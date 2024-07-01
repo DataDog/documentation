@@ -1,8 +1,8 @@
 ---
+title: processing pipeline
 related_terms:
-- プロセッサー
-- パイプライン
-title: 処理パイプライン
+  - processor
+  - pipeline
 ---
-Datadog Events の場合、処理パイプラインは、取り込み時のイベント属性に対するデータ構造化アクションのセットシーケンスのことです。ユーザーは、処理パイプラインを構成して、イベントを正規化し、リッチ化することができます。
-詳細は、<a href="/service_management/events/usage/#enrichment-and-normalization">ドキュメントを参照してください</a>。
+For Datadog Events, a processing pipeline is a set sequence of data-structuring actions on event attributes when they are ingested. Users can configure processing pipelines to normalize and enrich events.
+For more information, <a href="/service_management/events/pipelines_and_processors/">see the documentation</a>.

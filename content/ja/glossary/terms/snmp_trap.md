@@ -1,7 +1,7 @@
 ---
+title: SNMP trap
 core_product:
-- network device monitoring
-title: SNMP トラップ
+  - network device monitoring
 ---
-SNMP トラップとは、SNMP 対応デバイスから SNMP マネージャーに送信される通知です。ネットワークデバイスが、機器の状態が突然変化するなどの異常な動作に遭遇した場合、デバイスは SNMP トラップイベントをトリガーします。
-詳細は、<a href="/network_monitoring/devices/snmp_traps/">ドキュメントを参照してください</a>。
+SNMP Traps are notifications sent from an SNMP-enabled device to an SNMP manager. When a network device encounters unusual activity, such as a sudden state change on a piece of equipment, the device triggers an SNMP Trap event.
+For more information, <a href="/network_monitoring/devices/snmp_traps/">see the documentation</a>.

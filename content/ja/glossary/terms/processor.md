@@ -1,6 +1,6 @@
 ---
+title: processor
 core_product:
-- log management
-title: プロセッサー
+  - log management
 ---
-プロセッサーは、ログパイプラインで実行される命令のセットで、ログデータを再構築し、ログを豊かにするための属性を生成するものです。
+A processor is a set of instructions executed in a log pipeline to restructure log data and generate attributes to enrich logs.

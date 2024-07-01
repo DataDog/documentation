@@ -1,56 +1,56 @@
 ---
+title: Fluent Bit
+name: fluentbit
+custom_kind: integration
+description: 'Configure Fluent Bit to collect, parse, and forward log data from several sources.'
+short_description: 'Collect, parse, and forward log data from several sources.'
 categories:
-- ログの収集
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md
-description: Fluent Bit を構成し、ログデータを複数ソースから収集してパースし、転送します。
+    - log collection
 doc_link: /integrations/fluentbit/
-further_reading:
-- link: https://www.datadoghq.com/blog/fluentbit-integration-announcement/
-  tag: ブログ
-  text: Datadog と Fluent Bit を使用してログを一元管理する
+dependencies:
+    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/fluentbit.md"]
 has_logo: true
-integration_id: fluentbit
 integration_title: Fluent Bit
 is_public: true
-kind: インテグレーション
-name: fluentbit
-public_title: Datadog-Fluent Bit インテグレーション
-short_description: ログデータを複数ソースから収集してパースし、転送します。
-title: Fluent Bit
+public_title: Datadog-Fluent Bit Integration
+further_reading:
+    - link: "https://www.datadoghq.com/blog/fluentbit-integration-announcement/"
+      tag: Blog
+      text: Centralize your logs with Datadog and Fluent Bit
+integration_id: "fluentbit"
 ---
 
-## 概要
+## Overview
 
-Fluent Bit を構成して、ログデータを複数の異なるソースから収集してパースし、Datadog に転送して監視します。Fluent Bit のメモリサイズは小さい (最大 450 KB) ため、コンテナ化されたサービスや埋め込み Linux システムなど、制約のあるリソース環境でログを収集するために使用できます。[Datadog の Fluent Bit アウトプットプラグイン][1]は Fluent Bit v1.3.0 以降に対応しています。
+Configure Fluent Bit to collect, parse, and forward log data from several different sources to Datadog for monitoring. Fluent Bit has a small memory footprint (~450 KB), so you can use it to collect logs in environments with limited resources, such as containerized services and embedded Linux systems. [Datadog's Fluent Bit output plugin][1] supports Fluent Bit v1.3.0+.
 
-## セットアップ
+## Setup
 
-下記の手順に従ってホストで Fluent Bit を構成します。Amazon ECS の場合は、[ECS Fluent Bit と FireLens][2] を参照してください。
+Find below instructions to configure Fluent Bit on a host, for Amazon ECS, see [ECS Fluent Bit and FireLens][2].
 
-### ログの収集
+### Log collection
 
-初めに、[Datadog アカウント][3]と [Datadog API キー][4]を確認し、[Datadog Logs Management を有効にする][5]必要があります。
+Before you begin, you need to have a [Datadog account][3], a [Datadog API key][4], and you need to [activate Datadog Logs Management][5].
 
-1. コンフィギュレーションファイルの推奨メソッドを使用して、Fluent Bit を [インストール][6]および[構成][7]します。
-2. [Fluent Bit コンフィギュレーションファイル][8]をアップデートし、アウトプットプラグインとして Datadog に追加します。コンフィギュレーションパラメーターの詳細情報については、[コンフィギュレーションパラメーターの表](#コンフィギュレーションパラメーター) を参照してください。たとえば、`[OUTPUT]` コンフィギュレーションセクションについては、[コンフィギュレーションファイルの例](#コンフィギュレーションファイルの例) を確認してください。
-3. Fluent Bit からログの送信を開始したら、[Datadog Logs Explorer ページ][9]でログを検証します。
+1. [Install][6] and [configure][7] Fluent Bit by using their recommended method of a configuration file.
+2. Update your [Fluent Bit configuration file][8] to add Datadog as an output plugin. For more information on the configuration parameters, see the [Configuration parameters table](#configuration-parameters). For an example `[OUTPUT]` configuration section, see the [Configuration file example](#configuration-file-example).
+3. Once you start sending logs from Fluent Bit, verify the logs on the [Datadog Logs Explorer page][9].
 
-#### コンフィギュレーションパラメーター
+#### Configuration parameters
 
-| キー            | 説明                                                                                                              | デフォルト                                                                     |
+| Key            | Description                                                                                                              | Default                                                                     |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| ホスト           | _必須_ - ログの送信先となる Datadog サーバー。                                                         | {{< region-param key="http_endpoint" code="true" >}} |
-| TLS            | _必須_ - エンドツーエンドの安全な通信のためのセキュリティプロトコル。この設定は `on` に設定する必要があります。              | `off`                                                                       |
-| apikey         | _必須_ - [Datadog API キー][4]。                                                                                  |                                                                             |
-| 圧縮       | _推奨_ - ペイロードを GZIP 形式で圧縮します。Datadog はこれを `gzip` と設定することをサポートおよび推奨します。           |                                                                             |
-| dd_service     | _推奨_ - ログを生成するサービス (アプリケーションまたはデータベース) の名前。人間が解読可能であること。 |                                                                             |
-| dd_source      | _推奨_ - サービスの基盤となるテクノロジーの名前。人間が解読可能であること。たとえば `postgres` や `nginx` など。 |                                                                             |
-| dd_message_key | _推奨_ - ログメッセージを保存するために属性を使用するように設定します。                                                      |                                                                             |
-| dd_tags        | _任意_ - Datadog のログに割り当てる[タグ][10]。                                                  |                                                                             |
-| プロバイダー       | _任意_ - 使用するプロバイダー。Fargate Tasks から Datadog にログを送信する場合は、これを `ecs` に設定します。         |                                                                             |
+| Host           | _Required_ - The Datadog server where you are sending your logs.                                                         | {{< region-param key="http_endpoint" code="true" >}} |
+| TLS            | _Required_ - End-to-end security communications security protocol. This setting must be set to `on`.              | `off`                                                                       |
+| apikey         | _Required_ - Your [Datadog API key][4].                                                                                  |                                                                             |
+| compress       | _Recommended_ - compresses the payload in GZIP format, Datadog supports and recommends setting this to `gzip`.           |                                                                             |
+| dd_service     | _Recommended_ - The human readable name for your service generating the logs - the name of your application or database. |                                                                             |
+| dd_source      | _Recommended_ - A human readable name for the underlying technology of your service. For example, `postgres` or `nginx`. |                                                                             |
+| dd_message_key | _Recommended_ - Set the attribute to use to store your log message.                                                      |                                                                             |
+| dd_tags        | _Optional_ - The [tags][10] you want to assign to your logs in Datadog.                                                  |                                                                             |
+| provider       | _Optional_ - The provider to use. Set this to `ecs` if you want to send logs from your Fargate Tasks to Datadog.         |                                                                             |
 
-#### コンフィギュレーションファイルの例
+#### Configuration file example
 
 ```text
 [OUTPUT]
@@ -59,29 +59,29 @@ Fluent Bit を構成して、ログデータを複数の異なるソースから
     Host              http-intake.logs.datadoghq.com
     TLS               on
     compress          gzip
-    apikey            <DATADOG_API_キー>
-    dd_service       <アプリケーション_サービス> 
-    dd_source         <ソース>
+    apikey            <DATADOG_API_KEY>
+    dd_service        <APPLICATION_SERVICE>
+    dd_source         <SOURCE>
     dd_message_key    log
-    dd_tags           env:dev,<タグキー>:<タグ値>
+    dd_tags           env:dev,<TAG_KEY>:<TAG_VALUE>
 ```
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+Need help? Contact [Datadog support][11].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.fluentbit.io/manual/output/datadog
-[2]: /ja/integrations/ecs_fargate/?tab=webui#fluent-bit-and-firelens
+[2]: /integrations/ecs_fargate/?tab=webui#fluent-bit-and-firelens
 [3]: https://app.datadoghq.com/signup
-[4]: /ja/account_management/api-app-keys/
+[4]: /account_management/api-app-keys/
 [5]: https://app.datadoghq.com/logs/activation
 [6]: https://docs.fluentbit.io/manual/installation/sources/build-and-install
 [7]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit
 [8]: https://docs.fluentbit.io/manual/administration/configuring-fluent-bit/classic-mode/configuration-file
 [9]: https://app.datadoghq.com/logs
-[10]: /ja/getting_started/tagging/
-[11]: /ja/help/
+[10]: /getting_started/tagging/
+[11]: /help/

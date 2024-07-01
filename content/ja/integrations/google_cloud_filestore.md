@@ -1,71 +1,72 @@
 ---
-categories:
+"categories":
 - cloud
 - data stores
 - google cloud
-- ログの収集
-dependencies: []
-description: Google Cloud Filestore のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_filestore/
-draft: false
-git_integration_title: google_cloud_filestore
-has_logo: true
-integration_id: google-cloud-filestore
-integration_title: Google Cloud Filestore
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: google_cloud_filestore
-public_title: Datadog-Google Cloud Filestore インテグレーション
-short_description: Google Cloud Filestore のキーメトリクスを追跡
-version: '1.0'
+- log collection
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Google Cloud Filestore metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/google_cloud_filestore/"
+"draft": false
+"git_integration_title": "google_cloud_filestore"
+"has_logo": true
+"integration_id": "google-cloud-filestore"
+"integration_title": "Google Cloud Filestore"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "google_cloud_filestore"
+"public_title": "Datadog-Google Cloud Filestore Integration"
+"short_description": "Track key Google Cloud Filestore metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Google Cloud Filestore は、データ用のファイルシステムインターフェイスと共有ファイルシステムを必要とするアプリケーション向けのマネージド型ファイルストレージサービスです。
+Google Cloud Filestore is a managed file storage service for applications that require a filesystem interface and a shared filesystem for data.
 
-Datadog Google Cloud Platform インテグレーションを使用して、Google Cloud Filestore からメトリクスを収集できます。
+Use the Datadog Google Cloud Platform integration to collect metrics from Google Cloud Filestore.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
-### 収集データ
+### Log collection
 
-Google Cloud Filestore のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
+Google Cloud Filestore logs are collected with Google Cloud Logging and sent to a Dataflow job through a Cloud Pub/Sub topic. If you haven't already, [set up logging with the Datadog Dataflow template][2].
 
-これが完了したら、Google Cloud Filestore のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
+Once this is done, export your Google Cloud Filestore logs from Google Cloud Logging to the Pub/Sub topic:
 
-1. [Google Cloud Logging のページ][3]に移動し、Google Cloud Filestore のログを絞り込みます。
-2. **Create Export** をクリックし、シンクに名前を付けます。
-3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
-4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
+1. Go to the [Google Cloud Logging page][3] and filter the Google Cloud Filestore logs.
+2. Click **Create Export** and name the sink.
+3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
+4. Click **Create** and wait for the confirmation message to show up.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "google_cloud_filestore" >}}
 
 
-### ヘルプ
+### Events
 
-Google Cloud Filestore インテグレーションには、イベントは含まれません。
+The Google Cloud Filestore integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Google Cloud Filestore インテグレーションには、サービスのチェック機能は含まれません。
+The Google Cloud Filestore integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
-[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
+[1]: https://docs.datadoghq.com/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_file/google_cloud_filestore_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

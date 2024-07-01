@@ -1,50 +1,50 @@
 ---
-title: IdP 始動の SAML を使用した Datadog モバイルアプリ
+title: The Datadog Mobile App with IdP Initiated SAML
 is_public: true
 aliases:
-  - /ja/account_management/faq/how-do-i-use-the-mobile-app-with-saml/
+  - /account_management/faq/how-do-i-use-the-mobile-app-with-saml/
 further_reading:
-  - link: /account_management/saml/
-    tag: Documentation
-    text: Datadog アカウントのための SAML の構成
-  - link: /account_management/multi_organization/
-    tag: Documentation
-    text: 複数のアカウントを持つチームとオーガニゼーションの構成
+- link: /account_management/saml/
+  tag: Documentation
+  text: Configure SAML for your Datadog account
+- link: /account_management/multi_organization/
+  tag: Documentation
+  text: Configuring Teams & Organizations with Multiple Accounts
 ---
-## セットアップ
 
-<div class="alert alert-warning">
-IdP 始動の SAML を使用した Datadog モバイルアプリへのログインは、オプトイン機能です。アカウントでこの機能を有効にするには、SAML コンフィギュレーションを変更する前に <a href="https://docs.datadoghq.com/help/">Datadog サポート</a>までお問い合わせください。
-</div>
+## Setup
 
-アイデンティティプロバイダー (IdP) 始動の SAML を使用して Datadog モバイルアプリを使用するには、Datadog に追加の Relay State をパススルーして、ログイン時にモバイルアプリのランディングページをトリガーする必要があります。有効にすると、SAML からその特定のアプリへのすべてのサインインは、続行する前にインタースティシャルページにアクセスするようになります。
+In order to use the Datadog mobile app with Identity Provider (IdP) Initiated SAML, you need to pass an additional Relay State through to Datadog to trigger the mobile app landing page on login. Once enabled, all sign ins from SAML for that particular app land on a the interstitial page before proceeding.
 
-- Datadog モバイルアプリがインストールされた**モバイルデバイス**では、ユーザーは**まずモバイルブラウザを使用してアイデンティティプロバイダーでログイン** (下記の Google の例を参照) する必要があります。すると、アプリで自動的にリクエストが取得され、ユーザーのサインインが許可されます。
+- On **mobile devices** with the Datadog mobile app installed, users should **first log in with their identity provider using their mobile browser** (see the example with Google, below). Then, the app automatically captures the request and allows the user to sign in.
 
-{{< img src="account_management/saml/google_idp_tile_sml.png" style="width:60%; background:none; border:none; box-shadow:none;" alt="Google IDP Relay State" >}}
+{{< img src="account_management/saml/google_idp_tile_sml.png" style="width:60%; background:none; border:none; box-shadow:none;" alt="Google IDP relay state" >}}
 
-- **デスクトップデバイス**またはアプリがインストールされていないアプリの場合、続行するにはユーザーは "Use the Datadog Website" をクリックする必要があります。
+- On **Desktop devices** or devices where the app is not installed, the user needs to click "Use the Datadog Website" to proceed.
 
-{{< img src="account_management/saml/datadog-mobile-idp-saml-landing-page.png" alt="Datadog Mobile SAML インタースティシャル" >}}
+{{< img src="account_management/saml/datadog-mobile-idp-saml-landing-page.png" alt="Datadog Mobile SAML Interstitial" >}}
 
-## プロバイダー
+## Providers
+
+**Note:** Datadog IdP Initiated SAML works with most identity providers. If you run into trouble while configuring your identity provider with the Datadog Mobile App, contact [Datadog support][1]. 
+
 ### OneLogin
 
-OneLogin アプリを構成する場合は、**Application Details** ページの Relay State の値を `dd_m_idp` に設定します。
-{{< img src="account_management/saml/one-login-mobile-idp-relay-state.png" alt="One Login のアプリケーション詳細ページ" >}}
+When configuring your OneLogin app, set the Relay State value on the **Application Details** page to `dd_m_idp`.
+{{< img src="account_management/saml/one-login-mobile-idp-relay-state.png" alt="One Login's Application Details Page" >}}
 
 ### Okta
 
-Okta アプリを構成する場合は、**Configure SAML** ページでデフォルトの RelayState 値を `dd_m_idp` に設定します。
-{{< img src="account_management/saml/okta-mobile-idp-relay-state.png" alt="Okta のアプリケーション詳細ページ" >}}
+When configuring your Okta app, set the Default RelayState value on the **Configure SAML** page to `dd_m_idp`.
+{{< img src="account_management/saml/okta-mobile-idp-relay-state.png" alt="Okta's Configure SAML page" >}}
 
 ### Google
 
-Google app for Work SAML アプリを構成する場合は、Service Provider Details にある **Start URL** を `dd_m_idp` に設定します。
-{{< img src="account_management/saml/google-mobile-idp-relay-state.png" alt="Google のサービスプロバイダー詳細ページ" >}}
+When configuring your Google app for SAML, set the **Start URL** under the Service Provider Details to `dd_m_idp`.
+{{< img src="account_management/saml/google-mobile-idp-relay-state.png" alt="Google's Service Provider Details Page" >}}
 
-## トラブルシューティング
+## Troubleshooting
 
-Relay State を構成後、ログイン時に `403 Forbidden` エラーが表示される場合は、[サポート][1]にお問い合わせの上、組織にこの機能が有効化されていることをご確認ください。
+If you see a `403 Forbidden` error on login after configuring the Relay State, contact [Support][1] to ensure that the feature has been enabled for your organization.
 
-[1]: /ja/help/
+[1]: /help/

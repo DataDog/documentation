@@ -1,71 +1,74 @@
 ---
-categories:
-- 自動化
-- クラウド
-- 構成 & デプロイ
+"categories":
+- automation
+- cloud
+- configuration & deployment
 - developer tools
-dependencies: []
-description: Travis CI に接続して、ビルド時間、ビルドステータス、ジョブなどに関するメトリクスを表示
-doc_link: https://docs.datadoghq.com/integrations/travis_ci/
-draft: false
-git_integration_title: travis_ci
-has_logo: true
-integration_id: ''
-integration_title: Travis CI
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: travis_ci
-public_title: Datadog-Travis CI インテグレーション
-short_description: Travis CI に接続して、ビルド時間、ビルドステータス、ジョブなどに関するメトリクスを表示
-team: web-integrations
-version: '1.0'
+- metrics
+"custom_kind": "integration"
+"dependencies": []
+"description": "Connect to Travis CI to view metrics about build times, build statuses, jobs, and more."
+"doc_link": "https://docs.datadoghq.com/integrations/travis_ci/"
+"draft": false
+"git_integration_title": "travis_ci"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Travis CI"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "travis_ci"
+"public_title": "Datadog-Travis CI Integration"
+"short_description": "Connect to Travis CI to view metrics about build times and build statuses."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+## Overview
 
-Travis CI に接続して、ビルド時間、ビルドステータス、ジョブなどに関するメトリクスを表示
+Travis CI is a hosted continuous integration service used to build and test software projects. Connect to Travis CI to view metrics about build times, build statuses, jobs, and more.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-Travis CI インテグレーションは、[インテグレーションタイル][1]からインストールできます。
+You can install the Travis CI integration with its [integration tile][1].
 
-### コンフィギュレーション
+### Configuration
 
-1. アカウント名、API トークン (Travis CI の Profile タブにあります)、プロジェクトタイプを追加します。プロジェクトタイプは以下のように決定されます。
+1. Add your account name, API token (found under the profile tab in Travis CI), and the project type. Project types are determined as follows:
 
-    - **オープンソース**は、travis-ci.org に接続されたリポジトリです。
-    - **プライベート**は、travis-ci.co に接続されたリポジトリです。
-    - **エンタープライズ**は、カスタム Travis CI ドメインに接続されたリポジトリです。
+    - _Open source_ refers to repositories connected to travis-ci.org
+    - _Private_ refers to repositories connected to travis-ci.co
+    - _Enterprise_ refers to repositories connected to a custom Travis CI domain
 
-2. アカウントが Travis CI Enterprise に登録されている場合は、カスタムドメインを入力します。
-3. 必要に応じて、"Add row" をクリックして複数のアカウントを追加します。
-4. 'Install' をクリックします (初回インストール時のみ)。
-5. 対応する API キーを使用して、メトリクスの収集元になるオーガニゼーションとリポジトリを追加します。
-6. オーガニゼーションに属するすべてのリポジトリのメトリクスを収集する場合は、プロジェクトで `<オーガニゼーション名>/*` と入力します。
-7. 'Update Configuration' をクリックします。
+2. If the account is under Travis CI enterprise, enter your custom domain.
+3. Add multiple accounts if needed by clicking "Add row".
+4. Click 'Install' (initial installation only).
+5. Add the organization and repositories you want to collect metrics from with the corresponding API key.
+6. To collect metrics for all repositories under an organization, type `<ORGANIZATION_NAME>/*` under Project.
+7. Click 'Update Configuration'.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "travis_ci" >}}
 
 
-### イベント
+### Events
 
-Travis CI インテグレーションには、イベントは含まれません。
+The Travis CI integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Travis CI インテグレーションには、サービスのチェック機能は含まれません。
+The Travis CI integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://app.datadoghq.com/account/settings#integrations/travis_ci
+[1]: https://app.datadoghq.com/integrations/travis_ci
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/travis_ci/travis_ci_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

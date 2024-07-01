@@ -1,42 +1,42 @@
 ---
+title: Tracing Java Applications
+kind: documentation
 aliases:
-- /ja/tracing/java
-- /ja/tracing/languages/java
-- /ja/agent/apm/java/
-- /ja/tracing/setup/java
-- /ja/tracing/setup_overview/java
-- /ja/tracing/setup_overview/setup/java
-- /ja/tracing/trace_collection/dd_libraries/java/
+    - /tracing/java
+    - /tracing/languages/java
+    - /agent/apm/java/
+    - /tracing/setup/java
+    - /tracing/setup_overview/java
+    - /tracing/setup_overview/setup/java
+    - /tracing/trace_collection/dd_libraries/java/
 code_lang: java
+type: multi-code-lang
 code_lang_weight: 0
 further_reading:
-- link: https://github.com/DataDog/dd-trace-java
-  tag: GitHub
-  text: Datadog Java APM ソースコード
-- link: tracing/trace_collection/otel_instrumentation/java/
-  tag: ドキュメント
-  text: サービス、リソース、トレースの詳細
-kind: ドキュメント
-title: Java アプリケーションのトレース
-type: multi-code-lang
+    - link: "https://github.com/DataDog/dd-trace-java"
+      tag: Source Code
+      text: Datadog Java APM source code
+    - link: tracing/glossary/
+      tag: Documentation
+      text: Explore your services, resources, and traces
 ---
-## 互換性要件
+## Compatibility requirements
 
-最新の Java トレーサーは、バージョン 8 以上のすべての JVM をサポートしています。8 以下の JVM バージョンに関する追加情報は、[サポートする JVM ランタイム][10]をお読みください。
+The latest Java Tracer supports all JVMs version 8 and higher. For additional information about JVM versions below 8, read [Supported JVM runtimes][10].
 
-Datadog の Java バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]ページをご覧ください。
+For a full list of Datadog's Java version and framework support (including legacy and maintenance versions), read [Compatibility Requirements][1].
 
-## はじめに
+## Getting started
 
-作業を始める前に、[Agent のインストールと構成][18]が済んでいることを確認してください。
+Before you begin, make sure you've already [installed and configured the Agent][18].
 
-### アプリケーションをインスツルメントする
+### Instrument your application
 
-Datadog Agent をインストールして構成したら、次はアプリケーションに直接トレーシングライブラリを追加してインスツルメントします。[互換性情報][1]の詳細をお読みください。
+After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
 
-アプリケーションのトレースを開始するには
+To begin tracing your applications:
 
-1. 最新のトレーサークラスファイルを含む `dd-java-agent.jar` を、Datadog ユーザーがアクセス可能なフォルダにダウンロードします。
+1. Download `dd-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
 
 {{< tabs >}}
 {{% tab "Wget" %}}
@@ -56,103 +56,128 @@ Datadog Agent をインストールして構成したら、次はアプリケー
 {{% /tab %}}
 {{< /tabs >}}
 
-   **注:** 特定の**メジャー**バージョンの最新ビルドをダウンロードするには、代わりに `https://dtdg.co/java-tracer-vX` リンクを使用してください。ここで `X` は希望するメジャーバージョンです。
-例えば、バージョン 1 の最新ビルドには `https://dtdg.co/java-tracer-v1` を使用します。マイナーバージョン番号は含めてはいけません。または、特定のバージョンについては Datadog の [Maven リポジトリ][3]を参照してください。
+   **Note:** To download the latest build of a specific **major** version, use the `https://dtdg.co/java-tracer-vX` link instead, where `X` is the desired major version.
+   For example, use `https://dtdg.co/java-tracer-v1` for the latest version 1 build. Minor version numbers must not be included. Alternatively, see Datadog's [Maven repository][3] for any specific version.
 
-2. IDE、Maven または Gradle アプリケーションスクリプト、`java -jar` コマンドから、Continuous Profiler、デプロイ追跡、ログ挿入（Datadog へログを送信する場合）を使用してアプリケーションを実行するには、`-javaagent` JVM 引数と、該当する以下のコンフィギュレーションオプションを追加します。
+   **Note**: Release Candidate versions are made available in GitHub [DataDog/dd-trace-java releases][21]. These have "RC" in the version and are recommended for testing outside of your production environment. You can [subscribe to GitHub release notifications][20] to be informed when new Release Candidates are available for testing. If you experience any issues with Release Candidates, reach out to [Datadog support][22].
+
+2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, and logs injection (if you are sending logs to Datadog), add the `-javaagent` JVM argument and the following configuration options, as applicable:
 
     ```text
     java -javaagent:/path/to/dd-java-agent.jar -Ddd.profiling.enabled=true -XX:FlightRecorderOptions=stackdepth=256 -Ddd.logs.injection=true -Ddd.service=my-app -Ddd.env=staging -Ddd.version=1.0 -jar path/to/your/app.jar
     ```
-    イメージのサイズを削減し、モジュールを省略する必要性が強い場合は、[jdeps][19] コマンドを使って依存関係を特定することができます。しかし、必要なモジュールは時間の経過とともに変更される可能性がありますので、自己責任で行ってください。
+    If you have a strong need to reduce the size of your image and omit modules, you can use the [jdeps][19] command to identify dependencies. However, required modules can change over time, so do this at your own risk.
 
-   <div class="alert alert-danger">プロファイリングを有効にすると、APM バンドルによっては料金に影響が出る場合があります。詳しくは<a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">料金ページ</a>をご覧ください。</div>
+    <div class="alert alert-danger">Enabling profiling may impact your bill depending on your APM bundle. See the <a href="https://docs.datadoghq.com/account_management/billing/apm_tracing_profiler/">pricing page</a> for more information.</div>
 
-| 環境変数      | システムプロパティ                     | 説明|
+| Environment Variable      | System Property                     | Description|
 | --------- | --------------------------------- | ------------ |
-| `DD_ENV`      | `dd.env`                  | アプリケーション環境（`production`、`staging` など） |
-| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Datadog のトレース ID とスパン ID に対する MDC キーの自動挿入を有効にします。詳細については、[高度な使用方法][6]を参照してください。 <br><br>**ベータ版**: バージョン 1.18.3 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] UI で `DD_LOGS_INJECTION` を設定できます。 |
-| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | [継続的プロファイラー][5]を有効化 |
-| `DD_SERVICE`   | `dd.service`     | 同一のジョブを実行するプロセスセットの名前。アプリケーションの統計のグループ化に使われます。 |
-| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   すべてのサービスのトレースのルートでサンプリングレートを設定します。<br><br>**ベータ版**: バージョン 1.18.3 から、このサービスが実行される場所で [Agent リモート構成][16]が有効になっている場合、[サービスカタログ][17] UI で `DD_TRACE_SAMPLE_RATE` を設定できます。     |
-| `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   指定したルールに合致するサービスのトレースのルートでのサンプリングレートを設定します。    |
-| `DD_VERSION` | `dd.version` |  アプリケーションのバージョン (例: `2.5`、`202003181415`、`1.3-alpha`) |
+| `DD_ENV`      | `dd.env`                  | Your application environment (`production`, `staging`, etc.) |
+| `DD_LOGS_INJECTION`   | `dd.logs.injection`     | Enable automatic MDC key injection for Datadog trace and span IDs. See [Advanced Usage][6] for details. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI. |
+| `DD_PROFILING_ENABLED`      | `dd.profiling.enabled`          | Enable the [Continuous Profiler][5] |
+| `DD_SERVICE`   | `dd.service`     | The name of a set of processes that do the same job. Used for grouping stats for your application. |
+| `DD_TRACE_SAMPLE_RATE` | `dd.trace.sample.rate` |   Set a sampling rate at the root of the trace for all services. <br><br>**Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.     |
+| `DD_TRACE_SAMPLING_RULES` | `dd.trace.sampling.rules` |   Set a sampling rate at the root of the trace for services that match the specified rule.    |
+| `DD_VERSION` | `dd.version` |  Your application version (for example, `2.5`, `202003181415`, or `1.3-alpha`) |
 
-追加の[コンフィギュレーションオプション](#configuration) は以下で説明されています。
+Additional [configuration options](#configuration) are described below.
 
 
-### Java トレーサーを JVM に追加する
+### Add the Java Tracer to the JVM
 
-アプリケーションサーバーのドキュメントを使用して、`-javaagent` およびその他の JVM 引数を渡す正しい方法を確認してください。一般的に使用されるフレームワークの手順は次のとおりです。
+Use the documentation for your application server to figure out the right way to pass in `-javaagent` and other JVM arguments. Here are instructions for some commonly used frameworks:
 
 {{< tabs >}}
 {{% tab "Spring Boot" %}}
 
-アプリの名前が `my_app.jar` の場合は、以下を含む `my_app.conf` を作成します。
+If your app is called `my_app.jar`, create a `my_app.conf`, containing:
 
 ```text
 JAVA_OPTS=-javaagent:/path/to/dd-java-agent.jar
 ```
 
-詳細については、[Spring Boot のドキュメント][1]を参照してください。
+For more information, see the [Spring Boot documentation][1].
 
 
 [1]: https://docs.spring.io/spring-boot/docs/current/reference/html/deployment.html#deployment-script-customization-when-it-runs
 {{% /tab %}}
 {{% tab "Tomcat" %}}
 
-Tomcat 起動スクリプトファイル (たとえば、Linux では `setenv.sh`) を開き、次を追加します。
+#### Linux
 
+To enable tracing when running Tomcat on Linux:
+
+1. Open your Tomcat startup script file, for example `setenv.sh`.
+2. Add the following to `setenv.sh`:
+   ```text
+   CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+   ```
+
+#### Windows (Tomcat as a Windows service)
+
+To enable tracing when running Tomcat as a Windows service:
+
+1. Open a Command Prompt.
+1. Run the following command to update your Tomcat service configuration:
+    ```shell
+    tomcat8 //US//<SERVICE_NAME> --Environment="CATALINA_OPTS=%CATALINA_OPTS% -javaagent:\"c:\path\to\dd-java-agent.jar\""
+    ```
+   Replace `<SERVICE_NAME>` with the name of your Tomcat service and replace the path to `dd-java-agent.jar`.
+1. Restart your Tomcat service for changes to take effect.
+
+#### Windows (Tomcat with environment setup script)
+
+To enable tracing when running Tomcat with an environment setup script:
+
+1. Create `setenv.bat` in the `./bin` directory of the Tomcat project folder, if it doesn't already exist.
+1. Add the following to `setenv.bat`:
+   ```text
+   set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
+   ```
+If the previous step doesn't work, try adding the following instead:
 ```text
-CATALINA_OPTS="$CATALINA_OPTS -javaagent:/path/to/dd-java-agent.jar"
+set JAVA_OPTS=%JAVA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 ```
-
-Windows では、`setenv.bat`:
-
-```text
-set CATALINA_OPTS=%CATALINA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
-```
-`setenv` ファイルが存在しない場合は、Tomcat プロジェクトフォルダーの `./bin` ディレクトリで作成します。
 
 {{% /tab %}}
 {{% tab "JBoss" %}}
 
-- スタンドアロンモードの場合:
+- In standalone mode:
 
-  `standalone.conf` の末尾に次の行を追加します。
+  Add the following line to the end of `standalone.conf`:
 
 ```text
 JAVA_OPTS="$JAVA_OPTS -javaagent:/path/to/dd-java-agent.jar"
 ```
 
-- スタンドアロンモードと Windows の場合、`standalone.conf.bat` の最後に以下の行を追加します。
+- In standalone mode and on Windows, add the following line to the end of `standalone.conf.bat`:
 
 ```text
 set "JAVA_OPTS=%JAVA_OPTS% -javaagent:X:/path/to/dd-java-agent.jar"
 ```
 
-- ドメインモードの場合:
+- In domain mode:
 
-  ファイル `domain.xml` の server-groups.server-group.jvm.jvm-options というタグの下に、以下の行を追加します。
+  Add the following line in the file `domain.xml`, under the tag server-groups.server-group.jvm.jvm-options:
 
 ```text
 <option value="-javaagent:/path/to/dd-java-agent.jar"/>
 ```
 
-詳細については、[JBoss のドキュメント][1]を参照してください。
+For more details, see the [JBoss documentation][1].
 
 
 [1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
 {{% /tab %}}
 {{% tab "Jetty" %}}
 
-`jetty.sh` を使用して Jetty をサービスとして開始する場合は、編集して次を追加します。
+If you use `jetty.sh` to start Jetty as a service, edit it to add:
 
 ```text
 JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/path/to/dd-java-agent.jar"
 ```
 
-`start.ini` を使用して Jetty を起動する場合は、次の行を追加します(`--exec` の下に。まだ存在しない場合は `--exec` 行を追加します)。
+If you use `start.ini` to start Jetty, add the following line (under `--exec`, or add `--exec` line if it isn't there yet):
 
 ```text
 -javaagent:/path/to/dd-java-agent.jar
@@ -161,69 +186,72 @@ JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/path/to/dd-java-agent.jar"
 {{% /tab %}}
 {{% tab "WebSphere" %}}
 
-管理コンソールで:
+In the administrative console:
 
-1. **Servers** を選択します。**Server Type** で、**WebSphere application servers** を選択し、サーバーを選択します。
-2. **Java and Process Management > Process Definition** を選択します。
-3. **Additional Properties** セクションで、**Java Virtual Machine** をクリックします。
-4. **Generic JVM arguments** テキストフィールドに次のように入力します。
+1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
+2. Select **Java and Process Management > Process Definition**.
+3. In the **Additional Properties** section, click **Java Virtual Machine**.
+4. In the **Generic JVM arguments** text field, enter:
 
 ```text
 -javaagent:/path/to/dd-java-agent.jar
 ```
 
-詳細とオプションについては、[WebSphere のドキュメント][1]を参照してください。
+For additional details and options, see the [WebSphere docs][1].
 
 [1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**
+**Note**
 
-- `-javaagent` 引数を `java -jar` コマンドに追加する場合は、アプリケーション引数としてではなく、JVM オプションとして `-jar` 引数の_前_に追加する必要があります。例:
+- If you're adding the `-javaagent` argument to your `java -jar` command, it needs to be added _before_ the `-jar` argument, as a JVM option, not as an application argument. For example:
 
    ```text
    java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
    ```
 
-     詳細については、[Oracle のドキュメント][7]を参照してください。
+     For more information, see the [Oracle documentation][7].
 
-- classpath に `dd-java-agent` を追加しないでください。予期せぬ挙動が生じる場合があります。
+- Never add `dd-java-agent` to your classpath. It can cause unexpected behavior.
 
-## 自動インスツルメンテーション
+## Automatic instrumentation
 
-Java の自動インスツルメンテーションは、[JVM によって提供される][8] `java-agent` インスツルメンテーション機能を使用します。`java-agent` が登録されている場合は、ロード時にクラスファイルを変更することができます。
+Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it can modify class files at load time.
 
-**注:** リモート ClassLoader でロードされたクラスは、自動的にインスツルメンテーションされません。
+**Note:** Classes loaded with remote ClassLoader are not instrumented automatically.
 
-インスツルメンテーションの由来は自動インスツルメンテーション、OpenTracing API、または両者の混合になる場合があります。一般的に、インスツルメンテーションは次の情報を取得します:
+Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mixture of both. Instrumentation generally captures the following info:
 
-- OpenTracing API からタイムスタンプが提供されない限り、JVM の NanoTime クロックを使ってタイミング時間が取得されます
-- キー/値タグペア
-- アプリケーションによって処理されていないエラーとスタックトレース
-- システムを通過するトレース (リクエスト) の合計数
+- Timing duration is captured using the JVM's NanoTime clock unless a timestamp is provided from the OpenTracing API
+- Key/value tag pairs
+- Errors and stack traces which are unhandled by the application
+- A total count of traces (requests) flowing through the system
 
-## セッションリプレイ
+## Configuration
 
-必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][9]を参照してください。
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/tracing/compatibility_requirements/java
+[1]: /tracing/compatibility_requirements/java
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://repo1.maven.org/maven2/com/datadoghq/dd-java-agent
-[4]: /ja/account_management/billing/apm_tracing_profiler/
-[5]: /ja/profiler/
-[6]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
+[4]: /account_management/billing/apm_tracing_profiler/
+[5]: /profiler/
+[6]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [7]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [8]: https://docs.oracle.com/javase/8/docs/api/java/lang/instrument/package-summary.html
-[9]: /ja/tracing/trace_collection/library_config/java/
-[10]: /ja/tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
-[11]: /ja/tracing/trace_collection/library_injection_local/
-[16]: /ja/agent/remote_config/
+[9]: /tracing/trace_collection/library_config/java/
+[10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
+[11]: /tracing/trace_collection/library_injection_local/
+[16]: /agent/remote_config/
 [17]: https://app.datadoghq.com/services
-[18]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[18]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [19]: https://docs.oracle.com/en/java/javase/11/tools/jdeps.html
+[20]: https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/managing-subscriptions-for-activity-on-github/viewing-your-subscriptions
+[21]: https://github.com/DataDog/dd-trace-java/releases
+[22]: https://docs.datadoghq.com/getting_started/support/

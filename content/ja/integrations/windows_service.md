@@ -1,73 +1,73 @@
 ---
-app_id: windows-service
-app_uuid: 1d895e93-d6f1-49f9-82bc-a03df7ff215c
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 112
-    source_type_name: Windows Service
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- os & system
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: windows_service
-integration_id: windows-service
-integration_title: Windows Services
-integration_version: 4.8.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: windows_service
-public_title: Windows Services
-short_description: Windows Service の状態を監視。
-supported_os:
-- windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Windows
-  - Category::OS とシステム
-  configuration: README.md#Setup
-  description: Windows Service の状態を監視。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Windows Services
+"app_id": "windows-service"
+"app_uuid": "1d895e93-d6f1-49f9-82bc-a03df7ff215c"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "112"
+    "source_type_name": "Windows Service"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "os & system"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "windows_service"
+"integration_id": "windows-service"
+"integration_title": "Windows Services"
+"integration_version": "4.9.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "windows_service"
+"public_title": "Windows Services"
+"short_description": "Monitor the state of your Windows services."
+"supported_os":
+- "windows"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Supported OS::Windows"
+  - "Category::OS & System"
+  "configuration": "README.md#Setup"
+  "description": "Monitor the state of your Windows services."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Windows Services"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、Windows Service の状態を監視し、サービスチェックを Datadog に送信します。
+This check monitors the state of any Windows Service and submits a service check to Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Windows Service チェックは [Datadog Agent][1] パッケージに含まれています。Windows ホストに追加でインストールする必要はありません。
+The Windows Service check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Windows hosts.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-構成は、[Agent の構成ディレクトリ][2]のルートにある `conf.d/` フォルダ内の `windows_service.d/conf.yaml` ファイルに格納されています。利用可能なすべての構成オプションについては、[windows_service.d/conf.yaml のサンプル][3]を参照してください。コンフィギュレーションファイルの編集が終わったら、[Agent を再起動][4]して新しい構成を読み込んでください。
+The configuration is located in the `windows_service.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][2]. See the [sample windows_service.d/conf.yaml][3] for all available configuration options. When you are done editing the configuration file, [restart the Agent][4] to load the new configuration.
 
-チェックは、システム上のすべてのサービスを監視するか、または名前によっていくつかのサービスを選択的に監視することができます。Agent バージョン 7.41 以降では、スタートアップタイプに基づいて監視するサービスを選択することができます。
+The check can monitor all services on the system or selectively monitor a few services by name. Beginning with Agent version 7.41, the check can select which services to monitor based on their startup type.
 
-この構成例では、`Dnscache` と `wmiApSrv` サービスのみを監視します。
+This example configuration monitors only the `Dnscache` and `wmiApSrv` services:
 ```yaml
 instances:
   - services:
@@ -75,23 +75,23 @@ instances:
     - wmiapsrv
 ```
 
-この例では、`ALL` キーワードを使用して、ホスト上のすべてのサービスを監視します。`ALL` キーワードを使用すると、インスタンス内の他のパターンは無視されます。
+This example uses the `ALL` keyword to monitor all services on the host. If the `ALL` keyword is used, the other patterns in the instance are ignored.
 ```yaml
 instances:
   - services:
     - ALL
 ```
 
-チェックでは、サービス名のマッチングに大文字と小文字を区別しない [Python 正規表現][5]を使用します。サービス名に特殊文字が含まれている場合、特殊文字を `\` でエスケープする必要があります。例えば、`MSSQL$CRMAWS` は `MSSQL\$CRMAWS` に、`Web Server (prod)` は `Web Server \(prod\)` になります。サービス名パターンは、そのパターンで始まるすべてのサービス名にマッチします。完全に一致させるには、正規表現 `^service$` を使用します。
+The check uses case-insensitive [Python regular expressions][5] when matching service names. If a service name includes special characters, you must escape the special characters with a `\`. For example, `MSSQL$CRMAWS` becomes  `MSSQL\$CRMAWS` and `Web Server (prod)` becomes `Web Server \(prod\)`. The service name pattern matches all service names that start with the pattern. For an exact match, use the regular expression `^service$`.
 
-サービス名は、表示名フィールド**ではなく**、サービス名フィールドに表示されるように記述してください。例えば、表示名 `Datadog Agent` **ではなく**、サービス名 `datadogagent` を構成します。
+Provide service names as they appear in the service name field, **NOT** the display name field. For example, configure the service name `datadogagent` **NOT** the display name `Datadog Agent`.
 
 <p align="center">
 <img alt="Datadog Agent service properties" src="https://raw.githubusercontent.com/DataDog/integrations-core/master/windows_service/images/service-properties.png"/>
 </p>
 
-Agent バージョン 7.41 から、チェックはスタートアップタイプに基づいて監視するサービスを選択できるようになりました。
-例えば、`automatic` または `automatic_delayed_start` のスタートアップタイプを持つサービスのみを監視するには
+Beginning with Agent version 7.41, the check can select which services to monitor based on their startup type.
+For example, to monitor only the services that have an `automatic` or `automatic_delayed_start` startup type.
 ```yaml
 instances:
   - services:
@@ -99,89 +99,92 @@ instances:
     - startup_type: automatic_delayed_start
 ```
 
-`startup_type` に指定できる値は以下の通りです。
+The possible values for `startup_type` are:
 - `disabled`
 - `manual`
 - `automatic`
 - `automatic_delayed_start`
 
-Agent バージョン 7.50 以降、チェックは[サービストリガーが割り当てられているか][6]に基づき、監視対象のサービスを選択できます。
-以下に、可能な構成を示す例をいくつか示します。
+Beginning with Agent version 7.50, the check can select which services to monitor based on whether they have a [Service Trigger assigned][6].
+Below are some examples showing possible configurations.
 ```yaml
-# トリガーを持たないすべてのサービスにマッチします
+# Matches all services that do not have a trigger
 services:
   - trigger_start: false
 
-# 自動起動タイプを持つすべてのサービスにマッチし、トリガーを持つサービスを除外します
+# Matches all services with an automatic startup type and excludes services with triggers
 services:
   - startup_type: automatic
     trigger_start: false
 
-# 起動タイプが自動でトリガーがある場合のみ、EventLog サービスにマッチします
+# Only matches EventLog service when its startup type is automatic and has triggers
 services:
   - name: EventLog
     startup_type: automatic
     trigger_start: true
 ```
 
-#### Lambda のトレースされた起動の 1 時間単位使用量の取得
+#### Tags
 
-このチェックは `windows_service:<SERVICE>` タグ内の各サービスチェックに対して、Windows サービス名を自動的にタグ付けします。タグ内の `<SERVICE>` 名は小文字を使用し、特殊文字はアンダースコアに置き換えられます。詳しくは、[タグの概要][7]を参照してください。
+The check automatically tags the Windows service name to each service check in the `windows_service:<SERVICE>` tag. The `<SERVICE>` name in the tag uses lowercase and special characters are replaced with underscores. See [Getting Started with Tags][7] for more information.
 
-**注:** また、このチェックでは、`service:<SERVICE>` タグ内の各サービスチェックに、Windows サービス名を自動的にタグ付けします。**この動作は非推奨です**。Agent の将来のバージョンでは、チェックがこのタグを自動的に割り当てることはありません。このタグを自動的に割り当てないようにし、関連する非推奨の警告を無効にするには、`disable_legacy_service_tag` オプションを設定します。サービスに `service` タグを割り当てる方法については、[タグの割り当て][8]を参照してください。
+**NOTE:** The check also automatically tags the Windows service name to each service check in the `service:<SERVICE>` tag. **This behavior is deprecated**. In a future version of the Agent, the check will stop automatically assigning this tag. To stop the check from automatically assigning this tag and to disable the associated deprecation warning, set the `disable_legacy_service_tag` option. See [Assigning Tags][8] for information on how to assign the `service` tag to a service.
 
-Agent バージョン 7.40 以降、チェックはサービスのスタートアップタイプを示すために、各サービスチェックに `windows_service_startup_type:<STARTUP_TYPE>` タグを追加できます。各サービスチェックにこのタグを含めるには、`windows_service_startup_type_tag` オプションを設定します。
+Beginning with Agent version 7.40, the check can add a `windows_service_startup_type:<STARTUP_TYPE>` tag to each service check to indicate the startup type of the service. Set the `windows_service_startup_type_tag` option to include this tag with each service check.
 
-### 検証
+Beginning with Agent version 7.55, the check can add a `display_name:<DISPLAY_NAME>` tag to each service check to indicate the display name of the service. Set the `collect_display_name_as_tag` option to `true` to include this tag with each service check.
 
-[Agent の status サブコマンドを実行][9]し、**Checks** セクションで `windows_service` を探します。
+### Validation
 
-## リアルユーザーモニタリング
+[Run the Agent's status subcommand][9] and look for `windows_service` under the **Checks** section.
 
-### データセキュリティ
+## Data Collected
 
-Windows Service チェックには、メトリクスは含まれません。
+### Metrics
 
-### ヘルプ
+The Windows Service check does not include any metrics.
 
-Windows Service チェックには、イベントは含まれません。
+### Events
 
-### ヘルプ
+The Windows Service check does not include any events.
+
+### Service Checks
 {{< get-service-checks-from-git "windows_service" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
+Need help? Contact [Datadog support][11].
 
-### サービス権限
-サービスが存在し、構成と一致しているにもかかわらず、Datadog Agent がそのサービスのサービスチェックを報告しない場合、Datadog Agent の権限が不十分である可能性があります。例えば、デフォルトでは、Datadog Agent は NTDS Active Directory Domain Services サービスへのアクセス権を持っていません。これを確認するには、**昇格した (管理者として実行する)** PowerShell シェルからチェックを実行します。
+### Service permissions
+If a service is present and matches the configuration, but the Datadog Agent does not report a service check for the service, the Datadog Agent might have insufficient permissions. For example, by default the Datadog Agent does not have access to the NTDS Active Directory Domain Services service. To verify this, run the check from an **elevated (run as Admin)** PowerShell shell.
 
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" check windows_service
 ```
-出力にそのサービスが表示されている場合、問題は権限にあります。Datadog Agent に権限を与えるには、[Datadog Agent User][13] に[サービスの `Read` アクセスを許可][12]してください。Windows Update を経ても権限が持続するように、[グループポリシーで `Read` アクセスを許可する][14]ことをお勧めします。
+If the service is present in the output, permissions are the issue. To give the Datadog Agent permission [grant `Read` access on the service][12] to the [Datadog Agent User][13]. We recommend [granting `Read` access with Group Policy][14] to ensure the permissions persist through Windows Updates.
 
-## その他の参考資料
+## Further Reading
 
-- [Windows Server 2012 の監視][15]
-- [Windows Server 2012 メトリクスの収集方法][16]
-- [Datadog を使用した Windows Server 2012 の監視][17]
+- [Monitoring Windows Server 2012][15]
+- [How to collect Windows Server 2012 metrics][16]
+- [Monitoring Windows Server 2012 with Datadog][17]
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/windows_service/datadog_checks/windows_service/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.python.org/3/howto/regex.html#regex-howto
 [6]: https://learn.microsoft.com/en-us/windows/win32/services/service-trigger-events
-[7]: https://docs.datadoghq.com/ja/getting_started/tagging/
-[8]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags/
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/getting_started/tagging/
+[8]: https://docs.datadoghq.com/getting_started/tagging/assigning_tags/
+[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-core/blob/master/windows_service/assets/service_checks.json
-[11]: https://docs.datadoghq.com/ja/help/
+[11]: https://docs.datadoghq.com/help/
 [12]: https://learn.microsoft.com/en-us/troubleshoot/windows-server/windows-security/grant-users-rights-manage-services
-[13]: https://docs.datadoghq.com/ja/agent/guide/windows-agent-ddagent-user/
+[13]: https://docs.datadoghq.com/agent/guide/windows-agent-ddagent-user/
 [14]: https://learn.microsoft.com/en-US/troubleshoot/windows-server/group-policy/configure-group-policies-set-security
 [15]: https://www.datadoghq.com/blog/monitoring-windows-server-2012
 [16]: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
 [17]: https://www.datadoghq.com/blog/windows-server-monitoring
+

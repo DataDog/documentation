@@ -1,24 +1,24 @@
 ---
-title: ブロックコンポーネント
+title: "Block Component"
 ---
-## 概要
+## Overview
 
-ブロックは、利用可能なコンポーネントの中で最も基本的なものです。画像やアイコンと共に、まだ利用可能でないクラウドコンポーネントを表現するために使用することができます。
+The Block is the most basic of the available components. Along with Images and Icons, it can be used to represent cloud components not yet available.
 
-{{< img src="cloudcraft/components-common/block/component-block.png" alt="Cloudcraft のブロックコンポーネントの 3D 表現のスクリーンショット" responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-common/block/component-block.png" alt="Screenshot of a 3D representation of the block component in Cloudcraft" responsive="true" style="width:60%;">}}
 
-## ツールバー
+## Toolbar
 
-ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: 定義済みの色を選択するか、希望する色の 16 進値を入力します。2D ビューと 3D ビューの両方に同じ色を使用することも、それぞれで異なる色を選択することもできます。
-- **Width**: ブロックコンポーネントの幅を選択します。
-- **Height**: ブロックコンポーネントの高さを選択します。
-- **Depth**: ブロックコンポーネントの奥行を選択します。
+- **Color**: Select a predefined color or enter the hexadecimal value for the color you want. You can use the same color for both 2D and 3D view, or choose different colors for each.
+- **Width**: Choose the width of your block component.
+- **Height**: Choose the height of your block component.
+- **Depth**: Choose the depth of your block component.
 
-## ヘルプ
+## API
 
-[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。以下は、ブロックコンポーネントの JSON オブジェクトの例です。
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of a Block component:
 
 ```json
 {
@@ -37,21 +37,21 @@ title: ブロックコンポーネント
 }
 ```
 
-- **type: ブロック**: コンポーネントのタイプ。
-- **id: 文字列**: `uuid` 形式のコンポーネントの一意な識別子。
-- **mapPos: [数値, 数値]**: x 座標と y 座標のペアで表される、ブループリント内のコンポーネントの位置。
-- **width: 数値**: ブロックコンポーネントの幅。デフォルトは 2 です。
-- **height: 数値**: ブロックコンポーネントの高さ。デフォルトは 1 です。
-- **depth: 数値**: ブロックコンポーネントの奥行。デフォルトは 2 です。
-- **color: オブジェクト**: コンポーネント本体の塗りつぶし色。
-  - **isometric: 文字列**: 3D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
-  - **2d: 文字列**: 2D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
-- **link: uri**: コンポーネントを、`blueprint://ID` フォーマットで別の図にリンクするか、`https://LINK` フォーマットで外部の Web サイトにリンクします。
-- **locked: ブール値**: true の場合、アプリケーション通じたコンポーネントへの変更は、ロックが解除されるまで無効になります。
+- **type: block**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as a x,y coordinate pair.
+- **width: number**: The width of the block component. Defaults to 2.
+- **height: number**: The height of the block component. Defaults to 1.
+- **depth: number**: The depth of the block component. Defaults to 2.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: Fill color for the component in 3D view. Must be an hexadecimal color.
+  - **2d: string**: Fill color for the component in 2D view. Must be an hexadecimal color.
+- **link: uri**: Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
+- **locked: boolean**: If true, changes to the component through the application are disabled until unlocked.
 
-ブロックコンポーネントは [VPCs][2]、[セキュリティグループ][3]、[サブネット][4]に追加することができます。
+The block component can be added to [VPCs][2], [security groups][3], and [subnets][4].
 
 [1]: https://developers.cloudcraft.co/
 [2]: https://help.cloudcraft.co/article/118-component-vpc
 [3]: https://help.cloudcraft.co/article/119-component-security-group
-[4]: /ja/cloudcraft/components-aws/subnet/
+[4]: /cloudcraft/components-aws/subnet/

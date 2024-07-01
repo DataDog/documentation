@@ -1,17 +1,17 @@
 ---
+title: trace root span
 core_product:
-- apm
-title: トレースルートスパン
+  - apm
 ---
-[スパン][1]がトレースの最初のスパンになる場合、トレースルートスパンとなります。ルートスパンは、トレースされたリクエストのエントリポイントメソッドです。そのスタートは、トレースの開始を示します。
+A [span][1] is a trace root span when it is the first span of a trace. The root span is the entry-point method of the traced request. Its start marks the beginning of the trace.
 
-{{< img src="tracing/visualization/toplevelspans.png" alt="トレースルートスパン" style="width:80%" >}}
+{{< img src="tracing/visualization/toplevelspans.png" alt="A trace root span" style="width:80%" >}}
 
-このの例における**サービスエントリスパン**は次の通りです。
+In this example, the **service entry spans** are:
 
-- `rack.request` (_ルートスパン_でもある)
+- `rack.request` (which is also the _root span_)
 - `aspnet_coremvc.request`
-- 以下で最上位にある緑色のスパン `aspnet_coremvc.request`
-- オレンジ色の各 `mongodb` スパン
+- The topmost green span below `aspnet_coremvc.request`
+- Every orange `mongodb` span
 
-[1]: /ja/glossary/#span
+[1]: /glossary/#span

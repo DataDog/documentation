@@ -1,18 +1,33 @@
 ---
-title: Cloudcraft サブスクリプションのキャンセル
+title: Cancel your Cloudcraft Subscription
 ---
 
-ご満足いただけなかったようで残念です！Cloudcraft のサブスクリプションをキャンセルできるのはアカウントオーナーのみで、現在の請求サイクルの終了時に有効になります。サブスクリプションをキャンセルすると、アカウントは無料プランにダウングレードされます。 
+Canceling your Cloudcraft subscription can be done from inside the Cloudcraft application.
 
-作成した構成図へのアクセスは失われません。ただし、**Infinite Grid** ブループリントは、再度サブスクライブするか、標準グリッドサイズに変更するまで読み取り専用モードに切り替わり、AWS リソースは更新されなくなります。
+Only the account owner can cancel a Cloudcraft subscription, which takes effect at the end of your current billing cycle. When you cancel your subscription, your account is downgraded to the free plan.
 
-<div class="alert alert-info">30 日間の返金保証期間内にキャンセルされ、返金を希望される場合は、<a href="https://app.cloudcraft.co/support" rel="お問合せ" title="Cloudcraft support">サポートチームまでご連絡ください</a>。
+Upon cancellation, you can still access to the diagrams you created, but will lose access to a few features:
+
+- _Infinite grid_ blueprints switch to read-only mode.
+- The _Live_ feature is no longer be available.
+- AWS and Azure resources no longer get updated.
+- [The Bits menu][1] no longer works.
+
+<div class="alert alert-info">If you're canceling within the 30-day money-back guarantee period, and prefer a refund, <a href="https://app.cloudcraft.co/support" rel="help" title="Cloudcraft support">reach out to Cloudcraft's support team</a> instead.
 </div>
 
-1. **User** > **Subscription Settings** に移動します。
-2. **Cancel subscription** をクリックします。
-3. オプションで、今後 Cloudcraft がよりお客様のニーズを満たせるようになるために何ができるかについて、フィードバックをお寄せください。
-4. **Cancel my account** をクリックします。
+1. Navigate to **User** > **Subscription Settings**.
+2. Select **Cancel subscription**.
+3. Optionally, provide feedback on what Cloudcraft can do to be a better fit for you in the future.
+4. Select **Cancel my account**.
 
-<div class="alert alert-danger">サブスクリプションをキャンセルしても、サーバーからデータが削除されるわけではなく、アカウントは無料プランにダウングレードされます。アカウントとすべてのデータをサーバーから削除したい場合は、<a href="https://app.cloudcraft.co/support" rel="お問合せ" title="Cloudcraft support">サポートチームまでご連絡</a>いただければ、喜んでお手伝いいたします。
+If you do not see the **Cancel subscription** option, you may have bought your subscription through the Datadog sales team or through the AWS Marketplace.
+
+- If you bought your subscription through the Datadog sales team, it does not auto-renew and expires at the end of your billing cycle.
+- If you bought your subscription through the AWS Marketplace, the cancellation process must be done through your AWS account. For more information, see [Cancel your product subscription][2] in the AWS Marketplace documentation page.
+
+<div class="alert alert-danger">Canceling a subscription does not remove your data from Cloudcraft's servers. Instead, it changes your account to the free plan. If you wish to delete your account and all data from Cloudcraft's servers, <a href="https://app.cloudcraft.co/support" rel="help" title="Cloudcraft support">contact the Cloudcraft support team</a>.
 </div>
+
+[1]: /cloudcraft/getting-started/using-bits-menu/
+[2]: https://docs.aws.amazon.com/marketplace/latest/buyerguide/cancel-subscription.html

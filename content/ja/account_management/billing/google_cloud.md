@@ -1,32 +1,32 @@
 ---
-title: Google Cloud インテグレーションの請求
+title: Google Cloud Integration Billing
 ---
 
-## 概要
+## Overview
 
-Datadog では、Agent を実行しているホスト、および Google Cloud インテグレーションによって使用されるすべての GCE インスタンスに対して課金が発生します。[Dataflow][6] のような GCE 以外のサービスが、Datadog で請求対象の GCE ホストを作成することがあります。Google Cloud インテグレーションによって使用される GCE インスタンスで Agent を実行している場合、二重に課金されることはありません。
+Datadog bills for hosts running the Agent and all GCE instances picked up by the Google Cloud integration. Services outside of GCE, such as [Dataflow][6], may create billable GCE hosts in Datadog. You are not billed twice if you are running the Agent on a GCE instance picked up by the Google Cloud integration.
 
-その他の Google Cloud リソース (CloudSQL、Google App Engine、Pub/Sub など) は月額請求の対象外です。請求対象のホストを確認するには、Google Cloud コンソールの GCE ページに移動し、実行中のホストのリストを表示します。[Google Cloud メトリクス除外](#google-cloud-metric-exclusion)のタグで除外されていない限り、このページにリストされているホストは Datadog にデータを送信しており、ホストとして請求されます。
+Other Google Cloud resources (CloudSQL, Google App Engine, Pub/Sub, and others) are not part of monthly billing. To see which hosts are billed, navigate to the GCE page in the Google Cloud console and view the list of running hosts. Unless excluded through tags with [Google Cloud metric exclusion](#google-cloud-metric-exclusion), hosts listed on this page are sending data to Datadog and are billed as hosts.
 
-## Google Cloud メトリクスの除外
+## Google Cloud metric exclusion
 
-メトリクスの収集を制御するには、[Google Cloud インテグレーションタイル][1]を使用します。**Configuration** タブに移動し、プロジェクトを選択するか、新しいプロジェクトを追加します。各プロジェクトは、**Optionally Limit Metrics Collection to hosts with tag** の設定に基づいて制御されます。次は、[ホストタグ][2]でメトリクスを制限する例です。
+Use the [Google Cloud integration tile][1] to control your metric collection. Go to the **Configuration** tab and select a project or add a new one. Each project is controlled under **Optionally Limit Metrics Collection to hosts with tag**. Limit metrics by [host tag][2]:
 
-{{< img src="account_management/billing/google_cloud_metric_filter.png" alt="Datadog の Google Cloud ページの General タブで、メトリクス収集を制限するオプションがハイライトされています" >}}
+{{< img src="account_management/billing/google_cloud_metric_filter.png" alt="The Google Cloud page in Datadog, on the General tab, with the option to limit metric collection highlighted" >}}
 
-インテグレーションタイルで既存の Google Cloud プロジェクトに制限を追加した場合は、それまでに検出されたインスタンスが[インフラストラクチャーリスト][3]に最長 2 時間残る可能性があります。移行時間中、GCE インスタンスのステータスは `???` と表示されます。これは、課金対象に含まれません。
+When adding limits to existing Google Cloud projects within the integration tile, the previously discovered instances could stay in the [Infrastructure List][3] up to 2 hours. During the transition period, GCE instances display a status of `???`. This does not count towards your billing.
 
-Agent が実行されているホストは引き続き表示され、課金対象に含まれます。制限オプションの使用は、Agent が実行されていない GCE インスタンスにのみ適用されます。
+Hosts with a running Agent still display and are included in billing. Using the limit option is only applicable to GCE instances without a running Agent.
 
-## トラブルシューティング
+## Troubleshooting
 
-技術的な質問については、[Datadog のサポートチーム][4]にお問い合わせください。
+For technical questions, contact [Datadog support][4].
 
-課金に関するご質問は、[カスタマーサクセス][5]マネージャーにお問い合わせください。
+For billing questions, contact your [Customer Success][5] Manager.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/google_cloud_platform
-[2]: /ja/getting_started/tagging/using_tags/#integrations
-[3]: /ja/infrastructure/
-[4]: /ja/help/
+[2]: /getting_started/tagging/using_tags/#integrations
+[3]: /infrastructure/
+[4]: /help/
 [5]: mailto:success@datadoghq.com
 [6]: https://cloud.google.com/dataflow

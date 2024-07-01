@@ -1,84 +1,85 @@
 ---
-categories:
-- AWS
-- クラウド
+"categories":
+- aws
+- cloud
 - data stores
-- ログの収集
-dependencies: []
-description: Amazon Neptune のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_neptune/
-draft: false
-git_integration_title: amazon_neptune
-has_logo: true
-integration_id: ''
-integration_title: Amazon Neptune
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_neptune
-public_title: Datadog-Amazon Neptune インテグレーション
-short_description: Amazon Neptune のキーメトリクスを追跡
-version: '1.0'
+- log collection
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Amazon Neptune metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_neptune/"
+"draft": false
+"git_integration_title": "amazon_neptune"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Amazon Neptune"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_neptune"
+"public_title": "Datadog-Amazon Neptune Integration"
+"short_description": "Track key Amazon Neptune metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Amazon Neptune は、高速かつ信頼性の高いフルマネージド型グラフデータベースサービスです。高度に接続されたデータセットと連携するアプリケーションを簡単に構築および実行できます。
+Amazon Neptune is a fast, reliable, fully managed graph database service that makes it easy to build and run applications that work with highly connected datasets.
 
-このインテグレーションを有効にすると、Datadog にすべての Neptune メトリクスを表示できます。
+Enable this integration to see all your Neptune metrics in Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][1] first.
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Neptune` が有効になっていることを確認します。
-2. [Datadog - Amazon Neptune インテグレーション][3]をインストールします。
+1. In the [AWS integration page][2], ensure that `Neptune` is enabled under the `Metric Collection` tab.
+2. Install the [Datadog - Amazon Neptune integration][3].
 
-### 収集データ
+### Log collection
 
-#### ログの有効化
+#### Enable logging
 
-Amazon Neptune から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+Configure Amazon Neptune to send logs either to a S3 bucket or to CloudWatch.
 
-**注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_neptune` に設定されているかを確認してください。
+**Note**: If you log to a S3 bucket, make sure that `amazon_neptune` is set as _Target prefix_.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Neptune ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. If you haven’t already, set up the [Datadog Forwarder Lambda function][4].
+2. Once the Lambda function is installed, manually add a trigger on the S3 bucket or CloudWatch log group that contains your Amazon Neptune logs in the AWS console:
 
-    - [S3 バケットに手動トリガーを追加][5]
-    - [CloudWatch ロググループに手動トリガーを追加][6]
+    - [Add a manual trigger on the S3 bucket][5]
+    - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_neptune" >}}
 
 
-### ヘルプ
+### Events
 
-Amazon Neptune インテグレーションには、イベントは含まれません。
+The Amazon Neptune integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Amazon Neptune インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon Neptune integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-neptune
-[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.datadoghq.com/logs/guide/forwarder/
+[5]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_neptune/amazon_neptune_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

@@ -1,8 +1,8 @@
 ---
-core_product:
-- network performance monitoring
 title: NetFlow
+core_product:
+  - network performance monitoring
 ---
-[NetFlow][1] は、IP ネットワークのトラフィックがインターフェイスに出入りする際に収集するネットワークプロトコルシステムです。1996 年にシスコ社によって発表されました。
+[NetFlow][1] is a network protocol system that collects IP network traffic as it enters or exits an interface. It was introduced by Cisco in 1996.
 
 [1]: https://www.cisco.com/c/en/us/products/ios-nx-os-software/ios-netflow/index.html

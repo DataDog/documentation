@@ -1,67 +1,67 @@
 ---
-further_reading:
-- link: /dynamic_instrumentation/
-  tag: ドキュメント
-  text: ダイナミックインスツルメンテーションについて
+title: Symbol Database
 is_beta: true
 private: true
-title: Symbol Database
+further_reading:
+- link: /dynamic_instrumentation/
+  tag: Documentation
+  text: Learn more about Dynamic Instrumentation
 ---
 
 {{< site-region region="gov,ap1" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Symbol Database はサポートされていません。</div>
+<div class="alert alert-warning">Symbol Database is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< beta-callout-private url="https://forms.gle/UG9EELAy8Li6z2jW8" >}}
-ダイナミックインスツルメンテーションプローブ作成時のユーザーエクスペリエンスの改善にご興味がおありですか？こちらから、Symbol Database の非公開データ版にご参加ください。
+Interested in an improved user experience when creating Dynamic Instrumentation probes? Join the Symbol Database private beta here.
 {{< /beta-callout-private >}}
 
-## 概要
+## Overview
 
-Symbol Database は、検索やオートコンプリートといった IDE 同様の機能を追加することで、[ダイナミックインスツルメンテーション][1]のユーザーエクスペリエンスを向上させます。
+Symbol Database enhances the user experience of [Dynamic Instrumentation][1]  by adding IDE-like features like search and autocomplete. 
 
-Symbol Database は、アプリケーションから Datadog に機密でないシンボルやメタデータをアップロードします。アップロードされるデータには、クラス、メソッド、属性、フィールド、ローカル変数の名前のほか、行番号などの関連するメタデータが含まれます。
+Symbol Database uploads nonsensitive symbols and metadata from your application to Datadog. The uploaded data includes the names of classes, methods, arguments, fields, and local variables, along with related metadata, like line numbers.
 
-## はじめに
+## Getting started
 
-### 前提条件
+### Prerequisites
 
-Symbol Database には以下が必要です。
+Symbol Database requires the following:
 
-- サービスで[ダイナミックインスツルメンテーション][1]が有効になっていること。
-- [Datadog Agent][2] 7.45.0 以降がサービスと一緒にインストールされていること。
-- その Agent で[リモート構成][3]が有効になっていること。
-- [統合サービスタグ付け][4]タグ `service`、`env`、`version` がデプロイメントに適用されていること。
+- [Dynamic Instrumentation][1] is enabled for your service.
+- [Datadog Agent][2] 7.45.0 or higher is installed alongside your service.
+- [Remote Configuration][3] is enabled in the Agent.
+- The [Unified Service Tagging][4] tags `service`, `env`, and `version` are applied to your deployment.
 
-### サービスで Symbol Database を有効にする
+### Enable Symbol Database for your service
 
-以下でランタイムを選択します。
+Select your runtime below:
 
 {{< partial name="dynamic_instrumentation/symbol-database-languages.html" >}}
 
-## Symbol Database を使ってみる
+## Explore Symbol Database
 
-Symbol Database は、より IDE に近い形で使用でき、ダイナミックインスツルメンテーションのユーザーエクスペリエンスが向上します。
+With Symbol Database, the user experience of Dynamic Instrumentation is improved to behave more like an IDE.
 
-Symbol Database は、クラス名およびメソッド名の検索機能を提供します。
-{{< img src="dynamic_instrumentation/symdb_method_search.png" alt="ダイナミックインスツルメンテーションログプローブ作成時のメソッドの検索" style="width:60%;" >}}
+Symbol Database provides search for class and method names:
+{{< img src="dynamic_instrumentation/symdb_method_search.png" alt="Search for methods when creating a Dynamic Instrumentation log probe" style="width:60%;" >}}
 
-ダイナミックインスツルメンテーションの構成でメソッドを選択すると、そのメソッドのコードが表示されます。
-{{< img src="dynamic_instrumentation/symdb_method_highlight.png" alt="Symbol Database で選択したメソッドがハイライト表示" >}}
+When you select a method in the Dynamic Instrumentation configuration, the code for that method is displayed:
+{{< img src="dynamic_instrumentation/symdb_method_highlight.png" alt="Symbol Database highlights the selected method" >}}
 
-また、Symbol Database は、ログテンプレートや[ダイナミックインスツルメンテーション式言語][5]を使用するその他のテンプレートを対象に、オートコンプリート機能も提供します。
-{{< img src="dynamic_instrumentation/symdb_completion.png" alt="ログテンプレートを対象としたオートコンプリートによる提案" style="width:80%;" >}}
+Symbol Database also provides autocomplete for log templates and other templates that use the [Dynamic Instrumentation expression language][5]:
+{{< img src="dynamic_instrumentation/symdb_completion.png" alt="Autocomplete suggestions for log templates" style="width:80%;" >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dynamic_instrumentation/
-[2]: /ja/agent/
-[3]: /ja/agent/remote_config/
-[4]: /ja/getting_started/tagging/unified_service_tagging/
-[5]: /ja/dynamic_instrumentation/expression-language
+[1]: /dynamic_instrumentation/
+[2]: /agent/
+[3]: /agent/remote_config/
+[4]: /getting_started/tagging/unified_service_tagging/
+[5]: /dynamic_instrumentation/expression-language
 [6]: https://github.com/DataDog/dd-trace-java
 [7]: https://github.com/DataDog/dd-trace-py
 [8]: https://github.com/DataDog/dd-trace-dotnet
-[9]: /ja/integrations/guide/source-code-integration/
+[9]: /integrations/guide/source-code-integration/

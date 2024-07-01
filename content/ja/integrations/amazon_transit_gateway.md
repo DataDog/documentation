@@ -1,92 +1,106 @@
 ---
-categories:
-- AWS
-- クラウド
-- ネットワーク
-dependencies: []
-description: AWS Transit Gateway のキーメトリクスを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/amazon_transit_gateway/
-draft: false
-git_integration_title: amazon_transit_gateway
-has_logo: true
-integration_id: amazon-transit-gateway
-integration_title: AWS Transit Gateway
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: amazon_transit_gateway
-public_title: Datadog-AWS Transit Gateway インテグレーション
-short_description: AWS Transit Gateway のキーメトリクスを追跡します。
-version: '1.0'
+"categories":
+- aws
+- cloud
+- network
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key AWS Transit Gateway metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_transit_gateway/"
+"draft": false
+"git_integration_title": "amazon_transit_gateway"
+"has_logo": true
+"integration_id": ""
+"integration_title": "AWS Transit Gateway"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_transit_gateway"
+"public_title": "Datadog-AWS Transit Gateway Integration"
+"short_description": "Track key AWS Transit Gateway metrics."
+"version": "1.0"
 ---
 
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+## Overview
 
-AWS Transit Gateway を使用して、仮想プライベートクラウド (VPC) とオンプレミスネットワークを相互接続します。
+Use AWS Transit Gateway to interconnect your virtual private clouds (VPCs) and on-premises networks.
 
-このインテグレーションを有効にすると、Datadog にすべての Transit Gateway メトリクスを表示できます。
+Enable this integration to see all your Transit Gateway metrics in Datadog.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][1] first.
 
-### メトリクスの収集
+### Metric & Resource collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `TransitGateway` が有効になっていることを確認します。
-2. [Datadog - AWS Transit Gateway インテグレーション][3]をインストールします。
+1. In the [AWS integration page][2], ensure that `TransitGateway` is enabled under the `Metric Collection` tab.
+2. Add the following permissions to your [Datadog IAM policy][3] to collect AWS Transit Gateway resources.
 
-### ログの収集
+  | AWS Permission                                | Description                                                                                          |
+  | --------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+  | `ec2:DescribeTransitGateways`                 | Grants permission to describe one or more transit gateways                                           |
+  | `ec2:DescribeTransitGatewayVPCAttachments`    | Grants permission to describe one or more VPC attachments on a transit gateway.                      |
+  | `ec2:DescribeTransitGatewayRouteTables`       | Grants permission to describe one or more transit gateway route tables.                              |
+  | `ec2:GetTransitGatewayPrefixListReferences`   | Grants permission to get information about prefix list references for a transit gateway route table. |
+  | `ec2:SearchTransitGatewayRoutes`              | Grants permission to search for routes in a transit gateway route table.                             |
 
-#### Transit Gateway フローログ記録の有効化
+3. Install the [Datadog - AWS Transit Gateway integration][4].
 
-Transit Gateway のフローログは、S3 バケットまたは CloudWatch のロググループに送信することができます。
 
-1. AWS コンソールで、監視したい Transit Gateway に移動します。
-2. **Flow logs** タブに移動します。
-3. **Create flow log** をクリックします。
-4. ログを送信する S3 バケットまたは CloudWatch のロググループを選択します。
+### Log collection
 
-**注**: S3 バケット名に `transit-gateway` という文字列を含めると、ログの自動パースが可能になります。
+#### Enable Transit Gateway flow log logging
 
-#### ログを Datadog に送信する方法
+Transit Gateway flow logs can be sent to an S3 bucket or a CloudWatch log group. 
 
-1. AWS アカウントで [Datadog Forwarder Lambda 関数][4] をまだセットアップしていない場合は、セットアップします。
-2. AWS アカウントで Datadog Forwarder Lambda 関数に移動します。Function Overview セクションで、**Add Trigger** をクリックします。
-3. Trigger Configuration で **S3** または **CloudWatch Logs** トリガーを選択します。
-4. Transit Gateway のログが含まれる S3 バケットまたは CloudWatch のロググループを選択します。
-5. S3 の場合、イベントタイプは `All object create events` のままにしておきます。
-6. **Add** をクリックすると、Lambda にトリガーが追加されます。
+1. In the AWS console, go to the Transit Gateway you want to monitor.
+2. Go to the **Flow logs** tab. 
+3. Click **Create flow log**.
+4. Select the S3 bucket or the CloudWatch log group to send the logs to.
 
-数分後、Transit Gateway のフローログが[ログエクスプローラー][5]に表示されます。
+**Note**: Include the string `transit-gateway` in the S3 bucket name to enable automatic log parsing.
 
-AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][6]を参照してください。
+#### Send logs to Datadog
 
-## 収集データ
+1. If you haven't already, set up the [Datadog Forwarder Lambda function][5] in your AWS account.
+2. Navigate to the Datadog Forwarder Lambda function in your AWS account. In the Function Overview section, click **Add Trigger**. 
+3. Select the **S3** or **CloudWatch Logs** trigger for the Trigger Configuration.
+4. Select the S3 bucket or CloudWatch log group that contains your Transit Gateway logs.
+5. For S3, leave the event type as `All object create events`.
+6. Click **Add** to add the trigger to your Lambda.
 
-### メトリクス
+After a few minutes, Transit Gateway flow logs appear in your [Log Explorer][6].
+
+For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda Function][7].
+
+## Data Collected
+
+### Metrics
 {{< get-metrics-from-git "amazon_transit_gateway" >}}
 
 
-### イベント
+### Events
 
-AWS Transit Gateway インテグレーションには、イベントは含まれません。
+The AWS Transit Gateway integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-AWS Transit Gateway インテグレーションには、サービスのチェック機能は含まれません。
+The AWS Transit Gateway integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][9].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://app.datadoghq.com/integrations/amazon-transit-gateway
-[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/logs/explorer/
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_transit_gateway/amazon_transit_gateway_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
+[4]: https://app.datadoghq.com/integrations/amazon-transit-gateway
+[5]: https://docs.datadoghq.com/logs/guide/forwarder/
+[6]: https://docs.datadoghq.com/logs/explorer/
+[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_transit_gateway/amazon_transit_gateway_metadata.csv
+[9]: https://docs.datadoghq.com/help/
+

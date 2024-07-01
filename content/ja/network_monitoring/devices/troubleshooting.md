@@ -1,92 +1,92 @@
 ---
+title: NDM Troubleshooting
 aliases:
-- /ja/network_performance_monitoring/devices/troubleshooting/
+    - /network_performance_monitoring/devices/troubleshooting/
 further_reading:
-- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
-  tag: ブログ
-  text: Datadog での SNMP モニタリング
-title: NDM トラブルシューティング
+- link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
+  tag: Blog
+  text: Monitor SNMP with Datadog
 ---
 
-## 概要
+## Overview
 
-Datadog Network Device Monitoring のトラブルシューティングには、以下の情報を使用してください。さらにヘルプが必要な場合は、[Datadog サポート][1]にお問い合わせください。
+Use the information below for troubleshooting Datadog Network Device Monitoring. If you need additional help, contact [Datadog support][1].
 
-## 用語
+## Terminology
 
 SNMP - Simple network management protocol
-: ベアメタルネットワーキングギアに関する情報を収集するために使用されるネットワークプロトコル。
+: A network protocol that is used to collect information about bare metal networking gear.
 
 OID - Object identifier
-: ポーリングされたときにその値の応答コードを返す、デバイス上の一意の ID またはアドレス。たとえば、OID は CPU またはデバイスのファン速度です。
+: A unique ID or address on a device that when polled returns the response code of that value. For example, OIDs are CPU or device fan speed.
 
 sysOID - System object identifier
-: デバイスタイプを定義する特定のアドレス。すべてのデバイスには、それを定義する一意の ID があります。 たとえば、Meraki ベースの sysOID は `1.3.6.1.4.1.29671` です。
+: A specific address that defines the device type. All devices have a unique ID that defines it. For example, the Meraki base sysOID is `1.3.6.1.4.1.29671`.
 
 MIB - Managed information base
-: MIB に関連する可能性のあるすべての OID とその定義のデータベースまたはリスト。たとえば、`IF-MIB` (interface MIB) には、デバイスのインターフェースに関する説明情報のすべての OID が含まれています。
+: A database or list of all the possible OIDs and their definitions that are related to the MIB. For example, the `IF-MIB` (interface MIB) contains all the OIDs for descriptive information about a device's interface.
 
-## よくあるご質問
+## FAQ
 
-#### Datadog はどの SNMP バージョンをサポートしていますか？
+#### What SNMP versions does Datadog support?
 
-Datadog は、SNMPv1、SNMPv2、SNMPv3 の 3 つのバージョンの SNMP をすべてサポートしています。
+Datadog supports all three versions of SNMP: SNMPv1, SNMPv2, and SNMPv3.
 
-#### Datadog はデバイスを検出するためにどのプロトコルを使用しますか？
+#### What protocol does Datadog use to discover devices?
 
-Datadog は SNMP を使用してデバイスを検出します。検出中、SNMP ポート (デフォルトは 161) がポーリングされます。一致する応答とプロファイルがある場合、これは検出されたデバイスと見なされます。
+Datadog uses SNMP to discover devices. During discovery, the SNMP port (default 161) is polled. If there's a response and a profile to match, this is considered a discovered device.
 
-#### Datadog は MIB 認証を行いますか？すべての MIB を送信する必要がありますか？Python で MIB を変換するにはどうすればよいですか？
+#### Does Datadog do MIB certification? Do I need to send you all my MIBs? How do I convert my MIBs with Python?
 
-Datadog Agent には MIB がありません。つまり、MIB で何かをする必要はありません。Datadog デバイスプロファイルで収集されたすべてのメトリクスは、MIB がなくても自動的に機能します。
+The Datadog Agent is MIB-less, meaning you don't need to do anything with your MIBs. All metrics collected with Datadog device profiles automatically work without the MIB.
 
-メトリクスまたはカスタムコンフィギュレーションを追加するには、MIB 名、テーブル名、テーブル OID、シンボル、シンボル OID をリストします。次に例を示します。
+To add metrics or a custom configuration, list the MIB name, table name, table OID, symbol, and symbol OID, for example:
 
 ```yaml
 - MIB: EXAMPLE-MIB
     table:
-      # メトリクスが由来するテーブルの ID。
+      # Identification of the table which metrics come from.
       OID: 1.3.6.1.4.1.10
       name: exampleTable
     symbols:
-      # 取得するシンボル ('columns') のリスト。
-      # 単一の OID と同じ形式。
-      # テーブルの各行はこれらのメトリクスを出力します。
+      # List of symbols ('columns') to retrieve.
+      # Same format as for a single OID.
+      # Each row in the table emits these metrics.
       - OID: 1.3.6.1.4.1.10.1.1
         name: exampleColumn1
 ```
 
-#### デバイスとモデルのペアがサポートされていない場合でも、Network Device Monitoring を使用できますか？
+#### Can I still use Network Device Monitoring if my device-model pair isn't supported?
 
-Datadog は、すべてのデバイスから一般的なベースラインメトリクスを収集します。ベンダー MIB からのサポートされていないメトリクスがある場合は、カスタムプロファイルを作成するか、機能リクエストを [Datadog サポート][1]に送信してください。
+Datadog collects generic base-line metrics from all devices. If there are unsupported metrics from a vendor MIB, you can write a custom profile, or send a feature request to [Datadog support][1].
 
-機能リクエストを送信する場合、Datadog サポートにはリクエストされたデバイスからの `snmpwalk` が必要です。以下を実行し、出力を送信してください。
+If you send a feature request, Datadog support needs a `snmpwalk` from the requested device. Run the following and send the output:
 
 ```
 snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 ```
 
-#### ネットワークについて収集されたメトリクスが 1 つしか表示されず、それがゼロで収集されたデバイスの数であるのはなぜですか？
+#### Why am I only seeing one metric collected for my networks and it's the number of devices collected at zero?
 
-1. デバイスの ACL/ファイアウォールルールを緩和してみてください。
-2. Agent が実行されているホストから `snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6` を実行します。応答なしでタイムアウトが発生する場合は、Datadog Agent がデバイスからメトリクスを収集できないように何かによってブロックされている可能性があります。
+1. Try loosening ACLs/firewall rules for your devices.
+2. Run `snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6` from the host your Agent is running on. If you get a timeout without any response, there is likely something blocking the Datadog Agent from collecting metrics from your device.
 
-#### Datadog でサポートされているベンダーまたはデバイスタイプであるにもかかわらず、所有している特定のモデルがサポートされていない場合はどうしたらいいですか？
+#### What do I do if Datadog supports a vendor or device type but my specific model isn't supported? 
 
-- [Datadog サポート][1]までご連絡の上、特定のモデルのサポートをご依頼ください。
-- 追加の `sysobjectid` 値をサポートするようプロファイルを拡張します。
-    たとえば、別のタイプの Cisco CSR を監視する場合、ISR プロファイルを直接修正して、以下のように別の `sysobjectid` をリストアップします。
+- Contact [Datadog support][1] to put in a request to support your specific model.
+- Extend your profiles to support additional `sysobjectid` values. 
+    For example, if you want to monitor another type of Cisco CSR, you can modify the ISR profile directly to list another `sysobjectid` like this: 
 
     ```
         snmpwalk -v 2c -c [community string] [ip address] 1.3.6.1.2.1.1.2
     ```
 
-**注**: デバイスの `sysobjectid` が不明な場合は、インターネットで調べるか、デバイスに到達できるホストで `snmpwalk` を実行します。この結果を使用して、プロファイルをリストアップします。 
+**Note**: If you do not know the `sysobjectid` of your device, try doing an Internet search or run a `snmpwalk` on a host that can reach out to your device. Use the output to list the profile to match against. 
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/help
+[1]: /help

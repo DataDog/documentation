@@ -1,35 +1,35 @@
 ---
-title: ユーザープロフィールの管理
+title: Manage Your User Profile
 ---
 
-ユーザープロフィールでは、名前やメールアドレスなどの個人情報を更新することができます。また、**Sign in with Google** ボタンを使用して Cloudcraft にサインアップした場合は、パスワードを更新したり、アカウントにパスワードを追加したりすることもできます。
+Your user profile is where you can make updates to your personal information, such as your name and email address. You can also update your password or add a password to your account if you signed up to Cloudcraft using the **Sign in with Google** button.
 
-## 名前とメールアドレスの更新
+## Update your name and email address
 
-1. **User** > **User Settings** に移動します。
-2. 名前とメールアドレスを更新し、**Update Name** または **Update Email** をクリックします。
+1. Navigate to **User** > **User Settings**.
+2. Update your name and email address, then click **Update Name** or **Update Email**.
 
-{{< img src="cloudcraft/account-management/manage-user-profile/update-email-button.png" alt="名前とメールアドレスを更新するオプションがある、Cloudcraft のユーザー設定ページのスクリーンショット。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/account-management/manage-user-profile/update-email-button.png" alt="Screenshot of Cloudcraft's user settings page with options to update name and email." responsive="true" style="width:100%;">}}
 
-- **Sign in with Google** を使用していない場合、ログインは新しいメールアドレスに変更されます。
-- **Sign in with Google** を使用している場合、変更されるのは請求書に表示されるメールと連絡の送信先のみです。
+- If you are not using **Sign in with Google**, your login will change to reflect your new email address.
+- If you are using **Sign in with Google**, the only thing that will change is the email shown in your invoices and where communications are sent to.
 
-<div class="alert alert-info">プライバシーとセキュリティのため、サポートリクエストを送信する際にお客様の名前とメールアドレスが Cloudcraft のデータベースと照合されますので、正確で最新の情報であることを確認してください。
+<div class="alert alert-info">For privacy and security purposes, your name and email address are checked against Cloudcraft's database when you submit a support request, so you will want to make sure they are correct and up-to-date.
 </div>
 
-## パスワードの追加または変更
+## Add or change your password
 
-1. **User** > **User Settings** に移動します。
-2. **Change Password** をクリックします。
-3. 現在のパスワードと新しいパスワードの両方を入力します。
-4. **Change Password** をクリックします。
+1. Navigate to **User** > **User Settings**.
+2. Click **Change Password**.
+3. Enter both your current password and new password.
+4. Click **Change Password**.
 
 
-パスワードを更新する必要がある場合は、**Login** セクションの右にある青い **Change Password** ボタンをクリックして、[強力なパスワードを選択してください][1]。
+If you need to update your password — [choose a strong one][1] —, you can do so by clicking the blue **Change Password** button to the right of the **Login** section.
 
-ウィンドウが開き、古いパスワードと新しいパスワードの入力を求められます。両方を入力し、下にある青い **Change Password** リンクをクリックしてください。
+A window will open up and ask for your old and new password. Type both in and click the blue **Change Password** link at the bottom.
 
-<div class="alert alert-info"><strong>Sign in with Google</strong> オプションを使用して Cloudcraft アカウントにサインアップした場合は、<strong>Change Password</strong> ボタンが <strong>Add Password</strong> ボタンに変わります。ボタンをクリックすると、パスワードリセットのリクエストがお客様のメールアドレスに送信されます。
+<div class="alert alert-info">If you signed up for a Cloudcraft account using the <strong>Sign in with Google</strong> option, the <strong>Change Password</strong> button is replaced with an <strong>Add Password</strong> button. After you click the button, a password reset request will be sent to your email email address.
 </div>
 
 [1]: https://help.cloudcraft.co/article/59-create-strong-password

@@ -1,78 +1,79 @@
 ---
-categories:
-- collaboration
-- notifications
-dependencies: []
-description: Datadog のアラートとグラフをチームの Hipchat ルームに送信。
-doc_link: https://docs.datadoghq.com/integrations/hipchat/
-draft: false
-git_integration_title: hipchat
-has_logo: true
-integration_id: ''
-integration_title: HipChat
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: hipchat
-public_title: Datadog-HipChat インテグレーション
-short_description: Datadog のアラートとグラフをチームの Hipchat ルームに送信。
-version: '1.0'
+"categories":
+- "collaboration"
+- "notifications"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Send Datadog alerts and graphs to your team's Hipchat room."
+"doc_link": "https://docs.datadoghq.com/integrations/hipchat/"
+"draft": false
+"git_integration_title": "hipchat"
+"has_logo": true
+"integration_id": ""
+"integration_title": "HipChat"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "hipchat"
+"public_title": "Datadog-HipChat Integration"
+"short_description": "Send Datadog alerts and graphs to your team's Hipchat room."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/hipchat/hipchat_graph.png" alt="Hipchat グラフ" popup="true">}}
+{{< img src="integrations/hipchat/hipchat_graph.png" alt="Hipchat Graph" popup="true">}}
 
-## 概要
+## Overview
 
-Hipchat インテグレーションを使用して、Datadog は、HipChat ルームまたは個別のハンドルに次のような通知を送信できます。
+The Hipchat integration lets Datadog send notifications to your HipChat room or individual handle. It can send:
 
-- Datadog モニターがトリガーしたときにメッセージやグラフを送信できます。
-- イベントストリームアクティビティに関するメッセージ (チームメンバーからのコメント) を送信できます。
+- Messages and graphs when your Datadog monitors trigger.
+- Messages about event stream activity (i.e. comments from teammates).
 
-## セットアップ
+## Setup
 
-### コンフィギュレーション
+### Configuration
 
-1. Datadog 用に[新しいアクセストークンを作成します][1]。通知レベルのアクセスだけが必要です。
-2. キーをコピーして、[HipChat インテグレーションタイル][2]に入力します。
-3. Datadog がメッセージを送信できるようにするルームの名前の入力します。
-   構成したすべてのルームで、すべてのコメントについて通知を受ける場合は、チェックボックスをオンにします。オンにしない場合は、HipChat に送信する各メッセージに、コメント作成者が `@hipchat-<CHAT_NAME>` を挿入する必要があります。
+1. [Create a new access token][1] for Datadog. Only notification level access is required.
+2. Copy your key and enter it in the [HipChat integration tile][2].
+3. Enter the room names you want Datadog to be able to send messages to.
+   Tick the checkbox if you want to be notified for every comment, in all configured rooms. If you don't check it, commenters must include `@hipchat-<CHAT_NAME>` in each message they want to send to HipChat.
 
-4. 構成を保存します。
+4. Save your configuration.
 
-`@hipchat-<CHAT_NAME>` を使用して、HipChat ルームとグラフを共有したり、Monitor アラートを送信することもできます。
+You also share graphs or send Monitor alerts to HipChat rooms using `@hipchat-<CHAT_NAME>`.
 
 <div class="alert alert-warning">
-HipChat API V1 トークンを使用している場合、チャットハンドルにカンマや角括弧などの特殊文字が含まれていても、ハンドルの入力時に特殊文字をエスケープする必要はありません。オートコンプリートボックスが自動的にこれを行います。
+If you are using a HipChat API V1 token and your chat handle contains special characters like commas or brackets, you don't need to escape them when you enter the handle; the auto-complete box does that for you.
 </div>
 
-#### HipChat サーバー
+#### HipChat server
 
-独自の HipChat サーバーをホストしている場合は、サーバーのホスト名を [Datadog-Hipchat タイル][2]に入力します。サーバーは、インターネットからアクセスできる必要があります。
+If you host your own HipChat server, enter the server's hostname in the [Datadog-Hipchat tile][2]. The server needs to be accessible from the Internet.
 
-HipChat サーバーの証明書が自己署名の場合にのみ、**Ignore SSL** チェックボックスをオンにします。
+Tick the **Ignore SSL** checkbox ONLY if your HipChat server's certificate is self-signed.
 
-{{< img src="integrations/hipchat/hipchat_hostname.png" alt="Hipchat ホスト名" popup="true">}}
+{{< img src="integrations/hipchat/hipchat_hostname.png" alt="Hipchat hostname" popup="true">}}
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 
-Hipchat インテグレーションには、メトリクスは含まれません。
+The Hipchat integration does not include any metric.
 
-### イベント
+### Events
 
-Hipchat インテグレーションには、イベントは含まれません。
+The Hipchat integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Hipchat インテグレーションには、サービスのチェック機能は含まれません。
+The Hipchat integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
 [1]: https://www.hipchat.com/admin/api
 [2]: https://app.datadoghq.com/integrations/hipchat
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

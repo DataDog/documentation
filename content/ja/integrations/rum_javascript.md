@@ -1,111 +1,112 @@
 ---
-app_id: rum-javascript
-app_uuid: d2496eee-ced1-4bf2-a85d-b8277b4952cf
-assets: {}
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- 言語
-- メトリクス
-- トレーシング
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/rum_javascript/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: rum_javascript
-integration_id: rum-javascript
-integration_title: JavaScript
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: rum_javascript
-public_title: JavaScript
-short_description: Datadog RUM を使用した JavaScript アプリケーションの監視とメトリクス生成
-supported_os:
-- すべて
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Languages
-  - Category::Metrics
-  - Category::Tracing
-  - Supported OS::Any
-  configuration: README.md#Setup
-  description: Datadog RUM を使用した JavaScript アプリケーションの監視とメトリクス生成
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: JavaScript
+"app_id": "rum-javascript"
+"app_uuid": "d2496eee-ced1-4bf2-a85d-b8277b4952cf"
+"assets": {}
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- languages
+- metrics
+- tracing
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/rum_javascript/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "rum_javascript"
+"integration_id": "rum-javascript"
+"integration_title": "JavaScript"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "rum_javascript"
+"public_title": "JavaScript"
+"short_description": "Monitor JavaScript applications and generate metrics using Datadog RUM"
+"supported_os":
+- any
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Languages"
+  - "Category::Metrics"
+  - "Category::Tracing"
+  - "Supported OS::Any"
+  "configuration": "README.md#Setup"
+  "description": Monitor JavaScript applications and generate metrics using Datadog RUM
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": JavaScript
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Datadog [JavaScript インテグレーション][1]で、JavaScript コンポーネントのパフォーマンス問題を迅速に解決します。
+With the Datadog [JavaScript integration][1], resolve performance issues quickly in JavaScript components by:
 
-- サーバーの応答速度が遅い、レンダーブロックするリソース、コンポーネント内のエラーなど、パフォーマンスボトルネックの根本原因をデバッグ
-- JavaScript のパフォーマンスデータをユーザージャーニー、サーバーサイドへの AJAX コール、ログと自動的に相関付け
-- JavaScript の重要なパフォーマンスメトリクス (Core Web Vitals など)がしきい値を下回り、ユーザーエクスペリエンスが低下した場合にエンジニアリングチームにアラートを発信
-
-
-JavaScript アプリケーションをエンドツーエンドで監視します。
-
-- スタック全体におけるユーザージャーニーを追跡、視覚化
-- ロードタイムが遅くなる根本的な原因をデバッグ。JavaScript のコード、ネットワークパフォーマンス、または基礎的なインフラストラクチャーの問題である可能性があります。
-- ユーザー ID、電子メール、名前などの属性で、すべてのユーザーセッションを分析し、コンテキストを作成
-- フロントエンドとバックエンドの開発チームのために、フルスタックモニタリングを 1 つのプラットフォームで実現
+- Debugging the root cause of performance bottlenecks, such as a slow server response time, render-blocking resource, or error inside a component
+- Automatically correlating JavaScript performance data with user journeys, AJAX calls to the server side, and logs
+- Alerting your engineering teams when crucial performance metrics for JavaScript (such as Core Web Vitals) fall below a threshold that results in a poor user experience
 
 
-## 計画と使用
+Monitor your JavaScript applications from end-to-end by:
 
-### RUM イベントの収集
+- Tracking and visualizing user journeys across your entire stack
+- Debugging the root cause of slow load times, which may be an issue with your JavaScript code, network performance, or underlying infrastructure 
+- Analyzing and contextualizing every user session with attributes such as user ID, email, name, and more
+- Unifying full-stack monitoring in one platform for frontend and backend development teams
 
-アプリケーションからリアルユーザーモニタリングのイベント収集を開始するには、[ブラウザモニタリング][2]を参照してください。
 
-### トレースの収集
+## Setup
 
-JavaScript アプリケーションのトレースを Datadog に送信し始めるには、[RUM とトレースの接続][3]をご覧ください。
+### Collect RUM events 
 
-### ログの収集
+To start collecting Real User Monitoring events from your application, see [Browser Monitoring][2]. 
 
-JavaScript アプリケーションのログを Datadog に転送し始めるには、[ブラウザログ収集][4]をご覧ください。
+### Collect traces 
 
-## リアルユーザーモニタリング
+To start sending your JavaScript application's traces to Datadog, see [Connect RUM and Traces][3].
 
-### データセキュリティ
+### Collect logs 
 
-JavaScript インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][5]を参照してください。
+To start forwarding your JavaScript application's logs to Datadog, see [Browser Log Collection][4].
 
-### イベント
+## Data Collected
 
-イベントや属性の詳細については、[RUM ブラウザデータ収集][6]を参照してください。
+### Metrics
 
-### サービスチェック
+The JavaScript integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][5].
 
-JavaScript インテグレーションには、サービスのチェック機能は含まれません。
+### Events 
 
-## ヘルプ
+For more information about events and attributes, see [RUM Browser Data Collected][6]. 
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+### Service Checks 
 
-## その他の参考資料 
+The JavaScript integration does not include any service checks.
 
-お役に立つドキュメント、リンクや記事:
+## Troubleshooting
 
-- [ブラウザモニタリング][2]
+Need help? Contact [Datadog Support][7]. 
+
+## Further Reading 
+
+Additional helpful documentation, links, and articles: 
+
+- [Browser Monitoring][2]
 
 
 
 [1]: https://app.datadoghq.com/integrations/rum-javascript
-[2]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces/?tabs=browserrum
-[4]: https://docs.datadoghq.com/ja/logs/log_collection/javascript/
-[5]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
-[6]: https://docs.datadoghq.com/ja/real_user_monitoring/browser/data_collected/
-[7]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/real_user_monitoring/browser/
+[3]: https://docs.datadoghq.com/real_user_monitoring/connect_rum_and_traces/?tabs=browserrum
+[4]: https://docs.datadoghq.com/logs/log_collection/javascript/
+[5]: https://docs.datadoghq.com/real_user_monitoring/generate_metrics
+[6]: https://docs.datadoghq.com/real_user_monitoring/browser/data_collected/
+[7]: https://docs.datadoghq.com/help/
+

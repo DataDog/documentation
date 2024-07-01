@@ -1,114 +1,114 @@
 ---
+title: Understanding the RUM Event Hierarchy
+kind: guide
 further_reading:
 - link: /real_user_monitoring/explorer/
-  tag: ドキュメント
-  text: RUM エクスプローラーについて
+  tag: Documentation
+  text: Learn about the RUM Explorer
 - link: /real_user_monitoring/
-  tag: ドキュメント
-  text: RUM データを視覚化する方法について
-kind: ガイド
-title: RUM イベントの階層を理解する
+  tag: Documentation
+  text: Learn how to visualize your RUM data
 ---
 
-## 概要
+## Overview
 
-このガイドでは、RUM が収集するさまざまな[データの種類][1]を説明し、各イベントの種類の階層を説明します。
+This guide walks through the different [types of data][1] that RUM collects and describes the hierarchy of each event type. 
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-session-hierarchy-overview.png" alt="RUM のイベント階層図。複数のビューを含む 1 つのセッションを表示します。" style="width:50%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-session-hierarchy-overview.png" alt="Diagram of the RUM event hierarchy, displaying a single session containing multiple views." style="width:50%;">}}
 
-## セッション
-すべての RUM データは、イベント階層の最上位にあるユーザーまたは Synthetic のセッションを参照しています。セッションは一意のユーザージャーニーであり、ユーザーがトリガーしたすべてのもの (たとえば、閲覧ページ、ビュー、クリック、スクロール、エラー) を包含します。セッションは、最大 4 時間の連続したアクティビティが可能で、[15 分間の非アクティブ][2]の後に失効することもあります。セッションはジャーニー全体を包含するので、そのユーザーに結びついたすべての[属性][3]は、そのセッションにも結びつきます。例えば、`action count` のようなデフォルトの属性でクエリを行い、[ユーザー属性][4]のようなカスタムなものを追加したいと思うかもしれません。
+## Sessions
+All RUM data refers to user or synthetics sessions, which are at the top of the event hierarchy. A session is a unique user journey and encompasses everything (for example, pages viewed, views, clicks, scrolls, and errors) the user triggered. A session can last up to four hours of continuous activity, or it can expire after [15 minutes of inactivity][2]. Since a session encompasses the entire journey, all [attributes][3] tied to that user are also tied to that session. For example, you may want to query on a default attribute, like `action count`, then add something more custom, like [user attributes][4].
 
-#### 検索の例: あるユーザーの全セッションを一覧表示する
+#### Sample search: List all sessions from a user
 
-特定のユーザーのすべてのセッションを一覧表示するには、イベントの種類のドロップダウンから **Sessions** を選択し、セッションステータスとユーザーの検索クエリを作成します。
+To list all sessions from a specific user, select **Sessions** from the event type dropdown, then make a search query for the session status and user.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-all-session-user-1.png" alt="ユーザー「Lee Davis」からの全セッションをリストアップするサンプル検索。" style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-all-session-user-1.png" alt="Sample search listing all sessions from user 'Lee Davis'." style="width:80%;">}}
 
-各セッションは自動的に一意の `session.id` に関連付けられます。
+Each session is automatically associated with a unique `session.id`.
 
-## ビュー
-セッション内では、ユーザーがアプリケーションのページ (ブラウザ RUM) または画面や画面セグメント (モバイル RUM) に移動するたびに、ビューイベントが作成されます。
+## Views
+Within a session, a view event is created each time a user navigates to a page (Browser RUM) or to a screen or screen segment (Mobile RUM) of an application. 
 
-各ビューは、URL 内のテキストや、特定のページのロード時間などのタイミングメトリクスなど、複数のビュー固有の属性やデータを自動的に収集します。特定のビューをクエリする場合、デバイス、オペレーティングシステム、ユーザー情報など、任意のデフォルトレベルの属性を追加することができます。ただし、イベント固有の属性は、ビュー固有である必要があります。イベントのみを表示するには、以下のイメージに示すように、イベントセレクタを調整することができます。
+Each view automatically collects multiple view-specific attributes and data, such as text in the URL and timing metrics, such as the load time of a given page. When querying for specific views, you can add any default level attributes, like device, operating system, or user information, for example. However, event-specific attributes must be view-specific. To view events only, you can adjust the event selector as shown in the image below.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-switch-views.png" alt="RUM ビュー。" style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-switch-views.png" alt="RUM views." style="width:80%;">}}
 
-`session.id` と同様に、各ビューには自動的に一意な `view.id` が接続されます。
+Similarly to the `session.id`, each view automatically has a unique `view.id` connected to it. 
 
-### アクション、エラー、リソース、ロングタスク
+### Actions, errors, resources, and long tasks
 
-ビュー内では、SDK は、すべて同じ階層レベルに沿ったより詳細なイベントを作成します。しかし、各イベントは一意であり、独自の属性とプロパティを保持します。
+Within views, the SDK creates more granular events that all fall along the same hierarchy level. However, each event is unique and carries its own attributes and properties.
 
-### アクション
+### Actions
 
-アクションは、ページ上でのユーザーのアクティビティを表します。ブラウザでは、すべてのクリックアクションが自動的に収集されます。モバイルでは、すべてのタップ、スワイプ、スクロールが収集されます。これらのデフォルトアクションの他に、フォームの完了やビジネストランザクションなどの[カスタムアクション][5]を送信することも可能です。
+Actions represent user activity on a page. In browsers, all click actions are automatically collected. On mobile, all taps, swipes, and scrolls are collected. Beyond these default actions, you can also send [custom actions][5], such as form completion and business transactions. 
 
-#### 検索の例: エラーにつながるアクションのトップリスト
+#### Sample search: Top list of actions leading to an error
 
-この例では、ユーザーが "Add to cart” ボタンをクリックした結果、エラーが発生したすべてのアクションを検索するクエリを表示しています。
+This example displays a query that searches for all actions from users clicking on the "Add to cart" button that resulted in an error.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-actions-all-add-to-cart-1.png" alt="エラーが発生したすべての「Add to Cart」アクションのサンプル検索。" style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-actions-all-add-to-cart-1.png" alt="Sample search of all 'Add to Cart' actions that led to an error." style="width:80%;">}}
 
-### エラー
+### Errors
 
-RUM を使用して、ユーザーセッション中に発生した[フロントエンドエラー][6]を収集することができます。デフォルトでは、ブラウザ SDK は処理されない例外とコンソールエラーのエラーイベントを作成します。さらに、RUMの `addError` API を通じて、カスタムエラーを収集することもできます ([ブラウザ][7]と[モバイル][8]上)。モバイルアプリでは、エラーがセッションの終了 (クラッシュとも呼ばれる) につながったかどうかも確認することができます。
+You can use RUM to collect [frontend errors][6] that occur during the user session. By default, the browser SDK creates error events for unhandled exceptions and console errors. Additionally, you can collect custom errors through the RUM `addError` API (on [browser][7] and [mobile][8]). On mobile apps, you can also see if the error led to a session termination, also known as a crash.
 
-エラーは RUM とエラー追跡の両方で見ることができます。ソースエラーとカスタムエラーはエラー追跡で処理され、コンソールエラーは RUM にのみ表示されます。
+Errors can be viewed in both RUM and Error Tracking. Source and custom errors are processed by Error Tracking, while console errors are solely in RUM.
 
-#### 検索の例: アプリケーション内のページで発生したすべてのクラッシュのリスト
+#### Sample search: List of all crashes that occurred on a page in the application
 
-この例では、エラーイベントを検索して、特定のアプリケーションの "HomeViewController" ページで発生したすべてのクラッシュを表示するクエリを表示します。
+This example displays a query that searches within the errors event to view all crashes that occurred on the "HomeViewController" page for a particular application.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-checkoutviewcontroller.png" alt="あるページで発生したすべてのクラッシュのサンプル検索。" style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-checkoutviewcontroller.png" alt="Sample search of all crashes that occurred on a page." style="width:80%;">}}
 
-### リソース
-リソースはビューから収集され、アプリケーションからネットワークプロバイダーへの外部リクエスト、例えば XHR、JS の読み込み、イメージ、フォントなどが含まれます。ビューから収集されるため、アプリケーションにロードされたすべてのリソースをクエリしたり、単一のビューで発生したリソースだけにスコープダウンすることができます。
+### Resources
+Resources are collected from views and include external requests from your application to a network provider, things like XHR, JS loading, images, or fonts, for example. Since it is collected from a view, you can query for all resources loaded on an application, or scope it down to just resources that occurred in a single view. 
 
-#### 検索の例: イメージサイズでフィルターをかけた `/cart` ビューに読み込まれたすべてのイメージのリスト
+#### Sample search: A list of all images loaded on the `/cart` view filtered by image size
 
-この例では、イベントタイプのドロップダウンから **Resources** が選択され、カートビューで読み込まれた 1000 キロバイト以上のイメージをクエリしてリストアップしています。
+In this example, **Resources** is selected from the event type dropdown, then a query for images that loaded on the cart view and were larger or equal to 1000 kilobytes are listed.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-resources.png" alt="カートビューに読み込まれたイメージのうち、1000 キロバイト以上のもののサンプル検索。" style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-resources.png" alt="Sample search of all images loaded on the cart view that were 1000 kilobytes or greater." style="width:80%;">}}
 
-### ロングタスク
-ロングタスクとは、UI スレッドを一定時間ブロックするタスクのことです。例えばモバイルでは、300 ミリ秒以上画面がブロックされると、ロングタスクはフリーズしたフレームになることがあります。
+### Long tasks
+Long tasks are any task that blocks the UI thread for a specified period of time. On mobile for example, a long task may be a frozen frame if the screen is blocked for longer than 300 milliseconds.
 
-#### 検索の例: 500 ms 以上続いた全てのフリーズしたフレームロングタスク
+#### Sample search: All frozen frame long tasks that lasted more than 500 ms
 
-この例では、イベントタイプのドロップダウンから **Long tasks** が選択され、次に期間が指定されています。
+In this example, **Long tasks** is selected from the event type dropdown and then duration is specified.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-long-tasks.png" alt="500 ミリ秒以上のフリーズした全フレームロングタスクのサンプル検索。" style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-long-tasks.png" alt="Sample search of all frozen frame long tasks lasting longer than 500 milliseconds." style="width:80%;">}}
 
-## トラブルシューティング
+## Troubleshooting
 
-### クエリを書き込むとデータが表示されない
+### No data appears after writing a query
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-3.png" alt="クエリを書き込んでもデータが表示されない例。" style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-3.png" alt="Example of no data appearing after writing a query." style="width:80%;">}}
 
-クエリを書いてもデータが表示されない場合は、イベントセレクタが検索バーにあるものと一致しているかどうかを確認してください。上記の例では、イベントセレクタは **views** 内を検索するように設定されていますが、検索バーには **action** 属性のみが表示されています。アクション関連のデータを表示するには、ビューセレクタをアクションに切り替えてください。それでもデータが表示されない場合は、タイムフレームセレクタを確認し、データが表示されるはずのタイムウィンドウにいることを確認します。
+If you aren't seeing data after writing a query, confirm that the event selector matches what you have in the search bar. In the example above, the event selector is set to search within **views**, but the search bar only contains  **action** attributes. To view action-related data, switch the view selector to actions. If you still don't see any data, check the time frame selector to ensure you are in a time window where data should be appearing.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-data-now-appears.png" alt="ビューと時間枠のセレクタを使用してクエリを更新する例。" style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-data-now-appears.png" alt="Example of updating a query by using the view and time frame selectors." style="width:80%;">}}
 
-### 別のイベントタイプにネストされたイベントタイプをクエリする 
+### Querying an event type that is nested in a different event type 
 
-特定のアクションをクエリする場合、親イベントタイプを使用することはできますが、同等または下位レベルのものは使用できません。例えば、アクションはビューの下にネストされており、アクションとエラーは階層的な連鎖の中で同じレベルにあります。つまり、あるページで発生したすべてのアクションとエラーをクエリすることはできますが、 特定のエラータイプを持つすべてのアクションをクエリすることはできません。
+When querying for specific actions, you can use the parent event type, but not one at equal or lower level. For example, actions are nested underneath views, and actions and errors are at the same level in the hierarchical chain. This means you can query for all actions and errors that happened on a given page, but not for all actions that had a specific error type.
 
-#### 検索の例: `/` で発生したアクションの上位 10 件
+#### Sample search: The top 10 actions that occurred on `/`
 
-この例では、ホームページを表す `/` で発生したアクションの上位 10 件を見るために、トップリストビューを使用してすべてのビュー名のアクションイベントタイプ内で検索しています。
+This example searches within the actions event type for all view names using the Top List view to see the top 10 actions that occurred on `/`, which represents the homepage.
 
-{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-top-ten-actions.png" alt="ホームページで発生したアクションの上位 10 件のサンプル検索。" style="width:80%;">}}
+{{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-top-ten-actions.png" alt="Sample search of the top ten actions that occurred on the homepage." style="width:80%;">}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser/data_collected
-[2]: /ja/account_management/billing/rum/#when-does-a-session-expire
-[3]: /ja/real_user_monitoring/browser/data_collected/#event-specific-metrics-and-attributes
-[4]: /ja/real_user_monitoring/browser/data_collected/#user-attributes
-[5]: /ja/real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
-[6]: /ja/real_user_monitoring/browser/collecting_browser_errors/?tab=npm
-[7]: /ja/real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
-[8]: /ja/real_user_monitoring/ios/advanced_configuration/?tab=swift#custom-errors
+[1]: /real_user_monitoring/browser/data_collected
+[2]: /account_management/billing/rum/#when-does-a-session-expire
+[3]: /real_user_monitoring/browser/data_collected/#event-specific-metrics-and-attributes
+[4]: /real_user_monitoring/browser/data_collected/#user-attributes
+[5]: /real_user_monitoring/guide/send-rum-custom-actions/?tab=npm
+[6]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm
+[7]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/?tab=swift#custom-errors

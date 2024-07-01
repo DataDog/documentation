@@ -1,37 +1,38 @@
 ---
-title: Webhooks を使用した Freshservice チケット
-kind: ガイド
-author: Trevor Veralrud
+title: Freshservice Tickets using Webhooks
+kind: guide
+author: "Trevor Veralrud"
 further_reading:
-  - link: /integrations/webhooks/
-    tag: Documentation
-    text: Webhooks インテグレーション
+- link: /integrations/webhooks/
+  tag: Documentation
+  text: Webhooks integration
 ---
-このガイドでは、Datadog Webhooks インテグレーションを使用して、モニターがアラートを出すときに、Freshservice で新しいチケットを開く方法について説明します。
 
-## セットアップ
+This guide shows you how to use the Datadog Webhooks integration to open new tickets in Freshservice when a monitor alerts.
 
-最初に [Webhooks インテグレーションタイル][1]を開き、Configuration タブに移動して画面の一番下にあるフォームまでスクロールし、新しい Webhook を追加します。
+## Setup
 
-### 名前
+To begin, open the [Webhooks integration tile][1], go to the Configuration tab, then scroll to the bottom form to add a new Webhook.
 
-Webhook に名前を付けます。この名前がモニターメッセージに `@webhook-<名前>` で表示されます。たとえば、Webhook に freshservice という名前を付けた場合、モニターメッセージで `@webhook-freshservice` をメンションすれば、モニターからチケットを開くことができます。
+### Name
+
+Provide your Webhook with a name. This name is used in your monitor message (see [Usage](#usage)) with `@webhook-<NAME>`. For example, if you name your Webhook freshservice, you can open a ticket from your monitor by mentioning `@webhook-freshservice` in the monitor message.
 
 ### URL
 
-Freshservice には 2 つのバージョンの API があります。このガイドでは V2 を使用しますが、JSON ペイロードに少し修正を加えれば、V1 を使用することもできます。
+Freshservice has 2 different versions of their API. This guide uses V2, but it is possible to use V1 with slight modifications to your JSON payload.
 
-URL フィールドに、次のエンドポイントを入力します。
+In the URL field enter the following endpoint:
 
 `https://<YOUR_DOMAIN>.freshservice.com/api/v2/tickets`
 
-### ペイロード
+### Payload
 
-新しいチケットの JSON ペイロードを入力します。次の例は、必須フィールドだけを使用しています。ペイロードのカスタマイズオプションについて、詳しくは [Freshservice のチケットエンドポイント][2]を参照してください。
+Enter a new ticket JSON payload. The following example uses only the required fields, so review [Freshservice's ticket endpoint][2] for more options on customizing your payload:
 
 ```json
 {
-  "email": "[チケットに関連付けるメールアドレス]",
+  "email": "[email address to associate with ticket]",
   "subject": "$EVENT_TITLE",
   "description": "<img src=\"$SNAPSHOT\" /><hr/>$TEXT_ONLY_MSG",
   "status": 2,
@@ -39,74 +40,74 @@ URL フィールドに、次のエンドポイントを入力します。
 }
 ```
 
-**注**:
+**Note**:
 
-* `$EVENT_TITLE` などの値は、Webhook インテグレーションで使用される変数です。この変数の一覧と、それぞれの意味については、Webhook インテグレーションタイル、または [Webhook インテグレーションのドキュメント][3]を参照してください。
-* email フィールドには `$EMAIL` 変数を使用せず、メールアドレスを直接入力してください。この変数は、Webhook をイベントストリームでメンションする場合にのみ値が入力され、*モニターアラート*内では使用されません。
-* ペイロードの `description` フィールドは HTML を受け取ります。`$EVENT_MSG` 変数は、モニターのメッセージを Markdown で表示しますが、Freshservice の API には対応していないため、上記の例では `$TEXT_ONLY_MSG` をグラフのスナップショットと一緒に使用しています。
-* `status` と `priority` のフィールドには、さまざまな値に対応付けられた数値を指定します。これらの値については、[Freshservice によるチケットエンドポイントの情報][2]を参照してください。
+* Values such as `$EVENT_TITLE` are variables used by the Webhook integration. For a full list of these variables and their meaning, see the Webhook integration tile or [Webhook integration documentation][3].
+* Manually enter an email address for the email field instead of using the variable of `$EMAIL`, which is only populated when mentioning the Webhook in an *Event Stream* comment and not used within *Monitor Alerts*.
+* The `description` field of the payload accepts HTML. The `$EVENT_MSG` variable renders your monitor's message in Markdown, which is not supported by Freshservice's API, so `$TEXT_ONLY_MSG` is used instead, along with a graph snapshot.
+* The `status` and `priority` fields are numbers mapped to different values. To see these values, review [Freshservice's ticket endpoint][2].
 
 ### Authentication
 
-Freshservice の API は、[Basic 認証][4]を使用します。Base64 でエンコードされた資格情報を、`Authorization` リクエストヘッダーで送る必要があります。ユーザー名とパスワードを `ユーザー名:パスワード` の形式で入力するか、または Freshservice API のキーを、資格情報として送ることができます。
+Freshservice's API uses [Basic Access Authentication][4]. Your Base64 encoded credentials should be sent in the `Authorization` request header. Accepted credentials are your username and password in `username:password` format, or your Freshservice API key.
 
-Webhook でこれを設定するには、以下を **Headers** セクションに追加します。
+To set this up in your Webhook, add the following to your **Headers** section:
 
 ```json
-{"Authorization": "Basic <BASE64でエンコードされた資格情報>"}
+{"Authorization": "Basic <BASE64_ENCODED_CREDENTIALS>"}
 ```
 
-### 最後に
+### Finishing up
 
-Webhook インテグレーションタイルで、**Install Integration** または（以前に Webhook の定義を入力していれば）**Update Configuration** をクリックし、変更を保存します。
+In the Webhook integration tile, click **Install Integration** or **Update Configuration** (if you previously entered a Webhook definition) to save your changes.
 
-## 使用方法
+## Usage
 
-`@webhook-<名前>` をモニターメッセージに追加します。モニターの状態が変わると Webhook がトリガーされます。
+Add the `@webhook-<NAME>` to your monitor message. The Webhook is triggered when the monitor changes state.
 
-@ メンションは、以下の例のように `{{#is_alert}}` または `{{#is_warning}}` 条件の内部に追加することをお勧めします。
+It is recommended to add your @-mention inside of `{{#is_alert}}` or `{{#is_warning}}` conditionals, for example:
 
 ```text
 {{#is_alert}}
-    {{host.name}} がダウンしました！
+    {{host.name}} is down!
     @webhook-freshservice
 {{/is_alert}}
 ```
 
-モニターがアラートをトリガーすると、新しいチケットが Freshservice のダッシュボードに表示されます。条件付きステートメントを使用しない場合は、モニターが回復したときに Webhook がもう一度トリガーされるため、新しいチケットが作成されます。
+When your monitor triggers an alert, a new ticket appears in your Freshservice dashboard. If you choose not to use a conditional statement, a new ticket is created when the monitor recovers because the Webhook is triggered again.
 
-## 制限
+## Limitations
 
-### チケットの作成
+### Ticket creation
 
-Webhooks インテグレーションで可能なのはチケットの作成だけです。既存のチケットを更新するには `PUT` メソッドが必要ですが、Webhooks インテグレーションがサポートするのは `POST` メソッドだけです。
+The Webhooks integration can only create tickets. Updating an existing ticket requires a `PUT` method and the Webhooks integration only supports `POST` methods.
 
-### ステータスと優先度
+### Status and priority
 
-`$ALERT_STATUS` と `$PRIORITY` の変数は、Freshservice の API が期待する数値ではなく、（`ALERT` や `NORMAL` などの）文字列を返します。さまざまなレベルのステータスやプライオリティを設定するには、重複する Webhook を作成して、ステータスとプライオリティのフィールドをハードコーディングし、それらの Webhook を関連する条件付きステートメントの内部で `@-メンション` してください。以下に例を示します。
+The `$ALERT_STATUS` and `$PRIORITY` variables return strings (such as `ALERT` and `NORMAL`) instead of a numerical value expected by Freshservice's API. To setup different levels of status and priorities, create duplicate Webhooks with hard-coded status and priority fields. Then, `@-mention` those Webhooks inside of related conditional statements, for example:
 
 ```text
 {{#is_warning}}
-    ディスクスペースの使用率が 80% を超えました
+    Disk space usage is above 80%
     @webhook-freshservice-warning
 {{/is_warning}}
 {{#is_alert}}
-    ディスクスペースの使用率が 95% を超えました
+    Disk space usage is above 95%
     @webhook-freshservice-alert
 {{/is_alert}}
 ```
 
-### タグ付け
+### Tagging
 
-タグ付けは Freshservice API でサポートされていますが、以下の点に注意してください。
+Tagging is supported in Freshservice's API, but note the following:
 
-* JSON ペイロードの tags パラメーターは、配列にする必要があります。つまり、Webhook の `$TAGS` 変数は（コンマで区切られた文字列のリストを返すので）使用できません。
-* JSON ペイロードに追加するタグに `:` の文字を含めると、Datadog のすべてのタグを Freshservice に対応付けできない場合があるので避けてください。タグに `:` の文字が存在すると、リクエストが失敗します。
-* Freshservice のタグに使用できる変数について詳しくは、[Webhook インテグレーションのドキュメント][3]を参照してください。以下の例では、`$HOSTNAME` と `$ORG_ID` が使用されています。
+* The tags parameter in your JSON payload must be an array. That means you cannot use the `$TAGS` Webhook variable because it returns a comma separated list of strings.
+* Tags added to your JSON payload must not contain a `:` character, so you may not be able to map all of your Datadog tags to Freshservice. If a `:` character exists in your tags, your request fails.
+* Review the [Webhook integration documentation][3] for more variables that may be useful for Freshservice tags. In the following example, `$HOSTNAME` and `$ORG_ID` are used:
 
 ```json
 {
-  "email": "<チケットに関連付けるメールアドレス>",
+  "email": "<EMAIL_ADDRESS_TO_ASSOCIATE_WITH_TICKET>",
   "subject": "$EVENT_TITLE",
   "description": "<img src=\"$SNAPSHOT\" /><hr/>$TEXT_ONLY_MSG",
   "status": 2,
@@ -115,9 +116,9 @@ Webhooks インテグレーションで可能なのはチケットの作成だ�
 }
 ```
 
-### トラブルシューティング
+### Troubleshooting
 
-モニターのトリガー後に Webhook が送信に失敗する場合は、イベントストリームに移動して、`sources:webhooks` `status:error` を探してください。Webhooks が失敗したイベントを探し、そこに含まれる情報（以下の例を参照）をトラブルシューティングに使用することができます。
+If your Webhooks fail to send after your monitor triggers, go to your Event Stream and search for `sources:webhooks` `status:error`. This searches for events with failed Webhooks that contain troubleshooting information, for example:
 
 ```text
 - Reply status code was: HTTP 401
@@ -125,11 +126,11 @@ Webhooks インテグレーションで可能なのはチケットの作成だ�
   {"code":"invalid_credentials","message":"You have to be logged in to perform this action."}
 ```
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [2]: https://api.freshservice.com/v2/#create_ticket
-[3]: /ja/integrations/webhooks/#usage
+[3]: /integrations/webhooks/#usage
 [4]: https://en.wikipedia.org/wiki/Basic_access_authentication

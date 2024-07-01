@@ -1,6 +1,6 @@
 ---
+title: Check
 core_product:
-- datadog agent
-title: チェック
+  - datadog agent
 ---
-Check は、Agent によって定期的に実行される小さな Python プログラムです。Check はアクションを実行して結果を収集します。Agent はこの結果を保存して、Datadog プラットフォームに報告します。これは自由形式のプログラムで、通常はカスタム環境またはアプリケーションからメトリクスを収集する際に使用されます。なお、「チェック」という単語は、日本語の場合、測定を行う一般的な行為を指します。
+Checks are small Python programs run periodically by the Agent. A Check performs an action and then gathers the result, which the Agent then stores and reports to the Datadog platform. These programs are freeform and are generally used to collect metrics from custom environments or applications. Note that the word "check" - when not capitalized - refers to the generic act of taking a measurement.

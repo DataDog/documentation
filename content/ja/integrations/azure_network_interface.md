@@ -1,59 +1,60 @@
 ---
-aliases:
-- /ja/integrations/azure_networkinterface
-categories:
+"aliases":
+- /integrations/azure_networkinterface
+"categories":
 - azure
-- クラウド
-- ネットワーク
-dependencies: []
-description: Azure Network Interface のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_network_interface/
-draft: false
-git_integration_title: azure_network_interface
-has_logo: true
-integration_id: azure-networkinterface
-integration_title: Microsoft Azure Network Interface
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_network_interface
-public_title: Datadog-Microsoft Azure Network Interface インテグレーション
-short_description: Azure Network Interface のキーメトリクスを追跡
-version: '1.0'
+- cloud
+- network
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Network Interface metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_network_interface/"
+"draft": false
+"git_integration_title": "azure_network_interface"
+"has_logo": true
+"integration_id": "azure-networkinterface"
+"integration_title": "Microsoft Azure Network Interface"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_network_interface"
+"public_title": "Datadog-Microsoft Azure Network Interface Integration"
+"short_description": "Track key Azure Network Interface metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Network Interface によって、Azure 仮想マシンがインターネット、Azure、オンプレミスリソースなどと通信できるようになります。
+Azure Network Interface enables an Azure Virtual Machine to communicate with internet, Azure, and on-premises resources.
 
-Datadog Azure インテグレーションを使用して、Azure Network Interface からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Azure Network Interface.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_network_interface" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Network Interface インテグレーションには、イベントは含まれません。
+The Azure Network Interface integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Network Interface インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Network Interface integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_network_interface/azure_network_interface_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

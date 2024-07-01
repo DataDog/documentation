@@ -1,3 +1,3 @@
 ---
-title: ユーザー
+title: Users
 ---

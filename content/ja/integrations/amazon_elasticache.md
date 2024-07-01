@@ -1,144 +1,145 @@
 ---
-aliases:
-- /ja/integrations/awselasticache/
-- /ja/integrations/elasticache/
-categories:
-- aws
-- caching
-- cloud
-- configuration & deployment
-- log collection
-dependencies: []
-description: Amazon ElasicCache のキーメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_elasticache/
-draft: false
-git_integration_title: amazon_elasticache
-has_logo: true
-integration_id: ''
-integration_title: Amazon ElastiCache
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_elasticache
-public_title: Datadog-Amazon ElastiCache インテグレーション
-short_description: Amazon ElasicCache のキーメトリクスを追跡。
-version: '1.0'
+"aliases":
+- "/integrations/awselasticache/"
+- "/integrations/elasticache/"
+"categories":
+- "aws"
+- "caching"
+- "cloud"
+- "configuration & deployment"
+- "log collection"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Amazon ElasicCache metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_elasticache/"
+"draft": false
+"git_integration_title": "amazon_elasticache"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Amazon ElastiCache"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_elasticache"
+"public_title": "Datadog-Amazon ElastiCache Integration"
+"short_description": "Track key Amazon ElasicCache metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/awselasticache/elasticache-memcached.png" alt="ElastiCache Memcached のデフォルトダッシュボード" popup="true">}}
+{{< img src="integrations/awselasticache/elasticache-memcached.png" alt="ElastiCache Memcached default dashboard" popup="true">}}
 
-## 概要
+## Overview
 
-主要なパフォーマンスメトリクス、それらの収集方法、そして [Coursera][2] が Datadog を使用して ElastiCache を監視する方法については、[Redis または Memcached を使用した ElastiCache パフォーマンスメトリクスの監視][1]を参照してください。
+See [Monitoring ElastiCache performance metrics with Redis or Memcached][1] to learn about key performance metrics, how to collect them, and how [Coursera][2] monitors ElastiCache using Datadog.
 
-## セットアップ
+## Setup
 
-[Amazon Web Services インテグレーション][3]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][3] first.
 
-### Datadog Agent を使用しない場合のインストール
+### Installation without Datadog Agent
 
-1. [AWS インテグレーションページ][4]で、`Metric Collection` タブの下にある `ElastiCache` が有効になっていることを確認します。
-2. Amazon ElastiCache のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][5]に追加します。詳細については、AWS ウェブサイト上の [ElastiCache ポリシー][6]を参照してください。
+1. In the [AWS integration page][4], ensure that `ElastiCache` is enabled under the `Metric Collection` tab.
+2. Add the following permissions to your [Datadog IAM policy][5] in order to collect Amazon ElastiCache metrics. For more information, see the [ElastiCache policies][6] on the AWS website.
 
-    | AWS アクセス許可                      | 説明                                                           |
+    | AWS Permission                      | Description                                                           |
     | ----------------------------------- | --------------------------------------------------------------------- |
-    | `elasticache:DescribeCacheClusters` | (タグやメトリクスを追加する場合) キャッシュクラスターとその説明を一覧表示します。|
-    | `elasticache:ListTagsForResource`   | (カスタムタグを追加する場合) クラスターのカスタムタグを一覧表示します。                    |
-    | `elasticache:DescribeEvents`        | スナップショットとメンテナンスに関連するイベントを追加します。                          |
+    | `elasticache:DescribeCacheClusters` | List and describe Cache clusters, to add tags and additional metrics. |
+    | `elasticache:ListTagsForResource`   | List custom tags of a cluster, to add custom tags.                    |
+    | `elasticache:DescribeEvents`        | Add events about snapshots and maintenances.                          |
 
-3. [Datadog - Amazon ElastiCache インテグレーション][7]をインストールします。
+3. Install the [Datadog - Amazon ElastiCache integration][7].
 
-### Datadog Agent を使用する場合のインストール (推奨)
+### Installation with Datadog Agent (recommended)
 
-#### Agent を使用したネイティブメトリクスの収集
+#### Collecting native metrics with the Agent
 
-次の図は、Datadog がネイティブ ElastiCache インテグレーションを経由して CloudWatch からメトリクスを直接収集する方法と、バックエンド技術である Redis または Memcached から追加のネイティブメトリクスを直接収集する方法を示しています。バックエンドから直接収集することで、より多くの重要なメトリクスに、より高い精度でアクセスできます。
+The following diagram shows how Datadog collects metrics directly from CloudWatch with the native ElastiCache integration, and how it can additionally collect native metrics directly from the backend technology: Redis or Memcached. By collecting from the backend directly, you have access to a greater number of important metrics, and at a higher resolution.
 
-{{< img src="integrations/awselasticache/elasticache1.png" alt="ElastiCache、Redis 、Memcached のインテグレーション" >}}
+{{< img src="integrations/awselasticache/elasticache1.png" alt="ElastiCache, Redis, and Memcached integrations" >}}
 
-#### 仕組み
+#### How this works
 
-Agent のメトリクスは、Agent が実行されている EC2 インスタンスに紐づけられており、実際の ElastiCache インスタンスには紐づけられていません。そのため、すべてのメトリクスを関連付けるには `cacheclusterid` タグを使用する必要があります。Agent を ElastiCache インスタンスと同じタグで構成すると、Redis/Memcached のメトリクスを ElastiCache のメトリクスと簡単に組み合わせることができます。
+Because the Agent metrics are tied to the EC2 instance where the agent is running and not to the actual ElastiCache instance, you need to use the `cacheclusterid` tag to connect all metrics together. Once the agent is configured with the same tags as the ElastiCache instance, combining Redis/Memcached metrics with ElastiCache metrics is straightforward.
 
-#### 手順
+#### Step-by-step
 
-Agent は実際の ElastiCache インスタンスではなくリモートマシンで実行されるため、メトリクスをどこから収集するかを Agent に伝えることが、このインテグレーションを正しくセットアップするカギになります。
+Since the Agent is not running on an actual ElastiCache instance, but on a remote machine, the key to setting up this integration correctly is telling the Agent where to collect the metrics from.
 
-##### ElastiCache インスタンスの接続の詳細の収集
+##### Gather connection details for your ElastiCache instance
 
-まず、AWS コンソールに移動し、ElastiCache セクションを開き、Cache Clusters のタブに移動して、監視対象のクラスターを探します。次のように表示されます。
+First navigate to the AWS Console, open the ElastiCache section and then the Cache Clusters tab to find the cluster you want to monitor. It should look like:
 
-{{< img src="integrations/awselasticache/elasticache2.png" alt="AWS コンソールの ElastiCache クラスター" >}}
+{{< img src="integrations/awselasticache/elasticache2.png" alt="ElastiCache Clusters in AWS console" >}}
 
-「ノード」リンクをクリックして、エンドポイント URL にアクセスします。
+Then click on the “node” link to access its endpoint URL:
 
-{{< img src="integrations/awselasticache/elasticache3.png" alt="AWS コンソールのノードリンク" >}}
+{{< img src="integrations/awselasticache/elasticache3.png" alt="Node link in AWS console" >}}
 
-エンドポイント URL (例: **replica-001.xxxx.use1.cache.amazonaws.com**) と `cacheclusterid` (例: **replica-001**) をメモします。Agent を構成したり、グラフやダッシュボードを作成したりする際に、これらの値が必要になります。
+Write down the endpoint URL (for example: **replica-001.xxxx.use1.cache.amazonaws.com**) and the `cacheclusterid` (for example: **replica-001**). You need these values to configure the agent and to create graphs and dashboards.
 
-##### Agent の構成
+##### Configure the Agent
 
-Redis/Memcached インテグレーションは、個別のキャッシュインスタンスのタグ付けをサポートします。本来は、同じマシン上の複数のインスタンスを監視するためのタグですが、このタグをメトリクスの絞り込みとグループ化に使用できます。以下は、`redisdb.yaml` を使用した Redis と ElastiCache の構成例です。このファイルがプラットフォームのどこに置かれているかについては、[Agent 構成ディレクトリ][8]を参照してください。
+The Redis/Memcached integrations support the tagging of individual cache instances. Originally designed to allow the monitoring of multiple instances on the same machine, these tags can be used to filter and group metrics. Here is an example of a configuration for ElastiCache with Redis using `redisdb.yaml`. For information about where this file is stored based on your platform, see the [Agent configuration directory][8].
 
 ```yaml
 init_config:
 
 instances:
-    # AWS コンソールからのエンドポイント URL
+    # Endpoint URL from AWS console
     - host: replica-001.xxxx.use1.cache.amazonaws.com
       port: 6379
-      # AWS コンソールからのキャッシュクラスター ID
+      # Cache Cluster ID from AWS console
       tags:
           - cacheclusterid:replicaa-001
 ```
 
-`sudo /etc/init.d/datadog-agent restart` (Linux の場合) で Agent を再起動します。
+Then restart the agent: `sudo /etc/init.d/datadog-agent restart` (on linux).
 
-##### メトリクスを一緒に視覚化する
+##### Visualize metrics together
 
-数分経過すると、Datadog で ElastiCache と Redis または Memcached のメトリクスにアクセスして、グラフ化、監視などを行うことができます。
+After a few minutes, ElastiCache metrics and Redis or Memcached metrics can be accessed in Datadog for graphing, monitoring, etc.
 
-以下に、同じ「cacheclusterid」タグ **replicaa-001** を使用して、ElastiCache からのキャッシュヒットメトリクスと Redis からのネイティブレイテンシーメトリクスを組み合わせたグラフをセットアップする例を挙げます。
+Here's an example of setting up a graph to combine cache hit metrics from ElastiCache with native latency metrics from Redis using the same `cacheclusterid` tag **replicaa-001**.
 
-{{< img src="integrations/awselasticache/elasticache4.png" alt="ElastiCache とキャッシュメトリクス" >}}
+{{< img src="integrations/awselasticache/elasticache4.png" alt="ElastiCache and Cache metrics" >}}
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_elasticache" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
+Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### ヘルプ
+### Events
 
-Amazon ElastiCache インテグレーションには、クラスター、キャッシュセキュリティグループ、およびキャッシュパラメーターグループのイベントが含まれています。以下はイベントの例です。
+The Amazon ElastiCache integration includes events for cluster, cache security groups, and cache parameter groups. See example events below:
 
-{{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Amazon Elasticache イベント" >}}
+{{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Amazon Elasticache Events" >}}
 
-### ヘルプ
+### Service Checks
 
-Amazon ElastiCache インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon ElastiCache integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
-## その他の参考資料
+## Further Reading
 
-- [Redis または Memcached を使用した ElastiCache のパフォーマンスメトリクスの監視][1]
-- [ElastiCache のメトリクスと Redis/Memcached メトリクスを収集する][11]
+- [Monitoring ElastiCache performance metrics with Redis or Memcached][1]
+- [Collecting ElastiCache metrics + its Redis/Memcached metrics][11]
 
 [1]: https://www.datadoghq.com/blog/monitoring-elasticache-performance-metrics-with-redis-or-memcached
 [2]: https://www.coursera.org
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[3]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [4]: https://app.datadoghq.com/integrations/amazon-web-services
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
+[5]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
 [6]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.html
 [7]: https://app.datadoghq.com/integrations/amazon-elasticache
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[8]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_elasticache/amazon_elasticache_metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/help/
 [11]: https://www.datadoghq.com/blog/collecting-elasticache-metrics-its-redis-memcached-metrics
+

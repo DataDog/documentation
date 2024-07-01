@@ -1,27 +1,27 @@
 ---
+title: Kubernetes Cluster Name Automatic Detection
 aliases:
-- /ja/agent/faq/kubernetes-cluster-name-detection
-- /ja/agent/guide/kubernetes-cluster-name-detection
+  - /agent/faq/kubernetes-cluster-name-detection
+  - /agent/guide/kubernetes-cluster-name-detection
 further_reading:
 - link: /agent/autodiscovery/
   tag: documentation
-  text: Docker Agent オートディスカバリー
+  text: Docker Agent Autodiscovery
 - link: /agent/kubernetes/host_setup/
   tag: documentation
-  text: Kubernetes DaemonSet のセットアップ
+  text: Kubernetes Host Setup
 - link: /agent/kubernetes/integrations/
   tag: documentation
-  text: カスタムインテグレーション
-title: Kubernetes クラスター名の自動検出
+  text: Custom Integrations
 ---
 
-Agent v6.11+ の場合、Datadog Agent は Google Kubernetes Engine (GKE)、Azure Kubernetes Service (AKS)、Amazon Elastic Kubernetes Service (EKS) で Kubernetes クラスター名を自動検出できます。検出された場合、収集されたすべてのデータに、ノード名のサフィックスとしてクラスター名が追加されます。これにより、Kubernetes クラスター全体でノードの識別が容易になります。
+For Agent v6.11+, the Datadog Agent can automatically detect the Kubernetes cluster name on Google Kubernetes Engine (GKE), Azure Kubernetes Service (AKS), and Amazon Elastic Kubernetes Service (EKS). If detected, the cluster name is added as a suffix on the node name to all data collected. This facilitates the identification of nodes across Kubernetes clusters. 
 
-GKE と AKS では、クラウドプロバイダーの API からクラスター名が取得されます。
+On GKE and AKS, the cluster name is retrieved from the cloud provider API. 
 
-Amazon EKS では、EC2 インスタンスタグからクラスター名が取得されます。Datadog Agent が EC2 インスタンスタグにクエリを実行するには、Datadog IAM ポリシーに `ec2:DescribeInstances` [権限][1]を追加する必要があります。
+On Amazon EKS, the cluster name is retrieved from EC2 instance tags. For the Datadog Agent to query EC2 instance tags, you must add the `ec2:DescribeInstances` [permission][1] to your Datadog IAM policy.
 
-**注**: Agent v6.5+ では、Agent 構成パラメーター [`clusterName`][2] または `DD_CLUSTER_NAME` 環境変数を使用することで、このクラスター名の値を手動で設定できます。
+**Note**: You can manually set this cluster name value with Agent v6.5+ by using Agent configuration parameter [`clusterName`][2] or the `DD_CLUSTER_NAME` environment variable.
 
-[1]: /ja/integrations/amazon_ec2/#configuration
+[1]: /integrations/amazon_ec2/#configuration
 [2]: https://github.com/DataDog/helm-charts/blob/896a355268ff6b3cfd33f945ae373912caa8b6e4/charts/datadog/values.yaml#L96

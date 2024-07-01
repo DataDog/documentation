@@ -1,6 +1,6 @@
 ---
+title: warning
 core_product:
-- alerts
-title: 警告
+  - alerts
 ---
-警告は、警告通知を送信するためのオプションのモニターしきい値設定で、優先順位はアラートより低いです。
+A warning is an optional monitor threshold setting for sending a warning notification, where the priority level is lower than an alert.

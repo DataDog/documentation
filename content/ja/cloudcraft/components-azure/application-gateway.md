@@ -1,32 +1,32 @@
 ---
-title: Application Gateway コンポーネント
+title: "Application Gateway Component"
 ---
 
-## 概要
+## Overview
 
-Application Gateway コンポーネントを使用すると、Azure 環境のアプリケーションゲートウェイを表現して視覚化できます。
+You can use the Application Gateway component to represent and visualize application gateways from your Azure environment.
 
-{{< img src="cloudcraft/components-azure/application-gateway/component-application-gateway-diagram.png" alt="Azure Application Gateway コンポーネントに相互接続された Web アプリコンポーネントを示す、等角投影された Cloudcraft 図のスクリーンショット。" responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-azure/application-gateway/component-application-gateway-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing web app components interconnected to an Azure application gateway component." responsive="true" style="width:60%;">}}
 
-## ツールバー
+## Toolbar
 
-ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: 3D ビューでコンポーネント本体のアクセントカラーと塗りつぶしカラーを選択します。
-- **Tier**: アプリケーションゲートウェイのサービスレベル階層を選択します。
-- **Size**: アプリケーションゲートウェイのサイズを選択します。このオプションは、Standard および WAF 階層でのみ使用できます。
-- **Instances**: 高可用性シナリオのインスタンス数を入力します。このオプションは、Standard および WAF 階層でのみ使用できます。
-- **Compute units**: アプリケーションゲートウェイが消費するコンピュート容量の指標を入力します。このオプションは、Standard V2 および WAF V2 階層でのみ使用できます。
-- **Persistent connections**: アプリケーションゲートウェイにおける持続的接続数を入力します。このオプションは、Standard V2 および WAF V2 階層でのみ使用できます。
-- **Throughput (Mbps)**: アプリケーションゲートウェイのスループットをメガビット/秒単位で入力します。このオプションは、Standard V2 および WAF V2 階層でのみ使用できます。
-- **Data processed (GB)**: アプリケーションゲートウェイがひと月に処理するデータの総量をギガバイト単位で入力します。
-- **Outbound data processed (GB)**: アプリケーションゲートウェイがひと月に処理するアウトバウンドデータの総量をギガバイト単位で入力します。
+- **Color**: Select accent and fill colors for the body of the component in 3D view.
+- **Tier**: Select the service level tier for your application gateway.
+- **Size**: Select the size of your application gateway. This option is only available for the Standard and WAF tiers.
+- **Instances**: Enter the number of instances for high-availability scenarios. This option is only available for the Standard and WAF tiers.
+- **Compute units**: Enter the measure of compute capacity consumed by your application gateway. This option is only available for the Standard V2 and WAF V2 tiers.
+- **Persistent connections**: Enter the number of persistent connections to your application gateway. This option is only available for the Standard V2 and WAF V2 tiers.
+- **Throughput (Mbps)**: Enter the throughput of your application gateway in megabits per second. This option is only available for the Standard V2 and WAF V2 tiers.
+- **Data processed (GB)**: Enter the total volume of data processed per month by your application gateway in gigabytes.
+- **Outbound data processed (GB)**: Enter the total volume of outbound data processed per month by your application gateway in gigabytes.
 
-## ヘルプ
+## API
 
-[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。以下は、Application Gateway コンポーネントの JSON オブジェクトの例です。
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of an Application Gateway component:
 
-### スキーマ
+### Schema
 
 ```json
 {
@@ -56,26 +56,26 @@ Application Gateway コンポーネントを使用すると、Azure 環境のア
 }
 ```
 
-- **type: 文字列**: コンポーネントのタイプ。このコンポーネントの値 `azureappgw` の文字列でなければなりません。
-- **id: string, uuid**: コンポーネントの一意な識別子。API は内部的に UUID v4 を使用しますが、任意の一意な文字列を受け付けます。
-- **resourceId: 文字列**: Azure 内のコンポーネントのグローバルに一意な識別子。
-- **region: 文字列**: コンポーネントの Azure リージョン。API は、中国を除くすべてのグローバルリージョンをサポートしています。
-- **mapPos: 配列**: ブループリント内のコンポーネントの位置。API では、一意の X 座標と Y 座標のペアを使用して位置を表現します。
-- **tier: 文字列**: アプリケーションゲートウェイのサービスレベル階層。`Standard`、`Standard V2`、`WAF`、`WAF V2` の 4 つの値のいずれかを指定します。デフォルトは `Standard V2` です。
-- **size: 文字列**: アプリケーションゲートウェイのサイズ。`Small`、`Medium`、`Large` の 3 つの値のいずれかを指定します。デフォルトは `Medium` です。
-- **instances: 数値**: アプリケーションゲートウェイのインスタンス数。デフォルトは `2` です。
-- **computeUnits: 数値**: アプリケーションゲートウェイが消費するコンピュート容量の指標。デフォルトは `0` です。
-- **persistentConnections: 数値**: アプリケーションゲートウェイにおける持続的接続数。デフォルトは `0` です。
-- **throughput: 数値**: アプリケーションゲートウェイのスループット (メガビット/秒単位)。デフォルトは `0` です。
-- **dataProcessed: 数値**: アプリケーションゲートウェイが処理する月間データ量の合計 (ギガバイト単位)。デフォルトは `0` です。
-- **outboundDataTransfer: 数値**: アプリケーションゲートウェイが処理する月間アウトバウンドデータ量の合計 (ギガバイト単位)。デフォルトは `0` です。
-- **color: オブジェクト**: コンポーネント本体の塗りつぶし色。
-  - **isometric: 文字列**: 3D ビューでのコンポーネント本体の 16 進数カラー。デフォルトは `#CEE0F5` です。
-  - **2d: 文字列**: 2D ビューでのコンポーネント本体の 16 進数カラー。デフォルトは `null` です。
-- **accentColor: オブジェクト**: コンポーネントロゴのアクセントカラー。
-  - **isometric: 文字列**: 3D ビューでのコンポーネントロゴの 16 進数カラー。デフォルトは `#0078D4` です。
-  - **2d: 文字列**: 2D ビューでのコンポーネントロゴの 16 進数カラー。デフォルトは `null` です。
-- **link: 文字列、uri**: コンポーネントを別の図や外部の Web サイトにリンクする URI。`blueprint://` または `https://` の 2 つの形式のどちらかを指定します。
-- **locked: ブール値**: Web インターフェイスを通してコンポーネントの位置の変更を許可するかどうか。デフォルトは `false` です。
+- **type: string**: The type of component. Must be a string of value `azureappgw` for this component.
+- **id: string, uuid**: The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
+- **resourceId: string**: The globally unique identifier for the component within Azure.
+- **region: string**: The Azure region for the component. The API supports all global regions, except China.
+- **mapPos: array**: The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
+- **tier: string**: The service level tier for the application gateway. Accepts one of four values, `Standard`, `Standard V2`, `WAF`, or `WAF V2`. Defaults to `Standard V2`.
+- **size: string**: The size of the application gateway. Accepts one of three values, `Small`, `Medium`, or `Large`. Defaults to `Medium`.
+- **instances: number**: The number of application gateway instances. Defaults to `2`.
+- **computeUnits: number**: The measure of compute capacity consumed by the application gateway. Defaults to `0`.
+- **persistentConnections: number**: The number of persistent connections to your application gateway. Defaults to `0`.
+- **throughput: number**: The throughput of the application gateway in megabits per second. Defaults to `0`.
+- **dataProcessed: number**: The total volume of monthly data processed by the application gateway in gigabytes. Defaults to `0`.
+- **outboundDataTransfer: number**: The total volume of monthly outbound data processed by the application gateway in gigabytes. Defaults to `0`.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: A hexadecimal color for the component body in 3D view. Defaults to `#CEE0F5`.
+  - **2d: string**: A hexadecimal color for the component body in 2D view. Defaults to `null`.
+- **accentColor: object**: The accent color for the component logo.
+  - **isometric: string**: A hexadecimal color for the component logo in 3D view. Defaults to `#0078D4`.
+  - **2d: string**: A hexadecimal color for the component logo in 2D view. Defaults to `null`.
+- **link: string, uri**: A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
+- **locked: boolean**: Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
 
 [1]: https://developers.cloudcraft.co/

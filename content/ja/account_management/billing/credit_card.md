@@ -1,32 +1,33 @@
 ---
-title: クレジットカードでの支払い
+title: Credit Card Billing
 ---
-## 概要
 
-Datadog では、[プラン][1]ページからクレジットカードでの支払い申し込みができます。管理者は、左下にある自分のユーザー名にカーソルを置き、`Plan & Usage`--> `Plan` と移動することで、このページにアクセスできます。
+## Overview
 
-デフォルトでは、クレジットカードを使用してサインアップすると、月次プランに登録されます。これを年間プランに切り替える場合は、[カスタマーサクセス][2]マネージャーにお問い合わせください。
+Datadog accepts payment by credit card through the [Plan][1] page. Administrators can access this page by hovering over their username at the bottom left, then navigate to: `Plan & Usage`--> `Plan`.
 
-## 支払い
+By default, when you sign up with a credit card you are on a monthly plan. If you want to switch to an annual plan, contact your [Customer Success][2] Manager.
 
-支払いは、毎月 10 営業日近くに Datadog によって収集されます。課金が失敗した場合、Datadog は最大 2 回再試行します。最近、支払い方法を請求書からクレジットカードに変更した場合は、[カスタマーサクセス][2]マネージャーに連絡して、過去の項目が課金対象としてキューに入れられていることを確認してください。将来の請求は自動課金されます。保存されるのは、一度に 1 つの支払い方法のみです。
+## Payment
 
-## 編集
+Payment is collected by Datadog near the 10th business day of each month. Datadog reattempts failed charges up to two more times. If you have recently changed your payment method from invoicing to credit card, connect with your [Customer Success][2] Manager to ensure past items are queued to be charged. Future bills are auto charged. Only one payment method is stored on file at a time.
+
+## Edit
 
 ### Update
 
-[プラン][1]ページからクレジットカードを更新する場合は、**Edit** ボタンをクリックします。
+Update your credit card through the [Plan][1] page by clicking the **Edit** button.
 
-### 削除
+### Remove
 
-Datadog からクレジットカードを削除する場合は、まず**無料**プランにダウングレードします。次に、[プラン][1]ページで **Remove Card** ボタンを使用します。
+To remove your credit card from Datadog, first downgrade to the **Free** plan. Then use the **Remove Card** button on the [Plan][1] page.
 
-## トラブルシューティング
+## Troubleshooting
 
-技術的な質問については、[Datadog のサポートチーム][3]にお問い合わせください。
+For technical questions, contact [Datadog support][3].
 
-課金に関するご質問は、[カスタマーサクセス][2]マネージャーにお問い合わせください。
+For billing questions, contact your [Customer Success][2] Manager.
 
 [1]: https://app.datadoghq.com/account/billing
 [2]: mailto:success@datadoghq.com
-[3]: /ja/help/
+[3]: /help/

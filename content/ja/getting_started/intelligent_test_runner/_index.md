@@ -1,161 +1,156 @@
 ---
-algolia:
-  tags:
-  - intelligent test runner
-  - CI テスト
-  - CI テスト
-  - 不安定なテスト
-  - 不安定なテスト
+title: Getting Started with Intelligent Test Runner
+kind: documentation
 further_reading:
-- link: https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/
-  tag: ブログ
-  text: Datadog Intelligent Test Runner による CI テストの効率化
+- link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
+  tag: Blog
+  text: Streamline your CI testing with Datadog Intelligent Test Runner
 - link: /intelligent_test_runner/
-  tag: ドキュメント
-  text: Intelligent Test Runner について
+  tag: Documentation
+  text: Learn about Intelligent Test Runner
 - link: /tests/code_coverage/
-  tag: ドキュメント
-  text: コードカバレッジについて
-kind: ドキュメント
-title: Intelligent Test Runner の概要
+  tag: Documentation
+  text: Learn about Code Coverage
+algolia:
+  tags: [intelligent test runner, ci test, ci tests, flaky test, flaky tests]
 ---
 
-## 概要
+## Overview
 
-[Intelligent Test Runner][1] は、最近のコード変更によって影響を受けない無関連なテストをインテリジェントに除外することにより、組織のテスト影響分析を合理化します。
+[Intelligent Test Runner][1] allows you to streamline your organization’s test impact analysis by intelligently excluding irrelevant tests that are not affected by recent code changes.
 
-[Test Visibility][2] により、開発チームはテストサービス用に Intelligent Test Runner を構成し、除外すべきブランチ (たとえばデフォルトブランチ) を設定し、追跡すべきファイルを定義できます (追跡されたファイルの変更時にはすべてのテストの完全な実行がトリガーされます)。
+With [Test Visibility][2], development teams can configure Intelligent Test Runner for their test services, set branches to exclude (such as the default branch), and define files to be tracked (which triggers full runs of all tests when any tracked file changes).
 
-{{< img src="/continuous_integration/itr_test_selection_diagram.png" alt="Intelligent Test Runner のコンポーネントのベン図: 追跡ファイル、除外ブランチ、およびスキップされたテスト" caption="Intelligent Test Runner が追跡ファイル、除外ブランチ、および通過したテストを使用して除外テストを定義する方法を示すベン図" style="width:65%" >}}
+{{< img src="/continuous_integration/itr_test_selection_diagram.png" alt="A Venn diagram of the components for the Intelligent Test Runner: tracked files, excluded branches, and skipped tests" caption="A Venn diagram displaying how Intelligent Test Runner defines an excluded test by using tracked files, excluded branches, and passed tests." style="width:65%" >}}
 
-テストサービスに Intelligent Test Runner を構成し有効化することで、CI 環境全体の信頼性とパフォーマンスを維持しつつ、不要なテスト時間を削減し、CI のテスト効率を向上させ、コストを削減します。
+Configure and enable Intelligent Test Runner for your test services to reduce unnecessary testing time, enhance CI test efficiency, and reduce costs, while maintaining the reliability and performance across your CI environments. 
 
-Intelligent Test Runner は [コードカバレッジデータ][5]を使用してテストをスキップすべきかどうかを判断します。詳細は [Datadog の Intelligent Test Runner の仕組み][10]を参照してください。
+Intelligent Test Runner uses [code coverage data][5] to determine whether or not tests should be skipped. For more information, see [How Intelligent Test Runner Works in Datadog][10].
 
-## Intelligent Test Runner のセットアップ
+## Set up the Intelligent Test Runner
 
-Intelligent Test Runner をセットアップするためには、お使いのプログラミング言語に関する以下のドキュメントを参照してください。
+To set up the Intelligent Test Runner, see the following documentation for your programming language:
 
 {{< partial name="continuous_integration/ci-itr-setup.html" >}}
 
 </br>
 
-## Intelligent Test Runner の有効化
+## Enable the Intelligent Test Runner
 
-Intelligent Test Runner を有効にするには
+To enable the Intelligent Test Runner:
 
-1. [**Software Delivery** > **Test Visibility** > **Settings**][3] に移動します。
-1. **Test Services** タブで、サービスの `Intelligent Test Runner` 列で **Configure** をクリックします。
+1. Navigate to [**Software Delivery** > **Test Visibility** > **Settings**][3]. 
+1. On the **Test Services** tab, click **Configure** in the `Intelligent Test Runner` column for a service.
 
-{{< img src="/getting_started/intelligent_test_runner/enable_settings.png" alt="Test Service Settings ページでテストサービスに Intelligent Test Runner を有効にする" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/enable_settings.png" alt="Enable Intelligent Test Runner for a test service on the Test Service Settings page" style="width:100%" >}}
 
-`Intelligent Test Runner Activation Write` 権限が必要です。詳細は [Datadog のロール権限についてのドキュメント][4]を参照してください。
+You must have the `Intelligent Test Runner Activation Write` permission. For more information, see the [Datadog Role Permissions documentation][4].
 
-クリティカルブランチ (たとえばデフォルトブランチなど) で Intelligent Test Runner を無効にすることで、包括的なテストカバレッジが確保されますが、機能や開発ブランチでそれを有効にすることで、テストの効率を最大限に高めることができます。
+Disabling the Intelligent Test Runner on critical branches (such as your default branch) ensures comprehensive test coverage, whereas enabling it to run on feature or development branches helps maximize testing efficiency.
 
-## Intelligent Test Runner の構成
+## Configure the Intelligent Test Runner
 
-Intelligent Test Runner を構成して、特定のテストがスキップされないようにすることができます。これらのテストは*スキップできないテスト*と呼ばれ、[コードカバレッジデータ][5]にかかわらず実行されます。
+You can configure the Intelligent Test Runner to prevent specific tests from being skipped. These tests are known as *unskippable tests*, and are run regardless of [code coverage data][5]. 
 
-Intelligent Test Runner を構成するには
+To configure the Intelligent Test Runner:
 
-1. **Status** トグルをクリックして Intelligent Test Runner を有効にします。
-1. 除外するブランチ (通常はリポジトリのデフォルトブランチ) を指定します。Intelligent Test Runner は、これらのブランチのテストをスキップしません。
-1. 追跡するファイルディレクトリとファイルを指定します (たとえば `documentation/content/**` や `domains/shopist/apps/api/BUILD.bazel` など) 。Intelligent Test Runner は、これらの追跡ファイルが変更された場合、すべての CI テストを実行します。
-1. **Save Settings** をクリックします。
+1. Click the **Status** toggle to enable Intelligent Test Runner. 
+1. Specify any branches to exclude (typically the default branch of a repository). Intelligent Test Runner does not skip tests for these branches.
+1. Specify file directories and files to track (for example, `documentation/content/**` or `domains/shopist/apps/api/BUILD.bazel`). Intelligent Test Runner runs all CI tests when any of these tracked files change.
+1. Click **Save Settings**.
 
-{{< img src="/getting_started/intelligent_test_runner/configure_itr.png" alt="Intelligent Test Runner を有効にし、Intelligent Test Runner が除外するブランチを提供し、変更があった場合にテストを実行するために Intelligent Test Runner が追跡するファイルを追加する" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/configure_itr.png" alt="Enable the Intelligent Test Runner, provide branches for the Intelligent Test Runner to exclude, and add files for the Intelligent Test Runner to track and run tests when any changes happen" style="width:100%" >}}
 
-テストサービスで Intelligent Test Runner を構成した後、デフォルトブランチでテストスイートの実行を行います。これにより、将来のコミットで無関係なテストを正確にスキップできる基準が確立されます。
+Once you’ve configured Intelligent Test Runner on a test service, execute a test suite run on your default branch. This establishes a baseline for the Intelligent Test Runner to accurately skip irrelevant tests in future commits. 
 
-## Intelligent Test Runner のデータを活用する
+## Use Intelligent Test Runner data
 
-Intelligent Test Runner を有効にすることで収集されたデータを探索し、テストのスキップによる時間節約や、組織における Intelligent Test Runner の利用状況などを分析して、CI の効率を向上させましょう。
+Explore the data collected by enabling Intelligent Test Runner, such as the time savings achieved by skipping tests, as well as your organization’s usage of Intelligent Test Runner, to improve your CI efficiency.
 
-{{< img src="/getting_started/intelligent_test_runner/dashboard.png" alt="テストがスキップされたことによる時間節約と、組織の Intelligent Test Runner の使用状況についての情報を表示する、すぐに使えるダッシュボード" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/dashboard.png" alt="The out-of-the-box dashboard displaying information about the time saved by tests skipped by Intelligent Test Runner, and your organization's usage of Intelligent Test Runner" style="width:100%" >}}
 
-[ダッシュボード][6]を作成してテストのメトリクスを視覚化することも、Intelligent Test Runner が収集したデータを利用したウィジェットを含む[すぐに使えるダッシュボード][7]を使用して、利用パターンや傾向から改善点を特定することもできます。
+You can create [dashboards][6] to visualize your testing metrics, or use an [out-of-the-box dashboard][7] containing widgets populated with data collected by the Intelligent Test Runner to help you identify areas of improvement with usage patterns and trends. 
 
-## Test Visibility Explorer で結果を検証する
+## Examine results in the Test Visibility Explorer
 
-[Test Visibility Explorer][8] では、Test Visibility と Intelligent Test Runner から収集したデータを用いて視覚化の作成やテストスパンのフィルタリングが可能です。Intelligent Test Runner がアクティブな場合は、各テストセッションやコミットで節約された時間が表示され、期間バーが紫色に変わります。これはアクティブなテストスキップを示します。
+The [Test Visibility Explorer][8] allows you to create visualizations and filter test spans using the data collected from Test Visibility and the Intelligent Test Runner. When the Intelligent Test Runner is active, it displays the amount of time saved for each test session or commit. The duration bars turn purple to indicate active test skipping.
 
 {{< tabs >}}
-{{% tab "セッション" %}}
+{{% tab "Session" %}}
 
-[**Software Delivery** > **Test Visibility** > **Test Runs**][101] に移動し、`Session` を選択してテストセッションスパンの結果のフィルタリングを開始します。
+Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Session` to start filtering your test session span results.
 
-{{< img src="/getting_started/intelligent_test_runner/itr_sessions.png" alt="Intelligent Test Runner によってスキップされたテストでフィルタリングされた Test Visibility Explorer のテストセッション結果" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/itr_sessions.png" alt="Test session results in the Test Visibility Explorer filtered on tests skipped by the Intelligent Test Runner" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Asession
 
 {{% /tab %}}
-{{% tab "モジュール" %}}
+{{% tab "Module" %}}
 
-[**Software Delivery** > **Test Visibility** > **Test Runs**][101] に移動し、`Module` を選択して、テストモジュールスパンの結果のフィルタリングを開始します。
+Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Module` to start filtering your test module span results. 
 
-{{< img src="/getting_started/intelligent_test_runner/itr_modules.png" alt="Test Visibility Explorer で、Intelligent Test Runner によってスキップされたテストでフィルタリングされたテストモジュールの結果" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/itr_modules.png" alt="Test module results in the Test Visibility Explorer filtered on tests skipped by the Intelligent Test Runner" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Amodule
 
 {{% /tab %}}
-{{% tab "スイート" %}}
+{{% tab "Suite" %}}
 
-[**Software Delivery** > **Test Visibility** > **Test Runs**][101] に移動し、`Suite` を選択して、テストスイートスパン結果のフィルタリングを開始します。
+Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Suite` to start filtering your test suite span results. 
 
-{{< img src="/getting_started/intelligent_test_runner/itr_suites.png" alt="Test Visibility Explorer で、Intelligent Test Runner がスキップしたテストにフィルタリングされたテストスイートの結果" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/itr_suites.png" alt="Test suite results in the Test Visibility Explorer filtered on tests skipped by the Intelligent Test Runner" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Asuite
 
 {{% /tab %}}
-{{% tab "テスト" %}}
+{{% tab "Test" %}}
 
-[**Software Delivery** > **Test Visibility** > **Test Runs**][101] に移動し、`Test` を選択して、テストスパンの結果のフィルタリングを開始します。
+Navigate to [**Software Delivery** > **Test Visibility** > **Test Runs**][101] and select `Test` to start filtering your test span results. 
 
-{{< img src="/getting_started/intelligent_test_runner/itr_tests.png" alt="Test Visibility Explorer で、Intelligent Test Runner によってスキップされたテストでフィルタリングされたテスト結果" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/itr_tests.png" alt="Test results in the Test Visibility Explorer filtered on tests skipped by the Intelligent Test Runner" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/ci/test-runs?query=test_level%3Atest
 
 {{% /tab %}}
 {{< /tabs >}}
 
-次のすぐに使える Intelligent Test Runner [ファセット][9]を使用して、検索クエリをカスタマイズします。
+Use the following out-of-the-box Intelligent Test Runner [facets][9] to customize the search query:
 
 Code Coverage Enabled
-: テストセッション中にコードカバレッジの追跡が活動していたかどうかを示します。
+: Indicates whether code coverage tracking was active during the test session.
 
 Skipped by ITR
-: Intelligent Test Runner によってセッション中にスキップされたテストの数です。
+: Number of tests that were skipped during the session by the Intelligent Test Runner.
 
 Test Skipping Enabled
-: テストセッションで Intelligent Test Runner が有効であったかどうかを示します。
+: Indicates if Intelligent Test Runner was enabled for the test session.
 
 Test Skipping Type
-: Intelligent Test Runner がスキップするテストを決定するために使用される方法または基準です。
+: The method or criteria used by the Intelligent Test Runner to determine which tests to skip.
 
 Tests Skipped
-: テストセッション中に実行されなかったテストの総数。これには、スキップするように構成されたテストや、手動で除外されたテストが含まれる場合があります。
+: The total count of tests that were not executed during the test session, which may include tests that were configured to skip, or were set as manual exclusions.
 
 Time Saved
-: Intelligent Test Runner の使用によってセッションで節約された時間の長さです。
+: The length of time saved for the session by Intelligent Test Runner usage.
 
-たとえば、`Test Skipping Enabled` を持つテストセッションの実行をフィルタリングするには、検索クエリで `@test.itr.tests_skipping.enabled:true` を使用します。
+For example, to filter test session runs that have `Test Skipping Enabled`, you can use `@test.itr.tests_skipping.enabled:true` in the search query. 
 
-{{< img src="/getting_started/intelligent_test_runner/session_run.png" alt="Intelligent Test Runner でテストスキップ機能が有効になっている最初のテストセッション実行を表示するサイドパネル" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/session_run.png" alt="A side panel displaying the first test session run where the Test Skipping feature is enabled for the Intelligent Test Runner" style="width:100%" >}}
 
-次に、テストセッションの実行をクリックし、テストセッションのサイドパネルの **Test Session Details** セクションで、Intelligent Test Runner によって節約された時間の量を確認します。
+Then, click on a test session run and see the amount of time saved by the Intelligent Test Runner in the **Test Session Details** section on the test session side panel.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/intelligent_test_runner/
-[2]: /ja/tests/
+[1]: /intelligent_test_runner/
+[2]: /tests/
 [3]: https://app.datadoghq.com/ci/settings/test-service
-[4]: /ja/account_management/rbac/permissions/
-[5]: /ja/tests/code_coverage
-[6]: /ja/dashboards/
+[4]: /account_management/rbac/permissions/
+[5]: /tests/code_coverage
+[6]: /dashboards/
 [7]: https://app.datadoghq.com/dash/integration/30941/ci-visibility---intelligent-test-runner
-[8]: /ja/continuous_integration/explorer?tab=testruns
-[9]: /ja/continuous_integration/explorer/facets/?tab=testruns
-[10]: /ja/intelligent_test_runner/how_it_works/
+[8]: /tests/explorer/
+[9]: /continuous_integration/explorer/facets/?tab=testruns
+[10]: /intelligent_test_runner/how_it_works/

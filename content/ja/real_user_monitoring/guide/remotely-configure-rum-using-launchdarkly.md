@@ -1,87 +1,88 @@
 ---
-aliases:
-- /ja/real_user_monitoring/guide/remote-config-launchdarkly/
+title: Remotely configure RUM using LaunchDarkly
+kind: guide
 beta: false
-description: LaunchDarkly を使用して RUM のサンプリングをリモートで構成する方法について説明します。
+private: true
+description: Learn how to set up RUM with LaunchDarkly to remotely configure RUM sampling.
+aliases:
+- /real_user_monitoring/guide/remote-config-launchdarkly/
 further_reading:
 - link: /real_user_monitoring/explorer
-  tag: ドキュメント
-  text: RUM エクスプローラーで RUM データを視覚化する
-kind: ガイド
-private: true
-title: LaunchDarkly を使用した RUM のリモート構成
+  tag: Documentation
+  text: Visualize your RUM data in the RUM Explorer
 ---
 
-## 概要
-[RUM アプリケーション][1]をインスツルメントする場合、より忠実なデータが必要な進行中のインシデントなどの即時のニーズに基づいて、RUM 初期化構成をリモートで制御することができます。
+## Overview
+When instrumenting a [RUM application][1], you can remotely control the RUM initialization configurations based on your immediate needs, such as an ongoing incident where you might need higher fidelity data.
 
-RUM の初期化構成の変更をデプロイする必要がない代わりに、機能フラグを使用することができます。[LaunchDarkly][2] のような機能フラグ管理会社は、サーバー側で機能フラグを評価するため、コードを再デプロイする必要なく、変更を加えることができます。
+Instead of having to deploy the changes to your RUM initialization configurations, you can use feature flags. Feature flag management companies like [LaunchDarkly][2] evaluate feature flags on the server side and thus allow you to make changes to your code without needing to redeploy it.
 
-## LaunchDarkly でフラグを設定する
-LaunchDarkly でフラグを設定するには、まず [SDK の設定][3]のドキュメントに従うことから始めてください。その他の詳細については、LaunchDarkly の[クライアントサイド SDK のドキュメント][4]を参照してください。
+## Setting up your flag in LaunchDarkly
+To set up your flag in LaunchDarkly, start by following their documentation on [setting up an SDK][3]. For additional details, see LaunchDarkly's [Client-side SDK documentation][4].
 
-LaunchDarkly は多変量フラグをサポートしており、返すバリエーションの数や種類をカスタマイズすることができます。多変量フラグの種類は以下の通りです。
+LaunchDarkly supports multivariate flags, which lets you customize the number and types of variations they return. Multivariate flag types include:
 
-- **文字列フラグ**: 単純な構成値、あるいはコンテンツを渡すためによく使われます。
-- **数字フラグ**: 単純な数値の構成値を渡すためによく使われます。
-- **JSON フラグ**: 複雑な構成オブジェクトや、構造化されたコンテンツを渡すために使用することができます。
+- **String flags**: Frequently used to pass simple configuration values or even content.
+- **Number flags**: Frequently used to pass simple numeric configuration values.
+- **JSON flags**: Can be used to pass complex configuration objects or even structured content.
 
-### 機能フラグオプション
+### Feature flag options
 
-このガイドでは、機能フラグを設定して、リモートで RUM の構成を変更する 2 つの方法を説明します。
+This guide covers two ways you can set up your feature flags to modify your RUM configuration remotely:
 
-1. 構成したい**個々のパラメーター**に対応する機能フラグを作成します。
-2. **RUM 構成全体**の機能フラグを作成します。
+1. Create a feature flag for each **individual parameter** you'd like to configure.
+2. Create a feature flag for the **entire RUM configuration**.
 
-**ヒント**: 最初のオプションを使用して、各パラメーターに個別のフラグを作成すると、RUM 構成をよりきめ細かく制御することができます。RUM 構成全体に対して機能フラグを作成すると、多くの異なるバリエーションが発生し、追跡が難しくなり、開発者がバリエーション間の特定の違いを判断するためのオーバーヘッドが発生する可能性があります。
+**Tip**: Using the first option to create individual flags for each parameter can give you more fine-grained control over your RUM configuration. Creating a feature flag for the entire RUM configuration may result in lots of different variants that can be harder to keep track of and cause overhead for your developers to determine what the specific differences between the variants are.
 
-### 個々のパラメーターオプション
+### Individual parameter option
 
-以下の例では、RUM 構成の個々のパラメーターである `sessionSampleRate` に対する機能フラグを作成しています。
+In the example below, a feature flag for an individual parameter, `sessionSampleRate`, of the RUM Configuration is created.
 
-1. LaunchDarkly で新しい機能フラグを作成し、名前とキーを指定します。
+1. Create a new feature flag in LaunchDarkly and provide a name, and key.
 
-{{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-sample-rate-new-flag.png" alt="LaunchDarkly で RUM サンプルレートのフラグを新規作成する" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-sample-rate-new-flag.png" alt="Create a new flag for the RUM sample rate in LaunchDarkly" style="width:75%;">}}
 
-2. フラグのバリエーションを指定します。`sessionSampleRate` パラメーターには、数値の値を渡したいので、フラグタイプを Number にし、バリエーションフィールドに値として必要な Sample Rates を追加してください。
+2. Specify the flag variations. For the `sessionSampleRate` parameter, you'll want to pass a number value, so you can choose the flag type to be Number and add the Sample Rates you would like as the value in the variation fields.
 
-   **注:** 必要であれば、複数の異なるフラグのバリエーションを作成することができます。今、必要と思われるすべてのサンプルレートを追加する必要はありません。後でいつでも新しい値のバリエーションを追加することができます。
+   **Note:** You can create multiple different flag variations if you'd like. Don't worry about adding all the possible sample rates that you might want now. You can always add a new variation of values later.
 
-   {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-sample-rate-flag-setup.png" alt="LaunchDarkly のサンプルレートのバリアント追加" style="width:75%;">}}
+   {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-sample-rate-flag-setup.png" alt="Add variants for the sample rate in LaunchDarkly" style="width:75%;">}}
 
-3. デフォルトのルールを設定します。以下の例では、機能フラグがオフのときは "Default Sample Rate"、オンのときは "High Fidelity Sample Rate" が設定されています。
+3. Set your default rules. In the example below, the "Default Sample Rate" is set when the feature flag is off and the "High Fidelity Sample Rate" when the feature flag is on.
 
-{{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-flag-targeting-rules.png" alt="LaunchDarkly でデフォルトのルールを設定する" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-flag-targeting-rules.png" alt="Set your default rules in LaunchDarkly" style="width:75%;">}}
 
-### RUM 全体構成オプション
+### Entire RUM configuration option
 
-この例では、RUM 構成オブジェクト全体に対する機能フラグが作成されます。
+In this example, a feature flag for the entire RUM Configuration Object is created.
 
-1. LaunchDarkly で新しい機能フラグを作成し、名前とキーを指定します。
+1. Create a new feature flag in LaunchDarkly and provide a name, and key.
 
-   {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-configuration-new-flag.png" alt="LaunchDarkly で RUM 構成のフラグを新規作成する" style="width:75%;">}}
+   {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-configuration-new-flag.png" alt="Create a new flag for the RUM configuration in LaunchDarkly" style="width:75%;">}}
 
-2. フラグのバリエーションを修正します。[RUM の構成][5]は、Object を渡したいので、フラグタイプを JSON にして、好きな構成を値として追加し、後でコード内で JSON を Object に変更します。
+2. Modify the Flag Variations. For the [RUM configuration][5], you'll want to pass an Object, so you can choose the flag type to be JSON, add the configurations you'd like as the values, and modify the JSON to an Object in our code later.
 
-   **注: **必要であれば、複数の異なるフラグのバリエーションを作成することができます。必要と思われるすべての構成を追加する必要はありません。いつでも好きなときに新しい値のバリエーションを追加することができます。
+   **Note:** You can create multiple different flag variations if you'd like. Don't worry about adding all possible configurations that you might want, you can always go in and add a new variation of values whenever you want.
 
-   {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-configuration-flag-setup.png" alt="LaunchDarkly で RUM 構成にバリアントを追加する" style="width:75%;">}}
+   {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/launchdarkly-rum-configuration-flag-setup.png" alt="Add variants for the RUM configuration in LaunchDarkly" style="width:75%;">}}
 
-3. デフォルトのルールを設定します。機能フラグがオフのときは "Default Configuration"、オンのときは "High Fidelity Configuration" が設定されています。
+3. Set your default rules. The "Default Configuration" is set when the feature flag is off and the "High Fidelity Configuration" when the feature flag is on.
 
-## RUM 構成に機能フラグを追加する
-[上記][7]のように LaunchDarkly をセットアップし、依存関係をインストールし、[LaunchDarkly クライアントを初期化][8]したら、Datadog のコードに機能フラグ評価を追加することが可能です。LaunchDarkly でのフラグ評価については、[こちら][9]を参照してください。
+## Adding your feature flag to your RUM configuration
+Once you've got set up with LaunchDarkly as mentioned [above][7], installed the dependencies, and [initialized the LaunchDarkly client][8]
+), you can add the feature flag evaluation into Datadog's code. You can read more about evaluating flags in LaunchDarkly [here][9].
 
-### 個別パラメーターオプション
+### Individual parameter option
 
-個々のパラメーターについて RUM SDK を初期化する前に、まず LaunchDarkly の機能フラグを評価する必要があります。
+Before you initialize the RUM SDK for an individual parameter, you need to first evaluate your LaunchDarkly feature flags.
 
-この例では、以下のコードスニペットのように JS で評価を追加することができます。
+In this example, you can add an evaluation in JS like the code snippet below.
 
 ```javascript
 const RUM_sample_rate = client.variation('rum-sample-rate-configuration', false);
 ```
-そして、これを RUM の初期設定に追加します。
+Then add this to your RUM initialization:
 
 ```javascript
 datadogRum.init({
@@ -99,37 +100,37 @@ datadogRum.init({
 })
 ```
 
-### RUM 全体構成オプション
+### Entire RUM configuration option
 
-RUM SDK を初期化する前に、まず、LaunchDarkly の機能フラグを評価する必要があります。例えば、JS ではこのような評価を追加します。
+Before you initialize the RUM SDK, you need to first evaluate your LaunchDarkly feature flags. For example, in JS you can add an evaluation like this:
 
 ```javascript
 const RUM_configuration = client.variation('rum-configuration', false);
 ```
 
-しかし、RUM を初期化するための構成を渡す前に、フラグの JSON 値から Object を作成する必要があります。これを行うと、RUM SDK を初期化することができます。
+However, before you can pass in the configuration to initialize RUM, you'll need to create an Object from the flag JSON value. Once you've done that, you can initialize the RUM SDK.
 
 ```javascript
 datadogRum.init(RUM_configuration_object)
 ```
 
-## LaunchDarkly のコントロールを埋め込んで、ダッシュボードで直接 RUM を構成する
-Datadog アプリケーションで直接 RUM の構成を変更したい場合は、LaunchDarkly UI を Datadog に埋め込んで、機能フラグのオン/オフを切り替えることができます。機能フラグはデフォルト値のまま、オフにしておくことができるように設定されています。より忠実度の高いデータを取得したい場合は、機能フラグをオンにすれば、オンのバリエーションに設定した値が RUM の初期化に使用されます。
+## Embed LaunchDarkly's controls to configure RUM directly in your Dashboards
+If you want to change your RUM configuration directly in your Datadog application, you can embed the LaunchDarkly UI into Datadog and switch your feature flag on/off. The feature flags are set up so you can keep them off, with the default values. When you want to have higher fidelity data, you can turn on your feature flag and the values you set for the ON variation are used for the RUM initialization.
 
-LaunchDarkly の Datadog アプリインテグレーションは、機能フラグ管理 UI をダッシュボードウィジェットとして埋め込んでいます。このウィジェットを使用すると、Datadog を離れることなく機能フラグを切り替えることができます。主要なメトリクスを表示する新規または既存のダッシュボード内に、LaunchDarkly ウィジェットを埋め込むことができます。インシデントやエラーの急増があった場合、Datadog 内から RUM 構成の機能フラグを素早く切り替え、より多くのデータのサンプリングを開始し、チームが問題に対処し解決するために必要な情報にアクセスできるようにすることが可能です。
+LaunchDarkly's Datadog App integration embeds the feature flag management UI as a dashboard widget. You can use this widget to toggle feature flags without ever leaving Datadog. You can embed the LaunchDarkly widget within a new or existing dashboard that displays key metrics. If there is an incident or spike in errors, you can toggle the feature flag for your RUM configuration from within Datadog to begin sampling more data and ensuring your teams have access to the information they need to address and resolve your issue.
 
-{{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/datadog-launchdarkly-ui-widget.png" alt="Datadog と LaunchDarkly の UI インテグレーションウィジェット" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/datadog-launchdarkly-ui-widget.png" alt="Datadog and LaunchDarkly UI Integration Widget" style="width:100%;">}}
 
-構成に最初に設定した値を変更する必要がある場合は、いつでも LaunchDarkly 内でフラグを更新することができます。変更を保存すると、すべての新しいフラグ評価には更新された値が適用されます。
+If you need to change the values that you originally set for your configuration, you can update your flag within LaunchDarkly at any time. After you save your changes, all new flag evaluations have your updated values.
 
-
+## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser#setup
+[1]: /real_user_monitoring/browser#setup
 [2]: https://launchdarkly.com/
 [3]: https://docs.launchdarkly.com/home/getting-started/setting-up
 [4]: https://docs.launchdarkly.com/sdk/client-side
-[5]: /ja/real_user_monitoring/browser#setup
+[5]: /real_user_monitoring/browser#setup
 [6]: https://docs.launchdarkly.com/sdk/features/evaluating
 [7]: #setting-up-your-flag-in-launchdarkly
 [8]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client

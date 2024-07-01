@@ -1,4 +1,4 @@
 ---
-title: ソースマップ
+title: source map
 ---
-ソースマップとは、簡略化された JavaScript のコードを元のソースにマッピングするファイルです。
+A source map is a file that maps minified JavaScript code to the original source.

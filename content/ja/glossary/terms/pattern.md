@@ -1,6 +1,6 @@
 ---
+title: pattern
 core_product:
-- log management
-title: パターン
+  - log management
 ---
-パターンとは、ログメッセージが類似した構造を持っていることです。パターン集計は、これらのログをグループ化し、パターンビューに表示します。
+A pattern is when log messages have a similar structure. Pattern aggregation groups these logs together and displays them in the patterns view.

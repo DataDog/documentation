@@ -1,51 +1,51 @@
 ---
-aliases:
-- /ja/synthetics/cicd_integrations/jenkins
-description: CI/CD パイプラインで Continuous Testing テストを実行するために、Jenkins インスタンスを構成します。
-further_reading:
-- link: https://www.datadoghq.com/blog/jenkins-testing/
-  tag: GitHub
-  text: Jenkins パイプラインで Datadog Synthetic テストを実行する
-- link: /continuous_integration/setup_pipelines/jenkins/
-  tag: ドキュメント
-  text: Jenkins パイプラインでトレースを設定する
 title: Jenkins
+description: Configure your Jenkins instance to run Continuous Testing tests in your CI/CD pipelines.
+aliases:
+  - /synthetics/cicd_integrations/jenkins
+further_reading:
+- link: "https://www.datadoghq.com/blog/jenkins-testing/"
+  tag: Blog
+  text: Run Datadog Synthetic tests in your Jenkins pipelines
+- link: /continuous_integration/setup_pipelines/jenkins/
+  tag: Documentation
+  text: Set up Tracing on a Jenkins pipeline
 ---
 
-## 概要
+## Overview
 
-Jenkins 環境に Continuous Testing テストを追加します。
+Add Continuous Testing tests to your Jenkins environment.
 
-Datadog では、既存の Jenkins アーキテクチャーをモデル化し、ビジネス要件に合ったインストールをカスタマイズするソリューションを決定するために、SRE およびインフラストラクチャーチームと話し合うことを推奨しています。
+Datadog recommends discussing with your SRE and Infrastructure teams to determine a solution that models your existing Jenkins architecture and customizes an installation that fits your business requirements.
 
-## セットアップ
+## Setup
 
-Jenkins 環境で Docker を使用するには、[Docker と Pipeline の併用][1]をご覧ください。
+To use Docker in your Jenkins environment, see [Using Docker with Pipeline][1].
 
-### 前提条件
+### Prerequisites
 
 * Node.js v10.24.1+
-* [Config File Provider][2] を介して Jenkins インスタンスにアップロードされたグローバル JSON コンフィギュレーションファイルです。このファイルは、Synthetics のテストセットアップのグローバルプロパティを定義するために必要です。
+* A global JSON configuration file uploaded to your Jenkins instance through the [Config File Provider][2]. You need this file to define the global properties for your Synthetics test setup.
 
-環境変数は、グローバルコンフィギュレーションファイル内に直接保存するか、[認証情報を使用する][3]ことができます。テストの構成について詳しくは、[テストの構成][4] を参照してください。
+You can store environment variables directly within the global configuration file or [use credentials][3]. For more information about test configurations, see [Configure tests][4].
 
-### `@datadog/datadog-ci` パッケージの実行
+### Run the `@datadog/datadog-ci` package
 
-Jenkins Node.js プラグインを使用して、Jenkins 環境内に Node.js および npm パッケージをインストールし、実行します。
+Install and run the Node.js and npm packages within your Jenkins environment with the Jenkins Node.js plugin.
 
-既存の Datadog と Jenkins のインテグレーションについては、[Jenkins パイプラインにトレースを設定する][5]を参照してください。
+For more information about the existing Datadog-Jenkins integration, see [Set up Tracing on a Jenkins Pipeline][5].
 
-### Node.js のインストールを追加する
+### Add a Node.js installation
 
-Jenkins のグローバルなコンフィギュレーションパネルに移動し、Node.js のインストールを追加します。
+Navigate to the global Jenkins Configuration panel and add a Node.js installation.
 
-{{< img src="synthetics/cicd_integrations/jenkins/nodejs-installation.png" alt="Jenkins の Node.js インストール" style="width:80%;">}}
+{{< img src="synthetics/cicd_integrations/jenkins/nodejs-installation.png" alt="Node.js Installations in Jenkins" style="width:80%;">}}
 
-Node.js に関連するすべてのインストールに対して、`@datadog/datadog-ci` をグローバルにインストールします。
+Install `@datadog/datadog-ci` globally for all relevant Node.js installations.
 
-#### タグ
+#### Tags
 
-Jenkins の Declarative パイプラインでタグを使った Continuous Testing テストを実行するには
+To run Continuous Testing tests with tags in a Jenkins Declarative pipeline:
 
 {{< code-block lang="groovy" disable_copy="false" collapsible="true" >}}
 pipeline {
@@ -66,9 +66,9 @@ pipeline {
    }
 {{< /code-block >}}
 
-#### カスタムテストファイル
+#### Custom test file
 
-Jenkins の Declarative パイプラインでカスタムテストファイルを使った Continuous Testing テストを実行するには
+To run Continuous Testing tests with a custom test file in a Jenkins Declarative pipeline:
 
 {{< code-block lang="groovy" disable_copy="false" collapsible="true" >}}
 pipeline {
@@ -90,16 +90,16 @@ pipeline {
 }
 {{< /code-block >}}
 
-以下のような出力が期待できます。
+You can expect the following output:
 
-{{< img src="synthetics/cicd_integrations/jenkins/example-test-run.png" alt="Jenkins でのテスト実行例" style="width:80%;">}}
+{{< img src="synthetics/cicd_integrations/jenkins/example-test-run.png" alt="Example Test Run in Jenkins" style="width:80%;">}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.jenkins.io/doc/book/pipeline/docker/#using-docker-with-pipeline
 [2]: https://plugins.jenkins.io/config-file-provider/
 [3]: https://www.jenkins.io/doc/book/using/using-credentials/#adding-new-global-credentials
-[4]: /ja/continuous_testing/cicd_integrations/configuration#configure-tests
-[5]: /ja/continuous_integration/pipelines/jenkins/
+[4]: /continuous_testing/cicd_integrations/configuration#configure-tests
+[5]: /continuous_integration/pipelines/jenkins/

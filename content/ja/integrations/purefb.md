@@ -1,115 +1,115 @@
 ---
-app_id: purefb
-app_uuid: 50ae3c61-a87d-44ee-9917-df981184ff8a
-assets:
-  dashboards:
-    purefb_overview: assets/dashboards/purefb_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: purefb.info
-      metadata_path: metadata.csv
-      prefix: purefb.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10269
-    source_type_name: PureFB
-author:
-  homepage: https://purestorage.com
-  name: Pure Storage
-  sales_email: sales@purestorage.com
-  support_email: pure-observability@purestorage.com
-categories:
+"app_id": "purefb"
+"app_uuid": "50ae3c61-a87d-44ee-9917-df981184ff8a"
+"assets":
+  "dashboards":
+    "purefb_overview": assets/dashboards/purefb_overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": purefb.info
+      "metadata_path": metadata.csv
+      "prefix": purefb.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10269"
+    "source_type_name": PureFB
+"author":
+  "homepage": "https://purestorage.com"
+  "name": Pure Storage
+  "sales_email": sales@purestorage.com
+  "support_email": pure-observability@purestorage.com
+"categories":
 - data stores
-- OS & システム
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/purefb/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: purefb
-integration_id: purefb
-integration_title: Pure Storage FlashBlade
-integration_version: 1.0.4
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: purefb
-public_title: Pure Storage FlashBlade
-short_description: Pure Storage FlashBlade のパフォーマンスと利用状況を監視
-supported_os:
+- os & system
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/purefb/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "purefb"
+"integration_id": "purefb"
+"integration_title": "Pure Storage FlashBlade"
+"integration_version": "1.0.4"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "purefb"
+"public_title": "Pure Storage FlashBlade"
+"short_description": "Monitor the performance and utilization of Pure Storage FlashBlade"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Data Stores
-  - Category::OS & System
-  - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Pure Storage FlashBlade のパフォーマンスと利用状況を監視
-  media:
-  - caption: Pure Storage FlashBlade ダッシュボード - 概要 (上)
-    image_url: images/FB-overview-1.png
-    media_type: image
-  - caption: Pure Storage FlashBlade ダッシュボード - 概要 (中)
-    image_url: images/FB-overview-2.png
-    media_type: image
-  - caption: Pure Storage FlashBlade ダッシュボード - 概要 (下)
-    image_url: images/FB-overview-3.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Pure Storage FlashBlade
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Data Stores"
+  - "Category::OS & System"
+  - "Offering::Integration"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Monitor the performance and utilization of Pure Storage FlashBlade
+  "media":
+  - "caption": Pure Storage FlashBlade Dashboard - Overview (Top)
+    "image_url": images/FB-overview-1.png
+    "media_type": image
+  - "caption": Pure Storage FlashBlade Dashboard - Overview (Middle)
+    "image_url": images/FB-overview-2.png
+    "media_type": image
+  - "caption": Pure Storage FlashBlade Dashboard - Overview (Bottom)
+    "image_url": images/FB-overview-3.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Pure Storage FlashBlade
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックでは、[Datadog Agent][2] と [Pure Storage FlashBlade OpenMetrics エクスポーター][3]を通して [Pure Storage FlashBlade][1] を監視します。
+This check monitors the [Pure Storage FlashBlade][1] through the [Datadog Agent][2] and the [Pure Storage FlashBlade OpenMetrics exporter][3]. 
 
-このインテグレーションにより、アレイ、クライアント、シェア、バケットレベルのパフォーマンスデータ、および容量と構成の概要情報を提供することができます。
+The integration can provide performance data at the array, client, share, and bucket level, as well as high-level capacity and configuration information.
 
-複数の FlashBlade を監視し、それらを 1 つのダッシュボードに集計したり、顧客定義環境ごとにまとめたりすることが可能です。
+You can monitor multiple FlashBlades and aggregate these into a single dashboard, or group them together by customer-defined environment.
 
-**このインテグレーションには以下が必要です**。
+**This integration requires the following**:
 
  - FlashBlade Purity 3.2.x+
- - Datadog Agent v7.26.x+、OpenMetricsBaseCheckV2 を利用するため
+ - Datadog Agent v7.26.x+ to use OpenMetricsBaseCheckV2
  - Python 3
- - Pure Storage FlashBlade OpenMetrics エクスポーターは、コンテナ環境でインストールされ、実行されます。インストール方法は、[Pure Storage GitHub リポジトリ][3]を参照してください。
+ - The Pure Storage FlashBlade OpenMetrics exporter is installed and running in a containerized environment. Refer to the [Pure Storage GitHub repo][3] for installation instructions.
 
-## 計画と使用
+## Setup
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][4]のガイドを参照してこの手順を行ってください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][4] for guidance on applying these instructions.
 
-### インフラストラクチャーリスト
+### Installation
 
-1. [Datadog Agent をダウンロードして起動][2]します。
-2. Pure FlashBlade インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][5]を参照してください。
-
-
-#### メトリクスベース SLO
-
-ホスト上で動作している Agent に対してこのチェックを構成するには、`datadog-agent integration install -t datadog-purefb==1.0.4` を実行します。
+1. [Download and launch the Datadog Agent][2].
+2. Manually install the Pure FlashBlade integration. See [Use Community Integrations][5] for more details based on your environment.
 
 
-### ブラウザトラブルシューティング
+#### Host
 
-1. FlashBlade に Read-Only ロールのユーザーを作成し、このユーザー用の API トークンを生成します。
+To configure this check for an Agent running on a host, run `datadog-agent integration install -t datadog-purefb==1.0.4`.
 
-2. PureFB のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `purefb.d/conf.yaml` ファイルに以下の構成ブロックを追加します。使用可能なすべてのコンフィギュレーションオプションについては、サンプル [purefb.d/conf.yaml][6] を参照してください。
 
-**注**: コンフィギュレーションファイルを作成する際には、最低限 `/array` エンドポイントが必要です。
+### Configuration
+
+1. Create a user on your FlashBlade with the Read-Only role and generate an API token for this user.
+
+2. Add the following configuration block to the `purefb.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory, to start collecting your PureFB performance data. See the sample [purefb.d/conf.yaml][6] for all available configuration options.
+
+**Note**: The `/array` endpoint is required as an absolute minimum when creating your configuration file.
 
 ```yaml
 init_config:
@@ -146,17 +146,17 @@ instances:
 
 ```
 
-2. [Agent を再起動します][7]。
+2. [Restart the Agent][7].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションの `purefb` を探します。
+[Run the Agent's status subcommand][8] and look for `purefb` under the Checks section.
 
-### ヘルプ
+### Troubleshooting
 
-#### ダッシュボードにアレイが表示されない
+#### Arrays are not showing in dashboard
 
-このインテグレーションに含まれるダッシュボードでは、`env`、`host`、`fb_array_name` というタグが使用されます。これらはインスタンスごとに設定されていることを確認してください。
+The dashboards included in this integration use the tags `env`, `host`, and `fb_array_name`. Make sure that these are set per instance.
 
 ```yaml
  tags:
@@ -165,49 +165,50 @@ instances:
     - host:<full_fqdn>
 ```
 
-#### 収集間隔を長くする
+#### Increasing collection interval
 
-`/array` エンドポイントの場合、Pure Storage FlashBlade のチェックでは、デフォルトで `min_collection_interval` が `120` に設定されており、推奨される最小値は `15` です。必要に応じて `purefb.d/conf.yaml` ファイルで `min_collection_interval` を増やしたり減らしたりすることができます。
+For the `/array` endpoint, the Pure Storage FlashBlade check sets `min_collection_interval` to `120` by default, and the minimum recommended value is `15`. You may increase or decrease `min_collection_interval` in the `purefb.d/conf.yaml` file if necessary:
 
 ```yaml
 min_collection_interval: 120
 ```
 
-`/clients`、および `/usage` エンドポイントの場合、Pure Storage FlashBlade のチェックでは、デフォルトで `min_collection_interval` が `600` に設定されており、推奨される最小値は `120` です。必要に応じて `purefb.d/conf.yaml` ファイルで `min_collection_interval` を増やしたり減らしたりすることができます。
+For the `/clients`, and `/usage` endpoints, the Pure Storage FlashBlade check sets `min_collection_interval` to `600` by default , and the minimum recommended value is `120`. You may increase or decrease `min_collection_interval` in the `purefb.d/conf.yaml` file if necessary:
 
 ```yaml
 min_collection_interval: 600
 ```
 
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "purefb" >}}
 
 
-### ヘルプ
+### Events
 
-PureFB インテグレーションには、イベントは含まれません。
+The PureFB integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-このインテグレーションによって提供されるサービスチェックのリストについては、[service_checks.json][10] を参照してください。
+See [service_checks.json][10] for a list of service checks provided by this integration.
 
-## Agent
+## Support
 
-サポートまたは機能リクエストをご希望の場合は、以下の方法で Pure Storage にお問い合わせください。
-* メール: pure-observability@purestorage.com
-* Slack: [Pure Storage Code// Observability Channel][11]
+For support or feature requests, contact Pure Storage through the following methods:
+* Email: pure-observability@purestorage.com
+* Slack: [Pure Storage Code// Observability Channel][11].
 
 [1]: https://www.purestorage.com/products.html
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/PureStorage-OpenConnect/pure-fb-openmetrics-exporter
-[4]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[5]: https://docs.datadoghq.com/ja/agent/guide/community-integrations-installation-with-docker-agent
+[4]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[5]: https://docs.datadoghq.com/agent/guide/community-integrations-installation-with-docker-agent
 [6]: https://github.com/DataDog/integrations-extras/blob/master/purefb/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://github.com/DataDog/integrations-extras/blob/master/purefb/metadata.csv
 [10]: https://github.com/DataDog/integrations-extras/blob/master/purefb/assets/service_checks.json
 [11]: https://code-purestorage.slack.com/messages/C0357KLR1EU
+

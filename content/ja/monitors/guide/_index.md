@@ -1,54 +1,53 @@
 ---
-cascade:
-  algolia:
-    category: ガイド
-    rank: 20
-    subcategory: モニターガイド
-disable_toc: true
-kind: ガイド
+title: Monitor Guides
 private: true
-title: モニターガイド
+disable_toc: true
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Monitor Guides
 ---
 
-{{< whatsnext desc="アラート、ダウンタイム、メッセージ:" >}}
-    {{< nextlink href="monitors/guide/troubleshooting-monitor-alerts" >}}モニターアラートのトラブルシューティング{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/template-variable-evaluation" >}}テンプレート変数の評価{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}監視範囲{{< /nextlink >}}
-    {{< nextlink href="/monitors/guide/scoping_downtimes" >}}ダウンタイムの範囲設定{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}数値に変化がない場合のアラート{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/create-cluster-alert" >}}メトリクスモニターのクラスターアラートの作成{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/create-monitor-dependencies" >}}モニターの依存関係の作成{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/export-monitor-alerts-to-csv" >}}モニターアラートを CSV にエクスポートする{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting" >}}特定のタグがレポーティングを停止した場合のアラート設定{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/recovery-thresholds" >}}回復のしきい値{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}メトリクスモニターにおける "No Data" アラートの調整{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}ダウンタイム中のモニターによるアラートの発生を防ぐ{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}アラートのフラッピングを減少させる{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/monitoring-sparse-metrics" >}}スパースメトリクスの監視{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/best-practices-for-live-process-monitoring" >}}ライブプロセスモニタリングのベストプラクティス{{< /nextlink >}}
+{{< whatsnext desc="Alerts, Downtimes, and Messages:" >}}
+    {{< nextlink href="monitors/guide/troubleshooting-monitor-alerts" >}}Troubleshooting monitor alerts{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Template variable evaluation{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}Monitoring ranges{{< /nextlink >}}
+    {{< nextlink href="/monitors/guide/scoping_downtimes" >}}Scoping Downtimes{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/alert-on-no-change-in-value" >}}Alert on no change in value{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/create-cluster-alert" >}}Create cluster alerts for metric monitor{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/create-monitor-dependencies" >}}Create monitor dependencies{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/export-monitor-alerts-to-csv" >}}Export monitor alerts to CSV{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting" >}}Set up an alert for when a specific tag stops reporting{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/recovery-thresholds" >}}Recovery thresholds{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}Adjusting "No Data" alerts for metric Monitors{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}Prevent alerts from monitors that were in downtime{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Reduce alert flapping{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitoring-sparse-metrics" >}}Monitoring Sparse Metrics{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/best-practices-for-live-process-monitoring" >}}Best practices for Live Process Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API:" >}}
-    {{< nextlink href="monitors/guide/monitor_api_options" >}}API オプションの監視{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor_api_options" >}}Monitor API options{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="一般ガイド:" >}}
-    {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}モニターの RBAC の設定方法{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}Synthetic テストでモニターを作成する方法{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/non_static_thresholds" >}}非静的しきい値の監視方法{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/anomaly-monitor" >}}異常モニター{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}エフェメラルサーバーの再起動を監視する{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}ローカルタイムゾーンを考慮した異常検出モニターの更新方法{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/history_and_evaluation_graphs" >}}モニター履歴と評価グラフ{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}モニター設定の変更が反映されない{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}モニターと Statuspage のインテグレーション{{< /nextlink >}}
-{{< nextlink href="monitors/guide/github_gating" >}}GitHub Actions のデプロイを Datadog モニターで選別する{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/monitoring-available-disk-space" >}}利用可能なディスク容量を監視する{{< /nextlink >}}
+{{< whatsnext desc="General Guides:" >}}
+    {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}How to set up RBAC for monitors{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}How to create monitors in synthetic tests{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/non_static_thresholds" >}}How to monitor non-static thresholds{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/anomaly-monitor" >}}Anomaly monitors{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Monitor ephemeral servers for reboots{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/how-to-update-anomaly-monitor-timezone" >}}How to update an anomaly detection monitor to account for local timezone{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/history_and_evaluation_graphs" >}}Monitor History and Evaluation Graph{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}Monitor settings changes not taking effect{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrate monitors with Statuspage{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitoring-available-disk-space" >}}Monitoring Available Disk Space{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="クエリ:" >}}
-    {{< nextlink href="/monitors/guide/custom_schedules" >}}カスタムスケジュールを追加してモニターの評価頻度をカスタマイズする{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}算術演算とスパースメトリクスの監視{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() を使用したモニター評価{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/monitor_aggregators" >}}アグリゲーターの監視{{< /nextlink >}}
+{{< whatsnext desc="Querying:" >}}
+    {{< nextlink href="/monitors/guide/custom_schedules" >}}Add custom schedules to customize monitor evaluation frequencies{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}Monitor arithmetic and sparse metrics{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() monitor evaluations{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor_aggregators" >}}Monitor aggregators{{< /nextlink >}}
 {{< /whatsnext >}}

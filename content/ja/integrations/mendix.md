@@ -1,107 +1,107 @@
 ---
-app_id: mendix
-app_uuid: 4119b134-c828-4e14-95b5-585bb13d314a
-assets:
-  dashboards:
-    Mendix Application Overview: assets/dashboards/MendixApplicationOverview.json
-  integration:
-    auto_install: true
-    metrics:
-      check: mx.database.diskstorage_size
-      metadata_path: metadata.csv
-      prefix: mx.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10344
-    source_type_name: Mendix
-author:
-  homepage: https://mendix.com/
-  name: Mendix
-  sales_email: mxsupport@mendix.com
-  support_email: mxsupport@mendix.com
-categories:
-- クラウド
-- 自動化
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/mendix/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: mendix
-integration_id: mendix
-integration_title: Mendix
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: mendix
-public_title: Mendix
-short_description: Mendix 環境メトリクスの監視
-supported_os:
+"app_id": "mendix"
+"app_uuid": "4119b134-c828-4e14-95b5-585bb13d314a"
+"assets":
+  "dashboards":
+    "Mendix Application Overview": assets/dashboards/MendixApplicationOverview.json
+  "integration":
+    "auto_install": true
+    "metrics":
+      "check": mx.database.diskstorage_size
+      "metadata_path": metadata.csv
+      "prefix": mx.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10344"
+    "source_type_name": Mendix
+"author":
+  "homepage": "https://mendix.com/"
+  "name": Mendix
+  "sales_email": mxsupport@mendix.com
+  "support_email": mxsupport@mendix.com
+"categories":
+- cloud
+- automation
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/mendix/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "mendix"
+"integration_id": "mendix"
+"integration_title": "Mendix"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "mendix"
+"public_title": "Mendix"
+"short_description": "Monitor Mendix environment metrics"
+"supported_os":
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Windows
-  - Category::Cloud
-  - Category::Automation
-  - Offering::Integration
-  - Submitted Data Type::Metrics
-  configuration: README.md#Setup
-  description: Mendix 環境メトリクスの監視
-  media:
-  - caption: Page Editor
-    image_url: images/page-editor.png
-    media_type: image
-  - caption: データハブによるドメインモデル
-    image_url: images/domain-model-with-data-hub.png
-    media_type: image
-  - caption: リソースパックのクラウド開発者向けポータルビュー
-    image_url: images/cloud_resource_pack_overview.png
-    media_type: image
-  - caption: Mendix アプリケーション概要ダッシュボード
-    image_url: images/mendix_dashboard.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Mendix
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Windows"
+  - "Category::Cloud"
+  - "Category::Automation"
+  - "Offering::Integration"
+  - "Submitted Data Type::Metrics"
+  "configuration": "README.md#Setup"
+  "description": Monitor Mendix environment metrics
+  "media":
+  - "caption": Page Editor
+    "image_url": images/page-editor.png
+    "media_type": image
+  - "caption": Domain model with Data Hub
+    "image_url": images/domain-model-with-data-hub.png
+    "media_type": image
+  - "caption": Cloud developer portal view of resource packs
+    "image_url": images/cloud_resource_pack_overview.png
+    "media_type": image
+  - "caption": Mendix Application Overview dashboard
+    "image_url": images/mendix_dashboard.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Mendix
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[Mendix][1] は、開発者が Mendix Platform 上でアプリを構築するために使用できる[ローコード IDE][2] とビジュアルモデル駆動型開発環境です。
+[Mendix][1] is a [low-code IDE][2] and a visual model-driven development environment that developers can use to build apps on the Mendix Platform.
 
-Mendix では、アプリケーションの作成、変更、インテグレーション、テスト、デプロイを簡単に行うことができます。また、組み込みのエディタを使って、分岐線やセキュリティを管理したり、カスタムコードでアプリを拡張することができます。
+With Mendix, you can easily create, change, integrate, test, and deploy your applications. You can manage branch lines and security as well as extend your app with custom code by using the built-in editors.
 
-[Mendix インテグレーション][3]では、Mendix ランタイムメトリクス、Java 仮想マシン (JVM) メトリクス、データベース、SaaS (Software as a Service) 環境メトリクスなど、Mendix エコシステムをモニタリングすることができます。Mendix Studio Pro で Datadog に送信するメトリクスをカスタマイズできます。
+[The Mendix integration][3] allows you to monitor your Mendix ecosystem, including Mendix Runtime metrics, Java Virtual Machine (JVM) metrics, database, SaaS(Software as a Service) environment metrics. Customize the metrics you send to Datadog in Mendix Studio Pro.
 
-**注**: このインテグレーションは、Mendix Cloud および Mendix Cloud Dedicated のデプロイメントモデルに適用されます。
+**Note**: This integration is applicable to Mendix Cloud and Mendix Cloud Dedicated deployment models.
 
-## 計画と使用
+## Setup
 
-Mendix Cloud 上で動作する Mendix アプリケーションの Datadog インテグレーションを有効にするには、[Datadog for Mendix cloud のドキュメント][4]をご覧ください。
-
-
-## リアルユーザーモニタリング
-
-### データセキュリティ
-
-インテグレーションを有効にすると利用できるメトリクスの一覧は、[Mendix 公式ドキュメント][5]をご覧ください。
-
-### ヘルプ
-
-Mendix インテグレーションには、イベントは含まれません。
-
-### ヘルプ
-
-Mendix インテグレーションには、サービスのチェック機能は含まれません。
+To enable the Datadog integration for Mendix applications running on Mendix Cloud, see the [Datadog for Mendix cloud documentation][4].
 
 
-## ヘルプ
+## Data Collected
 
-ご不明な点は、[Mendix サポート][6]までお問い合わせください。
+### Metrics
+
+For a list of metrics available once the integration is enabled, see the [official Mendix documentation][5].
+
+### Events
+
+The Mendix integration does not include any events.
+
+### Service Checks
+
+The Mendix integration does not include any service checks.
+
+
+## Troubleshooting
+
+Need help? Contact [Mendix support][6].
 
 [1]: https://mendix.com/
 [2]: https://www.mendix.com/blog/a-low-code-leader-composing-the-modern-enterprise-with-mendix/
@@ -109,3 +109,4 @@ Mendix インテグレーションには、サービスのチェック機能は�
 [4]: https://docs.mendix.com/developerportal/operate/datadog-metrics/#2-setting-up-datadog-for-your-mendix-app
 [5]: https://docs.mendix.com/developerportal/operate/monitoring-with-apm/#environment
 [6]: https://support.mendix.com/hc/en-us
+

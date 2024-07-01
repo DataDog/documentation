@@ -1,71 +1,72 @@
 ---
-categories:
-- Collaboration
-- issue tracking
-dependencies: []
-description: イベントストリームで、新規、オープン、保留中、解決済みのケースを確認および議論。
-doc_link: https://docs.datadoghq.com/integrations/desk/
-draft: false
-git_integration_title: desk
-has_logo: true
-integration_id: desk
-integration_title: Desk
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: desk
-public_title: Datadog-Desk インテグレーション
-short_description: イベントストリームで、新規、オープン、保留中、解決済みのケースを確認および議論。
-team: web-integrations
-version: '1.0'
+"categories":
+- "Collaboration"
+- "issue tracking"
+"custom_kind": "integration"
+"dependencies": []
+"description": "See and discuss new, open, pending, and resolved cases in your event stream."
+"doc_link": "https://docs.datadoghq.com/integrations/desk/"
+"draft": false
+"git_integration_title": "desk"
+"has_logo": true
+"integration_id": "desk"
+"integration_title": "Desk"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "desk"
+"public_title": "Datadog-Desk Integration"
+"short_description": "See and discuss new, open, pending, and resolved cases in your event stream."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Desk を Datadog に接続すると、Salesforce サポートケースのデータをすぐに使えるダッシュボードで表示することができます。ダッシュボードでは以下のことが可能です。
+Connect Desk to Datadog to view your Salesforce support case data in an OOTB dashboard. The dashboard allows you to:
 
-- イベントストリームで新しいケースイベントをテールできます
-- ユーザーおよびステータス別にケース統計を可視化できます。
-- サポートチケットの傾向と DevOps の問題を並べて表示できます。
+- Tail new case events in the event stream
+- Visualize case stats by user and status
+- View trends in support tickets alongside DevOps issues
 
-詳細については、[Salesforce Desk インテグレーションを利用して、サポートを情報面で一致させる][1]をご覧ください。
+For more information, see [Keep support on the same page with the Salesforce Desk integration][1].
 
-## 計画と使用
+## Setup
 
-### ブラウザトラブルシューティング
+### Configuration
 
-Desk アカウントから、Settings -> API -> My Applications ページで API アプリケーションを追加します (管理者特権が必要な場合があります)。
+From your Desk account, add an API application on the Settings -> API -> My Applications page (you may need administrator privileges).
 
-後者の 2 つの URL フィールドは空白のまま、図のようにフォームに入力します。Desk はアプリケーションキー、アプリケーションシークレット、API アクセストークン、API アクセストークンシークレットを生成します。
+Fill out the form as shown, leaving the latter two URL fields blank. Desk should then generate an application key, application secret, API access token, and API access token secret.
 
-{{< img src="integrations/desk/desk_config.png" alt="Desk コンフィグ" popup="true">}}
+{{< img src="integrations/desk/desk_config.png" alt="desk config" popup="true">}}
 
-次に、Datadog アカウントから、対応する情報を [Desk タイル][2]、および会社固有の Desk ドメイン名を入力します。インストールボタンを押すと、設定が完了します。
+Then from your Datadog account, enter the corresponding information on the [Desk tile][2] along with your company's unique Desk domain name. Hit the install button, and then you're all set.
 
-インストール後、カスタムダッシュボードで `desk.*` メトリクスを選択するか、提供されている [Desk ダッシュボード][3]で表示することができます。
+After installation, you can select `desk.*` metrics on a custom dashboard or view them on the provided [Desk dashboard][3].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "desk" >}}
 
 
-### ヘルプ
+### Events
 
-Desk インテグレーションには、イベントは含まれません。
+The Desk integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Desk インテグレーションには、サービスのチェック機能は含まれません。
+The Desk integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
 [1]: https://www.datadoghq.com/blog/keep-support-team-page-salesforce-desk-integration
 [2]: https://app.datadoghq.com/integrations/desk
 [3]: https://app.datadoghq.com/screen/integration/desk
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/desk/desk_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

@@ -1,69 +1,70 @@
 ---
-categories:
-- collaboration
-- notifications
-dependencies: []
-description: Datadog のアラートとグラフをチームの Chatwork ルームに送信。
-doc_link: https://docs.datadoghq.com/integrations/chatwork/
-draft: false
-git_integration_title: chatwork
-has_logo: true
-integration_id: chatwork
-integration_title: Chatwork
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: chatwork
-public_title: Datadog-Chatwork インテグレーション
-short_description: Datadog のアラートとグラフをチームの Chatwork ルームに送信。
-version: '1.0'
+"categories":
+- "collaboration"
+- "notifications"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Send Datadog alerts and graphs to your team's Chatworks room."
+"doc_link": "https://docs.datadoghq.com/integrations/chatwork/"
+"draft": false
+"git_integration_title": "chatwork"
+"has_logo": true
+"integration_id": "chatwork"
+"integration_title": "Chatwork"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "chatwork"
+"public_title": "Datadog-Chatwork Integration"
+"short_description": "Send Datadog alerts and graphs to your team's Chatworks room."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/chatwork/chatwork_event.png" alt="Chatwork イベント" popup="true">}}
+{{< img src="integrations/chatwork/chatwork_event.png" alt="Chatwork Event" popup="true">}}
 
-## 概要
+## Overview
 
-Chatwork と統合すると、以下のことが可能です。
+Integrate with Chatwork to:
 
-- ストリームでポストが行われたときに通知を受けることができます。
-- メトリクスアラートがトリガーされたときに通知を受けることができます。
+- Be notified when someone posts on your stream.
+- Be notified when a metric alert is triggered.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-1. まず、Datadog 更新をポストする ChatWork オーガニゼーションアカウントに Datadog ユーザーを作成します。
-2. Chatwork API は現在プレビュー段階なので、[アクセスを申請する][1]必要があります。
-3. 確認の電子メールを待ちます (最大 2 日かかります)。
-4. [この手順][2]を実行してトークンを取得します。
-5. トークンをこの[フィールド][3]にコピーします。
-6. アクセスするチャット名と ID を入力します。(ID はチャットルームの URL に示されています)
-7. すべてのコメントについての通知を受ける場合は、チェックボックスをオンにします。それ以外の場合は、`@chatwork-chat_namesyntax` を使用する必要があります。
-   {{< img src="integrations/chatwork/chatwork_tile.png" alt="Chatwork タイル" popup="true">}}
+1. First, create a Datadog user in your Chatwork organization account for posting Datadog updates.
+2. The Chatwork API is still in preview, so you have to [ask for an access][1].
+3. Wait for the confirmation email (can take up to 2 days).
+4. Follow [these instructions][2] to get a token.
+5. Copy it into this [field][3].
+6. Enter the chat names and ids you want to access. (ids can be found in the URL of chatrooms)
+7. Tick the checkbox if you want to be notified for every comment, otherwise you need to use the `@chatwork-chat_namesyntax`.
+   {{< img src="integrations/chatwork/chatwork_tile.png" alt="Chatwork tile" popup="true">}}
 
-8. [構成を保存します][3]
+8. [Save your configuration][3]
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 
-Chatwork インテグレーションには、メトリクスは含まれません。
+The Chatwork integration does not include metrics.
 
-### イベント
+### Events
 
-Chatwork インテグレーションには、イベントは含まれません。
+The Chatwork integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Chatwork インテグレーションには、サービスのチェック機能は含まれません。
+The Chatwork integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
 [1]: https://www.chatwork.com/login.php?redirect=apply_beta&package=chatwork&subpackage=api&args=
 [2]: http://developer.chatwork.com/ja/authenticate.html
 [3]: https://app.datadoghq.com/integrations/chatwork
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/help/
+

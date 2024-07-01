@@ -1,44 +1,44 @@
 ---
+title: Programmatically Access Log Data Using the Logs Search API
+kind: guide
 further_reading:
 - link: /logs/explorer/
   tag: Documentation
-  text: ログエクスプローラーの詳細
+  text: Learn more about Log Explorer
 - link: /logs/explorer/
   tag: Documentation
-  text: 検索構文の詳細
+  text: Learn more about Search Syntax
 - link: /logs/search_syntax/
   tag: Documentation
-  text: ログ検索 API 向け構文の詳細
-kind: ガイド
-title: ログ検索 API を使用してログデータにプログラマティックにアクセスする
+  text: Learn more about syntax for Logs Search API
 ---
 
 
-## 概要
+## Overview
 
-[ログ検索 API][1] を使用してログデータにプログラマティックにアクセスし、クエリを実行します。
+Use the [Logs Search API][1] to programmatically access your log data and execute queries.
 
-このガイドでは、以下の例についてご説明します、
+The following examples are covered in this guide:
 
-* [基本検索](#basic-search)
-* [ファセットまたはタイムスタンプでの並べ替え](#sort-by-facet-or-timestamp)
-* [取得した結果数の制限](#limit-the-number-of-results-retrieved)
-* [時間設定](#time-settings)
-* [ページ区切り](#pagination)
+* [Basic search](#basic-search)
+* [Sort by facet or timestamp](#sort-by-facet-or-timestamp)
+* [Limit the number of results retrieved](#limit-the-number-of-results-retrieved)
+* [Time settings](#time-settings)
+* [Pagination](#pagination)
 
-## 前提条件
+## Prerequisites
 
-- ログ検索 API の使用には、[API キー][2]と[アプリケーションキー][3]が必要です。アプリケーションキーを作成したユーザーは、データにアクセスするための適切な権限を所有する必要があります。以下の例を使用する場合は、`<DATADOG_API_KEY>` および `<DATADOG_APP_KEY>` を、それぞれご使用中の Datadog API キーおよび Datadog アプリケーションキーに置き換えます。
+- Use of the Logs Search API requires an [API key][2] and an [application key][3]. The user who created the application key must have the appropriate permission to access the data. To use the examples below, replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively.
 
-- このガイドでは `curl` の例を解説しています。[curl][4] をまだインストールしていない場合はインストールするか、[ログ API][1]でこの API エンドポイントについての他言語の例を参照してください。
+- This guide features `curl` examples. Install [curl][4] if you do not have it installed, or reference additional language examples for this API endpoint in the [Logs API][1].
 
-## 例
+## Examples
 
-### 基本検索
+### Basic search
 
-特定の期間内のすべてのログイベントを取得するには、以下の[検索構文][5]を使用して API コールを完了します。
+To retrieve all log events within a specific time period, use the following [Search Syntax][5] to complete the API call.
 
-`from` はログデータの `start time` を、`to` は `end time` を表します。`query` は実行すべき検索クエリを示します。
+`from` indicates the `start time` and `to` indicates the `end time` for the log data. `query` indicates the search query that must be executed.
 
 **API call:**
 
@@ -56,7 +56,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 **Response:**
 
-結果のデータセットは、以下の応答サンプルに示されるように `data` オブジェクトで構成されます。
+The result dataset is comprised of the `data` object, as depicted in the following example response.
 
 ```json
 
@@ -138,11 +138,11 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 ```
 
-### ファセットまたはタイムスタンプでの並べ替え
+### Sort by facet or timestamp
 
-#### ファセット
+#### Facet
 
-以下の API コールで、取得したログイベントを `pageViews`  などのファセットで昇順に並べ替えます。ファセットには `@` を含めるようにしてください。降順に並べ替える場合はファセット名の前にハイフン `-` を追加し、`-@pageViews` のような形で使用します。デフォルトの並び順はタイムスタンプの降順となります。
+With the following API call, sort your retrieved log events by a facet such as `pageViews` in ascending order. Include `@` for the facet. Use a `-` hyphen in front of the facet name such as `-@pageViews` to sort in descending order. The default sort order is descending order by timestamps.
 
 **API call:**
 
@@ -161,7 +161,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 **Response:**
 
-ログイベントは以下の応答にある通り、 `pageViews` ファセット値の昇順で取得されます。ユーザーごとのページビューはそれぞれ、`chris` が 450、`bob` が 500、`steve` が 700 です。
+Log events are retrieved in ascending order of the `pageViews` facet values as depicted in the following response. User `chris` has 450, `bob` has 500, and `steve` has 700 page views.
 
 ```json
 
@@ -243,9 +243,9 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 ```
 
-#### タイムスタンプ
+#### Timestamp
 
-以下の API コールで、取得したログイベントを `timestamp` で昇順に並べ替えます。デフォルト表示は降順です。
+With the following API call, your retrieved log events are sorted by `timestamp` in ascending order. The default is descending order.
 
 **API call:**
 
@@ -264,7 +264,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 **Response:**
 
-ログイベントは以下の応答にある通り、`timestamp` の値に基づいて昇順で取得されます。
+Log events are retrieved in ascending order based on their `timestamp` values as depicted in the following response.
 
 ```json
 
@@ -346,9 +346,9 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 ```
 
-### 取得した結果数の制限
+### Limit the number of results retrieved
 
-以下の API コールで、取得したログイベントの数を制限します。`limit` は該当する応答で返されたログイベントの最大数を表します。制限の最大値は `1000` です。
+With the following API call, limit the number of log events retrieved. The `limit` indicates the maximum number of log events returned in the response. The maximum limit is `1000`.
 
 ```bash
 
@@ -427,12 +427,12 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 ```
 
-### 時間設定
+### Time settings
 
-`from` および `to` パラメーターの定義は以下の通りです。
-- ISO-8601 文字列
-- Unix タイムスタンプ (Epoch 以降の経過ミリ秒を表す数)
-- 1 時間を加算する `+1h`、2 日を差し引く `-2d` など、日付の計算文字列。秒を表す `s`、 分を表す `m`、時間を表す `h`、日を表す `d` などが含まれます。オプションとして現在時刻を示す `now` も使用可能です。
+The `from` and `to` parameters can be:
+- an ISO-8601 string
+- a unix timestamp (number representing the elapsed millisec since epoch)
+- a date math string such as `+1h` to add one hour, `-2d` to subtract two days, etc. The full list includes `s` for seconds, `m` for minutes, `h` for hours, and `d` for days. Optionally, use `now` to indicate current time.
 
 ```javascript
 {
@@ -443,7 +443,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 }
 ```
 
-タイムゾーンはオフセット ("UTC+03:00" など) または地域ゾーン ("Europe/Paris" など) で指定することができます。オフセットとゾーンの両方が渡された場合は、オフセットが優先されます。オフセットは秒で指定する必要があります。
+The timezone can be specified both as an offset (for example, "UTC+03:00") or a regional zone (for example, "Europe/Paris"). If both offset and timezone are supplied then the offset takes precedence. The offset must be specified in seconds.
 
 ```javascript
 {
@@ -455,15 +455,15 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 ```
 
 
-### ページ区切り
+### Pagination
 
-`1000` の[ログ制限](#取得した結果数の制限)よりも長いログリストを取得するには、ページ区切り機能を使用します。
+To retrieve a log list longer than the `1000` [logs limit](#limit-the-number-of-results-retrieved), use the pagination feature. 
 
-`data` パラメーターは Log オブジェクトの配列であり、最大でクエリの `limit` パラメーターで定義された数のログが含まれます。このパラメーターはデフォルトで `50` ですが、最大 `1000` に設定できます。
+The `data` parameter is an array of Log objects and at maximum it contains as many logs as defined with the `limit` parameter in your query. This parameter is `50` by default, but can be set up to `1000`.
 
-ログの次のページを閲覧するには、前の呼び出しから `after` を取得する `cursor` パラメーターでクエリを再送信します。
+To see the next page of your logs, resend the query with the `cursor` parameter that takes the `after` value from the previous call.
 
-上記の JSON 例から、`after` の値 `eyJhZnRlciI6IkFRQUFBWFVBWFZOU3Z1TXZXd0FBQUFCQldGVkJXRlpPVTJJMlpXY3hYM2MyTFZWQlFRIiwidmFsdWVzIjpbIjUwMCJdfQ` を使用して次の 2 つの結果を取得します。
+From the above JSON example, use the `after` value `eyJhZnRlciI6IkFRQUFBWFVBWFZOU3Z1TXZXd0FBQUFCQldGVkJXRlpPVTJJMlpXY3hYM2MyTFZWQlFRIiwidmFsdWVzIjpbIjUwMCJdfQ` to get the next two results.
 
 ```bash
 
@@ -483,7 +483,7 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 ```
 **Response:**
 
-この応答では、次の 2 つの結果として 500 `pageviews` を持つ `joe` と、450 `pageviews` を持つ `chris` が取得されます。`data` が `null` を返したら、クエリに関連付けられたログのすべてのページが返ったことになります。
+In the response, the next two results, `joe` with 500 `pageviews` and `chris` with 450 `pageviews`, are retrieved. When you see `data` returns `null`, you have returned all pages of logs associated with your query.
 
 ```json
 {
@@ -543,14 +543,14 @@ curl -L -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/
 
 ```
 
-**注:** ページ区切りを使用する際は、相対的なタイムレンジを使用しないでください。検索結果が失われる可能性があります。
+**Note:** Avoid the use of relative timeranges when using pagination as it may lead to missing search results.
 
-### その他の参考資料
+### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/v2/logs/
-[2]: /ja/account_management/api-app-keys/#api-keys
-[3]: /ja/account_management/api-app-keys/#application-keys
+[1]: /api/v2/logs/
+[2]: /account_management/api-app-keys/#api-keys
+[3]: /account_management/api-app-keys/#application-keys
 [4]: https://curl.haxx.se/download.html
-[5]: /ja/account_management/rbac/permissions/?tab=ui#log-data-access
+[5]: /logs/explorer/search_syntax/

@@ -1,92 +1,132 @@
 ---
+title: Isolate Outliers in Monolithic Services
 further_reading:
 - link: /profiler
-  tag: ドキュメント
+  tag: Documentation
   text: Datadog Continuous Profiler
 - link: /profiler/compare_profiles/
-  tag: ドキュメント
-  text: プロファイルの比較
-title: モノリシックサービスで外れ値を隔離する
+  tag: Documentation
+  text: Comparing Profiles
 ---
 
-## 概要
+## Overview
 
-単一のサービスが複数の用途を持つモノリシックなアプリケーションのパフォーマンスを調査する場合、通常はコードベースのどの部分が最もリソースを多く使用しているかを突き止める必要があります。まず、APM サービスのページからトップのエンドポイントを表示してみるのが論理的かもしれませんが、そこで表示されるデータはリクエスト数とその継続時間に焦点を当てており、それらのリクエストがバックエンドで利用可能なコンピューティングリソースに与える影響は表示されません。
+When investigating the performance of a monolithic application--that is, a single service that has multiple uses--you usually need to find which parts of the code base are using the most resources. The APM Service page showing top endpoints might be a logical first place to look, but the data there is focused on the number of requests and their duration, not the impact those requests have on compute resources available on your backend. 
 
-代わりに、Continuous Profiler を使用して、エンドポイントの利用状況でフレームグラフを絞り込みます。これにより、リソースの消費量の多い上位のエンドポイントを特定し、エンドポイントごとに最もリソース使用量の多い関数を調べることができます。
+Instead, use the Continuous Profiler to filter flame graphs by endpoint usage. This allows you to identify the top resource-consuming endpoints and examine which functions use the most resources for each particular endpoint.
 
-このガイドでは、Datadog Continuous Profiler を使用して、こうした種類の問題を調べる方法を説明します。
+This guide describes how to use the Datadog Continuous Profiler to investigate these kinds of problems.
 
-## CPU バースト
+## CPU bursts
 
-パフォーマンス調査の最初のステップは、経時的なリソース使用量における異常値の特定です。サービス `product-recommendation` について、以下の過去 1 時間の CPU 使用率のグラフをご覧ください。
+The first step in a performance investigation is to identify anomalies in resource usage over time. Consider the following graph of CPU utilization over the past hour for the service `product-recommendation`:
 
-{{< img src="profiler/guide-monolithic-outliers/1-outliers-monolith-cpu-usage.png" alt="" style="width:100%;" >}}
+{{< img src="profiler/guide-monolithic-outliers/1-outliers-monolith-cpu-usage-2.png" alt="" style="width:100%;" >}}
 
-これにより、正確な根本原因まではわかりませんが、CPU 使用率の異常ピークを見ることができます。
+This doesn't provide the exact root cause, but you can see anomalous peaks in CPU usage. 
 
-**Show - Avg of** ドロップダウン (前の画像でハイライト表示) を選択し、グラフを `CPU Cores for Top Endpoints` に変更します。このグラフでは、アプリケーションの異なる部分が全体の CPU 使用率にどのように寄与しているかが示されています。
+Select the **Show - Avg of** dropdown (highlighted in the previous image) and change the graph to show `CPU Cores for Top Endpoints` instead. This graph shows how different parts of the application contribute to the overall CPU utilization:
 
-{{< img src="profiler/guide-monolithic-outliers/2-outliers-monolith-cpu-top-endpoints.png" alt="" style="width:100%;" >}}
-
-
-黄色のピークは、`GET /store_history` エンドポイントにおいて、先ほど特定した異常値に対応するいくつかの断続的な使用が見られることを示しています。ただし、これらのピークは、そのエンドポイントへのトラフィックの違いが原因かもしれません。さらなる洞察を得るために、プロファイルがどれだけの情報を提供できるかを理解するため、メトリクスを `CPU - Average Time Per Call for Top Endpoints` に変更します。
-
-{{< img src="profiler/guide-monolithic-outliers/3-outliers-monolith-cpu-avg-time-per-call.png" alt="" style="width:100%;" >}}
-
-更新されたグラフにより、CPU 使用率の急上昇が断続的に見られ、`GET /store_history` に対する呼び出しのたびに、CPU 時間として平均 3 秒を要していることが明らかになります。これは、急上昇がトラフィックの増加ではなく、リクエスト 1 回あたりの CPU 使用率の上昇によるものであることを示唆しています。
+{{< img src="profiler/guide-monolithic-outliers/2-outliers-monolith-cpu-top-endpoints-2.png" alt="" style="width:100%;" >}}
 
 
-## エンドポイントの影響を分離する
+The yellow peaks indicate that the `GET /store_history` endpoint has some intermittent usage corresponding to the anomalies identified earlier. However, the peaks might be due to differences in traffic to that endpoint. To understand if profiles can provide further insights, change the metric to `CPU - Average Time Per Call for Top Endpoints`:
 
-`GET /store_history` が呼び出されるたびに CPU 使用率が上昇する原因を特定するため、スパイクが発生している時点での、このエンドポイントのプロファイリングフレームグラフを調べます。`GET /store_history` で CPU 使用率の上昇が見られる時間範囲を選択し、プロファイリングページのスコープをその時間範囲に設定します。次に、Flame Graph 表示に切り替えて、その時点で CPU を利用しているメソッドを確認します。
+{{< img src="profiler/guide-monolithic-outliers/3-outliers-monolith-cpu-avg-time-per-call-2.png" alt="" style="width:100%;" >}}
 
-{{< img src="profiler/guide-monolithic-outliers/4-outliers-monolith-flame-graph.png" alt="画像の説明" style="width:100%;" >}}
+The updated graph reveals that there is an intermittent spike in CPU utilization where each call to `GET /store_history` takes on average three seconds of CPU time. This suggests the spikes aren't due to an increase in traffic, but instead an increase in CPU usage per request.
 
-`GET /store_history` エンドポイントで CPU をより多く使用する理由をより良く理解するには、前の画像でハイライトされたテーブルを参照してください。該当のエンドポイントが、上から 2 番目に表示されています。その行を選択し、フレームグラフのフォーカスを `GET /store_history` エンドポイントによって引き起こされる CPU 使用率に合わせます。
 
-ここで調査しているのはリクエスト 1 件あたりのリソース使用量なので、表の上にあるドロップダウンの値も `CPU Time per Endpoint Call` に変更します。これにより、1 分あたりの平均リソース使用量ではなく、そのエンドポイントに対する呼び出し 1 回当たりの平均リソース使用量が表示されます。
+## Isolate the impact of endpoints
 
-## フレームグラフの比較
+To determine the cause of increased CPU usage each time `GET /store_history` is called, examine the profiling flame graph for this endpoint during one of the spikes. Select a time range where `GET /store_history` is showing more CPU utilization and scope the profiling page to that time range. Then switch to the **Flame Graph** visualization to see the methods using the CPU at this time:
 
-グラフが正しい時間とエンドポイントのデータを表示しているため、CPU 使用率の急上昇を引き起こしている要因を特定するには十分なデータがあります。まだ確信が持てない場合は、急上昇が発生したときのフレームグラフを、使用率がより許容できるレベルだったときのものと比較することができます。
+{{< img src="profiler/guide-monolithic-outliers/4-outliers-monolith-flame-graph-2.png" alt="Your image description" style="width:100%;" >}}
 
-CPU 使用時間が多いメソッドに、急上昇時と通常使用時で違いがあるかどうかを見るためには、**Compare** (検索フィールドの隣) をクリックし、`Previous 15 minutes` を選択します。これで Comparison ビューが開きます。
+To better understand why the `GET /store_history` endpoint is using more CPU, refer to the table highlighted in the previous image, where the endpoint is second from the top. Select that row to focus the flame graph on the CPU utilization caused by the `GET /store_history` endpoint. 
 
-このビューには **A** 、**B** と書かれた 2 つのグラフが表示され、それぞれ `GET /store_history` 呼び出し 1 回あたりの CPU 使用率の時間範囲を表します。**A** のタイムセレクターを調整して、呼び出し 1 回あたりの CPU 使用率が低い期間に合わせます。
+Because you are investigating resource usage per request, also change the value in the dropdown at top of the table to `CPU Time per Endpoint Call`. This shows the average resource usage per call to that endpoint instead of the average resource usage per minute.
 
-{{< img src="profiler/guide-monolithic-outliers/5-outliers-monolith-compare-flame-graphs.png" alt="画像の説明" style="width:100%;" >}}
+## Comparing flame graphs
 
-この比較により、通常の CPU 使用率の時 (タイムフレーム **A**) には使用されておらず、急上昇発生時 (タイムフレーム **B**) に CPU 使用率に寄与している各種メソッドが明らかになります。前の画像で示されているとおり、`Product.loadAssets(int)` が急上昇を引き起こしています。
+With the graph displaying data for the correct time and endpoint, you should have enough data to determine what is causing the spike in CPU utilization. If you're still uncertain, you can compare the flame graph for the spike with a time when utilization was more acceptable.
 
-問題を修正するために、メソッドを最適化します。メソッドのコードを確認すると、シグネチャは `Product(int id, String name, boolean shouldLoadAssets)` であり、`GET /store_history` エンドポイントへのレスポンスにはアセットをロードする必要はありません。これは、コールスタックの上位に、`Product` コンストラクタに不適切にアセットをロードするよう指示するバグが存在することを示唆しています。
+To see if there are differences in which methods are using a lot of CPU time between a spike and normal usage, click **Compare** (next to the search field) and select `Previous 15 minutes`. This opens the Comparison view. 
 
-そのバグを修正して、前に見た時系列グラフを使用して、急上昇が解消されたことを確認します。
+The view shows two graphs, labeled **A** and **B**, each representing a time range for CPU utilization per `GET /store_history` call. Adjust the time selector for **A** so that it is scoped to a period with low CPU utilization per call:
 
-## オペレーションの影響を分離する (Java)
+{{< img src="profiler/guide-monolithic-outliers/5-outliers-monolith-compare-flame-graphs-2.png" alt="Your image description" style="width:100%;" >}}
 
-プロファイラーでは他の属性も利用可能です。たとえば、関数やスレッドではなく、オペレーション名を用いてフレームグラフをフィルタリングしたりグループ化したりできます。モノリシックなアプリケーションにおいて、これによりエンドポイント間でリソースが共有されている場合でも、CPU 集約的なリソースをより明確に特定できます。
+The comparison reveals the different methods causing CPU utilization during the spike (timeframe **B**) that are not used during normal CPU usage (timeframe **A**). As shown in the previous image,`Product.loadAssets(int)`, is causing the spikes.
 
-APM の `Trace operation` 属性を使えば、選択したエンドポイントのトレースと同じ細かさでフレームグラフの絞り込みとグループ化が可能です。これは、スレッドやメソッドの細かい粒度と、エンドポイント全体の大まかな粒度との間で、適切なバランスとなっています。オペレーションを分離するには、**CPU time by** ドロップダウンから `Trace Operation` を選択します。
+To fix the problem, optimize the method. Looking at the method code, the signature is `Product(int id, String name, boolean shouldLoadAssets)` and you do not need to load assets for the response to the `GET /store_history` endpoint. This implies that there is a bug further up the call stack that improperly instructs the `Product` constructor to load assets.
 
-{{< img src="profiler/guide-monolithic-outliers/7-outliers-monolith-trace-operation.png" alt="画像の説明" style="width:100%;" >}}
+Fix that bug and verify that the spikes go away, using the timeseries graphs discussed earlier.
 
-前の画像では、`ModelTraining` オペレーションが `GET /train` エンドポイントでの主要な用途よりも多くの CPU 時間を使用していることが分かりますので、それが他のどこかで使われているはずです。それがどこで使用されているかを特定するため、オペレーション名をクリックしてください。この例では、`ModelTraining` は `POST /update_model` によっても使用されています。
+## Isolate the impact of operations (Java)
 
-## 独自のビジネスロジックを分離する (Java)
+There are other attributes available in the profiler. For example, you can filter and group a flame graph by operation names, rather than by functions or threads. For monolithic applications, this can more clearly identify CPU-intensive resources, even if they are shared between endpoints.
 
-エンドポイントとオペレーションの分離は、デフォルトでプロファイルに利用可能ですが、異なるロジックを分離したい場合もあるでしょう。例えば、もしモノリスが特定の顧客に対して敏感な場合、プロファイルにカスタムフィルターを追加することができます。
+The APM `Trace operation` attribute lets you filter and group a flame graph with the same granularity as the traces for the selected endpoints. This is a good balance between the high granularity of threads or methods, and the low granularity of entire endpoints. To isolate operations, select `Trace Operation` from the **CPU time by** dropdown: 
 
-{{< code-block lang="java" >}}
+{{< img src="profiler/guide-monolithic-outliers/7-outliers-monolith-trace-operation-2.png" alt="Your image description" style="width:100%;" >}}
+
+In the previous image, notice that the `ModelTraining` operation is taking more CPU time than its primary use in the `GET /train` endpoint, so it must be used elsewhere. Click the operation name to determine where else it is used. In this case, `ModelTraining` is also use by `POST /update_model`.
+
+
+## Isolate your own business logic
+
+Endpoint and operation isolation is available in your profiles by default, but you may want to isolate a different piece of logic. For example, if the monolith is sensitive to specific customers, you can add a custom filter to the profiles:
+
+{{< programming-lang-wrapper langs="java,go" >}}
+{{< programming-lang lang="java">}}
+
+
+Set a context value for the customer name like so:
+
+```java
 try (var scope = Profiling.get().newScope()) {
    scope.setContextValue("customer_name", <the customer name value>);
    <logic goes here>
 }
-{{< /code-block >}}
+```
+
+To specify which label keys you want to use for filtering, set the `profiling.context.attributes` configuration with one of the following:
+* Environment variable: `DD_PROFILING_CONTEXT_ATTRIBUTES=customer_name`
+* System setting: `-Ddd.profiling.context.attributes=customer_name`
+
+If you have multiple context keys, use a comma-separated string for the configuration (for example,`-Ddd.profiling.context.attributes=customer_name,customer_group`).
+
+Then, open CPU, Exceptions, or Wall Time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
+
+{{< /programming-lang >}}
+{{< programming-lang lang="go">}}
+
+The Go profiler supports custom annotations for your business logic as of version v1.60.0. To add annotations, use [profiler labels][1] like so:
+
+```go
+pprof.Do(ctx, pprof.Labels("customer_name", <value>), func(context.Context) {
+  /* customer-specific logic here */
+})
+```
+
+To specify which label keys you want to use for filtering, add the [WithCustomProfilerLabelKeys][2] option when starting the profiler:
+
+```go
+profiler.Start(
+  profiler.WithCustomProfilerLabelKeys("customer_name"),
+  /* other options */
+)
+```
+
+Then, open CPU or goroutine profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
+
+[1]: https://pkg.go.dev/runtime/pprof#Do
+[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
 
 
-
-
-## 参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

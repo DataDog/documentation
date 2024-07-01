@@ -1,6 +1,6 @@
 ---
-core_product:
-- infrastructure monitoring
 title: Amazon Elastic Kubernetes Service (EKS)
+core_product:
+  - infrastructure monitoring
 ---
-EKS はマネージド Kubernetes サービスです。
+EKS is a managed Kubernetes service.

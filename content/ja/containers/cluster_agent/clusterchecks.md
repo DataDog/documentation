@@ -1,56 +1,42 @@
 ---
+title: Cluster Checks
 aliases:
-- /ja/agent/autodiscovery/clusterchecks
-- /ja/agent/faq/kubernetes-state-cluster-check
-- /ja/agent/cluster_agent/clusterchecks
+    - /agent/autodiscovery/clusterchecks
+    - /agent/faq/kubernetes-state-cluster-check
+    - /agent/cluster_agent/clusterchecks
 further_reading:
-- link: /containers/cluster_agent/
-  tag: ドキュメント
-  text: Datadog Cluster Agent
-- link: /containers/troubleshooting/cluster-and-endpoint-checks
-  tag: ドキュメント
-  text: クラスターチェックのトラブルシューティング
-- link: /containers/guide/clustercheckrunners
-  tag: ドキュメント
-  text: クラスターチェックランナー
-title: クラスターチェック
+    - link: /containers/cluster_agent/
+      tag: Documentation
+      text: Datadog Cluster Agent
+    - link: /containers/troubleshooting/cluster-and-endpoint-checks
+      tag: Documentation
+      text: Troubleshooting Cluster Checks
+    - link: /containers/guide/clustercheckrunners
+      text: Cluster Check Runners
+      tag: Documentation
 ---
 
-## 概要
+## Overview
 
-Datadog Agent は、[オートディスカバリーメカニズム][1]を用いてコンテナを自動的に発見し、チェック構成を作成します。
+The Datadog Agent automatically discovers containers and creates check configurations by using the [Autodiscovery mechanism][1].
 
-_クラスターチェック_は機能を拡張し、次のようなコンテナ化されていないワークロードを監視します。
+_Cluster checks_ extend this mechanism to monitor noncontainerized workloads, including:
 
-- データストアとエンドポイントがクラスターの外部で実行された (例えば、RDS や CloudSQL)。
-- 負荷分散型クラスターサービス (例: Kubernetes サービス)
+- Datastores and endpoints ran outside of the cluster (for example, RDS or CloudSQL).
+- Load-balanced cluster services (for example, Kubernetes services).
 
-これにより、ノードベースの Agent ポッド**ごとに**対応するチェックを実行するのではなく、各チェックの **1 つ**のインスタンスのみが実行されるようになります。[Cluster Agent][2] は構成を保持し、それをノードベースの Agent に動的にディスパッチします。Agent は 10 秒ごとに Cluster Agent に接続し、実行する構成を取得します。1 つの Agent が報告を停止した場合、Cluster Agent はその Agent をアクティブなプールから削除し、他の Agent に構成をディスパッチします。これにより、クラスターにノードが追加または削除されても、常にインスタンスが 1 つだけ実行されることになります。
+This ensures that only **one** instance of each check runs as opposed to **each** node-based Agent Pod running this corresponding check. The [Cluster Agent][2] holds the configurations and dynamically dispatches them to node-based Agents. The Agents connect to the Cluster Agent every ten seconds and retrieve the configurations to run. If an Agent stops reporting, the Cluster Agent removes it from the active pool and dispatches the configurations to other Agents. This ensures that one (and only one) instance always runs, even as nodes are added and removed from the cluster.
 
-クラスターチェックによって収集されたメトリクス、イベント、およびサービスチェックは、ホスト名は関連がないため、それ無しで送信されます。データのスコープやフィルタリングを実行できるように、`cluster_name` タグが追加されます。
+Metrics, events, and service checks collected by cluster checks are submitted without a hostname, as it is not relevant. A `cluster_name` tag is added, to allow you to scope and filter your data.
 
-インフラストラクチャーが高可用性 (HA) 向けに構成されている場合は、クラスターチェックを使用することをお勧めします。
+Using cluster checks is recommended if your infrastructure is configured for high availability (HA).
 
-## クラスターチェックのディスパッチを設定する
-セットアッププロセスでは、Cluster Agent でディスパッチ機能を有効にすることと、Agent が `clusterchecks` プロバイダーから構成を受け取る準備が整っていることを確認します。これが完了すると、マウントされたコンフィギュレーションファイルまたは Kubernetes サービスアノテーションを通じて、Cluster Agent に構成が渡されます。
+## Set up cluster check dispatching
+The setup process involves enabling the dispatching ability in the Cluster Agent, as well as ensuring the Agents are prepared to receive configurations from the `clusterchecks` provider. Once this is done, configurations are passed to the Cluster Agent through mounted configuration files or through Kubernetes service annotations.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-Cluster Agent の Helm デプロイメントでは、`datadog.clusterChecks.enabled` 構成キーによりクラスターチェックのディスパッチがデフォルトで有効になっています。
-```yaml
-datadog:
-  clusterChecks:
-    enabled: true
-  # (...)
-clusterAgent:
-  enabled: true
-  # (...)
-```
-
-これにより、Cluster Agent でのクラスターチェックの設定が有効になり、Kubernetes サービスアノテーション (`kube_services`) からの構成を処理できるようになります。
-{{% /tab %}}
-{{% tab "Operator" %}}
-クラスターチェックのディスパッチは、Cluster Agent の Operator デプロイメントで `spec.features.clusterChecks.enabled` 構成キーを使用して有効にします。
+{{% tab "Datadog Operator" %}}
+Cluster check dispatching is enabled in the Operator deployment of the Cluster Agent by using the `spec.features.clusterChecks.enabled` configuration key:
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -62,30 +48,45 @@ spec:
       enabled: true
 ```
 
-これにより、Cluster Agent でのクラスターチェックの設定が有効になり、Kubernetes サービスアノテーション (`kube_services`) からの構成を処理できるようになります。
+This enables the cluster check setup in the Cluster Agent and allows it to process configurations from the Kubernetes service annotations (`kube_services`).
 
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "Helm" %}}
+Cluster check dispatching is enabled by default in the Helm deployment of the Cluster Agent through the `datadog.clusterChecks.enabled` configuration key:
+```yaml
+datadog:
+  clusterChecks:
+    enabled: true
+  # (...)
+clusterAgent:
+  enabled: true
+  # (...)
+```
+
+This enables the cluster check setup in the Cluster Agent and allows it to process configurations from the Kubernetes service annotations (`kube_services`).
+{{% /tab %}}
+
+{{% tab "Manual (DaemonSet)" %}}
 ### Cluster Agent
 
-[Cluster Agent][1] を実行したら、Cluster Agent のデプロイメントを以下のように変更します。
+Once your [Cluster Agent][1] is running, make the following changes to the Cluster Agent deployment:
 
-1. 環境変数 `DD_CLUSTER_CHECKS_ENABLED` を `true` に設定します。
-2. クラスター名を `DD_CLUSTER_NAME` とします。メトリクスにスコープを当てるため、Datadog は全ての構成に `cluster_name` インスタンスタグとしてクラスター名を挿入します。
-3. サービス名が初期設定の `datadog-cluster-agent` と異なる場合は、サービス名が `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` の環境変数に反映されるようにします。
-4. Kubernetes サービスアノテーションからの構成を Cluster Agent で処理できるようにするには、環境変数 `DD_EXTRA_CONFIG_PROVIDERS` と `DD_EXTRA_LISTENERS` を **両方** `kube_services` に設定します。
+1. Set the environment variable `DD_CLUSTER_CHECKS_ENABLED` to `true`.
+2. Pass your cluster name as `DD_CLUSTER_NAME`. To help you scope your metrics, Datadog injects your cluster name as a `cluster_name` instance tag to all configurations.
+3. If the service name is different from the default `datadog-cluster-agent`, ensure the `DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME` environment variable reflects the service name.
+4. To enable the Cluster Agent to process configurations from the Kubernetes service annotations, set **both** `DD_EXTRA_CONFIG_PROVIDERS` and `DD_EXTRA_LISTENERS` environment variables to `kube_services`.
 
-### エージェント
+### Agent
 
-Datadog **Node** Agent で `clusterchecks` 構成プロバイダーを有効にします。それには 2 つの方法があります。
+Enable the `clusterchecks` configuration provider on the Datadog **Node** Agent. This can be done in two ways:
 
-- **推奨**: Agent DaemonSet の `DD_EXTRA_CONFIG_PROVIDERS` の環境変数を設定します。複数の値がある場合には、スペースで区切られたストリングになります。
+- **Recommended**: By setting the `DD_EXTRA_CONFIG_PROVIDERS` environment variable in your Agent DaemonSet. This takes a space-separated string if you have multiple values:
 
     ```text
     DD_EXTRA_CONFIG_PROVIDERS="clusterchecks"
     ```
 
-- または、`datadog.yaml` 構成ファイルに追加します。
+- Or adding it to the `datadog.yaml` configuration file:
 
     ```yaml
     config_providers:
@@ -93,24 +94,24 @@ Datadog **Node** Agent で `clusterchecks` 構成プロバイダーを有効に�
           polling: true
     ```
 
-[1]: /ja/agent/cluster_agent/setup/
+[1]: /agent/cluster_agent/setup/
 {{% /tab %}}
 {{< /tabs >}}
 
 
-**注**: クラスターチェックでは、Agent が報告するメトリクスは、クラスター中心のメトリクスであり、必ずしもホストベースのメトリクスではないため、特定のホスト名にはリンクされません。その結果、これらのメトリクスは、クラウドプロバイダーから継承されたものや Agent の環境変数 `DD_TAGS` によって追加されたものなど、そのホストに関連付けられたホストレベルのタグを継承しません。クラスターチェックメトリクスにタグを追加するには、`DD_CLUSTER_CHECKS_EXTRA_TAGS` 環境変数を使用します。
+**Note**: With cluster checks, the metrics reported by the Agent are not linked to a given hostname because they are meant to be cluster-centric metrics and not necessarily host-based metrics. As a result, these metrics do not inherit any host-level tags associated with that host, such as those inherited from a cloud provider or added by the Agent's `DD_TAGS` environment variable. To add tags to cluster check metrics, use the `DD_CLUSTER_CHECKS_EXTRA_TAGS` environment variable.
 
-### クラスターチェックランナー
+### Cluster check runners
 
-[Datadog Helm Chart][3] と [Datadog Operator][4] では、さらにクラスターチェックランナーをデプロイすることができます。これは、通常のノードベースの Agent にディスパッチする代わりに、ディスパッチしたクラスターチェックのみを実行するように構成された Datadog Agent の小さなセットのためのデプロイです。詳しくは、[クラスターチェックランナー][5]のガイドをご覧ください。
+The [Datadog Helm Chart][3] and the [Datadog Operator][4] additionally offer the possibility to deploy cluster check runners, which are a deployment for a small set of Datadog Agents configured to run these dispatched cluster checks only—instead of dispatching these to the normal node-based Agents. See the [Cluster Check Runner][5] guide for more details.
 
-### 高度なディスパッチ
+### Advanced dispatching
 
-Cluster Agent はクラスターチェックに対する高度なディスパッチロジックを使用することができます。これには、チェックインスタンスからの実行時間およびメトリクスサンプルが考慮されます。このロジックにより Cluster Agent はクラスターチェックランナー間のディスパッチと分散を最適化できます。
+The Cluster Agent can use an advanced dispatching logic for cluster checks, which takes into account the execution time and metric samples from check instances. This logic enables the Cluster Agent to optimize dispatching and distribution between cluster check runners.
 
-高度なディスパッチロジックを構成するには、Cluster Agent で `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` 環境変数を `true` に設定します。
+To configure advanced dispatching logic, set the `DD_CLUSTER_CHECKS_ADVANCED_DISPATCHING_ENABLED` environment variable to `true` for the Cluster Agent. See [Cluster Agent environment variables][15] for how to set environment variables in your Datadog Operator manifest or Helm chart.
 
-ノード Agent (またはクラスターチェックランナー) がチェックの統計情報を公開するように構成するためには、以下の環境変数が必要です。統計情報は Cluster Agent によって消費され、クラスターチェックのディスパッチロジックを最適化するために使用されます。
+The following environment variables are required to configure the node Agents (or cluster check runners) to expose their check stats. The stats are consumed by the Cluster Agent and are used to optimize the cluster checks' dispatching logic.
 
 ```yaml
   env:
@@ -122,41 +123,23 @@ Cluster Agent はクラスターチェックに対する高度なディスパッ
           fieldPath: status.podIP
 ```
 
-### カスタムチェック
-全てのノードベースの Agent によるチェックの実行が可能であれば、クラスターチェックとしての [Agent のカスタムチェック][6]の実行がサポートされています。これにより、カスタムチェックのコードは以下のようになります。
+### Custom checks
+Running [custom Agent checks][6] as cluster checks is supported, as long as all node-based Agents are able to run the check. This means your custom check code:
 
-- `clusterchecks` の構成プロバイダが有効になっている全てのノードベースの Agent にインストールされていること。
-- 全ての Agent にアクセス可能ではない、ローカルのリソースに依存**しない**こと。
+- Must be installed on all node-based Agents where the `clusterchecks` config provider is enabled.
+- Must **not** depend on local resources that are not accessible to all Agents.
 
-## チェック構成の設定
+## Setting up check configurations
 
-### コンフィギュレーションファイルからの構成
+### Configuration from configuration files
 
-リソースの URL または IP が変わらない場合 (例: 外部サービスエンドポイントまたはパブリック URL)、静的構成を YAML ファイルとして Cluster Agent に渡すことができます。ファイル命名規則と構文はノードベースの Agent に対する静的構成と同じですが、必須の `cluster_check: true` 行が追加されています。
+When the URL or IP of a given resource is constant (for example, an external service endpoint or a public URL), a static configuration can be passed to the Cluster Agent as YAML files. The file name convention and syntax are the same as the static configurations on the node-based Agent, with the required addition of the `cluster_check: true` line.
 
-Cluster Agent v1.18.0 からは、Kubernetes サービスを対象としたチェック構成で、`advanced_ad_identifiers` と[オートディスカバリーテンプレート変数][7]を使用できます ([例をご参照ください][8])。
+In Cluster Agent v1.18.0+, you can use `advanced_ad_identifiers` and [Autodiscovery template variables][7] in your check configuration to target Kubernetes services ([see example][8]).
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-Helm では、これらのコンフィギュレーションファイルは `clusterAgent.confd` セクション内に作成することができます。
-
-```yaml
-#(...)
-clusterAgent:
-  confd:
-    <INTEGRATION_NAME>.yaml: |-
-      cluster_check: true
-      init_config:
-        - <INIT_CONFIG>
-      instances:
-        - <INSTANCES_CONFIG>
-```
-
-**注**: これは、ノードベースの Agent でファイルを作成する `datadog.confd` セクションとは別のものです。`<INTEGRATION_NAME>` は、実行したいインテグレーションチェックと正確に一致させる必要があります。
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-Datadog Operator では、これらのコンフィギュレーションファイルは `spec.override.clusterAgent.extraConfd.configDataMap` セクション内に作成することができます。
+{{% tab "Datadog Operator" %}}
+With the Datadog Operator, these configuration files can be created within the `spec.override.clusterAgent.extraConfd.configDataMap` section:
 
 ```yaml
 spec:
@@ -173,7 +156,7 @@ spec:
               - <INSTANCES_CONFIG>
 ```
 
-あるいは、静的コンフィギュレーションファイルを格納する ConfigMap を作成し、`spec.override.clusterAgent.extraConfd.configMap` フィールドを使用してこの ConfigMap を Cluster Agent にマウントすることができます。
+Alternatively, you can create a ConfigMap to store the static configuration file and mount this ConfigMap to the Cluster Agent using the `spec.override.clusterAgent.extraConfd.configMap` field:
 
 ```yaml
 spec:
@@ -203,8 +186,26 @@ data:
 ```
 
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
-手動で行う場合は、必要な静的コンフィギュレーションファイルを格納する ConfigMap を作成し、続いて Cluster Agent コンテナの対応する `/conf.d` ファイルにこの ConfigMap をマウントする必要があります。これは、[ConfigMap を Agent コンテナにマウントする][1]のと同じアプローチに従います。例:
+{{% tab "Helm" %}}
+With Helm, these configuration files can be created within the `clusterAgent.confd` section.
+
+```yaml
+#(...)
+clusterAgent:
+  confd:
+    <INTEGRATION_NAME>.yaml: |-
+      cluster_check: true
+      init_config:
+        - <INIT_CONFIG>
+      instances:
+        - <INSTANCES_CONFIG>
+```
+
+**Note**: This is separate from the `datadog.confd` section, where the files are created in the node-based Agents. The `<INTEGRATION_NAME>` must exactly match the desired integration check you want to run.
+
+{{% /tab %}}
+{{% tab "Manual (DaemonSet)" %}}
+With the manual approach you must create a ConfigMap to store the desired static configuration files, and then mount this ConfigMap into the corresponding `/conf.d` file of the Cluster Agent container. This follows the same approach for [mounting ConfigMaps into the Agent container][1]. For example:
 
 ```yaml
 kind: ConfigMap
@@ -220,7 +221,7 @@ data:
       <INSTANCES_CONFIG>
 ```
 
-次に、Cluster Agent デプロイメントのマニフェストで、`ConfigMap` とデータの対応するキーに関連して、`volumeMounts` と `volumes` を定義します。
+Then, in the manifest for the Cluster Agent deployment, define the `volumeMounts` and `volumes` with respect to your `ConfigMap` and the corresponding key of your data.
 
 ```yaml
         volumeMounts:
@@ -236,16 +237,16 @@ data:
                 path: <INTEGRATION_NAME>.yaml
           #(...)
 ```
-これは、Cluster Agent の `/conf.d/` ディレクトリに、インテグレーションに対応するファイルを作成します。例: `/conf.d/mysql.yaml` または `/conf.d/http_check.yaml`。
+This creates a file in the `/conf.d/` directory of the Cluster Agent corresponding to the integration. For example: `/conf.d/mysql.yaml` or `/conf.d/http_check.yaml`.
 
 
-[1]: /ja/agent/kubernetes/integrations/?tab=configmap#configuration
+[1]: /agent/kubernetes/integrations/?tab=configmap#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 例: 外部でホストされているデータベースの MySQL チェック
+#### Example: MySQL check on an externally hosted database
 
-CloudSQL や RDS など外部でホストされているデータベースと、それに対応する [Datadog ユーザー][9]を設定してデータベースにアクセスしたら、Cluster Agent コンテナに以下の内容の `/conf.d/mysql.yaml` ファイルをマウントしてください。
+After you set up an externally hosted database, such as CloudSQL or RDS, and a corresponding [Datadog user][9] to access the database, mount a `/conf.d/mysql.yaml` file in the Cluster Agent container with the following content:
 
 ```yaml
 cluster_check: true
@@ -257,9 +258,9 @@ instances:
       pass: "<YOUR_CHOSEN_PASSWORD>"
 ```
 
-#### 例: 外部 URL の HTTP_Check
+#### Example: HTTP_Check on an external URL
 
-クラスターごとに 1 回だけ [HTTP チェック][10]を行いたい URL がある場合は、Cluster Agent コンテナに以下の内容で `/conf.d/http_check.yaml` ファイルをマウントしてください。
+If there is a URL you would like to perform an [HTTP check][10] against once per cluster, mount a `/conf.d/http_check.yaml` file in the Cluster Agent container with the following content:
 
 ```yaml
 cluster_check: true
@@ -269,32 +270,12 @@ instances:
       url: "<EXAMPLE_URL>"
 ```
 
-#### 例: Kubernetes サービスでの HTTP_Check
-Kubernetes サービスで、クラスターごとに 1 回だけ [HTTP チェック][10]をさせたいものがある場合
+#### Example: HTTP_Check on a Kubernetes service
+If there is a Kubernetes service you would like the to perform an [HTTP check][10] against once per cluster:
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-`clusterAgent.confd` フィールドを使用して、チェックの構成を定義します。
-
-```yaml
-#(...)
-clusterAgent:
-  confd:
-    http_check.yaml: |-
-      advanced_ad_identifiers:
-        - kube_service:
-            name: "<SERVICE_NAME>"
-            namespace: "<SERVICE_NAMESPACE>"
-      cluster_check: true
-      init_config:
-      instances:
-        - url: "http://%%host%%"
-          name: "<EXAMPLE_NAME>"
-```
-
-{{% /tab %}}
-{{% tab "Operator" %}}
-チェック構成を定義するには、`spec.override.clusterAgent.extraConfd.configDataMap` フィールドを使用します。
+{{% tab "Datadog Operator" %}}
+Use the `spec.override.clusterAgent.extraConfd.configDataMap` field to define your check configuration:
 
 ```yaml
 spec:
@@ -315,8 +296,28 @@ spec:
                 name: "<EXAMPLE_NAME>"
 ```
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
-Cluster Agent コンテナに以下の内容で `/conf.d/http_check.yaml` ファイルをマウントします。
+{{% tab "Helm" %}}
+Use the `clusterAgent.confd` field to define your check configuration:
+
+```yaml
+#(...)
+clusterAgent:
+  confd:
+    http_check.yaml: |-
+      advanced_ad_identifiers:
+        - kube_service:
+            name: "<SERVICE_NAME>"
+            namespace: "<SERVICE_NAMESPACE>"
+      cluster_check: true
+      init_config:
+      instances:
+        - url: "http://%%host%%"
+          name: "<EXAMPLE_NAME>"
+```
+
+{{% /tab %}}
+{{% tab "Manual (DaemonSet)" %}}
+Mount a `/conf.d/http_check.yaml` file in the Cluster Agent container with the following content:
 
 ```yaml
 advanced_ad_identifiers:
@@ -333,16 +334,16 @@ instances:
 {{% /tab %}}
 {{< /tabs >}}
 
-**注:** フィールド `advanced_ad_identifiers` は、Datadog Cluster Agent v1.18 からサポートされるようになりました。
+**Note:** The field `advanced_ad_identifiers` is supported in Datadog Cluster Agent v1.18+.
 
-### Kubernetes のサービスアノテーションからの構成
+### Configuration from Kubernetes service annotations
 
 {{< tabs >}}
 {{% tab "Kubernetes (AD v2)" %}}
 
-**注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
+**Note:** AD Annotations v2 was introduced in Datadog Agent 7.36 to simplify integration configuration. For previous versions of the Datadog Agent, use AD Annotations v1.
 
-サービスにアノテーションするための構文は、[Kubernetes ポッドにアノテーションする][1]のと同様です。
+The syntax for annotating services is similar to that for [annotating Kubernetes Pods][1]:
 
 ```yaml
 ad.datadoghq.com/service.checks: |
@@ -354,11 +355,11 @@ ad.datadoghq.com/service.checks: |
   }
 ```
 
-この構文は `%%host%%` [テンプレート変数][11]をサポートしており、サービスの IP に置き換わります。インスタンスには `kube_namespace` と `kube_service` タグが自動的に追加されます。
+This syntax supports a `%%host%%` [template variable][11], which is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
 
-#### 例: NGINX によってホストされるサービスの HTTP チェック
+#### Example: HTTP check on an NGINX-backed service
 
-以下のサービス定義では、`my-nginx` デプロイからポッドを外部に出し、[HTTP チェック][10]を実行させて負荷分散サービスの待ち時間を測定します。
+The following service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
@@ -392,17 +393,17 @@ spec:
         run: my-nginx
 ```
 
-さらに、集約されたサービスだけではなく各ワーカーのモニターも可能なため、各ポッドは [NGINX チェック][12]によりモニターされます。
+In addition, each Pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
 
-[1]: /ja/agent/kubernetes/integrations/
-[10]: /ja/integrations/http_check/
-[11]: /ja/agent/faq/template_variables/
-[12]: /ja/integrations/nginx/
+[1]: /agent/kubernetes/integrations/
+[10]: /integrations/http_check/
+[11]: /agent/faq/template_variables/
+[12]: /integrations/nginx/
 {{% /tab %}}
 
 {{% tab "Kubernetes (AD v1)" %}}
 
-サービスにアノテーションするための構文は、[Kubernetes ポッドにアノテーションする][1]のと同様です。
+The syntax for annotating services is similar to that for [annotating Kubernetes Pods][1]:
 
 ```yaml
 ad.datadoghq.com/service.check_names: '[<INTEGRATION_NAME>]'
@@ -410,11 +411,11 @@ ad.datadoghq.com/service.init_configs: '[<INIT_CONFIG>]'
 ad.datadoghq.com/service.instances: '[<INSTANCE_CONFIG>]'
 ```
 
-この構文は `%%host%%` [テンプレート変数][11]をサポートしており、サービスの IP に置き換わります。インスタンスには `kube_namespace` と `kube_service` タグが自動的に追加されます。
+This syntax supports a `%%host%%` [template variable][11], which is replaced by the service's IP. The `kube_namespace` and `kube_service` tags are automatically added to the instance.
 
-#### 例: NGINX によってホストされるサービスの HTTP チェック
+#### Example: HTTP check on an NGINX-backed service
 
-以下のサービス定義では、`my-nginx` デプロイからポッドを外部に出し、[HTTP チェック][10]を実行させて負荷分散サービスの待ち時間を測定します。
+The following service definition exposes the Pods from the `my-nginx` deployment and runs an [HTTP check][10] to measure the latency of the load balanced service:
 
 ```yaml
 apiVersion: v1
@@ -445,19 +446,19 @@ spec:
         run: my-nginx
 ```
 
-さらに、集約されたサービスだけではなく各ワーカーのモニターも可能なため、各ポッドは [NGINX チェック][12]によりモニターされます。
+In addition, each Pod should be monitored with the [NGINX check][12], as it enables the monitoring of each worker as well as the aggregated service.
 
-[1]: /ja/agent/kubernetes/integrations/
-[10]: /ja/integrations/http_check/
-[11]: /ja/agent/faq/template_variables/
-[12]: /ja/integrations/nginx/
+[1]: /agent/kubernetes/integrations/
+[10]: /integrations/http_check/
+[11]: /agent/faq/template_variables/
+[12]: /integrations/nginx/
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## 検証
+## Validation
 
-Datadog Cluster Agent は、各クラスターチェックを実行するためにノード Agent にディスパッチします。[Datadog Cluster Agent の `clusterchecks` サブコマンド][13]を実行し、ノード Agent のホスト名の下にチェック名を探します。
+The Datadog Cluster Agent dispatches each cluster check to a node Agent to run. Run the [Datadog Cluster Agent's `clusterchecks` subcommand][13] and look for the check name under the node Agent's hostname:
 
 ```
 # kubectl exec <CLUSTER_AGENT_POD_NAME> agent clusterchecks
@@ -481,7 +482,7 @@ Init Config:
 ===
 ```
 
-ここで、[ノード Agent の `status` サブコマンド][14]を実行し、Checks セクションの下にあるチェック名を探します。
+Now, run the [node Agent's `status` subcommand][14] and look for the check name under the Checks section.
 
 ```
 # kubectl exec <NODE_AGENT_POD_NAME> agent status
@@ -496,21 +497,22 @@ Init Config:
       Average Execution Time : 90ms
 ```
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/kubernetes/integrations/
-[2]: /ja/agent/cluster_agent/
-[3]: /ja/agent/cluster_agent/clusterchecksrunner?tab=helm
-[4]: /ja/agent/cluster_agent/clusterchecksrunner?tab=operator
-[5]: /ja/containers/guide/clustercheckrunners
-[6]: /ja/developers/custom_checks/write_agent_check/
-[7]: /ja/agent/guide/template_variables/
-[8]: /ja/agent/cluster_agent/clusterchecks/#example-http_check-on-a-kubernetes-service
-[9]: /ja/integrations/mysql/
-[10]: /ja/integrations/http_check/
-[11]: /ja/agent/faq/template_variables/
-[12]: /ja/integrations/nginx/
-[13]: /ja/containers/troubleshooting/cluster-and-endpoint-checks#dispatching-logic-in-the-cluster-agent
-[14]: /ja/containers/cluster_agent/commands/#cluster-agent-commands
+[1]: /agent/kubernetes/integrations/
+[2]: /agent/cluster_agent/
+[3]: /agent/cluster_agent/clusterchecksrunner?tab=helm
+[4]: /agent/cluster_agent/clusterchecksrunner?tab=operator
+[5]: /containers/guide/clustercheckrunners
+[6]: /developers/custom_checks/write_agent_check/
+[7]: /agent/guide/template_variables/
+[8]: /agent/cluster_agent/clusterchecks/#example-http_check-on-a-kubernetes-service
+[9]: /integrations/mysql/
+[10]: /integrations/http_check/
+[11]: /agent/faq/template_variables/
+[12]: /integrations/nginx/
+[13]: /containers/troubleshooting/cluster-and-endpoint-checks#dispatching-logic-in-the-cluster-agent
+[14]: /containers/cluster_agent/commands/#cluster-agent-commands
+[15]: /containers/cluster_agent/commands/?tab=datadogoperator#cluster-agent-environment-variables

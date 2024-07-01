@@ -1,102 +1,102 @@
 ---
-app_id: amazon-api-gateway
-app_uuid: 431bfc66-cc6e-40c5-b7f0-dbb2990322c8
-assets:
-  dashboards:
-    Amazon API Gateway: assets/dashboards/aws_api_gateway_dashboard.json
-  integration:
-    auto_install: false
-    events:
-      creates_events: false
-    metrics:
-      check:
-      - aws.apigateway.latency
-      metadata_path: metadata.csv
-      prefix: aws.apigateway
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 166
-    source_type_name: Amazon API Gateway
-  monitors:
-    '[AWS] API Gateway Elevated 4XX Error Rate for REST API {{apiname.name}}': assets/monitors/rec_mon_4xx_errors.json
-    '[AWS] API Gateway Elevated 5XX Error Rate for REST API {{apiname.name}}': assets/monitors/rec_mon_5xx_errors.json
-    '[AWS] API Gateway High Response Time (latency) on {{apiname.name}}': assets/monitors/rec_mon_high_latency.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- aws
-- metrics
-- cloud
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: amazon_api_gateway
-integration_id: amazon-api-gateway
-integration_title: Amazon API Gateway
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: amazon_api_gateway
-public_title: Amazon API Gateway インテグレーション
-short_description: Amazon API Gateway は API のマネージドサービスです。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::AWS
-  - Category::Metrics
-  - Category::クラウド
-  configuration: README.md#Setup
-  description: Amazon API Gateway は API のマネージドサービスです。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Amazon API Gateway インテグレーション
+"app_id": "amazon-api-gateway"
+"app_uuid": "431bfc66-cc6e-40c5-b7f0-dbb2990322c8"
+"assets":
+  "dashboards":
+    "Amazon API Gateway": "assets/dashboards/aws_api_gateway_dashboard.json"
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": false
+    "metrics":
+      "check":
+      - "aws.apigateway.latency"
+      "metadata_path": "metadata.csv"
+      "prefix": "aws.apigateway"
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "166"
+    "source_type_name": "Amazon Api Gateway"
+  "monitors":
+    "[AWS] API Gateway Elevated 4XX Error Rate for REST API {{apiname.name}}": "assets/monitors/rec_mon_4xx_errors.json"
+    "[AWS] API Gateway Elevated 5XX Error Rate for REST API {{apiname.name}}": "assets/monitors/rec_mon_5xx_errors.json"
+    "[AWS] API Gateway High Response Time (latency) on {{apiname.name}}": "assets/monitors/rec_mon_high_latency.json"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "aws"
+- "metrics"
+- "cloud"
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "amazon_api_gateway"
+"integration_id": "amazon-api-gateway"
+"integration_title": "Amazon Api Gateway"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "amazon_api_gateway"
+"public_title": "Amazon Api Gateway Integration"
+"short_description": "Amazon API Gateway is a managed service for APIs."
+"supported_os": []
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::AWS"
+  - "Category::Metrics"
+  - "Category::Cloud"
+  "configuration": "README.md#Setup"
+  "description": "Amazon API Gateway is a managed service for APIs."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Amazon Api Gateway Integration"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## 概要
+## Overview
 
-Amazon API Gateway は、開発者があらゆる規模で API の作成、公開、保守、監視、およびセキュリティ保護を簡単に行えるフルマネージド型サービスです。
+Amazon API Gateway is a fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale.
 
-このインテグレーションを有効にすると、Datadog にすべての API Gateway メトリクスを表示できます。
+Enable this integration to see all of your API Gateway metrics in Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、セットアップします。
+If you haven't already, set up the [Amazon Web Services integration][1].
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `API Gateway` が有効になっていることを確認します。
+1. On the [AWS integration page][2], ensure that `API Gateway` is enabled under the `Metric Collection` tab.
 
-2. API Gateway ステージにカスタムタグを適用するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
+2. Add the following permissions to your [Datadog IAM policy][3] in order to get custom tags applied to API Gateway Stages:
 
     - `apigateway:GET`
     - `tag:GetResources`
 
-3. [Datadog - Amazon API Gateway インテグレーション][4]をインストールします。
+3. Install the [Datadog - Amazon API Gateway integration][4].
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
+Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-**注**: CloudWatch の詳細メトリクスを有効にしている場合、ステージ内のすべてのリソースまたはルートで有効にする必要があります。無効の場合、Datadog の集計値が不正確になります。
+**Note**: If you've enabled detailed CloudWatch metrics, you must enable them for all Resources or Routes within a Stage. Otherwise, aggregate values in Datadog will be incorrect.
 
-### 収集データ
+### Log collection
 
-API Gateway ログを有効にするには
+To enable API Gateway logging:
 
-1. AWS コンソールで API Gateway に移動します。
-2. 目的の API を選択し、Stages セクションに移動します。
-3. **Logs** タブで、**Enable CloudWatch Logs** と **Enable Access Logging** を有効にします。
-4. `INFO` レベルを選択して、すべてのリクエストが取得されるようにします。
-5. **CloudWatch Group** の名前が `api-gateway` で開始することを確認します。
-6. JSON 形式を選択し (CLF と CSV もサポートされています)、**Log format** ボックスに以下を追加します。
+1. Go to API Gateway in your AWS console.
+2. Select the wanted API and go to the Stages section.
+3. In the **Logs** tab, enable **Enable CloudWatch Logs** and **Enable Access Logging**.
+4. Select the `INFO` level to make sure you have all the requests.
+5. Make sure your **CloudWatch Group** name starts with `api-gateway`.
+6. Select the JSON format (CLF and CSV are also supported) and add the following in the **Log format** box:
 
     ```text
     {
@@ -115,38 +115,39 @@ API Gateway ログを有効にするには
     }
     ```
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. [Datadog ログコレクション AWS Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから手動で API Gateway ログを含む CloudWatch ロググループにトリガーを追加します。
-   対応する CloudWatch ロググループを選択し、フィルター名を追加して (空にすることも可能)、トリガーを追加します。
+1. If you haven't already, set up the [Datadog log collection AWS Lambda function][5].
+2. Once the Lambda function is installed, manually add a trigger on the CloudWatch Log group that contains your API Gateway logs in the AWS console.
+   Select the corresponding CloudWatch Log group, add a filter name (but feel free to leave the filter empty) and add the trigger.
 
-完了したら、[Logs ページ][6]に移動し、ログの検索を開始します。
+Once completed, navigate to the [Logs page][6] to start exploring your logs!
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_api_gateway" >}}
 
 
 
-### ヘルプ
+### Events
 
-Amazon API Gateway インテグレーションには、イベントは含まれません。
+The Amazon API Gateway integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Amazon API Gateway インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon API Gateway integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
 [4]: https://app.datadoghq.com/integrations/amazon-api-gateway
-[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
+[5]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function
 [6]: https://app.datadoghq.com/logs
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_api_gateway/amazon_api_gateway_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

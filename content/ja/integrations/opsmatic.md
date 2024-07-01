@@ -1,64 +1,65 @@
 ---
-categories:
-- notifications
-dependencies: []
-description: Datadog イベントストリームから Opsmatic アラートを参照および認識。
-doc_link: https://docs.datadoghq.com/integrations/opsmatic/
-draft: false
-git_integration_title: opsmatic
-has_logo: true
-integration_id: opsmatic
-integration_title: Opsmatic
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: opsmatic
-public_title: Datadog-Opsmatic インテグレーション
-short_description: Datadog イベントストリームから Opsmatic アラートを参照および認識。
-version: '1.0'
+"categories":
+- "notifications"
+"custom_kind": "integration"
+"dependencies": []
+"description": "See Opsmatic alerts and acknowledge them from your Datadog event stream."
+"doc_link": "https://docs.datadoghq.com/integrations/opsmatic/"
+"draft": false
+"git_integration_title": "opsmatic"
+"has_logo": true
+"integration_id": "opsmatic"
+"integration_title": "Opsmatic"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "opsmatic"
+"public_title": "Datadog-Opsmatic Integration"
+"short_description": "See Opsmatic alerts and acknowledge them from your Datadog event stream."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Opsmatic を Datadog に接続して、以下のことができます。
+Connect Opsmatic to Datadog to get:
 
-- 重大な変更に迅速に気付くことができます。
-- すべてのホストのライブ状態と履歴を完全に視覚化できます。
+- Instant awareness of any critical change
+- Full visibility of the live state and history of all your hosts
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Opsmatic のイベントを DataDog のストリームに表示するには、以下のようにします。
+To see Opsmatic events in your DataDog stream:
 
-1. DataDog API キーを Opsmatic のインテグレーションページに追加します。
-2. Opsmatic の通知が DataDog に送信されるように設定します。
+1. Add your DataDog API key to your Opsmatic Integrations page.
+2. Configure your Opsmatic notifications to go to DataDog.
 
-詳細については、[Opsmatic の Web サイトでガイド][1]を参照してください。
+Check out the [docs on the Opsmatic website for more information][1].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-Opsmatic インテグレーションタイルで **Install Integration** ボタンをクリックします。このインテグレーションの構成手順を行う必要があります。
+Click the **Install Integration** button on the Opsmatic Integration Tile. configuration steps are required for this integration.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Opsmatic インテグレーションには、メトリクスは含まれません。
+The Opsmatic integration does not include any metric.
 
-### ヘルプ
+### Events
 
-Opsmatic インテグレーションには、イベントは含まれません。
+The Opsmatic integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Opsmatic インテグレーションには、サービスのチェック機能は含まれません。
+The Opsmatic integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+Need help? Contact [Datadog support][2].
 
 [1]: https://opsmatic.com/app/docs/datadog-integration
-[2]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/help/
+

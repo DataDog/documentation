@@ -1,47 +1,45 @@
 ---
-title: ログ分析 API を使用したカスタムレポートの構築
-kind: ガイド
+title: Build custom reports using Log Analytics API
+kind: guide
 further_reading:
-  - link: /logs/explorer/analytics/?tab=timeseries#overview
-    tag: Documentation
-    text: ログ分析に関する詳細
-  - link: /api/v2/logs/#aggregate-events
-    tag: Documentation
-    text: ログ分析 API の構文
-  - link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
-    tag: Documentation
-    text: ページ区切りで複数のログを収集する
+- link: "/logs/explorer/analytics/?tab=timeseries#overview"
+  tag: Documentation
+  text: Learn more about Log Analytics
+- link: "/api/v2/logs/#aggregate-events"
+  tag: Documentation
+  text: Syntax for Log Analytics API
+- link: /logs/guide/collect-multiple-logs-with-pagination/?tab=v1api
+  tag: Documentation
+  text: Collect multiple logs with Pagination 
 ---
-## 概要
 
-[ログ分析 API][1] を使用すると、ビジネスや他のサービスの情報とログデータを併せたチームのカスタムレポートおよびダッシュボードをすばやく構築できます。
 
-このガイドでは、以下の例についてご説明します、
+## Overview
 
-* [カウントを取得する](#getting-counts)
-* [統計を取得する](#getting-stats)
-* [パーセンタイルを取得する](#getting-percentiles)
-* [複数のグループ化、ユニークカウント、メトリクス](#複数のグループ化、ユニークカウント、メトリクス) 
-* [ページ区切り](#pagination)
+Use the [Log Analytics API][1] to quickly build custom reports and dashboards for your team by combining information from your business and other services alongside log data.
 
-## 前提条件
+The following examples are covered in this guide:
 
-本ガイドは API の使用手順を説明するため、管理者ユーザーからの API キーとアプリケーションキーが必要となります。これらは [Datadog アカウントの API キーページ][2]にあります。
+* [Getting counts](#getting-counts)
+* [Getting stats](#getting-stats)
+* [Getting percentiles](#getting-percentiles)
+* [Multiple group-bys, unique counts, and metrics](#multiple-group-bys-unique-counts-and-metrics) 
+* [Pagination](#pagination)
 
-この記事をとおして、`<Datadog_API_キー >` および `<Datadog_アプリケーションキー >` はそれぞれご使用中の Datadog API キーおよび Datadog アプリケーションキーに置き換えて進めてください。
+## Prerequisites
 
-また、本ガイドでは `CURL` に対応するターミナルであることを前提としています。
+- Use of the Log Analytics API requires an [API key][2] and an [application key][3]. The user who created the application key must have the appropriate permission to access the data. To use the examples below, replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API key and your Datadog application key, respectively.
 
-**注:** Datadog EU サイトの場合、https://api.datadoghq.eu/api/  をエンドポイントとして使用してください。
+- This guide also assumes that you have a terminal with `curl`.
 
-## 例
+## Examples
 
-### 件数の取得
+### Getting counts
 
 {{< tabs >}}
 {{% tab "Table" %}}
 
-以下の API 呼び出しでは、`status` フィールドによりグループ化されたログイベントの `count` を含み、上位 3 項目を表示する `table` を構築します。`type` は `total` である必要があります。
+With the following API call, build a `table` with `count` of log events grouped by the field `status` and showing the top 3 items. The `type` must be `total`.
 
 **API call:**
 
@@ -74,7 +72,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 
 **Response:**
 
-結果のデータセットは、以下の応答サンプルに示されるように `buckets` オブジェクトで構成されます。この例では、`c0` は合計 `count` を表します。
+The result dataset comprises the `buckets` object as shown in the following sample response. In this example, `c0` represents the total `count`.
 
 ```json
 {
@@ -119,7 +117,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 ```
 {{% /tab %}}
 {{% tab "Timeseries" %}}
-以下の API 呼び出しでは、`1m` ごとにロールアップされる、`status` フィールドによりグループ化されたログイベントの `count` と `timeseries` を構築します。`type` は `timeseries` である必要があります。
+With the following API call, build a `timeseries` with `count` of log events grouped by the field `status` rolled up every `1m`. The `type` must be `timeseries`.
 
 **API call:**
 
@@ -205,12 +203,12 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 {{% /tab %}}
 {{< /tabs >}}
 
-### 分析の取得
+### Getting stats
 
 {{< tabs >}}
 {{% tab "Average" %}}
 
-以下の API 呼び出しでは、`status` フィールドによりグループ化された、`@http.response_time` のような `metric` の値の `avg` を含む `table` を構築します。`type` は `total` である必要があります。
+With the following API call, build a `table` with `avg` of values in a `metric` such as `@http.response_time` grouped by the field `status`. The `type` must be `total`.
 
 **API call:**
 
@@ -282,12 +280,12 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 }
 ```
 
-同様に、`type` を `timeseries` と設定することで `avg` 時系列を構築できます。
+Similarly, you can build an `avg` timeseries by setting `type` as `timeseries`.
 
 {{% /tab %}}
 {{% tab "Sum" %}}
 
-以下の API 呼び出しでは、`service` フィールドによりグループ化された、`@http.response_time` のような `metric` の値の `sum` を含む `table` を構築します。`type` は `total` である必要があります。
+With the following API call, build a `table` with `sum` of values in a `metric` such as `@http.response_time` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
@@ -318,7 +316,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
    ]
 }'
 ```
-同様に、`type` を `timeseries` と設定することで `sum` 時系列を構築できます。
+Similarly, build a `sum` timeseries by setting `type` as `timeseries`.
 
 **Response:**
 
@@ -355,7 +353,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 {{% /tab %}}
 {{% tab "Min" %}}
 
-以下の API 呼び出しでは、`service` フィールドによりグループ化された、`@http.response_time` のような `metric` の値の `min` を含む `table` を構築します。`type` は `total` である必要があります。
+With the following API call, build a `table` with `min` of values in a `metric` such as `@http.response_time` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
@@ -386,7 +384,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
    ]
 }'
 ```
-同様に、`type` を `timeseries` と設定することで `min` 時系列を構築できます。
+Similarly, build a `min` timeseries by setting `type` as `timeseries`.
 
 **Response:**
 
@@ -423,7 +421,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 {{% /tab %}}
 {{% tab "Max" %}}
 
-以下の API 呼び出しでは、`service` フィールドによりグループ化された、`@http.response_time` のような `metric` の値の `max` を含む `table` を構築します。`type` は `total` である必要があります。
+With the following API call, build a `table` with `max` of values in a `metric` such as `@http.response_time` grouped by the field `service`. The `type` must be `total`.
 
 **API call:**
 
@@ -454,7 +452,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
    ]
 }'
 ```
-同様に、`type` を `timeseries` と設定することで `max` 時系列を構築できます。
+Similarly, you can build a `max` timeseries by setting `type` as `timeseries`.
 
 **Response:**
 
@@ -491,9 +489,9 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 {{% /tab %}}
 {{< /tabs >}}
 
-### パーセンタイルの取得
+### Getting percentiles
 
-以下の API 呼び出しでは、`service` フィールドによりグループ化された、`@http.response_time` のような `metric` の値の `percentiles` を含む `table` を構築します。`type` は `total` である必要があります。利用可能なパーセンタイル値は、`pc75`、`pc90`、`pc95`、`pc98`、`pc99` です。
+With the following API call, build a `table` with `percentiles` of values in a `metric` such as `@http.response_time` grouped by the field `service`. The `type` must be `total`. The different percentile values available are `pc75`,`pc90`,`pc95`,`pc98`,and `pc99`.
 
 **API call:**
 
@@ -556,11 +554,11 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
     }
 }
 ```
-同様に、`type` を `timeseries` と設定することで `percentile` 時系列を構築できます。
+Similarly, build a `percentile` timeseries by setting `type` as `timeseries`.
 
-### 複数のグループ化、ユニークカウント、メトリクス
+### Multiple group-bys, unique counts, and metrics
 
-以下の API 呼び出しで、`OS` や `Browser` などの `facets` 別のログデータの詳細を表示する `table` を構築し、`useragent` のユニークカウント、メトリクスの `duration` の `pc90`、メトリクスの `network.bytes_written` の `avg`、ログイベントの 合計 `count` など、さまざまなメトリクスを計算できます。
+With the following API call, build a `table` to display the breakdown of your log data by `facets` such as `OS` and `Browser` and calculate different metrics such as unique count of `useragent`, `pc90` of metric `duration`, `avg` of metric `network.bytes_written`, and the total `count` of log events.
 
 **API call:**
 
@@ -685,11 +683,11 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 }
 
 ```
-応答で、`c0` は `useragent` のユニークカウントを、`c1` はメトリクスの `duration` の `pc90` を、`c2` はメトリクスの `network.bytes_written` の `avg` を、`c3` はログイベントの合計 `count` を表します。
+In the response, `c0` represents the unique count of `useragent`, `c1` represents the `pc90` of metric `duration`, `c2` represents the `avg` of metric `network.bytes_written`, and `c3` represents the total `count` of log events.
 
-### ページ区切り
+### Pagination
 
-以下の API 呼び出しで、`service` や `status` などファセット別のログデータの詳細を表示する `table` を構築し、結果を `service` ごとに昇順で並べ替え、`limit` を使用して結果セットをページに軸切ります。
+The following API call builds a `table` to display the breakdown of your log data by facets (such as `service` and `status`), sorts the results by `service` in ascending order, and paginates over the result set using `limit`.
 
 **API call:**
 
@@ -774,7 +772,7 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 }
 
 ```
-ページを区切り次の結果セットにアクセスするには、 `page` オプションを使用して `cursor` の値を以前の呼び出しから `after` の値に設定します。
+To paginate and access the next set of results, use `page` option and set the `cursor` value to the `after` value from the previous call. 
 
 **API call:**
 ```bash
@@ -861,11 +859,12 @@ curl -L -X POST "https://api.datadoghq.com/api/v2/logs/analytics/aggregate" -H "
 }
 ```
 
-**注:** ページングは、上記の例で示されるとおり、1 つ以上のファセットで `sort` が `alphabetical` の場合のみサポートされます。細かい粒度のファセットを持つ複数のグループ化を含むレポートを構築するには、別々の API 呼び出しを作成します。たとえば、各 `session id` に対し `url paths` の異なるメトリクスを表示するレポートを構築する場合は、別々の API 呼び出しを作成します。最初の呼び出しは、`sessions ids` がソートされて返されるため、この結果を使用して各 `session id` に対する `url paths` のメトリクスを取得できます。
+**Note:** Paging is only supported if `sort` is `alphabetical` for at least one facet as shown in above example. To build a report with multiple group-bys with high cardinality facets, make separate API calls. For example, to build a report showing different metrics for `url paths` for every `session id`, make separate API calls. The first call would return all `sessions ids` sorted and you would use these results to get the metrics for `url paths` for each `session id`.
 
-### その他の参考資料
+### Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/api/v2/logs/
-[2]: https://docs.datadoghq.com/ja/api/v1/authentication/
+[1]: https://docs.datadoghq.com/api/v2/logs/
+[2]: /account_management/api-app-keys/#api-keys
+[3]: /account_management/api-app-keys/#application-keys

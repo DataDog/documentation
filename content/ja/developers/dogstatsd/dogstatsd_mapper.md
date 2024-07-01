@@ -1,65 +1,66 @@
 ---
 title: DogStatsD Mapper
-kind: ドキュメント
-description: DogStatsD のマッピング規則を使用して、statsd メトリクス名の一部をタグに変換。
+kind: documentation
+description: Convert parts of statsd metric names to tags using mapping rules in DogStatsD.
 further_reading:
-  - link: developers/dogstatsd
-    tag: ドキュメント
-    text: DogStatsD 入門
-  - link: developers/libraries
-    tag: ドキュメント
-    text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-  - link: 'https://github.com/DataDog/datadog-agent/tree/master/pkg/dogstatsd'
-    tag: GitHub
-    text: DogStatsD ソースコード
+    - link: developers/dogstatsd
+      tag: Documentation
+      text: Introduction to DogStatsD
+    - link: developers/libraries
+      tag: Documentation
+      text: Official and Community created API and DogStatsD client libraries
 ---
-Agent バージョン 7.17+ では、DogStatsD Mapper 機能でマッピング規則とワイルドカード、正規表現パターンを使用して、DogStatsD に送信されたメトリクス名の一部をタグに変換できるようになりました。たとえば、以下のようなメトリクスの変換が可能です。
 
-- `airflow.job.duration.<ジョブ種類>.<ジョブ名>`
+With Agent v7.17+, the DogStatsD Mapper feature allows you to convert parts of a metric name submitted to DogStatsD to tags using mapping rules with wildcard and regex patterns. For example it allows you to transform the metric:
 
-これは 2 つの関連するタグを使用して `airflow.job.duration` メトリクスに変換することができます。
+- `airflow.job.duration.<JOB_TYPE>.<JOB_NAME>`
 
-- `job_type:<ジョブ種類>`
-- `job_name:<ジョブ名>`.
+into the metric `airflow.job.duration` with two associated tags:
 
-以下の手順でマッピング規則を作成します。
+- `job_type:<JOB_TYPE>`
+- `job_name:<JOB_NAME>`.
 
-1. [`datadog.yaml` ファイルを開きます][1]。
-2. `dogstatsd_mapper_profiles` パラメーター下に[マッピング規則のコンフィギュレーションブロック](#マッピング規則のコンフィギュレーション)を追加します。
+To create a mapping rule:
 
-## マッピング規則のコンフィギュレーション
+1. [Open your `datadog.yaml` file][1].
+2. Add a [mapping rule configuration block](#mapping-rule-configuration) under the `dogstatsd_mapper_profiles` parameter.
 
-マッピング規則ブロックは以下のようなレイアウトになります。
+## Mapping rule configuration
+
+A mapping rule block has the following layout:
 
 ```yaml
 dogstatsd_mapper_profiles:
-    - name: '<プロファイル名>'
-      prefix: '<プロファイルのプレフィックス>'
+    - name: '<PROFILE_NAME>'
+      prefix: '<PROFILE_PREFIX>'
       mappings:
-          - match: '<一致するメトリクス>'
-            match_type: '<一致タイプ>'
-            name: '<マッピング済みのメトリクス名>'
+          - match: '<METRIC_TO_MATCH>'
+            match_type: '<MATCH_TYPE>'
+            name: '<MAPPED_METRIC_NAME>'
             tags:
-                '<タグキー>': '<展開するタグ値>'
+                '<TAG_KEY>': '<TAG_VALUE_TO_EXPAND>'
 ```
 
-次のプレースホルダーと組み合わせます。
+With the following placeholders:
 
-| プレースホルダー             |  定義                                                                                                                               | 必須                |
+| Placeholder             |  Definition                                                                                                                               | Required                |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-|  `<プロファイル名>`       | マッピング規則のプロファイルに付与する名称。                                                                                              | はい                     |
-| `<プロファイルのプレフィックス>`      | プロファイルに関連付けられているメトリクス名のプレフィックス。                                                                                        | はい                     |
-| `<一致するメトリクス>`     | [ワイルドカード](#ワイルドカードの一致パターン) または [正規表現](#正規表現の一致パターン) の一致ロジックを使ってグループを抽出するためのメトリクス名。         | はい                     |
-| `<一致タイプ>`          | `<一致するメトリクス>`に適用する一致タイプ。[ワイルドカード](#ワイルドカードの一致パターン) または [正規表現](#正規表現の一致パターン) のいずれかとなります。    | いいえ / デフォルト: `wildcard` |
-| `<マッピング済みのメトリクス名>`  | 同じグループで定義されたタグと共に Datadog に送信する新しいメトリクス名。                                                           | はい                     |
-| `<タグキー>`             | 収集されたタグに関連付けるタグキー。                                                                                           | いいえ                      |
-| `<展開するタグ値>` | `<一致タイプ>` からインラインに収集するタグ。                                                                                     | いいえ                      |
+|  `<PROFILE_NAME>`       | A name to give to your mapping rule profile.                                                                                              | yes                     |
+| `<PROFILE_PREFIX>`      | The metric name prefix associated to this profile.                                                                                        | yes                     |
+| `<METRIC_TO_MATCH>`     | The metric name to extract groups from with the [Wildcard](#wildcard-match-pattern) or [Regex](#regex-match-pattern) match logic.         | yes                     |
+| `<MATCH_TYPE>`          | The type of match to apply to the `<METRIC_TO_MATCH>`. Either [`wildcard`](#wildcard-match-pattern) or [`regex`](#regex-match-pattern)    | no, default: `wildcard` |
+| `<MAPPED_METRIC_NAME>`  | The new metric name to send to Datadog with the tags defined in the same group.                                                           | yes                     |
+| `<TAG_KEY>`             | The Tag key to associate to the tags collected.                                                                                           | no                      |
+| `<TAG_VALUE_TO_EXPAND>` | The tags collected from the `<MATCH_TYPE>` to inline.                                                                                     | no                      |
 
-## ワイルドカードの一致パターン
+## Wildcard match pattern
 
-ワイルドカードの一致パターンは、`*` をワイルドカードに用いたドット区切りのメトリクス名と一致します。このパターンを使用する場合、メトリクス名には英数字、`.`、`_` のみ使用できます。抽出されたグループは `$1`、`$2`、`$3`... などの `$n` 形式、または `${1}`、`${2}`、`${3}`... などの `${n}` 形式でのみ展開が可能です。
+The wildcard match pattern matches dot-separated metric names using `*` as wildcard. The metric name must be only composed of alphanumeric, `.`, and `_` characters for this pattern to work. Groups extracted can then be expanded with one of the following:
 
-たとえば、以下のマッピンググループコンフィギュレーションを持つメトリクス `custom_metric.process.value_1.value_2` について見てみましょう。
+- `$n` format: `$1`, `$2`, `$3`, etc.
+- `${n}` format: `${1}`, `${2}`, `${3}`, etc.
+
+For instance, if you have the metric `custom_metric.process.value_1.value_2` with the following mapping group configuration:
 
 ```yaml
 dogstatsd_mapper_profiles:
@@ -74,14 +75,16 @@ dogstatsd_mapper_profiles:
                 tag_key_2: '$2'
 ```
 
-メトリクス `custom_metric.process` にタグ `tag_key_1:value_1` および `tag_key_2:value_2` が付与され、Datadog に送られます。
+It would send the metric `custom_metric.process` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value_2`.
 
-## 正規表現の一致パターン
+## Regex match pattern
 
-正規表現の一致パターンは、正規表現パターンを使用したメトリクス名と一致します。ワイルドカードの一致パターンとは異なり、`.` を含むキャプチャされたグループを定義することができます。
-抽出されたグループは `$1`、`$2`、`$3`... などの `$n` 形式、または `${1}`、`${2}`、`${3}`... などの `${n}` 形式でのみ展開が可能です。
+The regex match pattern matches metric names using regex patterns. Compared to the wildcard match pattern, it allows to define captured groups that contain `.`. Groups extracted can then be expanded with one of the following:
 
-たとえば、以下のマッピンググループコンフィギュレーションを持つメトリクス `custom_metric.process.value_1.value.with.dots._2` について見てみましょう。
+- `$n` format: `$1`, `$2`, `$3`, etc.
+- `${n}` format: `${1}`, `${2}`, `${3}`, etc.
+
+For instance, if you have the metric `custom_metric.process.value_1.value.with.dots._2` with the following mapping group configuration:
 
 ```yaml
 dogstatsd_mapper_profiles:
@@ -96,11 +99,11 @@ dogstatsd_mapper_profiles:
                 tag_key_2: '$2'
 ```
 
-メトリクス `custom_metric.process` にタグ `tag_key_1:value_1` および `tag_key_2:value.with.dots._2` が付与され、Datadog に送られます。
+It would send the metric `custom_metric.process` to Datadog with the tags `tag_key_1:value_1` and `tag_key_2:value.with.dots._2`.
 
-## メトリクス名でグループを展開する
+## Expand group in metric name
 
-`regex` および `wildcard` の一致パターンでは、上記のように、収集されたグループを関連するタグキーが付いたタグ値として展開することができます。メトリクス `name` のパラメーターとして使用することも可能です。たとえば、以下のマッピンググループコンフィギュレーションにメトリクス `custom_metric.process.value_1.value_2` がある場合は以下のようになります。
+For the `regex` and `wildcard` match type, group collected can be expanded as tags value with an associated tag key as see above, but can also be used in the metric `name` parameter. For instance, if you have the metric `custom_metric.process.value_1.value_2` with the following mapping group configuration:
 
 ```yaml
 dogstatsd_mapper_profiles:
@@ -114,10 +117,10 @@ dogstatsd_mapper_profiles:
                 tag_key_2: '$2'
 ```
 
-メトリクス `custom_metric.process.prod.value_1.live` にタグ `tag_key_2:value_2` が付与され、Datadog に送られます。
+It would send the metric `custom_metric.process.prod.value_1.live` to Datadog with the tag `tag_key_2:value_2`.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file

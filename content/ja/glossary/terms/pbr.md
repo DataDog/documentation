@@ -1,6 +1,6 @@
 ---
+title: policy-based routing (PBR)
 core_product:
-- network performance monitoring
-title: ポリシーベースルーティング (PBR)
+  - network performance monitoring
 ---
-コンピュータネットワークにおいて、PBR はポリシーやフィルターに従ってデータをルーティングするための技術のことです。
+In computer networks, PBR is a technique for routing data according to policies and filters.

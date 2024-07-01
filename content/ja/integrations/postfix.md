@@ -1,66 +1,64 @@
 ---
-app_id: postfix
-app_uuid: 76293d0a-1cde-4f25-ae72-c3e6ef352273
-assets:
-  dashboards:
-    postfix: assets/dashboards/postfix_dashboard.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: postfix.queue.size
-      metadata_path: metadata.csv
-      prefix: postfix.
-    process_signatures:
-    - postfix start
-    - sendmail -bd
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 66
-    source_type_name: Postfix
-  logs:
-    source: postfix
-  saved_views:
-    postfix_processes: assets/saved_views/postfix_processes.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- log collection
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: postfix
-integration_id: postfix
-integration_title: Postfix
-integration_version: 1.14.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: postfix
-public_title: Postfix
-short_description: すべての Postfix キューのサイズを監視する。
-supported_os:
-- linux
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::ログの収集
-  - Supported OS::Linux
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: すべての Postfix キューのサイズを監視する。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Postfix
+"app_id": "postfix"
+"app_uuid": "76293d0a-1cde-4f25-ae72-c3e6ef352273"
+"assets":
+  "dashboards":
+    "postfix": "assets/dashboards/postfix_dashboard.json"
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "postfix.queue.size"
+      "metadata_path": "metadata.csv"
+      "prefix": "postfix."
+    "process_signatures":
+    - "postfix start"
+    - "sendmail -bd"
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "66"
+    "source_type_name": "Postfix"
+  "saved_views":
+    "postfix_processes": "assets/saved_views/postfix_processes.json"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "log collection"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/postfix/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "postfix"
+"integration_id": "postfix"
+"integration_title": "Postfix"
+"integration_version": "1.14.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "postfix"
+"public_title": "Postfix"
+"short_description": "Monitor the size of all your Postfix queues."
+"supported_os":
+- "linux"
+- "macos"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Log Collection"
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": "Monitor the size of all your Postfix queues."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Postfix"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -68,29 +66,29 @@ tile:
 
 ![Postfix Graph][1]
 
-## 概要
+## Overview
 
-このチェックは、すべての Postfix キューのサイズを監視します。
+This check monitors the size of all your Postfix queues.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Postfix チェックは [Datadog Agent][2] パッケージに含まれています。Postfix サーバーに追加でインストールする必要はありません。
+The Postfix check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Postfix servers.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-このチェックは、`find` コマンドを使用するように構成できます。このコマンドを使用するには、`incoming`、`active`、および `deferred` メールキュー内のメッセージカウントを取得するために、`dd-agent` への `sudo` アクセスを許可する必要があります。
+This check can be configured to use the `find` command. This requires granting `sudo` access to the `dd-agent` to get a count of messages in the `incoming`, `active`, and `deferred` mail queues.
 
-オプションで、組み込みの `postqueue -p` コマンドを使用して `active`、`hold`、および `deferred` メールキュー内のメッセージカウントを取得するように Agent を構成できます。`postqueue` に `sudo` は必要なく、設定されたグループ ID の権限で実行されます。
+Optionally, you can configure the Agent to use a built in `postqueue -p` command to get a count of messages in the `active`, `hold`, and `deferred` mail queues. `postqueue` is executed with set group ID privileges without the need for `sudo`.
 
-**警告**: `postqueue` を使用してメールキューを監視する場合、`incoming` キューのメッセージカウントは報告されません。
+**WARNING**: Using `postqueue` to monitor the mail queues doesn't report a count of messages for the `incoming` queue.
 
-#### メトリクスの収集
+#### Metric collection
 
-##### sudo を使用する場合
+##### Using sudo
 
-1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `postfix.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[postfix.d/conf.yaml のサンプル][4] を参照してください。
+1. Edit the file `postfix.d/conf.yaml`, in the `conf.d/` folder at the root of your [Agent's configuration directory][3]. See the [sample postfix.d/conf.yaml][4] for all available configuration options:
 
    ```yaml
    init_config:
@@ -121,7 +119,7 @@ Postfix チェックは [Datadog Agent][2] パッケージに含まれていま�
          - deferred
    ```
 
-2. `queues` 内の各メールキューに対して、Agent は、そのディレクトリ上で `find` をフォークします。これは、Postfix ユーザーの権限で `sudo` を使用して実行されます。そのため、Agent のユーザーである `dd-agent` の `/etc/sudoers` に以下の行を追加する必要があります。Postfix は `postfix` として実行されているとします。
+2. For each mail queue in `queues`, the Agent forks a `find` on its directory. It uses `sudo` to do this with the privileges of the Postfix user, so you must add the following lines to `/etc/sudoers` for the Agent's user, `dd-agent`, assuming Postfix runs as `postfix`:
 
    ```text
    dd-agent ALL=(postfix) NOPASSWD:/usr/bin/find /var/spool/postfix/incoming -type f
@@ -129,11 +127,11 @@ Postfix チェックは [Datadog Agent][2] パッケージに含まれていま�
    dd-agent ALL=(postfix) NOPASSWD:/usr/bin/find /var/spool/postfix/deferred -type f
    ```
 
-3. [Agent を再起動します][5]。
+3. [Restart the Agent][5]
 
-##### postqueue を使用する場合
+##### Using postqueue
 
-1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `postfix.d/conf.yaml` ファイルを編集します。
+1. Edit the `postfix.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][3]:
 
    ```yaml
    init_config:
@@ -173,25 +171,25 @@ Postfix チェックは [Datadog Agent][2] パッケージに含まれていま�
          - deferred
    ```
 
-2. `instances` 内の各 `config_directory` について、Agent は、Postfix コンフィギュレーションディレクトリに対して `postqueue -c` をフォークします。Postfix は、メールキューに対するアクティビティを内部アクセス制御によって制限しています。デフォルトでは、Postfix は `anyone` にキューの表示を許可します。実稼働システムの Postfix インストレーションで、より厳密にアクセス制御が構成されている場合は、`dd-agent` ユーザーにメールキューの表示アクセスを許可することが必要な場合があります。詳しくは、[postqueue Postfix のドキュメント][6]を参照してください。
+2. For each `config_directory` in `instances`, the Agent forks a `postqueue -c` for the Postfix configuration directory. Postfix has internal access controls that limit activities on the mail queue. By default, Postfix allows `anyone` to view the queue. On production systems where the Postfix installation may be configured with stricter access controls, you may need to grant the `dd-agent` user access to view the mail queue. See the [postqueue Postfix documentation][6] for more details.
 
    ```shell
    postconf -e "authorized_mailq_users = dd-agent"
    ```
 
-   キューの表示を許可されたユーザーのリスト。
+    List of users who are authorized to view the queue:
 
    ```shell
    authorized_mailq_users (static:anyone)
    ```
 
-3. [Agent を再起動します][5]。
+3. [Restart the Agent][5].
 
-#### 収集データ
+#### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-Postfix は syslog デーモンにログを送信し、そのログがファイルシステムに書き込まれます。命名規則とログファイルの送信先は構成可能です。
+Postfix sends logs to the syslog daemon, which then writes logs to the file system. The naming convention and log file destinations are configurable:
 
 ```text
 /etc/syslog.conf:
@@ -199,13 +197,13 @@ Postfix は syslog デーモンにログを送信し、そのログがファイ�
     mail.debug                                  /var/log/mail.log
 ```
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
 
    ```yaml
    logs_enabled: true
    ```
 
-2. 次の構成ブロックを `postfix.d/conf.yaml` ファイルに追加します。それぞれの環境に応じて、`path` パラメーターと `service` パラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[postfix.d/conf.yaml のサンプル][5] を参照してください。
+2. Add the following configuration block to your `postfix.d/conf.yaml` file. Change the `path` and `service` parameter values based on your environment. See the [sample postfix.d/conf.yaml][5] for all available configuration options.
 
    ```yaml
    logs:
@@ -215,43 +213,44 @@ Postfix は syslog デーモンにログを送信し、そのログがファイ�
        service: myapp
    ```
 
-3. [Agent を再起動します][5]。
+3. [Restart the Agent][5].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `postfix` を探します。
+[Run the Agent's status subcommand][7] and look for `postfix` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "postfix" >}}
 
 
-### ヘルプ
+### Events
 
-Postfix チェックには、イベントは含まれません。
+The Postfix check does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Postfix チェックには、サービスのチェック機能は含まれません。
+The Postfix check does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog support][9].
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Postfix キューのパフォーマンスの監視][10]
+- [Monitor Postfix queue performance][10]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postfix/images/postfixgraph.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/postfix/datadog_checks/postfix/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: http://www.postfix.org/postqueue.1.html
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-core/blob/master/postfix/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://docs.datadoghq.com/help/
 [10]: https://www.datadoghq.com/blog/monitor-postfix-queues
+

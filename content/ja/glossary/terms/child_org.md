@@ -1,4 +1,4 @@
 ---
-title: 子組織
+title: child org
 ---
-子組織は親組織に属し、親組織や他の子組織とは別に、独自のデータを保持します。
+A child org belongs to a parent org and maintains its own data separate from the parent org and other child orgs.

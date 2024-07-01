@@ -1,6 +1,6 @@
 ---
+title: mute
 core_product:
-- alerts
-title: ミュート
+  - alerts
 ---
-モニターのアラートと通知を消すには、モニターをミュートします。
+Mute a monitor to silence a monitor's alerts and notifications.

@@ -1,61 +1,62 @@
 ---
-categories:
-- cloud
-- data stores
-- caching
-- azure
-dependencies: []
-description: Azure SQL Database の主要メトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/azure_sql_database/
-draft: false
-git_integration_title: azure_sql_database
-has_logo: true
-integration_id: azure-sql-database
-integration_title: Microsoft Azure SQL Database
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_sql_database
-public_title: Datadog-Microsoft Azure SQL Database インテグレーション
-short_description: Azure SQL Database の主要メトリクスを追跡。
-version: '1.0'
+"categories":
+- "cloud"
+- "data stores"
+- "caching"
+- "azure"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure SQL Database metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_sql_database/"
+"draft": false
+"git_integration_title": "azure_sql_database"
+"has_logo": true
+"integration_id": "azure-sql-database"
+"integration_title": "Microsoft Azure SQL Database"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_sql_database"
+"public_title": "Datadog-Microsoft Azure SQL Database Integration"
+"short_description": "Track key Azure SQL Database metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure SQL Database は、需要に応じて柔軟にスケーリングできるロバストなデータストアを提供します。
+Azure SQL Database gives you a robust datastore with the flexibility to scale to meet demand.
 
-Azure SQL Database からメトリクスを取得すると、以下のことができます。
+Get metrics from Azure SQL Database to:
 
-- SQL Database のパフォーマンスを視覚化。
-- SQL Database のパフォーマンスをアプリケーションと関連付け。
+- Visualize the performance of your SQL Database.
+- Correlate the performance of your SQL Database with your applications.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration first][1]. There are no other installation steps that need to be performed.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_sql_database" >}}
 
 
-### ヘルプ
+### Events
 
-Azure SQL Database インテグレーションには、イベントは含まれません。
+The Azure SQL Database integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure SQL Database インテグレーションには、サービスのチェック機能は含まれません。
+The Azure SQL Database integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_sql_database/azure_sql_database_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

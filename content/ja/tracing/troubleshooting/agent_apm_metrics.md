@@ -1,244 +1,230 @@
 ---
+title: APM metrics sent by the Datadog Agent
+kind: Documentation
 aliases:
-- /ja/agent/faq/agent-apm-metrics/
-- /ja/tracing/send_traces/agent-apm-metrics/
-kind: ドキュメント
-title: Datadog Agent によって送信された APM メトリクス
+    - /agent/faq/agent-apm-metrics/
+    - /tracing/send_traces/agent-apm-metrics/
 ---
 
-以下で、[APM が有効化された際に][1] Datadog Agent により送信され、すぐに使えるトレーシングメトリクスの一覧をご覧いただけます。お使いの Datadog アカウントに [APM モニタリングダッシュボード][2]をインポートすれば、ダッシュボードでこれらのメトリクスの大半を利用できるようになります。
+Find below the list of out-of-the-box tracing metrics sent by the Datadog Agent when [APM is enabled][1]. Import the [APM monitoring dashboard][2] in your Datadog account in order to get an out-of-the-box dashboard exploiting most of those metrics.
 
 
 
 `datadog.trace_agent.cpu_percent`
-: **タイプ**: ゲージ<br>
-コアに対する割合で見た CPU 使用量。例えば、値が `50` の場合はコアの半分、`200` の場合は 2 コア。
+: **Type**: Gauge<br>
+CPU usage in terms of percentage of a core. For example, a value of `50` is half a core, or `200` is two cores.
 
 `datadog.trace_agent.events.max_eps.current_rate`
-: **タイプ**: ゲージ<br>
-Agent が受信した 1 秒あたりの APM イベントの数
+: **Type**: Gauge<br>
+Count of APM Events per second received by the Agent
 
 `datadog.trace_agent.events.max_eps.max_rate`
-: **タイプ**: ゲージ<br>
-Agent が構成する max_events_per_second パラメーターと同一
-
+: **Type**: Gauge<br>
+Same as the Agent config's max_events_per_second parameter.
 
 `datadog.trace_agent.events.max_eps.reached_max`
-: **タイプ**: ゲージ<br>
-max_events_per_second に到達するたびに `1` に設定 (それ以外は `0`)
-
+: **Type**: Gauge<br>
+Is set to `1` every time max_events_per_second is reached, otherwise it's `0`.
 
 `datadog.trace_agent.events.max_eps.sample_rate`
-: **タイプ**: ゲージ<br>
-Agent が受信したイベントに適用されるサンプルレート
+: **Type**: Gauge<br>
+Sample rate applied by the Agent to Events it received
 
 `datadog.trace_agent.heap_alloc`
-: **タイプ**: ゲージ<br>
-GO のランタイムで報告されたヒープ割り当て。
+: **Type**: Gauge<br>
+Heap allocations as reported by the Go runtime.
 
 `datadog.trace_agent.heartbeat`
-: **タイプ**: ゲージ<br>
-10 秒ごとに 1 増加。
+: **Type**: Gauge<br>
+Increment by one every 10 seconds.
 
 `datadog.trace_agent.normalizer.spans_malformed`
-: **タイプ**: カウント<br>
-システムがフィールドを受け入れるため変更する必要がある不正フィールドを持つスパンの数
+: **Type**: Count<br>
+Number of spans having malformed fields that had to be altered in order for the system to accept them
 
-`datadog.trace_agent.obfuscations`
-: **タイプ**: カウント<br>
-SQL の難読化が発生するたびに 1 増加。
+`datadog.trace_agent.obfuscation.sql_cache.hits`
+: **Type**: Count<br>
+Number of GET calls where a value was found for the corresponding key.
+
+`datadog.trace_agent.obfuscation.sql_cache.misses`
+: **Type**: Count<br>
+Number of GET calls where a value was not found for the corresponding key.
 
 `datadog.trace_agent.panic`
-: **タイプ**: ゲージ<br>
-コードパニックごとに 1 増加。
+: **Type**: Gauge<br>
+Increment by one on every code panic.
 
 `datadog.trace_agent.profile`
-: **タイプ**: カウント<br>
-プロファイルエンドポイントのリバースプロキシが作成されるたびに 1 つずつ増加する。
+: **Type**: Count<br>
+Increment by one every time a reverse proxy of profile endpoints is created.
 
 `datadog.trace_agent.receiver.error`
-: **タイプ**: カウント<br>
-デコード、フォーマット、またはその他のエラーが原因で API がペイロードを拒否した回数。
+: **Type**: Count<br>
+Number of times that the API rejected a payload due to an error in either decoding, formatting or other.
 
 `datadog.trace_agent.receiver.events_extracted`
-: **タイプ**: カウント<br>
-サンプリングされた APM イベントの合計。
+: **Type**: Count<br>
+Total APM events sampled.
 
 `datadog.trace_agent.receiver.events_sampled`
-: **タイプ**: カウント<br>
-`max_events_per_second` パラメーターサンプラーでサンプリングされた APM イベントの合計。
+: **Type**: Count<br>
+Total APM events sampled by the `max_events_per_second` parameter sampler.
 
 `datadog.trace_agent.receiver.oom_kill`
-: **タイプ**: カウント<br>
-メモリ使用量の上限 (max_memory の 150%) 超過が原因で Agent が自動的に強制終了した回数。
+: **Type**: Count<br>
+Number of times the Agent killed itself due to excessive memory use (150% of max_memory).
 
 `datadog.trace_agent.receiver.out_chan_fill`
-: **タイプ**: ゲージ<br>
-内部メトリクス。受信機の出力チャンネルのフィルの割合。
+: **Type**: Gauge<br>
+Internal metric. Percentage of fill on the receiver's output channel.
 
 `datadog.trace_agent.receiver.payload_accepted`
-: **タイプ**: カウント<br>
-Agent が受け入れたペイロード数。
+: **Type**: Count<br>
+Number of payloads accepted by the Agent.
 
 `datadog.trace_agent.receiver.payload_refused`
-: **タイプ**: カウント<br>
-サンプリングが原因で受信者に拒否されたペイロードの数。
-
-`datadog.trace_agent.receiver.ratelimit`
-: **タイプ**: ゲージ<br>
-`1` 未満の場合、リソース使用量 (CPU またはメモリ) が多いためにペイロードが拒否されていることを意味します。
+: **Type**: Count<br>
+Number of payloads rejected by the receiver because of the sampling.
 
 `datadog.trace_agent.receiver.spans_dropped`
-: **タイプ**: カウント<br>
-Agent によってドロップされたスパンの数。
+: **Type**: Count<br>
+Number of spans dropped by the Agent.
 
 `datadog.trace_agent.receiver.spans_filtered`
-: **タイプ**: カウント<br>
-Agent によってフィルターされたスパンの数。
+: **Type**: Count<br>
+Number of spans filtered by the Agent.
 
 `datadog.trace_agent.receiver.spans_received`
-: **タイプ**: カウント<br>
-Agent が受信したスパンの総数。
+: **Type**: Count<br>
+Total number of spans received by the Agent.
 
 `datadog.trace_agent.receiver.tcp_connections`
-: **タイプ**: カウント<br>
-Agent に対して接続された TCP 接続の数。
+: **Type**: Count<br>
+Number of TCP connections coming in to the agent.
 
 `datadog.trace_agent.receiver.trace`
-: **タイプ**: カウント<br>
-受信済みおよび承認済みのトレース数。
+: **Type**: Count<br>
+Number of traces received and accepted.
 
 `datadog.trace_agent.receiver.traces_bytes`
-: **タイプ**: カウント<br>
-Agent が承認したペイロードの合計バイト数。
+: **Type**: Count<br>
+Total bytes of payloads accepted by the Agent.
 
 `datadog.trace_agent.receiver.traces_filtered`
-: **タイプ**: カウント<br>
-無視されたリソースによってフィルター処理されたトレース (`datadog.yaml` ファイルで定義)。
+: **Type**: Count<br>
+Traces filtered by ignored resources (as defined in `datadog.yaml` file).
 
 `datadog.trace_agent.receiver.traces_priority`
-: **タイプ**: カウント<br>
-priority タグを持つ優先度サンプラーで処理されたトレース。
+: **Type**: Count<br>
+Traces processed by priority sampler that have the priority tag.
 
 `datadog.trace_agent.receiver.traces_received`
-: **タイプ**: カウント<br>
-受信済みおよび承認済みのトレース数。
-
-`datadog.trace_agent.service_writer.services`
-: **タイプ**: カウント<br>
-フラッシュしたサービス数。
+: **Type**: Count<br>
+Number of traces received and accepted.
 
 `datadog.trace_agent.started`
-: **タイプ**: カウント<br>
-Agent が起動するたびに 1 増加。
+: **Type**: Count<br>
+Increment by one every time the Agent starts.
 
 `datadog.trace_agent.stats_writer.bytes`
-: **タイプ**: カウント<br>
-送信されたバイト数 (GZIP 後に計算)。
+: **Type**: Count<br>
+Number of bytes sent (calculated after Gzip).
 
 `datadog.trace_agent.stats_writer.connection_fill`
-: **タイプ**: ヒストグラム <br>
-使用する発信接続の割合。
+: **Type**: Histogram <br>
+Percentage of outgoing connections used.
 
 `datadog.trace_agent.stats_writer.dropped`
-: **タイプ**: カウント<br>
-再試行不可能な HTTP のエラーが原因でドロップされたペイロード数。
+: **Type**: Count<br>
+Number of payloads dropped due to non retriable HTTP errors.
 
 `datadog.trace_agent.stats_writer.dropped_bytes`
-: **タイプ**: カウント<br>
-リトライできない HTTP エラーによって削除されたバイト数。
+: **Type**: Count<br>
+Number of bytes dropped due to non retriable HTTP errors.
 
 `datadog.trace_agent.stats_writer.encode_ms`
-: **タイプ**: ヒストグラム <br>
-統計データペイロードのエンコード時間。
+: **Type**: Histogram <br>
+Time it took to encode a stats payload.
 
 `datadog.trace_agent.stats_writer.errors`
-: **タイプ**: カウント<br>
-リトライできなかったエラー。
+: **Type**: Count<br>
+Errors that could not be retried.
 
 `datadog.trace_agent.stats_writer.queue_fill`
-: **タイプ**: ヒストグラム <br>
-いっぱいになったキューの割合。
+: **Type**: Histogram <br>
+Percentage of queue filled.
 
 `datadog.trace_agent.stats_writer.retries`
-: **タイプ**: カウント<br>
-Datadog API でのエラーに対するリトライ回数
+: **Type**: Count<br>
+Number of retries on failures to the Datadog API
 
 `datadog.trace_agent.stats_writer.splits`
-: **タイプ**: カウント<br>
-ペイロードが複数に分割された回数。
+: **Type**: Count<br>
+Number of times a payload was split into multiple ones.
 
 `datadog.trace_agent.stats_writer.stats_buckets`
-: **タイプ**: カウント<br>
-フラッシュされた統計バケット数。
+: **Type**: Count<br>
+Number of stats buckets flushed.
 
 `datadog.trace_agent.trace_writer.bytes`
-: **タイプ**: カウント<br>
-送信されたバイト数 (GZIP 後に計算)。
-
-`datadog.trace_agent.trace_writer.bytes_estimated`
-: **タイプ**: カウント<br>
-Agent の内部アルゴリズムで推定されたバイト数。
+: **Type**: Count<br>
+Number of bytes sent (calculated after Gzip).
 
 `datadog.trace_agent.trace_writer.bytes_uncompressed `
-: **タイプ**: カウント<br>
-送信されたバイト数 (GZIP 前に計算)。
+: **Type**: Count<br>
+Number of bytes sent (calculated before Gzip).
 
 `datadog.trace_agent.trace_writer.compress_ms`
-: **タイプ**: ゲージ<br>
-エンコードされたトレースペイロードの圧縮にかかったミリ秒数。
+: **Type**: Gauge<br>
+Number of milliseconds it took to compress an encoded trace payload.
 
 `datadog.trace_agent.trace_writer.connection_fill`
-: **タイプ**: ヒストグラム <br>
-トレースライターが使用する発信接続の割合。
+: **Type**: Histogram <br>
+Percentage of outgoing connections used by the trace writer.
 
 `datadog.trace_agent.trace_writer.dropped`
-: **タイプ**: カウント<br>
-リトライできない HTTP エラーによってドロップされたペイロード数。
+: **Type**: Count<br>
+Number of dropped payloads due to non retriable HTTP errors.
 
 `datadog.trace_agent.trace_writer.dropped_bytes`
-: **タイプ**: カウント<br>
-リトライできない HTTP エラーによってドロップされたバイト数。
+: **Type**: Count<br>
+Number of dropped bytes due to non retriable HTTP errors.
 
 `datadog.trace_agent.trace_writer.encode_ms`
-: **タイプ**: ゲージ<br>
-トレースペイロードのエンコードにかかったミリ秒数。
+: **Type**: Gauge<br>
+Number of milliseconds it took to encode a trace payload.
 
 `datadog.trace_agent.trace_writer.errors`
-: **タイプ**: カウント<br>
-リトライできなかったエラー。
+: **Type**: Count<br>
+Errors that could not be retried.
 
 `datadog.trace_agent.trace_writer.events`
-: **タイプ**: カウント<br>
-処理されたイベント数。
+: **Type**: Count<br>
+Number of events processed.
 
 `datadog.trace_agent.trace_writer.flush_duration`
-: **タイプ**: ゲージ<br>
-ペイロードを Datadog API にフラッシュするのにかかった時間。
+: **Type**: Gauge<br>
+Time it took to flush a payload to the Datadog API.
 
 `datadog.trace_agent.trace_writer.payloads`
-: **タイプ**: カウント<br>
-処理されたペイロード数。
-
-`datadog.trace_agent.trace_writer.payloads`
-: **タイプ**: カウント<br>
-発信ペイロード数。
+: **Type**: Count<br>
+Number of payloads sent.
 
 `datadog.trace_agent.trace_writer.queue_fill`
-: **タイプ**: ヒストグラム <br>
-発信ペイロードキューがいっぱいになる割合。
+: **Type**: Histogram <br>
+Percentage of outgoing payload queue fill.
 
 `datadog.trace_agent.trace_writer.retries`
-: **タイプ**: カウント<br>
-Datadog API でのエラーに対するリトライ回数。
+: **Type**: Count<br>
+Number of retries on failures to the Datadog API.
 
 `datadog.trace_agent.trace_writer.spans`
-: **タイプ**: カウント<br>
-処理されたスパン数。
+: **Type**: Count<br>
+Number of spans processed.
 
 `datadog.trace_agent.trace_writer.traces`
-: **タイプ**: カウント<br>
-処理されたトレース数。
+: **Type**: Count<br>
+Number of traces processed.
 
-[1]: /ja/tracing/setup/
+[1]: /tracing/setup/
 [2]: /resources/json/APM_monitoring_dashboard.json

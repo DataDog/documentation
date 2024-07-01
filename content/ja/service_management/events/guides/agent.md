@@ -1,65 +1,65 @@
 ---
+title: Events with a Custom Agent Check
+kind: guide
 aliases:
-- /ja/events/agent/
-- /ja/events/guides/agent
+- /events/agent/
+- /events/guides/agent
 further_reading:
 - link: /developers/custom_checks/write_agent_check/
   tag: Documentation
-  text: カスタム Agent チェックの書き方
-kind: ガイド
-title: カスタム Agent チェックを使用したイベント
+  text: Writing a Custom Agent Check
 ---
 
-## 送信
+## Submission
 
-カスタム Agent チェックからイベントを送信するには、以下の `event(<イベント_辞書>)` 関数を使用します。
+To submit an event from a custom Agent Check use the `event(<EVENT_DICT>)` function:
 
 ```text
 self.event(
             {
-              "timestamp": <タイムスタンプ_エポック>,
-              "event_type": "<イベント名>",
-              "msg_title": "<タイトル>",
-              "msg_text": "<メッセージ>",
-              "aggregation_key": "<集計キー>",
-              "alert_type": "<アラートタイプ>",
-              "source_type_name": "<ソースタイプ>",
-              "host": "<ホスト名>",
-              "tags": ["<タグ>"],
-              "priority": "<優先度>"
+              "timestamp": <TIMESTAMP_EPOCH>,
+              "event_type": "<EVENT_NAME>",
+              "msg_title": "<TITLE>",
+              "msg_text": "<MESSAGE>",
+              "aggregation_key": "<AGGREGATION_KEY>",
+              "alert_type": "<ALERT_TYPE>",
+              "source_type_name": "<SOURCE_TYPE>",
+              "host": "<HOSTNAME>",
+              "tags": ["<TAGS>"],
+              "priority": "<PRIORITY>"
             }
 )
 ```
 
-イベントの辞書では、以下のキーとデータ型を使用できます。
+The following keys and data types are available in the event dictionary:
 
-| キー                | タイプ            | 必須 | 説明                                                   |
+| Key                | Type            | Required | Description                                                   |
 |--------------------|-----------------|----------|---------------------------------------------------------------|
-| `timestamp`        | 整数         | はい      | イベントのエポックタイムスタンプ                             |
-| `event_type`       | 文字列          | はい      | イベント名                                                |
-| `msg_title`        | 文字列          | はい      | イベントのタイトル                                        |
-| `msg_text`         | 文字列          | はい      | イベントのテキスト本文                                    |
-| `aggregation_key`  | 文字列          | ✕       | イベントを集計するために使用するキー                           |
-| `alert_type`       | 文字列          | ✕       | `error`、`warning`、`success`、または `info` (デフォルトは `info`) |
-| `source_type_name` | 文字列          | ✕       | ソースタイプの名前                                     |
-| `host`             | 文字列          | ✕       | ホスト名                                                 |
-| `tags`             | 文字列のリスト | ✕       | このイベントに関連付けられるタグのリスト                    |
-| `priority`         | 文字列          | ✕       | イベントの優先度を指定します (`normal` または `low`)。      |
+| `timestamp`        | Integer         | Yes      | The epoch timestamp for the event                             |
+| `event_type`       | String          | Yes      | The event name                                                |
+| `msg_title`        | String          | Yes      | The title of the event                                        |
+| `msg_text`         | String          | Yes      | The text body of the event                                    |
+| `aggregation_key`  | String          | No       | A key to use for aggregating events                           |
+| `alert_type`       | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`) |
+| `source_type_name` | String          | No       | The source type name                                     |
+| `host`             | String          | No       | The host name                                                 |
+| `tags`             | List of strings | No       | A list of tags associated with this event.                    |
+| `priority`         | String          | No       | Specifies the priority of the event (`normal` or `low`).      |
 
-### 例
+### Example
 
-カスタム Agent チェックを使用して、1 つのイベントを定期的に送信する例を示します。詳細については、[カスタム Agent チェックの書き方][1]を参照してください。
+This is an example of using a custom Agent check to send one event periodically. See [Writing a Custom Agent Check][1] for more details.
 
-1. [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーに、ディレクトリ `event_example.d/` を作成します。
+1. Create a new directory `event_example.d/` in the `conf.d/` folder at the root of your [Agent's configuration directory][2].
 
-2. `event_example.d/` フォルダーに次の内容でコンフィギュレーションファイルを作成し、`event_example.yaml` と名付けます。
+2. In the `event_example.d/` folder, create a configuration file named `event_example.yaml` with the following content:
 
     ```yaml
     instances: [{}]
     ```
 
-3. `conf.d/` フォルダーから階層を 1 つ上がり、`checks.d/` フォルダーに移動します。
-4. このフォルダーに次の内容でカスタムチェックファイルを作成し、`event_example.py` と名付けます。
+3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder.
+4. In this folder, create a custom check file named `event_example.py` with the following content:
 
     {{< code-block lang="python" filename="event_example.py" >}}
     from datadog_checks.base import AgentCheck
@@ -72,15 +72,15 @@ self.event(
                 {
                     "timestamp": time.time(),
                     "event_type": "Error",
-                    "msg_title": "サンプルイベント",
-                    "msg_text": "これは Datadog から送られたサンプルのイベントです。",
+                    "msg_title": "Example Event",
+                    "msg_text": "This is an example event coming from Datadog.",
                     "alert_type": "error",
                 }
             )
     {{< /code-block >}}
 
-5. [Agent を再起動します][3]。
-6. 検証するには、[Agent の status コマンド][4]を実行し、Checks セクションで `event_example` を探します。
+5. [Restart the Agent][3].
+6. For validation, run the [Agent's status command][4] and look for `event_example` under the Checks section:
 
     ```
     =========
@@ -104,12 +104,12 @@ self.event(
         (...)
     ```
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/developers/custom_checks/write_agent_check/
-[2]: /ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[3]: /ja/agent/guide/agent-commands/#restart-the-agent
-[4]: /ja/agent/guide/agent-commands/#agent-information
+[1]: /developers/custom_checks/write_agent_check/
+[2]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[3]: /agent/configuration/agent-commands/#restart-the-agent
+[4]: /agent/configuration/agent-commands/#agent-information

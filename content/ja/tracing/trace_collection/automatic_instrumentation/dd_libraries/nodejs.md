@@ -1,125 +1,139 @@
 ---
+title: Tracing Node.js Applications
+kind: documentation
 aliases:
-- /ja/tracing/nodejs/
-- /ja/tracing/languages/nodejs/
-- /ja/tracing/languages/javascript/
-- /ja/tracing/setup/javascript/
-- /ja/agent/apm/nodejs/
-- /ja/tracing/setup/nodejs
-- /ja/tracing/setup_overview/nodejs
-- /ja/tracing/setup_overview/setup/nodejs
-- /ja/tracing/trace_collection/dd_libraries/nodejs/
+    - /tracing/nodejs/
+    - /tracing/languages/nodejs/
+    - /tracing/languages/javascript/
+    - /tracing/setup/javascript/
+    - /agent/apm/nodejs/
+    - /tracing/setup/nodejs
+    - /tracing/setup_overview/nodejs
+    - /tracing/setup_overview/setup/nodejs
+    - /tracing/trace_collection/dd_libraries/nodejs/
 code_lang: nodejs
+type: multi-code-lang
 code_lang_weight: 30
 further_reading:
-- link: https://github.com/DataDog/dd-trace-js
-  tag: GitHub
-  text: ソースコード
-- link: https://datadog.github.io/dd-trace-js
-  tag: ドキュメント
-  text: API ドキュメント
-- link: tracing/trace_collection/otel_instrumentation/java/
-  tag: APM の UI を利用する
-  text: サービス、リソース、トレースを調査する
-- link: tracing/trace_collection/otel_instrumentation/
-  tag: 高度な使用方法
-  text: 高度な使用方法
-kind: ドキュメント
-title: Node.js アプリケーションのトレース
-type: multi-code-lang
+    - link: "https://github.com/DataDog/dd-trace-js"
+      tag: Source Code
+      text: Source code
+    - link: "https://datadog.github.io/dd-trace-js"
+      tag: Documentation
+      text: API documentation
+    - link: tracing/glossary/
+      tag: Documentation
+      text: Explore your services, resources and traces
+    - link: tracing/
+      tag: Documentation
+      text: Advanced Usage
 ---
-## 互換性要件
+## Compatibility requirements
 
-最新の Node.js トレーサーは、バージョン `>=14` に対応しています。Datadog の Node.js バージョンとフレームワークのサポート一覧 (レガシーバージョンとメンテナンスバージョンを含む) については、[互換性要件][1]ページをご覧ください。
+The latest Node.js Tracer supports Node.js versions `>=18`. For a full list of Datadog's Node.js version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
-## はじめに
+## Getting started
 
-作業を始める前に、[Agent のインストールと構成][13]が済んでいることを確認してください。
+Before you begin, make sure you've already [installed and configured the Agent][13]. Then, complete the following steps to add the Datadog tracing library to your Node.js application to instrument it. 
 
-### アプリケーションをインスツルメントする
+### Install the Datadog tracing library
 
-Datadog Agent をインストールして構成したら、次はアプリケーションに直接トレーシングライブラリを追加してインスツルメントします。[互換性情報][1]の詳細をお読みください。
+To install the Datadog tracing library using npm for Node.js 18+, run:
 
-Agent のインストールが完了したら、以下の手順で Datadog のトレーシングライブラリを Node.js アプリケーションに追加します。
+  ```shell
+  npm install dd-trace --save
+  ```
+To install the Datadog tracing library (version 4.x of `dd-trace`) for end-of-life Node.js version 16, run:
+  ```shell
+  npm install dd-trace@latest-node16
+  ```
+For more information on Datadog's distribution tags and Node.js runtime version support, see the [Compatibility Requirements][1] page.
+If you are upgrading from a previous major version of the library (0.x, 1.x, 2.x, 3.x or 4.x) to another major version, read the [Migration Guide][5] to assess any breaking changes.
 
-1. Node.js 14 以降に対応する npm を使用して Datadog Tracing ライブラリをインストールします。
+### Import and initialize the tracer
 
-    ```sh
-    npm install dd-trace --save
-    ```
-   発売終了済みの Node.js バージョン 12 をトレースしたい場合は、以下を実行して `dd-trace` のバージョン 2.x をインストールしてください。
-    ```
-    npm install dd-trace@latest-node12
-    ```
-   ディストリビューションタグおよび Node.js のランタイムばージョンサポートについて詳しくは、[互換性要件][1] ページを参照してください。
-   ライブラリの以前のメジャーバージョン (0.x、1.x、2.x) から別のメジャーバージョン (2.x、3.x) にアップグレードする場合は、[移行ガイド][5]を読み、変更点を評価するようにしてください。
+Import and initialize the tracer either in code or with command line arguments. The Node.js tracing library needs to be imported and initialized **before** any other module.
 
-2. コードまたはコマンドライン引数を使用して、トレーサーをインポートして初期化します。Node.js トレースライブラリは、他のモジュールの**前**にインポートして初期化する必要があります。
+After you have completed setup, if you are not receiving complete traces, including missing URL routes for web requests, or disconnected or missing spans, **confirm the tracer has been imported and initialized correctly**. The tracing library being initialized first is necessary for the tracer to properly patch all of the required libraries for automatic instrumentation.
 
-   セットアップが完了した後、Web リクエストの URL ルートの欠落、スパンの切断または欠落など、完全なトレースを受信していない場合は、**ステップ 2 が正しく行われたことを確認してください**。最初に初期化されるトレースライブラリは、トレーサーが自動インスツルメンテーションに必要なすべてのライブラリに適切にパッチを適用するために必要です。
+When using a transpiler such as TypeScript, Webpack, Babel, or others, import and initialize the tracer library in an external file and then import that file as a whole when building your application.
 
-   TypeScript、Webpack、Babel などのトランスパイラーを使用する場合は、トレーサーライブラリを外部ファイルにインポートして初期化し、アプリケーションをビルドするときにそのファイル全体をインポートします。
+#### Option 1: Add the tracer in code
 
-### コードにトレーサーを追加する
-
-#### JavaScript
+##### JavaScript
 
 ```javascript
-// の行は、インスツルメントされたいずれのモジュールのインポートより前である必要があります。
+// This line must come before importing any instrumented module.
 const tracer = require('dd-trace').init();
 ```
 
-#### TypeScript とバンドラー
+##### TypeScript and bundlers
 
-EcmaScript モジュール構文をサポートする TypeScript およびバンドラーの場合、正しいロード順序を維持するために、別のファイルでトレーサーを初期化します。
+For TypeScript and bundlers that support EcmaScript Module syntax, initialize the tracer in a separate file to maintain correct load order.
 
 ```typescript
 // server.ts
-import './tracer'; // インスツルメントされたいずれのモジュールのインポートより前である必要があります。
+import './tracer'; // must come before importing any instrumented module.
 
 // tracer.ts
 import tracer from 'dd-trace';
-tracer.init(); // ホイストを避けるため異なるファイルで初期化。
+tracer.init(); // initialized in a different file to avoid hoisting.
 export default tracer;
 ```
 
-デフォルトのコンフィギュレーションで十分な場合、またはすべてのコンフィギュレーションが環境変数を介して行われる場合は、`dd-trace/init` を使用することもできます。これは 1 つのステップでロードおよび初期化されます。
+If the default config is sufficient, or all configuration is done
+via environment variables, you can also use `dd-trace/init`, which loads and
+initializes in one step.
 
 ```typescript
 import 'dd-trace/init';
 ```
 
-### コマンドライン引数を介したトレーサーの追加
+#### Option 2: Add the tracer with command line arguments
 
-Node.js の `--require` オプションを使用して、トレーサーを 1 回のステップでロードして初期化します。
+Use the `--require` option to Node.js to load and initialize the tracer in one step.
 
 ```sh
 node --require dd-trace/init app.js
 ```
 
-**注:** このアプローチでは、トレーサーのすべてのコンフィギュレーションに環境変数を使用する必要があります。
+**Note:** This approach requires using environment variables for all configuration of the tracer.
 
-### バンドル
+#### ESM applications only: Import the loader
 
-`dd-trace` は Node.js アプリケーションがモジュールをロードする際に行う `require()` 呼び出しを傍受することで動作します。これには、ファイルシステムにアクセスするための `fs` モジュールのような Node.js に組み込まれているモジュールや、`pg` データベースモジュールのような NPM レジストリからインストールされたモジュールが含まれます。
+EcmaScript Modules (ESM) applications require an additional command line argument. Run this command regardless of how the tracer is imported and initialized.
 
-バンドラーはアプリケーションがディスク上のファイルに対して行う `require()` 呼び出しをすべてクロールします。`require()` の呼び出しをカスタムコードに置き換え、その結果の JavaScript を 1 つの "バンドルされた" ファイルにまとめます。`require('fs')` のような組み込みモジュールがロードされたとき、その呼び出しは結果として生成されるバンドルにそのまま残ります。
+**Node.js < v20.6**
+```shell
+node --loader dd-trace/loader-hook.mjs entrypoint.js
+```
 
-`dd-trace` のような APM ツールはこの時点で機能しなくなります。組み込みモジュールの呼び出しは引き続き傍受できますが、サードパーティライブラリの呼び出しは傍受しません。つまり、`dd-trace` アプリをバンドラーでバンドルすると、ディスクアクセス (`fs` 経由) とアウトバウンド HTTP リクエスト (`http` 経由) の情報はキャプチャしますが、サードパーティライブラリの呼び出しは省略する可能性が高くなります。例:
-- `express` フレームワークの受信リクエストルート情報を抽出する。
-- データベースクライアント `mysql` に対して実行されるクエリを表示する。
+**Node.js >= v20.6**
+```shell
+node --import dd-trace/register.js entrypoint.js
+```
 
-一般的な回避策は、APM がインスツルメンテーションする必要のあるすべてのサードパーティモジュールを、バンドラーの "外部" として扱うことです。この設定では、インスツルメンテーションされたモジュールはディスク上に残り、`require()` でロードされ続け、インスツルメンテーションされていないモジュールはバンドルされます。しかし、これでは余計なファイルがたくさんあるビルドになってしまい、バンドルする意味がなくなってしまいます。
+### Bundling
 
-Datadog では、カスタムビルトバンドラープラグインを推奨しています。このプラグインは、バンドラーに動作を指示したり、中間コードを挿入したり、"翻訳された" `require()` 呼び出しを傍受したりすることができます。その結果、より多くのパッケージがバンドルされた JavaScript ファイルに含まれるようになります。
+`dd-trace` works by intercepting `require()` calls that a Node.js application makes when loading modules. This includes modules that are built-in to Node.js, like the `fs` module for accessing the filesystem, as well as modules installed from the NPM registry, like the `pg` database module.
 
-**注**: アプリケーションによっては、100% のモジュールをバンドルすることができますが、ネイティブモジュールはまだバンドルの外部に残しておく必要があります。
+Bundlers crawl all of the `require()` calls that an application makes to files on disk. It replaces the `require()` calls with custom code and combines all of the resulting JavaScript into one "bundled" file. When a built-in module is loaded, such as `require('fs')`, that call can then remain the same in the resulting bundle.
 
-#### Esbuild サポート
+APM tools like `dd-trace` stop working at this point. They can continue to intercept the calls for built-in modules but don't intercept calls to third party libraries. This means that when you bundle a `dd-trace` app with a bundler it is likely to capture information about disk access (through `fs`) and outbound HTTP requests (through `http`), but omit calls to third party libraries. For example:
+- Extracting incoming request route information for the `express` framework. 
+- Showing which query is run for the `mysql` database client.
 
-このライブラリは esbuild プラグインの形で実験的な esbuild サポートを提供し、少なくとも Node.js v16.17 または v18.7 が必要です。プラグインを使用するには、`dd-trace@3+` がインストールされていることを確認し、バンドルをビルドするときに `dd-trace/esbuild` モジュールを要求します。
+A common workaround is to treat all third party modules that the APM needs to instrument as being "external" to the bundler. With this setting the instrumented modules remain on disk and continue to be loaded with `require()` while the non-instrumented modules are bundled. However, this results in a build with many extraneous files and starts to defeat the purpose of bundling.
 
-以下は esbuild で `dd-trace` を使う例です。
+Datadog recommends you have custom-built bundler plugins. These plugins are able to instruct the bundler on how to behave, inject intermediary code and intercept the "translated" `require()` calls. As a result, more packages are included in the bundled JavaScript file. 
+
+**Note**: Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.
+
+#### Esbuild support
+
+This library provides experimental esbuild support in the form of an esbuild plugin, and requires at least Node.js v16.17 or v18.7. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
+
+Here's an example of how one might use `dd-trace` with esbuild:
 
 ```javascript
 const ddPlugin = require('dd-trace/esbuild')
@@ -130,21 +144,21 @@ esbuild.build({
   bundle: true,
   outfile: 'out.js',
   plugins: [ddPlugin],
-  platform: 'node', // 組み込みモジュールの使用を可能にします
+  platform: 'node', // allows built-in modules to be required
   target: ['node16'],
   external: [
-    // esbuild はネイティブモジュールをバンドルできません
+    // esbuild cannot bundle native modules
     '@datadog/native-metrics',
 
-    // プロファイリングを使用する場合は必須です
+    // required if you use profiling
     '@datadog/pprof',
 
-    // Datadog のセキュリティ機能を使用する場合は必須です
+    // required if you use Datadog security features
     '@datadog/native-appsec',
     '@datadog/native-iast-taint-tracking',
     '@datadog/native-iast-rewriter',
 
-    // ビルドステップで graphql エラーが発生した場合は必須です
+    // required if you encounter graphql errors during the build step
     'graphql/language/visitor',
     'graphql/language/printer',
     'graphql/utilities'
@@ -155,9 +169,9 @@ esbuild.build({
 })
 ```
 
-**注**: トレーサーでは、コンパイルされた C++ コードであるネイティブモジュール (通常、拡張機能が `.node` で終わる) を使用するため、 `external` リストにエントリを追加する必要があります。現在、Node.js トレーサーで使用されているネイティブモジュールは `@datadog` プレフィックス付きパッケージの中にあります。このため、バンドルしたアプリケーションと共に `node_modules/` ディレクトリも配布する必要があります。 ディレクトリには、バンドル内に含まれるべき多くの不要なパッケージがあるため、`node_modules/` ディレクトリ全体を配布する必要はありません。
+**Note**: Due to the usage of native modules in the tracer, which are compiled C++ code, (usually ending with a `.node` file extension), you need to add entries to your `external` list. Currently native modules used in the Node.js tracer live inside of `@datadog` prefixed packages. This will also require that you ship a `node_modules/` directory alongside your bundled application. You don't need to ship your entire `node_modules/` directory as it would contain many superfluous packages that should be contained in your bundle.
 
-必要なネイティブモジュール (とその依存関係) だけを含む、より小さな `node_modules/` ディレクトリを生成するには、まず必要なパッケージのバージョンを決定し、それらをインストールするための一時ディレクトリを作成し、そこから結果の `node_modules/` ディレクトリをコピーします。例:
+To generate a smaller `node_modules/` directory with only the required native modules, (and their dependencies) you can first determine the versions of packages that you need, then create a temporary directory to install them into, and copy the resulting `node_modules/` directory from it. For example:
 
 ```sh
 cd path/to/project
@@ -173,22 +187,22 @@ npm install @datadog/native-metrics@2.0.0 @datadog/pprof@5.0.0
 cp -R ./node_modules path/to/bundle
 ```
 
-この段階で、バンドル (アプリケーションコードと依存関係の大部分) と、ネイティブモジュールとその依存関係を含む `node_modules/` ディレクトリをデプロイできるはずです。
+At this stage you should be able to deploy your bundle, (which is your application code and most of your dependencies), with the `node_modules/` directory, which contains the native modules and their dependencies.
 
-## ブラウザトラブルシューティング
+## Configuration
 
-必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][4]を参照してください。
+If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
 
-初期化のオプションについては、[トレーサー設定][3]をお読みください。
+Read [tracer settings][3] for a list of initialization options.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/compatibility_requirements/nodejs
+[1]: /tracing/compatibility_requirements/nodejs
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
-[4]: /ja/tracing/trace_collection/library_config/nodejs/
+[4]: /tracing/trace_collection/library_config/nodejs/
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
-[11]: /ja/tracing/trace_collection/library_injection_local/
-[13]: /ja/tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[11]: /tracing/trace_collection/library_injection_local/
+[13]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

@@ -1,146 +1,145 @@
 ---
-app_id: azure-active-directory
-app_uuid: 8c4717a8-93f0-4de6-b79b-1e7f52c94895
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10106
-    source_type_name: Azure Active Directory
-  logs:
-    source: azure.active_directory
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
+"app_id": "azure-active-directory"
+"app_uuid": "8c4717a8-93f0-4de6-b79b-1e7f52c94895"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10106"
+    "source_type_name": Azure Active Directory
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - azure
-- クラウド
-- ログの収集
-- セキュリティ
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/azure_active_directory/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: azure_active_directory
-integration_id: azure-active-directory
-integration_title: Azure Active Directory
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: azure_active_directory
-public_title: Azure Active Directory
-short_description: Azure Active Directory アクティビティログを分析
-supported_os:
+- cloud
+- log collection
+- security
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/azure_active_directory/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "azure_active_directory"
+"integration_id": "azure-active-directory"
+"integration_title": "Azure Active Directory"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "azure_active_directory"
+"public_title": "Azure Active Directory"
+"short_description": "Analyze your Azure Active Directory activity logs"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Azure
-  - Category::Cloud
-  - Category::Log Collection
-  - Category::Security
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Azure Active Directory アクティビティログを分析
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Azure Active Directory
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Azure"
+  - "Category::Cloud"
+  - "Category::Log Collection"
+  - "Category::Security"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Analyze your Azure Active Directory activity logs
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Azure Active Directory
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Azure Active Directory は、Microsoft Azure によるクラウドホスト型 Active Directory 製品です。
-このインテグレーションにより、[Azure AD アクティビティログ][1] (監査ログとサインインログ) を Datadog に取り込むことができます。
+Azure Active Directory is a cloud hosted Active Directory offering by Microsoft Azure.
+This integration allows you to ingest your [Azure AD activity logs][1] (audit and sign-in logs) to Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-このインテグレーションにより、 Azure Event Hubs を使用してログが Datadog に転送されます。アクティビティログをイベントハブに転送するように Azure AD を構成します。
+This integration forwards logs to Datadog using Azure with Event Hubs. Configure Azure AD to forward activity logs to the event hub.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. [Datadog への Azure ログの送信][2]ガイドに従って、Event Hub を使用して Azure から Datadog へのログ転送パイプラインをセットアップします。
+1. Set up the log forwarding pipeline from Azure to Datadog using Event Hubs by following the [Send Azure Logs to Datadog][2] guide.
 
-2. Azure ポータルで、 _Azure Active Directory > Monitoring > Audit logs_ を選択します。
+2. In Azure portal, select _Azure Active Directory > Monitoring > Audit logs_.
 
-3. **Export Settings** を選択します。
+3. Select **Export Settings**.
 
-4. 診断設定ペインで、以下を実行します。
+4. In the Diagnostics settings pane, do one of the following:
 
-   - 既存の設定を変更するには、**Edit setting** を選択します。
-   - 新しい設定を追加するには、**Add diagnostics setting** を選択します。最大3つまで設定できます。
+   - To change existing settings, select **Edit setting**.
+   - To add new settings, select **Add diagnostics setting**. You can have up to three settings.
 
-5. **Stream to an event hub** チェックボックスを選択してから、**Event Hub/Configure** を選択します。
+5. Select the **Stream to an event hub** check box, and then select **Event Hub/Configure**.
 
-6. ログを送信するために作成した Azure サブスクリプションと Event Hubs ネームスペースを選択します。
+6. Select the Azure subscription and Event Hubs namespace that you created earlier to route the logs to.
 
-7. OK を選択してイベントハブコンフィギュレーションを終了します。
+7. Select OK to exit the event hub configuration.
 
-8. 以下のいずれかまたは両方を実行します。Datadog では両方選択することを推奨します。
+8. Do one or both of the following. Datadog recommends selecting both.
 
-   - 監査ログを送信するには、**AuditLogs** チェックボックスを選択します。
-   - サインインログを送信するには、**SignInLogs** チェックボックスを選択します。
+   - To send audit logs, select the **AuditLogs** check box.
+   - To send sign-in logs, select the **SignInLogs** check box.
 
-9. **Save** を選択します。
+9. Select **Save**.
 
-15 分以内に Datadog はログを受け取り始めます。
-セットアップに関する詳細は、[Azure チュートリアル][3]を参照してください。
+Logs should start coming into Datadog within 15 minutes.
+For more details on the setup, see the [Azure tutorial][3].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-#### 収集データ
+#### Log collection
 
-このインテグレーションにより、Azure Active Directory アクティビティログのログ取り込みを設定できます。
+This integration allows you to setup log ingestion for Azure Active Directory activity logs.
 
-これには以下が含まれます。
+This includes the following:
 
-   - Sign-ins - 管理対象のアプリケーションおよびユーザーのサインインアクティビティの使用状況に関する情報を提供します。
+   - Sign-ins - Provides information about the usage of managed applications and user sign-in activities.
 
-   - Audit logs - Azure AD 内のさまざまな機能が行った変更のログを介してトレーサビリティを提供します。
+   - Audit logs - Provides traceability through logs for all changes done by various features within Azure AD.  
 
-### データセキュリティ
+### Metrics
 
-Azure Active Directory には、メトリクスは含まれません。
+Azure Active Directory does not include any metrics.
 
-### ヘルプ
+### Events
 
-Datadog は、Azure アプリ登録、Key Vault キー、Key Vault シークレット、Key Vault 証明書の資格情報期限切れを視覚化する資格情報期限切れイベントを送信します。Azure アプリ登録のイベントを受信するには、Azure Active Directory インテグレーションをインストールする必要があります。また、Azure からイベントを受信するには、[Azure インテグレーション][4]のインストールが必要です。
+Datadog sends credential expiry events, which grant visibility into credential expirations for Azure app registrations, Key Vault keys, Key Vault secrets, and Key Vault certificates. The Azure Active Directory integration must be installed to receive events for Azure app registrations. Receiving events from Azure also requires installation of the [Azure integration][4].
 
 
-- **期限切れイベント**は、資格情報有効期限の 60 日、30 日、15 日、1 日前に送信され、期限切れ後に 1 回送信されます。
-- **権限欠落イベント**は 15 日ごとに送信されます。権限欠落イベントは、Datadog に権限が与えられていない Key Vault をリストアップします。前の 15 日間のサイクルで Key Vault 権限に関して変更が行われていない場合、イベント通知は再度送信されません。
+- **Expiration events** are sent 60, 30, 15, and 1 day(s) before credential expiration, and once after expiration.
+- **Missing permission events** are sent every 15 days. A missing permission event lists the Key Vaults for which Datadog has not been given permissions. If no changes have been made regarding Key Vault permissions in the previous 15-day cycle, the event notification is not sent again.
 
-これらのイベントは[イベントエクスプローラー][5]で表示できます。
+You can view these events in [Event Explorer][5].
 
-**注**: 
+**Notes**: 
 
-- Azure アプリ登録期限切れイベントを収集するには、[Microsoft Graph API へのアクセスを有効にします][6]。
-- 証明書とそれに関連するキーとシークレットがまったく同時に期限切れになる場合、すべてのリソースに対して 1 つの期限切れイベントが送信されます。
+- To collect Azure app registration expiration events, [enable access to the Microsoft Graph API][6].
+- If a certificate and its associated key and secret expire at the exact same time, one expiration event is sent for all resources.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+Need help? Contact [Datadog support][7].
 
 [1]: https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/overview-reports#activity-reports
-[2]: https://docs.datadoghq.com/ja/logs/guide/azure-logging-guide/
+[2]: https://docs.datadoghq.com/logs/guide/azure-logging-guide/
 [3]: https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/tutorial-azure-monitor-stream-logs-to-event-hub
-[4]: https://docs.datadoghq.com/ja/integrations/azure/
+[4]: https://docs.datadoghq.com/integrations/azure/
 [5]: https://app.datadoghq.com/event/explorer
-[6]: https://docs.datadoghq.com/ja/integrations/guide/azure-graph-api-permissions/
-[7]: https://docs.datadoghq.com/ja/help
+[6]: https://docs.datadoghq.com/integrations/guide/azure-graph-api-permissions/
+[7]: https://docs.datadoghq.com/help
+

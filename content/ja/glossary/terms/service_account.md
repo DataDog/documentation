@@ -1,5 +1,5 @@
 ---
-title: サービスアカウント
+title: service account
 ---
-サービスアカウントは、ロールを割り当てられ、アプリケーションキーを所有することができる、人間以外のユーザーです。
-詳細は、<a href="/account_management/org_settings/#service-accounts">ドキュメントを参照してください</a>。
+A service account is a non-human user that can be assigned a role and own application keys.
+For more information, <a href="/account_management/org_settings/#service-accounts">see the documentation</a>.

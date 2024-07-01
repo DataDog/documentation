@@ -1,197 +1,233 @@
 ---
+title: Datadog Audit Trail
 aliases:
-- /ja/account_management/audit_logs/
+    - /account_management/audit_logs/
 further_reading:
 - link: /account_management/audit_trail/events/
-  tag: ドキュメント
-  text: 監査証跡イベントについて
+  tag: Documentation
+  text: Learn about Audit Trail events
 - link: /account_management/org_settings/
-  tag: ドキュメント
-  text: 組織設定について
-- link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
-  tag: ブログ
-  text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
-- link: https://www.datadoghq.com/blog/audit-trail-best-practices/
-  tag: ブログ
-  text: 監査証跡で重要な Datadog のアセットと構成を監視する
-title: Datadog Audit Trail（監査証跡）
+  tag: Documentation
+  text: Learn about organization settings
+- link: /data_security/pci_compliance/
+  tag: Documentation
+  text: Set up a PCI-compliant Datadog organization
+- link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
+  tag: Blog
+  text: Build compliance, governance, and transparency across your teams with Datadog Audit Trail
+- link: "https://www.datadoghq.com/blog/audit-trail-best-practices/"
+  tag: Blog
+  text: Monitor critical Datadog assets and configurations with Audit Trail
 ---
 
-## 概要
+## Overview
 
-管理者またはセキュリティチームのメンバーは、[Datadog 監査証跡][1]を使用して組織内で Datadog を使用しているユーザーとそのコンテキストを確認できます。個人として、自身のアクションをストリームで確認することも可能です。
+As an administrator or security team member, you can use [Datadog Audit Trail][1] to see who is using Datadog within your organization and the context in which they are using Datadog. As an individual, you can see a stream of your own actions, too.
 
-監査証跡内で発生するイベントには、Datadog API に要求されたすべてのリクエストを顧客リクエストに変換する**リクエストイベント**と、**製品特化イベント**の 2 種類があります。
+There are two types of events that can occur within an audit trail: **request events**, which translate all requests made to Datadog's API into customer records, or **product-specific events**.
 
-たとえば、**リクエストイベント**を追跡すると、そのイベントに到達する API 呼び出しを確認できます。または、組織または請求担当の管理者の場合は、監査証跡イベントを使用してインフラストラクチャーの状態を変更したユーザーイベントを追跡できます。
+For example, track **request events** so you can see what API calls led up to the event. Or, if you're an enterprise or billing admin, use audit trail events to track user events that change the state of your infrastructure.
 
-この環境では、以下のような製品特有のイベントについて確認する場合に監査証跡が便利です。
+In this circumstance, audit events are helpful when you want to know product-specific events such as:
 
-  -  ログのボリュームが変化し、毎月の請求額が変化したためインデックスの保持期間が変更されたとき。
+  -  When someone changed the retention of an index because the log volume changed and, therefore, the monthly bill has changed.
 
-  - ダッシュボードまたはモニターが壊れていて修復が必要な場合に、プロセッサまたはパイプラインを変更したユーザーおよびその変更日時を確認する。
+  - Who modified processors or pipelines, and when they were modified, as a dashboard or monitor is now broken and needs to be fixed.
 
-  - インデックス化のボリュームが増減し、ログが見つからないまたは請求額が増加したため、除外フィルターを変更したユーザーを確認する。
+  - Who modified an exclusion filter because the indexing volume has increased or decreased and logs are unable to be found or your bill went up.
 
-セキュリティ管理者またはInfoSecチームには、監査証跡イベントはコンプライアンスチェックや Datadog リソースにおける監査証跡（だれがいつ何をしたか）の管理に便利です。たとえば、以下のような監査証跡を管理できます。
+For security admins or InfoSec teams, audit trail events help with compliance checks and maintaining audit trails of who did what, and when, for your Datadog resources. For example, maintaining an audit trail:
 
-- 重要なダッシュボード、モニター、その他の Datadog リソースの更新または削除があった場合の日時と実行者。
+- Of anytime someone updates or deletes critical dashboard, monitors, and other Datadog resources.
 
-- 組織内のユーザーログイン、アカウント、ロール変更。
+- For user logins, account, or role changes in your organization.
 
-## セットアップ
+**Note**: See [PCI DSS Compliance][2] for information on setting up a PCI-compliant Datadog organization.
 
-Datadog 監査証跡を有効にするには、[オーガニゼーションの設定][2]で *Security* の *Audit Trail Settings* を選択し、**Enable** ボタンをクリックします。
+## Setup
 
-{{< img src="account_management/audit_logs/audit_trail_settings.png" alt="監査証跡の設定ページで無効になっている様子" style="width:85%;">}}
+To enable Datadog Audit Trail, navigate to your [Organization Settings][3] and select *Audit Trail Settings* under *COMPLIANCE*. Click the **Enable** button.
 
-監査証跡を有効にした人を確認するには
-1. [イベントエクスプローラー][3]に移動します。
-2. 検索バーに `Datadog Audit Trail was enabled by` と入力します。イベントをキャプチャするために、より広い時間範囲を選択する必要がある場合があります。
-3. "A user enabled Datadog Audit Trail" というタイトルの最新イベントには、最後に監査証跡を有効にしたのが誰であるかが表示されます。
+{{< img src="account_management/audit_logs/audit_trail_settings.png" alt="The Audit Trail Settings page showing it disabled" style="width:85%;">}}
 
-## コンフィギュレーション
+To see who enabled Audit Trail:
+1. Navigate to [Events Explorer][4].
+2. Enter `Datadog Audit Trail was enabled by` in the search bar. You may have to select a wider time range to capture the event.
+3. The most recent event with the title "A user enabled Datadog Audit Trail" shows who last enabled Audit Trail.
 
-
-### アーカイブ
-
-アーカイブは、監査証跡のオプション機能です。Amazon S3、Google Cloud Storage、Azure Storage への書き込みと、これらの場所から SIEM システムによりイベントを読み取るためにアーカイブを使用できます。アーカイブ構成を作成または更新してから次にアーカイブのアップロードが試行されるまで、数分かかることがあります。イベントは 15 分ごとにアーカイブにアップロードされるので、**15 分待ってストレージバケットをチェックし**、Datadog アカウントからアーカイブが正常にアップロードされたことを確認してください。
-
-監査証跡のアーカイブを有効にするには、[オーガニゼーションの設定][2]で *Compliance* の *Audit Trail Settings* を選択し、Archiving までスクロールダウンして Store Events のトグルボタンをクリックしてオンにします。
-
-### 保存期間
-
-イベントの保持は、監査証跡のオプション機能です。*Retention* までスクロールし、*Retain Audit Trail Events* のトグルをクリックすると、有効になります。
-
-デフォルトの監査証跡イベント保持期間は 7 日間です。保持期間は 3～90 日間の間で設定できます。
-
-{{< img src="account_management/audit_logs/retention_period.png" alt="Datadog の監査証跡保持期間の設定" style="width:80%;">}}
-
-## 監査イベントの確認
-
-監査イベントを詳しく確認するには、[Audit Trail][1] セクションに移動します。Datadog の[オーガニゼーションの設定][2]からもアクセス可能です。
-
-{{< img src="account_management/audit_logs/audit_side_nav.png" alt="組織設定メニューの監査証跡設定" style="width:30%;">}}
-
-監査証跡イベントは、[ログエクスプローラー][4]内のログと同様の機能を持っています。
-
-- フィルターを使用して、イベント名 (ダッシュボード、モニター、認証など)、認証属性 (アクター、API キー ID、ユーザーのメールアドレスなど)、`Status` (`Error`、`Warn`、`Info`)、メソッド (`POST`、`GET`、`DELETE`) およびその他のファセット別に監査証跡イベントを確認します。
-
-- イベントを選択してイベント属性タブに移動し、関連する監査証跡イベントを確認します。絞り込みまたは検索から除外する特定の属性を選択します (`http.method`、`usr.email`、`client.ip` など)。
-
-{{< img src="account_management/audit_logs/attributes.png" alt="組織設定メニューの監査証跡" style="width:50%;">}}
+## Configuration
 
 
-### 保存済みビュー
+### Permissions
+Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer. 
 
-効率的なトラブルシューティングには、探索を可能にする適切なスコープにデータがあり、意味のある情報を表示する視覚化オプションにアクセスでき、分析を可能にする関連ファセットがリストされていることが必要です。トラブルシューティングはコンテキストに依存するため、保存ビューを使用すると、あなたとチームメイトが異なるトラブルシューティングコンテキスト間で簡単に切り替えられるようになります。保存ビューは、監査証跡エクスプローラーの左上隅からアクセスできます。
+### Archiving
 
-デフォルトのビュー以外のすべての保存ビューは、組織全体で共有されます。
+Archiving is an optional feature for Audit Trail. You can use archiving to write to Amazon S3, Google Cloud Storage, or Azure Storage and have your SIEM system read events from it. After creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Events are uploaded to the archive every 15 minutes, so check back on your storage bucket in 15 minutes to make sure the archives are successfully being uploaded from your Datadog account.
 
-* **インテグレーション保存ビュー**は、監査証跡と同時に提供されます。これらのビューは読み取り専用で、Datadog のロゴが表示されます。
-* **カスタム保存ビュー** は、ユーザーにより作成されます。組織内のユーザーが誰でも編集でき（[読み取り専用ユーザー][5]を除く）、作成したユーザーのアバターで識別されます。エクスプローラーの既存のコンテンツからカスタム保存ビューを新規作成するには、**Save** ボタンをクリックします。
+To enable archiving for Audit Trail, navigate to your [Organization Settings][3] and select *Audit Trail Settings* under *Compliance*. Scroll down to Archiving and click the Store Events toggle to enable.
 
-Views パネルの保存ビューエントリからは、いつでも以下のアクションが可能です。
+### Retention
 
-* 保存ビューを**ロード**または**リロード** 
-* 現在のビューのコンフィギュレーションで保存ビューを**更新**。
-* 保存ビューの**名前を変更**または**削除**。
-* ショートリンクを使用して保存ビューを**共有**。
-* 保存ビューに**スター**を付けて、保存ビューリストの先頭に表示。ナビゲーションメニューから直接アクセス可能になります。
+Retaining events is an optional feature for Audit Trail. Scroll down to *Retention* and click the *Retain Audit Trail Events* toggle to enable.
 
-**注**: インテグレーションの保存ビューおよび[読み取り専用ユーザー][5]には、アクションの更新、名前変更、および削除は無効になっています。
+The default retention period for an audit trail event is seven days. You can set a retention period between three and 90 days.
+
+{{< img src="account_management/audit_logs/retention_period.png" alt="Audit Trail Retention setup in Datadog" style="width:80%;">}}
+
+## Explore audit events
+
+To explore an audit event, navigate to the [Audit Trail][1] section, also accessible from your [Organization Settings][3] in Datadog.
+
+{{< img src="account_management/audit_logs/audit_side_nav.png" alt="Audit Trail Settings in the Organization Settings menu" style="width:30%;">}}
+
+Audit Trail events have the same functionality as logs within the [Log Explorer][5]:
+
+- Filter to inspect audit trail events by Event Names (Dashboards, Monitors, Authentication, and more), Authentication Attributes (Actor, API Key ID, User email, and more), `Status` (`Error`, `Warn`, `Info`), Method (`POST`, `GET`, `DELETE`), and other facets.
+
+- Inspect related audit trail events by selecting an event and navigating to the event attributes tab. Select a specific attribute to filter by or exclude from your search, such as `http.method`, `usr.email`, `client.ip`, and more.
+
+{{< img src="account_management/audit_logs/attributes.png" alt="Audit Trail in the Organization Settings menu" style="width:50%;">}}
 
 
-### デフォルトのビュー
+### Saved views
 
-{{< img src="logs/explorer/saved_views/default.png" alt="デフォルトビュー" style="width:50%;" >}}
+Efficient troubleshooting requires your data to be in the proper scope to permit exploration, have access to visualization options to surface meaningful information, and have relevant facets listed to enable analysis. Troubleshooting is contextual, and Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. You can access Saved Views in the upper left corner of the Audit Trail explorer.
 
-デフォルトビュー機能では、監査証跡エクスプローラーを最初に開いたときに常に表示されるクエリやフィルターのデフォルトセットを設定することができます。デフォルトビューに戻るには、Views パネルを開き、リロードボタンをクリックします。
+All saved views, that are not your default view, are shared across your organization:
 
-既存の監査証跡エクスプローラーのビューは、デフォルトの保存ビューです。この構成は、自身のみがアクセスおよび閲覧可能であり、この構成を更新しても、組織には何の影響も与えません。UI で何らかのアクションを実行するか、別の構成を埋め込んだ監査証跡エクスプローラーのリンクを開くことで、デフォルトの保存ビューを**一時的**にオーバーライドすることができます。
+* **Integration saved views** come out-of-the-box with Audit Trail. These views are read-only, and identified by the Datadog logo.
+* **Custom saved views** are created by users. They are editable by any user in your organization (except [read only users][6]), and identified with the avatar of the user who created them Click the **Save** button to create a new custom saved view from the current content of your explorer.
 
-Views パネルのデフォルト保存ビューエントリからは、いつでも以下のアクションが可能です。
+At any moment, from the saved view entry in the Views panel:
 
-* エントリをクリックして、デフォルトビューを**リロード**。
-* 現在のパラメーターでデフォルトビューを**更新**。
-* デフォルトビューを Datadog のデフォルトに**リセット**して再起動。
+* **Load** or **reload** a saved view.
+* **Update** a saved view with the configuration of the current view.
+* **Rename** or **delete** a saved view.
+* **Share** a saved view through a short-link.
+* **Star** (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
 
-### 注目イベント
+**Note:** Update, rename, and delete actions are disabled for integration saved views and [read only users][6].
 
-注目イベントとは、監査イベントのサブセットで、Datadog が特定した、請求に影響を与える可能性のある、またはセキュリティに影響を与える可能性のある重要な構成変更を示すものです。これにより、組織管理者は、生成された多くのイベントの中から最も重要なイベントに絞り込むことができ、利用可能なすべてのイベントとそのプロパティについて学習する必要がありません。
 
-{{< img src="account_management/audit_logs/notable_events.png" alt="監査イベントのファセットパネルで、チェックした注目イベントが表示される" style="width:30%;">}}
+### Default view
 
-以下のクエリにマッチするイベントは、注目イベントとしてマークされます。
+{{< img src="logs/explorer/saved_views/default.png" alt="Default view" style="width:50%;" >}}
 
-| 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
+The default view feature allows you to set a default set of queries or filters that you always see when you first open the Audit Trail explorer. You can come back to your default view by opening the Views panel and clicking the reload button.
+
+Your existing Audit Trail explorer view is your default saved view. This configuration is only accessible and viewable to you, and updating this configuration does not have any impact on your organization. You can **temporarily** override your default saved view by completing any action in the UI or by opening links to the Audit Trail explorer that embed a different configuration.
+
+At any moment, from the default view entry in the Views panel:
+
+* **Reload** your default view by clicking on the entry.
+* **Update** your default view with the current parameters.
+* **Reset** your default view to Datadog's defaults for a fresh restart.
+
+### Notable Events
+
+Notable events are a subset of audit events that show potential critical configuration changes that could impact billing or have security implications as identified by Datadog. This allows org admins to hone in on the most important events out of the many events generated, and without having to learn about all available events and their properties.
+
+{{< img src="account_management/audit_logs/notable_events.png" alt="The audit event facet panel showing notable events checked" style="width:30%;">}}
+
+Events that match the following queries are marked as notable.
+
+| Description of audit event                                          | Query in audit explorer                           |
 | ------------------------------------------------------------------- | --------------------------------------------------|
-| ログベースメトリクスの変更 | `@evt.name:"Log Management" @asset.type:"custom_metrics"` |
-| ログ管理インデックスの除外フィルターの変更 | `@evt.name:"Log Management" @asset.type:"exclusion_filter"` |
-| ログ管理インデックスの変更 | `@evt.name:"Log Management" @asset.type:index` |
-| APM 保持フィルターの変更 | `@evt.name:APM @asset.type:retention_filter` |
-| APM カスタムメトリクスの変更 | `@evt.name:APM @asset.type:custom_metrics` |
-| メトリクスタグの変更 | `@evt.name:Metrics @asset.type:metric @action:(created OR modified)` |
-| RUM アプリケーションの作成と削除 | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
-| 機密データスキャナーのスキャングループの変更 | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
-| Synthetic テストの作成または削除 | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+| Changes to log-based metrics | `@evt.name:"Log Management" @asset.type:"custom_metrics"` |
+| Changes to Log Management index exclusion filters | `@evt.name:"Log Management" @asset.type:"exclusion_filter"` |
+| Changes to Log Management indexes | `@evt.name:"Log Management" @asset.type:index` |
+| Changes to APM retention filters | `@evt.name:APM @asset.type:retention_filter` |
+| Changes to APM custom metrics | `@evt.name:APM @asset.type:custom_metrics` |
+| Changes to metrics tags | `@evt.name:Metrics @asset.type:metric @action:(created OR modified)` |
+| Creations and deletion of RUM applications | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
+| Changes to Sensitive Data Scanner scanning groups | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
+| Creation or deletion of Synthetic tests | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
 
 ### Inspect Changes (Diff)
 
-監査イベントの詳細パネルにある Inspect Changes (Diff) タブは、行われた構成変更と以前に設定されたものを比較します。ダッシュボード、ノートブック、およびモニターの構成に加えられた変更が表示され、JSON オブジェクトとして表されます。
+The Inspect Changes (Diff) tab in the audit event details panel compares the configuration changes that were made to what was previously set. It shows the changes made to dashboard, notebook, and monitor configurations, which are represented as JSON objects.
 
-{{< img src="account_management/audit_logs/inspect_changes.png" alt="監査イベント側のパネルで、複合条件モニター構成の変更を表示。緑でハイライトされたテキストが変更されたもので、赤でハイライトされたテキストは削除されたものです。" style="width:70%;">}}
+{{< img src="account_management/audit_logs/inspect_changes.png" alt="The audit event side panel showing the changes to a composite monitor configuration, where the text highlighted in green is what was changed and the text highlighted in red is what was removed." style="width:70%;">}}
 
+## Filter audit events based on Reference Tables
 
-## モニターの作成
+<div class="alert alert-warning">Reference Tables are in beta. Reference Tables containing over 40,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
 
-監査証跡イベントの特定のタイプや証跡の属性別にモニターを作成するには、[監査証跡モニターに関するドキュメント][6]をご参照ください。例: 特定のユーザーログが発生したときにトリガーするモニターを設定、ダッシュボードが削除されたとき用のモニターを設定など。
+Reference Tables allow you to combine metadata with audit events, providing more information to investigate Datadog user behavior. Add a query filter based on a Reference Table to perform lookup queries. For more information on activating and managing this feature, see the [Reference Tables][2] guide.
 
-## ダッシュボードやグラフの作成
+To apply a query filter with Reference Tables, click on the `+ Add` button next to the query editor and select **Join with Reference Table**. In the following example, the Reference Table query filter is used to search for dashboards modified by users who are accessing Datadog from non-authorized IP addresses:
 
-ダッシュボードを使用すると、監査証跡イベントに視覚的なコンテキストを追加できます。監査ダッシュボードを作成するには:
+{{< img src="account_management/audit_logs/reference_tables.png" alt="The Datadog Audit Trail explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
 
-1. Datadog で[新しいダッシュボード][7]を作成します。
-2. 視覚化を選択します。監査イベントを[トップリスト][8]、[時系列][9]、[リスト][10]で視覚化することができます。
-3. [データのグラフを作成][11]: 編集で、データソースとして *Audit Events* を選択し、クエリを作成します。監査イベントはカウント別に絞り込まれ、ファセット別にグループ化できます。ファセットと上限を選択します。
-{{< img src="account_management/audit_logs/audit_graphing.png" alt="監査証跡をデータソースとして設定しデータからグラフを作成" style="width:100%;">}}
-4. 表示設定を完了してグラフにタイトルを付けます。*Save* ボタンをクリックしてダッシュボードを作成します。
+### API key auditing
 
-## スケジュールレポートの作成
+<div class="alert alert-warning">API key auditing is in private beta.</div>
 
-Datadog 監査証跡では、監査分析ビューを定期的にスケジュールされたメールとして送信することができます。これらのレポートは、Datadog プラットフォームの使用状況を定期的に監視するのに便利です。例えば、国別のユニークな Datadog ユーザーログイン数の週次レポートを取得するように選択できます。このクエリにより、異常なログインアクティビティを監視したり、使用状況に関する自動化された洞察を受け取ったりすることができます。
+Log management users can audit API key usage with Audit Trail. For API key auditing, logs have a `datadog.api_key_uuid` tag that contains the UUID of the API key used for collecting those logs. Use this information to determine:
+- How API keys are used across your organization and telemetry sources.
+- API key rotation and management.
 
-監査分析クエリをレポートとしてエクスポートするには、時系列、トップリスト、またはテーブルクエリを作成し、**More...** > **Export as scheduled report** をクリックして、クエリをスケジュールレポートとしてエクスポートを開始します。
+## Create a monitor
 
-{{< img src="account_management/audit_logs/scheduled_report_export.png" alt="More… ドロップダウンメニューの Export as scheduled report 機能" style="width:90%;" >}}
+To create a monitor on a type of audit trail event or by specificTrail attributes, see the [Audit Trail Monitor documentation][7]. For example, set a monitor that triggers when a specific user logs in, or set a monitor for anytime a dashboard is deleted.
 
-1. クエリウィジェットで作成されるダッシュボードの名称を入力します。新しいダッシュボードは、スケジュールされたレポートごとに作成されます。このダッシュボードは、レポートの内容やスケジュールを変更する必要がある場合に、後で参照・変更することができます。
-2. レポートの頻度や時間帯をカスタマイズして、メールレポートのスケジュールを設定します。
-3. メールを送信したい受信者を追加します。
-4. メールレポートの一部として必要なカスタマイズされたメッセージを追加します。
-5. **Create Dashboard and Schedule Report** をクリックします。
+## Create a dashboard or a graph
 
-{{< img src="account_management/audit_logs/export_workflow.png" alt="監査分析ビューをスケジュールメールにエクスポートする" style="width:80%;" >}}
+Give more visual context to your audit trail events with dashboards. To create an audit dashboard:
 
-## すぐに使えるダッシュボード
+1. Create a [New Dashboard][8] in Datadog.
+2. Select your visualization. You can visualize Audit events as [top lists][9], [timeseries][10], and [lists][11].
+3. [Graph your data][12]: Under edit, select *Audit Events* as the data source, and create a query. Audit events are filtered by count and can be grouped by different facets. Select a facet and limit.
+{{< img src="account_management/audit_logs/audit_graphing.png" alt="Set Audit Trail as a data source to graph your data" style="width:100%;">}}
+4. Set your display preferences and give your graph a title. Click the *Save* button to create the dashboard.
 
-Datadog 監査証跡には、インデックス保持の変更、ログパイプラインの変更、ダッシュボードの変更など、さまざまな監査イベントを表示する[すぐに使えるダッシュボード][12]が付属しています。このダッシュボードを複製して、監査ニーズに合わせてクエリや視覚化をカスタマイズすることができます。
+## Create a scheduled report
 
-{{< img src="account_management/audit_logs/audit_dashboard.png" alt="監査証跡ダッシュボード" style="width:100%;">}}
+Datadog Audit Trail allows you to send out audit analytics views as routinely scheduled emails. These reports are useful for regular monitoring of the Datadog platform usage. For example, you can choose to get a weekly report of the number of unique Datadog user logins by country. This query allows you to monitor anomalous login activity or receive automated insight on usage.
 
-## その他の参考資料
+To export an audit analytics query as a report, create a timeseries, top list, or a table query and click **More...** > **Export as scheduled report** to start exporting your query as a scheduled report.
+
+{{< img src="account_management/audit_logs/scheduled_report_export.png" alt="Export as scheduled report function in the More... dropdown menu" style="width:90%;" >}}
+
+1. Enter a name for the dashboard, which is created with the query widget. A new dashboard is created for every scheduled report. This dashboard can be referenced and changed later if you need to change the report content or schedule.
+2. Schedule the email report by customizing the report frequency and time frame.
+3. Add recipients that you want to send the email to.
+4. Add any additional customized messages that needs to be part of the email report.
+5. Click **Create Dashboard and Schedule Report**.
+
+{{< img src="account_management/audit_logs/export_workflow.png" alt="Exporting a audit analytics view into a scheduled email" style="width:80%;" >}}
+
+## Download Audit Events as CSV
+
+Datadog Audit Trail allows you to download up to 100K audit events as a CSV file locally. These events can then be analyzed locally, uploaded to a different tool for further analytics, or shared with appropriate team members as part of a security and compliance exercise.
+
+To export audit events as CSV:
+1. Run the appropriate search query that captures the events you are interested in
+2. Add event fields as columns in the view that you want as part of CSV
+3. Click on Download as CSV
+4. Select the number of events to export and export as CSV
+
+## Out-of-the-box dashboard
+
+Datadog Audit Trail comes with an [out-of-the-box dashboard][13] that shows various audit events, such as index retention changes, log pipeline changes, dashboard changes, and more. Clone this dashboard to customize queries and visualizations for your auditing needs.
+
+{{< img src="account_management/audit_logs/audit_dashboard.png" alt="Audit Trail dashboard" style="width:100%;">}}
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/audit-trail
-[2]: https://app.datadoghq.com/organization-settings/
-[3]: https://app.datadoghq.com/event/explorer
-[4]: /ja/logs/explorer/
-[5]: https://docs.datadoghq.com/ja/account_management/rbac/permissions/?tab=ui#general-permissions
-[6]: /ja/monitors/types/audit_trail/
-[7]: /ja/dashboards/
-[8]: /ja/dashboards/widgets/top_list/
-[9]: /ja/dashboards/widgets/timeseries/
-[10]: /ja/dashboards/widgets/list/
-[11]: /ja/dashboards/querying/#define-the-metric/
-[12]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true
+[2]: /data_security/pci_compliance/
+[3]: https://app.datadoghq.com/organization-settings/
+[4]: https://app.datadoghq.com/event/explorer
+[5]: /logs/explorer/
+[6]: https://docs.datadoghq.com/account_management/rbac/permissions/?tab=ui#general-permissions
+[7]: /monitors/types/audit_trail/
+[8]: /dashboards/
+[9]: /dashboards/widgets/top_list/
+[10]: /dashboards/widgets/timeseries/
+[11]: /dashboards/widgets/list/
+[12]: /dashboards/querying/#define-the-metric/
+[13]: https://app.datadoghq.com/dash/integration/30691/datadog-audit-trail-overview?from_ts=1652452436351&to_ts=1655130836351&live=true

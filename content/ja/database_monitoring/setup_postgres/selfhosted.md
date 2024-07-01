@@ -1,71 +1,68 @@
 ---
-description: セルフホストの Postgres のデータベースモニタリングをインストールして構成します。
+title: Setting Up Database Monitoring for self hosted Postgres
+description: Install and configure Database Monitoring for self-hosted Postgres.
 further_reading:
 - link: /integrations/postgres/
-  tag: ドキュメント
-  text: Postgres インテグレーションの基本
-title: セルフホストの Postgres のデータベースモニタリングの設定
+  tag: Documentation
+  text: Basic Postgres Integration
+
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
+Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に視覚化します。
+The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database:
 
-Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリを収集します。Postgres データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
+1. [Configure database parameters](#configure-postgres-settings)
+1. [Grant the Agent access to the database](#grant-the-agent-access)
+1. [Install the Agent](#install-the-agent)
 
-1. [データベースのパラメーターを構成する](#configure-postgres-settings)
-1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
-1. [Agent をインストールする](#install-the-agent)
+## Before you begin
 
-## はじめに
+Supported PostgreSQL versions
+: 9.6, 10, 11, 12, 13, 14, 15, 16
 
-サポート対象の PostgreSQL バージョン
-: 9.6, 10, 11, 12, 13, 14, 15
+Prerequisites
+: Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of your version of [the `postgresql-contrib` package][1].
 
-前提条件
-: Postgres の追加供給モジュールがインストールされている必要があります。ほとんどのインストールでは、これはデフォルトで含まれていますが、一般的でない設定でインストールされている場合、お使いのバージョンの [`postgresql-contrib` パッケージ][1]の追加インストールが必要になる場合があります。
-
-サポート対象の Agent バージョン
+Supported Agent versions
 : 7.36.1+
 
-パフォーマンスへの影響
-: データベースモニタリングのデフォルトの Agent 構成は保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。<br/><br/>
-データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][2]してください)。
+Performance impact
+: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][2]).
 
-プロキシ、ロードバランサー、コネクションプーラー
-: Agent は、監視対象のホストに直接接続する必要があります。セルフホスト型のデータベースでは、`127.0.0.1` またはソケットを使用することをお勧めします。Agent をプロキシ、ロードバランサー、または `pgbouncer` などのコネクションプーラーを経由させないようご注意ください。クライアントアプリケーションのアンチパターンとなる可能性があります。また、各 Agent は基礎となるホスト名を把握し、フェイルオーバーの場合でも常に 1 つのホストのみを使用する必要があります。Datadog Agent が実行中に異なるホストに接続すると、メトリクス値の正確性が失われます。
+Proxies, load balancers, and connection poolers
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
-データセキュリティへの配慮
-: Agent がデータベースから収集するデータとその安全性については、[機密情報][3]を参照してください。
+Data security considerations
+: See [Sensitive information][3] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
-## Postgres 設定を構成する
+## Configure Postgres settings
 
-`postgresql.conf` ファイルに以下の[パラメーター][4]を構成し、**サーバーを再起動**すると設定が有効になります。これらのパラメーターの詳細については、[Postgres ドキュメント][5]を参照してください。
+Configure the following [parameters][4] in the `postgresql.conf` file and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][5].
 
-| パラメーター | 値 | 説明 |
+| Parameter | Value | Description |
 | --- | --- | --- |
-| `shared_preload_libraries` | `pg_stat_statements` | `postgresql.queries.*` メトリクスに対して必要です。[pg_stat_statements][5] 拡張機能を使用して、クエリメトリクスの収集を可能にします。 |
-| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
-| `pg_stat_statements.track` | `ALL` | オプション。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
-| `pg_stat_statements.max` | `10000` | オプション。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
-| `pg_stat_statements.track_utility` | `off` | オプション。PREPARE や EXPLAIN のようなユーティリティコマンドを無効にします。この値を `off` にすると、SELECT、UPDATE、DELETE などのクエリのみが追跡されます。 |
-| `track_io_timing` | `on` | オプション。クエリのブロックの読み取りおよび書き込み時間の収集を有効にします。 |
+| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][5] extension. |
+| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value then queries longer than `1024` characters will not be collected. |
+| `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
+| `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
+| `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
+| `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
 
-## Agent にアクセスを付与する
+## Grant the Agent access
 
-Datadog Agent は、統計やクエリを収集するためにデータベース サーバーへの読み取り専用のアクセスを必要とします。
+The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
 
-Postgres がレプリケートされている場合、以下の SQL コマンドはクラスタ内の**プライマリ**データベースサーバー（ライター）で実行する必要があります。Agent が接続するデータベースサーバー上の PostgreSQL データベースを選択します。Agent は、どのデータベースに接続してもデータベースサーバー上のすべてのデータベースからテレメトリーを収集することができるため、デフォルトの `postgres` データベースを使用することをお勧めします。[特定のデータに対するカスタムクエリ][6]を Agent で実行する必要がある場合のみ、別のデータベースを選択してください。
+The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the database server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][6].
 
-選択したデータベースに、スーパーユーザー (または十分な権限を持つ他のユーザー) として接続します。例えば、選択したデータベースが `postgres` である場合は、次のように実行して [psql][7] を使用する `postgres` ユーザーとして接続します。
+Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][7] by running:
 
  ```bash
  psql -h mydb.example.com -d postgres -U postgres
  ```
 
-`datadog` ユーザーを作成します。
+Create the `datadog` user:
 
 ```SQL
 CREATE USER datadog WITH password '<PASSWORD>';
@@ -75,13 +72,13 @@ CREATE USER datadog WITH password '<PASSWORD>';
 
 {{% tab "Postgres ≥ 15" %}}
 
-`datadog` ユーザーに関連テーブルに対する権限を与えます。
+Give the `datadog` user permission to relevant tables:
 
 ```SQL
 ALTER ROLE datadog INHERIT;
 ```
 
-**すべてのデータベース**に以下のスキーマを作成します。
+Create the following schema **in every database**:
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -95,7 +92,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 
 {{% tab "Postgres ≥ 10" %}}
 
-**すべてのデータベース**に以下のスキーマを作成します。
+Create the following schema **in every database**:
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -108,7 +105,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
 
-**すべてのデータベース**に以下のスキーマを作成します。
+Create the following schema **in every database**:
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -118,7 +115,7 @@ GRANT SELECT ON pg_stat_database TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-**すべてのデータベース**に関数を作成して、Agent が `pg_stat_activity` および `pg_stat_statements` の全コンテンツを読み込めるようにします。
+Create functions **in every database** to enable the Agent to read the full contents of `pg_stat_activity` and `pg_stat_statements`:
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.pg_stat_activity() RETURNS SETOF pg_stat_activity AS
@@ -134,9 +131,9 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">追加のテーブルをクエリする必要があるデータ収集またはカスタムメトリクスでは、それらのテーブルの <code>SELECT</code> 権限を <code>datadog</code> ユーザーに付与する必要がある場合があります。例: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>。詳細は、<a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL カスタムメトリクス収集</a>を参照してください。</div>
+<div class="alert alert-info">For data collection or custom metrics that require querying additional tables, you may need to grant the <code>SELECT</code> permission on those tables to the <code>datadog</code> user. Example: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. See <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL custom metric collection</a> for more information. </div>
 
-Agent が実行計画を収集できるように、**すべてのデータベース**に関数を作成します。
+Create the function **in every database** to enable the Agent to collect explain plans.
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
@@ -161,9 +158,9 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-### 検証する
+### Verify
 
-権限が正しいことを確認するために、以下のコマンドを実行して、Agent ユーザーがデータベースに接続してコアテーブルを読み取ることができることを確認します。
+To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
@@ -203,13 +200,13 @@ psql -h localhost -U datadog postgres -A \
 {{% /tab %}}
 {{< /tabs >}}
 
-パスワードの入力を求められた場合は、`datadog` ユーザーを作成したときに入力したパスワードを使用してください。
+When it prompts for a password, use the password you entered when you created the `datadog` user.
 
-## Agent のインストール
+## Install the Agent
 
-Datadog Agent をインストールすると、Postgres でのデータベースモニタリングに必要な Postgres チェックもインストールされます。Postgres データベースホストの Agent をまだインストールしていない場合は、[Agent のインストール手順][8]を参照してください。
+Installing the Datadog Agent also installs the Postgres check which is required for Database Monitoring on Postgres. If you haven't already installed the Agent for your Postgres database host, see the [Agent installation instructions][8].
 
-1. Agent の `conf.d/postgres.d/conf.yaml` ファイルを編集して、`host` / `port` を指定し、監視するホストを設定します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル postgres.d/conf.yaml][9] を参照してください。
+1. Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to your `host` / `port` and set the hosts to monitor. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
@@ -222,7 +219,7 @@ Datadog Agent をインストールすると、Postgres でのデータベース
        port: 5432
        username: datadog
        password: '<PASSWORD>'
-       ## オプション: `custom_queries` に必要な場合は、別のデータベースに接続します
+       ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
    ```
 
@@ -239,20 +236,20 @@ Datadog Agent をインストールすると、Postgres でのデータベース
        password: '<PASSWORD>'
        pg_stat_statements_view: datadog.pg_stat_statements()
        pg_stat_activity_view: datadog.pg_stat_activity()
-       ## オプション: `custom_queries` に必要な場合は、別のデータベースに接続します
+       ## Optional: Connect to a different database if needed for `custom_queries`
        # dbname: '<DB_NAME>'
    ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-2. [Agent を再起動します][10]。
+2. [Restart the Agent][10].
 
-### ログの収集 (オプション)
+### Collecting logs (optional)
 
-PostgreSQL のデフォルトのログは `stderr` に記録され、ログに詳細な情報は含まれません。ログ行のプレフィックスに指定された詳細を追加してファイルに記録することをお勧めします。詳細については、このトピックに関する PostgreSQL [ドキュメント][11]を参照してください。
+PostgreSQL default logging is to `stderr`, and logs do not include detailed information. It is recommended to log into a file with additional details specified in the log line prefix. Refer to the PostgreSQL [documentation][11] on this topic for additional details.
 
-1. ロギングはファイル `/etc/postgresql/<バージョン>/main/postgresql.conf` 内で構成されます。ステートメント出力を含む通常のログ結果の場合、ログセクションの次のパラメーターのコメントを外します。
+1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, uncomment the following parameters in the log section:
    ```conf
      logging_collector = on
      log_directory = 'pg_log'  # directory where log files are written,
@@ -265,9 +262,9 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
      ## For Windows
      #log_destination = 'eventlog'
    ```
-2. 詳細な期間メトリクスを収集し、Datadog インターフェースで検索可能にするには、ステートメント自体を使用してインラインで構成する必要があります。上記の例と推奨コンフィギュレーションとの違いについては、以下を参照してください。また、`log_statement` オプションと `log_duration` オプションの両方がコメントアウトされているので注意してください。このトピックに関する議論は[こちら][12]をご覧ください。
+2. To gather detailed duration metrics and make them searchable in the Datadog interface, they should be configured inline with the statement themselves. See below for the recommended configuration differences from above and note that both `log_statement` and `log_duration` options are commented out. See discussion on this topic [here][12].
 
-   この構成はすべてのステートメントをログしますが、出力を特定の期間を持つものに減らすには、`log_min_duration_statement` の値を目的の最小期間（ミリ秒単位）に設定します（完全な SQL ステートメントのログ記録が組織のプライバシー要件に準拠していることを確認してください）。
+   This config logs all statements, but to reduce the output to those which have a certain duration, set the `log_min_duration_statement` value to the desired minimum duration in milliseconds (check that logging the full SQL statement complies with your organization's privacy requirements):
    ```conf
      log_min_duration_statement = 0    # -1 is disabled, 0 logs all statements
                                        # and their durations, > 0 logs only
@@ -276,11 +273,11 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
      #log_statement = 'all'
      #log_duration = on
    ```
-3. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+3. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
    ```yaml
    logs_enabled: true
    ```
-4. PostgreSQL のログの収集を開始するには、次の構成ブロックを `conf.d/postgres.d/conf.yaml` ファイルに追加し、編集します。
+4. Add and edit this configuration block to your `conf.d/postgres.d/conf.yaml` file to start collecting your PostgreSQL logs:
    ```yaml
    logs:
      - type: file
@@ -293,37 +290,37 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
        #    name: new_log_start_with_date
    ```
-   `service` パラメーターと `path` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル postgres.d/conf.yaml][9] を参照してください。
-5. [Agent を再起動します][10]。
+   Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
+5. [Restart the Agent][10].
 
-### 検証
+### Validate
 
-[Agent の status サブコマンドを実行][13]し、Checks セクションで `postgres` を探します。または、[データベース][14]のページを参照してください。
+[Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
 
-## Agent の構成例
+## Example Agent Configurations
 {{% dbm-postgres-agent-config-examples %}}
 
-## トラブルシューティング
+## Troubleshooting
 
-インテグレーションと Agent を手順通りにインストール・設定しても期待通りに動作しない場合は、[トラブルシューティング][15]を参照してください。
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][15]
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: https://www.postgresql.org/docs/12/contrib.html
-[2]: /ja/agent/basic_agent_usage#agent-overhead
-[3]: /ja/database_monitoring/data_collected/#sensitive-information
+[2]: /database_monitoring/agent_integration_overhead/?tab=postgres
+[3]: /database_monitoring/data_collected/#sensitive-information
 [4]: https://www.postgresql.org/docs/current/config-setting.html
 [5]: https://www.postgresql.org/docs/current/pgstatstatements.html
-[6]: /ja/integrations/faq/postgres-custom-metric-collection-explained/
+[6]: /integrations/faq/postgres-custom-metric-collection-explained/
 [7]: https://www.postgresql.org/docs/current/app-psql.html
 [8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[10]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://www.postgresql.org/docs/11/runtime-config-logging.html
 [12]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
-[13]: /ja/agent/configuration/agent-commands/#agent-status-and-information
+[13]: /agent/configuration/agent-commands/#agent-status-and-information
 [14]: https://app.datadoghq.com/databases
-[15]: /ja/database_monitoring/troubleshooting/?tab=postgres
+[15]: /database_monitoring/troubleshooting/?tab=postgres

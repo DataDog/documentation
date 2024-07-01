@@ -1,4 +1,4 @@
 ---
-title: ファセット検索
+title: faceted search
 ---
-ファセット検索は、フィルターを使って検索結果を絞り込みます。
+A faceted search uses filters to narrow down search results.

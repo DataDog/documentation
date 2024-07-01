@@ -1,6 +1,6 @@
 ---
+title: transaction
 core_product:
-- log management
-title: トランザクション
+  - log management
 ---
-トランザクションは、ユーザーセッションや複数のマイクロサービス間で処理されたリクエストなど、一連のイベントのインスタンスに基づいてインデックス化されたログを集計します。
+A transaction aggregates indexed logs based on an instance of a sequence of events, such as a user session or a request processed across multiple micro-services. 

@@ -1,75 +1,76 @@
 ---
-categories:
-- cloud
-- google cloud
-- log collection
-dependencies: []
-description: 関数実行時間の最小、最大、平均を追跡。
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_functions/
-draft: false
-git_integration_title: google_cloud_functions
-has_logo: true
-integration_id: google-cloud-functions
-integration_title: Google Cloud Functions
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: google_cloud_functions
-public_title: Datadog-Google Cloud Functions インテグレーション
-short_description: 関数実行時間の最小、最大、平均を追跡。
-version: '1.0'
+"categories":
+- "cloud"
+- "google cloud"
+- "log collection"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track min, max, and average function execution times."
+"doc_link": "https://docs.datadoghq.com/integrations/google_cloud_functions/"
+"draft": false
+"git_integration_title": "google_cloud_functions"
+"has_logo": true
+"integration_id": "google-cloud-functions"
+"integration_title": "Google Cloud Functions"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "google_cloud_functions"
+"public_title": "Datadog-Google Cloud Functions Integration"
+"short_description": "Track min, max, and average function execution times."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Google Cloud Functions は、単一目的の小規模な関数を作成できる、軽量、イベントベース、かつ非同期のコンピューティングソリューションです。
+Google Cloud Functions is a lightweight, event-based, asynchronous compute solution that allows you to create small, single-purpose functions.
 
-Google Functions からメトリクスを取得して、以下のことができます。
+Get metrics from Google Functions to:
 
-- 関数のパフォーマンスを視覚化。
-- 関数のパフォーマンスをアプリケーションと関連付け。
+- Visualize the performance of your Functions.
+- Correlate the performance of your Functions with your applications.
 
-## 計画と使用
+## Setup
 
-### メトリクスの収集
+### Metric collection
 
-#### インフラストラクチャーリスト
+#### Installation
 
-[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
-### 収集データ
+### Log collection
 
-Google Cloud Function のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
+Google Cloud Function logs are collected with Google Cloud Logging and sent to a Dataflow job through a Cloud Pub/Sub topic. If you haven't already, [set up logging with the Datadog Dataflow template][2].
 
-これが完了したら、Google Cloud Firestore のログを Google Cloud Function から Pub/Sub へエクスポートします。
+Once this is done, export your Google Cloud Function logs from Google Cloud Logging to the Pub/Sub topic:
 
-1. [Google Cloud Logging のページ][3]に移動し、Google Cloud Function のログを絞り込みます。
-2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
-4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
+1. Go to the [Google Cloud Logging page][3] and filter the Google Cloud Function logs.
+2. Click **Create Sink** and name the sink accordingly.
+3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
+4. Click **Create** and wait for the confirmation message to show up.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "google_cloud_functions" >}}
 
 
-### ヘルプ
+### Events
 
-Google Cloud Functions インテグレーションには、イベントは含まれません。
+The Google Cloud Functions integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Google Cloud Functions インテグレーションには、サービスのチェック機能は含まれません。
+The Google Cloud Functions integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
-[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
+[1]: https://docs.datadoghq.com/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_functions/google_cloud_functions_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

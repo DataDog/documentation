@@ -1,9 +1,9 @@
 ---
+title: service
 core_product:
-- apm
-- serverless monitoring
-- service catalog
-title: サービス
+  - apm
+  - serverless monitoring
+  - service catalog
 ---
-1. APM では、サービスとは、アプリケーションの作業の一部を実行する、関連するエンドポイント、クエリー、またはジョブのグループです。マイクロサービスベースのアーキテクチャは、複数のサービスから構築され、それぞれがアプリケーションの操作の一部を実行します。
-2. サーバーレスコンピューティングでは、サービスとは、アーキテクチャ内で独立してデプロイされる機能の一部です。サーバーレスアプリケーションは、マネージドサービスによって支えられています。
+1. In APM, a service is a group of related endpoints, queries, or jobs that perform a piece of work for your application. A microservices-based architecture is built from multiple services, each performing part of the operation of the application.
+2. In serverless computing, a service is an independently-deployed piece of functionality in your architecture. Serverless applications are powered by managed services.

@@ -1,99 +1,99 @@
 ---
-algolia:
-  subcategory: Marketplace インテグレーション
-app_id: shoreline-software-license
-app_uuid: d1da5605-5ef5-47bc-af8d-16005945e21e
-assets: {}
-author:
-  homepage: https://shoreline.io/
-  name: Shoreline.io
-  sales_email: sales@shoreline.io
-  support_email: support@shoreline.io
-  vendor_id: shoreline
-categories:
-- 自動化
-- マーケットプレイス
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: shoreline_license
-integration_id: shoreline-software-license
-integration_title: Shoreline.io
-integration_version: ''
-is_public: true
-custom_kind: integration
-legal_terms:
-  eula: assets/EULA.pdf
-manifest_version: 2.0.0
-name: shoreline_license
-pricing:
-- billing_type: tag_count
-  includes_assets: true
-  metric: datadog.marketplace.shoreline.shoreline
-  product_id: software-license
-  short_description: 1 ホスト/月あたり。ポッドやコンテナの追加費用なし
-  tag: ホスト
-  unit_label: ホスト
-  unit_price: 25
-public_title: Shoreline.io
-short_description: トリガーされたモニターを修復するためのオートメーション構築
-supported_os:
+"algolia":
+  "subcategory": Marketplace Integrations
+"app_id": "shoreline-software-license"
+"app_uuid": "d1da5605-5ef5-47bc-af8d-16005945e21e"
+"assets": {}
+"author":
+  "homepage": "https://shoreline.io/"
+  "name": Shoreline.io
+  "sales_email": sales@shoreline.io
+  "support_email": support@shoreline.io
+  "vendor_id": shoreline
+"categories":
+- automation
+- marketplace
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "shoreline_license"
+"integration_id": "shoreline-software-license"
+"integration_title": "Shoreline.io"
+"integration_version": ""
+"is_public": true
+"kind": "integration"
+"legal_terms":
+  "eula": assets/EULA.pdf
+"manifest_version": "2.0.0"
+"name": "shoreline_license"
+"pricing":
+- "billing_type": tag_count
+  "includes_assets": true
+  "metric": datadog.marketplace.shoreline.shoreline
+  "product_id": software-license
+  "short_description": Per host / month. No extra cost for pods or containers
+  "tag": host
+  "unit_label": Host
+  "unit_price": !!int "25"
+"public_title": "Shoreline.io"
+"short_description": "Build automations to repair triggered monitors"
+"supported_os":
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Category::Automation
-  - Category::Marketplace
-  - Offering::Software License
-  configuration: README.md#Setup
-  description: トリガーされたモニターを修復するためのオートメーション構築
-  media:
-  - caption: 修復ダッシュボード
-    image_url: images/remediation_dashboard.png
-    media_type: image
-  - caption: 修復自動化セットアップの例
-    image_url: images/automate_remediation.png
-    media_type: image
-  - caption: フリート全体でのインタラクティブなデバッグと修理の例
-    image_url: images/fleetwide_interactive_debugging_and_repair.png
-    media_type: image
-  - caption: フリート全体での linux コマンドの詳細の例
-    image_url: images/fleetwide_linux_command_details.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Shoreline.io
-  uninstallation: README.md#Uninstallation
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Category::Automation"
+  - "Category::Marketplace"
+  - "Offering::Software License"
+  "configuration": "README.md#Setup"
+  "description": Build automations to repair triggered monitors
+  "media":
+  - "caption": Remediation dashboard
+    "image_url": images/remediation_dashboard.png
+    "media_type": image
+  - "caption": Example of remediation automation setup
+    "image_url": images/automate_remediation.png
+    "media_type": image
+  - "caption": Example of fleetwide interactive debugging and repair
+    "image_url": images/fleetwide_interactive_debugging_and_repair.png
+    "media_type": image
+  - "caption": Example of fleetwide linux command details
+    "image_url": images/fleetwide_linux_command_details.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Shoreline.io
+  "uninstallation": "README.md#Uninstallation"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## 概要
+## Overview
 
-Shoreline のインシデント自動化により、DevOps と Site Reliability Engineer (SRE) は、**大規模なデバッグ**をインタラクティブに行い、迅速に**修復を構築**して反復作業を排除することができます。
+Shoreline incident automation enables DevOps and Site Reliability Engineers (SREs) to interactively **debug at scale** and quickly **build remediations** to eliminate repetitive work.
 
-デバッグ・修復機能により、サーバーに個別に SSH 接続することなく、サーバーファーム全体でリアルタイムにコマンドを実行することができます。Linux コマンド、シェルスクリプト、クラウドプロバイダー API の呼び出しなど、Linux コマンドプロンプトで入力できるものなら何でも実行でき、これらのデバッグセッションを Datadog モニターに接続したオートメーションにすることができます。
+The debug and repair feature allows you to execute commands in real-time across your server farm without needing to SSH into the servers individually. You can execute anything that can be typed at the Linux command prompt such as Linux commands, shell scripts, and calls to cloud provider APIs, and turn these debug sessions into automations connected to Datadog monitors.
 
-Shoreline アプリは、モニターがトリガーされると自動的に自動化を実行し、平均修復時間 (MTTR) と手作業を大幅に削減します。
+The Shoreline app automatically executes the automation when the monitor is triggered, significantly reducing Mean Time to Repair (MTTR) and manual work.
 
-Shoreline は、待機中の全員が最高の SRE と同等の能力を発揮できるよう支援します。Shoreline は、オンコールチームにデバッグツールと承認された修復アクションを提供し、エスカレーションを減らしてインシデントを迅速に修正し、ミスを減らして初回で正しくインシデントを修正できるよう支援します。
+Shoreline helps everyone on call be as good as your best SRE. Shoreline arms your on-call team with debugging tools and approved remediation actions, helping you fix incidents faster with fewer escalations and ensuring that incidents are fixed correctly the first time with fewer mistakes.
 
-まずは、[Shoreline][1] でトライアルアカウントを設定してください。
+To get started, set up a trial account on [Shoreline][1].
 
-## Agent
+## Support
 
-サポートおよび機能リクエストをご希望の場合は、以下のチャンネルから Shoreline にお問い合わせください。
+For support and feature requests, contact Shoreline through the following channel:
 
-- メール: [support@shoreline.io][2]
+- Email: [support@shoreline.io][2]
 
-### その他の参考資料
+### Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Shoreline と Datadog による問題のデバッグと修復の自動化][11]
-- [Shoreline ドキュメント][9]
+- [Debug issues and automate remediation with Shoreline and Datadog][11]
+- [Shoreline Documentation][9]
 
 [1]: https://shoreline.io/datadog?source=DatadogMarketplace
 [2]: mailto:support@shoreline.io
@@ -107,4 +107,4 @@ Shoreline は、待機中の全員が最高の SRE と同等の能力を発揮�
 [10]: https://app.datadoghq.com/account/settings#integrations/shoreline-integration
 [11]: https://www.datadoghq.com/blog/shoreline-io-marketplace-datadog/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/shoreline-software-license" target="_blank">こちらをクリック</a>してください。
+This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/shoreline-software-license" target="_blank">Click Here</a> to purchase this application.

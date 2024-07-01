@@ -1,63 +1,63 @@
 ---
+title: Tutorial - Enabling Tracing for a Java Application on Amazon ECS with Fargate
+kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tags: ドキュメント
-  text: トレーシングライブラリの追加構成オプション
+  tag: Documentation
+  text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
-  tags: ドキュメント
-  text: トレーシングライブラリの詳細設定手順
+  tag: Documentation
+  text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/java/
-  tags: ドキュメント
-  text: 自動インスツルメンテーションのためにサポートされている Java フレームワーク
+  tag: Documentation
+  text: Supported Java frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tags: ドキュメント
-  text: トレースとスパンを手動で構成する
-- link: https://github.com/DataDog/dd-trace-java
-  tags: GitHub
-  text: トレーシングライブラリオープンソースコードリポジトリ
-kind: ガイド
-title: チュートリアル - AWS ECS with Fargate 上の Java アプリケーションのトレースを有効にする
+  tag: Documentation
+  text: Manually configuring traces and spans
+- link: "https://github.com/DataDog/dd-trace-java"
+  tag: Source Code
+  text: Tracing library open source code repository
 ---
 
-## 概要
+## Overview
 
-このチュートリアルでは、AWS Elastic Container Service (ECS) with Fargate 上のクラスターにインストールされたサンプル Java アプリケーションでトレースを有効にするための手順を説明します。このシナリオでは、Datadog Agent もクラスターにインストールされています。
+This tutorial walks you through the steps for enabling tracing on a sample Java application installed in a cluster on AWS Elastic Container Service (ECS) with Fargate. In this scenario, the Datadog Agent is also installed in the cluster.
 
-ホスト、コンテナ、クラウドインフラストラクチャー、他の言語で書かれたアプリケーションなど、他のシナリオについては、他の[トレース有効化のチュートリアル][1]を参照してください。例えば、コンテナや EKS を使用したチュートリアルの中には、Datadog で見られる自動インスツルメンテーションとカスタムインスツルメンテーションの違いを説明するものがあります。このチュートリアルでは、完全にカスタムインスツルメンテーションされた例までスキップします。
+For other scenarios, including on a host, in a container, on other cloud infrastructure, and on applications written in other languages, see the other [Enabling Tracing tutorials][1]. Some of those other tutorials, for example, the ones using containers or EKS, step through the differences seen in Datadog between automatic and custom instrumentation. This tutorial skips right to a fully custom instrumented example.
 
-このチュートリアルでは、中級レベルの AWS トピックも使用しているので、AWS のネットワークとアプリケーションにある程度慣れていることが必要です。もしあなたが AWS にそれほど精通しておらず、Datadog APM のセットアップの基本を学ぼうとしているならば、代わりにホストまたはコンテナのチュートリアルのいずれかを使用してください。
+This tutorial also uses intermediate-level AWS topics, so it requires that you have some familiarity with AWS networking and applications. If you're not as familiar with AWS, and you are trying to learn the basics of Datadog APM setup, use one of the host or container tutorials instead.
 
-Java の一般的なトレース設定ドキュメントについては、[Java アプリケーションのトレース][2]を参照してください。
+See [Tracing Java Applications][2] for general comprehensive tracing setup documentation for Java.
 
-### 前提条件
+### Prerequisites
 
-- Datadog のアカウントと[組織の API キー][3]
+- A Datadog account and [organization API key][3]
 - Git
 - Docker
 - Terraform
-- AWS ECS
-- イメージをホスティングするための AWS ECR リポジトリ
-- `AdministratorAccess` 権限を持つ AWS IAM ユーザー。アクセスキーとシークレットアクセスキーを使用して、ローカルの資格情報ファイルにプロファイルを追加する必要があります。詳しくは、[AWS の資格情報ファイルと資格情報プロファイルの使用][20]を参照してください。
+- Amazon ECS
+- an Amazon ECR repository for hosting images
+- An AWS IAM user with `AdministratorAccess` permission. You must add the profile to your local credentials file using the access and secret access keys. For more information, read [Using the AWS credentials file and credential Profiles][20].
 
-## サンプルの Java アプリケーションをインストールする
+## Install the sample Java application
 
-このチュートリアルのコードサンプルは、GitHub の [github.com/DataDog/apm-tutorial-java-host][9] にあります。まずは、このリポジトリを複製してください。
+The code sample for this tutorial is on GitHub, at [github.com/DataDog/apm-tutorial-java-host][9]. To get started, clone the repository:
 
 {{< code-block lang="sh" >}}
 git clone https://github.com/DataDog/apm-tutorial-java-host.git
 {{< /code-block >}}
 
-リポジトリには、Docker コンテナ内で動作するようにあらかじめ構成されたマルチサービスの Java アプリが含まれています。コンテナを作成するための `docker-compose` YAML ファイルは `docker` ディレクトリに配置されています。このチュートリアルでは、アプリケーション用のコンテナをビルドする `service-docker-compose-ECS.yaml` ファイルを使用します。
+The repository contains a multi-service Java application pre-configured to run inside Docker containers. The `docker-compose` YAML files to make the containers are located in the `docker` directory. This tutorial uses the `service-docker-compose-ECS.yaml` file, which builds containers for the application.
 
-`notes` と `calendar` の各ディレクトリには、アプリケーションをビルドするための Dockerfile が、Maven と Gradle の 2 つのセットで用意されています。このチュートリアルでは Maven を使用しますが、Gradle に慣れている場合は、ビルドコマンドを変更することで、Maven の代わりに Gradle を使用することができます。
+In each of the `notes` and `calendar` directories, there are two sets of Dockerfiles for building the applications, either with Maven or with Gradle. This tutorial uses the Maven build, but if you are more familiar with Gradle, you can use it instead with the corresponding changes to build commands.
 
-サンプルアプリケーションはシンプルなマルチサービスの Java アプリケーションで、2 つの API (`notes` サービスと `calendar` サービス) を備えています。`notes` サービスには、メモリ内 H2 データベースに保存されたノートに対する `GET`、`POST`、`PUT`、`DELETE` のエンドポイントがあります。`calendar` サービスはリクエストを受け、ノートで使用するランダムな日付を返します。両方のアプリケーションには、それぞれ関連する Docker イメージがあり、AWS ECS に別々のサービスとして、それぞれ独自のタスクとそれぞれのコンテナを持ってデプロイします。ECS は、ビルド後にイメージを公開するアプリケーションイメージのリポジトリである ECR からイメージを取得します。
+The sample application is a simple multi-service Java application with two APIs, one for a `notes` service and another for a `calendar` service. The `notes` service has `GET`, `POST`, `PUT`, and `DELETE` endpoints for notes stored within an in-memory H2 database. The `calendar` service can take a request and return a random date to be used in a note. Both applications have their own associated Docker images, and you deploy them on Amazon ECS as separate services, each with its own tasks and respective containers. ECS pulls the images from ECR, a repository for application images that you publish the images to after building.
 
-### ECS の初期設定
+### Initial ECS setup
 
-このアプリケーションでは、AWS プロファイル (ECS クラスターを作成し、ECR から読み取るための正しい権限で構成済み)、AWS リージョン、AWS ECR リポジトリの追加など、いくつかの初期構成が必要です。
+The application requires some initial configuration, including adding your AWS profile (already configured with the correct permissions to create an ECS cluster and read from ECR), AWS region, and Amazon ECR repository.
 
-`terraform/Fargate/global_constants/variables.tf` を開きます。以下の変数の値を、正しい AWS アカウント情報に置き換えます。
+Open `terraform/Fargate/global_constants/variables.tf`. Replace the variable values below with your correct AWS account information:
 
 ```
 output "aws_profile" {
@@ -76,40 +76,40 @@ output "aws_ecr_repository" {
 }
 ```
 
-### アプリケーションイメージの構築とアップロード
+### Build and upload the application images
 
-コンテナイメージのレジストリである Amazon ECR に馴染みがない方は、[Amazon ECR を AWS CLI で使う][17]を読むとよいかもしれません。
+If you're not familiar with Amazon ECR, a registry for container images, it might be helpful to read [Using Amazon ECR with the AWS CLI][17].
 
-サンプルプロジェクトの `/docker` ディレクトリで、以下のコマンドを実行します。
+In the sample project's `/docker` directory, run the following commands:
 
-1. このコマンドでユーザー名とパスワードを入力し、ECR で認証します。
+1. Authenticate with ECR by supplying your username and password in this command:
    {{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>{{< /code-block >}}
 
-2. サンプルアプリの Docker イメージを構築し、プラットフォーム設定を合わせます。
+2. Build a Docker image for the sample apps, adjusting the platform setting to match yours:
    {{< code-block lang="sh" >}}
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-ECS.yaml build{{< /code-block >}}
 
-3. コンテナに ECR 宛先のタグを付けます。
+3. Tag the containers with the ECR destination:
    {{< code-block lang="sh" >}}
 docker tag docker_notes:latest <ECR_REGISTRY_URL>:notes
 docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
-4. コンテナを ECR レジストリにアップロードします。
+4. Upload the container to the ECR registry:
    {{< code-block lang="sh" >}}
 docker push <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
-(トレースを有効にしていない) アプリケーションはコンテナ化され、ECS がプルできるようになります。
+Your application (without tracing enabled) is containerized and available for ECS to pull.
 
 
-### アプリケーションをデプロイする
+### Deploy the application
 
-アプリケーションを起動し、トレースせずにいくつかのリクエストを送信します。アプリケーションがどのように動作するかを確認した後、トレーシングライブラリと Datadog Agent を使用してインスツルメントを行います。
+Start the application and send some requests without tracing. After you've seen how the application works, you'll instrument it using the tracing library and Datadog Agent.
 
-まずは、Terraform スクリプトを使用して AWS ECS にデプロイします。
+To start, use a terraform script to deploy to Amazon ECS:
 
-1. `terraform/Fargate/Uninstrumented` ディレクトリで、以下のコマンドを実行します。
+1. From the `terraform/Fargate/Uninstrumented` directory, run the following commands:
 
    ```sh
    terraform init
@@ -117,11 +117,11 @@ docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
    terraform state show 'aws_alb.application_load_balancer'
    ```
 
-   **注**: `terraform apply` コマンドが CIDR ブロックメッセージを返す場合、IP アドレスを取得するスクリプトはローカルマシンでは動作しませんでした。これを解決するには、`terraform/Fargate/Uninstrumented/security.tf` ファイルで値を手動で設定します。`load_balancer_security_group` の `ingress` ブロック内で、どの `cidr_blocks` 行がコメントアウトされているかを切り替え、コメントアウトされていない例の行をマシンの IP4 アドレスで更新してください。
+   **Note**: If the `terraform apply` command returns a CIDR block message, the script to obtain your IP address did not work on your local machine. To fix this, set the value manually in the `terraform/Fargate/Uninstrumented/security.tf` file. Inside the `ingress` block of the `load_balancer_security_group`, switch which `cidr_blocks` line is commented out and update the now-uncommented example line with your machine's IP4 address.
 
-2. ロードバランサーの DNS 名をメモしておきます。サンプルアプリの API コールでは、そのベースドメインを使用します。インスタンスが起動するまで数分待ちます。
+2. Make note of the DNS name of the load balancer. You'll use that base domain in API calls to the sample app. Wait a few minutes for the instances to start up.
 
-3. 別のターミナルを開いて、アプリを行使するために API リクエストを送信します。ノートアプリケーションは、同じコンテナで実行されているメモリ内 H2 データベースにデータを保存する REST API です。これにいくつかのコマンドを送信します。
+3. Open up another terminal and send API requests to exercise the app. The notes application is a REST API that stores data in an in-memory H2 database running on the same container. Send it a few commands:
 
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
    : `[]`
@@ -144,43 +144,43 @@ docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
    `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
    : `{"id":2,"description":"NewestNote with date 12/02/2022."}`
 
-   このコマンドは `notes` と `calendar` の両方のサービスを呼び出します。
+      This command calls both the `notes` and `calendar` services.
 
-4. アプリケーションの実行を確認したら、以下のコマンドを実行してアプリケーションを停止し、AWS リソースをクリーンアップして、トレースを有効にできるようにします。
+4. After you've seen the application running, run the following command to stop it and clean up the AWS resources so that you can enable tracing:
    {{< code-block lang="sh" >}}
 terraform destroy{{< /code-block >}}
 
-## トレースを有効にする
+## Enable tracing
 
-Java アプリケーションが動作するようになったので、トレースを有効にするための構成を行います。
+Now that you have a working Java application, configure it to enable tracing.
 
-1. dockerfile を編集して、アプリケーションがトレースを生成するために必要な Java トレーシングパッケージを追加します。`notes/dockerfile.notes.maven` ファイルを開き、`dd-java-agent` をダウンロードする行のコメントを解除します。
+1. Edit the dockerfile to add the Java tracing package which is needed by the application to generate traces. Open the `notes/dockerfile.notes.maven` file and uncomment the line that downloads `dd-java-agent`:
 
    ```
-   RUN curl -Lo dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   RUN curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 
-2. 同じ `notes/dockerfile.notes.maven` ファイル内で、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
+2. Within the same `notes/dockerfile.notes.maven` file, comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
 
    ```
    ENTRYPOINT ["java" , "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/notes-0.0.1-SNAPSHOT.jar"]
    ```
 
-   もう一つのサービスである `calendar` でこのステップを繰り返します。`calendar/dockerfile.calendar.maven` を開き、トレースなしで実行するための `ENTRYPOINT` 行をコメントアウトしてください。次に、トレースを有効にしてアプリケーションを実行する `ENTRYPOINT` 行のコメントを解除します。
+   Repeat this step with the other service, `calendar`. Open `calendar/dockerfile.calendar.maven`, and comment out the `ENTRYPOINT` line for running without tracing. Then uncomment the `ENTRYPOINT` line, which runs the application with tracing enabled:
 
    ```
-   ENTRYPOINT ["java", "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"] 
+   ENTRYPOINT ["java", "-javaagent:../dd-java-agent.jar", "-Ddd.trace.sample.rate=1", "-jar" , "target/calendar-0.0.1-SNAPSHOT.jar"]
    ```
 
-   これで、どちらのサービスも自動インスツルメンテーションが行われるようになります。
+   Now both services will have automatic instrumentation.
 
-   <div class="alert alert-warning"><strong>注</strong>: これらのサンプルコマンドのフラグ、特にサンプルレートは、このチュートリアル以外の環境では、必ずしも適切ではありません。実際の環境で何を使うべきかについては、<a href="#tracing-configuration">トレース構成</a>を読んでください。</div>
+   <div class="alert alert-warning"><strong>Note</strong>: The flags on these sample commands, particularly the sample rate, are not necessarily appropriate for environments outside this tutorial. For information about what to use in your real environment, read <a href="#tracing-configuration">Tracing configuration</a>.</div>
 
-3. 自動インスツルメンテーションは便利ですが、より細かいスパンが欲しい場合もあります。Datadog の Java DD Trace API では、アノテーションやコードを使用してコード内のスパンを指定することができます。コードにアノテーションを追加し、いくつかのサンプルメソッドにトレースします。
+3. Automatic instrumentation is convenient, but sometimes you want more fine-grained spans. Datadog's Java DD Trace API allows you to specify spans within your code using annotations or code. Add some annotations to the code to trace into some sample methods.
 
-   `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java` を開きます。このサンプルには、コードにカスタムトレースを設定するさまざまな方法を示す、コメントアウトされたコードがすでに含まれています。
+   Open `/notes/src/main/java/com/datadog/example/notes/NotesHelper.java`. This example already contains commented-out code that demonstrates the different ways to set up custom tracing on the code.
 
-4. 手動トレーシングをサポートするためのライブラリをインポートしている行のコメントを解除します。
+4. Uncomment the lines that import libraries to support manual tracing:
 
    ```java
    import datadog.trace.api.Trace;
@@ -194,14 +194,14 @@ Java アプリケーションが動作するようになったので、トレー
    import java.io.StringWriter
    ```
 
-5. 2 つのパブリックプロセスを手動でトレースしている行のコメントを解除します。これらは、`@Trace` アノテーションを使用して、`operationName` や `resourceName` などのアスペクトをトレースで指定することを示しています。
+5. Uncomment the lines that manually trace the two public processes. These demonstrate the use of `@Trace` annotations to specify aspects such as `operationName` and `resourceName` in a trace:
    ```java
    @Trace(operationName = "traceMethod1", resourceName = "NotesHelper.doLongRunningProcess")
    // ...
    @Trace(operationName = "traceMethod2", resourceName = "NotesHelper.anotherProcess")
    ```
 
-6. また、アプリケーション内の特定のコードブロックに対して、別のスパンを作成することもできます。スパン内には、サービスやリソース名のタグ、エラー処理タグを追加します。これらのタグは、Datadog の視覚化でスパンとメトリクスを表示するフレームグラフになります。プライベートメソッドを手動でトレースする行のコメントを解除します。
+6. You can also create a separate span for a specific code block in the application. Within the span, add service and resource name tags and error handling tags. These tags result in a flame graph showing the span and metrics in Datadog visualizations. Uncomment the lines that manually trace the private method:
 
    ```java
            Tracer tracer = GlobalTracer.get();
@@ -211,12 +211,12 @@ Java アプリケーションが動作するようになったので、トレー
                .withTag(DDTags.RESOURCE_NAME, "privateMethod1")
                .start();
            try (Scope scope = tracer.activateSpan(span)) {
-               // Tags can also be set after creation 
+               // Tags can also be set after creation
                span.setTag("postCreationTag", 1);
                Thread.sleep(30);
                Log.info("Hello from the custom privateMethod1");
    ```
-   また、エラー時にタグを設定する行も:
+   And also the lines that set tags on errors:
    ```java
         } catch (Exception e) {
             // Set error on span
@@ -233,15 +233,15 @@ Java アプリケーションが動作するようになったので、トレー
         }
    ```
 
-7. `notes/pom.xml` を開き、手動トレースの依存関係を構成する行のコメントを解除して、Maven ビルドを更新します。`dd-trace-api` ライブラリは `@Trace` アノテーションに使用され、`opentracing-util` と `opentracing-api` は手動でスパンを作成するために使用されます。
+7. Update your Maven build by opening `notes/pom.xml` and uncommenting the lines configuring dependencies for manual tracing. The `dd-trace-api` library is used for the `@Trace` annotations, and `opentracing-util` and `opentracing-api` are used for manual span creation.
 
-8. Datadog Agent を `notes` と `calendar` の各タスク定義に追加します。Agent はどこかにインストールするのではなく、各 AWS タスクの横にあるコンテナ内に追加してください。`terraform/Fargate/Instrumented/main.tf` を開き、このサンプルには ECS Fargate 上で Datadog Agent を実行しトレースを収集するために必要な基本構成が既にあることが確認できます。つまり、ECS Fargate を有効にし APM を有効にする API キー (次のステップで構成する) です。この定義は、`notes` タスクと `calendar` タスクの両方で提供されています。
+8. Add the Datadog Agent to each of the `notes` and `calendar` task definitions, adding an Agent in a container beside each AWS task rather than installing it anywhere. Open `terraform/Fargate/Instrumented/main.tf` and see that this sample already has the base configurations necessary to run the Datadog Agent on ECS Fargate and collect traces: the API key (which you configure in the next step), enabling ECS Fargate, and enabling APM. The definition is provided in both the `notes` task and the `calendar` task.
 
-9. API キー変数に値を指定します。`terraform/Fargate/global_constants/variables.tf` を開き、`output "datadog_api_key"` セクションのコメントを解除し、組織の Datadog API キーを提供します。
+9. Provide the API key variable with a value. Open `terraform/Fargate/global_constants/variables.tf` and uncomment the `output "datadog_api_key"` section and provide your organization's Datadog API key.
 
-10. 異なるバージョンやデプロイ環境間でトレースされたサービスを識別する[統合サービスタグ][10]により、Datadog 内で相関が取れるようになり、検索やフィルターに利用できるようになります。統合サービスタグ付けに使用する環境変数は、`DD_SERVICE`、`DD_ENV`、`DD_VERSION` の 3 つです。ECS 上にデプロイされたアプリケーションの場合、これらの環境変数はコンテナのタスク定義内で設定されます。
+10. [Universal Service Tags][10] identify traced services across different versions and deployment environments so that they can be correlated within Datadog, and so you can use them to search and filter. The three environment variables used for Unified Service Tagging are `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. For applications deployed on ECS, these environment variables are set within the task definition for the containers.
 
-    このチュートリアルでは、`/terraform/Fargate/Instrumented/main.tf` ファイルに、ノートとカレンダーアプリケーションのためのこれらの環境変数がすでに定義されています。例えば `notes` の場合:
+    For this tutorial, the `/terraform/Fargate/Instrumented/main.tf` file already has these environment variables defined for the notes and calendar applications, for example, for `notes`:
 
     ```yaml
     ...
@@ -282,7 +282,7 @@ Java アプリケーションが動作するようになったので、トレー
        },
        ...
     ```
-    そして `calendar` の場合:
+    And for `calendar`:
 
     ```yaml
      ...
@@ -311,19 +311,19 @@ Java アプリケーションが動作するようになったので、トレー
       ...
      ```
 
-    また、同じユニバーサルサービスタグの `service`、`env`、`version` の値に対する Docker ラベルが設定されていることがわかります。これにより、アプリケーションを起動したら Docker メトリクスを取得することもできます。
+    You can also see that Docker labels for the same Universal Service Tags `service`, `env`, and `version` values are set. This allows you also to get Docker metrics once your application is running.
 
-### トレーシングのコンフィギュレーション
+### Tracing configuration
 
-Java トレーシングライブラリは、Java のビルトイン Agent とモニタリングのサポートを利用します。Dockerfile のフラグ `-javaagent:../dd-java-agent.jar` は、JVM が Java Agent として実行できるように、Java トレーシングライブラリをどこで見つけるかを指示します。Java Agent については、[https://www.baeldung.com/java-instrumentation][7] で詳しく説明されています。
+The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
-`dd.trace.sample.rate` フラグは、このアプリケーションのサンプルレートを設定します。Dockerfile の ENTRYPOINT コマンドでは、この値を `1` に設定しています。これは、全てのサービスリクエストの 100% が、分析と表示のために Datadog のバックエンドに送信されることを意味します。低容量のテストアプリケーションの場合、これは問題ありません。実稼働時や大量のデータを扱う環境では、このようなことはしないでください。代わりに、リクエストの一部をサンプリングします。例えば、`-Ddd.trace.sample.rate=0.1` とすると、リクエストの 10% 分のトレースが Datadog に送信されます。[トレース構成設定][14]と[サンプリング機構][15]について詳しくお読みください。
+The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile sets its value to `1`, meaning that 100% of all service requests are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][14] and [sampling mechanisms][15].
 
-このコマンドのサンプリングレートフラグは `-jar` フラグの前に表示されていることに注意してください。これは、このフラグがアプリケーションではなく、Java Virtual Machine のパラメーターだからです。アプリケーションに Java Agent を追加するときは、このフラグを正しい場所に指定するようにしてください。
+Notice that the sampling rate flag in the commands appears _before_ the `-jar` flag. That's because this is a parameter for the Java Virtual Machine, not your application. Make sure that when you add the Java Agent to your application, you specify the flag in the right location.
 
-### アプリケーションイメージの再構築とアップロード
+### Rebuild and upload the application image
 
-[前と同じ手順](#build-and-upload-the-application-images)で、トレースを有効にしてイメージを再構築します。
+Rebuild the image with tracing enabled using the [same steps as before](#build-and-upload-the-application-images):
 {{< code-block lang="sh" >}}
 aws ecr get-login-password --region us-east-1 | docker login --username <YOUR_AWS_USER> --password-stdin <USER_CREDENTIALS>
 DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f service-docker-compose-ECS.yaml build
@@ -332,13 +332,13 @@ docker tag docker_calendar:latest <ECR_REGISTRY_URL>:calendar
 docker push <ECR_REGISTRY_URL>:notes
 docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
-トレースを有効にしたマルチサービスアプリケーションはコンテナ化され、ECS がプルできるようになります。
+Your multi-service application with tracing enabled is containerized and available for ECS to pull.
 
-## トレースを見るためにアプリを起動する
+## Launch the app to see traces
 
-アプリケーションを再デプロイし、API を実行します。
+Redeploy the application and exercise the API:
 
-1. [先ほどと同じ terraform コマンド](#deploy-the-application)を使って、AWS ECS にアプリケーションを再デプロイしてください。ただし、インスツルメンテーション版のコンフィギュレーションファイルを使います。`terraform/Fargate/Instrumented` ディレクトリから、以下のコマンドを実行します。
+1. Redeploy the application to Amazon ECS using the [same terraform commands as before](#deploy-the-application), but with the instrumented version of the configuration files. From the `terraform/Fargate/Instrumented` directory, run the following commands:
 
    ```sh
    terraform init
@@ -346,9 +346,9 @@ docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
    terraform state show 'aws_alb.application_load_balancer'
    ```
 
-2. ロードバランサーの DNS 名をメモしておきます。サンプルアプリの API コールでは、そのベースドメインを使用します。
+2. Make note of the DNS name of the load balancer. You'll use that base domain in API calls to the sample app.
 
-3. インスタンスが起動するまで数分待ちます。アプリケーション用のコンテナが準備できたことを確認するため、数分間待ちます。いくつかの curl コマンドを実行して、インスツルメンテーションされたアプリを実行します。
+3. Wait a few minutes for the instances to start up. Wait a few minutes to ensure the containers for the applications are ready. Run some curl commands to exercise the instrumented app:
 
    `curl -X GET 'BASE_DOMAIN:8080/notes'`
    : `[]`
@@ -370,65 +370,66 @@ docker push <ECR_REGISTRY_URL>:calendar{{< /code-block >}}
 
    `curl -X POST 'BASE_DOMAIN:8080/notes?desc=NewestNote&add_date=y'`
    : `{"id":2,"description":"NewestNote with date 12/02/2022."}`
-   : このコマンドは `notes` と `calendar` の両方のサービスを呼び出します。
+   : This command calls both the `notes` and `calendar` services.
 
-4. しばらく待って、Datadog の [**APM > Traces**][11] にアクセスすると、API 呼び出しに対応するトレースの一覧が表示されます。
+4. Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
-   {{< img src="tracing/guide/tutorials/tutorial-java-container-traces.png" alt="APM トレースエクスプローラーのサンプルアプリのトレース" style="width:100%;" >}}
+   {{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
-   `h2` はこのチュートリアルのために埋め込まれたインメモリデータベースで、`notes` は Spring Boot アプリケーションです。トレースリストには、すべてのスパン、いつ開始したか、どのリソースがスパンで追跡されたか、どれくらいの時間がかかったか、が表示されます。
+   The `h2` is the embedded in-memory database for this tutorial, and `notes` is the Spring Boot application. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
-もし、数分待ってもトレースが表示されない場合は、Traces Search フィールドのフィルターをクリアしてください (使用していない `ENV` などの環境変数にフィルターをかけている場合があります)。
+If you don't see traces after several minutes, clear any filter in the Traces Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
-### トレースの検証
+### Examine a trace
 
-Traces ページで、`POST /notes` トレースをクリックすると、各スパンにかかった時間や、あるスパンが完了する前に他のスパンが発生したことを示すフレームグラフが表示されます。グラフの上部にあるバーは、前の画面で選択したスパンです (この場合、ノートアプリケーションへの最初のエントリポイントです)。
+On the Traces page, click on a `POST /notes` trace to see a flame graph that shows how long each span took and what other spans occurred before a span completed. The bar at the top of the graph is the span you selected on the previous screen (in this case, the initial entry point into the notes application).
 
-バーの幅は、それが完了するまでにかかった時間を示します。低い深さのバーは、高い深さのバーの寿命の間に完了するスパンを表します。
+The width of a bar indicates how long it took to complete. A bar at a lower depth represents a span that completes during the lifetime of a bar at a higher depth.
 
-トレースエクスプローラーで、`GET` リクエストの 1 つをクリックすると、次のようなフレームグラフが表示されます。
+On the Trace Explorer, click into one of the `GET` requests, and see a flame graph like this:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="カスタムインスツルメンテーションを用いた GET トレースのフレームグラフ。" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-custom-flame.png" alt="A flame graph for a GET trace with custom instrumentation." style="width:100%;" >}}
 
-手動でスパンを作成した `privateMethod` は、他のコールとは別のブロックとして表示され、別の色でハイライトされています。`@Trace` アノテーションを使用した他のメソッドは、`GET` リクエスト (`notes` アプリケーション) と同じサービス、同じ色で表示されます。カスタムインスツルメンテーションは、ハイライトして監視する必要があるコードの重要な部分がある場合に有効です。
+The `privateMethod` around which you created a manual span shows up as a separate block from the other calls and is highlighted by a different color. The other methods where you used the `@Trace` annotation show under the same service and color as the `GET` request, which is the `notes` application. Custom instrumentation is valuable when there are key parts of the code that need to be highlighted and monitored.
 
-詳しくは、[カスタムインストルメンテーション][12]をご覧ください。
+For more information, read [Custom Instrumentation][12].
 
-単一のサービスをトレースすることは素晴らしいスタートです。しかし、トレースの本当の価値は、リクエストがサービスを通じてどのように流れているかを見ることです。これを_分散型トレーシング_と呼びます。最後の API コール (ノートに日付を追加したコール) のトレースをクリックすると、2 つのサービス間の分散型トレースを見ることができます。
+Tracing a single service is a great start, but the real value in tracing is seeing how requests flow through your services. This is called _distributed tracing_. Click the trace for the last API call, the one that added a date to the note, to see a distributed trace between the two services:
 
-{{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="分散型トレーシングのフレームグラフ。" style="width:100%;" >}}
+{{< img src="tracing/guide/tutorials/tutorial-java-container-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
 
-`notes` アプリケーションでは何も変更していないことに注意してください。Datadog は `notes` から `calendar` への HTTP コールに使用される `okHttp` ライブラリと、`notes` と `calendar` の HTTP リクエストをリッスンするために使用する Jetty ライブラリの両方を自動的にインスツルメントします。これにより、トレース情報を 1 つのアプリケーションから他のアプリケーションに渡すことができ、分散型トレースをキャプチャすることができます。
+Note that you didn't change anything in the `notes` application. Datadog automatically instruments both the `okHttp` library used to make the HTTP call from `notes` to `calendar`, and the Jetty library used to listen for HTTP requests in `notes` and `calendar`. This allows the trace information to be passed from one application to the other, capturing a distributed trace.
 
-確認が終わったら、すべてのリソースをクリーンアップし、デプロイを削除してください。
+When you're done exploring, clean up all resources and delete the deployments:
 
 ```sh
 aws ecs delete-service --cluster apm-tutorial-ec2-java --service datadog-agent --profile <PROFILE> --region <REGION>
 terraform destroy
 ```
 
-## トラブルシューティング
+## Troubleshooting
 
-もし、期待通りのトレースが受信できない場合は、Java トレーサーのでデバッグモードを設定してください。詳しくは[デバッグモードの有効化][13]を読んでください。
+If you're not receiving traces as expected, set up debug mode for the Java tracer. Read [Enable debug mode][13] to find out more.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/guide/#enabling-tracing-tutorials
-[2]: /ja/tracing/trace_collection/dd_libraries/java/
-[3]: /ja/account_management/api-app-keys/
-[4]: /ja/tracing/trace_collection/compatibility/java/
-[6]: /ja/getting_started/site/
+[1]: /tracing/guide/#enabling-tracing-tutorials
+[2]: /tracing/trace_collection/dd_libraries/java/
+[3]: /account_management/api-app-keys/
+[4]: /tracing/trace_collection/compatibility/java/
+[6]: /getting_started/site/
 [8]: https://app.datadoghq.com/event/explorer
 [7]: https://www.baeldung.com/java-instrumentation
 [9]: https://github.com/DataDog/apm-tutorial-java-host
-[10]: /ja/getting_started/tagging/unified_service_tagging/
+[10]: /getting_started/tagging/unified_service_tagging/
 [11]: https://app.datadoghq.com/apm/traces
-[12]: /ja/tracing/trace_collection/custom_instrumentation/java/
-[13]: /ja/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
-[14]: /ja/tracing/trace_collection/library_config/java/
-[15]: /ja/tracing/trace_pipeline/ingestion_mechanisms/?tab=java
+[12]: /tracing/trace_collection/custom_instrumentation/java/
+[13]: /tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode
+[14]: /tracing/trace_collection/library_config/java/
+[15]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=java
 [17]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/getting-started-cli.html
 [18]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#create-and-provide-a-secret-that-contains-your-datadog-api-and-app-keys
-[20]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html
+[20]: https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-profiles.html
+

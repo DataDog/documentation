@@ -1,47 +1,48 @@
 ---
+title: Handle Pop-Ups In Browser Tests
+kind: guide
 further_reading:
-- link: https://www.datadoghq.com/blog/browser-tests/
-  tag: ブログ
-  text: Datadog ブラウザテストによるユーザーエクスペリエンスの監視
-- link: synthetics/browser_tests
-  tag: Documentation
-  text: ブラウザテストの設定
-kind: ガイド
-title: ブラウザテストでのポップアップの処理
+  - link: "https://www.datadoghq.com/blog/browser-tests/"
+    tag: Blog
+    text: User experience monitoring with Datadog Browser Tests
+  - link: synthetics/browser_tests
+    tag: Documentation
+    text: Learn about Synthetic browser tests
 ---
-## 概要
+## Overview
 
-Synthetic のブラウザテストで、モーダルやアプリケーションウィンドウなどのポップアップを管理する方法について説明します。
+This guide describes how to manage pop-ups such as modals or application windows in a Synthetic [browser test][5].
 
-## モーダル
+## Modals
 
 ### JavaScript
 
-Synthetic ブラウザテストは自動的に [JavaScript モーダル][1]を処理します。 
+Synthetic browser tests automatically handle [JavaScript modals][1]:
 
- - `alert` モーダルは閉じています。
- - `prompt` と `confirm` モーダルは `Lorem Ipsum` で回答されます。
+ - `alert` modals are immediately dismissed for OK. 
+ - `prompt` modals are filled with `Lorem Ipsum` for tests on Google Chrome or Microsoft Edge.
+ - `confirm` modals that ask for confirmation are accepted.
 
-### 基本認証
+### Basic authentication
 
-基本認証ポップアップの場合、ブラウザテストコンフィギュレーションの[**高度なオプション > HTTP 認証**][2]で関連する資格情報を指定します。
+For basic authentication pop-ups, specify the associated credentials in your browser test configuration's [**Advanced Options**][2].
 
-{{< img src="synthetics/guide/popup/http_auth_option.png" alt="基本認証ポップアップ">}}
+{{< img src="synthetics/guide/popup/http_authentication.png" alt="Basic Auth Pop-up" style="width:90%" >}}
 
-## アプリケーションポップアップ
+## Application pop-ups
 
-### 固定ポップアップ
+### Anchored pop-ups
 
-ユーザージャーニーの特定の時点でポップアップが表示された場合、閉じるためのステップを記録し、[対応するオプション][3]を使いそのステップを失敗させることができます。それにより、テストはポップアップが表示された際の対応を学ぶことができます。ポップアップが表示されない場合、ステップは失敗しますが、テスト全体が失敗に終わることはありません。
+If a pop-up appears at a specific point of your journey, you can record a step to close it and allow this step to fail using the [corresponding option][3]. This way, your test knows how to behave in case a pop-up appears. If the pop-up does not show up, the step fails without causing the whole test to fail. 
 
-{{< img src="synthetics/guide/popup/allow_fail_option.png" alt="ステップの失敗を許可しポップアップを処理する" width="90%">}}
+{{< img src="synthetics/guide/popup/allow_fail_option.png" alt="Allow step to fail to handle pop-up" style="width:60%" >}}
 
-### ポップアップの移動
+### Moving pop-ups
 
-セッション中にポップアップが表示される時間を予測できない場合は、ブラウザテストの実行中にポップアップが表示されないようにするルールを作成してもらえないか、ポップアップを出すサードパーティーに確認してください。たとえばテストの[専用 **高度なオプション**][2]の下に挿入できるクッキーなどがあるかもしれません。
+If the time at which these pop-ups appear in a session is not predictable, check with the third party providing the pop-up to see if they can create a rule that prevents the pop-up from appearing during your browser test execution. They can, for example, provide you with a cookie that you can input in the [**Advanced Options** section][2] of your test.
 
-または、次のいずれかの方法でポップアップが閉じたままテストが続行できるようにします。
-  * ブラウザテストの開始時に [JavaScript アサーション][4]を作成し、ポップアップを定期的に閉じるようにします。
+Alternatively, use one of these methods to ensure your pop-up is closed and your test is able to continue its journey:
+  * Create a [JavaScript assertion][4] at the beginning of your browser test to regularly try to close the pop-up:
 
     ```javascript
     if (document.querySelector("<ELEMENT>")) {
@@ -59,13 +60,14 @@ Synthetic ブラウザテストは自動的に [JavaScript モーダル][1]を�
     }
     ```
 
-  * ポップアップを閉じるためのステップを記録し、他のブラウザテストのステップの間に追加し、それぞれに対し[**このステップの失敗を許可** オプション][3]を選択します。
+  * Record steps to close the pop-up, add them between all your other browser test steps, and select the [**Allow this step to fail** option][3] for each of them.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://javascript.info/alert-prompt-confirm
-[2]: /ja/synthetics/browser_tests/#test-configuration
-[3]: /ja/synthetics/browser_tests/advanced_options/#optional-step
-[4]: /ja/synthetics/browser_tests/actions#test-your-ui-with-custom-javascript
+[2]: /synthetics/browser_tests/#test-configuration
+[3]: /synthetics/browser_tests/advanced_options/#optional-step
+[4]: /synthetics/browser_tests/actions#test-your-ui-with-custom-javascript
+[5]: /synthetics/browser_tests

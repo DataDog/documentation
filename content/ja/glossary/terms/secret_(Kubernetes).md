@@ -1,6 +1,6 @@
 ---
+title: Secrets (Kubernetes)
 core_product:
-- infrastructure monitoring
-title: シークレット (Kubernetes)
+  - infrastructure monitoring
 ---
-Kubernetes では、シークレットは、パスワード、トークン、キーなどの機密データを格納するために使用できるオブジェクトです。
+In Kubernetes, a Secret is an object that can be used to store sensitive data, such as passwords, tokens, and keys.

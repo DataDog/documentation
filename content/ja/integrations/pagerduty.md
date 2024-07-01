@@ -1,106 +1,107 @@
 ---
-categories:
-- collaboration
-- incidents
-- notifications
-dependencies: []
-description: Datadog のメトリクスとイベントから PagerDuty アラートを生成。
-doc_link: https://docs.datadoghq.com/integrations/pagerduty/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/mobile-incident-management-datadog/
-  tag: ブログ
-  text: Datadog モバイルアプリで外出先からインシデントを管理
-- link: https://www.datadoghq.com/blog/how-pagerduty-deploys-safely-with-datadog/
-  tag: ブログ
-  text: Datadog で PagerDuty を安全にデプロイする方法
-- link: https://docs.datadoghq.com/tracing/service_catalog/integrations/#pagerduty-integration
-  tag: ブログ
-  text: サービスカタログとのインテグレーションを利用する
-- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_pagerduty
-  tag: Terraform
-  text: Terraform による Datadog Pagerduty インテグレーションの作成と管理
-git_integration_title: pagerduty
-has_logo: true
-integration_id: ''
-integration_title: PagerDuty
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: pagerduty
-public_title: Datadog-PagerDuty インテグレーション
-short_description: Datadog のメトリクスとイベントから PagerDuty アラートを生成。
-version: '1.0'
+"categories":
+- "collaboration"
+- "incidents"
+- "notifications"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Generate PagerDuty alerts from Datadog metrics and events."
+"doc_link": "https://docs.datadoghq.com/integrations/pagerduty/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/mobile-incident-management-datadog/"
+  "tag": "Blog"
+  "text": "Manage incidents on the go with the Datadog mobile app"
+- "link": "https://www.datadoghq.com/blog/how-pagerduty-deploys-safely-with-datadog/"
+  "tag": "Blog"
+  "text": "How PagerDuty deploys safely with Datadog"
+- "link": "https://docs.datadoghq.com/tracing/service_catalog/integrations/#pagerduty-integration"
+  "tag": "Blog"
+  "text": "Using Integrations with Service Catalog"
+- "link": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_pagerduty"
+  "tag": "Terraform"
+  "text": "Create and manage the Datadog Pagerduty integration with Terraform"
+"git_integration_title": "pagerduty"
+"has_logo": true
+"integration_id": ""
+"integration_title": "PagerDuty"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "pagerduty"
+"public_title": "Datadog-PagerDuty Integration"
+"short_description": "Generate PagerDuty alerts from Datadog metrics and events."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog PagerDuty インテグレーションは、政府関係のサイトに対する Datadog の使用をサポートしていません。<b>注</b>: 監視通知を PagerDuty に送信することは可能です。</div>
+<div class="alert alert-warning">The Datadog PagerDuty integration has limited support in the Datadog for Government site. Service Catalog integration and auto-resolution from Incident Management and Workflow Automation are not supported.</div>
 {{< /site-region >}}
 
-## 概要
+## Overview
 
-PagerDuty を Datadog に接続して、以下のことができます。
+Connect PagerDuty to Datadog in order to:
 
-- ポストに `@pagerduty` をメンションすることで、ストリームからインシデントをトリガーおよび解決できます。
-- インシデントやエスカレーションの発生時に、それらをストリームに表示できます。
-- 誰がオンコールかのリマインダーを毎日取得できます。
+- Trigger and resolve incidents from your stream by mentioning `@pagerduty` in your post
+- See incidents and escalations in your stream as they occur
+- Get a daily reminder of who's on-call
 
-## 計画と使用
+## Setup
 
-Pagerduty の [Datadog インテグレーションガイド][1]を参照してください。
+See the [Datadog Integration Guide][1] from Pagerduty.
 
 {{< site-region region="us" >}}
-PagerDuty を統合したら、Datadog のカスタム PagerDuty インシデントトレンドを確認できます。
+Once you have Pagerduty integrated, you can check out Datadog's custom Pagerduty Incident Trends.
 {{< /site-region >}}
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-PagerDuty インテグレーションには、メトリクスは含まれません。
+The PagerDuty integration does not include any metrics.
 
-### ヘルプ
+### Events
 
-PagerDuty のトリガーされた/解決されたイベントは[イベントエクスプローラー][2]に表示されます。
+Your PagerDuty Triggered/Resolved events appear in the [Events Explorer][2].
 
-### ヘルプ
+### Service Checks
 
-PagerDuty インテグレーションには、サービスのチェック機能は含まれません。
+The PagerDuty integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-### 特定の PagerDuty サービスに通知を送信する
+### Send a notification to a specific PagerDuty service
 
-複数のサービスが統合されている場合に、特定の PagerDuty サービスにメッセージや通知を送るには、モニターメッセージに `@pagerduty-[serviceName]` を使用します。これをモニターの **Say what's happening** セクションに入力し始めると、オートコンプリートされるのがわかるはずです。
+To send a message or notification to a specific PagerDuty service when multiple services are integrated, use `@pagerduty-[serviceName]` in your monitor message. If you start typing it in your monitor **Say what's happening** section, you should see it autocomplete.
 
 {{< img src="integrations/pagerduty/pagerduty_faq_1.png" alt="pagerduty faq 1" popup="true">}}
 
-モニターが回復するとき、通知ハンドルをモニター回復メッセージに含めると、自動的に Pagerduty サービスを解決しますが、`{{#is_alert}}` コンテキストにのみ含まれている場合は解決しません。
+When a monitor recovers, it automatically resolves the Pagerduty service if you include the notification handle in the monitor recover message but won't if it's only included in the`{{#is_alert}}` context.
 
-### PagerDuty のインシデント重大度のマッピング
+### Mapping of PagerDuty incident severities
 
-PagerDuty インシデントの重大度は、アラートの原因となっているモニターのステータスによって決定されます。次の表は、アラートステータスが PagerDuty インシデントの重大度にどのようにマッピングされるかを示しています。
+The severity of PagerDuty incidents is determined by the status of the monitor that is causing the alert. The following table illustrates how the alert status is mapped to a PagerDuty incident severity.
 
-| モニターステータス     | PagerDuty インシデント重大度             |
+| Monitor status     | PagerDuty incident severity             |
 |--------------------|-----------------------------------------|
 | `ALERT`            | `error`                                 |
 | `NODATA`           | `error`                                 |
 | `WARNING`          | `warning`                               |
-| `OK` またはその他     | `info`                                  |
+| `OK` or others     | `info`                                  |
 
-例えば、モニターが `OK` から `WARNING` に遷移し、`@pagerduty-[serviceName]` に通知した場合、作成される PagerDuty インシデントの重大度は `warning` となります。
+For example, if the monitor transitions from `OK` to `WARNING` and notifies a `@pagerduty-[serviceName]`, the created PagerDuty incident will be of severity `warning`.
 
-**注**: このマッピングは自動的に行われ、変更することはできません。
+**Note**: This mapping happens automatically, and cannot be modified.
 
-### アラートの説明文の切り捨て
+### Alert description truncated
 
-Datadog では、PagerDuty に送信されるモニター通知の長さに上限を設けています。上限は **1024 文字**です。
+Datadog has an upper limit on your monitor notification lengths sent to PagerDuty. The limit is at **1024 characters**.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: http://www.pagerduty.com/docs/guides/datadog-integration-guide
-[2]: https://docs.datadoghq.com/ja/events/explorer/
+[2]: https://docs.datadoghq.com/events/explorer/
+

@@ -1,85 +1,88 @@
 ---
-app_id: wmi
-app_uuid: ddd1578f-d511-4d57-b5dd-33c0ea7c391e
-assets:
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: WMI
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- os & system
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: wmi_check
-integration_id: wmi
-integration_title: WMI チェック
-integration_version: 1.16.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: wmi_check
-public_title: WMI チェック
-short_description: WMI メトリクスを収集してグラフを作成。
-supported_os:
-- windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::OS とシステム
-  - Supported OS::Windows
-  configuration: README.md#Setup
-  description: WMI メトリクスを収集してグラフを作成。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: WMI チェック
+"app_id": "wmi"
+"app_uuid": "ddd1578f-d511-4d57-b5dd-33c0ea7c391e"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "115"
+    "source_type_name": "WMI"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "os & system"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "wmi_check"
+"integration_id": "wmi"
+"integration_title": "WMI Check (legacy)"
+"integration_version": "1.18.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "wmi_check"
+"public_title": "WMI Check (legacy)"
+"short_description": "Collect and graph any WMI metrics."
+"supported_os":
+- "windows"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::OS & System"
+  - "Supported OS::Windows"
+  "configuration": "README.md#Setup"
+  "description": "Collect and graph any WMI metrics."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "WMI Check (legacy)"
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![WMI メトリクス][1]
+![WMI metric][1]
 
-## 概要
+## Overview
 
-WMI (Windows Management Instrumentation) で Windows アプリケーションからメトリクスをリアルタイムに取得して、以下のことができます。
+**Note:** Datadog no longer maintains or recommends the use of this integration. Instead, use the [Windows performance counters integration][2] in all cases due to its significantly lower overhead and thus better scalability.
 
-- アプリケーションのパフォーマンスを視覚化できます。
-- アプリケーションのアクティビティを他のアプリケーションと関連付けることができます。
+Get metrics from your Windows applications and servers with Windows Management Instrumentation (WMI) in real time to
 
-**注:** オーバーヘッドが大幅に少なく、したがってスケーラビリティに優れるため、どの場合も代わりに [Windows パフォーマンスカウンターチェック][2]を使用することをお勧めします。
+- Visualize their performance.
+- Correlate their activity with the rest of your applications.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-Microsoft Windows および他のパッケージアプリケーションから標準メトリクスのみを収集している場合、インストール手順はありません。新しいメトリクスを定義してアプリケーションから収集する必要がある場合は、いくつかオプションがあります。
+If you are only collecting standard metrics from Microsoft Windows and other packaged applications, there are no installation steps. If you need to define new metrics to collect from your application, then you have a few options:
 
-1. .NET の System.Diagnostics を使用してパフォーマンスカウンターを送信し、次に WMI でそれらにアクセスします。
-2. アプリケーションで COM ベースの WMI プロバイダーを実装します。通常、これは、.NET 以外の言語を使用している場合にのみ行います。
+1. Submit performance counters using System.Diagnostics in .NET, then access them with WMI.
+2. Implement a COM-based WMI provider for your application. You would typically only do this if you are using a non-.NET language.
 
-System.Diagnostics の使い方については、[PerformanceCounter クラス][3]を参照してください。メトリクスを追加した後、WMI でそれを見つけることができるはずです。WMI ネームスペースを参照するには、[WMI エクスプローラー][4]が便利でしょう。Powershell で [Get-WmiObject][5] を使用すると、同じ情報を見つけることができます。また、[WMI メトリクスの取得][6]の情報も確認してください。
+To learn more about using System.Diagnostics, see the [PerformanceCounter Class][3]). After adding your metric you should be able to find it in WMI. To browse the WMI namespaces, you may find [WMI Explorer][4] useful. You can find the same information with Powershell using [Get-WmiObject][5]. Also, review the information in [Retrieving WMI metrics][6].
 
-新しいメトリクスに My_New_Metric というカテゴリを割り当てる場合、WMI パスは 
-`\\<ComputerName>\ROOT\CIMV2:Win32_PerfFormattedData_My_New_Metric` になります
+If you assign the new metric a category of My_New_Metric, the WMI path is
+`\\<ComputerName>\ROOT\CIMV2:Win32_PerfFormattedData_My_New_Metric`
 
-メトリクスが WMI に表示されない場合は、`winmgmt /resyncperf` を実行して、WMI に強制的にパフォーマンスライブラリを登録してみてください。
+If the metric isn't showing up in WMI, try running `winmgmt /resyncperf` to force the computer to reregister the performance libraries with WMI.
 
-### コンフィギュレーション
+### Configuration
 
-1. WMI インテグレーションタイルの **Install Integration** ボタンをクリックします。
-2. Windows サーバーで Datadog Agent Manager を開きます。
-3. `Wmi Check` 構成を編集します。
+1. Click the **Install Integration** button on the WMI Integration Tile.
+2. Open the Datadog Agent Manager on the Windows server.
+3. Edit the `Wmi Check` configuration.
 
 ```yaml
 init_config:
@@ -103,27 +106,27 @@ instances:
 ```
 
 <div class="alert alert-info">
-デフォルトの構成は、フィルター節を使用して、プルされるメトリクスを制限しています。フィルターに有効な値を設定するか、上のようにフィルターを削除して、メトリクスを収集してください。
+The default configuration uses the filter clause to limit the metrics pulled. Either set the filters to valid values or remove them as shown above to collect the metrics.
 </div>
 
-メトリクス定義は、次の 3 つの要素からなります。
+The metrics definitions include three components:
 
-- WMI のクラスプロパティ。
-- Datadog に表示されるメトリクス名。
-- メトリクスタイプ
+- Class property in WMI.
+- Metric name as it appears in Datadog.
+- The metric type.
 
-次のサンプルコンフィギュレーションは、Windows 2012 サーバーにさらに多くのメトリクスを設定します。
+The following sample configuration populates many more metrics on a Windows 2012 server.
 ```yaml
 init_config:
 
 instances:
-  # プロセスとユーザーの数を取得します。
+  # Fetch the number of processes and users.
   - class: Win32_OperatingSystem
     metrics:
       - [NumberOfProcesses, system.proc.count, gauge]
       - [NumberOfUsers, system.users.count, gauge]
 
-# ページング情報
+# Paging info
   - class: Win32_PerfFormattedData_PerfOS_Memory
     metrics:
       - [PageFaultsPersec, system.mem.page.faults, gauge]
@@ -131,15 +134,15 @@ instances:
       - [PagesInputPersec, system.mem.page.input, gauge]
       - [AvailableMBytes, system.mem.avail, gauge]
       - [CommitLimit, system.mem.limit, gauge]
-      # ディスク情報のキャッシュバイトメトリクス
+      # Cache bytes metric for disk info
       - [CacheBytes, system.mem.fs_cache, gauge]
 
-# ページングファイル
+# Paging file
   - class: Win32_PerfFormattedData_PerfOS_PagingFile
     metrics:
       - [PercentUsage, system.mem.page.pct, gauge]
     tag_by: Name
-  # プロセス数を取得します
+  # Fetch the number of processes
   - class: Win32_PerfFormattedData_PerfOS_System
     metrics:
       - [ProcessorQueueLength, system.proc.queue, gauge]
@@ -153,14 +156,14 @@ instances:
       - [DPCsQueuedPersec, system.cpu.dpc.queue, gauge]
     tag_by: Name
 
-# コンテキストスイッチ
+# Context switches
   - class: Win32_PerfFormattedData_PerfProc_Thread
     metrics:
       - [ContextSwitchesPersec, system.proc.context_switches, gauge]
     filters:
       - Name: _total/_total
 
-# ディスク情報
+# Disk info
   - class: Win32_PerfFormattedData_PerfDisk_LogicalDisk
     metrics:
       - [PercentFreeSpace, system.disk.free.pct, gauge]
@@ -177,80 +180,81 @@ instances:
       - [SegmentsRetransmittedPersec, system.net.tcp.retrans_seg, gauge]
     tag_by: Name
 ```
-#### コンフィギュレーションオプション
+#### Configuration options
 
-_この機能は、バージョン 5.3 の Agent から使用できます。_
+_This feature is available starting with version 5.3 of the agent_
 
-各 WMI クエリには、2 つの必須オプション `class` と `metrics`、および 6 つの任意指定オプション `host`、`namespace`、`filters`、`provider`、`tag_by`、`constant_tags`、`tag_queries` があります。
+Each WMI query has 2 required options, `class` and `metrics` and six optional options, `host`, `namespace`, `filters`, `provider`, `tag_by`, `constant_tags` and `tag_queries`.
 
-- `class` は、`Win32_OperatingSystem`、`Win32_PerfFormattedData_PerfProc_Process` などの WMI クラスの名前です。標準クラス名の多くは、[MSDN ドキュメント][7]に記載されています。`Win32_FormattedData_*` クラスは、デフォルトで多数の有用なパフォーマンスカウンターを提供しています。
+- `class` is the name of the WMI class, for example `Win32_OperatingSystem` or `Win32_PerfFormattedData_PerfProc_Process`. You can find many of the standard class names on the [MSDN docs][7]. The `Win32_FormattedData_*` classes provide many useful performance counters by default.
 
-- `metrics` は、キャプチャするメトリクスのリストです。リスト内の各項目は、
-  `[<WMI_PROPERTY_NAME>, <METRIC_NAME>, <METRIC_TYPE>]` 形式のセットです。
+- `metrics` is a list of metrics you want to capture, with each item in the
+  list being a set of `[<WMI_PROPERTY_NAME>, <METRIC_NAME>, <METRIC_TYPE>]`:
 
-  - `<WMI_PROPERTY_NAME>` は、`NumberOfUsers` や `ThreadCount` などです。標準プロパティは、各クラスの MSDN ドキュメントにも記載されています。
-  - `<METRIC_NAME>` は、Datadog に表示する名前です。
-  - `<METRIC_TYPE>` は、gauge、rate、histogram、counter などの標準的な Agent チェックタイプです。
+  - `<WMI_PROPERTY_NAME>` is something like `NumberOfUsers` or `ThreadCount`. The standard properties are also available on the MSDN docs for each class.
+  - `<METRIC_NAME>` is the name you want to show up in Datadog.
+  - `<METRIC_TYPE>` is from the standard choices for all agent checks, such as gauge, rate, histogram or counter.
 
-- `host` は、WMI クエリのターゲットです (オプション)。デフォルトでは、`localhost` が想定されます。このオプションを設定する場合は、ターゲットホストで Remote Management が有効になっていることを確認してください。詳細については、[サーバーマネージャーでリモートマネジメントを構成する][8]をご覧ください。
+- `host` is the optional target of the WMI query, `localhost` is assumed by default. If you set this option, make sure that Remote Management is enabled on the target host. See [Configure Remote Management in Server Manager][8] for more information.
 
-- `namespace` は、接続先の WMI ネームスペースです (オプション)。デフォルトは `cimv2` です。
+- `namespace` is the optional WMI namespace to connect to (default to `cimv2`).
 
-- `filters` は、WMI クエリに対するフィルターのリストです。たとえば、プロセスベースの WMI クラスの場合は、マシン上で実行されている特定のプロセスのメトリクスだけが必要なことがあります。この場合は、各プロセス名に対応するフィルターを追加します。ワイルドカードとして '%' 文字を使用することもできます。
+- `filters` is a list of filters on the WMI query you may want. For example, for a process-based WMI class you may want metrics for only certain processes running on your machine, so you could add a filter for each process name. You can also use the '%' character as a wildcard.
 
-- `provider` は、WMI プロバイダーです (オプション)。デフォルトは `32` (Datadog Agent 32 ビットの場合) または `64` です。これは、デフォルト以外のプロバイダーに WMI データをリクエストするために使用されます。使用できるオプションは `32` または `64` です。
-  詳細については、[MSDN][9] をご覧ください。
+- `provider` is the optional WMI provider (default to `32` on Datadog Agent 32-bit or `64`). It is used to request WMI data from the non-default provider. Available options are: `32` or `64`.
+  See [MSDN][9] for more information.
 
-- `tag_by` は、使用している WMI クラスのプロパティで各メトリクスをタグ付けします (オプション)。これは、WMI クエリに複数の値がある場合にのみ役立ちます。
+- `tag_by` optionally lets you tag each metric with a property from the WMI class you're using. This is only useful when you have multiple values for your WMI query.
 
-- `tags` は、固定値のセットで各メトリクスをタグ付けします (オプション)。
+- `tags` optionally lets you tag each metric with a set of fixed values.
 
-- `tag_queries` は、クエリのリストを指定して、ターゲットクラスのプロパティでメトリクスをタグ付けします (オプション)。リスト内の各項目は、`[<LINK_SOURCE_PROPERTY>, <TARGET_CLASS>, <LINK_TARGET_CLASS_PROPERTY>, <TARGET_PROPERTY>]` 形式のセットです。
+- `tag_queries` optionally lets you specify a list of queries, to tag metrics with a target class property. Each item in the list is a set of `[<LINK_SOURCE_PROPERTY>, <TARGET_CLASS>, <LINK_TARGET_CLASS_PROPERTY>, <TARGET_PROPERTY>]` where:
 
-  - `<LINK_SOURCE_PROPERTY>` は、リンク値です。
-  - `<TARGET_CLASS>` は、リンク先のクラスです。
-  - `<LINK_TARGET_CLASS_PROPERTY>` は、リンク先のターゲットクラスのプロパティです。
-  - `<TARGET_PROPERTY>` は、タグ付けに使用する値です。
+  - `<LINK_SOURCE_PROPERTY>` contains the link value
+  - `<TARGET_CLASS>` is the class to link to
+  - `<LINK_TARGET_CLASS_PROPERTY>` is the target class property to link to
+  - `<TARGET_PROPERTY>` contains the value to tag with
 
-  これは、WMI クエリ
-  `SELECT '<TARGET_PROPERTY>' FROM '<TARGET_CLASS>' WHERE '<LINK_TARGET_CLASS_PROPERTY>' = '<LINK_SOURCE_PROPERTY>'` に変換されます。
+  It translates to a WMI query:
+  `SELECT '<TARGET_PROPERTY>' FROM '<TARGET_CLASS>' WHERE '<LINK_TARGET_CLASS_PROPERTY>' = '<LINK_SOURCE_PROPERTY>'`
 
-##### 例
+##### Example
 
-設定 `[IDProcess, Win32_Process, Handle, CommandLine]` は各プロセスにそれぞれのコマンドラインをタグ付けします。インスタンスの番号はすべて tag_by 値から削除されます（例、`name:process#1` => `name:process. NB`）。`CommandLine` プロパティにアクセスできるのは管理者のみなので、Agent は **Administrator** アカウントでこの作業を行う必要があります。
+The setting `[IDProcess, Win32_Process, Handle, CommandLine]` tags each process with its command line. Any instance number is removed from tag_by values, for example: `name:process#1` => `name:process. NB`. The Agent must be running under an **Administrator** account for this to work as the `CommandLine` property is not accessible to non-admins.
 
-### 検証
+### Validation
 
-[Agent の status サブコマンド][10]を実行し、Checks セクションで `wmi_check` を探します。
+Run the [Agent's status subcommand][10] and look for `wmi_check` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 
-WMI チェックにより収集されたすべてのメトリクスは、[カスタムメトリクス][11]として Datadog に送信できますが、これはお客様への[請求][12]に影響します。
+All metrics collected by the WMI check are forwarded to Datadog as [custom metrics][11], which may impact your [billing][12].
 
-### イベント
+### Events
 
-WMI チェックには、イベントは含まれません。
+The WMI check does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-WMI チェックには、サービスのチェック機能は含まれません。
+The WMI check does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+Need help? Contact [Datadog support][13].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/wmi_check/images/wmimetric.png
-[2]: https://docs.datadoghq.com/ja/integrations/windows_performance_counters/
+[2]: https://docs.datadoghq.com/integrations/windows_performance_counters/
 [3]: https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.performancecounter
 [4]: https://github.com/vinaypamnani/wmie2/releases
 [5]: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-wmiobject
-[6]: https://docs.datadoghq.com/ja/integrations/guide/retrieving-wmi-metrics/
+[6]: https://docs.datadoghq.com/integrations/guide/retrieving-wmi-metrics/
 [7]: https://msdn.microsoft.com/en-us/library/windows/desktop/aa394084.aspx
 [8]: https://technet.microsoft.com/en-us/library/Hh921475.aspx
 [9]: https://msdn.microsoft.com/en-us/library/aa393067.aspx
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://docs.datadoghq.com/ja/developers/metrics/custom_metrics/
-[12]: https://docs.datadoghq.com/ja/account_management/billing/custom_metrics/
-[13]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[11]: https://docs.datadoghq.com/developers/metrics/custom_metrics/
+[12]: https://docs.datadoghq.com/account_management/billing/custom_metrics/
+[13]: https://docs.datadoghq.com/help/
+

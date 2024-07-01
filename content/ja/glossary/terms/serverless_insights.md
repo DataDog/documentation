@@ -1,6 +1,6 @@
 ---
+title: Serverless Insights
 core_product:
-- serverless monitoring
-title: サーバーレスインサイト
+  - serverless monitoring
 ---
-サーバーレスインサイトは、自動的に生成される指標 (*メモリ使用量の多さ*、*コールドスタート*、*メモリ不足*など) で、Datadog は失敗したりパフォーマンスが低下している Lambda 関数を特定しフラグを立てるために使用します。
+Serverless insights are automatically-generated indicators (such as *high memory usage*, *cold start*, *out of memory*, etc.) that Datadog uses to identify and flag Lambda functions that are failing or performing poorly.

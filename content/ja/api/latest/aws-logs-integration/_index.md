@@ -1,3 +1,3 @@
 ---
-title: AWS ログインテグレーション
+title: AWS Logs Integration
 ---

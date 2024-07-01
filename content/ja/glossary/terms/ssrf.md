@@ -1,7 +1,7 @@
 ---
+title: server-side request forgery (SSRF)
 core_product:
-- security
-- appsec
-title: サーバーサイドリクエストフォージェリー (SSRF)
+  - security
+  - appsec
 ---
-SSRF は、攻撃者がサーバーを利用して情報へのアクセスや操作を行うエクスプロイトの一種です。
+SSRF is a type of exploit where an attacker uses a server to access or manipulate information.

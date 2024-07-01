@@ -1,3 +1,3 @@
 ---
-title: インシデントチーム
+title: Incident Teams
 ---

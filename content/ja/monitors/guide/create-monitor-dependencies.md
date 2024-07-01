@@ -1,53 +1,52 @@
 ---
-aliases:
-- /ja/monitors/faq/can-i-create-monitor-dependencies
+title: Create monitor dependencies
 further_reading:
 - link: /monitors/
-  tag: ドキュメント
-  text: モニターの作成方法
+  tag: Documentation
+  text: Learn how to create a monitor
 - link: /monitors/notify/
-  tag: ドキュメント
-  text: モニター通知の設定
+  tag: Documentation
+  text: Configure your monitor notifications
 - link: /monitors/downtimes/
-  tag: ドキュメント
-  text: モニターをミュートするダウンタイムのスケジュール
-kind: ガイド
-title: モニターの依存関係を作成する
+  tag: Documentation
+  text: Schedule a downtime to mute a monitor
+aliases:
+- /monitors/faq/can-i-create-monitor-dependencies
 ---
 
-Datadog は[複合条件モニター][1]を完全にサポートしていますが、アラートツリーを作成する公式の方法はありません。
+While Datadog does fully support [composite monitors][1], there is not an official way to create alerting trees.
 
-Webhook 通知と Datadog API によるダウンタイムスコープを組み合わせて、同様の結果を得ている Datadog のユーザーもいます。
+Some Datadog users have combined webhook notifications with downtime scoping via the Datadog API to achieve a similar result.
 
-そのための設定を大まかに言うと、次のようになります。
+At a high level, the setup for this is as follows:
 
-* アラート A はトリガーされ、`@webhook-notification` を持ちます。
-* 通知は `$scope` によって [Datadog ダウンタイム API][2] に到達し、他のアラートをミュートします。
-* アラート A が解決したら、別の @webhook-notification を使用して、同じ $scope からダウンタイムを削除します。
-定義された [$scope][3] と重複するアクティブなダウンタイムがある場合、以前にスケジュールされたダウンタイムに影響を与える可能性があることに注意が必要です。
+* Alert A triggers and has an `@webhook-notification`.
+* Notification reaches out to the [Datadog downtime API][2] by `$scope` to mute any other alerts.
+* When Alert A resolves, use a different @webhook-notification to remove the downtimes from the same $scope.
+It should be noted that this can impact previously scheduled downtimes if you have an active downtime overlapping with the defined [$scope][3].
 
-まず、[Webhook を作成します][4]。
+First, [create the webhooks][4]:
 {{< img src="monitors/guide/mute_demo_webhook.png" alt="mute_demo_webhook" >}}
 
-API エンドポイントのフルテキスト (左列の各入力ボックスの 2 つ目):
+Full text for API endpoints (2nd input box for each in the left column):
 
-ミュート: `https://api.datadoghq.com/api/v1/downtime?api_key=XXX&application_key=XXX`
+Mute: `https://api.datadoghq.com/api/v1/downtime?api_key=XXX&application_key=XXX`
 
-ミュート解除: `https://api.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key=XXX&application_key=XXX`
+Unmute: `https://api.datadoghq.com/api/v1/downtime/cancel/by_scope?api_key=XXX&application_key=XXX`
 
-そして、その両方に対応する Webhook の内容:
+And the webhook content for both:
 
 ```json
 {"scope": "$ALERT_SCOPE"}
 ```
 
-次に、"Alert A" (たとえば、各利用可能ゾーンのホストのグループ化された割合に対するデータなしアラート) を作成します。
-{{< img src="monitors/guide/alert_exammple.png" alt="alert_example"  >}}
+Then, create "Alert A" - for example- a no-data alert for a grouped percentage of hosts for each Availability zone.
+{{< img src="monitors/guide/alert_exammple.png" alt="alert_example" >}}
 
-次に、アラートメッセージで、@notify webhook を使用して、その可用性ゾーン内の後続のすべてのホストをトリガー時にミュートし、アラートが解決したときにミュートを解除するようにします。
+Then, in the alert message, you'll want to use the @notify webhook to mute all subsequent hosts in that Availability Zone when it triggers, and unmute when the alert resolves:
 {{< img src="monitors/guide/mute_demo_msg.png" alt="mute_demo_msg" >}}
 
-そのフルサンプルマークアップがこちらです。
+Here is that full sample markup:
 
 ```text
 That's alot of missing data - check first to see if there is an AWS outage?
@@ -64,7 +63,7 @@ That's alot of missing data - check first to see if there is an AWS outage?
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/types/composite/
-[2]: /ja/api/v1/downtimes/
-[3]: /ja/api/v1/downtimes/#cancel-downtimes-by-scope
+[1]: /monitors/types/composite/
+[2]: /api/v1/downtimes/
+[3]: /api/v1/downtimes/#cancel-downtimes-by-scope
 [4]: https://app.datadoghq.com/account/settings#integrations/webhooks

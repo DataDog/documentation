@@ -1,224 +1,224 @@
 ---
+title: Dynamic Instrumentation
 aliases:
-- /ja/tracing/dynamic_instrumentation/
-- /ja/dynamic_instrumentation/how-it-works/
-further_reading:
-- link: /dynamic_instrumentation/expression-language/
-  tag: ドキュメント
-  text: ダイナミックインスツルメンテーション式言語について
-- link: dynamic_instrumentation/sensitive-data-scrubbing/
-  tag: ドキュメント
-  text: ダイナミックインスツルメンテーションデータからの機密情報の削除
-- link: /tracing/trace_collection/dd_libraries
-  tag: ドキュメント
-  text: アプリケーションのインスツルメンテーションの方法について
-- link: /getting_started/tagging/unified_service_tagging/
-  tag: ドキュメント
-  text: 統合サービスタグ付け
-- link: /tracing/service_catalog/
-  tag: ドキュメント
-  text: Datadog に報告するサービスの発見とカタログ化
-- link: /metrics
-  tag: ドキュメント
-  text: メトリクスについて
-- link: https://www.datadoghq.com/blog/dynamic-instrumentation-application-logging/
-  tag: ブログ
-  text: Datadog ダイナミックインスツルメンテーションを使用して、再デプロイせずにアプリケーションログを追加する
+    - /tracing/dynamic_instrumentation/
+    - /dynamic_instrumentation/how-it-works/
 is_beta: false
 private: false
-title: ダイナミックインスツルメンテーション
+further_reading:
+- link: /dynamic_instrumentation/expression-language/
+  tag: Documentation
+  text: Learn more about the Dynamic Instrumentation Expression Language
+- link: dynamic_instrumentation/sensitive-data-scrubbing/
+  tag: Documentation
+  text: Removing sensitive information from your Dynamic Instrumentation data
+- link: /tracing/trace_collection/dd_libraries
+  tag: Documentation
+  text: Learn more about how to instrument your application
+- link: /getting_started/tagging/unified_service_tagging/
+  tag: Documentation
+  text: Unified Service Tagging
+- link: /tracing/service_catalog/
+  tag: Documentation
+  text: Discover and catalog the services reporting to Datadog
+- link: /metrics
+  tag: Documentation
+  text: Learn more about Metrics
+- link: "https://www.datadoghq.com/blog/dynamic-instrumentation-application-logging/"
+  tag: Blog
+  text: Use Datadog Dynamic Instrumentation to add application logs without redeploying
 ---
 
-## 概要
+## Overview
 
-ダイナミックインスツルメンテーションを使用すると、再起動することなく、サードパーティのライブラリを含むアプリケーションのコードの任意の場所で、実行中の本番システムにインスツルメンテーションを追加することができます。Datadog の UI から、ログ、メトリクス、スパン、および対応するタグ付けのテレメトリーを追加または変更することができます。ダイナミックインスツルメンテーションはオーバーヘッドが少なく、システムに副作用を与えません。
+Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
 
-ダイナミックインスツルメンテーションの最新のユーザーエクスペリエンス改善を試したい場合は、[Symbol Database の非公開ベータ版][17]への参加をご検討ください。
+If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [Symbol Database private beta][17].
 
-## はじめに
+## Getting started
 
-### 前提条件
+### Prerequisites
 
-ダイナミックインスツルメンテーションには、以下のものが必要です。
+Dynamic Instrumentation requires the following:
 
-- [Datadog Agent][1] 7.44.0 以降がサービスと一緒にインストールされていること。
-- その Agent で[リモート構成][2]が有効になっていること。
-- Java アプリケーションの場合、トレーシングライブラリ [`dd-trace-java`][3] 1.24.0 以降。
-- Python アプリケーションの場合、トレーシングライブラリ [`dd-trace-py`][4] 2.2.0 以降。
-- .NET アプリケーションの場合、トレーシングライブラリ [`dd-trace-dotnet`][5] 2.42.0 以降。
-- [統合サービスタグ付け][6]タグ `service`、`env`、`version` がデプロイメントに適用されていること。
-- オプションで、サービスに[ソースコードインテグレーション][7]が設定されていること。
-- ダイナミックインスツルメンテーションページにアクセスするには、**ダイナミックインスツルメンテーションの 読み取り構成** (`debugger_read`) 権限が必要です。
-- インスツルメンテーションを作成または変更するには、**Dynamic Instrumentation Write Configuration** (`debugger_write`) 権限が必要です。
-- **Capture method parameters and local variables** (メソッドパラメーターとローカル変数をキャプチャする) オプションを使用するには、**Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) 権限が必要です。
+- [Datadog Agent][1] 7.44.0 or higher is installed alongside your service.
+- [Remote Configuration][2] is enabled in that Agent.
+- For Java applications, tracing library [`dd-trace-java`][3] 1.24.0 or higher.
+- For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
+- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.42.0 or higher.
+- [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
+- Optionally, [Source Code Integration][7] is set up for your service.
+- The **Dynamic Instrumentation Read Configuration** (`debugger_read`) permission is required to access the Dynamic Instrumentation page
+- The **Dynamic Instrumentation Write Configuration** (`debugger_write`) permission is required to create or modify instrumentations.
+- The **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) permission is required to use the **Capture method parameters and local variables** option.
 
- ロールの詳細と、ユーザーにロールを割り当てる方法については、[ロールベースのアクセス制御][8]を参照してください。
+ For more information about roles and on how to assign roles to users, see [Role Based Access Control][8].
 
-### ログのインデックスを作成する
+### Create a logs index
 
-ダイナミックインスツルメンテーションは、Datadog に送信され、通常のアプリケーションログと一緒に表示される「ダイナミックログ」を作成します。
+Dynamic Instrumentation creates "dynamic logs" that are sent to Datadog and appear alongside your regular application logs.
 
-[除外フィルター][9]を使用する場合は、ダイナミックインスツルメンテーションのログがフィルターされないようにします。
+If you use [Exclusion filters][9], ensure Dynamic Instrumentation logs are not filtered:
 
-1. ログインデックスを作成し、**サンプリングなし**で希望する保存期間まで[構成][10]します。
-2. `source:dd_debugger` タグにマッチするようにフィルターを設定します。すべてのダイナミックインスツルメンテーションログはこのソースを持ちます。
-3. 新しいインデックスが、そのタグにマッチする他のフィルターよりも優先されることを確認してください。先にマッチした方が勝つからです。
+1. Create a logs index and [configure it][10] to the desired retention with **no sampling**.
+2. Set the filter to match on the `source:dd_debugger` tag. All Dynamic Instrumentation logs have this source.
+3. Ensure that the new index takes precedence over any other with filters that match that tag, because the first match wins.
 
-### ダイナミックインスツルメンテーションを有効にする
+### Enable Dynamic Instrumentation
 
-サービスでダイナミックインスツルメンテーションを有効にするには、[アプリ内設定ページ][16]にアクセスしてください。
+To enable Dynamic Instrumentation on a service, go to the [in-app setup page][16].
 
-より詳細な説明については、以下のランタイムを選択してください。
+For more detailed instructions, select your runtime below:
 
 {{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
 
 
-### 制限
+### Limitations
 
-- ダイナミックインスツルメンテーションは、Azure App Services やサーバーレス環境にはまだ対応していません。
-- サポートは Python、Java、.NET で構築されたアプリケーションに限定されます。
+- Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
+- Support is limited to applications built with Python, Java, and .NET.
 
-## ダイナミックインスツルメンテーションを見る
+## Explore Dynamic Instrumentation
 
-ダイナミックインスツルメンテーションは、アプリケーションがランタイムに何をしているかを理解するのに役立ちます。ダイナミックインスツルメンテーションのプローブを追加することで、コードを変更したり再デプロイすることなく、アプリケーションから追加のデータをエクスポートすることができます。
+Dynamic Instrumentation can help you understand what your application is doing at runtime. By adding a Dynamic Instrumentation probe you are exporting additional data from your application, without the need to change code or redeploy it.
 
-### プローブの使用
+### Using probes
 
-プローブを使用すると、プログラムの実行を停止することなく、コード内の特定のポイントからデータを収集できます。
+A probe allows you to collect data from specific points in your code without halting the execution of the program.
 
-プローブの使用は、コードの変更、デプロイ、サービスの再起動を行うことなく、実行中のアプリケーションに動的なログ、メトリクス、スパンを追加して観測可能性を強化することと考えてください。ユーザーエクスペリエンスを妨げたり、長時間のデプロイを必要とすることなく、即座にデータを収集することができます。
+Think of using probes as enhancing your observability by adding dynamic logs, metrics, and spans to a running application without needing to change code, deploy it, or restart a service. You can gather data immediately without disturbing the user experience or requiring lengthy deployments.
 
-開発者としては、プローブを「ブレークしないブレークポイント」と考えることもできます。従来のデバッグでは、ブレークポイントとはプログラムの実行を停止するポイントのことで、開発者はその時点でのプログラムの状態を検査することができます。しかし、実際の本番環境では、プログラムの実行を停止することは現実的ではありませんし、不可能です。プローブは、非侵入的な方法で本番環境の変数状態を検査できるようにすることで、このギャップを埋めます。
+As a developer, you can also think of a probe as a "non-breaking breakpoint". In traditional debugging, a breakpoint is a point in the program where the execution stops, allowing the developer to inspect the state of the program at that point. However, in real-world production environments, it's not practical or even possible to stop the execution of the program. Probes fill in this gap by allowing you to inspect variable state in production environments in a non-intrusive way.
 
-### プローブの作成
+### Creating a probe
 
-どのプローブタイプでも、初期設定は同じです。
+All probe types require the same initial setup:
 
-1. [ダイナミックインスツルメンテーションのページ][12]へ移動します。
-1. 右上の **Create Probe** をクリックするか、サービス上で 3 つの点のメニューをクリックし、**Add the probe for this service** を選択します。
-1. あらかじめ入力されていない場合は、サービス、ランタイム、環境、バージョンを選択します。
-1. ソースコードで、クラスとメソッド、またはソースファイルと行のいずれかを選択して、プローブを設定する場所を指定します。サービスにソースコードインテグレーションを設定している場合、オートコンプリートがファイルを選択するための候補を表示し、ファイルのコードを表示するので、行を選択することができます。
+1. Go to the [Dynamic Instrumentation page][12].
+1. Click **Create Probe** in the top right, or click the three-dot menu on a service and select **Add a probe for this service**.
+1. If they are not prefilled, choose service, runtime, environment, and version.
+1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you set up Source Code Integration for your service, autocomplete shows suggestions for the selecting a file, and displays the file's code so you can choose the line.
 
-各プローブタイプの具体的な作成手順については、以下の各プローブタイプを参照してください。
+See the individual probe types below for specific creation steps for each probe type.
 
-または、これらの他のコンテキストからプローブを作成することもできます。
+Alternatively, you can create a probe from these other contexts:
 
-プロファイリング
-: プロファイラーのフレームグラフで、フレームのコンテキストメニューから **Instrument this frame with a probe** を選択すると、メソッドのプローブを作成できます。
+Profiling
+: On a profiler flame graph, you can create a probe for a method by selecting **Instrument this frame with a probe** from the frame's context menu.
 
-エラー追跡
-: スタックトレース上で、スタックフレームにカーソルを合わせ、** Instrument** をクリックします。これにより、プローブ作成フォームに問題のコンテキストが入力されます。
-
-
-### ログプローブの作成
-
-*ログプローブ*は、実行時にログを出力します。
-
-ログプローブを作成するには
-
-1. プローブタイプとして **Log** を選択します。
-1. [一般的なプローブのセットアップ](#creating-a-probe)を完了します (サービス、環境、バージョン、プローブの場所を選択します)。
-1. ログメッセージテンプレートを定義します。ダイナミックインスツルメンテーション式言語を使用して、実行コンテキストから値を参照することができます。
-1. オプションで、プローブからの追加データキャプチャを有効にします。(ベータ版)
-1. オプションで、ダイナミックインスツルメンテーション式言語を使用して、条件を定義します。式が真と評価されたときにログが出力されます。
-
-ログプローブは、指定された環境とバージョンに一致するすべてのサービスインスタンスでデフォルトで有効になっています。また、サービスの各インスタンスで 1 秒間に最大 5000 回までしか実行できないようにレート制限されています。
-
-すべてのログプローブでログメッセージテンプレートを設定する必要があります。テンプレートは、中括弧内の[式][15]の埋め込みをサポートします。例: `User {user.id} purchased {count(products)} products`
-
-[式言語][15]を使用して、ログプローブに条件を設定することもできます。式はブール値で評価する必要があります。式が true の場合、プローブは実行され、式が false の場合、データはキャプチャまたは出力されません。
-
-{{< img src="dynamic_instrumentation/log_probe.png" alt="ダイナミックインスツルメンテーションのログプローブの作成" >}}
-
-**ベータ版**: ログプローブで **Capture method parameters and local variables** (メソッドパラメーターとローカル変数をキャプチャする) を有効にすると、すべての実行コンテキストがログイベントに追加されます。
-  - **メソッド引数**、*ローカル変数**、*フィールド**。以下のデフォルトの制限があります。
-    - 3 段階の深さのリファレンスをフォローします (UI で構成可能)。
-    - コレクション内の最初の 100 項目。
-    - 文字列値で最初の 255 文字。
-    - オブジェクト内の 20 個のフィールド。静的フィールドは収集されません。
-  - **スタックトレース**を呼び出します。
-  - 捕捉される場合と捕捉されない場合の**例外**。
-
-この設定を有効にしたプローブは、1 秒間に 1 回のヒットにレート制限されます。
-
-<div class="alert alert-warning"><p><strong>警告: キャプチャされたデータには、個人情報、パスワード、シークレット (例: AWS キー) などの機密情報が含まれている可能性があります。</strong></p><p>この情報が適切に削除されるようにするには<ul>
-<li>Datadog ダイナミックインスツルメンテーションは、機密情報を削除するために、いくつかのテクニックを採用しています。デフォルトのメカニズムや、ニーズに合わせて拡張する方法の詳細については、<a href="/dynamic_instrumentation/sensitive-data-scrubbing/">機密データスクラビング</a>を参照してください。</li>
-<li><strong>Capture method parameters and local variables</strong> オプションをオフにし、ログメッセージテンプレートに含める変数を明示的に選択します。こうすることで、ログプローブには、明確に指定した変数に関連するデータのみが含まれるようになり、意図しない機密データ漏えいのリスクを低減できます。</li>
-<li>Datadog アカウントの管理者で、他のユーザーが <strong>Capture method parameters and local variables</strong> オプションを使用できないようにしたい場合は、Dynamic Instrumentation Capture Variables (<code>debugger_capture_variables</code>) 権限を取り消すことができます。</li></ul></p><p>また、このデータをログに記録する必要があるが、Datadog 製品でアクセスできることに関連するリスクを軽減したい場合は、<code>source:dd_debugger</code> に <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">Restriction クエリ</a>を設定することで、組織内のどのユーザーがキャプチャデータを表示できるかを制限できます。</p></div>
-
-### メトリクスプローブの作成
-
-*メトリクスプローブ*は、実行時にメトリクスを出力します。
-
-メトリクスプローブを作成するには
-
-1. プローブタイプとして **Metric** を選択します。
-1. [一般的なプローブのセットアップ](#creating-a-probe)を完了します (サービス、環境、バージョン、プローブの場所を選択します)。
-1. メトリクスの名前を指定します。この名前のプレフィックスは `dynamic.instrumentation.metric.probe.` となります。
-1. メトリクスタイプ (カウント、ゲージ、ヒストグラム) を選択します。
-1. [ダイナミックインスツルメンテーション式言語][15]を使用して、メトリクスの値を選択します。メソッドのパラメーター、ローカル変数、クラスフィールド、または数値を返す式など、実行コンテキストから任意の数値を使用できます。カウントメトリクスの場合、これはオプションで、省略すると、すべての呼び出しでカウントが 1 つ増分されます。
-
-{{< img src="dynamic_instrumentation/metric_probe.png" alt="ダイナミックインスツルメンテーションのメトリクスプローブの作成" >}}
-
-メトリクスプローブは、構成された環境とバージョンに一致するすべてのサービスインスタンスで自動的に有効になります。メトリクスプローブはレート制限を受けず、メソッドまたは行が呼び出されるたびに実行されます。
-
-ダイナミックインスツルメンテーションメトリクスプローブは、以下のメトリクスタイプをサポートしています。
-
-- **カウント**: 指定されたメソッドや行が何回実行されたかを数えます。変数の値を用いてカウントを増加させる際には、[メトリクス式][15]と組み合わせて使用できます。
-- **ゲージ**: 変数の最後の値に基づいてゲージを生成します。このメトリクスは[メトリクス式][15]を必要とします。
-- **ヒストグラム**: 変数の統計的分布を生成します。このメトリクスは[メトリクス式][15]を必要とします。
-
-### スパンプローブの作成
-
-*スパンプローブ*は、メソッドの実行時にスパンを出力します。
-
-スパンプローブを作成するには
-
-1. プローブタイプとして **Span** を選択します。
-1. [一般的なプローブのセットアップ](#creating-a-probe)を完了します (サービス、環境、バージョン、プローブの場所を選択します)。
-
-{{< img src="dynamic_instrumentation/span_probe.png" alt="ダイナミックインスツルメンテーションのスパンプローブの作成" >}}
-
-[カスタムインスツルメンテーションで新しいスパンを作成する][13]代替手段として、*スパンプローブ*を使用することができます。メソッドが例外をスローした場合、例外の詳細は新しく作成されたスパンの `error` タグに関連付けられます。
-
-### スパンタグプローブの作成
-
-*スパンタグ*プローブは、既存のスパンにタグ値を追加します。タグは、_アクティブ_スパンまたは_サービスエントリ_スパンに追加できます。
-内部スパンはデフォルトでインデックス化されていないため、APM で検索できない可能性があることに注意してください。
-
-スパンタグプローブを作成するには
-
-1. プローブタイプとして **Span Tag** を選択します。
-1. [一般的なプローブのセットアップ](#creating-a-probe)を完了します (サービス、環境、バージョン、プローブの場所を選択します)。
-1. タグの名前を指定します。
-1. [ダイナミックインスツルメンテーション式言語][15]を使用してタグの値を指定します。
-1. オプションで、ダイナミックインスツルメンテーション式言語を使用して、条件を定義します。式が真と評価されたときにのみタグが追加されます。
-1. オプションで、それぞれ独自の名前、式、オプションの条件を持つタグを追加できます。
+Error Tracking
+: On a stack trace, mouse over a stack frame and click **Instrument**. This prefills the probe creation form with the Issue context.
 
 
-{{< img src="dynamic_instrumentation/span_tag_probe.png" alt="ダイナミックインスツルメンテーションのスパンタグプローブの作成" >}}
+### Creating log probes
 
-[コードにタグを追加するためにカスタムインスツルメンテーションを使用する][14]代替手段として、*スパンタグプローブ*を使用することができます。
+A *log probe* emits a log when it executes.
+
+To create a log probe:
+
+1. Select **Log** as the probe type.
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
+1. Define a log message template. You can use the Dynamic Instrumentation expression language to reference values from the execution context.
+1. Optionally enable extra data capturing from the probe. (Beta)
+1. Optionally define a condition using the Dynamic Instrumentation expression language. The log is emitted when the expression evaluates to true.
+
+Log probes are enabled by default on all service instances that match the specified environment and version. They are rate-limited to execute at most 5000 times per second, on each instance of your service.
+
+You must set a log message template on every log probe. The template supports embedding [expressions][15] inside curly brackets. For example: `User {user.id} purchased {count(products)} products`.
+
+You can also set a condition on a log probe using the [expression language][15]. The expression must evaluate to a Boolean. The probe executes if the expression is true, and does not capture or emit any data if the expression is false.
+
+{{< img src="dynamic_instrumentation/log_probe.png" alt="Creating a Dynamic Instrumentation log probe" >}}
+
+**Beta**: If you enable **Capture method parameters and local variables** on the log probe, all execution context is added the log event:
+  - **Method arguments**, **local variables**, and **fields**, with the following default limits:
+    - Follow references three levels deep (configurable in the UI).
+    - The first 100 items inside collections.
+    - The first 255 characters for string values.
+    - 20 fields inside objects. Static fields are not collected.
+  - Call **stack trace**.
+  - Caught and uncaught **exceptions**.
+
+Probes with this setting enabled are rate-limited to one hit per second.
+
+<div class="alert alert-warning"><p><strong>Warning: The captured data may contain sensitive information, including personal data, passwords, and secrets such as AWS keys.</strong></p><p>To ensure this information is properly redacted:<ul>
+<li>Datadog Dynamic Instrumentation employs several techniques to redact sensitive information. To learn more about the default mechanisms or how to extend the it to meet your needs, read <a href="/dynamic_instrumentation/sensitive-data-scrubbing/">Sensitive Data Scrubbing</a>.</li>
+<li>Turn off the <strong>Capture method parameters and local variables</strong> option and explicitly select the variables you want to include in the log message template. Doing so ensures that log probes contain only data related to the variables that you specifically identify, thus reducing the risk of unintentional sensitive data leaks. </li>
+<li>If you are the Administrator of your Datadog account and would like to prevent other users from being able to use the <strong>Capture method parameters and local variables</strong> option, you can revoke their Dynamic Instrumentation Capture Variables (<code>debugger_capture_variables</code>) permission. </li></ul></p><p>Alternatively, if you need to log this data but want to mitigate the risk associated with it being accessible in the Datadog product, you can limit which users in your organization can view the captured data by setting up a <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">Restriction query</a> on <code>source:dd_debugger</code>.</p></div>
+
+### Creating metric probes
+
+A *metric probe* emits a metric when it executes.
+
+To create a metric probe:
+
+1. Select **Metric** as the probe type.
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
+1. Specify a name for the metric, which will be prefixed with `dynamic.instrumentation.metric.probe.`.
+1. Select a metric type (count, gauge, or histogram).
+1. Choose the value of the metric using the [Dynamic Instrumentation expression language][15]. You can use any numeric value you'd like from the execution context, such as a method parameter, local variable, a class field, or an expression that yields a numeric value. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
+
+{{< img src="dynamic_instrumentation/metric_probe.png" alt="Creating a Dynamic Instrumentation metric probe" >}}
+
+Metric probes are automatically enabled on all service instances that match the configured environment and version. Metric probes are not rate limited and execute every time the method or line is invoked.
+
+Dynamic Instrumentation metric probes support the following metric types:
+
+- **Count**: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
+- **Gauge**: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
+- **Histogram**: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
+
+### Creating span probes
+
+A *span probe* emits a span when a method is executed.
+
+To create a span probe:
+
+1. Select **Span** as the probe type.
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
+
+{{< img src="dynamic_instrumentation/span_probe.png" alt="Creating a Dynamic Instrumentation span probe" >}}
+
+You can use a *span probe* as an alternative to [creating new spans with Custom Instrumentation][13]. If the method throws an exception, the details of the exception are associated with the newly created span's `error` tag.
+
+### Creating span tag probes
+
+A *span tag* probe adds a tag value to an existing span. You can add a tag either to the _active_ span or to the _service entry_ span.
+Keep in mind that internal spans are not indexed by default and so might not be searchable in APM.
+
+To create a span tag probe:
+
+1. Select **Span Tag** as the probe type.
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
+1. Specify a name for the tag.
+1. Specify the value of the tag using the [Dynamic Instrumentation expression language][15].
+1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag will only be added when the expression evaluates to true.
+1. Optionally add additional tags, each with their own name, expression, and optional condition.
 
 
-## その他の参考資料
+{{< img src="dynamic_instrumentation/span_tag_probe.png" alt="Creating a Dynamic Instrumentation span tag probe" >}}
+
+You can use a *span tag probe* as an alternative to [using Custom Instrumentation to add tags in code][14].
+
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/
-[2]: /ja/agent/remote_config/
+[1]: /agent/
+[2]: /agent/remote_config/
 [3]: https://github.com/DataDog/dd-trace-java
 [4]: https://github.com/DataDog/dd-trace-py
 [5]: https://github.com/DataDog/dd-trace-dotnet
-[6]: /ja/getting_started/tagging/unified_service_tagging/
-[7]: /ja/integrations/guide/source-code-integration/
-[8]: /ja/account_management/rbac/permissions#apm
-[9]: /ja/logs/log_configuration/indexes/#exclusion-filters
-[10]: /ja/logs/log_configuration/indexes/#add-indexes
-[11]: /ja/dynamic_instrumentation/how-it-works/
+[6]: /getting_started/tagging/unified_service_tagging/
+[7]: /integrations/guide/source-code-integration/
+[8]: /account_management/rbac/permissions#apm
+[9]: /logs/log_configuration/indexes/#exclusion-filters
+[10]: /logs/log_configuration/indexes/#add-indexes
+[11]: /dynamic_instrumentation/how-it-works/
 [12]: https://app.datadoghq.com/dynamic-instrumentation
-[13]: /ja/tracing/trace_collection/custom_instrumentation/java/#adding-spans
-[14]: /ja/tracing/trace_collection/custom_instrumentation/java/#adding-tags
-[15]: /ja/dynamic_instrumentation/expression-language
+[13]: /tracing/trace_collection/custom_instrumentation/java/#adding-spans
+[14]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
+[15]: /dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
-[17]: /ja/dynamic_instrumentation/symdb/
+[17]: /dynamic_instrumentation/symdb/

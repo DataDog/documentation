@@ -1,3 +1,3 @@
 ---
-title: CI Visibility テスト
+title: CI Visibility Tests
 ---

@@ -1,59 +1,60 @@
 ---
-categories:
+"categories":
 - cloud
 - azure
-dependencies: []
-description: Azure Service Bus のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_service_bus/
-draft: false
-git_integration_title: azure_service_bus
-has_logo: true
-integration_id: azure-service-bus
-integration_title: Microsoft Azure Service Bus
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_service_bus
-public_title: Datadog-Microsoft Azure Service Bus インテグレーション
-short_description: Azure Service Bus のキーメトリクスを追跡
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Service Bus metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_service_bus/"
+"draft": false
+"git_integration_title": "azure_service_bus"
+"has_logo": true
+"integration_id": "azure-service-bus"
+"integration_title": "Microsoft Azure Service Bus"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_service_bus"
+"public_title": "Datadog-Microsoft Azure Service Bus Integration"
+"short_description": "Track key Azure Service Bus metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Microsoft Azure Service Bus は、フルマネージド型のエンタープライズ統合メッセージブローカーです。
+Microsoft Azure Service Bus is a fully managed enterprise integration message broker.
 
-Azure Service Bus からメトリクスを取得すると、以下のことができます。
+Get metrics from Azure Service Bus to:
 
-- サービスバスのパフォーマンスを視覚化できます。
-- サービスバスのパフォーマンスをアプリケーションと関連付けることができます。
+- Visualize the performance of your Service Bus.
+- Correlate the performance of your Service Buses with your applications.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps that need to be performed.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_service_bus" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Service Bus インテグレーションには、イベントは含まれません。
+The Azure Service Bus integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Service Bus インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Service Bus integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_service_bus/azure_service_bus_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

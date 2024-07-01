@@ -1,3 +1,3 @@
 ---
-title: IP 許可リスト
+title: IP Allowlist
 ---

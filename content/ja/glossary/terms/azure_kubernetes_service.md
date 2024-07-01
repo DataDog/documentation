@@ -1,6 +1,6 @@
 ---
-core_product:
-- infrastructure monitoring
 title: Azure Kubernetes Service (AKS)
+core_product:
+  - infrastructure monitoring
 ---
-AKS はマネージド Kubernetes サービスです。
+AKS is a managed Kubernetes service.

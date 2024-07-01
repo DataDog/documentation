@@ -1,48 +1,53 @@
 ---
+title: Set up Tracing on Codefresh Pipelines
 aliases:
-- /ja/continuous_integration/setup_pipelines/codefresh
+  - /continuous_integration/setup_pipelines/codefresh
 further_reading:
-- link: /continuous_integration/pipelines
-  tag: ドキュメント
-  text: パイプラインの実行結果とパフォーマンスを確認する
-- link: /continuous_integration/troubleshooting/
-  tag: ドキュメント
-  text: トラブルシューティング CI
-title: Codefresh パイプラインでトレースを設定する
+    - link: /continuous_integration/pipelines
+      tag: Documentation
+      text: Explore Pipeline Execution Results and Performance
+    - link: /continuous_integration/troubleshooting/
+      tag: Documentation
+      text: Troubleshooting CI Visibility
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## 互換性
+## Overview
 
-- **Partial pipelines**: 部分リトライとダウンストリームパイプラインの実行を表示します
+[Codefresh][1] is a continuous integration and delivery platform built for Kubernetes which offers automation features that streamline the building, testing, and deploying of your applications. 
 
-- **Manual steps**: 手動でトリガーされたパイプラインを表示します
+Set up tracing in Codefresh to collect data on each step of your pipelines, analyze performance bottlenecks, troubleshoot operational challenges, and monitor your deployment workflows.
 
-- **Parameters**: パイプラインのトリガー時にカスタムパラメーター (例えば、[Codefresh 変数][6]) を設定します
+### Compatibility
 
-- **Pipeline failure reasons**: エラーメッセージからパイプラインの障害理由を特定します
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][7] | Partial pipelines | View partially retried pipeline executions. |
+| [Manual steps][8] | Manual steps | View manually triggered pipelines. |
+| [Parameters][9] | Parameters | Set custom parameters (for example, [Codefresh variables][6]) when a pipeline is triggered. |
+| [Pipeline failure reasons][10] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
 
-## Datadog インテグレーションの構成
+## Configure the Datadog integration
 
-[Codefresh][1] の Datadog インテグレーションを有効にする手順は以下の通りです。
+To set up the Datadog integration for [Codefresh][1]:
 
-1. Codefresh の **[Account Settings > Configuration > Integrations][2]** に移動し、Datadog の行の **CONFIGURE** をクリックします。
-2. **ADD INTEGRATION** をクリックします。
-3. 以下の情報をフォームに入力してください。
-   * **Datadog site**: ドロップダウンから {{< region-param key="dd_site" code="true" >}} を選択します。
-   * **Token**: [Datadog API キー][3]を追加します。
-4. インテグレーションを保存するには、**SAVE** をクリックします。
+1. Go to **[Account Settings > Configuration > Integrations][2]** in Codefresh and click **CONFIGURE** on the Datadog row.
+2. Click **ADD INTEGRATION**.
+3. Fill the form with the following information:
+   * **Datadog site**: Select {{< region-param key="dd_site" code="true" >}} from the dropdown.
+   * **Token**: Add your [Datadog API Key][3].
+4. Click **SAVE** to save the integration.
 
-## Datadog でパイプラインデータを視覚化する
+## Visualize pipeline data in Datadog
 
-パイプラインが終了した後、[Pipelines][4] ページと [Pipeline Executions][5] ページにデータが入力されます。
+The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
 
-**注**: Pipelines ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。
+The **CI Pipeline List** page shows data for only the default branch of each repository.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -52,3 +57,7 @@ title: Codefresh パイプラインでトレースを設定する
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: https://codefresh.io/docs/docs/codefresh-yaml/variables/#user-provided-variables
+[7]: /glossary/#partial-retry
+[8]: /glossary/#manual-step
+[9]: /glossary/#parameter
+[10]: /glossary/#pipeline-failure

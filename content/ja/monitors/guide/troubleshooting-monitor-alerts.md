@@ -1,106 +1,107 @@
 ---
+title: Troubleshooting Monitor Alerts
 further_reading:
-- link: https://docs.datadoghq.com/monitors/guide/alert-on-no-change-in-value/
-  tag: ガイド
-  text: 値に変化がない場合のアラート
-- link: https://docs.datadoghq.com/monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting/
-  tag: ガイド
-  text: 特定のタグがレポートを停止した場合のアラート設定
-- link: https://docs.datadoghq.com/monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime/
-  tag: ガイド
-  text: ダウンタイムになったモニターからのアラートを防止する
-- link: https://www.datadoghq.com/blog/datadog-recommended-monitors/
-  tag: ブログ
-  text: 推奨モニターであらかじめ構成されたアラートを有効にする
-- link: https://www.datadoghq.com/blog/datadog-recommended-monitors/
-  tag: ブログ
-  text: OpsGenie と Datadog によるアラートとイベントの監視
-- link: https://www.datadoghq.com/blog/set-and-monitor-slas/
-  tag: ブログ
-  text: Datadog によるサービスの監視と SLA 設定
-kind: ガイド
-title: モニターアラートのトラブルシューティング
+- link: "https://docs.datadoghq.com/monitors/guide/alert-on-no-change-in-value/"
+  tag: Guide
+  text: Alert on no change in value
+- link: "https://docs.datadoghq.com/monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting/"
+  tag: Guide
+  text: Set up an alert for when a specific tag stops reporting
+- link: "https://docs.datadoghq.com/monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime/"
+  tag: Guide
+  text: Prevent alerts from monitors that were in downtime
+- link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
+  tag: Blog
+  text: Enable preconfigured alerts with recommended monitors
+- link: "https://www.datadoghq.com/blog/datadog-recommended-monitors/"
+  tag: Blog
+  text: Monitor alerts and events with OpsGenie and Datadog
+- link: "https://www.datadoghq.com/blog/set-and-monitor-slas/"
+  tag: Blog
+  text: Monitoring services and setting SLAs with Datadog
 ---
 
-## 概要
+## Overview
 
-このガイドでは、モニターのアラート動作が有効であるかどうかを判断するのに役立つ、いくつかの基本的な概念の概要を説明します。モニターの評価が基礎データを正確に反映していないと思われる場合、モニターを検査する際に以下のセクションを参照してください。
+This guide provides an overview of some foundational concepts that can help you determine if your monitor's alerting behavior is valid. If you suspect that your monitor's evaluations are not accurately reflecting the underlying data, refer to the sections below as you inspect your monitor.
 
-### モニター状態とモニターステータス
+### Monitor state and monitor status
 
-モニターの*評価*はステートレスで、与えられた評価の結果は以前の評価の結果に依存しないことを意味しますが、モニター自体はステートフルで、その状態はクエリや構成の評価結果に基づいて更新されます。あるステータスのモニター評価によって、モニターのステータスが同じステータスに変化するとは限りません。考えられる原因については、以下を参照してください。
+While monitor *evaluations* are stateless, meaning that the result of a given evaluation does not depend on the results of previous evaluations, monitors themselves are stateful, and their state is updated based on the evaluation results of their queries and configurations. A monitor evaluation with a given status won't necessarily cause the monitor's state to change to the same status. See below for some potential causes:
 
-#### メトリクスモニターの評価ウィンドウ内で、メトリクスがまばらすぎる
+#### Metrics are too sparse within a metric monitor's evaluation window
 
-モニターの評価ウィンドウにメトリクスがなく、モニターが[データなし条件][1]を予期するように構成されていない場合、評価は `skip` されるかもしれません。このような場合、モニターの状態は更新されないので、以前は `OK` 状態であったモニターは `OK` のままであり、同様に `Alert` 状態であったモニターについても同様です。モニターステータスページの[履歴][2]グラフを使用して、対象となるグループと時間帯を選択します。データがまばらな場合は、[モニターの演算処理とまばらなメトリクス][3]を参照してください。
+If metrics are absent from a monitor's evaluation window, and the monitor is not configured to anticipate [no-data conditions][1], the evaluation may be `skipped`. In such a case, the monitor state is not updated, so a monitor previously in the `OK` state remains `OK`, and likewise with a monitor in the `Alert` state. Use the [history][2] graph on the monitor status page and select the group and time frame of interest. If data is sparsely populated, see [monitor arithmetic and sparse metrics][3] for more information.
 
-#### 外部条件による状態の更新を監視する
+#### Monitor state updates due to external conditions
 
-また、[自動解決][4]などにより、モニターの評価がない状態でもモニターの状態が更新されることがあります。
+The state of a monitor may also sometimes update in the absence of a monitor evaluation, for example, due to [auto-resolve][4].
 
-### データの有無を確認する
+### Verify the presence of data
 
-モニターの状態やステータスが期待したものと異なる場合、基礎となるデータソースの動作を確認します。メトリクスモニターの場合、[履歴][2]グラフを使用して、メトリクスクエリによって引き込まれたデータポイントを表示できます。メトリクスの進化をさらに調査するには、ステータスグラフのそばにある **Open in a notebook** をクリックします。これにより、モニタークエリのフォーマットされたグラフを持つ調査用[ノートブック][20]が生成されます。
+If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][20] with a formatted graph of the monitor query.
 
-{{< img src="monitors/monitor_status/notebook-button2.png" alt="1 つのモニターグループのステータスバーの横にある Open in a notebook ボタンにマウスカーソルを合わせた状態でのモニターのステータスページ" style="width:60%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="The monitor status page with the mouse cursor hovering over the Open in a notebook button next to one monitor group status bar" style="width:60%;">}}
 
-### アラートの条件
+### Alert conditions
 
-予期しないモニターの動作は、時には[モニタータイプ][6]によって異なる[ アラート条件][5]を誤って設定した結果である可能性があります。モニタークエリが `as_count()` 関数を使用している場合、[モニター評価における `as_count()`][7] のガイドを確認してください。
+Unexpected monitor behavior can sometimes be the result of misconfigured [alert conditions][5], which vary by [monitor type][6]. If your monitor query uses the `as_count()` function, check the [`as_count()` in Monitor Evaluations][7] guide.
 
-回復しきい値を使用する場合は、[回復しきい値ガイド][8]に記載されている条件を確認し、想定される動作であるかどうかを確認してください。
+If using recovery thresholds, check the conditions listed in the [recovery thresholds guide][8] to see if the behavior is expected.
 
-### モニターステータスとグループ
+### Monitor status and groups
 
-モニター評価と状態の両方について、ステータスはグループごとに追跡されます。
+For both monitor evaluations and state, status is tracked by group.
 
-マルチアラートモニターの場合、グループは各グループ化キーに 1 つの値を持つタグのセットです (例えば、`env` と `host` でグループ化されたモニターには `env:dev, host:myhost` があります)。単純なアラートでは、グループ (`*`) は 1 つだけで、モニターの範囲内のすべてを表します。
+For a multi alert monitor, a group is a set of tags with one value for each grouping key (for example, `env:dev, host:myhost` for a monitor grouped by `env` and `host`). For a simple alert, there is only one group (`*`), representing everything within the monitor's scope.
 
-デフォルトでは、Datadog はクエリを変更しない限り、モニターグループを UI で 24 時間、ホストモニターでは 48 時間利用可能な状態に保ちます。詳しくは、[モニター設定の変更が反映されない][9]を参照してください。
+By default, Datadog keeps monitor groups available in the UI for 24 hours, or 48 hours for host monitors, unless the query is changed. See [Monitor settings changes not taking effect][9] for more information.
 
-マルチアラートモニターの範囲内に新しいモニターグループを作成することが予想される場合、これらの新しいグループの評価のための遅延を構成することができます。これは、新しいコンテナの作成に関連する高いリソース使用量など、新しいグループの予想される動作からアラートを回避するのに役立ちます。詳細については、[新規グループ遅延][10]を参照してください。
+If you anticipate creating new monitor groups within the scope of your multi alert monitors, you may want to configure a delay for the evaluation of these new groups. This can help you avoid alerts from the expected behavior of new groups, such as high resource usage associated with the creation of a new container. Read [new group delay][10] for more information.
 
-モニターがクローラーベースのクラウドメトリクスをクエリする場合、[評価遅延][11]を使用して、モニターが評価する前にメトリクスが到着していることを確認します。クラウドインテグレーションクローラーのスケジュールについての詳細は、[クラウドメトリクスの遅延][12]をお読みください。
+If your monitor queries for crawler-based cloud metrics, use an [evaluation delay][11] to ensure that the metrics have arrived before the monitor evaluates. Read [cloud metric delay][12] for more information about cloud integration crawler schedules.
 
-### 通知に関する問題
+### Notification issues
 
-モニターが正常に動作しているにもかかわらず、不要な通知が表示される場合、通知を削減または抑制するための複数のオプションが用意されています。
+If your monitor is behaving as expected, but producing unwanted notifications, there are multiple options to reduce or suppress notifications:
 
-- 状態が急激に変化するモニターの場合、警告の疲労を最小限に抑える方法については、[アラートのバタつきを抑える][13]をお読みください。
-- 予想されるアラート、または組織にとって有用でないアラートについては、[ダウンタイム][14]で不要な通知を抑制してください。
-- アラートのルーティングを制御するには、[テンプレート変数][15]と、[条件変数][16]による**警告**と**アラート**の状態の分離を使用します。
+- For monitors that rapidly change between states, read [reduce alert flapping][13] for ways to minimize alert fatigue.
+- For alerts which are expected or are otherwise not useful for your organization, use [Downtimes][14] to suppress unwanted notifications.
+- To control alert routing, use [template variables][15] and the separation of **warning** or **alert** states with [conditional variables][16].
 
-#### 通知の欠落
+#### Absent notifications
 
-通知が正しく届いていないと思われる場合は、以下の項目を確認し、通知が届くように設定してください。
+If you suspect that notifications are not being properly delivered, check the items below to ensure that notifications are able to be delivered:
 
-- 受信者の[メール設定][17]を確認し、`Notification from monitor alerts` がチェックされていることを確認します。
-- [イベントストリーム][18]に、文字列 `Error delivering notification` があるイベントをチェックします。
+- Check [email preferences][17] for the recipient and ensure that `Notification from monitor alerts` is checked.
+- Check the [event stream][18] for events with the string `Error delivering notification`.
 
-#### Opsgenie 複数通知
+#### Opsgenie multi-notification
 
-モニターで複数の `@opsgenie-[...]` 通知を使用している場合、同じエイリアスを持つそれらの通知を Opsgenie に送信します。
-[Opsgenie の機能][19]により、Opsgenie は重複とみなされたものを破棄します。
+If you are using multiple `@opsgenie-[...]` notifications in your monitor, we send those notifications with the same alias to Opsgenie.
+Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplication.
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/configuration/?tabs=thresholdalert#no-data
-[2]: /ja/monitors/manage/status/#history
-[3]: /ja/monitors/guide/monitor-arithmetic-and-sparse-metrics/
-[4]: /ja/monitors/configuration/?tabs=thresholdalert#auto-resolve
-[5]: /ja/monitors/configuration/?tabs=thresholdalert#set-alert-conditions
-[6]: /ja/monitors/types
-[7]: /ja/monitors/guide/as-count-in-monitor-evaluations/
-[8]: /ja/monitors/guide/recovery-thresholds/#behavior
-[9]: /ja/monitors/guide/why-did-my-monitor-settings-change-not-take-effect
-[10]: /ja/monitors/configuration/?tabs=thresholdalert#new-group-delay
-[11]: /ja/monitors/configuration/?tabs=thresholdalert#evaluation-delay
-[12]: /ja/integrations/faq/cloud-metric-delay/
-[13]: /ja/monitors/guide/reduce-alert-flapping/
-[14]: /ja/monitors/guide/suppress-alert-with-downtimes/
-[15]: /ja/monitors/notify/variables/?tab=is_alert&tabs=is_alert#template-variables
-[16]: /ja/monitors/notify/variables/?tab=is_alert&tabs=is_alert#conditional-variables
-[17]: /ja/account_management/#preferences
-[18]: /ja/events/stream
+[1]: /monitors/configuration/?tabs=thresholdalert#no-data
+[2]: /monitors/manage/status/#history
+[3]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
+[4]: /monitors/configuration/?tabs=thresholdalert#auto-resolve
+[5]: /monitors/configuration/?tabs=thresholdalert#set-alert-conditions
+[6]: /monitors/types
+[7]: /monitors/guide/as-count-in-monitor-evaluations/
+[8]: /monitors/guide/recovery-thresholds/#behavior
+[9]: /monitors/guide/why-did-my-monitor-settings-change-not-take-effect
+[10]: /monitors/configuration/?tabs=thresholdalert#new-group-delay
+[11]: /monitors/configuration/?tabs=thresholdalert#evaluation-delay
+[12]: /integrations/faq/cloud-metric-delay/
+[13]: /monitors/guide/reduce-alert-flapping/
+[14]: /monitors/guide/suppress-alert-with-downtimes/
+[15]: /monitors/notify/variables/?tab=is_alert&tabs=is_alert#template-variables
+[16]: /monitors/notify/variables/?tab=is_alert&tabs=is_alert#conditional-variables
+[17]: /account_management/#preferences
+[18]: /events/stream
 [19]: https://docs.opsgenie.com/docs/alert-deduplication
-[20]: /ja/notebooks
+[20]: /notebooks

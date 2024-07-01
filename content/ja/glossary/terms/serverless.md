@@ -1,6 +1,6 @@
 ---
+title: serverless
 core_product:
-- serverless monitoring
-title: サーバーレス
+  - serverless monitoring
 ---
-サーバーレスとは、クラウドサービスプロバイダーがサーバーインフラクチャーを担当するクラウド開発・実行モデルのことです。
+Serverless is a cloud development and execution model in which a cloud service provider handles server infrastructure.

@@ -1,83 +1,83 @@
 ---
-app_id: external-dns
-app_uuid: b41539a6-8222-4d6e-92f9-0a9f8496acdd
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: external_dns.source.endpoints.total
-      metadata_path: metadata.csv
-      prefix: external_dns.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10075
-    source_type_name: 外部 DNS
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- ネットワーク
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: external_dns
-integration_id: external-dns
-integration_title: 外部 DNS
-integration_version: 3.2.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: external_dns
-public_title: 外部 DNS
-short_description: 外部 DNS のすべてのメトリクスを Datadog で追跡
-supported_os:
+"app_id": "external-dns"
+"app_uuid": "b41539a6-8222-4d6e-92f9-0a9f8496acdd"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": external_dns.source.endpoints.total
+      "metadata_path": metadata.csv
+      "prefix": external_dns.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10075"
+    "source_type_name": External DNS
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- network
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "external_dns"
+"integration_id": "external-dns"
+"integration_title": "External DNS"
+"integration_version": "3.2.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "external_dns"
+"public_title": "External DNS"
+"short_description": "Track all your External DNS metrics with Datadog"
+"supported_os":
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Network
-  configuration: README.md#Setup
-  description: 外部 DNS のすべてのメトリクスを Datadog で追跡
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: 外部 DNS
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Category::Network"
+  "configuration": "README.md#Setup"
+  "description": Track all your External DNS metrics with Datadog
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": External DNS
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-外部 DNS サーバーからメトリクスをリアルタイムに取得して、Kubernetes の外部 DNS Prometheus アドオンで収集した DNS メトリクスを視覚化および監視できます。
+Get metrics from the external DNS service in real time to visualize and monitor DNS metrics collected with the Kubernetes external DNS Prometheus add on.
 
-外部 DNS の詳細については、[Github リポジトリ][1]を参照してください。
+For more information about external DNS, see the [Github repo][1].
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-外部 DNS チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The external DNS check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your servers.
 
-### 構成
+### Configuration
 
-サーバーとポートを指定し、監視するマスターを設定するには、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `external_dns.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[external_dns.d/conf.yaml のサンプル][4] を参照してください。
+Edit the `external_dns.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][3], to point to your server and port, and to set the masters to monitor. See the [sample external_dns.d/conf.yaml][4] for all available configuration options.
 
-#### サービスディスカバリーの使用
+#### Using with service discovery
 
-Kubernetes ワーカーノードごとに 1 つの Datadog Agent ポッドを使用している場合は、external-dns ポッドで以下のサンプルアノテーションを使用して、データを自動的に取得できます。
+If you are using one Datadog Agent pod per Kubernetes worker node, use these example annotations on your external-dns pod to retrieve the data automatically:
 
 ```yaml
 apiVersion: v1
@@ -89,36 +89,37 @@ metadata:
     ad.datadoghq.com/external-dns.instances: '[{"prometheus_url":"http://%%host%%:7979/metrics", "tags":["externaldns-pod:%%host%%"]}]'
 ```
 
-- `externaldns-pod` タグは、対象の DNS ポッド IP を追跡します。他のタグは、オートディスカバリーを使用して情報をポーリングする Datadog Agent に関連します。
-- オートディスカバリーアノテーションはポッド上で行われます。デプロイするには、アノテーションをテンプレートの仕様のメタデータに追加します。
+- The `externaldns-pod` tag keeps track of the target DNS pod IP. The other tags are related to the Datadog Agent that is polling the information using the autodiscovery.
+- The autodiscovery annotations are done on the pod. To deploy, add the annotations to the metadata of the template's specification.
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `external_dns` を探します。
+[Run the Agent's `status` subcommand][5] and look for `external_dns` under the Checks section.
 
-## データ収集
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "external_dns" >}}
 
 
-### イベント
+### Events
 
-外部 DNS チェックには、イベントは含まれません。
+The external DNS check does not include any events.
 
-### サービスチェック
+### Service Checks
 {{< get-service-checks-from-git "external_dns" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
 [1]: https://github.com/kubernetes-incubator/external-dns
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/external_dns/datadog_checks/external_dns/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/external_dns/metadata.csv
 [7]: https://github.com/DataDog/integrations-core/blob/master/external_dns/assets/service_checks.json
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

@@ -1,107 +1,107 @@
 ---
-title: チームの管理
+title: Manage Your Team
 ---
 
-アーキテクチャレビューをチームワークで行い、リアルタイムのクラウドインフラストラクチャービューを共有し、Cloudcraft チームの助けを借りて次のプロジェクトを共同設計しましょう。
+Make architecture reviews a team effort, share your real-time cloud infrastructure views, or collaboratively design your next project with the help of Cloudcraft teams.
 
-Cloudcraft のチームへの追加は簡単で、全員がリアルタイムで共同作業を行うことができます。
+Adding people to a team in Cloudcraft is easy, and allows everyone to collaborate in real-time.
 
-アカウント所有者と管理者ロールを持つチームメンバーは、ユーザーを招待したり削除したり、メンバーのロールを変更することができます。
-
-<section class="alert alert-info">
- <p>チーム機能は Cloudcraft Pro および Enterprise プランでご利用いただけます。</p>
-</section>
-
-## ユーザー管理
-
-### 新規ユーザーの招待
-
-チームにメンバーを追加するには、Cloudcraft 内の **User → Team settings** に移動します。
-
-次に、表示された **Manage Team** ウィンドウの下部にある青い **Add member** ボタンをクリックします。
-
-{{< img src="cloudcraft/account-management/manage-teams/add-member.png" alt="「Add Member」ボタンがハイライトされた Cloudcraft の「Manage Team」インターフェイスのスクリーンショット。" responsive="true" style="width:100%;">}}
-
-ボタンをクリックしたら、ユーザーのメールアドレスを入力し、チームでのロールを選択する必要があります。
-
-{{< img src="cloudcraft/account-management/manage-teams/add-teammate.png" alt="Cloudcraft でチームメンバーを追加するためのユーザーインターフェイス (メールアドレス入力とロール選択オプション付き)。" responsive="true" style="width:100%;">}}
-
-ロールによってアクセスできるレベルが異なるため、正しいロールを選択することはこのプロセスにおいて重要なステップです。このユーザーに最も適したロールを選択しますが、[最小権限の原則][1]に従うようにしてください。
-
-最後に、**Send invite** ボタンをクリックして、ユーザーをチームに招待します。招待されたユーザーには、チームに参加し、アカウントをセットアップする (まだしていない場合) ためのリンクが記載されたメールが送信されます。
+The account owner and team members with the admin role can invite and remove users, as well as change member's roles.
 
 <section class="alert alert-info">
- <p>組織横断チームのメンバーである場合、ユーザーは組織横断ロールを継承します。</p>
+  <p>Team features are available with Cloudcraft Pro and Enterprise plans.</p>
 </section>
 
-### 既存ユーザーの削除
+## User management
 
-誰かがチームから離脱した場合、または誰かが誤って追加された場合、そのユーザーをチームから削除したいと思うでしょう。そのためには、Cloudcraft 内の **User → Team settings** に移動します。
+### Invite new users
 
-次に、削除したいユーザーを選択し、名前の右側にある灰色のゴミ箱アイコンをクリックします。
+To add members to your team, head to **User → Team settings** inside Cloudcraft.
 
-{{< img src="cloudcraft/account-management/manage-teams/trash-can-icon.png" alt="削除アクションアイコンが付いたユーザー連携機能をハイライトする Cloudcraft Manage Team インターフェイスのスクリーンショット。" responsive="true" style="width:100%;">}}
+Next, click the blue **Add member** button at the bottom of the **Manage Team** window that appeared.
 
-画面に確認ダイアログが表示されます。赤い **Remove** ボタンをクリックすると、ユーザーがチームから削除されます。
+{{< img src="cloudcraft/account-management/manage-teams/add-member.png" alt="Screenshot of a 'Manage Team' interface in Cloudcraft with an 'Add Member' button highlighted." responsive="true" style="width:100%;">}}
+
+After clicking the button, you need to enter the user's email address and select a role for them on your team.
+
+{{< img src="cloudcraft/account-management/manage-teams/add-teammate.png" alt="User interface for adding a team member in Cloudcraft with email input and role selection options." responsive="true" style="width:100%;">}}
+
+Selecting the correct role is a critical step in this process, as different roles have different levels of access. Select the role that best fits this user, but try to follow the [principle of least privilege][1].
+
+Lastly, click the **Send invite** button to invite the user to your team. The user you invited will receive an email that includes a link to join your team and set up their account if they have not already.
 
 <section class="alert alert-info">
- <p>削除されたユーザーが作成し、チームと共有していた図は、引き続きチームで利用できます。削除する前にユーザーのすべてのデータの移行についてサポートが必要な場合は、<a href="https://app.cloudcraft.co/app/support" title="Contact our support team">アプリケーション内からサポートチームにお問い合わせください</a>。</p>
- <p>削除されたユーザーのデータへのチームアクセスは、30 日間のデータ保持期間内にリクエストがあれば、復元することもできます。</p>
+  <p>The user will inherit their cross-organizational role if they are a member of a cross-organizational team.</p>
 </section>
 
-### 既存ユーザーのロールの変更
+### Remove existing users
 
-ユーザーのアクセス権を変更する必要がある場合は、Cloudcraft 内の **User → Team settings** に移動します。
+When someone leaves the team — or if someone is added by mistake — you will want to remove them from your team. For that, head to **User → Team settings** inside Cloudcraft.
 
-次に、ユーザーの左にある灰色の鉛筆アイコンをクリックします。
+Next, select the user you want to have removed and click the gray trash can icon to the right of their name.
 
-{{< img src="cloudcraft/account-management/manage-teams/edit-user.png" alt="編集オプションをハイライトしている、Cloudcraft でチームメンバーを管理するためのユーザーインターフェイス。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/account-management/manage-teams/trash-can-icon.png" alt="Screenshot of a Cloudcraft Manage Team interface highlighting user collaboration features with delete action icon." responsive="true" style="width:100%;">}}
 
-次のプロンプトでユーザーの新しいロールを選択し、青い **Save** ボタンをクリックします。以上で設定は完了です。
-
-## チーム管理
+A confirmation dialog will appear on your screen. Click the red **Remove** button and the user will be removed from your team.
 
 <section class="alert alert-info">
- <p>複数チームの管理機能は、Enterprise プランでのみ利用可能です。</p>
+  <p>Diagrams that were created by the removed user and that were shared with the team, will continue to be available to the team. If you need help migrating all of the user's data prior to removing them, please <a href="https://app.cloudcraft.co/app/support" title="Contact our support team">contact our support team from inside the application</a>.</p>
+  <p>Team access to data of removed users can also be restored if requested within our 30-day data retention period.</p>
 </section>
 
-### 新規チームの作成
+### Change an existing user's role
 
-アカウントに新しいチームを作成するには、Cloudcraft 内の **User → Team settings** に移動します。
+If you need to change what a user has access to, head to **User → Team settings** inside Cloudcraft.
 
-左側のチームリストの下にある青い **Create Team** ボタンをクリックします。
+Next, click the gray pencil icon to the left of the user.
 
-{{< img src="cloudcraft/account-management/manage-teams/create-new-team.png" alt="Cloudcraft のチーム管理用ユーザーインターフェイス。チームメンバーのリストとともに「Create Team」ボタンをハイライトしています。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/account-management/manage-teams/edit-user.png" alt="User interface for managing team members in Cloudcraft, highlighting edit options." responsive="true" style="width:100%;">}}
 
-次に、チームに名前を付け、可視性を設定する必要があります。**Visible** チームは組織内の誰でも見ることができ、**Secret** チームはアカウント所有者とチームのメンバーだけが見ることができます。
+On the next prompt, select a new role for the user and click the blue **Save** button. That is all there is to it.
 
-{{< img src="cloudcraft/account-management/manage-teams/create-new-team-settings.png" alt="チームの可視性とロールのオプションがある、Cloudcraft のチーム作成インターフェイスのスクリーンショット。" responsive="true" style="width:100%;">}}
+## Team management
 
-チームを作成する前に、**Cross-organizational** ボックスをチェックして、このチームを組織横断チームにすることもできます。組織横断チームのメンバーは、組織内の他のすべてのチームに自動的に追加されます。組織横断チームの例としては、すべての個別チームを監視する必要がある中央セキュリティ管理チームがあります。
+<section class="alert alert-info">
+  <p>The multi-team management feature is only available for the Enterprise plan</p>
+</section>
 
-既に他のチームのメンバーでない限り、組織横断的なメンバーは組織横断的なロールを継承します。
+### Create a new team
 
-下部にある **Create** ボタンをクリックすると、チームメンバーの招待を開始できます。
+To create a new team for your account, head to **User → Team settings** inside Cloudcraft.
 
-### 既存のチームの削除または更新
+Click the blue **Create Team** button at the bottom of the team list, on the left.
 
-自分が所有するチームを更新または削除する必要がある場合は、Cloudcraft 内の **User → Team settings** に移動します。
+{{< img src="cloudcraft/account-management/manage-teams/create-new-team.png" alt="User interface for team management in Cloudcraft highlighting the 'Create Team' button with a list of team members." responsive="true" style="width:100%;">}}
 
-更新したいチームを選択し、名前の横にある灰色の鉛筆アイコンをクリックします。
+Next, you need to give your team a name and set its visibility. A **Visible** team can be seen by anyone in your organization, while a **Secret** team can only be seen by the account owner and members of the team.
 
-{{< img src="cloudcraft/account-management/manage-teams/edit-team.png" alt="「Manage Teams」インターフェイス内の編集ボタンがハイライトされた Cloudcraft のスクリーンショット。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/account-management/manage-teams/create-new-team-settings.png" alt="Screenshot of a team creation interface in Cloudcraft with options for team visibility and roles." responsive="true" style="width:100%;">}}
 
-ここでは、チーム名を更新したり、表示されているチームをシークレットにしたり (またはその逆)、チームを組織横断型に変更したり、チームを完全に削除したりすることができます。
+Before creating the team, you can also check the **Cross-organizational** box to make this a cross-organizational team, which are teams with members that are automatically added to all other teams in your organization. An example of cross-organizational team woul be a central security management team, which need visibility into all of the individual teams.
 
-その他のチーム設定を更新するには、変更したい内容を入力し、一番下にある青い **Save** ボタンをクリックします。
+Unless they are already a member of another team, cross-organizational members inherit their cross-organizational roles.
 
-{{< img src="cloudcraft/account-management/manage-teams/update-team-settings.png" alt="チームの可視性とロールを編集するオプションがある、Cloudcraft のチーム管理インターフェイスのスクリーンショット。" responsive="true" style="width:100%;">}}
+Click the **Create** button at the bottom and that is it, you are ready to start inviting team members.
 
-チームを削除するには、赤い **Delete** ボタンをクリックし、チームを削除することを確認するだけです。
+### Removing or updating existing teams
 
-{{< img src="cloudcraft/account-management/manage-teams/delete-team.png" alt="チームを削除するための確認ダイアログが表示されている、Cloudcraft のインターフェイス。" responsive="true" style="width:100%;">}}
+If you need to update or remove a team that you own, head to **User → Team settings** inside Cloudcraft.
 
-このプロセスで質問や問題がある場合は、[サポートチームにご連絡ください][2]。
+Select the team you want to update and click on the gray pencil icon that sits next to its name.
+
+{{< img src="cloudcraft/account-management/manage-teams/edit-team.png" alt="Screenshot from Cloudcraft with a highlighted edit button within the 'Manage Teams' interface." responsive="true" style="width:100%;">}}
+
+Here you can update the name of the team, make a visible team secret — and vice-versa —, change a team to cross-organizational, or remove a team entirely.
+
+To update other team settings, make the change you want to make and click the blue **Save** button at the bottom.
+
+{{< img src="cloudcraft/account-management/manage-teams/update-team-settings.png" alt="Screenshot of a Cloudcraft's team management interface with options to edit team visibility and roles." responsive="true" style="width:100%;">}}
+
+To remove a team, simply click on the red **Delete** button and confirm that you want to delete your team.
+
+{{< img src="cloudcraft/account-management/manage-teams/delete-team.png" alt="Cloudcraft interface showing a confirmation dialog for deleting a team." responsive="true" style="width:100%;">}}
+
+If you have any questions or trouble with the process, [get in touch with our support team][2], and we will be happy to help.
 
 [1]: https://en.wikipedia.org/wiki/Principle_of_least_privilege
 [2]: https://app.cloudcraft.co/app/support

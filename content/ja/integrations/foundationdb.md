@@ -1,130 +1,134 @@
 ---
-app_id: foundationdb
-app_uuid: 0ab23627-c6f5-4ec5-b42c-43b85dc26445
-assets:
-  dashboards:
-    FoundationDB Latency Probe: assets/dashboards/foundationdb_latency_probe.json
-    FoundationDB Processes and Utilization: assets/dashboards/foundationdb_processes_and_utilization.json
-    FoundationDB Transactions and Queues: assets/dashboards/foundationdb_transactions_and_queues.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check:
+"app_id": "foundationdb"
+"app_uuid": "0ab23627-c6f5-4ec5-b42c-43b85dc26445"
+"assets":
+  "dashboards":
+    "FoundationDB Latency Probe": assets/dashboards/foundationdb_latency_probe.json
+    "FoundationDB Processes and Utilization": assets/dashboards/foundationdb_processes_and_utilization.json
+    "FoundationDB Transactions and Queues": assets/dashboards/foundationdb_transactions_and_queues.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check":
       - foundationdb.processes
       - foundationdb.instances
-      metadata_path: metadata.csv
-      prefix: foundationdb.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10258
-    source_type_name: FoundationDB
-  logs:
-    source: foundationdb
-  monitors:
-    FoundationDB Errors Logged: assets/monitors/errors_logged.json
-    FoundationDB High Durability Lag: assets/monitors/high_durability_lag.json
-    FoundationDB High Level Of Conflicted Transactions: assets/monitors/conflicts.json
-    FoundationDB High Level Of Rejected Transactions: assets/monitors/rejections.json
-    FoundationDB Log Queue Reaching Spill Threshold: assets/monitors/log_queue_spill.json
-    FoundationDB Low Disk Space: assets/monitors/low_disk_space.json
-    FoundationDB Read Latency Probe: assets/monitors/read_latency_probe.json
-    FoundationDB Status Check: assets/monitors/service_check.json
-    FoundationDB Transaction Commit Latency Probe: assets/monitors/transaction_commit_latency.json
-    FoundationDB Transaction Start Latency Probe: assets/monitors/transaction_start_latency.json
-  saved_views:
-    all: assets/saved_views/all.json
-    errors: assets/saved_views/errors.json
-    errors_and_strong_warnings: assets/saved_views/errors_and_strong_warnings.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
+      "metadata_path": metadata.csv
+      "prefix": foundationdb.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10258"
+    "source_type_name": FoundationDB
+  "monitors":
+    "FoundationDB Errors Logged": assets/monitors/errors_logged.json
+    "FoundationDB High Durability Lag": assets/monitors/high_durability_lag.json
+    "FoundationDB High Level Of Conflicted Transactions": assets/monitors/conflicts.json
+    "FoundationDB High Level Of Rejected Transactions": assets/monitors/rejections.json
+    "FoundationDB Log Queue Reaching Spill Threshold": assets/monitors/log_queue_spill.json
+    "FoundationDB Low Disk Space": assets/monitors/low_disk_space.json
+    "FoundationDB Read Latency Probe": assets/monitors/read_latency_probe.json
+    "FoundationDB Status Check": assets/monitors/service_check.json
+    "FoundationDB Transaction Commit Latency Probe": assets/monitors/transaction_commit_latency.json
+    "FoundationDB Transaction Start Latency Probe": assets/monitors/transaction_start_latency.json
+  "saved_views":
+    "all": assets/saved_views/all.json
+    "errors": assets/saved_views/errors.json
+    "errors_and_strong_warnings": assets/saved_views/errors_and_strong_warnings.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - data stores
-- ログの収集
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/foundationdb/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: foundationdb
-integration_id: foundationdb
-integration_title: FoundationDB
-integration_version: 1.4.0
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: foundationdb
-public_title: FoundationDB
-short_description: FoundationDB インテグレーション
-supported_os:
+- log collection
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/foundationdb/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "foundationdb"
+"integration_id": "foundationdb"
+"integration_title": "FoundationDB"
+"integration_version": "1.4.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "foundationdb"
+"public_title": "FoundationDB"
+"short_description": "FoundationDB integration"
+"supported_os":
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Data Stores
-  - Category::Log Collection
-  configuration: README.md#Setup
-  description: FoundationDB インテグレーション
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: FoundationDB
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Category::Data Stores"
+  - "Category::Log Collection"
+  "configuration": "README.md#Setup"
+  "description": FoundationDB integration
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": FoundationDB
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックでは、Datadog Agent を通じて [FoundationDB][1] を監視します。FoundationDB クラスターが健全であることを確認するほか、多数のメトリクスを収集し、オプションで FoundationDB トランザクションログも収集します。
+This check monitors [FoundationDB][1] through the Datadog Agent. Aside from
+checking that the FoundationDB cluster is healthy, it also collects numerous metrics
+and, optionally, FoundationDB transaction logs.
 
-## 計画と使用
+## Setup
 
-チェックとメトリクスはどちらも FoundationDB クラスター全体に適用され、1 つのホストにのみインストールする必要があります。このホストは FoundationDB を実行しているホストである必要はなく、アクセス可能なホストであれば問題ありません。
+Both the check and metrics apply to the FoundationDB cluster as a whole,
+and should only be installed on one host. The host doesn't need to be one that is
+running FoundationDB, but just one with access to it.
 
-### インフラストラクチャーリスト
+### Installation
 
-FoundationDB チェックは [Datadog Agent][2] パッケージに含まれていますが、[FoundationDB クライアント][3]がインストールされている必要があります。
+The FoundationDB check is included in the [Datadog Agent][2] package,
+but requires the [FoundationDB client][3] to be installed.
 
-### ブラウザトラブルシューティング
+### Configuration
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-##### メトリクスの収集
+##### Metric collection
 
-1. FoundationDB メトリクスの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダ内の `foundationdb.d/conf.yaml` ファイルを編集します。
-   使用可能なすべての構成オプションの詳細については、[サンプル foundationdb.d/conf.yaml][1] を参照してください。
+1. To start collecting your FoundationDB metrics, edit the `foundationdb.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's configuration directory.
+   See the [sample foundationdb.d/conf.yaml][1] for all available configuration options.
 
-2. チェックするクラスターは、[デフォルトの場所][2]にあるクラスターファイルを検索することで決定されます。クラスターファイルが他の場所にある場合は、
-`cluster_file` プロパティを設定します。チェックインスタンスごとに監視できるクラスターは 1 つだけです。
+2. The cluster to check is determined by searching for a cluster file  in the [default location][2]. If the cluster file is located elsewhere,
+set the `cluster_file` property. Only one cluster can be monitored per check instance.
 
-3. クラスターが [TLS を使用するように構成されている][3]場合、構成にさらなるプロパティを設定する必要があります。これらのプロパティは、
-そのようなクラスターに接続するために `fdbcli` に与えられる TLS 関連のオプションの名前に従います。
+3. If the cluster is [configured to use TLS][3], further properties should  be set in the configuration. These properties follow the names of the TLS
+related options given to `fdbcli` to connect to such a cluster.
 
-4. [Agent を再起動します][4]。
+4. [Restart the Agent][4].
 
-##### 収集データ
+##### Log collection
 
-FoundationDB はデフォルトで XML ログを書き込みますが、Datadog インテグレーションは JSON ログを想定しています。そのため、FoundationDB に構成変更を行う必要があります。
+FoundationDB writes XML logs by default, however, Datadog integrations expect JSON logs. Thus, a configuration change needs to be made to
+FoundationDB.
 
-1. `foundationdb.conf` ファイルを探します。`fdbserver` セクションで、
-   キー `trace_format` を追加または変更して、値を `json` にします。
-   また、`logdir` をメモしておきます。
+1. Locate your `foundationdb.conf` file. Under the `fdbserver` section, add
+   or change the key `trace_format` to have the value `json`. Also, make
+   note of the `logdir`.
 
     ```
     [fdbserver]
@@ -133,18 +137,18 @@ FoundationDB はデフォルトで XML ログを書き込みますが、Datadog 
     trace_format = json
     ```
 
-2. FoundationDB サーバーを再起動し、変更を有効にします。
-   `logdir` にあるログが JSON で書き込まれていることを確認します。
+2. Restart the FoundationDB server so the changes take effect. Verify that
+   logs in the `logdir` are written in JSON.
 
-3. `datadog.yaml` ファイルでログ収集が有効になっていることを確認します。
+3. Ensure that log collection is enabled in your `datadog.yaml` file:
 
     ```yaml
     logs_enabled: true
     ```
 
-4. `foundationdb.d/conf.yaml` ファイルで、`logs` セクションのコメントを解除し、
-   パスを FoundationDB の構成ファイルにあるものに設定し、
-   `*.json` を追加します。
+4. In the `foundationdb.d/conf.yaml` file, uncomment the `logs` section
+   and set the path to the one in your FoundationDB configuration file,
+   appending `*.json`.
 
     ```yaml
     logs:
@@ -154,67 +158,67 @@ FoundationDB はデフォルトで XML ログを書き込みますが、Datadog 
         source: foundationdb
     ```
 
-5. Datadog Agent が、ディレクトリの一覧表示とそのファイルの読み取りに必要な権限を
-   持っていることを確認します。
+5. Make sure the Datadog Agent has the privileges required to list the
+   directory and read its files.
 
-5. Datadog Agent を再起動します。
+5. Restart the Datadog Agent.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/foundationdb/datadog_checks/foundationdb/data/conf.yaml.example
 [2]: https://apple.github.io/foundationdb/administration.html#default-cluster-file
 [3]: https://www.foundationdb.org/
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
 
-##### メトリクスの収集
+##### Metric collection
 
-| パラメーター            | 値                                                      |
+| Parameter            | Value                                                      |
 |----------------------|------------------------------------------------------------|
 | `<INTEGRATION_NAME>` | `foundationdb`                                             |
-| `<INIT_CONFIG>`      | 空白または `{}`                                              |
+| `<INIT_CONFIG>`      | blank or `{}`                                              |
 | `<INSTANCE_CONFIG>`  | `{}`                                                       |
 
-##### 収集データ
+##### Log collection
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes log collection][2].
 
-| パラメーター      | 値                                     |
+| Parameter      | Value                                     |
 |----------------|-------------------------------------------|
 | `<LOG_CONFIG>` | `{"source": "foundationdb", "service": "<SERVICE_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][4]し、**Checks** セクションで `foundationdb` を探します。
+[Run the Agent's status subcommand][4] and look for `foundationdb` under the **Checks** section.
 
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "foundationdb" >}}
 
 
-### ヘルプ
+### Events
 
-FoundationDB チェックには、イベントは含まれません。
+The FoundationDB check does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
 
 [1]: https://www.foundationdb.org/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://apple.github.io/foundationdb/downloads.html
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[5]: https://docs.datadoghq.com/help/

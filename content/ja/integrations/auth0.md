@@ -1,144 +1,145 @@
 ---
-app_id: auth0
-app_uuid: 0c91d12e-f01e-47d9-8a07-4dba1cde4b67
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: auth0.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10098
-    source_type_name: Auth0
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Auth0
-  sales_email: help@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- インシデント
-- ログの収集
-- セキュリティ
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: auth0
-integration_id: auth0
-integration_title: Auth0
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: auth0
-public_title: Auth0
-short_description: Auth0 イベントを表示し、分析します。
-supported_os:
+"app_id": "auth0"
+"app_uuid": "0c91d12e-f01e-47d9-8a07-4dba1cde4b67"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": []
+      "metadata_path": metadata.csv
+      "prefix": auth0.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10098"
+    "source_type_name": Auth0
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Auth0
+  "sales_email": help@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- incidents
+- log collection
+- security
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "auth0"
+"integration_id": "auth0"
+"integration_title": "Auth0"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "auth0"
+"public_title": "Auth0"
+"short_description": "View and analyze your Auth0 events."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Incidents
-  - Category::Log Collection
-  - Category::Security
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Auth0 イベントを表示し、分析します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Auth0
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Incidents"
+  - "Category::Log Collection"
+  - "Category::Security"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": View and analyze your Auth0 events.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Auth0
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Auth0 は、開発者や企業がアプリケーションを安全に保つために必要なビルディングブロックを提供する、開発チーム向けの認証プラットフォームです。
-
-
-このインテグレーションにより、Auth0 の Log Streaming を活用して Datadog に直接ログを送信できます。ログは、Auth0 で生成される度にリアルタイムで送信されるので、顧客は利用中の Auth0 テナントに関する最新情報を得ることができます。このインテグレーションを利用する主なメリットの 1 つは、トレンドを把握するためにデータを収集して視覚化できることです。エンジニアリングチームは、エラー率とトラフィックデータを視覚化します。セキュリティチームは、認証トラフィックを視覚化し、リスクの高いアクションに対しアラートを設定します。
-
-### 主なユースケース
-
-#### アクティビティを ID データと関連付けて、トレンドを表面化
-
-ID データからは、誰がどのようなアクティビティを行ったのかについて、重要なインサイトを得ることができます。このデータを活用することで、チームは使用中のシステム全体においてユーザー行動に関する理解を深めることができます。
-
-#### システムのアーキテクチャや開発についての意思決定
-
-アイデンティティのトレンドを長期間追跡することで、チームは製品開発やシステムのアーキテクチャについて、情報に基づいた判断をすることができます。例えば、ログイン時間のピークや認証アクティビティ、地理情報に紐づくアクティビティの追跡に基づき、開発の優先順位を決定できます。
-
-#### パフォーマンスおよびセキュリティのインシデントに迅速に対応
-
-ID 情報を使って、セキュリティやパフォーマンスのインシデントを迅速に特定することができます。例えば、ログインが異常な回数試みられ、失敗している場合は、クレデンシャルスタッフィング攻撃 (認証システムを標的とした最も一般的な脅威の 1 つ) の可能性を疑うことができます。
-
-しきい値を構成することで、セキュリティチームは不審なイベントが発生した際に通知するためのアラートを設定でき、セキュリティインシデントにより早急に対応することができます。
-
-## 計画と使用
-
-コンフィギュレーションはすべて [Auth0 ダッシュボード][1]で行います。
-
-1. [Auth0 ダッシュボード][1]にログインします。
-2. **Logs** > **Streams** の順に移動します。
-3. **+ Create Stream** をクリックします。
-4. Datadog を選択し、新しい Datadog イベントストリームにユニークな名前を入力します。
-5. 次の画面で、以下の設定を Datadog イベントストリームに対して行います。
+Auth0 is an identity platform for development teams which provides developers and enterprises with the building blocks they need to secure their applications.
 
 
-    | 設定          | 説明                                                |
+This integration leverages Auth0's Log Streaming to send logs directly to Datadog. The logs are sent in real time as they are generated in Auth0, giving customers up-to-date information about their Auth0 tenant. One of the key benefits of using this integration is the ability to collect and visualize data in order to identify trends. Engineering teams use it to visualize error rates and traffic data. Security teams use it to visualize authorization traffic and set up alerts for high-risk actions.
+
+### Key use cases
+
+#### Correlate activity with identity data to surface trends
+
+Identity data provides crucial insight into who performed what activity. This allows teams to better understand user behavior across their system.
+
+#### Decisions about system architecture and development
+
+By tracking identity trends over time, teams can make informed decisions about product development and system architecture. As an example teams might prioritize development based on tracking peak login times, authentication activity and geographical activity.
+
+####  Quickly respond to performance and security incidents
+
+Identity information can be used to quickly identify security and performance incidents. For instance, massive spikes in unsuccessful login attempts could indicate an ongoing credential stuffing attack, one of the most common threats targeting identity systems.
+
+By configuring thresholds, security teams can set up alerts to notify them when suspicious events take place, allowing them to more quickly respond to security incidents.
+
+## Setup
+
+All configuration happens on the [Auth0 Dashboard][1]. 
+
+1. Log in to the [Auth0 Dashboard][1].
+2. Navigate to **Logs** > **Streams**.
+3. Click **+ Create Stream**.
+4. Select Datadog and enter a unique name for your new Datadog Event Stream.
+5. On the next screen, provide the following settings for your Datadog Event Stream:
+
+
+    | Setting          | Description                                                |
     | ---------------- | ---------------------------------------------------------- |
-    | `API Key`        | [Datadog API キー][2]を入力します。                           |
-    | `Region`           | ご使用の [Datadog サイト][3]。たとえば、app.datadoghq.eu の場合は `EU`、app.datadoghq.com の場合は `US1`、us3.datadoghq.com の場合は `US3`。 |
+    | `API Key`        | Enter your [Datadog API key][2].                           |
+    | `Region`           | Your [Datadog site][3]. For example, `EU` for app.datadoghq.eu, `US1` for app.datadoghq.com, and `US3` for us3.datadoghq.com. |
 
 
-6. Save をクリックします。
+6. Click Save.
 
-その後、Auth0 がテナントログを書き込む際に、ソースとサービスに `auth0` がセットされたログイベントのコピーを Datadog で受け取るようになります。
+When Auth0 writes the next tenant log, you receive a copy of that log event in Datadog with the source and service set to `auth0`.
 
-### 検証
+### Validation
 
-ログを Datadog に表示します。
+View logs in Datadog:
 
-1. **Logs** > **Livetail** の順に移動します。
-2. `source:auth0` を設定して、Auth0 ログを確認します。
+1. Navigate to **Logs** > **Livetail**.
+2. See Auth0 logs by setting `source:auth0`.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### 収集データ
+### Log collection
 
-Auth0 のログが収集され、Datadog に送信されます。送信されるログのタイプについては、[ログのイベントタイプコード][4]を参照してください。
+Auth0 logs are collected and sent to Datadog. The types of logs that could be returned are outlined in the [Log Event Type Codes][4].
 
-### データセキュリティ
+### Metrics
 
-auth0 には、メトリクスは含まれません。
+auth0 does not include any metrics.
 
-### ヘルプ
+### Service Checks
 
-auth0 には、サービスのチェック機能は含まれません。
+auth0 does not include any service checks.
 
-### ヘルプ
+### Events
 
-auth0 には、イベントは含まれません。
+auth0 does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ヘルプが必要な場合は、[Datadog サポート][5]までお問い合せください。
-このインテグレーションの詳細は、Datadog の[ブログ記事][6]でご確認いただけます。
+Need help? Contact [Datadog support][5].
+Read more about this integration in our [blog post][6].
 
 [1]: https://manage.auth0.com
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://docs.datadoghq.com/ja/getting_started/site/
+[3]: https://docs.datadoghq.com/getting_started/site/
 [4]: https://auth0.com/docs/logs/references/log-event-type-codes
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
 [6]: https://www.datadoghq.com/blog/monitor-auth0-with-datadog/
+

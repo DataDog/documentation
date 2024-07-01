@@ -1,36 +1,38 @@
 ---
-title: HTTP リクエストが HTTPS にリダイレクトされることを監視する
-kind: ガイド
+title: Monitor your HTTP requests are redirected into HTTPS
+kind: guide
 further_reading:
-  - link: /synthetics/api_tests/http_tests
-    tag: ドキュメント
-    text: HTTP テストの作成
+    - link: /synthetics/api_tests/http_tests
+      tag: Documentation
+      text: Create a HTTP Test
+
 ---
-## 概要
 
-HTTP トラフィックが HTTPS にリダイレクトされることを監視することは、ユーザーの API エンドポイントおよびアプリケーションとの接続が暗号化されていることを確認するために重要です。
+## Overview
 
-### HTTPS リダイレクトの監視
+Monitoring your HTTP traffic is redirected into HTTPS is critical in ensuring your users' connections are encrypted with your API endpoints and your application.
 
-設定によっては、生成された **Response Preview** タブの Headers に `location` として、または **Body** に `"https:"===window.location.protocol` として HTTPS へのリダイレクトを識別することが可能です。
+### Monitor your HTTPS redirection
 
-HTTP トラフィックが HTTPS にリダイレクトされることを監視するには
+Depending on your setup, you can identify the redirect to HTTPS in the generated **Response Preview** tab under Headers as `location` or in the **Body** as `"https:"===window.location.protocol`.
 
-1. HTTP テストを作成し、[リクエストを定義][1]します。
-2. **Test URL** をクリックします。レスポンスプレビューは、**Request Preview** と **Response Preview** を生成します。
-3. HTTPS へのリダイレクトに関するアサーションを追加します。
-    - レスポンスプレビューで `location` ヘッダーをクリックして、`location` ヘッダーにアサーションを定義します。例えば、**Headers** で、`http://datadoghq.com` の `location` ヘッダーは、`https://datadoghq.com` です。
+To monitor the redirection of your HTTP traffic into HTTPS:
 
-    {{< img src="synthetics/guide/monitor-https-redirections/location-header-https.png" alt="レスポンスプレビューの Location ヘッダー" style="width:100%;" >}}
-    - または、**+ New Assertion** をクリックして、レスポンス本文にアサーションを定義することもできます。`body` `contains` を選択し、テキストフィールドに `"https:"===window.location.protocol` を貼り付けます。
-    {{< img src="synthetics/guide/monitor-https-redirections/https-assertion.png" alt="アサーションの定義" style="width:100%;" >}}
+1. Create an HTTP test and [define the request][1].
+2. Click **Test URL**. The response preview generates a **Request Preview** and **Response Preview**.
+3. Add an assertion about the redirection to HTTPS.
+    - Define an assertion on the `location` header by clicking the `location` header in the response preview. For example, under **Headers**, the `location` header for `http://datadoghq.com` is `https://datadoghq.com`.
 
-テスト作成ワークフローの残りの部分を完了し、HTTP テストを保存します。
+    {{< img src="synthetics/guide/monitor-https-redirections/location-header-https.png" alt="Location header in the response preview" style="width:100%;" >}}
+    - Alternatively, define an assertion on the response body by clicking **+ New Assertion**. Select `body` `contains` and paste `"https:"===window.location.protocol` in the text field. 
+    {{< img src="synthetics/guide/monitor-https-redirections/https-assertion.png" alt="Define your assertion" style="width:100%;" >}}
 
-通知を定義すると、HTTP トラフィックが HTTPS に正しくリダイレクトされない場合に、Datadog が警告を出すことができます。
+Complete the rest of the test creation workflow and save your HTTP test. 
 
-## その他の参考資料
+After defining the notification, Datadog can alert you when your HTTP traffic does not correctly redirect into HTTPS.
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/synthetics/api_test/#define-request
+[1]: /getting_started/synthetics/api_test/#define-request

@@ -1,19 +1,19 @@
 ---
-title: NPM AWS でサポートされるデバイス
-npm_provider: AWS
+title: NPM AWS Supported Services
+npm_provider: aws
 further_reading:
   - link: "https://www.datadoghq.com/blog/network-performance-monitoring"
-    tag: ブログ
-    text: ネットワークパフォーマンスモニタリング
+    tag: Blog
+    text: Network Performance Monitoring
   - link: /network_monitoring/devices
-    tag: ドキュメント
-    text: ネットワークデバイスモニタリング
+    tag: Documentation
+    text: Network Device Monitoring
 ---
 
-Datadog ネットワークパフォーマンスモニタリング (NPM) は自動的に S3、RDS、Kinesis、ELB、Elasticache および次に記載するその他の AWS サービスを検知します:
+Datadog Network Performance Monitoring (NPM) automatically detects S3, RDS, Kinesis, ELB, Elasticache, and other AWS services listed below:
 
 {{< get-npm-integrations "aws" >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

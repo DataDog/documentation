@@ -1,132 +1,130 @@
 ---
-app_id: nginx
-app_uuid: b98a5a97-1d65-4f74-9d1a-b2c1be85a470
-assets:
-  dashboards:
-    NGINX Plus base overview: assets/dashboards/plus_overview.json
-    NGINX-Metrics: assets/dashboards/NGINX-Metrics_dashboard.json
-    NGINX-Overview: assets/dashboards/NGINX-Overview_dashboard.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check:
-      - nginx.net.connections
-      - nginx.connections.active
-      metadata_path: metadata.csv
-      prefix: nginx.
-    process_signatures:
-    - 'nginx: マスタープロセス'
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 31
-    source_type_name: Nginx
-  logs:
-    source: nginx
-  monitors:
-    '[NGINX] 4xx Errors higher than usual': assets/monitors/4xx.json
-    '[NGINX] 5xx Errors higher than usual': assets/monitors/5xx.json
-    '[NGINX] Upstream peers fails': assets/monitors/upstream_peer_fails.json
-  saved_views:
-    4xx_errors: assets/saved_views/4xx_errors.json
-    5xx_errors: assets/saved_views/5xx_errors.json
-    bot_errors: assets/saved_views/bot_errors.json
-    nginx_processes: assets/saved_views/nginx_processes.json
-    status_code_overview: assets/saved_views/status_code_overview.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- configuration & deployment
-- log collection
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/nginx/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: nginx
-integration_id: nginx
-integration_title: Nginx
-integration_version: 6.3.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: nginx
-public_title: Nginx
-short_description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
-supported_os:
-- linux
-- windows
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::構成 & デプロイ
-  - Category::ログの収集
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Nginx
+"app_id": "nginx"
+"app_uuid": "b98a5a97-1d65-4f74-9d1a-b2c1be85a470"
+"assets":
+  "dashboards":
+    "NGINX Plus base overview": "assets/dashboards/plus_overview.json"
+    "NGINX-Metrics": "assets/dashboards/NGINX-Metrics_dashboard.json"
+    "NGINX-Overview": "assets/dashboards/NGINX-Overview_dashboard.json"
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "metrics":
+      "check":
+      - "nginx.net.connections"
+      - "nginx.connections.active"
+      "metadata_path": "metadata.csv"
+      "prefix": "nginx."
+    "process_signatures":
+    - "nginx: master process"
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "31"
+    "source_type_name": "Nginx"
+  "monitors":
+    "[NGINX] 4xx Errors higher than usual": "assets/monitors/4xx.json"
+    "[NGINX] 5xx Errors higher than usual": "assets/monitors/5xx.json"
+    "[NGINX] Upstream peers fails": "assets/monitors/upstream_peer_fails.json"
+  "saved_views":
+    "4xx_errors": "assets/saved_views/4xx_errors.json"
+    "5xx_errors": "assets/saved_views/5xx_errors.json"
+    "bot_errors": "assets/saved_views/bot_errors.json"
+    "nginx_processes": "assets/saved_views/nginx_processes.json"
+    "status_code_overview": "assets/saved_views/status_code_overview.json"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "configuration & deployment"
+- "log collection"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/nginx/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "nginx"
+"integration_id": "nginx"
+"integration_title": "Nginx"
+"integration_version": "6.3.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "nginx"
+"public_title": "Nginx"
+"short_description": "Monitor connection and request metrics. Get more metrics with NGINX Plus."
+"supported_os":
+- "linux"
+- "windows"
+- "macos"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Configuration & Deployment"
+  - "Category::Log Collection"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": "Monitor connection and request metrics. Get more metrics with NGINX Plus."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Nginx"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![NGINX のデフォルトのダッシュボード][1]
+![NGINX default dashboard][1]
 
-## 概要
+## Overview
 
-Datadog Agent は NGINX インスタンスから、次のような多数のメトリクスを収集できます (一例)。
+The Datadog Agent can collect many metrics from NGINX instances, including (but not limited to)::
 
-- 合計リクエスト数
-- 接続数 (許可された接続、処理された接続、アクティブな接続など)
+- Total requests
+- Connections, such as accepted, handled, and active
 
-NGINX の商用版である NGINX Plus のユーザーの場合、Agent は、NGINX Plus が提供する次のような数多くのメトリクスを収集できます。
+For users of NGINX Plus, the commercial version of NGINX, the Agent can collect the significantly more metrics that NGINX Plus provides, like:
 
-- エラー (4xx コード、5xx コードなど)
-- 上流サーバー (アクティブな接続、5xx コード、健全性チェックなど)
-- キャッシュ (サイズ、ヒット数、ミス数など)
-- SSL (ハンドシェイクやハンドシェイクの失敗など)
+- Errors, such as 4xx codes and 5xx codes
+- Upstream servers, such as active connections, 5xx codes, and health checks
+- Caches, such as size, hits, and misses
+- SSL, such as handshakes and failed handshakes
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-NGINX チェックは、ローカルの NGINX ステータスエンドポイントからメトリクスを取得するため、`nginx` バイナリが NGINX ステータスモジュールと共にコンパイルされている必要があります。
+The NGINX check pulls metrics from a local NGINX status endpoint, so your `nginx` binaries need to be compiled with a NGINX status module:
 
-- [スタブステータスモジュール][2] - オープンソース NGINX 用
-- [HTTP ステータスモジュール][3] - NGINX Plus 専用
+- [Stub status module][2] - for open source NGINX
+- [HTTP status module][3] - only for NGINX Plus
 
-#### NGINX オープンソース
+#### NGINX open source
 
-オープンソース NGINX を使用している場合は、インスタンスにスタブステータスモジュールが含まれていないことがあります。**コンフィグレーション**を行う前に、`nginx` バイナリにモジュールが含まれているかを確認してください。
+If you use open source NGINX, your instances may lack the stub status module. Verify that your `nginx` binary includes the module before proceeding to **Configuration**:
 
 ```shell
 $ nginx -V 2>&1| grep -o http_stub_status_module
 http_stub_status_module
 ```
 
-コマンドの出力に `http_stub_status_module` が含まれていない場合は、このモジュールを含む NGINX パッケージをインストールする必要があります。独自の NGINX をコンパイルして、コンパイル時にモジュールを有効化することもできますが、最新の Linux ディストリビューションで提供されている代替 NGINX パッケージには、外部モジュールのさまざまな組み合わせが組み込まれています。ご使用のオペレーティングシステムの NGINX パッケージをチェックして、スタブステータスモジュールが含まれているパッケージを探してください。
+If the command output does not include `http_stub_status_module`, you must install an NGINX package that includes the module. You _can_ compile your own NGINX-enabling the module as you compile it-but most modern Linux distributions provide alternative NGINX packages with various combinations of extra modules built in. Check your operating system's NGINX packages to find one that includes the stub status module.
 
 #### NGINX Plus
 
-リリース 13 より前の NGINX Plus パッケージにはHTTP ステータスモジュールが含まれています。リリース 13 以降の NGINX Plus では、このステータスモジュールは非推奨になり、代わりに新しい Plus API を使用する必要があります。詳細については、[こちらのお知らせ][4]を参照してください。
+NGINX Plus packages prior to release 13 include the http status module. For NGINX Plus release 13 and above, the status module is deprecated and you must use the new Plus API instead. See [the announcement][4] for more information.
 
-#### NGINX の準備
+#### Prepare NGINX
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-各 NGINX サーバーで、他の NGINX 構成ファイルが含まれているディレクトリ (`/etc/nginx/conf.d/` など) に `status.conf` ファイルを作成します。
+On each NGINX server, create a `status.conf` file in the directory that contains your other NGINX configuration files, such as `/etc/nginx/conf.d/`.
 
 ```conf
 server {
@@ -138,28 +136,28 @@ server {
   deny all;
 
   location /nginx_status {
-    # ステータスモジュールを選択します
+    # Choose your status module
 
-    # オープンソース NGINX を自由に利用できます
+    # freely available with open source NGINX
     stub_status;
 
-    # バージョン 1.7.5 以前の オープンソース NGINX で使用します
+    # for open source NGINX < version 1.7.5
     # stub_status on;
 
-    # NGINX Plus でのみ使用できます
+    # available only with NGINX Plus
     # status;
 
-   # バージョン情報を取得できるようにします
-   server_tokens on;
+    # ensures the version information can be retrieved
+    server_tokens on;
   }
 }
 ```
 
 **NGINX Plus**
 
-NGINX Plus ユーザーは、`stub_status` を使用することもできますが、このモジュールで提供されるメトリクスは少ないため、`status` の使用をお勧めします。
+NGINX Plus users can also use `stub_status`, but since that module provides fewer metrics, Datadog recommends using `status`.
 
-NGINX Plus リリース 15 以降では、`status` モジュールは非推奨です。代わりに [http_api_module][1] を使用してください。たとえば、メインの NGINX 構成ファイル (`/etc/nginx/conf.d/default.conf`) で `/api` エンドポイントを有効にするには、以下のようにします。
+For NGINX Plus releases 15+, the `status` module is deprecated. Use the [http_api_module][1] instead. For example, enable the `/api` endpoint in your main NGINX configuration file (`/etc/nginx/conf.d/default.conf`):
 
 ```conf
 server {
@@ -170,17 +168,17 @@ server {
 }
 ```
 
-NGINX Plus を使用してさらに詳細なメトリクス (毎秒の 2xx / 3xx / 4xx / 5xx 応答数など) を取得するには、監視するサーバーで `status_zone` を設定します。たとえば、以下のとおりです。
+To get more detailed metrics with NGINX Plus (such as 2xx / 3xx / 4xx / 5xx response counts per second), set a `status_zone` on the servers you want to monitor. For example:
 
 ```conf
 server {
   listen 80;
-  status_zone <ゾーン名>;
+  status_zone <ZONE_NAME>;
   ...
 }
 ```
 
-NGINX をリロードして、status または API エンドポイントを有効にします。完全な再起動は必要ありません。
+Reload NGINX to enable the status or API endpoint. There's no need for a full restart.
 
 ```shell
 sudo nginx -t && sudo nginx -s reload
@@ -189,7 +187,7 @@ sudo nginx -t && sudo nginx -s reload
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-以下のスニペットを構成 ConfigMaps に追加し、別のポートでメトリクスエンドポイントを公開します。
+Add the following snippet to your configuration ConfigMaps to expose the metrics endpoint in a different port:
 
 ```yaml
 kind: ConfigMap
@@ -211,7 +209,7 @@ data:
     }
 ```
 
-次に、NGINX ポッドで `81` エンドポイントを公開し、そのファイルを NGINX 構成フォルダーにマウントします。
+Then, in your NGINX pod, expose the `81` endpoint and mount that file in the NGINX configuration folder:
 
 ```yaml
 spec:
@@ -234,46 +232,46 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### ブラウザトラブルシューティング
+### Configuration
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
+Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Docker](?tab=docker#docker), [Kubernetes](?tab=kubernetes#kubernetes), or [ECS](?tab=ecs#ecs) sections.
 
-##### メトリクスの収集
+##### Metric collection
 
-1. [NGINX メトリクス](#metrics)の収集を開始するには、`nginx.d/conf.yaml` ファイルで `nginx_status_url` パラメーターを `http://localhost:81/nginx_status/` に設定します。使用可能なすべての構成オプションの詳細については、[サンプル nginx.d/conf.yaml][1] を参照してください。
+1. Set the `nginx_status_url` parameter to `http://localhost:81/nginx_status/` in your `nginx.d/conf.yaml` file to start gathering your [NGINX metrics](#metrics). See the [sample nginx.d/conf.yaml][1] for all available configuration options.
 
     **NGINX Plus**:
 
-      - NGINX Plus リリース 13 以降の場合は、`nginx.d/conf.yaml` 構成ファイルでパラメーター `use_plus_api` を `true` に設定します。
-      - ストリーム統計 API 呼び出しは、NGINX Plus のデフォルトで含まれています。これを無効にしたい場合は、`nginx.d/conf.yaml` コンフィギュレーションファイルでパラメーター `use_plus_api_stream` を `false` に設定します。
-      - `http_api_module` を使用する場合は、`nginx.d/conf.yaml` 構成ファイルでパラメーター `nginx_status_url` をサーバーの `/api` の場所に設定します。以下に例を示します。
+      - For NGINX Plus releases 13+, set the parameter `use_plus_api` to `true` in your `nginx.d/conf.yaml` configuration file.
+      - Stream stats API calls are included by default for NGINX Plus. If you want to disable them, set the parameter `use_plus_api_stream` to `false` in your `nginx.d/conf.yaml` configuration file.
+      - If you are using `http_api_module`, set the parameter `nginx_status_url` to the server's `/api` location in your `nginx.d/conf.yaml` configuration file, for example:
 
           ```yaml
           nginx_status_url: http://localhost:8080/api
           ```
 
-2. オプション - NGINX の `vhost_traffic_status module` を使用する場合は、`nginx.d/conf.yaml` 構成ファイルでパラメーター `use_vts` を `true` に設定します。
+2. Optional - If you are using the NGINX `vhost_traffic_status module`, set the parameter `use_vts` to `true` in your `nginx.d/conf.yaml` configuration file.
 
-3. [Agent を再起動][2]すると、Datadog への NGINX メトリクスの送信が開始されます。
+3. [Restart the Agent][2] to start sending NGINX metrics to Datadog.
 
-##### 収集データ
+##### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
 
    ```yaml
    logs_enabled: true
    ```
 
-2. NGINX のログの収集を開始するには、次の構成ブロックを `nginx.d/conf.yaml` ファイルに追加します。
+2. Add this configuration block to your `nginx.d/conf.yaml` file to start collecting your NGINX Logs:
 
    ```yaml
    logs:
@@ -288,15 +286,15 @@ _Agent バージョン 6.0 以降で利用可能_
        source: nginx
    ```
 
-    `service` パラメーターと `path` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nginx.d/conf.yaml][1] を参照してください。
+    Change the `service` and `path` parameter values and configure them for your environment. See the [sample nginx.d/conf.yaml][1] for all available configuration options.
 
-3. [Agent を再起動します][2]。
+3. [Restart the Agent][2].
 
-**注**: NGINX のデフォルトのログ形式には、リクエスト応答時間が含まれていません。これをログに含めるには、NGINX 構成ファイル (`/etc/nginx/nginx.conf`) の `http` セクションに以下の構成ブロックを追加して、NGINX のログ形式を更新します。
+**Note**: The default NGINX log format does not have a request response time. To include it into your logs, update the NGINX log format by adding the following configuration block in the `http` section of your NGINX configuration file (`/etc/nginx/nginx.conf`):
 
 ```conf
 http {
-    #推奨ログフォーマット
+    #recommended log format
     log_format nginx '\$remote_addr - \$remote_user [\$time_local] '
                   '"\$request" \$status \$body_bytes_sent \$request_time '
                   '"\$http_referer" "\$http_user_agent"';
@@ -306,17 +304,17 @@ http {
 ```
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/nginx/datadog_checks/nginx/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Docker" %}}
 
 #### Docker
 
-コンテナで実行中の Agent に対してこのチェックを構成するには:
+To configure this check for an Agent running on a container:
 
-##### メトリクスの収集
+##### Metric collection
 
-アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+Set [Autodiscovery Integration Templates][1] as Docker labels on your application container:
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["nginx"]'
@@ -324,34 +322,34 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"nginx_status_url": "http://%%host%%:81/nginx_status/"}]'
 ```
 
-**注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
+**Note**: This instance configuration works only with NGINX Open Source. If you are using NGINX Plus, inline the corresponding instance configuration.
 
-#### 収集データ
+#### Log collection
 
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker Log Collection][2].
 
-次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
+Then, set [Log Integrations][3] as Docker labels:
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"nginx","service":"nginx"}]'
 ```
 
-[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
-[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#installation
+[3]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### ガイド
+#### Kubernetes
 
-このチェックを、Kubernetes で実行している Agent に構成します。
+To configure this check for an Agent running on Kubernetes:
 
-##### メトリクスの収集
+##### Metric collection
 
-アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][2]を使用してテンプレートを構成することもできます。
+Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Alternatively, you can configure templates with a [file, configmap, or key-value store][2].
 
-**Annotations v1** (Datadog Agent < v7.36 向け)
+**Annotations v1** (for Datadog Agent < v7.36)
 
 ```yaml
 apiVersion: v1
@@ -371,7 +369,7 @@ metadata:
     name: nginx
 ```
 
-**Annotations v2** (Datadog Agent v7.36+ 向け)
+**Annotations v2** (for Datadog Agent v7.36+)
 
 ```yaml
 apiVersion: v1
@@ -394,14 +392,14 @@ metadata:
     name: nginx
 ```
 
-**注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
+**Note**: This instance configuration works only with NGINX Open Source. If you are using NGINX Plus, inline the corresponding instance configuration.
 
-#### 収集データ
+#### Log collection
 
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][3].
 
-次に、[ログインテグレーション][4]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][5]を使用してこれを構成することもできます。
+Then, set [Log Integrations][4] as pod annotations. Alternatively, you can configure this with a [file, configmap, or key-value store][5].
 
 **Annotations v1/v2**
 
@@ -416,21 +414,21 @@ metadata:
     name: nginx
 ```
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
-[3]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
-[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
+[4]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
+[5]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=daemonset#configuration
 {{% /tab %}}
 {{% tab "ECS" %}}
 
 #### ECS
 
-このチェックを、ECS で実行している Agent に構成するには:
+To configure this check for an Agent running on ECS:
 
-##### メトリクスの収集
+##### Metric collection
 
-アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
 
 ```json
 {
@@ -446,14 +444,14 @@ metadata:
 }
 ```
 
-**注**: このインスタンスは NGINX オープンソースでのみ機能します。NGINX Plus を使用している場合は、対応するインスタンス構成をインライン化します。
+**Note**: This instance configuration works only with NGINX Open Source. If you are using NGINX Plus, inline the corresponding instance configuration.
 
-##### 収集データ
+##### Log collection
 
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [ECS Log Collection][2].
 
-次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
+Then, set [Log Integrations][3] as Docker labels:
 
 ```yaml
 {
@@ -467,25 +465,25 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 }
 ```
 
-[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
-[3]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
+[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/agent/amazon_ecs/logs/?tab=linux
+[3]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `nginx` を探します。
+[Run the Agent's status subcommand][5] and look for `nginx` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "nginx" >}}
 
 
-オープンソース NGINX のユーザーは、ここに示したメトリクスのすべてを利用できるわけではありません。各モジュールで提供されるメトリクスを確認するには、[スタブステータス][2] (オープンソース NGINX) と [HTTP ステータス][3] (NGINX Plus) のモジュールリファレンスを比較してください。
+Not all metrics shown are available to users of open source NGINX. Compare the module reference for [stub status][2] (open source NGINX) and [http status][3] (NGINX Plus) to understand which metrics are provided by each module.
 
-オープンソース NGINX と NGINX Plus では名前が異なるメトリクスがいくつかありますが、それらは同じメトリクスです。
+A few open-source NGINX metrics are named differently in NGINX Plus, but they are the same metric:
 
 | NGINX                          | NGINX Plus                   |
 | ------------------------------ | ---------------------------- |
@@ -494,49 +492,49 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 | `nginx.net.conn_dropped_per_s` | `nginx.connections.dropped`  |
 | `nginx.net.request_per_s`      | `nginx.requests.total`       |
 
-次のメトリクスは、正確には同じメトリクスではありませんが、関連はあります。
+These metrics don't refer exactly to the same metric, but they are somewhat related:
 
 | NGINX               | NGINX Plus               |
 | ------------------- | ------------------------ |
 | `nginx.net.waiting` | `nginx.connections.idle` |
 
-最後に、次のメトリクスには対応するメトリクスがありません。
+Finally, these metrics have no good equivalent:
 
-| エラー予算アラート              | 説明                                                                               |
+| Metric              | Description                                                                               |
 | ------------------- | ----------------------------------------------------------------------------------------- |
-| `nginx.net.reading` | nginx がリクエストヘッダーを読み取っている現在の接続数。              |
-| `nginx.net.writing` | nginx がクライアントへの応答を書き込んでいる現在の接続数。 |
+| `nginx.net.reading` | The current number of connections where nginx is reading the request header.              |
+| `nginx.net.writing` | The current number of connections where nginx is writing the response back to the client. |
 
-### ヘルプ
+### Events
 
-NGINX チェックには、イベントは含まれません。
+The NGINX check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "nginx" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-- [あるはずのタイムスタンプがログに含まれないのはなぜですか？][6]
+- [Why do my logs not have the expected timestamp?][6]
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+Need help? Contact [Datadog support][7].
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [NGINX の監視方法][8]
-- [NGINX メトリクスの収集方法][9]
-- [Datadog を使用した NGINX の監視方法][10]
+- [How to monitor NGINX][8]
+- [How to collect NGINX metrics][9]
+- [How to monitor NGINX with Datadog][10]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/nginx/images/nginx_dashboard.png
 [2]: https://nginx.org/en/docs/http/ngx_http_stub_status_module.html
 [3]: https://nginx.org/en/docs/http/ngx_http_status_module.html
 [4]: https://www.nginx.com/blog/nginx-plus-r13-released
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
-[7]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/logs/faq/why-do-my-logs-not-have-the-expected-timestamp/
+[7]: https://docs.datadoghq.com/help/
 [8]: https://www.datadoghq.com/blog/how-to-monitor-nginx
 [9]: https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/index.html
 [10]: https://www.datadoghq.com/blog/how-to-monitor-nginx-with-datadog/index.html

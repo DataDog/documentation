@@ -1,6 +1,6 @@
 ---
+title: manifest (Kubernetes)
 core_product:
-- infrastructure monitoring
-title: マニフェスト (Kubernetes)
+  - infrastructure monitoring
 ---
-Kubernetes において、マニフェストとは、クラスター内のリソースの作成と管理を記述したファイルです。
+In Kubernetes, a manifest is a file that describes the creation and management of resources in a cluster.

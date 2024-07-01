@@ -1,60 +1,60 @@
 ---
-categories:
-- AWS
-- クラウド
-- ログの収集
-- ネットワーク
-- トレーシング
-creates_events: false
-dependencies: []
-description: AWS App Mesh はオープンソースのエッジおよびサービスプロキシです。
-display_name: AWS App Mesh
-draft: false
-further_reading:
-- link: https://docs.datadoghq.com/integrations/envoy/
-  tag: ドキュメント
-  text: Envoy インテグレーション
-git_integration_title: amazon_app_mesh
-guid: 04669673-120b-48c9-a855-06d57d92c7cf
-integration_id: amazon-app-mesh
-integration_title: AWS App Mesh
-integration_version: ''
-is_public: true
-kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: envoy.
-metric_to_check: envoy.stats.overflow
-name: amazon_app_mesh
-public_title: Datadog-AWS App Mesh インテグレーション
-short_description: AWS App Mesh はオープンソースのエッジおよびサービスプロキシです。
-support: コア
-supported_os:
+"categories":
+- aws
+- cloud
+- log collection
+- network
+- tracing
+"creates_events": false
+"custom_kind": "integration"
+"dependencies": []
+"description": "AWS App Mesh is an open source edge and service proxy."
+"display_name": "AWS App Mesh"
+"draft": false
+"further_reading":
+- "link": "https://docs.datadoghq.com/integrations/envoy/"
+  "tag": Documentation
+  "text": Envoy integration
+"git_integration_title": "amazon_app_mesh"
+"guid": "04669673-120b-48c9-a855-06d57d92c7cf"
+"integration_id": "amazon-app-mesh"
+"integration_title": "AWS App Mesh"
+"integration_version": ""
+"is_public": true
+"maintainer": "help@datadoghq.com"
+"manifest_version": "1.0.0"
+"metric_prefix": "envoy."
+"metric_to_check": "envoy.stats.overflow"
+"name": "amazon_app_mesh"
+"public_title": "Datadog-AWS App Mesh Integration"
+"short_description": "AWS App Mesh is an open source edge and service proxy."
+"support": "core"
+"supported_os":
 - linux
 - mac_os
 - windows
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-[AWS App Mesh][1] は、Amazon ECS Fargate クラスターや AWS EKS クラスターで実行するマイクロサービスにアプリケーションレベルのネットワーキングを提供するサービスメッシュです。
+[AWS App Mesh][1] is a service mesh that provides application-level networking to your micro services running on Amazon ECS Fargate or AWS EKS clusters.
 
 
-## 計画と使用
+## Setup
 
 {{< tabs >}}
 {{% tab "EKS" %}}
 
-下記の指示に従って、Envoy と呼ばれる AWS App Mesh のサイドカープロキシのメトリクスの収集を有効にします。デプロイ、後でデプロイをパッチ、AWS App Mesh インジェクターコントローラーを使用、のいずれかの方法を選択してサイドカーを追加します。どの方法を選択しても、下記のステップで実行できます。
+Use the instructions below to enable metric collection for the AWS App Mesh proxy sidecar, called Envoy. Users can choose to add sidecars in one of three modes: deploying, patching the deployment later, or using the AWS App Mesh injector controller. All modes are supported by the following steps.
 
-#### メトリクスの収集
+#### Metric collection
 
-**前提条件**: [EKS インテグレーション][1]ドキュメントを参考にして、Datadog Agent を Kubernetes クラスターで DaemonSet としてデプロイします。
+**Prerequisite**: Deploy Datadog Agents as a DaemonSet in your Kubernetes cluster using the [EKS integration][1] documentation.
 
-1. App Mesh の制限により、EKS から Datadog へメトリクスを転送するには Egress フィルターを `Allow External Traffic` に設定する必要があります。
+1. Due to limitations in App Mesh, forwarding metrics from EKS to Datadog requires the Egress filter to be set to `Allow External Traffic`.
 
-2. クラスターで ConfigMap を作成し、各ポッドに追加されている App Mesh の Envoy サイドカーを自動的に検出します。
+2. Create a ConfigMap in your cluster to automatically discover App Mesh’s Envoy side cars that are added to each pod:
 
     ```yaml
       apiVersion: v1
@@ -72,7 +72,7 @@ supported_os:
             - <TAG_KEY>:<TAG_VALUE>  # Example - cluster:eks-appmesh
     ```
 
-3. Datadog Agent の DaemonSet YAML ファイルで `volumeMounts` オブジェクトをアップデートします。
+3. Update the `volumeMounts` object in your Datadog Agent’s DaemonSet YAML file:
 
     ```yaml
           volumeMounts:
@@ -80,7 +80,7 @@ supported_os:
              mountPath: /conf.d
     ```
 
-4. Datadog Agent の DaemonSet YAML ファイルで `volumes` オブジェクトをアップデートします。
+4. Update the `volumes` object in your Datadog Agent’s DaemonSet YAML file:
 
     ```yaml
          volumes:
@@ -92,25 +92,25 @@ supported_os:
                 path: envoy.yaml
     ```
 
-#### 収集データ
+#### Log collection
 
 {{< site-region region="us3" >}}
 
-ログ収集は、このサイトではサポートされていません。
+Log collection is not supported for this site.
 
 {{< /site-region >}}
 
 {{< site-region region="us,eu,gov" >}}
 
-ログの収集を有効にするには、[Kubernetes ログ収集の説明][1]に従って Agent の DaemonSet をアップデートします。
+To enable log collection, update the Agent’s DaemonSet with the dedicated [Kubernetes log collection instructions][1].
 
-[1]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/#log-collection
+[1]: https://docs.datadoghq.com/integrations/ecs_fargate/#log-collection
 
 {{< /site-region >}}
 
-#### トレースの収集
+#### Trace collection
 
-namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) をデプロイします。オプションでこれを使用し、以下のように appmesh-injector をデプロイします。
+Select the namespace to deploy the `datadog-agent` and service, for example: `monitoring`. Use this in the option to deploy the appmesh-injector with:
 
     ```shell
       helm upgrade -i appmesh-controller eks/appmesh-controller \
@@ -123,21 +123,21 @@ namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) 
     ```
 
 
-または、[EKS を使用した App Mesh][2] ドキュメントの説明に従って、オプションの `enable-datadog-tracing=true` や環境変数の `ENABLE_DATADOG_TRACING=true` を使用して appmesh インジェクターをデプロイすることもできます。
+Alternatively, the appmesh injector can be deployed by following the [App Mesh with EKS][2] documentation using the option `enable-datadog-tracing=true` or environment variable `ENABLE_DATADOG_TRACING=true`.
 
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_eks/
+[1]: https://docs.datadoghq.com/integrations/amazon_eks/
 [2]: https://github.com/aws/aws-app-mesh-examples/blob/master/walkthroughs/eks/base.md#install-app-mesh--kubernetes-components
 {{% /tab %}}
 {{% tab "ECS Fargate" %}}
 
-#### メトリクスの収集
+#### Metric collection
 
-**前提条件**: [ECS Fargate インテグレーション][1]ドキュメントを参考にして、有効化された App Mesh (Envoy サイドカーがインジェクト済みなど) により Datadog Agent を各 Fargate タスク定義に追加します。
+**Prerequisite**: Add Datadog Agents to each of your Fargate task definitions with App Mesh enabled, such as an Envoy sidecar injected, using the [ECS Fargate integration][1] documentation.
 
-1. App Mesh の制限により、ECS から Datadog へメトリクスを転送するには Egress フィルターを `Allow External Traffic` に設定する必要があります。
+1. Due to limitations in App Mesh, forwarding metrics from an ECS task to Datadog requires the Egress filter to be set to `Allow External Traffic`.
 
-2. 下記の Docker ラベルを使用して、Envoy サイドカーと Datadog Agent を含むタスク定義をアップデートします。詳細については、[ECS Fargate インテグレーションのセットアップ][2]をご参照ください。
+2. Update all task definitions containing the Envoy sidecar and Datadog Agent with the following Docker labels. See [Integration Setup for ECS Fargate][2] for details.
 
     ```text
         "dockerLabels": {
@@ -147,43 +147,43 @@ namespace を選択して、`datadog-agent` とサービス (例: `monitoring`) 
             },
     ```
 
-#### 収集データ
+#### Log collection
 
 {{< site-region region="us3" >}}
 
-ログ収集は、このサイトではサポートされていません。
+Log collection is not supported for this site.
 
 {{< /site-region >}}
 
 {{< site-region region="us,eu,gov" >}}
 
-[ECS Fargate インテグレーションドキュメント][1]の説明に従って、ログの収集を有効化します。
+Enable log collection with the instructions in the [ECS Fargate integration documentation][1].
 
-[1]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/#log-collection
+[1]: https://docs.datadoghq.com/integrations/ecs_fargate/#log-collection
 
 {{< /site-region >}}
 
-#### トレースの収集
+#### Trace collection
 
-1. [ECS Fargate インテグレーション][3]ドキュメントの説明に従って、トレースの収集を有効化します。
+1. Enable trace collection with the instructions in the [ECS Fargate integration][3] documentation.
 
-AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADOG_TRACER_PORT` を ECS Fargate タスク定義の環境変数として設定します。詳細は [AWS App Mesh][4] ドキュメントを参照してください。
+Set the AWS App Mesh parameters `ENABLE_ENVOY_DATADOG_TRACING` and `DATADOG_TRACER_PORT` as environment variables in the ECS Fargate task definition. Learn more in the [AWS App Mesh][4] documentation.
 
 
-[1]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/
-[2]: https://docs.datadoghq.com/ja/integrations/faq/integration-setup-ecs-fargate/
-[3]: https://docs.datadoghq.com/ja/integrations/ecs_fargate/#trace-collection
+[1]: https://docs.datadoghq.com/integrations/ecs_fargate/
+[2]: https://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate/
+[3]: https://docs.datadoghq.com/integrations/ecs_fargate/#trace-collection
 [4]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
 {{% /tab %}}
 {{% tab "ECS EC2" %}}
 
-#### メトリクスの収集
+#### Metric collection
 
-**前提条件**: [ECS インテグレーション][1]ドキュメントを参考にして、有効化された App Mesh (Envoy サイドカーがインジェクト済みなど) により、Datadog Agent を各  ECS EC2 タスク定義に追加します。
+**Prerequisite**: Add Datadog Agents to each of your ECS EC2 task definitions with App Mesh enabled, such as an Envoy sidecar injected, using the [ECS integration][1] documentation.
 
-1. App Mesh の制限により、ECS から Datadog へメトリクスを転送するには Egress フィルターを `Allow External Traffic` に設定する必要があります。
+1. Due to limitations in App Mesh, forwarding metrics from an ECS task to Datadog requires the Egress filter to be set to `Allow External Traffic`.
 
-2. 下記の Docker ラベルを使用して、Envoy サイドカーと Datadog Agent を含むタスク定義をアップデートします。詳細については、[ECS Fargate インテグレーションのセットアップ][2]をご参照ください。
+2. Update all task definitions containing the Envoy sidecar and Datadog Agent with the following Docker labels. See [Integration Setup for ECS Fargate][2] for details.
 
     ```text
         "dockerLabels": {
@@ -193,58 +193,59 @@ AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADO
             },
     ```
 
-#### 収集データ
+#### Log collection
 
 {{< site-region region="us3" >}}
 
-ログ収集は、このサイトではサポートされていません。
+Log collection is not supported for this site.
 
 {{< /site-region >}}
 
 {{< site-region region="us,eu,gov" >}}
 
-[ECS インテグレーションドキュメント][1]の説明に従って、ログの収集を有効化します。
+Enable log collection with the instructions in the [ECS integration documentation][1].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/#log-collection
+[1]: https://docs.datadoghq.com/integrations/amazon_ecs/#log-collection
 
 {{< /site-region >}}
 
-#### トレースの収集
+#### Trace collection
 
-1. [ECS インテグレーション][3]ドキュメントの説明に従って、トレースの収集を有効化します。
+1. Enable trace collection with the instructions in the [ECS integration][3] documentation.
 
-2. AWS App Mesh パラメーター `ENABLE_ENVOY_DATADOG_TRACING` および `DATADOG_TRACER_PORT` を ECS タスク定義の環境変数として設定します。詳細は [AWS App Mesh][4] ドキュメントを参照してください。
+2. Set the AWS App Mesh parameters `ENABLE_ENVOY_DATADOG_TRACING` and `DATADOG_TRACER_PORT` as environment variables in the ECS task definition. Learn more in the [AWS App Mesh][4] documentation.
 
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/
-[2]: https://docs.datadoghq.com/ja/integrations/faq/integration-setup-ecs-fargate/
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_ecs/#trace-collection
+[1]: https://docs.datadoghq.com/integrations/amazon_ecs/
+[2]: https://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate/
+[3]: https://docs.datadoghq.com/integrations/amazon_ecs/#trace-collection
 [4]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
 {{% /tab %}}
 {{< /tabs >}}
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-メトリクス一覧については、[Envoy インテグレーション][2]をご参照ください。
+See the [Envoy integration][2] for a list of metrics.
 
-### ヘルプ
+### Events
 
-AWS  App Mesh インテグレーションには、イベントは含まれません。
+The AWS App Mesh integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-AWS App Mesh インテグレーションには、サービスチェック機能は含まれません。
+The AWS App Mesh integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://aws.amazon.com/app-mesh
-[2]: https://docs.datadoghq.com/ja/integrations/envoy/#metrics
-[3]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/integrations/envoy/#metrics
+[3]: https://docs.datadoghq.com/help/
+

@@ -1,53 +1,53 @@
 ---
-aliases:
-- /ja/logs/log_collection/kubernetes_audit_logs
-categories:
-- ログの収集
-- コンテナ
-- オーケストレーション
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md
-description: Kubernetes クラスター内で起きるすべてのことを追跡
-doc_link: /integrations/kubernetes_audit_logs/
-further_reading:
-- link: logs/
-  tag: ドキュメント
-  text: ログ管理
-- link: https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/
-  tag: ブログ
-  text: クラスターセキュリティを監視するための主要な Kubernetes 監査ログ
-has_logo: true
-integration_id: kubernetes-audit-logs
-integration_title: Kubernetes 監査ログ
-is_public: true
-kind: インテグレーション
+title: Kubernetes Audit Logs
 name: kubernetes_audit_logs
-public_title: Datadog-Kubernetes 監査ログ
-short_description: Kubernetes クラスターの内部を追跡
+custom_kind: integration
+description: 'Track everything that happens inside your Kubernetes clusters'
+short_description: 'Track inside Kubernetes clusters'
+dependencies:
+    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md"]
+categories:
+    - log collection
+    - containers
+    - orchestration
+doc_link: /integrations/kubernetes_audit_logs/
+aliases:
+    - /logs/log_collection/kubernetes_audit_logs
+has_logo: true
+integration_title: Kubernetes Audit Logs
+is_public: true
+public_title: Datadog-Kubernetes Audit Logs
 supported_os:
-- linux
-- mac_os
-- windows
-title: Kubernetes 監査ログ
+    - linux
+    - mac_os
+    - windows
+further_reading:
+    - link: logs/
+      tag: Documentation
+      text: Log Management
+    - link: "https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/"
+      tag: Blog
+      text: Key Kubernetes audit logs for monitoring cluster security
+integration_id: "kubernetes-audit-logs"
 ---
 
-## 概要
+## Overview
 
-[Kubernetes 監査ログ][1]を収集すると、任意のサービスで作成される Kubernetes API へのあらゆる呼び出しをはじめ、Kubernetes クラスター内で起こるすべてのことを追跡できます。たとえば、Control Plane（ビルトインコントローラ、スケジューラ）、ノードのデーモン（kubelet、kube-proxy、その他）、クラスターサービス（クラスターのオートスケーラーなど）、ユーザーが作成する `kubectl` リクエスト、さらに Kubernetes API 自体も追跡できます。
+Collect [Kubernetes audit logs][1] to track everything that happens inside your Kubernetes clusters, including every call made to the Kubernetes API by any service. This includes the control plane (built-in controllers, the scheduler), node daemons (the kubelet, kube-proxy, and others), cluster services (such as the cluster autoscaler), users making `kubectl` requests, and even the Kubernetes API itself.
 
-Kubernetes 監査ログインテグレーションを使用すると、アクセス許可の問題を診断したり、更新すべき RBAC ポリシーを特定したり、クラスター全体に影響を与えるほどレスポンスの遅い API リクエストを追跡したりできます。これらのトピックについて詳しくは、[KubeCon 2019 での Datadog による講演を参照してください][2]。
+With the Kubernetes audit logs integration, you can diagnose permission issues, identify RBAC policies that need to be updated, and track slow API requests that are impacting your whole cluster. Deep dive into these topics with the [Datadog talk at KubeCon 2019][2].
 
-## セットアップ
+## Setup
 
-このインテグレーションは **Agent 6.0 以上**で使用可能です。
+This integration is **available for Agent >6.0**
 
-### コンフィギュレーション
+### Configuration
 
-Kubernetes 監査ログの設定について詳しくは、[Kubernetes Auditing][3] を参照してください。
+For more information about setting up Kubernetes audit logs, see [Kubernetes Auditing][3].
 
-Kubernetes で監査ログを有効にするには
+To enable audit logs in Kubernetes:
 
-1. Kubernetes の監査ログはデフォルトで無効になっています。監査ログを API サーバーコンフィギュレーションで有効にするには、監査ポリシーファイルのパスを以下のように指定します。
+1. Audit logs are disabled by default in Kubernetes. To enable them in your API server configuration, specify an audit policy file path:
 
     ```conf
     kube-apiserver
@@ -56,7 +56,7 @@ Kubernetes で監査ログを有効にするには
       --audit-policy-file=/etc/kubernetes/audit-policies/policy.yaml
     ```
 
-2. ポリシーファイルを `/etc/kubernetes/audit-policies/policy.yaml` に作成し、監査ログに取得する API リクエストのタイプを指定します。監査ポリシー規則は上から順に評価されます。API サーバーは操作やリソースのタイプ別に規則を探し、一致する最初の規則に従います。監査ポリシーの例を以下に示します。
+2. Create the policy file at `/etc/kubernetes/audit-policies/policy.yaml` to specify the types of API requests you want to capture in your audit logs. Audit policy rules are evaluated in order. The API server follows the first matching rule it finds for each type of operation or resource. Example of an audit policy:
 
 ```yaml
 # /etc/kubernetes/audit-policies/policy.yaml
@@ -64,7 +64,7 @@ Kubernetes で監査ログを有効にするには
 apiVersion: audit.k8s.io/v1
 kind: Policy
 rules:
-    # 以下のリクエストのログは作成しない
+    # do not log requests to the following
     - level: None
       nonResourceURLs:
           - '/healthz*'
@@ -73,7 +73,7 @@ rules:
           - '/swagger*'
           - '/version'
 
-    # 仕様やステータスにトークンを含めないようにレベルを Metadata に制限する
+    # limit level to Metadata so token is not included in the spec/status
     - level: Metadata
       omitStages:
           - RequestReceived
@@ -82,7 +82,7 @@ rules:
             resources:
                 - tokenreviews
 
-    # 認証委任の監査を拡張
+    # extended audit of auth delegation
     - level: RequestResponse
       omitStages:
           - RequestReceived
@@ -91,32 +91,32 @@ rules:
             resources:
                 - subjectaccessreviews
 
-    # ポッド変更のログを RequestResponse レベルで作成
+    # log changes to pods at RequestResponse level
     - level: RequestResponse
       omitStages:
           - RequestReceived
       resources:
-          # コア API グループ; 必要に応じてサードパーティまたは自作の API サービスを追加
+          # core API group; add third-party API services and your API services if needed
           - group: ''
             resources: ['pods']
             verbs: ['create', 'patch', 'update', 'delete']
 
-    # その他すべてのログを Metadata レベルで作成
+    # log everything else at Metadata level
     - level: Metadata
       omitStages:
           - RequestReceived
 ```
 
-このポリシーの例では、特定のタイプの操作（更新、パッチ、作成、削除）によってクラスターが変更された場合に、最高レベルの詳細なログが API サーバーによって作成されます。また、`subjectaccessreviews` リソースへのリクエストも最高レベルで追跡され、認証委任の問題を解決するために役立てることができます。
+This example policy file configures the API server to log at the highest level of detail for certain types of cluster-changing operations (update, patch, create, delete). It also tracks requests to the `subjectaccessreviews` resource at the highest level to help troubleshoot authentication delegation issues.
 
-機密性の高いデータ（`tokenreviews` リソースなど）を含むエンドポイントに対しては、ログの詳細レベルを `Metadata` まで下げることをお勧めします。これにより、`RequestReceived` のステージもログから省略されます。
+You may want to reduce the level of verbosity to `Metadata` for endpoints that contain sensitive data, such as the `tokenreviews` resource. Datadog also omits the `RequestReceived` stage from logs.
 
-最後のセクションでは、先行する規則で明示されていないすべてのことに対し、`Metadata` レベルでログを作成するようにポリシーが構成されます。監査ログがあまりに詳細な場合は、重要度の低いアクションや動詞（list、watch、get などクラスターの状態が変化しない操作）を除外することもできます。
+In the last section, for everything that was not explicitly configured by the previous rules, the policy is configured to log at `Metadata` level. As audit logs might be verbose, you can choose to exclude less critical actions/verbs, such as operations that don't change the cluster state like list, watch, and get.
 
-### ログの収集
+### Log collection
 
-1. Kubernetes 環境に [Agent をインストール][1]します。
-2. ログの収集はデフォルトで無効になっています。[DaemonSet][4] の `env` セクションでこれを有効にします。
+1. [Install the Agent][1] on your Kubernetes environment.
+2. Log collection is disabled by default. Enable it in the `env` section of your [DaemonSet][4]:
 
     ```yaml
     env:
@@ -125,7 +125,7 @@ rules:
           value: 'true'
     ```
 
-3. 監査ログのディレクトリと、Agent が使用するディレクトリをマウントし、ポインタを格納して、最後に送信されたログをそのファイルから特定できるようにします。それには、daemonset の `volumeMounts` セクションに以下を追加します。
+3. Mount the audit log directory as well as a directory that the Agent uses to store a pointer to know which log was last sent from that file. To do this, add the following in the `volumeMounts` section of the daemonset:
 
     ```yaml
      # (...)
@@ -155,9 +155,9 @@ rules:
       # (...)
     ```
 
-      これにより、Agent が監査ログファイルからログを収集するよう構成するための `conf.d` フォルダもマウントされます。
+      This also mounts the `conf.d` folder which is used to configure the Agent to collect logs from the audit log file.
 
-4. ConfigMap を使用し、そのファイルからログを収集するように Agent を構成します。
+4. Configure the Agent to collect logs from that file with a ConfigMap:
 
     ```yaml
     kind: ConfigMap
@@ -174,21 +174,21 @@ rules:
                 service: audit
     ```
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `Logs` を探します。
+[Run the Agent's status subcommand][5] and look for `Logs` under the Checks section.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+Need help? Contact [Datadog support][6].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/kubernetes/#installation
+[1]: /agent/kubernetes/#installation
 [2]: https://www.youtube.com/watch?v=raJRLmGb9Is&t=1s
 [3]: https://kubernetes.io/docs/tasks/debug-application-cluster/audit/
-[4]: /ja/agent/kubernetes/log/
-[5]: /ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: /ja/help/
+[4]: /agent/kubernetes/log/
+[5]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: /help/

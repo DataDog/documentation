@@ -1,6 +1,6 @@
 ---
-core_product:
-- infrastructure monitoring
 title: Docker
+core_product:
+  - infrastructure monitoring
 ---
-<a href="https://www.docker.com/">Docker</a> はコンテナを管理するためのフレームワークです。
+<a href="https://www.docker.com/">Docker</a> is a framework for managing containers.

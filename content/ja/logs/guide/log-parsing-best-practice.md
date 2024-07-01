@@ -1,70 +1,69 @@
 ---
+title: Log Parsing - Best Practices
+kind: guide
 aliases:
-- /ja/logs/faq/log-parsing-best-practice
+  - /logs/faq/log-parsing-best-practice
 further_reading:
 - link: /logs/log_configuration/processors
   tag: Documentation
-  text: ログの処理方法
+  text: Learn how to process your logs
 - link: /logs/log_configuration/parsing
   tag: Documentation
-  text: パースの詳細
+  text: Learn more about parsing
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: FAQ
-  text: ログのパースに関する問題を調査する方法
-kind: ガイド
-title: ログのパース - ベストプラクティス
+  text: How to investigate a log parsing issue?
 ---
 
-Datadog では、ログからすべての関連情報を抽出するためのパーサーを定義できます。パースの言語および機能の詳細については、[こちらのドキュメント][1]を参照してください。
+Datadog lets you define parsers to extract all relevant information from your logs. More information about the parsing language and possibilities is available in [our documentation][1].
 
-この記事では、Datadog Agent のコレクターによるログをパースする方法について説明します。
+This article walks through parsing a log from the Datadog Agent's collector log:
 
 ```text
 2017-10-12 08:54:44 UTC | INFO | dd.collector | checks.collector(collector.py:530) | Finished run #1780. Collection time: 4.06s. Emit time: 0.01s
 ```
 
-1. **パースするログのサンプルをコメントとして必ず規則に追加する**。
+1. **Always add the sample log you are working on as a comment in your rule**:
     {{< img src="logs/faq/parsing_best_practice_1.png" alt="parsing_best_practice_1" >}}
-    そうすれば、パース規則をサンプルログでテストすることができます。初めて規則を記述する際や、パーサーの問題を調査したり、新しいログ形式をサポートしたりする場合に、これが非常に役に立ちます。
+    It is possible to test your parsing rule on a sample log. As it is helpful when you first write the rule, it might be important when coming back to the parser to investigate an issue or support a new log format.
 
-2. **アスタリスクを利用して、属性を 1 つずつパースする**。
-    最初からログ全体のパース規則を記述する必要はありません。1 つの属性ごとに規則をチェックしましょう。それには、規則の末尾に `.*` を使用して、後続の規則を無視してマッチさせることができます。
-    たとえば、ここではまず、後続の属性を考慮せず、ログの日付をパースするとします。次の規則を作成します。
+2. **Parse one attribute at a time thanks to the star trick**:
+    You do not need to write a parsing rule for the full log on the first draft. Check your rule one attribute at a time using a `.*` at the end of the rule. This matches anything that would follow the end of your rule.
+    For example here, say that you first want to parse the log date, no matter what is next. Create the rule:
     {{< img src="logs/faq/parsing_best_practice_2.png" alt="parsing_best_practice_2" >}}
-    日付が正しくパースされることを確認できました。では次の属性である重大度のパースに進みましょう。
-    まず、パイプ (エスケープする必要がある特殊文字) をエスケープしてから、文字とのマッチを記述します。
+    So you know the date is correctly parsed. You can now move on to the next attribute, the severity.
+    You first need to escape the pipe (special characters need to be escaped) and then match the word:
     {{< img src="logs/faq/parsing_best_practice_3.png" alt="parsing_best_practice_3" >}}
-    このログから目的の属性をすべて抽出するまで、この手順を続けます。
+    And then you can keep on until you extract all the desired attributes from this log.
 
-3. **適切なマッチャーを使用する**。
-    規則はできるだけシンプルに作成しましょう。たとえば、基本の `notSpace` が機能するなら、多くの場合、特定のパターンに合わせて複雑な正規表現を定義する必要はありません。
-    パース規則を記述する際には、次のマッチャーがよく使用されます。
+3. **Use the right matchers**:
+    The simpler the better. There is often no need to try to define a complex regex to match a specific pattern when the classic `notSpace` can do the job.
+    Keep in mind the following matchers when writing a parsing rule:
 
-    * notSpace: 次のスペースまでの文字列に一致します
-    * data: すべてに一致します (「.*」と同等)
-    * word: すべての英数字に一致します
-    * integer: 10 進整数に一致し、それを整数としてパースします
+    * notSpace: matches everything until the next space
+    * data: matches everything (equivalent to .*)
+    * word: matches all coming alphanumeric characters
+    * integer: matches a decimal integer number and parses it as an integer number
 
-    ほとんどの規則は、この 4 つのマッチャーを使用して記述できます。利用可能なマッチャーの完全なリストは[パースのドキュメント][2]で確認できます。
+    Most of the rules can be written with those four matchers. You can see the full list of available matchers [in the parsing documentation][2].
 
-4. **KeyValue**。
-   key-value フィルターがあり、これによりすべての属性を自動的に抽出できることに留意してください。
-    詳細については、[いくつかの例][3]を参照してください。
+4. **KeyValue**:
+    Note that there is a key-value filter that can automatically extract all your attributes.
+    Learn more about this with [some examples][3].
 
-5. **ログメッセージの中で、属性として抽出しない部分をスキップする**。
-    先の例に戻ります。
+5. **How to skip some parts of your log message that should not be extracted as attributes**:
+    Use the example again:
     ```
     2017-10-12 08:54:44 UTC | INFO | dd.collector | checks.collector(collector.py:530) | Finished run #1780. Collection time: 4.06s. Emit time: 0.01s
     ```
-    たとえば、dd.collector の情報は利用価値がなく、属性として抽出する必要がないと判断したとします。
-    これをスキップするには、対応するセクションを規則から削除します。
+    Assume that the information from `dd.collector` is not of any value for you, and you do not want to extract it as an attribute.
+    To do this, remove the extract section of the rule:
     {{< img src="logs/faq/parsing_best_practice_4.png" alt="parsing_best_practice_4" >}}
 
-## その他の参考資料
-
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/log_configuration/parsing
-[2]: /ja/logs/log_configuration/parsing/#matcher-and-filter
-[3]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt
+[1]: /logs/log_configuration/parsing
+[2]: /logs/log_configuration/parsing/#matcher-and-filter
+[3]: /logs/log_configuration/parsing/#key-value-or-logfmt

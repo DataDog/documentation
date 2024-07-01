@@ -1,158 +1,165 @@
 ---
-algolia:
-  subcategory: Marketplace インテグレーション
-app_id: circleci-circleci
-app_uuid: 3c51a71d-330c-4fd3-ae55-9146c20a3b65
-assets: {}
-author:
-  homepage: https://circleci.com/
-  name: CircleCI
-  sales_email: partners@circleci.com
-  support_email: support@circleci.com
-  vendor_id: circleci
-categories:
-- 自動化
-- クラウド
-- 構成 & デプロイ
+"algolia":
+  "subcategory": Marketplace Integrations
+"app_id": "circleci-circleci"
+"app_uuid": "3c51a71d-330c-4fd3-ae55-9146c20a3b65"
+"assets": {}
+"author":
+  "homepage": "https://circleci.com/"
+  "name": CircleCI
+  "sales_email": partners@circleci.com
+  "support_email": support@circleci.com
+  "vendor_id": circleci
+"categories":
+- automation
+- cloud
+- configuration & deployment
 - developer tools
-- マーケットプレイス
+- marketplace
 - orchestration
-- プロビジョニング
-- ソースコントロール
-- テスト
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: circleci_circleci
-integration_id: circleci-circleci
-integration_title: CircleCI
-integration_version: ''
-is_public: true
-custom_kind: integration
-legal_terms:
-  eula: assets/eula.pdf
-manifest_version: 2.0.0
-name: circleci_circleci
-pricing:
-- billing_type: flat_fee
-  includes_assets: true
-  product_id: circleci-license
-  short_description: GPU リソースクラスへのアクセス、専任アカウントチーム、24 時間 365 日サポートへのアクセス、カスタマイズ可能な年間請求、監査ログ、データの一括エクスポート
-  unit_price: 2000
-public_title: CircleCI
-short_description: CircleCI を使用して、コードのビルド、テスト、およびデプロイを行う
-supported_os:
+- provisioning
+- source control
+- testing
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "circleci_circleci"
+"integration_id": "circleci-circleci"
+"integration_title": "CircleCI"
+"integration_version": ""
+"is_public": true
+"legal_terms":
+  "eula": assets/eula.pdf
+"manifest_version": "2.0.0"
+"name": "circleci_circleci"
+"pricing":
+- "billing_type": flat_fee
+  "includes_assets": true
+  "product_id": circleci-license
+  "short_description": Access to GPU resource classes, a dedicated account team, access to 24/7 support, customizable annual billing, audit logging, and bulk data export
+  "unit_price": !!int "2000"
+"public_title": "CircleCI"
+"short_description": "Use CircleCI to build, test, and deploy your code"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Automation
-  - Category::Cloud
-  - Category::Configuration & Deployment
-  - Category::Developer Tools
-  - Category::Marketplace
-  - Category::Orchestration
-  - Category::Provisioning
-  - カテゴリ::ソースコントロール
-  - Category::Testing
-  - Offering::Software License
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: CircleCI を使用して、コードのビルド、テスト、およびデプロイを行う
-  media:
-  - caption: CircleCI パイプラインダッシュボードには、最近のビルドがすべて一箇所に表示されます。フィルターを適用して、探しているものをより早く見つけることができます。
-    image_url: images/img_1.jpg
-    media_type: image
-  - caption: ビルドの進捗状況を監視し、エンドツーエンドのパイプラインビューで問題を迅速に特定します。
-    image_url: images/img_2.png
-    media_type: image
-  - caption: SSH 経由のデバッグにより、ビルドやテストの問題をより迅速に解決できます。
-    image_url: images/img_3.jpg
-    media_type: image
-  - caption: あらゆる業務に最適なツール - CircleCI
-    image_url: images/video_thumbnail.jpg
-    media_type: ビデオ
-    vimeo_id: 731430543
-  overview: README.md#Overview
-  support: README.md#Support
-  title: CircleCI
-  uninstallation: README.md#Uninstallation
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Automation"
+  - "Category::Cloud"
+  - "Category::Configuration & Deployment"
+  - "Category::Developer Tools"
+  - "Category::Marketplace"
+  - "Category::Orchestration"
+  - "Category::Provisioning"
+  - "Category::Source Control"
+  - "Category::Testing"
+  - "Offering::Software License"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Use CircleCI to build, test, and deploy your code
+  "media":
+  - "caption": CircleCI pipeline dashboard shows all recent builds in one place. Apply filters to quickly find what you're looking for faster.
+    "image_url": images/img_1.jpg
+    "media_type": image
+  - "caption": Monitor your build progress and quickly locate issues in our end-to-end pipeline view.
+    "image_url": images/img_2.png
+    "media_type": image
+  - "caption": Debug via SSH for faster resolution of build and test issues.
+    "image_url": images/img_3.jpg
+    "media_type": image
+  - "caption": The best tool for every job - CircleCI
+    "image_url": images/video_thumbnail.jpg
+    "media_type": video
+    "vimeo_id": !!int "731430543"
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": blog
+    "url": "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
+  - "resource_type": blog
+    "url": "https://www.datadoghq.com/blog/run-synthetic-tests-in-circeci-pipelines-with-datadog/"
+  - "resource_type": documentation
+    "url": "https://circleci.com/docs"
+  "support": "README.md#Support"
+  "title": CircleCI
+  "uninstallation": "README.md#Uninstallation"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## 概要
+## Overview
 
-### CircleCI について
-世界最高のソフトウェアチームは、CircleCI を使用して、高品質のコードを自信を持って提供しています。最大の継続的インテグレーションおよびデリバリー (CI/CD) プラットフォームである CircleCI は、エンジニアがアイデアをシームレスに実行に移せるよう、スケールアップを支援します。このプラットフォームのすべての機能は、開発プロセスの最初から最後までを微調整するために構築されています。
+### About CircleCI
+The world’s best software teams use CircleCI to deliver quality code with confidence. As the largest continuous integration and delivery (CI/CD) platform, CircleCI empowers engineers to seamlessly take ideas to execution, at scale. Every feature of the platform is built to fine-tune the entire development process from start to finish.
 
-CircleCI は、ジョブごとに OS、CPU、GPU、メモリ、イメージをカスタマイズできる最も広い選択肢を提供します。Docker、Windows、Linux、ARM、macOS 向けにビルドしたり、ランナーを使って独自のコンピュート構築を行うことができ、すべて無料でご利用いただけます。
+CircleCI offers the widest choices for customizing operating systems, CPUs, GPUs, memory, and images for each job. Build for Docker, Windows, Linux, ARM, macOS, or build your own compute with runners, all for free.
 
-チームは、CircleCI が管理するクラウド、またはお客様がセルフホスティングするサーバープランで複雑なワークフローをオーケストレーションすることができます。
+Teams can orchestrate complex workflows in the cloud, managed by CircleCI, or with a server plan, self-hosted by you.
 
-### 製品概要
+### Product Overview
 
-#### 市場最速のビルド時間
-CircleCI のビルド時間は、競合他社に比べ平均 70％ 短縮されています。
+#### Fastest build times on the market
+Build times on CircleCI are 70% faster on average than competitors.
 
-#### 最高レベルのコンプライアンスと認証
-CircleCI は、FedRAMP および SOC 2 Type II の認定を受けた唯一の CI/CD プラットフォームです。監査ログ、制限付きコンテキスト、LDAP などの組み込み機能により、コードを完全に制御することができます。
+#### The highest level of compliance and certification
+CircleCI is the only CI/CD platform that’s FedRAMP and SOC 2 Type II certified. Built-in features like audit logs, restricted contexts, and LDAP give you complete control of your code.
 
-#### ソフトウェア開発プロセスにおける可視性の向上
-CircleCI の Insights ダッシュボードでは、ワークフローのステータス、期間、クレジット消費量、コストなどを無料で可視化することができます。
+#### Greater visibility throughout the software development process
+CircleCI’s Insights dashboard gives visibility into workflow status, duration, credit consumption, and costs, for free.
 
-#### SSH デバッグ
-CircleCI の任意のジョブに安全にアクセスし、ビルドやテストをリアルタイムでデバッグできます。
+#### SSH debugging
+Securely access any job in CircleCI to debug builds and tests in real time.
 
-#### 自動テスト分割
-同じジョブの並列インスタンス間で自動的にテストを分割することで、フィードバックループを短縮します。
+#### Auto-test splitting
+Shorten the feedback loop by automatically splitting your tests across parallel instances of the same job.
 
-### ハイライト
-#### 規模に応じたデリバリーのための基盤
-CI/CD プロセスは、エンジニアリング組織の心臓部です。CircleCI を使用すれば、チームの成長と革新の能力が制限されることはありません。エキスパートである CircleCI チームは、すべてのステップをガイドし、サポートします。
+### Highlights
+#### The foundation for delivery at scale
+Your CI/CD process is the heartbeat of your engineering organization. With CircleCI, teams are never limited in their ability to grow and innovate. The expert CircleCI team is here to guide and support you every step of the way.
 
-#### すべてのコミットメントに自信を
-コードを管理し、すべての変更源を管理します。CircleCI は、すべてのステップで変更を検証することを意味します。顧客が必要とするときに、毎回確実に動作するアップデートをリリースできることを信頼できます。
+#### Confidence in every commit
+Take control of your code and manage every source of change. CircleCI means change validation, at every step. Trust that you can release updates right when your customers need them, with the certainty they’ll work every time.
 
-#### 無限に広がる創造力
-macOS、Linux、Windows にまたがる、あらゆる言語でのコーディングが可能です。お客様が書くことができれば、CircleCI はそれを構築、テスト、およびデプロイすることができます。柔軟なビルド環境と何千ものビルド済みインテグレーションにより、パイプラインはお客様が提供するものの可能性を制限しません。
+#### The power to create without limits
+Code in every language, across macOS, Linux, and Windows. If you can write it, CircleCI can build, test, and deploy it. With flexible build environments and thousands of pre-built integrations, your pipelines never limit the possibility of what you can deliver.
 
-### プラン
-**スケールプラン**
-- 2,000,000 クレジット/月を含む
-- 複雑なプロセスやスピードに対応した当社最大のリソースクラス
-- GPU リソースクラスへのアクセス
-- 専任のアカウントチーム
-- 24 時間 365 日サポートへのアクセス
-- 監査ログ
-- データ一括エクスポート
+### Plans
+**Scale plan**
+- 2,000,000 credits included per month
+- Our largest resource classes for complex processes and speed
+- Access to GPU resource classes
+- A dedicated account team
+- Access to 24/7 support
+- Audit logging
+- Bulk data export
 
-このプランは、Datadog Marketplace を通じて、月額 2,000 ドルで利用することができます。
+This plan is available through the Datadog Marketplace for $2,000/month.
 
-ボリュームディスカウントや他のプランに興味がある方は、[support@circleci.com][2] までご連絡ください。プライベートオファーについてもご相談ください。
+For volume discounts or interest in other plans, reach out to [support@circleci.com][2] to discuss a private offer.
 
 
 
-## Agent
+## Support
 
-サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから CircleCI にお問い合わせください。
+For support or feature requests, contact CircleCI through the following channel:
 
-- メール: [support@circleci.com][2]
+- Email: [support@circleci.com][2]
 
-CircleCI のプライバシーポリシーは、[CircleCI Web サイト][3]をご覧ください。
+To view CircleCI's privacy policy, see the [CircleCI website][3].
 
-### その他の参考資料
+### Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Datadog で CircleCI 環境を監視する][5]
-- [Datadog CircleCI orb を使用して、CI/CD パイプラインで Synthetic テストを実行する][6]
-- [CircleCI ドキュメント][1]
+- [Monitor your CircleCI environment with Datadog][5]
+- [Run Synthetic tests in your CI/CD pipelines with the Datadog CircleCI orb][6]
+- [CircleCI Documentation][1]
 
 [1]: https://circleci.com/docs
 [2]: mailto:support@circleci.com
@@ -161,4 +168,4 @@ CircleCI のプライバシーポリシーは、[CircleCI Web サイト][3]を�
 [5]: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
 [6]: https://www.datadoghq.com/blog/run-synthetic-tests-in-circeci-pipelines-with-datadog/
 ---
-このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/circleci-circleci" target="_blank">こちらをクリック</a>してください。
+This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/circleci-circleci" target="_blank">Click Here</a> to purchase this application.

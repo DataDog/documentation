@@ -1,4 +1,4 @@
 ---
-title: 予測値
+title: forecast
 ---
-フォーキャストは、アルゴリズムを使用して、あるメトリクスの将来の挙動や値を予測するものです。
+Forecasts use algorithms to predict the future behavior and values of a metric.

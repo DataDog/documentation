@@ -1,56 +1,57 @@
 ---
-categories:
+"categories":
 - cloud
 - azure
-dependencies: []
-description: Azure Cognitive Search の主要メトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/azure_search/
-draft: false
-git_integration_title: azure_search
-has_logo: true
-integration_id: azure-search
-integration_title: Microsoft Azure Cognitive Search
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: azure_search
-public_title: Datadog-Microsoft Azure Cognitive Search インテグレーション
-short_description: Azure Cognitive Search の主要メトリクスを追跡。
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Cognitive Search metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_search/"
+"draft": false
+"git_integration_title": "azure_search"
+"has_logo": true
+"integration_id": "azure-search"
+"integration_title": "Microsoft Azure Cognitive Search"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_search"
+"public_title": "Datadog-Microsoft Azure Cognitive Search Integration"
+"short_description": "Track key Azure Cognitive Search metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Cognitive Search は、ウェブ、モバイル、エンタープライズアプリケーションで非公開の異種コンテンツを詳細に検索できるよう開発者向けに API およびツールを提供する、サービスとしての検索クラウドソリューションです。
+Azure Cognitive Search is a search-as-a-service cloud solution that gives developers APIs and tools for adding a rich search experience over private, heterogeneous content in web, mobile, and enterprise applications.
 
-Datadog Azure インテグレーションを使用して、Azure Cognitive  Search からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Azure Cognitive Search.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_search" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Cognitive Search インテグレーションには、イベントは含まれません。
+The Azure Cognitive Search integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Cognitive Search インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Cognitive Search integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_search/azure_search_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

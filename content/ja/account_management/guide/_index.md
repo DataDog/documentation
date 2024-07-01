@@ -1,20 +1,20 @@
 ---
-cascade:
-  algolia:
-    category: ガイド
-    rank: 20
-    subcategory: アカウントの管理ガイド
+title: Account Management Guides
 private: true
-title: アカウントの管理ガイド
+cascade:
+    algolia:
+        rank: 20
+        category: Guide
+        subcategory: Account Management Guides
 ---
 
-{{< whatsnext desc="使用量計測 API の移行ガイド" >}}
-    {{< nextlink href="account_management/guide/hourly-usage-migration" >}}Hourly Usage API の v1 から v2 への移行{{< /nextlink >}}
-    {{< nextlink href="account_management/guide/usage-attribution-migration" >}}Usage Attribution API の v1 から v2 への移行{{< /nextlink >}}
-    {{< nextlink href="account_management/guide/csv-headers-billing-migration" >}}2023 年 9 月 18 日付の Plan & Usage CSV ヘッダーへの更新{{< /nextlink >}}
+{{< whatsnext desc="Usage metering API migration guides:" >}}
+    {{< nextlink href="account_management/guide/hourly-usage-migration" >}}Migrating from the v1 Hourly Usage APIs to v2{{< /nextlink >}}
+    {{< nextlink href="account_management/guide/usage-attribution-migration" >}}Migrating from v1 to v2 of the Usage Attribution API{{< /nextlink >}}
+    {{< nextlink href="account_management/guide/csv-headers-billing-migration" >}}Updates to Plan & Usage CSV Headers as of September 18, 2023{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="一般的なアカウント管理:" >}}
-    {{< nextlink href="account_management/guide/manage-datadog-with-terraform" >}}Terraform で Datadog を管理する{{< /nextlink >}}
-    {{< nextlink href="account_management/guide/access-your-support-ticket" >}}サポートチケットにアクセスする{{< /nextlink >}}
+{{< whatsnext desc="General Account Management:" >}}
+    {{< nextlink href="account_management/guide/manage-datadog-with-terraform" >}}Manage Datadog with Terraform{{< /nextlink >}}
+    {{< nextlink href="account_management/guide/access-your-support-ticket" >}}Access your Support ticket{{< /nextlink >}}
 {{< /whatsnext >}}

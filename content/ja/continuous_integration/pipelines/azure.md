@@ -1,71 +1,84 @@
 ---
+title: Set up Tracing on an Azure Pipeline
 aliases:
-- /ja/continuous_integration/setup_pipelines/azure
+  - /continuous_integration/setup_pipelines/azure
 further_reading:
-- link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
-  tag: ブログ
-  text: Datadog CI Visibility で Azure Pipelines を監視する
-- link: /continuous_integration/troubleshooting/
-  tag: Documentation
-  text: トラブルシューティング CI
-- link: /continuous_integration/pipelines/custom_tags_and_metrics/
-  tag: Documentation
-  text: カスタムタグとメトリクスを追加してパイプラインの可視性を拡張する
-title: Azure パイプラインでトレースを設定する
+    - link: "https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/"
+      tag: Blog
+      text: Monitor Azure Pipelines with Datadog CI Visibility
+    - link: /continuous_integration/troubleshooting/
+      tag: Documentation
+      text: Troubleshooting CI Visibility
+    - link: /continuous_integration/pipelines/custom_tags_and_measures/
+      tag: Documentation
+      text: Extend Pipeline Visibility by adding custom tags and measures
 ---
 
+<div class="alert alert-warning">
+Azure DevOps Server is not officially supported.
+</div>
+
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## 互換性
+## Overview
 
-- **ランタイムのカスタムタグとメトリクス**: ランタイムの[カスタムタグ][6]とメトリクスを構成します
+[Azure Pipelines][1] is a continuous integration and delivery service that supports any language, platform, or cloud.
 
-## Datadog インテグレーションの構成
+Set up tracing on Azure Pipelines to gain real time insights into your CI/CD workflows, track pipeline performance, analyze inefficiencies, and manage your deployment operations.
 
-[Azure Pipelines][1] の Datadog インテグレーションは、[サービスフック][2]を使って Datadog にデータを送信することで動作します。 
+### Compatibility
 
-1. Azure Marketplace から [Datadog CI Visibility][8] の拡張機能をインストールします。
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime. |
 
-2. 各プロジェクトについて、Azure DevOps の **Project settings > Service hooks** に移動し、緑色のプラス (+) アイコンを選択し、サブスクリプションを作成します。
+## Configure the Datadog integration
 
-3. 以下の Webhook タイプごとに、`Datadog CI Visibility` サービスに対する新しいサブスクリプションを作成します。
+The Datadog integration for [Azure Pipelines][1] works by using [service hooks][2] to send data to Datadog.
+
+1. Install the [Datadog CI Visibility][8] extension from the Azure Marketplace. There are several extensions starting with **Datadog**, make sure that you are installing the [Datadog CI Visibility][8] extension.
+
+2. For each project, go to **Project settings > Service hooks** in Azure DevOps and select the green plus (+) icon to create a subscription.
+
+3. Create a new subscription to the `Datadog CI Visibility` service for each of the following webhook types:
     - **Run state changed**
     - **Run stage state changed**
     - **Run job state changed**
+    - **Run stage approval completed**
+    - **Run stage waiting for approval**
 
-4. **Next** をクリックして次のステップに進み、次のように設定します。
+4. Click **Next** to continue to the next step and set the following:
     - **Datadog Site**: {{< region-param key="dd_site" >}}
     - **Datadog API Key**: your [Datadog API key][3].
 
-5. **Finish** をクリックします。
+5. Click **Finish**.
 
 <div class="alert alert-info">
-サポートされている 3 種類のイベントはすべて必須であり、個別に有効にする必要があります。
-1 つ以上のイベントを有効にしないと、インストールが不完全になり、Datadog の予期せぬ動作につながります。
+All 5 supported types of events are required and must be enabled individually.
+Not enabling one or more events results in an an incomplete installation, leading to unexpected behavior in Datadog.
 </div>
 
+### Configuring multiple projects in bulk
 
-### 複数プロジェクトの一括構成
 
+If you want to enable the hooks for many or all your Azure projects, Datadog provides a [script][12] to help you do it through the Azure API.
 
-多くの、あるいはすべての Azure プロジェクトでフックを有効にしたい場合、Datadog は Azure API を通してそれを行うための[スクリプト](https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py)を提供します。
+To run the script, you need:
 
-スクリプトを実行するには、以下が必要です。
+- An Azure DevOps username
+- An Azure DevOps [API Token][13]
+- An Azure DevOps organization name
 
-- Azure DevOps のユーザー名
-- Azure DevOps [API Token](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat)
-- Azure DevOps の組織名
-
-このスクリプトに必要なのは、python3 とリクエストパッケージだけです。詳しくは、以下を実行してください。
+The script only needs python3 and the requests package. For more information, run:
 ```shell
 ./service_hooks.py --help
 ```
 
-このスクリプトは環境変数 `DD_API_KEY` と `DD_SITE`、フラグパラメーター `--dd-api-key` と `--dd-site` をサポートします。
+The script supports environment variables `DD_API_KEY` and `DD_SITE`, and flag parameters `--dd-api-key` and `--dd-site`.
 
-すべてのプロジェクトでフックを有効にする場合の例:
+Example for enabling the hooks in all projects:
 ```
 ./service_hooks.py \
     --dd-api-key ******************** \
@@ -75,7 +88,7 @@ title: Azure パイプラインでトレースを設定する
     --threads 4
 ```
 
-指定したプロジェクトでフックを有効にする場合の例:
+Example for enabling the hooks in specified projects:
 ```
 ./service_hooks.py \
     --dd-api-key ******************** \
@@ -85,13 +98,25 @@ title: Azure パイプラインでトレースを設定する
     projectName1 projectName2
 ```
 
-## Datadog でパイプラインデータを視覚化する
+### Enable job log collection
 
-ワークフローが終了した後、[Pipelines][4] ページと [Pipeline Executions][5] ページにデータが入力されます。
+<div class="alert alert-info">Azure Log Collection is in private beta. To request access, fill out <a href="https://forms.gle/vXEQQcPLARdSDLd27">this form</a>.</div>
 
-**注**: Pipelines ページには、各リポジトリのデフォルトブランチのデータのみが表示されます。
+Datadog supports log collection for your Azure DevOps pipelines. To enable it:
 
-## その他の参考資料
+1. Install a Datadog app registration on your Azure console. Follow the steps within the [Azure integration][14].
+
+2. Add the Datadog app registration to your Azure DevOps organization and to every project for which you want to enable Log Collection. You can do this by going to "Organization settings" in your DevOps console. You may select "Add to all projects" to configure all projects in bulk.
+
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for Azure jobs can be identified by the <code>datadog.product:cipipeline</code> and <code>source:azurepipelines</code> tags.</div>
+
+## Visualize pipeline data in Datadog
+
+The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the workflows finish.
+
+The **CI Pipeline List** page shows data for only the default branch of each repository.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -100,5 +125,11 @@ title: Azure パイプラインでトレースを設定する
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: /ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
+[9]: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops&tabs=check-pass#approvals
+[10]: /glossary/#custom-tag
+[11]: /glossary/#custom-measure
+[12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
+[13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
+[14]: https://app.datadoghq.com/integrations/azure

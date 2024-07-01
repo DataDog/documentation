@@ -1,93 +1,99 @@
 ---
-categories:
-- クラウド
-- インシデント
+"categories":
+- cloud
+- incidents
 - notifications
-dependencies: []
-description: このインテグレーションにより、Datadog でトリガーされたアラートから Salesforce Incidents を作成し、既存のインシデントに新しい情報を随時更新することができます。
-doc_link: https://docs.datadoghq.com/integrations/salesforce_incidents/
-draft: false
-git_integration_title: salesforce_incidents
-has_logo: true
-integration_id: ''
-integration_title: Salesforce Incidents
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: salesforce_incidents
-public_title: Datadog-Salesforce Incidents インテグレーション
-short_description: Datadog のアラートから Salesforce Service Cloud のインシデントを作成し、管理します。
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "This integration allows you to create Salesforce Incidents from triggered alerts in Datadog, and update existing incidents with new information as it arises."
+"doc_link": "https://docs.datadoghq.com/integrations/salesforce_incidents/"
+"draft": false
+"git_integration_title": "salesforce_incidents"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Salesforce Incidents"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "salesforce_incidents"
+"public_title": "Datadog-Salesforce Incidents Integration"
+"short_description": "Create and manage Salesforce Service Cloud Incidents from Datadog alerts."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Salesforce Incidents インテグレーションを利用すると、モニターアラートイベントから Salesforce Service Cloud にインシデントを作成することができます。Salesforce Datadog Widget を使用すると、インシデントに関連するモニターイベントのタイムラインを Salesforce で直接表示できます。
+The Salesforce Incidents integration allows you to create incidents in Salesforce Service Cloud from monitor alert 
+events. Using the Salesforce Datadog Widget, you can view the timeline of monitor events related to the incident
+directly in Salesforce.
 
-## 計画と使用
+## Setup
 
-### Datadog と Salesforce Service Cloud の連携
+### Connect Datadog to Salesforce Service Cloud
 
-1. [Datadog Salesforce Incidents インテグレーションタイル][1]に移動し、**Add Organization** をクリックします。
-2. 組織タイプを選択します。
-3. **Connect** をクリックし、Salesforce Service Cloud の認証ページの指示に従います。
+1. Go to the [Datadog Salesforce Incidents integration tile][1] and click **Add Organization**.
+2. Select the Organization type.
+3. Click **Connect** and follow the instructions on the Salesforce Service Cloud authorization page.
 
-### Trusted IP 範囲
+### Trusted IP Ranges
 
-Salesforce 組織でトラフィックのフィルタリングに Trusted IP 範囲を使用している場合、インテグレーションを動作させるためには、Datadog に属する **Webhooks** IP プレフィックスからの接続を許可する必要があります。お客様の地域の **Webhooks** IP プレフィックスのリストについては、[Datadog IP 範囲][2]を参照してください。
+If your Salesforce Organization uses Trusted IP ranges to filter traffic, you need to allow connections from the 
+**Webhooks** IP prefixes belonging to Datadog in order for the integration to work. For a list of **Webhooks** 
+IP prefixes for your region, see [Datadog IP Ranges][2].
 
-### インシデントテンプレートの構成
+### Configure an incident template
 
-テンプレートは、Datadog のアラートイベントから Salesforce Service Cloud でどのようにインシデントが作成されるかを定義します。
+Templates define how incidents are created in Salesforce Service Cloud from Datadog alert events.
 
-インシデントテンプレートを作成するには
+To create an incident template:
 
-1. **New Incident Template** をクリックします。
-2. インシデントテンプレートの名前を入力します。この名前には `salesforce_incidents-` というプレフィックスが付き、モニター通知で使用するハンドルになります (`@salesforce_incidents-my-incident-template-name` のように)。
-3. Salesforce Organization を選択します。
-4. インシデントを作成する際に使用する件名、説明、所有者、優先順位を指定します。
-5. **Save** をクリックします。
+1. Click **New Incident Template**.
+2. Enter a name for your incident template. This name, prefixed with `salesforce_incidents-`, becomes the handle you can use in your monitor notifications (such as `@salesforce_incidents-my-incident-template-name`).
+3. Select a Salesforce Organization.
+4. Provide a subject, description, owner, and priority to use when creating an incident.
+5. Click **Save**.
 
-### Datadog ウィジェットを Salesforce Service Cloud に追加する
+### Add the Datadog Widget to Salesforce Service Cloud
 
-Salesforce Service Cloud に Datadog Widget をインストールするには
+To install the Datadog Widget in Salesforce Service Cloud:
 
-1. Salesforce Organization の管理者に、[Salesforce AppExchange][3] から Datadog アプリをインストールしてもらいます。
-2. Salesforce Service Cloud で、Incident Record ページに移動します。
-3. 歯車のアイコンをクリックし、**Edit page** をクリックします。
-4. 左のナビゲーションのカスタムコンポーネントから Datadog ウィジェットをクリックし、ページにドラッグします。
-5. **Save** をクリックします。
+1. Have an admin for your Salesforce Organization install the Datadog app from the [Salesforce AppExchange][3].
+2. In Salesforce Service Cloud, go to an Incident Record page.
+3. Click on the Gear Icon and then click **Edit page**.
+4. Click and drag the Datadog widget onto the page from the custom components in the left nav.
+5. Click **Save**.
 
-## API
+## Usage
 
-#### Datadog アラートから Salesforce Service Cloud にインシデントを作成する
+#### Creating incidents in Salesforce Service Cloud from Datadog Alerts
 
-Datadog モニターの **Notify your team** または **Say what's happening** セクションに、1 つ以上のインシデントテンプレートの通知ハンドル (例: `@salesforce_incidents-my-incident-template-name`) を含めます。
+Include a notification handle of one or more incidents templates (for example, `@salesforce_incidents-my-incident-template-name`).
+in the **Notify your team** or **Say what's happening** sections of your Datadog monitor.
 
-インシデントは、モニターがトリガーされると作成されます。モニターが解決されるまで、新しいインシデントは作成されません。
+Incidents are created when the monitor triggers. New incidents are not created until the monitor resolves.
 
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Salesforce Incidents インテグレーションは、メトリクスを提供しません。
+The Salesforce Incidents integration does not provide any metrics.
 
-### ヘルプ
+### Events
 
-Salesforce Incidents インテグレーションには、イベントは含まれません。
+The Salesforce Incidents integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Salesforce Incidents インテグレーションには、サービスのチェック機能は含まれません。
+The Salesforce Incidents integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
 [1]: https://app.datadoghq.com/integrations/salesforce-incidents
-[2]: https://docs.datadoghq.com/ja/api/latest/ip-ranges/
+[2]: https://docs.datadoghq.com/api/latest/ip-ranges/
 [3]: https://appexchange.salesforce.com/
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/help/
+

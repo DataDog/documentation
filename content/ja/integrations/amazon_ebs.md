@@ -1,100 +1,101 @@
 ---
-aliases:
-- /ja/integrations/awsebs/
-categories:
-- cloud
-- data stores
-- aws
-- log collection
-dependencies: []
-description: スナップショットの経過時間、IOPS、読み取り/書き込み回数などを追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_ebs/
-draft: false
-git_integration_title: amazon_ebs
-has_logo: true
-integration_id: ''
-integration_title: Amazon Elastic Block Store
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_ebs
-public_title: Datadog-Amazon Elastic Block Store インテグレーション
-short_description: スナップショットの経過時間、IOPS、読み取り/書き込み回数などを追跡。
-version: '1.0'
+"aliases":
+- "/integrations/awsebs/"
+"categories":
+- "cloud"
+- "data stores"
+- "aws"
+- "log collection"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track snapshot age, IOPS, read/write times, and more."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_ebs/"
+"draft": false
+"git_integration_title": "amazon_ebs"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Amazon Elastic Block Store"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_ebs"
+"public_title": "Datadog-Amazon Elastic Block Store Integration"
+"short_description": "Track snapshot age, IOPS, read/write times, and more."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Amazon EBS は、AWS Cloud 内の Amazon EC2 インスタンスと共に使用される永続的ブロックストレージボリュームです。
+Amazon EBS provides persistent block storage volumes for use with Amazon EC2 instances in the AWS Cloud.
 
-このインテグレーションを有効にすると、Datadog にすべての EBS メトリクスを表示できます。
+Enable this integration to see in Datadog all your EBS metrics.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration first][1].
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `EBS` が有効になっていることを確認します。
-2. [Datadog - Amazon EBS インテグレーション][3]をインストールします。
+1. In the [AWS integration page][2], ensure that `EBS` is enabled under the `Metric Collection` tab.
+2. Install the [Datadog - Amazon EBS integration][3].
 
-**注**: このインテグレーションは、監視対象の EC2 に接続された EBS ボリュームのメトリクスを収集します。すべての EBS メトリクスを収集するには、[AWS インテグレーションページ][2]で EC2 にチェックを入れ、[リソース収集を制限する][4]設定で EC2 を監視対象から除外していないことを確認します。
+**Note**: This integration collects metrics for EBS volumes attached to a monitored EC2. To collect all EBS metrics, make sure that EC2 is checked in the [AWS integration page][2] and that the EC2 is not excluded from monitoring with the [limit resource collection][4] setting.
 
-### 収集データ
+### Log collection
 
-#### ログの有効化
+#### Enable logging
 
-Amazon EBS から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+Configure Amazon EBS to send logs either to a S3 bucket or to CloudWatch.
 
-**注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_ebs` に設定されているかを確認してください。
+**Note**: If you log to a S3 bucket, make sure that `amazon_ebs` is set as _Target prefix_.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. [Datadog Forwarder Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon EBS ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. If you haven’t already, set up the [Datadog Forwarder Lambda function][5].
+2. Once the Lambda function is installed, manually add a trigger on the S3 bucket or CloudWatch log group that contains your Amazon EBS logs in the AWS console:
 
-    - [S3 バケットに手動トリガーを追加][6]
-    - [CloudWatch ロググループに手動トリガーを追加][7]
+    - [Add a manual trigger on the S3 bucket][6]
+    - [Add a manual trigger on the CloudWatch Log Group][7]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_ebs" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
+Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### ヘルプ
+### Events
 
-Amazon EBS インテグレーションには、イベントは含まれません。
+The Amazon EBS integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Amazon EBS インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon EBS integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog support][9].
 
-## その他の参考資料
+## Further Reading
 
-- [Amazon EBS 監視のキーメトリクス][10]
-- [Amazon EBS メトリクスの収集][11]
-- [Datadog で Amazon EBS ボリュームを監視][12]
+- [Key metrics for Amazon EBS monitoring][10]
+- [Collecting Amazon EBS metrics][11]
+- [Monitoring Amazon EBS volumes with Datadog][12]
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-ebs
-[4]: https://docs.datadoghq.com/ja/account_management/billing/aws/#aws-resource-exclusion
-[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.datadoghq.com/account_management/billing/aws/#aws-resource-exclusion
+[5]: https://docs.datadoghq.com/logs/guide/forwarder/
+[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ebs/amazon_ebs_metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://docs.datadoghq.com/help/
 [10]: https://www.datadoghq.com/blog/amazon-ebs-monitoring
 [11]: https://www.datadoghq.com/blog/collecting-amazon-ebs-metrics
 [12]: https://www.datadoghq.com/blog/monitoring-amazon-ebs-volumes-with-datadog
+

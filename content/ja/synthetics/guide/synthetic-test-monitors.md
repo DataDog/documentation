@@ -1,70 +1,70 @@
 ---
-description: Synthetic テストで作成された Synthetic モニターについて説明します。
+title: Use Synthetic Test Monitors
+kind: guide
+description: Learn about Synthetic monitors created with your Synthetic tests. 
 further_reading:
 - link: /monitors/manage/
-  tag: ドキュメント
-  text: モニターの管理方法について
+  tag: Documentation
+  text: Learn how to manage monitors
 - link: /monitors/guide/integrate-monitors-with-statuspage/
-  tag: ドキュメント
-  text: モニターと Statuspage のインテグレーション方法について
+  tag: Documentation
+  text: Learn how to integrate monitors with Statuspage
 - link: /synthetics/metrics/
-  tag: ドキュメント
-  text: Synthetic モニタリングメトリクスについて
-kind: ガイド
-title: Synthetic テストモニターを利用する
+  tag: Documentation
+  text: Learn about Synthetic Monitoring metrics
 ---
 
-## 概要
+## Overview
 
-Synthetic テストを作成すると、Datadog は自動的に関連するモニターを作成します。Synthetic テストのモニターがアラートを発する際の通知を設定することができます。
+When you create a Synthetic test, Datadog automatically creates an associated monitor. You can set up notifications when the Synthetic test monitor alerts.
 
-{{< img src="synthetics/guide/synthetics_test_monitors/synthetic_test_monitor.png" alt="Synthetic テストモニター" style="width:100%;">}}
+{{< img src="synthetics/guide/synthetics_test_monitors/synthetic_test_monitor.png" alt="Synthetic test monitor" style="width:100%;">}}
 
-## Synthetic テストモニターの作成
+## Create a Synthetic test monitor
 
-<div class="alert alert-info"><a href="/monitors/">モニター</a>で Synthetic テストモニターを作成またはインポートすることはできません。</div>
+<div class="alert alert-info">You cannot create or import a Synthetic test monitor in <a href="/monitors/">Monitors</a>.</div>
 
-Synthetic テストが失敗したときに通知を送信するために、**Configure the monitor for this test** セクションでモニターを作成します。モニターは、作成した Synthetic テストに関連付けられ、Synthetic テストの構成で設定したアラート条件とリンクしています。モニターの属性とタグの変数を使用するには、[メトリクスモニター][1]を作成します。
+Create a monitor in the **Configure the monitor for this test** section to send notifications when a Synthetic test is failing. Monitors are associated with the Synthetic test you create and link to the alerting conditions set in your Synthetic test configuration. To use monitor attribute and tag variables, create a [metric monitor][1].
 
-{{< img src="synthetics/guide/synthetics_test_monitors/configure_the_monitor_for_this_test.png" alt="Synthetic テストでモニターを作成する" style="width:90%;">}}
+{{< img src="synthetics/guide/synthetics_test_monitors/configure_the_monitor_for_this_test.png" alt="Creating a monitor in your Synthetic test" style="width:90%;">}}
 
-モニター名をカスタマイズして、[**Manage Monitors**][2] ページで検索することができます。Synthetic テストモニターを見つけるには、検索バーで `type:synthetics` にフィルターをかけます。モニターの[条件変数][3]を使用して、テストの状態に基づいて通知メッセージを特徴付けることができます。
+Customize the monitor name to search for it on the [**Manage Monitors**][2] page. To find a Synthetic test monitor, filter on `type:synthetics` in the search bar. You can use monitor [conditional variables][3] to characterize the notification message based on test state. 
 
-Synthetic テストモニターは、メール、Slack、Pagerduty、Microsoft Teams などの通知チャンネルとインテグレーションしています。詳しくは、[通知][4]を参照してください。
+The Synthetic test monitor integrates with notification channels such as email, Slack, Pagerduty, and Microsoft Teams. For more information, see [Notifications][4].
 
-複数の通知レイヤーがある場合 (例えば、Synthetic テストがアラートを発している時間が長いほど多くのチームに通知する)、Datadog は Synthetic モニターで[再通知][5]を有効にすることを推奨しています。
+If you have multiple layers of notifications (for example, notifying more teams the longer a Synthetic test is alerting), Datadog recommends enabling [renotification][5] on your Synthetic monitors.
 
-## モニター通知をカスタマイズする
+## Tailor monitor notifications
 
-インシデント管理戦略によっては、Synthetic テストがアラートを出したときに、複数のチームを巻き込みたい場合があります。最初のアラート以降にチーム B に通知するには、チーム B への通知を `{{#is_renotify}}` と `{{/is_renotify}` で囲んでください。モニター属性に基づいて通知メッセージをさらに特徴付けるには、[条件変数][3]を使用します。
+Depending on your incident management strategy, you may want to involve multiple teams when a Synthetic test alerts. To notify Team B only on subsequent alerts after the first alert, surround the notification to Team B with `{{#is_renotify}}` and `{{/is_renotify}`. Use [conditional variables][3] to further characterize the notification message based on monitor attributes. 
 
-{{< img src="synthetics/guide/synthetics_test_monitors/renotification_toggle.png" alt="アラートモニターが再通知するまでの時間を選択します" style="width:90%;">}}
+{{< img src="synthetics/guide/synthetics_test_monitors/renotification_toggle.png" alt="Select the amount of time for the alerting monitor to renotify" style="width:90%;">}}
 
-アラートモニターの再通知を有効にするには、`If this monitor stays in alert status renotify every` の左側のトグルをクリックし、ドロップダウンメニューから時間オプショ ンを選択します。
+To enable the alerting monitor to renotify, click the toggle left of `If this monitor stays in alert status renotify every` and select a time option from the dropdown menu.
 
-## Synthetic テストモニターと Statuspage のインテグレーション
+## Integrate your Synthetic test monitor with Statuspage
 
-[Atlassian Statuspage][6] を使用してアプリケーションやサービスの稼働状況を視覚化している場合、Synthetic テストモニターの通知でシステムのステータスを更新することができます。
+If you use [Atlassian Statuspage][6] for visibility into your applications' and services' uptime, you can update the status of your systems with Synthetic test monitor notifications.
 
-{{< img src="synthetics/guide/synthetics_test_monitors/statuspage_monitor_setup.png" alt="Synthetic テストでモニター名に Statuspage のメールアドレスとステータスを追加する" style="width:95%;">}}
+{{< img src="synthetics/guide/synthetics_test_monitors/statuspage_monitor_setup.png" alt="Add a Statuspage email address and status to the monitor name in your Synthetic test" style="width:95%;">}}
 
-1. コンポーネント固有のメールアドレスを生成するには、[Statuspage ドキュメント][7]を参照してください。
-2. 生成されたメールアドレスをテストの通知メッセージに追加します。例: `@custom-statuspage-email@notifications.statuspage.io`
-3. テストの状態に応じて、`UP` または `DOWN` を返すようにモニター名をカスタマイズします。例: `{{#is_alert}}DOWN{{/is_alert}}{{#is_recovery}}UP{{/is_recovery}}`
-4. モニター通知セクションに必要事項を記入し、モニター名にサマリーを追加します。例: `Shopist Checkout Functionality`
-5. モニターの構成が完了したら、**Save & Exit** をクリックします。
+1. See the [Statuspage documentation][7] to generate a component-specific email address.
+2. Add the generated email address into your test's notification message. For example, `@custom-statuspage-email@notifications.statuspage.io`.
+3. Customize the monitor name to return `UP` or `DOWN` depending on the test state. For example, `{{#is_alert}}DOWN{{/is_alert}}{{#is_recovery}}UP{{/is_recovery}}`.
+4. Fill out the monitor notification section and add a summary in the monitor name. For example, `Shopist Checkout Functionality`.
+5. Once you have configured your monitor, click **Save & Exit**.
 
-詳しくは、[Statuspage とモニターのインテグレーション][8]をご覧ください。
+For more information, see [Integrating Monitors with Statuspage][8].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/types/metric/
-[2]: /ja/monitors/manage/
-[3]: /ja/monitors/notify/variables/?tab=is_alert#conditional-variables
-[4]: /ja/monitors/notify/#integrations/
-[5]: /ja/monitors/notify/#renotify
+[1]: /monitors/types/metric/
+[2]: /monitors/manage/
+[3]: /monitors/notify/variables/?tab=is_alert#conditional-variables
+[4]: /monitors/notify/#integrations/
+[5]: /monitors/notify/#renotify
 [6]: https://support.atlassian.com/statuspage/
 [7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
-[8]: /ja/monitors/guide/integrate-monitors-with-statuspage/
+[8]: /monitors/guide/integrate-monitors-with-statuspage/

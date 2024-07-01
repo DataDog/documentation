@@ -1,141 +1,147 @@
 ---
 aliases:
-- /ja/developers/integrations/oauth_for_data_integrations
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/oauth_for_integrations.md
-title: インテグレーションのための OAuth
+- /developers/integrations/oauth_for_data_integrations/
+title: OAuth for Integrations
+description: Use OAuth to authenticate integrations.
 ---
 {{< callout btn_hidden="true" >}}
-  Datadog Developer Platform は現在ベータ版です。アクセス権をお持ちでない場合は、apps@datadoghq.com までご連絡ください。
+  The Datadog Developer Platform is in beta. If you don't have access, contact apps@datadoghq.com.
 {{< /callout >}} 
 
-## 概要
+## Overview
 
-OAuth の仕組みにより、ユーザーはサードパーティインテグレーションに対し、スコープを特定した形でユーザーの Datadog データへのアクセスを許可することができます。この認証により、インテグレーションは Datadog にデータをプッシュしたり、Datadog からデータをプルしたりすることが可能になります。例えば、ユーザーがインテグレーションに対し Datadog モニターへの読み取りアクセスを許可した場合、インテグレーションはユーザーのモニターデータを直接読み取って、抽出することができます。
+OAuth enables Datadog customers to securely authorize third-party access to their Datadog organization. This authorization allows integrations to push data into Datadog or pull data out from Datadog without the need for customers to input API or app keys anywhere. For example, a user can consent to provide an on-call notification tool with read access to their Datadog organization's monitors.
 
-Datadog における OAuth の実装の詳細については、[Datadog OAuth2 のドキュメント][1]をご覧ください。
+For more information on Datadog's OAuth implementation, see the [Datadog OAuth2 documentation][1].
 
-## インテグレーションで OAuth を使用する
+## When to use OAuth in an integration
 
-OAuth の仕組みにより、Datadog をご利用のお客様は、数回のクリック操作で簡単かつセキュアにサードパーティプラットフォームを認証することができます。API キーやアプリキーを直接どこかに入力する必要はありません。既存のインテグレーションで OAuth を利用することも、新規のインテグレーション開発の一環として OAuth を構成することも可能です。
+OAuth support is required for all partner-built SaaS integrations that directly submit data to, or query data from, Datadog's public [API endpoints][12]. OAuth does not apply to software deployed on-premises, or to Datadog Agent checks. 
 
-OAuth を利用してインテグレーションをビルドする際は、アプリケーションがアクセスする必要のあるデータの正確なスコープを選択でき、ユーザーは要求された詳細なスコープに対するアクセス権を付与することができます。任意のスコープはサポートされていませんが、ユーザーが承認した場合、インテグレーションにより要求された全てのスコープがアクセス可能となります。
+## Build an integration with OAuth
 
-## OAuth を使ったインテグレーションの構築
+When building an integration with OAuth, you should only select the scopes to which your application needs access. After a customer consents to authorize your integration, all listed scopes become available to your application through a token.
 
-ここでは、[Marketplace][2] または [Integrations][3] ページのタイルを使って新規のインテグレーションをビルドする方法をご説明します。既存のインテグレーションをもとにビルドする場合や、新規のインテグレーションをビルドして、いずれかのページの既存のタイルに追加したい場合は、[既存のオファーに OAuth を追加する](#Adding-oauth-to-an-existing-offering)をご覧ください。
+You can include OAuth in a new integration (or add it to an existing integration) on the [Marketplace][2] or [Integrations][3] page by following the steps below. For existing integrations, note that there's no need to change your `app_uuid` in the `manifest.json`. 
 
-### テンプレートからアプリを作成する
+### Create an app from a template
 
-1. [Datadog Developer Platform][4] に移動して、**+New App** をクリックします。 
+1. Navigate to the [Datadog Developer Platform][4] and click **+New App**.
 
-   インテグレーション用の OAuth クライアントそれぞれについて、アプリを作成する必要があります。インテグレーションが公開されると、Datadog がこのアプリをインテグレーションに紐付けます。
+   You need to create an app for each integration OAuth client. Datadog ties this app to your integration once your integration is published.
 
-2. **Blank App** を選択して、アプリの名前を追加します。
-3. **作成**をクリックします。
-4. **Basic Information** タブで、詳細ビューに表示される情報を入力します。
-5. OAuth クライアントの公開準備が整ったら、**Mark Stable** ボタンをクリックします。
-6. **保存**をクリックします。
+2. Select a **Blank App** and add a name for your app.
+3. Click **Create**.
+4. In the **Basic Information** tab, complete the fields that populate in the details view.
+5. Once you are ready to publish your OAuth client, click the **Mark Stable** button.
+6. Click **Save**.
 
-### OAuth クライアントを作成する
+### Create an OAuth client
 
-OAuth クライアントはアプリケーションのコンポーネントで、ユーザーがアプリケーションに対し、自身の Datadog データへのアクセスを許可することが可能になります。クライアントがアクセス権を取得するには、適切なアクセストークンが必要です。
+The client is the component of an application that enables users to authorize the application access to the customer's Datadog data. In order to gain access, the client requires the appropriate access token.
 
-1. **Features** の **OAuth & Permissions** タブに移動し、**Create OAuth Client** をクリックします。
+1. Navigate to the **OAuth & Permissions** tab under **Features** and click **New Confidential OAuth Client**.
 
-   インテグレーション用に作成する OAuth クライアントは、クライアント ID とクライアントシークレットを提供する**機密クライアント**です。この段階で作成するクライアントはクライアントの非公開バージョンで、その資格情報を使ってテストを行うことができます。このクライアントの公開バージョンが作成された際には、新しい資格情報が付与されます。**この資格情報は、クライアント作成後は二度と表示されないため、必ず安全な場所に保管してください。**
+   The OAuth clients you create for integrations are **confidential clients** that provide a client ID and client secret. The client you create in this step is a private version of the client, whose credentials you can use for testing. When a published version of this client is created, you will receive a new set of credentials. **These credentials are never shown again after you create the client, so be sure to store them in a secure location.**
 
-2. 名前、説明、リダイレクト先の URI、オンボーディング用 URL などのクライアント情報を入力します。 
-3. スコープを検索して、**Requested** 欄のチェックボックスを選択することで、OAuth クライアントのスコープの構成を行います。
+2. Enter your client information such as the name, description, redirect URIs, and onboarding URL.
+3. Configure scopes for the OAuth client by searching for scopes and selecting their checkboxes in the **Requested** column.
 
-   スコープとは、顧客の Datadog アカウント内でアプリがアクセス可能なデータの種類を決定するものです。これにより、インテグレーションが必要なスコープにアクセスすることができます。スコープは必要に応じて後で追加できますので、ご自身のユースケースで必要とされる最低限のスコープのみを要求するようにしてください。
+   Scopes determine the types of data your app can access in the customer's Datadog account. This allows your integration to access the necessary scopes. Only request the minimum amount of scopes required for your use case, as more can be added later on as needed.
 
-   Datadog にデータを送信するには、`api_keys_write` スコープを選択する必要があります。これは、インテグレーションパートナーにのみ認められる非公開のスコープで、ユーザーに代わって API キーを作成することが可能になり、このキーを使ってデータを Datadog に送信することができます。 
+   In order to submit data into Datadog, the `api_keys_write` scope must be selected. This is a private scope that is only approved for integration partners and allows you to create an API key on the user's behalf, which you can use to send data into Datadog.
 
-4. **Save Changes** をクリックします。
-5. OAuth クライアントを作成してスコープを割り当てた後は、OAuth を通じて利用可能なエンドポイントを利用して、インテグレーションに OAuth PKCE プロトコルを実装し、認可コードの付与フローを完成させ、インテグレーションコードの記述を開始することができます。
+4. Click **Save Changes**.
+5. After creating an OAuth client and assigning it scopes, you can implement the OAuth PKCE protocol in your integration, complete the authorization code grant flow, and start writing integration code utilizing the endpoints available through OAuth.
 
-   認可コード付与フローでは、認可コードとリフレッシュトークンを受け取った後、認可コードをアクセストークンと交換します。アクセストークンは、Datadog からプルしたいデータにアクセスするために利用できます。 
+   In the authorization code grant flow, you receive an authorization code and refresh token, then exchange the code for an access token that can be used to access the data you want to pull from Datadog.
 
-   Datadog で使用する OAuth プロトコルの実装に関する詳細については、[Datadog OAuth2][1] をご覧ください。また、インテグレーションのビルドと公開に関する詳細については、[インテグレーション開発者用ドキュメント][5]をご覧ください。
+   For more information about implementing the OAuth protocol with Datadog, see [Datadog OAuth2][1]. For more information about building and publishing an integration, see the [Integrations developer documentation][5].
 
-6. OAuth プロトコルのテストを行います。クライアントの詳細ページにある **Test Authorization** をクリックすると、オンボーディング用 URL にリダイレクトされ、顧客がたどる認可フローが開始されます。
+### Test the OAuth client
 
-    クライアントが公開されるまでは、お客様の Datadog オーガニゼーションのメンバーのみがテスト中にクライアントを認可できます。
+Once you have implemented the OAuth protocol, you should test your OAuth client to ensure that you can send data into Datadog, or pull data out, according to your use case.
 
-7. OAuth が正しく機能しているかどうかを検証するために、リクエストのヘッダーにトークンを設定して、`marketplace_create_api` エンドポイントにリクエストを送信します。
+**Note**: Until your integration tile is published, you can only authorize the OAuth client from your sandbox organization. This means that you can only send data into or pull data out of your sandbox account.
 
-   このリクエストが成功した場合は、API キーが返されます。API キーは、ユーザーに代わって Datadog にデータを送信する際に使用できるよう、セキュリティに配慮して保存する必要があります。**最初のリクエストに対する応答が返された後は、この API キーの値に再度アクセスすることはできません**。
+To test your OAuth client, complete the following steps:
 
-8. US1 以外の Datadog アカウントから認可を要求して、OAuth クライアントが複数の [Datadog サイト][8]で機能することを確認します。
-   - 別のサイトのサンドボックスアカウントへのアクセス権がない場合は、`marketplace@datadog.com` までご連絡ください。
-   - Developer Platform で作成したアプリに移動して右上の歯車アイコンをクリックし、**Export App Manifest** をクリックして、*オリジナル*の Datadog サイトのアカウントからアプリのマニフェストをエクスポートします。
-   - *新しい* Datadog サイトのアカウントで Developer Platform に移動して、手順 2 でエクスポートしたアプリのマニフェストをインポートします。
-   - マニフェストのインポートが完了したら、**OAuth & Permissions** タブに移動して、OAuth クライアントとそのクライアント ID およびクライアントシークレットを確認します。この資格情報を使って、このサイトからの認可をテストします。
+#### Test that authorization is working properly
+Ensure that you do not encounter any errors when going through the basic authorization flow.
 
-9. 他にもアクセスを要求したスコープがある場合は、そちらのテストを行います。
+   1. Navigate to the Developer Platform, click the Edit icon on your app, and open the **OAuth and Permissions** tab.
+   2. Select your OAuth client, and click the  **Test Authorization** button on your client's details page.
+   3. This directs you to the onboarding URL and starts the authorization flow that a customer takes. By clicking this button, the `domain` parameter is provided on the redirect to the `onboarding_url`.
+   4. Go through the OAuth flow and authorize your integration.
 
-### OAuth クライアントを公開する
+#### Create an API Key
+If your OAuth client requests the `api_keys_write` scope, ensure that you can successfully make a request to the `marketplace_create_api` endpoint with your token in the headers of the request.
 
-OAuth クライアントを公開するには、まず [`integrations-extras`][5] または [Marketplace][6] GitHub リポジトリで、作成したインテグレーションについてプルリクエストを開く必要があります。
+If successful, this request returns an API key that you can find on the [API Keys Management page][10]. You must securely save this key to use it for submitting data into Datadog on behalf of the user. **You cannot access this API key value again after the initial request response**.
 
-プルリクエストの一環として、README ファイルを更新してください。`## Setup` 内に **uninstallation** セクションとして次の指示を記入します (カスタムの指示を追加した場合は併せて記入)。
+#### Test multiple Datadog sites
+Test that your OAuth client can work across multiple [Datadog sites][8] by kicking off authorization from your EU Datadog sandbox organization.
+   1. If you do not have access to a sandbox account on a different site, contact `ecosystems@datadog.com`.
+   2. Export your app manifest from the organization in the *original* US1 Datadog site by navigating to the app you've created in the Developer Platform, clicking the Gear icon to the right of **Documentation**, and clicking **Export App Manifest**.
+   3. In your EU sandbox organization, navigate to the Developer Platform and import your app manifest from Step 2.
+   4. After successfully importing your manifest, navigate to the **OAuth & Permissions** tab to find your OAuth client, along with its client ID and client secret. Update your OAuth implementation to use these credentials.
+   5. Navigate to the **Test Authorization** button, click it, and go through the OAuth flow.
 
-- このインテグレーションをアンインストールすると、それ以前に与えられた認可は全て取り消されます。
-- また、[API Keys ページ][10]でインテグレーション名を検索して、このインテグレーションに紐付けられた全ての API キーが無効になったことを確認してください。
+### Confirm data flow for all scopes
+Ensure that you are able to send data in, pull data out, or edit data for each scope you've requested.
 
+### Publish the OAuth client
 
-[Developer Platform][4] で公開プロセスを開始する方法
+#### Create or update your pull request
+In order to publish an OAuth client, you first need to open a pull request for your integration in either the [`integrations-extras`][5] or [Marketplace][6] GitHub repositories if you haven't already.
 
-1. **General** の **Publishing** タブに移動します。公開フローの手順 1 では、公開済みのクライアント ID とクライアントシークレットを受け取りました。手順 2 では、インテグレーションに関する追加の情報を入力し、以下で使用する公開済みの `app_uuid` を確認することができます。
+As a part of your pull request, complete the following steps:
 
-   クライアント ID、クライアントシークレット、`app_uuid` を安全な場所に保存します。
+1. Update your README file with an `## Uninstallation` section under `## Setup` that includes the following instructions (along with any custom instructions you would like to add):
+       - Once this integration has been uninstalled, any previous authorizations are revoked. 
+       - Additionally, ensure that all API keys associated with this integration have been disabled by searching for the integration name on the [API Keys page][10].
+2. Update your `manifest.json` file to reference this new `## Uninstallation` section. This reference should appear directly beneath the support field:
+       - ```
+           "support": "README.md#Support",
+           "uninstallation": "README.md#Uninstallation",
+         ```
 
-2. `integrations-extras` または `Marketplace` で**新規インテグレーション**のプルリクエストをオープンする際には、`manifest.json` ファイルの `app_uuid` フィールドに公開するのに、この `app_uuid` の値を使用します。`app_uuid` の値が一致しない場合、アプリケーションの公開が正しく行われません。**既存のインテグレーション**がある場合、`app_uuid` の更新は不要です。
+#### Initiate publishing process in Developer Platform
 
-公開済みの OAuth クライアントを直接編集することはできませんので、全てのテストが完了し、準備が整った段階で公開フローを実行してください。OAuth クライアントを更新するには、公開フローを再度実行する必要があります。**公開済みクライアントの資格情報は再表示されません**。
+To start the publishing process in the [Developer Platform][4]:
 
-インテグレーション公開プロセスの詳細については、[マーケットプレイスとインテグレーションのドキュメント][7]を参照してください。
+1. Navigate to the **Publishing** tab under **General**. At the top of this tab, you receive your published client ID and secret. Your OAuth implementation needs to be updated to include these client credentials. **Note:** Save your client ID and client secret in a secure location. This information is not shown again.
 
-## 既存のオファーに OAuth を追加する
+2. Under the Integration Publishing section, follow the steps to add your OAuth information to use below within your pull request. 
 
-既存のインテグレーションに OAuth クライアントを追加する手順は、上記とほぼ同じですが、いくつかの重要な違いがあります。
+3. When opening a pull request for a **new integration** in `integrations-extras` or `Marketplace`, copy the `app_uuid` value under the Integration Publishing section and paste this within your manifest.json file under the `app_uuid` field. 
 
-### UI Extension に接続されていない既存のインテグレーションがある場合
+Once an OAuth client is submitted for publishing, the team is notified. When your pull request is approved by all required parties and is ready to be merged, at that point your OAuth client gets published as well. Your integration tile is then published to your sandbox account (_not_ for all customers), and your OAuth client can then be authorized by any Datadog organization (not only your Sandbox organization).
 
-上記の[手順](#build-an-integration-with-oauth)に従い、インテグレーションタイルに新しいアンインストール手順を追加するためにプルリクエストを開くことを確認してください。
+At this point, Datadog recommends doing final testing with your OAuth client to ensure authorization is working smoothly.
 
-既存のインテグレーションがある場合は、`manifest.json` ファイル内の `app_uuid` を変更する必要はありません。
+#### Making changes after submitting your client for publishing
 
-### UI Extension に接続中の既存のインテグレーションがある場合 (同じタイルを共有)
+You cannot edit a published OAuth client directly, so only go through the publishing flow when everything has been tested and is ready to go. To make updates to the OAuth client after it has been submitted for publishing, you need to go through the publishing flow again and re-submit. **The published client credentials do not appear again**.
 
-アプリを作成するのではなく、Developer Platform で公開した UI Extension を含むアプリに移動し、残りの[手順](#create-an-oauth-client)に従ってください。
+For more information about publishing your integration tile and creating your pull request, see the [Marketplace and Integrations documentation][7].
 
-インテグレーションの OAuth クライアントを作成し、公開する準備ができたら、アプリの **Edit** をクリックし、**General** の下の **Publishing** タブに移動します。また、新しいアンインストール手順をタイルに追加するために、プルリクエストを開きます。
+## Further Reading
 
-**注**: 既存のインテグレーションまたは UI Extension がある場合は、`manifest.json` ファイル内の `app_uuid` を変更する必要はありません。
+Additional helpful documentation, links, and articles:
 
-### 公開されている UI Extension があり、同じタイルにインテグレーションを追加したい場合
+- [OAuth 2.0 in Datadog][1]
+- [Authorize your Datadog integrations with OAuth][11]
 
-アプリを作成するのではなく、Developer Platform で公開した UI Extension を含むアプリに移動し、残りの[手順](#create-an-oauth-client)に従ってください。
-
-README、画像フォルダなどの更新を含む、インテグレーションに関する追加情報で既存のタイルを更新するために、プルリクエストを開きます。公開プロセスで、このプルリクエストへのリンクを追加します。
-
-## その他の参考資料
-
-お役に立つドキュメント、リンクや記事:
-
-- [Datadog の OAuth 2.0][1]
-- [OAuth で Datadog のインテグレーションを認可する][11]
-
-[1]: https://docs.datadoghq.com/ja/developers/authorization/oauth2_in_datadog/
+[1]: https://docs.datadoghq.com/developers/authorization/oauth2_in_datadog/
 [2]: https://app.datadoghq.com/marketplace
 [3]: https://app.datadoghq.com/integrations
 [4]: https://app.datadoghq.com/apps
 [5]: https://github.com/DataDog/integrations-extras/
 [6]: http://github.com/DataDog/marketplace
-[7]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering/#list-an-offering-on-marketplace
-[8]: https://docs.datadoghq.com/ja/getting_started/site/
+[7]: https://docs.datadoghq.com/developers/integrations/marketplace_offering/#list-an-offering
+[8]: https://docs.datadoghq.com/getting_started/site/
 [9]: https://app.datadoghq.com/organization-settings/oauth-applications
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://www.datadoghq.com/blog/oauth/
+[12]: https://docs.datadoghq.com/api/latest/using-the-api/

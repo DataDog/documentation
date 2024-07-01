@@ -1,30 +1,30 @@
 ---
+title: Hostname and Tagging
 further_reading:
 - link: /opentelemetry/collector_exporter/
-  tag: ドキュメント
-  text: OpenTelemetry Collector のセットアップ
-title: ホスト名とタグ付け
+  tag: Documentation
+  text: Setting Up the OpenTelemetry Collector
 ---
 
-{{< img src="opentelemetry/collector_exporter/hostname_tagging.png" alt="OpenTelemetry から収集したホスト名情報" style="width:100%;" >}}
+{{< img src="opentelemetry/collector_exporter/hostname_tagging.png" alt="Hostname information collected from OpenTelemetry" style="width:100%;" >}}
 
-## 概要
+## Overview
 
-正しいホスト名とホストタグを抽出するために、Datadog Exporter は[リソース検出プロセッサー][2]と [Kubernetes 属性プロセッサー][3]を使用します。これらのプロセッサーにより、ホストとコンテナから[リソースセマンティック規則][1]の形式で情報を抽出することが可能になります。これは、ホスト名、ホストタグ、コンテナタグを構築するために使用されます。これらのタグは、テレメトリーシグナル間の自動相関や、Datadog 内でテレメトリーデータをフィルタリングしたりグループ化するためのタグベースのナビゲーションを可能にします。
+To extract the correct hostname and host tags, Datadog Exporter uses the [resource detection processor][2] and the [Kubernetes attributes processor][3]. These processors allow for extracting information from hosts and containers in the form of [resource semantic conventions][1], which is then used to build the hostname, host tags, and container tags. These tags enable automatic correlation among telemetry signals and tag-based navigation for filtering and grouping telemetry data within Datadog.
 
-詳細については、[リソース検出][2]と [Kubernetes 属性][3]プロセッサーの OpenTelemetry プロジェクトのドキュメントを参照してください。
+For more information, see the OpenTelemetry project documentation for the [resource detection][2] and [Kubernetes attributes][3] processors.
 
-## NoPassword
+## Setup
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-Collector の構成に以下の行を追加します。
+Add the following lines to your Collector configuration:
 
 ```yaml
 processors:
   resourcedetection:
-    # ベアメタル
+    # bare metal
     detectors: [env, system]
     system:
       resource_attributes:
@@ -58,16 +58,16 @@ processors:
 
 {{% tab "Kubernetes Daemonset" %}}
 
-以下の行を `values.yaml` に追加します。
+Add the following lines to `values.yaml`:
 ```yaml
 presets:
   kubernetesAttributes:
     enabled: true
 ```
 
-Helm `kubernetesAttributes` プリセットは、Kubernetes 属性プロセッサーがポッドからメタデータを抽出するために必要なサービスアカウントをセットアップします。必要なサービスアカウントの詳細については、[Kubernetes で重要なコンポーネント][1]を参照してください。
+The Helm `kubernetesAttributes` preset sets up the service account necessary for the Kubernetes attributes processor to extract metadata from pods. Read [Important Components for Kubernetes][1] for additional information about the required service account. 
 
-Collector 構成に以下を追加します。
+Add the following in the Collector configuration:
 
 ```yaml
 processors:
@@ -122,7 +122,7 @@ processors:
           key: app.kubernetes.io/managed-by
           from: pod
   resourcedetection:
-    # 使用しないものを削除
+    # remove the ones that you do not use
     detectors: [env, eks, ec2, aks, azure, gke, gce, system]
     timeout: 2s
     override: false
@@ -133,14 +133,14 @@ processors:
 
 {{% tab "Kubernetes DaemonSet -> Gateway" %}}
 
-以下の行を `values.yaml` に追加します。
+Add the following lines to `values.yaml`:
 ```yaml
 presets:
   kubernetesAttributes:
     enabled: true
 ```
 
-Daemonset と Gateway の両方で Helm の `k8sattributes` プリセットを使用して、`k8sattributesprocessor` がポッドからメタデータを抽出するために必要なサービスアカウントをセットアップします。必要なサービスアカウントの詳細については、[Kubernetes で重要なコンポーネント][1]を参照してください。
+Use the Helm `k8sattributes` preset in both Daemonset and Gateway, to set up the service account necessary for  `k8sattributesprocessor` to extract metadata from pods. Read [Important Components for Kubernetes][1] for additional information about the required service account. 
 
 DaemonSet:
 
@@ -154,7 +154,7 @@ processors:
     timeout: 2s
     override: false
 ```
-プロセッサーは DaemonSet のパススルーモードであるため、ポッドの IP アドレスのみを追加します。これらのアドレスは、Kubernetes API コールを行い、メタデータを抽出するために Gateway プロセッサーによって使用されます。
+Because the processor is in passthrough mode in the DaemonSet, it adds only the pod IP addresses. These addresses are then used by the Gateway processor to make Kubernetes API calls and extract metadata.
 
 Gateway:
 
@@ -216,16 +216,16 @@ processors:
 {{% /tab %}}
 {{% tab "Kubernetes Gateway" %}}
 
-以下の行を `values.yaml` に追加します。
+Add the following lines to `values.yaml`:
 
 ```yaml
 presets:
   kubernetesAttributes:
     enabled: true
 ```
-Helm `kubernetesAttributes` プリセットは、Kubernetes 属性プロセッサーがポッドからメタデータを抽出するために必要なサービスアカウントをセットアップします。必要なサービスアカウントの詳細については、[Kubernetes で重要なコンポーネント][1]を参照してください。
+The Helm `kubernetesAttributes` preset sets up the service account necessary for the Kubernetes attributes processor to extract metadata from pods. Read [Important Components for Kubernetes][1] for additional information about the required service account. 
 
-Collector 構成に以下を追加します。
+Add the following in the Collector configuration:
 
 ```yaml
 processors:
@@ -290,9 +290,9 @@ processors:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Datadog Operator
+## Data collected
 
-| OpenTelemetry 属性 | Datadog タグ | プロセッサー |
+| OpenTelemetry attribute | Datadog Tag | Processor |
 |---|---|---|
 | `host.arch` |  | `resourcedetectionprocessor{system}` |
 | `host.name` |  | `resourcedetectionprocessor{system,gcp,ec2,azure}` |
@@ -350,11 +350,11 @@ processors:
 | `container.image.tag` | `image_tag` | `k8sattributes` |
 
 
-## 完全な構成例
+## Full example configuration
 
-Datadog Exporter を用いた実際に動作する構成の完全な例については、[`k8s-values.yaml`][4] を参照してください。この例は Amazon EKS 用です。
+For a full working example configuration with the Datadog exporter, see [`k8s-values.yaml`][4]. This example is for Amazon EKS.
 
-## ログ出力例
+## Example logging output
 
 ```
 ResourceSpans #0

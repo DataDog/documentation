@@ -1,32 +1,32 @@
 ---
-kind: ガイド
-title: Datadog Forwarder を使用した Java サーバーレスアプリケーションのインスツルメンテーション
+title: Instrumenting Java Serverless Applications Using the Datadog Forwarder
+kind: guide
 ---
-## 概要
+## Overview
 
 <div class="alert alert-warning">
-Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serverless/installation/java">Datadog Lambda Extension を使用して Lambda 関数をインスツルメントする手順</a>に従ってください。Lambda がすぐに使える機能を提供する前に、Datadog Forwarder で Datadog Serverless をセットアップした場合は、このガイドを使用してインスタンスを維持してください。
+If you are a new user of Datadog Serverless, follow the <a href="/serverless/installation/java">instructions to instrument your Lambda functions using the Datadog Lambda Extension</a> instead. If you have setup Datadog Serverless with the Datadog Forwarder before Lambda offered out-of-the-box functionality, use this guide to maintain your instance.
 </div>
 
 <div class="alert alert-danger">
-<code>datadog-lambda-java</code> の一部の古いバージョンでは、推移的依存関係として <code>log4j <=2.14.0</code> をインポートします。<a href="#upgrading">アップグレードの手順</a>は以下の通りです。
+Some older versions of <code>datadog-lambda-java</code> import <code>log4j <=2.14.0</code> as a transitive dependency. <a href="#upgrading">Upgrade instructions</a> are below.
 </div>
 
-## 前提条件
+## Prerequisites
 
-[Datadog Forwarder Lambda 関数][2]は、AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
+The [Datadog Forwarder Lambda function][2] is required to ingest AWS Lambda traces, enhanced metrics, custom metrics, and logs.
 
-分散型トレーシングでサーバーレスアプリケーションを完全にインスツルメントするには、Java Lambda 関数が Java 8 Corretto (`java8.al2`)、Java 11 (`java11`) または Java 17 (`java17`) ランタイムを使用している必要があります。
+To fully instrument your serverless application with distributed tracing, your Java Lambda functions must be using the Java 8 Corretto (`java8.al2`), Java 11 (`java11`) or Java 17 (`java17`) runtime.
 
-## ブラウザトラブルシューティング
+## Configuration
 
-### インストール
+### Install
 
-以下のコードブロックのいずれかを `pom.xml` (Maven) または `build.gradle` (Gradle) に追加し、Datadog Lambda Library をローカルにインストールします。以下の `VERSION` を最新のリリースに置き換えてください (直前の `v` は省略): ![Maven Cental][4]
+Install the Datadog Lambda Library locally by adding one of the following code blocks into `pom.xml` (Maven) or `build.gradle` (Gradle). Replace `VERSION` below with the latest release (omitting the preceding `v`): ![Maven Cental][4]
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-`pom.xml` に以下の依存関係を含めます。
+Include the following dependency in your `pom.xml`:
 
 ```xml
 <dependency>
@@ -39,7 +39,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 {{% /tab %}}
 {{% tab "Gradle" %}}
 
-`build.gradle` に以下を含めます。
+Include the following in your `build.gradle`:
 
 ```groovy
 dependencies {
@@ -49,16 +49,16 @@ dependencies {
 {{% /tab %}}
 {{< /tabs >}}
 
-### インスツルメントする
+### Instrument
 
 
-1. 関数に Datadog Lambda レイヤーをインストールします。最新の `VERSION` は `{{< latest-lambda-layer-version layer="dd-trace-java" >}}` です。
+1. Install the Datadog Lambda Layer on your function. The latest `VERSION` is `{{< latest-lambda-layer-version layer="dd-trace-java" >}}`.
 
     ```yaml
     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:<VERSION>
     ```
 
-2. 関数に以下の環境変数を構成します。
+2. Configure the following environment variables on your function:
 
     ```yaml
     JAVA_TOOL_OPTIONS: -javaagent:"/opt/java/lib/dd-java-agent.jar" -XX:+TieredCompilation -XX:TieredStopAtLevel=1
@@ -67,7 +67,7 @@ dependencies {
     DD_TRACE_ENABLED: true
     ```
 
-3. Datadog Lambda ライブラリが提供するラッパーを使用して、Lambda ハンドラー関数をラップします。
+3. Wrap your Lambda handler function using the wrapper provided by the Datadog Lambda Library:
 
     ```java
     public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
@@ -83,35 +83,35 @@ dependencies {
     }
     ```
 
-### サブスクライブ
+### Subscribe
 
-関数の各ロググループに Datadog Forwarder Lambda 関数をサブスクライブします。これにより、メトリクス、トレース、ログを Datadog へ送信できるようになります。
+Subscribe the Datadog Forwarder Lambda function to each of your function's log groups. This enables you to send metrics, traces, and logs to Datadog.
 
-1. [まだの場合は、Datadog Forwarder をインストールします][2]。
-2. [Datadog Forwarder を関数のロググループにサブスクライブします][5]。
+1. [Install the Datadog Forwarder if you haven't][2].
+2. [Subscribe the Datadog Forwarder to your function's log groups][5].
 
-### Java Lambda 関数のコールドスタートの監視
+### Monitor Java Lambda function cold starts
 
-コールドスタートは、関数が以前に非アクティブだったときや比較的一定数のリクエストを受信していたときなどを含め、サーバーレスアプリケーションで受信するトラフィックが突然増加したときに発生します。ユーザーには、コールドスタートは遅い応答時間または遅延として認識されることがあります。Datadog では、モニターに Java Lambda 関数コールドスタートを構成し、Datadog Serverless Insights を使用して[コールドスタートを最低限に保つ][6]ことをおすすめしています。
+Cold starts occur when your serverless applications receive sudden increases in traffic, including when the function was previously inactive or when it was receiving a relatively constant number of requests. Users may perceive cold starts as slow response times or lag. Datadog recommends you configure a monitor on Java Lambda function cold starts, and use Datadog Serverless Insights to [keep cold starts to a minimum][6].
 
-{{< img src="serverless/java-monitor-cold-starts.png" alt="Java Lambda 関数コールドスタートの監視" style="width:100%;">}}
+{{< img src="serverless/java-monitor-cold-starts.png" alt="Monitor Java Lambda Function Cold Starts" style="width:100%;">}}
 
-Java Lambda 関数コールドスタートに Datadog モニターを作成するには、以下の条件を使用して[モニター作成手順][7]を実行します。
-- メトリクス名: `aws.lambda.enhanced.invocations`
-- ソース: `runtime:java*` および `cold_start:true`
-- アラートグループ: 各 `function_arn` に対し個別のアラートをトリガーするマルチアラート
+To create a Datadog monitor on Java Lambda function cold starts, follow the [monitor creation steps][7] with the following criteria:
+- Metric Name: `aws.lambda.enhanced.invocations`
+- From: `runtime:java*` and `cold_start:true`
+- Alert Grouping: Multi Alert, trigger a separate alert for each `function_arn`
 
-### タグ
+### Tag
 
-オプションではありますが、Datadog ではサーバーレスアプリケーションに予約タグ `env`、`service`、`version` を付けることを推奨しています。予約タグの詳細については、[統合サービスタグ付けのドキュメント][8]を参照してください。
+Although it is optional, Datadog recommends tagging your serverless applications with the reserved tags `env`, `service`, and `version`. For more information about reserved tags, see the [Unified Service Tagging documentation][8].
 
-## 確認
+## Explore
 
-以上の方法で関数を構成すると、[Serverless Homepage][9] でメトリクス、ログ、トレースを確認できるようになります。
+After configuring your function following the steps above, view your metrics, logs, and traces on the [Serverless homepage][9].
 
-### カスタムビジネスロジックの監視
+### Monitor custom business logic
 
-カスタムメトリクスを送信するには、以下のコード例をご参照ください。
+To submit a custom metric, see the sample code below:
 
 ```java
 public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, APIGatewayV2ProxyResponseEvent> {
@@ -122,11 +122,11 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
             myTags.put("product", "latte");
             myTags.put("order","online");
 
-        // カスタムメトリクスを送信
+        // Submit a custom metric
         ddl.metric(
-            "coffee_house.order_value", // メトリクス名
-            12.45,                      // メトリクス値
-            myTags);                    // 関連タグ
+            "coffee_house.order_value", // Metric name
+            12.45,                      // Metric value
+            myTags);                    // Associated tags
 
         URL url = new URL("https://example.com");
         HttpURLConnection hc = (HttpURLConnection)url.openConnection();
@@ -137,33 +137,33 @@ public class Handler implements RequestHandler<APIGatewayV2ProxyRequestEvent, AP
 }
 ```
 
-カスタムメトリクスの送信について、詳しくは[カスタムメトリクスのドキュメント][10]を参照してください。
+See the [custom metrics documentation][10] for more information on custom metric submission.
 
-### ログとトレースの接続
+### Connect logs and traces
 
-Java Lambda 関数ログとトレースを自動接続する方法については、[Java ログとトレースの接続][11]を参照してください。
+To automatically connect Java Lambda function logs and traces, see [Connecting Java Logs and Traces][11] for instructions.
 
-<div class="alert alert-info">正しい Java ランタイムを使用しないと、<code>Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar</code> (zip ファイルを開くときのエラーまたは JAR マニフェストがありません : /opt/java/lib/dd-java-agent.jar) などのエラーが発生する可能性があります。上記のとおり、ランタイムとして <code>java8.al2</code> または <code>java11</code> を使用してください。</div>
+<div class="alert alert-info"> Failing to use the correct Java runtime can result in errors, for example: <code>Error opening zip file or JAR manifest missing : /opt/java/lib/dd-java-agent.jar</code>. Make sure to use <code>java8.al2</code> or <code>java11</code> as your runtime, as described above. </div>
 
-## アップグレード
+## Upgrading
 
-Apache Foundation は、一般的な Java のログ記録ライブラリである log4j に [リモートでコードが実行される脆弱性][12] があることを発表しました。
-`datadog-lambda-java` の一部のバージョンには、log4j への推移的な依存関係があり、脆弱性が存在する可能性があります。脆弱性のあるバージョンは以下の通りです。
+The Apache Foundation has announced that log4j, a popular Java logging library, is [vulnerable to remote code execution][12].
+Some versions of `datadog-lambda-java` include a transitive dependency on log4j that may be vulnerable. The vulnerable versions are:
 
 -  `<=0.3.3`
 -  `1.4.0`
 
-`datadog-lambda-java` の最新バージョンは ![Maven Cental][4] です。以下のアップグレード手順を実行する場合は、このバージョンを使用してください (直前の `v` は省略)。
+The latest version of `datadog-lambda-java` is ![Maven Cental][4]. Use this version (omitting the preceeding `v`) when following the upgrading instructions below.
 
-`1.4.x` へのアップグレードを希望しない場合、 `0.3.x` には最新の log4j セキュリティパッチも適用されています。
-最新版の `0.3.x` は [`datadog-lambda-java` リポジトリ][13] にあります。
+If you do not wish to upgrade to `1.4.x`, `0.3.x` is updated with the latest log4j security patches as well.
+You may find the latest version of `0.3.x` in the [`datadog-lambda-java` repository][13].
 
-Lambda 関数の依存関係である `datadog-lambda-java` のバージョンは `pom.xml` (Maven) または `build.gradle` (Gradle) で設定されます。
+The version of the `datadog-lambda-java` dependency in your Lambda function is set in `pom.xml` (Maven) or `build.gradle` (Gradle).
 
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-`pom.xml` ファイルには、次のようなセクションが含まれています。
+Your `pom.xml` file contains a section similar to the following:
 
 ```xml
 <dependency>
@@ -173,14 +173,14 @@ Lambda 関数の依存関係である `datadog-lambda-java` のバージョン�
 </dependency>
 ```
 
-`VERSION` を最新バージョンの `datadog-lambda-java` (上記で入手可能) に置き換えます。
-その後、Lambda 関数を再デプロイしてください。
+Replace `VERSION` with the latest version of `datadog-lambda-java` (available above).
+Then redeploy your Lambda function.
 
 {{% /tab %}}
 
 {{% tab "Gradle" %}}
 
-`build.gradle` ファイルには、次のようなセクションが含まれています。
+Your `build.gradle` file contains a section similar to the following:
 
 ```groovy
 dependencies {
@@ -188,28 +188,28 @@ dependencies {
 }
 ```
 
-`VERSION` を最新バージョンの `datadog-lambda-java` (上記で入手可能) に置き換えます。
-その後、Lambda 関数を再デプロイしてください。
+Replace `VERSION` with the latest version of `datadog-lambda-java` (available above).
+Then redeploy your Lambda function.
 
 {{% /tab %}}
 {{< /tabs>}}
 
-0.3.x から 1.4.x へのアップグレードで、`dd-trace-java` トレーサーを使用したい場合は、`dd-trace-java` Lambda レイヤーへの参照を見つけ、次のように変更してください。
+If you are upgrading from 0.3.x to 1.4.x and you wish to use the `dd-trace-java` tracer, find the reference to the `dd-trace-java` Lambda layer and change it to:
 
 ```
 arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:4
 ```
 
 
-[2]: /ja/serverless/forwarder/
-[3]: /ja/serverless/enhanced_lambda_metrics
+[2]: /serverless/forwarder/
+[3]: /serverless/enhanced_lambda_metrics
 [4]: https://img.shields.io/maven-central/v/com.datadoghq/datadog-lambda-java
-[5]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
-[6]: /ja/serverless/insights#cold-starts
-[7]: /ja/monitors/types/metric/?tab=threshold#overview
-[8]: /ja/getting_started/tagging/unified_service_tagging/#aws-lambda-functions
+[5]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[6]: /serverless/insights#cold-starts
+[7]: /monitors/types/metric/?tab=threshold#overview
+[8]: /getting_started/tagging/unified_service_tagging/#aws-lambda-functions
 [9]: https://app.datadoghq.com/functions
-[10]: /ja/serverless/custom_metrics?tab=java
-[11]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
+[10]: /serverless/custom_metrics?tab=java
+[11]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [12]: https://www.datadoghq.com/log4j-vulnerability/
 [13]: https://github.com/DataDog/datadog-lambda-java/releases

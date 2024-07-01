@@ -1,63 +1,66 @@
 ---
+title: Metrics Explorer
+description: "Explore all of your metrics and perform analytics."
 aliases:
-- /ja/graphing/metrics/explorer/
-description: すべてのメトリクスを調査し分析する
+  - /graphing/metrics/explorer/
 further_reading:
-- link: /metrics/summary/
-  tag: ドキュメント
-  text: メトリクスの概要
-- link: /metrics/distributions/
-  tag: ドキュメント
-  text: ディストリビューションメトリクス
-title: メトリクスエクスプローラー
+  - link: /metrics/summary/
+    tag: Documentation
+    text: Metrics Summary
+  - link: /metrics/distributions/
+    tag: Documentation
+    text: Metrics Distributions
+
 ---
 
-## 概要
+## Overview
 
-[メトリクスエクスプローラー][1]は、メトリクスを Datadog で調査するための基本のインターフェースです。より高度なオプションを使用するには、[ノートブック][2]またはダッシュボード（[スクリーンボード][3]や[タイムボード][4]）を作成します。
+The [Metrics Explorer][1] is a basic interface for examining your metrics in Datadog. For more advanced options, create a [notebook][2] or dashboard ([screenboard][3], or [timeboard][4]).
 
-## グラフ
+## Graphing
 
-クエリエディタを使用して、Metrics Explorer ページに表示されるグラフをカスタマイズします。
+Use the query editor to customize the graph displayed on the Metrics Explorer page.
 
-ページの右上にある時間帯を指定することができます。デフォルトは **Past 1 Hour** です。
+You can specify the time frame in the top right corner of the page. The default is **Past 1 Hour**.
 
-{{< img src="metrics/explorer/metrics_explorer.png" alt="2 つのクエリを棒グラフで表示するメトリクスエクスプローラー" style="width:80%;" >}}
+{{< img src="metrics/explorer/metrics_explorer.png" alt="Metrics Explorer displaying two queries on a bar graph" style="width:80%;" >}}
 
-過去 24 時間に報告されていないメトリクスは、クエリエディタに表示されません。メトリクス名または完全なクエリを入力することで、これらのメトリクスをグラフに手動で追加することができます。
+Metrics that are not reported in the last 24 hours do not appear in the query editor. You can add these metrics to your graphs manually by entering the metric name or full query.
 
-### スコープ
+### Scope
 
-**from** テキストボックスでタグの値を選択または検索すると、スコープを定義できます。たとえば、**from** テキストボックスを使用して、メトリクスの値を特定のホスト、クラスター、環境、リージョンで絞り込むことができます。
+Define a filtering scope with the **from** text box by selecting or searching for tag values. For example, you can use the **from** text box to filter metric values from a specific host, cluster, environment, or region.
 
-### 空間集計
+### Space aggregation
 
-メトリクスの値を結合するために使用される[空間集計][5]を定義します。
+Define the [space aggregation][5] used to combine a metric's values.
 
-利用可能なオプションは次のとおりです。
+The possible options are:
 
-* 報告された値の平均値（デフォルト）
-* 報告された値の最大値
-* 報告された値の最小値
-* 報告された値の合計値
+* Average of reported values (default)
+* Max of reported values
+* Min of reported values
+* Sum of reported values
 
-**注**: これらのオプションは、選択したメトリクスのタイプによって変わります。
+**Note**: The options may differ based on the metric type selected.
 
-### 関数と数式
+### Functions and formulas
 
-関数ボタンを使って、オプションで関数をクエリに追加することができます。すべての関数が、すべてのメトリクスタイプで利用できるわけではありません。詳しくは[クエリ][6]のドキュメントをご覧ください。
+You can optionally add functions to your query using the function button. Not all functions are available for all metric types. For more information, see the [querying][6] documentation. 
 
-### エクスポート
+### Export
 
-右上のボタンで、グラフをダッシュボードやノートブックにエクスポートします。また、**Split Graph in Notebook** を使用すると、データをリージョン、サービス、環境などで個別のグラフに分割して表示することも可能です。
+Export your graph to a dashboard or notebook with the buttons at the top right. You can also use **Split Graph in Notebook** to view the data split into individual graphs by things like region, service, or environment.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/explorer
-[2]: /ja/notebooks/
-[3]: /ja/dashboards/#screenboards
-[4]: /ja/dashboards/#timeboards
-[5]: /ja/metrics/introduction/#space-aggregation
-[6]: https://docs.datadoghq.com/ja/dashboards/querying/#advanced-graphing
+[2]: /notebooks/
+[3]: /dashboards/#screenboards
+[4]: /dashboards/#get-started
+[5]: /metrics/introduction/#space-aggregation
+[6]: https://docs.datadoghq.com/dashboards/querying/#advanced-graphing
+
+

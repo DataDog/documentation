@@ -1,7 +1,8 @@
 ---
+title: multistep API test
 core_product:
-- synthetic monitoring
-title: マルチステップ API テスト
+  - synthetic monitoring
+related_terms:
+  - api test
 ---
-マルチステップ API テストは、いくつかの HTTP リクエストを連鎖させて、サービスでのユーザージャーニーを監視します。
-詳細は、<a href="/synthetics/multistep/?tab=requestoptions">ドキュメントを参照してください</a>。
+In Datadog Synthetic Monitoring, a multistep API test has several HTTP requests chained together to monitor user journeys on your services. For more information, <a href="/synthetics/multistep/?tab=requestoptions">see the documentation</a>.

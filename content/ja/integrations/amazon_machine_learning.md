@@ -1,95 +1,96 @@
 ---
-aliases:
-- /ja/integrations/awsml/
-categories:
-- cloud
-- aws
-- log collection
-- ai/ml
-dependencies: []
-description: AWS Machine Learning の予測カウントおよび失敗数を追跡。
-doc_link: https://docs.datadoghq.com/integrations/amazon_machine_learning/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/
-  tag: ブログ
-  text: 本番環境で ML モデルを監視するためのベストプラクティス
-git_integration_title: amazon_machine_learning
-has_logo: true
-integration_id: ''
-integration_title: Amazon Machine Learning
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_machine_learning
-public_title: Datadog-Amazon Machine Learning インテグレーション
-short_description: AWS Machine Learning の予測カウントおよび失敗数を追跡。
-version: '1.0'
+"aliases":
+- "/integrations/awsml/"
+"categories":
+- "cloud"
+- "aws"
+- "log collection"
+- "ai/ml"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track prediction counts and failures from AWS Machine Learning."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_machine_learning/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/"
+  "tag": "Blog"
+  "text": "Best practices for monitoring ML models in production"
+"git_integration_title": "amazon_machine_learning"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Amazon Machine Learning"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_machine_learning"
+"public_title": "Datadog-Amazon Machine Learning Integration"
+"short_description": "Track prediction counts and failures from AWS Machine Learning."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-AWS Machine Learning は、どのレベルの開発者でも機械学習技術を容易に使用できるようにするサービスです。
+AWS Machine Learning is a service that makes it easy for developers of all skill levels to use machine learning technology.
 
-このインテグレーションを有効にすると、Datadog にすべての Machine Learning メトリクスを表示できます。
+Enable this integration to see in Datadog all your Machine Learning metrics.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration first][1].
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `ML` が有効になっていることを確認します。
-2. [Datadog - AWS Machine Learning インテグレーション][3]をインストールします。
+1. In the [AWS integration page][2], ensure that `ML` is enabled under the `Metric Collection` tab.
+2. Install the [Datadog - AWS Machine Learning integration][3].
 
-### ログ収集
+### Log collection
 
-#### ログの有効化
+#### Enable logging
 
-AWS Machine Learning から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+Configure AWS Machine Learning to send logs either to a S3 bucket or to CloudWatch.
 
-**注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_machine_learning` に設定されているかを確認してください。
+**Note**: If you log to a S3 bucket, make sure that `amazon_machine_learning` is set as _Target prefix_.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、AWS Machine Learning ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. If you haven’t already, set up the [Datadog Forwarder Lambda function][4].
+2. Once the Lambda function is installed, manually add a trigger on the S3 bucket or CloudWatch log group that contains your AWS Machine Learning logs in the AWS console:
 
-    - [S3 バケットに手動トリガーを追加][5]
-    - [CloudWatch ロググループに手動トリガーを追加][6]
+    - [Add a manual trigger on the S3 bucket][5]
+    - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## データ収集
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "amazon_machine_learning" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
+Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### イベント
+### Events
 
-AWS Machine Learning インテグレーションには、イベントは含まれません。
+The AWS Machine Learning integration does not include any events.
 
-### サービスチェック
+### Service Checks
 
-AWS Machine Learning インテグレーションには、サービスのチェック機能は含まれません。
+The AWS Machine Learning integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-## その他の参考資料
+## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-machine-learning
-[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.datadoghq.com/logs/guide/forwarder/
+[5]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_machine_learning/amazon_machine_learning_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

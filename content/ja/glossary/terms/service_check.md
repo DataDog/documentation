@@ -1,5 +1,5 @@
 ---
-title: サービスチェック
+title: service check
 ---
-サービスチェックは、特定のサービスのステータスがアップしているかダウンしているかを監視します。
-詳細は、<a href="/developers/service_checks/">ドキュメントを参照してください</a>。
+A service check monitors whether the status of a specific service is up or down.
+For more information, <a href="/developers/service_checks/">see the documentation</a>.

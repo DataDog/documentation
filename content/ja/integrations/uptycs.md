@@ -1,155 +1,156 @@
 ---
-app_id: uptycs
-app_uuid: d27ee4b6-649d-42bd-b7ac-fb40537d7031
-assets:
-  dashboards:
-    Uptycs Events Dashboard: assets/dashboards/uptycs.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10400
-    source_type_name: Uptycs
-author:
-  homepage: https://www.uptycs.com
-  name: Uptycs
-  sales_email: sales@uptycs.com
-  support_email: support@uptycs.com
-categories:
-- クラウド
-- コラボレーション
-- slos
-- コンプライアンス
-- セキュリティ
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/uptycs/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: uptycs
-integration_id: uptycs
-integration_title: Uptycs
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: uptycs
-public_title: Uptycs
-short_description: Uptycs からアラートと検出を収集する
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Collaboration
-  - Category::Alerting
-  - カテゴリ::コンプライアンス
-  - Category::Security
-  - Offering::Integration
-  - Submitted Data Type::Events
-  configuration: README.md#Setup
-  description: Uptycs からアラートと検出を収集する
-  media:
-  - caption: Uptycs イベントダッシュボード
-    image_url: images/integration_dashboard_1.png
-    media_type: image
-  - caption: ホストごとの Uptycs イベントのトレンドグラフ
-    image_url: images/integration_dashboard_2.png
-    media_type: image
-  - caption: Datadog イベントとしての Uptycs 検出
-    image_url: images/data_collected_1.png
-    media_type: image
-  - caption: Datadog イベントとしての Uptycs アラート
-    image_url: images/data_collected_2.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Uptycs
+"app_id": "uptycs"
+"app_uuid": "d27ee4b6-649d-42bd-b7ac-fb40537d7031"
+"assets":
+  "dashboards":
+    "Uptycs Events Dashboard": assets/dashboards/uptycs.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": true
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10400"
+    "source_type_name": Uptycs
+"author":
+  "homepage": "https://www.uptycs.com"
+  "name": Uptycs
+  "sales_email": sales@uptycs.com
+  "support_email": support@uptycs.com
+"categories":
+- cloud
+- collaboration
+- alerting
+- compliance
+- security
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/uptycs/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "uptycs"
+"integration_id": "uptycs"
+"integration_title": "Uptycs"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "uptycs"
+"public_title": "Uptycs"
+"short_description": "Collect alerts and detection from Uptycs"
+"supported_os": []
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Cloud"
+  - "Category::Collaboration"
+  - "Category::Alerting"
+  - "Category::Compliance"
+  - "Category::Security"
+  - "Offering::Integration"
+  - "Submitted Data Type::Events"
+  "configuration": "README.md#Setup"
+  "description": Collect alerts and detection from Uptycs
+  "media":
+  - "caption": Uptycs events dashboard
+    "image_url": images/integration_dashboard_1.png
+    "media_type": image
+  - "caption": Uptycs events per host trend graph
+    "image_url": images/integration_dashboard_2.png
+    "media_type": image
+  - "caption": Uptycs detection as a Datadog event
+    "image_url": images/data_collected_1.png
+    "media_type": image
+  - "caption": Uptycs alert as a Datadog event
+    "image_url": images/data_collected_2.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Uptycs
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Uptycs は、脅威、脆弱性、誤構成、機密データの漏洩、およびコンプライアンス要件に対する対応を優先することで、現代の攻撃対象領域全体でのリスクを軽減します。これらの情報は、1 つのユーザーインターフェイスとデータモデルを通じてアクセス可能です。これには、オンプレミスとクラウドの境界を横断する脅威アクティビティを相関付ける機能も含まれ、より包括的な企業全体のセキュリティポスチャを提供します。
+Uptycs mitigates risk by prioritizing your responses to threats, vulnerabilities, misconfigurations, sensitive data exposure, and compliance requirements across your modern attack surface, making this information accessible through a single user interface and data model. This includes the capability to correlate threat activity as it traverses on-premises and cloud boundaries, providing a more comprehensive enterprise-wide security posture.
 
-略語でのサポートが必要ですか？CNAPP、CWPP、CSPM、KSPM、CIEM、CDR、XDR で対応します。Detection Cloud からスタートし、Google 風の検索機能を使って、今日あなたが必要としている攻撃対象範囲を把握しましょう。
+Looking for acronym coverage? We've got you covered with CNAPP, CWPP, CSPM, KSPM, CIEM, CDR, and XDR. Start with your Detection Cloud, utilize Google-like search, and the attack surface coverage you need today.
 
-詳しくは [Uptycs の Web サイト][1]をご覧ください。
+For more information, see the [Uptycs website][1].
 
-Uptycs インテグレーションにより、Uptycs のアラートや検出を Datadog のイベントに取り込むことができます。
+The Uptycs integration enables you to ingest your Uptycs alerts and detections into Datadog events.
 
-### アラート詳細
+### Alert Details
 
-各アラートには、以下の主要なコンポーネントが含まれています。
-   1. タイトル
-   2. 説明
-   3. Id: Uptycs アラート ID。
-   4. Uptycs アラートコード。
-   5. アラートの重大度。
-   6. アラートキーと値。
-   7. Asset details: アセット ID とホスト名。
-   8. Uptycs プラットフォームに移動するための Uptycs URL。
+Each alert contains the following main components:
+   1. Title
+   2. Description
+   3. Id: Uptycs alert ID.
+   4. Uptycs alert code.
+   5. Alert severity.
+   6. Alert key and value.
+   7. Asset details: Asset ID and host name.
+   8. Uptycs URL to navigate to the Uptycs platform.
 
-### 検出の詳細
+### Detection Details
 
-各検出には、以下の主要なコンポーネントが含まれています。
-   1. タイトルまたは名前
-   2. Id: Uptycs 検出 ID。
-   3. Score: Uptycs が算出したスコア。
-   4. Alerts: 検出に関連するアラートのリスト。
-   5. Events: 検出に関連するイベントのリスト。
-   5. Attack Matrix: アラートやイベントに関連するテクニック。
-   7. Asset details: アセット ID とホスト名。
-   8. Uptycs プラットフォームに移動するための Uptycs URL。
+Each detection contains the following main components:
+   1. Title or Name
+   2. Id: Uptycs detection ID.
+   3. Score: Uptycs calculated score.
+   4. Alerts: List of Alerts associated with the detection.
+   5. Events: List of Events associated with the detection.
+   5. Attack Matrix: Techniques associated with the alerts and events.
+   7. Asset details: Asset ID and host name.
+   8. Uptycs URL to navigate to the Uptycs platform.
 
-## 計画と使用
+## Setup
 
-このインテグレーションをセットアップするには、Uptycs のアカウントが必要です。Uptycs をご利用でない場合は、[お問い合わせ][2]から Uptycs アカウントを取得してください。
-また、Datadog API キーも必要です。
+To set up this integration, you must have an Uptycs account. If you are not an Uptycs customer, [contact us][2] for an Uptycs account.
+You'll also need Datadog API keys.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. [Datadog API キー][3]を作成します。
-2. Datadog API キーを使用して、Uptycs プラットフォーム上に Datadog インテグレーションの宛先を作成します。
-   1. Configuration > Destinations に移動します。
-   2. New destination をクリックします。
-   3. **Datadog** 宛先タイプを選択します。
-   4. 宛先の名前、Datadog ドメイン、API キーを入力します。テンプレートフィールドには、アラートや検出用のカスタムテンプレートを追加することもできます。
+1. Create a [Datadog API key][3].
+2. Create a Datadog Integration Destination on the Uptycs platform using your Datadog API key:
+   1. Go to Configuration > Destinations.
+   2. Click on New destination.
+   3. Select **Datadog** destination type.
+   4. Provide a name for the destination, your Datadog domain, and your API key. You can also add custom templates for alerts or detections in the template field.
 
-      ![インテグレーションセットアップその 1][4]
+      ![Integration setup part 1][4]
 
-   5. **Save** をクリックします。
-3. 宛先をセットアップしたら、その宛先の転送ルールを作成します。
-   1. Configuration > Detection Forwarding Rules > New rule に移動します。
-   2. 名前と説明を入力し、ルールの関連条件を選択します。
-   3. 'Destinations' オプションで、新しく作成した宛先を選択します。
+   5. Click **Save**.
+3. Once the destination is set up, create a forwarding rule for it.
+   1. Go to Configuration > Detection Forwarding Rules > New rule
+   2. Provide a name and description, then choose the relevant criteria for the rule.
+   3. In the 'Destinations' options, select the newly created destination.
 
-      ![インテグレーションセットアップその 2][5]
+      ![Integration setup part 2][5]
 
-   4. Enable Rule を選択し、**Save** をクリックします。
-4. 作成された宛先はアラート転送に使用できます。
-   1. Configuration > Alert Rules に移動します。
-   2. アラートルールを選択するか、複数のルールを一括選択します。
-   3. 'Destinations' オプションで、新しく作成した宛先を選択します。
-   4. 'Notify on Every Alert' (アラートごとに通知) と 'Close After Delivery' (配信後に閉じる) のオプションを選択します。
+   4. Select Enable Rule and click **Save**.
+4. The created destination can be used for alert forwarding.
+   1. Go to Configuration > Alert Rules.
+   2. Select an Alert Rule or bulk select several rules.
+   3. In the 'Destinations' options, select the newly created destination.
+   4. Select the options for 'Notify on Every Alert' and 'Close After Delivery'.
 
-      ![インテグレーションセットアップその 3][6]
+      ![Integration setup part 3][6]
 
-   5. **Save** をクリックします。
-6. Uptycs がアラートや検出を生成すると、Datadog イベントとして配信されます。
+   5. Click **Save**.
+6. Once Uptycs generates an alert or detection, it will be delivered as a Datadog Event.
 
-## ヘルプ
+## Troubleshooting
 
-ヘルプが必要な場合は、[サポート][7]までお問い合わせください。
+Need help? Contact [Support][7].
 
 [1]: https://www.uptycs.com
 [2]: https://www.uptycs.com/about/contact/
-[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#add-an-api-key-or-client-token
+[3]: https://docs.datadoghq.com/account_management/api-app-keys/#add-an-api-key-or-client-token
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/uptycs/images/integration_setup_1.png
 [5]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/uptycs/images/integration_setup_2.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/uptycs/images/integration_setup_3.png
 [7]: mailto:support@uptycs.com
+

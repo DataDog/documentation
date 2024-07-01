@@ -1,7 +1,7 @@
 ---
+title: cold start
 core_product:
-- serverless monitoring
-- infrastructure monitoring
-title: コールドスタート
+  - serverless monitoring
+  - infrastructure monitoring
 ---
-コンピューティングでは、コールドスタートとは、システムやコンポーネントが最近作成されたり、再起動されたりしたときのことを指します。サーバーレスコンピューティングでは、コールドスタートとは特に、機能を初めて起動したときやアイドル期間後に発生する可能性のある問題 (レイテンシーの増加など) を指します。
+In computing, a cold start refers to when a system or component was recently created or restarted. In serverless computing, a cold start refers specifically to the problems (such as increased latency) that may arise when a function is invoked for the first time or after an idle period.

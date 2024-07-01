@@ -1,41 +1,43 @@
 ---
+title: NetFlow Monitoring
+is_beta: true
 further_reading:
 - link: /network_monitoring/devices/profiles
-  tag: ドキュメント
-  text: ネットワークデバイスモニタリングのプロファイルの使用
-- link: https://www.datadoghq.com/blog/monitor-netflow-with-datadog/
-  tag: ブログ
-  text: Datadog で NetFlow トラフィックデータを監視する
-- link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
-  tag: ブログ
-  text: SNMP トラップによるネットワークパフォーマンスの問題の監視と診断
-is_beta: true
-title: NetFlow Monitoring
+  tag: Documentation
+  text: Using Profiles with Network Device Monitoring
+- link: "https://www.datadoghq.com/blog/monitor-netflow-with-datadog/"
+  tag: Blog
+  text: Monitor NetFlow traffic data with Datadog
+- link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
+  tag: Blog
+  text: Monitor and diagnose network performance issues with SNMP Traps
 ---
 
-## 概要
+## Overview
 
-Datadog で NetFlow Monitoring を使用すると、NetFlow 対応デバイスからのフローレコードを視覚化して監視することができます。
+Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your NetFlow-enabled devices.
 
-## インストール
+{{< img src="network_device_monitoring/netflow/home.png" alt="The NetFlow Monitoring page containing tabs for top sources, destinations, protocols, source ports, destination ports, and device trends" style="width:100%;" >}}
 
-ネットワークデバイスモニタリングで NetFlow Monitoring を使用するには、[Agent][1] のバージョン 7.45 以降を使用していることを確認してください。
+## Installation
 
-**注:** NetFlow データの送信には、[ネットワークデバイスモニタリングからのメトリクス収集][2]の構成は必須ではありませんが、この追加データを使用してデバイス名、モデル、ベンダー、インバウンド/アウトバウンドインターフェイス名などの情報でフローレコードをリッチ化できるため、強く推奨されています。
+To use NetFlow Monitoring with Network Device Monitoring, ensure you are using the [Agent][1] version 7.45 or newer.
 
-## 構成
+**Note:** Configuring [metric collection from Network Device Monitoring][2] is not a requirement for sending NetFlow data, although it is strongly recommended as this extra data can be used to enrich your flow records with information such as the device name, model, and vendor, as well as the inbound/outbound interface name.
 
-NetFlow、sFlow、または IPFIX トラフィックを Agent NetFlow サーバーに送信するようにデバイスを構成するには、Datadog Agent がインストールされている IP アドレス、具体的には `flow_type` と `port` にトラフィックを送信するようデバイスを構成する必要があります。
+## Configuration
 
-NetFlow を有効にするために、Agent コンフィグレーションファイル [`datadog.yaml`][3] を編集します。
+To configure your devices to send NetFlow, jFlow, sFlow, or IPFIX traffic to the Agent NetFlow server, your devices must be configured to send traffic to the IP address that the Datadog Agent is installed on, specifically the `flow_type` and `port`.
+
+Edit your [`datadog.yaml`][3] Agent configuration file to enable NetFlow:
 
 ```yaml
 network_devices:
   netflow:
     enabled: true
     listeners:
-      - flow_type: netflow9   # 選択肢: netflow5、netflow9、ipfix、sflow5
-        port: 2055            # デバイスはこのポートにトラフィックを送信する必要があります
+      - flow_type: netflow9   # choices: netflow5, netflow9, ipfix, sflow5
+        port: 2055            # devices must send traffic to this port
       - flow_type: netflow5
         port: 2056
       - flow_type: ipfix
@@ -44,38 +46,168 @@ network_devices:
         port: 6343
 ```
 
-変更内容を保存したら、[Agent を再起動][4]します。
+After saving your changes, [restart the Agent][4].
 
-## 集計
+## Aggregation
 
-Datadog Agent は、情報の大半を維持しつつ、プラットフォームに送信されるレコード数を制限するために、受信した NetFlow データを自動的に集計します。デフォルトでは、集計の間隔は 5 分間で、その間に共通の識別情報 (ソースと宛先アドレスおよびポート、プロトコルなど) をもつフローレコードが集計されます。また、Datadog Agent は、エフェメラルポートを検出して削除することができます。その結果、`port:*` のフローを見ることができます。
+The Datadog Agent automatically aggregates the received NetFlow data in order to limit the number of records sent to the platform while maintaining most of the information. By default there is a five-minute aggregation interval, during which flow recordings which share the same identifying information (source and destination address and port, protocol, and so forth) are aggregated together. Additionally, the Datadog Agent can detect ephemeral ports and remove them. As a result, you may see Flows with `port:*`.
 
-## リッチ化
+## Enrichment
 
-NetFlow データは Datadog のバックエンドにより処理され、デバイスおよびインターフェイスから利用できるメタデータでリッチ化されます。リッチ化は、NetFlow エクスポーターの IP とインターフェイスインデックスに基づいて行われます。再利用されたプライベート IP が競合する可能性に対し、曖昧性を解消するため、Agent コンフィギュレーションファイルごとに異なる `namespace` を構成することができます (`network_devices.namespace` の設定を使用します)。
+Your NetFlow data is processed by the Datadog backend and enriched with the available metadata from your devices and interfaces. Enrichment is based on the NetFlow exporter IP and the interface indexes. To disambiguate possible collisions between reused private IPs, you can configure a different `namespace` for each Agent configuration file (with the setting `network_devices.namespace`).
 
-NetFlow エクスポーターの IP がデバイスの IP の 1 つではあるが、SNMP インテグレーションで構成されたものではない場合、Datadog はエクスポーターの IP が属するデバイスの特定を試み、一意で一致する場合に限り、その情報で NetFlow データをリッチ化します。
+If the NetFlow exporter IP is one of the device IPs, but not the one configured on the SNMP integration, Datadog attempts to locate the device that the exporter IP belongs to, and enriches your NetFlow data with it is as long as the match is unique.
 
-## 視覚化
+### Cloud provider IP enrichment
 
-NetFlow のページは[ネットワークデバイスのページ][5]で確認できます。
-{{< img src="network_device_monitoring/netflow/netflow_page.png" alt="NetFlowのページ" >}}
+Datadog enriches IPs with public cloud provider service and region for IPv4 addresses, so you can filter for flow records from a specific service and region.
 
-このデータはダッシュボードやノートブックなどでも利用でき、より正確なクエリを確認したり、別のデータソースとの相関を見たりすることができます。
-{{< img src="network_device_monitoring/netflow/notebook.png" alt="ノートブック" >}}
+{{< img src="network_device_monitoring/netflow/netflow_cloud_provider_ip_enrichment.png" alt="Netflow IPs enriched with cloud provider name, region, and service" width="80%" >}}
 
-## 保持
+### Port enrichment
 
-NetFlow データは、デフォルトで 30 日間保持されます。
+Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority) data to resolve well known port mappings (such as Postgres on 5432 and HTTPS on 443). This can be seen when searching for source or destination application names on NetFlow.
 
+{{< img src="network_device_monitoring/netflow/netflow_iana_port_mappings.png" alt="The NetFlow page filtered by @destination.application_name and displaying names for ports such as HTTPS" width="80%" >}}
 
-## その他の参考資料
+#### Custom port enrichment
+
+You can also add your own custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
+
+From the **Configuration** tab in NetFlow, click **Add Enrichment** to upload the CSV file containing your custom enrichments.
+
+{{< img src="network_device_monitoring/netflow/new_enrichment.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="80%" >}}
+
+## Visualization
+
+You can access the data collected by NetFlow Monitoring on the [**NetFlow** page][5]. Hover over a flow from the list for additional information about hosts, pods, and containers, and access related network connections.
+
+{{< img src="network_device_monitoring/netflow/information.png" alt="Hover over a flow aggregated from a device emitting netflow to access related network connections" width="100%" >}}
+
+When creating a [NetFlow monitor][6], you should consider the following fields with respect to the source IP or destination IP from the perspective of the device. These fields provide insights into network traffic patterns and help with optimizing performance and security.
+
+### Interface information
+
+The following fields represent details about the ingress and egress interfaces.
+
+| Field Name | Field Description |
+|---|---|
+| Egress Interface Alias | Alias of the egress interface. |
+| Egress Interface Index | Index of the egress interface. |
+| Egress Interface Name | Name of the egress interface. |
+| Ingress Interface Alias | Alias of the ingress interface. |
+| Ingress Interface Index | Index of the ingress interface. |
+| Ingress Interface Name | Name of the ingress interface. |
+
+### Device information
+
+The following fields represent details related to the device generating NetFlow records.
+
+| Field Name | Field Description |
+|---|---|
+| Device IP | IP address used to map to a device in NDM for enrichment purposes. |
+| Exporter IP | IP address from which NetFlow packets originate. |
+| Device Model | Model of the device. |
+| Device Name | Name of the device. |
+| Device Namespace | Namespace of the device. |
+| Device Vendor | Vendor of the device. |
+
+### Flow details
+
+The following fields represent characteristics of the network flow.
+
+| Field Name | Field Description |
+|---|---|
+| Direction | Indicates whether the flow is inbound or outbound. |
+| Start Time | Timestamp of the first network packet between the source and destination IP addresses. |
+| End Time | Timestamp of the last network packet between the source and destination IP addresses. |
+| Ether Type | Type of Ethernet frame encapsulation (IPv4 or IPv6). |
+| Flow Type | Type of NetFlow data format (IPFIX, sFlow5, NetFlow5, NetFlow9, or Unknown). |
+| IP Protocol | Protocol used for communication (such as ICMP, TCP, or UDP). |
+| Next Hop IP | IP address of the next hop in the network path. |
+| TCP Flag | Union of all TCP flags observed over the life of the flow. |
+| Bytes | Total number of bytes transferred. |
+| Packets | Total number of packets transferred. |
+
+In addition to fields, you can also use out-of-the-box facets to start analyzing traffic patterns based on NetFlow destination and source IP addresses.
+
+### NetFlow Destination IP facets
+
+| Facet Name | Facet Description |
+|---|---|
+| Destination AS Domain | The domain associated with the Autonomous System (AS) to which the destination IP belongs. |
+| Destination AS Name | The name of the Autonomous System (AS) to which the destination IP belongs. |
+| Destination AS Number | The number assigned to the Autonomous System (AS) to which the destination IP belongs. |
+| Destination AS Route | The route information associated with the Autonomous System (AS) to which the destination IP belongs. |
+| Destination AS Type | The type of Autonomous System (AS) to which the destination IP belongs (such as transit, customer, peer). |
+| Destination Application Name | The name of the application associated with the destination IP. |
+| Destination City Name | The name of the city associated with the destination IP. |
+| Destination Cloud Provider Name | The name of the cloud provider associated with the destination IP. |
+| Destination Cloud Provider Region | The region of the cloud provider associated with the destination IP. |
+| Destination Cloud Provider Service | The service provided by the cloud provider associated with the destination IP. |
+| Destination Continent Code | The code representing the continent associated with the destination IP. |
+| Destination Continent Name | The name of the continent associated with the destination IP. |
+| Destination Country ISO Code | The ISO code representing the country associated with the destination IP. |
+| Destination Country Name | The name of the country associated with the destination IP. |
+| Destination IP | The destination IP address. |
+| Destination Latitude | The latitude coordinate associated with the destination IP. |
+| Destination Longitude | The longitude coordinate associated with the destination IP. |
+| Destination MAC | The Media Access Control (MAC) address associated with the destination IP. |
+| Destination Mask | The subnet mask associated with the destination IP. |
+| Destination Port | The destination port number. |
+| Destination Subdivision ISO Code | The ISO code representing the subdivision (such as state or province) associated with the destination IP. |
+| Destination Subdivision Name | The name of the subdivision (such as state or province) associated with the destination IP. |
+| Destination Timezone | The timezone associated with the destination IP. |
+
+### NetFlow Source IP facets
+
+| Facet Name | Facet Description |
+|---|---|
+| Source AS Domain | The domain associated with the Autonomous System (AS) to which the source IP belongs. |
+| Source AS Name | The name of the Autonomous System (AS) to which the source IP belongs. |
+| Source AS Number | The number assigned to the Autonomous System (AS) to which the source IP belongs. |
+| Source AS Route | The route information associated with the Autonomous System (AS) to which the source IP belongs. |
+| Source AS Type | The type of Autonomous System (AS) to which the source IP belongs (such as transit, customer, peer). |
+| Source Application Name | The name of the application associated with the source IP. |
+| Source City Name | The name of the city associated with the source IP. |
+| Source Cloud Provider Name | The name of the cloud provider associated with the source IP. |
+| Source Cloud Provider Region | The region of the cloud provider associated with the source IP. |
+| Source Cloud Provider Service | The service provided by the cloud provider associated with the source IP. |
+| Source Continent Code | The code representing the continent associated with the source IP. |
+| Source Continent Name | The name of the continent associated with the source IP. |
+| Source Country ISO Code | The ISO code representing the country associated with the source IP. |
+| Source Country Name | The name of the country associated with the source IP. |
+| Source IP | The source IP address. |
+| Source Latitude | The latitude coordinate associated with the source IP. |
+| Source Longitude | The longitude coordinate associated with the source IP. |
+| Source MAC | The Media Access Control (MAC) address associated with the source IP. |
+| Source Mask | The subnet mask associated with the source IP. |
+| Source Port | The source port number. |
+| Source Subdivision ISO Code | The ISO code representing the subdivision (such as state or province) associated with the source IP. |
+| Source Subdivision Name | The name of the subdivision (such as state or province) associated with the source IP. |
+| Source Timezone | The timezone associated with the source IP. |
+
+By monitoring these key fields and using facets to analyze NetFlow events, organizations can gain visibility into their network infrastructure, optimize performance, and improve security posture.
+
+{{< img src="monitors/monitor_types/netflow/monitor.png" alt="Create a dashboard with NetFlow data" width="100%" >}}
+
+This data is also available in dashboards and notebooks, enabling precise queries and correlation with other data sources. When creating a dashboard with NetFlow data, select **NetFlow** as the source in the **Graph your data** section.
+
+{{< img src="network_device_monitoring/netflow/dashboard.png" alt="Create a dashboard with NetFlow data" width="100%" >}}
+
+## Retention
+
+NetFlow data is retained for 30 days by default, with options for 15, 30, 60, and 90 day retention. 
+
+<div class="alert alert-danger">To retain NetFlow data for longer periods of time, contact your account representative.</div>
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /ja/network_monitoring/devices/snmp_metrics/
-[3]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[4]: /ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
-[5]: https://app.datadoghq.com/infrastructure/devices?facets=&viewTab=netflow
+[2]: /network_monitoring/devices/snmp_metrics/
+[3]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[4]: /agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
+[5]: https://app.datadoghq.com/devices/netflow
+[6]: /monitors/types/netflow/

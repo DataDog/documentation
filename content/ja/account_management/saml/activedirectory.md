@@ -1,33 +1,34 @@
 ---
-title: Microsoft Active Directory フェデレーションサービスの SAML IdP
+title: Microsoft Active Directory Federation Services SAML IdP
 aliases:
-  - /ja/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
+  - /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 further_reading:
-  - link: /account_management/saml/
-    tag: Documentation
-    text: Datadog アカウントのための SAML の構成
-  - link: /account_management/multi_organization/
-    tag: Documentation
-    text: 複数のアカウントを持つチームとオーガニゼーションの構成
+- link: /account_management/saml/
+  tag: Documentation
+  text: Configure SAML for your Datadog account
+- link: /account_management/multi_organization/
+  tag: Documentation
+  text: Configuring Teams & Organizations with Multiple Accounts
 ---
-Datadog の SSO 用 SAML インテグレーションは、オーガニゼーションを外部のユーザー管理システムにリンクして、一元的なシステムで資格情報を維持および管理するための手段を提供します。このドキュメントは、Datadog 目線でシングルサインオンの概要を説明したメインの「[SAML を使用したシングルサインオン][1]」ドキュメントのアドオンとして使用してください。
 
-Active Directory フェデレーションサービス (AD FS) 用の SAML コンフィギュレーションを開始するには、Microsoft の「[AD FS を使用してポータルに SAML 2.0 プロバイダーを構成する][2]」ドキュメントを参照してください。
+The Datadog SAML integration for SSO provides a pathway for linking an organization to an external user management system so that credentials can be kept and managed in a central system. This doc is meant to be used as an add-on to the main [Single Sign On With SAML][1] documentation, which gives an overview of single sign-on from the Datadog perspective.
 
-SAML の構成が完了すると、ユーザーは [SAML コンフィギュレーションページ][3]で提供されるリンクを使ってログインできるようになります。ただし、ユーザーがログインするには招待とアクティベーションが必要ですのでご注意ください。新しいユーザーを招待する際には、必ず Active Directory のユーザーレコードに対応するメールアドレスを使用してください。アドレスが一致しない場合は以下のように拒否される可能性があります。
+To begin configuration of SAML for Active Directory Federation Service (AD FS), see Microsoft's [Configure a SAML 2.0 provider for portals with AD FS][2] docs.
+
+Once SAML is configured, users can login by using the link provided in the [SAML configuration page][3]. Keep in mind that users still need to be invited and activated before they're able to login. Be sure to invite new users by using the email address corresponding to their Active Directory user records; otherwise they may be denied as shown below.
 
 {{< img src="account_management/saml/6TsPUla.png" alt="6TsPUla" style="width:60%;">}}
 
-ほとんどの設定では、ユーザーの `user@domain` は Microsoft のログイン名になりますが、そのように制限されているわけではありません。ユーザーレコード内で使用される電子メールアドレスは、以下のように確認できます。
+In most setups, a user's `user@domain` is their Microsoft login, but this is not enforced. You can confirm the email address used within the user record as shown below.
 
 {{< img src="account_management/saml/0R81SaK.png" alt="0R81SaK" style="width:60%;">}}
 
-SAML に関連する Datadog のアプリ内エラーに関する質問は、[Datadog サポートチーム][4]にお問い合わせください。AD FS の SAML 設定やエラーに関するお問い合わせは、[Microsoft サポート][5]までご連絡ください。
+For questions regarding Datadog in-app errors pertaining to SAML, contact [the Datadog support team][4]. For errors pertaining to AD FS SAML setup and errors, contact [Microsoft support][5].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/saml/
+[1]: /account_management/saml/
 [2]: https://docs.microsoft.com/en-us/powerapps/maker/portals/configure/configure-saml2-settings
 [3]: https://app.datadoghq.com/saml/saml_setup
-[4]: /ja/help/
+[4]: /help/
 [5]: https://powerapps.microsoft.com/en-us/support/

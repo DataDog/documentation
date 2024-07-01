@@ -1,31 +1,31 @@
 ---
+title: Service Catalog Best Practices
+kind: guide
 further_reading:
 - link: /tracing/service_catalog/
-  tag: ドキュメント
-  text: Datadog サービスカタログ
-kind: ガイド
-title: サービスカタログのベストプラクティス
+  tag: Documentation
+  text: Datadog Service Catalog
 ---
 
-このページでは、サービスカタログを利用する際のベストプラクティスについて説明します。
+This page covers best practices for working with the Service Catalog.
 
-## インフラストラクチャーテレメトリーの関連付け
+## Linking infrastructure telemetries
 
-`service` タグは、サービスカタログエントリのプライマリキーです。また、[統合サービス タグ付け][1]を利用した Datadog テレメトリーの最小の共通分析単位でもあります。[Kubernetes ポッドラベル][4]に `service` タグを直接設定します。`tags.datadoghq.com/service` ラベルに `service` タグを設定することで、メトリクスやログなどのすべてのポッドテレメトリーが Datadog でサービスタグを受け取るようになります。これが推奨される Kubernetes サービスラベルです。 
+The `service` tag is the primary key for Service Catalog entries. It's also the smallest common unit of analysis for Datadog telemetries with [Universal Service Tagging][1]. Set the `service` tag directly on [Kubernetes pod labels][4]. By setting the `service` tag within the `tags.datadoghq.com/service` label, all pod telemetry, like metrics and logs, receives the service tag in Datadog. This is the recommended Kubernetes service label. 
 
-それに比べ、Kubernetes のサービスにラベルを設定した場合、影響を受けるのはメトリクスのタグ付けのみで、他のテレメトリーには影響しません。ログとトレースに正しくタグ付けを行うためには、[追加のコンテナラベル][2]の適用が不可欠であるため、この方法は推奨されません。
+In comparison, setting the label on a Kubernetes service only affects metric tagging, not other telemetry. Applying [additional container labels][2] is essential for correctly tagging logs and traces, so this approach isn't recommended.
 
-## メタデータスキーマ v2.1+ における application フィールドの使用
+## Using the application field in metadata schema v2.1+
 
-マイクロサービスの場合、サービスは通常、Kubernetes デプロイメントと一致します。これは、所有権やその他のメタデータが明確に定義された、自己完結型の機能単位だからです。したがって、マイクロサービス内のその他のコンポーネントは、インスツルメンテーションプロセス の間に自動的に命名される可能性があります。自動的に検出されたすべてのコンポーネントに **application** フィールドを追加し、コアサービスと一緒にグループ化してください。
+For microservices, a service typically coincides with a Kubernetes deployment because its a self-contained unit of functionality with well-defined ownership and other metadata. Therefore, other components in a microservice might be named automatically during the instrumentation process. Add an **application** field to all the automatically discovered components to group them with the core service.
 
-モノリシックサービスの場合、サービスを複数定義すると便利な可能性があります。最低限、モノリス全体を表すサービスを選択する必要があります。そして、ドキュメントやソースコードなどの関連するメタデータと、ポッドメトリクスなどの関連するテレメトリを関連付けます。モノリス内の他の機能単位に独立した所有権属性 (運用マニュアルやドキュメントなど) がある場合、それらを表す追加のサービスを定義することが有益な場合があります。モノリスとその中の他のユニットとの間で階層が明確に定義されている場合、[メタデータスキーマ v2.1+][3] の**application** フィールドを使用することが推奨されます。モノリス自体のサービス名として **application** の値を設定し、モノリスに属するすべてのサブサービスにこの application フィールドを追加します。
+For monolithic services, defining multiple services might be helpful. At the minimum, you should choose a service to represent the monolith as a whole. Then, associate relevant metadata, like documentation or source code, and relevant telemetry, like pod metrics. It's sometimes useful to define additional services that represent other functional units within the monolith if they have separate ownership properties like operation runbooks and documentation. In cases where there's a clearly defined hierarchy between the monolith and other units within it, it's recommended to use the **application** field in [metadata schema v2.1+][3]. Set the **application** value as the service name for the monolith itself, and add this application field to all sub-services that belong to the monolith. 
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/unified_service_tagging/
-[2]: /ja/containers/docker/tag/
-[3]: /ja/service_catalog/adding_metadata#service-definition-schema-v21
-[4]: /ja/getting_started/tagging/unified_service_tagging/?tab=kubernetes#full-configuration
+[1]: /getting_started/tagging/unified_service_tagging/
+[2]: /containers/docker/tag/
+[3]: /service_catalog/adding_metadata#service-definition-schema-v21
+[4]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#full-configuration

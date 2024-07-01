@@ -1,83 +1,86 @@
 ---
-app_id: teradata
-app_uuid: 8cac0599-64ca-4a46-8c68-1c5db6cc65ca
-assets:
-  dashboards:
-    Teradata Overview: assets/dashboards/teradata_overview.json
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: teradata.disk_space.curr_perm.total
-      metadata_path: metadata.csv
-      prefix: teradata.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Teradata
-  monitors:
-    High disk space: assets/recommended_monitors/high_disk_space.json
-    Low ready threads: assets/recommended_monitors/low_ready_threads.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- キャッシュ
-- data store
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/teradata/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: teradata
-integration_id: teradata
-integration_title: Teradata
-integration_version: 1.1.0
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: teradata
-public_title: Teradata
-short_description: Teradata Vantage Database の健全性とパフォーマンスをモニタリングします。
-supported_os:
+"app_id": "teradata"
+"app_uuid": "8cac0599-64ca-4a46-8c68-1c5db6cc65ca"
+"assets":
+  "dashboards":
+    "Teradata Overview": assets/dashboards/teradata_overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": teradata.disk_space.curr_perm.total
+      "metadata_path": metadata.csv
+      "prefix": teradata.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10275"
+    "source_type_name": Teradata
+  "monitors":
+    "High disk space": assets/monitors/high_disk_space.json
+    "Low ready threads": assets/monitors/low_ready_threads.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- caching
+- data stores
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/teradata/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "teradata"
+"integration_id": "teradata"
+"integration_title": "Teradata"
+"integration_version": "2.2.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "teradata"
+"public_title": "Teradata"
+"short_description": "Monitor the health and performance of your Teradata Vantage Database."
+"supported_os":
 - linux
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Caching
-  - Category::Data Store
-  - Supported OS::Linux
-  - Supported OS::Windows
-  configuration: README.md#Setup
-  description: Teradata Vantage Database の健全性とパフォーマンスをモニタリングします。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Teradata
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Caching"
+  - "Category::Data Stores"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  "configuration": "README.md#Setup"
+  "description": Monitor the health and performance of your Teradata Vantage Database.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Teradata
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-[Teradata][1] は、マルチクラウドデータプラットフォーム内のエンタープライズレベルのリレーショナルデータベース管理システムです。
+[Teradata][1] is an enterprise-level relational database management system within a multi-cloud data platform. 
 
-このチェックでは、Datadog Agent を通じて Teradata を監視します。Datadog-Teradata インテグレーションを有効にして、Teradata のパフォーマンス、ディスク使用量、リソース消費量を表示します。
+This check monitors Teradata through the Datadog Agent. Enable the Datadog-Teradata integration to view Teradata performance, disk usage, and resource consumption.
 
-## セットアップ
+## Setup
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### インストール
+### Installation
 
-Teradata チェックは [Datadog Agent][3] パッケージに含まれています。
+The Teradata check is included in the [Datadog Agent][3] package.
 
-#### Teradata の準備
+#### Prepare Teradata
 
-1. [Teradata SQL Driver for Python][4] をダウンロードし、お使いの [OS][5] の埋め込み Agent pip コマンドを使用してインストールします。
+1. Download and install the [Teradata SQL Driver for Python][4] using the embedded agent pip command for your [operating system][5]:
 
 **Linux**
 
@@ -91,47 +94,47 @@ sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install teradatasql
 %PROGRAMFILES%\Datadog\"Datadog Agent"\embedded<PYTHON_MAJOR_VERSION>\python -m pip install teradatasql
 ```
 
-2. Teradata Database にアクセスできる、読み取り専用の `datadog` ユーザーを作成します。Teradata Database 上で `BTEQ` セッションを開始します。
+2. Create a read-only `datadog` user with proper access to your Teradata Database. Start a `BTEQ` session on your Teradata Database:
 
 ```shell
 CREATE USER "datadog" AS PASSWORD="<PASSWORD>";
 ```
 
-任意ですが、強くお勧めします。読み取り専用で監視するために指定された `datadog` ユーザーに新規または既存のロールを付与します。
+Optional, but strongly recommended: Grant a new or existing role to the `datadog` user designated for read-only monitoring purposes. 
 
 ```shell
 GRANT "<READ_ONLY_ROLE>" TO "datadog"; 
 ```
 
-Teradata システムは、デフォルトでほとんどの [Data Dictionary ビュー][12]で PUBLIC に `SELECT` 権限を付与しています。すべての Teradata Database ユーザーは `PUBLIC` 権限を持ちます。
+The Teradata system grants the `SELECT` privilege to PUBLIC on most [Data Dictionary views][12] by default. All Teradata Database users have `PUBLIC` privileges.
 
-3. リソースの使用量メトリクスを収集するには、[SPMA Resource Usage Table][6] を有効にします。これは、[`ctl` Teradata Utility][7] を使用して行います。
+3. To collect resource usage metrics, enable the [SPMA Resource Usage Table][6]. This is done with the [`ctl` Teradata Utility][7]:
 
 ```shell
-# ctl セッションの開始
+# Start ctl session
 ctl
 
-# RSS 画面の表示
+# View RSS screen
 screen rss
 
-# SPMA リソース使用量テーブルの有効化
+# Enable SPMA resource usage table
 SPMA=yes
 
-# 構成設定の保存
+# Save the configuration setting
 write
 ```
 
-注: SPMA Resource Table はデフォルトで 10 分毎に統計情報をログ収集します。ログの記録間隔は `rss` 画面で `ctl` を使用して構成することができます。リソース使用量のロギングはデータベースのパフォーマンスに影響を与える可能性があります。Resource Usage のロギング頻度を減らすには、`Node Logging Rate` 設定のロギング間隔を長くしてください。Resource Usage Logging の詳細については、Teradata [ドキュメント][8]を参照してください。
+Note: The SPMA Resource Table logs statistics every 10 minutes by default. The logging interval can be configured in the `rss` screen using `ctl`. Resource Usage logging may impact database performance. To reduce the frequency of Resource Usage logging, increase the logging interval of the `Node Logging Rate` setting. See the Teradata [documentation][8] for more information on Resource Usage Logging.
 
-4. Teradata インテグレーションは、デフォルトで DBC.DiskSpaceV システムビューからディスクスペースメトリクスを収集します。データベーステーブルのディスクスペースメトリクスを追加で収集するには、`collect_table_disk_metrics` オプションを有効にします。
+4. The Teradata integration collects disk space metrics from the DBC.DiskSpaceV system view by default. To collect additional disk space metrics on your database tables, enable the `collect_table_disk_metrics` option. 
 
 ```
 collect_table_disk_metrics: true
 ```
 
-監視するテーブルをフィルターするには、`tables` オプションを構成します。
+To filter the monitored tables, configure the `tables` option:
 
-監視するテーブルをリストで指定します。
+Specify tables to monitor with a list:
 
 ```
 tables:
@@ -139,7 +142,7 @@ tables:
     - <TABLE_2>
 ```
 
-`include` と `exclude` オプションでマップを指定し、監視するテーブルをカスタマイズすることができます。
+Customize your monitored tables by specifying a map with the `include` and `exclude` options:
 
 ```
 tables:
@@ -150,47 +153,48 @@ tables:
         - <TABLE_3>
 ```
 
-### コンフィギュレーション
+### Configuration
 
-1. teradata のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `teradata.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル teradata.d/conf.yaml][9] を参照してください。
+1. Edit the `teradata.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your teradata performance data. See the [sample teradata.d/conf.yaml][9] for all available configuration options.
 
-2. [Agent を再起動します][10]。
+2. [Restart the Agent][10].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][11]し、Checks セクションで `teradata` を探します。
+[Run the Agent's status subcommand][11] and look for `teradata` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "teradata" >}}
 
 
-### イベント
+### Events
 
-Teradata インテグレーションには、イベントは含まれません。
+The Teradata integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "teradata" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+Need help? Contact [Datadog support][14].
 
 
 [12]:https://docs.teradata.com/r/Teradata-VantageTM-Data-Dictionary/July-2021/Data-Dictionary-Views/Access-to-Data-Dictionary-Views/Default-PUBLIC-Privileges-for-Views
 [1]: https://www.teradata.com/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/Teradata/python-driver#Installation
-[5]: https://docs.datadoghq.com/ja/developers/guide/custom-python-package/?tab=linux#pagetitle
+[5]: https://docs.datadoghq.com/developers/guide/custom-python-package/?tab=linux#pagetitle
 [6]: https://docs.teradata.com/r/Teradata-VantageTM-Resource-Usage-Macros-and-Tables/July-2021/ResUsageSpma-Table
 [7]: https://docs.teradata.com/r/Teradata-VantageTM-Database-Utilities/July-2021/Control-GDO-Editor-ctl/Ctl-Commands/SCREEN
 [8]: https://docs.teradata.com/r/Teradata-VantageTM-Resource-Usage-Macros-and-Tables/July-2021/Planning-Your-Resource-Usage-Data/Resource-Usage-Logging
 [9]: https://github.com/DataDog/integrations-core/blob/master/teradata/datadog_checks/teradata/data/conf.yaml.example
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [12]: https://github.com/DataDog/integrations-core/blob/master/teradata/metadata.csv
 [13]: https://github.com/DataDog/integrations-core/blob/master/teradata/assets/service_checks.json
-[14]: https://docs.datadoghq.com/ja/help/
+[14]: https://docs.datadoghq.com/help/
+

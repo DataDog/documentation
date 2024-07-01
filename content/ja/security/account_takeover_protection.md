@@ -1,269 +1,268 @@
 ---
+title: Account Takeover Protection
+kind: documentation
 disable_toc: false
 further_reading:
 - link: security/application_security/terms/
-  tag: ドキュメント
-  text: ASM の用語と概念
+  tag: Documentation
+  text: ASM Terms and Concepts
 - link: security/application_security/threats/add-user-info/?tab=set_user
-  tag: ドキュメント
-  text: ユーザーの監視と保護
+  tag: Documentation
+  text: User Monitoring and Protection
 - link: security/application_security/guide/
-  tag: ドキュメント
-  text: Application Security Management ガイド
-kind: ドキュメント
-title: Account Takeover Protection
+  tag: Documentation
+  text: Application Security Management Guides
 ---
 
-ASM はアカウント乗っ取り攻撃を検出および軽減するために、アカウント乗っ取り (ATO) 保護を提供します。
+ASM provides account takeover (ATO) protection to detect and mitigate account takeover attacks.
 
-ATO 保護には次のような利点があります。
+ATO protection has the following benefits:
 
-* 攻撃者をブロックし、ユーザーを無効にします。
-* 標的とされたユーザーや侵害されたユーザーを識別します。
-* 既存のユーザーとそうでないユーザーを区別します。
-* 攻撃者を論理的なグループにまとめて軽減策を講じます。
+* Block attackers and disable users.
+* Identify targeted and compromised users.
+* Differentiate existing users from non-existing users.
+* Cluster attackers into logical groups for mitigation.
 
-## アカウント乗っ取り保護の概要
+## Account takeover protection overview
 
-アカウントの乗っ取りは、攻撃者がユーザーのアカウント資格情報にアクセスしてアカウントの制御権を奪うことで発生します。
+Account takeover occurs when an attacker gains access to a user's account credentials and assumes control of the account.
 
-以下の表は、*ビジネス別の攻撃者の動機*の一覧です。
+The following tables lists the *attacker motivation by business*:
 
-| 金銭的窃盗                           | アカウントの転売              |
+| Monetary Theft                           | Reselling Accounts              |
 |------------------------------------------|---------------------------------|
-| コンシューマーバンキングアプリ                    | SaaS プラットフォーム                  |
-| クレジットカードを発行する金融サービスアプリ | ギフトカードを保管するコンシューマー向けプラットフォーム |
+| Consumer banking apps                    | SaaS Platforms                  |
+| Financial service apps that issue credit cards | Consumer platforms with stored gift cards |
 
-## 攻撃者の戦略
+## Attacker strategies
 
-攻撃者は一般に公開されている自動化ツールを使用してユーザーのアカウント資格情報を侵害します。これらのツールの洗練度や規模はさまざまです。
+Attacks use publicly available automated tools to compromise a user's account credentials. The sophistication and scale of these tools have varying capabilities.
 
-一般的な戦略をいくつか紹介します。
+Here are some common strategies:
 
-資格情報スタッフィング
-: 盗まれたアカウント資格情報 (ユーザー名、電子メールアドレス、パスワードなど) を使用してユーザーアカウントに不正アクセスする自動化されたサイバー攻撃です。アクセスは Web アプリケーションに対する大規模な自動ログインリクエストを通じて行われます。
-: 資格情報スタッフィングは資格情報ダンプに依存しています。
+Credential stuffing
+: An automated cyberattack where stolen account credentials (usernames, email addresses, passwords, and so on) are used to gain unauthorized access to user accounts. Access is gained through large scale automated login requests directed against a web application.
+: Credential stuffing relies on credential dumps.
 
-資格情報ダンプ
-: 資格情報ダンプは、セキュリティ侵害で盗まれた資格情報が公開されたり、ダーク Web 市場で販売されたりすることで発生します。この結果、大量のユーザー名、パスワード、その他のアカウント詳細が公開されることがよくあります。
+Credential dumps
+: Credential dumps occur when stolen credentials from a security breach are posted publicly or sold on dark web markets. This often results in the release of a large number of usernames, passwords, and other account details.
 
-資格情報クラッキング
-: 資格情報クラッキングでは、正しいパスワードが見つかるまでさまざまなパスワードの組み合わせを系統的に試すことでユーザーのパスワードの解読を試みます。この方法では、さまざまなパスワード推測技術を用いたソフトウェアツールがよく使用されます。
+Credential cracking
+: Credential cracking involves attempting to decipher a user's password by systematically trying different combinations of passwords until the correct one is found. This method often uses software tools that apply various password guessing techniques.
 
-ブルートフォース
-: ブルートフォースは、ユーザーのパスワードや個人識別番号 (PIN) などの情報を取得するために試行錯誤する手法です。この攻撃では、自動化を利用して連続的な推測を生成し、システムに不正アクセスを試みます。
+Brute force
+: Brute force is a trial-and-error method used to obtain information such as a user password or personal identification number (PIN). In this attack, automation is used to generate consecutive guesses and gain unauthorized access to a system.
 
-## ATO の検出と防止のセットアップ
+## Setting up ATO detection and prevention
 
-ASM は ATO 攻撃の検出を管理します。
+ASM provides managed detections of ATO attacks.
 
-ATO の効果的な検出と防止には以下が必要です。
+Effective ATO detection and prevention requires the following:
 
-1. 本番ログインエンドポイントのインスツルメンテーション。これにより、ASM 管理のルールによる検出が可能になります。
-2. リモート構成。これにより、Datadog ユーザーインターフェイスから攻撃をブロックし、リモートインスツルメンテーションをプッシュできます。
-3. 通知。侵害されたアカウントを通知することができます。
-4. 最初の検出を確認します。自動化された保護が攻撃やエスカレーションの要件にどのように適合するかを理解します。
+1. Instrumenting your production login endpoints. This enables detection with ASM-managed rules.
+2. Remote configuration. This enables blocking attacks and pushing remote instrumentation from the Datadog user interface.
+3. Notifications. Ensures you are notified of compromised accounts.
+4. Reviewing your first detection. Understand how automated protection fits in with your attacks and escalation requirements.
 
 
-## 本番ログインエンドポイントのインスツルメンテーション
+## Instrumenting your production login endpoints
 
-ATO の追跡には以下のユーザーアクティビティイベントが使用されます。
+The following user activity events are used for ATO tracking.
 
-| リッチ化              | 自動インスツルメンテーション | 使用例                                     |
+| Enrichment              | Auto-instrumented | Use case                                     |
 |-------------------------|-------------------|----------------------------------------------|
-| `users.login.success`     | 真              | アカウント乗っ取り検出ルール要件       |
-| `users.login.failure`     | 真              | アカウント乗っ取り検出ルール要件       |
-| `users.exists`            | 偽             | シグナルの確認と攻撃対象かどうかの判断 |
-| `users.password_reset`     | 偽             | パスワードリセットによるユーザー列挙を識別する検出ルール要件 |
+| `users.login.success`     | True              | Account takeover detection rule requirement       |
+| `users.login.failure`     | True              | Account takeover detection rule requirement       |
+| `users.password_reset`     | False             | Detection rule requirement to identify user enumeration through password reset |
 
-自動的にインスツルメンテーションされないイベントの追跡を有効にする手順については、[ユーザーの監視と保護][1]を参照してください。
+Those enrichment need to hold a user identifier (unique to a user, numeric or otherwise) as `usr.id`. In the case of login failures, it also needs to know whether the user existed in the database or not (`usr.exists`). This helps identifying malicious activity that will regularly target missing accounts.
 
-関連する検出とインスツルメンテーション要件の最新リストについては、[検出ルール][2]ページを参照してください。
+For steps on enabling tracking for events that are not automatically instrumented, go to [User Monitoring and Protection][1].
+
+For the latest list of relevant detections and instrumentation requirements, go to [Detection Rules][2] page.
+
+[Automatic instrumentation][3] is a Datadog capability that automatically identifies user login success and failure for many authentication implementations.
+
+You are not limited to how Datadog defines these enrichments. Many platform products opt to add additional enrichments, such as identifying the customer organization or user role.
+
+## Remote Configuration
+
+[Remote Configuration][4] enables ASM users to instrument apps with custom [business logic][5] data in near real time.
+
+## Notifications
+
+[Notifications][6] are a flexible method to ensure the correct team members are informed of an attack. Collaboration [Integrations][7] with common communication methods are available out of the box.
 
 
-[自動インスツルメンテーション][3]は Datadog の機能で、ほとんどの認証実装に対してユーザーのログインの成功と失敗を自動的に識別します。`users.exists` のような推奨されるすべてのエンリッチメントに対してアプリケーションを追加インスツルメンテーションすることを推奨します。
+## Review your first detection
 
-Datadog がこれらのエンリッチメントを定義する方法に制限はありません。多くのプラットフォーム製品では、顧客組織やユーザーロールの識別など、他のエンリッチメントを追加できます。
+ASM highlights the most relevant information and suggests actions to take based on the detection type. It also indicates what actions have been taken.
 
-## リモート構成
-
-[リモート構成][4]を使用すると、ASM ユーザーは、`users.exists` やカスタム[ビジネスロジック][5]データなどのエンリッチメントをほぼリアルタイムでアプリにインスツルメンテーションできます。
-
-
-## 通知
-
-[通知][6]は、攻撃を適切なチームメンバーに確実に通知するための柔軟な方法です。一般的なコミュニケーション方法とのコラボレーション[インテグレーション][7]はすぐに使えます。
-
-
-## 最初の検出をレビュー
-
-ASM は、検出タイプに基づいて最も関連性の高い情報をハイライトし、取るべきアクションを提案します。また、どのようなアクションが実行されたかも表示されます。
-
-{{<img src="security/ato/review_first_detection2.png" alt="関心のあるさまざまな領域をハイライト表示したアカウント乗っ取りシグナル" style="width:100%;">}}
+{{<img src="security/ato/review_first_detection2.png" alt="An Account Takeover signal showing different highlighted areas of interest" style="width:100%;">}}
 
 **Compromised Users**
 
-**Signals** と **Traces** では、侵害されたユーザーと標的とされたユーザーを確認し、ブロックすることができます。
+Compromised and targeted users can be reviewed and blocked within **Signals** and **Traces**.
 
 **Signals**
 
-個々のユーザーは、**Targeted Users** を使用して **Signals** でブロックできます。
+Individual users can be blocked in **Signals** using **Targeted Users**.
 
-{{<img src="security/ato/compromised_users_signals2.png" alt="セキュリティシグナルに表示される侵害されたユーザー" style="width:100%;">}}
+{{<img src="security/ato/compromised_users_signals2.png" alt="Compromised users shown on a security signal" style="width:100%;">}}
 
 **Traces**
 
-個々のユーザーは、**User** の **Traces** でブロックできます。このオプションを表示するには、任意のユーザーをクリックしてください。
+Individual users can be blocked on **Traces**, in **User**. Click on any user to show this option.
 
-{{<img src="security/ato/traces_block_user.png" alt="セキュリティトレースエクスプローラーに表示される侵害されたユーザー" style="width:100%;">}}
+{{<img src="security/ato/traces_block_user.png" alt="Compromised users shown in the security trace explorer" style="width:100%;">}}
 
-## シグナルの確認と保護のベストプラクティス
+## Best practices for signal review and protection
 
-アカウント乗っ取り攻撃を検出および軽減するために、以下のベストプラクティスを確認してください。
+Review the following best practices to help you detect and mitigate account takeover attacks.
 
-### インシデント対応計画の策定
+### Develop an incident response plan
 
-インシデント対応計画を策定するために、次のセクションを確認してください。
+Review the following sections to help you develop an incident response plan.
 
-#### 認証済みスキャナーを使用していますか？
+#### Do you use authenticated scanners?
 
-信頼できる IP を特定し、自動的にブロックされないようにします。この手順は、次の場合に役立ちます:
+Identify trusted IPs, preventing them from being automatically blocked. This step is useful for the following: 
 
-- ログインを試みる承認されたスキャンソース。
-- 単一の IP アドレスの背後に多数のユーザーを持つ企業サイト。
+- Approved scanning sources that attempt to log in.
+- Corporate sites with large numbers of users behind single IP addresses.
 
-信頼済み IP を構成するには、[Passlist][12] を使用して、`Monitored` エントリを追加します。監視対象エントリは自動ブロックから除外されます。
+To configure trusted IPs, use [Passlist][12] and add a `Monitored` entry. Monitored entries are excluded from automated blocking.
 
-{{<img src="security/ato/passlist2.png" alt="監視パスリスト" style="width:100%;">}}
+{{<img src="security/ato/passlist2.png" alt="Monitored passlist" style="width:100%;">}}
 
-#### 顧客の認証プロファイルを把握
+#### Know your customer authentication profile
 
-以下のような、顧客が認証するネットワークを確認します。
+Review the networks your customers authenticate from, such as:
 
-- モバイル ISP
-- 企業 VPN
-- 住宅用 IP
-- データセンター
+- Mobile ISPs
+- Corporate VPNs
+- Residential IPs
+- Data centers
 
-認証ソースを理解することは、ブロッキング戦略に役立ちます。
+Understanding authentication sources can inform your blocking strategy. 
 
-例えば、あなたは顧客がデータセンターからコンシューマーアプリケーションで認証を行うことを想定*していない*かもしれません。その場合、そのデータセンターに関連する IP をブロックする自由度が高まります。
+For example, you might *not* expect customers to authenticate with your consumer application from data centers. Consequently, you might have more freedom to block the IPs associated with that data center. 
 
-それにもかかわらず、顧客がモバイル ISP から全てを発信している場合、それらの ISP をブロックすると、正当なトラフィックに影響を与える可能性があります。
+Nevertheless, if your customers source entirely from Mobile ISPs, you might have an impact to legitimate traffic if you block those ISPs.
 
-あなたの顧客がどのような人たちなのか、そして彼らのアカウント名の構造を考えてみてください。
+Consider who your customers are, and their account name structure.
 
-あなたの顧客はこれらの属性に一致していますか？
+Do your customers match these attributes?
 
-- 整数、企業ドメイン、数字とテキストの組み合わせなど、予想される ID 形式を持つ従業員。
-- 顧客企業に関連するドメイン名を使用している SaaS の顧客。
-- Gmail や Proton Mail などの無料プロバイダーを使用しているコンシューマー。
+- Employees with an expected ID format such as integers, corporate domains, or combinations of numbers and text.
+- SaaS customers using domain names associated with the customer company.
+- Consumers using free providers such as Gmail or Proton Mail.
 
-顧客のアカウント名の構造を理解することで、攻撃が標的型なのか、それとも大量の資格情報を無差別に試すような攻撃なのかを判断することができます。
+Understanding your customers' account name structure helps you determine if attacks are targeted or blind attempts at credential stuffing.
 
 
-### 分散攻撃
+### Distributed attacks
 
-攻撃は可用性、ユーザーの資金、および正規ユーザーに影響を与える可能性があるため、高度な分散攻撃については、多くの場合、ビジネス上の意思決定の上ブロックすることになります。
+Blocking advanced distributed attacks is often a business decision because attacks can impact availability, user funds, and legitimate users. 
 
-このような攻撃を軽減するための 3 つの重要なコンポーネントを紹介します。
+Here are three critical components for success in mitigating these attacks:
 
-1. 適切なオンボーディング: ASM によるブロックの構成はできていますか？
-2. 適切な構成: クライアント IP と X-Forwarded-For (XFF) HTTP ヘッダーを正しく設定していますか？
-3. 内部コミュニケーション計画: セキュリティチーム、サービスオーナー、製品リードとのコミュニケーションは、大規模攻撃の軽減による影響を理解する上で非常に重要です。
+1. Proper onboarding: Are you configured for blocking with ASM?
+2. Proper configuration: Ensure you have correctly set client IPs and X-Forwarded-For (XFF) HTTP headers.
+3. Internal communication plans: Communication with security teams, service owners, and product leads is critical to understanding the impact of mitigating large scale attacks.
 
-<div class="alert alert-info">対応者は、すべての ASM シグナルに含まれるタグを使用して、サービスオーナーを特定することができます。</div>
+<div class="alert alert-info">Responders can identify service owners using the tags in all ASM signals.</div>
 
-### 傾向を知る
+### Know your trends
 
-[Threats Overview][11] を使用して、サービスに対するログイン失敗の急増など、ビジネスロジックの傾向を監視します。
+Use the [Threats Overview][11] to monitor business logic trends, such as spikes in failed logins against your services.
 
 {{<img src="security/ato/threats_overview2.png" alt="Threats Overview" style="width:100%;">}}
 
 
-### シグナルの確認
+### Signal review
 
-シグナルに関する以下のベストプラクティスを確認してください。
+Review the following best practices for signals.
 
-#### IP アドレス
+#### IP addresses
 
-攻撃者のブロックには短い時間を使用します。15 分以内を推奨します。攻撃者が分散型のアカウント乗っ取りで IP アドレスを再利用することは稀です。
+Use short durations for blocking attackers. 15 minutes or less is recommended. It is uncommon for attackers to reuse IP addresses in distributed account takeovers.
 
-#### データセンター
+#### Data centers
 
-安価な仮想プライベートサーバー (VPS) やホスティングプロバイダーを利用した攻撃もあります。攻撃者の動機は、低コストで自動化されているため、データセンターで新しい IP アドレスにアクセスできることにあります。
+Some attacks are launched using inexpensive virtual private servers (VPS) and hosting providers. Attackers are motivated by how their low cost and automation enables access to new IP addresses at the data center.
 
-多くのコンシューマーアプリケーションでは、データセンター、特に低コストのデータセンターや VPS プロバイダーからのユーザー認証の発生率は低いです。ネットワーク範囲が小さく、想定されるユーザー認証動作の範囲内にない場合は、データセンターまたは ASN 全体をブロックすることを検討してください。
+Many consumer applications have low occurrences of user authentication from data centers, especially low cost data centers and VPS providers. Consider blocking the entire data center or ASN when the network range is small, and not within your expected user authentication behavior.
 
-<div class="alert alert-info">Datadog は、IPinfo や Spur などのサードパーティのデータソースを使用して、IP がホスティングプロバイダーであるかどうかを判断します。Datadog はこのデータを Datadog インフラストラクチャー内で処理します。</div>
+<div class="alert alert-info">Datadog uses third party data sources such as IPinfo and Spur to determine if an IP is a hosting provider. Datadog processes this data within Datadog infrastructure.</div>
 
-#### プロキシ
+#### Proxies
 
-Datadog は [Spur][8] を使用して、IP がプロキシであるかどうかを判断します。Datadog は、ASM が管理するアカウント乗っ取りルールでより迅速に検出するために、侵害の指標 (IOC) とアカウント乗っ取り攻撃を相関させます。
+Datadog uses [Spur][8] to determine if an IP is a proxy. Datadog correlates indicators of compromise (IOCs) with account takeover attacks for faster detection with the ASM-managed account takeover rules.
 
-Datadog は、IP アドレスの脅威インテリジェンス IOC のみに基づいて IP アドレスをブロックしないことを推奨します。詳しくは、脅威インテリジェンスの[ベストプラクティス][9]を参照してください。
+Datadog recommends never blocking IP addresses solely based on threat intelligence IOCs for IP addresses. See our threat intelligence [best practices][9] for details.
 
-所有権や脅威インテリジェンスを含む IP の詳細は、IP アドレスの詳細で確認できます。これらの詳細を表示するには、IP アドレスをクリックしてください。
+Details on IPs, including ownership and threat intelligence, are available in the IP address details. Click on an IP addresses to view these details.
 
-分散型アカウント乗っ取りでは、2 種類のプロキシが頻繁に見られます。
+Two types of proxies are frequently seen in distributed account takeovers:
 
-- ホスティングプロキシ: データセンターに存在するプロキシで、多くの場合、データセンターのホストが侵害された結果です。ホスティングプロキシとやりとりするためのガイダンスはデータセンターと同様です。
+- Hosting proxies: Proxies that exist at data centers, and are often the result of a compromised host at that data center. Guidance for interacting with hosting proxies is similar to data centers.
 
-- レジデンシャルプロキシ: 住宅用 IP の背後に存在するプロキシ。レジデンシャルプロキシは、モバイルアプリケーション SDK またはブラウザのプラグインによって有効化されることがよくあります。SDK またはプラグインのユーザーは通常、プロキシを実行していることに気づきません。レジデンシャルプロキシとして識別された IP アドレスから良性のトラフィックが発生することはよくあります。
+- Residential proxies: Proxies that exist behind residential IPs. Residential proxies are frequently enabled by mobile application SDKs or browser plugins. The user of the SDK or plugin is typically unaware that they are running a proxy. It is common to see benign traffic from IP addresses identified as residential proxies.
 
-#### モバイル ISP
+#### Mobile ISPs
 
-Datadog は、IPinfo や Spur などのサードパーティを使用して、IP がモバイル ISP であるかどうかを判断します。
+Datadog uses third parties such as IPinfo and Spur to determine if an IP is a Mobile ISP.
 
-モバイル ISP をブロックする場合は注意してください。モバイル ISP は [CGNAT][10] を使用し、頻繁に各 IP アドレスの背後に多数の電話を持っています。
+Exercise caution when blocking Mobile ISPs. Mobile ISPs use [CGNAT][10] and frequently have large numbers of phones behind each IP address. 
 
-#### 攻撃者の属性
+#### Attacker attributes
 
-攻撃者の属性を使用して、レスポンスアクションの目標を設定します。
+Use attacker attributes to target response actions.
 
-Datadog は、攻撃者の属性の類似性によって攻撃者をクラスター化します。対応者はカスタムルールを使用して、しつこい攻撃者の属性をブロックすることができます。
+Datadog clusters attackers by the similarity of their attributes. Responders can use custom rules to block the attributes of persistent attackers.
 
 
-### 保護
+### Protection
 
-保護に関する以下のベストプラクティスを確認してください。
+Review the following best practices for protection.
 
-#### 自動化された保護
+#### Automated protection
 
-管理されたルールセットを評価し、どのルールが社内の自動ブロックポリシーに適合するかを判断します。
+Evaluate the managed ruleset to determine which rules fit your internal automated blocking policies. 
 
-ポリシーがない場合は、既存の検出を確認し、**Signals** で推奨される対応から始めます。長期間にわたって実行された最も関連性の高いアクションに基づいてポリシーを構築します。
+If you do not have a policy, review your existing detections and start with the suggested responses in **Signals**. Build your policy based on the most relevant actions taken over time.
 
-#### ユーザー
+#### Users
 
-**Signals** では、**What Happened** および **Targeted Users** セクションに、試行されたユーザー名の例が示されています。
+In **Signals**, the **What Happened** and **Targeted Users** sections provide examples of the attempted usernames.
 
-**Traces** セクションでは、ユーザーが存在するかどうかを識別します。ユーザーが存在するかどうかを理解することは、インシデント対応の決定に影響します。
+The **Traces** section identifies if the users exist. Understanding if users exist can influence your incident response decisions.
 
-以下の侵害後の手順を使用して、インシデント対応計画を策定します。
+Develop an incident response plan using the following post compromise steps:
 
-1. 侵害されたユーザーアカウントの監視
-2. 資格情報の無効化を計画し、資格情報を更新するようユーザーに連絡します。
-3. ASM を使用してユーザーをブロックすることを検討します。
+1. Monitoring compromised user accounts.
+2. Plan to invalidate credentials and contact users to update credentials.
+3. Consider blocking users using ASM.
 
-攻撃の動機は、侵害後のアクティビティに影響を与えます。アカウントの転売を目的とする攻撃者は、侵害直後にアカウントを使用する可能性は低いでしょう。
-貯蓄された資金にアクセスしようとする攻撃者は、侵害後すぐにアカウントを使用します。
+Attack motivation can influence post-compromise activity. Attackers wanting to resell accounts are unlikely to use accounts immediately after a compromise.
+Attackers attempting to access stored funds will use accounts immediately after compromise.
 
-攻撃者のブロックに加え、侵害されたユーザーのブロックを検討してください。
+Consider blocking compromised users in addition to blocking the attacker.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/security/application_security/threats/add-user-info/
+[1]: https://docs.datadoghq.com/security/application_security/threats/add-user-info/
 [2]: https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name
 [3]: https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRule%3Atrue%20dependency%3A%28business_logic.users.%2A%29%20&deprecated=hide&groupBy=none&sort=rule_name
-[4]: https://docs.datadoghq.com/ja/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
+[4]: https://docs.datadoghq.com/agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [5]: https://app.datadoghq.com/security/appsec/business-logic
-[6]: https://docs.datadoghq.com/ja/security/notifications/rules/
+[6]: https://docs.datadoghq.com/security/notifications/rules/
 [7]: https://app.datadoghq.com/integrations?category=Collaboration
-[8]: https://docs.datadoghq.com/ja/security/threat_intelligence#threat-intelligence-sources
-[9]: https://docs.datadoghq.com/ja/security/threat_intelligence#best-practices-in-threat-intelligence
+[8]: https://docs.datadoghq.com/security/threat_intelligence#threat-intelligence-sources
+[9]: https://docs.datadoghq.com/security/threat_intelligence#best-practices-in-threat-intelligence
 [10]: https://en.wikipedia.org/wiki/Carrier-grade_NAT
 [11]: https://app.datadoghq.com/security/appsec/threat
 [12]: https://app.datadoghq.com/security/appsec/passlist

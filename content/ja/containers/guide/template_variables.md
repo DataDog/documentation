@@ -1,51 +1,51 @@
 ---
+title: Autodiscovery Template Variables
 aliases:
-- /ja/agent/autodiscovery/template_variables
-- /ja/agent/faq/template_variables
-- /ja/agent/guide/template_variables
+ - /agent/autodiscovery/template_variables
+ - /agent/faq/template_variables
+ - /agent/guide/template_variables
 further_reading:
 - link: /agent/kubernetes/integrations/
   tag: Documentation
-  text: オートディスカバリーのインテグレーションテンプレートの作成とロード
+  text: Create and load an Autodiscovery integration template
 - link: /agent/guide/ad_identifiers/
   tag: Documentation
-  text: コンテナと該当するインテグレーションテンプレートとの対応
+  text: Match a container with the corresponding integration template
 - link: /agent/guide/autodiscovery-management/
   tag: Documentation
-  text: Agent オートディスカバリーに含めるコンテナの管理
-title: オートディスカバリーテンプレート変数
+  text: Manage which container to include in the Agent Autodiscovery
 ---
 
-コンテナの値を動的に割り当てるために、オートディスカバリーを構成するときに次のテンプレート変数を使用します。
+Use the following template variables when configuring Autodiscovery in order to dynamically assign your container's values:
 
-| テンプレート変数           | 説明                                                                                                                                                                                                 |
+| Template Variable           | Description                                                                                                                                                                                                 |
 | --------------------------  | ---                                                                                                                                                                                                         |
-| `"%%host%%"`                | ネットワークを自動検出します。単一ネットワークコンテナの場合は、対応する IP を返します。                                                                                                                   |
-| `"%%host_<ネットワーク名>%%"` | 複数のネットワークにアタッチするときに使用するネットワーク名を指定します。                                                                                                                                      |
-| `"%%port%%"`                | 公開ポートを**数値として昇順にソート**した場合に最大のポートが使用されます。<br>たとえば、ポート `80`、`443`、`8443` を公開しているコンテナの場合は、`8443` が返されます。                                    |
-| `"%%port_<数値_X>%%"`     | ポートを数値として昇順にソートした場合に `<数値_X>` ポートが使用されます。<br>たとえば、ポート `80`、`443`、`8443` を公開しているコンテナの場合は、`"%%port_0%%` はポート `80`、`"%%port_1%%"` は `443` を表示します。 |
-| `"%%port_<名前>%%"`     | ポート名 `<名前>` に関連付けられたポートを使用します。                                                                                                                                                           |
-| `"%%pid%%"`                 | `docker inspect --format '{{.State.Pid}}' <コンテナ名>` から返されたコンテナプロセス ID を取得します。                                                                                              |
-| `"%%hostname%%"`            | コンテナ構成から `hostname` 値を取得します。`"%%host%%"` 変数で信頼性のある IP を取得できない場合にのみ使用してください ([ECS awsvpc モード][1]など)。                                       |
-| `"%%env_<環境変数>%%"`       | **Agent プロセスから参照される** `$<環境変数>` 環境変数の内容を使用します。                                                                                                                |
-| `"%%kube_namespace%%"`      | Kubernetes のネームスペースを自動検出する |
-| `"%%kube_pod_name%%"`       | Kubernetes のポッド名を自動検出する  |
-| `"%%kube_pod_uid%%"`        | Kubernetes のポッド UID を自動検出する   |
+| `"%%host%%"`                | Auto-detects the network. For single-network containers, it returns its corresponding IP.                                                                                                                   |
+| `"%%host_<NETWORK NAME>%%"` | Specifies the network name to use, when attached to multiple networks.                                                                                                                                      |
+| `"%%port%%"`                | Uses the highest exposed port **sorted numerically and in ascending order**,<br>For example, it would return `8443` for a container that exposes ports `80`, `443`, and `8443`.                                    |
+| `"%%port_<NUMBER_X>%%"`     | Uses the `<NUMBER_X>` port **sorted numerically and in ascending order**,<br>For example, if a container exposes ports `80`, `443`, and `8443`, `"%%port_0%%` refers to port `80`, `"%%port_1%%"` refers to `443`. |
+| `"%%port_<NAME>%%"`     | Uses the port associated with the port name `<NAME>`.                                                                                                                                                           |
+| `"%%pid%%"`                 | Retrieves the container process ID as returned by `docker inspect --format '{{.State.Pid}}' <CONTAINER_NAME>`.                                                                                              |
+| `"%%hostname%%"`            | Retrieves the `hostname` value from the container configuration. Only use it if the `"%%host%%"` variable cannot fetch a reliable IP (example: [ECS awsvpc mode][1]).                                       |
+| `"%%env_<ENV_VAR>%%"`       | Uses the contents of the `$<ENV_VAR>` environment variable **as seen by the Agent process**.                                                                                                                |
+| `"%%kube_namespace%%"`      | Auto-detects the Kubernetes namespace |
+| `"%%kube_pod_name%%"`       | Auto-detects the Kubernetes pod name  |
+| `"%%kube_pod_uid%%"`        | Auto-detects the Kubernetes pod UID   |
 
-**フォールバック**:
+**Fall back**:
 
-* `"%%host%%"` テンプレート変数の場合: Agent がそれを見つけられない場合、このテンプレート変数は `bridge` ネットワーク IP にフォールバックします。
-* `"%%host_<ネットワーク名>%%"` の場合: 指定された `<ネットワーク名>` が見つからなかった場合、このテンプレート変数は `"%%host%%"` のように動作します。
+* For the `"%%host%%"` template variable: in case the Agent is not able to find it, this template variable falls back to the `bridge` network IP.
+* For the `"%%host_<NETWORK NAME>%%"`: if the `<NETWORK_NAME>` specified was not found this template variable behaves like `"%%host%%"`.
 
-プラットフォームによっては、すべてのテンプレート変数がサポートされているわけではありません。
+Depending on your platform, not all template variables are supported:
 
-| プラットフォーム    | オートディスカバリー識別子  | ホスト | ポート | タグ | Pid | Env | ホスト名 | Kube ネームスペース | ポッド名 | ポッド UID |
+| Platform    | Auto-discovery identifiers  | Host | Port | Tag | Pid | Env | Hostname | Kube Namespace | Pod Name | Pod UID |
 | ----------- | ---                         | ---  | ---  | --- | --- | --- | ---      | ---            | ---      | ---     |
 | Docker      | ✅                          | ✅   | ✅   | ✅  | ✅  | ✅  | ✅      | ❌      | ❌      | ❌      |
 | ECS Fargate | ✅                          | ✅   | ❌   | ✅  | ❌  | ✅  | ❌      | ❌      | ❌      | ❌      |
 | Kubernetes  | ✅                          | ✅   | ✅   | ✅  | ❌  | ✅  | ❌      | ✅      | ✅      | ✅      |
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

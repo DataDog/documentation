@@ -1,35 +1,38 @@
 ---
+title: Datadog Admission Controller
 aliases:
-- /ja/agent/cluster_agent/admission_controller
+- /agent/cluster_agent/admission_controller
 further_reading:
 - link: /agent/cluster_agent/troubleshooting/
-  tag: ドキュメント
-  text: Datadog Cluster Agent のトラブルシューティング
-- link: https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/
-  tag: ブログ
-  text: Datadog APM で Kubernetes アプリケーションのトレーシングを自動インスツルメンテーションするために、ライブラリインジェクションを使用します
-title: Datadog Admission Controller
+  tag: Documentation
+  text: Troubleshooting the Datadog Cluster Agent
+- link: /containers/troubleshooting/admission-controller
+  tag: Documentation
+  text: Troubleshooting the Admission Controller
+- link: "https://www.datadoghq.com/blog/auto-instrument-kubernetes-tracing-with-datadog/"
+  tag: Blog
+  text: Use library injection to auto-instrument tracing for Kubernetes applications with Datadog APM
 ---
 
-## 概要
-Datadog Admission Controller は Datadog Cluster Agent のコンポーネントで、アプリケーションポッドのコンフィギュレーションを簡略化できる便利なツールです。Admission Controller には以下の 2 つの機能が備わっています。
+## Overview
+The Datadog Admission Controller is a component of the Datadog Cluster Agent. The main benefit of the Admission Controller is to simplify your application Pod configuration. For that, it has two main functionalities:
 
-- 環境変数 (`DD_AGENT_HOST`、`DD_TRACE_AGENT_URL`、`DD_ENTITY_ID`) をユーザーのアプリケーションコンテナに挿入し、DogStatsD および APM トレーサーライブラリを構成する。
-- アプリケーションラベルから取得した Datadog の標準タグ (`env`、`service`、`version`) をコンテナ環境変数に挿入する。
+- Inject environment variables (`DD_AGENT_HOST`, `DD_TRACE_AGENT_URL` and `DD_ENTITY_ID`) to configure DogStatsD and APM tracer libraries into the user's application containers.
+- Inject Datadog standard tags (`env`, `service`, `version`) from application labels into the container environment variables.
 
-Datadog Admission Controller は `MutatingAdmissionWebhook` 型に属します。Admission Controller について詳しくは、[Admission Controller に関する Kubernetes ガイド][1]を参照してください。
+Datadog's Admission Controller is `MutatingAdmissionWebhook` type. For more details on admission controllers, see the [Kubernetes guide on admission controllers][1].
 
-## 要件
+## Requirements
 
 - Datadog Cluster Agent v7.40+
 
-## 構成
+## Configuration
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
-Datadog Operator の Admission Controller を有効にするには、`DatadogAgent` の構成でパラメーター `features.admissionController.enabled` を `true` に設定します。
+To enable the Admission Controller for the Datadog Operator, set the parameter `features.admissionController.enabled` to `true` in your `DatadogAgent` configuration:
 
-{{< code-block lang="yaml" disable_copy="false" >}}
+{{< code-block lang="yaml" filename="datadog-agent.yaml" disable_copy="false" >}}
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
@@ -43,24 +46,24 @@ spec:
 {{< /code-block >}}
 {{% /tab %}}
 {{% tab "Helm" %}}
-Helm chart v2.35.0 から、Datadog Admission Controller がデフォルトで有効化されました。Admission Controller を有効にするために、特別な構成は必要ありません。
+Starting from Helm chart v2.35.0, Datadog Admission controller is activated by default. No extra configuration is needed to enable the Admission Controller.
 
-Admission Controller で v2.34.6 以前の Helm チャートを有効にするには、パラメーター `clusterAgent.admissionController.enabled` を `true` に設定してください。
+To enable the Admission Controller for Helm chart v2.34.6 and earlier, set the parameter `clusterAgent.admissionController.enabled` to `true`:
 
-{{< code-block lang="yaml" filename="values.yaml" disable_copy="false" >}}
+{{< code-block lang="yaml" filename="datadog-values.yaml" disable_copy="false" >}}
 #(...)
 clusterAgent:
   #(...)
-  ## @param admissionController - オブジェクト - 必須
-  ## admissionController での自動 APM 挿入を有効化
-  ## DogStatsD config および標準タグ (env、service、version) を
-  ## ポッドに挿入
+  ## @param admissionController - object - required
+  ## Enable the admissionController to automatically inject APM and
+  ## DogStatsD config and standard tags (env, service, version) into
+  ## your pods
   #
   admissionController:
     enabled: true
 
     ## @param mutateUnlabelled - boolean - optional
-    ## ポッドラベルなしで config の挿入を有効化:
+    ## Enable injecting config without having the pod label:
     ## admission.datadoghq.com/enabled="true"
     #
     mutateUnlabelled: false
@@ -68,9 +71,9 @@ clusterAgent:
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
 
-Helm または Datadog Operator を使用せずに Admission Controller を有効にするには、コンフィギュレーションに以下を追加します。
+To enable the Admission Controller without using Helm or the Datadog operator, add the following to your configuration:
 
-まず、[Cluster Agent RBAC アクセス許可][1]のマニフェストをダウンロードし、`rules` の下に以下を追加します。
+First, download the [Cluster Agent RBAC permissions][1] manifest, and add the following under `rules`:
 
 {{< code-block lang="yaml" filename="cluster-agent-rbac.yaml" disable_copy="true" >}}
 - apiGroups:
@@ -89,7 +92,7 @@ Helm または Datadog Operator を使用せずに Admission Controller を有�
   verbs: ["get"]
 {{< /code-block >}}
 
-`agent-services.yaml` の下に以下を追加します。
+Add the following to the bottom of `agent-services.yaml`:
 
 {{< code-block lang="yaml" filename="agent-services.yaml" disable_copy="true" >}}
 
@@ -109,7 +112,7 @@ spec:
 
 {{< /code-block >}}
 
-Cluster Agent のデプロイに環境変数を追加し、Admission Controller を有効にします。
+Add environment variables to the Cluster Agent deployment which enable the Admission Controller:
 
 {{< code-block lang="yaml" filename="cluster-agent-deployment.yaml" disable_copy="true" >}}
 - name: DD_ADMISSION_CONTROLLER_ENABLED
@@ -117,12 +120,12 @@ Cluster Agent のデプロイに環境変数を追加し、Admission Controller 
 - name: DD_ADMISSION_CONTROLLER_SERVICE_NAME
   value: "datadog-cluster-agent-admission-controller"
 
-# このコメントを解除して自動的に APM トレーサーを構成します (以下を参照)
+# Uncomment this to configure APM tracers automatically (see below)
 # - name: DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED
 #   value: "true"
 {{< /code-block >}}
 
-最期に、次のコマンドを実行します。
+Finally, run the following commands:
 
 - `kubectl apply -f cluster-agent-rbac.yaml`
 - `kubectl apply -f agent-services.yaml`
@@ -132,69 +135,67 @@ Cluster Agent のデプロイに環境変数を追加し、Admission Controller 
 {{% /tab %}}
 {{< /tabs >}}
 
-### インスツルメンテーションライブラリの挿入
-Cluster Agent (バージョン 7.39 以降) を構成して、インスツルメンテーションライブラリを挿入することができます。詳しくは、[Admission Controller によるインスツルメンテーションライブラリの挿入][2]を参照してください。
+### Instrumentation library injection
+You can configure the Cluster Agent (version 7.39 and higher) to inject instrumentation libraries. Read [Instrumentation library injection with Admission Controller][2] for more information.
 
 
-### APM および DogStatsD
+### APM and DogStatsD
 
-DogStatsD クライアントやライブラリの挿入をサポートしていない他の APM ライブラリを構成するには、以下のいずれかの方法で環境変数 `DD_AGENT_HOST` と `DD_ENTITY_ID` を挿入します。
-- ラベル `admission.datadoghq.com/enabled: "true"` をポッドに追加します。
-- `mutateUnlabelled` (コンフィギュレーションメソッドによっては `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`) を `true` に設定して Cluster Agent の Admission Controller を構成します。
+To configure DogStatsD clients or other APM libraries that do not support library injection, inject the environment variables `DD_AGENT_HOST` and `DD_ENTITY_ID` by doing one of the following:
+- Add the label `admission.datadoghq.com/enabled: "true"` to your Pod.
+- Configure the Cluster Agent admission controller by setting `mutateUnlabelled` (or `DD_ADMISSION_CONTROLLER_MUTATE_UNLABELLED`, depending on your configuration method) to `true`.
 
-Helm チャートに `mutateUnlabelled: true` という Agent 構成を追加すると、Cluster Agent はラベルのないすべてのポッドをインターセプトしようとします。
+Adding a `mutateUnlabelled: true` Agent config in the Helm chart causes the Cluster Agent to attempt to intercept every unlabelled Pod.
 
-ポッドで環境変数を受信しないようにするには、ラベル `admission.datadoghq.com/enabled: "false"` を追加します。これは `mutateUnlabelled: true` を設定している場合でも機能します。
+To prevent Pods from receiving environment variables, add the label `admission.datadoghq.com/enabled: "false"`. This works even if you set `mutateUnlabelled: true`.
 
-`mutateUnlabelled` が `false` に設定されている場合、ポッドラベルは `admission.datadoghq.com/enabled: "true"` とします。
+If `mutateUnlabelled` is set to `false`, the Pod label must be set to `admission.datadoghq.com/enabled: "true"`.
 
-利用可能なオプション:
+Possible options:
 
-| mutateUnlabelled | ポッドラベル                               | 挿入可否 |
+| mutateUnlabelled | Pod label                               | Injection |
 |------------------|-----------------------------------------|-----------|
-| `true`           | ラベルなし                                | はい       |
-| `true`           | `admission.datadoghq.com/enabled=true`  | はい       |
-| `true`           | `admission.datadoghq.com/enabled=false` | ✕        |
-| `false`          | ラベルなし                                | ✕        |
-| `false`          | `admission.datadoghq.com/enabled=true`  | はい       |
-| `false`          | `admission.datadoghq.com/enabled=false` | ✕        |
+| `true`           | No label                                | Yes       |
+| `true`           | `admission.datadoghq.com/enabled=true`  | Yes       |
+| `true`           | `admission.datadoghq.com/enabled=false` | No        |
+| `false`          | No label                                | No        |
+| `false`          | `admission.datadoghq.com/enabled=true`  | Yes       |
+| `false`          | `admission.datadoghq.com/enabled=false` | No        |
 
 
-#### 優先順位
-Datadog Admission Controller は環境変数 `DD_VERSION`、`DD_ENV` または `DD_SERVICE` が既に存在する場合は挿入を行いません。
+#### Order of priority
+The Datadog Admission Controller does not inject the environment variables `DD_VERSION`, `DD_ENV`, or `DD_SERVICE` if they already exist.
 
-これらの環境変数が設定されていない場合、Admission Controller は以下の順序で標準タグの値を使用します (高い方から順に)。
+When these environment variables are not set, the Admission Controller uses standard tags value in the following order (highest first):
 
-- ポッド上のラベル
-- `ownerReference` のラベル (ReplicaSets、DaemonSets、Deployments など)
+- Labels on the Pod
+- Labels on the `ownerReference` (ReplicaSets, DaemonSets, Deployments, etc.)
 
-#### APM と DogstatsD の通信モードの構成
-Datadog Cluster Agent v1.20.0 以降、Datadog Admission Controller は、アプリケーションと Datadog Agent の間で異なる通信モードを注入するように構成することができるようになりました。
+#### Configure APM and DogstatsD communication mode
+Starting from Datadog Cluster Agent v1.20.0, the Datadog Admission Controller can be configured to inject different modes of communication between the application and Datadog agent.
 
-この機能は `admission_controller.inject_config.mode` を設定するか、ポッドラベル `admission.datadoghq.com/config.mode` を使用してポッド固有のモードを定義することによって構成することができます。
+This feature can be configured by setting `admission_controller.inject_config.mode` or by defining a Pod-specific mode using the `admission.datadoghq.com/config.mode` Pod label.
 
-可能なオプション:
-| モード               | 説明                                                                                                       |
+Possible options:
+| Mode               | Description                                                                                                       |
 |--------------------|-------------------------------------------------------------------------------------------------------------------|
-| `hostip` (デフォルト) | 環境変数 `DD_AGENT_HOST` にホスト IP を注入する                                                        |
-| `service`          | Datadog のローカルサービスの DNS 名を環境変数 `DD_AGENT_HOST` に注入する (Kubernetes v1.22+で使用可能)|
-| `socket`           | 環境変数 `DD_TRACE_AGENT_URL` に Unix ドメインソケットのパスを注入し、対応するパスにアクセスするようにボリュームを定義する |
+| `hostip` (Default) | Inject the host IP in `DD_AGENT_HOST` environment variable                                                        |
+| `service`          | Inject Datadog's local-service DNS name in `DD_AGENT_HOST` environment variable (available with Kubernetes v1.22+)|
+| `socket`           | Inject Unix Domain Socket path in `DD_TRACE_AGENT_URL` environment variable and the volume definition to access the corresponding path. Inject URL to use to connect the Datadog Agent for DogStatsD metrics in `DD_DOGSTATSD_URL`.  |
 
-**注**: ポッド固有のモードは、Admission Controller レベルで定義されたグローバルモードより優先されます。
+**Note**: Pod-specific mode takes precedence over the global mode defined at the Admission Controller level.
 
-#### 注
+## Troubleshooting
 
-- 新しいアプリケーションポッドを作成する前に、Admission Controller のデプロイと構成が必要です。既に存在するポッドは更新できません。
-- Admission Controller の挿入機能を無効化するには、Cluster Agent のコンフィギュレーション: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false` を使用します。
-- Datadog Admission Controller を使用すれば、ユーザーは Downward API ([Kubernetes トレースコレクション設定のステップ 2 ][3]) を利用してアプリケーションポッドの構成をスキップすることができます。
-- プライベートクラスターでは、[コントロールプレーン用のファイアーウォールルールを追加する][4]必要があります。着信接続を処理する Webhook は、ポート `443` でリクエストを受け取り、ポート `8000` に実装されたサービスに誘導します。デフォルトでは、クラスターのネットワークに `gke-<CLUSTER_NAME>-master` という名前のファイアーウォールルールが存在するはずです。ルールの "ソースフィルター" は、クラスターの "コントロールプレーンのアドレス範囲" と一致します。このファイアーウォールルールを編集して、TCP ポート `8000` へのイングレッションを許可するようにします。
+See [Admission Controller Troubleshooting][6].
 
-
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://kubernetes.io/blog/2019/03/21/a-guide-to-kubernetes-admission-controllers/
-[2]: /ja/tracing/trace_collection/library_injection_local/
-[3]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=helm#setup
+[2]: /tracing/trace_collection/library_injection_local/
+[3]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=helm#setup
 [4]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
+[5]: https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html#security-group-rule-components
+[6]: /containers/troubleshooting/admission-controller

@@ -1,55 +1,62 @@
 ---
-algolia:
-  tags:
-  - npm
-  - ネットワークパフォーマンスモニタリング
+title: Network Performance Monitoring
+description: Explore metrics for point to point communication on your infrastructure.
 aliases:
-- /ja/monitors/network_flow_monitors/
-- /ja/graphing/infrastructure/network_performance_monitor/
-- /ja/network_performance_monitoring/
-description: インフラストラクチャー上のポイントツーポイントコミュニケーションのメトリクスを調べます。
+  - /monitors/network_flow_monitors/
+  - /graphing/infrastructure/network_performance_monitor/
+  - /network_performance_monitoring/
 further_reading:
-- link: https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/
-  tag: ブログ
-  text: Datadog NPM でクラウドアーキテクチャとアプリの依存関係を監視する
-- link: https://www.datadoghq.com/blog/network-performance-monitoring
-  tag: ブログ
-  text: ネットワークパフォーマンスモニタリング
-- link: https://www.datadoghq.com/blog/npm-windows-support/
-  tag: ブログ
-  text: ネットワークパフォーマンスモニタリングで Windows ホストを監視する
-- link: https://www.datadoghq.com/blog/cloud-service-autodetection-datadog/
-  tag: ブログ
-  text: クラウドサービスの自動検出でクラウドエンドポイントの健全性を監視する
-- link: https://www.datadoghq.com/blog/npm-best-practices/
-  tag: ブログ
-  text: Datadog NPM を始めるためのベストプラクティス
-- link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
-  tag: ブログ
-  text: Datadog NPM が Consul ネットワーキングに対応
-title: ネットワークパフォーマンスモニタリング
+- link: "https://www.datadoghq.com/blog/cloud-network-monitoring-datadog/"
+  tag: Blog
+  text: Monitor cloud architecture and app dependencies with Datadog NPM
+- link: "https://www.datadoghq.com/blog/network-performance-monitoring"
+  tag: Blog
+  text: Network Performance Monitoring
+- link: "https://www.datadoghq.com/blog/npm-windows-support/"
+  tag: Blog
+  text: Monitor Windows hosts with Network Performance Monitoring
+- link: "https://www.datadoghq.com/blog/cloud-service-autodetection-datadog/"
+  tag: Blog
+  text: Monitor cloud endpoint health with cloud service autodetection
+- link: "https://www.datadoghq.com/blog/npm-best-practices/"
+  tag: Blog
+  text: Best practices for getting started with Datadog NPM
+- link: "https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/"
+  tag: Blog
+  text: Datadog NPM now supports Consul networking
+- link: "https://www.datadoghq.com/blog/npm-story-centric-ux/"
+  tag: Blog
+  text: Quickstart network investigations with NPM's story-centric UX
+- link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+  tag: Blog
+  text: Monitor DNS logs for network and security analysis
+algolia:
+  tags: [npm, network performance monitoring]
 ---
 
-## 概要
+## Overview
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/670228207/rendition/1080p/file.mp4?loc=external&signature=42d4a7322017fffa6d5cc2e49ddbb7cfc4c6bbbbf207d13a5c9830630bda4ece" poster="/images/poster/npm.png" >}}
 
-Datadog ネットワークパフォーマンスモニタリング (NPM) は Datadog のサービス、コンテナ、アベイラビリティーゾーン、およびその他のタグまで、ネットワークトラフィックを可視化します。IP、ポート、PID レベルの接続データは有意義なクライアントとサーバーのエンドポイント間のアプリケーションレイヤーの依存関係に集約され、カスタマイズ可能な[ネットワークページ][1]と[ネットワークマップ][2]経由で分析および可視化することができます。フローデータと主要なネットワークトラフィック、および DNS サーバーのメトリクスを使用すると以下のことが行えます。
+Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog. Connection data at the IP, port, and PID levels is aggregated into application-layer dependencies between meaningful client and server endpoints, which can be analyzed and visualized through a customizable [network page][1] and [network map][2]. Use flow data along with key network traffic and DNS server metrics to:
 
-* 予期しない、または潜在的なサービスの依存関係を特定
-* クロスリージョンやマルチクラウドなど、高コストの通信を最適化
-* クラウドプロバイダーのリージョンやサードパーティーツールの機能停止を特定
-* クライアントおよびサーバーサイドにおける、DNS サーバーに関する問題のトラブルシューティング
+* Pinpoint unexpected or latent service dependencies
+* Optimize costly cross-regional or multi-cloud communication
+* Identify outages of cloud provider regions and third-party tools
+* Troubleshoot client-side and server-side DNS server issues
 
-NPM は Linux および [Windows OS][3] の組み込みサポートと、[Istio サービスメッシュのインスツルメンテーション][4]およびオーケストレーションに対応したコンテナ化環境を搭載しており、複雑なネットワークの監視をシンプルにします。
+NPM makes it simple to monitor complex networks with built in support for Linux and [Windows OS][3] as well as containerized environments that are orchestrated and [instrumented with Istio service mesh][4].
 
-{{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
-    {{< nextlink href="network_monitoring/performance/setup" >}}<u>セットアップ</u>: ネットワークデータを収集するように Agent を構成します。{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/performance/network_analytics" >}}<u>ネットワーク分析</u>: 利用可能な各クライアントとサーバー間のネットワークデータをグラフ化します。{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/performance/network_map" >}}<u>ネットワークマップ</u>: タグ間でネットワークデータをマッピングします。{{< /nextlink >}}
+Additionally, [Network path][5], a feature of NPM, is available in private beta, which allows you to see hop-by-hop traffic in your network.
+
+{{< whatsnext desc="This section includes the following topics:">}}
+    {{< nextlink href="network_monitoring/performance/setup" >}}<u>Setup</u>: Configure the Agent to collect network data.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/network_analytics" >}}<u>Network Analytics</u>: Graph your network data between each client and server available.{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/performance/network_map" >}}<u>Network Map</u>: Map your network data between your tags.{{< /nextlink >}}
+    {{< nextlink href="monitors/types/network_performance/" >}}<u>Recommended Monitors</u>: Configure recommended NPM monitors.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -57,3 +64,4 @@ NPM は Linux および [Windows OS][3] の組み込みサポートと、[Istio 
 [2]: https://app.datadoghq.com/network/map
 [3]: https://www.datadoghq.com/blog/npm-windows-support/
 [4]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
+[5]: /network_monitoring/network_path/

@@ -1,65 +1,65 @@
 ---
+title: Saved Views
+kind: documentation
 further_reading:
 - link: /quality_gates/explorer/search_syntax/
-  tag: ドキュメント
-  text: 検索クエリの作成方法
-kind: ドキュメント
-title: パフォーマンス
+  tag: Documentation
+  text: Learn how to create a search query
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 Quality Gates は利用できません。</div>
+<div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
-Quality Gates は公開ベータ版です。
+Quality Gates is in public beta.
 {{< /callout >}}
 
-## 概要
+## Overview
 
-保存ビューにより、[**Quality Gate Executions** ページ][1]の[Quality Gates Explorer][2] の状態を保存し、スコープ付きクエリ、関連ファセット、可視化オプション、および時間範囲にすばやくアクセスできるため、効果的なトラブルシューティングを行うことができます。
+Saved views allow you to save the state of the [Quality Gates Explorer][2] on the [**Quality Gate Executions** page][1] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range. 
 
-保存ビューは、以下を追跡することができます。
+Saved views can keep track of your:
 
-- Quality Gates 実行とルール実行
-- 検索クエリ 
-- 列のソート順
-- ライブ時間範囲 (過去 1 時間や過去 1 週間など)
-- 視覚化 (時系列、トップリスト、テーブル、ファネルグラフなど)
-- ファセットのサブセット
+- Quality Gate executions and rule executions
+- Search queries 
+- Column sort order
+- Live time range (such as the past hour or the past week)
+- Visualizations (such as a timeseries, top list, table, or funnel graph)
+- Subset of facets
 
-保存ビューを使用して、チームメイトと共通のクエリや構成を共有することもできます。
+You can also use saved views to share common queries and configurations with your teammates.
 
-## 保存ビュー
+## Saved views
 
-保存ビューにアクセスするには、[Quality Gates Explorer][1] の左側にある **> Views** を展開します。
+To access your saved views, expand **> Views** to the left in the [Quality Gates Explorer][1].
 
-[デフォルトビュー](#default-views)を除き、保存ビューはすべて、ユーザーが作成したいカスタム保存ビューも含め、組織全体で共有されます。これらの保存ビューは組織内の誰でも編集可能で、ビューの作成者のアバターが表示されます。Explorer の現在のコンテンツからカスタム保存ビューを作成するには、**Save** をクリックします。
+All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the avatar of the view's creator. Click **Save** to create a saved view from the current content in your Explorer.
 
-{{< img src="quality_gates/explorer/expand_view.png" text="Quality Gates Explorer に保存ビューを作成" style="width:100%" >}}
+{{< img src="quality_gates/explorer/expand_view.png" text="Create a saved view in the Quality Gates Explorer" style="width:100%" >}}
 
 You can:
 
-- 保存ビューをロードまたはリロード
-- 保存ビューを現在のビューの構成で更新
-- 保存ビューの名前を変更または削除
-- ショートリンクを使用して保存ビューを共有
-- 保存ビューをお気に入りに登録し、ナビゲーションメニューからアクセスできる Saved Views リストに追加
+- Load or reload a saved view
+- Update a saved view with the current view's configuration
+- Rename or delete a saved view
+- Share a saved view through a short link
+- Favorite a saved view to add it to your Saved Views list accessible in the navigation menu
 
-<div class="alert alert-info">更新、名前の変更、削除の操作は、読み取り専用ユーザーには無効です。</div>
+<div class="alert alert-info">Update, rename, and delete actions are disabled for read-only users.</div>
 
-## デフォルトビュー
+## Default views
 
-[Quality Gates Explorer][2] では、保存ビューをデフォルトのランディングページに設定することができます。デフォルトビューは各ユーザーごとに設定され、組織への影響はありません。
+You can set a saved view to be your default landing page in the [Quality Gates Explorer][2]. Default views are set per-user and have no impact on your organization. 
 
-{{< img src="quality_gates/explorer/default_view.png" text="Quality Gates Explorer でデフォルトビューを設定" style="width:100%" >}}
+{{< img src="quality_gates/explorer/default_view.png" text="Set a default view in the Quality Gates Explorer" style="width:100%" >}}
 
-現在のデフォルト保存ビューから、デフォルトにしたい別のレイアウトにビューを更新するアクションを実行します。**Views** パネルで、現在のビューをデフォルトの保存ビューとして保存します。
+From your current default saved view, take actions to update the view to a different layout that you want as your default. In the **Views** panel, save the current view as your default saved view.
 
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/quality-gates/executions
-[2]: /ja/quality_gates/explorer/
+[2]: /quality_gates/explorer/

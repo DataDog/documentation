@@ -1,6 +1,6 @@
 ---
-core_product:
-- alerts
 title: alert
+core_product:
+  - alerts
 ---
-Datadog のモニターは、設定された条件に達したことを示すアラートを生成します。
+Datadog monitors generate alerts, indicating that a set condition has been reached. 

@@ -1,149 +1,150 @@
 ---
-app_id: nvml
-app_uuid: 2c7a8b1e-9343-4b4a-bada-5091e37c4806
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: nvml.device_count
-      metadata_path: metadata.csv
-      prefix: nvml.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10177
-    source_type_name: nvml
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: コミュニティ
-  sales_email: help@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
+"app_id": "nvml"
+"app_uuid": "2c7a8b1e-9343-4b4a-bada-5091e37c4806"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": nvml.device_count
+      "metadata_path": metadata.csv
+      "prefix": nvml.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10177"
+    "source_type_name": nvml
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Community
+  "sales_email": help@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - ai/ml
 - kubernetes
-- OS & システム
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/nvml/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: nvml
-integration_id: nvml
-integration_title: Nvidia NVML
-integration_version: 1.0.9
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: nvml
-public_title: Nvidia NVML
-short_description: k8s で Nvidia GPU メトリクスをサポート
-supported_os:
+- os & system
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/nvml/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "nvml"
+"integration_id": "nvml"
+"integration_title": "Nvidia NVML"
+"integration_version": "1.0.9"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "nvml"
+"public_title": "Nvidia NVML"
+"short_description": "Support Nvidia GPU metrics in k8s"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::AI/ML
-  - Category::Kubernetes
-  - Category::OS & System
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: k8s で Nvidia GPU メトリクスをサポート
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Nvidia NVML
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::AI/ML"
+  - "Category::Kubernetes"
+  - "Category::OS & System"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Support Nvidia GPU metrics in k8s
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Nvidia NVML
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通じて [NVIDIA Management Library (NVML)][1] 公開メトリクスを監視し、[公開された Kubernetes デバイス][2]と関連付けることができます。
+This check monitors [NVIDIA Management Library (NVML)][1] exposed metrics through the Datadog Agent and can correlate them with the [exposed Kubernetes devices][2].
 
-## 計画と使用
+## Setup
 
-NVML チェックは [Datadog Agent][3] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The NVML check is not included in the [Datadog Agent][3] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い NVML チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][4]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the NVML check on your host. See [Use Community Integrations][4] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
-   Linux の場合:
+   For Linux:
    ```shell
    datadog-agent integration install -t datadog-nvml==<INTEGRATION_VERSION>
    # You may also need to install dependencies since those aren't packaged into the wheel
    sudo -u dd-agent -H /opt/datadog-agent/embedded/bin/pip3 install grpcio pynvml
    ```
-   Windows の場合 (管理者として実行する Powershell を使用):
+   For Windows (Using Powershell run as admin):
    ```shell
    & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" integration install -t datadog-nvml==<INTEGRATION_VERSION>
    # You may also need to install dependencies since those aren't packaged into the wheel
    & "$env:ProgramFiles\Datadog\Datadog Agent\embedded3\python" -m pip install grpcio pynvml
    ```
 
-2. コアの[インテグレーション][5]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][5].
 
-Docker を使用している場合、NVML リポジトリに [Dockerfile の例][6]があります。
+If you are using Docker, there is an [example Dockerfile][6] in the NVML repository.
 
    ```shell
    docker build -t dd-agent-nvml .
    ```
 
-Docker と Kubernetes を使用している場合は、環境変数 `NVIDIA_VISIBLE_DEVICES` と `NVIDIA_DRIVER_CAPABILITIES` を公開する必要があります。例については、付属の Dockerfile を参照してください。
+If you're using Docker and Kubernetes, you need to expose the environment variables `NVIDIA_VISIBLE_DEVICES` and `NVIDIA_DRIVER_CAPABILITIES`. See the included Dockerfile for an example.
 
-予約済みの Kubernetes NVIDIA デバイスを、そのデバイスを使用する Kubernetes ポッドと関連付けるには、Unix ドメインソケット `/var/lib/kubelet/pod-resources/kubelet.sock` を Agent のコンフィギュレーションにマウントします。このソケットの詳細については、[Kubernetes のウェブサイト][2]を参照してください。このデバイスはバージョン 1.15 のベータサポートであることに注意してください。
+To correlate reserved Kubernetes NVIDIA devices with the Kubernetes pod using the device, mount the Unix domain socket `/var/lib/kubelet/pod-resources/kubelet.sock` into your Agent's configuration. More information about this socket is on the [Kubernetes website][2]. **Note**: This device is in beta support for version 1.15.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. NVML のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `nvml.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nvml.d/conf.yaml][7] を参照してください。
+1. Edit the `nvml.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your NVML performance data. See the [sample nvml.d/conf.yaml][7] for all available configuration options.
 
-2. [Agent を再起動します][8]。
+2. [Restart the Agent][8].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][9]し、Checks セクションで `nvml` を探します。
+[Run the Agent's status subcommand][9] and look for `nvml` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "nvml" >}}
-  信頼できるメトリクスのドキュメントは、[NVIDIA ウェブサイト][11]にあります。
+ The authoritative metric documentation is on the [NVIDIA website][11].
 
-可能な場合、メトリクス名を NVIDIA の [Data Center GPU Manager (DCGM) エクスポーター][12]と一致させる試みがあります。
+There is an attempt to, when possible, match metric names with NVIDIA's [Data Center GPU Manager (DCGM) exporter][12].
 
-### ヘルプ
+### Events
 
-NVML には、イベントは含まれません。
+NVML does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "nvml" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+Need help? Contact [Datadog support][14].
 
 
 [1]: https://pypi.org/project/pynvml/
 [2]: https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/#monitoring-device-plugin-resources
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
-[5]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[4]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
+[5]: https://docs.datadoghq.com/getting_started/integrations/
 [6]: https://github.com/DataDog/integrations-extras/blob/master/nvml/tests/Dockerfile
 [7]: https://github.com/DataDog/integrations-extras/blob/master/nvml/datadog_checks/nvml/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [10]: https://github.com/DataDog/integrations-extras/blob/master/nvml/metadata.csv
 [11]: https://docs.nvidia.com/deploy/nvml-api/group__nvmlDeviceQueries.html
 [12]: https://github.com/NVIDIA/dcgm-exporter
 [13]: https://github.com/DataDog/integrations-extras/blob/master/nvml/assets/service_checks.json
-[14]: https://docs.datadoghq.com/ja/help
+[14]: https://docs.datadoghq.com/help
+

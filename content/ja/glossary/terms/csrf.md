@@ -1,8 +1,8 @@
 ---
-core_product:
-- security
+title: cross-site request forgery (CSRF)
 synonyms:
-- XSRF
-title: クロスサイトリクエストフォージェリー (CSRF)
+  - XSRF
+core_product:
+  - security
 ---
-CSRF とは、攻撃者がブラウザなどの Web クライアントを利用して、情報へのアクセスや操作を行う悪用方法の一種のことです。
+CSRF is a type of exploit where an attacker uses a web client, such as a browser, to access or manipulate information.

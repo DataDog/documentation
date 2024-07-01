@@ -1,7 +1,7 @@
 ---
+title: ingested
 core_product:
-- log management
-- apm
-title: 取り込み
+  - log management
+  - apm
 ---
-取り込まれたログとスパンは、環境全体で収集されたすべてのログとスパンです。
+Ingested logs and spans are all logs and spans collected throughout your environment.

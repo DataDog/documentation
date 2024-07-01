@@ -1,85 +1,85 @@
 ---
-app_id: ping
-app_uuid: 841c9313-628f-4861-ad0b-2d12c37ee571
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: network.ping.response_time
-      metadata_path: metadata.csv
-      prefix: ネットワーク。
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10200
-    source_type_name: Ping
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: コミュニティ
-  sales_email: jim.stanton@datadoghq.com
-  support_email: jim.stanton@datadoghq.com
-categories:
+"app_id": "ping"
+"app_uuid": "841c9313-628f-4861-ad0b-2d12c37ee571"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": network.ping.response_time
+      "metadata_path": metadata.csv
+      "prefix": network.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10200"
+    "source_type_name": Ping
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Community
+  "sales_email": jim.stanton@datadoghq.com
+  "support_email": jim.stanton@datadoghq.com
+"categories":
 - developer tools
-- ネットワーク
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/ping/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: ping
-integration_id: ping
-integration_title: Ping
-integration_version: 1.0.2
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: ping
-public_title: Ping
-short_description: リモートホストへの接続を監視
-supported_os:
+- network
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/ping/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "ping"
+"integration_id": "ping"
+"integration_title": "Ping"
+"integration_version": "1.0.2"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "ping"
+"public_title": "Ping"
+"short_description": "Monitor connectivity to remote hosts."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Developer Tools
-  - Category::Network
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: リモートホストへの接続を監視
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Ping
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Developer Tools"
+  - "Category::Network"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Monitor connectivity to remote hosts.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Ping
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-このチェックでは、システムの [ping][1] コマンドを使用して、ホストの到達可能性をテストします。
-また、オプションで、チェックから宛先ホストに送信されるメッセージの往復時間を測定します。
+This check uses the system [ping][1] command to test the reachability of a host.
+It also optionally measures the round-trip time for messages sent from the check to the destination host.
 
-Ping は、インターネット制御メッセージプロトコル（ICMP）エコー要求パケットをターゲットホストに送信し、ICMP エコー応答を待機することで動作します。
+Ping operates by sending Internet Control Message Protocol (ICMP) echo request packets to the target host and waiting for an ICMP echo reply.
 
-ICMP パケットの作成には raw ソケットが必要であるため、このチェックでは ICMP エコー要求自体を生成するのではなく、システムの ping コマンドを使用します。raw ソケットの作成には Agent にないルート権限が必要です。ping コマンドは、`setuid` アクセスフラグを使用して昇格した権限で実行し、この問題を回避します。
+This check uses the system ping command, rather than generating the ICMP echo request itself, as creating an ICMP packet requires a raw socket. Creating raw sockets requires root privileges, which the Agent does not have. The ping command uses the `setuid` access flag to run with elevated privileges, avoiding this issue.
 
-**Windows をお使いの方への注意事項**: インストールされている Windows の言語が英語に設定されていない場合、このチェックが正しく行われないことがあります。
+**Note for Windows users**: This check might not work properly if the language for the installed Windows is not set to English.
 
-## 計画と使用
+## Setup
 
-Ping チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The ping check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the ping check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the one following commands to install the Agent integration:
 
    ```shell
    # Linux
@@ -88,41 +88,41 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Ping チェッ
    # Windows
    agent.exe integration install -t datadog-ping==<INTEGRATION_VERSION>
    ```
-2. お使いの OS に合わせて、`ping` バイナリをインストールします。例えば、Ubuntu の場合、以下のコマンドを実行します。
+2. Install the `ping` binary in accordance to your OS. For example, run the following command for Ubuntu:
    ```shell
    apt-get install iputils-ping
    ```
 
-3. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+3. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. ping のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ping.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ping.d/conf.yaml][5] を参照してください。
+1. Edit the `ping.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your ping performance data. See the [sample ping.d/conf.yaml][5] for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンド][7]を実行し、Checks セクションで `ping` を探します。
+Run the [Agent's status subcommand][7] and look for `ping` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "ping" >}}
 
 
-### ヘルプ
+### Events
 
-Ping チェックには、イベントは含まれません。
+The Ping check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "ping" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-### `SubprocessOutputEmptyError: get_subprocess_output expected output but had none` エラー
-Ping インテグレーションを実行中に、以下のようなエラーが表示されることがあります。
+### `SubprocessOutputEmptyError: get_subprocess_output expected output but had none` Error
+While running the Ping integration, you may see an error like the following:
 
 ```
       Traceback (most recent call last):
@@ -137,19 +137,20 @@ Ping インテグレーションを実行中に、以下のようなエラーが
       _util.SubprocessOutputEmptyError: get_subprocess_output expected output but had none.
 ```
 
-Ping インテグレーションは Agent にデフォルトで含まれていないため、`ping` バイナリも Agent に含まれていません。インテグレーションを正常に実行するためには、自分で `ping` バイナリをインストールする必要があります。
+Because the Ping integration is not included by default in the Agent, the `ping` binary is also not included with the Agent. You must install the `ping` binary yourself in order to run the integration successfully. 
 
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
 
 [1]: https://en.wikipedia.org/wiki/Ping_%28networking_utility%29
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/ping/datadog_checks/ping/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#service-status
 [8]: https://github.com/DataDog/integrations-extras/blob/master/ping/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/ping/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/help/
+

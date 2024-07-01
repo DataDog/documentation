@@ -1,5 +1,7 @@
 ---
 title: gauge
+core_product:
+  - metrics
 ---
-ゲージは、インターバルの間に報告された最後の値を取るメトリクスタイプです。
-詳細は、<a href="/metrics/#metric-types">ドキュメントを参照してください</a>。
+Gauge is a metric type that takes the last value reported during the interval.
+For more information, <a href="/metrics/#metric-types">see the documentation</a>.

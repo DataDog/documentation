@@ -1,97 +1,98 @@
 ---
-categories:
+"categories":
 - cloud
-- AWS
-- ログの収集
-dependencies: []
-description: Amazon Managed Streaming for Apache Kafka (MSK) のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_msk/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/monitor-amazon-msk/
-  tag: GitHub
-  text: Datadog による Amazon Managed Streaming for Apache Kafka の監視
-git_integration_title: amazon_msk
-has_logo: true
-integration_id: ''
-integration_title: Amazon Managed Streaming for Apache Kafka (MSK)
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_msk
-public_title: Datadog-Amazon Managed Streaming for Apache Kafka (MSK) インテグレーション
-short_description: Amazon MSK のキーメトリクスを追跡
-version: '1.0'
+- aws
+- log collection
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Amazon Managed Streaming for Apache Kafka (MSK) metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_msk/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/monitor-amazon-msk/"
+  "tag": Blog
+  "text": Monitor Amazon Managed Streaming for Apache Kafka with Datadog
+"git_integration_title": "amazon_msk"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Amazon Managed Streaming for Apache Kafka (MSK)"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_msk"
+"public_title": "Datadog-Amazon Managed Streaming for Apache Kafka (MSK) Integration"
+"short_description": "Track key Amazon MSK metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Amazon Managed Streaming for Apache Kafka (MSK) は、Apache Kafka を使用してストリーミングデータを処理するアプリケーションを、簡単に構築して実行できるフルマネージド型のサービスです。
+Amazon Managed Streaming for Apache Kafka (MSK) is a fully managed service that makes it easy to build and run applications that use Apache Kafka to process streaming data.
 
-このインテグレーションでは、CloudWatch からメトリクスを収集するクローラーを使用します。Datadog Agent による MSK の監視については、[Amazon MSK (Agent)][1] のページをお読みください。
+This integration uses a crawler that collects metrics from CloudWatch. Read the [Amazon MSK (Agent)][1] page for information about monitoring MSK through the Datadog Agent.
 
-## 計画と使用
+## Setup
 
-Amazon MSK クローラーを有効にして、CloudWatch からの MSK メトリクスを Datadog で確認できるようにします。
+Enable the Amazon MSK crawler to see MSK metrics from CloudWatch in Datadog.
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][2] first.
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `Kafka` が有効になっていることを確認します。
+1. In the [AWS integration page][3], ensure that `Kafka` is enabled under the `Metric Collection` tab.
 
-2. [Amazon MSK インテグレーション][4]をインストールします。
+2. Install the [Amazon MSK integration][4].
 
-### 収集データ
+### Log collection
 
-#### ログの有効化
+#### Enable logging
 
-Amazon MSK から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+Configure Amazon MSK to send logs either to a S3 bucket or to CloudWatch.
 
-**注**: 
-- S3 バケットにログを送る場合は、_Target prefix_ が `amazon_msk` に設定されているかを確認してください。
-- CloudWatch のロググループにログを送る場合は、その名前に `msk` という部分文字列が含まれていることを確認してください。
+**Notes**: 
+- If you log to a S3 bucket, make sure that `amazon_msk` is set as _Target prefix_.
+- If you log to a CloudWatch log group, make sure its name contains the substring `msk`.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. [Datadog Forwarder Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon MSK ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. If you haven’t already, set up the [Datadog Forwarder Lambda function][5].
+2. Once the Lambda function is installed, manually add a trigger on the S3 bucket or CloudWatch log group that contains your Amazon MSK logs in the AWS console:
 
-    - [S3 バケットに手動トリガーを追加][6]
-    - [CloudWatch ロググループに手動トリガーを追加][7]
+    - [Add a manual trigger on the S3 bucket][6]
+    - [Add a manual trigger on the CloudWatch Log Group][7]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_msk" >}}
 
 
-### ヘルプ
+### Events
 
-Amazon MSK クローラーには、イベントは含まれません。
+The Amazon MSK crawler does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Amazon MSK インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon MSK integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog support][9].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_kafka/
-[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_kafka/
+[2]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
 [4]: https://app.datadoghq.com/integrations/amazon-msk
-[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
-[7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/logs/guide/forwarder/
+[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-s3-buckets
+[7]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_msk/amazon_msk_metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://docs.datadoghq.com/help/
+

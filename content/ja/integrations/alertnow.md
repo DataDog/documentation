@@ -1,118 +1,118 @@
 ---
-app_id: alertnow
-app_uuid: cdb258cc-5e74-4fa2-be21-1489375bb370
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: alertnow.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10279
-    source_type_name: AlertNow
-author:
-  homepage: https://service.opsnow.com
-  name: AlertNow
-  sales_email: sales@opsnow.com
-  support_email: support@opsnow.com
-categories:
-- アラート設定
-- 自動化
-- コラボレーション
-- インシデント
-- モバイル
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: alertnow
-integration_id: alertnow
-integration_title: AlertNow
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: alertnow
-public_title: AlertNow
-short_description: Datadog のアラートと AlertNow のアラートを同期させる
-supported_os:
+"app_id": "alertnow"
+"app_uuid": "cdb258cc-5e74-4fa2-be21-1489375bb370"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": []
+      "metadata_path": metadata.csv
+      "prefix": alertnow.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10279"
+    "source_type_name": AlertNow
+"author":
+  "homepage": "https://service.opsnow.com"
+  "name": AlertNow
+  "sales_email": sales@opsnow.com
+  "support_email": support@opsnow.com
+"categories":
+- alerting
+- automation
+- collaboration
+- incidents
+- mobile
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "alertnow"
+"integration_id": "alertnow"
+"integration_title": "AlertNow"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "alertnow"
+"public_title": "AlertNow"
+"short_description": "Sync Datadog alerts with those in AlertNow"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Alerting
-  - Category::Automation
-  - Category::Collaboration
-  - Category::Incidents
-  - Category::Mobile
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Datadog のアラートと AlertNow のアラートを同期させる
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: AlertNow
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Alerting"
+  - "Category::Automation"
+  - "Category::Collaboration"
+  - "Category::Incidents"
+  - "Category::Mobile"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Sync Datadog alerts with those in AlertNow
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": AlertNow
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-AlertNow は、多様で複雑な IT 環境からアラートを収集し、適切な担当者にアラートを配信することで、迅速なインシデント対応を可能にする統合インシデント管理プラットフォームです。AlertNow を Datadog と接続すると、Datadog のアラートと AlertNow のアラートが自動的に同期されます。単一のプラットフォームでアラートを管理し、チームに通知して、重要な問題に即座に対応することができます。
-
-
-AlertNow が提供するもの
-- Datadog でインシデントをトリガーして解決する
-- インシデント発生時にメール、SMS、ボイスコール、モバイルアプリケーションで適切な担当者に通知
-
-- エスカレーションポリシーに基づき、ユーザーに通知
-- MTTA、MTTR に関するレポート、分析レポート
+AlertNow is an integrated incident management platform that collects alerts from various and complex IT environments and delivers the alerts to the right people, enabling them to handle incidents rapidly. Connecting AlertNow with Datadog automatically syncs your Datadog alerts with those in AlertNow. You can manage alerts on a single platform, notify your teams, and respond to critical issues immediately.
 
 
-![alertnow 概要][1]
+What AlertNow offers:
+- Trigger and resolve incidents from Datadog
+- Notify the right people via email, SMS, Voice call, and mobile application when incidents occur
 
-## 計画と使用
+- Notify users based on escalation policy
+- Reports on MTTA and MTTR, analysis reports
+
+
+![alertnow overview][1]
+
+## Setup
 
 ### AlertNow
 
-Datadog と AlertNow を接続するには、Datadog で Webhook とモニターを作成します。
+To connect Datadog with AlertNow, create a webhook and monitors in Datadog.
 
 
-1. 既存のアカウントを使用するか、または opsnow.com で AlertNow のアカウントを作成してください。
+1. Use your existing account or create an AlertNow account at opsnow.com.
 
-2. AlertNow にログインし、Configuration >  Integration メニューに進みます。
-3. **Create Integration** をクリックし、**Datadog** カードを選択します。
+2. Log in to AlertNow and go to the Configuration > Integration menu.
+3. Click **Create Integration**, and then select the **Datadog** card.
 
-    ![datadog カード][2]
+    ![datadog card][2]
 
-4. Create integration ページで、必要な情報を入力し、OK ボタンをクリックすると、インテグレーションが作成されます。
+4. In the Create integration page, enter the required information, and then click the OK button to create the integration.
 
-    ![datadog インテグレーション][3]
+    ![datadog integration][3]
 
-5. AlertNow のインテグレーションページから URL をコピーします。
-    ![datadog 詳細][4]
-
-
-### Ruby
-
-Datadog のアカウントで、以下の手順を実行します。
+5. Copy the URL from the Integration page of AlertNow.
+    ![datadog detail][4]
 
 
-1. [Webhooks インテグレーションタイル][5]を開きます。
+### Datadog
 
-2. **Configuration** タブを選択し、一番下までスクロールして **New** をクリックします。
+Follow the steps below in your Datadog account.
 
-3. **New Webhook** フォームで、意味のある名前と AlertNow インテグレーションページで作成された AlertNow Webhook URL を入力します。コピーした AlertNow Webhook URL のフォーマットは以下の通りです。API キーは **{ALERTNOW-API-KEY}** に置き換えてください。
+
+1. Open the [Webhooks Integration tile][5].
+
+2. Select the **Configuration** tab, and scroll to the bottom and click **New**.
+
+3. On the **New Webhook** form, enter a meaningful name and the AlertNow Webhook URL created in the AlertNow integration page. The format of the copied AlertNow Webhook URL is as below. Substitute your API key for **{ALERTNOW-API-KEY}**.
 
 
 
@@ -120,7 +120,7 @@ Datadog のアカウントで、以下の手順を実行します。
 
     ![datadog webhook][6]
 
-4. 以下の JSON Payload をコピーして、Payload ウィンドウに貼り付けます。
+4. Copy the JSON Payload below and paste it in the Payload window.
 
 
     ``` json
@@ -159,13 +159,13 @@ Datadog のアカウントで、以下の手順を実行します。
 
     ```
 
-5. Datadog の[アラート用ドキュメント][7]を参照して、モニターを作成します。
+5. Refer to Datadog's [Alerting documentation][7] to create monitors.
 
 
 
-## Agent
+## Support
 
-ご不明な点は、[AlertNow サポート][8]までお問い合わせください。
+Need help? Contact [AlertNow support][8].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/alertnow/images/alertnow_overview.png
@@ -174,5 +174,6 @@ Datadog のアカウントで、以下の手順を実行します。
 [4]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/alertnow/images/datadog_integration_detail.png
 [5]: https://app.datadoghq.com/account/login?next=%2Faccount%2Fsettings#integrations/webhooks
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/alertnow/images/datadog_webhook.png
-[7]: https://docs.datadoghq.com/ja/monitors/
+[7]: https://docs.datadoghq.com/monitors/
 [8]: mailto:support@opsnow.com
+

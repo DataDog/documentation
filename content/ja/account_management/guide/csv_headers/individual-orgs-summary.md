@@ -1,47 +1,13 @@
 ---
-title: 個別組織概要の新しい CSV ヘッダー
+title: New CSV headers for Individual Organizations Summary
 ---
 
-CSV ヘッダーの変更は、2022 年 12 月 12 日現在有効です。オートメーションが依存する CSV ヘッダーを更新するには、このテーブルを使用してください。
+CSV header changes take effect the week of February 19, 2024. The following example demonstrates the new CSV structure. 
 
-| 旧 | 新規 (2022 年 12 月 12 日現在) |
-|----| ----------------------|
-|取り込みログ (合計) | 取り込みログ (ライブとリハイドレート) (合計)|
-|インデックス化ログ (合計) | インデックス化ログ (ライブとリハイドレート) (合計)|
-|解析済みログ (解析済み取り込みバイト数) | 解析済みログ (セキュリティ) (合計)|
-|CWS ホスト (上位 99p) | クラウドワークロードセキュリティホスト (上位 99p)|
-|CWS ホスト時間 (合計) | クラウドワークロードセキュリティホスト時間 (合計)|
-|CWS コンテナ (平均値) | クラウドワークロードセキュリティコンテナ (平均値)|
-|CWS コンテナ時間 (合計) | クラウドワークロードセキュリティコンテナ時間 (合計)|
-|CSPM ホスト時間 (合計) | クラウドセキュリティポスチャ管理ホスト時間 (合計)|
-|CSPM ホスト時間 (合計) | Azure CSPM ホスト時間 (合計)|
-|CSPM ホスト時間 (合計) | Azure App Services CSPM ホスト時間 (合計)|
-|CSPM ホスト時間 (合計) | AWS CSPM ホスト時間 (合計)|
-|CSPM ホスト時間 (合計) | GCP CSPM ホスト時間 (合計)|
-|CSPM ホスト (上位 99p) | クラウドセキュリティポスチャ管理ホスト (上位 99p)|
-|CSPM コンテナ (平均値) | クラウドセキュリティポスチャ管理コンテナ (平均値)|
-|CSPM コンテナ時間 (合計) | クラウドセキュリティポスチャ管理コンテナ時間 (合計)|
-|Application Security Management Fargate タスク (平均値) | Application Security Management Fargate タスク (平均値)|
-|サーバーレス関数 (関数数) | サーバーレス関数 (平均値)|
-|サーバーレス関数 (ワークロードモニタリング) (平均値) | サーバーレスワークロード関数 (平均値)|
-|サーバーレス呼び出し (呼び出し回数) | サーバーレス呼び出し (合計)|
-|サーバーレストレース呼び出し (呼び出し回数) | サーバーレストレース呼び出し (合計)|
-|Fargate タスク (平均タスク数) | Fargate タスク (平均値)|
-|ネットワークフロー (インデックス化されたネットワークフローの合計) | ネットワークフロー (合計)|
-|SNMP デバイス (上位 99p) | ネットワークデバイス (上位 99p)|
-|Synthetic API テストラン (テストラン数) | Synthetics API テストラン (合計)|
-|Synthetic ブラウザテストラン (テストラン数) | Synthetics ブラウザテストラン (合計)|
-|RUM 総セッション (セッション数) | RUM 総セッション (合計)|
-|RUM ブラウザセッション (セッション数) | RUM ブラウザセッション (合計)|
-|RUM iOS セッション (セッション数) | RUM iOS セッション (合計)|
-|RUM Android セッション (セッション数) | RUM Android セッション (合計)|
-|RUM React Native セッション (セッション数) | RUM React Native セッション (合計)|
-|Incident Mgmt (これまでの月間ユニークアクティブユーザー数) | インシデント管理ユニークアクティブユーザー (最大)|
-|DBM 正規化クエリ (平均値) | DBM 正規化クエリ (平均値)|
-|SDS トータル (合計) | 機密データスキャナー (トータル) (合計)|
-|SDS スキャンログ (合計) | 機密データスキャナー (スキャンログ) (合計)|
-|Observability Pipelines 処理バイト数 (合計) | Observability Pipelines (合計)|
-|CI Visibility パイプラインコミッター (これまでの月間ユニークアクティブコミッター数) | CI パイプラインコミッター (最大)|
-|CI Visibility テストコミッター (これまでの月間ユニークアクティブコミッター数) | CI テストコミッター (最大)|
-|CI パイプラインインデックス化スパン (合計) | CI パイプラインスパン (合計)|
-|CI テストインデックス化スパン (合計) | CI テストスパン (合計)|
+Use this table to update CSV headers that your automation depends on:
+
+
+| Organization Name | Public ID | Month | Product Name | Cost | 
+|----| ---| ---| ---| ---| 
+|Org 1 | public_id_1 | 2024-01 | Infra Hosts    | $100.18   |
+|Org 1 | public_id_1 | 2024-01 | Custom Metrics | $50.00    | 

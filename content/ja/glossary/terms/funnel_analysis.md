@@ -1,6 +1,6 @@
 ---
+title: funnel analysis
 core_product:
-- real user monitoring
-title: ファネル分析
+  - real user monitoring
 ---
-ファネル分析では、サインアップや購入など、定義された結果に向けたユーザーのジャーニーを分析します。ファネル分析では、このジャーニーに沿った一連のイベントを調べます。
+Funnel analysis analyzes a user's journey towards a defined outcome, such as signup or purchase. Funnel analysis looks at the sequence of events along this journey.

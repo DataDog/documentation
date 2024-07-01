@@ -1,29 +1,29 @@
 ---
-description: 複数組織のアカウント設定における、Datadog プラットフォームの個々のクライアントおよび集計使用量の監視。
+title: Billing and usage reporting
+description: "Monitoring individual client and aggregate usage of the Datadog platform in multi-organization account setups."
 private: true
-title: 請求と使用量報告
 ---
 
-複数組織のアカウントで、Datadog プラットフォームの個々のクライアントと集計された使用量の両方を監視する方法については、こちらをご覧ください。
+Read on for information on how to monitor both individual client and aggregate usage of the Datadog platform in your multiple-organization account.
 
-親組織に Datadog の[管理者ロール][1]があれば、子組織と親組織のすべての組織の合計と請求可能な使用量、および顧客の使用量が過去 6 ヶ月間でどう変化したかを確認することができます。詳しくは、[複数組織の使用量][2]をご覧ください。
+With a Datadog [admin role][1] in the parent organization, you can view the total and billable usage of all your organizations, both child and parent, as well as how your clients' usage has changed over the past six months. For more information, see [Multi-org usage][2].
 
-使用量は、すべての子組織に集計され、親組織レベルで請求されます。親組織の管理者ロールを持つ人は、すべての子組織の使用量を集計したり、個々の子組織の使用量をさらに分析したりすることができます。
+Usage is aggregated across all child organizations and billed at the parent organization level. From the parent organization, those with an admin role can view aggregate usage across all child organizations as well as further analyze usage of individual child organizations.
 
-既存のロールがあなたやクライアント組織にとって十分に柔軟でない場合、新しいカスタムロールを作成することができます。カスタムロールを使用すると、一般的な権限に加えて、特定のアセットやデータ型に対してより詳細な権限を定義することが可能になります。請求量と使用量のアセットに固有の権限の一覧は、[ロールベースアクセスコントロールのドキュメント][3]に記載されています。
+In case existing roles are not flexible enough for you or your client organization, you can create new custom roles. With custom roles, in addition to the general permissions, it is possible to define more granular permissions for specific assets or data types. You can find the list of permissions specific to billing and usage assets [in the Role Based Access Control documentation][3].
 
-使用量のページに加え、クライアントの使用量を見積もり、管理し、簡単な配分とチャージバックを提供するために使用できる追加リソースをご紹介します。
-- [推定使用量メトリクス][4]: Datadog は、クライアントの現在の推定使用量をほぼリアルタイムで計算します。推定使用量メトリクスにより、推定使用量のグラフ化、選択したしきい値に基づく推定使用量に関するモニターやアラートの作成、使用量の急増や減少に関する即時アラートの取得が可能になります。
-- [共有ダッシュボード][5]: 共有ダッシュボードとグラフを使用すると、Datadog の外部のユーザーとメトリクス、トレース、ログの視覚化を表示することができます。使用量推定メトリクスダッシュボードを公開し、クライアントが追跡できるようにすることができます。
-- [使用属性][6]:
-  - 使用方法が分類されている既存のタグキーのリストを提供し、新しいタグを変更・追加する機能を提供します。
-  - ほとんどの使用タイプの日次 .tsv ファイル（タブ区切り値）を生成します。
-  - 子組織だけでなく、タグごとの使用量を月末に集計します。
-  使用属性は、Enterprise プランに含まれる高度な機能であることに注意してください。その他のプランについては、Datadog パートナー担当者にお問い合わせの上、この機能をリクエストしてください。
+In addition to the usage page, here are some additional resources you can use to estimate and manage clients' usage as well as provide easy allocations and chargebacks:
+- [Estimated Usage Metrics][4]: Datadog calculates your clients' current estimated usage in near real time. Estimated usage metrics enable you to graph your estimated usage, create monitors or alerts around your estimated usage based on thresholds of your choosing, and get instant alerts on spikes or drops in your usage.
+- [Shared Dashboards][5]: Shared dashboards and graphs allow you to display metric, trace, and log visualizations with your users outside of Datadog. You can publish estimated usage metrics dashboards for your clients to track.
+- [Usage Attribution][6]:
+  - Provides lists to the existing tag keys that usage is being broken down by and provides the ability to change and add new tags.
+  - Generates daily .tsv (tab separated values) files for most usage types.
+  - Summarizes usage at the end of each month, not only by child organizations, but also by tag.
+  Note that usage attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your Datadog partner representative to request this feature.
 
-[1]: /ja/account_management/rbac/
-[2]: /ja/account_management/multi_organization/#multi-org-usage
-[3]: /ja/account_management/rbac/permissions/?tab=ui#billing-and-usage
-[4]: /ja/account_management/billing/usage_metrics/
-[5]: /ja/dashboards/sharing/
-[6]: /ja/account_management/billing/usage_attribution/
+[1]: /account_management/rbac/
+[2]: /account_management/multi_organization/#multi-org-usage
+[3]: /account_management/rbac/permissions/?tab=ui#billing-and-usage
+[4]: /account_management/billing/usage_metrics/
+[5]: /dashboards/sharing/
+[6]: /account_management/billing/usage_attribution/

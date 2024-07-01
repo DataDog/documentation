@@ -1,44 +1,44 @@
 ---
-categories:
+"categories":
 - event management
 - notifications
-dependencies: []
-description: SolarWinds Orion から Datadog イベントストリームにアラートを取り込みます。
-doc_link: https://docs.datadoghq.com/integrations/solarwinds/
-draft: false
-git_integration_title: solarwinds
-has_logo: true
-integration_id: ''
-integration_title: SolarWinds
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: solarwinds
-public_title: Datadog-SolarWinds インテグレーション
-short_description: SolarWinds Orion から Datadog イベントストリームにアラートを取り込みます。
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Ingest alerts from SolarWinds Orion into your Datadog Event Stream."
+"doc_link": "https://docs.datadoghq.com/integrations/solarwinds/"
+"draft": false
+"git_integration_title": "solarwinds"
+"has_logo": true
+"integration_id": ""
+"integration_title": "SolarWinds"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "solarwinds"
+"public_title": "Datadog-SolarWinds Integration"
+"short_description": "Ingest alerts from SolarWinds Orion into your Datadog Event Stream."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-SolarWinds Orion からアラートを受け取り、一元化された場所でアラートを集約してトリアージします。
+Get alerts from SolarWinds Orion to aggregate and triage your alerts in a centralized location. 
 
-このインテグレーションは、Datadog をお使いの SolarWinds アラート通知すべてにサブスクライブすることで機能します。
+This integration works by subscribing Datadog to all of your SolarWinds alert notifications.
 
-## 計画と使用
+## Setup
 
-### トリガーアクションを作成する
+### Create trigger actions
 
-SolarWinds で新規トリガーアクションを作成します:
+To create a new trigger action in SolarWinds:
 
-1. アラートへ移動 > アラートの管理
-2. 任意のアラートを選択し、“アラートの編集”をクリックするか、アラートがない場合は新しく作成します
-3. トリガーアクションへ移動 > アクションを追加
-4. “ウェブサーバーへ GET または POST リクエストを送信する”を選択します
-5. “アクションを構成する”をクリックします
-6. アクションペインに次の詳細を入力します:
+1. Navigate to Alerts > Manage Alerts
+2. Select any alert and click “Edit Alert”, or create a new alert if you do not have any
+3. Navigate to Trigger Actions > Add Action
+4. Select “Send a GET or POST Request to a Web Server”
+5. Click “Configure Action”
+6. Fill in the Action Pane with the following details:
 
         a. Name of Action: Send Alert to Datadog (or whatever you prefer)
         b. URL: https://app.datadoghq.com/intake/webhook/solarwinds?api_key=<DATADOG_API_KEY>
@@ -47,18 +47,18 @@ SolarWinds で新規トリガーアクションを作成します:
         e. Time of Day: Leave as is
         f. Execution Settings: Leave as is
 
-7. “アクションを追加”をクリックします
-8. “アクションをリセット”ステップをクリックし、トリガーアクションテンプレートではなくリセットアクションテンプレートを使い、ステップ 4〜7 を繰り返します。
-9. “次へ“をクリックします
-10. サマリーページで、“送信“をクリックします
+7. Click “Add Action”
+8. Click the “Reset Actions” step and then repeat steps 4 - 7, using the Reset Action template instead of the Trigger Action template
+9. Click “Next“
+10. Click “Submit“ on the Summary page
 
-### アラートにアクションを割り当てる
+### Assign actions to alerts
 
-1. アラート管理ビューから Datadog へ送るすべてのアラートを選択し、Assign Action > Assign Trigger Action に移動します。
-2. Send Alert to Datadog - Trigger アクションを選択し、Assign をクリックします
-3. Send Alert to Datadog - Reset アクションを使い、Assign Action > Assign Reset Action を繰り返します
+1. From the Alert Manager view select all the alerts you wish to send to Datadog, then navigate to Assign Action > Assign Trigger Action
+2. Select the Send Alert to Datadog - Trigger action and click Assign
+3. Repeat for Assign Action > Assign Reset Action using the Send Alert to Datadog - Reset action
 
-### 投稿するトリガーアクション本文
+### Trigger action body to post
 ``` 
 {
     "acknowledged": "${N=Alerting;M=Acknowledged}",
@@ -81,7 +81,7 @@ SolarWinds で新規トリガーアクションを作成します:
 }
 ``` 
 
-### 投稿するリセットアクション本文
+### Reset action body to post
 ``` 
 {
     "acknowledged": "${N=Alerting;M=Acknowledged}",
@@ -105,20 +105,21 @@ SolarWinds で新規トリガーアクションを作成します:
 }
 ``` 
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-SolarWinds のインテグレーションにメトリクスは含まれません。
+The SolarWinds integration does not include any metrics.
 
-### ヘルプ
+### Events
 
-SolarWinds インテグレーションはイベントストリームで SolarWinds アラートを集めます。
+The SolarWinds integration collects SolarWinds alerts in the event stream.
 
-### ヘルプ
+### Service Checks
 
-SolarWinds のインテグレーションにサービスチェックは含まれません。
+The SolarWinds integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、Datadog サポートまでお問い合わせください
+Need help? Contact Datadog support
+

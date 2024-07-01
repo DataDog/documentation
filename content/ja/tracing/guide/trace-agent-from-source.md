@@ -1,24 +1,25 @@
 ---
+title: Installing the trace Agent from source
+kind: guide
 aliases:
-- /ja/tracing/faq/trace-agent-from-source/
-kind: ガイド
-title: トレース Agent をソースからインストールする
+  - /tracing/faq/trace-agent-from-source/
 ---
 
-## ソースからのインストール
+## Install from source
 
-1. `Go 1.11+` をインストールします。詳しくは、[Go 公式サイト][1]の手順を参照してください。
-2. [Datadog Agent リポジトリ][2]を複製します。
-3. `datadog-agent` リポジトリのルートで、このコマンドを実行します。
+1. Install `Go 1.11+`. For more information, see the steps on the [official Go website][1].
+2. Clone the [Datadog Agent repo][2].
+3. Run this command in the root of the `datadog-agent` repository:
     ```bash
     go install ./cmd/trace-agent
     ```
 
-4. `trace-agent` を使用して Agent を実行します (システムの `$PATH` に `$GOPATH/bin` というパスが含まれていると仮定しています)。
+4. Run the Agent using `trace-agent` (assuming the path `$GOPATH/bin` is in your system's `$PATH`).
 
-### トラブルシューティング
+### Troubleshooting
 
-Agent の出力やログ (Linux では `/var/log/datadog/trace-agent.log`) を確認し、トレースが正しいように見え、Datadog API に到達していることを確認します。
+Check the Agent output or logs (`/var/log/datadog/trace-agent.log` on Linux) to ensure that traces seem correct
+and that they are reaching the Datadog API.
 
 [1]: https://golang.org/dl
 [2]: https://github.com/DataDog/datadog-agent

@@ -1,39 +1,42 @@
 ---
-description: RDS 上で管理される SQL Server 用のデータベースモニタリングをインストールし、構成します。
+title: Setting Up Database Monitoring for SQL Server on Amazon RDS
+description: Install and configure Database Monitoring for SQL Server managed on RDS.
 further_reading:
 - link: /integrations/sqlserver/
-  tag: ドキュメント
-  text: 基本的な SQL Server インテグレーション
+  tag: Documentation
+  text: Basic SQL Server Integration
 - link: /database_monitoring/troubleshooting/?tab=sqlserver
-  tag: ドキュメント
-  text: よくある問題のトラブルシューティング
-title: Amazon RDS 上の SQL Server のデータベースモニタリングの設定
+  tag: Documentation
+  text: Troubleshoot Common Issues
+
+
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
+Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
+Do the following steps to enable Database Monitoring with your database:
 
-データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
+1. [Configure the AWS integration](#configure-the-aws-integration)
+1. [Grant the Agent access](#grant-the-agent-access)
+1. [Install the Agent](#install-the-agent)
+1. [Install the RDS integration](#install-the-rds-integration)
 
-1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
-2. [Agent をインストールする](#install-the-agent)
-3. [RDS インテグレーションをインストールする](#install-the-rds-integration)
+## Before you begin
 
-## はじめに
-
-サポートされている SQL Server バージョン
-: 2014、2016、2017、2019
+Supported SQL Server versions
+: 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
-## Agent にアクセスを付与する
+## Configure the AWS integration
 
-Datadog Agent が統計やクエリを収集するためには、データベースサーバーへの読み取り専用のアクセスが必要となります。
+Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][2].
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+## Grant the Agent access
+
+The Datadog Agent requires read-only access to the database server to collect statistics and queries.
+
+Create a read-only login to connect to your server and grant the required permissions:
 
 ```SQL
 USE [master];
@@ -42,6 +45,8 @@ GO
 --Set context to msdb database and create datadog user
 USE [msdb];
 CREATE USER datadog FOR LOGIN datadog;
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next line:
+-- GRANT SELECT to datadog;
 GO
 --Switch back to master and grant datadog user server permissions
 USE [master];
@@ -50,44 +55,47 @@ GRANT VIEW ANY DEFINITION to datadog;
 GO
 ```
 
-追加した各アプリケーションデータベースに `datadog` ユーザーを作成します。
+Create the `datadog` user in each additional application database:
 ```SQL
 USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-これは、RDS が `CONNECT ANY DATABASE` の付与を許可していないため、必要です。Datadog Agent は、データベース固有のファイル I/O 統計情報を収集するために、各データベースに接続する必要があります。
+This is required because RDS does not permit granting `CONNECT ANY DATABASE`. The Datadog Agent needs to connect to each database to collect database-specific file I/O statistics.
 
-## Agent のインストール
+## Install the Agent
 
-AWS はホストへの直接アクセスを許可しないため、Datadog Agent は SQL Server ホストと通信可能な別のホストにインストールする必要があります。Agent のインストールと実行には、いくつかのオプションがあります。
-
-**AlwaysOn ユーザーの場合**、Agent は別のサーバーにインストールし、リスナーエンドポイントを介してクラスターに接続する必要があります。これは、Availability Group (AG) のセカンダリレプリカに関する情報がプライマリレプリカから収集されるからです。さらに、この方法で Agent をインストールすると、フェイルオーバー時に Agent を稼働させ続けることができます。
+Because AWS does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
 {{% /tab %}}
 {{% tab "Linux Host" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-linux %}}
 {{% /tab %}}
 {{% tab "Docker" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-docker %}}
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
+{{% dbm-alwayson %}}
 {{% dbm-sqlserver-agent-setup-kubernetes %}}
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent の構成例
+## Example Agent Configurations
 {{% dbm-sqlserver-agent-config-examples %}}
 
-## RDS インテグレーションをインストールする
+## Install the RDS integration
 
-AWS からより包括的なデータベースメトリクスとログを収集するには、[RDS インテグレーション][1]をインストールします。
+To collect more comprehensive database metrics and logs from AWS, install the [RDS integration][1].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/amazon_rds
+[1]: /integrations/amazon_rds
+[2]: https://app.datadoghq.com/integrations/amazon-web-services

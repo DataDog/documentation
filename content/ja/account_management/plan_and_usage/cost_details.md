@@ -1,141 +1,155 @@
 ---
+title: Cost Details
 further_reading:
-- link: https://docs.datadoghq.com/account_management/billing/
+- link: "https://docs.datadoghq.com/account_management/billing/"
   tag: Documentation
-  text: 課金
-- link: https://docs.datadoghq.com/account_management/billing/usage_details/
+  text: Billing
+- link: "https://docs.datadoghq.com/account_management/billing/usage_details/"
   tag: Documentation
-  text: 使用量の詳細
-- link: https://docs.datadoghq.com/account_management/multi_organization/
+  text: Usage details
+- link: "https://docs.datadoghq.com/account_management/multi_organization/"
   tag: Documentation
-  text: 複数組織アカウントの管理
-title: コスト詳細
+  text: Managing multiple-organization accounts
 ---
 
-{{< callout url="http://docs.datadoghq.com/help/">}}
-  Estimated Cost Summary と Cost Chargebacks はベータ版です。アクセスをリクエストし、お客様の組織がサポートされていることを確認するには、アカウント担当者またはサポートにお問い合わせください。
-{{< /callout >}} 
+## Overview
 
-## 概要
+Cost Summary and Cost Chargebacks help you understand your estimated month-to-date, projected end-of-month, and historical Datadog costs.
 
-Estimated Cost Summary と Cost Chargebacks は、Datadog の月間および過去の推定コストを把握するのに役立ちます。
+You can break down your costs by sub-organization and by product to:
+- Allocate costs according to their source
+- Gain insight into how costs are tracking
 
-下部組織や製品ごとにコストを細分化することで、
-- ソースに応じてコストを割り当てることができます
-- コストの追跡状況を把握できます
+### Permissions
 
-### 権限
+To view the Cost Summary and Cost Chargebacks data, you must be a Datadog Admin user.
 
-Estimated Cost Summary および Cost Chargebacks データを表示するには、Datadog Admin ユーザーである必要があります。
+Alternately, roles with Billing Read (`billing_read`) and Usage Read (`usage_read`) [permissions][1] can view the Cost Summary and Cost Chargebacks data.
 
-あるいは、Billing Read (`billing_read`) および Usage Read (`usage_read`) [権限][1]を持つロールは、Estimated Cost Summary および Cost Chargebacks データを見ることができます。
+## Cost summary
 
-## コストサマリー
+Use the cost summary to:
+- View estimated month-to-date and projected end-of-month costs
+- View historical costs
+- Filter and group costs by product or sub-organization
+- View month-over-month % and $ cost changes
+- View cost trends within the month
+- View cumulative day-over-day costs
 
-コストサマリーを使用して
-- 月間の推定コストを表示します
-- 月内のコスト動向を表示します
-- 製品または下部組織ごとにフィルターをかけてコストをグループ化します
-- 累積前日比コストを表示します
+### Projected Costs (parent organization)
 
-### Estimated Cost Summary (親組織)
+Projected end-of-month costs are calculated by applying the current month's projected usage data against your contracted rates. Projections are available around the 12th of the month and are updated daily. Projected end-of-month costs may change over time, depending on your usage throughout the month. Because the costs are a prediction, the amount may differ from your finalized monthly cost. 
 
-Datadog を単一組織として使用するか、複数組織として使用するかによって、コストサマリー機能が変わります。複数組織では、親組織と各下部組織の推定コストを表示できます。
+### Cost Summary (parent organization)
 
-{{< img src="account_management/plan_and_usage/multi-org-estimated-cost-summary.png" alt="親組織の Estimated Cost Summary のスクリーンショット。月間の全体コスト、累積コスト内訳のグラフ、サマリー表が表示されています。" >}}
+The cost summary functionality changes according to your Datadog usage as a single organization or a multi-organization. As a multi-organization, you can view estimated, projected, and historical costs for the parent organization and each sub-organization. 
 
-1. 親組織にログインした状態で、[Plan & Usage][2] に移動します。
-1. **Usage** タブをクリックします。
-1. 複数組織の場合は、**Overall** タブが選択されていることを確認します。
+{{< img src="account_management/plan_and_usage/multiorg-current-month-historical-costs.png" alt="Screenshot of the current month's Cost Summary for a parent organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
-#### 表示とフィルター
+View historical costs by toggling to previous months.
 
-左側の検索ファセットを使用して、** Products** または **Sub-Orgs** でコストをフィルターします。**Over Time** タブを使用して、累積前日比コストがどのように変化したかを確認できます。
+{{< img src="account_management/plan_and_usage/multiorg-prior-month-historical-costs.png" alt="Screenshot of a previous month's Cost Summary for a parent organization, showing the overall cost for the month, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes." >}}
 
-#### ダウンロード
+1. While logged in to the parent organization, navigate to [Plan & Usage][2].
+1. Click the **Usage** tab.
+1. For a multi-organization, ensure the **Overall** tab is selected.
 
-カンマ区切りの値ファイルとしてデータをダウンロードするには、**Download as CSV** をクリックします。
+#### View and filter
 
-API を使用して推定コストデータを照会するには、[アカウント全体で見積コストを取得する][3]を参照してください。
+Use the search facets at the left to filter the cost by **Products** or by **Sub-Orgs**. Use the **Daily Cost** tab to see how the cumulative day-over-day costs have changed within the current month.
 
-### Estimated Cost Summary (下部組織)
+#### Download
 
-下部組織は、自分の組織のコストのみを表示することができます。この制限により、所有権が分散され、親組織に広範な管理者権限を付与する必要がなくなります。
+To download the data as a comma separated value file, click **Download as CSV**. Data is available for the current month and pre-defined prior months. Use the `Cost Type` field to distinguish between the records:
+- **Projected**: Data is available for the current month.
+- **Estimated MTD**: Data is available from the first of the month to the current date. If historical cost data is not yet available for the prior month, estimated cost data also displays for the prior month.
+- **Historical**: Data is available after month close, which is approximately 16 days after the end of the month.
 
-{{< img src="account_management/plan_and_usage/sub-org-estimated-cost-summary.png" alt="下部組織の Estimated Cost Summary のスクリーンショット。月間の全体コスト、累積コスト内訳のグラフ、サマリー表が表示されています。" >}}
+To query estimated cost data through the API, see [Get estimated cost across your account][3]. To query projected cost data through the API, see [Get projected cost across your account][6].
 
-1. サブ組織にログインした状態で、[Plan & Usage][2] に移動します。
-1. **Usage** タブをクリックします。
-1. **Overall** タブが選択されていることを確認します。
+### Cost Summary (sub-organization)
 
-#### 表示とフィルター
+<div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
-左側の検索ファセットを使用して、** Products** でコストをフィルターします。**Over Time** タブを使用して、累積前日比コストがどのように変化したかを確認できます。
+As a sub-organization, you can view the costs for your organization only. This restriction allows for more distributed ownership and removes the need to grant broader Admin permissions to the parent organization.
 
-#### ダウンロード
+{{< img src="account_management/plan_and_usage/suborg-cost-trends.png" alt="Screenshot of the current month's Cost Summary for a sub-organization, showing the overall month-to-date cost, projected cost, a graph with cumulative cost breakdowns, and a summary table including month-over-month cost changes.">}}
 
-カンマ区切りの値ファイルとしてデータをダウンロードするには、**Download as CSV** をクリックします。
+1. While logged in to the sub-organization, navigate to [Plan & Usage][2].
+1. Click the **Usage** tab.
+1. Ensure the **Overall** tab is selected.
 
-API を使用して見積コストデータを照会するには、[アカウント全体で見積コストを取得する][3]を参照してください。
+#### View and filter
 
-## コストチャージバック
+Use the search facets at the left to filter the cost by **Products**. Use the **Daily Cost** tab to see how the cumulative day-over-day costs have changed within the current month.
 
-コストチャージバックを使用して
-- 複数組織の月間推定コストと過去のコストを表示します
-- 各下部組織にコストを属性化します
+#### Download
 
-### 過去のコストチャージバック
+To download the data as a comma separated value file, click **Download as CSV**.
 
-親組織から、製品別、下部組織別に集計された最終的な過去のコストを表示します。
+## Cost chargebacks
 
-{{< img src="account_management/plan_and_usage/historical-cost-chargebacks.png" alt="'Usage and Cost Summary' と題された表のスクリーンショット。4 つの下部組織の使用量合計 (ドル) とコスト合計が表示されています。" >}}
+Use the cost chargebacks to:
+- View estimated month-to-date and historical costs for multi-organizations
+- Attribute costs to each sub-organization
 
-1. 親組織にログインした状態で、[Plan & Usage][2] に移動します。
-1. **Usage** タブを選択します。
-1. **Individual Organizations** をクリックします。
-1. **Billable** と **Cost** トグルが選択されていることを確認します。
-1. 請求が完了した前月を表示するには、日付セレクタを使用します。
+Cost chargebacks are derived by:
+- Calculating the sub-organization usage ratio. This is done by dividing usage per sub-organization by the total parent organization usage.
+- Applying the sub-organization usage ratio against the parent organization costs, providing the cost chargebacks per sub-organization.
 
-**注**: データは月末締めの約 16 日後に入手可能になります。
+### Historical cost chargebacks
 
-### 推定コストチャージバック
+From a parent organization, view finalized historical costs aggregated by product and sub-organization.
 
-親組織から、製品別、下部組織別に集計された推定コストを表示します。
+{{< img src="account_management/plan_and_usage/historical-cost-chargebacks.png" alt="Screenshot of a table titled 'Usage and Cost Summary', showing total usage in dollars for four sub-organizations and the total cost." >}}
 
-推定コストデータは当月分です。前月の履歴コストデータがまだない場合は、前月の推定コストデータも表示されます。
+1. While logged in to the parent organization, navigate to [Plan & Usage][2].
+1. Select the **Usage** tab.
+1. Click **Individual Organizations**.
+1. Ensure the **Billable** and **Cost** toggles are selected.
+1. Use the date selector to view a prior month for which billing has completed.
 
-{{< img src="account_management/plan_and_usage/estimated-cost-chargebacks.png" alt="'Usage and Cost Summary' と題された表のスクリーンショット。4 つの下部組織の使用量合計 (ドル) とコスト合計が表示されています。" >}}
+**Note**: Data is available after month close, which is approximately 16 days after the end of the month.
 
-1. 親組織にログインした状態で、[Plan & Usage][2] に移動します。
-1. **Usage** タブを選択します。
-1. **Individual Organizations** をクリックします。
-1. **Billable** と **Cost** トグルが選択されていることを確認します。
-1. 日付セレクタに当月または前月が表示されていることを確認します。
+### Estimated cost chargebacks
 
-### ダウンロード
+From a parent organization, view estimated costs aggregated by product and sub-organization.
 
-- 過去または推定のコストチャージバックデータをカンマ区切りの値ファイルとしてダウンロードするには、**Download as CSV** をクリックします。
-- API を使用して過去のコストチャージバックデータを照会するには、[アカウント全体で過去のコストを取得する][4]を参照してください。
-- API を使用して推定コストチャージバックデータを照会するには、[アカウント全体で見積コストを取得する][3]を参照してください。
+Estimated cost data is available for the current month. If historical cost data is not yet available for the prior month, estimated cost data also displays for the prior month.
 
-## 請求集計がコスト変動に与える影響
+{{< img src="account_management/plan_and_usage/estimated-cost-chargebacks.png" alt="Screenshot of a table titled 'Usage and Cost Summary', showing total usage in dollars for four sub-organizations and the total cost." >}}
 
-Datadog の当月請求予定額は月によって異なります。各製品の請求に使用される集計の種類によって、コストがどのように影響されるかが決まります。最適な視覚化については、[コスト サマリー][5]機能チャートをご覧ください。各 **Products** フィルターには、製品名の横に関連する請求集計方法が含まれています。
+1. While logged in to the parent organization, navigate to [Plan & Usage][2].
+1. Select the **Usage** tab.
+1. Click **Individual Organizations**.
+1. Ensure the **Billable** and **Cost** toggles are selected.
+1. Ensure the date selector shows the current or prior month.
 
-### パーセンタイルおよび平均使用量請求
+### Download
 
-月間使用量の下位 99 パーセントの最大カウント (ハイウォーターマーク) で請求される製品には、インフラストラクチャーホストおよび APM ホストが含まれます。月間平均で請求される製品には、カスタムメトリクスと Fargate タスクが含まれます。これら 2 つのタイプの製品については、コストは月を通して比較的安定していると予想されます。ただし、使用量が大幅に急増した場合は、コストは変動する可能性があります。
+- To download historical or estimated cost chargeback data as a comma separated value file, click **Download as CSV**.
+- See [Get historical cost across your account][4] to query historical cost chargeback data through the API.
+- See [Get estimated cost across your account][3] to query estimated cost chargeback data through the API.
 
-### 使用量請求の合計
+## How billing aggregations affect cost changes
 
-月間使用量の合計で請求される製品には、インデックス化ログと取り込みログが含まれます。これらのタイプの製品については、使用量の変化に応じてコストが増減することが予想されます。
+Your estimated month-to-date Datadog bill varies throughout the month. The type of aggregation used to bill each product determines how the costs are impacted. For the best visualization, see the [cost summary][5] feature chart. Each **Products** filter includes the relevant billing aggregation method next to the product name.
 
-## その他の参考資料
+### Percentile and average usage billing
+
+Products billed by the maximum count (high-water mark) of the lower 99 percent of usage for the month include infrastructure hosts and APM hosts. Products billed by the average over the month include custom metrics and Fargate tasks. For these two types of products, expect their costs to remain relatively stable throughout the month. However, they are still subject to cost changes if there is a significant spike or drop in usage.
+
+### Sum of usage billing
+
+Products billed by the sum of usage throughout the month include indexed logs and ingested logs. For these types of products, expect their costs to increase or decrease based on changes to usage volume.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/rbac/
+[1]: /account_management/rbac/
 [2]: https://app.datadoghq.com/billing/usage
-[3]: /ja/api/latest/usage-metering/#get-estimated-cost-across-your-account
-[4]: /ja/api/latest/usage-metering/#get-historical-cost-across-your-account
-[5]: /ja/account_management/plan_and_usage/cost_details/#cost-summary
+[3]: /api/latest/usage-metering/#get-estimated-cost-across-your-account
+[4]: /api/latest/usage-metering/#get-historical-cost-across-your-account
+[5]: /account_management/plan_and_usage/cost_details/#cost-summary
+[6]: /api/latest/usage-metering/#get-projected-cost-across-your-account

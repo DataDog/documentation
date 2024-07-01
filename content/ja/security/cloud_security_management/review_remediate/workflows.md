@@ -1,65 +1,77 @@
 ---
-aliases:
-- /ja/security/cloud_security_management/workflows
+title: Automate Security Workflows with Workflow Automation
 further_reading:
-- link: /security/cloud_security_management
-  tag: ドキュメント
-  text: 検索構文
-- link: /service_management/workflows/
-  tag: ドキュメント
-  text: Workflow Automation
-title: Workflow Automation によるセキュリティワークフローの自動化
+  - link: /security/cloud_security_management
+    tag: Documentation
+    text: Cloud Security Management
+  - link: /service_management/workflows/
+    tag: Documentation
+    text: Workflow Automation
+aliases:
+  - /security/cloud_security_management/workflows
+products:
+  - name: CSM Threats
+    url: /security/threats/
+    icon: cloud-security-management
+  - name: CSM Misconfigurations
+    url: /security/cloud_security_management/misconfigurations/
+    icon: cloud-security-management
+  - name: CSM Identity Risks
+    url: /security/cloud_security_management/identity_risks/
+    icon: cloud-security-management
 ---
 
+{{< product-availability >}}
+
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Security Management Misconfigurations はサポートされていません。</div>
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-[Datadog ワークフローオートメーション][1]では、インフラストラクチャーやツールに接続するアクションで構成されるワークフローを構築することで、エンドツーエンドのプロセスをオーケストレーションし、自動化することができます。
+[Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools.
 
-[Cloud Security Management (CSM)][2] で Workflow Automation を使って、セキュリティ関連のワークフローを自動化します。例えば、[対話型の Slack メッセージ経由で公開 Amazon S3 バケットへのアクセスをブロックする](#block-access-to-aws-s3-bucket-via-slack)ことや、[自動的に Jira 課題を作成してチームに割り当てる](#automatically-create-and-assign-a-jira-issue) ことを可能にするワークフローを作成できます。
+Use Workflow Automation with [Cloud Security Management (CSM)][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public Amazon S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
 
-## トリガーとソースの仕組みを理解する
+## Understanding how triggers and sources work
 
-Workflow Automation では、モニター、セキュリティシグナル、またはカスタムスケジュールから手動または自動的にワークフローをトリガーすることができます。本記事のワークフロー例では、サイドパネルの **Actions** > **Run Workflow** ボタンをクリックすることで、ワークフローが手動でトリガーされています。
+Workflow Automation allows you to trigger a workflow manually or automatically from a monitor, security signal, or custom schedule. In the example workflows in this article, the workflows are triggered manually by clicking the **Actions** > **Run Workflow** button on the side panels.
 
-ワークフローをトリガーするとき、トリガーイベントのソース ID をワークフローの次のステップに渡さなければなりません。この記事の例では、トリガーイベントは新しいセキュリティの所見です。どちらの場合も、ソース ID はワークフローの最初のステップで[ソースオブジェクト変数][7]を使用して指定されます。
+When you trigger a workflow, the source ID of the trigger event must be passed on to the next step in the workflow. In the examples in this article, the trigger events are a new security finding. In both cases, the source IDs are specified in the initial step of the workflow using [source object variables][7].
 
-## ワークフローの構築
+## Build a workflow
 
-ワークフローを構築するには、すぐに使えるブループリントからあらかじめ構成されたフローを使用することも、カスタムワークフローを作成することもできます。ワークフローの作成方法の詳細については、[Workflow Automation のドキュメント][3]を参照してください。
-### Slack 経由で Amazon S3 バケットへのアクセスをブロックする
+You can build a workflow using a preconfigured flow from an out-of-the-box blueprint, or by creating a custom workflow. For detailed instructions on how to create a workflow, see the [Workflow Automation docs][3].
 
-この例では、公開 Amazon S3 バケットが検出されたときに、対話型の Slack メッセージを送信する修復ワークフローを作成します。**Approve** または **Reject** をクリックすることで、S3 バケットへのアクセスを自動的にブロックしたり、措置を取らないことを選択することができます。
+### Block access to Amazon S3 bucket via Slack
 
-**注**: このワークフローを構築するには、[Slack インテグレーション][5]を構成する必要があります。
+This example creates a remediation workflow that sends an interactive Slack message when a public Amazon S3 bucket is detected. By clicking **Approve** or **Reject**, you can automatically block access to the S3 bucket or decline to take action.
 
-1. [Workflow Automation ページ][4]で、**New Workflow** をクリックします。
-2. ワークフローの名前を入力します。
-3. トリガーに **Manual** を選択し、**Create** をクリックします。
-4. ワークフロービルダーを使ってワークフローにステップを追加するには **Add a step to get started** をクリックします。または、JSON エディターを使用してワークフローを構築するには **Edit JSON Spec** をクリックします。
+**Note**: To build this workflow, you must configure the [Slack integration][5].
 
-#### セキュリティ誤構成の取得
+1. On the [Workflow Automation page][4], click **New Workflow**.
+1. Enter a name for the workflow and click **Save**.
 
-セキュリティ誤構成を取得してワークフローに渡すには、**Get security finding** アクションを使用します。このアクションは `{{ Source.securityFinding.id }}` ソースオブジェクト変数を使用して、[**Get a finding**][8] API エンドポイントから誤構成の詳細を取得します。
+#### Get security misconfiguration
 
-1. **Add a step to get started** をクリックして、ワークフローに最初のステップを追加します。
-2. **Get security finding** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
-3. ワークフローキャンバスのステップをクリックして構成します。
-4. **Finding ID** には、`{{ Source.securityFinding.id }}` を入力します。
+To retrieve the security misconfiguration and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` source object variable to retrieve the misconfiguration's details from the [**Get a finding**][8] API endpoint.
 
-#### JS 関数の追加
+1. Click **Add Step** to add the first step to your workflow.
+1. Search for the **Get security finding** action and select it to add it as a step on your workflow canvas.
+1. Click the step in the workflow canvas to configure it.
+1. For **Finding ID**, enter `{{ Source.securityFinding.id }}`.
+1. Click **Save** to save your workflow.
 
-次に、JavaScript Data Transformation Function アクションをキャンバスに追加し、誤構成のタグからリージョン名を返すように構成します。
+#### Add JS function
 
-1. ワークフローキャンバスのプラス (`+`) アイコンをクリックして、別のステップを追加します。
-2. **JS Function** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
-3. ワークフローキャンバスのステップをクリックし、スクリプトエディターに以下を貼り付けます。
+Next, add the JavaScript Data Transformation Function action to the canvas and configure it to return the region name from the misconfiguration's tags.
+
+1. Click the plus (`+`) icon on the workflow canvas to add another step.
+2. Search for the **JS Function** action and select it to add it as a step on your workflow canvas.
+3. Click the step in the workflow canvas and paste the following in the script editor:
    {{< code-block lang="javascript" >}}
-    // 誤構成タグからリージョン情報を取得します
-    // トリガーやステップのデータにアクセスするには `$` を使用します。
-    // Lodash にアクセスするには `_` を使用します。
-    // https://lodash.com/ を参照してください。
+    // Gets the region info from the misconfiguration tags
+    // Use `$` to access Trigger or Steps data.
+    // Use `_` to access Lodash.
+    // See https://lodash.com/ for reference.
 
     let tags = $.Steps.Get_security_finding.tags
 
@@ -71,118 +83,93 @@ Workflow Automation では、モニター、セキュリティシグナル、ま
     }
     {{< /code-block >}}
 
-#### Slack アクションの追加
+#### Add Slack action
 
-1. ワークフローキャンバスのプラス (`+`) アイコンをクリックして、別のステップを追加します。
-2. Slack の **Make a decision** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
-3. ワークフローキャンバスのステップをクリックし、以下の情報を入力します。
-    - **Workspace**: Slack ワークスペースの名前。
-    - **Channel**: Slack メッセージの送信先チャンネル。
-    - **Prompt text**: Slack メッセージの選択ボタンのすぐ上の表示テキスト。例: "リージョン `{{ Steps.GetRegion.data }}` で `{{ Steps.Get_security_finding.resource }}` のパブリックアクセスをブロックしますか？"
+1. Click the plus (`+`) icon on the workflow canvas to add another step.
+2. Search for the **Make a decision** action for Slack and select it to add it as a step on your workflow canvas.
+3. Click the step in the workflow canvas and enter the following information:
+    - **Workspace**: The name of your Slack workspace.
+    - **Channel**: The channel to send the Slack message to.
+    - **Prompt text**: The text that appears immediately above the choice buttons in the Slack message, for example, "Would you like to block public access for `{{ Steps.Get_security_finding.resource }}` in region `{{ Steps.GetRegion.data }}`?"
 
-##### ワークフローの承認
+##### Approve workflow
 
-1. ワークフローキャンバスの **Approve** の下にあるプラス (`+`) アイコンをクリックして、別のステップを追加します。
-2. Amazon S3 の **Block Public Access** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
-3. ワークフローキャンバスのステップをクリックし、以下の情報を入力します。
-    - **Connection**: AWS インテグレーションのワークフロー接続名。
+1. Under **Approve** on the workflow canvas, click the plus (`+`) icon to add another step.
+2. Search for the **Block Public Access** action for Amazon S3 and select it to add it as a step on your workflow canvas.
+3. Click the step in the workflow canvas and enter the following information:
+    - **Connection**: The name of the workflow connection for the AWS integration.
     - **Region**: `{{ Steps.GetRegion.data }}`
     - **Bucket name**: `{{ Steps.Get_security_finding.resource }}`
-4. ワークフローキャンバスの **Block public access** ステップの下にあるプラス (`+`) アイコンをクリックして、別のステップを追加します。
-5. Slack の **Send message** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
-3. ワークフローキャンバスのステップをクリックし、以下の情報を入力します。
-    - **Workspace**: Slack ワークスペースの名前。
-    - **Channel**: Slack メッセージの送信先チャンネル。
-    - **Message text**: Slack メッセージに表示されるテキスト。例:
+4. Under the **Block public access** step on the workflow canvas, click the plus (`+`) icon to add another step.
+5. Search for the **Send message** action for Slack and select it to add it as a step on your workflow canvas.
+3. Click the step in the workflow canvas and enter the following information:
+    - **Workspace**: The name of your Slack workspace.
+    - **Channel**: The channel to send the Slack message to.
+    - **Message text**: The text that appears in the Slack message. For example:
     {{< code-block lang="text" >}}
-    S3 バケット `{{ Steps.Get_security_finding.resource }}` は正常にブロックされました。AWS API のレスポンス:
+    S3 bucket `{{ Steps.Get_security_finding.resource }}` successfully blocked. AWS API response: 
     ```{{ Steps.Block_public_access }}```
 
-    この問題は、次にリソースがスキャンされるときに修正済みとしてマークされます。これには最大で 1 時間程度かかります。
+    The issue will be marked as fixed the next time the resource is scanned, which can take up to one hour.
     {{< /code-block >}}
 
-##### 拒否ワークフロー
+##### Reject workflow
 
-1. ワークフローキャンバスの **Reject** の下にあるプラス (`+`) アイコンをクリックして、別のステップを追加します。
-2. Slack の **Send message** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
-3. ワークフローキャンバスのステップをクリックし、以下の情報を入力します。
-    - **Workspace**: Slack ワークスペースの名前。
-    - **Channel**: Slack メッセージの送信先チャンネル。
-    - **Message text**: Slack メッセージに表示されるテキスト。例: 「ユーザーはアクションを拒否しました。」
-4. **Save** をクリックします。
+1. Under **Reject** on the workflow canvas, click the plus (`+`) icon to add another step.
+2. Search for the **Send message** action for Slack and select it to add it as a step on your workflow canvas.
+3. Click the step in the workflow canvas and enter the following information:
+    - **Workspace**: The name of your Slack workspace.
+    - **Channel**: The channel to send the Slack message to.
+    - **Message text**: The text that appears in the Slack message, for example, "User declined the action".
+4. Click **Save**.
 
-### Jira 課題の自動作成と割り当て
+### Automatically create and assign a Jira issue
 
-この例では、セキュリティの所見が検出されたときに、Jira 課題を作成し、適切なチームに割り当てる自動的なチケットルーティングワークフローを作成します。
+This example creates an automated ticket routing workflow that creates and assigns a Jira issue to the appropriate team when a security finding is detected.
 
-**注**: このワークフローを構築するには、[Jira インテグレーション][6]を構成する必要があります。
+**Note**: To build this workflow, you must configure the [Jira integration][6].
 
-1. [Workflow Automation ページ][4]で、**New Workflow** をクリックします。
-2. ワークフローの名前を入力します。
-3. トリガーに **Manual** を選択し、**Create** をクリックします。
-4. ワークフロービルダーを使ってワークフローにステップを追加するには **Add a step to get started** をクリックします。または、JSON エディターを使用してワークフローを構築するには **Edit JSON Spec** をクリックします。
+1. On the [Workflow Automation page][4], click **New Workflow**.
+1. Enter a name for the workflow and click **Save**.
 
-#### セキュリティ問題を取得する
+#### Get security finding
 
-所見を取得してワークフローに渡すには、**Get security finding** アクションを使用します。このアクションは `{{ Source.securityFinding.id }}` ソースオブジェクト変数を使用して、[**Get a finding**][8] API エンドポイントから所見の詳細を取得します。
+To retrieve the finding and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` source object variable to retrieve the finding's details from the [**Get a finding**][8] API endpoint.
 
-1. **Add a step to get started** をクリックして、ワークフローに最初のステップを追加します。
-2. **Get security finding** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
-3. ワークフローキャンバスのステップをクリックして構成します。
-4. **Security ID** には、`{{ Source.securityFinding.id }}` を入力します。
+1. Click **Add Step** to add the first step to your workflow.
+1. Search for the **Get security finding** action and select it to add it as a step on your workflow canvas.
+1. Click the step in the workflow canvas to configure it.
+1. For **Security ID**, enter `{{ Source.securityFinding.id }}`.
 
-#### JS 関数の追加
+#### Add Jira action
 
-次に、JavaScript データ変換関数アクションをキャンバスに追加し、所見のタグからチーム名を返すように構成します。
+1. Click the plus (`+`) icon on the workflow canvas to add another step.
+2. Search for the **Create issue** Jira action and select it to add it as a step on your workflow canvas.
+3. Click the step in the workflow canvas and enter the following information:
+    - **Jira account**: The URL of your Jira account.
+    - **Project**: `{{ Source.securityFinding.tags_value.team }}`
+    - **Summary**: `{{ Source.securityFinding.rule.name }}`
+4. Click **Save**.
 
-1. ワークフローキャンバスのプラス (`+`) アイコンをクリックして、別のステップを追加します。
-2. **JS Function** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
-3. ワークフローキャンバスのステップをクリックし、スクリプトエディターに以下を貼り付けます。
-   {{< code-block lang="javascript" >}}
-    // 所見タグからチーム情報を取得します
-    // トリガーやステップのデータにアクセスするには `$` を使用します。
-    // Lodash にアクセスするには `_` を使用します。
-    // https://lodash.com/ を参照してください。
+## Trigger a workflow
 
-    let tags = $.Steps.Get_security_finding.tags
+You can trigger an existing workflow from the finding, misconfiguration, and resource side panels.
 
-    let team = tags.filter(t => t.includes('team:'))
-    if(region.length == 1){
-        return team[0].split(':')[1]
-    } else {
-        return '';
-    }
-    {{< /code-block >}}
+In the side panel, click **Actions** > **Run Workflow**, and select a workflow to run. Depending on the workflow, you may be required to enter additional input parameters, such as incident details and severity, the name of the impacted S3 bucket, or the Slack channel you want to send an alert to.
 
-#### Jira アクションの追加
+{{< img src="/security/csm/run_workflow_side_panel.png" alt="The Actions menu on the misconfigurations side panel showing a list of actions to run" width="100%">}}
 
-1. ワークフローキャンバスのプラス (`+`) アイコンをクリックして、別のステップを追加します。
-2. **Create issue Jira** アクションを検索して選択し、ワークフローキャンバスにステップとして追加します。
-3. ワークフローキャンバスのステップをクリックし、以下の情報を入力します。
-    - **Jira account**: Jira アカウントの URL。
-    - **Project**: `{{ Steps.GetTeamInfo.data }}`
-    - **Summary**: `{{ Steps.Get_security_finding.rule.name }}`
-4. **Save** をクリックします。
+After running the workflow, additional information is shown on the side panel. You can click the link to view the workflow.
 
-## ワークフローをトリガーする
-
-所見、誤構成、リソースの各サイドパネルから既存のワークフローをトリガーできます。
-
-サイドパネルで、**Actions** > **Run Workflow** をクリックし、実行するワークフローを選択します。ワークフローによっては、インシデントの詳細や重大度、影響を受ける S3 バケット名、アラートの送信先 Slack チャンネルなど、追加の入力パラメーターを入力する必要がある場合があります。
-
-{{< img src="/security/csm/run_workflow_side_panel.png" alt="実行するアクションの一覧が表示されている誤構成サイドパネルの Actions メニュー" width="100%">}}
-
-ワークフロー実行後、サイドパネルに追加情報が表示されます。リンクをクリックすると、ワークフローを表示できます。
-
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/service_management/workflows
-[2]: /ja/security/cloud_security_management/
-[3]: /ja/service_management/workflows/build/
+[1]: /service_management/workflows
+[2]: /security/cloud_security_management/
+[3]: /service_management/workflows/build/
 [4]: https://app.datadoghq.com/workflow
-[5]: /ja/integrations/slack/
-[6]: /ja/integrations/jira/
-[7]: /ja/service_management/workflows/build/#source-object-variables
-[8]: /ja/api/latest/security-monitoring/#get-a-finding
+[5]: /integrations/slack/
+[6]: /integrations/jira/
+[7]: /service_management/workflows/build/#source-object-variables
+[8]: /api/latest/security-monitoring/#get-a-finding

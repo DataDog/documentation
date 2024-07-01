@@ -1,12 +1,12 @@
 ---
-core_product:
-- security
-- cspm
+title: framework
 synonyms:
-- コンプライアンスフレームワーク
-- コンプライアンス規格
-- コンプライアンスベンチマーク
-title: フレームワーク
+  - compliance framework
+  - compliance standard
+  - compliance benchmark
+core_product:
+  - security
+  - csm
 ---
 
-業界のベンチマークや規制標準にマップされる要件のコレクション。
+A collection of requirements that map to an industry benchmark or regulatory standard.

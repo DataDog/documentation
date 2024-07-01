@@ -1,46 +1,46 @@
 ---
+title: Getting Integrations Working
 aliases:
-- /ja/integrations/faq/issues-getting-integrations-working
+    - /integrations/faq/issues-getting-integrations-working
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
-  tag: Agent のトラブルシューティング
-  text: Agent デバッグモード
+  tag: Documentation
+  text: Agent debug mode
 - link: /agent/troubleshooting/send_a_flare/
-  tag: Agent のトラブルシューティング
-  text: Agent フレアの送信
+  tag: Documentation
+  text: Send an Agent flare
 - link: /agent/troubleshooting/agent_check_status/
-  tag: Agent のトラブルシューティング
-  text: Agent チェックのステータスを確認
-title: インテグレーションの稼働
+  tag: Documentation
+  text: Get the status of an Agent check
 ---
 
-Datadog インテグレーションは、YAML コンフィギュレーションファイルを使用して Datadog Agent から構成されます。オペレーティングシステムの構成ディレクトリへのパスは、[Agent コンフィギュレーションファイル][1]のドキュメントを参照してください。
+Datadog integrations are configured through the Datadog Agent using YAML configuration files. For the path to the configuration directory for your operating system, consult the [Agent Configuration Files][1] documentation.
 
-構成したインテグレーションが Datadog に表示されない場合、[`status` CLI コマンド][2]を実行し、*Running Checks* 見出しの下にあるインテグレーションを探します。
+If an integration that you've configured is not showing up in Datadog, run the [`status` CLI command][2] and look for the integration under the *Running Checks* heading.
 
-**注**: コミュニティ、パートナー、および Marketplace インテグレーションは、Agent のアップグレード時に保持されません。Agent のバージョンアップ時にこれらのインテグレーションを再インストールする必要があります。
+**Note**: Community, Partner, and Marketplace integrations are not retained when the Agent is upgraded. These integrations need to be re-installed upon upgrading the Agent version.
 
-インテグレーションが **Running Checks** の下に表示されているが、Datadog アプリで表示されていない場合
-1. `status` の出力で、インテグレーションのエントリーの下にエラーや警告が表示されていないことを確認します。
-1. [メトリクスエクスプローラー][3]で、ホストからシステムメトリクスが表示されているかどうか確認します。例えば、インテグレーションを構成したホストで、`system.cpu.user` を探します。
-1. それでもメトリクスがない場合は、[Datadog ログ][4]にエラーがないか確認し、`status` コマンドの出力と一緒に [Datadog サポート][5]に送信してください。
+If the integration is listed under **Running Checks**, but is not visible in the Datadog app:
+1. Make sure there are no errors or warnings listed under the integration's entry in the `status` output.
+1. Check the [Metrics Explorer][3] to see if system metrics are showing up from the host. For example, on the host where you configured the integration, look for `system.cpu.user`.
+1. If there are still no metrics, check the [Datadog logs][4] for errors and send them along with the `status` command output to [Datadog support][5].
 
-インテグレーションが **Running Checks** に表示されていない場合
-1. インテグレーション用のコンフィギュレーションファイルが正しい場所にあり、正しい名前が付けられていることを確認します。
-1. [インテグレーションに関するドキュメント][6]を参照し、正しく構成されていることを確認します。
-1. [YAML パーサー][7]を使ってコンフィギュレーションファイルをチェックし、YAML が有効であることを確認します。
-1. ファイルを移動したり変更したりするたびに、[Agent を再起動][8]し、再度 `status` コマンドを実行して変更を確認します。
-1. それでもインテグレーションが `status` 出力に表示されない場合は、[Datadog Logs][4] でエラーを確認し、[Datadog サポート][5]に送信してください。
+If the integration is not listed under **Running Checks**:
+1. Make sure that the configuration file for the integration is in the right location and named correctly.
+1. [Consult the documentation][6] for the integration to check that you've configured it correctly.
+1. Check the configuration file using a [YAML parser][7] to make sure the YAML is valid.
+1. Each time you move or change the file, [restart the Agent][8] and run the `status` command again to check for changes.
+1. If you still can't get the integration to appear in the `status` output, check the [Datadog Logs][4] for errors and send them to [Datadog support][5].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/configuration/agent-configuration-files/#agent-configuration-directory
-[2]: /ja/agent/configuration/agent-commands/#agent-information
+[1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[2]: /agent/configuration/agent-commands/#agent-information
 [3]: https://app.datadoghq.com/metric/explorer
-[4]: /ja/agent/configuration/agent-log-files/
-[5]: /ja/help/
-[6]: /ja/integrations/
+[4]: /agent/configuration/agent-log-files/
+[5]: /help/
+[6]: /integrations/
 [7]: https://codebeautify.org/yaml-parser-online
-[8]: /ja/agent/configuration/agent-commands/#start-stop-restart-the-agent
+[8]: /agent/configuration/agent-commands/#start-stop-restart-the-agent

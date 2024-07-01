@@ -1,154 +1,154 @@
 ---
-categories:
+"categories":
 - azure
-- コラボレーション
+- collaboration
 - developer tools
-- 問題追跡
-- プロビジョニング
-- ソースコントロール
-dependencies: []
-description: 主要な Azure DevOps メトリクスを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/azure_devops
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
-  tag: ブログ
-  text: Datadog CI Visibility で Azure Pipelines を監視する
-- link: https://www.datadoghq.com/blog/azure-pipeline-testing-with-datadog-synthetic-monitoring/
-  tag: ブログ
-  text: Azure Pipelines で Datadog Synthetic テストを実行する
-- link: https://www.datadoghq.com/blog/monitor-azure-devops/
-  tag: ブログ
-  text: Datadog を使用して Azure DevOps のワークフローとパイプラインを監視する
-git_integration_title: azure_devops
-has_logo: true
-integration_id: azuredevops
-integration_title: Microsoft Azure DevOps
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_devops
-public_title: Datadog-Microsoft Azure DevOps インテグレーション
-short_description: 主要な Azure DevOps メトリクスを追跡します。
-team: web-integrations
-version: '1.0'
+- issue tracking
+- provisioning
+- source control
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure DevOps metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_devops"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/"
+  "tag": Blog
+  "text": Monitor Azure Pipelines with Datadog CI Visibility
+- "link": "https://www.datadoghq.com/blog/azure-pipeline-testing-with-datadog-synthetic-monitoring/"
+  "tag": Blog
+  "text": Run Datadog Synthetic tests in Azure Pipelines
+- "link": "https://www.datadoghq.com/blog/monitor-azure-devops/"
+  "tag": Blog
+  "text": Monitor Azure DevOps workflows and pipelines with Datadog
+"git_integration_title": "azure_devops"
+"has_logo": true
+"integration_id": "azuredevops"
+"integration_title": "Microsoft Azure DevOps"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_devops"
+"public_title": "Datadog-Microsoft Azure DevOps Integration"
+"short_description": "Track key Azure DevOps metrics."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-[Azure DevOps][1] は、組織が製品をより迅速に作成・開発するために使用する機能を提供します。Datadog を Azure DevOps にインテグレーションすることで、次のことが可能になります。
+[Azure DevOps][1] provides features that organizations use to create and develop products faster. Integrate Datadog with Azure DevOps to:
 
-- プルリクエストを追跡し、さまざまなプロジェクトにマージします。
-- リリースを監視し、スタックの他のデータとの関連でイベントを作成します。
-- 完了したビルドと作業項目の期間を追跡します。
-- 作業項目と更新を追跡します。
+- Track pull requests and merges to your various projects.
+- Monitor release and build events in context with other data from your stack.
+- Track durations of completed builds and work items.
+- Keep track of work items and updates.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Datadog で、[Azure DevOps インテグレーションタイル][2]のインストールボタンをクリックします。
+In Datadog, click the install button in the [Azure DevOps integration tile][2].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-サービスフックを使用して、Azure DevOps サービスからのイベントに応じて Datadog でイベントとメトリクスを作成します。
+Use a service hook to create events and metrics in Datadog in response to events from Azure DevOps services:
 
-{{< img src="integrations/azure_devops/configure-service-hook.mp4" alt="サービスフックの構成" video="true" >}}
+{{< img src="integrations/azure_devops/configure-service-hook.gif" alt="Configure Service Hooks" >}}
 
-1. Azure で、プロジェクトのサービスフックページに移動します。
-2. **Create subscription** をクリックします。
-3. Datadog サービスを選択します。
-4. トリガーする Visual Studio イベントを構成します。
-5. [Datadog API キー][3]を必須フィールドに入力します。
-6. Datadog 組織のサイトを追加: {{< region-param key="dd_site_name" code="true" >}}
-7. サービスフックサブスクリプションをテストし、ウィザードを終了します。**注**: テストは、API キーまたは Datadog オーガニゼーションサイトは検証しません。
-8. Datadog に送信するイベントタイプごとにステップ 4〜7 を繰り返します。すべてのイベントタイプが受け入れられます。
+1. In Azure, go to your project's service hooks page.
+2. Click **Create subscription**.
+3. Pick the Datadog service.
+4. Configure the triggering Visual Studio event.
+5. Enter your [Datadog API key][3] into the required field.
+6. Add your Datadog organization site: {{< region-param key="dd_site_name" code="true" >}}
+7. Test the service hook subscription and finish the wizard. **Note**: The test does not validate your API key or Datadog organization site.
+8. Repeat steps 4-7 for each event type you want to send to Datadog. All event types are accepted.
 
-サービスフックを構成したら、Datadog に移動して、Azure DevOps のイベントとメトリクスを確認します。
+After your service hooks are configured, go to Datadog to see events and metrics from Azure DevOps.
 
-Azure 側の他の参照先: [Datadog で Azure DevOps Services と TFS のサービスフックを作成する][4]
+Additional reference from Azure: [Create a service hook for Azure DevOps Services and TFS with Datadog][4]
 
-#### プログラマティック
+#### Programmatic
 
-Azure ドキュメントに従い[プログラムでサービスフックサブスクリプションを作成][5]し、Datadog のエンドポイントを使用します。
+Follow Azure's documentation to [Create a service hooks subscription programmatically][5] and use Datadog's endpoint:
 
 ```text
 https://{{< region-param key="dd_full_site" >}}/intake/webhook/azuredevops?api_key=<DATADOG_API_KEY>
 ```
 
-### Datadog モニターを Azure Pipelines のゲートとして使用する
+### Use Datadog monitors as gates in Azure pipelines
 
-Datadog のモニターをゲートとして使用し、Azure Pipelines でのリリースデプロイメントを制御することもできます。このオプションを使用すると、Datadog で異常な状態が検出された場合、問題のあるデプロイを自動的に停止できます。
+You can also use Datadog monitors as gates to [control release deployments][6] in Azure Pipelines. This option allows you to automatically stop problematic deployments if an unhealthy state is detected in Datadog.
 
-1. [Datadog Monitors as Deployment Gates][7] 拡張機能を Azure DevOps 組織に追加します。
+1. Add the [Datadog Monitors as Deployment Gates][7] extension to your Azure DevOps org.
 
-    {{< img src="integrations/azure_devops/extension-service-connection.mp4" alt="拡張サービス接続" video="true" >}}
+    {{< img src="integrations/azure_devops/extension-service-connection.gif" alt="Extension Service Connection" >}}
 
-2. Azure DevOps で、プロジェクト設定の下の **Service Connections** に移動し、**New Service Connection** を選択します。
-3. リストから Datadog を選択し、**Next** を押します。
-4. 指定されたフィールドに、使用するアカウントの Datadog API キーとアプリケーションキーを追加し、名前と説明を入力して、Azure DevOps でこの Datadog アカウントを識別します。**Save** をクリックします。複数の Datadog アカウントからモニターを照会する必要がある場合は、他のサービス接続を追加できます。
-5. **Azure Pipelines** に移動して、デプロイを構成します。ステージ間でデプロイ前後の条件を追加するオプションが表示されるので、Datadog モニターを追加する場所を選択し、**Gates** のトグルスイッチを有効にします。
-6. **Add** をクリックし、**Query Datadog monitors** オプションを選択します。
-7. Datadog サービス接続を選択し、使用するモニター ID と重大度しきい値を入力します。重大度しきい値は、タスクが失敗したモニターの状態（`Alert` または `Warning`）です。
+2. In Azure DevOps, go to **Service Connections** under your project settings and select **New Service Connection**.
+3. Select Datadog from the list and press **Next**.
+4. In the fields provided, add your Datadog API key and application key for the account you want to use, then enter a name and description to identify this Datadog account in Azure DevOps. Click **Save**. You can add additional service connections if you need to query monitors from multiple Datadog accounts.
+5. Go to **Azure Pipelines** to configure your deployment. Here, there's an option to add pre or post deployment conditions between stages. Select where you want to add a Datadog monitor, and then enable the toggle switch for **Gates**.
+6. Click **Add** and select the option **Query Datadog monitors**.
+7. Select the Datadog service connection then enter your monitor ID and the severity threshold you want to use. The severity threshold is the state of the monitor (either `Alert` or `Warning`) at which the task is failed.
 
-    {{< img src="integrations/azure_devops/datadog-monitor-gate.mp4" alt="Datadog モニターゲート" video="true" >}}
+    {{< img src="integrations/azure_devops/datadog-monitor-gate.gif" alt="Datadog Monitor Gate" >}}
 
-8. ステップ 5〜7 を繰り返して、デプロイパイプラインの必要に応じてゲートを追加します。
+8. Repeat steps 5-7 to add additional gates as needed in your deployment pipeline.
 
-**注**: 各ステージの単一の健全性状態の一部としてパイプラインのゲートの複数の状況を監視するには、[複合条件モニター][8]を使用します。
+**Note**: Use [composite monitors][8] to monitor multiple conditions for the gates in your pipeline as part of a single health state for each stage.
 
-ソースコードを表示するには、[Azure Devops Monitor Gate Extension リポジトリ][9]をご覧ください。
+To view the source code, see the [Azure Devops Monitor Gate Extension repo][9]."
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_devops" >}}
 
 
-### ヘルプ
+### Events
 
-Azure DevOps インテグレーションは、以下の[サービスフックイベントタイプ][11]をサポートします。
+The Azure DevOps integration supports the following [service hook event types][11]:
 
-- ビルドとリリース
-- 作業項目
-- コード
+- Build and release
+- Work items
+- Code
 
 
-### ヘルプ
+### Service Checks
 
-Azure DevOps インテグレーションには、サービスのチェック機能は含まれません。
+The Azure DevOps integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+Need help? Contact [Datadog support][12].
 
-### よくあるご質問
+### FAQ
 
-#### このインテグレーションに追加費用はかかりますか？
-このインテグレーションで生成されるメトリクスとイベントには、追加費用は発生しません。
+#### Is there an additional cost for this integration?
+The metrics and events generated from this integration do not incur any additional costs.
 
-#### データはどのくらいの期間 Datadog で保持されますか？
-このインテグレーションからのデータは、Datadog の他のタイプの時系列データと同様に 15 か月間保持されます。
+#### How long does this data persist in Datadog?
+The data from this integration is held for 15 months, similar to other types of timeseries data in Datadog.
 
-#### イベントとメトリクスは、どのくらいの時間で Datadog に表示されますか？
-合計レイテンシーには多くの変数がありますが、ほとんどの場合、イベントとメトリクスはインシデントが発生してから 30 秒以内に Datadog に表示されます。
+#### How long does it take for the events and metrics to display in Datadog?
+The total latency has many variables, but in most cases the events and metrics display in Datadog within 30 seconds of the incident occurring.
 
-#### Datadog の Azure DevOps イベントとメトリクスで何ができますか？
-イベントとメトリクスは、ダッシュボードの構築、モニターのセットアップ、トラブルシューティングなど、Datadog の他のイベントおよびメトリクスと同様に使用できます。
+#### What can you do with the Azure DevOps events and metrics in Datadog?
+The events and metrics can be used like other events and metrics in Datadog, including building dashboards, setting up monitors, and troubleshooting.
 
-#### ビルド期間と作業項目期間のメトリクスはどのように生成されますか？
-ビルド期間は、ビルドが開始されてから完了するまでの時間差（秒単位）を取得することにより、_ビルド完了_イベントから生成されます。
+#### How are the metrics for build duration and work item duration generated?
+The build duration is generated from _build completed_ events by taking the time difference between when the build was initiated to when it completed (measured in seconds).
 
-作業項目期間は、`Done` への移行と作業項目が作成されたときの時間差（時間単位）を取得することにより、_作業項目更新_イベントから生成されます。
+The work item duration is generated from _work item updated_ events by taking the time difference between the transition to `Done` and when the work item was created (measured in hours).
 
-**注**: `Done` の作業項目が再度開かれた場合は、次回 `Done` に移行したときに別のデータポイントが生成されます。初期データポイントは変更されず、新しいデータポイントは、やはり作業項目が最初に作成された時点から測定されます。
+**Note**: If a `Done` work item is re-opened, the next time it is transitioned to `Done` another data point is generated. The initial data point is not modified, and the new data point still measures from the time the work item was initially created.
 
-#### サービスフックサブスクリプションのテストで、成功メッセージが返されましたが、イベントが Datadog に到達しないのはなぜですか？
-サービスフックサブスクリプションテストは、Azure DevOps が Datadog へイベントを送信できるかどうかのみをチェックします。API キーまたは Datadog オーガニゼーションサイト (US または EU) は検証されません。API キーおよびサイトが正しいことをご確認ください。
+#### Your service hook subscription test returns a success message, why aren't events arriving to Datadog?
+The service hook subscription test only checks whether Azure DevOps is able to send events to Datadog. It does not validate your API key or your Datadog organization site (US or EU). Make sure that the API key and site are correct.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -159,8 +159,9 @@ Azure DevOps インテグレーションには、サービスのチェック機�
 [5]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/create-subscription?view=azure-devops
 [6]: https://docs.microsoft.com/en-us/azure/devops/pipelines/release/approvals/gates?view=azure-devops
 [7]: https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-monitors
-[8]: /ja/monitors/monitor_types/composite/
+[8]: /monitors/monitor_types/composite/
 [9]: https://github.com/DataDog/azure-devops-monitor-gate-extension
 [10]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_dev_ops/azure_dev_ops_metadata.csv
 [11]: https://docs.microsoft.com/en-us/azure/devops/service-hooks/events?view=azure-devops#available-event-types
-[12]: https://docs.datadoghq.com/ja/help/
+[12]: https://docs.datadoghq.com/help/
+

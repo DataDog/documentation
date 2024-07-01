@@ -1,78 +1,78 @@
 ---
-aliases:
-- /ja/tracing/visualization/search/
-- /ja/tracing/trace_search_and_analytics/
-- /ja/tracing/advanced_usage/
-kind: ドキュメント
 title: App Analytics
+kind: documentation
+aliases:
+  - /tracing/visualization/search/
+  - /tracing/trace_search_and_analytics/
+  - /tracing/advanced_usage/
 ---
 
 <div class="alert alert-danger">
-このページは、レガシー版 App Analytics に関するコンフィギュレーション情報を伴う非推奨機能について説明します。トラブルシューティングまたは古い設定の修正に利用可能です。トレース全体を完全に制御するには、<a href="/tracing/trace_pipeline">取り込みコントロールおよび保持フィルター</a>を使用してください。
+This page describes deprecated features with configuration information relevant to legacy App Analytics, useful for troubleshooting or modifying some old setups. To have full control over your traces, use <a href="/tracing/trace_pipeline">ingestion controls and retention filters</a> instead.
 </div>
 
-##  新しいコンフィギュレーションオプションへの移行
+##  Migrate to the new configuration options
 
-[取り込みコントロールページ][1]へ移動し、レガシー版コンフィギュレーションを使用しているサービスを確認します。`Legacy Setup` のステータスでフラグが立てられています。
+Navigate to the [ingestion control page][1] to see services with legacy configurations. These are flagged with a `Legacy Setup` status.
 
-新しいコンフィギュレーションオプションへ移行するには、`Legacy Setup` のフラグ付きのサービスから、すべてのレガシー版 App Analytics [コンフィギュレーションオプション](#app-analytics-setup)を削除します。次に、Datadog Agent およびトレーシングライブラリの[サンプリングメカニズム][2]を実装してトレースを送信します。
+To migrate to the new configuration options, remove all legacy App Analytics [configuration options](#app-analytics-setup) from the services flagged with `Legacy Setup`. Then, implement the Datadog Agent and tracing libraries' [sampling mechanisms][2] to send traces.
 
-## App Analytics のセットアップ
+## App Analytics setup
 
-App Analytics の構成オプションは、トレーシングライブラリと Datadog Agent に配置されています。ライブラリでは、サービスからの分析スパンは、[自動](#automatic-configuration)または[手動](#custom-instrumentation)のいずれかで生成されます。
+App Analytics configuration options are located in the Tracing Libraries and in the Datadog Agent. In the libraries, analytics spans from your services are generated either [automatically](#automatic-configuration) or [manually](#custom-instrumentation).
 
-### トレーシングライブラリで
+### In Tracing Libraries
 
-#### 自動コンフィギュレーション
+#### Automatic configuration
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp,nginx" >}}
 {{< programming-lang lang="java" >}}
 
-App Analytics は、Java トレースクライアントのバージョン 0.25.0 以降で使用できます。トレースクライアントでコンフィギュレーションパラメーターを 1 つ設定することで、すべての **web サーバー**インテグレーションに対してグローバルに有効にすることができます。
+App Analytics is available starting in version 0.25.0 of the Java tracing client. It can be enabled globally for all **web server** integrations with one configuration parameter in the Tracing client:
 
-* システムプロパティ: `-Ddd.trace.analytics.enabled=true`
-* <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
+* System Property: `-Ddd.trace.analytics.enabled=true`
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-App Analytics は、Python トレースクライアントのバージョン 0.19.0 以降で使用できます。トレースクライアントでコンフィギュレーションパラメーターを 1 つ設定することで、すべての **web** インテグレーションに対して App Analytics をグローバルに有効にできます。
+App Analytics is available starting in version 0.19.0 of the Python tracing client. Enable App Analytics globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
-* トレーサー構成: `ddtrace.config.analytics_enabled = True`
-* <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
+* Tracer Configuration: `ddtrace.config.analytics_enabled = True`
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-App Analyticsは、Ruby トレースクライアントのバージョン 0.19.0 以降で使用できます。グローバルフラグを使用することで、すべての **web** インテグレーションに対して有効にできます。
+App Analytics is available starting in version 0.19.0 of the Ruby tracing client, and can be enabled for all **web** integrations with a global flag.
 
-これを行うには、環境で `DD_TRACE_ANALYTICS_ENABLED=true` を設定するか、次のように構成します。
+To do so, set either `DD_TRACE_ANALYTICS_ENABLED=true` in your environment, or configure with:
 
 ```ruby
 Datadog.configure { |c| c.tracing.analytics.enabled = true }
 ```
 
-* `true` は、すべての Web フレームワークで分析を有効にします。
-* `false` または `nil` は、明示的に有効にされているインテグレーションを除いて分析を無効にします。(デフォルト)
+* `true` enables analytics for all web frameworks.
+* `false` or `nil` disables analytics, except for integrations that explicitly enable it. (Default)
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-App Analyticsは、Go トレースクライアントのバージョン 1.11.0 以降で使用できます。以下を使用することで、すべての **web** インテグレーションにグローバルに有効化できます:
+App Analytics is available starting in version 1.11.0 of the Go tracing client, and can be enabled globally for all **web** integrations using:
 
-* [`WithAnalytics`][1] トレーサー開始オプション。例:
+* the [`WithAnalytics`][1] tracer start option, for example:
 
   ```go
   tracer.Start(tracer.WithAnalytics(true))
   ```
 
-* バージョン 1.26.0 以降は、環境変数 `DD_TRACE_ANALYTICS_ENABLED=true` を使用
+* starting in version 1.26.0 using environment variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 [1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#WithAnalytics
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-App Analytics は、Node.js トレースクライアントのバージョン 0.10.0 以降で使用できます。トレースクライアントでコンフィギュレーションパラメーターを 1 つ設定することで、すべての web インテグレーションに対してグローバルに有効できます。
+App Analytics is available starting in version 0.10.0 of the Node.js tracing client, and can be enabled globally for all web integrations with one configuration parameter in the tracing client:
 
 ```javascript
 tracer.init({
@@ -80,18 +80,18 @@ tracer.init({
 })
 ```
 
-次のコンフィギュレーションパラメーターを使用することもできます。
+You can also use the following configuration parameter:
 
-* <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-App Analytics は、.NET トレースクライアントのバージョン 1.1.0 以降で使用できます。トレースクライアントでコンフィギュレーションパラメーターを 1 つ設定することで、すべての **web** インテグレーションに対してグローバルに有効にできます。
+App Analytics is available starting in version 1.1.0 of the .NET tracing client, and can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
-* 環境変数または AppSetting: `DD_TRACE_ANALYTICS_ENABLED=true`
+* Environment Variable or AppSetting: `DD_TRACE_ANALYTICS_ENABLED=true`
 
-これは、コードでも設定できます。
+This setting can also be set in code:
 
 ```csharp
 Tracer.Instance.Settings.AnalyticsEnabled = true;
@@ -100,19 +100,19 @@ Tracer.Instance.Settings.AnalyticsEnabled = true;
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-App Analytics は、PHP トレースクライアントのバージョン 0.17.0 以降で使用できます。トレースクライアントでコンフィギュレーションパラメーターを 1 つ設定することで、すべての **web** インテグレーションに対してグローバルに有効にできます。
+App Analytics is available starting in version 0.17.0 of the PHP tracing client, and can be enabled globally for all **web** integrations with one configuration parameter in the Tracing Client:
 
-* <mrk mid="40" mtype="seg"/><mrk mid="41" mtype="seg"/>
+* Environment Variable: `DD_TRACE_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-App Analytics は、C++ トレースクライアントのバージョン 1.0.0 以降で使用できます。環境変数 `DD_TRACE_ANALYTICS_ENABLED` を `true` に設定することで、すべてのサービスエントリスパンに対してグローバルに有効にすることができます。**注**: この設定は、コードで直接設定することもできます。
+App Analytics is available starting in version 1.0.0 of the C++ tracing client, and can be enabled globally for all service entry spans by setting the environment variable: `DD_TRACE_ANALYTICS_ENABLED` to `true`. **Note**: This setting can also be set in the code directly:
 
 ```csharp
 datadog::opentracing::TracerOptions tracer_options;
   tracer_options.agent_host = "dd-agent";
-  tracer_options.service = "<サービス名>";
+  tracer_options.service = "<SERVICE_NAME>";
   tracer_options.analytics_rate = 1.0;
   auto tracer = datadog::opentracing::makeTracer(tracer_options);
 ```
@@ -120,80 +120,80 @@ datadog::opentracing::TracerOptions tracer_options;
 {{< /programming-lang >}}
 {{< programming-lang lang="nginx" >}}
 
-Nginx で App Analytics を有効にするには
+To enable App Analytics for Nginx:
 
-1. 環境変数 `DD_TRACE_ANALYTICS_ENABLED` を `true` に設定します。
+1. Set the environment variable: `DD_TRACE_ANALYTICS_ENABLED` to `true`.
 
-2. `nginx.conf` ファイルの先頭に `env DD_TRACE_ANALYTICS_ENABLED;` を追加します。
+2. Add `env DD_TRACE_ANALYTICS_ENABLED;` at the top of your `nginx.conf` file.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-#### その他のサービスの構成 (オプション)
+#### Configure additional services (optional)
 
-##### インテグレーションごとの構成
+##### Configure by integration
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
 
-グローバルに設定するほか、次の設定を使用して個々のインテグレーションに対して App Analytics を有効または無効にすることも可能です。
+In addition to setting globally, you can enable or disable App Analytics for individual integrations using the following setting:
 
-* システムプロパティ: `-Ddd.<integration>.analytics.enabled=true`
-* 環境変数: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+* System Property: `-Ddd.<integration>.analytics.enabled=true`
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-カスタムサービスを送信するインテグレーションに対し、グローバルコンフィギュレーションに加えて上記を使用します。例えば、カスタムサービスとして送信される JMS スパンの場合、次のように設定して App Analytics ですべての JMS トレースを有効にします。
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for JMS spans which comes in as a custom service, you can set the following to enable all JMS Tracing in App Analytics:
 
-* システムプロパティ: `-Ddd.jms.analytics.enabled=true`
-* 環境変数: `DD_JMS_ANALYTICS_ENABLED=true`
+* System Property: `-Ddd.jms.analytics.enabled=true`
+* Environment Variable: `DD_JMS_ANALYTICS_ENABLED=true`
 
-インテグレーション名は、[インテグレーションテーブル][1]にあります。
+Integration names can be found on the [integrations table][1].
 
-[1]: /ja/tracing/compatibility_requirements/java/#compatibility
+[1]: /tracing/compatibility_requirements/java/#compatibility
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-グローバルに設定するほか、次の設定を使用して個々のインテグレーションに対して App Analytics を有効または無効にすることも可能です。
+In addition to setting globally, you can enable or disable App Analytics for individual integrations using the following setting:
 
-* トレーサー構成: `ddtrace.config.<INTEGRATION>.analytics_enabled = True`
-* 環境変数: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+* Tracer Configuration: `ddtrace.config.<INTEGRATION>.analytics_enabled = True`
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-カスタムサービスを送信するインテグレーションに対し、グローバルコンフィギュレーションに加えて上記を使用します。例えば、カスタムサービスとして送信される Boto スパンの場合、次のように設定して App Analytics ですべての Boto トレースを有効にします。
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for Boto spans which comes in as a custom service, set the following to enable all Boto Tracing in App Analytics:
 
-* トレーサー構成: `ddtrace.config.boto.analytics_enabled = True`
-* 環境変数: `DD_BOTO_ANALYTICS_ENABLED=true`
+* Tracer Configuration: `ddtrace.config.boto.analytics_enabled = True`
+* Environment Variable: `DD_BOTO_ANALYTICS_ENABLED=true`
 
-**注**: インテグレーションによっては、そのインテグレーション固有のトレーサーが実装されているため非標準の方法で設定する必要があります。詳細については、[App Analytics][1] のライブラリドキュメントを参照してください。
+**Note**: Several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [App Analytics][1] for details.
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace_search_analytics
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-特定のインテグレーションに対して App Analytics を有効にすることできます。
+App Analytics can be enabled for specific integrations.
 
-それには、環境で `DD_<INTEGRATION>_ANALYTICS_ENABLED=true` を設定するか、以下の構成を使用します。
+To do so, set either `DD_<INTEGRATION>_ANALYTICS_ENABLED=true` in your environment, or configure with:
 
 ```ruby
 Datadog.configure { |c| c.tracing.instrument :integration, analytics_enabled: true }
 ```
 
-`integration` は、インテグレーションの名前です。オプションについては、[インテグレーションのリスト][1]を参照してください。
+Where `integration` is the name of the integration. See the [list of available integrations][1] for options.
 
-* `true` は、グローバル設定に関係なく、このインテグレーションで分析を有効にします。
-* `false` は、グローバル設定に関係なく、このインテグレーションで分析を無効にします。
-* `nil` は、グローバルな分析設定を優先させます。
+* `true` enables analytics for this integration, regardless of the global setting.
+* `false` disables analytics for this integration, regardless of the global setting.
+* `nil` defers to global setting for analytics.
 
-[1]: /ja/tracing/setup/ruby/#library-compatibility
+[1]: /tracing/setup/ruby/#library-compatibility
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-グローバル設定に加えて、各インテグレーションで App Analytics を個別に有効または無効にできます。たとえば、標準ライブラリの `net/http` パッケージを構成する場合は、以下のようにします。
+In addition to the global setting, you can enable or disable App Analytics individually for each integration. As an example, for configuring the standard library's `net/http` package, you could do:
 
-<mrk mid="87" mtype="seg">```go
+```go
 package main
 
 import (
-    httptrace &quot;gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http&quot;
-    &quot;gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer&quot;
+    httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
@@ -201,16 +201,16 @@ func main() {
     defer tracer.Stop()
 
     mux := httptrace.NewServeMux(httptrace.WithAnalytics(true))
-    // ...</mrk>
-<mrk mid="88" mtype="seg">}
-```</mrk>
+    // ...
+}
+```
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-グローバル設定に加えて、個別のインテグレーションで App Analytics を有効または無効にできます。
+In addition to setting globally, you can enable or disable App Analytics for individual integrations.
 
-たとえば、`express` で App Analytics を有効にするには、以下のようにします。
+For example, to enable App Analytics for `express`:
 
 ```js
 tracer.use('express', {
@@ -218,75 +218,75 @@ tracer.use('express', {
 })
 ```
 
-インテグレーション名は、[インテグレーションテーブル][1]にあります。
+Integration names can be found on the [integrations table][1].
 
-[1]: /ja/tracing/setup/nodejs/#integrations
+[1]: /tracing/setup/nodejs/#integrations
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-グローバル設定に加えて、個別のインテグレーションで App Analytics を有効または無効にできます。
+In addition to setting globally, you can enable or disable App Analytics for individual integrations.
 
-* 環境変数または AppSetting: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+* Environment Variable or AppSetting: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-コードの場合は次のようになります。
+Or in code:
 
 ```csharp
 Tracer.Instance.Settings.Integrations["<INTEGRATION>"].AnalyticsEnabled = true;
 ```
 
-たとえば、ASP.NET MVC で App Analytics を有効にするには、以下のようにします。
+For example, to enable App Analytics for ASP.NET MVC:
 
-* 環境変数または AppSetting: `DD_ASPNETMVC_ANALYTICS_ENABLED=true`
+* Environment Variable or AppSetting: `DD_ASPNETMVC_ANALYTICS_ENABLED=true`
 
-コードの場合は次のようになります。
+Or in code:
 
 ```csharp
 Tracer.Instance.Settings.Integrations["AspNetMvc"].AnalyticsEnabled = true;
 ```
 
-インテグレーション名は、[インテグレーションテーブル][1]にあります。**注:** Linux では、環境変数の名前は大文字と小文字が区別されます。
+Integration names can be found on the [integrations table][1]. **Note:** On Linux, the names of environment variables are case-sensitive.
 
-[1]: /ja/tracing/setup/dotnet/#integrations
+[1]: /tracing/setup/dotnet/#integrations
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-グローバルに設定するほか、次の設定を使用して個々のインテグレーションに対して App Analytics を有効または無効にすることも可能です。
+In addition to setting globally, you can enable or disable App Analytics for individual integrations using the following setting:
 
-* 環境変数: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-カスタムサービスを送信するインテグレーションに対し、グローバルコンフィギュレーションに加えて上記を使用します。例えば、カスタムサービスとして送信される Symfony スパンの場合、次のように設定して App Analytics ですべての Symfony トレースを有効にします。
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for Symfony spans which comes in as a custom service, you can set the following to enable all Symfony Tracing in App Analytics:
 
-* 環境変数: `DD_SYMFONY_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_SYMFONY_ANALYTICS_ENABLED=true`
 
-インテグレーション名は、[インテグレーションテーブル][1]にあります。
+Integration names can be found on the [integrations table][1].
 
-[1]: /ja/tracing/setup/php/#integration-names
+[1]: /tracing/setup/php/#integration-names
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-#### データベースサービス
+#### Database services
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php" >}}
 {{< programming-lang lang="java" >}}
 
 
-デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
+Database tracing is not captured by App Analytics by default and you must enable collection manually for each integration. For example:
 
-* システムプロパティ: `-Ddd.jdbc.analytics.enabled=true`
-* 環境変数: `DD_JDBC_ANALYTICS_ENABLED=true`
+* System Property: `-Ddd.jdbc.analytics.enabled=true`
+* Environment Variable: `DD_JDBC_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
+Database tracing is not captured by App Analytics by default and you must enable collection manually for each integration. For example:
 
-* トレーサーコンフィギュレーション: `ddtrace.config.psycopg.analytics_enabled = True`
-* 環境変数: `DD_PSYCOPG_ANALYTICS_ENABLED=true`
+* Tracer Configuration: `ddtrace.config.psycopg.analytics_enabled = True`
+* Environment Variable: `DD_PSYCOPG_ANALYTICS_ENABLED=true`
 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
+Database tracing is not captured by App Analytics by default and you must enable collection manually for each integration. For example:
 
 ```ruby
 Datadog.configure { |c| c.tracing.instrument :mongo, analytics_enabled: true }
@@ -295,16 +295,17 @@ Datadog.configure { |c| c.tracing.instrument :mongo, analytics_enabled: true }
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-デフォルトでは、データベーストレースは App Analytics によりキャプチャされません。各インテグレーションに対し手動で収集を有効にする必要があります。例:
+Database tracing is not captured by App Analytics by default. Enable collection manually for each integration, for example:
 
 ```go
-// Analytics が有効になっているデータベースドライバーを登録します。sqltrace.Register("mysql", &mysql.MySQLDriver{}, sqltrace.WithAnalytics(true))
+// Register the database driver with Analytics enabled.
+sqltrace.Register("mysql", &mysql.MySQLDriver{}, sqltrace.WithAnalytics(true))
 ```
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例:
+Database tracing is not captured by App Analytics by default and you must enable collection manually for each integration. For example:
 
 ```javascript
 tracer.use('mysql', {
@@ -315,42 +316,42 @@ tracer.use('mysql', {
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-デフォルトでは、App Analytics はデータベーストレースをキャプチャしないため、各インテグレーションに対して手動で収集を有効にする必要があります。例えば、ADO.NET に対して App Analytics を有効にするには以下のようにします。
+Database tracing is not captured by App Analytics by default and you must enable collection manually for each integration. For example, to enable App Analytics for ADO.NET:
 
-* 環境変数または AppSetting: `DD_AdoNet_ANALYTICS_ENABLED=true`
+* Environment Variable or AppSetting: `DD_AdoNet_ANALYTICS_ENABLED=true`
 
-コードの場合は次のようになります。
+Or in code:
 
 ```csharp
 Tracer.Instance.Settings.Integrations["AdoNet"].AnalyticsEnabled = true;
 ```
 
-インテグレーション名は、[インテグレーションテーブル][1]にあります。**注:** Linux では、環境変数の名前は大文字と小文字が区別されます。
+Integration names can be found on the [integrations table][1]. **Note:** On Linux, the names of environment variables are case-sensitive.
 
-[1]: /ja/tracing/setup/dotnet/#integrations
+[1]: /tracing/setup/dotnet/#integrations
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-デフォルトでは、App Analytics はデータベーストレースをキャプチャしません。次の設定を使用して、個々のインテグレーションに対し App Analytics を有効または無効にすることができます。
+Database tracing is not captured by App Analytics by default. You can enable or disable App Analytics for individual integrations using the following setting:
 
-* 環境変数: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_<INTEGRATION>_ANALYTICS_ENABLED=true`
 
-カスタムサービスを送信するインテグレーションに対し、グローバルコンフィギュレーションに加えて上記を使用します。`mysqli` の場合、次のようになります。
+Use this in addition to the global configuration for any integrations that submit custom services. For example, for `mysqli`:
 
-* 環境変数: `DD_MYSQLI_ANALYTICS_ENABLED=true`
+* Environment Variable: `DD_MYSQLI_ANALYTICS_ENABLED=true`
 
-インテグレーション名は、[インテグレーションテーブル][1]にあります。
+Integration names can be found on the [integrations table][1].
 
-[1]: /ja/tracing/setup/php/#integrations
+[1]: /tracing/setup/php/#integrations
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-##### カスタムインスツルメンテーション
+##### Custom instrumentation
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodejs,.NET,php,cpp" >}}
 {{< programming-lang lang="java" >}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ANALYTICS_SAMPLE_RATE` タグを設定することで App Analytics を有効にできます。
+Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_SAMPLE_RATE` tag on a span:
 
 ```java
 import datadog.trace.api.DDTags;
@@ -362,7 +363,7 @@ class MyClass {
   @Trace
   void myMethod() {
     final Span span = GlobalTracer.get().activeSpan();
-    // @Trace アノテーションにより送信されるスパン。
+    // Span provided by @Trace annotation.
     if (span != null) {
       span.setTag(DDTags.SERVICE, "<SERVICE_NAME>");
       span.setTag(DDTags.ANALYTICS_SAMPLE_RATE, 1.0);
@@ -370,15 +371,15 @@ class MyClass {
   }
 }
 ```
-**注:** [dd.trace.methods][1] または [trace annotations][2] スパン向けの App analytics は、`-Ddd.trace-annotation.analytics.enabled=true` の設定により有効化することができます。
+**Note:** App analytics for [dd.trace.methods][1] or [trace annotations][2] spans can be enabled by setting `-Ddd.trace-annotation.analytics.enabled=true`.
 
 
-[1]: https://docs.datadoghq.com/ja/tracing/custom_instrumentation/java/#dd-trace-methods
-[2]: https://docs.datadoghq.com/ja/tracing/custom_instrumentation/java/#trace-annotations
+[1]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#dd-trace-methods
+[2]: https://docs.datadoghq.com/tracing/custom_instrumentation/java/#trace-annotations
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` タグを設定することで App Analytics を有効にできます。
+Applications with custom instrumentation can enable App Analytics by setting the `ddtrace.constants.ANALYTICS_SAMPLE_RATE_KEY` tag on a span:
 
 ```python
 from ddtrace import tracer
@@ -393,11 +394,11 @@ def my_method():
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `Analytics::TAG_ENABLED` タグを設定することで App Analytics を有効にできます。
+Applications with custom instrumentation can enable App Analytics by setting the `Analytics::TAG_ENABLED` tag on a span:
 
 ```ruby
 Datadog::Tracing.trace('my.task') do |span|
-  # 分析サンプリングレートを 1.0 に設定します
+  # Set the analytics sample rate to 1.0
   span.set_tag(Datadog::Tracing::Metadata::Ext::Analytics::TAG_ENABLED, true)
 end
 ```
@@ -405,18 +406,18 @@ end
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-カスタムインスツルメンテーションの場合、以下に示すように、スパンで App Analytics を有効にするための特別なタグが追加されています。
+For custom instrumentation, a special tag has been added to enable App Analytics on a span, as can be seen below:
 
 ```go
 span.SetTag(ext.AnalyticsEvent, true)
 ```
 
-これにより、スパンが App Analytics イベントとしてマークされます。
+This marks the span as a App Analytics event.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ANALYTICS` タグを設定することで App Analytics を有効にできます。
+Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS` tag on a span:
 
 ```javascript
 const { ANALYTICS } = require('dd-trace/ext/tags')
@@ -427,14 +428,14 @@ span.setTag(ANALYTICS, true)
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `Tags.Analytics` タグを設定することで App Analytics を有効にできます。
+Applications with custom instrumentation can enable App Analytics by setting the `Tags.Analytics` tag on a span:
 
 ```csharp
 using Datadog.Trace;
 
 using(var scope = Tracer.Instance.StartActive("web.request"))
 {
-    // このスパンで Analytics を有効にします
+    // enable Analytics on this span
     scope.span.SetTag(Tags.Analytics, "true");
 }
 
@@ -443,11 +444,11 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `ANALYTICS_KEY` タグを設定することで App Analytics を有効にできます。
+Applications with custom instrumentation can enable App Analytics by setting the `ANALYTICS_KEY` tag on a span:
 
 ```php
 <?php
-  // ... App Analytics を有効にする既存のスパン
+  // ... your existing span that you want to enable for App Analytics
   $span->setTag(Tag::ANALYTICS_KEY, true);
 ?>
 ```
@@ -455,7 +456,7 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 {{< /programming-lang >}}
 {{< programming-lang lang="cpp" >}}
 
-カスタムインスツルメンテーションを使用するアプリケーションは、スパンで `analytics_event` タグを設定することで App Analytics を有効にできます。
+Applications with custom instrumentation can enable App Analytics by setting the `analytics_event` tag on a span:
 
 ```cpp
 ...
@@ -463,24 +464,24 @@ using(var scope = Tracer.Instance.StartActive("web.request"))
 ...
 auto tracer = ...
 auto span = tracer->StartSpan("operation_name");
-// true のブール値はスパンに対して App Analytics を有効にします
-//（サンプルレートは 1.0）。
+// A boolean value of true enables App Analytics for the span,
+// with a sample rate of 1.0.
 span->SetTag(datadog::tags::analytics_event, true);
-// 0.0～1.0 のダブル値は App Analytics を有効にし、
-//サンプルレートを指定された値に設定します。
+// A double value between 0.0 and 1.0 enables App Analytics
+// and sets the sample rate to the provided value.
 span->SetTag(datadog::tags::analytics_event, 0.5);
 ```
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### Datadog Agent で
+### In the Datadog Agent
 
 <div class="alert alert-danger">
-このセクションでは、レガシー App Analytics に関連する構成情報とともに、非推奨の機能について説明します。
+This section describes deprecated features with configuration information relevant to legacy App Analytics.
 </div>
 
-サービスごとに解析するスパンの割合を構成するには、`datadog.yaml` ファイルに以下のように設定します。
+To configure a rate of spans to analyze by service, setup the following in the `datadog.yaml` file:
 ```
 apm_config:
   analyzed_rate_by_service:
@@ -489,7 +490,7 @@ apm_config:
     service_C: 0.05
 ```
 
-サービスおよび操作名ごとに解析するスパンの割合を構成するには、`datadog.yaml` ファイルに以下のように設定します。
+To configure a rate of spans to analyze by service and operation name, setup the following in the `datadog.yaml` file:
 
 ```
 apm_config:
@@ -499,19 +500,19 @@ apm_config:
     service_B|operation_name_Z: 0.01
 ```
 
-## トラブルシューティング: 1 秒あたりの最大イベント制限
+## Troubleshooting: Maximum events per second limit
 
-Agent ログに以下のエラーメッセージが表示される場合、アプリケーションは、デフォルトで APM で許可されている毎秒 200 件を超えるトレースイベントを発行しています。
+If you encounter the following error message in your Agent logs, your applications are emitting more than the default 200 trace events per second allowed by APM.
 
 ```
 Max events per second reached (current=300.00/s, max=200.00/s). Some events are now being dropped (sample rate=0.54). Consider adjusting event sampling rates.
 
 ```
 
-Agent の APM レート制限を増やすには、Agent のコンフィギュレーションファイル (`apm_config:` セクションの下) 内で `max_events_per_second` 属性を構成します。コンテナ化されたデプロイメント (Docker、Kubernetes など) の場合は、`DD_APM_MAX_EPS` 環境変数を使用します。
+To increase the APM rate limit for the Agent, configure the `max_events_per_second` attribute within the Agent's configuration file (underneath the `apm_config:` section). For containerized deployments (for example, Docker or Kubernetes), use the `DD_APM_MAX_EPS` environment variable.
 
-**注**: APM レート制限を増やすと、App Analytics のコストが増加する可能性があります。
+**Note**: Increasing the APM rate limit could result in increased costs for App Analytics.
 
 
-[1]: /ja/tracing/trace_pipeline/ingestion_controls/
-[2]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
+[1]: /tracing/trace_pipeline/ingestion_controls/
+[2]: /tracing/trace_pipeline/ingestion_mechanisms/

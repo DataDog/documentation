@@ -1,64 +1,66 @@
 ---
-categories:
+"categories":
 - cloud
-- AWS
-- ログの収集
-dependencies: []
-description: AWS Backup のキーメトリクスを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/amazon_backup/
-draft: false
-git_integration_title: amazon_backup
-has_logo: true
-integration_id: ''
-integration_title: AWS Backup
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: amazon_backup
-public_title: Datadog-AWS Backup インテグレーション
-short_description: AWS Backup のキーメトリクスを追跡します。
-version: '1.0'
+- aws
+- log collection
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key AWS Backup metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_backup/"
+"draft": false
+"git_integration_title": "amazon_backup"
+"has_logo": true
+"integration_id": ""
+"integration_title": "AWS Backup"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_backup"
+"public_title": "Datadog-AWS Backup Integration"
+"short_description": "Track key AWS Backup metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-AWS Backup は、AWS サービスやハイブリッドワークロードのデータ保護を一元化し、自動化することができます。
+AWS Backup enables you to centralize and automate data protection across AWS
+services and hybrid workloads.
 
-このインテグレーションを有効にすると、Backup メトリクスを Datadog に表示できます。
+Enable this integration to see your Backup metrics in Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、セットアップします。
+If you haven't already, set up the [Amazon Web Services integration][1].
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Backup` が有効になっていることを確認します。
-2. [Datadog - AWS Backup インテグレーション][3]をインストールします。
+1. In the [AWS integration page][2], ensure that `Backup` is enabled under the `Metric Collection` tab.
+2. Install the [Datadog - AWS Backup integration][3].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_backup" >}}
 
 
-### ヘルプ
+### Events
 
-AWS Backup インテグレーションには、イベントは含まれません。
+The AWS Backup integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-AWS Backup インテグレーションには、サービスのチェック機能は含まれません。
+The AWS Backup integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-backup
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_backup/amazon_backup_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

@@ -1,9 +1,9 @@
 ---
-core_product:
-- network device monitoring
-- network performance monitoring
+title: layer 3
 synonyms:
-- ネットワーク層
-title: レイヤー 3
+  - network layer
+core_product:
+  - network device monitoring
+  - network performance monitoring
 ---
-コンピュータネットワークの OSI モデルでは、レイヤー 3 は、データが送信元から宛先まで物理的にどのようにルーティングされるかを決定します。レイヤー 3 は、パケットと論理アドレスに関係します。
+In the OSI model of computer networking, layer 3 determines how data is physically routed from source to destination. Layer 3 concerns packets and logical addressing. 

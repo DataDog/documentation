@@ -1,147 +1,148 @@
 ---
-app_id: workday
-app_uuid: 011547b7-572e-481a-988a-69c1ad8c6779
-assets:
-  integration:
-    auto_install: false
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10381
-    source_type_name: Workday
-author:
-  homepage: https://www.datadoghq.com
-  name: Ruby
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- ログの収集
-- セキュリティ
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: workday
-integration_id: workday
-integration_title: Workday ユーザーアクティビティログ
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: workday
-public_title: Workday ユーザーアクティビティログ
-short_description: Datadog で Workday のログを確認し、コンプライアンスおよび Cloud SIEM 分析のために利用します。
-supported_os:
+"app_id": "workday"
+"app_uuid": "011547b7-572e-481a-988a-69c1ad8c6779"
+"assets":
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10381"
+    "source_type_name": Workday
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- log collection
+- security
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "workday"
+"integration_id": "workday"
+"integration_title": "Workday User Activity Logs"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "workday"
+"public_title": "Workday User Activity Logs"
+"short_description": "View Workday logs in Datadog for compliance and Cloud SIEM analysis."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Log Collection
-  - Category::Security
-  - Submitted Data Type::Logs
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Datadog で Workday のログを確認し、コンプライアンスおよび Cloud SIEM 分析のために利用します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Workday ユーザーアクティビティログ
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Log Collection"
+  - "Category::Security"
+  - "Submitted Data Type::Logs"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": View Workday logs in Datadog for compliance and Cloud SIEM analysis.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Workday User Activity Logs
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## 概要
+## Overview
 
-このインテグレーションにより、Workday テナント内のユーザーアクティビティを記録する Workday ユーザーアクティビティログの収集が可能になります。このインテグレーションにより、次のことが可能になります。
+This integration enables the collection of Workday User Activity Logs to capture user activity within a Workday tenant. This integration allows you to:
 
-- Workday のデータ保持期間を管理する。
-- カスタムウィジェットやカスタムダッシュボードを構築する。
-- [すぐに使えるログパイプライン][2]を使って [Cloud SIEM][1] の検出ルールをセットアップする。
-- Workday のイベントを、スタック全体の他のサービスのデータと相互参照する。
+- Control your Workday data retention.
+- Build custom widgets and dashboards.
+- Set up [Cloud SIEM][1] detection rules using the [out-of-the-box Logs Pipeline][2].
+- Cross-reference Workday events with the data from other services across your stack.
 
-Datadog の Workday インテグレーションでは、[Workday の User Activity Logging API][3] を使用してログを収集します。これにより生成されるログから、以下に対する洞察が得られます。
+Datadog’s Workday integration collects logs using [Workday’s User Activity Logging API][3], which generates logs that allow insight into:
 
-- どのユーザーが Workday でリクエストを行っているか
-- どのタイプのリクエストが行われているのか
-- 行われたリクエストの総量
-- デバイスの種類や IP アドレスなど、イベントに関連するその他のメタデータ
+- Which users are making requests in Workday
+- What type of requests are being made
+- The total amount of requests made
+- Other metadata related to the event, such as device type and IP address
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-**ステップ 1: テナントレベルでユーザーアクティビティロギングを有効にする**
+**Step 1: Enable User Activity Logging at the tenant level**
 
-1. **Edit Tenant Setup - System** タスクにアクセスし、**Enable User Activity Logging** チェックボックスが選択されていることを確認します。
-2. **Edit Tenant Setup - Security** タスクにアクセスし、**OAuth 2.0 Clients Enabled** チェックボックスが選択されていることを確認します。
+1. Access the **Edit Tenant Setup - System** task and ensure that the **Enable User Activity Logging** checkbox is selected.
+2. Access the **Edit Tenant Setup - Security** task and ensure that the **OAuth 2.0 Clients Enabled** checkbox is selected.
 
-**ステップ 2: インテグレーションシステムユーザーを作成する**
+**Step 2: Create an Integration System User**
 
-1. **Create Integration System User** タスクにアクセスします。
+1. Access the **Create Integration System User** task.
    - Username: < ISU_Datadog >
-   - Session Timeout Minutes: 0 (セッションの有効期限を無効にする)
-   - Don't Allow UI Sessions: Yes (このチェックボックスを選択する)
-2. **Create Security Group** タスクにアクセスします。
+   - Session Timeout Minutes: 0 (disable session expiration)
+   - Don't Allow UI Sessions: Yes (select this checkbox)
+2. Access the **Create Security Group** task.
    - Type of Tenanted Security Group: Integration System Security Group (Unconstrained)
    - Name: < ISSG_Datadog_Monitoring >
-3. 作成したグループの **Edit Integration System Security Group** (Unconstrained) タスクにアクセスします。
+3. Access the **Edit Integration System Security Group** (Unconstrained) task for the group you just created.
    - Integration System Users: < ISU_Datadog >
-4. ドメイン System Auditing の **View Domain** タスクにアクセスします。
-5. System Auditing 関連のアクションメニューから Domain > Edit Security Policy Permissions を選択します。
-6. 作成したグループ Remote Security Monitoring を以下の両方のテーブルに追加します。
-   - Report/Task Permissions テーブル: View access
-   - Integration Permissions テーブル: Get access
-7. Activate Pending Security Policy Changes タスクにアクセスし、行った変更を有効にします。
+4. Access the **View Domain** task for the domain System Auditing.
+5. Select Domain > Edit Security Policy Permissions from the System Auditing related actions menu.
+6. Add the group that you created, Remote Security Monitoring, to both tables:
+   - Report/Task Permissions table: View access
+   - Integration Permissions table: Get access
+7. Access the Activate Pending Security Policy Changes task and activate the changes that you made.
 
-**ステップ 3: テナントにインテグレーション用の API クライアントを登録する**
+**Step 3: Register the API client for integrations in your tenant**
 
-1. **Register API Clients for Integrations** タスクにアクセスし、クライアントを登録します。
+1. Access the **Register API Clients for Integrations** task and register the client.
    - Client Name: < Datadog User Activity Monitor >
    - Non-Expiring Refresh Tokens: Yes
    - Scope: System
 
-**ステップ 4: Datadog でモニターをセットアップするために必要な構成値を取得する**
+**Step 4: Grab Required Configuration Values to setup the Monitor in Datadog**
 
-1. View API Clients タスクにアクセスし、API Clients for Integrations タブを選択して、以下の設定を確認します。
+1. Access the View API Clients task, select the API Clients for Integrations tab and confirm these settings:
    - Client Grant Type: Authorization Code Grant
    - Access Token Type: Bearer
-2. 以下の 4 つの値をコピーして保存してください (最初の 2 つの値はページの一番上にあります)。
+2. Copy and store these four values (the first two values are at the top of the page):
    - Workday REST API Endpoint
    - Token Endpoint
    - Client ID
    - Client Secret
-3. Client 関連アクションメニューから、**API Client > Manage Refresh Token for Integration** を選択します。
+3. Select **API Client > Manage Refresh Token for Integrations** from the Client related actions menu.
    - Workday Account:< ISU_Datadog >
-4. **Generate New Refresh Token** チェックボックスを選択し、そのトークンを保存します。
-5. Datadog インテグレーションを作成する
-   - 保存した値を Datadog Configuration タブに入力します。
-   - URL のドメイン部分を入力します: **https://DOMAIN/**
+4. Select the **Generate New Refresh Token** checkbox, then save that token.
+5. Create the Datadog Integration
+   - Enter the values that you saved into the Datadog Configuration Tab.
+   - Enter the domain part of the URL: **https://DOMAIN/**
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Workday には、メトリクスは含まれません。
+Workday does not include any metrics.
 
-### ワークフローの自動化
+### Logs
 
-### ヘルプ
+### Events
 
-Workday インテグレーションには、イベントは含まれません。
+The Workday integration does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "workday" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
 [1]: https://app.datadoghq.com/security/home
 [2]: https://app.datadoghq.com/logs/pipelines?search=workday
 [3]: https://community.workday.com/sites/default/files/file-hosting/restapi/index.html#privacy/v1/get-/activityLogging
 [4]: https://github.com/DataDog/integrations-internal-core/blob/master/workday/assets/service_checks.json
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

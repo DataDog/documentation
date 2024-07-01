@@ -1,75 +1,75 @@
 ---
+title: Signal Correlation Rules
+type: documentation
 aliases:
-- /ja/security_platform/cloud_siem/signal_correlation_rules
+ - /security_platform/cloud_siem/signal_correlation_rules
 further_reading:
 - link: /cloud_siem/explorer/
-  tag: ドキュメント
-  text: セキュリティシグナルエクスプローラーについて学ぶ
+  tag: Documentation
+  text: Learn about the Security Signals Explorer
 - link: /security/notifications/variables/
-  tag: ドキュメント
-  text: セキュリティ通知変数について
-title: シグナル相関ルール
-type: documentation
+  tag: Documentation
+  text: Learn more about Security notification variables
 ---
 
-## 概要
+## Overview
 
-シグナル相関ルールは、複数のシグナルを組み合わせて新しいシグナルを生成するため、より複雑なユースケースに対してアラートを発し、アラート疲れを軽減することができます。例えば、イベントやシグナルを相関させて特定の問題を特定したり、特定の重大度 `low` シグナルが特定の重大度 `high` シグナルと組み合わさった場合にのみアラートを生成したりすることができます。
+Signal correlation rules combine multiple signals together to generate a new signal so that you can alert on more complex use cases and reduce alert fatigue. For example, you can correlate events or signals to identify a specific issue or generate an alert only if a specific `low` severity signal is combined with a specific `high` severity signal.
 
-別の例として、この 2 つのルールを組み合わせてシグナルを作成することができます。
+As another example, you can create a signal by combining these two rules:
 
-1. 期限切れのアカウントからアクセスしようとした場合の検出
-2. ホストやリソースへの認証の試みがあったかどうかの検出
+1. Detect if an access attempt was made from an expired account
+2. Detect if there was an attempt to authenticate into a host or resource
 
-そして、`expired account ID` 属性を使用して、2 つのルールを関連付けます。
+And use the `expired account ID` attribute to correlate the two rules.
 
-ログ検出ルールや、ログ検出ルールと Cloud Security Management Threats や Application Security Management のルールを相関させることができます。
+You can correlate log detection rules, as well as log detection rules with Cloud Security Management Threats and Application Security Management rules.
 
-## シグナル相関ルールの作成
+## Create a Signal Correlation rule
 
-[Detection Rules][1] に移動し、**+New Rule** をクリックします。*Select a rule type* セクションで、**Signal Correlation** をクリックします。
+Navigate to [Detection Rules][1] and click **+ New Rule**. In the *Select a rule type* section, click **Signal Correlation**.
 
-### ルールを設定する
+### Set rules
 
-1. **Rule a** のルールを選択します。鉛筆のアイコンをクリックして、ルールの名前を変更します。相関する属性を定義するには、**correlated by** ドロップダウンを使用します。選択したルールを相関させるために、複数の属性を選択できます (最大 3 つまで)。スライディングウィンドウの詳細については、[タイムウィンドウ](#time-windows)を参照してください。
+1. Select a rule for **Rule a**. Click the pencil icon to rename the rule. Use the **correlated by** dropdown to define the correlating attribute. You can select multiple attributes (maximum of 3) to correlate the selected rules. See [Time windows](#time-windows) for more information about the sliding window.
 
-2. 2 つ目のルールエディタのドロップダウンで、**Rule b** のルールを選択します。鉛筆のアイコンをクリックして、ルールの名前を変更します。属性とスライディングウィンドウのタイムフレームは、**Rule a** で選択されたものに設定されています。
+2. Select a rule for **Rule b** in the second Rule editor's dropdown. Click the pencil icon to rename the rule. The attributes and sliding window time frame is set to what was selected for **Rule a**.
 
-### ルールケースを設定する
+### Set rule cases
 
-#### トリガー
+#### Trigger
 
-{{< img src="security/security_monitoring/detection_rules/define_rule_case.png" alt="トリガー、重大度、通知のフィールドが表示されたルールケースのセットセクション" >}}
+{{< img src="security/security_monitoring/detection_rules/define_rule_case.png" alt="The set rule cases section showing the trigger, severity, and notification fields" >}}
 
-ルールのケースは case ステートメントとして評価されます。したがって、最初にマッチしたケースがシグナルを発生させます。ルールケースの例としては、`a > 3` があり、`a` はルール名です。ルールケースをクリックしてドラッグすると、その順序を操作することができます。
+Rule cases are evaluated as case statements. Thus, the first case to match generates the signal. An example of a rule case is`a > 3`, where `a` is the rule name. Click and drag your rule cases to manipulate their ordering.
 
-ルールケースには、過去に定義されたクエリのイベント数に基づいてシグナルを生成すべきかを判断するための論理演算 (`>、>=、&&、||`) が含まれます。ここで ASCII 小文字の[ルール名](#set-rules)が参照されます。
+A rule case contains logical operations (`>, >=, &&, ||`) to determine if a signal should be generated based on the event counts in the previously defined queries. The ASCII lowercase [rule names](#set-rules) are referenced in this section.
 
-**注**: クエリラベルは演算子に先行しなければなりません。たとえば、`a > 3` は使用できますが、`3 < a` は許容されません。
+**Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
 
-各ルールケースにつき、「ケース 1」のような**名前**を付与します。シグナルの生成時には、この名前がルールの名称に追加されます。
+Provide a **name**, for example "Case 1", for each rule case. This name is appended to the rule name when a signal is generated.
 
-#### 重大度および通知
+#### Severity and notification
 
 {{% security-rule-severity-notification %}}
 
-#### タイムウィンドウ
+#### Time windows
 
 {{% security-rule-time-windows %}}
 
-ケースを追加する場合は、**Add Case** をクリックします。
+Click **Add Case** to add additional cases.
 
-**注**: この `evaluation window` は、`keep alive` および `maximum signal duration` 以下でなければなりません。
+**Note**: The `evaluation window` must be less than or equal to the `keep alive` and `maximum signal duration`.
 
 ### Say what's happening
 
 {{% security-rule-say-whats-happening %}}
 
-シグナルにタグを追加するには、**Tag resulting signals** ドロップダウンメニューを使用します。例えば、`security:attack` や `technique:T1110-brute-force` のようになります。
+Use the **Tag resulting signals** dropdown menu to add tags to your signals. For example, `security:attack` or `technique:T1110-brute-force`.
 
-**注**: `security` タグはセキュリティシグナルの分類に用いられる特殊なタグです。`attack`、`threat-intel`、`compliance`、`anomaly`、`data-leak` など他のタグの使用を推奨します。
+**Note**: the tag `security` is special. This tag is used to classify the security signal. The recommended options are: `attack`, `threat-intel`, `compliance`, `anomaly`, and `data-leak`.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

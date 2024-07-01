@@ -1,58 +1,59 @@
 ---
-aliases:
-- /ja/integrations/azure_customerinsights
-categories:
+"aliases":
+- /integrations/azure_customerinsights
+"categories":
 - cloud
 - azure
-dependencies: []
-description: Azure Customer Insights のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_customer_insights/
-draft: false
-git_integration_title: azure_customer_insights
-has_logo: true
-integration_id: azure-customerinsights
-integration_title: Microsoft Azure Customer Insights
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_customer_insights
-public_title: Datadog-Microsoft Azure Customer Insights インテグレーション
-short_description: Azure Customer Insights のキーメトリクスを追跡
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Customer Insights metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_customer_insights/"
+"draft": false
+"git_integration_title": "azure_customer_insights"
+"has_logo": true
+"integration_id": "azure-customerinsights"
+"integration_title": "Microsoft Azure Customer Insights"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_customer_insights"
+"public_title": "Datadog-Microsoft Azure Customer Insights Integration"
+"short_description": "Track key Azure Customer Insights metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Customer Insights を使用すると、どのような規模のオーガニゼーションであっても、多種多様なデータセットを結合して知識やインサイトを得ることで、あらゆる角度から捉えた顧客の全体像を構築することができます。
+Azure Customer Insights enables organizations of all sizes to bring together diverse data sets and generate knowledge and insights to build a holistic 360° view of their customers.
 
-Datadog Azure インテグレーションを使用して、Customer Insights からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Customer Insights.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_customer_insights" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Customer Insights インテグレーションには、イベントは含まれません。
+The Azure Customer Insights integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Customer Insights インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Customer Insights integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_customer_insights/azure_customer_insights_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

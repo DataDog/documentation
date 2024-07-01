@@ -1,61 +1,62 @@
 ---
-categories:
-- collaboration
-- developer tools
-- issue tracking
-dependencies: []
-description: Redmine のアップデートを Datadog のイベントストリームで表示、検索、議論。
-doc_link: https://docs.datadoghq.com/integrations/redmine/
-draft: false
-git_integration_title: redmine
-has_logo: true
-integration_id: redmine
-integration_title: Redmine
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: redmine
-public_title: Datadog-Redmine インテグレーション
-short_description: Redmine のアップデートを Datadog のイベントストリームで表示、検索、議論。
-version: '1.0'
+"categories":
+- "collaboration"
+- "developer tools"
+- "issue tracking"
+"custom_kind": "integration"
+"dependencies": []
+"description": "View, search on, and discuss Redmine updates in your Datadog event stream."
+"doc_link": "https://docs.datadoghq.com/integrations/redmine/"
+"draft": false
+"git_integration_title": "redmine"
+"has_logo": true
+"integration_id": "redmine"
+"integration_title": "Redmine"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "redmine"
+"public_title": "Datadog-Redmine Integration"
+"short_description": "View, search on, and discuss Redmine updates in your Datadog event stream."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Redmine はオープンソースのプロジェクト管理 Web アプリケーションです。Redmine のアクティビティを Datadog でキャプチャすることで、以下のことが可能になります。
+Redmine is an open source project management web application. Capture Redmine activity in Datadog to:
 
-- 開発サイクルを追跡できます。
-- Datadog イベントストリームに未解決の問題を表示できます。
-- プロジェクトについてチームで議論できます。
+- Track your development cycle.
+- View open issues in the Datadog event stream.
+- Discuss projects with your team.
 
-Redmine 構成に必要な項目は、目的のアクティビティフィードの完全な URL です。複数の URL を追加できます。
+The Redmine configuration requires a full URL to the desired activity feed. You can add multiple URLs.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-インテグレーションを構成するには、[Redmine インテグレーションタイル][1]を参照してください。
+See the [Redmine integration tile][1] to configure your integration.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Redmine インテグレーションには、メトリクスは含まれません。
+The Redmine integration does not include any metric.
 
-### ヘルプ
+### Events
 
-作成された問題はすべて Datadog 内でイベントとして表示されます。インテグレーションをインストールして構成した後、[Events Explorer][2] で `source:redmine` を検索すると、Redmine のアクティビティフィードで問題を確認することができます。
+All created issues appear as events within Datadog. After installing and configuring the integration, you can search the [Events Explorer][2] for `source:redmine` to see issues in your Redmine activity feed.
 
-### ヘルプ
+### Service Checks
 
-Redmine インテグレーションには、サービスのチェック機能は含まれません。
+The Redmine integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
 [1]: https://app.datadoghq.com/integrations/redmine
-[2]: https://docs.datadoghq.com/ja/service_management/events/explorer/
-[3]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/service_management/events/explorer/
+[3]: https://docs.datadoghq.com/help/
+

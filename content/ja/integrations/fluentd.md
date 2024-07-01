@@ -1,92 +1,92 @@
 ---
-app_id: fluentd
-app_uuid: c725a834-feee-481d-94f0-afe95f39d0b1
-assets:
-  dashboards:
-    fluentd: assets/dashboards/fluentd_dashboard.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: fluentd.buffer_queue_length
-      metadata_path: metadata.csv
-      prefix: fluentd.
-    process_signatures:
-    - td-agent
-    - fluentd
-    - ruby td-agent
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 108
-    source_type_name: fluentd
-  saved_views:
-    fluentd_processes: assets/saved_views/fluentd_processes.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- log collection
-- metrics
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: fluentd
-integration_id: fluentd
-integration_title: FluentD
-integration_version: 3.2.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: fluentd
-public_title: FluentD
-short_description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
-supported_os:
-- linux
-- windows
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Category::ログの収集
-  - Category::Metrics
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: FluentD
+"app_id": "fluentd"
+"app_uuid": "c725a834-feee-481d-94f0-afe95f39d0b1"
+"assets":
+  "dashboards":
+    "fluentd": "assets/dashboards/fluentd_dashboard.json"
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "fluentd.buffer_queue_length"
+      "metadata_path": "metadata.csv"
+      "prefix": "fluentd."
+    "process_signatures":
+    - "td-agent"
+    - "fluentd"
+    - "ruby td-agent"
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "108"
+    "source_type_name": "fluentd"
+  "saved_views":
+    "fluentd_processes": "assets/saved_views/fluentd_processes.json"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "log collection"
+- "metrics"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "fluentd"
+"integration_id": "fluentd"
+"integration_title": "FluentD"
+"integration_version": "3.2.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "fluentd"
+"public_title": "FluentD"
+"short_description": "Monitor buffer queues and retry counts for each Fluentd plugin you've enabled."
+"supported_os":
+- "linux"
+- "windows"
+- "macos"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Category::Log Collection"
+  - "Category::Metrics"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": "Monitor buffer queues and retry counts for each Fluentd plugin you've enabled."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "FluentD"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Fluentd ダッシュボード][1]
+![Fluentd Dashboard][1]
 
-## 概要
+## Overview
 
-Fluentd からメトリクスを取得して、以下のことができます。
+Get metrics from Fluentd to:
 
-- Fluentd のパフォーマンスを視覚化できます。
-- Fluentd のパフォーマンスを他のアプリケーションと関連付けることができます。
+- Visualize Fluentd performance.
+- Correlate the performance of Fluentd with the rest of your applications.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Fluentd チェックは [Datadog Agent][2] パッケージに含まれています。Fluentd サーバーに追加でインストールする必要はありません。
+The Fluentd check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Fluentd servers.
 
-#### Fluentd の準備
+#### Prepare Fluentd
 
-FluentD コンフィギュレーションファイルに `monitor_agent` ソースを追加します。
+In your Fluentd configuration file, add a `monitor_agent` source:
 
 ```text
 <source>
@@ -96,18 +96,18 @@ FluentD コンフィギュレーションファイルに `monitor_agent` ソー�
 </source>
 ```
 
-### ブラウザトラブルシューティング
+### Configuration
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-##### メトリクスの収集
+##### Metric collection
 
-1. [Fluentd メトリクス](#メトリクス)を収集するには、[Agent コンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `fluentd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル fluentd.d/conf.yaml][2] を参照してください。
+1. Edit the `fluentd.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your [Fluentd metrics](#metrics). See the [sample fluentd.d/conf.yaml][2] for all available configuration options.
 
    ```yaml
    init_config:
@@ -119,37 +119,37 @@ FluentD コンフィギュレーションファイルに `monitor_agent` ソー�
      - monitor_agent_url: http://example.com:24220/api/plugins.json
    ```
 
-2. [Agent を再起動します][3]。
+2. [Restart the Agent][3].
 
-##### 収集データ
+##### Log collection
 
-[Datadog の FluentD プラグイン][4]を使用して FluentD から Datadog アカウントへログを直接転送することができます。
+You can use the [Datadog FluentD plugin][4] to forward the logs directly from FluentD to your Datadog account.
 
-###### ログへのメタデータの追加
+###### Add metadata to your logs
 
-適切なメタデータ (ホスト名、ソースなど) は、Datadog でログの可能性をフルに引き出すためのカギです。デフォルトでは、ホスト名およびタイムスタンプフィールドが、[予約済み属性の再マップ][5]によって適切に再マップされます。
+Proper metadata (including hostname and source) is the key to unlocking the full potential of your logs in Datadog. By default, the hostname and timestamp fields should be properly remapped with the [remapping for reserved attributes][5].
 
-###### ソースとカスタムタグ
+###### Source and custom tags
 
-Datadog で[インテグレーションの自動セットアップ][7]をトリガーするには、ログに `ddsource` 属性を追加して、[ログのインテグレーションの名前][6]を設定します。
-[インフラストラクチャーリスト][9]に一致するホスト名があれば、[ホストタグ][8]がログに自動的に設定されます。ログにカスタムタグを追加する場合は、`ddtags` 属性を使用します。
+Add the `ddsource` attribute with [the name of the log integration][6] in your logs in order to trigger the [integration automatic setup][7] in Datadog.
+[Host tags][8] are automatically set on your logs if there is a matching hostname in your [infrastructure list][9]. Use the `ddtags` attribute to add custom tags to your logs:
 
-セットアップ例:
+Setup Example:
 
 ```conf
-  # "datadog.**" タグが付いたイベントを照合して
-  # Datadog に送信
+  # Match events tagged with "datadog.**" and
+  # send them to Datadog
 
 <match datadog.**>
   @type datadog
   @id awesome_agent
   api_key <your_api_key>
 
-  # オプション
+  # Optional
   include_tag_key true
   tag_key 'tag'
 
-  # オプションのタグ
+  # Optional tags
   dd_source '<INTEGRATION_NAME>'
   dd_tags '<KEY1:VALUE1>,<KEY2:VALUE2>'
 
@@ -163,22 +163,22 @@ Datadog で[インテグレーションの自動セットアップ][7]をトリ�
 </match>
 ```
 
-デフォルトでは、ログを gzip 圧縮して HTTPS (ポート 443) から送信するためにプラグインを構成します。
-次のパラメーターを使用して、この動作を変更できます。
+By default, the plugin is configured to send logs through HTTPS (port 443) using gzip compression.
+You can change this behavior by using the following parameters:
 
-- `use_http`: TCP 転送を使用する場合はこれを `false` に設定し、`host` と `port` を 状況に応じて更新します (デフォルトは `true`)
-- `use_compression`: 圧縮は HTTP にのみ利用できます。無効にする場合はこれを `false` に設定します (デフォルトは `true`)
-- `compression_level`: HTTP の圧縮レベルを 1 ～ 9 の範囲で設定します。最大値は 9 となります (デフォルトは `6`)
+- `use_http`: Set this to `false` if you want to use TCP forwarding and update the `host` and `port` accordingly (default is `true`)
+- `use_compression`: Compression is only available for HTTP. Disable it by setting this to `false` (default is `true`)
+- `compression_level`: Set the compression level from HTTP. The range is from 1 to 9, 9 being the best ratio (default is `6`)
 
-以下の追加パラメーターを使用すると、プロキシを通過するために、使用するエンドポイントを変更できます。
+Additional parameters can be used to change the endpoint used in order to go through a proxy:
 
-- `host`: ログを Datadog に直接転送しない場合のプロキシのエンドポイント (デフォルト値は `http-intake.logs.datadoghq.com`)。
-- `port`: ログを Datadog に直接転送しない場合のプロキシのポート (デフォルト値は `80`)
-- `ssl_port`: ログをセキュリティ保護された TCP/SSL 接続で Datadog に転送する場合に使用するポート (デフォルトは `443`)
-- `use_ssl`: Datadog へのセキュリティ保護された TCP/SSL 接続を初期化するよう Agent に指示します (デフォルト値は `true`)。
-- `no_ssl_validation`: SSL ホスト名の検証を無効化します (デフォルト値は `false`)。
+- `host`: The proxy endpoint for logs not directly forwarded to Datadog (default value: `http-intake.logs.datadoghq.com`).
+- `port`: The proxy port for logs not directly forwarded to Datadog (default value: `80`).
+- `ssl_port`: The port used for logs forwarded with a secure TCP/SSL connection to Datadog (default value: `443`).
+- `use_ssl`: Instructs the Agent to initialize a secure TCP/SSL connection to Datadog (default value: `true`).
+- `no_ssl_validation`: Disables SSL hostname validation (default value: `false`).
 
-**注**: `host` および `port` をリージョン {{< region-param key="http_endpoint" code="true" >}} {{< region-param key="http_port" code="true" >}} に設定します。
+**Note**: Set `host` and `port` to your region {{< region-param key="http_endpoint" code="true" >}} {{< region-param key="http_port" code="true" >}}.
 
 ```conf
 <match datadog.**>
@@ -189,11 +189,11 @@ Datadog で[インテグレーションの自動セットアップ][7]をトリ�
 </match>
 ```
 
-###### Kubernetes と Docker タグ
+###### Kubernetes and Docker tags
 
-製品のある部分から別の部分に移動できるようにするには、Datadog タグがたいへん重要です。コンテナビューやコンテナメトリクスから最も関連するログに移動するには、ログに正しいメタデータを関連付けることが大切です。
+Datadog tags are critical to be able to jump from one part of the product to another. Having the right metadata associated with your logs is therefore important in jumping from a container view or any container metrics to the most related logs.
 
-以下の属性がログに含まれている場合は、これらの属性が Datadog タグとしてログに自動的に追加されます。
+If your logs contain any of the following attributes, these attributes are automatically added as Datadog tags on your logs:
 
 - `kubernetes.container_image`
 - `kubernetes.container_name`
@@ -201,75 +201,75 @@ Datadog で[インテグレーションの自動セットアップ][7]をトリ�
 - `kubernetes.pod_name`
 - `docker.container_id`
 
-Datadog Agent は Docker と Kubernetes のメタデータを自動的に収集しますが、FluentD では、そのためのプラグインが必要です。このメタデータの収集には、[fluent-plugin-kubernetes_metadata_filter][10] を使用することを Datadog はお勧めします。
+While the Datadog Agent collects Docker and Kubernetes metadata automatically, FluentD requires a plugin for this. Datadog recommends using [fluent-plugin-kubernetes_metadata_filter][10] to collect this metadata.
 
-構成例:
+Configuration example:
 
 ```conf
-# "kubernetes.**" のタグが付いたログのメタデータを収集
+# Collect metadata for logs tagged with "kubernetes.**"
  <filter kubernetes.*>
    type kubernetes_metadata
  </filter>
 ```
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/fluentd/datadog_checks/fluentd/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/fluent-plugin-datadog
-[5]: https://docs.datadoghq.com/ja/logs/processing/#edit-reserved-attributes
-[6]: https://docs.datadoghq.com/ja/integrations/#cat-log-collection
-[7]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
-[8]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags/
+[5]: https://docs.datadoghq.com/logs/processing/#edit-reserved-attributes
+[6]: https://docs.datadoghq.com/integrations/#cat-log-collection
+[7]: https://docs.datadoghq.com/logs/processing/#integration-pipelines
+[8]: https://docs.datadoghq.com/getting_started/tagging/assigning_tags/
 [9]: https://app.datadoghq.com/infrastructure
 [10]: https://github.com/fabric8io/fluent-plugin-kubernetes_metadata_filter
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-##### メトリクスの収集
+##### Metric collection
 
-| パラメーター            | 値                                                             |
+| Parameter            | Value                                                             |
 | -------------------- | ----------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `fluentd`                                                         |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                     |
+| `<INIT_CONFIG>`      | blank or `{}`                                                     |
 | `<INSTANCE_CONFIG>`  | `{"monitor_agent_url": "http://%%host%%:24220/api/plugins.json"}` |
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションで `fluentd` を検索します。
+[Run the Agent's status subcommand][3] and look for `fluentd` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "fluentd" >}}
 
 
-### ヘルプ
+### Events
 
-FluentD チェックには、イベントは含まれません。
+The FluentD check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "fluentd" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
-## その他の参考資料
+## Further Reading
 
-- [Datadog を使用した Fluentd の監視方法][5]
+- [How to monitor Fluentd with Datadog][5]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/fluentd/images/snapshot-fluentd.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/help/
 [5]: https://www.datadoghq.com/blog/monitor-fluentd-datadog

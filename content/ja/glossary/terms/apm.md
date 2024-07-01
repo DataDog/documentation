@@ -1,11 +1,11 @@
 ---
-core_product:
-- apm
-synonyms:
-- トレーシング
-- 分散型トレーシング
 title: APM
+synonyms:
+    - Tracing
+    - Distributed Tracing
+core_product:
+  - apm
 ---
-Application Performance Monitoring (APM) は、アプリケーションのリクエスト、エラー、レイテンシーを監視します。アプリケーション全体に分散型トレーシングを追加し、ホスト、コンテナ、プロキシ、サーバーレス機能におけるブラウザセッション、ログ、プロファイル、Synthetic チェック、ネットワーク、プロセス、インフラストラクチャーのメトリクスに相関付けます。
+Application Performance Monitoring (APM) monitors requests, errors, and latency in your application. Add distributed traces throughout your application to correlate to browser sessions, logs, profiles, synthetic checks, network, processes, and infrastructure metrics across your hosts, containers, proxies, and server less functions.
 
-APM の詳細については、<a href='/tracing'>APM のドキュメント</a>を参照してください。
+For more information about APM, see the <a href='/tracing'>APM documentation</a>.

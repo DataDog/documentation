@@ -1,112 +1,146 @@
 ---
+title: Ingestion Sampling with OpenTelemetry
 aliases:
-- /ja/opentelemetry/guide/ingestion_sampling_with_opentelemetry/
+  - /opentelemetry/guide/ingestion_sampling_with_opentelemetry/
 further_reading:
 - link: /tracing/guide/trace_ingestion_volume_control
-  tag: ガイド
-  text: トレース取り込み量制御
+  tag: Guide
+  text: Trace Ingestion Volume Control
 - link: /tracing/trace_pipeline/ingestion_controls
-  tag: ドキュメント
-  text: Expression Language
+  tag: Documentation
+  text: Ingestion Controls
 - link: /opentelemetry/
-  tag: ドキュメント
-  text: Datadog の OpenTelemetry サポート
-title: OpenTelemetry による取り込みサンプリング
+  tag: Documentation
+  text: OpenTelemetry Support in Datadog
 ---
 
-## 概要
+## Overview
 
-アプリケーションやサービスが OpenTelemetry のライブラリでインスツルメンテーションされている場合、次のことが可能です。
-- トレースを **[OpenTelemetry コレクター][1]**に送信し、Datadog エクスポーターで Datadog に転送する
-- Datadog Agent と一緒に **[OpenTelemetry コレクター][2]**にトレースを送信し、Datadog に転送する
-- トレースを **[Datadog Agent OTLP 取り込み][3]**に送信し、Datadog に転送する
+OpenTelemetry SDKs and the OpenTelemetry Collector provide sampling capabilities, as ingesting 100% of traces is often unnecessary to gain visibility into the health of your applications. Configure sampling rates before sending traces to Datadog to ingest data that is most relevant to your business and observability goals, while controlling and managing overall costs.
 
-1 つ目と 2 つ目のシナリオでは、Datadog エクスプローラーで [APM RED メトリクス][4] (サービス、演算子、リソースごとのリクエスト/エラー回数とレイテンシー分布) が計算されます。3 つ目のケースでは、Datadog Agent がこれらのメトリクスを計算します。
+This document demonstrates two primary methods for sending traces to Datadog with OpenTelemetry:
 
-{{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation.png" alt="Otel APM メトリクス計算" style="width:100%;" >}}
+- Send traces to the **[OpenTelemetry Collector][1]**, and use the Datadog Exporter to forward them to Datadog.
+- Send traces to the **[Datadog Agent OTLP ingest][3]**, which forwards them to Datadog.
 
-APM メトリクスと分散型トレーシングは、どちらもアプリケーションのパフォーマンスをモニターするのに便利なツールです。メトリクスは特定のリソースのレイテンシーやエラー率の上昇を発見するのに役立ち、分散型トレーシングは個々のリクエストレベルまで掘り下げることができます。
+**Note**: Datadog doesn't support running the OpenTelemetry Collector and the Datadog Agent on the same host.
 
-### サンプリングが役立つ理由
+### Using the OpenTelemetry Collector
 
-Datadog トレーシングライブラリ、Datadog Agent、OpenTelemetry SDK、OpenTelemetry コレクターは全てサンプリング機能を備えています。なぜなら、ほとんどのサービスでは、アプリケーションの健全性を可視化するために、100% のトレースを取り込む必要はないためです。
+With this method, the OpenTelemetry Collector receives traces from OpenTelemetry SDKs and exports them to Datadog using the Datadog Exporter. In this scenario, [APM trace metrics][4] are computed by the Datadog Connector:
 
-Datadog にトレースを送信する前にサンプリングレートを構成することで、以下のことが可能になります。
-- ビジネスと観測可能性の目標に最も関連性の高いデータを取り込みます。
-- 未使用のトレースデータを Datadog プラットフォームに送信しないようにすることで、ネットワークコストを削減します。
-- 全体のコストをコントロールし、管理します。
+{{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation_collector.png" alt="OpenTelemetry APM Metrics computation using the Collector" style="width:100%;" >}}
 
-## 取り込み量を減らす
+Choose this method if you require the advanced processing capabilities of the OpenTelemetry Collector, such as tail-based sampling. To configure the Collector to receive traces, follow the instructions on [OpenTelemetry Collector and Datadog Exporter][16].
 
-OpenTelemetry では、OpenTelemetry ライブラリと OpenTelemetry コレクターの両方でサンプリングの構成が可能です。
-- OpenTelemetry SDK の**ヘッドベースサンプリング**
-- OpenTelemetry コレクターでの**追跡ベースサンプリング**
+### Using Datadog Agent OTLP ingestion
 
-{{< img src="/opentelemetry/guide/ingestion_otel/otel_head_tail_based_sampling.png" alt="Otel APM メトリクス計算" style="width:100%;" >}}
+With this method, the Datadog Agent receives traces directly from OpenTelemetry SDKs using the OTLP protocol. This allows you to send traces to Datadog without running a separate OpenTelemetry Collector service. In this scenario, APM trace metrics are computed by the Agent:
 
-### SDK レベルのサンプリング
+{{< img src="/opentelemetry/guide/ingestion_otel/otel_apm_metrics_computation_agent.png" alt="OpenTelemetry APM Metrics computation using the Datadog Agent" style="width:100%;" >}}
 
-SDK レベルでは、_ヘッドベースサンプリング_を実装することができ、これはサンプリングの決定がトレースの開始時に行われる場合です。このタイプのサンプリングは、高スループットのアプリケーションで、アプリケーションの健全性を監視するためにトラフィックの 100% を可視化する必要がないことが分かっている場合に特に有用です。また、OpenTelemetry がもたらすオーバーヘッドを抑制するのにも有効です。
+Choose this method if you prefer a simpler setup without the need for a separate OpenTelemetry Collector service. To configure the Datadog Agent to receive traces using OTLP, follow the instructions on [OTLP Ingestion by the Datadog Agent][15].
 
-[TraceIdRatioBased][5] と [ParentBased][6] は、SDK レベルで `trace_id` に基づく決定論的なヘッドベースサンプリングを実装することができる SDK の組み込みサンプラーです。
+## Reducing ingestion volume
 
-ヘッドベースサンプリングでは、サンプリングされたトラフィックのみが OpenTelemetry コレクターまたは Datadog Agent に送信され、そこでメトリクスの計算が行われるため、APM メトリクスは**サンプリングされたトラフィック**で計算されます。
+With OpenTelemetry, you can configure sampling both in the OpenTelemetry libraries and in the OpenTelemetry Collector:
 
-正確な統計情報を得るためには、SDK で構成されたサンプリングレートを知っていれば、Datadog のダッシュボードやモニターで[計算式と関数][7]を使ってメトリクスをアップスケールすることが可能です。
+- **Head-based sampling** in the OpenTelemetry SDKs
+- **Tail-based sampling** in the OpenTelemetry Collector
+- **Probabilistic sampling** in the Datadog Agent
 
-スパンからのトレース分析モニターとメトリクスにトレースサンプリングを設定することの意味については、[取り込み量制御ガイド][8]を参照してください。
+### Head-based sampling
 
-### コレクターレベルのサンプリング
+At the SDK level, you can implement _head-based sampling_. This is when the sampling decision is made at the beginning of the trace. This type of sampling is particularly useful for high-throughput applications, where you have a clear understanding of which traces are most important to ingest and want to make sampling decisions early in the tracing process.
 
-OpenTelemetry コレクターレベルでは、_追跡ベースサンプリング_を行うことができ、より高度なルールを定義して、エラーや高レイテンシーのトレースに対する可視性を維持することができます。
+#### Configuring
 
-[Tail Sampling Processor][9] と [Probabilistic Sampling Processor][10] は、コレクターレベルで一連のルールに基づいてトレースをサンプリングすることが可能です。
+To configure head-based sampling, use the [TraceIdRatioBased][5] or [ParentBased][6] samplers provided by the OpenTelemetry SDKs. These allow you to implement deterministic head-based sampling based on the `trace_id` at the SDK level.
 
-**注**: 追跡サンプリングの主な制限は、効果的なサンプリング決定のために、与えられたトレースのすべてのスパンが同じコレクターインスタンスによって受信されなければならないということです。トレースが複数のコレクターインスタンスに分散している場合、トレースの一部がドロップされ、同じトレースの他の一部が Datadog に送信される危険性があります。
+#### Considerations
 
-コレクターレベルのテールベースサンプリングを使用しながら、APM メトリクスがアプリケーションのトラフィックの 100% に基づいて計算されるようにするには、[Datadog Connector][11] を使用します。
+Head-based sampling affects the computation of APM metrics. Only sampled traces are sent to the OpenTelemetry Collector or Datadog Agent, which perform metrics computation.
 
-<div class="alert alert-info">Datadog Connector は v0.83.0 から利用可能です。古いバージョンから移行する場合は、<a href="/opentelemetry/guide/switch_from_processor_to_connector">OpenTelemetry APM メトリクスのために Datadog Processor から Datadog Connector に切り替える</a>をお読みください。</div>
+To approximate unsampled metrics from sampled metrics, use [formulas and functions][7] with the sampling rate configured in the SDK.
 
-スパンからのトレース分析モニターとメトリクスにトレースサンプリングを設定することの意味については、[取り込み量制御ガイド][8]を参照してください。
+Use the [ingestion volume control guide][8] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
-### Datadog Agent によるサンプリング
 
-[Datadog Agent OTLP Ingest][3] を使用する場合、Agent バージョン 7.44.0 から[確率的サンプラー][10]が利用できます。環境変数 `DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE` を使用して設定するか、Agent のコンフィグレーションファイルで以下の YAML を設定します。
+### Tail-based sampling
 
-```yaml
-otlp_config:
-  # ...
-  traces:
+At the OpenTelemetry Collector level, you can do _tail-based sampling_, which allows you to define more advanced rules to maintain visibility over traces with errors or high latency.
+
+#### Configuring
+
+To configure tail-based sampling, use the [Tail Sampling Processor][9] or [Probabilistic Sampling Processor][10] to sample traces based on a set of rules at the collector level.
+
+#### Considerations
+
+A limitation of tail-based sampling is that all spans for a given trace must be received by the same collector instance for effective sampling decisions. If a trace is distributed across multiple collector instances, and tail-based sampling is used, some parts of that trace may not be sent to Datadog.
+
+To ensure that APM metrics are computed based on 100% of the applications' traffic while using collector-level tail-based sampling, use the [Datadog Connector][11].
+
+<div class="alert alert-info">The Datadog Connector is available starting v0.83.0. Read <a href="/opentelemetry/guide/switch_from_processor_to_connector">Switch from Datadog Processor to Datadog Connector for OpenTelemetry APM Metrics</a> if migrating from an older version.</div>
+
+See the [ingestion volume control guide][8] for information about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
+
+### Probabilistic sampling
+
+When using Datadog Agent OTLP ingest, a probabilistic sampler is available starting with Agent v7.54.0.
+
+#### Configuring
+
+To configure probabilistic sampling, do one of the following:
+
+- Set `DD_APM_PROBABILISTIC_SAMPLER_ENABLED` to `true` and `DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE` to the percentage of traces you'd like to sample (between `0` and `100`).
+- Add the following YAML to your Agent's configuration file:
+
+  ```yaml
+  apm_config:
+    # ...
     probabilistic_sampler:
-      sampling_percentage: 50
-```
+        enabled: true
+        sampling_percentage: 50 #In this example, 50% of traces are captured.
+        hash_seed: 22 #A seed used for the hash algorithm. This must match other agents and OTel
+  ```
 
-上記の例では、50% のトレースがキャプチャされます。
+**If you use a mixed setup of Datadog tracing libraries and OTel SDKs**:
 
-**注**: 確率的サンプラーのプロパティは、すべての Agent で同じサンプリング率を使用すると仮定した場合、完全なトレースのみが取り込まれることを保証します。
+- Probabilistic sampling will apply to spans originating from both Datadog and OTel tracing libraries.
+- If you send spans both to the Datadog Agent **and** OTel collector instances, set the same seed between Datadog Agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) and OTel collector (`hash_seed`) to ensure consistent sampling.
 
-確率的サンプラーは、SDK レベルでサンプリング優先度がすでに設定されているスパンを無視します。さらに、確率的サンプラーでキャプチャされなかったスパンは、Datadog Agent の[エラーサンプラーと希少サンプラー][12]でキャプチャされる可能性があり、取り込みデータセットにおいてエラーと稀少エンドポイントトレースの高い反映を確保することができます。
+<div class="alert alert-warning"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> is deprecated and has been replaced by <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
 
-## Datadog UI から取り込み量を監視する
+#### Considerations
 
-[APM 推定使用量ダッシュボード][13]と推定使用量メトリクス `datadog.estimated_usage.apm.ingested_bytes` を活用すると、特定の期間の取り込み量を視覚化することができます。ダッシュボードで特定の環境とサービスをフィルターして、取り込み量の最大のシェアを占めるサービスを確認できます。
+- The probabilistic sampler will ignore the sampling priority of spans that are set at the tracing library level. As a result, probabilistic sampling is **incompatible with [head-based sampling][16]**. This means that head-based sampled traces might still be dropped by probabilistic sampling.
+- Spans not captured by the probabilistic sampler may still be captured by the Datadog Agent's [error and rare samplers][12].
+- For consistent sampling all tracers must support [128-bit trace IDs][17].
 
+## Monitoring ingested volumes in Datadog
 
-## その他の参考資料
+Use the [APM Estimated Usage dashboard][13] and the `datadog.estimated_usage.apm.ingested_bytes` metric to get visibility into your ingested volumes over a specific time period. Filter the dashboard to specific environments and services to see which services are responsible for the largest shares of the ingested volume.
+
+If the ingestion volume is higher than expected, consider adjusting your sampling rates.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/opentelemetry/otel_collector_datadog_exporter
-[2]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#step-5---run-the-collector
-[3]: /ja/opentelemetry/otlp_ingest_in_the_agent
-[4]: /ja/tracing/metrics/metrics_namespace/
+[1]: /opentelemetry/otel_collector_datadog_exporter
+[2]: /opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#step-5---run-the-collector
+[3]: /opentelemetry/otlp_ingest_in_the_agent
+[4]: /tracing/metrics/metrics_namespace/
 [5]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
 [6]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#parentbased
-[7]: /ja/dashboards/functions/#add-a-function
-[8]: /ja/tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
+[7]: /dashboards/functions/#add-a-function
+[8]: /tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector#datadog-connector
-[12]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#error-and-rare-traces
+[12]: /tracing/trace_pipeline/ingestion_mechanisms/#error-and-rare-traces
 [13]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
+[14]: /opentelemetry/guide/migration/
+[15]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/?tab=host
+[16]: /tracing/trace_pipeline/ingestion_mechanisms#head-based-sampling
+[17]: /opentelemetry/interoperability/otel_api_tracing_interoperability/#128-bit-trace-ids

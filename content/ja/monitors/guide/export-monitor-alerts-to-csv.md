@@ -1,20 +1,19 @@
 ---
+title: Export Monitor Alerts to CSV
 aliases:
-- /ja/monitors/faq/how-can-i-export-alert-history
-kind: ガイド
-title: モニターアラートを CSV にエクスポート
+- /monitors/faq/how-can-i-export-alert-history
 ---
 
-過去 6 ヶ月間 (182 日間) の CSV を生成する[時間ごとのモニターデータ][1]を通して、モニターアラートの履歴をダウンロードすることができます。この CSV はライブではなく、週 1 回、月曜日 11:59AM UTC に更新されます。
+Download a history of Monitor Alerts through the [hourly monitor data][1], which generates a CSV for the past 6 months (182 days). This CSV is **not** live; it is updated once a week on Monday at 11:59AM UTC.
 
-**注**:
+**Notes**:
 
-- この機能は、Datadog US サイトでのみサポートされています。
-- CSV ファイルにアクセスするには、組織の管理者である必要があります。
+- This feature is only supported for the Datadog US site.
+- You need to be an administrator of your organization to access the CSV file.
 
 {{< site-region region="us" >}}
 
-curl を使用して CSV を取得する場合は、以下のようにします。
+To fetch the CSV using curl, use the following:
 
 ```shell
 api_key=<DATADOG_API_KEY>
@@ -26,7 +25,7 @@ curl -G \
     -d "application_key=${app_key}" \
 ```
 
-応答例
+Example response:
 
 ```text
 hour,host_name,alert_name,user,cnt
@@ -37,7 +36,7 @@ hour,host_name,alert_name,user,cnt
 
 {{< site-region region="eu,gov,us3,us5,ap1" >}}
 
-この機能はサポートされていません。
+This feature is not supported.
 
 {{< /site-region >}}
 

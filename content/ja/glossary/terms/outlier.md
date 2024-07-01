@@ -1,8 +1,8 @@
 ---
+title: outlier
 core_product:
-- alerts
+    - alerts
 related_terms:
-- 異常値
-title: 外れ値
+    - anomaly
 ---
-外れ値検出は、特定のメトリクスグループが他のグループと異なる動作をしていることを検出できるアルゴリズム機能です。詳しくは、<a href="/monitors/types/outlier">ドキュメントを参照</a>してください。
+Outlier detection is an algorithmic feature that allows you to detect when a specific metric group behaves differently than its peers. For more information, <a href="/monitors/types/outlier">see the documentation</a>.

@@ -1,102 +1,133 @@
 ---
-description: デフォルトブランチに影響を与える前に、Early Flake Detection を使用して不安定性を検出します。
-further_reading:
-- link: /tests
-  tag: ドキュメント
-  text: Test Visibility について
-- link: /tests/guides/flaky_test_management
-  tag: ドキュメント
-  text: 不安定なテストの管理について
-- link: /quality_gates
-  tag: ドキュメント
-  text: Quality Gates について
-kind: ドキュメント
 title: Early Flake Detection
+kind: documentation
+description: Detect flakiness before it impacts your default branch using Early Flake Detection.
+further_reading:
+  - link: /tests
+    tag: Documentation
+    text: Learn about Test Visibility
+  - link: /tests/guides/flaky_test_management
+    tag: Documentation
+    text: Learn about Flaky Test Management
+  - link: /quality_gates
+    tag: Documentation
+    text: Learn about Quality Gates
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 Early Flake Detection は利用できません。</div>
+<div class="alert alert-warning">Early Flake Detection is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
-Early Flake Detection は公開ベータ版です。
+Early Flake Detection is in public beta.
 {{< /callout >}}
 
-## 概要
+## Overview
 
-Early Flake Detection は、開発サイクルの早い段階で[不安定なテスト][3]を特定することでコード品質を向上させる、テストの不安定性に対する Datadog のソリューションです。不安定なテストについては、[不安定なテストの管理][9]を参照してください。
+Early Flake Detection is Datadog's test flakiness solution that enhances code quality by identifying [flaky tests][1] early in the development cycle. For more information about flaky tests, see [Flaky Test Management][2].
 
-新しく追加されたテストを複数回実行することで、Datadog はこれらのテストがデフォルトブランチにマージされる前に不安定性を検出することができます。ある調査では、この方法で最大で [75% の不安定なテスト][1]を特定できることが示されています。
+By running newly added tests multiple times, Datadog can detect flakiness before these tests are merged into the default branch. A study shows that up to [75% of flaky tests][3] can be identified with this approach.
 
 Known Tests
-: Datadog のバックエンドは、特定のテストサービスに対して固有のテストを保存します。テストセッションが実行される前に、Datadog ライブラリはこれらの既知のテストのリストをフェッチします。
+: Datadog's backend stores unique tests for a given test service. Before a test session runs, the Datadog library fetches the list of these known tests.
 
 Detection of New Tests
-: テストが既知のテストリストにない場合、そのテストは**新しい**と見なされ、自動的に 10 回まで再試行されます。
+: If a test is not in the list of known tests, it is considered **new** and is automatically retried up to ten times.
 
 Flakiness Identification
-: テストを複数回実行することで、レースコンディションなどの問題を発見することができます。テストの試行のいずれかが失敗した場合、そのテストは自動的に不安定なテストとしてタグ付けされます。
+: Running a test multiple times helps uncover issues like race conditions, which may cause the test to pass and fail intermittently. If any of the test attempts fail, the test is automatically tagged as flaky.
 
-テストを複数回実行することで、不安定性の原因となるランダムな状態を明らかにできる可能性が高まります。Early Flake Detection は、安定した信頼性の高いテストだけがメインブランチに統合されるようにします。
+Running a test multiple times increases the likelihood of exposing random conditions that cause flakiness. Early Flake Detection helps ensure that only stable, reliable tests are integrated into the main branch.
 
-フィーチャーブランチのマージは、[Quality Gate][2] でブロックすることができます。詳細については、[Quality Gates ドキュメント][8]を参照してください。
+You can choose to block the merge of the feature branch with a [Quality Gate][4]. For more information, see the [Quality Gates documentation][5].
 
-## 計画と使用
+## Setup
 
-Early Flake Detection を実装する前に、開発環境の [Test Visibility][5] を構成する必要があります。Datadog Agent を使用してデータをレポートする場合は、v6.40 または 7.40 以降を使用してください。
+Before implementing Early Flake Detection, you must configure [Test Visibility][6] for your development environment. If you are reporting data through the Datadog Agent, use v6.40 or 7.40 and later.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-Datadog ライブラリを Test Visibility 用に設定したら、[Test Service Settings ページ][6]から Early Flake Detection を構成します。
+After you have set up your Datadog library for Test Visibility, you can configure Early Flake Detection from the [Test Service Settings page][7].
 
-{{< img src="continuous_integration/early_flake_detection_test_settings.png" alt="テストサービス設定の Early Flake Detection" style="width:100%" >}}
+{{< img src="continuous_integration/early_flake_detection_test_settings.png" alt="Early flake Detection in Test Service Settings." style="width:100%" >}}
 
-1. [**Software Delivery** > **Test Visibility** > **Settings**][6] に移動します。
-1. テストサービスの Early Flake Detection 列の **Configure** をクリックします。
-1. トグルをクリックして Early Flake Detection を有効にし、[**Excluded Branches from Early Flake Detection**](#manage-excluded-branches) のリストを追加または変更します。
+1. Navigate to [**Software Delivery** > **Test Visibility** > **Settings**][7].
+1. Click **Configure** on the Early Flake Detection column for a test service.
+1. Click the toggle to enable Early Flake Detection and add or modify the list of [**Excluded Branches from Early Flake Detection**](#manage-excluded-branches).
 
-{{< img src="continuous_integration/early_flake_detection_configuration_modal.png" alt="Early Flake Detection を有効にして、テストサービス構成で除外ブランチを定義する" style="width:60%" >}}
+{{< img src="continuous_integration/early_flake_detection_configuration_modal.png" alt="Enabling Early Flake Detection and defining excluded branches in the test service configuration" style="width:60%">}}
 
-## 除外ブランチの管理
+## Compatibility
+{{< tabs >}}
+{{% tab "JavaScript/TypeScript" %}}
 
-除外ブランチでは、Early Flake Detection によってテストが再試行されません。これらのブランチで実行されるテストは、Early Flake Detection の対象として新しいテストとは見なされません。
+The required test framework and dd-trace versions are:
 
-{{< img src="continuous_integration/early_flake_detection_commits.png" alt="コミットでの Early Flake Detection の動作方法" style="width:60%" >}}
+`dd-trace-js`:
+* `>=5.12.0` for the 5.x release.
+* `>=4.36.0` for the 4.x release.
+* `>=3.57.0` for the 3.x release.
 
-[Test Service Settings ページ][6]で除外ブランチのリストを管理し、特定のワークフローやブランチ構造に合わせて機能を調整できます。
+The test framework compatibility is the same as [Test Visibility Compatibility][1], with the exception of `playwright`, which is only supported from `>=1.38.0`.
 
-## Test Visibility Explorer で結果を探索する
+[1]: /tests/setup/javascript/?tab=cloudciprovideragentless#compatibility
+{{% /tab %}}
 
-以下のファセットを使用して、[Test Visibility Explorer][10] で Early Flake Detection と新規テストを実行するセッションを照会できます。
+{{% tab "Java" %}}
 
-* **Test Session**: Early Flake Detection を実行しているテストセッションでは、`@test.early_flake.enabled` タグが `true` に設定されています。
-* **New Tests**: 新しいテストでは、`@test.is_new` タグが `true` に設定され、このテストの再試行では `@test.is_retry` タグが `true` に設定されます。
+`dd-trace-java>=1.34.0`
 
-## トラブルシューティング
+{{% /tab %}}
 
-Early Flake Detection に問題があると思われる場合は、[Test Service Settings ページ][6]に移動して、テストサービスを探し、**Configure** をクリックします。トグルをクリックして、Early Flake Detection を無効にします。
+{{% tab ".NET" %}}
 
-### 新しいテストが再試行されない理由
+`dd-trace-dotnet>=2.51.0`
 
-これには以下のような原因が考えられます。
+{{% /tab %}}
 
-* このテストはすでに `staging`、`main`、または `preprod` などの除外されたブランチで実行されています。
-* このテストの実行時間が 5 分を超えています。非常に遅いテストに Early Flake Detection を適用しないメカニズムがあります。これらのテストを再試行すると、CI パイプラインに大きな遅延が発生する可能性があるためです。
+{{< /tabs >}}
 
-### 新しくないテストが再試行された場合
 
-Datadog ライブラリが既知のテストの完全なリストを取得できない場合、新しくないテストを再試行することがあります。このエラーが CI パイプラインを遅くしないようにする仕組みがありますが、発生した場合は [Datadog サポート][7]に連絡してください。
+## Manage Excluded Branches
 
-## その他の参考資料
+Excluded Branches will not have any tests retried by Early Flake Detection. Tests run in these branches are not considered new for the purposes of Early Flake Detection.
+
+{{< img src="continuous_integration/early_flake_detection_commit_new_test_explanation.png" alt="How Early Flake Detection works in your commits" style="width:100%">}}
+
+You can manage the list of excluded branches on the [Test Service Settings page][7], ensuring that the feature is tailored to your specific workflow and branch structure.
+
+## Explore results in the Test Visibility Explorer
+
+You can use the following facets to query sessions that run Early Flake Detection and new tests in the [Test Visibility Explorer][8].
+
+* **Test Session**: Test sessions running Early Flake Detection have the `@test.early_flake.enabled` tag set to `true`.
+* **New Tests**: New tests have the `@test.is_new` tag set to `true`, and retries for this test have the `@test.is_retry` tag set to `true`.
+
+## Troubleshooting
+
+If you suspect there are issues with Early Flake Detection, navigate to the [Test Service Settings page][7], look for your test service, and click **Configure**. Disable Early Flake Detection by clicking on the toggle.
+
+### A new test is not being retried
+
+This could be caused by a couple of reasons:
+
+* This test has already run in an excluded branch, such as `staging`, `main`, or `preprod`.
+* This test is slower than five minutes. There is a mechanism not to run Early Flake Detection on tests that are too slow, since retrying these tests could cause significant delays in CI pipelines.
+
+### A test was retried that is not new
+
+If the Datadog library can't fetch the full list of known tests, the Datadog library may retry tests that are not new. There is a mechanism to prevent this error from slowing down the CI pipeline, but if it happens, contact [Datadog Support][9].
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://2020.splashcon.org/details/splash-2020-oopsla/78/A-Large-Scale-Longitudinal-Study-of-Flaky-Tests
-[2]: /ja/quality_gates/
-[3]: /ja/glossary/#flaky-test
-[5]: /ja/tests
-[6]: https://app.datadoghq.com/ci/settings/test-service
-[7]: /ja/help/
-[8]: /ja/quality_gates/setup
-[9]: /ja/tests/guides/flaky_test_management
-[10]: /ja/continuous_integration/explorer?tab=testruns
+[1]: /glossary/#flaky-test
+[2]: /tests/guides/flaky_test_management
+[3]: https://2020.splashcon.org/details/splash-2020-oopsla/78/A-Large-Scale-Longitudinal-Study-of-Flaky-Tests
+[4]: /quality_gates/
+[5]: /quality_gates/setup
+[6]: /tests
+[7]: https://app.datadoghq.com/ci/settings/test-service
+[8]: /tests/explorer/
+[9]: /help/

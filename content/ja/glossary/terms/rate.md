@@ -1,5 +1,7 @@
 ---
 title: rate
+core_product:
+  - metrics
 ---
-レートは、カウントを時間間隔の長さで割ったメトリクスタイプです。
-詳細は、<a href="/metrics/#metric-types">ドキュメントを参照してください</a>。
+Rate is a metric type that takes the count and divides it by the length of the time interval.
+For more information, <a href="/metrics/#metric-types">see the documentation</a>.

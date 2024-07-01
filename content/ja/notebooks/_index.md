@@ -1,219 +1,219 @@
 ---
+title: Notebooks
 aliases:
-- /ja/graphing/notebooks/
-cascade:
-  algolia:
-    rank: 70
+  - /graphing/notebooks/
 further_reading:
-- link: https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/
-  tag: ブログ
-  text: ドキュメントライブラリの作成と使用
-- link: https://www.datadoghq.com/blog/collaborative-notebooks-datadog/
-  tag: ブログ
-  text: コラボレーション型ノートブックでデータにデータドリブンの背景情報を追加
-- link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
-  tag: ブログ
-  text: インシデントの事後分析を作成するためのベストプラクティス
-- link: https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/
+- link: "https://www.datadoghq.com/blog/incident-management-templates-notebooks-list/"
+  tag: Blog
+  text: Create and navigate a documentation library
+- link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
+  tag: Blog
+  text: Tell data-driven stories with Collaborative Notebooks
+- link: "https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/"
+  tag: Blog
+  text: Best practices for writing incident postmortems
+- link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: blog
-  text: Datadog Workflows と Cloud SIEM で、一般的なセキュリティタスクを自動化し、脅威の先を行く
-title: ノートブック
+  text: Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM
+cascade:
+    algolia:
+        rank: 70
 ---
 
-## 概要
+## Overview
 
-ノートブックは、グラフとテキストを組み合わせて 1 列のセル形式で表示し、事後分析、調査、ランブック、ドキュメントなどを作成することで、データの背景情報を調査したり共有したりできます。
+Notebooks combine graphs and text in a linear, cell-based format. They help you explore and share stories with your data by creating postmortems, investigations, runbooks, documentation, and more.
 
-## はじめに
+## Getting started
 
-1. [Notebook List][1] ページで、**+ New Notebook** をクリックします。
+1. From the [Notebook List][1] page, click **+ New Notebook**.
 
-2. **Save Notebook** ボタンをクリックします。</br>
-  **注**: 新しいノートブックは、デフォルトでは保存されません。
+2. Click the **Save Notebook** button. </br>
+  **Note**: A new notebook is not saved by default.
 
-3. [サポートされているグラフやテキストコンテンツ](#types-of-content)を使って、ノートブックに新しいセルを追加します。
+3. Add new cells to your notebook with [supported graph and text content](#types-of-content). 
 
-4. [セルを構成します](#cell-configuration)。
+4. [Configure cells](#cell-configuration).
 
-## コラボレーション
+## Collaboration
 
-{{< img src="notebooks/collaboration.png" alt="ユーザーがノートブックを閲覧し、ライブエディットを行っていることを示すインジケーター" style="width:100%;">}}
+{{< img src="notebooks/collaboration.png" alt="Indicators of users viewing the notebook and making live edits" style="width:100%;">}}
 
-ノートブックは、リアルタイムのコラボレーションをサポートします。プレゼンスインジケーターは、ノートブックを誰が見ているか、またノートブックのセルをリアルタイムで編集しているかを表示します。ノートブックに加えられた変更は、更新することなく、自動的に表示されます。
+Notebooks support real-time collaboration. Presence indicators show who is viewing your notebook at any time, as well as real-time edits to notebook cells. Changes made to a notebook appear automatically, without the need to refresh.
 
-チームの誰もが任意のノートブックを開くことができますが、ノートブックを変更または削除できるのは、`Notebooks Write` 権限を持つ Datadog ロールに限られます。
+Everyone on your team can open any notebook, but a notebook can only be modified or deleted by any Datadog role with the `Notebooks Write` permission.
 
-### コメントの作成
+### Commenting
 
-コメントを追加するには、テキストを選択するか、グラフにカーソルを合わせます。セルの右側に **Add comment** のアイコンが表示されます。コメントから、`@mention` 機能でチームのメンバーに通知することもできます。書いたコメントを編集したり削除したりするには、コメントの右上にある 3 つの縦長の点をクリックします。解決したコメントは、ノートブックの歯車メニューにある Comment History サイドパネルで表示したり、再度開いたりすることができます。
+To add a comment, select some text or hover over a graph. The **Add comment** icon is displayed to the right of the cell. From the comments you can also notify a member on your team through the `@mention` feature. Click the three vertical dots in the top-right corner of your comment to edit or delete a comment you wrote. View or re-open resolved comments in the Comment History side panel, available in the Notebook cog menu.
 
-ノートブックへ新規コメントがあると、ノートブックの作成者に通知が送信され、コメントに返信があるとコメントの作成者に通知が送信されます。通知設定を管理するには、ノートブックのメニュー（歯車）にある `Notifications` を使用します。
+Notebook authors receive email notifications for new comments on their notebooks, and commenters are notified for replies to their comments. Manage your notification settings through `Notifications` in the notebook cog menu.
 
-### ビューモード
+### View mode
 
-{{< img src="notebooks/read_mode.png" alt="ビューモードドロップダウンメニュー" style="width:100%;">}}
+{{< img src="notebooks/read_mode.png" alt="View mode dropdown menu" style="width:100%;">}}
 
-ノートブックの右上にあるドロップダウンを選択することで、ノートブック内からモードを切り替えることができます。
+You can switch between modes from within the Notebook by selecting the dropdown at the top right of your notebook.
 
-- **Editing**: ノートブックに変更を加えます。
+- **Editing**: make changes to the notebook.
 
-- **Viewing**: コンテンツは読み取り専用で、既存の構成や情報をユーザーが不要に編集することを防ぎます。
+- **Viewing**: contents are Read Only, preventing users from making unwanted edits to existing configurations and information.
 
-- **Presenting**: 各セルがスライドとして表示される表示形式で、ノートブックの内容を共有します。プレゼンテーションモードでは、ツールチップや凡例などのグラフのインタラクションをサポートしています。
+- **Presenting**: share the contents of the Notebook in a display format where each cell appears as a slide. Presentation mode supports graph interactions such as tooltips and legends.
 
-## ノートブックの共有
+## Share notebooks
 
-ノートブックの右上にある歯車のアイコンをクリックすると、共有オプションが表示されます。ノートブックは、PDF、Markdown などのドキュメントエディタにエクスポートできます。
+Click on the cog icon in the upper right of a notebook to see sharing options. Notebooks can be exported to PDF, Markdown, or any document editor.
 
-ノートブックをドキュメントエディタにコピーするには、**Copy formatted contents** をクリックします。Google ドキュメントや Microsoft Word などのドキュメントエディタに貼り付けて、グラフを含むノートブックのコンテンツを元の形式で表示します。
+To copy a notebook into a document editor, click **Copy formatted contents**. Paste into a document editor like Google Docs or Microsoft Word to see notebook contents, including graphs, with original formatting.
 
-### ノートブック JSON のインポートまたはエクスポート
+### Import or export notebook JSON
 
-ノートブックの定義を含む JSON ファイルをダウンロードするには、**Export Notebook JSON** を使用します。**Import Notebook JSON** を使用すると、ノートブックのすべてのコンテンツがアップロード済みの JSON コンテンツで上書きされます。
+Use **Export Notebook JSON** to download a JSON file containing the definition of your notebook. **Import Notebook JSON** overwrites all content on the notebook with the content of the uploaded JSON.
 
-### 個々のセルへのリンク設定
+### Link to individual cells
 
-特定のセルの URL をコピーするには、セルの **Share** メニューをクリックし、**Link directly to cell** を選択します。直接リンクは、視覚化セルとマークダウンセルの両方で利用できます。
+To copy the URL for a specific cell, click the cell's **Share** menu and select **Link directly to cell**. Direct linking is available for both visualization and Markdown cells.
 
-ユーザーが特定のセルの URL にアクセスすると、ノートブックが開き、ビューポートの上部にセルが表示されます。絶対リンクのため、セルの URL はノートブック内で新しい位置に移されたとしても、変わることはありません。
+When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute. A cell's URL remains the same even if it is moved to a new position within the notebook.
 
-## ノートブック一覧
+## Notebook List
 
-{{< img src="notebooks/notebook_list.png" alt="選択したノートブックのセルの種類をプレビューするノートブック一覧" style="width:100%;">}}
+{{< img src="notebooks/notebook_list.png" alt="notebook list previewing the cell types of a selected notebook" style="width:100%;">}}
 
-[ノートブック一覧][1]で、以前に作成したノートブックの表示と検索ができます。各ノートブックの名前、作成者、最終更新日が表示されます。ノートブックは以下のグループに分けられます。
+The [Notebook List][1] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. Notebooks are grouped by:
 
-* **Your Notebooks**: 自分が作成したノートブック。
-* **All Notebooks**: 組織内のすべてのノートブック。
-* **[Notebook Type](#notebook-types)**: ノートを種類別に分類します。
+* **Your Notebooks**: Notebooks created by you.
+* **All Notebooks**: All Notebooks in your organization.
+* **[Notebook Type](#notebook-types)**: Group notebooks by type.
 
-任意のノートブックのプレビューアイコンにカーソルを合わせると、ウィジェットタイプや Markdown を含むコンテンツのプレビューが表示されます。[ビューモード](#view-mode)でノートブックを開くには、ノートブックにカーソルを合わせ、右側にある **Open notebook in view mode** をクリックします。
+Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#view-mode), hover over the notebook and click **Open notebook in view mode** on the right.
 
-## テンプレートギャラリー
-[テンプレートギャラリー][2]では、新しいノートブックを作成するための、すぐに使えるテンプレートが紹介されています。テンプレートには、インシデントレスポンスのポストモーテム、インシデントレポート、SLO 仕様が含まれます。また、新しいカスタムテンプレートを作成し、再利用可能なノートブック構造を構築することもできます。
+## Template gallery
+From the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
 
-## バージョン履歴
-ノートブックから **Configure** アイコンをクリックし、**Version history** をクリックすると、バージョン履歴のサイドパネルが表示されます。ノートブックのバージョン履歴をプレビューしたり、復元したり、複製したりすることができます。詳しくは、[バージョン履歴ガイド][3]を参照してください。
+## Version history
+From a notebook, click the **Configure** icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone your notebook's version history. For more information, see the [Version History guide][3].
 
-## ノートブックの構成
+## Notebook configuration
 
-### タイムフレーム
+### Time frames
 
-デフォルトでは、すべてのグラフセルはノートブックのヘッダに設定されたグローバルなタイムフレームにリンクされています。
+By default, all graph cells are linked to the global time frame set in the notebook header.
 
-別のタイムフレームを表示するには、グローバルタイムピッカーでオプションを選択するか、グラフを直接スクラブします。ノートブック URL は、ノートブックに保存することなく、この新しいタイムフレームを反映するように更新されます。
+To view a different time frame, select an option in the global time picker, or scrub on a graph directly. The notebook URL will update to reflect this new time frame without saving it to the notebook.
 
-**注**: クリックアンドドラッグしてグラフを拡大しても、セルのグローバルな時間を解除することはできません。この操作を行うと、ノートブックのグローバルなタイムフレームが変更されます。
+**Note**: Clicking and dragging to zoom in on a graph does not unlock the cell from the global time. It changes the notebook's global time instead.
 
-{{< img src="notebooks/set_default_time.png" alt="Set Default Time ボタンでノートブックのグローバルタイムを保存する" style="width:100%;">}}
+{{< img src="notebooks/set_default_time.png" alt="Save notebook global time with Set Default Time button" style="width:100%;">}}
 
-この時間をノートブックのデフォルトとして保存するには、**Set Default Time** をクリックします。グローバルタイムを、以前に保存したデフォルトのグローバルタイムに戻すには、リセットボタンをクリックします。
+To save this time as the notebook's default, click **Set Default Time**. To reset your global time back to the previously saved default global time, click the reset button.
 
-個々のセルは、グローバルタイムのリンクを解除し、独立したタイムフレームを設定することができます。
+Individual cells can be unlinked from the global time and set to an independent time frame.
 
-{{< img src="notebooks/cell_time.png" alt="セルがグローバルタイムとリンクしていない状態のセルタイムセレクター" style="width:100%;">}}
+{{< img src="notebooks/cell_time.png" alt="Cell Time Selector with the cell unlinked from global time" style="width:100%;">}}
 
-1 つのセルで別のタイムフレームを表示するには、そのセルを編集し、トグルを使用しグローバルタイムからリンクを解除します。タイムピッカーを使用するかグラフをスクラブして、タイムフレームを変更します。編集モードでの変更は、**Done** をクリックすると自動的に保存されます。変更内容を破棄するには、**Done** ではなく **Cancel** をクリックします。
+To view a different time frame on a single cell, edit the cell and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
 
-### ノートブックタイプ
+### Notebook types
 
-{{< img src="notebooks/add_notebook_type.png" alt="ノートブックでハイライトされたタイプ追加ボタン" style="width:100%;">}}
+{{< img src="notebooks/add_notebook_type.png" alt="Add Type button highlighted in a Notebook" style="width:100%;">}}
 
-ノートブックをタイプ別に分類することで、関連する情報に素早くアクセスすることができます。インシデント管理やモニターなど、他の製品から構築されたノートブックには、自動的にタイプが割り当てられる場合があります。ノートブックのタイトルにカーソルを合わせると、タイプを追加または編集するためのオプションが表示されます。または、カーソルを合わせて表示される鉛筆のアイコンをクリックすると、タイプを編集することができます。
+Notebooks can be grouped into types, giving you quick access to relevant information. Notebooks built from other products like Incident Management or Monitors may automatically assign a type. Hover over the notebook title to display the option to add or edit the type. Click **+ Add Type**, or to edit the type, click the pencil icon that appears next to it on hover.
 
-### グラフのスナップショット
+### Graph snapshots
 
-ノートブックでは、期限切れになる可能性のあるグラフのスナップショットを自動的に取るように設定することができます。ノートブックの歯車メニューの **Turn on snapshots** をクリックして、この機能を有効にします。歯車メニューを使用して、スナップショットを表示したり、自動スナップショットをオフにしたりすることができます。自動スナップショットをオフにすると、既存のスナップショットへのアクセスが削除されます。
+Notebooks can be set to automatically take snapshots of graphs that might expire. Enable this by clicking **Turn on snapshots** in the cog menu of any notebook. Use the cog menu to view snapshots or turn off automatic snapshots. Turn off automatic snapshots to remove access to existing snapshots.
 
-{{< img src="notebooks/cog_snapshots.png" alt="スナップショットをオンにする歯車メニューオプション" style="width:100%;">}}
+{{< img src="notebooks/cog_snapshots.png" alt="Cog menu option to turn on snapshots" style="width:100%;">}}
 
- スナップショットが有効になっているノートブックは、固定の時間範囲 (たとえば `Aug 18, 12:00 am - Aug 19, 11:59 pm`) でグラフの静止画像を自動的にキャプチャします。このスナップショットは、新しいグラフに同じ時間範囲が設定されていれば、グラフの更新に合わせて更新されます。グラフをグローバルな時間範囲 (`Past 1 Hour` など) に変更すると、スナップショットは削除されます。
+ Notebooks with snapshots enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
 
- 固定時間のグラフの既存のスナップショットをプレビューするには、編集モードでカメラアイコンの上にカーソルを合わせます。
+ You can preview the existing snapshot on any fixed-time graph by hovering over the camera icon while in edit mode.
 
-スナップショット付きのノートブックのバージョンを共有するには、歯車メニューから、**View snapshots** をクリックします。URL をコピーするか、スナップショットを有効にしているノートブックの URL に `&view=snapshots` を追加します。
+To share a version of your notebook with snapshots, from the cog menu, click **View snapshots**. Copy the URL, or append `&view=snapshots` to the URL of any notebook that has snapshots enabled.
 
-### テンプレート変数
+### Template variables
 
-ノートブックはテンプレート変数をサポートしています。テンプレート変数の値を追加・選択することで、視覚化した内容を動的にスコープすることができます。詳しくは、[テンプレート変数][4]を参照してください。
+Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][4].
 
-### セルの構成
+### Cell configuration
 
-セルを追加するには、セルの左に表示される **+** ボタンを使用するか、ノートブックの下部にある **Add New Cell** のセクションからオプションを選択します。セルを共有、複製、削除するには、カーソルを置いたときにセルの上に表示されるアクショントレイを使用します。グラフセルは、ダッシュボードにエクスポートしたり、PNG やグラフデータの CSV としてダウンロードすることができます。編集モードでの変更は、**Done** をクリックすると自動的に保存されます。変更内容を破棄するには、**Done** ではなく、**Cancel** をクリックしてください。
+To add cells, use the **+** button that appears to the left of the cell, or select an option from the **Add New Cell** section at the bottom of the notebook. Use the action tray that appears above the cell on hover to share, clone, or delete cells. Graph cells can be exported to a dashboard, or downloaded as a PNG or a CSV of graph data. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
 
-#### オプションの編集
+#### Edit options
 
-ウィジェットのインラインエディターで **More options** をクリックすると、ウィジェットのオプションが編集できます。イベントオーバーレイ、マーカー、Y 軸コントロールなどの詳細を追加します。
+Click on **More options** in the inline editor of a widget to edit widget options. Add details like event overlays, markers, and y-axis controls. 
 
-#### レイアウトオプション
+#### Layout options
 
-ノートブックのセルで、**Edit** をクリックすると、セルの構成が編集モードで表示されます。また、利用可能なレイアウトオプションを見ることができます。レイアウトオプションは、セルのコンテンツタイプによって異なりますが、以下のようなものがあります。
+In a Notebook cell, click **Edit** to view the cell configuration in edit mode. You can also see the available layout options, which vary based on the cell content type, but include the following:
 
-* **グラフサイズ**: `XS`、`S`、`M` (デフォルト)、`L`、`XL`から選択。
-* **グラフの凡例**: 凡例を非表示にするには、ボックスのチェックマークを外します。`XS` と `S` サイズのグラフでは、凡例は自動的に無効になります。
-* **グループ化**: タグ値ごとに 1 つのグラフを表示し、複数の小さいグループに視覚化します。
+* **Graph size**: Choose between `XS`, `S`, `M` (default), `L`, and `XL`.
+* **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for `XS` and `S` graphs.
+* **Grouping**: Display one graph per tag value to see small multiples of your visualization.
 
-{{< img src="notebooks/edit_cell_action_menu.png" alt="グラフサイズ、凡例、グループ化構成のレイアウトオプションを表示する編集モードのノートブックセルのグラフ設定オプション" style="width:100%;">}}
+{{< img src="notebooks/edit_cell_action_menu.png" alt="The graph settings option of a notebook cell in edit mode displaying layout options for graph size, legend, and grouping configuration" style="width:100%;">}}
 
-**注**: 設定の変更は対象となるセルにのみ影響します。
+**Note**: Changing any of these settings only affects the targeted cell.
 
-#### コンテンツの種類
+#### Types of content
 
-ノートブックは、視覚化とテキストセルをサポートしています。テキストセルは [Markdown][5] でフォーマットされ、見出し、小見出し、リンク、イメージ、リスト、コードブロックを使用することが可能です。また、ノートブックでは、[MermaidJS][6] でフォーマットされたダイアグラムもサポートしています。
+Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][6].
 
-ノートブック内のグラフは、Datadog のすべてのデータソースに対応しています（メトリクス、ログイベント、インデックス化されたスパン、ライブプロセス、ネットワークトラフィック、RUM イベント、プロファイリングのメトリクス、セキュリティシグナルなど）。グラフは、Datadog のクエリエディターで作成します。ノートブックは以下に対応しています。
+Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, security signals, and more. Graphs are created with the Datadog query editor. Notebooks support:
 
-* [時系列][7]
-* [トップリスト][8]
-* [テーブル][9]
-* [ヒートマップ][10]
-* [ディストリビューション][11]
-* [リスト][12]
-* [クエリ値][13]
-* [ファネル][14]
-* [パイ][15]
+* [Timeseries][7]
+* [Top List][8]
+* [Table][9]
+* [Heatmap][10]
+* [Distribution][11]
+* [List][12]
+* [Query value][13]
+* [Funnel][14]
+* [Pie][15]
 * [SLO][16]
 
-### 編集アクセス権の制限
+### Limit edit access
 
-デフォルトでは、すべてのユーザーがノートブックにフルアクセスできます。
+By default, all users have full access to notebooks.
 
-きめ細かいアクセス制御を使用して、特定のノートブックを編集できる[ロール][17]を制限することができます。
-1. ノートブックを表示中に、右上の歯車をクリックします。設定メニューが開きます。
-1. **Permissions** を選択します。
-1. **Restrict Access** をクリックします。
-1. ダイアログボックスが更新され、組織のメンバーはデフォルトで **Viewer** アクセス権を持っていることが表示されます。
-1. ドロップダウンを使用して、ノートブックを編集できる 1 つまたは複数のロール、チーム、ユーザーを選択します。
-1. **Add** をクリックします。
-1. ダイアログボックスが更新され、選択したロールに **Editor** 権限があることが表示されます。
-1. **Save** をクリックします。
+Use granular access controls to limit the [roles][17] that may edit a particular notebook:
+1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
+1. Select **Permissions**.
+1. Click **Restrict Access**.
+1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
+1. Click **Add**.
+1. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Save**
 
-**注:** ノートブックの編集アクセス権を維持するために、保存する前に、少なくとも 1 つのロールのメンバーであることを含めることがシステムから要求されます。
+**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving. 
 
-アクセスが制限されたノートブックに一般的なアクセスを戻すには、次の手順に従います。
-1. ノートブックを表示中に、右上の歯車をクリックします。設定メニューが開きます。
-1. **Permissions** を選択します。
-1. **Restore Full Access** をクリックします。
-1. **Save** をクリックします。
+To restore general access to a notebook with restricted access, follow the steps below:
+1. While viewing the notebook, click on the cog in the upper right. The settings menu opens.
+1. Select **Permissions**.
+1. Click **Restore Full Access**.
+1. Click **Save**.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/notebook/list
 [2]: https://app.datadoghq.com/notebook/template-gallery
-[3]: /ja/notebooks/guide/version_history
-[4]: /ja/dashboards/template_variables/
+[3]: /notebooks/guide/version_history
+[4]: /dashboards/template_variables/
 [5]: https://daringfireball.net/projects/markdown/
 [6]: https://mermaid.js.org/
-[7]: /ja/dashboards/widgets/timeseries/
-[8]: /ja/dashboards/widgets/top_list/
-[9]: /ja/dashboards/widgets/table/
-[10]: /ja/dashboards/widgets/heatmap/
-[11]: /ja/dashboards/widgets/distribution/
-[12]: /ja/dashboards/widgets/list/
-[13]: /ja/dashboards/widgets/query_value/
-[14]: /ja/dashboards/widgets/funnel/
-[15]: /ja/dashboards/widgets/pie_chart/
-[16]: /ja/dashboards/widgets/slo/
-[17]: /ja/account_management/rbac/
+[7]: /dashboards/widgets/timeseries/
+[8]: /dashboards/widgets/top_list/
+[9]: /dashboards/widgets/table/
+[10]: /dashboards/widgets/heatmap/
+[11]: /dashboards/widgets/distribution/
+[12]: /dashboards/widgets/list/
+[13]: /dashboards/widgets/query_value/
+[14]: /dashboards/widgets/funnel/
+[15]: /dashboards/widgets/pie_chart/
+[16]: /dashboards/widgets/slo/
+[17]: /account_management/rbac/

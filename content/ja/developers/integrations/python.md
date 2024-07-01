@@ -1,41 +1,41 @@
 ---
-description: Datadog Agent Integration Developer Tool をインストールします。
-title: Datadog Agent Integration Developer Tool をインストールする
+title: Install the Datadog Agent Integration Developer Tool
+description: Install the Datadog Agent Integration Developer Tool.
 ---
-このドキュメントでは、インタープリターおよび開発ツールのインストールなど、Agent ベースのインテグレーションを開発するための Python 環境の設定方法について説明します。
+This document covers how to setup a Python environment to work on Agent-based Integrations, including installing the interpreter and developer tool.
 
-## Python のインストール
+## Install Python
 
-多くのオペレーティングシステムには、Python がプリインストールされています。しかし、デフォルトでインストールされている Python のバージョンは、最新の Agent で使用されるものと同じではない場合があります。インテグレーションを実行するために必要なものがすべて揃っていることを確認するために、専用の Python インタプリターをインストールしてください。
+Many operating systems come with a pre-installed version of Python. However, the version of Python installed by default may not be the same as the one used by the latest Agent. To ensure that you have everything you need to get an integration running, install a dedicated Python interpreter.
 
 {{< tabs >}}
 
 {{% tab "MacOS" %}}
-[Homebrew][1] を使って Python 3.11 をインストールします。
+Install Python 3.11 using [Homebrew][1]:
 
-1. Homebrew を更新します。
+1. Update Homebrew:
    ```
    brew update
    ```
 
-2. Python をインストールします。
+2. Install Python:
    ```
    brew install python@3.11
    ```
 
-3. Homebrew のインストール出力を確認し、インストールスクリプトが推奨する追加のコマンドを実行します。
+3. Check the Homebrew installation output and run any additional commands recommended by the installation script.
 
-4. Python のバイナリが `PATH` にインストールされていることと、正しいバージョンがインストールされていることを確認します。
+4. Verify that the Python binary is installed in your `PATH` and that have installed the correct version:
    ```
    which python3.11
    ```
 
-   お使いの Mac のアーキテクチャに応じて、以下の出力が表示されるはずです。
-   - ARM (M1+) マシン:
+   You should see the following output depending on your Mac architecture:
+   - ARM (M1+) machines:
      ```
      /opt/homebrew/bin/python3.11
      ```
-   - Intel マシンの MacOS:
+   - MacOS on Intel machines:
      ```
      /usr/local/bin/python3.11
      ```
@@ -44,11 +44,11 @@ title: Datadog Agent Integration Developer Tool をインストールする
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. [Python 3.11 64 ビット版の実行形式インストーラー][1]をダウンロードして実行します。
-1. Python を PATH に追加するオプションを選択します。
-1. **Install Now** をクリックします。
-1. インストールが完了したら、マシンを再起動します。
-1. Python のバイナリが `PATH` にインストールされていることを確認します。
+1. Download the [Python 3.11 64-bit executable installer][1] and run it.
+1. Select the option to add Python to your PATH.
+1. Click **Install Now**.
+1. After the installation has completed, restart your machine.
+1. Verify that the Python binary is installed in your `PATH`:
    ```
    > where python
 
@@ -56,10 +56,10 @@ title: Datadog Agent Integration Developer Tool をインストールする
    ```
 
 [1]: https://www.python.org/downloads/release/python-3115/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Linux" %}}
-Linux でのインストールでは、システム Python の変更は避けてください。Datadog では [pyenv][1] や [miniconda][2] を使用して Python 3.11 をインストールすることを推奨しています。
+For Linux installations, avoid modifying your system Python. Datadog recommends installing Python 3.11 using [pyenv][1] or [miniconda][2].
 
 [1]: https://github.com/pyenv/pyenv#automatic-installer
 [2]: https://conda.io/projects/conda/en/stable/user-guide/install/linux.html
@@ -67,18 +67,18 @@ Linux でのインストールでは、システム Python の変更は避けて
 
 {{< /tabs >}}
 
-## 開発ツールのインストール
+## Install developer tooling
 
-`ddev` CLI をインストールするには、2 つの選択肢があります。
+You have 2 options to install the `ddev` CLI.
 
-### GUI を使ったインストール
+### Install using a GUI
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
-1. ブラウザで `.pkg` ファイルをダウンロードします: [ddev-{{< sdk-version "integrations-core" >}}.pkg](https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg)
-2. ダウンロードしたファイルを実行し、画面の指示に従います。
-3. ターミナルを再起動します。
-4. `ddev` コマンドが `PATH` に追加されたことを確認するには、次のコマンドを実行して、`ddev` バージョンを取得します。
+1. In your browser, download the `.pkg` file: [ddev-{{< sdk-version "integrations-core" >}}.pkg](https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg)
+2. Run your downloaded file and follow the on-screen instructions.
+3. Restart your terminal.
+4. To verify that the `ddev` command has been added to your `PATH`, run the following command to retrieve the `ddev` version:
    ```shell
    ddev --version
    {{< sdk-version "integrations-core" >}}
@@ -86,12 +86,12 @@ Linux でのインストールでは、システム Python の変更は避けて
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. ブラウザで、以下のいずれかの `.msi` ファイルをダウンロードします。
+1. In your browser, download one of the following `.msi` files:
      - [ddev-{{< sdk-version "integrations-core" >}}-x64.msi (64-bit)](https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}-x64.msi)
      - [ddev-{{< sdk-version "integrations-core" >}}-x86.msi (32-bit) ](https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}-x86.msi)
-2. ダウンロードしたファイルを実行し、画面の指示に従います。
-3. ターミナルを再起動します。
-4. `ddev` コマンドが `PATH` に追加されたことを確認するには、次のコマンドを実行して、`ddev` バージョンを取得します。
+2. Run your downloaded file and follow the on-screen instructions.
+3. Restart your terminal.
+4. To verify that the `ddev` command has been added to your `PATH`, run the following command to retrieve the `ddev` version:
    ```shell
    ddev --version
    {{< sdk-version "integrations-core" >}}
@@ -99,20 +99,20 @@ Linux でのインストールでは、システム Python の変更は避けて
 {{% /tab %}}
 {{< /tabs >}}
 
-### コマンドラインからのインストール
+### Install from the command line
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
-1. `curl` コマンドを使ってファイルをダウンロードします。`-o` オプションは、ダウンロードしたパッケージが書き込まれるファイル名を指定するためのものです。この例では、ファイルはカレントディレクトリの `ddev-{{< sdk-version "integrations-core" >}}.pkg` として書き込まれます。
+1. Download the file using the `curl` command. The `-o` option specifies the file name that the downloaded package is written to. In this example, the file is written to `ddev-{{< sdk-version "integrations-core" >}}.pkg` in the current directory.
    ```shell
    curl -o ddev-{{< sdk-version "integrations-core" >}}.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg
    ```
-2. 標準の macOS [`installer`](https://ss64.com/osx/installer.html) プログラムを実行し、ダウンロードした `.pkg` ファイルをソースとして指定します。`-pkg` パラメーターを使用して、インストールするパッケージの名前を指定し、`-target /` パラメーターで、パッケージをインストールするドライブを指定します。ファイルは `/usr/local/ddev` にインストールされ、`/etc/paths.d/ddev` にエントリが作成され、そこに `/usr/local/ddev` ディレクトリを追加するようシェルに指示します。これらのフォルダーへの書き込み権限を付与するため、コマンドに `sudo` を含める必要があります。
+2. Run the standard macOS [`installer`](https://ss64.com/osx/installer.html) program, specifying the downloaded `.pkg` file as the source. Use the `-pkg` parameter to specify the name of the package to install, and the `-target /` parameter for the drive in which to install the package. The files are installed to `/usr/local/ddev`, and an entry is created at `/etc/paths.d/ddev` that instructs shells to add the `/usr/local/ddev` directory to. You must include `sudo` on the command to grant write permissions to those folders.
    ```shell
    sudo installer -pkg ./ddev-{{< sdk-version "integrations-core" >}}.pkg -target /
    ```
-3. ターミナルを再起動します。
-4. シェルが `PATH` 内の `ddev` コマンドを見つけて実行できることを確認するために、次のコマンドを使用します。
+3. Restart your terminal.
+4. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
    ```shell
    ddev --version
    {{< sdk-version "integrations-core" >}}
@@ -120,7 +120,7 @@ Linux でのインストールでは、システム Python の変更は避けて
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. 標準の Windows [`msiexec`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec) プログラムを使用して、インストーラーをダウンロードして実行し、いずれかの `.msi` ファイルをソースとして指定します。通常の無人インストールをリクエストするには、`/passive` および `/i` パラメーターを使用します。
+1. Download and run the installer using the standard Windows [`msiexec`](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec) program, specifying one of the `.msi` files as the source. Use the `/passive` and `/i` parameters to request an unattended, normal installation.
    - `x64`:
       ```shell
       msiexec /passive /i https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}-x64.msi
@@ -129,8 +129,8 @@ Linux でのインストールでは、システム Python の変更は避けて
       ```shell
       msiexec /passive /i https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}-x86.msi
       ```
-2. ターミナルを再起動します。
-3. シェルが `PATH` 内の `ddev` コマンドを見つけて実行できることを確認するために、次のコマンドを使用します。
+2. Restart your terminal.
+3. To verify that the shell can find and run the `ddev` command in your `PATH`, use the following command.
    ```shell
    ddev --version
    {{< sdk-version "integrations-core" >}}
@@ -138,9 +138,9 @@ Linux でのインストールでは、システム Python の変更は避けて
 {{% /tab %}}
 {{< /tabs >}}
 
-### スタンドアロンバイナリからのインストール
+### Install from a standalone binary
 
-ご利用のプラットフォームおよびアーキテクチャに対応するアーカイブをダウンロードした後、`PATH` 上のディレクトリにバイナリを抽出し、バイナリの名前を `ddev` に変更します。
+After downloading the archive corresponding to your platform and architecture, extract the binary to a directory that is on your `PATH` and rename the binary to `ddev`.
 
 {{< tabs >}}
 {{% tab "MacOS" %}}

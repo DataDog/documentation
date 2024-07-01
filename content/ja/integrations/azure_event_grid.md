@@ -1,58 +1,59 @@
 ---
-aliases:
-- /ja/integrations/azure_eventgrid
-categories:
+"aliases":
+- /integrations/azure_eventgrid
+"categories":
 - cloud
 - azure
-dependencies: []
-description: Azure Event Grid のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_event_grid/
-draft: false
-git_integration_title: azure_event_grid
-has_logo: true
-integration_id: azure-eventgrid
-integration_title: Microsoft Azure Event Grid
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_event_grid
-public_title: Datadog-Microsoft Azure Event Grid インテグレーション
-short_description: Azure Event Grid のキーメトリクスを追跡
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Event Grid metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_event_grid/"
+"draft": false
+"git_integration_title": "azure_event_grid"
+"has_logo": true
+"integration_id": "azure-eventgrid"
+"integration_title": "Microsoft Azure Event Grid"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_event_grid"
+"public_title": "Datadog-Microsoft Azure Event Grid Integration"
+"short_description": "Track key Azure Event Grid metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Event Grid は、公開/サブスクライブモデルを使用して均一なイベント消費を可能にするフルマネージド型のインテリジェントなイベントルーティングサービスです。
+Azure Event Grid is a fully-managed, intelligent event routing service that allows for uniform event consumption using a publish-subscribe model.
 
-Datadog Azure インテグレーションを使用して、Azure Event Grid からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Azure Event Grid.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_event_grid" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Event Grid インテグレーションには、イベントは含まれません。
+The Azure Event Grid integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Event Grid インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Event Grid integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_event_grid/azure_event_grid_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

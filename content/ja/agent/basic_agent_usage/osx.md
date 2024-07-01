@@ -1,115 +1,117 @@
 ---
-aliases:
-- /ja/guides/basic_agent_usage/osx/
-further_reading:
-- link: /logs/
-  tag: Documentation
-  text: ログの収集
-- link: /infrastructure/process/
-  tag: Documentation
-  text: プロセスの収集
-- link: /tracing/
-  tag: Documentation
-  text: トレースの収集
-- link: /agent/basic_agent_usage/#agent-architecture
-  tag: Documentation
-  text: Agent のアーキテクチャを詳しく見る
-- link: /agent/configuration/network#configure-ports
-  tag: Documentation
-  text: インバウンドポートの構成
-os: osx
+title: Basic Agent Usage for macOS
 platform: OS X
-title: macOS 用 Agent の基本的な使用方法
+os: osx
+aliases:
+    - /guides/basic_agent_usage/osx/
+further_reading:
+- link: "/logs/"
+  tag: "Documentation"
+  text: "Collect your logs"
+- link: "/infrastructure/process/"
+  tag: "Documentation"
+  text: "Collect your processes"
+- link: "/tracing/"
+  tag: "Documentation"
+  text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/configuration/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
 
-## 概要
+## Overview
 
-このページでは、macOS 用 Datadog Agent の基本的な機能について説明します。Agent をまだインストールしていない場合は、[Datadog Agent インテグレーションに関するドキュメント][1]で手順を参照してください。
+This page outlines the basic features of the Datadog Agent for macOS. If you haven't installed the Agent yet, instructions can be found in the [Datadog Agent Integration][1] documentation.
 
-デフォルトでは、Agent は `/opt/datadog-agent` にあるサンドボックスにインストールされます。このフォルダーは任意の場所に移動できますが、ここでは、デフォルトのインストール場所を前提として説明します。
+By default, the Agent is installed in a sandbox located at `/opt/datadog-agent`. You can move this folder anywhere; however, this documentation assumes a default installation location.
 
-## サポートされている macOS バージョン
+## Supported macOS versions
 
-| macOS バージョン       | サポートされている Agent バージョン                                            |
+| macOS version       | Supported Agent versions                                            |
 |---------------------|---------------------------------------------------------------------|
 | macOS 10.10 & 10.11 | Agent v5                                                            |
-| macOS 10.12         | Agent v5、Agent v6 (v6.34.0 まで)、Agent v7 (v7.34.0 まで)            |
-| macOS 10.13         | Agent v5、Agent v6 (v6.38.2 まで)、Agent v7 (v7.38.2 まで)            |
-| macOS 10.14+        | Agent v5、Agent v6、Agent v7                                        |
+| macOS 10.12         | Agent v5, Agent v6 until v6.34.0, Agent v7 until v7.34.0            |
+| macOS 10.13         | Agent v5, Agent v6 until v6.38.2, Agent v7 until v7.38.2            |
+| macOS 10.14+        | Agent v5, Agent v6, Agent v7                                        |
 
-## コマンド
+## Commands
 
-Agent v6 および v7 では、オペレーティングシステムから提供される `launchctl` サービスマネージャーが Agent のライフサイクルを担う一方で、他のコマンドは Agent バイナリから直接実行する必要があります。別の方法として、ライフサイクルコマンドを systray アプリで管理し、他のコマンドは Web GUI から実行することもできます。
+In Agent v6 and v7, the `launchctl` service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run through the Agent binary directly. Alternatively, lifecycle commands can also be managed through the systray app, and other commands can be executed with the web GUI.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| 説明                        | コマンド                                              |
+| Description                        | Command                                              |
 |------------------------------------|------------------------------------------------------|
-| Agent をサービスとして起動           | `launchctl start com.datadoghq.agent` または systray アプリ |
-| サービスとして実行中の Agent の停止    | `launchctl stop com.datadoghq.agent` または systray アプリ  |
-| サービスとして実行中の Agent の再起動 | **run `stop` then `start`** または systray アプリ             |
-| Agent サービスのステータス            | `launchctl list com.datadoghq.agent` または systray アプリ  |
-| 実行中の Agent のステータスページ       | `datadog-agent status` または Web GUI                    |
-| フレアの送信                         | `datadog-agent flare` または Web GUI                     |
-| コマンドの使用方法の表示              | `datadog-agent --help`                               |
-| チェックの実行                        | `datadog-agent check <チェック名>`                   |
+| Start Agent as a service           | `launchctl start com.datadoghq.agent` or systray app |
+| Stop Agent running as a service    | `launchctl stop com.datadoghq.agent` or systray app  |
+| Restart Agent running as a service | _run `stop` then `start`_ or systray app             |
+| Status of Agent service            | `launchctl list com.datadoghq.agent` or systray app  |
+| Status page of running Agent       | `datadog-agent status` or web GUI                    |
+| Send flare                         | `datadog-agent flare` or web GUI                     |
+| Display command usage              | `datadog-agent --help`                               |
+| Run a check                        | `datadog-agent check <CHECK_NAME>`                   |
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-| 説明                        | コマンド                            |
+| Description                        | Command                            |
 |------------------------------------|------------------------------------|
-| Agent をサービスとして起動           | `datadog-agent start`              |
-| サービスとして実行中の Agent の停止    | `datadog-agent stop`               |
-| サービスとして実行中の Agent の再起動 | `datadog-agent restart`            |
-| Agent サービスのステータス            | `datadog-agent status`             |
-| 実行中の Agent のステータスページ       | `datadog-agent info`               |
-| フレアの送信                         | `datadog-agent flare`              |
-| コマンドの使用方法の表示              | _not implemented_                  |
-| チェックの実行                        | `datadog-agent check <チェック名>` |
+| Start Agent as a service           | `datadog-agent start`              |
+| Stop Agent running as a service    | `datadog-agent stop`               |
+| Restart Agent running as a service | `datadog-agent restart`            |
+| Status of Agent service            | `datadog-agent status`             |
+| Status page of running Agent       | `datadog-agent info`               |
+| Send flare                         | `datadog-agent flare`              |
+| Display command usage              | _not implemented_                  |
+| Run a check                        | `datadog-agent check <CHECK_NAME>` |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## コンフィギュレーション
+## Configuration
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
-Agent の構成ファイルおよびフォルダーの場所:
+The configuration files and folders for the Agent are located in:
 
 * `~/.datadog-agent/datadog.yaml`
 
-[インテグレーション][1]用構成ファイルの場所
+Configuration files for [Integrations][1]:
 
 * `~/.datadog-agent/conf.d/`
 
-[1]: /ja/integrations/
+[1]: /integrations/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-Agent の構成ファイルおよびフォルダーの場所
+The configuration files and folders for the Agent are located in:
 
 * `~/.datadog-agent/datadog.conf`
 
-[インテグレーション][1]用構成ファイルの場所
+Configuration files for [Integrations][1]:
 
 * `~/.datadog-agent/conf.d/`
 
-[1]: /ja/integrations/
+[1]: /integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent のアンインストール
+## Uninstall the Agent
 
 {{< tabs >}}
-{{% tab "Agent v6 と v7" %}}
-**シングルユーザーインストール**
+{{% tab "Agent v6 & v7" %}}
+**Single user installation**
 
-Agent とすべての Agent 構成ファイルを削除するには
-1. トレイにある骨のアイコンで Datadog Agent を停止して閉じます。
-2. Datadog アプリケーションをアプリケーションフォルダからゴミ箱にドラッグします。
-3. 次のコマンドを実行します。
+To remove the Agent and all Agent configuration files:
+1. Stop and close the Datadog Agent with the bone icon in the tray.
+2. Drag the Datadog application from the application folder to the trash bin.
+3. Run the following commands:
     ```shell
     sudo rm -rf /opt/datadog-agent
     sudo rm -rf /usr/local/bin/datadog-agent
@@ -117,13 +119,13 @@ Agent とすべての Agent 構成ファイルを削除するには
     launchctl remove com.datadoghq.agent
     sudo rm -rf /var/log/datadog
     ```
-4. マシンを再起動すると、変更が有効になります。
+4. Reboot your machine for the changes to take effect.
 
-**システム全体の LaunchDaemon のインストール**
+**System-wide LaunchDaemon installation**
 
-Agent とすべての Agent 構成ファイルを削除するには
-1. Datadog アプリケーションをアプリケーションフォルダからゴミ箱にドラッグします。
-2. 残りのファイルを削除するには、以下を実行します。
+To remove the Agent and all Agent configuration files:
+1. Drag the Datadog application from the application folder to the trash bin.
+2. To remove remaining files, run the following:
     ```shell
     sudo rm -rf /opt/datadog-agent
     sudo rm -rf /usr/local/bin/datadog-agent
@@ -132,45 +134,45 @@ Agent とすべての Agent 構成ファイルを削除するには
     sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
     sudo rm -rf /var/log/datadog
     ```
-3. マシンを再起動すると、変更が有効になります。
+3. Reboot your machine for the changes to take effect.
 {{% /tab %}}
 
 {{% tab "Agent v5" %}}
-1. トレイにある骨のアイコンで Datadog Agent を停止して閉じます。
-2. Datadog アプリケーションをアプリケーションフォルダからゴミ箱にドラッグします。
-3. 次を実行します。
+1. Stop and close the Datadog Agent with the bone icon in the tray.
+2. Drag the Datadog application from the application folder to the trash bin.
+3. Run:
 
 ```shell
 sudo rm -rf /opt/datadog-agent
 sudo rm -rf /usr/local/bin/datadog-agent
-sudo rm -rf ~/.datadog-agent/** # 壊れたシンボリックリンクを削除するため
+sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
 ```
 
-オプションのインストールコマンドを実行して、Agent を起動時に実行させた場合は、以下を実行してアンインストールを終了してください。
+If you ran the optional install commands to have the Agent run at boot time, run the following to finish uninstalling:
 
 ```shell
 sudo launchctl unload -w /Library/LaunchDaemons/com.datadoghq.agent.plist
 sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
 ```
 
-> この方法では、Agent とすべての Agent コンフィグレーションファイルが削除されます。
+> This method removes the Agent, as well as all Agent configuration files.
 {{% /tab %}}
 {{< /tabs >}}
 
-## ヘルプ
+## Troubleshooting
 
-[Agent のトラブルシューティングに関するドキュメント][2]を参照してください。
+See the [Agent Troubleshooting documentation][2].
 
-## 埋め込み Agent の使用
+## Working with the embedded Agent
 
-Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に含まれています。`python`、`pip` などの共通バイナリは `/opt/datadog-agent/embedded/bin/` に含まれています。
+The Agent contains an embedded Python environment at `/opt/datadog-agent/embedded/`. Common binaries such as `python` and `pip` are contained within `/opt/datadog-agent/embedded/bin/`.
 
-詳細については、[埋め込み Agent へのパッケージの追加方法][3]の手順を参照してください。
+See the instructions on how to [add packages to the embedded Agent][3] for more information.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=macos
-[2]: /ja/agent/troubleshooting/
-[3]: /ja/developers/guide/custom-python-package/
+[2]: /agent/troubleshooting/
+[3]: /developers/guide/custom-python-package/

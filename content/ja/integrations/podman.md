@@ -1,81 +1,82 @@
 ---
-app_id: podman
-app_uuid: ecc06845-18ac-448e-b352-1bbf31fdfcc3
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10267
-    source_type_name: Podman
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- コンテナ
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/podman/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: podman
-integration_id: podman
-integration_title: Podman
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: podman
-public_title: Podman
-short_description: Podman コンテナのすべてのメトリクスを Datadog で追跡
-supported_os:
+"app_id": "podman"
+"app_uuid": "ecc06845-18ac-448e-b352-1bbf31fdfcc3"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": true
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10267"
+    "source_type_name": Podman
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- containers
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/podman/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "podman"
+"integration_id": "podman"
+"integration_title": "Podman"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "podman"
+"public_title": "Podman"
+"short_description": "Track all your Podman containers metrics with Datadog"
+"supported_os":
 - linux
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Category::Containers
-  configuration: README.md#Setup
-  description: Podman コンテナのすべてのメトリクスを Datadog で追跡
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Podman
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Category::Containers"
+  "configuration": "README.md#Setup"
+  "description": Track all your Podman containers metrics with Datadog
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Podman
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-[Podman][1] は、Linux システムで OCI コンテナを開発、管理、実行するためのデーモンレスコンテナエンジンです。コンテナは、ルートで実行することも、ルートレスで実行することも可能です。
+[Podman][1] is a daemonless container engine for developing, managing, and running OCI Containers on your Linux System. Containers can either be run as root or in rootless mode.
 
-## 概要
+## Overview
 
-Podman コンテナランタイムは、[コンテナ Agent チェック][2]でサポートされています。
-このチェックは、起動に使用されたランタイムに関係なく、実行中のコンテナに関する一連のメトリクスを報告します。
+Podman container runtime is supported by the [container Agent check][2].
+This check reports a set of metrics on any running containers, regardless of the runtime used to start them.
 
-**注**: `container` チェックレポートは、コンテナランタイムに関係なく、システム上で見つかったすべてのコンテナのメトリクスを標準化します。
+**NOTE**: The `container` check report standardizes metrics for all containers found on the system, regardless of the container runtime.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Podman][1] で管理されているコンテナを監視するには、[コンテナ Agent チェック][2]の[インストール手順][3]をご覧ください。
+To monitor containers managed by [Podman][1], see the [installation instructions][3] for the [container Agent check][2].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][4] を参照してください。
+See [metadata.csv][4] for a list of metrics provided by this integration.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
+Need help? Contact [Datadog support][1].
 
 [1]: https://podman.io/
-[2]: https://docs.datadoghq.com/ja/integrations/container/
-[3]: https://docs.datadoghq.com/ja/integrations/container/#setup
+[2]: https://docs.datadoghq.com/integrations/container/
+[3]: https://docs.datadoghq.com/integrations/container/#setup
 [4]: https://github.com/DataDog/integrations-core/blob/master/container/metadata.csv
+

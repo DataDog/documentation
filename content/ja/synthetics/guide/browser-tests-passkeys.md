@@ -1,63 +1,70 @@
 ---
-description: Synthetic ブラウザテストでアプリケーションにログインできるようにする方法について説明します。
+title: Use Passkeys (FIDO2) In Browser Tests
+kind: guide
+description: Learn how to ensure your Synthetic browser tests can log in to your applications. 
 further_reading:
-- link: /synthetics/guide/app-that-requires-login/
-  tag: Documentation
-  text: ブラウザテストにおける認証について
-- link: /synthetics/guide/browser-tests-totp
-  tag: Documentation
-  text: ブラウザテストにおける多要素認証 (MFA) 用 TOTP
-- link: synthetics/settings/?tab=specifyvalue#global-variables
-  tag: Documentation
-  text: グローバル変数について
-kind: ガイド
-title: ブラウザテストでパスキー (FIDO2) を使用する
+  - link: /synthetics/guide/app-that-requires-login/
+    tag: Documentation
+    text: Learn more about authentication in browser test
+  - link: /synthetics/guide/browser-tests-totp
+    tag: Documentation
+    text: TOTPs for Multi-Factor Authentication (MFA) in browser tests
+  - link: "synthetics/settings/?tab=specifyvalue#global-variables"
+    tag: Documentation
+    text: Learn more about global variables
 ---
 
-## 概要
+## Overview
 
-パスキー (FIDO2) は、標準的なユーザー名とパスワードのタプルよりも強力なセキュリティを提供するもので、すべての Web サイトを対象とする一意の暗号化ログイン資格情報に依拠しています。パスキーがユーザーのデバイスの外に出ることはなく、Web アプリケーションサーバー上に保存されることもありません。このセキュリティモデルでは、フィッシングやあらゆる形態のパスワード窃取、リプレイ攻撃のリスクが排除されます。
+Passkeys (FIDO2) offer stronger security than the standard username and password tuple, and rely on cryptographic login credentials that are unique across every website. Passkeys never leave your user's devices and are never stored on a web application server. This security model eliminates the risks of phishing, all forms of password theft, and replay attacks.
 
-パスキーは、ユーザー名とパスワードに代えて、または多要素認証の 2 つ目の要素として使用することができます。パスキーを生成、保管、活用できる Synthetic モニタリングは、パスキーで保護された重要なユーザージャーニーをテストするのに役立ちます。
+You can use passkeys as a replacement for a username and password, or as a second factor authentication. By generating, storing, and leveraging passkeys, Synthetic Monitoring can help you test your critical passkey-protected user journeys without disabling this important security measure.
 
-## Virtual Authenticator グローバル変数を作成する
+## Create your Virtual Authenticator global variable
 
-Synthetic モニタリングのパスキーは、Virtual Authenticator グローバル変数を使って処理されます。パスキーを保存する Virtual Authenticator グローバル変数を作成するには、[Synthetic Monitoring & Continuous Testing の設定ページの **Global Variables** セクション][4]を参照してください。
+Passkeys in Synthetic Monitoring are handled by Virtual Authenticator global variables. To create a Virtual Authenticator global variable storing your passkeys, see the [**Global Variables** section in Synthetic Monitoring & Continuous Testing Settings][4].
 
-{{< img src="synthetics/guide/browser-tests-passkeys/new-variable-virtual-authenticator.png" alt="Virtual Authenticator グローバル変数の作成" style="width:70%;" >}}
+{{< img src="synthetics/guide/browser-tests-passkeys/new-variable-virtual-authenticator.png" alt="Create a Virtual Authenticator global variable" style="width:70%;" >}}
 
-## Synthetic ブラウザテストでパスキーを使用する
-<div class="alert alert-warning">Synthetic モニタリングは、Chrome と Edge のブラウザテストでパスキーをサポートしています。</div>
+## Use passkeys in your Synthetic browser tests
+<div class="alert alert-warning">Synthetic Monitoring supports passkeys in browser tests for Chrome and Edge.</div>
 
-[ブラウザテストを作成][3]する際は、グローバル変数に保存されているパスキーを使用して、アプリケーションのパスキーの登録を完了し、認証フローを完成させます。
+### Add passkeys to a browser test
 
-### 登録フローのフロー
+1. Click [Digital Experience > New Test > Browser Test][3].
+2. Click **Save & Edit Recording**.
+3. On the recording page, click **Add Variable** > **Create variable from Global Variable**.
+4. Supply the passkeys stored in your virtual authenticator global variable that you created in the [previous step](#create-your-virtual-authenticator-global-variable).
 
-[ブラウザテスト][3]で、パスキーを使用して登録をテストする方法
+{{< img src="synthetics/guide/browser-tests-passkeys/synthetics_add_variable.png" alt="Adding your Virtual Authenticator global variable to your browser test" style="width:70%;" >}}
 
-1. テストに [Virtual Authenticator グローバル変数をインポート][5]します。
-2. パスキーを登録するページに移動します。テストを記録する際、Datadog はインポートされた Virtual Authenticator グローバル変数を使って新規のパスワードを自動的に作成し、保存します。
-3. テストの手順を記録したら、**Save & Launch Test** をクリックします。
+### Test a registration flow
 
-### ログインフローのテスト
+To test a registration flow using passkeys in your [browser tests][3]:
 
-[ブラウザテスト][3]でパスキーを使ってログインフローをテストするには、まず Datadog パスキーを Web アプリケーションに登録する必要があります (上記セクション参照)。この作業は、パスキーとアプリケーションごとに 1 回必要です。
+1. [Import your Virtual Authenticator global variable][5] into your test. 
+2. Navigate to the page to register your passkey. When recording your test, Datadog automatically generates and stores a new passkey by using the imported virtual authenticator global variable.
+3. After recording your test steps, click **Save & Launch Test**.
 
-次のいずれかの方法を選択できます。
+### Test a login flow
 
-- レコーダー内から登録フローを完了する。ただし、登録のステップは記録しない。
-- 登録フローとログインフローの両方のステップを埋め込んだテストを作成する。
+To test a login flow using a passkey in your [browser tests][3], you need to first register your Datadog passkey on the web application (see section above). This is required once per passkey and application.
 
-1. [Virtual Authenticator グローバル変数をインポート][5]します。 
-2. パスキーでログインするページに移動します。テストを記録する際、Datadog は選択された Virtual Authenticator を使って Web アプリケーションにあらかじめ登録されたパスキーを使用して、自動的にログインします。
-3. テストの手順を記録したら、**Save & Launch Test** をクリックします。
+You can either:
 
-## その他の参考資料
+- Complete the registration flow from within the recorder, but without recording the registration steps, or
+- Create a test that embeds both steps for the registration and login flows.
+
+1. [Import your virtual authenticator global variable][5]. 
+2. Navigate to the page to login with your passkey. When recording your test, Datadog automatically logs in using the passkey previously registered on the web application with the selected virtual authenticator.
+3. After recording your test steps, click **Save & Launch Test**.
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/settings/variables
-[2]: /ja/account_management/rbac/?tab=datadogapplication#custom-roles
-[3]: /ja/synthetics/browser_tests/
-[4]: /ja/synthetics/settings/?tab=virtualauthenticator
-[5]: /ja/synthetics/browser_tests#use-global-variables
+[2]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[3]: /synthetics/browser_tests/
+[4]: /synthetics/settings/?tab=virtualauthenticator
+[5]: /synthetics/browser_tests#use-global-variables

@@ -1,121 +1,119 @@
 ---
-app_id: twistlock
-app_uuid: b10f1447-4e25-4c76-ab05-911cde5df5c6
-assets:
-  dashboards:
-    Twistlock: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: true
-    metrics:
-      check: twistlock.images.cve.details
-      metadata_path: metadata.csv
-      prefix: twistlock.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10052
-    source_type_name: Twistlock
-  logs:
-    source: twistlock
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- コンプライアンス
-- コンテナ
-- ログの収集
-- ネットワーク
-- セキュリティ
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: twistlock
-integration_id: twistlock
-integration_title: Prisma Cloud Compute Edition
-integration_version: 3.6.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: twistlock
-public_title: Prisma Cloud Compute Edition
-short_description: Twistlock はコンテナセキュリティスキャナ
-supported_os:
+"app_id": "twistlock"
+"app_uuid": "b10f1447-4e25-4c76-ab05-911cde5df5c6"
+"assets":
+  "dashboards":
+    "Twistlock": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": true
+    "metrics":
+      "check": twistlock.images.cve.details
+      "metadata_path": metadata.csv
+      "prefix": twistlock.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10052"
+    "source_type_name": Twistlock
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- compliance
+- containers
+- log collection
+- network
+- security
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "twistlock"
+"integration_id": "twistlock"
+"integration_title": "Prisma Cloud Compute Edition"
+"integration_version": "3.6.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "twistlock"
+"public_title": "Prisma Cloud Compute Edition"
+"short_description": "Twistlock is a container security scanner"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - カテゴリ::コンプライアンス
-  - Category::Containers
-  - Category::Log Collection
-  - Category::Network
-  - Category::Security
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Twistlock はコンテナセキュリティスキャナ
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Prisma Cloud Compute Edition
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Compliance"
+  - "Category::Containers"
+  - "Category::Log Collection"
+  - "Category::Network"
+  - "Category::Security"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Twistlock is a container security scanner
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Prisma Cloud Compute Edition
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-[Prisma Cloud Compute Edition][1] はセキュリティスキャナです。コンテナ、ホスト、パッケージをスキャンして、脆弱性やコンプライアンス問題を発見します。
+[Prisma Cloud Compute Edition][1] is a security scanner. It scans containers, hosts, and packages to find vulnerabilities and compliance issues.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Prisma Cloud Compute Edition チェックは [Datadog Agent][2] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
+The Prisma Cloud Compute Edition check is included in the [Datadog Agent][2] package, so you do not need to install anything else on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-##### メトリクスの収集
+##### Metric collection
 
-1. twistlock のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `twistlock.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル twistlock.d/conf.yaml][1] を参照してください。
+1. Edit the `twistlock.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your twistlock performance data. See the [sample twistlock.d/conf.yaml][1] for all available configuration options.
 
-2. [Agent を再起動します][2]。
+2. [Restart the Agent][2].
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/twistlock/datadog_checks/twistlock/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-##### メトリクスの収集
+##### Metric collection
 
-| パラメーター            | 値                                                                               |
+| Parameter            | Value                                                                               |
 | -------------------- | ----------------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `twistlock`                                                                         |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                                       |
-| `<INSTANCE_CONFIG>`  | `{"url":"http://%%host%%:8083", "username":"<ユーザー名>", "password": "<パスワード>"}` |
+| `<INIT_CONFIG>`      | blank or `{}`                                                                       |
+| `<INSTANCE_CONFIG>`  | `{"url":"http://%%host%%:8083", "username":"<USERNAME>", "password": "<PASSWORD>"}` |
 
-###### ガイド
+###### Kubernetes
 
-Kubernetes を使用している場合は、デプロイ前に twistlock_console.yaml の replication controller セクションに構成を追加してください。
+If you're using Kubernetes, add the config to replication controller section of twistlock_console.yaml before deploying:
 
 ```yaml
 apiVersion: v1
@@ -140,25 +138,25 @@ spec:
         name: twistlock-console
 ```
 
-##### 収集データ
+##### Log collection
 
 
 {{< site-region region="us3" >}}
-**ログ収集は、Datadog {{< region-param key="dd_site_name" >}} サイトでサポートされていません**。
+**Log collection is not supported for the Datadog {{< region-param key="dd_site_name" >}} site**.
 {{< /site-region >}}
 
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
 
-| パラメーター      | 値                                             |
+| Parameter      | Value                                             |
 | -------------- | ------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "twistlock", "service": "twistlock"}` |
 
-###### ガイド
+###### Kubernetes
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、[DaemonSet コンフィギュレーション][3]でこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your [DaemonSet configuration][3]:
 
    ```yaml
      #(...)
@@ -171,68 +169,68 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
      #(...)
    ```
 
-2. Docker ソケットを Datadog Agent にマウントします。Datadog Kubernetes の[マニフェストの例][4]を参照してください。
+2. Mount the Docker socket to the Datadog Agent. See the Datadog Kubernetes [example manifests][4].
 
-3. ディフェンダーのポッドアノテーションにログセクションを追加します。コンテナ名は、ポッド仕様の直下にあります。
+3. Make sure the log section is included in the Pod annotation for the defender, where the container name can be found just below in the pod spec:
 
    ```yaml
    ad.datadoghq.com/<container-name>.logs: '[{"source": "twistlock", "service": "twistlock"}]'
    ```
 
-4. [Agent を再起動します][5]。
+4. [Restart the Agent][5].
 
 ###### Docker
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。次のように、環境変数を使用してこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent. Enable it with the environment variable:
 
    ```shell
    DD_LOGS_ENABLED=true
    ```
 
-2. ディフェンダーコンテナにラベルを追加します。
+2. Add a label on the defender container:
 
    ```yaml
    ad.datadoghq.com/<container-name>.logs: '[{"source": "twistlock", "service": "twistlock"}]'
    ```
 
-3. Docker ソケットを Datadog Agent にマウントします。Datadog Agent を使用してログを収集するための構成については、[Docker ログの収集][6]を参照してください。
+3. Mount the Docker socket to the Datadog Agent. More information about the required configuration to collect logs with the Datadog Agent available in [Docker Log Collection][6].
 
-4. [Agent を再起動します][5]。
+4. [Restart the Agent][5].
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
-[3]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/#log-collection
-[4]: https://docs.datadoghq.com/ja/agent/kubernetes/?tab=daemonset
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
+[3]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/#log-collection
+[4]: https://docs.datadoghq.com/agent/kubernetes/?tab=daemonset
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の status サブコマンド][3]を実行し、Checks セクションで `twistlock` を探します。
+Run the [Agent's status subcommand][3] and look for `twistlock` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "twistlock" >}}
 
 
-### ヘルプ
+### Events
 
-Prisma Cloud Compute Edition は、新しい CVE が見つかると、イベントを送信します。
+Prisma Cloud Compute Edition sends an event when a new CVE is found.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "twistlock" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
 
 
 [1]: https://www.paloaltonetworks.com/prisma/cloud
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/help/

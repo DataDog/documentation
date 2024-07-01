@@ -1,80 +1,80 @@
 ---
-app_id: システム
-app_uuid: b30c1062-d2cd-4fb7-be84-c144913b8266
-assets:
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: system.disk.directory.file.bytes
-      metadata_path: metadata.csv
-      prefix: system.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Directory
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- os & system
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/directory/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: directory
-integration_id: システム
-integration_title: Directory
-integration_version: 2.1.1
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: directory
-public_title: Directory
-short_description: Directory インテグレーションにより、既定のディレクトリのファイルについてメトリクスを報告
-supported_os:
-- linux
-- macos
-- windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::OS とシステム
-  configuration: README.md#Setup
-  description: Directory インテグレーションにより、既定のディレクトリのファイルについてメトリクスを報告
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Directory
+"app_id": "system"
+"app_uuid": "b30c1062-d2cd-4fb7-be84-c144913b8266"
+"assets":
+  "integration":
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "system.disk.directory.file.bytes"
+      "metadata_path": "metadata.csv"
+      "prefix": "system."
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_name": "Directory"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "os & system"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/directory/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "directory"
+"integration_id": "system"
+"integration_title": "Directory"
+"integration_version": "2.1.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "directory"
+"public_title": "Directory"
+"short_description": "The Directory integration reports metrics on files for a provided directory"
+"supported_os":
+- "linux"
+- "macos"
+- "windows"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Category::OS & System"
+  "configuration": "README.md#Setup"
+  "description": "The Directory integration reports metrics on files for a provided directory"
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Directory"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-選択したディレクトリやファイルからメトリクスをキャプチャします。Agent は以下を収集します。
+Capture metrics from directories and files of your choosing. The Agent collects:
 
-- ファイルの数
-- ファイルサイズ
-- 最終更新からの経過時間
-- 作成からの経過時間
+- Number of files
+- File size
+- Age of the last modification
+- Age of the creation
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Directory チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The Directory check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Directory のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `directory.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル directory.d/conf.yaml][3] を参照してください。
+1. Edit the `directory.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][2] to start collecting Directory performance data. See the [sample directory.d/conf.yaml][3] for all available configuration options.
 
    ```yaml
    init_config:
@@ -87,44 +87,45 @@ Directory チェックは [Datadog Agent][1] パッケージに含まれてい�
      - directory: "<DIRECTORY_PATH>"
    ```
 
-    Agent プロセスを実行しているユーザーが (通常は `datadog-agent`)、構成したディレクトリ、サブディレクトリ、およびファイルへの読み取りアクセス権を持つことを確認してください。
+    Ensure that the user running the Agent process (usually `datadog-agent`) has read access to the directories, subdirectories, and files you configure.
 
-    **注**: Windows でチェックを実行するには、ディレクトリを追加する際に、単一のバックスラッシュ `C:\path\to\directory` ではなく、ダブルバックスラッシュ `C:\\path\\to\\directory` を使用してください。そうしないと、トレースバックの最後に `found unknown escape character in "<string>"` というエラーが示されて、ディレクトリチェックが失敗します。
+    **Note**: On Windows when you add your directory, use double-backslashes `C:\\path\\to\\directory` instead of single-backslashes `C:\path\to\directory` for the check to run. Otherwise, the directory check fails with traceback ending in the error: `found unknown escape character in "<string>"`.
 
-2. [Agent を再起動します][4]。
+2. [Restart the Agent][4].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `directory` を探します。
+[Run the Agent's status subcommand][5] and look for `directory` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "directory" >}}
 
 
-### ヘルプ
+### Events
 
-Directory チェックには、イベントは含まれません。
+The Directory check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "directory" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-非常に大きなディレクトリに対してチェックを実行し、再帰が true に設定されている場合、I/O と CPU に負荷がかかることに注意してください。デフォルトのチェック頻度である 15 秒ごとを調整する必要があるかもしれません。
+When running the check against very large directories and recursion is set to true, be aware that is an intensive operation on the I/O and CPU. The default check frequency, every 15 seconds, may need to be adjusted. 
 
-例えば、15,000 個のファイルとサブディレクトリがあるディレクトリで、CPU 使用率の高いチェックが 30〜40 秒実行される場合、チェック頻度を低くセットアップしなければ、CPU 使用率の高いチェックが効率よく継続的に実行されます。
+For example, if there is a directory with 15,000 files and sub-directories, and the check runs 30-40 seconds with high CPU usage, if you do not set up less frequent check frequency, the check with high CPU runs effectively and continuously.
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/directory/datadog_checks/directory/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://github.com/DataDog/integrations-core/blob/master/directory/metadata.csv
 [7]: https://github.com/DataDog/integrations-core/blob/master/directory/assets/service_checks.json
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

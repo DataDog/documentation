@@ -1,27 +1,25 @@
 ---
+title: span summary
 core_product:
-- apm
-title: スパンタグ
+  - apm
 ---
 
-スパンタグは、リクエストを他のテレメトリーと関連付ける (または検索でフィルターする) ために、キーと値のペアの形で、[スパン][1]に適用されるタグのことです。タグは、1 つのスパンに追加することも、すべてのスパンにグローバルに追加することも可能です。
+The span summary table in APM shows metrics for spans aggregated across all traces, including how often the span shows up among all traces, what percent of traces contain the span, the average duration for the span, and its typical share of total execution time of the requests. This helps you detect N+1 problems in your code so you can improve your application performance.
 
-APM のスパンサマリーテーブルには、すべてのトレースでスパンが表示される頻度、トレースの何パーセントにスパンが含まれるか、スパンの平均期間、リクエストの合計実行時間の一般的な割合など、すべてのトレースで集計されたスパンのメトリクスが表示されます。これにより、コード内の N+1 問題を検出し、アプリケーションのパフォーマンスを向上させることができます。
+{{< img src="tracing/visualization/span-summary.png" alt="Span summary table" style="width:50%" >}}
 
-{{< img src="tracing/visualization/span-summary.png" alt="スパンサマリーテーブル" style="width:50%" >}}
-
-スパンサマリーテーブルは、サービスエントリースパンを含むリソースにのみ利用可能であり、以下の情報を含みます。
+The span summary table is only available for resources containing service entry spans, and contains the following information:
 
 Average spans per trace
-: スパンが少なくとも 1 回存在する、現在のリソースを含むトレースのスパンの平均発生回数。
+: Average number of occurrences of the span for traces, including the current resource, where the span is present at least once.
 
 Percentage of traces
-: スパンが少なくとも 1 回存在する現在のリソースを含むトレースの割合。
+: Percentage of traces, including the current resource, where the span is present at least once.
 
 Average duration
-: スパンが少なくとも 1 回存在する、現在のリソースを含むトレースのスパンの平均期間。
+: Average duration of the span for traces, including the current resource, where the span is present at least once.
 
 Average percentage of execution time
-: スパンが少なくとも 1 回存在する、現在のリソースを含むトレースについて、スパンがアクティブだった実行時間の平均比率。
+: Average ratio of execution time for which the span was active for traces, including the current resource, where the span is present at least once.
 
-[1]: /ja/glossary/#span
+[1]: /glossary/#span

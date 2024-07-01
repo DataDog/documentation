@@ -1,7 +1,7 @@
 ---
+title: Service Map
 core_product:
-- apm
-- service catalog
-title: サービスマップ
+  - apm
+  - service catalog
 ---
-APM では、サービスマップを視覚化することで、サービスの概要とその健全性を確認できます。アプリケーションをコンポーネントサービスに分解し、サービス間の観測された依存関係を描画します。
+In APM, the Service Map visualization provides an overview of your services and their health. It decomposes your application into its component services and draws observed dependencies between them.

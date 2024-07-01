@@ -1,126 +1,87 @@
 ---
+title: Container Discovery Management
 aliases:
-- /ja/agent/autodiscovery/management
-- /ja/agent/kubernetes/management
-- /ja/agent/guide/autodiscovery-management
+ - /agent/autodiscovery/management
+ - /agent/kubernetes/management
+ - /agent/guide/autodiscovery-management
 further_reading:
 - link: /agent/kubernetes/integrations/
   tag: Documentation
-  text: オートディスカバリーのインテグレーションテンプレートの作成とロード
-title: コンテナディスカバリー管理
+  text: Create and load an Autodiscovery Integration Template
 ---
 
-デフォルトで、Datadog Agent は、利用可能なすべてのコンテナを自動的に検出する設定になっています。検出パラメーターを制限したりデータの収集をコンテナのサブセットのみに制限するには、それぞれのコンフィギュレーションで取り扱いを設定します。
+By default, the Datadog Agent automatically discovers all containers available. To restrict its discovery perimeter and limit data collection to a subset of containers only, include or exclude them through a dedicated configuration.
 
-**注**: `kubernetes.containers.running`、`kubernetes.pods.running`、`docker.containers.running`、`.stopped`、`.running.total`、`.stopped.total` の各メトリクスは、この設定の影響を受けず、常にすべてのコンテナを対象とします。
+## Autodiscovery patterns
 
-## 環境変数
-Agent をコンテナとして実行する場合は、[Containerized Agent](?tab=containerizedagent) タブの指示を使用します。Agent をホスト上のバイナリとして実行する場合は、[Host Agent](?tab=hostagent) タブの指示を使用します。
+The Datadog Agent should be deployed once per host within containerized environments. This is typically done with a DaemonSet in Kubernetes (managed by Helm or Operator) or by ECS Daemon Services. Each Datadog Agent deployed automatically discovers and monitors all containers on its respective host.
 
-{{< tabs >}}
-{{% tab "Containerized Agent" %}}
+You can adjust the discovery rules for the Agent to restrict metric and log collection. Any containers restricted from metric collection are also restricted for any Autodiscovery based Agent Integrations. When the [log "Container Collect All" feature][1] is enabled, all discovered containers have their logs collected, unless otherwise blocked by the rules described below.
 
-**Agent v7.20+** では、以下の環境変数を使用して、イメージ、名前、または Kubernetes ネームスペースによってコンテナを除外します。除外されたコンテナからはログとメトリクスが収集されません。
+These restrictions can be set by either:
+- Providing environment variables to the Datadog Agent container as an allowlist/blocklist of containers.
+- Adding annotations to your Kubernetes pods to block individual pods or containers.
 
-| 環境変数 | 説明 |
+The first option works well as a list of container names, images, or Kubernetes namespaces to exclude for the entire cluster. The second option works well for more fine tuned exclusions in Kubernetes.
+
+**Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total`, and `.stopped.total` metrics are not affected by these settings and always count all containers.
+
+## Agent configuration
+
+### Environment variables
+In **Agent v7.20+**, use the following environment variables to exclude containers by image name, container name, or Kubernetes namespace. Logs and metrics are not collected from excluded containers.
+
+| Environment variable | Description |
 | ------------ | ----------- |
-| `DD_CONTAINER_EXCLUDE` | 除外するコンテナのブロックリスト。 |
-| `DD_CONTAINER_EXCLUDE_METRICS` | メトリクスが除外されるコンテナのブロックリスト。 |
-| `DD_CONTAINER_EXCLUDE_LOGS` | ログが除外されるコンテナのブロックリスト。 |
-| `DD_CONTAINER_INCLUDE` | 含めるコンテナの許可リスト。 |
-| `DD_CONTAINER_INCLUDE_METRICS` | メトリクスが含まれるコンテナの許可リスト。 |
-| `DD_CONTAINER_INCLUDE_LOGS` | ログが含まれるコンテナの許可リスト。 |
+| `DD_CONTAINER_EXCLUDE` | Blocklist of containers to exclude. |
+| `DD_CONTAINER_EXCLUDE_METRICS` | Blocklist of containers whose metrics are excluded. |
+| `DD_CONTAINER_EXCLUDE_LOGS` | Blocklist of containers whose logs are excluded. |
+| `DD_CONTAINER_INCLUDE` | Allowlist of containers to include. |
+| `DD_CONTAINER_INCLUDE_METRICS` | Allowlist of containers whose metrics are included. |
+| `DD_CONTAINER_INCLUDE_LOGS` | Allowlist of containers whose logs are included. |
 
-**Agent <=v7.19** では、環境変数 `DD_AC_INCLUDE` と `DD_AC_EXCLUDE` を使用して、イメージまたは名前でコンテナを含めたり除外したりできます。これらの環境変数は、それ以降の Agent のバージョンでは非推奨です。
+In **Agent <=v7.19**, use the environment variables `DD_AC_INCLUDE` and `DD_AC_EXCLUDE` to include or exclude a container by image or name. These environment variables are deprecated in later Agent versions.
 
-{{% /tab %}}
-{{% tab "ホスト Agent" %}}
+Each inclusion or exclusion is defined as a list of space-separated regex strings. You can include or exclude containers based on their name (`name`), image name (`image`), or Kubernetes namespace (`kube_namespace`).
 
-| 環境変数 | 説明 |
-| ------------ | ----------- |
-| `container_exclude` | 除外するコンテナのブロックリスト。 |
-| `container_exclude_metrics` | メトリクスが除外されるコンテナのブロックリスト。Agent v7.20+ でサポートされています。 |
-| `container_exclude_logs` | ログが除外されるコンテナのブロックリスト。Agent v7.20+ でサポートされています。 |
-| `container_include` | 含めるコンテナのブロックリスト。 |
-| `container_include_metrics` | メトリクスが含まれるコンテナのブロックリスト。Agent v7.20+ でサポートされています。 |
-| `container_include_logs` | ログが含まれるコンテナのブロックリスト。Agent v7.20+ でサポートされています。 |
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## 使用方法
-
-### 値の定義
-
-{{< tabs >}}
-{{% tab "Containerized Agent" %}}
-それぞれの包含または除外は、スペースで区切られた正規表現文字列のリストとして定義されます。コンテナの名前 (`name`)、イメージ名 (`image`)、Kubernetes ネームスペース (`kube_namespace`) に基づいて、コンテナを包含または除外できます。
-
-#### 例
-`dd-agent` という名前のコンテナを除外するには
+#### Examples
+To exclude the container with the name `dd-agent`:
 
 ```
 DD_CONTAINER_EXCLUDE = "name:^dd-agent$"
 ```
 
-イメージ名が `dockercloud/network-daemon` と `dockercloud/logrotate` の 2 つのコンテナを除外するには
+To exclude two containers with the image names `dockercloud/network-daemon` and `dockercloud/logrotate`:
 
 ```
 DD_CONTAINER_EXCLUDE = "image:^dockercloud/network-daemon$ image:^dockercloud/logrotate$"
 ```
 
-すべてのコンテナを除外するには
+To exclude every container:
 
 ```
 DD_CONTAINER_EXCLUDE = "name:.*"
 ```
 
-また、`image:.*` または `kube_namespace:.*` を使用することもできます。`name:`、`image:`、`kube_namespace:` のプレフィックスを付けずに `.*` を構成しても動作しません。
-{{% /tab %}}
-{{% tab "Host Agent" %}}
-それぞれの包含または除外は、スペースで区切られた正規表現文字列のリストとして定義されます。コンテナの名前 (`name`)、イメージ名 (`image`)、Kubernetes ネームスペース (`kube_namespace`) に基づいて、コンテナを包含または除外できます。
+Alternatively, you can also use `image:.*` or `kube_namespace:.*`. Configuring `.*` without a `name:`, `image:`, or `kube_namespace:` prefix does not work.
 
-#### 例
-`dd-agent` という名前のコンテナを除外するには
+### Inclusion and exclusion behavior
 
-```
-container_exclude: [name:^dd-agent$]
-```
-
-イメージ名が `dockercloud/network-daemon` と `dockercloud/logrotate` の 2 つのコンテナを除外するには
-
-```
-container_exclude: [image:^dockercloud/network-daemon$ image:^dockercloud/logrotate$]
-```
-
-すべてのコンテナを除外するには
-
-```
-container_exclude: [name:.*]
-```
-
-また、`image:.*` または `kube_namespace:.*` を使用することもできます。`name:`、`image:`、`kube_namespace:` のプレフィックスを付けずに `.*` を構成しても動作しません。
-{{% /tab %}}
-{{< /tabs >}}
-### 包含動作と除外動作
-
-{{< tabs >}}
-{{% tab "Containerized Agent" %}}
-包含は除外よりも優先されます。例えば、`ubuntu` や `debian` のイメージだけを監視したい場合は、まず他のイメージをすべて除外してから、どのイメージを含めるかを指定します。
+Inclusion takes precedence over exclusion. For example, to only monitor `ubuntu` or `debian` images, first exclude all other images and then specify which images to include:
 
 ```
 DD_CONTAINER_EXCLUDE = "image:.*"
 DD_CONTAINER_INCLUDE = "image:ubuntu image:debian"
 ```
 
-カテゴリーをまたがる包含/除外ルールを混在させることはできません。例えば、イメージ名 `foo` を持つコンテナを含めて、イメージ名 `bar` を持つコンテナのメトリクスのみを除外したい場合、以下のようにすると**不十分**です。
+You cannot mix cross-category inclusion/exclusion rules. For instance, if you want to include a container with the image name `foo` and exclude only metrics from a container with the image name `bar`, the following is **not sufficient**:
 
 ```
 DD_CONTAINER_EXCLUDE_METRICS = "image:^bar$"
 DD_CONTAINER_INCLUDE = "image:^foo$"
 ```
 
-代わりに、以下を使用します。
+Instead, use:
 
 ```
 DD_CONTAINER_EXCLUDE_METRICS = "image:^bar$"
@@ -128,43 +89,15 @@ DD_CONTAINER_INCLUDE_METRICS = "image:^foo$"
 DD_CONTAINER_INCLUDE_LOGS = "image:^foo$"
 ```
 
-グローバルリストと選択リスト (ログとメトリクス) の間には相互作用はありません。つまり、コンテナをグローバルに除外して (`DD_CONTAINER_EXCLUDE`)、そのコンテナを `DD_CONTAINER_INCLUDE_LOGS` と `DD_CONTAINER_INCLUDE_METRICS` で含めることはできません。
+There is no interaction between the global lists and the selective (logs and metrics) lists. In other words, you cannot exclude a container globally (`DD_CONTAINER_EXCLUDE`) and then include it with `DD_CONTAINER_INCLUDE_LOGS` and `DD_CONTAINER_INCLUDE_METRICS`.
 
-{{% /tab %}}
-{{% tab "Host Agent" %}}
-包含は除外よりも優先されます。例えば、`ubuntu` や `debian` のイメージだけを監視したい場合は、まず他のイメージをすべて除外してから、どのイメージを含めるかを指定します。
-
-```
-container_exclude: [image:.*]
-container_include: [image:ubuntu image:debian]
-```
-
-カテゴリーをまたがる包含/除外ルールを混在させることはできません。例えば、イメージ名 `foo` を持つコンテナを含めて、イメージ名 `bar` を持つコンテナのメトリクスのみを除外したい場合、以下のようにすると**不十分**です。
-
-```
-container_exclude_metrics: [image:^bar$]
-container_include: [image:^foo$]
-```
-
-代わりに、以下を使用します。
-
-```
-container_exclude_metrics: [image:^bar$]
-container_include_metrics: [image:^foo$]
-container_include_logs: [image:^foo$]
-```
-
-グローバルリストと選択リスト (ログとメトリクス) の間には相互作用はありません。つまり、コンテナをグローバルに除外して (`container_exclude`)、そのコンテナを `container_include_logs` と `container_include_metrics` で含めることはできません。
-{{% /tab %}}
-{{< /tabs >}}
-
-### 環境変数を設定する
+### Setting environment variables
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Datadog Operator で、これらの環境変数を `spec.override.nodeAgent.env` の下に設定します。
+In Datadog Operator, set these environment variables under `spec.override.nodeAgent.env`.
 
-##### 例
+##### Example
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -177,48 +110,163 @@ spec:
       apiKey: <DATADOG_API_KEY>
   override:
     nodeAgent:
-    env:
+      env:
       - name: DD_CONTAINER_EXCLUDE
         value: "image:<IMAGE_NAME>"
 ```
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Helm チャートの `datadog.containerExclude`、`datadog.containerInclude`、`datadog.containerExcludeLogs`、`datadog.containerIncludeLogs`、`datadog.containerExcludeMetrics`、`datadog.containerIncludeMetrics` にスペース区切りの文字列を指定します。また、`excludePauseContainer` を `true` または `false` に設定することもできます。
+In your Helm chart, supply a space-separated string to `datadog.containerExclude`, `datadog.containerInclude`, `datadog.containerExcludeLogs`, `datadog.containerIncludeLogs`, `datadog.containerExcludeMetrics`, or `datadog.containerIncludeMetrics`.
 
-##### 例
+##### Example
 
 ```yaml
 datadog:
   containerExclude: "image:<IMAGE_NAME_1> image:<IMAGE_NAME_2>"
   containerInclude: "image:<IMAGE_NAME_3> image:<IMAGE_NAME_4>"
-  excludePauseContainer: true
 ```
 
 {{% /tab %}}
-{{% tab "Host Agent" %}}
-[Agent の `datadog.yaml` コンフィグレーションファイル][1]に環境変数を設定します。
+{{% tab "Containerized Agent" %}}
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
+
+##### Example Docker
+```shell
+docker run -e DD_CONTAINER_EXCLUDE=image:<IMAGE_NAME> ...
+```
+
+##### Example ECS
+```json
+"environment": [
+  {
+    "name": "DD_CONTAINER_EXCLUDE",
+    "value": "image:<IMAGE_NAME>"
+  },
+  ...
+]
+```
+
 {{% /tab %}}
 {{< /tabs >}}
 
-## Pause コンテナ
+#### Pause containers
 
-Datadog Agent は、デフォルトで Kubernetes や OpenShift の Pause コンテナを除外しますが、除外コンテナのようなコンテナ数にはカウントされます。
+The Datadog Agent excludes Kubernetes and OpenShift pause containers by default. This prevents their metric collection and counting as billable containers. They are still counted in the container count metrics such as `kubernetes.containers.running` and `docker.containers.running`.
 
-この動作を無効にし、一時停止コンテナをオートディスカバリーの境界に含めるには
+To disable this behavior and include monitoring the pause containers:
 
 {{< tabs >}}
-{{% tab "Containerized Agent" %}}
-`DD_EXCLUDE_PAUSE_CONTAINER` を `false` に設定します。
+{{% tab "Datadog Operator" %}}
+
+In Datadog Operator, set these environment variables under `spec.override.nodeAgent.env`.
+
+##### Example
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+  override:
+    nodeAgent:
+      env:
+      - name: DD_EXCLUDE_PAUSE_CONTAINER
+        value: "false"
+```
 {{% /tab %}}
-{{% tab "Host Agent" %}}
-`exclude_pause_container` を `false` に設定します。
+{{% tab "Helm" %}}
+
+In your Helm chart, set `datadog.excludePauseContainer` to `true` or `false`.
+
+##### Example
+
+```yaml
+datadog:
+  containerExclude: "image:<IMAGE_NAME_1> image:<IMAGE_NAME_2>"
+  containerInclude: "image:<IMAGE_NAME_3> image:<IMAGE_NAME_4>"
+  excludePauseContainer: false
+```
+
+{{% /tab %}}
+{{% tab "Containerized Agent" %}}
+
+In environments where you are not using Helm or the Operator, the following environment variables can be passed to the Agent container at startup.
+
+Set `DD_EXCLUDE_PAUSE_CONTAINER` to `false`.
 {{% /tab %}}
 {{< /tabs >}}
-## その他の参考資料
+
+## Pod exclude configuration
+
+In **Agent v7.45+** you can set annotations on your Kubernetes pods to control Autodiscovery. Set the following annotations with the value `"true"` to add exclusion rules.
+
+| Annotation | Description |
+| ------------ | ----------- |
+| `ad.datadoghq.com/exclude` | Excludes the entire pod |
+| `ad.datadoghq.com/logs_exclude` | Excludes log collection from the entire pod |
+| `ad.datadoghq.com/metrics_exclude` | Excludes metric collection from the entire pod |
+| `ad.datadoghq.com/<CONTAINER_NAME>.exclude` | Excludes the container with `<CONTAINER_NAME>` in the pod |
+| `ad.datadoghq.com/<CONTAINER_NAME>.logs_exclude` | Excludes log collection from the container with `<CONTAINER_NAME>` in the pod |
+| `ad.datadoghq.com/<CONTAINER_NAME>.metrics_exclude` | Excludes metric collection from the container with `<CONTAINER_NAME>` in the pod |
+
+#### Exclude the entire pod:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example
+spec:
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/exclude: "true"
+    spec:
+      containers:
+        #(...)
+```
+
+#### Exclude log collection from a container:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example
+spec:
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/helper.logs_exclude: "true"
+    spec:
+      containers:
+        - name: app
+          #(...)
+        - name: helper
+          #(...)
+```
+
+### Tolerate unready pods
+
+By default, `unready` pods are ignored when the Datadog Agent schedules checks. Therefore, metrics, service checks, and logs are not collected from these pods. To override this behavior, set the annotation `ad.datadoghq.com/tolerate-unready` to `"true"`. For example:
+
+```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/tolerate-unready: "true"
+  ...
+```
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /containers/kubernetes/log/?tab=helm#log-collection

@@ -1,3 +1,3 @@
 ---
-title: GCP インテグレーション
+title: GCP Integration
 ---

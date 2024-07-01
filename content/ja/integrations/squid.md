@@ -1,101 +1,102 @@
 ---
-app_id: squid
-app_uuid: de18c581-69ee-48cf-ba23-7794bfb7a4bd
-assets:
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: squid.cachemgr.cpu_time
-      metadata_path: metadata.csv
-      prefix: squid.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Squid
-  logs:
-    source: squid
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- caching
-- log collection
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/squid/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: squid
-integration_id: squid
-integration_title: Squid
-integration_version: 2.3.1
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: squid
-public_title: Squid
-short_description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
-supported_os:
-- linux
-- windows
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::キャッシュ
-  - Category::ログの収集
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Squid
+"app_id": "squid"
+"app_uuid": "de18c581-69ee-48cf-ba23-7794bfb7a4bd"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "squid.cachemgr.cpu_time"
+      "metadata_path": "metadata.csv"
+      "prefix": "squid."
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "10022"
+    "source_type_name": "Squid"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "caching"
+- "log collection"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/squid/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "squid"
+"integration_id": "squid"
+"integration_title": "Squid"
+"integration_version": "2.5.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "squid"
+"public_title": "Squid"
+"short_description": "Track metrics from your squid-cache servers with Datadog"
+"supported_os":
+- "linux"
+- "windows"
+- "macos"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Caching"
+  - "Category::Log Collection"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": "Track metrics from your squid-cache servers with Datadog"
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Squid"
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このチェックは、Datadog Agent を通してキャッシュマネージャーから取得された [Squid][1] メトリクスを監視します。
+This check monitors [Squid][1] metrics from the Cache Manager through the Datadog Agent.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-Agent の Squid チェックは [Datadog Agent][2] パッケージに含まれています。Squid サーバーに追加でインストールする必要はありません。
+The Agent's Squid check is included in the [Datadog Agent][2] package. No additional installation is needed on your Squid server.
 
-### コンフィギュレーション
+### Configuration
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### ホスト
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+To configure this check for an Agent running on a host:
 
-##### メトリクスの収集
+##### Metric collection
 
-1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `squid.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル squid.d/conf.yaml][2] を参照してください。
+1. Edit the `squid.d/conf.yaml`, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample squid.d/conf.yaml][2] for all available configuration options.
 
-2. [Agent を再起動します][3]。
+2. [Restart the Agent][3].
 
-##### ログの収集
+##### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
 
    ```yaml
    logs_enabled: true
    ```
 
-2. `squid.d/conf.yaml` の下部にある、コンフィギュレーションブロックのコメントを解除して編集します。
+2. Uncomment and edit this configuration block at the bottom of your `squid.d/conf.yaml` file:
 
    ```yaml
    logs:
@@ -109,68 +110,68 @@ _Agent バージョン 6.0 以降で利用可能_
        source: squid
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
+    Change the `path` and `service` parameter values and configure them for your environment.
 
-3. [Agent を再起動します][3]。
+3. [Restart the Agent][3].
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/squid/datadog_checks/squid/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-##### メトリクスの収集
+##### Metric collection
 
-| パラメーター            | 値                                                                  |
+| Parameter            | Value                                                                  |
 | -------------------- | ---------------------------------------------------------------------- |
-| `<インテグレーション名>` | `squid`                                                                |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                          |
-| `<インスタンスコンフィギュレーション>`  | `{"name": "<SQUID_INSTANCE_NAME>", "host": "%%host%%", "port":"3128"}` |
+| `<INTEGRATION_NAME>` | `squid`                                                                |
+| `<INIT_CONFIG>`      | blank or `{}`                                                          |
+| `<INSTANCE_CONFIG>`  | `{"name": "<SQUID_INSTANCE_NAME>", "host": "%%host%%", "port":"3128"}` |
 
-##### ログの収集
+##### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
 
-| パラメーター      | 値                                               |
+| Parameter      | Value                                               |
 | -------------- | --------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "squid", "service": "<YOUR_APP_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションで `squid` を探します。
+[Run the Agent's status subcommand][3] and look for `squid` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "squid" >}}
 
 
-### イベント
+### Events
 
-Squid チェックには、イベントは含まれません。
+The Squid check does not include any events.
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "squid" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
 
 
 [1]: http://www.squid-cache.org/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[4]: https://docs.datadoghq.com/help/

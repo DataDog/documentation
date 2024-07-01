@@ -1,44 +1,44 @@
 ---
+title: Events with DogStatsD
+kind: guide
+description: Overview of the features of DogStatsD, including data types and tagging.
 aliases:
-- /ja/developers/events/dogstatsd/
-- /ja/events/guides/dogstatsd
-description: データタイプ、タグ付けなど、DogStatsD の機能の概要
+- /developers/events/dogstatsd/
+- /events/guides/dogstatsd
 further_reading:
 - link: /developers/dogstatsd/
   tag: Documentation
-  text: DogStatsD 入門
+  text: Introduction to DogStatsD
 - link: /developers/community/libraries/
   tag: Documentation
-  text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-kind: ガイド
-title: DogStatsD によるイベント
+  text: Official and Community created API and DogStatsD client libraries
 ---
 
-## 送信
+## Submission
 
-[DogStatsD をインストール][1]した後、次の関数を使用して [Datadog のイベントエクスプローラー][2]にイベントを送信できます。
+After [installing DogStatsD][1], you can emit events to your [Datadog event explorer][2] with the following function:
 
 ```text
 event(<title>, <message>, <alert_type>, <aggregation_key>, <source_type_name>, <date_happened>, <priority>, <tags>, <hostname>)
 ```
 
-**定義**:
+**Definitions**:
 
-| パラメーター            | タイプ            | 必須 | 説明                                                                                |
+| Parameter            | Type            | Required | Description                                                                                |
 |----------------------|-----------------|----------|--------------------------------------------------------------------------------------------|
-| `<title>`            | 文字列          | はい      | イベントのタイトル                                                                     |
-| `<message>`          | 文字列          | はい      | イベントのテキスト本文                                                                 |
-| `<alert_type>`       | 文字列          | ✕       | `error`、`warning`、`success`、または `info` (デフォルトは `info`)                              |
-| `<aggregation_key>`  | 文字列          | ✕       | イベントを集計するために使用するキー                                                        |
-| `<source_type_name>` | 文字列          | ✕       | ソースタイプ名 (デフォルトは `my_apps`)                                               |
-| `<date_happened>`    | 整数         | ✕       | イベントの Epoch タイムスタンプ (デフォルトで DogStatsD サーバーからの現在時刻が入力されます) |
-| `<priority>`         | 文字列          | ✕       | イベントの優先度を指定します (`normal` または `low`)                                    |
-| `<tags>`             | 文字列のリスト | ✕       | このイベントに関連付けられるタグのリスト                                                  |
-| `<hostname>`         | 文字列          | ✕       | ホストの名前                                                                       |
+| `<title>`            | String          | Yes      | The title of the event                                                                     |
+| `<message>`          | String          | Yes      | The text body of the event                                                                 |
+| `<alert_type>`       | String          | No       | `error`, `warning`, `success`, or `info` (defaults to `info`)                              |
+| `<aggregation_key>`  | String          | No       | A key to use for aggregating events                                                        |
+| `<source_type_name>` | String          | No       | The source type name (defaults to `my_apps`)                                               |
+| `<date_happened>`    | Integer         | No       | The epoch timestamp for the event (defaults to the current time from the DogStatsD server) |
+| `<priority>`         | String          | No       | Specifies the priority of the event (`normal` or `low`)                                    |
+| `<tags>`             | List of strings | No       | A list of tags associated with this event                                                  |
+| `<hostname>`         | String          | No       | The name of the host                                                                       |
 
-### 例
+### Examples
 
-次のコードを実行して、Datadog の DogStatsD イベントのエラーおよび例外を表示します。必要がなくなったら、クライアントを `フラッシュする`/`閉じる` ことを忘れないでください。
+Run the following code to view errors and exceptions in Datadog with a DogStatsD event. Remember to `flush`/`close` the client when it is no longer needed.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -170,7 +170,8 @@ $statsd->event('An error occurred.',
   );
 ```
 
-DogStatsD-PHP ライブラリを使用すると、イベントを TCP を通じて直接 Datadog API に送信できます。速度は遅くなりますが、イベントが UDP を使用してアプリケーションから Agent に転送されるため、Agent の DogStatsD インスタンスを使うよりも信頼性が高くなります。これを使用するには、ローカルの DogStatD インスタンスの代わりに [Datadog API とアプリケーションのキー][1]を使用してライブラリを構成する必要があります。
+With the DogStatsD-PHP library you can submit events through TCP directly to the Datadog API. It's slower but more reliable than using the Agent DogStatsD instance since events are forwarded from your application to the Agent using UDP.
+To use this, you must configure the library with your [Datadog API and application keys][1] instead of the local DogStatS instance:
 
 ```php
 <?php
@@ -198,16 +199,16 @@ $statsd->event('An error occurred.',
 
 {{< /programming-lang-wrapper >}}
 
-**注**:
+**Note**:
 
-* この方法でイベントを送信する場合は、API リクエストに cURL を使用します。
-* Datadog API との通信の問題によって警告やエラーが出るのを避けるために、`try`/`catch` のコード ブロックを使用する必要があります。
+* Sending events with this method uses cURL for API requests.
+* You should use a `try`/`catch` code block to avoid warnings or errors on communication issues with the Datadog API.
 
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/developers/dogstatsd/
-[2]: /ja/service_management/events/
+[1]: /developers/dogstatsd/
+[2]: /service_management/events/

@@ -1,100 +1,101 @@
 ---
-aliases:
-- /ja/integrations/nodejs/
-categories:
-- languages
-- log collection
-- tracing
-dependencies: []
-description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
-doc_link: https://docs.datadoghq.com/integrations/nodejs/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/node-logging-best-practices/
-  tag: ブログ
-  text: Node.js ログを収集、カスタマイズ、一元化する方法
-- link: https://www.datadoghq.com/blog/node-monitoring-apm/
-  tag: ブログ
-  text: Datadog APM と分散型トレーシングを使用した Node.js の監視。
-git_integration_title: node
-has_logo: true
-integration_id: node
-integration_title: NodeJS
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: node
-public_title: Datadog-NodeJS インテグレーション
-short_description: Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。
-version: '1.0'
+"aliases":
+- "/integrations/nodejs/"
+"categories":
+- "languages"
+- "log collection"
+- "tracing"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Send custom metrics from your Node.js services via DogStatsD or our API."
+"doc_link": "https://docs.datadoghq.com/integrations/nodejs/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/node-logging-best-practices/"
+  "tag": "Blog"
+  "text": "How to collect, customize, and centralize Node.js logs"
+- "link": "https://www.datadoghq.com/blog/node-monitoring-apm/"
+  "tag": "Blog"
+  "text": "Node.js monitoring with Datadog APM and distributed tracing"
+"git_integration_title": "node"
+"has_logo": true
+"integration_id": "node"
+"integration_title": "NodeJS"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "node"
+"public_title": "Datadog-NodeJS Integration"
+"short_description": "Send custom metrics from your Node.js services via DogStatsD or our API."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Node.js インテグレーションを利用して、Node.js アプリケーションのログ、トレース、カスタムメトリクスを収集および監視できます。
+The Node.js integration allows you to collect and monitor your Node.js application logs, traces, and custom metrics.
 
-## 計画と使用
+## Setup
 
-### メトリクスの収集
+### Metric collection
 
-Node.js インテグレーションを使用すると、数行のコードのインスツルメンテーションでカスタムメトリクスを監視できます。たとえば、ページビューや関数呼び出しの回数を返すメトリクスを監視できます。
+The Node.js integration enables you to monitor a custom metric by instrumenting a few lines of code. For instance, you can have a metric that returns the number of page views or the time of any function call.
 
-Node.js インテグレーションの詳細については、[メトリクスの送信に関するガイド][1]を参照してください。
+For additional information about the Node.js integration, see the [guide on submitting metrics][1].
 
 ```js
-// dd-trace が必要です
+// Require dd-trace
 const tracer = require('dd-trace').init();
 
-// カウンターをインクリメントします
+// Increment a counter
 tracer.dogstatsd.increment('page.views');
 ```
 
-カスタムメトリクスを動作させるには、Agent で DogStatsD を有効にする必要があることに注意してください。収集はデフォルトで有効になっていますが、Agent は localhost からのメトリクスのみをリッスンします。外部メトリクスを許可するには、環境変数を設定するか、コンフィギュレーションファイルを更新する必要があります。
+Note that for custom metrics to work you need to enable DogStatsD on the Agent. Collection is enabled by default, but the Agent only listens for metrics from localhost. To allow external metrics, you need to either set an environment variable or update the config file:
 
 ```sh
-DD_USE_DOGSTATSD=true # デフォルト
-DD_DOGSTATSD_PORT=8125 # デフォルト
-DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true # 外部メトリクスを期待する場合
+DD_USE_DOGSTATSD=true # default
+DD_DOGSTATSD_PORT=8125 # default
+DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true # if expecting external metrics
 ```
 
 ```yaml
-use_dogstatsd: true # デフォルト
-dogstatsd_port: 8125 # デフォルト
-dogstatsd_non_local_traffic: true # 外部メトリクスを期待する場合
+use_dogstatsd: true # default
+dogstatsd_port: 8125 # default
+dogstatsd_non_local_traffic: true # if expecting external metrics
 ```
 
-Agent の DogStatsD コレクターを使用するようにアプリケーションを構成する必要もあります。
+You'll also need to configure your application to use the agent's DogStatsD collector:
 
 ```sh
 DD_DOGSTATSD_HOSTNAME=localhost DD_DOGSTATSD_PORT=8125 node app.js
 ```
 
-### トレースの収集
+### Trace collection
 
-トレースを Datadog に送信するには、[Node.js アプリケーションのインスツルメンテーション][2]に関するドキュメントを参照してください。
+See the dedicated documentation for [instrumenting your Node.js application][2] for sending traces to Datadog.
 
-### 収集データ
+### Log collection
 
-_Agent v6.0 以上で使用可能_
+_Available for Agent v6.0+_
 
-ログを Datadog に転送するには、[Node.js ログ収集][3]のセットアップに関するドキュメントを参照してください。
+See the dedicated documentation to set up [Node.js log collection][3] for forwarding your logs to Datadog.
 
-### プロファイルの収集
+### Profile collection
 
-[Node.js プロファイラを有効にするための][4]専用ドキュメントをご覧ください。
+See the dedicated documentation for [enabling the Node.js profiler][4].
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs
-[2]: https://docs.datadoghq.com/ja/tracing/setup/nodejs/
-[3]: https://docs.datadoghq.com/ja/logs/log_collection/nodejs/
-[4]: https://docs.datadoghq.com/ja/profiler/enabling/nodejs/
-[5]: https://docs.datadoghq.com/ja/help/
+[1]: https://docs.datadoghq.com/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs
+[2]: https://docs.datadoghq.com/tracing/setup/nodejs/
+[3]: https://docs.datadoghq.com/logs/log_collection/nodejs/
+[4]: https://docs.datadoghq.com/profiler/enabling/nodejs/
+[5]: https://docs.datadoghq.com/help/
+

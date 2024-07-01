@@ -1,3 +1,3 @@
 ---
-title: 制限ポリシー
+title: Restriction Policies
 ---

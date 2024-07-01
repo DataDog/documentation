@@ -1,35 +1,24 @@
 ---
+title: Writing Custom Rules with Rego
 aliases:
-- /ja/security_platform/cloud_security_management/guide/writing_rego_rules/
+  - /security_platform/cloud_security_management/guide/writing_rego_rules/
 further_reading:
 - link: /security/default_rules
-  tag: ドキュメント
-  text: デフォルトの Posture Management クラウド構成検出ルールを調べる
-- link: /security/misconfigurations/frameworks_and_benchmarks
-  tag: ガイド
-  text: フレームワークおよび業界のベンチマークの詳細
+  tag: Documentation
+  text: Explore default Posture Management cloud configuration detection rules
+- link: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
+  tag: Guide
+  text: Learn about frameworks and industry benchmarks
 is_beta: true
-title: Rego によるカスタムルールの作成
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations は、選択したサイトではご利用いただけません。
-</div>
-{{< /site-region >}}
+## Overview
 
-{{< callout url="#" btn_hidden="true">}}
-カスタムルールの作成は、すべての Cloud Security Management Misconfigurations (CSM Misconfigurations) のお客様が利用できるベータ版機能です。フィードバックやご質問は、<a href="/help">Datadog サポート</a>までご連絡ください。
-{{< /callout >}} 
+Open Policy Agent (OPA) provides [Rego][1], an open source policy language with versatile resource inspection features for determining cloud security posture. In Datadog, you can write custom rules with Rego to control the security of your infrastructure. 
 
+## The template module
 
-## 概要
-
-Open Policy Agent (OPA) は、クラウドのセキュリティポスチャを決定するための多彩なリソース検査機能を備えたオープンソースのポリシー言語である [Rego][1] を提供しています。Datadog では、Rego を使用してカスタムルールを記述し、インフラストラクチャーのセキュリティを制御することができます。
-
-## テンプレートモジュール
-
-ルールの定義は、[モジュール][3]の内部で定義された Rego [ポリシー][2]から始まります。CSM Misconfigurations では、以下のようなモジュールテンプレートを使用して、ルールの記述を簡素化しています。
+Defining a rule starts with a Rego [policy][2], defined inside a [module][3]. CSM Misconfigurations uses a module template like the one below to simplify writing rules:
 
 ```python
 package datadog
@@ -41,14 +30,14 @@ import future.keywords.if
 import future.keywords.in
 
 eval(resource_type) = "skip" if {
-    # リソースをスキップする場合に true と評価されるロジック
+    # Logic that evaluates to true if the resource should be skipped
 } else = "pass" {
-    # リソースが準拠している場合に true と評価されるロジック
+    # Logic that evaluates to true if the resource is compliant
 } else = "fail" {
-    # リソースが非準拠の場合に true と評価されるロジック
+    # Logic that evaluates to true if the resource is not compliant
 }
 
-# この部分は、すべてのルールで変更されません
+# This part remains unchanged for all rules
 results contains result if {
     some resource in input.resources[input.main_resource_type]
     result := dd_output.format(resource, eval(resource))
@@ -56,11 +45,11 @@ results contains result if {
 
 ```
 
-このモジュールの各パーツをよく見て、その仕組みを理解してください。
+Take a close look at each part of this module to understand how it works.
 
-### インポートステートメント
+### Import statements
 
-最初の行は `package datadog` という宣言を含んでいます。[パッケージ][4]は Rego のモジュールを一つのネームスペースにグループ化し、モジュールを安全にインポートすることを可能にします。現在のところ、ユーザーモジュールのインポートはカスタムルールの機能ではありません。すべてのポスチャ管理ルールは、`datadog` ネームスペースの下にまとめられています。結果を正しく返すために、ルールは `package datadog` ネームスペースの下にグループ化してください。
+The first line contains the declaration `package datadog`. A [package][4] groups Rego modules into a single namespace, allowing modules to be imported safely. Currently, importing user modules is not a feature of custom rules. All posture management rules are grouped under the `datadog` namespace. For your results to be returned properly, group your rules under the `package datadog` namespace. 
 
 ```python
 import future.keywords.contains
@@ -68,17 +57,17 @@ import future.keywords.if
 import future.keywords.in
 ```
 
-次の 3 つのステートメントは、OPA が提供するキーワード [`contains`][5]、[`if`][6]、[`in`][7] をインポートしています。これらのキーワードは、可読性を高めるために、より表現力豊かな構文でルールを定義することを可能にします。**注:** `import future.keywords` で全てのキーワードをインポートすることは[推奨しません][8]。
+The next three statements import the OPA-provided keywords [`contains`][5], [`if`][6], and [`in`][7]. These keywords allow defining rules with more expressive syntax to improve readability. **Note:** Importing all keywords with `import future.keywords` is [not recommended][8].
 
 ```python
 import data.datadog.output as dd_output
 ```
 
-次の行では、Datadog のヘルパーメソッドをインポートして、Datadog のポスチャ管理システムの仕様に合わせて結果をフォーマットしています。`datadog.output` は Rego モジュールで、最初の引数にリソース、2 番目の引数にリソースの検査結果を表す `pass`、`fail`、`skip` という文字列を指定するフォーマットメソッドを持っています。
+The next line imports the Datadog helper method, which formats your results to the specifications of the Datadog posture management system. `datadog.output` is a Rego module with a format method that expects your resource as the first argument, and a string, `pass`, `fail`, or `skip` as the second argument, describing the outcome of the inspection of your resource.
 
-### ルール
+### Rules
 
-インポートステートメントの後に、テンプレートモジュールの最初のルールが来ます。
+After the import statements comes the first rule in the template module:
 
 ```python
 eval(resource) = "skip" if {
@@ -90,7 +79,7 @@ eval(resource) = "skip" if {
 }
 ```
 
-ルールはリソースを評価し、リソースの状態に応じて結果を文字列として提供します。`pass`、`fail`、`skip` の順番は、必要に応じて変更することができます。上記のルールでは、リソースに `skip_me` と `should_pass` が false または存在しない場合、 `fail` がデフォルトとして設定されています。また、`pass` をデフォルトにすることもできます。
+The rule evaluates the resource, and provides the outcome as a string depending on the state of the resource. You can change the order of `pass`, `fail`, and `skip` according to your needs. The rule above has `fail` as a default, if `skip_me` and `should_pass` are false or nonexistent in your resource. Alternatively, you can make `pass` the default: 
 
 ```python
 eval(resource) = "skip" if {
@@ -102,25 +91,25 @@ eval(resource) = "skip" if {
 }
 ```
 
-### 結果
+### Results
 
-テンプレートモジュールの最後のセクションは、結果のセットを構築します。
+The final section of the template module builds your set of results:
 
 ```python
-# この部分は、すべてのルールで変更されません
+# This part remains unchanged for all rules
 results contains result if {
     some resource in input.resources[input.main_resource_type]
     result := dd_output.format(resource, eval(resource))
 }
 ```
 
-このセクションでは、メインリソースタイプからすべてのリソースを通過させ、それらを評価します。これは、ポスチャ管理システムで処理される結果の配列を作成します。[some][9] キーワードはローカル変数 `resource` を宣言し、これはメインリソースの配列から取得されます。`eval` ルールは各リソースに対して実行され、`pass`、`fail`、または `skip` を返します。`dd_output.format` ルールは、リソースと評価結果をクラウドセキュリティで処理できるように正しくフォーマットします。
+This section passes through all resources from the main resource type and evaluates them. It creates an array of results to be processed by the posture management system. The [some][9] keyword declares the local variable `resource`, which comes from the array of main resources. The `eval` rule is executed on every resource, returning a `pass`, `fail`, or `skip`. The `dd_output.format` rule formats the resource and evaluation correctly to be processed by cloud security.
 
-ポリシーのこのセクションは、変更する必要はありません。代わりに、ルールの複製時に **Choose your main resource type** ドロップダウンでメインリソースの種類を選択すると、ポリシーのこのセクションに挿入されます。また、`some_resource_type` を `gcp_iam_policy` など、選択したメインリソースの種類に置き換えて、`input.resources.some_resource_type` を通じてリソースの配列にアクセスすることができます。
+This section of the policy does not need to be modified. Instead, when you select your main resource type in the **Choose your main resource type** dropdown when cloning rules, it is inserted in this section of the policy. You can also access the array of your resources through `input.resources.some_resource_type`, replacing `some_resource_type` with the main resource type that you chose, for example, `gcp_iam_policy`.
 
-## その他のルールの書き方
+## Other ways to write rules
 
-このテンプレートは、カスタムルールを書き始めるのに役立ちます。このテンプレートに従わなければならないわけではありません。既存のデフォルトルールを複製することもできますし、ゼロから独自のルールを作成することもできます。ただし、ポスチャ管理システムが結果を解釈するためには、Rego モジュールの中で `results` という名前で、次のようなフォーマットで記述する必要があります。
+The template helps you start writing custom rules. You aren't required to follow it. You can instead clone an existing default rule, or you write your own rule from scratch. However, for the posture management system to interpret your results, they must be called `results` in your Rego module and be formatted as follows:
 
 ```json
 [
@@ -132,9 +121,9 @@ results contains result if {
 ]
 ```
 
-## より複雑なルール 
+## More complex rules 
 
-上記のルール例では、リソースに含まれる `should_pass` のような基本的な真偽フラグを評価します。論理的な `OR` を表現するルールを考えてみましょう。例:
+The above rule example evaluates basic true or false flags like `should_pass` in your resource. Consider a rule that expresses a logical `OR`, for example:
 
 ```python
 bad_port_range(resource) {
@@ -146,7 +135,7 @@ bad_port_range(resource) {
 }
 ```
 
-このルールは、`port` が `100` と `200` の間、または `300` と `400` の間である場合に true と評価されます。このために、`eval` ルールを以下のように定義します。
+This rule evaluates to true if the `port` is between `100` and `200`, or between `300` and `400`, inclusive. For this, you can define your `eval` rule as follows:
 
 ```python
 eval(resource) = "skip" if {
@@ -158,11 +147,11 @@ eval(resource) = "skip" if {
 }
 ```
 
-これは、リソースに `port` 属性がない場合はスキップし、2 つの "bad" 範囲のいずれかに当てはまる場合は失敗します。
+This skips the resource if it has no `port` attribute, and fails it if it falls within one of the two "bad" ranges. 
 
-ルールの中で、複数のリソースタイプを調べたい場合があります。これを行うには、**Advanced Rule Options** のドロップダウンで、いくつかの関連するリソースタイプを選択します。関連リソースの配列には、`input.resources.related_resource_type` を使ってアクセスできます (`related_resource_type` は、アクセスしたい関連リソースに置き換えてください)。
+Sometimes you want to examine more than one resource type in your rule. To do this, you can select some related resource types in the dropdown under **Advanced Rule Options**. You can then access the arrays of related resources through `input.resources.related_resource_type`, replacing `related_resource_type` with whatever related resource you would like to access.
 
-複数のリソースタイプに対してポリシーを記述する場合、各メインリソースに対して関連するリソースタイプのすべてのインスタンスをループするのは時間がかかる場合があります。次の例を見てみましょう。
+When writing a policy for more than one resource type, it can be time consuming to loop through all instances of a related resource type for each main resource. Take the following example:
 
 ```python
 eval(iam_service_account) = "fail" if {
@@ -173,16 +162,16 @@ eval(iam_service_account) = "fail" if {
     true
 }
 
-# この部分は、すべてのルールで変更されません
+# This part remains unchanged for all rules
 results contains result if {
     some resource in input.resources[input.main_resource_type]
     result := dd_output.format(resource, eval(resource))
 }
 ```
 
-このルールは、`gcp_iam_service_account_key` のインスタンスが `gcp_iam_service_account` (メインリソースの種類として選択したリソース) にマッチし、ユーザーが管理しているものがあるかどうかを判断します。サービスアカウントがユーザー管理されているキーを持っている場合、`fail` という結果が出ます。`eval` ルールはすべてのサービスアカウントに対して実行され、すべてのサービスアカウントのキーをループしてアカウントにマッチするものを探します。その結果、計算量は `O(MxN)` となります。ここで、M はサービスアカウント数、N はサービスアカウントキーの数です。
+This rule determines whether there are any instances of `gcp_iam_service_account_key` that are user managed and match to a `gcp_iam_service_account` (the resource selected as the main resource type). If the service account has a key that is user managed, it produces a `fail` result. The `eval` rule is executed on every service account, and loops through every service account key to find one that matches the account, resulting in a complexity of `O(MxN)`, where M is the number of service accounts and N is the number of service account keys. 
 
-時間計算量を大幅に改善するために、ユーザーが管理するキー親の[集合][10]を[集合内包][11]で構築します。
+To improve the time complexity significantly, build a [set][10] of key parents that are user managed with a [set comprehension][11]:
 
 ```python
 user_managed_keys_parents := {key_parent |
@@ -192,7 +181,7 @@ user_managed_keys_parents := {key_parent |
 }
 ```
 
-サービスアカウントーにユーザが管理するキーがあるかどうかを調べるには、`O(1)` 時間に集合をクエリしてください。
+To find out if your service account has a user managed key, query the set in `O(1)` time:
 
 ```python
 eval(iam_service_account) = "fail" if {
@@ -202,13 +191,13 @@ eval(iam_service_account) = "fail" if {
 }
 ```
 
-新しい時間計算量は `O(M+N)` です。Rego は集合、オブジェクト、配列の[内包][12]を提供し、クエリを作成するための[複合値][13]の構築を支援します。
+The new time complexity is `O(M+N)`. Rego provides set, object, and array [comprehensions][12] to help you build [composite values][13] to query.
 
-## 詳細はこちら
+## Find out more
 
-ルール、モジュール、パッケージ、内包の詳細や、カスタムルールの書き方については、 [Rego ドキュメント][2]を参照してください。
+Read the [Rego documentation][2] for more context around rules, modules, packages, comprehensions, and for specific guidance around writing custom rules.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

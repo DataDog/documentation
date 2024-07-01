@@ -1,4 +1,4 @@
 ---
 title: No Data
 ---
-No Data は、インテグレーションやアプリケーションが Datadog にメトリクスを送信していない状態です。
+No Data is when an integration or application is no longer submitting metrics to Datadog. 

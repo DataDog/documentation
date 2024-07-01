@@ -1,24 +1,23 @@
 ---
+title: trace metric
 core_product:
-- apm
-title: トレースメトリクス
+  - apm
 ---
-トレースメトリクスは自動的に収集され、他の [Datadog メトリクス][1]と同様の 15 か月の保持ポリシーで保持されます。これを使用して、ヒット、エラー、またはレイテンシーを特定し、アラートを発信することができます。統計およびメトリクスは、常にすべてのトレースに基づき算出されるため、Ingestion controls による影響を受けません。
+Trace metrics are automatically collected and kept with a 15-month retention policy similar to any other [Datadog metric][1]. They can be used to identify and alert on hits, errors, or latency. Statistics and metrics are always calculated based on all traces, and are not impacted by ingestion controls.
 
-トレースメトリクスは、トレースを受信するホストによって、サービスやリソースとともにタグ付けされます。例えば、Web サービスをインスツルメンテーションした後、トレースメトリクスは [**Metrics** > **Summary**][2] のエントリポイントのスパン `web.request` に対して収集されます。
+Trace metrics are tagged by the host receiving traces along with the service or resource. For example, after instrumenting a web service trace metrics are collected for the entry-point span `web.request` on the [**Metrics Summary** page][2].
 
-{{< img src="tracing/visualization/trace_metrics.mp4" video="true" alt="トレースメトリクス" >}}
+{{< img src="tracing/visualization/trace_metrics.mp4" video="true" alt="trace metrics" >}}
 
-トレースメトリクスは、**Service** または **Resource** ページからダッシュボードにエクスポートできます。さらに、既存のダッシュボードからトレースメトリクスを照会できます。
+Trace metrics can be exported to a dashboard from the **Service** or **Resource** page. Additionally, trace metrics can be queried from an existing dashboard.
 
-{{< img src="tracing/visualization/trace_metric_dashboard.mp4" video="true" alt="トレースメトリクスダッシュボード" >}}
+{{< img src="tracing/visualization/trace_metric_dashboard.mp4" video="true" alt="trace metrics dashboard" >}}
 
-トレースメトリクスは、監視に役立ちます。APM モニターは、[New Monitors][3]、[Service][4]、または [Resource][5] ページで設定できます。推奨されるモニターのセットは、[Service][4] または [Resource][5] ページで利用できます。
+Trace metrics are useful for monitoring. APM monitors can be set up on the [New Monitors][3], [Service][4], or [Resource][5] page. A set of suggested monitors is available on the [Service][4] or [Resource][5] page.
 
-{{< img src="tracing/visualization/trace_metric_monitor.mp4" video="true" alt="トレースメトリクスモニター" >}}
 
-[1]: /ja/developers/guide/data-collection-resolution-retention/
+[1]: /developers/guide/data-collection-resolution-retention/
 [2]: https://app.datadoghq.com/metric/summary
 [3]: https://app.datadoghq.com/monitors
-[4]: /ja/tracing/services/service_page/
-[5]: /ja/tracing/services/resource_page/
+[4]: /tracing/services/service_page/
+[5]: /tracing/services/resource_page/

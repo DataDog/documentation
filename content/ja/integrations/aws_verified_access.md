@@ -1,101 +1,105 @@
 ---
-categories:
-- クラウド
-- AWS
-- ログの収集
-dependencies: []
-description: AWS Verified Access ログを収集します。
-doc_link: https://docs.datadoghq.com/integrations/aws_verified_access/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/verified-access-datadog/
-  tag: ブログ
-  text: AWS Verified Access と Datadog による企業アプリケーションのセキュリティ強化
-git_integration_title: aws_verified_access
-has_logo: true
-integration_id: amazon-verified-access
-integration_title: AWS Verified Access
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: aws_verified_access
-public_title: Datadog-AWS Verified Access インテグレーション
-short_description: AWS Verified Access ログを収集します。
-version: '1.0'
+"aliases":
+- /integrations/amazon_verified_access
+"categories":
+- cloud
+- aws
+- log collection
+"custom_kind": "integration"
+"dependencies": []
+"description": "Collect AWS Verified Access logs."
+"doc_link": "https://docs.datadoghq.com/integrations/aws_verified_access/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/verified-access-datadog/"
+  "tag": Blog
+  "text": Enhance corporate application security with AWS Verified Access and Datadog
+"git_integration_title": "aws_verified_access"
+"has_logo": true
+"integration_id": "amazon-verified-access"
+"integration_title": "AWS Verified Access"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "aws_verified_access"
+"public_title": "Datadog-AWS Verified Access Integration"
+"short_description": "Collect AWS Verified Access logs."
+"version": "1.0"
 ---
 
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+## Overview
 
-AWS Verified Access を使用すると、仮想プライベートネットワーク (VPN) の使用を必要とせずに、企業のアプリケーションへの安全なアクセスを提供することができます。Verified Access は、各アプリケーションのリクエストを評価し、指定されたセキュリティ要件を満たした場合にのみ、ユーザーが各アプリケーションにアクセスできるようにすることを支援します。
+With AWS Verified Access, you can provide secure access to your corporate applications without requiring the use of a virtual private network (VPN). Verified Access evaluates each application request and helps ensure that users can access each application only when they meet the specified security requirements.
 
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][1] first.
 
-### ログの収集
+### Log collection
 
-#### Verified Access ログを有効にする
+#### Enable Verified Access logs
 
-1. Amazon VPC のコンソールを開く
-2. ナビゲーションペインで、**Verified Access instances** を選択します。
-3. Verified Acccess インスタンスを選択します。
-4. Verified Access インスタンスロギング構成タブで、**Modify Verified Access instance logging configuration** を選択します。
-5. **Deliver to Amazon Cloudwatch Logs** をオンにします。宛先のロググループを選択します。
+1. Open the Amazon VPC console
+2. In the navigation pane, choose **Verified Access instances**.
+3. Select the Verified Acccess instance.
+4. On the Verified Access instance logging configuration tab, choose **Modify Verified Access instance logging configuration**
+5. Turn on **Deliver to Amazon Cloudwatch Logs**. Choose the destination log group. 
 
-**注**: ロググループ名に `verified-access` という文字列を含めると、ログの自動パースが可能になります。
+**Note**: Include the string `verified-access` in the log group name to enable automatic log parsing.
 
-詳しくは、[Verified Access ログを有効にする][2]を参照してください。
+For more information, see [Enable Verified Access logs][2].
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-**注**: Datadog の [Amazon Security Lake インテグレーション][3]を使用している場合、以下のステップに従う代わりに、そのインテグレーションを通じて Verified Access ログを送信することができます。
+**Note**: If you are using Datadog's [Amazon Security Lake integration][3], you can send Verified Access logs through that integration instead of following the steps below.
 
-1. AWS アカウントで [Datadog Forwarder Lambda 関数][4] をまだセットアップしていない場合は、セットアップします。
-2. 設定したら、Datadog Forwarder Lambda 関数に移動します。Function Overview セクションで、**Add Trigger** をクリックします。
-3. Trigger Configuration で **CloudWatch Logs** トリガーを選択します。
-4. Verified Access ログが含まれるロググループを選択します。
-5. フィルター名を追加します。
-6. **Add** をクリックすると、Lambda にトリガーが追加されます。
+1. If you haven't already, set up the [Datadog Forwarder Lambda function][4] in your AWS account.
+2. Once set up, go to the Datadog Forwarder Lambda function. In the Function Overview section, click **Add Trigger**.
+3. Select the **CloudWatch Logs** trigger for the Trigger Configuration.
+4. Select the log group that contains your Verified Access logs.
+5. Add a Filter Name.
+6. Click **Add** to add the trigger to your Lambda.
 
-[ログエクスプローラー][5]に移動して、ログを確認します。
+Go to the [Log Explorer][5] to start exploring your logs.
 
-AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][6]を参照してください。
+For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda function][6].
 
-## 収集データ
+## Data collected
 
-### メトリクス
+### Metrics
 
-AWS Verified Access インテグレーションには、メトリクスの収集は含まれていません。
+The AWS Verified Access integration does not include any metric collection.
 
-### イベント
+### Events
 
-AWS Verified Access インテグレーションには、イベントは含まれません。
+The AWS Verified Access integration does not include any events.
 
-### ログ管理
+### Logs
 
-AWS Verified Access インテグレーションには、[Verified Access ログ][7]が含まれます。
+The AWS Verified Access integration includes [Verified Access logs][7]. 
 
-### サービスのチェック
+### Service Checks
 
-AWS Verified Access インテグレーションには、サービスのチェック機能は含まれません。
+The AWS Verified Access integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://docs.aws.amazon.com/verified-access/latest/ug/access-logs-enable.html
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_security_lake/
-[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[3]: https://docs.datadoghq.com/integrations/amazon_security_lake/
+[4]: https://docs.datadoghq.com/logs/guide/forwarder/
 [5]: https://app.datadoghq.com/logs
-[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[6]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 [7]: https://docs.aws.amazon.com/verified-access/latest/ug/access-logs.html
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

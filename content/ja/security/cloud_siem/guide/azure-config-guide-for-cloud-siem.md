@@ -1,134 +1,134 @@
 ---
+title: Azure Configuration Guide for Cloud SIEM
 further_reading:
-- link: /security/default_rules/#cat-cloud-siem-log-detection
+- link: "/security/default_rules/#cat-cloud-siem-log-detection"
   tag: Documentation
-  text: Cloud SIEM のデフォルト検出ルールの確認
-- link: /security/explorer/
+  text: Explore Cloud SIEM default detection rules
+- link: /security/cloud_siem/investigate_security_signals
   tag: Documentation
-  text: セキュリティシグナルエクスプローラーについて学ぶ
+  text: Learn about the Security Signals Explorer
 - link: /security/cloud_siem/log_detection_rules/
   tag: Documentation
-  text: 新しい検出ルールの作成
-title: Cloud SIEM の Azure 構成ガイド
+  text: Create new detection rules
 ---
 
-## 概要
+## Overview
 
-Cloud SIEM は、Datadog で処理されたすべてのログに検出ルールを適用し、標的型攻撃や脅威インテリジェンスに記載された IP がシステムと通信している、あるいは安全でないリソース変更などの脅威を検出します。この脅威は、トリアージするためにセキュリティシグナルエクスプローラーでセキュリティシグナルとして表面化されます。
+Cloud SIEM applies detection rules to all processed logs in Datadog to detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure resource modification. The threats are surfaced as Security Signals in the Security Signals Explorer for triaging.
 
-このガイドでは、Azure Platform のログから脅威の検出を開始できるように、Datadog にログを送信するための Microsoft Azure の構成を説明します。
+This guide walks you through configuring Microsoft Azure to send logs to Datadog so that you can start detecting threats on your Azure Platform logs.
 
-<div class="alert alert-info">Azure Native インテグレーション (Datadog の US3 サイトのお客様向け) には、ログ収集の設定手順が異なります。Azure Native インテグレーションを使用する場合は、Datadog サイトドロップダウンメニューで <strong>US3</strong> を選択し、<a href="https://docs.datadoghq.com/logs/guide/azure-native-logging-guide/">Microsoft Azure ログ収集</a>の指示に従ってください。</div>
+<div class="alert alert-info">The Azure Native integration (available for customers on Datadog's US3 site) has different log collection setup instructions. If you are using the Azure Native integration, select <strong>US3</strong> in the Datadog Site dropdown menu and follow the instructions in <a href="https://docs.datadoghq.com/logs/guide/azure-native-logging-guide/">Microsoft Azure log collection</a>. </div>
 
 {{< tabs >}}
-{{% tab "自動インストール" %}}
+{{% tab "Automated Installation" %}}
 
-下のボタンをクリックし、Azure ポータルのフォームに記入してください。フォームを完了すると、アクティビティログを Datadog アカウントに送信するために必要な Azure リソースが、お客様のためにデプロイされます。
+Click the button below and fill in the form on Azure portal. After completing the form, the Azure resources required to send activity logs into your Datadog account are deployed for you.
 
-[![Azure にデプロイ](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Fmaster%2Fazure%2Fdeploy-to-azure%2Fparent_template.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Fmaster%2Fazure%2Fdeploy-to-azure%2Fparent_template.json)
 
-1. 既存のリソースグループを選択するか、新規に作成します。
-1. リージョンを選択します。
-1. **Send Activity Logs** は **true** を選択します。
-1. Datadog API キーを入力します。
-1. リソースの名前を入力します。詳しくは、[オプションパラメーター][1]をご覧ください。
-1. **Create + review** をクリックします。
-1. 検証後、**Create** をクリックします。
+1. Select an existing resource group or create a new one.
+1. Select a region.
+1. Select **true** for **Send Activity Logs**.
+1. Enter your Datadog API key.
+1. Enter names for your resources. See [Optional Parameters][1] for more information.
+1. Click **Create + review**.
+1. After the validation passes, click **Create**.
 
-デプロイが正常に完了したら、[ログエクスプローラー][2]で検索クエリに `service:azure` と入力し、Azure のログを表示します。
+After the deployment is completed successfully, go to [Log Explorer][2] and enter `service:azure` in the search query to view your Azure logs.
 
-[1]: /ja/logs/guide/azure-logging-guide/?tab=automatedinstallation#optional-parameters
+[1]: /logs/guide/azure-logging-guide/?tab=automatedinstallation#optional-parameters
 [2]: https://app.datadoghq.com/logs
 
 {{% /tab %}}
 
-{{% tab "手動インストール" %}}
+{{% tab "Manual Installation" %}}
 
-このセクションでは、Azure Platform のログを Datadog に送信できるように、手動インストールのステップを説明します。
+The section walks you through the manual installation steps so that you can send Azure Platform logs to Datadog:
 
-1. [リソースグループの作成](#create-a-resource-group)
-1. [Event Hubs ネームスペースの作成](#create-an-event-hubs-namespace)
-1. [Azure イベントハブの作成](#create-an-event-hub)
-1. [Azure Function アプリの作成](#create-an-azure-function-app)
-1. [Function アプリに新しい関数を追加する](#add-a-new-function-to-your-function-app)
-1. [Azure サービスのログをイベントハブに転送する](#forward-azure-services-logs-to-event-hub)
+1. [Create a resource group](#create-a-resource-group)
+1. [Create an Event Hubs namespace](#create-an-event-hubs-namespace)
+1. [Create an Azure event hub](#create-an-event-hub)
+1. [Create an Azure Function App](#create-an-azure-function-app)
+1. [Add a new function to your Function App](#add-a-new-function-to-your-function-app)
+1. [Forward Azure services logs to the event hub](#forward-azure-services-logs-to-event-hub)
 
-### リソースグループの作成
+### Create a resource group
 
-既存のリソースグループを使用する場合は、Event Hubs ネームスペースの作成に進んでください。
+If you want to use an existing resource group, skip to Create an Event Hubs namespace.
 
-1. [Azure Resource groups][1] ページに移動します。
-1. **作成**をクリックします。
-1. リソースグループの名前を入力します。
-1. オプションで、タグを追加したい場合は、**Next: Tags** をクリックします。
-1. **Review + create** をクリックします。
-1. 検証後、**Create** をクリックします。
+1. Go to [Azure Resource groups][1] page.
+1. Click **Create**.
+1. Enter a name for the resource group.
+1. Optionally, click **Next: Tags** if you want to add tags.
+1. Click **Review + create**.
+1. After the validation passes, click **Create**.
 
-### Event Hubs ネームスペースの作成
+### Create an Event Hubs namespace
 
-1. [Azure Event Hubs][2] に移動します。
-1. **作成**をクリックします。
-1. **Resource group** ドロップダウンメニューで、Event Hub を追加するリソースグループを選択します。
-1. ネームスペースの名前を入力します。
-1. ネームスペースの場所を選択します。
-   **注**: Event Hub とログの送信元となるリソースは同じ場所になければなりません。アクティビティログや他のアカウント全体のログソースは、その限りではありません。
-1. 価格帯を選択します。
-1. スループットユニット (スタンダードティアの場合) またはプロセッシングユニット (プレミアムティアの場合) はそのままにしておいてください。
-1. **Review + create** をクリックします。
-1. 検証に成功したら、**Create** をクリックします。
-1. デプロイが正常に完了したら、**Go to resource** をクリックします。
+1. Navigate to [Azure Event Hubs][2].
+1. Click **Create**.
+1. In the **Resource group** dropdown menu, select the resource group you want to add the Event Hub to.
+1. Enter a name for the namespace.
+1. Select a location for the namespace.
+     **Note**: The Event Hub must be in the same Location as the resource you want to submit logs from. For activity logs or other account-wide log sources, you can choose any region.
+1. Select a pricing tier.
+1. Leave the throughput units (for standard tier) or processing units (for premium tier) as it is.
+1. Click **Review + create**.
+1. After validation succeeds, click **Create**.
+1. After the deployment is completed successfully, click **Go to resource**.
 
-### イベントハブの作成
+### Create an event hub
 
-1. 先ほど作成した Event Hubs ネームスペースで、**+ Event Hub** をクリックします。
-1. イベントハブの名前を入力します。
-1. オプションで、パーティションカウントと保持オプションを構成します。
-1. **Review + create** をクリックします。
-1. 検証に成功したら、**Create** をクリックします。
+1. In the Event Hubs namespace you just created, click **+ Event Hub**.
+1. Enter a name for the event hub.
+1. Optionally, configure the partition count and retention options.
+1. Click **Review + create**.
+1. After validation succeeds, click **Create**.
 
-### Azure Function アプリの作成
-新しい Function アプリを作成します。既存の関数アプリを使用している場合は、Function アプリに新しい関数を追加するに進んでください。
+### Create an Azure Function App
+Create a new Function App. If you are using an existing function app, skip to Add a new function to your Function App.
 
-1. [Function アプリ][3]に移動します。
-1. **作成**をクリックします。
-1. 関数アプリのリソースグループを選択します。
-1. 関数アプリの名前を入力します。
-1. コードにデプロイする場合は選択のままにしてください。
-1. **Runtime stack** ドロップダウンメニューで、**Node.js** を選択します。
-1. 関数アプリのリージョンを選択します。
-1. オペレーティングシステムとプランタイプを選択します。
-1. **Next: Storage** をクリックします。
-1. ドロップダウンメニューで、ストレージアカウントを選択します。
-1. **Review + create** をクリックします。
-1. 検証に成功したら、**Create** をクリックします。
-1. デプロイが正常に完了したら、**Create a function** をクリックします。
+1. Navigate to [Function App][3].
+1. Click **Create**.
+1. Select a resource group for the function app.
+1. Enter a name for the function app.
+1. Leave the selection to deploy to code.
+1. In the **Runtime stack** dropdown menu, select **Node.js**.
+1. Select a region for your function app.
+1. Select an operating system and plan type.
+1. Click **Next: Storage**.
+1. Select a storage account in the dropdown menu.
+1. Click **Review + create**.
+1. After validation succeeds, click **Create**.
+1. After the deployment is completed successfully, click **Create a function**.
 
-### Function アプリに新しい関数を追加する
+### Add a new function to your Function App
 
-1. 既存のものを使用している場合は、関数アプリに移動します。左サイドメニューの ** Functions** をクリックします。
-1. **作成**をクリックします。
-1. **Azure Event Hub trigger** を選択します。
-1. 新しい関数の名前を入力します。
-1. **Event Hub connection** で、**New** をクリックします。
-1. **Event Hub connection** ドロップダウンメニューで、先に作成したイベントハブを選択します。
-1. **OK** をクリックします。
-1. **Event Hub name** には、先ほど作成したイベントハブの名前を入力します。
-1. **作成**をクリックします。
+1. Navigate to the function app if you are using an existing one. Click **Functions** in the left side menu.
+1. Click **Create**.
+1. Select **Azure Event Hub trigger**.
+1. Enter a name for the new function.
+1. In **Event Hub connection**, click **New**.
+1. In the **Event Hub connection** dropdown menu, select the event hub you created earlier.
+1. Click **OK**.
+1. In the **Event Hub name**, enter the name of the event hub you created earlier.
+1. Click **Create**.
 
-### Datadog Azure 関数を追加する
+### Add the Datadog Azure function
 
-1. 新しい関数で、左側のメニューから **Code + Test** を選択します。
-1. [Datadog-Azure 関数コード][4]をコピーして `index.js` ファイルに貼り付けてください。
-1. 関数コードの 22 行目の `<DATADOG_API_KEY>` をお使いの Datadog API に置き換えてください。
-1. Datadog US1 サイトを使用していない場合は、関数コードの 23 行目で `DD_SITE` を [Datadog サイト][5]パラメーターに置き換えてください。
-1. **保存**をクリックします。
-1. 左サイドメニューの **Integrations** をクリックします。
-1. **Azure Event Hubs** をクリックします。
-1. `Event parameter name` を `eventHubMessages` に設定します
-1. `Event Hub Cardinality` は、`Many` に設定する必要があります。
-1. `Event Hub Data Type` を empty に設定します。
-1. **保存**をクリックします。
-1. 関数を実行し、Datadog ログエクスプローラーでテストメッセージをチェックし、設定が正しいことを確認します。テストログイベントは、有効な JSON 形式である必要があります。例:
+1. In the new function, select **Code + Test** in the left side menu.
+1. Copy and paste the [Datadog-Azure function code][4] to your `index.js` file.
+1. Replace `<DATADOG_API_KEY>` with your Datadog API on line 22 of the function code.
+1. If you are not using the Datadog US1 site, replace `DD_SITE` with your [Datadog site][5] parameter on line 23 of the function code.
+1. Click **Save**.
+1. Click **Integrations** in the left side menu.
+1. Click **Azure Event Hubs**.
+1. Set `Event parameter name` to `eventHubMessages`.
+1. `Event Hub Cardinality` must be set to `Many`.
+1. Set `Event Hub Data Type` to empty.
+1. Click **Save**.
+1. Verify your setup is correct by running the function and then checking the Datadog log explorer for the test message. The test log event must be in valid JSON format. For example:
     ```
     {
         is_test:true,
@@ -136,51 +136,51 @@ Cloud SIEM は、Datadog で処理されたすべてのログに検出ルール�
     }
     ```
 
-### Azure サービスのログを Event Hub に転送する
+### Forward Azure services logs to Event Hub
 
-#### Activity ログを Event Hub に転送する
+#### Forward Activity logs to Event Hub
 
-1. [Azure Activity ログ][6]に移動します。
-1. **Export Activity Logs** をクリックします。
-1. **Add diagnostic settings** をクリックします。
-1. 診断設定の名前を入力します。
-1. Datadog に送信するログのカテゴリーを選択します。
-1. **Stream to an event hub** を選択します。
-1. 先に作成したイベントハブネームスペースを選択します。
-1. **保存**をクリックします。
+1. Navigate to [Azure Activity log][6].
+1. Click **Export Activity Logs**.
+1. Click **Add diagnostic settings**.
+1. Enter a name for the diagnostic setting.
+1. Select the categories of logs you want to send to Datadog.
+1. Select **Stream to an event hub**.
+1. Select the event hub namespace created previously.
+1. Click **Save**.
 
-#### リソースログを Event Hub に転送する
+#### Forward resource logs to Event Hub
 
-1. リソースログを送信するリソースに移動します。
-1. 左サイドメニューの **Monitor** の下にある、**Diagnostic settings** をクリックします。
-1. **Add diagnostic setting** をクリックします。
-1. 診断設定の名前を入力します。
-1. **allLogs** を選択します。
-1. **Destination details** セクションで、**Stream to an event hub** を選択します。
-1. 先に作成したイベントハブネームスペースを選択します。
-1. **保存**をクリックします。
+1. Navigate to the resource from which you want to send resource logs.
+1. Under **Monitor** in the left side menu, click **Diagnostic settings**.
+1. Click **Add diagnostic setting**.
+1. Enter a name for the diagnostic setting.
+1. Select **allLogs**.
+1. Under the **Destination details** section, select **Stream to an event hub**.
+1. Select the event hub namespace created previously.
+1. Click **Save**.
 
-[ログエクスプローラー][7]で検索クエリに `service:azure` と入力し、Azure のログを表示します。
+Go to [Log Explorer][7] and enter `service:azure` in the search query to view your Azure logs.
 
 [1]: https://portal.azure.com/#view/HubsExtension/BrowseResourceGroups
 [2]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.EventHub%2Fnamespaces
 [3]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
 [4]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/activity_logs_monitoring/index.js
-[5]: https://docs.datadoghq.com/ja/getting_started/site/
+[5]: https://docs.datadoghq.com/getting_started/site/
 [6]: https://portal.azure.com/#view/Microsoft_Azure_Monitoring/AzureMonitoringBrowseBlade/~/activityLog
 [7]: https://app.datadoghq.com/logs
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Cloud SIEM でセキュリティシグナルのトリアージを行う
+## Use Cloud SIEM to triage Security Signals
 
-Cloud SIEM は、設定した Azure Platform ログを含む、処理されたすべてのログに対して、すぐに検出ルールを適用します。検出ルールで脅威が検出されると、セキュリティシグナルが生成され、セキュリティシグナルエクスプローラーで確認することができます。
+Cloud SIEM applies out-of-the-box detection rules to all processed logs, including the Azure Platform logs you have just set up. When a threat is detected with a detection rule, a Security Signal is generated and can be viewed in the Security Signals Explorer.
 
-- Cloud SIEM シグナルエクスプローラーにアクセスして、脅威の表示とトリアージを行います。詳細はセキュリティシグナルエクスプローラーをご覧ください。
-- ログに適用されるすぐに使える検出ルールをご覧ください。
-- 新しいルールを作成し、特定のユースケースにマッチした脅威を検出することができます。
+- Go to the Cloud SIEM Signals Explorer to view and triage threats. See Security Signals Explorer for further details.
+- See out-of-the-box detection rules that are applied to your logs.
+- Create new rules to detect threats that match your specific use case.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

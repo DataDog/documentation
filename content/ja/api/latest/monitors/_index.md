@@ -1,3 +1,3 @@
 ---
-title: モニター
+title: Monitors
 ---

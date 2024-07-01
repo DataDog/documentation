@@ -1,16 +1,16 @@
 ---
-app_id: akeyless-gateway
-app_uuid: a71a3b29-5921-4bc9-8a7e-38de5a940ad8
-assets:
-  dashboards:
-    akeyless_gateway_dashboard: assets/dashboards/akeyless_gateway_dashboard.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check:
+"app_id": "akeyless-gateway"
+"app_uuid": "a71a3b29-5921-4bc9-8a7e-38de5a940ad8"
+"assets":
+  "dashboards":
+    "akeyless_gateway_dashboard": assets/dashboards/akeyless_gateway_dashboard.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check":
       - akeyless.gw.system.cpu
       - akeyless.gw.system.disk
       - akeyless.gw.system.load
@@ -21,86 +21,87 @@ assets:
       - akeyless.gw.quota.total_transactions_limit
       - akeyless.gw.system.http_response_status_code
       - akeyless.gw.system.request_count
-      metadata_path: metadata.csv
-      prefix: akeyless
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10426
-    source_type_name: Akeyless Gateway
-author:
-  homepage: https://www.akeyless.io
-  name: Akeyless Security
-  sales_email: sales@akeyless.io
-  support_email: support@akeyless.io
-categories:
-- セキュリティ
+      - akeyless.gw.system.healthcheck.status
+      "metadata_path": metadata.csv
+      "prefix": akeyless
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10426"
+    "source_type_name": Akeyless Gateway
+"author":
+  "homepage": "https://www.akeyless.io"
+  "name": Akeyless Security
+  "sales_email": sales@akeyless.io
+  "support_email": support@akeyless.io
+"categories":
+- security
 - kubernetes
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/akeyless_gateway/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: akeyless_gateway
-integration_id: akeyless-gateway
-integration_title: Akeyless Gateway
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: akeyless_gateway
-public_title: Akeyless Gateway
-short_description: Akeyless Gateway のキーメトリクスを追跡します。
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/akeyless_gateway/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "akeyless_gateway"
+"integration_id": "akeyless-gateway"
+"integration_title": "Akeyless Gateway"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "akeyless_gateway"
+"public_title": "Akeyless Gateway"
+"short_description": "Track your Akeyless Gateway key metrics."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Security
-  - Category::Kubernetes
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  - Submitted Data Type::Metrics
-  configuration: README.md#Setup
-  description: Akeyless Gateway のキーメトリクスを追跡します。
-  media:
-  - caption: Akeyless Gateway メトリクスダッシュボード
-    image_url: images/AKs-Graphs-Light.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Akeyless Gateway
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Security"
+  - "Category::Kubernetes"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  - "Offering::Integration"
+  - "Submitted Data Type::Metrics"
+  "configuration": "README.md#Setup"
+  "description": Track your Akeyless Gateway key metrics.
+  "media":
+  - "caption": Akeyless Gateway metrics dashboard
+    "image_url": images/AKs-Graphs-Light.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Akeyless Gateway
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Akeyless Platform は、資格情報、証明書、暗号化キーの保存、保護、ローテーション、および動的な作成を可能にする統合シークレット管理システムです。当社のプラットフォームは、静的および動的な資格情報の管理、証明書の自動化、暗号化と電子署名、社内リソースへのリモートアクセスを保護するゼロトラストアプリケーションアクセスなど、複数のユースケースをサポートしています。
+The Akeyless Platform is a unified secrets management system that enables you to store, protect, rotate, and dynamically create credentials, certificates, and encryption keys. Our platform supports several use cases, including managing static and dynamic credentials, certificate automation, encryption and digital signing, and zero-trust application access that secures remote access to your internal resources.
 
-このインテグレーションにより、[Akeyless Gateway][1] のパフォーマンスを視覚化し、監視することができます。テレメトリーメトリクスはアプリケーションとランタイム環境から取得されます。
+This integration allows you to visualize and monitor performance of your [Akeyless Gateway][1]. Telemetry metrics are sourced from the application and the runtime environment.
 
-## 計画と使用
+## Setup
 
-Akeyless は、プライベートネットワークとクラウドの間に保護レベルを追加する独自のゲートウェイを提供します。当社のコアサービスの SaaS 拡張機能として機能するステートレスゲートウェイは、すぐに使える堅牢なメカニズムで透過的な内部運用を可能にし、お客様の内部リソースと連携するためにネットワークインフラストラクチャーを変更することなく、サービスの継続と復旧を保証します。
+Akeyless offers a unique Gateway which adds an extra level of protection between your private network and the cloud. Acting as a SaaS extension of our core services, our stateless Gateway enables a transparent internal operation with a robust out-of-the-box mechanism to ensure service continuity and recovery without having to change any network infrastructure in order to work with your internal resources.
 
-Datadog とのインテグレーションを構成して重要な Akeyless Gateway メトリクスを表示するには、ゲートウェイのデプロイメントに使用している (または使用していた) 方法に応じて、以下の手順に従ってください。
+To configure the integration with Datadog to view important Akeyless Gateway metrics, follow the instructions below for the method you are using (or have used) for your Gateway deployment.
 
-### 前提条件
-- 稼動しているか、初めてデプロイされている Akeyless Gateway
+### Prerequisites
+- An Akeyless Gateway either running or being deployed for the first time
 
-### 構成
+### Configure
 
-このインテグレーションは、1 つのゲートウェイまたは同じ API キーを使用する複数のインスタンスで動作します。メトリクスは **Akeyless GW** ダッシュボードの `host` または `instance` ごとに表示できます。
+This integration works with one Gateway or multiple instances using the same API key. Metrics can be shown per `host` or `instance` in the **Akeyless GW** dashboard.
 
-#### Kubernetes 上で動作するゲートウェイの場合
+#### For a Gateway running on Kubernetes
 
-[K8s 上で動作するゲートウェイ][2]で Akeyless Gateway インテグレーションを構成するには
+To configure the Akeyless Gateway integration on a [Gateway running on K8s][2]:
 
-1. Kubernetes 上にゲートウェイをデプロイするために使用する `values.yaml` ファイルの `metrics` セクションの下に、以下の構成を追加します。Datadog サーバーの関連する API キーと、`app.datadoghq.com` のような関連する [Datadog サイト][3]を設定します。
+1. In your `values.yaml` file you use to deploy your Gateway on Kubernetes, under the `metrics` section, add the following configuration. Set the relevant API Key of your Datadog server, and the relevant [Datadog site][3] such as: `app.datadoghq.com`.
 
 ```
 metrics:
@@ -117,23 +118,23 @@ metrics:
           exporters: [datadog]
 ```
 
-2. まだゲートウェイをデプロイしていない場合は、通常どおりインストールを続行し、デプロイの準備ができたら次のコマンドを実行します。
+2. If you have not yet deployed the Gateway, continue with your installation as usual and run the following command when you are ready to deploy:
 
 ```
 helm install <your-gateway-name> akeyless/akeyless-api-gateway -f values.yaml
 ```
 
-3. Kubernetes 上の既存のゲートウェイを更新する場合は、以下のコマンドを実行して更新します。
+3. If you are updating an existing Gateway on Kubernetes, run the following commands to update:
 
 ```
 helm upgrade <your-gateway-name> akeyless/akeyless-api-gateway -f values.yaml
 ```
 
-#### Docker 上で動作するスタンドアロンゲートウェイの場合
+#### For a standalone Gateway running on Docker
 
-[スタンドアロンゲートウェイ][4]で Akeyless Gateway インテグレーションを構成するには
+To configure the Akeyless Gateway integration on a [Standalone Gateway][4]:
 
-1. 以下の構成で、`otel-config.yaml` というローカルファイルを作成します。Datadog サーバーの関連する API キーと、`app.datadoghq.com` などの関連する [Datadog サイト][3]を設定します。
+1. Create a local file called `otel-config.yaml` with the following configuration. Set the relevant API Key of your Datadog server, and the relevant [Datadog site][3] such as `app.datadoghq.com`.
 
 ```
 exporters:
@@ -147,44 +148,45 @@ service:
       exporters: [datadog]
 ```
 
-2. まだゲートウェイをデプロイしていない場合は、以下のコマンドを実行して `ENABLE_METRICS=true` 変数を指定して Akeyless Gateway をスピンアップし、`otel-config.yaml` ファイルをマウントします。
+2. If you have not yet deployed the Gateway, run the following command to spin up your Akeyless Gateway with the `ENABLE_METRICS=true` variable and mount the `otel-config.yaml` file:
 
 ```
 docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081 -p 5696:5696 -e ENABLE_METRICS="true" -v $PWD/otel-config.yaml:/akeyless/otel-config.yaml --name <your-gateway-name> akeyless/base:latest-akeyless
 ```
-3. 既存のゲートウェイを更新している場合、以前に削除した Docker インスタンスから最新の設定とデータを取得するために、更新したゲートウェイに同じ `Admin Access ID` と `Cluster Name` を使用します。
+3. If you are updating an existing Gateway, use the same `Admin Access ID` and `Cluster Name` for the updated Gateway in order to retrieve the latest settings and data from the previously removed Docker instance:
 
 ```
 docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081 -p 5696:5696 -e ADMIN_ACCESS_ID="p-xxxxxx" -e ADMIN_ACCESS_KEY="62Hu...xxx....qlg=" -e ENABLE_METRICS="true" -v $PWD/otel-config.yaml:/akeyless/otel-config.yaml --name <your-gateway-name> akeyless/base:latest-akeyless
 ```
 
-### 検証
+### Validation
 
-ゲートウェイのセットアップに成功したら、Datadog サイトの[メトリクスエクスプローラー][5]にアクセスし、サマリーページで Akeyless メトリクスをフィルタリングします。
+Upon successful setup of the Gateway, go to the [Metrics Explorer][5] on the Datadog site, and filter the Akeyless metrics on the summary page.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "akeyless_gateway" >}}
 
 
-### ヘルプ
+### Service Checks
 
-Akeyless Gateway インテグレーションには、サービスのチェック機能は含まれません。
+The Akeyless Gateway integration does not include any service checks.
 
-### ヘルプ
+### Events
 
-Akeyless Gateway インテグレーションには、イベントは含まれません。
+The Akeyless Gateway integration does not include any events.
 
-## Agent
+## Support
 
-ご不明な点は、[Akeyless のサポートチーム][7]までお問い合わせください。
+Need help? Contact [Akeyless Support][7].
 
 
 [1]: https://docs.akeyless.io/docs/api-gw
 [2]: https://docs.akeyless.io/docs/gateway-k8s
-[3]: https://docs.datadoghq.com/ja/getting_started/site/
+[3]: https://docs.datadoghq.com/getting_started/site/
 [4]: https://docs.akeyless.io/docs/install-and-configure-the-gateway
 [5]: https://app.datadoghq.com/metric/explorer
 [6]: https://github.com/DataDog/integrations-extras/blob/master/akeyless_gateway/metadata.csv
 [7]: mailto:support@akeyless.io
+

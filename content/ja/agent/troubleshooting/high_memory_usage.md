@@ -1,65 +1,65 @@
 ---
+title: High CPU or Memory Consumption
 disable_toc: false
 further_reading:
 - link: /agent/troubleshooting/send_a_flare/
-  tag: Agent のトラブルシューティング
-  text: Agent フレアの送信
+  tag: Documentation
+  text: Send an Agent Flare
 - link: /agent/troubleshooting/agent_check_status/
-  tag: Agent のトラブルシューティング
-  text: Agent チェックのステータスを確認
-title: CPU やメモリの消費量が多い
+  tag: Documentation
+  text: Get the Status of an Agent Check
 ---
 
-Agent の CPU やメモリの消費量が多くなる場合、いくつかの要因が考えられます。以下の手順を試しても問題が解決しない場合は、[Datadog サポートにお問い合わせください](#reach-out-to-datadog-support)。
+Several factors can cause high Agent CPU or memory consumption. If you try the steps below and continue to have trouble, [contact Datadog Support for further assistance](#reach-out-to-datadog-support).
 
-### CPU やメモリの消費量が多い場合の一般的な原因
+### Common causes of high CPU or memory consumption
 
-- インテグレーションが何千ものメトリクスを返している、または多数のチェックインスタンスを実行している。[CLI コマンドの `status`][2] を実行し、**Collector** セクションを確認すると、実行中のチェックインスタンスの概要と、収集されたメトリクス数を確認できます。
-- Agent の Python または Go ランタイムがリソースを大量に消費している。[ライブプロセスモニタリング][3]を有効にして、Agent プロセスが予期しない量のメモリや CPU を消費していないかどうかを確認します。また、オペレーティングシステムのアクティビティマネージャーを使用して、Agent プロセスのリソース消費を確認することもできます。
-- Agent が多数のプロセスを監視している。これは、[プロセスチェックコンフィギュレーションファイル][4]で構成されています。
-- Agent の動作が Windows のアンチマルウェアまたはアンチウィルスツールをトリガーし、CPU 使用率が高くなっている。
-- Agent が非常に多くのログ行または DogStatsD メトリクスを転送している。
+- An integration is returning thousands of metrics, or is running a large number of check instances. You can see a summary of the running check instances, as well as the number of metrics collected, by running [the `status` CLI command][2] and checking the **Collector** section.
+- The Agent's Python or Go runtime is causing high resource consumption. Enable [Live Processes Monitoring][3] to check if the Agent process is consuming unexpected amounts of memory or CPU. You can also use your operating system's activity manager to check Agent process resource consumption.
+- The Agent is monitoring a large number of processes. This is configured in the [Process Check configuration file][4].
+- The Agent's behavior is triggering Windows anti-malware or antivirus tools, causing high CPU usage.
+- The Agent is forwarding a very large number of log lines or DogStatsD metrics.
 
-### リソース使用量削減のための調整
+### Adjustments to reduce resource usage
 
-ここでは、Agent の構成に加えることで、リソースの使用量を減らすことができる調整方法を紹介します。
+Here are some adjustments you can make to your Agent configuration to reduce resource usage:
 
-- 多くのチェックインスタンスを持つインテグレーションや、大量のメトリクスを収集する場合は、インテグレーションの `conf.yaml` ファイルで `min_collection_interval` を調整してください。通常、Agent は各チェックインスタンスを 10 秒から 15 秒ごとに実行します。`min_collection_interval` を 60 秒以上に設定すると、リソースの消費を抑えることができます。チェックの収集間隔についての詳細は、[カスタム Agent チェックのドキュメント][5]を参照してください。
-- インテグレーションがオートディスカバリーを使用するように構成されているかどうか、またはインテグレーションがより具体的にスコープすることができるワイルドカード (`*`) を使用しているかどうかをチェックします。オートディスカバリーの詳細については、[基本的な Agent のオートディスカバリー][6]を参照してください。
+- For integrations that have many check instances or are collecting large numbers of metrics, adjust the `min_collection_interval` in the integration's `conf.yaml` file. In general, the Agent runs each check instance every 10 to 15 seconds. Setting `min_collection_interval` to 60 seconds or more can help reduce resource consumption. For more information on the check collection interval, see the [Custom Agent Check documentation][5].
+- Check if an integration is configured to use Autodiscovery, or if an integration is using a wildcard (`*`) that could be scoped more specifically. For more information on Autodiscovery, see [Basic Agent Autodiscovery][6].
 
-## Datadog サポートに連絡する
+## Reach out to Datadog Support
 
-上記のどの解決策も適切でない場合は、Datadog サポートにご連絡ください。[ライブプロセスモニタリング][3]を有効にして、Agent プロセスが予期せぬ量のメモリまたは CPU を消費していることを確認してください。
+If none of the above solutions are right for your situation, [reach out to Datadog Support][1]. Make sure you've enabled [Live Processes Monitoring][3] to confirm that the Agent process is consuming unexpected amounts of memory or CPU.
 
-チケットを開く際に、問題を確認する方法と、これまでに行った手順についての情報を含めてください。問題を 1 つのインテグレーションに分離できるかどうかに応じて、次のいずれかのセクションの情報を含めてください。
+When opening a ticket, include information on how you are confirming the issue and what steps you have taken so far. Depending on whether or not you can isolate the problem to a single integration, include information from one of the following sections.
 
-### 消費量の多さを 1 つのインテグレーションに分離できる場合
+### High consumption isolated to a single integration
 
-1 つのインテグレーションだけが大量のメモリを消費している場合、Python のメモリプロファイルの出力と一緒にデバッグレベルのフレアを送信してください。
-1. デバッグモードを有効にするには、[デバッグモードのドキュメントに従ってください][7]。
-1. プロファイルを送信するには、flare コマンドに `--profile 30` フラグを付加してください。
+If only one integration is consuming high amounts of memory, send a debug-level flare along with Python memory profile output:
+1. To enable debug mode, [follow the Debug Mode documentation][7].
+1. To send a profile, append the `--profile 30` flag to the flare command:
    {{< code-block lang="shell">}}sudo datadog-agent flare --profile 30{{< /code-block >}}
-   コマンドは、プロファイル情報を収集する間、約 30 秒かけて実行されます。
+   The command takes approximately 30 seconds to run while it collects profile information.
 
-1. Python のメモリプロファイルについては、このコマンドの出力をキャプチャしてください。
+1. For the Python memory profile, capture the output of this command:
    {{< code-block lang="shell">}}sudo -u dd-agent -- datadog-agent check <check name> -m -t 10{{< /code-block >}}
 
-### 消費量の多さを 1 つのインテグレーションに関連付けることができない場合
+### High consumption not associated with a single integration
 
-メモリ消費量の多さが単一のインテグレーションに関連していない場合、Agent が予想以上にメモリや CPU を使用している期間に収集したプロファイルをデバッグレベルのフレアで送信してください。
-1. デバッグモードを有効にするには、[デバッグモードのドキュメントに従ってください][7]。
-1. プロファイルを送信するには、flare コマンドに `--profile 30` フラグを付加してください。
+If the high memory consumption is not associated with a single integration, send a debug-level flare with a profile, collected during a period when the Agent is using more memory or CPU than expected:
+1. To enable debug mode, [follow the Debug Mode documentation][7].
+1. To send a profile, append the `--profile 30` flag to the flare command:
    {{< code-block lang="shell">}}sudo datadog-agent flare --profile 30{{< /code-block >}}
-   コマンドは、プロファイル情報を収集する間、約 30 秒かけて実行されます。
+   The command takes approximately 30 seconds to run while it collects profile information.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/help/
-[2]: /ja/agent/basic_agent_usage/#cli
-[3]: /ja/infrastructure/process/
-[4]: /ja/integrations/process/#configuration
-[5]: /ja/developers/write_agent_check/#collection-interval
-[6]: /ja/getting_started/containers/#enable-autodiscovery
-[7]: /ja/agent/troubleshooting/debug_mode/
+[1]: /help/
+[2]: /agent/basic_agent_usage/#cli
+[3]: /infrastructure/process/
+[4]: /integrations/process/#configuration
+[5]: /developers/write_agent_check/#collection-interval
+[6]: /getting_started/containers/#enable-autodiscovery
+[7]: /agent/troubleshooting/debug_mode/

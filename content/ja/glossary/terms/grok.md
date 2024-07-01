@@ -1,6 +1,6 @@
 ---
-core_product:
-- log management
 title: grok
+core_product:
+  - log management
 ---
-Grok とは、半構造化されたログメッセージをパースして属性を抽出する手法のことです。
+Grok is a method for parsing and extracting attributes from semi-structured log messages.

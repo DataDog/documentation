@@ -1,97 +1,97 @@
 ---
-app_id: catchpoint
-app_uuid: e80ef287-1a1a-4b73-94e7-3c1d6fe66eaf
-assets:
-  dashboards:
-    catchpoint: assets/dashboards/Catchpoint_dashboard.json
-  integration:
-    auto_install: true
-    events:
-      creates_events: true
-    metrics:
-      check:
-      - catchpoint.success.rate
-      metadata_path: metadata.csv
-      prefix: catchpoint.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 132
-    source_type_name: Catchpoint
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- metrics
-- issue tracking
-- network
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: catchpoint
-integration_id: catchpoint
-integration_title: Catchpoint
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: catchpoint
-public_title: Catchpoint
-short_description: Catchpoint のアラートを Datadog イベントストリームへ送信。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Metrics
-  - Category::問題の追跡
-  - Category::ネットワーク
-  configuration: README.md#Setup
-  description: Catchpoint のアラートを Datadog イベントストリームへ送信。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Catchpoint
+"app_id": "catchpoint"
+"app_uuid": "e80ef287-1a1a-4b73-94e7-3c1d6fe66eaf"
+"assets":
+  "dashboards":
+    "catchpoint": "assets/dashboards/Catchpoint_dashboard.json"
+  "integration":
+    "auto_install": true
+    "events":
+      "creates_events": true
+    "metrics":
+      "check":
+      - "catchpoint.success.rate"
+      "metadata_path": "metadata.csv"
+      "prefix": "catchpoint."
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "132"
+    "source_type_name": "Catchpoint"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "metrics"
+- "issue tracking"
+- "network"
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "catchpoint"
+"integration_id": "catchpoint"
+"integration_title": "Catchpoint"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "catchpoint"
+"public_title": "Catchpoint"
+"short_description": "Send your Catchpoint alerts to your Datadog event stream."
+"supported_os": []
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Metrics"
+  - "Category::Issue Tracking"
+  - "Category::Network"
+  "configuration": "README.md#Setup"
+  "description": "Send your Catchpoint alerts to your Datadog event stream."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Catchpoint"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## 概要
+## Overview
 
-Catchpoint は、デジタルエコシステム全体に対する完全で実用的な洞察と可視性を提供するデジタルパフォーマンス分析プラットフォームです。
+Catchpoint is a Digital Performance Analytics platform that provides you with complete, actionable insights and visibility into your entire digital ecosystem.
 
-Catchpoint インテグレーションにより、以下のことが可能になります。
+The Catchpoint integration allows you to:
 
--   イベントストリームで包括的なアラートを構成できます。
--   Catchpoint ポータルの分析チャートへの直接リンクにアクセスできます。
--   Alert Type タグを設定して、イベントをより効果的にフィルタリングできます。
+-   Configure comprehensive alerts in your Event Stream.
+-   Access direct links to Analysis Charts in the Catchpoint Portal.
+-   Set Alert Type tags to filter events more effectively.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-インストールは必要ありません。
+No installation is required.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-イベントストリームに Catchpoint のアラートを取り込むには、Catchpoint ポータルにログインし、_Settings_ > _API_ に移動します。
+To get Catchpoint alerts into your Event Stream, login to the Catchpoint Portal and go to _Settings_ > _API_.
 
-1. Alerts API で Enable を選択します。
+1. In the Alerts API, select Enable.
 
-   {{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="catchpoint イベント" popup="true">}}
+   {{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="catchpoint event" popup="true">}}
 
-2. Datadog API エンドポイント URL を入力します。
+2. Enter the Datadog API endpoint URL.
 
     ```text
     https://app.datadoghq.com/api/v1/events?api_key=<YOUR_DATADOG_API_KEY>
     ```
 
-    既存の Datadog API キーを選択するか、[インテグレーションタイルの **Configure** タブ][1]で API キーを作成します。
+    You can choose an existing Datadog API key, or create an API key on the [**Configure** tab of the integration tile][1].
 
-3. Status を Active に設定します。
-4. Format は Template を選択します。
-5. 新しいテンプレートを追加します。
-6. テンプレート名 (例: `DataDog`) を入力し、Format を JSON に設定します。
-7. 以下の JSON テンプレートを使用し、これを保存します。
+3. Set Status to Active.
+4. Select Template for Format.
+5. Add a new template.
+6. Enter the template name, such as `DataDog`, and set the Format to JSON.
+7. Use the following JSON template and save it.
 
    ```json
    {
@@ -106,20 +106,20 @@ Catchpoint インテグレーションにより、以下のことが可能にな
    }
    ```
 
-Catchpoint は Datadog の[イベントエクスプローラー][2]にアラートを直接送信します。
+Catchpoint sends alerts directly to the [Events Explorer][2] in Datadog.
 
 {{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint event" popup="true">}}
 
-### メトリクスの収集
+### Metric collection
 
-Catchpoint メトリクスを Datadog で受信するには、Catchpoint ポータルで Test Data Webhook を作成します。
+To receive Catchpoint metrics in Datadog, create a Test Data Webhook in the Catchpoint Portal.
 
-1. Test Data Webhook で Datadog API エンドポイントと API キーを追加します。
-2. "Template" を選択します。
-3. ドロップダウンメニューで "Add New" をクリックします。
-4. 名前を入力します。
-5. フォーマット下で "JSON" を選択します。
-6. 以下の JSON テンプレートを貼り付けて "Save" をクリックします。
+1. In the Test Data Webhook, add the Datadog API endpoint along with the API key.
+2. Select "Template".
+3. Click "Add New" from the dropdown menu.
+4. Enter a name.
+5. Select "JSON" under format.
+6. Paste the following JSON template and click "Save".
 
 ```json
 {
@@ -821,26 +821,27 @@ Catchpoint メトリクスを Datadog で受信するには、Catchpoint ポー�
 }
 ```
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "catchpoint" >}}
 
 
-### ヘルプ
+### Events
 
-Catchpoint からのイベントは、[Catchpoint Dashboard][4] の Event Stream ウィジェットに表示されます。
+Events from Catchpoint appear in the Event Stream widget on the [Catchpoint Dashboard][4].
 
-### ヘルプ
+### Service Checks
 
-Catchpoint インテグレーションには、サービスのチェック機能は含まれません。
+The Catchpoint integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
 [1]: https://app.datadoghq.com/integrations/catchpoint
-[2]: https://docs.datadoghq.com/ja/service_management/events/
+[2]: https://docs.datadoghq.com/service_management/events/
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/catchpoint/catchpoint_metadata.csv
 [4]: https://app.datadoghq.com/dash/integration/32054/catchpoint-dashboard
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

@@ -1,35 +1,35 @@
 ---
-code_lang: java
-code_lang_weight: 10
+title: Enable Symbol Database for Java
 is_beta: true
 private: true
-title: Java で Symbol Database を有効にする
+code_lang: java
 type: multi-code-lang
+code_lang_weight: 10
 ---
 
 {{< beta-callout-private url="https://forms.gle/UG9EELAy8Li6z2jW8" >}}
-ダイナミックインスツルメンテーションプローブ作成時のユーザーエクスペリエンスの改善にご興味がおありですか？こちらから、Symbol Database 非公開データ版に参加しましょう。
+Interested in an improved user experience when creating Dynamic Instrumentation probes? Join the Symbol Database private beta here.
 {{< /beta-callout-private >}}
 
-[Symbol Database][6] は、ダイナミックインスツルメンテーションの非公開ベータ版の機能です。
+[Symbol Database][6] is a feature of Dynamic Instrumentation in private beta.
 
-## 要件
+## Requirements
 
-- サービスで[ダイナミックインスツルメンテーション][1]が有効になっていること。
-- トレーシングライブラリ [`dd-trace-java`][6] 1.25.0 以上がインストールされていること。
+- [Dynamic Instrumentation][1] is enabled for your service.
+- Tracing library [`dd-trace-java`][6] 1.25.0 or higher is installed.
 
-## インフラストラクチャーリスト
+## Installation
 
-ダイナミックインスツルメンテーションを有効にしてサービスを実行し、さらに Symbol Database のアップロードを有効にするには:
+To run your service with Dynamic Instrumentation enabled, and additionally enable Symbol Database uploads:
 
-1. `-Ddd.symbol.database.upload.enabled` フラグ、または `DD_SYMBOL_DATABASE_UPLOAD_ENABLED` 環境変数を `true` に設定します。
-2. `-Ddd.symbol.database.includes` フラグ、または `DD_SYMBOL_DATABASE_INCLUDES` 環境変数を利用しているパッケージのプレフィックス (例: `com.datadoghq`) に設定します。設定にはカンマ区切りリストを使用し、複数のプレフィックスを追加できます。
-3. [統合サービスタグ][5]の `dd.service` と `dd.version` を指定します。
+1. Set the `-Ddd.symbol.database.upload.enabled` flag or the `DD_SYMBOL_DATABASE_UPLOAD_ENABLED` environment variable to `true`. 
+2. Set the `-Ddd.symbol.database.includes` flag or the `DD_SYMBOL_DATABASE_INCLUDES` environment variable to your package prefix (for example, `com.datadoghq`). The setting expects a comma-separated list, so you can add multiple prefixes. 
+3. Specify the `dd.service` and `dd.version` [Unified Service Tags][5].
 
 {{< tabs >}}
-{{% tab "コマンド引数" %}}
+{{% tab "Command arguments" %}}
 
-サービス起動コマンドの例:
+Example service startup command:
 ```shell
 java \
     -javaagent:dd-java-agent.jar \
@@ -43,7 +43,7 @@ java \
 ```
 {{% /tab %}}
 
-{{% tab "環境変数" %}}
+{{% tab "Environment variables" %}}
 
 ```shell
 export DD_SERVICE=<YOUR_SERVICE>
@@ -59,7 +59,7 @@ java \
 {{% /tab %}}
 {{< /tabs >}}
 
-**注**: `-javaagent` 引数は `-jar` ファイルより前にあり、アプリケーション引数ではなく JVM オプションとして追加される必要があります。詳しくは、[Oracle ドキュメント][3]を参照してください。
+   **Note**: The `-javaagent` argument needs to be before `-jar`, adding it as a JVM option rather than an application argument. For more information, see the [Oracle documentation][3]:
 
    ```
    # Correct:
@@ -69,11 +69,11 @@ java \
    $ java -jar my-service.jar -javaagent:dd-java-agent.jar ...
    ```
 
-2. Symbol Database を有効にした状態でサービスを起動すると、[APM > ダイナミックインスツルメンテーションページ][4]で Symbol Database の IDE 同様の機能を利用することができます。
+2. After starting your service with Symbol Database enabled, you can use Symbol Database's IDE-like features on the [APM > Dynamic Instrumentation page][4].
 
-[1]: /ja/dynamic_instrumentation
+[1]: /dynamic_instrumentation
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: https://app.datadoghq.com/dynamic-instrumentation
-[5]: /ja/getting_started/tagging/unified_service_tagging
-[6]: /ja/dynamic_instrumentation/symdb
+[5]: /getting_started/tagging/unified_service_tagging
+[6]: /dynamic_instrumentation/symdb

@@ -1,58 +1,59 @@
 ---
-aliases:
-- /ja/integrations/azure_appserviceenvironment
-categories:
+"aliases":
+- /integrations/azure_appserviceenvironment
+"categories":
 - cloud
 - azure
-dependencies: []
-description: Azure App Service Environment のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_app_service_environment/
-draft: false
-git_integration_title: azure_app_service_environment
-has_logo: true
-integration_id: azure-appserviceenvironment
-integration_title: Microsoft Azure App Service Environment
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_app_service_environment
-public_title: Datadog-Microsoft Azure App Service Environment インテグレーション
-short_description: Azure App Service Environment のキーメトリクスを追跡
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure App Service Environment metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_app_service_environment/"
+"draft": false
+"git_integration_title": "azure_app_service_environment"
+"has_logo": true
+"integration_id": "azure-appserviceenvironment"
+"integration_title": "Microsoft Azure App Service Environment"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_app_service_environment"
+"public_title": "Datadog-Microsoft Azure App Service Environment Integration"
+"short_description": "Track key Azure App Service Environment metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure App Service Environment は、App Service アプリを大規模かつ安全に実行するために完全に分離された専用の環境を提供する Azure App Service の機能です。
+The Azure App Service Environment is an Azure App Service feature that provides a fully isolated and dedicated environment for securely running App Service apps at high scale.
 
-Datadog Azure インテグレーションを使用して、Azure App Service Environment からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Azure App Service Environment.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_app_service_environment" >}}
 
 
-### ヘルプ
+### Events
 
-Azure App Service Environment インテグレーションには、イベントは含まれません。
+The Azure App Service Environment integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure App Service Environment インテグレーションには、サービスのチェック機能は含まれません。
+The Azure App Service Environment integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_app_service_environment/azure_app_service_environment_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

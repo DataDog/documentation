@@ -1,76 +1,77 @@
 ---
-categories:
-- cloud
-- configuration & deployment
-- google cloud
-dependencies: []
-description: プロジェクトのメトリクスを収集してプロジェクトバージョン間で比較。
-doc_link: https://docs.datadoghq.com/integrations/google_app_engine/
-draft: false
-git_integration_title: google_app_engine
-has_logo: true
-integration_id: google-app-engine
-integration_title: Google App Engine
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: google_app_engine
-public_title: Datadog-Google App Engine インテグレーション
-short_description: プロジェクトのメトリクスを収集してプロジェクトバージョン間で比較。
-version: '1.0'
+"categories":
+- "cloud"
+- "configuration & deployment"
+- "google cloud"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Collect metrics for your project and compare them across project versions."
+"doc_link": "https://docs.datadoghq.com/integrations/google_app_engine/"
+"draft": false
+"git_integration_title": "google_app_engine"
+"has_logo": true
+"integration_id": "google-app-engine"
+"integration_title": "Google App Engine"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "google_app_engine"
+"public_title": "Datadog-Google App Engine Integration"
+"short_description": "Collect metrics for your project and compare them across project versions."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Google App Engine インテグレーションをプロジェクトにインストールして、以下のことができます。
+Install the Google App Engine integration in your project to:
 
-- Google App Engine サービスのメトリクス (メモリキャッシュ、タスクキュー、データストア) を確認できます。
-- リクエストに関するメトリクス (表示パーセンタイル、レイテンシー、コスト) を確認できます。
-- Google App Engine のメトリクスをバージョンごとにタグ付けし、異なるバージョンのパフォーマンスを比較できます。
+- See your Google App Engine services metrics: memcache, task queues, datastores.
+- See metrics about requests: display percentiles, latency, cost.
+- Tag Google App Engine metrics by version and compare the performance of different versions.
 
-また、[API][1] や [DogStatsD][2] を使って、Datadog にカスタムメトリクスを送信することも可能です。
+You can also send custom metrics to Datadog through the [API][1] or [DogStatsD][2].
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Google Cloud Platform インテグレーション][3]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Google Cloud Platform integration][3] first. There are no other installation steps.
 
-### 収集データ
+### Log collection
 
-Google App Engine のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][4]。
+Google App Engine logs are collected with Google Cloud Logging and sent to a Dataflow job through a Cloud Pub/Sub topic. If you haven't already, [set up logging with the Datadog Dataflow template][4].
 
-これが完了したら、Google App Engine のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
+Once this is done, export your Google App Engine logs from Google Cloud Logging to the Pub/Sub topic:
 
-1. [Google Cloud Logging のページ][5]に移動し、Google App Engine のログを絞り込みます。
-2. **Create Export** をクリックし、シンクに名前を付けます。
-3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
-4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
+1. Go to the [Google Cloud Logging page][5] and filter the Google App Engine logs.
+2. Click **Create Export** and name the sink.
+3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
+4. Click **Create** and wait for the confirmation message to show up.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "google_app_engine" >}}
 
 
-### ヘルプ
+### Events
 
-Google App Engine インテグレーションには、イベントは含まれません。
+The Google App Engine integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Google App Engine インテグレーションには、サービスのチェック機能は含まれません。
+The Google App Engine integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+Need help? Contact [Datadog support][7].
 
-[1]: https://docs.datadoghq.com/ja/api/latest/using-the-api/
-[2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
-[3]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
-[4]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
+[1]: https://docs.datadoghq.com/api/latest/using-the-api/
+[2]: https://docs.datadoghq.com/developers/dogstatsd/
+[3]: https://docs.datadoghq.com/integrations/google_cloud_platform/
+[4]: https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection
 [5]: https://console.cloud.google.com/logs/viewer
 [6]: https://github.com/DataDog/dogweb/blob/prod/integration/google_app_engine/google_app_engine_metadata.csv
-[7]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/help/
+

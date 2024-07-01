@@ -1,82 +1,84 @@
 ---
-title: 推定使用量メトリクス
+title: Estimated Usage Metrics
 ---
 
-## 概要
+## Overview
 
-Datadog は、現在の推定使用量をほぼリアルタイムで計算します。推定使用量メトリクスにより、次のことが可能になります。
+Datadog calculates your current estimated usage in near real-time. Estimated usage metrics enable you to:
 
-* 推定使用量をグラフ化します
-* 自身で選んだしきい値に基づいた推定使用量に関する[モニター][3]を作成します
-* 使用量の急増や減少に関する[モニターアラート][4]を受け取ります
-* コードの変更が使用量に及ぼす潜在的な影響をほぼリアルタイムで評価します
+* Graph your estimated usage
+* Create [monitors][3] around your estimated usage based on thresholds of your choosing
+* Get [monitor alerts][4] of spikes or drops in your usage
+* Assess the potential impact of code changes on your usage in near real-time
 
-**注**: これらの使用量メトリクスはあくまでも推定値であり、リアルタイムという性質上、請求対象の使用量に必ずしも一致しません。推定使用量と請求対象使用量には平均で 10〜20% の差があります。推定であるため、使用量が少ないと誤差の範囲はより大きくなります。
+**Note**: These usage metrics are estimates that are not always matched to billable usage given their real-time nature. There is a 10-20% difference between estimated usage and billable usage on average. Due to the nature of the estimations, the margin of error is larger for small usage.
 
-{{< img src="account_management/billing/usage-metrics-01.png" alt="ダッシュボード例" >}}
+{{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" >}}
 
-## 使用のタイプ
+## Types of usage
 
-推定使用量メトリクスは、通常、次の使用タイプで使用できます。
+Estimated usage metrics are generally available for the following usage types:
 
-| 使用タイプ                    | メトリクス                                   | 説明 |
+| Usage Type                    | Metric                                   | Description |
 |-------------------------------|------------------------------------------| ----------- |
-| インフラストラクチャーホスト          | `datadog.estimated_usage.hosts`          | 過去 1 時間に確認された一意のホスト。 |
-| コンテナ                    | `datadog.estimated_usage.containers`     | 過去 1 時間に確認された一意のコンテナ。 |
-| Fargate タスク                 | `datadog.estimated_usage.fargate_tasks`  | 過去 5 分間に確認された一意の Fargate タスク。 |
-| インデックスされたカスタムメトリクス        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric` | 過去 1 時間に確認された一意のインデックス化カスタムメトリクス。 |
-| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric` | 過去 1 時間に確認された一意の取り込みカスタムメトリクス。 |
-| ログ取り込みバイト           | `datadog.estimated_usage.logs.ingested_bytes` | バイト単位のログの取り込みの合計。 |
-| ログ取り込みイベント          | `datadog.estimated_usage.logs.ingested_events` | 除外されたログを含む、取り込まれたイベントの総数。 |
-| ログのドロップ数               | `datadog.estimated_usage.logs.drop_count` | 取り込み中にドロップされたイベントの総数。 |
-| ログの切り捨て数          | `datadog.estimated_usage.logs.truncated_count` | 取り込み時に切り捨てられたイベントの総数。 |
-| ログの切り捨てバイト数          | `datadog.estimated_usage.logs.truncated_bytes` | 切り捨てられたイベントの量 (バイト単位)。 |
-| 分析ログ (セキュリティ)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes` | バイト単位の Cloud SIEM ログの取り込みの合計。 |
-| APM ホスト                     | `datadog.estimated_usage.apm_hosts` | 過去 1 時間に確認された一意の APM ホスト。Azure App Services ホストは含まれません。 |
-| APM インデックス化スパン             | `datadog.estimated_usage.apm.indexed_spans` | インデックス化スパンの総数。 |
-| APM 取り込みバイト            | `datadog.estimated_usage.apm.ingested_bytes` | バイト単位の取り込みスパンの量。 |
-| APM 取り込みスパン            | `datadog.estimated_usage.apm.ingested_spans` | 取り込みスパンの総数。 |
-| APM Fargate タスク             | `datadog.estimated_usage.apm.fargate_tasks` | 過去 5 分間に確認された一意の APM Fargate タスク。 |
-| RUM Sessions                  | `datadog.estimated_usage.rum.sessions` | RUM セッションの総数。 |
-| サーバーレス Lambda 関数   | `datadog.estimated_usage.serverless.aws_lambda_functions` | 過去 1 時間に確認された一意のサーバーレス関数。 |
-| サーバーレス呼び出し        | `datadog.estimated_usage.serverless.invocations`| 過去 1 時間のサーバーレス呼び出しの合計。 |
-| API テストの実行                 | `datadog.estimated_usage.synthetics.api_test_runs` | API テストの推定使用量。 |
-| ブラウザテストの実行             | `datadog.estimated_usage.synthetics.browser_test_runs`| ブラウザテストの推定使用量。 |
-| 並列テストスロット        | `datadog.estimated_usage.synthetics.parallel_testing_slots` | 並列テストスロットの推定使用量。 |
-| Network Hosts                 | `datadog.estimated_usage.network.hosts` | 過去 1 時間に確認された一意の NPM ホスト。 |
-| Network Devices               | `datadog.estimated_usage.network.devices` | 過去 1 時間に確認された一意の NDM デバイス。 |
-| Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` | 過去 1 時間に確認された一意のプロファイリングホスト。 |
-| Profiled Containers           | `datadog.estimated_usage.profiling.containers` | 過去 5 分間に確認された一意のプロファイリングコンテナ。 |
-| Profiler Fargate タスク        | `datadog.estimated_usage.profiling.fargate_tasks` | 過去 5 分間に確認された一意のプロファイリング Fargate タスク。 |
-| CSPM ホスト                    | `datadog.estimated_usage.cspm.hosts` | 過去 1 時間に確認された一意の CSPM ホスト。 |
-| CSPM コンテナ               | `datadog.estimated_usage.cspm.containers` | 過去 5 分間に確認された一意の CSPM コンテナ。 |
-| CWS ホスト                     | `datadog.estimated_usage.cws.hosts` | 過去 1 時間に確認された一意の CWS ホスト。 |
-| CWS コンテナ                | `datadog.estimated_usage.cws.containers` | 過去 5 分間に確認された一意の CWS コンテナ。 |
-| データベースホスト                | `datadog.estimated_usage.dbm.hosts` | 過去 1 時間に確認された一意の DBM ホスト。 |
-| ASM ホスト                     | `datadog.estimated_usage.asm.hosts` | 過去 1 時間に確認された一意の ASM ホスト。 |
-| ASM タスク                     | `datadog.estimated_usage.asm.tasks` | 過去 5 分間に確認された一意の ASM Fargate タスク。 |
-| インシデント管理 (アクティブユーザー)   | `datadog.estimated_usage.incident_management.active_users` | (暦) 月累計の確認されたアクティブ IM ユーザー。 |
-| CI Visibility パイプラインのコミッター | `datadog.estimated_usage.ci_visibility.pipeline.committers` | (暦) 月累計の確認されたパイプラインコミッター。 |
-| CI Visibility テストのコミッター | `datadog.estimated_usage.ci_visibility.test.committers` | (暦) 月累計の確認されたテストコミッター。 |
-| IOT デバイス                   | `datadog.estimated_usage.iot.devices` | 過去 1 時間に確認された一意の IoT デバイス。 |
-| Observability Pipelines 取り込みバイト数 | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Observability Pipelines によって取り込まれたデータ量。 |
+| Infrastructure Hosts          | `datadog.estimated_usage.hosts`          | Unique hosts seen in the last hour. |
+| Containers                    | `datadog.estimated_usage.containers`     | Unique containers seen in the last hour. |
+| Fargate Tasks                 | `datadog.estimated_usage.fargate_tasks`  | Unique Fargate Tasks seen in the last 5 minutes. |
+| Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric` | Unique indexed Custom Metrics seen in the last hour. |
+| Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric` | Unique ingested Custom Metrics seen in the last hour. |
+| Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Total ingestion of logs in bytes. |
+| Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events` | Total number of ingested events, including excluded logs. |
+| Logs Drop Count               | `datadog.estimated_usage.logs.drop_count` | Total number of events dropped during ingestion. |
+| Logs Truncated Count          | `datadog.estimated_usage.logs.truncated_count` | Total number of events truncated at ingestion. |
+| Logs Truncated Bytes          | `datadog.estimated_usage.logs.truncated_bytes` | Volume of truncated events in bytes. |
+| Error Tracking Logs Events    | `datadog.estimated_usage.error_tracking.logs.events` | Volume of error logs ingested into Error Tracking. |
+| Analyzed Logs (security)      | `datadog.estimated_usage.security_monitoring.analyzed_bytes` | Total ingestion of Cloud SIEM logs in bytes. |
+| APM Hosts                     | `datadog.estimated_usage.apm_hosts` | Unique APM hosts seen in last hour. Does not include Azure App Services hosts. |
+| APM Indexed Spans             | `datadog.estimated_usage.apm.indexed_spans` | Total number of spans indexed by tag-based retention filters. |
+| APM Ingested Bytes            | `datadog.estimated_usage.apm.ingested_bytes` | Volume of ingested spans in bytes. |
+| APM Ingested Spans            | `datadog.estimated_usage.apm.ingested_spans` | Total number of ingested spans. |
+| APM Fargate Tasks             | `datadog.estimated_usage.apm.fargate_tasks` | Unique APM Fargate Tasks seen in last 5 minutes. |
+| RUM Sessions                  | `datadog.estimated_usage.rum.sessions` | Total number of RUM sessions. |
+| Serverless Lambda Functions   | `datadog.estimated_usage.serverless.aws_lambda_functions` | Unique serverless functions seen in the last hour. |
+| Serverless Invocations        | `datadog.estimated_usage.serverless.invocations`| Sum of serverless invocations in the last hour. |
+| API test runs                 | `datadog.estimated_usage.synthetics.api_test_runs` | Estimated usage for API tests. |
+| Browser test runs             | `datadog.estimated_usage.synthetics.browser_test_runs`| Estimated usage for browser tests. |
+| Parallel Testing Slots        | `datadog.estimated_usage.synthetics.parallel_testing_slots` | Estimated usage for parallel testing slots. |
+| Network Hosts                 | `datadog.estimated_usage.network.hosts` | Unique NPM hosts seen in the last hour. |
+| Network Devices               | `datadog.estimated_usage.network.devices` | Unique NDM devices seen in the last hour. |
+| Profiled Hosts                | `datadog.estimated_usage.profiling.hosts` | Unique profiling hosts seen in the last hour. |
+| Profiled Containers           | `datadog.estimated_usage.profiling.containers` | Unique profiling containers seen in last 5 minutes. |
+| Profiler Fargate Tasks        | `datadog.estimated_usage.profiling.fargate_tasks` | Unique profiling Fargate Tasks seen in the last 5 minutes. |
+| CSPM Hosts                    | `datadog.estimated_usage.cspm.hosts` | Unique CSPM hosts seen in the last hour. |
+| CSPM Containers               | `datadog.estimated_usage.cspm.containers` | Unique CSPM containers seen in the last 5 minutes. |
+| CWS Hosts                     | `datadog.estimated_usage.cws.hosts` | Unique CWS hosts seen in the last hour. |
+| CWS Containers                | `datadog.estimated_usage.cws.containers` | Unique CWS containers seen in the last 5 minutes. |
+| Database Hosts                | `datadog.estimated_usage.dbm.hosts` | Unique DBM hosts seen in the last hour. |
+| ASM Hosts                     | `datadog.estimated_usage.asm.hosts` | Unique ASM hosts seen in the last hour. |
+| ASM Tasks                     | `datadog.estimated_usage.asm.tasks` | Unique ASM Fargate Tasks seen in the last 5 minutes. |
+| Incident Management (Active Users)   | `datadog.estimated_usage.incident_management.active_users` | Active IM users seen from (calendar) month-to-date. |
+| CI Visibility Pipeline Committers | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Pipeline committers seen from (calendar) month-to-date. |
+| CI Visibility Test Committers | `datadog.estimated_usage.ci_visibility.test.committers` | Test committers seen from (calendar) month-to-date. |
+| IOT devices                   | `datadog.estimated_usage.iot.devices` | Unique IoT devices seen in the last hour. |
+| Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
+| Custom Events                   | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
+| Events Ingested                        | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |
 
+{{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
-{{< img src="account_management/billing/usage-metrics-02.png" alt="メトリクス名" >}}
+## Multi-Org usage
 
-## 複数組織の使用
+For accounts with multiple organizations, you can roll up estimated usage from child organizations using the `from` field to monitor usage across your entire account.
 
-複数の組織を持つアカウントの場合、`from` フィールドを使用して子組織の推定使用量をロールアップし、アカウント全体の使用量を監視できます。
+{{< img src="account_management/billing/usage-metrics-03.png" alt="Multi-Org Usage" >}}
 
-{{< img src="account_management/billing/usage-metrics-03.png" alt="複数組織の使用" >}}
+## Troubleshooting
 
-## ヘルプ
+For technical questions, contact [Datadog support][1].
 
-技術的な質問については、[Datadog のサポートチーム][1]にお問い合わせください。
+For billing questions, contact your [Customer Success][2] Manager.
 
-課金に関するご質問は、[カスタマーサクセス][2]マネージャーにお問い合わせください。
-
-[1]: /ja/help/
+[1]: /help/
 [2]: mailto:success@datadoghq.com
-[3]: /ja/monitors/types/metric/?tab=threshold
-[4]: /ja/logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
+[3]: /monitors/types/metric/?tab=threshold
+[4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month

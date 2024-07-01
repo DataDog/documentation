@@ -1,54 +1,82 @@
 ---
+title: Tag Pipelines
 further_reading:
 - link: /cloud_cost_management/
-  tag: ドキュメント
-  text: Cloud Cost Management
-title: タグパイプライン
+  tag: Documentation
+  text: Learn about Cloud Cost Management
+- link: /getting_started/tagging/
+  tag: Documentation
+  text: Getting Started with Tags
+- link: /integrations/guide/reference-tables
+  tag: Documentation
+  text: Learn about Reference Tables
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management はこのサイトではサポートされていません。</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## 概要
+## Overview
 
-クラウドのコストを効果的に監視するには、さまざまなサービス、チーム、製品が全体的なコストにどのように寄与しているかを完全かつ詳細に把握する必要があります。タグパイプラインは、クラウドリソースが製品全体で活用できる標準タグを使用するようにし、リソースのコストデータが漏れないようにします。
+To effectively monitor cloud costs, you need a comprehensive understanding of how various services, teams, and products contribute to your overall spending. Tag Pipelines enforce the use of standardized tags across your cloud resources and ensure consistent, accurate cost attribution throughout your organization.
 
-[タグパイプライン][1]を使用してタグルールを作成し、クラウド請求書に記載されていないタグや不正確なタグを修正したり、ビジネスロジックに沿った新しい推論タグを作成したりすることができます。
+With [Tag Pipelines][1], you can create tag rules to address missing or incorrect tags on your cloud bills. You can also create new inferred tags that align with specific business logic to enhance the accuracy of your cost tracking.
 
-## ルールタイプ
+## Create a ruleset
 
-<div class="alert alert-warning"> 作成できるルールは最大 100 個で、API ベースのリファレンステーブルはサポートされていません。 </div>
+<div class="alert alert-warning"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
 
-3 種類のルールがサポートされています。**Add tag** (タグの追加)、**Alias tag keys** (タグキーのエイリアス設定)、**Map multiple tags** (複数のタグのマッピング) です。ルールセットを活用することで、ルールを整理することができます。ルールセットは、ルールのフォルダーとして機能します。ルールは、決定論的な順序で (上から下へ) 実行されます。ルールとルールセットを整理することで、実行順序をビジネスロジックと一致させることができます。
+Before creating individual rules, create a ruleset (a folder for your rules) by clicking **+ New Ruleset**. 
 
-### タグの追加
+Within each ruleset, click **+ Add New Rule** and select a rule type: **Add tag**, **Alias tag keys**, or **Map multiple tags**. These rules execute in a sequential, deterministic order from top to bottom. 
 
-クラウドコストデータに存在する既存のタグに基づいて、新しいタグ (キー + 値) を追加します。
+{{< img src="cloud_cost/tags_order.png" alt="A list of tag rules on the Tag Pipelines page displaying various categories such as team, account, service, department, business unit, and more" style="width:80%;" >}}
 
-例えば、リソースが所属するサービスに基づいて、すべてのリソースにビジネスユニットのタグを付けるルールを作成できます。
+You can organize rules and rulesets to ensure the order of execution matches your business logic.
 
-{{< img src="cloud_cost/tags_addnew.png" alt="service:processing、service:creditcard、または service:payment-notification を持つリソースに新しいビジネスユニットタグを追加します。" >}}
+### Add tag
 
-### タグキーのエイリアス設定
+Add a new tag (key + value) based on the presence of existing tags on your Cloud Costs data.
 
-  既存のタグ値をより標準化されたタグにマッピングします。
+For example, you can create a rule to tag all resources with their business unit based on the services those resources are a part of.
 
-例えば、組織で標準の `application` タグキーを使用したいが、いくつかのチームがそのタグのバリエーション（`app`、`webapp`、`apps` など）を持っている場合、`apps` を `application` にエイリアス設定することができます。各エイリアスタグルールでは、最大で 25 個のタグキーを新しいタグにエイリアス設定することができます。
+{{< img src="cloud_cost/tags_addnew.png" alt="Add new business unit tag to resources with service:processing, service:creditcard, or service:payment-notification." style="width:60%;" >}}
 
-ルールは最初のマッチが見つかった後、各リソースに対して実行を停止します。例えば、リソースがすでに `app` タグを持っている場合、ルールはもう `webapp` または `apps` タグを識別しようとしません。
-{{< img src="cloud_cost/tags_alias.png" alt="app、webapp、apps タグを持つリソースにアプリケーションタグを追加します。" >}}
+To ensure the rule only applies if the `business_unit` tag doesn't already exist, click the toggle in the **Additional options** section.
 
-### 複数のタグのマッピング
+### Alias tag keys
 
-[リファレンステーブル][2]を使用すると、複数のルールを作成することなく、コストデータに複数のタグを追加できます。これにより、リファレンステーブルのプライマリキー列の値がコストタグの値にマップされます。見つかった場合、パイプラインは選択したリファレンステーブルの列をタグとしてコストデータに追加します。
+Map existing tag values to a more standardized tag.
 
-例えば、異なる AWS や Azure のアカウントがどの VP、組織、ビジネスユニットに属しているかの情報を追加したい場合、テーブルを作成してタグをマッピングします。タグキーのエイリアス設定と同様に、ルールは最初のマッチが見つかった後、各リソースに対して実行を停止します。例えば、`aws_member_account_id` が見つかった場合、ルールはもはや `subscriptionid` を見つけようとしません。
-{{< img src="cloud_cost/tags_mapmultiple.png" alt="タグパイプラインのリファレンステーブルを使用して、VP、組織、ビジネスユニットなどのアカウントメタデータを追加します" >}}
+For example, if your organization wants to use the standard `application` tag key, but several teams have a variation of that tag (like `app`, `webapp`, or `apps`), you can alias `apps` to `application`. Each alias tag rule allows you to alias a maximum of 25 tag keys to a new tag.
 
-## その他の参考資料
+{{< img src="cloud_cost/tags_alias.png" alt="Add application tag to resources with app, webapp, or apps tag." style="width:60%;" >}}
+
+Add the application tag to resources with `app`, `webapp`, or `apps` tags. The rule stops executing for each resource after a first match is found. For example, if a resource already has a `app` tag, then the rule no longer attempts to identify a `webapp` or `apps` tag.
+
+To ensure the rule only applies if the `application` tag doesn't already exist, click the toggle in the **Additional options** section.
+
+### Map multiple tags
+
+Use [Reference Tables][2] to add multiple tags to cost data without creating multiple rules. This will map the values from your Reference Table's primary key column to values from cost tags. If found, the pipelines adds the selected Reference Table columns as tags to cost data.
+
+For example, if you want to add information about which VPs, organizations, and business_units different AWS and Azure accounts fall under, you can create a table and map the tags. 
+
+{{< img src="cloud_cost/tags_mapmultiple.png" alt="Add account metadata like vp, organization, and businessunit using reference tables for tag pipelines" style="width:60%;" >}}
+
+Similar to [Alias tag keys](#alias-tag-keys), the rule stops executing for each resource after a first match is found. For example, if an `aws_member_account_id` is found, then the rule no longer attempts to find a `subscriptionid`.
+
+## Reserved tags
+
+Certain tags such as `env` and `host` are [reserved tags][4], and are part of [Unified Service Tagging][3]. The `host` tag cannot be added in Tag Pipelines. 
+
+Using tags helps correlate your metrics, traces, processes, and logs. Reserved tags like `host` provide visibility and effective monitoring across your infrastructure. For optimal correlation and actionable insights, use these reserved tags as part of your tagging strategy in Datadog.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/tag-pipelines
-[2]: https://docs.datadoghq.com/ja/integrations/guide/reference-tables/?tab=manualupload
+[2]: /integrations/guide/reference-tables/?tab=manualupload
+[3]: /getting_started/tagging/unified_service_tagging/
+[4]: /getting_started/tagging/

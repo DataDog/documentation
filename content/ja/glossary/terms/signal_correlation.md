@@ -1,7 +1,7 @@
 ---
+title: signal correlation
 core_product:
-- セキュリティ
-- cloud siem
-title: シグナル相関
+  - security
+  - cloud siem
 ---
-シグナル相関ルールは、ユーザーがより複雑なユースケースでアラートを出すことができるよう、複数の信号を組み合わせて新しい信号を生成します。
+A signal correlation rule combines multiple signals together to generate a new signal so that users can alert on more complex use cases.

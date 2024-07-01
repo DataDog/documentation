@@ -1,4 +1,4 @@
 ---
-title: オブジェクト識別子 (OID)
+title: object identifier (OID)
 ---
-OID は、オブジェクトを識別するために使用される標準的な名前です。
+An OID is a standardized name used to identify an object.

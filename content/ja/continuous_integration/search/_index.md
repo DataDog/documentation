@@ -1,181 +1,99 @@
 ---
-algolia:
-  rank: 70
-  tags:
-  - 不安定なテスト
-  - 不安定なテスト
-  - テスト回帰
-  - テスト回帰
-  - テストサービス
-  - テストサービス
+title: Search and Manage CI Pipelines 
+description: Learn how to search for your CI pipelines.
 aliases:
-- /ja/continuous_integration/guides/find_flaky_tests/
-description: CI パイプラインとテストの検索方法
+- /continuous_integration/explorer/search/
 further_reading:
 - link: /continuous_integration/explorer
-  tag: ドキュメント
-  text: テスト実行またはパイプライン実行を検索およびフィルターする
-- link: /continuous_integration/guides/flaky_test_management
-  tag: ドキュメント
-  text: 不安定なテストの管理方法について
-title: CI パイプラインとテストの検索と管理
+  tag: Documentation
+  text: Search and filter pipeline executions
 ---
 
-## 概要
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 
-{{< tabs >}}
-{{% tab "Pipelines" %}}
+## Overview
 
-[Pipelines ページ][101]は、自分のサービスのビルドパイプラインを監視したい開発者にとって有用です。
+The [Pipelines page][1] is useful for developers who want to keep an eye on the build pipeline for their service.
 
-{{< img src="/continuous_integration/pipelines.png" text="CI Pipelines ページ" style="width:100%" >}}
+{{< img src="/continuous_integration/pipelines.png" text="CI Pipelines page" style="width:100%" >}}
 
-このページでは、以下の質問に答えます。
+This page answers the following questions:
 
-- 特にデフォルトのブランチで、サービスのパイプラインはパフォーマンスと信頼性を確保できているか？
-- そうでない場合、根本的な原因は？
+- Is the pipeline for your service performant and reliable, especially on the default branch?
+- If not, what's the root cause?
 
-以下などのおおまかな蓄積と傾向にアクセスできます。
+You can access high-level accumulation and trends, including:
 
-- パイプラインの実行とブランチの集計された統計を含む、ビルドシステム全体の状態の概要。
-- プロダクションパイプラインの破損など、緊急の問題をすばやく見つけて修正するためのウィンドウ。
-- 時間の経過とともに各パイプラインがどのように実行されたか、また、どのような結果と傾向が見られるか。
-- 時間の経過に伴う、各ビルド段階で費やされた時間の内訳。これにより、最大の違いを生む場所に改善努力を集中させることができます。
+- An overview of the health of the whole build system, with aggregated stats for pipeline runs and branches.
+- A window to quickly spotting and fixing immediate, urgent issues like broken pipelines to production.
+- How each pipeline has run, over time, and with what results and trends.
+- The breakdown of where time is spent in each build stage, over time, so you can focus your improvement efforts where it makes the biggest difference.
 
-## パイプラインを検索する
+## Search for pipelines
 
-パイプラインを確認するには、[**CI** > **Pipelines**][101] に移動します。
+To see your pipelines, navigate to [**Software Delivery** > **CI Visibility** > **CI Pipeline List**][1].
 
-[Pipelines ページ][101]には、選択した時間枠での各パイプラインのデフォルトブランチの集計統計と、最新のパイプライン実行のステータスが表示されます。このページを使用して、すべてのパイプラインを確認し、その健全性をすばやく確認します。このページには、デフォルトブランチ (通常は `main` や `prod` などの名前) に関連付けられた Git 情報を持つパイプラインと、Git 情報を一切持たないパイプラインのみが表示されます。
+The [Pipelines page][1] shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. Only pipelines with Git information associated to the default branch (usually named `main` or `prod`), as well as pipelines without any Git information, are displayed on this page.
 
-表示されるメトリクスには、ビルド頻度、失敗率、期間の中央値、期間の中央値の絶対的および相対的な変化が含まれます。この情報により、どのパイプラインが利用率が高く、潜在的にリソース消費が多いのか、または劣化が生じているのかが明らかになります。最後のビルドの結果、期間、および最後の実行時間は、最後のコミットの影響を示します。
+The metrics shown include build frequency, failure rate, median duration, and change in median duration on both an absolute and relative basis. This information reveals which pipelines are high-usage and potentially high-resource consumers, or are experiencing regressions. The last build result, duration, and last runtime shows you the effect of the last commit.
 
-パイプライン名でページをフィルタリングして、最も関心のあるパイプラインを確認できます。遅延または障害が発生しているパイプラインをクリックすると、パフォーマンスの低下やビルドエラーを引き起こした可能性のあるコミットが表示されます。[Datadog Teams][106] を使用している場合は、チームハンドルと一致する[カスタムタグ][107]を使用して、自分のチームに関連付けられた特定のパイプラインをフィルタリングすることができます。
+You can filter the page by pipeline name to see the pipelines you're most concerned with. Click on a pipeline that is slow or failing to dig into details that show what commit might have introduced the performance regression or build error. If you are using [Datadog Teams][6], you can filter for specific pipelines associated to your team using [custom tags][7] that match team handles.
 
-## パイプラインの詳細と実行
+## Pipeline details and executions
 
-特定のパイプラインをクリックすると、_Pipeline Details_ ページが表示されます。このページでは、指定された時間枠で選択したパイプラインのデータを閲覧できます。
+Click into a specific pipeline to see the _Pipeline Details_ page which provides views of the data for the pipeline you selected over a specified time frame.
 
-{{< img src="ci/pipeline_branch_overview_updated.png" alt="単一パイプラインの Pipeline Details ページ" style="width:100%;">}}
+{{< img src="ci/pipeline_branch_overview_updated.png" alt="Pipeline Details page for a single pipeline" style="width:100%;">}}
 
-選択したパイプラインに関する、時間の経過に伴う実行の合計と失敗、ビルド期間のパーセンタイル、エラーレート、およびステージごとの合計時間の内訳などの洞察を得ます。ステージとジョブの要約テーブルもあるため、期間、全体的な実行時間の割合、または失敗率の観点からそれらをすばやく並べ替えることができます。
+Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, error rates, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate.
 
-パイプライン実行リストには、選択したブランチについて、選択した時間枠内にパイプライン (またはそのステージまたはジョブ) が実行されたすべての時間が表示されます。左側のファセットを使用して、表示するパイプライン、ステージ、またはジョブにリストを正確にフィルタリングします。
+The pipeline execution list shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
 
-### サービス、リソース、ネットワークイベントへの接続を確認する
+### View unified pipeline trace
 
-実行の 1 つをクリックしてパイプライン実行ビューを開き、パイプラインとそのステージのフレームグラフまたはスパンリストを表示します。左側の _Executions (n)_ リストを使用すると、同じコミットでパイプラインを再試行するたびにデータにすばやくアクセスできます。
+To see the unified pipeline trace, click on the `View unified trace` checkbox on the pipeline execution page.
 
-CI プロバイダーリンク (次の画像の `gitlab-ci gitlab.pipeline > documentation`) をクリックして、パイプライン、ステージ、またはジョブの Resource、Service、または Analytics ページを具体的に調べます。また、完全なタグ情報と、ネットワーク監視イベントへのリンクもあります。
+The unified trace shows in a single trace all pipeline traces generated due to the different partial retries of your pipeline. If the pipeline execution has no partial retries, the unified trace shows only the trace of a single pipeline execution.
 
-{{< img src="ci/ci-pipeline-execution.png" alt="トレース情報とフレームグラフ表示によるパイプライン実行ビュー" style="width:100%;">}}
+### Highlight critical path
 
-### ログへの接続を確認する
+To highlight the critical path on the trace, click on the `Critical path` checkbox on the pipeline execution page.
 
-CI プロバイダーでジョブログ収集がサポートされ、有効になっている場合、関連するログイベントはパイプライン実行ビューの _Logs_ タブで確認できます。
+The critical path highlights the spans that you need to speed up if you want to reduce the overall execution time of your pipeline. If a CI job is on the critical path, it means it is part of the longest path through the trace in terms of execution time. Speeding up the CI Jobs on the critical path is strictly necessary to speed up the CI pipeline.
 
-ジョブログの収集は、以下のプロバイダーでサポートされています。
+### Explore connections to services, resources, and network events
 
-- [GitHub Actions][103]
-- [GitLab][104]
-- [Jenkins][105]
+Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
 
-#### AI 生成のログサマリー
+Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to investigate the Resource, Service, or Analytics page for the pipeline, stage, or job specifically. You can also find complete tags information and links to network monitoring events.
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
+{{< img src="ci/ci-pipeline-execution.png" alt="Pipeline execution view with trace info and flamegraph display" style="width:100%;">}}
 
-この機能は非公開ベター版です。アクセスをリクエストするには、[こちらのフォーム][108]に記入してください。
-{{% /site-region %}}
-{{% site-region region="gov" %}}
+### Explore connections to logs
 
-AI 生成のログサマリーは、{{< region-param key="dd_site_name" >}} サイトでは使用できません。
-{{% /site-region %}}
+If job log collection is supported and enabled for the CI provider, related log events can be found in the _Logs_ tab of the pipeline execution view.
 
-Pipeline Visibility は、CI ジョブログに基づいてパイプラインエラーの説明を AI によって生成します。これらの説明は、各パイプラインの実行に対して **Failed Jobs** タブで確認できます。これらの要約を利用して、CI のエラーが開発者によって書かれたコードに関連しているのか、それとも CI パイプライン自体に関連しているのかを判断し、実行失敗のトラブルシューティングも行うことができます。
+Job log collection is supported for the following providers:
 
-[101]: https://app.datadoghq.com/ci/pipelines
-[103]: /ja/continuous_integration/pipelines/github/#enable-log-collection
-[104]: /ja/continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
-[105]: /ja/continuous_integration/pipelines/jenkins#enable-job-log-collection
-[106]: /ja/account_management/teams/ 
-[107]: /ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
-[108]: https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform
+- [GitHub Actions][3]
+- [GitLab][4]
+- [Jenkins][5]
 
-{{% /tab %}}
-{{% tab "Tests" %}}
+#### AI-generated log summaries
 
-[Tests ページ][101]は、テスト結果を見続けたい開発者にとって便利です。
+<div class="alert alert-info">AI-generated log summaries are in private beta. To request access, fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBuPfdyhgqjjduDYpOM5twJdkdDnTTxJdCCWonauaBxWTCnQ/viewform">this form</a>.</div>
 
-{{< img src="/continuous_integration/tests.png" text="CI Tests ページ" style="width:100%" >}}
+Pipeline Visibility provides AI-generated explanations for pipeline errors based on your CI job logs. These explanations can be found on the **Failed Jobs** tab for each pipeline execution. You can use these summaries to determine whether an error in CI is associated with developer-written code or the CI pipeline itself, as well as troubleshoot execution failures.
 
-詳細で即時的な洞察にアクセスできます。
-
-- 失敗しているテストとその理由を確認します。
-- 最後のコミットのテスト結果を確認します。
-- 機能ブランチでテストの実行時間を表示し、それをデフォルトブランチと比較して、パフォーマンスの低下を引き起こそうとしているかどうかを特定します。
-- コミットによって、以前は不安定ではなかった新しい[不安定なテスト][105]が導入されているかどうかを確認します。これは、コードの変更が不安定な原因であることを示しています。これにより、CI の不安定なテストの数を増やすのではなく、続行する前に問題を修正する機会が得られます。
-
-また、おおまかな蓄積と傾向にもアクセスできます。
-
-- コードの変更、テストの追加、複雑さの増加が、時間の経過とともにテストスイートのパフォーマンスに与える影響を確認します。
-- 時間の経過とともにどのテストが遅くなったかを確認し、その回帰を引き起こしたコミットを特定します。
-- 時間の経過とともにどのテストが多かれ少なかれ信頼できなくなっているかを示す、Datadog の自動テストフレークネス検出と追跡を利用します。
-
-## テストを検索する
-
-テストを表示するには、[**CI** > **Tests**][101] に移動し、[**Branches**](#branches-view) または [**Default Branches** ビュー](#default-branches-view)のどちらかを選択します。
-
-### Branches ビュー
-
-Tests ページの [Branches][102] ビューには、テスト結果を報告したすべての[テストサービス][103]のすべてのブランチが一覧表示されます。このタブは、個々の開発者がコードブランチで実行されるテストのステータスをすばやく確認し、テストの失敗をトラブルシューティングするのに役立ちます。
-
-このページでは、名前、テストサービス、またはコミット SHA でリストをフィルタリングしたり、**My branches** トグルを有効にして Git 構成で使用するメールアドレスを追加することで、ブランチ (自分で作成したコミットを少なくとも 1 つ含むブランチ) のみを表示したりできます。
-
-#### テスト結果
-
-各ブランチについて、テストサービス、失敗したテストの数、パスしたテストの数、スキップしたテストの数、テスト回帰、実行時間、デフォルトブランチと比較した変更の割合、コミットの最終更新日時、そしてコミットの作成者のアバターを見ることができます。
-
-ブランチをクリックすると、テストの詳細ページが表示されます。このページには、そのブランチの最新のコミット、不安定なテスト、テストのパフォーマンス、一般的なエラーの種類、すべてのテストの実行に関する情報が含まれています。
-
-{{< img src="continuous_integration/test_details.png" alt="単一ブランチの Test Details ページ" style="width:100%;">}}
-
-#### テストスイートのパフォーマンス
-
-また、直近のテストスイート実行時の[実行時間][104]やデフォルトブランチの平均実行時間との比較といった情報もあります。ブランチの実行時間とデフォルトブランチの実行時間を比較することで、そのコミットがテストスイートにパフォーマンスの[回帰][106]をもたらしているかどうかを判断することができます。
-
-コミット作成者のアバターにカーソルを合わせると、最新のコミットに関する詳細情報が表示されます。
-
-#### テスト回帰
-
-テスト回帰は、パフォーマンス回帰を特定のコード変更に関連付けるために、コミットごとに評価されます。
-
-#### 詳細な情報を調べる
-
-行をクリックすると、このブランチでの最後のコミットのテスト結果 (ブランチを切り替えることもできます)、失敗したテストと最も一般的なエラー、遅いテスト、不安定なテスト、選択した時間枠のテスト実行の完全なリストなど、テストスイートの実行の詳細が表示されます。このテスト実行のリストをファセットでフィルタリングして、最も見たい情報にアクセスできます。
-
-テスト実行の 1 つをクリックすると、テストトレースがフレームグラフまたはスパンリストとして表示されます。左側の _Runs (n)_ リストを使用すると、同じコミットのテストを再試行するたびにトレースにすばやくアクセスできます。
-
-#### サービス、リソース、ログ、ネットワークイベントへの接続を確認する
-
-CI プロバイダーのリンクをクリックして、テストのリソース、サービス、または分析ページを調べます。また、完全なタグ情報と、関連するログイベントおよびネットワーク監視イベントへのリンクもあります。
-
-### Default Branches ビュー
-
-Tests ページの [Default Branches][107] ビューには、各テストサービスの_デフォルト_ブランチの健全性メトリクスが集計されて表示されます。このビューは、チームがサービスの全体的な健全性を経時的に把握するのに便利です。
-
-Default Branches ビューでは、Branches ビューと似たような情報が表示されますが、これはデフォルトブランチに適用されます。これは、現在の実行時間とデフォルトブランチの平均実行時間とを比較し、時間の経過とともにテストスイートのパフォーマンスがどのように推移しているかを示すためのものです。
-
-[101]: https://app.datadoghq.com/ci/test-services
-[102]: https://app.datadoghq.com/ci/test-services?view=branches
-[103]: /ja/glossary/#test-service
-[104]: /ja/glossary/#wall-time
-[105]: /ja/glossary/#flaky-test
-[106]: /ja/glossary/#test-regression
-[107]: https://app.datadoghq.com/ci/test-services?view=default-branches
-
-{{% /tab %}}
-{{< /tabs >}}
-
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/ci/pipelines
+[3]: /continuous_integration/pipelines/github/#enable-log-collection
+[4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
+[5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
+[6]: /account_management/teams/ 
+[7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux

@@ -1,3 +1,3 @@
 ---
-title: タイムボード
+title: Timeboards
 ---

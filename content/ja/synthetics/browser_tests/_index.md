@@ -1,214 +1,214 @@
 ---
+title: Browser Testing
+kind: documentation
+description: Simulate and monitor user journeys from specific locations.
 aliases:
-- /ja/synthetics/browser_check
-- /ja/synthetics/browser_test
-description: 特定の場所からユーザー操作をシミュレートして監視します。
+  - /synthetics/browser_check
+  - /synthetics/browser_test
 further_reading:
-- link: https://www.datadoghq.com/blog/browser-tests/
-  tag: ブログ
-  text: ブラウザテストによるユーザーエクスペリエンスの監視
-- link: https://www.datadoghq.com/blog/test-creation-best-practices/
-  tag: ブログ
-  text: エンドツーエンドテスト作成のベストプラクティス
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
-  tag: ラーニングセンター
-  text: Synthetic テストの紹介
+- link: "https://www.datadoghq.com/blog/browser-tests/"
+  tag: Blog
+  text: User experience monitoring with browser tests
+- link: "https://www.datadoghq.com/blog/test-creation-best-practices/"
+  tag: Blog
+  text: Best practices for creating end-to-end tests
+- link: "https://learn.datadoghq.com/courses/intro-to-synthetic-tests"
+  tag: Learning Center
+  text: Introduction to Synthetic Tests
 - link: /getting_started/synthetics/browser_test
-  tag: ドキュメント
-  text: ブラウザテストの概要
+  tag: Documentation
+  text: Getting started with browser tests
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentation
-  text: Synthetic テストモニターについて
-- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
-  tag: Terraform
-  text: Terraform による Synthetic ブラウザテストの作成と管理
-kind: ドキュメント
-title: ブラウザテスト
+  text: Learn about Synthetic test monitors
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
+  tag: External Site
+  text: Create and manage Synthetic Browser Tests with Terraform
 ---
 
-## 概要
+## Overview
 
-ブラウザテストは、Datadog が Web アプリケーション上で実行するシナリオです。世界中の複数の場所からさまざまなブラウザおよびデバイスを使用して実行され、テスト間隔は自由に設定できます。これらのテストは、アプリケーションが稼働してリクエストに応答していること、シナリオで定義された条件が満たされていることを確認します。
+Browser tests are scenarios executed by Datadog on your web applications. They run at configurable periodic intervals from multiple locations around the world, from multiple browsers, and devices. These tests verify both that your applications are up and responding to requests, and that any conditions defined in your scenarios are met.
 
-<div class="alert alert-info">MFA の背後にあるアプリケーションのテストに興味がある場合は、<a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">専用ガイド</a>を読み、<a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">フィードバックを送信</a>して、Synthetic Monitoring チームがお客様のチームにとって最も重要なシステムの構築をできるようサポートしてください。</div>
+<div class="alert alert-info">If you are interested in testing applications that sit behind MFA, read <a href="/synthetics/guide/app-that-requires-login/#multi-factor-authentication" target="_blank">the dedicated guide </a> and <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjx8PDZ8kJ3MD2ehouTri9z_Fh7PoK90J8arRQgt7QFgFxog/viewform?usp=sf_link">send feedback</a> to the Synthetic Monitoring team to help improve the systems that matter most to your teams.</div>
 
-## テストコンフィギュレーション
+## Test configuration
 
-ブラウザテストの構成を定義します。
+Define the configuration of your browser test.
 
-1. **Starting URL** を入力します。ブラウザテストがシナリオを開始する URL です。
-2. **Advanced Options** を追加します (オプション)。ブラウザテストに特定のオプションを設定します。
+1. Enter a **Starting URL**: The URL from which your browser test starts the scenario.
+2. Add **Advanced Options** (optional): Set specific options for your browser test.
 
    {{< tabs >}}
 
-   {{% tab "リクエストオプション" %}}
+   {{% tab "Request Options" %}}
 
-   クロスオリジンリソース共有 (CORS) ポリシーがテストをブロックするのを防ぐには、**Disable CORS** を選択します。コンテンツセキュリティポリシー (CSP) がテストをブロックするのを防ぐには、**Disable CSP** を選択します。
+   Select **Disable CORS** to prevent the cross-origin resource sharing (CORS) policy from blocking your test. To prevent the Content Security Policy (CSP) from blocking your test, select **Disable CSP**.
 
-   * **Request Headers**: **Name** および **Value* フィールドでヘッダーを定義して、デフォルトのブラウザヘッダーに追加またはオーバーライドします。たとえば、ヘッダーに User Agent を設定して、[Datadog スクリプトを識別][1]できます。
-   * **Cookies**: ブラウザのデフォルトのクッキーに追加するクッキーを定義します。1 行に 1 つのクッキーを入力し、[`Set-Cookie`][2] の構文を使用します。
-   * **HTTP Authentication**: HTTP Basic、Digest または NTLM を使用し、ユーザー名とパスワードで認証を行います。資格情報は、ブラウザテストのすべてのステップで使用されます。
+   * **Request Headers**: Define headers in the **Name** and **Value** fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
+   * **Cookies**: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
+   * **HTTP Authentication**: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test.
 
-   リクエストオプションは、テストの実行ごとに設定され、記録時ではなく、実行時にブラウザテストのすべてのステップに適用されます。次の手順を記録するためにこれらのオプションをアクティブのままにしておく必要がある場合は、記録元のページにオプションを手動で適用し、テストの後続の手順を作成します。
+   Request options are set at every test execution and apply to every step of your browser test at execution time, not recording time. If you need these options to remain active to record the following steps, manually apply the options on the page you are recording from and create subsequent steps in your test.
 
 
-[1]: /ja/synthetics/guide/identify_synthetics_bots/?tab=apitests
+[1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
    {{% /tab %}}
 
-   {{% tab "証明書" %}}
+   {{% tab "Certificate" %}}
 
-   **Ignore server certificate error** を選択すると、テストでサーバー証明書のエラーをスキップするように指示されます。
+   Select **Ignore server certificate error** to instruct the test to skip errors in the server certificate.
 
-   * **Client Certificate**: クライアント証明書を必要とするシステムでテストを行うには、**Upload File** をクリックして、証明書ファイルと秘密鍵をアップロードしてください。PEM 証明書のみ受け付けます。
-   * **Client Certificate Domains**: 証明書ファイルをアップロードすると、クライアント証明書は、開始 URL のドメインに適用されます。別のドメインにクライアント証明書を適用する場合は、**Value** 欄でドメインを指定します。 
+   * **Client Certificate**: Perform tests on systems that require client certificates by clicking **Upload File** and uploading your certificate file and private key. Only PEM certificates are accepted.
+   * **Client Certificate Domains**: Once the certificate files are uploaded, the client certificate applies to the starting URL's domain. To apply the client certificate on another domain, specify the domain in the **Value** field.
 
-   URL にワイルドカードを含めることができます。
+   You can include wildcards in the URL.
 
    {{% /tab %}}
 
-   {{% tab "プロキシ" %}}
+   {{% tab "Proxy" %}}
 
-   **Proxy URL** フィールドに、リクエストを送信するプロキシの URL を `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` として入力します。
+   Enter a URL for a proxy you want to send requests through in the **Proxy URL** field as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`.
 
-   URL に[グローバル変数](#use-global-variables)を含めることができます。
+   You can include [global variables](#use-global-variables) in the URL.
 
    {{% /tab %}}
 
    {{% tab "Privacy" %}}
 
-   **Do not capture any screenshots for this test** を選択して、テストステップでスクリーンショットが撮影されないようにします。
+   Select **Do not capture any screenshots for this test** to prevent screenshots from being taken in your test steps.
 
-   このプライバシー オプションは、個々のテストステップレベルで[詳細オプション][1]として利用でき、テスト結果に機密データが表示されないようにすることができます。テストによるスクリーンショットの撮影を防止すると、失敗のトラブルシューティングがより困難になります。詳細については、[データセキュリティ][2]を参照してください。
+   This privacy option is available as an [advanced option][1] at the individual test step level and ensures that no sensitive data appears in your test results. Preventing the test from taking screenshots makes troubleshooting failures more difficult. For more information, see [Data Security][2].
 
-[1]: /ja/synthetics/browser_tests/advanced_options#prevent-screenshot-capture
-[2]: /ja/data_security/synthetics
+[1]: /synthetics/browser_tests/advanced_options#prevent-screenshot-capture
+[2]: /data_security/synthetics
    {{% /tab %}}
 
-   {{% tab "開始 URL" %}}
+   {{% tab "Starting URL" %}}
 
-最初のテストステップを失敗と宣言する前に待機する時間を秒単位で入力します。
+   Enter an amount of time in seconds for the test to wait before declaring the initial test step as failed.
 
    {{% /tab %}}
 
    {{< /tabs >}}
 
-3. **名前**を追加します。ブラウザテストの名前です。
-4. **環境と追加タグ**を選択します。ブラウザのテストにアタッチされる `env` と関連するタグを設定します。与えられた `<KEY>` に対する `<VALUE>` をフィルタリングするには、`<KEY>:<VALUE>` という形式を使用します。
-5. **ブラウザとデバイス**を選択します。テストを実行するブラウザ (`Chrome`、`Firefox`、`Edge` など) とデバイス (`Laptop Large`、`Tablet`、`Mobile Small` など) です。
-   - 大型のラップトップデバイスの場合、寸法は 1440 ピクセル × 1100 ピクセルです。
-   - タブレットデバイスの場合、寸法は 768 ピクセル × 1020 ピクセルです。
-   - 小型のモバイルデバイスの場合、寸法は 320 ピクセル × 550 ピクセルです。
-6. **管理ロケーションとプライベートロケーション**を選択します。Datadog が管理する世界中のロケーションを選択するか、[プライベートロケーション][1]を作成して、カスタムロケーションやプライベートネットワーク内からブラウザテストを実行することができます。
+3. Add a **name**: The name of your browser test.
+4. Select **environment and additional tags**: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.
+5. Select **browsers and devices**: The browsers (such as `Chrome`, `Firefox`, and `Edge`), and devices (such as `Laptop Large`, `Tablet`, and `Mobile Small`) to run your test on.
+   - For a large laptop device, the dimensions are 1440 pixels x 1100 pixels.
+   - For a tablet device, the dimensions are 768 pixels x 1020 pixels.
+   - For a small mobile device, the dimensions are 320 pixels x 550 pixels.
+6. Select **managed and private locations**: Select locations around the world that are managed by Datadog or create [private locations][1] to run your browser test from custom locations or inside private networks.
 
    {{% managed-locations %}}
 
-   また、[Continuous Testing Tunnel][15] を使用すると、ローカルの開発環境や CI/CD パイプライン内でテストをトリガーし、内部環境をテストすることができます。
+   You can also use the [Continuous Testing Tunnel][15] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.
 
-7. **テスト頻度**を設定します。間隔は 5 分に 1 回から週に 1 回までさまざまです。1 分単位の頻度を希望する場合は、[サポートにお問い合わせ][2]ください。
+7. Set the **test frequency**: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][2].
 
 {{% synthetics-variables %}}
 
-### グローバル変数を使用する
+### Use global variables
 
-[**Settings** で定義されたグローバル変数][3]は、ブラウザテストの詳細の **Starting URL** や **Advanced Options** のほか、テスト記録で使用することができます。
+You can use the [global variables defined in **Settings**][3] in the **Starting URL** and **Advanced Options** of your browser test details, as well as in your test recording.
 
-利用可能な変数の一覧を表示するには
+To display a list of available variables:
 
-- ブラウザテストの詳細で: 目的のフィールドに `{{` と入力します。
+- In your browser test's details: Type `{{` in the desired field.
 
-  {{< img src="synthetics/browser_tests/recording_global_variable_1.mp4" alt="グローバル変数からローカル変数を定義する" video="true" width="90%" >}}
+  {{< img src="synthetics/browser_tests/recording_global_variable_1.mp4" alt="Defining a local variable from global variables" video="true" width="90%" >}}
 
-- ブラウザテストのレコーダーで: テストに変数をインポートし、目的のフィールドに `{{` を入力するか、アプリケーションに変数を挿入して使用します。
+- In your browser test's recorder: Import the variable in your test, then type `{{` in the desired field or inject the variable in your application to use it.
 
-  {{< img src="synthetics/browser_tests/recording_inject_variable_1.mp4" alt="ブラウザレコーディング時にローカル変数をフィールドに挿入する" video="true" width="90%" >}}
+  {{< img src="synthetics/browser_tests/recording_inject_variable_1.mp4" alt="Injecting a local variable into a field during a browser recording" video="true" width="90%" >}}
 
-ブラウザテストの記録で変数を使用する方法については、[ブラウザテストの手順][4]を参照してください。
+For more information about using variables in your browser test recording, see [Browser Test Steps][4].
 
-### アラート条件を定義する
+### Define alert conditions
 
-アラートの条件をカスタマイズして、通知アラートの送信をテストする状況を定義できます。
+You can customize alert conditions to define the circumstances under which you want a test to send a notification alert.
 
-{{< img src="synthetics/browser_tests/alerting_rules.png" alt="ブラウザテストのアラートルール" style="width:80%" >}}
+{{< img src="synthetics/browser_tests/alerting_rules.png" alt="Browser test alerting rule" style="width:80%" >}}
 
-* `N` のうち `n` の数の場所で、`X` の時間（分）継続してアサーションが失敗した場合は、アラートがトリガーされます。このアラートルールにより、通知をトリガーする前にテストが失敗する必要がある時間と場所の数を指定できます。
-* 場所が失敗としてマークされる前に、`X` 回再試行します。これにより、場所が失敗と見なされるために、連続していくつのテスト失敗が発生する必要があるかを定義できます。デフォルトでは、失敗したテストを再試行する前に 300 ミリ秒待機します。この間隔は、[API][5] で構成できます。
+* An alert is triggered if any assertion fails for `X` minutes from any `n` of `N` locations. This alerting rule allows you to specify for how much time and in how many locations a test needs to fail before triggering the notification.
+* Retry `X` times before location is marked as failed. This allows you to define how many consecutive test failures need to happen for a location to be considered as failed. By default, there is a 300ms wait before retrying a test that failed. This interval can be configured with the [API][5].
 
-### テストモニターを構成する
+### Configure the test monitor
 
-設定されたアラート条件に従って、通知が送信されます。このセクションを使用して、チームにメッセージを送る方法と内容を定義します。
+A notification is sent according to the set of alerting conditions. Use this section to define how and what to message your teams.
 
-1. ブラウザテストの**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][6]のほか、以下の[条件付き変数][17]を使用できます。
+1. Enter a **message** for the browser test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][17]:
 
-    | 条件付き変数       | 説明                                                         |
+    | Conditional Variable       | Description                                                         |
     |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            | モニターがアラートを発する場合に表示します。                                       |
-    | `{{^is_alert}}`            | モニターがアラートを発しない限り表示します。                                     |
-    | `{{#is_recovery}}`         | モニターが `alert` から回復したときに表示します。                          |
-    | `{{^is_recovery}}`         | モニターが `alert` から回復しない限り表示します。                        |
-    | `{{#is_renotify}}`         | モニターが再通知したときに表示します。                                   |
-    | `{{^is_renotify}}`         | モニターが再通知しない限り表示します。                                 |
-    | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
-    | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |
+    | `{{#is_alert}}`            | Show when the monitor alerts.                                       |
+    | `{{^is_alert}}`            | Show unless the monitor alerts.                                     |
+    | `{{#is_recovery}}`         | Show when the monitor recovers from `alert`.                          |
+    | `{{^is_recovery}}`         | Show unless the monitor recovers from `alert`.                        |
+    | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
+    | `{{^is_renotify}}`         | Show unless the monitor renotifies.                                 |
+    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
+    | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
 
-    通知メッセージには、このセクションで定義された**メッセージ**や、失敗した場所に関する情報が記載されます。
+    Notification messages include the **message** defined in this section and information about the failing locations.
 
-2. 通知するメンバーやサービスを選択します。
-3. 再通知の頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
-4. **Save Details and Record Test** をクリックすると、テストの構成が保存され、ブラウザのステップが記録されます。
+2. Choose team members and services to notify.
+3. Specify a renotification frequency. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
+4. Click **Save Details and Record Test** to save your test configuration and record your browser steps.
 
-詳しくは、[Synthetic テストモニターの使用][7]をご覧ください。
+For more information, see [Using Synthetic Test Monitors][7].
 
-## ステップを記録する
+## Record your steps
 
-テストの記録を実行できるのは [Google Chrome][8] だけです。テストを記録するには、[Google Chrome 用の Datadog test recorder][9] をダウンロードする必要があります。
+Tests can be only recorded from [Google Chrome][8]. To record your test, download the [Datadog Record Test extension for Google Chrome][9].
 
-アプリケーション上でアクションを実行するために (リンクをクリックして別のタブを開くなど) ブラウザテストの記録でタブを切り替え、別のテストステップを追加することができます。ブラウザテストは、[アサーション][10]を実行する前に、まず (クリックによって) ページと相互作用する必要があります。すべてのテストステップを記録することによって、ブラウザテストはテスト実行時に自動的にタブを切り替えることができます。
+You can switch tabs in a browser test recording in order to perform an action on your application (such as clicking on a link that opens another tab) and add another test step. Your browser test must interact with the page first (through a click) before it can perform an [assertion][10]. By recording all of the test steps, the browser test can switch tabs automatically at test execution.
 
-{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="ブラウザでのテストの記録" width="90%" >}}
+{{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" width="90%" >}}
 
-1. 必要に応じて、ページの右上にある **Open in a pop-up** を選択して、別のポップアップウィンドウでテスト記録を開きます。これは、アプリケーションが iframe で開くことをサポートしていない場合、または記録時のサイズの問題を回避したい場合に役立ちます。**シークレットモード**でポップアップを開いて、ログイン済みのセッションや既存のブラウザからの Cookie などを使用せずに、新しいブラウザからテストの記録を開始することもできます。
-2. オプションとして、ブラウザテストからステップの記録を実行する際に、Datadog が自動的に RUM データを収集するように設定します。詳細については、[RUM とセッションリプレイの確認][11]を参照してください。
-3. **Start Recording** をクリックして、ブラウザテストの記録を開始します。
-4. 監視したいユーザージャーニーを通過するアプリケーションをクリックすると、アクションが自動的に記録され、左側のブラウザテストシナリオ内で[ステップ][12]を作成するために使用されます。
-5. 自動的に記録されたステップに加えて、左上隅にある[ステップ][12]を使用して、シナリオを強化することもできます。
-   {{< img src="synthetics/browser_tests/manual_steps.png" alt="ブラウザテストのステップ" style="width:80%;">}}
+1. Optionally, select **Open in a pop-up** at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in **Incognito mode** to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
+2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][11].
+3. Click **Start Recording** to begin recording your browser test.
+4. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][12] within your browser test scenario on the left.
+5. In addition to the automatically recorded steps, you can also use the [steps][12] available in the upper left corner to enrich your scenario:
+   {{< img src="synthetics/browser_tests/manual_steps.png" alt="Browser Test steps" style="width:80%;">}}
 
-   ブラウザテストによって実行されたジャーニーが期待される状態になったことを確認するために、Datadog では、ブラウザテストは**[アサーション][10]**で終了することを推奨します。
-6. シナリオが終了したら、**Save and Launch Test** をクリックします。
+   Datadog recommends ending your browser test with an **[assertion][10]** to confirm the journey executed by the browser test resulted in the expected state.
+6. Once you have finished your scenario, click **Save and Launch Test**.
 
-## 権限
+## Permissions
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][13]を持つユーザーのみが、Synthetic ブラウザテストを作成、編集、削除できます。Synthetic ブラウザテストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][13]のいずれかにアップグレードします。
+By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic browser tests. To get create, edit, and delete access to Synthetic browser tests, upgrade your user to one of those two [default roles][13].
 
-[カスタムロール機能][13]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+If you are using the [custom role feature][13], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
 
-### アクセス制限
+### Restrict access
 
-アカウントに[カスタムロール][14]を使用しているお客様は、アクセス制限が利用可能です。
+Access restriction is available for customers using [custom roles][14] on their accounts.
 
-組織内の役割に基づいて、ブラウザテストへのアクセスを制限することができます。ブラウザテストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
+You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test.
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="テストの権限の設定" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/private_locations/
-[2]: /ja/help/
-[3]: /ja/synthetics/settings/#global-variables
-[4]: /ja/synthetics/browser_tests/actions#variables
-[5]: /ja/api/latest/synthetics/#create-or-clone-a-test
+[1]: /synthetics/private_locations/
+[2]: /help/
+[3]: /synthetics/settings/#global-variables
+[4]: /synthetics/browser_tests/actions#variables
+[5]: /api/latest/synthetics/#create-or-clone-a-test
 [6]: http://daringfireball.net/projects/markdown/syntax
-[7]: /ja/synthetics/guide/synthetic-test-monitors
+[7]: /synthetics/guide/synthetic-test-monitors
 [8]: https://www.google.com/chrome
 [9]: https://chrome.google.com/webstore/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa
-[10]: /ja/synthetics/browser_tests/actions/#assertion
-[11]: /ja/synthetics/guide/explore-rum-through-synthetics/
-[12]: /ja/synthetics/browser_tests/actions/
-[13]: /ja/account_management/rbac#custom-roles
-[14]: /ja/account_management/rbac/#create-a-custom-role
-[15]: /ja/continuous_testing/environments/proxy_firewall_vpn
-[16]: /ja/synthetics/guide/browser-tests-passkeys
-[17]: /ja/monitors/notify/variables/?tab=is_alert#conditional-variables
+[10]: /synthetics/browser_tests/actions/#assertion
+[11]: /synthetics/guide/explore-rum-through-synthetics/
+[12]: /synthetics/browser_tests/actions/
+[13]: /account_management/rbac#custom-roles
+[14]: /account_management/rbac/#create-a-custom-role
+[15]: /continuous_testing/environments/proxy_firewall_vpn
+[16]: /synthetics/guide/browser-tests-passkeys
+[17]: /monitors/notify/variables/?tab=is_alert#conditional-variables

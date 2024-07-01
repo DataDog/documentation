@@ -1,102 +1,102 @@
 ---
-app_id: oracle
-app_uuid: 34835d2b-a812-4aac-8cc2-d298db851b80
-assets:
-  dashboards:
-    DBM Oracle Database Overview: assets/dashboards/dbm_oracle_database_overview.json
-    oracle: assets/dashboards/oracle_overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: oracle.session_count
-      metadata_path: metadata.csv
-      prefix: oracle.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10000
-    source_type_name: Oracle Database
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- data stores
-- network
-- oracle
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/oracle/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: oracle
-integration_id: oracle
-integration_title: Oracle
-integration_version: 5.2.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: oracle
-public_title: Oracle
-short_description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
-supported_os:
-- linux
-- windows
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Data Stores
-  - Category::ネットワーク
-  - Category::Oracle
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Oracle
+"app_id": "oracle"
+"app_uuid": "34835d2b-a812-4aac-8cc2-d298db851b80"
+"assets":
+  "dashboards":
+    "DBM Oracle Database Overview": "assets/dashboards/dbm_oracle_database_overview.json"
+    "oracle": "assets/dashboards/oracle_overview.json"
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "oracle.session_count"
+      "metadata_path": "metadata.csv"
+      "prefix": "oracle."
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "10000"
+    "source_type_name": "Oracle Database"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "data stores"
+- "network"
+- "oracle"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/oracle/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "oracle"
+"integration_id": "oracle"
+"integration_title": "Oracle"
+"integration_version": "5.2.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "oracle"
+"public_title": "Oracle"
+"short_description": "Oracle relational database system designed for enterprise grid computing"
+"supported_os":
+- "linux"
+- "windows"
+- "macos"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Data Stores"
+  - "Category::Network"
+  - "Category::Oracle"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": "Oracle relational database system designed for enterprise grid computing"
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Oracle"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Oracle ダッシュボード][1]
+![Oracle Dashboard][1]
 
-## 概要
+## Overview
 
-Oracle インテグレーションは、Oracle データベースの健全性とパフォーマンスに関するメトリクスをほぼリアルタイムで提供します。提供されるダッシュボードでこれらのメトリクスを可視化するとともに、モニターを作成して Oracle データベースの状態についてチームに警告を発することができます。
+The Oracle integration provides health and performance metrics for your Oracle database in near real-time. Visualize these metrics with the provided dashboard and create monitors to alert your team on Oracle database states.
 
-[Database Monitoring][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーション機能に加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画、ブロッキングを引き起こしているクエリについてのインサイトが提供されます。
+Enable [Database Monitoring][2] (DBM) for enhanced insights into query performance and database health. In addition to the standard integration features, Datadog DBM provides query-level metrics, live and historical query snapshots, wait event analysis, database load, query explain plans, and blocking query insights.
 
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-#### 前提条件
+#### Prerequisite
 
-Oracle インテグレーションを使用するためには、ネイティブクライアント (追加のインストール手順は不要)、または Oracle Instant Client のいずれかを使用できます。
+To use the Oracle integration you can either use the native client (no additional install steps required), or the Oracle Instant Client.
 
 ##### Oracle Instant Client
 
-Instant Client を使用していない場合は、この手順をスキップしてください。
+Skip this step if you are not using Instant Client.
 
 {{< tabs >}}
 
 {{% tab "Linux" %}}
 ###### Linux
 
-1. [Linux 用の Oracle Instant Client のインストール][1]に従ってください。
+1. Follow the [Oracle Instant Client installation for Linux][1].
 
-2. *Instant Client Basic* パッケージがインストールされていることを確認します。Oracle の[ダウンロードページ][2]を参照してください。
+2. Verify that the *Instant Client Basic* package is installed. Find it on Oracle's [download page][2].
 
-   Instant Client ライブラリのインストール後に、ランタイムリンカがライブラリを見つけることができることを確認します。例:
+    After the Instant Client libraries are installed, ensure the runtime linker can find the libraries, for example:
 
       ```shell
       # Put the library location in the /etc/datadog-agent/environment file.
@@ -110,16 +110,16 @@ Instant Client を使用していない場合は、この手順をスキップ�
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-###### ログの収集
+###### Windows
 
-1. [Oracle Windows インストールガイド][1]に従って、Oracle Instant Client を構成します。
+1. Follow the [Oracle Windows installation guide][1] to configure your Oracle Instant Client.
 
-2. 以下を確認してください。
-    - [Microsoft Visual Studio 2017 再頒布可能パッケージ][2]または適切なバージョンが Oracle Instant Client にインストールされます。
+2. Verify the following:
+    - The [Microsoft Visual Studio 2017 Redistributable][2] or the appropriate version is installed for the Oracle Instant Client.
 
-    - Oracle の[ダウンロードページ][3]にある *Instant Client Basic* パッケージがインストールされ、指定されたマシン上のすべてのユーザーが使用できる (例: `C:\oracle\instantclient_19`)。
+    - The *Instant Client Basic* package from Oracle's [download page][3] is installed, and is available to all users on the given machine (for example, `C:\oracle\instantclient_19`).
 
-    - 環境変数 `PATH` には、Instant Client のあるディレクトリ (例: `C:\oracle\instantclient_19`) が含まれている。
+    - The `PATH` environment variable contains the directory with the Instant Client (for example, `C:\oracle\instantclient_19`).
 
 
 [1]: https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html#ic_winx64_inst
@@ -128,15 +128,15 @@ Instant Client を使用していない場合は、この手順をスキップ�
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Datadog ユーザーの作成
+#### Datadog user creation
 
 {{< tabs >}}
-{{% tab "マルチテナント" %}}
-##### マルチテナント
+{{% tab "Multi-tenant" %}}
+##### Multi-tenant
 
-###### ユーザーの作成
+###### Create user
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+Create a read-only login to connect to your server and grant the required permissions:
 
 ```SQL
 CREATE USER c##datadog IDENTIFIED BY &password CONTAINER = ALL ;
@@ -144,9 +144,9 @@ CREATE USER c##datadog IDENTIFIED BY &password CONTAINER = ALL ;
 ALTER USER c##datadog SET CONTAINER_DATA=ALL CONTAINER=CURRENT;
 ```
 
-###### 権限付与
+###### Grant permissions
 
-`sysdba` としてログオンし、以下の権限を付与します。
+Log on as `sysdba`, and grant the following permissions:
 
 ```SQL
 grant create session to c##datadog ;
@@ -186,7 +186,7 @@ grant select on cdb_data_files to c##datadog;
 grant select on dba_data_files to c##datadog;
 ```
 
-プラグ可能データベース (PDB) 上で実行するカスタムクエリを構成した場合は、`C##DATADOG` ユーザーに `set container` 権限を付与する必要があります。
+If you configured custom queries that run on a pluggable database (PDB), you must grant the `set container` privilege to the `C##DATADOG` user:
 
 ```SQL
 connect / as sysdba
@@ -199,17 +199,17 @@ grant set container to c##datadog ;
 {{% tab "Non-CDB" %}}
 ##### Non-CDB
 
-###### ユーザーの作成
+###### Create user
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+Create a read-only login to connect to your server and grant the required permissions:
 
 ```SQL
 CREATE USER datadog IDENTIFIED BY &password ;
 ```
 
-###### 権限付与
+###### Grant permissions
 
-`sysdba` としてログオンし、以下の権限を付与します。
+Log on as `sysdba`, and grant the following permissions:
 
 ```SQL
 grant create session to datadog ;
@@ -252,17 +252,17 @@ grant select on dba_data_files to datadog;
 {{% /tab %}}
 
 {{% tab "RDS" %}}
-##### Splunk
+##### RDS
 
-###### ユーザーの作成
+###### Create user
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+Create a read-only login to connect to your server and grant the required permissions:
 
 ```SQL
 CREATE USER datadog IDENTIFIED BY your_password ;
 ```
 
-###### 権限付与
+###### Grant permissions 
 
 ```SQL
 grant create session to datadog ;
@@ -308,15 +308,15 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_DATA_FILES','DATADOG','SELECT'
 {{% tab "Oracle Autonomous Database" %}}
 ##### Oracle Autonomous Database
 
-###### ユーザーの作成
+###### Create user
 
-サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
+Create a read-only login to connect to your server and grant the required permissions:
 
 ```SQL
 CREATE USER datadog IDENTIFIED BY your_password ;
 ```
 
-###### 権限付与
+###### Grant permissions 
 
 ```SQL
 grant create session to datadog ;
@@ -360,11 +360,11 @@ grant select on dba_data_files to datadog;
 
 {{< /tabs >}}
 
-### ブラウザトラブルシューティング
+### Configuration
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-1. [Agent の構成ディレクトリ][3]の root にある `conf.d/` フォルダーの `oracle.d/conf.yaml` ファイルを編集します。`server` と `port` を更新し、監視するマスターを設定します。使用可能なすべての構成オプションの詳細については、[oracle.d/conf.yaml のサンプル][4]を参照してください。
+1. Edit the `oracle.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][3]. Update the `server` and `port` to set the masters to monitor. See the [sample oracle.d/conf.yaml][4] for all available configuration options.
 
    ```yaml
    init_config:
@@ -392,79 +392,79 @@ grant select on dba_data_files to datadog;
         password: <PASSWORD>
    ```
 
-**注:** `7.50.1` (このバージョンを含む) から `7.53.0` (このバージョンを含まない) までの Agent リリースでは、構成サブディレクトリは `oracle-dbm.d` です。その他のすべての Agent リリースでは、構成ディレクトリは `oracle.d` です。
+**Note:** For the Agent releases between `7.50.1` (inclusive) and `7.53.0` (exclusive), the configuration subdirectory is `oracle-dbm.d`. For all other Agent releases, the configuration directory is `oracle.d`.
 
-Oracle Real Application Cluster (RAC) を使用する場合は、RAC ノードごとに Agent を構成する必要があります。Agent は `V$` ビューに問い合わせることで、各ノードから個別に情報を収集します。さらに、インターコネクトトラフィックの発生を避けるために、`GV$` ビューにはクエリしません。
+**Note**: Oracle Real Application Cluster (RAC) customers must configure the Agent for each RAC node, because the Agent collects information from every node separately by querying `V$` views. The Agent doesn't query any `GV$` views to avoid generating interconnect traffic.
 
-2. [Agent を再起動します][5]。
+2. [Restart the Agent][5].
 
-#### TCPS による Oracle への接続
+#### Connect to Oracle through TCPS
 
-TCPS (TCP with SSL) を使って Oracle に接続するには、`protocol` 構成オプションのコメントを解除して、`TCPS` を選択します。`server` オプションを更新して、監視する TCPS サーバーを設定します。
+To connect to Oracle through TCPS (TCP with SSL), uncomment the `protocol` configuration option and select `TCPS`. Update the `server` option to set the TCPS server to monitor.
 
     ```yaml
     init_config:
 
     instances:
-      ## @param server - 文字列 - 必須
-      ## Oracle Database Server の IP アドレスまたはホスト名。
+      ## @param server - string - required
+      ## The IP address or hostname of the Oracle Database Server.
       #
       - server: localhost:1522
 
-        ## @param service_name - 文字列 - 必須
-        ## Oracle Database サービス名。サーバーで利用可能なサービスを表示するには、
-        ## 次のクエリを実行します。
+        ## @param service_name - string - required
+        ## The Oracle Database service name. To view the services available on your server,
+        ## run the following query:
         #
         service_name: "<SERVICE_NAME>"
 
-        ## @param username - 文字列 - 必須
-        ## ユーザーアカウントのユーザー名。
+        ## @param username - string - required
+        ## The username for the user account.
         #
         username: <USER>
 
-        ## @param password - 文字列 - 必須
-        ## ユーザーアカウントのパスワード。
+        ## @param password - string - required
+        ## The password for the user account.
         #
         password: "<PASSWORD>"
 
-        ## @param protocol - 文字列 - 任意 - デフォルト: TCP
-        ## Oracle Database Server に接続するためのプロトコル。有効なプロトコルには TCP と TCPS があります。
+        ## @param protocol - string - optional - default: TCP
+        ## The protocol to connect to the Oracle Database Server. Valid protocols include TCP and TCPS.
         ##
         #
         protocol: TCPS
     ```
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションで `oracle` を探します。
+[Run the Agent's status subcommand][6] and look for `oracle` under the Checks section.
 
-### カスタムクエリ
+### Custom query
 
-カスタムクエリの指定もサポートされています。各クエリには、次の 2 つのパラメーターを含める必要があります。
+Providing custom queries is also supported. Each query must have two parameters:
 
-| パラメーター       | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Parameter       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |                                                                                                                                                                
-| `query`         | 実行する SQL です。簡単なステートメントにすることも、複数行のスクリプトにすることもできます。結果のすべての行が評価されます。                                                                                                                                                                                                                                                                                                                        |
-| `columns`       | 列を表すリストです。左から右の順に並べられます。次の 2 つの必須データがあります。<br> a. `type` - 送信方法 (`gauge`、`count` など)。<br> b. name - メトリクス名のサフィックス。これは、完全なメトリクス名を形成するために使用されるサフィックスです。`type` が `tag` の場合、この列は、このクエリによって収集されるすべてのメトリクスに適用されるタグと見なされます。 |
+| `query`         | This is the SQL to execute. It can be a simple statement or a multi-line script. All rows of the result are evaluated.                                                                                                                                                                                                                                                                                                                        |
+| `columns`       | This is a list representing each column, ordered sequentially from left to right. There are two required pieces of data: <br> a. `type` - This is the submission method (`gauge`, `count`, etc.). <br> b. name - This is the suffix used to form the full metric name. If `type` is `tag`, this column is instead considered as a tag which is applied to every metric collected by this particular query. |
 
-オプションで、`tags` パラメーターを使用して、収集される各メトリクスにタグのリストを適用できます。
+Optionally use the `tags` parameter to apply a list of tags to each metric collected.
 
-以下のメトリクスは
+The following:
 
 ```python
 self.gauge('oracle.custom_query.metric1', value, tags=['tester:oracle', 'tag1:value'])
 self.count('oracle.custom_query.metric2', value, tags=['tester:oracle', 'tag1:value'])
 ```
 
-以下の構成例から作成されます。
+is what the following example configuration would become:
 
 ```yaml
-- query: | # 複数行のスクリプトが必要な場合は、パイプを使用します。
+- query: | # Use the pipe if you require a multi-line script.
     SELECT columns
     FROM tester.test_table
     WHERE conditions
   columns:
-    # スキップする列にはこれを入れます。
+    # Put this for any column you wish to skip:
     - {}
     - name: metric1
       type: gauge
@@ -476,31 +476,31 @@ self.count('oracle.custom_query.metric2', value, tags=['tester:oracle', 'tag1:va
     - tester:oracle
 ```
 
-使用可能なすべてのコンフィギュレーションオプションの詳細については、[oracle.d/conf.yaml のサンプル][4]を参照してください。
+See the [sample oracle.d/conf.yaml][4] for all available configuration options.
 
-## データ収集
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "oracle" >}}
 
 
-### イベント
+### Events
 
-Oracle Database チェックには、イベントは含まれません。
+The Oracle Database check does not include any events.
 
-### サービスチェック
+### Service Checks
 {{< get-service-checks-from-git "oracle" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+Need help? Contact [Datadog support][7].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
-[2]: https://docs.datadoghq.com/ja/database_monitoring/
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[2]: https://docs.datadoghq.com/database_monitoring/
+[3]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/help/

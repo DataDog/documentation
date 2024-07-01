@@ -1,53 +1,53 @@
 ---
 categories:
-- cloud
-- aws
-- ログの収集
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md
-description: Datadog オーガニゼーションの HSM 監査ログを収集
+    - cloud
+    - aws
+    - log collection
+description: Gather your HSM audit logs in your Datadog organization.
 has_logo: true
-integration_id: amazon-cloudhsm
+dependencies:
+    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/amazon_cloudhsm.md"]
 integration_title: AWS CloudHSM
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 name: amazon_cloudhsm
-public_title: Datadog-AWS Cloudhsm インテグレーション
-short_description: Datadog オーガニゼーションの HSM 監査ログを収集
+public_title: Datadog-AWS Cloudhsm Integration
+short_description: Gather your HSM audit logs in your Datadog organization.
+integration_id: "amazon-cloudhsm"
 ---
 
-## 概要
+## Overview
 
-アカウントの HSM は、AWS CloudHSM コマンドラインツールまたはソフトウェアライブラリからコマンドを受信すると、そのコマンドの実行を監査ログフォームに記録します。HSM 監査ログには、HSM の作成と削除、HSM へのログインとログアウト、およびユーザーとキーの管理など、クライアントで起動されたすべての管理コマンドが含まれます。このログは、HSM の状態を変更したアクションに関する信頼性の高い記録です。
+When an HSM in your account receives a command from the AWS CloudHSM command line tools or software libraries, it records its execution of the command in audit log form. The HSM audit logs include all client-initiated management commands, including those that create and delete the HSM, log into and out of the HSM, and manage users and keys. These logs provide a reliable record of actions that have changed the state of the HSM.
 
-Datadog は、CloudHSM ログを Datadog のログ管理ソリューションに送信する Lambda 関数を通じて AWS CloudHSM と統合されます。
+Datadog integrates with AWS CloudHSM through a Lambda function that ships CloudHSM logs to Datadog’s Log Management solution.
 
-## セットアップ
+## Setup
 
-### ログの収集
+### Log collection
 
-#### ログを有効にする
+#### Enable logs
 
-CloudHSM では監査ログがデフォルトで有効になっています。
+Audit logs are enabled by default for CloudHSM.
 
-#### ログを Datadog に送信する方法
+#### Send your logs to Datadog
 
-1. AWS アカウントで [Datadog Forwarder Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
-2. 設定したら、Datadog Forwarder Lambda 関数に移動します。Function Overview セクションで、**Add Trigger** をクリックします。
-3. Trigger Configuration で **CloudWatch Logs** トリガーを選択します。
-4. CloudHSM のログを含む CloudWatch のロググループを選択します。
-5. フィルターの名前を入力します。
-6. **Add** をクリックすると、Lambda にトリガーが追加されます。
+1. If you haven't already, set up the [Datadog Forwarder Lambda function][1] in your AWS account.
+2. Once set up, go to the Datadog Forwarder Lambda function. In the Function Overview section, click **Add Trigger**. 
+3. Select the **CloudWatch Logs** trigger for the Trigger Configuration.
+4. Select the CloudWatch log group that contains your CloudHSM logs.
+5. Enter a name for the filter.
+6. Click **Add** to add the trigger to your Lambda.
 
-[ログエクスプローラー][2]に移動して、ログを確認します。
+Go to the [Log Explorer][2] to start exploring your logs.
 
-AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][3]を参照してください。
+For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda Function][3].
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog Support][4].
 
-[1]: /ja/logs/guide/forwarder/
+[1]: /logs/guide/forwarder/
 [2]: https://app.datadoghq.com/logs
-[3]: /ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
-[4]: /ja/help/
+[3]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[4]: /help/

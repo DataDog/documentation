@@ -1,39 +1,39 @@
 ---
-aliases:
-- /ja/logs/log_collection/syslog_ng
+title: Syslog-ng
+name: syslog_ng
+custom_kind: integration
+description: 'Configure Syslog-ng to gather logs from your host, containers, & services.'
+short_description: 'Configure Syslog-ng to gather logs from your host, containers, & services.'
 categories:
-- ログの収集
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
-description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
+    - log collection
 doc_link: /integrations/syslog_ng/
+aliases:
+    - /logs/log_collection/syslog_ng
 has_logo: true
-integration_id: syslog_ng
 integration_title: syslog_ng
 is_public: true
-kind: インテグレーション
-name: syslog_ng
-public_title: Datadog-Syslog-ng インテグレーション
-short_description: Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
+public_title: Datadog-Syslog-ng Integration
+dependencies:
+    ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md"]
 supported_os:
-- linux
-- windows
-title: Syslog-ng
+    - linux
+    - windows
+integration_id: "syslog_ng"
 ---
 
-## 概要
+## Overview
 
-Syslog-ng を構成して、ホスト、コンテナ、サービスからログを収集
+Configure Syslog-ng to gather logs from your host, containers, & services.
 
 {{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では <code>syslog-ng</code> のログ収集は利用できません。</div>
+<div class="alert alert-warning">Log collection for <code>syslog-ng</code> is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## セットアップ
+## Setup
 
-### ログの収集
+### Log collection
 
-1. `/etc/syslog-ng/syslog-ng.conf` 内のシステムログとログファイルを収集し、ソースが正しく定義されていることを確認してください。
+1. Collect system logs and log files in `/etc/syslog-ng/syslog-ng.conf` and make sure the source is correctly defined:
 
     ```conf
     source s_src {
@@ -43,7 +43,7 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
     };
     ```
 
-    ファイルを監視する場合は、次のソースを追加します。
+    If you want to monitor files, add the following source:
 
     ```conf
     #########################
@@ -59,7 +59,7 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
     };
     ```
 
-2. 正しいログ形式を設定します。
+2. Set the correct log format:
 
     ```conf
     #########################
@@ -79,7 +79,7 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
     };
     ```
 
-3. path セクションで出力を定義します。
+3. Define the output in the path section:
 
     ```conf
     #########################
@@ -91,11 +91,11 @@ Syslog-ng を構成して、ホスト、コンテナ、サービスからログ�
     log { source(s_src); source(s_files); destination(d_datadog); };
     ```
 
-4. syslog-ng を再起動します。
+4. Restart syslog-ng.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+Need help? Contact [Datadog support][2].
 
 [1]: https://syslog-ng.com/documents/html/syslog-ng-ose-latest-guides/en/syslog-ng-ose-guide-admin/html/tlsoptions.html
-[2]: /ja/help/
+[2]: /help/

@@ -1,113 +1,117 @@
 ---
-app_id: datazoom
-app_uuid: 3c289cc6-b148-4e99-98ae-66c01386f767
-assets:
-  dashboards:
-    Datazoom Overview: assets/dashboards/datazoom_overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: datazoom.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10260
-    source_type_name: Datazoom
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Datadog
-  sales_email: help@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- ログの収集
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/datazoom/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: datazoom
-integration_id: datazoom
-integration_title: Datazoom
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: datazoom
-public_title: Datazoom
-short_description: Datazoom Collector のデータをログエクスプローラーで表示します。
-supported_os:
+"app_id": "datazoom"
+"app_uuid": "3c289cc6-b148-4e99-98ae-66c01386f767"
+"assets":
+  "dashboards":
+    "Datazoom Overview": assets/dashboards/datazoom_overview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": []
+      "metadata_path": metadata.csv
+      "prefix": datazoom.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10260"
+    "source_type_name": Datazoom
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Datadog
+  "sales_email": help@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- log collection
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/datazoom/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "datazoom"
+"integration_id": "datazoom"
+"integration_title": "Datazoom"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "datazoom"
+"public_title": "Datazoom"
+"short_description": "View Datazoom Collector data in Log Explorer."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Log Collection
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Datazoom Collector のデータをログエクスプローラーで表示します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Datazoom
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Log Collection"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": View Datazoom Collector data in Log Explorer.
+  "media": []
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": blog
+    "url": "https://www.datadoghq.com/blog/monitor-datazoom/"
+  "support": "README.md#Support"
+  "title": Datazoom
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Datazoom は、コレクターのエコシステムを通じてエンドポイントからデータを収集するビデオデータプラットフォームです。
+Datazoom is a video data platform that gathers data from endpoints through an ecosystem of collectors.
 
-[Datazoom Datadog Connector][1] は、コレクターのデータを Datadog に送信し、[ログエクスプローラー][2]でデータをクエリすることができます。
+The [Datazoom Datadog Connector][1] sends collector data to Datadog, where you can query the data in your [Log Explorer][2].
 
-Datazoom は INFO レベルに設定されたデータを送信します。
+Datazoom sends data set at the INFO level.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Datazoom インテグレーションは、Datadog にログを出力します。Datadog 側でのインストールは必要ありません。
+The Datazoom integration emits logs to Datadog. No installation is required on the Datadog side.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-- Datazoom Datadog Connector の構成方法の詳細については、Datazoom のインテグレーション[ドキュメント][1]をご覧ください。
+- Visit Datazoom's integration [documentation][1] for details on how to configure the Datazoom Datadog Connector.
 
-### ダッシュボード  
+### Dashboard
 
-[Datazoom ログダッシュボード][3]をご覧ください。
+See the [Datazoom logs dashboard][3].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Datazoom には、メトリクスは含まれません。
+Datazoom does not include any metrics.
 
-### ヘルプ
+### Service Checks
 
-Datazoom には、サービスのチェック機能は含まれません。
+Datazoom does not include any service checks.
 
-### ヘルプ
+### Events
 
-Datazoom には、イベントは含まれません。
+Datazoom does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [ブログ: Datadog で Datazoom のテレメトリーを監視する][5]
+- [Blog: Monitor Datazoom telemetry with Datadog][5]
 
 [1]: https://help.datazoom.io/hc/en-us/articles/360042494512-Datadog
 [2]: https://app.datadoghq.com/logs
 [3]: https://app.datadoghq.com/dashboard/lists/preset/3?q=datazoom
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/help/
 [5]: https://www.datadoghq.com/blog/monitor-datazoom/
+

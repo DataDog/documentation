@@ -1,7 +1,7 @@
 ---
+title: Core Web Vitals
 core_product:
-- real user monitoring
-- synthetic monitoring
-title: コアウェブバイタル
+  - real user monitoring
+  - synthetic monitoring
 ---
-コアウェブバイタルは、Google が UX テストに意味のあるシグナルとして認定したメトリクス群です。これらのメトリクスは、ページの読み込みにかかる時間、ユーザーとの対話にかかる時間、読み込み中のページの安定性などに関係します。詳しくは<a href="https://support.google.com/webmasters/answer/9205520?hl=en/">ドキュメントをご覧ください</a>。
+Core Web Vitals are a set of metrics that Google has identified as meaningful signals for UX testing. These metrics concern how long it takes for a page to load, how long it takes for a user to interact, how stable a page is as it loads, and more. For more information, <a href="https://support.google.com/webmasters/answer/9205520?hl=en/">see the documentation</a>.

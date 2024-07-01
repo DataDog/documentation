@@ -1,59 +1,60 @@
 ---
-aliases:
-- /ja/integrations/azure_datafactory
-categories:
+"aliases":
+- /integrations/azure_datafactory
+"categories":
 - azure
-- クラウド
+- cloud
 - data stores
-dependencies: []
-description: Azure Data Factory のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_data_factory/
-draft: false
-git_integration_title: azure_data_factory
-has_logo: true
-integration_id: azure-datafactory
-integration_title: Microsoft Azure Data Factory
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_data_factory
-public_title: Datadog-Microsoft Azure Data Factory インテグレーション
-short_description: Azure Data Factory のキーメトリクスを追跡
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Data Factory metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_data_factory/"
+"draft": false
+"git_integration_title": "azure_data_factory"
+"has_logo": true
+"integration_id": "azure-datafactory"
+"integration_title": "Microsoft Azure Data Factory"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_data_factory"
+"public_title": "Datadog-Microsoft Azure Data Factory Integration"
+"short_description": "Track key Azure Data Factory metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Data Factory は、データの保管・移動・処理サービスを自動化されたデータパイプラインとして構築するクラウドデータ統合サービスです。
+Azure Data Factory is a cloud data integration service, to compose data storage, movement, and processing services into automated data pipelines.
 
-Datadog Azure インテグレーションを使用して、Data Factory からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Data Factory.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_data_factory" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Data Factory インテグレーションには、イベントは含まれません。
+The Azure Data Factory integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Data Factory インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Data Factory integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_data_factory/azure_data_factory_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

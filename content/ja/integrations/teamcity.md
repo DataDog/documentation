@@ -1,173 +1,143 @@
 ---
-app_id: teamcity
-app_uuid: 8dd65d36-9cb4-4295-bb0c-68d67c0cdd4b
-assets:
-  dashboards:
-    TeamCity Overview: assets/dashboards/overview.json
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: true
-    metrics:
-      check:
-      - teamcity.builds
-      - teamcity.build_duration
-      metadata_path: metadata.csv
-      prefix: teamcity.
-    process_signatures:
-    - teamcity-server.sh
-    - teamcity-server
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Teamcity
-  logs:
-    source: teamcity
-  monitors:
-    Build Status: assets/recommended_monitors/build_status.json
-  saved_views:
-    teamcity_processes: assets/saved_views/teamcity_processes.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- configuration & deployment
-- log collection
-- notification
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: teamcity
-integration_id: teamcity
-integration_title: TeamCity
-integration_version: 4.0.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: teamcity
-public_title: TeamCity
-short_description: ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。
-supported_os:
-- linux
-- windows
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::構成 & デプロイ
-  - Category::ログの収集
-  - Category::通知
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: TeamCity
+"app_id": "teamcity"
+"app_uuid": "8dd65d36-9cb4-4295-bb0c-68d67c0cdd4b"
+"assets":
+  "dashboards":
+    "TeamCity Overview": "assets/dashboards/overview.json"
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": true
+    "metrics":
+      "check":
+      - "teamcity.builds"
+      - "teamcity.build_duration"
+      "metadata_path": "metadata.csv"
+      "prefix": "teamcity."
+    "process_signatures":
+    - "teamcity-server.sh"
+    - "teamcity-server"
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "109"
+    "source_type_name": "Teamcity"
+  "monitors":
+    "Build Status": "assets/monitors/build_status.json"
+  "saved_views":
+    "teamcity_processes": "assets/saved_views/teamcity_processes.json"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "configuration & deployment"
+- "log collection"
+- "notifications"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "teamcity"
+"integration_id": "teamcity"
+"integration_title": "TeamCity"
+"integration_version": "4.2.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "teamcity"
+"public_title": "TeamCity"
+"short_description": "Track builds and understand the performance impact of every deploy."
+"supported_os":
+- "linux"
+- "windows"
+- "macos"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Configuration & Deployment"
+  - "Category::Log Collection"
+  - "Category::Notifications"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": "Track builds and understand the performance impact of every deploy."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "TeamCity"
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このインテグレーションは、TeamCity サーバーに接続してメトリクス、サービスチェック、イベントを送信し、TeamCity プロジェクトのビルド構成、ビルド実行、サーバーリソースなどの健全性を監視することができます。
+This integration connects to your TeamCity server to submit metrics, service checks, and events, allowing you to monitor the health of your TeamCity projects' build configurations, build runs, server resources, and more.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-TeamCity チェックは [Datadog Agent][1] パッケージに含まれています。TeamCity サーバーに追加でインストールする必要はありません。
+The TeamCity check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your TeamCity servers.
 
-### コンフィギュレーション
+### Configuration
 
-#### TeamCity の準備
+#### Prepare TeamCity
 
-[ゲストログイン](#guest-login)を有効にするか、Basic HTTP 認証の[ユーザー資格情報](#user-credentials)を識別することができます。
+You can enable [Guest login](#guest-login), or identify [user credentials](#user-credentials) for basic HTTP authentication.
 
-##### ゲストログイン
+##### Guest login
 
-1. [ゲストログインを有効にします][2]。
+1. [Enable guest login][2].
 
-2. プロジェクト単位の権限を Guest ユーザーに割り当てられるように、`Per-project permissions` を有効にします。[認可モードの変更][3]を参照してください。
-![ゲストログインを有効にする][4]
-3. 既存のロールを使用するか、新しい読み取り専用ロールを作成し、そのロールに`View Usage Statistics` 権限を追加します。[ロールと権限の管理][5]を参照してください。
-![読み取り専用ロールの作成][6]
+2. Enable `Per-project permissions` to allow assigning project-based permissions to the Guest user. See [Changing Authorization Mode][3].
+![Enable Guest Login][4]
+3. Use an existing or create a new Read-only role and add the `View Usage Statistics` permission to the role. See [Managing Roles and Permissions][5].
+![Create Read-only Role][6]
 
-3. _[オプション]_ イベント収集時にビルド構成の種類を自動的に検出するチェックを有効にするには、読み取り専用ロールに `View Build Configuration Settings` 権限を追加します。
-![View Build Config Settings 権限の付与][7]
+3. _[Optional]_ To enable the check to automatically detect build configuration type during event collection, add the `View Build Configuration Settings` permission to the Read-only role.
+![Assign View Build Config Settings Permission][7]
 
-4. Guest ユーザーに[読み取り専用]ロールを割り当てます。[ユーザーへのロールの割り当て][8]を参照してください。
-![ゲストユーザー設定][9]
-![ロールの割り当て][10]
+4. Assign the Read-only role to the Guest user. See [Assigning Roles to Users][8].
+![Guest user settings][9]
+![Assign Role][10]
 
-##### ユーザー資格情報
+##### User credentials
 
-Basic HTTP 認証の場合
-- [Agent の構成ディレクトリ][11]の `conf.d/` フォルダ内の `teamcity.d/conf.yaml` ファイルに、識別された `username` と `password` を指定します。
-- `Access denied. Enable guest authentication or check user permissions.` (アクセスが拒否されました。ゲスト認証を有効にするか、ユーザー権限を確認してください。) というエラーが発生した場合は、ユーザーの権限が正しいことを確認してください。 
-  - プロジェクト単位および View Usage Statistics 権限が有効になっている。
-  - Agent Workload Statistics を収集する場合は、View Agent Details および View Agent Usage Statistics 権限も割り当てます。
+For basic HTTP authentication
+- Specify an identified `username` and `password` in the `teamcity.d/conf.yaml` file in the `conf.d/` folder of your [Agent's configuration directory][11].
+- If you encounter an `Access denied. Enable guest authentication or check user permissions.` error, ensure the user has the correct permissions:
+  - Per-project and View Usage Statistics permissions enabled.
+  - If collecting Agent Workload Statistics, assign the View Agent Details and View Agent Usage Statistics permissions as well.
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### ホスト
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `teamcity.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル teamcity.d/conf.yaml][2] を参照してください。
+Edit the `teamcity.d/conf.yaml` in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample teamcity.d/conf.yaml][2] for all available configuration options:
 
-TeamCity チェックは、データ収集の 2 つのメソッドを提供します。TeamCity 環境を最適にモニターするには、2 つの別々のインスタンスを構成して、それぞれの方法からメトリクスを収集します。
+The TeamCity check offers two methods of data collection. To optimally monitor your TeamCity environment, configure two separate instances to collect metrics from each method. 
 
-1. OpenMetricsV2 メソッド(Python バージョン 3 が必要です):
+1. OpenMetrics method (requires Python version 3):
 
-   TeamCity の `/metrics` Prometheus エンドポイントからメトリクスを収集するために `use_openmetrics: true` を有効化します。
-
-
-   ```yaml
-   init_config:
-
-   instances:
-       ## @param server - 文字列 - 必須
-       ## TeamCity インスタンスのサーバー名を指定します。
-       ## インスタンスでゲスト認証を有効にするか、
-       ## オプションの `basic_http_authentication` 構成パラメーターを有効にして、データを収集します。
-       ## `basic_http_authentication` を使用する場合は、以下を指定します。
-       ##
-       ## server: http://<USER>:<PASSWORD>@teamcity.<ACCOUNT_NAME>.com
-       #
-     - server: http://teamcity.<ACCOUNT_NAME>.com
-       ## @param use_openmetrics - ブール値 - オプション - デフォルト: false
-       ## 最新の OpenMetrics V2 実装を使用して、
-       ## TeamCity サーバーの Prometheus メトリクスエンドポイントからメトリクスを収集します。
-       ## Python バージョン 3 が必要です。
-       ##
-       ## Prometheus のメトリクスを収集するために別のインスタンスで有効化します。
-       ## このオプションは、TeamCity REST API からイベント、サービスチェック、メトリクスを収集しません。
-       #
-       use_openmetrics: true
-   ```
-**注:** [OpenMetrics 準拠][3]のヒストグラムとサマリーのメトリクスを収集するには (TeamCity Server 2022.10+ から利用可能)、内部プロパティである `teamcity.metrics.followOpenMetricsSpec=true` を追加してください。[TeamCity 内部プロパティ][4]を参照してください。
-
-2. TeamCity Server REST API メソッド:
-
-   TeamCity サーバーの REST API から追加のビルド固有のメトリクス、サービスチェック、ビルドステータスイベントを収集するために、`teamcity.d/conf.yaml` ファイルに別のインスタンスを構成します。`projects` オプションを使用して、プロジェクトとビルド構成を指定します (Python バージョン 3 が必要です)。
-
+   Enable `use_openmetrics: true` to collect metrics from the TeamCity `/metrics` Prometheus endpoint.
 
    ```yaml
-   init_config:
+   init_config: 
 
    instances:
      - server: http://teamcity.<ACCOUNT_NAME>.com
 
-       ## @param projects - マッピング - オプション
-       ## TeamCity REST API からイベントとメトリクスを収集するための
-       ## TeamCity プロジェクトとビルド構成のマッピング。
+       ## @param projects - mapping - optional
+       ## Mapping of TeamCity projects and build configurations to
+       ## collect events and metrics from the TeamCity REST API.
        #
        projects:
          <PROJECT_A>:
@@ -182,11 +152,11 @@ TeamCity チェックは、データ収集の 2 つのメソッドを提供し�
          <PROJECT_C>: {}
    ```
 
+  To collect [OpenMetrics-compliant][3] histogram and summary metrics (available starting in TeamCity Server 2022.10+), add the internal property, `teamcity.metrics.followOpenMetricsSpec=true`. See, [TeamCity Internal Properties][4].
 
-オプションの `include` と `exclude` フィルターを使用して、監視に含めるビルド構成 ID と監視から除外するビルド構成 ID をそれぞれ指定し、各プロジェクトのビルド構成監視をカスタマイズします。ビルド構成 ID のマッチングパターンを指定するために、`include` と `exclude` のキーで RegEx パターンがサポートされています。もし `include` と `exclude` の両方のフィルターが省略された場合、指定したプロジェクトのすべてのビルド構成が監視されます。
+2. TeamCity Server REST API method (requires Python version 3):
 
-Python バージョン 2 の場合、`build_configuration` オプションを使用して、インスタンスごとに 1 つのビルド構成 ID を構成します。
-
+   Configure a separate instance in the `teamcity.d/conf.yaml` file to collect additional build-specific metrics, service checks, and build status events from the TeamCity server's REST API. Specify your projects and build configurations using the `projects` option.
 
    ```yaml
    init_config:
@@ -194,35 +164,61 @@ Python バージョン 2 の場合、`build_configuration` オプションを使
    instances:
      - server: http://teamcity.<ACCOUNT_NAME>.com
 
-       ## @param projects - マッピング - オプション
-       ## TeamCity REST API からイベントとメトリクスを収集するための
-       ## TeamCity プロジェクトとビルド構成のマッピング。
+       ## @param projects - mapping - optional
+       ## Mapping of TeamCity projects and build configurations to
+       ## collect events and metrics from the TeamCity REST API.
        #
-       build_configuration: <BUILD_CONFIGURATION_ID>
-   ```
+       projects:
+         <PROJECT_A>:
+           include:    
+           - <BUILD_CONFIG_A>
+           - <BUILD_CONFIG_B>
+           exclude:
+           - <BUILD_CONFIG_C>
+         <PROJECT_B>:
+           include:
+           - <BUILD_CONFIG_D>
+         <PROJECT_C>: {}
+    ```
 
+Customize each project's build configuration monitoring using the optional `include` and `exclude` filters to specify build configuration IDs to include or exclude from monitoring, respectively. Regular expression patterns are supported in the `include` and `exclude` keys to specify build configuration ID matching patterns. If both `include` and `exclude` filters are omitted, all build configurations are monitored for the specified project. 
 
-[Agent を再起動][5]すると、TeamCity イベントが収集され、Datadog に送信されます。
+For Python version 2, configure one build configuration ID per instance using the `build_configuration` option:
 
-##### ログの収集
+```yaml
+init_config:
 
-1. TeamCity [ログ設定][6]を構成します。
+instances:
+  - server: http://teamcity.<ACCOUNT_NAME>.com
 
-2. デフォルトでは、Datadog のインテグレーションパイプラインは以下のログフォーマットをサポートします。
+    ## @param projects - mapping - optional
+    ## Mapping of TeamCity projects and build configurations to
+    ## collect events and metrics from the TeamCity REST API.
+    #
+    build_configuration: <BUILD_CONFIGURATION_ID>
+```
+
+[Restart the Agent][5] to start collecting and sending TeamCity events to Datadog.
+
+##### Log collection
+
+1. Configure TeamCity [logging settings][6].
+
+2. By default, Datadog's integration pipeline supports the following kind of log format:
 
    ```text
    [2020-09-10 21:21:37,486]   INFO -  jetbrains.buildServer.STARTUP - Current stage: System is ready
    ```
 
-   別の変換[パターン][8]を定義する場合は、[インテグレーションパイプライン][7]を複製して編集してください。
+   Clone and edit the [integration pipeline][7] if you defined different conversion [patterns][8].
 
-3. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+3. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
 
    ```yaml
    logs_enabled: true
    ```
 
-4. `teamcity.d/conf.yaml` ファイルで以下のコンフィギュレーションブロックのコメントを削除します。環境に基づいて、`path` パラメーターの値を変更します。使用可能なすべてのコンフィギュレーションオプションについては、[teamcity.d/conf.yaml のサンプル][2]を参照してください。
+4. Uncomment the following configuration block in your `teamcity.d/conf.yaml` file. Change the `path` parameter value based on your environment. See the [sample teamcity.d/conf.yaml][2] for all available configuration options.
 
    ```yaml
    logs:
@@ -246,67 +242,67 @@ Python バージョン 2 の場合、`build_configuration` オプションを使
        source: teamcity
    ```
 
-5. [Agent を再起動します][5]。
+5. [Restart the Agent][5].
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/teamcity/datadog_checks/teamcity/data/conf.yaml.example
 [3]: https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md
 [4]: https://www.jetbrains.com/help/teamcity/server-startup-properties.html#TeamCity+Internal+Properties
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://www.jetbrains.com/help/teamcity/teamcity-server-logs.html
-[7]: https://docs.datadoghq.com/ja/logs/log_configuration/pipelines/#integration-pipelines
+[7]: https://docs.datadoghq.com/logs/log_configuration/pipelines/#integration-pipelines
 [8]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-| パラメーター            | 値                                                                                             |
+| Parameter            | Value                                                                                             |
 | -------------------- | ------------------------------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `teamcity`                                                                                        |
-| `<INIT_CONFIG>`      | 空白または `{}`                                                                                     |
+| `<INIT_CONFIG>`      | blank or `{}`                                                                                     |
 | `<INSTANCE_CONFIG>`  | `{"server": "%%host%%", "use_openmetrics": "true"}`                                               |
 
-##### ログの収集
+##### Log collection
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes log collection][2].
 
-| パラメーター      | 値                                                |
+| Parameter      | Value                                                |
 | -------------- | ---------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "teamcity"}` |
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][12]し、Checks セクションで `teamcity` を探します。
+[Run the Agent's `status` subcommand][12] and look for `teamcity` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "teamcity" >}}
 
 
-### イベント
+### Events
 
-ビルドの成功と失敗を表す TeamCity イベントが Datadog に転送されます。
+TeamCity events representing successful and failed builds are forwarded to Datadog.
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "teamcity" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+Need help? Contact [Datadog support][13].
 
-## その他の参考資料
+## Further Reading
 
-- [TeamCity と Datadog を使用して、コード変更がパフォーマンスに与える影響を追跡します。][14]
+- [Track performance impact of code changes with TeamCity and Datadog][14]
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
@@ -319,7 +315,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [8]: https://www.jetbrains.com/help/teamcity/creating-and-managing-users.html#Assigning+Roles+to+Users
 [9]: https://raw.githubusercontent.com/DataDog/integrations-core/master/teamcity/images/guest_user_settings.jpg
 [10]: https://raw.githubusercontent.com/DataDog/integrations-core/master/teamcity/images/assign_role.jpg
-[11]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[12]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[13]: https://docs.datadoghq.com/ja/help/
+[11]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[12]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[13]: https://docs.datadoghq.com/help/
 [14]: https://www.datadoghq.com/blog/track-performance-impact-of-code-changes-with-teamcity-and-datadog

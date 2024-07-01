@@ -1,6 +1,6 @@
 ---
+title: invocation
 core_product:
-- serverless monitoring
-title: 呼び出し
+  - serverless monitoring
 ---
-サーバーレスコンピューティングでは、デプロイされた関数が呼び出されることを「呼び出し」と言います。
+In serverless computing, an invocation is when a deployed function is called.

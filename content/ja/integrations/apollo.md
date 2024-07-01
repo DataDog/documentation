@@ -1,77 +1,77 @@
 ---
-app_id: apollo
-app_uuid: b39f1239-b97f-4b3b-ab5a-7a888915eedd
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check:
+"app_id": "apollo"
+"app_uuid": "b39f1239-b97f-4b3b-ab5a-7a888915eedd"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check":
       - apollo.operations.count
       - apollo.engine.operations.count
-      metadata_path: metadata.csv
-      prefix: apollo.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10014
-    source_type_name: Apollo Engine
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Apollo
-  sales_email: sachin@apollographql.com
-  support_email: sachin@apollographql.com
-categories:
-- キャッシュ
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: apollo
-integration_id: apollo
-integration_title: Apollo
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: apollo
-public_title: Apollo
-short_description: GraphQL インフラストラクチャーのパフォーマンスを監視
-supported_os:
+      "metadata_path": metadata.csv
+      "prefix": apollo.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10014"
+    "source_type_name": Apollo Engine
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Apollo
+  "sales_email": sachin@apollographql.com
+  "support_email": sachin@apollographql.com
+"categories":
+- caching
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "apollo"
+"integration_id": "apollo"
+"integration_title": "Apollo"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "apollo"
+"public_title": "Apollo"
+"short_description": "Monitor the performance of your GraphQL infrastructure"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Caching
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: GraphQL インフラストラクチャーのパフォーマンスを監視
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Apollo
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Caching"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Monitor the performance of your GraphQL infrastructure
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Apollo
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Apollo と Datadog のインテグレーションにより、Studio のパフォーマンスメトリクスを Datadog アカウントに転送できます。Datadog は高度な機能 API をサポートしているため、GraphQL メトリクスのグラフとアラートを作成することもできます。
+The Apollo Datadog integration enables you to forward Studio performance metrics to your Datadog account. Datadog supports an advanced function API, which enables you to create graphs and alerts for GraphQL metrics.
 
-![メトリクス][1]
+![Metrics][1]
 
-Studio は次のメトリクスを Datadog に送信します。
+Studio forwards the following metrics to Datadog:
 
-- `apollo.operations.count` - 実行された GraphQL 操作の数。これには、クエリ、ミューテーション、エラーになった操作が含まれます。
-- `apollo.operations.error_count` - エラーになった GraphQL 操作の数。これには、GraphQL 実行エラーのほか、Studio がサーバーへの接続に失敗した場合の HTTP エラーが含まれます。
-- `apollo.operations.cache_hit_count` - Apollo Server のクエリキャッシュ全体から結果が提供された GraphQL クエリの数。
-- GraphQL 操作の応答時間のヒストグラム (ミリ秒単位)。Studio の集計方法 (対数ビニング) のため、以下の値の精度は 5% 以内です。
+- `apollo.operations.count` - The number of GraphQL operations that were executed. This includes queries, mutations, and operations that resulted in an error.
+- `apollo.operations.error_count` - The number of GraphQL operations that resulted in an error. This includes GraphQL execution errors, and HTTP errors if Studio failed to connect to your server.
+- `apollo.operations.cache_hit_count` - The number of GraphQL queries for which the result was served from Apollo Server's full query cache.
+- A histogram of GraphQL operation response times, measured in milliseconds. Due to Studio's aggregation method (logarithmic binning), these values are accurate to +/- 5%:
 
   - `apollo.operations.latency.min`
   - `apollo.operations.latency.median`
@@ -80,57 +80,57 @@ Studio は次のメトリクスを Datadog に送信します。
   - `apollo.operations.latency.max`
   - `apollo.operations.latency.avg`
 
-これらのメトリクスは 60 秒間隔で集計され、GraphQL 操作名に `operation:<query-name>` というタグが付けられます。同じ操作名を持つ一意のクエリシグネチャはマージされ、操作名のないクエリは無視されます。
+These metrics are aggregated in 60-second intervals and tagged with the GraphQL operation name as `operation:<query-name>`. Unique query signatures with the same operation name are merged, and queries without an operation name are ignored.
 
-これらのメトリクスは関連する Studio のグラフ ID (`graph:<graph-id>`) および関連するバリアント名 (`variant:<variant-name>`) の双方にタグ付けされるため、Studio の複数のグラフから同じ Datadog アカウントにデータを送信できます。バリアント名を設定していない場合、`current` が使用されます。
+These metrics are also tagged with both the associated Studio graph ID (as `graph:<graph-id>`) and the associated variant name (as `variant:<variant-name>`), so multiple graphs from Studio can send data to the same Datadog account. If you haven't set a variant name, then `current` is used.
 
-(2020 年 10 月より前に設定されたインテグレーションでは、メトリクス名が `apollo.operations` ではなく `apollo.engine.operations` で始まり、`graph` ではなく `service` タグが使用されます。Apollo Studio のグラフのインテグレーションページで新しいメトリクス名に移行できます。)
+(Integrations set up prior to October 2020 have metric names starting with `apollo.engine.operations` instead of `apollo.operations` and use a `service` tag instead of `graph`. You can migrate to the new metric names in your graph's Integrations page in Apollo Studio.)
 
-## 計画と使用
+## Setup
 
-### ブラウザトラブルシューティング
+### Configuration
 
-Apollo Datadog インテグレーションは、Studio に Datadog API キーとリージョンを提供するだけで簡単にセットアップできます。それ以上の構成は必要ありません。
+Getting set up with the Apollo Datadog integration is as simple as providing a Datadog API key and region to Studio. There's no further configuration required.
 
-1. [Datadog インテグレーションページ][2]に移動し、Apollo タイルをクリックします。その後、**Configuration** タブの一番下にある **Install Integration** をクリックします。
+1. Go to your [Datadog Integrations page][2] and click on the Apollo tile. Then go to the **Configuration** tab and click **Install Integration** at the bottom.
 
-2. [Datadog API ページ][3]に移動して、API キーを作成します。
+2. Go to your [Datadog APIs page][3] and create an API key.
 
-3. ブラウザのアドレスバーで Datadog の API リージョンを確認します。
-- ドメイン名が `app.datadoghq.com` の場合、API リージョンは `US` となります。
-- ドメイン名が `app.datadoghq.eu` の場合、API リージョンは `EU` となります。
+3. Determine your Datadog API region by looking at your browser's address bar:
+- If the domain name is `app.datadoghq.com`, then your API region is `US`.
+- If the domain name is `app.datadoghq.eu`, then your API region is `EU`.
 
-4. [Studio][4] で、グラフのインテグレーションページを開きます。
+4. In [Studio][4], go to your graph's Integrations page:
 
    ![IntegrationsPage][5]
 
-5. Datadog Forwarding セクションで **Configure** を開き、API キーとリージョンを入力して **Enable** をクリックします。転送されるすべてのメトリクスは対応するグラフ ID (`graph:<graph-id>`) でタグ付けされるため、すべてのグラフに対して同じ API キーを使用できます。
+5. In the Datadog Forwarding section, click **Configure**. Provide your API key and region, then click **Enable**. Because all forwarded metrics are tagged with the corresponding graph's ID (`graph:<graph-id>`), you can use the same API key for all of your graphs.
 
    ![IntegrationsToggle][6]
 
-6. Datadog  メトリクスエクスプローラーにアクセスし、メトリクスを確認します。メトリクスは、表示されるまでに最大 5 分かかる場合があります。
+6. Go to the Datadog metrics explorer to see your metrics. Metrics may take up to five minutes to be visible.
 
-### API
+### Usage
 
-詳細な使用方法については、[Apollo インテグレーションのドキュメント][7]を参照してください。
+See the [Apollo integrations docs][7] for more detailed usage information.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "apollo" >}}
 
 
-### ヘルプ
+### Events
 
-現時点で、Apollo インテグレーションには、イベントは含まれません。
+The Apollo integration does not include any events at this time.
 
-### ヘルプ
+### Service Checks
 
-現時点で、Apollo インテグレーションには、サービスのチェック機能は含まれません。
+The Apollo integration does not include any service checks at this time.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog Support][9].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/metrics.png
@@ -141,4 +141,5 @@ Apollo Datadog インテグレーションは、Studio に Datadog API キーと
 [6]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/apollo/images/settings-toggle.png
 [7]: https://www.apollographql.com/docs/studio/datadog-integration/
 [8]: https://github.com/DataDog/integrations-extras/blob/master/apollo/metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://docs.datadoghq.com/help/
+

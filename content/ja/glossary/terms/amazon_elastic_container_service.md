@@ -1,6 +1,6 @@
 ---
-core_product:
-- infrastructure monitoring
 title: Amazon Elastic Container Service (ECS)
+core_product:
+  - infrastructure monitoring
 ---
-ECS は、コンテナオーケストレーションサービスです。
+ECS is a container orchestration service.

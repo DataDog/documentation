@@ -1,59 +1,61 @@
 ---
-categories:
+"categories":
 - azure
-- クラウド
-- data store
-dependencies: []
-description: Azure DB for MariaDB のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mariadb/
-draft: false
-git_integration_title: azure_db_for_mariadb
-has_logo: true
-integration_id: azure-dbformariadb
-integration_title: Microsoft Azure DB for MariaDB
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: azure_db_for_mariadb
-public_title: Datadog-Microsoft Azure DB for MariaDB インテグレーション
-short_description: Azure DB for MariaDB のキーメトリクスを追跡
-version: '1.0'
+- cloud
+- data stores
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure DB for MariaDB metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_db_for_mariadb/"
+"draft": false
+"git_integration_title": "azure_db_for_mariadb"
+"has_logo": true
+"integration_id": "azure-dbformariadb"
+"integration_title": "Microsoft Azure DB for MariaDB"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_db_for_mariadb"
+"public_title": "Datadog-Microsoft Azure DB for MariaDB Integration"
+"short_description": "Track key Azure DB for MariaDB metrics."
+"version": "1.0"
 ---
 
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+## Overview
 
-Azure Database for MariaDB は、サービスとしてエンタープライズ対応のフルマネージド型コミュニティ MariaDB データベースを提供します。
+Azure Database for MariaDB provides fully managed, enterprise-ready community MariaDB database as a service.
 
-Azure Database for MariaDB からメトリクスを取得すると、以下のことができます。
+Get metrics from Azure Database for MariaDB to:
 
-- MariaDB データベースのパフォーマンスを視覚化
-- MariaDB データベースのパフォーマンスをアプリケーションと関連付けることができます。
+- Visualize the performance of your MariaDB databases
+- Correlate the performance of your MariaDB databases with your applications
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "azure_db_for_mariadb" >}}
 
 
-### イベント
+### Events
 
-Azure Database for MariaDB インテグレーションには、イベントは含まれません。
+The Azure Database for MariaDB integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Azure Database for MariaDB インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Database for MariaDB integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_db_for_mariadb/azure_db_for_mariadb_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

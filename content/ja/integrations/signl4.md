@@ -1,109 +1,109 @@
 ---
-app_id: signl4
-app_uuid: 07952edd-2dc5-4c11-a697-5cba325f64ee
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: signl4.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10158
-    source_type_name: SIGNL4
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: SIGNL4
-  sales_email: success@signl4.com
-  support_email: success@signl4.com
-categories:
-- アラート設定
-- コラボレーション
-- インシデント
-- 問題追跡
+"app_id": "signl4"
+"app_uuid": "07952edd-2dc5-4c11-a697-5cba325f64ee"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": []
+      "metadata_path": metadata.csv
+      "prefix": signl4.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10158"
+    "source_type_name": SIGNL4
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": SIGNL4
+  "sales_email": success@signl4.com
+  "support_email": success@signl4.com
+"categories":
+- alerting
+- collaboration
+- incidents
+- issue tracking
 - notifications
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/signl4/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: signl4
-integration_id: signl4
-integration_title: SIGNL4
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: signl4
-public_title: SIGNL4
-short_description: Datadog のアラート通知を受信し、SIGNL4 を使用して対処。
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/signl4/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "signl4"
+"integration_id": "signl4"
+"integration_title": "SIGNL4"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "signl4"
+"public_title": "SIGNL4"
+"short_description": "Get notified of your Datadog alerts and take actions using SIGNL4."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Alerting
-  - Category::Collaboration
-  - Category::Incidents
-  - Category::Issue Tracking
-  - Category::Notifications
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Datadog のアラート通知を受信し、SIGNL4 を使用して対処。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: SIGNL4
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Alerting"
+  - "Category::Collaboration"
+  - "Category::Incidents"
+  - "Category::Issue Tracking"
+  - "Category::Notifications"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Get notified of your Datadog alerts and take actions using SIGNL4.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": SIGNL4
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-## 概要
+## Overview
 
-[SIGNL4][1] インテグレーションを使用すると、Datadog のアラートを SIGNL4 チームに送信し、SIGNL4 アプリ内でシームレスにこのアラートに対応できます。
+Use the [SIGNL4][1] integration to send Datadog alerts to SIGNL4 teams and seamlessly take actions on these alerts within the SIGNL4 app.
 
-SIGNL4 を Datadog に接続すると、以下が可能になります。
-- Datadog でインシデントをトリガーして解決する
-- インシデントに取り組み、エスカレーションの発生時にポリシーを設定する
-- 誰がオンコールかのデイリーリマインダーを設定
+Connect SIGNL4 to Datadog in order to:
+- Trigger and resolve incidents from Datadog
+- Tackle incidents and set up escalation policies as they occur
+- Set up a daily reminder of who is on-call
 
 ![SIGNL4 App][2]
 
-## 計画と使用
+## Setup
 
 ### SIGNL4
 
-SIGNL4 で以下のステップに従います。
+Follow these steps in SIGNL4:
 
-1. 既存のアカウントを使用、または [signl4.com][1] で SIGNL4 アカウントを新規作成します。
+1. Use your existing account or create a SIGNL4 account at [signl4.com][1].
 
-2. SIGNL4 アプリで *Teams -> Your Team -> Secret* を開き、チームのシークレットを含む SIGNL4 Webhook アドレスを探します。
+2. In your SIGNL4 app find your SIGNL4 webhook address including your team secret under *Teams -> Your Team -> Secret*.
 
-### Datadog アラート
+### Datadog alerts
 
-Datadog の新しいアラートについて、SIGNL4 チームに警告することができます。Datadog で解決されたアラートは、自動的に SIGNL4 でアラートを閉じます。これを行うには、次のように構成する必要があります。
+You can alert your SIGNL4 team about new alerts in Datadog. Alerts that get resolved in Datadog automatically close the alert in SIGNL4. In order to do so you need to configure the following:
 
-1. [Webhooks Integration タイル][3]へ移動します。
+1. Navigate to the [Webhooks Integration tile][3].
 
-2. **Configuration** タブで Webhooks を選択し、**New** をクリックします。
+2. On the **Configuration** tab, go to Webhooks and click **New**.
 
-3. **New Webhook** で意味のある `Name` を入力し、チームのシークレットを含む SIGNL4 Webhook `URL` (上記で作成したもの) を使用します。例:
+3. Under **New Webhook**, enter a meaningful `Name` and use the SIGNL4 Webhook `URL` (created above) including your team secret, for example:
 
     ```
     https://connect.signl4.com/webhook/[team-secret]?ExtIDParam=alertId&ExtStatusParam=alertTransition&ResolvedStatus=Recovered
     ```
 
-    ここで `[team-secret]` を SIGNL4 チームシークレットに置き換えます。
+    Replace `[team-secret]` with your SIGNL4 team secret here.
 
-    ![SIGNL4 アラート Webhook][4]
+    ![SIGNL4 Alerts Webhook][4]
 
-4. `Payload` テキストボックスで、以下の JSON をコピーして貼り付けます。
+4. Copy-paste the following JSON in the `Payload` text box:
 
     ```json
     {
@@ -126,33 +126,33 @@ Datadog の新しいアラートについて、SIGNL4 チームに警告する�
     }
     ```
 
-パラメーターは必要に応じて変更できますが、`alertId`、`alertTransition`、`X-S4-SourceSystem` は変更しないようにしてください。
+You can adapt the parameters according to your needs, but leave `alertId`, `alertTransition`, and `X-S4-SourceSystem` unchanged.
 
-5. **Save** をクリックすると、Webhook が作成されます。
+5. Click **Save** to create the webhook.
 
-詳しくは、[Datadog のモバイルアラートと追跡 & エスカレーション][5]をご参照ください。
+For more details, see [Mobile alerting with tracking & escalation for Datadog][5].
 
-これで、Webhook をモニターの通知チャンネルとして使うことができます。Webhook の名前が SIGNL4 であると仮定して、`@webhook-SIGNL4` を使って通知を送信します。モニターの条件が適用されるとき、チームは新しい SIGNL4 アラートを受け取ります。
+You can now use your webhook as a notification channel in your monitor. Assuming the name of your webhook is SIGNL4, send notifications using `@webhook-SIGNL4`. When the conditions of the monitor apply, your team receives a new SIGNL4 alert.
 
-### Datadog インシデント
+### Datadog Incidents
 
-Datadog の新しいインシデントについて、SIGNL4 チームに警告することができます。Datadog で解決されたインシデントは、自動的に SIGNL4 でアラートを閉じます。これを行うには、次のように構成します。
+You can alert your SIGNL4 team about new Incidents in Datadog. Incidents that get resolved in Datadog automatically close the alert in SIGNL4. In order to do so, configure the following:
 
-1. [Webhooks Integration タイル][3]へ移動します。
+1. Navigate to the [Webhooks Integration tile][3].
 
-2. **Configuration** タブで Webhooks を選択し、**New** をクリックします。
+2. On the **Configuration** tab, go to Webhooks and click **New**.
 
-3. **New Webhook** で意味のある `Name` を入力し、チームのシークレットを含む SIGNL4 Webhook `URL` (上記で作成したもの) を使用します。例:
+3. Under **New Webhook**, enter a meaningful `Name` and use the SIGNL4 Webhook `URL` (created above) including your team secret, for example:
 
     ```
     https://connect.signl4.com/webhook/[team-secret]?ExtIDParam=s4ExternalId&ExtStatusParam=incidentStatus&ResolvedStatus=resolved
     ```
 
-   URL の `[team-secret]` を SIGNL4 チームシークレットに置き換えます。
+    Replace `[team-secret]` in the URL with your SIGNL4 team secret.
 
-    ![SIGNL4 インシデント Webhook][6]
+    ![SIGNL4 Incidents Webhook][6]
 
-4. `Payload` テキストボックスで、以下の JSON をコピーして貼り付けます。
+4. Copy-paste the following JSON in the `Payload` text box:
 
     ```json
     {
@@ -178,53 +178,53 @@ Datadog の新しいインシデントについて、SIGNL4 チームに警告�
     }
     ```
 
-パラメーターは必要に応じて変更できますが、`incidentStatus`、`s4ExternalId`、`X-S4-SourceSystem` は変更しないようにしてください。
+Adapt the parameters according to your needs, but leave `incidentStatus`, `s4ExternalId` and `X-S4-SourceSystem` unchanged.
 
-5. **Save** をクリックすると、Webhook が作成されます。
+5. Click **Save** to create the webhook.
 
-詳しくは、[Datadog のモバイルアラートと追跡 & エスカレーション][5]をご参照ください。
+For more details, see [Mobile alerting with tracking & escalation for Datadog][5].
 
-### インシデントルール
+### Incidents Rule
 
-Datadog の Monitors -> Settings (Incidents) Rules でルールを作成することができます。ルールでは、例えば、重大度、サービスなどの条件を指定します。"Other attributes" には、新しいアラートをトリガーする "state:active" とアラートをクローズする "state:resolved" を使用することをお勧めします。"Notify" で、上記で作成した SIGNL4 インシデント Webhook を選択します。
+You can create a rule in Datadog under Monitors -> Settings (Incidents) Rules. In the rule, you specify the criteria, for example, the severity, service, etc. For the "Other attributes", it is recommended to use "state:active" to trigger a new alert and "state:resolved" to close the alert. Under "Notify", select your SIGNL4 incident webhook as created above.
 
-![SIGNL4 インシデントルール][7]
+![SIGNL4 Incidents Rule][7]
 
-新しいインシデントを作成すると、SIGNL4 チームはアラートを受け取ります。SIGNL4 アプリでアラートを承認または閉じると、インシデントのステータスは Stable または Resolved に設定されます。
+If you create a new incident, your SIGNL4 team receives an alert. If you acknowledge or close the alert in the SIGNL4 app, the incident status is be set to Stable or Resolved.
 
-また、Datadog でインシデントステータスを Resolved に設定すると、SIGNL4 でアラートが閉じられます。
+Also, if you set the incident status to Resolved in Datadog, this closes the alert in SIGNL4.
 
-### Datadog インシデントのステータス更新
+### Status updates for Datadog incidents
 
-Datadog インシデントについては、それぞれのアラートを承認または閉じることで、SIGNL4 アプリから直接ステータスを Stable または Resolved に更新することができます。
+For Datadog incidents, you can update the status to Stable or Resolved directly from your SIGNL4 app by acknowledging or closing the respective alert.
 
-このバックチャンネルを構成するために、SIGNL4 ウェブポータルに行き、Teams -> Apps に進んでください。Datadog コネクタアプリを検索し、そこで "Create" をクリックします。アプリの設定の中で直接詳細な情報を見つけることができます。
+In order to configure this back channel, go to your SIGNL4 web portal and then to Teams -> Apps. Search for the Datadog connector app and click "Create" there. You can find more information directly within the app settings.
 
-![Datadog コネクタアプリ][8]
+![Datadog Connector App][8]
 
-以下の構成が必要です。
+You need to configure the following:
 
-- Datadog URL: Datadog インスタンスの URL。例えば、https://app.datadoghq.com/ や https://app.datadoghq.eu/ など。 
-- Datadog API Key: Datadog の API キー。API キーは、自分のアカウントの Datadog で、Organization Settings -> API Keys で検索または作成することができます。 
-- Datadog Application Key: Datadog のアプリケーションキー。アプリケーションキーは、自分のアカウントの Datadog で、Organization Settings -> Application Keys で検索または作成することができます。 
-- Acknowledgement as Stable: Acknowledgements は、インシデントのステータスを Stable に設定します。 
+- Datadog URL: The URL of your Datadog instance, for example, https://app.datadoghq.com/ or https://app.datadoghq.eu/.  
+- Datadog API Key: Your Datadog API key. You can find or create an API key in Datadog under your account, Organization Settings -> API Keys.  
+- Datadog Application Key: Your Datadog application key. You can find or create an application key in Datadog under your account, Organization Settings -> Application Keys.  
+- Acknowledgement as Stable: Acknowledgements set the incident status to Stable.  
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-SIGNL4 インテグレーションには、メトリクスは含まれません。
+The SIGNL4 integration does not include any metrics.
 
-### ヘルプ
+### Events
 
-SIGNL4 でトリガーされ解決したイベントは、SIGNL4 アプリおよびウェブポータルに表示されます。
+SIGNL4 triggered and resolved events appear in your SIGNL4 app and web portal.
 
-### ヘルプ
+### Service Checks
 
-SIGNL4 インテグレーションには、サービスチェックは含まれません。
+The SIGNL4 integration does not include any service checks.
 
-## ヘルプ
-ヘルプが必要な場合は、[SIGNL4 サポート][9]までお問い合わせください。
+## Troubleshooting
+Need help? Contact [SIGNL4 Support][9].
 
 
 [1]: https://www.signl4.com
@@ -236,3 +236,4 @@ SIGNL4 インテグレーションには、サービスチェックは含まれ�
 [7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/signl4/images/datadog-incidents-rule.png
 [8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/signl4/images/signl4-datadog-connector-app.png
 [9]: mailto:success@signl4.com
+

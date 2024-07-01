@@ -1,73 +1,74 @@
 ---
-categories:
+"categories":
 - cloud
-- 構成 & デプロイ
+- configuration & deployment
 - google cloud
-- ログの収集
-dependencies: []
-description: Google Cloud Load Balancing のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_loadbalancing/
-draft: false
-git_integration_title: google_cloud_loadbalancing
-has_logo: true
-integration_id: google-cloud-loadbalancing
-integration_title: Google Cloud Load Balancing
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: google_cloud_loadbalancing
-public_title: Datadog-Google Cloud Load Balancing インテグレーション
-short_description: Google Cloud Load Balancing のキーメトリクスを追跡
-version: '1.0'
+- log collection
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Google Cloud Load Balancing metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/google_cloud_loadbalancing/"
+"draft": false
+"git_integration_title": "google_cloud_loadbalancing"
+"has_logo": true
+"integration_id": "google-cloud-loadbalancing"
+"integration_title": "Google Cloud Load Balancing"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "google_cloud_loadbalancing"
+"public_title": "Datadog-Google Cloud Load Balancing Integration"
+"short_description": "Track key Google Cloud Load Balancing metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Google Cloud Load Balancing を使用すると、負荷分散されたコンピューティングリソースを単一または複数のリージョンに分配し、高可用性要件を満たすことができます。また、1 つのエニーキャスト IP の背後にリソースを置き、インテリジェントなオートスケーリング機能を使用してリソースをスケーリングできます。
+Google Cloud Load Balancing gives you the ability to distribute load-balanced compute resources in single or multiple regions, to meet your high availability requirements, to put your resources behind a single anycast IP and to scale your resources up or down with intelligent Autoscaling.
 
-Datadog Google Cloud Platform インテグレーションを使用して、Google Cloud Load Balancing からメトリクスを収集できます。
+Use the Datadog Google Cloud Platform integration to collect metrics from Google Cloud Load Balancing.
 
-## 計画と使用
+## Setup
 
-### メトリクスの収集
+### Metric collection
 
-#### インフラストラクチャーリスト
+#### Installation
 
-[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
-### 収集データ
+### Log collection
 
-Google Cloud HTTP Loadbalancer のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
+Google Cloud HTTP Loadbalancer logs are collected with Google Cloud Logging and sent to a Dataflow job through a Cloud Pub/Sub topic. If you haven't already, [set up logging with the Datadog Dataflow template][2].
 
-これが完了したら、Google Cloud HTTP Loadbalancer のログを Google Cloud Logging から Pub/Sub へエクスポートします。
+Once this is done, export your Google Cloud HTTP Loadbalancer logs from Google Cloud Logging to the Pub/Sub topic:
 
-1. [Google Cloud Logging のページ][3]に移動し、Google Cloud HTTP Loadbalancer のログを絞り込みます。
-2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
-4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
+1. Go to the [Google Cloud Logging page][3] and filter the Google Cloud HTTP Loadbalancer logs.
+2. Click **Create Sink** and name the sink accordingly.
+3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
+4. Click **Create** and wait for the confirmation message to show up.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "google_cloud_loadbalancing" >}}
 
 
-### ヘルプ
+### Events
 
-Google Cloud Load Balancing インテグレーションには、イベントは含まれません。
+The Google Cloud Load Balancing integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Google Cloud Load Balancing インテグレーションには、サービスのチェック機能は含まれません。
+The Google Cloud Load Balancing integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
-[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
+[1]: https://docs.datadoghq.com/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_loadbalancing/google_cloud_loadbalancing_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

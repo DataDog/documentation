@@ -1,7 +1,7 @@
 ---
+title: security information and event management (SIEM)
 core_product:
-- security
-- cloud siem
-title: セキュリティ情報およびイベント管理 (SIEM)
+  - security
+  - cloud siem
 ---
-SIEM は、セキュリティイベントのデータを用いて、脅威の検出、セキュリティインシデント管理、コンプライアンスなどを支援するコンピュータセキュリティの分野です。
+SIEM is a field in computer security that uses data from security events to support threat detection, security incident management, and compliance.

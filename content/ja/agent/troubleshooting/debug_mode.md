@@ -1,81 +1,81 @@
 ---
+title: Debug Mode
 aliases:
-- /ja/agent/faq/how-to-get-more-logging-from-the-agent
-- /ja/agent/faq/agent-5-container-more-log
+    - /agent/faq/how-to-get-more-logging-from-the-agent
+    - /agent/faq/agent-5-container-more-log
 further_reading:
 - link: /agent/troubleshooting/send_a_flare/
-  tag: Agent のトラブルシューティング
-  text: Agent フレアの送信
+  tag: Documentation
+  text: Send an Agent Flare
 - link: /agent/troubleshooting/agent_check_status/
-  tag: Agent のトラブルシューティング
-  text: Agent チェックのステータスを確認
-title: デバッグモード
+  tag: Documentation
+  text: Get the Status of an Agent Check
 ---
 
 ## Agent
 
-Agent は、デフォルトで `INFO` レベルでログを作成します。ログからさらに情報を取得するため、ログレベルを `DEBUG` に設定することができます。
+The Agent, by default, logs in `INFO` level. You can set the log level to `DEBUG` to get more information from your logs.
 
-**注**: デバッグモードは、デバッグ目的のみにご使用ください。インデックス付きログの数が増加するため、Datadog では一定期間のみ `DEBUG` を有効にすることをおすすめしています。終了後は、ログレベルを `INFO` に戻します。
+**Note**: Debug mode is meant for debugging purposes only. Datadog recommends only enabling `DEBUG` for a certain window of time as it increases the number of indexed logs. Set the log level back to `INFO` when done.
 
-Agent のフルデバッグモードを有効にするには
+To enable the Agent full debug mode:
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-1. ローカル `datadog.yaml` ファイルを変更します。各 OS 固有の詳細については、[Agent の主な構成ファイル][8]をご参照ください。
+1. Modify your local `datadog.yaml` file. See [Agent main configuration file][1] for OS specific details.
 
-2. `# log_level: INFO` を `log_level: DEBUG` に置き換えます (`#` を削除してコメントを解除します)。
+2. Replace `# log_level: INFO` with `log_level: DEBUG` (remove `#` to uncomment the line).
 
-3. Datadog Agent を再起動します。各 OS 固有の詳細については、[Agent コマンド][2]をご参照ください。
+3. Restart the Datadog Agent. See [Agent Commands][2] for OS specific details.
 
-4. ログが生成されるまで数分待ちます。各 OS 固有の詳細については、[Agent ログファイル][3]をご参照ください。
+4. Wait a few minutes to generate some logs. See [Agent Log Files][3] for OS specific details.
 
-[1]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[2]: /ja/agent/configuration/agent-commands/#restart-the-agent
-[3]: /ja/agent/configuration/agent-log-files/
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/configuration/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-log-files/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-1. ローカル `datadog.conf` ファイルを変更します。各 OS 固有の詳細については、[Agent の主な構成ファイル][1]をご参照ください。
+1. Modify your local `datadog.conf` file. See [Agent main configuration file][1] for OS specific details.
 
-2. `# log_level: INFO` を `log_level: DEBUG` に置き換えます (`#` を削除してコメントを解除します)。
+2. Replace `# log_level: INFO` with `log_level: DEBUG` (remove `#` to uncomment the line).
 
-3. Datadog Agent を再起動します。各 OS 固有の詳細については、[Agent コマンド][2]をご参照ください。
+3. Restart the Datadog Agent. See [Agent Commands][2] for OS specific details.
 
-4. ログが生成されるまで数分待ちます。各 OS 固有の詳細については、[Agent ログファイル][3]をご参照ください。
+4. Wait a few minutes to generate some logs. See [Agent Log Files][3] for OS specific details.
 
-[1]: /ja/agent/configuration/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
-[2]: /ja/agent/configuration/agent-commands/?tab=agentv5#restart-the-agent
-[3]: /ja/agent/configuration/agent-log-files/?tab=agentv5
+[1]: /agent/configuration/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
+[2]: /agent/configuration/agent-commands/?tab=agentv5#restart-the-agent
+[3]: /agent/configuration/agent-log-files/?tab=agentv5
 {{% /tab %}}
 {{< /tabs >}}
 
-## コンテナ化された Agent
+## Containerized Agent
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-コンテナ Agent でデバッグモードを有効にする場合は、Agent の起動時に `DD_LOG_LEVEL=debug` を使用してください。
+To enable debug mode for the container Agent, use `DD_LOG_LEVEL=debug` when starting your Agent.
 
-Agent v6.19 / v7.19 以降の場合は、以下を使用してランタイム時の Agent のログレベルを設定します。
+For Agent v6.19+ / v7.19+, set the Agent log level at runtime using:
 
 ```shell
 agent config set log_level debug
 ```
 
-エージェントコンテナでのようにランタイムにトレースエージェントコンテナのログレベルを変更することは **できません**。`DD_LOG_LEVEL` 変数を `debug` に設定した後に、専用のトレースエージェントコンテナへの再デプロイメントが依然として必要です。
+You **cannot** change the log level for the trace-agent container at runtime like you can do for the agent container. A redeployment after setting `DD_LOG_LEVEL` variable to `debug` is still necessary for the dedicated trace-agent container.
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-<mrk mid="68" mtype="seg">Agent がコンテナ内で実行されている場合、`service datadog-agent restart` (または同様のコマンド) では、Docker によってコンテナが強制終了されるため、Agent を再起動できません。</mrk><mrk mid="69" mtype="seg">コンテナ化 Agent を再起動するには、スーパーバイザーを使用します。</mrk>
+When run in a container, the Agent cannot be restarted via `service datadog-agent restart` (or similar) which causes the container to be killed by Docker. Use supervisor to restart a containerized Agent:
 
 ```text
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
 ```
 
-次のコマンドは、デバッグログを有効にし、次に Agent を再起動し、次に 60 秒待機し、最後にフレアを送信します。
+The following commands enable debug logging, restart the Agent, wait 60 seconds, then send a flare, in that order:
 
 ```shell
 sed -i '/\[Main\]/a LOG_LEVEL=DEBUG' /etc/dd-agent/datadog.conf
@@ -84,23 +84,23 @@ sleep 60
 /etc/init.d/datadog-agent flare <CASE_ID>
 ```
 
-デバッグログは次のコマンドで無効にできます。
+Debug logs can be disabled with:
 
 ```shell
 sed -i '/LOG_LEVEL=DEBUG/d' /etc/dd-agent/datadog.conf
 /opt/datadog-agent/bin/supervisorctl -c /etc/dd-agent/supervisor.conf restart all
 ```
 
-または、コンテナを再起動します。
+Or the container can be restarted.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Agent のログレベル
+## Agent log level
 
-`log_level` または `DD_LOG_LEVEL` には、以下の Agent ログレベルを使用可能です。
+The following Agent log levels are available for `log_level` or `DD_LOG_LEVEL`:
 
-| オプション     | クリティカルログ | エラーログ | 警告ログ | 情報ログ | デバッグログ | トレースログ |
+| Option     | Critical logs | Error logs | Warn logs | Info logs | Debug logs | Trace logs |
 |------------|---------------|------------|-----------|-----------|------------|------------|
 | `'OFF'`      |               |            |           |           |            |            |
 | `'CRITICAL'` | {{< X >}}     |            |           |           |            |            |
@@ -110,8 +110,8 @@ sed -i '/LOG_LEVEL=DEBUG/d' /etc/dd-agent/datadog.conf
 | `'DEBUG'`    | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  |            |
 | `'TRACE'`    | {{< X >}}     | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}}  |
 
-**注**: コンフィギュレーションファイルでログレベルを `'OFF'` に設定する場合、値が不適切に解析されないように引用符を使用します。他のログレベルでは、引用符はオプションです。
+**Note**: When setting the log level to `'OFF'` in the configuration file quotes are mandatory to prevent the value for being improperly parsed. Quotes are optional for other log levels.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -1,115 +1,115 @@
 ---
-app_id: taskcall
-app_uuid: dd54da03-0a8c-4796-aaa6-61eeb04e611b
-assets:
-  oauth: assets/oauth_clients.json
-author:
-  homepage: https://taskcallapp.com
-  name: TaskCall
-  sales_email: support@taskcallapp.com
-  support_email: support@taskcallapp.com
-categories:
-- アラート設定
-- コラボレーション
-- インシデント
-- 問題追跡
+"app_id": "taskcall"
+"app_uuid": "dd54da03-0a8c-4796-aaa6-61eeb04e611b"
+"assets":
+  "oauth": assets/oauth_clients.json
+"author":
+  "homepage": "https://taskcallapp.com"
+  "name": TaskCall
+  "sales_email": support@taskcallapp.com
+  "support_email": support@taskcallapp.com
+"categories":
+- alerting
+- collaboration
+- incidents
+- issue tracking
 - notifications
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/taskcall/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: taskcall
-integration_id: taskcall
-integration_title: TaskCall
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: taskcall
-public_title: TaskCall
-short_description: TaskCall による Datadog インシデントの監視と一元化
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/taskcall/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "taskcall"
+"integration_id": "taskcall"
+"integration_title": "TaskCall"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "taskcall"
+"public_title": "TaskCall"
+"short_description": "Monitor and centralize Datadog incidents with TaskCall"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Alerting
-  - Category::Collaboration
-  - Category::Incidents
-  - Category::Issue Tracking
-  - Category::Notifications
-  - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Queried Data Type::Incidents
-  configuration: README.md#Setup
-  description: TaskCall による Datadog インシデントの監視と一元化
-  media:
-  - caption: インシデント通知
-    image_url: images/incident_notifications.png
-    media_type: image
-  - caption: インシデント詳細
-    image_url: images/incident_details.png
-    media_type: image
-  - caption: インパクトの可視性とステータスダッシュボード
-    image_url: images/impact_visibility_status_dashboard.png
-    media_type: image
-  - caption: オンコール管理
-    image_url: images/on_call_management.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: TaskCall
-  uninstallation: README.md#Uninstallation
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Alerting"
+  - "Category::Collaboration"
+  - "Category::Incidents"
+  - "Category::Issue Tracking"
+  - "Category::Notifications"
+  - "Offering::Integration"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  - "Queried Data Type::Incidents"
+  "configuration": "README.md#Setup"
+  "description": Monitor and centralize Datadog incidents with TaskCall
+  "media":
+  - "caption": Incident Notifications
+    "image_url": images/incident_notifications.png
+    "media_type": image
+  - "caption": Incident Details
+    "image_url": images/incident_details.png
+    "media_type": image
+  - "caption": Impact Visibility and Status Dashboard
+    "image_url": images/impact_visibility_status_dashboard.png
+    "media_type": image
+  - "caption": On-Call Management
+    "image_url": images/on_call_management.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": TaskCall
+  "uninstallation": "README.md#Uninstallation"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-TaskCall は、対応プロセスを自動化することで、システムのダウンタイムを短縮するリアルタイムのインシデント対応システムです。システムの包括的なビューを提供するために、監視ツールからのフィードを継続的に受け入れます。オンコール管理とインシデント対応メカニズムを使用して、適切なチームを編成し、可能な限り最短時間でインシデントを解決します。
+TaskCall is a real-time incident response system that reduces system downtime by automating the response process. It continuously accepts feeds from monitoring tools to provide a comprehensive view of your system. It uses its on-call management and incident response mechanisms to assemble the right team and resolve incidents in the fastest possible time.
 
-TaskCall のインテグレーションにより、Datadog ユーザーは、インシデント認識を向上させ、インシデント処理プロセスを簡素化することで、オペレーションを強化することができます。インシデントは、2 つのプラットフォーム間で双方向に同期されます。Datadog アラートが TaskCall で受信されると、ユーザーはすべてのインシデントを中断することなく体系的に管理することができます。ユーザーは、依存関係グラフとステータスダッシュボードから改善された影響の可視性からも恩恵を受けます。インフラストラクチャー全体の状態をよりよく理解することで、効率的な解決が可能になります。
-
-
-## 主な特徴
-
-- Datadog からアラートを受信すると、すぐに正しいオンコール対応者に通知されます。
-- 繰り返されるアラートは自動的に消音され、オンコール対応者がすでにインシデントを見ているときに中断されることはありません。
-- インテグレーションは双方向です。ステータスと優先度は、Datadog と TaskCall の間で同期されます。
-- アラート条件がなくなると、インシデントは TaskCall で自動的に解決されます。
-- このインテグレーションは、すべての TaskCall サブスクリプションプランで利用可能です。
+TaskCall's integration allows Datadog users to bolster their operations by improving their incident awareness and simplifying the process in which they are handled. Incidents sync up bi-directionally between the two platforms. Once Datadog alerts are received in TaskCall, users can systematically manage all incidents without being interrupted. Users also benefit from improved impact visibility from dependency graphs and status dashboards. With a better understanding of the state of your overall infrastructure, efficient resolutions can be achieved.
 
 
-## 計画と使用
+## Key Features
 
-インテグレーションは、TaskCall と Datadog の両方から構成する必要があります。
+- Correct on-call responders are notified as soon as an alert is received from Datadog.
+- Repeating alerts are automatically silenced to avoid interrupting the on-call responders when they are already looking at the incident.
+- The integration is bi-directional. Status and priority are synced up between Datadog and TaskCall.
+- Incidents are automatically resolved in TaskCall when alert conditions are no longer present.
+- This integration is available on all TaskCall subscription plans.
 
-### Datadog への TaskCall アプリのインストール
 
-1. まだアカウントをお持ちでない場合は、[TaskCall アカウントを作成][1]してください。
-2. **Datadog で**: [TaskCall インテグレーションタイル][2]に移動します。
-3. TaskCall インテグレーションタイルで、** Configure** タブに移動し、**Connect Accounts** をクリックします。TaskCall にリダイレクトされます。
-4. **TaskCall で**: インテグレーションに**名前**を付け、インテグレーションが必要な**サービス**を選択します。
+## Setup
 
-![TaskCall 認可][3]
+The integration needs to be configured from both TaskCall and Datadog.
 
-5. **Integrate** をクリックします。Datadog の認可ページにリダイレクトされます。
-6. インテグレーションを認可し、正しい権限があることを確認します。
-7. インテグレーションを認可すると、TaskCallにリダイレクトされます。
-8. ** TaskCall で**: インテグレーション用に発行された **Integration Url** をコピーします。これは Datadog で Webhook をセットアップするために必要です。
+### Install TaskCall App in Datadog
 
-### Datadog で Webhook を作成する
+1. [Create a TaskCall account][1] if you do not already have one.
+2. **In Datadog**: Navigate to the [TaskCall integration tile][2].
+3. On the TaskCall integration tile, go to the **Configure** tab and click **Connect Accounts**. You will be redirected to TaskCall.
+4. **In TaskCall**: Give the integration a **name** and select the **service** you want the integration to be on.
 
-1. [**Integrations** > **Integrations**][4] に移動します。
-2. **Webhooks** を見つけてクリックします。
-3. **New Webhook** ボタンをクリックします。
-4. 名前を付け、TaskCall からコピーした **Integration Url** を貼り付けます。
-5. 以下の [JSON ペイロード][5]をコピーし、ペイロードセクションに貼り付けます。
+![TaskCall Authorization][3]
+
+5. Click **Integrate**. You will be redirected to a Datadog authorization page.
+6. Authorize the integration, ensuring that you have the correct permissions to do so.
+7. Once you authorize the integration you will be redirected to TaskCall.
+8. **In TaskCall**: Copy the **Integration Url** that is issued for the integration. You will need this to set up the webhook in Datadog.
+
+### Create Webhook in Datadog
+
+1. Go to [**Integrations** > **Integrations**][4].
+2. Find **Webhooks** and click on it.
+3. Click on the **New Webhook** button.
+4. Give it a name and paste the **Integration Url** you copied over from TaskCall.
+5. Copy the following [JSON payload][5] and paste it in the Payload section.
 ```json
 {
      "body": "$EVENT_MSG",
@@ -157,20 +157,20 @@ TaskCall のインテグレーションにより、Datadog ユーザーは、イ
      "tags": "$TAGS"
 }
 ```
-6. 詳細を入力したら、Save をクリックします。
+6. Once the details have been entered, click Save.
 
-詳細については、[TaskCall Datadog インテグレーションガイド][6]を参照してください。
+For more information, see the [TaskCall Datadog Integration Guide][6].
 
-## アンインストール
+## Uninstallation
 
-- TaskCall で、Services > Integrations からインテグレーションを削除します。
-- Datadog の [TaskCall インテグレーションタイル][2]に移動し、アンインストールします。また、TaskCall に通知を送信するために作成した Webhook を削除する必要があります。
-- このインテグレーションをアンインストールすると、それ以前に与えられた認可は全て取り消されます。
+- In TaskCall, delete the integration from Services > Integrations.
+- Navigate to the [TaskCall integration tile][2] in Datadog and uninstall it. You must also delete the webhook you created to send notifications to TaskCall.
+- Once this integration has been uninstalled, any previous authorizations are revoked.
 
 
-## Agent
+## Support
 
-インテグレーションまたはプラットフォームに関するご質問は、[TaskCall サポートにお問い合わせください][7]。
+[Contact TaskCall support][7] for any questions regarding the integration or the platform.
 
 
 [1]: https://app.us.taskcallapp.com/register
@@ -180,3 +180,4 @@ TaskCall のインテグレーションにより、Datadog ユーザーは、イ
 [5]: https://docs.taskcallapp.com/integrations/v1/datadog-integration-guide#in-datadog
 [6]: https://docs.taskcallapp.com/integrations/v1/datadog-integration-guide
 [7]: https://www.taskcallapp.com/contact-us
+

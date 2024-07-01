@@ -1,107 +1,109 @@
 ---
-app_id: rethinkdb
-app_uuid: f8348717-0ba8-4d42-b856-983e0cde0314
-assets:
-  dashboards:
-    RethinkDB Overview: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: rethinkdb.config.servers
-      metadata_path: metadata.csv
-      prefix: rethinkdb.
-    process_signatures:
+"app_id": "rethinkdb"
+"app_uuid": "f8348717-0ba8-4d42-b856-983e0cde0314"
+"assets":
+  "dashboards":
+    "RethinkDB Overview": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": rethinkdb.config.servers
+      "metadata_path": metadata.csv
+      "prefix": rethinkdb.
+    "process_signatures":
     - rethinkdb
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10092
-    source_type_name: RethinkDB
-  logs:
-    source: rethinkdb
-  saved_views:
-    rethinkdb_processes: assets/saved_views/rethinkdb_processes.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10092"
+    "source_type_name": RethinkDB
+  "saved_views":
+    "rethinkdb_processes": assets/saved_views/rethinkdb_processes.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - data stores
-- ログの収集
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: rethinkdb
-integration_id: rethinkdb
-integration_title: RethinkDB
-integration_version: 3.1.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: rethinkdb
-public_title: RethinkDB
-short_description: ステータスやパフォーマンスなどのメトリクスを RethinkDB クラスターから収集します。
-supported_os:
+- log collection
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "rethinkdb"
+"integration_id": "rethinkdb"
+"integration_title": "RethinkDB"
+"integration_version": "3.1.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "rethinkdb"
+"public_title": "RethinkDB"
+"short_description": "Collect status, performance and other metrics from a RethinkDB cluster."
+"supported_os":
 - linux
 - macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Data Stores
-  - Category::Log Collection
-  configuration: README.md#Setup
-  description: ステータスやパフォーマンスなどのメトリクスを RethinkDB クラスターから収集します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: RethinkDB
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  - "Category::Data Stores"
+  - "Category::Log Collection"
+  "configuration": "README.md#Setup"
+  "description": Collect status, performance and other metrics from a RethinkDB cluster.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": RethinkDB
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-[RethinkDB][1] は分散型のドキュメント指向 NoSQL データベースです。リアルタイムな変更フィードに対してファーストクラスのサポートを提供します。
+[RethinkDB][1] is a distributed documented-oriented NoSQL database, with first class support for realtime
+change feeds.
 
-このチェックは Datadog Agent を使用して RethinkDB クラスターを監視し、パフォーマンス、データ可用性、クラスター コンフィギュレーションなどのメトリクスを収集します。
+This check monitors a RethinkDB cluster through the Datadog Agent and collects metrics about performance,
+data availability, cluster configuration, and more.
 
-**注**: このインテグレーションには、RethinkDB **バージョン 2.3.6 以降**が必要です。
+**Note**: this integration is compatible with RethinkDB **version 2.3.6 and above**.
 
-## 計画と使用
+## Setup
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For
+containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these
+instructions.
 
-### インフラストラクチャーリスト
+### Installation
 
-RethinkDB チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The RethinkDB check is included in the [Datadog Agent][3] package. No additional installation is needed on your server.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. RethinkDB 2.4 以降を使用する場合は、`rethinkdb` データベースに対して読み取り専用のアクセス許可を持つ `datadog-agent` ユーザーを追加してください。
-以下の ReQL コマンドを使用できます。詳しくは、[アクセス許可とユーザーアカウント][4]を
-参照してください。
+1. If using RethinkDB 2.4+, add a `datadog-agent` user with read-only permissions on the `rethinkdb`
+database. You can use the following ReQL commands, and see [Permissions and user accounts][4] for
+details:
 
     ```python
     r.db('rethinkdb').table('users').insert({'id': 'datadog-agent', 'password': '<PASSWORD>'})
     r.db('rethinkdb').grant('datadog-agent', {'read': True})
     ```
 
-    **注**: RethinkDB 2.3.x の場合、`rethinkdb` データベースに対するアクセス許可の付与はサポートされていません。
-   この手順をスキップし、下記の[管理者アカウント][5]を使用してください。
+    **Note**: on RethinkDB 2.3.x, granting permissions on the `rethinkdb` database is not supported. Skip
+    this step and use your [admin account][5] below instead.
 
-2. [Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーの `rethinkdb.d/conf.yaml` ファイルを編集します。
-使用可能なすべてのコンフィギュレーションオプションについては、[rethinkdb.d/conf.yaml のサンプル][7]を
-参照してください。
+2. Edit the `rethinkdb.d/conf.yaml` file in the `conf.d/` folder at the root of your
+[Agent's configuration directory][6]. See the [sample rethinkdb.d/conf.yaml][7] for all available
+configuration options.
 
     ```yaml
     init_config:
@@ -113,20 +115,20 @@ RethinkDB チェックは [Datadog Agent][3] パッケージに含まれてい�
         password: "<PASSWORD>"
     ```
 
-3. [Agent を再起動します][8]。
+3. [Restart the Agent][8].
 
-**注**: このインテグレーションはクラスター内のすべてのサーバーからメトリクスを収集します。したがって、Agent は 1 つしか必要ありません。
+**Note**: this integration collects metrics from all servers in the cluster, so you only need a single Agent.
 
-#### 収集データ
+#### Log collection
 
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
 
     ```yaml
     logs_enabled: true
     ```
 
-2. RethinkDB ログの収集を開始するには、次のコンフィギュレーションブロックを `rethinkdb.d/conf.yaml` ファイルで編集します。
+2. Edit this configuration block in your `rethinkdb.d/conf.yaml` file to start collecting your RethinkDB logs:
 
     ```yaml
     logs:
@@ -137,45 +139,46 @@ RethinkDB チェックは [Datadog Agent][3] パッケージに含まれてい�
     ```
 
 
-    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[conf.yaml のサンプル][7]を参照してください。
+    Change the `path` parameter value based on your environment. See the [sample conf.yaml][7] for all available configuration options.
 
-3. [Agent を再起動します][8]。
+3. [Restart the Agent][8].
 
-Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][9]を参照してください。
+To enable logs for Kubernetes environments, see [Kubernetes Log Collection][9].
 
-### 検証
+### Validation
 
-[Agent のステータスサブコマンドを実行][10]し、Checks セクションで `rethinkdb` を探します。
+[Run the Agent's status subcommand][10] and look for `rethinkdb` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "rethinkdb" >}}
 
 
-### ヘルプ
+### Events
 
-RethinkDB には、イベントは含まれません。
+RethinkDB does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "rethinkdb" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+Need help? Contact [Datadog support][13].
 
 
 [1]: https://rethinkdb.com
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://rethinkdb.com/docs/permissions-and-accounts/
 [5]: https://rethinkdb.com/docs/security/#the-admin-account
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[6]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [7]: https://github.com/DataDog/integrations-core/blob/master/rethinkdb/datadog_checks/rethinkdb/data/conf.yaml.example
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[9]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[9]: https://docs.datadoghq.com/agent/kubernetes/log/
+[10]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/rethinkdb/metadata.csv
 [12]: https://github.com/DataDog/integrations-core/blob/master/rethinkdb/assets/service_checks.json
-[13]: https://docs.datadoghq.com/ja/help/
+[13]: https://docs.datadoghq.com/help/
+

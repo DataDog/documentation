@@ -1,6 +1,6 @@
 ---
+title: archive
 core_product:
-- log management
-title: アーカイブ
+  - log management
 ---
-アーカイブとは、インデックスの有無にかかわらず、ログを長期間保存するためのクラウドストレージソリューションです。
+An archive is a long-term cloud storage solution to store logs, whether they are indexed or not, for longer periods. 

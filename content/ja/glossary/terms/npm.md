@@ -1,7 +1,7 @@
 ---
+title: Network Performance Monitoring (NPM)
 core_product:
-- network performance monitoring
-title: ネットワークパフォーマンスモニタリング (NPM)
+  - network performance monitoring
 ---
-Datadog のネットワークパフォーマンスモニタリング (NPM) は、サービス、コンテナ、アベイラビリティゾーンなどの間のネットワークトラフィックを視覚化します。
-詳細は、<a href="/network_monitoring/devices">ドキュメントを参照してください</a>。
+Datadog's Network Performance Monitoring (NPM) provides visibility into network traffic between services, containers, availability zones, etc.
+For more information, <a href="/network_monitoring/devices">see the documentation</a>.

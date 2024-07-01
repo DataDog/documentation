@@ -1,6 +1,6 @@
 ---
-core_product:
-- infrastructure monitoring
 title: Container Runtime Interface (CRI)
+core_product:
+  - infrastructure monitoring
 ---
-CRI インターフェイスにより、kubelet は異なるコンテナランタイムを使用することができます。
+The CRI interface allows a kubelet to use different container runtimes.

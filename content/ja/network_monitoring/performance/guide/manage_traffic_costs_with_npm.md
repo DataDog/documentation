@@ -1,63 +1,63 @@
 ---
+title: Manage Cloud Traffic Costs with NPM
 aliases:
-- /ja/network_performance_monitoring/guide/manage_traffic_costs_with_npm/
-title: NPM でクラウドトラフィックのコストを管理する
+    - /network_performance_monitoring/guide/manage_traffic_costs_with_npm/
 ---
-特にクラウド環境ではトラフィックが高額になりがちです。クラウドプロバイダーはトラフィックがアベイラビリティーゾーン (AZ) の範囲内、AZ 間、特定のリージョン間、またはオープンなインターネットのどれに流入するのかに応じて異なる課金形態を採用しています。クロスリージョンおよび送信トラフィックは最も高額となるだけでなく、エラー、レイテンシー、セキュリティ上の脅威に対する脆弱性も最高水準となります。
+Traffic is expensive, especially in the cloud. Cloud providers charge different prices for traffic, depending on whether it is flowing within an availability zone (AZ), between AZs, between particular regions, or to the open internet. Cross-regional and egress traffic is not only the most expensive, but also the most vulnerable to errors, latency, and security threats. 
 
-ネットワークパフォーマンスモニタリング (NPM) では、サービス、コンテナ、アベイラビリティーゾーン、リージョン、データセンターなどを含む Datadog のタグ間の依存関係をマッピングすることで、上述のすべてのトラフィックパターンを追跡することができます。依存関係とそこから生み出されるトラフィックの量 (最終的にクラウドプロバイダーにより課金される量) に関するこのインサイトを使用して、トラフィック関連のコストを監視および最適化することができます。
+Network Performance Monitoring (NPM) allows you to track all of the traffic patterns described above by mapping dependencies between any tags in Datadog, including service, container, availability zone, region, datacenter, etc. This insight into your dependencies and the traffic volume they produce (which is ultimately what cloud providers charge for) can be used to monitor and optimize your traffic-related costs. 
 
-## Datadog のストーリー
+## Datadog's story
 
-Datadog で Kubernetes への移行を行いましたが、ステートレスサービスの移行は (期待通り) ステートフルサービス (Kafka など) の移行に比べてとても速く、簡単に完了することができました。その結果、ステートフルサービス (すべて同じ AZ) とステートレスサービス (複数の AZ にまたがる形) 間でテラバイト単位の新しいクロス AZ トラフィックが流入し、クラウドの請求が予期せぬ形で急増したのですが、Datadog 独自の NPM プロダクトのおかげで根本原因を特定できました。移行戦略が最適ではなかったため、ネットワーク通信が非効率かつ高額になってしまっていたのです。ステートフルサービスのシャーディングを行うことで、最終的にクラウドプロバイダーのトラフィックコストを劇的に削減することができました。
+When Datadog migrated to Kubernetes, migrating stateless services was (expectedly) much faster and easier than migrating stateful services (for example, Kafka), stateless services were first. The outcome was a terabytes of new cross-AZ traffic between the stateful services (all in one AZ) and stateless services (spread across the other AZs), which led the cloud bill to increase drastically and unexpectedly. Datadog used its own NPM product to identify the root cause: a suboptimal migration strategy and consequently, inefficient and costly network communication. Sharding stateful services ultimately led to significant reductions in cloud provider traffic costs.
 
-## トラフィックコスト管理のステップ
+## Steps for managing traffic costs 
 
-1. お使いの環境で同様の問題がないかを調べるために、まずビューの範囲をリージョン、
-    アベイラビリティーゾーン、
-    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/availability_zone.png" alt="アベイラビリティー別のグループフロー">}}
-    データセンター間で絞り込んで確認することをお勧めします。
-    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/datacenter.png" alt="データセンター別のグループフロー">}}
-    トラフィック請求額の増加は、ほぼ必ずこれらの種類のトラフィックのいずれかの増加に関連しています。多くの場合、非対称の検索用語でトラフィックをグループ化してみるのも効果的です。あるタグに関するトラフィック元と別のタグの送信先を確認するという手法です。このように非対称のクエリを使用することで、高額請求の原因となるオンプレミスデータセンターとクラウドリージョン間、
-    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/aws_account.png" alt="データセンターとクラウドリージョン間の依存関係を特定">}}
-    およびクラウド間の依存関係を特定することができます。特に、トラフィックのソースをサービス、および複数のアベイラビリティーゾーンをまたぐ送信先でグループ化すると便利です。
+1. To find similar issues in your own environment, you can start by scoping your view to traffic between regions, 
+    availability zones,
+    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/availability_zone.png" alt="Group flows by availability">}}
+    and datacenters:
+    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/datacenter.png" alt="Group flows by datacenter">}}
+    An increase in your traffic bill is almost always tied to an increase in one of these types of traffic. In many cases you may want to group traffic by asymmetric search terms. That is, you want to see the source of the traffic in terms of one tag, and also see the destination in terms of another tag. You can use this kind of asymmetric query to identify costly dependencies between your on-prem datacenters and cloud regions, 
+    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/aws_account.png" alt="Identify dependencies between datacenters and cloud regions">}}
+    as well as between clouds. One particularly helpful view is to group the source of the traffic by service, and the destination across availability zones.
 
-2. ここから、複数のAZ をまたいで最もトラフィック量が多いサービスを切り離します。検索バー内のフィルターを使用してクエリを絞り込むことができます。たとえば、ひとつのアベイラビリティーゾーン内を起点とし、他のアベイラビリティーゾーンにトラフィックを送信しているサービスのみを表示させることが可能です。
-    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/service_availability_zone.png" alt="AZ をまたぐ形で通信を行ったサービスのハイライト">}}
-    上記のクエリは `us-east4-a` からどこかに通信を行ったサービスのみをハイライトするものです。表はすでに量でソートされているため、最初の数行には最も多くのクロス AZ トラフィックを呼び込む原因となった、最も混雑していたサービスが表示されます。これらのひとつについてインフラストラクチャーをまたいだ場合の効果を検証したい場合は、**Source** でその特定のサービスにフィルターを適用し、他の各アベイラビリティーゾーンに対するトラフィックを確認すると良いでしょう。
-    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/single_service.png" alt="単一のサービスを検索">}}
+2. From here, isolate services that have the most traffic volume across multiple AZs. You can use filters inside the search bars to narrow down your query. For example, you can show only services that originate inside of one availability zone, and are sending traffic to any other availability zone.
+    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/service_availability_zone.png" alt="Highlight any services that communicated across AZs">}}
+    The query above highlights any services that communicate from `us-east4-a` to anywhere else. Since the table is already sorted by volume, the first few rows surface the chattiest services contributing to the most cross-AZ traffic. If you want to inspect the cross-infrastructure effects of one of these culprits, you can filter the **Source** to that particular service and view its traffic to every other availability zone.
+    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/single_service.png" alt="Search for a single service.">}}
 
-3. 同様に、チームタグを使用して、たとえばどのエンジニアリングチームがクロスリージョンのトラフィックに起因したかを特定したり、
-{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/team_region.png" alt="チームタグの使用">}}
-所属するチームのアウトプットを個別に監視したりすることができます。
-{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/region_region.png" alt="リージョンタグの使用">}}
+3. Similarly, you can use the team tag to identify engineering teams that generate the most, for instance, cross-regional traffic 
+{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/team_region.png" alt="Use the team tag.">}}
+or monitor your own team's output specifically.
+{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/region_region.png" alt="Use the region tag.">}}
 
-4. 外部トラフィックからのコストを監視する場合は、**IP Type** ファセットを使用して送信先のエンドポイントをパブリック IP に絞ります。
-    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/scope_destination_points.png" alt="Type ファセットの使用">}}
-    その後、送信先を `domain` でグループ化して送信先ごとに外部トラフィックの量を分割します。パブリックサーバーには Datadog Agent をインストールできませんが、Datadog は外部およびクラウドエンドポイントを示す IP を、読んで意味の通るわかりやすいドメイン名に変換して解決することができます。
-    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/dns_resolution.png" alt="DNS でグループ化">}}
-    上記の例のクエリは部分文字列のワイルドカードエントリ (dns:*s3* など) を使用して Amazon S3、Elastic ロードバランサー、API、および外部の `.com` ドメインへのトラフィックをフィルタリングします。
-    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/wildcard.png" alt="ワイルドカード検索">}}
+4. To monitor costs from external traffic, scope your destination endpoints to public IPs using the **IP Type** facet.
+    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/scope_destination_points.png" alt="Use the type facet.">}}
+    Then group your destination by `domain` to break down external traffic volume by where it is going. Although you cannot install a Datadog Agent on public servers, Datadog can resolve IPs representing external and cloud endpoints to human-readable domain names. 
+    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/dns_resolution.png" alt="Group by DNS.">}}
+    The example query above filters for traffic to Amazon S3, elastic load balancers, APIs, and external `.com` domains using substring wildcard entries (for example: `dns:*s3*`).  
+    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/wildcard.png" alt="Search with wildcards">}}
 
-## トラフィックコストの可視化
+## Visualizing traffic costs 
 
-AZ をまたぐ、または AZ 内部のトラフィックは Network Map で可視化してすばやくボトルネックを特定することができます。Datadog では、このビューを使用して EU および米国のアベイラビリティーゾーンが通信していないことを検証し、GDPR の遵守と顧客データ保護の確認を行っています。
-AZ をまたぐトラフィック:
-{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/cross-az-traffic.png" alt="AZ をまたぐトラフィック">}}
-AZ 内のサービス対サービスのトラフィック:
-{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/inter-az-service-to-service-traffic.png" alt="AZ 内のサービス対サービスのトラフィック">}}
-マップのノード間の太線はアベイラビリティーゾーンを示しており、各ノード間で大量のトラフィックが流れていることを表します。これがコストにつながるトラフィック量となります。
+You can visualize cross-AZ or inter-AZ traffic using the Network Map to quickly pinpoint bottlenecks. At Datadog,  this view is used to validate that the EU and US availability zones are not communicating, to ensure compliance with GDPR and protection of customers' data. 
+Cross-AZ traffic:
+{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/cross-az-traffic.png" alt="Cross-AZ traffic">}}
+Inter-AZ service-to-service traffic:
+{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/inter-az-service-to-service-traffic.png" alt="Inter-AZ service-to-service traffic">}}
+Thick edges between the map's nodes, representing availability zones, indicates high volume of traffic flowing between them, which is what contributes to your costs.
 
-設定は **Filter traffic** ボタンから編集することができます。大規模環境の場合、Datadog はスライダーを移動させてトラフィック量が最多の依存関係のみを含む、最も目立つトラフィックソースだけをグループ化することを推奨しています。
+You can edit your preferences using the **Filter traffic** button. In larger environments, Datadog recommends scoping to just the most significant traffic sources by moving the sliders to include only the highest-volume dependencies.
 
-{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/filter-traffic.png" alt="トラフィックのスコープを指定">}}
+{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/filter-traffic.png" alt="Scope your traffic">}}
 
-## トラフィックコストのグラフ化
+## Graphing traffic costs 
 
-Datadog は、ダッシュボードとノートブックで時間の経過に伴うトラフィック量のメトリクスを追跡することを推奨しています。ネットワークページで用いたものと同じクエリを使用して、任意の 2 つのエンドポイント間のトラフィックをグラフ化することができます。このためには、**Timeseries Widget** を作成し、ドロップダウンメニューから **Network Traffic** ソースを選択してください。
+Datadog recommends tracking traffic volume metrics over time in dashboards and notebooks. You can graph traffic between any two endpoints using the same queries you would make on the Network page. To do this, create a **Timeseries Widget** and select the **Network Traffic** source from the dropdown menu.  
 
-{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/timeseries.png" alt="時系列を作成">}}
+{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/timeseries.png" alt="Create a Timeseries">}}
 
-そして、その結果や問題点をダッシュボードやノートブックを使ってチームメイトと共有します。
+Then share these results and any issues with your teammates using Dashboards and Notebooks. 
 
-{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/network-traffic.png" alt="ネットワークトラフィックの表示">}}
+{{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_npm/network-traffic.png" alt="View your network traffic">}}

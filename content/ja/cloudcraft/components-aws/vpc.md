@@ -1,29 +1,29 @@
 ---
-title: VPC コンポーネント
+title: "VPC Component"
 ---
-## 概要
+## Overview
 
-VPC コンポーネントを使用して、Amazon Web Services アーキテクチャ内の隔離された仮想ネットワークを表現します。
+Use the VPC component to represent isolated virtual network from your Amazon Web Services architecture.
 
-{{< img src="cloudcraft/components-aws/vpc/component-vpc-diagram.png" alt="'VPC' AWS コンポーネントを示す、等角投影された Cloudcraft 図のスクリーンショット。" responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/vpc/component-vpc-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'VPC' AWS component." responsive="true" style="width:60%;">}}
 
-## ツールバー
+## Toolbar
 
-ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: 定義済みの色を選択するか、コンポーネントとそのアクセントの色の 16 進値を入力します。コンポーネントは、2D ビューと 3D ビューの両方に同じ色を使用することも、それぞれに異なる色を使用することもできます。
-- **Name**: VPC に名前を付けます。
-- **Shape**: VPC の形状を選択します。
-- **Padding**: VPC 内部の空間を増減します。
-- **Peering**: 他の VPC とのピアリング接続を表示、削除、追加します。
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- **Name**: Give the VPC a name.
+- **Shape**: Select a shape for the VPC.
+- **Padding**: Increase or decrease the amount of space inside the VPC.
+- **Peering**: View, remove, or add peering connections to other VPCs.
 
-## ヘルプ
+## API
 
-[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
 
-### スキーマ
+### Schema
 
-以下は、VPC コンポーネントの JSON の例です。
+The following is an example JSON of a VPC component:
 
 ```json
 {
@@ -52,38 +52,38 @@ VPC コンポーネントを使用して、Amazon Web Services アーキテク�
 }
 ```
 
-- **type: vpc**: コンポーネントのタイプ。
-- **id: 文字列**: `uuid` 形式のコンポーネントの一意な識別子。
-- **region: 文字列**: この VPC がデプロイされる AWS リージョン。`cn-` リージョン以外のすべてのグローバルリージョンがサポートされています。
-- **name: 文字列**: VPC の名前。
-- **shape: 文字列**: VPC の形状。指定できる値は `dynamic` または `rectangular` です。
-- **padding: 数値**: VPC の内部パディング。デフォルトは `1.5` です。
-- **nodes: 配列**: VPC 内部のコンポーネント。詳しくは [`nodes` で許容される値](#accepted-values-for-nodes)を参照してください。
-- **peeringConnections: 配列**: この VPC にピアリング接続する VPC。詳しくは [`peeringConnections` で許容される値](#accepted-values-for-peeringconnections)を参照してください。
-- **color: オブジェクト**: コンポーネントの塗りつぶし色。
-  - **isometric: 文字列**: 3D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
-  - **2d: 文字列**: 2D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
-- **locked: ブール値**: `true` の場合、アプリケーションを使用してコンポーネントに加えられた変更は、ロックが解除されるまで無効になります。
+- **type: vpc**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region this VPC is deployed in. All global regions are supported except `cn-` regions.
+- **name: string**: The name for the VPC.
+- **shape: string**: The shape of the VPC. Accepted values are `dynamic` or `rectangular`.
+- **padding: number**: The internal padding for the VPC. Defaults to `1.5`.
+- **nodes: array**: The components inside the VPC. See [Accepted values for `nodes`](#accepted-values-for-nodes) for more information.
+- **peeringConnections: array**: The VPCs that make peering connections to this VPC. See [Accepted values for `peeringConnections`](#accepted-values-for-peeringconnections) for more information.
+- **color: object**: The fill color for the component.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
+- **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
 
-### `nodes` で許容される値
+### Accepted values for `nodes`
 
-`nodes` キーには VPC 内のコンポーネントの一意な識別子の配列を指定します。
+The `nodes` key accepts an array of unique identifiers for the components inside the VPC.
 
-VPC 内に追加できる AWS コンポーネントは以下の通りです。
+The following AWS components can be added inside a VPC:
 
 ```
 asg, ec2, lambda, efs, fsx, elb, subnet, sg, rds, docdb, elasticache, redshift, es, natgateway, internetgateway, vpngateway, customergateway
 ```
 
-AWS コンポーネントに加えて、以下の一般的なコンポーネントも VPC 内に追加できます。
+In addition to the AWS components, the following common components can also be added inside a VPC:
 
 ```
 block, isotext, icon, image, area
 ```
 
-### `peeringConnections` で許容される値
+### Accepted values for `peeringConnections`
 
-`peeringConnections` キーには配列を指定し、各ピアリング接続を JSON オブジェクトで表します。
+The `peeringConnections` key accepts an array, with each peering connection being represented by a JSON object.
 
 ```
 {
@@ -98,9 +98,9 @@ block, isotext, icon, image, area
 }
 ```
 
-- **id: 文字列**: このピアリング接続の `uuid` 形式の一意な識別子。
-- **name: 文字列**: この接続の名前。どのように表示されるかは、ページ上部のコンポーネントイメージを参照してください。
-- **accepterVpc: 文字列**: アクセプター VPC の `id` 。
-- **hidden: ブール値**: `true` の場合、ピアリング接続は図に表示されません。デフォルトは `false` です。
+- **id: string**: A unique identifier in the `uuid` format for this peering connection.
+- **name: string**: The name of this connection. See the component image at the top of the page to see how it is displayed.
+- **accepterVpc: string**: The `id` of the accepter VPC.
+- **hidden: boolean**: If `true`, the peering connection is not displayed in the diagram. Defaults to `false`.
 
 [1]: https://developers.cloudcraft.co/

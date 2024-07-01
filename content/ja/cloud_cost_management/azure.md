@@ -1,146 +1,152 @@
 ---
+title: Azure
 further_reading:
 - link: /cloud_cost_management/
-  tag: ドキュメント
+  tag: Documentation
   text: Cloud Cost Management
 - link: /cloud_cost_management/aws
-  tag: ドキュメント
-  text: AWS の請求に関する洞察を得る
+  tag: Documentation
+  text: Gain insights into your AWS bill
 - link: /cloud_cost_management/google_cloud
-  tag: ドキュメント
-  text: Google Cloud の請求に関する洞察を得る
-title: Azure
+  tag: Documentation
+  text: Gain insights into your Google Cloud bill
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">クラウドコストマネジメントはこのサイトではサポートされていません。</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## 概要
+## Overview
 
-Datadog で Azure Cloud Cost Management を使用するには、Datadog Azure インテグレーションを設定し、Azure で **amortized** (償却) と **actual** (実際) のエクスポートをセットアップする必要があります。さらに、Datadog はコンテナからエクスポートを読み取る権限が必要です。
+To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure integration and set up **amortized** and **actual** exports in Azure. Additionally, Datadog must have permissions to read the exports from the container.
 
-Datadog は、サブスクリプションレベル、リソースグループレベル、請求アカウントレベルでコストを視覚化します。Microsoft Customer Agreements (MCA) は、サブスクリプションレベルでのみセットアップできます。従量課金アカウントはサポートされていません。
+Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can only set up at the Subscription level. Pay as you go (PAYG) and CSP accounts are not supported.
 
-## セットアップ
+## Setup
 
 
 {{% site-region region="us3" %}}
-**注**:
-- Datadog の **US3** サイトを使用している場合、Azure ポータルから推奨される [Datadog リソース方法][1]を使用して Datadog Azure Native インテグレーションをセットアップしているかもしれません。クラウドコストマネジメントに対応するためには、[App Registration の作成][2]が必要です。
-- Microsoft Customer Agreement のエクスポートは、サブスクリプションレベルで構成する必要があります。Enterprise プランの場合は、すべてのサブスクリプションにオンボードするように請求アカウントを構成できます。
-- 従量課金制のアカウントには対応していません。
+**Notes**:
+- If you are using Datadog's **US3** site, you may have set up the Datadog Azure Native integration using the recommended [Datadog Resource method][1] through the Azure Portal. To support Cloud Cost Management, you need to [create an App Registration][2].
+- Microsoft Customer Agreement exports must be configured at the subscription level. If you have an Enterprise plan, you can configure your billing accounts to onboard all subscriptions.
+- Pay-as-you-go accounts are not supported.
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: /ja/integrations/azure/?tab=azurecliv20#setup
+[2]: /integrations/azure/?tab=azurecliv20#setup
 {{% /site-region %}}
 
-### Azure インテグレーションの構成
-[Setup & Configuration][3] に移動し、コストをプルする Azure アカウントをメニューから選択します。リストに Azure アカウントがない場合は、[Azure インテグレーション][4]を表示してアカウントを追加します。
+### Configure the Azure integration
+Navigate to [Setup & Configuration][3] and select an Azure account from the menu to pull costs from. If you do not see your Azure account in the list, view your [Azure integration][4] to add your account.
 
-### コストエクスポートの生成
+### Generate cost exports
 
-**actual** (実際) と **amortized** (償却) の 2 つのデータタイプのエクスポートを生成する必要があります。Datadog は、両方のエクスポートに同じストレージコンテナを使用することを推奨しています。
+You need to generate exports for two data types: **actual** and **amortized**. Datadog recommends using the same storage container for both exports.
 
-1. Azure ポータルの *Cost Management + Billing* の下にある [Exports][5] に移動します。
-2. エクスポートのスコープを選択します。**注:** スコープは *billing account*、*subscription* または *resource group* でなければなりません。
-3. スコープを選択したら、**Add** をクリックします。
+1. Navigate to [Exports][5] under Azure portal's *Cost Management + Billing*.
+2. Select the export scope. **Note:** The scope must be *billing account*, *subscription*, or *resource group*.
+3. After the scope is selected, click **Add**.
 
-{{< img src="cloud_cost/exports_scope.png" alt="Azure ポータルで、ナビゲーションのエクスポートオプションとエクスポートスコープをハイライト表示" >}}
+{{< img src="cloud_cost/exports_scope.png" alt="In Azure portal highlighting Exports option in navigation and the export scope" >}}
 
-4. 次のエクスポートの詳細を選択します。
-    - Metric: **Actual Cost (usage and purchases)** THEN  **Amortized Cost (usage and purchases)**
+4. Select the following Export details:
+    - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
     - Export type: **Daily export of month-to-date costs**
     - File Partitioning: `On`
 
-{{< img src="cloud_cost/new_export.png" alt="Metric: Actual、Export type: Daily、File Partitioning: On のエクスポートの詳細" >}}
+{{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
-5. エクスポート用のストレージアカウント、コンテナ、およびディレクトリを選択します。
-    - **注:** これらのフィールドでは、`.` のような特殊文字は使用しないでください。
-    - **注:** 請求エクスポートは、任意のサブスクリプションに保存できます。複数のサブスクリプションのエクスポートを作成する場合、Datadog は同じストレージアカウントに保存することを推奨しています。エクスポート名は一意でなければなりません。
-7. **Create** を選択します。
+At this time, there is no support for creating cost exports using the [improved exports experience][8].
+To disable it, open the Cost Management labs [preview features][9], click on "Go to preview portal" and deselect the "Exports (preview)" option. Then proceed to create the two exports within the Preview Portal.
 
-より迅速な処理のために、**Run Now** をクリックして最初のエクスポートを手動で生成してください。
-{{< img src="cloud_cost/run_now.png" alt="エクスポートのサイドパネルにある Run Now ボタンをクリックしてエクスポートを生成する" >}}
+5. Choose a storage account, container, and directory for the exports.
+    - **Note:** Do not use special characters like `.` in these fields.
+    - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
+7. Select **Create**.
 
-### Datadog がエクスポートにアクセスできるようにする
+For faster processing, generate the first exports manually by clicking **Run Now**.
+{{< img src="cloud_cost/run_now.png" alt="Click Run Now button in export side panel to generate exports" >}}
+
+### Provide Datadog access to your exports
 
 {{< tabs >}}
-{{% tab "請求アカウント" %}}
-**注**: Microsoft Customer Agreement の場合は、サブスクリプションレベルでセットアップします。
+{{% tab "Billing Accounts" %}}
+**Note**: For Microsoft Customer Agreement, set up at the subscription level.
 
-1. Exports タブで、エクスポートの Storage Account をクリックし、移動します。
-2. Containers タブをクリックします。
-3. 請求書の入っているストレージコンテナを選びます。
-4. Access Control (IAM) タブを選択し、**Add** をクリックします。
-5. **Add role assignment** を選択します。
-6. **Storage Blob Data Reader** を選択し、Next をクリックします。
-7. これらの権限を、Datadog と接続した App Registration のいずれかに割り当てます。
-    - **Select members** をクリックし、App Registration の名前を選んで、**Select** をクリックします。
-    - *review + assign* を選択します。
+1. In the Exports tab, click on the export's Storage Account to navigate to it.
+2. Click the Containers tab.
+3. Choose the storage container your bills are in.
+4. Select the Access Control (IAM) tab, and click **Add**.
+5. Choose **Add role assignment**.
+6. Choose **Storage Blob Data Reader**, then click Next.
+7. Assign these permissions to one of the App Registrations you have connected with Datadog.
+    - Click **Select members**, pick the name of the App Registration, and click **Select**.
+    - Select *review + assign*.
 
-エクスポートが別のコンテナに入っている場合は、他のコンテナについて手順 1〜7 を繰り返します。
+If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 {{% /tab %}}
 
-{{% tab "サブスクリプションとリソースグループ" %}}
+{{% tab "Subscriptions & Resource Groups" %}}
 
-1. Exports タブで、エクスポートの Storage Account をクリックし、移動します。
-2. Containers タブをクリックします。
-3. 請求書の入っているストレージコンテナを選びます。
-4. Access Control (IAM) タブを選択し、**Add** をクリックします。
-5. **Add role assignment** を選択します。
-6. **Storage Blob Data Reader** を選択し、Next をクリックします。
-7. これらの権限を、Datadog と接続した App Registration のいずれかに割り当てます。
-    - **Select members** をクリックし、App Registration の名前を選んで、**Select** をクリックします。
-    - *review + assign* を選択します。
+1. In the Exports tab, click on the export's Storage Account to navigate to it.
+2. Click the Containers tab.
+3. Choose the storage container your bills are in.
+4. Select the Access Control (IAM) tab, and click **Add**.
+5. Choose **Add role assignment**.
+6. Choose **Storage Blob Data Reader**, then click Next.
+7. Assign these permissions to one of the App Registrations you have connected with Datadog.
+    - Click **Select members**, pick the name of the App Registration, and click **Select**.
+    - Select *review + assign*.
 
-エクスポートが別のコンテナに入っている場合は、他のコンテナについて手順 1〜7 を繰り返します。
+If your exports are in different storage containers, repeat steps one to seven for the other storage container.
 
-### コストマネジメントリーダーへのアクセス構成
-**注:** スコープが **Billing Account** の場合、このアクセスは構成する必要はありません。
+### Configure Cost Management Reader access
+**Note:** You do not need to configure this access if your scope is **Billing Account**.
 
-1. [サブスクリプション][1]に移動し、サブスクリプションの名前をクリックします。
-2. Access Control (IAM) タブを選択します。
-3. **Add** をクリックし、次に **Add role assignment** をクリックします。
-4. **Cost Management Reader** を選択し、Next をクリックします。
-5. これらの権限を App Registration に割り当てます。
+1. Navigate to your [subscriptions][1] and click your subscription's name.
+2. Select the Access Control (IAM) tab.
+3. Click **Add**, then **Add role assignment**.
+4. Choose **Cost Management Reader**, then click Next.
+5. Assign these permissions to the app registration.
 
-これにより、Microsoft Cost Management に対する定期的なコスト計算を許可することで、完全なコスト精度を確保することができます。
+This ensures complete cost accuracy by allowing periodic cost calculations against Microsoft Cost Management.
 
 [1]: https://portal.azure.com/#view/Microsoft_Azure_Billing/SubscriptionsBlade
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Datadog でクラウドコストを構成する
-[Setup & Configuration][3] に移動し、手順に従います。
+### Configure Cloud Costs in Datadog
+Navigate to [Setup & Configuration][3] and follow the steps.
 
-### コストタイプ
+### Cost types
 
-インジェストしたデータは、以下のコストタイプで視覚化することができます。
+You can visualize your ingested data using the following cost types:
 
-| コストタイプ            | 説明           |
+| Cost Type            | Description           |
 | -------------------- | --------------------- |
-| `azure.cost.amortized` | 適用される割引率に基づくコストと、割引期間中の使用量に応じたプリペイドの配分 (発生主義)。|
-| `azure.cost.actual` | コストは、使用時に請求される金額で表示されます (現金主義)。実際のコストには、プライベート割引、リザーブドインスタンスやセービングプランの割引が別の料金タイプとして含まれています。|
+| `azure.cost.amortized` | Cost based on applied discount rates plus the distribution of pre-payments across usage for the discount term (accrual basis).|
+| `azure.cost.actual` | Cost shown as the amount charged at the time of usage (cash basis). Actual costs include private discounts as well as discounts from reserved instances and savings plans as separate charge types.|
+| `azure.cost.discounted.ondemand` | Cost based on the list rate provided by Azure, after privately negotiated discounts. To get the true on-demand cost, divide this metric by (1 - <negotiated_discount>). For example if you have a 5% flat rate discount across all Azure products, taking this metric and dividing by .95 (1-.05) provides the true on-demand price.|
 
-### コストと観測可能性の相関
-観測可能性データのコンテキストでコストを表示することは、インフラストラクチャーの変更がコストに与える影響を理解し、コストが変化する理由を特定し、コストとパフォーマンスの両方のためにインフラストラクチャーを最適化するために重要です。Datadog は、観測可能性とコストメトリクスの相関を簡素化するために、Azure のトップ製品のコストデータ上に `name` タグを追加します。
+### Cost and observability correlation
+Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog adds the `name` tag on cost data for top Azure products to simplify correlating observability and cost metrics.
 
-例えば、各 Azure VM のコストと利用率を表示するには、`azure.cost.amortized` と `azure.vm.network_in_total` (またはその他の VM メトリクス) でテーブルを作成し、`name` でグループ化します。また、Storage の使用量とコストを並べて見るには、`metercategory:Storage` でフィルタリングし、`azure.storage.transactions` と `azure.cost.amortized` を `name` でグループ化してグラフ化します。
+For example, to view cost and utilization for each Azure VM, you can make a table with `azure.cost.amortized` and `azure.vm.network_in_total` (or any other VM metric) and group by `name`. Or, to see Storage usage and costs side by side, you can filter into `metercategory:Storage` and graph `azure.storage.transactions` and `azure.cost.amortized` grouped by `name`.
 
 
-### 履歴データの取得
+### Getting historical data
 
-[Microsoft API][6] を使用するか、[Microsoft にサポートチケット][7]を作成してコストデータをバックフィルしてもらうことで、ストレージアカウントに履歴データを作成することができます。Cloud Cost Management は、ファイル構造とパーティショニングがスケジュールされたエクスポートの形式に従っている限り、最大 15 か月分の履歴データを自動的に取り込みます。
+You can create historical data in your storage account using the [Microsoft API][6] or by creating a [support ticket with Microsoft][7] to have them backfill cost data. Cloud Cost Management automatically pulls in up to 15 months of historical data as long as the file structure and partitioning follows the format of scheduled exports.
 
-## その他の参考資料
+## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/blog/azure-datadog-partnership/
-[2]: https://docs.datadoghq.com/ja/integrations/azure/?tab=azurecliv20#setup
+[2]: https://docs.datadoghq.com/integrations/azure/?tab=azurecliv20#setup
 [3]: https://app.datadoghq.com/cost/setup?cloud=azure
 [4]: https://app.datadoghq.com/integrations/azure
 [5]: https://portal.azure.com/#view/Microsoft_Azure_GTM/ModernBillingMenuBlade/~/Exports
 [6]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-export-acm-data?tabs=azure-cli
 [7]: https://support.microsoft.com
+[8]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/tutorial-improved-exports
+[9]: https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/enable-preview-features-cost-management-labs#explore-preview-features

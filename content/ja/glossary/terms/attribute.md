@@ -1,6 +1,6 @@
 ---
+title: attribute
 core_product:
-- log management
-title: 属性
+  - log management
 ---
-属性は、ログに関する情報の一部です。
+An attribute is a piece of information about a log.

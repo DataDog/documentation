@@ -1,127 +1,125 @@
 ---
-app_id: airflow
-app_uuid: ed426432-3df4-4ab8-ab2f-a5a85900c59b
-assets:
-  dashboards:
-    Airflow Overview: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: airflow.dagbag_size
-      metadata_path: metadata.csv
-      prefix: airflow。
-    process_signatures:
+"app_id": "airflow"
+"app_uuid": "ed426432-3df4-4ab8-ab2f-a5a85900c59b"
+"assets":
+  "dashboards":
+    "Airflow Overview": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": airflow.dagbag_size
+      "metadata_path": metadata.csv
+      "prefix": airflow.
+    "process_signatures":
     - airflow
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10083
-    source_type_name: Airflow
-  logs:
-    source: airflow
-  monitors:
-    Heartbeat Failure: assets/monitors/heartbeat_failures.json
-    Ongoing Duration: assets/monitors/ongoing_duration.json
-  saved_views:
-    airflow_overview: assets/saved_views/airflow_overview.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- 自動化
-- ログの収集
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/airflow/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: airflow
-integration_id: airflow
-integration_title: Airflow
-integration_version: 5.0.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: airflow
-public_title: Airflow
-short_description: DAG、タスク、プール、エグゼキューターなどに関するメトリクスを追跡
-supported_os:
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10083"
+    "source_type_name": Airflow
+  "monitors":
+    "Heartbeat Failure": assets/monitors/heartbeat_failures.json
+    "Ongoing Duration": assets/monitors/ongoing_duration.json
+  "saved_views":
+    "airflow_overview": assets/saved_views/airflow_overview.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- automation
+- log collection
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/airflow/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "airflow"
+"integration_id": "airflow"
+"integration_title": "Airflow"
+"integration_version": "5.0.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "airflow"
+"public_title": "Airflow"
+"short_description": "Tracks metrics related to DAGs, tasks, pools, executors, etc"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Automation
-  - Category::Log Collection
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: DAG、タスク、プール、エグゼキューターなどに関するメトリクスを追跡
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Airflow
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Automation"
+  - "Category::Log Collection"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Tracks metrics related to DAGs, tasks, pools, executors, etc
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Airflow
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Datadog Agent は、以下のような多くのメトリクスを Airflow から収集します。
+The Datadog Agent collects many metrics from Airflow, including those for:
 
-- DAGs（Directed Acyclic Graphs）: DAG 処理の数、DAG バッグサイズなど
-- タスク: タスクの失敗、成功、強制終了など
-- プール: オープンスロット、使用中のスロットなど
-- エグゼキューター: オープンスロット、キューにあるタスク、実行中のタスクなど
+- DAGs (Directed Acyclic Graphs): Number of DAG processes, DAG bag size, etc.
+- Tasks: Task failures, successes, killed, etc.
+- Pools: Open slots, used slots, etc.
+- Executors: Open slots, queued tasks, running tasks, etc.
 
-メトリクスは [Airflow StatsD][1] プラグインを通じて収集され、Datadog の [DogStatsD][2] へ送られます。
+Metrics are collected through the [Airflow StatsD][1] plugin and sent to Datadog's [DogStatsD][2].
 
-Datadog Agent はメトリクスだけでなく、Airflow の健全性に関するサービスチェックも送信します。
+In addition to metrics, the Datadog Agent also sends service checks related to Airflow's health.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Airflow インテグレーションを適切に動作させるには、以下のステップをすべて実施する必要があります。ステップを開始する前に、StatsD/DogStatsD マッピング機能が含まれる [Datadog Agent][3] (バージョン `6.17 または 7.17` 以降) をインストールしてください。
+All steps below are needed for the Airflow integration to work properly. Before you begin, [install the Datadog Agent][3] version `>=6.17` or `>=7.17`, which includes the StatsD/DogStatsD mapping feature.
 
-### ブラウザトラブルシューティング
-Airflow インテグレーションには 2 つの形式があります。まず、Airflow が接続でき、正常であるかどうかを報告するために、提供されたエンドポイントにリクエストを行う Datadog Agent インテグレーションがあります。次に、Airflow が Datadog Agent にメトリクスを送信するように Airflow を構成できる Airflow StatsD 部分があります。これにより、Airflow 表記を Datadog 表記に再マップできます。
+### Configuration
+There are two forms of the Airflow integration. There is the Datadog Agent integration which makes requests to a provided endpoint for Airflow to report whether it can connect and is healthy. Then there is the Airflow StatsD portion where Airflow can be configured to send metrics to the Datadog Agent, which can remap the Airflow notation to a Datadog notation.
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-##### Datadog Agent Airflow インテグレーションを構成する
+##### Configure Datadog Agent Airflow integration
 
-[Datadog Agent][1] パッケージに含まれている Airflow チェックを構成して、ヘルスメトリクスとサービスチェックを収集します。これは、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーにある `airflow.d/conf.yaml` ファイル内の `url` を編集して、Airflow サービスチェックの収集を開始することで実行できます。利用可能なすべてのコンフィギュレーションオプションについては、[airflow.d/conf.yaml のサンプル][2]を参照してください。
+Configure the Airflow check included in the [Datadog Agent][1] package to collect health metrics and service checks. This can be done by editing the `url` within the `airflow.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory, to start collecting your Airflow service checks. See the [sample airflow.d/conf.yaml][2] for all available configuration options.
 
-`url` が Airflow [Web サーバー `base_url`][3] (Airflow インスタンスへの接続に使用する URL) に一致することを確認します。
+Ensure that `url` matches your Airflow [webserver `base_url`][3], the URL used to connect to your Airflow instance.
 
-##### Airflow を DogStatsD に接続する
+##### Connect Airflow to DogStatsD
 
-Airflow の `statsd` 機能を使用してメトリクスを収集することにより、Airflow を DogStatsD (Datadog Agent に含まれる) に接続します。使用されている Airflow バージョンによって報告されるメトリクスと追加のコンフィギュレーションオプションの詳細については、以下の Airflow ドキュメントを参照してください。
-- [Airflow メトリクス][4]
-- [Airflow メトリクス構成][5]
+Connect Airflow to DogStatsD (included in the Datadog Agent) by using the Airflow `statsd` feature to collect metrics. For more information about the metrics reported by the Airflow version used and the additional configuration options, see the Airflow documentation below:
+- [Airflow Metrics][4]
+- [Airflow Metrics Configuration][5]
 
-**注**: Airflow により報告される StatsD メトリクスの有無は、使用される Airflow エグゼキューターにより異なる場合があります。たとえば、`airflow.ti_failures/successes`、`airflow.operator_failures/successes`、`airflow.dag.task.duration` は [`KubernetesExecutor` に報告されません][6]。
+**Note**: Presence or absence of StatsD metrics reported by Airflow might vary depending on the Airflow Executor used. For example: `airflow.ti_failures/successes`, `airflow.operator_failures/successes`, `airflow.dag.task.duration` are [not reported for `KubernetesExecutor`][6]. 
 
-1. [Airflow StatsD プラグイン][7]をインストールします。
+1. Install the [Airflow StatsD plugin][7].
 
    ```shell
    pip install 'apache-airflow[statsd]'
    ```
 
-2. 下記のコンフィギュレーションを追加して、Airflow コンフィギュレーションファイル `airflow.cfg` を更新します。
+2. Update the Airflow configuration file `airflow.cfg` by adding the following configs:
 
-   <div class="alert alert-warning"> `statsd_datadog_enabled` を true に設定しないでください。`statsd_datadog_enabled` を有効にすると、競合が発生する可能性があります。問題を防ぐには、この変数を `False` に設定してください。</div>
+   <div class="alert alert-warning"> Do not set `statsd_datadog_enabled` to true. Enabling `statsd_datadog_enabled` can create conflicts. To prevent issues, ensure that the variable is set to `False`.</div>
 
    ```conf
    [scheduler]
@@ -133,7 +131,7 @@ Airflow の `statsd` 機能を使用してメトリクスを収集すること�
    statsd_prefix = airflow
    ```
 
-3. 下記のコンフィギュレーションを追加して、[Datadog Agent のメインコンフィギュレーションファイル][8]である `datadog.yaml` を更新します。
+3. Update the [Datadog Agent main configuration file][8] `datadog.yaml` by adding the following configs:
 
    ```yaml
    # dogstatsd_mapper_cache_size: 1000  # default to 1000
@@ -266,29 +264,29 @@ Airflow の `statsd` 機能を使用してメトリクスを収集すること�
              state: "$3"
    ```
 
-##### Datadog Agent と Airflow を再起動する
+##### Restart Datadog Agent and Airflow
 
-1. [Agent を再起動します][9]。
-2. Airflow を再起動し、Agent の DogStatsD エンドポイントへの Airflow メトリクスの送信を開始します。
+1. [Restart the Agent][9].
+2. Restart Airflow to start sending your Airflow metrics to the Agent DogStatsD endpoint.
 
-##### インテグレーションサービスチェック
+##### Integration service checks
 
-`airflow.d/conf.yaml` ファイルのデフォルトコンフィギュレーションを使用して、Airflow サービスチェックを有効にします。利用可能なすべてのコンフィギュレーションオプションについては、[airflow.d/conf.yaml][2] のサンプルを参照してください。
+Use the default configuration in your `airflow.d/conf.yaml` file to activate your Airflow service checks. See the sample [airflow.d/conf.yaml][2] for all available configuration options.
 
-##### 収集データ
+##### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
 
    ```yaml
    logs_enabled: true
    ```
 
-2. `airflow.d/conf.yaml` の下部にある、コンフィギュレーションブロックのコメントを解除して編集します。
-  `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
+2. Uncomment and edit this configuration block at the bottom of your `airflow.d/conf.yaml`:
+  Change the `path` and `service` parameter values and configure them for your environment.
 
-   - DAG プロセッサーマネージャーと Scheduler のログのコンフィギュレーション
+   - Configuration for DAG processor manager and Scheduler logs:
 
       ```yaml
       logs:
@@ -308,9 +306,9 @@ _Agent バージョン 6.0 以降で利用可能_
               pattern: \[\d{4}\-\d{2}\-\d{2}
       ```
 
-       スケジューラーログを毎日ローテーションする場合は、ログを定期的にクリーンアップすることをお勧めします。
+        Regular clean up is recommended for scheduler logs with daily log rotation.
 
-   - DAG タスクのログ用に追加するコンフィギュレーション
+   - Additional configuration for DAG tasks logs:
 
       ```yaml
       logs:
@@ -323,9 +321,9 @@ _Agent バージョン 6.0 以降で利用可能_
               pattern: \[\d{4}\-\d{2}\-\d{2}
       ```
 
-     注意事項: デフォルトでは、Airflow は `log_filename_template = {{ ti.dag_id }}/{{ ti.task_id }}/{{ ts }}/{{ try_number }}.log` のログファイルテンプレートをタスクに使用します。ログファイルの数は、定期的に削除しなければ急速に増加します。これは、実行された各タスクのログを Airflow UI が個別に表示するために使用するパターンです。
+      Caveat: By default Airflow uses this log file template for tasks: `log_filename_template = {{ ti.dag_id }}/{{ ti.task_id }}/{{ ts }}/{{ try_number }}.log`. The number of log files grow quickly if not cleaned regularly. This pattern is used by Airflow UI to display logs individually for each executed task.
 
-      ログを Airflow UI で確認しない場合は、`airflow.cfg` に `log_filename_template = dag_tasks.log` を構成することをお勧めします。これにより、ログはこのファイルをローテーションすると同時に、以下のコンフィギュレーションを使用します。
+      If you do not view logs in Airflow UI, Datadog recommends this configuration in `airflow.cfg`: `log_filename_template = dag_tasks.log`. Then log rotate this file and use this configuration:
 
       ```yaml
       logs:
@@ -338,7 +336,7 @@ _Agent バージョン 6.0 以降で利用可能_
               pattern: \[\d{4}\-\d{2}\-\d{2}
       ```
 
-3. [Agent を再起動します][10]。
+3. [Restart the Agent][10].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/integrations-core/blob/master/airflow/datadog_checks/airflow/data/conf.yaml.example
@@ -347,37 +345,37 @@ _Agent バージョン 6.0 以降で利用可能_
 [5]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#metrics
 [6]: https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html
 [7]: https://airflow.apache.org/docs/stable/metrics.html
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/
+[9]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#start-stop-and-restart-the-agent
+[10]: https://docs.datadoghq.com/help/
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-##### Datadog Agent Airflow インテグレーションを構成する
+##### Configure Datadog Agent Airflow integration
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-| パラメーター            | 値                 |
+| Parameter            | Value                 |
 |----------------------|-----------------------|
 | `<INTEGRATION_NAME>` | `airflow`             |
-| `<INIT_CONFIG>`      | 空白または `{}`         |
+| `<INIT_CONFIG>`      | blank or `{}`         |
 | `<INSTANCE_CONFIG>`  | `{"url": "http://%%host%%:8080"}` |
 
-`url` が Airflow [Web サーバー `base_url`][2] (Airflow インスタンスへの接続に使用する URL) に一致することを確認します。`localhost` をテンプレート変数 `%%host%` に置き換えます。
+Ensure that `url` matches your Airflow [webserver `base_url`][2], the URL used to connect to your Airflow instance. Replace `localhost` with the template variable `%%host%%`.
 
-##### Airflow を DogStatsD に接続する
+##### Connect Airflow to DogStatsD
 
-Airflow の `statsd` 機能を使用してメトリクスを収集することにより、Airflow を DogStatsD (Datadog Agent に含まれる) に接続します。使用されている Airflow バージョンによって報告されるメトリクスと追加のコンフィギュレーションオプションの詳細については、以下の Airflow ドキュメントを参照してください。
-- [Airflow メトリクス][3]
-- [Airflow メトリクス構成][4]
+Connect Airflow to DogStatsD (included in the Datadog Agent) by using the Airflow `statsd` feature to collect metrics. For more information about the metrics reported by the Airflow version used and the additional configuration options, see the Airflow documentation below:
+- [Airflow Metrics][3]
+- [Airflow Metrics Configuration][4]
 
-**注**: Airflow により報告される StatsD メトリクスの有無は、使用される Airflow エグゼキューターにより異なる場合があります。たとえば、`airflow.ti_failures/successes`、`airflow.operator_failures/successes`、`airflow.dag.task.duration` は [`KubernetesExecutor` に報告されません][5]。
+**Note**: Presence or absence of StatsD metrics reported by Airflow might vary depending on the Airflow Executor used. For example: `airflow.ti_failures/successes`, `airflow.operator_failures/successes`, `airflow.dag.task.duration` are [not reported for `KubernetesExecutor`][5]. 
 
-**注**: Airflow に使用される環境変数は、バージョン間で異なる場合があります。たとえば、Airflow `2.0.0` では、これは環境変数 `AIRFLOW__METRICS__STATSD_HOST` を利用しますが、Airflow `1.10.15` は `AIRFLOW__SCHEDULER__STATSD_HOST` を利用します。
+**Note**: The environment variables used for Airflow may differ between versions. For example in Airflow `2.0.0` this utilizes the environment variable `AIRFLOW__METRICS__STATSD_HOST`, whereas Airflow `1.10.15` utilizes `AIRFLOW__SCHEDULER__STATSD_HOST`. 
 
-Airflow StatsD コンフィギュレーションは、Kubernetes デプロイメントで次の環境変数を使用して有効にできます。
+The Airflow StatsD configuration can be enabled with the following environment variables in a Kubernetes Deployment:
   ```yaml
   env:
     - name: AIRFLOW__SCHEDULER__STATSD_ON
@@ -391,9 +389,9 @@ Airflow StatsD コンフィギュレーションは、Kubernetes デプロイメ
         fieldRef:
           fieldPath: status.hostIP
   ```
-ホストエンドポイント `AIRFLOW__SCHEDULER__STATSD_HOST` の環境変数には、ノードのホスト IP アドレスが提供され、Airflow ポッドと同じノード上の Datadog Agent ポッドに StatsD データをルーティングします。この設定では、Agent がこのポート `8125` に対して `hostPort` を開き、非ローカルの StatsD トラフィックを受け入れる必要もあります。詳細については、[Kubernetes セットアップの DogStatsD][6] を参照してください。
+The environment variable for the host endpoint `AIRFLOW__SCHEDULER__STATSD_HOST` is supplied with the node's host IP address to route the StatsD data to the Datadog Agent pod on the same node as the Airflow pod. This setup also requires the Agent to have a `hostPort` open for this port `8125` and accepting non-local StatsD traffic. For more information, see [DogStatsD on Kubernetes Setup][6].
 
-これにより、StatsD トラフィックが Airflow コンテナから受信データを受け入れる準備ができている Datadog Agent に転送されます。最後の部分は、対応する `dogstatsd_mapper_profiles` で Datadog Agent を更新することです。これは、[ホストインストール][7]で提供されている `dogstatsd_mapper_profiles` を `datadog.yaml` ファイルにコピーすることで実行できます。または、環境変数 `DD_DOGSTATSD_MAPPER_PROFILES` に同等の JSON コンフィギュレーションで Datadog Agent をデプロイします。Kubernetes に関して、同等の環境変数表記は次のとおりです。
+This should direct the StatsD traffic from the Airflow container to a Datadog Agent ready to accept the incoming data. The last portion is to update the Datadog Agent with the corresponding `dogstatsd_mapper_profiles` . This can be done by copying the `dogstatsd_mapper_profiles` provided in the [Host installation][7] into your `datadog.yaml` file. Or by deploying your Datadog Agent with the equivalent JSON configuration in the environment variable `DD_DOGSTATSD_MAPPER_PROFILES`. With respect to Kubernetes the equivalent environment variable notation is:
   ```yaml
   env: 
     - name: DD_DOGSTATSD_MAPPER_PROFILES
@@ -401,64 +399,64 @@ Airflow StatsD コンフィギュレーションは、Kubernetes デプロイメ
         [{"name":"airflow","prefix":"airflow.","mappings":[{"match":"airflow.*_start","name":"airflow.job.start","tags":{"job_name":"$1"}},{"match":"airflow.*_end","name":"airflow.job.end","tags":{"job_name":"$1"}},{"match":"airflow.*_heartbeat_failure","name":"airflow.job.heartbeat.failure","tags":{"job_name":"$1"}},{"match":"airflow.operator_failures_*","name":"airflow.operator_failures","tags":{"operator_name":"$1"}},{"match":"airflow.operator_successes_*","name":"airflow.operator_successes","tags":{"operator_name":"$1"}},{"match":"airflow\\.dag_processing\\.last_runtime\\.(.*)","match_type":"regex","name":"airflow.dag_processing.last_runtime","tags":{"dag_file":"$1"}},{"match":"airflow\\.dag_processing\\.last_run\\.seconds_ago\\.(.*)","match_type":"regex","name":"airflow.dag_processing.last_run.seconds_ago","tags":{"dag_file":"$1"}},{"match":"airflow\\.dag\\.loading-duration\\.(.*)","match_type":"regex","name":"airflow.dag.loading_duration","tags":{"dag_file":"$1"}},{"match":"airflow.dagrun.*.first_task_scheduling_delay","name":"airflow.dagrun.first_task_scheduling_delay","tags":{"dag_id":"$1"}},{"match":"airflow.pool.open_slots.*","name":"airflow.pool.open_slots","tags":{"pool_name":"$1"}},{"match":"airflow.pool.queued_slots.*","name":"airflow.pool.queued_slots","tags":{"pool_name":"$1"}},{"match":"airflow.pool.running_slots.*","name":"airflow.pool.running_slots","tags":{"pool_name":"$1"}},{"match":"airflow.pool.used_slots.*","name":"airflow.pool.used_slots","tags":{"pool_name":"$1"}},{"match":"airflow.pool.starving_tasks.*","name":"airflow.pool.starving_tasks","tags":{"pool_name":"$1"}},{"match":"airflow\\.dagrun\\.dependency-check\\.(.*)","match_type":"regex","name":"airflow.dagrun.dependency_check","tags":{"dag_id":"$1"}},{"match":"airflow\\.dag\\.(.*)\\.([^.]*)\\.duration","match_type":"regex","name":"airflow.dag.task.duration","tags":{"dag_id":"$1","task_id":"$2"}},{"match":"airflow\\.dag_processing\\.last_duration\\.(.*)","match_type":"regex","name":"airflow.dag_processing.last_duration","tags":{"dag_file":"$1"}},{"match":"airflow\\.dagrun\\.duration\\.success\\.(.*)","match_type":"regex","name":"airflow.dagrun.duration.success","tags":{"dag_id":"$1"}},{"match":"airflow\\.dagrun\\.duration\\.failed\\.(.*)","match_type":"regex","name":"airflow.dagrun.duration.failed","tags":{"dag_id":"$1"}},{"match":"airflow\\.dagrun\\.schedule_delay\\.(.*)","match_type":"regex","name":"airflow.dagrun.schedule_delay","tags":{"dag_id":"$1"}},{"match":"airflow.scheduler.tasks.running","name":"airflow.scheduler.tasks.running"},{"match":"airflow.scheduler.tasks.starving","name":"airflow.scheduler.tasks.starving"},{"match":"airflow.sla_email_notification_failure","name":"airflow.sla_email_notification_failure"},{"match":"airflow\\.task_removed_from_dag\\.(.*)","match_type":"regex","name":"airflow.dag.task_removed","tags":{"dag_id":"$1"}},{"match":"airflow\\.task_restored_to_dag\\.(.*)","match_type":"regex","name":"airflow.dag.task_restored","tags":{"dag_id":"$1"}},{"match":"airflow.task_instance_created-*","name":"airflow.task.instance_created","tags":{"task_class":"$1"}},{"match":"airflow\\.ti\\.start\\.(.+)\\.(\\w+)","match_type":"regex","name":"airflow.ti.start","tags":{"dag_id":"$1","task_id":"$2"}},{"match":"airflow\\.ti\\.finish\\.(\\w+)\\.(.+)\\.(\\w+)","name":"airflow.ti.finish","match_type":"regex","tags":{"dag_id":"$1","task_id":"$2","state":"$3"}}]}]
   ```
 
-##### 収集データ
+##### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][8]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][8].
 
-| パラメーター      | 値                                                 |
+| Parameter      | Value                                                 |
 |----------------|-------------------------------------------------------|
 | `<LOG_CONFIG>` | `{"source": "airflow", "service": "<YOUR_APP_NAME>"}` |
 
-[1]: https://docs.datadoghq.com/ja/getting_started/agent/autodiscovery/?tab=docker#integration-templates
+[1]: https://docs.datadoghq.com/getting_started/agent/autodiscovery/?tab=docker#integration-templates
 [2]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#base-url
 [3]: https://airflow.apache.org/docs/apache-airflow/stable/logging-monitoring/metrics.html
 [4]: https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#metrics
 [5]: https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html
-[6]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=kubernetes#setup
-[7]: /ja/integrations/airflow/?tab=host#connect-airflow-to-dogstatsd
-[8]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[6]: https://docs.datadoghq.com/developers/dogstatsd/?tab=kubernetes#setup
+[7]: /integrations/airflow/?tab=host#connect-airflow-to-dogstatsd
+[8]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][4]し、Checks セクションで `airflow` を探します。
+[Run the Agent's status subcommand][4] and look for `airflow` under the Checks section.
 
-## 付録
+## Annexe
 
 ### Airflow DatadogHook
 
-さらに、Datadog とのインタラクションに [Airflow DatadogHook][5] を使用することも可能です。
+In addition, [Airflow DatadogHook][5] can be used to interact with Datadog:
 
-- メトリクスの送信
-- メトリクスのクエリ
-- イベントのポスト
+- Send Metric
+- Query Metric
+- Post Event
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "airflow" >}}
 
 
-### ヘルプ
+### Events
 
-Airflow チェックには、イベントは含まれません。
+The Airflow check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "airflow" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+Need help? Contact [Datadog support][6].
 
 
 
 [1]: https://airflow.apache.org/docs/stable/metrics.html
-[2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
-[3]: https://docs.datadoghq.com/ja/agent/
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
+[2]: https://docs.datadoghq.com/developers/dogstatsd/
+[3]: https://docs.datadoghq.com/agent/
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6#agent-status-and-information
 [5]: https://airflow.apache.org/docs/apache-airflow-providers-datadog/stable/_modules/airflow/providers/datadog/hooks/datadog.html
-[6]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/help/

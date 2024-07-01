@@ -1,44 +1,45 @@
 ---
+title: Add event log files to the Win32_NTLogEvent WMI class
+kind: guide
 aliases:
-- /ja/integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
-kind: ガイド
-title: イベントログファイルを `Win32_NTLogEvent` WMI クラスに追加する
+  - /integrations/faq/how-to-add-event-log-files-to-the-win32-ntlogevent-wmi-class
 ---
 
-すべてのイベントログが Win32_NTLogEvent WMI クラス内にあるわけではありません。Event Viewer インテグレーションはこのクラスのイベントしか拾えないので、Windows レジストリを変更して、このクラスの範囲外のイベントログを追加してください。
+Not all event logs are are in the Win32_NTLogEvent WMI class. Since the Event Viewer integration can only pick up events in this class, modify the Windows Registry to add event logs outside of the scope of this class.
 
-まず、Win32_NTLogEvent でログファイルにアクセスできるかどうかを、Powershell で以下の WMI クエリを使用して確認します。(これは、Agent がこれらのイベントを収集するために実行するクエリと同じものです)
+The first step is to confirm whether or not the logfile can be accessed through the Win32_NTLogEvent using the following WMI query in Powershell. (This is the same query the Agent runs to collect these events)
 
 ```text
 $ Get-WmiObject -Query "Select EventCode,SourceName,TimeGenerated,Type,InsertionStrings,Message,Logfile from Win32_NTLogEvent WHERE ( LogFile = '<LogFileName>' )" | select -First 1
 ```
 
-結果が出ない場合は、ログファイルにアクセスできないので、Windows レジストリから追加する必要があります。
+If there are no results, the log file cannot be accessed and you need to add it through the Windows Registry.
 
-Event Viewer で監視したいイベントログを探します。ログファイルを探し、 "Actions" セクションの "properties" をクリックし、ログパスと Full Name を確認します。例えば、Microsoft/Windows/TaskScheduler フォルダにある "Operational" イベント Log ファイルを監視する設定方法を以下に示します。
-{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_1.png" alt="Windows のイベントビューアでは、File という名前のファイルが選択され、文字列を編集するオプションが表示されています。Value data: フィールドがハイライトされ、ログパスが表示されています" >}}
+Locate the event logs you want to monitor in the Event Viewer. Locate the log file and click "properties" under the "Actions" section to find the Log path and Full Name. For example, here is how to set up monitoring the "Operational" event Log file located in the Microsoft/Windows/TaskScheduler folder:
+{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_1.png" alt="The windows event viewer showing a file selected named File and the option to edit string. The Value data: field is highlighted and shows the log path" >}}
 
-Windows レジストリを開きます。(レジストリエディタのデフォルト名である regedit.exe を検索してください)。レジストリエディタ内で、以下のパスにある EventLog フォルダを探します。
+Open the Windows Registry. (search for regedit.exe, the default name of the registry editor). Inside the registry editor, locate the EventLog folder in the following path:
 
 ```text
 \HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\
 ```
 
-監視したいイベントログの名前で新しいキーを作成します。path-to-folder/LogFileName の構文を使用します (Event Viewer で見つかる Full Name と同じです)。
-{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_2.png" alt="EventLog フォルダを展開し、右クリックでサブメニューを表示します。サブメニューの中で New が選択され、新しいサブメニューが開かれます。Key は赤枠で強調表示されています" >}}
+Create a new key with the name of the event log you're wanting to monitor. Using the syntax of path-to-folder/LogFileName (as in the Full Name found in the Event Viewer).
+{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_2.png" alt="The EventLog folder expanded and right-clicked to show its sub-menu. New is selected in the submenu, and opens a new submenu. Key is highlighted with a red box" >}}
 
-{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_3.png" alt="EventLog フォルダが展開され、Microsoft-Windows-TaskScheduler/Operational が赤枠でハイライト表示されている" >}}
+{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_3.png" alt="The EventLog folder expanded to show Microsoft-Windows-TaskScheduler/Operational highlighted in a red box" >}}
 
-キーを作成した後、このキーに 3 つの値を追加します。まず、ログファイルのパスを "File" という名前の String Value (REG_SZ) として追加します。
-{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_4.png" alt="Windows のイベントビューアでは、file という名前のファイルが選択され、文字列を編集するオプションが表示されています。Value data: フィールドがハイライトされ、ログパスが表示されています" >}}
+After creating the key, add three values to this key. First, add the path to the log file as a String Value (REG_SZ) named "File":
+{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_4.png" alt="The windows event viewer showing a file selected named file and the option to edit string. The Value data: field is highlighted and shows the log path" >}}
 
-次に、Log ファイルの Full Name を String Value (REG_SZ) として "Primary Module" という名前で追加します。
-{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_5.png" alt="Windows のイベントビューアでは、Primary Module という名前のファイルが選択され、文字列を編集するオプションが表示されています。Value data: フィールドがハイライトされ、フルネームが表示されています" >}}
+Next, add the Full Name of the Log file as a String Value (REG_SZ) named "Primary Module":
+{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_5.png" alt="The windows event viewer showing a file selected named Primary Module and the option to edit string. The Value data: field is highlighted and shows the full name" >}}
 
-最後に、Windows Event Log Api DLL (wevtapi.dll) へのパスを、`%SystemRoot%\system32\wevtapi.dll` の Expandable String Value として、名前 "DisplayNameFile" で追加します。
-{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_6.png" alt="Windows のイベントビューアでは、DisplayNameFile という名前のファイルが選択され、文字列を編集するオプションが表示されています。Value data: フィールドがハイライトされています" >}}
+Finally, add the path to the Windows Event Log Api DLL (wevtapi.dll), which should be at `%SystemRoot%\system32\wevtapi.dll` as an Expandable String Value with the name "DisplayNameFile":
+{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_6.png" alt="The windows event viewer showing a file selected named DisplayNameFile and the option to edit string. The Value data: field is highlighted" >}}
 
-変更は即座に行われるはずです。イベントログが Win32_NTLogEvent WMI クラスを通してアクセス可能であることを確認するために、上記のクエリをもう一度試してください。その後、Event Viewer インテグレーションコンフィギュレーションファイルへのイベントの追加を再開することができます。
+The changes should be immediate. To confirm that the event log is accesible through the Win32_NTLogEvent WMI class, try the above query again. Then you can resume adding events to the Event Viewer integration config file.
 
-注: クエリを実行してもイベントがない場合は、イベントビューアでログファイルにイベントがあることを確認してください。また、イベントログが無効になっていないか、最近のイベントがあるかどうかも確認してください。
-{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_7.png" alt="Windows のイベントビューアでは、右側にアクションのリストが表示されています。ログを有効にするアクションがハイライトされ、ここでログを有効にするよう注意書きがされています" >}}
+Note: if there still aren't events when running the query, check the event viewer to confirm that there are any events in the log file. Also, make sure that the event log isn't disabled and that there are recent events available.
+{{< img src="integrations/guide/windows_event_logs_with_wmi/event_viewer_7.png" alt="The windows event viewer showing a list of actions on the right. The enable log action is highlighted with a note to enable log here" >}}
+

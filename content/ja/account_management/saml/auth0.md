@@ -1,25 +1,26 @@
 ---
 title: Auth0 SAML IdP
 aliases:
-  - /ja/account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
+  - /account_management/faq/how-do-i-setup-microsoft-active-directory-federation-services-as-a-saml-idp/
 further_reading:
-  - link: /account_management/saml/
-    tag: Documentation
-    text: Datadog アカウントのための SAML の構成
+- link: /account_management/saml/
+  tag: Documentation
+  text: Configure SAML for your Datadog account
 ---
-## 設定およびコンフィギュレーション
 
-[Auth0 を Datadog の ID プロバイダーとして構成する方法][1]に関するドキュメントに従って、Auth0 を SAML ID プロバイダーとして設定します。
+## Setup and configuration
 
-## 追加情報
+Follow the [Configure Auth0 as Identity Provider for Datadog][1] docs to configure Auth0 as a SAML identity provider.
 
-`first_name` と `give_name` は Auth0 ユーザーのルート属性です。これらは、Auth0 管理 API で作成時にのみ設定できます。[Normalized User Profiles][2]を参照してください。
+## Additional information
 
-追加のユーザー情報を指定するには、ユーザープロファイルの `user_metadata` セクションを使用します。次に例を示します。
+`first_name` and `give_name` are root attributes of an Auth0 user. These can only be set upon creation with Auth0 Management API. See [Normalized User Profiles][2] for reference.
 
-{{< img src="account_management/saml/auth0_metadata.png" alt="これを更新" >}}
+The `user_metadata` section of the user profile is used to specify additional user information, for example:
 
-## その他の参考資料
+{{< img src="account_management/saml/auth0_metadata.png" alt="Update this" >}}
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

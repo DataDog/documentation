@@ -1,78 +1,78 @@
 ---
+title: Delete Logs with Sensitive Data
+kind: guide
 disable_toc: false
 further_reading:
 - link: logs/guide/control-sensitive-logs-data/
-  tag: ドキュメント
-  text: 機密ログデータの管理
+  tag: Documentation
+  text: Control Sensitive Logs Data
 - link: /sensitive_data_scanner/
-  tag: ドキュメント
-  text: センシティブ データ スキャナー
-kind: ガイド
-title: 機密データを含むログを削除する
+  tag: Documentation
+  text: Sensitive Data Scanner
 ---
 
-## 概要
+## Overview
 
-データのセキュリティを確保するためには、機密データを含むログを削除することが重要です。このガイドでは、以下の内容について説明します。
+It is important to delete logs with sensitive data to ensure the security of your data. This guide provides information on how to:
 
-- 機密データを含むログが保存期間内であるために削除が必要かどうかを確認する方法。
-- 機密データを含むログをクエリ不可にする方法。
-- 機密データスキャナーで機密データを秘匿化する方法。
-- Datadog サポートにログの削除を依頼する方法。
+- Check if the logs with sensitive data need to be deleted because they are within the retention period.
+- Make logs with sensitive data un-queryable.
+- Redact sensitive data with Sensitive Data Scanner.
+- Request log deletion from Datadog support.
 
-## ログの保存期間を確認する
+## Check your log retention period
 
-Datadog は、組織で定められた最長保存期間を超えたログを自動的に削除します。
+Datadog automatically deletes logs that exceed the longest retention period for your organization.
 
-ログの保存期間を確認または変更するには:
+To check or change your log retention period:
 
-1. [Log Indexes][1] ページに移動します。
-1. **Retention** 列で各インデックスについてログの保存期間を確認します。
-1. ログをより早く期限切れにしたい場合は、インデックスの右側にある**編集**アイコンをクリックします。
-1. **Set Index Retention** ドロップダウンメニューを更新して、新しい保存期間にします。
+1. Navigate to the [Log Indexes][1] page.
+1. See the log retention period for each index in the **Retention** column.
+1. If you want to make logs age out faster, click the **Edit** icon on the right side of the index.
+1. Update the **Set Index Retention** dropdown menu to a new retention period.
 
-## 機密データを含むログをクエリ不可にする
+## Make logs with sensitive data un-queryable
 
-機密データを含むログが保存期間内にある場合、ログが期限切れになるまで、Datadog のログエクスプローラー、ダッシュボード 、および Live Tail でクエリ不可にすることができます。クエリ不可となったログは、クエリまたは閲覧ができません。Datadog で機密データを含むログをクエリ不可にするには、こちらの[手順][2]に従ってください。
+If logs with sensitive data are within the the log retention period, you can make then un-queryable in Datadog's Log Explorer, Dashboards, and Live Tail until they age out. Logs made un-queryable are not available for querying or viewing. Follow these [instructions][2] to make logs with sensitive data un-queryable in Datadog.
 
-## インデックス全体を削除する
+## Delete an entire index
 
-インデックス全体を削除するには:
+To delete an entire index:
 
-1. [Log Indexes][1] ページに移動します。
-1. 削除したいインデックスの右側にある**削除**アイコンをクリックします。
-1. **Confirm** をクリックしてインデックスを削除します。
+1. Navigate to the [Log Indexes][1] page.
+1. Click the **Delete** icon on the right side of the index you want to delete.
+1. Click **Confirm** to delete the index.
 
-**注**: インデックスは、ログが期限切れになるまで削除待ちとして表示されます。その後、インデックスは完全に削除され、UI から削除されます。
+**Note**: The index shows as a pending deletion until the logs age out, after which the index is fully deleted and removed from the UI.
 
-## 機密データスキャナーで機密データを秘匿化する
+## Redact sensitive data with Sensitive Data Scanner
 
-Datadog に機密データを保存するリスクを抑えるには、[機密データスキャナー][5]を使用します。機密データスキャナーは、ストリームベースのパターンマッチングサービスで、機密データの特定、タグ付け、オプションで秘匿化やハッシュ化に使用されます。セキュリティおよびコンプライアンスチームは、機密データスキャナーを導入することで、機密データの漏洩を防ぎ、コンプライアンス違反のリスクを抑えることができます。
+Use [Sensitive Data Scanner][5] to limit the risk of storing sensitive data in Datadog. Sensitive Data Scanner is a stream-based, pattern matching service used to identify, tag, and optionally redact or hash sensitive data. Security and compliance teams can implement Sensitive Data Scanner to prevent sensitive data leaks and limit non-compliance risks.
 
-## ログの削除リクエストを送信する
+## Submit a request for log deletion
 
 <div class="alert alert-warning">
-ログの削除を依頼できるのは、Datadog 管理者のみです。管理者でない場合は、管理者が削除リクエストを確認できるように、必ずリクエストに管理者を含めるようにしてください。
+Only a Datadog Admin can request log deletion. If you are not an Admin, make sure to include an Admin on the request so they can confirm the deletion request.
 </div>
 
-保存期間の変更、クエリ対象からのログの除外、機密データスキャナーを使った機密データの秘匿化、といったオプションだけではデータのセキュリティを確保できない場合は、[Datadog サポート][3]にリクエストを送信して、機密データを含むインデックス付きログの削除を依頼してください。リクエストには以下の情報が必要です。
+If the options for changing your retention period, making logs un-queryable, and redacting sensitive data using Sensitive Data Scanner are not enough to ensure the security of your data, submit a request to [Datadog support][3] to delete the indexed logs with sensitive data. Your request must provide the following information:
 
-1. 機密データを含むログが現在、Datadog に送信されていないことの確認。
-1. 時間枠を限定した削除なのか、[インデックス全体の削除](#delete-an-entire-index)依頼なのかの確認。
-1. 機密データが送信された正確な組織名と[サイト][4] (例: US1)。
-1. 時間枠を限定した削除依頼の場合、機密データを含むログの正確な時間範囲 (エポック または UTC 形式)。
-1. 機密データがあるインデックスの名前。
-1. 以下の条件を理解していることの確認:
+1. Confirmation that the logs with sensitive data are no longer being sent to Datadog.
+1. Whether this is a targeted deletion by time frame or an [entire index deletion](#delete-an-entire-index) request.
+1. The exact organization name and the [site][4] (for example, US1) where the sensitive data was sent to.
+1. If the request is for targeted deletion by time frame, the exact time range, in Epoch or UTC format, of the logs that contained sensitive data.
+1. The name of the indexes where the sensitive data is in.
+1. Confirmation that you understand the following requirement:
    <div class="alert alert-danger">
    Datadog deletes logs by time buckets, not by query scope or precise time frame. Therefore, Datadog might have to delete a larger amount of data than your exposed logs. For example. if you need to delete all error logs from <code>service:x</code> that came in between 10:00 a.m. to 12:00 p.m. from <code>index:main</code>, Datadog might have to delete all logs in that index from 1:00 a.m. to 5:00 p.m. Datadog support will work with you to ensure that only the necessary data is deleted.
    </div>
 
-## 参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines/indexes
-[2]: /ja/logs/guide/control-sensitive-logs-data/#make-sensitive-logs-un-queryable-in-datadog-until-they-age-out
-[3]: /ja/help/
-[4]: /ja/getting_started/site/
+[2]: /logs/guide/control-sensitive-logs-data/#make-sensitive-logs-un-queryable-in-datadog-until-they-age-out
+[3]: /help/
+[4]: /getting_started/site/
 [5]: https://www.datadoghq.com/product/sensitive-data-scanner/

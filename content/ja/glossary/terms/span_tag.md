@@ -1,9 +1,9 @@
 ---
+title: span tag
 core_product:
-- apm
-title: スパンタグ
+  - apm
 ---
 
-スパンタグは、リクエストを他のテレメトリーと関連付ける (または検索でフィルターする) ために、キーと値のペアの形で、[スパン][1]に適用されるタグのことです。タグは、1 つのスパンに追加することも、すべてのスパンにグローバルに追加することも可能です。
+A span tag is a tag that is applied to a [span][1], in the form of a key-value pair, to correlate a request with other telemetry (or to filter it in searches). Tags can be added to a single span or globally to all spans. 
 
-[1]: /ja/glossary/#span
+[1]: /glossary/#span

@@ -1,79 +1,79 @@
 ---
+title: Ease Troubleshooting With Cross-Product Correlation
+kind: guide
 further_reading:
 - link: /getting_started/tagging/unified_service_tagging/
-  tag: ドキュメント
-  text: 統合サービスタグ付けについて
+  tag: Documentation
+  text: Learn about Unified Service Tagging
 - link: /tracing/other_telemetry/connect_logs_and_traces
-  tag: ドキュメント
-  text: ログとトレースの接続
+  tag: Documentation
+  text: Connect Logs and Traces
 - link: /real_user_monitoring/platform/connect_rum_and_traces/
-  tag: ドキュメント
-  text: RUM およびセッションリプレイとトレースの接続
+  tag: Documentation
+  text: Connect RUM & Session Replay and Traces
 - link: /synthetics/apm/
-  tag: ドキュメント
-  text: Synthetics テストとトレースの接続
-kind: ガイド
-title: クロスプロダクト相関で容易にトラブルシューティング
+  tag: Documentation
+  text: Connect Synthetic Tests and Traces
 ---
 
-## 概要
+## Overview
 
-[統合サービスタグ付け][1]は、高度な相関能力を可能にします。調査の出発点が単一のログ、トレース、ビュー、または Synthetic テストという場合もあるでしょう。ログ、トレース、およびビューを他のデータと相関させることで、ビジネスへの影響を推定し、問題の根本原因を迅速に特定するのに役立つコンテキストが提供されます。
+[Unified service tagging][1] enables high-level correlation capabilities. There may be times when the starting point of your investigation is a single log, trace, view, or Synthetic test. Correlating logs, traces, and views with other data provides helpful context in estimating business impact and identifying the root cause of an issue in quickly.
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/full-stack-cover.png" alt="フルスタックの相関" style="width:100%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/full-stack-cover.png" alt="Full stack correlation" style="width:100%;" >}}
 
-このガイドでは、フルスタックデータを相関させる方法を説明します。ユースケースによっては、以下のいくつかのステップは省略することができます。他のステップに依存しているステップは、明示されています。
+This guide walks you through how to correlate your full stack data. Depending on your use case, you may skip certain steps below. Steps that are dependent on others are explicitly stated.
 
-1. [サーバー側ログとトレースの相関付け](#correlate-server-side-logs-with-traces)
-   * [アプリケーションログの相関付け](#correlate-application-logs)
-   * [プロキシログの相関付け](#correlate-proxy-logs)
-   * [データベースログの相関付け](#correlate-database-logs)
-2. [フロントエンドプロダクトの相関付け](#correlate-frontend-products)
-   * [ブラウザログと RUM の相関付け](#correlate-browser-logs-with-rum)
-3. [ユーザーエクスペリエンスとサーバー動作の相関付け](#correlate-user-experience-with-server-behavior)
-   * [RUM ビューとトレースの相関付け](#correlate-rum-views-with-traces)
-   * [トレースの相関を活用して Synthetic テストをトラブルシューティング](#leverage-trace-correlation-to-troubleshoot-synthetic-tests)
+1. [Correlate server-side logs with traces](#correlate-server-side-logs-with-traces)
+   * [Correlate application logs](#correlate-application-logs)
+   * [Correlate proxy logs](#correlate-proxy-logs)
+   * [Correlate database logs](#correlate-database-logs)
+2. [Correlate frontend products](#correlate-frontend-products)
+   * [Correlate browser logs with RUM](#correlate-browser-logs-with-rum)
+3. [Correlate user experience with server behavior](#correlate-user-experience-with-server-behavior)
+   * [Correlate RUM views with traces](#correlate-rum-views-with-traces)
+   * [Leverage trace correlation to troubleshoot Synthetic tests](#leverage-trace-correlation-to-troubleshoot-synthetic-tests)
 
-## サーバー側ログとトレースの関連付け
+## Correlate server-side logs with traces
 
-アプリケーションでユーザーにエラーまたは高レイテンシーが発生した際、問題のあるリクエストからの特定のログを見ることで問題を的確に把握できます。該当リクエストに関するすべてのログを集めて始めから終わりまでの処理を詳しく確認し、問題をすばやく診断できます。
+When your users are encountering errors or high latency in your application, viewing the specific logs from a problematic request can reveal exactly what went wrong. By pulling together all the logs pertaining to a given request, you can see in rich detail how it was handled from beginning to end so you can quickly diagnose the issue.
 
-ログをトレースと相関付けることで、`trace_id` を使用して[エンティティレベルの一貫性を維持しながら積極的なサンプリング戦略][2]も実現できます。
+Correlating your logs with traces also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of `trace_id`.
 
-[アプリケーションログの相関付け](#correlate-application-logs)により、スタック全体の広い範囲を可視化できますが、特定のユースケースではスタックのより深くに相関付ける必要があります。ユースケースに合わせたセットアップを完了するには、以下のリンクをご利用ください。
+[Correlating application logs](#correlate-application-logs) offers extensive visibility across your stack, but some specific use cases require correlation deeper into your stack. Follow the links to complete setup per use case:
 
-* [プロキシログの相関付け](#correlate-proxy-logs)
-* [データベースログの相関付け](#correlate-database-logs)
+* [Correlate proxy logs](#correlate-proxy-logs)
+* [Correlate database logs](#correlate-database-logs)
 
-### アプリケーションログの相関付け
+### Correlate application logs
 
-#### 理由
+#### Why?
 
-アプリケーションログは、ほとんどのコードおよびビジネスロジックの問題に関するコンテキストを提供します。他のサービスの問題（たとえばORM ログデータベースエラーなど）の解決にも役立ちます。
+Application logs give the most context around most code and business logic issues. They can even help you solve other services issues. For example, most ORMs log database errors.
 
-#### 方法
+#### How?
 
-[さまざまな OOTB 相関][3]の 1 つを使用します。カスタムトレーサーを使用している場合や、問題がある場合は、[相関に関するよくあるご質問][4]をご参照ください。
+Use one of the [various OOTB correlations][3]. If you use a custom tracer or if you have any issues, follow the [correlation FAQ][4].
 
-### プロキシログの相関付け
+### Correlate proxy logs
 
-#### 理由
+#### Why?
 
-プロキシログは、アプリケーションログより多くのエントリポイントをカバーするため、静的なコンテンツとリダイレクトに関する、より多くの情報を提供します。
+Proxy logs provide more information than application logs as they cover more entry points and give information on static content and redirections.
 
-#### 方法
+#### How?
 
-アプリケーショントレーサーは、デフォルトでトレーサーを生成します。HTTP リクエストヘッダに `x-datadog-trace-id` を挿入することでこれを変更することが可能です。
+The application tracer generates trace IDs by default. This can be changed by injecting `x-datadog-trace-id` into HTTP Request headers.
 
 #### NGINX
 
-##### OpenTracing のセットアップ
+##### Setup opentracing
 
-[NGINX トレースインテグレーション][5]を参照。
+Follow [NGINX tracing integration][5].
 
-##### ログのトレース ID の挿入
+##### Inject trace ID in logs
 
-トレース ID は、`opentracing_context_x_datadog_trace_id` 変数として保存されます。NGINX 構成ファイル (`/etc/nginx/nginx.conf`) の HTTP セクションに以下の構成ブロックを追加して、NGINX のログ形式を更新します。
+Trace ID is stored as `opentracing_context_x_datadog_trace_id` variable. Update the NGINX log format by adding the following configuration block in the HTTP section of your NGINX configuration file `/etc/nginx/nginx.conf`:
 
 ```conf
 http {
@@ -85,52 +85,52 @@ http {
 }
 ```
 
-##### パイプラインでトレース ID をパース
+##### Parse trace ID in pipelines
 
-1. NGINX パイプラインのクローンを作成します。
+1. Clone the NGINX pipeline.
 
-2. 最初の [grok parser][6] をカスタマイズします。
-   - **Parsing rules** で、パースルールを以下と置き換えます。
+2. Customize the first [grok parser][6]:
+   - In **Parsing rules**, replace the first parsing rule with:
    ```text
    access.common %{_client_ip} %{_ident} %{_trace_id} %{_auth} \[%{_date_access}\] "(?>%{_method} |)%{_url}(?> %{_version}|)" %{_status_code} (?>%{_bytes_written}|-)
    ```
-   - **Helper Rules** の **Advanced settings** で、行を追加します。
+   - In **Advanced settings** under **Helper Rules**, add the line:
    ```text
    _trace_id %{notSpace:dd.trace_id:nullIf("-")}
    ```
 
-3. `dd.trace_id` 属性で [トレース ID リマッパー][7]を追加します。
+3. Add a [trace ID remapper][7] on `dd.trace_id` attribute.
 
-### データベースログの相関付け
+### Correlate database logs
 
-#### 理由
+#### Why?
 
-データベースログは、同様のクエリ、変数の匿名化、そして高い使用量のため、コンテキスト化が困難なことが多くあります。
+Database logs are often hard to contextualize due to query similarities, variable anonymization, and high usage.
 
-たとえば、プロダクションのクエリ遅延は、多くのリソースを使用して長時間かけて調査しなければ再現することが困難です。以下に、トレースを使用してクエリ遅延の分析を相関付ける方法例をご紹介します。
+For example, production slow queries are hard to reproduce and analyze without investing a lot of time and resources. Below is an example of how to correlate slow query analysis with traces.
 
-#### 方法
+#### How?
 
 #### PostgreSQL
 
-##### データベースログの強化
+##### Enrich your database logs
 
-PostgreSQL のデフォルトのログについては詳述されていません。強化するには、[こちらのインテグレーションガイド][8]に従ってください。
+PostgreSQL default logs are not detailed. Follow [this integration guide][8] to enrich them.
 
-クエリ遅延のベストプラクティスでは、ステートメント遅延の実行プランを自動的にログに記録することも提案されているため、手動で `EXPLAIN` を実行する必要はありません。`EXPLAIN` を自動的に実行するには、`/etc/postgresql/<VERSION>/main/postgresql.conf` を次のように更新します。
+Slow query best practices also suggests logging execution plans of slow statements automatically, so you don't have to run `EXPLAIN` by hand. To run `EXPLAIN` automatically, update `/etc/postgresql/<VERSION>/main/postgresql.conf` with:
 
 ```conf
 session_preload_libraries = 'auto_explain'
 auto_explain.log_min_duration = '500ms'
 ```
 
-500ms 以上のクエリは実行プランを記録します。
+Queries longer than 500ms log their execution plan.
 
-**注**: `auto_explain.log_analyze = 'true'` にすると、より多くの情報を取得できますが、パフォーマンスに大きな影響が出ます。詳しくは、[公式ドキュメント][9]をご参照ください。
+**Note**: `auto_explain.log_analyze = 'true'` provides even more information, but greatly impacts performance. For more information, see the [official documentation][9].
 
-##### trace_id のデータベースログへの挿入
+##### Inject trace_id into your database logs
 
-[SQL コメント][10]とともに、データベースログのほとんどに `trace_id` を挿入します。以下は、Flask および SQLAlchemy の例です。
+Inject `trace_id` into most of your database logs with [SQL comments][10]. Here is an example with Flask and SQLAlchemy:
 
 ```python
 if os.environ.get('DD_LOGS_INJECTION') == 'true':
@@ -145,101 +145,101 @@ if os.environ.get('DD_LOGS_INJECTION') == 'true':
         return statement, parameters
 ```
 
-**注**: これは、クエリステートメントを含むログのみを相関付けます。 `ERROR: duplicate key value violates unique constraint "<TABLE_KEY>"` のようなエラーログは、コンテキスト外にとどまります。ほとんどの場合、エラー情報はアプリケーションログを通じて取得できます。
+**Note**: This only correlates logs that include a query statement. Error logs like `ERROR:  duplicate key value violates unique constraint "<TABLE_KEY>"` stay out of context. Most of the time you can still get error information through your application logs.
 
-PostgreSQL パイプラインのクローン作成とカスタマイズ:
+Clone and customize the PostgreSQL pipeline:
 
-1. 新しい [grok parser][6] を追加します。
+1. Add a new [grok parser][6]:
    ```text
    extract_trace %{data}\s+--\s+dd.trace_id=<%{notSpace:dd.trace_id}>\s+%{data}
    ```
 
-2. `dd.trace_id` 属性で [トレース ID リマッパー][7]を追加します。
+2. Add a [trace ID remapper][7] on `dd.trace_id` attribute.
 
-以下に、遅延しているトレースからのクエリ遅延の実行プランの例を示します。
+Here is an example of a slow query execution plan from a slow trace:
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/slow-query-root-cause.png" alt="クエリ遅延ログの相関" style="width:100%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/slow-query-root-cause.png" alt="Slow query logs correlation" style="width:100%;" >}}
 
-## フロントエンドプロダクトの相関付け
+## Correlate frontend products
 
-### ブラウザログと RUM およびセッションリプレイの相関付け
+### Correlate browser logs with RUM & Session Replay
 
-#### 理由
+#### Why?
 
-RUM イベント内の[ブラウザログ][11]から、問題のコンテキストと洞察を得ることができます。以下の例では、ブラウザログは、不正なクエリの根本的な原因が無効なユーザー ID であることを示しています。
+[Browser logs][11] inside a RUM event give context and insight into an issue. In the following example, browser logs indicate that the root cause of the bad query is an invalid user ID.
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/browser-logs-in-rum.png" alt="RUM アクションのブラウザログ" style="width:100%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/browser-logs-in-rum.png" alt="Browser logs in a RUM action" style="width:100%;" >}}
 
-ブラウザログを RUM と相関付けると、`session_id` や `view.id` などの属性を使用して、[エンティティレベルの一貫性を維持しながら積極的なサンプリング戦略][2]も実現できます。
+Correlating your browser logs with RUM also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of attributes like `session_id` and `view.id`.
 
-#### 方法
+#### How?
 
-ブラウザログと RUM イベントは自動的に相関付けられます。詳細については、[RUM とセッションリプレイの請求][12]を参照してください。[RUM ブラウザ SDK とログ SDK の構成を一致させる][13]必要があります。
+Browser logs and RUM events are automatically correlated. For more information, see [RUM & Session Replay Billing][12]. You must [match configurations between the RUM Browser SDK and Logs SDK][13].
 
-## ユーザーエクスペリエンスとサーバー動作の相関付け
+## Correlate user experience with server behavior
 
-従来のバックエンドとフロントエンドのモニタリングはサイロ化されており、スタック全体のトラブルシューティングには別々のワークフローが必要になる場合があります。しかし Datadog のフルスタック相関なら、ブラウザの問題であれ、データベースのダウンタイムであれ、根本原因を特定し、ユーザーへの影響を見積もることができます。
+Traditional backend and frontend monitoring are siloed and may require separate workflows to troubleshoot across a stack. Datadog's full stack correlations allow you to identify a root cause—whether it comes from a browser issue or a database downtime—and estimate the user impact.
 
-このセクションでは、以下の相関を有効にする方法を説明します。
+This section walks you through how to enable these correlations:
 
-* [RUM ビューとトレースの相関付け](#correlate-rum-views-with-traces)
-* [トレースの相関を活用して Synthetic テストをトラブルシューティング](#leverage-trace-correlation-to-troubleshoot-synthetic-tests)
+* [Correlate RUM views with traces](#correlate-rum-views-with-traces)
+* [Leverage the trace correlation to troubleshoot Synthetic tests](#leverage-trace-correlation-to-troubleshoot-synthetic-tests)
 
-### RUM ビューとトレースの相関付け
+### Correlate RUM views with traces
 
-#### 理由
+#### Why?
 
-APM と RUM およびセッションリプレイのインテグレーションにより、フロントエンドとバックエンドのデータを 1 つの視点で見ることができるようになります。また、以下のことも可能になります。
+The APM integration with RUM & Session Replay allows you to see your frontend and backend data in one lens, in addition to:
 
-* フロントエンドを含むスタックのあらゆる場所の問題をすばやく特定
-* ユーザーが経験している問題を完璧に把握
+* Quickly pinpoint issues anywhere in your stack, including the frontend
+* Fully understand what your users are experiencing
 
-#### 方法
+#### How?
 
-[トレースエクスプローラー][14]で RUM ビューに、[RUM エクスプローラー][15]で APM トレースにアクセスできます。詳細については、[RUM とトレースの接続][16]を参照してください。
+You can access RUM views in the [Trace Explorer][14] and APM traces in the [RUM Explorer][15]. For more information, see [Connect RUM and Traces][16]. 
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/trace-details-rum.png" alt="トレース内の RUM 情報" style="width:100%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/trace-details-rum.png" alt="RUM information in a trace" style="width:100%;" >}}
 
-RUM ビューとサーバーログには直接の相関はありません。ログ内の RUM イベントと RUM イベント内のログを表示するには、**Traces** タブをクリックします。
+There is no direct correlation between RUM views and server logs. To see RUM events in a log and logs in a RUM event, click in the **Traces** tab. 
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/rum-action-server-logs.png" alt="RUM アクショントレースプレビューのログ" style="width:100%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/rum-action-server-logs.png" alt="Logs in a RUM action trace preview" style="width:100%;" >}}
 
-### トレースの相関を活用して Synthetic テストをトラブルシューティング
+### Leverage trace correlation to troubleshoot Synthetic tests
 
-#### 理由
+#### Why?
 
-APM と Synthetic Monitoring のインテグレーションにより、テストによって生成されたトレースを使用して、失敗したテスト実行から問題の根本原因を導き出すことができます。
+The APM integration with Synthetic Monitoring allows you to navigate from a failed test run to the root cause of the issue with the trace generated by the test.
 
-{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/synthetic-trace-root-cause.png" alt="Synthetic テストの失敗の根本原因" style="width:100%;" >}}
+{{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/synthetic-trace-root-cause.png" alt="Root cause of a synthetic test fail" style="width:100%;" >}}
 
-バックエンド、インフラストラクチャー、トレースからのログ情報、および RUM イベント ([ブラウザテスト][17]のみ) に加えて、テストからネットワーク関連の詳細情報を得ることで、アプリケーションの動作とユーザー体験に関するさらなる詳細にアクセスすることができます。
+Having network-related specifics from your test, in addition to backend, infrastructure, and log information from your trace, and RUM events (for [browser tests][17] only) allows you to access additional details about your application's behavior and user experience.
 
-#### 方法
+#### How?
 
-アプリケーションのエンドポイントで APM を有効にすると、[Synthetic Monitoring & Continuous Testing ページ][18]で APM トレースにアクセスできます。
+After enabling APM on your application's endpoint, you can access APM traces in the [Synthetic Monitoring & Continuous Testing page][18]. 
 
-詳しくは [Synthetic テストとトレースの接続][19]を参照してください。
+For more information, see [Connect Synthetic Tests and Traces][19].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/unified_service_tagging
-[2]: /ja/logs/indexes/#sampling-consistently-with-higher-level-entities
-[3]: /ja/tracing/other_telemetry/connect_logs_and_traces
-[4]: /ja/tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
-[5]: /ja/tracing/trace_collection/proxy_setup/?tab=nginx
-[6]: /ja/logs/log_configuration/processors/#grok-parser
-[7]: /ja/logs/log_configuration/processors/#trace-remapper
-[8]: /ja/integrations/postgres/?tab=host#log-collection
+[1]: /getting_started/tagging/unified_service_tagging
+[2]: /logs/indexes/#sampling-consistently-with-higher-level-entities
+[3]: /tracing/other_telemetry/connect_logs_and_traces
+[4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
+[5]: /tracing/trace_collection/proxy_setup/?tab=nginx
+[6]: /logs/log_configuration/processors/#grok-parser
+[7]: /logs/log_configuration/processors/#trace-remapper
+[8]: /integrations/postgres/?tab=host#log-collection
 [9]: https://www.postgresql.org/docs/13/auto-explain.html
 [10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
-[11]: /ja/logs/log_collection/javascript/
-[12]: /ja/account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
-[13]: /ja/real_user_monitoring/browser/#initialization-parameters
+[11]: /logs/log_collection/javascript/
+[12]: /account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
+[13]: /real_user_monitoring/browser/setup/#initialization-parameters
 [14]: https://app.datadoghq.com/apm/traces
 [15]: https://app.datadoghq.com/rum/explorer
-[16]: /ja/real_user_monitoring/platform/connect_rum_and_traces
-[17]: /ja/synthetics/browser_tests/
+[16]: /real_user_monitoring/platform/connect_rum_and_traces
+[17]: /synthetics/browser_tests/
 [18]: https://app.datadoghq.com/synthetics/tests
-[19]: /ja/synthetics/apm
+[19]: /synthetics/apm

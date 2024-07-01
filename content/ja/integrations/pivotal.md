@@ -1,61 +1,62 @@
 ---
-categories:
-- Collaboration
-- issue tracking
-dependencies: []
-description: Datadog イベントストリームでストーリーを参照してコメントを入力。
-doc_link: https://docs.datadoghq.com/integrations/pivotal/
-draft: false
-git_integration_title: pivotal
-has_logo: true
-integration_id: pivotal
-integration_title: Pivotal Tracker
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: pivotal
-public_title: Datadog-Pivotal Tracker インテグレーション
-short_description: Datadog イベントストリームでストーリーを参照してコメントを入力。
-team: web-integrations
-version: '1.0'
+"categories":
+- "Collaboration"
+- "issue tracking"
+"custom_kind": "integration"
+"dependencies": []
+"description": "See and comment on stories in your Datadog event stream."
+"doc_link": "https://docs.datadoghq.com/integrations/pivotal/"
+"draft": false
+"git_integration_title": "pivotal"
+"has_logo": true
+"integration_id": "pivotal"
+"integration_title": "Pivotal Tracker"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "pivotal"
+"public_title": "Datadog-Pivotal Tracker Integration"
+"short_description": "See and comment on stories in your Datadog event stream."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-[Pivotal Tracker][1] は、新機能の構築、バグの解決、技術的負債への対応など、開発サイクルのさまざまな部分を通して、チームがプロジェクトを追跡し、共同作業できるようにストーリーを使用します。Pivotal Tracker を Datadog に接続することで、
+[Pivotal Tracker][1] uses stories to help teams track projects and collaborate throughout different parts of the development cycle, such as building new features, resolving bugs, or addressing technical debt. Connect Pivotal Tracker to Datadog to:
 
-- Datadog Events Explorer でストーリーの進捗を確認し、議論することができます。
-- ストーリーの完成度をシステム内の他のイベントやメトリクスと相関付け、グラフ化することができます。
-- ストーリーの更新通知を受け取ることができます。
+- See and discuss the progress of your stories in the Datadog Events Explorer.
+- Correlate and graph story completion with other events and metrics in your system.
+- Receive notifications for updates to your stories.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Datadog Events Explorer で Pivotal イベントを取得するには、Pivotal [プロファイルページ][2]で生成される API トークンを入力します。
+To get Pivotal events in the Datadog Events Explorer, enter the API token generated from your Pivotal [profile page][2].
 
-{{< img src="integrations/pivotal/pivotal_token.png" alt="Pivotal のトークン" popup="true">}}
+{{< img src="integrations/pivotal/pivotal_token.png" alt="pivotal token" popup="true">}}
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Pivotal Tracker インテグレーションには、メトリクスは含まれません。
+The Pivotal Tracker integration does not include any metric.
 
-### ヘルプ
+### Events
 
-Pivotal Tracker インテグレーションには、イベントは含まれません。
+The Pivotal Tracker integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Pivotal Tracker インテグレーションには、サービスのチェック機能は含まれません。
+The Pivotal Tracker integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
 [1]: https://www.pivotaltracker.com/features
 [2]: https://www.pivotaltracker.com/signin
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

@@ -1,76 +1,72 @@
 ---
-algolia:
-  tags:
-  - network device monitoring
+title: Network Device Monitoring
+description: Gain visibility into your network-connected devices, such as routers, switches, servers, and firewalls.
 aliases:
-- /ja/network_performance_monitoring/devices/
-description: ルーター、スイッチ、サーバー、ファイアウォールなどのネットワーク接続デバイスを可視化。
+    - /network_performance_monitoring/devices/
 further_reading:
-- link: https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/
-  tag: ナレッジセンター
-  text: SNMP モニタリングの概要
-- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
-  tag: ブログ
-  text: Datadog での SNMP モニタリング
-- link: https://www.datadoghq.com/blog/monitor-meraki/
-  tag: ブログ
-  text: Datadog で Cisco Meraki を監視する
-- link: https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/
-  tag: ブログ
-  text: Datadog でデータセンターおよびネットワークデバイスを監視
-- link: https://www.datadoghq.com/blog/network-device-monitoring/
-  tag: ブログ
-  text: ネットワークデバイスモニタリングの紹介
-- link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
-  tag: ブログ
-  text: SNMP トラップによるネットワークパフォーマンスの問題の監視と診断
-title: ネットワークデバイスモニタリング
+    - link: "https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/"
+      tag: Knowledge Center
+      text: SNMP Monitoring Overview
+    - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
+      tag: Blog
+      text: Monitor SNMP with Datadog
+    - link: "https://www.datadoghq.com/blog/monitor-meraki/"
+      tag: Blog
+      text: Monitor Cisco Meraki with Datadog
+    - link: "https://www.datadoghq.com/blog/datacenter-monitoring-dashboards/"
+      tag: Blog
+      text: Monitor datacenters and network devices with Datadog
+    - link: "https://www.datadoghq.com/blog/network-device-monitoring/"
+      tag: Blog
+      text: Introducing Network Device Monitoring
+    - link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
+      tag: Blog
+      text: Monitor and diagnose network performance issues with SNMP Traps
+algolia:
+  tags: [network device monitoring]
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">ネットワークデバイスモニタリングはこのサイトではサポートされていません。</div>
-{{< /site-region >}}
-
-## 概要
+## Overview
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/673243317/rendition/1080p/file.mp4?loc=external&signature=cadf7020caa33b97a62ecb01216b83e5d04b35a4ca3a1b8b0a22323b9e79d0c3" poster="/images/poster/ndm.png" >}}
 
 <br/>
 
-ネットワークデバイスモニタリングは、ルーター、スイッチ、ファイアウォールなどのオンプレミスおよびバーチャルのネットワークデバイスを可視化します。任意のネットワーク上のデバイスを自動的に検出し、帯域幅使用率、送信されたバイト数、デバイスのアップ/ダウンなどのメトリクスを迅速に収集します。
+Network Device Monitoring gives you visibility into your on-premises and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up/down.
 
-## はじめに
+## Getting started
 
-1. Datadog Agent をインストールします (通常、監視対象デバイスではないサーバーにインストールします)。
-2. [個々のデバイスの監視][1]または[デバイスのオートディスカバリー][2]のいずれかで、SNMP インテグレーションを構成します。
-3. [ネットワークデバイス][3]ページで、ネットワークインフラストラクチャー全体の監視を開始します。
-4. Datadog のすぐに使えるダッシュボードで収集されたメトリクスを表示します。
-    - [監視対象のデバイス一覧][4]
-    - [すべてのインターフェイスのパフォーマンス全体][5]
-5. [SNMP メトリクス][6]の積極的な監視で問題が発生する前に把握します。
+1. Install the Datadog Agent (usually on a server that is not the monitored device).
+2. Configure the SNMP integration by either [monitoring individual devices][1], or using [device autodiscovery][2].
+3. Start monitoring your entire network infrastructure on the [Network Devices][3] page.
+4. View metrics collected on Datadog's out-of-the-box dashboards:
+    - [Overview of all devices monitored][4]
+    - [Across the performance on all interfaces][5]
+5. Catch issues before they arise with proactive monitoring on any [SNMP metric][6].
+6. Optionally, configure the Agent to collect specific metrics and tags by creating [device profiles][224] directly in the Datadog app.
 
-## サポートされるデバイス
+## Supported devices
 
-### 一般的なプロファイル
+### Generic profile
 
-一般的なプロファイルはベンダープロファイルでサポートされないデバイスのメトリクスを収集します。メトリクスには、TCP、UDP、IP の他、帯域幅使用率や送受信量などのインターフェイスメトリクスが含まれます。
+The generic profile collects metrics for all devices not supported by a vendor profile. Metrics include TCP, UDP, IP, and interface metrics such as bandwidth utilization, volume sent/received, etc.
 
 ### SD-WAN
 
-Datadog は、特定のベンダー向けに SD-WAN (Software-Defined Wide Area Network) モニタリングを提供しています。SD-WAN は、SDN (Software-Defined Networking) の原則を使用して、広域ネットワーク (WAN) のパフォーマンスを管理・最適化するネットワーキング技術の一種です。主に、異なるトランスポート (MPLS、ブロードバンド、5G など) 間でリモートオフィスやデータセンターを相互接続するために使用されます。SD-WAN の利点は、これらのトランスポート間での自動負荷分散と障害検出です。
+Datadog provides SD-WAN (Software-Defined Wide Area Network) monitoring for select vendors. SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). It is mainly used to interconnect remote offices and data centers across different transports (MPLS, Broadband, 5G, and so on). SD-WAN benefits from automatic load balancing and failure detection across these transports. 
 
-Datadog は、SD-WAN ネットワークモニタリングのために以下のベンダーをサポートしています。
+Datadog supports the following vendors for SD-WAN network monitoring:
 
-- [Meraki SD-WAN][7] (公開ベータ版)
-- Cisco SD-WAN (非公開ベータ版)
+- [Meraki SD-WAN][7] 
+- [Cisco SD-WAN][223] (public beta)
 
-### ベンダープロファイル
+### Vendor profiles
 
-以下のベンダーのデバイスは、専用のプロファイルでサポートされます。特定のベンダーやデバイスタイプがサポートされているが、特定のモデルがサポートされていない場合は、
-  - 自分自身で YAML プロファイルをカスタマイズできます (詳細は [NDM トラブルシューティング FAQ ページ][8] を参照)
-  - 新しい[プロファイル][9]を作成して、新しいデバイスモデルの監視を開始できます
+The following vendor devices are supported with dedicated profiles. If a vendor or device type is supported, but the specific model isn't supported, you can:
+  - Customize your own YAML profile (see the [NDM troubleshooting FAQ page][8] for guidance).
+  - Create new [profiles][9] to start monitoring new device models.
 
-| ベンダー | コンフィギュレーションファイル |
+| Vendor | Config files |
 | ---  | ----------- |
 | 3com | [3com.yaml][10] <br> |
 | TP-Link | [tp-link.yaml][11] <br> |
@@ -89,7 +85,7 @@ Datadog は、SD-WAN ネットワークモニタリングのために以下の�
 | Brocade | [brocade.yaml][31] <br> |
 | Brother | [brother.yaml][32] <br> |
 | [Chatsworth][201] | [chatsworth_pdu.yaml][33] <br> |
-| チェックポイント | [checkpoint.yaml][34] <br>[checkpoint-firewall.yaml][35] <br> |
+| Checkpoint | [checkpoint.yaml][34] <br>[checkpoint-firewall.yaml][35] <br> |
 | Chrysalis | [chrysalis.yaml][36] <br> |
 | [Cisco][202] </br> [Cisco ACI][203] </br> [Cisco ASA][204] </br> Cisco ASR </br> Cisco Catalyst </br> Cisco ICM </br> [Cisco ISE][205] </br> Cisco ISR </br> Cisco Nexus </br> Cisco SB </br> Cisco UCS  </br> Cisco WLC | [cisco-3850.yaml][37]</br> [cisco-asa.yaml][38]  </br>[cisco-asa-5525.yaml][39]  </br>[cisco-asr.yaml][40]  </br>[cisco-catalyst-wlc.yaml][41]  </br>[cisco-catalyst.yaml][42]  </br>[cisco-csr1000v.yaml][43]  </br>[cisco_icm.yaml][44]  </br>[cisco-ise.yaml][45]  </br>[cisco-isr.yaml][46]  </br>[cisco_isr_4431.yaml][47]  </br>[cisco-nexus.yaml][48]  </br>[cisco-sb.yaml][49]  </br>[cisco-ucs.yaml][50]  </br>[_cisco-metadata.yaml][51]  </br>[_cisco-wlc.yaml][52] </br>[cisco-legacy-wlc.yaml][53]  </br>[cisco_uc_virtual_machine.yaml][54] |
 | Citrix | [citrix.yaml][55] <br> |
@@ -147,19 +143,19 @@ Datadog は、SD-WAN ネットワークモニタリングのために以下の�
 
 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/network_monitoring/devices/snmp_metrics/#monitoring-individual-devices
-[2]: /ja/network_monitoring/devices/snmp_metrics/#autodiscovery
+[1]: /network_monitoring/devices/snmp_metrics/#monitoring-individual-devices
+[2]: /network_monitoring/devices/snmp_metrics/#autodiscovery
 [3]: https://app.datadoghq.com/devices
 [4]: https://app.datadoghq.com/dash/integration/30409/datacenter-overview
 [5]: https://app.datadoghq.com/dash/integration/30417/interface-performance
-[6]: /ja/monitors/types/metric/
-[7]: /ja/integrations/meraki/
-[8]: /ja/network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
-[9]: /ja/network_monitoring/devices/profiles/
+[6]: /monitors/types/metric/
+[7]: /integrations/meraki/
+[8]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
+[9]: /network_monitoring/devices/profiles/
 [10]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/3com.yaml
 [11]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/tp-link.yaml
 [12]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/a10.yaml
@@ -167,10 +163,10 @@ Datadog は、SD-WAN ネットワークモニタリングのために以下の�
 [14]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/anue.yaml
 [15]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_apc.yaml
 [16]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/apc_ups.yaml
-[17]: https://docs.datadoghq.com/ja/integrations/snmp_arista/
+[17]: https://docs.datadoghq.com/integrations/snmp_arista/
 [18]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/arista.yaml
 [19]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_arista.yaml
-[20]: https://docs.datadoghq.com/ja/integrations/snmp_aruba/
+[20]: https://docs.datadoghq.com/integrations/snmp_aruba/
 [21]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/aruba-switch.yaml
 [22]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_aruba-base.yaml
 [23]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/aruba-access-point.yaml
@@ -229,7 +225,7 @@ Datadog は、SD-WAN ネットワークモニタリングのために以下の�
 [77]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/ixsystems-truenas.yaml
 [78]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/ibm.yaml
 [79]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/infinera-coriant-groove.yaml
-[213]:https://docs.datadoghq.com/ja/integrations/rapdev_infoblox/
+[213]:https://docs.datadoghq.com/integrations/rapdev_infoblox/
 [80]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/infoblox-ipam.yaml
 [81]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/_juniper.yaml
 [82]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/juniper-ex.yaml
@@ -271,17 +267,19 @@ Datadog は、SD-WAN ネットワークモニタリングのために以下の�
 [119]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/western-digital-mycloud-ex2-ultra.yaml
 [120]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zebra-printer.yaml
 [121]:https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/zyxel-switch.yaml
-[200]: https://docs.datadoghq.com/ja/integrations/crest_data_systems_barracuda_waf/
-[201]: https://docs.datadoghq.com/ja/integrations/snmp_chatsworth_products/
-[202]: https://docs.datadoghq.com/ja/integrations/snmp_cisco/
-[203]: https://docs.datadoghq.com/ja/integrations/cisco_aci/?tab=host
-[204]: https://docs.datadoghq.com/ja/integrations/crest_data_systems_cisco_asa/
-[205]: https://docs.datadoghq.com/ja/integrations/crest_data_systems_cisco_ise/
-[206]: https://docs.datadoghq.com/ja/integrations/snmp_dell/
-[207]: https://docs.datadoghq.com/ja/integrations/snmp_f5/
-[208]: https://docs.datadoghq.com/ja/integrations/snmp_fortinet/
-[209]: https://docs.datadoghq.com/ja/integrations/snmp_hewlett_packard_enterprise/
-[210]: https://docs.datadoghq.com/ja/integrations/snmp_juniper/
-[211]: https://docs.datadoghq.com/ja/integrations/pan_firewall/
-[212]: https://docs.datadoghq.com/ja/integrations/crest_data_systems_pfsense/
-[222]:https://docs.datadoghq.com/ja/integrations/pan_firewall/
+[200]: https://docs.datadoghq.com/integrations/crest_data_systems_barracuda_waf/
+[201]: https://docs.datadoghq.com/integrations/snmp_chatsworth_products/
+[202]: https://docs.datadoghq.com/integrations/snmp_cisco/
+[203]: https://docs.datadoghq.com/integrations/cisco_aci/?tab=host
+[204]: https://docs.datadoghq.com/integrations/crest_data_systems_cisco_asa/
+[205]: https://docs.datadoghq.com/integrations/crest_data_systems_cisco_ise/
+[206]: https://docs.datadoghq.com/integrations/snmp_dell/
+[207]: https://docs.datadoghq.com/integrations/snmp_f5/
+[208]: https://docs.datadoghq.com/integrations/snmp_fortinet/
+[209]: https://docs.datadoghq.com/integrations/snmp_hewlett_packard_enterprise/
+[210]: https://docs.datadoghq.com/integrations/snmp_juniper/
+[211]: https://docs.datadoghq.com/integrations/pan_firewall/
+[212]: https://docs.datadoghq.com/integrations/crest_data_systems_pfsense/
+[222]: https://docs.datadoghq.com/integrations/pan_firewall/
+[223]: https://docs.datadoghq.com/integrations/cisco_sdwan/
+[224]: /network_monitoring/devices/guide/device_profiles/

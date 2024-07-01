@@ -1,6 +1,6 @@
 ---
-core_product:
-- infrastructure monitoring
 title: HorizontalPodAutoscaler (HPA)
+core_product:
+  - infrastructure monitoring
 ---
-Kubernetes では、HPA は需要に応じて自動的に多くのポッドをデプロイします。
+In Kubernetes, an HPA automatically deploys more Pods to meet demand.

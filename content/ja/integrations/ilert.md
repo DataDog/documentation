@@ -1,117 +1,117 @@
 ---
-app_id: ilert
-app_uuid: 12731389-915a-4fb7-baec-3319f87dfc7f
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: ilert.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10154
-    source_type_name: iLert
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: ilert
-  sales_email: support@ilert.com
-  support_email: support@ilert.com
-categories:
-- アラート設定
-- コラボレーション
-- インシデント
-- 問題追跡
+"app_id": "ilert"
+"app_uuid": "12731389-915a-4fb7-baec-3319f87dfc7f"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": true
+    "metrics":
+      "check": []
+      "metadata_path": metadata.csv
+      "prefix": ilert.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10154"
+    "source_type_name": iLert
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": ilert
+  "sales_email": support@ilert.com
+  "support_email": support@ilert.com
+"categories":
+- alerting
+- collaboration
+- incidents
+- issue tracking
 - notifications
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/ilert/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: ilert
-integration_id: ilert
-integration_title: ilert
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: ilert
-public_title: ilert
-short_description: Datadog アラートの通知を受け取り ilert でアクションを実行する
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/ilert/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "ilert"
+"integration_id": "ilert"
+"integration_title": "ilert"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "ilert"
+"public_title": "ilert"
+"short_description": "Get notified of your Datadog alerts & take actions using ilert"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Alerting
-  - Category::Collaboration
-  - Category::Incidents
-  - Category::Issue Tracking
-  - Category::Notifications
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Datadog アラートの通知を受け取り ilert でアクションを実行する
-  media:
-  - caption: ilert アラートリスト
-    image_url: images/ilert-alert-list.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: ilert
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Alerting"
+  - "Category::Collaboration"
+  - "Category::Incidents"
+  - "Category::Issue Tracking"
+  - "Category::Notifications"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Get notified of your Datadog alerts & take actions using ilert
+  "media":
+  - "caption": ilert alert list
+    "image_url": images/ilert-alert-list.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": ilert
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-## 概要
+## Overview
 
-[ilert][1] インテグレーションは、Datadog のアラートを ilert に送信し、ilert プラットフォーム内でこれらのアラートに対するアクションをシームレスに実行します。
-ilert は、チームがインシデントサイクルの全段階をカバーできるようにするインシデント管理プラットフォームです。ilert は、信頼性が高くアクション可能なアラート、コールルーティング、柔軟なオンコールスケジュール、ステータスページ、さまざまな ChatOps 機能、インシデントコミュニケーションにおける AI 支援、事後報告書の作成を提供します。ilert を使用することで、DevOps チームはアップタイムを伸ばし、インシデントに迅速に対応することができます。
+The [ilert][1] integration sends Datadog alerts to ilert and seamlessly takes actions on these alerts within the ilert platform.
+ilert is an incident management platform that enables teams to cover all stages of the incident cycle. ilert provides reliable and actionable alerting, call routing, flexible on-call schedules, status pages, various ChatOps features, AI assistance in incident communications, and post-mortem creation. With ilert, DevOps teams increase uptime and respond to incidents faster.
 
-ilert と統合すると、以下のことができます。
+Integrate with ilert to:
 
-- Datadog でインシデントをトリガーして解決する
-- インシデントに取り組み、エスカレーションの発生時にポリシーを設定する
-- 誰がオンコールかのデイリーリマインダーを設定
+- Trigger and resolve incidents from Datadog
+- Tackle incidents and set up escalation policies as they occur
+- Set up a daily reminder of who is on-call
 
-## 計画と使用
+## Setup
 
 ### ilert
 
-#### Datadog アラートソースを作成します
+#### Create Datadog alert source
 
-1. **Alert Sources** タブに切り替えて、"Create new alert source" ボタンをクリックします
+1. Switch to the **Alert Sources** tab and click on the "Create new alert source" button
 
-2. 「**Datadog**」を検索し、**Datadog** タイルを選択して Next をクリックします。
+2. Search for "**Datadog**", select the **Datadog** tile and click on Next.
 
    ![ilert Alert Source New][2]
 
-3. 名前を割り当てます。
+3. Assign a name.
 
    ![ilert Alert Source New 2][3]
 
-4. 必要なエスカレーションポリシーを選択します。
+4. Select a desired escalation policy.
 
    ![ilert Alert Source New 3][4]
 
-5. 次のページで、**Webhook URL** が生成されます。この URL は、Datadog 内のインテグレーションセットアップに必要です。
+5. On the next page a **Webhook URL** is generated. You need this URL for the integration setup within Datadog.
 
    ![ilert Alert Source View][5]
 
-### Ruby
+### Datadog
 
-#### アラートチャネルとして ilert Webhook を追加します
+#### Add ilert Webhook as alerting channel
 
-1. Datadog Integrations ページから、[**Webhook インテグレーションをインストール**][6]します。
-2. Webhook インテグレーションタイルで、新しい Webhook を追加します。
+1. From the Datadog Integrations page, [**install the Webhooks integration**][6].
+2. On the Webhooks integration tile, add a new webhook:
 
    ![Datadog Webhook New][7]
 
-3. 名前、ilert アラートソースから先に生成された **Datadog webhook URL**、および**テンプレートペイロード**を入力します。
+3. Enter a name, the **Datadog webhook URL** generated earlier from the ilert alert source, and the **template payload**:
 
    ```json
    {
@@ -133,25 +133,25 @@ ilert と統合すると、以下のことができます。
 
    ![Datadog Webhook View][8]
 
-4. Save をクリックします。
+4. Click Save.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-ilert インテグレーションには、メトリクスは含まれません。
+The ilert integration does not include any metrics.
 
-### ヘルプ
+### Events
 
-ilert のトリガーおよび解決されたイベントは、ilert プラットフォーム ダッシュボードに表示されます。
+Your ilert triggered and resolved events appear in the ilert platform dashboard.
 
-### ヘルプ
+### Service Checks
 
-ilert インテグレーションには、サービスのチェック機能は含まれません。
+The ilert integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+Need help? Contact [Datadog Support][9].
 
 [1]: https://www.ilert.com/?utm_medium=organic&utm_source=integration&utm_campaign=datadog
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ilert/images/datadog-alert-source-new.png
@@ -161,4 +161,5 @@ ilert インテグレーションには、サービスのチェック機能は�
 [6]: https://app.datadoghq.com/integrations/webhooks
 [7]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ilert/images/datadog-webhook-new.png
 [8]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/ilert/images/datadog-webhook-view.png
-[9]: https://docs.datadoghq.com/ja/help/
+[9]: https://docs.datadoghq.com/help/
+

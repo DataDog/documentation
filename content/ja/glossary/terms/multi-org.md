@@ -1,4 +1,4 @@
 ---
-title: 複数組織
+title: multi-org
 ---
-複数組織とは、1 つの親組織のアカウントで複数の子組織を管理するためのアカウント機能です。親組織と複数の子組織にユーザーを追加することができます。
+Multi-org is an account feature to manage multiple child organizations from one parent organization account. Users can be added to the parent-org and multiple child-orgs.

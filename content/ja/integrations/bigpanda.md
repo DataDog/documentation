@@ -1,77 +1,77 @@
 ---
-aliases: []
-categories:
+"aliases": []
+"categories":
 - notifications
 - ai/ml
-dependencies: []
-description: BigPanda と Datadog アラートを相関付け、アクションにつながるインシデントを作成します。
-doc_link: https://docs.datadoghq.com/integrations/bigpanda/
-draft: false
-git_integration_title: bigpanda
-has_logo: true
-integration_id: ''
-integration_title: BigPanda
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: bigpanda
-public_title: Datadog-BigPanda インテグレーション
-short_description: Datadog アラートを BigPanda のアカウントに送信
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Correlate Datadog alerts and create actionable incidents with BigPanda."
+"doc_link": "https://docs.datadoghq.com/integrations/bigpanda/"
+"draft": false
+"git_integration_title": "bigpanda"
+"has_logo": true
+"integration_id": ""
+"integration_title": "BigPanda"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "bigpanda"
+"public_title": "Datadog-BigPanda Integration"
+"short_description": "Send Datadog alerts to your BigPanda account."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-BigPanda を Datadog に接続すると、以下のことが可能になります。
+Connect BigPanda to Datadog to help your team by:
 
-- Datadog からアラートを受信して情報の相関付けを行う。
+- Correlating information by receiving alerts from Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-BigPanda インテグレーションは、Datadog サイトの[インテグレーションタイル][1]を使用してインストールします。
+The BigPanda integration is installed using the [integration tile][1] on the Datadog site.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. BigPanda アカウントのインテグレーションページで新しいインテグレーションを選択します。
-2. _Datadog_ --> _Add Integration_, の順にクリックし、アプリキーを作成します。
-3. 作成された Webhook URL には必要なアクセストークンとアプリキーが含まれています。
-4. Datadog で BigPanda タイルを開き、_New Account_ をクリックします。
-5. お好みの **BigPanda Account Name** を追加します。これは通知ハンドルの名前になります。
-6. それぞれのフィールドに**アクセストークン**と**アプリキー**を貼り付けます。
-7. **Endpoint Type** を選択します。アカウントの地域を選択するか、カスタム URL を設定することができます。
-8. _Save_ をクリックします。
+1. In your BigPanda account, go to the Integrations page and select New Integration.
+2. Click _Datadog_ --> _Add Integration_, then create the App Key.
+3. The provided Webhook URL contains the necessary Access Token and App Key.
+4. Navigate to the BigPanda tile on Datadog and click on _New Account_
+5. Add a **BigPanda Account Name** of your choice. This will be the name of the notification handle.
+6. Paste the **Access Token** and **App Key** in the respective fields.
+7. Select an **Endpoint Type**. You can choose a region for the account or set a custom URL.
+8. Click _Save_.
 
-**注**:
-- 現在サポートされている BigPanda のアカウント数は最大 5 つです。
-- **Route All Monitor Events** (すべてのモニターイベントをルーティング) オプションを有効にして、すべてのモニターイベントを BigPanda に自動的に送信するには、[Datadog サポート][2]にお問い合わせください。デフォルトでは、**@bigpanda-<account-name>** を含むモニターイベントのみが送信されます。
+**Note**:
+- The maximum number of BigPanda accounts currently supported is 5.
+- To Enable the **Route All Monitor Events** option and automatically send all monitor events to BigPanda, contact [Datadog support][2]. By default, only monitor events containing **@bigpanda-<account-name>** are sent.
 
-### API
+### Usage
 
-BigPanda は Datadog からイベントを受信し、インシデントを作成します。インシデントにはトリガーされたモニター名やアラートの発生源となった条件などの関連する情報が含まれています。
+BigPanda creates incidents as it begins to receive events from Datadog. Incidents maintain relevant information such as the name of the monitor that was triggered and the condition causing the alert. 
+Incidents can move from Active to Resolved as monitors undergo transition changes. To stop Datadog from sending alerts to BigPanda, remove the desired account from the integration tile.
 
-インシデントはモニターの遷移が変更されるにつれて、Active から Resolved に移動させることができます。Datadog から BigPanda　へのアラート送信を中止する場合は、インテグレーションタイルから目的のアカウントを削除してください。
+## Data Collected
 
-## リアルユーザーモニタリング
+### Metrics
 
-### データセキュリティ
+The BigPanda integration does not provide any metrics.
 
-BigPanda インテグレーションは、メトリクスを提供しません。
+### Events
 
-### ヘルプ
+The BigPanda integration does not include any events.
 
-BigPanda インテグレーションには、イベントは含まれません。
+### Service Checks
 
-### ヘルプ
+The BigPanda integration does not include any service checks.
 
-BigPanda インテグレーションには、サービスのチェック機能は含まれません。
+## Troubleshooting
 
-## ヘルプ
-
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+Need help? Contact [Datadog support][2].
 
 [1]: https://app.datadoghq.com/integrations/bigpanda
-[2]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/help/
+

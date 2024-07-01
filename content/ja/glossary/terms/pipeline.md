@@ -1,9 +1,9 @@
 ---
+title: pipeline
 core_product:
-- log management
-- observability pipelines
-title: パイプライン
+  - log management
+  - observability pipelines
 ---
-1. ログ管理におけるパイプラインは、フィルタリングされたログのサブセットに適用される一連のプロセッサであり、ログの収集後、インデックス作成前に処理されます。
+1. In Log Management, a pipeline is an ordered set of processors applied to a filtered subset of logs, which happens after the collection of logs but before indexing.
 
-2. 可観測性パイプラインにおけるパイプラインは、可観測性データのソース、変換、および宛先の連続的なパスのことです。
+2. In Observability Pipelines, a pipeline is a sequential path of sources, transforms, and destinations for your observability data.

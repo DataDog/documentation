@@ -1,69 +1,98 @@
 ---
+title: Set up Tracing on a TeamCity Pipeline
 aliases:
-- /ja/continuous_integration/setup_pipelines/teamcity
+  - /continuous_integration/setup_pipelines/teamcity
 further_reading:
-- link: /continuous_integration/pipelines
-  tag: ドキュメント
-  text: パイプラインの実行結果とパフォーマンスを確認する
-- link: /continuous_integration/troubleshooting/
-  tag: ドキュメント
-  text: トラブルシューティング CI
-title: TeamCity パイプラインでトレースを設定する
+  - link: /continuous_integration/pipelines
+    tag: Documentation
+    text: Explore Pipeline Execution Results and Performance
+  - link: /continuous_integration/troubleshooting/
+    tag: Documentation
+    text: Troubleshooting CI Visibility
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では、現時点では CI Visibility は利用できません。</div>
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## 互換性
+## Overview
 
-- **対応する TeamCity のバージョン**: 2021.2 以降
+[TeamCity][1] is a continuous integration and delivery server that optimizes and automates software development processes.
 
-- **部分的なリトライ**: 部分的にリトライされたパイプライン実行を表示
+Set up tracing in TeamCity to collect data about your pipeline executions, debug performance bottlenecks, address operational issues, and optimize your development workflows.
 
-- **キュー時間**: パイプラインのジョブが処理されるまでのキュー時間を表示
+### Compatibility
 
-- **パイプラインの障害理由**: エラーメッセージからパイプラインの障害原因を特定
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][14] | Retry build triggers | View partially retried pipeline executions. |
+| [Queue time][15] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| [Pipeline failure reasons][16] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
 
-## Datadog インテグレーションの構成
+The following TeamCity versions are supported: 
 
-[TeamCity][1] と Datadog CI Visibility のインテグレーションは、TeamCity プラグインで提供されています。
-インテグレーションを有効にするには
-1. TeamCity サーバーで、**Administration** -> **Plugins** -> **Browse Plugin Repository** にアクセスして、[Datadog CI Integration プラグイン][5]をダウンロードします。
-2. まだ持っていない場合は、ビルドチェーンの最後のビルドとして [TeamCity 複合ビルド][6]を追加します。このビルドは、ビルドチェーンの現在の最後のビルドに依存し、他のビルドに依存しない必要があります。最後のビルドとして複合ビルドを持たないビルドチェーンは、プラグインによって無視されます。以下は、`Aggregating Results` が最後の複合ビルドである、期待されるビルドチェーンの一例です。
-{{< img src="ci/teamcity_build_chain.png" alt="最後に複合ビルドがある TeamCity ビルドチェーン" style="width:90%;">}}
-最終的な複合ビルドは、VCS Root がアタッチされ、[VCS Trigger][13] が設定され、バージョン管理設定が適切に行われている必要があります。
-3. TeamCity プロジェクトでは、以下の構成パラメーターが必要です。
-   * **datadog.ci.api.key**: [Datadog API キー][2]。
-   * **datadog.ci.site**: {{< region-param key="dd_site" code="true" >}}。
-   * **datadog.ci.enabled**: `true` (`false` を使用すると、特定のプロジェクトでプラグインを無効にすることができます)。
+- TeamCity >= 2021.2 or later
 
-   これらの構成パラメーターは、TeamCity サブプロジェクトまたは [TeamCity ルートプロジェクト][10]のいずれかに追加することができます。ルートプロジェクトに追加すると、そのすべてのサブプロジェクトに伝搬されます。たとえば、すべてのプロジェクトでプラグインを有効にするには、ルートプロジェクトに **datadog.ci.enabled** を `true` という値で追加します。構成パラメーターの定義に関する詳細は、[TeamCity Project Hierarchy][9] のドキュメントを参照してください。
-4. プラグインを有効にするには、**Administration** -> **Plugins** ページで **Enable uploaded plugins** をクリックします。
-または、TeamCity サーバーを再起動します。
+## Configure the Datadog integration
 
-## Datadog でパイプラインデータを視覚化
+The integration between [TeamCity][1] and Datadog CI Visibility is provided through a TeamCity plugin.
+To activate the integration:
+1. Download the [Datadog CI Integration plugin][5] on the TeamCity server by going to
+**Administration** -> **Plugins** -> **Browse Plugin Repository**.
+2. If you don't already have one, add a [TeamCity composite build][6] as the last build of the build chain. This build must have
+a dependency on the current last build of the chain and no other builds depending on it. Build chains not having a
+composite build as their last build are ignored by the plugin. Below is an example of an expected build chain,
+in which `Aggregating Results` is the last composite build:
+{{< img src="ci/teamcity_build_chain.png" alt="TeamCity build chain with composite build at the end" style="width:90%;">}}
+The final composite build must be properly configured in terms of version control settings, with
+the VCS Root attached and the [VCS Trigger][13] configured.
+3. The following configuration parameters need to be present for TeamCity projects:
+   * **datadog.ci.api.key**: Your [Datadog API Key][2].
+   * **datadog.ci.site**: {{< region-param key="dd_site" code="true" >}}.
+   * **datadog.ci.enabled**: `true` (`false`
+   can be used to disable the plugin for a specific project).
 
-パイプライン終了後、[Pipelines][3] と [Pipeline Executions][4] のページでデータを表示します。
+   These configuration parameters can be added either to TeamCity subprojects
+   or to the [TeamCity Root Project][10]. When added to the Root project, they are propagated
+   to all its subprojects. For example, to enable the plugin for all projects, add **datadog.ci.enabled** with the
+   value `true` to the Root Project. More information on defining configuration parameters
+   is available in the [TeamCity Project Hierarchy][9] documentation.
+4. To enable the plugin, click on **Enable uploaded plugins** in the **Administration** -> **Plugins** page.
+Alternatively, restart the TeamCity server.
 
-**注**: Pipelines ページには、各リポジトリの[デフォルトブランチ][12]のデータのみが表示されます。
+## Visualize pipeline data in Datadog
 
-## Git ユーザー情報の構成
+View your data on the [**CI Pipeline List**][3] and [**Executions**][4] pages after the pipelines finish.
 
-このプラグインは、[TeamCity ユーザー名スタイル][7]に基づいて、Git の作者名とメールを取得します。Datadog では、**Author Name and Email** または **Author Email** のいずれかのユーザー名スタイルを使用することを推奨しています。他のユーザー名スタイル (**UserId** または **Author Name**) のいずれかが使用されている場合、プラグインはユーザー名に `@Teamcity` を付加して、ユーザーのメールを自動的に生成します。例えば、**UserId** ユーザー名スタイルが使われていて、Git の作者のユーザー名が `john.doe` の場合、プラグインは `john.doe@Teamcity` を Git 作者のメールとして生成します。ユーザー名スタイルは [VCS Roots][11] で定義されており、VCS Root 設定で変更することができます。
+The **CI Pipeline List** page shows data for only the [default branch][12] of each repository.
 
-<div class="alert alert-danger"><strong>注:</strong> Git の作者メールアドレスは<a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility" target="_blank">請求</a>のために使用されるため、メールアドレスを提供しないユーザー名スタイル (<strong>UserId</strong> または <strong>Author Name</strong>) を使用すると、コストが発生する可能性があります。使用例についてご質問がある場合は、<a href="https://docs.datadoghq.com/help/" target="_blank">Datadog のサポートチームまでご連絡ください</a>。
+## Configure Git user information
+
+The plugin retrieves the Git author name and email based on the [TeamCity username style][7].
+Datadog recommends using either **Author Name and Email** or **Author Email** username styles, as they
+provide information about the user email. When one of the other username styles is used (**UserId** or **Author Name**),
+the plugin automatically generates an email for the user by appending `@Teamcity` to the username.
+For example, if the **UserId** username style is used and the Git author username is `john.doe`,
+the plugin generates `john.doe@Teamcity` as the Git author email. The username style is defined for [VCS Roots][11],
+and can be modified in the VCS Root settings.
+
+<div class="alert alert-danger"><strong>Note:</strong> The Git author email is used for
+<a href="https://www.datadoghq.com/pricing/?product=ci-visibility#ci-visibility" target="_blank">billing</a> purposes,
+therefore there might be cost implications when username styles not providing email
+(<strong>UserId</strong> or <strong>Author Name</strong>) are used. <a href="https://docs.datadoghq.com/help/" target="_blank">Reach out to the Datadog support team</a> if you have any questions about your use case.
 </div>
 
-## プラグインリポジトリ
+## Plugin repository
 
-Datadog CI Integration プラグインの[ソースコード][8]は、Apache 2.0 ライセンスでオープンソース化されています。
+The [source code][8] of the Datadog CI Integration plugin is open source under the Apache 2.0 license.
 
-## トラブルシューティング
+## Troubleshooting
 
-Datadog CI Integration プラグインによって生成されたすべてのログは `teamcity-server.log` ファイルに保存され、TeamCity Server から **Administration** -> **Diagnostic** -> **Server Logs** にアクセスしてアクセスすることが可能です。これらのログを確認することで、プラグインに関する問題についての追加情報を得ることができます。
+All the logs generated by the Datadog CI Integration plugin are stored inside the `teamcity-server.log` file and can be
+accessed from the TeamCity Server by going to **Administration** -> **Diagnostic** -> **Server Logs**.
+Check these logs to get additional context on any issues with the plugin.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -78,5 +107,8 @@ Datadog CI Integration プラグインによって生成されたすべてのロ
 [9]: https://www.jetbrains.com/help/teamcity/project.html#Project+Hierarchy
 [10]: https://www.jetbrains.com/help/teamcity/project.html#Root+Project
 [11]: https://www.jetbrains.com/help/teamcity/vcs-root.html
-[12]: https://docs.datadoghq.com/ja/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
+[12]: https://docs.datadoghq.com/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
 [13]: https://www.jetbrains.com/help/teamcity/configuring-vcs-triggers.html#Trigger+build+on+changes+in+snapshot+dependencies
+[14]: /glossary/#partial-retry
+[15]: /glossary/#queue-time
+[16]: /glossary/#pipeline-failure

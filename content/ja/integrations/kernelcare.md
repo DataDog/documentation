@@ -1,124 +1,125 @@
 ---
-app_id: kernelcare
-app_uuid: 7bfd2b8a-d461-4890-aeba-f1e9eab617c7
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: kernelcare.uptodate
-      metadata_path: metadata.csv
-      prefix: kernelcare.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10109
-    source_type_name: KernelCare
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: CloudLinux
-  sales_email: schvaliuk@cloudlinux.com
-  support_email: schvaliuk@cloudlinux.com
-categories:
-- OS & システム
-- セキュリティ
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: kernelcare
-integration_id: kernelcare
-integration_title: KernelCare
-integration_version: 1.0.0
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: kernelcare
-public_title: KernelCare
-short_description: KernelCare サーバーのアクティビティとステータスメトリクスを監視します。
-supported_os:
+"app_id": "kernelcare"
+"app_uuid": "7bfd2b8a-d461-4890-aeba-f1e9eab617c7"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": kernelcare.uptodate
+      "metadata_path": metadata.csv
+      "prefix": kernelcare.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10109"
+    "source_type_name": Kernelcare
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": CloudLinux
+  "sales_email": schvaliuk@cloudlinux.com
+  "support_email": schvaliuk@cloudlinux.com
+"categories":
+- os & system
+- security
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "kernelcare"
+"integration_id": "kernelcare"
+"integration_title": "Kernelcare"
+"integration_version": "1.0.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "kernelcare"
+"public_title": "Kernelcare"
+"short_description": "Monitor kernelcare server activity and status metrics."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::OS & System
-  - Category::Security
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: KernelCare サーバーのアクティビティとステータスメトリクスを監視します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: KernelCare
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::OS & System"
+  - "Category::Security"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Monitor kernelcare server activity and status metrics.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Kernelcare
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-[KernelCare][1] は、Linux カーネルの脆弱性に対して、再起動することなく自動的にセキュリティパッチを適用するライブパッチシステムです。過去 6 年、Dell やZoom を始めとする企業の 50 万台以上のサーバーで利用されています。RHEL、CentOS、Amazon Linux、Ubuntu など主要な Linux ディストリビューションで動作し、一般的な脆弱性スキャナー、クラウドモニタリングツール、パッチ管理ソリューションと相互運用します。
+[KernelCare][1] is a live patching system that automatically applies security patches to Linux kernel vulnerabilities, with no reboots. It's used on over 500,000 servers, and has been used to patch servers running for 6+ years for Dell, Zoom, and other enterprise companies. It works with all major Linux distributions, such as RHEL, CentOS, Amazon Linux, and Ubuntu, and interoperates with common vulnerability scanners, cloud monitoring tools, and patch management solutions.
 
-このインテグレーションにより、Datadog Agent を介して KernelCare メトリクスを転送できます。
+This integration allows you to forward the Kernelcare metrics through the Datadog Agent.
 
-## 計画と使用
+## Setup
 
-Kernelcare チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
+The Kernelcare check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### インフラストラクチャーリスト
+### Installation
 
-Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Kernelcare チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
+For Agent v7.21+ / v6.21+, follow the instructions below to install the Kernelcare check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
-1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
+1. Run the following command to install the Agent integration:
 
    ```shell
    datadog-agent integration install -t datadog-kernelcare==<INTEGRATION_VERSION>
    ```
 
-2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
+2. Configure your integration similar to core [integrations][4].
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. KernelCare のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `kernelcare.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[kernelcare.d/conf.yaml のサンプル][5]を参照してください。
+1. Edit the `kernelcare.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your kernelcare performance data. See the [sample kernelcare.d/conf.yaml][5] for all available configuration options.
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンド][7]を実行し、Checks セクションで `kernelcare` を探します。
+Run the [Agent's status subcommand][7] and look for `kernelcare` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "kernelcare" >}}
 
 
-### ヘルプ
+### Events
 
-Kernelcare インテグレーションには、イベントは含まれません。
+The Kernelcare integration does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "kernelcare" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
 
 [1]: https://www.kernelcare.com
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
-[4]: https://docs.datadoghq.com/ja/getting_started/integrations/
+[3]: https://docs.datadoghq.com/agent/guide/use-community-integrations/
+[4]: https://docs.datadoghq.com/getting_started/integrations/
 [5]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/datadog_checks/kernelcare/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [8]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/metadata.csv
 [9]: https://github.com/DataDog/integrations-extras/blob/master/kernelcare/assets/service_checks.json
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/help/
+

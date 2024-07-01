@@ -1,20 +1,21 @@
 ---
-algolia:
-  tags:
-  - アンインストール
+title: Uninstalling the Agent
 aliases:
-- /ja/agent/faq/how-do-i-uninstall-the-agent/
+  - /agent/faq/how-do-i-uninstall-the-agent/
 further_reading:
 - link: /agent/basic_agent_usage/
-  tag: ドキュメント
-  text: Alma Linux
-title: Agent のアンインストール
+  tag: Documentation
+  text: Basic Agent Usage
+algolia:
+  tags: [uninstall]
 ---
 
-システム上にある Agent のアンインストールについては、ご利用のオペレーティングシステム、プラットフォーム、または構成ツールに対応した[基本的な Agent の利用方法][1] ページをご覧ください。
+For information on uninstalling the Agent on your system, consult the [Basic Agent Usage][1] page for your operating system, platform, or configuration tool.
 
-## その他の参考資料
+{{< uninstall-agent >}}
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/basic_agent_usage
+[1]: /agent/basic_agent_usage

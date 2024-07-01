@@ -1,7 +1,7 @@
 ---
+title: private location
 core_product:
-- synthetic monitoring
-title: プライベートロケーション
+  - synthetic monitoring
 ---
-Datadog Synthetic Monitoring では、プライベートロケーションは、ユーザーがプライベートネットワーク内にインストールできる Docker コンテナです。これにより、ユーザーは、公衆インターネットからアクセスできない内部向けアプリケーションまたはプライベート URL を監視することができます。
-詳細は、<a href="/synthetics/private_locations">ドキュメントを参照してください</a>。
+In Datadog Synthetic Monitoring, a private location is a Docker container that a user can install inside a private network. This enables users to monitor internal-facing applications or private URLs that are not accessible from the public internet.
+For more information, <a href="/synthetics/private_locations">see the documentation</a>.

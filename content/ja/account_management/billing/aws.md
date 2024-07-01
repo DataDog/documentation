@@ -1,65 +1,65 @@
 ---
+title: AWS Integration Billing
 aliases:
-- /ja/integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/
-title: AWS インテグレーションの請求
+- /integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/
 ---
 
-## 概要
+## Overview
 
-Datadog では、Datadog Agent を実行している AWS ホスト、および Datadog-AWS インテグレーションによって使用されるすべての EC2 インスタンスに対して課金が発生します。AWS インテグレーションによって使用される EC2 インスタンスで Agent を実行している場合に、**二重に課金されることはありません**。
+Datadog bills for AWS hosts running the Datadog Agent and all EC2 instances picked up by the Datadog-AWS integration. **You are not billed twice** if you are running the Agent on an EC2 instance picked up by the AWS integration.
 
-**重要**: Datadog は EC2 インスタンスのメタデータを使用して、Agent を実行しているホストと AWS インテグレーションによってクロールされているホストの両方に対して二重請求が行われないようにします。EC2 インスタンスが [Instance Metadata Service Version 2 (IMDSv2)][1] の使用を必要とするように構成されている場合、二重請求を避けるために、[Agent 構成][2]でパラメーター `ec2_prefer_imdsv2` を `true` に設定しなければなりません。
+**IMPORTANT**: Datadog uses EC2 instance metadata to ensure you aren't billed twice for hosts both running the agent and being crawled by the AWS integration. If your EC2 instances are configured to require the use of [Instance Metadata Service Version 2 (IMDSv2)][1], then you must set the parameter `ec2_prefer_imdsv2` to `true` in your [Agent configuration][2] to avoid double-billing.
 
-Fargate と Lambda のインテグレーションタイル、およびカスタムメトリクスを設定すると、Datadog の請求に影響します。
+When you set up the Fargate and Lambda integration tiles, and any custom metrics, it impacts your Datadog bill.
 
-ELB、RDS、DynamoDB などの他の AWS リソースは、インフラストラクチャーの月額請求に含まれず、構成除外も適用されません。
+Other AWS resources such as ELB, RDS, and DynamoDB are not part of monthly infrastructure billing, and configuration exclusions do not apply.
 
-## AWS リソースの除外
+## AWS resource exclusion
 
-一部のサービスに対して収集する AWS メトリクスを、特定のリソースに限定することができます。[Datadog-AWS インテグレーションページ][3]で、AWS アカウントを選択し、**Metric Collection** タブをクリックします。次に、**Limit Metric Collection to Specific Resources** で、EC2、Lambda、ELB、Application ELB、Network ELB、RDS、SQS、CloudWatch カスタムメトリクスのうち 1 つまたは複数に対するメトリクスを除外することが可能です。
+You can limit the AWS metrics collected for some services to specific resources. On the [Datadog-AWS integration page][3], select the AWS account and click on the **Metric Collection** tab. Under **Limit Metric Collection to Specific Resources** you can then exclude metrics for one or more of EC2, Lambda, ELB, Application ELB, Network ELB, RDS, SQS, and CloudWatch custom metrics.
 
-{{< img src="account_management/billing/aws-resource-exclusion.png" alt="Datadog AWS インテグレーションページ内の AWS アカウントのメトリクス収集タブ。AWS サービスを選択するドロップダウンメニューと key:value 形式でタグを追加するフィールドで、特定のリソースにメトリクス収集を制限するオプションが表示されている" >}}
+{{< img src="account_management/billing/aws-resource-exclusion.png" alt="The metric collection tab of an AWS account within the Datadog AWS integration page showing the option to limit metric collection to specific resources with a dropdown menu to select AWS service and a field to add tags in key:value format" >}}
 
-また、[API][4] を利用して AWS のメトリクスを制限することも可能です。
+You can also limit AWS metrics using the [API][4].
 
-**注**: Datadog の請求対象となるのは、EC2 (ホスト)、Lambda (アクティブ関数)、CloudWatch Custom Metrics (カスタムメトリクス) のみです。フィルターできる他のサービスのためにインテグレーションされたメトリクスは、Datadog の課金対象にはなりません。
+**Note**: Only EC2 (hosts), Lambda (active functions), and CloudWatch Custom Metrics (custom metrics) are billable by Datadog. Metrics integrated for the other services you can filter do not incur Datadog charges.
 
 ### EC2
 
-EC2 メトリクスリソースの除外設定は、EC2 インスタンスとアタッチされた EBS ボリュームの両方に適用されます。インテグレーションページで既存の AWS アカウントに制限を追加した場合は、それまでに検出されたインスタンスが[インフラストラクチャーリスト][5]に最長 2 時間残る可能性があります。移行期間中、EC2 インスタンスのステータスは `???` と表示されます。これは課金の対象外です。
+EC2 metrics resource exclusion settings apply to both EC2 instances and any attached EBS volumes. When adding limits to existing AWS accounts within the integration page, the previously discovered instances could stay in the [Infrastructure List][5] for up to two hours. During the transition period, EC2 instances display a status of `???`. This does not count towards your billing.
 
-Agent が稼働しているホストはまだ表示され、請求に含まれます。limit オプションを使用して、AWS からの `aws.ec2.*` メトリクス収集を制限し、AWS リソース EC2 インスタンスホストを制限します。
+Hosts with a running Agent still display and are included in billing. Use the limit option to restrict `aws.ec2.*` metrics collection from AWS and restrict the AWS resource EC2 instance hosts.
 
-#### 例
+#### Examples
 
-次のフィルターは、`datadog:no` タグを含む EC2 インスタンスをすべて除外します。
+The following filter excludes all EC2 instances that contain the tag `datadog:no`:
 
 ```
 !datadog:no
 ```
 
-次のフィルターは、`datadog:monitored` タグ、または `env:production` タグ、または `c1.*` 値を持つ `instance-type` タグを含み、`region:us-east-1` タグを含まない EC2 インスタンスからのみメトリクスを収集します。
+The following filter _only_ collects metrics from EC2 instances that contain the tag `datadog:monitored` **or** the tag `env:production` **or** an `instance-type` tag with a `c1.*` value **and not** a `region:us-east-1` tag:
 
 ```
 datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
 ```
-**注**: Datadog では、大文字は小文字に変換され、スペースはアンダースコアに置換されます。たとえば、`Team:Frontend App` タグを含む EC2 インスタンスからメトリクスを収集する場合、Datadog で適用されるタグは `team:frontend_app` になります。
+**Note**: In Datadog, uppercase letters are changed to lowercase letters and spaces are replaced with underscores. For example, to collect metrics from EC2 instances with the tag `Team:Frontend App`, in Datadog, the tag applied should be `team:frontend_app`.
 
-### Amazon Data Firehose を使用した CloudWatch メトリクスストリーム
+### CloudWatch Metric Streams with Amazon Data Firehose
 
-デフォルトの API ポーリング方法の代わりに、オプションで [Amazon Data Firehose を利用して CloudWatch メトリクスを Datadog に送信][8]することができます。組織が Kinesis Data Firehose を使用した CloudWatch メトリクスストリームの方法を利用している場合、Datadog AWS インテグレーションページで定義されている AWS リソースの除外ルールは適用されません。各 AWS アカウントについて、AWS コンソール内の CloudWatch メトリクスストリーム設定で、メトリクスのネームスペースや特定のメトリクス名の含除ルールを全て管理する必要があります。
+You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Amazon Data Firehose][8] instead of using the default API polling method. If your organization uses the CloudWatch Metric Streams with Kinesis method, AWS resource exclusion rules defined in the Datadog AWS integration page do not apply. You must manage all rules for including and excluding metric namespaces or specific metric names in the CloudWatch Metric Streams configuration for each of your AWS accounts within the AWS console.
 
-## ヘルプ
+## Troubleshooting
 
-技術的な質問については、[Datadog のサポートチーム][6]にお問い合わせください。
+For technical questions, contact [Datadog support][6].
 
-請求に関するご質問は、[カスタマーサクセス][7]マネージャーにお問い合わせください。
+For billing questions, contact your [Customer Success][7] Manager.
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 [2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [3]: https://app.datadoghq.com/integrations/amazon-web-services
-[4]: /ja/api/latest/aws-integration/#set-an-aws-tag-filter
-[5]: /ja/infrastructure/
-[6]: /ja/help/
+[4]: /api/latest/aws-integration/#set-an-aws-tag-filter
+[5]: /infrastructure/
+[6]: /help/
 [7]: mailto:success@datadoghq.com
-[8]: /ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#streaming-vs-polling
+[8]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#streaming-vs-polling

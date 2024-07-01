@@ -1,63 +1,63 @@
 ---
+title: Correlate Logs with Metrics
+kind: guide
 further_reading:
 - link: /logs/explorer/
   tag: Documentation
-  text: ログの調査方法
+  text: See how to explore your logs
 - link: /logs/logging_without_limits/
   tag: Documentation
   text: Logging without Limits*
 - link: /logs/live_tail/
   tag: Documentation
-  text: Datadog Live Tail 機能
-kind: ガイド
-title: ログとメトリクスの相関
+  text: Datadog live tail functionality
 ---
 
-## 概要
+## Overview
 
-Datadog アプリ内には、ログをメトリクスと相関させるいくつかの方法があります。[ログエクスプローラー][1]、[ダッシュボード][2]、[メトリクスエクスプローラー][3]などのビューには、詳細なパネルとインスタントビューの切り替えが用意されており、問題のコンテキストをすばやく取得して、サービス全体にマッピングするのに役立ちます。
+Within the Datadog app there are several ways to correlate logs with metrics. Views like [Log Explorer][1], [Dashboards][2], and [Metrics Explorer][3] offer detailed panels and instant view switching to help you quickly gain context of an issue and map it throughout your service.
 
-このガイドでは、これらのビュー全体でログとメトリクスを相関させる方法を示します。
+This guide shows you how to correlate logs and metrics throughout these views.
 
-## ログエクスプローラー
+## Log Explorer
 
-[ログエクスプローラー][4]でログとメトリクスを相関させるには
+To correlate logs and metrics in the [Log Explorer][4]:
 
-1. **Content** 列の下にあるログをクリックします。これにより、ログに関する詳細情報を含むパネルが展開されます。
-2. パネル内の **Metrics** タブをクリックします。
+1. Click on any log under the **Content** column. This expands a panel with detailed information about the log.
+2. Click on the **Metrics** tab within the panel.
 
-{{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.jpg" alt="ログエクスプローラーメトリクス" >}}
+{{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.jpg" alt="Log Explorer Metrics" >}}
 
-## ダッシュボード
+## Dashboards
 
-[ダッシュボード][5]でログとメトリクスを相関させるには
+To correlate logs and metrics in a [Dashboard][5]:
 
-1. ダッシュボードに移動します。
-2. ウィジェット内の任意のデータポイントをクリックして、[グラフメニュー][6]にデータを入力します。
-3. ウィジェットに**メトリクスと相関させたいログイベント**が含まれている場合
-    1. **View related logs** を選択して、関連ログに関する詳細情報をパネルに入力します。
-    2. 特定のログイベントを選択します。
-    3. **Metrics** タブをクリックします。
-4. ウィジェットに**ログと相関させたいメトリクス**が含まれている場合
-    1. **View related logs** を選択します。
+1. Navigate to your dashboard.
+2. Click on any data point within any widget to populate the [graph menu][6].
+3. If your widget contains **logs events that you wish to correlate with metrics**:
+    1. Select **View related logs** to populate a panel with detailed information about related logs.
+    2. Select a specific log event.
+    3. Click on the **Metrics** tab.
+4. If your widget contains **metrics that you wish to correlate with logs**:
+    1. Select **View related logs**.
 
-## メトリクスエクスプローラー
+## Metrics Explorer
 
-[ログエクスプローラー][7]ページでログとメトリクスを相関させるには
+To correlate logs and metrics on the [Metrics Explorer][7] page:
 
-1. グラフ化するメトリクスを選択します。
-2. グラフ内の任意のポイントをクリックして、グラフメニューに入力します。
-3. **View related logs** を選択します。
+1. Select a metric to graph.
+2. Click on any point within the graph to populate the graph menu.
+3. Select **View related logs**.
 
-## その他の参考資料
+## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 <br>
-\*Logging without Limits は Datadog, Inc. の商標です。
+\*Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: /ja/logs/explorer/
-[2]: /ja/dashboards/
-[3]: /ja/metrics/explorer/
+[1]: /logs/explorer/
+[2]: /dashboards/
+[3]: /metrics/explorer/
 [4]: https://app.datadoghq.com/logs
 [5]: https://app.datadoghq.com/dashboard/lists
-[6]: /ja/dashboards/#graph-menu
+[6]: /dashboards/widgets/#graph-menu
 [7]: https://app.datadoghq.com/metric/explorer

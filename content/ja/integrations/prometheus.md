@@ -1,124 +1,127 @@
 ---
-app_id: prometheus
-app_uuid: b978d452-7008-49d0-bb87-62d8639b2205
-assets:
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Prometheus
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- metrics
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: prometheus
-integration_id: prometheus
-integration_title: Prometheus (レガシー)
-integration_version: 3.5.1
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: prometheus
-public_title: Prometheus (レガシー)
-short_description: Prometheus は時系列メトリクスデータ向けのオープンソース監視システムです
-supported_os:
-- linux
-- windows
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Category::Metrics
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Prometheus は時系列メトリクスデータ向けのオープンソース監視システムです
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Prometheus (レガシー)
+"app_id": "prometheus"
+"app_uuid": "b978d452-7008-49d0-bb87-62d8639b2205"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "10013"
+    "source_type_name": "Prometheus"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "metrics"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "prometheus"
+"integration_id": "prometheus"
+"integration_title": "Prometheus (legacy)"
+"integration_version": "3.6.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "prometheus"
+"public_title": "Prometheus (legacy)"
+"short_description": "Prometheus is an open source monitoring system for timeseries metric data"
+"supported_os":
+- "linux"
+- "windows"
+- "macos"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Category::Metrics"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": "Prometheus is an open source monitoring system for timeseries metric data"
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Prometheus (legacy)"
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Prometheus に接続して:
-- Prometheus エンドポイントからカスタムメトリクスを抽出します
-- Datadog イベントストリームで Prometheus Alertmanager アラートを確認します
+Connect to Prometheus to:
+- Extract custom metrics from Prometheus endpoints
+- See Prometheus Alertmanager alerts in your Datadog event stream
 
-**注**: [OpenMetrics チェック][1]の方が効率性が高く Prometheus のテキスト形式を完全にサポートしているので、OpenMetrics チェックの使用をお勧めします。Prometheus チェックは、メトリクスのエンドポイントがテキスト形式をサポートしていない場合にのみ使用してください。
+**Note**: Datadog recommends using the [OpenMetrics check][1] since it is more efficient and fully supports Prometheus text format. Use the Prometheus check only when the metrics endpoint does not support a text format.
 
 <div class="alert alert-warning">
-このインテグレーションによって取得されたメトリクスはすべて、<a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">カスタムメトリクス</a>と見なされます。
+All the metrics retrieved by this integration are considered <a href="https://docs.datadoghq.com/developers/metrics/custom_metrics">custom metrics</a>.
 </div>
 
-**Prometheus チェックを構成する方法については、[Prometheus メトリクスの収集のガイド][2]を参照してください。**
+**See the [Prometheus metrics collection Getting Started][2] to learn how to configure a Prometheus Check.**
 
-## セットアップ
+## Setup
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][3]のガイドを参照してこの手順を行ってください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][3] for guidance on applying these instructions.
 
-### インストール
+### Installation
 
-Prometheus チェックは、[Datadog Agent][4] のバージョン 6.1.0 以降にパッケージ化されています。
+The Prometheus check is packaged with the [Datadog Agent][4] starting version 6.1.0.
 
-### コンフィギュレーション
+### Configuration
 
-`prometheus.d/conf.yaml` ファイルを編集して、OpenMetrics/Prometheus エンドポイントを公開するアプリケーションからメトリクスを取得します。
+Edit the `prometheus.d/conf.yaml` file to retrieve metrics from applications that expose OpenMetrics / Prometheus end points.
 
-各インスタンスは、少なくとも以下で構成されます。
+Each instance is at least composed of:
 
-| 設定          | 説明                                                                                                         |
+| Setting          | Description                                                                                                         |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `prometheus_url` | メトリクスルートをポイントする URL (**注**: 一意である必要があります)                                                    |
-| `namespace`      | このネームスペースがすべてのメトリクスの前に付加されます (メトリクス名の競合を避けるため)                                        |
-| `metrics`        | カスタムメトリクスとして取得するメトリクスのリスト。`- <METRIC_NAME>` または `- <METRIC_NAME>: <RENAME_METRIC>` の形式 |
+| `prometheus_url` | A URL that points to the metric route (**Note:** must be unique)                                                    |
+| `namespace`      | This namespace is prepended to all metrics (to avoid metrics name collision)                                        |
+| `metrics`        | A list of metrics to retrieve as custom metrics in the form `- <METRIC_NAME>` or `- <METRIC_NAME>: <RENAME_METRIC>` |
 
-メトリクスをリストする際は、`- <METRIC_NAME>*` のようにワイルドカード `*` を使用して、一致するすべてのメトリクスを取得できます。**注:** 大量のカスタムメトリクスが送信される可能性があるため、ワイルドカードの使用には注意が必要です。
+When listing metrics, it's possible to use the wildcard `*` like this `- <METRIC_NAME>*` to retrieve all matching metrics. **Note:** use wildcards with caution as it can potentially send a lot of custom metrics.
 
-より高度な設定 (ssl、labels joining、custom tags など) が[サンプル prometheus.d/conf.yaml][5] に記載されています
+More advanced settings (ssl, labels joining, custom tags,...) are documented in the [sample prometheus.d/conf.yaml][5]
 
-このインテグレーションは性格上、極めて多くのカスタムメトリクスが Datadog に送信される可能性があります。ユーザーは、構成の誤りや入力の変化があった場合に送信されるメトリクスの最大数を制御できます。このチェックには 2000 メトリクスというデフォルトの制限があります。必要な場合は、`prometheus.d/conf.yaml` ファイルで `max_returned_metrics` オプションを設定することで、この制限を増やすことができます。
+Due to the nature of this integration, it's possible to submit a high number of custom metrics to Datadog. Users can control the maximum number of metrics sent for configuration errors or input changes. The check has a default limit of 2000 metrics. If needed, this limit can be increased by setting the option `max_returned_metrics` in the `prometheus.d/conf.yaml` file.
 
-`send_monotonic_counter: True` の場合、Agent は、それらの値の差分を送信し、アプリ内タイプはカウントに設定されます (これはデフォルトの動作です)。`send_monotonic_counter: False` の場合、Agent は、単調増加する値をそのまま送信し、アプリ内タイプはゲージに設定されます。
+If `send_monotonic_counter: True`, the Agent sends the deltas of the values in question, and the in-app type is set to count (this is the default behavior). If `send_monotonic_counter: False`, the Agent sends the raw, monotonically increasing value, and the in-app type is set to gauge.
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `prometheus` を探します。
+[Run the Agent's `status` subcommand][6] and look for `prometheus` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 
-Prometheus チェックによって収集されたメトリクスはすべて、カスタムメトリクスとして Datadog に転送されます。
+All metrics collected by the prometheus check are forwarded to Datadog as custom metrics.
 
-注: 指定された `<HISTOGRAM_METRIC_NAME>` Prometheus ヒストグラムのバケットデータは、バケットの名前を含む `upper_bound` タグを付けて Datadog 内の `<HISTOGRAM_METRIC_NAME>.count` メトリクスに格納されます。`+Inf` バケットにアクセスするには、`upper_bound:none` を使用します。
+Note: Bucket data for a given `<HISTOGRAM_METRIC_NAME>` Prometheus histogram metric are stored in the `<HISTOGRAM_METRIC_NAME>.count` metric within Datadog with the tags `upper_bound` including the name of the buckets. To access the `+Inf` bucket, use `upper_bound:none`.
 
-### イベント
+### Events
 
-Prometheus Alertmanager アラートは、Webhook コンフィギュレーションに従って、Datadog イベントストリームに自動的に送信されます。
+Prometheus Alertmanager alerts are automatically sent to your Datadog event stream following the webhook configuration.
 
-### サービスのチェック
+### Service Checks
 
-Prometheus チェックには、サービスのチェック機能は含まれません。
+The Prometheus check does not include any service checks.
 
 ## Prometheus Alertmanager
-Prometheus Alertmanager のアラートをイベントストリームで送信します。ネイティブでは、Alertmanager は構成された Webhook にすべてのアラートを同時に送信します。Datadog でアラートを見るには、Alertmanager のインスタンスがアラートを 1 つずつ送信するように構成する必要があります。`route` の下に group-by パラメーターを追加して、アラートルールの実際の名前でアラートをグループ化させることができます。
+Send Prometheus Alertmanager alerts in the event stream. Natively, Alertmanager sends all alerts simultaneously to the configured webhook. To see alerts in Datadog, you must configure your instance of Alertmanager to send alerts one at a time. You can add a group-by parameter under `route` to have alerts grouped by the actual name of the alert rule.
 
-### セットアップ
-1. Alertmanager コンフィギュレーションファイル `alertmanager.yml` を編集して、以下を含めます。
+### Setup
+1. Edit the Alertmanager configuration file, `alertmanager.yml`, to include the following:
 ```
 receivers:
 - name: datadog
@@ -133,30 +136,31 @@ route:
   repeat_interval: 3h
 ```
 
-**注**: このエンドポイントは、一度にペイロード内の 1 つのイベントのみを受け入れます。
+**Note**: This endpoint accepts only one event in the payload at a time.
 
-2. Prometheus および Alertmanager サービスを再起動します。
+2. Restart the Prometheus and Alertmanager services.
 ```
 sudo systemctl restart prometheus.service alertmanager.service
 ```
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+Need help? Contact [Datadog support][7].
 
-## その他の参考資料
+## Further Reading
 
-- [Datadog Agent 6 用の Prometheus サポートの導入][8]
-- [Prometheus チェックの構成][9]
-- [カスタム Prometheus チェックの書き方][10]
+- [Introducing Prometheus support for Datadog Agent 6][8]
+- [Configuring a Prometheus Check][9]
+- [Writing a custom Prometheus Check][10]
 
-[1]: https://docs.datadoghq.com/ja/integrations/openmetrics/
-[2]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/
-[3]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus?tab=docker#configuration
+[1]: https://docs.datadoghq.com/integrations/openmetrics/
+[2]: https://docs.datadoghq.com/getting_started/integrations/prometheus/
+[3]: https://docs.datadoghq.com/getting_started/integrations/prometheus?tab=docker#configuration
 [4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://github.com/DataDog/integrations-core/blob/master/prometheus/datadog_checks/prometheus/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/help/
 [8]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
-[9]: https://docs.datadoghq.com/ja/agent/prometheus/
-[10]: https://docs.datadoghq.com/ja/developers/prometheus/
+[9]: https://docs.datadoghq.com/agent/prometheus/
+[10]: https://docs.datadoghq.com/developers/prometheus/
+

@@ -1,31 +1,32 @@
 ---
+title: Monitor your AWS billing details
+kind: guide
 aliases:
-- /ja/integrations/faq/how-do-i-monitor-my-aws-billing-details
-kind: ガイド
-title: AWS の請求の詳細を監視する
+  - /integrations/faq/how-do-i-monitor-my-aws-billing-details
+
 ---
 
-Datadog-AWS Billing インテグレーションを利用することで、AWS から請求メトリクスを収集することができます。詳しくは Datadog の [Amazon Billing][5] インテグレーションをご覧ください。
+Billing metrics can be collected from AWS with the Datadog-AWS Billing integration. See the [Amazon Billing][5] integration in Datadog for more information. 
 
-請求メトリクスの収集を開始するには
+To begin collecting billing metrics:
 
-1. [AWS 構成ページ][1]の `Metric Collection` タブで `Billing` が有効になっていることを確認し、Datadog の AWS ポリシーに `budgets:ViewBudget` という権限が含まれていることを確認します。
+1. Ensure that `Billing` is enabled under the `Metric Collection` tab on the [AWS configuration page][1], and include the permission `budgets:ViewBudget` in your Datadog AWS policy.
 
-2. AWS コンソール内で[請求メトリクスを有効にします][2]。
+2. [Enable billing][2] metrics within the AWS console.
 
-Datadog-AWS Billing インテグレーションを使用すると、以下のメトリクスを利用できます。
+The following metrics are available using the Datadog-AWS Billing integration:
 
-| 名前                            | 単位   | 説明                                                                                                                                        |
+| Name                            | Units   | Description                                                                                                                                        |
 | -----                           | ------  | ------                                                                                                                                             |
-| `aws.billing.actual_spend`      | ドル | 予算期間中の実際の支出コスト                                                                                                   |
-| `aws.billing.budget_limit`      | ドル | 予算期間中の支出限度額                                                                                                          |
-| `aws.billing.estimated_charges` | ドル | AWS の使用量に応じた見積もり料金です。これは、1 つのサービスの見積もり料金、またはすべてのサービスの見積もり料金のロールアップのいずれかにすることができます。 |
-| `aws.billing.forecasted_spend`  | ドル | 予算期間中の予測の支出コスト                                                                                               |
+| `aws.billing.actual_spend`      | dollars | The actual spending costs for your budget period                                                                                                   |
+| `aws.billing.budget_limit`      | dollars | The spending limit for your budget period                                                                                                          |
+| `aws.billing.estimated_charges` | dollars | The estimated charges for your AWS usage. This can either be estimated charges for one service or a roll-up of estimated charges for all services. |
+| `aws.billing.forecasted_spend`  | dollars | The forecasted spending costs for your budget period                                                                                               |
 
-AWS に加え、多くのクラウドサービスにまたがるより強固なコスト監視のために、Datadog は [CloudHealth][3] とサードパーティーのインテグレーションをサポートしています。[CloudHealth][3] がどのように Datadog とインテグレーションし、ホストされたインフラストラクチャー全体のコストを可視化するかについては、[このブログ記事][4]でより詳しく解説しています。
+For more robust cost monitoring across a number of cloud services in addition to AWS, Datadog supports 3rd-party integration with [CloudHealth][3]. [This blog post][4] has a more in-depth look at how [CloudHealth][3] integrates with Datadog to enable visibility of cost across your hosted infrastructure.
 
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
 [2]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html#turning_on_billing_metrics
-[3]: /ja/integrations/cloudhealth/
+[3]: /integrations/cloudhealth/
 [4]: https://www.datadoghq.com/blog/monitor-cloudhealth-assets-datadog
 [5]: https://app.datadoghq.com/integrations/amazon-billing

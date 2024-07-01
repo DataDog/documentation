@@ -1,109 +1,121 @@
 ---
+title: SLO Checklist
+kind: guide
 aliases:
-- /ja/monitors/guide/slo-checklist/
+- /monitors/guide/slo-checklist/
 further_reading:
-- link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
-  tag: ブログ
-  text: Datadog で SLO のステータスとエラーバジェットを追跡する
-- link: https://learn.datadoghq.com/courses/intro-to-slo
-  tag: ラーニングセンター
-  text: サービスレベル目標入門
-kind: ガイド
-title: SLO チェックリスト
+- link: "https://www.datadoghq.com/blog/slo-monitoring-tracking/"
+  tag: Blog
+  text: Track the status and error budget of your SLOs with Datadog
+- link: "https://learn.datadoghq.com/courses/intro-to-slo"
+  tag: Learning Center
+  text: Introduction to Service Level Objectives
+- link: /service_management/service_level_objectives/guide/slo_types_comparison/
+  tag: Documentation
+  text: Comparison of Datadog SLO Types
 ---
 
-<div class="alert alert-info">
-このページの PDF 版は<a href="https://www.datadoghq.com/pdf/SLOChecklist_200619.pdf">こちら</a>よりご覧いただけます。
-</div>
 
-## はじめに
+## Getting started
 
-1. SLO ページを開きます: [Monitors › Service Level Objectives][1]
+1. Navigate to the [SLO Manage page][1].
 
-2. ユーザーの目線から考えてみてください:
+2. Start thinking from the perspective of your user:
 
-    * ユーザーはアプリケーションをどのように操作していますか？
-    * アプリケーションを通じたユーザージャーニーはどのようなものですか？
-    * それらのジャーニーには、インフラストラクチャーのどの部分が関わっていますか？
-    * システムから何を期待していますか？何を達成したいと思っていますか？
+    * How are your users interacting with your application?
+    * What is their journey through the application?
+    * Which parts of your infrastructure do these journeys interact with?
+    * What are they expecting from your systems and what are they hoping to accomplish?
 
-## 関連する SLI の選択
+## Select the relevant SLI
 
-### ステップ 1
+### STEP 1
 
-#### 応答 / リクエスト
+#### Response/Request
 
-|              |                                                                |
+|  Type of SLI |  Description                                                   |
 | ------------ | -------------------------------------------------------------- |
-| 可用性 | サーバーはリクエストに正常に応答しましたか？          |
-| レイテンシー      | サーバーがリクエストに応答するまでにどれぐらい時間がかかりましたか？ |
-| スループット   | いくつのリクエストを処理できますか？                              |
+| Availability | Could the server respond to the request successfully?          |
+| Latency      | How long did it take for the server to respond to the request? |
+| Throughput   | How many requests can be handled?                              |
 
 #### Storage
 
-|              |                                              |
+|  Type of SLI |  Description                                 |
 | ------------ | -------------------------------------------- |
-| 可用性 | データにオンデマンドでアクセスできますか？          |
-| レイテンシー      | データの読み書きにどれぐらい時間がかかりますか？ |
-| 耐性   | データは必要なときに取り出せる状態ですか？   |
+| Availability | Can the data be accessed on demand?          |
+| Latency      | How long does it take to read or write data? |
+| Durability   | Is the data still there when it is needed?   |
 
-#### パイプライン
+#### Pipeline
 
-|             |                                                                    |
+| Type of SLI |   Description                                                      |
 | ----------- | ------------------------------------------------------------------ |
-| 正確性 | 正しいデータが返されましたか？                                       |
-| 鮮度   | 新しいデータまたは処理された結果が表示されるまでにどれぐらい時間がかかりますか？ |
+| Correctness | Was the right data returned?                                       |
+| Freshness   | How long does it take for new data or processed results to appear? |
 
-### ステップ 2
+### STEP 2
 
-**タイムベースまたは計数ベース SLI のどちらが必要ですか？**
+**Do you require an SLI calculation that is time-based or count-based?**
 
-**タイムベースの SLI は Datadog モニターを使用します**:
+The following SLO types are available in Datadog: 
 
-_例: すべてのユーザーリクエストのタイムレイテンシーの 99% は、いずれの 30 日の範囲内でも250 ms 未満で
-ある必要があります。_
+**Metric-based SLOs**
 
-1. 単一のモニター、
-2. 複数のモニター (最大 20) 、または
-3. 単一のマルチアラートモニターを選択し、特定のモニターグループ (最大20) で
-   SLO 計算に含めるものを選びます
+_Example: 99% of requests should complete in less than 250 ms over a 30-day window._
 
-新しいモニターの作成が必要な場合は [Monitor create][2] ページを開きます。
+- Count-based SLI calculation
+- SLI is calculated as the sum of good events divided by the sum of total events
 
-**計数ベースの SLI は Datadog アカウント内のメトリクスを使用します。モニターは必要ありません**:
+**Monitor-based SLOs**
 
-_例: リクエストの 99% は、30 日間で 250 ms 未満で完了する必要があります。_
+_Example: the latency of all user requests should be less than 250 ms 99% of the time in any
+30-day window._
 
-## SLI の実装
+- Time-based SLI calculation
+- SLI calculated based on the underlying Monitor’s uptime
+- You can select a single monitor, multiple monitors (up to 20), or a single multi alert monitor with groups
 
-1. [カスタムメトリクス][3] (例: カウンター)
-2. [インテグレーションメトリクス][4] (例: ロードバランサー、HTTP リクエスト)
-3. [Datadog APM][5] (例: エラー、サービスのレイテンシー、リソース)
-4. [Datadog ログ][6] (例: 特定のイベントの発生数に応じてログから生成されたメトリクス)
+If you need to create a new monitor go to the [Monitor create][2] page.
 
-## ターゲット目標および時間枠の設定
+**Time Slice SLOs**
 
-1. ターゲットを選択します: `99%`、`99.5%`、`99.9%`、`99.95%` から選択するか、要件に合致するものを選びます。
-2. 時間枠を選択します: 過去 `7`、`30` または `90 日間`
+_Example: the latency of all user requests should be less than 250 ms 99% of the time in any
+30-day window._
 
-## SLO の名前、説明、タグの追加
+- Time-based SLI calculation
+- SLI calculated based on your custom uptime definition using a metric query
 
-1. SLO に名前を付けます。
-2. 説明を追加します: SLO が追跡している対象と、それがエンドユーザーのエクスペリエンスにとってなぜ重要なのかを記述します。参考としてダッシュボードのリンクを追加することもできます。
-3. タグを追加します: 一般的には `team` および `service` のタグが用いられます。
+## Implement your SLIs
 
-## ビューおよび検索
+1. [Custom metrics][3] (for example, counters)
+2. [Integration metrics][4] (for example, load balancer, http requests)
+3. [Datadog APM][5] (for example, errors, latency on services and resources)
+4. [Datadog Logs][6] (for example, metrics generated from logs for a count of particular occurrence)
 
-[タグを使用して SLO のリストビューから SLO を検索します][7]。
+## Set your target objective and time window
 
-## その他の参考資料
+1. Select your target: `99%`, `99.5%`, `99.9%`, `99.95%`, or any other target value that makes sense for your requirements.
+2. Select your time window: over the last rolling `7`, `30`, or `90 days`
+
+## Name, describe, and tag your SLOs
+
+1. Name your SLO.
+2. Add a description: describe what the SLO is tracking and why it is important for your end user experience. You can also add links to dashboards for reference.
+3. Add tags: tagging by `team` and `service` is a common practice.
+
+## View and search
+
+[Use tags to search for your SLOs from the SLO list view][7].
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/slo
+[1]: https://app.datadoghq.com/slo/manage
 [2]: https://app.datadoghq.com/monitors#create/metric
-[3]: /ja/metrics
-[4]: /ja/integrations
-[5]: /ja/tracing/trace_pipeline/generate_metrics/
-[6]: /ja/logs/logs_to_metrics/
-[7]: /ja/service_management/service_level_objectives/#searching-and-viewing-slos
+[3]: /metrics
+[4]: /integrations
+[5]: /tracing/trace_pipeline/generate_metrics/
+[6]: /logs/logs_to_metrics/
+[7]: /service_management/service_level_objectives/#searching-and-viewing-slos

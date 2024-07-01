@@ -1,115 +1,115 @@
 ---
-app_id: pliant
-app_uuid: 28fb0874-e3be-4171-819d-142f1c9dd3cc
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: pliant.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10102
-    source_type_name: Pliant
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Pliant
-  sales_email: hello@pliant.io
-  support_email: hello@pliant.io
-categories:
-- 自動化
-- コンプライアンス
+"app_id": "pliant"
+"app_uuid": "28fb0874-e3be-4171-819d-142f1c9dd3cc"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": []
+      "metadata_path": metadata.csv
+      "prefix": pliant.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10102"
+    "source_type_name": Pliant
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": Pliant
+  "sales_email": hello@pliant.io
+  "support_email": hello@pliant.io
+"categories":
+- automation
+- compliance
 - notifications
 - orchestration
-- プロビジョニング
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: pliant
-integration_id: pliant
-integration_title: Pliant
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: pliant
-public_title: Pliant
-short_description: Pliant.io で IT プロセスを自動化
-supported_os:
+- provisioning
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "pliant"
+"integration_id": "pliant"
+"integration_title": "Pliant"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "pliant"
+"public_title": "Pliant"
+"short_description": "IT Process Automation with Pliant.io"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Automation
-  - カテゴリ::コンプライアンス
-  - Category::Notifications
-  - Category::Orchestration
-  - Category::Provisioning
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Pliant.io で IT プロセスを自動化
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Pliant
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Automation"
+  - "Category::Compliance"
+  - "Category::Notifications"
+  - "Category::Orchestration"
+  - "Category::Provisioning"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": IT Process Automation with Pliant.io
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Pliant
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Pliant.io により、Datadog の通知をローコードの自動ワークフローで強化し、真のクローズドループ自動化ソリューションを実現できます。トラブルシューティングや診断、自動修復などに便利です。
+Pliant.io enhances Datadog notifications with low-code automated workflows, creating a true close-loop-automation solution. This can help with troubleshooting, diagnosis, and automated remediation.
 
-インテグレーションに関する詳細は、[Pliant][1] のサイトをご参照ください。
+For more integration information, check out the [Pliant][1] site.
 
-例:
+Examples include:
 
-- サービスの再起動
-- ロードバランサーのコンフィギュレーション
-- システムプロビジョニング
-- ディスク / 再プロビジョニング領域をクリア
-- ロードに応じてさらに VM またはコンテナノードをプロビジョン
-- ロードが低いときリソースの使用を停止
+- Service restart
+- Load balancer configuration
+- System provisioning
+- Clear disk / reprovision storage
+- Provision additional VMs or container nodes in response to load
+- De-commission resources when load is low
 
-## 計画と使用
-### インフラストラクチャーリスト
+## Setup
+### Installation
 
-Datadog の通知からトリガーするワークフローを作成します。
+Create one or more workflows that you would like to trigger from a Datadog notification.
 
-### ブラウザトラブルシューティング
+### Configuration
 #### Pliant
 
-1. **Pliant API キーを作成します** - Pliant にログインし、画面右上のユーザー名をクリックしてメニューを開きます。"API Keys" をクリックします。
+1. **Create a Pliant API key** - Log in to Pliant and click on your username at the top right of the screen to reveal a menu. Click "API Keys".
 
-![API キー メニューステップ 1][2]
+![API Key Menu step1][2]
 
-2. API キー画面で、右上の "+ Create" をクリックして新しい API キーに名前を付けます。"Save" をクリックして、テーブルに追加される API キーについて注意書きを作成します。
+2. From the API keys screen, click "+ Create" at the top right of the screen and title your new API key. Click save and make note of the API key, which will be added to the table.
 
-![API キーの作成ステップ 2][3]
+![Create API Key step2][3]
 
-**Datadog でトリガーする Pliant ワークフローを作成**
+**Create a Pliant workflow to trigger from Datadog**
 
-1. Pliant でワークフロータブを開きます。"+ Create" をクリックし、"Create Flow" で新しいワークフローを作成します。ポップアップウィンドウでタイトルを入力したら "Create" をクリックしてエディターを新しいワークフローで起動します。
+1. Navigate to the workflows tab in Pliant. Click "+ Create" and "Create Flow" to create a new workflow. Title the workflow in the popup and click "Create" to launch the editor into the new workflow.
 
-![フローの作成ステップ 1-a-][4]
+![Create Flow step1-a-][4]
 
-2. Datadog のトリガーを受信すると実行するアクションをワークフローに入力します。
+2. Populate the workflow with actions to take upon receiving the Datadog trigger. 
 
-この "RestartHost" というタイトルのサンプルワークフローは、Datadog がこのワークフローにトリガーしたデータからホストを再起動します。
+This example workflow is called "RestartHost" and restarts a host from the data Datadog triggers this workflow with.
 
-このワークフローはトリガーしたリクエスト本文をもとに初期に割り当てられた入力変数を実行します。また、入力された情報を使用して、このワークフローで希望するインフラストラクチャーの自動化アクションをトリガー/実施することもできます。この例では、Datadog が特定のパラメーターで自動化ワークフローをトリガーした状況下において、SSH でホストを再起動します。
+This workflow runs with its input variables initially assigned based on the request body you trigger it with. The workflow can trigger/perform any desired infrastructure automation actions, using information from its input. In this example, restart a host with SSH under certain circumstances when Datadog triggers the automation workflow with certain parameters.
 
-  - Datadog から送信されたデータで生成される入力変数を追加するには、ワークフローの "Start" にある "Expand" アイコンをクリックして変数パネルを開きます。一致する **Input** 変数を作成するには、すべての入力変数を同等の空要素 `""` に設定します。Datadog では、デフォルトで以下のデータを送信します。
+  - To add Input variables which populate with data sent from Datadog, click the "Expand" icon on at the start of the workflow to open the Variable panel. To create matching **Input** variables, set all of these input variables to equal empty quotes: `""`. By default, Datadog sends the following data:
     ```
     body
     last_updated
@@ -120,66 +120,66 @@ Datadog の通知からトリガーするワークフローを作成します。
     id
     ```
 
-また、初期化されたその他の出力変数 (`host`、`meta`、`ip`) も存在します。ワークフローはこれらの出力変数を割り当て、完了時に結果値を出力します。入力でも出力でもない変数を特定し、ワークフローのロジック内部で使用することもできます。
+There are also additional output variables (`host`, `meta`, and `ip`) that are initialized. The workflow assigns these output variables and outputs the resulting values upon completion. It may also specify variables which are neither input nor output variables to use internally within the workflow's logic.
 
-![拡張][5]
+![Expand][5]
 
-3. Datadog から HTTP リクエストでトリガーされる Pliant ワークフローのエンドポイントを取得するには、ワークフローの "Start" にある "Expand" アイコンをクリックします。
+3. To get the endpoint of the Pliant workflow, used to trigger from Datadog with an HTTP request, click the "Expand" icon at the start of the workflow.
 
-"cURL" > "Temporary Bearer Token" の順にクリックし、先ほど作成した API キーを選択します。
+Click "cURL" > "Temporary Bearer Token" and select the API key you just created.
 
 ![curl][6]
 
-![キーを選択][7]
+![select key][7]
 
-エンドポイントは二重引用符で囲まれており、次のように表示されます : ***https://<YOUR_PLIANT_INSTANCE>/api/v1/trigger/<YOUR_PLIANT_USERNAME>/User/<PATH_TO_WORKFLOW>/<WORKFLOW_NOW>?sync=true&api_key=<YOUR_API_KEY>***
+Your endpoint is enclosed in double quotes and resembles: ***https://<YOUR_PLIANT_INSTANCE>/api/v1/trigger/<YOUR_PLIANT_USERNAME>/User/<PATH_TO_WORKFLOW>/<WORKFLOW_NOW>?sync=true&api_key=<YOUR_API_KEY>***
 
-![エンドポイント][8]
+![endpoint][8]
 
-***https*** で始まる、二重引用符で囲まれた URL (その他のクエリパラメーターを含む場合もあります) 全体をコピーします。二重引用符は含まないよう注意してください。
+Copy the entire URL enclosed in the double quotes (which may include additional query parameters), starting with ***https***. Do not include the double quotes.
 
-#### Datadog のセットアップ
-1. Datadog を開き、左側のサイドバーで **Integrations** > **Integrations** をクリックします。
-![インテグレーション][9]
+#### Datadog setup
+1. Open Datadog and from the left sidebar, click to **Integrations** > **Integrations**.
+![integrations][9]
 
-2. 検索バーに "webhooks" と入力し、**Webhook** エントリをクリックしてコンフィギュレーションウィンドウを開きます。
-![webhook 検索][10]
+2. Enter "webhooks" in the search bar and click on the **webhooks** entry to reveal a configuration window.
+![webhookSearch][10]
 
 
-3. "webhooks" までスクロールします。**New** をクリックして、Pliant ワークフローにリンクする新しい Webhook を追加します。まず、"name" フィールドで Webhook に名前を付けます。この例では *RestartHost* という名前を使用します。
-![webhook コンフィグ2][11]
+3. Scroll to "webhooks". Click **New** to add a new webhook to link to the Pliant workflow. First, give the webhook a name in the "name" field. This example uses the name *RestartHost*.
+![webhooksConfig2][11]
 
-ステップ 4 でコピーした URL を貼り付けます。例: 
+Paste the URL copied from step 4. For example:
 
 ```
 https://<YOUR_PLIANT_INSTANCE>/api/v1/trigger/<YOUR_PLIANT_USERNAME>/User/<PATH_TO_WORKFLOW>/<WORKFLOW_NOW>?sync=true&api_key=<YOUR_API_KEY>
 ```
 
-これを、Webhook フォームの ***URL*** フィールドに貼り付けます。
+Paste this into the ***URL*** field of the webhook form.
 
-![webhook フォーム][12]
+![webhookForm][12]
 
-リクエストペイロードは事前設定されています。"ENCODE AS FORM" のボックスにチェックを入れ、Save をクリックします。
+The request payload is pre-configured. Check the "ENCODE AS FORM" box and click save.
 
-`@webhook-RestartHost` の受信者を追加して、このインテグレーションを Datadog 内の任意の通知に追加します。モニターでアラートがトリガーされると、Webhook が Pliant ワークフローをトリガー氏、入力変数が Datadog から Pliant へ送信されます。
+Add this integration to any alert notification in Datadog by adding the recipient of `@webhook-RestartHost`. When the monitor triggers an alert, the webhook triggers your Pliant workflow, and the input variables are sent to Pliant from Datadog.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Pliant インテグレーションは、メトリクスを提供しません。
+The Pliant integration does not provide metrics.
 
-### ヘルプ
+### Service Checks
 
-Pliant インテグレーションには、サービスのチェック機能は含まれません。
+The Pliant integration does not include any service checks.
 
-### ヘルプ
+### Events
 
-Pliant インテグレーションには、イベントは含まれません。
+The Pliant integration does not include any events.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+Need help? Contact [Datadog support][13].
 
 [1]: https://pliant.io/
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/pliant/images/step1.png
@@ -193,4 +193,5 @@ Pliant インテグレーションには、イベントは含まれません。
 [10]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/pliant/images/webhook_Search.png
 [11]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/pliant/images/webhooksConfig3.png
 [12]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/pliant/images/webhookForm.png
-[13]: https://docs.datadoghq.com/ja/help/
+[13]: https://docs.datadoghq.com/help/
+

@@ -1,95 +1,93 @@
 ---
-app_id: gearman
-app_uuid: 7e1b6c42-8f40-4f4c-8d58-a3f7f39cb3e5
-assets:
-  dashboards:
-    gearman: assets/dashboards/gearman_dashboard.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: gearman.unique_tasks
-      metadata_path: metadata.csv
-      prefix: gearman.
-    process_signatures:
-    - gearmand
-    - gearman
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 52
-    source_type_name: Gearman
-  logs:
-    source: gearman
-  saved_views:
-    gearman_processes: assets/saved_views/gearman_processes.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- log collection
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: gearmand
-integration_id: gearman
-integration_title: Gearman
-integration_version: 3.1.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: gearmand
-public_title: Gearman
-short_description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
-supported_os:
-- linux
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::ログの収集
-  - Supported OS::Linux
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: 実行中およびキューにあるジョブの合計数またはタスクごとの数を追跡。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Gearman
+"app_id": "gearman"
+"app_uuid": "7e1b6c42-8f40-4f4c-8d58-a3f7f39cb3e5"
+"assets":
+  "dashboards":
+    "gearman": "assets/dashboards/gearman_dashboard.json"
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "gearman.unique_tasks"
+      "metadata_path": "metadata.csv"
+      "prefix": "gearman."
+    "process_signatures":
+    - "gearmand"
+    - "gearman"
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "52"
+    "source_type_name": "Gearman"
+  "saved_views":
+    "gearman_processes": "assets/saved_views/gearman_processes.json"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "log collection"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/gearmand/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "gearmand"
+"integration_id": "gearman"
+"integration_title": "Gearman"
+"integration_version": "3.1.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "gearmand"
+"public_title": "Gearman"
+"short_description": "Track the number of jobs queued and running - in total or by task."
+"supported_os":
+- "linux"
+- "macos"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Log Collection"
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": "Track the number of jobs queued and running - in total or by task."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Gearman"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Gearman のメトリクスを収集して、以下のことができます。
+Collect Gearman metrics to:
 
-- Gearman のパフォーマンスを視覚化できます。
-- キューに置かれているタスクまたは実行中のタスクの数を知ることができます。
-- Gearman のパフォーマンスをアプリケーションの他の部分と関連付けることができます。
+- Visualize Gearman performance.
+- Know how many tasks are queued or running.
+- Correlate Gearman performance with the rest of your applications.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-Gearman チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The Gearman check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Gearman job servers.
 
-### ブラウザトラブルシューティング
+### Configuration
 
 {{< tabs >}}
-{{% tab "ホスト" %}}
+{{% tab "Host" %}}
 
-#### メトリクスベース SLO
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-1. Gearman のパフォーマンスデータを収集するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーで `gearmand.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル gearmand.d/conf.yaml][2] を参照してください。
+1. Edit the `gearmand.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your Gearman performance data. See the [sample gearmand.d/conf.yaml][2] for all available configuration options.
 
    ```yaml
    init_config:
@@ -99,37 +97,37 @@ Gearman チェックは [Datadog Agent][1] パッケージに含まれていま�
        port: 4730
    ```
 
-2. [Agent を再起動します][3]。
+2. [Restart the Agent][3]
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/gearmand/datadog_checks/gearmand/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "コンテナ化" %}}
+{{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-| パラメーター            | 値                                  |
+| Parameter            | Value                                  |
 | -------------------- | -------------------------------------- |
 | `<INTEGRATION_NAME>` | `gearmand`                             |
-| `<INIT_CONFIG>`      | 空白または `{}`                          |
+| `<INIT_CONFIG>`      | blank or `{}`                          |
 | `<INSTANCE_CONFIG>`  | `{"server":"%%host%%", "port":"4730"}` |
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-#### 収集データ
+#### Log collection
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Gearman ログの収集を開始するには、次のコンフィギュレーションブロックを `gearmand.d/conf.yaml` ファイルに追加します。
+2. Add this configuration block to your `gearmand.d/conf.yaml` file to start collecting your Gearman logs:
 
     ```yaml
     logs:
@@ -138,38 +136,38 @@ Gearman チェックは [Datadog Agent][1] パッケージに含まれていま�
         source: gearman
     ```
 
-    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[gearmand.d/conf.yaml のサンプル][2]を参照してください。
+    Change the `path` parameter value based on your environment. See the [sample gearmand.d/conf.yaml][2] for all available configuration options.
 
-3. [Agent を再起動します][3]。
+3. [Restart the Agent][3].
 
-Kubernetes 環境でのログ収集のための Agent の構成については、[Kubernetes のログ収集][4]を参照してください。
+See [Kubernetes Log Collection][4] for information on configuring the Agent for log collection in Kubernetes environments.
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `gearmand` を探します。
+[Run the Agent's `status` subcommand][5] and look for `gearmand` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "gearmand" >}}
 
 
-### ヘルプ
+### Events
 
-Gearman チェックには、イベントは含まれません。
+The Gearman check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "gearmand" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+Need help? Contact [Datadog support][6].
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/integrations-core/blob/master/gearmand/datadog_checks/gearmand/data/conf.yaml.example
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[4]: https://docs.datadoghq.com/agent/kubernetes/log/
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/help/

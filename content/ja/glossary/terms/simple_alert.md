@@ -1,9 +1,9 @@
 ---
+title: simple alert
 core_product:
-- alerts
+    - alerts
 related_terms:
-- マルチアラート
-- アラートタイプ
-title: シンプルアラート
+    - multi alert
+    - alerting type
 ---
-すべての報告元ソースを集計するモニターアラート。集計値が設定条件を満たすと、アラートを 1 件受信します。詳細は、<a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">ドキュメントを参照してください</a>。
+Monitor alerts that aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. For more information, <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">see the documentation</a>.

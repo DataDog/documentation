@@ -1,3 +1,3 @@
 ---
-title: ケース
+title: Cases
 ---

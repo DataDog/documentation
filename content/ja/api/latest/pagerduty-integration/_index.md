@@ -1,3 +1,3 @@
 ---
-title: PagerDuty インテグレーション
+title: PagerDuty Integration
 ---

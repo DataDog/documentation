@@ -1,110 +1,111 @@
 ---
-app_id: redis
-app_uuid: 15f0ff37-2b36-4165-9606-758271d4a16d
-assets:
-  dashboards:
-    redis: assets/dashboards/overview.json
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: redis.net.clients
-      metadata_path: metadata.csv
-      prefix: redis.
-    process_signatures:
-    - redis-server
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Redis
-  logs:
-    source: redis
-  monitors:
-    '[Redis] High memory consumption': assets/monitors/high_mem.json
-  saved_views:
-    error_warning_status: assets/saved_views/error_warning_status.json
-    pid_overview: assets/saved_views/pid_overview.json
-    redis_pattern: assets/saved_views/redis_pattern.json
-    redis_processes: assets/saved_views/redis_processes.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- caching
-- data store
-- log collection
-- tracing
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: redisdb
-integration_id: redis
-integration_title: Redis
-integration_version: 4.8.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: redisdb
-public_title: Redis
-short_description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
-supported_os:
-- linux
-- windows
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::キャッシュ
-  - Category::データストア
-  - Category::ログの収集
-  - Category::Tracing
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: redis のパフォーマンス、メモリ使用量、クライアントのブロック数、キーのエビクション数を追跡。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Redis
+"app_id": "redis"
+"app_uuid": "15f0ff37-2b36-4165-9606-758271d4a16d"
+"assets":
+  "dashboards":
+    "redis": "assets/dashboards/overview.json"
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": "assets/configuration/spec.yaml"
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "redis.net.clients"
+      "metadata_path": "metadata.csv"
+      "prefix": "redis."
+    "process_signatures":
+    - "redis-server"
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "21"
+    "source_type_name": "Redis"
+  "monitors":
+    "[Redis] High memory consumption": "assets/monitors/high_mem.json"
+  "saved_views":
+    "error_warning_status": "assets/saved_views/error_warning_status.json"
+    "pid_overview": "assets/saved_views/pid_overview.json"
+    "redis_pattern": "assets/saved_views/redis_pattern.json"
+    "redis_processes": "assets/saved_views/redis_processes.json"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "caching"
+- "data stores"
+- "log collection"
+- "tracing"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/redisdb/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "redisdb"
+"integration_id": "redis"
+"integration_title": "Redis"
+"integration_version": "5.5.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "redisdb"
+"public_title": "Redis"
+"short_description": "Track redis performance, memory use, blocked clients, evicted keys, and more."
+"supported_os":
+- "linux"
+- "windows"
+- "macos"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Caching"
+  - "Category::Data Stores"
+  - "Category::Log Collection"
+  - "Category::Tracing"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": "Track redis performance, memory use, blocked clients, evicted keys, and more."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Redis"
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Redis をデータベース、キャッシュ、メッセージキューとして使用しているかどうかにかかわらず、このインテグレーションは、Redis サーバー、クラウドサービス、およびそれらが提供するインフラストラクチャーの一部の問題を追跡します。Datadog Agent の Redis チェックを使用して、以下に関連するメトリクスを収集します。
+Whether you use Redis as a database, cache, or message queue, this integration tracks problems with your Redis servers, cloud service, and the parts of your infrastructure they serve. Use the Datadog Agent's Redis check to collects metrics related to:
 
-- パフォーマンス
-- メモリ使用量
-- ブロックされたクライアント
-- 二次接続
-- ディスクの永続性
-- キーの期限切れとエビクション
-- その他多数
+- Performance
+- Memory usage
+- Blocked clients
+- Secondary connections
+- Disk persistence
+- Expired and evicted keys
+- and many more
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-Redis チェックは [Datadog Agent][1] パッケージに含まれています。Redis サーバーに追加でインストールする必要はありません。
+The Redis check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Redis servers.
 
-### コンフィギュレーション
+### Configuration
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### ホスト
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+To configure this check for an Agent running on a host:
 
-##### メトリクスの収集
+##### Metric collection
 
-1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `redisdb.d/conf.yaml` ファイルを編集します。以下のパラメーターは、更新が必要な場合があります。使用可能なすべてのコンフィギュレーションオプションの詳細については、[redisdb.d/conf.yaml のサンプル][2]を参照してください。
+1. Edit the `redisdb.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. The following parameters may require updating. See the [sample redisdb.d/conf.yaml][2] for all available configuration options.
 
    ```yaml
    init_config:
@@ -127,21 +128,21 @@ Redis チェックは [Datadog Agent][1] パッケージに含まれています
        # password: <PASSWORD>
    ```
 
-2. Redis 6+ と ACL を使用する場合、少なくともデータベースレベルの `DB Viewer` 権限、クラスター環境で運用する場合は `Cluster Viewer` 権限、および `+config|get +info +slowlog|get` ACL ルールが必要であることを確認してください。詳しくは、[データベースアクセス制御][3]を参照してください。
+2. If using Redis 6+ and ACLs, ensure that the user has at least `DB  Viewer` permissions at the Database level, `Cluster Viewer` permissions if operating in a cluster environment, and `+config|get +info +slowlog|get` ACL rules. For more details, see [Database access control][3].
 
-3. [Agent を再起動します][4]。
+3. [Restart the Agent][4].
 
-##### ログの収集
+##### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
 
    ```yaml
    logs_enabled: true
    ```
 
-2. `redisdb.d/conf.yaml` の下部にある、次の構成ブロックのコメントを解除して編集します。
+2. Uncomment and edit this configuration block at the bottom of your `redisdb.d/conf.yaml`:
 
    ```yaml
    logs:
@@ -151,34 +152,34 @@ _Agent バージョン 6.0 以降で利用可能_
        service: myapplication
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[redisdb.yaml のサンプル][2]を参照してください。
+    Change the `path` and `service` parameter values and configure them for your environment. See the [sample redisdb.yaml][2] for all available configuration options.
 
-3. [Agent を再起動します][4]。
+3. [Restart the Agent][4].
 
-##### トレースの収集
+##### Trace collection
 
-Datadog APM は、Redis と統合して分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
+Datadog APM integrates with Redis to see the traces across your distributed system. Trace collection is enabled by default in the Datadog Agent v6+. To start collecting traces:
 
-1. [Datadog でトレースの収集を有効にします][5]。
-2. [Redis へのリクエストを作成するアプリケーションをインスツルメントします][6]。
+1. [Enable trace collection in Datadog][5].
+2. [Instrument your application that makes requests to Redis][6].
 
 
-[1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/conf.yaml.example
 [3]: https://docs.redis.com/latest/rs/security/passwords-users-roles/
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: https://docs.datadoghq.com/ja/tracing/send_traces/
-[6]: https://docs.datadoghq.com/ja/tracing/setup/
+[4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.datadoghq.com/tracing/send_traces/
+[6]: https://docs.datadoghq.com/tracing/setup/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
 #### Docker
 
-コンテナで実行中の Agent に対してこのチェックを構成するには:
+To configure this check for an Agent running on a container:
 
-##### メトリクスの収集
+##### Metric collection
 
-アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["redisdb"]'
@@ -186,56 +187,56 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"host":"%%host%%","port":"6379","password":"%%env_REDIS_PASSWORD%%"}]'
 ```
 
-**注**: パスワードがプレーンテキストで保存されることを避けるため、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数は Agent コンテナに設定される必要があります。詳細は、[オートディスカバリーのテンプレート変数][2]ドキュメントをご参照ください。または、Agent で `secrets` パッケージを利用して[シークレット管理][3]バックエンド（HashiCorp Vault または AWS Secrets Manager）と動作することも可能です。
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be set on the Agent container. See the [Autodiscovery Template Variable][2] documentation for more details. Alternatively, the Agent can leverage the `secrets` package to work with any [secrets management][3] backend (such as HashiCorp Vault or AWS Secrets Manager).
 
-##### ログの収集
+##### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][4]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker Log Collection][4].
 
-次に、[ログインテグレーション][5]を Docker ラベルとして設定します。
+Then, set [Log Integrations][5] as Docker labels:
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"redis","service":"<YOUR_APP_NAME>"}]'
 ```
 
-##### トレースの収集
+##### Trace collection
 
-コンテナ化されたアプリケーションの APM は、Agent v6 以降でサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
+APM for containerized apps is supported on Agent v6+ but requires extra configuration to begin collecting traces.
 
-Agent コンテナで必要な環境変数
+Required environment variables on the Agent container:
 
-| パラメーター            | 値                                                                      |
+| Parameter            | Value                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-利用可能な環境変数およびコンフィギュレーションの全リストについては、[Docker アプリケーションのトレース][6] を参照してください。
+See [Tracing Docker Applications][6] for a complete list of available environment variables and configuration.
 
-次に、[Redis にリクエストを送信するアプリケーションのコンテナをインスツルメント][7]し、Agent のコンテナ名に `DD_AGENT_HOST` を設定します。
+Then, [instrument your application container that makes requests to Redis][7] and set `DD_AGENT_HOST` to the name of your Agent container.
 
 
-[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
-[3]: https://docs.datadoghq.com/ja/agent/guide/secrets-management/?tab=linux
-[4]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#installation
-[5]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-[6]: https://docs.datadoghq.com/ja/agent/docker/apm/?tab=linux
-[7]: https://docs.datadoghq.com/ja/tracing/setup/
+[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/agent/faq/template_variables/
+[3]: https://docs.datadoghq.com/agent/guide/secrets-management/?tab=linux
+[4]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#installation
+[5]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
+[6]: https://docs.datadoghq.com/agent/docker/apm/?tab=linux
+[7]: https://docs.datadoghq.com/tracing/setup/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
 #### Kubernetes
 
-このチェックを、Kubernetes で実行している Agent に構成します。
+To configure this check for an Agent running on Kubernetes:
 
-##### メトリクスの収集
+##### Metric collection
 
-アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
+Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Aside from this, templates can also be configured using a [file, configmap, or key-value store][2].
 
-**Annotations v1** (Datadog Agent < v7.36 向け)
+**Annotations v1** (for Datadog Agent < v7.36)
 
 ```yaml
 apiVersion: v1
@@ -263,7 +264,7 @@ spec:
         - containerPort: 6379
 ```
 
-**Annotations v2** (Datadog Agent v7.36+ 向け)
+**Annotations v2** (for Datadog Agent v7.36+)
 
 ```yaml
 apiVersion: v1
@@ -294,15 +295,15 @@ spec:
         - containerPort: 6379
 ```
 
-**注**: パスワードがプレーンテキストで保存されることを避けるため、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数は Agent コンテナに設定される必要があります。詳細は、[オートディスカバリーのテンプレート変数][3]ドキュメントをご参照ください。または、Agent で `secrets` パッケージを利用して[シークレット管理][4]バックエンド（HashiCorp Vault または AWS Secrets Manager）と動作することも可能です。
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be set on the Agent container. See the [Autodiscovery Template Variable][3] documentation. Alternatively, the Agent can leverage the `secrets` package to work with any [secrets management][4] backend (such as HashiCorp Vault or AWS Secrets Manager).
 
-##### ログの収集
+##### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][5]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][5].
 
-次に、[ログのインテグレーション][6]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][7]を使用して構成することも可能です。
+Then, set [Log Integrations][6] as pod annotations. This can also be configure using a [file, configmap, or key-value store][7].
 
 **Annotations v1/v2**
 
@@ -323,42 +324,42 @@ spec:
         - containerPort: 6379
 ```
 
-##### トレースの収集
+##### Trace collection
 
-コンテナ化されたアプリケーションの APM は、Agent v6 以降を実行するホストでサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
+APM for containerized apps is supported on hosts running Agent v6+ but requires extra configuration to begin collecting traces.
 
-Agent コンテナで必要な環境変数
+Required environment variables on the Agent container:
 
-| パラメーター            | 値                                                                      |
+| Parameter            | Value                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][8]および [Kubernetes Daemon のセットアップ][9]を参照してください。
+See [Tracing Kubernetes Applications][8] and the [Kubernetes Daemon Setup][9] for a complete list of available environment variables and configuration.
 
-そして、[Redis へのリクエストを作成するアプリケーションコンテナをインスツルメントします][10]。
+Then, [instrument your application container that makes requests to Redis][10].
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/?tab=kubernetes#configuration
-[3]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
-[4]: https://docs.datadoghq.com/ja/agent/guide/secrets-management/?tab=linux
-[5]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=containerinstallation#setup
-[6]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-[7]: https://docs.datadoghq.com/ja/agent/kubernetes/log/?tab=daemonset#configuration
-[8]: https://docs.datadoghq.com/ja/agent/kubernetes/apm/?tab=java
-[9]: https://docs.datadoghq.com/ja/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
-[10]: https://docs.datadoghq.com/ja/tracing/setup/
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes
+[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
+[3]: https://docs.datadoghq.com/agent/faq/template_variables/
+[4]: https://docs.datadoghq.com/agent/guide/secrets-management/?tab=linux
+[5]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=containerinstallation#setup
+[6]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
+[7]: https://docs.datadoghq.com/agent/kubernetes/log/?tab=daemonset#configuration
+[8]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=java
+[9]: https://docs.datadoghq.com/agent/kubernetes/daemonset_setup/?tab=k8sfile#apm-and-distributed-tracing
+[10]: https://docs.datadoghq.com/tracing/setup/
 {{% /tab %}}
 {{% tab "ECS" %}}
 
 #### ECS
 
-このチェックを、ECS で実行している Agent に構成するには:
+To configure this check for an Agent running on ECS:
 
-##### メトリクスの収集
+##### Metric collection
 
-アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
+Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
 
 ```json
 {
@@ -374,15 +375,15 @@ Agent コンテナで必要な環境変数
 }
 ```
 
-**注**: パスワードがプレーンテキストで保存されることを避けるため、`"%%env_<ENV_VAR>%%"` テンプレート変数ロジックが使用されています。そのため、`REDIS_PASSWORD` 環境変数は Agent コンテナに設定される必要があります。詳細は、[オートディスカバリーのテンプレート変数][2]ドキュメントをご参照ください。または、Agent で `secrets` パッケージを利用して[シークレット管理][3]バックエンド（HashiCorp Vault または AWS Secrets Manager）と動作することも可能です。
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text, hence the `REDIS_PASSWORD` environment variable must be set on the Agent container. See the [Autodiscovery Template Variable][2] documentation. Alternatively, the Agent can leverage the `secrets` package to work with any [secrets management][3] backend (such as HashiCorp Vault or AWS Secrets Manager).
 
-##### ログの収集
+##### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][4]を参照してください。
+Collecting logs is disabled by default in the Datadog Agent. To enable it, see [ECS Log Collection][4].
 
-次に、[ログインテグレーション][5]を Docker ラベルとして設定します。
+Then, set [Log Integrations][5] as Docker labels:
 
 ```yaml
 {
@@ -396,54 +397,54 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 }
 ```
 
-##### トレースの収集
+##### Trace collection
 
-コンテナ化されたアプリケーションの APM は、Agent v6 以降でサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
+APM for containerized apps is supported on Agent v6+ but requires extra configuration to begin collecting traces.
 
-Agent コンテナで必要な環境変数
+Required environment variables on the Agent container:
 
-| パラメーター            | 値                                                                      |
+| Parameter            | Value                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-利用可能な環境変数およびコンフィギュレーションの全リストについては、[Docker アプリケーションのトレース][6] を参照してください。
+See [Tracing Docker Applications][6] for a complete list of available environment variables and configuration.
 
-次に、[Redis にリクエストを送信するアプリケーションのコンテナをインスツルメント][7]し、 [EC2 プライベート IP アドレス][8]に `DD_AGENT_HOST` を設定します。
+Then, [instrument your application container that makes requests to Redis][7] and set `DD_AGENT_HOST` to the [EC2 private IP address][8].
 
-[1]: https://docs.datadoghq.com/ja/agent/docker/integrations/?tab=docker
-[2]: https://docs.datadoghq.com/ja/agent/faq/template_variables/
-[3]: https://docs.datadoghq.com/ja/agent/guide/secrets-management/?tab=linux
-[4]: https://docs.datadoghq.com/ja/agent/amazon_ecs/logs/?tab=linux
-[5]: https://docs.datadoghq.com/ja/agent/docker/log/?tab=containerinstallation#log-integrations
-[6]: https://docs.datadoghq.com/ja/agent/docker/apm/?tab=linux
-[7]: https://docs.datadoghq.com/ja/tracing/setup/
-[8]: https://docs.datadoghq.com/ja/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
+[1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
+[2]: https://docs.datadoghq.com/agent/faq/template_variables/
+[3]: https://docs.datadoghq.com/agent/guide/secrets-management/?tab=linux
+[4]: https://docs.datadoghq.com/agent/amazon_ecs/logs/?tab=linux
+[5]: https://docs.datadoghq.com/agent/docker/log/?tab=containerinstallation#log-integrations
+[6]: https://docs.datadoghq.com/agent/docker/apm/?tab=linux
+[7]: https://docs.datadoghq.com/tracing/setup/
+[8]: https://docs.datadoghq.com/agent/amazon_ecs/apm/?tab=ec2metadataendpoint#setup
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][2]し、Checks セクションで `redisdb` を探します。
+[Run the Agent's status subcommand][2] and look for `redisdb` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "redisdb" >}}
 
 
-### イベント
+### Events
 
-Redis チェックには、イベントは含まれません。
+The Redis check does not include any events.
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "redisdb" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-### Agent が接続できない
+### Agent cannot connect
 
 ```shell
     redisdb
@@ -452,9 +453,9 @@ Redis チェックには、イベントは含まれません。
       - Collected 0 metrics, 0 events & 1 service check
 ```
 
-`redisdb.yaml` 内の接続情報が正しいかどうかをチェックしてください。
+Check that the connection info in `redisdb.yaml` is correct.
 
-### Agent を認証できない
+### Agent cannot authenticate
 
 ```shell
     redisdb
@@ -463,15 +464,15 @@ Redis チェックには、イベントは含まれません。
       - Collected 0 metrics, 0 events & 1 service check
 ```
 
-`redisdb.yaml` で `password` を設定してください。
+Configure a `password` in `redisdb.yaml`.
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Redis パフォーマンスメトリクスの監視方法][3]
+- [How to monitor Redis performance metrics][3]
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://www.datadoghq.com/blog/how-to-monitor-redis-performance-metrics

@@ -1,48 +1,49 @@
 ---
+title: Authorization
+type: documentation
 further_reading:
-- link: https://www.datadoghq.com/blog/oauth/
-  tag: GitHub
-  text: OAuth で Datadog のインテグレーションを認可する
+- link: "https://www.datadoghq.com/blog/oauth/"
+  tag: Blog
+  text: Authorize your Datadog integrations with OAuth
 - link: /developers/integrations/oauth_for_integrations
-  tag: ドキュメント
-  text: インテグレーションに OAuth を実装する
+  tag: Documentation
+  text: Implement OAuth for your integration
 - link: /developers/authorization/oauth2_in_datadog/
-  tag: ドキュメント
-  text: Datadog の OAuth2 について
+  tag: Documentation
+  text: Learn more about OAuth2 in Datadog
 - link: /developers/authorization/oauth2_endpoints
   tag: API
-  text: OAuth2 認可エンドポイントリファレンス
-title: 認可
-type: documentation
+  text: OAuth2 Authorization Endpoints Reference
 ---
 
-## 概要
+## Overview
 
-Datadog は、[OAuth 2.0 (OAuth2) Authorization Framework][1] を使用し、ユーザーに代わってサードパーティアプリケーションの制限付き Datadog リソースへのアクセスを安全に認可することができます。アプリケーションが持つアクセスは、[スコープ][2]によって決定され、ユーザーがアプリケーションによってリクエストされた特定の詳細な権限のセットに対して明示的な同意を与えることができるようになります。
+Datadog uses the [OAuth 2.0 (OAuth2) Authorization Framework][1] to allow users to securely authorize third-party applications' access to restricted Datadog resources on behalf of the user. The access that applications have is determined by [scopes][2], which enable users to grant explicit consent for a specific set of granular permissions requested by the application. 
 
-## クライアントと資格情報
+## Clients and credentials
 
-OAuth2 クライアントは、ユーザーに代わって Datadog リソースへのアプリケーションのアクセスを承認できるようにするアプリケーションのコンポーネントです。OAuth2 は、パブリックと[機密][3]の 2 種類のクライアントを定義しています。
+An OAuth2 client is the component of an application that enables users to authorize the application access to Datadog resources on the user's behalf. OAuth2 defines two types of clients: public and [confidential][3]. 
 
-パブリッククライアント
-: 一般的にブラウザベースのアプリケーションに使用され、機密情報を保存することができません。パブリッククライアントの例としては、[UI 拡張機能][4]の OAuth クライアントが挙げられます。
+Public Clients
+: Typically used for browser-based applications and are not capable of storing confidential information.
+<!--Examples of public clients include OAuth clients for [UI Extensions][4]. -->
 
-機密クライアント
-: 機密データを保存することができ、認可リクエストを行うために追加の `client_secret` を必要とします。インテグレーション用の OAuth クライアントは機密クライアントです。
+Confidential Clients
+: Capable of storing sensitive data and requires an additional `client_secret` to make authorization requests. OAuth clients for integrations are confidential clients. 
 
-OAuth クライアントを作成すると、クライアント ID、およびオプションで機密クライアントのためのクライアントシークレットの形で、クライアント資格情報のセットが発行されます。
+When you create an OAuth client, a set of client credentials is issued in the form of a client ID, and optionally, a client secret for confidential clients. 
 
-クライアント ID 
-: 認可とトークンのエンドポイントにリクエストを行う際に、クライアントを識別するために使用します。
+Client ID 
+: Used to identify your client when making requests to the authorization and token endpoints. 
 
-クライアントシークレット 
-: 発行された場合、認可エンドポイントにリクエストを行う際にクライアントを認証するために使用されます。クライアントシークレットは、クライアント作成時に一度だけ公開される機密パスワードであるため、直ちにコピーして安全に保管してください。
+Client Secret 
+: If issued, used to authenticate the client when making requests to the authorization endpoints. Immediately copy and store the client secret securely as it is a confidential password exposed only once upon client creation. 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://datatracker.ietf.org/doc/html/rfc6749
-[2]: https://docs.datadoghq.com/ja/api/latest/scopes/
+[2]: https://docs.datadoghq.com/api/latest/scopes/
 [3]: https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1
-[4]: https://docs.datadoghq.com/ja/developers/ui_extensions/#oauth-api-access
+[4]: https://docs.datadoghq.com/developers/ui_extensions/#oauth-api-access

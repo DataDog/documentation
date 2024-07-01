@@ -1,57 +1,56 @@
 ---
+title: Connection Issues with the SQL Server Integration
+kind: guide
 aliases:
-- /ja/integrations/faq/connection-issues-with-the-sql-server-integration
-kind: ガイド
-title: SQL Server インテグレーションでの接続の問題
+  - /integrations/faq/connection-issues-with-the-sql-server-integration
 ---
 
-## SQL Server の接続に関する一般的な問題
+## Common SQL Server connection issues
 
-アカウントの [SQL Server インテグレーションタイル][1]の説明に従って、Datadog Agent が SQL Server からメトリクスを収集するように構成することができます。このインテグレーションは、いくつかの基本的な [SQL Server メトリクス][2]を提供しており、それらを[自分の好み][3]に拡張することができます。
+You can configure the Datadog Agent to collect metrics from SQL Server by following the instructions in the [SQL Server integration tile][1] in your account. This integration offers several basic [SQL Server metrics][2], which you can expand to [your own liking][3].
 
-しかし、このインテグレーションを設定する際によく遭遇する接続エラーがあり、その原因には多くの変数があるため、トラブルシューティングには特にイライラさせられます。このエラーの全容は次のとおりです。
+But there is a common connection error that users run into while they're setting up this integration, one that can be especially frustrating to troubleshoot since there are many variables that can cause it. In full, the error looks like this:
 
 ```text
 'Unable to connect to SQL Server for instance 127.0.0.1,1433 - None. \n Traceback (most recent call last):\n File "C:\\Program Files (x86)\\Datadog\\Datadog Agent\\files\\..\\checks.d\\sqlserver.py", line 219, in get_cursor\n File "adodbapi\\adodbapi.pyc", line 116, in connect\nOperationalError: (com_error(-2147352567, \'Exception occurred.\', (0, u\'Microsoft OLE DB Provider for SQL Server\', u\'[DBNETLIB][ConnectionOpen (Connect()).]SQL Server does not exist or access denied.\', None, 0, -2147467259), None), \'Error opening connection to "Provider=SQLOLEDB;Data Source=127.0.0.1,1433;Initial Catalog=master;User ID=datadog;Password=******;"\')\n'
 ```
 
-このエラーは、Agent がデータ収集を完了するために SQL Server に接続できなかったことを示します。これは、次のいずれかが原因である可能性があります。
+This error indicates that the Agent was unable to connect to your SQL Server to complete its data collection. This could be caused by any of the following:
 
-* SQL Server の `conf.yaml` のホスト、ポート、ユーザー名、パスワードのタイプミス (すべてトリプルチェックする価値があります)
-* パスワードにセミコロン (`;`) が含まれている場合、中括弧で囲んで解決します (`password: "{<PASSWORD>}"`)
-* SQL Server の TCP/IP 接続が有効になっていない
-* SQL Server の IPv4 アドレスが正しくないか、SQL Server の `conf.yaml` で指定したものと一致していません。
-* SQL Server の TCP/IP ポートが正しくないか、SQL Server の `conf.yaml` で指定したものと一致していません。
-* SQL Server の認証モードが、"SQL Server and Windows Authentication mode" と "Windows Authentication mode" の間で適切なオプションに設定されていない
+* A typo in your SQL Server `conf.yaml` host, port, username, or password (it's all worth triple-checking)
+* Your password contains a semicolon (`;`)-use curly brackets around the password to resolve (`password: "{<PASSWORD>}"`)
+* Your SQL Server's TCP/IP connection has not been enabled
+* Your SQL Server's IPv4 address is incorrect or does not match what you've provided in your SQL Server `conf.yaml`.
+* Your SQL Server's TCP/IP port is incorrect or does not match what you've provided in your SQL Server `conf.yaml`.
+* The authentication mode of your SQL Server is not set to the appropriate option between "SQL Server and Windows Authentication mode" vs. "Windows Authentication mode"
 
-正しい TCP/IP アドレス/ポートで待機するようにサーバーを設定する方法がわからない場合、Microsoft の [Configure a Server to Listen on a Specific TCP Port][4] が参考になります (IPv4 と IPALL は特に関連する部分です。ここでは、ポートを「動的」または「静的」のどちらかに設定できますが、使用しない方は空白にしてください)。Agent が SQL Server と同じホストにインストールされている場合、ユーザーから見てホストがローカルホストでなくても、ホストオプションを "127.0.0.1" に設定することが適切な場合があります。SQL Server への接続の標準ポートは 1433 です。
+If you are unsure of how to set up a server to listen on the correct TCP/IP address/port, Microsoft's [Configure a Server to Listen on a Specific TCP Port][4] should give you some direction (IPv4 and IPALL are the specifically relevant parts; there, you may set your port either as a "Dynamic" or as a "Static" port, but whichever you aren't using should be left blank). If the Agent is installed on the same host as your SQL Server, it may be appropriate to set your host option to "127.0.0.1", even if the host is not a localhost from your perspective as a user. The standard port for connections to SQL Server is 1433.
 
-SQL Server の認証モードの設定方法がわからない場合は、Microsoft の [Choose an Authentication Mode][5] の記事を参照してください。
+If you are unsure how to set your SQL Server's authentication mode, see Microsoft's [Choose an Authentication Mode][5] article.
 
-**注**: SQL Server に対して上記の変更を行った場合、その変更を有効にする前に SQL Server を再起動する必要があります。
+**Note**: If you make any of the changes above to SQL Server, you must restart SQL Server before the changes take effect.
 
-Datadog のあるテスト環境 (Windows 2012 R2、SQL Server 2014 Express) で動作した SQL Server の IP/TCP 設定の一例をご紹介します。
-{{< img src="integrations/faq/sql_server_test_1.png" alt="TCP/IP プロパティウィンドウで、IP アドレスタブを選択します。IP4 セクションは、active yes と enabled no が設定されています。IP アドレスは 127.0.0.1、TCP ダイナミックポートは 1433 に設定されています。TCP ポートは空白のままです。" >}}
+Here's an example of some SQL Server IP/TCP settings that have worked on one of Datadog's testing environments (Windows 2012 R2, SQL Server 2014 Express):
+{{< img src="integrations/faq/sql_server_test_1.png" alt="the TCP/IP properties window with IP addresses tab selected. The IP4 section is set with active yes and enabled no. IP address is set to 127.0.0.1 and TCP dynamic ports is set to 1433. TCP port is left blank." >}}
 
+{{< img src="integrations/faq/sql_server_test_2.png" alt="the TCP/IP properties window with IP addresses tab selected. In the IPAll section the TCP dynamic ports is set to 1433 and TCP port is left blank." >}}
 
-{{< img src="integrations/faq/sql_server_test_2.png" alt="TCP/IP プロパティウィンドウで、IP アドレスタブを選択します。IPAll セクションで、TCP ダイナミックポートを 1433 に設定し、TCP ポートは空白のままです。" >}}
+## Empty connection string
 
-## 空白の接続文字列
-
-Datadog の SQL Server チェックは、adodbapi Python ライブラリに依存しており、このライブラリは、SQL Server への接続文字列を作成する際に使用できる文字にいくつかの制限があります。もし、Agent が SQL Server への接続に問題があり、Agent の collector.logs に以下のようなエラーがある場合、`sqlserver.yaml` に adodbapi で問題が発生する文字が含まれている可能性があります。
+Datadog's SQL Server check relies on the adodbapi Python library, which has some limitations in the characters that it is able to use in making a connection string to a SQL Server. If your Agent experiences trouble connecting to your SQL Server, and if you find errors similar to the following in your Agent's collector.logs, your `sqlserver.yaml` probably includes some character that causes issues with adodbapi.
 
 ```text
 OperationalError: (KeyError('Python string format error in connection string->',), 'Error opening connection to ""')
 ```
 
-現時点では、この特定の接続問題を引き起こすことが知られている唯一の文字は、`%` 文字です。もし、`sqlserver.yaml` で "%" 文字を使用したい場合、つまり、Datadog SQL Server のユーザーパスワードに `%` が含まれている場合、各 `%` の代わりに `%%` を 2 つ記述して、その文字をエスケープする必要があります。
+At the moment, the only character known to cause this specific connectivity issue is the `%` character. If you want to use the "%" character in your `sqlserver.yaml`, that is if your Datadog SQL Server user password includes a `%`), you need to escape that character by including a double `%%` in place of each single `%`.
 
-## Linux ホストでの SQL Server への接続
+## Connecting to SQL Server on a Linux host
 
-SQL Server (Linux または Windows にホストされている) を Linux ホストに接続するには
+To connect SQL Server (either hosted on Linux or Windows) to a Linux host:
 
-1. お使いの Linux ディストリビューション用の [Microsoft ODBC Driver][6] をインストールします。
-   使用するドライバー名がわからない場合は、`/etc/odbcinst.ini` の先頭にある括弧で囲まれたドライバー名を確認することができます。
+1. Install the [Microsoft ODBC Driver][6] for your Linux distribution.
+    If you are unsure of the driver name to use, you can find it enclosed in brackets at the top of `/etc/odbcinst.ini`.
 
     ```text
     $ cat /etc/odbcinst.ini
@@ -60,13 +59,13 @@ SQL Server (Linux または Windows にホストされている) を Linux ホ�
     Driver=/opt/microsoft/msodbcsql/lib64/libmsodbcsql-13.1.so.7.0
     UsageCount=1
     ```
-2. `odbc.ini` ファイルと `odbcinst.ini` ファイルを `/opt/datadog-agent/embedded/etc` フォルダーにコピーします。
-3. 必要であれば、pyodbc モジュールをインストールします。これは、Agent の Python 環境内で pip install pyodbc を実行することで行うことができます。例えば、以下のようになります。
+2. Copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
+3. If needed, install the pyodbc module. This can be done by running pip install pyodbc within your Agent's python environment. For example:
 
     ```shell
     $ sudo /opt/datadog-agent/embedded/bin/pip install pyodbc
     ```
-3. SQL Server の `conf.yaml` を構成して、odbc コネクターを使用し、`odbcinst.ini` ファイルに示されているように適切なドライバーを指定します。
+3. Configure your SQL Server `conf.yaml` to use the odbc connector and specify the proper driver as indicated in the `odbcinst.ini` file.
 
     ```yaml
     init_config:
@@ -83,8 +82,8 @@ SQL Server (Linux または Windows にホストされている) を Linux ホ�
 
 
 [1]: https://app.datadoghq.com/account/settings#integrations/sql_server
-[2]: /ja/integrations/sqlserver/#metrics
-[3]: /ja/integrations/guide/collect-more-metrics-from-the-sql-server-integration/
+[2]: /integrations/sqlserver/#metrics
+[3]: /integrations/guide/collect-more-metrics-from-the-sql-server-integration/
 [4]: https://msdn.microsoft.com/en-us/library/ms177440.aspx
 [5]: https://msdn.microsoft.com/en-us/library/ms144284.aspx
 [6]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux/installing-the-microsoft-odbc-driver-for-sql-server-on-linux

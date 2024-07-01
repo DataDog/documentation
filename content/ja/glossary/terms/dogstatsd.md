@@ -1,8 +1,8 @@
 ---
-core_product:
-- datadog agent
 title: DogStatsD
+core_product:
+  - datadog agent
 ---
-DogStatsD は関連する 2 つの対象を参照します。StatsD に基づくプロトコルと、そのプロトコルを実装するメトリクスのレポートを送信するアプリケーションです。DogStatsD プロトコルは StatsD プロトコルの拡張機能であり、Datadog プラットフォームに特化した修正を少し加えてあります。DogStatsD アプリケーションは Agent が付属するサービスで、メトリクス送信用の軽量メカニズムとして使用します。
+DogStatsD refers to two related things: a protocol based on StatsD, and an application for reporting metrics which implements that protocol. The DogStatsD protocol is an extension of the StatsD protocol, with some modifications that are specific to the Datadog platform. The DogStatsD application is a service that is bundled with the Agent, and is used as a lightweight mechanism for reporting metrics.
 
-詳しくは <a href='/developers/dogstatsd'>DogStatsD のドキュメント</a>をご覧ください。
+See the <a href='/developers/dogstatsd'>DogStatsD documentation</a> for more information.

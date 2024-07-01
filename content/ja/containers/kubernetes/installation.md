@@ -1,70 +1,70 @@
 ---
+title: Install the Datadog Agent on Kubernetes
 aliases:
-- /ja/agent/kubernetes/daemonset_setup
-- /ja/agent/kubernetes/helm
-- /ja/agent/kubernetes/installation
+    - /agent/kubernetes/daemonset_setup
+    - /agent/kubernetes/helm
+    - /agent/kubernetes/installation
 further_reading:
-- link: /agent/kubernetes/configuration
-  tag: ドキュメント
-  text: Kubernetes 上の Datadog Agent のさらなる構成
-- link: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#all-configuration-options
-  tag: ソースコード
-  text: Datadog Helm チャート - すべての構成オプション
-- link: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading
-  tag: ソースコード
-  text: Datadog Helm のアップグレード
-title: Kubernetes に Datadog Agent をインストールする
+    - link: /agent/kubernetes/configuration
+      tag: Documentation
+      text: Further Configure the Datadog Agent on Kubernetes
+    - link: "https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#all-configuration-options"
+      tag: Source Code
+      text: Datadog Helm chart - All configuration options
+    - link: "https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading"
+      tag: Source Code
+      text: Upgrading Datadog Helm
 ---
 
-## 概要
+## Overview
 
-このページでは、Kubernetes 環境に Datadog Agent をインストールする手順を説明します。
+This page provides instructions on installing the Datadog Agent in a Kubernetes environment.
 
-AWS Elastic Kubernetes Service (EKS)、Azure Kubernetes Service (AKS)、Google Kubernetes Engine (GKE)、Red Hat OpenShift、Rancher、Oracle Container Engine for Kubernetes (OKE) など主要な Kubernetes ディストリビューションの専用ドキュメントやサンプルは [Kubernetes ディストリビューション][1]に掲載されています。
+For dedicated documentation and examples for major Kubernetes distributions including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE), see [Kubernetes distributions][1].
 
-Kubernetes のコントロールプレーンを監視するための専用のドキュメントと例については、[Kubernetes のコントロールプレーン監視][2]を参照してください。
+For dedicated documentation and examples for monitoring the Kubernetes control plane, see [Kubernetes control plane monitoring][2].
 
-### Kubernetes と Datadog Agent の最小バージョン
+### Minimum Kubernetes and Datadog Agent versions
 
-Kubernetes の後期バージョンに関連する一部の機能では、Datadog Agent の最低バージョンが必要です。
+Some features related to later Kubernetes versions require a minimum Datadog Agent version.
 
-| Kubernetes バージョン | Agent バージョン  | 理由                                |
+| Kubernetes version | Agent version  | Reason                                |
 |--------------------|----------------|---------------------------------------|
-| 1.16.0+            | 7.19.0+        | Kubelet メトリクスの非推奨化           |
-| 1.21.0+            | 7.36.0+        |  Kubernetes リソースの非推奨化       |
-| 1.22.0+            | 7.37.0+        |  ダイナミックサービスアカウントトークンをサポート |
+| 1.16.0+            | 7.19.0+        | Kubelet metrics deprecation           |
+| 1.21.0+            | 7.36.0+        |  Kubernetes resource deprecation       |
+| 1.22.0+            | 7.37.0+        |  Support dynamic service account token |
 
-こちらもご覧ください: [Kubernetes と Cluster Agent の最小バージョン][8]
+See also: [Minimum Kubernetes and Cluster Agent versions][8].
 
-## インストール
+## Installation
 
-Datadog の [Installing on Kubernetes][16] ページを利用すると、インストールプロセスの説明が表示されます。
+Use the [Installing on Kubernetes][16] page in Datadog to guide you through the installation process.
 
-1. **インストール方法を選択する**
+1. **Select installation method**
 
-   以下のインストール方法のいずれかを使用します。
+   Choose one of the following installation methods:
 
-   - [Datadog Operator][9] (推奨): Kubernetes や OpenShift に Datadog Agent をデプロイするために利用できる Kubernetes [オペレーター][10]。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度な構成オプションで構成ミスのリスクを抑えます。
+   - [Datadog Operator][9] (recommended): a Kubernetes [operator][10] that you can use to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
    - [Helm][11]
-   - 手動インストール。[Datadog Agent を DaemonSet で手動でインストール、構成する][12]を参照してください。
+   - Manual installation. See [Manually install and configure the Datadog Agent with a DaemonSet][12]
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-<div class="alert alert-info"><a href="https://helm.sh">Helm</a> と <a href="https://kubernetes.io/docs/tasks/tools/#kubectl">kubectl CLI</a> が必要です。</div>
+<div class="alert alert-info">Requires <a href="https://helm.sh">Helm</a> and the <a href="https://kubernetes.io/docs/tasks/tools/#kubectl">kubectl CLI</a>.</div>
 
-2. **Datadog Operator をインストールする**
+2. **Install the Datadog Operator**
 
-   現在のネームスペースに Datadog Operator をインストールするには、以下を実行します：
+   To install the Datadog Operator in your current namespace, run:
    ```shell
    helm repo add datadog https://helm.datadoghq.com
    helm install datadog-operator datadog/datadog-operator
    kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY>
    ```
-   - `<API_キー>` を、ご使用の [Datadog API キー][1]に置き換えます。
+   - Replace `<DATADOG_API_KEY>` with your [Datadog API key][1].
 
-3. **`datadog-agent.yaml` を構成する**
+3. **Configure `datadog-agent.yaml`**
 
-   以下の設定を含む `datadog-agent.yaml` というファイルを作成します。
+   Create a file, `datadog-agent.yaml`, that contains:
    ```yaml
    apiVersion: datadoghq.com/v2alpha1
    kind: DatadogAgent
@@ -79,18 +79,18 @@ Datadog の [Installing on Kubernetes][16] ページを利用すると、イン�
            secretName: datadog-secret
            keyName: api-key
    ```
-   - `<CLUSTER_NAME>` を、ご使用のクラスターの名前に置き換えます。
-   - `<DATADOG_SITE>` を、ご使用の [Datadog サイト][2]に置き換えます。ご使用のサイトは {{< region-param key="dd_site" code="true" >}} です (右側で正しいサイトが選択されていることを確認してください)。
+   - Replace `<CLUSTER_NAME>` with a name for your cluster.
+   - Replace `<DATADOG_SITE>` with your [Datadog site][2]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
-4. **上記の構成ファイルを使って Agent をデプロイする**
+4. **Deploy Agent with the above configuration file**
 
-   次を実行します。
+   Run:
    ```shell
    kubectl apply -f datadog-agent.yaml
    ```
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /ja/getting_started/site
+[2]: /getting_started/site
 {{% /tab %}}
 {{% tab "Helm" %}}
 <div class="alert alert-info">Requires <a href="https://helm.sh">Helm</a>.</div>
@@ -130,7 +130,7 @@ Datadog の [Installing on Kubernetes][16] ページを利用すると、イン�
    </div>
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /ja/getting_started/site
+[2]: /getting_started/site
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -275,51 +275,51 @@ helm uninstall datadog-agent
 {{% /tab %}}
 {{< /tabs >}}
 
-## 次のステップ
+## Next steps
 
-### Datadog でインフラストラクチャーを監視する
-コンテナインフラストラクチャーを可視化し、リソースメトリクスとファセット検索を利用するには、[Containers][13] ページを使用します。Containers ページの使い方については、[コンテナビュー][14]を参照してください。
+### Monitor your infrastructure in Datadog
+Use the [Containers][13] page for visibility into your container infrastructure, with resource metrics and faceted search. For information on how to use the Containers page, see [Containers View][14].
 
-環境内で使用されているすべてのイメージに関する洞察を得るには、[Container Images][18] ページを使用します。このページには、[Cloud Security Management][19] (CSM) から提供される、コンテナイメージで見つかった脆弱性の情報も表示されます。Container Images ページの使用方法については、[コンテナイメージビュー][20] を参照してください。
+Use the [Container Images][18] page for insights into every image used in your environment. This page also displays vulnerabilities found in your container images from [Cloud Security Management][19] (CSM). For information on how to use the Container Images page, see the [Containers Images View][20].
 
-[Kubernetes][21] セクションには、すべての Kubernetes リソースの概要が表示されます。[オーケストレータエクスプローラー][22]を利用すると、特定のネームスペースや可用性ゾーン内のポッド、デプロイメント、およびその他の Kubernetes コンセプトの状態を監視したり、デプロイメント内で失敗したポッドのリソースの仕様を確認したり、ノードのアクティビティを関連ログと相関付けたりすることができます。[Resource Utilization][23] ページでは、インフラストラクチャー全体で Kubernetes ワークロードがどのようにコンピューティングリソースを使用しているかについて洞察が得られます。これらのページの使い方については、[オーケストレータエクスプローラー][24] と [Kubernetes Resource Utilization][25] を参照してください。
+The [Kubernetes][21] section features an overview of all your Kubernetes resources. [Orchestrator Explorer][22] allows you to monitor the state of pods, deployments, and other Kubernetes concepts in a specific namespace or availability zone, view resource specifications for failed pods within a deployment, correlate node activity with related logs, and more. The [Resource Utilization][23] page provides insights into how your Kubernetes workloads are using your computing resources across your infrastructure. For information on how to use these pages, see [Orchestrator Explorer][24] and [Kubernetes Resource Utilization][25].
 
-### 機能を有効にする
+### Enable features
 
 {{< whatsnext >}}
-  {{< nextlink href="/containers/kubernetes/apm">}}<u>Kubernetes 用の APM</u>: Kubernetes アプリケーション用にトレースの収集をセットアップし、構成します。{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/log">}}<u>Kubernetes でのログ収集</u>: Kubernetes 環境でのログの収集をセットアップします。{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/prometheus">}}<u>Prometheus & OpenMetrics</u>: Kubernetes 内で実行されているアプリケーションから、公開されている Prometheus および OpenMetrics メトリクスを収集します。{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/control_plane">}}<u>制御プレーンの監視</u>: Kubernetes の API サーバー、コントローラーマネージャー、スケジューラー、etcd を監視します。{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/configuration">}}<u>その他の構成</u>: イベントの収集、プロキシ設定の上書き、DogStatsD を使ったカスタムメトリクスの送信、コンテナの許可リストおよびブロックリストの構成、利用可能な環境変数一覧の参照が可能です。{{< /nextlink >}}
+  {{< nextlink href="/containers/kubernetes/apm">}}<u>APM for Kubernetes</u>: Set up and configure trace collection for your Kubernetes application.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/log">}}<u>Log collection in Kubernetes</u>: Set up log collection in a Kubernetes environment.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/prometheus">}}<u>Prometheus & OpenMetrics</u>: Collect your exposed Prometheus and OpenMetrics metrics from your application running inside Kubernetes.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/control_plane">}}<u>Control plane monitoring</u>: Monitor the Kubernetes API server, controller manager, scheduler, and etcd.{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/configuration">}}<u>Further Configuration</u>: Collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, and reference the full list of available environment variables.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/kubernetes/distributions
-[2]: /ja/agent/kubernetes/control_plane
-[3]: /ja/infrastructure/livecontainers/configuration/
-[4]: /ja/agent/kubernetes/configuration/
-[5]: /ja/agent/kubernetes/integrations/
-[6]: /ja/agent/kubernetes/apm/
-[7]: /ja/agent/kubernetes/log/
-[8]: /ja/containers/cluster_agent/#minimum-agent-and-cluster-agent-versions
-[9]: /ja/containers/datadog_operator
+[1]: /agent/kubernetes/distributions
+[2]: /agent/kubernetes/control_plane
+[3]: /infrastructure/livecontainers/configuration/
+[4]: /agent/kubernetes/configuration/
+[5]: /agent/kubernetes/integrations/
+[6]: /agent/kubernetes/apm/
+[7]: /agent/kubernetes/log/
+[8]: /containers/cluster_agent/#minimum-agent-and-cluster-agent-versions
+[9]: /containers/datadog_operator
 [10]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [11]: https://helm.sh
-[12]: /ja/containers/guide/kubernetes_daemonset/
+[12]: /containers/guide/kubernetes_daemonset/
 [13]: https://app.datadoghq.com/containers
-[14]: /ja/infrastructure/containers
-[15]: /ja/containers/kubernetes/apm
+[14]: /infrastructure/containers
+[15]: /containers/kubernetes/apm
 [16]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-[17]: /ja/containers/guide/changing_container_registry/
+[17]: /containers/guide/changing_container_registry/
 [18]: https://app.datadoghq.com/containers/images
-[19]: /ja/security/cloud_security_management
-[20]: /ja/infrastructure/containers/container_images
+[19]: /security/cloud_security_management
+[20]: /infrastructure/containers/container_images
 [21]: https://app.datadoghq.com/kubernetes
 [22]: https://app.datadoghq.com/orchestration/overview
 [23]: https://app.datadoghq.com/orchestration/resource/pod
-[24]: /ja/infrastructure/containers/orchestrator_explorer
-[25]: /ja/infrastructure/containers/kubernetes_resource_utilization
+[24]: /infrastructure/containers/orchestrator_explorer
+[25]: /infrastructure/containers/kubernetes_resource_utilization

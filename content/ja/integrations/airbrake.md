@@ -1,107 +1,108 @@
 ---
-app_id: airbrake
-app_uuid: 9628996b-82c1-4920-a0c5-c5f32dabd4cf
-assets:
-  integration:
-    auto_install: false
-    events:
-      creates_events: true
-    metrics:
-      check:
-      - airbrake.exception_rate
-      metadata_path: metadata.csv
-      prefix: airbrake.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 34
-    source_type_name: Airbrake
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- metrics
-- event management
-- issue tracking
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: airbrake
-integration_id: airbrake
-integration_title: Airbrake
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: airbrake
-public_title: Airbrake
-short_description: イベントストリームで Airbrake の例外を表示、検索、議論。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Metrics
-  - Category::Event Management
-  - Category::問題の追跡
-  configuration: README.md#Setup
-  description: イベントストリームで Airbrake の例外を表示、検索、議論。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Airbrake
+"app_id": "airbrake"
+"app_uuid": "9628996b-82c1-4920-a0c5-c5f32dabd4cf"
+"assets":
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": true
+    "metrics":
+      "check":
+      - "airbrake.exception_rate"
+      "metadata_path": "metadata.csv"
+      "prefix": "airbrake."
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "34"
+    "source_type_name": "Airbrake"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "metrics"
+- "event management"
+- "issue tracking"
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "airbrake"
+"integration_id": "airbrake"
+"integration_title": "Airbrake"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "airbrake"
+"public_title": "Airbrake"
+"short_description": "View, search on, and discuss Airbrake exceptions in your event stream."
+"supported_os": []
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Metrics"
+  - "Category::Event Management"
+  - "Category::Issue Tracking"
+  "configuration": "README.md#Setup"
+  "description": "View, search on, and discuss Airbrake exceptions in your event stream."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Airbrake"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## 概要
+## Overview
 
-Airbrake を Datadog に接続すると、以下のことができます。
+Connect Airbrake to Datadog to:
 
-- 例外は Datadog の[イベント][1]としてリアルタイムで確認できます。
-- グラフで例外を検索できます。
-- 例外についてチームで議論できます。
+- See exceptions in real time as [Events][1] in Datadog.
+- Search for exceptions in your graphs.
+- Discuss exceptions with your team.
 
 {{< img src="integrations/airbrake/airbrakeevent.png" alt="airbrake" popup="true">}}
 
-## 計画と使用
+## Setup
 
-### ブラウザトラブルシューティング
+### Configuration
 
-Webhook を使用して Airbrake インテグレーションをセットアップします。
+Set up Airbrake integration using webhooks:
 
-1. Airbrake アカウントの Settings ページに移動します。
+1. Go to the Settings page in your Airbrake account.
 
-2. 有効にしたいプロジェクトごとに、**Integrations** をクリックします。
+2. For each project you want to enable, click **Integrations**.
 
-3. **WebHooks** をクリックし、**URL** フィールドにこの URL を入力します。
+3. Click **WebHooks** and enter this URL in the **URL** field:
 
     ```text
     https://app.datadoghq.com/intake/webhook/airbrake?api_key=<YOUR_DATADOG_API_KEY>
     ```
 
-4. **Save** をクリックします。
+4. Click **Save**.
 
-[イベントエクスプローラー][2]にアクセスすると、Airbrake からの新しいエラーが表示されます。
+Go to the [Events Explorer][2] to see new errors from Airbrake.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "airbrake" >}}
 
 
-### ヘルプ
+### Events
 
-Airbrake インテグレーションは、Airbrake からのエラーをイベントとして表示します。
+The Airbrake integration shows errors from Airbrake as events.
 
-### ヘルプ
+### Service Checks
 
-Airbrake インテグレーションには、サービスのチェック機能は含まれません。
+The Airbrake integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
-[1]: https://docs.datadoghq.com/ja/events/
+[1]: https://docs.datadoghq.com/events/
 [2]: https://app.datadoghq.com/event/explorer
 [3]: https://github.com/DataDog/integrations-internal-core/blob/main/airbrake/metadata.csv
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/help/
+

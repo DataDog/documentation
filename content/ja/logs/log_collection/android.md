@@ -1,254 +1,275 @@
 ---
-description: Android アプリケーションからログを収集する。
+title: Android Log Collection
+kind: documentation
+description: Collect logs from your Android applications.
 further_reading:
-- link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
-  text: dd-sdk-android ソースコード
+- link: "https://github.com/DataDog/dd-sdk-android"
+  tag: Source Code
+  text: dd-sdk-android Source code
 - link: logs/explorer
-  tag: ドキュメント
-  text: ログの調査方法
-kind: ドキュメント
-title: Android ログの収集
+  tag: Documentation
+  text: Learn how to explore your logs
 ---
 
-[Datadog の `dd-sdk-android` クライアント側ロギングライブラリ][1]を使用すると、Android アプリケーションから Datadog へログを送信すると共に、次の機能を利用できます。
+## Overview
 
-* Datadog に JSON 形式でネイティブに記録する。
-* 送信される各ログに `context` およびカスタム属性を追加する。
-* Java/Kotlin がキャッチした例外を転送します。
-* 実際のクライアント IP アドレスとユーザーエージェントを記録する。
-* 自動一括ポストによってネットワークの利用を最適化する。
+Send logs to Datadog from your Android applications with [Datadog's `dd-sdk-android-logs` client-side logging library][1] and leverage the following features:
 
-## セットアップ
+* Log to Datadog in JSON format natively.
+* Add `context` and extra custom attributes to each log sent.
+* Forward Java or Kotlin caught exceptions.
+* Record real client IP addresses and User-Agents.
+* Optimized network usage with automatic bulk posts.
 
-1. モジュールレベルの `build.gradle` ファイルでライブラリを依存関係として宣言し、Gradle 依存関係を追加します。
+## Setup
 
-    ```conf
+1. Add the Gradle dependency by declaring the library as a dependency in the module-level `build.gradle` file. Make sure to replace `x.x.x` in the following example with the latest version of [dd-sdk-android-logs][2].
+
+    ```groovy
     dependencies {
-        implementation "com.datadoghq:dd-sdk-android:x.x.x"
+        implementation "com.datadoghq:dd-sdk-android-logs:x.x.x"
     }
     ```
 
-2. アプリケーションコンテキストと追跡に関する同意、[Datadog クライアントトークン][2]、そして Datadog UI で新しい RUM アプリケーションを作成したときに生成されたアプリケーション ID で、ライブラリを初期化します (詳細は、[Android の RUM データを収集][6]を参照)。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][3]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。`APP_VARIANT_NAME` は、データを生成するアプリケーションのバリアントを指定します。
+2. Initialize Datadog SDK with your application context, tracking consent, as well as the [Datadog client token][3]. For security reasons, you must use a client token; you cannot use [Datadog API keys][4] to configure the Datadog SDK, as they would be exposed client-side in the Android application APK byte code.
 
-{{< site-region region="us" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-```kotlin
-    class SampleApplication : Application() {
-        override fun onCreate() {
-            super.onCreate()
-            val configuration = Configuration.Builder(
-                logsEnabled = true,
-                tracesEnabled = true,
-                crashReportsEnabled = true,
-                rumEnabled = true
-            ).build()
-            val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
-            Datadog.initialize(this, credentials, configuration, trackingConsent)
-        }
-    }
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-    public class SampleApplication extends Application {
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            Configuration configuration =
-                    new Configuration.Builder(true, true, true, true)
-                            .build();
-            Credentials credentials = new Credentials( < CLIENT_TOKEN >, <ENV_NAME >, <APP_VARIANT_NAME >, <
-            APPLICATION_ID >);
-            Datadog.initialize(this, credentials, configuration, trackingConsent);
-        }
-    }
-```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
+   The `APP_VARIANT_NAME` specifies the variant of the application that generates data. This is required in the initialization credentials; use your `BuildConfig.FLAVOR` value or an empty string if you do not have variants. The appropriate ProGuard `mapping.txt` file will be automatically uploaded at build time, allowing you to view de-obfuscated error stack traces. For more information, see [Android Crash Reporting and Error Tracking][5].
 
-{{< site-region region="eu" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-```kotlin
-    class SampleApplication : Application() {
-        override fun onCreate() {
-            super.onCreate()
-            val configuration = Configuration.Builder(
-                    logsEnabled = true,
-                    tracesEnabled = true,
-                    crashReportsEnabled = true,
-                    rumEnabled = true
-                )
-                .useSite(DatadogSite.EU1)
-                .build()
-            val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
-            Datadog.initialize(this, credentials, configuration, trackingConsent)
-        }
-    }
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-    public class SampleApplication extends Application {
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            Configuration configuration =
-                    new Configuration.Builder(true, true, true, true)
-                            .useSite(DatadogSite.EU1)
-                            .build();
-            Credentials credentials = new Credentials( < CLIENT_TOKEN >, <ENV_NAME >, <APP_VARIANT_NAME >, <
-            APPLICATION_ID >);
-            Datadog.initialize(this, credentials, configuration, trackingConsent);
-        }
-    }
-```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
+   For more information about setting up a client token, see the [client token documentation][3].
 
-{{< site-region region="us3" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-```kotlin
-    class SampleApplication : Application() {
-        override fun onCreate() {
-            super.onCreate()
-            val configuration = Configuration.Builder(
-                    logsEnabled = true,
-                    tracesEnabled = true,
-                    crashReportsEnabled = true,
-                    rumEnabled = true
-                )
-                .useSite(DatadogSite.US3)
-                .build()
-            val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
-            Datadog.initialize(this, credentials, configuration, trackingConsent)
-        }
-    }
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-    public class SampleApplication extends Application {
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            Configuration configuration =
-                    new Configuration.Builder(true, true, true, true)
-                            .useSite(DatadogSite.US3)
-                            .build();
-            Credentials credentials = new Credentials( < CLIENT_TOKEN >, <ENV_NAME >, <APP_VARIANT_NAME >, <
-            APPLICATION_ID >);
-            Datadog.initialize(this, credentials, configuration, trackingConsent);
-        }
-    }
-```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
+   {{< site-region region="us" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                   clientToken = <CLIENT_TOKEN>,
+                   env = <ENV_NAME>,
+                   variant = <APP_VARIANT_NAME>
+               ).build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
 
-{{< site-region region="us5" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-```kotlin
-    class SampleApplication : Application() {
-        override fun onCreate() {
-            super.onCreate()
-            val configuration = Configuration.Builder(
-                    logsEnabled = true,
-                    tracesEnabled = true,
-                    crashReportsEnabled = true,
-                    rumEnabled = true
-                )
-                .useSite(DatadogSite.US5)
-                .build()
-            val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
-            Datadog.initialize(this, credentials, configuration, trackingConsent)
-        }
-    }
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-    public class SampleApplication extends Application {
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            Configuration configuration =
-                    new Configuration.Builder(true, true, true, true)
-                            .useSite(DatadogSite.US5)
-                            .build();
-            Credentials credentials = new Credentials( < CLIENT_TOKEN >, <ENV_NAME >, <APP_VARIANT_NAME >, <
-            APPLICATION_ID >);
-            Datadog.initialize(this, credentials, configuration, trackingConsent);
-        }
-    }
-```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
+   {{< site-region region="eu" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.EU1)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .useSite(DatadogSite.EU1)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
 
-{{< site-region region="gov" >}}
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-```kotlin
-    class SampleApplication : Application() {
-        override fun onCreate() {
-            super.onCreate()
-            val configuration = Configuration.Builder(
-                    logsEnabled = true,
-                    tracesEnabled = true,
-                    crashReportsEnabled = true,
-                    rumEnabled = true
-                )
-                .useSite(DatadogSite.US1_FED)
-                .build()
-            val credentials = Credentials(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>, <APPLICATION_ID>)
-            Datadog.initialize(this, credentials, configuration, trackingConsent)
-        }
-    }
-```
-{{% /tab %}}
-{{% tab "Java" %}}
-```java
-    public class SampleApplication extends Application {
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            Configuration configuration =
-                    new Configuration.Builder(true, true, true, true)
-                            .useSite(DatadogSite.US1_FED)
-                            .build();
-            Credentials credentials = new Credentials( < CLIENT_TOKEN >, <ENV_NAME >, <APP_VARIANT_NAME >, <
-            APPLICATION_ID >);
-            Datadog.initialize(this, credentials, configuration, trackingConsent);
-        }
-    }
-```
-{{% /tab %}}
-{{< /tabs >}}
-{{< /site-region >}}
+   {{< site-region region="us3" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.US3)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .useSite(DatadogSite.US3)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
 
-GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同意を求めます。
-追跡の同意は以下のいずれかの値になります。
-   * `TrackingConsent.PENDING`: SDK はデータの収集とバッチ処理を開始しますが、データ
-     収集エンドポイントへの送信は行われません。SDK はバッチ処理が完了したデータをどうするかについての新たな同意値が得られるまで待機します。
-   * `TrackingConsent.GRANTED`: SDK はデータの収集を開始し、それをデータ収集エンドポイントに送信します。
-   * `TrackingConsent.NOT_GRANTED`: SDK がデータを収集することはありません。手動でログやトレース、
-     RUM イベントを送信することもできません。
+   {{< site-region region="us5" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.US5)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .useSite(DatadogSite.US5)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
 
-   SDK の初期化後に追跡に関する同意を更新する場合は、 `Datadog.setTrackingConsent(<NEW CONSENT>)` を呼び出してください。
-   SDK は新しい同意に応じて動作を変更します。たとえば、現在の同意内容が `TrackingConsent.PENDING` で、それを
-   * `TrackingConsent.GRANTED` に更新した場合: SDK は現在のバッチデータと将来的なデータをすべてデータ収集エンドポイントに直接送信します。
-   * `TrackingConsent.NOT_GRANTED`: SDK はすべてのバッチデータを消去し、以後のデータも収集しません。
+   {{< site-region region="gov" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.US1_FED)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .useSite(DatadogSite.US1_FED)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
 
-**注**: 初期化に必要な認証情報では、アプリケーションのバリアント名も必要となり、値 `BuildConfig.FLAVOR` (バリアントがない場合は空白の文字列) の使用が求められることにご注意ください。これは適切な ProGuard `mapping.txt` ファイルを有効化し、ビルド時の自動アップロードを行うために重要です。この操作により、難読化を解除された RUM エラースタックトレースを表示できるようになります。詳しくは、[Android ソースマッピングファイルのアップロードガイド][7]をご参照ください。
+   {{< site-region region="ap1" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+       class SampleApplication : Application() {
+           override fun onCreate() {
+               super.onCreate()
+               val configuration = Configuration.Builder(
+                        clientToken = <CLIENT_TOKEN>,
+                        env = <ENV_NAME>,
+                        variant = <APP_VARIANT_NAME>
+                    )
+                    .useSite(DatadogSite.AP1)
+                    .build()
+               Datadog.initialize(this, configuration, trackingConsent)
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+       public class SampleApplication extends Application {
+           @Override
+           public void onCreate() {
+               super.onCreate();
+               Configuration configuration =
+                       new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                               .useSite(DatadogSite.AP1)
+                               .build();
+               Datadog.initialize(this, configuration, trackingConsent);
+           }
+       }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
 
-   ユーティリティメソッド `isInitialized` を使用して SDK が適切に初期化されていることを確認します。
+   To be compliant with the GDPR regulation, the SDK requires the tracking consent value at initialization.
+   The tracking consent can be one of the following values:
+   * `TrackingConsent.PENDING`: The SDK starts collecting and batching the data but does not send it to the data
+     collection endpoint. The SDK waits for the new tracking consent value to decide what to do with the batched data.
+   * `TrackingConsent.GRANTED`: The SDK starts collecting the data and sends it to the data collection endpoint.
+   * `TrackingConsent.NOT_GRANTED`: The SDK does not collect any data. You will not be able to manually send any logs, traces, or
+     RUM events.
+
+   To update the tracking consent after the SDK is initialized, call: `Datadog.setTrackingConsent(<NEW CONSENT>)`.
+   The SDK changes its behavior according to the new consent. For example, if the current tracking consent is `TrackingConsent.PENDING` and you update it to:
+   * `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
+   * `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
+
+   Use the utility method `isInitialized` to check if the SDK is properly initialized:
 
    ```kotlin
     if (Datadog.isInitialized()) {
@@ -256,38 +277,58 @@ GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同�
     }
    ```
 
-   アプリケーションを書く際、 `setVerbosity` メソッドを呼び出すことで開発ログを有効にできます。指定したレベル以上の優先度を持つライブラリ内のすべての内部メッセージが Android の Logcat に記録されます。
+   When writing your application, you can enable development logs by calling the `setVerbosity` method. All internal messages in the library with a priority equal to or higher than the provided level are then logged to Android's Logcat:
    ```kotlin
    Datadog.setVerbosity(Log.INFO)
    ```
 
-3. Android ロガーの構成：
+3. Configure and enable Logs feature:
+
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-         val logger = Logger.Builder()
-            .setNetworkInfoEnabled(true)
-            .setLogcatLogsEnabled(true)
-            .setDatadogLogsEnabled(true)
-            .setBundleWithTraceEnabled(true)
-            .setLoggerName("<LOGGER_NAME>")
-            .build()
+        val logsConfig = LogsConfiguration.Builder().build()
+        Logs.enable(logsConfig)
    ```
    {{% /tab %}}
+
    {{% tab "Java" %}}
    ```java
-          final Logger logger = new Logger.Builder()
-            .setNetworkInfoEnabled(true)
-            .setLogcatLogsEnabled(true)
-            .setDatadogLogsEnabled(true)
-            .setBundleWithTraceEnabled(true)
-            .setLoggerName("<LOGGER_NAME>")
-            .build();
+        LogsConfiguration logsConfig = new LogsConfiguration.Builder().build();
+        Logs.enable(logsConfig);
    ```
    {{% /tab %}}
    {{< /tabs >}}
 
-4. 次のいずれかの関数で、カスタムログエントリを Datadog に直接送信します。
+4. Configure the Android Logger:
+
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+        val logger = Logger.Builder()
+           .setNetworkInfoEnabled(true)
+           .setLogcatLogsEnabled(true)
+           .setRemoteSampleRate(100f)
+           .setBundleWithTraceEnabled(true)
+           .setName("<LOGGER_NAME>")
+           .build()
+   ```
+   {{% /tab %}}
+
+   {{% tab "Java" %}}
+   ```java
+        Logger logger = new Logger.Builder()
+           .setNetworkInfoEnabled(true)
+           .setLogcatLogsEnabled(true)
+           .setRemoteSampleRate(100f)
+           .setBundleWithTraceEnabled(true)
+           .setName("<LOGGER_NAME>")
+           .build();
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+
+5. Send a custom log entry directly to Datadog with one of the following functions:
 
     ```kotlin
     logger.d("A debug message.")
@@ -297,186 +338,177 @@ GDPR 規定を遵守するため、SDK は初期化時に追跡に関する同�
     logger.wtf("What a Terrible Failure!")
     ```
 
-5. キャッチされた例外はメッセージで送信できます。
+6. Exceptions caught can be sent with a message:
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-        try { 
-            doSomething() 
-        } catch (e: IOException) {
-            logger.e("Error while doing something", e) 
-        }
+       try { 
+           doSomething() 
+       } catch (e: IOException) {
+           logger.e("Error while doing something", e) 
+       }
    ```
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-        try {
-            doSomething();
-        } catch (IOException e) {
-            logger.e("Error while doing something", e);
-        }
+       try {
+           doSomething();
+       } catch (IOException e) {
+           logger.e("Error while doing something", e);
+       }
    ```
    {{% /tab %}}
    {{< /tabs >}}
 
-    **注**: すべてのロギングメソッドに Throwable をアタッチすることができます。
+    **Note**: All logging methods can have a throwable attached to them.
 
-6. (任意) - ログメッセージと一緒にマップを提供し、発行されたログに属性を追加します。マップの各エントリーは属性として追加されます。
+7. (Optional) Provide a map alongside your log message to add attributes to the emitted log. Each entry of the map is added as an attribute.
 
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-        logger.i("onPageStarted", attributes = mapOf("http.url" to url))
+       logger.i("onPageStarted", attributes = mapOf("http.url" to url))
    ```
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-        Map<String, Object> attributes = new HashMap<>();
-        attributes.put("http.url", url);
-        logger.i("onPageStarted", null, attributes);
+       Map<String, Object> attributes = new HashMap<>();
+       attributes.put("http.url", url);
+       logger.i("onPageStarted", null, attributes);
    ```
    {{% /tab %}}
    {{< /tabs >}}
 
-7. バッチ処理前にログイベントで属性を変更する必要がある場合は、SDK の初期化時に `EventMapper<LogEvent>` を実装することで上記の処理を行えます。
+8. If you need to modify some attributes in your Log events before batching you can do so by providing an implementation of `EventMapper<LogEvent>` when initializing Logs feature:
 
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-        val config = Configuration.Builder(logsEnabled = true, ...)
-                    // ...
-                    .setLogEventMapper(logEventMapper)
-                    .build()
+       val logsConfig = LogsConfiguration.Builder()
+                   // ...
+                   .setEventMapper(logEventMapper)
+                   .build()
    ```
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-        Configuration config = new Configuration.Builder(true, true, true, true)
-                    // ...
-                    .setLogEventMapper(logEventMapper)
-                    .build();
+       LogsConfiguration logsConfig = new LogsConfiguration.Builder()
+                   // ...
+                   .setEventMapper(logEventMapper)
+                   .build();
    ```
    {{% /tab %}}
    {{< /tabs >}}
 
-   **注**: `EventMapper<LogEvent>` の実装から null や異なるインスタンスが返された場合、イベントは削除されます。
+   **Note**: If you return null or a different instance from the `EventMapper<LogEvent>` implementation, the event will be dropped.
 
-## 高度なロギング
+## Advanced logging
 
-### ライブラリの初期化
+### Logger initialization
 
-ライブラリを初期化するよう Datadog のコンフィギュレーションを作成する際、`Configuration.Builder` の以下のメソッドを使用できます。
+The following methods in `Logger.Builder` can be used when initializing the logger to send logs to Datadog:
 
-| メソッド                           | 説明                                                                                                                                                                                                                                                             |
+| Method                           | Description                                                                                                                                                                                                                                                             |
 |----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `constructor(logsEnabled = true)`     | Datadog へのログ送信を有効にするには、`true` に設定します。                                                                                                                                                                                                                                  |
-| `addPlugin(DatadogPlugin, Feature)`   | 特定の機能 (CRASH、LOG、TRACE、RUM) についてのプラグインの実装を追加します。プラグインはこの機能の初期化に伴い登録され、機能が停止すると登録解除されます。 |
+| `setNetworkInfoEnabled(true)`    | Add the `network.client.connectivity` attribute to all logs. The data logged by default is `connectivity` (`Wifi`, `3G`, `4G`...) and `carrier_name` (`AT&T - US`). `carrier_name` is only available for Android API level 28+.                                     |
+| `setService(<SERVICE_NAME>)` | Set `<SERVICE_NAME>` as value for the `service` [standard attribute][6] attached to all logs sent to Datadog.                                                                                                                                                           |
+| `setLogcatLogsEnabled(true)`     | Set to `true` to use Logcat as a logger.                                                                                                                                                                                                                                  |
+| `setBundleWithTraceEnabled(true)`| Set to `true` (default) to bundle the logs with the active trace in your application. This parameter lets you display all the logs sent during a specific trace by using the Datadog dashboard.                                                        |
+| `setBundleWithRumEnabled(true)`| Set to `true` (default) to bundle the logs with the current RUM context in your application. This parameter lets you display all the logs sent while a specific View is active by using the Datadog RUM Explorer.                                                        |
+| `setName(<LOGGER_NAME>)`   | Set `<LOGGER_NAME>` as the value for the `logger.name` attribute attached to all logs sent to Datadog.                                                                                                                                                                  |
+| `setRemoteSampleRate(<SAMPLE_RATE>)`   | Set the sampling rate for this logger. All the logs produced by the logger instance are randomly sampled according to the provided sample rate (default 1.0 = all logs). **Note**: The Logcat logs are not sampled.            |
+| `build()`                        | Build a new logger instance with all options set.                                                                                                                                                                                                                       |
 
-### ロガーの初期化
+### Global configuration
 
-ログを Datadog に送信するようにロガーを初期化する際に、`Logger.Builder` の次のメソッドを使用できます。
+Find below functions to add/remove tags and attributes to all logs sent by a given logger.
 
-| メソッド                           | 説明                                                                                                                                                                                                                                                             |
-|----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `setNetworkInfoEnabled(true)`    | すべてのログに `network.client.connectivity` 属性を追加します。デフォルトで記録されるデータには、`connectivity` (`Wifi`、`3G`、`4G`...) と `carrier_name` (`AT&T - US`)です。`carrier_name` は Android API レベル 28 以降でのみ利用できます。                                     |
-| `setServiceName(<サービス名>)` | Datadog に送信されるすべてのログに添付される `service` [標準属性][4] の値として `<サービス名>` を設定します。                                                                                                                                                           |
-| `setLogcatLogsEnabled(true)`     | Logcat をロガーとして使用するには、`true` とします。                                                                                                                                                                                                                                  |
-| `setDatadogLogsEnabled(true)`    | Datadog にログを送信するには、`true` とします。                                                                                                                                                                                                                                  |
-| `setBundleWithTraceEnabled(true)`| アプリケーションでアクティブなトレースとログをバンドルするには、`true` (デフォルト) に設定します。このパラメーターにより、Datadog ダッシュボードを使い指定されたトレース中に送信されたすべてのログを表示できます。                                                        |
-| `setBundleWithRumEnabled(true)`| アプリケーションで現在の RUM コンテキストとログをバンドルするには、`true` (デフォルト) に設定します。このパラメーターにより、Datadog RUM Explorer 使い指定されたビューがアクティブの間に送信されたすべてのログを表示できます。                                                        |
-| `setLoggerName(<ロガー名>)`   | Datadog に送信されるすべてのログに添付される `logger.name` 標準属性の値として `<ロガー名>` を設定します。                                                                                                                                                                  |
-| `setSampleRate(<サンプルレート>)`   | このロガーのサンプリングレートを設定します。ロガーインスタンスが生成するすべてのログは、指定されたサンプリングレートに従いランダムにサンプリングされます (デフォルト 1.0 = すべてのログ)。**注**: Logcat ログはサンプリングされません。            |
-| `build()`                        | すべてのオプションを設定して新しいロガーインスタンスをビルドします。                                                                                                                                                                                                                       |
+#### Global tags
 
-### グローバルコンフィギュレーション
+##### Add tags
 
-指定されたロガーから送信されるすべてのログにタグと属性を追加/削除する関数を以下に記します。
-
-#### グローバルタグ
-
-##### タグを追加
-
-`addTag("<TAG_KEY>", "<TAG_VALUE>")` 関数を使い、指定されたロガーから送信されるすべてのログにタグを追加します。
+Use the `addTag("<TAG_KEY>", "<TAG_VALUE>")` function to add tags to all logs sent by a specific logger:
 
 ```kotlin
-// これにより、"build_type:debug" タグまたは "build_type:release" タグが適宜追加されます
+// This adds a tag "build_type:debug" or "build_type:release" accordingly
 logger.addTag("build_type", BuildConfig.BUILD_TYPE)
 
-// これにより、"device:android" タグが追加されます
+// This adds a tag "device:android"
 logger.addTag("device", "android")
 ```
 
-**注意**: `<タグの値>` は文字列でなければなりません。
+The `<TAG_VALUE>` must be a `String`.
 
-##### タグを削除
+##### Remove tags
 
-`removeTagsWithKey("<タグキー>")` 関数を使い、指定されたロガーから送信されるすべてのログからタグを削除します。
+Use the `removeTagsWithKey("<TAG_KEY>")` function to remove tags from all logs sent by a specific logger:
 
 ```kotlin
-// これにより "build_type" で始まるすべてのタグが削除されます
+// This removes any tag starting with "build_type"
 logger.removeTagsWithKey("build_type")
 ```
 
-[Datadog タグに関する詳細][5]。
+For more information, see [Getting Started with Tags][7].
 
-#### グローバル属性
+#### Global attributes
 
-##### 属性を追加
+##### Add attributes
 
-デフォルトで、ロガーにより送信されるすべてのログに次の属性が追加されます。
+By default, the following attributes are added to all logs sent by a logger:
 
-* `http.useragent` と抽出された `device` と `OS` プロパティ
-* `network.client.ip` と抽出された地理的プロパティ (`country`, `city`)
+* `http.useragent` and its extracted `device` and `OS` properties
+* `network.client.ip` and its extracted geographical properties (`country`, `city`)
 
-`addAttribute("<属性キー>", "<属性の値>")` 関数を使い、指定されたロガーから送信されるすべてのログにカスタム属性を追加します。
+Use the `addAttribute("<ATTRIBUTE_KEY>", "<ATTRIBUTE_VALUE>")` function to add a custom attribute to all logs sent by a specific logger:
 
 ```kotlin
-// これにより整数値を持つ "version_code" 属性が追加されます
+// This adds an attribute "version_code" with an integer value
 logger.addAttribute("version_code", BuildConfig.VERSION_CODE)
 
-// これにより文字列値を持つ "version_name" 属性が追加されます
+// This adds an attribute "version_name" with a String value
 logger.addAttribute("version_name", BuildConfig.VERSION_NAME)
 ```
 
-**注**: `<属性の値>` にはプリミティブ、文字列、日付を使用できます。
+The `<ATTRIBUTE_VALUE>` can be any primitive, `String`, or Date.
 
-##### 属性を削除
+##### Remove attributes
 
-`removeAttribute("<属性キー>", "<属性の値>")` 関数を使い、指定されたロガーから送信されるすべてのログからカスタム属性を削除します。
+Use the `removeAttribute("<ATTRIBUTE_KEY>", "<ATTRIBUTE_VALUE>")` function to remove a custom attribute from all logs sent by a specific logger:
 
 ```kotlin
-// これにより、"version_code" 属性は今後送信されるすべてのログから削除されます。
+// This removes the attribute "version_code" from all further log send.
 logger.removeAttribute("version_code")
 
-// これにより、"version_name" 属性は今後送信されるすべてのログから削除されます。
+// This removes the attribute "version_name" from all further log send.
 logger.removeAttribute("version_name")
 ```
 
-## バッチコレクション
+## Batch collection
 
-すべてのログは、最初にローカルデバイスにバッチで格納されます。各バッチはインテークの仕様に従います。ネットワークが利用可能で、Datadog SDK がエンドユーザーのエクスペリエンスに影響を与えないようにバッテリーの残量が十分にあれば、バッチはすぐに送信されます。アプリケーションがフォアグラウンドにあるときにネットワークが利用できない場合、またはデータのアップロードが失敗した場合、バッチは正常に送信されるまで保持されます。
+All the logs are first stored on the local device in batches. Each batch follows the intake specification. They are sent as soon as network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
 
-つまり、ユーザーがオフラインでアプリケーションを開いても、データが失われることはありません。
+This means that even if users open your application while being offline, no data will be lost.
 
-ディスク上のデータは、古すぎる場合は SDK がディスク容量を使いすぎないようにするために自動的に破棄されます。
+The data on disk will automatically be discarded if it gets too old to ensure the SDK does not use too much disk space.
 
-**注**: データが Datadog にアップロードされる前に、アプリケーションのキャッシュディレクトリに平文で保存されます。このキャッシュフォルダは、[Android のアプリケーションサンドボックス][8]によって保護されており、ほとんどのデバイスで、このデータは他のアプリケーションによって読み取られることはありません。しかし、モバイルデバイスがルート化されていたり、誰かが Linux カーネルをいじったりすると、保存されているデータが読めるようになる可能性があります。
+Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][8], meaning that on most devices this data cannot be read by other applications. However, if the mobile device is rooted, or someone tempers with the Linux kernel, the stored data might become readable.
 
-## 拡張
+## Extensions
 
-### Timber 
+### Timber
 
-既存のコードベースが Timber を使用している場合、[専用ライブラリ](https://github.com/DataDog/dd-sdk-android/tree/master/dd-sdk-android-timber) を使用してすべてのログを自動的に Datadog へ転送できます。
+If your existing codebase is using Timber, you can forward all those logs to Datadog automatically by using the [dedicated library][9].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-sdk-android
-[2]: /ja/account_management/api-app-keys/#client-tokens
-[3]: /ja/account_management/api-app-keys/#api-keys
-[4]: /ja/logs/processing/attributes_naming_convention/
-[5]: /ja/tagging/
-[6]: /ja/real_user_monitoring/android/?tab=us
-[7]: /ja/real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[1]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-logs
+[2]: https://github.com/DataDog/dd-sdk-android/blob/develop/CHANGELOG.md
+[3]: /account_management/api-app-keys/#client-tokens
+[4]: /account_management/api-app-keys/#api-keys
+[5]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[6]: /logs/processing/attributes_naming_convention/
+[7]: /getting_started/tagging/
 [8]: https://source.android.com/security/app-sandbox
+[9]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-timber

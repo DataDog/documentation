@@ -1,3 +1,3 @@
 ---
-title: スパン
+title: Spans
 ---

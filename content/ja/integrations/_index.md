@@ -1,133 +1,125 @@
 ---
+title: Integrations
+disable_sidebar: true
 aliases:
-- /ja/integrations/verisign_openhybrid/
-- /ja/integrations/snyk/
-- /ja/integrations/lightstep_incident_response/
-- /ja/integrations/mainstorconcept_ziris/
-- /ja/integrations/rookout/
-- /ja/integrations/rookout_license/
+    - /integrations/verisign_openhybrid/
+    - /integrations/snyk/
+    - /integrations/lightstep_incident_response/
+    - /integrations/mainstorconcept_ziris/
+    - /integrations/rookout/
+    - /integrations/rookout_license/
+    - /integrations/shoreline/
+    - /integrations/shoreline_license/
+    - /integrations/shoreline_software_license/
+description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
     path: /integrations/akamai_datastream_2.md
   aliases:
-  - /integrations/akamai_datastream
+    - /integrations/akamai_datastream
 - _target:
     path: /integrations/azure.md
   algolia:
-    category: ドキュメント
     rank: 80
-    subcategory: インテグレーション
-    tags:
-    - azure
-    - microsoft azure
+    category: Documentation
+    subcategory: Integrations
+    tags: ['azure', 'microsoft azure']
 - _target:
     path: /integrations/kubernetes_state_core.md
   algolia:
-    category: ドキュメント
     rank: 60
-    subcategory: インテグレーション
-    tags:
-    - ksm
+    category: Documentation
+    subcategory: Integrations
+    tags: ['ksm']
 - _target:
     path: /integrations/google_cloud_platform.md
   algolia:
-    category: ドキュメント
     rank: 80
-    subcategory: インテグレーション
-    tags:
-    - gcp
-    - google cloud platform
+    category: Documentation
+    subcategory: Integrations
+    tags: ['gcp', 'google cloud platform']
 - _target:
     path: /integrations/amazon_web_services.md
   algolia:
-    category: ドキュメント
     rank: 80
-    subcategory: インテグレーション
-    tags:
-    - aws
-    - amazon web services
+    category: Documentation
+    subcategory: Integrations
+    tags: ['aws', 'amazon web services']
 - _target:
     path: /integrations/eks_fargate.md
   algolia:
-    category: ドキュメント
     rank: 60
-    subcategory: インテグレーション
-    tags:
-    - eks logging
+    category: Documentation
+    subcategory: Integrations
+    tags: ['eks logging']
 - _target:
     path: /integrations/win32_event_log.md
-  algolia:
-    category: ドキュメント
-    rank: 60
-    subcategory: CoScreen
-    tags:
-    - event viewer
   aliases:
-  - /integrations/eventviewer/
+    - /integrations/eventviewer/
+  algolia:
+    rank: 60
+    category: Documentation
+    subcategory: Integrations
+    tags: ['event viewer']
 - _target:
     path: /integrations/lambdatest_license.md
   aliases:
-  - /integrations/lambdatest_software_license/
+    - /integrations/lambdatest_software_license/
 - _target:
     path: /integrations/mongo.md
   aliases:
-  - /integrations/mongodb/
+    - /integrations/mongodb/
 - _target:
     path: /integrations/rapdev_validator.md
   aliases:
-  - /integrations/rapdev_dashboard_widget_pack/
+    - /integrations/rapdev_dashboard_widget_pack/
 - _target:
     path: /integrations/wmi_check.md
   aliases:
-  - /integrations/wmi/
+    - /integrations/wmi/
 - _target:
     path: /integrations/jfrog_platform_self_hosted.md
   aliases:
-  - /integrations/jfrog_platform/
+    - /integrations/jfrog_platform/
 - _target:
     path: /integrations/komodor_license.md
   aliases:
-  - /integrations/komodor_komodor/
-- _target:
-    path: /integrations/shoreline_license.md
-  aliases:
-  - /integrations/shoreline_software_license/
+    - /integrations/komodor_komodor/
 - _target:
     path: /integrations/stormforge_license.md
   aliases:
-  - /integrations/stormforge_stormforge_license/
+    - /integrations/stormforge_stormforge_license/
 - _target:
     path: /integrations/feed.md
   aliases:
-  - /integrations/rss/
+    - /integrations/rss/
 - _target:
     path: /integrations/java.md
   aliases:
-  - /agent/faq/jmx_integrations/
-  - /agent/faq/docker-jmx/
+    - /agent/faq/jmx_integrations/
+    - /agent/faq/docker-jmx/
 - _target:
     path: /integrations/amazon_elb.md
   aliases:
-  - /integrations/awselb
+    - /integrations/awselb
 - _target:
     path: /integrations/elastic.md
   aliases:
-  - /integrations/awses
+    - /integrations/awses
 - _target:
     path: /integrations/amazon_s3.md
   aliases:
-  - /integrations/awss3
-- params:
-    custom_kind: "integration"
-description: すべてのシステム、アプリケーション、およびサービスからデータを収集
-disable_sidebar: true
-title: インテグレーション
+    - /integrations/awss3
+- _target:
+    path: /integrations/snowflake_web.md
+  aliases:
+    - /integrations/snowflake/
 ---
 
-すべてのシステム、アプリケーション、サービスの横断的な監視を実現します。Datadog が提供する {{< translate key="integration_count" >}} 以上の組み込みインテグレーションをご活用ください。
+More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.
 
-インテグレーションとは何でしょうか？ [インテグレーションをご紹介します][1]
+What's an integration? See [Introduction to Integrations][1].
 
 {{< integrations >}}
 
-[1]: /ja/getting_started/integrations/
+[1]: /getting_started/integrations/

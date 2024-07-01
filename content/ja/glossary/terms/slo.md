@@ -1,7 +1,7 @@
 ---
+title: Service Level Objective (SLO)
 core_product:
-- slos
-title: サービスレベル目標 (SLO)
+  - slos
 ---
-SLO は、特定の期間におけるアプリケーションのパフォーマンスに対する目標割合です。
-詳細は、<a href="/service_management/service_level_objectives/">ドキュメントを参照してください</a>。
+An SLO is a target percentage for application performance over a specific period of time.
+For more information, <a href="/service_management/service_level_objectives/">see the documentation</a>.

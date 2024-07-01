@@ -1,6 +1,6 @@
 ---
-core_product:
-- log management
 title: Live Tail
+core_product:
+  - log management
 ---
-Live Tail とは、Datadog が処理後、インデックスやアーカイブを作成する前に取り込んだすべてのログのことです。
+Live Tail is all logs ingested by Datadog after processing but before indexing or archiving.

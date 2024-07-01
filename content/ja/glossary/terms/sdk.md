@@ -1,4 +1,4 @@
 ---
-title: ソフトウェア開発キット (SDK)
+title: software development kit (SDK)
 ---
-SDK とは、開発者が OS やプログラミング言語など、特定の技術に対応したアプリケーションを作成するためのツール群のことです。
+An SDK is a set of tools that enable developers to create applications for a specific technology, such as an operating system or a programming language.

@@ -1,240 +1,240 @@
 ---
-description: インテグレーションダッシュボードの作成方法をご紹介します。
+title: Create an Integration Dashboard
+description: Learn how to create an integration dashboard.
 further_reading:
 - link: /dashboards/
-  tag: ドキュメント
-  text: ダッシュボードについて
-title: インテグレーションダッシュボードの作成
+  tag: Documentation
+  text: Learn about Dashboards
 ---
-## 概要
+## Overview
 
-[Datadog ダッシュボード][1]は、主要なメトリクスを表示・追跡することで、インフラストラクチャーやインテグレーションを効率的に監視することができます。Datadog は、多くの機能やインテグレーションに対して、すぐに使えるダッシュボードのセットを提供しています。これらのダッシュボードには、[ダッシュボードリスト][12]からアクセスすることができます。
+[Datadog Dashboards][1] enable you to efficiently monitor your infrastructure and integrations by displaying and tracking key metrics. Datadog provides a set of out-of-the-box dashboards for many features and integrations. You can access these by viewing your [Dashboard List][12].
 
-[Datadog インテグレーションを作成][2]した場合、そのインテグレーションのユーザーがより迅速に価値を見出せるよう、すぐに使えるダッシュボードを作成する必要があります。このガイドでは、インテグレーションダッシュボードを作成するための手順と、作成プロセスで従うべきベストプラクティスを説明します。
+If you have [created a Datadog integration][2], you must create an out-of-the-box dashboard to help your integration's users more quickly find value in your integration. This guide provides steps for creating an integration dashboard and best practices to follow during the creation process.
 
-Datadog インテグレーションを作成するには、[Agent インテグレーションの作成][2]を参照してください。
+To create a Datadog integration, see [Create an Agent Integration][2].
 
-## インテグレーションダッシュボードの作成
+## Create an integration dashboard
 
-### ダッシュボードの作成
+### Create a dashboard
 
-Datadog の [**Dashboard List**][12] から、**+ New Dashboard** をクリックします。
+In Datadog, from the [**Dashboard List**][12], click **+ New Dashboard**.
 
-{{< img src="dashboards/create_dashboard.png" alt="インテグレーション用のダッシュボードの作成" width="80%">}}
+{{< img src="dashboards/create_dashboard.png" alt="Create a dashboard for your integration" width="80%">}}
 
-ダッシュボードに要素を追加する際は、[本ガイドのベストプラクティスに従ってください](#follow-dashboard-best-practices)。
+[Follow the best practices in this guide](#follow-dashboard-best-practices) when adding elements to your dashboard.
 
-### ダッシュボードのエクスポート
+### Export your dashboard
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
-ダッシュボードを JSON 形式でエクスポートするには、**Share** または **Configure** アイコンをクリックし、**Export dashboard JSON** を選択します。
+Export your dashboard to JSON by clicking the **Share** or **Configure** icon and selecting **Export dashboard JSON**.
 
-{{< img src="developers/create-an-integration-dashboard/share-dashboard.png" alt="共有アイコンをクリックし、Export dashboard JSON をクリックして、ダッシュボードを JSON ファイルとしてエクスポートします" width="100%">}}
+{{< img src="developers/create-an-integration-dashboard/share-dashboard.png" alt="Click the Share icon and Export dashboard JSON to export your dashboard as a JSON file" width="100%">}}
 
-ダッシュボードのタイトルに従ってファイル名を付けます。例: `your_integration_name_overview.json`
+Name the file according to your dashboard title: for example, `your_integration_name_overview.json`.
 
-このファイルを、インテグレーションの `assets/dashboards` フォルダに保存します。アセットを `manifest.json` ファイルに追加します。インテグレーションのファイル構造とマニフェストファイルの詳細については、[インテグレーションアセットリファレンス][101]を参照してください。
+Save this file to your integration's `assets/dashboards` folder. Add the asset to your `manifest.json` file. See [Integrations Assets Reference][101] for more information about your integration's file structure and manifest file.
 
-[101]: /ja/developers/integrations/check_references/#manifest-file
+[101]: /developers/integrations/check_references/#manifest-file
 
 {{% /tab %}}
-{{% tab "プログラム" %}}
+{{% tab "Programmatically" %}}
 
-- [Datadog Agent Integration Developer ツール][103] (`ddev`) がインストールされていることを確認します。
-- [`ddev` コンフィギュレーションファイル][101]で、ダッシュボードを含む組織の `api_key` と `app_key` を設定していることを確認してください。
+- Ensure you have installed the [Datadog Agent Integration Developer tool][103] (`ddev`).
+- Ensure you have set an `api_key` and `app_key` for the organization that contains your dashboard in the [`ddev` configuration file][101].
 
-[`ddev meta dash export` コマンド][102] を `--extras` または `-e` フラグを付けて実行し、ダッシュボードの定義をエクスポートします。
+Run the [`ddev meta dash export` command][102] with the `--extras` or `-e` flag to export the dashboard definition: 
 
 ```shell
 ddev meta dash export <URL_OF_DASHBOARD> <INTEGRATION> --extras
 ```
 
-ダッシュボードのタイトルに従ってファイル名を付けます。
+Name the file according to your dashboard title.
 
-このコマンドはインテグレーションの `manifest.json` ファイルにダッシュボードの定義を追加します。ダッシュボードの JSON ファイルはインテグレーションの `assets/dashboards` フォルダにあります。
+This command adds the dashboard definition to your integration's `manifest.json` file. You can find the dashboard JSON file in your integration's `assets/dashboards` folder. 
 
-**注:** ダッシュボードは各地域で `/dash/integration/<DASHBOARD_KEY>` というアドレスで利用できます。`<DASHBOARD_KEY>` はダッシュボードの `manifest.json` ファイルに記述されているものと一致します。ダッシュボードの中に別のダッシュボードへのリンクを追加したい場合は、この値を入れ替えることができます。
+**Note:** The dashboard is available at the following address `/dash/integration/<DASHBOARD_KEY>` in each region. The `<DASHBOARD_KEY>` matches what is in your dashboard's `manifest.json` file. You can swap this value when you want to add a link to another dashboard inside your dashboard.
 
 [101]: https://datadoghq.dev/integrations-core/ddev/cli/#ddev-config
 [102]: https://datadoghq.dev/integrations-core/ddev/cli/#ddev-meta-dash-export
-[103]: /ja/developers/integrations/python/
+[103]: /developers/integrations/python/
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### プルリクエストを開く
+### Open a pull request
 
-[`integrations-extras` の GitHub リポジトリ][13]については、プルリクエスト (PR) を開き、ダッシュボードの JSON ファイルと更新されたマニフェストファイルを対応するインテグレーションフォルダに追加します。Datadog はすべての `integration-extras` PR をレビューします。承認されると、Datadog は PR をマージし、インテグレーションダッシュボードは本番環境にプッシュされます。
+For the [`integrations-extras` GitHub repository][13] and open a pull request (PR) to add your dashboard JSON file and updated manifest file to the corresponding integration folder. Datadog reviews all `integration-extras` PRs. Once approved, Datadog merges the PR and your integration dashboard is pushed to production.
 
-### ダッシュボードを本番環境で検証する
+### Verify your dashboard in production
 
-関連するインテグレーションタイルが Datadog に `Installed` (インストール) されていることを確認します。関連するすぐに使えるダッシュボードを見るには、インテグレーションをインストールする必要があります。
+Ensure the relevant integration tile is `Installed` in Datadog. You must install an integration to see its associated out-of-the-box dashboards.
 
-[Dashboard List ページ][12]でダッシュボードを見つけます。ロゴがプリセットダッシュボード内で正しくレンダリングされることを確認します。
+Find your dashboard on the [Dashboard List page][12]. Ensure logos render correctly and within the preset dashboard.
 
-## ダッシュボードのベストプラクティスに従う
+## Follow dashboard best practices
 
-{{< img src="developers/create-an-integration-dashboard/dashboard_best_practices_example.png" alt="ダッシュボードの例" width="100%">}}
+{{< img src="developers/create-an-integration-dashboard/dashboard_best_practices_example.png" alt="An example of a Dashboard" width="100%">}}
 
-インテグレーションダッシュボードは、以下のビジュアルスタイルガイドラインを遵守する必要があります。
+An integration dashboard should adhere to the following visual style guidelines:
 
-- バナー画像、簡潔なコピー、便利なリンク、優れたタイポグラフィで注目を集める **About** グループ
-- 最も重要な統計情報を先頭に、簡単な注釈をつけた **Overview** グループ
-- シンプルなグラフのタイトルとタイトルケースのグループ名
-- 高密度モードでの対称性
-- 簡潔で整ったメモ
-- 関連グループ間、グループ内のメモ、グループ内のグラフのカラーコーディネート
+- An attention-grabbing **About** group with a banner image, concise copy, useful links, and a good typography hierarchy
+- A brief, annotated **Overview** group with the most important statistics at the top
+- Simple graph titles and title-case group names
+- Symmetry in high density mode
+- Well-formatted, concise notes
+- Color coordination between related groups, notes within groups, and graphs within groups
 
-### 一般的なガイドライン
+### General guidelines
 
--  新しいダッシュボードを作成する際に、デフォルトのダッシュボードタイプを選択します。
+-  When creating a new dashboard, select the default dashboard type.
 
--  ダッシュボードのタイトルにインテグレーション名を入れます。ダッシュボードのタイトルの例としては、`Scylla` や `Cilium Overview` などがあります。**注**: ダッシュボードの URL はタイトルから生成されるため、ダッシュボードのタイトルに `-` (ハイフン) を使用しないようにしてください。
+-  Put the integration name in your dashboard title. Some examples of a good dashboard title are `Scylla` or `Cilium Overview`. **Note**: Avoid using `-` (hyphens) in the dashboard title, as the dashboard URL is generated from the title.
 
--  ダッシュボードのヘッダーにロゴを追加します。インテグレーションロゴは、アイコンが存在し、`integration_id` がアイコン名と一致すれば、自動的にヘッダーに表示されます。
+-  Add a logo to the dashboard header. The integration logo automatically appears in the header if the icon exists and the `integration_id` matches the icon name.
 
--  簡単な説明と役立つリンクを含む、インテグレーションのための About グループを含めます。About セクションには、データではなく、コンテンツを含める必要があります。About セクションを全幅にすることは避けてください。ダッシュボードのタイトルにカーソルを合わせると表示されるホバーカードに、About セクションの内容をコピーすることを検討してください。
+-  Include an About group for the integration containing a brief description and helpful links. The About section should contain content, not data. Avoid making the About section full-width. Consider copying the content in the About section into the hovercard that appears when hovering over the dashboard title.
 
-- About セクションを編集し、バナー表示オプションを選択します。次に、次のファイルの場所に従って、バナー画像にリンクすることができます: `/static/images/integration_dashboard/your-image.png`
+- Edit the About section and select the banner display option. You can then link to a banner image according to the following file location: `/static/images/integration_dashboard/your-image.png`.
 
-- 最も重要なメトリクス、有効性チェックや準備完了チェックなどのサービスチェック、そしてこのインテグレーションに対して既に設定されているモニターがあればそのサマリーを含む **Overview** グループを追加してください。Overview グループはダッシュボードの最上部に配置してください。このグループにはデータを含めることができます。
+- Include an **Overview** group containing a few of the most important metrics; service checks, such as liveness or readiness checks; and a monitor summary if you have pre-existing monitors for this integration. Place the overview group at the top of the dashboard. The group can contain data.
 
-  {{< img src="developers/create-an-integration-dashboard/about-and-overview-groups.png" alt="ダッシュボードの About セクションと Overview セクションの例" width="100%">}}
+  {{< img src="developers/create-an-integration-dashboard/about-and-overview-groups.png" alt="An example About section and Overview section in a dashboard" width="100%">}}
 
-- インテグレーションでログ収集が有効である場合、Logs グループをダッシュボードに含めてください。このグループには、ステータス別に時間経過とともにログを表示する棒グラフの時系列ウィジェットと、`Error` もしくは `Critical` ステータスを持つログのログストリームが含まれます。**注:** インテグレーションの種類にかかわらず、同じウィジェットを一から毎回追加するのではなく、正しいフォーマットで一括でグループを挿入できるように、ダッシュボードに繰り返し表示されるグループは[パワーパック][14]に変更することを検討してください。
+- If log collection is enabled for the integration, include a Logs group containing a timeseries widget showing a bar graph of logs by status over time and a log stream of logs with the `Error` or `Critical` status. **Note:** Consider turning groups into [powerpacks][14] if they appear repeatedly in dashboards regardless of the integration type so you can insert the entire group with the correct formatting with a few clicks rather than adding the same widgets from scratch each time.
 
--  幅 1280px と幅 2560px でダッシュボードの見え方を確認します。これは、小型のノートパソコンと大型のモニターで、それぞれダッシュボードがどのように表示されるかを示しています。ダッシュボードの最も一般的な画面幅は、1920、1680、1440、2560、1280px です。お使いのモニターが高密度モードに対応する大きさでない場合は、ブラウザのズームコントロールを使用してズームアウトしてください。
+-  Check to see how your dashboard looks at 1280px wide and 2560px wide. This is how the dashboard appears on a smaller laptop and a larger monitor, respectively. The most common screen widths for dashboards are 1920, 1680, 1440, 2560, and 1280px. If your monitor is not large enough for high density mode, use the browser zoom controls to zoom out.
 
    {{< tabs >}}
-   {{% tab "1280 ピクセル" %}}
+   {{% tab "1280 pixels" %}}
 
-   {{< img src="developers/create-an-integration-dashboard/qa-widths.png" alt="1280 ピクセルのダッシュボードの例" width="80%">}}
+   {{< img src="developers/create-an-integration-dashboard/qa-widths.png" alt="An example of a dashboard at 1280 pixels" width="80%">}}
 
    {{% /tab %}}
-   {{% tab "2560 ピクセル" %}}
+   {{% tab "2560 pixels" %}}
 
-   {{< img src="developers/create-an-integration-dashboard/qa-large-widths.png" alt="2560 ピクセルのダッシュボードの例" width="100%">}}
+   {{< img src="developers/create-an-integration-dashboard/qa-large-widths.png" alt="An example of a dashboard at 2560 pixels" width="100%">}}
 
    {{% /tab %}}
    {{< /tabs >}}
 
-### ウィジェットとグループ化
+### Widgets and grouping
 
--  インテグレーションによってサポートされるメトリクスを調査し、関連するカテゴリにグループ化することを検討します。インテグレーションのパフォーマンスと概要の鍵となる重要なメトリクスは、一番上にあるべきです。
+-  Research the metrics supported by the integration and consider grouping them in relevant categories. Important metrics that are key to the performance and the overview of the integration should be at the top.
 
-   システム内でマクロレベルからミクロレベルへと移る
-   : 例えばデータベースインテグレーションのダッシュボードにおいて、ノードのメトリクスを一つのグループ、インデックスのメトリクスを次のグループ、シャードのメトリクスを三つ目のグループに分けることができます。
+   Go from macro to micro levels within the system
+   : For a database integration's dashboard, for example, you can group node metrics in one group, index metrics in the next group, and shard metrics in the third group.
 
-   システム内でアップストリームからダウンストリームへと進む
-   : 例えばデータストリームインテグレーションのダッシュボードにおいて、プロデューサーのメトリクスを一つのグループ、ブローカーのメトリクスを次のグループ、コンシューマーのメトリクスを三つ目のグループに分けることができます。
+   Go from upstream to downstream sections within the system
+   : For a data streams integration's dashboard, for example, you can group producer metrics in one group, broker metrics in the next group, and consumer metrics in the third group.
 
-   同じ実践的な洞察につながるメトリクスを一つのグループにまとめる
-   : どのインデックスやシャードを最適化すべきかを示すインデキシングメトリクスを一つのグループに集め、ディスクスペースやメモリ使用量のような、割り当てやリソースの再配布を決定するのに役立つリソース利用メトリクスを別のグループに集めることができます。
+   Group together metrics that lead to the same actionable insights
+   : You can group indexing metrics that reveal which indexes or shards should be optimized in one group, and group resource utilization metrics like disk space or memory usage that inform allocation and redistribution decisions together in a separate group.
 
--  メモウィジェットではなく、グループウィジェットを使用してセクションのタイトルとグループ化を行います。グループを横に並べて表示するには、部分幅のグループを使用します。ほとんどのダッシュボードでは、グループ内のすべてのウィジェットを表示する必要があります。
+-  Use Group widgets to title and group sections, rather than note widgets. Use partial width groups to display groups side-by-side. Most dashboards should display every widget within a group.
 
-    {{< img src="developers/create-an-integration-dashboard/full-width-grouped-logs.png" alt="グループウィジェットの例" width="100%">}}
+    {{< img src="developers/create-an-integration-dashboard/full-width-grouped-logs.png" alt="An example of Group widgets" width="100%">}}
 
--  時系列ウィジェットは、小さいディスプレイで潰れて表示されないように、少なくとも 4 列の幅が必要です。
+-  Timeseries widgets should be at least four columns wide in order not to appear squashed on smaller displays.
 
--  ストリームウィジェットの幅は、読みやすさを考慮して、少なくとも 6 列、またはダッシュボードの幅の半分にする必要があります。ダッシュボードの末尾に配置すると、スクロールの妨げになりません。ストリームウィジェットを単独でグループ化し、折りたたむことができるようにすると便利です。イベントストリームは、ダッシュボードが監視するサービスがイベントを報告している場合にのみ追加します。`sources:service_name` を使用してください。
+-  Stream widgets should be at least six columns wide, or half the dashboard width, for readability. Place them at the end of a dashboard so they don't trap scrolling. It's useful to put stream widgets in a group by themselves so they can be collapsed. Add an event stream only if the service monitored by the dashboard is reporting events. Use `sources:service_name`.
 
-   {{< img src="developers/create-an-integration-dashboard/stream-widgets.png" alt="ダッシュボードのストリームウィジェットの例" width="100%">}}
+   {{< img src="developers/create-an-integration-dashboard/stream-widgets.png" alt="An example of a stream widget in a dashboard" width="100%">}}
 
--  ウィジェットの種類やサイズを組み合わせて使用してみてください。ダッシュボードが可能な限り明確になるまで、視覚化やフォーマットの選択肢を探求してください。ダッシュボード全体が時系列で構成されていても問題ない場合もありますが、さまざまなタイプのウィジェットを使用することで読みやすさが向上する場合もあります。最も一般的に使用されるメトリクスウィジェットは、[時系列][4]、[クエリ値][5]、[テーブル][6]です。クエリ値ウィジェットが空白ではなく時系列の背景 (例えば、「バー」) を持つようにします。利用可能なウィジェットタイプの詳細については、[サポートされるダッシュボードウィジェットのリスト][7]を参照してください。
+-  Try using a mix of widget types and sizes. Explore visualizations and formatting options until you're confident your dashboard is as clear as it can be. Sometimes a whole dashboard of timeseries is okay, but other times variety can improve legibility. The most commonly used metric widgets are [timeseries][4], [query values][5], and [tables][6]. Ensure query value widgets have a timeseries background (for example, "bars") instead of being blank. For more information on the available widget types, see the [list of supported dashboard widgets][7].
 
--  高密度モードでダッシュボードの左右が対称になるよう努めてください。大型モニターを使用するユーザーは、デフォルトで高密度モードでダッシュボードを見るため、グループの関係が理にかなっていて、ダッシュボードが美しく見えることが重要です。そのためには、グループの高さを調整したり、グループを左半分と右半分の間で移動させることができます。
+-  Try to make the left and right halves of your dashboard symmetrical in high density mode. Users with large monitors see your dashboard in high density mode by default, so it's important that group relationships make sense, and that the dashboard looks good. You can adjust group heights to achieve this, and move groups between the left and right halves.
 
    {{< tabs >}}
-   {{% tab "完璧な左右対称" %}}
+   {{% tab "Perfectly symmetrical" %}}
 
-   {{< img src="developers/create-an-integration-dashboard/symmetrical-dashboard.png" alt="左右対称のダッシュボードの例" width="100%">}}
+   {{< img src="developers/create-an-integration-dashboard/symmetrical-dashboard.png" alt="An example of a symmetrical dashboard" width="100%">}}
 
    {{% /tab %}}
-   {{% tab "十分近い" %}}
+   {{% tab "Close enough" %}}
 
-   {{< img src="developers/create-an-integration-dashboard/symmetrical_example_2.png" alt="左右対称のダッシュボードの例" width="100%">}}
+   {{< img src="developers/create-an-integration-dashboard/symmetrical_example_2.png" alt="An example of a symmetrical dashboard" width="100%">}}
 
    {{% /tab %}}
    {{< /tabs >}}
 
--  [テンプレート変数][8]を使用すると、ダッシュボード内の 1 つまたは複数のウィジェットを動的にフィルタリングできます。テンプレート変数はユニバーサルであり、インテグレーションテクノロジーのタイプに基づいてカスタマイズされ、モニタリングサービスを使用しているすべてのユーザーまたはアカウントからアクセスできる必要があります。
+-  [Template variables][8] allow you to dynamically filter one or more widgets in a dashboard. Template variables must be universal, customized based on the type on integration technology, and accessible by any user or account using the monitored service. 
 
-   | インテグレーションテクノロジーのタイプ | 典型的なテンプレート変数 |
+   | Type of integration technology | Typical template variable |
    | - | - |
-   | データベース | シャード |
-   | データストリーミング | コンシューマー |
-   | MLモデルサービング | モデル |
+   | Database | Shards |
+   | Data Streaming | Consumer |
+   | ML Model Serving | Model |
 
-   関連するすべてのグラフが、関連するテンプレート変数フィルターをリスニングしていることを確認します。**注**: テンプレート変数として `*=scope` を追加すると、ユーザーが自分のタグすべてにアクセスできるので便利です。
+   Ensure all relevant graphs are listening to the relevant template variable filters. **Note**: Adding `*=scope` as a template variable is useful as users can access all of their own tags.
 
-### コピー
+### Copy
 
--  グラフのタイトルは、最も重要な情報から始まる簡潔なものを使用してください。一般的なフレーズは避けて、インテグレーションタイトルを含めないでください (例: "Memcached Load")。
+-  Use concise graph titles that start with the most important information. Avoid common phrases such as "number of" and don't include the integration title (e.g. "Memcached Load").
 
-    | 簡潔なタイトル (良い) | 冗長なタイトル (悪い) |
+    | Concise title (good) | Verbose title (bad) |
     | - | - |
-    | ノードあたりのイベント数 | ノードあたりの Kubernetes イベントの数 |
-    | 保留タスク: [$ノード名] | [$ノード名]の保留中のタスクの総数 |
-    | 読み/書き操作 | 読み出し/書き込み操作の回数 |
-    | サーバー接続 - 率 | サーバーへの接続の率 |
-    | 負荷 | Memcached の負荷 |
+    | Events per node | Number of Kubernetes events per node |
+    | Pending tasks: [$node_name] | Total number of pending tasks in [$node_name] |
+    | Read/write operations | Number of read/write operations |
+    | Connections to server - rate | Rate of connections to server |
+    | Load | Memcached Load |
 
--  特に、ウィジェットが同名のカスタムユニットを持つクエリ値である場合、グループ内のすべてのウィジェットでグループタイトルやインテグレーション名を繰り返すことは避けてください。この例では、"Shards" というグループ内の各ウィジェットのタイトルに "shards" という単語があることに注意してください。
+-  Avoid repeating the group title or integration name in every widget in a group, especially if the widgets are query values with a custom unit of the same name. In this example, note the word "shards" in each widget title in the group named "Shards".
 
-   {{< img src="developers/create-an-integration-dashboard/name-repetition.png" alt="ダッシュボードで用語を繰り返す例" width="100%">}}
+   {{< img src="developers/create-an-integration-dashboard/name-repetition.png" alt="An example of repeating terms in a dashboard" width="100%">}}
 
--  時系列ウィジェットの場合は、常に[エイリアス式][9]を指定します。
+-  For the timeseries widget, always [alias formulas][9].
 
--  グループのタイトルはタイトルケースを、ウィジェットのタイトルはセンテンスケースを使用します (英語の場合)。
+-  Group titles should be title case. Widget titles should be sentence case.
 
--  凡例を表示する場合は、エイリアスをわかりやすく表示するようにしましょう。
+-  If you're showing a legend, make sure the aliases are easy to understand.
 
--  グラフのタイトルは、クエリされたメトリクスを要約する必要があります。単位はメタデータから自動的に表示されるため、グラフタイトルに単位を表示しないでください。ただし、クエリの計算が異なるタイプの単位を表している場合は例外です。
+-  Graph titles should summarize the queried metric. Do not indicate the unit in the graph title because unit types are displayed automatically from metadata. An exception to this is if the calculation of the query represents a different type of unit.
 
-### ビジュアルスタイル
+### Visual style
 
--  メモを用途に合わせてフォーマットすることができます。キャプション」、「注釈」、「ヘッダー」のプリセットや、独自のスタイルの組み合わせを試してみてください。長いメモや、箇条書きやコードブロックのような複雑な書式を含むメモには、最小のフォントサイズを使用しないようにしましょう。
+-  Format notes to make them fit their use case. Try the presets "caption", "annotation", or "header", or pick your own combination of styles. Avoid using the smallest font size for notes that are long or including complex formatting, like bulleted lists or code blocks.
 
--  色は重要な関係を強調し、読みやすさを向上させるために使用し、スタイルのために使用するのではありません。複数のグループが関連している場合は、すべてのグループに同じグループヘッダーカラーを適用します。あるグループの見出し色を緑にした場合、そのグループのメモも緑にしてみましょう。2 つのグループが関連しているが、どちらかがより重要である場合、重要なグループには「鮮やかな」色を、重要でないグループには「明るい」色を使ってみてください。グループのヘッダーを白にすることを恐れず、色の使いすぎに注意しましょう。例えば、ダッシュボード上のすべてのグループをビビッドブルーにするのはやめましょう。また、ヘッダーをグレーにするのも避けましょう。
+-  Use colors to highlight important relationships and to improve readability, not for style. If several groups are related, apply the same group header color to all of them. If you've applied a green header color to a group, try making its notes green as well. If two groups are related, but one is more important, try using the "vivid" color on the important group and the "light" color on the less important group. Don't be afraid to leave groups with white headers, and be careful not to overuse color. For example, don't make every group on a dashboard vivid blue. Also avoid using gray headers.
 
-    {{< img src="developers/create-an-integration-dashboard/color-related-data.png" alt="ダッシュボードにおける色関連データの例" width="100%">}}
+    {{< img src="developers/create-an-integration-dashboard/color-related-data.png" alt="An example of color-related data in a dashboard" width="100%">}}
 
-- しきい値やゾーンが明らかな視覚化では、グラフにはセマンティックフォーマット、クエリ値にはカスタムの赤/黄/緑のテキストフォーマットを使用します。
+- Visualizations with obvious thresholds or zones use semantic formatting for graphs or custom red/yellow/green text formatting for query values.
 
--  凡例は意味があるときに使います。凡例があれば、各系列にカーソルを合わせたり、ウィジェットを最大化したりしなくても、グラフを簡単に読むことができます。凡例が読みやすいように、必ず時系列のエイリアスを使用してください。凡例の自動モードは、スペースに余裕がないときは凡例を隠し、余裕があるときは凡例を表示する優れたオプションです。
+-  Use legends when they make sense. Legends make it easy to read a graph without having to hover over each series or maximize the widget. Make sure you use timeseries aliases so the legend is easy to read. Automatic mode for legends is a great option that hides legends when space is tight and shows them when there's room.
 
-    {{< img src="developers/create-an-integration-dashboard/well-named-legends.png" alt="ダッシュボードにおける凡例の例" width="100%">}}
+    {{< img src="developers/create-an-integration-dashboard/well-named-legends.png" alt="An example of legends in a dashboard" width="100%">}}
 
--  2 つのグラフを並べて比較させたい場合は、X 軸が揃っていることを確認する必要があります。片方のグラフに凡例が表示され、もう片方には表示されていない場合、X 軸の位置は揃いません。両方のグラフに凡例が表示されているか、または表示されていないことを確認してください。
+-  If you want users to compare two graphs side-by-side, make sure their x-axes align. If one graph is showing a legend and the other isn't, the x-axes won't align. Make sure they both show a legend or both do not.
 
-   {{< img src="developers/create-an-integration-dashboard/x-axes-alignment.png" alt="ダッシュボードの X 軸のずれの例" width="100%">}}
+   {{< img src="developers/create-an-integration-dashboard/x-axes-alignment.png" alt="An example of misaligned x-axes in a dashboard" width="100%">}}
 
--  時系列の場合、表示タイプはメトリクスのタイプに基づきます。
+-  For timeseries, base the display type on the type of metric.
 
-    | メトリクスのタイプ | 表示タイプ |
+    | Types of metric | Display type |
     | - | - |
-    | ボリューム (例: 接続数) | `area` |
-    | カウント (例: エラー数) | `bars` |
-    | 複数のグループまたはデフォルト | `lines` |
+    | Volume (e.g. Number of connections) | `area` |
+    | Counts (e.g. Number of errors) | `bars` |
+    | Multiple groups or default | `lines` |
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/
-[2]: /ja/developers/integrations/agent_integration/
-[3]: /ja/dashboards/#new-dashboard
-[4]: /ja/dashboards/widgets/timeseries/
-[5]: /ja/dashboards/widgets/query_value/
-[6]: /ja/dashboards/widgets/table/
-[7]: /ja/dashboards/widgets/
-[8]: /ja/dashboards/template_variables/
-[9]: /ja/dashboards/widgets/timeseries/#metric-aliasing
-[10]: /ja/dashboards/#copy-import-or-export-dashboard-json
-[11]: /ja/developers/integrations/check_references/#manifest-file
+[1]: /dashboards/
+[2]: /developers/integrations/agent_integration/
+[3]: /dashboards/#new-dashboard
+[4]: /dashboards/widgets/timeseries/
+[5]: /dashboards/widgets/query_value/
+[6]: /dashboards/widgets/table/
+[7]: /dashboards/widgets/
+[8]: /dashboards/template_variables/
+[9]: /dashboards/widgets/timeseries/#metric-aliasing
+[10]: /dashboards/#copy-import-or-export-dashboard-json
+[11]: /developers/integrations/check_references/#manifest-file
 [12]: https://app.datadoghq.com/dashboard/lists
 [13]: https://github.com/DataDog/integrations-extras
-[14]: /ja/dashboards/widgets/powerpack/
+[14]: /dashboards/widgets/powerpack/

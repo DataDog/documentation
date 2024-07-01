@@ -1,206 +1,206 @@
 ---
+title: Access Control
 aliases:
-- /ja/guides/rbac
-- /ja/account_management/rbac/role_api
-- /ja/account_management/users/default_roles
-- /ja/account_management/users/custom_roles
-- /ja/account_management/rbac/log_management
+    - /guides/rbac
+    - /account_management/rbac/role_api
+    - /account_management/users/default_roles
+    - /account_management/users/custom_roles
+    - /account_management/rbac/log_management
 further_reading:
-- link: /api/v2/roles/
-  tag: Documentation
-  text: Roles API を使用してロールとアクセス許可を管理する
-- link: /api/v2/roles/#list-permissions
-  tag: Documentation
-  text: Permission API を使用してアクセス許可を管理する
-- link: /account_management/rbac/permissions
-  tag: ドキュメント
-  text: 利用可能なアクセス許可の一覧
-- link: /account_management/saml/
-  tag: Documentation
-  text: SAML を使用したシングルサインオンを有効にする
-- link: https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/
-  tag: ブログ
-  text: Datadog Audit Trail で、チーム全体のコンプライアンス、ガバナンス、透明性を構築します
-title: アクセス制御
+    - link: /api/v2/roles/
+      tag: Documentation
+      text: Manage roles and permissions with the Roles API
+    - link: "/api/v2/roles/#list-permissions"
+      tag: Documentation
+      text: Manage your permissions with the Permissions API
+    - link: /account_management/rbac/permissions
+      tag: Documentation
+      text: Discover the list of permissions available
+    - link: /account_management/saml/
+      tag: Documentation
+      text: Enable single sign on with SAML
+    - link: "https://www.datadoghq.com/blog/compliance-governance-transparency-with-datadog-audit-trail/"
+      tag: Blog
+      text: Build compliance, governance, and transparency across your teams with Datadog Audit Trail
 ---
 
-## 概要
+## Overview
 
-Datadog は、Datadog リソースへのアクセスを制御するレベルをカスタマイズすることを可能にする、柔軟なアクセス管理システムを提供しています。
+Datadog offers a flexible access management system that allows you to customize the level at which you control access to your Datadog resources.
 
-基本的な機能を求めるユーザーには、[権限][1]付きのすぐに使える[ロール](#role-based-access-control)が用意されています。より柔軟性を求めるのであれば、独自の[カスタムロール](#custom-roles)を作成し、権限を新しいロールにまとめることができます。カスタムロールにアタッチされた権限は、特定のリソースタイプのすべてのリソースに適用されます。
+Users looking for basic functionality have access to OOTB [roles](#role-based-access-control) with [permissions][1]. For more flexibility, create your own [custom roles](#custom-roles) to combine permissions into new roles. Permissions attached to a custom role apply to all resources of a particular resource type.
 
-最大限の柔軟性を必要とする組織やユーザーは、[粒度の高いアクセス制御][2]を使用して、個々のダッシュボード、ノートブック、およびその他のリソースへのアクセスを制御できます。
+Organizations and users that need maximum flexibility can control access to individual dashboards, notebooks, and other resources with [granular access control][2].
 
-## ロールベースのアクセス制御
+## Role based access control
 
-ロールによりユーザーを分類し、各ユーザーが読み取ることができるデータや変更できるアカウントアセットなど、アカウントのアクセス許可を定義します。Datadog ではデフォルトで 3 つのロールを提供していますが、[カスタムロール](#カスタムロール)を作成すると、ユーザーとアクセス許可のマッピングをより適切に定義できます。
+Roles categorize users and define what account permissions those users have, such as what data they can read or what account assets they can modify. By default, Datadog offers three roles, and you can create [custom roles](#custom-roles) so you can define a better mapping between your users and their permissions.
 
-ロールにアクセス許可を付与することで、ロールに関連付けられているユーザーはアクセス許可を受け取ります。複数のロールに関連付けられているユーザーは、それぞれのロールに付与されているすべてのアクセス許可を受け取ります。ユーザーに関連付けられたロールが増えるほど、Datadog アカウント内で持つアクセス権も増えます。
+By granting permissions to roles, any user who is associated with that role receives that permission. When users are associated with multiple roles, they receive all the permissions granted to each of their roles. The more roles a user is associated with, the more access they have within a Datadog account.
 
-[子組織][3]のユーザーが `org_management` 権限を持っていても、親組織で同じ権限を持っているとは限りません。ユーザーのロールは、親組織と子組織の間で共有されることはありません。
+If a user in a [child organization][3] has `org_management` permission, it does not mean that they have the same permission in the parent org. Users' roles are not shared between parent and child organizations.
 
-**注**: SAML ID プロバイダーを使用する場合、認証のためにそれを Datadog と統合でき、ID 属性を Datadog のデフォルトロールとカスタムロールにマップできます。詳細については、[SAML グループマッピング][4]を参照してください。
+**Note**: If you use a SAML identity provider, you can integrate it with Datadog for authentication, and you can map identity attributes to Datadog default and custom roles. For more information, see [SAML group mapping][4].
 
-## Datadog のデフォルトのロール
+## Datadog default roles
 
-Datadog 管理者ロール
-: 請求情報へのアクセス、API キーの無効化に加えて、ユーザーの管理や[読み取り専用ダッシュボード][5]の構成が可能です。標準ユーザーを管理者に昇格させることもできます。
+Datadog Admin Role
+: Users have access to billing information and the ability to revoke API keys. They can manage users and configure [read-only dashboards][5]. They can also promote standard users to administrators.
 
-Datadog 標準ロール
-: [ダッシュボード][5]、[モニター][6]、[イベント][7]、[ノートブック][8]など、Datadog が提供するすべての監視機能を表示および変更できます。他のユーザーを組織に招待することも可能です。
+Datadog Standard Role
+: Users are allowed to view and modify all monitoring features that Datadog offers, such as [dashboards][5], [monitors][6], [events][7], and [notebooks][8]. Standard users can also invite other users to organizations.
 
-Datadog 読み取り専用ロール
-: Datadog システム内での編集権限を持たないユーザーです。特定の機能を読み取り専用ビューでクライアントに共有したり、ある部門のメンバーから外部ユーザーに[ダッシュボード][5]を共有する必要がある場合に便利です。
+Datadog Read Only Role
+: Users do not have access to edit within Datadog. This comes in handy when you'd like to share specific read-only views with a client, or when a member of one business unit needs to share a [dashboard][5] with someone outside their unit.
 
-## カスタムロール
+## Custom roles
 
-カスタムロール機能を使用すると、組織で一意の権限セットを持つ新しいロールを作成できます。Datadog サイト、[Datadog Role API][8]、または SAML から直接カスタムロールを管理できます。下記からロールの作成、更新、削除方法をご確認ください。利用可能なアクセス許可の詳細については、[Datadog ロールの権限][1]を参照してください。Datadog でロールを作成または編集できるのは、User Access Manage 権限を持つユーザーのみです。
+The custom roles feature gives your organization the ability to create new roles with unique permission sets. Manage your custom roles through the Datadog site, the [Datadog Role API][8], or SAML directly. Find out below how to create, update, or delete a role. See [Datadog Role Permissions][1] for more information about available permissions. Only users with the User Access Manage permission can create or edit roles in Datadog.
 
-### カスタムロールを有効にする
+### Enable custom roles
 
-1. [Organization Settings][9] に移動します。
-2. ページ左側の **Roles** を選択します。
-3. 右上のギアアイコンをクリックすると、Custom Roles のポップアップウィンドウが開きます。
-4. Custom Roles で **Enable** をクリックします。
+1. Navigate to [Organization Settings][9]. 
+2. On the left side of the page, select **Roles**.
+3. Click the gear in the upper right corner. The Custom Roles pop-up appears.
+4. In the Custom Roles pop-up, click **Enable**.
 
-{{< img src="account_management/rbac/enable_custom_roles.png" alt="Custom Roles ポップアップウィンドウの Enable ボタン" style="width:90%;">}}
+{{< img src="account_management/rbac/enable_custom_roles.png" alt="Custom Roles pop-up with Enable button" style="width:90%;">}}
 
-代替として、POST 呼び出しを [Create Role API エンドポイント][10]宛てにすると、自動的にオーガニゼーションに対するカスタムロールが有効になります。
+Alternatively, making a POST call to the [Create Role API endpoint][10] automatically enables custom roles for your organization.
 
-### カスタムロールを作成する
+### Create a custom role
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-カスタムロールを作成するには
+To create a custom role:
 
-1. [Datadog Roles ページ][1]に移動します。
-2. ページ右上隅 **New Role** を選択します。
-3. ロールに名前を付けます。
-4. ロールにアクセス許可セットを割り当てます。利用可能なアクセス許可の詳細については、[Datadog ロールのアクセス許可][2]を参照してください。
+1. Go to your [Datadog Roles page][1].
+2. Select **New Role** in the upper right corner of the page.
+3. Give a name to your role.
+4. Assign a set of permissions to your role. See [Datadog Role Permissions][2] for more information about available permissions.
 
-ロールを作成したら、[既存のユーザーに追加][3]できます。
+Once a role is created, you can [add the role to existing users][3].
 
 
 [1]: https://app.datadoghq.com/access/roles
-[2]: /ja/account_management/rbac/permissions/
-[3]: /ja/account_management/users/#edit-a-user-roles
+[2]: /account_management/rbac/permissions/
+[3]: /account_management/users/#edit-a-user-roles
 {{% /tab %}}
 {{% tab "API" %}}
 
-[ロールの作成 API リファレンス][1]で、ロールの作成方法の例をご紹介しています。
+Find an example of how to create a role in [Create Role API Reference][1].
 
 
-[1]: /ja/api/latest/roles/#create-role
+[1]: /api/latest/roles/#create-role
 {{% /tab %}}
 {{< /tabs >}}
 
-### ロールを更新する
+### Update a role
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-カスタムロールを編集するには
+To edit a custom role:
 
-1. [Datadog Roles ページ][1]に移動します。
-2. 変更するロールの編集ボタンを選択します。
-3. ロールのアクセス許可セットを変更します。利用可能なアクセス許可の詳細については、[ロールのアクセス許可][2]を参照してください。
-4. 変更を保存します。
+1. Go to your [Datadog Roles page][1].
+2. Select the edit button on the role you would like to modify.
+3. Modify the set of permissions for your role. See [Role Permissions][2] for more information about available permissions.
+4. Save your changes.
 
 
-ロールが変更されると、そのロールを持つすべてのユーザーのアクセス許可が更新されます。
+Once a role is modified, permissions are updated for all users with the role.
 
 
 [1]: https://app.datadoghq.com/access/roles
-[2]: /ja/account_management/rbac/permissions/
+[2]: /account_management/rbac/permissions/
 {{% /tab %}}
 {{% tab "API" %}}
 
-[ロールの更新 API リファレンス][1]で、ロールの更新方法の例をご紹介しています。
+Find an example of how to update a role in [Update Role API Reference][1].
 
 
-[1]: /ja/api/latest/roles/#update-a-role
+[1]: /api/latest/roles/#update-a-role
 {{% /tab %}}
 {{< /tabs >}}
 
-### ロールの複製
+### Clone a role
 
 {{< tabs >}}
 {{% tab "Datadog application" %}}
 
-既存ロールのクローンを作成するには:
+To clone an existing role:
 
-1. [Datadog Roles ページ][1]に移動します。
-2. クローンを作成するロールの上にカーソルを合わせます。右側にボタン群が表示されます。
-3. クローンを作成するロールのクローンボタンを選択します。
-4. オプションで、ロールの名前または権限を変更します。
-5. 下の **Save** ボタンをクリックします。
+1. Go to your [Datadog Roles page][1].
+2. Hover over the role you would like to clone. A series of buttons appears to the right.
+3. Select the clone button on the role you would like to clone.
+4. Optionally modify the name or permissions of the role.
+5. Click the **Save** button at the bottom.
 
-{{< img src="account_management/rbac/clone_role.png" alt="クローンボタンがハイライトされた 2 つのロールのリスト" style="width:90%;">}}
-
-
-[1]: https://app.datadoghq.com/access/roles
-{{% /tab %}}
-{{% tab "API" %}}
-
-[ロールのクローン作成 API リファレンス][1]で、ロールのクローン作成方法の例をご紹介しています。
-
-[1]: /ja/api/latest/roles/#create-a-new-role-by-cloning-an-existing-role
-{{% /tab %}}
-{{< /tabs >}}
-
-### ロールを削除する
-
-{{< tabs >}}
-{{% tab "Datadog application" %}}
-
-カスタムロールを削除するには
-
-1. [Datadog Roles ページ][1]に移動します。
-2. 削除するロールの上にカーソルを合わせます。右側にボタン群が表示されます。
-3. 削除するロールの削除ボタンを選択します。
-4. 決定を確認します。
-
-
-ロールが削除されると、このロールを持つすべてのユーザーのアクセス許可が更新されます。ロールのないユーザーは、Datadog を効率的に使用できませんが、制限付きのアクセスを保持します。
+{{< img src="account_management/rbac/clone_role.png" alt="List of two roles with Clone button highlighted" style="width:90%;">}}
 
 
 [1]: https://app.datadoghq.com/access/roles
 {{% /tab %}}
 {{% tab "API" %}}
 
-[ロールの削除 API リファレンス][1]で、ロールの削除方法の例をご紹介しています。
+Find an example of how to clone a role in the [Cloning A Role API reference][1].
 
-
-[1]: /ja/api/latest/roles/#delete-role
+[1]: /api/latest/roles/#create-a-new-role-by-cloning-an-existing-role
 {{% /tab %}}
 {{< /tabs >}}
 
-### ロールテンプレートの適用
+### Delete a role
 
-Datadog サイトでロールを作成または更新する際、Datadog ロールテンプレートを使用すると、ロールに既定のアクセス許可を適用できます。
+{{< tabs >}}
+{{% tab "Datadog application" %}}
 
-1. New Role または Edit Role ページで、右側の **Show Role Templates** ボタンをクリックします。
-2. ロールテンプレートのドロップダウンメニューが表示されます。
-3. メニューから、ロールに適用するアクセス許可のロールテンプレートを選択します。
-4. **Apply** ボタンをクリックします。
-4. オプションで、ロールにさらに変更を加えます。
-5. **Save** ボタンをクリックします。
+To delete a custom role:
 
-{{< img src="account_management/rbac/role_templates.png" alt="Datadog 請求管理者ロールが選択されたロールテンプレートのドロップダウンメニュー" style="width:90%;">}}
+1. Go to your [Datadog Roles page][1].
+2. Hover over the role you would like to delete. A series of buttons appears to the right.
+3. Select the delete button on the role you would like to delete.
+4. Confirm your decision.
 
-## その他の参考資料
+
+Once a role is deleted, permissions are updated for all users with the role. Users without any roles cannot use Datadog effectively, but still maintain limited access.
+
+
+[1]: https://app.datadoghq.com/access/roles
+{{% /tab %}}
+{{% tab "API" %}}
+
+Find an example of how to delete a role in the [Delete Role API reference][1].
+
+
+[1]: /api/latest/roles/#delete-role
+{{% /tab %}}
+{{< /tabs >}}
+
+### Apply a role template
+
+When creating or updating a role on the Datadog site, use a Datadog role template to apply a prescribed set of permissions to the role.
+
+1. On the New Role or Edit Role page, click the **Show Role Templates** button on the right.
+2. A dropdown menu populated with role templates appears.
+3. From the menu, select the role template whose permissions you would like to apply to your role.
+4. Click the **Apply** button.
+4. Optionally make additional changes to your role.
+5. Click the **Save** button.
+
+{{< img src="account_management/rbac/role_templates.png" alt="Role Templates dropdown menu with Datadog Billing Admin Role selected" style="width:90%;">}}
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/rbac/permissions/
-[2]: /ja/account_management/rbac/granular_access/
-[3]: /ja/account_management/multi_organization/
-[4]: /ja/account_management/saml/mapping/
-[5]: /ja/dashboards/
-[6]: /ja/monitors/
-[7]: /ja/events/
-[8]: /ja/api/v2/roles/
+[1]: /account_management/rbac/permissions/
+[2]: /account_management/rbac/granular_access/
+[3]: /account_management/multi_organization/
+[4]: /account_management/saml/mapping/
+[5]: /dashboards/
+[6]: /monitors/
+[7]: /events/
+[8]: /api/v2/roles/
 [9]: https://app.datadoghq.com/organization-settings/
-[10]: /ja/api/latest/roles/#create-role
+[10]: /api/latest/roles/#create-role

@@ -1,61 +1,60 @@
 ---
-aliases:
-- /ja/integrations/kubernetes_state
-- /ja/integrations/kube_proxy
-- /ja/integrations/Kubernetes
-categories:
-- cloud
-- configuration & deployment
-- containers
-- orchestration
-- log collection
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes.md
-description: Kubernetes クラスターとそこで実行されているアプリケーションの状態を監視します。Pod スケジュールイベントをキャプチャし、Kubelets
-  のステータスのトレースなどを実行します。
-doc_link: /integrations/kubernetes/
-further_reading:
-- link: https://www.datadoghq.com/blog/debug-kubernetes-pending-pods/
-  tag: ブログ
-  text: Kubernetes の保留中のポッドとスケジュールの失敗をデバッグする方法
-- link: https://www.datadoghq.com/blog/monitoring-kubernetes-era
-  tag: ブログ
-  text: Kubernetes 時代のモニタリング
-- link: https://www.datadoghq.com/blog/monitor-kubernetes-events/
-  tag: ブログ
-  text: Kubernetes イベントのトラブルシューティング
-git_integration_title: Kubernetes
-integration_id: kubernetes
 integration_title: Kubernetes
-is_public: true
-kind: インテグレーション
-name: Kubernetes
+name: kubernetes
+custom_kind: integration
+git_integration_title: kubernetes
 newhlevel: true
-public_title: Datadog-Kubernetes インテグレーション
-short_description: Pod スケジュールイベントをキャプチャし、Kubelets のステータスのトレースなどを実行します。
 updated_for_agent: 6.0
+description: 'Monitor the health of your Kubernetes cluster and the applications running on it. Capture Pod scheduling events, track the status of your Kubelets, and more.'
+is_public: true
+aliases:
+  - /integrations/kubernetes_state
+  - /integrations/kube_proxy
+  - /integrations/Kubernetes
+public_title: Datadog-Kubernetes Integration
+short_description: 'Capture Pod scheduling events, track the status of your Kubelets, and more'
+dependencies:
+  ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes.md']
+categories:
+  - cloud
+  - configuration & deployment
+  - containers
+  - orchestration
+  - log collection
+doc_link: /integrations/kubernetes/
+integration_id: "kubernetes"
+further_reading:
+  - link: "https://www.datadoghq.com/blog/debug-kubernetes-pending-pods/"
+    tag: "Blog"
+    text: "How to debug Kubernetes Pending pods and scheduling failures"
+  - link: "https://www.datadoghq.com/blog/monitoring-kubernetes-era"
+    tag: "Blog"
+    text: "Monitoring in the Kubernetes era"
+  - link: "https://www.datadoghq.com/blog/monitor-kubernetes-events/"
+    tag: "Blog"
+    text: "Troubleshoot with Kubernetes events"
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes ダッシュボード" >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}
 
-## 概要
+## Overview
 
-Kubernetes からメトリクスとログをリアルタイムで取得し、次のことが可能になります。
+Get metrics and logs from Kubernetes in real time to:
 
-- Kubernetes の状態を視覚化および監視できます。
-- Kubernetes のフェイルオーバーとイベントの通知を受けることができます。
+- Visualize and monitor Kubernetes states.
+- Be notified about Kubernetes failovers and events.
 
-## セットアップ
+## Setup
 
-Kubernetes の場合、Datadog は Agent をクラスター内のコンテナとして実行することを推奨します。
+For Kubernetes, Datadog recommends that you run the Agent as a container in your cluster.
 
-**[Kubernetes クラスターで Agent をデプロイするには、別途 Kubernetes ドキュメントを参照してください][1]**。
+**[See the dedicated Kubernetes documentation to deploy the Agent in your Kubernetes cluster][1]**.
 
-**注**: [ホストで Datadog Agent を実行][2]して構成することで Kubernetes メトリクスを収集することも可能です。
+**Note**: You can also [run the Datadog Agent on your host][2] and configure it to gather your Kubernetes metrics.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/kubernetes/
-[2]: /ja/integrations/faq/kubernetes-host-installation/
+[1]: /agent/kubernetes/
+[2]: /integrations/faq/kubernetes-host-installation/

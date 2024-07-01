@@ -1,31 +1,31 @@
 ---
+title: Session Replay Browser Privacy Options
+kind: documentation
+description: Describes privacy controls available in Session Replay and how to set privacy options
 aliases:
-- /ja/real_user_monitoring/session_replay/privacy_options
-description: セッションリプレイで利用可能なプライバシーコントロールとプライバシーオプションの設定方法について説明します。
+- /real_user_monitoring/session_replay/privacy_options
 further_reading:
-- link: /real_user_monitoring/session_replay
-  tag: ドキュメント
-  text: 送信 - Agent チェック
-- link: https://www.datadoghq.com/blog/default-privacy-session-replay/
-  tag: ブログ
-  text: セッションリプレイのデフォルトプライバシー設定によるユーザーデータの難読化
-kind: ドキュメント
-title: セッションリプレイブラウザのプライバシーオプション
+    - link: /real_user_monitoring/session_replay
+      tag: Documentation
+      text: Session Replay
+    - link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"
+      tag: Blog
+      text: Obfuscate user data with Session Replay default privacy settings
 ---
 
-## 概要
+## Overview
 
-セッションリプレイは、あらゆる規模の組織が機密データや個人データを公開しないよう、プライバシーコントロールを提供します。データは Datadog が管理するクラウドインスタンスに保存され、静止時には暗号化されます。
+Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest.
 
-セッションリプレイのデフォルトのプライバシー オプションは、エンドユーザーのプライバシーを保護し、重要な組織情報が収集されるのを防ぐように設計されています。
+Default privacy options for Session Replay are designed to protect end user privacy and prevent sensitive organizational information from being collected.
 
-セッションリプレイを有効にすることで、RUM ブラウザ SDK を通じて記録される機密要素を自動的にマスクすることができます。データがマスクされると、そのデータは Datadog の SDK によって元の形で収集されないため、バックエンドに送信されることはありません。
+By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Browser SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 
-## ブラウザトラブルシューティング
+## Configuration
 
-<div class="alert alert-warning"><code>defaultPrivacyLevel</code> と <code>mask-user-input</code> は、SDK v3.6.0+ で利用できます。</div>
+<div class="alert alert-warning"><code>defaultPrivacyLevel</code> and <code>mask-user-input</code> are available in the SDK v3.6.0+.</div>
 
-プライバシー設定を有効にするには、JavaScript の構成で `defaultPrivacyLevel` を `mask`、`mask-user-input`、または `allow` に設定します。
+To enable your privacy settings, set `defaultPrivacyLevel` to `mask`, `mask-user-input`, or `allow` in your JavaScript configuration.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -46,39 +46,39 @@ datadogRum.init({
 });
 ```
 
-構成を更新すると、以下のプライバシーオプションで HTML ドキュメントの要素を上書きすることができます。
+After updating your configuration, you can override elements of your HTML documents with the below privacy options.
 
-### マスクモード
+### Mask mode
 
-`defaultPrivacyLevel` を `mask` モードに設定すると、すべての HTML テキスト、ユーザー入力、画像、リンク、 [`data-*` 属性[1]がマスクされます。アプリケーション上のテキストは `X` に置き換えられ、ページがワイヤーフレームにレンダリングされます。
+Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, images, links and [`data-*` attributes][1]. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
-{{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="マスクモード" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="Mask mode" style="width:70%;">}}
 
-**注**: セッションリプレイを有効にした場合、デフォルトでは `mask` がプライバシー設定になります。
-**注**: マスクされたデータは、Datadog サーバーに保存されません。
+**Note:** By default, `mask` is the privacy setting when you enable Session Replay.
+**Note**: Masked data is not stored on Datadog servers.
 
-### ユーザー入力マスクモード
+### Mask user input mode
 
-入力、テキストエリア、チェックボックスの値など、ほとんどのフォームフィールドをマスクし、その他のテキストはそのまま記録します。入力は 3 つのアスタリスク (`***`) に置き換えられ、テキストエリアはスペースを保持する `x` 文字で難読化されます。
+Masks most form fields such as inputs, text areas, and checkbox values while recording all other text as is. Inputs are replaced with three asterisks (`***`) and text areas are obfuscated with space-preserving `x` characters.
 
-{{< img src="real_user_monitoring/session_replay/mask-user-input-v2.png" alt="ユーザー入力マスクモード" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/mask-user-input-v2.png" alt="Mask user input mode" style="width:70%;">}}
 
-### 許可モード
+### Allow mode
 
-マスクされていないすべてが記録されます。
+Records everything unmasked.
 
-{{< img src="real_user_monitoring/session_replay/allow.png" alt="許可モード" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/allow.png" alt="Allow mode" style="width:70%;">}}
 
-## プライバシーのオプション
+## Privacy options
 
-### HTML 要素のオーバーライド
+### Override an HTML element
 
-アプリケーション全体のデフォルトを設定し、個々の HTML 要素のプライバシーレベルをタグ付けするには、次の 2 つの方法のいずれかを使用します。
+You can set an application-wide default and tag the privacy level of an individual HTML element using one of two methods:
 
-1. `data-dd-privacy="allow" | "mask" | "hidden" | "mask-user-input"` などの HTML 属性、または
-2. `class="dd-privacy-allow" | "dd-privacy-mask-user-input" | "dd-privacy-mask" | "dd-privacy-hidden"` のような HTML クラス名。
+1. An HTML attribute such as `data-dd-privacy="allow" | "mask" | "hidden" | "mask-user-input"` or
+2. An HTML class name such as `class="dd-privacy-allow" | "dd-privacy-mask-user-input" | "dd-privacy-mask" | "dd-privacy-hidden"`.
 
-以下の例では、難読化をカスタマイズするために、HTML の特定の要素をオーバーライドする方法を示しています。
+The example below demonstrates how you can override certain elements in your HTML to customize your obfuscation:
 
 ```
 <div class="line-item" data-dd-privacy="allow">
@@ -89,48 +89,51 @@ datadogRum.init({
 </div>
 ```
 
-カート内の金額がアスタリスクに置き換えられます。
+The dollar amount in the cart is replaced with asterisks.
 
-{{< img src="real_user_monitoring/session_replay/example-mask.png" alt="マスクモードによる金額の難読化の例" style="width:70%;">}}
+{{< img src="real_user_monitoring/session_replay/example-mask.png" alt="Example of mask mode obfuscating dollar amount" style="width:70%;">}}
 
-## プライバシーに関する制限
+## Privacy restrictions
 
-エンドユーザーのプライバシーを保護するため、プライバシー設定に関わらず、以下の HTML 要素は**常にマスクされます**。
-- `password`、`email`、`tel` 型の入力要素
-- クレジットカード番号、有効期限、セキュリティコードなどの `autocomplete` 属性を持つ要素
+In order to protect end-user privacy, regardless of your privacy configuration, the following HTML elements are **always masked**:
+- Input elements of type `password`, `email`, and `tel`
+- Elements with `autocomplete` attributes such as credit card numbers, expiration dates, and security codes
 
-## 高度なプライバシーオプション
+## Advanced privacy options
 
-### 要素を完全に非表示にする
-
-
-`hidden` は高度なプライバシー設定で、テキストを見えなくする代わりに、特定の要素を完全に隠します。
-
-機密性の高いフィールドで可視要素の数が気になる場合は、特定の要素に対して `hidden` を有効にしてください。これらの HTML 要素は、記録時にグレーのブロックに置き換えられます。
-
-このリプレイセッションの例では、Datadog のナビゲーションにあるユーザー名が難読化されています。
-
-{{< img src="real_user_monitoring/session_replay/hidden.png" alt="ユーザー名を難読化する非表示モードの例" style="width:60%;">}}
+### Completely hide an element
 
 
+`hidden` is an advanced privacy setting that completely hides specific elements instead of obscuring the text.
 
-### アクション名のオーバーライド
+If you are concerned about the number of visible elements in sensitive fields, enable `hidden` for your specific elements. These HTML elements are replaced with a gray block at the time of recording.
 
-デフォルトのアクション名を見えなくし、個々のアクションの命名規則を更新するには、個々のアクション名にオーバーライドを設定します。
+In this example replay session, the username in the Datadog navigation is obfuscated.
 
-特定の HTML 要素の名前をより一般的な名前で上書きすることで、デフォルトのアクション名を変更することができます。デフォルトでは、Datadog はカスタムオーバーライド名を表示します。
+{{< img src="real_user_monitoring/session_replay/hidden.png" alt="Example of hidden mode obfuscating a username" style="width:60%;">}}
 
-例えば、以下の名前を `<div data-dd-action-name="Address" > → Action: "Click on Address"` でオーバーライドします。
 
-デフォルトのアクション名をオーバーライドするその他のユースケースとしては、RUM エクスプローラーで機密データをマスクする、カスタム命名規則で分析と検索を合理化するなどがあります。
+
+### Override the action name
+
+To obscure the default action name and update the naming convention for individual actions, set the override for your individual action names.
+
+You can rename the default action name by overriding the name of a specific HTML element with a more general name. By default, Datadog displays the custom override name.
+
+For example, override the following name with `<div data-dd-action-name="Address" > → Action: "Click on Address"`.
+
+Additional use cases to override the default action name include masking sensitive data in the RUM Explorer and streamlining your analytics and search with custom naming conventions.
+
+### Mask action names
+By default, if you wish to mask all action names, you can use the `enablePrivacyForActionName` option in conjunction with the `mask` privacy setting. This operation automatically substitutes all non-overridden action names with the placeholder `Masked Element`. This setting is also designed to be compatible with existing [HTML override attributes](#override-an-html-element).
 
 <div class="alert alert-info">
 
-Datadog は、RUM とセッションリプレイにさらなるプライバシー機能を追加するために取り組んでいます。ご希望がございましたら、<a href="/help">Datadog サポートにご連絡ください。</a>
+Datadog is working to add more privacy features to RUM & Session Replay. Have something in mind that you would like to see? <a href="/help">Contact Datadog support.</a>
 
 </div>
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

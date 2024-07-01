@@ -1,98 +1,107 @@
 ---
-app_id: cloudera
-app_uuid: 526ca1e8-f474-49cd-9a79-6cfe75de15fe
-assets:
-  dashboards:
-    Cloudera Data Platform Overview: assets/dashboards/cloudera_overview.json
-  integration:
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: cloudera.cluster.cpu_percent_across_hosts
-      metadata_path: metadata.csv
-      prefix: cloudera.
-    process_signatures:
+"app_id": "cloudera"
+"app_uuid": "526ca1e8-f474-49cd-9a79-6cfe75de15fe"
+"assets":
+  "dashboards":
+    "Cloudera Data Platform Overview": assets/dashboards/cloudera_overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": cloudera.cluster.cpu_percent_across_hosts
+      "metadata_path": metadata.csv
+      "prefix": cloudera.
+    "process_signatures":
     - cdp
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Cloudera
-  monitors:
-    Cloudera High CPU Usage: assets/recommended_monitors/cloudera_high_cpu.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- クラウド
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/cloudera/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: cloudera
-integration_id: cloudera
-integration_title: Cloudera
-integration_version: 1.1.0
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: cloudera
-public_title: Cloudera
-short_description: Cloudera
-supported_os:
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10318"
+    "source_type_name": Cloudera
+  "monitors":
+    "Cloudera High CPU Usage": assets/monitors/cloudera_high_cpu.json
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- cloud
+- data stores
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/cloudera/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "cloudera"
+"integration_id": "cloudera"
+"integration_title": "Cloudera"
+"integration_version": "2.2.0"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "cloudera"
+"public_title": "Cloudera"
+"short_description": "Cloudera"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Cloudera
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Cloudera
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Cloud"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  - "Category::Data Stores"
+  - "Submitted Data Type::Metrics"
+  "configuration": "README.md#Setup"
+  "description": Cloudera
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Cloudera
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-このインテグレーションは、Datadog Agent を通じて [Cloudera Data Platform][1] をモニタリングし、Cloudera Data Hub クラスター、ホスト、ロールの健全性に関するメトリクスとサービスチェックを送信できるようにします。
+This integration monitors your [Cloudera Data Platform][1] through the Datadog Agent, allowing you to submit metrics and service checks on the health of your Cloudera Data Hub clusters, hosts, and roles.  
 
-## セットアップ
+## Setup
 
-ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### インストール
+### Installation
 
-Cloudera チェックは [Datadog Agent][3] パッケージに含まれています。
-サーバーに追加でインストールする必要はありません。
+The Cloudera check is included in the [Datadog Agent][3] package.
+No additional installation is needed on your server.
 
-### コンフィギュレーション
+### Configuration
+
+#### Requirements
+The Cloudera check requires version 7 of Cloudera Manager.
 
 #### Prepare Cloudera Manager
-1. Cloudera Data Platform で、Management Console に移動し、**User Management** タブをクリックします。
+1. In Cloudera Data Platform, navigate to the Management Console and click on the **User Management** tab.
 ![User Management][4]
 
-2. **Actions**、**Create Machine User** の順にクリックし、Datadog Agent を通じて Cloudera Manager にクエリを行うマシンユーザーを作成します。
+2. Click on **Actions**, then **Create Machine User** to create the machine user that queries the Cloudera Manager through the Datadog Agent.
 ![Create Machine User][5]
 
-3. ワークロードパスワードが設定されていない場合は、ユーザー作成後、**Set Workload Password** をクリックしてください。
+3. If the workload password hasn't been set, click on **Set Workload Password** after the user is created.
 ![Set Workload Password][6]
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### ホスト
-1. Cloudera クラスターとホストのデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `cloudera.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[cloudera.d/conf.yaml のサンプル][1]を参照してください。
-**注**: `api_url`の末尾には、API バージョンを記述する必要があります。
+#### Host
+1. Edit the `cloudera.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Cloudera cluster and host data. See the [sample cloudera.d/conf.yaml][1] for all available configuration options.  
+**Note**: The `api_url` should contain the API version at the end.
 
    ```yaml
    init_config:
@@ -125,50 +134,50 @@ Cloudera チェックは [Datadog Agent][3] パッケージに含まれていま
       - api_url: <API_URL>
    ```
 
-2. [Agent を再起動する][2]と、Cloudera Data Hub クラスターデータの収集と Datadog への送信を開始します。
+2. [Restart the Agent][2] to start collecting and sending Cloudera Data Hub cluster data to Datadog.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/cloudera/datadog_checks/cloudera/data/conf.yaml.example
-[2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{% tab "Containerized" %}}
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
 
-| パラメーター            | 値                                                                                                            |
+| Parameter            | Value                                                                                                            |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `cloudera`                                                                                                       |
-| `<初期コンフィギュレーション>`      | `{"workload_username": "<WORKLOAD_USERNAME>", 'workload_password": "<WORKLOAD_PASSWORD>"}`                       |
-| `<インスタンスコンフィギュレーション>`  | `{"api_url": <API_URL>"}`                                                                                        |
+| `<INTEGRATION_NAME>` | `cloudera`                                                                                                       |
+| `<INIT_CONFIG>`      | `{"workload_username": "<WORKLOAD_USERNAME>", 'workload_password": "<WORKLOAD_PASSWORD>"}`                       |
+| `<INSTANCE_CONFIG>`  | `{"api_url": <API_URL>"}`                                                                                        |
 
-[1]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-#### クラスターの検出
+#### Clusters Discovery
 
-クラスターの検出方法は、`clusters` 構成オプションで以下のパラメーターで設定することができます。
+You can configure how your clusters are discovered with the `clusters` configuration option with the following parameters:
 
 - `limit`
-: 自動検出するアイテムの最大数。
-**デフォルト値**: `None` (全クラスターが処理されます)
+: Maximum number of items to be autodiscovered.  
+**Default value**: `None` (all clusters will be processed)
 
 - `include`
-: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。 
-**デフォルト値**: empty map
+: Mapping of regular expression keys and component config values to autodiscover.  
+**Default value**: empty map
 
 - `exclude`
-: 自動検出から除外するコンポーネントのパターンを持つ正規表現のリスト。
-**デフォルト値**: empty list
+: List of regular expressions with the patterns of components to exclude from autodiscovery.  
+**Default value**: empty list
 
 - `interval`
-: エンドポイントを通じて取得した最後のクラスター一覧の有効時間 (秒)。 
-**デフォルト値**: `None` (キャッシュを使用しない)
+: Validity time in seconds of the last list of clusters obtained through the endpoint.  
+**Default value**: `None` (no cache used)
 
-**例**:
+**Examples**:
 
-`my_cluster` で始まる名前のクラスターを最大 `5` まで処理します。
+Process a maximum of `5` clusters with names that start with `my_cluster`:
 
 ```yaml
 clusters:
@@ -177,7 +186,7 @@ clusters:
     - 'my_cluster.*'
 ```
 
-最大 `20` のクラスターを処理し、`tmp_` で始まる名前を持つクラスターを除外します。
+Process a maximum of `20` clusters and exclude those with names that start with `tmp_`:
 
 ```yaml
 clusters:
@@ -188,13 +197,13 @@ clusters:
     - 'tmp_.*'
 ```
 
-#### カスタムクエリ
+#### Custom Queries
 
-カスタム時系列クエリを実行することで、デフォルトでは収集されないカスタムメトリクスを収集するように Cloudera インテグレーションを構成することができます。これらのクエリは、[tsquery 言語][7]を使用して、Cloudera Manager からデータを取得します。
+You can configure the Cloudera integration to collect custom metrics that are not be collected by default by running custom timeseries queries. These queries use [the tsquery language][7] to retrieve data from Cloudera Manager. 
 
-**例**:
+**Example**:
 
-カスタムタグとして `cloudera_jvm` を使用して、JVM ガベージコレクションレートと JVM フリーメモリを収集します。
+Collect JVM garbage collection rate and JVM free memory with `cloudera_jvm` as a custom tag:
 
 ```yaml
 custom_queries:
@@ -202,21 +211,21 @@ custom_queries:
   tags: cloudera_jvm
 ```
 
-注: これらのクエリはメトリクス表現を利用することができ、`total_cpu_user + total_cpu_system`、`1000 * jvm_gc_time_ms / jvm_gc_count` および `max(total_cpu_user)` などのクエリを作成します。メトリクス式を使用する場合、メトリクスのエイリアスも含めるようにしてください。そうしないと、メトリクス名が正しくフォーマットされないことがあります。例えば、`SELECT last(jvm_gc_count)` は `cloudera.<CATEGORY>.last_jvm_gc_count` というメトリクスを生成します。次の例のようにエイリアスを追加することができます: `SELECT last(jvm_gc_count) as jvm_gc_count` で `cloudera.<CATEGORY>.jvm_gc_count` というメトリクスが生成されます。
+Note: These queries can take advantage of metric expressions, resulting in queries such as `total_cpu_user + total_cpu_system`, `1000 * jvm_gc_time_ms / jvm_gc_count`, and `max(total_cpu_user)`. When using metric expressions, make sure to also include aliases for the metrics, otherwise the metric names may be incorrectly formatted. For example, `SELECT last(jvm_gc_count)` results in the metric `cloudera.<CATEGORY>.last_jvm_gc_count`. You can append an alias like in the following example: `SELECT last(jvm_gc_count) as jvm_gc_count` to generate the metric `cloudera.<CATEGORY>.jvm_gc_count`.
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][8]し、Checks セクションの `cloudera` を探します。
+[Run the Agent's status subcommand][8] and look for `cloudera` under the Checks section.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "cloudera" >}}
 
 
-### イベント
+### Events
 
-Cloudera インテグレーションは、Cloudera Manager API の `/events` エンドポイントから発行されるイベントを収集します。イベントレベルは以下のようにマッピングされます。
+The Cloudera integration collects events that are emitted from the `/events` endpoint from the Cloudera Manager API. The event levels are mapped as the following:
 
 | Cloudera                  | Datadog                        |
 |---------------------------|--------------------------------|
@@ -225,28 +234,28 @@ Cloudera インテグレーションは、Cloudera Manager API の `/events` エ
 | `IMPORTANT`               | `info`                         |
 | `CRITICAL`                | `error`                        |
 
-### サービスのチェック
+### Service Checks
 {{< get-service-checks-from-git "cloudera" >}}
 
 
-## トラブルシューティング
+## Troubleshooting
 
-### Cloudera ホスト上の Datadog インテグレーションのメトリクスを収集する
-Cloudera ホストに Datadog Agent をインストールするには、ホストに関連付けられたセキュリティグループが SSH アクセスを許可していることを確認します。
-そして、環境作成時に生成した SSH キーでホストにアクセスする際に、[ルートユーザー `cloudbreak`][9] を使用する必要があります。
+### Collecting metrics of Datadog integrations on Cloudera hosts
+To install the Datadog Agent on a Cloudera host, make sure that the security group associated with the host allows SSH access. 
+Then, you need to use the [root user `cloudbreak`][9] when accessing the host with the SSH key generated during the environment creation:
 
 ```
 sudo ssh -i "/path/to/key.pem" cloudbreak@<HOST_IP_ADDRESS>
 ```
 
-ワークロードのユーザー名とパスワードは、SSH で Cloudera ホストにアクセスするために使用できますが、Datadog Agent をインストールできるのは `cloudbreak` ユーザーだけです。
-`cloudbreak` 以外のユーザーを使用しようとすると、以下のようなエラーが発生する可能性があります。
+The workload username and password can be used to access Cloudera hosts through SSH, although only the `cloudbreak` user can install the Datadog Agent. 
+Trying to use any user that is not `cloudbreak` may result in the following error:
 ```
 <NON_CLOUDBREAK_USER> is not allowed to run sudo on <CLOUDERA_HOSTNAME>.  This incident will be reported.
 ```
 
-### Datadog メトリクス収集時の構成エラー
-Cloudera ホストからメトリクスを収集する際に、Agent のステータスに以下のようなものが表示された場合
+### Config errors when collecting Datadog metrics
+If you see something similar to the following in the Agent status when collecting metrics from your Cloudera host:
 
 ```
   Config Errors
@@ -256,30 +265,30 @@ Cloudera ホストからメトリクスを収集する際に、Agent のステ�
       open /etc/datadog-agent/conf.d/zk.d/conf.yaml: permission denied
 ```
 
-`conf.yaml` の所有者を `dd-agent` に変更する必要があります。
+You need to change the ownership of the `conf.yaml` to `dd-agent`:
 
 ```
 [cloudbreak@<CLOUDERA_HOSTNAME> ~]$ sudo chown -R dd-agent:dd-agent /etc/datadog-agent/conf.d/zk.d/conf.yaml
 ```
 
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Datadog で Cloudera クラスターを視覚化する][11]
+- [Gain visibility into your Cloudera clusters with Datadog][11]
 
 
 [1]: https://www.cloudera.com/products/cloudera-data-platform.html
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/user_management.png
 [5]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/create_machine_user.png
 [6]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cloudera/images/set_workload_password.png
 [7]: https://docs.cloudera.com/cloudera-manager/7.9.0/monitoring-and-diagnostics/topics/cm-tsquery-syntax.html
-[8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://docs.cloudera.com/data-hub/cloud/access-clusters/topics/mc-accessing-cluster-via-ssh.html
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/help/
 [11]: https://www.datadoghq.com/blog/cloudera-integration-announcement/

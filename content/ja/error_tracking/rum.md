@@ -1,9 +1,9 @@
 ---
-kind: ドキュメント
-title: Web アプリケーションとモバイルアプリケーションのエラー追跡
+title: Error Tracking for Web and Mobile Applications
+kind: documentation
 ---
 
-{{< whatsnext desc="RUM 用の Datadog Error Tracking を始めるには、対応するドキュメントを参照してください。" >}}
+{{< whatsnext desc="To get started with Datadog Error Tracking for RUM, see the corresponding documentation:" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}

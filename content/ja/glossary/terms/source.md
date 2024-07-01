@@ -1,6 +1,6 @@
 ---
-core_product:
-- log management
 title: source
+core_product:
+  - log management
 ---
-ログソースは、ログを収集し、Datadog に取り込む場所です。
+A log source is where logs are collected and ingested into Datadog.

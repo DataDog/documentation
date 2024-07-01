@@ -1,24 +1,24 @@
 ---
-aliases:
-- /ja/tracing/dynamic_instrumentation/enabling/
-further_reading:
-- link: /agent/
-  tag: ドキュメント
-  text: Datadog Agent の概要
-is_beta: true
-private: true
-title: ダイナミックインスツルメンテーションを有効にする
+title: Enabling Dynamic Instrumentation
 type: multi-code-lang
+aliases:
+    - /tracing/dynamic_instrumentation/enabling/
+is_beta: false
+private: false
+further_reading:
+    - link: /agent/
+      tag: Documentation
+      text: Getting Started with Datadog Agent
 ---
 
-ダイナミックインスツルメンテーションは、Datadog のトレーシングライブラリをサポートする機能です。すでに [APM を使用してアプリケーションのトレースを収集][1]している場合は、トレーシングライブラリが最新であることを確認してから、アプリケーションでダイナミックインスツルメンテーションを有効にします。
+Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, ensure your tracing library is up-to-date and then enable Dynamic Instrumentation for your application.
 
-アプリケーションでダイナミックインスツルメンテーションを有効にする方法については、以下でランタイムを選択してください。
+Select your runtime below to learn how to enable Dynamic Instrumentation for your application:
 
 {{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_collection/
+[1]: /tracing/trace_collection/

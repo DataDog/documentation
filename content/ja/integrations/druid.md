@@ -1,102 +1,100 @@
 ---
-app_id: druid
-app_uuid: 15b15f01-b342-4001-89ac-9e92fc4f3234
-assets:
-  dashboards:
-    Druid Overview: assets/dashboards/overview.json
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: druid.service.health
-      metadata_path: metadata.csv
-      prefix: druid.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10074
-    source_type_name: Druid
-  logs:
-    source: druid
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- キャッシュ
+"app_id": "druid"
+"app_uuid": "15b15f01-b342-4001-89ac-9e92fc4f3234"
+"assets":
+  "dashboards":
+    "Druid Overview": assets/dashboards/overview.json
+  "integration":
+    "auto_install": true
+    "configuration":
+      "spec": assets/configuration/spec.yaml
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": druid.service.health
+      "metadata_path": metadata.csv
+      "prefix": druid.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10074"
+    "source_type_name": Druid
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- caching
 - data stores
-- ログの収集
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/druid/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: druid
-integration_id: druid
-integration_title: Druid
-integration_version: 2.5.0
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: druid
-public_title: Druid
-short_description: クエリ、取り込み、コーディネーションに関するメトリクスを追跡。
-supported_os:
+- log collection
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/druid/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "druid"
+"integration_id": "druid"
+"integration_title": "Druid"
+"integration_version": "2.5.1"
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "druid"
+"public_title": "Druid"
+"short_description": "Track metrics related to queries, ingestion, and coordination."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Caching
-  - Category::Data Stores
-  - Category::Log Collection
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: クエリ、取り込み、コーディネーションに関するメトリクスを追跡。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Druid
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Caching"
+  - "Category::Data Stores"
+  - "Category::Log Collection"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Track metrics related to queries, ingestion, and coordination.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Druid
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Druid ダッシュボード][1]
+![Druid Dashboard][1]
 
-## 概要
+## Overview
 
-Datadog Agent は [DogStatsD][2] を使用して Druid からメトリクスを収集します。DogStatsD は Druid のクエリ、取り込み、コーディネーションデータに関するメトリクスを収集します。詳細については、[Druid メトリクスドキュメント][3]をご参照ください。
+The Datadog Agent collects metrics from Druid using [DogStatsD][2]. DogStatsD collects metrics on Druid queries, ingestion, and coordination data. For more information, see the [Druid metrics documentation][3].
 
-メトリクスの収集に加え、Agent はDruid の健全性に関連するサービスチェックも送信します。
+In addition to collecting metrics, the Agent also sends a Service Check related to Druid's health.
 
-## 計画と使用
+## Setup
 
-### 前提条件
+### Prerequisite
 
-このインテグレーションが正常に動作するには Druid 0.16 以上が必要です。
+Druid 0.16 or above is required for this integration to work properly.
 
-### インフラストラクチャーリスト
+### Installation
 
-Druid インテグレーショが正常に動作するためには、下記の 2 ステップを実施する必要があります。ステップを開始する前に [Datadog Agent][4] をインストールしてください。
+Both steps below are needed for Druid integration to work properly. Before you begin, you should [install the Datadog Agent][4].
 
-#### ステップ 1: 健全性メトリクスとサービスチェックを収集するように Druid を構成する
+#### Step 1: Configure Druid to collect health metrics and service checks
 
-健全性メトリクスとサービスチェックを収集するように、[Datadog Agent][5] パッケージに含まれている Druid チェックを構成します。
+Configure the Druid check included in the [Datadog Agent][5] package to collect health metrics and service checks.
 
-1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/`  フォルダーで `druid.d/conf.yaml` ファイルを編集し、Druid サービスチェックの収集を開始します。利用可能なすべてのコンフィギュレーションオプションについては、[ druid.d/conf.yaml のサンプル][6]をご参照ください。
-2. [Agent を再起動します][7]。
+1. Edit the `druid.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your druid service checks. See the [sample druid.d/conf.yaml][6] for all available configuration options.
+2. [Restart the Agent][7].
 
-#### ステップ 2: 拡張子 `statsd-emitter` を使用して Druid をDogStatsD (Datadog Agent に含まれる) に関連付け、メトリクスの収集を開始する
+#### Step 2: Connect Druid to DogStatsD (included in the Datadog Agent) by using the extension `statsd-emitter` to collect metrics
 
-`statsd-emitter` 拡張子を構成して多数の [Druid メトリクス][3]を収集するためのステップを以下に示します。
+Step to configure `statsd-emitter` extension to collect the majority of [Druid metrics][3].
 
-1. Druid 拡張子 [`statsd-emitter`][8] をインストールします。
+1. Install the Druid extension [`statsd-emitter`][8].
 
    ```shell
    $ java \
@@ -108,9 +106,9 @@ Druid インテグレーショが正常に動作するためには、下記の 2
      -c "org.apache.druid.extensions.contrib:statsd-emitter:0.15.0-incubating"
    ```
 
-    本ステップの詳細情報については、[Druid 拡張子のロードに関する公式ガイド][9]をご確認ください。
+    More info about this step can be found on the [official guide for loading Druid extensions][9]
 
-2. 下記のコンフィギュレーションを追加して、Druid Java プロパティを更新します。
+2. Update Druid java properties by adding the following configs:
 
    ```conf
    # Add `statsd-emitter` to the extensions list to be loaded
@@ -132,23 +130,23 @@ Druid インテグレーショが正常に動作するためには、下記の 2
    druid.emitter.statsd.dogstatsdServiceAsTag=true
    ```
 
-3. Druid を再起動すると、DogStatsD を通して Agent に向けて Druid メトリクスの送信が開始されます。
+3. Restart Druid to start sending your Druid metrics to the Agent through DogStatsD.
 
-#### インテグレーションサービスチェック
+#### Integration Service Checks
 
-`druid.d/conf.yaml` ファイルのデフォルトコンフィギュレーションを使用して、Druid サービスチェックの収集を有効にします。利用可能なすべてのコンフィギュレーションオプションについては、[druid.d/conf.yaml][6]  のサンプルをご参照ください。
+Use the default configuration of your `druid.d/conf.yaml` file to activate the collection of your Druid service checks. See the sample [druid.d/conf.yaml][6] for all available configuration options.
 
-#### 収集データ
+#### Log collection
 
-_Agent バージョン 6.0 以降で利用可能_
+_Available for Agent versions >6.0_
 
-1. デフォルトでは、Datadog Agent のログの収集は無効化されています。以下のように `datadog.yaml` ファイルを使用して有効化します。
+1. Collecting logs is disabled by default in the Datadog Agent, enable it in your datadog.yaml file:
 
    ```yaml
    logs_enabled: true
    ```
 
-2. `druid.d/conf.yaml` の下部にある、コンフィギュレーションブロックのコメントを解除して編集します。
+2. Uncomment and edit this configuration block at the bottom of your `druid.d/conf.yaml`:
 
    ```yaml
    logs:
@@ -162,43 +160,44 @@ _Agent バージョン 6.0 以降で利用可能_
            pattern: \d{4}\-\d{2}\-\d{2}
    ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
+    Change the `path` and `service` parameter values and configure them for your environment.
 
-3. [Agent を再起動します][7]。
+3. [Restart the Agent][7].
 
-### 検証
+### Validation
 
-[Agent のステータスサブコマンドを実行][10]し、Checks セクションで `druid` を探します。
+[Run the Agent's status subcommand][10] and look for `druid` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "druid" >}}
 
 
-### ヘルプ
+### Events
 
-Druid チェックには イベントは含まれません。
+The Druid check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "druid" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
+Need help? Contact [Datadog support][13].
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/druid/images/druid_dashboard_overview.png
-[2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
+[2]: https://docs.datadoghq.com/developers/dogstatsd/
 [3]: https://druid.apache.org/docs/latest/operations/metrics.html
-[4]: https://docs.datadoghq.com/ja/agent/
+[4]: https://docs.datadoghq.com/agent/
 [5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: https://github.com/DataDog/integrations-core/blob/master/druid/datadog_checks/druid/data/conf.yaml.example
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://druid.apache.org/docs/latest/development/extensions-contrib/statsd.html
 [9]: https://druid.apache.org/docs/latest/operations/including-extensions.html
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[10]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 [11]: https://github.com/DataDog/integrations-core/blob/master/druid/metadata.csv
 [12]: https://github.com/DataDog/integrations-core/blob/master/druid/assets/service_checks.json
-[13]: https://docs.datadoghq.com/ja/help/
+[13]: https://docs.datadoghq.com/help/
+

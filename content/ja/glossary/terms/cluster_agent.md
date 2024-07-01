@@ -1,6 +1,6 @@
 ---
-core_product:
-- datadog agent
 title: Cluster Agent
+core_product:
+  - datadog agent
 ---
-Cluster Agent は、Datadog Agent のバージョンで、クラスターレベルの監視データを収集するための合理的で集中的なアプローチを提供します。
+The Cluster Agent is a version of the Datadog Agent that provides a streamlined, centralized approach to collecting cluster-level monitoring data.

@@ -1,94 +1,95 @@
 ---
-aliases:
-- /ja/integrations/awsdirectconnect/
-categories:
-- cloud
-- aws
-- log collection
-dependencies: []
-description: AWS Direct Connect のキーメトリクスを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/amazon_directconnect/
-draft: false
-git_integration_title: amazon_directconnect
-has_logo: true
-integration_id: ''
-integration_title: AWS Direct Connect
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_directconnect
-public_title: Datadog-AWS Direct Connect インテグレーション
-short_description: AWS Direct Connect のキーメトリクスを追跡します。
-version: '1.0'
+"aliases":
+- "/integrations/awsdirectconnect/"
+"categories":
+- "cloud"
+- "aws"
+- "log collection"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key AWS Direct Connect metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_directconnect/"
+"draft": false
+"git_integration_title": "amazon_directconnect"
+"has_logo": true
+"integration_id": ""
+"integration_title": "AWS Direct Connect"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_directconnect"
+"public_title": "Datadog-AWS Direct Connect Integration"
+"short_description": "Track key AWS Direct Connect metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-このインテグレーションは、AWS Direct Connect から接続状態、送受信ビットレート、送受信パケットレートなどのメトリクスを収集します。
+This integration collects metrics from AWS Direct Connect, such as connection state, bit rate ingress and egress, packet rate ingress and egress, and more.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration first][1].
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `DirectConnect` が有効になっていることを確認します。
-2. AWS Direct Connect メトリクスの収集には、これらの権限を [Datadog IAM ポリシー][3] に追加してください。
+1. In the [AWS integration page][2], ensure that `DirectConnect` is enabled under the `Metric Collection` tab.
+2. Add those permissions to your [Datadog IAM policy][3] in order to collect AWS Direct Connect metrics:
 
-    - `directconnect:DescribeConnections`: 使用できる Direct Connect 接続をリストするために使用されます。
-    - `directconnect:DescribeTags`: Direct Connect 接続に適用されるカスタムタグを収集するために使用されます。
+    - `directconnect:DescribeConnections`: Used to list available Direct Connect connections.
+    - `directconnect:DescribeTags`: Used to gather custom tags applied to Direct Connect connections.
 
-    詳細については、AWS ウェブサイト上の [Direct Connect ポリシー][4]を参照してください。
+    For more information, see the [Direct Connect policies][4] on the AWS website.
 
-3. [Datadog - AWS Direct Connect インテグレーション][5]をインストールします。
+3. Install the [Datadog - AWS Direct Connect integration][5].
 
-### 収集データ
+### Log collection
 
-#### ログの有効化
+#### Enable logging
 
-AWS Direct Connect を構成して、ログを S3 バケットか CloudWatch のいずれかに送信します。
+Configure AWS Direct Connect to send logs either to a S3 bucket or to CloudWatch.
 
-**注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_directconnect` に設定されているかを確認してください。
+**Note**: If you log to a S3 bucket, make sure that `amazon_directconnect` is set as _Target prefix_.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. [Datadog Forwarder Lambda 関数][6]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、AWS Direct Connect ログを含む S3 バケットまたは CloudWatch ロググループに手動でトリガーを追加します。
+1. If you haven’t already, set up the [Datadog Forwarder Lambda function][6].
+2. Once the Lambda function is installed, manually add a trigger on the S3 bucket or CloudWatch log group that contains your AWS Direct Connect logs in the AWS console:
 
-    - [S3 バケットに手動トリガーを追加][7]
-    - [CloudWatch ロググループに手動トリガーを追加][8]
+    - [Add a manual trigger on the S3 bucket][7]
+    - [Add a manual trigger on the CloudWatch Log Group][8]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_directconnect" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
+Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### ヘルプ
+### Events
 
-AWS Direct Connect インテグレーションには、イベントは含まれません。
+The AWS Direct Connect integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-AWS Direct Connect インテグレーションには、サービスのチェック機能は含まれません。
+The AWS Direct Connect integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/security-iam.html
 [5]: https://app.datadoghq.com/integrations/amazon-directconnect
-[6]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[6]: https://docs.datadoghq.com/logs/guide/forwarder/
+[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[8]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_directconnect/amazon_directconnect_metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/help/
+

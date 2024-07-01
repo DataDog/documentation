@@ -1,6 +1,6 @@
 ---
+title: Session Replay
 core_product:
-- real user monitoring
-title: セッション リプレイ
+  - real user monitoring
 ---
-セッションリプレイは、Web サイトやアプリケーションのユーザージャーニーを再現する UX テストの手法です。
+Session replay is a technique in UX testing that replays a user's journey on a website or application.

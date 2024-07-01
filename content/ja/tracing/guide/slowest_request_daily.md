@@ -1,70 +1,70 @@
 ---
+title: Debug the slowest trace on the slowest endpoint of a web service
+kind: guide
 further_reading:
 - link: /tracing/guide/alert_anomalies_p99_database/
-  tag: 3 分
-  text: データベースサービスの異常な p99 レイテンシーに関するアラート
+  tag: 3 mins
+  text: Alert on anomalous p99 latency of a database service
 - link: /tracing/guide/week_over_week_p50_comparison/
-  tag: 2 分
-  text: サービスのレイテンシーを前週と比較する
+  tag: 2 mins
+  text: Compare a service's latency to the previous week
 - link: /tracing/guide/apm_dashboard/
-  tag: 4 分
-  text: ダッシュボードを作成して、APM メトリクスを追跡、関連付ける
+  tag: 4 mins
+  text: Create a Dashboard to track and correlate APM metrics
 - link: /tracing/guide/
-  tag: ''
-  text: すべてのガイド
-kind: ガイド
-title: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
+  tag: ""
+  text: All guides
 ---
 
-_所要時間 3 分_
+_3 minutes to complete_
 
-{{< img src="tracing/guide/slowest_request_daily/slowest_trace_1.mp4" video="true" alt="最も遅いトレースを特定し、そのホストメトリクスを解明する" style="width:90%;">}}
+{{< img src="tracing/guide/slowest_request_daily/slowest_trace_1_cropped.mp4" video="true" alt="Identifying the slowest trace and finding the Host metrics for it" style="width:90%;">}}
 
-Datadog APM を使用すると、エンドポイントのパフォーマンスを調査して遅いリクエストを特定し、レイテンシー問題の根本原因を調査できます。上記の例では、E コマースチェックポイントのエンドポイントについて、1 日のうちで最も遅い[トレース][1]と、CPU 使用率が高いためにそのトレースが遅くなっている様子を示しています。
+With Datadog APM, you can investigate the performance of your endpoints, identify slow requests, and investigate the root cause of latency issues. This example shows the slowest [trace][1] of the day for an e-commerce checkout endpoint and how it slows down because of high CPU usage.
 
-1. **[サービスカタログ][2]を開きます**。
+1. **Open the [Service Catalog][2]**.
 
-    このページには、Datadog にデータを送信しているすべてのサービスのリストが含まれています。キーワードで検索したり、`env-tag`でフィルターをかけたり、時間枠を設定することができます。
+    This page contains a list of all services sending data to Datadog. Note you can search for keywords, filter by `env-tag`, and set the time frame.
 
-2. **関連性があるアクティブなウェブサービスを検索し、そのサービス詳細画面を開きます**。
+2. **Search for a relevant and active web service and open the Service Page**.
 
-   ここでは、テクノロジースタックのプライマリサーバーであり、サードパーティのサービスへのコールのほとんどを制御している `web-store` サービスを例として使用しています。
+    The `web-store` service is used in this example because it is the primary server in the tech stack and it controls most calls to third party services.
 
-    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_2.png" alt="最も遅いトレースを特定し、その原因となっているボトルネックを解明する" style="width:90%;">}}
+    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_2_cropped.png" alt="Identifying the slowest trace and finding the bottleneck causing it" style="width:90%;">}}
 
-    スループット、レイテンシー、エラー率に関する情報のほか、サービス詳細ページでは、サービスで特定されたリソース (API エンドポイント、SQL クエリ、Web リクエストなどの主なオペレーション) の一覧も確認できます。
+    In addition to throughput, latency, and error rate information, the service details page contains a list of Resources (major operations like API endpoints, SQL queries, and web requests) identified for the service.
 
-3. **リソース表を p99 レイテンシーで並べ替え**、最も遅いリソースをクリックして開きます。
-    **注**: p99 レイテンシーの列が表示されていない場合は、歯車アイコン `Change Columns` をクリックして `p99` に切り替えます。
+3. **Sort the Resource table by p99 latency** and click into the slowest resource.
+    **Note**: If you cannot see a p99 latency column, you can click on the cog icon `Change Columns` and flip the switch for `p99`.
 
-    [Resource][4] ページには、スループット、レイテンシー、エラー率、リソースからの各ダウンストリームサービスにかかった時間の内訳など、このリソースに関する上位のメトリクスが表示されます。また、リソースをパススルーする特定の[トレース][1]や、このトレースを構成する[スパン][5]の集計ビューも確認できます。
+    The [Resource][4] page contains high-level metrics about this resource like throughput, latency, error rate, and a breakdown of the time spent on each downstream service from the resource. In addition, it contains the specific [traces][1] that pass through the resource and an aggregate view of the [spans][5] that make up these traces.
 
-     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3.png" alt="最も遅いトレースを特定し、その原因となっているボトルネックを解明する" style="width:90%;">}}
+     {{< img src="tracing/guide/slowest_request_daily/slowest_trace_3_cropped.png" alt="Identifying the slowest trace and finding the bottleneck causing it" style="width:90%;">}}
 
-4. 時間フィルターを `1d One Day` に設定します。トレース表までスクロールダウンし、**期間で並べ替え**、表の一番上のトレースにマウスを合わせ **View Trace をクリックします**。
+4. Set the time filter to `1d One Day`. Scroll down to the Traces table and **sort it by duration**, hover over the top trace in the table and **click View Trace**
 
-    これはフレームグラフと関連情報です。ここでは、トレースの各ステップの時間とエラーの有無を確認できます。これは、遅いコンポーネントやエラーが発生しやすいコンポーネントを特定するのに役立ちます。フレームグラフでは、拡大、スクロール、調査が可能です。フレームグラフの下には、関連するメタデータ、ログ、ホストの情報が表示されます。
+    This is the flame graph and associated information. Here you can see the duration of each step in the trace and whether it is erroneous. This is useful in identifying slow components and error-prone ones. The flame graph can be zoomed, scrolled, and explored naturally. Under the flame graph you can see associated metadata, Logs, and Host information.
 
-    フレームグラフは、エラーが発生しているスタックや遅延しているスタックを正確に特定するのに最適です。エラーは赤いハイライトでマークされ、時間はスパンの水平方向の長さで表されます。つまり、長いスパンが最も遅いものです。フレームグラフの活用については、[トレースビューガイド][6]を参照してください。
+    The flame graph is a great way of identifying the precise piece of your stack that is erroneous or latent. Errors are marked with red highlights and duration is represented by the horizontal length of the span, meaning long spans are the slowest ones. Learn more about using the flame graph in the [Trace View guide][6].
 
-    また、フレームグラフの下には、すべてのタグ ([カスタムタグ][7]を含む) が表示されます。ここから、関連するログ ([ログをトレースに接続][8]してある場合) を確認したり、CPU の使用率やメモリの使用量など、ホストレベルの情報を確認したりできます。
+    Under the flame graph you can see all of the tags (including [custom ones][7]). From here you can also see associated logs (if you [connected Logs to your Traces][8]), see host-level information such as CPU and memory usage.
 
-    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_4.png" alt="最も遅いトレースを特定し、その原因となっているボトルネックを解明する" style="width:90%;">}}
+    {{< img src="tracing/guide/slowest_request_daily/slowest_trace_4_cropped.png" alt="Identifying the slowest trace and finding the bottleneck causing it" style="width:90%;">}}
 
-5. **Host タブをクリックして開き**、リクエストがヒットしていた間の下層のホストの CPU とメモリのパフォーマンスを調査します。
-6. **Open Host Dashboard をクリックして**、ホストに関するすべての関連データを表示します。
+5. **Click into the Host tab**, observe the CPU and memory performance of the underlying host while the request was hitting it.
+6. **Click Open Host Dashboard** to view all relevant data about the host
 
-Datadog APM では、インフラストラクチャーメトリクスやログなど、他の Datadog のメトリクスや情報がシームレスに統合されています。フレームグラフを使用すればこのような情報や、トレースと一緒に送信しているあらゆる[カスタムメタデータ][7]を利用できます。
+Datadog APM seamlessly integrates with the other Datadog metrics and information - like infrastructure metrics and Logs. Using the flame graph, this information is available to you as well as any [custom metadata][7] you are sending with your traces.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/glossary/#trace
+[1]: /tracing/glossary/#trace
 [2]: https://app.datadoghq.com/services
-[3]: /ja/tracing/glossary/#services
-[4]: /ja/tracing/glossary/#resources
-[5]: /ja/tracing/glossary/#spans
-[6]: /ja/tracing/trace_explorer/trace_view/?tab=spanmetadata
-[7]: /ja/tracing/guide/adding_metadata_to_spans/
-[8]: /ja/tracing/other_telemetry/connect_logs_and_traces/
+[3]: /tracing/glossary/#services
+[4]: /tracing/glossary/#resources
+[5]: /tracing/glossary/#spans
+[6]: /tracing/trace_explorer/trace_view/?tab=spanmetadata
+[7]: /tracing/guide/adding_metadata_to_spans/
+[8]: /tracing/other_telemetry/connect_logs_and_traces/

@@ -2,156 +2,156 @@
 title: Product Allotments
 ---
 
-割り当ては、選択した親製品のサブスクリプションに付随する追加の使用量を提供します。これにより、アカウントの親製品に対するコミットされた使用量およびオンデマンド使用量の一部として、子製品に一定量の使用量が付与されます。
+Allotments provide additional usage that comes with subscriptions to select parent products. They grant a certain amount of usage for a child product as part of the account's committed and on-demand usage of the parent product.
 
-この構造を持つ製品の例としては、すべてのホストにコンテナ割り当てが付属しているインフラストラクチャーホストとコンテナが挙げられます。
+Examples of products that have this structure include Infrastructure hosts and containers, where every host comes with a container allotment.
 
-## 請求計算における割り当て
+## Allotments within billing calculations
 
-発生した総使用量は、請求対象の使用量と請求対象外の使用量に分類されます。請求対象の使用量はアカウントに課金されるもので、請求対象外の使用量は課金されません。請求対象外の使用量にはトライアル使用量が含まれます。
+Total usage incurred is classified into billable and non-billable usage. Billable usage is what an account can be charged for, while non-billable usage is not charged. Non-billable usage can include trial usage.
 
-請求対象の使用量を請求するために、まず含まれる使用量が差し引かれます。割り当ては含まれる使用量に計上され、請求対象の使用量からオンデマンド使用量を計算するために使用されます。
+In order to invoice billable usage, included usage is first subtracted. Allotments are factored into included usage, which is then used to calculate on-demand usage from billable usage:
 
-- `割り当て量 + コミットされた使用量 = 含まれる使用量`
-- `請求対象の使用量 - 含まれる使用量 = オンデマンド使用量`
+- `allotments + committed usage = included usage`
+- `billable usage - included usage = on-demand usage`
 
-例えば、あるアカウントでは Ingested Span の合計使用量が 150 GB で、このうち 140 GB が請求対象の使用量だとします。事前に 50 GB のコミットメントと 30 GB の割り当てがある場合、この 80 GB の使用量は含まれる使用量として分類され、請求対象の 140 GB から差し引かれます。残りの 60 GB の使用量はオンデマンド使用量に分類されます。
+For example, an account can have a total Ingested Spans usage of 150 GB. From this, 140 GB is billable usage. If there is a prior commitment of 50 GB and an allotment of 30 GB, this 80 GB of usage is classified as included usage and subtracted from the 140 GB of billable usage. The remaining 60 GB of usage is classified as on-demand usage.
 
-- 合計使用量と請求対象の使用量を表示するには、Datadog の [**Plan and Usage** ページ][2]の **All** タブと **Billable** タブを参照してください。
-- コミットメントを表示するには、契約を参照してください。
+- To view total usage and billable usage, see the **All** and **Billable** tabs within the [**Plan and Usage** page][2] in Datadog. 
+- To view commitments, refer to your contract.
 
-## 含まれる使用量の計算
-含まれる使用量の合計は、**製品のコミットメントと親製品ごとの割り当ての合計**で構成されます。コミットメント量については、ユーザーの契約を参照してください。以下の変数によって、割り当て使用量の計算方法が決まります。
+## Calculating included usage
+Total included usage is made up of the **commitment for the product, and the sum of allotments per parent product**. Refer to the user's contract for commitment quantities. The following variables determine how allotment usage is calculated:
 
-- オンデマンドオプション
-- 親製品ごとの割り当て量
-- 使用量集計関数
+- On-demand option
+- Allotments by parent products
+- Usage aggregation function
 
-### オンデマンドオプション
+### On-demand option
 
-製品の割り当て使用量は、組織のオンデマンド測定オプションに従って計算できます。組織のオンデマンドオプションは**月単位または時間単位**を選択できます。測定オプションに関する情報については、契約を参照してください。
+The allotment usage of a product can be computed according to the organization's on-demand metering option. Organizations can opt for a **monthly or hourly** on-demand option. Refer to your contract for information on your metering option. 
 
-デフォルトでは、オンデマンドオプションはサブスクリプションレベルで設定され、単一のデフォルトオンデマンドオプションをサポートする以下の製品を除くすべての製品に適用されます。
+By default, the on-demand option is set at the subscription level and applies to all products except for the following, which support a single default on-demand option: 
 
-| 製品                                         | デフォルトのオプション |
+| Product                                         | Default option |
 |-------------------------------------------------|----------------|
-| コンテナ (インフラストラクチャー、プロファイリング、セキュリティ) | Hourly         |
-| Incident Management                             | 月単位        |
-| APM Fargate 製品                            | 月単位        |
-| サーバーレス APM                                  | 月単位        |
-| ログ製品                                   | 月単位        |
-| SNMP トラップ                                      | 月単位        |
+| Containers (Infrastructure, Profiled, Security) | Hourly         |
+| Incident Management                             | Monthly        |
+| APM Fargate Products                            | Monthly        |
+| Serverless APM                                  | Monthly        |
+| Logs Products                                   | Monthly        |
+| SNMP Traps                                      | Monthly        |
 
-時間単位の測定では、月単位の割り当てが時間単位の割り当てに調整されます。例えば、APM スパンのような合計される製品の場合、月単位の割り当ては年率化され、1 年間の時間数で割られて 1 時間当たりの割り当てとなります。カスタムメトリクスのような平均化される製品の場合、月単位の合計使用量はその月のすべての時間にわたる請求対象の使用量の平均であるため、月単位の割り当て量はどちらのオンデマンドオプションでも変わりません。
+On hourly metering, the monthly allotment is adjusted to an hourly allotment. For summed products such as APM spans, for example, the monthly allotment is annualized and then divided by the number of hours in a year to get the hourly allotment. For averaged products such as custom metrics, the monthly allotment stays the same at either on-demand option, since total monthly usage is the average of billable usage across all hours in the month.
 
-## 親製品ごとの割り当て
+## Allotments by parent products
 
-親製品ごとのデフォルト割り当ての完全なリストについては、[割り当て計算機][3]ページの割り当て表をご覧ください。カスタム割り当てやデフォルト以外の割り当てについては、契約をご確認ください。
+For a full list of default allotments by parent product, see the allotments table on the [Allotments Calculator][3] page. For custom or otherwise non-default allotments, review your contract for more information.
 
-組織が親製品の請求対象使用量をコミット量以上に使用した場合、オンデマンドの親製品使用量から追加の割り当てが行われ、親製品のみの請求が発生します。追加の割り当てを使い切った場合、子製品の追加使用量はオンデマンド料金で請求されます。どちらのオンデマンドオプションでも、割り当て量は次の時間には繰り越されません。組織が時間単位または月単位の測定期間の終了時に使用量の残りがある場合、それは次の期間には適用されません。
+If an organization's billable usage of the parent product exceeds their commitment, they receive an additional allotment from the on-demand parent product usage and are only billed for the parent product. After that additional allotment is exhausted, any additional usage of the child product may be billed at an on-demand rate. For either on-demand option, allotments are not carried over to subsequent hours; if an organization has a remainder at the end of their hourly or monthly metering period, it is not applicable in the next period.
 
-例えば、月単位のオンデマンドオプションを利用する組織が 5 台の APM Pro ホストにコミットしている場合、その月のデフォルトの Ingested Span 割り当ては `5 台の APM Pro ホスト × 1 ホストあたり 150 GB の Ingested Span = 750 GB` となります。6 台の APM ホストを使用し、800 GB の Ingested Span を使用した場合、追加のホスト使用量は請求されますが、Ingested Span の割り当てが 900 GB に増加するため、追加のスパン使用量は請求されません。残りの 100 GB は翌月に繰り越されません。
+For example, if an organization with a monthly on-demand option is committed to 5 APM Pro Hosts, they have a default Ingested Spans allotment of `5 APM Pro Hosts * 150 GB Ingested Spans per host = 750 GB` for the month. If they use 6 APM Hosts and 800 GB of Ingested Spans, they are billed for the additional host usage but not for the additional _spans_ usage, since their Ingested Spans allotment increases to 900 GB. The 100 GB remainder is not applicable in the following month.
 
-## 使用量集計関数
-使用量集計関数は、請求対象の時間単位使用量を月単位の使用量に変換し、請求に利用します。各製品には最大 2 つの使用量集計関数 (オンデマンドオプションごとに 1 つ) を設定できます。利用可能な集計関数には、合計、平均、最大、ハイ・ウォーターマーク・プラン (HWMP) があります。
+## Usage aggregation function
+Aggregation functions are used to convert the hourly billable usage into a monthly usage value that can be used for billing. Each product can have up to two usage aggregation functions (one for each possible on-demand option). The available aggregation functions include sum, average, maximum, and high watermark plan (HWMP). 
 
-- **合計:** これは、月内のすべての時間にわたる総使用量の合計です。使用量は毎時間計算され、各製品使用の個別のインスタンスごとに、含まれる使用量と請求対象使用量が比較されます。月末には、その月の各時間のオンデマンド使用量が合計されます。
-- **平均:** 月単位のオンデマンドオプションでは、その月のすべての時間の平均使用量です。その月のオンデマンド使用量は、月の平均使用量から含まれる使用量の合計を差し引いて算出されます。
+- **Sum:** This is the sum of total usage volume over all hours in the month. Usage is calculated every hour as included usage is compared with billable usage of each distinct instance of product usage. At the end of the month, on-demand usage is added up for each hour in the month.
+- **Average:** On a monthly on-demand option, this is the average usage across all hours in the month. On-demand usage for the month is derived by subtracting total included usage from the average usage for the month.
 
-  時間単位のオンデマンドオプションでは、使用量が毎時間測定され、その後、毎時間の測定された使用量から含まれる使用量の合計が差し引かれて、各時間のオンデマンド使用量が得られます。月末には、すべての時間のオンデマンド使用量を合計し、その月の時間数で割って平均を算出します。
-- **最大:** 指定された期間 (通常は月間) のすべての間隔での最大使用量です。
-- **ハイ・ウォーターマーク・プラン (HWMP):** 使用量の上位 1% を除外し、残りの下位 99% の最大カウントを使用して月末に請求対象ホスト数を計算します。これにより、使用量の急増が請求に与える影響を軽減します。
+    On an hourly on-demand option, usage is metered each hour, then the total included usage is subtracted from the metered usage each hour to get the on-demand usage for each hour. At the end of the month, the average is calculated by summing on-demand usage across all hours and dividing by the number of hours in the month.
+- **Maximum:** This is the maximum usage over all intervals across a given time period, usually monthly.
+- **High watermark plan (HWMP):** The billable count of hosts is calculated at the end of the month using the maximum count of the lower 99 percent of usage for those hours. Datadog excludes the top 1% to reduce the impact of spikes in usage on your bill. 
 
-各製品の詳細については、[割り当て用の使用量集計関数](#usage-aggregation-functions-for-allotments)を参照してください。
+See [Usage aggregation functions for allotments](#usage-aggregation-functions-for-allotments) for individual product details.
 
-## オンデマンド使用量の計算
+## Calculating on-demand usage
 
-オンデマンド使用量とは、コミットされた使用量と割り当てられた使用量の合計を超えた使用量を指します。オンデマンド使用量を計算するには、**請求対象の使用量**から**含まれる使用量** (つまり、コミットされた使用量と割り当てられた使用量) を差し引きます。
+On-demand usage refers to usage accrued beyond the sum of committed and allotted usage. To calculate on-demand usage, subtract **included usage** (that is, committed and allotted usages) from **billable usage**. 
 
-オンデマンドオプションにより、オンデマンド使用量の計算頻度が決まります。月単位のオンデマンドオプションの場合、オンデマンド使用量は月末に計算されます。時間単位のオンデマンドオプションの場合、毎時間オンデマンド使用量が計算され、月末に請求される総オンデマンド使用量は、その月の各時間のオンデマンド使用量を合計したものになります。オンデマンド使用量はオンデマンド料金で請求されます。詳細は [Datadog の料金][1]をご覧ください。
+The on-demand option determines how frequently on-demand usage is calculated. For the monthly on-demand option, on-demand usage is calculated at the end of each month. For the hourly on-demand option, on-demand usage is calculated each hour and the total on-demand usage to be billed at the end of the month is the aggregate of hourly on-demand usage across all hours in the month. On-demand usage is billed at an on-demand rate. See [Datadog Pricing][1].
 
-### 例
-**月単位のオンデマンドオプションを利用するある組織**は、5 台の APM Pro ホストにコミットし、Ingested Span の使用はありません。その場合、含まれる使用量の合計は `(5 台の APM Pro ホスト × 1 ホストあたり 150 GB の Ingested Span) + 0 コミットメント = 750 GB` となります。1000 GB の Ingested Span を使用した場合、追加の 250 GB はオンデマンド使用として分類されます。
+### Example
+**An organization with a monthly on-demand option** is committed to 5 APM Pro hosts and no Ingested Spans. They will have a total included usage of `(5 APM Pro hosts * 150 GB Ingested Spans per host) + 0 commitment = 750 GB Ingested Spans of total included usage`. If they have 1000 GB of Ingested Spans usage, the additional 250 GB is classified as on-demand usage.
 
-**時間単位のオンデマンドオプションを利用するある組織**は、5 台の APM Pro ホストにコミットし、Ingested Span の使用はありません。オンデマンド使用量は毎時間計算されるため、月単位の割り当て量は年率換算され、年間の時間数 (`(365 日 × 24 時間 / 12 か月) = 730 時間`) で割られます。したがって、Ingested Span の時間単位の割り当て量は `(5 台の APM ホスト × 1 ホストあたり 150 GB の Ingested Span) / 730 時間 = 1.027 GB` となります。
+**An organization with an hourly on-demand option** is committed to 5 APM Pro hosts and no Ingested Spans. Since their on-demand usage is calculated hourly, their monthly allotment is annualized then divided by the number of hours in a year: `(365 * 24 / 12) = 730`. Thus, their hourly Ingested Spans allotment is `(5 APM Hosts * (150 GB Ingested Spans / Host) /  (730 hours))  = 1.027 GB Ingested Spans per hour`.
 
-1 時間目に 1.1 GB、2 時間目に 0.9 GB、3 時間目に 1.2 GB を使用した場合、その月のオンデマンド使用量は、請求対象の使用量と割り当てられた使用量の差をその月の全使用時間で合計したものになります。つまり、`((1.1 - 1.027 = 0.073) + (0.9 - 1.027 = 0) + (1.2 - 1.027 = 0.173)) = 0.246 GB` のオンデマンド使用量となります。
+If they used 1.1 GB during hour 1, 0.9 GB during hour 2, and 1.2 GB during hour 3, their on-demand usage for the month is the difference between their billable usage and their allotted usage summed across all usage hours in the month: `((1.1 - 1.027 = 0.073) + (0.9 - 1.027 = 0) + (1.2 - 1.027 = 0.173)) = 0.246 GB on-demand usage for Ingested Spans`.
 
-## 請求対象の使用量の計算
+## Calculating billable usage
 
-請求対象の使用量とは、組織および製品のトライアル使用量を除く、ユーザーの請求書に記載できる生の使用量を指します。請求対象の使用量を表示するには、Datadog の [Plan and Usage ページ][2]を参照してください。請求対象の使用量がどのように計算されるかは、以下の変数によって決まります。
+Billable usage refers to any raw usage that is eligible to appear on a user's invoice, excluding organization and product trial usage. Refer to the [Plan and Usage page][2] in Datadog to view your billable usage. The following variables determine how billable usage is calculated:
 
-- オンデマンドオプション
-- 使用量集計関数
+- On-demand option
+- Usage aggregation function
 
-### オンデマンドオプション
-月単位の測定の場合、オンデマンド使用量は、請求対象の使用量と含まれる使用量を比較して、月末に計算されます。時間単位の測定では、オンデマンド使用量は月末ではなく 1 時間ごとに計算されます。その後、その月のすべての使用時間にわたって集計され、コミットメントが適用されて最終的な請求対象のオンデマンド使用量が算出されます。
+### On-demand option
+On monthly metering, on-demand usage is calculated at the end of the month by comparing billable usage to included usage. On hourly metering, on-demand usage is calculated every hour instead of at the end of the month. It is then aggregated over all usage hours in the month, and the commitment is then applied to arrive at a final billable on-demand usage value.
 
-### 使用量集計
-[使用量集計関数](#usage-aggregation-function)を参照してください。
+### Usage aggregation
+See [Usage aggregation function](#usage-aggregation-function).
 
-### 例
+### Examples
 
-#### 月単位のオンデマンドオプション
+#### Monthly on-demand option
 
-ある組織が、APM Pro ホスト 10 台と Ingested Span 100 GB を 3 か月間、毎月コミットメントしたとします。その使用量は以下のとおりです (*斜体*内は派生値 )。
+An organization has a monthly commitment of 10 APM Pro Hosts and 100 GB Ingested Spans commitment per month over a period of three months. Their usage is as follows (with derived values in *italics*): 
 
-| 月 | APM ホストのコミットメント | APM ホスト使用量 | Ingested Span の割り当て | Ingested Span の含まれる使用量 | Ingested Span の請求対象の使用量 | Ingested Span のオンデマンド使用量 |
+| Month | APM host commitment | APM host usage | Allotment for Ingested Spans | Included usage for Ingested Spans | Billable usage for Ingested Spans | On-demand usage for Ingested Spans |
 |-----|--------|--------|-----------|-----------|---------|---|
 | 1  | 10  | 5   | *1500 GB*   | *1600 GB*   | 2000 GB | *400 GB*  |
 | 2  | 10  | 15 | *2250 GB*  | *2350 GB* | 2000 GB  | *0 GB*      |
 | 3 | 10   | 10   | *1500 GB*  | *1600 GB*  | 1600 GB | *0 GB*  |
 
-月単位のオンデマンドオプションの場合、各 APM Pro ホストの Ingested Span の[デフォルトの割り当て](#allotments-table)は 150 GB です。
+For a monthly on-demand option, the [default allotment](#allotments-table) of Ingested Spans for each APM Pro host is 150 GB. 
 
-**1 か月目**は、組織は 10 台の APM ホストにコミットしていましたが、5 台しか使用していませんでした。彼らの Ingested Span の割り当ては、ホストのコミットメントとホスト使用量の最大値にデフォルト割り当てを掛けたものである `最大値(5, 10) × 150 GB = 1500 GB` でした。Ingested Span の含まれる使用量は、コミットメントと割り当ての合計である `1500 GB + 100 GB = 1600 GB` でした。Ingested Span のオンデマンド使用量は、0 と請求対象使用量と割り当て量の差のうち最大のものである `最大値(0, 2000 - 1600) = 400 GB` でした。
+In **Month 1**, the organization was committed to 10 APM hosts but only used 5. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: `maximum(5, 10) * 150 GB = 1500 GB allotment of Ingested Spans`. Their included usage for Ingested Spans was the sum of their commitment and allotment: `1500 GB + 100 GB = 1600 GB`. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their billable usage and allotment: `maximum(0, 2000 – 1600) = 400 GB`.
 
-**2 か月目**は、組織は 10 台の APM ホストにコミットしていましたが、15 台を使用しました。彼らの Ingested Span の割り当ては、ホストのコミットメントとホスト使用量の最大値にデフォルト割り当てを掛けたものである `最大値(15, 10) × 150 GB = 2250 GB` でした。Ingested Span に含まれる使用量は、コミットメントと割り当ての合計である `2250 GB + 100 GB = 2350 GB` でした。Ingested Span のオンデマンド使用量は、0 と請求対象使用量と割り当て量の差のうち最大のものである `最大値(0, 2000 - 2350) = 0 GB` でした。
+In **Month 2**, the organization was committed to 10 APM hosts but used 15. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: `maximum(15, 10) * 150 GB = 2250 GB allotment of Ingested Spans`. Their included usage for Ingested Spans was the sum of their commitment and allotment: `2250 GB + 100 GB = 2350 GB`. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their usage and allotment: `maximum(0, 2000 – 2350) = 0 GB`.
 
-**3 か月目**は、組織は 10 台の APM ホストにコミットし、10 台を使用しました。彼らの Ingested Span の割り当ては、ホストのコミットメントとホスト使用量の最大値にデフォルト割り当てを掛けたものである `最大値(10, 10) × 150 GB = 1500 GB` でした。Ingested Span に含まれる使用量は、コミットメントと割り当ての合計である `1500 GB + 100 GB = 1600 GB` でした。Ingested Span のオンデマンド使用量は、0 と請求対象使用量と割り当て量の差のうち最大のものである `最大値(0, 1600 - 1600) = 0 GB` でした。
+In **Month 3**, the organization was committed to 10 APM hosts, and they used 10. Their Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: `maximum(10, 10) * 150 GB = 1500 GB allotment of Ingested Spans`. Their included usage for Ingested Spans was the sum of their commitment and allotment: `1500 GB + 100 GB = 1600 GB`. Their on-demand usage for Ingested Spans was the maximum of 0 and the difference between their usage and allotment: `maximum(0, 1600 – 1600) = 0 GB`.
 
-#### 時間単位のオンデマンドオプション
+#### Hourly on-demand option
 
-ある組織が、1 か月あたり APM Pro ホスト 10 台と Ingested Span 0.3 GB を、1 か月の期間コミットメントしたとします。その使用量は以下のとおりです。
+An organization has a monthly commit of 10 APM Pro Hosts and 0.3 GB Ingested Spans commitment per month over a period of a month. Their usage is as follows: 
 
-| タイムスタンプ    | APM ホストのコミットメント | APM ホスト使用量 | Ingested Span の割り当て | Ingested Span の使用量 | Ingested Span のオンデマンド使用量 |
+| Timestamp    | APM host commitment | APM host usage | Ingested spans allotment | Ingested spans usage | On-demand ingested spans usage |
 |--------------|---------------------|----------------|--------------------------|----------------------|--------------------------------|
-| 1 時間目 | 10    | 5      | 2.054 GB     | 2.500 GB    | 0.446 GB           |
-| 2 時間目 | 10    | 15     | 3.082 GB     | 3.000 GB    | 0 GB               |
-| 3 時間目 | 10    | 10     | 2.054 GB     | 2.054 GB    | 0 GB               |
+| Hour 1 | 10    | 5      | 2.054 GB     | 2.500 GB    | 0.446 GB           |
+| Hour 2 | 10    | 15     | 3.082 GB     | 3.000 GB    | 0 GB               |
+| Hour 3 | 10    | 10     | 2.054 GB     | 2.054 GB    | 0 GB               |
 
-時間単位のオンデマンドオプションを持つユーザーの場合、各 APM Pro ホストに対する Ingested Span の[デフォルトの割り当て](#allotments-table)は 0.2054 GB です。
+For a user with an hourly on-demand option, the [default allotment](#allotments-table) of Ingested Spans for each APM Pro host is 0.2054 GB.
 
-**1 時間目**では、この組織は 10 台の APM ホストにコミットしていましたが、5 台しか使用しませんでした。Ingested Span の時間単位の割り当て量は、ホストのコミットメントとホストの使用量のうち最大の値にデフォルトの割り当て量を掛けたものである `最大値(5, 10) * 0.2054 GB = 2.054 GB/時間` でした。その時間のオンデマンドの使用量は、0 と請求対象使用量と割り当てられた使用量の差のうち最大のものである `最大値(0, 2.500 - 2.054) = 0.446 GB` です。
+In **Hour 1**, the organization was committed to 10 APM hosts but only used 5. Their hourly Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: `maximum(5, 10)  * 0.2054 GB = 2.054 GB / hour`. Their on-demand usage for the hour is the maximum of 0 and the difference between their billable usage and their allotted usage: `maximum(0, 2.500 – 2.054) = 0.446 GB`.
 
-**2 時間目**では、組織は 10 台の APM ホストにコミットしていましたが、15 台を使用しました。Ingested Span の時間単位の割り当て量は、ホストのコミットメントとホストの使用量のうち最大の値にデフォルトの割り当て量を掛けたものである `最大値(15, 10) * 0.2054 GB = 3.081 GB/時間` でした。その時間のオンデマンドの使用量は、0 と請求対象使用量と割り当てられた使用量の差のうち最大のものである `最大値(0, 3.000 - 3.081) = 0 GB` です。
+In **Hour 2**, the organization was committed to 10 APM hosts but used 15. Their hourly Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: `maximum(15,10) * 0.2054 GB = 3.081 GB / hour`. Their on-demand usage for the hour is the maximum of 0 and the difference between their billable usage and their allotted usage: `maximum(0, 3.000 – 3.081) = 0 GB`.
 
-**3 時間目**では、組織は 10 台の APM ホストにコミットし、10 台を使用しました。Ingested Span の時間単位の割り当て量は、ホストのコミットメントとホストの使用量のうち最大の値にデフォルトの割り当て量を掛けたものである `最大値(10, 10) * 0.2054 GB = 2.054 GB/時間` でした。その時間のオンデマンドの使用量は、0 と請求対象使用量と割り当てられた使用量の差のうち最大のものである `最大値(0, 2.054 - 2.054) = 0 GB` です。
+In **Hour 3**, the organization was committed to 10 APM hosts and used 10. Their hourly Ingested Spans allotment was the maximum of their host commitment and host usage multiplied by the default allotment: `maximum(10,10) * 0.2054 GB = 2.054 GB / hour`. Their on-demand usage for the hour is the maximum of 0 and the difference between their billable usage and their allotted usage: `maximum(0, 2.054 – 2.054) = 0 GB`.
 
-Ingested Span のデフォルトの使用量集計関数は合計であるため、使用量はその月のすべての時間にわたって合計され、その月のオンデマンド使用量の総量が算出されます。この組織が 1 か月間に 3 時間しか Ingested Span を使用しなかった場合、その月の総使用量は `0.446 + 0 + 0 = 0.446 GB` となります。
+Since the default usage aggregation function for Ingested Spans is sum, usage is summed over all hours in the month to get the total on-demand usage for the month. If this organization only had 3 hours of Ingested Spans usage over the month, their total monthly usage would be 0: `4452 + 0 + 0 = 0.446 GB`. 
 
-さらに、この組織は 0.3 GB の Ingested Span の月単位コミットメントを持っています。したがって、月単位のオンデマンド使用量は、0 と月単位の使用量とコミットメントの差のうち最大のものである `最大値(0, 0.446 - 0.3) = 0.146 GB` です。
+Additionally, the organization has a monthly commitment of 0.3 GB of Ingested Spans. Thus, their monthly on-demand usage is the maximum of 0 and the difference between their monthly usage and commitment: `maximum(0, 0.446 – 0.3) = 0.146 GB`.
 
-## 割り当ての使用量集計関数
+## Usage aggregation functions for allotments
 
-| 割り当て             | 可能な親製品                                      | デフォルトの月単位の使用量集計関数 | デフォルトの時間単位の使用量集計関数 |
+| Allotment             | Possible Parent Products                                      | Default monthly usage aggregation function | Default hourly usage aggregation function |
 |-----------------------|---------------------------------------------------------------|--------------------------------------------|-------------------------------------------|
-| カスタムメトリクス | Infrastructure Pro Hosts、Infrastructure Pro Plus Hosts、Infrastructure Enterprise Hosts、Internet of Things (IoT)、Serverless Workload Monitoring - Functions、Serverless Workload Monitoring - Apps、Serverless Invocations、Serverless Functions  | 平均 | 平均 |
-| Ingested Custom Metrics | Infrastructure Pro Hosts、Infrastructure Pro Plus Hosts、Infrastructure Enterprise Hosts、Internet of Things (IoT)、Serverless Workload Monitoring - Functions、Serverless Workload Monitoring - Apps | 平均 | 平均 |
-| カスタムイベント | Infrastructure Pro Hosts、Infrastructure Pro Plus Hosts、Infrastructure Enterprise Hosts | 合計 | 合計 |
-| CSM Enterprise Containers    | Cloud Security Management (CSM)       |      N/A     | 合計    |
-| CWS コンテナ      | クラウドワークロードセキュリティ (CWS)              |       N/A     | 合計      |
-| Infrastructure Containers    | Infrastructure Pro Hosts、Infrastructure Pro Plus Hosts、Infrastructure Enterprise Hosts |   N/A   | 合計  |
-| Profiled Containers | APM Enterprise、Continuous Profiler    |   N/A        | 合計   |
-| Profiled Hosts        | APM Enterprise       | HWMP   | 合計     |
-| CI Indexed Spans    | CI Visibility         | 合計     | 合計   |      
-| Test Indexed Spans    | Test Visibility         | 合計   | 合計   |               
-| APM インデックス化スパン | APM、APM Pro、APM Enterprise、Serverless APM、</br> Legacy - Serverless Invocations、</br> Legacy - Serverless Functions、Fargate Task (APM Pro)、</br> Fargate Task (APM Enterprise) | 合計 | 合計 |
-| APM 取り込みスパン | APM、APM Pro、APM Enterprise </br> Serverless APM、Legacy - Serverless Invocations </br> Legacy - Serverless Functions </br> Fargate Task (APM Pro)、Fargate Task (APM Enterprise) | 合計 | 合計 | 
-| DBM Normalized Queries | Database Monitoring (DBM) | 平均 | 平均 |
-| Data Streams Monitoring | APM Pro、APM Enterprise | HWMP | 合計 |
-| CSPM Workflow Executions | Cloud Security Management Pro、Cloud Security Management Enterprise | 合計 | 合計 |
-| Fargate Task (Continuous Profiler) | Fargate Task (APM Enterprise) | 平均 | N/A |
+| Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps, Serverless Invocations, Serverless Functions  | Average | Average |
+| Ingested Custom Metrics | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts, Internet of Things (IoT), Serverless Workload Monitoring - Functions, Serverless Workload Monitoring - Apps | Average | Average |
+| Custom Events | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts | Sum | Sum |
+| CSM Enterprise Containers    | Cloud Security Management (CSM)       |      N/A     | Sum    |
+| CWS Containers      | Cloud Workload Security (CWS)              |       N/A     | Sum      |
+| Infrastructure Containers    | Infrastructure Pro Hosts, Infrastructure Pro Plus Hosts, Infrastructure Enterprise Hosts |   N/A   | Sum  |
+| Profiled Containers | APM Enterprise, Continuous Profiler    |   N/A        | Sum   |
+| Profiled Hosts        | APM Enterprise       | HWMP   | Sum     |
+| CI Indexed Spans    | CI Visibility         | Sum     | Sum   |      
+| Test Indexed Spans    | Test Visibility         | Sum   | Sum   |               
+| APM Indexed Spans | APM, APM Pro, APM Enterprise, Serverless APM, </br> Legacy - Serverless Invocations, </br> Legacy - Serverless Functions, Fargate Task (APM Pro), </br> Fargate Task (APM Enterprise) | Sum | Sum |
+| APM Ingested Spans | APM, APM Pro, APM Enterprise </br> Serverless APM, Legacy - Serverless Invocations </br> Legacy - Serverless Functions </br> Fargate Task (APM Pro), Fargate Task (APM Enterprise) | Sum | Sum | 
+| DBM Normalized Queries | Database Monitoring (DBM) | Average | Average |
+| Data Streams Monitoring | APM Pro, APM Enterprise | HWMP | Sum |
+| CSPM Workflow Executions | Cloud Security Management Pro, Cloud Security Management Enterprise | Sum | Sum |
+| Fargate Task (Continuous Profiler) | Fargate Task (APM Enterprise) | Average | N/A |
 
 [1]: https://www.datadoghq.com/pricing/list/
 [2]: https://app.datadoghq.com/billing/usage

@@ -1,133 +1,134 @@
 ---
-app_id: singlestoredb-cloud
-app_uuid: c7638089-0864-4ddc-bd32-b731c58fe567
-assets:
-  dashboards:
-    singlestoredb_cloud_overview: assets/dashboards/singlestoredb_cloud_overview.json
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: singlestoredb_cloud.cpu_resource_limits
-      metadata_path: metadata.csv
-      prefix: singlestoredb_cloud.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10373
-    source_type_name: SinglestoreDB Cloud
-  oauth: assets/oauth_clients.json
-author:
-  homepage: https://www.singlestore.com
-  name: Singlestore
-  sales_email: info@singlestore.com
-  support_email: support@singlestore.com
-categories:
+"app_id": "singlestoredb-cloud"
+"app_uuid": "c7638089-0864-4ddc-bd32-b731c58fe567"
+"assets":
+  "dashboards":
+    "singlestoredb_cloud_overview": assets/dashboards/singlestoredb_cloud_overview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": singlestoredb_cloud.cpu_resource_limits
+      "metadata_path": metadata.csv
+      "prefix": singlestoredb_cloud.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10373"
+    "source_type_name": SinglestoreDB Cloud
+  "oauth": assets/oauth_clients.json
+"author":
+  "homepage": "https://www.singlestore.com"
+  "name": Singlestore
+  "sales_email": info@singlestore.com
+  "support_email": support@singlestore.com
+"categories":
 - data stores
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/singlestoredb_cloud/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: singlestoredb_cloud
-integration_id: singlestoredb-cloud
-integration_title: SingleStoreDB Cloud
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: singlestoredb_cloud
-public_title: SingleStoreDB Cloud
-short_description: SinglestoreDB Cloud のメトリクスを Datadog に送信
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/singlestoredb_cloud/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "singlestoredb_cloud"
+"integration_id": "singlestoredb-cloud"
+"integration_title": "SingleStoreDB Cloud"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "singlestoredb_cloud"
+"public_title": "SingleStoreDB Cloud"
+"short_description": "Send your SinglestoreDB Cloud metrics to Datadog"
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Data Stores
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  - Submitted Data Type::Metrics
-  configuration: README.md#Setup
-  description: SinglestoreDB Cloud のメトリクスを Datadog に送信
-  media:
-  - caption: SinglestoreDB Cloud - ダッシュボード
-    image_url: images/singlestoredb-cloud-dashboard.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: SingleStoreDB Cloud
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Data Stores"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  - "Offering::Integration"
+  - "Submitted Data Type::Metrics"
+  "configuration": "README.md#Setup"
+  "description": Send your SinglestoreDB Cloud metrics to Datadog
+  "media":
+  - "caption": SinglestoreDB Cloud - Dashboard
+    "image_url": images/singlestoredb-cloud-dashboard.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": SingleStoreDB Cloud
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-## 概要
+## Overview
 
-SingleStoreDB Cloud は、データ集約的でリアルタイムなアプリケーションをサポートするために最適化されたスピードとスケーラビリティを持つ分散リレーショナルデータベースです。このインテグレーションを使用すると、SingleStoreDB Cloud のワークスペースグループ/クラスターの全体的な健全性とパフォーマンスを監視できます。Datadog と SingleStoreDB Cloud を統合するには、Datadog SingleStore インテグレーションをインストールし、[Cloud Portal][1] で構成します。
+SingleStoreDB Cloud is a distributed, relational database with optimized speed and scalability to support data-intensive and real-time applications. Using this integration, you can monitor the overall health and performance of a SinglestoreDB Cloud Workspace Group/Cluster. To integrate Datadog with SingleStoreDB Cloud, install the Datadog SingleStore integration and then configure it in the [Cloud Portal][1]. 
 
-SinglestoreDB Cloud を Datadog に接続すると、以下のことができます。
+Connect SinglestoreDB Cloud to Datadog in order to:
 
-- SinglestoreDB Cloud のキーメトリクスを視覚化する
-- リソースの利用効率を高める
-- クエリレートとパフォーマンスを観測する
-- SinglestoreDB のパフォーマンスをアプリケーションの他の部分と相関付ける
+- Visualize key SinglestoreDB Cloud metrics
+- Improve resource utilization efficiency
+- Observe query rate & performance
+- Correlate SinglestoreDB performance with the rest of your applications
 
-## 計画と使用
+## Setup
 
-### Datadog に SingleStoreDB Cloud インテグレーションをインストールする
+### Install the SingleStoreDB Cloud integration in Datadog
 
-1. Datadog の [SingleStoreDB Cloud][2] インテグレーションタイルに移動します。
-3. **Install Integration** を選択し、インストールが完了するまで待ちます。
-4. **Configure** タブで、**Connect Accounts** を選択します。このアクションにより [Cloud Portal][1] に移動し、OAuth を通じてインテグレーションを認可します。
+1. Navigate to the [SingleStoreDB Cloud][2] integration tile in Datadog.
+3. Select **Install Integration** and wait for installation to complete before proceeding.
+4. On the **Configure** tab, select **Connect Accounts**. This action takes you to the [Cloud Portal][1] to authorize the integration through OAuth.
 
-上記の手順は、最初のワークスペースグループを Datadog に接続するために 1 回だけ実行する必要があります。インテグレーションがインストールされ、アカウントが接続されたら、[Cloud Portal で Datadog インテグレーションを構成する](#configure-the-datadog-integration-in-the-cloud-portal)で指定された手順に従って、連続するワークスペースグループを接続します。
+The steps above only need to be performed once to connect your first workspace group with Datadog. Once the integration is installed and the accounts are connected, follow the steps specified under [Configure the Datadog Integration in the Cloud Portal](#configure-the-datadog-integration-in-the-cloud-portal) to connect consecutive workspace groups. 
 
-### Cloud Portal で Datadog インテグレーションを構成する
+### Configure the Datadog integration in the Cloud Portal
 
-SingleStoreDB Cloud のワークスペースグループを Datadog と接続するには
+To connect your SingleStoreDB Cloud workspace group with Datadog:
 
-1. Cloud Portal にサインインします。サインインすると、** Integration** ページが表示されます。左側のナビゲーションペインで **Monitoring > Integration** を選択して、このページにアクセスすることもできます。
-2. 利用可能なインテグレーションのリストから、Datadog の **+ Integration** を選択します。
-3. **Create Datadog Integration** ダイアログの **Workspace Group** リストから、ワークスペースグループを選択します。
-4. **Create** を選択します。このアクションにより、Datadog のサインインページが表示されます。Datadog にサインインしたら、次のステップに進みます。
-5. **Authorize access** 画面で、**Authorize** ボタンを選択します。認可に成功すると、クラウドポータルの ** Integration** ページが表示されます。
+1. Sign in to the Cloud Portal. Upon signing in, you are taken to the **Integration** page. You can also select **Monitoring > Integration** on the left navigation pane to access this page.
+2. From the list of available integrations, select **+ Integration** for Datadog.
+3. On the **Create Datadog Integration** dialog, from the **Workspace Group** list, select your workspace group.
+4. Select **Create**. This action takes you to the Datadog sign-in page. After signing in to Datadog, proceed to the next step.
+5. On the **Authorize access** screen, select the **Authorize** button. Upon successful authorization, you are taken to the **Integration** page on the Cloud Portal. 
 
-Datadog を使用して SingleStoreDB Cloud データベースを監視できるようになりました。
+You can now monitor your SingleStoreDB Cloud databases using Datadog.
 
-### Datadog インテグレーションをアンインストールする
+### Uninstall the Datadog integration
 
-以下の手順に従って、Datadog インテグレーションをアンインストールします。
+Follow these steps to uninstall the Datadog integration:
 
-1. **Datadog 上の SingleStoreDB Cloud インテグレーションをアンインストールします**: Datadog の [SingleStore DB Cloud インテグレーションタイル][2]に移動し、**Uninstall Integration** をクリックします。このインテグレーションがアンインストールされると、以前の認可はすべて取り消されます。
-2. **SingleStore Cloud Portal の Datadog インテグレーションを削除します**: Cloud Portal で、**Monitoring > Integration** に進みます。削除したい各 Datadog 構成の **Delete** を選択します。
+1. **Uninstall the SingleStoreDB Cloud integration on Datadog**: In Datadog, navigate to the [SingleStore DB Cloud integration tile][2] and click **Uninstall Integration**. Once this integration is uninstalled, all previous authorizations are revoked.
+2. **Remove the Datadog integration on the SingleStore Cloud Portal**: On the Cloud Portal, go to **Monitoring > Integration**. Select **Delete** for each Datadog configuration you want to remove. 
 
-さらに、このインテグレーションに関連付けられているすべての API キーを削除します。
+Additionally, remove all the API keys associated with this integration.
 
-特定のワークスペースグループの監視を停止する (インテグレーションは保持する) には、SingleStore DB Cloud Portal に移動し、**Delete** (**Cloud Portal > Monitoring > Integration**) を選択して、このワークスペースグループの Datadog 構成を削除します。
+To stop monitoring a specific workspace group (and retain the integration), navigate to the SingleStore DB Cloud Portal and select **Delete** (**Cloud Portal > Monitoring > Integration**) to remove the Datadog configuration for this workspace group.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "singlestoredb_cloud" >}}
 
 
-### ヘルプ
+### Service Checks
 
-SingleStoreDB Cloud には、サービスのチェック機能は含まれません。
+SingleStoreDB Cloud does not include any service checks. 
 
-### ヘルプ
+### Events
 
-SingleStoreDB Cloud には、イベントは含まれません。
+SingleStoreDB Cloud does not include any events. 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
 
 [1]: https://portal.singlestore.com
 [2]: https://app.datadoghq.com/integrations/singlestoredb-cloud
 [3]: https://github.com/DataDog/integrations-extras/blob/master/singlestoredb_cloud/metadata.csv
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/help/
+

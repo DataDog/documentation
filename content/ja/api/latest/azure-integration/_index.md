@@ -1,3 +1,3 @@
 ---
-title: Azure インテグレーション
+title: Azure Integration
 ---

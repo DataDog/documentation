@@ -1,90 +1,90 @@
 ---
+title: Agent Version differences
 further_reading:
-- link: agent/versions/upgrade_to_agent_v7
-  tag: ドキュメント
-  text: Agent バージョン7へアップグレード
-- link: agent/versions/upgrade_to_agent_v6
-  tag: ドキュメント
-  text: Agent v6 へのアップグレード
-- link: agent/versions/upgrade_between_agent_minor_versions
-  tag: ドキュメント
-  text: Agent マイナーバージョン間でのアップグレード
-- link: agent/faq/agent_v6_changes
-  tag: よくあるご質問
-  text: Agent v6 の変更点
-title: Agent バージョンの違い
+    - link: agent/versions/upgrade_to_agent_v7
+      tag: Documentation
+      text: Upgrade to Agent v7
+    - link: agent/versions/upgrade_to_agent_v6
+      tag: Documentation
+      text: Upgrade to Agent v6
+    - link: agent/versions/upgrade_between_agent_minor_versions
+      tag: Documentation
+      text: Upgrade Between Agent Minor Versions
+    - link: agent/faq/agent_v6_changes
+      tag: FAQ
+      text: Agent v6 Changes
 ---
 
 <div class="alert alert-info"><p>
-Datadog は、Datadog Agent をマイナーリリースとパッチリリースごとに、または少なくとも毎月更新することをお勧めします。</p>
+Datadog recommends you update Datadog Agent with every minor and patch release, or, at a minimum, monthly. </p>
 <p>
-Datadog Agent のメジャーバージョンにアップグレードして最新の状態に保つことが、最新の Agent 機能と修正を入手するためにサポートされている唯一の方法です。ただし、Agent は頻繁にアップデートをリリースしており、エンタープライズ規模でアップデートを管理することは困難な場合があります。これは、メジャーリリースまで更新を待つべきであるあるという意味ではありません。組織に適した更新の頻度は、インフラストラクチャーと構成管理の方法によって異なりますが、毎月が目標です。</p>
+Upgrading to a major Datadog Agent version and keeping it updated is the only supported way to get the latest Agent functionality and fixes. The Agent has frequent update releases, though, and managing updates at enterprise scale can be challenging. That doesn't mean you should wait for major releases before updating. The right update cadence for your organization will depend on your infrastructure and your configuration management practices, but aim for monthly.</p>
 <p>
-特定のホストの 2 つのマイナーバージョン間で Datadog Agent コアを更新するには、<a href="/agent/versions/upgrade_between_agent_minor_versions">プラットフォームに対応するインストールコマンド</a>を実行します。</p>
+To update the Datadog Agent core between two minor versions on a given host, run <a href="/agent/versions/upgrade_between_agent_minor_versions">the corresponding install command for your platform</a>.</p>
 <p>
-Datadog Agent のリリース番号は、<a href="https://semver.org/">SemVer</a> の規則に従います。</p>
+Datadog Agent release numbering follows <a href="https://semver.org/">SemVer</a> rules.</p>
 </div>
 
-## メジャー Agent バージョン間の変更点
+## Changes between major Agent versions
 
 {{< tabs >}}
-{{% tab "Agent v7 と v6" %}}
+{{% tab "Agent v7 vs v6" %}}
 
-Agent v7 は、Datadog Agent の最新のメジャーバージョンです。Agent v6 からの唯一の変更点は、**このバージョンには、インテグレーションおよびカスタムチェック用の Python 3 のサポートのみが含まれている**ことです。
+Agent v7 is the latest major version of the Datadog Agent. The only change from Agent v6 is that **this version only includes support for Python 3 for integrations and custom checks**.
 
-Agent をバージョン 7 にアップグレードする方法については、[Agent v7 へのアップグレードのドキュメント][1]を参照してください。すべての公式インテグレーションは、そのままの状態で Python 3 をサポートしています。[Python 3 カスタムチェック移行ガイド][2]に従って、カスタムチェックを Python 3 に移行します。
+See the [Upgrade to Agent v7 documentation][1] to learn how to upgrade your Agent to version 7. All official integrations support Python 3 out-of-the-box. Follow the [Python 3 Custom Check Migration guide][2] to migrate your custom checks to Python 3.
 
-**注**: [Datadog Agent v6 で Python 3 を使用する][3]で、Agent v6 でこの移行をテストできます。
+**Note**: You can test this migration with Agent v6, by [Using Python 3 with Datadog Agent v6][3].
 
 
-[1]: /ja/agent/versions/upgrade_to_agent_v7/
-[2]: /ja/agent/guide/python-3/
-[3]: /ja/agent/guide/agent-v6-python-3/
+[1]: /agent/versions/upgrade_to_agent_v7/
+[2]: /agent/guide/python-3/
+[3]: /agent/guide/agent-v6-python-3/
 {{% /tab %}}
-{{% tab "Agent v6 と v5" %}}
+{{% tab "Agent v6 vs v5" %}}
 
-**Agent バージョン 6 の主な変更点**:
+**Agent version 6 main changes**:
 
-Agent 5 と Agent 6 の大きな違いは、Agent 6 のコア Agent が Golang で全面的に書き換えられていることです。Golang により、Agent は並行処理を利用できるようになりました。これまで Agent v5 が実行していたフォワーダー、コレクター、DogStatsD の 3 つのプロセスの代わりに、Agent プロセスだけが実行されるようになりました。また、他にも多くのコアの改善が行われています。
+The big difference between Agent 5 and Agent 6 is that Agent 6 is a complete rewrite of the core Agent in Golang. Golang has allowed the Agent to take advantage of concurrency. In place of the three processes the Agent v5 used to run—_the Forwarder_, _the Collector_, and _DogStatsD_—there is now only one process: _the Agent_. It also comes with a number of other core improvements:
 
-- Agent v6 では、Agent v5 と比べてリソースの使用が大幅に改善されました。
+- Agent v6 has significantly improved resource usage over Agent v5:
 
-  - CPU 使用量が減少しました。
-  - メモリ使用量が減少しました。
-  - 使用するファイルディスクリプタ数が減少しました。
-  - あらゆる面でフットプリントが減少しました。
+  - Decreased CPU usage
+  - Decreased memory usage
+  - Fewer file descriptors
+  - All around decreased footprint
 
-- Agent 6 は、[さらに 2 つのポート][1]を使用します。
+- Agent 6 uses [two additional ports][1]:
 
-  - `5000`: ランタイムメトリクスの公開用
-  - `5001`: [Agent CLI/GUI コマンド][2]用
+  - `5000` to expose its runtime metrics.
+  - `5001` for the [Agent CLI/GUI commands][2].
 
-    **注**: `datadog.yaml` ファイルで、`expvar_port` および `cmd_port` に別のポートを指定できます。
+    **Note**: You can specify different ports for `expvar_port` and `cmd_port` in the `datadog.yaml` file.
 
-- Agent v6 と [DogStatsD][3] のカスタムビルドがたいへん容易になりました。使用できる構成オプションも増え、ほぼすべての項目を自由に収集対象にしたり、対象から外したりすることができます。
+- Custom build your Agent v6 and [DogStatsD][3] much easier and with many more configuration options, to include or exclude almost anything.
 
-**Agent v6 の新機能**:
+**Agent v6 new functionalities**:
 
-Agent v5 から Agent v6 へのすべての変更内容については、[Datadog Agent の変更点に関するドキュメント][4]を参照してください。以下は、主な違いです。
+To see all changes between Agent v5 and v6, consult the [Datadog Agent dedicated changes][4] documentation. The following are key differentiators:
 
-- [ディストリビューションメトリクス][5]をサーバー上で直接実行することで、実際に有効なグローバルパーセンタイルを算出することができます。
-- [DogStatsD][3] を UDP ではなく UNIX ソケット経由で使用できます。
-- [Windows でライブプロセスモニタリングを使用できます][6]。
-- [Prometheus OpenMetrics をネイティブにサポートします][7]。
-- [すべてのログを Datadog に送信して、アラート設定、分析、メトリクスとの関連付けなどを行うことができます][8]。
+- [Distributions metrics][5] can be performed on the server directly to calculate real, effective global percentiles.
+- [DogStatsD][3] can be used over a Unix socket instead of over UDP.
+- [Live Process monitoring is available for Windows][6].
+- [Prometheus OpenMetrics is supported natively][7].
+- [All your logs can be sent to Datadog for alerting, analysis, and correlation with metrics][8].
 
 
-[1]: /ja/agent/#agent-architecture
-[2]: /ja/agent/guide/agent-commands/
-[3]: /ja/developers/dogstatsd/unix_socket/
+[1]: /agent/#agent-architecture
+[2]: /agent/configuration/agent-commands/
+[3]: /developers/dogstatsd/unix_socket/
 [4]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/changes.md
-[5]: /ja/metrics/types/?tab=distribution#metric-types
-[6]: /ja/infrastructure/process/
+[5]: /metrics/types/?tab=distribution#metric-types
+[6]: /infrastructure/process/
 [7]: https://www.datadoghq.com/blog/monitor-prometheus-metrics
-[8]: /ja/logs/
+[8]: /logs/
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

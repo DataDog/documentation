@@ -1,103 +1,104 @@
 ---
-app_id: datadog-agent
-app_uuid: 4af17310-84ad-4bac-b05d-85917bc378cb
-assets:
-  integration:
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: []
-      metadata_path: metadata.csv
-      prefix: datadog.agent.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Agent メトリクス
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories: []
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/agent_metrics/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: agent_metrics
-integration_id: datadog-agent
-integration_title: Agent メトリクス
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: agent_metrics
-public_title: Agent メトリクス
-short_description: agent_metrics の説明。
-supported_os:
-- linux
-- macos
-- windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  configuration: README.md#Setup
-  description: agent_metrics の説明。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Agent メトリクス
+"app_id": "datadog-agent"
+"app_uuid": "4af17310-84ad-4bac-b05d-85917bc378cb"
+"assets":
+  "integration":
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": []
+      "metadata_path": "metadata.csv"
+      "prefix": "datadog.agent."
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_name": "Agent Metrics"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories": []
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/agent_metrics/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "agent_metrics"
+"integration_id": "datadog-agent"
+"integration_title": "Agent Metrics"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "agent_metrics"
+"public_title": "Agent Metrics"
+"short_description": "agent_metrics description."
+"supported_os":
+- "linux"
+- "macos"
+- "windows"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::macOS"
+  - "Supported OS::Windows"
+  "configuration": "README.md#Setup"
+  "description": "agent_metrics description."
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Agent Metrics"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Datadog Agent から内部メトリクスを取得し、Datadog で視覚化やモニターを作成します。
+Get internal metrics from the Datadog Agent to create visualizations and monitors in Datadog.
 
-**注:** このインテグレーションによって収集されるメトリクスのリストは、マイナーな Agent のバージョン間で変更される可能性があります。そのような変更は、Agent の変更履歴に記載されない場合があります。
+**Note:** The list of metrics collected by this integration may change between minor Agent versions. Such changes may not be mentioned in the Agent's changelog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[go_expvar][1] チェックに基づく Agent Metrics インテグレーションは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+The Agent Metrics integration, based on the [go_expvar][1] check, is included in the [Datadog Agent][2] package, so you don't need to install anything else on your servers.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. [Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダ内の [`go_expvar.d/agent_stats.yaml.example`][3] ファイルの名前を `go_expvar.d/agent_stats.yaml` に変更します。
+1. Rename the [`go_expvar.d/agent_stats.yaml.example`][3] file, in the `conf.d/` folder at the root of your [Agent's configuration directory][4], to `go_expvar.d/agent_stats.yaml`.
 
-2. [Agent を再起動します][5]。
+2. [Restart the Agent][5].
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][6]し、Checks セクションの `go_expvar` を探します。
+[Run the Agent's status subcommand][6] and look for `go_expvar` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 
-Agent Metrics インテグレーションは、[`agent_stats.yaml.example`][3] で定義されたメトリクスを収集します。
+The Agent Metrics integration collects the metrics defined in [`agent_stats.yaml.example`][3].
 
-### ヘルプ
+### Events
 
-Agent Metrics インテグレーションには、イベントは含まれません。
+The Agent Metrics integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Agent Metrics インテグレーションには、サービスのチェック機能は含まれません。
+The Agent Metrics integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+Need help? Contact [Datadog support][7].
 
-[1]: https://docs.datadoghq.com/ja/integrations/go_expvar/
+[1]: https://docs.datadoghq.com/integrations/go_expvar/
 [2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/go_expvar.d/agent_stats.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
+[5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://docs.datadoghq.com/help/
+

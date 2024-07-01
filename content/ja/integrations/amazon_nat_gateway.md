@@ -1,83 +1,84 @@
 ---
-categories:
+"categories":
 - cloud
 - aws
-- ログの収集
-dependencies: []
-description: AWS NAT Gateway のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_nat_gateway/
-draft: false
-git_integration_title: amazon_nat_gateway
-has_logo: true
-integration_id: ''
-integration_title: AWS NAT Gateway
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_nat_gateway
-public_title: Datadog-AWS NAT Gateway インテグレーション
-short_description: AWS NAT Gateway のキーメトリクスを追跡
-version: '1.0'
+- log collection
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key AWS NAT Gateway metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_nat_gateway/"
+"draft": false
+"git_integration_title": "amazon_nat_gateway"
+"has_logo": true
+"integration_id": ""
+"integration_title": "AWS NAT Gateway"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_nat_gateway"
+"public_title": "Datadog-AWS NAT Gateway Integration"
+"short_description": "Track key AWS NAT Gateway metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-AWS NAT Gateway を使用すると、プライベートサブネットのインスタンスからインターネットに接続できても、インターネットからはこれらのインスタンスとの接続を開始できないようにすることができます。
+Use AWS NAT Gateway to enable instances in a private subnet to connect to the internet, but prevent the internet from initiating connections with the instances.
 
-このインテグレーションを有効にすると、Datadog にすべての NAT Gateway メトリクスを表示できます。
+Enable this integration to see all your NAT Gateway metrics in Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][1] first.
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `NATGateway` が有効になっていることを確認します。
-2. [Datadog - AWS NAT Gateway インテグレーション][3]をインストールします。
+1. In the [AWS integration page][2], ensure that `NATGateway` is enabled under the `Metric Collection` tab.
+2. Install the [Datadog - AWS NAT Gateway integration][3].
 
-### 収集データ
+### Log collection
 
-#### ログの有効化
+#### Enable logging
 
-AWS NAT Gateway から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+Configure AWS NAT Gateway to send logs either to a S3 bucket or to CloudWatch.
 
-**注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_nat_gateway` に設定されているかを確認してください。
+**Note**: If you log to a S3 bucket, make sure that `amazon_nat_gateway` is set as _Target prefix_.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから手動で、AWS NAT Gateway ログを含む CloudWatch ロググループにトリガーを追加します。
+1. If you haven’t already, set up the [Datadog Forwarder Lambda function][4].
+2. Once the Lambda function is installed, manually add a trigger on the S3 bucket or CloudWatch log group that contains your AWS NAT Gateway logs in the AWS console:
 
-    - [S3 バケットに手動トリガーを追加][5]
-    - [CloudWatch ロググループに手動トリガーを追加][6]
+    - [Add a manual trigger on the S3 bucket][5]
+    - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_nat_gateway" >}}
 
 
-### ヘルプ
+### Events
 
-AWS NAT Gateway インテグレーションには、イベントは含まれません。
+The AWS NAT Gateway integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-AWS NAT Gateway インテグレーションには、サービスのチェック機能は含まれません。
+The AWS NAT Gateway integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-nat-gateway
-[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.datadoghq.com/logs/guide/forwarder/
+[5]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_nat_gateway/amazon_nat_gateway_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

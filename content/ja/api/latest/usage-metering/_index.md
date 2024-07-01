@@ -1,3 +1,3 @@
 ---
-title: 使用料のメータリング
+title: Usage Metering
 ---

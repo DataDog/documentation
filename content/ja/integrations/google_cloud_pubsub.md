@@ -1,83 +1,84 @@
 ---
-categories:
-- cloud
-- google cloud
-- log collection
-- message queues
-dependencies: []
-description: Google Cloud PubSub の主要メトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_pubsub/
-draft: false
-git_integration_title: google_cloud_pubsub
-has_logo: true
-integration_id: google-cloud-pubsub
-integration_title: Google Pub/Sub
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: google_cloud_pubsub
-public_title: Datadog-Google Pub/Sub インテグレーション
-short_description: Google Cloud PubSub の主要メトリクスを追跡。
-version: '1.0'
+"categories":
+- "cloud"
+- "google cloud"
+- "log collection"
+- "message queues"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Google Cloud PubSub metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/google_cloud_pubsub/"
+"draft": false
+"git_integration_title": "google_cloud_pubsub"
+"has_logo": true
+"integration_id": "google-cloud-pubsub"
+"integration_title": "Google Pub/Sub"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "google_cloud_pubsub"
+"public_title": "Datadog-Google Pub/Sub Integration"
+"short_description": "Track key Google Cloud PubSub metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Google Cloud Pub/Sub は、エンタープライズメッセージ指向ミドルウェアの拡張性、柔軟性、信頼性をクラウドにもたらします。
+Google Cloud Pub/Sub brings the scalability, flexibility, and reliability of enterprise message-oriented middleware to the cloud.
 
-Google Pub/Sub からメトリクスを取得して、以下のことができます。
+Get metrics from Google Pub/Sub to:
 
-- Pub/Sub のトピックおよびサブスクリプションのパフォーマンスを視覚化。
-- Pub/Sub のトピックおよびサブスクリプションのパフォーマンスをアプリケーションと関連付け。
+- Visualize the performance of your Pub/Sub topics and subscriptions.
+- Correlate the performance of your Pub/Sub topics and subscriptions with your applications.
 
-## 計画と使用
+## Setup
 
-### メトリクスの収集
+### Metric collection
 
-#### インフラストラクチャーリスト
+#### Installation
 
-[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
-#### ブラウザトラブルシューティング
+#### Configuration
 
-カスタム Pub/Sub ラベルをタグとして収集するには、Cloud Asset Inventory のアクセス権を有効にします。
+To collect custom Pub/Sub labels as tags, enable the cloud asset inventory permission.
 
-### 収集データ
+### Log collection
 
-Google Cloud Pub/Sub のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
+Google Cloud Pub/Sub logs are collected with Google Cloud Logging and sent to a Dataflow job through a Cloud Pub/Sub topic. If you haven't already, [set up logging with the Datadog Dataflow template][2].
 
-これが完了したら、Google Cloud Pub/Sub のログを Google Cloud Logging から Pub/Sub へエクスポートします。
+Once this is done, export your Google Cloud Pub/Sub logs from Google Cloud Logging to the Pub/Sub topic:
 
-1. [Google Cloud Logging のページ][3]に移動し、Google Cloud Pub/Sub のログを絞り込みます。
-2. **シンクを作成**し、シンクに適宜名前を付けます。
-3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
+1. Go to the [Google Cloud Logging page][3] and filter the Google Cloud Pub/Sub logs.
+2. Click **Create Sink** and name the sink accordingly.
+3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
 
-    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
+    {{< img src="integrations/google_cloud_pubsub/creating_sink2.png" alt="Export Google Cloud Pub/Sub Logs to Pub Sub" >}}
 
-4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
+4. Click **Create** and wait for the confirmation message to show up.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "google_cloud_pubsub" >}}
 
 
-### ヘルプ
+### Events
 
-Google Cloud Pub/Sub インテグレーションには、イベントは含まれません。
+The Google Cloud Pub/Sub integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Google Cloud Pub/Sub インテグレーションには、サービスのチェック機能は含まれません。
+The Google Cloud Pub/Sub integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
-[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
+[1]: https://docs.datadoghq.com/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_pubsub/google_cloud_pubsub_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

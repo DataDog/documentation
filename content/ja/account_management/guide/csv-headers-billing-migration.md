@@ -1,22 +1,22 @@
 ---
+title: Migrating to New Plan & Usage CSV Headers the week of February 19, 2024
 further_reading:
 - link: /account_management/plan_and_usage/
-  tag: ドキュメント
-  text: 計画と使用設定
-title: 2024 年 2 月 19 日の週より新 Plan & Usage CSV ヘッダーに移行
+  tag: Documentation
+  text: Plan and Usage Settings
 ---
-Plan & Usage Cost Chargebacks CSV ファイルのヘッダーは、2024 年 2 月 19 日の週に更新されます。この更新により、CSV ファイル内のコストとアプリ内に表示されるコストデータが一致します。
+The headers for Plan & Usage Cost Chargebacks CSV files will be updated the week of February 19, 2024. The updates align the costs in the CSV file with the cost data shown in-app. 
 
-Usage ページからダウンロードした Cost Chargebacks ファイルの CSV ヘッダーに依存するオートメーションがある場合、これらのヘッダーが変更されるため、オートメーションを更新する必要があります。以下は、変更が行われるセクションで、移行をサポートするために新しい CSV ヘッダーの例が含まれています。
+If you have automation that relies on the CSV headers in the cost chargebacks file you download from the Usage page, these headers are changing and your automation needs to be updated. Below is the section where the changes are taking place, and includes an example of the new CSV headers to support the migration.
 
-## 個別組織概要
+## Individual Organizations Summary
 
-1. [ヘッダーマッピング][1]
-2. CSV のダウンロード先:
+1. [Header Mapping][1]
+2. Where to download the CSV:
 
-{{< img src="account_management/billing/cost-chargebacks-csv-update.png" alt="個別組織概要で CSV をダウンロードする" >}}
+{{< img src="account_management/billing/cost-chargebacks-csv-update.png" alt="Download CSV in Individual Orgs Summary" >}}
 
 
 
-[1]: /ja/account_management/guide/csv_headers/individual-orgs-summary/
-[2]: /ja/account_management/guide/csv_headers/usage-trends/
+[1]: /account_management/guide/csv_headers/individual-orgs-summary/
+[2]: /account_management/guide/csv_headers/usage-trends/

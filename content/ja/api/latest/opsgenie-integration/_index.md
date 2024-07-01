@@ -1,3 +1,3 @@
 ---
-title: Opsgenie インテグレーション
+title: Opsgenie Integration
 ---

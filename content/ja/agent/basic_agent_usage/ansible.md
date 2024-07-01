@@ -1,42 +1,42 @@
 ---
 dependencies:
-- https://github.com/ansible-collections/Datadog/blob/main/README.md
+- "https://github.com/ansible-collections/Datadog/blob/main/README.md"
 title: Ansible
 ---
-## 概要
+## Overview
 
-Datadog Ansible コレクションである `datadog.dd` は、Ansible 関連の Datadog コンテンツの公式コレクションです。現時点では、[Ansible Datadog Role](https://github.com/DataDog/ansible-datadog/) のみが含まれています。このロールには `datadog.dd.agent` としてアクセスすることができ、Datadog Agent とインテグレーションをインストール、構成することを可能にします。Agent のバージョン 7 がデフォルトでインストールされます。
+The Datadog Ansible collection, `datadog.dd`, is the official collection of Ansible-related Datadog content. At the moment, it only contains the [Ansible Datadog Role](https://github.com/DataDog/ansible-datadog/). This role can be accessed as `datadog.dd.agent`, allowing to install and configure the Datadog Agent and integrations. Agent version 7 is installed by default.
 
-## 計画と使用
+## Setup
 
-### 要件
+### Requirements
 
-- Ansible v2.10 以上。
-- Debian、RHEL ベース、SUSE ベースの Linux ディストリビューションのほとんど、並びに macOS と Windows をサポートしていること。
-- Windows ホストを管理するために使用する場合、`ansible.windows` コレクションをインストールする必要があります。
+- Requires Ansible v2.10+.
+- Supports most Debian, RHEL-based and SUSE-based Linux distributions, macOS, and Windows.
+- When using to manage Windows hosts, requires the `ansible.windows` collection to be installed:
 
   ```shell
   ansible-galaxy collection install ansible.windows
   ```
-- openSUSE/SLES ホストを管理するために使用する場合、`community.general` コレクションをインストールする必要があります。
+- When using to manage openSUSE/SLES hosts, requires the `community.general` collection to be installed:
 
   ```shell
   ansible-galaxy collection install community.general
   ```
 
-### インフラストラクチャーリスト
+### Installation
 
-Ansible Galaxy からインストールするには、以下を実行します。
+To install from Ansible Galaxy, run:
 
 ```shell
 ansible-galaxy collection install datadog.dd
 ```
 
-Datadog Ansible コレクションは [Red Hat Automation Hub](https://console.redhat.com/ansible/automation-hub/repo/published/datadog/dd/) からも入手可能で、Red Hat によって正式に認定されています。
+The Datadog Ansible collection is also available through the [Red Hat Automation Hub](https://console.redhat.com/ansible/automation-hub/repo/published/datadog/dd/), where it is officially certified by Red Hat.
 
-### API
+### Usage
 
-Datadog Agent をホストにデプロイするには、Datadog のロールと API キーをプレイブックに追加します。
+To deploy the Datadog Agent on hosts, add the Datadog role and your API key to your playbook:
 
 ```yaml
 - hosts: servers
@@ -48,16 +48,16 @@ Datadog Agent をホストにデプロイするには、Datadog のロールと 
     datadog_api_key: "<YOUR_DD_API_KEY>"
 ```
 
-Ansible Automation Hub 経由でコレクションをインストールするユーザーへの注: OpenSUSE/SLES の機能は `community.general` というコミュニティコレクションに依存しています。Red Hat サポートでは、コミュニティコンテンツに関する問題のサポートは提供していません。したがって、OpenSUSE/SLES に関するすべてのサポート問題は、Datadog サポートに直接お問い合わせください。
+Note for users installing the collection through the Ansible Automation Hub: OpenSUSE/SLES functionality depends on a community collection `community.general`. Red Hat Support does not provide support for any issues related to community content. Thus, all support issues for OpenSUSE/SLES should be directed to Datadog Support.
 
-### コレクションロールリスト
+### Collection role list
 
-- `datadog.dd.agent`: Datadog Agent のインストールと構成。
-  - [ロールに関する公式ドキュメント](https://docs.datadoghq.com/agent/guide/ansible_standalone_role/#setup)を参照してください。
-  - [スタンドアロンロールのリポジトリ](https://github.com/DataDog/ansible-datadog#readme)を参照してください。
+- `datadog.dd.agent`: Installation and configuration of the Datadog Agent.
+  - See [the official documentation for the role](https://docs.datadoghq.com/agent/guide/ansible_standalone_role/#setup).
+  - See [the repository for the standalone role](https://github.com/DataDog/ansible-datadog#readme).
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-- [Datadog Ansible コレクションによる Agent インストールの自動化](https://www.datadoghq.com/blog/datadog-ansible-collection/)
+- [Automate Agent installation with the Datadog Ansible collection](https://www.datadoghq.com/blog/datadog-ansible-collection/)

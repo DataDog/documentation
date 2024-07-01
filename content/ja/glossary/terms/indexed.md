@@ -1,31 +1,31 @@
 ---
+title: indexed
 core_product:
-- log management
-- apm
-title: インデックス化
+  - log management
+  - apm
 ---
-インデックス化された[ログ][1]とは、分析、アラート、トラブルシューティングのために収集、処理、保持されているログのことです。
+Indexed logs are [logs][1] that have been collected, processed, and retained for analysis, alerting, and troubleshooting.
 
-インデックス化スパンは、Datadog に 15 日間保存された[保持フィルター][3]によってインデックス化された[スパン][2]で、スパンに含まれる[タグ][5]によって[検索スパン][4]で検索、クエリ、監視に利用できることを表します。
+Indexed spans represent [spans][2] indexed by a [retention filter][3] stored in Datadog for 15 days that can be used to search, query, and monitor in [Search Spans][4] by the [tags][5] included on the span.
 
 <div class="alert alert-info">
-取り込み後に<a href="/tracing/trace_pipeline/trace_retention/">タグベースの Retention Filter</a> を作成して、サービスごとにインデックス化されたスパンの正確な数を制御および可視化することができます。
+Creating <a href="/tracing/trace_pipeline/trace_retention/">tag-based retention filters</a> after ingestion allows you to control and visualize exactly how many spans are being indexed per service.
 </div>
 
-{{< img src="tracing/visualization/span_tag.png" alt="スパンタグ" style="width:80%" >}}
+{{< img src="tracing/visualization/span_tag.png" alt="span tag" style="width:80%" >}}
 
-この例では、リクエスト (`merchant.store_name` と `merchant.tier`) がスパンにタグとして追加されています。
+In this example, the requests (`merchant.store_name` and `merchant.tier`) have been added as tags to the span.
 
-アプリケーションでスパンのタグ付けを始めるには、[スパンのタグを追加する][6]ガイドを参照してください。
+To get started with tagging spans in your application, see the [Adding span tags][6] guide.
 
-タグがスパンに追加されたら、タグをクリックして[ファセット][7]として追加し、Analytics でタグを検索およびクエリします。これが完了すると、このタグの値はすべての新しいトレースに保存され、検索バー、ファセットパネル、トレースグラフクエリで使用できます。
+After a tag has been added to a span, search and query on the tag in Analytics by clicking on the tag to add it as a [facet][7]. Once this is done, the value of this tag is stored for all new traces and can be used in the search bar, facet panel, and trace graph query.
 
-{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="ファセットの作成" style="width:50%;">}}
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" style="width:50%;">}}
 
-[1]: /ja/logs/
-[2]: /ja/glossary/#span
-[3]: /ja/glossary/#retention-filter
-[4]: /ja/tracing/trace_explorer/search
-[5]: /ja/getting_started/tagging
-[6]: /ja/tracing/guide/add_span_md_and_graph_it/
-[7]: /ja/glossary/#facet
+[1]: /logs/
+[2]: /glossary/#span
+[3]: /glossary/#retention-filter
+[4]: /tracing/trace_explorer/search
+[5]: /getting_started/tagging
+[6]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[7]: /glossary/#facet

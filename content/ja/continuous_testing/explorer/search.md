@@ -1,84 +1,87 @@
 ---
+title: Search Test Batches
+kind: documentation
+description: Examine batches of executed CI jobs and troubleshoot failing test results.
 aliases:
-- /ja/synthetics/explorer/search
-description: 実行された CI ジョブのバッチを調査し、失敗したテスト結果のトラブルシューティングを行います。
+  - /synthetics/explorer/search
 further_reading:
 - link: /continuous_testing/explorer
-  tag: ドキュメント
-  text: Synthetic Monitoring &amp; Continuous Testing Explorer について
-title: テストバッチを検索する
+  tag: Documentation
+  text: Learn about the Synthetic Monitoring & Testing Results Explorer
 ---
 
-## 概要
+## Overview
 
-右上のドロップダウンメニューから時間帯を選択した後、[Synthetic Monitoring & Continuous Testing Explorer][1] の **CI Batches** イベントタイプをクリックすると、CI ジョブのバッチを検索することができます。
+After selecting a time frame from the dropdown menu on the top right, you can search for batches of CI jobs by clicking on the **CI Batches** event type in the [Synthetic Monitoring & Testing Results Explorer][1].
 
-ファセットを使用すると、以下のアクションを実行できます。
+{{< img src="continuous_testing/explorer/results_explorer.png" alt="CI batches in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
-- CI パイプラインで実行されている最新のテストバッチを観測する。
-- CI バッチを集計し、CI パイプラインに追加するテスト ID を特定する。
-- 失敗したテスト実行の数をブロックのステータスで比較する。
+You can use facets to accomplish the following actions:
 
-## ファセットの確認
+- Observe the latest batches of tests running in a CI pipeline.
+- Aggregate CI batches and identify test IDs to add into your CI pipeline.
+- Compare the number of failing test runs by their blocking status.
 
-左側のファセットパネルには、バッチを検索するために使用できる複数のファセットが表示されます。検索クエリのカスタマイズを開始するには、**Batch** で始まるファセットリストをクリックします。
+## Explore facets
 
-### バッチ属性
+The facets panel on the left lists several facets you can use to search through your batches. To start customizing the search query, click through the list of facets starting with **Batch**.
 
-**Batch** ファセットを使用すると、バッチの属性でフィルタリングできます。
+### Batch attributes
 
-| ファセット            | 説明                                                 |
+**Batch** facets allow you to filter on your batches' attributes.
+
+| Facet            | Description                                                 |
 |------------------|-------------------------------------------------------------|
-| `Summary Status` | バッチのステータス: `Passed`、`Failed`、`In Progress`。 |
-| `Duration`       | バッチの全体的な期間。                          |
-| `ID`             | バッチ ID。                                               |
+| `Summary Status` | The status of the batch: `Passed`, `Failed`, and `In Progress`. |
+| `Duration`       | The overall duration of the batch.                          |
+| `ID`             | The batch ID.                                               |
 
-### CI 属性
+### CI attributes
 
-**CI** ファセットを使用すると、バッチの CI 関連の属性をフィルタリングできます。
+**CI** facets allow you to filter on your batches' CI-related attributes.
 
-| ファセット          | 説明                                 |
+| Facet          | Description                                 |
 |----------------|---------------------------------------------|
-| `CI Provider`  | バッチに関連付けられている CI プロバイダー。  |
-| `Job Name`     | バッチに関連付けられたジョブ名。     |
-| `Job URL`      | バッチに関連付けられたジョブの URL。      |
-| `Pipeline ID`  | バッチに関連付けられたパイプライン ID。  |
-| `Pipeline Name` | バッチに関連付けられたパイプラインまたはリポジトリ名。 |
-| `Pipeline Number` | バッチに関連付けられたパイプラインまたはビルド番号。 |
-| `Pipeline URL` | バッチに関連付けられたパイプライン URL。 |
-| `Stage Name`   | バッチに関連付けられたステージ名。   |
+| `CI Provider`  | The CI provider associated with the batch.  |
+| `Job Name`     | The job name associated with the batch.     |
+| `Job URL`      | The job URL associated with the batch.      |
+| `Pipeline ID`  | The pipeline ID associated with the batch.  |
+| `Pipeline Name` | The pipeline or repository name associated with the batch. |
+| `Pipeline Number` | The pipeline or build number associated with the batch. |
+| `Pipeline URL` | The pipeline URL associated with the batch. |
+| `Stage Name`   | The stage name associated with the batch.   |
 
-### テスト結果属性
+### Test result attributes
 
-**Test result** ファセットを使用すると、実行されたテスト結果の属性をフィルタリングできます。
+**Test result** facets allow you to filter on your executed test results' attributes.
 
-| ファセット            | 説明                                                                                             |
+| Facet            | Description                                                                                             |
 |------------------|---------------------------------------------------------------------------------------------------------|
-| <code>実行ルール</code> | バッチのテスト結果に関連付けられた実行ルール: `Blocking`、`Non Blocking`、`Skipped`。 |
-| `Fast Retries`   | バッチのテスト結果に関連付けられた高速再試行の数。                                |
-| `Location`       | バッチのテスト結果に関連付けられたロケーション。                                              |
-| `Test ID`        | バッチのテスト結果に関連付けられたテスト ID。                                               |
-| `Test Name`      | バッチのテスト結果に関連付けられたテスト名。                                             |
+| <code>Execution&nbsp;Rule</code> | The execution rule associated with the test result of the batch: `Blocking`, `Non Blocking`, and `Skipped`. |
+| `Fast Retries`   | The number of fast retries associated with the test result of the batch.                                |
+| `Location`       | The location associated with the test result of the batch.                                              |
+| `Test ID`        | The test ID associated with the test result of the batch.                                               |
+| `Test Name`      | The test name associated with the test result of the batch.                                             |
 
-### Git 属性
+### Git attributes
 
-**Git** ファセットを使用すると、バッチの Git 関連の属性をフィルタリングできます。
+**Git** facets allow you to filter on your batches' Git-related attributes.
 
-| ファセット       | 説明                               |
+| Facet       | Description                               |
 |-------------|-------------------------------------------|
-| `Author Email` | コミット作成者のメールアドレス。 |
-| `Branch`    | バッチに関連付けられたブランチ。     |
-| `Commit SHA`| バッチに関連付けられたコミット SHA。 |
-| `Repository URL`| バッチに関連付けられた Git リポジトリの URL。 |
-| `Tag`       | バッチに関連付けられた Git タグ。    |
+| `Author Email` | The email address of the commit author. |
+| `Branch`    | The branch associated with the batch.     |
+| `Commit SHA`| The commit SHA associated with the batch. |
+| `Repository URL`| The URL of the Git repository associated with the batch. |
+| `Tag`       | The Git tag associated with the batch.    |
 
-過去 1 日間に実行された CI ジョブのバッチにフィルターをかけるには、`@ci.provider.name:github` といった検索クエリを作成し、時間範囲を`1d` に設定します。
+To filter on batches of CI jobs run over the past day, create a search query such as `@ci.provider.name:github` and set the time range to `1d`.
 
-CI バッチの検索については、[検索構文][2]を参照してください。
+For more information about searching for CI batches, see [Search Syntax][2].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/explorer/
-[2]: /ja/continuous_testing/explorer/search_syntax
+[2]: /continuous_testing/explorer/search_syntax

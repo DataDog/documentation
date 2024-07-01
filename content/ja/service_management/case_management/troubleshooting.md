@@ -1,36 +1,36 @@
 ---
-kind: ドキュメント
-title: ヘルプ
+title: Troubleshooting
+kind: Documentation
 ---
 
-## 概要
+## Overview
 
-このガイドは、Case Management のサードパーティインテグレーションに関する問題を解決するためのものです。問題が解決しない場合は、[Datadog サポート][1]までお問い合わせください。
+This guide is intended to help you resolve issues with third-party integrations in Case Management. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.
 
 ## Jira
 
-カスタムフィールドを持つ Jira 課題タイプ、プライベート Jira プロジェクト、およびオンプレミス Jira インスタンスはサポートされていません。同期による Jira チケットの自動作成に問題がある場合は、次のセクションを参照してください。
+Jira issue types with custom fields, private Jira projects, and on-premises Jira instances are not supported. If you are having trouble with automatic Jira ticket creation with syncing, see the following sections:
 
-### ブラウザトラブルシューティング
+### Configuration
 
-1. Jira プロジェクトが Jira インテグレーション構成画面のドロップダウンに反映されない場合は、`manage_integrations` 権限があるか確認してください。
+1. If Jira projects are not populating the dropdown on the Jira integration configuration screen, check that you have the `manage_integrations` permission. 
 
-1. Jira からイベントを受信するように webhook が構成されていることを確認してください。
+1. Ensure that you have configured a webhook to receive events from Jira.
 
-### 同期と更新
+### Syncing and updates
 
-1. Jira 課題と同期しているケースを別の Case Management プロジェクトに移動すると、同期が停止します。移動後、新しいプロジェクトのケースには Jira 課題が関連付けられていません。
-1. Jira ワークフローで許可されていない方法でケースのステータスを更新している場合、ケースはステータスマッピングと同期しません。
-1. Case Management または Jira のいずれにおいても、削除を含むコメントの更新は相手側に反映されません。
-1. 双方向インテグレーションが有効になった後に作成されたケースのみが同期されます。Datadog は、インテグレーションが有効になる前に存在したケースを遡って同期することはありません。
+1. If you move a case that is being synced with a Jira issue to a different Case Management project, the syncing stops. After it is moved, the case in the new project does not have a Jira issue attached to it. 
+1. If you're updating the status of a case in a way that is disallowed by a Jira workflow, the case falls out of sync with the status mapping. 
+1. Updates to comments, including deletions, in either Case Management or Jira are not reflected on the other side. 
+1. Only cases created after the bidirectional integration was enabled are synced. Datadog does not retroactively sync cases that existed before the integration was enabled. 
 
-### Jira 課題レポーター
+### Jira issue reporter
 
-1. Jira 課題レポーターが、Jira インテグレーションをセットアップした Datadog ユーザーとして反映されるシナリオがいくつかあります。これらのシナリオには次のようなものがあります。
-    - ケースを作成する Datadog ユーザーが Jira アカウントを持っていない場合
-    - Jira ユーザーがメールを非表示にしている
-1. ミラーリングされた Jira 課題のレポーターが更新されても、"created by" フィールドが編集できないため、Case Management には反映されません。
+1. There are a few scenarios where the Jira issue reporter is reflected as the Datadog user that set up the Jira integration. Some of these scenarios include:
+    - When a Datadog user that creates a case does not have a Jira account
+    - A Jira user has hidden email visibility
+1. If the reporter on the mirrored Jira issue is updated, it is not reflected in Case Management, as the "created by" field is not editable. 
 
 
 
-[1]: https://docs.datadoghq.com/ja/help/
+[1]: https://docs.datadoghq.com/help/

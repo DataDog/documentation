@@ -1,7 +1,7 @@
 ---
-core_product:
-- real user monitoring
-- error tracking
 title: error
+core_product:
+  - real user monitoring
+  - error tracking
 ---
-Datadog RUM では、エラーはイベントの一種です。ブラウザがフロントエンドエラーを発すると、エラーイベントが生成されます。
+In Datadog RUM, an error is a type of event. An error event is generated when the browser emits a frontend error.

@@ -1,51 +1,52 @@
 ---
-categories:
-- cloud
-- containers
-- google cloud
-- log collection
-dependencies: []
-description: GCE コンテナのリソースの使用状況を監視。
-doc_link: https://docs.datadoghq.com/integrations/google_container_engine/
-draft: false
-git_integration_title: google_container_engine
-has_logo: true
-integration_id: google-container-engine
-integration_title: Google Container Engine
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: google_container_engine
-public_title: Datadog-Google Container Engine インテグレーション
-short_description: GCE コンテナのリソースの使用状況を監視。
-version: '1.0'
+"categories":
+- "cloud"
+- "containers"
+- "google cloud"
+- "log collection"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Monitor your GCE containers' resource usage."
+"doc_link": "https://docs.datadoghq.com/integrations/google_container_engine/"
+"draft": false
+"git_integration_title": "google_container_engine"
+"has_logo": true
+"integration_id": "google-container-engine"
+"integration_title": "Google Container Engine"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "google_container_engine"
+"public_title": "Datadog-Google Container Engine Integration"
+"short_description": "Monitor your GCE containers' resource usage."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
 <div class="alert alert-warning">
-このインテグレーションは非推奨です。代わりに、<a href="https://docs.datadoghq.com/integrations/google_kubernetes_engine">Google Kubernetes Engine インテグレーション</a>のドキュメントをご覧ください。非推奨のメトリクスについては、<a href="https://cloud.google.com/monitoring/api/metrics_gcp#gcp-container">Google Cloud のメトリクス</a>のドキュメントを参照してください。
+This integration is deprecated. Instead, see the <a href="https://docs.datadoghq.com/integrations/google_kubernetes_engine">Google Kubernetes Engine integration</a> documentation. For more details about deprecated metrics, see the <a href="https://cloud.google.com/monitoring/api/metrics_gcp#gcp-container">Google Cloud metrics</a> documentation.
 </div>
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "google_container_engine" >}}
 
 
-### ヘルプ
+### Events
 
-Google Container Engine インテグレーションには、イベントは含まれません。
+The Google Container Engine integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Google Container Engine インテグレーションには、サービスのチェック機能は含まれません。
+The Google Container Engine integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+Need help? Contact [Datadog support][2].
 
 [1]: https://github.com/DataDog/dogweb/blob/prod/integration/google_container_engine/google_container_engine_metadata.csv
-[2]: https://docs.datadoghq.com/ja/help/
+[2]: https://docs.datadoghq.com/help/
+

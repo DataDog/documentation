@@ -1,11 +1,11 @@
 ---
-core_product:
-- security
-- cspm
+title: rule
 synonyms:
-- 検出ルール
-- コンプライアンスルール
-title: ルール
+  - detection rule
+  - compliance rule
+core_product:
+  - security
+  - csm
 ---
 
-セキュリティルールはリソースのコンフィギュレーションを評価し、1 つ以上のコントロールに関連する要素を検証します。ルールは複数のコントロール、要件、フレームワークにマップすることができます。
+A security rule evaluates the configuration of a resource to validate an element related to one or more controls. Rules may map to multiple controls, requirements, and frameworks.

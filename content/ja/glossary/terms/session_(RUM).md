@@ -1,6 +1,6 @@
 ---
+title: session
 core_product:
-- real user monitoring
-title: セッション
+  - real user monitoring
 ---
-Datadog RUM では、セッションはイベントの一種です。ユーザーセッションは、ユーザーが Web アプリケーションの閲覧を開始したときに開始されます。これには、ブラウザやデバイスを含む、ユーザーに関する概要情報が含まれています。
+In Datadog RUM, a session is a type of event. A user session begins when a user starts browsing the web application. It contains high-level information about the user, including their browser and device.

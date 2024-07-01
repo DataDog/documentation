@@ -1,113 +1,137 @@
 ---
-categories:
-- クラウド
+"categories":
+- cloud
 - network
-dependencies: []
-description: Salesforce のリアルタイムプラットフォームイベントを Datadog ログとして収集します。
-doc_link: https://docs.datadoghq.com/integrations/salesforce/
-draft: false
-git_integration_title: salesforce
-has_logo: true
-integration_id: ''
-integration_title: セールスフォース・ドットコム
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: salesforce
-public_title: セールスフォース・ドットコム
-short_description: Salesforce のリアルタイムプラットフォームイベントを Datadog ログとして収集します。
-team: web-integrations
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Collect Salesforce real-time platform events as Datadog logs."
+"doc_link": "https://docs.datadoghq.com/integrations/salesforce/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/monitor-salesforce-logs-datadog/"
+  "tag": Blog
+  "text": Monitor Salesforce logs with Datadog
+"git_integration_title": "salesforce"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Salesforce"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "salesforce"
+"public_title": "Salesforce"
+"short_description": "Collect Salesforce real-time platform events as Datadog logs."
+"team": "web-integrations"
+"version": "1.0"
 ---
 
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/salesforce/salesforce_dashboard.png" alt="The out of the box Salesforce dashboard in Datadog" popup="true">}}
 
-Salesforce は顧客関係管理サービスに加えて、カスタマーサービス、マーケティングオートメーション、アナリティクス、アプリケーション開発に特化したエンタープライズ向けアプリケーションスイートを無料で提供しています。
+## Overview
 
-Salesforce と Datadog の統合により次のことが行えます:
+Salesforce provides a customer relationship management service and a complementary suite of enterprise applications focused on customer service, marketing automation, analytics, and application development. 
 
-- [Datadog ログ管理][1]を使用してログを表示およびパースする。
-- Salesforce プラットフォームからの[イベント][3]に[モニター][2]を設定する。
-- Datadogの[セキュリティプラットフォーム][4]を活用して、Salesforce プラットフォームに対する脅威を監視および検知する。
-- Salesforce API の使用量を監視し、API の制限以下で運用を行っていることを確認する。
+Integrate Salesforce with Datadog to:
 
-## セットアップ
+- View and parse your Salesforce user activity, platform access activity, and security logs using [Datadog Log Management][1].
+- Set [monitors][2] on [events][3] from your Salesforce Platform.
+- Leverage the Datadog [Security Platform][4] to monitor and detect threats across your Salesforce Platform.
+- Monitor your Salesforce API usage to ensure you are operating under API limits.
 
-### インストール
+## Setup
 
-インストールは必要ありません。
+### Installation
 
-### コンフィギュレーション
+No installation is required.
 
-Datadog にデータを送信するよう Salesforce を構成するには、[Salesforce イベントモニタリング][5]にアクセスし、Salesforce イベント上のストレージを有効化して Salesforce の組織を Datadog に接続する必要があります。
+### Configuration
 
-#### アクセス許可
+To configure Salesforce to send data to Datadog, you need to have access to [Salesforce Event Monitoring][5], enable storage on your Salesforce events, and connect your Salesforce org to Datadog.
 
-[Salesforce Shield][6] を使用している場合、すべてのイベントに対して必要な権限が設定されています。Shield をご利用でない場合は、[イベントモニタリングアドオン][7]が必要です。
+#### Permissions
 
-#### イベントストレージを有効化する
+If you are using [Salesforce Shield][6], you have the required permissions for all events. If you do not have Shield, you need the [Event Monitoring add-on][7].
 
-プラットフォームまたはリアルタイムイベントの使用を計画している場合、イベントマネージャーでこれを設定する必要があります。イベントログファイルイベントの場合は、このステップは必要ありません。
+#### Enabling event storage
 
-1. (Lightning インターフェースを使用して) Salesforce のアカウントに[ログイン][8]します。
-2. **Event Manager** を検索します。
-3. Event Manager ページで、クロールしたい各イベントについて右矢印をクリックして **Enable Storage** を選択します。**ストリーミングを有効にする**必要はありません。
-サポートされているイベントの一覧は、[Salesforce インテグレーションタイル][9]の **Configuration** タブにある **Platform Events** セクションで確認できます。
+If you plan on using the platform or real-time events, you need to set this up in the Event Manager. This step is not required for event log file events.
 
-#### 組織を接続する
+1. [Log into][8] your Salesforce account (using the Lightning interface).
+2. Search for **Event Manager**.
+3. On the Event Manager page, for each event you want to crawl, click the right arrow and select **Enable Storage**. You do not need to **Enable Streaming**. The list of supported
+events can be found under the **Platform Events** section in the **Configuration** tab of the [Salesforce Integration tile][9].
 
-1. Salesforce の組織で、固有のシステムアカウントを作成します。
-2. [Salesforce インテグレーションタイル][9]の ** Configuration** タブにある **New Production Org** または **New Sandbox Org** をクリックします。
-3. これらのイベントに付けたいカスタムタグを、カンマ区切りのリストとして設定します。有効にするイベントを選択することができます。
+#### Connecting your org
 
-    {{< img src="integrations/salesforce/salesforce-1.png" alt="Datadog 上で Salesforce org の構成が完了した際の成功画面" popup="true" style="width:90%" >}}
+1. Create a unique system account in your Salesforce org. 
+2. Click **New Production Org** or **New Sandbox Org** in the **Configuration** tab of the [Salesforce Integration tile][9].
+3. Set any custom tags you want to attach to these events as a comma-separated list. You can choose which events to enable.
 
-4. **Save** をクリックします。これにより、Salesforce アカウントにログインし、Datadog のアクセス権限を付与するよう促されます。
-5. ログインフローが完了したら、Datadog の [Salesforce インテグレーションタイル][9]に戻ります。組織には、すぐに使えるデフォルトのタグが含まれています。
+    {{< img src="integrations/salesforce/salesforce-1.png" alt="The success screen when you have successfully configured your Salesforce org on Datadog" popup="true" style="width:90%" >}}
 
-    {{< img src="integrations/salesforce/salesforce-default-tags.png" alt="Datadog 上で Salesforce org の構成が完了した際の成功画面" popup="true" style="width:90%" >}}
+4. Click **Save**. This prompts you to log into your Salesforce account and grant Datadog access permissions. 
+5. Once you have completed the login flow, return to the [Salesforce Integration tile][9] in Datadog. Your org includes out-of-the-box default tags.
 
-6. 使用するタグを選択し、**Connect** をクリックします。
-7. この手順を繰り返して、残りの組織を接続します。追加しようとする組織へのアクセス権が必要です。
+    {{< img src="integrations/salesforce/salesforce-default-tags.png" alt="The success screen when you have successfully configured your Salesforce org on Datadog" popup="true" style="width:90%" >}}
 
-**注**: Salesforce org ID にデフォルトタグが追加されますが、[このタグ][10]は企業にとってより意味の通りやすいものになるよう編集することができます。
+6. Select the tags you want to use and click **Connect**. 
+7. Repeat these steps to connect your remaining organizations. You must have access to the organizations you are trying to add. 
 
-#### 結果
+**Note**: A default tag is added with your Salesforce org ID, but you can edit [the tags][10] with something more meaningful to your company.
 
-しばらくすると、`salesforce` のソース下に[ログ][1]が表示されます。Salesforce は頻繁にイベントログファイルに書き込むわけではないため、イベントログファイルベースのイベントが Datadog に表示されるまでに、1 時間以上かかる場合があります。
+#### Results
 
-## 収集データ
+After some time, [logs][1] appear under the `salesforce` source. Salesforce writes the event log files infrequently, so it may take an hour or more for event log file-based events to appear in Datadog.
 
-### メトリクス
+{{< img src="integrations/salesforce/salesforce_dashboard_logs.png" alt="The Salesforce Log Stream widget in the out of the box Salesforce dashboard" popup="true">}}
+
+## Data Collected
+
+### Metrics
 {{< get-metrics-from-git "salesforce" >}}
 
 
-### イベント
+### Events
 
-ログイベントの一覧は、[リアルタイムイベント監視データ保存][12]と [EventLogFile イベント][13]を参照してください。
+For the full list of Log events, see [Real-Time Event Monitoring Data Storage][12] and [EventLogFile Events][13].
 
-### サービスのチェック
+### Service Checks
 
-Salesforce インテグレーションには、サービスのチェック機能は含まれません。
+The Salesforce integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-Configuration タブで `The authenticated connection does not have access` エラーが発生した場合、要求されたイベントにアクセスするための権限が欠落している可能性があります。Salesforce の Datadog ロールの管理者権限を一時的に有効にして、不足しているアクセス権限を確認することができます。
+If you encounter an `The authenticated connection does not have access` error in the Configuration tab, you may be missing permissions to access requested events. You can temporarily enable admin permissions for the Datadog role in Salesforce to confirm any missing access permissions.
 
-ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+At a minimum, the user must have the following permissions:
 
-[1]: /ja/logs/
-[2]: /ja/monitors/monitor_types/
-[3]: /ja/events/
-[4]: /ja/security_platform/
+* API Enabled
+* View Setup and Configuration
+* View Real-Time Event Monitoring Events
+* View Event Log Files
+* View Threat Detection Events
+
+The user must also have read permission on any underlying event objects that are selected in the configuration.
+
+Need help? Contact [Datadog support][14].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/
+[2]: /monitors/monitor_types/
+[3]: /events/
+[4]: /security_platform/
 [5]: https://trailhead.salesforce.com/content/learn/modules/event_monitoring
 [6]: https://www.salesforce.com/editions-pricing/platform/shield
 [7]: https://help.salesforce.com/s/articleView?id=000339868&type=1
 [8]: https://login.salesforce.com/
-[9]: https://app.datadoghq.com/account/settings#integrations/salesforce
-[10]: /ja/getting_started/tagging/using_tags/
+[9]: https://app.datadoghq.com/integrations/salesforce
+[10]: /getting_started/tagging/using_tags/
 [11]: https://github.com/DataDog/dogweb/blob/prod/integration/salesforce/salesforce_metadata.csv
 [12]: https://developer.salesforce.com/docs/atlas.en-us.securityImplGuide.meta/securityImplGuide/real_time_event_monitoring_storage.htm#storage-events
 [13]: https://developer.salesforce.com/docs/atlas.en-us.object_reference.meta/object_reference/sforce_api_objects_eventlogfile_supportedeventtypes.htm
-[14]: https://docs.datadoghq.com/ja/help/
+[14]: https://docs.datadoghq.com/help/
+

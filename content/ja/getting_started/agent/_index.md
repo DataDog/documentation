@@ -1,124 +1,124 @@
 ---
+title: Getting Started with the Agent
 further_reading:
-- link: /agent/basic_agent_usage/
-  tag: ドキュメント
-  text: 基本的な Agent の利用方法
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: インフラストラクチャーモニタリングをパワーアップさせるインタラクティブなセッションに参加できます
-- link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
-  tag: よくあるご質問
-  text: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
-title: Agent の概要
+    - link: /agent/basic_agent_usage/
+      tag: Documentation
+      text: Basic Agent Usage
+    - link: "https://dtdg.co/fe"
+      tag: Foundation Enablement
+      text: Join an interactive session to power up your Infrastructure monitoring
+    - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
+      tag: FAQ
+      text: Why should I install the Datadog Agent on my cloud instances?
 ---
 
-このガイドでは、Agent の紹介と、Agent を使用して Datadog プラットフォームにシステムレベルのメトリクスを送信する方法について説明します。また、Ubuntu 上での Agent のインストール例についても説明します。以下の内容をカバーしています。
+This guide provides an introduction to the Agent and how you can use it to send system level metrics to the Datadog platform. It walks through an example Agent installation on Ubuntu. It covers:
 
-  - Agent のインストール
-  - Agent が起動していることを確認する
-  - Agent の機能を構成する
-  - トラブルシューティングリソース
+  - Agent installation
+  - Verifying that the Agent is running
+  - Configuring Agent features
+  - Troubleshooting resources
 
-## 概要
+## Overview
 
-### Agent について
+### About the Agent
 
-Datadog Agent は、ホスト上で実行されるソフトウェアです。ホストからイベントやメトリクスを収集し、Datadog に送信し、モニタリングやパフォーマンスデータを分析することができます。ローカルホスト (Windows、MacOS)、コンテナ環境 (Docker、Kubernetes)、オンプレミスデータセンターで実行することが可能です。構成管理ツール (Chef、Puppet、Ansible) を使って、インストールと構成が可能です。
+The Datadog Agent is software that runs on your hosts. It collects events and metrics from hosts and sends them to Datadog, where you can analyze your monitoring and performance data. It can run on your local hosts (Windows, MacOS), containerized environments (Docker, Kubernetes), and in on-premises data centers. You can install and configure it using configuration management tools (Chef, Puppet, Ansible).
 
-Agent は、15～20 秒ごとに 75～100 のシステムレベルメトリクスを収集することができます。また、追加の構成により、Agent は実行中のプロセスからライブプロセスデータ、ログ、トレースを Datadog プラットフォームに送信することができます。Datadog Agent はオープンソースで、ソースコードは GitHub の [DataDog/datadog-agent][1] で公開されています。
+The Agent is able to collect 75 to 100 system level metrics every 15 to 20 seconds. With additional configuration, the Agent can send live data, logs, and traces from running processes to the Datadog Platform. The Datadog Agent is open source and its source code is available on GitHub at [DataDog/datadog-agent][1].
 
-### Agent のオーバーヘッド
+### Agent overhead
 
-Agent が占有するスペースとリソースの量は、構成と Agent が送信するように構成されているデータによって異なります。初期状態では、平均して約 0.08% の CPU 使用率と、約 880MB から 1.3GB のディスクスペースが見込まれます。
+The amount of space and resources the Agent takes up depends on the configuration and what data the Agent is configured to send. At the onset, you can expect around 0.08% CPU used on average with a disk space of roughly 880MB to 1.3GB.
 
-これらのベンチマークについて詳しくは、[Agent Overhead][2] を参照してください。
+See [Agent Overhead][2] to learn more about these benchmarks.
 
-### 収集データ
+### Data collected
 
-#### Agent メトリクス
+#### Agent metrics
 
-以下の Agent メトリクスは、Agent が Datadog に送信する自分自身に関する情報であり、どのホストやコンテナで Agent が動作しているか、Agent がいつ起動するか、どのバージョンの Python が動作しているかなどを判断することができます。
+The following Agent metrics are information the Agent sends to Datadog about itself, so that you can determine things like what hosts or containers have running Agents, when an Agent starts, and what version of Python it's running.
 
-| メトリクス                           | 説明                                                                                                          |
+| Metric                           | Description                                                                                                          |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `datadog.agent.python.version` | Agent が Datadog に報告中の場合は、値 `1` が表示されます。メトリクスには `python_version` がタグ付けされています。 |
-| `datadog.agent.running`        | Agent が Datadog に報告中の場合は、値 `1` が表示されます。                                                 |
-| `datadog.agent.started`        | Agent 起動時に値 `1` で送信されるカウント (v6.12 以上で使用可能)。                                        |
+| `datadog.agent.python.version` | Shows a value of `1` if the Agent is reporting to Datadog. The metric is tagged with the `python_version`. |
+| `datadog.agent.running`        | Shows a value of `1` if the Agent is reporting to Datadog.                                                 |
+| `datadog.agent.started`        | A count sent with a value of `1` when the Agent starts (available in v6.12+).                                        |
 
-Agent メトリクスの全リストは、[Agent メトリクス][3]のインテグレーションをご覧ください。
+See the [Agent Metrics][3] integration for a full list of Agent metrics.
 
-#### チェック
+#### Checks
 
-一部のプラットフォームの Agent では、メトリクスを収集するいくつかのコアチェックがデフォルトで有効になっています。
+Depending on your platform, the Agent has several core checks enabled by default that collect metrics.
 
-| チェック       | メトリクス       | プラットフォーム          |
+| Check       | Metrics       | Platforms          |
 | ----------- | ------------- | ------------------ |
-| CPU         | [System][4]  | すべて                |
-| ディスク        | [Disk][5]    | すべて                |
-| IO          | [System][4]  | すべて                |
-| メモリ      | [System][4]  | すべて                |
-| ネットワーク     | [Network][6] | すべて                |
-| NTP         | [NTP][7]     | すべて                |
-| アップタイム      | [System][4]  | All                |
-| ファイル処理 | [System][4]  | Mac 以外のすべて     |
-| ロード        | [System][4]  | Windows 以外のすべて |
+| CPU         | [System][4]  | All                |
+| Disk        | [Disk][5]    | All                |
+| IO          | [System][4]  | All                |
+| Memory      | [System][4]  | All                |
+| Network     | [Network][6] | All                |
+| NTP         | [NTP][7]     | All                |
+| Uptime      | [System][4]  | All                |
+| File Handle | [System][4]  | All except Mac     |
+| Load        | [System][4]  | All except Windows |
 | Docker      | [Docker][8]  | Docker             |
 | Winproc     | [System][4]  | Windows            |
 
-他のテクノロジーからメトリクスを収集する方法については、[インテグレーション][9]のページを参照してください。
+To collect metrics from other technologies, see the [Integrations][9] page.
 
-## ホスト用 Agent とコンテナ用 Agent の相違点
+## Differences between Agents for hosts and containers
 
-このガイドでは、ホストへの Agent のインストールと構成を説明します。最終的にコンテナ環境に Agent をインストールする予定がある場合、いくつか知っておくべき相違点があります。
+This guide walks you through installing and configuring an Agent on a host. If you plan to eventually install Agents in a containerized environment, there are a few differences you should know about.
 
-1. ホストでは、Agent は YAML ファイルを使用して構成されます (このガイドの後半で説明します)。一方、コンテナの Agent の構成オプションは、[環境変数][10]で渡されます。たとえば、以下のようになります。
-    - `DD_API_KEY` は Datadog API キー用
-    - `DD_SITE` は Datadog サイト用
+1. On a host, the Agent is configured using a YAML file (as you will see later in this guide), whereas Agent configuration options for a container's Agent are passed in with [environment variables][10], for example:
+    - `DD_API_KEY` for the Datadog API key
+    - `DD_SITE` for the Datadog site
 
-2. 同様に、ホスト上では、[インテグレーション][9]は Agent 構成ファイルを通して特定されますが、コンテナ環境では、Datadog のオートディスカバリー機能によりインテグレーションが自動的に特定されます。詳しくは、[基本的な Agent のオートディスカバリー][11]を参照してください。
+2. Similarly, while on a host, [integrations][9] are identified through the Agent configuration file, in a container environment, integrations are automatically identified through Datadog's Autodiscovery feature. See [Basic Agent Autodiscovery][11] to learn more.
 
-コンテナ環境で Agent を実行するためのチュートリアルは、[Docker Agent][12] または [Kubernetes][13] を参照してください。
+See the [Docker Agent][12] or [Kubernetes][13] for a walkthrough on running the Agent in a containerized environment.
 
-## なぜ Agent をインストールする必要があるのですか？
+## Why should I install the Agent?
 
-Agent ベースのインテグレーションからデータを送信するには、Agent をインストールする必要があります。Agent は必ずしも Datadog プラットフォームにデータを転送することを求められておらず、例えば、ログやメトリクスの送信は Datadog API を通じて行うことができます。しかし、Agent は Datadog プラットフォームにデータを転送する方法として推奨されています。
+The Agent needs to be installed to send data from any one of the many Agent based Integrations. The Agent is not necessarily required to forward data to the Datadog Platform, for example, you can send Logs and Metrics through the Datadog API. However, the Agent is the recommended method to forward your data to the Datadog Platform.
 
-Agent は 15 秒ごとにホストデータを収集し、環境全体で何が起こっているかを正確に把握することができます。[チェック][14]のセクションで述べたように、Agent は 50 以上のデフォルトメトリクスを収集するいくつかのチェックを有効にし、システムレベルのデータについてより深い洞察を提供します。
+The Agent collects host data every 15 seconds to provide an accurate understanding of what is happening across your environments. As previously mentioned in the [Checks][14] section, the Agent has several checks enabled which collect over 50 default metrics to provide greater insight on system level data.
 
-## セットアップ
+## Setup
 
-### 前提条件
+### Prerequisites
 
-1. [Datadog アカウント][15]を作成します。
+1. Create a [Datadog account][15].
 
-2. [Datadog API キー][16]を手元に用意します。
+2. Have your [Datadog API key][16] on hand.
 
-3. Datadog の UI を開いておきます。
+3. Have the Datadog UI open.
 
-**注**: このチュートリアルでは、Ubuntu オペレーティングシステムを使用しています。サポートされているプラットフォームの全リストは、[基本的な Agent の利用方法][17]ページを参照してください。
+**Note**: This walkthrough uses the Ubuntu operating system. See the [Basic Agent Usage][17] page for a full list of supported platforms.
 
-### インストール
+### Installation
 
-Datadog UI で [Agent Installation ページ][18]に移動し、**Ubuntu** をクリックします。ホストに Datadog Agent をインストールするには、そのページから 1 行のインストールコマンド (下図の例) を使用し、[Datadog API キー][16]で更新します。
+In the Datadog UI, navigate to the [Agent Installation page][18] and click on **Ubuntu**. To install the Datadog Agent on a host, use the one-line installation command from that page (example shown below), updated with your [Datadog API key][16].
 
-Ubuntu の 1 行インストールコマンドの例:
+Example Ubuntu one-line installation command:
 
 ```shell
 DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-[Agent Installation ページ][18]を使用して、お使いのオペレーティングシステムの最新のインストール手順を参照してください。
+Use the [Agent Installation page][18] to see the most up-to-date installation instructions for your operating system.
 
-### 検証
+### Validation
 
-#### ターミナルコマンド
+#### Terminal command
 
-インストールを検証するには、Agent の[ステータスコマンド][19]を実行します。
+Run the Agent's [status command][19] to verify installation.
 
 ```shell
 sudo datadog-agent status
 ```
-インストールに成功すると、次のような Agent 情報で始まる Agent Status レポートが返されます。
+A successful installation returns an Agent Status report that begins with Agent information like this:
 
 ```text
 ===============
@@ -136,53 +136,53 @@ Agent (v7.36.1)
   Log Level: info
 ```
 
-#### イベント
+#### Events
 
-Datadog UI で [Events Explorer ページ][20]に移動します。Agent が起動または再起動されると、Agent は Datadog にイベントを送信します。Agent が正常にインストールされると、以下のメッセージが表示されます。
+In the Datadog UI, go to the [Events Explorer Page][20]. When an Agent is started or restarted, it sends events to Datadog. The following message displays if your Agent successfully installs:
 
 ```text
 Datadog agent (v. 7.XX.X) started on <Hostname>
 ```
 
-#### サービスチェック
+#### Service checks
 
-Agent は、以下のサービスチェックを行うように設定されています。
+The Agent is set up to provide the following service checks:
 
   - `datadog.agent.up`:
-    Agent が Datadog に接続した場合、`OK` を返します。
+    Returns `OK` if the Agent connects to Datadog.
 
   - `datadog.agent.check_status`:
-    Agent チェックが Datadog にメトリクスを送信できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
+    Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, otherwise returns `OK`.
 
-これらのチェックは、Datadog プラットフォームで使用することで、モニターやダッシュボードを通じて Agent のステータスを一目で視覚化することができます。詳しくは、[サービスチェックの概要][21]を参照してください。
+These checks can be used in the Datadog Platform to visualize the Agent status through monitors and dashboards at a quick glance. See [Service Check Overview][21] to learn more.
 
-#### メトリクス
+#### Metrics
 
-Datadog UI で、[Metrics Summary ページ][22]に移動し、メトリクス `datadog.agent.started` または メトリクス `datadog.agent.running` を検索してください。これらのメトリクスがすぐに表示されない場合、Agent が Datadog プラットフォームにデータを送信するのに数分かかることがあります。
+In the Datadog UI, go to the [Metrics Summary page][22] and search for the metric `datadog.agent.started` or the metric `datadog.agent.running`. If these metrics are not visible right away, it may take a few minutes for the Agent to send the data to the Datadog Platform.
 
-いずれかのメトリクスをクリックすると、Metric パネルが開きます。このパネルには、これらのメトリクスがどこから収集されたか、および関連するタグに関する追加のメタデータが表示されます。このチュートリアルでは今のところ、このホストにはタグが構成されていないため、`version` や `host` など、Datadog がメトリクスに割り当てるデフォルトのタグだけが表示されるはずです。タグを追加する方法については、次の Agent コンフィギュレーションファイルのセクションを参照してください。
+Click on either of the metrics and a Metric panel opens up. This panel shows additional metadata about where these metrics are collected from and any associated tags. Because so far in this walkthrough no tags are configured on this host, you should see only the default tags that Datadog assigns to the metrics including `version` and `host`. See the following section on Agent Configuration Files to learn more about how to add tags.
 
-`ntp.offset` や `system.cpu.idle` など、他のデフォルトメトリクスも調べてみてください。
+Explore other default metrics such as `ntp.offset` or `system.cpu.idle`.
 
-## Agent 構成ファイル
+## Agent configuration files
 
-Agent の主なコンフィギュレーションファイルは `datadog.yaml` です。必要なパラメーターは以下の通りです。
-- [Datadog API キー][16]。Agent のデータを組織と関連付けるために使用されます。
-- Datadog サイト ({{< region-param key="dd_site" code="true" >}})
+The Agent's main configuration file is `datadog.yaml`. The required parameters are:
+- your [Datadog API key][16], which is used to associate your Agent's data with your organization, and
+- the Datadog site ({{< region-param key="dd_site" code="true" >}}).
 
-使用可能なすべての構成オプションの詳細については、[サンプル `config_template.yaml` ファイル][23]を参照してください。
+See the [sample `config_template.yaml` file][23] for all available configuration options.
 
-Agent のコンフィギュレーションファイルを調整することで、タグを含む他の Datadog の機能を利用することができます。
+You can adjust the Agent configuration files to take advantage of other Datadog features including tags.
 
-#### Agent のコンフィギュレーションファイルによるタグの設定
+#### Setting tags through the Agent configuration file
 
-タグは、メトリクスとイベントにメタデータの追加レイヤーを追加します。これにより、Datadog の視覚化において、データのスコープと比較ができるようになります。複数のホストから Datadog にデータが送信された場合、この情報をタグ付けすることで、最も視覚化したいデータにスコープを絞ることができます。
+Tags add an additional layer of metadata to your metrics and events. They allow you to scope and compare your data in Datadog visualizations. When data is sent to Datadog from multiple hosts, tagging this information allows you to scope down to the data you are most interested in visualizing.
 
-例えば、異なるチームから収集したデータを持っていて、チーム・アルファのメトリクスだけを見たい場合、特定のホストに `team:alpha` または `team:bravo` タグを付けると、`team:alpha` タグが付いているメトリクスにフィルターがかかるようになります。タグ付けの詳細については、[タグの使用を開始する][24]を参照してください。
+For example, let's say you have data that is collected from different teams and you are only interested in seeing the metrics from team alpha, tagging those specific hosts with either the `team:alpha` or `team:bravo` tag gives you the ability to filter down to the metrics that are tagged with `team:alpha`. See [Getting Started with Tags][24] to learn more about tagging your data.
 
-1. Agent の[メインコンフィギュレーションファイル][25]を探します。Ubuntu の場合、ファイルの場所は `/etc/datadog-agent/datadog.yaml` です。
+1. Locate your Agent's [main configuration file][25]. For Ubuntu, the file locations is `/etc/datadog-agent/datadog.yaml`.
 
-2. `datadog.yaml` ファイルで、`tags` パラメーターを探します。ホストレベルのタグを `datadog.yaml` 構成で設定すると、このホストから転送される全てのメトリクス、トレース、ログにタグを適用することができます。
+2. In the `datadog.yaml` file, locate the `tags` parameter. Host level tags can be set in the `datadog.yaml` configuration to apply tags on all metrics, traces and logs forwarded from this host.
 
    ```yaml
    ## @param tags  - list of key:value elements - optional
@@ -200,7 +200,7 @@ Agent のコンフィギュレーションファイルを調整することで�
    #   - <TAG_KEY>:<TAG_VALUE>
    ```
 
-3. tags パラメーターと、例として提供されている `team:infra` タグのコメントを解除します。また、例えば `test:agent_walkthrough` のように、独自のタグを追加することもできます。
+3. Uncomment the tags parameter and the provided example `team:infra` tag. You can also add your own custom tag, for example `test:agent_walkthrough`.
    ```yaml
    ## @param tags  - list of key:value elements - optional
    ## @env DD_TAGS - space separated list of strings - optional
@@ -217,101 +217,101 @@ Agent のコンフィギュレーションファイルを調整することで�
       - test:agent_walkthrough
    ```
 
-4. Agent の [restart コマンド][26]を実行して、Agent を再起動します。Ubuntu の restart コマンド:
+4. Restart the Agent by running the Agent's [restart command][26]. The Ubuntu restart command:
 
    ```shell
    sudo service datadog-agent restart
    ```
 
-5. 数分後、再び [Metrics Summary ページ][22]に移動し、メトリクス `datadog.agent.started` をクリックします。デフォルトの `host` と `version` タグに加えて、`team` タグや追加した個人用タグも表示されます。また、ページ上部にある `Tag` フィールドでメトリクスをフィルターすることもできます。
+5. After a few minutes, go to the [Metrics Summary page][22] again, and click on the metric `datadog.agent.started`. In addition to the default `host` and `version` tags, you can also see the `team` tag and any personal tags you added. You can also filter metrics by the `Tag` field at the top of the page.
 
-6. [Events Explorer ページ][20]で、最新の Agent イベントとともに表示されるカスタムタグを見つけます。
+6. Go to the [Events Explorer page][20] and find the custom tags displayed with the latest Agent Event.
 
-#### その他の構成オプション
+#### Other configuration options
 
-[ログ][27]、[トレース][28]、[プロセス][29]のデータ収集は、Agent コンフィギュレーションファイルから有効にすることができます。これらは、デフォルトで有効になっている機能ではありません。例えば、コンフィギュレーションファイルで、`logs_enabled` パラメーターは false に設定されています。
+The collection of [logs][27], [traces][28], and [processes][29] data can be enabled through the Agent configuration file. These are not features that are enabled by default. For example, in the configuration file, the `logs_enabled` parameter is set to false.
 
 ```yaml
 ##################################
 ## Log collection Configuration ##
 ##################################
 
-## @param logs_enabled - ブール値 - オプション - デフォルト: false
-## @env DD_LOGS_ENABLED - ブール値 - オプション - デフォルト: false
-## logs_enabled を true に設定し、Datadog Agent のログ収集を有効にします。
+## @param logs_enabled - boolean - optional - default: false
+## @env DD_LOGS_ENABLED - boolean - optional - default: false
+## Enable Datadog Agent log collection by setting logs_enabled to true.
 #
 # logs_enabled: false
 ```
 
-Agent コンフィギュレーションファイルを通じて構成可能なその他の Datadog 機能は以下の通りです。
-- [OTLP トレース取り込み][30]を有効にする
-- [ログ収集のカスタマイズ][31]で機密データをフィルターまたはスクラブする
-- [DogStatsD][32] によるカスタムデータの構成
+Other Datadog features that can be configured through the Agent configuration file include:
+- Enabling [OTLP Trace Ingestion][30]
+- [Customizing log collection][31] to filter or scrub sensitive data
+- Configuring custom data through [DogStatsD][32]
 
-セットアップ中、ドキュメントが `datadog.yaml` ファイルまたは Agent コンフィギュレーションファイルに言及している場合、このファイルを構成する必要があります。
+Throughout your setup, when the documentation refers to the `datadog.yaml` file or the Agent configuration file, this is the file you need to configure.
 
-## コマンド
+## Commands
 
-Agent を[起動][34]、[停止][35] または [再起動][26]する方法については、[Agent のコマンド][33]を参照してください。
+See [Agent Commands][33] to [Start][34], [Stop][35] or [Restart][26] your Agent.
 
-## トラブルシューティング
+## Troubleshooting
 
-Agent のトラブルシューティングに関するヘルプ
+For help troubleshooting the Agent:
 
-- [Agent のトラブルシューティング][36]を参照してください。
-- [Agent のログファイル][37]を確認してください。
-- [Datadog のサポートチーム][38]までお問い合わせください。
+- See [Agent Troubleshooting][36]
+- View the [Agent Log Files][37]
+- Contact [Datadog support][38]
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <p>
 
-## 次のステップ
+## Next steps
 
-{{< whatsnext desc="Agent のインストール後:">}}
-{{< nextlink href="/getting_started/integrations" >}}インテグレーションについて{{< /nextlink >}}
-{{< nextlink href="/getting_started/application" >}}Datadog の UI について{{< /nextlink >}}
-{{< nextlink href="/getting_started/logs" >}}Agent によるログの収集方法について{{< /nextlink >}}
-{{< nextlink href="/getting_started/tracing" >}}Agent によるトレースの収集方法について{{< /nextlink >}}
+{{< whatsnext desc="After the Agent is installed:">}}
+{{< nextlink href="/getting_started/integrations" >}}Learn about Integrations{{< /nextlink >}}
+{{< nextlink href="/getting_started/application" >}}Learn about the Datadog UI{{< /nextlink >}}
+{{< nextlink href="/getting_started/logs" >}}Learn how to collect Logs through the Agent{{< /nextlink >}}
+{{< nextlink href="/getting_started/tracing" >}}Learn how to collect Traces through the Agent{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: https://github.com/DataDog/datadog-agent
-[2]: /ja/agent/basic_agent_usage/?tab=agentv6v7#agent-overhead
-[3]: /ja/integrations/agent_metrics/
-[4]: /ja/integrations/system/#metrics
-[5]: /ja/integrations/disk/#metrics
-[6]: /ja/integrations/network/#metrics
-[7]: /ja/integrations/ntp/#metrics
-[8]: /ja/agent/docker/data_collected/#metrics
-[9]: /ja/getting_started/integrations/
-[10]: /ja/agent/guide/environment-variables/#overview
-[11]: /ja/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
-[12]: /ja/agent/docker/?tab=standard
-[13]: /ja/agent/kubernetes/installation?tab=operator
-[14]: /ja/getting_started/agent/#checks
+[2]: /agent/basic_agent_usage/?tab=agentv6v7#agent-overhead
+[3]: /integrations/agent_metrics/
+[4]: /integrations/system/#metrics
+[5]: /integrations/disk/#metrics
+[6]: /integrations/network/#metrics
+[7]: /integrations/ntp/#metrics
+[8]: /agent/docker/data_collected/#metrics
+[9]: /getting_started/integrations/
+[10]: /agent/guide/environment-variables/#overview
+[11]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
+[12]: /agent/docker/?tab=standard
+[13]: /agent/kubernetes/installation?tab=operator
+[14]: /getting_started/agent/#checks
 [15]: https://www.datadoghq.com
 [16]: https://app.datadoghq.com/organization-settings/api-keys
-[17]: /ja/agent/basic_agent_usage/?tab=agentv6v7
+[17]: /agent/basic_agent_usage/?tab=agentv6v7
 [18]: https://app.datadoghq.com/account/settings/agent/latest
-[19]: /ja/agent/configuration/agent-commands/#agent-status-and-information
+[19]: /agent/configuration/agent-commands/#agent-status-and-information
 [20]: https://app.datadoghq.com/event/explorer
-[21]: /ja/developers/service_checks/#visualize-your-service-check-in-datadog
+[21]: /developers/service_checks/#visualize-your-service-check-in-datadog
 [22]: https://app.datadoghq.com/metric/summary
 [23]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[24]: /ja/getting_started/tagging/
-[25]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[26]: /ja/agent/configuration/agent-commands/#restart-the-agent
-[27]: /ja/logs/
-[28]: /ja/tracing/
-[29]: /ja/infrastructure/process/?tab=linuxwindows#introduction
-[30]: /ja/opentelemetry/otlp_ingest_in_the_agent/?tab=host
-[31]: /ja/agent/logs/advanced_log_collection/
-[32]: /ja/developers/dogstatsd/?tab=hostagent
-[33]: /ja/agent/configuration/agent-commands/
-[34]: /ja/agent/configuration/agent-commands/#start-the-agent
-[35]: /ja/agent/configuration/agent-commands/#stop-the-agent
-[36]: /ja/agent/troubleshooting/
-[37]: /ja/agent/configuration/agent-log-files/
-[38]: /ja/help/
+[24]: /getting_started/tagging/
+[25]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[26]: /agent/configuration/agent-commands/#restart-the-agent
+[27]: /logs/
+[28]: /tracing/
+[29]: /infrastructure/process/?tab=linuxwindows#introduction
+[30]: /opentelemetry/otlp_ingest_in_the_agent/?tab=host
+[31]: /agent/logs/advanced_log_collection/
+[32]: /developers/dogstatsd/?tab=hostagent
+[33]: /agent/configuration/agent-commands/
+[34]: /agent/configuration/agent-commands/#start-the-agent
+[35]: /agent/configuration/agent-commands/#stop-the-agent
+[36]: /agent/troubleshooting/
+[37]: /agent/configuration/agent-log-files/
+[38]: /help/

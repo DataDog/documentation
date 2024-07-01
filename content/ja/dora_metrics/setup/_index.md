@@ -1,35 +1,55 @@
 ---
+title: Set up DORA Metrics
+kind: documentation
 aliases:
-- /ja/continuous_integration/dora_metrics/setup/
-kind: ドキュメント
-title: DORA メトリクスのセットアップ
+- /continuous_integration/dora_metrics/setup/
+further_reading:
+- link: /dora_metrics/
+  tag: Documentation
+  text: Learn about DORA Metrics
 ---
 
-{{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-DORA メトリクスの非公開ベータ版は終了しました。キャンセル待ちリストに参加するには、以下のフォームにご記入ください。
-{{< /callout >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
 
-## 概要
+<div class="alert alert-warning">DORA Metrics is in public beta.</div>
 
-DevOps Research and Assessment (DORA) メトリクスは、ソフトウェア開発の速度と安定性を示すために使用される [4 つの主要なメトリクス][1]です。
+## Overview
 
-Deployment Frequency
-: 組織が本番環境へのリリースを成功させる頻度。
+The four DORA Metrics are calculated based on two types of events:
 
-Lead Time for Changes
-: コミットが本番稼動するまでの時間。
+- [**Deployment events**][8]: Indicate that a new deployment has occurred for a service in a specific environment. 
+- [**Incident events**][9]: Indicate that a new failure has occurred for a service in a specific environment.
 
-Change Failure Rate
-: デプロイメントによって本番環境で障害が発生した割合。
+Each event type supports different data sources.
 
-Time to Restore Service
-: 本番稼動中の障害から組織が回復するのにかかる時間。
+## Configure data sources
 
-DORA メトリクスを定義し追跡することで、チームや組織のソフトウェアデリバリのスピードと品質の改善点を特定することができます。
-
-{{< whatsnext desc="Datadog で DORA メトリクスをセットアップします。" >}}
-    {{< nextlink href="continuous_integration/dora_metrics/setup/deployments" >}}デプロイメントイベントの送信{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/dora_metrics/setup/incidents" >}}インシデントイベントの送信{{< /nextlink >}}
+### Deployments 
+{{< whatsnext desc="Deployment events are used to compute deployment frequency, change lead time, and change failure rate. See the respective documentation to set up a data source for your deployment events:" >}}
+  {{< nextlink href="/dora_metrics/deployments/apm" >}}APM Deployment Tracking{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/deployments/deployment_api" >}}Deployment Event API or datadog-ci CLI{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance
+### Failures
+{{< whatsnext desc="Failure events, interpreted through incident events, are used to compute change failure rate and mean time to restore. See the respective documentation to set up a data source for your failure events:">}}
+  {{< nextlink href="/dora_metrics/failures/pagerduty" >}}PagerDuty{{< /nextlink >}}
+  {{< nextlink href="/dora_metrics/failures/incident_api" >}}Incident Event API{{< /nextlink >}}
+{{< /whatsnext >}}
+
+## Limitations
+- When you first select a data source option (such as APM Deployment Tracking or PagerDuty), DORA Metrics begins populating data from that point forward. If you switch from source A to source B, then back to source A, the historical data from source A is only available from the time it was first selected. 
+- Deployments or incidents of the same service cannot occur at the same second.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[3]: /dora_metrics/
+[4]: /service_management/events/explorer/
+[5]: /api/latest/metrics/#query-timeseries-points
+[6]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
+[7]: /dora_metrics/data_collected/
+[8]: /dora_metrics/deployments/
+[9]: /dora_metrics/failures/

@@ -1,241 +1,241 @@
 ---
-aliases:
-- /ja/real_user_monitoring/roku/data_collected/
+title: RUM Roku Data Collected
+kind: documentation
 code_lang: roku
-code_lang_weight: 50
-further_reading:
-- link: https://github.com/DataDog/dd-sdk-roku
-  tag: GitHub
-  text: dd-sdk-roku ソースコード
-- link: /real_user_monitoring
-  tag: ドキュメント
-  text: Datadog RUM を探索する
-kind: ドキュメント
-title: RUM Roku データ収集
 type: multi-code-lang
+code_lang_weight: 50
+aliases:
+- /real_user_monitoring/roku/data_collected/
+further_reading:
+- link: "https://github.com/DataDog/dd-sdk-roku"
+  tag: Source Code
+  text: Source code for dd-sdk-roku
+- link: /real_user_monitoring
+  tag: Documentation
+  text: Explore Datadog RUM
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">RUM for Roku は、US1-FED Datadog サイトではご利用いただけません。</div>
+<div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
-## 概要
+## Overview
 
-RUM Roku SDK は、メトリクスと属性が関連付けられたイベントを生成します。メトリクスとは、イベント関連の計測に使用される定量化可能な値のことです。属性は、分析でメトリクスデータをスライス（グループ化）するために使用する定量化できない値です。
+The RUM Roku SDK generates events that have associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics. 
 
-RUM SDK は、メトリクスと属性が関連付けられたイベントを生成します。すべての RUM イベントには、すべての[デフォルト属性](#default-attributes)があります。例: デバイスタイプ (`device.type`)、名前 (`usr.name`) や 国 (`geo.country`) などのユーザー情報。
+Every RUM event has all of the [default attributes](#default-attributes), for example, the device type (`device.type`) and user information such as their name (`usr.name`) and their country (`geo.country`). 
 
-追加の[特定のイベントタイプに固有のメトリクスと属性](#event-specific-metrics-and-attributes)があります。たとえば、メトリクス `view.time_spent` は "view" イベントに関連付けられ、属性 `resource.method` は "resource" イベントに関連付けられます。
+There are additional [metrics and attributes that are specific to a given event type](#event-specific-metrics-and-attributes). For example, the metric `view.time_spent` is associated with "view" events and the attribute `resource.method` is associated with "resource" events. 
 
-| イベントタイプ | 保持 | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Event Type | Retention | Description                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ---------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| セッション    | 30 日   | セッションは、Roku チャンネルでの実際のユーザージャーニーを表します。セッションはユーザーがチャンネルを起動したときに開始され、ユーザーがアクティブである限りライブのままになります。ユーザージャーニー中、セッションの一部として生成されたすべての RUM イベントは、同じ `session.id` 属性を共有します。**注:** セッションは、15 分間操作されないとリセットされます。チャンネルがクラッシュするか Roku OS によって強制終了された場合、セッションがリセットされます。 |
-| ビュー       | 30 日   | ビューは、Roku チャンネルのユニークな画面 (または画面セグメント) を表します。ビューは `startView` 関数を呼び出したときに開始し、新しいビューが開始されたときに停止します。それぞれの発生は、個別のビューとして分類されます。ユーザーがビューに滞在している間、RUM イベント属性 (エラー、リソース、アクション) は、一意の `view.id` を持つビューにアタッチされます。                                                                               |
-| Resource   | 15 日   | リソースとは、Roku チャンネルのファーストパーティホスト、API、サードパーティプロバイダーへのネットワークリクエストのことです。ユーザーセッション中に生成されるすべてのリクエストは、一意の `resource.id` と共にビューにアタッチされます。                                                                                                                                                                                                                        |
-| Error      | 30 日   | エラーとは、Roku チャンネルにより送信される例外またはクラッシュで、それが生成されたビューにアタッチされます。                                                                                                                                                                                                                                                                                                                               |
-| アクション     | 30 日   | アクションとは、Roku チャンネルでのユーザーアクティビティ (リモートクリックなど) のことです。各アクションは、一意の `action.id` と共に、それが生成されたビューにアタッチされます。                                                                                                                                                                                                                                                               |
-| ロングタスク  | 15 日   | ロングタスクイベントは、指定された閾値以上の期間メインスレッドをブロックするアプリケーション内のすべてのタスクに対して生成されます。                                                                                                                                                                                                                                                                                                   |
+| Session    | 30 days   | A session represents a real user journey on your Roku channel. It begins when the user launches the channel, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session will share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the channel crashes or is killed by the Roku OS, it will reset the session. |
+| View       | 30 days   | A view represents a unique screen (or screen segment) on your Roku channel. A view starts when you call the `startView` function and stops when a new view is started. Each occurrence is classified as a distinct view. While a user stays on a view, RUM event attributes (Errors, Resources, and Actions) get attached to the view with a unique `view.id`.                                                                               |
+| Resource   | 15 days   | A resource represents network requests to first-party hosts, APIs, and third-party providers in your Roku channel. All requests generated during a user session are attached to the view with a unique `resource.id`.                                                                                                                                                                                                                        |
+| Error      | 30 days   | An error represents an exception or crash emitted by the Roku channel attached to the view it is generated in.                                                                                                                                                                                                                                                                                                                               |
+| Action     | 30 days   | An action represents user activity in your Roku channel (such as a remote click). Each action is attached with a unique `action.id` attached to the view it gets generated in.                                                                                                                                                                                                                                                               |
+| Long Task  | 15 days   | A long task event is generated for any task in the application that blocks the main thread for more than the specified duration threshold.                                                                                                                                                                                                                                                                                                   |
 
-次の図は、RUM イベント階層を示しています。
+The following diagram illustrates the RUM event hierarchy:
 
-{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM イベント階層" style="width:50%;" >}}
+{{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;" >}}
 
-## デフォルト属性
+## Default attributes
 
-RUM は、すべてのイベントに共通の属性および以下に挙げたイベントに特定の属性を自動的に収集します。また、[追加のイベント][2]を追跡またはアプリケーションの監視やビジネス分析のニーズに合わせてデフォルトのイベントに[カスタム属性を追加][2]することで、ユーザーセッションデータを強化することも可能です。
+RUM collects common attributes for all events and attributes specific to each event listed below automatically. You can also choose to enrich your user session data by tracking [additional events][2] or by [adding custom attributes][2] to default events specific to your application monitoring and business analytics needs.
 
-### 共通のコア属性
+### Common core attributes
 
-| 属性名   | タイプ    | 説明                                                                         |
+| Attribute name   | Type    | Description                                                                         |
 | ---------------- | ------- | ----------------------------------------------------------------------------------- |
-| `date`           | 整数 | Epoch からのイベント開始時間 (ミリ秒)                                      |
-| `type`           | 文字列  | イベントのタイプ (`view` や `resource` など)。                          |
-| `service`        | 文字列  | ユーザーセッションを関連付けるために使用した、このアプリケーションの[統合サービス名][4]。 |
-| `application.id` | 文字列  | Datadog アプリケーション ID。                                                         |
+| `date`           | integer | Start of the event in milliseconds from epoch.                                      |
+| `type`           | string  | The type of the event (for example, `view` or `resource`).                          |
+| `service`        | string  | The [unified service name][4] for this application used to correlate user sessions. |
+| `application.id` | string  | The Datadog application ID.                                                         |
 
-### デバイス
+### Device
 
-以下のデバイス関連属性は、Datadog により収集されるすべてのイベントに自動的にアタッチされます。
+The following device-related attributes are attached automatically to all events collected by Datadog:
 
-| 属性名                       | タイプ   | 説明                                                                                             |
+| Attribute name                       | Type   | Description                                                                                             |
 | ------------------------------------ | ------ | ------------------------------------------------------------------------------------------------------- |
-| `device.type`                        | 文字列 | デバイスにより報告されたデバイスタイプ (System User-Agent)。                                          |
-| `device.brand`                       | 文字列 | デバイスにより報告されたデバイスのブランド (System User-Agent)。                                         |
-| `device.model`                       | 文字列 | デバイスにより報告されたデバイスモデル (System User-Agent)。                                         |
-| `device.name`                        | 文字列 | デバイスにより報告されたデバイス名 (System User-Agent)。                                          |
+| `device.type`                        | string | The device type as reported by the device (System User-Agent).                                          |
+| `device.brand`                       | string | The device brand as reported by the device (System User-Agent).                                         |
+| `device.model`                       | string | The device model as reported by the device (System User-Agent).                                         |
+| `device.name`                        | string | The device name as reported by the device (System User-Agent).                                          |
 
 
-### オペレーティングシステム
+### Operating system
 
-以下の OS 関連属性は、Datadog により収集されるすべてのイベントに自動的にアタッチされます。
+The following OS-related attributes are attached automatically to all events collected by Datadog:
 
-| 属性名     | タイプ   | 説明                                                         |
+| Attribute name     | Type   | Description                                                         |
 | ------------------ | ------ | ------------------------------------------------------------------- |
-| `os.name`          | 文字列 | デバイスにより報告された OS 名 (System User-Agent)。          |
-| `os.version`       | 文字列 | デバイスにより報告される OS バージョン (System User-Agent)。       |
-| `os.version_major` | 文字列 | デバイスにより報告される OS バージョンメジャー (System User-Agent)。 |
+| `os.name`          | string | The OS name as reported by the device (System User-Agent).          |
+| `os.version`       | string | The OS version as reported by the device (System User-Agent).       |
+| `os.version_major` | string | The OS version major as reported by the device (System User-Agent). |
 
 
-### 地理的位置
+### Geo-location
 
-以下の属性は、IP アドレスの地理的位置に関連しています。
+The below attributes are related to the geo-location of IP addresses.
 
-**注:** 地理的位置の属性収集を停止したい場合は、[アプリケーションの詳細][9]で設定を変更してください。
+**Note:** If you want to stop collecting geo-location attributes, change the setting in your [application details][9].
 
-| 完全名                  | タイプ   | 説明                                                                                                                               |
+| Fullname                  | Type   | Description                                                                                                                               |
 | :------------------------ | :----- | :---------------------------------------------------------------------------------------------------------------------------------------- |
-| `geo.country`             | 文字列 | 国名。                                                                                                                      |
-| `geo.country_iso_code`    | 文字列 | 国の ISO コード (米国は `US`、フランスは `FR` など)。                                                     |
-| `geo.country_subdivision` | 文字列 | その国で最大規模の地方区分 (米国は `California` 州、フランスは `Sarthe` 県など)。 |
-| `geo.continent_code`      | 文字列 | 大陸の ISO コード (`EU`、`AS`、`NA`、`AF`、`AN`、`SA`、または `OC`)。                                                                  |
-| `geo.continent`           | 文字列 | 大陸名 (`Europe`、`Australia`、`North America`、`Africa`、`Antarctica`、`South America`、または `Oceania`)。                    |
-| `geo.city`                | 文字列 | 都市名 (`San Francisco`、`Paris`、`New York` など)。                                                              |
+| `geo.country`             | string | Name of the country.                                                                                                                      |
+| `geo.country_iso_code`    | string | ISO Code of the country (for example, `US` for the United States or `FR` for France).                                                     |
+| `geo.country_subdivision` | string | Name of the first subdivision level of the country (for example, `California` in the United States or the `Sarthe` department in France). |
+| `geo.continent_code`      | string | ISO code of the continent (`EU`, `AS`, `NA`, `AF`, `AN`, `SA`, or `OC`).                                                                  |
+| `geo.continent`           | string | Name of the continent (`Europe`, `Australia`, `North America`, `Africa`, `Antarctica`, `South America`, or `Oceania`).                    |
+| `geo.city`                | string | The name of the city (for example, `San Francisco`, `Paris`, or `New York`).                                                              |
 
 
-### グローバルユーザー属性
+### Global user attributes
 
-[ユーザー情報の追跡][5]をグローバルに有効にして、ユーザー属性を収集しすべての RUM イベントに適用できます。
+You can enable [tracking user info][5] globally to collect and apply user attributes to all RUM events.
 
-| 属性名 | タイプ   | 説明             |
+| Attribute name | Type   | Description             |
 | -------------- | ------ | ----------------------- |
-| `user.id`      | 文字列 | ユーザーの識別子。 |
-| `usr.name`     | 文字列 | ユーザーの名前。       |
-| `usr.email`    | 文字列 | ユーザーのメールアドレス。      |
+| `user.id`      | string | Identifier of the user. |
+| `usr.name`     | string | Name of the user.       |
+| `usr.email`    | string | Email of the user.      |
 
 
-## イベント固有のメトリクスと属性
+## Event-specific metrics and attributes 
 
-メトリクスとは、イベント関連の計測に使用される定量化可能な値のことです。属性は、分析でメトリクスデータをスライス（グループ化）するために使用する定量化できない値です。
+Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics. 
 
-### セッションメトリクス
+### Session metrics
 
-| エラー予算アラート                    | タイプ        | 説明                                         |
+| Metric                    | Type        | Description                                         |
 | ------------------------- | ----------- | --------------------------------------------------- |
-| `session.time_spent`      | 数値 (ns) | セッションに費やされた時間。                            |
-| `session.view.count`      | 数値      | このセッションで収集されたすべてのビューの数。      |
-| `session.error.count`     | 数値      | このセッションで収集されたすべてのエラーの数。     |
-| `session.resource.count`  | 数値      | このセッションで収集されたすべてのリソースの数。  |
-| `session.action.count`    | 数値      | このセッションで収集されたすべてのアクションの数。    |
-| `session.long_task.count` | 数値      | このセッションで収集されたすべてのロングタスクの数。 |
+| `session.time_spent`      | number (ns) | Time spent on a session.                            |
+| `session.view.count`      | number      | Count of all views collected for this session.      |
+| `session.error.count`     | number      | Count of all errors collected for this session.     |
+| `session.resource.count`  | number      | Count of all resources collected for this session.  |
+| `session.action.count`    | number      | Count of all actions collected for this session.    |
+| `session.long_task.count` | number      | Count of all long tasks collected for this session. |
 
-### セッション属性
+### Session attributes
 
-| 属性名              | タイプ    | 説明                                                                                                                                                                                                   |
+| Attribute name              | Type    | Description                                                                                                                                                                                                   |
 | --------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `session.id`                | 文字列  | セッションのユニーク ID。                                                                                                                                                                                     |
-| `session.type`              | 文字列  | セッションのタイプ (`user`)。                                                                                                                                                                                 |
-| `session.is_active`         | ブール値 | セッションが現在アクティブであるかどうかを示します。セッションは、ユーザーがアプリケーションから移動したり、ブラウザウィンドウを閉じたりすると終了し、4 時間の活動または 15 分の非活動時間が経過すると失効します。 |
-| `session.initial_view.url`  | 文字列  | セッションの初期ビューの URL。                                                                                                                                                                       |
-| `session.initial_view.name` | 文字列  | セッションの初期ビューの名前。                                                                                                                                                                      |
-| `session.last_view.url`     | 文字列  | セッションの最後のビューの URL。                                                                                                                                                                          |
-| `session.last_view.name`    | 文字列  | セッションの最後のビューの名前。                                                                                                                                                                         |
-| `session.ip`                | 文字列  | インテークの TCP 接続から抽出されたセッションの IP アドレス。この属性の収集を停止したい場合は、[アプリケーションの詳細][8]で設定を変更してください。                                |
-| `session.useragent`         | 文字列  | デバイスの情報を解釈するためのシステムユーザーエージェントの情報。                                                                                                                                                              |
+| `session.id`                | string  | Unique ID of the session.                                                                                                                                                                                     |
+| `session.type`              | string  | Type of the session (`user`).                                                                                                                                                                                 |
+| `session.is_active`         | boolean | Indicates if the session is currently active. The session ends if a user navigates away from the application or closes the browser window, and expires after 4 hours of activity or 15 minutes of inactivity. |
+| `session.initial_view.url`  | string  | URL of the initial view of the session.                                                                                                                                                                       |
+| `session.initial_view.name` | string  | Name of the initial view of the session.                                                                                                                                                                      |
+| `session.last_view.url`     | string  | URL of the last view of the session.                                                                                                                                                                          |
+| `session.last_view.name`    | string  | Name of the last view of the session.                                                                                                                                                                         |
+| `session.ip`                | string  | IP address of the session extracted from the TCP connection of the intake. If you want to stop collecting this attribute, change the setting in your [application details][8].                                |
+| `session.useragent`         | string  | System user agent info to interpret device info.                                                                                                                                                              |
 
-### ビューのメトリクス
+### View metrics
 
-RUM アクション、エラー、リソース、ロングタスクのイベントには、収集時のアクティブな RUM ビューイベントに関する情報が含まれています。
+RUM action, error, resource, and long task events contain information about the active RUM view event at the time of collection.
 
 
-| エラー予算アラート                 | タイプ        | 説明                                                                  |
+| Metric                 | Type        | Description                                                                  |
 | ---------------------- | ----------- | ---------------------------------------------------------------------------- |
-| `view.time_spent`      | 数値 (ns) | このビューに費やされた時間。                                                     |
-| `view.long_task.count` | 数値      | このビューについて収集されたすべてのロングタスクの数。                             |
-| `view.error.count`     | 数値      | このビューについて収集されたすべてのエラーの数。                                 |
-| `view.resource.count`  | 数値      | このビューについて収集されたすべてのリソースの数。                              |
-| `view.action.count`    | 数値      | このビューについて収集されたすべてのアクションの数。                                |
-| `view.is_active`       | ブール値     | このイベントに対応するビューがアクティブであるとみなされるかどうかを示します。 |
+| `view.time_spent`      | number (ns) | Time spent on this view.                                                     |
+| `view.long_task.count` | number      | Count of all long tasks collected for this view.                             |
+| `view.error.count`     | number      | Count of all errors collected for this view.                                 |
+| `view.resource.count`  | number      | Count of all resources collected for this view.                              |
+| `view.action.count`    | number      | Count of all actions collected for this view.                                |
+| `view.is_active`       | boolean     | Indicates whether the view corresponding to this event is considered active. |
 
-### ビューの属性
+### View attributes      
 
-| 属性名 | タイプ   | 説明                                               |
+| Attribute name | Type   | Description                                               |
 | -------------- | ------ | --------------------------------------------------------- |
-| `view.id`      | 文字列 | イベントに対応する初期ビューのユニーク ID。 |
-| `view.url`     | 文字列 | イベントに対応するクラスの正規の名前。   |
-| `view.name`    | 文字列 | イベントに対応する、カスタマイズ可能なビューの名前。 |
+| `view.id`      | string | Unique ID of the initial view corresponding to the event. |
+| `view.url`     | string | Canonical name of the class corresponding to the event.   |
+| `view.name`    | string | Customizable name of the view corresponding to the event. |
 
-### リソースのメトリクス
+### Resource metrics
 
 
-| エラー予算アラート                         | タイプ           | 説明                                                                                                                                |
+| Metric                         | Type           | Description                                                                                                                                |
 | ------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `duration`                     | 数値 (ns)    | リソースのロードにかかった全時間。                                                                                                    |
-| `resource.size`                | 数値（バイト） | リソースのサイズ。                                                                                                                             |
-| `resource.connect.duration`    | 数値 (ns)    | サーバーへの接続が確立されるまでにかかった時間 (connectEnd - connectStart)。                                                            |
-| `resource.ssl.duration`        | 数値 (ns)    | TLS ハンドシェイクにかかった時間。最後のリクエストが HTTPS 経由ではなかった場合、このメトリクスは収集されません (connectEnd - secureConnectionStart)。 |
-| `resource.dns.duration`        | 数値 (ns)    | 最後のリクエストの DNS 名が解決されるまでにかかった時間 (domainLookupEnd - domainLookupStart)。                                               |
-| `resource.redirect.duration`   | 数値 (ns)    | 後続の HTTP リクエストにかかった時間 (redirectEnd - redirectStart)。                                                                      |
-| `resource.first_byte.duration` | 数値 (ns)    | 応答の最初のバイトを受信するまでにかかった時間 (responseStart - RequestStart)。                                           |
-| `resource.download.duration`   | 数値 (ns)    | 応答のダウンロードにかかった時間 (responseEnd - responseStart)。                                                                         |
+| `duration`                     | number (ns)    | Entire time spent loading the resource.                                                                                                    |
+| `resource.size`                | number (bytes) | Resource size.                                                                                                                             |
+| `resource.connect.duration`    | number (ns)    | Time spent establishing a connection to the server (connectEnd - connectStart).                                                            |
+| `resource.ssl.duration`        | number (ns)    | Time spent for the TLS handshake. If the last request is not over HTTPS, this metric does not appear (connectEnd - secureConnectionStart). |
+| `resource.dns.duration`        | number (ns)    | Time spent resolving the DNS name of the last request (domainLookupEnd - domainLookupStart).                                               |
+| `resource.redirect.duration`   | number (ns)    | Time spent on subsequent HTTP requests (redirectEnd - redirectStart).                                                                      |
+| `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - RequestStart).                                           |
+| `resource.download.duration`   | number (ns)    | Time spent downloading the response (responseEnd - responseStart).                                                                         |
 
-### リソースの属性
+### Resource attributes
 
-| 属性                  | タイプ   | 説明                                                                                 |
+| Attribute                  | Type   | Description                                                                                 |
 | -------------------------- | ------ | ------------------------------------------------------------------------------------------- |
-| `resource.id`              | 文字列 | リソースの一意の識別子。                                                          |
-| `resource.type`            | 文字列 | 収集されるリソースのタイプ (`xhr`、`image`、`font`、`css`、または `js` など)。 |
-| `resource.method`          | 文字列 | HTTP メソッド (`POST`、`GET` `PATCH`、または `DELETE` など)。                         |
-| `resource.status_code`     | 数値 | 応答ステータスコード。                                                                   |
-| `resource.url`             | 文字列 | リソースの URL。                                                                           |
-| `resource.provider.name`   | 文字列 | リソースプロバイダー名。デフォルトは `unknown` となります。                                           |
-| `resource.provider.domain` | 文字列 | リソースプロバイダーのドメイン。                                                               |
-| `resource.provider.type`   | 文字列 | リソースプロバイダーのタイプ (`first-party`、`cdn`、`ad`、または `analytics` など)。       |
+| `resource.id`              | string | Unique identifier of the resource.                                                          |
+| `resource.type`            | string | The type of resource being collected (for example, `xhr`, `image`, `font`, `css`, or `js`). |
+| `resource.method`          | string | The HTTP method (for example, `POST`, `GET`, `PATCH`, or `DELETE`).                         |
+| `resource.status_code`     | number | The response status code.                                                                   |
+| `resource.url`             | string | The resource URL.                                                                           |
+| `resource.provider.name`   | string | The resource provider name. Default is `unknown`.                                           |
+| `resource.provider.domain` | string | The resource provider domain.                                                               |
+| `resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).       |
 
-### エラー属性
+### Error attributes
 
-フロントエンドのエラーはリアルユーザーモニタリング (RUM) で収集されます。エラーメッセージとスタックトレースが利用できる場合は含まれます。
+Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
-| 属性        | タイプ   | 説明                                                                       |
+| Attribute        | Type   | Description                                                                       |
 | ---------------- | ------ | --------------------------------------------------------------------------------- |
-| `error.source`   | 文字列 | エラーの発生元 (`webview`、`logger`、`network` など)。 |
-| `error.type`     | 文字列 | エラーのタイプ (場合によってはエラーコード)。                                     |
-| `error.message`  | 文字列 | イベントについて簡潔にわかりやすく説明する 1 行メッセージ。                  |
-| `error.stack`    | 文字列 | スタックトレースまたはエラーに関する補足情報。                     |
-| `error.issue_id` | 文字列 | スタックトレースまたはエラーに関する補足情報。                     |
+| `error.source`   | string | Where the error originates from (for example, `webview`, `logger`, or `network`). |
+| `error.type`     | string | The error type (or error code in some cases).                                     |
+| `error.message`  | string | A concise, human-readable one-line message explaining the event.                  |
+| `error.stack`    | string | The stack trace or complementary information about the error.                     |
+| `error.issue_id` | string | The stack trace or complementary information about the error.                     |
 
 
-### ネットワークエラー
+### Network errors 
 
-ネットワークエラーには失敗した HTTP リクエストに関する情報が含まれます。次のファセットも収集されます。
+Network errors include information about failing HTTP requests. The following facets are also collected:
 
-| 属性                        | タイプ   | 説明                                                                           |
+| Attribute                        | Type   | Description                                                                           |
 | -------------------------------- | ------ | ------------------------------------------------------------------------------------- |
-| `error.resource.status_code`     | 数値 | 応答ステータスコード。                                                             |
-| `error.resource.method`          | 文字列 | HTTP メソッド (`POST` または `GET` など)。                                       |
-| `error.resource.url`             | 文字列 | リソースの URL。                                                                     |
-| `error.resource.provider.name`   | 文字列 | リソースプロバイダー名。デフォルトは `unknown` となります。                                     |
-| `error.resource.provider.domain` | 文字列 | リソースプロバイダーのドメイン。                                                         |
-| `error.resource.provider.type`   | 文字列 | リソースプロバイダーのタイプ (`first-party`、`cdn`、`ad`、または `analytics` など)。 |
+| `error.resource.status_code`     | number | The response status code.                                                             |
+| `error.resource.method`          | string | The HTTP method (for example, `POST` or `GET`).                                       |
+| `error.resource.url`             | string | The resource URL.                                                                     |
+| `error.resource.provider.name`   | string | The resource provider name. Default is `unknown`.                                     |
+| `error.resource.provider.domain` | string | The resource provider domain.                                                         |
+| `error.resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`). |
 
-### アクションタイミングメトリクス
+### Action timing metrics
 
-| エラー予算アラート                   | タイプ        | 説明                                        |
+| Metric                   | Type        | Description                                        |
 | ------------------------ | ----------- | -------------------------------------------------- |
-| `action.loading_time`    | 数値 (ns) | アクションのロード時間。                    |
-| `action.long_task.count` | 数値      | このアクションについて収集されたすべてのロングタスクの数。 |
-| `action.resource.count`  | 数値      | このアクションについて収集されたすべてのリソースの数。  |
-| `action.error.count`     | 数値      | このアクションについて収集されたすべてのエラーの数。     |
+| `action.loading_time`    | number (ns) | The loading time of the action.                    |
+| `action.long_task.count` | number      | Count of all long tasks collected for this action. |
+| `action.resource.count`  | number      | Count of all resources collected for this action.  |
+| `action.error.count`     | number      | Count of all errors collected for this action.     |
 
-### アクションの属性
+### Action attributes
 
-| 属性            | タイプ   | 説明                                                                      |
+| Attribute            | Type   | Description                                                                      |
 | -------------------- | ------ | -------------------------------------------------------------------------------- |
-| `action.id`          | 文字列 | ユーザーアクションの UUID。                                                         |
-| `action.type`        | 文字列 | ユーザーアクションのタイプ (`tap` または `application_start` など)。             |
-| `action.name`        | 文字列 | ユーザーアクションの名前。                                                         |
-| `action.target.name` | 文字列 | ユーザーが操作したエレメント。自動収集されたアクションのみ対象。 |
+| `action.id`          | string | UUID of the user action.                                                         |
+| `action.type`        | string | Type of the user action (for example, `tap` or `application_start`).             |
+| `action.name`        | string | Name of the user action.                                                         |
+| `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 
-## データストレージ
+## Data Storage
 
-データが Datadog にアップロードされる前に、チャンネルの[キャッシュディレクトリ][6]に平文で保存され、このデータは他のアプリケーションでは読めないことを意味します。なお、OS はいつでもデータを退避させることができるため、稀にデータ損失が発生する可能性があります。
+Before data is uploaded to Datadog, it is stored in cleartext in your channel's [cache directory][6], meaning that this data can't be read by other applications. Note that the OS can evict the data at any time, which could result in data loss in some rare cases. 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
-[4]: /ja/getting_started/tagging/unified_service_tagging/
-[5]: /ja/real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#identifying-your-users
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
+[4]: /getting_started/tagging/unified_service_tagging/
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#identifying-your-users
 [6]: https://developer.roku.com/fr-fr/docs/developer-program/getting-started/architecture/file-system.md#cachefs
-[8]: /ja/data_security/real_user_monitoring/#ip-address
-[9]: /ja/data_security/real_user_monitoring/#geolocation
+[8]: /data_security/real_user_monitoring/#ip-address
+[9]: /data_security/real_user_monitoring/#geolocation

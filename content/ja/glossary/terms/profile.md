@@ -1,6 +1,6 @@
 ---
+title: profile
 core_product:
-- code profiling
-title: プロファイル
+  - continuous profiler
 ---
-プロファイルとは、コードによる作業量 (CPU 使用量、メモリ使用量) の時間的なスナップショットです。
+A profile is snapshot in time of how much work (CPU usage, memory usage) is being done by code.

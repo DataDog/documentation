@@ -1,63 +1,64 @@
 ---
-categories:
-- azure
-- cloud
-- iot
-- provisioning
-dependencies: []
-description: Azure IOT Hub のキーメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/azure_iot_hub/
-draft: false
-git_integration_title: azure_iot_hub
-has_logo: true
-integration_id: azure-iot-hub
-integration_title: Microsoft Azure IOT Hub
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_iot_hub
-public_title: Datadog-Microsoft Azure IOT Hub インテグレーション
-short_description: Azure IOT Hub のキーメトリクスを追跡。
-version: '1.0'
+"categories":
+- "azure"
+- "cloud"
+- "iot"
+- "provisioning"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure IOT Hub metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_iot_hub/"
+"draft": false
+"git_integration_title": "azure_iot_hub"
+"has_logo": true
+"integration_id": "azure-iot-hub"
+"integration_title": "Microsoft Azure IOT Hub"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_iot_hub"
+"public_title": "Datadog-Microsoft Azure IOT Hub Integration"
+"short_description": "Track key Azure IOT Hub metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure IOT Hub は、多数の IoT デバイス間で信頼性が高くて安全な双方向通信を可能にするフルマネージド型のサービスです。
+Azure IOT Hub is a fully managed service that enables reliable and secure bidirectional communications between millions of IoT devices.
 
-Azure IOT Hub からメトリクスを取得すると、以下のことができます。
+Get metrics from Azure IOT Hub to:
 
-- IOT Hub のパフォーマンスを視覚化。
-- IOT Hub のパフォーマンスをアプリケーションと関連付け。
+- Visualize the performance of your IOT Hubs.
+- Correlate the performance of your IOT Hubs with your applications.
 
-Azure Provisioning Service は、IoT Hub 向けのヘルパーサービスです。人間が介入することなく、適切な IoT ハブへのゼロタッチ、ジャストインタイムプロビジョニングを可能にします。顧客は、多数のデバイスを安全かつスケーラブルな方法でプロビジョニングできます。
+Azure Provisioning Service is a helper service for IoT Hub that enables zero-touch, just-in-time provisioning to the right IoT hub without requiring human intervention, allowing customers to provision millions of devices in a secure and scalable manner.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration first][1]. There are no other installation steps that need to be performed.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_iot_hub" >}}
 
 
-### ヘルプ
+### Events
 
-Azure IoT Hub インテグレーションには、イベントは含まれません。
+The Azure IoT Hub integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure IoT Hub インテグレーションには、サービスのチェック機能は含まれません。
+The Azure IoT Hub integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_iot_hub/azure_iot_hub_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

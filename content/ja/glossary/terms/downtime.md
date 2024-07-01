@@ -1,9 +1,9 @@
 ---
+title: downtime
 core_product:
-- alerts
-- slos
-- incident management
-title: ダウンタイム
+  - alerts
+  - slos
+  - incident management
 ---
-ダウンタイムとは、モニターのアラートと通知を停止させるスケジュールされた時間です。
-詳細は、<a href="/monitors/downtimes">ドキュメントを参照してください</a>。
+Downtimes are scheduled periods during which monitors' alerts and notifications are silenced.
+For more information, <a href="/monitors/downtimes">see the documentation</a>.

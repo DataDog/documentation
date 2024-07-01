@@ -1,111 +1,112 @@
 ---
-categories:
-- 自動化
+"categories":
+- automation
 - aws
-- クラウド
-- ログの収集
+- cloud
+- log collection
 - ai/ml
-dependencies: []
-description: Amazon SageMaker のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_sagemaker/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/monitor-cloudhealth-assets-datadog/
-  tag: ブログ
-  text: 'CloudHealth + Datadog: クラウドアセットを効果的に管理'
-git_integration_title: amazon_sagemaker
-has_logo: true
-integration_id: ''
-integration_title: Amazon SageMaker
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_sagemaker
-public_title: Datadog-Amazon SageMaker インテグレーション
-short_description: Amazon SageMaker のキーメトリクスを追跡
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Amazon SageMaker metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_sagemaker/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/monitor-cloudhealth-assets-datadog/"
+  "tag": Blog
+  "text": "CloudHealth + Datadog: Effectively manage your cloud assets"
+"git_integration_title": "amazon_sagemaker"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Amazon SageMaker"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_sagemaker"
+"public_title": "Datadog-Amazon SageMaker Integration"
+"short_description": "Track key Amazon SageMaker metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Amazon SageMaker は、フルマネージド型の機械学習サービスです。Amazon SageMaker を使用して、データサイエンティストや開発者は、機械学習モデルを構築およびトレーニングした後に、実稼働準備ができたホスト環境にモデルを直接デプロイすることができます。
+Amazon SageMaker is a fully managed machine learning service. With Amazon SageMaker, data scientists and developers can build and train machine learning models, and then directly deploy them into a production-ready hosted environment.
 
-このインテグレーションを有効にすると、Datadog にすべての SageMaker メトリクスを表示できます。
+Enable this integration to see all your SageMaker metrics in Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][1] first.
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `SageMaker` が有効になっていることを確認します。
-2. [Datadog - Amazon SageMaker インテグレーション][3]をインストールします。
+1. In the [AWS integration page][2], ensure that `SageMaker` is enabled under the `Metric Collection` tab.
+2. Install the [Datadog - Amazon SageMaker integration][3].
 
-### 収集データ
+### Log collection
 
-#### ログの有効化
+#### Enable logging
 
-Amazon SageMaker から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+Configure Amazon SageMaker to send logs either to a S3 bucket or to CloudWatch.
 
-**注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_sagemaker` に設定されているかを確認してください。
+**Note**: If you log to a S3 bucket, make sure that `amazon_sagemaker` is set as _Target prefix_.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
-2. lambda 関数がインストールされたら、AWS コンソールから、Amazon SageMaker ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. If you haven’t already, set up the [Datadog log collection AWS Lambda function][4].
+2. Once the lambda function is installed, manually add a trigger on the S3 bucket or CloudWatch log group that contains your Amazon SageMaker logs in the AWS console:
 
-    - [S3 バケットに手動トリガーを追加][5]
-    - [CloudWatch ロググループに手動トリガーを追加][6]
+    - [Add a manual trigger on the S3 bucket][5]
+    - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_sagemaker" >}}
 
 
-### ヘルプ
+### Events
 
-Amazon SageMaker インテグレーションには、イベントは含まれません。
+The Amazon SageMaker integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Amazon SageMaker インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon SageMaker integration does not include any service checks.
 
-## すぐに使える監視
+## Out-of-the-box monitoring
 
-Datadog は、SageMaker のエンドポイントとジョブ向けにすぐに使えるダッシュボードを提供しています。
+Datadog provides out-of-the-box dashboards for your SageMaker endpoints and jobs.
 
-### SageMaker エンドポイント
+### SageMaker endpoints
 
-[SageMaker エンドポイントダッシュボード][8]を使用すると、追加構成なしで SageMaker エンドポイントの健全性とパフォーマンスの監視をすぐに開始できます。エラー、予想以上のレイテンシー、またはトラフィックの急増が発生しているエンドポイントを特定します。CPU、GPU、メモリ、およびディスクの使用量メトリクスを使用して、インスタンスタイプとスケーリングポリシーの選択を見直し、修正します。
+Use the [SageMaker endpoints dashboard][8] to help you immediately start monitoring the health and performance of your SageMaker endpoints with no additional configuration. Determine which endpoints have errors, higher-than-expected latency, or traffic spikes. Review and correct your instance type and scaling policy selections using CPU, GPU, memory, and disk utilization metrics.
 
-{{< img src="integrations/amazon_sagemaker/sagemaker_endpoints_2.png" alt="すぐに使える SageMaker エンドポイントダッシュボード" style="width:80%;">}}
+{{< img src="integrations/amazon_sagemaker/sagemaker_endpoints_2.png" alt="The out of the box SageMaker endpoints dashboard" style="width:80%;">}}
 
-### SageMaker ジョブ
+### SageMaker jobs
 
-[SageMaker ジョブダッシュボード][9]を使用すると、トレーニング、処理、または変換ジョブのリソース使用状況 (CPU、GPU、およびストレージのボトルネックの検出など) を把握できます。この情報を使用して、コンピュートインスタンスを最適化します。
+You can use the [SageMaker jobs dashboard][9] to gain insight into the resource utilization (for example, finding CPU, GPU, and storage bottlenecks) of your training, processing, or transform jobs. Use this information to optimize your compute instances.
 
-{{< img src="integrations/amazon_sagemaker/sagemaker_jobs_2.png" alt="すぐに使える SageMaker ジョブダッシュボード" style="width:80%;">}}
+{{< img src="integrations/amazon_sagemaker/sagemaker_jobs_2.png" alt="The out of the box SageMaker jobs dashboard" style="width:80%;">}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-sagemaker
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#log-collection
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#log-collection
+[5]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_sagemaker/amazon_sagemaker_metadata.csv
 [8]: https://app.datadoghq.com/dash/integration/31076/amazon-sagemaker-endpoints
 [9]: https://app.datadoghq.com/dash/integration/31077/amazon-sagemaker-jobs
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/help/
+

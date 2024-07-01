@@ -1,6 +1,6 @@
 ---
+title: ingestion control
 core_product:
-- apm
-title: 取り込みのコントロール
+  - apm
 ---
-取り込みのコントロールとは、アプリケーションから Datadog に送信するトレースを決定するための Agent やトレーシングライブラリにおけるメカニズムやルールのことです。
+Ingestion control refers to the mechanisms and rules in the Agent and in tracing libraries for determining what traces are sent from an application to Datadog.

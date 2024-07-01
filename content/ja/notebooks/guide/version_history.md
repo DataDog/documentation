@@ -1,64 +1,64 @@
 ---
+title: Version History for Notebooks
 disable_toc: false
 further_reading:
 - link: /notebooks/
   tag: documentation
-  text: ノートブックの概要
+  text: Notebooks Overview
 - link: /account_management/audit_trail/
   tag: documentation
-  text: 監査証跡の概要
-- link: https://www.datadoghq.com/blog/dashboards-notebooks-version-history/
+  text: Audit Trail Overview
+- link: "https://www.datadoghq.com/blog/dashboards-notebooks-version-history/"
   tag: blog
-  text: バージョン履歴で Datadog ダッシュボードとノートブックに対する変更を追跡する
-title: ノートブックのバージョン履歴
+  text: Track changes to Datadog dashboards and notebooks with version history
 ---
 
-## 概要
-バージョン履歴は、ノートブックに加えられた変更を自動的に追跡し、以前のバージョンを保存してくれるため、誰が何を変更したのかを正確に確認することができます。以前のバージョンを確認したり、ノートブックを保存済みのバージョンに復元したり、任意のバージョンを複製して新しいノートブックを作成したりすることができます。
+## Overview
+Version History automatically tracks changes made to your notebooks and saves previous versions so you can see exactly what was changed and by whom. You can view previous versions, restore your notebook to any saved version, or clone a version to create a new notebook.
 
-## 前提条件
-すべてのノートブックでは、バージョン履歴がデフォルトで 30 日間保持されます。以前のバージョンを見るには、過去 30 日以内に編集が行われている必要があります。
+## Prerequisites
+All notebooks have a default 30 days retention of version history. In order to see any previous versions, an edit must be made within the last 30 days. 
 
-[監査証跡][1]を有効にすると、バージョン履歴が 30 日から 90 日に延長されます。監査証跡を有効にした後は、既存のすべてのノートブックで、30 ～ 90 日前の間に行われたすべての編集を見ることができます。
+With [Audit Trail][1] enabled, the version history is extended from 30 days to 90 days. After enabling Audit Trail, you are able to see any edits made between 30 to 90 days ago on all existing notebooks. 
 
-## バージョンの表示
-ノートブックから ** Configure** アイコンをクリックし、**Version History** をクリックすると、バージョン履歴のサイドパネルが開きます。保持期間内に編集がない場合、バージョン履歴のオプションは無効になります。
+## View versions
+From a notebook, click the **Configure** icon and click **Version History** to open the Version History side panel. If there are no edits within the retention period, the Version History option is disabled.
 
-{{< img src="/notebooks/guide/version_history/disabled_version_history.png" alt="ノートブックでバージョン履歴オプションを無効化" style="width:100%;" >}}
+{{< img src="/notebooks/guide/version_history/disabled_version_history.png" alt="Disabled version history option in a notebook" style="width:100%;" >}}
 
-バージョン履歴サイドパネルでは、各バージョンごとに以下の情報を確認できます。
-- 変更を行った Datadog ユーザー
-- 変更日時
-- 変更の概要と、前のバージョンと比べた詳細な変更内容の説明
+In the Version History side panel, for each version you can see:
+- Which Datadog user made the change
+- The date and time of the change
+- A summary of the change and a detailed change description of the version to its predecessor
 
-## バージョンのプレビュー
-Version History サイドパネルから任意のバージョンをクリックすると、ノートブックをそのバージョンに復元した場合にどのように見えるかをプレビューすることができます。任意のバージョン上でクリックすると、変更箇所までスクロールされ、変更されたウィジェットやセルがハイライト表示されます。
+## Preview a version
+From the Version History side panel, click on a version to preview what your notebook would look like if you choose to restore to that version. Click on any version to scroll to the location of the change and highlight any widgets or cells that were changed.
 
-**注**: 任意のバージョンをクリックしてプレビューしても、そのバージョンに復元するという選択を自ら行わない限り、変更内容は一切保存されず、他のユーザーに表示される内容にも影響を及ぼしません。
+**Note**: Clicking on a version to preview it does not save any changes or impact what other users see until you actively choose to restore to that version.
 
-## バージョンの復元
-ノートブックを以前のバージョンに復元するには、2 つの方法があります。
+## Restore a version
+There are two ways you can restore your notebook to a previous version.
 
-{{< img src="/notebooks/guide/version_history/version_history_options.png" alt="バージョン履歴のオプションを示すノートブックの例" style="width:100%;" >}}
+{{< img src="/notebooks/guide/version_history/version_history_options.png" alt="Example notebooks showing version history options" style="width:100%;" >}}
 
-- バージョン履歴サイドパネルから、復元するバージョンが決まったら、ユーザープロファイルの右側にあるケバブメニューをクリックし、**Restore this version** を選択します。
-- バージョン履歴サイドパネルが開いた際に、ページ上部に **Restore this version** ボタンが表示されます。
+- From the Version History side panel, after you choose the version to restore, click the kebab menu to the right of a user profile and select **Restore this version**.
+- When the Version History side panel opens up, a button appears at the top of the page to **Restore this version**.
 
-バージョンを復元すると、すべてのユーザーを対象にノートブックがそのバージョンにアップデートされ、バージョン履歴には復元を示す新しいエントリが追加されます。これによって変更履歴が上書きされることはなく、引き続き保持期間内の任意のバージョンのプレビューと復元が可能です。
+Restoring a version updates the notebook to that version for all users and a new entry is added to the version history showing the restore. This does not overwrite the history of your changes, so you are still able preview and restore to any versions within your retention period. 
 
-## バージョンの複製
-現在のノートブックを変更せずに、以前のバージョンのコピーを作成したい場合は、バージョン履歴内の任意のバージョンからクローンを作成することができます。Version History サイドパネルからコピーしたいバージョンを決め、ユーザープロファイルの右側にあるケバブメニューをクリックして、**Clone** を選択します。
+## Clone a version
+If you do not want to change your current notebook but you'd like to create a copy of a previous version, you can create a clone from any version in your version history. From the Version History side panel after you choose the version you want to make a copy of, click the kebab menu to the right of a user profile and select **Clone**.
 
-## バージョン履歴の保持
+## Version History retention
 
-|                          | 保持期間    |
+|                          | Retention Period    |
 | -----------------------  | ------- |
-| 監査証跡が**無効**な場合 | 30 日 |
-| 監査証跡が**有効**な場合  | 90 日 |
+| Audit Trail **Disabled** | 30 days |
+| Audit Trail **Enabled**  | 90 days |
 
 
-[1]:/ja/account_management/audit_trail/
+[1]: /account_management/audit_trail/
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

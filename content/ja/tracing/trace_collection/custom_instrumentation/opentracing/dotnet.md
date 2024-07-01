@@ -1,45 +1,45 @@
 ---
+title: .NET OpenTracing Instrumentation
+kind: documentation
 aliases:
-- /ja/tracing/setup_overview/open_standards/dotnet
-- /ja/tracing/trace_collection/open_standards/dotnet
-- /ja/tracing/trace_collection/opentracing/dotnet/
+- /tracing/setup_overview/open_standards/dotnet
+- /tracing/trace_collection/open_standards/dotnet
+- /tracing/trace_collection/opentracing/dotnet/
 code_lang: dotnet
-code_lang_weight: 70
-description: .NET のための OpenTracing インスツルメンテーション
-further_reading:
-- link: tracing/services/services_map/
-  text: トレースコンテキストの伝搬
-kind: ドキュメント
-title: .NET OpenTracing インスツルメンテーション
 type: multi-code-lang
+code_lang_weight: 70
+description: 'OpenTracing instrumentation for .NET'
+further_reading:
+    - link: tracing/trace_collection/trace_context_propagation/dotnet/
+      text: Propagating trace context
 ---
 
-<div class="alert alert-info">OpenTracing のサポートは、非推奨の仕様に基づくものです。オープンな仕様でコードをインスツルメンテーションしたい場合は、代わりに OpenTelemetry を使用してください。<a href="/tracing/trace_collection/otel_instrumentation/dotnet/">Datadog トレーシングライブラリの OpenTelemetry インスツルメンテーションからのデータを処理する</a>ためのベータサポートをお試しください。</div>
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/dotnet/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
 
-詳細や情報については、[OpenTracing API][1] をご覧ください。
+For more details and information, view the [OpenTracing API][1].
 
-## 計画と使用
-OpenTracing のサポートには、[`Datadog.Trace.OpenTracing`][2] NuGet パッケージをアプリケーションに追加します。アプリケーションの起動時に、OpenTracing SDK を初期化します。
+## Setup
+For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][2] to your application. During application start-up, initialize the OpenTracing SDK:
 
 ```csharp
 using Datadog.Trace.OpenTracing;
 
 public void ConfigureServices(IServiceCollection services)
 {
-    // デフォルト設定で OpenTracing ITracer を作成します
+    // Create an OpenTracing ITracer with the default setting
     OpenTracing.ITracer tracer = OpenTracingTracerFactory.CreateTracer();
 
-    // ASP.NET Core 依存関係の挿入でトレーサーを使用します
+    // Use the tracer with ASP.NET Core dependency injection
     services.AddSingleton<ITracer>(tracer);
 
-    // OpenTracing.GlobalTracer.Instance でトレーサーを使用します
+    // Use the tracer with OpenTracing.GlobalTracer.Instance
     GlobalTracer.Register(tracer);
 }
 ```
 
-## メソッドの手動インスツルメント
+## Manually instrument a method
 
-OpenTracing を使用してスパンを作成します。
+Use OpenTracing to create a span.
 
 ```csharp
 using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").StartActive(finishSpanOnDispose: true))
@@ -49,9 +49,9 @@ using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").Start
 }
 ```
 
-## 非同期トレース
+## Asynchronous traces
 
-非同期タスクで実行中のコードをトレースするには、バックグラウンドタスク内で新しいスコープを作成（非同期コードをラップするのと同様）します。
+To trace code running in an asynchronous task, create a new scope within the background task, just as you would wrap synchronous code.
 ```csharp
  Task.Run(
      () =>
@@ -65,7 +65,7 @@ using (IScope scope = GlobalTracer.Instance.BuildSpan("manual.sortorders").Start
 
 ```
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

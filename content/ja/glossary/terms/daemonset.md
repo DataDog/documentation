@@ -1,6 +1,6 @@
 ---
-core_product:
-- infrastructure monitoring
 title: DaemonSet
+core_product:
+  - infrastructure monitoring
 ---
-Kubernetes では、DaemonSet はポッドのグループを管理するコントローラです。DaemonSet は YAML ファイルに記述することができます。
+In Kubernetes, a DaemonSet is a controller that manages groups of Pods. You can describe a DaemonSet in a YAML file.

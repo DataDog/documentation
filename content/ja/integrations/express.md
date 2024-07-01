@@ -1,53 +1,53 @@
 ---
-aliases:
-- /ja/integrations/expressjs/
-categories:
-- languages
-dependencies: []
-description: 全体的な応答時間と応答コード別のリクエスト率を監視。
-doc_link: https://docs.datadoghq.com/integrations/express/
-draft: false
-git_integration_title: express
-has_logo: true
-integration_id: express
-integration_title: ExpressJS
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: express
-public_title: Datadog-ExpressJS インテグレーション
-short_description: 全体的な応答時間と応答コード別のリクエスト率を監視。
-version: '1.0'
+"aliases":
+- "/integrations/expressjs/"
+"categories":
+- "languages"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Monitor response times overall and request rates by response code."
+"doc_link": "https://docs.datadoghq.com/integrations/express/"
+"draft": false
+"git_integration_title": "express"
+"has_logo": true
+"integration_id": "express"
+"integration_title": "ExpressJS"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "express"
+"public_title": "Datadog-ExpressJS Integration"
+"short_description": "Monitor response times overall and request rates by response code."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/expressjs/expressjs_graph.png" alt="ExpressJS グラフ" popup="true">}}
+{{< img src="integrations/expressjs/expressjs_graph.png" alt="ExpressJS graph" popup="true">}}
 
-## 概要
+## Overview
 
-<div class="alert alert-danger">Express インテグレーションは非推奨となり、Datadog APM に置き換わりました。Datadog APM は、Express インテグレーションと同じ<a href="https://docs.datadoghq.com/tracing/runtime_metrics/nodejs/">メトリクス</a>を生成し、その他多くの機能とインテグレーションを備えています。Express インテグレーションは今後アップデートされないため、Datadog では <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/nodejs/">APM</a> へのアップグレードを強く推奨しています。</div>
+<div class="alert alert-danger">The Express integration is deprecated and has been replaced with Datadog APM. Datadog APM generates the same <a href="https://docs.datadoghq.com/tracing/runtime_metrics/nodejs/">metrics</a> as the Express integration and also has many other features and integrations. Datadog highly recommends upgrading to <a href="https://docs.datadoghq.com/tracing/connect_logs_and_traces/nodejs/">APM</a> as the Express integration will receive no further updates.</div>
 
-Datadog の [Connect-Datadog ミドルウェア][1]をアプリケーションに追加すると、以下のことができます。
+Add the Datadog [connect-datadog middleware][1] to your application to:
 
-- 応答時間に関するアラートを生成できます。
-- 応答コードを監視できます。
+- Alert on your response times
+- Monitor your response code
 
-## セットアップ
+## Setup
 
-Express インテグレーションは、収集したメトリクス Datadog に転送するのに Datadog Agent DogStatsD サーバーを必要とします。
+The Express integration requires the Datadog Agent DogStatsD server in order to forward your collected metrics to Datadog.
 
-ホストに [Agent をインストール][2]したら、[DogStatsD セットアップドキュメント][3]を参照して有効にしてください。
+After [installing the Agent][2] on your host, see the [DogStatsD Setup documentation][3] to enable it.
 
-### コンフィギュレーション
+### Configuration
 
-1. ミドルウェアをインストールします。
+1. Install the middleware
 
     ```shell
     npm install connect-datadog
     ```
 
-2. コードを変更して Datadog ミドルウェアを追加します。
+2. Modify your code to add the Datadog middleware:
 
     ```js
     var dd_options = {
@@ -65,26 +65,27 @@ Express インテグレーションは、収集したメトリクス Datadog に
     app.use(router);
     ```
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "express" >}}
 
 
-### イベント
+### Events
 
-Express インテグレーションには、イベントは含まれません。
+The Express integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Express インテグレーションには、サービスのチェック機能は含まれません。
+The Express integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+Need help? Contact [Datadog support][5].
 
 [1]: https://www.npmjs.com/package/connect-datadog
 [2]: https://app.datadoghq.com/account/settings/agent/latest
-[3]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=hostagent#setup
+[3]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent#setup
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/express/express_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

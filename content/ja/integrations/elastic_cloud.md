@@ -1,157 +1,163 @@
 ---
-app_id: elastic-cloud
-app_uuid: f00a0b0b-b25f-4b9b-af4d-dda28f33609a
-assets:
-  dashboards:
-    elastic_cloud: assets/dashboards/elastic_cloud_overview.json
-  integration:
-    auto_install: false
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: elastic_cloud.docs.count
-      metadata_path: metadata.csv
-      prefix: elastic_cloud.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10315
-    source_type_name: Elastic Cloud
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- モニター
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: elastic_cloud
-integration_id: elastic-cloud
-integration_title: Elastic Cloud
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: elastic_cloud
-public_title: Elastic Cloud
-short_description: Elastic Cloud でホストされている Elasticsearch サービスのメトリクスモニターです。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Metrics
-  configuration: README.md#Setup
-  description: Elastic Cloud でホストされている Elasticsearch サービスのメトリクスモニターです。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Troubleshooting
-  title: Elastic Cloud
+"app_id": "elastic-cloud"
+"app_uuid": "f00a0b0b-b25f-4b9b-af4d-dda28f33609a"
+"assets":
+  "dashboards":
+    "elastic_cloud": assets/dashboards/elastic_cloud_overview.json
+  "integration":
+    "auto_install": false
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": elastic_cloud.docs.count
+      "metadata_path": metadata.csv
+      "prefix": elastic_cloud.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10315"
+    "source_type_name": Elastic Cloud
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- metrics
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "elastic_cloud"
+"integration_id": "elastic-cloud"
+"integration_title": "Elastic Cloud"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "elastic_cloud"
+"public_title": "Elastic Cloud"
+"short_description": "Metrics monitoring for Elasticsearch services hosted by Elastic Cloud."
+"supported_os": []
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Metrics"
+  "configuration": "README.md#Setup"
+  "description": Metrics monitoring for Elasticsearch services hosted by Elastic Cloud.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Troubleshooting"
+  "title": Elastic Cloud
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## 概要
+## Overview
 
-Elastic Cloud とインテグレーションすることで、ホスティングされた Elasticsearch のサービスを常に最新の状態に保つことができます。
+Integrate with Elastic Cloud to stay up to date with your hosted Elasticsearch services.
 
-このインテグレーションは、以下のような Elastic Cloud サービスのメトリクスを提供します。
+The integration provides metrics for your Elastic Cloud services, including the following:
 
-- クラスター統計情報
-- クラスターの健全性
-- ノードとインデックスの統計情報
-- リソース使用率メトリクス
+- Cluster statistics
+- Cluster health
+- Node and index statistics
+- Resource utilization metrics
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-必要なインストール手順はありません。
+No installation steps required.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-#### メトリクスの収集
+#### Metric collection
 
-デプロイ用に読み取り専用の Elastic Cloud ユーザーを作成し、[Elastic Cloud インテグレーションタイル](https://app.datadoghq.com/account/settings#integrations/elastic-cloud)にユーザー資格情報を入力します。
+Create a read-only Elastic Cloud user for your deployment and enter the user credentials in the [Elastic Cloud
+integration tile](https://app.datadoghq.com/account/settings#integrations/elastic-cloud).
 
-1. すべての [Elastic Cloud デプロイ][1]にアクセスします。
-2. デプロイ名を選択します。
-3. **Management** の下にある **Manage permissions** をクリックします。
-4. **Roles** タブで、**Create role** をクリックしてロールを作成します。
-    1. **Role name** に **Datadog-Role** と入力します。
-    2. **Elasticsearch Cluster privileges** に **monitor, read_slm** と入力します。
-    3. **Indices** の下に、メトリクスが必要なインデックスを入力します。
-    4. **privileges** に、**monitor** と入力します。
-    5. **Create role** をクリックします。
-5. **Users** タブを選択します。
-    1. **Create user** をクリックします。
-    2. ユーザー名、メールアドレス、パスワードをフォームに入力します。
-    3. **Privileges** の下にある **Roles** ドロップダウンから、**Datadog-Role** を選択します。
-    4. **create user** をクリックします。
+1. Access all your [Elastic Cloud deployments][1].
+2. Select your deployment name.
+3. Click **Manage permissions** under **Management**.
+4. Under the **Roles** tab, create a role by clicking **Create role**.
+    1. Enter **Datadog-Role** in **Role name**.
+    2. Enter **monitor, read_slm** in **Elasticsearch Cluster privileges**.
+    3. Under **Indices**, enter the indices you want metrics for.
+    4. In **privileges**, enter **monitor**.
+    5. Click **Create role**.
+5. Select the **Users** tab.
+    1. Click **Create user**.
+    2. Fill out the form with a username, email, and password.
+    3. Under **Privileges**, select **Datadog-Role** in the **Roles** drop-down.
+    4. Click **create user**.
 
-次の手順で Elastic Cloud デプロイの URL を取得します。
-1. すべての [Elastic Cloud デプロイ][1]にアクセスします。
-2. デプロイを選択します。
-3. **Applications** の中から **Elasticsearch** を探します。
-4. **Copy Endpoint** をクリックして、デプロイの URL をコピーします。
+Get your Elastic Cloud deployment URL with the following steps:
+1. Access all your [Elastic Cloud deployments][1].
+2. Select your deployment.
+3. Find **Elasticsearch** under **Applications**.
+4. Click **Copy Endpoint** to copy the deployment URL
 
-デフォルトでは、インテグレーションはクラスター内のノードの統計情報 (ノード数や各ノードのドキュメント数など) を収集します。
+By default, the integration will collect statistics for nodes in your clusters, such as the number of nodes or number of
+docs in each node.
 
-以下は、特定のメトリクスを受け取るためにインテグレーションタイルに設定できる構成可能なフラグです。
+The following are configurable flags you can set on the integration tile to receive specific metrics:
 
 Primary shard stats
-: クラスターのプライマリシャードのみを対象としたメトリクス。
+: Metrics for only the cluster's primary shards.
 
 Primary shard graceful timeout
-: クラスターのプライマリシャードのメトリクスは非常に大きくなる可能性があるため、リクエストがタイムアウトする可能性があります。このフラグを有効にすると 、タイムアウトが発生しても他のすべてのメトリクスを収集し続けることができます。
+: Metrics for cluster primary shards can get very large, so there is a chance the request may time out. Enable this
+flag to continue collecting all other metrics despite the time-out.
 
 Detailed index stats
-: インデックス固有のプライマリシャードの統計情報を取得できるようにします。
+: Enable to obtain index-specific primary shard stats.
 
 Pending tasks stats
-: まだ実行されていないクラスターレベルの変更に関するメトリクス。
+: Metrics for cluster-level changes that have not yet been executed.
 
 Shard allocation stats
-: 各データノードに割り当てられたシャードの数およびそのディスク容量のメトリクス。
+: Metrics for the number of shards allocated to each data node and their disk space.
 
 Snapshot life cycle management stats
-: スナップショットライフサイクルマネジメントによるアクションに関するメトリクス。
+: Metrics about actions taken by snapshot lifecycle management.
 
 Index stats
-: 個々の指標のメトリクスを収集できるようにします。
+: Enable to collect metrics for individual indices.
 
-### IP トラフィックフィルター
+### IP Traffic Filter
 
-Elastic Cloud では、セキュリティ対策として、IP アドレスか CIDR ブロックによるトラフィックのフィルタリングが可能です。これにより、デプロイへのアクセス方法を制限できます。Datadog がデプロイからメトリクスを取得できるように、特定の IP アドレスプレフィックスを許可する必要があります。
+Elastic Cloud allows traffic filtering, either by IP address or CIDR block, as a security layer. It limits how
+deployments can be accessed.
+Certain IP address prefixes must be permitted for Datadog to retrieve metrics from the deployment.
 
-トラフィックフィルターのルールセットを作成するには、こちらの[手順][2]に従ってください。ルールセットが作成できたら、ルールセットをデプロイと関連付けます。
+Follow these [steps][2] to create a traffic filter rule set. After creating the rule set, associate the rule
+set with your deployment.
 
-Datadog の IP プレフィックスを含める方法
+To include the Datadog IP prefixes:
 
-1. Datadog の IP 範囲を[こちら][3]で確認します。
-2. **webhooks** の各プレフィックスを **source** としてトラフィックルールに入力します。
+1. Find the Datadog IP ranges [here][3].
+2. Enter each prefix under **webhooks** into the traffic rule set as a **source**.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "elastic_cloud" >}}
 
 
-### ワークフローの自動化
+### Logs
 
-Elastic Cloud インテグレーションには、ログは含まれません。
+The Elastic Cloud integration does not include any logs.
 
-### ヘルプ
+### Events
 
-Elastic Cloud インテグレーションには、イベントは含まれません。
+The Elastic Cloud integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Elastic Cloud インテグレーションには、サービスのチェック機能は含まれません。
+The Elastic Cloud integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
 
 
@@ -160,6 +166,7 @@ Elastic Cloud インテグレーションには、サービスのチェック機
 
 [1]: https://cloud.elastic.co/deployments
 [2]: https://www.elastic.co/guide/en/cloud-enterprise/current/ece-traffic-filtering-ip.html
-[3]: https://docs.datadoghq.com/ja/api/latest/ip-ranges/
+[3]: https://docs.datadoghq.com/api/latest/ip-ranges/
 [4]: https://github.com/DataDog/integrations-internal-core/blob/main/elastic_cloud/metadata.csv
-[5]: https://docs.datadoghq.com/ja/help
+[5]: https://docs.datadoghq.com/help
+

@@ -1,43 +1,43 @@
 ---
-title: Login Methods の構成
+title: Configuring Login Methods
 ---
 
-ログイン方法は、ユーザーの認証方法と Datadog 組織へのログイン方法を決定します。ログイン方法を使用して、デフォルトのログイン方法を有効または無効にするには、次の特権アクセス権限のいずれかが必要です。
+Login Methods determine how users may authenticate themselves and log into your Datadog organization. Using Login Methods to enable or disable the default login methods requires one of the following privileged access permissions:
 
-- Datadog 管理者ロール
-- 組織管理 (`org_management`) 権限
+- Datadog Admin Role
+- Org Management (`org_management`) permission
 
-ログイン方法がデフォルトで有効になっている場合、([ユーザーのログイン方法のオーバーライドによって][1]) 明示的にアクセスを拒否されていないユーザーは、ユーザー名 (メールアドレス) が組織に招待されているユーザーと一致すれば、そのログイン方法を使って Datadog にアクセスすることが可能です。
+When a login method is enabled by default, any user who is not explicitly denied access ([by a user login method override][1]) can use that login method to access Datadog, provided their username (their email address) matches the user that is invited to the organization.
 
-以下のログイン方法があります。
+The following login methods are available:
 
-- Datadog のユーザー名とパスワード (Standard とも呼ばれる)
-- Google でサインインする
-- [SAML でサインインする][2]
+- Datadog Username and Password (also known as Standard)
+- Sign in with Google
+- [Sign in with SAML][2]
 
-## デフォルトのログイン方法を有効または無効にする
+## Enabling or disabling a default login method
 
-組織管理者は、組織のデフォルトのログイン方法を有効または無効にすることができます。新しい組織は、すべての組織とユーザーに対して **Datadog Username and Password** (Datadogのユーザー名とパスワード) と **Sign in with Google** (Google でサインインする) を有効にして設定した状態で開始します。SAML を構成すると、**Sign in with SAML** (SAML でサインインする) も有効になります。
+As an organization manager you can enable or disable the default login methods for your organization. New organizations start with **Datadog Username and Password** and **Sign in with Google** enabled and configured for all organizations and users. After you configure SAML, **Sign in with SAML** is also enabled.
 
-1. [Login Methods][3] に移動します。
-2. 各方法の **Enabled by Default** 設定を、組織の好みまたはポリシーの要件に従って、`On` または `Off` に設定します。
-3. 選択内容を確認します。
+1. Navigate to [Login Methods][3].
+2. Set the **Enabled by Default** setting for each method to `On` or `Off`, according to your organization's preference or policy requirements.
+3. Confirm your selection.
 
-**注**: 組織ですべてのログイン方法を無効にすることはできません。組織のデフォルトでは、少なくとも 1 つのログイン方法が有効になっている必要があります。
+**Note**: You cannot disable all login methods for an organization. At least one login method must be enabled by default for your organization.
 
-## ユーザーオーバーライドの見直し
+## Reviewing user overrides
 
-オーバーライドを使用すると、個々のユーザーに対して利用可能なログイン方法を変更することができます。次の例では、組織のデフォルトでは **Sign in with Google** (Google でサインインする) が Off になっていますが、オーバーライドを設定することで、あるユーザーがこれを有効にしています。
+Using overrides, you can change the available login methods for individual users. In the following example, **Sign in with Google** is Off by default in the organization, but one user has it enabled by having an override set.
 
-{{< img src="account_management/login_methods_disabled_overrides_set.png" alt="ログイン方法は無効、ユーザーオーバーライドは有効" style="width:80%;">}}
+{{< img src="account_management/login_methods_disabled_overrides_set.png" alt="Login method disabled, with user override enabled" style="width:80%;">}}
 
-[ユーザー管理][4]では、設定されているオーバーライド方法でユーザーを絞り込んだり、デフォルトのログイン方法を有効にしているユーザーを表示することができます。
+In [User Management][4], you can filter users by the override methods set, or view users who have the Default login methods enabled:
 
-{{< img src="account_management/users/user_page_login_methods_override_view.png" alt="ユーザー管理ビューは、設定されたログイン方法によってユーザーを表示するようにフィルターがかけられています。" style="width:80%;">}}
+{{< img src="account_management/users/user_page_login_methods_override_view.png" alt="User Management view filtered to show users by login methods set." style="width:80%;">}}
 
-ユーザーのオーバーライドを編集するか、オーバーライドを完全に削除して、ユーザーがデフォルトのみを使用できるようにすることができます。詳しくは、[ユーザーのログイン方法を編集する][1]を参照してください。
+You can edit the user's overrides or remove the override altogether to allow the user to only use the defaults. For more information see [Edit a user's login methods][1].
 
-[1]: /ja/account_management/users/#edit-a-users-login-methods
-[2]: /ja/account_management/saml/
+[1]: /account_management/users/#edit-a-users-login-methods
+[2]: /account_management/saml/
 [3]: https://app.datadoghq.com/organization-settings/login-methods
 [4]: https://app.datadoghq.com/organization-settings/users

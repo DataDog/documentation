@@ -1,61 +1,62 @@
 ---
-categories:
-- collaboration
-- notifications
-dependencies: []
-description: Datadog のアラートとグラフをチームのフローに送信。
-doc_link: https://docs.datadoghq.com/integrations/flowdock/
-draft: false
-git_integration_title: flowdock
-has_logo: true
-integration_id: ''
-integration_title: Flowdock
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: flowdock
-public_title: Datadog-Flowdock インテグレーション
-short_description: Datadog のアラートとグラフをチームのフローに送信。
-version: '1.0'
+"categories":
+- "collaboration"
+- "notifications"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Send Datadog alerts and graphs to your team's flows."
+"doc_link": "https://docs.datadoghq.com/integrations/flowdock/"
+"draft": false
+"git_integration_title": "flowdock"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Flowdock"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "flowdock"
+"public_title": "Datadog-Flowdock Integration"
+"short_description": "Send Datadog alerts and graphs to your team's flows."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock 概要" popup="true">}}
+{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock overview" popup="true">}}
 
-## 概要
+## Overview
 
-FlowDock と統合して、以下のことができます。
+Integrate with FlowDock to:
 
-- ストリームでポストが行われたときに通知を受けることができます。
-- モニターアラートやインテグレーションステータスの変更などをフローに直接取り込むことができます。
+- Be notified when someone posts on your stream.
+- Get monitor alerts, integration status changes (and much more) directly in your flows.
 
-Datadog は、Flowdock のスレッドを利用して、フローに余計な通知が紛れ込むことを防ぎます。それぞれのフローで、各通知はそれ自身のスレッドに送られ、その後のそれに関連する通知も同じスレッドに送られます (たとえば、あるモニターアラートがトリガーされ、その後解決された場合は、対応する通知が Flowdock でグループ化されます)。
+Datadog takes advantage of Flowdock's Threads to avoid polluting your flows with notifications: for a given flow, every notification goes into its own Thread, further related notifications go in the same thread (for instance if a given monitor alert is triggered and then resolved, the corresponding notifications are grouped in Flowdock).
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-Flowdock を Datadog と統合するには、Flowdock の **Configuration** タブを使用します。開いているすべてのフローが取得されます。フローのすべてにポストする必要がない場合は、オートコンプリートリストで表示しないフローを削除できます。これで、ユーザーメッセージまたはモニターで `@flowdock` ハンドルを使用して、メッセージをフローにポストできます。
+To integrate Flowdock with Datadog, use the **Configuration** tab in Flowdock. It fetches all your opened flows. If you don't want to post to all of them, you can delete the ones you don't want to appear in the autocomplete list. You can then use `@flowdock` handles in any user message or monitor to post messages to your flows.
 
-ユーザーメッセージとスナップショットはフローのメインスレッドに送られますが、各アラートはそれぞれ独自の Flowdock スレッドにポストされます。これにより、メインスレッドに余計なアラートが紛れ込むことを防ぎ、チームのチャットをクリーンで整理された状態に維持できます。同時に、最近報告されたモニターのステータスは、Inbox ビューでいつでも即座に確認できます。
+User messages and snapshots go into the main thread of your flow while each alert is posted in its own Flowdock thread. It prevents the main thread from being overpolluted with alerts and keeps your team chat clean and organized. On the other hand, you always have an immediate glance at the statuses of the monitors which reported recently on the Inbox view.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 
-Flowdock インテグレーションには、メトリクスは含まれません。
+The Flowdock integration does not include any metric.
 
-### イベント
+### Events
 
-Flowdock インテグレーションには、イベントは含まれません。
+The Flowdock integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Flowdock インテグレーションには、サービスのチェック機能は含まれません。
+The Flowdock integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
+Need help? Contact [Datadog support][1].
 
-[1]: https://docs.datadoghq.com/ja/help/
+[1]: https://docs.datadoghq.com/help/
+

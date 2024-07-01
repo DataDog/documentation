@@ -1,80 +1,80 @@
 ---
-categories:
+"categories":
 - cloud
-dependencies: []
-description: Alibaba Cloud サービスを Datadog と統合
-doc_link: https://docs.datadoghq.com/integrations/alibaba_cloud/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/monitor-alibaba-cloud-datadog/
-  tag: ブログ
-  text: Alibaba Cloud を Datadog で監視
-git_integration_title: alibaba_cloud
-has_logo: true
-integration_id: alibaba-cloud
-integration_title: Alibaba Cloud
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: alibaba_cloud
-public_title: Datadog-Alibaba Cloud インテグレーション
-short_description: Alibaba Cloud サービスを Datadog と統合
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Integrate your Alibaba Cloud services with Datadog."
+"doc_link": "https://docs.datadoghq.com/integrations/alibaba_cloud/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/monitor-alibaba-cloud-datadog/"
+  "tag": Blog
+  "text": Monitor Alibaba Cloud with Datadog
+"git_integration_title": "alibaba_cloud"
+"has_logo": true
+"integration_id": "alibaba-cloud"
+"integration_title": "Alibaba Cloud"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "alibaba_cloud"
+"public_title": "Datadog-Alibaba Cloud Integration"
+"short_description": "Integrate your Alibaba Cloud services with Datadog."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Datadog Alibaba Cloud インテグレーションは、政府関係のサイトに対する Datadog の使用をサポートしていません。</div>
+<div class="alert alert-warning">The Datadog Alibaba Cloud integration does not support the Datadog for Government site.</div>
 {{< /site-region >}}
 
-## 概要
+## Overview
 
-Alibaba Cloud に接続して、以下からメトリクスを取得します。
+Connect to Alibaba Cloud to get metrics from your:
 
 - Alibaba Cloud Servers Load Balancer (SLB)
-- Alibaba Elastic Compute Service インスタンス
-- Alibaba Cloud ApsaraDB for RDS インスタンス
-- Alibaba Cloud ApsaraDB for Redis インスタンス
-- Alibaba Cloud Content Delivery Network (CDN) インスタンス
-- Alibaba Cloud Container Service クラスター
-- Alibaba Cloud Express Connect インスタンス
+- Alibaba Elastic Compute Service instances
+- Alibaba Cloud ApsaraDB for RDS instances
+- Alibaba Cloud ApsaraDB for Redis instances
+- Alibaba Cloud Content Delivery Network (CDN) instances
+- Alibaba Cloud Container Service clusters
+- Alibaba Cloud Express Connect instances
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-[Datadog-Alibaba Cloud インテグレーションコンフィギュレーションタイル][1]に移動し、_add account_ を押します。
+Navigate to the [Datadog-Alibaba Cloud integration configuration tile][1] and press _add account_.
 
-### コンフィギュレーション
+### Configuration
 
-Datadog を Alibaba Cloud API と統合するには、以下のパラメーターを入力します。
+Fill out the following parameters to integrate Datadog with the Alibaba Cloud API:
 
 - **`Account Id`**
 
-これを見つけるには、Alibaba Cloud コンソールの右上にあるアバターの上にカーソルを置き、_Security Settings_ を選択します。アカウント ID がこのページの上部に表示されます。
+Find this by hovering over the avatar on the top right of the Alibaba Cloud console and selecting _Security Settings_. The account ID is displayed on the top of that page.
 
-{{< img src="integrations/alibaba_cloud/account_id_ac.png" alt="アカウント ID AC" style="width:30%;">}}
+{{< img src="integrations/alibaba_cloud/account_id_ac.png" alt="Account ID AC" style="width:30%;">}}
 
-- **`Access Key Id`** と **`Access Key Secret`**
+- **`Access Key Id`** & **`Access Key Secret`**
 
-Alibaba Cloud のアカウントで
+In your Alibaba Cloud Account:
 
-1. _RAM_ タブで、以下のようにパラメーターを指定して新しいユーザーを作成します。
+1. Create a new user in the _RAM_ tab with the following parameters:
 
     - `Logon Name`: Datadog
     - `display name`: Datadog
-    - `description`: Datadog-Alibaba Cloud インテグレーションの Datadog ユーザー
+    - `description`: Datadog User for the Datadog-Alibaba Cloud integration
 
-2. _Programmatic Access_ を選択:
+2. Select _Programmatic Access_:
 
     {{< img src="integrations/alibaba_cloud/ac_programmatic_access.png" alt="Programmatic access" style="width:40%;">}}
 
-3. _OK_ をクリックしたら、`AccessKeyID` と `AccessKeySecret` をコピーして [Datadog-Alibaba Cloud インテグレーションタイル][1]に貼り付け、_install integration_ をクリックします。
+3. After hitting _OK_, copy and paste the `AccessKeyID` and `AccessKeySecret` in the [Datadog-Alibaba Cloud integration tile][1] and click _install integration_.
 
-    {{< img src="integrations/alibaba_cloud/ac_access_keys.png" alt="AC アクセスキー" style="width:40%;">}}
+    {{< img src="integrations/alibaba_cloud/ac_access_keys.png" alt="AC access keys" style="width:40%;">}}
 
-4. Alibaba Cloud アカウントで、作成したユーザーに対して `Add Permissions` を選択し、以下のアクセス許可をすべて追加します。
+4. In your Alibaba Cloud Account, select `Add Permissions` for the user you just created, then add all of the following permissions:
 
     ```text
     AliyunCloudMonitorReadOnlyAccess
@@ -87,30 +87,30 @@ Alibaba Cloud のアカウントで
     AliyunExpressConnectReadOnlyAccess
     ```
 
-5. _Update_ を押すと、約 15 分後に、Datadog-Alibaba Cloud インテグレーションタイルの _Metrics_ タブに表示されているメトリクスが、以下のリソースやタグに追加したカスタムタグでタグ付けされて、[メトリクスエクスプローラーページ][2]に表示され始めます。
+5. Press _Update_, and after around ~15 minutes, the metrics seen in the _Metrics_ tab of the Datadog-Alibaba Cloud integration tile starts appearing in your [metric explorer page][2] tagged with any custom tags you add to your resources and tags found here:
 
     - [kvstore/redis DescribeInstances][3]
     - [ECS DescribeInstances][4]
     - [DescribeDBInstances][5]
     - [DescribeLoadBalancers][6]
 
-6. オプション - [Datadog-Alibaba Cloud インテグレーションタイル][1]で、`Optionally Limit Metrics Collection` を設定します。この Alibaba Cloud タグのカンマ区切りリスト (`<KEY:VALUE>` 形式) は、Alibaba Cloud からメトリクスを収集する際に使用するフィルターを定義します。`?` (1 文字の場合) や `*` (複数文字の場合) などのワイルドカードを使用できます。定義されたラベルのいずれかに一致するホストだけが Datadog にインポートされ、それ以外は無視されます。ラベルの前に `!` を追加することで、指定されたラベルに一致するホストを除外することもできます。
+6. Optional - Set `Optionally Limit Metrics Collection` in your [Datadog-Alibaba Cloud integration tile][1]. This comma separated list of Alibaba Cloud tags (in the form `<KEY:VALUE>`) defines a filter to use when collecting metrics from Alibaba Cloud. Wildcards such as `?` (for single characters) and `*` (for multiple characters) can be used. Only hosts that match one of the defined labels are imported into Datadog—the rest are ignored. Hosts matching a given label can also be excluded by adding `!` before the label.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "alibaba_cloud" >}}
 
 
-### イベント
+### Events
 
-Alibaba Cloud のイベントは、Alibaba Cloud サービスごとに収集されます。
+Events from Alibaba Cloud are collected on a per Alibaba Cloud-service basis.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -121,4 +121,5 @@ Alibaba Cloud のイベントは、Alibaba Cloud サービスごとに収集さ�
 [5]: https://www.alibabacloud.com/help/doc-detail/26232.htm
 [6]: https://www.alibabacloud.com/help/doc-detail/27582.htm
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/alibaba_cloud/alibaba_cloud_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[8]: https://docs.datadoghq.com/help/
+

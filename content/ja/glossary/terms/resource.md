@@ -1,9 +1,9 @@
 ---
-core_product:
-- apm
-- real user monitoring
 title: resource
+core_product:
+  - apm
+  - real user monitoring
 ---
-1. APM では、リソースはアプリケーションの特定のドメインです。通常、インスツルメントされたウェブエンドポイント、データベースクエリ、またはバックグラウンドジョブです。
-2. RUM では、リソースはイベントの一種です。リソースイベントは、ページに読み込まれたイメージ、XHR、Fetch、CSS、または JS ライブラリに対して生成されます。
-3. Cloud Security Management Misconfigurations では、リソースは構成可能なエンティティです。継続的にスキャンして、1 つ以上のコントロールが適用されていることを確認する必要があります。たとえば、AWS インスタンスのリソースには、ホスト、コンテナ、セキュリティグループ、ユーザー、および顧客が管理する IAM ポリシーなどがあります。
+1. In APM, a resource is a particular domain of an application, typically an instrumented web endpoint, database query, or background job.
+2. In RUM, a resource is a type of event. A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a page.
+3. In Cloud Security Management Misconfigurations, a resource is a configurable entity that needs to be continuously scanned for adherence with one or more controls. Examples of AWS instance resources include hosts, containers, security groups, users, and customer-managed IAM policies.

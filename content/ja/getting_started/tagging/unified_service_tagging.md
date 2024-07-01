@@ -1,87 +1,87 @@
 ---
-algolia:
-  tags:
-  - 統合サービスタグ
-  - 統合
-  - 統合サービス
-  - サービスタグ
+title: Unified Service Tagging
+kind: documentation
 further_reading:
 - link: /getting_started/tagging/using_tags
   tag: Documentation
-  text: Datadog アプリでのタグの使用方法
+  text: Learn how to use tags in the Datadog app
 - link: /tracing/version_tracking
   tag: Documentation
-  text: Datadog APM 内の Version タグを使用してデプロイを監視する
-- link: https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/
-  tag: ブログ
-  text: オートディスカバリーの詳細
-kind: ドキュメント
-title: 統合サービスタグ付け
+  text: Use Version tags within Datadog APM to monitor deployments
+- link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
+  tag: Blog
+  text: Learn more about Autodiscovery
+algolia:
+  tags: [unified service tags,unified,unified service,service tags]
 ---
 
-## 概要
+## Overview
 
-統合サービスタグ付けは、3 つの[予約済みタグ][1]である `env`、`service`、`version` を使用して Datadog テレメトリを結び付けます。
+Unified service tagging ties Datadog telemetry together by using three [reserved tags][1]: `env`, `service`, and `version`.
 
-これら 3 つのタグを使用すると、次のことができます。
+With these three tags, you can:
 
-- バージョンでフィルタリングされたトレースおよびコンテナメトリクスでデプロイへの影響を特定する
-- 一貫性のあるタグを使用して、トレース、メトリクス、ログ間をシームレスに移動する
-- 統一された方法で環境またはバージョンに基づいてサービスデータを表示する
+- Identify deployment impact with trace and container metrics filtered by version
+- Navigate seamlessly across traces, metrics, and logs with consistent tags
+- View service data based on environment or version in a unified fashion
 
-{{< img src="tagging/unified_service_tagging/overview.mp4" alt="統合サービスタグ付け" video=true >}}
+{{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
-**注**: オートディスカバリーログのコンフィギュレーションが存在しない場合、ログの公式サービスはフォルトでコンテナのショートイメージになります。ログの公式サービスを上書きするには、オートディスカバリーの [Docker ラベル/ポッドアノテーション][2]を追加します。例: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+**Notes**:
 
-### 要件
+- The `version` tag is expected to change with each new application deployment. Two different versions of your application's code should have distinct `version` tags.
+- The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+- Host information is excluded for database and cache spans because the host associated with the span is not the database/cache host.
 
-- 統合サービスタグ付けには、[Datadog Agent][3] 6.19.x/7.19.x 以上のセットアップが必要です。
+### Requirements
 
-- 統合サービスタグ付けには、[予約済みタグ][1]の新しいコンフィギュレーションに対応するトレーサーのバージョンが必要です。詳細は、言語別の[セットアップ手順][4]をご覧ください。
+- Unified service tagging requires the setup of a [Datadog Agent][3] that is 6.19.x/7.19.x or higher.
+
+- Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][4].
 
 
-| 言語         | トレーサー最小バージョン |
+| Language         | Minimum Tracer Version |
 |--------------|------------|
 | .NET    |  1.17.0+       |
-| C++    |  1.1.4+       |
+| C++    |  0.1.0+       |
 | Go         |  1.24.0+       |
 | Java   |  0.50.0+      |
 | Node    |  0.20.3+       |
-| PHP  |  0.47.0 以降      |
+| PHP  |  0.47.0+      |
 | Python  |  0.38.0+      |
 | Ruby  |  0.34.0+      |
 
-- 統合サービスタグ付けには、タグの構成に関する知識が必要です。タグの構成方法がわからない場合は、コンフィギュレーションに進む前に、[タグの概要][1]および[タグの付け方][5]のドキュメントをお読みください。
+- Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][1] and [Assigning Tags][5] documentation before proceeding to configuration.
 
-## コンフィギュレーション
+## Configuration
 
-統合サービスタグ付けの構成を開始するには、環境を選択します。
+To start configuring unified service tagging, choose your environment:
 
-- [コンテナ化](#containerized-environment)
-- [非コンテナ化](#non-containerized-environment)
+- [Containerized](#containerized-environment)
+- [Non-Containerized](#non-containerized-environment)
 
-### コンテナ化環境
+### Containerized environment
 
-コンテナ化環境では、`env`、`service`、`version` は、サービスの環境変数またはラベル（Kubernetes のデプロイやポッドラベル、Docker コンテナラベルなど）を介して設定されます。Datadog Agent はこのタグ付けコンフィギュレーションを検出し、コンテナから収集するデータに適用します。
+In containerized environments, `env`, `service`, and `version` are set through the service's environment variables or labels (for example, Kubernetes deployment and pod labels, Docker container labels). The Datadog Agent detects this tagging configuration and applies it to the data it collects from containers.
 
-コンテナ化環境で統合サービスタグ付けをセットアップするには
+To setup unified service tagging in a containerized environment:
 
-1. [オートディスカバリー][6]を有効にします。これにより、Datadog Agent は特定のコンテナで実行されているサービスを自動的に識別し、そのサービスからデータを収集して、環境変数を `env`、`service`、`version` タグにマッピングできます。
+1. Enable [Autodiscovery][6]. This allows the Datadog Agent to automatically identify services running on a specific container and gathers data from those services to map environment variables to the `env`, `service,` and `version` tags.
 
-2. [Docker][2] を使用している場合は、Agent がコンテナの [Docker ソケット][7]にアクセスできることを確認してください。これにより、Agent は環境変数を検出し、それを標準タグにマッピングできます。
+2. If you are using [Docker][2], make sure the Agent can access your container's [Docker socket][7]. This allows the Agent detect the environment variables and map them to the standard tags.
 
-3. コンテナオーケストレーションサービスに対応する環境は、以下のように完全構成または部分構成のいずれかに基づいて構成します。
+3. Configure your environment that corresponds to your container orchestration service based on either full configuration or partial configuration as detailed below.
 
-#### コンフィギュレーション
+#### Configuration
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
 
-[Admission Controller][1] を有効にして Datadog Cluster Agent をデプロイした場合、Admission Controller はポッドマニフェストを変異させ、(構成された変異条件に基づいて) 必要なすべての環境変数を注入します。その場合、ポッドマニフェスト内の環境変数 `DD_` の手動構成は不要になります。詳細は [Admission Controller のドキュメント][1]を参照してください。
+If you deployed the Datadog Cluster Agent with [Admission Controller][1] enabled, the Admission Controller mutates the pod manifests and injects all required environment variables (based on configured mutation conditions). In that case, manual configuration of `DD_` environment variables in pod manifests is unnecessary. For more information, see the [Admission Controller documentation][1].
 
-##### 完全なコンフィギュレーション
+##### Full configuration
 
-Kubernetes の使用時に全範囲の統合サービスタグ付けを取得するには、デプロイオブジェクトレベルとポッドテンプレート仕様レベルの両方に環境変数を追加します。
+To get the full range of unified service tagging when using Kubernetes, add environment variables to both the deployment object level and the pod template spec level:
 
 ```yaml
 apiVersion: apps/v1
@@ -115,11 +115,11 @@ template:
                 fieldPath: metadata.labels['tags.datadoghq.com/version']
 ```
 
-##### 部分的なコンフィギュレーション
+##### Partial configuration
 
-###### ポッドレベルのメトリクス
+###### Pod-level metrics
 
-ポッドレベルのメトリクスを構成するには、次の標準ラベル (`tags.datadoghq.com`) を Deployment、StatefulSet、または Job のポッド仕様に追加します。
+To configure pod-level metrics, add the following standard labels (`tags.datadoghq.com`) to the pod spec of a Deployment, StatefulSet, or Job:
 
 ```yaml
 template:
@@ -129,9 +129,9 @@ template:
       tags.datadoghq.com/service: "<SERVICE>"
       tags.datadoghq.com/version: "<VERSION>"
 ```
-これらのラベルは、ポッドレベルの Kubernetes CPU、メモリ、ネットワーク、ディスクメトリクスをカバーし、[Kubernetes の Downward API][2] を介してサービスのコンテナに `DD_ENV`、`DD_SERVICE`、`DD_VERSION` を挿入するために使用できます。
+These labels cover pod-level Kubernetes CPU, memory, network, and disk metrics, and can be used for injecting `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` into your service's container through [Kubernetes's downward API][2].
 
-ポッドごとに複数のコンテナがある場合は、コンテナごとに標準ラベルを指定できます。
+If you have multiple containers per pod, you can specify standard labels by container:
 
 ```yaml
 tags.datadoghq.com/<container-name>.env
@@ -139,13 +139,13 @@ tags.datadoghq.com/<container-name>.service
 tags.datadoghq.com/<container-name>.version
 ```
 
-###### ステートメトリクス
+###### State metrics
 
-[Kubernetes ステートメトリクス][3]を構成するには:
+To configure [Kubernetes State Metrics][3]:
 
-1. コンフィギュレーションファイルで、`join_standard_tags` を `true` に設定します。設定場所については、こちらの[コンフィギュレーションファイルの例][4]を参照してください。
+1. Set `join_standard_tags` to `true` in your configuration file. See this [example configuration file][4] for the setting location.
 
-2. 同じ標準ラベルを親リソース (`Deployment` など) のラベルのコレクションに追加します。
+2. Add the same standard labels to the collection of labels for the parent resource, for example: `Deployment`.
 
   ```yaml
   apiVersion: apps/v1
@@ -164,9 +164,9 @@ tags.datadoghq.com/<container-name>.version
           tags.datadoghq.com/version: "<VERSION>"
   ```
 
-###### APM トレーサー / StatsD クライアント
+###### APM tracer and StatsD client
 
-[APM トレーサー][5]および [StatsD クライアント][6]環境変数を構成するには、[Kubernetes の Downward API][2] を以下の形式で使用します。
+To configure [APM tracer][5] and [StatsD client][6] environment variables, use the [Kubernetes's downward API][2] in the format below:
 
 ```yaml
 containers:
@@ -187,20 +187,20 @@ containers:
 ```
 
 
-[1]: /ja/agent/cluster_agent/admission_controller/
+[1]: /agent/cluster_agent/admission_controller/
 [2]: https://kubernetes.io/docs/tasks/inject-data-application/downward-api-volume-expose-pod-information/#capabilities-of-the-downward-api
-[3]: /ja/agent/kubernetes/data_collected/#kube-state-metrics
+[3]: /agent/kubernetes/data_collected/#kube-state-metrics
 [4]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/conf.yaml.example
-[5]: /ja/tracing/send_traces/
-[6]: /ja/integrations/statsd/
+[5]: /tracing/send_traces/
+[6]: /integrations/statsd/
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-##### 完全なコンフィギュレーション
+##### Full configuration
 
-コンテナの `DD_ENV`、`DD_SERVICE`、`DD_VERSION` 環境変数と対応する Docker ラベルを設定して、統合サービスタグ付けの全範囲を取得します。
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels for your container to get the full range of unified service tagging.
 
-`service` と `version` の値は Dockerfile で指定できます。
+The values for `service` and `version` can be provided in the Dockerfile:
 
 ```yaml
 ENV DD_SERVICE <SERVICE>
@@ -210,13 +210,13 @@ LABEL com.datadoghq.tags.service="<SERVICE>"
 LABEL com.datadoghq.tags.version="<VERSION>"
 ```
 
-`env` はデプロイ時に決定される可能性が高いため、後で環境変数を挿入してラベルを付けることができます。
+Since `env` is likely determined at deploy time, you can inject the environment variable and label later:
 
 ```shell
 docker run -e DD_ENV=<ENV> -l com.datadoghq.tags.env=<ENV> ...
 ```
 
-デプロイ時にすべてを設定することもできます。
+You may also prefer to set everything at deploy time:
 
 ```shell
 docker run -e DD_ENV="<ENV>" \
@@ -228,9 +228,9 @@ docker run -e DD_ENV="<ENV>" \
            ...
 ```
 
-##### 部分的なコンフィギュレーション
+##### Partial configuration
 
-サービスが Datadog 環境変数を必要としない場合 (たとえば、Redis、PostgreSQL、NGINX などのサードパーティソフトウェアや、APM によってトレースされないアプリケーション)、Docker ラベルを使用できます。
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels:
 
 ```yaml
 com.datadoghq.tags.env
@@ -238,14 +238,14 @@ com.datadoghq.tags.service
 com.datadoghq.tags.version
 ```
 
-完全なコンフィギュレーションで説明したように、これらのラベルは Dockerfile で設定するか、コンテナを起動するための引数として設定できます。
+As explained in the full configuration, these labels can be set in a Dockerfile or as arguments for launching the container.
 
 {{% /tab %}}
 
 {{% tab "ECS" %}}
-##### 完全なコンフィギュレーション
+##### Full configuration
 
-各サービスのコンテナのランタイム環境で、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` 環境変数と対応する Docker ラベルを設定して、統合サービスタグ付けの全範囲を取得します。たとえば、ECS タスク定義を通じて、このコンフィギュレーションをすべて 1 か所で設定できます。
+Set the `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` environment variables and corresponding Docker labels in the runtime environment of each service's container to get the full range of unified service tagging. For instance, you can set all of this configuration in one place through your ECS task definition:
 
 ```
 "environment": [
@@ -269,9 +269,9 @@ com.datadoghq.tags.version
 }
 ```
 
-##### 部分的なコンフィギュレーション
+##### Partial configuration
 
-サービスが Datadog 環境変数を必要としない場合 (たとえば、Redis、PostgreSQL、NGINX などのサードパーティソフトウェアや、APM によってトレースされないアプリケーション)、ECS タスク定義で Docker ラベルを使用できます。
+If your service has no need for the Datadog environment variables (for example, third party software like Redis, PostgreSQL, NGINX, and applications not traced by APM) you can just use the Docker labels in your ECS task definition:
 
 ```
 "dockerLabels": {
@@ -284,87 +284,85 @@ com.datadoghq.tags.version
 {{% /tab %}}
 {{< /tabs >}}
 
-### 非コンテナ化環境
+### Non-containerized environment
 
-サービスのバイナリまたは実行可能ファイルをどのように構築およびデプロイするかによって、環境変数を設定するためのオプションをいくつか利用できる場合があります。ホストごとに 1 つ以上のサービスを実行する可能性があるため、Datadog ではこれらの環境変数のスコープを単一プロセスにすることをお勧めします。
+Depending on how you build and deploy your services' binaries or executables, you may have several options available for setting environment variables. Since you may run one or more services per host, Datadog recommends scoping these environment variables to a single process.
 
-[トレース][8]、[ログ][9]、[RUMリソース][10]、[Synthetic テスト][11]、[StatsD メトリクス][12]、またはシステムメトリクスのサービスのランタイムから直接送信されるすべてのテレメトリーのコンフィギュレーションの単一ポイントを形成するには、次のいずれかを実行します。
+To form a single point of configuration for all telemetry emitted directly from your services' runtime for [traces][8], [logs][9], [RUM resources][10], [Synthetics tests][11], [StatsD metrics][12], or system metrics, either:
 
-1. 実行可能ファイルのコマンドで環境変数をエクスポートします。
+1. Export the environment variables in the command for your executable:
 
    ```
    DD_ENV=<env> DD_SERVICE=<service> DD_VERSION=<version> /bin/my-service
    ```
 
-2. または、[Chef][13]、[Ansible][14]、または別のオーケストレーションツールを使用して、サービスの systemd または initd コンフィギュレーションファイルに `DD` 環境変数を設定します。サービスプロセスが開始すると、その変数にアクセスできるようになります。
+2. Or use [Chef][13], [Ansible][14], or another orchestration tool to populate a service's systemd or initd configuration file with the `DD` environment variables. When the service process starts, it has access to those variables.
 
    {{< tabs >}}
-   {{% tab "トレース" %}}
+   {{% tab "Traces" %}}
 
-   統合サービスタグ付けのトレースを構成する場合
+   When configuring your traces for unified service tagging:
 
-   1. `DD_ENV` で [APM トレーサー][1]を構成し、トレースを生成しているアプリケーションに `env` の定義を近づけます。このメソッドを使用すると、`env` タグをスパンメタデータのタグから自動的に取得できます。
+   1. Configure the [APM Tracer][1] with `DD_ENV` to keep the definition of `env` closer to the application that is generating the traces. This method allows the `env` tag to be sourced automatically from a tag in the span metadata.
 
-   2. `DD_VERSION` でスパンを構成して、トレーサーに属するサービス (通常は `DD_SERVICE`) に属するすべてのスパンにバージョンを追加します。これは、サービスが外部サービスの名前でスパンを作成する場合、そのスパンはタグとして `version` を受信しないことを意味します。
+   2. Configure spans with `DD_VERSION` to add version to all spans that fall under the service that belongs to the tracer (generally `DD_SERVICE`). This means that if your service creates spans with the name of an external service, those spans do not receive `version` as a tag.
 
-      バージョンがスパンに存在する限り、そのスパンから生成されたメトリクスをトレースするために追加されます。バージョンは、手動でコード内に追加するか、APM トレーサーによって自動的に追加できます。構成すると、これらは APM および [DogStatsD クライアント][2]によって使用され、トレースデータと StatsD メトリクスに `env`、`service`、`version` でタグ付けします。有効にすると、APM トレーサーはこの変数の値もログに挿入します。
+      As long as version is present in spans, it is added to trace metrics generated from those spans. The version can be added manually in-code or automatically by the APM Tracer. When configured, these are used by the APM and [DogStatsD clients][2] to tag trace data and StatsD metrics with `env`, `service`, and `version`. If enabled, the APM tracer also injects the values of these variables into your logs.
 
-      **注**: **スパンごとに 1 つのサービス**しか存在できません。トレースメトリクスには、通常、単一のサービスもあります。ただし、ホストのタグで異なるサービスが定義されている場合、その構成されたサービスタグは、そのホストから発行されたすべてのトレースメトリクスに表示されます。
+      **Note**: There can only be **one service per span**. Trace metrics generally have a single service as well. However, if you have a different service defined in your hosts' tags, that configured service tag shows up on all trace metrics emitted from that host.
 
-[1]: /ja/tracing/setup/
-[2]: /ja/developers/dogstatsd/
+[1]: /tracing/setup/
+[2]: /developers/dogstatsd/
    {{% /tab %}}
 
-   {{% tab "ログ" %}}
+   {{% tab "Logs" %}}
 
-[接続されたログとトレース][1]を使用している場合、APM トレーサーでサポートされている場合は、自動ログ挿入を有効にします。APM トレーサーは、自動的に `env`、`service`、`version` をログに挿入するため、他の場所でこれらのフィールドを手動で構成する必要がなくなります。
+   If you're using [connected logs and traces][1], enable automatic logs injection if supported for your APM Tracer. Then, the APM Tracer automatically injects `env`, `service`, and `version` into your logs, therefore eliminating manual configuration for those fields elsewhere.
 
-**注**: PHP Tracer は、ログの統合サービスタグ付けのコンフィギュレーションをサポートしていません。
-
-[1]: /ja/tracing/other_telemetry/connect_logs_and_traces/
+[1]: /tracing/other_telemetry/connect_logs_and_traces/
    {{% /tab %}}
 
-{{% tab "RUM とセッションリプレイ" %}}
+   {{% tab "RUM & Session Replay" %}}
 
-[接続された RUM とトレース][1]を使用する場合、初期化ファイルの `service` フィールドにブラウザアプリケーションを指定し、`env` フィールドに環境を定義し、`version` フィールドにバージョンを列挙します。
+   If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file.
 
-[RUM アプリケーションの作成][2]の際に、`env` と `service` の名前を確認します。
+   When you [create a RUM application][2], confirm the `env` and `service` names.
 
 
-[1]: /ja/real_user_monitoring/connect_rum_and_traces/
-[2]: /ja/real_user_monitoring/browser/#setup
+[1]: /real_user_monitoring/platform/connect_rum_and_traces/
+[2]: /real_user_monitoring/browser/setup
    {{% /tab %}}
 
    {{% tab "Synthetics" %}}
 
-[接続された Synthetic ブラウザのテストとトレース][1]をご利用の場合、[Integration Settings ページ][2]の **APM Integration for Browser Tests** セクションでヘッダー送信先 URL を指定してください。
+   If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2].
 
-ワイルドカードとして `*` を使用することができます。例えば、`https://*.datadoghq.com` のように指定します。
+   You can use `*` for wildcards, for example: `https://*.datadoghq.com`.
 
-[1]: /ja/synthetics/apm/
+[1]: /synthetics/apm/
 [2]: https://app.datadoghq.com/synthetics/settings/integrations
    {{% /tab %}}
 
-{{% tab "カスタムメトリクス" %}}
+   {{% tab "Custom Metrics" %}}
 
-タグは、[カスタム StatsD メトリクス][1]の付加のみの方法で追加されます。たとえば、`env` に 2 つの異なる値がある場合、メトリクスは両方の環境でタグ付けされます。1 つのタグが同じ名前の別のタグをオーバーライドする順序はありません。
+   Tags are added in an append-only fashion for [custom StatsD metrics][1]. For example, if you have two different values for `env`, the metrics are tagged with both environments. There is no order in which one tag overrides another of the same name.
 
-サービスが `DD_ENV`、`DD_SERVICE`、`DD_VERSION` にアクセスできる場合、DogStatsD クライアントは対応するタグをカスタムメトリクスに自動的に追加します。
+   If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the DogStatsD client automatically adds the corresponding tags to your custom metrics.
 
-**注**: .NET および PHP 用の Datadog DogStatsD クライアントは、この機能をサポートしていません。
+   **Note**: The Datadog DogStatsD clients for .NET and PHP do not support this functionality.
 
-[1]: /ja/metrics/
+[1]: /metrics/
    {{% /tab %}}
 
-{{% tab "システムメトリクス" %}}
+   {{% tab "System Metrics" %}}
 
-インフラストラクチャーメトリクスには、`env` タグと `service` タグを追加することができます。コンテナ化されていないコンテキストでは、サービスメトリクスのタグ付けは Agent レベルで構成されます。
+   You can add `env` and `service` tags to your infrastructure metrics. In non-containerized contexts, tagging for service metrics is configured at the Agent level.
 
-この構成はサービスのプロセスを起動するたびに変更されるわけではないので、`version` を追加することは推奨されません。
+   Because this configuration does not change for each invocation of a service's process, adding `version` is not recommended.
 
-#### ホスト毎の単一サービス
+#### Single service per host
 
-Agent の[メインコンフィギュレーションファイル][1]に、以下のコンフィギュレーションを適用します。
+Set the following configuration in the Agent's [main configuration file][1]:
 
 ```yaml
 env: <ENV>
@@ -372,17 +370,17 @@ tags:
   - service:<SERVICE>
 ```
 
-この設定により、Agent が送信するすべてのデータに対する `env` と `service` のタグ付けの一貫性が保証されます。
+This setup guarantees consistent tagging of `env` and `service` for all data emitted by the Agent.
 
-#### ホスト毎の複数のサービス
+#### Multiple services per host
 
-Agent の[メインコンフィギュレーションファイル][1]に、以下のコンフィギュレーションを適用します。
+Set the following configuration in the Agent's [main configuration file][1]:
 
 ```yaml
 env: <ENV>
 ```
 
-CPU、メモリ、ディスク I/O のメトリクスに一意の `service` タグをプロセスレベルで取得するには、Agent の構成フォルダ (例えば、`process.d/conf.yaml` 下の `conf.d` フォルダ) で[プロセスチェック][2]を構成します。
+To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, configure a [process check][2] in the Agent's configuration folder (for example, in the `conf.d` folder under `process.d/conf.yaml`):
 
 ```yaml
 init_config:
@@ -397,32 +395,32 @@ instances:
       service: nginx-web-app
 ```
 
-**注**: Agent のメインコンフィギュレーションファイルで既に `service` タグをグローバルに設定している場合は、プロセスのメトリクスが 2 つのサービスにタグ付けされます。これによってメトリクスの解釈に相違が生じることがあるため、`service` タグはプロセスチェックのコンフィギュレーションのみで構成することをお勧めします。
+**Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended to configure the `service` tag only in the configuration of the process check.
 
-[1]: /ja/agent/guide/agent-configuration-files
-[2]: /ja/integrations/process
+[1]: /agent/configuration/agent-configuration-files
+[2]: /integrations/process
     {{% /tab %}}
     {{< /tabs >}}
 
-### サーバーレス環境
+### Serverless environment
 
-AWS Lambda 関数については、[タグを使った Lambda のテレメトリー接続方法][15]を参照してください。
-## その他の参考資料
+For more information about AWS Lambda functions, see [how to connect your Lambda telemetry using tags][15].
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/
-[2]: /ja/agent/docker/integrations/?tab=docker
-[3]: /ja/getting_started/agent
-[4]: /ja/tracing/setup
-[5]: /ja/getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
-[6]: /ja/getting_started/agent/autodiscovery
-[7]: /ja/agent/docker/?tab=standard#optional-collection-agents
-[8]: /ja/getting_started/tracing/
-[9]: /ja/getting_started/logs/
-[10]: /ja/real_user_monitoring/connect_rum_and_traces/
-[11]: /ja/getting_started/synthetics/
-[12]: /ja/integrations/statsd/
+[1]: /getting_started/tagging/
+[2]: /agent/docker/integrations/?tab=docker
+[3]: /getting_started/agent
+[4]: /tracing/setup
+[5]: /getting_started/tagging/assigning_tags?tab=noncontainerizedenvironments
+[6]: /getting_started/agent/autodiscovery
+[7]: /agent/docker/?tab=standard#optional-collection-agents
+[8]: /getting_started/tracing/
+[9]: /getting_started/logs/
+[10]: /real_user_monitoring/platform/connect_rum_and_traces/
+[11]: /getting_started/synthetics/
+[12]: /integrations/statsd/
 [13]: https://www.chef.io/
 [14]: https://www.ansible.com/
-[15]: /ja/serverless/configuration/#connect-telemetry-using-tags
+[15]: /serverless/configuration/#connect-telemetry-using-tags

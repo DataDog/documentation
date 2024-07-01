@@ -1,8 +1,8 @@
 ---
+title: minified code
 core_product:
-- apm
-- synthetic monitoring
-- real user monitoring
-title: 縮小化されたコード
+  - apm
+  - synthetic monitoring
+  - real user monitoring
 ---
-縮小化されたコードは、コメント、余分な空白、未使用のコード、および関数に影響しないその他のものを取り除いたコード (多くの場合、JavaScript) です。縮小化されたコードは、人間が読むことはできませんが、サイズが小さくなることで、Web サイトのパフォーマンスが向上します。
+Minified code is code (often JavaScript) stripped of comments, extra whitespace, unused code, and anything else that does not affect functionality. Minified code is less human-readable, but its smaller size improves website performance.

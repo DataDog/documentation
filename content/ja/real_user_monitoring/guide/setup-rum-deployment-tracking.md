@@ -1,41 +1,36 @@
 ---
+title: Getting Started with RUM Deployment Tracking
+kind: guide
+description: Learn how to set up RUM to capture new releases, track your deployments, and analyze the performance in Datadog
 aliases:
-- /ja/real_user_monitoring/guide/getting-started-rum-deployment-tracking/
-beta: true
-description: Datadog で新しいリリースをキャプチャし、デプロイメントを追跡し、パフォーマンスを分析するために RUM を設定する方法について説明します。
+- /real_user_monitoring/guide/getting-started-rum-deployment-tracking/
 further_reading:
 - link: /real_user_monitoring/explorer
-  tag: ドキュメント
-  text: RUM エクスプローラーで RUM データを視覚化する
+  tag: Documentation
+  text: Visualize your RUM data in the RUM Explorer
 - link: /tracing/version_tracking
-  tag: ドキュメント
-  text: Datadog APM 内の Version タグを使用してデプロイを監視する
-- link: https://www.datadoghq.com/blog/datadog-rum-deployment-tracking
-  tag: ブログ
-  text: RUM のデプロイメント追跡でフロントエンドの不具合をトラブルシュートする
-kind: ガイド
-title: RUM デプロイメント追跡の概要
+  tag: Documentation
+  text: Use Version tags within Datadog APM to monitor deployments
+- link: "https://www.datadoghq.com/blog/datadog-rum-deployment-tracking"
+  tag: Blog
+  text: Troubleshoot faulty frontend deployments with Deployment Tracking in RUM
 ---
 
-<div class="alert alert-warning">
-    RUM デプロイ追跡は現在ベータ版です。
-</div>
 
+## Overview
+As teams iterate quickly and deploy code, it can be difficult to find the exact change that caused a spike in errors or slower page load times. RUM Deployment Tracking enables you to identify when a recent deployment or release is causing performance issues within your application and help you identify the source of the problem.
 
-## 概要
-チームが迅速に反復してコードを展開すると、エラーの急増やページロード時間の低下の原因となった正確な変更を見つけることが困難になることがあります。RUM デプロイメント追跡を使用すると、最近のデプロイメントやリリースがアプリケーション内でパフォーマンスの問題を引き起こしている場合に、その原因を特定することができます。
+## Setup
+You can use the `version` tag to monitor deployments and service behavior in support of your software deployment strategy. To get started with RUM Deployment tracking you must add RUM versions to your application.
 
-## セットアップ
-`version` タグを使用すると、ソフトウェアデプロイメント戦略をサポートするために、デプロイメントとサービスの動作を監視することができます。RUM デプロイメント追跡を開始するには、アプリケーションに RUM バージョンを追加する必要があります。
-
-### ブラウザ RUM
+### Browser RUM
 {{< tabs >}}
 {{% tab "npm" %}}
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
 
-// Datadog ブラウザ SDK の初期化
+// Initialize Datadog Browser SDK
 datadogRum.init({
   ...
   version: '1.0.0',
@@ -70,116 +65,116 @@ window.DD_RUM &&
 {{% /tab %}}
 {{< /tabs >}}
 
-### モバイル RUM
+### Mobile RUM
 
 #### Android RUM
 
-バージョンタグは、アプリケーションのマニフェストから自動的にキャプチャされます。
+The version tag is captured automatically from the application's manifest.
 
 #### iOS RUM
 
-バージョンタグは、アプリケーションのアプリの `info.plist` から自動的にキャプチャされます。
+The version tag is captured automatically from the application's `info.plist`.
 
-## RUM でデプロイメントのパフォーマンスを分析する
+## Analyze your deployment performance in RUM
 
 {{< tabs >}}
-{{% tab "ブラウザ RUM" %}}
+{{% tab "Browser RUM" %}}
 
-### Application Overview ページでバージョンタグを使用する
+### Using version tags on the Application Overview page
 
-バージョンタグで構成されたアプリケーションには、Application Overview ページに **Deployment Tracking** セクションがあります。**Deployment Tracking** セクションには、選択した時間間隔にアクティブだったアプリケーションとサービスのすべてのバージョンが表示されます。
+An application configured with version tags has a **Deployment Tracking** section on the Application Overview page. The **Deployment Tracking** section shows all versions of the application and services that were active during the selected time interval.
 
-これにより、問題に気づいたらすぐにリリース候補をロールバックすることができ、ネガティブなユーザー体験を回避することができます。これらのすぐに使えるグラフは、バージョン間で集計されるので、アプリケーションの問題が深刻な問題に発展する前に、簡単に特定することができます。
+This enables you to roll back release candidates as soon as you notice an issue so you can avoid negative user experiences. These out of the box graphs are aggregated across versions, making it easier to identify problems in your application before they turn into serious issues.
 
-以下を確認できます。
-- バージョン別 P75 ロード時間
-- バージョン別総ユーザーセッション数
-- バージョン別のエラー率
+You will see:
+- P75 Loading Time by Version
+- Total User Sessions by Version
+- Error Rate by Version
 
-これらのウィジェットの下の表では、以下を確認できます。
-- アプリケーションとそのサービスに対して、期間内にデプロイされたバージョン名。
-- そのバージョンのユーザーセッション数
-- ビューあたりの平均エラー数
-- P75 ロード時間
-- Core Web Vitals の P75
+In the table below these widgets, you will see:
+- The version names deployed for the application and its services over the timeframe.
+- Number of user session for that version
+- Average errors per view
+- P75 Loading Time
+- P75 for Core Web Vitals
 
-これらのウィジェットは、ダッシュボードやモニターにエクスポートすることができます。
+These widgets can be exported to dashboards and monitors.
 
-{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-rum-app-overview-deployment-tracking.png" alt="RUM アプリケーション概要のブラウザデプロイメント追跡" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-rum-app-overview-deployment-tracking.png" alt="Browser Deployment Tracking in RUM Application Overview" style="width:100%;">}}
 
 
-### デプロイメントの比較
+### Deployment Comparison
 
-**List of Versions*** 表の任意のバージョン行をクリックすると、バージョン比較ページが表示され、同じサービスの 2 つのバージョンを比較することができます。デフォルトでは、選択されたバージョンは過去のすべてのバージョンと比較されます。過去 30 日以内の任意の 2 つのバージョンを比較するように選択を変更することができます。
+Click on any version row in the **List of Versions*** table to open a version comparison page, allowing you to compare two versions of the same service. By default, the selected version is compared to all previous versions. You can change the selection to compare any two versions within the past 30 days.
 
-**Application Overview** ページにあるグラフと同様に、**User Sessions**、**Core Web Vitals**、**Errors** グラフは、デプロイメントロールアウトの概要やエラー率の急上昇を表示します。このページでは、グラフは比較のために選択したバージョンを強調表示し、その他のバージョンはすべてグレーで表示され、コンテキストを追加します。
+Similar to the graphs on the **Application Overview** page, the **User Sessions**, **Core Web Vitals**, and **Errors** graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and display all other versions in gray for additional context.
 
-リリースを監視する際に、コードのデプロイメントのパフォーマンスを既存のライブコードと比較し、新しいコードが適切に動作しているか、バージョン間で新しいエラーが表面化していないかを確認するのに役立ちます。
+As you are monitoring your release, this helps you to compare the performance of code deployments against existing live code to verify that new code is performing properly, and that no new errors have surfaced in between versions.
 
-{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison.png" alt="ブラウザデプロイメント追跡の比較" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison.png" alt="Browser Deployment Tracking Comparison" style="width:75%;">}}
 
-**Issues** タブでは、2 つのバージョンで検出されたエラーの違いを表示し、以下をハイライトします。
-- バージョン別のエラー数
-- バージョン別のエラーが発生したビューの割合
-- エラー追跡の問題
+The **Issues** tab lists differences in errors detected for each of the two versions, highlighting:
+- Error Count by Version
+- % of Views with Errors by Version
+- Error Tracking issues
 
-{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison-error.png" alt="ブラウザデプロイメント追跡の比較エラー" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison-error.png" alt="Browser Deployment Tracking Comparison Errors" style="width:75%;">}}
 
-### RUM デプロイメント追跡パワーパックを確認する
-ダッシュボードのパワーパックメニューから "Deployment Version Tracking" パワーパックを検索して、RUM サービスのデプロイメント追跡をダッシュボードに追加することができます。その後、繰り返し、他のウィジェットをダッシュボードに追加して、チームが新機能を安全にリリースできるようにすることができます。
+### Explore the RUM deployment tracking powerpacks
+You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the "Deployment Version Tracking" powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
 
-{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-powerpack.png" alt="ブラウザデプロイメント追跡パワーパック" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-powerpack.png" alt="Browser Deployment Tracking Powerpack" style="width:75%;">}}
 
 {{% /tab %}}
-{{% tab "モバイル RUM" %}}
+{{% tab "Mobile RUM" %}}
 
-### Application Overview ページでバージョンタグを使用する
+### Using version tags on the Application Overview page
 
-バージョンタグで構成されたアプリケーションには、Application Overview ページに **Deployment Tracking** セクションがあります。**Deployment Tracking** セクションには、選択した時間間隔にアクティブだったアプリケーションとサービスのすべてのバージョンが表示されます。
+An application configured with version tags has a **Deployment Tracking** section on the Application Overview page. The **Deployment Tracking** section shows all versions of the application and services that were active during the selected time interval.
 
-これにより、問題を見つけたらすぐにリリース候補を素早くロールバックすることができ、ネガティブなユーザー体験を回避することができます。これらのすぐに使えるグラフは、バージョン間で集計されるので、アプリケーションの問題が深刻な問題に発展する前に、簡単に特定することができます。
+This enables you to quickly roll back release candidates as soon as you spot an issue so you can avoid negative user experiences. These out of the box graphs are aggregated across versions, making it easier to identify problems in your application before they turn into serious issues.
 
-以下を確認できます。
-- バージョン別の平均アプリケーション開始時間
-- バージョン別総ユーザーセッション数
-- バージョン別のエラー率
+You will see:
+- Average Application Start Time by Version
+- Total User Sessions by Version
+- Error Rate by Version
 
-これらのウィジェットの下の表では、以下を確認できます。
-- アプリケーションとそのサービスに対して、期間内にデプロイされたバージョン名。
-- そのバージョンのアプリの起動数
-- エラー率
-- クラッシュ率
-- P90 アプリケーション開始時間
+In the table below these widgets, you will see:
+- The version names deployed for the application and its services over the timeframe.
+- Number of app launches for that version
+- Error Rate
+- Crash Rate
+- P90 Application Start Time
 
-これらのウィジェットは、ダッシュボードやモニターにエクスポートすることができます。
+These widgets can be exported to dashboards and monitors.
 
-{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-rum-app-overview-deployment-tracking.png" alt="RUM アプリケーション概要のモバイルデプロイメント追跡" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-rum-app-overview-deployment-tracking.png" alt="Mobile Deployment Tracking in RUM Application Overview" style="width:100%;">}}
 
-### デプロイメントの比較
+### Deployment comparison
 
-**List of Versions** 表の任意のバージョン行をクリックすると、バージョン比較ページが表示され、同じサービスの 2 つのバージョンを比較することができます。デフォルトでは、選択されたバージョンは過去のすべてのバージョンと比較されます。過去 30 日以内の任意の 2 つのバージョンを比較するように選択を変更することができます。
+Click on any version row in the **List of Versions** table to open a version comparison page, allowing you to compare two versions of the same service. By default, the selected version is compared to all previous versions. You can change the selection to compare any two versions within the past 30 days.
 
-**Application Overview** ページにあるグラフと同様に、**User Sessions**、**Mobile Vitals**、**Errors** グラフは、デプロイメントロールアウトの概要やエラー率の急上昇を表示します。このページでは、グラフは比較のために選択したバージョンを強調表示し、その他のバージョンはすべてグレーで表示され、コンテキストを追加します。
+Similar to the graphs on the **Application Overview** page, the **User Sessions**, **Mobile Vitals**, and **Errors** graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and display all other versions in gray for additional context.
 
-リリースを監視する際に、コードのデプロイメントのパフォーマンスを既存のライブコードと比較し、新しいコードが適切に動作しているか、バージョン間で新しいエラーが表面化していないかを確認するのが簡単になります。
+As you are monitoring your release, this makes it easy for you to compare the performance of code deployments against existing live code to verify that new code is performing properly and that no new errors have surfaced in between versions.
 
-{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-comparison.png" alt="モバイルデプロイメント追跡の比較" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-comparison.png" alt="Mobile Deployment Tracking Comparison" style="width:75%;">}}
 
-**Issues** タブでは、2 つのバージョンで検出されたエラーの違いを表示し、以下をハイライトします。
-- バージョン別のエラー数
-- バージョン別のエラーが発生したビューの割合
-- エラー追跡の問題
+The **Issues** tab lists differences in errors detected for each of the two versions, highlighting:
+- Error Count by Version
+- % of Views with Errors by Version
+- Error Tracking issues
 
-{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-comparison-error.png" alt="モバイルデプロイメント追跡の比較エラー" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-comparison-error.png" alt="Mobile Deployment Tracking Comparison Errors" style="width:75%;">}}
 
-### RUM デプロイメント追跡パワーパックを確認する
-ダッシュボードのパワーパックメニューから "Deployment Version Tracking" パワーパックを検索して、RUM サービスのデプロイメント追跡をダッシュボードに追加することができます。その後、繰り返し、他のウィジェットをダッシュボードに追加して、チームが新機能を安全にリリースできるようにすることができます。
+### Explore the RUM Deployment Tracking Powerpacks
+You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the "Deployment Version Tracking" powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
 
-{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-powerpack.png" alt="ブラウザデプロイメント追跡パワーパック" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-powerpack.png" alt="Browser Deployment Tracking Powerpack" style="width:75%;">}}
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

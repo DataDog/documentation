@@ -1,3 +1,3 @@
 ---
-title: ダウンタイム
+title: Downtimes
 ---

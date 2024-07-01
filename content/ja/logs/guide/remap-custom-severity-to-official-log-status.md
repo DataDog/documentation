@@ -1,47 +1,47 @@
 ---
+title: Remap Custom Severity Values to the Official Log Status
+kind: guide
 aliases:
-- /ja/logs/faq/how-to-remap-custom-severity-values-to-the-official-log-status
+  - /logs/faq/how-to-remap-custom-severity-values-to-the-official-log-status
 further_reading:
-- link: logs/log_collection/#custom-log-collection
+- link: "logs/log_collection/#custom-log-collection"
   tag: Documentation
-  text: Agent によるログ収集について
+  text: Learn more about Log collection with the Agent
 - link: /logs/log_configuration/processors
   tag: Documentation
-  text: ログの処理方法
+  text: Learn how to process your logs
 - link: /logs/log_configuration/parsing
   tag: Documentation
-  text: パースの詳細
-kind: ガイド
-title: カスタム重大度値を公式ログステータスに再マップする
+  text: Learn more about parsing
 ---
 
-デフォルトでは、[Log Status Remapper][1] は [Syslog 重大度基準][2]に基づいています。
-しかし、公式のログステータスに再マッピングしたいかもしれない異なる重大度値を持つ他のシステムがあるかもしれません。
-これは、カスタム値と期待される値の間のマッピングを定義する[カテゴリープロセッサー][3]のおかげで可能です。
+By default, the [Log Status Remapper][1] relies on the [Syslog severity standards][2].
+However there might be other systems having different severity values that you might want to remap on the official log status.
+This is possible thanks to the [Category Processor][3] that defines a mapping between your custom values and the expected ones.
 
-このページでは、その方法を Bunyan レベルと Web アクセスログの 2 つの例で説明します。
+This page describes how to do this with 2 examples: Bunyan levels and web access logs.
 
-## Web アクセスログ
+## Web access logs
 
-リクエストのステータスコードから、ログのステータスを判断することができます。Datadog インテグレーションでは、以下のマッピングを使用します。
+The status code of the request can be used to determine the log status. Datadog integrations use the following mapping:
 
 * 2xx: OK
 * 3xx: Notice
 * 4xx: Warning
 * 5xx: Error
 
-ログのステータスコードが `http.status_code` 属性に格納されていると仮定します。
-パイプラインにカテゴリープロセッサーを追加し、上記のマッピングを反映した新しい属性を作成します。
+Assume the status code of your log is stored in the `http.status_code` attribute.
+Add a Category Processor in your Pipeline that creates a new attribute to reflect the above mapping:
 
-{{< img src="logs/guide/category_processor.png" alt="カテゴリープロセッサー" >}}
+{{< img src="logs/guide/category_processor.png" alt="Category Processor " >}}
 
-次に、新しく作成された属性を使用するステータスリマッパーを追加します。
+Then add a status remapper that uses the newly created attribute:
 
-{{< img src="logs/guide/log_status_remapper.png" alt="ログステータスリマッパー" >}}
+{{< img src="logs/guide/log_status_remapper.png" alt="log status remapper" >}}
 
-## バニヤンレベル
+## Bunyan levels
 
-バニヤンのレベルは Syslog のレベルと同様ですが、その値は 10 倍になります。
+Bunyan levels are similar to those of Syslog, but their values are multiplied by 10.
 
 * 10 = TRACE
 * 20 = DEBUG
@@ -50,19 +50,19 @@ title: カスタム重大度値を公式ログステータスに再マップす�
 * 50 = ERROR
 * 60 = FATAL
 
-バニヤンレベルが `bunyan_level` 属性に格納されていると仮定します。
-パイプラインにカテゴリープロセッサーを追加し、上記のマッピングを反映した新しい属性を作成します。
+Assume the bunyan level is stored in the `bunyan_level` attribute.
+Add a Category Processor in your Pipeline that creates a new attribute to reflect the above mapping:
 
-{{< img src="logs/guide/category_processor_bunyan.png" alt="カテゴリープロセッサーバニヤン" >}}
+{{< img src="logs/guide/category_processor_bunyan.png" alt="category Processor bunyan" >}}
 
-次に、新しく作成された属性を使用するステータスリマッパーを追加します。
+Then add a status remapper that uses the newly created attribute:
 
-{{< img src="logs/guide/status_remapper_bunyan.png" alt="ログステータスリマッパーバニヤン" >}}
+{{< img src="logs/guide/status_remapper_bunyan.png" alt="log status remapper bunyan" >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/log_configuration/processors/#log-status-remapper
+[1]: /logs/log_configuration/processors/#log-status-remapper
 [2]: https://en.wikipedia.org/wiki/Syslog#Severity_level
-[3]: /ja/logs/log_configuration/processors/#category-processor
+[3]: /logs/log_configuration/processors/#category-processor

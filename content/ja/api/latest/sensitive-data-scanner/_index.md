@@ -1,3 +1,3 @@
 ---
-title: センシティブ データ スキャナー
+title: Sensitive Data Scanner
 ---

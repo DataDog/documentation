@@ -1,7 +1,8 @@
 ---
+title: granularity
 core_product:
-- dashboards
-title: 粒度
+  - dashboards
+  - metrics
 ---
-粒度とは、データを収集したり、グラフに表示したりする頻度のことです。
-詳細は、<a href="/dashboards/guide/query-to-the-graph/#why">ドキュメントを参照してください</a>。
+Granularity is the frequency at which data is collected or displayed on graphs.
+For more information, <a href="/dashboards/guide/query-to-the-graph/#why">see the documentation</a>.

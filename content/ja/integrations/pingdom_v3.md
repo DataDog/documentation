@@ -1,114 +1,115 @@
 ---
-app_id: pingdom-v3
-app_uuid: d7f6a5a2-9614-45f1-9022-2ca1eba7bd5c
-assets:
-  integration:
-    auto_install: false
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: pingdom.response_time
-      metadata_path: metadata.csv
-      prefix: pingdom.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 615
-    source_type_name: Pingdom
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- メトリクス
+"app_id": "pingdom-v3"
+"app_uuid": "d7f6a5a2-9614-45f1-9022-2ca1eba7bd5c"
+"assets":
+  "integration":
+    "auto_install": false
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": pingdom.response_time
+      "metadata_path": metadata.csv
+      "prefix": pingdom.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "615"
+    "source_type_name": Pingdom
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- metrics
 - notifications
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: pingdom_v3
-integration_id: pingdom-v3
-integration_title: Pingdom
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: pingdom_v3
-public_title: Pingdom
-short_description: Pingdom が収集したアップタイム、応答時間、アラートを Datadog で参照
-supported_os:
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "pingdom_v3"
+"integration_id": "pingdom-v3"
+"integration_title": "Pingdom"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "pingdom_v3"
+"public_title": "Pingdom"
+"short_description": "See Pingdom-collected uptimes, response times, and alerts in Datadog."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Category::Metrics
-  - Category::Notifications
-  configuration: README.md#Setup
-  description: Pingdom が収集したアップタイム、応答時間、アラートを Datadog で参照
-  media: []
-  overview: README.md#Overview
-  support: README.md#Troubleshooting
-  title: Pingdom
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  - "Category::Metrics"
+  - "Category::Notifications"
+  "configuration": "README.md#Setup"
+  "description": See Pingdom-collected uptimes, response times, and alerts in Datadog.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Troubleshooting"
+  "title": Pingdom
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## 概要
+## Overview
 
-他のイベントやメトリクスに関連付けて、ユーザー中心の Pingdom パフォーマンスメトリクスを Datadog で追跡します。
+Track Pingdom user-centric performance metrics in Datadog, for correlation with other relevant events and metrics.
 
-Pingdom V3 インテグレーションは [Datadog Pingdom インテグレーション (非推奨)][1] と同様の動作をしますが、[Pingdom API][2] のバージョン 3.1 を使用します。
+Pingdom V3 Integration acts similarly to the [Datadog Pingdom Integration (Deprecated)][1] but uses version 3.1 of the [Pingdom API][2].
 
-{{< img src="integrations/pingdom/pingdom_dashboard.png" alt="Datadog ダッシュボード上の Pingdom グラフ" popup="true">}}
+{{< img src="integrations/pingdom/pingdom_dashboard.png" alt="Pingdom graphs on a Datadog dashboard" popup="true">}}
 
-## セットアップ
+## Setup
 
-### API トークンの生成
+### Generate API Token
 
-1. [Pingdom アカウント][3]にログインします。
-2. _Settings_ > _Pingdom API_ に移動します。
-3. _Add API token_ をクリックします。トークンに名前を付け、_Read-Write_ 権限を与えます。トークンは二度とアクセスできないので、どこかに保存してください。
+1. Login to your [Pingdom account][3].
+2. Navigate to _Settings_ > _Pingdom API_.
+3. Click _Add API token_. Give the token a name and _Read-Write_ permissions. Save the token somewhere as you will not be able to access it again.
 
-### インストールと構成
+### Installation and configuration
 
-1. [Pingdom V3 インテグレーションタイル][4]を開きます。
-2. 名前と API トークンを対応するフィールドに入力します。Pingdom で構成したメトリクスやチェックは、Datadog に収集されます。
-3. Pingdom のチェックのタグを管理します。Pingdom のチェックに追加されたタグは、Datadog のチェックにも自動的に追加されます。`datadog-exclude` タグを追加して、チェックを除外します。
+1. Open the [Pingdom V3 Integration Tile][4].
+2. Enter the name and API Token into the corresponding fields. Metrics and checks configured in Pingdom are collected into Datadog.
+3. Manage tags of checks in Pingdom. Tags added to a check in Pingdom are automatically added to a check in Datadog. Exclude checks by adding the `datadog-exclude` tag. 
 
-## データ収集
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "pingdom_v3" >}}
 
 
-### イベント
+### Events
 
-Pingdom インテグレーションには、イベントは含まれません。
+The Pingdom integration does not include any events.
 
-### サービスチェック
+### Service Checks
 
-Pingdom インテグレーションは、トランザクションチェックを取得し、それをサービスチェックとしてレポートします。
+The Pingdom integration pulls in transaction checks and reports them as service checks.
 
-`pingdom.status` のチェックでは、Pingdom のトランザクションチェックの結果と Datadog のサービスチェックの結果は以下のように相関しています。
+For the `pingdom.status` check, Pingdom transaction check results correlate to Datadog service check results as follows:
 
-| Datadog ステータス | Pingdom ステータス      |
+| Datadog status | Pingdom status      |
 | -------------- | ------------------- |
 | `OK`           | `up`                |
 | `CRITICAL`     | `down`              |
 | `WARNING`      | `unconfirmed_down`  |
-| `UNKNOWN`      | `unknown`、`paused` |
+| `UNKNOWN`      | `unknown`, `paused` |
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+Need help? Contact [Datadog support][6].
 
-[1]: https://docs.datadoghq.com/ja/integrations/pingdom/
+[1]: https://docs.datadoghq.com/integrations/pingdom/
 [2]: https://docs.pingdom.com/api/
 [3]: https://my.pingdom.com/
 [4]: https://app.datadoghq.com/account/settings#integrations/pingdom-v3
 [5]: https://github.com/DataDog/integrations-internal-core/blob/main/pingdom/metadata.csv
-[6]: https://docs.datadoghq.com/ja/help
+[6]: https://docs.datadoghq.com/help
+

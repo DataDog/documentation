@@ -1,14 +1,14 @@
 ---
+title: execution time
 core_product:
-- apm
-title: 実行時間
+  - apm
 ---
-APM では、実行時間とは、スパンがアクティビティとみなされる時間、つまり子スパンの完了を待っていない時間の合計を指します。
+In APM, execution time is the total time that a span is considered active, or not waiting for a child span to complete.
 
-実行時間は、あるスパンがアクティブである時間、つまり子スパンを持たない時間を合計して計算されます。非同期の作業では、これは簡単です。下図では、スパン 1 の実行時間は $\D1 + \D2 + \D3$ となります。スパン 2 とスパン 3 の実行時間は、それぞれの幅になります。
+Execution time is calculated by adding up the time that a span is active, meaning it has no child spans. For non-concurrent work, this is straightforward. In the following image, the execution time for Span 1 is $\D1 + \D2 + \D3$. The execution time for Spans 2 and 3 are their respective widths.
 
-{{< img src="tracing/visualization/execution-time1.png" style="width:50%;" alt="実行時間" >}}
+{{< img src="tracing/visualization/execution-time1.png" style="width:50%;" alt="Execution time" >}}
 
-子スパンが同時進行する場合、実行時間は重複する時間を同時進行するスパンの数で割って計算されます。下図の場合、スパン 2 とスパン 3 は同時進行で (どちらもスパン 1 の子スパン)、スパン 3 の時間だけ重なっているため、スパン 2 の実行時間は $\D2 ÷ 2 + \D3$、スパン 3 の実行時間は $\D2 ÷ 2$ となります。
+When child spans are concurrent, execution time is calculated by dividing the overlapping time by the number of concurrently active spans. In the following image, Spans 2 and 3 are concurrent (both are children of Span 1), overlapping for the duration of Span 3, so the execution time of Span 2 is $\D2 ÷ 2 + \D3$, and the execution time of Span 3 is $\D2 ÷ 2$.
 
-{{< img src="tracing/visualization/execution-time2.png" style="width:50%;" alt="同時進行作業の実行時間" >}}
+{{< img src="tracing/visualization/execution-time2.png" style="width:50%;" alt="Execution time for concurrent work" >}}

@@ -1,58 +1,60 @@
 ---
-aliases:
-- /ja/integrations/azure_filestorage
-categories:
+"aliases":
+- /integrations/azure_filestorage
+"categories":
 - azure
-- クラウド
-- data store
-dependencies: []
-description: Azure File Storage のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_file_storage/
-draft: false
-git_integration_title: azure_file_storage
-has_logo: true
-integration_id: azure-filestorage
-integration_title: Microsoft Azure File Storage
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_file_storage
-public_title: Datadog-Microsoft Azure File Storage インテグレーション
-short_description: Azure File Storage のキーメトリクスを追跡
-version: '1.0'
+- cloud
+- data stores
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure File Storage metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_file_storage/"
+"draft": false
+"git_integration_title": "azure_file_storage"
+"has_logo": true
+"integration_id": "azure-filestorage"
+"integration_title": "Microsoft Azure File Storage"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_file_storage"
+"public_title": "Datadog-Microsoft Azure File Storage Integration"
+"short_description": "Track key Azure File Storage metrics."
+"version": "1.0"
 ---
 
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+## Overview
 
-Azure File Storage は、業界標準のサーバーメッセージブロック (SMB) プロトコルを使用してアクセスできるフルマネージド型のファイル共有をクラウドで提供します。
+Azure File Storage offers fully managed file shares in the cloud that are accessible using the industry standard protocol - Server Message Block (SMB).
 
-Datadog Azure インテグレーションを使用すると、Azure File Storage からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Azure File Storage.
 
-## セットアップ
+## Setup
 
-### インストール
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "azure_file_storage" >}}
 
 
-### イベント
+### Events
 
-Azure File Storage インテグレーションには、イベントは含まれません。
+The Azure File Storage integration does not include any events.
 
-### サービスのチェック
+### Service Checks
 
-Azure File Storage インテグレーションには、サービスのチェック機能は含まれません。
+The Azure File Storage integration does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_file_storage/azure_file_storage_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

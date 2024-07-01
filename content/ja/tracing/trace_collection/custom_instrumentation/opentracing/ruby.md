@@ -1,48 +1,48 @@
 ---
+title: Ruby OpenTracing Instrumentation
+kind: documentation
 aliases:
-- /ja/tracing/setup_overview/open_standards/ruby
-- /ja/tracing/trace_collection/open_standards/ruby
-- /ja/tracing/trace_collection/opentracing/ruby
+- /tracing/setup_overview/open_standards/ruby
+- /tracing/trace_collection/open_standards/ruby
+- /tracing/trace_collection/opentracing/ruby
+description: 'OpenTracing instrumentation for Ruby'
 code_lang: ruby
-code_lang_weight: 20
-description: Ruby のための OpenTracing インスツルメンテーション
-kind: ドキュメント
-title: Ruby OpenTracing インスツルメンテーション
 type: multi-code-lang
+code_lang_weight: 20
 ---
 
-<div class="alert alert-info">OpenTracing のサポートは、非推奨の仕様に基づくものです。オープンな仕様でコードをインスツルメンテーションしたい場合は、代わりに OpenTelemetry を使用してください。<a href="/tracing/trace_collection/otel_instrumentation/ruby/">Datadog トレーシングライブラリの OpenTelemetry インスツルメンテーションからのデータを処理する</a>ためのベータサポートをお試しください。</div>
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/ruby/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
 
-OpenTracing で Datadog をセットアップするには、詳細について Ruby [OpenTracing のクイックスタート][1]を参照してください。
+To set up Datadog with OpenTracing, see the Ruby [Quickstart for OpenTracing][1] for details.
 
-## Datadog トレーサー設定の構成
+## Configuring Datadog tracer settings
 
-基底の Datadog トレーサーは、グローバルトレーサーを構成するときにオプション（ `Datadog::Tracer` と一致）を渡すことで構成できます。
+The underlying Datadog tracer can be configured by passing options (which match `Datadog::Tracer`) when configuring the global tracer:
 
 ```ruby
-# `options` は Datadog::Tracer に提供されるオプションのハッシュです
+# Where `options` is a Hash of options provided to Datadog::Tracer
 OpenTracing.global_tracer = Datadog::OpenTracer::Tracer.new(options)
 ```
 
-[Ruby トレーサー設定][2]セクションで説明されているように、`Datadog.configure` を使用して構成することもできます。
+It can also be configured by using `Datadog.configure` as described in the [Ruby tracer settings][2] section.
 
-## インテグレーションのアクティブ化と構成
+## Activating and configuring integrations
 
-デフォルトでは、Datadog で OpenTracing を構成しても、Datadog が提供する追加のインスツルメンテーションは自動的にアクティブになりません。アプリケーションにある OpenTracing インスツルメンテーションからのみ[スパン][3]と[トレース][4]を受け取ります。
+By default, configuring OpenTracing with Datadog does not automatically activate any additional instrumentation provided by Datadog. You will only receive [spans][3] and [traces][4] from OpenTracing instrumentation you have in your application.
 
-ただし、Datadog が提供する追加のインスツルメンテーションは、`Datadog.configure` を使用して OpenTracing とともにアクティブ化できます。これは、トレースをさらに強化するために使用できます。これを有効にするには、[Ruby インテグレーションインスツルメンテーション][5]で詳細をご覧ください。
+However, additional instrumentation provided by Datadog can be activated alongside OpenTracing using `Datadog.configure`, which can be used to enhance your tracing further. To enable this, see [Ruby integration instrumentation][5] for more details.
 
-## サポートされているシリアル化形式
+## Supported serialization formats
 
-| タイプ                           | サポート | 追加情報                                                                                                                                                                                                                                                                                        |
+| Type                           | Supported? | Additional information                                                                                                                                                                                                                                                                                        |
 | ------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `OpenTracing::FORMAT_TEXT_MAP` | はい        |                                                                                                                                                                                                                                                                                                               |
-| `OpenTracing::FORMAT_RACK`     | はい        | Rack 形式では解決が失われるため、大文字または `-` のいずれかを含む名前のバゲージアイテムは、往復でそれぞれ小文字と `_` に変換されることに注意してください。Datadog は、これらの文字を避けるか、受信側でそれに応じて対応することをお勧めします。 |
-| `OpenTracing::FORMAT_BINARY`   | いいえ         |                                                                                                                                                                                                                                                                                                               |
+| `OpenTracing::FORMAT_TEXT_MAP` | Yes        |                                                                                                                                                                                                                                                                                                               |
+| `OpenTracing::FORMAT_RACK`     | Yes        | Because of the loss of resolution in the Rack format, note that baggage items with names containing either upper case characters or `-` are be converted to lower case and `_` in a round-trip, respectively. Datadog recommends avoiding these characters or accommodating accordingly on the receiving end. |
+| `OpenTracing::FORMAT_BINARY`   | No         |                                                                                                                                                                                                                                                                                                               |
 
 
-[1]: /ja/tracing/setup/ruby/#quickstart-for-opentracing
-[2]: /ja/tracing/setup/ruby/#tracer-settings
-[3]: /ja/tracing/glossary/#spans
-[4]: /ja/tracing/glossary/#trace
-[5]: /ja/tracing/setup/ruby/#integration-instrumentation
+[1]: /tracing/setup/ruby/#quickstart-for-opentracing
+[2]: /tracing/setup/ruby/#tracer-settings
+[3]: /tracing/glossary/#spans
+[4]: /tracing/glossary/#trace
+[5]: /tracing/setup/ruby/#integration-instrumentation

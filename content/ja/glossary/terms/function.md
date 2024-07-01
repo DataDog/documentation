@@ -1,6 +1,6 @@
 ---
+title: function
 core_product:
-- serverless monitoring
-title: 関数
+  - serverless monitoring
 ---
-サーバーレスコンピューティングでは、関数はマネージドインフラクチャー上でホストされるプログラマティックな関数です。
+In serverless computing, a function is a programmatic function hosted on managed infrastructure.

@@ -1,25 +1,25 @@
 ---
+title: Python OpenTracing instrumentation
+kind: documentation
 aliases:
-- /ja/tracing/setup_overview/open_standards/python
-- /ja/tracing/trace_collection/open_standards/python
-- /ja/tracing/trace_collection/opentracing/python/
+- /tracing/setup_overview/open_standards/python
+- /tracing/trace_collection/open_standards/python
+- /tracing/trace_collection/opentracing/python/
+description: 'OpenTracing instrumentation for Python'
 code_lang: python
-code_lang_weight: 10
-description: Python のための OpenTracing インスツルメンテーション
-kind: ドキュメント
-title: Python OpenTracing インスツルメンテーション
 type: multi-code-lang
+code_lang_weight: 10
 ---
 
-<div class="alert alert-info">OpenTracing のサポートは、非推奨の仕様に基づくものです。オープンな仕様でコードをインスツルメンテーションしたい場合は、代わりに OpenTelemetry を使用してください。<a href="/tracing/trace_collection/otel_instrumentation/python/">Datadog トレーシングライブラリの OpenTelemetry インスツルメンテーションからのデータを処理する</a>ためのベータサポートをお試しください。</div>
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try the beta support for <a href="/tracing/trace_collection/otel_instrumentation/python/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
 
-OpenTracing のサポートは `ddtrace` パッケージに含まれています。`pip` を使用して、必要な `opentracing` パッケージをインストールします。
+OpenTracing support is included in the `ddtrace` package. Use `pip` to install the required `opentracing` package:
 
 ```sh
 pip install ddtrace[opentracing]
 ```
 
-トレーサーを初期化するための OpenTracing の規則は、新しいトレーサーを構成、インスタンス化し、グローバルな `opentracing.tracer` 参照を上書きする初期化メソッドを定義することです。
+The OpenTracing convention for initializing a tracer is to define an initialization method that configures and instantiates a new tracer and overwrites the global `opentracing.tracer` reference:
 
 ```python
 import time
@@ -45,7 +45,7 @@ init_tracer("<SERVICE_NAME>")
 my_operation()
 ```
 
-トレーサーが、その他の OpenTracing アプリケーションと同様に使用できるようになりました。OpenTracing Python の使用方法については [opentracing.io][1] を参照してください。
+The tracer can now be used like in any other OpenTracing application. See [opentracing.io][1] for OpenTracing Python usage.
 
 
 [1]: https://opentracing.io/guides/python/

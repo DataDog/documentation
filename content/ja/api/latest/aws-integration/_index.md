@@ -1,3 +1,3 @@
 ---
-title: AWS インテグレーション
+title: AWS Integration
 ---

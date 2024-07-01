@@ -1,78 +1,103 @@
 ---
-categories:
+"app_id": "jumpcloud"
+"app_uuid": "37f8026f-e2ac-4a71-9270-0b03fab814cc"
+"assets":
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "613"
+    "source_type_name": Jumpcloud
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - event management
-- セキュリティ
-- ログの収集
-dependencies: []
-description: Jumpcloud
-doc_link: https://docs.datadoghq.com/integrations/jumpcloud/
-draft: false
-git_integration_title: jumpcloud
-has_logo: true
-integration_id: ''
-integration_title: Jumpcloud
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: jumpcloud
-public_title: Jumpcloud
-short_description: Jumpcloud からログを収集します。
-team: web-integrations
-version: '1.0'
+- security
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "jumpcloud"
+"integration_id": "jumpcloud"
+"integration_title": "Jumpcloud"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "jumpcloud"
+"public_title": "Jumpcloud"
+"short_description": "View Jumpcloud events in Datadog"
+"supported_os": []
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Event Management"
+  - "Category::Security"
+  "configuration": "README.md#Setup"
+  "description": View Jumpcloud events in Datadog
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Jumpcloud
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
+## Overview
 
-JumpCloud は、ユーザー認証とネットワーク管理を中心とした Active Directory と LDAP サービスの統合アプローチを提供するクラウドベースのディレクトリプラットフォームです。
+JumpCloud is a cloud-based directory platform that provides a unified approach to Active Directory and LDAP services centered around user authentication and network management. 
 
-JumpCloud を使用すると、企業は、ソフトウェア、システム、およびネットワークへのユーザーアクセスを管理およびプロビジョニングし、監査証跡でコンプライアンスを実施し、シングルサインオン (SSO) を介して統一されたログインエクスペリエンスを提供することができます。クラウドネイティブプラットフォームである JumpCloud は、従来のディレクトリニーズにドメインレスセキュリティソリューションを提供することで、リモートで柔軟な IT 管理を可能にします。
+Using JumpCloud, companies can manage and provision user access to software, systems, and networks; enforce compliance with audit trails; and provide a unified login experience through single sign-on (SSO). As a cloud-native platform, JumpCloud enables a remote and flexible form of IT management by providing domainless security solutions for traditional directory needs.
 
-JumpCloud インテグレーションにより、以下のアクセスが提供されます。
+The JumpCloud integration provides access to the following:
 
-- ディレクトリイベント: ポータル内のアクティビティのログ（ディレクトリの管理者および
-  ポータルへの管理者/ユーザー認証の変更を含む）
+- Directory Events: Logs on activity in the Portal, including admin changes in
+  the directory and admin/user authentications to the Portal.
 
-- SAML イベント: SAML アプリケーションへのユーザー認証のログ
+- SAML Events: Logs on user authentications to SAML applications.
 
-- RADIUS イベント: WiFi および VPN に使用された RADIUS へのユーザー認証のログ
+- RADIUS Events: Logs on user authentications to RADIUS used for wifi and VPNs.
 
-- MacOS、Windows、Linux イベント: システムへのユーザー認証に関するログ
-  （ロックアウト時の Agent 関連のイベント、パスワード変更、
-  ファイルディスク暗号化キーの更新などを含む）
+- MacOS, Windows, and Linux Events: Logs about user authentications to systems
+  including agent-related events on lockout, password changes, and File Disk
+  Encryption key updates.
 
-- LDAP イベント: LDAP へのユーザー認証に関するログ（LDAP バインドおよび
-  検索イベントタイプを含む）
+- LDAP Events: Logs about user authentications to LDAP, including LDAP bind and
+  search events types.
 
-- MDM イベント: MDM コマンドの結果に関するログ
+- MDM Events: Logs about MDM command results.
 
-詳細については、[Datadog で JumpCloud ディレクトリを監視する][1]および [Insights API リファレンス][2]を参照してください。
+For more information, see [Monitor your JumpCloud directory with Datadog][1] and the [Insights API Reference][2].
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-インストールは必要ありません。
+No installation is required.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-詳しくは、インテグレーションタイルを参照してください。JumpCloud 管理ポータルからの API キーが必要です。
+See the integration tile for details. An API key is required from the JumpCloud
+Administrator Portal.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### ワークフローの自動化
+### Logs
 
-ログは、単一の API エンドポイントから収集されます。[インサイト API][2] をご確認ください。
+Logs are collected from a single API endpoint. See the [Insights API][2].
 
-### データセキュリティ
+### Metrics
 
-JumpCloud インテグレーションには、メトリクスは含まれません。
+The JumpCloud integration does not include any metrics.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
 [1]: https://www.datadoghq.com/blog/monitor-jumpcloud-directory/
 [2]: https://docs.jumpcloud.com/api/insights/directory/1.0/index.html
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

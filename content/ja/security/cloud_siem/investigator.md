@@ -1,51 +1,49 @@
 ---
+title: Investigator
 aliases:
-- /ja/security_platform/cloud_siem/cloud_security_investigator/
-- /ja/security_platform/cloud_siem/cloud_siem_investigator/
-- /ja/security_platform/cloud_siem/investigator/
-- /ja/security/cloud_siem/cloud_security_investigator/
-- /ja/security/cloud_siem/cloud_siem_investigator/
+  - /security_platform/cloud_siem/cloud_security_investigator/
+  - /security_platform/cloud_siem/cloud_siem_investigator/
+  - /security_platform/cloud_siem/investigator/
+  - /security/cloud_siem/cloud_security_investigator/
+  - /security/cloud_siem/cloud_siem_investigator/
 further_reading:
 - link: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-  tag: ドキュメント
-  text: Cloud SIEM のための AWS の構成
+  tag: Documentation
+  text: Configure AWS for Cloud SIEM
 - link: /cloud_siem/explorer/
   tag: Documentation
-  text: セキュリティシグナルエクスプローラーについて学ぶ
-- link: https://www.datadoghq.com/blog/visualize-cloud-activity-datadog-cloud-siem-investigator/
-  tag: ブログ
-  text: Datadog Cloud SIEM Investigator でクラウド環境のアクティビティを視覚化する
-title: Investigator
+  text: Learn about the Security Signals Explorer
+- link: "https://www.datadoghq.com/blog/visualize-cloud-activity-datadog-cloud-siem-investigator/"
+  tag: Blog
+  text: Visualize activity in your cloud environment with Datadog Cloud SIEM Investigator
 ---
 
-## 概要
+## Overview
 
-<div class="alert alert-info">Cloud SIEM Investigator は、AWS CloudTrail ログと Google Cloud Audit ログをサポートしています。</div>
+When a security signal alerts on suspicious activity by a user or a resource, some commonly asked questions during the investigation include:
 
-セキュリティシグナルがユーザーやリソースによる不審なアクティビティをアラートした場合、調査時によく聞かれる質問に次のようなものがあります。
+- Is the user accessing other accounts?
+- What other actions did the user take around that specific time frame?
+- What are all the actions taken on a resource by the user?
+- What users have interacted with this resource?
 
-- ユーザーが他のアカウントにアクセスしていないか？
-- その特定の時間帯に、ユーザーは他にどのようなアクションを起こしたのか？
-- ユーザーがリソースに対して行うすべてのアクションは何か？
-- どのようなユーザーがこのリソースと交流しているのか？
+For example, suppose you receive a security signal that someone changed the configuration of an Amazon S3 bucket so that it is accessible by everyone, but the action was taken by an assumed role. To investigate, look into who took the action and what other activities they did recently, as that could indicate compromised credentials.
 
-例えば、誰かが AWS S3 バケットの構成を変更し、誰でもアクセスできるようにしたが、そのアクションは想定された役割によって行われたというセキュリティシグナルを受け取ったとします。調査するには、誰がアクションを起こしたか、そして彼らが最近行った他のアクティビティを調べます。それは侵害された資格情報を示す可能性があるからです。
-
-Cloud SIEM Investigator は、影響を受けるエンティティから別のエンティティにピボットするためのグラフィカルインターフェイスを提供し、ユーザーの行動とそれが環境に与える影響を確認することができます。
+The Cloud SIEM Investigator provides a graphical interface for you to pivot from one affected entity to another, so that you can see user behavior and its impact on your environment.
 
 
-## アクティビティを視覚化し、調査する
+## Visualize and investigate the activity
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-1. **Security** > **Cloud SIEM** に移動し、[**Investigator**][1] タブをクリックします。
+1. Navigate to **Security** > **Cloud SIEM** and click the [**Investigator**][1] tab.
 
-2. **In** フィールドのドロップダウンメニューで、エンティティタイプを選択します。
+2. Select an entity type in the **In** field dropdown menu.
 
-3. エンティティを選択するか、**Investigate** フィールドに特定のエンティティ名を入力すると、そのエンティティに関連するアクティビティの図が表示されます。
+3. Select an entity or enter a specific entity name in the **Investigate** field to see a diagram of the activities associated with the entity.
 
-4. ノードをクリックし、**View related logs** または **View in Log Explorer** を選択すると、関連するログを見ることができます。アクションでフィルターをかけるには、**and filter by** ドロップダウンメニューを使用します。
+4. Click on a node and select **View related logs** or **View in Log Explorer** to see the related logs. Use the **and filter by** dropdown menu to filter by actions.
 
 [1]: https://app.datadoghq.com/security/investigator/aws
 
@@ -53,20 +51,36 @@ Cloud SIEM Investigator は、影響を受けるエンティティから別の�
 
 {{% tab "GCP" %}}
 
-1. **Security** > **Cloud SIEM** に移動し、**Investigator** タブ、そして [**GCP**][1] タブをクリックします。
+1. Navigate to **Security** > **Cloud SIEM** and click the **Investigator** tab, and then the [**GCP**][1] tab.
 
-2. **In** フィールドのドロップダウンメニューで、エンティティタイプを選択します。
+2. Select an entity type in the **In** field dropdown menu.
 
-3. エンティティを選択するか、**Investigate** フィールドに特定のエンティティ名を入力すると、そのエンティティに関連するアクティビティの図が表示されます。
+3. Select an entity or enter a specific entity name in the **Investigate** field to see a diagram of the activities associated with the entity.
 
-4. ノードをクリックし、**View related logs** または **View in Log Explorer** を選択すると、関連するログを見ることができます。アクションでフィルターをかけるには、**and filter by** ドロップダウンメニューを使用します。
+4. Click on a node and select **View related logs** or **View in Log Explorer** to see the related logs. Use the **and filter by** dropdown menu to filter by actions.
 
 [1]: https://app.datadoghq.com/security/investigator/gcp
 {{% /tab %}}
+
+{{% tab "Azure" %}}
+
+1. Navigate to **Security** > **Cloud SIEM** and click the **Investigator** tab, and then the [**Azure**][1] tab.
+
+2. Select an entity type in the **In** field dropdown menu.
+
+3. Select an entity or enter a specific entity name in the **Investigate** field to see a diagram of the activities associated with the entity.
+
+4. Click on a node and select **View related logs** or **View in Log Explorer** to see the related logs. Use the **and filter by** dropdown menu to filter by actions.
+
+[1]: https://app.datadoghq.com/security/investigator/azure
+{{% /tab %}}
+
 {{< /tabs >}}
 
-また、セキュリティシグナルから直接 Cloud SIEM Investigator に移動することができます。セキュリティシグナルパネルで、**Investigate user activity** (ここで `user` は問題のユーザー ID) をクリックすると、特定のユーザー ID にフィルターがかかった Investigator ビューが表示されます。
+You can also navigate to the Cloud SIEM Investigator directly from a security signal. In the security signal panel, click **Investigate user activity** (where `user` is the user identity in question) to see the Investigator view filtered to the specific user identity.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+

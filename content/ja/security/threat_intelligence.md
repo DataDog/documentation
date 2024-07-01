@@ -1,96 +1,110 @@
 ---
+title: Threat Intelligence
+kind: documentation
 aliases:
-- /ja/security/threat_intel
-description: Datadog の Threat Intelligence
+    - /security/threat_intel
+description: "Threat Intelligence at Datadog"
 further_reading:
-- link: /security/application_security/threats/threat-intelligence/
-  tag: ドキュメント
-  text: ASM Threat Intelligence
-kind: ドキュメント
-title: 高度な構成
+  - link: /security/application_security/threats/threat-intelligence/
+    tag: documentation
+    text: ASM Threat Intelligence
+products:
+- name: Cloud SIEM
+  url: /security/cloud_siem/
+  icon: siem
+- name: CSM Threats
+  url: /security/threats/
+  icon: cloud-security-management
+- name: Application Security Management
+  url: /security/application_security/
+  icon: app-sec
 ---
 
-## 概要
-Threat Intelligence は、対応者が攻撃や侵害について情報に基づいた判断を下すのに役立つ評判情報です。
+{{< product-availability >}}
 
-Datadog は、商用、オープンソース、および自社の脅威インテリジェンスの侵害指標をカテゴリーと意図に分類しています。脅威インテリジェンスは、ソースごとに少なくとも 1 日 1 回更新されます。このデータは、ログとトレースを関連する評判情報でリッチ化するために使用されます。
+## Overview
+Threat Intelligence is reputation information that helps responders make informed decisions on attacks and compromises. 
 
-## 脅威インテリジェンスのライフサイクル
+Datadog curates commercial, open-source, and in-house threat intelligence indicators of compromise into categories and intents. Threat intelligence is updated at least once per day, per source. This data is used to enrich your logs and traces with relevant reputation information.
 
-Datadog は、以下に挙げるエンティティタイプにわたって脅威インテリジェンスを収集します。各エンティティタイプには固有の特徴と有用なタイムフレームがあります。このタイムフレーム (ライフサイクル) は、データに対する脅威インテリジェンスの一致の重要性を評価する際に考慮する必要があります。
+## Threat Intelligence Lifecycle
 
-**ファイルハッシュ: 一意のデジタルフィンガープリント**
+Datadog collects threat intelligence across the following entity types. Each entity type has unique characteristics and a useful timeframe. This timeframe, or lifecycle, requires consideration when assessing the importance of a threat intelligence match on your data.
 
-ファイルハッシュは、特定のファイルに対する一意のデジタフィンガープリントとして機能します。ファイルハッシュがマルウェアとしてマークされた場合、そのファイルの正確なコンテンツが有害であることを意味します。ハッシュの不変性は、そのファイルのコンテンツと結びついているため、一貫した識別が保証されます。その結果、マルウェアとしてタグ付けされたファイルハッシュは、識別が真陽性であれば、この識別を保持します。
+### File Hashes: Unique Digital Fingerprints
 
-**アプリケーションパッケージ: 配布におけるマルウェアのリスク**
+File hashes function as unique digital fingerprints for specific files. When a file hash is marked as malware, it signifies the file's exact content is harmful. The immutability of a hash, which is tied to its file's content, ensures its consistent identification. As a result, a file hash tagged as malware retains this identification, provided the identification was a true positive.
 
-不変のファイルハッシュとは異なり、アプリケーションパッケージは同じバージョン番号であっても、内容やセキュリティが異なる可能性があります。悪意のある行為者は、正当なパッケージを模倣した有害なパッケージをアップロードするかもしれませんし、マルウェアを導入することで既存のパッケージを危険にさらすかもしれません。悪意のあるパッケージのライフサイクルは頻繁に長くなりますが、不変ではありません。
+### Application Packages: Malware Risk in Distribution
 
-**ドメイン: 一時的な署名**
+Unlike immutable file hashes, application packages can vary in content and security, even under the same version number. Malicious actors may upload harmful packages mimicking legitimate ones, or they might compromise existing packages by introducing malware. The lifecycle of malicious packages is frequently long-lived, but not immutable.
 
-ファイルハッシュとは異なり、悪意のあるドメインとして識別されたドメインは変更される可能性があります。様々なエンティティによって、修復、再割り当て、再利用などのプロセスが行われる可能性があります。悪意のあるドメインや疑わしいドメインのライフサイクルは、IP アドレスに比べると多少長くなりますが、一時的で変化しやすいことに変わりはありません。
+### Domains: Temporary Signatures
 
-**IP アドレス: 動的および一時的**
+Unlike file hashes, domains identified as malicious are subject to change. They may undergo processes such as remediation, reassignment, or repurposing by various entities. While the lifecycle of malicious or suspicious domains is somewhat prolonged compared to IP addresses, it remains temporary and variable.
 
-IP アドレスは脅威インテリジェンスにおける最も変動しやすい要素を代表し、24 時間周期で評判が変わることがよくあります。IP アドレスの動的な性質、特に複数のホストが関与する可能性のある家庭用ネットワークやモバイルネットワークでは、そのステータスを定期的に再評価することが極めて重要です。評判の低い IP アドレスに接続しているすべてのホストが本質的に悪意があるわけではないため、相関関係の必要性が強調されます。
+### IP Addresses: Dynamic and Transient
 
-## 脅威インテリジェンスのベストプラクティス
+IP addresses represent the most volatile element in threat intelligence, often changing reputations within a 24-hour cycle. Given their dynamic nature, particularly in residential and mobile networks where multiple hosts may be involved, it's crucial to regularly reassess their status. Not all hosts connected to a low-reputation IP address are inherently malicious, underscoring the need for correlation.
 
-脅威インテリジェンスでは、評判がキーとなりますが、他の証拠と比較検討する必要があります。トラフィックをブロックするために IP やドメインのインテリジェンスだけに頼ることは、ごく少数の例外を除いて推奨されません。バランスの取れた、証拠に基づくアプローチが不可欠です。
+## Best Practices in Threat Intelligence
 
-[検出ルール][1]内で使用される脅威インテリジェンスは、カテゴリーや意図といった Datadog のキー項目を参照すべきです。その他のキーは使用しないでください。
+With threat intelligence, reputation is key, but it must be weighed alongside other evidence. Relying solely on IP and domain intelligence for blocking traffic is not recommended, with few exceptions. A balanced, evidence-based approach is essential.
 
-## 脅威インテリジェンスの透明性
-Datadog は、検出に関連する外部の脅威インテリジェンスソースへの外部リンクを提供することで、透明性を確保します。Datadog がキュレーションした脅威インテリジェンスは、Datadog プラットフォームに取り込まれ、リッチ化と検出が行われます。Datadog が脅威インテリジェンスソースに顧客データを送信することはありません。
+Threat intelligence used in [Detection Rules][1] should reference the Datadog keys such as category (`@threat_intel.results.category`) and intent (`@threat_intel.results.intention`). Other keys should not be used.
 
-検出とリッチ化は、UI とイベント JSON でアクセスできます。
+## Transparency in Threat Intelligence 
 
-## 脅威インテリジェンスファセット
-ソース、カテゴリー、意図は、関連する製品エクスプローラーのファセットやフィルターとして利用できます。
+Datadog ensures transparency by providing external links to external threat intelligence sources associated with a detection. Threat intelligence curated by Datadog is ingested into the Datadog platform for enrichment and detection. Datadog does not send customer data to threat intelligence sources.
 
-### 脅威インテリジェンスソース
+The detections and enrichments are accessible in the UI and event JSON.
 
-| ソース | カテゴリー | ソースの使用例 | 主要製品 | 
+## Threat Intelligence Facets
+
+Sources, categories, and intents are available as facets and filters on relevant product explorers. 
+
+### Threat Intelligence Sources
+
+| Source | Category | Source Use Cases | Primary Products | 
 |--------|------------|-----------|------------------|
-| Datadog Threat Research| スキャナ、エクスプロイト | ソフトウェア固有の脅威に特化したハニーポット | ASM と CWS |
-| [Spur](https://spur.us/) | residential_proxy | クレデンシャルスタッフィングと詐欺に関連するプロキシ | ASM と Cloud SIEM |
-| [Spur](https://spur.us/) | malware_proxy | マルウェアのコマンドとコントロールに関連するプロキシ | GRPC |
-| [Abuse.ch](https://abuse.ch/) Malware Bazaar| マルウェア | ホスト上のマルウェア | CWS |
-| [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | マルウェア | 既知のマイニングプールでのコインマイナー活動| CWS |
-| Tor | tor | ユーザーアクティビティに関するポリシー違反 | AWS、Cloud SIEM、CWS |
+| Datadog Threat Research| scanners, exploits | Honeypots focused on software specific threats | ASM and CWS |
+| [Spur](https://spur.us/) | residential_proxy | Proxies associated credential stuffing and fraud | ASM and Cloud SIEM |
+| [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM |
+| [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
+| [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | malware | Coinminer activity with known mining pools| CWS |
+| Tor | tor | Policy violations for user activity | AWS, Cloud SIEM, and CWS |
 
-### 脅威インテリジェンスカテゴリー
+### Threat Intelligence Categories
 
-| カテゴリー | 意図 | エンティティタイプ | 製品の使用例 | 主要製品 |
+| Category | Intention | Entity Types | Product Use Cases | Primary Products |
 |----------|----------|--------------|----------|------------------|
-| residential_proxy | 疑わしい | IP アドレス | クレデンシャルスタッフィングと詐欺の評判 | ASM と Cloud SIEM |
-| botnet_proxy | 疑わしい | IP アドレス | ボットネットの一部であり、分散攻撃に貢献しているという評判 | ASM と Cloud SIEM |
-| マルウェア | 悪意がある | アプリケーションライブラリのバージョン、ファイルハッシュ | 悪意のあるパッケージとマイニングプールとの通信| CWS |
-| スキャナー | 疑わしい | IP アドレス | スキャナーの評判 | ASM と Cloud SIEM |
-| hosting_proxy | 疑わしい | IP アドレス | 分散クレデンシャルスタッフィング攻撃など、悪用の評判があるデータセンター IP | ASM と Cloud SIEM |
-| Tor | 疑わしい | IP アドレス  | ユーザーアクティビティに関する企業ポリシー違反 | ASM と Cloud SIEM |
+| residential_proxy | suspicious | IP addresses | Reputation for credential stuffing and fraud | ASM and Cloud SIEM |
+| botnet_proxy | suspicious | IP addresses | Reputation for being part of a botnet and contributing to distributed attacks | ASM and Cloud SIEM |
+| malware | malicious | application library versions, file hashes | Malicious packages and communication with mining pools| CWS |
+| scanner | suspicious | IP addresses | Reputation for scanners | ASM and Cloud SIEM |
+| hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | ASM and Cloud SIEM |
+| Tor | suspicious | IP addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
 
-### 脅威インテリジェンスの意図
-| 意図 | 使用例 |
+### Threat Intelligence Intents
+| Intent | Use Case |
 |--------|----------|
-| 良性 | 企業 VPN と情報のリッチ化 |
-| 疑わしい | 低い評判 | 
-| 悪意がある | 悪意のある評判 | 
+| benign | Corporate VPNs and informational enrichments |
+| suspicious | Low reputation | 
+| malicious | Malicious reputation | 
 
 
-## エンティティタイプ
-| エンティティタイプ | 例 | 使用例 | 
+## Entity Types
+| Entity Type | Example | Use Cases | 
 |-------------|---------|-----------------------------|
-| IP アドレス | 128.66.0.1 | 攻撃、コマンドとコントロール、スキャンアクティビティに関連する IP アドレスの特定 | 
-| ドメイン | example.com、subdomain.example.com | 悪意のある使用に関連するドメイン。マルウェアのコマンドとコントロールとしてよく使用されます |
-| アプリケーションパッケージのバージョン | (example_package、1.0.0) | PyPi からダウンロードされた悪意のあるパッケージの特定 |
-| ファイルハッシュ [SHA1、SHA256] | 5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8 | マルウェアまたは侵害に関連する明確なファイルの特定 |</br>
+| IP addresses | 128.66.0.1 | Identify IP addresses associated with attacks, command and control, and scanning activity | 
+| domains | example.com, subdomain.example.com | Domains associated with malicious use. Often used with malware as a command and control |
+| application packages versions | (example_package, 1.0.0) | Identify malicious packages downloaded from PyPi |
+| file hashes [SHA1, SHA256] | 5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8 | Identify a distinct file associated with malware or compromise |</br>
 
-**注**: 現在、脅威インテリジェンスのソースとカテゴリは構成変更できません。
+**Note**: Threat intelligence sources and categories are not configurable at this time. 
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]:/ja/security/detection_rules/
+[1]:/security/detection_rules/

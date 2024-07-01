@@ -1,41 +1,42 @@
 ---
 integration_title: Hdfs
 is_public: true
-kind: インテグレーション
-short_description: クラスターのディスク使用状況、ボリューム障害、停止した DataNode などを追跡します。
+kind: integration
+short_description: Track cluster disk usage, volume failures, dead DataNodes, and more.
 ---
 
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-## HDFS DataNode インテグレーション
+## HDFS DataNode Integration
 
-![HDFS ダッシュボード][1]
+![HDFS Dashboard][1]
 
-## 概要
+## Overview
 
-各 HDFS DataNode のディスク使用率と障害ボリュームを追跡します。この Agent チェックはこれらのメトリクスに加えて、ブロックおよびキャッシュ関連のメトリクスを収集します。 このチェック (hdfs_datanode) とその対になるチェック (hdfs_namenode) を使用し、古いツーインワンチェック (hdfs) は使用しないでください。このチェックは非推奨です。 
+Track disk utilization and failed volumes on each of your HDFS DataNodes. This Agent check collects metrics for these, as well as block- and cache-related metrics.
 
-## セットアップ
+Use this check (hdfs_datanode) and its counterpart check (hdfs_namenode), not the older two-in-one check (hdfs); that check is deprecated.
 
-ホスト上で実行されている Agent に対してこのチェックをインストールおよび構成するには、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーインテグレーションテンプレート][2]を参照してください。
+## Setup
 
-### インストール
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれているため、DataNode に他に何かをインストールする必要はありません。
+### Installation
 
-### 構成
+The HDFS DataNode check is included in the [Datadog Agent][3] package, so you don't need to install anything else on your DataNodes.
 
-#### Agent の接続
+### Configuration
+
+#### Connect the Agent
 
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Host" xxx -->
 
+#### Host
 
-#### メトリクスベース SLO
+To configure this check for an Agent running on a host:
 
-ホストで実行中の Agent に対してこのチェックを構成するには
-
-1. [Agent の構成ディレクトリ][4]のルートにある `conf.d/` フォルダーの `hdfs_datanode.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル hdfs_datanode.d/conf.yaml][5] を参照してください。
+1. Edit the `hdfs_datanode.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][4]. See the [sample hdfs_datanode.d/conf.yaml][5] for all available configuration options:
 
    ```yaml
    init_config:
@@ -53,32 +54,32 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
      - hdfs_datanode_jmx_uri: http://localhost:9864
    ```
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
 <!-- xxz tab xxx -->
-<!-- xxx tab "コンテナ化" xxx -->
+<!-- xxx tab "Containerized" xxx -->
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying the parameters below.
 
-| パラメーター            | 値                                               |
+| Parameter            | Value                                               |
 | -------------------- | --------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `hdfs_datanode`                                     |
-| `<INIT_CONFIG>`      | 空白または `{}`                                       |
+| `<INIT_CONFIG>`      | blank or `{}`                                       |
 | `<INSTANCE_CONFIG>`  | `{"hdfs_datanode_jmx_uri": "http://%%host%%:9864"}` |
 
-#### 収集データ
+#### Log collection
 
-**Agent 6.0 以上で使用可能**
+**Available for Agent >6.0**
 
-1. Datadog Agent でのログ収集は、デフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent. Enable it in the `datadog.yaml` file with:
 
     ```yaml
       logs_enabled: true
     ```
 
-2. DataNode のログの収集を開始するには、次の構成ブロックを `hdfs_datanode.d/conf.yaml` ファイルに追加します。
+2. Add this configuration block to your `hdfs_datanode.d/conf.yaml` file to start collecting your DataNode logs:
 
     ```yaml
       logs:
@@ -88,76 +89,76 @@ HDFS DataNode チェックは [Datadog Agent][3] パッケージに含まれて�
           service: <SERVICE_NAME>
     ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
+    Change the `path` and `service` parameter values and configure them for your environment.
 
-3. [Agent を再起動します][6]。
+3. [Restart the Agent][6].
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
 
-### 検証
+### Validation
 
-[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `hdfs_datanode` を検索します。
+[Run the Agent's status subcommand][7] and look for `hdfs_datanode` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "hdfs_datanode" >}}
 
 
-### ヘルプ
+### Events
 
-HDFS-datanode チェックには、イベントは含まれません。
+The HDFS-datanode check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "hdfs_datanode" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-## その他の参考資料
+## Further Reading
 
-- [Hadoop アーキテクチャの概要][9]
-- [Hadoop メトリクスの監視方法][10]
-- [Hadoop メトリクスの収集方法][11]
-- [Datadog を使用した Hadoop の監視方法][12]
+- [Hadoop architectural overview][9]
+- [How to monitor Hadoop metrics][10]
+- [How to collect Hadoop metrics][11]
+- [How to monitor Hadoop with Datadog][12]
 
 
 
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-## HDFS NameNode インテグレーション
+## HDFS NameNode Integration
 
-![HDFS ダッシュボード][13]
+![HDFS Dashboard][13]
 
-## 概要
+## Overview
 
-プライマリ HDFS NameNode とスタンバイ HDFS NameNode を監視して、クラスターが不安定な状態に陥ったときに知ることができます。この Agent チェックは、残り容量、破損/欠落ブロック、停止した DataNode、ファイルシステム負荷、レプリケート不足ブロック、合計ボリューム障害 (すべての DataNode に対する) などのメトリクスを収集します。
+Monitor your primary _and_ standby HDFS NameNodes to know when your cluster falls into a precarious state: when you're down to one NameNode remaining, or when it's time to add more capacity to the cluster. This Agent check collects metrics for remaining capacity, corrupt/missing blocks, dead DataNodes, filesystem load, under-replicated blocks, total volume failures (across all DataNodes), and many more.
 
-このチェック (hdfs_namenode) とその対になるチェック (hdfs_datanode) を使用し、古いツーインワンチェック (hdfs) は使用しないでください。このチェックは非推奨です。
+Use this check (hdfs_namenode) and its counterpart check (hdfs_datanode), not the older two-in-one check (hdfs); that check is deprecated.
 
-## セットアップ
+## Setup
 
-ホスト上で実行されている Agent に対してこのチェックをインストールおよび構成するには、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーインテグレーションテンプレート][2]を参照してください。
+Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### インストール
+### Installation
 
-HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれているため、NameNode に他に何かをインストールする必要はありません。
+The HDFS NameNode check is included in the [Datadog Agent][3] package, so you don't need to install anything else on your NameNodes.
 
-### 構成
+### Configuration
 
-#### Agent の接続
+#### Connect the Agent
 
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Host" xxx -->
 
-#### メトリクスベース SLO
+#### Host
 
-ホストで実行中の Agent に対してこのチェックを構成するには
+To configure this check for an Agent running on a host:
 
-1. [Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `hdfs_namenode.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hdfs_namenode.d/conf.yaml][14] を参照してください。
+1. Edit the `hdfs_namenode.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][4]. See the [sample hdfs_namenode.d/conf.yaml][14] for all available configuration options:
 
    ```yaml
    init_config:
@@ -175,32 +176,32 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
      - hdfs_namenode_jmx_uri: http://localhost:9870
    ```
 
-2. [Agent を再起動します][6]。
+2. [Restart the Agent][6].
 
 <!-- xxz tab xxx -->
-<!-- xxx tab "コンテナ化" xxx -->
+<!-- xxx tab "Containerized" xxx -->
 
-#### コンテナ化
+#### Containerized
 
-コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照して、次のパラメーターを適用してください。
+For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying the parameters below.
 
-| パラメーター            | 値                                                |
+| Parameter            | Value                                                |
 | -------------------- | ---------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `hdfs_namenode`                                      |
-| `<INIT_CONFIG>`      | 空白または `{}`                                        |
+| `<INIT_CONFIG>`      | blank or `{}`                                        |
 | `<INSTANCE_CONFIG>`  | `{"hdfs_namenode_jmx_uri": "https://%%host%%:9870"}` |
 
-#### 収集データ
+#### Log collection
 
-**Agent 6.0 以上で使用可能**
+**Available for Agent >6.0**
 
-1. Datadog Agent でのログ収集は、デフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
+1. Collecting logs is disabled by default in the Datadog Agent. Enable it in the `datadog.yaml` file with:
 
     ```yaml
       logs_enabled: true
     ```
 
-2. NameNode のログの収集を開始するには、次の構成ブロックを `hdfs_namenode.d/conf.yaml` ファイルに追加します。
+2. Add this configuration block to your `hdfs_namenode.d/conf.yaml` file to start collecting your NameNode logs:
 
     ```yaml
       logs:
@@ -210,51 +211,51 @@ HDFS NameNode チェックは [Datadog Agent][3] パッケージに含まれて�
           service: <SERVICE_NAME>
     ```
 
-    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
+    Change the `path` and `service` parameter values and configure them for your environment.
 
-3. [Agent を再起動します][6]。
+3. [Restart the Agent][6].
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
 
-### 検証
+### Validation
 
-[Agent の status サブコマンドを実行][7]し、Checks セクションで `hdfs_namenode` を検索します。
+[Run the Agent's status subcommand][7] and look for `hdfs_namenode` under the Checks section.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "hdfs_namenode" >}}
 
 
-### ヘルプ
+### Events
 
-HDFS-namenode チェックには、イベントは含まれません。
+The HDFS-namenode check does not include any events.
 
-### ヘルプ
+### Service Checks
 {{< get-service-checks-from-git "hdfs_namenode" >}}
 
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+Need help? Contact [Datadog support][8].
 
-## その他の参考資料
+## Further Reading
 
-- [Hadoop アーキテクチャの概要][9]
-- [Hadoop メトリクスの監視方法][10]
-- [Hadoop メトリクスの収集方法][11]
-- [Datadog を使用した Hadoop の監視方法][12]
+- [Hadoop architectural overview][9]
+- [How to monitor Hadoop metrics][10]
+- [How to collect Hadoop metrics][11]
+- [How to monitor Hadoop with Datadog][12]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/hdfs_datanode/images/hadoop_dashboard.png
-[2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
+[2]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[4]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/hdfs_datanode/datadog_checks/hdfs_datanode/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://docs.datadoghq.com/ja/help/
+[6]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[7]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
+[8]: https://docs.datadoghq.com/help/
 [9]: https://www.datadoghq.com/blog/hadoop-architecture-overview
 [10]: https://www.datadoghq.com/blog/monitor-hadoop-metrics
 [11]: https://www.datadoghq.com/blog/collecting-hadoop-metrics

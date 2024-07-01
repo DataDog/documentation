@@ -1,108 +1,116 @@
 ---
-app_id: snmp-cisco
-app_uuid: 91202d4a-1af4-4c64-88e4-5ba02b23c69f
-assets:
-  integration:
-    configuration: {}
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Cisco
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
-- モニタリング
-- notification
-- ネットワーク
+"app_id": "snmp-cisco"
+"app_uuid": "91202d4a-1af4-4c64-88e4-5ba02b23c69f"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10136"
+    "source_type_name": Cisco
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
+- network
+- notifications
 - snmp
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: snmp_cisco
-integration_id: snmp-cisco
-integration_title: Cisco
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: snmp_cisco
-public_title: Cisco
-short_description: Cisco ネットワークデバイスから SNMP メトリクスを収集
-supported_os:
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "snmp_cisco"
+"integration_id": "snmp-cisco"
+"integration_title": "Cisco"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "snmp_cisco"
+"public_title": "Cisco"
+"short_description": "Collect SNMP metrics from your Cisco network devices."
+"supported_os":
 - linux
-- macos
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
-  - Category::Notification
-  - Category::Network
-  - Category::SNMP
-  configuration: README.md#Setup
-  description: Cisco ネットワークデバイスから SNMP メトリクスを収集
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Cisco
+- macos
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Network"
+  - "Category::Notifications"
+  - "Category::SNMP"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Collect SNMP metrics from your Cisco network devices.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Cisco
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## 概要
+## Overview
 
-Cisco は、IT、ネットワーク、そしてサイバーセキュリティのソリューションを世界的にけん引する企業です。インテグレーションをインストールすると、ルーター、スイッチ、ボイスギア、セキュリティ アプライアンスなど、すべての Cisco アプライアンスを監視できます。
+Cisco is the worldwide leader in IT, networking, and cybersecurity solutions. Install the integration to monitor all of your Cisco appliances, including routers, switches, voice gear, security appliances and more.
 
-Cisco アプライアンスから、以下を含む SNMP メトリクスを収集:
+Collect SNMP metrics from Cisco appliances, including:
 
 - Cisco Catalyst
-- Cisco ASA (Adaptive Security Appliance: 適応型セキュリティアプライアンス)
-- Cisco Meraki (注: [Meraki インテグレーションタイル][1]を通じて、追加イベントを Meraki から収集可能)
+- [Cisco Adaptive Security Appliance][1] (ASA)
+- [Cisco Meraki][2] 
+    **Note**: Additional events can be collected from Meraki through the [Meraki integration tile][3]
 - Cisco Nexus
 - Cisco ICM
 - Cisco ISR
+- [Cisco SD-WAN][4]
 - Cisco UC Virtual Machines
 
-監視対象となるメトリクスの詳細については、[SNMP インテグレーションタイル][2]を参照してください。
+**Note**: Additional supported vendor profiles for this integration can be found on the [network vendors][5] page.
 
-## セットアップ
+## Setup
 
-SNMP インテグレーションをインストールして構成するには、[ネットワークデバイスモニタリング][3]のドキュメントを参照してください。
+To install and configure the SNMP integration, see the [Network Device Monitoring][6] documentation.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 
-監視対象となるメトリクスの詳細については、[SNMP インテグレーションタイル][2]を参照してください。
+For details of monitored metrics see the [SNMP integration tile][7].
 
-### サービスのチェック
+### Service Checks
 
-SNMP Cisco には、サービスのチェック機能は含まれません。
+Snmp Cisco does not include any service checks.
 
-### イベント
+### Events
 
-SNMP Cisco には、イベントは含まれません。
+Snmp Cisco does not include any events.
 
-## その他の参考資料
+## Further Reading
 
-お役に立つドキュメント、リンクや記事:
+Additional helpful documentation, links, and articles:
 
-* [Datadog での SNMP モニタリング][4]
+* [Monitor SNMP with Datadog][8]
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+Need help? Contact [Datadog support][9].
 
-[1]: https://app.datadoghq.com/account/settings#integrations/meraki
-[2]: https://app.datadoghq.com/account/settings#integrations/snmp
-[3]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
-[4]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
-[5]: https://docs.datadoghq.com/ja/help/
+[1]: https://docs.datadoghq.com/integrations/crest_data_systems_cisco_asa/
+[2]: https://docs.datadoghq.com/integrations/meraki/
+[3]: https://app.datadoghq.com/account/settings#integrations/meraki
+[4]: https://docs.datadoghq.com/integrations/cisco_sdwan/
+[5]: https://docs.datadoghq.com/network_monitoring/devices/#vendor-profiles
+[6]: https://docs.datadoghq.com/network_performance_monitoring/devices/setup
+[7]: https://app.datadoghq.com/account/settings#integrations/snmp
+[8]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+[9]: https://docs.datadoghq.com/help/
+

@@ -1,5 +1,8 @@
 ---
-title: スコープ
+title: scope
+core_product:
+  - metrics
+  - alerts
 ---
-スコープでは、タグを使ってクエリをフィルタリングします。
-詳細は、<a href="/metrics/#filter-your-metric">ドキュメントを参照ください</a>。
+The scope uses tag(s) to filter the query. 
+For more information, <a href="/metrics/#filter-your-metric">see the documentation</a>.

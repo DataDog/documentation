@@ -1,66 +1,70 @@
 ---
+title: Query Value Widget
+widget_type: query_value
+description: "Display an aggregated value for a given metric query"
 aliases:
-- /ja/graphing/widgets/query_value/
-description: 1 つのメトリクスクエリの集計値を表示する
+- /graphing/widgets/query_value/
 further_reading:
-- link: /ja/dashboards/graphing_json/
-  tag: ドキュメント
-  text: JSON を使用したダッシュボードの構築
-title: クエリ値ウィジェット
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Building Dashboards using JSON
 ---
 
-クエリ値は、1 つのメトリクス、APM、またはログクエリの現在の値を表示します。値は条件付き書式 (緑/黄/赤色の背景など) を使用して表示され、値が期待される範囲内にあるかどうかを示します。これに、オプションで時系列データの背景を追加することができます。クエリ値によって表示される値は、必ずしもある瞬間の測定値を必要としません。
+Query values display the current value of a given metric, APM, or log query. They come with conditional formatting (such as a green/yellow/red background) to convey whether the value is in the expected range. This can be supplemented with optional backgrounds of timeseries data. The values displayed by a query value do not require an instantaneous measurement.
 
-このウィジェットは、最新の報告値を表示することも、タイムウィンドウ全体のすべてのクエリ値から計算された集計値を表示することもできます。この可視化機能は、小さくてもはっきりとしたインフラストラクチャークエリへのウィンドウを提供します。
+The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure query.
 
-{{< img src="dashboards/widgets/query_value/query_value1.png" alt="クエリ値ウィジェット" style="width:80%;" >}}
+{{< img src="dashboards/widgets/query_value/query_value1.png" alt="Query value widget" style="width:80%;" >}}
 
-## セットアップ
+## Setup
 
-{{< img src="dashboards/widgets/query_value/query-value-widget-setup1.png" alt="クエリ値ウィジェットのセットアップ" style="width:80%;">}}
+{{< img src="dashboards/widgets/query_value/query-value-widget-setup1.png" alt="Query value widget setup" style="width:80%;">}}
 
-### コンフィギュレーション
+### Configuration
 
-1. グラフ化するデータを選択します。
-    * メトリクス: メトリクスクエリの構成については、[クエリ作成のドキュメント][1]を参照してください。
-    * Indexed Span: Indexed Span クエリの構成については、[トレース検索に関するドキュメント][2]を参照してください。
-    * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][3]を参照してください。
-2. 指定した時間枠内のすべてのデータポイントの `avg`、`min`、`sum`、`max`、`last` の値として計算される、クエリ値を単一の値に削減します。
-3. 単位とフォーマットを選択します。自動フォーマットは、単位に基づいてダッシュボードをスケーリングします。
-4. オプションで、表示される値に応じて条件付き書式を構成します。
-5. オプションで、時系列の背景をオーバーレイ表示します。
-    * Min to Max: 最小から最大までのスケールグラフ。
-    * Line: ゼロ (0) を含むためのスケールグラフ。
-    * Bars: 離散的、周期的な測定値を表示します。
+1. Choose the data to graph:
+    * Metric: See the [Querying documentation][1] to configure a metric query.
+    * Indexed Spans: See the [Trace search documentation][2] to configure an Indexed Span query.
+    * Log Events: See the [Log search documentation][3] to configure a log event query.
+2. Reduce the query values to a single value, calculated as the `avg`, `min`, `sum`, `max`, or `last` value of all data points in the specified timeframe.
+3. Choose the units and the formatting. Autoformat scales the dashboard for you based on the units.
+4. Optionally, configure a conditional format depending on the value displayed. See [Visual Formatting Rules](#visual-formatting-rules) for more examples.
+5. Optionally, overlay a timeseries background:
+    * Min to Max: A scale graph from minimum to maximum.
+    * Line: A scale graph to include zero (0).
+    * Bars: Shows discrete, periodic measurements.
 
-### オプション
+### Options
 
-#### グローバルタイム
+#### Visual formatting rules
 
-スクリーンボードの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、スクリーンボードのグローバルタイムフレームを持つかを選択します。
+<div class="alert alert-info">Visual formatting rules should be based on the metric's raw value. If the metric base unit is in nanoseconds, but the Query Value autoformats to seconds, your conditional rules should be based on nanoseconds.</div>
 
-#### タイトル
+Customize the background of your Query Value widget with conditional rules. You have the option of adding a background color, font color, or a custom image. With custom images, internal servers must be updated to support cross origin requests to reference internal images.
 
-`Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
+{{< img src="dashboards/widgets/query_value/visual_formatting_rules_custom_img.png" alt="Query value widget visual formatting rules with custom image background" style="width:90%;" >}}
 
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル" style="width:80%;">}}
+#### Context links
 
-オプションで、サイズと配置を定義できます。
+[Context links][4] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
+
+#### Global time
+
+Choose whether your widget has a custom timeframe or the dashboard's global timeframe.
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][4] ドキュメントをご参照ください。
-
-クエリ値ウィジェットの[ウィジェット JSON スキーマ定義][5]は次のとおりです。
+This widget can be used with the **[Dashboards API][5]**. See the following table for the [widget JSON schema definition][6]:
 
 {{< dashboards-widgets-api >}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/querying/#overview
-[2]: /ja/tracing/app_analytics/search/#search-bar
-[3]: /ja/logs/search_syntax/
-[4]: /ja/api/v1/dashboards/
-[5]: /ja/dashboards/graphing_json/widget_json/
+[1]: /dashboards/querying/#overview
+[2]: /tracing/trace_explorer/query_syntax/#search-bar
+[3]: /logs/search_syntax/
+[4]: /dashboards/guide/context-links/
+[5]: /api/latest/dashboards/
+[6]: /dashboards/graphing_json/widget_json/

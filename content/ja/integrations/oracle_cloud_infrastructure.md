@@ -1,121 +1,121 @@
 ---
-app_id: oracle-cloud-infrastructure
-app_uuid: c2b4d38f-dd23-4ca2-8bc4-b70360868e8c
-assets:
-  integration:
-    auto_install: false
-    events:
-      creates_events: false
-    metrics:
-      check:
+"app_id": "oracle-cloud-infrastructure"
+"app_uuid": "c2b4d38f-dd23-4ca2-8bc4-b70360868e8c"
+"assets":
+  "dashboards":
+    "OCI-Overview-Beta": assets/dashboards/oci-overview-beta-dashboard.json
+  "integration":
+    "auto_install": false
+    "events":
+      "creates_events": false
+    "metrics":
+      "check":
       - oci.computeagent.cpu_utilization
-      metadata_path: metadata.csv
-      prefix: oci.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 310
-    source_type_name: Oracle Cloud Infrastructure
-author:
-  homepage: https://www.datadoghq.com
-  name: Ruby
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
+      "metadata_path": metadata.csv
+      "prefix": oci.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "310"
+    "source_type_name": Oracle Cloud Infrastructure
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - cloud
-- ログの収集
-- ネットワーク
+- log collection
+- network
 - oracle
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: oracle_cloud_infrastructure
-integration_id: oracle-cloud-infrastructure
-integration_title: Oracle Cloud Infrastructure
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: oracle_cloud_infrastructure
-public_title: Oracle Cloud Infrastructure
-short_description: Oracle Cloud Infrastructure (OCI) は、高性能コンピューティングとシンプルな移行を実現する IaaS
-  プラットフォームです。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Log Collection
-  - Category::Network
-  - Category::Oracle
-  configuration: README.md#Setup
-  description: Oracle Cloud Infrastructure (OCI) は、高性能コンピューティングとシンプルな移行を実現する IaaS
-    プラットフォームです。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Oracle Cloud Infrastructure
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "oracle_cloud_infrastructure"
+"integration_id": "oracle-cloud-infrastructure"
+"integration_title": "Oracle Cloud Infrastructure"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "oracle_cloud_infrastructure"
+"public_title": "Oracle Cloud Infrastructure"
+"short_description": "Oracle Cloud Infrastructure (OCI) is an IaaS platform that delivers high-performance computing and simple migrations."
+"supported_os": []
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Cloud"
+  - "Category::Log Collection"
+  - "Category::Network"
+  - "Category::Oracle"
+  "configuration": "README.md#Setup"
+  "description": Oracle Cloud Infrastructure (OCI) is an IaaS platform that delivers high-performance computing and simple migrations.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Oracle Cloud Infrastructure
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## 概要
+## Overview
 
-Oracle Cloud Infrastructure (OCI) は、エンタープライズ規模の企業で使用されるInfrastructure-as-a-Service (IaaS) および Platform-as-a-Service (PaaS) です。ホスティング、ストレージ、ネットワーキング、データベースなどのマネージドサービスの完全なスイートを備えています。
+Oracle Cloud Infrastructure (OCI) is an infrastructure-as-a-service (IaaS) and platform-as-a-service (PaaS) used by enterprise-scale companies. With a full suite of managed services for hosting, storage, networking, databases, and more.
 
-Datadog インテグレーションにより、OCI ユーザーはすべてのログを Datadog に直接ストリーミングでき、そこで無期限に保存し、トラブルシューティングのために分析し、セキュリティとコンプライアンスの姿勢を監視できます。
+With the Datadog integration, OCI users can stream all of their logs directly into Datadog, where they can then be stored indefinitely, analyzed for troubleshooting, and monitored for security and compliance posturing.
 
-## 計画と使用
+## Setup
 
-### 収集データ
+### Log collection
 
-次のいずれかのプロセスに従って、Oracle Cloud Infrastructure から Datadog にログを送信します。
+Send logs from your Oracle Cloud Infrastructure to Datadog by following either process:
 
 {{< tabs >}}
-{{% tab "サービスコネクタハブ" %}}
+{{% tab "Service Connector Hub" %}}
 
-1. OCI ログを構成します。
-2. OCI 関数を作成します。
-3. OCI サービスコネクタを設定します。
+1. Configure an OCI log.
+2. Create an OCI function.
+3. Setup an OCI Service Connector.
 
-以下の手順では、OCI ポータルを使用してインテグレーションを設定します。
+The instructions below use the OCI portal to set up the integration.
 
-#### OCI ロギング
+#### OCI logging
 
-1. OCI ポータルで、*Logging -> Log Groups* に移動します。
-2. コンパートメントを選択し、**Create Log Group** をクリックします。サイドパネルが開きます。
-3. 名前には `data_log_group` を入力し、オプションで説明とタグを入力します。
-4. **Create** をクリックして、新しいロググループを設定します。
-5. **Resources** の下にある **Logs** をクリックします。
-6. 必要に応じて、**Create custom log** または **Enable service log** をクリックします。
-7. **Enable Log** をクリックして、新しい OCI ログを作成します。
+1. In the OCI portal, navigate to *Logging -> Log Groups*.
+2. Select your compartment and click **Create Log Group**. A side panel opens.
+3. Enter `data_log_group` for the name, and optionally provide a description and tags.
+4. Click **Create** to set up your new Log Group.
+5. Under **Resources**, click **Logs**.
+6. Click to **Create custom log** or **Enable service log** as desired.
+7. Click **Enable Log**, to create your new OCI Log.
 
-OCI ログの詳細については、[リソースのログを有効にする][1]を参照してください。
+For more information on OCI Logs, see [Enabling Logging for a Resource][1].
 
-#### OCI 関数
+#### OCI function
 
-1. OCI ポータルで、*Functions* に移動します。
-2. 既存のアプリケーションを選択するか、**Create Application** をクリックします。
-3. アプリケーション内に新しい OCI 関数を作成します。詳細については、[Oracle の関数概要][2]を参照してください。
-4. 最初にボイラープレート Python 関数を作成し、自動生成されたファイルを Datadog のソースコードに置き換えることをお勧めします。
-   - `func.py` を [Datadog OCI リポジトリ][3]のコードに置き換えます。
-   - `func.yaml` を [Datadog OCI リポジトリ][4]のコードに置き換えます。`DATADOG_TOKEN` と `DATADOG_HOST` は、Datadog API キーとリージョンログの取り込みリンクに置き換える必要があります。
-   - `requirements.txt` を [Datadog OCI リポジトリ][5]のコードに置き換えます。
+1. In the OCI portal, navigate to *Functions*.
+2. Select an existing application or click **Create Application**.
+3. Create a new OCI function within your application. See the [Oracle Overview of Functions][2] for details.
+4. It is recommended to create a boilerplate Python function first and replace the auto generated files with Datadog's source code:
+   - Replace `func.py` with code from the [Datadog OCI repo][3].
+   - Replace `func.yaml` with code from the [Datadog OCI repo][4]. `DATADOG_TOKEN` and `DATADOG_HOST` must be replaced with your Datadog API key and region logs intake link.
+   - Replace `requirements.txt` with code from the [Datadog OCI repo][5].
 
-#### OCI サービスコネクタハブ
+#### OCI service connector hub
 
-1. OCI ポータルで、*Logging -> Service Connectors* に移動します。
-2. **Create Service Connector** をクリックして、**Create Service Connector** ページに移動します。
-3. ロギングとして **Source** を選択し、関数として **Target** を選択します。
-4. **Configure Source Connection** で、**Compartment name**、**Log Group**、**Log** を選択します。(最初のステップで作成された **Log Group** と **Log**)
-5. **Audit Logs** も送信する場合は、**+Another Log** をクリックし、同じ **Compartment** を選択して、**Log Group** として "_Audit" を置き換えます。
-6. **Configure target** で、**Compartment**、**Function application**、**Function** を選択します。(前のステップで作成された **Function Application** と **Function**)
-7. ポリシーを作成するように求められたら、プロンプトから **Create** をクリックします。
-8. 一番下の **Create** をクリックして、サービスコネクタの作成を完了します。
+1. In the OCI portal, navigate to *Logging -> Service Connectors*.
+2. Click **Create Service Connector** to be directed to the **Create Service Connector** page.
+3. Select the **Source** as Logging and **Target** as Functions.
+4. Under **Configure Source Connection** select a **Compartment name**, **Log Group**, and **Log**. (The **Log Group** and **Log** created in the first step)
+5. If you also want to send **Audit Logs**, click **+Another Log** and select the same **Compartment** while replacing "_Audit" as your **Log Group**.
+6. Under **Configure target** select a **Compartment**, **Function application**, and **Function**. (The **Function Application** and **Function** created in the previous step)
+7. If you are prompted to create a policy, click **Create** from the prompt.
+8. Click **Create** at the bottom to finish creating your Service Connector.
 
-OCI オブジェクトストレージの詳細については、[Oracle のサービスコネクタのブログ記事][6]を参照してください。
+For more information on OCI Object Storage, see [Oracle's Service Connector blog post][6].
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
+Need help? Contact [Datadog support][7].
 
 
 [1]: https://docs.cloud.oracle.com/en-us/iaas/Content/Logging/Concepts/service_logs.htm#enabling_logging
@@ -124,68 +124,68 @@ OCI オブジェクトストレージの詳細については、[Oracle のサ�
 [4]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/func.yaml
 [5]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/requirements.txt
 [6]: https://blogs.oracle.com/cloud-infrastructure/oracle-cloud-infrastructure-service-connector-hub-now-generally-available
-[7]: https://docs.datadoghq.com/ja/help/
+[7]: https://docs.datadoghq.com/help/
 {{% /tab %}}
-{{% tab "オブジェクトストア" %}}
+{{% tab "Object store" %}}
 
-1. OCI ログを構成します。
-2. OCI オブジェクトストアを作成し、OCI ログの読み取り/書き込みアクセスを有効にします。
-3. OCI 関数を作成します。
-4. OCI イベントを設定します。
+1. Configure an OCI log.
+2. Create an OCI object store and enable read/write access for OCI logs.
+3. Create an OCI function.
+4. Set up an OCI event.
 
-以下の手順では、OCI ポータルを使用してインテグレーションを設定します。
+The instructions below use the OCI portal to set up the integration.
 
-#### OCI ロギング
+#### OCI logging
 
-1. OCI ポータルで、*Solutions and Platform -> Logging -> Logs* に移動します。
-2. **Create Custom Log** をクリックして、**Create Custom Log** ページに移動します。
-3. 新しい OCI ログに名前を付けます。
-4. **Compartment** と **Log Group** を選択します。この選択は、インストール全体で一貫しています。
-5. **Create Custom Log** をクリックして、**Create Agent Config** ページに移動します。
-6. **Create new configuration** をクリックします。
-7. 新しいコンフィギュレーションに名前を付けます。コンパートメントは事前に選択されています。
-8. グループタイプを **Dynamic Group** に設定し、グループを既存のグループの 1 つに設定します。
-9. 入力タイプを **Log Path** に設定し、希望の入力名を入力して、ファイルパスに "/" を使用します。
-10. **Create Custom Log** をクリックすると、OCI ログが作成され、ログページで利用できるようになります。
+1. In the OCI portal, navigate to *Solutions and Platform -> Logging -> Logs*.
+2. Click **Create Custom Log** to be directed to the **Create Custom Log** page.
+3. Give your new OCI log a name.
+4. Select a **Compartment** and **Log Group**. These selections remain consistent across the entire installation.
+5. Click **Create Custom Log** to be directed to the **Create Agent Config** page.
+6. Click **Create new configuration**.
+7. Give your new configuration a name. Your compartment is preselected for you.
+8. Set the group type to **Dynamic Group** and group to one of your existing groups.
+9. Set the input type to **Log Path**, enter your preferred input name and use "/" for file paths.
+10. Click **Create Custom Log**, then your OCI log is created and available on the logs page.
 
-OCI ログの詳細については、[リソースのログを有効にする][1]を参照してください。
+For more information on OCI Logs, see [Enabling Logging for a Resource][1].
 
-#### OCI オブジェクトストレージ
+#### OCI object storage
 
-1. OCI ポータルで、*Core Infrastructure -> Object Storage -> Object Storage* に移動します。
-2. **Create Bucket** をクリックして、**Create Bucket** フォームに移動します。
-3. ストレージ階層に **Standard** を選択し、**Emit Object Events** をチェックします。
-4. 好みに応じてフォームの残りの部分に記入します。
-5. **Create Bucket** をクリックすると、バケットが作成され、バケットリストで利用できるようになります。
-6. アクティブなバケットリストから新しいバケットを選択し、リソースの下の **Logs** をクリックします。
-7. **read** を有効に切り替えると、**Enable Log** サイドメニューが表示されます。
-8. **Compartment** と **Log Group** を選択します (OCI ログと同じ選択を使用します)。
-9. **Log Name** の名前を入力し、希望するログ保持を選択します。
+1. In the OCI portal, navigate to *Core Infrastructure -> Object Storage -> Object Storage*.
+2. Click **Create Bucket** to be directed to the **Create Bucket** form.
+3. Select **Standard** for your storage tier and check **Emit Object Events**.
+4. Complete the rest of the form based on your preference.
+5. Click **Create Bucket**, then your bucket is created and available in the bucket list.
+6. Select your new bucket from the active bucket list and click **Logs** under resources.
+7. Toggle **read** to enabled which directs you to an **Enable Log** side menu.
+8. Select a **Compartment** and **Log Group** (use the same selections as your OCI log).
+9. Enter a name for the **Log Name** and select your preferred log retention.
 
-OCI オブジェクトストレージの詳細については、[データをオブジェクトストレージに格納する][2]を参照してください。
+For more information on OCI Object Storage, see [Putting Data into Object Storage][2].
 
-#### OCI 関数
+#### OCI function
 
-1. OCI ポータルで、*Solutions and Platform -> Developer Services -> Functions* に移動します。
-2. 既存のアプリケーションを選択するか、**Create Application** をクリックします。
-3. アプリケーション内に新しい OCI 関数を作成します。詳細については、[Oracle の関数概要][3]を参照してください。
-4. 最初にボイラープレート Python 関数を作成し、自動生成されたファイルを Datadog のソースコードに置き換えることをお勧めします。
-   - `func.py` を [Datadog OCI リポジトリ][4]のコードに置き換えます。
-   - `func.yaml` を [Datadog OCI リポジトリ][5]のコードに置き換えます。`DATADOG_TOKEN` と `DATADOG_HOST` は、Datadog API キーとリージョンログの取り込みリンクに置き換える必要があります。
-   - `requirements.txt` を [Datadog OCI リポジトリ][6]のコードに置き換えます。
+1. In the OCI portal, navigate to *Solutions and Platform -> Developer Services -> Functions*.
+2. Select an existing application or click **Create Application**.
+3. Create a new OCI function within your application. See the [Oracle Overview of Functions][3] for more details.
+4. It is recommended to create a boilerplate Python function first and replace the auto generated files with Datadog's source code:
+   - Replace `func.py` with code from the [Datadog OCI repo][4].
+   - Replace `func.yaml` with code from the [Datadog OCI repo][5]. `DATADOG_TOKEN` and `DATADOG_HOST` must be replaced with your Datadog API key and region logs intake link.
+   - Replace `requirements.txt` with code from the [Datadog OCI repo][6].
 
-#### OCI イベント
+#### OCI event
 
-1. OCI ポータルで、*Solutions and Platform -> Application Integration -> Event Service* に移動します。
-2. **Create Rule** をクリックして、**Create Rule** ページに移動します。
-3. イベントルールに名前と説明を付けます。
-4. 条件を *Event Type**、サービス名を **Object Storage**、イベントタイプを **Object - Create** として設定します。
-5. アクションタイプを **Functions** として設定します。
-6. 関数コンパートメントが、OCI ログ、OCI バケット、および OCI 関数に対して行った選択と同じであることを確認します。
-7. 関数適用と関数を選択します (前のインストール手順に従って)。
-8. **Create Rule** をクリックすると、ルールが作成され、ルールリストで利用できるようになります。
+1. In the OCI portal, navigate to *Solutions and Platform -> Application Integration -> Event Service*.
+2. Click **Create Rule** to be directed to the **Create Rule** page.
+3. Give your event rule a name and description.
+4. Set your condition as **Event Type**, service name as **Object Storage**, and event type as **Object - Create**.
+5. Set your action type as **Functions**.
+6. Ensure that your function compartment is the same selection you made for OCI Log, OCI Bucket, and OCI Function.
+7. Select your function application and function (according to the previous installation step.)
+8. Click **Create Rule**, then your rule is created and available in the rules list.
 
-OCI オブジェクトストレージの詳細については、[イベント入門][7]を参照してください。
+For more information on OCI Object Storage, see [Getting Started with Events][7].
 
 
 
@@ -197,5 +197,5 @@ OCI オブジェクトストレージの詳細については、[イベント入
 [6]: https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Object%20Store/requirements.txt
 [7]: https://docs.cloud.oracle.com/en-us/iaas/Content/Events/Concepts/eventsgetstarted.htm
 {{% /tab %}}
-
 {{< /tabs >}}
+

@@ -1,106 +1,116 @@
 ---
-app_id: uptime
-app_uuid: 937f96ea-644f-4903-9f74-cdc5e8b46dd8
-assets:
-  integration:
-    configuration: {}
-    events:
-      creates_events: true
-    metrics:
-      check: uptime.response_time
-      metadata_path: metadata.csv
-      prefix: uptime
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Uptime
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Uptime
-  sales_email: help@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- notification
-- os & system
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: uptime
-integration_id: uptime
-integration_title: Uptime.com
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: uptime
-public_title: Uptime.com
-short_description: アップタイムとパフォーマンスの監視を容易に実行
-supported_os:
-- linux
-- windows
-- macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::通知
-  - Category::OS とシステム
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: アップタイムとパフォーマンスの監視を容易に実行
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Uptime.com
+"app_id": "uptime"
+"app_uuid": "937f96ea-644f-4903-9f74-cdc5e8b46dd8"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": true
+    "metrics":
+      "check": "uptime.response_time"
+      "metadata_path": "metadata.csv"
+      "prefix": "uptime"
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "10001"
+    "source_type_name": "Uptime"
+"author":
+  "homepage": "https://github.com/DataDog/integrations-extras"
+  "name": "Uptime"
+  "sales_email": "help@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "notifications"
+- "metrics"
+- "event management"
+- "os & system"
+- "testing"
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "uptime"
+"integration_id": "uptime"
+"integration_title": "Uptime.com"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "uptime"
+"public_title": "Uptime.com"
+"short_description": "Uptime & performance monitoring made easy"
+"supported_os":
+- "linux"
+- "windows"
+- "macos"
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Notifications"
+  - "Category::Metrics"
+  - "Category::Event Management"
+  - "Category::OS & System"
+  - "Category::Testing"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": "Uptime & performance monitoring made easy"
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Uptime.com"
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-アプリからイベントとメトリクスをリアルタイムに取得して、以下のことができます。
+Get events and metrics from your app in real time to:
 
-- ダウンタイムや中断を追跡および通知できます。
-- Synthetic リクエストの応答時間メトリクスを視覚化できます。
+- Track and notify of any downtime or interruptions.
+- Visualize response time metrics from synthetic requests.
 
-![Uptime.com のグラフ][1]
+![Uptime.com Graph][1]
 
-## セットアップ
+## Setup
 
-### コンフィギュレーション
+### Configuration
 
-Uptime アカウント内で Datadog インテグレーションを有効にするには、[Notifications > Integrations][2] に移動し、新しいプッシュ通知プロファイルを追加する際にプロバイダータイプとして Datadog を選択します。
+To activate the Datadog integration within your Uptime account, go to [Notifications > Integrations][2] then choose Datadog as the provider type when adding a new push notifications profile.
 
-下記は、Uptime アカウントで Datadog を構成する際に表示されるフィールドです。
+The following describes the fields shown when configuring Datadog within your Uptime account:
 shell
-- Name: Datadog プロファイルに割り当てる参照名。Uptime アカウント内で複数のプロバイダープロファイルを整理するために役立ちます。
+- Name: The reference name you desire to assign to your Datadog profile. It can assist you with organizing multiple provider profiles within your Uptime account.
 
-- API キー: <span class="hidden-api-key">\${api_key}</span>
+- API key: <span class="hidden-api-key">\${api_key}</span>
 
 - Application Key: <span class="app_key" data-name="uptime"></span>
 
-Datadog プロファイルの構成が完了したら、_Alerting > Contacts_ にある連絡先グループにプロファイルを割り当てます。プロファイルは、連絡先グループの **Push Notifications** フィールドに割り当てます。
+After configuring your Datadog profile, assign the profile to a contact group located under _Alerting > Contacts_. The profile is assigned in the **Push Notifications** field within the contact group.
 
-## 収集データ
+## Data Collected
 
-### メトリクス
+### Metrics
 {{< get-metrics-from-git "uptime" >}}
 
 
-### イベント
+### Events
 
-Uptime インテグレーションは、アラートが発生または解決したときに、Datadog のイベントストリームにイベントを送信します。
+The Uptime integration sends an event to your Datadog Event Stream when an alert happens or resolves.
 
-### サービスのチェック
+### Service Checks
 
-Uptime チェックには、サービスのチェック機能は含まれません。
+The Uptime check does not include any service checks.
 
-## トラブルシューティング
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+Need help? Contact [Datadog support][4].
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/uptime/images/snapshot.png
 [2]: https://uptime.com/integrations/manage/
 [3]: https://github.com/DataDog/integrations-extras/blob/master/uptime/metadata.csv
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/help/
+

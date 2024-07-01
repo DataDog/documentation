@@ -1,51 +1,52 @@
 ---
-categories:
-- クラウド
+"categories":
+- cloud
 - azure
-dependencies: []
-description: Synapse のキーメトリクスを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/azure_synapse/
-draft: false
-git_integration_title: azure_synapse
-has_logo: true
-integration_id: azure-synapse
-integration_title: Microsoft Azure Synapse
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: azure_synapse
-public_title: Datadog-Microsoft Azure Synapse インテグレーション
-short_description: Azure Synapse のキーメトリクスを追跡します。
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Synapse metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_synapse/"
+"draft": false
+"git_integration_title": "azure_synapse"
+"has_logo": true
+"integration_id": "azure-synapse"
+"integration_title": "Microsoft Azure Synapse"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_synapse"
+"public_title": "Datadog-Microsoft Azure Synapse Integration"
+"short_description": "Track key Azure Synapse metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Synapse Analytics は、データインテグレーション、エンタープライズデータウェアハウス、ビッグデータアナリティクスを統合したアナリティクスサービスです。
+Azure Synapse Analytics is an analytics service that brings together data integration, enterprise data warehousing and big data analytics.
 
-Datadog Azure インテグレーションを使用して、Azure Synapse からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Azure Synapse.
 
-## 計画と使用
-### インフラストラクチャーリスト
+## Setup
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
-### データセキュリティ
+## Data Collected
+### Metrics
 {{< get-metrics-from-git "azure_synapse" >}}
 
 
-### ヘルプ
-Azure Synapse インテグレーションには、イベントは含まれません。
+### Events
+The Azure Synapse integration does not include any events.
 
-### ヘルプ
-Azure Synapse インテグレーションには、サービスのチェック機能は含まれません。
+### Service Checks
+The Azure Synapse integration does not include any service checks.
 
-## ヘルプ
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+## Troubleshooting
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_synapse/azure_synapse_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

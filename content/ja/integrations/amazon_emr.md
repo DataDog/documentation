@@ -1,96 +1,97 @@
 ---
-aliases:
-- /ja/integrations/awsemr/
-categories:
-- aws
-- cloud
-- log collection
-dependencies: []
-description: Amazon EMR のキーメトリクスを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/amazon_emr/
-draft: false
-git_integration_title: amazon_emr
-has_logo: true
-integration_id: ''
-integration_title: Amazon EMR
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: amazon_emr
-public_title: Datadog-Amazon EMR インテグレーション
-short_description: Amazon EMR のキーメトリクスを追跡します。
-version: '1.0'
+"aliases":
+- "/integrations/awsemr/"
+"categories":
+- "aws"
+- "cloud"
+- "log collection"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Amazon EMR metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_emr/"
+"draft": false
+"git_integration_title": "amazon_emr"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Amazon EMR"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_emr"
+"public_title": "Datadog-Amazon EMR Integration"
+"short_description": "Track key Amazon EMR metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Amazon EMR は、膨大な量のデータを迅速かつコスト効率よく簡単に処理できる Web サービスです。
+Amazon EMR is a web service that makes it easy to quickly and cost-effectively process vast amounts of data.
 
-このインテグレーションを有効にすると、EMR メトリクスを Datadog に表示できます。
+Enable this integration to see EMR metrics in Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][1] first.
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `EMR` が有効になっていることを確認します。
-2. Amazon EMR のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [EMR ポリシー][4]を参照してください。
+1. In the [AWS integration page][2], ensure that `EMR` is enabled under the `Metric Collection` tab.
+2. Add the following permissions to your [Datadog IAM policy][3] to collect Amazon EMR metrics. For more information, see the [EMR policies][4] on the AWS website.
 
-    | AWS アクセス許可                     | 説明                         |
+    | AWS Permission                     | Description                         |
     | ---------------------------------- | ----------------------------------- |
-    | `elasticmapreduce:ListClusters`    | 使用できるクラスターを一覧表示します。          |
-    | `elasticmapreduce:DescribeCluster` | CloudWatch EMR メトリクスにタグを追加します。|
+    | `elasticmapreduce:ListClusters`    | List available clusters.            |
+    | `elasticmapreduce:DescribeCluster` | Add tags to CloudWatch EMR metrics. |
 
-3. [Datadog - Amazon EMR インテグレーション][5]をインストールします。
+3. Install the [Datadog - Amazon EMR integration][5].
 
-### 収集データ
+### Log collection
 
-#### ログの有効化
+#### Enable logging
 
-Amazon EMR から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+Configure Amazon EMR to send logs either to a S3 bucket or to CloudWatch.
 
-**注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_emr` に設定されているかを確認してください。
+**Note**: If you log to a S3 bucket, make sure that `amazon_emr` is set as _Target prefix_.
 
-#### ログを Datadog に送信する方法
+#### Send logs to Datadog
 
-1. [Datadog Forwarder Lambda 関数][6]をまだセットアップしていない場合は、セットアップします。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon EMR ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. If you haven’t already, set up the [Datadog Forwarder Lambda function][6].
+2. Once the Lambda function is installed, manually add a trigger on the S3 bucket or CloudWatch log group that contains your Amazon EMR logs in the AWS console:
 
-    - [S3 バケットに手動トリガーを追加][7]
-    - [CloudWatch ロググループに手動トリガーを追加][8]
+    - [Add a manual trigger on the S3 bucket][7]
+    - [Add a manual trigger on the CloudWatch Log Group][8]
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_emr" >}}
 
 
-AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
+Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### ヘルプ
+### Events
 
-Amazon EMR インテグレーションには、イベントは含まれません。
+The Amazon EMR integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Amazon EMR インテグレーションには、サービスのチェック機能は含まれません。
+The Amazon EMR integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
+Need help? Contact [Datadog support][10].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
+[3]: https://docs.datadoghq.com/integrations/amazon_web_services/#installation
 [4]: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/load-balancer-authentication-access-control.html
 [5]: https://app.datadoghq.com/integrations/amazon-emr
-[6]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[6]: https://docs.datadoghq.com/logs/guide/forwarder/
+[7]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
+[8]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_emr/amazon_emr_metadata.csv
-[10]: https://docs.datadoghq.com/ja/help/
+[10]: https://docs.datadoghq.com/help/
+

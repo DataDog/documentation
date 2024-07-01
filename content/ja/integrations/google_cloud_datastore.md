@@ -1,75 +1,76 @@
 ---
-categories:
-- cloud
-- data stores
-- google cloud
-- log collection
-- mobile
-dependencies: []
-description: Datastore の読み取り/書き込みパフォーマンス、リクエスト数などを追跡。
-doc_link: https://docs.datadoghq.com/integrations/google_cloud_datastore/
-draft: false
-git_integration_title: google_cloud_datastore
-has_logo: true
-integration_id: google-cloud-datastore
-integration_title: Google Datastore
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: google_cloud_datastore
-public_title: Datadog-Google Datastore インテグレーション
-short_description: Datastore の読み取り/書き込みパフォーマンス、リクエスト数などを追跡。
-version: '1.0'
+"categories":
+- "cloud"
+- "data stores"
+- "google cloud"
+- "log collection"
+- "mobile"
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track Datastore read/write performance, request counts, and more."
+"doc_link": "https://docs.datadoghq.com/integrations/google_cloud_datastore/"
+"draft": false
+"git_integration_title": "google_cloud_datastore"
+"has_logo": true
+"integration_id": "google-cloud-datastore"
+"integration_title": "Google Datastore"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "google_cloud_datastore"
+"public_title": "Datadog-Google Datastore Integration"
+"short_description": "Track Datastore read/write performance, request counts, and more."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Cloud Datastore は、Web およびモバイルアプリケーション用の高い拡張性を備えた NoSQL データベースです。
+Cloud Datastore is a highly-scalable NoSQL database for your web and mobile applications.
 
-Google Datastore からメトリクスを取得して、以下のことができます。
+Get metrics from Google Datastore to:
 
-- Datastore のパフォーマンスを視覚化。
-- Datastore のパフォーマンスをアプリケーションと関連付け。
+- Visualize the performance of your Datastores.
+- Correlate the performance of your Datastores with your applications.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
+If you haven't already, set up the [Google Cloud Platform integration first][1]. There are no other installation steps that need to be performed.
 
-### 収集データ
+### Log collection
 
-Google Cloud Datastore のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][2]。
+Google Cloud Datastore logs are collected with Google Cloud Logging and sent to a Dataflow job through a Cloud Pub/Sub topic. If you haven't already, [set up logging with the Datadog Dataflow template][2].
 
-これが完了したら、Google Cloud Datastore のログを Google Cloud Logging から Pub/Sub トピックへエクスポートします。
+Once this is done, export your Google Cloud Datastore logs from Google Cloud Logging to the Pub/Sub topic:
 
-1. [Google Cloud Logging のページ][3]に移動し、Google Cloud Datastore のログを絞り込みます。
-2. **Create Export** をクリックし、シンクに名前を付けます。
-3. 宛先として "Cloud Pub/Sub" を選択し、その目的で作成された Pub/Sub トピックを選択します。**注**: Pub/Sub トピックは別のプロジェクトに配置できます。
-4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
+1. Go to the [Google Cloud Logging page][3] and filter the Google Cloud Datastore logs.
+2. Click **Create Export** and name the sink.
+3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
+4. Click **Create** and wait for the confirmation message to show up.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "google_cloud_datastore" >}}
 
 
-### ヘルプ
+### Events
 
-Google Cloud Datastore インテグレーションには、イベントは含まれません。
+The Google Cloud Datastore integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Google Cloud Datastore インテグレーションには、サービスのチェック機能は含まれません。
+The Google Cloud Datastore integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/
-[2]: https://docs.datadoghq.com/ja/integrations/google_cloud_platform/#log-collection
+[1]: https://docs.datadoghq.com/integrations/google_cloud_platform/
+[2]: https://docs.datadoghq.com/integrations/google_cloud_platform/#log-collection
 [3]: https://console.cloud.google.com/logs/viewer
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_datastore/google_cloud_datastore_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

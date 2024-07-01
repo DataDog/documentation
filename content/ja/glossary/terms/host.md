@@ -1,6 +1,6 @@
 ---
+title: host
 core_product:
-- infrastructure monitoring
-title: ホスト
+  - infrastructure monitoring
 ---
-ホストとは、コンピュータまたは仮想マシンのことです。
+A host is a computer or a virtual machine.

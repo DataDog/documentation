@@ -1,99 +1,106 @@
 ---
-app_id: fastly
-app_uuid: baa14f81-c988-4262-9a9f-e268e9476689
-assets:
-  dashboards:
-    fastly: assets/dashboards/fastly_overview.json
-  integration:
-    auto_install: false
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: fastly.requests
-      metadata_path: metadata.csv
-      prefix: fastly.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 57
-    source_type_name: Fastly
-  monitors:
-    '[Fastly] 5xx Errors higher than usual for service: {{service.name}}': assets/monitors/rec_monitor_5xx_errors.json
-    '[Fastly] Abnormal bandwidth being sent for service: {{service.name}}': assets/monitors/rec_monitor_bandwidth.json
-    '[Fastly] High volume of requests triggering a Web Application Firewall rule on service: {{service.name}}': assets/monitors/waf_rules.json
-    '[Fastly] Low Hit Ratio for service: {{service.name}}': assets/monitors/rec_monitor_hit_ratio.json
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com
-  support_email: help@datadoghq.com
-categories:
-- caching
-- log collection
-- metrics
-dependencies: []
-display_on_public_website: true
-draft: false
-git_integration_title: fastly
-integration_id: fastly
-integration_title: Fastly
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: 2.0.0
-name: fastly
-public_title: Fastly
-short_description: Fastly のキーメトリクスを Datadog の他のメトリクスと関連付けて表示します。
-supported_os: []
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::キャッシュ
-  - Category::ログの収集
-  - Category::Metrics
-  configuration: README.md#Setup
-  description: Fastly のキーメトリクスを Datadog の他のメトリクスと関連付けて表示します。
-  media: []
-  overview: README.md#Overview
-  support: README.md#Troubleshooting
-  title: Fastly
+"app_id": "fastly"
+"app_uuid": "baa14f81-c988-4262-9a9f-e268e9476689"
+"assets":
+  "dashboards":
+    "fastly": "assets/dashboards/fastly_overview.json"
+  "integration":
+    "auto_install": false
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": "fastly.requests"
+      "metadata_path": "metadata.csv"
+      "prefix": "fastly."
+    "service_checks":
+      "metadata_path": "assets/service_checks.json"
+    "source_type_id": !!int "57"
+    "source_type_name": "Fastly"
+  "monitors":
+    "[Fastly] 5xx Errors higher than usual for service: {{service.name}}": "assets/monitors/rec_monitor_5xx_errors.json"
+    "[Fastly] Abnormal bandwidth being sent for service: {{service.name}}": "assets/monitors/rec_monitor_bandwidth.json"
+    "[Fastly] High volume of requests triggering a Web Application Firewall rule on service: {{service.name}}": "assets/monitors/waf_rules.json"
+    "[Fastly] Low Hit Ratio for service: {{service.name}}": "assets/monitors/rec_monitor_hit_ratio.json"
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": "Datadog"
+  "sales_email": "info@datadoghq.com"
+  "support_email": "help@datadoghq.com"
+"categories":
+- "caching"
+- "log collection"
+- "metrics"
+"custom_kind": "integration"
+"dependencies": []
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "fastly"
+"integration_id": "fastly"
+"integration_title": "Fastly"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "fastly"
+"public_title": "Fastly"
+"short_description": "View key Fastly metrics in context with the rest of your Datadog metrics."
+"supported_os": []
+"tile":
+  "changelog": "CHANGELOG.md"
+  "classifier_tags":
+  - "Category::Caching"
+  - "Category::Log Collection"
+  - "Category::Metrics"
+  "configuration": "README.md#Setup"
+  "description": "View key Fastly metrics in context with the rest of your Datadog metrics."
+  "media": []
+  "overview": "README.md#Overview"
+  "resources":
+  - "resource_type": "blog"
+    "url": "https://www.datadoghq.com/blog/monitor-fastly-performance-metrics/"
+  - "resource_type": "other"
+    "url": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_fastly_account"
+  - "resource_type": "other"
+    "url": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_fastly_service"
+  "support": "README.md#Troubleshooting"
+  "title": "Fastly"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/fastly/fastly_dashboard.png" alt="キャッシュヒット率、成功率、その他のメトリクスを表示する Fastly ダッシュボード" popup="true">}}
+{{< img src="integrations/fastly/fastly_dashboard.png" alt="Fastly dashboard showing cache hit ratio, success rate, and other metrics" popup="true">}}
 
-## 概要
+## Overview
 
-Fastly を Datadog に接続して、Fastly のキーメトリクス (キャッシュカバレッジ、ヘッダーサイズなど) を Datadog の他のメトリクスと関連付けて表示できます。
+Connect Fastly to Datadog to view key Fastly metrics (for example, cache coverage and header size) in context with the rest of your Datadog metrics.
 
-このインテグレーションには、即座に使用可能なモニターとダッシュボードが含まれており、それによってメトリクスを総合的に表示し、Fastly メトリクスと関連ログとの間で比較し、メトリクスがユーザー定義のしきい値を超えたり異常な振る舞いを示したりした際に通知するモニターを作成することが可能です。
+The integration includes out-of-the-box monitors and dashboard that enable you to view metrics in aggregate, pivot between Fastly metrics and related logs, and create monitors that alert you when a metric passes a user-defined threshold or behaves anomalously.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-必要なインストール手順はありません。
+No installation steps required.
 
-### ブラウザトラブルシューティング
+### Configuration
 
-#### メトリクスの収集
+#### Metric collection
 
-Fastly のトークン管理ページで読み取り専用アクセス API トークンを作成し、ダッシュボードからサービス ID を取得して、それらを [Fastly インテグレーションタイル][1]に入力します。
+Create a Read-only access API token on Fastly's token management page, get your Service ID from the Dashboard and enter them in the [Fastly integration tile][1].
 
 <div class="alert alert-info">
-ServiceID は英数字のコードです。例: <code>5VqE6MOOy1QFJbgmCK41pY</code>（<a href="https://docs.fastly.com/api/auth">Fastly API ドキュメント</a>からの例）。
+The ServiceID is the alphanumerical code, for example: <code>5VqE6MOOy1QFJbgmCK41pY</code> (example from the <a href="https://docs.fastly.com/api/auth">Fastly API documentation</a>).
 </div>
 
-1 つのアカウントで複数のサービス ID を使用している場合は、各行に API トークンを入力します。
+If you are using multiple Service IDs from one account, enter an API token on each line.
 
-アカウント名はアカウントの整理に使用されるものであり、データ取り込みプロセスには使用されません。
+The account name is a way for you to organize your accounts, and is not used as part of the data ingestion process.
 
-#### 収集データ
+#### Log collection
 
 
 {{< site-region region="us3" >}}
 
-ログ収集は、このサイトではサポートされていません。
+Log collection is not supported for this site.
 
 {{< /site-region >}}
 
@@ -101,41 +108,41 @@ ServiceID は英数字のコードです。例: <code>5VqE6MOOy1QFJbgmCK41pY</co
 
 {{< site-region region="us,us5,eu,gov" >}}
 
-Fastly ログを Datadog に転送するように Datadog エンドポイントを構成します。`Datadog` または `Datadog (via Syslog)` エンドポイントを選択できます。Syslog 経由でログをより確実に配信するには、`Datadog` エンドポイントをお勧めします。
+Configure the Datadog endpoint to forward Fastly logs to Datadog. You can choose the `Datadog` or `Datadog (via Syslog)` endpoint. The `Datadog` endpoint is recommended for more reliable delivery of logs over Syslog.
 
-##### ログエンドポイントの選択
+##### Select the logging endpoint
 
-1. Fastly Web インターフェイスにログインし、**Configure リンク**をクリックします。
-2. **Service** メニューから、該当するサービスを選択します。
-3. **Configuration** ボタンをクリックし、次に **Clone active** を選択します。Domains ページが表示されます。
-4. **Logging** リンクをクリックします。ログエンドポイントページが表示されます。**Datadog** または **Datadog (with Syslog)** オプションの下の **Create Endpoint** をクリックします。
+1. Log in to the Fastly web interface and click **Configure link**.
+2. From the **Service** menu, select the appropriate service.
+3. Click the **Configuration** button and then select **Clone active**. The Domains page appears.
+4. Click the **Logging** link. The logging endpoints page appears. Click **Create Endpoint** under **Datadog** or the **Datadog (with Syslog)** options.
 
-##### Datadog エンドポイントを構成する (推奨)
+##### Configure the Datadog endpoint (recommended)
 
-1. エンドポイントに名前を付けます (例: `Datadog`)。
-2. ログ形式を構成します。デフォルトで、推奨される[Datadog-Fastly ログ形式][2]がすでに用意されており、カスタマイズできます。
-3. Datadog アカウントのリージョンと一致するように、リージョンを選択します: {{< region-param key="dd_site_name" code="true" >}}
-4. [Datadog API キー][3]を追加します。
-5. 下部にある **Create** をクリックします。
-6. 右上の **Activate** をクリックして、新しいコンフィギュレーションをアクティブ化します。数分後、ログがアカウントに流れ始めます。
+1. Give a name to the endpoint, for example: `Datadog`.
+2. Configure the log format. By default, the recommended [Datadog-Fastly log format][2] is already provided and can be customized.
+3. Select your region to match your Datadog account region: {{< region-param key="dd_site_name" code="true" >}}
+4. Add your [Datadog API key][3].
+5. Click **Create** at the bottom.
+6. Click **Activate** at the top right to activate the new configuration. After a few minutes, logs should begin flowing into your account.
 
-##### Syslog エンドポイントの構成
+##### Configure the Syslog endpoint
 
-1. エンドポイントに名前を付けます (例: `Datadog`)。
-2. ログ形式を構成して、推奨される[Datadog-Fastly ログ形式][2]の先頭に[Datadog API キー][3]を含めます。
+1. Give a name to the endpoint, for example: `Datadog`.
+2. Configure the log format to include the recommended [Datadog-Fastly log format][2] with [your Datadog API key][3] at the beginning.
 
     ```text
     <DATADOG_API_KEY> <DATADOG_FASTLY_LOG_FORMAT>
     ```
 
-   注: Datadog-Fastly ログ形式の先頭に Datadog API キーがないと、ログが Datadog に表示されません。詳しくは、[ログを取るのに便利な変数][4]をご覧ください。
+    **Note**: Your Datadog API key MUST be in front of the Datadog-Fastly log format for your logs to display in Datadog. See [Useful variables to log][4] for more details.
 
-3. **Syslog Address** を {{< region-param key="web_integrations_endpoint" code="true" >}} に設定します
-4. **Port** を {{< region-param key="web_integrations_port" code="true" >}} に設定します
-5. **TLS** を `yes` に設定します。
-6. **TLS Hostname** を {{< region-param key="web_integrations_endpoint" code="true" >}} に設定します
-7. Advanced options セクションで、**log line format** として `Blank` を選択します。
-8. 最後に、エンドポイントを保存し、サービスをデプロイします。[Datadog のログエクスプローラー][5] でログを確認できます。
+3. Set **Syslog Address** to: {{< region-param key="web_integrations_endpoint" code="true" >}}
+4. Set **Port** to: {{< region-param key="web_integrations_port" code="true" >}}
+5. Set **TLS** to `yes`
+6. Set **TLS Hostname** to: {{< region-param key="web_integrations_endpoint" code="true" >}}
+7. In the advanced option section, select `Blank` as **log line format**
+8. Finally, save the endpoint and deploy the service. See the logs in your [Datadog Logs Explorer][5].
 
 [2]: https://docs.datadoghq.com/resources/json/fastly_format.json
 [3]: https://app.datadoghq.com/organization-settings/api-keys
@@ -145,33 +152,34 @@ Fastly ログを Datadog に転送するように Datadog エンドポイント�
 {{< /site-region >}}
 
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "fastly" >}}
 
 
-### ヘルプ
+### Events
 
-Fastly インテグレーションには、イベントは含まれません。
+The Fastly integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Fastly インテグレーションには、サービスのチェック機能は含まれません。
+The Fastly integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-## その他の参考資料
+## Further reading
 
-- [Datadog を使用した Fastly パフォーマンスの監視][4]
-- [Terraform による Fastly アカウントの作成と管理][5]
-- [Terraform による Fastly サービスの作成と管理][6]
+- [Monitor Fastly performance with Datadog][4]
+- [Create and manage your Fastly accounts with Terraform][5]
+- [Create and manage your Fastly services with Terraform][6]
 
 [1]: https://app.datadoghq.com/account/settings#integrations/fastly
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/fastly/fastly_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
 [4]: https://www.datadoghq.com/blog/monitor-fastly-performance-metrics/
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_fastly_account
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_fastly_service
+

@@ -1,66 +1,67 @@
 ---
-categories:
-- AWS
-- クラウド
+"categories":
+- aws
+- cloud
 - data stores
-- ログの収集
-dependencies: []
-description: AWS Elemental MediaStore のキーメトリクスを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/amazon_mediastore/
-draft: false
-git_integration_title: amazon_mediastore
-has_logo: true
-integration_id: ''
-integration_title: AWS Elemental MediaStore
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: amazon_mediastore
-public_title: Datadog-AWS Elemental MediaStore インテグレーション
-short_description: AWS Elemental MediaStore のキーメトリクスを追跡します。
-version: '1.0'
+- log collection
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key AWS Elemental MediaStore metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/amazon_mediastore/"
+"draft": false
+"git_integration_title": "amazon_mediastore"
+"has_logo": true
+"integration_id": ""
+"integration_title": "AWS Elemental MediaStore"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "amazon_mediastore"
+"public_title": "Datadog-AWS Elemental MediaStore Integration"
+"short_description": "Track key AWS Elemental MediaStore metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-AWS Elemental MediaStore は、メディア向けに最適化された AWS のストレージサービスです。
+AWS Elemental MediaStore is an AWS storage service optimized for media.
 
-このインテグレーションを有効にすると、Datadog にすべての AWS Elemental MediaStore メトリクスを表示できます。
+Enable this integration to see all your AWS Elemental MediaStore metrics in Datadog.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
+If you haven't already, set up the [Amazon Web Services integration][1] first.
 
-### メトリクスの収集
+### Metric collection
 
-1. [AWS インテグレーションタイル][2]で、メトリクスコレクションの下にある `MediaStore` にチェックが入っていることを
-   確認します。
-2. [Datadog - AWS Elemental MediaStore インテグレーション][3]をインストールします。
+1. In the [AWS integration tile][2], ensure that `MediaStore` is checked
+   under metric collection.
+2. Install the [Datadog - AWS Elemental MediaStore integration][3].
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "amazon_mediastore" >}}
 
 
-### ヘルプ
+### Events
 
-AWS Elemental MediaStore インテグレーションには、イベントは含まれません。
+The AWS Elemental MediaStore integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-AWS Elemental MediaStore インテグレーションには、サービスのチェック機能は含まれません。
+The AWS Elemental MediaStore integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-[1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-mediastore
 [4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mediastore/amazon_mediastore_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[5]: https://docs.datadoghq.com/help/
+

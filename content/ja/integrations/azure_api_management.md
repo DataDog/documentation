@@ -1,58 +1,59 @@
 ---
-aliases:
-- /ja/integrations/azure_apimanagement
-categories:
+"aliases":
+- /integrations/azure_apimanagement
+"categories":
 - cloud
 - azure
-dependencies: []
-description: Azure API Management のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_api_management/
-draft: false
-git_integration_title: azure_api_management
-has_logo: true
-integration_id: azure-apimanagement
-integration_title: Microsoft Azure API Management
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_api_management
-public_title: Datadog-Microsoft Azure API Management インテグレーション
-short_description: Azure API Management のキーメトリクスを追跡
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure API Management metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_api_management/"
+"draft": false
+"git_integration_title": "azure_api_management"
+"has_logo": true
+"integration_id": "azure-apimanagement"
+"integration_title": "Microsoft Azure API Management"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_api_management"
+"public_title": "Datadog-Microsoft Azure API Management Integration"
+"short_description": "Track key Azure API Management metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure API Management は、顧客が API を公開、セキュリティ保護、変換、保守、および監視できるフルマネージド型サービスです。
+Azure API Management is a fully managed service that enables customers to publish, secure, transform, maintain, and monitor APIs.
 
-Datadog Azure インテグレーションを使用して、Azure API Management からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Azure API Management.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_api_management" >}}
 
 
-### ヘルプ
+### Events
 
-Azure API Management インテグレーションには、イベントは含まれません。
+The Azure API Management integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure API Management インテグレーションには、サービスのチェック機能は含まれません。
+The Azure API Management integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_api_management/azure_api_management_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

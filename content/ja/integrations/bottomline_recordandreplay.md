@@ -1,118 +1,122 @@
 ---
-app_id: bottomline-recordandreplay
-app_uuid: d87fbcfa-71db-4d62-8264-5d88ba2338ce
-assets:
-  dashboards:
-    Bottomline Record and Replay Overview: assets/dashboards/bottomline_activity_overview.json
-  integration:
-    configuration: {}
-    events:
-      creates_events: false
-    metrics:
-      check: datadog.marketplace.bottomline.mainframe.activity.usr.id.count
-      metadata_path: metadata.csv
-      prefix: bottomline.mainframe.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_name: Bottomline Mainframe
-  monitors:
-    Mainframe resource taking long time to respond: assets/monitors/bottomline_mainframe_resource_has_problem.json
-author:
-  homepage: https://www.bottomline.com/
-  name: Bottomline Technologies
-  sales_email: partner.cfrm@bottomline.com
-  support_email: partner.cfrm@bottomline.com
-  vendor_id: bottomline
-categories:
-- mainframe
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/bottomline_recordandreplay/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: bottomline_recordandreplay
-integration_id: bottomline-recordandreplay
-integration_title: 'Bottomline の Record and Replay: Mainframe'
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: bottomline_recordandreplay
-public_title: 'Bottomline の Record and Replay: Mainframe'
-short_description: ネットワークトラフィックを利用して 3270/5250 Mainframe のユーザーとリソースを監視する
-supported_os:
+"app_id": "bottomline-recordandreplay"
+"app_uuid": "d87fbcfa-71db-4d62-8264-5d88ba2338ce"
+"assets":
+  "dashboards":
+    "Bottomline Record and Replay Overview": assets/dashboards/bottomline_activity_overview.json
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "metrics":
+      "check": bottomline.mainframe.activity.resource.duration
+      "metadata_path": metadata.csv
+      "prefix": bottomline.mainframe.
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10324"
+    "source_type_name": Bottomline Mainframe
+  "monitors":
+    "Mainframe resource taking long time to respond": assets/monitors/bottomline_mainframe_resource_has_problem.json
+"author":
+  "homepage": "https://www.bottomline.com/"
+  "name": Bottomline Technologies
+  "sales_email": partner.cfrm@bottomline.com
+  "support_email": partner.cfrm@bottomline.com
+  "vendor_id": bottomline
+"categories":
+- mainframes
+"custom_kind": "integration"
+"dependencies":
+- "https://github.com/DataDog/integrations-extras/blob/master/bottomline_recordandreplay/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "bottomline_recordandreplay"
+"integration_id": "bottomline-recordandreplay"
+"integration_title": "Bottomline's Record and Replay: Mainframe"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "bottomline_recordandreplay"
+"public_title": "Bottomline's Record and Replay: Mainframe"
+"short_description": "Monitor your 3270/5250 Mainframe users and resources using network traffic"
+"supported_os":
 - linux
 - windows
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Mainframe
-  - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  configuration: README.md#Setup
-  description: ネットワークトラフィックを利用して 3270/5250 Mainframe のユーザーとリソースを監視する
-  media:
-  - caption: Mainframe Record and Replay ユーザーセッション
-    image_url: images/mainframe_replay.png
-    media_type: image
-  - caption: Mainframe Record and Replay ダッシュボード
-    image_url: images/bt_dashboard.png
-    media_type: image
-  - caption: Mainframe Record and Replay 概要
-    image_url: images/bt_replay.png
-    media_type: image
-  - caption: Mainframe Record and Replay アーキテクチャ
-    image_url: images/bt_architecture.png
-    media_type: image
-  overview: README.md#Overview
-  support: README.md#Support
-  title: 'Bottomline の Record and Replay: Mainframe'
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Mainframes"
+  - "Offering::Integration"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  "configuration": "README.md#Setup"
+  "description": Monitor your 3270/5250 Mainframe users and resources using network traffic
+  "media":
+  - "caption": Mainframe Record and Replay User Session
+    "image_url": images/mainframe_replay.png
+    "media_type": image
+  - "caption": Mainframe Record and Replay Dashboard
+    "image_url": images/bt_dashboard.png
+    "media_type": image
+  - "caption": Mainframe Record and Replay Overview
+    "image_url": images/bt_replay.png
+    "media_type": image
+  - "caption": Mainframe Record and Replay Architecture
+    "image_url": images/bt_architecture.png
+    "media_type": image
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": "Bottomline's Record and Replay: Mainframe"
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## 概要
+## Overview
 
-Bottomline の Mainframe Record and Replay ソリューションは、ネットワークトラフィックを介して 3270/5250 ユーザーを非侵襲的に監視し、顧客がユーザーとシステムを監視するのに役立ちます。
+Bottomline's Mainframe Record and Replay solution is non-invasive in its capability to monitor 3270/5250 users via network traffic to help customers monitor users and systems.
 
-このインテグレーションにより、Datadog で Bottomline の Record and Replay セッションを監視し、リソース使用率、リソースパフォーマンス、ユーザーアクティビティ、セキュリティイベント、およびシステムモニターの可視性を提供することができます。また、お客様は Datadog を通じてユーザーセッションの再生に直接アクセスすることができます。
+With this integration, you can monitor Bottomline's' Record and Replay sessions in Datadog to provide visibility into resource utilization, resource performance, user activity, security events, and system monitors. Customers can also directly access user session replays through Datadog.
 
-### アラート設定
+### Monitors
 
-このインテグレーションには、Mainframe Resource に問題が発生した場合に報告するモニターが含まれています。
+This integration includes a monitor that reports when a Mainframe Resource is experiencing a problem.
 
-### メトリクス
+### Metrics
 
-このチェックによって提供されるメトリクスのリストについては、[metadata.csv][1] を参照してください。
+See [metadata.csv][1] for a list of metrics provided by this check.
 
-### ダッシュボード  
+### Dashboards
 
-**Bottomline Record and Replay 概要**: このダッシュボードでは、どのようなリソースが使用されているか、リソースのパフォーマンス、ユーザーアクティビティ、セキュリティイベント、システムモニターを可視化することができます。
+**Bottomline Record and Replay Overview**: This dashboard gives visibility into what resources are being used, resource performance, user activity, security events, and system monitors.
 
-## セットアップ
+## Setup
 
-以下のステップバイステップの手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
+Follow the step-by-step instructions below to install and configure this check for an Agent running on a host. 
 
-### 前提条件
+### Prerequisites
 
-このインテグレーションを意図したとおりに実行するためには、次の項目が必要です。
-  - Datadog Agent がインストールされ、実行されている必要があります。
-  - Bottomline の Record and Replay をインストールし、Datadog Agent の構成を変更するための、Datadog Agent が実行しているサーバーへのアクセス。
-  - サポートされているデータベース (Oracle または Postgres)。
-  - Record and Replay を構成するための Bottomline の Enterprise Manager をインストールするための Windows デスクトップ。
+The following items are required for this integration to run as intended:
+  - You must have the Datadog Agent installed and running.
+  - Access to the server running the Datadog Agent for installing Bottomline's Record and Replay and to modify the Datadog Agent configurations.
+  - A supported database (Oracle or Postgres).
+  - A Windows desktop to install Bottomline's Enterprise Manager for configuring Record and Replay.
 
 
-### セットアップ
+### Setup
 
-Bottomline をまだご利用でないお客様は、[Bottomline の Marketplace の出品][2]にアクセスしてライセンスを購入してください。
+If you are not already a customer of Bottomline, visit [Bottomline's Marketplace listing][2] to purchase a license.
 
-[こちら][3]の手順に従い、インテグレーションをインストールしてください。
+Follow the instructions outlined [here][3] to install the integration.
 
-## サポート
-サポートや機能のリクエストは、[Bottomline][4] にお問い合わせください。
+## Support
+For support or feature requests, contact [Bottomline][4].
 
 
 [1]: https://github.com/DataDog/integrations-extras/blob/master/bottomline_recordandreplay/metadata.csv
 [2]: https://app.datadoghq.com/marketplace/app/bottomline-mainframe
 [3]: https://github.com/nbk96f1/datadog/tree/main/Documentation
 [4]: mailto:partner.cfrm@bottomline.com
+

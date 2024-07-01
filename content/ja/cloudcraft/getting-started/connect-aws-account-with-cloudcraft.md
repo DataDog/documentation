@@ -1,80 +1,80 @@
 ---
-title: AWS アカウントを Cloudcraft に接続する
+title: Connect your AWS Account to Cloudcraft
 ---
 
-AWS アカウントを Cloudcraft に接続すると、ライブ環境のサービス同士の関係をリバースエンジニアリングでシステムアーキテクチャ図に落とし込み、インフラストラクチャーを可視化できます。ダイアグラムが自動的に生成されるだけでなく、予算モデルも作成され、インポートされたコンポーネントはリアルタイムのステータスデータをダイアグラムに直接表示します。Cloudcraft に接続できる AWS アカウントの数に制限はありません。
+Connecting your AWS accounts to Cloudcraft allows you to visualize your infrastructure by reverse-engineering the live environment's service relationships into a system architecture diagram. In addition to automatically generating diagrams, a budget model will also be created, and your imported components will display live status data directly in your diagrams. There is no limit on the number of AWS accounts you can connect to Cloudcraft.
 
-**注**: AWS 組織の場合、組織内の各アカウントに Cloudcraft ロールを手動で追加する必要があります。
+**Note**: For AWS organizations, you must manually add the Cloudcraft role to each individual account in the organization.
 
-この記事では、AWS アカウントを Cloudcraft に接続する手順を説明します。
+This article walks you through connecting your AWS account to Cloudcraft.
 
-## 要件
+## Requirements
 
-- [オーナーまたは管理者ロール][1]を持つ Cloudcraft ユーザー。
-- 有効な [Cloudcraft Pro サブスクリプション][2]。
-- IAM ロールの作成権限を持つ AWS アカウント。
+- A Cloudcraft user with the [Owner or Administrator role][1].
+- An active [Cloudcraft Pro subscription][2].
+- An AWS account with permission to create IAM roles.
 
-## ライブ AWS sync の仕組み
+## How the live AWS sync works
 
-Cloudcraft は [AWS 環境に安全にアクセスするためにクロスアカウントロール][3]を使用します。そのため、AWS アカウントに Cloudcraft 専用の読み取り専用ロールを作成する必要があります。このロールはいつでも取り消すことができます。
+Cloudcraft uses a [cross-account role to securely access your AWS environment][3]. As a result, you need to create a Cloudcraft-specific, read-only role in your AWS account. This role can be revoked at any time.
 
-すべてのコンポーネントにアクセス可能な読み取り専用ロールの使用が許可されていない場合や、社内ポリシーに違反する場合、[より厳格な最小限アクセスポリシーを適用する][4]ことも可能です。これにより、Cloudcraftで使用したいリソースに限定して読み取り専用アクセスを与え、ロールがアクセスできるデータ量をさらに最小化することができます。
+If having a read-only role with access to all components isn't permissible or violates your company's policies, you also have the option to [attach a stricter minimal access policy][4], only giving read-only access to the resources you want to use with Cloudcraft, further minimizing the amount of data the role can access.
 
-Cloudcraft は AWS 環境のライブデータを一切保持しません。その代わりに、AWS 内のリソースの一意の識別子である ARN を保存します。これにより、アプリケーションは実行時にライブデータをコンポーネントに紐づけることができます。
+Cloudcraft doesn't keep any of the live data from your AWS environment. Instead, it stores ARNs, which are unique identifiers for resources in AWS. This allows the application to link live data to components at runtime.
 
-AWS 環境のデータは、Cloudcraft 独自の AWS 環境を介してロールベースのアクセスを通じてリアルタイムでブラウザにストリーミングされ、アプリケーションを使用している間のみクライアント側に保存されます。アプリケーションを閉じると、ライブデータは削除されます。
+The data from your AWS environment is streamed in real-time to your browser via Cloudcraft's own AWS environment via role-based access, and is only stored client-side while you are using the application. When you close the application, the live data is deleted.
 
-アカウントへの書き込み権限を持たないことで、Cloudcraft は EC2 インスタンスをダイアグラムとアカウントの両方から削除するといった特定の機能を提供できませんが、その方が単純により安全なアプローチであると言えます。
+While not having write access to your account prevents Cloudcraft from offering certain features—like deleting an EC2 instance on both the diagram and your account—it's simply a more secure approach.
 
-Cloudcraft は、SOC2 準拠プログラムにより厳格なセキュリティ処理および管理を実施しています。Cloudcraft のセキュリティプログラムと管理については、[セキュリティページ][5]をご覧ください。
+Cloudcraft implements rigorous security processes and controls for the SOC2 compliance program. You can read more about Cloudcraft's security program and controls on [the security page][5].
 
-## AWS アカウントの管理
+## Manage AWS accounts
 
-### アカウントの追加
+### Add account
 
-1. Cloudcraft で **User** > **AWS accounts** に移動します。
-2. モーダルの一番下にある **Add AWS Account** をクリックします。
-3. 次のページでは、手順が順を追って表示されます。**Open the AWS IAM Console to the Create Role page (AWS IAM コンソールの Create Role ページを開く)** をクリックして、AWS で読み取り専用の IAM ロールを構成します。
+1. In Cloudcraft, navigate to **User** > **AWS accounts**.
+2. At the bottom of the modal, click **Add AWS Account**.
+3. The next page provides step-by-step instructions. Click **Open the AWS IAM Console to the Create Role page** to configures the read-only IAM role in AWS.
 
-<div class="alert alert-info"><strong>Create Role</strong> ページにアクセスできない場合は、新しい IAM ロールを作成するための <strong>AdministrativeAccess</strong> または十分な IAM 権限が不足している可能性があります。その場合は、AWS アカウントの管理者に連絡して、次の手順を実行してもらいます。</div>
+<div class="alert alert-info">If you can't access the <strong>Create Role</strong> page, you may lack <strong>AdministrativeAccess</strong> or sufficient IAM permissions to create a new IAM role. If this is the case, contact your AWS account's administrator and have them complete the following steps.</div>
 
-4. AWS の **Create role** ページで **Require MFA** のチェックを外し、**Next** をクリックします。
+4. On the **Create role** page in AWS, leave **Require MFA** unchecked, and click **Next**.
 
-<div class="alert alert-info"><strong>Require MFA</strong> は、人間が関与しないシステム間のアクセスには適用できないため、無効にする必要があります。代わりに、アクセスは Cloucraft AWS アカウントからのアクセスに制限されることで保護されます。</div>
+<div class="alert alert-info"><strong>Require MFA</strong> must be disabled as it's not applicable for system-to-system access where there is no human involved. Access is instead protected by being limited to access from the Cloucraft AWS account.</div>
 
-{{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/create-iam-role.png" alt="ロール構成で信頼できるエンティティの選択オプションが表示されている AWS Identity and Access Management コンソール画面。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/create-iam-role.png" alt="AWS Identity and Access Management console screen showing options for selecting trusted entities for role configuration." responsive="true" style="width:100%;">}}
 
-5. 次に、権限ポリシーをロールに追加します。検索ボックスに **ReadOnlyAccess** と入力し、**Enter** を押すと、ポリシーが名前でフィルタリングされます。
-6. AWS サービスおよびリソースへの読み取り専用アクセスを提供する **ReadOnlyAccess** ポリシーを選択し、**Next** をクリックします。
+5. Next, add permissions policies to your role. Type **ReadOnlyAccess** in the search box and press **Enter** to filter policies by name.
+6. Select the **ReadOnlyAccess** policy that provides read-only access to AWS services and resources, then click **Next**.
 
-{{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/read-only-role.png" alt="'ReadOnlyAccess' ポリシーがハイライト表示され、選択されている AWS 管理コンソールページ。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/read-only-role.png" alt="AWS management console page with the 'ReadOnlyAccess' policy highlighted and selected." responsive="true" style="width:100%;">}}
 
-7. IAM ロールの名前と説明を入力します。また、タグを追加して、ロールの整理、追跡、アクセス制御を行うこともできます。ロールへのタグ付けは任意です。タグ付けのベストプラクティスについては、[AWS リソースのタグ付けのベストプラクティス][6]を参照してください。
-8. **Create role** をクリックします。
-9. ロールのリストから `cloudcraft` ロールを選択します。**Summary** 0ページで **Role ARN** をコピーします。
+7. Enter a name and description for the IAM role. You can also add tags to organize, track, or control access for the role. Tagging your role is optional. For tagging best practices, see [Best Practices for Tagging AWS Resources][6].
+8. Click **Create role**.
+9. Select the `cloudcraft` role from the list of roles. On the **Summary** page, copy the **Role ARN**.
 
-{{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/role-summary.png" alt="Cloudcraft インテグレーション用の Role ARN が表示された AWS IAM ロール構成画面。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/role-summary.png" alt="AWS IAM role configuration screen showing Role ARN for Cloudcraft integration." responsive="true" style="width:100%;">}}
 
-10. Cloudcraft の **Role ARN** フィールドに ARN を貼り付け、アカウント名を入力します。
-11. オプションで、**Team access** の下にある青いボタンをクリックし、AWS アカウントへのアクセスを共有するチームを選択して、チームアクセスを構成します。
+10. In Cloudcraft, paste the ARN in the **Role ARN** field, and enter a name for your account.
+11. Optionally, configure team access by clicking the blue button beneath **Team access** and selecting the teams you want to share access to the AWS account with.
 
-{{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/team-access.png" alt="Team access オプションで Cloudcraft、Team Demo、Cloudcraft Sales + Support のチームタグが表示されているCloudcraft インターフェース。" responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/team-access.png" alt="Cloudcraft interface showing Team access options with Cloudcraft, Team Demo, and Cloudcraft Sales + Support team tags." responsive="true" style="width:100%;">}}
 
-12. **Save Account** をクリックします。
+12. Click **Save Account**.
 
-### アカウントの編集
+### Edit account
 
-アカウントを編集するには、編集したいアカウントの左側にあるグレーの鉛筆アイコンをクリックします。名前、ARN、チームアクセスなど、アカウントの詳細情報を変更できます。
+To edit an account, click the gray pencil icon to the left of the account you want to edit. You can change details of the account, such as the name, ARN, and team access.
 
-完了したら、**Save Account** をクリックします。
+When you are done, click **Save Account**.
 
-### アカウントの削除
+### Remove account
 
-アカウントを削除するには、削除したいアカウントの右側にあるゴミ箱アイコンをクリックし、**Remove** をクリックします。
+To remove an account, click the trash can icon to the right of the account you want to remove, then click **Remove**.
 
-[1]: /ja/cloudcraft/account-management/roles-and-permissions/
+[1]: /cloudcraft/account-management/roles-and-permissions/
 [2]: https://www.cloudcraft.co/pricing
 [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
-[4]: /ja/cloudcraft/advanced/minimal-iam-policy/
+[4]: /cloudcraft/advanced/minimal-iam-policy/
 [5]: https://www.cloudcraft.co/security
 [6]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html

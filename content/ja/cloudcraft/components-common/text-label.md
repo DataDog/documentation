@@ -1,27 +1,27 @@
 ---
-title: テキストラベルコンポーネント
+title: "Text label Component"
 ---
 
-## 概要
+## Overview
 
-テキストラベルコンポーネントを使用すると、図内のコンポーネント、アイコン、および領域にラベルを付けることができ、可読性と視覚的な魅力を高めることができます。
+The Text label component can be used to label components, icons, and areas in a diagram, increasing readability and visual appeal.
 
-{{< img src="cloudcraft/components-common/text-label/component-text-label.png" alt="Cloudcraft のテキストラベルコンポーネントの 3D 表現のスクリーンショット" responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-common/text-label/component-text-label.png" alt="Screenshot of a 3D representation of the text label component in Cloudcraft" responsive="true" style="width:60%;">}}
 
-## ツールバー
+## Toolbar
 
-ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: 定義済みの色を選択するか、色の 16 進値を入力します。2D ビューと 3D ビューの両方に同じ色を使用することも、それぞれに異なる色を使用することもできます。
-- **Toggle 3D/2D projection**: ラベルを 3D または 2D ビューで表示します。
-- **Toggle flat/standing projection**: ラベルを平面または立体に表示します。2D 投影に切り替えている場合は使用できません。
-- **Size**: テキストラベルのサイズ。最大値は 112 です。
-- **Rotate item**: テキストラベルコンポーネントを回転させ、その方向を変更します。
-- **Outline**: テキストラベルにアウトラインを追加して、色のコントラストを強めます。
+- **Color**: Select a predefined color or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
+- **Toggle 3D/2D projection**: Display the label in 3D or 2D view.
+- **Toggle flat/standing projection**: Display the label flat or standing. Not available when 2D projection is toggled.
+- **Size**: The size of the text label. Accepts a maximum value of 112.
+- **Rotate item**: Rotate a text label component and change its direction.
+- **Outline**: Add an outline to the text label for increased color contrast.
 
-## ヘルプ
+## API
 
-[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。以下は、テキストラベルコンポーネントの JSON オブジェクトの例です。
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of a Text label component:
 
 ```json
 {
@@ -43,19 +43,19 @@ title: テキストラベルコンポーネント
 }
 ```
 
-- **type: isotext**: コンポーネントのタイプ。
-- **id: 文字列**: `uuid` 形式のコンポーネントの一意な識別子。
-- **mapPos: [数値, 数値]**: x 座標と y 座標のペアで表される、ブループリント内のコンポーネントの位置。
-- **text: 文字列**: ラベルに使用されるテキスト。
-- **textSize: 数値**: テキストラベルのサイズ。デフォルトは 25 です。
-- **isometric: ブール値**: true の場合、ラベルは 3D 投影で表示され、false の場合、ラベルは 2D 投影で表示されます。デフォルトは true です。
-- **standing: ブール値**: true の場合 、ラベルを平面ではなく立体で表示します。デフォルトは false です。
-- **direction: 文字列**: ラベルの回転または方向。値として `down, up, right, left` を受け付けます。デフォルトは `down` です。
-- **outline: ブール値**: true の場合、 テキストにアウトラインを追加して色のコントラストを増加させます。デフォルトは false です。
-- **color: オブジェクト**: コンポーネントの塗りつぶし色。
-  - **isometric: 文字列**: 3D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
-  - **2d: 文字列**: 2D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
-- **link: uri**: コンポーネントを、`blueprint://ID` フォーマットで別の図にリンクするか、`https://LINK` フォーマットで外部の Web サイトにリンクします。
-- **locked: ブール値**: true の場合、アプリケーション通じたコンポーネントへの変更は、ロックが解除されるまで無効になります。
+- **type: isotext**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as a x,y coordinate pair.
+- **text: string**: The text used for the label.
+- **textSize: number**: The size of the text label. Defaults to 25.
+- **isometric: boolean**: If true, the label is displayed using a 3D projection, while false displays the label in a 2D projection. Defaults to true.
+- **standing: boolean**: If true, displays the label in a standing position instead of flat. Defaults to false.
+- **direction: string**: The rotation or direction of the label. Accepts `down, up, right, left` as value, with `down` as the default.
+- **outline: boolean**: If true, adds an outline to the text to increase color contrast. Defaults to false.
+- **color: object**: The fill color for the component.
+  - **isometric: string**: Fill color for the component in 3D view. Must be an hexadecimal color.
+  - **2d: string**: Fill color for the component in 2D view. Must be an hexadecimal color.
+- **link: uri**: Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
+- **locked: boolean**: If true, changes to the component through the application are disabled until unlocked.
 
 [1]: https://developers.cloudcraft.co/

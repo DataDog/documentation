@@ -1,78 +1,79 @@
 ---
-aliases:
-- /ja/integrations/azure_keyvault
-categories:
+"aliases":
+- /integrations/azure_keyvault
+"categories":
 - cloud
 - azure
-dependencies: []
-description: Azure Key Vault のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_key_vault/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/azure-key-vault-monitoring-events/
-  tag: ブログ
-  text: Azure Key Vault からの期限切れイベントの監視
-git_integration_title: azure_key_vault
-has_logo: true
-integration_id: azure-keyvault
-integration_title: Microsoft Azure Key Vault
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_key_vault
-public_title: Datadog-Microsoft Azure Key Vault インテグレーション
-short_description: Azure Key Vault のキーメトリクスを追跡
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Key Vault metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_key_vault/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/azure-key-vault-monitoring-events/"
+  "tag": Blog
+  "text": Monitor expiration events from Azure Key Vault
+"git_integration_title": "azure_key_vault"
+"has_logo": true
+"integration_id": "azure-keyvault"
+"integration_title": "Microsoft Azure Key Vault"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_key_vault"
+"public_title": "Datadog-Microsoft Azure Key Vault Integration"
+"short_description": "Track key Azure Key Vault metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Key Vault は、クラウドアプリケーションおよびサービスが使用する暗号化キーとシークレットを保護および管理するために使用されます。
+Azure Key Vault is used to safeguard and manage cryptographic keys and secrets used by cloud applications and services.
 
-Datadog Azure インテグレーションを使用して、Azure Key Vault からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Azure Key Vault.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_key_vault" >}}
 
 
-### ヘルプ
+### Events
 
-Datadog は*資格情報期限切れイベント*を送信し、Azure アプリ登録、Key Vault キー、Key Vault シークレット、Key Vault 証明書の資格情報の期限切れを視覚化します。Key Vault キー、Key Vault シークレット、Key Vault 証明書のイベントを受信するには、*Azure Key Vault* インテグレーションをインストールする必要があります。
+Datadog sends *credential expiry events*, which grant visibility into credential expirations for Azure app registrations, Key Vault keys, Key Vault secrets, and Key Vault certificates. The *Azure Key Vault* integration must be installed to receive events for Key Vault keys, Key Vault secrets, and Key Vault certificates.
 
-- **期限切れイベント**は、資格情報有効期限の 60 日、30 日、15 日、1 日前に送信され、期限切れ後に 1 回送信されます。
-- **権限欠落イベント**は 15 日ごとに送信されます。権限欠落イベントは、Datadog に権限が与えられていない Key Vault をリストアップします。前の 15 日間のサイクルで Key Vault 権限に関して変更が行われていない場合、イベント通知は再度送信されません。
+- **Expiration events** are sent 60, 30, 15, and 1 day(s) before credential expiration, and once after expiration.
+- **Missing permission events** are sent every 15 days. A missing permission event lists the Key Vaults for which Datadog has not been given permissions. If no changes have been made regarding Key Vault permissions in the previous 15-day cycle, the event notification is not sent again.
 
-これらのイベントは[イベントエクスプローラー][3]で表示できます。
+You can view these events in [Event Explorer][3].
 
-**注**: 
+**Notes**: 
 
-- Azure アプリ登録期限切れイベントを収集するには、[Microsoft Graph API へのアクセスを有効にします][4]。
-- 証明書とそれに関連するキーとシークレットがまったく同時に期限切れになる場合、すべてのリソースに対して 1 つの期限切れイベントが送信されます。
+- To collect Azure app registration expiration events, [enable access to the Microsoft Graph API][4].
+- If a certificate and its associated key and secret expire at the exact same time, one expiration event is sent for all resources.
 
-### ヘルプ
+### Service Checks
 
-Azure Key Vault インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Key Vault integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+Need help? Contact [Datadog support][5].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_key_vault/azure_key_vault_metadata.csv
 [3]: https://app.datadoghq.com/event/explorer?query=status%3Awarn%20source%3Aazure
-[4]: https://docs.datadoghq.com/ja/integrations/guide/azure-graph-api-permissions/
-[5]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/integrations/guide/azure-graph-api-permissions/
+[5]: https://docs.datadoghq.com/help/
+

@@ -1,36 +1,36 @@
 ---
+title: Create cluster alerts to notify when a percentage of groups are in critical state
 further_reading:
 - link: /monitors/
-  tag: ドキュメント
-  text: モニターの作成方法
+  tag: Documentation
+  text: Learn how to create a monitor
 - link: /monitors/notify/
-  tag: ドキュメント
-  text: モニター通知の設定
-kind: ガイド
-title: クラスターアラートを作成し、グループの何割かが重大な状態になったときに通知する
+  tag: Documentation
+  text: Configure your monitor notifications
 ---
 
-## 概要
+## Overview
 
-このガイドでは、条件を満たしたグループごとに通知するのではなく、そのうちの一定割合のグループに対してのみ通知するアラートを作成する方法を説明します。
-これは、例えば、ホストやコンテナの所定の割合が重大な状態に達したときにのみアラートを発するモニターを作成する場合に便利です。
+This guide shows how to create alerts that would not notify for each single group meeting the condition, but only when a given percent of them do.
+This is helpful, for example, if you want a monitor that alerts only when a given percentage of hosts or containers reach a critical state.
 
-### 例: CPU 使用率の高いホストの割合でアラートを出す
+### Example: Alert for a percentage of hosts with high CPU usage
 
-この例では、40% のホストの CPU 使用率が 50% 以上になったときに通知を受け取りたいとします。`min_cutoff` 関数と `count_nonzero` 関数を利用します。
+In this example, you want to receive a notification when 40 percent of hosts have a CPU usage above 50 percent. Leverage the `min_cutoff` and `count_nonzero` functions:
 
-* CPU 使用率が 50% 以上のホストの数を数えるには、`min_cutoff` 関数を使用します。
-* ホストの総数を数えるには `count_nonzero` 関数を使用します。
-* 一方を他方で割ると、CPU 使用率が 50% 以上のホストの割合が算出されます。
+* Use the `min_cutoff` function to count the number of hosts that have CPU usage above 50 percent.
+* Use the `count_nonzero` function to count the total number of hosts.
+* Divide one by the other for the resulting percentage of hosts with CPU usage above 50 percent.
 
 {{< img src="monitors/faq/cluster-condition.png" alt="cluster-alert-condition" >}}
 
-* そして、その条件に該当するホストの割合が 40% になったらアラートを出すように設定します。
+* Then, set the condition to alert if the percentage of hosts in that condition reaches 40 percent.
 
 {{< img src="monitors/faq/cluster-trigger.png" alt="cluster-alert-trigger" >}}
 
-このモニターは、過去 10 分以内に CPU 使用率が 50% を超えたホストの割合を追跡し、それらのホストの 40% 以上が指定された条件を満たした場合に通知を生成します。
+This monitor tracks the percentage of host that have a CPU usage above 50 percent within the last ten minutes and generates a notification if more than 40 percent of those hosts meet the specified condition.
 
 {{< img src="monitors/faq/cluster-status.png" alt="cluster-alert-status" >}}
 
 {{< partial name="whats-next/whats-next.html" >}}
+

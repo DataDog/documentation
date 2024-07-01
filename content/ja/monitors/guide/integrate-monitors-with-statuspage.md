@@ -1,69 +1,68 @@
 ---
-description: Datadog のモニターと Atlassian Statuspage をインテグレーションする方法をご紹介します。
+title: Integrating Monitors With Statuspage
+description: Learn how to integrate Datadog monitors with Atlassian Statuspage.
 further_reading:
 - link: /integrations/statuspage
-  tag: ドキュメント
-  text: Statuspage インテグレーションについて
+  tag: Documentation
+  text: Learn about the Statuspage integration
 - link: /synthetics/guide/synthetic-test-monitors/
-  tag: ドキュメント
-  text: Synthetic テストモニターについて
-kind: ガイド
-title: モニターと Statuspage のインテグレーション
+  tag: Documentation
+  text: Learn about Synthetic test monitors
 ---
 
-## 概要
+## Overview
 
-[Atlassian Statuspage][1] は、アプリケーションやサービスのアップタイムを可視化する、ステータスおよびインシデント管理ツールです。ステータスページでは、Datadog のカスタムメトリクスやイベントを表示でき、Datadog のモニター通知でシステムのステータスを更新できます。
+[Atlassian Statuspage][1] is a status and incident management tool that provides visibility into your applications' and services' uptime. A status page can display custom metrics and events from Datadog, and you can update the status of your systems with Datadog monitor notifications.
 
-## Datadog イベントとして Statuspage アラートを追加する
+## Add Statuspage alerts as Datadog events
 
-[Statuspage インテグレーション][2]を構成して、[イベントエクスプローラー][3]で Statuspage アラートを追跡することができます。
+You can configure the [Statuspage integration][2] to track Statuspage alerts in the [Events Explorer][3].
 
-1. [インテグレーション][4]に移動し、インテグレーションの一覧から `statuspage` を探します。
-2. StatusPage インテグレーションタイルを選択し、**Add New** をクリックします。
-3. ステータス URL と監視したいカスタムタグを追加します (例: `https://status.datadoghq.com` または `https://datadogintegrations.statuspage.io/` と `datadog`、`test`、`test1` タグ)。各ページに最低 1 つのカスタムタグを含める必要があります。
-3. **Save** アイコンをクリックします。
+1. Navigate to [Integrations][4] and search for `statuspage` from the list of integrations.
+2. Select the StatusPage Integration tile and click **Add New**.
+3. Add the status URL and custom tags you want to monitor, for example: `https://status.datadoghq.com` or `https://datadogintegrations.statuspage.io/` with `datadog`, `test`, and `test1` tags. You must include at least one custom tag per page.
+3. Click the **Save** icon. 
 
-5 分後、[イベントエクスプローラー][5]に Statuspage からのモニターアラートが表示されることを確認します。右上の[タイムフレーム][6]を設定し、**Core** の下にあるソースのリストから **Statuspage** を選択します。
+After five minutes, you should see monitor alerts from Statuspage appearing in the [Events Explorer][5]. Set a [time frame][6] on the top right corner and select **Statuspage** from the list of sources under **Core**.
 
-{{< img src="monitors/guide/statuspage_integration_configuration.png" alt="Datadog の Statuspage インテグレーションのセットアップ" style="width:90%;" >}}
+{{< img src="monitors/guide/statuspage_integration_configuration.png" alt="Set up the Statuspage Integration in Datadog" style="width:90%;" >}}
 
-アラートをクリックすると、イベントのメッセージ、タグ、属性を含むサイドパネルが表示されます。
+Click on an alert to display a side panel containing the event's message, tags, and attributes.
 
-{{< img src="monitors/guide/statuspage_side_panel.png" alt="イベントのソース、メッセージ、タグ、属性を含むイベントのサイドパネル" style="width:90%;" >}}
+{{< img src="monitors/guide/statuspage_side_panel.png" alt="An event's side panel containing the event's source, message, tags, and attributes" style="width:90%;" >}}
 
-## Datadog のモニターに Statuspage アラートを追加する
+## Add Statuspage alerts in Datadog monitors
 
-### Statuspage のメールアドレスを生成する
+### Generate a Statuspage email address
 
-コンポーネント固有のメールアドレスを生成するには、[Statuspage ドキュメント][7]を参照してください。
+See the [Statuspage documentation][7] to generate a component-specific email address.
 
-### メトリクスモニターの作成
+### Create a metric monitor
 
-Statuspage アラートでトリガーする[メトリクスモニター][8]を作成するには
+To create a [metric monitor][8] that triggers on Statuspage alerts:
 
-1. [**Monitors** > **New Monitor**][9] の順に移動し、**Metric** をクリックします。
-2. 検出方法の選択、メトリクスの定義、アラート条件の設定、高度なモニターオプションの構成については、[メトリクスモニターのドキュメント][8]を参照してください。
-3. テストの状態に応じて、`UP` または `DOWN` を返すようにモニター名をカスタマイズします。例: `{{#is_alert}}DOWN{{/is_alert}}{{#is_recovery}}UP{{/is_recovery}}`
-4. **Notify your team** セクションで、`@custom-statuspage-email@notifications.statuspage.io`のような生成されたメールアドレスをメッセージに追加します。これにより、**Renotification** の上にある `Notify your services and your team members` フィールドに自動的に入力されます。
-5. モニター通知セクションに必要事項を記入し、モニター名にサマリーを追加します。例: `Shopist Checkout Functionality`
-6. モニターの再通知条件を設定し、`service:status-page` などのタグを追加します。
-7. チームを選択し、モニターに優先順位を割り当てます。
-8. モニターの編集権限と通知条件を定義します。
-9. モニターの構成が完了したら、**Create** をクリックします。
+1. Navigate to [**Monitors** > **New Monitor**][9] and click **Metric**.
+2. See the [Metric Monitor documentation][8] to select a detection method, define your metric(s), set alerting conditions, and configure advanced monitor options. 
+3. Customize the monitor name to return `UP` or `DOWN` depending on the test state. For example, `{{#is_alert}}DOWN{{/is_alert}}{{#is_recovery}}UP{{/is_recovery}}`.
+4. In the **Configure notifications and automations** section, add the generated email address such as `@custom-statuspage-email@notifications.statuspage.io` in the message. This automatically populates the `Notify your services and your team members` field above **Renotification**.
+5. Fill out the monitor notification section and add a summary in the monitor name such as `Shopist Checkout Functionality`.
+6. Set the monitor renotification conditions and add tags such as `service:status-page`.
+7. Select a team and assign a priority to the monitor.
+8. Define the monitor's editing permissions and notification conditions.
+9. Once you have configured your monitor, click **Create**. 
 
-{{< img src="monitors/guide/statuspage_alerts_metric_monitor.png" alt="Statuspage からのアラートを含むメトリクスモニターの作成" style="width:90%;" >}}
+{{< img src="monitors/guide/statuspage_alerts_metric_monitor.png" alt="Creating a metric monitor containing alerts from Statuspage" style="width:90%;" >}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.atlassian.com/software/statuspage
-[2]: /ja/integrations/statuspage
-[3]: /ja/service_management/events/explorer/
+[2]: /integrations/statuspage
+[3]: /service_management/events/explorer/
 [4]: https://app.datadoghq.com/integrations
 [5]: https://app.datadoghq.com/event/explorer
-[6]: /ja/dashboards/guide/custom_time_frames/
+[6]: /dashboards/guide/custom_time_frames/
 [7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
-[8]: /ja/monitors/types/metric/
+[8]: /monitors/types/metric/
 [9]: https://app.datadoghq.com/monitors/create/metric

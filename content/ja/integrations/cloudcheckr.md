@@ -2,40 +2,39 @@
 categories:
 - cloud
 - configuration & deployment
-dependencies:
-- https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md
-description: CloudCheckr で Datadog のメトリクスを表示するために、インテグレーションを有効にします。
+description: "Enable the integration to see Datadog metrics in CloudCheckr."
 doc_link: https://docs.datadoghq.com/integrations/cloudcheckr/
-further_reading:
-- link: https://www.datadoghq.com/blog/rightsizing-cloudcheckr/
-  tag: ブログ
-  text: 'CloudCheckr + Datadog: クラウドリソースの最適化'
+dependencies: ["https://github.com/DataDog/documentation/blob/master/content/en/integrations/cloudcheckr.md"]
 has_logo: true
-integration_id: cloudcheckr
 integration_title: CloudCheckr
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 name: cloudcheckr
-public_title: Datadog-CloudCheckr インテグレーション
-short_description: CloudCheckr に Datadog メトリクスを追加して、AWS の利用状況を監視し、最適化します。
+public_title: Datadog-CloudCheckr Integration
+short_description: "Add Datadog metrics in CloudCheckr to monitor and optimize your AWS usage."
+integration_id: "cloudcheckr"
+further_reading:
+  - link: "https://www.datadoghq.com/blog/rightsizing-cloudcheckr/"
+    tag: "Blog"
+    text: "CloudCheckr + Datadog: Better rightsizing of cloud resources"
 ---
 
-## 概要
+## Overview
 
-[CloudCheckr][1] は、コストとパフォーマンスに関するカスタマイズされた提案を提供することで、AWS インフラストラクチャーを監視し、最適化することを可能にする Web ベースのプラットフォームです。
+[CloudCheckr][1] is a web-based platform that allows you to monitor and optimize your AWS infrastructure by providing customized recommendations about cost and performance.
 
 {{< img src="integrations/cloudcheckr/EC2_Right_Sizing_Report.png" alt="ec2 right sizing report">}}
 
-Datadog と CloudCheckr のインテグレーションにより、現在および過去のリソース消費に基づいてデータ駆動型の意思決定を行い、俊敏でコスト効率の高いインフラストラクチャーを維持することができます。
+With the Datadog-CloudCheckr integration, you can make data-driven decisions based on current and past resource consumption to maintain an agile, cost-effective infrastructure.
 
-## 計画と使用
+## Setup
 
-Datadog アカウントを CloudCheckr アカウントに接続するには
+To connect your Datadog account to your CloudCheckr account:
 
-- CloudCheckr 拡張機能をクリックします。
-- [Datadog API キーとアプリケーションキー][2]を追加します。
+- Click into your CloudCheckr Extensions.
+- Add your [Datadog API and application keys][2].
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,18 +1,18 @@
 ---
-description: MySQL データベースでのデータベースモニタリングの設定
+title: Setting up MySQL
+description: Setting up Database Monitoring on a MySQL database
 disable_sidebar: true
-title: MySQL の設定
 ---
 
-### サポートされる MySQL バージョン
+### MySQL versions supported
 
-|  | セルフホスト | Amazon RDS | Amazon Aurora | Google Cloud SQL (26GB 以下の RAM) | Azure |
+|  | Self-hosted | Amazon RDS | Amazon Aurora | Google Cloud SQL with >26GB RAM | Azure |
 |--|------------|---------|------------|------------------|---------|
 | MySQL 5.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | MySQL 5.7 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | MySQL 8.0 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 
-ホスティングタイプを選択して設定の手順を確認します。
+For setup instructions, select your hosting type:
 
 {{< partial name="dbm/dbm-setup-mysql" >}}
 

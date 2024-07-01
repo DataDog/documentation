@@ -1,57 +1,56 @@
 ---
-categories:
-- ログの収集
-- セキュリティ
-dependencies: []
-description: Microsoft 365 に接続して組織の監査ログを Datadog のロギングプラットフォームにプル転送。
-doc_link: https://docs.datadoghq.com/integrations/microsoft_365/
-draft: false
-further_reading:
-- link: https://www.datadoghq.com/blog/microsoft-365-integration/
-  tag: ブログ
-  text: Datadog による Microsoft 365 監査ログの収集と監視
-git_integration_title: microsoft_365
-has_logo: true
-integration_id: ''
-integration_title: Microsoft 365 のセキュリティと監査ログ
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: microsoft_365
-public_title: Datadog-Microsoft 365 のセキュリティと監査ログ
-short_description: Datadog で、Microsoft Teams、Power BI、Azure Active Directory、Dynamics
-  365 などのサービスからの Microsoft 365 監査ログを表示
-team: web-integrations
-version: '1.0'
+"categories":
+- log collection
+- security
+"custom_kind": "integration"
+"dependencies": []
+"description": "Connect to Microsoft 365 to pull an organization's audit logs into Datadog's logging platform."
+"doc_link": "https://docs.datadoghq.com/integrations/microsoft_365/"
+"draft": false
+"further_reading":
+- "link": "https://www.datadoghq.com/blog/microsoft-365-integration/"
+  "tag": Blog
+  "text": Collect and monitor Microsoft 365 audit logs with Datadog
+"git_integration_title": "microsoft_365"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Microsoft 365 Security and Audit Logs"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "microsoft_365"
+"public_title": "Datadog-Microsoft 365 Security and Audit Logs"
+"short_description": "View Microsoft 365 audit logs in Datadog from services such as: Microsoft Teams, Power BI, Azure Active Directory, Dynamics 365, and more"
+"team": "web-integrations"
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Microsoft 365 と統合して、以下のことができます。
+Integrate with Microsoft 365 to:
 
-- Datadog のロギング製品を使用して、監査ログを表示、パース
-- Microsoft 365 プラットフォームからのイベントにモニターを設定
-- Datadog のセキュリティツールスイートを活用してセキュリティ規則を設定
+- View and parse your audit logs using Datadog's logging product
+- Set monitors on events from your Microsoft 365 platform
+- Leverage the Datadog suite of security tools to set security rules
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Datadog Microsoft 365 タイル][1]を使用してインテグレーションをインストールします。
+Use the [Datadog Microsoft 365 tile][1] to install the integration.
 
-**Install a New Tenant** をクリックすると、認証のために Microsoft 365 アカウントにログインするページが開きます。監理者アカウントでログインする必要があります。
+Click **Install a New Tenant**. This directs you to login to your Microsoft 365 account for authorization. You must login with an admin account.
 
-オプションとして、この新たに設定したテナントの全てのログに付加されるカスタムタグを、カンマ区切りで追加することができます (例: `environment:prod,team:us`)。このタグは、ログのフィルタリング/分析に使用することが可能です。
+Optionally add comma separated custom tags that get attached to every log for this newly setup tenant, for example, `environment:prod,team:us`. These tags can be used to filter/analyze logs.
 
-**注**: Datadog の監査ログを使用するには、組織の[監査ログが有効][2]である必要があります。
+**Note**: Your organization must have [audit logging enabled][2] to use Datadog audit logging.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### ワークフローの自動化
+### Logs
 
-[Office 365 Management API スキーマ][3]で言及されている、以下のようなすべてのサービスの監査ログを収集できます。
+You can collect audit logs for all services mentioned in [Office 365 Management API schemas][3], such as:
 
 - Microsoft Teams
 - Power BI
@@ -60,117 +59,117 @@ Microsoft 365 と統合して、以下のことができます。
 - Exchange
 - SharePoint
 
-Microsoft 365 インテグレーションは、監査ログごとに 1 つのログイベントを生成します。収集されたログには、ソース `microsoft-365` のタグが付けられます。一般的なログソースのリストとサマリー、および Datadog で事前に設定されたログクエリへのリンクは、以下をクリックしてください。
+The Microsoft 365 integration produces one log event per audit log. Collected logs are tagged with the source `microsoft-365`. Click below for a list of common log sources with summaries and links to preset log queries in Datadog.
 
 <details>
-  <summary><strong>クリックすると一般的なログソースが表示されます</strong></summary>
+  <summary><strong>Click to view common log sources</strong></summary>
 
 [`AirInvestigation`][4]
-: Microsoft 365 内の Advanced eDiscovery および Advanced Threat Protection (ATP) 調査に関連します。これらのログには、セキュリティ インシデント、調査、およびアラート、修復ステップ、フォレンジックデータなど、脅威を軽減するために実行したアクションに関する情報が含まれています。
+: Related to Advanced eDiscovery and Advanced Threat Protection (ATP) investigations within Microsoft 365. These logs contain information about security incidents, investigations, and actions taken to mitigate threats, such as alerts, remediation steps, and forensic data.
 
 [`Audit.AzureActiveDirectory`][5]
-: Microsoft のクラウドベースの ID およびアクセス管理サービスである Azure Active Directory (Azure AD) によって生成されたログを表します。Azure AD のログは、ユーザーのサインインアクティビティ、ディレクトリとグループの管理、アプリケーションのアクセス、およびセキュリティ関連のイベントに関する洞察を提供します。これにより、組織はユーザーアクセスを管理し、潜在的なセキュリティリスクを検出することができます。
+: Represents logs generated by Azure Active Directory (Azure AD), Microsoft's cloud-based identity and access management service. Azure AD logs provide insights into user sign-in activities, directory and group management, application access, and security-related events. It enables organizations to manage user access and detect potential security risks.
 
 [`Audit.Exchange`][6]
-: Microsoft Exchange Server によって生成されるログに関連します。Exchange ログには、メールの配信、メールボックスへのアクセス、クライアント接続、および Exchange 環境内の管理アクションに関する情報が含まれています。これは、組織がメール関連の問題を監視し、トラブルシューティングするのに役立ちます。
+: Pertains to logs generated by Microsoft Exchange Server. Exchange logs contain information about email delivery, mailbox access, client connections, and administrative actions within the Exchange environment. It helps organizations monitor and troubleshoot email-related issues.
 
 [`Audit.General`][7]
-: ユーザーや管理者のアクティビティ、システム イベント、セキュリティ インシデント、Exchange や SharePoint などの特定のサービスに直接関連しないその他のアクションなど、Microsoft 365 環境内で発生するさまざまなアクティビティやイベントに関する情報が含まれます。
+: Contains information about various activities and events occurring within your Microsoft 365 environment, such as user and admin activities, system events, security incidents, and other actions that are not directly associated with specific services like Exchange or SharePoint.
 
 [`Audit.MicrosoftForms`][8]
-: アンケート、クイズ、フォームを作成するためのツールである Microsoft Forms によって生成されるログを表します。フォームのログには、フォームの作成、アクセス、回答、およびユーザーのアクティビティに関する情報が含まれます。これは、組織がフォームデータを追跡し、保護するのを支援するものです。
+: Represents logs generated by Microsoft Forms, a tool for creating surveys, quizzes, and forms. Forms logs include information about form creation, access, responses, and user activities. It assists organizations in tracking and securing their forms data.
 
 [`Audit.MicrosoftStream`][9]
-: Microsoft エコシステム内のビデオ共有プラットフォームである Microsoft Stream によって生成されるログを指します。Stream のログには、ビデオのアップロード、アクセス、共有、およびユーザーのアクティビティに関する情報が含まれています。これは、組織がビデオコンテンツを追跡し、保護するのに役立ちます。
+: Refers to logs generated by Microsoft Stream, a video-sharing platform within the Microsoft ecosystem. Stream logs contain information about video uploads, access, sharing, and user activities. It helps organizations track and secure their video content.
 
 [`Audit.MicrosoftTeams`][10]
-: コラボレーションおよびコミュニケーションプラットフォームである Microsoft Teams によって生成されるログを包含します。Teams のログには、ユーザーのアクティビティ、チームとチャンネルの管理、ファイル共有、およびミーティングイベントに関する情報が含まれます。ユーザーのやり取りを監視し、安全なコラボレーションを確保するために組織を支援します。
+: Encompasses logs produced by Microsoft Teams, a collaboration and communication platform. Teams logs include information about user activities, team and channel management, file sharing, and meeting events. It assists organizations in monitoring user interactions and ensuring secure collaboration.
 
 [`Audit.OneDrive`][11]
-: Microsoft のクラウドベースのファイルストレージおよび同期サービスである OneDrive によって生成されるログを指します。OneDrive のログには、ファイルへのアクセス、共有、変更、およびユーザーのアクティビティに関する情報が含まれます。組織がクラウドベースのデータを監視し、保護するのに役立ちます。
+: Refers to logs generated by OneDrive, Microsoft's cloud-based file storage and synchronization service. OneDrive logs include information about file access, sharing, modifications, and user activities. It helps organizations monitor and secure their cloud-based data.
 
 [`Audit.PowerBI`][12]
-: Microsoft のビジネス分析およびデータ可視化ツールである Power BI によって生成されるログを指します。Power BI のログには、データアクセス、レポート生成、ダッシュボードアクティビティ、ユーザーインタラクションに関する情報が含まれています。組織がビジネスインテリジェンスデータを監視し、保護するのに役立ちます。
+: Refers to logs produced by Power BI, Microsoft's business analytics and data visualization tool. Power BI logs contain information about data access, report generation, dashboard activities, and user interactions. It helps organizations monitor and secure their business intelligence data.
 
 [`Audit.Project`][13]
-: Microsoft 365 スイート内のプロジェクト管理ツールである Microsoft Project の監査ログを指します。これらのログは、プロジェクトの作成、タスクの更新、リソースの割り当て、権限の変更など、Microsoft Project 内のユーザーアクティビティ、管理アクション、およびシステムイベントに関連するイベントをキャプチャします。
+: Refers to the audit logs for Microsoft Project, a project management tool within the Microsoft 365 suite. These logs capture events related to user activities, administrative actions, and system events within Microsoft Project, such as project creation, task updates, resource allocation, and permission changes.
 
 [`Audit.SharePoint`][14]
-: Microsoft SharePoint によって生成されるログを指します。SharePoint のログは、ユーザーアクセス、ドキュメントの変更、サイト管理、およびセキュリティ関連のイベントを記録します。これにより、インテグレーションはデータの整合性を維持し、SharePoint サイトとコンテンツを保護することができます。
+: Refers to logs produced by Microsoft SharePoint. SharePoint logs record user access, document modifications, site administration, and security-related events. It enables organizations to maintain data integrity and secure their SharePoint sites and content.
 
 [`Audit.SkypeForBusiness`][15]
-: Skype for Business アクティビティの監査ログを指します。これらのログは、通話詳細記録、会議詳細記録、メッセージングアクティビティ、ユーザー管理やポリシー更新などの管理アクションなど、Skype for Business サービス内のユーザーおよび管理アクションに関連するイベントをキャプチャするものです。
+: Refers to the audit logs for Skype for Business activities. These logs capture events related to user and administrative actions within the Skype for Business service, such as call detail records, conference detail records, messaging activities, and admin actions like user management and policy updates.
 
 [`Audit.Yammer`][16]
-: 企業向けソーシャルネットワーキングプラットフォームである Yammer が生成するログを表します。Yammer のログには、ユーザーアクティビティ、グループおよびコミュニティ管理、コンテンツ共有に関する情報が含まれます。組織が社内のソーシャルネットワークを監視し、保護するのに役立ちます。
+: Represents logs produced by Yammer, a social networking platform for enterprises. Yammer logs include information about user activities, group and community management, and content sharing. It helps organizations monitor and secure their internal social networks.
 
 [`ComplianceManager`][17]
-: Microsoft Compliance Manager ツールに関連するもので、組織が Microsoft 365 のコンプライアンス活動を評価、管理、追跡できるようにするものです。これらのログには、コンプライアンスの評価、タスク、改善アクション、および規制要件を満たすための進捗状況に関する情報が含まれています。
+: Related to the Microsoft Compliance Manager tool, which helps organizations assess, manage, and track their compliance activities in Microsoft 365. These logs contain information about compliance assessments, tasks, improvement actions, and progress towards meeting regulatory requirements.
 
 `DLP.All`
-: Exchange、SharePoint、OneDrive、Microsoft Teams など、すべての Microsoft 365 サービスにおける DLP ポリシー、検出、アクションに関連するイベントをキャプチャします。これらのログは、ポリシー違反、機密情報の検出、およびコンテンツのブロック、ユーザーまたは管理者への通知など、データを保護するために実行されたアクションに関する洞察を提供します。
+: Captures events related to DLP policies, detections, and actions across all Microsoft 365 services, including Exchange, SharePoint, OneDrive, Microsoft Teams, and others. These logs provide insights into policy violations, sensitive information detections, and the actions taken to protect the data, such as blocking content, notifying users or administrators, and more.
 
 `Dynamics365`
-[Microsoft Dynamics 365][18] のサービスやアプリケーションからイベントを収集します。
+: Collect events from any of your [Microsoft Dynamics 365][18] services and applications.
 
 [`MicrosoftFlow`][19]
-: Microsoft Power Automate サービス (旧称: Microsoft Flow) に関連するもので、さまざまなアプリケーションやサービス間で自動化されたワークフローを作成、管理できるクラウドベースのプラットフォームです。これらのログは、ワークフローの実行、エラー、およびフローの作成、更新、削除などの管理操作に関連するイベントをキャプチャします。
+: Associated with the Microsoft Power Automate service (formerly known as Microsoft Flow), a cloud-based platform that allows users to create and manage automated workflows between various applications and services. These logs capture events related to workflow runs, errors, and administrative actions, such as creating, updating, or deleting flows.
 
 [`Mip`][20]
-: 機密データを分類、ラベル付け、保護するためのツールとサービスのスイートである Microsoft Information Protection (MIP) によって生成されるログに関係します。MIP ログは、データの分類、アクセス、および保護イベントに関する洞察を提供します。これにより、組織は機密情報を管理し、保護することができます。
+: Pertains to logs generated by Microsoft Information Protection (MIP), a suite of tools and services for classifying, labeling, and protecting sensitive data. MIP logs provide insights into data classification, access, and protection events. It enables organizations to manage and secure their sensitive information.
 
 [`MyAnalytics`][21]
-: Microsoft MyAnalytics サービスに関連するもので、Microsoft 365 スイート内での個人の作業習慣や生産性傾向に関する洞察を提供します。これらのログには、会議、メール、コラボレーション、集中時間などに費やした時間など、ユーザーのアクティビティに関する情報が含まれています。
+: Related to the Microsoft MyAnalytics service, which provides insights into an individual's work habits and productivity trends within the Microsoft 365 suite. These logs contain information about users' activities, such as time spent on meetings, emails, collaboration, and focus time.
 
 [`PowerApps`][22]
-: Microsoft のローコードアプリケーション開発プラットフォームである Power Apps によって生成されるログを指します。Power Apps のログには、アプリの作成、アクセス、使用、およびユーザーアクティビティに関する情報が含まれています。
+: Refers to logs generated by Power Apps, Microsoft's low-code application development platform. Power Apps logs contain information about app creation, access, usage, and user activities.
 
 [`Quarantine`][23]
-: 悪意のあるメールや不要なメールを隔離して確認するために使用されるメール検疫システムによって生成されるログを表します。検疫ログには、隔離されたメール、送信者、受信者の詳細、および実行されたアクションに関する情報が含まれます。メールのセキュリティを管理し、脅威を防ぐために組織を支援します。
+: Represents logs generated by email quarantine systems used to isolate and review potentially malicious or unwanted emails. Quarantine logs include information about quarantined emails, sender and recipient details, and actions taken. It assists organizations in managing email security and preventing threats.
 
 [`Rdl`][24]
-: SQL Server Reporting Services (SSRS) に関連するもので、サーバーベースのレポートプラットフォームで、さまざまな形式のレポートを作成、公開、管理することができます。Rdl ログソースは、レポートの実行、アクセス、およびレポートの生成、更新、削除などの管理アクションに関連するイベントをキャプチャします。
+: Related to SQL Server Reporting Services (SSRS), a server-based reporting platform that allows users to create, publish, and manage reports in various formats. The Rdl log source captures events related to report execution, access, and administrative actions, such as generating, updating, or deleting reports.
 
 [`SecurityComplianceCenter`][25]
-: Microsoft 365 サービス全体のセキュリティとコンプライアンス機能を管理するための集中型プラットフォームである Microsoft の Security & Compliance Center によって生成されるログに関係します。これらのログは、セキュリティインシデント、ポリシー違反、およびコンプライアンス管理アクティビティに関する洞察を提供します。これにより、組織は安全でコンプライアンスに準拠した IT 環境を維持することができます。
+: Pertains to logs generated by Microsoft's Security & Compliance Center, a centralized platform for managing security and compliance features across Microsoft 365 services. These logs provide insights into security incidents, policy violations, and compliance management activities. It helps organizations maintain a secure and compliant IT environment.
 
 [`SecurityMonitoringEntityReducer`][26]
-: Microsoft 365 のセキュリティイベントログとアラート集計アクティビティに関連します。これらのログは、Microsoft 365 環境全体で検出されたセキュリティイベント、異常、および潜在的な脅威に関する洞察を提供します。
+: Associated with security event logs and alert aggregation activities in Microsoft 365. These logs provide insights into security events, anomalies, and potential threats detected across the Microsoft 365 environment.
 
 [`ThreatIntelligence`][27]
-: 新興のセキュリティ脅威に関する情報を収集、分析、共有する脅威インテリジェンスシステムまたはツールによって生成されるログを包含します。脅威インテリジェンスログは、潜在的な脅威、脆弱性、および侵害の指標に関する洞察を提供します。組織がサイバー攻撃からプロアクティブに防御するのに役立ちます。
+: Encompasses logs generated by threat intelligence systems or tools that collect, analyze, and share information about emerging security threats. Threat intelligence logs provide insights into potential threats, vulnerabilities, and indicators of compromise. It helps organizations proactively defend against cyberattacks.
 
 </details>
 
-可能なログソースの完全なリストについては、[Office 365 Management API スキーマ][3]をご覧ください。
+See [Office 365 Management API schemas][3] for the full list of potential log sources.
 
-### セキュリティ
+### Security
 
-Datadog の [Cloud SIEM][28] を使用すると、Microsoft 365 の監査ログにより環境内の脅威をリアルタイムで検出できます。[すぐに使える Microsoft 365 検出ルール][29]の全リストを参照するか、[カスタム検出ルールを作成][30]してください。
+You can use Datadog's [Cloud SIEM][28] to detect real-time threats in your environment with Microsoft 365 audit logs. See the full list of [out-of-the-box Microsoft 365 detection rules][29] or [create a custom detection rule][30].
 
-{{< img src="integrations/microsoft_365/microsoft_365_rules.png" alt="Cloud SIEM を選択し、検索バーに Microsoft 365 を入力したすぐに使えるセキュリティルールのページ" style="width:80;" popup="true">}}
+{{< img src="integrations/microsoft_365/microsoft_365_rules.png" alt="The out of the box security rules page with Cloud SIEM selected and Microsoft 365 entered in the search bar" style="width:80;" popup="true">}}
 
-### データセキュリティ
+### Metrics
 
-Microsoft 365 インテグレーションはメトリクスを収集しません。
+The Microsoft 365 integration does not collect any metrics.
 
-### サービスチェック
+### Service checks
 
-Microsoft 365 インテグレーションはサービスチェックを収集しません。
+The Microsoft 365 integration does not collect any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-Datadog のログインテークは、最大過去 18 時間までさかのぼったログイベントのみをサポートします。この期間より前のタイムスタンプのログイベントは破棄されます。
+Datadog's log intake only supports backdating log events up to 18 hours in the past. Log events with an earlier timestamp are discarded.
 
-Datadog では、異なる Microsoft エンドポイントが必要となるため、GCC、GCC High、または DoD 環境のテナントに対応していません。
+Datadog does not support GCC government, GCC High government, or DoD tenants, because they require different Microsoft endpoints.
 
-ご不明な点は、[Datadog のサポートチーム][31]までお問合せください。
+Need help? Contact [Datadog support][31].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/integrations/microsoft_365
+[1]: https://app.datadoghq.com/integrations/microsoft-365
 [2]: https://docs.microsoft.com/en-us/microsoft-365/compliance/turn-audit-log-search-on-or-off?view=o365-worldwide#turn-on-audit-log-search
 [3]: https://learn.microsoft.com/en-us/office/office-365-management-api/office-365-management-activity-api-schema#office-365-management-api-schemas
 [4]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AAirInvestigation%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
@@ -197,7 +196,8 @@ Datadog では、異なる Microsoft エンドポイントが必要となるた�
 [25]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASecurityComplianceCenter%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
 [26]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3ASecurityMonitoringEntityReducer%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
 [27]: https://app.datadoghq.com/logs?query=source%3Amicrosoft-365%20service%3AThreatIntelligence%20&cols=host%2Cservice&index=%2A&messageDisplay=inline&stream_sort=desc&viz=stream&live=true
-[28]: https://docs.datadoghq.com/ja/security/#cloud-siem
-[29]: https://docs.datadoghq.com/ja/security/default_rules/?q=microsoft%20365#cat-cloud-siem-log-detection
-[30]: https://docs.datadoghq.com/ja/security/detection_rules/#creating-and-managing-detection-rules
-[31]: https://docs.datadoghq.com/ja/help/
+[28]: https://docs.datadoghq.com/security/#cloud-siem
+[29]: https://docs.datadoghq.com/security/default_rules/?category=cat-cloud-siem-log-detection&search=microsoft+365
+[30]: https://docs.datadoghq.com/security/detection_rules/#create-detection-rules
+[31]: https://docs.datadoghq.com/help/
+

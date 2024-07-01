@@ -1,24 +1,21 @@
 ---
-description: データベースモニタリングセットアップのトラブルシューティング
-title: MySQL のデータベースモニタリングセットアップのトラブルシューティング
+title: Troubleshoot Database Monitoring setup for MySQL
+description: Troubleshoot Database Monitoring setup
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
-このページでは、MySQL によるデータベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Datadog では、Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
+This page details common issues with setting up and using Database Monitoring with MySQL, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
 
-## 一般的な問題の診断
+## Diagnosing common problems
 
-### データベースモニタリングを構成してもデータが表示されない
+### No data is showing after configuring Database Monitoring
 
-[セットアップ手順][1]に従って Agent を構成してもデータが表示されない場合は、Agent のコンフィギュレーションまたは API キーに問題がある可能性があります。[トラブルシューティングガイド][2]に従って、Agent からデータを受信していることを確認してください。
+If you do not see any data after following the [setup instructions][1] and configuring the Agent, there is most likely an issue with the Agent configuration or API key. Ensure you are receiving data from the Agent by following the [troubleshooting guide][2].
 
-システムメトリクスなどの他のデータは受信しているが、データベースモニタリングのデータ (クエリメトリクスやクエリサンプルなど) を受信していない場合、Agent またはデータベースのコンフィギュレーションに問題がある可能性があります。Agent のコンフィギュレーションが[セットアップ手順][1]の例と同様であることを確認し、コンフィギュレーションファイルの場所を再確認してください。
+If you are receiving other data such as system metrics, but not Database Monitoring data (such as query metrics and query samples), there is probably an issue with the Agent or database configuration. Ensure your Agent configuration looks like the example in the [setup instructions][1], double-checking the location of the configuration files.
 
-デバッグを行うには、まず[Agent のステータスコマンド][3]を実行して、収集されたデータや Datadog に送信されたデータのデバッグ情報を収集します。
+To debug, start by running the [Agent status command][3] to collect debugging information about data collected and sent to Datadog.
 
-`Config Errors` セクションをチェックして、コンフィギュレーションファイルが有効であることを確認してください。例えば、次のような場合は、インスタンスコンフィギュレーションが存在しないか、ファイルが無効であることを示しています。
+Check the `Config Errors` section to ensure the configuration file is valid. For instance, the following indicates a missing instance configuration or invalid file:
 
 ```
   Config Errors
@@ -28,7 +25,7 @@ title: MySQL のデータベースモニタリングセットアップのトラ�
       Configuration file contains no valid instances
 ```
 
-コンフィギュレーションが有効であれば、次のように表示されます。
+If the configuration is valid, the output looks like this:
 
 ```
 =========
@@ -61,48 +58,48 @@ Collector
         version.scheme: semver
 ```
 
-これらの行が出力され、値がゼロより大きいことを確認してください。
+Ensure that these lines are in the output and have values greater than zero:
 
 ```
 Database Monitoring Query Metrics: Last Run: 2, Total: 51,074
 Database Monitoring Query Samples: Last Run: 1, Total: 74,451
 ```
 
-Agent のコンフィギュレーションが正しいことを確認したら、[Agent のログ][4]でデータベースのインテグレーション実行時に警告やエラーが発生していないかをチェックします。
+When you are confident the Agent configuration is correct, [check the Agent logs][4] for warnings or errors attempting to run the database integrations.
 
-Datadog Agent で `check` CLI コマンドを実行し、出力にエラーがないかを検査することで、明示的にチェックを実行することもできます。
+You can also explicitly execute a check by running the `check` CLI command on the Datadog Agent and inspecting the output for errors:
 
 ```bash
-# Agent をセルフホストでインストールした場合
+# For self-hosted installations of the Agent
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check sqlserver -t 2
 
-# Agent をコンテナベースでインストールした場合
+# For container-based installations of the Agent
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 ```
-### クエリに実行計画が欠けている
+### Queries are missing explain plans
 
-一部またはすべてのクエリで計画が利用できない場合があります。これは、サポートされていないクエリコマンドである、クエリがサポートされていないクライアントアプリケーションせ生成された、Agent のバージョンが古い、データベースのセットアップが不完全であることなどが原因です。以下は、説明計画の欠落の原因として考えられるものです。
+Some or all queries may not have plans available. This can be due to unsupported query commands, queries made by unsupported client applications, an outdated Agent, or incomplete database setup. Below are possible causes for missing explain plans.
 
-#### イベントステートメントコンシューマーの欠落 {#events-statements-consumer-missing}
-実行計画をキャプチャするには、イベントステートメントのコンシューマーを有効にする必要があります。これを行うには、コンフィグレーションファイル (例: `mysql.conf`) に以下のオプションを追加します。
+#### Missing event statements consumer {#events-statements-consumer-missing}
+To capture explain plans, you must enable an event statements consumer. You can do this by adding the following option to your configuration files (for example, `mysql.conf`):
 ```
 performance-schema-consumer-events-statements-current=ON
 ```
 
-Datadog では、さらに以下を有効にすることを推奨しています。
+Datadog additionally recommends enabling the following:
 ```
 performance-schema-consumer-events-statements-history-long=ON
 ```
-このオプションは、すべてのスレッドにおいて、より多くの最近のクエリを追跡することができます。これをオンにすると、頻度の低いクエリの実行内容をキャプチャできる可能性が高くなります。
+This option enables the tracking of a larger number of recent queries across all threads. Turning it on increases the likelihood of capturing execution details from infrequent queries.
 
-#### 実行計画プロシージャの欠落 {#explain-plan-procedure-missing}
-Agent は `datadog.explain_statement(...)` というプロシージャが `datadog` スキーマに存在することを必要とします。`datadog` スキーマの作成の詳細については、[セットアップ手順][1]を参照してください。 
+#### Missing explain plan procedure {#explain-plan-procedure-missing}
+The Agent requires the procedure `datadog.explain_statement(...)` to exist in the `datadog` schema. Read the [setup instructions][1] for details on the creation of the `datadog` schema.
 
-Agent が説明プランを収集できるようにするには、`explain_statement` プロシージャを作成します。
+Create the `explain_statement` procedure to enable the Agent to collect explain plans:
 
 ```sql
 DELIMITER $$
@@ -116,10 +113,10 @@ BEGIN
 END $$
 DELIMITER ;
 ```
-#### 完全修飾実行計画プロシージャの欠落 {#explain-plan-fq-procedure-missing}
-Agent は、プロシージャ `explain_statement(...)` が、Agent がサンプルを収集できる**すべてのスキーマ**に存在することを必要とします。
+#### Missing full qualified explain plan procedure {#explain-plan-fq-procedure-missing}
+The Agent requires the procedure `explain_statement(...)` to exist in **all schemas** the Agent can collect samples from.
 
-実行計画を収集する**すべてのスキーマ**でこのプロシージャを作成します。`<YOUR_SCHEMA>` をデータベーススキーマに置き換えます。
+Create this procedure **in every schema** from which you want to collect explain plans. Replace `<YOUR_SCHEMA>` with your database schema:
 
 ```sql
 DELIMITER $$
@@ -135,48 +132,48 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-#### Agent がサポートされていないバージョンで動作している
+#### Agent is running an unsupported version
 
-Agent のバージョンが 7.36.1 以上であることを確認してください。Datadog では、新機能、より良いパフォーマンス、およびセキュリティアップデートをご利用いただくために、定期的な Agent のアップデートをお勧めします。
+Ensure that the Agent is running version 7.36.1 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
 
-#### クエリが切り捨てられる。
+#### Queries are truncated
 
-クエリのサンプルテキストのサイズを大きくする方法については、[切り捨てられたクエリサンプル](#query-samples-are-truncated)のセクションを参照してください。
+See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text.
 
-#### クエリが実行されない
+#### Query cannot be explained
 
-BEGIN、COMMIT、SHOW、USE、ALTER などの一部のクエリでは、データベースから有効な実行計画を得ることができません。SELECT、UPDATE、INSERT、DELETE、REPLACE の各クエリのみが実行計画をサポートしています。
+Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans.
 
-#### クエリの実行頻度が比較的低い、または実行速度が速い。
+#### Query is relatively infrequent or executes quickly
 
-このクエリはデータベースの総実行時間の中で大きな割合を占めていないため、選択のためにサンプリングされていない可能性があります。クエリをキャプチャするために、[サンプリングレートを上げる][5]ことを試みてください。
+The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][5] to capture the query.
 
-### クエリメトリクスが見つからない
+### Query metrics are missing
 
-クエリメトリクスデータの欠落を診断する手順を実行する前に、Agent が正常に動作しており、[Agent データの欠落を診断する手順](#no-data-is-show-after-configuring-database-monitoring)を実行していることを確認してください。クエリメトリクスが見つからない場合、以下のような原因が考えられます。
+Before following these steps to diagnose missing query metric data, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query metrics.
 
-#### `performance_schema` が有効になっていない {#performance-schema-not-enabled}
-Agent は、`performance_schema` オプションが有効になっていることを必要とします。これは、MySQL ではデフォルトで有効になっていますが、コンフィギュレーションやクラウドプロバイダーによっては無効になっている場合があります。有効にするには、[セットアップ手順][1]に従ってください。
+#### `performance_schema` is not enabled {#performance-schema-not-enabled}
+The Agent requires the `performance_schema` option to be enabled. It is enabled by default by MySQL, but may be disabled in configuration or by your cloud provider. Follow the [setup instructions][1] for enabling it.
 
-#### Google Cloud SQL の制限
-このホストは Google Cloud SQL で管理されており、`performance_schema` をサポートしていません。Google Cloud SQL の制限により、Datadog データベースモニタリングは[16GB 以下の RAM を持つインスタンスではサポートされません][6]。
+#### Google Cloud SQL limitation
+The host is managed by Google Cloud SQL and does not support `performance_schema`. Due to limitations with Google Cloud SQL, Datadog Database Monitoring is [not supported on instances with less than 16GB of RAM][6].
 
-### 特定のクエリが見つからない
+### Certain queries are missing
 
-いくつかのクエリのデータはあるが、データベースモニタリングで特定のクエリやクエリセットを確認したい場合は、以下のガイドに従ってください。
+If you have data from some queries, but are expecting to see a particular query or set of queries in Database Monitoring, follow this guide.
 
 
-| 考えられる原因                         | ソリューション                                  |
+| Possible cause                         | Solution                                  |
 |----------------------------------------|-------------------------------------------|
-| クエリが「トップクエリ」ではなく、そのクエリの実行時間の合計が、選択した期間のどの時点においても正規化された上位 200 のクエリに含まれていない。 | クエリが「Other Queries」の行にまとめられている場合があります。どのクエリが追跡されるかの詳細については、[収集データ][7]を参照してください。追跡されるトップクエリの数を増やしたい場合は、Datadog サポートにお問い合わせください。 |
-| `events_statements_summary_by_digest` が満杯の可能性がある。 | `performance_schema` の MySQL テーブル `events_statements_summary_by_digest` には、保存対象となるダイジェスト (正規化されたクエリ) の数に上限があります。メンテナンスタスクでこのテーブルを定期的にデータを削除することで、すべてのクエリが長期にわたって追跡されるようになります。詳しくは[高度なコンフィギュレーション][5]をご覧ください。 |
-| Agent が最後に再起動してから、クエリが一回実行された。 | クエリメトリクスは、Agent の再起動後、10 秒間隔で 2 回以上実行された後にのみ発行されます。 |
+| The query is not a "top query," meaning the sum of its total execution time is not in the top 200 normalized queries at any point in the selected time frame. | It may be grouped into the "Other Queries" row. For more information on which queries are tracked, see [Data Collected][7]. The number of top queries tracked can be raised by contacting Datadog Support. |
+| The `events_statements_summary_by_digest` may be full. | The MySQL table `events_statements_summary_by_digest` in `performance_schema` has a maximum limit on the number of digests (normalized queries) it stores. Regular truncation of this table as a maintenance task ensures all queries are tracked over time. See [Advanced configuration][5] for more information. |
+| The query has been executed a single time since the agent last restarted. | Query metrics are only emitted after having been executed at least once over two separate ten second intervals since the Agent was restarted. |
 
-### クエリサンプルが切り捨てられる
+### Query samples are truncated
 
-長いクエリの場合、データベースのコンフィギュレーション上 SQL の全文が表示されないことがあります。お客様のワークロードに合わせて多少のチューニングが必要です。
+Longer queries may not show their full SQL text due to database configuration. Some tuning is necessary to adjust for your workload.
 
-Datadog Agent から見える MySQL の SQL テキストの長さは、以下の[システム変数][8]によって決定されます。
+The MySQL SQL text length visible to the Datadog Agent is determined by the following [system variables][8]:
 
 ```
 max_digest_length=4096
@@ -184,12 +181,14 @@ performance_schema_max_digest_length=4096
 performance_schema_max_sql_text_length=4096
 ```
 
-### クエリアクティビティがない
+### Query activity is missing
 
-クエリアクティビティの欠落を診断する手順を実行する前に、Agent が正常に動作しており、[Agent データの欠落を診断する手順](#no-data-is-show-after-configuring-database-monitoring)を実行していることを確認してください。クエリアクティビティが見つからない場合、以下のような原因が考えられます。
+<div class="alert alert-warning">Query Activity and Wait Event collection are not supported for Flexible Server, as these features require MySQL settings that are not available on a Flexible Server host.</div>
 
-#### `performance-schema-consumer-events-waits-current` が有効になっていない {#events-waits-current-not-enabled}
-Agent は `performance-schema-consumer-events-waits-current` オプションが有効であることを必要とします。このオプションは MySQL ではデフォルトで無効になっていますが、クラウドプロバイダーによって有効化されている場合があります。有効にするには、[セットアップの説明][1]に従ってください。また、データベースのバウンスを回避するために、ランタイムセットアップコンシューマーの設定を検討してください。以下のプロシージャを作成し、実行時に `performance_schema.events_*` コンシューマーを有効にする機能を Agent に与えます。
+Before following these steps to diagnose missing query activity, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query activity.
+
+#### `performance-schema-consumer-events-waits-current` is not enabled {#events-waits-current-not-enabled}
+The Agent requires the `performance-schema-consumer-events-waits-current` option to be enabled. It is disabled by default by MySQL, but may be enabled by your cloud provider. Follow the [setup instructions][1] for enabling it. Alternatively, to avoid bouncing your database, consider setting up a runtime setup consumer. Create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
 
 
 ```SQL
@@ -204,23 +203,23 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-**注:** このオプションを使用するには、さらに `performance_schema` が有効であることが必要です。
+**Note:** This option additionally requires `performance_schema` to be enabled.
 
 
-<!-- TODO: SQL テキストの最大長を取得するためのカスタムクエリレシピを追加 -->
+<!-- TODO: add a custom query recipe for getting the max sql text length -->
 
-### MySQL Query Metrics & Samples でスキーマまたはデータベースが見つからない
+### Schema or Database missing on MySQL Query Metrics & Samples
 
-`schema` タグ (別名 "database") は、クエリを実行した接続にデフォルトデータベースが設定されている場合のみ MySQL Query Metrics and Samples に存在します。デフォルトデータベースは、データベース接続パラメーターで "schema" を指定するか、すでに存在する接続で [USE Statement][9] を実行することで、アプリケーションによって構成されます。
+The `schema` tag (also known as "database") is present on MySQL Query Metrics and Samples only when a Default Database is set on the connection that made the query. The Default Database is configured by the application by specifying the "schema" in the database connection parameters, or by executing the [USE Statement][9] on an already existing connection.
 
-接続にデフォルトのデータベースが構成されていない場合、その接続で行われるクエリには `schema` タグは付きません。
+If there is no default database configured for a connection, then none of the queries made by that connection have the `schema` tag on them.
 
-[1]: /ja/database_monitoring/setup_mysql/
-[2]: /ja/agent/troubleshooting/
-[3]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-[4]: /ja/agent/guide/agent-log-files
-[5]: /ja/database_monitoring/setup_mysql/advanced_configuration/
+[1]: /database_monitoring/setup_mysql/
+[2]: /agent/troubleshooting/
+[3]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /agent/configuration/agent-log-files
+[5]: /database_monitoring/setup_mysql/advanced_configuration/
 [6]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
-[7]: /ja/database_monitoring/data_collected/#which-queries-are-tracked
+[7]: /database_monitoring/data_collected/#which-queries-are-tracked
 [8]: https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_digest_length
 [9]: https://dev.mysql.com/doc/refman/8.0/en/use.html

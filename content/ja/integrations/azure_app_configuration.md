@@ -1,52 +1,53 @@
 ---
-categories:
-- クラウド
+"categories":
+- cloud
 - azure
-dependencies: []
-description: Azure App Configuration のキーメトリクスを追跡します。
-doc_link: https://docs.datadoghq.com/integrations/azure_app_configuration/
-draft: false
-git_integration_title: azure_app_configuration
-has_logo: true
-integration_id: azure-app-configuration
-integration_title: Microsoft Azure App Configuration
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: azure_app_configuration
-public_title: Datadog-Microsoft Azure App Configuration インテグレーション
-short_description: Azure App Configuration のキーメトリクスを追跡します。
-version: '1.0'
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure App Configuration metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_app_configuration/"
+"draft": false
+"git_integration_title": "azure_app_configuration"
+"has_logo": true
+"integration_id": "azure-app-configuration"
+"integration_title": "Microsoft Azure App Configuration"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_app_configuration"
+"public_title": "Datadog-Microsoft Azure App Configuration Integration"
+"short_description": "Track key Azure App Configuration metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure App Configuration は、アプリケーションの設定と機能フラグを管理するためのセントラルサービスを提供します。App Configuration では、アプリケーションのすべての設定を保存し、そのアクセスを一箇所で保護することができます。
+Azure App Configuration provides a central service to manage application settings and feature flags. App Configuration enables you to store all the settings for your application and secure their access in one place.
 
-[Datadog Azure インテグレーション][1]を利用することで、Azure App Configuration からメトリクスを収集し、リクエストの着信やレイテンシー、スロットリングエラーをモニタリングすることができます。
+By using the [Datadog Azure integration][1], you can collect metrics from Azure App Configuration to monitor incoming requests, latency, and throttling errors.
 
-## 計画と使用
-### インフラストラクチャーリスト
+## Setup
+### Installation
 
-[Microsoft Azure インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][2] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
-### データセキュリティ
+## Data Collected
+### Metrics
 {{< get-metrics-from-git "azure_app_configuration" >}}
 
 
-### ヘルプ
-Azure App Configuration インテグレーションには、イベントは含まれません。
+### Events
+The Azure App Configuration integration does not include any events.
 
-### ヘルプ
-Azure App Configuration インテグレーションには、サービスのチェック機能は含まれません。
+### Service Checks
+The Azure App Configuration integration does not include any service checks.
 
-## ヘルプ
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+## Troubleshooting
+Need help? Contact [Datadog support][4].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://app.datadoghq.com/integrations/azure
 [3]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_app_configuration/azure_app_configuration_metadata.csv
-[4]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.datadoghq.com/help/
+

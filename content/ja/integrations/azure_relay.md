@@ -1,57 +1,58 @@
 ---
-categories:
+"categories":
 - azure
-- クラウド
-- ネットワーク
-dependencies: []
-description: Azure Relay のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/azure_relay/
-draft: false
-git_integration_title: azure_relay
-has_logo: true
-integration_id: azure-relay
-integration_title: Microsoft Azure Relay
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: '1.0'
-name: azure_relay
-public_title: Datadog-Microsoft Azure Relay インテグレーション
-short_description: Azure Relay のキーメトリクスを追跡
-version: '1.0'
+- cloud
+- network
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Relay metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_relay/"
+"draft": false
+"git_integration_title": "azure_relay"
+"has_logo": true
+"integration_id": "azure-relay"
+"integration_title": "Microsoft Azure Relay"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_relay"
+"public_title": "Datadog-Microsoft Azure Relay Integration"
+"short_description": "Track key Azure Relay metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Relay サービスを使用すると、ファイアウォールでポートを解放したり企業ネットワークインフラストラクチャーの内部に及んだりするような変更を加える必要なく、企業ネットワーク内で実行されているサービスをパブリッククラウドに安全に公開することができます。
+The Azure Relay service enables you to securely expose services that run in your corporate network to the public cloud without opening a port on your firewall, or making intrusive changes to your corporate network infrastructure.
 
-Datadog Azure インテグレーションを使用して、Azure Relay からメトリクスを収集できます。
+Use the Datadog Azure integration to collect metrics from Azure Relay.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_relay" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Relay インテグレーションには、イベントは含まれません。
+The Azure Relay integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Relay インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Relay integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_relay/azure_relay_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+

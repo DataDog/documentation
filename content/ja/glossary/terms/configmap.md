@@ -1,6 +1,6 @@
 ---
-core_product:
-- infrastructure monitoring
 title: ConfigMap
+core_product:
+  - infrastructure monitoring
 ---
-ConfigMap は、データをキーと値のペアで格納する API オブジェクトです。ConfigMap は、環境変数、コマンドライン引数、またはボリューム内の構成ファイルとしてポッドに提供することができます。
+A ConfigMap is an API object that stores data in key-value pairs. ConfigMaps can be supplied to Pods as environment variables, command-line arguments, or configuration files in a volume.

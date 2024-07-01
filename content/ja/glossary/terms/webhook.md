@@ -1,5 +1,5 @@
 ---
 title: webhook
 ---
-Webhook は、URL を使用してサービスを接続し、メトリクスアラートがトリガーされたときにサービスにアラートを通知します。
-詳細については、<a href="/integrations/webhooks/">ドキュメントを参照してください</a>。
+A webhook uses a URL to connect your services, and alerts your services when a metric alert is triggered.
+For more information, <a href="/integrations/webhooks/">see the documentation</a>.

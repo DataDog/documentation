@@ -1,77 +1,76 @@
 ---
+title: Notification Rules
+description: "Create notification rules to automatically notify your team and integrations when security detection rules trigger."
 aliases:
-- /ja/security_platform/notification_profiles/
-- /ja/security_platform/notification_rules/
-- /ja/security_platform/notifications/rules/
-- /ja/security/notification_profiles/
-- /ja/security/notification_rules/
-description: 通知ルールを作成し、セキュリティ検出ルールがトリガーされたときに、チームとインテグレーションに自動的に通知します。
+  - /security_platform/notification_profiles/
+  - /security_platform/notification_rules/
+  - /security_platform/notifications/rules/
+  - /security/notification_profiles/
+  - /security/notification_rules/
 further_reading:
 - link: /security/detection_rules/
-  tag: ドキュメント
-  text: セキュリティ検出ルールについて
-title: ルール
+  tag: Documentation
+  text: Explore security detection rules
+products:
+- name: Cloud SIEM
+  url: /security/cloud_siem/
+  icon: siem
+- name: Cloud Security Management
+  url: /security/cloud_security_management/
+  icon: cloud-security-management
+- name: Application Security Management
+  url: /security/application_security/
+  icon: app-sec
 ---
 
-## 概要
+{{< product-availability >}}
 
-セキュリティ通知ルールは、個々のセキュリティ検出ルールの通知設定を手動で編集することなく、チームに問題を通知する重要な役割を果たします。
+## Overview
 
-重大度、ルールタイプ、ルールタグ、シグナル属性、シグナルタグなどのパラメーターに基づいて、複数のセキュリティ検出ルールとシグナルにまたがる通知プリファレンスを通知ルール内で作成および変更することができます。
+Security notification rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual detection rules. Notification rules can span across multiple detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
 
-**Notification Rules** ページで、作成されたすべての通知ルールを閲覧、検索することができます。組織内のユーザーが作成した通知ルールを作成、編集、クローン、有効化、無効化、削除、または表示することができます。
+{{< img src="security/notification-profiles-overview3.png" alt="Notification Rules" style="width:100%;" >}}
 
-{{< img src="security/notification-profiles-overview2.png" alt="通知ルール" style="width:100%;" >}}
+## Create notification rules
 
-## 通知ルールの作成
+To create a notification rule, you define the logic for when the notification rule is triggered based on conditions such as severity, detection rule type, tags, and attributes.
 
-新規に通知ルールを作成する場合は、以下の手順で行ってください。
+As you configure the rule, a preview of issues matching the notification rule conditions appears on the **Example of matching issues** panel. This can be useful in determining if the notification rule is too specific or broad.
 
-1. Datadog で、[Notification Rules][1] タブに移動します。
-2. ページ右上の **+ New Notification Rule** ボタンをクリックします。
-3. **Name** フィールドに通知ルールの名前を入力します。
-4. セキュリティ検出ルールやセキュリティシグナルに一致する条件によって、この通知ルールがトリガーされる場合のロジックを定義します。
-    - セキュリティ検出ルールの場合、重大度、ルールタイプ、ルールタグを条件として通知ルールを作成することができます。
-    - セキュリティ信号の場合、信号の属性とシグナルタグが一致すれば、通知ルールを作成することができます。
+1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
+2. Under **Source Types**, select the detection rule types you want to include in the notification rule.
+3. (Optional) For ASM, select the ASM Vulnerability Management source type, _or_ leave the source type empty and select the **Include Application level vulnerabilities** checkbox.
+4. Under **Rule Criteria**, select one or more severity levels.
+5. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
+6. Under **Notification Details**, specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notifications][2] for more information.
+7. Enter a name for the notification rule.
+8. Click **Save and Activate**.
 
-    例えば、重大度を `Medium` に設定すると、ステップ 4 で設定したセキュリティシグナルのルール条件を少なくとも 1 回満たしている限り、シグナルが有効な通知ルールをトリガーすることを意味します。
+{{< img src="security/notification-profiles-setup3.png" alt="Setup of a notification rule" style="width:100%;" >}}
 
-5. **Recipients** フィールドで、通知したい関係者をすべて選択します。例えば、個人、チーム、リスト、ハンドルネームに通知します。
-6. 通知ルールに一致するルールのプレビューパネルが右側に表示され、通知ルールが具体的すぎるか広範すぎるかを示すのに役立ちます。
-7. **Save and Activate** をクリックすると、通知ルールが保存されます。これで通知ルールが自動的にアクティブになり、メインの **Notification Rules** ページに戻ります。
+If the notification rule matches the specified conditions, the resulting notification includes details about the matched notification rule in the notification footer.
 
-{{< img src="security/notification-profiles-setup2.png" alt="通知ルールの設定" style="width:100%;" >}}
+## Manage notification rules
 
-通知ルールがセキュリティ検出ルールと関連付けられている場合、ルールの **Set severity and notifications** (重大度と通知の設定) セクションでルールのトリガー条件を確認することができます。
+### Enable or disable a notification rule
 
-通知ルールが設定された条件に一致する場合、結果の通知には、一致した通知ルールに関する詳細が通知フッターに含まれます。
+To enable or disable a notification rule, toggle the switch on the notification rule card.
 
-## 通知ルールの管理
+### Edit a notification rule
 
-### 検索
+To edit a notification rule, click the notification rule card. After you finish making your changes, click **Save and Activate**.
 
-フリーテキスト検索は、**Notification Rule** ページにあるテキストで通知ルールをフィルタリングします。ルールタイプ、ルールタグ、シグナル属性、シグナルタグ内のタグを選択すると、検索にそのタグが追加され、その値に一致する通知ルールが表示されます。
+### Clone a notification rule
 
-検索クエリを編集すると、検索結果がリアルタイムで更新されます。**Search** ボタンはありません。
+To clone a notification rule, click the vertical three-dot menu on the notification rule card and select **Clone**.
 
-### 有効または無効にする
+### Delete a notification rule
 
-通知ルールカードの右上にあるトグルスイッチで、通知ルールを有効または無効にします。
+To delete a notification rule, click the vertical three-dot menu on the notification rule card and select **Delete**.
 
-### 編集
-
-通知ルールを編集するには、通知ルールカードにカーソルを合わせ、クリックします。
-
-### Clone
-
-通知ルールを複製するには、通知ルールカードの右上にあるケバブメニューをクリックし、メニューから **Clone Notification Rule** を選択します。
-
-### 削除
-
-通知ルールを削除するには、通知ルールカードの右上にあるケバブメニューをクリックし、メニューから **Delete Notification Rule** を選択します。
-
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/notification-profiles
+[1]: https://app.datadoghq.com/security/configuration/notification-rules
+[2]: /security/notifications/#notification-channels

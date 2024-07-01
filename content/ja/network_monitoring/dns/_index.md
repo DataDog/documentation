@@ -1,107 +1,116 @@
 ---
+title: DNS Monitoring
+description: Diagnose and debug DNS server issues
 aliases:
-- /ja/network_performance_monitoring/network_table
-- /ja/network_performance_monitoring/dns_monitoring
-description: DNS サーバーに関する問題の診断とデバッグ
+    - /network_performance_monitoring/network_table
+    - /network_performance_monitoring/dns_monitoring
 further_reading:
-- link: https://www.datadoghq.com/blog/monitor-dns-with-datadog/
-  tag: ブログ
-  text: Datadog での DNS モニタリング
-- link: https://www.datadoghq.com/blog/monitor-coredns-with-datadog/
-  tag: ブログ
-  text: Datadog での CoreDNS モニタリング
-- link: /network_monitoring/performance/network_page
-  tag: Documentation
-  text: 各ソースと宛先間のネットワークデータを探索。
-- link: https://www.datadoghq.com/blog/dns-resolution-datadog/
-  tag: ブログ
-  text: DNS 解決を使用してクラウドおよび外部エンドポイントを監視
-title: DNS モニタリング
+    - link: "https://www.datadoghq.com/blog/monitor-dns-with-datadog/"
+      tag: Blog
+      text: Monitor DNS with Datadog
+    - link: "https://www.datadoghq.com/blog/monitor-coredns-with-datadog/"
+      tag: Blog
+      text: Monitor CoreDNS with Datadog
+    - link: /network_monitoring/performance/network_analytics
+      tag: Documentation
+      text: Explore network data between each source and destination.
+    - link: "https://www.datadoghq.com/blog/dns-resolution-datadog/"
+      tag: Blog
+      text: Use DNS resolution to monitor cloud and external endpoints
 ---
 
-{{< img src="network_performance_monitoring/dns_default.png" alt="DNS モニタリング" >}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_overview.png" alt="The DNS monitoring page in Datadog" >}}
 
 <div class="alert alert-info">
-DNS モニタリングを有効にするには、Agent バージョン 7.33 にアップグレードします。
+Upgrade to Agent version 7.33 or later to enable DNS monitoring.
 </div>
 
-DNS モニタリングにより提供される DNS サーバーのパフォーマンス概要を把握することで、サーバー側およびクライアント側の DNS に関する問題を確認できます。フローレベルの DNS メトリクスを収集、表示するこのページを使用して、以下を確認できます。
+DNS Monitoring provides an overview of DNS server performance to help you identify server-side and client-side DNS issues. By collecting and displaying flow-level DNS metrics, this page can be used to identify:
 
-* DNS リクエストを作成しているポッドまたはサービス、およびそのリクエストを受信するサーバー。
-* 最も多くのリクエストを作成または最高レートでリクエストを作成しているエンドポイント。
-* DNS サーバーによるリクエストへの応答時間が徐々にまたは急に増加した場合。
-* 高いエラー率の DNS サーバーと、送信されるエラーのタイプ。
-* どのドメインが解決されているか。
+* The pods or services making DNS requests and the servers receiving those requests.
+* The endpoints making the most requests or making requests at the highest rate.
+* If a DNS server's response time to requests has gradually or suddenly increased.
+* The DNS servers with a high error rate and the type of errors being emitted.
+* Which domains are being resolved.
 
-## セットアップ
+## Setup
 
-DNS モニタリングの使用を開始する前に、[ネットワークパフォーマンスモニタリングのセットアップ][1]を行ってください。また、最新バージョンの Agent、少なくとも Linux OS では Agent v7.23+、Windows Server では v7.28+ を使用していることを確認してください。インストールすると、ネットワークパフォーマンスモニタリング製品に **DNS** タブが表示されます。
+Before you can begin to use DNS Monitoring, [set up Network Performance Monitoring][1]. Also ensure you are using the latest version of the Agent, or at least Agent v7.23+ for Linux OS, and v7.28+ for Windows Server. Once installed, a **DNS** tab is accessible in the Network Performance Monitoring product.
 
-ネットワークデバイスモニタリングをご希望の場合は、[NDM セットアップ手順][2]をご覧ください。
+Are you looking for Network Device Monitoring instead? See the [NDM setup instructions][2].
 
-## クエリ
+## Queries
 
-ページ上部のソースおよび宛先検索バーを使用して、DNS リクエストを作成するクライアント (_ソース_)、および DNS リクエストに応答する DNS サーバー (_宛先_) の間の依存関係を問い合わせます。宛先ポートは自動的に DNS ポート 53 に限定され、依存関係の検索結果がすべてこの形式 (クライアント → DNS サーバー) に一致するようになります。
+Use the search bar at the top of the page to query for dependencies between a client (which makes the DNS request) and a DNS server (which responds to the DNS request). The destination port is automatically scoped to DNS port 53 so that all resulting dependencies match this (client → DNS server) format.
 
-検索を特定のクライアントに絞るには、ソース検索バーでタグを使用して DNS トラフィックにフィルターをかけ集計します。デフォルトのビューでは、ソースに `service` タグが使用されています。したがって、表の各行は DNS サーバーへ DNS リクエストを作成しているサービスを表しています。
+To refine your search to a particular client, aggregate and filter DNS traffic using client tags in the search bar. In the default view, the client is automatically grouped by the most common tags. Accordingly, each row in the table represents a service that is making DNS requests to some DNS server.
 
-{{< img src="network_performance_monitoring/dns_default.png" alt="DNS モニタリングデフォルトビュー" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_client_search.png" alt="The DNS monitoring page with client_service:ad-server entered into the search bar, pod_name entered for View clients as, and network.dns_query entered for View servers as" style="width:100%;">}}
 
-検索を特定の DNS サーバーに絞るには、宛先検索バーでタグを使用します。宛先の表示を構成するには、**Group by** のドロップダウンメニューで以下のオプションの 1 つを選択します。
+To refine your search to a particular DNS server, filter the search bar by using server tags. Configure your server display with one of the following options from the **Group by** dropdown menu:
 
-* `dns_server`: DNS リクエストを受信するサーバー。このタグには、`pod_name` または `task_name` と同じ値が与えられています。上記タブが使用できない場合は、`host_name` を使用します。
-* `host`: DNS サーバーのホスト名。
-* `service`: DNS サーバーで実行中のサービス。
-* `IP`: DNS サーバーの IP。
-* `dns_query`: **Agent バージョン 7.33 以降が必要** クエリされたドメイン。
+* `dns_server`: The server receiving DNS requests. This tag has the same value as `pod_name` or `task_name`. If those tags are not available, `host_name` is used.
+* `host`: The host name of the DNS server.
+* `service`: The service running on the DNS server.
+* `IP`: The IP of the DNS server.
+* `dns_query`: (Requires Agent version 7.33 or later) The domain that was queried.
 
-この例は、本番環境のアベイラビリティーゾーンのポッドから、DNS リクエストを受信するホストへのすべてのフローを示しています。
+This example shows all flows from pods in the production environment's availability zone to hosts receiving DNS requests:
 
-{{< img src="network_performance_monitoring/dns_query_screenshot.png" alt="複数の DNS サーバーへリクエストを送信するポッドのクエリ" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_query_example.png" alt="Query with client_availability_zone:us-central1-b and client_env: prod entered into the Search for field, pod_name selected in the View clients as dropdown, and host selected in the View servers as dropdown" style="width:100%;">}}
 
-## メトリクス
+### Recommended queries
 
-DNS メトリクスはグラフと関連する表を用いて表示されます。
+{{< img src="network_performance_monitoring/dns_monitoring/recommended_queries_dns.png" alt="Recommended queries in the DNS monitoring page displaying the description of a query" style="width:100%;">}}
 
-**注:** データは 30 秒ごとに収集され、5 分ごとに集計され、14 日間保持されます。
+There are three recommended queries at the top of the DNS page, similar to the [Network Analytics][4] page. These are static queries commonly used to investigate DNS health and view high-level DNS metrics. Use the recommended queries as a starting point to gain further insights into your DNS configuration and troubleshoot DNS issues. 
 
-次の DNS メトリクスを使用できます。
+You can hover over a recommended query to see a short description of what the results of the query mean. Click on the query to run the query, and click **Clear query** to remove the query. Each recommended query has its own set of recommended graphs as well; clearing the recommended query resets the graphs to their default settings. 
 
-| メトリクス                   | 説明                                                                                                             |
+## Metrics
+
+Your DNS metrics are displayed through the graphs and the associated table.
+
+**Note**: Data is collected every 30 seconds, aggregated in five minute buckets, and retained for 14 days.
+
+The following DNS metrics are available:
+
+| Metric                   | Description                                                                                                             |
 |--------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| **DNS requests**         | クライアントで作成された DNS リクエストの数。                                                                         |
-| **DNS requests / second** | クライアントにより作成された DNS リクエストの速度。                                                                             |
-| **DNS response time**    | クライアントからのリクエストへの DNS サーバーによる平均応答時間。                                                |
-| **Timeouts**             | クライアントからの DNS リクエストのタイムアウト回数（DNS の全応答に対するパーセンテージとして表示）。                    |
-| **Errors**               | DNS エラーコードを生成した、クライアントからのリクエスト数（DNS の全応答に対するパーセンテージとして表示）。   |
-| **SERVFAIL**             | SERVFAIL コード（DNS サーバーの応答失敗）を生成した、クライアントからのリクエスト数（DNS の全応答に対するパーセンテージとして表示）。   |
-| **NXDOMAIN**             | NXDOMAIN コード（ドメイン名の存在なし）を生成した、クライアントからのリクエスト数（DNS の全応答に対するパーセンテージとして表示）。   |
-| **OTHER**                | NXDOMAIN または SERVFAILDNS 以外のエラーコードを生成した、クライアントからのリクエスト数（DNS の全応答に対するパーセンテージとして表示）。   |
-| **Failures**             | クライアントからの DNS リクエストにおけるすべてのタイムアウトとエラーの総数（DNS の全応答に対するパーセンテージとして表示）。 |
+| **DNS requests**         | The number of DNS requests made from the client.                                                                         |
+| **DNS requests / second** | The rate of DNS requests made by the client.                                                                             |
+| **DNS response time**    | The average response time of the DNS server to a request from the client.                                                |
+| **Timeouts**             | The number of timed out DNS requests from the client (displayed as a percentage of all DNS responses). <br  /><br />**Note**: These timeouts are a metric computed by NPM internally, and may not align with DNS timeouts reported from outside of NPM. They are not the same as the DNS timeouts reported by DNS clients or servers.                |
+| **Errors**               | The number of requests from the client that generated DNS error codes (displayed as a percentage of all DNS responses).   |
+| **SERVFAIL**             | The number of requests from the client that generated SERVFAIL (DNS server failed to respond) codes (displayed as a percentage of all DNS responses).   |
+| **NXDOMAIN**             | The number of requests from the client that generated NXDOMAIN (domain name does not exist) codes (displayed as a percentage of all DNS responses).   |
+| **OTHER**                | The number of requests from the client that generated error codes that are not NXDOMAIN or SERVFAIL (displayed as a percentage of all DNS responses).   |
+| **Failures**             | The total number of timeouts and errors in DNS requests from the client (displayed as a percentage of all DNS responses). |
 
-## 表
+## Table
 
-ネットワークテーブルには、クエリで定義された各 _ソース_ と _宛先_ の依存関係別に、上記メトリクスの詳細が表示されます。
+The network table breaks down the above metrics by each _client_ and _server_ dependency defined by your query.
 
-表の右上にある **Customize** ボタンを使い、表中の列を構成します。
+Configure the columns in your table using the **Customize** button at the top right of the table.
 
-**Filter Traffic** [オプション][3]で、ビュー内のトラフィックの詳細を表示できます。
+Narrow down the traffic in your view with the **Filter Traffic** [options][3].
 
-## サイドパネル
+## Sidepanel
 
-サイドパネルでは、DNS サーバーの依存関係のデバッグに役立つコンテキストテレメトリを確認できます。Flows、Logs、Traces、Processes タブを使用して、DNS サーバーの受信リクエストや応答時間、失敗率の数値が高い原因が次であるかどうかを判別します。
+The sidepanel provides contextual telemetry to help you quickly debug DNS server dependencies. Use the Flows, Logs, Traces, and Processes tabs to determine whether a DNS server's high number of incoming requests, response time, or failure rate is due to:
 
-* 基底のインフラストラクチャーのリソースを消費している重い処理
-* クライアント側のコードでのアプリケーションエラー
-* 特定のポートまたは IP から発生している大量のリクエスト
+* Heavy processes consuming the resources of the underlying infrastructure
+* Application errors in the code on the client side
+* A high number of requests originating from a particular port or IP
 
-{{< img src="network_performance_monitoring/dns_sidepanel.png" alt="DNS モニタリングのサイドパネル" style="width:100%;">}}
+{{< img src="network_performance_monitoring/dns_monitoring/dns_sidepanel.png" alt="DNS Monitoring sidepanel" style="width:100%;">}}
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/network_monitoring/performance/
-[2]: /ja/network_monitoring/devices/snmp_metrics/?tab=snmpv2
-[3]: /ja/network_monitoring/performance/network_page#table
+[1]: /network_monitoring/performance/
+[2]: /network_monitoring/devices/snmp_metrics/?tab=snmpv2
+[3]: /network_monitoring/performance/network_analytics#table
+[4]: /network_monitoring/performance/network_analytics/#recommended-queries

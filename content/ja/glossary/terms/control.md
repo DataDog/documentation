@@ -1,8 +1,8 @@
 ---
+title: control
 core_product:
-- security
-- cspm
-title: コントロール
+  - security
+  - csm
 ---
 
-テクノロジー、ユーザー、およびプロセスを管理すべき特定の方法を推奨するもの。コントロールは通常は規制や業界標準に基づきます。
+A specific recommendation for how technology, people, and processes should be managed. A control is typically based on a regulation or industry standard.

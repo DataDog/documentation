@@ -1,60 +1,61 @@
 ---
-categories:
+"categories":
 - azure
-- クラウド
-- プロビジョニング
-dependencies: []
-description: Azure Functions のキーメトリクスを追跡。
-doc_link: https://docs.datadoghq.com/integrations/azure_functions/
-draft: false
-git_integration_title: azure_functions
-has_logo: true
-integration_id: ''
-integration_title: Microsoft Azure Functions
-integration_version: ''
-is_public: true
-kind: インテグレーション
-manifest_version: '1.0'
-name: azure_functions
-public_title: Datadog-Microsoft Azure Functions インテグレーション
-short_description: Azure Functions のキーメトリクスを追跡。
-version: '1.0'
+- cloud
+- provisioning
+"custom_kind": "integration"
+"dependencies": []
+"description": "Track key Azure Functions metrics."
+"doc_link": "https://docs.datadoghq.com/integrations/azure_functions/"
+"draft": false
+"git_integration_title": "azure_functions"
+"has_logo": true
+"integration_id": ""
+"integration_title": "Microsoft Azure Functions"
+"integration_version": ""
+"is_public": true
+"manifest_version": "1.0"
+"name": "azure_functions"
+"public_title": "Datadog-Microsoft Azure Functions Integration"
+"short_description": "Track key Azure Functions metrics."
+"version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## 概要
+## Overview
 
-Azure Functions は、イベント駆動型のサーバーレスコンピューティングプラットフォームです。複雑なオーケストレーション問題も解決します。追加のセットアップなしでローカルでビルドおよびデバッグし、クラウドで大規模にデプロイおよび運用が可能なうえ、トリガーとバインドによりサービスを統合します。
+Azure Functions is an event-driven serverless compute platform that can also solve complex orchestration problems. Build and debug locally without additional setup, deploy and operate at scale in the cloud, and integrate services using triggers and bindings.
 
-Azure Functions からメトリクスを取得すると、以下のことができます。
+Get metrics from Azure Functions to:
 
-- 関数のパフォーマンスと使用状況を視覚化。
-- Azure Functions のパフォーマンスを他のアプリと関連付け。
+- Visualize your function performance and utilization.
+- Correlate the performance of your Azure Functions with the rest of your apps.
 
-## 計画と使用
+## Setup
 
-### インフラストラクチャーリスト
+### Installation
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
+If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## リアルユーザーモニタリング
+## Data Collected
 
-### データセキュリティ
+### Metrics
 {{< get-metrics-from-git "azure_functions" >}}
 
 
-### ヘルプ
+### Events
 
-Azure Functions インテグレーションには、イベントは含まれません。
+The Azure Functions integration does not include any events.
 
-### ヘルプ
+### Service Checks
 
-Azure Functions インテグレーションには、サービスのチェック機能は含まれません。
+The Azure Functions integration does not include any service checks.
 
-## ヘルプ
+## Troubleshooting
 
-ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
+Need help? Contact [Datadog support][3].
 
-[1]: https://docs.datadoghq.com/ja/integrations/azure/
+[1]: https://docs.datadoghq.com/integrations/azure/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/azure_functions/azure_functions_metadata.csv
-[3]: https://docs.datadoghq.com/ja/help/
+[3]: https://docs.datadoghq.com/help/
+
