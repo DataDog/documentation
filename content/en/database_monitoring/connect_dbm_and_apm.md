@@ -52,7 +52,7 @@ SQL Server and Oracle do not support `full` propagation mode due to statement ca
 | **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |
 |                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |
 |             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |
-|                                          | [asyngpg][27]          | {{< X >}} |           |                     |                     |
+|                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |
 |                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |
 |                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |
 |                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |
