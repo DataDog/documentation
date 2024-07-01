@@ -6,7 +6,6 @@ further_reading:
 - link: /service_management/workflows/actions_catalog
   tag: Documentation
   text: アクションカタログで利用可能なアクションを参照する
-kind: documentation
 title: ワークフローの構築
 ---
 

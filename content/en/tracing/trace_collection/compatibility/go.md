@@ -1,6 +1,5 @@
 ---
 title: Go Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the Go tracer'
 aliases:
   - /tracing/compatibility_requirements/go

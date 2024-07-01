@@ -1,6 +1,5 @@
 ---
 title: RUM Browser Monitoring Setup
-kind: documentation
 aliases:
   - /real_user_monitoring/setup
 further_reading:

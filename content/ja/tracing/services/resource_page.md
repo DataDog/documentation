@@ -14,7 +14,6 @@ further_reading:
 - link: /tracing/trace_explorer/trace_view/
   tag: ドキュメント
   text: Datadog トレースの読み方を理解する
-kind: documentation
 title: リソースステータス画面
 ---
 

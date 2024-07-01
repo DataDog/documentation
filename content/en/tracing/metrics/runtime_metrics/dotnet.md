@@ -1,6 +1,5 @@
 ---
 title: .NET Runtime Metrics
-kind: documentation
 description: "Gain additional insights into your .NET application's performance with the runtime metrics associated to your traces."
 code_lang: dotnet
 type: multi-code-lang

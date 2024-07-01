@@ -19,7 +19,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Terraform による Synthetic Multistep API テストの作成と管理
-kind: documentation
 title: Multistep API テスト
 ---
 

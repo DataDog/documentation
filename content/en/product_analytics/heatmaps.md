@@ -1,6 +1,5 @@
 ---
 title: Heatmaps
-kind: documentation
 description: Heatmaps are a type of visualization allowing you to see where users click on your website.
 further_reading:
 - link: '/product_analytics/session_replay/browser/'

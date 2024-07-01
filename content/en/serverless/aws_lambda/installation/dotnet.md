@@ -1,6 +1,5 @@
 ---
 title: Instrumenting .NET Serverless Applications
-kind: documentation
 aliases:
     - /serverless/installation/dotnet
 further_reading:

@@ -3,7 +3,6 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: ドキュメント
   text: Node.js アプリケーションのインスツルメンテーション
-kind: documentation
 title: サーバーレスパッケージが大きすぎるエラーのトラブルシューティング
 ---
 

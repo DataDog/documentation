@@ -4,7 +4,6 @@ aliases:
 - /ja/serverless/serverless_integrations/cli/
 dependencies:
 - https://github.com/DataDog/datadog-ci/blob/master/src/commands/lambda/README.md
-kind: documentation
 title: Datadog サーバーレス CLI
 ---
 CLI を使って、AWS Lambda 関数を Datadog でインスツルメントすることができます。CLI は既存の Lambda 関数のコンフィギュレーションを変更することでインスツルメンテーションを可能にするため、再デプロイは*必要ありません*。Datadog のサーバーレスモニタリングをはじめるにはこの方法が最速です。

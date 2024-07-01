@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
   tag: ブログ
   text: CIDR 表記クエリを使用して、ネットワークトラフィックログをフィルターする
-kind: documentation
 title: ログモニター
 ---
 
