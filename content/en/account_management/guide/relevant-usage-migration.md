@@ -8,7 +8,7 @@ On October 1, 2024, two API endpoints will change:
 - [Get hourly usage by product family][1]
 - [Get usage across your account][2]
 
-The RUM and Indexed Logs products are affected. See the following section for each API endpoint you use, and review the upcoming updates to determine what changes to make to your automation. 
+The RUM and Indexed Logs products are affected. See the following section for each API endpoint you use and review the updates to determine what changes to make to your automation. 
 
 ## Get hourly usage by product family
 
@@ -49,12 +49,12 @@ The following new keys will be added:
 - `rum_mobile_lite_session_count_reactnative`
 - `rum_mobile_lite_session_count_roku`
 
-RUM usage in the **Get hourly usage by product family** v2 endpoint will be shown under one `rum` product family with three keys representing SKUs that your RUM usage may be billed on:
+RUM usage in the **Get hourly usage by product family** v2 endpoint will be shown under one `rum` product family with three keys representing SKUs that your RUM usage might be billed on:
 - `rum`
 - `rum_replay`
 - `rum_lite`
 
- Legacy product families and usage types will be deprecated and displayed as `null` in the **Get hourly usage by product family** v2 endpoint.
+Legacy product families and usage types will be deprecated and displayed as `null` in the **Get hourly usage by product family** v2 endpoint.
 
  #### Current response structure
 
@@ -234,7 +234,7 @@ After October 1, 2024, the [Get hourly usage by product family][1] v2 endpoint w
               "usage": 0
             } 
 
-// Legacy usage types are nulled out
+// Legacy usage types, which are nulled
           {
             "usage_type": "browser_rum_units",
             "value": null
@@ -248,7 +248,7 @@ After October 1, 2024, the [Get hourly usage by product family][1] v2 endpoint w
             "value": null
           }
 
-// One active existing product family (rum); rum_browser_sessions and rum_mobile_sessions product families are legacy product families represented as null
+// One active existing product family (rum); rum_browser_sessions and rum_mobile_sessions product families are legacy product families and are represented as null
  {
       "id": "abcd",
       "type": "usage_timeseries",
@@ -352,7 +352,7 @@ The following new keys describe RUM usage:
 - `rum_mobile_lite_session_count_reactnative_agg_sum`
 - `rum_mobile_lite_session_count_roku_agg_sum`
 
-RUM usage in the **Get usage across your account** v1 endpoint will include three keys representing SKUs that your RUM usage may be billed on:
+RUM usage in the **Get usage across your account** v1 endpoint will include three keys representing SKUs that your RUM usage might be billed on:
 - `rum`
 - `rum_replay`
 - `rum_lite`
@@ -405,7 +405,7 @@ After October 1, 2024, the [Get usage across your account][2] v1 endpoint will h
     "rum_mobile_lite_session_count_reactnative_agg_sum": 0,
     "rum_mobile_lite_session_count_roku_agg_sum": 0,
 
-// Legacy usage keys are nulled
+// Legacy usage keys, which are nulled
    "rum_session_count_agg_sum": null,
    "mobile_rum_session_count_flutter_agg_sum": null,
    "mobile_rum_session_count_ios_agg_sum": null,
@@ -421,7 +421,7 @@ After October 1, 2024, the [Get usage across your account][2] v1 endpoint will h
 
 ### Indexed Logs
 
-Keys that represent total usage across all retentions will be deprecated and displayed as null. These keys are: 
+Keys that represent total usage across all retentions will be deprecated and displayed as `null`. These keys are: 
 - `indexed_events_count_sum`
 - `live_indexed_events_agg_sum`
 - `rehydrated_indexed_events_agg_sum`
@@ -466,7 +466,7 @@ After October 1, 2024, the [Get usage across your account][2] v1 endpoint will h
 {{< highlight json "hl_lines=3-5 17-20 31-34" >}}
 {
   "usage": {
-// Usage keys across retention period are nulled
+// Usage keys across retention period, which are nulled
     "rehydrated_indexed_events_agg_sum": null,
     "live_indexed_events_agg_sum": null,
     "logs_indexed_logs_usage_agg_sum_15_day": 100,
@@ -480,7 +480,7 @@ After October 1, 2024, the [Get usage across your account][2] v1 endpoint will h
       "uuid": "abcd",
       "region": "eu",
       "usage": {
- // Deprecated intermediate groupings are nulled
+ // Deprecated intermediate groupings, which are nulled
         "indexed_events_count_sum": null,
         "live_indexed_events_sum": null,
         "rehydrated_indexed_events_sum": null,
@@ -494,7 +494,7 @@ After October 1, 2024, the [Get usage across your account][2] v1 endpoint will h
       "uuid": "abcd",
       "region": "eu",
       "usage": {
-   // Deprecated intermediate groupings are nulled
+   // Deprecated intermediate groupings, which are nulled
         "indexed_events_count_sum": null,
         "live_indexed_events_sum": null,
         "rehydrated_indexed_events_sum": null,
