@@ -54,7 +54,7 @@ RUM usage in the **Get hourly usage by product family** v2 endpoint will be show
 - `rum_replay`
 - `rum_lite`
 
- Legacy product families and usage types will be deprecated and displayed as null in the **Get hourly usage by product family** v2 endpoint.
+ Legacy product families and usage types will be deprecated and displayed as `null` in the **Get hourly usage by product family** v2 endpoint.
 
  #### Current response structure
 
@@ -156,7 +156,7 @@ After October 1, 2024, the [Get hourly usage by product family][1] v2 endpoint w
       "id": "abcd",
       "type": "usage_timeseries",
       "attributes": {
-// One existing product family (rum) ; rum_browser_sessions and rum_mobile_sessions product families are deprecated below
+// One existing product family (rum); rum_browser_sessions and rum_mobile_sessions product families are deprecated below
         "product_family": "rum",
         "org_name": "Test Org",
         "public_id": "abcd",
@@ -311,7 +311,7 @@ After October 1, 2024, the [Get hourly usage by product family][1] v2 endpoint w
 
 ## Get usage across your account
 
-The October 1, 2024 change to the [Get usage across your account][2] endpoint deprecates legacy keys and provides more granular information about your RUM and Indexed Logs usage.
+The October 1, 2024 change to the [Get usage across your account][2] endpoint deprecates legacy keys and provides more granular information about your RUM and indexed logs usage.
 
 ### RUM
 
@@ -351,7 +351,6 @@ The following new keys describe RUM usage:
 - `rum_mobile_lite_session_count_ios_agg_sum`
 - `rum_mobile_lite_session_count_reactnative_agg_sum`
 - `rum_mobile_lite_session_count_roku_agg_sum`
-
 
 RUM usage in the **Get usage across your account** v1 endpoint will include three keys representing SKUs that your RUM usage may be billed on:
 - `rum`
@@ -490,7 +489,7 @@ After October 1, 2024, the [Get usage across your account][2] v1 endpoint will h
       }
     },
 {
-       "name": "Sub-Org 2",
+      "name": "Sub-Org 2",
       "public_id": "abcd",
       "uuid": "abcd",
       "region": "eu",
