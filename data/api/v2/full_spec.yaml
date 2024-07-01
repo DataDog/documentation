@@ -6742,6 +6742,7 @@ components:
           $ref: '#/components/schemas/DowntimeIncludedMonitorType'
       type: object
     DowntimeMuteFirstRecoveryNotification:
+      default: false
       description: If the first recovery notification during a downtime should be
         muted.
       example: false
@@ -6771,6 +6772,10 @@ components:
       - NO_DATA
       - WARN
     DowntimeNotifyEndStates:
+      default:
+      - no data
+      - warn
+      - alert
       description: States that will trigger a monitor notification when the `notify_end_types`
         action occurs.
       example:
@@ -6780,6 +6785,8 @@ components:
         $ref: '#/components/schemas/DowntimeNotifyEndStateTypes'
       type: array
     DowntimeNotifyEndTypes:
+      default:
+      - expired
       description: Actions that will trigger a monitor notification if the downtime
         is in the `notify_end_types` state.
       example:
