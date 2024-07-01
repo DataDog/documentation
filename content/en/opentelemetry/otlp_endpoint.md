@@ -1,5 +1,5 @@
 ---
-title: Datadog OTLP Trace Intake Endpoint
+title: Datadog OTLP Traces Intake Endpoint
 private: true
 further_reading:
   - link: "https://opentelemetry.io/docs/concepts/sdk-configuration/general-sdk-configuration/"
