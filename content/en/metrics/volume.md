@@ -25,7 +25,7 @@ further_reading:
 
 Cloud-based applications generate massive amounts of data, which can be overwhelming for your organization as it scales. Observability costs become a significant budget item but core observability teams lack visibility into what is truly valuable to each individual engineering team. Individual teams are less incentivized to be proactive in helping manage this growth because they have limited insights into the costs of the metrics and tags they're submitting.
 
-Datadog's [Metrics Volume Management page][1] provides comprehensive visibility and intelligent insights for which metrics you should focus your cost-optimization efforts. When used with [Metrics without Limits™][1], Metrics Volume allows for flexible configuration of metrics ingestion and indexing to reduce costs without sacrificing accuracy. 
+Datadog's [Metrics Volume Management page][1] provides comprehensive visibility and intelligent insights for which metrics you should focus your cost-optimization efforts. When used with [Metrics without Limits™][3], Metrics Volume allows for flexible configuration of metrics ingestion and indexing to reduce costs without sacrificing accuracy. 
 
 ## Search, filter, and sort
 
@@ -64,7 +64,7 @@ Compare metric cardinality to understand:
 To view your spiking metric's cardinality over time:
 1. Select a time frame in the top right hand corner (the recommended time frame is **Past 1 Day** or **Past 4 Weeks**).
 2. Find the metric you want to compare and in the same row click on the value under the **Change in Volume** column. This opens up a modal showing a graph comparing your metric's cardinality over time and the percentage increase in its spike.
-3. (Optional) Create a Change monitor for `% change` to proactively alert on this spiking metric. For more information, see the [Change monitor][2] guide.
+3. (Optional) Create a Change monitor for `% change` to proactively alert on this spiking metric. For more information, see the [Change Alert Monitor][2] documentation.
 
 ## Identify unqueried metrics
 
@@ -94,7 +94,7 @@ In this example, the tag configuration modal shows a metric with a current volum
 
 <div class="alert alert-info">Related Assets is in public beta</div>
 
-Assess the value of metrics queried but underutilized in Datadog with metrics-related assets. A metrics-related asset refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can utilize existing metrics to get more value from your observability spend and [reduce metric volume and cost](#reduce-metric-volume-and-cost).
+Assess the value of metrics queried but underutilized in Datadog with metrics-related assets. A metrics-related asset refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. Use related asset popularity and quantity to evaluate metric utility within your organization, enabling data-driven decisions. Gain a better understanding of how your team can utilize existing metrics to get more value from your observability spend and [reduce metric volume and cost].
 
 {{< img src="metrics/volume/related_assets.png" alt="Metric detail side panel showing the Related Assets section. The example metric is applied to one dashboard" style="width:100%;" >}}
 
@@ -108,6 +108,7 @@ To view a metric's related assets:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/metric/volume
-[2]: /monitors/guide/change-alert/
+[2]: /monitors/types/change-alert/
 [3]: /metrics/metrics-without-limits
 [4]: https://app.datadoghq.com/metric/volume?bulk_manage_tags=true&facet.query_activity=-queried&sort=volume_total
+[5]: #reduce-metric-volume-and-cost
