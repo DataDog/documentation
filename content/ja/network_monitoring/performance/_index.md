@@ -27,7 +27,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: ブログ
   text: Datadog NPM が Consul ネットワーキングに対応
-kind: documentation
 title: ネットワークパフォーマンスモニタリング
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: OTLP Ingestion by the Datadog Agent
-kind: documentation
 aliases:
   - /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
   - /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/

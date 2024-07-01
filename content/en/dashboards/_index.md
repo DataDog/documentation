@@ -107,6 +107,8 @@ View your dashboards in a mobile-friendly format with the Datadog Mobile App, av
 
 ## Further Reading
 
+{{< learning-center-callout header="Try Creating Graph Widgets in the Datadog Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboard-graph-widgets">}} Explore timeseries, query value, top list, table, distribution, and pie chart widgets. Learn how to configure the widgets and develop an understanding of when each widget type should be utilized. {{< /learning-center-callout >}}
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/mobile/

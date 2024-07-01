@@ -1,6 +1,5 @@
 ---
 title: Database Monitoring Monitor
-kind: documentation
 ---
 
 

@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-datadog-continuous-testing/
   tag: 블로그
   text: Datadog을 사용한 연속적 테스트 모범 사례
-kind: 설명서
 title: Continuous Testing 및 CI/CD 문제 해결
 ---
 

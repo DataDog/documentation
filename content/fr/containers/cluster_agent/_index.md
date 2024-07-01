@@ -12,7 +12,6 @@ further_reading:
   tag: Blog
   text: Mettre à l'échelle vos charges de travail Kubernetes en fonction d'une métrique
     Datadog
-kind: documentation
 title: Agent de cluster pour Kubernetes
 ---
 

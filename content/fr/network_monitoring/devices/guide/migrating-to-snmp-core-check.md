@@ -3,7 +3,6 @@ further_reading:
 - link: network_monitoring/devices/setup
   tag: Documentation
   text: En savoir plus sur la configuration de NDM
-kind: guide
 title: Migration depuis les checks basés sur Python vers les checks SNMP Core (en
   Go)
 ---

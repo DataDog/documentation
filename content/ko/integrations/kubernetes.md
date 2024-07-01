@@ -28,7 +28,7 @@ git_integration_title: 쿠버네티스(Kubernetes)
 integration_id: kubernetes
 integration_title: 쿠버네티스(Kubernetes)
 is_public: true
-kind: 통합
+custom_kind: 통합
 name: 쿠버네티스(Kubernetes)
 newhlevel: true
 public_title: Datadog-쿠버네티스 통합

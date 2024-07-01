@@ -1,7 +1,6 @@
 ---
 description: SQL Server データベースでのデータベースモニタリングの設定
 disable_sidebar: true
-kind: documentation
 title: SQL Server の設定
 ---
 

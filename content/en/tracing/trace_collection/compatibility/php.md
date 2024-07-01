@@ -40,7 +40,7 @@ PHP APM supports the following PHP versions (both ZTS and NTS):
 
 <div class="alert alert-info">
 <strong>Note:</strong>
-PHP 5.x is not supported starting version 1.0.0. If you are using PHP 5, you can still use the PHP tracer up to version [0.99](https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0).
+PHP 5.x is not supported starting version 1.0.0. If you are using PHP 5, you can still use the PHP tracer up to version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0">0.99</a>.
 <br>
 If you are using PHP 5.x version in your application and have a feature request which is critical for your business needs, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a>.
 <br>

@@ -1,6 +1,5 @@
 ---
 title: "Metric Submission: DogStatsD"
-kind: documentation
 description: "Submit custom metrics directly from your application."
 aliases:
   - /developers/faq/reduce-submission-rate

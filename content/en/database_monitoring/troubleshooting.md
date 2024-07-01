@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Database Monitoring
-kind: documentation
 description: Troubleshoot Database Monitoring setup
 
 ---
@@ -17,7 +16,7 @@ For specific database setup troubleshooting, use the corresponding troubleshooti
 ## Diagnosing common problems
 ### Query bind parameters cannot be viewed
 
-At this time, the raw query bind parameters are obfuscated for Query Samples and Explain Plans, and are replaced with a `?` character. In a future release, settings to expose the un-obfuscated query bind parameters are planned.
+At this time, the raw query bind parameters are obfuscated for Query Samples and Explain Plans, and are replaced with a `?` character.
 
 
 ### DBM host limit
