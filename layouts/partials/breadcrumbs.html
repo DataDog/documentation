@@ -1,13 +1,15 @@
 {{- $text := "" -}}
 <div id="breadcrumbs" {{- if (eq .Section "api") -}}class="position-relative"{{- end -}}>
     {{- range .Ancestors.Reverse }}
-      {{- $exclusions := (or (eq .File.Path "api/_index.md") (eq (.Title | lower) "service_managements")) -}}
-      {{- if eq .File.Dir "/" -}}
+      {{ if .File }}
+        {{- $exclusions := (or (eq .File.Path "api/_index.md") (eq (.Title | lower) "service_managements")) -}}
+        {{- if eq .File.Dir "/" -}}
         {{- $text = i18n "docs" -}}
-      {{- else -}}
+        {{- else -}}
         {{- $text = (replace .Title "_" " ") -}}
-      {{- end -}}
-      {{ if not $exclusions }}
+        {{- end -}}
+        {{ if not $exclusions }}
+      {{ end }}
       <a class="text-uppercase text-gray-darkish" href="{{ .RelPermalink }}">{{ $text }}</a>
 &nbsp;>&nbsp;
       {{ end }}
