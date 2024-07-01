@@ -1,6 +1,5 @@
 ---
 title: Issue States in Error Tracking
-kind: documentation
 ---
 
 ## Overview

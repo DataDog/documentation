@@ -1,6 +1,5 @@
 ---
 title: Injecting Libraries Locally
-kind: documentation
 description: "Inject instrumentation libraries into applications"
 aliases:
  - /tracing/trace_collection/admission_controller/

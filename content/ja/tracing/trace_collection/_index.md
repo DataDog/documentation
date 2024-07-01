@@ -15,7 +15,6 @@ further_reading:
 - link: tracing/trace_collection/compatibility
   tag: ドキュメント
   text: 互換性要件
-kind: documentation
 title: Datadog へのトレースの送信
 ---
 

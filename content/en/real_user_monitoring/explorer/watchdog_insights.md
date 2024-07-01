@@ -1,6 +1,5 @@
 ---
 title: Watchdog Insights for RUM
-kind: documentation
 description: 'Learn how to investigate issues in your RUM applications with Watchdog Insights.'
 further_reading:
 - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"

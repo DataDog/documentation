@@ -1,6 +1,5 @@
 ---
 title: RUM Roku Channel Monitoring Setup
-kind: documentation
 aliases:
     - /real_user_monitoring/roku/
 code_lang: roku

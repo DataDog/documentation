@@ -1,7 +1,6 @@
 ---
 code_lang: nodejs
 code_lang_weight: 50
-kind: documentation
 title: Node.js 互換性要件
 type: multi-code-lang
 ---

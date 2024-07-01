@@ -14,7 +14,6 @@ further_reading:
   tag: 블로그
   text: Datadog 리소스 카탈로그를 사용하여 인프라스트럭처 리소스 관리
 is_beta: true
-kind: documentation
 title: Datadog 리소스 카탈로그
 ---
 

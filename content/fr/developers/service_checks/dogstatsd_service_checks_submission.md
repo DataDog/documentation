@@ -1,6 +1,5 @@
 ---
 title: "Envoi de checks de service\_: DogStatsD"
-kind: documentation
 description: Présentation des fonctionnalités de DogStatsD, y compris des types de données et du tagging.
 further_reading:
   - link: /developers/dogstatsd/

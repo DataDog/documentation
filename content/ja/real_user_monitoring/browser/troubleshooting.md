@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring/faq/content_security_policy/
   tag: Documentation
   text: コンテンツセキュリティポリシー
-kind: documentation
 title: トラブルシューティング
 ---
 

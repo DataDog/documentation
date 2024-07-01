@@ -12,7 +12,6 @@ further_reading:
   tag: Blog
   text: Mejora tu prestación de servicios con los widgets de dashboard móviles de
     Datadog
-kind: documentation
 title: Aplicación móvil de Datadog
 ---
 

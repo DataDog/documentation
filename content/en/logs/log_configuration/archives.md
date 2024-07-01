@@ -1,6 +1,5 @@
 ---
 title: Log Archives
-kind: documentation
 description: Forward all your ingested logs to long term storage.
 aliases:
   - /logs/s3/

@@ -1,6 +1,5 @@
 ---
 title: Live Tail
-kind: documentation
 description: 'Search through all of your logs and perform Log Analytics'
 aliases:
     - /logs/explore/livetail

@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM threat detection and protection using single step instrumentation
-kind: documentation
 ---
 
 <div class="alert alert-info">Enabling ASM threat detection and protection using single step instrumentation is in beta.</div>

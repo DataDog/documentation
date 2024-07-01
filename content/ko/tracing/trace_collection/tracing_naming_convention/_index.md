@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/trace_explorer/query_syntax/
   tag: 설명서
   text: 트레이스 탐색 방법 알아보기
-kind: documentation
 title: 스팬 태그 시맨틱
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Datadog Extension for Visual Studio
-kind: documentation
 is_beta: true
 aliases:
 - '/developers/ide_integrations/visual_studio/'

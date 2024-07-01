@@ -1,6 +1,5 @@
 ---
 title: Attributes and Aliasing
-kind: documentation
 description: 'Learn about attributes and how to support a naming convention'
 aliases:
   - /logs/processing/attributes_naming_convention/

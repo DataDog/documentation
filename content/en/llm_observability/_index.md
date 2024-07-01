@@ -1,6 +1,5 @@
 ---
 title: LLM Observability
-kind: documentation
 aliases:
     - /tracing/llm_observability/
 ---

@@ -1,6 +1,5 @@
 ---
 title: Node.js Lambda Tracing and Webpack Compatibility 
-kind: documentation
 further_reading:
 - link: '/serverless/installation/nodejs'
   tag: 'Documentation'

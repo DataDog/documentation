@@ -1,6 +1,5 @@
 ---
 title: HTTP Requests
-kind: Documentation
 disable_toc: false
 aliases:
 - service_management/app_builder/http_request/

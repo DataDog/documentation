@@ -17,7 +17,6 @@ further_reading:
 - link: dashboards/functions/algorithms/#anomalies
   tag: ドキュメント
   text: 異常関数
-kind: documentation
 title: 異常検知モニター
 ---
 

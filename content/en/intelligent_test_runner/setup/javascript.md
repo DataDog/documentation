@@ -1,6 +1,5 @@
 ---
 title: Intelligent Test Runner for JavaScript and TypeScript
-kind: documentation
 code_lang: javascript
 type: multi-code-lang
 code_lang_weight: 20

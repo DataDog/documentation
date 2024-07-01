@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/pricing/?product=application-performance-monitoring#application-performance-monitoring-apm_faq-what-is-considered-as-a-host-for-azure-app-services
   tag: 料金
   text: Azure App Service APM 価格設定
-kind: documentation
 title: Azure App Service のモニタリング
 ---
 
