@@ -331,6 +331,7 @@ Au lieu de monter un fichier, vous pouvez déclarer la configuration d'instance 
 
 ```yaml
 apiVersion: v1
+kind: Service
 metadata:
   name: postgres
   labels:
