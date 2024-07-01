@@ -1,6 +1,5 @@
 ---
 title: Volume
-kind: documentation
 description: "Understand and manage your custom metrics usage and costs."
 further_reading:
   - link: "/metrics/summary/"
@@ -24,7 +23,7 @@ further_reading:
 
 {{< img src="metrics/volume/metrics_volume_overview.png" alt="Metrics Volume page set to a timeframe of the past hour (by default) showing the search, filter, facet and column sorting features available" style="width:100%;" >}}
 
-Cloud-based applications generate massive amounts of data, which can be overwhelming for your organization as it scales. Observability costs become a significant budget item but core observability teams lack visibility into what is truly valuable to each individual engineering team. Concurrently, individual teams may have limited insights into the costs of the metrics and tags they're submitting; teams are less incentivized to be proactive in helping manage this growth.
+Cloud-based applications generate massive amounts of data, which can be overwhelming for your organization as it scales. Observability costs become a significant budget item but core observability teams lack visibility into what is truly valuable to each individual engineering team. Individual teams are less incentivized to be proactive in helping manage this growth because they have limited insights into the costs of the metrics and tags they're submitting.
 
 Datadog's [Metrics Volume Management page][1] provides comprehensive visibility and intelligent insights for which metrics you should focus your cost-optimization efforts. When used with [Metrics without Limits™][1], Metrics Volume allows for flexible configuration of metrics ingestion and indexing to reduce costs without sacrificing accuracy. 
 
@@ -71,7 +70,7 @@ To view your spiking metric's cardinality over time:
 
 {{< img src="metrics/volume/id_unqueried_metrics.png" alt="Facet fields for Query Activity with the 'Not actively queried' facet selected" style="width:100%;" >}}
 
-To effectively reduce costs with Metrics without Limits, identify your highest volume or spiking metric names. To find the metrics not actively queried in the past 30 days, click on **Not Actively Queried** in the Query Activity Facet box. Datadog analyzes query patterns to determine valuable metrics. Selecting **Not Actively Queried** generates a list of unused metric names across dashboards, notebooks, monitors, SLOs, Metrics Explorer, and the API.
+To effectively reduce costs with Metrics without Limits, identify your highest volume or spiking metric names. To find the metrics not actively queried in the past 30 days, click on **Not Actively Queried** in the *Query Activity Facet* box. Datadog analyzes query patterns to determine valuable metrics. Selecting **Not Actively Queried** generates a list of unused metric names across dashboards, notebooks, monitors, SLOs, Metrics Explorer, and the API.
 
 ## Reduce metric volume and cost
 
@@ -103,7 +102,6 @@ To view a metric's related assets:
 1. Click on the metric name to open its details side panel.
 2. Scroll down to the section of the side panel titled **Related Assets**.
 3. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can use the search bar to validate specific assets.
-
 
 ## Further reading
 
