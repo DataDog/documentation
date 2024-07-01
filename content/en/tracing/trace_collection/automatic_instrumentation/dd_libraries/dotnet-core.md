@@ -1,6 +1,5 @@
 ---
 title: Tracing .NET Core Applications
-kind: documentation
 aliases:
   - /tracing/dotnet-core
   - /tracing/languages/dotnet-core
@@ -115,7 +114,7 @@ To install the .NET Tracer machine-wide:
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
 
    Other distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && /opt/datadog/createLogPath.sh`
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases

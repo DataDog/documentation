@@ -68,6 +68,7 @@ title: ログガイド
     {{< nextlink href="logs/guide/logs-rbac" >}}ログ用に RBAC を設定する方法{{< /nextlink >}}
     {{< nextlink href="logs/guide/logs-rbac-permissions" >}}ログの RBAC アクセス許可の詳細{{< /nextlink >}}
     {{< nextlink href="/logs/guide/restrict-access-to-sensitive-data-with-rbac/" >}}クエリベースのアクセス制御を使用して機密データへのアクセスを制限する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/delete_logs_with_sensitive_data/" >}}機密データを含むログを削除する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Datadog インテグレーション" >}}

@@ -1,6 +1,5 @@
 ---
 title: Instrumenting Java Serverless Applications
-kind: documentation
 further_reading:
     - link: '/serverless/configuration'
       tag: 'Documentation'

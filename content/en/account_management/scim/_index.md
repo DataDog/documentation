@@ -1,6 +1,5 @@
 ---
 title: User Provisioning with SCIM
-kind: documentation
 further_reading:
     - link: '/account_management/scim/azure/'
       tag: 'Documentation'

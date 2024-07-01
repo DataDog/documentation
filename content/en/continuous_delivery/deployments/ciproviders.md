@@ -1,6 +1,5 @@
 ---
 title: Monitor CI Providers Deployments
-kind: documentation
 description: Learn how to monitor deployments from CI Providers in Datadog CD Visibility.
 is_beta: true
 further_reading:

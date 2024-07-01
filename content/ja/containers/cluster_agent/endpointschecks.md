@@ -13,7 +13,6 @@ further_reading:
 - link: /containers/cluster_agent/troubleshooting#endpoint-checks
   tag: ドキュメント
   text: エンドチェックのトラブルシューティング
-kind: documentation
 title: オートディスカバリーによるエンドポイントチェック
 ---
 

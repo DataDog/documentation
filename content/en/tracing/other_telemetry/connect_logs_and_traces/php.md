@@ -1,6 +1,5 @@
 ---
 title: Correlating PHP Logs and Traces
-kind: documentation
 description: 'Connect your PHP logs and traces to correlate them in Datadog.'
 aliases:
   - /tracing/connect_logs_and_traces/php

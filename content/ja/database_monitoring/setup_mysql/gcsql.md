@@ -4,7 +4,6 @@ further_reading:
 - link: /integrations/mysql/
   tag: ドキュメント
   text: 基本的な MySQL インテグレーション
-kind: documentation
 title: Google Cloud SQL マネージド MySQL のデータベースモニタリングの設定
 ---
 
@@ -44,7 +43,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 {{% tab "MySQL 5.6" %}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][1]を有効にします。 |
+| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][9]を有効にします。 |
 | `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
 
@@ -54,7 +53,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 {{% tab "MySQL ≥ 5.7" %}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][1]を有効にします。 |
+| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][9]を有効にします。 |
 | `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
@@ -383,7 +382,7 @@ Google Cloud からより包括的なデータベースメトリクスを収集�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
+[1]: /ja/database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://cloud.google.com/sql/docs/mysql/flags
 [4]: https://app.datadoghq.com/account/settings/agent/latest
@@ -391,3 +390,4 @@ Google Cloud からより包括的なデータベースメトリクスを収集�
 [6]: https://app.datadoghq.com/databases
 [7]: /ja/integrations/google_cloudsql
 [8]: /ja/database_monitoring/troubleshooting/?tab=mysql
+[9]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema

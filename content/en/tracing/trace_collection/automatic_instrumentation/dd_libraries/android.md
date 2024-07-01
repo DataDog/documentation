@@ -14,7 +14,6 @@ further_reading:
 - link: tracing/visualization/
   tag: Documentation
   text: Explore your services, resources, and traces
-kind: documentation
 title: Tracing Android Applications
 ---
 Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-sdk-android-trace` client-side tracing library][2] and leverage the following features:
@@ -25,6 +24,7 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-s
 
 <div class="alert alert-info"><strong>Note</strong>: Datadog charges for <strong>ingested and indexed</strong> spans sent from your Android applications, but does not charge for the underlying devices. Read more in the <a href="/account_management/billing/apm_tracing_profiler/">APM billing documentation</a>.</div>
 
+Datadog tracer implements both [Open Tracing][11] and [Open Telemetry][10] standards. 
 
 ## Setup
 
@@ -286,21 +286,21 @@ dependencies {
 
 3. Configure and enable Trace feature:
 
-   {{< tabs >}}
-   {{% tab "Kotlin" %}}
-   ```kotlin
-        val traceConfig = TraceConfiguration.Builder().build()
-        Trace.enable(traceConfig)
-   ```
-   {{% /tab %}}
+{{< tabs >}}
+{{% tab "Kotlin" %}}
+```kotlin
+    val traceConfig = TraceConfiguration.Builder().build()
+    Trace.enable(traceConfig)
+```
+{{% /tab %}}
 
-   {{% tab "Java" %}}
-   ```java
-        TraceConfiguration traceConfig = TraceConfiguration.Builder().build();
-        Trace.enable(traceConfig);
-   ```
-   {{% /tab %}}
-   {{< /tabs >}}
+{{% tab "Java" %}}
+```java
+    TraceConfiguration traceConfig = TraceConfiguration.Builder().build();
+    Trace.enable(traceConfig);
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 4. Configure and register the Android Tracer. You only need to do it once, usually in your application's `onCreate()` method:
 
@@ -319,7 +319,7 @@ GlobalTracer.registerIfAbsent(tracer);
 {{% /tab %}}
 {{< /tabs >}}
 
-4. (Optional) - Set the partial flush threshold. You can optimize the workload of the SDK if you create a lot of spans in your application, or on the contrary very few of them. The library waits until the number of finished spans gets above the threshold to write them on disk. A value of `1` writes each span as soon as its finished.
+5. (Optional) - Set the partial flush threshold to optimize the SDK's workload based on the number of spans your application generates. The library waits until the number of finished spans exceeds the threshold before writing them to disk. Setting this value to `1` writes each span as soon as it finishes.
 
 {{< tabs >}} 
 {{% tab "Kotlin" %}}
@@ -341,7 +341,7 @@ AndroidTracer tracer = new AndroidTracer.Builder()
 {{% /tab %}}
 {{< /tabs >}}
 
-5. Start a custom span using the following method:
+6. Start a custom span using the following method:
 
 {{< tabs >}} 
 {{% tab "Kotlin" %}}
@@ -366,7 +366,7 @@ span.finish();
 {{% /tab %}}
 {{< /tabs >}}
 
-6. To use scopes in synchronous calls:
+7. To use scopes in synchronous calls:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -431,7 +431,7 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
-7. To use scopes in asynchronous calls:
+8. To use scopes in asynchronous calls:
 
     {{< tabs >}}
 {{% tab "Kotlin" %}}
@@ -484,7 +484,7 @@ try {
 {{% /tab %}}
     {{< /tabs >}}
    
-8. (Optional) To manually distribute traces between your environments, for example frontend to backend:
+9. (Optional) To manually distribute traces between your environments, for example frontend to backend:
 
    a. Inject tracer context in the client request.
 
@@ -570,13 +570,13 @@ Span serverSpan = tracer.buildSpan("<SERVER_SPAN_NAME>").asChildOf(extractedCont
 
 **Note**: For code bases using the OkHttp client, Datadog provides the [implementation below](#okhttp).
 
-9. (Optional) To provide additional tags alongside your span:
+10. (Optional) To provide additional tags alongside your span:
 
 ```kotlin
 span.setTag("http.url", url)
 ```
 
-10. (Optional) To mark a span as having an error, log it using OpenTracing tags:
+11. (Optional) To mark a span as having an error, log it using OpenTracing tags:
 
 ```kotlin
 span.log(mapOf(Fields.ERROR_OBJECT to throwable))
@@ -593,7 +593,7 @@ AndroidTracer.logThrowable(span, throwable)
 AndroidTracer.logErrorMessage(span, message)
 ```
 
-11. If you need to modify some attributes in your Span events before batching you can do so by providing an implementation of `SpanEventMapper` when enabling Trace feature:
+12. If you need to modify some attributes in your Span events before batching you can do so by providing an implementation of `SpanEventMapper` when enabling Trace feature:
 
 {{< tabs >}} 
 {{% tab "Kotlin" %}}
@@ -945,3 +945,5 @@ The following methods in `AndroidTracer.Builder` can be used when initializing t
 [7]: /real_user_monitoring/android/?tab=us
 [8]: https://github.com/opentracing-contrib/java-rxjava
 [9]: https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3
+[10]: /tracing/trace_collection/custom_instrumentation/android/otel
+[11]: https://opentracing.io

@@ -1,6 +1,5 @@
 ---
 title: Tables
-kind: documentation
 disable_toc: false
 aliases:
 - /service_management/app_builder/tables/
@@ -12,6 +11,10 @@ further_reading:
   tag: "Documentation"
   text: "Build Apps"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">App Builder is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 This page describes advanced features you can use to manipulate table components in your App Builder apps.
 

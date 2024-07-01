@@ -1,6 +1,5 @@
 ---
 title: Serverless
-kind: documentation
 aliases:
   - /graphing/infrastructure/cloudfunctions
   - /graphing/infrastructure/serverless_functions

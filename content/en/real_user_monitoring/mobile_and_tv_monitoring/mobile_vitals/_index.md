@@ -1,6 +1,5 @@
 ---
 title: Mobile Vitals
-kind: documentation
 aliases:
 - /real_user_monitoring/android/mobile_vitals
 - /real_user_monitoring/ios/mobile_vitals

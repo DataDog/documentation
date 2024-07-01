@@ -1,6 +1,5 @@
 ---
 title: Web View Tracking
-kind: documentation
 aliases:
   - /real_user_monitoring/android/web_view_tracking
   - /real_user_monitoring/ios/web_view_tracking
@@ -210,7 +209,7 @@ See [RUM & Session Replay Billing][4] for details on how webviews in mobile appl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/#npm
+[1]: /real_user_monitoring/browser/setup/#npm
 [2]: /real_user_monitoring/ios/
 [3]: https://docs.datadoghq.com/logs/log_collection/ios
 [4]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing

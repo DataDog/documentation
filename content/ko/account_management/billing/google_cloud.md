@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Google Cloud 통합 빌링
 ---
 

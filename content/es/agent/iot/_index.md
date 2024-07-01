@@ -3,7 +3,6 @@ further_reading:
 - link: /getting_started/agent/
   tag: Documentación
   text: Empezando con el Agent
-kind: documentación
 title: IoT Agent
 ---
 
@@ -52,7 +51,7 @@ Los requisitos exactos de un recurso varían en función del uso que hace de ell
 Para descargar e instalar automáticamente el IoT Agent correcto para tu sistema operativo y la arquitectura de tu conjunto de chips, usa el siguiente comando:
 
 ```shell
-DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 #### Manual

@@ -1,6 +1,5 @@
 ---
 title: Uh oh, Something Went Wrong
-kind: documentation
 private: true
 ---
 

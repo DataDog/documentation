@@ -1,6 +1,5 @@
 ---
 title: Investigate Agent Events
-kind: documentation
 disable_toc: false
 further_reading:
   - link: "/security/default_rules/?category=cat-csm-threats#all"
@@ -28,9 +27,9 @@ With the [Agent Events explorer][13], you can investigate Agent Events separatel
 
 ## Proactively block threats with Active Protection
 
-By default, all OOTB Agent threat detection rules are enabled and actively monitoring for threats.
+By default, all OOTB Agent crypto mining threat detection rules are enabled and actively monitoring for threats.
 
-[Active Protection][18] enables you to proactively block and terminate threats identified by the Datadog Agent threat detection rules.
+[Active Protection][18] enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
 
 ## View Agent events
 

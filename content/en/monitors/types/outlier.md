@@ -1,6 +1,5 @@
 ---
 title: Outlier Monitor
-kind: documentation
 aliases:
     - /guides/outliers
     - /monitors/monitor_types/outlier
@@ -16,6 +15,9 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Consult your monitor status"
+- link: "/watchdog/insights/"
+  tag: "Documentation"
+  text: "Outlier detection in Watchdog Insights"
 ---
 
 ## Overview
@@ -101,7 +103,7 @@ For detailed instructions on the advanced alert options (auto resolve, new group
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][4] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
 
 ## API
 

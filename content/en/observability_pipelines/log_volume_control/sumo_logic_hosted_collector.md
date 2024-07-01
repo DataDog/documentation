@@ -1,6 +1,5 @@
 ---
 title: Log Volume Control for the Sumo Logic Hosted Collector HTTP Logs Source
-kind: document
 disable_toc: false
 ---
 
@@ -71,6 +70,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Edit fields" %}}
 
 {{% observability_pipelines/processors/remap %}}
+
+{{% /tab %}}
+{{% tab "Sensitive Data Scanner" %}}
+
+{{% observability_pipelines/processors/sensitive_data_scanner %}}
 
 {{% /tab %}}
 {{< /tabs >}}

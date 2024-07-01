@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/
-kind: documentación
 title: Facturación de la integración de AWS
 ---
 

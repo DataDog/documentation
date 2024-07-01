@@ -2,7 +2,6 @@
 aliases:
 - /fr/agent/faq/upgrade-between-agent-minor-versions
 - /fr/agent/guide/upgrade-between-agent-minor-versions
-kind: documentation
 title: Passer d'une version mineure de l'Agent Datadog à une autre
 ---
 

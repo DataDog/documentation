@@ -15,7 +15,7 @@ integration_id: express
 integration_title: ExpressJS
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: express
 public_title: Intégration Datadog/ExpressJS

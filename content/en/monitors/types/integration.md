@@ -1,6 +1,5 @@
 ---
 title: Integration Monitor
-kind: documentation
 description: "Monitor metric values or health status from a specific integration"
 aliases:
 - /monitors/monitor_types/integration
@@ -99,7 +98,7 @@ See the [Monitor configuration][5] documentation for information on [No data][6]
 
 #### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][9] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][9] page.
 
 ## Further Reading
 

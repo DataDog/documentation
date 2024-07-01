@@ -1,6 +1,5 @@
 ---
 title: Writing Custom Rules with Rego
-kind: guide
 aliases:
   - /security_platform/cloud_security_management/guide/writing_rego_rules/
 further_reading:

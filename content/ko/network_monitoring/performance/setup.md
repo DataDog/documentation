@@ -15,7 +15,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-consul-with-datadog-npm/
   tag: 블로그
   text: Datadog NPM는 콘술 네트워킹을 지원합니다.
-kind: 설명서
 title: 네트워크 성능 모니터링 설정
 ---
 
@@ -90,7 +89,7 @@ Datadog으로 Istio 환경을 모니터링하는 방법에 대해 자세히 살�
 - Chef 12.7+: [Datadog 셰프 레시피][12]를 참조하세요.
 - Ansible 2.6+: [Datadog Ansible 역할][13]을 참조하세요.
 
-## 서비스 계정
+## 설정
 
 해당 툴의 중점과 강점은 네트워크 엔드포인트 간 트래픽을 분석하고 네트워크 종속성을 매핑하는 것이므로, 이러한 성능을 극대화하려면 인프라스트럭처 내 중요 하위 집합과 **최소 2개 호스트**에 설치할 것을 권장합니다.
 
@@ -361,7 +360,6 @@ Helm을 사용하지 않는다면 처음부터 쿠버네티스(Kubernetes)에서
 오퍼레이터에서 네트워크 성능 모니터링 기능을 사용하도록 구성하려면 다음과 같이 설정하세요.
 
 ```yaml
-kind: DatadogAgent
 apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder

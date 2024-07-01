@@ -14,7 +14,6 @@ further_reading:
 - link: tracing/glossary/
   tag: Documentation
   text: サービス、リソース、トレースの詳細
-kind: documentation
 title: Java ランタイムメトリクス
 type: multi-code-lang
 ---

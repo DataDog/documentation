@@ -1,6 +1,5 @@
 ---
 title: Service Definitions and Supported Versions
-kind: documentation
 further_reading:
 - link: "/tracing/service_catalog/adding_metadata"
   tag: "Documentation"
@@ -190,8 +189,8 @@ The `inheritFrom` field instructs the ingestion pipeline to inherit metadata fro
 Note: The entity reference only applies to an entity from the same YAML file. 
 
 ##### Implicit Inheritance 
-Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:library`) inherit all metadata from the application that it belongs to under the following conditions:
-- The component belongs to only *one* application in the same YAML file. For example, if a component of `kind:service` is specified as part of two separate `kind:application` definitions, it does not implicitly inherit the metadata from either parent application. 
+Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit all metadata from the application that they belong to under the following conditions:
+- There is only one application defined in the YAML file.
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
 
 #### v3.0 API endpoints (alpha)

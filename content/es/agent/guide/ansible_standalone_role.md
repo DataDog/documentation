@@ -1,7 +1,6 @@
 ---
 dependencies:
 - https://github.com/DataDog/ansible-datadog/blob/main/README.md
-kind: documentation
 title: Configurar Ansible con un rol independiente de Datadog
 ---
 El rol Ansible del Datadog Agent instala y configura el Datadog Agent y sus integraciones.
@@ -348,8 +347,8 @@ Cuando la variable `datadog_macos_download_url` no está definida, se usa el paq
 
 | Versión del Agent | URL predeterminada del paquete DMG de macOS                                |
 |---------------|--------------------------------------------------------------|
-| 6             | https://s3.amazonaws.com/dd-agent/datadog-agent-6-latest.dmg |
-| 7             | https://s3.amazonaws.com/dd-agent/datadog-agent-7-latest.dmg |
+| 6             | https://install.datadoghq.com/datadog-agent-6-latest.dmg |
+| 7             | https://install.datadoghq.com/datadog-agent-7-latest.dmg |
 
 Para anular el comportamiento por defecto, cambia esta variable a un valor distinto de una cadena vacía.
 

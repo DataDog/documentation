@@ -1,5 +1,4 @@
 ---
-kind: ドキュメント
 title: Application Gateway コンポーネント
 ---
 

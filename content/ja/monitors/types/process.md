@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-fargate-processes/
   tag: ブログ
   text: AWS Fargate 上で実行されるプロセスを Datadog で監視する
-kind: documentation
 title: ライブプロセスモニター
 ---
 
@@ -86,9 +85,9 @@ title: ライブプロセスモニター
 
 高度なアラートオプション (自動解決、評価遅延など) の詳細な手順については、[モニターコンフィギュレーション][5]ページを参照してください。
 
-### Multistep API テスト
+### 通知
 
-**Say what's happening** と **Notify your team** のセクションに関する詳しい説明は、[通知][6]のページを参照してください。
+**Configure notifications and automations** (通知と自動化の構成) セクションの詳しい説明は、[通知][6]のページをご覧ください。
 
 ## その他の参考資料
 

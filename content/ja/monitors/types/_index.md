@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/
   tag: ブログ
   text: GitHub Deployment Protection Rules と Datadog で品質チェックの失敗を検出する
-kind: documentation
 title: モニターの種類
 ---
 

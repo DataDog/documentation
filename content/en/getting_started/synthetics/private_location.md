@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Private Locations
-kind: documentation
 further_reading:
     - link: 'https://www.datadoghq.com/blog/synthetic-private-location-monitoring-datadog/'
       tag: 'Blog'
@@ -111,5 +110,5 @@ Use your new private location just like a managed location in your Synthetic tes
 [10]: https://podman.io/
 [11]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [12]: /synthetics/private_locations?tab=windows#install-your-private-location
-[13]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+[13]: https://dd-public-oss-mirror.s3.amazonaws.com/synthetics-windows-pl/datadog-synthetics-worker-1.48.0.amd64.msi
 [14]: https://www.datadoghq.com/legal/eula/

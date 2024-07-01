@@ -6,7 +6,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: サーバーレスモニタリングについて詳しく知ることができるインタラクティブなセッションに参加できます
-kind: documentation
 title: AWS Lambda サーバーレスモニタリングの概要
 ---
 

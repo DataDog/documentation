@@ -1,6 +1,5 @@
 ---
 title: Configuring the Go Tracing Library
-kind: documentation
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20

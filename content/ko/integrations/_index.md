@@ -6,6 +6,9 @@ aliases:
 - /ko/integrations/mainstorconcept_ziris/
 - /ko/integrations/rookout/
 - /ko/integrations/rookout_license/
+- /ko/integrations/shoreline/
+- /ko/integrations/shoreline_license/
+- /ko/integrations/shoreline_software_license/
 cascade:
 - _target:
     path: /integrations/akamai_datastream_2.md
@@ -89,10 +92,6 @@ cascade:
   aliases:
   - /integrations/komodor_komodor/
 - _target:
-    path: /integrations/shoreline_license.md
-  aliases:
-  - /integrations/shoreline_software_license/
-- _target:
     path: /integrations/stormforge_license.md
   aliases:
   - /integrations/stormforge_stormforge_license/
@@ -117,9 +116,13 @@ cascade:
     path: /integrations/amazon_s3.md
   aliases:
   - /integrations/awss3
+- _target:
+    path: /integrations/snowflake_web.md
+  aliases:
+  - /integrations/snowflake/
 description: 모든 시스템, 앱, 서비스에서 데이터를 수집하세요.
 disable_sidebar: true
-kind: 설명서
+custom_kind: 설명서
 title: 통합
 ---
 

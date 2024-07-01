@@ -1,6 +1,5 @@
 ---
 title: Configuring the Node.js Tracing Library
-kind: documentation
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 30
@@ -15,7 +14,7 @@ further_reading:
       tag: "Documentation"
       text: "Propagating trace context"
     - link: 'tracing/glossary/'
-      tag: 'Use the APM UI'
+      tag: 'Documentation'
       text: 'Explore your services, resources and traces'
     - link: 'tracing/'
       tag: 'Documentation'

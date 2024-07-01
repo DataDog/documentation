@@ -1,6 +1,5 @@
 ---
 title: Event Monitor
-kind: documentation
 description: "Monitor events gathered by Datadog"
 aliases :
     - /monitors/monitor_types/event
@@ -66,7 +65,7 @@ For detailed instructions on the advanced alert options (auto resolve, evaluatio
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][5] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
 
 #### Event template variables
 

@@ -1,6 +1,5 @@
 ---
 title: Ruby Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
     - /tracing/opentracing/ruby
     - /tracing/manual_instrumentation/ruby
@@ -26,6 +25,20 @@ If you have not yet read the instructions for auto-instrumentation and setup, re
 
 This page details describes use cases for adding and customizing observability with Datadog APM.
 
+## Requirements
+
+Make sure you require the appropriate gem for your [Ruby tracer version][8]:
+
+- For v2.x, require the `datadog` gem:
+  ```ruby
+  require 'datadog'
+  ```
+
+- For v1.x, require the `ddtrace` gem:
+  ```ruby
+  require 'ddtrace'
+  ```
+
 ## Adding tags
 
 Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
@@ -34,15 +47,13 @@ Add custom [span tags][1] to your [spans][2] to customize your observability wit
 
 Add custom tags to your spans corresponding to any dynamic value within your application code such as `customer.id`.
 
-{{< tabs >}}
-{{% tab "Active Span" %}}
+#### Active spans
+
 Access the current active [span][1] from any method within your code. 
 
 **Note**: If the method is called and there is no active span, `active_span` is `nil`.
 
 ```ruby
-require 'ddtrace'
-
 # get '/shopping_cart/:customer_id', to: 'shopping_cart#index'
 class ShoppingCartController < ApplicationController
   # GET /shopping_cart
@@ -60,10 +71,7 @@ class ShoppingCartController < ApplicationController
 end
 ```
 
-[1]: /tracing/glossary/#spans
-{{% /tab %}}
-
-{{% tab "Manually Instrumented Spans" %}}
+#### Manually instrumented spans
 
 Add [tags][1] directly to `Datadog::Span` objects by calling `#set_tag`:
 
@@ -78,10 +86,8 @@ get '/posts' do
 end
 ```
 
-
 [1]: /tracing/glossary/#span-tags
-{{% /tab %}}
-{{< /tabs >}}
+
 
 ### Adding tags globally to all spans
 
@@ -102,7 +108,6 @@ There are two ways to set an error on a span:
 - Call `span.set_error` and pass in the Exception Object. This automatically extracts the error type, message, and backtrace.
 
 ```ruby
-require 'ddtrace'
 require 'timeout'
 
 def example_method
@@ -125,7 +130,6 @@ example_method()
 Default behavior for `on_error`:
 
 ```ruby
-require 'ddtrace'
 require 'timeout'
 
 def example_method
@@ -142,7 +146,6 @@ end
 Custom behavior for `on_error`:
 
 ```ruby
-require 'ddtrace'
 require 'timeout'
 
 def example_method
@@ -306,3 +309,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [5]: /tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
 [6]: /tracing/trace_collection/trace_context_propagation/ruby/
 [7]: /tracing/security
+[8]: https://github.com/DataDog/dd-trace-rb/releases

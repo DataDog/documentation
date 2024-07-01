@@ -14,7 +14,6 @@ further_reading:
   tag: ドキュメント
   text: エラー追跡モニターを作成する
 is_beta: true
-kind: documentation
 title: ログのエラー追跡
 ---
 

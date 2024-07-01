@@ -1,6 +1,5 @@
 ---
 title: Grouping Logs Into Transactions
-kind: documentation
 description: 'Group queried logs into transactions.'
 further_reading:
 - link: 'logs/explorer/'

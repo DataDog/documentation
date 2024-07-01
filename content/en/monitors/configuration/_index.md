@@ -1,6 +1,5 @@
 ---
 title: Configure Monitors
-kind: documentation
 description: Describes the monitor creation page.
 aliases:
   - /monitors/create/configuration
@@ -20,10 +19,9 @@ further_reading:
 
 To start configuring the monitor, complete the following:
 
-* **Define the search query:** Construct a query to count events, measure metrics, group by one or several dimensions, etc.
+* **Define the search query:** Construct a query to count events, measure metrics, group by one or several dimensions, and more.
 * **Set alert conditions:** Define alert and warning thresholds , evaluation time frames, and configure advanced alert options.
-* **Say what's happening:** Write a custom notification title and message with variables.
-* **Notify your team:** Choose how notifications are sent to your teams (email, Slack, PagerDuty, etc)
+* **Configure notifications and automations:** Write a custom notification title and message with variables. Choose how notifications are sent to your teams (email, Slack, or PagerDuty). Include workflow automations or cases in the alert notification.
 
 ## Define the search query
 
@@ -143,7 +141,7 @@ See the documentation for [process check][1], [integration check][2], and [custo
 
 
 [1]: /monitors/types/process_check/
-[2]: /monitors/types/integration/?tab=checkalert#integration-status
+[2]: /monitors/types/integration/?tab=checkalert#integration-metric
 [3]: /monitors/types/custom_check/
 {{% /tab %}}
 {{< /tabs >}}
@@ -245,19 +243,28 @@ Delay evaluation by `N` seconds.
 
 The time (in seconds) to delay evaluation. This should be a non-negative integer. So, if the delay is set to 900 seconds (15 minutes), the monitor evaluation is during the last `5 minutes`, and the time is 7:00, the monitor evaluates data from 6:40 to 6:45. The maximum configurable evaluation delay is 86400 seconds (24 hours).
 
-## Notify your team
+## Configure notifications and automations
 
 Configure your notification messages to include the information you are most interested in. Specify which teams to send these alerts to as well as which attributes to trigger alerts for.
 
 ### Message
 
 Use this section to configure notifications to your team and configure how to send these alerts:
+
   - [Configure your notification with Template Variables][5]
-  - [Send notifications to your team through email, Slack, PagerDuty, etc.][6]
+  - [Send notifications to your team through email, Slack, or PagerDuty][6]
 
-  For more information on the configuration options for the notification message, see [Alerting Notifications][7].
+For more information on the configuration options for the notification message, see [Alerting Notifications][7].
 
-### Alert grouping
+### Add metadata
+
+<div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations. See the <a href="/monitors/manage/">Manage Monitors documentation</a>.</div>
+
+1. Use the **Tags** dropdown to associate [tags][9] with your monitor.
+1. Use the **Teams** dropdown to associate [teams][10] with your monitor.
+1. Choose a **Priority**.
+
+### Set alert aggregation
 
 Alerts are grouped automatically based on your selection of the `group by` step when defining your query. If the query has no grouping, it defaults to `Simple Alert`. If the query is grouped by any dimension, grouping changes to `Multi Alert`.
 
@@ -293,14 +300,6 @@ If you configure tags or dimensions in your query, these values are available fo
 | _(everything)_                      | One single group triggering one notification | N/A |
 | 1&nbsp;or&nbsp;more&nbsp;dimensions | One notification if one or more groups meet the alert conditions | One notification per group meeting the alert conditions |
 
-## Add metadata
-
-<div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations. See the <a href="/monitors/manage/">Manage Monitors documentation</a>.</div>
-
-1. Use the **Tags** dropdown to associate [tags][9] with your monitor.
-1. Use the **Teams** dropdown to associate [teams][10] with your monitor.
-1. Choose a **Priority**.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -310,8 +309,8 @@ If you configure tags or dimensions in your query, these values are available fo
 [3]: /monitors/configuration/?tab=thresholdalert#auto-resolve
 [4]: /monitors/configuration/?tabs=othermonitortypes#no-data
 [5]: /monitors/notify/variables/
-[6]: /monitors/notify/#notify-your-team
-[7]: /monitors/notify/#say-whats-happening
+[6]: /monitors/notify/#configure-notifications-and-automations
+[7]: /monitors/notify/
 [8]: /monitors/notify/variables/?tab=is_alert#attribute-and-tag-variables
 [9]: /getting_started/tagging/
 [10]: /account_management/teams/

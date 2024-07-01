@@ -1,6 +1,5 @@
 ---
 title: Datadog Resource Catalog
-kind: documentation
 is_beta: true
 aliases:
   - /security_platform/cspm/resource_catalog
@@ -16,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"
   tag: "Blog"
   text: "Govern your infrastructure resources with the Datadog Resource Catalog"
+- link: "https://www.datadoghq.com/blog/infrastructure-troubleshooting-recent-changes/"
+  tag: "Blog"
+  text: "Troubleshoot infrastructure issues faster with Recent Changes"
 ---
 
 {{< site-region region="gov" >}}
@@ -93,6 +95,20 @@ Clicking on a resource opens a side panel with details including:
 
 Click the **Share** button and select **Share event** to share a link to the current resource with your teammates through email, Slack, and more. See all of the [Datadog notification integrations][3] available for this feature.
 
+### Recent changes
+
+Use the **Recent Changes** tab on a resource's side panel to see a 7-day history of changes to the resource and its configuration. To forward change events from your cloud environments, follow the links or instructions for your cloud providers below:
+
+**Note**: Contact [Datadog support][7] to enable change event forwarding from your Azure environment.
+
+#### AWS
+
+See the [AWS Config integration page][6] to launch a CloudFormation template that sets up change event forwarding through AWS Config.
+
+#### Google Cloud Platform
+
+See the [Resource change collection][8] section of the Google Cloud Platform integration page for instructions on forwarding change events through a Pub/Sub topic and subscription.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -102,7 +118,8 @@ Click the **Share** button and select **Share event** to share a link to the cur
 [3]: /integrations/#cat-notification
 [4]: /account_management/teams
 [5]: https://app.datadoghq.com/infrastructure/catalog/configuration
-
-
+[6]: /integrations/amazon_config/#events
+[7]: /help/
+[8]: /integrations/google_cloud_platform/#resource-change-collection
 
 

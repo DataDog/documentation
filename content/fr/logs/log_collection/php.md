@@ -23,7 +23,6 @@ further_reading:
 - link: /glossary/#tail
   tag: Glossaire
   text: Entrée du glossaire pour le terme « tail »
-kind: documentation
 title: Collecte de logs avec PHP
 ---
 
@@ -191,8 +190,8 @@ instances:
 logs:
 
   - type: file
-    path: "/chemin/vers/votre/php/application-json.log"
-    service: "<NOM_SERVICE>"
+    path: "<path_to_your_php_application_json>.log"
+    service: "<service_name>"
     source: php
     sourcecategory: sourcecode
 ```
@@ -552,5 +551,5 @@ Ajoutez ce qui suit :
 [10]: https://symfony.com/
 [11]: /fr/agent/logs/?tab=tailfiles#activate-log-collection
 [12]: /fr/agent/logs/?tab=tailfiles#custom-log-collection
-[13]: /fr/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[13]: /fr/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 [14]: /fr/glossary/#tail

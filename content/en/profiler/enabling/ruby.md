@@ -1,6 +1,5 @@
 ---
 title: Enabling the Ruby Profiler
-kind: Documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 40
@@ -27,7 +26,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
 
-The Datadog Profiler requires Ruby 2.3+. JRuby and TruffleRuby are not supported.
+The Datadog Profiler requires Ruby 2.5+. JRuby and TruffleRuby are not supported.
 
 The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
@@ -51,17 +50,14 @@ To begin profiling applications:
 
 1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
-2. Add the `ddtrace` gem to your `Gemfile` or `gems.rb` file:
+2. Add the `datadog` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace', '~> 1.21'
+    gem 'datadog', '~> 2.0'
     ```
+3. Install the gems with `bundle install`.
 
-    If you're running a version of `ddtrace` older than 1.15.0, add the `google-protobuf` gem (version ~> 3.0) as a dependency.
-
-2. Install the gems with `bundle install`.
-
-3. Enable the profiler:
+4. Enable the profiler:
 
    {{< tabs >}}
 {{% tab "Environment variables" %}}
@@ -90,7 +86,7 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Add the `ddprofrb exec` command to your Ruby application start command:
+5. Add the `ddprofrb exec` command to your Ruby application start command:
 
     ```shell
     bundle exec ddprofrb exec ruby myapp.rb
@@ -112,12 +108,13 @@ end
     require 'datadog/profiling/preload'
     ```
 
+6. Optional: Set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
-4. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][4].
+7. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][5].
 
 ## Not sure what to do next?
 
-The [Getting Started with Profiler][5] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
 ## Further Reading
 
@@ -126,8 +123,9 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 [1]: /tracing/trace_collection/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
-[4]: https://app.datadoghq.com/profiling
-[5]: /getting_started/profiler/
+[4]: /integrations/guide/source-code-integration/?tab=ruby
+[5]: https://app.datadoghq.com/profiling
+[6]: /getting_started/profiler/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [14]: /profiler/enabling/supported_versions/

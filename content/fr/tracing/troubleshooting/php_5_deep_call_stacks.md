@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Call stacks profondes sur PHP 5
 ---
 PHP prend en charge une call stack quasiment infinie. Toutefois, le hook d'appel de fonction fourni par le Zend Engine, `zend_execute_ex` (`zend_execute` pour PHP 5.4), appelle les méthodes et fonctions PHP à l'aide de la stack C native, ce qui peut provoquer un stack overflow lorsque la call stack dans PHP atteint une profondeur trop importante.

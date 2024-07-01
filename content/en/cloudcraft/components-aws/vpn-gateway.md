@@ -1,6 +1,5 @@
 ---
 title: "VPN Gateway Component"
-kind: documentation
 ---
 ## Overview
 
