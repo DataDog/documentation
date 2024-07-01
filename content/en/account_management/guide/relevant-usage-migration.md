@@ -49,16 +49,16 @@ The following new keys will be added:
 - `rum_mobile_lite_session_count_reactnative`
 - `rum_mobile_lite_session_count_roku`
 
-RUM usage in the **Get hourly usage by product family** v2 endpoint will be shown under one `rum` product family with three keys representing SKUs that your RUM usage might be billed on:
+RUM usage in the **Get hourly usage by product family** endpoint will be shown under one `rum` product family with three keys representing SKUs that your RUM usage might be billed on:
 - `rum`
 - `rum_replay`
 - `rum_lite`
 
-Legacy product families and usage types will be deprecated and displayed as `null` in the **Get hourly usage by product family** v2 endpoint.
+Legacy product families and usage types will be deprecated and displayed as `null` in the **Get hourly usage by product family** endpoint.
 
  #### Current response structure
 
- A current example of a response for the [Get hourly usage by product family][1] v2 endpoint follows:
+ A current example of a response for the [Get hourly usage by product family][1] endpoint follows:
  {{< code-block lang="json">}}
  {
   "data": [
@@ -147,7 +147,7 @@ Legacy product families and usage types will be deprecated and displayed as `nul
 
 #### Upcoming response structure
 
-After October 1, 2024, the [Get hourly usage by product family][1] v2 endpoint will have the following example structure:
+After October 1, 2024, the [Get hourly usage by product family][1] endpoint will have the following example structure:
 
 {{< highlight json "hl_lines=7 14 17 22 27 31 85 99" >}}
 {
@@ -352,7 +352,7 @@ The following new keys describe RUM usage:
 - `rum_mobile_lite_session_count_reactnative_agg_sum`
 - `rum_mobile_lite_session_count_roku_agg_sum`
 
-RUM usage in the **Get usage across your account** v1 endpoint will include three keys representing SKUs that your RUM usage might be billed on:
+RUM usage in the **Get usage across your account** endpoint will include three keys representing SKUs that your RUM usage might be billed on:
 - `rum`
 - `rum_replay`
 - `rum_lite`
@@ -361,7 +361,7 @@ The SKUs that are not active for your org will be null. The 13 usage types will 
 
 #### Current response structure
 
-A current example of a response for the [Get usage across your account][2] v1 endpoint follows:
+A current example of a response for the [Get usage across your account][2] endpoint follows:
 {{< code-block lang="json">}}
 {
   "usage": {
@@ -380,7 +380,7 @@ A current example of a response for the [Get usage across your account][2] v1 en
 
 #### Upcoming response structure
 
-After October 1, 2024, the [Get usage across your account][2] v1 endpoint will have the following example structure:
+After October 1, 2024, the [Get usage across your account][2] endpoint will have the following example structure:
 
 {{< highlight json "hl_lines=3 8 23" >}}
 {
@@ -430,7 +430,7 @@ You can continue to calculate the usage across all retention periods by summing 
 
 #### Current response structure
 
-A current example of a response for the [Get usage across your account][2] v1 endpoint follows:
+A current example of a response for the [Get usage across your account][2] endpoint follows:
 {{< code-block lang="json">}}
 {
   "usage": {
@@ -461,7 +461,7 @@ A current example of a response for the [Get usage across your account][2] v1 en
 
 #### Upcoming response structure
 
-After October 1, 2024, the [Get usage across your account][2] v1 endpoint will have the following example structure:
+After October 1, 2024, the [Get usage across your account][2] endpoint will have the following example structure:
 
 {{< highlight json "hl_lines=3-5 17-20 31-34" >}}
 {
