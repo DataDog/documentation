@@ -49,7 +49,7 @@ The following new keys will be added:
 - `rum_mobile_lite_session_count_reactnative`
 - `rum_mobile_lite_session_count_roku`
 
-RUM usage in the **Get hourly usage by product family** v2 endpoint will be shown under one _RUM_ product family with three keys representing SKUs that your RUM usage may be billed on:
+RUM usage in the **Get hourly usage by product family** v2 endpoint will be shown under one `rum` product family with three keys representing SKUs that your RUM usage may be billed on:
 - `rum`
 - `rum_replay`
 - `rum_lite`
@@ -248,7 +248,7 @@ After October 1, 2024, the [Get hourly usage by product family][1] v2 endpoint w
             "value": null
           }
 
-// One existing product family (rum) ; rum_browser_sessions and rum_mobile_sessions product families are nulled
+// One active existing product family (rum); rum_browser_sessions and rum_mobile_sessions product families are legacy product families represented as null
  {
       "id": "abcd",
       "type": "usage_timeseries",
@@ -404,7 +404,7 @@ After October 1, 2024, the [Get usage across your account][2] v1 endpoint will h
     "rum_mobile_lite_session_count_flutter_agg_sum": 0,
     "rum_mobile_lite_session_count_ios_agg_sum": 0,
     "rum_mobile_lite_session_count_reactnative_agg_sum": 0,
-    "rum_mobile_lite_session_count_roku_agg_sum": 0
+    "rum_mobile_lite_session_count_roku_agg_sum": 0,
 
 // Legacy usage keys are nulled
    "rum_session_count_agg_sum": null,
