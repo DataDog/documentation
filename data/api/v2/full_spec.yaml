@@ -6594,6 +6594,114 @@ components:
       type: string
       x-enum-varnames:
       - DETAILED_FINDING
+    DeviceAttributes:
+      description: The device attributes
+      properties:
+        description:
+          description: The device description
+          example: a device monitored with NDM
+          type: string
+        device_type:
+          description: The device type
+          example: other
+          type: string
+        integration:
+          description: The device integration
+          example: snmp
+          type: string
+        interface_statuses:
+          $ref: '#/components/schemas/DeviceAttributesInterfaceStatuses'
+        ip_address:
+          description: The device IP address
+          example: 1.2.3.4
+          type: string
+        location:
+          description: The device location
+          example: paris
+          type: string
+        model:
+          description: The device model
+          example: xx-123
+          type: string
+        name:
+          description: The device name
+          example: example device
+          type: string
+        os_hostname:
+          description: The device OS hostname
+          type: string
+        os_name:
+          description: The device OS name
+          example: example OS
+          type: string
+        os_version:
+          description: The device OS version
+          example: 1.0.2
+          type: string
+        ping_status:
+          description: The device ping status
+          example: unmonitored
+          type: string
+        product_name:
+          description: The device product name
+          example: example device
+          type: string
+        serial_number:
+          description: The device serial number
+          example: X12345
+          type: string
+        status:
+          description: The device SNMP status
+          example: ok
+          type: string
+        subnet:
+          description: The device subnet
+          example: 1.2.3.4/24
+          type: string
+        sys_object_id:
+          description: The device sysObjectID
+          example: 1.3.6.1.4.1.99999
+          type: string
+        tags:
+          description: The list of device tags
+          example:
+          - device_ip:1.2.3.4
+          - device_id:example:1.2.3.4
+          items:
+            type: string
+          type: array
+        vendor:
+          description: The device vendor
+          example: example vendor
+          type: string
+        version:
+          description: The device version
+          example: 1.2.3
+          type: string
+      type: object
+    DeviceAttributesInterfaceStatuses:
+      additionalProperties:
+        format: int64
+        type: integer
+      description: List of the device interfaces and their respective statuses
+      example:
+        down: 13
+        up: 2
+        warning: 4
+      type: object
+    DevicesData:
+      description: The devices list data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DeviceAttributes'
+        id:
+          description: The device ID
+          example: example:1.2.3.4
+          type: string
+        type:
+          description: The type of the resource. The value should always be device.
+          type: string
+      type: object
     DowntimeCreateRequest:
       description: Request for creating a downtime.
       properties:
@@ -11930,6 +12038,21 @@ components:
           example: One or several indexes are missing or invalid, results hold data
             from the other indexes
           type: string
+      type: object
+    MetaData:
+      description: Object describing meta attributes of response.
+      properties:
+        page:
+          $ref: '#/components/schemas/MetaDataPage'
+      type: object
+    MetaDataPage:
+      description: Pagination object.
+      properties:
+        total_filtered_count:
+          description: Total count of devices matched by the filter.
+          example: 1
+          format: int64
+          type: integer
       type: object
     Metric:
       description: Object for a single metric tag configuration.
@@ -32065,6 +32188,79 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/ndm/devices:
+    get:
+      description: Get the list of devices.
+      operationId: ListDevices
+      parameters:
+      - description: The page number to fetch.
+        example: 0
+        in: query
+        name: page[number]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The number of devices to return per page.
+        example: 10
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: The field to sort the devices by.
+        example: status
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      - description: Filter devices by tag.
+        example: status:ok
+        in: query
+        name: filter[tag]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/DevicesData'
+                    type: array
+                  meta:
+                    $ref: '#/components/schemas/MetaData'
+                type: object
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get the list of devices
+      tags:
+      - Network Device Monitoring
+      x-menu-order: 1
+      x-undo:
+        type: safe
   /api/v2/org_configs:
     get:
       description: Returns all Org Configs (name, description, and value).
@@ -39467,6 +39663,10 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/create/types/
   name: Monitors
+- description: The Network Device Monitoring API allows you to fetch devices and interfaces
+    and their attributes. See the [Network Device Monitoring page](https://docs.datadoghq.com/network_monitoring/)
+    for more information.
+  name: Network Device Monitoring
 - description: Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/)
     directly through the Datadog API.
   name: Okta Integration

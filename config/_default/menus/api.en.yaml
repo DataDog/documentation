@@ -6083,6 +6083,22 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Network Device Monitoring
+      url: /api/latest/network-device-monitoring/
+      identifier: network-device-monitoring
+      generated: true
+    - name: Get the list of devices
+      url: '#get-the-list-of-devices'
+      identifier: network-device-monitoring-get-the-list-of-devices
+      parent: network-device-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDevices
+        unstable: []
+        order: 1
     - name: Okta Integration
       url: /api/latest/okta-integration/
       identifier: okta-integration
