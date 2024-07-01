@@ -8,9 +8,12 @@ further_reading:
 - link: "/tracing/version_tracking"
   tag: "Documentation"
   text: "Use Version tags within Datadog APM to monitor deployments"
+- link: "https://www.datadoghq.com/blog/unified-service-tagging/"
+  tag: "Blog"
+  text: "Tags: set once, access everywhere"
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
-  text: "Learn more about Autodiscovery"
+  text: "Autodiscovery: Tracking services across ephemeral containers"
 algolia:
   tags: ['unified service tags','unified','unified service','service tags']
 ---
@@ -59,6 +62,8 @@ To start configuring unified service tagging, choose your environment:
 
 - [Containerized](#containerized-environment)
 - [Non-Containerized](#non-containerized-environment)
+- [Serverless](#serverless-environment)
+- [OpenTelemetry](#opentelemetry-environment)
 
 ### Containerized environment
 
@@ -405,6 +410,39 @@ instances:
 ### Serverless environment
 
 For more information about AWS Lambda functions, see [how to connect your Lambda telemetry using tags][15].
+
+### OpenTelemetry environment
+
+In OpenTelemetry environments, you can use the [OpenTelemetry Collector][16] to collect and batch telemetry data (like metrics, traces, and logs) and the [OpenTelemetry Exporter][17] to send the data to Datadog (without the Datadog Agent).
+
+To setup unified service tagging in an OpenTelemetry environment:
+
+1. Set the following attributes in your OpenTelemetry configuration to ensure proper tagging:
+
+   ```yaml
+   service.name: "<SERVICE>"
+   deployment.environment: "<ENV>"
+   service.version: "<VERSION>"
+   ```
+   
+1. To [correlate OpenTelemetry language SDK logs and traces][18], translate the OpenTelemetry `TraceId` and `SpanId` properties into the Datadog format, and ensure your logs are sent as JSON files. Your language-level logs must become Datadog attributes for the trace-log correlation to work.
+
+   The following table outlines the key differences between OpenTelemetry and Datadog schemas for tracing and unified service tagging:
+
+   | Domain | OpenTelemetry | Datadog |
+   |---|---|---|
+   | Tracing | `TraceId` and `SpanId` are stored in OpenTelemetry as 32-hex character and 16-hex character. | Stored in Datadog as 64-bit unsigned int. |
+   | Unified service tagging | `service.name`, `deployment.environment`, `service.version` | `service`, `env`, `version` |
+
+   For more information, see [Correlating OpenTelemetry Traces and Logs][19]. 
+
+1. To ensure span kind statistics are computed and services are properly aggregated by their peers, you can enable the following settings in the OpenTelemetry Exporter's YAML configuration file:
+
+   ```yaml
+   compute_stats_by_span_kind: true
+   peer_service_aggregation: true
+   ```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -424,3 +462,7 @@ For more information about AWS Lambda functions, see [how to connect your Lambda
 [13]: https://www.chef.io/
 [14]: https://www.ansible.com/
 [15]: /serverless/configuration/#connect-telemetry-using-tags
+[16]: /opentelemetry/collector_exporter/
+[17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
+[18]: /tracing/other_telemetry/connect_logs_and_traces/
+[19]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/
