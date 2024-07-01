@@ -367,6 +367,20 @@ Events include additional context:
 |               | `resourceEvent.additionalInformation.userInfo`   | Contains the global user info set by `DdSdkReactNative.setUser`.        |
 |               | `resourceEvent.additionalInformation.attributes` | Contains the global attributes set by `DdSdkReactNative.setAttributes`. |
 
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```kotlin
+   fun getCurrentSessionId(promise: Promise) {
+       datadog.getRumMonitor().getCurrentSessionId {
+           promise.resolve(it)
+        }
+    }
+```
+
 ## Resource timings
 
 Resource tracking provides the following timings:
