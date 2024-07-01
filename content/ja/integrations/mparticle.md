@@ -11,7 +11,7 @@ integration_id: mparticle
 integration_title: mParticle
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: mparticle
 public_title: Datadog-mParticle インテグレーション

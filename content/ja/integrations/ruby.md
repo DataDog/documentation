@@ -23,7 +23,7 @@ integration_id: ruby
 integration_title: Ruby
 integration_version: ''
 is_public: true
-kind: インテグレーション
+custom_kind: integration
 manifest_version: '1.0'
 name: ruby
 public_title: Datadog-Ruby インテグレーション
