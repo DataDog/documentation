@@ -158,10 +158,10 @@ Triggering a workflow using an API call requires an [API key][8] and an [applica
 You can trigger a workflow by sending a POST request with the workflow ID to the endpoint `https://api.datadoghq.com/api/v2/workflows/WORKFLOW-ID/instances`. When you add an API trigger to a workflow, the trigger interface gives you an example cURL request that you can use to trigger the workflow.
 
 To add an API trigger to a workflow:
-1. Click **Add Trigger** > **API** to add an API trigger to your workflow.
+1. Click **Add Trigger** > **API**.
 1. On the workflow canvas, click **API** and note the example workflow cURL request, which includes the required headers and data to trigger your workflow.
 
-   An cURL request to trigger a workflow looks something like this:
+   A cURL request to trigger a workflow looks something like this:
    {{< code-block lang="shell" >}}
 curl -X POST \
   -H "Content-Type: application/json" \
