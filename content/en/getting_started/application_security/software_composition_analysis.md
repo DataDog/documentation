@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Software Composition Analysis
-kind: documentation
 aliases:
 - /getting_started/application_security/vulnerability_management
 further_reading:

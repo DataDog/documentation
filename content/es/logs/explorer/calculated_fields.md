@@ -1,6 +1,5 @@
 ---
 disable_toc: false
-kind: documentation
 private: true
 title: Campos calculados
 ---

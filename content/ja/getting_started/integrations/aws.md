@@ -27,7 +27,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
   tag: ブログ
   text: Datadog で Graviton3 搭載の EC2 インスタンスを監視する
-kind: documentation
 title: AWS の概要
 ---
 

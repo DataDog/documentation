@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Logs
-kind: documentation
 further_reading:
     - link: 'https://learn.datadoghq.com/courses/intro-to-log-management'
       tag: 'Learning Center'

@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Détection automatique des déploiements défectueux
 ---
 

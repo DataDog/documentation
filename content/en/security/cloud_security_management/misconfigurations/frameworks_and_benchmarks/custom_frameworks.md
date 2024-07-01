@@ -1,6 +1,5 @@
 ---
 title: Create Custom Compliance Frameworks
-kind: documentation
 aliases:
   - /security/misconfigurations/frameworks_and_benchmarks/custom_frameworks
 further_reading:

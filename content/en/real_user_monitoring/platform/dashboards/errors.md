@@ -1,6 +1,5 @@
 ---
 title: RUM Error Dashboards
-kind: documentation
 aliases:
 - '/real_user_monitoring/platform/dashboards/errors_dashboard'
 further_reading:

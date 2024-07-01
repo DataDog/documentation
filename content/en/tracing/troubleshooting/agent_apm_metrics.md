@@ -1,6 +1,5 @@
 ---
 title: APM metrics sent by the Datadog Agent
-kind: Documentation
 aliases:
     - /agent/faq/agent-apm-metrics/
     - /tracing/send_traces/agent-apm-metrics/

@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Monitors
-kind: documentation
 aliases:
   - /getting_started/application/monitors
 further_reading:

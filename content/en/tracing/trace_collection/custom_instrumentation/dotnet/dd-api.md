@@ -1,6 +1,5 @@
 ---
 title: .NET Custom Instrumentation using Datadog API
-kind: documentation
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1

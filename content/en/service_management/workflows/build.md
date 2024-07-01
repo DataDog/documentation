@@ -1,6 +1,5 @@
 ---
 title: Build workflows
-kind: documentation
 disable_toc: false
 aliases:
 - /workflows/build

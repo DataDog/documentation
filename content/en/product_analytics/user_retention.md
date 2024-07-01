@@ -1,6 +1,5 @@
 ---
 title: User Retention
-kind: documentation
 description: Measure user retention to understand overall user satisfaction with your application.
 further_reading:
     - link: '/product_analytics/'

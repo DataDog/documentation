@@ -1,6 +1,5 @@
 ---
 title: Log Workspaces
-kind: documentation
 disable_toc: false
 ---
 

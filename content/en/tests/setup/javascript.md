@@ -1,6 +1,5 @@
 ---
 title: JavaScript and TypeScript Tests
-kind: documentation
 code_lang: javascript
 type: multi-code-lang
 code_lang_weight: 20

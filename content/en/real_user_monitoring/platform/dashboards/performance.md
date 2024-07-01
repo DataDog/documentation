@@ -1,6 +1,5 @@
 ---
 title: RUM Performance Overview Dashboards
-kind: documentation
 aliases:
 - '/real_user_monitoring/dashboards/performance_overview_dashboard/'
 - '/real_user_monitoring/dashboards/resources_dashboard'
