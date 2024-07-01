@@ -1,6 +1,5 @@
 ---
 title: Exploring Database Hosts
-kind: documentation
 description: Explore and dig into your database host health and configuration
 
 ---

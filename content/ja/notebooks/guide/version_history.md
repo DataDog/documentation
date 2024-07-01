@@ -10,7 +10,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dashboards-notebooks-version-history/
   tag: blog
   text: バージョン履歴で Datadog ダッシュボードとノートブックに対する変更を追跡する
-kind: documentation
 title: ノートブックのバージョン履歴
 ---
 

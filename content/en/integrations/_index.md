@@ -1,6 +1,5 @@
 ---
 title: Integrations
-kind: documentation
 disable_sidebar: true
 aliases:
     - /integrations/verisign_openhybrid/

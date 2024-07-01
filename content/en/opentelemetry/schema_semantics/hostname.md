@@ -1,6 +1,5 @@
 ---
 title: Mapping OpenTelemetry Semantic Conventions to Hostnames
-kind: documentation
 further_reading:
 - link: "/opentelemetry/"
   tag: "Documentation"

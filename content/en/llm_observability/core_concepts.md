@@ -10,8 +10,6 @@ LLM Observability is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
-<div class="alert alert-info">LLM Observability is in public beta.</a></div>
-
 ## Spans
 
 A span is a unit of work representing an operation in your LLM application, and is the building block of a [trace](#traces).

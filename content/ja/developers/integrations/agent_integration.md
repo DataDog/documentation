@@ -16,7 +16,6 @@ further_reading:
 - link: /developers/
   tag: Documentation
   text: Datadog プラットフォームで開発する方法について
-kind: documentation
 title: Agent インテグレーションの作成
 ---
 ## 概要

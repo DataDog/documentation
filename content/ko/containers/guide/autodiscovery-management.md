@@ -7,7 +7,6 @@ further_reading:
 - link: /agent/kubernetes/integrations/
   tag: 설명서
   text: 자동탐지 통합 템플릿 만들기 & 불러오기
-kind: guide
 title: 컨테이너 탐지 관리
 ---
 

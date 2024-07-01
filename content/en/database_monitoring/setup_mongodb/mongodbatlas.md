@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for MongoDB Atlas
-kind: documentation
 description: Install and configure Database Monitoring for MongoDB Atlas
 further_reading:
 - link: "/integrations/mongo/"

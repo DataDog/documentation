@@ -1,6 +1,5 @@
 ---
 title: Setup Data Streams Monitoring for Java
-kind: documentation
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'

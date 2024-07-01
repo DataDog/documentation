@@ -23,7 +23,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: データベースモニタリングのレベルアップのためのインタラクティブなセッションに参加できます
-kind: documentation
 title: データベース モニタリング
 ---
 Datadog Database Monitoring は、すべてのホストにわたるデータベースの詳細な可視性を提供します。データベースの正常性とパフォーマンスを理解し、問題が発生したときにトラブルシューティングを行うために、過去のクエリパフォーマンスメトリクスを掘り下げ、計画とホストレベルのメトリクスをすべて 1 か所で説明します。
