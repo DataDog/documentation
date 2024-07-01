@@ -12,6 +12,10 @@ further_reading:
     tag: "External Site"
     text: "OpenTelemetry Protocol Exporter"
 ---
+{{< callout header="false" btn_hidden="true">}}
+  The Datadog OTLP traces intake endpoint is in private beta.
+{{< /callout >}} 
+
 {{< site-region region="ap1,gov" >}}
 <div class="alert alert-warning">OTLP Trace Intake Endpoint is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
