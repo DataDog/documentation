@@ -110,6 +110,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% observability_pipelines/destination_settings/sumo_logic %}}
 
 {{% /tab %}}
+{{% tab "Syslog" %}}
+
+{{% observability_pipelines/destination_settings/syslog %}}
+
+{{% /tab %}}
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
@@ -226,6 +231,11 @@ Follow the instructions for the cloud provider you are using to archive your log
 {{% tab "Sumo Logic" %}}
 
 {{% observability_pipelines/destination_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{% tab "Syslog" %}}
+
+{{% observability_pipelines/destination_env_vars/syslog %}}
 
 {{% /tab %}}
 {{% tab "Chronicle" %}}

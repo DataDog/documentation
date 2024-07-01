@@ -49,6 +49,11 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/destination_settings/sumo_logic %}}
 
 {{% /tab %}}
+{{% tab "Syslog" %}}
+
+{{% observability_pipelines/destination_settings/syslog %}}
+
+{{% /tab %}}
 {{% tab "Chronicle" %}}
 
 {{% observability_pipelines/destination_settings/chronicle %}}
@@ -155,6 +160,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Sumo Logic" %}}
 
 {{% observability_pipelines/destination_env_vars/sumo_logic %}}
+
+{{% /tab %}}
+{{% tab "Syslog" %}}
+
+{{% observability_pipelines/destination_env_vars/syslog %}}
 
 {{% /tab %}}
 {{% tab "Chronicle" %}}
