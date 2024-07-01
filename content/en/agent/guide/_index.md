@@ -1,6 +1,5 @@
 ---
 title: Agent Guides
-kind: guide
 private: true
 disable_toc: true
 cascade:
@@ -30,6 +29,7 @@ cascade:
     {{< nextlink href="agent/guide/private-link" >}}Forward your telemetry securely to Datadog over AWS PrivateLink{{< /nextlink >}}
     {{< nextlink href="agent/guide/azure-private-link" >}}Connect to Datadog over Azure Private Link{{< /nextlink >}}
     {{< nextlink href="agent/guide/why-should-i-install-the-agent-on-my-cloud-instances" >}}Why should I install the Datadog Agent on my cloud instances?{{< /nextlink >}}
+    {{< nextlink href="agent/guide/gcp-private-service-connect" >}}Connect to Datadog over GCP Private Service Connect{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Integration guides:" >}}

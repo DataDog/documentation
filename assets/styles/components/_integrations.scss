@@ -35,6 +35,19 @@ $screen-md-max: ($screen-lg-min - 1) !default;
     height: auto;
   }
 
+  table {
+    tr {
+        th:empty {
+            display: none;
+        }
+
+        td {
+            word-break: break-word;
+            width: 50%;
+        }
+    }
+  }
+
   table.table-metrics {
     tr {
       td {

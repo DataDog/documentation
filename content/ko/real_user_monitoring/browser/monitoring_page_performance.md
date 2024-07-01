@@ -15,7 +15,7 @@ further_reading:
 - link: /real_user_monitoring/explorer/visualize/
   tag: 설명서
   text: 이벤트에 시각화 적용
-- link: /real_user_monitoring/dashboards/
+- link: /real_user_monitoring/platform/dashboards/
   tag: 설명서
   text: RUM 대시보드에 대해 알아보기
 kind: 설명서
@@ -24,7 +24,7 @@ title: 페이지 성능 모니터링
 
 ## 개요
 
-RUM 보기 이벤트는 모든 페이지 보기에 대한 광범위한 성능 메트릭을 수집합니다. 애플리케이션의 페이지 조회수를 모니터링하고 대시보드와 RUM 탐색기에서 성능 메트릭을 탐색하세요.
+RUM 보기 이벤트는 모든 페이지 보기에 대한 광범위한 성능 메트릭을 수집합니다. 애플리케이션의 페이지 조회수를 모니터링하고 대시보드와 RUM Explorer에서 성능 메트릭을 탐색하세요.
 
 {{< img src="real_user_monitoring/browser/waterfall-4.png" alt="RUM 탐색기에서 RUM 보기의 성능 탭에 있는 워터폴 그래프" style="width:100%;" >}}
 
@@ -170,7 +170,7 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-타이밍이 전송되면 타이밍은 `@view.custom_timings.<timing_name>`과 같이 액세스할 수 있습니다(예: `@view.custom_timings.first_scroll`). RUM 탐색기 또는 대시보드에서 시각화를 만들기 전에 [측정값을 만들기][18]를 실행해야 합니다.
+타이밍이 전송되면 타이밍은 `@view.custom_timings.<timing_name>`과 같이 나노초 단위로 액세스할 수 있습니다 (예: `@view.custom_timings.first_scroll`). RUM Explorer 또는 대시보드에서 시각화를 만들기 전에 [측정값을 생성][18]해야 합니다.
 
 단일 페이지 애플리케이션의 경우 `addTiming` API는 현재 RUM 보기의 시작을 기준으로 타이밍을 발행합니다. 예를 들어 사용자가 애플리케이션을 시작(초기 로드)하고 5초 후에 다른 페이지로 이동(경로 변경)하고 8초 후에 최종적으로 `addTiming`을 트리거하는 경우, 타이밍은 `8-5 = 3`초입니다.
 
@@ -195,9 +195,9 @@ document.addEventListener("scroll", function handler() {
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/real_user_monitoring/dashboards/
+[1]: /ko/real_user_monitoring/platform/dashboards/
 [2]: /ko/real_user_monitoring/browser/data_collected/#default-attributes
-[3]: /ko/real_user_monitoring/dashboards/performance
+[3]: /ko/real_user_monitoring/platform/dashboards/performance
 [4]: /ko/real_user_monitoring/explorer/
 [5]: https://web.dev/vitals/
 [6]: /ko/synthetics/browser_tests/

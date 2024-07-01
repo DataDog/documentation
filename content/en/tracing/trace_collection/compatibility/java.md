@@ -21,7 +21,7 @@ The Java Datadog Trace library is open source - view the [GitHub repository][1] 
 
 ### Supported Java runtimes
 
-The Java Tracer supports automatic instrumentation for the following Oracle JDK and OpenJDK JVM runtimes.
+The Java Tracer supports automatic instrumentation for the following Oracle JDK, OpenJDK JVM, and [GraalVM](#graalvm-native-image-support) runtimes.
 
 #### Java Tracer v1 (latest)
 
@@ -105,7 +105,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Ratpack                 | 1.5+       | Fully Supported                                     | `ratpack`                                                |
 | Restlet HTTP Server     | 2.2 - 2.4  | Fully Supported                                     | `restlet-http`.                                          |
 | Spark Java              | 2.3+       | [Beta](#framework-integrations-disabled-by-default) | `sparkjava` (requires `jetty`)                           |
-| Spring Boot             | 1.5        | Fully Supported                                     | `spring-web` or `spring-webflux`                         |
+| Spring Boot             | 1.5+       | Fully Supported                                     | `spring-web` or `spring-webflux`                         |
 | Spring Web (MVC)        | 4.0+       | Fully Supported                                     | `spring-web`                                             |
 | Spring WebFlux          | 5.0+       | Fully Supported                                     | `spring-webflux`                                         |
 | Tomcat                  | 5.5+       | Fully Supported                                     | `tomcat`                                                 |
@@ -160,7 +160,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Java RMI                           | all         | Distributed Tracing Not Supported                   | `rmi`, `rmi-client`, `rmi-server`                       |
 | Jax RS Clients                     | 2.0+        | Fully Supported                                     | `jax-rs`, `jaxrs`, `jax-rs-client`                      |
 | Jersey Client                      | 1.9-2.29    | Fully Supported                                     | `jax-rs`, `jaxrs`, `jax-rs-client`                      |
-| JMS                                | 1 and 2     | Fully Supported                                     | `jms`, `jms-1`, `jms-2`                                 |
+| JMS / Jakarta JMS                  | 1-3.0+      | Fully Supported                                     | `jms`, `jms-1`, `jms-2`, `jakarta-jms`                  |
 | Netty HTTP Client                  | 4.0+        | Fully Supported                                     | `netty`, `netty-4.0`, `netty-4.1`                       |
 | Ning HTTP Client                   | 1.9.0+      | [Beta](#framework-integrations-disabled-by-default) | `ning`                                                  |
 | OkHTTP                             | 2.2+        | Fully Supported                                     | `okhttp`, `okhttp-2`,`okhttp-3`                         |
@@ -199,7 +199,7 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | Lettuce                 | 4.0+     | Fully Supported | `lettuce`, `lettuce-4-async`, `lettuce-5-rx`                                               |
 | MongoDB                 | 3.0-4.0+ | Fully Supported | `mongo`                                                                                    |
 | OpenSearch Rest         | 1.x-2.x  | Fully Supported | `opensearch`, `opensearch-rest`                                                            |
-| OpenSearch Transport    | 1.0+     | Fully Supported | `opensearch`, `opensearch-transport`                                                       |
+| OpenSearch Transport    | 1.x-2.x  | Fully Supported | `opensearch`, `opensearch-transport`                                                       |
 | RediScala               | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                       |
 | Redisson                | 2.x-3.x  | Fully Supported | `redisson`, `redis`                                                                        |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                             |
@@ -279,6 +279,123 @@ Integrations can be enabled or disabled individually (overriding the default abo
 - Running the Java tracer in Bitbucket is not supported.
 - Loading multiple Java Agents that perform APM/tracing functions is not a recommended or supported configuration.
 
+## GraalVM Native Image support
+
+GraalVM Native Image is a technology that allows you to compile Java applications into native executables. The Datadog Java tracer supports GraalVM Native Image. This allows you to compile your applications into native executables while still benefiting from the tracing capabilities offered by the library.
+
+### Requirements
+
+Use the latest versions of:
+
+- [GraalVM][7]
+- [Datadog Java tracer][1]
+
+### Setup
+
+{{< tabs >}}
+{{% tab "GraalVM" %}}
+To set up the Datadog Java tracer with GraalVM Native Image, follow these steps:
+
+1. Instrument your application, following the steps described on [Tracing Java Applications][6].
+2. When you build a native executable with the `native-image` command, add the `-J-javaagent:/path/to/dd-java-agent.jar` argument. For example:
+   ```shell
+   native-image -J-javaagent:/path/to/dd-java-agent.jar -jar App.jar
+   ```
+3. (Optional) Enable the profiler integration by adding the following argument:
+`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+
+[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+{{% /tab %}}
+
+{{% tab "Quarkus Native" %}}
+To set up the Datadog Java tracer with Quarkus Native, follow these steps:
+
+1. Instrument your application, following the steps described in [Tracing Java Applications][6].
+2. When you build a native executable, use the `quarkus.native.additional-build-args` property. For example:
+   ```shell
+   ./mvnw package -Dnative -Dquarkus.native.additional-build-args='-J-javaagent:/path/to/dd-java-agent.jar'
+   ```
+3. (Optional) Enable the profiler integration by adding the following argument:
+`-J-Ddd.profiling.enabled=true –enable-monitoring=jfr`.
+
+[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+{{% /tab %}}
+
+{{% tab "Spring Native" %}}
+To set up the Datadog Java tracer with Spring Native, follow these steps:
+
+1. Instrument your application, following the steps described on [Tracing Java Applications][6].
+2. For Spring Native builds based on Buildpacks, enable the [Paketo Buildpack for Datadog][8] using `BP_DATADOG_ENABLED=true`.
+   - You can do this at the build tool level, like Maven:
+     ```yaml
+     <build>
+     <plugins>
+       <plugin>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-maven-plugin</artifactId>
+         <configuration>
+           <image>
+             ...
+             <env>
+               ...
+               <BP_DATADOG_ENABLED>true</BP_DATADOG_ENABLED>
+               ...
+             </env>
+           </image>
+         </configuration>
+       </plugin>
+     </plugins>
+     </build>
+     ```
+   - Alternatively, you can use the `pack build` command with `--env BP_DATADOG_ENABLED=true` option to enable the Datadog buildpack.
+3. (Optional) Enable the profiler integration by setting the environment variable `BP_NATIVE_IMAGE_BUILD_ARGUMENTS=’-J-Ddd.profiling.enabled=true –enable-monitoring=jfr’`.
+
+[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[8]: https://github.com/paketo-buildpacks/datadog
+{{% /tab %}}
+
+{{< /tabs >}}
+
+#### Usage
+
+After completing the setup, the service should send traces to Datadog.
+
+You can view traces using the [Trace Explorer][9].
+
+{{% collapse-content title="Troubleshooting" level="h4" %}}
+##### Native-image buildpack versions older than 5.12.2
+
+Older native-image buildpack versions expose the following option: `USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM`.
+
+When this option is `false`, exceptions like the following can occur:
+
+```text
+Caused by: org.graalvm.compiler.java.BytecodeParser$BytecodeParserError: 
+com.oracle.graal.pointsto.constraints.UnsupportedFeatureException: 
+No instances of datadog.trace.bootstrap.DatadogClassLoader are allowed in the image heap 
+as this class should be initialized at image runtime. To see how this object got 
+instantiated use --trace-object-instantiation=datadog.trace.bootstrap.DatadogClassLoader.
+```
+
+Solutions to this issue are:
+
+- Set `USE_NATIVE_IMAGE_JAVA_PLATFORM_MODULE_SYSTEM` explicitly to true in the image env configuration,
+- Or upgrade the `native-image` buildpack to version 5.12.2 or later. The best way to do this is by upgrading the `java-native-image` buildpack to 8.13.0 or later.
+
+##### Paketo buildpack for Datadog versions older than 4.6.0
+
+Paketo buildpack for Datadog had a bug in older versions that materialized with the following error message:
+
+```text
+disabling Datadog at launch time is unsupported for Node
+ERROR: failed to launch: exec.d: failed to execute exec.d file at path '/layers
+paketo-buildpacks_datadog/helper/exec.d/toggle': exit status 1
+```
+
+The solution to this issue is to upgrade to version 4.6.0 or later.
+
+{{% /collapse-content %}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -288,3 +405,5 @@ Integrations can be enabled or disabled individually (overriding the default abo
 [3]: /tracing/manual_instrumentation/java
 [4]: https://github.com/DataDog/documentation#outside-contributors
 [5]: /tracing/trace_collection/otel_instrumentation/java/
+[7]: https://www.graalvm.org/downloads/
+[9]: /tracing/trace_explorer/

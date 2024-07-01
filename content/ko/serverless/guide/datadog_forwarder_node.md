@@ -262,7 +262,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 
 ```
 
-사용 가능한 `RUNTIME`옵션은 {{< latest-lambda-layer-version layer="node-versions" >}}입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="node" >}}`입니다. 다음 예를 참고하세요.
+사용 가능한 `RUNTIME` 옵션은: {{< latest-lambda-layer-version layer="node-versions" >}}입니다. 최신`VERSION`은 `{{< latest-lambda-layer-version layer="node" >}}`입니다.다음 예를 참고하세요.
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}

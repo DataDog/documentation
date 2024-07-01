@@ -1,6 +1,5 @@
 ---
 title: Variables
-kind: documentation
 description: "Use variables to customize your monitor notifications"
 further_reading:
 - link: "/monitors/guide/template-variable-evaluation/"
@@ -312,7 +311,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 ### Matching attribute/tag variables
 
-_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][8]_.
+_Available for [Log monitors][2], [Trace Analytics monitors][3] (APM), [RUM monitors][4], [CI monitors][5], and [Database Monitoring monitors][6]_.
 
 To include **any** attribute or tag from a log, a trace span, a RUM event, a CI pipeline, or a CI test event matching the monitor query, use the following variables:
 
@@ -356,13 +355,13 @@ Logs, Event Management, spans, RUM, CI Pipeline, and CI Test events have generic
 | RUM             | `{{rum.key}}`     | `service`, `status`, `timestamp`, `link` |
 | Event             | `{{event.key}}`     | `attributes`, `host.name`, `id`, `link`, `title`, `text`, `tags` |
 | CI Pipeline             | `{{cipipeline.key}}`     | `service`, `env`, `resource_name`, `ci_level`, `trace_id`, `span_id`, `pipeline_fingerprint`, `operation_name`, `ci_partial_array`, `status`, `timestamp`, `link` |
-| CI Test             | `{{citest.key}}`     | `service`, `env`, `resource_name`, `error.message`, `trace_id`, `span_id`, `operation_name`, `status`, `timestamp`, `link` |
+| CI Test             | `{{citest.key}}`     | `service`, `env`, `resource_name`, `trace_id`, `span_id`, `operation_name`, `status`, `timestamp`, `link` |
 
 If the matching event does not contain the attribute in its definition, the variable is rendered empty.
 
 #### Explorer link
 
-Use `{{log.link}}`, `{{span.link}}`, and `{{rum.link}}` to enrich the notification with a link to the Log Explorer, Trace Explorer, or RUM Explorer, scoped on the events matching the query.
+Use `{{log.link}}`, `{{span.link}}`, `{{rum.link}}`, and `{{issue.link}}` to enrich the notification with a link to the Log Explorer, Trace Explorer, RUM Explorer, or Error Tracking, scoped on the events matching the query.
 
 ### Check monitor variables
 
@@ -411,17 +410,32 @@ Use template variables to customize your monitor notifications. The built-in var
 | `{{warn_recovery_threshold}}`        | The value that recovered the monitor from its `WARN` state.                   |
 | `{{ok_threshold}}`                   | The value that recovered the Service Check monitor.                           |
 | `{{comparator}}`                     | The relational value set in the monitor's alert conditions.                   |
-| `{{first_triggered_at}}`<br>*See note below*         | The UTC date and time when the monitor first triggered.                       |
-| `{{first_triggered_at_epoch}}`<br>*See note below*   | The UTC date and time when the monitor first triggered in epoch milliseconds. |
-| `{{last_triggered_at}}`<br>*See note below*          | The UTC date and time when the monitor last triggered.                        |
-| `{{last_triggered_at_epoch}}`<br>*See note below*    | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
+| `{{first_triggered_at}}`<br>*See section below*         | The UTC date and time when the monitor first triggered.                       |
+| `{{first_triggered_at_epoch}}`<br>*See section below*   | The UTC date and time when the monitor first triggered in epoch milliseconds. |
+| `{{last_triggered_at}}`<br>*See section below*          | The UTC date and time when the monitor last triggered.                        |
+| `{{last_triggered_at_epoch}}`<br>*See section below*    | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
 | `{{triggered_duration_sec}}`         | The number of seconds the monitor has been in a triggered state.              |
 
-**Note**: The `{{first_triggered_at}}`, `{{first_triggered_at_epoch}}`, `{{last_triggered_at}}`, and `{{last_triggered_at_epoch}}` monitor template variables reflect the values when a monitor changes state **NOT** when a new monitor event occurs. Renotification events show the same template variable if the monitor state has not changed. Use `{{triggered_duration_sec}}` to display the duration at the time of the monitor event.
+### Triggered variables
+
+ The `{{first_triggered_at}}`, `{{first_triggered_at_epoch}}`, `{{last_triggered_at}}`, and `{{last_triggered_at_epoch}}` monitor template variables reflect the values when a monitor changes state, **NOT** when a new monitor event occurs. Renotification events show the same template variable if the monitor state has not changed. Use `{{triggered_duration_sec}}` to display the duration at the time of the monitor event.
+
+ `{{first_triggered_at}}` is set when the monitor group goes from `OK` to a non-`OK` state or when a new group appears in a non-`OK` state. `{{last_triggered_at}}` gets set when the monitor group goes to a non-`OK` state independently from its previous state (including `WARN` → `ALERT`, `ALERT` → `WARN`). Additionally, `{{last_triggered_at}}` is set when a new group appears in a non-`OK` state. The difference is that `{{last_triggered_at}}` is independent from its previous state.
+
+ {{< img src="monitors/notifications/triggered_variables.png" alt="Showing four transitions with timestamps A: 1419 OK to WARN, B: 1427 WARN to ALERT, C: 1445 ALERT to NO DATA, D: 1449 NO DATA to OK" style="width:90%;">}}
+
+**Example**: When the monitor transitions from `OK` → `WARN`, the values of `{{first_triggered_at}}` and `{{last_triggered_at}}` both have timestamp A. The table below shows the values until the monitor recovers.
+
+| Transition         | first_triggered_at     | last_triggered_at      | triggered_duration_sec           |
+|------------------  |--------------------------------  |--------------------------------  |--------------------------------  |
+| `OK` → `WARN`      | A                                | A                                | 0                                |
+| `WARN` → `ALERT`   | A                                | B                                | B - A                            |
+| `ALERT` → `NO DATA`| A                                | C                                | C - A                            |
+| `NO DATA` → `OK`   | A                                | C                                | D - A                            |
 
 ### Evaluation
 
-Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][6].
+Template variables that return numerical values support operations and functions, which allow you to perform mathematical operations or formatting changes to the value. For full details, see [Template Variable Evaluation][7].
 
 ### Local time
 
@@ -433,7 +447,7 @@ For example, to add the last triggered time of the monitor in the Tokyo time zon
 ```
 
 The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example `2021-05-31 23:43:27+09:00`.
-See the [list of tz database time zones][7], particularly the TZ database name column, to see the list of available time zone values.
+See the [list of tz database time zones][8], particularly the TZ database name column, to see the list of available time zone values.
 
 ## Advanced
 
@@ -521,7 +535,7 @@ The monitors link is customizable with additional parameters. The most common ar
 Use the `{{last_triggered_at_epoch}}` [template variable](#template-variables) to provide a link to all logs happening in the moment of the alert.
 
 ```text
-https://app.datadoghq.com/logs>?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
+https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-10*60*1000"}}&to_ts={{eval "last_triggered_at_epoch+10*60*1000"}}&live=false
 ```
 
 The logs link is customizable with additional parameters. The most common are:
@@ -594,6 +608,6 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [3]: /monitors/types/apm/?tab=analytics
 [4]: /monitors/types/real_user_monitoring/
 [5]: /monitors/types/ci/
-[6]: /monitors/guide/template-variable-evaluation/
-[7]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-[8]: /monitors/types/database_monitoring/
+[6]: /monitors/types/database_monitoring/
+[7]: /monitors/guide/template-variable-evaluation/
+[8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones

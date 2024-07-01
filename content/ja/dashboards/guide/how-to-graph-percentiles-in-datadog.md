@@ -1,6 +1,5 @@
 ---
 title: Datadog でパーセンタイルグラフを作成する方法
-kind: ガイド
 aliases:
   - /ja/graphing/faq/how-to-graph-percentiles-in-datadog
   - /ja/graphing/guide/how-to-graph-percentiles-in-datadog

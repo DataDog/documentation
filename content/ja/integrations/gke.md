@@ -27,7 +27,7 @@ integration_id: gke
 integration_title: Google Kubernetes Engine, Agent
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: gke
 public_title: Google Kubernetes Engine, Agent インテグレーション
@@ -52,13 +52,14 @@ tile:
   title: Google Kubernetes Engine, Agent インテグレーション
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 Google Cloud Platform (GCP) のサービスである Google Kubernetes Engine (GKE) は、コンテナ化されたアプリケーションを実行およびオーケストレーションするためのホスト型プラットフォームです。Amazon の Elastic Container Service (ECS) と同様に、GKE はマシンのクラスターにデプロイされた Docker コンテナを管理します。ただし、ECS とは異なり、GKE は Kubernetes を使用します。
 
-## セットアップ
+## 計画と使用
 
 ### 前提条件
 
@@ -95,7 +96,8 @@ $  gcloud container clusters create doglib --num-nodes 3 --zone "us-central1-b" 
 
 [コンテナ化されたバージョンの Datadog Agent][1] を Kubernetes クラスターにデプロイします。[Kubernetes に Datadog Agent をインストールする][2]を参照してください。
 
-[1]: https://app.datadoghq.com/account/settings#agent/kubernetes
+
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [2]: https://docs.datadoghq.com/ja/containers/kubernetes/installation?tab=operator
 {{% /tab %}}
 {{% tab "Autopilot" %}}
@@ -123,7 +125,7 @@ $  gcloud container clusters create doglib --num-nodes 3 --zone "us-central1-b" 
       datadog/datadog
   ```
 
-  **注**: ログまたはトレースも有効にする場合は、このコマンドに行を追加して、`datadog.logs.enabled` (ログの場合) および `datadog.apm.enabled` (トレースの場合) を `true` に設定します。例:
+  **注**: ログやトレースも有効にしたい場合は、このコマンドに `datadog.logs.enabled` (ログ用) と `datadog.apm.portEnabled` (トレース用) を true に設定する行を追加してください。例:
 
   ```bash
   helm install --name <RELEASE_NAME> \
@@ -133,20 +135,32 @@ $  gcloud container clusters create doglib --num-nodes 3 --zone "us-central1-b" 
       --set clusterAgent.metricsProvider.enabled=true \
       --set providers.gke.autopilot=true \
       --set datadog.logs.enabled=true \
-      --set datadog.apm.enabled=true \
+      --set datadog.apm.portEnabled=true \
       datadog/datadog
   ```
 
-  構成可能な値の一覧は、[Datadog helm-charts リポジトリ][1]を参照してください。
+  構成可能な値の一覧は、[Datadog `helm-charts` リポジトリ][1]を参照してください。
+
+#### ダッシュボード  
+
+[Admission Controller][2] を Autopilot で使用するには、Admission Controller の [`configMode`][3] を `service` または `hostip` に設定します。
+
+Autopilot では `socket` モードが許可されていないため、Datadog はコントローラーにより堅牢な抽象化レイヤーを提供するため `service` (フォールバックオプションとして `hostip`) の使用を推奨します。
+
 
 
 [1]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog#values
+[2]: https://docs.datadoghq.com/ja/containers/cluster_agent/admission_controller/?tab=operator
+[3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1046
 {{% /tab %}}
 {{< /tabs >}}
 
 ## その他の参考資料
 
-- [GKE Autopilot のサポートを発表][7]
+- [Datadog を使用した GKE Autopilot の監視][7]
+- [Datadog を使用した GKE の監視][8]
+- [Datadog を使用した T2A による GKE ワークロードの監視][9]
+- [新しい GKE ダッシュボードとメトリクスによる、環境の視覚化の向上][10]
 
 
 [1]: https://cloud.google.com/resource-manager/docs/creating-managing-projects
@@ -156,3 +170,6 @@ $  gcloud container clusters create doglib --num-nodes 3 --zone "us-central1-b" 
 [5]: /ja/integrations/google_cloud_platform/
 [6]: https://app.datadoghq.com/screen/integration/gce
 [7]: https://www.datadoghq.com/blog/gke-autopilot-monitoring/
+[8]: https://www.datadoghq.com/blog/monitor-google-kubernetes-engine/
+[9]: https://www.datadoghq.com/blog/monitor-tau-t2a-gke-workloads-with-datadog-arm-support/
+[10]: https://www.datadoghq.com/blog/gke-dashboards-integration-improvements/

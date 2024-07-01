@@ -18,6 +18,7 @@ assets:
       metadata_path: assets/service_checks.json
     source_type_id: 10320
     source_type_name: Buoyant Cloud
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://buoyant.io/cloud
   name: Buoyant
@@ -36,7 +37,7 @@ integration_id: buoyant-cloud
 integration_title: Buoyant Cloud
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: buoyant_cloud
 public_title: Buoyant Cloud

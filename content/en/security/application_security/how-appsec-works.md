@@ -1,6 +1,5 @@
 ---
 title: How Application Security Management Works in Datadog
-kind: documentation
 aliases:
   - /security_platform/guide/how-appsec-works/
   - /security_platform/application_security/how-appsec-works/
@@ -152,7 +151,7 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [10]: /tracing/configure_data_security/?tab=http
 [11]: /security/application_security/threats/library_configuration/#exclude-specific-parameters-from-triggering-detections
 [12]: https://owasp.org/www-project-modsecurity-core-rule-set/
-[13]: /security/default_rules/#cat-application-security
+[13]: /security/default_rules/?category=cat-application-security
 [14]: https://app.datadoghq.com/security/appsec/event-rules
 [15]: https://app.datadoghq.com/security/appsec/vm
 [16]: /security/cloud_siem/

@@ -8,7 +8,7 @@ aliases:
     - /real_user_monitoring/android/advanced_configuration/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation
@@ -484,16 +484,16 @@ To modify some attributes in your RUM events, or to drop some of the events enti
    
    **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
 
-## Sample RUM sessions
+## Retrieve the RUM session ID
 
-To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][2] as a percentage between 0 and 100.
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
 
 ```kotlin
-val rumConfig = RumConfiguration.Builder(applicationId)
-        // Here 75% of the RUM sessions are sent to Datadog
-        .setSessionSampleRate(75.0f)
-        .build()
-Rum.enable(rumConfig)
+GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
+  currentSessionId = sessionId
+}
 ```
 
 ## Further Reading

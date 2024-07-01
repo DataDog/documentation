@@ -37,7 +37,6 @@
 		"body": [
 			"---",
 			"title: Doc Title",
-			"kind: <UPDATE>",
 			"disable_toc: false",
 			"aliases:",
 			"- /path-to-old-doc/",
@@ -249,5 +248,34 @@
 				"   {{< nextlink href=\"link/here\" >}}Link desctiption goes here{{< /nextlink >}}",
 				"{{< /whatsnext >}}"
 			]
+	},
+	"Eng Blog Frontmatter":{
+		"prefix": ";;eng_blog_frontmatter",
+		"body": [
+			"---",
+			"authors:",
+			"- email: author@datadoghq.com",
+			"  name: author-full-name",
+			"  image: author-headshot-image.jpg",
+			"blog: engineering",
+			"date: YYYY-MM-DD",
+			"publishDate: YYYY-MM-DD",
+			"description: \"A short summary of the post to be used on the front page of the blog\"",
+			"specific_interest:",
+			" - add-optional-interest",
+			" - add-optional-interest",
+			"core_product:",
+			" - product-name",
+			"disable_hiring_blurb: false",
+			"draft: false",
+			"private: false",
+			"slug: identical-to-your-markdown-filename",
+			"series: add-series-identifier-if-the-post-is-one-in-a-series",
+			"title: \"Title of the Blog\"",
+			"image: filename-of-hero-image.png",
+			"preview_image: filename-of-hero-image.png",
+            "---"
+		],
+		"description": "Eng Blog Frontmatter"
 	}
 }

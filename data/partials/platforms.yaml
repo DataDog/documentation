@@ -47,6 +47,10 @@ platforms:
     link: "agent/basic_agent_usage/osx/"
     image: "platform_macosx.png"
     category: "macOS"
+  - name: Oracle
+    link: "agent/basic_agent_usage/oracle/"
+    image: "platform_oracle.png"
+    category: "Linux"  
   - name: puppet
     link: "agent/basic_agent_usage/puppet/"
     image: "platform_puppet.png"

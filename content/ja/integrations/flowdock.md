@@ -1,7 +1,7 @@
 ---
 categories:
 - collaboration
-- notification
+- notifications
 dependencies: []
 description: Datadog のアラートとグラフをチームのフローに送信。
 doc_link: https://docs.datadoghq.com/integrations/flowdock/
@@ -20,7 +20,8 @@ short_description: Datadog のアラートとグラフをチームのフロー�
 version: '1.0'
 ---
 
-{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock の概要" popup="true">}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/flowdock/flowdock_overview.png" alt="Flowdock 概要" popup="true">}}
 
 ## 概要
 

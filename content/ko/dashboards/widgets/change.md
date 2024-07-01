@@ -3,6 +3,9 @@ aliases:
 - /ko/graphing/widgets/change/
 description: 선택한 기간 동안 값의 변화를 그래프화합니다.
 further_reading:
+- link: /monitors/types/metric/?tab=change
+  tag: 설명서
+  text: 모니터에서 변경 알림 탐지를 설정하세요.
 - link: /dashboards/graphing_json/
   tag: 설명서
   text: JSON을 사용하여 대시보드 구축
@@ -11,15 +14,16 @@ further_reading:
   text: 위젯 JSON 스키마
 - link: /dashboards/graphing_json/request_json/
   tag: 설명서
-  text: 요청 JSON 스키마
-kind: 설명서
+  text: JSON 스키마 요청
 title: 변경 위젯
+widget_type: 변경
 ---
-변경 그래프는 일정 기간 동안 메트릭의 변경을 보여줍니다.
 
-{{< img src="dashboards/widgets/change/change.png" alt="변경 그래프" >}}
+변경 그래프는 일정 시간 동안 메트릭의 변화를 보여줍니다. 일정 임계값에 대해 N분 이전 및 현재 간 값의 절대 또는 상대(%) 변화를 비교합니다. 비교된 데이터 포인트는 단일 포인트가 아니라 메트릭 정의 섹션에서 파라마터를 사용해 계산됩니다. 자세한 정보는 [메트릭 모니터][6] 설명서와 [변경 알림 모니터 가이드][7]를 참조하세요.
 
-## 구성
+{{< img src="/dashboards/widgets/change/change_widget.png" alt="Example of a change widget for jvm.heap_memory metric" style="width:100%;" >}}
+
+## 설정
 
 ### 설정
 
@@ -41,19 +45,15 @@ title: 변경 위젯
 8. `ascending` 또는 `descending` 순서를 선택합니다.
 9. 그래프에 현재 값을 표시할지 여부를 선택합니다.
 
-### 디스플레이 기본 설정
+### 옵션
 
-위젯이 커스텀 시간 프레임을 사용하는지 또는 대시보드의 글로벌 시간 프레임을 사용하는지 선택합니다.
+#### 컨텍스트 링크
 
-### 타이틀
-
-위젯의 커스텀 타이틀을 선택하거나, 생성된 타이틀을 사용하려면 양식을 비워 둡니다.
+[컨텍스트 링크][1]는 기본적으로 활성화되어 있으며, 켜거나 끌 수 있습니다. 컨텍스트는 대시보드 위젯을 다른 페이지(Datadog 또는 제3자)와 연결합니다.
 
 ## API
 
-이 위젯은 **Dashboards API**와 함께 사용할 수 있습니다. 더 많은 정보를 얻으시려면 [Dashboards API documentation][1]을 참조하세요.
-
-변경 위젯의 전용 [위젯 JSON 스키마 정의][2]는 다음과 같습니다.
+이 위젯은 **[대시보드 API][2]**와 함께 사용할 수 있습니다. [위젯 JSON 스키마 정의][3]에 대한 다음 표를 참조하세요.
 
 {{< dashboards-widgets-api >}}
 
@@ -61,5 +61,8 @@ title: 변경 위젯
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/api/v1/dashboards/
-[2]: /ko/dashboards/graphing_json/widget_json/
+[1]: /ko/dashboards/guide/context-links/
+[2]: /ko/api/latest/dashboards/
+[3]: /ko/dashboards/graphing_json/widget_json/
+[6]: /ko/monitors/types/metric/?tab=change
+[7]: /ko/monitors/guide/change-alert/

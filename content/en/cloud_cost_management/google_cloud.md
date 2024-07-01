@@ -1,6 +1,5 @@
 ---
 title: Google Cloud
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
@@ -15,13 +14,15 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
 
-To use Google Cloud Cost Management in Datadog, you must configure the [Google Cloud Platform Integration][12] and set up the [detailed usage cost][14] billing export for your desired billing account.
-Additionally, the Google Cloud Platform Datadog Integration Service Account must have the [necessary permissions][13] configured to interact with Google Cloud Storage and BigQuery.
+To use Google Cloud Cost Management in Datadog, follow these steps:
+1. Configure the [Google Cloud Platform Integration][12]
+2. Set up the [detailed usage cost export][13] with the necessary permissions (Google Service APIs, export project access, and BigQuery Dataset access)
+3. Create or select a [Google Cloud Storage bucket][15] with the necessary permissions (Bucket access)
 
 ## Setup
 
@@ -29,8 +30,12 @@ Additionally, the Google Cloud Platform Datadog Integration Service Account must
 Navigate to [Setup & Configuration][3], and select a Google Cloud Platform integration.
 If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to configure it.
 
-**Note**: [Datadog Google Cloud Platform integration][4] will automatically monitor any projects this Service Account has access to.
-Cloud Cost processes all resources in a project, regardless of the Metrics Collection limits defined per integration.
+<div class="alert alert-warning">
+The Datadog Google Cloud Platform integration allows Cloud Costs to automatically monitor all projects this service account has access to.
+To limit infrastructure monitoring hosts for these projects, apply tags to the hosts. Then define whether the tags should be included or excluded from monitoring in the <strong>Limit Metric Collection Filters</strong> section of the integration page.
+</div>
+
+{{< img src="cloud_cost/gcp_integration_limit_metric_collection.png" alt="Limit metric collection filters section configured in the Google Cloud Platform integration page" >}}
 
 ### Enable detailed usage cost export
 <div class="alert alert-info">
@@ -40,6 +45,10 @@ The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-t
  1. Navigate to [Billing Export][1] under Google Cloud console *Billing*.
  2. Enable the [Detailed Usage cost][2] export (select or create a project and a BigQuery dataset).
  3. Document the `Billing Account ID` for the billing account where the export was configured, as well as the export `Project ID` and `Dataset Name`.
+
+{{< img src="cloud_cost/billing_export.png" alt="Google Cloud project and dataset info highlighted" >}}
+
+_Newly created BigQuery billing export datasets only contain the most recent two months of data. It can take a day or two for this data to backfill in BigQuery._
 
 #### Enable Google Service APIs
 The following permissions allow Datadog to access and transfer the billing export into the storage bucket using a scheduled BigQuery query.
@@ -128,10 +137,44 @@ You can visualize your ingested data using the following cost types:
 | Cost Type | Description |
 | ----------| ----------------------------------|
 | `gcp.cost.amortized` | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
-| `gcp.cost.amortized.shared.resources.allocated` | All of your GCP amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][15].|
+| `gcp.cost.amortized.shared.resources.allocated` | All of your Google Cloud Platform amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][14].|
+
+### Out-of-the-box tags
+Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [detailed usage cost report][16] and make it easier to discover and understand cost data.
+
+The following out-of-the-box tags are available for filtering and grouping data:
+
+| Tag                          | Description       |
+| ---------------------------- | ----------------- |
+| `google_product`             | The Google service being billed.|
+| `google_cost_type`           | The type of charge covered by this item (for example, regular, tax, adjustment, or rounding error).|
+| `google_usage_type`          | The usage details of the item (for example, Standard Storage US).|
+| `google_location`            | The location associated with the item at the level of a multi-region, country, region, or zone.|
+| `google_region`              | The region associated with the item.|
+| `google_zone`                | The availability zone associated with the item.|
+| `google_pricing_usage_unit`  | The pricing unit used for calculating the usage cost (for example, gibibyte, tebibyte, or year).|
+| `google_is_unused_reservation`| Whether the usage was reserved but not used.|
+
+#### Cost and observability correlation
+
+Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top Google products to simplify correlating observability and cost metrics.
+
+For example, to view cost and utilization for each Cloud SQL database, you can make a table with `gcp.cost.amortized`, `gcp.cloudsql.database.cpu.utilization`, and `gcp.cloudsql.database.memory.utilization` (or any other Cloud SQL metric) and group by `database_id`. Or, to see Cloud Function usage and costs side by side, you can graph `gcp.cloudfunctions.function.execution_count` and `gcp.cost.amortized` grouped by `function_name`.
+
+The following out-of-the-box tags are available:
+| Google Product     | Tag(s)                        |
+| -------------------| ----------------------------- |
+| Compute Engine     | `instance_id`, `instance-type`|
+| Cloud Functions    | `function_name`               |
+| Cloud Run          | `job_name`, `service_name`    |
+| Cloud SQL          | `database_id`                 |
+| Cloud Spanner      | `instance_id`                 |
+| App Engine         | `module_id`                   |
+| BigQuery           | `project_id`, `dataset_id`    |
+| Kubernetes Engine  | `cluster_name`                |
 
 ### Container allocation
-**Container allocation** metrics contain all of the same costs as the GCP metrics, but with additional breakdowns and insights for container workloads. See [container cost allocation][15] for more details.
+**Container allocation** metrics contain all of the same costs as the Google Cloud Platform metrics, but with additional breakdowns and insights for container workloads. See [Container Cost Allocation][14] for more details.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -148,6 +191,7 @@ You can visualize your ingested data using the following cost types:
 [10]: https://cloud.google.com/bigquery/docs/enable-transfer-service#cross-project_service_account_authorization
 [11]: https://cloud.google.com/iam/docs/create-service-agents#create
 [12]: /integrations/google_cloud_platform/
-[13]: /cloud_cost_management/google_cloud/#provide-service-account-necessary-permissions
-[14]: /cloud_cost_management/google_cloud/#enable-detailed-usage-cost-export
-[15]: https://docs.datadoghq.com/cloud_cost_management/container_cost_allocation/
+[13]: /cloud_cost_management/google_cloud/#enable-detailed-usage-cost-export
+[14]: /cloud_cost_management/container_cost_allocation/
+[15]: /cloud_cost_management/google_cloud/#create-or-select-a-google-cloud-storage-bucket
+[16]: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage

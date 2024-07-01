@@ -321,6 +321,6 @@ See the [Azure Logging guide][5] to set up log forwarding from your Azure enviro
 [6]: /integrations/guide/azure-native-manual-setup/
 [7]: https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install
 [8]: https://app.datadoghq.com/monitors/recommended
-[9]: /monitors/notify/#notify-your-team
+[9]: /monitors/notify/#configure-notifications-and-automations
 [12]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
 [13]: /integrations/guide/azure-native-manual-setup/

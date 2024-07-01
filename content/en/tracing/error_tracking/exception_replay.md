@@ -10,6 +10,9 @@ further_reading:
 - link: '/tracing/error_tracking'
   tag: 'Documentation'
   text: 'Learn about Error Tracking for Backend Services'
+- link: 'https://www.datadoghq.com/blog/exception-replay-datadog/'
+  tag: 'Blog'
+  text: 'Simplify production debugging with Datadog Exception Replay'
 aliases:
   - /tracing/error_tracking/executional_context
   - /tracing/error_tracking/execution_replay/

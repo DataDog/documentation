@@ -16,7 +16,7 @@ integration_id: google-kubernetes-engine
 integration_title: Google Kubernetes Engine, Cloud
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: google_kubernetes_engine
 public_title: Datadog-Google Kubernetes Engine, Cloud インテグレーション
@@ -24,6 +24,7 @@ short_description: GKE リソースの使用状況を監視します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Google Kubernetes Engine (GKE)  は、Docker コンテナを実行するための強力なクラスターマネージャーおよびオーケストレーションシステムです。
@@ -42,11 +43,11 @@ Google Kubernetes Engine からメトリクスを取得して、以下のこと�
 
 セルフホスティングの Kubernetes クラスターとは異なり、GKE コントロールプレーンは Google によって管理され、クラスターで動作する Datadog Agent からはアクセスできません。そのため、クラスターの監視に Datadog Agent を主に使用している場合でも、GKE コントロールプレーンへの観測可能性は Google とのインテグレーションを必要とします。
 
-## セットアップ
+## 計画と使用
 
 ### メトリクスの収集
 
-#### インストール
+#### インフラストラクチャーリスト
 
 1. まだの方は、まず[Google Cloud Platform とのインテグレーション][1]を設定してください。標準のメトリクスとプリセットダッシュボードについては、他のインストール手順はありません。
 
@@ -54,9 +55,9 @@ Google Kubernetes Engine からメトリクスを取得して、以下のこと�
 
 3. コントロールプレーンメトリクスを入力するには、[GKE コントロールプレーンメトリクスを有効にする][3]必要があります。コントロールプレーンメトリクスは、Google が GKE で管理している Kubernetes コントロールプレーンの動作を可視化するものです。
 
-### ログの収集
+### 収集データ
 
-Google Kubernetes Engine のログは Google Cloud Logging により収集され、HTTP プッシュフォワーダーを使用して Cloud Pub/Sub へ送信されます。[HTTP プッシュフォワーダーを使用した Cloud Pub/Sub][4] をまだセットアップしていない場合は、これをセットアップしてください。
+Google Kubernetes Engine のログは Google Cloud Logging で収集され、Cloud Pub/Sub トピックを通じて Dataflow ジョブに送信されます。まだの場合は、[Datadog Dataflow テンプレートでロギングをセットアップしてください][4]。
 
 これが完了したら、Google Kubernetes Engine のログを Google Cloud Logging から Pub/Sub へエクスポートします。
 
@@ -68,21 +69,21 @@ Google Kubernetes Engine のログは Google Cloud Logging により収集され
 
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "google_kubernetes_engine" >}}
 
 
-### イベント
+### ヘルプ
 
 Google Kubernetes Engine インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Google Kubernetes Engine インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 

@@ -1,12 +1,11 @@
 ---
 title: Deployment
-kind: documentation
 further_reading:
 - link: "/opentelemetry/collector_exporter/configuration/"
   tag: "Documentation"
   text: "Configuring the OpenTelemetry Collector"
 - link: "https://opentelemetry.io/docs/collector/deployment/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "OpenTelemetry Collector Deployment"
 ---
 
@@ -286,16 +285,9 @@ Configure the Operator using one of the OpenTelemetry Collector standard Kuberne
 {{< /tabs >}}
 
 
-### Host name resolution
+### Hostname resolution
 
-The host name that OpenTelemetry signals are tagged with is obtained based on the following sources, in order of decreasing precedence.
-
-1. [Resource attributes][19], for example `host.name` (many others are supported).
-2. The `hostname` field in the Datadog Exporter configuration.
-3. Cloud provider API.
-4. Kubernetes host name.
-5. Fully qualified domain name.
-6. Operating system host name.
+See [Mapping OpenTelemetry Semantic Conventions to Hostnames][25] to understand how the hostname is resolved.
 
 ## Deployment-based limitations
 
@@ -322,3 +314,4 @@ The OpenTelemetry Collector has [two primary deployment methods][20]: Agent and 
 [22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [23]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
 [24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
+[25]: /opentelemetry/schema_semantics/hostname/

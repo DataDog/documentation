@@ -21,7 +21,6 @@ categories:
 - ログの収集
 - イベント管理
 - 問題追跡
-- モニタリング
 - セキュリティ
 dependencies: []
 display_on_public_website: true
@@ -43,7 +42,6 @@ tile:
   - Category::Log Collection
   - Category::Event Management
   - Category::Issue Tracking
-  - Category::Monitoring
   - Category::Security
   - Submitted Data Type::Logs
   - Offering::Integration
@@ -82,7 +80,7 @@ Datadog と 1Password のインテグレーションは、[1Password Events API]
 
 1Password のログをパースした後、[すぐに使える 1Password 概要ダッシュボード][3]に、1Password の値、アイテム、ユーザーからのセキュリティ関連イベントに関する洞察が Datadog によって入力されます。ウィジェットには、最も頻繁に発生するイベントと頻繁に発生しないイベントを示すトップリストや、サインイン試行の発生国を示すジオロケーションマップが含まれます。
 
-## 計画と使用
+## セットアップ
 
 **ステップ 1: 1Password でアクセストークンを生成する**
 
@@ -116,21 +114,21 @@ Datadog と 1Password のインテグレーションは、[1Password Events API]
 
 Datadog のログを `source:1password` で検索します。インテグレーションが正しくインストールされていれば、1Password のイベントを見ることができるはずです。
 
-## リアルユーザーモニタリング
+## データ収集
 
-### データセキュリティ
+### メトリクス
 
 1Password インテグレーションには、メトリクスは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 1Password インテグレーションには、サービスチェック機能は含まれません。
 
-### ヘルプ
+### イベント
 
 1Password インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 Datadog からのサポートが必要な場合は、[Datadog サポート][6]にお問い合わせください。または、1Password からのサポートが必要な場合は、[1Password サポート][7]にお問い合わせください。
 

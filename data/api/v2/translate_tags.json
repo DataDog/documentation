@@ -35,10 +35,6 @@
     "name": "Cloud Cost Management",
     "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management page](https://docs.datadoghq.com/cloud_cost_management/) for more information."
   },
-  "cloud-workload-security": {
-    "name": "Cloud Workload Security",
-    "description": "Workload activity security rules for generating events using the Datadog security Agent. See the [Setting up CSM Workload Security page](https://docs.datadoghq.com/security/cloud_security_management/setup/csm_workload_security/) for more information."
-  },
   "cloudflare-integration": {
     "name": "Cloudflare Integration",
     "description": "Manage your Datadog Cloudflare integration directly through the Datadog API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/) for more information."
@@ -107,6 +103,10 @@
     "name": "Logs Archives",
     "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in Datadog."
   },
+  "logs-custom-destinations": {
+    "name": "Logs Custom Destinations",
+    "description": "Custom Destinations forward all the logs ingested to an external destination.\n\n**Note**: Log forwarding is not available for the Government (US1-FED) site. Contact your account representative for more information.\n\nSee the [Custom Destinations Page](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)\nfor a list of the custom destinations currently configured in web UI."
+  },
   "logs-metrics": {
     "name": "Logs Metrics",
     "description": "Manage configuration of [log-based metrics](https://app.datadoghq.com/logs/pipelines/generate-metrics) for your organization."
@@ -171,6 +171,10 @@
     "name": "Service Definition",
     "description": "API to create, update, retrieve and delete service definitions."
   },
+  "service-level-objectives": {
+    "name": "Service Level Objectives",
+    "description": "[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)\n(SLOs) are a key part of the site reliability engineering toolkit.\nSLOs provide a framework for defining clear targets around application performance,\nwhich ultimately help teams provide a consistent customer experience,\nbalance feature development with platform stability,\nand improve communication with internal and external users."
+  },
   "service-scorecards": {
     "name": "Service Scorecards",
     "description": "API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
@@ -193,7 +197,7 @@
   },
   "usage-metering": {
     "name": "Usage Metering",
-    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\nUsage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request.\nLearn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/)."
+    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request.\nLearn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/)."
   },
   "users": {
     "name": "Users",

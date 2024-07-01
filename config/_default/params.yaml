@@ -108,6 +108,10 @@ code_language_ids:
     docker: "Docker"
     hosts: "Hosts"
     ecs_ec2: "ECS EC2"
+    elixir: "Elixir"
+    rust: "Rust"
+    dd-api: "Datadog API"
+    otel: "OpenTelemetry API"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -160,7 +164,7 @@ core_product:
     - name: cloud siem
       requires_all_keyvals:
         - 'core_product:security'
-    - name: code profiling
+    - name: continuous profiler
     - name: continuous testing
       requires_all_keyvals:
         - 'core_product:synthetic monitoring'

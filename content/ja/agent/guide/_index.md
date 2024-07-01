@@ -5,7 +5,6 @@ cascade:
     rank: 70
     subcategory: Agent ガイド
 disable_toc: true
-kind: ガイド
 private: true
 title: Agent ガイド
 ---
@@ -28,7 +27,9 @@ title: Agent ガイド
     {{< nextlink href="/agent/guide/heroku-ruby" >}}Heroku 上の Ruby on Rails アプリケーションを Datadog でインスツルメントする{{< /nextlink >}}
     {{< nextlink href="agent/guide/heroku-troubleshooting/" >}}Datadog-Heroku Buildpack のトラブルシューティング{{< /nextlink >}}
     {{< nextlink href="agent/guide/private-link" >}}AWS PrivateLink 経由でテレメトリーを安全に Datadog に転送する{{< /nextlink >}}
-    {{< nextlink href="agent/guide/why-should-i-install-the-agent-on-my-cloud-instances" >}}クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか{{< /nextlink >}}
+ {{< nextlink href="agent/guide/azure-private-link" >}}Azure Private Link 経由で Datadog に接続する{{< /nextlink >}}
+    {{< nextlink href="agent/guide/why-should-i-install-the-agent-on-my-cloud-instances" >}}クラウドインスタンスに Datadog Agent をインストールする理由{{< /nextlink >}}
+ {{< nextlink href="agent/guide/gcp-private-service-connect" >}}GCP Private Service Connect 経由で Datadog に接続する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Integration guides:" >}}

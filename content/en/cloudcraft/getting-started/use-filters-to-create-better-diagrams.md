@@ -1,6 +1,5 @@
 ---
 title: Using Filters to Create Better Diagrams
-kind: documentation
 ---
 
 The number of components rendered at once for large environment diagrams can introduce performance and readability issues, making for a poor experience.
@@ -8,6 +7,8 @@ The number of components rendered at once for large environment diagrams can int
 To avoid these issues, Cloudcraft recommends that you use the **Filtered layout** feature to apply filters, or exclude services when placing live components.
 
 Building smaller diagrams makes managing them much easier. It also gives viewers more control over how they ingest information.
+
+<div class="alert alert-info">If you are using Cloudcraft's New Live Experience, see this documentation: <a href="https://docs.datadoghq.com/cloudcraft/getting-started/crafting-better-diagrams/" title="Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering">Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering</a>.</div>
 
 ## Search patterns
 

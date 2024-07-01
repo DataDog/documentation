@@ -1,6 +1,5 @@
 ---
 title: AWS Integration Billing
-kind: documentation
 aliases:
 - /integrations/faq/i-can-t-filter-out-my-elb-instances-will-i-be-charged-for-them/
 ---
@@ -46,9 +45,9 @@ datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
 ```
 **Note**: In Datadog, uppercase letters are changed to lowercase letters and spaces are replaced with underscores. For example, to collect metrics from EC2 instances with the tag `Team:Frontend App`, in Datadog, the tag applied should be `team:frontend_app`.
  
-### CloudWatch Metric Streams with Kinesis Data Firehose
+### CloudWatch Metric Streams with Amazon Data Firehose
 
-You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Kinesis Data Firehose][8] instead of using the default API polling method. If your organization uses the CloudWatch Metric Streams with Kinesis method, AWS resource exclusion rules defined in the Datadog AWS integration page do not apply. You must manage all rules for including and excluding metric namespaces or specific metric names in the CloudWatch Metric Streams configuration for each of your AWS accounts within the AWS console.
+You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Amazon Data Firehose][8] instead of using the default API polling method. If your organization uses the CloudWatch Metric Streams with Kinesis method, AWS resource exclusion rules defined in the Datadog AWS integration page do not apply. You must manage all rules for including and excluding metric namespaces or specific metric names in the CloudWatch Metric Streams configuration for each of your AWS accounts within the AWS console.
 
 ## Troubleshooting
 

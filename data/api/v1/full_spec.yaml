@@ -90,6 +90,12 @@ components:
             description: Regions to exclude.
             type: string
           type: array
+        extended_resource_collection_enabled:
+          default: false
+          description: Whether Datadog collects additional attributes and configuration
+            information about the resources in your AWS account. Required for `cspm_resource_collection`.
+          example: true
+          type: boolean
         filter_tags:
           description: 'The array of EC2 tags (in the form `key:value`) defines a
             filter that Datadog uses when collecting metrics from EC2.
@@ -128,8 +134,9 @@ components:
           type: boolean
         resource_collection_enabled:
           default: false
-          description: Whether Datadog collects a standard set of resources from your
-            AWS account.
+          deprecated: true
+          description: Deprecated in favor of 'extended_resource_collection_enabled'.
+            Whether Datadog collects a standard set of resources from your AWS account.
           example: true
           type: boolean
         role_name:
@@ -2289,7 +2296,7 @@ components:
           description: 'POSIX timestamp of the event. Must be sent as an integer (that
             is no quotes).
 
-            Limited to events no older than 18 hours.'
+            Limited to events up to 18 hours in the past and two hours in the future.'
           format: int64
           type: integer
         device_name:
@@ -3135,6 +3142,14 @@ components:
       type: string
       x-enum-varnames:
       - METRIC
+    FormulaType:
+      description: Set the sort type to formula.
+      enum:
+      - formula
+      example: formula
+      type: string
+      x-enum-varnames:
+      - FORMULA
     FreeTextWidgetDefinition:
       description: Free text is a widget that allows you to add headings to your screenboard.
         Commonly used to state the overall purpose of the dashboard. Only available
@@ -3503,6 +3518,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        sort:
+          $ref: '#/components/schemas/WidgetSortBy'
       type: object
     GraphSnapshot:
       description: Object representing a graph snapshot.
@@ -3523,6 +3540,14 @@ components:
           example: https://app.datadoghq.com/s/f12345678/aaa-bbb-ccc
           type: string
       type: object
+    GroupType:
+      description: Set the sort type to group.
+      enum:
+      - group
+      example: group
+      type: string
+      x-enum-varnames:
+      - GROUP
     GroupWidgetDefinition:
       description: The groups widget allows you to keep similar graphs together on
         your timeboard. Each group has a custom header, can hold one to many graphs,
@@ -4209,6 +4234,7 @@ components:
       - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
+      - incident_management_monthly_active_users_usage
       - indexed_spans_usage
       - infra_host_usage
       - ingested_logs_bytes_usage
@@ -4217,6 +4243,7 @@ components:
       - lambda_traced_invocations_usage
       - logs_indexed_15day_usage
       - logs_indexed_180day_usage
+      - logs_indexed_1day_usage
       - logs_indexed_30day_usage
       - logs_indexed_360day_usage
       - logs_indexed_3day_usage
@@ -4230,6 +4257,7 @@ components:
       - npm_host_usage
       - obs_pipeline_bytes_usage
       - obs_pipelines_vcpu_usage
+      - online_archive_usage
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
@@ -4277,6 +4305,7 @@ components:
       - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
+      - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
       - INDEXED_SPANS_USAGE
       - INFRA_HOST_USAGE
       - INGESTED_LOGS_BYTES_USAGE
@@ -4285,6 +4314,7 @@ components:
       - LAMBDA_TRACED_INVOCATIONS_USAGE
       - LOGS_INDEXED_15DAY_USAGE
       - LOGS_INDEXED_180DAY_USAGE
+      - LOGS_INDEXED_1DAY_USAGE
       - LOGS_INDEXED_30DAY_USAGE
       - LOGS_INDEXED_360DAY_USAGE
       - LOGS_INDEXED_3DAY_USAGE
@@ -4298,6 +4328,7 @@ components:
       - NPM_HOST_USAGE
       - OBS_PIPELINE_BYTES_USAGE
       - OBS_PIPELINE_VCPU_USAGE
+      - ONLINE_ARCHIVE_USAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
@@ -6683,8 +6714,6 @@ components:
         priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int64
-          maximum: 5
-          minimum: 1
           nullable: true
           type: integer
         query:
@@ -7162,8 +7191,13 @@ components:
           nullable: true
           type: integer
         renotify_statuses:
-          description: The types of monitor statuses for which re-notification messages
+          description: 'The types of monitor statuses for which re-notification messages
             are sent.
+
+            Default: **null** if `renotify_interval` is **null**.
+
+            If `renotify_interval` is set, defaults to renotify on `Alert` and `No
+            Data`.'
           items:
             $ref: '#/components/schemas/MonitorRenotifyStatusType'
           nullable: true
@@ -7172,7 +7206,7 @@ components:
           description: "A Boolean indicating whether this monitor needs a full window
             of data before it\u2019s evaluated.\nWe highly recommend you set this
             to `false` for sparse metrics,\notherwise some evaluations are skipped.
-            Default is false."
+            Default is false. This setting only applies to\nmetric monitors."
           type: boolean
         scheduling_options:
           $ref: '#/components/schemas/MonitorOptionsSchedulingOptions'
@@ -7768,8 +7802,7 @@ components:
         priority:
           description: Integer from 1 (high) to 5 (low) indicating alert severity.
           format: int64
-          maximum: 5
-          minimum: 1
+          nullable: true
           type: integer
         query:
           description: The monitor query.
@@ -7915,6 +7948,8 @@ components:
       - fargate_percentage
       - functions_usage
       - functions_percentage
+      - incident_management_monthly_active_users_usage
+      - incident_management_monthly_active_users_percentage
       - infra_host_usage
       - infra_host_percentage
       - invocations_usage
@@ -7931,6 +7966,8 @@ components:
       - obs_pipeline_bytes_percentage
       - obs_pipelines_vcpu_usage
       - obs_pipelines_vcpu_percentage
+      - online_archive_usage
+      - online_archive_percentage
       - profiled_container_usage
       - profiled_container_percentage
       - profiled_fargate_usage
@@ -7979,6 +8016,8 @@ components:
       - logs_indexed_7day_percentage
       - logs_indexed_3day_usage
       - logs_indexed_3day_percentage
+      - logs_indexed_1day_usage
+      - logs_indexed_1day_percentage
       - rum_replay_sessions_usage
       - rum_replay_sessions_percentage
       - rum_browser_mobile_sessions_usage
@@ -8046,6 +8085,8 @@ components:
       - FARGATE_PERCENTAGE
       - FUNCTIONS_USAGE
       - FUNCTIONS_PERCENTAGE
+      - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_USAGE
+      - INCIDENT_MANAGEMENT_MONTHLY_ACTIVE_USERS_PERCENTAGE
       - INFRA_HOST_USAGE
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
@@ -8062,6 +8103,8 @@ components:
       - OBS_PIPELINE_BYTES_PERCENTAGE
       - OBS_PIPELINES_VCPU_USAGE
       - OBS_PIPELINES_VCPU_PERCENTAGE
+      - ONLINE_ARCHIVE_USAGE
+      - ONLINE_ARCHIVE_PERCENTAGE
       - PROFILED_CONTAINER_USAGE
       - PROFILED_CONTAINER_PERCENTAGE
       - PROFILED_FARGATE_USAGE
@@ -8110,6 +8153,8 @@ components:
       - LOGS_INDEXED_7DAY_PERCENTAGE
       - LOGS_INDEXED_3DAY_USAGE
       - LOGS_INDEXED_3DAY_PERCENTAGE
+      - LOGS_INDEXED_1DAY_USAGE
+      - LOGS_INDEXED_1DAY_PERCENTAGE
       - RUM_REPLAY_SESSIONS_USAGE
       - RUM_REPLAY_SESSIONS_PERCENTAGE
       - RUM_BROWSER_MOBILE_SESSIONS_USAGE
@@ -8385,6 +8430,15 @@ components:
           description: The Lambda function usage by tag(s).
           format: double
           type: number
+        incident_management_monthly_active_users_percentage:
+          description: The percentage of Incident Management monthly active users
+            usage by tag(s).
+          format: double
+          type: number
+        incident_management_monthly_active_users_usage:
+          description: The Incident Management monthly active users usage by tag(s).
+          format: double
+          type: number
         indexed_spans_percentage:
           description: The percentage of APM Indexed Spans usage by tag(s).
           format: double
@@ -8449,6 +8503,14 @@ components:
           type: number
         logs_indexed_180day_usage:
           description: The total Indexed Logs (180-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_1day_percentage:
+          description: The percentage of Indexed Logs (1-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_1day_usage:
+          description: The total Indexed Logs (1-day Retention) usage by tag(s).
           format: double
           type: number
         logs_indexed_30day_percentage:
@@ -8564,6 +8626,14 @@ components:
           description: The observability pipeline per core usage by tag(s).
           format: double
           type: number
+        online_archive_percentage:
+          description: The percentage of online archive usage by tag(s).
+          format: double
+          type: number
+        online_archive_usage:
+          description: The online archive usage by tag(s).
+          format: double
+          type: number
         profiled_container_percentage:
           description: The percentage of profiled container usage by tag(s).
           format: double
@@ -8597,11 +8667,11 @@ components:
           format: double
           type: number
         rum_replay_sessions_percentage:
-          description: The percentage of RUM Replay Sessions usage by tag(s).
+          description: The percentage of RUM Session Replay usage by tag(s).
           format: double
           type: number
         rum_replay_sessions_usage:
-          description: The total RUM Replay Sessions usage by tag(s).
+          description: The total RUM Session Replay usage by tag(s).
           format: double
           type: number
         sds_scanned_bytes_percentage:
@@ -10705,9 +10775,24 @@ components:
           example: name
           type: string
         history:
-          description: For `monitor` based SLOs, this includes the aggregated history
-            as arrays that include timeseries and uptime data where `0=monitor` is
-            in `OK` state and `1=monitor` is in `alert` state.
+          description: 'The state transition history for the monitor. It is represented
+            as
+
+            an array of pairs. Each pair is an array containing the timestamp of the
+            transition
+
+            as an integer in Unix epoch format in the first element, and the state
+            as an integer in the
+
+            second element. An integer value of `0` for state means uptime, `1` means
+            downtime, and `2` means no data.
+
+            Periods of no data are counted either as uptime or downtime depending
+            on monitor settings.
+
+            See [SLO documentatio](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
+
+            for detailed information.'
           example:
           - - 1579212382
             - 0
@@ -10887,9 +10972,26 @@ components:
           example: name
           type: string
         history:
-          description: For `monitor` based SLOs, this includes the aggregated history
-            as arrays that include timeseries and uptime data where `0=monitor` is
-            in `OK` state and `1=monitor` is in `alert` state.
+          description: 'The state transition history for `monitor` or `time-slice`
+            SLOs. It is represented as
+
+            an array of pairs. Each pair is an array containing the timestamp of the
+            transition
+
+            as an integer in Unix epoch format in the first element, and the state
+            as an integer in the
+
+            second element. An integer value of `0` for state means uptime, `1` means
+            downtime, and `2` means no data.
+
+            Periods of no data count as uptime in time-slice SLOs, while for monitor
+            SLOs, no data is counted
+
+            either as uptime or downtime depending on monitor settings. See
+
+            [SLO documentation](https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data)
+
+            for detailed information.'
           example:
           - - 1579212382
             - 0
@@ -11440,7 +11542,8 @@ components:
       description: 'The time-slice condition, composed of 3 parts: 1. the metric timeseries
         query, 2. the comparator,
 
-        and 3. the threshold.'
+        and 3. the threshold. Optionally, a fourth part, the query interval, can be
+        provided.'
       example:
         comparator: <
         query:
@@ -11459,6 +11562,8 @@ components:
           $ref: '#/components/schemas/SLOTimeSliceComparator'
         query:
           $ref: '#/components/schemas/SLOTimeSliceQuery'
+        query_interval_seconds:
+          $ref: '#/components/schemas/SLOTimeSliceInterval'
         threshold:
           description: The threshold value to which each SLI value will be compared.
           example: 5
@@ -11469,6 +11574,22 @@ components:
       - threshold
       - query
       type: object
+    SLOTimeSliceInterval:
+      description: 'The interval used when querying data, which defines the size of
+        a time slice.
+
+        Two values are allowed: 60 (1 minute) and 300 (5 minutes).
+
+        If not provided, the value defaults to 300 (5 minutes).'
+      enum:
+      - 60
+      - 300
+      example: 300
+      format: int32
+      type: integer
+      x-enum-varnames:
+      - ONE_MINUTE
+      - FIVE_MINUTES
     SLOTimeSliceQuery:
       description: The queries and formula used to calculate the SLI value.
       example:
@@ -11523,7 +11644,10 @@ components:
       - time_slice
       type: object
     SLOTimeframe:
-      description: The SLO time window options.
+      description: 'The SLO time window options. Note that "custom" is not a valid
+        option for creating
+
+        or updating SLOs. It is only used when querying SLO history over custom timeframes.'
       enum:
       - 7d
       - 30d
@@ -12189,7 +12313,7 @@ components:
         interval:
           default: null
           description: If the type of the metric is rate or count, define the corresponding
-            interval.
+            interval in seconds.
           example: 20
           format: int64
           nullable: true
@@ -13470,60 +13594,11 @@ components:
           $ref: '#/components/schemas/WidgetStyle'
       type: object
     SyntheticsAPIStep:
-      description: The steps used in a Synthetic multistep API test.
-      properties:
-        allowFailure:
-          description: Determines whether or not to continue with test if this step
-            fails.
-          type: boolean
-        assertions:
-          default: []
-          description: Array of assertions used for the test.
-          example:
-          - operator: lessThan
-            target: 1000
-            type: responseTime
-          items:
-            $ref: '#/components/schemas/SyntheticsAssertion'
-          type: array
-        extractedValues:
-          description: Array of values to parse and save as variables from the response.
-          items:
-            $ref: '#/components/schemas/SyntheticsParsingOptions'
-          type: array
-        isCritical:
-          description: 'Determines whether or not to consider the entire test as failed
-            if this step fails.
-
-            Can be used only if `allowFailure` is `true`.'
-          type: boolean
-        name:
-          description: The name of the step.
-          example: Example step name
-          type: string
-        request:
-          $ref: '#/components/schemas/SyntheticsTestRequest'
-        retry:
-          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
-        subtype:
-          $ref: '#/components/schemas/SyntheticsAPIStepSubtype'
-      required:
-      - assertions
-      - request
-      - name
-      - subtype
+      description: The steps used in a Synthetic multi-step API test.
+      oneOf:
+      - $ref: '#/components/schemas/SyntheticsAPITestStep'
+      - $ref: '#/components/schemas/SyntheticsAPIWaitStep'
       type: object
-    SyntheticsAPIStepSubtype:
-      description: The subtype of the Synthetic multistep API test step, currently
-        only supporting `http`.
-      enum:
-      - http
-      - grpc
-      example: http
-      type: string
-      x-enum-varnames:
-      - HTTP
-      - GRPC
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -13614,6 +13689,10 @@ components:
           items:
             $ref: '#/components/schemas/SyntheticsAPIStep'
           type: array
+        variablesFromScript:
+          description: Variables defined from JavaScript code.
+          example: dd.variable.set("FOO", "foo")
+          type: string
       type: object
     SyntheticsAPITestResultData:
       description: Object containing results for your Synthetic API test.
@@ -13708,6 +13787,60 @@ components:
         timings:
           $ref: '#/components/schemas/SyntheticsTiming'
       type: object
+    SyntheticsAPITestStep:
+      description: The Test step used in a Synthetic multi-step API test.
+      properties:
+        allowFailure:
+          description: Determines whether or not to continue with test if this step
+            fails.
+          type: boolean
+        assertions:
+          default: []
+          description: Array of assertions used for the test.
+          example:
+          - operator: lessThan
+            target: 1000
+            type: responseTime
+          items:
+            $ref: '#/components/schemas/SyntheticsAssertion'
+          type: array
+        extractedValues:
+          description: Array of values to parse and save as variables from the response.
+          items:
+            $ref: '#/components/schemas/SyntheticsParsingOptions'
+          type: array
+        isCritical:
+          description: 'Determines whether or not to consider the entire test as failed
+            if this step fails.
+
+            Can be used only if `allowFailure` is `true`.'
+          type: boolean
+        name:
+          description: The name of the step.
+          example: Example step name
+          type: string
+        request:
+          $ref: '#/components/schemas/SyntheticsTestRequest'
+        retry:
+          $ref: '#/components/schemas/SyntheticsTestOptionsRetry'
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPITestStepSubtype'
+      required:
+      - assertions
+      - request
+      - name
+      - subtype
+      type: object
+    SyntheticsAPITestStepSubtype:
+      description: The subtype of the Synthetic multi-step API test step.
+      enum:
+      - http
+      - grpc
+      example: http
+      type: string
+      x-enum-varnames:
+      - HTTP
+      - GRPC
     SyntheticsAPITestType:
       default: api
       description: Type of the Synthetic test, `api`.
@@ -13717,6 +13850,36 @@ components:
       type: string
       x-enum-varnames:
       - API
+    SyntheticsAPIWaitStep:
+      description: The Wait step used in a Synthetic multi-step API test.
+      properties:
+        name:
+          description: The name of the step.
+          example: Example step name
+          type: string
+        subtype:
+          $ref: '#/components/schemas/SyntheticsAPIWaitStepSubtype'
+        value:
+          description: 'The time to wait in seconds. Minimum value: 0. Maximum value:
+            180.'
+          example: 5
+          format: int32
+          maximum: 180
+          minimum: 0
+          type: integer
+      required:
+      - name
+      - subtype
+      - value
+      type: object
+    SyntheticsAPIWaitStepSubtype:
+      description: The subtype of the Synthetic multi-step API wait step.
+      enum:
+      - wait
+      example: wait
+      type: string
+      x-enum-varnames:
+      - WAIT
     SyntheticsApiTestFailureCode:
       description: Error code that can be returned by a Synthetic test.
       enum:
@@ -13790,8 +13953,45 @@ components:
         which property they apply, and upon which target.'
       oneOf:
       - $ref: '#/components/schemas/SyntheticsAssertionTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionBodyHashTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionJSONPathTarget'
+      - $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTarget'
       - $ref: '#/components/schemas/SyntheticsAssertionXPathTarget'
+    SyntheticsAssertionBodyHashOperator:
+      description: Assertion operator to apply.
+      enum:
+      - md5
+      - sha1
+      - sha256
+      example: md5
+      type: string
+      x-enum-varnames:
+      - MD5
+      - SHA1
+      - SHA256
+    SyntheticsAssertionBodyHashTarget:
+      description: An assertion which targets body hash.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionBodyHashOperator'
+        target:
+          description: Value used by the operator.
+          example: 123456
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionBodyHashType'
+      required:
+      - type
+      - operator
+      - target
+      type: object
+    SyntheticsAssertionBodyHashType:
+      description: Type of the assertion.
+      enum:
+      - bodyHash
+      example: bodyHash
+      type: string
+      x-enum-varnames:
+      - BODY_HASH
     SyntheticsAssertionJSONPathOperator:
       description: Assertion operator to apply.
       enum:
@@ -13819,6 +14019,12 @@ components:
     SyntheticsAssertionJSONPathTargetTarget:
       description: Composed target for `validatesJSONPath` operator.
       properties:
+        elementsOperator:
+          description: The element from the list of results to assert on.  To choose
+            from the first element in the list `firstElementMatches`, every element
+            in the list `everyElementMatches`, at least one element in the list `atLeastOneElementMatches`
+            or the serialized value of the list `serializationMatches`.
+          type: string
         jsonPath:
           description: The JSON path to assert.
           type: string
@@ -13827,6 +14033,45 @@ components:
           type: string
         targetValue:
           description: The path target value to compare to.
+      type: object
+    SyntheticsAssertionJSONSchemaMetaSchema:
+      description: The JSON Schema meta-schema version used in the assertion.
+      enum:
+      - draft-07
+      - draft-06
+      type: string
+      x-enum-varnames:
+      - DRAFT_07
+      - DRAFT_06
+    SyntheticsAssertionJSONSchemaOperator:
+      description: Assertion operator to apply.
+      enum:
+      - validatesJSONSchema
+      example: validatesJSONSchema
+      type: string
+      x-enum-varnames:
+      - VALIDATES_JSON_SCHEMA
+    SyntheticsAssertionJSONSchemaTarget:
+      description: An assertion for the `validatesJSONSchema` operator.
+      properties:
+        operator:
+          $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaOperator'
+        target:
+          $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaTargetTarget'
+        type:
+          $ref: '#/components/schemas/SyntheticsAssertionType'
+      required:
+      - type
+      - operator
+      type: object
+    SyntheticsAssertionJSONSchemaTargetTarget:
+      description: Composed target for `validatesJSONSchema` operator.
+      properties:
+        jsonSchema:
+          description: The JSON Schema to assert.
+          type: string
+        metaSchema:
+          $ref: '#/components/schemas/SyntheticsAssertionJSONSchemaMetaSchema'
       type: object
     SyntheticsAssertionOperator:
       description: Assertion operator to apply.
@@ -15914,7 +16159,6 @@ components:
 
             (in minutes).'
           format: int64
-          maximum: 1440
           minimum: 0
           type: integer
       type: object
@@ -16047,6 +16291,11 @@ components:
           maximum: 65535
           minimum: 1
           type: integer
+        files:
+          description: Files to be used as part of the request in the test.
+          items:
+            $ref: '#/components/schemas/SyntheticsTestRequestBodyFile'
+          type: array
         follow_redirects:
           description: Specifies whether or not the request follows redirects.
           type: boolean
@@ -16055,6 +16304,8 @@ components:
         host:
           description: Host name to perform the test with.
           type: string
+        httpVersion:
+          $ref: '#/components/schemas/SyntheticsTestOptionsHTTPVersion'
         message:
           description: Message to send for UDP or WebSocket tests.
           type: string
@@ -16111,6 +16362,36 @@ components:
           example: https://example.com
           type: string
       type: object
+    SyntheticsTestRequestBodyFile:
+      description: Object describing a file to be used as part of the request in the
+        test.
+      properties:
+        bucketKey:
+          description: Bucket key of the file.
+          type: string
+        content:
+          description: Content of the file.
+          maxLength: 3145728
+          type: string
+        name:
+          description: Name of the file.
+          maxLength: 1500
+          type: string
+        originalFileName:
+          description: Original name of the file.
+          maxLength: 1500
+          type: string
+        size:
+          description: Size of the file.
+          format: int64
+          maximum: 3145728
+          minimum: 1
+          type: integer
+        type:
+          description: Type of the file.
+          maxLength: 1500
+          type: string
+      type: object
     SyntheticsTestRequestBodyType:
       description: Type of the request body.
       enum:
@@ -16120,6 +16401,8 @@ components:
       - text/html
       - application/x-www-form-urlencoded
       - graphql
+      - application/octet-stream
+      - multipart/form-data
       example: text/plain
       type: string
       x-enum-varnames:
@@ -16129,6 +16412,8 @@ components:
       - TEXT_HTML
       - APPLICATION_X_WWW_FORM_URLENCODED
       - GRAPHQL
+      - APPLICATION_OCTET_STREAM
+      - MULTIPART_FORM_DATA
     SyntheticsTestRequestCertificate:
       description: Client certificate to use when performing the test request.
       properties:
@@ -16431,6 +16716,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        sort:
+          $ref: '#/components/schemas/WidgetSortBy'
       type: object
     TagToHosts:
       description: In this object, the key is the tag, the value is a list of host
@@ -16767,6 +17054,8 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
           $ref: '#/components/schemas/LogQueryDefinition'
+        sort:
+          $ref: '#/components/schemas/WidgetSortBy'
         style:
           $ref: '#/components/schemas/WidgetRequestStyle'
       type: object
@@ -17046,270 +17335,6 @@ components:
           format: double
           type: number
       type: object
-    UsageAttributionBody:
-      description: Usage Summary by tag for a given organization.
-      properties:
-        month:
-          description: 'Datetime in ISO-8601 format, UTC, precise to month: [YYYY-MM].'
-          format: date-time
-          type: string
-        org_name:
-          description: The name of the organization.
-          type: string
-        public_id:
-          description: The organization public ID.
-          type: string
-        tag_config_source:
-          description: The source of the usage attribution tag configuration and the
-            selected tags in the format `<source_org_name>:::<selected tag 1>///<selected
-            tag 2>///<selected tag 3>`.
-          type: string
-        tags:
-          $ref: '#/components/schemas/UsageAttributionTagNames'
-        updated_at:
-          description: Shows the the most recent hour in the current month for all
-            organizations for which all usages were calculated.
-          type: string
-        values:
-          $ref: '#/components/schemas/UsageAttributionValues'
-      type: object
-    UsageAttributionLimit:
-      default: 5000
-      description: Maximum number of records to be returned.
-      format: int64
-      type: integer
-    UsageAttributionMetadata:
-      description: The object containing document metadata.
-      properties:
-        aggregates:
-          $ref: '#/components/schemas/UsageAttributionAggregates'
-        pagination:
-          $ref: '#/components/schemas/UsageAttributionPagination'
-      type: object
-    UsageAttributionOffset:
-      default: 0
-      description: Number of records to skip before beginning to return.
-      format: int64
-      type: integer
-    UsageAttributionPagination:
-      description: The metadata for the current pagination.
-      properties:
-        limit:
-          description: Maximum amount of records to be returned.
-          format: int64
-          type: integer
-        offset:
-          description: Records to be skipped before beginning to return.
-          format: int64
-          type: integer
-        sort_direction:
-          description: Direction to sort by.
-          type: string
-        sort_name:
-          description: Field to sort by.
-          type: string
-        total_number_of_records:
-          description: Total number of records.
-          format: int64
-          type: integer
-      type: object
-    UsageAttributionResponse:
-      description: Response containing the Usage Summary by tag(s).
-      properties:
-        metadata:
-          $ref: '#/components/schemas/UsageAttributionMetadata'
-        usage:
-          description: Get usage summary by tag(s).
-          items:
-            $ref: '#/components/schemas/UsageAttributionBody'
-          type: array
-      type: object
-    UsageAttributionSort:
-      default: custom_timeseries_usage
-      description: The field to sort by.
-      enum:
-      - api_percentage
-      - snmp_usage
-      - apm_host_usage
-      - api_usage
-      - appsec_usage
-      - appsec_percentage
-      - container_usage
-      - custom_timeseries_percentage
-      - container_percentage
-      - apm_host_percentage
-      - npm_host_percentage
-      - browser_percentage
-      - browser_usage
-      - infra_host_percentage
-      - snmp_percentage
-      - npm_host_usage
-      - infra_host_usage
-      - custom_timeseries_usage
-      - lambda_functions_usage
-      - lambda_functions_percentage
-      - lambda_invocations_usage
-      - lambda_invocations_percentage
-      - estimated_indexed_logs_usage
-      - estimated_indexed_logs_percentage
-      - estimated_ingested_logs_usage
-      - estimated_ingested_logs_percentage
-      - estimated_indexed_spans_usage
-      - estimated_indexed_spans_percentage
-      - estimated_ingested_spans_usage
-      - estimated_ingested_spans_percentage
-      - apm_fargate_usage
-      - apm_fargate_percentage
-      - appsec_fargate_usage
-      - appsec_fargate_percentage
-      - estimated_rum_usage_attribution_usage
-      - estimated_rum_usage_attribution_percentage
-      - asm_serverless_traced_invocations_usage
-      - asm_serverless_traced_invocations_percentage
-      type: string
-      x-enum-varnames:
-      - API_PERCENTAGE
-      - SNMP_USAGE
-      - APM_HOST_USAGE
-      - API_USAGE
-      - APPSEC_USAGE
-      - APPSEC_PERCENTAGE
-      - CONTAINER_USAGE
-      - CUSTOM_TIMESERIES_PERCENTAGE
-      - CONTAINER_PERCENTAGE
-      - APM_HOST_PERCENTAGE
-      - NPM_HOST_PERCENTAGE
-      - BROWSER_PERCENTAGE
-      - BROWSER_USAGE
-      - INFRA_HOST_PERCENTAGE
-      - SNMP_PERCENTAGE
-      - NPM_HOST_USAGE
-      - INFRA_HOST_USAGE
-      - CUSTOM_TIMESERIES_USAGE
-      - LAMBDA_FUNCTIONS_USAGE
-      - LAMBDA_FUNCTIONS_PERCENTAGE
-      - LAMBDA_INVOCATIONS_USAGE
-      - LAMBDA_INVOCATIONS_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
-      - ESTIMATED_INDEXED_SPANS_USAGE
-      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
-      - ESTIMATED_INGESTED_SPANS_USAGE
-      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
-      - APM_FARGATE_USAGE
-      - APM_FARGATE_PERCENTAGE
-      - APPSEC_FARGATE_USAGE
-      - APPSEC_FARGATE_PERCENTAGE
-      - ESTIMATED_RUM_USAGE_ATTRIBUTION_USAGE
-      - ESTIMATED_RUM_USAGE_ATTRIBUTION_PERCENTAGE
-      - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
-      - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
-    UsageAttributionSupportedMetrics:
-      description: Supported fields for usage attribution requests (valid requests
-        contain one or more metrics, or `*` for all).
-      enum:
-      - custom_timeseries_usage
-      - container_usage
-      - snmp_percentage
-      - apm_host_usage
-      - browser_usage
-      - npm_host_percentage
-      - infra_host_usage
-      - custom_timeseries_percentage
-      - container_percentage
-      - api_usage
-      - apm_host_percentage
-      - infra_host_percentage
-      - snmp_usage
-      - browser_percentage
-      - api_percentage
-      - npm_host_usage
-      - lambda_functions_usage
-      - lambda_functions_percentage
-      - lambda_invocations_usage
-      - lambda_invocations_percentage
-      - fargate_usage
-      - fargate_percentage
-      - profiled_host_usage
-      - profiled_host_percentage
-      - profiled_container_usage
-      - profiled_container_percentage
-      - dbm_hosts_usage
-      - dbm_hosts_percentage
-      - dbm_queries_usage
-      - dbm_queries_percentage
-      - estimated_indexed_logs_usage
-      - estimated_indexed_logs_percentage
-      - estimated_ingested_logs_usage
-      - estimated_ingested_logs_percentage
-      - appsec_usage
-      - appsec_percentage
-      - estimated_indexed_spans_usage
-      - estimated_indexed_spans_percentage
-      - estimated_ingested_spans_usage
-      - estimated_ingested_spans_percentage
-      - apm_fargate_usage
-      - apm_fargate_percentage
-      - appsec_fargate_usage
-      - appsec_fargate_percentage
-      - estimated_rum_usage_attribution_usage
-      - estimated_rum_usage_attribution_percentage
-      - asm_serverless_traced_invocations_usage
-      - asm_serverless_traced_invocations_percentage
-      - '*'
-      type: string
-      x-enum-varnames:
-      - CUSTOM_TIMESERIES_USAGE
-      - CONTAINER_USAGE
-      - SNMP_PERCENTAGE
-      - APM_HOST_USAGE
-      - BROWSER_USAGE
-      - NPM_HOST_PERCENTAGE
-      - INFRA_HOST_USAGE
-      - CUSTOM_TIMESERIES_PERCENTAGE
-      - CONTAINER_PERCENTAGE
-      - API_USAGE
-      - APM_HOST_PERCENTAGE
-      - INFRA_HOST_PERCENTAGE
-      - SNMP_USAGE
-      - BROWSER_PERCENTAGE
-      - API_PERCENTAGE
-      - NPM_HOST_USAGE
-      - LAMBDA_FUNCTIONS_USAGE
-      - LAMBDA_FUNCTIONS_PERCENTAGE
-      - LAMBDA_INVOCATIONS_USAGE
-      - LAMBDA_INVOCATIONS_PERCENTAGE
-      - FARGATE_USAGE
-      - FARGATE_PERCENTAGE
-      - PROFILED_HOST_USAGE
-      - PROFILED_HOST_PERCENTAGE
-      - PROFILED_CONTAINER_USAGE
-      - PROFILED_CONTAINER_PERCENTAGE
-      - DBM_HOSTS_USAGE
-      - DBM_HOSTS_PERCENTAGE
-      - DBM_QUERIES_USAGE
-      - DBM_QUERIES_PERCENTAGE
-      - ESTIMATED_INDEXED_LOGS_USAGE
-      - ESTIMATED_INDEXED_LOGS_PERCENTAGE
-      - ESTIMATED_INGESTED_LOGS_USAGE
-      - ESTIMATED_INGESTED_LOGS_PERCENTAGE
-      - APPSEC_USAGE
-      - APPSEC_PERCENTAGE
-      - ESTIMATED_INDEXED_SPANS_USAGE
-      - ESTIMATED_INDEXED_SPANS_PERCENTAGE
-      - ESTIMATED_INGESTED_SPANS_USAGE
-      - ESTIMATED_INGESTED_SPANS_PERCENTAGE
-      - APM_FARGATE_USAGE
-      - APM_FARGATE_PERCENTAGE
-      - APPSEC_FARGATE_USAGE
-      - APPSEC_FARGATE_PERCENTAGE
-      - ESTIMATED_RUM_USAGE_ATTRIBUTION_USAGE
-      - ESTIMATED_RUM_USAGE_ATTRIBUTION_PERCENTAGE
-      - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
-      - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
-      - ALL
     UsageAttributionTagNames:
       additionalProperties:
         description: 'A list of values that are associated with each tag key.
@@ -17338,225 +17363,6 @@ components:
 
         In this scenario the API returns the total usage, not broken down by tags.'
       nullable: true
-      type: object
-    UsageAttributionValues:
-      description: Fields in Usage Summary by tag(s).
-      properties:
-        api_percentage:
-          description: The percentage of synthetic API test usage by tag(s).
-          format: double
-          type: number
-        api_usage:
-          description: The synthetic API test usage by tag(s).
-          format: double
-          type: number
-        apm_fargate_percentage:
-          description: The percentage of APM ECS Fargate task usage by tag(s).
-          format: double
-          type: number
-        apm_fargate_usage:
-          description: The APM ECS Fargate task usage by tag(s).
-          format: double
-          type: number
-        apm_host_percentage:
-          description: The percentage of APM host usage by tag(s).
-          format: double
-          type: number
-        apm_host_usage:
-          description: The APM host usage by tag(s).
-          format: double
-          type: number
-        appsec_fargate_percentage:
-          description: The percentage of Application Security Monitoring ECS Fargate
-            task usage by tag(s).
-          format: double
-          type: number
-        appsec_fargate_usage:
-          description: The Application Security Monitoring ECS Fargate task usage
-            by tag(s).
-          format: double
-          type: number
-        appsec_percentage:
-          description: The percentage of Application Security Monitoring host usage
-            by tag(s).
-          format: double
-          type: number
-        appsec_usage:
-          description: The Application Security Monitoring host usage by tag(s).
-          format: double
-          type: number
-        browser_percentage:
-          description: The percentage of synthetic browser test usage by tag(s).
-          format: double
-          type: number
-        browser_usage:
-          description: The synthetic browser test usage by tag(s).
-          format: double
-          type: number
-        container_percentage:
-          description: The percentage of container usage by tag(s).
-          format: double
-          type: number
-        container_usage:
-          description: The container usage by tag(s).
-          format: double
-          type: number
-        cspm_container_percentage:
-          description: The percentage of Cloud Security Management Pro container usage
-            by tag(s)
-          format: double
-          type: number
-        cspm_container_usage:
-          description: The Cloud Security Management Pro container usage by tag(s)
-          format: double
-          type: number
-        cspm_host_percentage:
-          description: The percentage of Cloud Security Management Pro host usage
-            by tag(s)
-          format: double
-          type: number
-        cspm_host_usage:
-          description: The Cloud Security Management Pro host usage by tag(s)
-          format: double
-          type: number
-        custom_timeseries_percentage:
-          description: The percentage of custom metrics usage by tag(s).
-          format: double
-          type: number
-        custom_timeseries_usage:
-          description: The custom metrics usage by tag(s).
-          format: double
-          type: number
-        cws_container_percentage:
-          description: The percentage of Cloud Workload Security container usage by
-            tag(s)
-          format: double
-          type: number
-        cws_container_usage:
-          description: The Cloud Workload Security container usage by tag(s)
-          format: double
-          type: number
-        cws_host_percentage:
-          description: The percentage of Cloud Workload Security host usage by tag(s)
-          format: double
-          type: number
-        cws_host_usage:
-          description: The Cloud Workload Security host usage by tag(s)
-          format: double
-          type: number
-        dbm_hosts_percentage:
-          description: The percentage of Database Monitoring host usage by tag(s).
-          format: double
-          type: number
-        dbm_hosts_usage:
-          description: The Database Monitoring host usage by tag(s).
-          format: double
-          type: number
-        dbm_queries_percentage:
-          description: The percentage of Database Monitoring normalized queries usage
-            by tag(s).
-          format: double
-          type: number
-        dbm_queries_usage:
-          description: The Database Monitoring normalized queries usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_logs_percentage:
-          description: The percentage of estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_logs_usage:
-          description: The estimated live indexed logs usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_spans_percentage:
-          description: The percentage of estimated indexed spans usage by tag(s).
-          format: double
-          type: number
-        estimated_indexed_spans_usage:
-          description: The estimated indexed spans usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_logs_percentage:
-          description: The percentage of estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_logs_usage:
-          description: The estimated live ingested logs usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_spans_percentage:
-          description: The percentage of estimated ingested spans usage by tag(s).
-          format: double
-          type: number
-        estimated_ingested_spans_usage:
-          description: The estimated ingested spans usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_percentage:
-          description: The percentage of estimated rum sessions usage by tag(s).
-          format: double
-          type: number
-        estimated_rum_sessions_usage:
-          description: The estimated rum sessions usage by tag(s).
-          format: double
-          type: number
-        infra_host_percentage:
-          description: The percentage of infrastructure host usage by tag(s).
-          format: double
-          type: number
-        infra_host_usage:
-          description: The infrastructure host usage by tag(s).
-          format: double
-          type: number
-        lambda_functions_percentage:
-          description: The percentage of Lambda function usage by tag(s).
-          format: double
-          type: number
-        lambda_functions_usage:
-          description: The Lambda function usage by tag(s).
-          format: double
-          type: number
-        lambda_invocations_percentage:
-          description: The percentage of Lambda invocation usage by tag(s).
-          format: double
-          type: number
-        lambda_invocations_usage:
-          description: The Lambda invocation usage by tag(s).
-          format: double
-          type: number
-        npm_host_percentage:
-          description: The percentage of network host usage by tag(s).
-          format: double
-          type: number
-        npm_host_usage:
-          description: The network host usage by tag(s).
-          format: double
-          type: number
-        profiled_container_percentage:
-          description: The percentage of profiled containers usage by tag(s).
-          format: double
-          type: number
-        profiled_container_usage:
-          description: The profiled container usage by tag(s).
-          format: double
-          type: number
-        profiled_hosts_percentage:
-          description: The percentage of profiled hosts usage by tag(s).
-          format: double
-          type: number
-        profiled_hosts_usage:
-          description: The profiled host usage by tag(s).
-          format: double
-          type: number
-        snmp_percentage:
-          description: The percentage of network device usage by tag(s).
-          format: double
-          type: number
-        snmp_usage:
-          description: The network device usage by tag(s).
-          format: double
-          type: number
       type: object
     UsageAuditLogsHour:
       description: Audit logs usage for a given organization for a given hour.
@@ -17759,6 +17565,8 @@ components:
         logs_indexed_15day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_180day_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        logs_indexed_1day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_indexed_30day_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -18719,7 +18527,7 @@ components:
       x-enum-varnames:
       - REPORTS
     UsageRumSessionsHour:
-      description: Number of RUM Sessions recorded for each hour for a given organization.
+      description: Number of RUM sessions recorded for each hour for a given organization.
       properties:
         hour:
           description: The hour for the usage.
@@ -18732,46 +18540,46 @@ components:
           description: The organization public ID.
           type: string
         replay_session_count:
-          description: Contains the number of RUM Replay Sessions (data available
+          description: Contains the number of RUM Session Replay counts (data available
             beginning November 1, 2021).
           format: int64
           type: integer
         session_count:
-          description: Contains the number of browser RUM Lite Sessions.
+          description: Contains the number of browser RUM lite Sessions.
           format: int64
           nullable: true
           type: integer
         session_count_android:
-          description: Contains the number of mobile RUM Sessions on Android (data
+          description: Contains the number of mobile RUM sessions on Android (data
             available beginning December 1, 2020).
           format: int64
           nullable: true
           type: integer
         session_count_flutter:
-          description: Contains the number of mobile RUM Sessions on Flutter (data
+          description: Contains the number of mobile RUM sessions on Flutter (data
             available beginning March 1, 2023).
           format: int64
           nullable: true
           type: integer
         session_count_ios:
-          description: Contains the number of mobile RUM Sessions on iOS (data available
+          description: Contains the number of mobile RUM sessions on iOS (data available
             beginning December 1, 2020).
           format: int64
           nullable: true
           type: integer
         session_count_reactnative:
-          description: Contains the number of mobile RUM Sessions on React Native
+          description: Contains the number of mobile RUM sessions on React Native
             (data available beginning May 1, 2022).
           format: int64
           nullable: true
           type: integer
       type: object
     UsageRumSessionsResponse:
-      description: Response containing the number of RUM Sessions for each hour for
+      description: Response containing the number of RUM sessions for each hour for
         a given organization.
       properties:
         usage:
-          description: Get hourly usage for RUM Sessions.
+          description: Get hourly usage for RUM sessions.
           items:
             $ref: '#/components/schemas/UsageRumSessionsHour'
           type: array
@@ -19027,7 +18835,8 @@ components:
         audit_logs_lines_indexed_sum:
           deprecated: true
           description: Shows the sum of audit logs lines indexed over all hours in
-            the current date for all organizations.
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         audit_trail_enabled_hwm:
@@ -19065,18 +18874,22 @@ components:
           format: int64
           type: integer
         browser_rum_lite_session_count_sum:
+          deprecated: true
           description: Shows the sum of all browser lite sessions over all hours in
-            the current date for all organizations.
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         browser_rum_replay_session_count_sum:
           description: Shows the sum of all browser replay sessions over all hours
-            in the current date for all organizations.
+            in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         browser_rum_units_sum:
+          deprecated: true
           description: Shows the sum of all browser RUM units over all hours in the
-            current date for all organizations.
+            current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -19352,43 +19165,58 @@ components:
           format: int64
           type: integer
         mobile_rum_lite_session_count_sum:
+          deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
-            the current date for all organizations.
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_android_sum:
-          description: Shows the sum of all mobile RUM Sessions on Android over all
-            hours in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Android over all
+            hours in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_flutter_sum:
-          description: Shows the sum of all mobile RUM Sessions on Flutter over all
-            hours in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Flutter over all
+            hours in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_ios_sum:
-          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
-            in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on iOS over all hours
+            in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_reactnative_sum:
-          description: Shows the sum of all mobile RUM Sessions on React Native over
-            all hours in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on React Native over
+            all hours in the current date for all organizations (To be deprecated
+            on October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_roku_sum:
-          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
-            in the current date for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Roku over all hours
+            in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_sum:
-          description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current date for all organizations
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions over all hours in
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_units_sum:
+          deprecated: true
           description: Shows the sum of all mobile RUM units over all hours in the
-            current date for all organizations.
+            current date for all organizations (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         ndm_netflow_events_sum:
@@ -19397,8 +19225,10 @@ components:
           format: int64
           type: integer
         netflow_indexed_events_count_sum:
+          deprecated: true
           description: Shows the sum of all Network flows indexed over all hours in
-            the current date for all organizations.
+            the current date for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         npm_host_top99p:
@@ -19445,22 +19275,117 @@ components:
           type: integer
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and
-            legacy sessions over all hours in the current month for all organizations.
+            legacy sessions over all hours in the current month for all organizations
+            (To be deprecated on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_legacy_session_count_sum:
+          description: Shows the sum of all browser RUM legacy sessions over all hours
+            in the current date for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_lite_session_count_sum:
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current date for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_replay_session_count_sum:
+          description: Shows the sum of all browser RUM Session Replay counts over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_lite_session_count_sum:
+          description: Shows the sum of all RUM lite sessions (browser and mobile)
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_android_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Android
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM legacy Sessions on Flutter
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on iOS over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on React Native
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Roku over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_android_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Android over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Flutter over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM lite sessions on iOS over all
+            hours in the current date for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM lite sessions on React Native
+            over all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Roku over
+            all hours in the current date for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_replay_session_count_sum:
+          description: Shows the sum of all RUM Session Replay counts over all hours
+            in the current date for all organizations (To be introduced on October
+            1st, 2024).
           format: int64
           type: integer
         rum_session_count_sum:
-          description: Shows the sum of all browser RUM Lite Sessions over all hours
-            in the current date for all organizations
+          deprecated: true
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         rum_total_session_count_sum:
-          description: Shows the sum of RUM Sessions (browser and mobile) over all
+          description: Shows the sum of RUM sessions (browser and mobile) over all
             hours in the current date for all organizations.
           format: int64
           type: integer
         rum_units_sum:
+          deprecated: true
           description: Shows the sum of all browser and mobile RUM units over all
-            hours in the current date for all organizations.
+            hours in the current date for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
@@ -19597,7 +19522,8 @@ components:
         audit_logs_lines_indexed_sum:
           deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
-            in the current date for the given org.
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         audit_trail_enabled_hwm:
@@ -19635,18 +19561,21 @@ components:
           format: int64
           type: integer
         browser_rum_lite_session_count_sum:
+          deprecated: true
           description: Shows the sum of all browser lite sessions over all hours in
-            the current date for the given org.
+            the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         browser_rum_replay_session_count_sum:
           description: Shows the sum of all browser replay sessions over all hours
-            in the current date for the given org.
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         browser_rum_units_sum:
+          deprecated: true
           description: Shows the sum of all browser RUM units over all hours in the
-            current date for the given org.
+            current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         ci_pipeline_indexed_spans_sum:
@@ -19906,8 +19835,9 @@ components:
           format: int64
           type: integer
         indexed_events_count_sum:
+          deprecated: true
           description: Shows the sum of all log events indexed over all hours in the
-            current date for the given org.
+            current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         infra_host_top99p:
@@ -19931,43 +19861,56 @@ components:
           format: int64
           type: integer
         mobile_rum_lite_session_count_sum:
+          deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
-            the current date for the given org.
+            the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_android_sum:
-          description: Shows the sum of all mobile RUM Sessions on Android over all
-            hours in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Android over all
+            hours in the current date for the given org (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_flutter_sum:
-          description: Shows the sum of all mobile RUM Sessions on Flutter over all
-            hours in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Flutter over all
+            hours in the current date for the given org (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_ios_sum:
-          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
-            in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on iOS over all hours
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_reactnative_sum:
-          description: Shows the sum of all mobile RUM Sessions on React Native over
-            all hours in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on React Native over
+            all hours in the current date for the given org (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_roku_sum:
-          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
-            in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Roku over all hours
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_sum:
-          description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions over all hours in
+            the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_units_sum:
+          deprecated: true
           description: Shows the sum of all mobile RUM units over all hours in the
-            current date for the given org.
+            current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         name:
@@ -19979,8 +19922,9 @@ components:
           format: int64
           type: integer
         netflow_indexed_events_count_sum:
+          deprecated: true
           description: Shows the sum of all Network flows indexed over all hours in
-            the current date for the given org.
+            the current date for the given org (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         npm_host_top99p:
@@ -20028,22 +19972,117 @@ components:
           type: string
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and
-            legacy sessions over all hours in the current date for the given org.
+            legacy sessions over all hours in the current date for the given org (To
+            be deprecated on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_legacy_session_count_sum:
+          description: Shows the sum of all browser RUM legacy sessions over all hours
+            in the current date for the given org (To be introduced on October 1st,
+            2024).
+          format: int64
+          type: integer
+        rum_browser_lite_session_count_sum:
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current date for the given org (To be introduced on October 1st,
+            2024).
+          format: int64
+          type: integer
+        rum_browser_replay_session_count_sum:
+          description: Shows the sum of all browser RUM Session Replay counts over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_lite_session_count_sum:
+          description: Shows the sum of all RUM lite sessions (browser and mobile)
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_android_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Android
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Flutter
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on iOS over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on React Native
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Roku over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_android_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Android over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_flutter_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Flutter over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_ios_sum:
+          description: Shows the sum of all mobile RUM lite sessions on iOS over all
+            hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_reactnative_sum:
+          description: Shows the sum of all mobile RUM lite sessions on React Native
+            over all hours in the current date for the given org (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_roku_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Roku over
+            all hours in the current date for the given org (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_replay_session_count_sum:
+          description: Shows the sum of all RUM Session Replay counts over all hours
+            in the current date for the given org (To be introduced on October 1st,
+            2024).
           format: int64
           type: integer
         rum_session_count_sum:
-          description: Shows the sum of all browser RUM Lite Sessions over all hours
-            in the current date for the given org.
+          deprecated: true
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current date for the given org (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         rum_total_session_count_sum:
-          description: Shows the sum of RUM Sessions (browser and mobile) over all
+          description: Shows the sum of RUM sessions (browser and mobile) over all
             hours in the current date for the given org.
           format: int64
           type: integer
         rum_units_sum:
+          deprecated: true
           description: Shows the sum of all browser and mobile RUM units over all
-            hours in the current date for the given org.
+            hours in the current date for the given org (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
@@ -20180,7 +20219,8 @@ components:
         audit_logs_lines_indexed_agg_sum:
           deprecated: true
           description: Shows the sum of all audit logs lines indexed over all hours
-            in the current month for all organizations.
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         audit_trail_enabled_hwm_sum:
@@ -20224,18 +20264,23 @@ components:
           format: int64
           type: integer
         browser_rum_lite_session_count_agg_sum:
+          deprecated: true
           description: Shows the sum of all browser lite sessions over all hours in
-            the current month for all organizations.
+            the current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         browser_rum_replay_session_count_agg_sum:
           description: Shows the sum of all browser replay sessions over all hours
-            in the current month for all organizations.
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         browser_rum_units_agg_sum:
+          deprecated: true
           description: Shows the sum of all browser RUM units over all hours in the
-            current month for all organizations.
+            current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         ci_pipeline_indexed_spans_agg_sum:
@@ -20495,8 +20540,10 @@ components:
           format: int64
           type: integer
         indexed_events_count_agg_sum:
+          deprecated: true
           description: Shows the sum of all log events indexed over all hours in the
-            current month for all organizations.
+            current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         infra_host_top99p_sum:
@@ -20525,9 +20572,9 @@ components:
           format: date-time
           type: string
         live_indexed_events_agg_sum:
+          deprecated: true
           description: Shows the sum of all live logs indexed over all hours in the
-            current month for all organizations (data available as of December 1,
-            2020).
+            current month for all organization (To be deprecated on October 1st, 2024).
           format: int64
           type: integer
         live_ingested_bytes_agg_sum:
@@ -20539,43 +20586,59 @@ components:
         logs_by_retention:
           $ref: '#/components/schemas/LogsByRetention'
         mobile_rum_lite_session_count_agg_sum:
+          deprecated: true
           description: Shows the sum of all mobile lite sessions over all hours in
-            the current month for all organizations.
+            the current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions over all hours in
-            the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions over all hours in
+            the current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         mobile_rum_session_count_android_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on Android over all
-            hours in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Android over all
+            hours in the current month for all organizations (To be deprecated on
+            October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_flutter_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on Flutter over all
-            hours in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Flutter over all
+            hours in the current month for all organizations (To be deprecated on
+            October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_ios_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on iOS over all hours
-            in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on iOS over all hours
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_reactnative_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on React Native over
-            all hours in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on React Native over
+            all hours in the current month for all organizations (To be deprecated
+            on October 1st, 2024).
           format: int64
           type: integer
         mobile_rum_session_count_roku_agg_sum:
-          description: Shows the sum of all mobile RUM Sessions on Roku over all hours
-            in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all mobile RUM sessions on Roku over all hours
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         mobile_rum_units_agg_sum:
+          deprecated: true
           description: Shows the sum of all mobile RUM units over all hours in the
-            current month for all organizations.
+            current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         ndm_netflow_events_agg_sum:
@@ -20584,8 +20647,10 @@ components:
           format: int64
           type: integer
         netflow_indexed_events_count_agg_sum:
+          deprecated: true
           description: Shows the sum of all Network flows indexed over all hours in
-            the current month for all organizations.
+            the current month for all organizations (To be deprecated on October 1st,
+            2024).
           format: int64
           type: integer
         npm_host_top99p_sum:
@@ -20631,9 +20696,10 @@ components:
           format: int64
           type: integer
         rehydrated_indexed_events_agg_sum:
+          deprecated: true
           description: Shows the sum of all rehydrated logs indexed over all hours
-            in the current month for all organizations (data available as of December
-            1, 2020).
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         rehydrated_ingested_bytes_agg_sum:
@@ -20644,22 +20710,117 @@ components:
           type: integer
         rum_browser_and_mobile_session_count:
           description: Shows the sum of all mobile sessions and all browser lite and
-            legacy sessions over all hours in the current month for all organizations.
+            legacy sessions over all hours in the current month for all organizations
+            (To be deprecated on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_legacy_session_count_agg_sum:
+          description: Shows the sum of all browser RUM legacy sessions over all hours
+            in the current month for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_lite_session_count_agg_sum:
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current month for all organizations (To be introduced on October
+            1st, 2024).
+          format: int64
+          type: integer
+        rum_browser_replay_session_count_agg_sum:
+          description: Shows the sum of all browser RUM Session Replay counts over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_lite_session_count_agg_sum:
+          description: Shows the sum of all RUM lite sessions (browser and mobile)
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Android
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_flutter_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Flutter
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on iOS over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on React Native
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_legacy_session_count_roku_agg_sum:
+          description: Shows the sum of all mobile RUM legacy sessions on Roku over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_android_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Android over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_flutter_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Flutter over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_ios_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on iOS over all
+            hours in the current month for all organizations (To be introduced on
+            October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_reactnative_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on React Native
+            over all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_mobile_lite_session_count_roku_agg_sum:
+          description: Shows the sum of all mobile RUM lite sessions on Roku over
+            all hours in the current month for all organizations (To be introduced
+            on October 1st, 2024).
+          format: int64
+          type: integer
+        rum_replay_session_count_agg_sum:
+          description: Shows the sum of all RUM Session Replay counts over all hours
+            in the current month for all organizations (To be introduced on October
+            1st, 2024).
           format: int64
           type: integer
         rum_session_count_agg_sum:
-          description: Shows the sum of all browser RUM Lite Sessions over all hours
-            in the current month for all organizations.
+          deprecated: true
+          description: Shows the sum of all browser RUM lite sessions over all hours
+            in the current month for all organizations (To be deprecated on October
+            1st, 2024).
           format: int64
           type: integer
         rum_total_session_count_agg_sum:
-          description: Shows the sum of RUM Sessions (browser and mobile) over all
+          description: Shows the sum of RUM sessions (browser and mobile) over all
             hours in the current month for all organizations.
           format: int64
           type: integer
         rum_units_agg_sum:
+          deprecated: true
           description: Shows the sum of all browser and mobile RUM units over all
-            hours in the current month for all organizations.
+            hours in the current month for all organizations (To be deprecated on
+            October 1st, 2024).
           format: int64
           type: integer
         sds_apm_scanned_bytes_sum:
@@ -21459,6 +21620,24 @@ components:
         order:
           $ref: '#/components/schemas/QuerySortOrder'
       type: object
+    WidgetFormulaSort:
+      description: The formula to sort the widget by.
+      properties:
+        index:
+          description: The index of the formula to sort by.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+        type:
+          $ref: '#/components/schemas/FormulaType'
+      required:
+      - type
+      - index
+      - order
+      type: object
     WidgetFormulaStyle:
       description: Styling options for widget formulas.
       properties:
@@ -21472,6 +21651,22 @@ components:
           example: 1
           format: int64
           type: integer
+      type: object
+    WidgetGroupSort:
+      description: The group to sort the widget by.
+      properties:
+        name:
+          description: The name of the group.
+          example: group_name
+          type: string
+        order:
+          $ref: '#/components/schemas/WidgetSort'
+        type:
+          $ref: '#/components/schemas/GroupType'
+      required:
+      - type
+      - name
+      - order
       type: object
     WidgetGrouping:
       description: The kind of grouping to use.
@@ -21848,6 +22043,25 @@ components:
       x-enum-varnames:
       - ASCENDING
       - DESCENDING
+    WidgetSortBy:
+      description: The controls for sorting the widget.
+      properties:
+        count:
+          description: The number of items to limit the widget to.
+          format: int64
+          minimum: 0
+          type: integer
+        order_by:
+          description: The array of items to sort the widget by in order.
+          items:
+            $ref: '#/components/schemas/WidgetSortOrderBy'
+          type: array
+      type: object
+    WidgetSortOrderBy:
+      description: The item to sort the widget by.
+      oneOf:
+      - $ref: '#/components/schemas/WidgetFormulaSort'
+      - $ref: '#/components/schemas/WidgetGroupSort'
     WidgetStyle:
       description: Widget style definition.
       properties:
@@ -21956,18 +22170,32 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/v1/authorize
           scopes:
+            apm_api_catalog_read: View API catalog and API definitions.
+            apm_api_catalog_write: Add, modify, and delete API catalog definitions.
+            apm_read: Read and query APM and Trace Analytics.
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            cases_read: View Cases.
+            cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
+            cloud_cost_management_read: View Cloud Cost pages. This does not restrict
+              access to the cloud cost data source in dashboards and notebooks.
+            cloud_cost_management_write: Configure cloud cost accounts and global
+              customizations.
+            continuous_profiler_pgo_read: Read and query Continuous Profiler data
+              for Profile-Guided Optimization (PGO).
             create_webhooks: Create webhooks integrations.
             dashboards_public_share: Generate public and authenticated links to share
               dashboards or embeddable graphs externally.
             dashboards_read: View dashboards.
             dashboards_write: Create and change dashboards.
+            data_scanner_read: View Data Scanner configurations.
+            data_scanner_write: Edit Data Scanner configurations.
             events_read: Read Events data.
+            hosts_read: List hosts and their attributes.
             incident_notification_settings_write: Configure Incidents Notification
               settings.
             incident_read: View incidents in Datadog.
@@ -21975,10 +22203,15 @@ components:
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in
-              an organization. Mute and unmute hosts. The ability to write monitors
+              an organization. Mute and unmute monitors. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit and delete individual monitors.
+            org_management: Edit org configurations, including authentication and
+              certain security preferences such as configuring SAML, renaming an org,
+              configuring allowed login methods, creating child orgs, subscribing
+              & unsubscribing from apps in the marketplace, and enabling & disabling
+              Remote Configuration for the entire organization.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
@@ -22013,6 +22246,9 @@ components:
             user_access_manage: Disable users, manage user roles, manage SAML-to-role
               mappings, and configure logs restriction queries.
             user_access_read: View users and their roles and settings.
+            workflows_read: View workflows.
+            workflows_run: Run workflows.
+            workflows_write: Create, edit, and delete workflows.
           tokenUrl: /oauth2/v1/token
       type: oauth2
     apiKeyAuth:
@@ -22617,11 +22853,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
       summary: Get the list of available daily custom reports
       tags:
       - Usage Metering
@@ -22670,11 +22901,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
       summary: Get specified daily custom reports
       tags:
       - Usage Metering
@@ -24784,7 +25010,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - hosts_read
       summary: Get all hosts for your organization
       tags:
       - Hosts
@@ -24832,7 +25059,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - hosts_read
       summary: Get the total number of active hosts
       tags:
       - Hosts
@@ -24989,9 +25217,9 @@ paths:
             value: "{\n  \"account_id\": \"{{ timestamp(\"now\") }}00\",\n  \"account_specific_namespace_rules\":
               {\n      \"auto_scaling\": false\n  },\n  \"cspm_resource_collection_enabled\":
               true,\n  \"excluded_regions\": [\n      \"us-east-1\",\n      \"us-west-2\"\n
-              \ ],\n  \"filter_tags\": [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\":
-              [\n      \"$KEY:$VALUE\"\n  ],\n  \"metrics_collection_enabled\": false,\n
-              \ \"resource_collection_enabled\": true,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
+              \ ],\n  \"extended_resource_collection_enabled\": true,\n  \"filter_tags\":
+              [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\": [\n      \"$KEY:$VALUE\"\n
+              \ ],\n  \"metrics_collection_enabled\": false,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
           step: there is a valid "aws_account" in the system
       x-menu-order: 8
       x-undo:
@@ -25166,10 +25394,6 @@ paths:
           description: Authentication Error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all Amazon EventBridge sources
       tags:
       - AWS Integration
@@ -27055,10 +27279,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get indexes order
       tags:
       - Logs Indexes
@@ -27290,10 +27510,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get pipeline order
       tags:
       - Logs Pipelines
@@ -27375,10 +27591,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get all pipelines
       tags:
       - Logs Pipelines
@@ -27496,10 +27708,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ: []
       summary: Get a pipeline
       tags:
       - Logs Pipelines
@@ -28317,22 +28525,20 @@ paths:
       description: Search and filter your monitor groups details.
       operationId: SearchMonitorGroups
       parameters:
-      - description: 'After entering a search query in your [Manage Monitor page][1]
+      - description: 'After entering a search query on the [Triggered Monitors page][1],
           use the query parameter value in the
 
-          URL of the page as value for this parameter. Consult the dedicated [manage
-          monitor documentation][2]
-
-          page to learn more.
+          URL of the page as a value for this parameter. For more information, see
+          the [Manage Monitors documentation][2].
 
 
           The query can contain any number of space-separated monitor attributes,
-          for instance `query="type:metric status:alert"`.
+          for instance: `query="type:metric group_status:alert"`.
 
 
-          [1]: https://app.datadoghq.com/monitors/manage
+          [1]: https://app.datadoghq.com/monitors/triggered
 
-          [2]: /monitors/manage/#find-the-monitors'
+          [2]: /monitors/manage/#triggered-monitors'
         in: query
         name: query
         required: false
@@ -29021,11 +29227,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
       summary: Get the list of available monthly custom reports
       tags:
       - Usage Metering
@@ -29080,11 +29281,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
       summary: Get specified monthly custom reports
       tags:
       - Usage Metering
@@ -33007,10 +33203,11 @@ paths:
         type: idempotent
   /api/v1/usage/analyzed_logs:
     get:
+      deprecated: true
       description: 'Get hourly usage for analyzed logs (Security Monitoring).
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageAnalyzedLogs
@@ -33067,103 +33264,6 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 23
-      x-undo:
-        type: safe
-  /api/v1/usage/attribution:
-    get:
-      deprecated: true
-      description: 'Get usage attribution.
-
-        **Note:** This endpoint will be fully deprecated on December 1, 2022.
-
-        Refer to [Migrating from v1 to v2 of the Usage Attribution API](https://docs.datadoghq.com/account_management/guide/usage-attribution-migration/)
-        for the associated migration guide.'
-      operationId: GetUsageAttribution
-      parameters:
-      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for usage beginning in this month.
-
-          Maximum of 15 months ago.'
-        in: query
-        name: start_month
-        required: true
-        schema:
-          format: date-time
-          type: string
-      - description: Comma-separated list of usage types to return, or `*` for all
-          usage types.
-        in: query
-        name: fields
-        required: true
-        schema:
-          $ref: '#/components/schemas/UsageAttributionSupportedMetrics'
-      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
-          for usage ending this month.'
-        in: query
-        name: end_month
-        required: false
-        schema:
-          format: date-time
-          type: string
-      - description: 'The direction to sort by: `[desc, asc]`.'
-        in: query
-        name: sort_direction
-        required: false
-        schema:
-          $ref: '#/components/schemas/UsageSortDirection'
-      - description: The field to sort by.
-        in: query
-        name: sort_name
-        required: false
-        schema:
-          $ref: '#/components/schemas/UsageAttributionSort'
-      - description: Include child org usage in the response. Defaults to false.
-        in: query
-        name: include_descendants
-        required: false
-        schema:
-          default: false
-          type: boolean
-      - description: Number of records to skip before beginning to return.
-        in: query
-        name: offset
-        required: false
-        schema:
-          $ref: '#/components/schemas/UsageAttributionOffset'
-      - description: Maximum number of records to be returned.
-        in: query
-        name: limit
-        required: false
-        schema:
-          $ref: '#/components/schemas/UsageAttributionLimit'
-      responses:
-        '200':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/UsageAttributionResponse'
-          description: OK
-        '403':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Forbidden - User is not authorized
-        '429':
-          content:
-            application/json;datetime-format=rfc3339:
-              schema:
-                $ref: '#/components/schemas/APIErrorResponse'
-          description: Too many requests
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - usage_read
-      summary: Get usage attribution
-      tags:
-      - Usage Metering
-      x-menu-order: 40
       x-undo:
         type: safe
   /api/v1/usage/audit_logs:
@@ -33230,10 +33330,11 @@ paths:
         type: safe
   /api/v1/usage/aws_lambda:
     get:
+      deprecated: true
       description: 'Get hourly usage for Lambda.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageLambda
@@ -33292,7 +33393,10 @@ paths:
         type: safe
   /api/v1/usage/billable-summary:
     get:
-      description: Get billable usage across your account.
+      description: 'Get billable usage across your account.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetUsageBillableSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -33341,10 +33445,11 @@ paths:
         type: safe
   /api/v1/usage/ci-app:
     get:
+      deprecated: true
       description: 'Get hourly usage for CI visibility (tests, pipeline, and spans).
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageCIApp
@@ -33405,10 +33510,11 @@ paths:
         type: safe
   /api/v1/usage/cspm:
     get:
+      deprecated: true
       description: 'Get hourly usage for cloud security management (CSM) pro.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageCloudSecurityPostureManagement
@@ -33469,10 +33575,11 @@ paths:
         type: safe
   /api/v1/usage/cws:
     get:
+      deprecated: true
       description: 'Get hourly usage for cloud workload security.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageCWS
@@ -33533,10 +33640,11 @@ paths:
         type: safe
   /api/v1/usage/dbm:
     get:
+      deprecated: true
       description: 'Get hourly usage for database monitoring
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageDBM
@@ -33597,10 +33705,11 @@ paths:
         type: safe
   /api/v1/usage/fargate:
     get:
+      deprecated: true
       description: 'Get hourly usage for [Fargate](https://docs.datadoghq.com/integrations/ecs_fargate/).
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageFargate
@@ -33659,10 +33768,11 @@ paths:
         type: safe
   /api/v1/usage/hosts:
     get:
+      deprecated: true
       description: 'Get hourly usage for hosts and containers.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageHosts
@@ -33812,10 +33922,11 @@ paths:
         type: safe
   /api/v1/usage/incident-management:
     get:
+      deprecated: true
       description: 'Get hourly usage for incident management.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetIncidentManagement
@@ -33876,10 +33987,11 @@ paths:
         type: safe
   /api/v1/usage/indexed-spans:
     get:
+      deprecated: true
       description: 'Get hourly usage for indexed spans.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageIndexedSpans
@@ -33938,10 +34050,11 @@ paths:
         type: safe
   /api/v1/usage/ingested-spans:
     get:
+      deprecated: true
       description: 'Get hourly usage for ingested spans.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetIngestedSpans
@@ -34002,10 +34115,11 @@ paths:
         type: safe
   /api/v1/usage/iot:
     get:
+      deprecated: true
       description: 'Get hourly usage for IoT.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageInternetOfThings
@@ -34066,10 +34180,11 @@ paths:
         type: safe
   /api/v1/usage/logs:
     get:
+      deprecated: true
       description: 'Get hourly usage for logs.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageLogs
@@ -34128,10 +34243,11 @@ paths:
         type: safe
   /api/v1/usage/logs-by-retention:
     get:
+      deprecated: true
       description: 'Get hourly usage for indexed logs by retention period.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageLogsByRetention
@@ -34369,10 +34485,11 @@ paths:
         type: safe
   /api/v1/usage/network_flows:
     get:
+      deprecated: true
       description: 'Get hourly usage for network flows.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageNetworkFlows
@@ -34433,10 +34550,11 @@ paths:
         type: safe
   /api/v1/usage/network_hosts:
     get:
+      deprecated: true
       description: 'Get hourly usage for network hosts.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageNetworkHosts
@@ -34495,10 +34613,11 @@ paths:
         type: safe
   /api/v1/usage/online-archive:
     get:
+      deprecated: true
       description: 'Get hourly usage for online archive.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageOnlineArchive
@@ -34559,10 +34678,11 @@ paths:
         type: safe
   /api/v1/usage/profiling:
     get:
+      deprecated: true
       description: 'Get hourly usage for profiled hosts.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageProfiling
@@ -34623,11 +34743,12 @@ paths:
         type: safe
   /api/v1/usage/rum:
     get:
+      deprecated: true
       description: 'Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
         Units.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageRumUnits
@@ -34686,11 +34807,12 @@ paths:
         type: safe
   /api/v1/usage/rum_sessions:
     get:
+      deprecated: true
       description: 'Get hourly usage for [RUM](https://docs.datadoghq.com/real_user_monitoring/)
         Sessions.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageRumSessions
@@ -34755,10 +34877,11 @@ paths:
         type: safe
   /api/v1/usage/sds:
     get:
+      deprecated: true
       description: 'Get hourly usage for sensitive data scanner.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageSDS
@@ -34819,10 +34942,11 @@ paths:
         type: safe
   /api/v1/usage/snmp:
     get:
+      deprecated: true
       description: 'Get hourly usage for SNMP devices.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageSNMP
@@ -34883,7 +35007,10 @@ paths:
         type: safe
   /api/v1/usage/summary:
     get:
-      description: Get all usage across your account.
+      description: 'Get all usage across your account.
+
+
+        This endpoint is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).'
       operationId: GetUsageSummary
       parameters:
       - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
@@ -34951,8 +35078,8 @@ paths:
       deprecated: true
       description: 'Get hourly usage for [synthetics checks](https://docs.datadoghq.com/synthetics/).
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageSynthetics
@@ -35011,10 +35138,11 @@ paths:
         type: safe
   /api/v1/usage/synthetics_api:
     get:
+      deprecated: true
       description: 'Get hourly usage for [synthetics API checks](https://docs.datadoghq.com/synthetics/).
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageSyntheticsAPI
@@ -35073,10 +35201,11 @@ paths:
         type: safe
   /api/v1/usage/synthetics_browser:
     get:
+      deprecated: true
       description: 'Get hourly usage for synthetics browser checks.
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageSyntheticsBrowser
@@ -35135,10 +35264,11 @@ paths:
         type: safe
   /api/v1/usage/timeseries:
     get:
+      deprecated: true
       description: 'Get hourly usage for [custom metrics](https://docs.datadoghq.com/developers/metrics/custom_metrics/).
 
-        **Note:** hourly usage data for all products is now available in the [Get
-        hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
+        **Note:** This endpoint has been deprecated. Hourly usage data for all products
+        is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
         Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)
         for the associated migration guide.'
       operationId: GetUsageTimeseries
@@ -35353,11 +35483,6 @@ paths:
           description: Conflict
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      - AuthZ:
-        - user_access_invite
       summary: Create a user
       tags:
       - Users
@@ -35537,7 +35662,6 @@ paths:
           $ref: '#/components/responses/TooManyRequestsResponse'
       security:
       - apiKeyAuth: []
-      - AuthZ: []
       summary: Validate API key
       tags:
       - Authentication
@@ -36090,8 +36214,6 @@ tags:
     monthly usage across multiple facets of Datadog.
 
     This API is available to all Pro and Enterprise customers.
-
-    Usage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).
 
 
     **Note**: Usage data is delayed by up to 72 hours from when it was incurred.

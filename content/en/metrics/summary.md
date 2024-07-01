@@ -1,6 +1,5 @@
 ---
 title: Metrics Summary
-kind: documentation
 description: "Consult the full list of metrics reporting to Datadog."
 aliases:
   - /graphing/faq/how-can-i-set-up-custom-units-for-custom-metrics
@@ -37,6 +36,8 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Query Activity** (Beta): Metrics not queried in the app or by the API in the past 30 days
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
+
+**Note**: A metric included on a Dashboard that has not been loaded by a user in the last 30 days would not be considered actively queried.
 
 {{< img src="metrics/summary/facets4.png" alt="Metrics Facet Panel" style="width:75%;">}}
 

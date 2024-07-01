@@ -27,6 +27,10 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+<div class="alert alert-info">
+  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
+</div>
+
 ## Compatibility
 
 Supported frameworks:
@@ -48,7 +52,7 @@ Supported test frameworks:
 | xUnit | >= 2.2 |
 | NUnit | >= 3.0 |
 | MsTestV2 | >= 14 |
-| [BenchmarkDotNet][2] | >= 0.13.2 |
+| [BenchmarkDotNet][1] | >= 0.13.2 |
 
 ## Configuring reporting method
 
@@ -78,11 +82,11 @@ Install or update the `dd-trace` command using one of the following ways:
    dotnet tool update -g dd-trace
    ```
 - By downloading the appropriate version:
-    * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][3]
-    * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][4]
-    * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][5]
+    * Win-x64: [https://dtdg.co/dd-trace-dotnet-win-x64][2]
+    * Linux-x64: [https://dtdg.co/dd-trace-dotnet-linux-x64][3]
+    * Linux-musl-x64 (Alpine): [https://dtdg.co/dd-trace-dotnet-linux-musl-x64][4]
 
-- Or by downloading [from the GitHub release page][6].
+- Or by downloading [from the GitHub release page][5].
 
 ## Instrumenting tests
 
@@ -116,6 +120,35 @@ dd-trace ci run --dd-service=my-dotnet-app --dd-env=ci -- VSTest.Console.exe {te
 
 All tests are automatically instrumented.
 
+### Compatibility with Microsoft.CodeCoverage nuget package
+
+Since `Microsoft.CodeCoverage` version `17.2.0` Microsoft introduced [dynamic instrumentation using the `.NET CLR Profiling API`][16] enabled by default only on Windows. Datadog's automatic instrumentation relies on the `.NET CLR Profiling API`. This API allows only one subscriber (for example, `dd-trace`). The use of CodeCoverage dynamic instrumentation breaks the automatic test instrumentation.
+
+The solution is to switch from dynamic instrumentation to [static instrumentation][17]. Modify your `.runsettings` file with the following configuration knobs:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+    <DataCollectionRunSettings>
+        <DataCollectors>
+            <DataCollector friendlyName="Code Coverage">
+              <Configuration>
+                <CodeCoverage>
+                  <!-- Switching to static instrumentation (dynamic instrumentation collides with dd-trace instrumentation) -->
+                  <EnableStaticManagedInstrumentation>True</EnableStaticManagedInstrumentation>
+                  <EnableDynamicManagedInstrumentation>False</EnableDynamicManagedInstrumentation>
+                  <UseVerifiableInstrumentation>False</UseVerifiableInstrumentation>
+                  <EnableStaticNativeInstrumentation>True</EnableStaticNativeInstrumentation>
+                  <EnableDynamicNativeInstrumentation>False</EnableDynamicNativeInstrumentation>
+                  ...
+                </CodeCoverage>
+              </Configuration>
+            </DataCollector>
+        </DataCollectors>
+    </DataCollectionRunSettings>
+</RunSettings>
+```
+
 ## Configuration settings
 
 You can change the default configuration of the CLI by using command line arguments or environment variables. For a full list of configuration settings, run:
@@ -143,7 +176,7 @@ The following list shows the default values for key configuration settings:
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-For more information about `service` and `env` reserved tags, see [Unified Service Tagging][17]. All other [Datadog Tracer configuration][7] options can also be used.
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][6]. All other [Datadog Tracer configuration][7] options can also be used.
 
 ### Adding custom tags to tests
 
@@ -163,11 +196,11 @@ if (scope != null) {
 
 To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][8] section of the .NET custom instrumentation documentation.
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-To add custom metrics to tests, configure [custom instrumentation](#custom-instrumentation) first.
+To add custom measures to tests, configure [custom instrumentation](#custom-instrumentation) first.
 
-Just like tags, you can add custom metrics to your tests by using the current active span:
+Just like tags, you can add custom measures to your tests by using the current active span:
 
 ```csharp
 // inside your test
@@ -181,7 +214,7 @@ if (scope != null) {
 
 To create filters or visualizations for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][8] section of the .NET custom instrumentation documentation.
 
-Read more about custom metrics in the [Add Custom Metrics Guide][9].
+Read more about custom Measures in the [Add Custom Measures Guide][9].
 
 ### Reporting code coverage
 
@@ -830,20 +863,20 @@ Always call `module.Close()` or `module.CloseAsync()` at the end so that all the
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /continuous_integration/tests/dotnet/#instrumenting-benchmarkdotnet-tests
-[2]: /continuous_integration/tests/setup/dotnet/?tab=onpremisesciproviderdatadogagent#instrumenting-benchmarkdotnet-tests
-[3]: https://dtdg.co/dd-trace-dotnet-win-x64
-[4]: https://dtdg.co/dd-trace-dotnet-linux-x64
-[5]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
-[6]: https://github.com/DataDog/dd-trace-dotnet/releases
+[1]: /continuous_integration/tests/setup/dotnet/?tab=onpremisesciproviderdatadogagent#instrumenting-benchmarkdotnet-tests
+[2]: https://dtdg.co/dd-trace-dotnet-win-x64
+[3]: https://dtdg.co/dd-trace-dotnet-linux-x64
+[4]: https://dtdg.co/dd-trace-dotnet-linux-musl-x64
+[5]: https://github.com/DataDog/dd-trace-dotnet/releases
+[6]: /getting_started/tagging/unified_service_tagging
 [7]: /tracing/trace_collection/dd_libraries/dotnet-core/?tab=windows#configuration
 [8]: /tracing/trace_collection/custom_instrumentation/dotnet?tab=locally#adding-tags
-[9]: /continuous_integration/guides/add_custom_metrics/?tab=net
+[9]: /tests/guides/add_custom_measures/?tab=net
 [10]: https://github.com/coverlet-coverage/coverlet
 [11]: /continuous_integration/tests/code_coverage/?tab=net
 [12]: https://www.nuget.org/packages/Datadog.Trace.BenchmarkDotNet
 [13]: /continuous_integration/tests/dotnet/#configuring-reporting-method
 [14]: https://www.nuget.org/packages/Datadog.Trace
 [15]: /tracing/trace_collection/custom_instrumentation/dotnet/
-[16]: /continuous_integration/intelligent_test_runner/
-[17]: /getting_started/tagging/unified_service_tagging
+[16]: https://github.com/microsoft/codecoverage/blob/main/docs/instrumentation.md
+[17]: https://github.com/microsoft/codecoverage/blob/main/samples/Calculator/scenarios/scenario07/README.md

@@ -18,7 +18,7 @@ const setRumDeviceId = () => {
     const domain = window.location.hostname.split('.').slice(-2).join('.')
     const maxAge = 60 * 60 * 24 * 365
 
-    document.cookie = `_dd_device_id=${deviceId}; Domain=.${domain}; Max-Age=${maxAge}; Path=/; SameSite=None; Secure`
+    document.cookie = `_dd_device_id=${deviceId}; Domain=.${domain}; Max-Age=${maxAge}; Path=/; SameSite=None; Secure; Partitioned`
 
     window.DD_RUM.setUserProperty('device_id', deviceId)
 }
@@ -31,20 +31,19 @@ if (window.DD_RUM) {
             env,
             service: 'docs',
             version: CI_COMMIT_SHORT_SHA,
-            trackInteractions: true,
             trackUserInteractions: true,
             trackFrustrations: true,
             enableExperimentalFeatures: ["clickmap"],
             sessionSampleRate: 100,
             sessionReplaySampleRate: 50,
-            allowedTracingOrigins: [window.location.origin],
+            allowedTracingUrls: [window.location.origin],
             internalAnalyticsSubdomain: IA_SUBDOMAIN
         });
 
         window.DD_RUM.startSessionReplayRecording();
 
         if (branch) {
-            window.DD_RUM.addRumGlobalContext('branch', branch);
+            window.DD_RUM.setGlobalContextProperty('branch', branch);
         }
 
         if (env === 'live') {
@@ -65,12 +64,12 @@ if (window.DD_LOGS) {
     });
 
     // global context
-    window.DD_LOGS.addLoggerGlobalContext('host', window.location.host);
-    window.DD_LOGS.addLoggerGlobalContext('referrer', document.referrer);
-    window.DD_LOGS.addLoggerGlobalContext('lang', lang);
+    window.DD_LOGS.setGlobalContextProperty('host', window.location.host);
+    window.DD_LOGS.setGlobalContextProperty('referrer', document.referrer);
+    window.DD_LOGS.setGlobalContextProperty('lang', lang);
 
     if (branch) {
-        window.DD_LOGS.addLoggerGlobalContext('branch', branch);
+        window.DD_LOGS.setGlobalContextProperty('branch', branch);
     }
 
     // Locally log to console

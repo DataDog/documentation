@@ -1,6 +1,5 @@
 ---
 description: データベースモニタリングセットアップのトラブルシューティング
-kind: documentation
 title: MySQL のデータベースモニタリングセットアップのトラブルシューティング
 ---
 {{< site-region region="gov" >}}

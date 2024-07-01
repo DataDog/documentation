@@ -1,6 +1,5 @@
 ---
 title: Granular Access Control
-kind: documentation
 ---
 ## Manage access to individual resources
 
@@ -17,6 +16,7 @@ Use the different principals to control access patterns in your organization and
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Monitors][3]                                    |                   | {{< X >}}         |                                     |
 | [Notebooks][4]                                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Powerpacks][8]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Security rules][5]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Service Level Objectives][6]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Synthetic tests][7]                             |                   | {{< X >}}         |                                     |
@@ -32,3 +32,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [5]: /security/detection_rules/#limit-edit-access
 [6]: /service_management/service_level_objectives/#permissions
 [7]: /synthetics/browser_tests/#permissions
+[8]: /dashboards/widgets/powerpack/#powerpack-permissions

@@ -9,13 +9,22 @@ aliases:
   - /continuous_integration/tests/java
   - /continuous_integration/tests/setup/java
 further_reading:
-    - link: "/continuous_integration/tests/containers/"
+    - link: "/tests/containers/"
       tag: "Documentation"
       text: "Forwarding Environment Variables for Tests in Containers"
-    - link: "/continuous_integration/tests"
+    - link: "/tests/explorer"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/early_flake_detection"
+      tag: "Documentation"
+      text: "Detect test flakiness with Early Flake Detection"
+    - link: "/tests/auto_test_retries"
+      tag: "Documentation"
+      text: "Retry failing test cases with Auto Test Retries"
+    - link: "/tests/correlate_logs_and_tests"
+      tag: "Documentation"
+      text: "Correlate logs and test traces"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI Visibility"
 ---
@@ -58,12 +67,12 @@ Other build systems, such as Ant or Bazel, are supported with the following limi
 
 ## Setup
 
-To set up Test Visibility for Java, you need to perform the following steps:
+Setting up Test Visibility for Java includes the following steps:
 1. Configure tracer reporting method.
 2. Download tracer library to the hosts where your tests are executed.
 3. Run your tests with the tracer attached.
 
-You may follow interactive setup steps on the [Datadog site][8] or with the instructions below.
+You may follow interactive setup steps on the [Datadog site][2] or with the instructions below.
 
 ### Configuring reporting method
 
@@ -171,8 +180,6 @@ Set the following environment variables to configure the tracer:
 `JAVA_TOOL_OPTIONS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
 : Injects the tracer into the JVMs that execute your tests.
 
-For more information about `service` and `env` reserved tags, see [Unified Service Tagging][8].
-
 Run your tests as you normally do.
 
 {{% /tab %}}
@@ -190,14 +197,19 @@ However, if there is a need to fine-tune the tracer's behavior, [Datadog Tracer 
 
 ## Extensions
 
-The [dd-trace-api][4] library exposes a set of APIs that can be used to extend the tracer's functionality programmatically.
-To use the extensions described below, add this library as a compile-time dependency to your project.
+The tracer exposes a set of APIs that can be used to extend its functionality programmatically.
 
 ### Adding custom tags to tests
 
-You can add custom tags to your tests by using the current active span:
+To add custom tags include [opentracing-util][4] library as a compile-time dependency to your project.
+
+You can then add custom tags to your tests by using the active span:
 
 ```java
+import io.opentracing.Span;
+import io.opentracing.util.GlobalTracer;
+
+// ...
 // inside your test
 final Span span = GlobalTracer.get().activeSpan();
 if (span != null) {
@@ -211,11 +223,15 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 For more information about adding tags, see the [Adding Tags][5] section of the Java custom instrumentation documentation.
 
-### Adding custom metrics to tests
+### Adding custom measures to tests
 
-Just like tags, you can add custom metrics to your tests by using the current active span:
+Just like tags, you can add custom measures to your tests by using the current active span:
 
 ```java
+import io.opentracing.Span;
+import io.opentracing.util.GlobalTracer;
+
+// ...
 // inside your test
 final Span span = GlobalTracer.get().activeSpan();
 if (span != null) {
@@ -225,13 +241,15 @@ if (span != null) {
 // ...
 ```
 
-For more information about custom metrics, see the [Add Custom Metrics guide][6].
+For more information about custom measures, see the [Add Custom Measures guide][6].
 
 ### Using manual testing API
 
 If you use one of the supported testing frameworks, the Java Tracer automatically instruments your tests and sends the results to the Datadog backend.
 
 If you are using a framework that is not supported, or an ad-hoc testing solution, you can harness the manual testing API, which also reports test results to the backend.
+
+To use the manual testing API, add the [`dd-trace-api`][7] library as a compile-time dependency to your project.
 
 #### Domain model
 
@@ -348,12 +366,61 @@ public class ManualTest {
 
 Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so that all the test info is flushed to Datadog.
 
+## Best practices
+
+### Deterministic test parameters representation
+
+Test Visibility works best when the [test parameters are deterministic][8] and stay the same between test runs.
+If a test case has a parameter that varies between test executions (such as a current date, a random number, or an instance of a class whose `toString()` method is not overridden), some of the product features may not work as expected.
+For example, the history of executions may not be available, or the test case may not be classified as flaky even if it exhibits flakiness.
+
+The best way to fix this is to make sure that the test parameters are the same between test runs.
+
+In JUnit 5, this can also be addressed by [customizing the string representation of the test parameters][9] without changing their values.
+To do so, use `org.junit.jupiter.api.Named` interface or change the `name` parameter of the `org.junit.jupiter.params.ParameterizedTest` annotation:
+
+```java
+@ParameterizedTest
+@MethodSource("namedArguments")
+void parameterizedTest(String s, Date d) {
+   // The second parameter in this test case is non-deterministic.
+   // In the argument provider method it is wrapped with Named to ensure it has a deterministic name.
+}
+
+static Stream<Arguments> namedArguments() {
+    return Stream.of(
+            Arguments.of(
+                    "a string",
+                    Named.of("current date", new Date())),
+            Arguments.of(
+                    "another string",
+                    Named.of("a date in the future", new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1))))
+    );
+}
+```
+
+```java
+@ParameterizedTest(name = "[{index}] {0}, a random number from one to ten")
+@MethodSource("randomArguments")
+void anotherParameterizedTest(String s, int i) {
+  // The second parameter in this test case is non-deterministic.
+  // The name of the parameterized test is customized to ensure it has a deterministic name.
+}
+
+static Stream<Arguments> randomArguments() {
+    return Stream.of(
+            Arguments.of("a string", ThreadLocalRandom.current().nextInt(10) + 1),
+            Arguments.of("another string", ThreadLocalRandom.current().nextInt(10) + 1)
+    );
+}
+```
+
 ## Troubleshooting
 
 ### The tests are not appearing in Datadog after enabling CI Visibility in the tracer
 
-Verify that the tracer is injected into your build process.
-Examine your build's logs. If the injection is successful, you will see a line containing `DATADOG TRACER CONFIGURATION`.
+Verify that the tracer is injected into your build process by examining your build's logs.
+If the injection is successful, you can see a line containing `DATADOG TRACER CONFIGURATION`.
 If the line is not there, make sure that the environment variables used to inject and configure the tracer are available to the build process.
 A common mistake is to set the variables in a build step and run the tests in another build step. This approach may not work if the variables are not propagated between build steps.
 
@@ -363,6 +430,7 @@ Verify that your build system and testing framework are supported by CI Visibili
 
 Ensure that the `dd.civisibility.enabled` property (or `DD_CIVISIBILITY_ENABLED` environment variable) is set to `true` in the tracer arguments.
 
+Try running your build with tracer debug logging enabled by setting the `DD_TRACE_DEBUG` environment variable to `true`.
 Check the build output for any errors that indicate tracer misconfiguration, such as an unset `DD_API_KEY` environment variable.
 
 ### Tests or source code compilation fails when building a project with the tracer attached
@@ -376,6 +444,15 @@ Depending on the build configuration, adding the plugin can sometimes disrupt th
 If the plugin interferes with the build, disable it by adding `dd.civisibility.compiler.plugin.auto.configuration.enabled=false` to the list of `-javaagent` arguments
 (or by setting `DD_CIVISIBILITY_COMPILER_PLUGIN_AUTO_CONFIGURATION_ENABLED=false` environment variable).
 
+### Builds fails because dd-javac-plugin-client artifact cannot be found
+
+It is possible that the Java compiler plugin injected into the build is not available if the build uses a custom artifactory storage or if it is run in offline mode.
+
+If this is the case, you can disable plugin injection by adding `dd.civisibility.compiler.plugin.auto.configuration.enabled=false` to the list of `-javaagent` arguments
+(or by setting the `DD_CIVISIBILITY_COMPILER_PLUGIN_AUTO_CONFIGURATION_ENABLED` environment variable to false).
+
+The plugin is optional, as it only serves to reduce the performance overhead.
+
 ### Tests fail when building a project with the tracer attached
 
 In some cases attaching the tracer can break tests, especially if they run asserts on the internal state of the JVM or instances of third-party libraries' classes.
@@ -385,7 +462,7 @@ While the best approach is such cases is to update the tests, there is also a qu
 The integrations provide additional insights into what happens in the tested code and are especially useful in integration tests, to monitor things like HTTP requests or database calls.
 They are enabled by default.
 
-To disable a specific integration, refer to the [Datadog Tracer Compatibility][7] table for the relevant configuration property names.
+To disable a specific integration, refer to the [Datadog Tracer Compatibility][10] table for the relevant configuration property names.
 For example, to disable `OkHttp3` client request integration, add `dd.integration.okhttp-3.enabled=false` to the list of `-javaagent` arguments.
 
 To disable all integrations, augment the list of `-javaagent` arguments with `dd.trace.enabled=false` (or set `DD_TRACE_ENABLED=false` environment variable).
@@ -394,12 +471,13 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[8]: https://app.datadoghq.com/ci/setup/test?language=java
 [1]: #using-manual-testing-api
-[2]: ?tab=other#running-your-tests
+[2]: https://app.datadoghq.com/ci/setup/test?language=java
 [3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
-[4]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
+[4]: https://mvnrepository.com/artifact/io.opentracing/opentracing-util
 [5]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
-[6]: /continuous_integration/guides/add_custom_metrics/?tab=java
-[7]: /tracing/trace_collection/compatibility/java#integrations
-[8]: /getting_started/tagging/unified_service_tagging
+[6]: /tests/guides/add_custom_measures/?tab=java
+[7]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
+[8]: /tests/#parameterized-test-configurations
+[9]: https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-display-names
+[10]: /tracing/trace_collection/compatibility/java#integrations

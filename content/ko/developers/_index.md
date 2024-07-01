@@ -70,7 +70,7 @@ Datadog 파트너가 되기 위한 자세한 정보는 [Datadog 파트너 네트
 
 초기 목표는 신뢰할 수 있는 방법으로 원하는 메트릭을 수집하는 일부 코드를 생성하고 일반 통합 프레임워크가 제대로 작동하는지 확인하는 것입니다. 먼저 커스텀 검사로 기본 기능을 작성하여 [Agent 통합 생성][13]에서 프레임워크 세부 정보를 입력합니다.
 
-다음으로 [`integrations-extras` 리포지토리][7]에 대한 풀 요청을 열어 코드를 같이 검토할 준비가 되었음을 Datadog에 알립니다. 테스트, Datadog 내부 자료 또는 기타 주제에 대해 궁금한 점이 있으시다면 —Datadog 에코시스템 팀이 도와드리겠습니다. [커뮤니티 근무 시간][4]도 적극적으로 활용해 보세요.
+다음으로 [`integrations-extras` 리포지토리][7]에 대한 풀 리퀘스트를 열어 코드를 같이 검토할 준비가 되었음을 Datadog에 알립니다. 테스트, Datadog 내부 자료 또는 기타 주제에 대해 궁금한 점이 있으시다면—Datadog 에코시스템 팀이 도와드리겠습니다. 해당 풀 리퀘스트를 통해 궁금하신 점을 해결하세요.
 
 기능, 프레임워크 규정 준수 및 일반 코드 품질에 대한 검증이 완료되면 이 통합은 Datadog 에코시스템의 일부인 `integrations-extras`로 통합됩니다.
 
@@ -112,10 +112,9 @@ Datadog에 지원되지 않는 데이터를 전송하는 방법을 결정하려�
 
 ## 개발자 커뮤니티 참여
 
-{{< whatsnext desc="Datadog 개발자 커뮤니티에 참여하는 방법에 대해 알아봅니다:" >}}
-    {{< nextlink href="/developers/libraries" >}}<u>라이브러리</u>: 다양한 플랫폼에 대한 공식 및 커뮤니티 기여 라이브러리 목록, Datadog API, DogStatsD 클라이언트, APM 및 연속 프로파일러, 외부에서 지원하는 커뮤니티 통합을 제공합니다.{{< /nextlink >}}
-    {{< nextlink href="/developers/office_hours" >}}<u>커뮤니티 근무 시간</u>: Datadog 개발에 대해 엔지니어와 직접 대화할 수 있는 정기적인 Datadog 근무 시간입니다.{{< /nextlink >}}
-    {{< nextlink href="/developers/guide/" >}}<u>가이드</u>: 기술 세부 정보, 코드 예제 및 참고 설명서가 포함된 유용한 문서를 확인하세요.{{< /nextlink >}}
+{{< whatsnext desc="Datadog 개발자 커뮤니티에 참여하는 방법을 알아보세요:" >}}
+    {{< nextlink href="/developers/libraries" >}}<u>라이브러리</u>: Datadog API, DogStatsD 클라이언트, APM 및 Continuous Profiler, 다양한 플랫폼에 대한 외부 지원 커뮤니티 통합을 위한 공식 및 커뮤니티 기여 라이브러리 목록입니다.{{< /nextlink >}}
+    {{< nextlink href="/developers/guide/" >}}<u>가이드</u>: 기술 세부 정보, 코드 예제 및 참고 자료가 포함된 유용한 문서를 읽어보세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 참고 자료

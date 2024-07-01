@@ -24,7 +24,7 @@ Investigating an incident requires trial and error. Drawing from their experienc
 Throughout most of Datadog, Watchdog returns two types of insights:
 
 - **Anomalies**: All the pre-calculated [Watchdog alerts][11] matching the active search query that Watchdog found by scanning your organization's data. Access the full list in the [Watchdog Alert explorer][12].
-- **Outliers**: Calculated on the product data matching the active query, outliers surface tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency).
+- **Outliers**: Tags that appear too frequently in some event types (for example, errors) or drive some continuous metrics upwards (for example, latency).  Outliers are dynamically calculated on the data matching the active query and the time frame.
 
 {{< img src="logs/explorer/watchdog_insights/insights-for-log-explorer.png" alt="The log explorer showing the Watchdog Insights banner with five log anomalies" style="width:100%;" >}}
 
@@ -57,6 +57,7 @@ Every outlier comes with embedded interactions and a side panel with troubleshoo
 ### Filter on Insight query
 
 To refine your current view to match a Watchdog Insight, hover over the top right corner of an Insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
+**Note**: Filtering on Watchdog Insights automatically changes the scope you're looking at. As a result, if you select an outlier insight, it is no longer visible, as it is treated as the baseline.
 
 {{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" style="width:70%;">}}
 
@@ -158,7 +159,7 @@ In the banner card view, you can see:
 
 In the full side panel, you can see instructions on how to resolve the lock contention:
 
-{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to adress the Lock Contention outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to address the Lock Contention outlier" style="width:100%;">}}
 
 ### Garbage collection outlier
 
@@ -171,7 +172,7 @@ In the banner card view, you can see:
 
 In the full side panel, you can see instructions on how to better configure garbage collection to free up some CPU time:
 
-{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to adress the Garbage Collection outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_garbage_collection.png" alt="Side panel with all the information on how to address the Garbage Collection outlier" style="width:100%;">}}
 
 ### Regex compilation outlier
 
@@ -184,7 +185,7 @@ In the banner card view, you can see:
 
 In the full side panel, you can see instructions on how to improve regex compilation time, as well as examples of functions within your code that could be improved:
 
-{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to adress the Regex Compilation outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_regex_compilation.png" alt="Side panel with all the information on how to address the Regex Compilation outlier" style="width:100%;">}}
 
 {{% /tab %}}
 {{% tab "Databases" %}}

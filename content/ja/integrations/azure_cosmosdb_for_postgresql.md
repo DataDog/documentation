@@ -15,7 +15,7 @@ integration_id: azure-cosmosdb-for-postgresql
 integration_title: Microsoft Azure Cosmos DB for PostgreSQL
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_cosmosdb_for_postgresql
 public_title: Datadog-Microsoft Azure Cosmos DB for PostgreSQL インテグレーション

@@ -125,7 +125,7 @@ $ sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 
 ディストリビューションによってパッケージ名が異なるため、上記の手順がうまくいかない場合は、`apt-cache search libcap` または `yum search libcap` を実行して、バイナリを提供するパッケージのショートリストを入手してください。サポートが必要な場合は、[Datadog サポート][4]に連絡してください。
 
-**注**: go-metro は独自のファイルにログを記録することにご注意ください。ログは `/var/log/datadog/go-metro.log` にあります。さらに、go-metro はスタンドアロンで機能するため、Agent の情報ページには表示されません。
+**注**: go-metro は専用のファイルにログを記録します。このファイルは `/var/log/datadog/go-metro.log` で見つけることができます。また、go-metro はスタンドアロンで実行されるため、Agent のステータス出力には表示されません。
 
 最後に、go-metro バイナリは、Datadog Agent の 64-ビット RPM と DEB 製品のみに同梱されているためパッケージ化されたバージョンでのみ使用できます。つまり、go-metro はソースインストールや 32-ビットパッケージでは利用できません。
 

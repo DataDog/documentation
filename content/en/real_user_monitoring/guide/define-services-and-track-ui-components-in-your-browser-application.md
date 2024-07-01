@@ -27,7 +27,7 @@ Whether your browser application is a single page application or is one that use
 - A view has a **URL** available at `@view.url`, such as `https://www.yourwebsite.com/about`.
 - A view has a **path** available at `@view.url_path`, such as `/about`.
 
-If, for example, automatically capturing page views by route change does not provide enough visibility, you can specify a different name for your pages. To do this, you can [track views manually][3] and assign them each a name available at `@view.name`, such as "About Us".
+If, for example, automatically capturing pageviews by route change does not provide enough visibility, you can specify a different name for your pages. To do this, you can [track views manually][3] and assign them each a name available at `@view.name`, such as "About Us".
 
 ## Track timings during the rendering lifecycle of your pages
 
@@ -100,7 +100,7 @@ Get insights into the performance or the adoption of a given team's scope by usi
 1. From the RUM Application Overview page, narrow down all graphs by `service` to get a holistic view for a team's scope
 2. Any query done in the RUM Explorer can use the `service` attribute to filter:
    - Errors by service
-   - Page views by service
+   - Pageviews by service
 
 {{< img src="real_user_monitoring/guide/define-applications-services-components-rum/rum-guide-rum-applications-overview-page-4.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
 
@@ -118,7 +118,7 @@ Components are tracked using custom actions [mentioned above][10]:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/explorer/
-[2]: /real_user_monitoring/browser/#setup
+[2]: /real_user_monitoring/browser/setup
 [3]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [4]: /real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
 [5]: /real_user_monitoring/browser/monitoring_page_performance/#add-your-own-performance-timing

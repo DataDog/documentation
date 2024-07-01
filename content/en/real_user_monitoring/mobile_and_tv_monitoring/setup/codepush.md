@@ -10,7 +10,7 @@ type: multi-code-lang
 code_lang_weight: 50
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-reactnative
 - link: real_user_monitoring/reactnative/
   tag: Documentation

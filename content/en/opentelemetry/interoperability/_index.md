@@ -1,6 +1,5 @@
 ---
 title: Interoperability with Datadog and OpenTelemetry
-kind: documentation
 further_reading:
     - link: '/opentelemetry/schema_semantics/'
       tag: 'Documentation'
@@ -17,7 +16,7 @@ Integrating Datadog with OpenTelemetry allows you to use Datadog's comprehensive
     {{< nextlink href="/opentelemetry/interoperability/otlp_ingest_in_the_agent/" >}}OTLP Ingestion by the Datadog Agent
     {{< /nextlink >}}
     {{< nextlink href="/tracing/trace_collection/trace_context_propagation/" >}}W3C Trace Context Propagation{{< /nextlink >}}
-    {{< nextlink href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/" >}}Custom Instrumentation with the OpenTelemetry API{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/interoperability/api_support" >}}OpenTelemetry API Support{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/platform/connect_rum_and_traces/" >}}Correlate RUM and Traces{{< /nextlink >}}
     {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/opentelemetry/" >}}Correlate Logs and Traces{{< /nextlink >}}
 {{< /whatsnext >}}

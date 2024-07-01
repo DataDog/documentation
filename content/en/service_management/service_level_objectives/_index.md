@@ -26,11 +26,9 @@ further_reading:
   tag: "Foundation Enablement"
   text: "Join an interactive session on creating effective monitors and SLOs"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage SLOs with Terraform"
 ---
-
-{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/382481078/rendition/1080p/file.mp4?loc=external&signature=f5a81ca1c44d9c1c2cfcbd23c2b6b4f89914027ff344fb0a9f8dc6b9a1d141aa" poster="/images/poster/slo.png" >}}
 
 {{< jqmath-vanilla >}}
 
@@ -142,9 +140,9 @@ To run a search, use the facet checkboxes on the left and the search bar at the 
 
 ## Viewing SLOs
 
-Group your SLOs by *team*, *service* or *environment* to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by context.
+Group your SLOs by *any* tag to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by service, team, user journey, tier, or any other tag set on your SLOs.
 
-{{< img src="service_management/service_level_objectives/slo_group_by.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
+{{< img src="service_management/service_level_objectives/slo_group_by_new.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
 
 Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
 
@@ -154,9 +152,12 @@ Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs ne
 
 ### SLO tags
 
-When you create or edit an SLO, you can add tags for filtering on the [SLO status page][2] or for creating [SLO saved views][17].
+SLO tags can be used for filtering on the [SLO status page][2], creating [SLO saved views][17], or grouping SLOs to view. Tags can be added to SLOs in the following ways:
 
-Add tags to SLOs in bulk with the *Edit Tags* and the *[Edit Teams][18]* dropdown options at the top of the SLO list.
+- When you create or edit an SLO, you can add tags
+- From the SLO list view, you can add and update tags in bulk using the *Edit Tags* and the *[Edit Teams][18]* dropdown options at the top of the SLO list.
+
+{{< img src="service_management/service_level_objectives/slo_bulk_tag.png" alt="SLO list page displays the Edit Tag dropdown for bulk tag editing" >}}
 
 ### SLO default view
 
@@ -197,9 +198,11 @@ Hover over a saved view from the list and select the hyperlink icon to copy the 
 
 Once you are using a saved view, you can update it by selecting that saved view, modifying the query, and clicking the *Update* button below its name in the *Saved Views* panel. To change the saved view's name or delete a saved view, hover over its row in the *Saved Views* panel and click the pencil icon or trash can icon, respectively.
 
-## SLO audit events
+## SLO and SLO status correction audit events
 
-SLO audit events allow you to track the history of your SLO configurations using the Event Explorer. Audit events are added to the Event Explorer every time you create, modify or delete an SLO. Each event includes information on an SLO's configuration, and the stream provides a history of the SLO's configuration changes over time.
+SLO audit events allow you to track the history of your SLO configurations using the [Event Explorer][27] or the **Audit History** tab in the SLO details. Audit events are added to the Event Explorer every time you create, modify, or delete an SLO or SLO status correction. Each event includes information on the configuration of an SLO or SLO status correction, and the stream provides a history of the configuration changes over time.
+
+### SLO audit events
 
 Each event includes the following SLO configuration information:
 
@@ -210,32 +213,48 @@ Each event includes the following SLO configuration information:
 
 Three types of SLO audit events appear in the Event Explorer:
 
-1. `SLO Created` events show all four pieces of SLO configuration information at creation time.
-2. `SLO Modified` events show a what configuration information changed during a modification
-3. `SLO Deleted` events show all four pieces of configuration information the SLO had right before it was deleted
+- `SLO Created` events show the SLO configuration information at creation time
+- `SLO Modified` events show what configuration information changed during a modification
+- `SLO Deleted` events show the configuration information the SLO had before it was deleted
 
-To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Explorer. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
+### Status correction audit events
 
-You can also query the Event Explorer programmatically using the [Datadog Events API][19].
+Each event includes the following SLO status correction configuration information:
+
+- SLO Name
+- Status correction start and end times with timezone
+- Status correction category
+
+Three types of SLO status correction audit events appear in the Event Explorer:
+
+- `SLO Correction Created` events show the status correction configuration information at creation time
+- `SLO Correction Modified` events show what configuration information changed during a modification
+- `SLO Correction Deleted` events show the configuration information the status correction had before it was deleted
+
+To get a full list of all SLO audit events, enter the search query `tags:(audit AND slo)` in the Event Explorer. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO. You can also query the Event Explorer programmatically using the [Datadog Events API][19].
 
 **Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Explorer to a longer period, for example, the past 7 days.
 
 {{< img src="service_management/service_level_objectives/slo-audit-events.png" alt="SLO audit events" >}}
 
-For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
+You can also use the "Audit History" tab in the SLO details to view all audit events for an individual SLO:
 
-{{< img src="service_management/service_level_objectives/slo-event-monitor.png" alt="SLO event monitor" >}}
+{{< img src="service_management/service_level_objectives/slo_audit_history_tab.png" alt="SLO details audit history tab" >}}
+
+With [Event Monitors][28], you can set up notifications to track SLO audit events. For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
 
 ## SLO widgets
 
+{{< learning-center-callout header="Try Creating Business-Critical Insights Using Dashboards and SLOs in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
+  Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about building Dashboards to track SLOs.
+{{< /learning-center-callout >}}
+
 After creating your SLO, you can visualize the data through Dashboards and widgets. 
-  - Use the SLO Summary widget to visualize the status of a single SLO.
+  - Use the SLO widget to visualize the status of a single SLO
   - Use the SLO List widget to visualize a set of SLOs
   - Graph 15 months' worth of metric-based SLO data with the [SLO data source][20] in both timeseries and scalar (query value, top list, table, change) widgets. 
   
-For more information about SLO Widgets, see the [SLO Summary][21] and [SLO List][22] widget pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][20].
-
-To proactively manage the configurations of your SLOs, set an [Event Monitor][23] to notify you when events corresponding to certain tags occur.
+For more information about SLO Widgets, see the [SLO widget][21] and [SLO List widget][22] pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][20].
 
 ## SLO status corrections
 
@@ -268,7 +287,7 @@ The 90-day limits per SLO are as follows:
 
 You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][25], or a [Terraform resource][26].
 
-{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" >}}
+{{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" style="width:80%;">}}
 
 #### Access in the UI
 
@@ -284,11 +303,43 @@ To access SLO status corrections in the UI:
 
 To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO's detailed side panel view.
 
-## SLO Calendar View
+## SLO calendar view
 
 The SLO Calendar View is available on the [SLO status page][2]. On the top right corner, switch from the "Primary" view to the "Weekly" or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
 
-{{< img src="service_management/service_level_objectives/calendar-view-slo.png" alt="SLO calendar view" >}}
+{{< img src="service_management/service_level_objectives/slo-calendar-view-cropped.png" alt="SLO calendar view" >}}
+
+## SLO CSV export
+
+{{< callout url="https://forms.gle/GQkcHDqaL5qWMss38" btn_hidden="false" header="Try Out the SLO CSV Export Feature">}}
+The CSV Export feature is in Private Beta. Complete the form to request access.
+{{< /callout >}}
+
+The SLO CSV Export feature is available on the [SLO status page][2] once you switch to the "Weekly" or "Monthly" Calendar View. In these views, you can access the new "Export to CSV" option to download a CSV of your historical SLO data with the following information:
+
+- SLO id, name, and type
+- SLO tags
+- SLO target
+- Historical SLO status values
+
+{{< img src="service_management/service_level_objectives/slo-csv-export.png" alt="SLO calendar view" >}}
+
+The following time windows are available for the CSV export:
+
+- **Weekly:** The SLO statuses are based on calendar-aligned weeks (Sunday 12am - Saturday 11:59pm)
+- **Monthly:** The SLO statuses are based on calendar-aligned months (First day of the month 12am - last day of the month 11:59pm)
+
+These times are based on the user's timezone setting in Datadog.
+
+The SLO statuses are calculated based on the SLO type:
+- **Metric-based SLOs:** Percent of good events out of total events for the time window
+- **Time Slice SLOs:** Percent of good minutes out of total minutes for the time window
+
+**Notes:**
+
+- The SLOs that are exported are based on your search query.
+- The Calendar View is supported for Metric-based and Time Slice SLOs. If you export any Monitor-based SLOs, only the SLO ID and name are included in the CSV (not the SLO's status history data).
+- There is a limit of 1000 SLOs per export.
 
 ## Further Reading
 
@@ -320,3 +371,5 @@ The SLO Calendar View is available on the [SLO status page][2]. On the top right
 [24]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [25]: /api/latest/service-level-objective-corrections/
 [26]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[27]: /service_management/events/explorer/
+[28]: /monitors/types/event/

@@ -96,9 +96,31 @@ cascade:
     path: /integrations/stormforge_license.md
   aliases:
   - /integrations/stormforge_stormforge_license/
+- _target:
+    path: /integrations/feed.md
+  aliases:
+  - /integrations/rss/
+- _target:
+    path: /integrations/java.md
+  aliases:
+  - /agent/faq/jmx_integrations/
+  - /agent/faq/docker-jmx/
+- _target:
+    path: /integrations/amazon_elb.md
+  aliases:
+  - /integrations/awselb
+- _target:
+    path: /integrations/elastic.md
+  aliases:
+  - /integrations/awses
+- _target:
+    path: /integrations/amazon_s3.md
+  aliases:
+  - /integrations/awss3
+- params:
+    custom_kind: "integration"
 description: すべてのシステム、アプリケーション、およびサービスからデータを収集
 disable_sidebar: true
-kind: documentation
 title: インテグレーション
 ---
 

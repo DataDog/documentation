@@ -1,6 +1,5 @@
 ---
 title: Basic Agent Usage for Red Hat
-kind: documentation
 platform: Red Hat
 aliases:
     - /guides/basic_agent_usage/redhat/
@@ -20,6 +19,8 @@ further_reading:
 - link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
+algolia:
+  tags: ['uninstall', 'uninstalling']
 ---
 
 ## Overview
@@ -28,9 +29,13 @@ This page outlines the basic features of the Datadog Agent for Red Hat. If you h
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
-**Notes**:
-- On the 64-bit x86 architecture, RedHat/CentOS 6 and above are supported. Since Agent 6.33.0/7.33.0, AlmaLinux/Rocky 8 and above are supported.
-- On the 64-bit Arm v8 architecture, RedHat/CentOS 8 and above are supported. Since Agent 6.33.0/7.33.0, AlmaLinux/Rocky 8 and above are supported.
+### Supported Versions
+#### x86 64-bit
+On the 64-bit x86 architecture, RedHat/CentOS 6 and above are supported. Since Agent 6.33.0/7.33.0, AlmaLinux/Rocky 8 and above are supported.
+
+**Note:** Agent 6.51.x/7.51.x are the last supported versions on RedHat/CentOS 6.x.
+#### Arm v8 64-bit
+On the 64-bit Arm v8 architecture, RedHat/CentOS 8 and above are supported. Since Agent 6.33.0/7.33.0, AlmaLinux/Rocky 8 and above are supported.
 
 ## Commands
 
@@ -169,6 +174,8 @@ sudo userdel dd-agent \
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% apm-ssi-uninstall-linux %}}
 
 ## Troubleshooting
 

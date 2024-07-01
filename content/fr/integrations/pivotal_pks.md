@@ -3,11 +3,13 @@ app_id: pivotal-pks
 app_uuid: e8a08b96-bbca-4907-8cc8-b7c3abf2f443
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10034
     source_type_name: Pivotal PKS
 author:
   homepage: https://www.datadoghq.com
@@ -29,7 +31,7 @@ integration_id: pivotal-pks
 integration_title: Pivotal Container Service
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: pivotal_pks
 public_title: Pivotal Container Service
@@ -55,13 +57,14 @@ tile:
   title: Pivotal Container Service
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Présentation
 
 L'intégration surveille les clusters [Pivotal Container Service][1].
 
-## Implémentation
+## Formule et utilisation
 
 Puisque la plateforme Datadog s'intègre déjà à Kubernetes, elle peut tout de suite surveiller le service Pivotal Kubernetes Service (PKS). Vous pouvez utiliser le [carré Datadog Cluster Monitoring][2] conjointement avec cette intégration pour surveiller votre cluster.
 
@@ -71,7 +74,7 @@ Installez l'Agent Datadog sur chaque VM ne correspondant pas à un worker dans v
 
 La surveillance de PKS nécessite la configuration de l'intégration Datadog pour [Kubernetes][3].
 
-### Collecte de logs
+### APM
 
 _Disponible à partir des versions > 6.0 de l'Agent_
 
@@ -81,7 +84,7 @@ Vous pouvez également tirer parti des DaemonSets pour [déployer automatiquemen
 
 Suivez les [étapes de collecte de logs de conteneur][6] pour en savoir plus sur ces variables d'environnement et découvrir les options de configuration avancées.
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][7].
 

@@ -1,6 +1,5 @@
 ---
 title: Real User Monitoring Data Security
-kind: documentation
 aliases:
     - /real_user_monitoring/security/
 further_reading:
@@ -22,6 +21,20 @@ further_reading:
 
 ## Overview
 Real User Monitoring (RUM) provides controls for implementing privacy requirements and ensuring organizations of any scale do not expose sensitive or personal information. Data is stored on Datadog-managed cloud instances and encrypted at rest. The default behaviors and configurable options described on this page are designed to protect end user privacy and prevent sensitive organizational information from being collected. Learn more about [Privacy at Datadog][13].
+
+## Shared responsibility
+
+The responsibility of keeping user data secure is shared between Datadog and developers who leverage the RUM SDKs.
+
+Datadog is responsible for:
+
+- Providing a reliable product that handles data securely when it is transmitted to and stored on the Datadog platform.
+- Ensuring that security issues are identified in accordance with internal policies.
+
+Developers are responsible for:
+- Leveraging configuration values and data privacy options as provided by Datadog.
+- Ensuring the integrity of code within their environments.
+
 ## Compliance frameworks
 RUM can be configured for compliance with many standards and regulatory frameworks, including, but not limited to:
 
@@ -113,7 +126,7 @@ Once you disable collection of IP data, the change will be applied immediately. 
 In addition to removing client IPs, you can also choose to disable the collection of geolocation (country, city, county), or GeoIP, from all future collected data. If you uncheck the **Collect geolocation data** box, the change will be applied immediately. Any events collected prior to disabling will not have their geolocation data removed. Data omission is done at the backend level, which means the Browser SDK will still be sending data, but geolocation data will be omitted by our backend pipelines and dropped at processing time.
 
 ### Proactively search for sensitive data with Sensitive Data Scanner
-[Sensitive Data Scanner][11] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. RUM events are scanned on the stream before any data is stored within Datadog. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules.
+[Sensitive Data Scanner][11] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. RUM events are scanned on the stream before any data is stored within Datadog. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules. If you've enabled this feature, you can find it on the [**Manage Sensitive Data** page][20].
 
 ## Session Replay-specific privacy options
 See [privacy options specific to Session Replay][12].
@@ -138,6 +151,7 @@ See [privacy options specific to Session Replay][12].
 [14]: /real_user_monitoring/explorer/search/
 [15]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
 [16]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
-[17]: /real_user_monitoring/browser/#configuration
+[17]: /real_user_monitoring/browser/setup/#configuration
 [18]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [19]: /real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
+[20]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/configuration

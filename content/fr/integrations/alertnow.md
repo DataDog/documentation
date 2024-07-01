@@ -3,6 +3,7 @@ app_id: alertnow
 app_uuid: cdb258cc-5e74-4fa2-be21-1489375bb370
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,13 +13,19 @@ assets:
       prefix: alertnow.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10279
     source_type_name: AlertNow
 author:
   homepage: https://service.opsnow.com
   name: AlertNow
   sales_email: sales@opsnow.com
   support_email: support@opsnow.com
-categories: []
+categories:
+- alerting
+- automation
+- collaboration
+- incidents
+- mobile
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md
 display_on_public_website: true
@@ -28,21 +35,26 @@ integration_id: alertnow
 integration_title: AlertNow
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: alertnow
 public_title: AlertNow
 short_description: Synchroniser des alertes Datadog avec des alertes AlertNow
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Alerting
+  - Category::Automation
+  - Category::Collaboration
+  - Category::Incidents
+  - Category::Mobile
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Synchroniser des alertes Datadog avec des alertes AlertNow
   media: []
@@ -51,6 +63,7 @@ tile:
   title: AlertNow
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Présentation
@@ -68,7 +81,7 @@ Avec AlertNow, vous pouvez :
 
 ![Vue d'ensemble d'AlertNow][1]
 
-## Configuration
+## Formule et utilisation
 
 ### AlertNow
 
@@ -90,7 +103,7 @@ Pour associer Datadog à AlertNow, créez un webhook et des monitors dans Datado
     ![Détails Datadog][4]
 
 
-### Datadog
+### Ruby
 
 Suivez les étapes indiquées ci-dessous dans votre compte Datadog.
 
@@ -150,7 +163,7 @@ Suivez les étapes indiquées ci-dessous dans votre compte Datadog.
 
 
 
-## Assistance
+## Agent
 
 Besoin d'aide ? Contactez [l'assistance AlertNow][8].
 

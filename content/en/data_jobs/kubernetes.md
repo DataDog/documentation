@@ -1,15 +1,10 @@
 ---
 title: Data Jobs Monitoring for Spark on Kubernetes
-kind: documentation
 further_reading:
     - link: '/data_jobs'
       tag: 'Documentation'
       text: 'Data Jobs Monitoring'
 ---
-
-{{< callout url="https://forms.gle/PZUoEgtBsH6qM62MA" >}}
-Data Jobs Monitoring is in private beta. Fill out this form to join the wait list.
-{{< /callout >}} 
 
 [Data Jobs Monitoring][6] gives visibility into the performance and reliability of Apache Spark applications on Kubernetes.
 
@@ -53,15 +48,15 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
    metadata:
      name: datadog
    spec:
-    features:
-        apm:
-        enabled: true
-        hostPortConfig:
-            enabled: true
-            hostPort: 8126
-        admissionController:
-        enabled: true
-        mutateUnlabelled: false
+     features:
+       apm:
+         enabled: true
+         hostPortConfig:
+           enabled: true
+           hostPort: 8126
+       admissionController:
+         enabled: true
+         mutateUnlabelled: false
      global:
        tags:
          - 'data_workload_monitoring_trial:true'
@@ -73,6 +68,11 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
          appSecret:
            secretName: datadog-secret
            keyName: app-key
+     override:
+       nodeAgent:
+         env:
+           - name: DD_DJM_CONFIG_ENABLED
+             value: "true"
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 1. Deploy the Datadog Agent with the above configuration file:
@@ -104,7 +104,10 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
        portEnabled: true
        port: 8126
      tags:
-       - 'data_workload_monitoring_trial:true' 
+       - 'data_workload_monitoring_trial:true'
+     env:
+       - name: DD_DJM_CONFIG_ENABLED
+         value: "true"
 
    clusterAgent:
      admissionController:
@@ -160,6 +163,9 @@ When you run your Spark job, use the following configurations:
    `-Ddd.tags` (Optional)
    : Other tags you wish to add, in the format `<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>`.
 
+   `-Ddd.trace.experimental.long-running.enabled` (Optional)
+   : `true` To view jobs while they are still running
+
 
 #### Example: spark-submit
 
@@ -173,7 +179,7 @@ spark-submit \
   --conf spark.kubernetes.authenticate.driver.serviceAccountName=<SERVICE_ACCOUNT> \
   --conf spark.kubernetes.driver.label.admission.datadoghq.com/enabled=true \
   --conf spark.kubernetes.driver.annotation.admission.datadoghq.com/java-lib.version=latest \
-  --conf spark.driver.extraJavaOptions="-Ddd.integration.spark.enabled=true -Ddd.integrations.enabled=false -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>" \
+  --conf spark.driver.extraJavaOptions="-Ddd.integration.spark.enabled=true -Ddd.integrations.enabled=false -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2> -Ddd.trace.experimental.long-running.enabled=true" \
   local:///usr/lib/spark/examples/jars/spark-examples.jar 20
 ```
 
@@ -188,7 +194,7 @@ aws emr-containers start-job-run \
 --job-driver '{
   "sparkSubmitJobDriver": {
     "entryPoint": "s3://BUCKET/spark-examples.jar",
-    "sparkSubmitParameters": "--class <MAIN_CLASS> --conf spark.kubernetes.driver.label.admission.datadoghq.com/enabled=true --conf spark.kubernetes.driver.annotation.admission.datadoghq.com/java-lib.version=latest --conf spark.driver.extraJavaOptions=\"-Ddd.integration.spark.enabled=true -Ddd.integrations.enabled=false -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2>\""
+    "sparkSubmitParameters": "--class <MAIN_CLASS> --conf spark.kubernetes.driver.label.admission.datadoghq.com/enabled=true --conf spark.kubernetes.driver.annotation.admission.datadoghq.com/java-lib.version=latest --conf spark.driver.extraJavaOptions=\"-Ddd.integration.spark.enabled=true -Ddd.integrations.enabled=false -Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION> -Ddd.tags=<KEY_1>:<VALUE_1>,<KEY_2:VALUE_2> -Ddd.trace.experimental.long-running.enabled=true\""
   }
 }
 
@@ -197,7 +203,9 @@ aws emr-containers start-job-run \
 
 In Datadog, view the [Data Jobs Monitoring][5] page to see a list of all your data processing jobs.
 
-## Tag spans at runtime
+## Advanced Configuration
+
+### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}
 

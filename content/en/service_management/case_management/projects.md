@@ -14,7 +14,7 @@ A project is a container object that holds a set of cases. Organize your work ar
 
 ## Create a project
 
-{{< img src="/service_management/case_management/case_management_overview.png" alt="Create a new project page under Case management Settings" style="width:100%;" >}}
+{{< img src="service_management/case_management/projects/projects_create_a_project_cropped.png" alt="Create a new project page under Case management Settings" style="width:100%;" >}}
 
 To create a project:
 1. Select **New Project** on the Projects view or click on the **+** icon next to *Your Projects* in the left navigation bar.  
@@ -25,7 +25,7 @@ After you create your project, add one or more users or Datadog Teams as members
 
 ## Join a project
 
-{{< img src="/service_management/case_management/projects/join_a_project.png" alt="Projects page showing the button options to join a project" style="width:100%;" >}}
+{{< img src="/service_management/case_management/projects/join_a_project_cropped.png" alt="Projects page showing the button options to join a project" style="width:100%;" >}}
 
 Find projects within your organization in the **Projects** view in the left navigation bar. Anyone can view and join any project. Anyone can also create and be assigned cases in any project, regardless of whether they're a member of the project or not. 
 

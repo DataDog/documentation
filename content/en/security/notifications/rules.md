@@ -1,6 +1,5 @@
 ---
 title: Notification Rules
-kind: documentation
 description: "Create notification rules to automatically notify your team and integrations when security detection rules trigger."
 aliases:
   - /security_platform/notification_profiles/
@@ -12,7 +11,19 @@ further_reading:
 - link: "/security/detection_rules/"
   tag: "Documentation"
   text: "Explore security detection rules"
+products:
+- name: Cloud SIEM
+  url: /security/cloud_siem/
+  icon: siem
+- name: Cloud Security Management
+  url: /security/cloud_security_management/
+  icon: cloud-security-management
+- name: Application Security Management
+  url: /security/application_security/
+  icon: app-sec
 ---
+
+{{< product-availability >}}
 
 ## Overview
 

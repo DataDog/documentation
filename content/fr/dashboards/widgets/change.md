@@ -1,6 +1,5 @@
 ---
 title: Widget Évolution
-kind: documentation
 description: Représentez graphiquement l'évolution d'une valeur sur une période donnée.
 aliases:
   - /fr/graphing/widgets/change/

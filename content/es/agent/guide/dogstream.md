@@ -1,7 +1,6 @@
 ---
 aliases:
 - /es/agent/faq/dogstream
-kind: guía
 private: true
 title: Dogstream
 ---
@@ -64,7 +63,7 @@ Si el parseador de logs personalizado no funciona, lo primero que hay que compro
 * Si todo va bien, deberías ver esto:`dogstream: parsing {filename} with {function name} (requested {config option text})`.
 
 <div class="alert alert-warning">
-Para comprobar si los dogstreams funcionan correctamente, añade una línea (sin editar ninguna de las existentes) en cualquier archivo de logs en los que hayas configurado el Agent para que los rastree. El Agent solo supervisa el final de cada archivo de logs, así que no detecta los cambios que realices en otras secciones del archivo.
+Para comprobar que los dogstreams funcionan, añade una línea, y no edites una ya existente, a cualquier archivo de log que hayas configurado para que el Agent vigile. El Agent solo <a href="/Glosario/#tail">sigue</a> el final de cada archivo de log, por lo que no se da cuenta de los cambios que haces en otras partes del archivo.
 </div>
 
 ### Cómo redactar funciones de parseo
@@ -238,20 +237,20 @@ dogstreams: /Users/Documents/Parser/test.log:/Users/Documents/Parser/myparser.py
 
 ## Solucionar problemas
 
-Los errores ocurren, por lo que es importante poder acceder al rastreo de tus parseadores de logs. Sin embargo, solo podrás hacerlo si el Agent se ejecuta con los [logs del Agent][6] configurados en el nivel "DEBUG" (depuración). Este nivel se puede configurar en `datadog.conf` de la siguiente manera: quita la marca de comentario y edita esta [línea][7]; a continuación, [reinicia el Agent][8]. Tras configurar el nivel, podrás encontrar el rastreo de los errores de tu parseador de logs personalizado en el archivo `collector.log`, que generalmente incluirá la cadena checks.collector(datadog.py:278) | Error while parsing line. Consulta el [código del Agent][9], dado que es probable que el error aparezca allí.
+Los errores ocurren, por lo que es importante poder acceder al rastreo de tus parseadores de logs. Sin embargo, solo podrás hacerlo si el Agent se ejecuta con los [logs del Agent][6] definidos en el nivel "DEBUG" (depuración). Este nivel se puede establecer en `datadog.conf` de la siguiente manera: quita la marca de comentario y edita esta [línea][7]; a continuación, [reinicia el Agent][8]. Tras establecerlo, podrás encontrar el rastreo de los errores de tu parseador de logs personalizado en el archivo `collector.log`, que generalmente incluirá la cadena checks.collector(datadog.py:278) | Error while parsing line. Consulta el [código del Agent][9], dado que es probable que el error aparezca allí.
 
 **Nota**: Cada vez que realices un cambio en tu parseador de logs personalizado, [reinicia el Agent][8] para que se aplique ese cambio.
 
-Si sospechas de que se está produciendo algún error fuera del contexto de la función de tu parseador de logs personalizado, no dudes en [contactar con el equipo de asistencia][10]. Sin embargo, antes de nada, establece el nivel del log del Agent en "DEBUG", ejecuta el Agent durante unos minutos para asegurarte de que se están añadiendo nuevos logs a tus archivos y, luego, [ejecuta el comando flare][11] desde tu Agent. De este modo, el equipo de asistencia dispondrá de la información necesaria para solucionar el problema como es debido.
+Si sospechas que se está produciendo algún error fuera del contexto de la función de tu parseador de logs personalizado, no dudes en [contactar con el equipo de asistencia][10]. Sin embargo, antes de nada, establece el nivel del log del Agent en "DEBUG", ejecuta el Agent durante unos minutos para asegurarte de que se están añadiendo nuevos logs a tus archivos y, luego, [ejecuta el comando flare][11] desde tu Agent. De este modo, el equipo de asistencia dispondrá de la información necesaria para solucionar el problema como es debido.
 
 [1]: https://app.datadoghq.com/infrastructure#tags
 [2]: /es/api/v1/tags/
 [3]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
 [4]: /es/events/
 [5]: https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
-[6]: /es/agent/guide/agent-log-files/
+[6]: /es/agent/configuration/agent-log-files/
 [7]: https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211
-[8]: /es/agent/guide/agent-commands/
+[8]: /es/agent/configuration/agent-commands/
 [9]: https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278
 [10]: /es/help/
 [11]: /es/agent/troubleshooting/send_a_flare/

@@ -20,10 +20,6 @@ further_reading:
   text: 'Add more context to your logs with Reference Tables'
 ---
 
-<div class="alert alert-warning">
-Reference Tables are in public beta. There are no billing implications for defining and querying Reference Tables. During the beta, a limit of 100 Reference Tables per account and a limit of 10,000 rows per Reference Table might apply. For more information, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
-</div>
-
 ## Overview
 
 Reference Tables allow you to combine metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata. 

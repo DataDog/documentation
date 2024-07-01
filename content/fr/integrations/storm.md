@@ -18,7 +18,7 @@ integration_id: storm
 integration_title: Storm
 integration_version: 1.0.1
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: '@platinummonkey'
 manifest_version: 1.0.0
 metric_prefix: storm.

@@ -1,6 +1,5 @@
 ---
 title: Dynamic Instrumentation
-kind: documentation
 aliases:
     - /tracing/dynamic_instrumentation/
     - /dynamic_instrumentation/how-it-works/
@@ -72,6 +71,12 @@ To enable Dynamic Instrumentation on a service, go to the [in-app setup page][16
 For more detailed instructions, select your runtime below:
 
 {{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
+
+
+### Limitations
+
+- Dynamic Instrumentation is not yet compatible with Azure App Services or serverless environments.
+- Support is limited to applications built with Python, Java, and .NET.
 
 ## Explore Dynamic Instrumentation
 

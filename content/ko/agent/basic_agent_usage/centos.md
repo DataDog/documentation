@@ -17,7 +17,6 @@ further_reading:
 - link: /agent/configuration/network#configure-ports
   tag: 설명서
   text: 인바운드 포트 구성
-kind: documentation
 platform: CentOS
 title: CentOS(Rocky/Alma Linux 포함)를 위한 기본 Agent 사용법
 ---
@@ -116,7 +115,58 @@ Agent 설정 파일과 폴더 위치는 다음과 같습니다.
 {{% /tab %}}
 {{< /tabs >}}
 
-## 트러블슈팅
+## 에이전트 설치 제거
+
+{{< tabs >}}
+{{% tab "에이전트 v6 & v7" %}}
+
+
+```shell
+sudo yum remove datadog-agent
+```
+
+이 명령을 사용하면 에이전트가 제거되나 다음은 제거되지 않습니다.
+* `datadog.yaml` 설정 파일
+* `/etc/datadog-agent` 설정 폴더에서 사용자가 생성한 파일
+* `/opt/datadog-agent` 폴더에서 사용자가 생성한 파일
+* `dd-agent` 사용자
+* Datadog 로그 파일
+
+이들 요소도 제거하려면 에이전트 제거 후 이 명령을 실행합니다.
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/datadog-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+
+{{% tab "에이전트 v5" %}}
+```shell
+sudo yum remove datadog-agent
+```
+
+이 명령을 사용하면 에이전트가 제거되나 다음은 제거되지 않습니다.
+
+* `datadog.yaml` 설정 파일
+* `/etc/dd-agent` 설정 폴더에 있는 사용자 생성 파일
+* `/opt/datadog-agent` 폴더에서 사용자가 생성한 파일
+* `dd-agent` 사용자
+* Datadog 로그 파일
+
+이들 요소도 제거하려면 에이전트 제거 후 이 명령을 실행합니다.
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## Python
 
 [Agent 트러블슈팅 가이드][2]를 참조하세요.
 

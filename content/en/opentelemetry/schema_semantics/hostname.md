@@ -1,6 +1,5 @@
 ---
 title: Mapping OpenTelemetry Semantic Conventions to Hostnames
-kind: documentation
 further_reading:
 - link: "/opentelemetry/"
   tag: "Documentation"
@@ -90,8 +89,13 @@ If no valid host names are found, the behavior varies depending on the ingestion
 {{% tab "Datadog Exporter" %}}
 
 The fallback hostname logic is used. This logic generates a hostname for the machine where 
-the Datadog Exporter is running, which is compatible with the rest of Datadog products.
-You can use the `hostname` setting to set a fallback hostname.
+the Datadog Exporter is running, which is compatible with the rest of Datadog products, by checking the following sources:
+
+1. The `hostname` field in the Datadog Exporter configuration.
+1. Cloud provider API.
+1. Kubernetes host name.
+1. Fully qualified domain name.
+1. Operating system host name.
 
 This may lead to incorrect hostnames in [gateway deployments][1]. To avoid this, use the `resource detection` processor in your pipelines to ensure accurate hostname resolution.
 

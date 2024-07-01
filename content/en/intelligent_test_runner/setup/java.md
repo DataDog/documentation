@@ -26,6 +26,7 @@ The following test frameworks are supported:
 - TestNG >= 6.4
 - Spock >= 2.0
 - Cucumber >= 5.4.0
+- Karate >= 1.0.0
 - Scalatest >= 3.0.8
 
 ## Setup

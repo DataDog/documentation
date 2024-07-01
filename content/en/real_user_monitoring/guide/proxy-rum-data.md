@@ -26,6 +26,7 @@ To successfully forward a request to Datadog, your proxy must
 <ul>
 <li>For security reasons, remove any HTTP headers that potentially contain sensitive information, such as the <code>cookie</code> header.</li>
 <li>The request body can contain binary data and should not be converted to a string. Make sure your proxy implementation forwards the raw body without conversion.</li>
+<li>Make sure your proxy implementation does not allow a malicious actor to send requests to a different server (ex: https://browser-intake-datadoghq.com.malicious.com).</li>  
 </ul>
 </div>
 
@@ -161,7 +162,7 @@ The Datadog intake origin needs to be defined in your proxy implementation to en
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/#initialization-parameters
+[1]: /real_user_monitoring/browser/setup/#initialization-parameters
 [2]: https://github.com/easylist/easylist/blob/997fb6533c719a015c21723b34e0cedefcc0d83d/easyprivacy/easyprivacy_general.txt#L3840
 
 

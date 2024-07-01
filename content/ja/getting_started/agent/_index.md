@@ -9,7 +9,6 @@ further_reading:
 - link: /agent/faq/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: よくあるご質問
   text: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
-kind: documentation
 title: Agent の概要
 ---
 
@@ -30,7 +29,7 @@ Agent は、15～20 秒ごとに 75～100 のシステムレベルメトリク�
 
 ### Agent のオーバーヘッド
 
-Agent が占有するスペースとリソースの量は、構成と Agent が送信するように構成されているデータによって異なります。初期状態では、平均して約 0.08% の CPU 使用率と、約 830MB から 880MB のディスクスペースが見込まれます。
+Agent が占有するスペースとリソースの量は、構成と Agent が送信するように構成されているデータによって異なります。初期状態では、平均して約 0.08% の CPU 使用率と、約 880MB から 1.3GB のディスクスペースが見込まれます。
 
 これらのベンチマークについて詳しくは、[Agent Overhead][2] を参照してください。
 
@@ -100,15 +99,15 @@ Agent は 15 秒ごとにホストデータを収集し、環境全体で何が�
 
 ### インストール
 
-Datadog UI で、**Integrations &gt; Agent** に移動し、Ubuntu を選択して、Ubuntu 用の Agent インストールページに移動します。Datadog Agent をホストにインストールするには、そのページにある 1 行のインストールコマンド (以下に示す例) を使用し、[Datadog API キー][16]で更新します。
+Datadog UI で [Agent Installation ページ][18]に移動し、**Ubuntu** をクリックします。ホストに Datadog Agent をインストールするには、そのページから 1 行のインストールコマンド (下図の例) を使用し、[Datadog API キー][16]で更新します。
 
 Ubuntu の 1 行インストールコマンドの例:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-最新のインストール方法については、お使いの OS のアプリ内 [Agent インストールページ][18]をご覧ください。
+[Agent Installation ページ][18]を使用して、お使いのオペレーティングシステムの最新のインストール手順を参照してください。
 
 ### 検証
 
@@ -139,7 +138,7 @@ Agent (v7.36.1)
 
 #### イベント
 
-Datadog UI で、**Service Mgmt > Event Management** のイベント管理ページにアクセスしてください。Agent が起動または再起動すると、Agent は Datadog にイベントを送信します。Agent が正常にインストールされると、以下のメッセージが表示されます。
+Datadog UI で [Events Explorer ページ][20]に移動します。Agent が起動または再起動されると、Agent は Datadog にイベントを送信します。Agent が正常にインストールされると、以下のメッセージが表示されます。
 
 ```text
 Datadog agent (v. 7.XX.X) started on <Hostname>
@@ -155,11 +154,11 @@ Agent は、以下のサービスチェックを行うように設定されて�
   - `datadog.agent.check_status`:
     Agent チェックが Datadog にメトリクスを送信できない場合は、`CRITICAL` を返します。それ以外の場合は、`OK` を返します。
 
-これらのチェックは、Datadog プラットフォームで使用することで、モニターやダッシュボードを通じて Agent のステータスを一目で視覚化することができます。詳しくは、[サービスチェックの概要][20]を参照してください。
+これらのチェックは、Datadog プラットフォームで使用することで、モニターやダッシュボードを通じて Agent のステータスを一目で視覚化することができます。詳しくは、[サービスチェックの概要][21]を参照してください。
 
 #### メトリクス
 
-Datadog UI で、メトリクスサマリーページ **Metrics > Summary** に移動し、メトリクス `datadog.agent.started` または メトリクス `datadog.agent.running` を検索してください。これらのメトリクスがすぐに表示されない場合、Agent が Datadog プラットフォームにデータを送信するのに数分かかることがあります。
+Datadog UI で、[Metrics Summary ページ][22]に移動し、メトリクス `datadog.agent.started` または メトリクス `datadog.agent.running` を検索してください。これらのメトリクスがすぐに表示されない場合、Agent が Datadog プラットフォームにデータを送信するのに数分かかることがあります。
 
 いずれかのメトリクスをクリックすると、Metric パネルが開きます。このパネルには、これらのメトリクスがどこから収集されたか、および関連するタグに関する追加のメタデータが表示されます。このチュートリアルでは今のところ、このホストにはタグが構成されていないため、`version` や `host` など、Datadog がメトリクスに割り当てるデフォルトのタグだけが表示されるはずです。タグを追加する方法については、次の Agent コンフィギュレーションファイルのセクションを参照してください。
 
@@ -171,7 +170,7 @@ Agent の主なコンフィギュレーションファイルは `datadog.yaml` �
 - [Datadog API キー][16]。Agent のデータを組織と関連付けるために使用されます。
 - Datadog サイト ({{< region-param key="dd_site" code="true" >}})
 
-使用可能なすべての構成オプションの詳細については、[サンプル `config_template.yaml` ファイル][21]を参照してください。
+使用可能なすべての構成オプションの詳細については、[サンプル `config_template.yaml` ファイル][23]を参照してください。
 
 Agent のコンフィギュレーションファイルを調整することで、タグを含む他の Datadog の機能を利用することができます。
 
@@ -179,9 +178,9 @@ Agent のコンフィギュレーションファイルを調整することで�
 
 タグは、メトリクスとイベントにメタデータの追加レイヤーを追加します。これにより、Datadog の視覚化において、データのスコープと比較ができるようになります。複数のホストから Datadog にデータが送信された場合、この情報をタグ付けすることで、最も視覚化したいデータにスコープを絞ることができます。
 
-例えば、異なるチームから収集したデータを持っていて、チーム・アルファのメトリクスだけを見たい場合、特定のホストに `team:alpha` または `team:bravo` タグを付けると、`team:alpha` タグが付いているメトリクスにフィルターがかかるようになります。タグ付けの詳細については、[タグの使用を開始する][22]を参照してください。
+例えば、異なるチームから収集したデータを持っていて、チーム・アルファのメトリクスだけを見たい場合、特定のホストに `team:alpha` または `team:bravo` タグを付けると、`team:alpha` タグが付いているメトリクスにフィルターがかかるようになります。タグ付けの詳細については、[タグの使用を開始する][24]を参照してください。
 
-1. Agent の[メインコンフィギュレーションファイル][23]を探します。Ubuntu の場合、ファイルの場所は `/etc/datadog-agent/datadog.yaml` です。
+1. Agent の[メインコンフィギュレーションファイル][25]を探します。Ubuntu の場合、ファイルの場所は `/etc/datadog-agent/datadog.yaml` です。
 
 2. `datadog.yaml` ファイルで、`tags` パラメーターを探します。ホストレベルのタグを `datadog.yaml` 構成で設定すると、このホストから転送される全てのメトリクス、トレース、ログにタグを適用することができます。
 
@@ -218,19 +217,19 @@ Agent のコンフィギュレーションファイルを調整することで�
       - test:agent_walkthrough
    ```
 
-4. Agent の [restart コマンド][24]を実行して、Agent を再起動します。Ubuntu の restart コマンド:
+4. Agent の [restart コマンド][26]を実行して、Agent を再起動します。Ubuntu の restart コマンド:
 
    ```shell
    sudo service datadog-agent restart
    ```
 
-5. 数分後、再び **Metrics &gt; Summary** に移動し、メトリクス `datadog.agent.started` をクリックします。デフォルトの `host` と `version` タグに加えて、`team` タグや追加した個人用タグも表示されます。また、ページ上部にある `Tag` フィールドでメトリクスをフィルターすることもできます。
+5. 数分後、再び [Metrics Summary ページ][22]に移動し、メトリクス `datadog.agent.started` をクリックします。デフォルトの `host` と `version` タグに加えて、`team` タグや追加した個人用タグも表示されます。また、ページ上部にある `Tag` フィールドでメトリクスをフィルターすることもできます。
 
-6. **Service Mgmt > Event Management** で、最新の Agent イベントとともに表示されるカスタムタグを見つけます。
+6. [Events Explorer ページ][20]で、最新の Agent イベントとともに表示されるカスタムタグを見つけます。
 
 #### その他の構成オプション
 
-[ログ][25]、[トレース][26]、[プロセス][27]のデータ収集は、Agent コンフィギュレーションファイルから有効にすることができます。これらは、デフォルトで有効になっている機能ではありません。例えば、コンフィギュレーションファイルで、`logs_enabled` パラメーターが false に設定されていることに注目してください。
+[ログ][27]、[トレース][28]、[プロセス][29]のデータ収集は、Agent コンフィギュレーションファイルから有効にすることができます。これらは、デフォルトで有効になっている機能ではありません。例えば、コンフィギュレーションファイルで、`logs_enabled` パラメーターは false に設定されています。
 
 ```yaml
 ##################################
@@ -245,23 +244,23 @@ Agent のコンフィギュレーションファイルを調整することで�
 ```
 
 Agent コンフィギュレーションファイルを通じて構成可能なその他の Datadog 機能は以下の通りです。
-- [OTLP トレース取り込み][28]を有効にする
-- [ログ収集のカスタマイズ][29]で機密データをフィルターまたはスクラブする
-- [DogStatsD][30] によるカスタムデータの構成
+- [OTLP トレース取り込み][30]を有効にする
+- [ログ収集のカスタマイズ][31]で機密データをフィルターまたはスクラブする
+- [DogStatsD][32] によるカスタムデータの構成
 
 セットアップ中、ドキュメントが `datadog.yaml` ファイルまたは Agent コンフィギュレーションファイルに言及している場合、このファイルを構成する必要があります。
 
 ## コマンド
 
-Agent を[起動][32]、[停止][33] または [再起動][24]する方法については、[Agent のコマンド][31]を参照してください。
+Agent を[起動][34]、[停止][35] または [再起動][26]する方法については、[Agent のコマンド][33]を参照してください。
 
 ## トラブルシューティング
 
 Agent のトラブルシューティングに関するヘルプ
 
-- [Agent のトラブルシューティング][34]を参照してください。
-- [Agent のログファイル][35]を確認してください。
-- [Datadog のサポートチーム][36]までお問合せください。
+- [Agent のトラブルシューティング][36]を参照してください。
+- [Agent のログファイル][37]を確認してください。
+- [Datadog のサポートチーム][38]までお問い合わせください。
 
 ## その他の参考資料
 
@@ -297,20 +296,22 @@ Agent のトラブルシューティングに関するヘルプ
 [17]: /ja/agent/basic_agent_usage/?tab=agentv6v7
 [18]: https://app.datadoghq.com/account/settings/agent/latest
 [19]: /ja/agent/configuration/agent-commands/#agent-status-and-information
-[20]: /ja/developers/service_checks/#visualize-your-service-check-in-datadog
-[21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
-[22]: /ja/getting_started/tagging/
-[23]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[24]: /ja/agent/configuration/agent-commands/#restart-the-agent
-[25]: /ja/logs/
-[26]: /ja/tracing/
-[27]: /ja/infrastructure/process/?tab=linuxwindows#introduction
-[28]: /ja/opentelemetry/otlp_ingest_in_the_agent/?tab=host
-[29]: /ja/agent/logs/advanced_log_collection/
-[30]: /ja/developers/dogstatsd/?tab=hostagent
-[31]: /ja/agent/configuration/agent-commands/
-[32]: /ja/agent/configuration/agent-commands/#start-the-agent
-[33]: /ja/agent/configuration/agent-commands/#stop-the-agent
-[34]: /ja/agent/troubleshooting/
-[35]: /ja/agent/configuration/agent-log-files/
-[36]: /ja/help/
+[20]: https://app.datadoghq.com/event/explorer
+[21]: /ja/developers/service_checks/#visualize-your-service-check-in-datadog
+[22]: https://app.datadoghq.com/metric/summary
+[23]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[24]: /ja/getting_started/tagging/
+[25]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[26]: /ja/agent/configuration/agent-commands/#restart-the-agent
+[27]: /ja/logs/
+[28]: /ja/tracing/
+[29]: /ja/infrastructure/process/?tab=linuxwindows#introduction
+[30]: /ja/opentelemetry/otlp_ingest_in_the_agent/?tab=host
+[31]: /ja/agent/logs/advanced_log_collection/
+[32]: /ja/developers/dogstatsd/?tab=hostagent
+[33]: /ja/agent/configuration/agent-commands/
+[34]: /ja/agent/configuration/agent-commands/#start-the-agent
+[35]: /ja/agent/configuration/agent-commands/#stop-the-agent
+[36]: /ja/agent/troubleshooting/
+[37]: /ja/agent/configuration/agent-log-files/
+[38]: /ja/help/

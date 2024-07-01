@@ -1,6 +1,5 @@
 ---
 title: Automate Security Workflows with Workflow Automation
-kind: documentation
 further_reading:
   - link: "/security/cloud_security_management"
     tag: "Documentation"
@@ -15,20 +14,20 @@ products:
     url: /security/threats/
     icon: cloud-security-management
   - name: CSM Misconfigurations
-    url: /security/misconfigurations/
+    url: /security/cloud_security_management/misconfigurations/
     icon: cloud-security-management
   - name: CSM Identity Risks
-    url: /security/identity_risks/
+    url: /security/cloud_security_management/identity_risks/
     icon: cloud-security-management
 ---
 
 {{< product-availability >}}
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-[Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools. 
+[Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools.
 
 Use Workflow Automation with [Cloud Security Management (CSM)][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public Amazon S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
 
@@ -41,6 +40,7 @@ When you trigger a workflow, the source ID of the trigger event must be passed o
 ## Build a workflow
 
 You can build a workflow using a preconfigured flow from an out-of-the-box blueprint, or by creating a custom workflow. For detailed instructions on how to create a workflow, see the [Workflow Automation docs][3].
+
 ### Block access to Amazon S3 bucket via Slack
 
 This example creates a remediation workflow that sends an interactive Slack message when a public Amazon S3 bucket is detected. By clicking **Approve** or **Reject**, you can automatically block access to the S3 bucket or decline to take action.
@@ -48,18 +48,17 @@ This example creates a remediation workflow that sends an interactive Slack mess
 **Note**: To build this workflow, you must configure the [Slack integration][5].
 
 1. On the [Workflow Automation page][4], click **New Workflow**.
-2. Enter a name for the workflow.
-3. Select **Manual** for the trigger and click **Create**.
-4. Click **Add a step to get started** to start adding steps to your workflow using the workflow builder. Alternatively, click **Edit JSON Spec** to build the workflow using the JSON editor.
+1. Enter a name for the workflow and click **Save**.
 
 #### Get security misconfiguration
 
 To retrieve the security misconfiguration and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` source object variable to retrieve the misconfiguration's details from the [**Get a finding**][8] API endpoint.
 
-1. Click **Add a step to get started** to add the first step to your workflow.
-2. Search for the **Get security finding** action and select it to add it as a step on your workflow canvas.
-3. Click the step in the workflow canvas to configure it.
-4. For **Finding ID**, enter `{{ Source.securityFinding.id }}`.
+1. Click **Add Step** to add the first step to your workflow.
+1. Search for the **Get security finding** action and select it to add it as a step on your workflow canvas.
+1. Click the step in the workflow canvas to configure it.
+1. For **Finding ID**, enter `{{ Source.securityFinding.id }}`.
+1. Click **Save** to save your workflow.
 
 #### Add JS function
 
@@ -91,7 +90,7 @@ Next, add the JavaScript Data Transformation Function action to the canvas and c
 3. Click the step in the workflow canvas and enter the following information:
     - **Workspace**: The name of your Slack workspace.
     - **Channel**: The channel to send the Slack message to.
-    - **Prompt text**: The text that will appear immediately above the choice buttons in the Slack message, for example, "Would you like to block public access for `{{ Steps.Get_security_finding.resource }}` in region `{{ Steps.GetRegion.data }}`?"
+    - **Prompt text**: The text that appears immediately above the choice buttons in the Slack message, for example, "Would you like to block public access for `{{ Steps.Get_security_finding.resource }}` in region `{{ Steps.GetRegion.data }}`?"
 
 ##### Approve workflow
 
@@ -131,50 +130,25 @@ This example creates an automated ticket routing workflow that creates and assig
 **Note**: To build this workflow, you must configure the [Jira integration][6].
 
 1. On the [Workflow Automation page][4], click **New Workflow**.
-2. Enter a name for the workflow.
-3. Select **Manual** for the trigger and click **Create**.
-4. Click **Add a step to get started** to start adding steps to your workflow using the workflow builder. Alternatively, click **Edit JSON Spec** to build the workflow using the JSON editor.
+1. Enter a name for the workflow and click **Save**.
 
-#### Get security issue
+#### Get security finding
 
 To retrieve the finding and pass it into the workflow, use the **Get security finding** action. The action uses the `{{ Source.securityFinding.id }}` source object variable to retrieve the finding's details from the [**Get a finding**][8] API endpoint.
 
-1. Click **Add a step to get started** to add the first step to your workflow.
-2. Search for the **Get security finding** action and select it to add it as a step on your workflow canvas.
-3. Click the step in the workflow canvas to configure it.
-4. For **Security ID**, enter `{{ Source.securityFinding.id }}`.
-
-#### Add JS function
-
-Next, add the JavaScript Data Transformation Function action to the canvas and configure it to return the team name from the finding's tags.
-
-1. Click the plus (`+`) icon on the workflow canvas to add another step.
-2. Search for the **JS Function** action and select it to add it as a step on your workflow canvas.
-3. Click the step in the workflow canvas and paste the following in the script editor:
-   {{< code-block lang="javascript" >}}
-    // Gets the team info from the finding tags 
-    // Use `$` to access Trigger or Steps data.
-    // Use `_` to access Lodash.
-    // See https://lodash.com/ for reference.
-
-    let tags = $.Steps.Get_security_finding.tags
-
-    let team = tags.filter(t => t.includes('team:'))
-    if(region.length == 1){
-        return team[0].split(':')[1]
-    } else {
-        return '';
-    }
-    {{< /code-block >}}
+1. Click **Add Step** to add the first step to your workflow.
+1. Search for the **Get security finding** action and select it to add it as a step on your workflow canvas.
+1. Click the step in the workflow canvas to configure it.
+1. For **Security ID**, enter `{{ Source.securityFinding.id }}`.
 
 #### Add Jira action
 
 1. Click the plus (`+`) icon on the workflow canvas to add another step.
-2. Search for the **Create issue Jira** action and select it to add it as a step on your workflow canvas.
+2. Search for the **Create issue** Jira action and select it to add it as a step on your workflow canvas.
 3. Click the step in the workflow canvas and enter the following information:
     - **Jira account**: The URL of your Jira account.
-    - **Project**: `{{ Steps.GetTeamInfo.data }}`
-    - **Summary**: `{{ Steps.Get_security_finding.rule.name }}`
+    - **Project**: `{{ Source.securityFinding.tags_value.team }}`
+    - **Summary**: `{{ Source.securityFinding.rule.name }}`
 4. Click **Save**.
 
 ## Trigger a workflow

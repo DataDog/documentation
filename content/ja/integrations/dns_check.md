@@ -21,7 +21,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - network
-- web
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/dns_check/README.md
 display_on_public_website: true
@@ -29,7 +28,7 @@ draft: false
 git_integration_title: dns_check
 integration_id: dns
 integration_title: DNS Check
-integration_version: 3.2.0
+integration_version: 3.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -47,7 +46,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::ネットワーク
-  - Category::Web
   configuration: README.md#Setup
   description: DNS レコードの解決可能性とルックアップ時間を監視。
   media: []
@@ -63,15 +61,15 @@ tile:
 
 選択したネームサーバーを使用した DNS レコードの解決可能性とルックアップ時間を監視します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 DNS チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 メトリクス指向チェックの多くは監視対象サービスと同じホストで実行することが最適ですが、このステータス指向チェックは、監視対象の DNS サービスを実行していないホストから実行することが望ましい場合があります。
 
-### ブラウザトラブルシューティング
+### 構成
 
 1. DNS データの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `dns_check.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル dns_check.d/conf.yaml][3] を参照してください。
@@ -100,21 +98,21 @@ DNS チェックは [Datadog Agent][1] パッケージに含まれています�
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `dns_check` を検索します。
 
-## リアルユーザーモニタリング
+## データ収集
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "dns_check" >}}
 
 
-### ヘルプ
+### イベント
 
 DNS チェックには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 {{< get-service-checks-from-git "dns_check" >}}
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 

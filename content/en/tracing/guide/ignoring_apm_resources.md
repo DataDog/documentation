@@ -59,18 +59,39 @@ apm_config:
 {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Kubernetes Helm" %}}
+{{% tab "Kubernetes" %}}
+#### Datadog Operator
 
-In the `traceAgent` section of the `values.yaml` file, add `DD_APM_FILTER_TAGS_REJECT` in the `env` section, then [spin up helm as usual][1]. For multiple tags, separate each key:value with a space.
+{{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      containers:
+        trace-agent:
+          env:
+            - name: DD_APM_FILTER_TAGS_REJECT
+              value: tag_key1:tag_val2 tag_key2:tag_val2
+{{< /code-block >}}
 
-{{< code-block lang="yaml" filename="values.yaml" >}}
-traceAgent:
-  # agents.containers.traceAgent.env -- Additional environment variables for the trace-agent container
-    env:
-      - name: DD_APM_FILTER_TAGS_REJECT
-        value: tag_key1:tag_val2 tag_key2:tag_val2
+{{% k8s-operator-redeploy %}}
+
+#### Helm
+
+{{< code-block lang="yaml" filename="datadog-values.yaml" >}}
+agents:
+  containers:
+    traceAgent:
+      env:
+        - name: DD_APM_FILTER_TAGS_REJECT
+          value: tag_key1:tag_val2 tag_key2:tag_val2
 
 {{< /code-block >}}
+
+{{% k8s-helm-redeploy %}}
 
 [1]: /agent/kubernetes/?tab=helm#installation
 {{% /tab %}}
@@ -411,13 +432,20 @@ tracer.configure(settings={
 
 {{< programming-lang lang="nodeJS" >}}
 
-Configure a blocklist on the [Http][1] plugin. Take note of what the blocklist matches on from the API docs. For example, Http matches on URLs, so if the trace's `http.url` span tag is `http://<domain>/healthcheck`, write a rule that matches the `healthcheck` URL:
+Configure a blocklist on the [Http][1] plugin. Take note of what the blocklist matches on from the API docs. For example, incoming Http requests matches on URL paths, so if the trace's `http.url` span tag is `http://<domain>/healthcheck`, write a rule that matches the `healthcheck` URL:
 
 
 ```
 const tracer = require('dd-trace').init();
 tracer.use('http', {
-  blocklist: ["/healthcheck"]
+  // incoming http requests match on the path
+  server: {
+    blocklist: ['/healthcheck']
+  },
+  // outgoing http requests match on a full URL
+  client: {
+    blocklist: ['https://telemetry.example.org/api/v1/record']
+  }
 })
 
 //import http
@@ -425,7 +453,7 @@ tracer.use('http', {
 ```
 <div class="alert alert-info"><strong>Note</strong>: The tracer configuration for the integration must come <em>before</em> that instrumented module is imported.</div>
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/plugins.connect.html#blocklist
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.plugins.connect.html#blocklist
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}

@@ -7,7 +7,6 @@ further_reading:
 - link: /security/application_security/how-appsec-works//
   tag: ドキュメント
   text: Application Security Management の仕組み
-kind: ドキュメント
 title: トレースの判定
 ---
 

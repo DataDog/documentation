@@ -47,7 +47,7 @@ When you click **Test URL**, assertions about your website's health populate. Ad
 ### Import your SLO in your Dashboard
 
 1. [Create a new Dashboard][6] to host your SLO widget.
-2. Drag and drop the SLO summary widget on your board.
+2. Drag and drop the SLO widget on your board.
 3. Select the SLO that you defined above.
 
     {{< img src="synthetics/guide/uptime_slo/slo_selection.png" alt="SLO widget selection" >}}

@@ -20,7 +20,10 @@ The Go Datadog Trace library is open source. View the [GitHub repository][1] for
 
 The Go Datadog Trace Library has a [version support policy][2] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][3]. Older versions may function, but no support is provided by default. For special requests, [contact support][4]. 
 
-You must be running Datadog Agent v5.21.1+.
+### Requirements
+
+- Datadog Agent v5.21.1+.
+- [Add and initialize the Datadog Go tracer][77] before configuring integrations.
 
 ### Integrations
 
@@ -164,3 +167,4 @@ import "gopkg.in/DataDog/dd-trace-go.v1/contrib/<PACKAGE_DIR>/<PACKAGE_NAME>"
 [74]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/bradfitz/gomemcache/memcache
 [75]: https://aws.github.io/aws-sdk-go-v2/docs/
 [76]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/aws/aws-sdk-go-v2/aws
+[77]: /tracing/trace_collection/library_config/go/

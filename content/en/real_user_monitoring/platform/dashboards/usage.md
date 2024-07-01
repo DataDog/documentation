@@ -18,7 +18,7 @@ further_reading:
 The RUM Web App Usage dashboard provides insights about how your customers are using your application. It shows:
 
 - **Application usage**:
-  See graphs of the average session duration, page views per sessions, actions per session, and errors per session. The tables below list usage metrics based on the first and last visited pages.
+  See graphs of the average session duration, pageviews per sessions, actions per session, and errors per session. The tables below list usage metrics based on the first and last visited pages.
 - **User journeys**:
   See what pages your users are spending the most time on, and see where they start and end their journey across your application.
 - **Engagement matrix**:

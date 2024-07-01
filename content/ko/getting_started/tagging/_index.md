@@ -102,7 +102,7 @@ Datadog에서는 태그를 할당할 때 통합 서비스 태깅을 사용하시
 | [통합][15]   | 선택 사항으로 AWS, Google Cloud, Azure용 메트릭을 제한합니다.                                        |
 | [APM][16]            | 서비스, 트레이스, 프로필을 필터링하거나 서비스 맵의 다른 영역으로 이동합니다.           |
 | [RUM & 세션 리플레이][17] | 이벤트 검색, 분석, 패턴, 리플레이, RUM 익스플로러(RUM Explorer)의 문제를 필터링합니다.        |
-| [Synthetic Monitoring & Continuous Testing][18]     |  Synthetic Monitoring & Continuous Testing Explorer를 사용하여 CI 파이프라인에서 실행되는 합성 테스트 또는 테스트를 필터링하고 그룹화합니다.   |
+| [Synthetic Monitoring & Continuous Testing][18]     | 신서틱(Synthetic) 모니터링 & 테스트 결과 탐색기를 사용하여 신서틱(Synthetic) 테스트 또는 CI 파이프라인에서 실행 중인 테스트를 필터링하고 그룹화하세요.   |
 | [노트북][19]      | 그래프의 메트릭을 필터링하고 그룹으로 묶습니다.                                                               |
 | [로그][20]           | 로그 검색, 분석, 패턴, 라이브 테일, 파이프라인을 필터링합니다.                                |
 | [SLO][21]           | SLO, 그룹화된 메트릭 기반의 SLO, 그룹화된 모니터 기반의 SLO를 검색합니다.                       |

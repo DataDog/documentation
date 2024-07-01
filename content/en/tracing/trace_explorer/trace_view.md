@@ -66,22 +66,21 @@ Groups can be sorted by clicking on the corresponding column header: **RESOURCE*
 [1]: /tracing/glossary/#resources
 [2]: /tracing/glossary/#services
 {{% /tab %}}
-{{% tab "Waterfall (Beta)" %}}
+{{% tab "Waterfall" %}}
 
-<div class="alert alert-info"><strong>Join the Beta!</strong><br />
-To join the Waterfall private beta <a href="https://forms.gle/LjJR1ZbF1tNDv5JC6">fill out this form</a>.</div>
+{{< img src="tracing/trace_view/waterfall2.png" alt="Waterfall" style="width:100%;">}}
 
-{{< img src="tracing/trace_view/waterfall.png" alt="Waterfall" style="width:90%;">}}
+Displays all spans for a trace on a timeline where each row corresponds to a span. This visualization is useful for isolating and focusing on relevant parts of a trace.
 
-Displays all the spans for an associated trace, color-coded on separate rows and on a timeline. This visualization is useful for isolating and focusing on relevant parts of a trace.
+Each row (span) indicates the following:
 
-On each row (that is, per span):
-* A bar (colored by service), whose length corresponds to the percentage of total trace duration
-* The service name, operation name, and resource name, with font styling: **service** operation <span style="color:gray">resource</span>
-* Absolute and relative span duration information
-* (when applicable) An error icon or HTTP status code
+- **Relative span duration**: The length of the color-coded bar corresponds to the percentage of total trace duration.
+- **Absolute span duration**: The absolute time in milliseconds (ms).
+- **Span details**: The corresponding service name and resource name are displayed.
+- **Statuses**: When applicable, an HTTP status code is displayed.
+- **Color coding**: Spans are color-coded by service (default), host, or container. To change how spans are color-coded, use the **Color by** dropdown.
 
-To expand or collapse span descendants, click the plus or minus button on any row. To expand all spans, click the plus button to the left of the timescale.
+To expand or collapse span descendants, click the chevron (>) icon on a row. To expand or collapse all spans, click the **Expand all** (+) or **Collapse all** (-) buttons.
 
 {{% /tab %}}
 {{% tab "Map" %}}
@@ -167,6 +166,15 @@ Click **View in ASM** to investigate further using [Datadog Application Security
 {{< img src="tracing/trace_view/security_tab.png" alt="Security tab" style="width:90%;">}}
 
 [1]: /security/application_security/how-appsec-works/
+{{% /tab %}}
+{{% tab "Code Hotspots" %}}
+
+View [Code Hotspots][1] to identify lines of code related to performance issues. The values on the left side represent the time spent in each method call during the selected span.
+
+{{< img src="profiler/code_hotspots_tab.png" alt="Code Hotspots tab showing time spent in each method for a selected span" style="width:90%;">}}
+
+[1]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+
 {{% /tab %}}
 {{% tab "Span Links (Beta)" %}}
 

@@ -12,6 +12,8 @@ assets:
       - snmp.devStatus
       metadata_path: metadata.csv
       prefix: ''
+    service_checks:
+      metadata_path: assets/service_checks.json
     source_type_id: 602
     source_type_name: Meraki
   monitors:
@@ -40,7 +42,7 @@ kind: インテグレーション
 manifest_version: 2.0.0
 name: meraki
 public_title: Cisco Meraki
-short_description: NDM メトリクス、ログ、Cloud SIEM を使用して Cisco Meraki プラットフォームを監視する
+short_description: Network Device Monitoring、ログ、Cloud SIEM を使用して Cisco Meraki 環境を監視する
 supported_os:
 - linux
 - windows
@@ -58,7 +60,7 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   configuration: README.md#Setup
-  description: NDM メトリクス、ログ、Cloud SIEM を使用して Cisco Meraki プラットフォームを監視する
+  description: Network Device Monitoring、ログ、Cloud SIEM を使用して Cisco Meraki 環境を監視する
   media: []
   overview: README.md#Overview
   support: README.md#Support
@@ -68,11 +70,11 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-このインテグレーションは、[ネットワークデバイスモニタリング][1]のメトリクス、ネットワークイベントログ、そして [Cloud SIEM][2] 用のセキュリティイベントログを収集することで、Cisco Meraki プラットフォームの包括的な可視性を提供します。ログ、メトリクス、推奨モニター、インテグレーションダッシュボードの詳細については、[Meraki インテグレーションタイル][3]を参照してください。
+このインテグレーションは、[Network Device Monitoring][1]、Network Event Logs、および [Cloud SIEM][2] の Security Event Logs のメトリクスを収集することで、Cisco Meraki 環境の包括的な可視性を提供します。
 
 **ネットワークデバイスモニタリング**
 
-潜在的なボトルネックに対する洞察を得て、デバイス構成を最適化し、ネットワークインフラストラクチャー全体の健全性が標準に達していることを保証します。
+[Network Device Monitoring][1] は、潜在的なボトルネックやデバイスの構成エラーを特定することで、ネットワークインフラストラクチャーの全体的な健全性が標準に達していることを確認するのに役立ちます。
 
 このインテグレーションは、以下のデバイスのメトリクスを収集します。
 
@@ -80,35 +82,36 @@ tile:
 * _MS (スイッチ):_ ポートステータス、トラフィック、エラーレートなどのスイッチパフォーマンスメトリクスを監視します。
 * _MX (セキュリティアプライアンス):_ VPN のステータス、ファイアウォールルール、デバイス全体のパフォーマンスに関するメトリクスを収集します。
 
-デバイスのタグ付けにより、Datadog でデータをフィルタリングして整理する機能が強化され、特定のデバイスグループ、ロケーション、またはデバイスタイプに深く分析することができます。これにより、すぐに使えるダッシュボードを使用しながら、トラブルシューティング、パフォーマンスの最適化、およびレポート作成を支援することができます。
+このインテグレーションは Meraki 環境からデバイスタグとメタデータを動的に取り込み、特定のデバイスグループ、ロケーション、デバイスタイプを簡単にドリルダウンします。
 
 **セキュリティイベントログ**
 
-[セキュリティイベントログ][4]では、以下のイベントを特定することができます。
+[Security Event Logs][3] は、侵入検出、ファイアウォールルール違反、マルウェア脅威の検出などのイベントに関するアラートを出力し、潜在的なセキュリティ脅威の特定と対応を支援します。
 
-* _侵入検知_: Meraki セキュリティアプライアンスによって検出された潜在的なセキュリティ脅威を特定し、対応します。
-* _ファイアウォールルールの違反_: ネットワークセキュリティを維持するために、ファイアウォールルールの違反を監視し、アクションを起こします。
-* _マルウェア脅威の検出_: アラートを受信し、Meraki ネットワーク内のマルウェア脅威に対して予防措置を講じます。
-
-独自のルールを作成したり、[すぐに使える Cloud SIEM ルール][5]を活用して、リアルタイムの脅威検出とインシデント対応を実現します。
+独自のルールを作成したり、[すぐに使える Cloud SIEM ルール][4]を活用して、リアルタイムの脅威検出とインシデント対応を実現します。
 
 **ネットワークイベントログ**
 
-[ネットワークイベントログ][6]は、以下のトピックの追跡に役立ちます。
+[Network Event Logs][5] は、ネットワーク管理者が過去のネットワークイベントを分析し、問題を効率的にトラブルシューティングするのに役立ちます。
+
+これらのログは以下のトピックを追跡します。
 
 * _構成変更:_ ネットワーク構成の変更を追跡し、コンプライアンスを確保し、接続の問題をトラブルシューティングします。
 * _クライアントアソシエーション:_ ワイヤレスアクセスポイントとのクライアントアソシエーションを監視し、ユーザーの接続性を把握します。
 * _ネットワーク健全性イベント:_ 特定のスイッチでパケットロスが多いなど、ネットワークの健全性に影響する問題を特定し、対処します。
 
-ネットワーク管理者は、過去のネットワークイベントを分析し、問題のトラブルシューティングを効率的に行うことができます。このインテグレーションに含まれる推奨モニターに加えて、重要なイベントを管理者に通知する追加モニターを構成することができ、プロアクティブなネットワーク管理が可能になります。
+<br />
 
-さらに、Meraki Cloud Controller からメトリクスを収集するために Meraki プロファイルで [SNMP インテグレーション][7]を構成します。
+このインテグレーションに含まれる推奨モニターに加えて、重要なイベントを管理者に通知する追加モニターを構成することができ、プロアクティブなネットワーク管理が可能になります。
+
+Meraki Cloud Controller からメトリクスを収集するには、Meraki Profile で [SNMP インテグレーション][6]を構成します。
+
 
 ## 計画と使用
 
 ### インフラストラクチャーリスト
 
-1. アプリで [Meraki インテグレーションタイル][3]を開きます。
+1. アプリで [Meraki インテグレーションタイル][7]を開きます。
 1. **+ Add Account** をクリックします。
 1. Meraki アカウントの名前を選択します。
 1. Meraki API キーを追加します。Meraki API キーの生成方法については、[Cisco Meraki Dashboard API][8] の手順を参照してください。
@@ -139,7 +142,7 @@ NDM メトリクスの収集を構成するには、Meraki の API キーが必�
 
 <div class="alert alert-info">ネットワークデバイスモニタリングの Meraki デバイス (MR、MS、MX) のデータ (ネットワークレベル、デバイスレベル、アップリンクレベル、インターフェイス (スイッチポート) レベルのメトリクスとタグを含む) はベータ版です。</div>
 
-Meraki デバイスからメトリクスを収集できるよう、Meraki プロファイルで [SNMP インテグレーション][7]を構成します。
+Meraki デバイスからメトリクスを収集できるよう、Meraki プロファイルで [SNMP インテグレーション][6]を構成します。
 
 {{< get-metrics-from-git "meraki" >}}
 
@@ -164,11 +167,11 @@ Meraki インテグレーションには、サービスのチェック機能は�
 
 [1]: https://app.datadoghq.com/devices
 [2]: https://app.datadoghq.com/security/home
-[3]: https://app.datadoghq.com/integrations/meraki
-[4]: https://developer.cisco.com/meraki/api/get-network-appliance-security-events/
-[5]: https://app.datadoghq.com/logs/pipelines?search=meraki
-[6]: https://developer.cisco.com/meraki/api/get-network-events/
-[7]: https://docs.datadoghq.com/ja/integrations/snmp/
+[3]: https://developer.cisco.com/meraki/api/get-network-appliance-security-events/
+[4]: https://app.datadoghq.com/logs/pipelines?search=meraki
+[5]: https://developer.cisco.com/meraki/api/get-network-events/
+[6]: https://docs.datadoghq.com/ja/integrations/snmp/
+[7]: https://app.datadoghq.com/integrations/meraki
 [8]: https://documentation.meraki.com/zGeneral_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API
 [9]: https://documentation.meraki.com/General_Administration/Other_Topics/Cisco_Meraki_Dashboard_API#Enable_API_access
 [10]: https://docs.datadoghq.com/ja/help/

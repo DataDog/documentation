@@ -32,7 +32,7 @@ RUM-based custom metrics are a cost-efficient option to summarize the data from 
 
 ## Create a RUM-based custom metric
 
-To create a custom metric from RUM event data, navigate to [**UX Monitoring** > **Setup & Configuration** > **Generate Metrics**][4] and click **+ New Metric**.
+To create a custom metric from RUM event data, navigate to [**Digital Experience** > **Application Management** > **Generate Metrics**][4] and click **+ New Metric**.
 
 {{< img src="real_user_monitoring/generate_metrics/new_metrics_button-2.png" alt="Click + New Metric to create a RUM-based custom metric" width="80%" >}}
 
@@ -69,7 +69,7 @@ Data points are not created for metrics with historical data. Data points for yo
 
 ### Add a RUM-based metric on sessions and views
 
-Sessions and views are considered active when there is ongoing application or user activity in a RUM application. For example, as a user opens new pages, these page views are collected in the user session. As a user interacts with buttons on a page, these actions are collected in the page views.
+Sessions and views are considered active when there is ongoing application or user activity in a RUM application. For example, as a user opens new pages, these pageviews are collected in the user session. As a user interacts with buttons on a page, these actions are collected in the pageviews.
 
    Let's assume you have a RUM-based custom metric that counts the number of user sessions containing more than five errors, and a session ID `123` that reaches five errors at 11 AM and closes at 12 PM.
 

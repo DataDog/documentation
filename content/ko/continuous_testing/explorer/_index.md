@@ -17,20 +17,19 @@ further_reading:
 - link: /continuous_testing/explorer/search_runs/
   tag: 설명서
   text: 테스트 실행을 통해 검색하는 방법 알아보기
-kind: 설명서
-title: 신서틱 모니터링 & 연속 테스트 탐색기
+title: 신서티 모니터링 및 및 테스트 결과 탐색기
 ---
 
 ## 개요
 
-[탐색기][1]는 **신서틱 모니터링** 및 **연속 테스트**를 위한 모든 테스트 실행 및 CI 배치에 대한 가시성을 제공해 드립니다.
+[Results Explorer][1]는 **Synthetic Monitoring** 및 **Continuous Testing**의 모든 테스트 실행 및 CI 배치에 대한 가시성을 제공합니다.
 
 {{< tabs >}}
-{{% tab "CI Batches" %}}
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="신서틱 모니터링 & 연속 테스트 탐색기로 CI 배치 검색 및 관리하기" style="width:100%;">}}
+{{% tab "CI 배치" %}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="신서틱 모니터링 및 테스트 결과 탐색기에서 CI 배치 검색 및 관리" style="width:100%;">}}
 {{% /tab %}}
-{{% tab "Test Runs" %}}
-{{< img src="continuous_testing/explorer_test_runs.png" alt="신서틱 모니터링 & 연속 테스트 탐색기로 테스트 실행 검색 및 관리하기" style="width:100%;">}}
+{{% tab "테스트 실행" %}}
+{{< img src="continuous_testing/explorer_test_runs_1.png" alt="신서틱 모니터링 및 테스트 결과 탐색기에서 테스트 실행 작업 검색 및 관리" style="width:100%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -42,9 +41,9 @@ title: 신서틱 모니터링 & 연속 테스트 탐색기
 
 ## 검색 쿼리 생성하기
 
-[**UX 모니터링** > **탐색기**][1]로 이동하여 기본 제공 검색 쿼리를 클릭하여 테스트 배치 또는 실행을 확인하고 시각화하세요.
+[**Digital Experience > Synthetic Monitoring & Testing** > **Continuous Testing**][1]로 이동해 기본 검색 쿼리를 클릭하면 테스트 배치나 실행 작업을 찾아 시각화할 수 있습니다.
 
-{{< img src="continuous_testing/explorer_search_query.png" alt="탐색기에서 사용할 수 있는 기본 제공 검색 쿼리" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_search_query_1.png" alt="Explorer에서 사용할 수 있는 기본 검색 쿼리" style="width:100%;">}}
 
 - 차단 상태를 필터링하고 새 릴리스를 차단하고 있는지 확인하여 CI 파이프라인에서 실행 중인 실패 테스트를 확인합니다.
 - HTTP 오류 상태 코드로 실패한 테스트 실행을 분석하여 예상치 못한 상태 코드가 있는 API 테스트를 식별하세요.
@@ -55,7 +54,7 @@ title: 신서틱 모니터링 & 연속 테스트 탐색기
 
 ## 테스트 실행 탐색하기
 
-탐색기에는 [신서틱 모니터링][7] 및 [연속 테스트][8]의 테스트 실행이 모두 표시됩니다. 빠른 재시도를 포함하여, 모든 테스트는 특정 테스트의 하위 유형에 대한 테스트 실행에 해당됩니다. 탐색기에서 테스트를 클릭하면 테스트 실행 페이지에 접근할 수 있습니다.
+Results Explorer에는 [Synthetic Monitoring][7] 및 [Continuous Testing][8]의 모든 테스트 실행이 표시됩니다. 모든 테스트는 빠른 재시도를 포함하여 특정 테스트 하위 유형에 대한 테스트 실행에 해당합니다. 테스트 실행 페이지에 액세스하려면 Results Explorer에서 테스트를 클릭합니다.
 
 {{< img src="continuous_testing/api_test_run.png" alt="API 테스트 실행 상세 페이지" style="width:100%;">}}
 
@@ -67,15 +66,19 @@ title: 신서틱 모니터링 & 연속 테스트 탐색기
 
 ## 테스트 배치 살펴보기
 
-탐색기는 [연속 테스트 및 CI/CD 공급자][2]가 실행한 테스트 배치를 표시합니다. 모든 배치는 ([CI/CD 통합][2], [datadog-ci][3] NPM 패키지 중 하나 또는 직접 API 엔드포인트를 통한) Datadog API에 대한 호출에 해당하며, 하나 또는 여러 테스트 실행을 트리거합니다. 
+Results Explorer에는 [Continuous Testing 및 CI/CD 공급자][2]에서 실행한 테스트 배치가 표시됩니다. 모든 배치는 ([CI/CD 통합][2], [datadog-ci][3] NPM 패키지 중 하나를 통해 또는 API 엔드포인트를 통해 직접) Datadog API에 대한 호출과 일치하며 하나 이상의 테스트 실행을 트리거합니다.
 
-{{< img src="continuous_testing/open_sidepanel.png" alt="CI 결과 탐색기 사이드 패널r" style="width:100%;">}}
+{{< img src="continuous_testing/ci_execution_side_panel.png" alt="신서틱 모니터링 및 테스트 결과 탐색기 테스트 작업의 CI 배치 측면 패널" style="width:100%;">}}
 
 1. 배치를 클릭하면 배치 CI/CD 메타데이터 및 배치 테스트 결과를 보여주는 사이드 패널이 열립니다. 
 2. 배치의 일부로 수행된 테스트 실행을 살펴보고 실패한 테스트를 정확히 찾아내세요.
 3. 실패한 테스트 결과를 클릭하면 자세한 **테스트 결과** 페이지가 표시되며 문제의 근본 원인을 알아낼 수 있습니다.
 
 더 자세한 정보는 [검색 테스트 배치][4]를 참조하시기 바랍니다.
+
+## 내보내기
+
+신서틱 모니터링 및 테스트 결과 탐색기에서 [저장한 뷰][9]로 내보낼 수 있습니다.
 
 ## 참고 자료
 
@@ -89,3 +92,4 @@ title: 신서틱 모니터링 & 연속 테스트 탐색기
 [6]: /ko/continuous_testing/explorer/search_runs/
 [7]: /ko/synthetics/
 [8]: /ko/continuous_testing/
+[9]: /ko/continuous_testing/explorer/saved_views/

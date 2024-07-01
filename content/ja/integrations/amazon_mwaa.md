@@ -13,7 +13,7 @@ integration_id: ''
 integration_title: Amazon Managed Workflows for Apache Airflow (MWAA)
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_mwaa
 public_title: Datadog-Amazon Managed Workflows for Apache Airflow (MWAA) インテグレーション
@@ -39,6 +39,11 @@ Amazon Managed Workflows for Apache Airflow (MWAA) は、クラウド上でワ�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `MWAA` が有効になっていることを確認します。
 2. [Datadog - Amazon Managed Workflows for Apache Airflow (MWAA) インテグレーション][3] をインストールします。
 
+### 収集データ
+
+1. AWS MWAA が [CloudWatch にログを送信][4]するよう構成します。
+2. [Datadog にログを送信します][5]。
+
 ## リアルユーザーモニタリング
 
 ### データセキュリティ
@@ -55,10 +60,12 @@ Amazon Managed Workflows for Apache Airflow (MWAA) インテグレーション�
 
 ## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-mwaa
-[4]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mwaa/amazon_mwaa_metadata.csv
-[5]: https://docs.datadoghq.com/ja/help/
+[4]: https://docs.aws.amazon.com/mwaa/latest/userguide/monitoring-airflow.html#monitoring-airflow-enable
+[5]: /ja/integrations/amazon_web_services/?tab=roledelegation#log-collection
+[6]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mwaa/amazon_mwaa_metadata.csv
+[7]: https://docs.datadoghq.com/ja/help/

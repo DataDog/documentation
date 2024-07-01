@@ -6,7 +6,7 @@ type: multi-code-lang
 code_lang_weight: 30
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-js'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Source code'
     - link: 'https://datadog.github.io/dd-trace-js'
       tag: 'Documentation'
@@ -15,10 +15,10 @@ further_reading:
       tag: "Documentation"
       text: "Propagating trace context"
     - link: 'tracing/glossary/'
-      tag: 'Use the APM UI'
+      tag: 'Documentation'
       text: 'Explore your services, resources and traces'
     - link: 'tracing/'
-      tag: 'Advanced Usage'
+      tag: 'Documentation'
       text: 'Advanced Usage'
 ---
 
@@ -107,8 +107,8 @@ Controls the ingestion sample rate (between 0.0 and 1.0) between the Agent and t
 
 `DD_TRACE_RATE_LIMIT`
 : **Configuration**: `rateLimit`<br>
-**Default**: `1.0` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
-Ratio of spans to sample as a float between `0.0` and `1.0`. <br>
+**Default**: `100` when `DD_TRACE_SAMPLE_RATE` is set. Otherwise, delegates rate limiting to the Datadog Agent.
+The maximum number of traces per second per service instance.<br>
 
 `DD_TRACE_SAMPLING_RULES`
 : **Configuration**: `samplingRules`<br>

@@ -6,32 +6,32 @@ type: multi-code-lang
 code_lang_weight: 20
 ---
 
-## ASM capabilities
+## Application Security capabilities
 
-The following ASM capabilities are supported in the Go library, for the specified tracer version:
+The following application security capabilities are supported in the Go library, for the specified tracer version:
 
-| ASM capability                   | Minimum Go tracer version |
+| Application Security capability                   | Minimum Go tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection| 1.47.0  |
 | API Security | 1.59.0 |
 | Threat Protection |  1.50.0   |
 | Customize response to blocked requests | 1.53.0 |
 | Software Composition Analysis (SCA) | 1.49.0 |
-| Code Security (beta) | not supported |
+| Code Security  | not supported |
 | Automatic user activity event tracking | not supported |
 
-The minimum tracer version to get all supported ASM capabilities for Go is 1.59.0.
+The minimum tracer version to get all supported application security capabilities for Go is 1.59.0.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][1], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
-|Type | Threat Detection support | Vulnerability Management for OSS support |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 |
-| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
-| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         |                           |
+| Type        | Threat Detection support | Software Composition Analysis |
+|-------------|--------------------------|-------------------------------|
+| Docker      | {{< X >}}                | {{< X >}}                     |
+| Kubernetes  | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS  | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate | {{< X >}}                | {{< X >}}                     |
+| AWS Lambda  | {{< X >}}                |                               |
 
 ## Language and framework compatibility
 
@@ -43,13 +43,13 @@ The Datadog Go Tracing Library has a [version support policy][3] defined for Go 
 
 You must be running Datadog Agent v5.21.1+
 
-Starting from tracer version 1.53.0, ASM does not require [CGO][15].
+Starting from tracer version 1.53.0, application security capabilities do not require [CGO][15].
 
 ## Integrations
 
 The Go tracer includes support for the following frameworks, data stores and libraries.
 
-The Go packages listed in this page are relevant for ASM. You can also find more tracing integrations in [APM's tracing compatibility page][16].
+The Go packages listed in this page are relevant for Application Security capabilities. You can also find more tracing integrations in [APM's tracing compatibility page][16].
 
 **Note**: The [Go integrations documentation][6] provides a detailed overview of the supported packages and their APIs, along with usage examples.
 
@@ -66,6 +66,9 @@ The Go packages listed in this page are relevant for ASM. You can also find more
 | [echo v4][9]     | {{< X >}}  | {{< X >}} |
 | [echo v3][10]     | {{< X >}} | {{< X >}} |
 | [chi][12] | {{< X >}} | {{< X >}} |
+| [graphql-go][17] | {{< X >}} | {{< X >}} |
+| [gqlgen][18] | {{< X >}} | {{< X >}} |
+
 
 ### Networking framework compatibility
 
@@ -96,4 +99,6 @@ The Go packages listed in this page are relevant for ASM. You can also find more
 [14]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
 [15]: https://github.com/golang/go/wiki/cgo
 [16]: /tracing/compatibility_requirements/go
+[17]: https://pkg.go.dev/github.com/graphql-go/graphql
+[18]: https://pkg.go.dev/github.com/99designs/gqlgen/graphql
 

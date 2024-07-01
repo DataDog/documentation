@@ -26,16 +26,9 @@ If you installed the Datadog Agent by using the Datadog [Helm chart][3] or [Data
 
 ### Agent configuration
 {{< tabs >}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-```yaml
-datadog:
-  apm:
-    portEnabled: true
-```    
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+Update your `datadog-agent.yaml` to set `features.apm.enabled` to `true`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -48,6 +41,22 @@ spec:
     apm:
       enabled: true
 ```
+
+{{% k8s-operator-redeploy %}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Update your `datadog-values.yaml` to set `datadog.apm.portEnabled` to `true`.
+
+```yaml
+datadog:
+  apm:
+    portEnabled: true
+```    
+
+{{% k8s-helm-redeploy %}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -58,17 +67,8 @@ You can configure your application to use the Kubernetes service by using the Cl
 The [Cluster Agent's Admission Controller][2] can inject the configuration for APM connectivity into your containers. The options are `hostip`, `socket`, or `service`. Choose the `service` mode to have the Admission Controller add the `DD_AGENT_HOST` environment variable for the DNS name of the service.
 
 {{< tabs >}}
-{{% tab "Helm" %}}
-
-```yaml
-clusterAgent:
-  admissionController:
-    enabled: true
-    configMode: service
-```    
-
-{{% /tab %}}
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
+Update your `datadog-agent.yaml` with the following:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -84,6 +84,22 @@ spec:
       enabled: true
       agentCommunicationMode: service
 ```
+
+{{% k8s-operator-redeploy %}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Update your `datadog-values.yaml` with the following:
+
+```yaml
+clusterAgent:
+  admissionController:
+    enabled: true
+    configMode: service
+```
+
+{{% k8s-helm-redeploy %}}
 
 {{% /tab %}}
 {{< /tabs >}}

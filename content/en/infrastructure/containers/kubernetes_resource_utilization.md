@@ -22,7 +22,7 @@ With a constantly-updated status of how well your resource requests and limits m
 
 ## Usage
 
-In Datadog, go to **Infrastructure** > [**Kubernetes**][2] and select the [**Resource Utilization** tab][3].
+In Datadog, go to the [**Kubernetes Overview** page][2] and select the [**Resource Utilization** tab][3].
 
 The page opens on **Pods**, with a default grouping by `kube_cluster_name`, `kube_namespace`, and `kube_deployment`.
 

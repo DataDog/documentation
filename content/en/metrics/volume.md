@@ -26,7 +26,7 @@ further_reading:
 
 Cloud-based applications generate massive amounts of data, which can be overwhelming for your organization as it scales. Observability costs become a significant budget item but core observability teams lack visibility into what is truly valuable to each individual engineering team. Concurrently, individual teams may have limited insights into the costs of the metrics and tags they're submitting; teams are less incentivized to be proactive in helping manage this growth.
 
-Datadog's [Metrics Volume Management page][1] provides comprehensive visibility and intelligent insights for which metrics you should focus your cost-optimization efforts. If used with [Metrics without Limits™][1], Metrics Volume allows for flexible configuration of metrics ingestion and indexing to reduce costs without sacrificing accuracy. 
+Datadog's [Metrics Volume Management page][1] provides comprehensive visibility and intelligent insights for which metrics you should focus your cost-optimization efforts. When used with [Metrics without Limits™][1], Metrics Volume allows for flexible configuration of metrics ingestion and indexing to reduce costs without sacrificing accuracy. 
 
 ## Search, filter, and sort
 
@@ -90,7 +90,6 @@ You have full control over the cardinality of your metrics without the need to c
 In this example, the tag configuration modal shows a metric with a current volume of 13690031 indexed custom metrics. After you select Include tags… with an empty allowlist of tags, the modal shows an estimated new volume of 1. You can reduce the number of indexed custom metrics by 13690030.
 
 {{< img src="metrics/volume/reduce_metric_vol_cost_tags.png" alt="Tag configuration modal showing an example metric with a current volume of 13690031 index metrics and an estimated new volume of 1, with an empty allowlist of tags" style="width:80%;" >}}
-
 
 ## Analyze metric utilization in Datadog
 

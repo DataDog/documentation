@@ -135,6 +135,18 @@ You can manually start a workflow from a Cloud SIEM Security Signal panel.
 
 For additional examples of Security workflows you can automate, see [Automate Security Workflows with Workflow Automation][4].
 
+## Trigger a workflow from incidents
+
+To trigger a workflow from incidents, create an incident notification rule:
+1. Create a workflow with a **Monitor, Incident, or Security signal** trigger, or add a **Monitor, Incident, or Security signal** trigger to an existing workflow.
+1. Click on the trigger in the workflow canvas and copy the **Mention handle**.
+1. From the [Incidents Settings][6] page, select **Rules**.
+1. Click **New Rule**.
+1. Configure a **Severity**, **Service**, and **Other attributes** for your notification rule.
+1. Under **Notify**, paste the workflow handle that you copied earlier.
+1. Enter a **Template** and configure the **Renotify** settings for the notification rule.
+1. Click **Save**.
+
 ## Trigger a workflow on a schedule
 
 To schedule a workflow run:
@@ -160,8 +172,12 @@ The initial run history for a workflow provides a panel with the list of previou
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][7].
+
 [1]: /service_management/workflows/access/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/notification-rules
 [4]: /security/cloud_security_management/workflows
 [5]: /service_management/workflows/build/#input-parameters
+[6]: https://app.datadoghq.com/incidents/settings#Rules
+[7]: https://datadoghq.slack.com/

@@ -28,37 +28,25 @@ title: Web アプリケーションとモバイルアプリケーションのエ
 
 ## 概要
 
-Datadog によって収集されたエラーを一貫して監視することは、システムの健全性のために非常に重要です。個々のエラーイベントが多数存在する場合、トラブルシューティングのためにエラーの優先順位をつけることが困難になります。クラッシュの追跡、トリアージ、デバッグを行うことで、Web およびモバイルアプリケーションのユーザーエクスペリエンスに対する致命的なエラーの影響を最小化することができます。
+{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="エラートラッキングエクスプローラーの問題の詳細画面" style="width:100%;" >}}
 
-{{< img src="real_user_monitoring/error_tracking/rum-error-tracking-2.png" alt="RUM のエラー追跡エクスプローラーが、Web およびモバイルアプリケーションのクラッシュレポートからの問題を表示しています" style="width:100%;" >}}
+{{% error-tracking-description %}}
 
-**Web and Mobile Apps** のエラー追跡のために [RUM][2] をセットアップすると、問題リストにカードが表示されます。[**UX Monitoring** > **Error Tracking**][1] に移動すれば、未解決の問題、無視されている問題、すべての問題を表示したり、件数や新旧で問題をソートしたり、Web およびモバイルアプリケーションにあるすべてのカスタムおよびデフォルトのファセットで問題をフィルターしたりすることができます。
+RUM エラーの課題には、スタックトレース、ユーザーセッションのタイムライン、メタデータ (ユーザーの場所、バージョン、クラッシュレポートに含まれるカスタム属性を含む) が含まれます。
 
-エラー追跡は、以下のことを可能にします。
+Error Tracking の主な機能は、[Error Tracking エクスプローラー][3]のドキュメントで確認することができます。RUM 用のエラートラッキングエクスプローラーを表示するには、[**Digital Experience** > **Error Tracking**][1] に移動します。
 
-- エラー追跡イベントに関するアラートを設定します。これにより、致命的な問題が発生した場合に、常に情報を得ることができます。
-- 類似のエラーを課題にまとめることで、重要なエラーをより簡単に特定し、ノイズを減らすことができます。
-- 経時的に問題を監視するため、開始のタイミングや継続した場合の頻度を把握できます。
-- 必要なすべてのコンテキストを 1 か所で収集することで、トラブルシューティングが容易になります。
+## 計画と使用
 
-## ソースマップのアップロード
-
-{{< whatsnext desc="RUM 用の Datadog エラー追跡を始めるには、対応するドキュメントを参照して、フレームワーク用のソースマップをアップロードしてください。" >}}
-    {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}ブラウザ{{< /nextlink >}}
+{{< whatsnext desc="RUM 用の Datadog Error Tracking を始めるには、対応するドキュメントを参照してください。" >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/expo" >}}Expo{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/roku" >}}Roku{{< /nextlink >}}
 {{< /whatsnext >}}
-
-## トラブルシューティングやデバッグを開始するための問題点の検討
-
-エラー追跡は、Web アプリケーションやモバイルアプリケーションから収集したクラッシュを、自動的に[エラー追跡エクスプローラー][1]に課題として分類します。
-
-{{< img src="real_user_monitoring/error_tracking/issue-panel-2.png" alt="RUM のエラー追跡エクスプローラーが、Web およびモバイルアプリケーションのクラッシュレポートからの問題を表示しています" style="width:100%;" >}}
-
-課題をクリックすると、スタックトレース、ユーザーセッションのタイムライン、メタデータ (ユーザーの場所、バージョン、クラッシュレポートに含まれるカスタム属性を含む) などのデバッグ情報を表示します。
 
 ## その他の参考資料
 
@@ -66,3 +54,4 @@ Datadog によって収集されたエラーを一貫して監視することは
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: /ja/real_user_monitoring/
+[3]: /ja/error_tracking/explorer

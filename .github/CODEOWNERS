@@ -13,8 +13,8 @@ go.mod                    @DataDog/corpweb @DataDog/documentation
 go.sum                    @DataDog/corpweb @DataDog/documentation
 
 # SDK versions
-.github/workflows/bump_versions.yml   @DataDog/integrations-tools-and-libraries @DataDog/documentation
-/data/sdk_versions.json               @DataDog/integrations-tools-and-libraries @DataDog/documentation
+.github/workflows/bump_versions.yml   @DataDog/api-clients @DataDog/documentation
+/data/sdk_versions.json               @DataDog/api-clients @DataDog/documentation
 
 # Serverless
 
@@ -103,11 +103,10 @@ content/en/mobile_app_testing/*.md                              @Datadog/synthet
 
 # Software Delivery
 
-content/en/tests/**.md                                 @Datadog/ci-app-libraries @Datadog/documentation
-content/en/intelligent_test_runner/**.md               @Datadog/ci-app-libraries @Datadog/documentation
-content/en/continuous_integration/**.md                @Datadog/ci-app-backend @Datadog/documentation
-content/en/continuous_delivery/**.md                   @Datadog/ci-app-backend @Datadog/documentation
-content/en/dora_metrics/**.md                          @Datadog/ci-app-backend @Datadog/documentation
-content/en/code_analysis/**.md                         @Datadog/static-analysis @Datadog/documentation
-content/en/quality_gates/_index.md                    @Datadog/ci-app-backend @Datadog/documentation
-content/en/quality_gates/_index.md                    @Datadog/ci-app-backend @Datadog/documentation
+content/en/tests/                                 @Datadog/ci-app-libraries @Datadog/documentation
+content/en/intelligent_test_runner/               @Datadog/ci-app-libraries @Datadog/documentation
+content/en/continuous_integration/                @Datadog/ci-app-backend @Datadog/documentation
+content/en/continuous_delivery/                   @Datadog/ci-app-backend @Datadog/documentation
+content/en/dora_metrics/                          @Datadog/ci-app-backend @Datadog/documentation
+content/en/code_analysis/                         @Datadog/static-analysis @Datadog/documentation
+content/en/quality_gates/                         @Datadog/ci-app-backend @Datadog/documentation

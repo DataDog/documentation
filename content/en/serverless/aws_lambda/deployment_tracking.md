@@ -12,11 +12,9 @@ aliases:
   - /serverless/deployment_tracking
 ---
 
-{{< img src="serverless/deployment_tracking.jpeg" alt="Serverless Deployment Tracking" style="width:100%;">}}
-
 Deployment tracking helps you to understand when a new version of code or a configuration change causes a spike in errors, degraded performance, or when your cloud environment drifts from its expected state.
 
-To access deployment tracking for your serverless applications, select a function in the [Serverless view][1] and click the **Deployments** tab. This pages shows key serverless metrics like invocations, execution duration, and error counts automatically displayed with event overlays that mark code deployments and configuration changes related to the function.
+To access deployment tracking for your serverless applications, select a function in the [Serverless view][1] to open a side panel, and click the **Deployments** tab. This shows key serverless metrics like invocations, execution duration, and error counts automatically displayed with event overlays that mark code deployments and configuration changes related to the function.
 
 For visibility into historical code and configuration changes, adjust the global time selector at the top right of the view.
 

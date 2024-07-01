@@ -17,7 +17,7 @@ integration_id: data-runner
 integration_title: Data Runner
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: data_runner
 public_title: Data Runner
@@ -45,6 +45,7 @@ tile:
   title: Data Runner
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## Présentation
@@ -55,7 +56,7 @@ Cette extension repose sur les [Apps Datadog][1], qui permettent d'intégrer à 
 
 Pour en savoir plus sur Data Runner, consultez le référentiel GitHub [stuartlangridge/data-runner][2].
 
-## Configuration
+## Formule et utilisation
 
 1. Pour afficher Data Runner sur le [dashboard][3] de votre choix, commencez par ouvrir ce dashboard.
 
@@ -63,21 +64,21 @@ Pour en savoir plus sur Data Runner, consultez le référentiel GitHub [stuartl
 
 3. Choisissez la métrique que le personnage doit trouver.
 
-## Données collectées
+## Real User Monitoring
 
-### Métriques
+### Analyse d'entonnoirs
 
 Data Runner ne fournit aucune métrique.
 
-### Événements
+### Aide
 
 Data Runner n'inclut aucun événement.
 
-### Checks de service
+### Aide
 
 Data Runner n'inclut aucun check de service.
 
-## Assistance
+## Agent
 
 Besoin d'aide ? Contactez [l'assistance Datadog][4].
 

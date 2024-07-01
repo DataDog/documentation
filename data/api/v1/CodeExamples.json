@@ -118,6 +118,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2563642929",
+      "description": "Create a new dashboard with a toplist widget sorted by group"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2308247857",
       "description": "Create a new dashboard with alert_graph widget"
     },
@@ -758,6 +763,11 @@
     },
     {
       "group": "synthetics",
+      "suffix": "_1987645492",
+      "description": "Create an API HTTP test has bodyHash filled out"
+    },
+    {
+      "group": "synthetics",
       "suffix": "_1487281163",
       "description": "Create an API HTTP test returns \"OK - Returns the created test details.\" response"
     },
@@ -780,6 +790,11 @@
       "group": "synthetics",
       "suffix": "_2472747642",
       "description": "Create an API test with WEBSOCKET subtype returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_1241981394",
+      "description": "Create an API test with a file payload returns \"OK - Returns the created test details.\" response"
     },
     {
       "group": "synthetics",

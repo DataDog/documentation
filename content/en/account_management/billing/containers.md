@@ -1,6 +1,5 @@
 ---
 title: Containers Billing
-kind: documentation
 ---
 
 ## Overview

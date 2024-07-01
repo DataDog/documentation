@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/guide/python-3/
   tag: 설명서
   text: 커스텀 검사를 Python 2에서 Python 3으로 마이그레이션하기
-kind: 설명서
 title: Datadog Agent v7로 업그레이드 하기
 ---
 
@@ -19,7 +18,7 @@ Agent v7은 Python 3 커스텀 검사만 지원합니다. Agent 7로 업그레�
 다음 Agent 설치 명령을 실행하여 Agent를 버전 6에서 버전 7로 업그레이드합니다:
 
 다음 명령은 Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu, SUSE에서 작동합니다:
-:`DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"`
+:`DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -40,7 +39,7 @@ Agent v7은 Python 3 커스텀 검사만 지원합니다. Agent 7로 업그레�
 환경 변수 `DD_AGENT_MAJOR_VERSION=7`와 함께 Agent 설치 명령을 실행하여 Agent를 버전 6에서 버전 7로 업그레이드합니다:
 
 ```shell
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 ```
 
 {{% /tab %}}
@@ -54,7 +53,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 환경 변수 `DD_UPGRADE="true"`와 함께 Agent 설치 명령을 실행하여 Agent를 버전 5에서 버전 7로 업그레이드합니다. 업그레이드하는 동안 Agent 버전 7 설치 관리자는 버전 5 설정을 자동으로 변환할 수 있습니다.
 
 다음 명령은 Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu, SUSE에서 작동합니다:
-:`DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"`
+:`DD_UPGRADE="true" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -69,7 +68,7 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 환경 변수 `DD_AGENT_MAJOR_VERSION=7` 및 `DD_UPGRADE="true"`와 함께 Agent 설치 명령을 실행하여 Agent를 버전 5에서 버전 7로 업그레이드합니다. 업그레이드하는 동안 Agent v7 설치 관리자가 v5 설정을 자동으로 변환할 수 있습니다.
 
 ```shell
-DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
+DD_UPGRADE="true" DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 ```
 
 {{% /tab %}}

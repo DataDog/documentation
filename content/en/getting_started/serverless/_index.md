@@ -53,7 +53,7 @@ def handler(event, context):
 
 You can [see your sample app functions in Serverless View][6].
 
-{{< img src="getting_started/serverless/dd_serverless_view.png" alt="Serverless Monitoring: Serverless View, an explorer page" style="width:80%;">}}
+{{< img src="getting_started/serverless/serverless_view_2024.png" alt="Serverless Monitoring: Serverless View, an explorer page" style="width:80%;">}}
 
 ## Serverless View
 

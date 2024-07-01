@@ -1,14 +1,13 @@
 ---
 title: Severity Scoring
-kind: documentation
 further_reading:
-- link: "/security/misconfigurations/"
+- link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
   text: "Start tracking misconfigurations with CSM Misconfigurations"
-- link: "/security/identity_risks/"
+- link: "/security/cloud_security_management/identity_risks/"
   tag: "Documentation"
   text: "Understand your identity landscape with CSM Identity Risks"
-- link: "/security/vulnerabilities/"
+- link: "/security/cloud_security_management/vulnerabilities/"
   tag: "Documentation"
   text: "Learn more about CSM Vulnerabilities"
 ---
@@ -129,7 +128,7 @@ CSM Vulnerabilities uses Common Vulnerability Scoring System version 3.0 ([CVSS 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/security/default_rules/aws-sns-subscription/
-[2]: https://docs.datadoghq.com/security/default_rules/aws-ec2-imdsv2/
+[2]: https://docs.datadoghq.com/security/default_rules/aws-ec2-instance-ec2-instances-should-enforce-imdsv2/
 [3]: https://hackingthe.cloud/aws/general-knowledge/intro_metadata_service/
 [4]: https://hackingthe.cloud/aws/exploitation/ec2-metadata-ssrf/
 [5]: https://www.first.org/cvss/v3-0/

@@ -55,11 +55,11 @@ This guide walks you through using the Datadog site for declaring an incident, u
 
 This guide describes using the [Datadog Clipboard][2] to declare an incident. Using the Clipboard, you can gather information from different sources, such as graphs, monitors, entire dashboards, or [notebooks][3]. This helps you provide as much information as possible when declaring an incident.
 
-1. In the Datadog menu on the left-hand side, go to **Dashboard** > **Dashboard lists** and select **System - Metrics**.
+1. In Datadog, navigate to [**Dashboard List**][15] and select **System - Metrics**.
 2. Hover over one of the graphs and copy it to the Clipboard with one of the following commands:
     - **Ctrl**/**Cmd** + **C**
     - Click the **Export** icon on the graph and select **Copy**.
-3. In the Datadog menu on the left-hand side, go to **Monitors** > **Manage Monitors** and select **[Auto] Clock in sync with NTP**.
+3. In the Datadog menu on the left-hand side, go to [**Monitors** > **Monitors List**][16] and select **[Auto] Clock in sync with NTP**.
 4. Open the Clipboard: **Ctrl**/**Cmd** + **Shift** + **K**.
 5. In the Clipboard, click **Add current page** to add the monitor to the Clipboard.
 {{< img src="getting_started/incident_management/copy_to_clipboard.png" alt="Copy to Clipboard" responsive="true" style="width:100%;">}}
@@ -210,3 +210,5 @@ You can also declare and edit incidents and quickly communicate to your teams th
 [12]: /service_management/mobile/
 [13]: https://apps.apple.com/app/datadog/id1391380318
 [14]: https://play.google.com/store/apps/details?id=com.datadog.app
+[15]: https://app.datadoghq.com/dashboard/lists
+[16]: https://app.datadoghq.com/monitors/manage

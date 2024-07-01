@@ -1,6 +1,5 @@
 ---
 title: Notebooks
-kind: documentation
 aliases:
   - /graphing/notebooks/
 further_reading:
@@ -27,7 +26,7 @@ Notebooks combine graphs and text in a linear, cell-based format. They help you 
 
 ## Getting started
 
-1. Build a [new notebook][1], from the main navigation **Notebooks > New Notebook**.
+1. From the [Notebook List][1] page, click **+ New Notebook**.
 
 2. Click the **Save Notebook** button. </br>
   **Note**: A new notebook is not saved by default.
@@ -68,15 +67,13 @@ Click on the cog icon in the upper right of a notebook to see sharing options. N
 
 To copy a notebook into a document editor, click **Copy formatted contents**. Paste into a document editor like Google Docs or Microsoft Word to see notebook contents, including graphs, with original formatting.
 
-{{< img src="notebooks/export-to-gdocs.jpeg" alt="Example exported Notebook in Google Docs" style="width:100%;">}}
-
 ### Import or export notebook JSON
 
 Use **Export Notebook JSON** to download a JSON file containing the definition of your notebook. **Import Notebook JSON** overwrites all content on the notebook with the content of the uploaded JSON.
 
 ### Link to individual cells
 
-Copy the URL for a specific cell by clicking **Link directly to cell** in the cell's **Share** menu. Direct linking is available for both visualization and Markdown cells.
+To copy the URL for a specific cell, click the cell's **Share** menu and select **Link directly to cell**. Direct linking is available for both visualization and Markdown cells.
 
 When a user visits the URL for a specific cell, the notebook is opened to show the cell at the top of the viewport. Links are absolute. A cell's URL remains the same even if it is moved to a new position within the notebook.
 
@@ -84,7 +81,7 @@ When a user visits the URL for a specific cell, the notebook is opened to show t
 
 {{< img src="notebooks/notebook_list.png" alt="notebook list previewing the cell types of a selected notebook" style="width:100%;">}}
 
-The [Notebook List][2] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. Notebooks are grouped by:
+The [Notebook List][1] allows you to view and search previously created notebooks. Each notebook's name, creator, and last modified date are displayed. Notebooks are grouped by:
 
 * **Your Notebooks**: Notebooks created by you.
 * **All Notebooks**: All Notebooks in your organization.
@@ -93,10 +90,10 @@ The [Notebook List][2] allows you to view and search previously created notebook
 Hover over the Preview icon for any Notebook to see a preview of the contents, including widget types and Markdown. To open the Notebook in [View Mode](#view-mode), hover over the notebook and click **Open notebook in view mode** on the right.
 
 ## Template gallery
-From the [Template Gallery][3], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
+From the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
 
 ## Version history
-From a notebook, click the **Configure** icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone your notebook's version history. For more information, see the [Version History guide][4].
+From a notebook, click the **Configure** icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone your notebook's version history. For more information, see the [Version History guide][3].
 
 ## Notebook configuration
 
@@ -138,7 +135,7 @@ To share a version of your notebook with snapshots, from the cog menu, click **V
 
 ### Template variables
 
-Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][5].
+Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][4].
 
 ### Cell configuration
 
@@ -162,26 +159,26 @@ In a Notebook cell, click **Edit** to view the cell configuration in edit mode. 
 
 #### Types of content
 
-Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][6], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][7].
+Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][6].
 
 Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, security signals, and more. Graphs are created with the Datadog query editor. Notebooks support:
 
-* [Timeseries][8]
-* [Top List][9]
-* [Table][10]
-* [Heatmap][11]
-* [Distribution][12]
-* [List][13]
-* [Query value][14]
-* [Funnel][15]
-* [Pie][16]
-* [SLO Summary][17]
+* [Timeseries][7]
+* [Top List][8]
+* [Table][9]
+* [Heatmap][10]
+* [Distribution][11]
+* [List][12]
+* [Query value][13]
+* [Funnel][14]
+* [Pie][15]
+* [SLO][16]
 
 ### Limit edit access
 
 By default, all users have full access to notebooks.
 
-Use granular access controls to limit the [roles][18] that may edit a particular notebook:
+Use granular access controls to limit the [roles][17] that may edit a particular notebook:
 1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
 1. Select **Permissions**.
 1. Click **Restrict Access**.
@@ -203,21 +200,20 @@ To restore general access to a notebook with restricted access, follow the steps
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/notebook
-[2]: https://app.datadoghq.com/notebook/list
-[3]: https://app.datadoghq.com/notebook/template-gallery
-[4]: /notebooks/guide/version_history
-[5]: /dashboards/template_variables/
-[6]: https://daringfireball.net/projects/markdown/
-[7]: https://mermaid.js.org/
-[8]: /dashboards/widgets/timeseries/
-[9]: /dashboards/widgets/top_list/
-[10]: /dashboards/widgets/table/
-[11]: /dashboards/widgets/heatmap/
-[12]: /dashboards/widgets/distribution/
-[13]: /dashboards/widgets/list/
-[14]: /dashboards/widgets/query_value/
-[15]: /dashboards/widgets/funnel/
-[16]: /dashboards/widgets/pie_chart/
-[17]: /dashboards/widgets/slo/
-[18]: /account_management/rbac/
+[1]: https://app.datadoghq.com/notebook/list
+[2]: https://app.datadoghq.com/notebook/template-gallery
+[3]: /notebooks/guide/version_history
+[4]: /dashboards/template_variables/
+[5]: https://daringfireball.net/projects/markdown/
+[6]: https://mermaid.js.org/
+[7]: /dashboards/widgets/timeseries/
+[8]: /dashboards/widgets/top_list/
+[9]: /dashboards/widgets/table/
+[10]: /dashboards/widgets/heatmap/
+[11]: /dashboards/widgets/distribution/
+[12]: /dashboards/widgets/list/
+[13]: /dashboards/widgets/query_value/
+[14]: /dashboards/widgets/funnel/
+[15]: /dashboards/widgets/pie_chart/
+[16]: /dashboards/widgets/slo/
+[17]: /account_management/rbac/

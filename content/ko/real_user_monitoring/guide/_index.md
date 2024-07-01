@@ -44,17 +44,20 @@ title: 실제 사용자 모니터링 및 세션 재생 가이드
 {{< /whatsnext >}}
 
 {{< whatsnext desc="모바일 RUM:" >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}RUM 모바일 SDK 지원 중단 정책{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}RUM 모바일 SDK 업그레이드{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}모바일 SDK의 여러 인스턴스 사용{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}모바일 RUM 데이터 프록시{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}RUM 모바일 SDK 지원 중단 정책{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}RUM 모바일 SDK 업그레이드{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}모바일 SDK의 여러 인스턴스 사용{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}모바일 RUM 데이터 프록시{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/initialize-your-native-sdk-before-react-native-starts" >}}React Native가 시작되기 전에 네이티브 SDK 초기화{{< /nextlink >}}
+{{< nextlink href="real_user_monitoring/guide/monitor-hybrid-react-native-applications" >}}하이브리드 React Native 애플리케이션 모니터링{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="세션 재생:" >}}
-    {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}세션 재생을 위해 타사 서비스 작업자 허용{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}지원 워크플로에서 세션 재생 사용{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}세션 재생을 위한 타사 서비스 작업자 허용{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}지원 워크플로에서 세션 재생을 사용{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Shadow DOM 구성요소로 세션 재생 강화{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}세션 재생을 타사 도구에 연결{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}세션 재생을 사후 분석의 핵심 도구로 사용{{< /nextlink >}}
-    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}세션 재생에서 신서틱 브라우저 테스트 생성{{< /nextlink >}}
+    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}세션 재생에서 Synthetic Browser Tests 생성{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/investigate-zendesk-tickets-with-session-replay" >}}세션 재생으로 Zendesk 티켓 조사{{< /nextlink >}}
 {{< /whatsnext >}}

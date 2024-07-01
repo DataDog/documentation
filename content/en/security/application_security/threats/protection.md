@@ -1,6 +1,5 @@
 ---
 title: Protection
-kind: documentation
 is_beta: true
 further_reading:
 - link: "/security/application_security/"
@@ -16,7 +15,7 @@ Application Security Management (ASM) Protect enables you to slow down attacks a
 
 ## Prerequisites 
 
-To leveraging protection capabilities for your service:
+To use protection capabilities with your service:
 
 - [Update your Datadog Agent][3] to at least version 7.41.1.
 - [Enable ASM][1].
@@ -77,7 +76,7 @@ View blocked security traces in the [Trace Explorer][11] by filtering on the fac
 
 1. [**Enable Remote Configuration**][2] so that your ASM-enabled services show up under In-App WAF. This is required to securely push In-App WAF configuration from your Datadog backend to the tracing library in your infrastructure. 
 
-2. **Associate your ASM/Remote Configuration-enabled services with a policy**. After Remote Configuration is enabled on a service, navigate to **Security > Protection > Application > [In-App WAF][9]**. The service appears under the _Datadog Monitoring-only_ policy by default. Datadog Monitoring-only is a managed policy and is read-only, meaning you cannot modify the status (monitoring, blocking, or disabled) for individual rules.
+2. **Associate your ASM/Remote Configuration-enabled services with a policy**. After Remote Configuration is enabled on a service, navigate to **Security > Application Security > Protection > [In-App WAF][9]**. The service appears under the _Datadog Monitoring-only_ policy by default. Datadog Monitoring-only is a managed policy and is read-only, meaning you cannot modify the status (monitoring, blocking, or disabled) for individual rules.
 
    If you need granular control, clone one of the available policies to create a custom policy where rule statuses can be modified. Associate one or more of your services with this custom policy.
 
@@ -91,7 +90,7 @@ View blocked security traces in the [Trace Explorer][11] by filtering on the fac
 
 {{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%" >}}
 
-The default HTTP response status code while serving the deny page to attackers is `403 FORBIDDEN`. To customize the response, navigate to **Security > Application Security > Protection > [Global Settings][16]**.
+The default HTTP response status code while serving the deny page to attackers is `403 FORBIDDEN`. To customize the response, navigate to **Security > Application Security > Protection > [Protection Settings][16]**.
 
 You can optionally mask the fact that the attacker has been detected and blocked by overriding the response code to be `200 OK` or `404 NOT FOUND` when the deny page is served.
 
@@ -101,7 +100,7 @@ You can also optionally redirect attackers to a custom deny page and away from y
 
 Protection mode is **on** by default and is a toggle available to quickly disable blocking across **all** your services. Requests can be blocked from two sections in Datadog: all attacker requests from Security Signals, and security traces from In-App WAF.
 
-As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To turn off protection, navigate to **Security > Application Security > Protection > [Global Settings][16]** and toggle **Protection mode** to off.
+As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To turn off protection, navigate to **Security > Application Security > Protection > [Protection Settings][16]** and toggle **Allow Request Blocking** to off.
 
 ## Further reading
 

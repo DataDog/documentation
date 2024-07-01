@@ -27,6 +27,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/watchdog-impact-analysis/
   tag: 블로그
   text: Watchdog Impact Analysis로 사용자 영향 범위 이해
+- link: https://www.datadoghq.com/blog/watchdog-live-processes/
+  tag: 블로그
+  text: Watchdog Insights for Live Processes를 사용하여 워크로드 성능 이상 문제 해결
 kind: 설명서
 title: Datadog WatchdogTM
 ---
@@ -66,7 +69,7 @@ Watchdog는 조사를 돕기 위해 모든 탐색기에서 컨텍스트 기반 �
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 고객지원][1]에 연락하세요.
+도움이 필요하신가요? [Datadog 지원팀][1]에 문의하세요.
 
 ## 참고 자료
 

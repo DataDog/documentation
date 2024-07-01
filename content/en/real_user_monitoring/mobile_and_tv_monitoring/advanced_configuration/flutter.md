@@ -13,7 +13,7 @@ aliases:
     - /real_user_monitoring/flutter/otel_support/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
@@ -313,6 +313,16 @@ Depending on the event's type, only some specific properties can be modified:
 | RumResourceEvent | `resourceEvent.resource.url`      | URL of the resource.                          |
 |                  | `resourceEvent.view.referrer`     | Referrer of the view linked to this action.   |
 |                  | `resourceEvent.view.url`          | URL of the view linked to this resource.      |
+
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```dart
+final sessionId = await DatadogSdk.instance.rum?.getCurrentSessionId()
+```
 
 ## Set tracking consent (GDPR & CCPA compliance)
 

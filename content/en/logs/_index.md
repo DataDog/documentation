@@ -35,6 +35,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
     tag: "Blog"
     text: "Monitor 1Password with Datadog Cloud SIEM"
+  - link: "https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/"
+    tag: "Blog"
+    text: "Filter and correlate logs dynamically using Subqueries"
+  - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+    tag: "Blog"
+    text: "Monitor DNS logs for network and security analysis"
 cascade:
     algolia:
         rank: 70
@@ -84,6 +90,11 @@ Start exploring your ingested logs in the [Log Explorer][1].
 - [Analytics][10]: Perform Log Analytics over your indexed logs.
 - [Patterns][11]: Spot log patterns by clustering your indexed logs together.
 - [Saved Views][12]: Use saved views to automatically configure your Log Explorer.
+
+
+{{< learning-center-callout header="Try Introduction to Log Management in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-log-management">}}
+  Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about log collection, querying, analytics, metrics, monitoring, processing, storage, and access control.
+{{< /learning-center-callout >}}
 
 ## Further Reading
 

@@ -224,9 +224,11 @@ A pipeline can contain nested pipelines and processors whereas a nested pipeline
 
 {{< img src="logs/processing/pipelines/nested_pipeline.png" alt="Nested pipelines" style="width:80%;">}}
 
-It is possible to move a pipeline into another pipeline to transform it into a nested pipeline:
+Move a pipeline into another pipeline to make it into a nested pipeline:
 
-{{< img src="logs/processing/pipelines/move_to_pipeline.mp4" alt="Drag and drop nested pipelines" video="true" width="80%" >}}
+1. Hover over the pipeline you want to move, and click on the **Move to** icon.
+1. Select the pipeline you want to move the original pipeline into. **Note**: Pipelines containing nested pipelines can only be moved to another top level position. They cannot be moved into another pipeline.
+1. Click **Move**.
 
 ## Manage your pipelines
 

@@ -22,6 +22,9 @@ further_reading:
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
+- link: "https://www.datadoghq.com/blog/sca-supply-chain-security/"
+  tag: "Blog"
+  text: "Beyond vulnerabilities, towards a holistic approach to securing the software supply chain"
 ---
 
 
@@ -34,25 +37,20 @@ This guide walks you through best practices for getting your team up and running
 ## Phase 1: Enable
 1. Check [ASM Compatibility][2] to see if your service is supported.
 2. Enable Software Composition Analysis on your services. 
-   - Navigate to [**Security -> Configuration -> Application Security -> Quick Start Guide**][4].
+   - Navigate to the [Quick Start Guide][4].
    - Expand **Enable Vulnerability Detection**.
    - Click **Start Activation**.
    - Choose services to secure with ASM.
 
    OR
    
-   - Navigate to [**Security -> Configuration -> Application Security -> Setup**][9].
-   - Click **Get Started** to enable Software Composition Analysis for static analysis in source code.
-   - Select and configure your CI/CD provider.
-   - Click **Get Started** to enable Software Composition Analysis for runtime analysis in running services.
-   - Choose services to secure with ASM.
-   - Click **Get Started** to enable Software Composition Analysis for code security.
-   - Select your programming language, and restart your services.
-
-   {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis setup page." style="width:100%;" >}}
+   - Navigate to the [Setup][9] page.
+   - To enable Software Composition Analysis for static analysis in source code, in **Software Composition Analysis**, click **Get Started**.
+     - In **SCA static analysis in source code**, click **See Instructions**.
+     - In **SCA runtime analysis in running services**, click **Select Services**.
 
 ## Phase 2: Identify
-1. **Identify Vulnerabilities**: Navigate to [**Security -> Application Security -> Vulnerabilities**][5].  
+1. **Identify Vulnerabilities**: Navigate to [Vulnerabilities][5].  
    - Sort by `Status`, `Vulnerability Source`, and `Severity`.
    - To switch to the code repository commit point of view, click on the **static** button. To switch to the real-time point of view to the applications already running, click on the **runtime** button.
 
@@ -95,7 +93,7 @@ This guide walks you through best practices for getting your team up and running
       |   `7.0 – 8.9`   | High                |
       |   `9.0 – 10.0`  | Critical            |
 
-4. Optionally, download the Software Bill of Materials (SBOM) for your service. While viewing the details of a vulnerability, click on [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the SBOM under the [libraries tab][8]. 
+4. Optionally, download the library inventory (list of libraries and versions in CycloneDX format) for your service. While viewing the details of a vulnerability, click on [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the library inventory under the [libraries tab][8]. 
 
 ## Phase 3: Remediate
 1. **Prioritize Response and Remediate**: While on the [Vulnerability Explorer][5], take action:

@@ -1,6 +1,5 @@
 ---
 title: Generic CI Providers
-kind: documentation
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 is_beta: true
 further_reading:
@@ -26,7 +25,6 @@ If you don't use GitHub Actions, you can run the Datadog CLI directly in your CI
 Prerequisites:
 
 - unzip
-- trivy
 - Node.js 14 or later
 
 Configure the following environment variables:
@@ -47,16 +45,26 @@ Provide the following inputs:
 
 ```bash
 # Set the Datadog site to send information to
-export DD_SITE="datadoghq.com"
-
+export DD_SITE="{{< region-param key="dd_site" code="true" >}}"
+                        
 # Install dependencies
 npm install -g @datadog/datadog-ci
 
-# Output Trivy results
-trivy fs --output /tmp/trivy.json --format cyclonedx </path/to/code>
+# Download the latest Datadog OSV Scanner:
+# https://github.com/DataDog/osv-scanner/releases
+DATADOG_OSV_SCANNER_URL=https://github.com/DataDog/osv-scanner/releases/latest/download/osv-scanner_linux_amd64.zip
+
+# Install OSV Scanner
+mkdir /osv-scanner
+curl -L -o /osv-scanner/osv-scanner.zip $DATADOG_OSV_SCANNER_URL
+cd /osv-scanner && unzip osv-scanner.zip
+chmod 755 /osv-scanner/osv-scanner
+
+# Output OSC Scanner results
+/osv-scanner/osv-scanner --skip-git -r --experimental-only-packages --format=cyclonedx-1-5 --paths-relative-to-scan-dir  --output=/tmp/sbom.json /path/to/repository
 
 # Upload results
-datadog-ci sbom upload --service "my-app" --env "ci" /tmp/trivy.json
+datadog-ci sbom upload --service "my-app" --env "ci" /tmp/sbom.json
 ```
 
 ## Further Reading

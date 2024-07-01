@@ -3,11 +3,13 @@ app_id: amazon-eks-blueprints
 app_uuid: 4c0828d6-0c41-47d0-aa20-c174773e2bda
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10268
     source_type_name: amazon_eks_blueprints
 author:
   homepage: https://www.datadoghq.com
@@ -16,6 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - aws
+- configuration & deployment
 - containers
 - orchestration
 dependencies:
@@ -27,7 +30,7 @@ integration_id: amazon-eks-blueprints
 integration_title: Extension Blueprints Datadog
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: amazon_eks_blueprints
 public_title: Extension Blueprints Datadog
@@ -35,17 +38,18 @@ short_description: Amazon EKS Blueprints regroupe vos outils de déploiement e
   configuration de clusters.
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::AWS
+  - Category::Configuration & Deployment
   - Category::Containers
   - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Amazon EKS Blueprints regroupe vos outils de déploiement et de configuration
     de clusters.
@@ -55,6 +59,7 @@ tile:
   title: Extension Blueprints Datadog
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## Présentation
@@ -65,15 +70,15 @@ Amazon EKS Blueprints est un framework qui regroupe vos outils de déploiement
 
 L'extension Blueprints Datadog repose sur Blueprints pour déployer l'Agent Datadog sur Amazon EKS.
 
-## Configuration
+## Formule et utilisation
 
-### Installation
+### Liste des infrastructures
 
 ```
 npm install @datadog/datadog-eks-blueprints-addon
 ```
 
-### Utilisation
+### API
 
 #### Avec un secret Kubernetes existant
 
@@ -151,10 +156,10 @@ La surveillance d'EKS nécessite la configuration de l'une des intégrations Dat
 
 Configurez également les intégrations des autres services AWS que vous exécutez avec EKS, par exemple [ELB][5].
 
-## Données collectées
+## Real User Monitoring
 
 
-## Dépannage
+## Aide
 
 Besoin d'aide ? Contactez [l'assistance Datadog][6].
 

@@ -44,16 +44,18 @@ title: Guides pour Real User Monitoring et Session Replay
 {{< /whatsnext >}}
 
 {{< whatsnext desc="RUM Mobile :" >}}
-    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}Politique de dépréciation des SDK RUM Mobile{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}Politique d'obsolescence des SDK RUM Mobile{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}Mettre à niveau les SDK RUM Mobile{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Utiliser plusieurs instances du SDK Mobile{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}Utiliser un proxy pour vos données RUM Mobile{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Session Replay :" >}}
-    {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}Autoriser les workers de services tiers pour Session Replay{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}Utiliser Session Replay dans vos workflows d'assistance technique{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}Autoriser les workers de services tiers pour Session Replay{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}Intégrer Session Replay à vos workflows d'assistance{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Enrichir vos enregistrements Session Replay avec des composants shadow DOM{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}Connecter Session Replay à des outils tiers{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}Utiliser Session Replay comme principal outil d'analyse post-mortem{{< /nextlink >}}
-    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}Générer des tests Browser Synthetic depuis Session Replay{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}Associer Session Replay à vos outils tiers{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}Utiliser Session Replay comme principal outil pour vos analyses post-mortem{{< /nextlink >}}
+    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}Générer des tests Browser Synthetic à partir d'enregistrements Session Replay{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/investigate-zendesk-tickets-with-session-replay" >}}Étudier des tickets Zendesk avec Session Replay{{< /nextlink >}}
 {{< /whatsnext >}}

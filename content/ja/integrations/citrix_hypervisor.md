@@ -3,6 +3,7 @@ app_id: citrix-hypervisor
 app_uuid: cf4ad6ea-85ae-4f7d-8e79-7b8d36924425
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,12 +14,13 @@ assets:
       prefix: citrix_hypervisor.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10198
     source_type_name: Citrix Hypervisor
   logs:
     source: citrix_hypervisor
   monitors:
-    Host CPU high: assets/recommended_monitors/host_cpu_high.json
-    VM CPU high: assets/recommended_monitors/vm_cpu_high.json
+    Host CPU high: assets/monitors/host_cpu_high.json
+    VM CPU high: assets/monitors/vm_cpu_high.json
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -34,9 +36,9 @@ draft: false
 git_integration_title: citrix_hypervisor
 integration_id: citrix-hypervisor
 integration_title: Citrix Hypervisor
-integration_version: 2.2.0
+integration_version: 3.2.0
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: citrix_hypervisor
 public_title: Citrix Hypervisor
@@ -61,17 +63,18 @@ tile:
   title: Citrix Hypervisor
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは、Datadog Agent を通じて [Citrix Hypervisor][1] を監視します。
 
-## セットアップ
+## 計画と使用
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### インストール
+### インフラストラクチャーリスト
 
 Citrix Hypervisor チェックは、[Datadog Agent][3] のパッケージに含まれています。
 サーバーに追加でインストールする必要はありません。 
@@ -81,15 +84,15 @@ Citrix Hypervisor を監視する推奨方法は、各ハイパーバイザー�
 
 Citrix Hypervisor とのインテグレーションでは、サービスを監視するために、少なくとも [`read-only`][4] のアクセス権を持つユーザーが必要です。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
-#### ホスト
+#### メトリクスベース SLO
 
 1. Citrix Hypervisor のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `citrix_hypervisor.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル citrix_hypervisor.d/conf.yaml][5] を参照してください。
 
 2. [Agent を再起動します][6]。
 
-#### ログの収集
+#### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -114,21 +117,21 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の status サブコマンドを実行][7]し、Checks セクションで `citrix_hypervisor` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "citrix_hypervisor" >}}
 
 
-### イベント
+### ヘルプ
 
 Citrix Hypervisor インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "citrix_hypervisor" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
@@ -140,7 +143,7 @@ Citrix Hypervisor インテグレーションには、イベントは含まれ�
 
 [1]: https://www.citrix.com/products/citrix-hypervisor/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.citrix.com/en-us/xencenter/7-1/rbac-roles.html
 [5]: https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/datadog_checks/citrix_hypervisor/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

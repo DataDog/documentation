@@ -1,6 +1,5 @@
 ---
 title: How do I set up the Agent to run as a system service on macOS?
-kind: faq
 further_reading:
 - link: "/agent/"
   tag: "Documentation"

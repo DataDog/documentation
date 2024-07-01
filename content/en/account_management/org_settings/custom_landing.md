@@ -1,6 +1,5 @@
 ---
 title: Custom Organization Landing Page
-kind: documentation
 ---
 
 ## Overview
@@ -18,8 +17,8 @@ Only users with the Datadog Admin Role or the Org Management (`org_management`) 
 To set a custom landing page, follow the steps below:
 
 1. Navigate to [Organization settings][1].
-2. From the tabs on the left, select **Preferences**.
-3. In the Datadog Homepage section, click the **Dashboard** button.
+2. From the tabs on the left, select [**Preferences**][2].
+3. In the Datadog Homepage section, click **Individual Dashboard**.
 4. Use the dropdown list to select a dashboard.
 5. Click the **Save** button.
 
@@ -30,8 +29,9 @@ Only users with the Datadog Admin Role or the Org Management (`org_management`) 
 To restore the default landing page of APM Home, follow the steps below:
 
 1. Navigate to [Organization settings][1].
-2. From the tabs on the left, select **Preferences**.
-3. In the Datadog Homepage section, click the **Default: APM Home** button.
+2. From the tabs on the left, select [**Preferences**][2].
+3. In the Datadog Homepage section, click **Default: Dashboard List**.
 4. Click the **Save** button.
 
 [1]: https://app.datadoghq.com/organization-settings/
+[2]: https://app.datadoghq.com/organization-settings/preferences

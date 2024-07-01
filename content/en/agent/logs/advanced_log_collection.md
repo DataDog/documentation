@@ -1,8 +1,10 @@
 ---
 title: Advanced Log Collection Configurations
-kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
+- link: "/logs/guide/how-to-set-up-only-logs/"
+  tag: "Documentation"
+  text: "Use the Datadog Agent for log collection only"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Discover how to process your logs"
@@ -99,7 +101,6 @@ To apply a specific configuration to a given container, Autodiscovery identifies
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -220,7 +221,6 @@ In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your p
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -257,6 +257,10 @@ spec:
 {{< /tabs >}}
 
 ## Scrub sensitive data from your logs
+
+{{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
+  Sensitive Data Scanner using the Agent is in private beta. See the <a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">blog post</a> and <a href="https://docs.datadoghq.com/sensitive_data_scanner/">documentation</a> for more information. To request access, fill out this form.
+{{< /callout >}}
 
 If your logs contain sensitive information that need redacting, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the `mask_sequences` type.
 
@@ -312,7 +316,6 @@ In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your p
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: cardpayment
 spec:
@@ -415,7 +418,6 @@ In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your p
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: postgres
 spec:
@@ -520,7 +522,6 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 
 ```yaml
 apiVersion: apps/v1
-kind: ReplicaSet
 metadata:
   name: testApp
 spec:
@@ -667,14 +668,33 @@ DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_
 ```
 
 {{% /tab %}}
-{{% tab "Helm" %}}
+{{% tab "Datadog Operator" %}}
 
-Use the `env` parameter in the helm chart to set the `DD_LOGS_CONFIG_PROCESSING_RULES` environment variable to configure global processing rules. For example:
+Use the `spec.override.[key].env` parameter in your Datadog Operator manifest to set the `DD_LOGS_CONFIG_PROCESSING_RULES` environment variable to configure global processing rules, where `[key]` is `nodeAgent`, `clusterAgent`, or `clusterChecksRunner`. For example:
 
 ```yaml
-env:
-  - name: DD_LOGS_CONFIG_PROCESSING_RULES
-    value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: DD_LOGS_CONFIG_PROCESSING_RULES
+          value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+Use the `datadog.env` parameter in the Helm chart to set the `DD_LOGS_CONFIG_PROCESSING_RULES` environment variable to configure global processing rules. For example:
+
+```yaml
+datadog:
+  env:
+    - name: DD_LOGS_CONFIG_PROCESSING_RULES
+      value: '[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
 ```
 
 {{% /tab %}}

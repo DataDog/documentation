@@ -1,6 +1,5 @@
 ---
 title: Autodiscovery Container Identifiers
-kind: documentation
 aliases:
  - /agent/autodiscovery/ad_identifiers
  - /agent/guide/ad_identifiers
@@ -60,6 +59,8 @@ ad_identifiers:
   - httpd
   - my-custom-httpd-image
 ```
+
+This matches **any** container images on your host that match `httpd` **or** `my-custom-httpd-image`.
 
 ## Custom Autodiscovery container identifiers
 

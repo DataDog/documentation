@@ -127,13 +127,13 @@ Une fois la bibliothèque dans votre classpath, ajoutez la disposition suivante 
 
   <!--
   Consultez https://github.com/nlog/nlog/wiki/Configuration-file
-  pour en savoir plus sur la personnalisation des règles et des sorties.
+  pour en savoir plus la personnalisation des règles de création et de sorties de logs.
    -->
   <targets async="true">
-    <!-- Rédiger les logs au format JSON dans un fichier -->
+    <!-- Rédiger les logs au format Json dans un fichier -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
-        <attribute name="date" layout="${date:format=yyyy-MM-ddTHH\:mm\:ss.fff}" />
+        <attribute name="date" layout="${date:universalTime=true:format=o}" />
         <attribute name="level" layout="${level:upperCase=true}"/>
         <attribute name="message" layout="${message}" />
         <attribute name="exception" layout="${exception:format=ToString}" />
@@ -283,8 +283,8 @@ Une fois la [collecte de logs activée][2], configurez la [collecte de logs pers
     logs:
 
       - type: file
-        path: "/path/to/your/csharp/log.log"
-        service: csharp
+        path: "<path_to_your_csharp_log>.log"
+        service: <service_name>
         source: csharp
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -293,9 +293,9 @@ Une fois la [collecte de logs activée][2], configurez la [collecte de logs pers
         #    name: new_log_start_with_date
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
-
-3. [Redémarrez l'Agent][5].
-4. Lancez la [sous-commande status de l'Agent][6] et cherchez `csharp` dans la section `Checks` pour vérifier que les logs sont bien transmis à Datadog.
+3. Assurez-vous que lʼutilisateur de lʼAgent possède un accès en lecture au log.
+4. [Redémarrez l'Agent][5].
+5. Lancez la [sous-commande status de l'Agent][6] et cherchez `csharp` dans la section `Checks` pour vérifier que les logs sont bien transmis à Datadog.
 
 Si les logs sont au format JSON, Datadog [parse automatiquement les messages de log][7] pour extraire les attributs. Utilisez le [Log Explorer][8] pour visualiser et dépanner vos logs.
 
@@ -634,9 +634,9 @@ Dans la matrice `Serilog.WriteTo`, ajoutez une entrée pour `DatadogLogs`. Voici
 [1]: /fr/logs/log_configuration/parsing
 [2]: /fr/agent/logs/?tab=tailfiles#activate-log-collection
 [3]: /fr/agent/logs/?tab=tailfiles#custom-log-collection
-[4]: /fr/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[5]: /fr/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[6]: /fr/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /fr/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[5]: /fr/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[6]: /fr/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [7]: /fr/logs/log_configuration/parsing/?tab=matchers
 [8]: /fr/logs/explorer/#overview
 [9]: /fr/tracing/other_telemetry/connect_logs_and_traces/dotnet/

@@ -39,10 +39,10 @@ further_reading:
     tag: "Blog"
     text: "Optimize your .NET application performance with the Datadog Continuous Profiler"
   - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-    tag: "GitHub"
+    tag: "Source Code"
     text: "Examples of custom instrumentation"
   - link: "https://github.com/DataDog/dd-trace-dotnet"
-    tag: "GitHub"
+    tag: "Source Code"
     text: "Source code"
 ---
 
@@ -61,7 +61,7 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 </div>
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog's .NET Tracer with Profiler enabled). To ensure maximum visibility, run only one APM solution in your application environment.
+  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. This API allows only one subscriber (for example, Datadog APM). To ensure maximum visibility, run only one APM solution in your application environment. 
 </div>
 
 <div class="alert alert-info">
@@ -115,7 +115,7 @@ To install the .NET Tracer machine-wide:
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>-musl.tar.gz && sh /opt/datadog/createLogPath.sh`
 
    Other distributions
-   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-tar.gz && /opt/datadog/createLogPath.sh`
+   : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && /opt/datadog/createLogPath.sh`
 
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases

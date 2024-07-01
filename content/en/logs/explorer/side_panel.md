@@ -87,7 +87,7 @@ Use the **Share** button to share the log opened in side panel to other contexts
 [2]: /integrations/#cat-log-collection
 [3]: /agent/autodiscovery/integrations/?tab=kubernetes
 [4]: /logs/log_configuration/attributes_naming_convention
-[5]: /dashboards/#preset-lists
+[5]: /dashboards/list/#preset-lists
 [6]: /network_monitoring/performance/network_analytics/
 [7]: /infrastructure/livecontainers/?tab=linuxwindows#introduction
 [8]: /infrastructure/serverless/#function-detail-view

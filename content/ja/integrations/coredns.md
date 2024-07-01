@@ -5,6 +5,7 @@ assets:
   dashboards:
     CoreDNS: assets/dashboards/coredns.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,8 +14,11 @@ assets:
       check: coredns.request_count
       metadata_path: metadata.csv
       prefix: coredns.
+    process_signatures:
+    - coredns
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10038
     source_type_name: CoreDNS
   logs:
     source: coredns
@@ -39,7 +43,7 @@ draft: false
 git_integration_title: coredns
 integration_id: coredns
 integration_title: CoreDNS
-integration_version: 2.4.1
+integration_version: 3.2.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -65,26 +69,27 @@ tile:
   title: CoreDNS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
-CoreDNS からリアルタイムにメトリクスを取得して、DNS エラーとキャッシュのヒット/ミスを視覚化および監視します。
+CoreDNS からリアルタイムにメトリクスを取得して、DNS エラーとキャッシュのヒットまたはミスを視覚化および監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
 
-CoreDNS チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+バージョン 1.11.0 から、この OpenMetrics ベースのインテグレーションには、最新モード (ターゲットエンドポイントを指すように `openmetrics_endpoint` を設定することで有効) とレガシーモード (代わりに `prometheus_url` を設定することで有効) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。詳細は [OpenMetrics ベースのインテグレーションにおける最新バージョンとレガシーバージョン][1]を参照してください。
 
-**注**: 現在のバージョンのチェック (1.11.0+) は、メトリクスの収集に [OpenMetrics][2] (OpenMetricsBaseCheckV2) を使用しており、これは Python 3 を必要とします。
-Python 3 を使用できないホストや、以前にこのインテグレーションバージョンを実装した場合は、[レガシー OpenMetricsBaseCheckV1 の例][3]をご覧ください。
-ただし、`coredns.d/auto_conf.yaml` ファイルに依存するオートディスカバリーユーザーには例外があり、デフォルトで OpenMetricsBaseCheckV1 のレガシーバージョンに対して `prometheus_url` オプションが有効になっています。
-デフォルトの構成オプションについてはサンプル [coredns.d/auto_conf.yaml][4] を、利用可能なすべての構成オプションについてはサンプル [coredns.d/conf.yaml.example][20] を参照してください。
+CoreDNS チェックの最新モードは Python 3 を必要とし、`.bucket` メトリクスを送信し、`.sum` と `.count` ヒストグラムサンプルを単調カウント型として送信します。これらのメトリクスはレガシーモードでは `gauge` 型で送信されていました。各モードで利用できるメトリクスの一覧は [`metadata.csv` ファイル][2]を参照してください。
 
-**注**: OpenMetricsBaseCheckV2 バージョンの CoreDNS チェックでは、`.bucket` メトリクスを送信し、`.sum` と `.count` ヒストグラムサンプルをモノトニックカウントタイプとして送信するようになりました。これらのメトリクスは、OpenMetricsBaseCheckV1 ではゲージタイプとして送信されていました。各バージョンで利用可能なメトリクスの一覧は [metadata.csv][5] を参照してください。
+Python 3 を使用できないホスト、または以前にこのインテグレーションモードを実装した場合は、`legacy` モードの[構成例][3]を参照してください。`coredns.d/auto_conf.yaml` ファイルに依存しているオートディスカバリーのユーザーのために、このファイルはデフォルトで `legacy` モードのチェックのために `prometheus_url` オプションを有効にします。デフォルトの構成オプションについては [coredns.d/auto_conf.yaml][4] のサンプルを、利用可能なすべての構成オプションについては [coredns.d/conf.yaml.example][5] のサンプルを参照してください。
 
-### コンフィギュレーション
+### インフラストラクチャーリスト
+
+CoreDNS チェックは [Datadog Agent][6] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
+
+### ブラウザトラブルシューティング
 {{< tabs >}}
 {{% tab "Docker" %}}
 #### Docker
@@ -101,7 +106,7 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]'
 ```
 
-レガシーの OpenMetricsBaseCheckV1 バージョンのチェックを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えてください。
+この OpenMetrics ベースのチェックのレガシーモードを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えます。
 
 ```yaml
 LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]' 
@@ -109,11 +114,11 @@ LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/met
 
 **注**:
 
-- 出荷時の `coredns.d/auto_conf.yaml` ファイルは、レガシーの OpenMetricsBaseCheckV1 オプションである `prometheus_url` をデフォルトで有効にしています。
-- `dns-pod` タグは、対象の DNS ポッド IP を追跡します。他のタグは、サービスディスカバリーを使用して情報をポーリングする dd-agent に関連付けられます。
+- 出荷時の `coredns.d/auto_conf.yaml` ファイルは、レガシーモードのデフォルトで `prometheus_url` オプションを有効にします。
+- `dns-pod` タグは、対象の DNS ポッド IP を追跡します。他のタグは、サービスディスカバリーを使用して情報をポーリングする Datadog Agent に関連します。
 - ポッドでサービスディスカバリーアノテーションを実行する必要があります。デプロイの場合は、テンプレートの仕様のメタデータにアノテーションを追加します。外側のレベルの仕様には追加しないでください。
 
-#### ログの収集
+#### 収集データ
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
@@ -129,7 +134,7 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"coredns","service":"<SERVICE_NAME>"}]
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-#### Kubernetes
+#### ガイド
 
 このチェックを、Kubernetes で実行している Agent に構成します。
 
@@ -161,7 +166,7 @@ spec:
     - name: coredns
 ```
 
-**Annotations v2** (Datadog Agent v7.36+ 向け)
+**Annotations v2** (Datadog Agent v7.36 以降向け)
 
 ```yaml
 apiVersion: v1
@@ -188,7 +193,7 @@ spec:
     - name: coredns
 ```
 
-レガシーの OpenMetricsBaseCheckV1 バージョンのチェックを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えてください。
+この OpenMetrics ベースのチェックのレガシーモードを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えます。
 
 **Annotations v1** (Datadog Agent < v7.36 向け)
 
@@ -202,7 +207,7 @@ spec:
       ]
 ```
 
-**Annotations v2** (Datadog Agent v7.36+ 向け)
+**Annotations v2** (Datadog Agent v7.36 以降向け)
 
 ```yaml
           "instances": [
@@ -215,11 +220,11 @@ spec:
 
 **注**:
 
-- 出荷時の `coredns.d/auto_conf.yaml` ファイルは、レガシーの OpenMetricsBaseCheckV1 オプションである `prometheus_url` をデフォルトで有効にしています。
+- 出荷時の `coredns.d/auto_conf.yaml` ファイルは、レガシーモードのデフォルトで `prometheus_url` オプションを有効にします。
 - `dns-pod` タグは、対象の DNS ポッド IP を追跡します。他のタグは、サービスディスカバリーを使用して情報をポーリングする Datadog Agent に関連します。
 - ポッドでサービスディスカバリーアノテーションを実行する必要があります。デプロイの場合は、テンプレートの仕様のメタデータにアノテーションを追加します。外側のレベルの仕様には追加しないでください。
 
-#### ログの収集
+#### 収集データ
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
@@ -268,7 +273,7 @@ metadata:
 }
 ```
 
-レガシーの OpenMetricsBaseCheckV1 バージョンのチェックを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えてください。
+この OpenMetrics ベースのチェックのレガシーモードを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えます。
 
 ```json
       "com.datadoghq.ad.instances": "[{\"prometheus_url\":\"http://%%host%%:9153/metrics\", \"tags\":[\"dns-pod:%%host%%\"]}]"
@@ -276,11 +281,11 @@ metadata:
 
 **注**:
 
-- 出荷時の `coredns.d/auto_conf.yaml` ファイルは、レガシーの OpenMetricsBaseCheckV1 オプションである `prometheus_url` をデフォルトで有効にしています。
+- 出荷時の `coredns.d/auto_conf.yaml` ファイルは、レガシーモードのデフォルトで `prometheus_url` オプションを有効にします。
 - `dns-pod` タグは、対象の DNS ポッド IP を追跡します。他のタグは、サービスディスカバリーを使用して情報をポーリングする Datadog Agent に関連します。
 - ポッドでサービスディスカバリーアノテーションを実行する必要があります。デプロイの場合は、テンプレートの仕様のメタデータにアノテーションを追加します。外側のレベルの仕様には追加しないでください。
 
-##### ログの収集
+##### 収集データ
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
 
@@ -305,33 +310,44 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `coredns` を探します。
+[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `coredns` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "coredns" >}}
 
 
-### イベント
+### ヘルプ
 
 CoreDNS チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "coredns" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [CoreDNS モニタリングのキーメトリクス][9]
+- [CoreDNS からメトリクスとログを収集するためのツール][10]
+- [Datadog を使用した CoreDNS の監視方法][11]
 
 
-[20]:https://github.com/DataDog/integrations-core/blob/master/coredns/datadog_checks/coredns/data/conf.yaml.example
 
-[1]: https://app.datadoghq.com/account/settings#agent
-[2]: https://docs.datadoghq.com/ja/integrations/openmetrics
+[1]: https://docs.datadoghq.com/ja/integrations/guide/versions-for-openmetrics-based-integrations
+[2]: https://github.com/DataDog/integrations-core/blob/master/coredns/metadata.csv
 [3]: https://github.com/DataDog/integrations-core/blob/7.32.x/coredns/datadog_checks/coredns/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/coredns/datadog_checks/coredns/data/auto_conf.yaml
-[5]: https://github.com/DataDog/integrations-core/blob/master/coredns/metadata.csv
-[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: http://docs.datadoghq.com/help
+[5]: https://github.com/DataDog/integrations-core/blob/master/coredns/datadog_checks/coredns/data/conf.yaml.example
+[6]: https://app.datadoghq.com/account/settings/agent/latest
+[7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[8]: http://docs.datadoghq.com/help
+[9]: https://www.datadoghq.com/blog/coredns-metrics/
+[10]: https://www.datadoghq.com/blog/coredns-monitoring-tools/
+[11]: https://www.datadoghq.com/blog/monitoring-coredns-with-datadog/

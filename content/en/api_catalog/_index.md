@@ -1,6 +1,5 @@
 ---
 title: Datadog API Catalog
-kind: documentation
 is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
@@ -15,6 +14,9 @@ further_reading:
 - link: "/security/application_security/how-appsec-works/#api-security"
   tag: "Documentation"
   text: "ASM API Security"
+- link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
+  tag: "Blog"
+  text: "Mitigate the primary risks to API security"
 aliases:
     - /tracing/api_catalog/get_started
     - /tracing/api_catalog/

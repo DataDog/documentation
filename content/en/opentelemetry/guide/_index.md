@@ -1,6 +1,5 @@
 ---
 title: OpenTelemetry Guides and Resources
-kind: guide
 private: true
 ---
 
@@ -8,8 +7,9 @@ private: true
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/guide/otlp_histogram_heatmaps/" >}}Visualizing OTLP Histograms as heatmaps{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/guide/switch_from_processor_to_connector/" >}}Switching from Datadog Processor to Datadog Connector for OpenTelemetry APM Metrics{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/migration/" >}}Migrate to OpenTelemetry Collector version 0.95.0+{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/guide/otlp_delta_temporality/" >}}Producing Delta Temporality Metrics{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/otel_demo_to_datadog/" >}}Sending Data from OpenTelemetry Demo to Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Read more on the blog

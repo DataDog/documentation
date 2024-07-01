@@ -1,6 +1,5 @@
 ---
 title: OTLP Metrics Types
-kind: documentation
 further_reading:
     - link: 'metrics/distributions'
       tag: 'Documentation'
@@ -71,10 +70,10 @@ An OTLP Histogram represents the statistical distribution of a set of values on 
 - *Aggregation temporality*, which can be cumulative or delta. Delta metrics have no overlap in their time windows, while cumulative metrics represent a time window from a fixed start point in time.
 
 The default mapping is as follows:
-1. Delta histograms are reported as Datadog distributions. [Read more about distributions][1] to understand the available aggregations.
-2. For cumulative histograms, the delta between consecutive points is calculated and reported to Datadog as a distribution. You may use the [`cumsum` arithmetic function][2] on individual aggregations to recover the value in the OTLP payload.
+1. Delta histograms are reported as Datadog distributions. [Read more about distributions][1] to understand the available aggregations. Histograms with a count of 0 are dropped.
+2. For cumulative histograms, the delta between consecutive points is calculated and reported to Datadog as a distribution. Deltas with a count of 0 are not reported. You may use the [`cumsum` arithmetic function][2] on individual aggregations to recover the value in the OTLP payload.
 
-**Note**: Histogram metrics in OTLP are mapped to Distribution metrics. Because of how OTLP sends this data, the max, min, and percentile aggregations are approximations, not accurate calculations.
+**Note**: Histogram metrics in OTLP are mapped by default to Distribution metrics. Because of how OTLP sends this data, percentile aggregations and the max and min (if not available on the original OTLP data) are approximations, not accurate calculations.
 
 The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changing the Histogram export in the `histogram` subsection.
 - If the `mode` is set to `counters`, the following metrics are produced:

@@ -1,6 +1,5 @@
-<div class="alert alert-warning">Cloud Security Management on Windows is in public beta and should only be installed on hosts that are not critical to production workloads.</div>
 
-Use the following instructions to enable [CSM Threats][11] on Windows. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][12].
+Use the following instructions to enable Threat Detection on Windows.
 
 Datadog Cloud Security Management on Windows includes built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
 
@@ -16,6 +15,7 @@ Datadog Cloud Security Management on Windows includes built-in threat detection 
 
 ## Prerequisites
 
+- Agent versions 7.52 and later.
 - Access to hosts running Windows Server 2016 or newer.
 - (Optional) For network events, [NPM][2] must be enabled on the hosts.
 
@@ -23,11 +23,9 @@ Datadog Cloud Security Management on Windows includes built-in threat detection 
 
 ## Installation
 
-<div class="alert alert-info">You must use the installer linked in this document, and <strong>not</strong> the installer available on the <strong>Integrations</strong> &gt; <strong>Agent</strong> page in Datadog.</div>
-
 ### Installer
 
-1. Download the [Datadog Agent installer][3].
+1. [Install the Datadog Windows Agent][3].
 2. Right-click the downloaded `.msi` file and select **Run as administrator**.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][5]. If you are upgrading from an existing version of the Agent, the installer may not prompt you for an API key.
 
@@ -35,7 +33,7 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ### Command line
 
-1. Download the [Datadog Agent installer][3].
+1. Download the [Datadog Agent installer][4].
 2. Follow the instructions for command line installation using command prompts or PowerShell.
 
 ## Configuration
@@ -62,16 +60,35 @@ When you enable CSM on Windows, the Agent sends a log to Datadog to confirm that
 
 Another method to verify that the Agent is sending events to CSM is to manually trigger a Windows security signal.
 
-1. In Windows, open a command prompt as Administrator and run the command `schtasks`.
+1. In Windows, open a command prompt as Administrator and run the command `schtasks /create /?`.
 2. In Datadog, navigate to the [CSM Signals Explorer][8] to view the generated Windows signals.
     - To view signals originating from configured Windows hosts, filter the signals by hostname using the **Hosts** > **Hostnames** facet.
     - To filter by Windows rules, use the **Workflow** > **Rule Name** facet.
 
 To get alerts whenever a Windows signal is created, create a [Notification Rule][9] that focuses on the `host` tag specifically for configured Windows hosts.
 
+### Enable FIM and Registry Monitoring
+
+<div class="alert alert-warning">File Integrity Monitoring (FIM) and Registry Monitoring is in beta and should not be enabled on production workloads.</div>
+
+1. Ensure you have access to `C:\ProgramData`, which is a hidden folder.
+    - In **File Explorer**, click the **View** tab, and clear the **Hidden items** checkbox. The **ProgramData** folder should now be visible when navigating to the `C:` drive. The transparent icon indicates it is a hidden folder.
+1. In `C:\ProgramData\Datadog\system-probe.yaml`, set the `fim_enabled` flag:<br><br>
+    ```
+    runtime_security_config:
+      fim_enabled: true
+    ```
+1. In `C:\ProgramData\Datadog\security-agent.yaml`, set the `fim_enabled` flag:<br><br>
+    ```
+    runtime_security_config:
+      fim_enabled: true
+    ```
+1. [Restart the Datadog Agent][6] to enable CSM.
+
 [1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
-[3]: https://s3.amazonaws.com/dd-agent-mstesting/builds/beta/ddagent-cli-7.50.3.cwsbeta-3.msi
+[3]: /agent/basic_agent_usage/windows/?tab=gui
+[4]: /agent/basic_agent_usage/windows/?tab=commandline
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://docs.datadoghq.com/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: https://app.datadoghq.com/logs
@@ -79,4 +96,3 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 [9]: https://docs.datadoghq.com/security/notifications/rules/
 [10]: /security/cloud_security_management/setup
 [11]: /security/threats
-[12]: /security/cloud_security_management/setup#supported-deployment-types-and-features

@@ -1,7 +1,8 @@
 ---
 app_id: shoreline-integration
 app_uuid: 90e1b0ed-0907-4973-929c-7e7f1be0c4f4
-assets: {}
+assets:
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://shoreline.io/
   name: Shoreline.io
@@ -19,7 +20,7 @@ integration_id: shoreline-integration
 integration_title: Shoreline.io
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: shoreline
 public_title: Shoreline.io

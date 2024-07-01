@@ -1,6 +1,5 @@
 ---
 title: Setup Data Streams Monitoring for Python
-kind: documentation
 further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
@@ -18,7 +17,10 @@ further_reading:
 
 To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Python libraries:
 * [Datadog Agent v7.34.0 or later][1]
-* [Python Tracer v1.16.0 or later][2] (v1.20.0 for Amazon SQS and Kinesis)
+* [Python Tracer][2]
+  * Kafka: v1.16.0 or later
+  * Amazon SQS and Amazon Kinesis: v1.20.0
+  * RabbitMQ: v2.6.0 or later
 
 ### Installation
 
@@ -31,7 +33,7 @@ environment:
 ```
 
 ### Libraries Supported
-Data Streams Monitoring supports the [confluent-kafka library][3].
+Data Streams Monitoring supports the [confluent-kafka library][3] and [kombu package][5].
 
 ### Monitoring SQS Pipelines
 Data Streams Monitoring uses one [message attribute][4] to track a message's path through an SQS queue. As Amazon SQS has a maximum limit of 10 message attributes allowed per message, all messages streamed through the data pipelines must have 9 or less message attributes set, allowing the remaining attribute for Data Streams Monitoring.
@@ -47,3 +49,4 @@ There are no message attributes in Kinesis to propagate context and track a mess
 [2]: /tracing/trace_collection/dd_libraries/python
 [3]: https://pypi.org/project/confluent-kafka/
 [4]: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html
+[5]: https://pypi.org/project/kombu/

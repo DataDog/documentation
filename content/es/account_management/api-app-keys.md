@@ -6,7 +6,6 @@ aliases:
 - /es/account_management/faq/how-do-i-reset-my-application-keys/
 - /es/agent/faq/how-do-i-reset-my-datadog-api-keys/
 - /es/account_management/faq/api-app-key-management/
-kind: documentación
 title: Claves de API y aplicación
 ---
 
@@ -33,15 +32,15 @@ La forma recomendada de determinar el contexto de las claves de aplicación es o
 
 ## Tokens de cliente
 
-Por motivos de seguridad, las claves de API no se pueden usar para enviar datos desde un navegador, ya que quedarían expuestas de cara al cliente en el código JavaScript. En cambio, los navegadores web y otros clientes usan tokens de cliente para enviar datos a Datadog.
+Por razones de seguridad, las claves de API no pueden utilizarse para enviar datos desde un navegador, móvil o aplicación de TV, ya que quedarían expuestas al cliente. En su lugar, las aplicaciones destinadas al usuario final utilizan tokens de cliente para enviar datos a Datadog.
 
  Varios tipos de clientes envían datos que requieren un token de cliente, como los siguientes ejemplos:
-- [Web Browser Log Collector][6] envía logs.
+- Los recopiladores de logs de [navegador web][6], [Android][12], [iOS][13], [React Native][14], [Flutter][15] y [Roku][16] envían logs.
 - Las aplicaciones de [Real User Monitoring (RUM)][7] envían eventos y logs.
 
 Los tokens de cliente son exclusivos de tu organización. Para gestionarlos, accede a **Organization Settings** (Parámetros de organización) y haz clic en la pestaña **Client Tokens** (Tokens de cliente).
 
-**Nota:** Si se desactiva un usuario que ha creado un token de cliente, este permanecerá activo.
+**Nota**: Cuando se desactiva un usuario que ha creado un token de cliente, el token de cliente permanece activo.
 
 ## Añadir una clave de API o token de cliente
 
@@ -133,3 +132,8 @@ Si identificas alguna actividad inusual o necesitas más ayuda para proteger tu 
 [9]: /es/api/latest/service-accounts/
 [10]: /es/help/
 [11]: /es/account_management/org_settings/service_accounts/
+[12]: /es/logs/log_collection/android/
+[13]: /es/logs/log_collection/ios/
+[14]: /es/logs/log_collection/reactnative/
+[15]: /es/logs/log_collection/flutter/
+[16]: /es/logs/log_collection/roku/

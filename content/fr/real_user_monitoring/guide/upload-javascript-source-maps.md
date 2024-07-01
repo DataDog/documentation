@@ -14,11 +14,21 @@ title: Importer des source maps JavaScript
 
 Si votre code source JavaScript frontend est minifié, importez vos source maps dans Datadog pour désobfusquer vos différentes stack traces. Pour une erreur donnée, vous avez accès au chemin du fichier, au numéro de ligne ainsi qu'à un extrait de code pour chaque frame de la stack trace associée. Datadog peut également associer des stack frames à votre code source dans votre référentiel. 
 
-<div class="alert alert-info">Seules les erreurs recueillies par la solution <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> peuvent être déminifiées.</div>
+<div class="alert alert-info">Seules les erreurs recueillies par la solution <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> et les logs de <a href="/logs/log_collection/javascript/">la collecte de logs à partir des navigateurs
+</a> peuvent être déminifiés.</div>
 
 ## Instrumenter votre code
 
-Configurez votre bundler JavaScript de façon à ce qu'il génère des source maps lorsque vous minifiez votre code source. Ces source maps incluent directement le code source associé dans l'attribut `sourcesContent`. Veillez également à ce que la taille de chaque source map combinée à la taille du fichier minifié associé ne dépasse pas la limite de **50 Mo**.
+Configurez votre bundler JavaScript de façon à ce qu'il génère des source maps lorsque vous minifiez votre code source. Ces source maps inclueront directement le code source associé dans l'attribut `sourcesContent`. 
+
+<div class="alert alert-warning">
+{{< site-region region="us,us3,us5,eu" >}}
+Vérifiez que la taille de chaque source map, à laquelle sʼajoute la taille du fichier minifié associé, ne dépasse pas la limite de **300** Mo.
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+Vérifiez que la taille de chaque source map, à laquelle sʼajoute la taille du fichier minifié associé, ne dépasse pas la limite de **50** Mo.
+{{< /site-region >}}
+</div>
 
 Consultez les configurations suivantes qui reposent sur des bundlers JavaScript populaires.
 
@@ -75,18 +85,24 @@ Vous trouverez un exemple ci-dessous :
         javascript.464388.js.map
 ```
 
-<div class="alert alert-warning">Si la somme de la taille des fichiers <code>javascript.364758.min.js</code> et <code>javascript.364758.js.map</code> dépasse la limite de <b>50 Mo</b>, réduisez cette taille en configurant votre bundler de façon à diviser le code source en plusieurs sections plus petites. Pour en savoir plus, consultez la section <a href="https://webpack.js.org/guides/code-splitting/">Division de code avec WebpackJS</a> (en anglais).</div>
+<div class="alert alert-warning">
+{{< site-region region="us,us3,us5,eu" >}}
+Si le total de la taille du fichier correspondant à <code>javascript.364758.min.js</code> et <code>javascript.364758.js.map</code> dépasse <b>la limite de **300** Mo</b>, réduisez-le en configurant votre bundler de façon à scinder le code source en plus petites parties. Pour en savoir plus, consultez <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+Si le total de la taille du fichier correspondant à <code>javascript.364758.min.js</code> et <code>javascript.364758.js.map</code> dépasse <b>la limite de **50** Mo</b>, réduisez-le en configurant votre bundler de façon à scinder le code source en plus petites parties. Pour en savoir plus, consultez <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
+{{< /site-region >}}
+</div>
 
 ## Importer vos source maps
 
 Le meilleur moyen d'importer des source maps est d'ajouter une étape supplémentaire dans votre pipeline de CI et d'exécuter la commande dédiée depuis l'[interface de ligne de commande Datadog][1]. Cette commande analyse le répertoire `dist` et ses sous-répertoires pour importer automatiquement les source maps avec leurs fichiers minifiés associés.
 
-{{< tabs >}}
-{{% tab "Site américain de Datadog" %}}
-
+{{< site-region region="us" >}}
 1. Ajoutez `@datadog/datadog-ci` à votre fichier `package.json` (assurez-vous d'utiliser la dernière version).
 2. [Créez une clé d'API Datadog dédiée][1] et exportez-la en tant que variable d'environnement `DATADOG_API_KEY`.
-3. Exécutez la commande suivante :
+3. Exécutez la commande suivante une fois par service dans votre application RUM :
+
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
      --service=my-service \
@@ -96,13 +112,13 @@ Le meilleur moyen d'importer des source maps est d'ajouter une étape supplémen
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{% tab "Site européen de Datadog" %}}
+{{< /site-region >}}
 
+{{< site-region region="eu,us3,us5,gov,ap1" >}}
 1. Ajoutez `@datadog/datadog-ci` à votre fichier `package.json` (assurez-vous d'utiliser la dernière version).
 2. [Créez une clé d'API Datadog dédiée][1] et exportez-la en tant que variable d'environnement `DATADOG_API_KEY`.
-3. Configurez l'interface de ligne de commande de façon à importer les fichiers sur le site européen en exportant deux variables d'environnement : `export DATADOG_SITE="datadoghq.eu"` et `export DATADOG_API_HOST="api.datadoghq.eu"`.
-4. Exécutez la commande suivante :
+3. Configurez le CLI de façon à importer des fichiers sur le site {{<region-param key="dd_site_name">}} en exportant deux variables dʼenvironnement : `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} et `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
+4. Exécutez la commande suivante une fois par service dans votre application RUM :
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
      --service=my-service \
@@ -112,16 +128,19 @@ Le meilleur moyen d'importer des source maps est d'ajouter une étape supplémen
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-{{% /tab %}}
-{{< /tabs >}}
+{{< /site-region >}}
 
 Pour minimiser l'impact sur les performances de votre intégration continue, l'interface de ligne de commande est optimisée pour permettre l'importation d'autant de source maps que nécessaires en peu de temps (généralement quelques secondes).
 
-Les paramètres `--service` et `--release-version` doivent correspondre aux tags `service` et `version` de vos événements RUM. Pour en savoir plus sur la configuration de ces tags, consultez la [documentation relative à l'initialisation du SDK Browser][2]. Les source maps qui ont été importées seront alors utilisées pour désobfusquer les erreurs recueillies par le SDK RUM.
+**Remarque** : la réimportation d'une source map ne remplace pas lʼancienne si la version n'a pas changé.
+
+Les paramètres `--service` et `--release-version` doivent correspondre aux tags `service` et `version` de vos événements RUM et logs de browser. Pour en savoir plus sur la configuration de ces tags, consultez la [documentation relative à l'initialisation du SDK Browser RUM][2] ou la [documentation relative à la collecte de logs à partir des navigateurs][3].
+
+<div class="alert alert-info">Si vous avez défini plusieurs services dans votre application RUM, exécutez la commande CI autant de fois qu'il y a de services, même si vous n'avez qu'un seul ensemble de sourcemaps pour l'ensemble de l'application RUM.</div>
 
 Lorsque vous exécutez la commande sur l'exemple de répertoire `dist`, Datadog s'attend à ce que votre serveur ou CDN fournissent les fichiers JavaScript sur `https://hostname.com/static/js/javascript.364758.min.js` et `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
 
-**Remarque** : seules les source maps avec l'extension `.js.map` peuvent déminifier des stack traces dans la solution de suivi des erreurs. Les sources maps ayant une autre extension (comme `.mjs.map`) sont acceptées, mais ne peuvent pas déminifier de stack traces.
+Seules les source maps avec l'extension `.js.map` peuvent déminifier des stack traces. Les sources maps ayant une autre extension (comme `.mjs.map`) sont acceptées, mais ne peuvent pas déminifier de stack traces.
 
 <div class="alert alert-info">Si vous distribuez les mêmes fichiers source JavaScript depuis différents sous-domaines, importez la source map associée une seule fois, et utilisez-la pour les différents sous-domaines en spécifiant le chemin du préfixe absolu plutôt que l'URL complète. Par exemple, indiquez <code>/static/js</code> plutôt que <code>https://hostname.com/static/js</code>).</div>
 
@@ -149,4 +168,5 @@ L'exemple suivant représente une stack trace minifiée :
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps
 [2]: https://docs.datadoghq.com/fr/real_user_monitoring/browser/#initialization-parameters
-[3]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code
+[3]: https://docs.datadoghq.com/fr/logs/log_collection/javascript/#initialization-parameters
+[4]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#link-errors-with-your-source-code

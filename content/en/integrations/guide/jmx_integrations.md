@@ -27,7 +27,7 @@ The following integrations use [JMXFetch][1] and are included by default in the 
 * [SonarQube][15]
 * [Tomcat][16]
 
-**Note**: These integrations do **not** run by default. Each integration must be confugured to run on a host.
+**Note**: These integrations do **not** run by default. Each integration must be configured to run on a host.
 
 ## Community integrations
 
@@ -46,7 +46,7 @@ The following [Community Integrations][17] use jmxfetch and are **not** included
 * [hbase_master][28]
 * [neutrona][29]
 
-**Note**: These integrations do **not** run by default. Each integration must be installed and confugured to run on a host.
+**Note**: These integrations do **not** run by default. Each integration must be installed and configured to run on a host.
 
 ## Custom checks
 

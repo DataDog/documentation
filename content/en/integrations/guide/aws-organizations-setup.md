@@ -103,7 +103,7 @@ To uninstall the AWS integration from all AWS accounts and regions in an Organiz
 [2]: /integrations/amazon_web_services/#log-collection
 [3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-enable-trusted-access.html
 [4]: /integrations/#cat-aws
-[5]: /security/misconfigurations/setup/
+[5]: /security/cloud_security_management/setup/
 [6]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws
 [7]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-delete.html
 [8]: https://docs.datadoghq.com/integrations/amazon_web_services/

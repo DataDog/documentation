@@ -3,18 +3,17 @@ further_reading:
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: ドキュメント
   text: Agent のアーキテクチャを詳しく見る
-- link: /agent/guide/network#configure-ports
+- link: /agent/configuration/network#configure-ports
   tag: ドキュメント
   text: インバウンドポートの構成
 - link: https://www.datadoghq.com/blog/announcing-ibm-aix-agent/
   tag: GitHub
   text: Datadog Unix Agent を使用した AIX の監視
-kind: documentation
 title: AIX 用 Agent の基本的な使用方法
 ---
 
 <div class="alert alert-info">
-Datadog Unix Agent は特定のシステムアーキテクチャ向けに開発されており、Windows、Linux、MacOS Agent とは異なります。
+Datadog UNIX Agent は特定のシステムアーキテクチャ向けに開発されており、Windows、Linux、MacOS Agent とは異なります。
 </div>
 
 このページでは、AIX 用 Datadog UNIX Agent のインストールと構成について説明します。
@@ -121,7 +120,7 @@ dogstatsd:                        # DogStatsD 構成オプション
 
 既存の Python スーパーバイザーで Agent を実行する機能もあります。このツールを使い慣れている場合は、この方法で Agent デーモンを管理してもかまいません。Agent と DogStatsD の両方のエントリがあります。
 
-## アンインストール
+## Agent のアンインストール
 
 インストールされている Agent を削除するには、次の `installp` コマンドを実行します。
 
@@ -135,6 +134,6 @@ installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/aix
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aix
 [2]: https://github.com/DataDog/datadog-unix-agent/releases
 [3]: https://github.com/DataDog/datadog-unix-agent/blob/master/checks/bundled/ibm_was/README.md

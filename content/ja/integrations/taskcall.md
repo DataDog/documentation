@@ -1,7 +1,8 @@
 ---
 app_id: taskcall
 app_uuid: dd54da03-0a8c-4796-aaa6-61eeb04e611b
-assets: {}
+assets:
+  oauth: assets/oauth_clients.json
 author:
   homepage: https://taskcallapp.com
   name: TaskCall

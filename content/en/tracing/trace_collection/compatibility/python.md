@@ -108,7 +108,7 @@ The `ddtrace` library includes support for the following libraries:
 | [asyncio][46]     | Fully Supported   | > Python 3.7 yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#asyncio     |
 | [Botocore][47]    | >= 1.4.51         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#botocore    |
 | [Boto2][48]       | >= 2.29.0         | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#boto2       |
-| [Celery][49]      | >= 3.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
+| [Celery][49]      | >= 4.4.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
 | [Consul][50]      | >= 0.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
 | [Futures][51]     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
 | [gevent][52]      | >= 20.12          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |

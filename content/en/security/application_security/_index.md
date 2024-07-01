@@ -1,6 +1,5 @@
 ---
 title: Application Security Management
-kind: documentation
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
 aliases:
   - /security_platform/application_security
@@ -38,6 +37,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/threat-modeling-datadog-application-security-management/"
   tag: "Blog"
   text: "Threat modeling with Datadog Application Security Management"
+- link: "https://www.datadoghq.com/blog/aws-waf-datadog/"
+  tag: "Blog"
+  text: "Monitor AWS WAF activity with Datadog"
 ---
 
 {{< site-region region="gov" >}}
@@ -83,7 +85,7 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [1]: /tracing/
 [2]: /agent/
 [3]: /security/application_security/how-appsec-works/
-[4]: /security/default_rules/#cat-application-security
+[4]: /security/default_rules/?category=cat-application-security
 [5]: /security/application_security/enabling/
 [6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec

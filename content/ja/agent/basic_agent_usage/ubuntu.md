@@ -17,16 +17,15 @@ further_reading:
 - link: /agent/configuration/network#configure-ports
   tag: Documentation
   text: インバウンドポートの構成
-kind: documentation
 platform: Ubuntu
 title: Ubuntu 用 Agent の基本的な使用方法
 ---
 
 ## 概要
 
-このページでは、Ubuntu 用 Datadog Agent の基本的な機能について説明します。Agent をまだインストールしていない場合は、[Datadog Agent インテグレーションに関するドキュメント][1]で手順を参照してください。
+このページでは、Ubuntu 向けに Datadog Agent の基本的な機能の概要を説明します。
 
-64-bit x86 および Arm v8 アーキテクチャ用のパッケージをご用意しています。その他のアーキテクチャについては、ソースインストールをご利用ください。
+Agent をインストールするには、[インストール手順][1]を参照してください。64-bit x86 および Arm v8 アーキテクチャ用のパッケージをご用意しています。その他のアーキテクチャについては、ソースインストールをご利用ください。
 
 **注**: Ubuntu 14.04 以降は、64 ビット x86 アーキテクチャでサポートされています。Ubuntu 16.04 以降は、64 ビット Arm v8 アーキテクチャでサポートされています。
 

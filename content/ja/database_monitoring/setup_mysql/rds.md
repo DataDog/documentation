@@ -4,13 +4,8 @@ further_reading:
 - link: /integrations/mysql/
   tag: ドキュメント
   text: 基本的な MySQL インテグレーション
-kind: documentation
 title: Amazon RDS マネージド MySQL のデータベースモニタリングの設定
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
 データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、説明プラン、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
 
@@ -201,7 +196,7 @@ instances:
 
 ECS や Fargate などの Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
-**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットに対する読み取り権限が与えられている必要があります。
+**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットの読み取り権限が必要です。
 
 ### コマンドライン
 
@@ -227,7 +222,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 ### Dockerfile
 
-`Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーのコンフィギュレーションを変更することなく、カスタム Agent を構築・デプロイすることができます。
+`Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーの構成を変更することなく、カスタム Agent を構築・デプロイすることができます。
 
 ```Dockerfile
 FROM gcr.io/datadoghq/agent:7.36.1
@@ -289,7 +284,7 @@ instances:
 
 ### Kubernetes サービスアノテーションで構成する
 
-ファイルをマウントせずに、インスタンスのコンフィギュレーションを Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
+ファイルをマウントせずに、インスタンスの構成を Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
 
 
 ```yaml
@@ -323,7 +318,7 @@ spec:
 
 Cluster Agent は自動的にこのコンフィギュレーションを登録し、MySQL チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
@@ -332,7 +327,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 {{% /tab %}}
 {{< /tabs >}}
 
-### 検証
+### UpdateAzureIntegration
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `mysql` を探します。または、[データベース][7]のページを参照してください。
 
@@ -341,13 +336,13 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 ## RDS インテグレーションをインストール
 
-AWS からより包括的なデータベースメトリクスを収集するには、[RDS インテグレーション][8]をインストールします (オプション)。
+DBM でデータベースのテレメトリーとともに CPU などの AWS からのインフラストラクチャーメトリクスを確認するには、[RDS インテグレーション][8]をインストールします (オプション)。
 
 ## トラブルシューティング
 
 インテグレーションと Agent を手順通りにインストール・設定しても期待通りに動作しない場合は、[トラブルシューティング][9]を参照してください。
 
-## 参考資料
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

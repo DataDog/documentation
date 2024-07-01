@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
+{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
 
 On the [Case Management page][1], cases can be sorted by creation date, status, or priority. By default, cases are sorted by creation date. 
 
@@ -49,13 +49,7 @@ To create a custom view:
 1. Select **Add View** from within a project.
 1. Give the view a name.
 1. In the search box, enter a query. The preview refreshes to show you the cases that match the current search query.
-1. (Optional) Send a notification with third-party tools such as Slack, Microsoft Teams, PagerDuty, or Webhooks. Click **+ Add Recipient Type** and select from the pre-configured channels or recipients. A notification is sent every time a case matching the query is created.
-    | Integration     | Configuration    |
-    | --------------- | ---------------- |
-    | Slack           | Select a Slack workspace and channel. |
-    | Microsoft Teams | If you've connected Microsoft Teams tenants to Datadog, select a tenant, team, and channel. Otherwise, select a connector.|
-    | PagerDuty       | Select a service. |
-    | Webhooks        | Select the name of a webhook. |
+1. (Optional) Send a notification with third-party tools such as Slack, Microsoft Teams, PagerDuty, or Webhooks. Click **+ Add Recipient Type** and select from the pre-configured channels or recipients. See [Create notifications and tickets ][2] to learn more about the available tools and options.
 1. Click **Save view**.
 
 ## Case details
@@ -87,18 +81,18 @@ Activity timeline
 Use Case Management to gather information, context, and resources to determine the proper action to take. This includes further investigation, escalating to an incident, or closing out a case.
 
 From an individual case:
-- [Create an investigative notebook][2]: Gather investigation information and collaborate with your team members.
-- [Declare an incident][3]: Escalate a case to an incident and kick off your incident response process. 
-- Manually create a Jira issue: Use `Shift + J` to create a Jira issue. For more information on how to configure automatic Jira issue creation and bidirectional synchronization, see the [Settings][4] documentation. 
+- [Create an investigative notebook][3]: Gather investigation information and collaborate with your team members.
+- [Declare an incident][4]: Escalate a case to an incident and kick off your incident response process. 
+- Manually create a Jira issue: Use `Shift + J` to create a Jira issue. For more information on how to configure automatic Jira issue creation and bidirectional synchronization, see the [Settings][5] documentation. 
 - Manually create a ServiceNow incident: Use `Shift + N` to create a ServiceNow incident. 
-- [Meet on CoScreen][5]: Share screens for collaborative debugging 
+- [Meet on CoScreen][6]: Share screens for collaborative debugging 
 - Close out the case: Let the team know that no further action is needed. Update the status of the case to closed.
 
 ## Case Analytics
 
 {{< img src="/service_management/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Graph editor showing the cases options selected as a data source" style="width:100%;" >}}
 
-Case Analytics is a queryable data source for aggregated case statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][6] and [Notebooks][2] to analyze team productivity and identify patterns in issues. 
+Case Analytics is a queryable data source for aggregated case statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][7] and [Notebooks][3] to analyze team productivity and identify patterns in issues. 
 
 The following widgets support Case Analytics: timeseries, top list, query value, table, tree map, pie chart, change, and list. 
 
@@ -107,8 +101,9 @@ The following widgets support Case Analytics: timeseries, top list, query value,
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cases
-[2]: /notebooks/
-[3]: /service_management/incident_management/#describing-the-incident
-[4]: /service_management/case_management/settings/#jira
-[5]: /coscreen/
-[6]: https://docs.datadoghq.com/dashboards/
+[2]: /service_management/case_management/create_notifications_and_third_party_tickets
+[3]: /notebooks/
+[4]: /service_management/incident_management/#describing-the-incident
+[5]: /service_management/case_management/settings/#jira
+[6]: /coscreen/
+[7]: https://docs.datadoghq.com/dashboards/

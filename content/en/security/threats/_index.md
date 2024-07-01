@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Threats
-kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/
   - /security/cloud_workload_security/
@@ -25,6 +24,12 @@ CSM Threats uses the Datadog Agent to monitor your environment. If you don't alr
 
 {{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
 
+## Proactively block threats with Active Protection
+
+By default, all OOTB Agent crypto mining threat detection rules are enabled and actively monitoring for threats.
+
+[Active Protection][10] enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
+
 ## Manage out-of-the-box and custom detection rules
 
 CSM Threats comes with more than 50 out-of-the-box detection rules that are maintained by a team of security experts. The rules surface the most important risks so that you can immediately take steps to remediate. Agent expression rules define the workload activities to be collected for analysis while backend detection rules analyze the activities and identify attacker techniques and other risky patterns of behavior.
@@ -45,6 +50,11 @@ Investigate and triage security signals in the [Signals Explorer][8]. View detai
 
 {{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}}
 
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSfzQARsTPr3tiJDnS_4bGx7w35LDfAbGUggaUzHYoL0dIUMWQ/viewform" btn_hidden="false" header="Active Protection">}}
+
+Datadog is introducing a new feature called Active Protection to address the crypto threats detected in your environment automatically. Active Protection is in private beta. Fill out the form to request access.
+{{< /callout >}}
+
 ## Get started
 
 {{< whatsnext >}}
@@ -64,3 +74,4 @@ Investigate and triage security signals in the [Signals Explorer][8]. View detai
 [7]: /security/threats/setup
 [8]: /security/threats/security_signals
 [9]: /network_monitoring/performance/
+[10]: /security/cloud_security_management/guide/active-protection

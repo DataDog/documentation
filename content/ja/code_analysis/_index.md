@@ -1,6 +1,9 @@
 ---
 description: Datadog Code Analysis を使用して、開発中の保守性の問題、バグ、セキュリティ脆弱性に対処し、顧客への影響を防ぐ方法を学びます。
 further_reading:
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
+  tag: リリースノート
+  text: Software Delivery の最新リリースをチェック！ (アプリログインが必要です)。
 - link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
   tag: ブログ
   text: Datadog によるすべての CI パイプラインの監視
@@ -14,7 +17,6 @@ further_reading:
   tag: ドキュメント
   text: Software Composition Analysis について
 is_beta: true
-kind: ドキュメント
 title: コード分析
 ---
 
@@ -107,8 +109,8 @@ Datadog UI の Static Analysis 結果の一部として問題のあるコード�
 
 [1]: /ja/code_analysis/static_analysis
 [2]: /ja/code_analysis/software_composition_analysis
-[3]: /ja/developers/ide_integrations/vscode/#static-analysis
-[4]: /ja/developers/ide_integrations/idea/#static-analysis
+[3]: /ja/developers/ide_plugins/vscode/#static-analysis
+[4]: /ja/developers/ide_plugins/idea/#static-analysis
 [5]: /ja/code_analysis/github_pull_requests/
 [6]: /ja/code_analysis/static_analysis_rules
 [7]: /ja/integrations/github/#link-a-repository-in-your-organization-or-personal-account

@@ -1,17 +1,11 @@
 ---
 aliases:
-  - /ja/developers/amazon_cloudformation/
+- /ja/developers/amazon_cloudformation/
 dependencies:
-  - https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md
-kind: documentation
+- https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md
+kind: ガイド
 title: Datadog-Amazon CloudFormation
 ---
-<div class="alert alert-warning">
-  Datadog-Amazon CloudFormation リソースは、us-east-1 リージョンのCloudFormation パブリックレジストリでのみ利用可能です。その他のリージョンでリソースを非公開で登録するには、提供されているパッケージを使用してください。
-</div>
-
-
-
 [AWS CloudFormation][1] は、環境内のすべての AWS リソースを一度に記述、構成、プロビジョニングするためのテンプレートを提供します。Datadog-AWS CloudFormation リソースでは、サポートされている Datadog リソースとのやりとり、任意の Datadog データセンターへのリソースの送信、任意のリージョンにおける Datadog リソースを使用した拡張機能の非公開登録を行うことができます。
 
 これらのリソースにアクセスするには、AWS マネジメントコンソール (UI)  または AWS コマンドラインインターフェイス (CLI) を使用します。
@@ -50,6 +44,7 @@ title: Datadog-Amazon CloudFormation
     }
   }
   ```
+   米国以外のアカウントを使用している場合は `ApiURL` を指定します (デフォルトは `https://api.datadoghq.com`)。例えば、EU アカウントの場合は `https://api.datadoghq.eu` を使用します。
 
 7. リソースを構成したら、アクティブ化された Datadog リソースのいずれかを含む [AWS スタックを作成][3]します。
 
@@ -59,6 +54,8 @@ title: Datadog-Amazon CloudFormation
 
 始めるには
 
+1. `<RESOURCE_DIR>/resource-role.yaml` ファイルに基づいて CloudFormation リソースの実行ロールを作成します
+
 1. [aws-cli tool][2] を使用して、ターミナルで Datadog リソースを登録します。
 
     ```shell
@@ -66,10 +63,11 @@ title: Datadog-Amazon CloudFormation
         --region "<REGION>" \
         --type RESOURCE \
         --type-name "<DATADOG_RESOURCE_NAME>" \
-        --schema-handler-package "<LINK_TO_S3>"
+        --schema-handler-package "<LINK_TO_S3>" \
+        --execution-role-arn "<ROLE_ARN_FROM_STEP_1>"
     ```
 
-2. ターミナルで以下を実行して、新しく登録されたリソースのバージョンを表示します。
+1. ターミナルで以下を実行して、新しく登録されたリソースのバージョンを表示します。
 
     ```shell
     aws cloudformation list-type-versions \
@@ -78,7 +76,7 @@ title: Datadog-Amazon CloudFormation
     --type-name "<DATADOG_RESOURCE_NAME>"
     ```
 
-3. ターミナルで以下を実行して、この新しく登録されたバージョンを `default` として設定します。
+1. ターミナルで以下を実行して、この新しく登録されたバージョンを `default` として設定します。
 
     ```shell
     aws cloudformation set-type-default-version \
@@ -96,7 +94,7 @@ title: Datadog-Amazon CloudFormation
       * [利用可能なリソース]セクション(#利用可能なリソース)を参照してください。サポート中の S3 リンクの最新例がリンクされています。
     * `VERSION_ID`: ステップ `2` のコマンドによって返されるリソースの基本バージョン。
 
-4. ターミナルで以下を実行して、この新しく登録されたリソースコンフィギュレーションを設定します。
+1. ターミナルで以下を実行して、この新しく登録されたリソースコンフィギュレーションを設定します。
 
     ```shell
     aws cloudformation set-type-configuration \
@@ -105,7 +103,7 @@ title: Datadog-Amazon CloudFormation
         --configuration '{"DatadogCredentials": {"ApiKey": "{{resolve:secretsmanager:MySecret:SecretString:SecretAPIKey}}", "ApplicationKey": "{{resolve:secretsmanager:MySecret:SecretString:SecretAppKey}}"}}'
     ```
 
-5. AWS アカウントで、登録済みの Datadog リソースのいずれかを含む [AWS スタックを作成][3]します。
+1. AWS アカウントで、登録済みの Datadog リソースのいずれかを含む [AWS スタックを作成][3]します。
 
 使用可能なコマンドとワークフローの詳細については、公式の [AWS ドキュメント][4]を参照してください。
 
@@ -113,16 +111,42 @@ title: Datadog-Amazon CloudFormation
 
 次の Datadog リソースは、AWS アカウント内で登録できます。それぞれの構成方法については、専用のドキュメントを参照してください。
 
-| Resource                | 名前                              | 説明                                             | フォルダー                          | S3 パッケージリンク              |
-|-------------------------|-----------------------------------|---------------------------------------------------------|---------------------------------|-------------------------------|
-| ダッシュボード                | `Datadog::Dashboards::Dashboard`  | [Datadog ダッシュボードの作成、更新および削除][5]。      | `datadog-dashboards-dashboard`  | [スキーマハンドラーのバージョン][6]  |
-| Datadog AWSインテグレーション | `Datadog::Integrations::AWS`      | [Datadog と Amazon Web Service のインテグレーションを管理][7] | `datadog-integrations-aws`      | [スキーマハンドラーのバージョン][8]  |
-| モニター                | `Datadog::Monitors::Monitor`      | [Datadog モニターの作成、更新および削除][9]        | `datadog-monitors-monitor`      | [スキーマハンドラーのバージョン][10] |
-| ダウンタイム               | `Datadog::Monitors::Downtime`     | [モニターのダウンタイムを有効化/無効化][11]     | `datadog-monitors-downtime`     | [スキーマハンドラーのバージョン][12] |
-| ユーザー                    | `Datadog::IAM::User`              | [Datadog ユーザーの作成と管理][13]                  | `datadog-iam-user`              | [スキーマハンドラーのバージョン][14] |
-| SLO                    | `Datadog::SLOs::SLO`              | [Datadog SLO の作成および管理][19]                   | `datadog-slos-slo`              | [スキーマハンドラーのバージョン][20] |
+| Resource                | 名前                                  | 説明                                             | フォルダー                              | S3 パッケージリンク              |
+|---------------------------|---------------------------------------|---------------------------------------------------------|-------------------------------------|-------------------------------|
+| ダッシュボード                   | `Datadog::Dashboards::Dashboard`      | [Datadog ダッシュボードの作成、更新および削除][5]。      | `datadog-dashboards-dashboard`      | [スキーマハンドラーのバージョン][6]  |
+| Datadog AWSインテグレーション   | `Datadog::Integrations::AWS`          | [Datadog と Amazon Web Service のインテグレーションを管理][7] | `datadog-integrations-aws`          | [スキーマハンドラーのバージョン][8]  |
+| モニター                   | `Datadog::Monitors::Monitor`          | [Datadog モニターの作成、更新および削除][9]        | `datadog-monitors-monitor`          | [スキーマハンドラーのバージョン][10] |
+| ダウンタイム (**非推奨**) | `Datadog::Monitors::Downtime`         | [モニターのダウンタイムを有効化/無効化][11]     | `datadog-monitors-downtime`         | [スキーマハンドラーのバージョン][12] |
+| ダウンタイムスケジュール         | `Datadog::Monitors::DowntimeSchedule` | [Datadog のダウンタイムのスケジュール][21]                        | `datadog-monitors-downtimeschedule` | [スキーマハンドラーのバージョン][22] |
+| ユーザー                      | `Datadog::IAM::User`                  | [Datadog ユーザーの作成と管理][13]                   | `datadog-iam-user`                  | [スキーマハンドラーのバージョン][14] |
+| SLO                       | `Datadog::SLOs::SLO`                  | [Datadog SLO の作成および管理][19]                    | `datadog-slos-slo`                  | [スキーマハンドラーのバージョン][20] |
 
-## トラブルシューティング
+## 対応地域
+
+Datadog-Amazon CloudFormation のリソースは、以下の地域で CloudFormation Public Registry で利用可能です。
+
+| コード            | 名前                      |
+|-----------------|---------------------------|
+| us-east-1       | アメリカ東部 (北バージニア)     |
+| us-east-2       | アメリカ東部 (オハイオ州)            |
+| us-west-1       | アメリカ西部 (北カリフォルニア)   |
+| us-west-2       | アメリカ西部 (オレゴン州)          |
+| ap-south-1      | アジア太平洋地域 (ムンバイ)     |
+| ap-northeast-1  | アジア太平洋地域 (東京)      |
+| ap-northeast-2  | アジア太平洋地域 (ソウル)      |
+| ap-southeast-1  | アジア太平洋地域 (シンガポール)  |
+| ap-southeast-2  | アジア太平洋地域 (シドニー)     |
+| ca-central-1    | カナダ (中部)          |
+| eu-central-1    | 欧州 (フランクフルト)        |
+| eu-west-1       | 欧州 (アイルランド)          |
+| eu-west-2       | 欧州 (ロンドン)           |
+| eu-west-3       | 欧州 (パリ)            |
+| eu-north-1      | 欧州 (ストックホルム)        |
+| sa-east-1       | 南米 (サンパウロ) |
+
+**注**: 他の地域のリソースを個人的に登録するには、提供されたパッケージを使用します。
+
+## ヘルプ
 
 ご不明な点は [Datadog サポート][15]までお問い合わせください。
 
@@ -146,3 +170,5 @@ title: Datadog-Amazon CloudFormation
 [18]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager
 [19]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-slos-slo-handler
 [20]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-slos-slo-handler/CHANGELOG.md
+[21]: https://github.com/DataDog/datadog-cloudformation-resources/tree/master/datadog-monitors-downtimeschedule-handler
+[22]: https://github.com/DataDog/datadog-cloudformation-resources/blob/master/datadog-monitors-downtimeschedule-handler/CHANGELOG.md

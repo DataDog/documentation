@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM
-kind: documentation
 type: multi-code-lang
 aliases:
   - /security_platform/application_security/getting_started/
@@ -15,7 +14,7 @@ further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Tracking user activity"
-- link: "/security/default_rules/#cat-application-security"
+- link: "/security/default_rules/?category=cat-application-security"
   tag: "Documentation"
   text: "OOTB Application Security Management Rules"
 - link: "/security/application_security/troubleshooting"
@@ -33,17 +32,25 @@ further_reading:
 <div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Enable your application to [detect and protect against threats][1] targeting your production systems, and to [manage risks][2] in your code and its open source dependencies, using the Datadog library for your application language. You can detect vulnerabilities and threats for apps hosted on a server, Docker, Kubernetes, Amazon ECS, and (for supported languages) AWS Fargate.
+## Prerequisites
 
-{{% appsec-getstarted %}}
+Before setting up Application Security capabilities, ensure the following prerequisites are met:
+- **Datadog Agent installation:** The [Datadog Agent][5] is installed and configured for your application's operating system or container, cloud, or virtual environment.
+- **Datadog APM configuration:** [Datadog APM][6] is configured for your application or service, and traces are being received by Datadog.
+- **Supported tracing library:** The Datadog Tracing Library used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, see [Library Compatibility][7].
 
-{{% appsec-getstarted-with-rc %}}
+## Application Security enablement types
 
-Select your application language for details on how to do these steps for your language and infrastructure types.
+There are two main approaches to enable Application Security on your applications: Single-Step Instrumentation or Datadog Tracing Library.
 
-{{< partial name="security-platform/appsec-languages.html" >}}
+### Single-step instrumentation
 
-<br>
+Run a one-line installation command to install the Datadog Agent and enable Application Security capabilities with [Single Step Instrumentation (Beta)][3].
+
+### Datadog tracing libraries
+
+Add an environment variable or a new argument to your [Datadog Tracing Library][4] configuration.
+
 
 ## Further Reading
 
@@ -51,3 +58,8 @@ Select your application language for details on how to do these steps for your l
 
 [1]: /security/application_security/threats/
 [2]: /security/application_security/risk_management/
+[3]: /security/application_security/enabling/single_step
+[4]: /security/application_security/enabling/tracing_libraries
+[5]: https://app.datadoghq.com/account/settings/agent/latest
+[6]: /tracing/trace_collection/dd_libraries/
+[7]: /security/application_security/enabling/compatibility/

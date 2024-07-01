@@ -1,6 +1,5 @@
 ---
 title: Configure
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "/dashboards/"
@@ -77,7 +76,7 @@ Copy, import, or export a dashboard's JSON using the export icon (upper right) w
 
 <div class="alert alert-warning">Dashboards must be unstarred before deletion.</div>
 
-Use this option to permanently delete your dashboard. You are prompted to confirm deletion.
+Use this option to permanently delete your dashboard. Use the preset **Recently Deleted** list to restore deleted dashboards. Dashboards in **Recently Deleted** are permanently deleted after 30 days. For more information, see the [Dashboard list][6] documentation.
 
 ## Permissions
 
@@ -85,7 +84,7 @@ Use this option to permanently delete your dashboard. You are prompted to confir
 
 {{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
-Use granular access controls to limit the [roles][6] that may edit a particular dashboard:
+Use granular access controls to limit the [roles][7] that may edit a particular dashboard:
 1. While viewing a dashboard, click on the cog **Configure** in the upper right.
 1. Select **Permissions**.
 1. Click **Restrict Access**.
@@ -95,7 +94,7 @@ Use granular access controls to limit the [roles][6] that may edit a particular 
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**.
 
-**Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][6].
+**Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][7].
 
 To restore general access to a dashboard with restricted access, follow the steps below:
 1. While viewing a dashboard, click on the cog **Configure** in the upper right.
@@ -105,7 +104,7 @@ To restore general access to a dashboard with restricted access, follow the step
 
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
-If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][7].
+If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][8].
 
 The access indicator appears at the top right of each edit-restricted dashboard. Depending on your permissions, it may say **Gain Edit Access** or **Request Edit Access**. Click the access indicator to understand your access permissions and what steps to take to edit the dashboard.
 
@@ -119,5 +118,6 @@ The access indicator appears at the top right of each edit-restricted dashboard.
 [3]: /dashboards/guide/version_history/
 [4]: /account_management/audit_trail/
 [5]: /events/
-[6]: /account_management/rbac/
-[7]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[6]: /dashboards/list
+[7]: /account_management/rbac/
+[8]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/

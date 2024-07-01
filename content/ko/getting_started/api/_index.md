@@ -33,8 +33,7 @@ Datadog API를 사용하면 Datadog와 데이터를 주고받을 수 있습니�
 data-postman-action="collection/fork"
 data-postman-visibility="public"
 data-postman-var-1="20651290-809b13c1-4ada-46c1-af65-ab276c434068"
-data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434068&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"
-data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0="></div>
+data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434068&entityType=collection&workspaceId=bf049f54-c695-4e91-b879-0cad1854bafa"></div>
 <script type="text/javascript">
   (function (p,o,s,t,m,a,n) {
     !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
@@ -47,21 +46,27 @@ data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsIn
 
 </br>이 컬렉션은 웹용 Postman 또는 Postman 애플리케이션에서 작동합니다. 불러오는 데 몇 초 정도 소요될 수 있습니다.
 
+**참고**: API 및 애플리케이션 키 값을 사용하여 Datadog API 컬렉션의 **컬렉션 변수**를 설정합니다.
+
 ### Postman 환경 설정
 
 Postman 컬렉션을 불러왔다면 사용 가능한 Datadog API 호출의 전체 목록이 Postman 왼쪽 화면에 폴더별로 구성됩니다.
 
-#### 인증
+#### Go
 
-컬렉션에는 [Postman 환경][6]인 `Datadog Authentication`이 포함됩니다. 여기에 Datadog API 키와 인증용 애플리케이션 키를 추가합니다.
+인증을 위해 Datadog API 및 애플리케이션 키를 [컬렉션 변수][6]에 추가합니다.
 
 다음 절차를 따라 환경 설정을 완료해주세요.
 
-1. Postman 오른쪽 상단 코너에 있는 **Environments** 드롭다운을 클릭합니다. 선택된 환경이 없는 경우 **Environments** 드롭다운은 `No Environment`로 표시됩니다.
+1. Datadog API Collection을 선택합니다.
 
-2. **Datadog Authentication**을 선택합니다.
+2. **Variables** 탭을 클릭합니다.
 
-3. **Datadog Authentication** 환경을 편집하여 Datadog [API 키][2]를 `api_key` 변수의 초기값 및 현재값으로 추가하고, 사용 중인 Datadog [애플리케이션 키][2]를 `application_key` 변수의 초기값 및 현재값으로 추가합니다.
+3. 유효한 Datadog API 및 애플리케이션 키 값을 각각 `api_key` 및 `application_key` 변수의 **Current value** 필드에 추가합니다.
+
+4. **저장**을 클릭합니다.
+
+{{< img src="getting_started/postman/collection_variables.png" alt="api_key 및 application_key 컬렉션 변수가 설정된 Datadog API Collection" style="width:100%;">}}
 
 #### API 엔드포인트 변경하기
 
@@ -101,7 +106,7 @@ Datadog 사이트를 `https://api.datadoghq.com`이 아닌 다른 주소로 액�
 
 이 탭은 API 호출의 `param1:value1&param2:value2` 구조를 표시하는 대신 사용할 수도 있습니다.
 
-**참조**:
+**참고**:
 
 - params 테이블에 앰퍼샌드(&)와 콜론(:)을 넣을 필요가 없습니다. Postman에서 기호를 삽입해줍니다.
 - 모든 플레이스홀더는 `<PLACEHOLDER>` 형식을 따릅니다. 플레이스홀더는 쿼리를 실행하기 전에 교체해야 합니다.
@@ -111,6 +116,6 @@ Datadog 사이트를 `https://api.datadoghq.com`이 아닌 다른 주소로 액�
 [3]: https://identity.getpostman.com/signup
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/
-[6]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[6]: https://learning.postman.com/docs/sending-requests/variables/variables/#defining-collection-variables
 [7]: /ko/api/latest/#api-reference
 [8]: /ko/api/

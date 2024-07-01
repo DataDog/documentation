@@ -4,7 +4,7 @@ aliases:
 - /ko/integrations/mesos_slave/
 integration_title: Mesos
 is_public: true
-kind: 통합
+custom_kind: integration
 short_description: 클러스터 리소스 사용, 주요 및 보조 노드 개수, 작업 상태 추적 and more.
 ---
 

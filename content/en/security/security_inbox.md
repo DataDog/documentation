@@ -14,7 +14,16 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/security-inbox/"
   tag: "Blog"
   text: "Easily identify and prioritize your top security risks with Datadog Security Inbox"
+products:
+- name: Cloud Security Management
+  url: /security/cloud_security_management/
+  icon: cloud-security-management
+- name: Application Security Management
+  url: /security/application_security/
+  icon: app-sec
 ---
+
+{{< product-availability >}}
 
 Security Inbox provides a consolidated, actionable list of your most important security findings. It automatically contextualizes and correlates insights from Datadog security products across vulnerabilities, signals, misconfigurations, and identity risks into a unified, prioritized view of actions to take to strengthen your environment.
 
@@ -43,8 +52,8 @@ Security Inbox also takes the following detected risks into consideration when d
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/default_rules/?category=cat-csm-security-issues#all
-[2]: /security/misconfigurations/
-[3]: /security/identity_risks/
+[2]: /security/cloud_security_management/misconfigurations/
+[3]: /security/cloud_security_management/identity_risks/
 [4]: /security/application_security/software_composition_analysis
 [5]: /security/application_security/code_security
 [6]: /security/cloud_security_management/guide/public-accessibility-logic/

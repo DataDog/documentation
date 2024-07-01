@@ -4,7 +4,6 @@ aliases:
 - /ja/security/cloud_workload_security/
 - /ja/security/cloud_workload_security/agent_expressions
 - /ja/security/cloud_workload_security/backend/
-kind: documentation
 title: Cloud Security Management Threats
 ---
 

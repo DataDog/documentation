@@ -122,8 +122,8 @@ After the index is moved to the first index position, review the settings and st
 [6]: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
 [8]: https://app.datadoghq.com/security/landing
-[9]: https://app.datadoghq.com/security/onboarding?contentPacks=&logSources=&step=0
-[10]: https://app.datadoghq.com/security/onboarding?contentPacks=&logSources=&step=1
+[9]: https://app.datadoghq.com/security/content-packs
+[10]: https://app.datadoghq.com/security/configuration/siem/log-sources
 [11]: https://app.datadoghq.com/security/configuration/siem/setup
 [12]: /security/default_rules/#cat-cloud-siem-log-detection
 [13]: /security/detection_rules/
