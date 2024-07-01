@@ -14,7 +14,6 @@ further_reading:
 - link: real_user_monitoring/error_tracking/
   tag: Documentation
   text: Learn about Error Tracking
-kind: documentation
 title: Flutter Crash Reporting and Error Tracking
 ---
 ## Overview

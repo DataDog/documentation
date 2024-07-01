@@ -1,6 +1,5 @@
 ---
 title: Mobile Session Replay
-kind: documentation
 description: Setting up Session Replay for mobile devices.
 aliases:
 further_reading:

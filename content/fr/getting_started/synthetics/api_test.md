@@ -21,7 +21,6 @@ further_reading:
 - link: /api/v1/synthetics/#creer-un-test
   tag: Documentation relative à l'API
   text: Créer un test Synthetic par programmation
-kind: documentation
 title: Débuter avec les tests API
 ---
 

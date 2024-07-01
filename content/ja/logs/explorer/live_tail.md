@@ -13,7 +13,6 @@ further_reading:
 - link: logs/explorer/#list-of-logs
   tag: ドキュメント
   text: ログのリストビュー
-kind: documentation
 title: Live Tail
 ---
 

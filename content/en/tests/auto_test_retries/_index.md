@@ -1,6 +1,5 @@
 ---
 title: Auto Test Retries
-kind: documentation
 description: Retry failing test cases to avoid failing the build because of flaky tests.
 further_reading:
   - link: "/tests"

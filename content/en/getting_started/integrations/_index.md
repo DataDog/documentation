@@ -1,6 +1,5 @@
 ---
 title: Introduction to Integrations
-kind: documentation
 further_reading:
   - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
     tag: 'Learning Center'

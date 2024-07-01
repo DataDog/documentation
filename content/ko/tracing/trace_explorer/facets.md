@@ -4,7 +4,6 @@ further_reading:
 - link: tracing/trace_explorer/
   tag: 설명서
   text: 트레이스 탐색기에 대해 알아보기
-kind: documentation
 title: 스팬 패싯
 ---
 

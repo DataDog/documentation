@@ -1,6 +1,5 @@
 ---
 title: Components
-kind: documentation
 disable_toc: true
 further_reading:
 - link: "/service_management/app_builder/tables/"

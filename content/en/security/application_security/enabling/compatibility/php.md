@@ -1,6 +1,5 @@
 ---
 title: PHP Compatibility Requirements
-kind: documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40

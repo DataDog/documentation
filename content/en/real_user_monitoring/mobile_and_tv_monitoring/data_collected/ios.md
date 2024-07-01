@@ -1,6 +1,5 @@
 ---
 title: RUM iOS Data Collected
-kind: documentation
 code_lang: ios
 type: multi-code-lang
 code_lang_weight: 20

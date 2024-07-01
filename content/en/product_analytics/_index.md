@@ -1,6 +1,5 @@
 ---
 title: Product Analytics
-kind: documentation
 description: Product Analytics help you understand your application usage at a glance.
 aliases:
 - /real_user_monitoring/product_analytics

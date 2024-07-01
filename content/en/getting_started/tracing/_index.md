@@ -1,6 +1,5 @@
 ---
 title: Getting Started with APM Tracing
-kind: documentation
 aliases:
     - /getting_started/tracing/distributed-tracing
 further_reading:

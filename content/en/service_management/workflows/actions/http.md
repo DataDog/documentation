@@ -1,6 +1,5 @@
 ---
 title: HTTP Requests
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "/service_management/workflows/connections/"

@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/monitors/create/types/slo/
-kind: documentation
 title: SLO アラート
 ---
 

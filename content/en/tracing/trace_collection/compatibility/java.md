@@ -1,6 +1,5 @@
 ---
 title: Java Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the Java tracer'
 code_lang: java
 type: multi-code-lang

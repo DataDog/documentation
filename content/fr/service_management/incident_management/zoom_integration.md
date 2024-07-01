@@ -1,7 +1,6 @@
 ---
 description: Associer Zoom à Datadog pour optimiser la collaboration au sein de votre
   équipe
-kind: documentation
 private: true
 title: Intégration Zoom
 ---

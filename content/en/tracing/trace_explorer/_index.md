@@ -1,6 +1,5 @@
 ---
 title: Trace Explorer
-kind: documentation
 aliases:
     - /tracing/tracing_without_limits/
     - /tracing/livesearch/

@@ -1,6 +1,5 @@
 ---
 title: Deployment Tracking for AWS Lambda Serverless Applications
-kind: documentation
 further_reading:
     - link: '/serverless/distributed_tracing'
       tag: 'Documentation'

@@ -1,6 +1,5 @@
 ---
 title: Error Tracking for Logs
-kind: documentation
 description: Learn about Error Tracking for Log Management.
 is_beta: true
 further_reading:

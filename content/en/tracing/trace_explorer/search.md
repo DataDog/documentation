@@ -1,6 +1,5 @@
 ---
 title: Search Spans
-kind: documentation
 description: 'Filter spans to narrow down, broaden, or shift your focus on the subset of spans of current interest.'
 further_reading:
     - link: 'tracing/trace_explorer/query_syntax'

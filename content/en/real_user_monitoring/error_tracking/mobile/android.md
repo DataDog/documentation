@@ -1,6 +1,5 @@
 ---
 title: Android Crash Reporting and Error Tracking
-kind: documentation
 description: Set up Error Tracking for your Android applications.
 aliases:
     - /real_user_monitoring/error_tracking/android

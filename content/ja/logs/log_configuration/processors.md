@@ -12,7 +12,6 @@ further_reading:
 - link: /logs/explorer/
   tag: ドキュメント
   text: ログの調査方法
-kind: documentation
 title: プロセッサー
 ---
 
