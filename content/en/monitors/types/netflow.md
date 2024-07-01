@@ -1,6 +1,5 @@
 ---
 title: NetFlow Monitor
-kind: Documentation
 further_reading:
 - link: "/network_monitoring/devices/netflow/#visualization"
   tag: "Documentation"

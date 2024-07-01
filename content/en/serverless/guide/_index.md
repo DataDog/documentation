@@ -20,6 +20,10 @@ cascade:
     {{< nextlink href="/serverless/guide/opentelemetry" >}}Serverless and OpenTelemetry{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Azure App Service and Container Apps" >}}
+    {{< nextlink href="/serverless/guide/azure_app_service_linux_sidecar" >}}Instrumenting Linux containers on Azure App Service using Azure Sidecar{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Install using the Datadog Forwarder
 
 {{< whatsnext desc="Installation instructions for applications previously set up to be monitored using the Datadog Forwarder" >}}

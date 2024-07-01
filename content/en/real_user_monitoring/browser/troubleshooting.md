@@ -41,7 +41,15 @@ You can also check your browser developer tools console or network tab if you no
 
 ### Data to the Datadog intake
 
-The RUM Browser SDK sends batches of data periodically to the Datadog intake. If data is being sent, you should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
+
+The RUM SDK sends batches of event data to Datadog's intake every time one of these conditions have been met:
+
+- Every 30 seconds
+- When 50 events have been reached
+- When the payload is >16 kB
+- On `visibility:hidden` or `beforeUnload`
+
+If data is being sent, you should see network requests targeting `/v1/input` (the URL origin part may differ due to RUM configuration) in the Network section of your browser developer tools:
 
 {{< img src="real_user_monitoring/browser/troubleshooting/network_intake.png" alt="RUM requests to Datadog intake">}}
 

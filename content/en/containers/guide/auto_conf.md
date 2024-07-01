@@ -1,6 +1,5 @@
 ---
 title: Autodiscovery Auto-Configuration
-kind: guide
 aliases:
  - /agent/autodiscovery/auto_conf
  - /agent/faq/auto_conf

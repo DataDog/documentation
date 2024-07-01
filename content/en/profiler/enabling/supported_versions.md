@@ -1,6 +1,5 @@
 ---
 title: Language and Library Versions for Profiler Features
-kind: documentation
 disable_sidebar: true
 further_reading:
 - link: "/profiler/enabling"

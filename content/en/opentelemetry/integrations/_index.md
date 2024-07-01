@@ -1,6 +1,5 @@
 ---
 title: Integrations
-kind: documentation
 ---
 
 {{< whatsnext desc="Collector integrations" >}}

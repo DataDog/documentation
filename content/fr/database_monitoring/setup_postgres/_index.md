@@ -1,7 +1,6 @@
 ---
 description: Configuration de Database Monitoring sur une base de données Postgres
 disable_sidebar: true
-kind: documentation
 title: Configuration de Postgres
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Continuous Delivery Visibility Explorer
-kind: documentation
 description: Learn about the CD Visibility Explorer for deployment executions.
 further_reading:
 - link: "/continuous_delivery/deployments/"
