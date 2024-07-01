@@ -1,4 +1,19 @@
-The following fields are optional:
+<div class="alert alert-warning">The Rsyslog and Syslog-ng destinations support the <a href="https://datatracker.ietf.org/doc/html/rfc5424">RFC5424</a> format and are only available when you use the Rsyslog or Syslog-ng source. </div>
+
+The Rsyslog and Syslog-ng destinations match these log fields to the following Syslog fields:
+
+| Log Event       | SYSLOG FIELD | Default                    |
+|-----------------|--------------|----------------------------|
+| log["message"]  | MESSAGE      | `NIL`                      |
+| log["procid"]   | PROCID       | `<OPW PID>    `            |
+| log["appname"]  | APP-NAME     | `observability_pipelines`  |
+| log["facility"] | FACILITY     | `8 (log_user)`             |
+| log["msgid"]    | MSGID        | `NIL`                      |
+| log["severity"] | SEVERITY     | `info`                     |
+| log["host"]     | HOSTNAME     | `NIL`                      |
+| log["timestamp"]| TIMESTAMP    | `Utc::now()`               |
+
+The following destination settings are optional:
 
 1. Toggle the switch to enable TLS. If you enable TLS, the following certificate and key files are required:
     - `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) Root File in DER or PEM (X.509).
