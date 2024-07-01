@@ -6,7 +6,6 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: Documentación
   text: Crear un test de navegador
-kind: guía
 title: Añadir la extensión de tests de navegador para Chrome manualmente a tiendas
   de aplicaciones internas
 ---
