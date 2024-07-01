@@ -12,7 +12,6 @@ further_reading:
 - link: /getting_started/tagging/assigning_tags/
   tag: Documentation
   text: Apprendre à assigner des tags
-kind: documentation
 title: Utiliser des tags
 ---
 

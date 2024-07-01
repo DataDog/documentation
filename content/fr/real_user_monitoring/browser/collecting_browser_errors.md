@@ -15,7 +15,6 @@ further_reading:
 - link: /real_user_monitoring/dashboards/
   tag: Documentation
   text: Dashboards RUM
-kind: documentation
 title: Collecte d'erreurs du navigateur
 ---
 

@@ -3,7 +3,6 @@ further_reading:
 - link: /tracing/troubleshooting/connection_errors/
   tag: Documentation
   text: Dépanner des erreurs de connexion APM
-kind: Documentation
 title: Logs de lancement du traceur
 ---
 ## Logs de lancement

@@ -3,7 +3,6 @@ aliases:
   - /fr/serverless/serverless_integrations/macro/
 dependencies:
   - https://github.com/DataDog/datadog-cloudformation-macro/blob/master/serverless/README.md
-kind: documentation
 title: Macro Serverless Datadog
 ---
 ![build_sans_serveur](https://github.com/DataDog/datadog-cloudformation-macro/workflows/build_serverless/badge.svg)

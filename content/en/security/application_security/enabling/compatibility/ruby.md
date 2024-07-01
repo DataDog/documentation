@@ -1,6 +1,5 @@
 ---
 title: Ruby Compatibility Requirements
-kind: documentation
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 30

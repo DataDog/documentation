@@ -1,6 +1,5 @@
 ---
 title: Mobile Session Replay Privacy Options
-kind: documentation
 description: Configure privacy options for Mobile Session Replay.
 further_reading:
     - link: '/product_analytics/session_replay/mobile'

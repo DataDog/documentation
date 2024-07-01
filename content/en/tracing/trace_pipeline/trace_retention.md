@@ -1,6 +1,5 @@
 ---
 title: Trace Retention
-kind: documentation
 description: "Learn how to control trace retention with retention filters."
 aliases:
 - /tracing/trace_retention/

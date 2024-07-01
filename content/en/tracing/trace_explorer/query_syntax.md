@@ -1,6 +1,5 @@
 ---
 title: Query Syntax
-kind: documentation
 description: "Global search of all your traces with tags"
 aliases:
  - /tracing/search_syntax/

@@ -2,7 +2,6 @@
 aliases:
 - /ja/monitors/incident_management/analytics
 description: ダッシュボードとノートブックで、インシデント管理の集計された統計情報を追跡・分析
-kind: documentation
 title: インシデント管理分析
 ---
 

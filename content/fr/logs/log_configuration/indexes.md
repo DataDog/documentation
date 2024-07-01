@@ -1,6 +1,5 @@
 ---
 title: Index
-kind: documentation
 description: Contrôler le volume de logs indexés par Datadog
 aliases:
   - /fr/logs/dynamic_volume_control

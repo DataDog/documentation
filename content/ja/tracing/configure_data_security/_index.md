@@ -8,7 +8,6 @@ aliases:
 - /ja/tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog
 - /ja/tracing/setup_overview/configure_data_security/
 description: クライアントライブラリまたは Agent を構成して、トレース内の機密データの収集を制御します。
-kind: documentation
 title: データセキュリティ
 ---
 ## 概要

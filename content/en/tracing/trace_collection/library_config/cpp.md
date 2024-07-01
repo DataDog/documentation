@@ -1,6 +1,5 @@
 ---
 title: Configuring the C++ Tracing Library
-kind: documentation
 code_lang: cpp
 type: multi-code-lang
 code_lang_weight: 50
