@@ -2,7 +2,7 @@
 aliases:
 - /es/logs/log_collection/apigee
 - /es/integrations/apigee
-description: Recopila logs de proxy Apigee para realizar un seguimiento de errores,
+description: Recopila logs de proxy de Apigee para realizar un seguimiento de errores,
   tiempos de respuesta de solicitudes, duración, latencia, rendimiento del monitor
   y problemas de proxies agregados en un solo lugar.
 further_reading:
@@ -18,7 +18,7 @@ title: Apigee
 
 ## Información general
 
-Recopila logs de proxy Apigee para realizar un seguimiento de errores, tiempos de respuesta, duración, latencia, rendimiento del monitor y problemas de proxies.
+Recopila logs de proxy de Apigee para realizar un seguimiento de errores, tiempos de respuesta, duración, latencia, rendimiento del monitor y problemas de proxies.
 
 ## Configuración
 
@@ -28,7 +28,7 @@ Recopila logs de proxy Apigee para realizar un seguimiento de errores, tiempos d
 Existen dos métodos para recopilar logs de Apigee:
 
 1. Utiliza la [política JavaScript][1] de Apigee para enviar logs a Datadog.
-2. Si ya dispones de un servidor syslog, utiliza el tipo de [política MessageLogging][2] de Apigee para registrar en una cuenta syslog.
+2. Si ya dispones de un servidor syslog, utiliza el tipo de [política MessageLogging][2] de Apigee para gestionar logs en una cuenta syslog.
 
 #### Parámetro Syslog
 
@@ -52,9 +52,9 @@ Utiliza el tipo de política MessageLogging con el parámetro syslog en tu API p
 {{% /site-region %}}
 #### Política JavaScript
 
-Envía logs de proxy Apigee a Datadog utilizando la [política JavaScript][1] de Apigee.
+Envía logs de proxy de Apigee a Datadog utilizando la [política JavaScript][1] de Apigee.
 
-El JavaScript se ha configurado para capturar las variables de flujo esenciales como atributos de logs en Datadog. Los atributos se nombran de acuerdo con la [lista de atributos estándar][2].
+El JavaScript se ha configurado para registrar las variables de flujo esenciales como atributos de logs en Datadog. Los atributos se nombran de acuerdo con la [lista de atributos estándar][2].
 
 1. Selecciona el proxy de Apigee desde el que quieres enviar logs a Datadog.
 2. En la página de información general del proxy seleccionada, haz clic en la pestaña **DEVELOP** (Ampliar), situada en la esquina superior derecha.
