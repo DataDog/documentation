@@ -290,6 +290,21 @@ processors:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Use environment variables
+
+When configuring the OpenTelemetry Collector, you can use the following environment variables for the Datadog Exporter:
+
+| Variable   | Required | Description                                                  |
+|------------|----------|--------------------------------------------------------------|
+| `DD_API_KEY` | Yes      | Your Datadog API key.                                        |
+| `DD_SITE`    | Yes       | The Datadog site to send data to. Defaults to {{< region-param key="dd_site" >}}. |
+| `DD_ENV`     | Yes       | The environment to associate the data with.                  |
+| `DD_SERVICE` | Yes       | The service name to associate the data with.                 |
+| `DD_VERSION` | Yes       | The version of the service to associate the data with.       |
+| `DD_TAGS`    | No       | A list of tags to apply to all data sent to Datadog.         |
+
+For more information, see [Unified Service Tagging][5].
+
 ## Data collected
 
 | OpenTelemetry attribute | Datadog Tag | Processor |
@@ -432,3 +447,4 @@ Attributes:
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/resourcedetectionprocessor/README.md
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/k8sattributesprocessor/README.md
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/k8s-values.yaml
+[5]: /getting_started/tagging/unified_service_tagging/#opentelemetry-environment
