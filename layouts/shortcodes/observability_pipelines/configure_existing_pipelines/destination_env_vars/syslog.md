@@ -1,0 +1,3 @@
+- The Rsyslog or Syslog-ng endpoint URL. For example, `127.0.0.1:9997`.
+    - The Observability Pipelines Worker sends logs to this address and port.
+    - Stored as the environment variable: `DD_OP_DESTINATION_SYSLOG_ENDPOINT_URL`

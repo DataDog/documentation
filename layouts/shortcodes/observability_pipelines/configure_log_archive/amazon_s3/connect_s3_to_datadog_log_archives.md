@@ -1,7 +1,7 @@
 ### Connect the S3 bucket to Datadog Log Archives
 
 1. Navigate to Datadog [Log Forwarding][201].
-1. Click **Add a new archive**.
+1. Click **New archive**.
 1. Enter a descriptive archive name.
 1. Add a query that filters out all logs going through log pipelines so that none of those logs go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming no logs going through the pipeline have that tag added.
 1. Select **AWS S3**.

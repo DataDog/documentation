@@ -13,10 +13,16 @@ As your infrastructure and your organization scales, so does your log volume, th
 
 Select a source to get started:
 
-- [Splunk HTTP Event Collector (HEC)][1]
-- [Splunk Heavy and Universal Forwarders (TCP)][2]
-- [Sumo Logic Hosted Collector][3]
+- [Fluentd or Fluent Bit][1]
+- [HTTP Client][2]
+- [Splunk HTTP Event Collector (HEC)][3]
+- [Splunk Heavy and Universal Forwarders (TCP)][4]
+- [Sumo Logic Hosted Collector][5]
+- [Rsyslog or Syslog-ng][6]
 
-[1]: /observability_pipelines/dual_ship_logs/splunk_hec
-[2]: /observability_pipelines/dual_ship_logs/splunk_tcp
-[3]: /observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector
+[1]: /observability_pipelines/dual_ship_logs/fluent
+[2]: /observability_pipelines/dual_ship_logs/http_client
+[3]: /observability_pipelines/dual_ship_logs/splunk_hec
+[4]: /observability_pipelines/dual_ship_logs/splunk_tcp
+[5]: /observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector
+[6]: /observability_pipelines/dual_ship_logs/syslog
