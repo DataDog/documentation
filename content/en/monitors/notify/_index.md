@@ -1,6 +1,5 @@
 ---
 title: Notifications
-kind: documentation
 aliases:
   - /monitors/faq/how-do-i-add-custom-template-variables-to-my-monitor-message
   - /monitors/faq/how-do-i-setup-conditional-contacts-and-messages-in-a-single-monitor

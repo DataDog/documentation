@@ -1,6 +1,5 @@
 ---
 title: Using Tags
-kind: documentation
 description: Learn how to use tags in Datadog products.
 aliases:
 - /tagging/using_tags/

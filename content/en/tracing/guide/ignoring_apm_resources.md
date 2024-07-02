@@ -1,6 +1,5 @@
 ---
 title: Ignoring Unwanted Resources in APM
-kind: documentation
 ---
 
 A service can handle a variety of requests, some of which you might not want traced or included in trace metrics. An example of this is, possibly, health checks in a web application.
@@ -453,7 +452,7 @@ tracer.use('http', {
 ```
 <div class="alert alert-info"><strong>Note</strong>: The tracer configuration for the integration must come <em>before</em> that instrumented module is imported.</div>
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/plugins.connect.html#blocklist
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.plugins.connect.html#blocklist
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}

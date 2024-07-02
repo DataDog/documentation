@@ -1,6 +1,5 @@
 ---
 title: Software Templates
-kind: documentation
 further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"

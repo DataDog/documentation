@@ -1,6 +1,5 @@
 ---
 title: Advanced setup for Datadog Operator
-kind: guide
 aliases:
  - /agent/guide/operator-advanced
 further_reading:

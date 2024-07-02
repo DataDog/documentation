@@ -10,7 +10,6 @@ further_reading:
   tag: Documentation
   text: En savoir plus sur l'Error Tracking Explorer
 is_beta: true
-kind: documentation
 title: Suivi des erreurs recueillies sur navigateur et mobile
 ---
 

@@ -9,7 +9,7 @@ further_reading:
 - link: /data_streams/
   tags: 설명서
   text: 데이터 스트림 모니터링
-kind: guide
+
 title: Kafka 대기열 모니터링
 ---
 

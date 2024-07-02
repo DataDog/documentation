@@ -8,7 +8,6 @@ further_reading:
 - link: /agent/amazon_ecs/tags/
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
-kind: ドキュメント
 title: ECS アプリケーションのトレース
 ---
 

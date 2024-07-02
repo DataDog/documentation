@@ -1,5 +1,9 @@
 ---
 title: Risk Based Entity Insights for AWS
+further_reading:
+    - link: "https://www.datadoghq.com/blog/risk-prioritization-entity-analytics/"
+      tag: Blog
+      text: "Accelerate investigations with Datadog Cloud SIEM Risk-based Insights and AWS Entity Analytics"
 ---
 
 {{< callout url="https://datadoghq.com/private-beta/risk-based-entity-insights" header="Join the Beta!">}}
@@ -53,6 +57,10 @@ The **Next steps** section of the entity details panel includes the available mi
 An entity's risk score summarizes the entity's risk level over time. 
 
 The risk score is calculated from the characteristics of the entity's associated signals, such as the severity level of the signal and how many times the signal has fired. All signals fired in the past 14 days are used to calculate the risk score.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
 [2]: https://docs.datadoghq.com/security/cloud_security_management/setup

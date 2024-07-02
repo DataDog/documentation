@@ -1,6 +1,5 @@
 ---
 title: Unified Service Tagging
-kind: documentation
 further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"

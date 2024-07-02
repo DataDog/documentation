@@ -4,7 +4,6 @@ further_reading:
 - link: https://docs.datadoghq.com/monitors/configuration/
   tag: Documentación
   text: Configurar monitores
-kind: Documentación
 title: Crear un monitor recomendado para integraciones
 ---
 ## Información general

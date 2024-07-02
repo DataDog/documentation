@@ -21,7 +21,6 @@ further_reading:
   tag: Blog
   text: Mettre en corrélation les événements RUM Datadog avec les traces de vos applications
     instrumentées via OTel
-kind: Documentation
 title: OpenTelemetry dans Datadog
 ---
 

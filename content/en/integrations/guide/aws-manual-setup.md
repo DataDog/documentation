@@ -1,6 +1,6 @@
 ---
 title: AWS Manual Setup Guide
-kind: guide
+
 description: "Steps for manually setting up the Datadog AWS Integration"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"

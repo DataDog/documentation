@@ -1,6 +1,5 @@
 ---
 title: Session Replay Browser Developer Tools
-kind: documentation
 description: Describes the developer tools available in Session Replay
 further_reading:
     - link: '/product_analytics/session_replay/browser'

@@ -18,9 +18,7 @@ Changing a schema produced by a service without updating the consumer can lead t
 
 You must have [Data Streams Monitoring installed][1] on your Java producer and consumer services.
 
-Schema tracking requires a recent version of [dd-trace-java][2]:
-- For Protobuf tracking: use tracer v1.34.0+
-- For Avro tracking: use tracer v1.36.0+
+Schema tracking requires version v1.36.0+ of [dd-trace-java][2] for Protobuf or Avro tracking.
 
 ## View schemas
 

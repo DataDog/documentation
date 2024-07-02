@@ -37,7 +37,7 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices/#aws
   tag: Blog
   text: Bonnes pratiques en matière de tagging pour votre infrastructure et vos applications
-kind: guide
+
 title: Guide de configuration manuelle d'AWS
 ---
 

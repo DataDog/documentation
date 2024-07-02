@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
   tag: 블로그
   text: CIDR 표기법 쿼리를 사용하여 네트워크 트래픽 로그 필터링
-kind: 설명서
 title: 속성과 별칭
 ---
 

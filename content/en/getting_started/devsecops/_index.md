@@ -1,6 +1,5 @@
 ---
 title: Getting Started with the DevSecOps Bundles
-kind: documentation
 ---
 
 This guide introduces the DevSecOps bundles with links to setup instructions to help you install and configure them.

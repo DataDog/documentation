@@ -20,7 +20,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
   tag: 블로그
   text: Datadog 클라우드 비용 관리를 통해 Kubernetes 및 ECS 지출 내역을 확인하세요.
-kind: 설명서
 title: Amazon ECS
 ---
 
@@ -285,7 +284,7 @@ Agent v6.10+인 경우 호스트 인스턴스의 보안 그룹이 관련 포트�
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:1.1.2",
+            "image": "datadog/fips-proxy:1.1.3",
             "portMappings": [
                 {
                     "containerPort": 9803,

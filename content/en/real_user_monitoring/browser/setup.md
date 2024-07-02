@@ -1,6 +1,5 @@
 ---
 title: RUM Browser Monitoring Setup
-kind: documentation
 aliases:
   - /real_user_monitoring/setup
 further_reading:
@@ -18,7 +17,7 @@ The responsibility of keeping user data secure is shared between Datadog and dev
 
 ## Setup
 
-{{< callout url="https://www.datadoghq.com/dg/rum-sdk-injection-beta/" btn_hidden="false" header="Join the Beta!">}}
+{{< callout url="https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/" btn_hidden="false" header="Join the Beta!">}}
 RUM SDK Injection is in private beta. Complete the form to request access.
 {{< /callout >}}
 
@@ -2116,4 +2115,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [25]: /real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [26]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [27]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
-[28]: https://www.datadoghq.com/dg/rum-sdk-injection-beta/
+[28]: https://www.datadoghq.com/private-beta/rum-sdk-auto-injection/

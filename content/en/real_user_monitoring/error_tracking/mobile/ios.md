@@ -1,6 +1,5 @@
 ---
 title: iOS Crash Reporting and Error Tracking
-kind: documentation
 aliases:
 - /real_user_monitoring/ios/crash_reporting/
 - /real_user_monitoring/error_tracking/ios

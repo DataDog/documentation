@@ -1,6 +1,5 @@
 ---
 title: Triage and Notify
-kind: Documentation
 further_reading:
 - link: "service_management/events/correlation/"
   tag: "Documentation"

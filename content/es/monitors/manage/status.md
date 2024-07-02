@@ -12,7 +12,6 @@ further_reading:
 - link: /monitors/manage/
   tag: Documentación
   text: Gestionar los monitores
-kind: documentación
 title: Estado de Monitor
 ---
 

@@ -16,7 +16,6 @@ further_reading:
   tag: Blog
   text: Detectar fallos en checks de calidad con las reglas de protección de despliegues
     de GitHub y Datadog
-kind: Documentación
 title: Tipos de monitores
 ---
 

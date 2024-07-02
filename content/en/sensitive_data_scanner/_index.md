@@ -1,6 +1,5 @@
 ---
 title: Sensitive Data Scanner
-kind: documentation
 aliases:
     - /logs/log_configuration/sensitive_data_detection
     - /account_management/org_settings/sensitive_data_detection
