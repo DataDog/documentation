@@ -10,7 +10,7 @@ further_reading:
 
 ## Requirements
 
-[Amazon EMR Release 6.6.0][10] or later is required.
+[Amazon EMR Release 6.0.1][10] or later is required.
 
 ## Setup
 
@@ -125,4 +125,4 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [7]: /getting_started/site/
 [8]: https://app.datadoghq.com/data-jobs/
 [9]: /data_jobs
-[10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-660-release.html
+[10]: https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-601-release.html
