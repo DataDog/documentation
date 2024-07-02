@@ -129,7 +129,8 @@ The following functions can be used to perform certain operations on strings var
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
 | upper(var) | Returns a string converted to uppercase letters|
 | lower(var)  | Returns a string converted to lowercase letters|
-| substring(var, start, end)            | Extracts characters from a string, between two specified indices (start, end).<br>For example: substring("Test Notification", 2) = "st Notification"|
+| substring(var, start, end)            | Extracts characters from a string, between two specified indices (start, end). The third parameter is optional.<br>For example: substring("host:D", 5) = "D"|
+| strip(var, characters)            | Remove the leading and trailing characters. When the second parameter is null, it removes spaces at the beginning and at the end of the string. For example:<br>strip("   host:E   ") = "host:E"<br>strip("abchost:Eabc", "abc") = "host:E"|
 
 
 {{% /tab %}}
