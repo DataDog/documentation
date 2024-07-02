@@ -186,9 +186,14 @@ Azure Active Directory (Azure AD) のログには、特定のテナントのサ�
 | Region not supported                      | Azure リソースは、Datadog へのログの送信をサポートしていないリージョンにあります。                                         |
 | Datadog Agent not configured              | Datadog Agent がインストールされていない仮想マシンは、Datadog にログを発行しません。                                        |
 
-### Virtual machine agent
+### Datadog Agent 拡張機能
+
+{{< tabs >}}
+{{% tab "VM 拡張機能" %}}
 
 サブスクリプション内の仮想マシン (VM) のリストを表示するには、左側のサイドバーで **Virtual machine agent** を選択します。このページでは、拡張機能として Datadog Agent を VM にインストールできます。
+
+{{< img src="integrations/guide/azure_native_manual_setup/azure_native_vm_extension.png" alt="Azure の Datadog リソース (Virtual machine Agent が選択され、Install extension オプションが強調表示されています)" responsive="true" style="width:90%;">}}
 
 VM ごとに、次の情報が表示されます。
 
@@ -202,15 +207,48 @@ VM ごとに、次の情報が表示されます。
 | Install method       | Chef、Azure VM 拡張機能など、Datadog Agent のインストールに使用される特定のツール。                                                                    |
 | Sending logs         | Datadog Agent が Datadog にログを送信しているかどうか。                                                                                                          |
 
-#### Install
+#### インストール
 
-Datadog Agent をインストールするには、適切な VM を選択し、**Install Agent** をクリックします。ポータルで、デフォルトのキーを使用して Agent をインストールすることの確認が求められます。**OK** を選択してインストールを開始します。Agent がインストールされてプロビジョニングされるまで、Azure はステータスを `Installing` (インストール中) と表示します。Datadog Agent がインストールされると、ステータスが `Installed` (インストール済み) に変わります。
+VM 拡張機能を利用して Azure で直接 Datadog Agent をインストールできます。Datadog Agent のインストール方法は以下の通りです。
+
+1. 適切な VM を選択します。
+2. **Install Extension** をクリックします。
+3. ポータルで、デフォルトのキーを使用して Agent をインストールすることの確認が求められます。**OK** を選択してインストールを開始します。Agent がインストールされてプロビジョニングされるまで、Azure はステータスを `Installing` (インストール中) と表示します。Datadog Agent がインストールされると、ステータスが `Installed` (インストール済み) に変わります。
+
+##### アンインストール
+
+Datadog Agent が Azure VM 拡張機能でインストールされた場合
+
+1. 適切な VM を選択します。
+2. **Uninstall Agent** をクリックします。
+
+Agent が別の方法でインストールされている場合、Datadog リソースを使って Agent をデプロイまたは削除することはできませんが、このページには引き続き Agent に関する情報が表示されます。
+
+{{% /tab %}}
+{{% tab "AKS クラスター拡張機能" %}}
+
+Datadog AKS クラスター拡張機能を使用すると、Azure AKS 内に Datadog Agent をネイティブにデプロイできるため、サードパーティの管理ツールの複雑さを回避できます。
+
+#### インストール
+
+AKS クラスター拡張機能を使って Datadog Agent をインストールするには
+
+1. 左サイドバーの **Monitored Resources** セクションにある AKS クラスターをクリックします。
+2. AKS クラスターの左サイドバーから、**Settings** の下にある **Extensions + applications** を選択します。
+3. `Datadog AKS Cluster Extension` を検索して選択します。
+4. **Create** をクリックし、表示される指示に従って [Datadog の資格情報][1]と [Datadog のサイト][2]を使用してください。
 
 #### アンインストール
 
-Datadog Agent が Azure VM 拡張機能とともにインストールされている場合は、適切な VM を選択して、**Uninstall Agent** をクリックすることで、Agent をアンインストールできます。
+1. 左サイドバーの **Monitored Resources** セクションにある AKS クラスターをクリックします。
+2. AKS クラスターの左サイドバーから、**Settings** の下にある **Extensions + applications** を選択します。
+3. Datadog AKS クラスター拡張機能 (その **Type** は `Datadog.AKSExtension`) を選択します。
+4. **Uninstall** をクリックします。
 
-Agent が別の方法でインストールされた場合、Datadog リソースを使用して Agent をデプロイまたは削除することはできませんが、Agent に関する情報は引き続きこのページに反映されます。
+[1]: /ja/account_management/api-app-keys/
+[2]: /ja/getting_started/site/
+{{% /tab %}}
+{{< /tabs >}}
 
 ### App Service extension
 
@@ -225,7 +263,7 @@ Agent が別の方法でインストールされた場合、Datadog リソース
 | App service plan  | アプリサービス用に構成された特定のプラン                                                                                                                             |
 | Extension version | Datadog 拡張機能バージョン番号                                                                                                                                         |
 
-#### Install
+#### インストール
 
 [Datadog 拡張機能][6]をインストールするには、適切なアプリを選択し、**Install Extension** をクリックします。ポータルで、拡張機能をインストールすることの確認が求められます。**OK** を選択してインストールを開始します。これにより、アプリが再起動し、次の設定が追加されます。
 
@@ -260,11 +298,11 @@ Azure ポータルは、API キーの読み取り専用ビューを提供しま�
 
 Azure Datadog インテグレーションにより、Datadog Agent を VM またはアプリサービスにインストールできます。デフォルトのキーが選択されていない場合、Datadog Agent のインストールは失敗します。
 
-### Cloud Security Posture Management
+### Cloud Security Management Misconfigurations
 
-左サイドバーの `Cloud Security Posture Management` を選択し、[Cloud Security Posture Management][8] の構成を行います。
+左サイドバーの `Cloud Security Posture Management` を選択し、[Cloud Security Management Misconfigurations (CSM Misconfigurations)][8] の構成を行います。
 
-デフォルトでは、CSPM は有効になっていません。CSPM を有効にするには、`Enable Datadog Cloud Security Posture Management` を選択し、**Save** をクリックします。これにより、Datadog リソースに関連するすべてのサブスクリプションに対して Datadog CSPM が有効になります。
+デフォルトでは、CSM Misconfigurations は有効になっていません。CSM Misconfigurations を有効にするには、`Enable Datadog Cloud Security Posture Management` を選択し、**Save** をクリックします。これにより、Datadog リソースに関連するすべてのサブスクリプションに対して Datadog CSM Misconfigurations が有効になります。
 
 無効にする場合は、チェックを外して **Save** をクリックします。
 
@@ -282,4 +320,4 @@ Azure Datadog インテグレーションにより、Datadog Agent を VM また
 [5]: https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/diagnostic-settings
 [6]: /ja/serverless/azure_app_services
 [7]: /ja/serverless/azure_app_services/#requirements
-[8]: /ja/security/cspm/
+[8]: /ja/security/cloud_security_management/misconfigurations/
