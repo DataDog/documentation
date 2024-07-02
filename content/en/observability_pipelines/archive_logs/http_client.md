@@ -1,6 +1,5 @@
 ---
 title: Archive Logs for HTTP Client
-kind: document
 disable_toc: false
 ---
 

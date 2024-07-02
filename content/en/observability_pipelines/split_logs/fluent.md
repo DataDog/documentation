@@ -1,6 +1,5 @@
 ---
 title: Split Logs for Fluent
-kind: document
 disable_toc: false
 ---
 

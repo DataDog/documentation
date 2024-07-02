@@ -1,6 +1,5 @@
 ---
 title: Split Logs for HTTP Client
-kind: document
 disable_toc: false
 ---
 

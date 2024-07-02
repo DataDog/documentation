@@ -1,6 +1,5 @@
 ---
 title: Dual Ship Logs for HTTP Client
-kind: document
 disable_toc: false
 ---
 

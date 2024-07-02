@@ -1,6 +1,5 @@
 ---
 title: Sensitive Data Redaction for Fluent
-kind: document
 disable_toc: false
 ---
 

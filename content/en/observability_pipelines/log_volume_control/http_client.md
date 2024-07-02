@@ -1,6 +1,5 @@
 ---
 title: Log Volume Control for HTTP Client
-kind: document
 disable_toc: false
 ---
 

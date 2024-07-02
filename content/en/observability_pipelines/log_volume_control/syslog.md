@@ -1,6 +1,5 @@
 ---
 title: Log Volume Control for Syslog
-kind: document
 disable_toc: false
 ---
 

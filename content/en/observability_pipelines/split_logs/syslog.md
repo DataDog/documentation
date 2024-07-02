@@ -1,6 +1,5 @@
 ---
 title: Split Logs for Syslog
-kind: document
 disable_toc: false
 ---
 

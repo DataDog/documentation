@@ -1,6 +1,5 @@
 ---
 title: Archive Logs for Fluent
-kind: document
 disable_toc: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Dual Ship Logs for Fluent
-kind: document
 disable_toc: false
 ---
 

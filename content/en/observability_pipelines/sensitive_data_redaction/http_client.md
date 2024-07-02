@@ -1,6 +1,5 @@
 ---
 title: Sensitive Data Redaction for HTTP Client
-kind: document
 disable_toc: false
 ---
 
