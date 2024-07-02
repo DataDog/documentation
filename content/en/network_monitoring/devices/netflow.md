@@ -204,9 +204,52 @@ To visualize the real data sent by your devices, you can query for **Bytes (Samp
 
 ## Retention
 
-NetFlow data is retained for 30 days by default, with options for 15, 30, 60, and 90 day retention. 
+NetFlow data is retained for 30 days by default, with options for 15, 30, 60, and 90 day retention.
 
 <div class="alert alert-danger">To retain NetFlow data for longer periods of time, contact your account representative.</div>
+
+## Troubleshooting
+
+### Netflow Packet Drops
+Netflow packet drops can occur when there is a high number of Netflow packets per second, typically greater than 50,000. Here are some steps to identify and mitigate Netflow packet drops:
+
+#### Identifying Packet Drops
+
+You can use the netstat -s command to see if there are any dropped UDP packets:
+```bash
+netstat -s
+```
+
+#### Mitigation Steps
+**1. Increase the Number of Netflow Listeners**
+
+You can increase the number of Netflow listeners by using a configuration similar to the following.
+We recommend setting the number of workers to match the number of CPU cores in your system:
+```yaml
+  netflow:
+    enabled: true
+    listeners:
+      - flow_type: netflow9
+        port: 2055
+        workers: 4 # 4 CPUs
+```
+
+**2. Increase UDP Queue Length**
+
+Adjusting your system's UDP queue length can help accommodate the higher volume of Netflow packets. Increase the UDP receive buffer size to 25MB by executing the following commands:
+```bash
+sudo sysctl -w net.core.rmem_max=26214400
+sudo sysctl -w net.core.rmem_default=26214400
+```
+
+**3. Persisting the Configuration**
+
+To make these changes permanent, add the following lines to your /etc/sysctl.conf file:
+
+```bash
+net.core.rmem_max=26214400
+net.core.rmem_default=26214400
+```
 
 ## Further Reading
 
