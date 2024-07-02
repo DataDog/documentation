@@ -716,7 +716,7 @@ To install the chart with a custom release name `RELEASE_NAME`:
    helm install -f datadog-values.yaml --name RELEASE_NAME --set datadog.site='datad0g.com' --set agents.image.tag='6' --set datadog.apiKey=MY_API_KEY datadog/datadog
    ```
 
-   This chart adds the Datadog Agent to all nodes in your cluster via a DaemonSet. Soon after installation, Datadog begins to report hosts and metrics data in your account.
+   This chart adds the Datadog Agent to all nodes in your cluster using a DaemonSet. Soon after installation, Datadog begins to report hosts and metrics data in your account.
 
 ### Enabling log collection
 
@@ -894,7 +894,7 @@ To install OpenShift, see the [Kubernetes installation instructions](?tab=kubern
 {{< tabs >}}
 {{% tab "Ansible" %}}
 
-Installing the Agent via Ansible requires Ansible version 2.10 or higher.
+Installing the Agent with Ansible requires Ansible version 2.10 or higher.
 
 <div class="alert alert-info">The Datadog Ansible collection supports most Debian, RHEL-based and SUSE-based Linux distributions, macOS, and Windows.<br></div>
 
