@@ -32,6 +32,8 @@ variables:
   # yarn/node cache dirs
   YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.yarn/cache/"
   PREVIEW_PATTERN: '/.+?\/[a-zA-Z0-9_-]+/'
+  DATADOG_API_SPEC_GENERATED_PR_PATTERN: '/^datadog-api-spec\/generated.*/'
+  BUILD_PREVIEW_LABEL_PATTERN: '/build-preview/'
   PREVIEW_ERROR_LOG: "/go/src/github.com/DataDog/documentation/preview_error.log"
   PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.pipcache/"
 
@@ -147,6 +149,7 @@ build_preview:
     CONFIGURATION_FILE: "./local/bin/py/build/configurations/pull_config_preview.yaml"
     LOCAL: "False"
   script:
+    - if [[ $CI_COMMIT_BRANCH ~= $DATADOG_API_SPEC_GENERATED_PR_PATTERN || ! $CI_MERGE_REQUEST_LABELS =~ $BUILD_PREVIEW_LABEL_PATTERN ]]; then echo "skipping pipeline for generated spec pr"; exit 0; fi; # skip if generated spec pr or does not have preview build tag
     - dog --config "$HOME/.dogrc" event post "documentation build ${CI_COMMIT_REF_NAME} started" "${CI_PROJECT_URL}/pipelines/${CI_PIPELINE_ID}" --alert_type "info" --tags="${DEFAULT_TAGS}"
     - touch Makefile.config
     - touch preview_error.log # Create log file for errors
@@ -178,7 +181,7 @@ build_preview:
       - ./latest-cached.tar.gz
   after_script:
     - |
-      if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
+      if [ -e $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
         echo "Error Detected: $(cat $PREVIEW_ERROR_LOG)";
       fi # Output the error to the console
   interruptible: true
@@ -297,7 +300,7 @@ post_build_success_status_to_spec_repo:
     - chmod +x ./local/bin/py/submit_github_status_check.py
     - ./local/bin/py/submit_github_status_check.py -i "$(get_secret 'dd-api-spec-repo-app-id')" -k "$(get_secret 'dd-api-spec-repo-app-key')"
   rules:
-    - if: $CI_COMMIT_BRANCH =~ /^datadog-api-spec\/generated.*/
+    - if: $CI_COMMIT_BRANCH =~ $DATADOG_API_SPEC_GENERATED_PR_PATTERN
       when: on_success
   interruptible: true
   allow_failure: true
@@ -311,7 +314,7 @@ post_build_failure_status_to_spec_repo:
     - chmod +x ./local/bin/py/submit_github_status_check.py
     - ./local/bin/py/submit_github_status_check.py -s "failure" -i "$(get_secret 'dd-api-spec-repo-app-id')" -k "$(get_secret 'dd-api-spec-repo-app-key')"
   rules:
-    - if: $CI_COMMIT_BRANCH =~ /^datadog-api-spec\/generated.*/
+    - if: $CI_COMMIT_BRANCH =~ $DATADOG_API_SPEC_GENERATED_PR_PATTERN
       when: on_failure
   interruptible: true
   allow_failure: true

@@ -9,6 +9,7 @@ concurrency:
 jobs:
   synthetic_testing:
     runs-on: ubuntu-latest
+    if: !startsWith(github.event.pull_request.head.ref, 'datadog-api-spec/generated') || !contains(github.event.pull_request.labels.*.name, 'build-preview')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
