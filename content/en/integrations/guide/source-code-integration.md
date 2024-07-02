@@ -355,6 +355,7 @@ The source code integration supports the following Git providers:
 | GitLab SaaS (gitlab.com) | Yes | Yes |
 | GitLab self-managed | Yes | No |
 | Bitbucket | Yes | No |
+| Azure DevOps Services | Yes | No |
 | Azure DevOps Server | Yes | No |
 
 {{< tabs >}}

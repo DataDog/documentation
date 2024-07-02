@@ -11,7 +11,6 @@ further_reading:
 - link: /agent/guide/autodiscovery-management/
   tag: 설명서
   text: 데이터 수집을 컨테이너의 하위 집합으로만 제한
-kind: 설명서
 title: 도커(Docker) 태그 추출
 ---
 

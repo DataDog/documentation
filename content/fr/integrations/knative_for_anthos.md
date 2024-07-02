@@ -18,7 +18,7 @@ integration_id: knative-for-anthos
 integration_title: Knative for Anthos
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: knative_for_anthos
 public_title: Intégration Datadog/Knative for Anthos

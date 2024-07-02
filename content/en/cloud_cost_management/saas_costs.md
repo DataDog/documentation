@@ -1,6 +1,5 @@
 ---
 title: SaaS Cost Integrations
-kind: documentation
 is_beta: true
 private: true
 disable_toc: false
@@ -23,7 +22,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
@@ -33,6 +32,10 @@ SaaS Cost Integrations are in public beta.
 ## Overview
 
 SaaS Cost Integrations allow you to send cost data **directly from your providers** by configuring the accounts associated with your cloud cost data in Datadog. 
+
+{{< partial name="cloud_cost/cost-integrations.html" >}}
+
+</br>
 
 If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services.
 
@@ -193,7 +196,7 @@ Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{% /tab %}}
 {{% tab "Twilio" %}}
 
-<div class="alert alert-warning">The Twilio SaaS Cost integration is in public beta.</div>
+<div class="alert alert-warning">The Twilio SaaS Cost integration is in private beta.</div>
 
 1. Navigate to the [Twilio integration tile][101] in Datadog and click **Add Account**.
 2. Under the **Resources** section, click the toggle for each account to enable `Twilio in Cloud Cost Management`.

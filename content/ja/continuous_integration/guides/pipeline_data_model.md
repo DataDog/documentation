@@ -4,7 +4,6 @@ further_reading:
 - link: /continuous_integration/pipelines
   tag: Documentation
   text: Pipeline Visibility について
-kind: ガイド
 title: パイプラインのデータモデルと実行タイプ
 ---
 

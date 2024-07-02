@@ -13,7 +13,6 @@ further_reading:
 - link: /api/v2/roles/#list-permissions
   tag: 설명서
   text: Permission API로 역할 권한 허용 관리하기
-kind: 설명서
 title: Datadog 역할 권한 허용
 ---
 

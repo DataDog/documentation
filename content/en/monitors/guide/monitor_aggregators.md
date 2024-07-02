@@ -1,6 +1,5 @@
 ---
 title: Monitor aggregators
-kind: Guide
 disable_toc: false
 further_reading:
 - link: "https://docs.datadoghq.com/monitors/configuration/"

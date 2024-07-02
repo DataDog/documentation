@@ -1,6 +1,5 @@
 ---
 title: Enable Symbol Database for Java
-kind: Documentation
 is_beta: true
 private: true
 code_lang: java

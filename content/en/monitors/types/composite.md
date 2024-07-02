@@ -1,6 +1,5 @@
 ---
 title: Composite Monitor
-kind: documentation
 aliases:
     - /guides/composite_monitors
     - /monitors/monitor_types/composite

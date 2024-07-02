@@ -16,7 +16,7 @@ integration_id: ''
 integration_title: AWS 키 관리 서비스 (KMS)
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: '1.0'
 name: amazon_kms
 public_title: Datadog-AWS 키 관리 서비스 (KMS) 통합

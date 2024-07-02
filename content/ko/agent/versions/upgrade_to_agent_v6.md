@@ -2,7 +2,6 @@
 aliases:
 - /ko/agent/faq/upgrade-to-agent-v6
 - /ko/agent/guide/upgrade-to-agent-v6
-kind: 설명서
 title: 에이전트 v6으로 업그레이드
 ---
 
@@ -22,7 +21,7 @@ title: 에이전트 v6으로 업그레이드
 에이전트 v6 설치 관리자는 업그레이드 중에 v5 설정을 자동으로 변환할 수 있습니다
 
 다음 명령은 Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu, SUSE에서 작동합니다:
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"`
+: `DD_UPGRADE=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent6.sh)"`
 
 **참고:** 가져오기 프로세스가 **커스텀** 에이전트 점검을 자동으로 이동하지 않습니다. 이는 Datadog에서 이전 버전과의 완벽한 호환성을 보장할 수 없기 때문입니다.
 
@@ -37,7 +36,7 @@ Windows 플랫폼에는 원스텝 설치가 없습니다. [수동 업그레이�
 에이전트 v6 설치 관리자는 업그레이드 중에 v5 설정을 자동으로 변환할 수 있습니다.
 
 ```shell
-DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
+DD_UPGRADE=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 ```
 
 **참고:** 가져오기 프로세스가 **커스텀** 에이전트 점검을 자동으로 이동하지 않습니다. 이는 Datadog에서 이전 버전과의 완벽한 호환성을 보장할 수 없기 때문에 이와 같이 설계되었습니다.
@@ -233,7 +232,7 @@ DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/ins
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
-5. 에이전트를 재시작 합니다.
+5. 에이전트 재시작
     ```shell
     sudo systemctl restart datadog-agent.service
     ```

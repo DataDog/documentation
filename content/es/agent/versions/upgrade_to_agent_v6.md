@@ -2,7 +2,6 @@
 aliases:
 - /es/agent/faq/upgrade-to-agent-v6
 - /es/agent/guide/upgrade-to-agent-v6
-kind: documentación
 title: Actualizar el Datadog Agent a la versión 6
 ---
 
@@ -22,7 +21,7 @@ Si ya has instalado el Agent v5, hay un script disponible para instalar el nuev
 El instalador del Agent v6 puede convertir automáticamente las configuraciones de la versión 5 durante la actualización:
 
 El siguiente comando funciona en Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu y SUSE:
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"`
+: `DD_UPGRADE=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent6.sh)"`
 
 **Nota:** El proceso de importación no moverá automáticamente los checks **personalizados** del Agent. Esto es así por diseño, ya que Datadog no puede garantizar una compatibilidad completa con versiones anteriores de forma predefinida.
 
@@ -37,7 +36,7 @@ No existe una instalación en un paso para plataformas Windows; consulta la secc
 El instalador del Agent v6 puede convertir automáticamente las configuraciones de la versión 5 durante la actualización:
 
 ```shell
-DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
+DD_UPGRADE=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 ```
 
 **Nota:** El proceso de importación no moverá automáticamente los checks **personalizados** del Agent. Esto es así por diseño, ya que Datadog no puede garantizar una compatibilidad completa con versiones anteriores de forma predefinida.

@@ -1,6 +1,5 @@
 ---
 title: Monitor History and Evaluation Graphs
-kind: Guide
 disable_toc: false
 further_reading:
 - link: "monitors/manage/status/"

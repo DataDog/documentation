@@ -1,6 +1,5 @@
 ---
 title: Code Security
-kind: documentation
 further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
@@ -15,8 +14,6 @@ further_reading:
   tag: "Blog"
   text: "Datadog Code Security achieves 100 percent accuracy in OWASP Benchmark by using an IAST approach"
 ---
-
-<div class="alert alert-info">Code Security is in beta. To use it for your service, follow the steps described in <a href="/security/application_security/code_security/#enabling-code-security">Enabling Code Security.</a></div>
 
 ## Overview
 

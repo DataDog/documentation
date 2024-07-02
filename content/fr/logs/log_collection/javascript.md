@@ -377,7 +377,7 @@ Options qui doivent avoir une configuration correspondante lors de l'utilisation
 | `usePartitionedCrossSiteSessionCookie` | Booléen | Non       | `false` | Utiliser un cookie de session intersite sécurisé partitionné. Cela permet l'exécution du SDK logs lorsque le site est chargé à partir d'un autre site (iframe). Implique l'utilisation de `useSecureSessionCookie`. |
 | `useCrossSiteSessionCookie`            | Booléen | Non       | `false` | **Obsolète**, voir `usePartitionedCrossSiteSessionCookie`.                                                                                                              |
 
-## API
+## Utilisation
 
 ### Logs personnalisés
 

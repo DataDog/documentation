@@ -20,7 +20,7 @@
             front_matters:
               dependencies: ["https://github.com/jenkinsci/datadog-plugin/blob/master/README.md"]
               public_title: Datadog-Jenkins Integration
-              kind: integration
+              custom_kind: integration
               name: jenkins
               is_public: true
               integration_title: Jenkins
@@ -47,7 +47,6 @@
             file_name: 'ansible.md'
             front_matters:
               title: Ansible
-              kind: documentation
               dependencies: ["https://github.com/ansible-collections/Datadog/blob/main/README.md"]
 
     - org_name: aws
@@ -158,7 +157,6 @@
             file_name: 'ansible_standalone_role.md'
             front_matters:
               title: Set up Ansible Using a Standalone Datadog Role
-              kind: documentation
               dependencies: ["https://github.com/DataDog/ansible-datadog/blob/main/README.md"]
 
       - repo_name: chef-datadog
@@ -173,7 +171,6 @@
             file_name: 'chef.md'
             front_matters:
               title: Chef
-              kind: documentation
               dependencies: ["https://github.com/DataDog/chef-datadog/blob/main/README.md"]
 
       - repo_name: heroku-buildpack-datadog
@@ -188,7 +185,6 @@
             file_name: 'heroku.md'
             front_matters:
               title: Datadog Heroku Buildpack
-              kind: documentation
               dependencies: ["https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md"]
               aliases:
               - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
@@ -205,7 +201,6 @@
             file_name: 'puppet.md'
             front_matters:
               title: Puppet
-              kind: documentation
               dependencies: ["https://github.com/DataDog/puppet-datadog-agent/blob/main/README.md"]
 
       - repo_name: datadog-formula
@@ -220,7 +215,6 @@
             file_name: 'saltstack.md'
             front_matters:
               title: SaltStack
-              kind: documentation
               dependencies: ["https://github.com/DataDog/datadog-formula/blob/main/README.md"]
 
       - repo_name: dd-trace-rb
@@ -330,7 +324,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-ci/blob/master/src/commands/synthetics/README.md"]
               title: Continuous Testing and CI/CD Configuration
-              kind: documentation
               description: Configure Continuous Testing to run tests in your CI/CD pipelines.
               aliases:
                 - /synthetics/cicd_integrations/configuration
@@ -360,7 +353,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
               title: Static Analysis and CircleCI Orbs
-              kind: documentation
               description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/circleci_orbs
@@ -378,7 +370,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
               title: Static Analysis and GitHub Actions
-              kind: documentation
               description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/github_actions
@@ -408,7 +399,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-sca-github-action/blob/main/README.md"]
               title: Software Composition Analysis and GitHub Actions
-              kind: documentation
               description: Use Datadog and GitHub to run Software Composition Analysis jobs in a CI pipeline.
 
       - repo_name: datadog-cdk-constructs
@@ -453,7 +443,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-ci-azure-devops/blob/main/README.md"]
               title: Continuous Testing and Datadog CI Azure DevOps Extension
-              kind: documentation
               description: Use the Synthetics and Datadog CI extension to create tasks that you can use in a CI pipeline.
               aliases:
                 - /synthetics/cicd_integrations/azure_devops_extension
@@ -470,7 +459,6 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-ci-github-action/blob/main/README.md"]
               title: Continuous Testing and CI GitHub Actions
-              kind: documentation
               aliases:
                 - /synthetics/cicd_integrations/github_actions
 
@@ -486,9 +474,36 @@
             front_matters:
               dependencies: ["https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/README.md"]
               title: Continuous Testing and CircleCI Orb
-              kind: documentation
               aliases:
                 - /synthetics/cicd_integrations/circleci_orb
+      
+      - repo_name: synthetics-test-automation-bitrise-step-upload-application
+        contents:
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - 'README.md'
+          options:
+            dest_path: '/continuous_testing/cicd_integrations/'
+            file_name: 'bitrise_upload.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/blob/main/README.md"]
+              title: Continuous Testing and Bitrise
+              kind: documentation
+      
+      - repo_name: synthetics-test-automation-bitrise-step-run-tests
+        contents:
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - 'README.md'
+          options:
+            dest_path: '/continuous_testing/cicd_integrations/'
+            file_name: 'bitrise_run.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/synthetics-test-automation-bitrise-step-run-tests/blob/main/README.md"]
+              title: Continuous Testing and Bitrise
+              kind: documentation
 
       - repo_name: datadog-cloudformation-resources
         contents:
@@ -564,6 +579,10 @@
           globs:
           - 'docs/cloud-workload-security/agent_expressions.md'
           - 'docs/cloud-workload-security/backend.md'
+          - 'docs/cloud-workload-security/backend_linux.md'
+          - 'docs/cloud-workload-security/backend_windows.md'
+          - 'docs/cloud-workload-security/linux_expressions.md'
+          - 'docs/cloud-workload-security/windows_expressions.md'
           options:
             dest_dir: '/security/threats/'
             path_to_remove: 'docs/cloud-workload-security/'

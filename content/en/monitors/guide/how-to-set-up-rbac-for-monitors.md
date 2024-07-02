@@ -1,6 +1,5 @@
 ---
 title: How to set up RBAC for Monitors
-kind: guide
 further_reading:
 - link: "/account_management/rbac/permissions/#monitors"
   tag: "Documentation"

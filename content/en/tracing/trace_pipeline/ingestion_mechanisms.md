@@ -284,7 +284,7 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 
 <div class="alert alert-warning"> This feature is currently in Beta. Reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a> to request access to the functionality.</div>
 
-The error sampling is remotely configurable if your using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to enable the collection of rare spans without having to restart the Datadog Agent.
+The error sampling is remotely configurable if you're using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to enable the collection of rare spans without having to restart the Datadog Agent.
 
 #### Datadog Agent 6/7.41.0 and higher
 
@@ -307,7 +307,7 @@ The rare sampler sends a set of rare spans to Datadog. It catches combinations o
 
 <div class="alert alert-warning"> This feature is currently in Beta. Reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a> to request access to the functionality.</div>
 
-The rare sampling rate is remotely configurable if your using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to change the parameter value without having to restart the Datadog Agent.
+The rare sampling rate is remotely configurable if you're using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to change the parameter value without having to restart the Datadog Agent.
 
 #### Datadog Agent 6/7.41.0 and higher
 

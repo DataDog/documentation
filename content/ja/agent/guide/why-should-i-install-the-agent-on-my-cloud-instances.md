@@ -7,7 +7,6 @@ further_reading:
 - link: /integrations/guide/cloud-metric-delay/
   tag: ガイド
   text: クラウドメトリクスの遅延
-kind: ガイド
 title: クラウドインスタンスに Datadog Agent をインストールした方がよいのはなぜですか
 ---
 

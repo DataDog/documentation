@@ -73,22 +73,21 @@ The following user activity events are used for ATO tracking.
 |-------------------------|-------------------|----------------------------------------------|
 | `users.login.success`     | True              | Account takeover detection rule requirement       |
 | `users.login.failure`     | True              | Account takeover detection rule requirement       |
-| `users.exists`            | False             | Signal review and determining if attack is targeted |
 | `users.password_reset`     | False             | Detection rule requirement to identify user enumeration through password reset |
+
+Those enrichment need to hold a user identifier (unique to a user, numeric or otherwise) as `usr.id`. In the case of login failures, it also needs to know whether the user existed in the database or not (`usr.exists`). This helps identifying malicious activity that will regularly target missing accounts.
 
 For steps on enabling tracking for events that are not automatically instrumented, go to [User Monitoring and Protection][1].
 
 For the latest list of relevant detections and instrumentation requirements, go to [Detection Rules][2] page.
 
-
-[Automatic instrumentation][3] is a Datadog capability that automatically identifies user login success and failure for most authentication implementations. We recommend that applications are additionally instrumented for all recommended enrichments, such as `users.exists`.
+[Automatic instrumentation][3] is a Datadog capability that automatically identifies user login success and failure for many authentication implementations.
 
 You are not limited to how Datadog defines these enrichments. Many platform products opt to add additional enrichments, such as identifying the customer organization or user role.
 
 ## Remote Configuration
 
-[Remote Configuration][4] enables ASM users to instrument apps with enrichments such as `users.exists` or custom [business logic][5] data in near real time.
-
+[Remote Configuration][4] enables ASM users to instrument apps with custom [business logic][5] data in near real time.
 
 ## Notifications
 

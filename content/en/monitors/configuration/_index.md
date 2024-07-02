@@ -1,6 +1,5 @@
 ---
 title: Configure Monitors
-kind: documentation
 description: Describes the monitor creation page.
 aliases:
   - /monitors/create/configuration
@@ -143,7 +142,7 @@ See the documentation for [process check][1], [integration check][2], and [custo
 
 
 [1]: /monitors/types/process_check/
-[2]: /monitors/types/integration/?tab=checkalert#integration-status
+[2]: /monitors/types/integration/?tab=checkalert#integration-metric
 [3]: /monitors/types/custom_check/
 {{% /tab %}}
 {{< /tabs >}}
@@ -343,7 +342,7 @@ Edit-restricted monitors display the roles that have Editor access at the top of
 [4]: /monitors/configuration/?tabs=othermonitortypes#no-data
 [5]: /monitors/notify/variables/
 [6]: /monitors/notify/#configure-notifications-and-automations
-[7]: /monitors/notify/#say-whats-happening
+[7]: /monitors/notify/
 [8]: /getting_started/tagging/
 [9]: /account_management/teams/
 [10]: /monitors/notify/variables/?tab=is_alert#attribute-and-tag-variables

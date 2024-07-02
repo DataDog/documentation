@@ -1,6 +1,5 @@
 ---
 title: Downgrade the Agent to a Prior Minor Version
-kind: faq
 aliases:
 - /agent/faq/downgrade-datadog-agent
 ---
