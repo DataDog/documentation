@@ -1,6 +1,5 @@
 ---
 title: Install Datadog Agent 6
-kind: Guide
 further_reading:
 - link: "/agent/basic_agent_usage/"
   tag: "Documentation"
