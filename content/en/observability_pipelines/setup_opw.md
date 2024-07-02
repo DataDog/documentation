@@ -24,11 +24,15 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-warning">All configuration file paths specified in the pipeline need to be under <code>DD_OP_DATA_DIR/config</code>. 
+<div class="alert alert-warning">All configuration file paths specified in the pipeline need to be under <code>DD_OP_DATA_DIR/config</code>.
 Modifying files under that location while OPW is running might have adverse effects.
 </div>
 
-Bootstrap the Observability Pipelines Worker within your infrastructure before you set up a pipeline. These environment variables are separate from the pipeline environment variables.
+Bootstrap the Observability Pipelines Worker within your infrastructure before you set up a pipeline. These environment variables are separate from the pipeline environment variables. The location of the related directories and files:
+
+- Default data directory: `var/lib/observability-pipelines-worker`
+- Bootstrap file: `/etc/observability-pipelines-worker/bootstrap.yaml`
+- Environment variables file: `/etc/default/observability-pipelines-worker`
 
 ## Bootstrap Options
 
