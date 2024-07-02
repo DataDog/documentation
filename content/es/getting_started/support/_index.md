@@ -3,7 +3,6 @@ further_reading:
 - link: https://docs.datadoghq.com/agent/troubleshooting/
   tag: Documentación
   text: Solucionar problemas del Agent
-kind: documentation
 title: Empezando con el soporte de Datadog
 ---
 

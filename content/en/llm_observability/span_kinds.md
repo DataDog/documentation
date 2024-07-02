@@ -1,6 +1,5 @@
 ---
 title: Span Kinds
-kind: documentation
 aliases:
     - /tracing/llm_observability/span_kinds
 ---

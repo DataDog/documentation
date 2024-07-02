@@ -11,7 +11,6 @@ further_reading:
   tag: Blog
   text: Automatiser les tâches de sécurité courantes et anticiper les menaces avec
     les workflows Datadog et Cloud SIEM
-kind: documentation
 title: Workflow Automation
 ---
 

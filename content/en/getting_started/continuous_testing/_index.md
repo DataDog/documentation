@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Continuous Testing
-kind: documentation
 further_reading:
 - link: 'https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline'
   tag: 'Learning Center'

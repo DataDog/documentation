@@ -11,7 +11,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-mobile-widgets/
   tag: ブログ
   text: Datadog モバイルダッシュボードウィジェットで、オンコールエクスペリエンスを改善
-kind: documentation
 title: Datadog モバイルアプリ
 ---
 

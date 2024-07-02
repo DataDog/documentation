@@ -12,7 +12,6 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: Dashboards RUM
-kind: documentation
 title: Surveillance des performances de ressources
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: APM Troubleshooting
-kind: documentation
 aliases:
     - /tracing/faq/my-trace-agent-log-renders-empty-service-error/
 further_reading:

@@ -9,7 +9,6 @@ further_reading:
 - link: /logs/log_configuration/processors
   tag: ドキュメント
   text: ログの処理方法
-kind: documentation
 title: Datadog の Lambda 関数で AWS サービスのログを送信する
 ---
 

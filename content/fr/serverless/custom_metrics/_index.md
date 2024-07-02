@@ -1,6 +1,5 @@
 ---
 title: Métriques custom à partir d'applications sans serveur
-kind: documentation
 ---
 ## Présentation
 

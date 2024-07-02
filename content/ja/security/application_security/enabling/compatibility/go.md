@@ -1,7 +1,6 @@
 ---
 code_lang: go
 code_lang_weight: 20
-kind: documentation
 title: Go 互換性要件
 type: multi-code-lang
 ---

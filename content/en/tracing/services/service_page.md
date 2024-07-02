@@ -1,6 +1,5 @@
 ---
 title: Service Page
-kind: documentation
 aliases:
 - /tracing/visualization/service/
 further_reading:

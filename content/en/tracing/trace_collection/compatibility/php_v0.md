@@ -1,6 +1,5 @@
 ---
 title: (Legacy) PHP Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the PHP tracer'
 further_reading:
     - link: 'tracing/trace_collection/dd_libraries/php'

@@ -1,6 +1,5 @@
 ---
 title: Network Path
-kind: documentation
 description: Investigate network traffic paths 
 is_beta: true
 further_reading:

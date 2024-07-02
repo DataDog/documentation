@@ -1,6 +1,5 @@
 ---
 title: Configuring the Python Tracing Library
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 20

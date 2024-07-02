@@ -14,7 +14,6 @@ further_reading:
 - link: /tracing/troubleshooting/agent_apm_metrics/
   tag: ドキュメント
   text: Datadog Agent によって送信された APM メトリクス
-kind: documentation
 title: APM トラブルシューティング
 ---
 

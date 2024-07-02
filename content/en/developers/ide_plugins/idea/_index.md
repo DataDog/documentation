@@ -1,6 +1,5 @@
 ---
 title: Datadog Plugin for JetBrains IDEs
-kind: documentation
 disable_toc: false
 is_beta: true
 aliases:

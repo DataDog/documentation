@@ -1,6 +1,5 @@
 ---
 title: JavaScript Expressions
-kind: documentation
 further_reading:
 - link: "/service_management/app_builder/build/"
   tag: "Documentation"
