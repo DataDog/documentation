@@ -50,7 +50,7 @@ After saving your changes, [restart the Agent][4].
 
 ## Aggregation
 
-The Datadog Agent automatically aggregates the data received into NetFlow to limit the number of records sent to the platform while maintaining most of the information. By default, flow recordings that have the same identifiers such as `source`, `destination address`, `port`, and `protocol`, are aggregated together in five minute intervals. Additionally, the Datadog Agent can detect ephemeral ports and remove them. As a result, you may see Flows with `port:*`.
+The Datadog Agent automatically aggregates the data received into NetFlow to limit the number of records sent to the platform while maintaining most of the information. By default, flow recordings that have the same identifiers, such as `source`, `destination address`, `port`, and `protocol`, are aggregated together in five minute intervals. Additionally, the Datadog Agent can detect ephemeral ports and remove them. As a result, you may see Flows with `port:*`.
 
 ## Enrichment
 
