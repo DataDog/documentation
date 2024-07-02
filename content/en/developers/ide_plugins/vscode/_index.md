@@ -164,7 +164,12 @@ In order to get access to this feature, you have to enable [Error Tracking Excep
 
 Once enabled, a new `Exception Replay` button appears next to the stack trace section of any instrumented Error Tracking code insight. If you click over it, you can access all the information Datadog has about the different frames, and navigate through the production code and the value of the different variables involved.
 
-Check out the following video to see the feature in action:
+Select an Error Tracking code insight from the Code Insights view. Go to the stack trace and click over the Exception Replay button. VS Code will show a new activity with two new views: 
+
+1. Variables: It shows the variables related to a particular stack trace frame.
+1. Stack Trace: It allows you to navigate through the different stack trace frames.
+
+Select a stack trace frame and inspect the values of all the variables that Datadog captured from your production code.
 
 {{< img src="/developers/ide_plugins/vscode/exception_replay.mp4" alt="Preview of Exception Replay" style="width:100%" video=true >}}
 
