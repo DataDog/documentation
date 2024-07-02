@@ -1,6 +1,5 @@
 ---
 title: Azure
-kind: documentation
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
@@ -14,7 +13,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
@@ -57,7 +56,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 {{< img src="cloud_cost/new_export.png" alt="Export details with Metric: Actual, Export type: Daily, and File Partitioning: On" >}}
 
 At this time, there is no support for creating cost exports using the [improved exports experience][8].
-To disable it, open the Cost Management labs [preview features][9], click on "Go to preview portal" and deselect the "Exports (preview)" option. Then proceed to create the two exports.
+To disable it, open the Cost Management labs [preview features][9], click on "Go to preview portal" and deselect the "Exports (preview)" option. Then proceed to create the two exports within the Preview Portal.
 
 5. Choose a storage account, container, and directory for the exports.
     - **Note:** Do not use special characters like `.` in these fields.

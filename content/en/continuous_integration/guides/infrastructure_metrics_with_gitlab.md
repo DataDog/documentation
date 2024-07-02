@@ -1,6 +1,5 @@
 ---
 title: Correlate Infrastructure Metrics with GitLab Jobs in Datadog
-kind: guide
 description: Learn how to correlate infrastructure metrics with your GitLab Autoscale job executions.
 further_reading:
   - link: "/continuous_integration/pipelines/gitlab"
@@ -37,7 +36,7 @@ You can set this up inside the template of your AWS Autoscaling Group. The Datad
 
 For instructions on setting up CI Visibility for your GitLab jobs, see [Set up Pipeline Visibility on a GitLab Pipeline][1]. 
 
-To test that you have performed the setup successfully, you can try running a GitLab pipeline and checking if it appears on the [Pipeline Executions page][8].
+To test that you have performed the setup successfully, you can try running a GitLab pipeline and checking if it appears on the [**Executions** page][8].
 
 You are required to enable the collection of job logs. You can check if Datadog is receiving the logs correctly by clicking on the Logs tab of your pipeline execution.
 

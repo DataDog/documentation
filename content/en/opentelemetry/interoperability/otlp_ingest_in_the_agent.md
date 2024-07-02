@@ -1,6 +1,5 @@
 ---
 title: OTLP Ingestion by the Datadog Agent
-kind: documentation
 aliases:
   - /tracing/setup_overview/open_standards/otlp_ingest_in_the_agent/
   - /tracing/trace_collection/open_standards/otlp_ingest_in_the_agent/
@@ -253,17 +252,6 @@ env:
 
 <div class="alert alert-info">When configuring the endpoint for sending traces, ensure you use the correct path required by your OTLP library. Some libraries expect traces to be sent to the <code>/v1/traces</code> path, while others use the root path <code>/</code>.</div>
 
-## Out-of-the-box dashboards
-
-Datadog provides out-of-the-box dashboards that you can copy and customize. To use Datadog's out-of-the-box OpenTelemetry dashboards:
-
-1. Install the [OpenTelemetry integration][9].
-2. Go to **Dashboards** > **Dashboards list** and search for `opentelemetry`:
-
-   {{< img src="metrics/otel/dashboard.png" alt="The Dashboards list, showing two OpenTelemetry out-of-the-box dashboards: Host Metrics and Collector Metrics." style="width:80%;">}}
-
-The **Host Metrics** dashboard is for data collected from the [host metrics receiver][7]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][8] you choose to enable.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -274,7 +262,4 @@ The **Host Metrics** dashboard is for data collected from the [host metrics rece
 [4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
 [6]: https://github.com/DataDog/datadog-agent/blob/7.35.0/pkg/config/config_template.yaml
-[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
-[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
-[9]: https://app.datadoghq.com/integrations/otel
 [10]: /opentelemetry/runtime_metrics/

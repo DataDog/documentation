@@ -1,6 +1,5 @@
 ---
 title: Using Tags
-kind: documentation
 description: Learn how to use tags in Datadog products.
 aliases:
 - /tagging/using_tags/
@@ -304,7 +303,7 @@ To filter tests by tags, use the search bar or facet checkboxes. The search bar 
 {{% /tab %}}
 {{% tab "Explorer" %}}
 
-The [Synthetic Monitoring & Continuous Testing Explorer][1] displays your test runs and batches of runs in a [CI pipeline][2].
+The [Synthetic Monitoring & Testing Results Explorer][1] displays your test runs and batches of runs in a [CI pipeline][2].
 
 To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:github`. For advanced search, see [Search Test Batches][3].
 

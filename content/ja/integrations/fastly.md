@@ -99,7 +99,7 @@ ServiceID は英数字のコードです。例: <code>5VqE6MOOy1QFJbgmCK41pY</co
 
 
 
-{{< site-region region="us,eu,gov" >}}
+{{< site-region region="us,us5,eu,gov" >}}
 
 Fastly ログを Datadog に転送するように Datadog エンドポイントを構成します。`Datadog` または `Datadog (via Syslog)` エンドポイントを選択できます。Syslog 経由でログをより確実に配信するには、`Datadog` エンドポイントをお勧めします。
 

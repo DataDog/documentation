@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM for Python
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 50
@@ -13,7 +12,7 @@ further_reading:
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-py'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Python Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"

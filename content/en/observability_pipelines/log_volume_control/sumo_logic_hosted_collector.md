@@ -1,6 +1,5 @@
 ---
 title: Log Volume Control for the Sumo Logic Hosted Collector HTTP Logs Source
-kind: document
 disable_toc: false
 ---
 
@@ -12,8 +11,6 @@ This document walks you through the following steps to set up the Observability 
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Sending logs to the Observability Pipelines Worker over Sumo Logic HTTP Source](#send-logs-to-the-observability-pipelines-worker-over-sumo-logic-http-source)
 
-{{< img src="observability_pipelines/use_cases/log_volume_control.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
-
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/sumo_logic %}}
@@ -21,23 +18,14 @@ This document walks you through the following steps to set up the Observability 
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Log Volume Control** use case to create a new pipeline.
+1. Select the **Log Volume Control** template to create a new pipeline.
 1. Select **Sumo Logic** as the source.
-
-### Set up the source
-
-{{% observability_pipelines/source_settings/sumo_logic %}}
 
 ### Set up the destination
 
 Enter the following information based on your selected logs destination.
 
 {{< tabs >}}
-{{% tab "Datadog" %}}
-
-{{% observability_pipelines/destination_settings/datadog %}}
-
-{{% /tab %}}
 {{% tab "Splunk HEC" %}}
 
 {{% observability_pipelines/destination_settings/splunk_hec %}}
@@ -55,8 +43,6 @@ Enter the following information based on your selected logs destination.
 {{% observability_pipelines/processors/intro %}}
 
 {{% observability_pipelines/processors/filter_syntax %}}
-
-{{< img src="observability_pipelines/processors/general_processors.png" alt="The log processors available" width="40%" >}}
 
 {{% observability_pipelines/processors/add_processors %}}
 
@@ -84,6 +70,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Edit fields" %}}
 
 {{% observability_pipelines/processors/remap %}}
+
+{{% /tab %}}
+{{% tab "Sensitive Data Scanner" %}}
+
+{{% observability_pipelines/processors/sensitive_data_scanner %}}
 
 {{% /tab %}}
 {{< /tabs >}}

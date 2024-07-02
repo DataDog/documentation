@@ -69,6 +69,11 @@ Datadog の Amazon Web Services インテグレーションは、[90 以上の A
   * **AWS 組織向けマルチアカウント設定**
     AWS 組織内の複数のアカウントに対して AWS インテグレーションを設定するには、[AWS 組織セットアップガイド][7]を参照してください。
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+  Datadog の US1-FED サイトを使用している場合、このインテグレーションはアクセスキーで構成する必要があります。<a href="https://docs.datadoghq.com/integrations/guide/aws-manual-setup/?tab=accesskeysgovcloudorchinaonly">AWS マニュアルセットアップガイド</a>の手順に従ってください。
+</div>{{% /site-region %}}
+
 ### 手動
 
    * **ロールの委任**  
@@ -81,19 +86,19 @@ Datadog の Amazon Web Services インテグレーションは、[90 以上の A
 
 {{% aws-permissions %}}
 
-## ログの収集
+## 収集データ
 
 AWSサービスログを Datadog に送信する方法はいくつかあります。
 
-- [Kinesis Firehose destination][11]: Kinesis Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信する際は、このアプローチを使用することが推奨されます。
-- [Forwarder Lambda 関数][12]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。また、S3 またはデータを Kinesis に直接ストリーミングできないその他のリソースからログを送信する場合、Datadog ではこのアプローチを使用することをお勧めしています。
+- [Amazon Data Firehose destination][11]: Amazon Data Firehose 配信ストリームで Datadog の宛先を使用して、ログを Datadog に転送します。CloudWatch から非常に大量のログを送信する際は、このアプローチを使用することが推奨されます。
+- [Forwarder Lambda 関数][12]: S3 バケットまたは CloudWatch ロググループにサブスクライブする Datadog Forwarder Lambda 関数をデプロイし、ログを Datadog に転送します。また、S3 またはデータを Amazon Data Firehose に直接ストリーミングできないその他のリソースからログを送信する場合、Datadog ではこのアプローチを使用することをお勧めしています。
 
 ## メトリクスの収集
 
 メトリクスを Datadog に送信する方法は 2 つあります。
 
 - [メトリクスのポーリング][13]: AWS インテグレーションで利用できる API ポーリングです。CloudWatch API をメトリクス別にクロールしてデータを取得し、Datadog に送信します。新しいメトリクスの取得は平均 10 分毎に行われます。
-- [Kinesis Firehose でのメトリクスストリーム][14]: Amazon CloudWatch Metric Streams と Amazon Kinesis Data Firehose を使用してメトリクスを確認します。**注**: このメソッドには 2 - 3 分のレイテンシーがあり、別途設定が必要となります。
+- [Amazon Data Firehose でのメトリクスストリーム][14]: Amazon CloudWatch Metric Streams と Amazon Data Firehose を使用してメトリクスを確認します。**注**: このメソッドには 2 - 3 分のレイテンシーがあり、別途設定が必要となります。
 
 コスト管理のために特定のリソースを除外するオプションについては、[AWS Integration Billing ページ][15]を参照してください。
 
@@ -101,15 +106,21 @@ AWSサービスログを Datadog に送信する方法はいくつかありま�
 
 一部の Datadog 製品は、AWS リソース (S3 バケット、RDS スナップショット、CloudFront ディストリビューションなど) の構成方法に関する情報を活用します。Datadog は、AWS アカウントに対して読み取り専用の API 呼び出しを行うことにより、この情報を収集します。
 
-### Cloud Security Management Misconfigurations
+### AWS セキュリティ監査ポリシー
 
-#### セットアップ
+<a href="https://docs.datadoghq.com/integrations/amazon_web_services/#resource-collection" target="_blank">リソースコレクション</a>を使用するには、AWS の管理する<a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">セキュリティ監査ポリシー</a>を Datadog IAM ロールに関連付けます。
 
-お使いの AWS アカウントで AWS インテグレーションの設定を行っていない場合は、上記の[設定プロセス][16]を完了させます。Cloud Security Management Misconfigurations が有効化されていることを適宜ご確認ください。
+**注**: Datadog IAM ロールに AWS セキュリティ監査ポリシーが関連付けられていない状態でリソース収集を有効にすると、Datadog の AWS インテグレーションタイルに警告メッセージが表示されます。
+
+### Cloud Security Management
+
+#### 計画と使用
+
+お使いの AWS アカウントで AWS インテグレーションの設定を行っていない場合は、上記の[設定プロセス][16]を完了させます。Cloud Security Management が有効化されていることを適宜ご確認ください。
 
 **注:** この機能を使用するには、AWS インテグレーションに**ロールの委任**を設定する必要があります。
 
-既存の AWS インテグレーションに Cloud Security Management Misconfigurations を追加するには、以下の手順でリソース収集を有効にしてください。
+既存の AWS インテグレーションに Cloud Security Management を追加するには、以下の手順でリソース収集を有効にしてください。
 
 1. 自動**または**手動手順で Datadog IAM ロールに必要な権限を提供します。
 
@@ -135,21 +146,21 @@ AWS CloudWatch アラームを Datadog イベントエクスプローラーに�
 - アラームポーリング: アラームポーリングは AWS インテグレーションですぐに使用でき、[DescribeAlarmHistory][19] API を介してメトリクスアラームをフェッチします。この方法に従うと、イベントソース `Amazon Web Services` の下にアラームが分類されます。**注**: クローラーは複合アラームを収集しません。
 - SNS トピック: アラームを SNS トピックにサブスクライブしてから、SNS メッセージを Datadog に転送することで、イベントエクスプローラー内のすべての AWS CloudWatch アラームを確認できます。Datadog でイベントとして SNS メッセージを受信する方法については、[SNS メッセージの受信][20]を参照してください。この方法に従うと、イベントソース `Amazon SNS` の下にアラームが分類されます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_web_services" >}}
 
 
-### イベント
+### ヘルプ
 
 AWS からのイベントは、AWS サービス単位で収集されます。収集されるイベントの詳細については、[お使いの AWS サービスのドキュメント][3]を参照してください。
 
-### タグ
+### Lambda のトレースされた起動の 1 時間単位使用量の取得
 
 AWS インテグレーションにより以下のタグが収集されます。**注**: 一部のタグは、特定のメトリクスにのみ表示されます。
 
-| インテグレーション            | Datadog タグキー                                                                                                                                                                                              |
+| Datadog クリップボード            | Datadog タグキー                                                                                                                                                                                              |
 |------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | All                    | `region`                                                                                                                                                                                                      |
 | [API Gateway][22]      | `apiid`、apiname`、`method`、`resource`、`stage`                                                                                                                                                             |
@@ -192,11 +203,11 @@ AWS インテグレーションにより以下のタグが収集されます。*
 | [VPC][59]              | `nategatewayid`、`vpnid`、`tunnelipaddress`                                                                                                                                                                   |
 | [WorkSpaces][60]       | `directoryid`、`workspaceid`                                                                                                                                                                                  |
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "amazon_web_services" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 AWS インテグレーションに関する問題解決は、[AWS インテグレーションのトラブルシューティングガイド][62]をご参照ください。
 

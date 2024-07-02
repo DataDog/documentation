@@ -1,6 +1,5 @@
 ---
 title: PHP Custom Instrumentation using OpenTelemetry API
-kind: documentation
 description: 'Instrument your PHP application with OpenTelemetry API to send traces to Datadog.'
 code_lang: otel
 type: multi-code-lang
@@ -17,41 +16,103 @@ further_reading:
     text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-{{% otel-custom-instrumentation %}}
+{{% otel-custom-instrumentation-lang %}}
 
-## Requirements and limitations
+## Setup
 
-- Datadog PHP tracing library `dd-trace-php` version 0.94.0 or greater.
+To configure OpenTelemetry to use the Datadog trace provider:
 
-The following OpenTelemetry features implemented in the Datadog library as noted:
+1. Install [OpenTelemetry API packages][13].
+  ```php
+  composer require open-telemetry/sdk
+  ```
+2. Add your desired manual OpenTelemetry instrumentation to your PHP code following the [OpenTelemetry PHP Manual Instrumentation documentation][5]. 
 
-| Feature                                | Support notes                                           |
-|----------------------------------------|---------------------------------------------------------|
-| [OpenTelemetry Context propagation][1] | [W3C Trace Context and Datadog header formats][9] are enabled by default. |
-| [Span limits][2]                       | Unsupported                                             |
-| [Metrics API][7]                       | Unsupported                                             |
-| Trace/span [ID generators][3]          | ID generation is performed by the tracing library, with support for [128-bit trace IDs][12].    |
+3. Install the [Datadog PHP tracing library][6].
 
-## Configuring OpenTelemetry to use the Datadog tracing library
-
-1. Add your desired manual OpenTelemetry instrumentation to your PHP code following the [OpenTelemetry PHP Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
-
-2. Install the [Datadog PHP tracing library][6].
-
-3. Set `DD_TRACE_OTEL_ENABLED` to `true`.
+4. Set `DD_TRACE_OTEL_ENABLED` to `true`.
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.
+
+## Adding span tags
+
+You can add attributes at the exact moment as you are starting the span:
+
+```php
+$span = $tracer->spanBuilder('mySpan')
+    ->setAttribute('key', 'value')
+    ->startSpan();
+```
+
+Or while the span is active:
+
+```php
+$activeSpan = OpenTelemetry\API\Trace\Span::getCurrent();
+
+$activeSpan->setAttribute('key', 'value');
+```
+
+
+## Setting errors on a span
+
+Exception information is captured and attached to a span if one is active when the exception is raised.
+
+```php
+// Create a span
+$span = $tracer->spanBuilder('mySpan')->startSpan();
+
+throw new \Exception('Oops!');
+
+// 'mySpan' will be flagged as erroneous and have 
+// the stack trace and exception message attached as tags
+```
+
+Flagging a trace as erroneous can also be done manually:
+
+```php
+use OpenTelemetry\API\Trace\Span;
+use OpenTelemetry\Context\Context;
+
+// Can only be done after the setup steps, such as initializing the tracer.
+
+try {
+    throw new \Exception('Oops!');
+} catch (\Exception $e) {
+    $rootSpan = Span::fromContext(Context::getRoot());
+    $rootSpan->recordException($e);
+}
+```
+## Adding spans
+
+To add a span:
+
+```php
+// Get a tracer or use an existing one
+$tracerProvider = \OpenTelemetry\API\Globals::tracerProvider();
+$tracer = $tracerProvider->getTracer('datadog')
+
+// Create a span
+$span = $tracer->spanBuilder('mySpan')->startSpan();
+
+// ... do stuff
+
+// Close the span
+$span->end();
+
+```
+
+## Accessing active spans
+
+To access the currently active span:
+
+```php
+$span = OpenTelemetry\API\Trace\Span::getCurrent();
+```
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://opentelemetry.io/docs/instrumentation/php/propagation/
-[2]: https://opentelemetry.io/docs/specs/otel/trace/sdk/#span-limits
-[3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
-[4]: /tracing/trace_collection/trace_context_propagation/php/
 [5]: https://opentelemetry.io/docs/instrumentation/php/manual/
 [6]: /tracing/trace_collection/dd_libraries/php#getting-started
-[7]: https://opentelemetry.io/docs/specs/otel/metrics/
-[9]: /tracing/trace_collection/trace_context_propagation/php/
-[12]: /opentelemetry/guide/otel_api_tracing_interoperability/
+[13]: https://opentelemetry.io/docs/languages/php/instrumentation/#instrumentation-setup

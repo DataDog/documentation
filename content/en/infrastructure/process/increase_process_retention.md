@@ -1,6 +1,5 @@
 ---
 title: Increase Process Retention
-kind: documentation
 aliases:
     - /infrastructure/process/generate_process_metrics/
     - /processes/processing/process_to_metrics/
@@ -31,9 +30,7 @@ While Live Processes data is stored for 36 hours, you can generate global and pe
 
 ## Generate a process-based metric
 
-You can generate a new process-based metric directly from queries in the Live Processes page, or in the _[Increase Retention][1]_ tab, by selecting the **Create Metric** button.
-
-{{< img src="infrastructure/process/process2metrics_create_LP_2.png" alt="Generate process-based metrics" style="width:80%;">}}
+You can generate a new process-based metric directly from queries in the [**Live Processes** page][2], or in the [**Manage Metrics** tab][1], by clicking **+ New Metric**.
 
 ### Add a new process-based metric
 

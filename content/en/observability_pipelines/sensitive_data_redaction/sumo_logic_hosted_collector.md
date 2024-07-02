@@ -1,6 +1,5 @@
 ---
 title: Sensitive Data Redaction for the Sumo Logic Hosted Collector HTTP Logs Source
-kind: document
 disable_toc: false
 ---
 
@@ -26,7 +25,7 @@ This document walks you through the following steps:
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Sensitive Data Redaction** use case to create a new pipeline.
+1. Select the **Sensitive Data Redaction** template to create a new pipeline.
 1. Select **Sumo Logic** as the source.
 
 ### Set up the source
@@ -61,9 +60,7 @@ Enter the following information based on your selected logs destination.
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
-{{< img src="observability_pipelines/processors/sdr_processors.png" alt="The log processors available" width="40%" >}}
-
-{{% observability_pipelines/processors/add_processors %}}
+{{% observability_pipelines/processors/add_processors_sds %}}
 
 {{< tabs >}}
 {{% tab "Filter" %}}

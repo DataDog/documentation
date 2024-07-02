@@ -49,8 +49,8 @@ AWS WAF は、一般的な Web エクスプロイトから Web アプリケー�
 
 Web Application Firewall 監査ログを有効にして、Web ACL で分析されたトラフィックに関する詳細情報を取得します。
 
-1. `aws-waf-logs-` で始まる名前で `Amazon Kinesis Data Firehose` を作成します。
-2. `Amazon Kinesis Data Firehose` の送信先として `Amazon S3` を選択し、プレフィックスとして `waf` を追加します。
+1. `aws-waf-logs-` から始まる名前で `Amazon Data Firehose` を作成します。
+2. `Amazon Data Firehose` の送信先で `Amazon S3` を選択し、`waf` をプレフィックスとして必ず追加してください。
 3. 必要な Web ACL を選択し、そのログを新しく作成した Firehose に送信します ([詳細な手順はこちら][4])。
 
 WAF ログが収集され、S3 バケットに送信されます。

@@ -3,7 +3,6 @@ aliases:
 - /fr/serverless/serverless_integrations/plugin
 dependencies:
 - https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md
-kind: documentation
 title: Plug-in Serverless Framework Datadog
 ---
 ![build](https://github.com/DataDog/serverless-plugin-datadog/workflows/build/badge.svg)

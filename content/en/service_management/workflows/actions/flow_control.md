@@ -1,6 +1,5 @@
 ---
 title: Workflow Logic
-kind: documentation
 disable_toc: false
 type: workflows
 is_beta: false
@@ -47,7 +46,7 @@ To configure a **For each** iteration:
 1. To select an inner action to repeat, drag an existing step from your canvas into the **For each** step, or click the plus (**+**) icon inside the **For each** step and make a selection from the action catalog.
 1. Click the **For each** step and enter an **Input list** for the step to iterate over.
 1. Toggle **Continue on error** if you want the action to continue down the list of remaining values when an error is encountered.
-1. Configure the inner action. To access the current value in the input list, use the `{{Current.value}}` variable. To access the index of the current value, use `{{Current.index}}`.
+1. Configure the inner action. To access the current value in the input list, use the `{{Current.Value}}` variable. To access the index of the current value, use `{{Current.Index}}`.
 1. **Save** and **Run** the action.
 
 When a run completes, the workflow enters **Debug** mode. Select the For each step to see:
@@ -57,9 +56,13 @@ When a run completes, the workflow enters **Debug** mode. Select the For each st
 You can delete the inner step by:
 - Clicking the inner step and selecting **Delete**
 - Clicking the For each step and selecting **Clear**
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][3].
+
 [1]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
 [2]: https://app.datadoghq.com/workflow/action-catalog#logic//com.datadoghq.core.if
+[3]: https://datadoghq.slack.com/

@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Software Composition Analysis
-kind: documentation
 aliases:
 - /getting_started/application_security/vulnerability_management
 further_reading:
@@ -22,6 +21,9 @@ further_reading:
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
+- link: "https://www.datadoghq.com/blog/sca-supply-chain-security/"
+  tag: "Blog"
+  text: "Beyond vulnerabilities, towards a holistic approach to securing the software supply chain"
 ---
 
 
@@ -90,7 +92,7 @@ This guide walks you through best practices for getting your team up and running
       |   `7.0 – 8.9`   | High                |
       |   `9.0 – 10.0`  | Critical            |
 
-4. Optionally, download the Software Bill of Materials (SBOM) for your service. While viewing the details of a vulnerability, click on [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the SBOM under the [libraries tab][8]. 
+4. Optionally, download the library inventory (list of libraries and versions in CycloneDX format) for your service. While viewing the details of a vulnerability, click on [View in Service Catalog][6]. From here you can navigate to the [Security view][7] of your service, and download the library inventory under the [libraries tab][8]. 
 
 ## Phase 3: Remediate
 1. **Prioritize Response and Remediate**: While on the [Vulnerability Explorer][5], take action:

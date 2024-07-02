@@ -10,7 +10,6 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: 설명서
   text: 트러블슈팅
-kind: 설명서
 title: 쿼리 샘플 탐색
 ---
 

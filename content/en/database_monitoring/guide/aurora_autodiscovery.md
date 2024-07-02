@@ -15,9 +15,7 @@ Supported databases
 : Postgres, MySQL
 
 Supported Agent versions
-: 7.53.0+ (beta)
-
-To use this feature, you must install the beta version of the Agent. See the [Install Datadog Agent 7.53.0+](#install-datadog-agent-7530) section on this page.
+: 7.53.0+
 
 ## Overview
 
@@ -27,26 +25,10 @@ With Autodiscovery and Database Monitoring, you can define configuration templat
 
 ## Enabling Autodiscovery for Aurora clusters
 
-1. [Install Datadog Agent 7.53.0+](#install-datadog-agent-7530)
-2. [Grant AWS permissions](#grant-aws-permissions)
-3. [Configure Aurora tags](#configure-aurora-tags)
-4. [Configure the Datadog Agent](#configure-the-datadog-agent)
-5. [Create a configuration template](#create-a-configuration-template)
-
-### Install Datadog Agent 7.53.0+
-
-To use this feature, you need to install a [beta version][9] of the Agent.
-
-You can use the Agent installation script to install the correct version by running the following command:
-
-```bash
-DD_API_KEY=<API_KEY> DD_SITE="{{< region-param key="dd_site" code="true" >}}" \
-DD_AGENT_DIST_CHANNEL=beta DD_AGENT_MAJOR_VERSION=7 \
-DD_AGENT_MINOR_VERSION=52.0~dbm~aurora~autodiscovery~beta~0.3-1 \
-bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
-```
-
-For more information on installing the Datadog Agent, see [Basic Agent Usage for Amazon Linux][10].
+1. [Grant AWS permissions](#grant-aws-permissions)
+2. [Configure Aurora tags](#configure-aurora-tags)
+3. [Configure the Datadog Agent](#configure-the-datadog-agent)
+4. [Create a configuration template](#create-a-configuration-template)
 
 ### Grant AWS permissions
 

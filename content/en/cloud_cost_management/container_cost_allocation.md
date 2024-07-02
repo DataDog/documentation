@@ -1,6 +1,5 @@
 ---
 title: Container Cost Allocation
-kind: documentation
 private: true
 description: Learn how to allocate Cloud Cost Management spending across your organization with Container Cost Allocation.
 further_reading:
@@ -10,7 +9,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< jqmath-vanilla >}}
@@ -56,8 +55,6 @@ The following table presents the list of collected features and the minimal Agen
 
 {{% /tab %}}
 {{% tab "Azure" %}}
-
-<div class="alert alert-warning">Container Cost Allocation for Azure is in beta.</div>
 
 CCM allocates costs of all Kubernetes clusters, including those managed through Azure Kubernetes Service (AKS).
 
@@ -138,8 +135,6 @@ ECS tasks that run on Fargate are already fully allocated [in the CUR][103]. CCM
 
 {{% /tab %}}
 {{% tab "Azure" %}}
-
-<div class="alert alert-warning">Container Cost Allocation for Azure is in beta.</div>
 
 ### Compute
 
@@ -225,8 +220,6 @@ The cost of an AWS EBS volume has three components: IOPS, throughput, and storag
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-<div class="alert alert-warning">Container Cost Allocation for Azure is in beta.</div>
-
 ### Compute
 
 The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
@@ -289,8 +282,6 @@ When the prerequisites are met, the following cost metrics automatically appear.
 
 {{% /tab %}}
 {{% tab "Azure" %}}
-
-<div class="alert alert-warning">Container Cost Allocation for Azure is in beta.</div>
 
 | Cost Metric                    | Description    |
 | ---                                | ----------- |
@@ -359,8 +350,6 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 
 {{% /tab %}}
 {{% tab "Azure" %}}
-
-<div class="alert alert-warning">Container Cost Allocation for Azure is in beta.</div>
 
 ### Kubernetes
 

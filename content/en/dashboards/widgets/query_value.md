@@ -1,6 +1,5 @@
 ---
 title: Query Value Widget
-kind: documentation
 widget_type: query_value
 description: "Display an aggregated value for a given metric query"
 aliases:

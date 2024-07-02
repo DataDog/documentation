@@ -1,6 +1,5 @@
 ---
 title: Set up Tracing on a GitLab Pipeline
-kind: documentation
 aliases:
   - /continuous_integration/setup_pipelines/gitlab
 further_reading:
@@ -9,7 +8,7 @@ further_reading:
       text: "Explore Pipeline Execution Results and Performance"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
     - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
       text: "Extend Pipeline Visibility by adding custom tags and measures"
@@ -19,32 +18,33 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## Compatibility
+## Overview
 
-- **Supported GitLab versions**:
-  - GitLab.com (SaaS)
-  - GitLab >= 14.1 (self-hosted)
-  - GitLab >= 13.7.0 (self-hosted) by enabling the `datadog_ci_integration` feature flag
+[GitLab][19] is a DevOps platform that automates the software development lifecycle with integrated CI/CD features, enabling you to deploy applications quickly and securely.
 
-- **Running pipelines**: View pipeline executions that are running
+Set up tracing in GitLab to collect data on your pipeline executions, analyze performance bottlenecks, troubleshoot operational issues, and optimize your deployment workflows.
 
-- **Partial pipelines**: View [partially retried][11] and downstream pipeline executions
+### Compatibility
 
-- **Manual steps**: View manually triggered pipelines
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][20] | Partial pipelines | View partially retried pipeline executions. |
+| [Manual steps][21] | Manual steps | View manually triggered pipelines. |
+| [Queue time][22] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job log collection][12]. |
+| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][14] for self-hosted GitLab runners. |
+| Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][10] to all generated pipeline, stages, and job spans. |
+| [Custom tags][15] [and measures at runtime][16] | Custom tags and measures at runtime | Configure [custom tags and measures][13] at runtime. |
+| Parameters | Parameters | Set custom `env` or `service` parameters when a pipeline is triggered. |
+| [Pipeline failure reasons][11] | Pipeline failure reasons | Identify pipeline failure reasons from [error messages][15]. |
+| [Approval wait time][23] | Approval wait time  | View the amount of time jobs and pipelines wait for manual approvals. |
+| [Execution time][24] | Execution time  | View the amount of time pipelines have been running jobs. Gitlab refers to this metric as `duration`. Duration in Gitlab and execution time may show different values. Gitlab does not take into consideration jobs that failed due to certain kinds of failures (such as runner system failures). |
 
-- **Queue time**: View amount of time pipeline jobs wait in the queue before processing
+The following GitLab versions are supported:
 
-- **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][12]
-
-- **Infrastructure metric correlation**: Correlate pipelines to [infrastructure host metrics][14] for self-hosted GitLab runners
-
-- **Custom pre-defined tags**: Configure [custom tags][10] to all generated pipeline, stages, and job spans
-
-- **Custom tags and measures at runtime**: Configure [custom tags][13] and measures at runtime
-
-- **Parameters**: Set custom `env` or `service` parameters
-
-- **Pipeline failure reasons**: Identify pipeline failure reasons from [error messages][15]
+- GitLab.com (SaaS)
+- GitLab >= 14.1 (self-hosted)
+- GitLab >= 13.7.0 (self-hosted) with the `datadog_ci_integration` feature flag enabled
 
 ## Configure the Datadog integration
 
@@ -163,13 +163,13 @@ To display and filter the teams associated with your pipelines, add `team:<your-
 
 ## Visualize pipeline data in Datadog
 
-After the integration is successfully configured, the [Pipelines][4] and [Pipeline Executions][5] pages populate with data after the pipelines finish.
+Once the integration is successfully configured, the [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
 
-**Note**: The Pipelines page shows data for only the default branch of each repository.
+The Pipelines page shows data for only the default branch of each repository.
 
 ### Partial and downstream pipelines
 
-In the **Pipeline Executions** page, you can use the filters below in the search bar:
+On the **Executions** page, you can use the filters below in the search bar:
 
 `Downstream Pipeline`
 : Possible values: `true`, `false`
@@ -178,12 +178,12 @@ In the **Pipeline Executions** page, you can use the filters below in the search
 : Possible values: `true`, `false`
 
 `Partial Pipeline`
-: Possible values: `retry`, `paused`, `resumed`
+: Possible values: `retry`
 
 {{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
 
 These filters can also be applied through the facet panel on the left hand side of the page.
-{{< img src="ci/partial_retries_facet_panel.png" alt="The facet panel with Partial Pipeline facet expanded and the value Retry selected, the Partial Retry facet expanded and the value true selected" style="width:40%;">}}
+{{< img src="ci/partial_retries_facet_panel_without_paused.png" alt="The facet panel with Partial Pipeline facet expanded and the value Retry selected, the Partial Retry facet expanded and the value true selected" style="width:40%;">}}
 
 
 ### Correlate infrastructure metrics to jobs
@@ -300,6 +300,7 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 {{% /tab %}}
 {{< /tabs >}}
 
+<div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for GitLab jobs can be identified by the <code>datadog.product:cipipeline</code> and <code>source:gitlab</code> tags.</div>
 
 ## Further reading
 
@@ -323,3 +324,9 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 [16]: /account_management/teams/
 [17]: /logs/log_configuration/processors/
 [18]: /continuous_integration/guides/infrastructure_metrics_with_gitlab
+[19]: https://about.gitlab.com/
+[20]: /glossary/#partial-retry
+[21]: /glossary/#manual-step
+[22]: /glossary/#queue-time
+[23]: /glossary/#approval-wait-time
+[24]: /glossary/#pipeline-execution-time

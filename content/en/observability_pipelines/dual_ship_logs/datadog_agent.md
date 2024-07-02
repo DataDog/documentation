@@ -1,6 +1,5 @@
 ---
 title: Dual Ship Logs for the Datadog Agent
-kind: document
 disable_toc: false
 ---
 
@@ -22,7 +21,7 @@ This document walks you through the following steps:
 ## Set up Observability Pipelines
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the **Dual Ship** use case to create a new pipeline.
+1. Select the **Dual Ship** template to create a new pipeline.
 1. Select **Datadog Agent** as the source.
 
 ### Set up the source
@@ -57,8 +56,6 @@ Enter the following information based on your selected logs destination.
 
 {{% observability_pipelines/processors/filter_syntax %}}
 
-{{< img src="observability_pipelines/processors/general_processors.png" alt="The log processors available" width="40%" >}}
-
 {{% observability_pipelines/processors/add_processors %}}
 {{< tabs >}}
 {{% tab "Filter" %}}
@@ -84,6 +81,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Edit fields" %}}
 
 {{% observability_pipelines/processors/remap %}}
+
+{{% /tab %}}
+{{% tab "Sensitive Data Scanner" %}}
+
+{{% observability_pipelines/processors/sensitive_data_scanner %}}
 
 {{% /tab %}}
 {{< /tabs >}}

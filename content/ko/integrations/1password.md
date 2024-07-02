@@ -21,8 +21,7 @@ categories:
 - 로그 수집
 - 이벤트 관리
 - 문제 추적
-- 모니터링
-- 보안
+- security
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -31,7 +30,7 @@ integration_id: onepassword
 integration_title: 1Password
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: 통합
 manifest_version: 2.0.0
 name: 1password
 public_title: 1Password
@@ -43,8 +42,7 @@ tile:
   - Category::Log Collection
   - 카테고리::이벤트 관리
   - 카테고리::이슈 추적
-  - 카테고리::모니터링
-  - 카테고리::보안
+  - Category::Security
   - 제출한 데이터 유형::로그
   - 제공::통합
   configuration: README.md#Setup

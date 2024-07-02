@@ -21,11 +21,9 @@ title: 로그 설정
 
 ## 개요
 
-Datadog의 제한없는 로그 수집* 기능으로 로그 수집과 인덱싱을 분리합니다. 인덱싱 및 보관할 로그를 선택하거나 [**로그 > 설정**][1]의 로그 설정 페이지에서 설정 및 컨트롤을 최상위 수준으로 관리, 보관, 기록합니다.
+제한 없는 Datadog 로깅*은 로그 수집과 인덱싱을 분리합니다. [**로그 > 파이프라인**][1]의 로그 설정 페이지에서 최상위 수준에서 색인을 생성하고 보존하거나 보관하고 설정 및 제어를 관리할 로그를 선택합니다.
 
 **참고**: PCI 준수 Datadog 조직을 설정하는 방법에 대한 자세한 내용을 확인하려면 [PCI DSS 준수][2]를 참조하세요.
-
-{{< img src="logs/log_configuration_overview1.mp4" alt="Datadog 앱의 로그 설정 섹션" video=true >}}
 
 ## 설정 옵션
 
@@ -46,7 +44,7 @@ Datadog의 제한없는 로그 수집* 기능으로 로그 수집과 인덱싱�
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-*제한 없는 로그 수집(Logging without Limits)은 Datadog, Inc.의 상표입니다.
+*제한없는 로그 수집(Logging without Limits)은 Datadog, Inc.의 상표입니다.
 
 [1]: https://app.datadoghq.com/logs/pipelines
 [2]: /ko/data_security/pci_compliance/

@@ -96,6 +96,34 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
+  "CreateCSMThreatsAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
+    }
+  ],
+  "CreateCloudWorkloadSecurityAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
+  "UpdateCSMThreatsAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
+    }
+  ],
+  "UpdateCloudWorkloadSecurityAgentRule": [
+    {
+      "group": "csm_threats",
+      "suffix": "",
+      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
+    }
+  ],
   "ArchiveCase": [
     {
       "group": "case_management",
@@ -171,34 +199,6 @@
       "group": "cloud_cost_management",
       "suffix": "",
       "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
-    }
-  ],
-  "CreateCSMThreatsAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Create a CSM Threats Agent rule returns \"OK\" response"
-    }
-  ],
-  "CreateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Create a Cloud Workload Security Agent rule returns \"OK\" response"
-    }
-  ],
-  "UpdateCSMThreatsAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Update a CSM Threats Agent rule returns \"OK\" response"
-    }
-  ],
-  "UpdateCloudWorkloadSecurityAgentRule": [
-    {
-      "group": "cloud_workload_security",
-      "suffix": "",
-      "description": "Update a Cloud Workload Security Agent rule returns \"OK\" response"
     }
   ],
   "CreateCloudflareAccount": [
@@ -687,6 +687,13 @@
       "description": "Update a single service object returns \"OK\" response"
     }
   ],
+  "UpdateOrgConfig": [
+    {
+      "group": "organizations",
+      "suffix": "",
+      "description": "Update a specific Org Config returns \"OK\" response"
+    }
+  ],
   "CreatePowerpack": [
     {
       "group": "powerpack",
@@ -758,8 +765,8 @@
   "CreateRole": [
     {
       "group": "roles",
-      "suffix": "",
-      "description": "Create role returns \"OK\" response"
+      "suffix": "_3862893229",
+      "description": "Create role with a permission returns \"OK\" response"
     }
   ],
   "AddPermissionToRole": [
@@ -781,13 +788,6 @@
       "group": "roles",
       "suffix": "",
       "description": "Revoke permission returns \"OK\" response"
-    }
-  ],
-  "UpdateRole": [
-    {
-      "group": "roles",
-      "suffix": "",
-      "description": "Update a role returns \"OK\" response"
     }
   ],
   "EditSecurityMonitoringSignalIncidents": [
@@ -874,6 +874,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Mute or unmute a batch of findings returns \"OK\" response"
+    }
+  ],
+  "TestSecurityMonitoringRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Test a rule returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [

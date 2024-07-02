@@ -20,7 +20,6 @@ further_reading:
 - link: /agent/kubernetes/tag/
   tag: ドキュメント
   text: コンテナから送信された全データにタグを割り当て
-kind: documentation
 title: Kubernetes インテグレーションオートディスカバリー
 ---
 
@@ -454,7 +453,7 @@ spec:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: redis-config-map
+  name: redisdb-config-map
   namespace: default
 data:
   redisdb-config: |-

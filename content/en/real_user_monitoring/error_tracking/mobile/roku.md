@@ -1,6 +1,5 @@
 ---
 title: Roku Crash Reporting and Error Tracking
-kind: documentation
 description: Set up Error Tracking for your Roku channels.
 aliases:
 - /real_user_monitoring/error_tracking/roku
@@ -9,7 +8,7 @@ code_lang: roku
 code_lang_weight: 50
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
-  tag: 'Error Tracking'
+  tag: 'Documentation'
   text: 'Get started with Error Tracking'
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
@@ -40,7 +39,28 @@ If you have not set up the Roku SDK yet, follow the [in-app setup instructions][
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
-## Forward errors to Datadog
+## Limitations
+
+Crash reporting on Roku doesn't yet support stacktraces. 
+
+## Test your implementation
+
+To verify your Roku Crash Reporting and Error Tracking configuration, you need to trigger a crash in your RUM application and confirm that the error appears in Datadog.
+
+To test your implementation:
+
+1. Run your application on an Roku device.
+2. Execute some code containing a crash. For example:
+
+   ```brightscript
+   sub explodingMethod()
+       x = 1
+       print x.foo
+   ```
+
+3. After the crash happens, restart your application and wait for the Roku SDK to upload the crash report in [**Error Tracking**][1].
+
+### Forward errors to Datadog
 
 Whenever you perform an operation that might throw an exception, you can forward the error to Datadog by adding the following code snippet:
 

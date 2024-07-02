@@ -1,16 +1,11 @@
 ---
 title: SNMP Traps
-kind: documentation
 description: "Enable listening for SNMP Traps."
 further_reading:
   - link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
     tag: "Blog"
     text: "Monitor and diagnose network performance issues with SNMP Traps"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 ## Overview
 
@@ -52,11 +47,9 @@ network_devices:
       privProtocol: "AES" # choices: DES, AES (128 bits), AES192, AES192C, AES256, AES256C
 ```
 
-**Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
-
 ## Device namespaces
 
-As in [Network Device Monitoring][3], namespaces can be used as tags to differentiate between multiple network devices that may share the same private IP. For example, consider a case of two routers: one in New York and one in Paris, which share the same private IP. There should be one Agent in the New York data center and another in the Paris data center. You may wish to tag these with `namespace: nyc` and `namespace: paris`, respectively.
+As in [Network Device Monitoring][2], namespaces can be used as tags to differentiate between multiple network devices that may share the same private IP. For example, consider a case of two routers: one in New York and one in Paris, which share the same private IP. There should be one Agent in the New York data center and another in the Paris data center. You may wish to tag these with `namespace: nyc` and `namespace: paris`, respectively.
 
 The namespace can then be used to uniquely pivot from an SNMP Trap to the emitter device, or from the emitter device to an SNMP Trap. 
 
@@ -119,14 +112,14 @@ vars:
 
 To extend the capabilities of the Agent, create your own mappings and place them in the `$<PATH_TO_AGENT_CONF.D>/snmp.d/traps_db/` directory.
 
-You can write these mappings by hand, or generate mappings from a list of MIBs using Datadog's developer toolkit, [`ddev`][4].
+You can write these mappings by hand, or generate mappings from a list of MIBs using Datadog's developer toolkit, [`ddev`][3].
 
 #### Generate a TrapsDB file from a list of MIBs
 
 **Prerequisites**:
 - Python 3
-- [`ddev`][4] (`pip3 install "datadog-checks-dev[cli]"`)
-- [`pysmi`][5] (`pip3 install pysmi`)
+- [`ddev`][3] (`pip3 install "datadog-checks-dev[cli]"`)
+- [`pysmi`][4] (`pip3 install pysmi`)
 
 Put all your MIBs into a dedicated folder. Then, run:
 `ddev meta snmp generate-traps-db -o ./output_dir/ /path/to/my/mib1 /path/to/my/mib2 /path/to/my/mib3 ...`
@@ -139,7 +132,6 @@ If there are errors due to missing dependencies and you have access to the missi
 
 
 [1]: /monitors/
-[2]: /help/
-[3]: /network_monitoring/devices
-[4]: /developers/integrations/python
-[5]: https://pypi.org/project/pysmi/
+[2]: /network_monitoring/devices
+[3]: /developers/integrations/python
+[4]: https://pypi.org/project/pysmi/

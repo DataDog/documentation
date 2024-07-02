@@ -4,14 +4,8 @@ further_reading:
 - link: /integrations/mysql/
   tag: ドキュメント
   text: 基本的な MySQL インテグレーション
-kind: documentation
 title: Google Cloud SQL マネージド MySQL のデータベースモニタリングの設定
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
-
 
 データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、説明プラン、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
 
@@ -31,7 +25,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 7.36.1+
 
 パフォーマンスへの影響
-: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。
+: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。<br/><br/>
 データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
 プロキシ、ロードバランサー、コネクションプーラー
@@ -49,7 +43,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 {{% tab "MySQL 5.6" %}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][1]を有効にします。 |
+| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][9]を有効にします。 |
 | `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
 
@@ -59,7 +53,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 {{% tab "MySQL ≥ 5.7" %}}
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][1]を有効にします。 |
+| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][9]を有効にします。 |
 | `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
 | <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
 | <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
@@ -178,7 +172,7 @@ Cloud SQL ホストを監視するには、インフラストラクチャーに 
 
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 ホストで実行されている Agent に対してこのチェックを設定するには (Agent が Google Cloud SQL データベースから収集するように小さな GCE インスタンスをプロビジョニングする場合など)
 
@@ -217,7 +211,7 @@ instances:
 
 Google Cloud Run などの Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
-**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットに対する読み取り権限が与えられている必要があります。
+**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットの読み取り権限が必要です。
 
 ### コマンドライン
 
@@ -247,7 +241,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 ### Dockerfile
 
-`Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーのコンフィギュレーションを変更することなく、カスタム Agent を構築・デプロイすることができます。
+`Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーの構成を変更することなく、カスタム Agent を構築・デプロイすることができます。
 
 ```Dockerfile
 FROM gcr.io/datadoghq/agent:7.36.1
@@ -318,7 +312,7 @@ instances:
 
 ### Kubernetes サービスアノテーションで構成する
 
-ファイルをマウントせずに、インスタンスのコンフィギュレーションを Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
+ファイルをマウントせずに、インスタンスの構成を Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
 
 ```yaml
 apiVersion: v1
@@ -357,7 +351,7 @@ spec:
 
 Cluster Agent は自動的にこのコンフィギュレーションを登録し、MySQL チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
@@ -367,7 +361,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 {{< /tabs >}}
 
-### 検証
+### UpdateAzureIntegration
 
 [Agent の status サブコマンドを実行][5]し、Checks セクションで `mysql` を探します。または、[データベース][6]のページを参照してください。
 
@@ -388,7 +382,7 @@ Google Cloud からより包括的なデータベースメトリクスを収集�
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
+[1]: /ja/database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://cloud.google.com/sql/docs/mysql/flags
 [4]: https://app.datadoghq.com/account/settings/agent/latest
@@ -396,3 +390,4 @@ Google Cloud からより包括的なデータベースメトリクスを収集�
 [6]: https://app.datadoghq.com/databases
 [7]: /ja/integrations/google_cloudsql
 [8]: /ja/database_monitoring/troubleshooting/?tab=mysql
+[9]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema

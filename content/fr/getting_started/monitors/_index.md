@@ -17,7 +17,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Validation des bases
   text: Participer à une session interactive sur la création de monitors efficaces
-kind: documentation
 title: Débuter avec les monitors
 ---
 
@@ -41,29 +40,31 @@ Pour vérifier que l'Agent Datadog est en cours d'exécution, vérifiez que la [
 
 ## Créer un monitor
 
-Pour créer un monitor, accédez à **[Monitors > New Monitor > Metric][5]**.
+Pour créer un monitor, accédez à **[Monitors > New Monitor][5]** et sélectionnez **Metric**.
 
 ## Configurer un monitor
 
 La configuration d'un monitor vous permet de définir ce qui suit :
-- **Méthode de détection** : comment sont mesurées les données sous-jacentes aux alertes ? Souhaitez-vous être informé lorsqu'une valeur de métrique dépasse un seuil, lorsque l'évolution de sa valeur dépasse un seuil ou encore lorsqu'une valeur anormale est détectée ?
+
+- **Choisir la méthode de détection** : comment mesurez-vous ce qui fera l'objet d'une alerte ? Vous préoccupez-vous du fait que la valeur dʼune métrique lui fasse franchir un seuil ? Que le changement dʼune valeur entraîne le franchissement dʼun seuil ? De la présence dʼune valeur anormale, ou d'autre chose ?
 - **Définition de la métrique** : quelle est la valeur surveillée pour les alertes ? S'agit-il de l'espace disque disponible de votre système, ou encore du nombre d'erreurs de connexion détectées ?
-- **Conditions d'alerte** : sur quels critères faut-il prévenir un ingénieur ?
-- **Notification** : quelles sont les informations qui doivent être incluses dans l'alerte ?
+- **Définir les conditions d'alerte** : quʼest-ce qui justifie de réveiller un ingénieur ? 
+- **Configurer les notifications et les automatisations** : quelles informations doivent figurer dans l'alerte ?
+- **Définir les permissions et les notifications dʼaudit** : qui a accès à ces alertes, et qui doit être notifié si l'alerte est modifiée ?
 
 ### Choisir la méthode de détection
 
-Lorsque vous créez un monitor de métrique, la méthode de détection **Threshold Alert** est sélectionnée par défaut. Une alerte de seuil compare les valeurs d'une métrique aux seuils que vous avez définis. Ce monitor a pour objectif d'envoyer une alerte en fonction d'un seuil statique : aucune modification n'est donc nécessaire.
+Lorsque vous créez un monitor de métrique, la méthode de détection **Threshold Alert** est sélectionnée par défaut. Une alerte de seuil compare les valeurs d'une métrique avec les seuils que vous avez définis. Ce monitor a pour objectif d'envoyer une alerte en fonction d'un seuil statique : aucune modification n'est donc nécessaire.
 
 ### Définir la métrique
 
 Pour recevoir une alerte en cas d'espace disque faible, utilisez la métrique `system.disk.in_use` de l'[intégration Disk][6] et calculez la moyenne par `host` et par `device` :
 
-{{< img src="getting_started/monitors/define_the_metric.png" alt="Définir la métrique pour system.disk.in_use avec l'agrégation avg en fonction du host et de l'appareil" >}}
+{{< img src="getting_started/monitors/monitor_query.png" alt="Définir la métrique pour system.disk.in_use avg par hôte et par appareil" style="width:100%" >}}
 
-### Définir des conditions d'alerte
+### Définir vos conditions d'alerte
 
-Selon la [documentation relative à l'intégration Disk][6], `system.disk.in_use` correspond à *la quantité proportionnelle d'espace disque utilisé par rapport au total*. Ainsi, lorsque la métrique envoie une valeur de `0.7`, l'appareil occupe 70 % de l'espace disque.
+Selon la [documentation relative à l'intégration Disk][6], `system.disk.in_use` est *la quantité d'espace disque utilisé sous forme de pourcentage du total*. De ce fait, lorsque la métrique envoie une valeur de `0.7`, l'appareil est plein à 70 %.
 
 Pour recevoir une alerte en cas d'espace disque faible, le monitor doit se déclencher lorsque la valeur de la métrique est `above` (supérieure à) la valeur seuil. Vous êtes libre de définir la valeur seuil que vous souhaitez. Pour cette métrique, les valeurs comprises entre `0` et `1` sont appropriées :
 
@@ -73,11 +74,13 @@ Alert threshold: > 0.9
 Warning threshold: > 0.8
 ```
 
-Pour cet exemple, laissez tels quels les autres paramètres de cette section. Pour en savoir plus, consultez la documentation relative aux [monitors de métrique][7].
+Pour cet exemple, laissez les autres paramètres par défaut tels quels. Pour en savoir plus, consultez la documentation relative aux [monitors de métrique][7].
 
-### Notification
+{{< img src="getting_started/monitors/monitor_alerting_conditions.png" alt="Définir les seuils dʼalerte et dʼavertissement pour que le monitor déclenche des alertes" style="width:80%" >}}
 
-Lorsque ce monitor déclenche une alerte, un message de notification est envoyé. Ce message peut contenir des valeurs conditionnelles, des instructions de résolution ou un résumé de l'alerte. Une notification doit impérativement comporter un titre et un message.
+### Notifications et automatisations
+
+Lorsque ce monitor déclenche une alerte, un message de notification est envoyé. Dans ce message, vous pouvez inclure des valeurs conditionnelles, des instructions pour la résolution ou un résumé de l'alerte. Un message de notification doit comporter au moins un titre et un message.
 
 #### Titre
 
@@ -88,36 +91,38 @@ Disk space is low on {{device.name}} / {{host.name}}
 
 #### Message
 
-Le message permet d'indiquer à votre équipe comment résoudre le problème. Exemple :
+Utilisez le message pour indiquer à votre équipe comment résoudre le problème, par exemple :
 ```text
 Étapes à suivre pour libérer de l'espace disque :
-1. Supprimer les packages non utilisés
+1. Supprimer les paquets non utilisés
 2. Vider le cache APT
 3. Désinstaller les applications superflues
 4. Supprimer les fichiers en double
 ```
 
-Pour ajouter des messages conditionnels reposant sur les seuils d'alerte et d'avertissement, consultez les [variables de notification][8] qui peuvent être incluses dans votre message.
+Pour ajouter des messages conditionnels basés sur des seuils d'alerte ou d'avertissement, consultez les [variables de notification][8] disponibles que vous pouvez inclure dans votre message.
 
-#### Prévenir vos services et membres d'équipe
+#### Informer vos services et les membres de votre équipe
 
-Envoyez des notifications à votre équipe par e-mail, via Slack, par l'intermédiaire de PagerDuty, etc. La liste déroulante vous permet de rechercher des membres d'équipe et des comptes connectés. Lorsqu'une `@notification` est ajoutée dans cette zone, celle-ci est automatiquement ajoutée au message :
+Envoyez des notifications à votre équipe par e-mail, Slack, PagerDuty, etc. Vous pouvez rechercher des membres de l'équipe et des comptes connectés à l'aide de la liste déroulante. 
 
-{{< img src="getting_started/monitors/message_notify.png" alt="Messages avec des variables conditionnelles et une @notification" style="width:90%;" >}}
+{{< img src="getting_started/monitors/monitor_notification.png" alt="Ajouter un message et des automatisations de monitor à la notification de votre alerte" style="width:100%;" >}}
 
-Si la `@notification` est supprimée de l'une de ces deux sections, elle est également supprimée de l'autre section.
+Pour ajouter un workflow à partir de [Workflow Automation][14] ou ajouter un cas de [Case Management][15] à la notification de l'alerte, cliquez sur **Add Workflow** ou **Add Case**. Vous pouvez également tagger [lʼéquipe Datadog][16] en utilisant l'identifiant `@team`.
 
-Ne modifiez pas les autres sections. Pour en savoir plus sur l'utilité de chaque option de configuration, consultez la section [Configurer des monitors][9].
+Laissez les autres sections telles quelles. Pour plus d'informations sur le rôle de chaque option de configuration, consultez la documentation relative à la [configuration de monitors][9].
 
 ### Autorisations
 
-{{< img src="getting_started/monitors/monitor_rbac_restricted.jpg" alt="Monitor avec restriction RBAC" style="width:90%;" >}}
+Cliquez sur **Edit Acces** pour que seul le créateur du monitor et des rôles spécifiques de votre organisation puissent bénéficier dʼun accès en édition. Vous pouvez aussi choisir de sélectionner `Notify` pour recevoir une alerte lorsque le monitor est modifié.
 
-Utilisez cette option pour faire en sorte que seuls le créateur de votre monitor ainsi que certains rôles spécifiques puissent le modifier. Pour en savoir plus sur les rôles, consultez la section [Contrôle d'accès à base de rôles (RBAC)][10].
+{{< img src="getting_started/monitors/monitor_permissions.png" alt="Définir des autorisations dʼaccès pour un monitor et des options pour les notifications dʼaudit" style="width:80%;" >}}
+
+Pour en savoir plus sur les rôles, consultez la section [Contrôle d'accès à base de rôles][10].
 
 ## Visualiser les monitors et les alertes de triage sur mobile
 
-Vous pouvez accéder à vos vues enregistrées de monitors et consulter ou désactiver des monitors avec l'[application mobile Datadog][11], disponible sur l'[App Store d'Apple][12] et le [Google Play Store][13]. Vous pourrez ainsi procéder au triage des alertes même lorsque vous n'avez pas accès à votre ordinateur.
+Vous pouvez consulter vos vues enregistrées de monitors et consulter ou désactiver des monitors avec l'[application mobile Datadog][11], disponible sur l'[App Store d'Apple][12] et le [Google Play Store][13]. Vous pourrez ainsi procéder au triage des alertes même lorsque vous n'avez pas accès à votre ordinateur.
 
 {{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents sur l'application mobile">}}
 
@@ -138,3 +143,6 @@ Vous pouvez accéder à vos vues enregistrées de monitors et consulter ou désa
 [11]: /fr/service_management/mobile/
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
+[14]: /fr/service_management/workflows/
+[15]: /fr/service_management/case_management/
+[16]: /fr/account_management/teams/

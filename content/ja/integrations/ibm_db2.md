@@ -5,6 +5,7 @@ assets:
   dashboards:
     IBM Db2 Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: ibm_db2.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10054
     source_type_name: IBM Db2
   logs:
     source: ibm_db2
@@ -24,7 +26,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- data store
+- data stores
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md
@@ -33,7 +35,7 @@ draft: false
 git_integration_title: ibm_db2
 integration_id: ibm-db2
 integration_title: IBM Db2
-integration_version: 2.0.0
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -50,7 +52,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Data Store
+  - Category::Data Stores
   - Category::Log Collection
   configuration: README.md#Setup
   description: IBM Db2 データベースからのテーブルスペース、バッファプールなどのメトリクスを監視
@@ -60,6 +62,7 @@ tile:
   title: IBM Db2
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ![デフォルトのダッシュボード][1]
@@ -68,9 +71,9 @@ tile:
 
 このチェックは、Datadog Agent を通じて [IBM Db2][2] を監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 IBM Db2 チェックは [Datadog Agent][3] パッケージに含まれています。
 
@@ -86,7 +89,7 @@ sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.1.0
 
 注: Python 2 が動作する Agent をお使いの場合は、`ibm_db=3.1.0` の代わりに `ibm_db==3.0.1` を使用してください。
 
-##### Windows
+##### ログの収集
 
 Agent バージョン < 6.11 の場合
 
@@ -110,6 +113,20 @@ Linux では、XML 機能が必要になる場合があります。ビルドプ�
 `libxslt-dev` (RPM では `libxslt-devel`) をインストールしてください。
 
 #### モニタリングを有効にする
+
+IBM Db2 インテグレーションは、以下のテーブル関数を使用してデータを取り出します。
+* `MON_GET_TABLESPACE`
+* `MON_GET_TRANSACTION_LOG`
+* `MON_GET_BUFFERPOOL`
+* `MON_GET_DATABASE`
+* `MON_GET_INSTANCE`
+
+これらのテーブル関数の詳細については、[IBM 公式ドキュメント][5]を参照してください。
+
+Db2 インスタンスを監視するには、上記の 5 つのテーブル関数に `EXECUTE` 権限を持つ Db2 ユーザーを作成するか、Db2 ユーザーに以下のロールのいずれかを付与します。
+* `DATAACCESS` 権限
+* `DBADM` 権限
+* `SQLADM` 権限
 
 インスタンス、関連するデータベース、およびデータベースオブジェクトの健全性を監視するには、監視したいオブジェクトごとにデータベースシステムモニタスイッチを有効にします。
 * ステートメント
@@ -141,14 +158,14 @@ update dbm cfg using DFT_MON_BUFPOOL on
  Monitor health of instance and databases   (HEALTH_MON) = ON
 ```
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -156,7 +173,7 @@ update dbm cfg using DFT_MON_BUFPOOL on
 
 2. [Agent を再起動します][2]。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -195,11 +212,11 @@ _Agent バージョン 6.0 以降で利用可能_
 
 | パラメーター            | 値                                                                                                         |
 | -------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `<インテグレーション名>` | `ibm_db2`                                                                                                     |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                                                                                                 |
-| `<インスタンスコンフィギュレーション>`  | `{"db": "<DB_NAME>", "username":"<USERNAME>", "password":"<PASSWORD>", "host":"%%host%%", "port":"%%port%%"}` |
+| `<INTEGRATION_NAME>` | `ibm_db2`                                                                                                     |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                                 |
+| `<INSTANCE_CONFIG>`  | `{"db": "<DB_NAME>", "username":"<USERNAME>", "password":"<PASSWORD>", "host":"%%host%%", "port":"%%port%%"}` |
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -216,30 +233,44 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 ### 検証
 
-[Agent の status サブコマンドを実行][5]し、Checks セクションで `ibm_db2` を探します。
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `ibm_db2` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "ibm_db2" >}}
 
 
-### イベント
+### ヘルプ
 
 - テーブルスペースの状態が変化するたびに、`ibm_db2.tablespace_state_change` がトリガーされます。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "ibm_db2" >}}
 
 
-## トラブルシューティング
+## ヘルプ
+
+### CLI Driver SQL1531N エラー
+
+以下のようなエラーログが表示される問題が発生した場合
+
+```
+2023-08-10 23:34:47 UTC | CORE | ERROR | (pkg/collector/python/datadog_agent.go:129 in LogMessage) | ibm_db2:c051131490335a94 | (ibm_db2.py:563) | Unable to connect to database `datadog` as user `db2inst1`: [IBM][CLI Driver] SQL1531N  The connection failed because the name specified with the DSN connection string keyword could not be found in either the db2dsdriver.cfg configuration file or the db2cli.ini configuration file.  Data source name specified in the connection string: "DATADOG". SQLCODE=-1531
+```
+
+その場合、以下のシナリオのいずれかが原因である可能性が高いです。
+- 構成 (conf.yaml) にホストとポートの構成がない
+- `db2cli.ini` と `db2dsdriver.cfg` が存在しないため、CLI Driver がデータベースを検索できない
+
+Agent はデータベースに正しく接続する場所を決定するために、上記の両方の情報を必要とします。この問題を解決するには、この問題が発生している `ibm_db2` チェックのすべてのインスタンスにホストとポートのパラメーターを含めるようにします。あるいは、`db2cli.ini` または `db2dsdriver.cfg` ファイルで定義された DSN を使用したい場合は、これらのファイルを Agent が使用する `clidriver` ディレクトリにコピーします。通常、このディレクトリは Linux の場合 `/opt/datadog-agent/embedded/lib/python3.9/site-packages/clidriver/cfg` にあります。
 
 ### オフラインで `ibm_db` クライアントライブラリをインストールする
 
 エアギャップ環境、または制限されたネットワーク上で `pip install ibm_db==x.y.z` (`x.y.z` はバージョン番号) を実行できない場合、以下の方法で `ibm_db` をインストールすることが可能です。
 
 
-1. ネットワークにアクセスできるマシンで、[`ibm_db` ライブラリ][6]と [ODBC と CLI][7] のソース tarball をダウンロードします。ODBC と CLI は `ibm_db` ライブラリが必要とするため、別途ダウンロードする必要がありますが、`pip` 経由ではダウンロードできません。以下のスクリプトは `ibm_db==x.y.z`  (`x.y.z` はバージョン番号) のアーカイブファイルを Linux マシンにインストールします。
+1. ネットワークにアクセスできるマシンで、[`ibm_db` ライブラリ][7]と [ODBC と CLI][8] のソース tarball をダウンロードします。ODBC と CLI は `ibm_db` ライブラリが必要とするため、別途ダウンロードする必要がありますが、`pip` 経由ではダウンロードできません。以下のスクリプトは `ibm_db==x.y.z`  (`x.y.z` はバージョン番号) のアーカイブファイルを Linux マシンにインストールします。
 
    ```
    curl -Lo ibm_db.tar.gz https://github.com/ibmdb/python-ibmdb/archive/refs/tags/vx.y.z.tar.gz
@@ -261,7 +292,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
    export IBM_DB_HOME=/path/to/clidriver
    ```
 
-1. Agent に組み込まれた [`pip`][8] を使用して、`ibm_db` ライブラリをローカルにインストールします。このライブラリのファイルは `ibm_db.tar.gz` から展開された `python-ibmdb-x.y.z` にコンテナとして含まれています。
+1. Agent に組み込まれた [`pip`][9] を使用して、`ibm_db` ライブラリをローカルにインストールします。このライブラリのファイルは `ibm_db.tar.gz` から展開された `python-ibmdb-x.y.z` にコンテナとして含まれています。
 
    ```
    /opt/datadog-agent/embedded/bin/pip install --no-index --no-deps --no-build-isolation  /path/to/python-ibmdb-x.y.z/IBM_DB/ibm_db/
@@ -288,22 +319,23 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 `gcc` をインストールする必要があるかもしれません。
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Datadog を使用した IBM DB2 の監視][10]
+- [Datadog を使用した IBM DB2 の監視][11]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ibm_db2/images/dashboard_overview.png
 [2]: https://www.ibm.com/analytics/us/en/db2
 [3]: https://app.datadoghq.com/account/settings/agent/latest
-[4]: https://github.com/ibmdb/python-ibmdb/tree/master/IBM_DB/ibm_db
-[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[6]: https://pypi.org/project/ibm-db/#files
-[7]: https://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/
-[8]: https://docs.datadoghq.com/ja/developers/guide/custom-python-package/?tab=linux
-[9]: https://docs.datadoghq.com/ja/help/
-[10]: https://www.datadoghq.com/blog/monitor-db2-with-datadog
+[4]: https://github.com/ibmdb/python-ibmdb
+[5]: https://www.ibm.com/docs/en/db2oc?topic=views-monitor-procedures-functions
+[6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[7]: https://pypi.org/project/ibm-db/#files
+[8]: https://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/
+[9]: https://docs.datadoghq.com/ja/developers/guide/custom-python-package/?tab=linux
+[10]: https://docs.datadoghq.com/ja/help/
+[11]: https://www.datadoghq.com/blog/monitor-db2-with-datadog

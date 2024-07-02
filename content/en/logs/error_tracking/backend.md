@@ -1,6 +1,5 @@
 ---
 title: Track Backend Errors
-kind: documentation
 description: Learn how to track backend errors from your logs.
 is_beta: true
 further_reading:
@@ -31,7 +30,7 @@ To configure inline code snippets in issues, set up the [source code integration
 To enable Error Tracking, logs must include both of the following:
 
 - either an `error.type` or `error.stack` field
-- a status level of `ERROR` or `CRITICAL`
+- a status level of `ERROR`, `CRITICAL`, `ALERT`, or `EMERGENCY`
 
 The remaining attributes listed below are optional, but their presence improves error grouping.
 
@@ -223,6 +222,26 @@ try {
 }
 ```
 
+### PHP
+
+#### Monolog (JSON)
+
+If you have not set up log collection for PHP, see the [PHP Log Collection documentation][12].
+
+To log a caught exception yourself, you may optionally use:
+
+```php
+try {
+    // ...
+} catch (\Exception $e) {
+    $logger->error('An error occurred', [
+        'error.message' => $e->getMessage(),
+        'error.kind' => get_class($e),
+        'error.stack' => $e->getTraceAsString(),
+    ]);
+}
+```
+
 ### Python
 
 #### Logging
@@ -329,3 +348,4 @@ end
 [9]: https://app.datadoghq.com/source-code/setup/apm
 [10]: /logs/log_collection/
 [11]: /logs/log_configuration/attributes_naming_convention/#source-code
+[12]: /logs/log_collection/php/

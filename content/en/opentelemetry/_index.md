@@ -1,6 +1,7 @@
 ---
 title: OpenTelemetry in Datadog
-kind: Documentation
+aliases:
+- /tracing/setup_overview/open_standards/
 further_reading:
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: "Blog"

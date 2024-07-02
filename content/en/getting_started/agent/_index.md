@@ -1,6 +1,5 @@
 ---
 title: Getting Started with the Agent
-kind: documentation
 further_reading:
     - link: '/agent/basic_agent_usage/'
       tag: 'Documentation'
@@ -30,7 +29,7 @@ The Agent is able to collect 75 to 100 system level metrics every 15 to 20 secon
 
 ### Agent overhead
 
-The amount of space and resources the Agent takes up depends on the configuration and what data the Agent is configured to send. At the onset, you can expect around 0.08% CPU used on average with a disk space of roughly 830MB to 880MB.
+The amount of space and resources the Agent takes up depends on the configuration and what data the Agent is configured to send. At the onset, you can expect around 0.08% CPU used on average with a disk space of roughly 880MB to 1.3GB.
 
 See [Agent Overhead][2] to learn more about these benchmarks.
 
@@ -105,7 +104,7 @@ In the Datadog UI, navigate to the [Agent Installation page][18] and click on **
 Example Ubuntu one-line installation command:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 Use the [Agent Installation page][18] to see the most up-to-date installation instructions for your operating system.

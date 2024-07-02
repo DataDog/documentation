@@ -1,25 +1,38 @@
 ---
 code_lang: サーバーレス
 code_lang_weight: 90
-kind: documentation
 title: サーバーレス互換性要件
 type: multi-code-lang
 ---
 
-<div class="alert alert-info">AWS Lambda の ASM サポートはベータ版です。脅威検出は Datadog の Lambda 拡張機能を利用します。<br><br>ご希望の技術がここに掲載されていませんか？Datadog は継続的にサポートを追加しています。<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォームに必要事項を記入して、詳細を送信してください</a>。</div>
+ASM は以下のプラットフォームとライブラリに対してサーバーレス機能を提供します。
 
-## 言語とフレームワークの互換性
+{{< partial name="security-platform/appsec-libraries-serverless.html" >}}</br>
 
-### 対応クラウド環境
+## APM に Datadog Agent を構成する
+**注**: リモート構成による Threat Protection はサポートされていません。[WAF][6] で IP をブロックするには、[ワークフロー][5]を使用してください。
 
-- AWS Lambda (ベータ版)
+|タイプ               | Threat Detection  |  Software Composition Analysis (SCA)  | コードセキュリティ     |
+| ---       |   ---                     |           ----                    |           ----                            |
+| テスト結果          | {{< X >}}             |                               |                       |
+| ステップの高度なオプション      | {{< X >}}             |                                   |                       |
+| Node      | {{< X >}}             | beta                          |                       |
+| ブラウザテスト    | {{< X >}}             | beta                          |                       |
+| 構成      | {{< X >}}             |                               |                       |
+| ディメンショニング       |                   |                           |                       |
+| プライベートロケーション        | {{< X >}}             |                           |                       |
 
-### バージョン依存関係
+### 対応するトリガータイプ
+ASM Threat Detection は、HTTP リクエストを関数の入力としてのみサポートします。これは、攻撃者がサーバーレスアプリケーションを悪用する可能性が最も高いチャンネルだからです。HTTP リクエストは通常、次のような AWS サービスからやってきます。
+- Application Load Balancer (ALB)
+- API Gateway v1 (Rest API)
+- API Gateway v2 (HTTP API)
+- 関数 URL
 
-- Lambda 拡張機能のバージョン: `39`
-- サーバーレスプラグインのバージョン: `5.20.0`
+<div class="alert alert-info">サポートされていない機能のサポート追加をご希望の場合は、こちらの<a href="https://forms.gle/gHrxGQMEnAobukfn7">フォーム</a>にご記入の上、フィードバックをお送りください。</div>
 
-### 対応言語とその要件
+
+### 言語固有の互換性に関する追加情報
 
 Node.js
 : webpack や esbuild を使ってバンドルしている場合は、[特定のバンドラーの指示に従ってください][4]。
@@ -37,36 +50,43 @@ Go
 .NET
 : 
 
-### ASM の機能
-以下の ASM 機能は、Lambda 関数ではサポートされていません。
- - ASM Risk Management
- - IP、ユーザー、不審リクエストの遮断
- - 1 クリックで ASM を有効にする
 
-## ASM の機能サポート
+## Kubernetes Resource Utilization
 
-指定された Datadog Lambda 拡張機能のバージョンで、以下の ASM 機能がサーバーレスでサポートされます。
+<div class="alert alert-info">ASM サーバーレスの Google Cloud Run サポートはベータ版です</a>。</div>
 
-| ASM の機能                   | 拡張機能の最小バージョン |
-| -------------------------------- | ----------------------------|
-| Threat Detection <br/> --> ビジネスロジック API  | Lambda Extension バージョン 39、Serverless プラグインバージョン 5.20.0 で、Node.js、Java、Python、Go、.NET に対応します。 <br/> --> ビジネスロジックの機能は、サービスが構築された言語固有のバージョンに従います。 |
-| Threat Protection <br/> --> IP ブロッキング <br/> --> 不審リクエストブロッキング <br> --> ユーザーブロッキング   | 非対応<br/><br/><br/> |
-| Vulnerability Management <br/> --> オープンソースの脆弱性検出 <br/> --> カスタムコードの脆弱性検出 | 非対応<br/> |
+**注**: リモート構成による Threat Protection はサポートされていません。[WAF][6] で IP をブロックするには、[ワークフロー][5]を使用してください。
+
+|タイプ               | Threat Detection  |  OSS の脆弱性管理 | コードレベルの脆弱性管理   |
+| ---       |   ---                     |           ----                    |           ----                            |
+| テスト結果          | beta          | beta                              |                       |
+| モニタリング      | beta          | beta                                  |                       |
+| Node      | beta          | beta                          |                       |
+| プライベートロケーション    | beta          | beta                          |                       |
+| ステップの記録      | beta          |  beta                             |                       |
+| テスト結果       |             |                         |                       |
+| ブラウザテスト        | beta          | beta                          |                       |
 
 
-<div class="alert alert-info">サポートされていない機能のサポート追加を希望される場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+## インフラストラクチャーリスト
 
-## 対応するトリガータイプ
+サポートされるのは *Web アプリケーション*のみです。Azure 関数は、ASM ではサポートされていません。
 
-ASM Threat Detection は、関数の入力としてのみ HTTP リクエストをサポートします。これらは通常、以下のような AWS サービスから来るものです。
+**注**: リモート構成による Threat Protection はサポートされていません。[WAF][6] で IP をブロックするには、[ワークフロー][5]を使用してください。
 
-- Application Load Balancer (ALB)
-- API Gateway v1 (Rest API)
-- API Gateway v2 (HTTP API)
-- 関数 URL
+|タイプ       | OS                 |Threat Detection  |  OSS の脆弱性管理  | コードレベルの脆弱性管理  |
+|-----------|--------------------|------------------|------------------------------------|------------------------------------------|
+| GRPC      | Windows、Linux     | {{< X >}}        | {{< X >}}                          | beta                                     |
+| モニタリング      | Windows、Linux     | {{< X >}}        | {{< X >}}                          |                                          |
+| Node      | Linux              | {{< X >}}        | {{< X >}}                          | beta                                     |
+| プライベートロケーション    | Linux              | {{< X >}}        | {{< X >}}                          |                                          |
+| ステップの記録      | Linux              | {{< X >}}        | {{< X >}}                          |                                          |
+| テスト結果       | Linux              |                  | {{< X >}}                          |                                          |
 
 
 [1]: /ja/serverless/distributed_tracing/
 [2]: /ja/serverless/guide/datadog_forwarder_python
 [3]: /ja/serverless/guide/upgrade_java_instrumentation
 [4]: /ja/serverless/guide/serverless_tracing_and_bundlers/
+[5]: /ja/service_management/workflows/
+[6]: /ja/security/application_security/threats/inapp_waf_rules/

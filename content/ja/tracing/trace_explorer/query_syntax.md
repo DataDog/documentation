@@ -32,7 +32,6 @@ further_reading:
 - link: /tracing/services/resource_page/
   tag: ドキュメント
   text: リソースのパフォーマンスとトレースの詳細
-kind: documentation
 title: 検索構文
 ---
 

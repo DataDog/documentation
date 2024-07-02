@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/basic_agent_usage/
   tag: 설명서
   text: 기본 에이전트 사용
-kind: 가이드
 title: Datadog 에이전트 5 설치
 ---
 
@@ -964,7 +963,7 @@ DD_API_KEY=MY_API_KEY sh -c "$(curl -L https://raw.githubusercontent.com/DataDog
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: /ko/agent/versions/upgrade_to_agent_v7/
-[3]: https://s3.amazonaws.com/dd-agent/datadog-agent-5.11.3-1.dmg
+[3]: https://install.datadoghq.com/datadog-agent-5.11.3-1.dmg
 [4]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
 [5]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-32bit-cli.msi
 [6]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json

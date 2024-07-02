@@ -1,6 +1,5 @@
 ---
 title: Trace Retention
-kind: documentation
 description: "Learn how to control trace retention with retention filters."
 aliases:
 - /tracing/trace_retention/
@@ -72,7 +71,7 @@ The Datadog intelligent retention filter is always active for your services, and
 - [Diversity sampling](#diversity-sampling)
 - [One percent flat sampling](#one-percent-flat-sampling)
 
-**Note:** [Trace Queries][11] are based the data indexed by the Intelligent Retention filter.
+**Note:** [Trace Queries][11] are based on the data indexed by the Intelligent Retention filter.
 
 Spans indexed by the Intelligent retention filter (diversity sampling and 1% flat sampling) are **not counted towards the usage** of indexed spans, and so **do not impact your bill**.
 

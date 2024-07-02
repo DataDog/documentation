@@ -1,6 +1,5 @@
 ---
 title: Transfer Account and Team Ownership
-kind: documentation
 ---
 
 When creating a team in your Cloudcraft account, you are automatically granted owner role permissions. As an owner of a team, you are the only user who can manage subscription information. This includes payment information, such as payment details and the number of users your organization's license supports.

@@ -4,6 +4,7 @@ import sys
 import yaml
 import shutil
 import os
+import glob
 
 from actions.pull_and_push_file import pull_and_push_file
 from actions.pull_and_push_folder import pull_and_push_folder
@@ -42,7 +43,15 @@ class Build:
         self.extract_dir = "{0}".format(
             join(self.tempdir, "extracted") + sep
         )
-        
+
+        # Should match directory name in integrations_data/extracted
+        self.apw_integrations = [
+            'ably',
+            'akamai_mpulse',
+            'avmconsulting_workday',
+            'bottomline_mainframe',
+            'nerdvision'
+        ]        
 
     def load_config(self, build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry=False):
         """
@@ -63,6 +72,15 @@ class Build:
     # downloaded globs from Github.
     def get_list_of_content(self, configuration):
         prepare_content(self, configuration, self.github_token, self.extract_dir)
+
+        # remove integrations that will be sourced from websites-sources/APW
+        # this accounts for duplicates from dogweb/other integration repos
+        for integration in self.apw_integrations:
+            integration_glob = f"{self.extract_dir}**/{integration}/"
+            extracted_integration_dirs = glob.glob(integration_glob, recursive=True)
+            
+            for integration_dir in extracted_integration_dirs:
+                shutil.rmtree(integration_dir)
 
 
     def build_documentation(self):

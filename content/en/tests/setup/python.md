@@ -1,6 +1,5 @@
 ---
 title: Python Tests
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 30
@@ -41,7 +40,7 @@ Supported test frameworks:
 
 | Test Framework | Version |
 |---|---|
-| `pytest` | >= 3.0.0 <= 7.0.0 |
+| `pytest` | >= 3.0.0 |
 | `pytest-benchmark` | >= 3.1.0 |
 | `unittest` | >= 3.7 |
 

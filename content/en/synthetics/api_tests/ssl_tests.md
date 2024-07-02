@@ -1,6 +1,5 @@
 ---
-title: SSL Tests
-kind: documentation
+title: SSL Testing
 description: Monitor your SSL certificates from locations around the world
 aliases:
   - /synthetics/ssl_test
@@ -152,7 +151,7 @@ You can restrict access to an SSL test based on the roles in your organization. 
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
 [4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[5]: /monitors/notify/#notify-your-team
+[5]: /monitors/notify/#configure-notifications-and-automations
 [6]: https://www.markdownguide.org/basic-syntax/
 [7]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [8]: /synthetics/guide/synthetic-test-monitors

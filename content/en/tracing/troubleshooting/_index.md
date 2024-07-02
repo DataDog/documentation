@@ -1,6 +1,5 @@
 ---
 title: APM Troubleshooting
-kind: documentation
 aliases:
     - /tracing/faq/my-trace-agent-log-renders-empty-service-error/
 further_reading:
@@ -61,7 +60,7 @@ Additionally, the number of [span tags][8] present on any span cannot exceed 102
 
 For a given 40 minute interval, Datadog accepts the following combinations. To accommodate larger volumes, contact [support][1] to discuss your use case.
 
-- 1000 unique environments and service combinations
+- 5000 unique environments and service combinations
 - 30 unique [second primary tag][16] values per environment
 - 100 unique operation names per environment and service
 - 1000 unique resources per environment, service, and operation name
@@ -165,7 +164,7 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 [5]: /tracing/troubleshooting/tracer_debug_logs/
 [6]: /tracing/glossary/#services
 [7]: /tracing/glossary/#resources
-[8]: /tracing/glossary/#span-tags
+[8]: /glossary/#span-tag
 [9]: /tracing/troubleshooting/agent_rate_limits
 [10]: /tracing/troubleshooting/agent_apm_resource_usage/
 [11]: /tracing/custom_instrumentation/agent_customization

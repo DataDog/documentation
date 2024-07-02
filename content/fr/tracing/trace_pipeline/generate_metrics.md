@@ -10,7 +10,6 @@ further_reading:
 - link: tracing/trace_search_and_analytics/query_syntax
   tag: Documentation
   text: Utilisez des requêtes et des monitors Analytics basés sur les traces conservées.
-kind: documentation
 title: Générer des métriques à partir de spans
 ---
 

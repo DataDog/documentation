@@ -1,6 +1,5 @@
 ---
 title: Node.js Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
     - /tracing/opentracing/nodejs
     - /tracing/manual_instrumentation/nodejs
@@ -68,7 +67,7 @@ span.addTags({
 ```
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/scope.html
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Scope.html
 {{% /tab %}}
 
 {{% tab "Globally" %}}
@@ -108,7 +107,7 @@ tracer.use('express', {
 To learn more, read [API details for individual plugins][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
+[1]: https://datadoghq.dev/dd-trace-js/modules/export_.plugins.html
 {{% /tab %}}
 
 {{% tab "Errors" %}}
@@ -159,7 +158,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Promises" %}}
@@ -188,7 +187,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Async/await" %}}
@@ -214,7 +213,7 @@ app.get('/make-sandwich', async (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#trace
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#trace
 {{% /tab %}}
 
 {{% tab "Wrapper" %}}
@@ -243,7 +242,7 @@ app.get('/make-sandwich', (req, res) => {
 To learn more, read [API details for `tracer.trace()`][1].
 
 
-[1]: https://datadoghq.dev/dd-trace-js/interfaces/tracer.html#wrap
+[1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.Tracer.html#wrap
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -29,7 +29,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/
   tag: ブログ
   text: CI/CD モニタリングのベストプラクティス
-kind: documentation
+- link: https://www.datadoghq.com/blog/best-practices-for-monitoring-software-testing/
+  tag: ブログ
+  text: CI/CD のソフトウェアテストを監視するためのベストプラクティス
 title: Continuous Integration Visibility
 ---
 

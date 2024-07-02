@@ -94,8 +94,8 @@ hostname: mymachine.mydomain
 
 
 [1]: /ja/getting_started/integrations/
-[2]: /ja/agent/guide/agent-configuration-files/
-[3]: /ja/getting_started/tagging/#defining-tags
+[2]: /ja/agent/configuration/agent-configuration-files/
+[3]: /ja/getting_started/tagging/#define-tags
 [4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -136,8 +136,8 @@ hostname: mymachine.mydomain
 
 
 [1]: /ja/getting_started/integrations/
-[2]: /ja/agent/guide/agent-configuration-files/
-[3]: /ja/getting_started/tagging/#defining-tags
+[2]: /ja/agent/configuration/agent-configuration-files/
+[3]: /ja/getting_started/tagging/#define-tags
 [4]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /ja/dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -263,17 +263,19 @@ Datadog トレーサーは環境変数、システムプロパティ、または
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-[Host Map ページ][1]を使って UI でホストタグを割り当てます。ページの下部にホストオーバーレイを表示するには、六角形（ホスト）をクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。UI でホストタグに加えた変更は、適用されるまでに最大 5 分かかる場合があります。
+[Host Map ページ][1]を使って UI でホストタグを割り当てます。ページの下部にホストオーバーレイを表示するには、六角形（ホスト）をクリックします。次に、*User* セクションで **Add Tags** ボタンをクリックします。タグをカンマで区切って入力し、**Save Tags** をクリックします。UI で行ったホストタグの変更が適用されるまで最大 5 分かかることがあります。
 
-{{< img src="tagging/assigning_tags/hostmapuitags.png" alt="ホストマップタグ" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/host_add_tags.png" alt="ホストの詳細情報が開かれ、Add Tags ボタンがハイライト表示されているホストマップ" style="width:80%;">}}
+
 
 [1]: /ja/infrastructure/hostmap/
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-[Infrastructure List ページ][1]を使って UI でホストタグを割り当てます。ページの右にホストオーバーレイを表示するには、ホストをクリックします。次に、*User* セクションで **Edit Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。UI でホストタグに加えた変更は、適用されるまでに最大 5 分かかる場合があります。タグを追加したら、タグが UI に表示されていることを確認してから、さらにタグを追加してください。
+[Infrastructure List ページ][1]を使って UI でホストタグを割り当てます。ページの右にホストオーバーレイを表示するには、ホストをクリックします。次に、*User* セクションで **Add Tags** ボタンをクリックします。タグをカンマ区切りリストで入力し、**Save Tags** をクリックします。UI でホストタグに加えた変更は、適用されるまでに最大 5 分かかる場合があります。タグを追加したら、タグが UI に表示されていることを確認してから、さらにタグを追加してください。
 
-{{< img src="tagging/assigning_tags/hostuitags.png" alt="インフラストラクチャーリストタグ" style="width:80%;">}}
+{{< img src="tagging/assigning_tags/infrastructure_add_tags.png" alt="インフラストラクチャーの詳細パネルが開かれ、Add Tags ボタンがハイライト表示されているインフラストラクチャーリスト" style="width:80%;">}}
+
 
 [1]: /ja/infrastructure/
 {{% /tab %}}
@@ -398,7 +400,7 @@ def algorithm_two():
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/#defining-tags
+[1]: /ja/getting_started/tagging/#define-tags
 [2]: /ja/getting_started/tagging/unified_service_tagging
 [3]: /ja/integrations/#cat-cloud
 [4]: /ja/getting_started/agent/#setup

@@ -1,6 +1,5 @@
 ---
 title: Sending Data from the OpenTelemetry Demo to Datadog
-kind: guide
 further_reading:
 - link: "/service_catalog/"
   tag: "Documentation"
@@ -108,7 +107,9 @@ Complete the following steps to configure these three components.
             action: upsert
 
     connectors:
-        datadog/connector:
+      datadog/connector:
+        traces:
+          span_name_as_resource_name: true
 
     service:
       pipelines:
@@ -180,7 +181,9 @@ Complete the following steps to configure these three components.
                 action: upsert
 
         connectors:
-            datadog/connector:
+          datadog/connector:
+            traces:
+              span_name_as_resource_name: true
 
         service:
           pipelines:

@@ -13,7 +13,7 @@ integration_id: azure-batch
 integration_title: Microsoft Azure Batch
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: azure_batch
 public_title: Intégration Datadog/Microsoft Azure Batch

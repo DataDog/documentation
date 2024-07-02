@@ -5,7 +5,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: ブログ
   text: Datadog での SNMP モニタリング
-kind: documentation
 title: NDM トラブルシューティング
 ---
 

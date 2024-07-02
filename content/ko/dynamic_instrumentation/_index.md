@@ -25,7 +25,6 @@ further_reading:
   tag: 블로그
   text: Datadog 동적 계측을 사용하여 재배치 없이 애플리케이션 로그 추가
 is_beta: false
-kind: documentation
 private: false
 title: 동적 계측
 ---
@@ -72,6 +71,12 @@ title: 동적 계측
 자세한 지침을 보려면 아래에서 런타임을 선택하세요.
 
 {{< partial name="dynamic_instrumentation/dynamic-instrumentation-languages.html" >}}
+
+
+### 한계
+
+- 동적 계측은 아직 Azure App Services 또는 서버리스 환경과 호환되지 않습니다.
+- Python, Java 및 .NET으로 구축된 애플리케이션만 지원됩니다.
 
 ## 동적 계측 살펴보기
 
@@ -163,7 +168,7 @@ title: 동적 계측
 - **게이지**: 변수의 마지막 값을 기준으로 게이지를 생성합니다. 이 메트릭에는 [메트릭 표현식][15]이 필요합니다.
 - **히스토그램**: 변수의 통계적 분포를 생성합니다. 이 메트릭을 사용하려면 [메트릭 표현식][15]이 필요합니다.
 
-### 스팬 프로브 생성
+### 스팬 프로브 만들기
 
 *span 프로브*는 메서드가 실행될 때 범위를 내보냅니다.
 

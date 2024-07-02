@@ -1,6 +1,5 @@
 ---
 title: Java Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
     - /tracing/opentracing/java
     - /tracing/manual_instrumentation/java
@@ -22,6 +21,8 @@ further_reading:
 ---
 
 This page details common use cases for adding and customizing observability with Datadog APM. If you have not read the setup instructions for automatic instrumentation, start with the [Java Setup Instructions][11].
+
+<div class="alert alert-info">The Datadog Java tracer is built on OpenTracing. Although OpenTracing is deprecated in favor of OpenTelemetry, the following examples correctly import the <code>opentracing</code> library.</div>
 
 ## Adding tags
 
@@ -200,7 +201,11 @@ Add `@Trace` to methods to have them be traced when running with `dd-java-agent.
 
 Datadog's Trace annotation is provided by the [dd-trace-api dependency][6].
 
-`@Trace` annotations have the default operation name `trace.annotation` and resource name of the traced method. These can be set as arguments of the `@Trace` annotation to better reflect what is being instrumented. These are the only possible arguments that can be set for the `@Trace` annotation.
+The available arguments for the `@Trace` annotation are:
+
+- `operationName`: Set the operation name for the trace (default: The method's name).
+- `resourceName`: Set the resource name for the trace (default: The same value as `operationName`).
+- `noParent`: Set to `true` to always start a new trace at that method. Supported from v1.22.0+ of `dd-trace-java` (default: `false`).
 
 ```java
 import datadog.trace.api.Trace;
@@ -213,7 +218,7 @@ public class SessionManager {
     }
 }
 ```
-Note that through the `dd.trace.annotations` system property, other tracing method annotations can be recognized by Datadog as `@Trace`. You can find a list [here][7] if you have previously decorated your code.
+**Note**: Through the `dd.trace.annotations` system property, other tracing method annotations can be recognized by Datadog as `@Trace`. You can find a list in [TraceAnnotationsInstrumentation.java][7] if you have previously decorated your code.
 
 ### Manually creating a new span
 

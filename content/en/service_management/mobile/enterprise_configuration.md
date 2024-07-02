@@ -1,6 +1,5 @@
 ---
 title: Enterprise Configuration
-kind: documentation
 aliases:
 - /mobile/enterprise-configuration
 further_reading:

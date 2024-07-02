@@ -1,6 +1,5 @@
 ---
 title: Log Volume Control
-kind: document
 disable_toc: false
 ---
 
@@ -14,10 +13,9 @@ As your infrastructure and applications grow, so does your log volume and the co
 - **Dedupe**: Drop duplicate copies of your logs, for example, due to retries because of network issues.
 - **Remap**: Add, drop, or rename a field in your logs.
 
-{{< img src="observability_pipelines/use_cases/log_volume_control.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
-
 Select a log source to get started:
 
+- [Datadog Agent][4]
 - [Splunk HTTP Event Collector (HEC)][1]
 - [Splunk Heavy and Universal Forwarders (TCP)][2]
 - [Sumo Logic Hosted Collector][3]
@@ -25,3 +23,4 @@ Select a log source to get started:
 [1]: /observability_pipelines/log_volume_control/splunk_hec
 [2]: /observability_pipelines/log_volume_control/splunk_tcp
 [3]: /observability_pipelines/log_volume_control/sumo_logic_hosted_collector
+[4]: /observability_pipelines/log_volume_control/datadog_agent

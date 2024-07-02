@@ -14,7 +14,7 @@ integration_id: amazon-sagemaker
 integration_title: "Amazon\_SageMaker"
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 name: amazon_sagemaker
 public_title: "Intégration Datadog/Amazon\_SageMaker"

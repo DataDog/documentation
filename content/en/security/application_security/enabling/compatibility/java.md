@@ -1,40 +1,39 @@
 ---
 title: Java Compatibility Requirements
-kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
 ---
 
-## ASM capabilities
+## Application Security capabilities
 
-The following ASM capabilities are supported in the Java library, for the specified tracer version:
+The following application security capabilities are supported in the Java library, for the specified tracer version:
 
-| ASM capability                   | Minimum Java tracer version |
+| Application Security capability  | Minimum Java tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 1.8.0  |
 | API Security | 1.31.0 |
 | Threat Protection| 1.9.0 |
 | Customize response to blocked requests | 1.11.0 |
 | Software Composition Analysis (SCA) | 1.1.4 |
-| Code Security (beta) | 1.15.0|
+| Code Security  | 1.15.0|
 | Automatic user activity event tracking | 1.20.0 |
 
-The minimum tracer version to get all supported ASM capabilities for Java is 1.31.0.
+The minimum tracer version to get all supported application security capabilities for Java is 1.31.0.
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
-|Type           | Threat Detection support |  Vulnerability Management for OSS support |
-| ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 |
-| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
-| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         |                           |
-| Azure App Service | {{< X >}}     | {{< X >}}                 |
+| Type              | Threat Detection support | Software Composition Analysis |
+|-------------------|--------------------------|-------------------------------|
+| Docker            | {{< X >}}                | {{< X >}}                     |
+| Kubernetes        | {{< X >}}                | {{< X >}}                     |
+| Amazon ECS        | {{< X >}}                | {{< X >}}                     |
+| AWS Fargate       | {{< X >}}                | {{< X >}}                     |
+| AWS Lambda        | {{< X >}}                |                               |
+| Azure App Service | {{< X >}}                | {{< X >}}                     |
 
-**Note**: Azure App Service is supported for **web applications only**. ASM doesn't support Azure Functions.
+**Note**: Azure App Service is supported for **web applications only**. Application Security doesn't support Azure Functions.
 
 ## Language and framework compatibility
 
@@ -59,13 +58,13 @@ Datadog does not officially support any early-access versions of Java.
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### ASM Capability Notes
-- **Vulnerability Management for OSS** is supported on all frameworks
-- If **Vulnerability Management for Code-level** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
+- If **Code Security** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
 
-| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
+| Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? |Code Security? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Grizzly                 | 2.0+       |  {{< X >}} |  {{< X >}} |  {{< X >}} |
 | Glassfish               |            |  {{< X >}} |  {{< X >}} |  {{< X >}} |
@@ -90,12 +89,12 @@ Datadog does not officially support any early-access versions of Java.
 - Distributed tracing through your applications
 - Request-based blocking
 
-##### ASM Capability Notes
-- **Vulnerability Management for OSS** is supported on all frameworks
-- If **Vulnerability Management for Code-level** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
+- If **Code Security** does not support your framework, it will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
-| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
+| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? | Code Security? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | Apache HTTP Client       | 4.0+        |  {{< X >}} |  |  |
 | gRPC                     | 1.5+        |  {{< X >}} |  |  |
@@ -118,12 +117,12 @@ Datadog does not officially support any early-access versions of Java.
 - Query info (for example, a sanitized query string)
 - Error and stacktrace capturing
 
-##### ASM Capability Notes
-- **Vulnerability Management for OSS** is supported on all frameworks
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
-- If your framework is not supported below, **Vulnerability Management for Code-level** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
+- If your framework is not supported below, **Code Security** won’t detect SQL Injection vulnerabilities, but will still detect the rest of vulnerability types listed [here][3].
 
-| Database                | Versions | Threat Detection supported? |  Vulnerability Management for Code-level supported? |
+| Database                | Versions | Threat Detection supported? |  Code Security? |
 | ----------------------- | -------- |  ------------------------| ---------------------------------------------------------------- |
 | Aerospike               | 4.0+     |  {{< X >}} |   |
 | Couchbase               | 2.0+     |  {{< X >}} |   |

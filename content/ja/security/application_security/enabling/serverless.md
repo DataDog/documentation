@@ -1,13 +1,11 @@
 ---
 aliases:
 - /ja/security/application_security/getting_started/serverless
-code_lang: サーバーレス
-code_lang_weight: 90
 further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: Documentation
   text: アプリケーションセキュリティの仕組み
-- link: /security/default_rules/#cat-application-security
+- link: /security/default_rules/?category=cat-application-security
   tag: Documentation
   text: すぐに使える Application Security Management ルール
 - link: /security/application_security/troubleshooting
@@ -16,16 +14,17 @@ further_reading:
 - link: /security/application_security/threats/
   tag: Documentation
   text: Application Threat Management
-kind: documentation
+- link: https://www.datadoghq.com/blog/datadog-security-google-cloud/
+  tag: ブログ
+  text: Datadog Security による Google Cloud のコンプライアンスと脅威対策機能の拡張
 title: サーバーレスの ASM を有効にする
-type: multi-code-lang
 ---
 
 {{< partial name="security-platform/appsec-serverless.html" >}}</br>
 
 サーバーレス関数で利用可能な ASM 機能については、[互換性要件][4]を参照してください。
 
-## APM に Datadog Agent を構成する
+## ホストとコンテナマップ
 
 AWS Lambda に ASM を構成する場合、以下のような内容になります。
 
@@ -985,13 +984,11 @@ curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.4.0/datad
 
 ## 脅威検出のテスト
 
-アプリケーションセキュリティ管理の脅威検出のアクションを見るには、既知の攻撃パターンをアプリケーションに送信します。例えば、`acunetix-product` という値を持つ HTTP ヘッダーを送信すると、[セキュリティスキャナー攻撃][5]の試行がトリガーされます。
+Application Security Management の脅威検出を実際に確認するためには、既知の攻撃パターンをアプリケーションに送信してください。例えば、ユーザーエージェントヘッダーに `dd-test-scanner-log` を設定したリクエストを送信して、[セキュリティスキャナ攻撃][5]の試行をトリガーすることができます。
    ```sh
-   curl -H 'My-ASM-Test-Header: acunetix-product' https://your-function-url/existing-route
+   curl -A 'dd-test-scanner-log' https://your-function-url/existing-route
    ```
 アプリケーションを有効にして実行すると、数分後に[アプリケーションシグナルエクスプローラー][3]に脅威情報が表示されます。
-
-{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Security Signal 詳細ページでは、タグ、メトリクス、次のステップの提案、脅威と関連する攻撃者の IP アドレスが表示されます。" style="width:100%;" >}}
 
 ## その他の参考資料
 

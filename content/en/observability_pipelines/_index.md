@@ -1,6 +1,5 @@
 ---
 title: Observability Pipelines
-kind: documentation
 disable_toc: false
 further_reading:
 - link: "/logs/log_collection/"
@@ -58,22 +57,24 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 
 ## Get started
 
-1. Navigate to [Observability Pipelines][1].
+1. [Set up bootstrap options for the Observability Pipelines Worker][1].
+1. Navigate to [Observability Pipelines][2].
 1. Select a use case:
-    - [Log volume control][2]
-    - [Dual ship logs][3]
-    - [Split logs][4]
-    - [Archive logs to Datadog Archives][5]
-    - [Sensitive data redaction][6]
+    - [Log volume control][3]
+    - [Dual ship logs][4]
+    - [Split logs][5]
+    - [Archive logs to Datadog Archives][6]
+    - [Sensitive data redaction][7]
 1. Enable monitors.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/log_volume_control/
-[3]: /observability_pipelines/dual_ship_logs/
-[4]: /observability_pipelines/split_logs/
-[5]: /observability_pipelines/archive_logs/
-[6]: /observability_pipelines/sensitive_data_redaction/
+[1]: /observability_pipelines/setup_opw/
+[2]: https://app.datadoghq.com/observability-pipelines
+[3]: /observability_pipelines/log_volume_control/
+[4]: /observability_pipelines/dual_ship_logs/
+[5]: /observability_pipelines/split_logs/
+[6]: /observability_pipelines/archive_logs/
+[7]: /observability_pipelines/sensitive_data_redaction/

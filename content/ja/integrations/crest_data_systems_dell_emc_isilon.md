@@ -6,6 +6,7 @@ app_uuid: 1c1b7c48-0c7c-46f2-9f0c-f68c74419244
 assets:
   dashboards:
     Crest Dell EMC Isilon - Cluster Information: assets/dashboards/dell_emc_isilon_cluster_information.json
+    Crest Dell EMC Isilon - Events: assets/dashboards/dell_emc_isilon_events.json
     Crest Dell EMC Isilon - File System: assets/dashboards/dell_emc_isilon_file_system.json
     Crest Dell EMC Isilon - Monitors Summary: assets/dashboards/dell_emc_isilon_monitors_summary.json
     Crest Dell EMC Isilon - Node Details: assets/dashboards/dell_emc_isilon_node_details.json
@@ -48,7 +49,7 @@ integration_id: crest-data-systems-dell-emc-isilon
 integration_title: Dell EMC Isilon
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
@@ -127,6 +128,7 @@ tile:
 - サポートメール: datadog.integrations@crestdatasys.com
 - 営業メール: datadog-sales@crestdatasys.com
 - Web サイト: [crestdatasys.com][3]
+- よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][8]
 
 ### その他の参考資料
 
@@ -140,6 +142,10 @@ tile:
 [3]: https://www.crestdatasys.com/
 [4]: https://www.dell.com/support/manuals/en-in/isilon-onefs/ifs_pub_administration_guide_cli/administrative-roles-and-privileges
 [5]: https://www.crestdatasys.com/datadog-integrations-readme/Dell_EMC_Isilon.pdf
+[6]: https://docs.datadoghq.com/ja/agent/?tab=Linux
+[7]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[8]: https://www.crestdatasys.com/datadog-integrations-readme/Crest_Data_Datadog_Integrations_FAQ.pdf
+[9]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-dell-emc-isilon" target="_blank">こちらをクリック</a>してください。

@@ -1,6 +1,5 @@
 ---
 title: Cloud Security Management Misconfigurations
-kind: documentation
 aliases:
   - /security_platform/cspm/
   - /security/cspm/#glossary
@@ -9,10 +8,6 @@ aliases:
 algolia:
   tags: ['cspm']
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 Cloud Security Management Misconfigurations (CSM Misconfigurations) makes it easier to assess and visualize the current and historic security posture of your cloud resources, automate audit evidence collection, and remediate misconfigurations that leave your organization vulnerable to attacks. By continuously surfacing security weaknesses resulting from misconfigurations, teams can mitigate risks while ensuring compliance with industry standards.
 
@@ -50,6 +45,8 @@ Use template variables and Markdown to [customize notification messages][9]. Edi
 
 Investigate details using the [Misconfigurations Explorer][10]. View detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a misconfiguration does not match your business use case or is an accepted risk, you can [mute the misconfiguration][13] up to an indefinite period of time.
 
+You can also [create a Jira issue][15] and assign it to a team, use Terraform remediation to generate a pull request in GitHub with code changes that fix the underlying misconfiguration, and leverage [Workflow Automation][14] to create automated workflows (with or without human involvement).
+
 {{< img src="security/cspm/misconfigurations_explorer.png" alt="CSM Misconfigurations Explorer page" width="100%">}}
 
 ## Get started
@@ -82,3 +79,5 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
 [11]: /security/default_rules/#cat-posture-management-infra
 [12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
 [13]: /security/cloud_security_management/mute_issues
+[14]: /security/cloud_security_management/review_remediate/workflows/
+[15]: /security/cloud_security_management/review_remediate/jira?tab=csmmisconfigurations

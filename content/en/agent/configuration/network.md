@@ -1,6 +1,5 @@
 ---
 title: Network Traffic
-kind: guide
 aliases:
     - /account_management/faq/what-are-the-required-ip-s-and-ports-i-need-open-to-connect-to-the-datadog-service
     - /account_management/faq/can-i-whitelist-the-ip-addresses-for-data-coming-from-datadog-via-webhook-and-integrations
@@ -242,6 +241,9 @@ Open the following ports to benefit from all the **Agent** functionalities:
 : Port for NTP ([more details on the importance of NTP][1]).<br>
 See [default NTP targets][2].
 
+8443/tcp
+: Port for [Custom Agent Autoscaling][5].
+
 10516/tcp
 : Port for log collection over TCP.<br>
 See [logs endpoints][3] for other connection types.
@@ -256,6 +258,7 @@ See [logs endpoints][3] for other connection types.
 [2]: /integrations/ntp/#overview
 [3]: /logs/log_collection/#logging-endpoints
 [4]: /agent/basic_agent_usage/kubernetes/
+[5]: /containers/guide/cluster_agent_autoscaling_metrics
 
 {{% /site-region %}}
 

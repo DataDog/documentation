@@ -7,7 +7,7 @@ guides:
     link_text: Getting Started with the Agent
     link: getting_started/agent/
   - title: Set Up Integrations
-    desc: Gather metrics, traces, and logs with over 700 built-in integrations to send to Datadog.
+    desc: Gather metrics, traces, and logs with over 750 built-in integrations to send to Datadog.
     link_text: Getting Started with Integrations
     link: getting_started/integrations/
   - title: Get Started in App
@@ -95,6 +95,10 @@ nav_sections:
         link: data_streams/
         icon: datastreams-monitoring
         desc: Track and improve performance of your data streaming pipelines
+      - title: Data Jobs Monitoring
+        link: data_jobs/
+        icon: data-jobs-monitoring
+        desc: Monitor and optimize your data processing jobs
       - title: Universal Service Monitoring
         link: universal_service_monitoring/
         icon: usm
@@ -107,6 +111,10 @@ nav_sections:
         link: real_user_monitoring/
         icon: rum
         desc: Capture, observe, and analyze the user experience of your applications
+      - title: Product Analytics
+        link: product_analytics/
+        icon: product-analytics
+        desc: Gain insight into user behavior and make data-driven product decisions
       - title: Mobile Application Testing
         link: mobile_app_testing/
         icon: mobile
@@ -121,7 +129,7 @@ nav_sections:
         desc: Monitor the health and performance of your CI pipelines
       - title: Test Visibility
         link: tests/
-        icon: intelligent-test-runner
+        icon: ci
         desc: Detect flaky tests and identify commits introducing flaky tests
       - title: Security
         link: security/

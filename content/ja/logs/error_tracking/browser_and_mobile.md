@@ -8,7 +8,6 @@ further_reading:
   tag: ドキュメント
   text: エラートラッキングエクスプローラーについて
 is_beta: true
-kind: documentation
 title: ブラウザとモバイルのエラーの追跡
 ---
 

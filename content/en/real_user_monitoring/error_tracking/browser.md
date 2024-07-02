@@ -1,11 +1,10 @@
 ---
 title: Browser Crash Reporting and Error Tracking
-kind: documentation
 aliases:
 - /real_user_monitoring/error_tracking/browser_errors
 further_reading:
 - link: "https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "datadog-ci Source code"
 - link: "/real_user_monitoring/guide/upload-javascript-source-maps"
   tag: "Documentation"
@@ -35,8 +34,6 @@ In addition to sending source maps, the [Datadog CLI][10] reports Git informatio
 
 Error Tracking and RUM can use this information to correlate errors with your source code, allowing you to pivot from any stack trace frame to the related line of code in [GitHub][11], [GitLab][12] and [Bitbucket][13]. 
 
-{{< img src="real_user_monitoring/error_tracking/link_to_git_js_example.mp4" alt="Link from a stack frame to the source code" video=true >}}
-
 <div class="alert alert-info">Linking from stack frames to source code is supported in the <a href="https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command">Datadog CLI</a> version <code>0.12.0</code> version and later.</div>
 
 For more information, see the [Datadog Source Code Integration][14].
@@ -59,9 +56,9 @@ Source maps are limited to **500** MB each.
 [3]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#error-sources
 [4]: https://app.datadoghq.com/rum/error-tracking
 [5]: https://app.datadoghq.com/rum/application/create
-[6]: /real_user_monitoring/browser/#setup
+[6]: /real_user_monitoring/browser/setup
 [7]: https://www.npmjs.com/package/@datadog/browser-rum
-[8]: /real_user_monitoring/browser/#initialization-parameters
+[8]: /real_user_monitoring/browser/setup/#initialization-parameters
 [9]: /real_user_monitoring/guide/upload-javascript-source-maps
 [10]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/sourcemaps#sourcemaps-command
 [11]: https://github.com

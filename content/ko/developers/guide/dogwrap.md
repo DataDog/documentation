@@ -22,9 +22,21 @@ pip install datadog
 
 유효한 최소 `dogwrap`명령의 레이아웃은 다음과 같습니다:
 
-{{< site-region region="us,us3,us5,gov,ap1" >}}
+{{< site-region region="us,gov,ap1" >}}
 ```bash
 dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> "<COMMAND>"
+```
+{{< /site-region >}}
+
+{{< site-region region="us3" >}}
+```bash
+dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s us3 "<COMMAND>"
+```
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+```bash
+dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s us5 "<COMMAND>"
 ```
 {{< /site-region >}}
 
@@ -34,7 +46,7 @@ dogwrap -n <EVENT_TITLE> -k <DATADOG_API_KEY> -s eu "<COMMAND>"
 ```
 {{< /site-region >}}
 
-**참고**: `dogwrap`명령은 기본적으로 미국 Datadog 사이트로 데이터를 전송합니다. EU 사이트로 데이터를 전송해야 할 경우  `-s eu` 옵션을 반드시 포함하세요.
+**참고**: `dogwrap` 명령은 기본적으로 US Datadog 사이트로 데이터를 보냅니다. 다른 사이트로 데이터를 보내야 하는 경우 `eu`, `us3`, `us5` 등과 같이 대상 사이트를 지정하는 `-s` 옵션을 포함해야 합니다.
 
 다음 플레이스홀더 사용:
 

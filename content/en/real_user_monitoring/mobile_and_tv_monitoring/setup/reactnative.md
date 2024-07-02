@@ -1,6 +1,5 @@
 ---
 title: RUM React Native Monitoring Setup
-kind: documentation
 description: Collect RUM data from your React Native projects.
 aliases:
     - /real_user_monitoring/react-native/
@@ -13,11 +12,14 @@ further_reading:
   tag: Documentation
   text: RUM React Native Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-reactnative
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-reactnative
 - link: https://www.datadoghq.com/blog/react-native-monitoring/
   tag: Blog
   text: Monitor React Native applications
+- link: real_user_monitoring/guide/monitor-hybrid-react-native-applications
+  tag: Documentation
+  text: Monitor hybrid React Native applications
 - link: real_user_monitoring/explorer/
   tag: Documentation
   text: Learn how to explore your RUM data
@@ -104,7 +106,7 @@ const config = new DatadogProviderConfiguration(
 config.site = 'US1';
 // Optional: Enable or disable native crash reports
 config.nativeCrashReportEnabled = true;
-// Optional: Sample RUM sessions (in this example, 80% of session are sent to Datadog. Default is 100%)
+// Optional: Sample RUM sessions (in this example, 80% of session are sent to Datadog. Default is 100%).
 config.sessionSamplingRate = 80;
 // Optional: Sample tracing integrations for network calls between your app and your backend (in this example, 80% of calls to your instrumented backend are linked from the RUM view to the APM view. Default is 20%)
 // You need to specify the hosts of your backends to enable tracing with these backends
@@ -291,6 +293,10 @@ export default function App() {
 
 {{< /site-region >}}
 
+### Sample RUM sessions
+
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK][18] as a percentage between 0 and 100. You can specify the rate with the `config.sampleRate` parameter.
+
 ### Override the reported version
 
 By default, the Datadog React Native SDK reports the `version` as the commercial version of your app (for example, "1.2.44").
@@ -351,42 +357,7 @@ Use one of Datadog's integrations to automatically track views for the following
 -   If you use the [`react-native-navigation`][5] library, then add the `@datadog/mobile-react-native-navigation` package and follow the [setup instructions][6].
 -   If you use the [`react-navigation`][7] library, then add the `@datadog/mobile-react-navigation` package and follow the [setup instructions][8].
 
-If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see our [example application][16] as a reference.
-
-## Track custom attributes
-
-You can attach user information to all RUM events to get more detailed information from your RUM sessions.
-
-### User information
-
-For user-specific information, use the following code wherever you want in your app (after the SDK has been initialized). The `id`, `name`, and `email` attributes are built into Datadog, and you can add other attributes that makes sense for your app.
-
-```js
-DdSdkReactNative.setUser({
-    id: '1337',
-    name: 'John Smith',
-    email: 'john@example.com',
-    type: 'premium'
-});
-```
-
-If you want to clear the user information (for example, when the user signs out), you can do so by passing an empty object, as follows:
-
-```js
-DdSdkReactNative.setUser({});
-```
-
-### Global attributes
-
-You can also keep global attributes to track information about a specific session, such as A/B testing configuration, ad campaign origin, or cart status.
-
-```js
-DdSdkReactNative.setAttributes({
-    profile_mode: 'wall',
-    chat_enabled: true,
-    campaign_origin: 'example_ad_network'
-});
-```
+If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see this Datadog [example application][16] as a reference.
 
 ## Track background events
 
@@ -488,3 +459,4 @@ end
 [15]: /getting_started/tagging/#define-tags
 [16]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
 [17]: https://reactnative.dev/docs/the-new-architecture/landing-page
+[18]: /real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/#initialize-the-library-with-application-context

@@ -1,6 +1,5 @@
 ---
 title: RUM Android and Android TV Monitoring Setup
-kind: documentation
 aliases:
     - /real_user_monitoring/android/
 code_lang: android
@@ -11,7 +10,7 @@ further_reading:
   tag: Documentation
   text: RUM Android Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: "Source Code"
   text: Source code for dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation
@@ -297,6 +296,18 @@ The initialization credentials require your application's variant name and uses 
 
 The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated RUM error stack traces. For more information, see the [Track Android Errors][8].
 
+### Sample RUM sessions
+
+To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][2] as a percentage between 0 and 100.
+
+```kotlin
+val rumConfig = RumConfiguration.Builder(applicationId)
+        // Here 75% of the RUM sessions are sent to Datadog
+        .setSessionSampleRate(75.0f)
+        .build()
+Rum.enable(rumConfig)
+```
+
 ### Enable RUM feature to start sending data
 
 {{< tabs >}}
@@ -361,7 +372,7 @@ This records each request processed by the `OkHttpClient` as a resource in RUM, 
 
 You can also add an `EventListener` for the `OkHttpClient` to [automatically track resource timing][11] for third-party providers and network requests.
 
-### Track background events
+## Track background events
 
 You can track events such as crashes and network requests when your application is in the background (for example, no active view is available). 
 
@@ -382,9 +393,9 @@ Add the following snippet during RUM configuration:
 <div class="alert alert-info"><p>Tracking background events may lead to additional sessions, which can impact billing. For questions, <a href="https://docs.datadoghq.com/help/">contact Datadog support.</a></p>
 </div>
 
-### Kotlin Extensions
+## Kotlin Extensions
 
-#### `Closeable` extension
+### `Closeable` extension
 
 You can monitor `Closeable` instance usage by using `useMonitored` method, it will report any error happened to Datadog and close the resource afterwards.
 
@@ -396,7 +407,7 @@ closeable.useMonitored {
 
 ```
 
-#### Track local assets as RUM resources
+### Track local assets as RUM resources
 
 You can track access to the assets by using `getAssetAsRumResource` extension method:
 

@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM for PHP
-kind: documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
@@ -13,7 +12,7 @@ further_reading:
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-php'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'PHP Datadog Tracer Library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"

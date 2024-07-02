@@ -34,17 +34,18 @@ title: Web アプリケーションとモバイルアプリケーションのエ
 
 RUM エラーの課題には、スタックトレース、ユーザーセッションのタイムライン、メタデータ (ユーザーの場所、バージョン、クラッシュレポートに含まれるカスタム属性を含む) が含まれます。
 
-エラートラッキングの主な機能は、[エラートラッキングエクスプローラー][3]のドキュメントで確認することができます。RUM 用のエラートラッキングエクスプローラーを表示するには、[**UX Monitoring** > **Error Tracking**][1] に移動します。
+Error Tracking の主な機能は、[Error Tracking エクスプローラー][3]のドキュメントで確認することができます。RUM 用のエラートラッキングエクスプローラーを表示するには、[**Digital Experience** > **Error Tracking**][1] に移動します。
 
 ## 計画と使用
 
-{{< whatsnext desc="RUM 用の Datadog エラー追跡を始めるには、対応するドキュメントを参照して、フレームワーク用のソースマップをアップロードしてください。" >}}
-    {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}ブラウザ{{< /nextlink >}}
+{{< whatsnext desc="RUM 用の Datadog Error Tracking を始めるには、対応するドキュメントを参照してください。" >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/android" >}}Android{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/ios" >}}iOS{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/expo" >}}Expo{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/error_tracking/roku" >}}Roku{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## その他の参考資料

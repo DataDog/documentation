@@ -1,6 +1,5 @@
 ---
 title: Static Analysis Setup
-kind: documentation
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
 - /continuous_integration/static_analysis
@@ -118,7 +117,7 @@ For example, you can use the following:
 rulesets:
   - python-best-practices
   - python-security
-  - python-code-style
+  - python-code-style:
     rules:
       max-function-lines:
         # Do not apply the rule max-function-lines to the following files
@@ -159,7 +158,12 @@ ignore:
 
 ## Set up the GitHub integration 
 
-You must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see the offending code snippets as part of the Static Analysis results in the Datadog UI.
+You must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see the offending code snippets as part of the Static Analysis results in the Datadog UI. 
+
+When installing a GitHub App, the following permissions are required to enable certain features:
+
+- `Content: Read`, which allows you to see code snippets displayed in Datadog
+- `Pull Request: Read & Write`, which allows Datadog to add feedback for violations directly in your pull requests using [pull request comments][11]
 
 ## Configure your CI/CD provider
 
@@ -202,10 +206,11 @@ To upload a SARIF report:
 
 [1]: https://app.datadoghq.com/ci/setup/code-analysis
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif 
-[3]: /developers/ide_integrations/idea/#static-analysis
+[3]: /developers/ide_plugins/idea/#static-analysis
 [4]: /account_management/api-app-keys/
 [6]: /code_analysis/static_analysis_rules
 [7]: /getting_started/site/
 [8]: https://github.com/DataDog/datadog-ci
 [9]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [10]: /integrations/guide/source-code-integration
+[11]: /code_analysis/github_pull_requests/

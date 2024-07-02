@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM for Serverless
-kind: documentation
 aliases:
   - /security/application_security/getting_started/serverless
 further_reading:

@@ -1,6 +1,5 @@
 ---
 title: RUM Flutter Monitoring Setup
-kind: documentation
 description: Collect RUM data from your Flutter projects.
 aliases:
     - /real_user_monitoring/flutter/
@@ -13,7 +12,7 @@ further_reading:
   tag: Documentation
   text: RUM Flutter Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation

@@ -1,6 +1,5 @@
 ---
 title: Install Datadog Agent 5
-kind: Guide
 further_reading:
 - link: "/agent/basic_agent_usage/"
   tag: "Documentation"
@@ -963,7 +962,7 @@ To make the installation permanent, set up your `init` daemon to run `$sandbox_d
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: /agent/versions/upgrade_to_agent_v7/
-[3]: https://s3.amazonaws.com/dd-agent/datadog-agent-5.11.3-1.dmg
+[3]: https://install.datadoghq.com/datadog-agent-5.11.3-1.dmg
 [4]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
 [5]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-32bit-cli.msi
 [6]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json

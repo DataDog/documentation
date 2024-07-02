@@ -7,13 +7,17 @@ kind: ガイド
 title: Amazon EventBridge API 宛先でイベントおよびログを Datadog へ送信
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Datadog for Government サイトは、Amazon EventBridge をサポートしていません。</div>
+{{< /site-region >}}
+
 Amazon EventBridge は、イベント駆動型アプリケーションの構築を可能にするサーバーレスイベントバスです。 EventBridge は AWS サービスと統合可能ですが、API 宛先機能を利用すると、API を使用して AWS 外からのデータをプッシュ/プルできます。このガイドでは、EventBridge から Datadog へイベントおよびログを送信する方法を解説します。Datadog から EventBridge へのイベントのプッシュに関する詳細は、[EventBridge インテグレーション文書][1]をご参照ください。
 
-## セットアップ
+## 計画と使用
 
 始めるには、[Datadog アカウント][2]と [API キー][3]、[Amazon Eventbridge API 宛先][4]へのアクセスが必要です。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. [Amazon の API 宛先を作成][5]文書のステップに従い、Datadog を API 宛先として追加します。
     - キー名として `DD-API-KEY`、[Datadog API キー][3]を値として、API キー認証を使用します。
@@ -28,7 +32,7 @@ Amazon EventBridge は、イベント駆動型アプリケーションの構築�
     ```
 4. およそ 5 分後、イベントとログが送信されると、Datadog の[ログコンソール][12]または[イベントエクスプローラー][13]（送信先となっているエンドポイントに基づき ます）でデータが利用可能になります。
 
-## トラブルシューティング
+## ヘルプ
 
 Datadog に送信されたペイロードの詳細を確認し、API エンドポイントのレスポンスを表示するには、Amazon SQS キューをセットアップします。
 1. [Amazon SQS][14] にキューを作成します。

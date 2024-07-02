@@ -1,7 +1,8 @@
 ---
 title: Dual Ship Logs
-kind: Documentation
 disable_toc: false
+aliases:
+    -  /observability_pipelines/dual_ship_logs/datadog_agent
 ---
 
 ## Overview
@@ -12,12 +13,10 @@ As your infrastructure and your organization scales, so does your log volume, th
 
 Select a source to get started:
 
-- [Datadog Agent][1]
-- [Splunk HTTP Event Collector (HEC)][2]
-- [Splunk Heavy and Universal Forwarders (TCP)][3]
-- [Sumo Logic Hosted Collector][4]
+- [Splunk HTTP Event Collector (HEC)][1]
+- [Splunk Heavy and Universal Forwarders (TCP)][2]
+- [Sumo Logic Hosted Collector][3]
 
-[1]: /observability_pipelines/dual_ship_logs/datadog_agent
-[2]: /observability_pipelines/dual_ship_logs/splunk_hec
-[3]: /observability_pipelines/dual_ship_logs/splunk_tcp
-[4]: /observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector
+[1]: /observability_pipelines/dual_ship_logs/splunk_hec
+[2]: /observability_pipelines/dual_ship_logs/splunk_tcp
+[3]: /observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector

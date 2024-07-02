@@ -1,6 +1,5 @@
 ---
 title: Monitor-based SLOs
-kind: documentation
 description: "Use Monitors to define the Service Level Objective"
 aliases:
 - /monitors/service_level_objectives/monitor/
@@ -14,11 +13,11 @@ further_reading:
 ---
 
 ## Overview
-To build an SLO from new or existing Datadog monitors, create a monitor-based SLO.
+To build an SLO from new or existing Datadog monitors, create a monitor-based SLO. Using a monitor-based SLO, you can calculate the Service Level Indicator (SLI) by dividing the amount of time your system exhibits good behavior by the total time.
 
-Time-based data sets usually map well to monitor-based SLOs. Using a monitor-based SLO, you can calculate the Service Level Indicator (SLI) by dividing the amount of time your system exhibits good behavior by the total time.
+<div class="alert alert-info">Time Slice SLOs are another way to create SLOs with a time-based SLI calculation. With Time Slice SLOs, you can create an uptime SLO without going through a monitor, so you don’t have to create and maintain both a monitor and an SLO.</div>
 
-{{< img src="service_management/service_level_objectives/grouped_monitor_based_slo.png" alt="monitor-based SLO example" >}}
+{{< img src="service_management/service_level_objectives/monitor_slo_side_panel.png" alt="monitor-based SLO example" >}}
 
 ## Prerequisites
 
@@ -31,24 +30,23 @@ Datadog monitor-based SLOs support the following monitor types:
 
 ## Setup
 
-On the [SLO status page][2], select **New SLO**.
-
-Under **Define the source**, select **Monitor Based**.
+On the [SLO status page][2], click **+ New SLO**. Then, select **By Monitor Uptime**.
 
 ### Define queries
 
+
 In the search box, start typing the name of a monitor. A list of matching monitors appears. Click on a monitor name to add it to the source list.
 
-If you're only using a single multi alert monitor in an SLO, you can optionally select "Calculate on selected groups" and pick up to 20 groups. Group selection is not supported for SLOs that contain multiple monitors. For SLOs with multiple monitors, you can add up to 20 monitors.
+**Notes**:
 
+- If you're using a single multi alert monitor in an SLO, you can optionally select "Calculate on selected groups" and pick up to 20 groups. 
+- If you're adding multiple monitors to your SLO, group selection is not supported. You can add up to 20 monitors.
 
 ### Set your SLO targets
 
 Select a **target** percentage, **time window**, and optional **warning** level.
 
-The target percentage specifies the portion of time the underlying monitor(s) of the SLO should not be in the ALERT state.
-
-The time window specifies the rolling period the SLO runs its calculation.
+The target percentage specifies the portion of time the underlying monitor(s) of the SLO should not be in the ALERT state. The time window specifies the rolling period the SLO runs its calculation.
 
 Depending on the value of the SLI, the Datadog UI displays the SLO status in a different color:
 - While the SLI remains above the target, the UI displays the SLO status in green.
@@ -67,13 +65,11 @@ If you need finer granularity than the once a minute monitor evaluation, conside
 
 ### Add name and tags
 
-Choose a name and extended description for your SLO. Select any tags you would like to associate with your SLO.
-
-Select **Save & Exit** to save your new SLO.
+Choose a name and extended description for your SLO. Select any tags you would like to associate with your SLO. Select **Create** or **Create & Set Alert** to save your new SLO.
 
 ## Status calculation
 
-{{< img src="service_management/service_level_objectives/aggregate_slo.jpg" alt="SLO detail showing 99 percent green with 8 groups aggregated" >}}
+{{< img src="service_management/service_level_objectives/monitor_slo_overall_status.png" alt="Monitor-based SLO with groups" >}}
 
 Datadog calculates the overall SLO status as the uptime percentage across all monitors or monitor groups, unless specific groups have been selected:
 - If specific groups have been selected (up to 20), the SLO status is calculated with only those groups. The UI displays all selected groups. 
@@ -128,10 +124,6 @@ SLOs based on the metric monitor types have a feature called SLO Replay that bac
 SLO Replay also triggers when you change the underlying metric monitor's query to correct the status based on the new monitor configuration. As a result of SLO Replay recalculating an SLO's status history, the monitor's status history and the SLO's status history may not match after a monitor update.
 
 **Note:** SLOs based on Synthetic tests or Service Checks do not support SLO Replay.
-
-## Other considerations
-
-Confirm you are using the preferred SLI type for your use case. Datadog supports monitor-based SLIs and [metric-based][3] SLIs.
 
 ## Further Reading
 

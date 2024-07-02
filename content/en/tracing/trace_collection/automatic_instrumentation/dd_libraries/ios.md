@@ -1,6 +1,5 @@
 ---
 title: Tracing iOS Applications
-kind: documentation
 aliases:
 - /tracing/setup_overview/setup/ios/
 - /tracing/setup/ios/
@@ -11,7 +10,7 @@ type: multi-code-lang
 code_lang_weight: 90
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-ios Source code
 - link: tracing/visualization/
   tag: Documentation
@@ -294,7 +293,7 @@ DDDatadog.verbosityLevel = DDSDKVerbosityLevelDebug;
 {{% /tab %}}
 {{< /tabs >}}
 
-3. Datadog tracer implements the [Open Tracing standard][8]. Configure and enable the shared an Open Tracing `Tracer` as `Tracer.shared()`:
+3. Datadog tracer implements both [OpenTracing][8] and [OpenTelemetry][12] standards. Configure and enable the shared an OpenTracing `Tracer` as `Tracer.shared()`:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -533,3 +532,4 @@ The following attributes in `Trace.Configuration` can be used when creating the 
 [9]: https://github.com/opentracing/specification/blob/master/semantic_conventions.md#log-fields-table
 [10]: https://docs.datadoghq.com/tracing/
 [11]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
+[12]: /tracing/trace_collection/custom_instrumentation/ios/otel

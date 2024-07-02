@@ -24,7 +24,7 @@ Jenkins プラグインを使用して、Datadog のアカウントにメトリ�
 
 ### インストール
 
-_このプラグインには [Jenkins 2.346.1][2] が必要です。_
+_このプラグインには [Jenkins 2.361.4][2] と Java 11 が必要です。_
 
 _それ以前のバージョン (1.632+) の Jenkins をご使用の場合は、[こちら](https://updates.jenkins.io/download/plugins/datadog/)からプラグインの 1.2.0 バージョンをご利用ください。_
 
@@ -230,30 +230,82 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]) {
 | グローバルジョブタグ            | ジョブとそのジョブに適用するタグのリストを照合するための正規表現を記載したカンマ区切りリストです。タグにはマスターの jenkins インスタンスで定義される環境変数を含めることができます。**注**: タグで `$` 記号を用いて正規表現に一致したグループを参照することができます。例: `(.*?)_job_(*?)_release, owner:$1, release_env:$2, optional:Tag3` | `DATADOG_JENKINS_PLUGIN_GLOBAL_JOB_TAGS`      |
 | セキュリティ監査イベントの送信 | イベントおよびメトリクスの `Security Events Type` を送信します (デフォルトで有効) 。                                                                                                                                                                | `DATADOG_JENKINS_PLUGIN_EMIT_SECURITY_EVENTS` |
 | システムイベントの送信         | イベントおよびメトリクスの `System Events Type` を送信します (デフォルトで有効) 。                                                                                                                                                                  | `DATADOG_JENKINS_PLUGIN_EMIT_SYSTEM_EVENTS`   |
+| 送信対象のイベント        | イベントタイプの有効/無効に関係なく、送信するイベント名文字列のカンマ区切りリスト。                                                                               | `DATADOG_JENKINS_PLUGIN_INCLUDE_EVENTS`   |
+| 送信から除外するイベント        | イベントタイプの有効/無効に関係なく、送信しないイベント名文字列のカンマ区切りリスト。                                                                               | `DATADOG_JENKINS_PLUGIN_EXCLUDE_EVENTS`   |
 
 ### ジョブのカスタマイズ
 
 各ジョブのコンフィギュレーションページでは、次のようなカスタマイズが可能です。
 
-| 内容                         | 説明                                                                                                                                                                                           |
+| PHP                         | 説明                                                                                                                                                                                           |
 |---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | カスタムタグ                           | ジョブワークスペースの `File` から設定 (パイプラインのジョブではサポートされていません) するか、コンフィギュレーションページのテキスト `Properties` から直接設定します。設定が完了すると、この内容で `Global Job Tags` が上書きされます。 |
 | ソース管理のイベントを送信 | イベントおよびメトリクスの `Source Control Management Events Type` を送信します (デフォルトで有効) 。                                                                                                         |
 
-## 収集データ
+### Test Visibility 構成
+
+このプラグインは、ジョブやパイプラインに対して Datadog の [Test Visibility][19] を自動的に構成することができます (使用しているテストフレームワークがサポートされているか確認するために、ご使用言語の [Test Visibility のドキュメント][20]を参照してください。また、コンテナ内で実行されるテストには自動構成がサポートされていないことに注意してください。コンテナ化されたテスト実行に Test Visibility を有効にするためには、[手動インスツルメンテーションの手順][20]に従ってください)。
+
+Test Visibility を有効にする前に、Datadog にデータを送信するようにプラグインを適切に構成してください。
+
+Test Visibility の自動構成を有効にするには、2 つのオプションがあります。
+
+1. Jenkins UI を使用する (プラグイン v5.6.0 以降で使用可能): テストをトレースする必要があるジョブまたはパイプラインの **Configure** ページに移動し、**General** セクションの **Enable Datadog Test Visibility** チェックボックスにチェックを入れ、変更を保存します。このオプションは、Multibranch Pipelines、Organization Folders、または全体的に `Jenkinsfile` で構成されたその他のタイプのパイプラインを使用している場合は使用できません。
+2. `datadog` パイプラインステップを使用する (プラグイン v5.6.2 以降で使用可能):
+
+宣言的パイプラインでは、トップレベルの `options` ブロックに、次のようにステップを追加します。
+
+```groovy
+pipeline {
+    agent any
+    options {
+        datadog(testVisibility: [ 
+            enabled: true, 
+            serviceName: "my-service", // the name of service or library being tested
+            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON", "DOTNET")
+            additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
+        ])
+    }
+    stages {
+        stage('Example') {
+            steps {
+                echo "Hello world."
+            }
+        }
+    }
+}
+```
+
+スクリプト化されたパイプラインでは、関連セクションを `datadog` ステップでラップします。
+
+```groovy
+datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: ["JAVA"], additionalVariables: [:] ]) {
+  node {
+    stage('Example') {
+      echo "Hello world."
+    }
+  }
+}
+```
+
+`collectLogs` や `tags` などの他の `datadog` の設定は `testVisibility` ブロックと一緒に追加することができます。
+
+Test Visibility は、Datadog の別製品であり、別途請求されることにご留意ください。
+
+## Datadog Operator
 
 このプラグインは以下の[イベント](#events)、[メトリクス](#metrics)、[サービスチェック](#service-checks)を収集します。
 
-### イベント
+### ヘルプ
 
 #### デフォルトのイベントタイプ
 
 | イベント名      | トリガー              | デフォルトのタグ                                                              | 関連するレートメトリクス  |
 |-----------------|---------------------------|---------------------------------------------------------------------------|-------------------------|
-| ビルド開始   | `RunListener#onStarted`   | `branch`, `event_type`, `jenkins_url`, `job`, `node`, `user_id`           | `jenkins.job.started`   |
-| ビルド中止   | `RunListener#onDeleted`   | `branch`, `event_type`, `jenkins_url`, `job`, `node`, `user_id`           | `jenkins.job.aborted`   |
-| ビルド完了 | `RunListener#onCompleted` | `branch`, `event_type`, `jenkins_url`, `job`, `node`, `result`, `user_id` | `jenkins.job.completed` |
-| SCM チェックアウト    | `SCMListener#onCheckout`  | `branch`, `event_type`, `jenkins_url`, `job`, `node`, `user_id`           | `jenkins.scm.checkout`  |
+| BuildStarted   | `RunListener#onStarted`   | `branch`, `event_type`, `jenkins_url`, `job`, `node`, `user_id`           | `jenkins.job.started`   |
+| BuildAborted   | `RunListener#onDeleted`   | `branch`, `event_type`, `jenkins_url`, `job`, `node`, `user_id`           | `jenkins.job.aborted`   |
+| BuildCompleted | `RunListener#onCompleted` | `branch`, `event_type`, `jenkins_url`, `job`, `node`, `result`, `user_id` | `jenkins.job.completed` |
+| SCMCheckout    | `SCMListener#onCheckout`  | `branch`, `event_type`, `jenkins_url`, `job`, `node`, `user_id`           | `jenkins.scm.checkout`  |
 
 注: `event_type` は上記のイベントとメトリクスに対して常に `default` に設定されます。
 
@@ -261,17 +313,16 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]) {
 
 | イベント名                   | トリガー                            | デフォルトのタグ                                                            | 関連するレートメトリクス                 |
 |------------------------------|-----------------------------------------|-------------------------------------------------------------------------|----------------------------------------|
-| コンピューターのオンライン              | `ComputerListener#onOnline`             | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.online`              |
-| コンピューターのオフライン             | `ComputerListener#onOffline`            | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.offline`             |
-| コンピューターの一時オンライン   | `ComputerListener#onTemporarilyOnline`  | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.temporarily_online`  |
-| コンピューターの一時オフライン  | `ComputerListener#onTemporarilyOffline` | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.temporarily_offline` |
-| コンピューターの起動失敗       | `ComputerListener#onLaunchFailure`      | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.launch_failure`      |
-| アイテムの作成                 | `ItemListener#onCreated`                | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.created`                 |
-| アイテムの削除                 | `ItemListener#onDeleted`                | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.deleted`                 |
-| アイテムの更新                 | `ItemListener#onUpdated`                | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.updated`                 |
-| アイテムのコピー                  | `ItemListener#onCopied`                 | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.copied`                  |
-| アイテムの場所変更        | `ItemListener#onLocationChanged`        | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.location_changed`        |
-| 構成の変更               | `SaveableListener#onChange`             | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.config.changed`               |
+| ComputerOnline              | `ComputerListener#onOnline`             | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.online`              |
+| ComputerOffline             | `ComputerListener#onOffline`            | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.offline`             |
+| ComputerTemporarilyOnline   | `ComputerListener#onTemporarilyOnline`  | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.temporarily_online`  |
+| ComputerTemporarilyOffline  | `ComputerListener#onTemporarilyOffline` | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.temporarily_offline` |
+| ComputerLaunchFailure       | `ComputerListener#onLaunchFailure`      | `event_type`, `jenkins_url`, `node_hostname`, `node_name`, `node_label` | `jenkins.computer.launch_failure`      |
+| ItemCreated                 | `ItemListener#onCreated`                | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.created`                 |
+| ItemDeleted                 | `ItemListener#onDeleted`                | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.deleted`                 |
+| ItemUpdated                 | `ItemListener#onUpdated`                | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.updated`                 |
+| ItemCopied                  | `ItemListener#onCopied`                 | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.copied`                  |
+| ItemLocationChanged        | `ItemListener#onLocationChanged`        | `event_type`, `jenkins_url`, `user_id`                                  | `jenkins.item.location_changed`        |
 
 注: `event_type` は上記のイベントとメトリクスに対して常に `system` に設定されます。
 
@@ -279,70 +330,82 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]) {
 
 | イベント名                  | トリガー                            | デフォルトのタグ                                     | 関連するレートメトリクス       |
 |-----------------------------|-----------------------------------------|--------------------------------------------------|------------------------------|
-| ユーザー認証成功          | `SecurityListener#authenticated`        | `event_type`, `jenkins_url`, `user_id`           | `jenkins.user.authenticated` |
-| ユーザー認証失敗 | `SecurityListener#failedToAuthenticate` | `event_type`, `jenkins_url`, `user_id`           | `jenkins.user.access_denied` |
-| ユーザーのログアウト              | `SecurityListener#loggedOut`            | `event_type`, `jenkins_url`, `user_id`           | `jenkins.user.logout`        |
+| UserAuthenticated          | `SecurityListener#authenticated`        | `event_type`, `jenkins_url`, `user_id`           | `jenkins.user.authenticated` |
+| UserFailedToAuthenticate | `SecurityListener#failedToAuthenticate` | `event_type`, `jenkins_url`, `user_id`           | `jenkins.user.access_denied` |
+| UserLoggedOut              | `SecurityListener#loggedOut`            | `event_type`, `jenkins_url`, `user_id`           | `jenkins.user.logout`        |
 
 注: `event_type` は上記のイベントとメトリクスに対して常に `security` に設定されます。
 
-### メトリクス
+#### イベントの絞り込み
 
-| メトリクス名                            | 説明                                                    | デフォルトのタグ                                                               |
-|----------------------------------------|----------------------------------------------------------------|----------------------------------------------------------------------------|
-| `jenkins.computer.launch_failure`      | コンピューターの起動失敗レート                              | `jenkins_url`                                                              |
-| `jenkins.computer.offline`             | コンピューターのオフラインレート                                | `jenkins_url`                                                              |
-| `jenkins.computer.online`              | コンピューターのオンラインレート                                 | `jenkins_url`                                                              |
-| `jenkins.computer.temporarily_offline` | コンピューターの一時的なオフラインレート                    | `jenkins_url`                                                              |
-| `jenkins.computer.temporarily_online`  | コンピューターの一時的なオンラインレート                     | `jenkins_url`                                                              |
-| `jenkins.config.changed`               | 変更された構成レート                                 | `jenkins_url`, `user_id`                                                   |
-| `jenkins.executor.count`               | エグゼキューター総数                                                | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
-| `jenkins.executor.free`                | 使用されていないエグゼキューター数                                     | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
-| `jenkins.executor.in_use`              | アイドル状態のエグゼキューター数                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
-| `jenkins.item.copied`                  | アイテムのコピーレート                                    | `jenkins_url`, `user_id`                                                   |
-| `jenkins.item.created`                 | アイテムの作成レート                                   | `jenkins_url`, `user_id`                                                   |
-| `jenkins.item.deleted`                 | アイテムの削除レート                                   | `jenkins_url`, `user_id`                                                   |
-| `jenkins.item.location_changed`        | アイテムの移動レート                                     | `jenkins_url`, `user_id`                                                   |
-| `jenkins.item.updated`                 | アイテムの更新レート                                   | `jenkins_url`, `user_id`                                                   |
-| `jenkins.job.aborted`                  | ジョブの中止レート                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
-| `jenkins.job.build_duration`           | 一時停止なしのビルドの所要時間 (秒単位)。                     | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
-| `jenkins.job.completed`                | ジョブの完了レート                                        | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
-| `jenkins.job.cycletime`                | ビルドのサイクル時間                                              | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
-| `jenkins.job.duration`                 | ビルドの所要時間 (秒単位)                                    | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
-| `jenkins.job.feedbacktime`             | コードのコミットからジョブの失敗までのフィードバック時間                 | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
-| `jenkins.job.leadtime`                 | ビルドのリードタイム                                               | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
-| `jenkins.job.mtbf`                     | MTBF: 最後に成功したジョブから現在失敗したジョブまでの時間 | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
-| `jenkins.job.mttr`                     | MTTR: 最後に失敗したジョブから現在成功したジョブまでの時間 | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
-| `jenkins.job.pause_duration`            | ビルドジョブの一時停止期間 (秒単位)。                     | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
-| `jenkins.job.started`                  | ジョブの開始レート                                          | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
-| `jenkins.job.stage_duration`           | 個々のステージの期間。                                 | `jenkins_url`、`job`、`user_id`、`stage_name`、`stage_depth`、`stage_parent`、`result` |
-| `jenkins.job.stage_pause_duration`     | 個々のステージの一時停止期間（ミリ秒）。         | `jenkins_url`、`job`、`user_id`、`stage_name`、`stage_depth`、`stage_parent`、`result` |
-| `jenkins.job.stage_completed`          | ステージの完了レート                                      | `jenkins_url`、`job`、`user_id`、`stage_name`、`stage_depth`、`stage_parent`、`result` |
-| `jenkins.job.waiting`                  | ジョブ実行までの待ち時間 (ミリ秒単位)            | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
-| `jenkins.node.count`                   | ノード総数                                          | `jenkins_url`                                                              |
-| `jenkins.node.offline`                 | オフラインのノード数                                           | `jenkins_url`                                                              |
-| `jenkins.node.online`                  | オンラインのノード数                                            | `jenkins_url`                                                              |
-| `jenkins.node_status.count`            | このノードが存在する場合。                                       | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
-| `jenkins.node_status.up`               | 特定のノードがオンラインの場合、値は 1。それ以外の場合は 0。              | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
-| `jenkins.plugin.count`                 | プラグイン総数                                                 | `jenkins_url`                                                              |
-| `jenkins.plugin.active`                | プラグインは有効です。                                                | `jenkins_url`                                                              |
-| `jenkins.plugin.failed`                | プラグインに失敗しました。                                                | `jenkins_url`                                                              |
-| `jenkins.plugin.inactivate`            | プラグインは無効です。                                              | `jenkins_url`                                                              |
-| `jenkins.plugin.withUpdate`            | プラグインに更新があります。                                           | `jenkins_url`                                                              |
-| `jenkins.project.count`                | プロジェクト総数                                                 | `jenkins_url`                                                              |
-| `jenkins.queue.size`                   | キューサイズ                                                    | `jenkins_url`                                                              |
-| `jenkins.queue.buildable`              | キュー内のビルド可能なアイテム数                             | `jenkins_url`                                                              |
-| `jenkins.queue.pending`                | キュー内の保留アイテム数                               | `jenkins_url`                                                              |
-| `jenkins.queue.stuck`                  | キュー内の立ち往生 (スタック) アイテム数                                 | `jenkins_url`                                                              |
-| `jenkins.queue.blocked`                | キュー内のブロックされたアイテム数                               | `jenkins_url`                                                              |
-| `jenkins.queue.job.in_queue`                   | ジョブがキューに入れられた回数。                                                     | `jenkins_url`、`job_name`                                               |
-| `jenkins.queue.job.buildable`              | ジョブがキューでビルド可能になった回数。                             | `jenkins_url`、`job_name`                                               |
-| `jenkins.queue.job.pending`                | ジョブがキューで保留された回数。                             | `jenkins_url`、`job_name`                                               |
-| `jenkins.queue.job.stuck`                  | ジョブがキューでスタックした回数。                                  | `jenkins_url`、`job_name`                                               |
-| `jenkins.queue.job.blocked`                | ジョブがキューでブロックされた回数。                           | `jenkins_url`、`job_name`                                               |
-| `jenkins.scm.checkout`                 | SCM チェックアウトのレート                                         | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
-| `jenkins.user.access_denied`           | 認証に失敗したユーザーレート                         | `jenkins_url`, `user_id`                                                   |
-| `jenkins.user.authenticated`           | 認証したユーザーレート                                  | `jenkins_url`, `user_id`                                                   |
-| `jenkins.user.logout`                  | ログアウトしたユーザーレート                                     | `jenkins_url`, `user_id`                                                   |
+このプラグインを使用すれば、上記の特定のイベント名だけでなく、イベントタイプによってイベントをフィルタリングすることができます。システムまたはセキュリティタイプのすべてのイベントを含める/除外するには
+- **UI で**: これらのイベントのチェックボックスをオフにします。
+- **groovy スクリプトで**: Datadog グローバル記述子を取得し、`d.setEmitSystemEvents()` または `d.setEmitSecurityEvents()` を呼び出します。
+- **[環境変数](#environment-variables)セクションで**: セキュリティイベントやシステムイベントを発生させるための環境変数を設定します。
+
+送信されるイベントをより詳細に制御するために、3 つの構成オプションが提供され、イベント名の文字列のカンマで区切られた含有/除外リストを許可します。含有/除外はイベントタイプによるフィルタリングよりも優先されます。例えば、`security` イベントはオフに切り替えることができますが、`UserAuthenticated` を含めることが優先されるため、`security` タイプからは `UserAuthenticated` イベントのみが送信されます。UI では、含有リストと除外リストの両方にテキストボックスが用意されています。groovy スクリプトでは、`d.setIncludeEvents()` メソッドと `d.setExcludeEvents()` メソッドがカンマで区切られたイベント名のリストを入力として受け付け、これはもう一つの有効な構成メソッドです。ます。最後に、[環境変数](#environment-variables)が用意されており、手動で含有/除外リストを設定することができます。
+
+注: [ジョブのカスタマイズ](#job-customization)セクションで言及されているように、`SCMCheckout` イベントを送信するためのジョブ固有のトグルがあります。`SCMCheckout` イベントがグローバルに除外されている場合、このトグルは無効です。
+
+### データセキュリティ
+
+| メトリクス名                            | 説明                                                                                            | デフォルトのタグ                                                               |
+|----------------------------------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| `jenkins.computer.launch_failure`      | コンピューターの起動失敗レート                                                                      | `jenkins_url`                                                              |
+| `jenkins.computer.offline`             | コンピューターのオフラインレート                                                                        | `jenkins_url`                                                              |
+| `jenkins.computer.online`              | コンピューターのオンラインレート                                                                         | `jenkins_url`                                                              |
+| `jenkins.computer.temporarily_offline` | コンピューターの一時的なオフラインレート                                                            | `jenkins_url`                                                              |
+| `jenkins.computer.temporarily_online`  | コンピューターの一時的なオンラインレート                                                             | `jenkins_url`                                                              |
+| `jenkins.config.changed`               | 変更された構成レート                                                                         | `jenkins_url`, `user_id`                                                   |
+| `jenkins.executor.count`               | エグゼキューター総数                                                                                        | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.executor.free`                | 使用されていないエグゼキューター数                                                                             | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.executor.in_use`              | アイドル状態のエグゼキューター数                                                                               | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.item.copied`                  | アイテムのコピーレート                                                                            | `jenkins_url`, `user_id`                                                   |
+| `jenkins.item.created`                 | アイテムの作成レート                                                                           | `jenkins_url`, `user_id`                                                   |
+| `jenkins.item.deleted`                 | アイテムの削除レート                                                                           | `jenkins_url`, `user_id`                                                   |
+| `jenkins.item.location_changed`        | アイテムの移動レート                                                                             | `jenkins_url`, `user_id`                                                   |
+| `jenkins.item.updated`                 | アイテムの更新レート                                                                           | `jenkins_url`, `user_id`                                                   |
+| `jenkins.job.aborted`                  | ジョブの中止レート                                                                                  | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
+| `jenkins.job.build_duration`           | 一時停止なしのビルドの所要時間 (秒単位)。                                                             | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.completed`                | ジョブの完了レート                                                                                | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.cycletime`                | ビルドサイクルタイム (秒単位)。                                                                         | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.duration`                 | ビルドの所要時間 (秒単位)                                                                            | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.feedbacktime`             | コードのコミットからジョブの失敗までのフィードバック時間 (秒単位)。                                            | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.leadtime`                 | ビルドのリードタイム                                                                                       | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.mtbf`                     | MTBF: 最後に成功したジョブから現在失敗したジョブまでの時間 (秒単位)。                            | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.mttr`                     | MTTR: 最後に失敗したジョブから現在成功したジョブまでの時間 (秒単位)。                            | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.pause_duration`           | ビルドジョブの一時停止期間 (秒単位)。                                                              | `branch`, `jenkins_url`, `job`, `node`, `result`, `user_id`                |
+| `jenkins.job.started`                  | ジョブの開始レート                                                                                  | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
+| `jenkins.job.stage_duration`           | 個々のステージの期間。                                                                         | `jenkins_url`、`job`、`user_id`、`stage_name`、`stage_depth`、`stage_parent`、`result` |
+| `jenkins.job.stage_pause_duration`     | 個々のステージの一時停止期間（ミリ秒）。                                                 | `jenkins_url`、`job`、`user_id`、`stage_name`、`stage_depth`、`stage_parent`、`result` |
+| `jenkins.job.stage_completed`          | ステージの完了レート                                                                              | `jenkins_url`、`job`、`user_id`、`stage_name`、`stage_depth`、`stage_parent`、`result` |
+| `jenkins.job.waiting`                  | ジョブ実行までの待ち時間 (秒単位) 。                                                        | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
+| `jenkins.job.currently_building`       | 現在構築中のジョブの数 (スケジュールされているが、まだ開始されていないジョブは含まれません)。 | `jenkins_url`                      |
+| `jenkins.node.count`                   | ノード総数                                                                                  | `jenkins_url`                                                              |
+| `jenkins.node.offline`                 | オフラインのノード数                                                                                   | `jenkins_url`                                                              |
+| `jenkins.node.online`                  | オンラインのノード数                                                                                    | `jenkins_url`                                                              |
+| `jenkins.node_status.count`            | このノードが存在する場合。                                                                               | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.node_status.up`               | 特定のノードがオンラインの場合、値は 1。それ以外の場合は 0。                                                      | `jenkins_url`, `node_hostname`, `node_name`, `node_label`                  |
+| `jenkins.plugin.count`                 | プラグイン総数                                                                                         | `jenkins_url`                                                              |
+| `jenkins.plugin.active`                | プラグインは有効です。                                                                                        | `jenkins_url`                                                              |
+| `jenkins.plugin.failed`                | プラグインに失敗しました。                                                                                        | `jenkins_url`                                                              |
+| `jenkins.plugin.inactivate`            | プラグインは無効です。                                                                                      | `jenkins_url`                                                              |
+| `jenkins.plugin.withUpdate`            | プラグインに更新があります。                                                                                   | `jenkins_url`                                                              |
+| `jenkins.project.count`                | プロジェクト総数                                                                                         | `jenkins_url`                                                              |
+| `jenkins.queue.size`                   | キューサイズ                                                                                            | `jenkins_url`                                                              |
+| `jenkins.queue.buildable`              | キュー内のビルド可能なアイテム数                                                                     | `jenkins_url`                                                              |
+| `jenkins.queue.pending`                | キュー内の保留アイテム数                                                                       | `jenkins_url`                                                              |
+| `jenkins.queue.stuck`                  | キュー内の立ち往生 (スタック) アイテム数                                                                         | `jenkins_url`                                                              |
+| `jenkins.queue.blocked`                | キュー内のブロックされたアイテム数                                                                       | `jenkins_url`                                                              |
+| `jenkins.queue.job.in_queue`           | ジョブがキューに入れられた回数。                                                             | `jenkins_url`、`job_name`                                                  |
+| `jenkins.queue.job.buildable`          | ジョブがキューでビルド可能になった回数。                                                   | `jenkins_url`、`job_name`                                                  |
+| `jenkins.queue.job.pending`            | ジョブがキューで保留された回数。                                                     | `jenkins_url`、`job_name`                                                  |
+| `jenkins.queue.job.stuck`              | ジョブがキューでスタックした回数。                                                       | `jenkins_url`、`job_name`                                                  |
+| `jenkins.queue.job.blocked`            | ジョブがキューでブロックされた回数。                                                     | `jenkins_url`、`job_name`                                                  |
+| `jenkins.scm.checkout`                 | SCM チェックアウトのレート                                                                                 | `branch`, `jenkins_url`, `job`, `node`, `user_id`                          |
+| `jenkins.user.access_denied`           | 認証に失敗したユーザーレート                                                                 | `jenkins_url`, `user_id`                                                   |
+| `jenkins.user.authenticated`           | 認証したユーザーレート                                                                          | `jenkins_url`, `user_id`                                                   |
+| `jenkins.user.logout`                  | ログアウトしたユーザーレート                                                                             | `jenkins_url`, `user_id`                                                   |
 
 #### Agent のログ収集
 
@@ -391,14 +454,14 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]) {
 [開発用ドキュメント][12]でも、ローカル開発環境の準備などに関するヒントをご紹介しています。
 
 [1]: https://plugins.jenkins.io/datadog
-[2]: http://updates.jenkins-ci.org/download/war/2.346.1/jenkins.war
+[2]: http://updates.jenkins-ci.org/download/war/2.361.4/jenkins.war
 [3]: https://wiki.jenkins-ci.org/display/JENKINS/Plugins#Plugins-Howtoinstallplugins
 [4]: https://app.datadoghq.com/account/settings#api
 [5]: https://github.com/jenkinsci/docker
 [6]: https://wiki.jenkins-ci.org/display/JENKINS/Logging
 [7]: https://github.com/jenkinsci/datadog-plugin/issues
 [8]: https://issues.jenkins-ci.org/issues/?jql=project%20%3D%20JENKINS%20AND%20status%20in%20%28Open%2C%20%22In%20Progress%22%2C%20Reopened%29%20AND%20component%20%3D%20datadog-plugin%20ORDER%20BY%20updated%20DESC%2C%20priority%20DESC%2C%20created%20ASC
-[9]: https://issues.jenkins-ci.org/browse/INFRA-305?jql=status%20in%20%28Open%2C%20%22In%20Progress%22%2C%20Reopened%2C%20Verified%2C%20Untriaged%2C%20%22Fix%20Prepared%22%29%20AND%20text%20~%20%22datadog%22
+[9]: https://issues.jenkins-ci.org/issues/?jql=status%20in%20%28Open%2C%20%22In%20Progress%22%2C%20Reopened%2C%20Verified%2C%20Untriaged%2C%20%22Fix%20Prepared%22%29%20AND%20text%20~%20%22datadog%22
 [10]: https://github.com/jenkinsci/datadog-plugin/blob/master/CHANGELOG.md
 [11]: https://github.com/jenkinsci/datadog-plugin/blob/master/CONTRIBUTING.md
 [12]: https://github.com/jenkinsci/datadog-plugin/blob/master/DEVELOPMENT.md
@@ -408,3 +471,5 @@ datadog(collectLogs: true, tags: ["foo:bar", "bar:baz"]) {
 [16]: https://raw.githubusercontent.com/jenkinsci/datadog-plugin/master/images/dashboard.png
 [17]: https://docs.datadoghq.com/ja/developers/dogstatsd/?tab=containeragent#
 [18]: https://www.jenkins.io/doc/book/using/using-credentials/
+[19]: https://docs.datadoghq.com/ja/tests/
+[20]: https://docs.datadoghq.com/ja/tests/setup/

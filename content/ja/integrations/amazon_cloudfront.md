@@ -96,9 +96,9 @@ Datadog は、このデフォルトのコンフィギュレーションを維持
 
 #### ログを Datadog に送信する方法
 
-リアルタイムログは、選択した Kinesis Data Stream へ配信され、[Kinesis Firehose インテグレーション][2]により Datadog に直接転送することが可能です。
+リアルタイムログは、選択した Kinesis Data Stream へ配信され、[Amazon Data Firehose インテグレーション][2]により Datadog に直接転送することが可能です。
 
-Amazon Kinesis Data Firehose などのコンシューマーを構成してリアルタイムログを S3 バケットに送信し、[Datadog Lambda forwarder][3] を使用してログを Datadog へ送信することもできます。
+Amazon Data Firehose などのコンシューマーを構成してリアルタイムログを S3 バケットに送信し、[Datadog Lambda forwarder][3] を使用してログを Datadog へ送信することもできます。
 
 [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_kinesis/

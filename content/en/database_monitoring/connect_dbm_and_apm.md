@@ -1,6 +1,5 @@
 ---
 title: Correlate Database Monitoring and Traces
-kind: documentation
 aliases:
 - /database_monitoring/guide/connect_dbm_and_apm/
 further_reading:
@@ -8,9 +7,6 @@ further_reading:
     tag: 'Blog'
     text: 'Seamlessly correlate DBM and APM telemetry to understand end-to-end query performance'
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 This guide assumes that you have configured [Database Monitoring][1] and are using [APM][2]. Connecting APM and DBM injects APM trace identifiers into DBM data collection, which allows for correlation of these two data sources. This enables product features showing database information in the APM product, and APM data in the DBM product.
 
@@ -34,10 +30,12 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 
 SQL Server and Oracle do not support `full` propagation mode due to statement caching behavior which could cause performance issues when including full trace context.
 
-| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL   | SQL Server |  Oracle   |
-|:------------------------|:---------:|:---------:|:----------:|:---------:|
-| `full`                  | {{< X >}} | {{< X >}} |            |           |
-| `service`               | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} |
+| DD_DBM_PROPAGATION_MODE | Postgres  |   MySQL     | SQL Server |  Oracle   |
+|:------------------------|:---------:|:-----------:|:----------:|:---------:|
+| `full`                  | {{< X >}} | {{< X >}} * |            |           |
+| `service`               | {{< X >}} | {{< X >}}   | {{< X >}}  | {{< X >}} |
+
+\* Full propagation mode on Aurora MySQL requires version 3.
 
 **Supported application tracers and drivers**
 
@@ -53,6 +51,12 @@ SQL Server and Oracle do not support `full` propagation mode due to statement ca
 |                                          | [mysql2][7]            |           | {{< X >}} |                     |                     |
 | **Python:** [dd-trace-py][11] >= 1.9.0   |                        |           |           |                     |                     |
 |                                          | [psycopg2][12]         | {{< X >}} |           |                     |                     |
+|             [dd-trace-py][11] >= 2.9.0   |                        |           |           |                     |                     |
+|                                          | [asyncpg][27]          | {{< X >}} |           |                     |                     |
+|                                          | [aiomysql][28]         |           | {{< X >}} |                     |                     |
+|                                          | [mysql-connector-python][29] |     | {{< X >}} |                     |                     |
+|                                          | [mysqlclient][30]      |           | {{< X >}} |                     |                     |
+|                                          | [pymysql][31]          |           | {{< X >}} |                     |                     |
 | **.NET** [dd-trace-dotnet][15] >= 2.35.0 |                        |           |           |                     |                     |
 |                                          | [Npgsql][16] *         | {{< X >}} |           |                     |                     |
 |                                          | [MySql.Data][17] *     |           | {{< X >}} |                     |                     |
@@ -194,7 +198,7 @@ In your Gemfile, install or update [dd-trace-rb][1] to version `1.8.0` or greate
 
 ```rb
 source 'https://rubygems.org'
-gem 'ddtrace', '>= 1.8.0'
+gem 'datadog' # Use `'ddtrace', '>= 1.8.0'` if you're using v1.x
 
 # Depends on your usage
 gem 'mysql2'
@@ -243,7 +247,7 @@ Update your app dependencies to include [dd-trace-py>=1.9.0][1]:
 pip install "ddtrace>=1.9.0"
 ```
 
-Install [psycopg2][2] (**Note**: Connecting DBM and APM is not supported for MySQL clients):
+Install [psycopg2][2]:
 ```
 pip install psycopg2
 ```
@@ -338,7 +342,7 @@ Enable the database monitoring propagation feature using one of the following me
    const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
    ```
 
-* Enable only at the integration level: 
+* Enable only at the integration level:
    ```javascript
    const tracer = require('dd-trace').init();
    tracer.use('pg', {
@@ -438,3 +442,8 @@ View historical performance of similar queries to those executed in your trace, 
 [24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set
 [26]: https://app.datadoghq.com/services
+[27]: https://pypi.org/project/asyncpg/
+[28]: https://pypi.org/project/aiomysql/
+[29]: https://pypi.org/project/mysql-connector-python/
+[30]: https://pypi.org/project/mysqlclient/
+[31]: https://github.com/PyMySQL/PyMySQL

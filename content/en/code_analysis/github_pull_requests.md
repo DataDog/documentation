@@ -1,6 +1,5 @@
 ---
 title: GitHub Pull Requests
-kind: documentation
 description: Learn how to use Code Analysis in GitHub pull requests.
 aliases:
 - /static_analysis/github_pull_requests
@@ -23,7 +22,7 @@ During code reviews on GitHub, the integration checks for Static Analysis violat
 
 The comment includes the name, ID, severity, category, and description of the Static Analysis violation. Certain violations also include suggested changes that can be applied directly in the GitHub UI.
 
-## Setup Code Analysis for GitHub pull requests
+## Set up Code Analysis for GitHub pull requests
 
 ### Enable Code Analysis on Datadog
 
@@ -68,6 +67,8 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 {{< img src="ci/static-analysis-github-comments.png" alt="Example of a Code Analysis comment on a pull request" style="width:100%;" >}}
 
+**Note:** If you are using [GitHub Actions][6] to run your scans, trigger the action on `push` in order for comments to appear.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -77,3 +78,4 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 [3]: https://app.datadoghq.com/integrations/github/add
 [4]: https://app.datadoghq.com/ci/settings/static-analysis
 [5]: https://app.datadoghq.com/integrations/github/configuration
+[6]: /code_analysis/static_analysis/github_actions/

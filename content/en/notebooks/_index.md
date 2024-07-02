@@ -1,6 +1,5 @@
 ---
 title: Notebooks
-kind: documentation
 aliases:
   - /graphing/notebooks/
 further_reading:
@@ -173,7 +172,7 @@ Graphs in notebooks support all Datadog data sources: metrics, log events, Index
 * [Query value][13]
 * [Funnel][14]
 * [Pie][15]
-* [SLO Summary][16]
+* [SLO][16]
 
 ### Limit edit access
 

@@ -138,7 +138,7 @@ If you set streaming up with [CloudFormation](?tab=cloudformation#installation):
 
 If you set streaming up through the [AWS Console](?tab=awsconsole#installation):
 1. Delete the CloudWatch Metric Stream linked to your delivery stream.
-2. Delete the S3 Bucket, Firehose, IAM roles associated with the stream and all other resources that were created while setting up the stream.
+2. Delete all resources that were created while setting up the stream, including the S3 and Firehose IAM roles that are associated with the stream.
 
 Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][4] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
 

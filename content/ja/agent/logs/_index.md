@@ -16,7 +16,6 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#global-processing-rules
   tag: ドキュメント
   text: グローバルな処理ルール
-kind: documentation
 title: ホスト Agent ログの収集
 ---
 
@@ -65,9 +64,9 @@ logs:
     source: "<SOURCE>"
 ```
 
-Windows では、パス `<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log` を使用し、ユーザー `ddagentuser` がログファイルへの読み取りおよび書き込みアクセス権を持つことを確認します。
+Windows では、パス `<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log` を使用し、ユーザー `ddagentuser` がログファイルへの読み取りおよび書き込みアクセス権を持つことを確認します。
 
-[1]: /ja/agent/guide/agent-configuration-files/
+[1]: /ja/agent/configuration/agent-configuration-files/
 {{< /tabs >}}
 
 {{% tab "TCP/UDP" %}}
@@ -88,7 +87,7 @@ Agent バージョン 7.31.0 以降では、TCP 接続はアイドル状態で�
 
 **注**: Agent は、単純文字列、JSON、および Syslog 形式のログをサポートします。複数のログを一度に送信する場合は、改行文字を使用してログを区切ってください。
 
-[1]: /ja/agent/guide/agent-configuration-files/
+[1]: /ja/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{% tab "journald" %}}
 
@@ -102,7 +101,7 @@ logs:
 
 コンテナ化環境およびユニットフィルタリングの設定については、[journald インテグレーション][2]に関するドキュメントを参照してください。
 
-[1]: /ja/agent/guide/agent-configuration-files/
+[1]: /ja/agent/configuration/agent-configuration-files/
 [2]: /ja/integrations/journald/
 {{% /tab %}}
 {{% tab "Windows Events" %}}
@@ -173,10 +172,10 @@ logs:
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /ja/agent/kubernetes/log/
 [3]: /ja/agent/docker/log/
-[4]: /ja/agent/guide/agent-configuration-files/
+[4]: /ja/agent/configuration/agent-configuration-files/
 [5]: /ja/agent/logs/log_transport/
-[6]: /ja/agent/guide/agent-commands/#restart-the-agent
-[7]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: /ja/agent/configuration/agent-commands/#restart-the-agent
+[7]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [8]: /ja/tracing/
 [9]: /ja/getting_started/tagging/unified_service_tagging
 [10]: /ja/metrics/custom_metrics/#overview

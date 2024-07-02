@@ -1,6 +1,5 @@
 ---
 title: C++ Custom Instrumentation using Datadog API
-kind: documentation
 aliases:
     - /tracing/manual_instrumentation/cpp
     - /tracing/custom_instrumentation/cpp
@@ -21,35 +20,84 @@ further_reading:
 If you have not yet read the setup instructions, start with the <a href="https://docs.datadoghq.com/tracing/setup/cpp/">C++ Setup Instructions</a>.
 </div>
 
-## Add tags
+## Creating spans
 
-Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. The span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
-
-C++ tracing uses "common tags". These tags can be sourced from both [Datadog specific tags][3] or [OpenTracing tags][4], and included like this:
+To manually instrument a method:
 
 ```cpp
-#include <opentracing/ext/tags.h>
-#include <datadog/tags.h>
+{
+  // Create a root span for the current request.
+  auto root_span = tracer.create_span();
+  root_span.set_name("get_ingredients");
+  // Set a resource name for the root span.
+  root_span.set_resource_name("bologna_sandwich");
+  // Create a child span with the root span as its parent.
+  auto child_span = root_span.create_child();
+  child_span.set_name("cache_lookup");
+  // Set a resource name for the child span.
+  child_span.set_resource_name("ingredients.bologna_sandwich");
+  // Spans can be finished at an explicit time ...
+  child_span.set_end_time(std::chrono::steady_clock::now());
+} // ... or implicitly when the destructor is invoked.
+  // For example, root_span finishes here.
 ```
 
-Note that the Datadog tags are necessary for [unified service tagging][5].
+## Adding tags
 
-### Add custom span tags
+Add custom [span tags][1] to your [spans][2] to customize your observability within Datadog. Span tags are applied to your incoming traces, allowing you to correlate observed behavior with code-level information such as merchant tier, checkout amount, or user ID.
 
-Add [tags][1] directly to a [span][2] object by calling `Span::SetTag`. For example:
+Note that some Datadog tags are necessary for [unified service tagging][3].
+
+{{< tabs >}}
+
+{{% tab "Locally" %}}
+
+### Manually
+
+Add tags directly to a span object by calling `Span::set_tag`. For example:
 
 ```cpp
-auto tracer = ...
-auto span = tracer->StartSpan("operation_name");
-span->SetTag("key must be string", "Values are variable types");
-span->SetTag("key must be string", 1234);
+// Add tags directly to a span by calling `Span::set_tag`
+auto span = tracer.create_span();
+span.set_tag("key must be string", "value must also be a string");
+
+// Or, add tags by setting a `SpanConfig`
+datadog::tracing::SpanConfig opts;
+opts.tags.emplace("team", "apm-proxy");
+auto span2 = tracer.create_span(opts);
 ```
 
-Values are of [variable type][6] and can be complex objects. Values are serialized as JSON, with the exception of a string value being serialized bare (without extra quotation marks).
+{{% /tab %}}
 
-### Adding tags globally to all spans
+{{% tab "Globally" %}}
+
+### Environment variable
 
 To set tags across all your spans, set the `DD_TAGS` environment variable as a list of `key:value` pairs separated by commas.
+
+```
+export DD_TAGS=team:apm-proxy,key:value
+```
+
+### Manually
+
+```cpp
+datadog::tracing::TracerConfig tracer_config;
+tracer_config.tags = {
+  {"team", "apm-proxy"},
+  {"apply", "on all spans"}
+};
+
+const auto validated_config = datadog::tracing::finalize_config(tracer_config);
+auto tracer = datadog::tracing::Tracer(*validated_config);
+
+// All new spans will have contains tags defined in `tracer_config.tags`
+auto span = tracer.create_span();
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Set errors on a span
 
@@ -57,71 +105,39 @@ To associate a span with an error, set one or more error-related tags on the
 span. For example:
 
 ```cpp
-span->SetTag(opentracing::ext::error, true);
+span.set_error(true);
 ```
 
-Or, alternatively:
-
-```cpp
-span->SetTag("error", true);
-```
-
-Add more specific information about the error by setting any combination of the
-`error.msg`, `error.stack`, or `error.type` tags. See [Error Tracking][7] for
-more information about error tags.
+Add more specific information about the error by setting any combination of `error.msg`, `error.stack`, or `error.type` by using respectively `Span::set_error_message`, `Span::set_error_stack` and `Span::set_error_type`. See [Error Tracking][4] for more information about error tags.
 
 An example of adding a combination of error tags:
 
 ```cpp
 // Associate this span with the "bad file descriptor" error from the standard
 // library.
-span->SetTag("error.msg", "[EBADF] invalid file");
-span->SetTag("error.type", "errno");
+span.set_error_message("error");
+span.set_error_stack("[EBADF] invalid file");
+span.set_error_type("errno");
 ```
 
-Adding any of the `error.msg`, `error.stack`, or `error.type` tags sets
-`error` to the value `true`.
+<div class="alert alert-info">
+Using any of the `Span::set_error_*` result in an underlying call to `Span::set_error(true)`.
+</div>
 
-To unset an error on a span, set the `error` tag to value `false`, which removes
-any previously set `error.msg`, `error.stack`, or `error.type` tags.
+To unset an error on a span, set `Span::set_error` to `false`, which removes any  combination of `Span::set_error_stack`, `Span::set_error_type` or `Span::set_error_message`.
 
 ```cpp
 // Clear any error information associated with this span.
-span->SetTag("error", false);
+span.set_error(false);
 ```
-
-## Adding spans
-
-### Manually instrument a method
-
-To manually instrument your code, install the tracer as in the [setup examples][8], and then use the tracer object to create [spans][2].
-
-```cpp
-{
-  // Create a root span for the current request.
-  auto root_span = tracer->StartSpan("get_ingredients");
-  // Set a resource name for the root span.
-  root_span->SetTag(datadog::tags::resource_name, "bologna_sandwich");
-  // Create a child span with the root span as its parent.
-  auto child_span = tracer->StartSpan(
-      "cache_lookup",
-      {opentracing::ChildOf(&root_span->context())});
-  // Set a resource name for the child span.
-  child_span->SetTag(datadog::tags::resource_name, "ingredients.bologna_sandwich");
-  // Spans can be finished at an explicit time ...
-  child_span->Finish();
-} // ... or implicitly when the destructor is invoked.
-  // For example, root_span finishes here.
-```
-
 
 ## Propagating context with headers extraction and injection
 
-You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][9] for information.
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][5] for information.
 
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from sending traces and influencing trace metrics. Find information about this and other security and fine-tuning configuration on the [Security][12] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from sending traces and influencing trace metrics. Find information about this and other security and fine-tuning configuration on the [Security][6] page.
 
 ## Further Reading
 
@@ -129,11 +145,7 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 
 [1]: /tracing/glossary/#span-tags
 [2]: /tracing/glossary/#spans
-[3]: https://github.com/DataDog/dd-opentracing-cpp/blob/master/include/datadog/tags.h
-[4]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/ext/tags.h
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/value.h
-[7]: /tracing/error_tracking/
-[8]: /tracing/setup/cpp/#installation
-[9]: /tracing/trace_collection/trace_context_propagation/cpp
-[12]: /tracing/security
+[3]: /getting_started/tagging/unified_service_tagging
+[4]: /tracing/error_tracking/
+[5]: /tracing/trace_collection/trace_context_propagation/cpp
+[6]: /tracing/security

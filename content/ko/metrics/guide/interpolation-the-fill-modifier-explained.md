@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/functions/interpolation/
   tag: 설명서
   text: 보간 함수에 대해 자세히 알아보기
-kind: faq
 title: 보간 및 입력 한정자
 ---
 

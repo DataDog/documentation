@@ -6,6 +6,9 @@ aliases:
 - /ko/integrations/mainstorconcept_ziris/
 - /ko/integrations/rookout/
 - /ko/integrations/rookout_license/
+- /ko/integrations/shoreline/
+- /ko/integrations/shoreline_license/
+- /ko/integrations/shoreline_software_license/
 cascade:
 - _target:
     path: /integrations/akamai_datastream_2.md
@@ -59,7 +62,7 @@ cascade:
   algolia:
     category: 설명서
     rank: 60
-    subcategory: 가이드
+    subcategory: 통합
     tags:
     - event viewer
   aliases:
@@ -89,10 +92,6 @@ cascade:
   aliases:
   - /integrations/komodor_komodor/
 - _target:
-    path: /integrations/shoreline_license.md
-  aliases:
-  - /integrations/shoreline_software_license/
-- _target:
     path: /integrations/stormforge_license.md
   aliases:
   - /integrations/stormforge_stormforge_license/
@@ -100,9 +99,30 @@ cascade:
     path: /integrations/feed.md
   aliases:
   - /integrations/rss/
+- _target:
+    path: /integrations/java.md
+  aliases:
+  - /agent/faq/jmx_integrations/
+  - /agent/faq/docker-jmx/
+- _target:
+    path: /integrations/amazon_elb.md
+  aliases:
+  - /integrations/awselb
+- _target:
+    path: /integrations/elastic.md
+  aliases:
+  - /integrations/awses
+- _target:
+    path: /integrations/amazon_s3.md
+  aliases:
+  - /integrations/awss3
+- _target:
+    path: /integrations/snowflake_web.md
+  aliases:
+  - /integrations/snowflake/
 description: 모든 시스템, 앱, 서비스에서 데이터를 수집하세요.
 disable_sidebar: true
-kind: 설명서
+custom_kind: 설명서
 title: 통합
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Datadog Service Catalog
-kind: documentation
 aliases:
   - /tracing/faq/service_catalog/
   - /tracing/services/services_list/
@@ -11,7 +10,7 @@ further_reading:
   tag: "Documentation"
   text: "Registering Services with the Service Definition API"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage service definitions with Terraform"
 - link: "/tracing/service_catalog/guides/understanding-service-configuration"
   tag: "Guide"
@@ -82,8 +81,8 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 ## Getting started
 
 {{< whatsnext desc="Explore what Service Catalog has to offer:" >}}
-    {{< nextlink href="tracing/service_catalog/browsing/" >}}Browsing the Service Catalog{{< /nextlink >}}
-    {{< nextlink href="tracing/service_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/navigating/" >}}Navigating the Service Catalog{{< /nextlink >}}
+    {{< nextlink href="/service_catalog/investigating" >}}Investigating a service{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Role based access and permissions
@@ -123,15 +122,6 @@ The type of the service can be one of:
 *  Web
 
 Some integrations alias to types. For example, Postgres, MySQL, and Cassandra map to the type "DB". Redis and Memcache integrations map to the type "Cache".
-
-### Updating service type and language
-With [Service Catalog metadata schema 2.2][5], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
-
-## Changing service color
-
-Service color is used in trace visualizations. Click the service type icon to change it.
-
-{{< img src="tracing/service_catalog/change_service_color.png" alt="Click the service icon to select a different icon color." style="width:80%;" >}}
 
 ## Data retention
 The services and resources statistics, and span summaries on the **Service List** and **Service Page** are retained for up to 30 days. For customized queries on APM trace metrics, use Metric Explorer. [Learn more about data retention for APM][4].

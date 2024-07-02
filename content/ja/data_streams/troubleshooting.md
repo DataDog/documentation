@@ -1,6 +1,5 @@
 ---
 description: データストリームモニタリングのトラブルシューティング
-kind: documentation
 title: データストリームモニタリングのトラブルシューティング
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM for .NET
-kind: documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 10
@@ -13,7 +12,7 @@ further_reading:
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-dotnet'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: '.NET Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"
@@ -26,8 +25,6 @@ further_reading:
 You can monitor application security for .NET apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
-
-{{% appsec-getstarted-with-rc %}}
 
 ## Enabling threat detection
 ### Get started

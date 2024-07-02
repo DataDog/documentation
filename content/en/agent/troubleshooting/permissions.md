@@ -1,16 +1,15 @@
 ---
 title: Permission Issues
-kind: documentation
 aliases:
   - /agent/faq/how-to-solve-permission-denied-errors
   - /agent/faq/why-don-t-i-see-the-system-processes-open-file-descriptors-metric
   - /agent/faq/cannot-open-an-http-server-socket-error-reported-errno-eacces-13
 further_reading:
 - link: "/agent/troubleshooting/debug_mode/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Agent Debug Mode"
 - link: "/agent/troubleshooting/send_a_flare/"
-  tag: "Agent Troubleshooting"
+  tag: "Documentation"
   text: "Send an Agent Flare"
 ---
 

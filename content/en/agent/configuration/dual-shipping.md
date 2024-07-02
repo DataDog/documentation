@@ -1,6 +1,5 @@
 ---
 title: Dual Shipping
-kind: guide
 aliases:
 - /agent/guide/dual-shipping
 further_reading:
@@ -15,7 +14,7 @@ Dual shipping can impact billing if you are sending data to multiple Datadog org
 
 ## Overview
 
-If you wish to send data to more than one destination, such as a second Datadog organization or other internal infrastructure, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the configurations below.
+If you wish to send data to more than one destination, such as a second Datadog organization, you can configure the Agent to send data to additional endpoints. To set up the Agent to send different kinds of data to multiple endpoints or API keys, use the configurations below.
 
 For a full list of network traffic destinations, see [Network Traffic][1].
 

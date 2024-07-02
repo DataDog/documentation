@@ -1,7 +1,6 @@
 ---
-title: .NET Core Compatibility Requirements
-kind: documentation
-description: 'Compatibility Requirements for the .NET tracer'
+title: .NET and .NET Core Compatibility Requirements
+description: 'Compatibility Requirements for the .NET Tracer'
 aliases:
   - /tracing/compatibility_requirements/dotnet-core
   - /tracing/setup_overview/compatibility_requirements/dotnet-core
@@ -13,7 +12,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Instrument Your Application'
     - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Examples of Custom Instrumentation'
     - link: 'https://www.datadoghq.com/blog/asp-dotnet-core-monitoring/'
       tag: 'Blog'
@@ -21,18 +20,18 @@ further_reading:
 ---
 
 
-The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
+The Datadog .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
 
 The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
 
-## Supported .NET Core runtimes
+## Supported .NET and .NET Core runtimes
 
-The .NET Tracer supports automatic instrumentation on the following .NET Core versions. It also supports [.NET Framework][2].
+The .NET Tracer supports automatic instrumentation on the following .NET and .NET Core versions. It also supports [.NET Framework][2].
 
-| Version              | Microsoft End of Life | Support level        | Package version      |
+| .NET Version         | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
 | .NET 8               |                       | [GA](#support-ga)    | latest (>= 2.42.0)   |
-| .NET 7               |                       | [GA](#support-ga)    | latest (>= 2.20.0)   |
+| .NET 7               | 05/14/2024            | [GA](#support-ga)    | latest (>= 2.20.0)   |
 | .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
 | .NET 5               | 05/10/2022            | [GA](#support-ga)    | latest (>= 2.0.0)    |
 | .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | latest               |
@@ -41,7 +40,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 | .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended       |
 | .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended       |
 
- Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions), and in [Runtime support policy for .NET Core APM](#runtime-support-policy-for-net-core-apm).
+Additional information can be found in [Microsoft's .NET and .NET Core Lifecycle Policy][3], [End of life .NET runtime versions](#end-of-life-net-runtime-versions), and [.NET runtime support policy](#net-runtime-support-policy).
 
 ## Supported processor architectures
 
@@ -105,15 +104,18 @@ Some libraries provide built in [Activity based tracing][13]. This is the same m
 
 Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][14] for more details.
 
+## End of life .NET runtime versions
 
-## End of life .NET Core versions
+The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, 3.0, and 3.1, and on .NET 5 and 7, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET 6 or .NET 8. Older versions of .NET and .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
 
-The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, and 3.0, but these versions reached their end of life and are no longer supported by Microsoft. See [Microsoft's support policy][3] for more details. Datadog recommends using the latest patch version of .NET Core 3.1, .NET 5, .NET 6, or .NET 7. Older versions of .NET Core may encounter the following runtime issues when enabling automatic instrumentation:
-
-| Issue                                         | Affected .NET Core Versions               | Solution                                                               | More information                        |
+| Issue                                         | Affected .NET Versions                    | Solution                                                               | More information                        |
 |-----------------------------------------------|-------------------------------------------|------------------------------------------------------------------------|-----------------------------------------|
 | JIT Compiler bug on Linux/x64                 | 2.0.x,</br>2.1.0-2.1.11,</br>2.2.0-2.2.5  | Upgrade .NET Core to the latest patch version, or follow steps in the linked issue | [DataDog/dd-trace-dotnet/issues/302][6] |
 | Resource lookup bug with a non `en-US` locale | 2.0.0                                     | Upgrade .NET Core to 2.0.3 or above                                    | [dotnet/runtime/issues/23938][7]        |
+| JIT Compiler bug causing crash on shutdown    | 2.0.0-2.2.x                               | Upgrade .NET Core to 3.1.0 or above | [dotnet/runtime/pull/11885][15]   |
+| JIT Compiler bug                              | 2.x, 3.x, 5.x, 6.x, 7.x, 8.0.0-8.0.5      | Upgrade .NET to 8.0.6 or above    | [dotnet/runtime/pull/73760][16]   |
+| JIT Compiler bug                              | All versions of .NET                      | No current workaround    | [dotnet/runtime/issues/85777][17]   |
+| .NET runtime bug causing crashes when used with runtime metrics | 6.0.0-6.0.10            | Upgrade .NET 6.0.11 or above, or disable runtime metrics    | [dotnet/runtime/pull/76431][18]   |
 
 ## Supported Datadog Agent versions
 
@@ -123,9 +125,9 @@ The .NET Tracer works on .NET Core 2.0, 2.1, 2.2, and 3.0, but these versions re
 | [6.x][8]                    | Latest              |
 | [5.x][9]                    | Latest              |
 
-## Runtime support policy for .NET Core APM
+## .NET runtime support policy
 
-Datadog APM for .NET Core depends on the host operating system, .NET Core runtime, certain .NET Core libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Core. When the external software no longer supports a version of .NET Core, Datadog APM for .NET Core also limits its support for that version.
+The .NET Tracer depends on the host operating system, .NET runtime, certain .NET libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET and .NET Core. When the external software no longer supports a version of .NET, the .NET Tracer also limits its support for that version.
 
 ### Levels of support
 
@@ -139,7 +141,7 @@ Datadog APM for .NET Core depends on the host operating system, .NET Core runtim
 
 ### Package versioning
 
-Datadog APM for .NET Core practices [semantic versioning][11].
+The .NET Tracer practices [semantic versioning][11].
 Version updates imply the following changes to runtime support:
 
   - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
@@ -164,3 +166,7 @@ Version updates imply the following changes to runtime support:
 [12]: https://www.nuget.org/packages/Datadog.Trace.Trimming/
 [13]: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing
 [14]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
+[15]: https://github.com/dotnet/runtime/pull/73760
+[16]: https://github.com/dotnet/runtime/issues/11885
+[17]: https://github.com/dotnet/runtime/issues/85777
+[18]: https://github.com/dotnet/runtime/pull/76431

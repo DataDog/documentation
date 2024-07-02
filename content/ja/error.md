@@ -1,6 +1,5 @@
 ---
 title: エラーが発生しました
-kind: documentation
 private: true
 ---
 

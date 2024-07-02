@@ -1,6 +1,5 @@
 ---
 title: OpenTelemetry Metrics Mapping
-kind: documentation
 aliases:
 - /opentelemetry/guide/metrics_mapping/
 further_reading:
@@ -160,7 +159,7 @@ The following table shows what Datadog container metric names are associated wit
 [4]: /opentelemetry/guide/semantic_mapping/
 [5]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=availability-zone
 [6]: https://app.datadoghq.com/infrastructure
-[7]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#out-of-the-box-dashboards
+[7]: /opentelemetry/collector_exporter/#out-of-the-box-dashboards
 [8]: /tracing/trace_explorer/trace_view/?tab=hostinfo
 [9]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
 [10]: /tracing/trace_explorer/trace_view/

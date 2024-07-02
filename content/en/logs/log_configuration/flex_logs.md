@@ -1,6 +1,5 @@
 ---
 title: Flex Logs
-kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
 aliases:
   - /logs/log_configuration/flex_log/
@@ -8,6 +7,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/flex-logging"
   tag: "Blog"
   text: "Store and analyze high-volume logs efficiently with Flex Logs"
+- link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+  tag: "Blog"
+  text: "Monitor DNS logs for network and security analysis"
 - link: "/logs/log_configuration/indexes"
   tag: "Documentation"
   text: "Log Indexes"
@@ -34,7 +36,7 @@ Flex Logs is set up within log index configurations. [Index filters][1] that app
 
 Configure Flex Tier in the [Logs Index Configuration][2] page:
 
-1. Go to [**Logs > Configuration > Indexes**][2].
+1. Go to [**Logs > Pipelines > Indexes**][2].
 2. Edit the index you wish to enable with Flex Logs or create a new index.
 3. Select **Flex Tier** and set the retention under *Configure Storage Tier and Retention*.
 
@@ -76,6 +78,8 @@ The following list is an example of log sources that are potentially good candid
   - AWS VPC, Direct Connect, PrivateLink, AWS NAT Gateway, Azure Basition, and Virtual WAN.
 - **Loadbalancers examples**
   - AWS ELB, ALB, NLB (GCP and Azure flavors), F5, and NGINX.
+- **Artifact repository management examples**
+  - [JFrog Artifactory][4], Archiva, Sonatype Nexus
 - **Identity services and tools examples**
   - Cisco ISE, Okta, OneLogin, and Workday User Activity Logs.
 - **Audit logs examples**
@@ -106,3 +110,4 @@ You can use the spectrum of log types shown in the image below to determine when
 [1]: /logs/log_configuration/indexes/#indexes-filters
 [2]: https://app.datadoghq.com/logs/pipelines/indexes
 [3]: https://app.datadoghq.com/logs
+[4]: https://jfrog.com/help/r/jfrog-platform-administration-documentation/monitoring-and-logging

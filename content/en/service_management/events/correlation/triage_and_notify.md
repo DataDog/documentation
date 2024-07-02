@@ -1,6 +1,5 @@
 ---
 title: Triage and Notify
-kind: Documentation
 further_reading:
 - link: "service_management/events/correlation/"
   tag: "Documentation"
@@ -11,15 +10,30 @@ further_reading:
 
 Event Management correlates related events and automatically consolidates them into a single case. Bring in all the context of related logs, related metrics, and alerting monitors to triage and troubleshoot issues in one place.
 
-From the [Correlation][1] page, find the pattern you want to analyze and click **Triage Cases** at the end of the same row. You can also click **View All Cases** at the top of the page to view all cases with correlated events in [Case Management][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
+From the [Correlation][1] page, find the pattern you want to analyze and click **Triage Cases** at the end of the same row. You can also click **Case Management** at the top of the page to view all cases with correlated events in [Case Management][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
 
-To investigate a case:
-1. Open the case you are investigating.
+## Event Management Case
+
+{{< img src="service_management/events/correlation/triage/event_management_case_detail.png" alt="Case detail page - Overview" style="width:100%;" >}}
+
+
+| Feature | Description | 
+| ------  | ----------- | 
+| Priority | highest priority of correlated alerts |
+| Attribute | tags from correlated events. user updates won't get overriden by the engine |
+| Status | automatically managed by system, user updates will get overriden by system. Cases will auto resolve when all of the underline alerts recover and automatically reopen when any alert is re-triggered during the maximum alive time window |
+| Deletion | select the checkbox on the alert to delete any irrelevant alerts, deleted alerts won't get correlated again |
+| Enriched Alerts | some cases will get automatically enriched with intelligent alerts that Datadog thinks are related based on your infrastructure. Enriched alert do not impact case attribute, priority, and status |
+
+
+For more information on Case Management operations, see the [Case Management documentation][5].
+
+### Investigation
 1. From the case Overview, click **Investigation**
-1. Under the *Correlations* section, you can see a list of alerts and events. 
-1. Click into any of the alerts or events to view all related metrics and logs in context of the alert.
-1. (Optional) Select any alerts or events you want to remove that are not related to the case.
-1. Under the *Related Metrics* section, compare all related metrics or group by tags.
+1. Under the *Correlations* section, you can see a list of alerts and events
+1. Click into any of the alerts or events to view all related metrics and logs in context of the alert
+1. (Optional) Select any alerts or events you want to remove that are not related to the case
+1. Under the *Related Metrics* section, compare all related metrics or group by tags
 
 
 ## Create a notification or ticket
@@ -45,3 +59,4 @@ In case management, _views_ group cases based on a configured query. You can set
 [2]: https://app.datadoghq.com/cases?query=status%3AOPEN%20creation_source%3AEVENT_MANAGEMENT&page=1&page-size=25&sort=created_at
 [3]: /service_management/case_management/settings#set-up-integrations
 [4]: /service_management/case_management/view_and_manage#create-a-view
+[5]: /service_management/case_management/view_and_manage

@@ -1,6 +1,5 @@
 ---
 title: Data Transformation
-kind: Documentation
 disable_toc: false
 ---
 
@@ -63,4 +62,7 @@ let object = {0:{
 ...
 ```
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][2].
+
 [1]: https://lodash.com/
+[2]: https://datadoghq.slack.com/

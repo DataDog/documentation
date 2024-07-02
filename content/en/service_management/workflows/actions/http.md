@@ -1,6 +1,5 @@
 ---
 title: HTTP Requests
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "/service_management/workflows/connections/"
@@ -140,10 +139,40 @@ You can also select whether you want to allow expired certificates, or follow re
 
 Under **Error on Status**, enter a comma-delineated list of any status codes on which to return an error. Use the **Response Parsing** dropdown to override the default response parsing method inferred from the headers, and **Response Encoding** if the target server specifies the wrong encoding in its response headers.
 
+## Private actions
+
+{{< callout url="https://www.datadoghq.com/private-beta/private-actions/" btn_hidden="false" header="Join the Beta!">}}
+Private Actions are in beta. Use this form to request access today.
+{{< /callout >}}
+
+You can use a private HTTP action to interact with services hosted on your private network without exposing your services to the public internet. Private actions make use of a private action runner which you install on a host in your network using Docker and pair with a Datadog Connection. For more information, see [Private Actions][5].
+
+To configure a private HTTP request:
+1. Add an HTTP action to your app.
+1. In the **Connection** section, click the plus icon (**+**).
+1. Select **HTTP**.
+1. Enter a **Connection Name**.
+1. Enter the **Base URL** for the host in your private network.
+1. For **Type**, ensure that **Private Action Runner** is selected.
+1. From the **Private Action Runner** dropdown, select your [private action runner][5].
+1. From the **Authentication Type** dropdown, select an Authentication type and fill in the required fields. Private HTTP requests support the following authentication types:
+   - No authentication
+   - [Basic authentication](#create-an-http-basic-authentication-connection)
+   - [Token authentication](#create-an-http-token-authentication-connection)
+
+   For information on configuring credentials for Token authentication, see [Handling Private Action Credentials][6].
+1. Click **Next, Confirm Access** and configure access to the query.
+1. Click **Create**.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+<br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][4].
+
 [1]: https://docs.datadoghq.com/api/latest/ip-ranges/#list-ip-ranges
 [2]: /service_management/workflows/access/
 [3]: https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc#the-default-scope
+[4]: https://datadoghq.slack.com/
+[5]: /service_management/workflows/private_actions
+[6]: /service_management/workflows/private_actions/private_action_credentials/?tab=httpsaction#credential-files

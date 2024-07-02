@@ -2,7 +2,6 @@
 aliases:
 - /ja/agent/faq/upgrade-to-agent-v6
 - /ja/agent/guide/upgrade-to-agent-v6
-kind: documentation
 title: Datadog Agent v6 へのアップグレード
 ---
 
@@ -22,7 +21,7 @@ Agent v5 が既にインストールされている場合は、新しい Agent �
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
 
 以下のコマンドは、Amazon Linux、CentOS、Debian、Fedora、Red Hat、Ubuntu、および SUSE で動作します。
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"`
+: `DD_UPGRADE=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent6.sh)"`
 
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、Datadog がそのままの状態での完全な下位互換性は保証できないためです。
 
@@ -37,7 +36,7 @@ Windows プラットフォーム用のワンステップインストールはあ
 Agent v6 インストーラは、アップグレード時に v5 の構成を自動的に変換できます。
 
 ```shell
-DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
+DD_UPGRADE=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 ```
 
 **注:** インポート処理では、**カスタム** Agent チェックは自動的に移動されません。これは、Datadog がそのままの状態での完全な下位互換性は保証できないためです。

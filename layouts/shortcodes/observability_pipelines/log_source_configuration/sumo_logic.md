@@ -10,6 +10,6 @@ curl -v -X POST -T [local_file_name] http://<OPW_HOST>/receiver/v1/http/<UNIQUE_
 
 `<UNIQUE_HTTP_COLLECTOR_CODE>` is the string that follows the last forward slash (`/`) in the upload URL for the HTTP source that you provided in the [Install the Observability Pipelines Worker](#install-the-observability-pipelines-worker) step.
 
-At this point, your logs should be going to the Worker, processed by the pipeline, and uploaded to the Sumo Logic HTTP Source.
+At this point, your logs should be going to the Worker, processed by the pipeline, and delivered to the configured destination.
 
 [1001]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/upload-logs/

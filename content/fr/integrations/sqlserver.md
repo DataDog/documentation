@@ -29,7 +29,7 @@ guid: 635cb962-ee9f-4788-aa55-a7ffb9661498
 integration_id: sql-server
 integration_title: SQL Server
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: help@datadoghq.com
 manifest_version: 1.0.0
 metric_prefix: sqlserver.

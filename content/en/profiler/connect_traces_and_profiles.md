@@ -1,6 +1,5 @@
 ---
 title: Investigate Slow Traces or Endpoints
-kind: Documentation
 further_reading:
     - link: 'tracing'
       tag: 'Documentation'
@@ -27,7 +26,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 {{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
-Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS. 
+Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1] on Linux and macOS.
 The feature is not available on Windows.
 
 For manually instrumented code, continuous profiler requires scope activation of spans:
@@ -61,7 +60,7 @@ Requires `dd-trace-py` version 0.44.0+.
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-The new [timeline feature](#span-execution-timeline-view) (beta) is enabled by default in `dd-trace-rb` 1.21.1+.
+The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-rb` 1.21.1+.
 
 To additionally enable showing [GC in timeline](#span-execution-timeline-view):
 - set `DD_PROFILING_FORCE_ENABLE_GC=true`
@@ -74,9 +73,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
 
-To enable the [timeline feature](#span-execution-timeline-view) (beta):
-- upgrade to `dd-trace-js` 5.1.0+, 4.25.0+, or 3.46.0+
-- set `DD_PROFILING_TIMELINE_ENABLED=1`
+The new [timeline feature](#span-execution-timeline-view) is enabled by default in `dd-trace-js` 5.11.0+, 4.35.0+, and 3.56.0+.
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
@@ -84,7 +81,7 @@ To enable the [timeline feature](#span-execution-timeline-view) (beta):
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Go service][1].
 
-To enable the new [timeline feature](#span-execution-timeline-view) (beta), set the environment variables below:
+To enable the new [timeline feature](#span-execution-timeline-view), set the environment variables below:
 
 ```go
 os.Setenv("DD_PROFILING_EXECUTION_TRACE_ENABLED", "true")
@@ -100,7 +97,7 @@ You can find this data:
 
 While recording execution traces, your application may observe an increase in CPU usage similar to a garbage collection. Although this should not have a significant impact for most applications, Go 1.21 includes [patches][7] to eliminate this overhead.
 
-This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline beta) and works best with Go version 1.18 or later (1.21 or later for timeline beta).
+This capability requires `dd-trace-go` version 1.37.0+ (1.52.0+ for timeline view) and works best with Go version 1.18 or later (1.21 or later for timeline view).
 
 [1]: /profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/issues/2099
@@ -124,7 +121,7 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-php` version 0.71+.
 
-To enable the [timeline feature](#span-execution-timeline-view) (beta):
+To enable the [timeline feature](#span-execution-timeline-view):
 - Upgrade to `dd-trace-php` version 0.98+.
 - Set the environment variable `DD_PROFILING_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.timeline_enabled=1`
 
@@ -230,7 +227,7 @@ Lanes on the top are garbage collector **runtime activities** that may add extra
 {{< programming-lang lang="php" >}}
 See [prerequisites](#prerequisites) to learn how to enable this feature for PHP.
 
-There is one lane for each PHP **thread**. In PHP NTS, this is one lane; in PHP ZTS, there is one lane per **thread**. Fibers that run in this **thread** are represented in the same lane.
+There is one lane for each PHP **thread** (in PHP NTS, this is only one lane). Fibers that run in this **thread** are represented in the same lane.
 
 Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 {{< /programming-lang >}}

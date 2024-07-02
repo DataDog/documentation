@@ -20,13 +20,10 @@ further_reading:
 - link: /agent/cluster_agent/troubleshooting/
   tag: Documentación
   text: Solucionar problemas del Datadog Cluster Agent
-kind: documentación
 title: Configurar el Datadog Cluster Agent
 ---
 
 Si despliegas el Datadog Agent usando Helm chart v2.7.0 o Datadog Operator v0.7.0 (o sus respectivas versiones posteriores), el Cluster Agent estará habilitado de forma predeterminada.
-
-Si utilizas otros métodos, como DaemonSet, sigue estos pasos:
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -75,7 +72,7 @@ Cuando se configura manualmente, este token debe estar compuesto por 32 caracte
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
-{{% tab "DaemonSet" %}}
+{{% tab "Manual (DaemonSet)" %}}
 
 Para configurar el Datadog Cluster Agent usando un DaemonSet:
 1. [Configura los permisos de control de acceso basado en roles del Cluster Agent](#configure-cluster-agent-rbac-permissions).
@@ -304,5 +301,5 @@ clusterAgent:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/es/agent/guide/agent-commands/?tab=agentv6v7#agent-information
+[1]: https://docs.datadoghq.com/es/agent/configuration/agent-commands/?tab=agentv6v7#agent-information
 [2]: https://docs.datadoghq.com/es/agent/troubleshooting/windows_containers/#mixed-clusters-linux--windows

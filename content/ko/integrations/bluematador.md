@@ -32,7 +32,7 @@ integration_id: blue-matador
 integration_title: Blue Matador
 integration_version: ''
 is_public: true
-kind: 통합
+custom_kind: 통합
 manifest_version: 2.0.0
 name: bluematador
 public_title: Blue Matador

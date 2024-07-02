@@ -9,7 +9,7 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Synthetic Monitoring"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage Synthetic API tests with Terraform"
 ---
 

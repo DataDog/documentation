@@ -1,6 +1,5 @@
 ---
 title: Gestion de compte
-kind: documentation
 description: Gérer votre organisation et votre compte Datadog
 aliases:
   - /fr/guides/billing

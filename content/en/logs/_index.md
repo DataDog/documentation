@@ -1,6 +1,5 @@
 ---
 title: Log Management
-kind: Documentation
 description: "Configure your Datadog Agent to gather logs from your host, containers & services."
 disable_sidebar: true
 aliases:
@@ -38,6 +37,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/filter-logs-by-subqueries-with-datadog/"
     tag: "Blog"
     text: "Filter and correlate logs dynamically using Subqueries"
+  - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+    tag: "Blog"
+    text: "Monitor DNS logs for network and security analysis"
 cascade:
     algolia:
         rank: 70

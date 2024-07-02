@@ -18,13 +18,12 @@ further_reading:
 - link: /real_user_monitoring/platform/dashboards/
   tag: Documentation
   text: RUM ダッシュボードについて
-kind: documentation
 title: ページのパフォーマンスの監視
 ---
 
 ## 概要
 
-RUM のビューイベントは、すべてのページビューについて、広範なパフォーマンスメトリクスを収集します。アプリケーションのページビューを監視し、ダッシュボードや RUM エクスプローラでパフォーマンスメトリクスを確認することができます。
+RUM のビューイベントは、各ページビューについて広範囲のパフォーマンスメトリクスを収集します。アプリケーションのページビューを監視し、ダッシュボードや RUM エクスプローラーでパフォーマンスメトリクスを確認することができます。
 
 {{< img src="real_user_monitoring/browser/waterfall-4.png" alt="RUM エクスプローラーの RUM ビューの Performance タブに表示されるウォーターフォールグラフ" style="width:100%;" >}}
 
@@ -44,7 +43,7 @@ Datadog の Core Web Vitals メトリクスは、<a href="https://github.com/Dat
 {{< img src="real_user_monitoring/browser/core-web-vitals.png" alt="コアウェブバイタルの概要の視覚化" >}}
 
 - バックグラウンドで開かれたページの First Input Delay および Largest Contentful Paint は収集されません（たとえば、新規タブや焦点のないウィンドウ）。
-- 実際のユーザーのページビューから収集されたメトリクスは、[Synthetic ブラウザテスト][6]などの固定され制御された環境で読み込まれたページに対して計算されたものと異なる場合があります。Synthetic Monitoring では、Largest Contentful Paint と Cumulative Layout Shift は、実際のメトリクスではなく、ラボのメトリクスとして表示されます。
+- 実際のユーザーのページビューから収集されたメトリクスは、[Synthetic ブラウザテスト][6]などの固定され制御された環境で読み込まれたページに対して計算されたものと異なる場合があります。Synthetic Monitoring では、Largest Contentful Paint と Cumulative Layout Shift を実際のメトリクスではなく、ラボメトリクスとして表示します。
 
 | メトリクス                   | 焦点            | 説明                                                                                           | 対象値 |
 |--------------------------|------------------|-------------------------------------------------------------------------------------------------------|--------------|

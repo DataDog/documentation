@@ -1,6 +1,5 @@
 ---
 title: Team Management
-kind: documentation
 ---
 
 ## Team detail
@@ -30,7 +29,7 @@ To modify the team page layout, you must have the `user_access_manage` or `teams
 1. To reorder the resources, click and drag the drag handle icons.
 1. To hide a resource, mouse over an item and click the eye (**Hide content**) icon.
 
-Hidden resources appear at the bottom of the page layout dialog. To unhide a resource, mouse over it and click the **Unhide content** icon.
+Hidden resources appear at the bottom of the page layout dialog. To reveal a resource, mouse over it and click the **Unhide content** icon.
 
 ### Customize settings
 

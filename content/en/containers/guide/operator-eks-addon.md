@@ -1,6 +1,5 @@
 ---
 title: Installing the Datadog Agent on Amazon EKS with the Datadog Operator add-on
-kind: guide
 aliases:
  - /agent/guide/operator-eks-addon
 further_reading:
@@ -144,7 +143,7 @@ To delete the add-on, run:
 [2]: /getting_started/containers/datadog_operator
 [3]: https://github.com/DataDog/helm-charts/blob/operator-eks-addon/charts/operator-eks-addon/aws_mp_configuration.schema.json
 [4]: https://github.com/DataDog/helm-charts/tree/main/charts/datadog-operator
-[5]: https://app.datadoghq.com/account/settings#api
+[5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 [7]: https://docs.datadoghq.com/infrastructure/containers/orchestrator_explorer/?tab=datadogoperator
 [8]: https://github.com/DataDog/datadog-agent/blob/4896a45f586f74de1da2e985f98988f0181afc36/pkg/config/config_template.yaml#L407-L416

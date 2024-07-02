@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Dashboards
-kind: documentation
 further_reading:
   - link: "https://www.datadoghq.com/blog/dashboard-sharing/"
     tag: "Blog"
@@ -92,7 +91,7 @@ Timeseries graphs of metrics are useful, but dashboards can contain many types o
  - **Tables**: Show lists of metrics grouped by tag keys.
  - **Top lists**: For example, show which hosts have the least free space, which services are throwing the most errors, or which URLs are returning the most 404s.
  - **Host map**: Show a diagram of, for example, the hosts in your infrastructure with colors that show status of their integrations or services.
- - **Service Level Objectives (SLO)**: Show team performance against goals with an SLO summary widget, and group it additional widgets that show details for SLI metrics.
+ - **Service Level Objectives (SLO)**: Show team performance against goals with an SLO widget, and group it additional widgets that show details for SLI metrics.
  - **Distributions**: Show, for example, a histogram of number of different types of events in a containerized environment, the number of critical errors in each service, website flow (number of users getting to page 2, page 3, page 4), or latency percentile buckets.
 
 See [Widgets][6] for more information and examples of setting up these graphs.
@@ -107,7 +106,7 @@ There are two ways to create links from a dashboard to any target URL:
  - Create a Custom link from a widget's Settings (gear) menu. Custom links can interpolate variables and template variables, so that the link changes according to what the user has selected when they click, taking them to exactly the right place for analyzing data or taking corrective action. 
      {{< img src="getting_started/dashboards/opening_custom_link.mp4" alt="Opening a custom link" video=true >}}
 
-## What's next 
+## What's next
 
 ### Share your dashboards outside of the Datadog site
 

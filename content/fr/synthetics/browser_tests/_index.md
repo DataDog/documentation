@@ -23,7 +23,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Créer et gérer des tests Browser Synthetic avec Terraform
-kind: documentation
 title: Tests Browser
 ---
 
