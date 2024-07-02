@@ -21,7 +21,7 @@ further_reading:
   text: Uso de consultas con notación de CIDR para filtrar tus logs de tráfico de
     red
 kind: documentación
-title: Atributos y solapamiento
+title: Atributos y alias
 ---
 
 ## Información general
@@ -30,9 +30,9 @@ Centralizar logs a partir de varias tecnologías y aplicaciones puede generar de
 
 Por ejemplo, una IP de cliente puede tener varios atributos de logs, como `clientIP`, `client_ip_address`, `remote_address`, `client.ip`, etc. Es posible hacer referencia a un tiempo de ejecución como `exec_time`, `request_latency`, `request.time_elapsed`, etc.
 
-Utiliza los **atributos** y el **solapamiento** para unificar el entorno de tus logs.
+Utiliza **atributos** y **alias** para unificar el entorno de tus logs.
 
-## Tipos de atributos y solapamiento
+## Tipos de atributos y alias
 
 Los atributos imponen [facetas de logs][1] y [etiquetas (tags)][2] que se utilizan para filtrar y buscar en el Explorador de logs.
 
@@ -40,7 +40,7 @@ Los atributos imponen [facetas de logs][1] y [etiquetas (tags)][2] que se utiliz
 
   * Los [**atributos estándar**](#standard-attributes) son la columna vertebral de la convención de nomenclatura de tu organización. Existe un conjunto predeterminado de atributos estándar disponibles en [la aplicación][3]. Sin embargo, esta lista puede personalizarse para crear una **convención de nomenclatura** para tu equipo.
 
-  * Utiliza el [**solapamiento**](#aliasing) una vez que hayas implementado una convención de nomenclatura con atributos estándar o si estás intentando crear una faceta estándar única a partir de múltiples fuentes de logs. Por ejemplo, realiza un seguimiento de los clientes más afectados por las latencias en una infraestructura híbrida [Apache][4] y [Amazon Cloud Front][5], utilizando la faceta estándar `Network Client IP` junto con la `duration` estándar. El solapamiento permite la implementación de una convención de nomenclatura sin tener que cambiar la pila técnica de un equipo.
+  * Utiliza los [**alias**](#aliasing) una vez que hayas implementado una convención de nomenclatura con atributos estándar o si estás intentando crear una faceta estándar única a partir de múltiples fuentes de logs. Por ejemplo, realiza un seguimiento de los clientes más afectados por las latencias en una infraestructura híbrida [Apache][4] y [Amazon Cloud Front][5], utilizando la faceta estándar `Network Client IP` junto con la `duration` estándar. El uso de alias permite la implementación de una convención de nomenclatura sin tener que cambiar la pila técnica de un equipo.
 
 ## Atributos reservados
 
