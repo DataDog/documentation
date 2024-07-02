@@ -1,0 +1,58 @@
+---
+title: Configure SCIM with Okta
+algolia:
+  tags: [scim, identity provider, IdP, Okta]
+---
+
+See the following instructions to synchronize your Datadog users with Okta using SCIM.
+
+For the capabilities and limitations of this feature, see [SCIM][1].
+
+## 前提条件
+
+Datadog の SCIM は、Enterprise プランに含まれる高度な機能です。
+
+このドキュメントは、組織がアイデンティティプロバイダーを使用してユーザーアイデンティティを管理していることを前提としています。
+
+Datadog strongly recommends that you use a service account application key when configuring SCIM to avoid any disruption in access. For further details, see [using a service account with SCIM][2].
+
+SAML と SCIM を併用する場合、Datadog は、アクセスの不一致を避けるために、SAML のジャストインタイム (JIT) プロビジョニングを無効にすることを強く推奨します。SCIM だけでユーザープロビジョニングを管理します。
+
+## Select the Datadog application in the Okta application gallery
+
+1. In your Okta portal, go to **Applications**
+2. Click **Browse App Catalog**
+3. 検索ボックスに「Datadog」と入力します
+4. Select the Datadog application
+5. Click **Add Integration**
+
+**Note:** If you already have Datadog configured with Okta, select your existing Datadog application.
+
+## 自動ユーザープロビジョニングの構成
+
+1. アプリケーション管理画面で、左のパネルから **Provisioning** を選択します
+2. Click **Configuration API integration**.
+3. Select **Enable API integration**.
+3. Complete the **Credentials** section as follows:
+    - **Base URL**: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
+    - **API Token**: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
+
+{{< img src="/account_management/scim/okta-admin-credentials.png" alt="Okta Admin Credentials configuration screen">}}
+
+5. Click **Test API Credentials**, and wait for the message confirming that the credentials are verified.
+6. Click **Save**. The settings section appears.
+7. Next to **Provisioning to App** , select **Edit** to enable the features:
+    - **Create Users**
+    - **Update User Attributes**
+    - **Deactivate Users**
+8. Under **Datadog Attribute Mappings**, find the mapping of Okta attributes to Datadog attributes already pre-configured. You can re-map them if needed, but map the Okta values to the same set of Datadog values.
+
+### グループ属性
+
+グループマッピングはサポートされていません。
+
+[1]: /account_management/scim/
+[2]: /account_management/scim/#using-a-service-account-with-scim
+[3]: /getting_started/site
+[4]: https://app.datadoghq.com/organization-settings/application-keys
+[5]: /account_management/org_settings/service_accounts
