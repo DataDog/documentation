@@ -17,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
   tag: "Blog"
   text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
+- link: "https://www.datadoghq.com/blog/exception-replay-datadog/"
+  tag: "Blog"
+  text: "Simplify production debugging with Datadog Exception Replay"
 ---
 
 ## Overview
