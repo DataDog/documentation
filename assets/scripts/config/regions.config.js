@@ -260,5 +260,11 @@ export default {
       eu: 'http://ip-ranges.datadoghq.eu',
       ap1: 'http://ip-ranges.ap1.datadoghq.com',
       gov: 'http://ip-ranges.ddog-gov.com'
-    }
+    },
+    otlp_trace_endpoint: {
+     us: `https://trace.agent.datadoghq.com/api/v0.2/traces`,
+     us3: `https://trace.agent.us3.datadoghq.com/api/v0.2/traces`,
+     us5: `https://trace.agent.us5.datadoghq.com/api/v0.2/traces`,
+     eu: `https://trace.agent.datadoghq.eu/api/v0.2/traces`
+    }  
 };
