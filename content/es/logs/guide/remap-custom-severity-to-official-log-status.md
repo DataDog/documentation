@@ -11,7 +11,6 @@ further_reading:
 - link: /logs/log_configuration/parsing
   tag: Documentación
   text: Obtén más información sobre el parseo
-kind: guía
 title: Reasignación de valores de gravedad personalizados al estado del log oficial
 ---
 
