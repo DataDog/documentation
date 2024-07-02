@@ -58,7 +58,7 @@ Después de procesar, se genera el siguiente log estructurado:
 * Debes tener nombres de regla únicos dentro del mismo analizador grok.
 * El nombre de la regla sólo debe contener: caracteres alfanuméricos, `_` y `.`. Debe comenzar con un carácter alfanumérico.
 * Las propiedades con valores nulos o vacíos no se muestran.
-* El emparejador de regex aplica un `^` implícito, para hacer coincidir el inicio de una cadena, y un `$`, para hacer coincidir el final de la cadena.
+* El emparejador de expresiones regulares aplica un `^` implícito, para hacer coincidir el inicio de una cadena, y un `$`, para hacer coincidir el final de la cadena.
 * Algunos logs pueden generar grandes espacios en blanco. Utiliza `\n` y `\s+` para tener en cuenta las nuevas líneas y los espacios en blanco.
 
 ### Emparejador y filtro
@@ -72,7 +72,7 @@ En esta lista encontrarás todos los emparejadores y filtros implementados de fo
 : Empareja una fecha con el patrón especificado y la analiza para producir una marca de tiempo Unix. [Consulta los ejemplos del emparejador de fechas](#parsing-dates).
 
 `regex("pattern")`
-: Empareja un regex. [Verifica los ejemplos del emparejador de regex](#regex).
+: Empareja una expresión regular. [Verifica los ejemplos del emparejador de expresiones regulares](#regex).
 
 `notSpace`
 : Empareja cualquier cadena hasta el siguiente espacio.
@@ -105,7 +105,7 @@ En esta lista encontrarás todos los emparejadores y filtros implementados de fo
 : Empareja un número entero (con soporte de notación científica) y lo analiza como un número entero.
 
 `word`
-: Empareja una palabra que comienza con un límite de palabra; es decir, contiene caracteres a-z, A-Z, 0-9, incluido el carácter `_` (guión bajo), y termina con un límite de palabra. Equivale a `\b\w+\b` en regex.
+: Empareja una palabra que comienza con un límite de palabra; es decir, contiene caracteres a-z, A-Z, 0-9, incluido el carácter `_` (guión bajo), y termina con un límite de palabra. Equivale a `\b\w+\b` en expresiones regulares.
 
 `doubleQuotedString`
 : Empareja una cadena entre comillas dobles.
@@ -141,7 +141,7 @@ En esta lista encontrarás todos los emparejadores y filtros implementados de fo
 : Empareja un número de puerto.
 
 `data`
-: Empareja cualquier cadena, incluidos espacios y líneas nuevas. Equivale a `.*` en regex. Utilízalo cuando ninguno de los patrones anteriores sea apropiado.
+: Empareja cualquier cadena, incluidos espacios y líneas nuevas. Equivale a `.*` en expresiones regulares. Utilízalo cuando ninguno de los patrones anteriores sea apropiado.
 
 {{% /tab %}}
 {{% tab "Filters" (Filtros) %}}
@@ -212,7 +212,7 @@ En la parte inferior de los cuadros de tu procesador grok se encuentra la secci�
 
 Utiliza el campo **Extract from** (Extraer de) para aplicar tu procesador grok en un atributo con texto determinado, en lugar del atributo `message` predeterminado.
 
-Por ejemplo, considera un log que contiene un atributo `command.line` que debe analizarse como un valor clave. Podrías analizar este log de la siguiente manera:
+Por ejemplo, considera un log que contiene un atributo `command.line` que debe analizarse como clave valor. Podrías analizar este log de la siguiente manera:
 
 {{< img src="logs/processing/parsing/parsing_attribute.png" alt="Análisis de una línea de comando" style="width:80%;">}}
 
@@ -251,7 +251,7 @@ Algunos ejemplos que demuestran cómo utilizar los analizadores:
 * [Alternancia de patrones](#alternating-pattern)
 * [Atributo opcional](#optional-attribute)
 * [JSON anidado](#nested-json)
-* [Regex](#regex)
+* [Expresiones regulares](#regex)
 * [Lista a matrices](#list-to-array)
 * [Formato glog](#glog-format)
 * [XML](#parsing-xml)
@@ -454,7 +454,7 @@ parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{numb
 
 {{< img src="logs/processing/parsing/nested_json.png" alt="Ejemplo de análisis de un JSON anidado" style="width:80%;" >}}
 
-### Expresión regular
+### Expresiones regulares
 
 **Log:**
 
