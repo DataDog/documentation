@@ -1,7 +1,6 @@
 ---
 description: Oracle データベースでのデータベースモニタリングの設定
 disable_sidebar: true
-kind: documentation
 title: Oracle の設定
 ---
 
@@ -72,7 +71,7 @@ Oracle DBM のビルドは [RHEL][6] と [Ubuntu][7] のそれぞれのリポジ
 export DD_AGENT_DIST_CHANNEL=beta
 export DD_AGENT_MINOR_VERSION="48.1~dbm~oracle~1.2-1"
 
-DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 [6]: https://yum.datadoghq.com/beta/7/x86_64/

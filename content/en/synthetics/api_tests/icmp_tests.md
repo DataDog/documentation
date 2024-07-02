@@ -1,6 +1,5 @@
 ---
 title: ICMP Testing
-kind: documentation
 description: Monitor the availability of your hosts and diagnose network issues.
 aliases:
   - /synthetics/icmp_test
@@ -30,8 +29,6 @@ algolia:
 ICMP tests allow you to monitor the availability of your hosts and diagnose network communication issues. By asserting on the values received from one or more ICMP pings to your endpoint, Datadog can help detect connectivity issues, above-quota latency for round trip times, and unexpected changes in security firewall configuration. The tests can also track the number of network hops (TTL) required to connect to your host and view traceroute results to discover details on each network hop along the path.
 
 ICMP tests can run from both [managed](#select-locations) and [private locations][1] depending on whether you want to trigger ICMP pings to your endpoints from outside or inside your network. You can run ICMP tests on a defined schedule, on demand, or from within your [CI/CD pipelines][2].
-
-**Note**: Windows Private Locations do not support running `ICMP` tests. 
 
 ## Configuration
 
@@ -122,7 +119,7 @@ You can restrict access to an ICMP test based on the roles in your organization.
 [1]: /synthetics/private_locations
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
-[4]: /monitors/notify/#notify-your-team
+[4]: /monitors/notify/#configure-notifications-and-automations
 [5]: https://www.markdownguide.org/basic-syntax/
 [6]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [7]: /synthetics/guide/synthetic-test-monitors

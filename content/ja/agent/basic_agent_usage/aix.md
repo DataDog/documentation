@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/announcing-ibm-aix-agent/
   tag: GitHub
   text: Datadog Unix Agent を使用した AIX の監視
-kind: documentation
 title: AIX 用 Agent の基本的な使用方法
 ---
 

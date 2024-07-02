@@ -1,6 +1,5 @@
 ---
 title: Docker Log Collection Troubleshooting Guide
-kind: documentation
 ---
 
 There are a number of common issues that can get in the way when sending new container logs to Datadog with the Container Agent or with a locally installed Host Agent. If you experience issues sending new logs to Datadog, this guide helps you troubleshoot. If you continue to have trouble, [contact our support team][1] for further assistance.

@@ -117,9 +117,10 @@ cascade:
     path: /integrations/amazon_s3.md
   aliases:
   - /integrations/awss3
+- params:
+    custom_kind: "integration"
 description: すべてのシステム、アプリケーション、およびサービスからデータを収集
 disable_sidebar: true
-kind: documentation
 title: インテグレーション
 ---
 

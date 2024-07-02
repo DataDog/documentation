@@ -1,6 +1,5 @@
 ---
 title: Propagating PHP Trace Context
-kind: documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 40
@@ -29,7 +28,7 @@ You can use the following environment variables to configure the PHP tracing lib
 - `DD_TRACE_PROPAGATION_STYLE_INJECT=datadog,tracecontext,B3 single header`
 - `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog,tracecontext,B3 single header`
 
-The environment variable values are comma-separated lists of header styles enabled for injection or extraction. The default style setting is `datadog,tracecontext`.
+The environment variable values are comma-separated lists of header styles enabled for injection or extraction. The default style setting is `datadog,tracecontext` (for PHP tracer versions prior to v0.98.0, the default setting is `tracecontext,Datadog`).
 
 If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 

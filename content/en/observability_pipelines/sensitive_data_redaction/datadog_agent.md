@@ -1,6 +1,5 @@
 ---
 title: Sensitive Data Redaction for the Datadog Agent
-kind: document
 disable_toc: false
 ---
 

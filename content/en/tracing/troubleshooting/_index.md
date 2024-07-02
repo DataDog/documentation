@@ -1,6 +1,5 @@
 ---
 title: APM Troubleshooting
-kind: documentation
 aliases:
     - /tracing/faq/my-trace-agent-log-renders-empty-service-error/
 further_reading:
@@ -165,7 +164,7 @@ kubectl exec -it <agent-pod-name> -c trace-agent -- agent flare <case-id> --loca
 [5]: /tracing/troubleshooting/tracer_debug_logs/
 [6]: /tracing/glossary/#services
 [7]: /tracing/glossary/#resources
-[8]: /tracing/glossary/#span-tags
+[8]: /glossary/#span-tag
 [9]: /tracing/troubleshooting/agent_rate_limits
 [10]: /tracing/troubleshooting/agent_apm_resource_usage/
 [11]: /tracing/custom_instrumentation/agent_customization

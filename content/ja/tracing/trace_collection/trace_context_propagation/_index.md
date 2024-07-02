@@ -8,7 +8,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
   tag: ブログ
   text: W3C Trace Context に対応した OpenTelemetry インスツルメンテーションされたアプリのモニタリング
-kind: documentation
 title: トレースコンテキストの伝搬
 type: multi-code-lang
 ---

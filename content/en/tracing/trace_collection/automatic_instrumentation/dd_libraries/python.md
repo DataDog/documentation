@@ -1,6 +1,5 @@
 ---
 title: Tracing Python Applications
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
@@ -17,7 +16,7 @@ further_reading:
       tag: "Source Code"
       text: 'Source code'
     - link: 'https://ddtrace.readthedocs.io/en/stable/'
-      tag: 'Pypi'
+      tag: 'External Site'
       text: 'API Docs'
     - link: 'tracing/glossary/'
       tag: 'Documentation'

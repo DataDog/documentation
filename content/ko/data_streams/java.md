@@ -6,7 +6,6 @@ further_reading:
 - link: /tracing/service_catalog/
   tag: 설명서
   text: 서비스 카탈로그
-kind: 설명서
 title: Data Streams Monitoring for Java 설정
 ---
 

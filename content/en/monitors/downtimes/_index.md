@@ -1,6 +1,5 @@
 ---
 title: Downtimes
-kind: documentation
 description: "Schedule downtimes for your Datadog monitors to prevent alerts during specific time periods"
 aliases:
 - /monitors/notify/downtimes/
@@ -116,11 +115,11 @@ Use [recurrence rules][4] (RRULEs) to define downtimes schedules. Use the offici
 ## Notifications
 ### Add a message
 
-Enter a message to notify your team about this downtime. The message field allows standard markdown formatting and Datadog's `@-notification` syntax. See the [Notifications page][7] for more information on formatting options.
+Enter a message to alert your team about this downtime. The message field allows standard markdown formatting and Datadog's `@-notification` syntax. See the [Notifications page][7] for more information on formatting options.
 
-### Notify your team
+### Configure notifications and automations
 
-Notify your team by specifying team members or send the message to a service [integration][8]. Datadog sends notifications to the specified destinations whenever the downtime is scheduled, started, cancelled, or expired. These audit notifications allows your team to be aware of the Downtimes in your system.
+Configure notifications and automations by specifying team members or sending the message to a service [integration][8]. Datadog sends notifications to the specified destinations whenever the downtime is scheduled, started, cancelled, or expired. These audit notifications allows your team to be aware of the downtimes in your system.
 
 ### Disable first recovery notification
 
@@ -155,9 +154,9 @@ Monitors trigger events when they change between possible states: `ALERT`, `WARN
 
 By default, if a monitor is in an alert-worthy state (`ALERT`, `WARNING`, or `NO DATA`) when a downtime expires, the monitor triggers a new notification. This applies to monitors that change state during downtime (such as from `OK` to `ALERT`, `WARNING`, or `NO DATA`), and to monitors that already have an alert-worthy state when downtime begins. If a downtime is manually canceled, notifications are not sent, even if the monitor has entered an alert-worthy state.
 
-To override the default behavior, specify which notifications should be sent at the end of downtimes with the options in the "Notify Your Team" section. For downtimes created with the API, the default behavior is to exclude the `Is cancelled` option.
+To override the default behavior, specify which notifications should be sent at the end of downtimes with the options in the **Configure notifications and automations** section. For downtimes created with the API, the default behavior is to exclude the `Is cancelled` option.
 
-{{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="Configure Notify your team section of a monitor with specific downtime conditions" style="width:100%;">}}
+{{< img src="monitors/downtimes/downtime_cancel_expire_notification.png" alt="The Configure notifications and automations section of a monitor with specific downtime conditions" style="width:100%;">}}
 
 **Example 1:** If a monitor is in an alert state *before* downtime starts and *continues* for the duration of downtime:
 1. During downtime, notifications for this alert are suppressed.

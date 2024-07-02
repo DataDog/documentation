@@ -1,6 +1,5 @@
 ---
 title: Tracing PHP Applications
-kind: documentation
 aliases:
 - /tracing/languages/php
 - /agent/apm/php/
@@ -32,7 +31,7 @@ further_reading:
 ---
 ## Compatibility requirements
 
-The latest PHP Tracer supports versions >= 5.4.x.
+The minimum PHP version requirement for the latest version of `dd-trace-php` is PHP 7. If you are using PHP 5, you can still use the PHP tracer up to version [0.99](https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0). PHP 5 is EOL as of version 1.0 of the PHP library.
 
 For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
@@ -57,7 +56,7 @@ apk add libgcc
 Run the installer:
 
 ```shell
-# Full installation: APM + ASM + Profiling (Beta)
+# Full installation: APM + ASM + Profiling
 php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
 
 # APM only

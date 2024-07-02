@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: DevSecOps 번들 사용하기
 ---
 
@@ -135,7 +134,7 @@ APM DevSecOps Enterprise에 포함된 기능에 대해 자세히 알아보세요
 {{< tabs >}}
 {{% tab "인프라스트럭처 DevSecOps Pro" %}}
 
-인프라스트럭처 DevSecOps Pro에는 [컨테이너][1], [서버리스][2] 및 [CSM Pro][3]가 포함됩니다. 또한 [700개 이상의 즉시 사용 가능한 통합][4]이 포함됩니다.
+인프라스트럭처 DevSecOps Pro에는 [컨테이너][1], [서버리스][2] 및 [CSM Pro][3]가 포함됩니다. 또한 [750개 이상의 즉시 사용 가능한 통합][4]이 포함됩니다.
 
 ### 설정
 
@@ -175,7 +174,7 @@ Agent를 설치한 후 환경에 맞게 CSM Pro를 설정합니다.
 {{% /tab %}}
 {{% tab "인프라스트럭처 DevSecOps Enterprise" %}}
 
-인프라스트럭처 DevSecOps Enterprise에는 [컨테이너][1], [서버리스][2], [실시간 프로세스][3] 및 [CSM Enterprise][4]가 포함됩니다. 또한 [700개 이상의 즉시 사용 가능한 통합][5]이 포함됩니다.
+인프라스트럭처 DevSecOps Enterprise에는 [컨테이너][1], [서버리스][2], [실시간 프로세스][3] 및 [CSM Enterprise][4]가 포함됩니다. 또한 [750개 이상의 즉시 사용 가능한 통합][5]이 포함됩니다.
 
 ### 설정
 

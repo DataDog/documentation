@@ -26,7 +26,7 @@ integration_id: federatorai
 integration_title: Federator.ai
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 maintainer: support@prophetstor.com
 manifest_version: 1.0.0
 metric_prefix: federatorai.

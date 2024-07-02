@@ -1,6 +1,5 @@
 ---
 title: Configuring the Python Tracing Library
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 20
@@ -9,7 +8,7 @@ further_reading:
       tag: "Source Code"
       text: 'Source code'
     - link: 'https://ddtrace.readthedocs.io/en/stable/'
-      tag: 'Pypi'
+      tag: 'External Site'
       text: 'API Docs'
     - link: "/tracing/trace_collection/trace_context_propagation/python/"
       tag: "Documentation"

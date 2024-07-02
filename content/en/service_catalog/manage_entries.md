@@ -1,6 +1,5 @@
 ---
 title: Manage Automatically Included Entries
-kind: documentation
 further_reading:
 - link: "/tracing/service_catalog/adding_metadata"
   tag: "Documentation"
@@ -21,17 +20,17 @@ further_reading:
 
 ## Automatic service discovery
 
-Datadog Service Catalog includes both eBPF-based autodiscovery with [Universal Service Monitoring][17] and distributed tracing based detection with [APM][18]. RUM applications are included in the Service Catalog as well. If you are using any of these products, your catalog is pre-populated with entries.
+Datadog Service Catalog includes both eBPF-based autodiscovery with [Universal Service Monitoring][1] and distributed tracing based detection with [APM][2]. RUM applications are included in the Service Catalog as well. If you are using any of these products, your catalog is pre-populated with entries.
 
 ## Enrich auto-detected services with metadata 
-To specify on-call, source code, or documentation for your services, you can add metadata to any existing services via the UI, APIs, or other automation. 2.2 is the recommended version. To try experimental features, you can opt into the beta program for [schema 3.0][21] by [submitting a request][22].
+To specify on-call, source code, or documentation for your services, you can add metadata to any existing services via the UI, APIs, or other automation. 2.2 is the recommended version. To try experimental features, you can opt into the beta program for [schema 3.0][3] by [submitting a request][4].
 
 {{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
 {{< /callout >}}
 
 ### Service Definition Schema (v2.2) (Recommended)
 
-The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][19].
+The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][5].
 
 #### Example
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
@@ -97,11 +96,8 @@ extensions:
     customField2: customValue2
 {{< /code-block >}}
 
-## Manage service-related workflows
-[Workflow Automation][14] allows you to automate end-to-end processes across your teams. It integrates with Datadog's Service Catalog to enable dynamic and self-service workflows.
-
-### Find Service Catalog actions
-To explore the complete set of actions specifically related to Service Catalog, navigate to the [Datadog Action Catalog][23]. Filter for the actions you need:
+## Find Service Catalog actions
+To explore the complete set of actions specifically related to Service Catalog, navigate to the [Datadog Action Catalog][6]. Filter for the actions you need:
 
 1. **Access the Action Catalog**: Look for the Action Catalog within your Datadog Workflow Automation environment.
 2. **Search Functionality**: Use the search bar to search for keywords like "Service Catalog" or more specific terms related to desired actions (for example, "get service dependencies").
@@ -118,32 +114,22 @@ Below is a comprehensive list of actions available for Service Catalog in Datado
   - "Get service PagerDuty on call"
   - When integrated with other actions, you can trigger workflows based on critical events (for example, execute runbooks). 
 
-## Changing the service color
+## Change the service color
 The service color is used in trace visualizations. Click the service type icon to change it.
 
 {{< img src="tracing/service_catalog/change_service_color.png" alt="Click the service icon to select a different icon color." style="width:80%;" >}}
 
-## Updating the service type and language
-With [Service Catalog metadata schema 2.2][19], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
+## Update the service type and language
+With [Service Catalog metadata schema 2.2][5], you can specify the type and language for user-defined services or overwrite the auto-detected type and language for instrumented services. Correctly label the service type and language to help other teams further understand what your services do and how to interact with them. 
 
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/service_catalog/service_definition_api/
-[2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
-[3]: https://app.datadoghq.com/services/settings/get-started
-[4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
-[5]: /getting_started/tagging/unified_service_tagging
-[6]: /integrations/github/
-[14]: /service_management/workflows/
-[15]: https://backstage.io/docs/features/software-catalog/descriptor-format/
-[16]: https://docs.datadoghq.com/integrations/servicenow/#service-ingestion
-[17]: https://docs.datadoghq.com/universal_service_monitoring/
-[18]: https://docs.datadoghq.com/tracing/
-[19]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.2
-[20]: /service_catalog/service_definitions
-[21]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
-[22]: https://forms.gle/zbLfnJYhD5Ab4Wr18
-[23]: https://docs.datadoghq.com/service_management/workflows/actions_catalog/
+[1]: /universal_service_monitoring/
+[2]: /tracing/
+[3]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
+[4]: https://forms.gle/zbLfnJYhD5Ab4Wr18
+[5]: https://github.com/DataDog/schema/tree/main/service-catalog/v2.2
+[6]: /service_management/workflows/actions_catalog/

@@ -6,6 +6,7 @@ categories:
 - provisioning
 - configuration & deployment
 - log collection
+custom_kind: integration
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/vmware_tanzu_application_service.md
 description: Surveillez l'intégrité de vos machines virtuelles VMware Tanzu Application
@@ -24,7 +25,6 @@ further_reading:
 integration_id: pivotal-platform
 integration_title: VMware Tanzu Application Service
 is_public: true
-kind: integration
 name: vmware_tanzu_application_service
 newhlevel: true
 public_title: Intégration Datadog/VMware Tanzu Application Service (Pivotal Cloud
@@ -46,7 +46,7 @@ Il existe trois composants principaux pour l'intégration Datadog/VMware Tanzu A
 
 Référez-vous au [guide d'installation et de configuration de VMware Tanzu][4] (en anglais) pour installer l'intégration via Tanzu Ops Manager. Pour obtenir les instructions de configuration manuelle, consultez la rubrique [Surveiller vos applications][5] du guide de configuration manuelle.
 
-### Suivi des vues Web
+### Configuration
 
 #### Collecte de métriques
 
@@ -119,7 +119,7 @@ Si la connexion ne peut pas être établie et que la collecte de logs ne démarr
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="Un événement dans Datadog dont le titre est « Log endpoint cannot be reached - Log collection not started » et un message indiquant qu'une connexion TCP n'a pas pu être établie" >}}
 
-### Supprimer les tags d'un host
+### Tags
 
 Pour ajouter des tags personnalisés à votre application, définissez la variable d'environnement `DD_TAGS` via le fichier `manifest.yml` ou la commande de l'interface de ligne de commande CF :
 
@@ -143,9 +143,9 @@ cf restage <VOTRE_APPLICATION>
 
 Référez-vous au [guide d'installation et de configuration de VMware Tanzu][13] (en anglais) pour installer l'intégration via Tanzu Ops Manager. Pour découvrir les instructions de configuration manuelle, consultez la rubrique relative à la [surveillance du cluster VMware Tanzu Application Service][14] du guide de configuration manuelle.
 
-## Heures de permanence
+## Données collectées
 
-### Signaux mobiles
+### Métriques
 
 Les métriques suivantes sont envoyées par le Firehose Nozzle de Datadog. Le préfixe `cloudfoundry.nozzle` est ajouté à ces métriques. L'Agent Datadog envoie les métriques de tous les checks d'Agent que vous avez configurés dans la configuration du runtime de Director, ainsi que, par défaut, les métriques [système][15], [réseau][16], [disque][17] et [NTP][18].
 

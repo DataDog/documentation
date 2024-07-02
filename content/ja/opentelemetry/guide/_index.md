@@ -22,7 +22,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/correlate-traces-datadog-rum-otel/
   tag: ブログ
   text: Datadog RUM イベントと OpenTelemetry インスツルメンテーションされたアプリケーションのトレースを相関させる
-kind: ガイド
 private: true
 title: OpenTelemetry ガイド
 ---

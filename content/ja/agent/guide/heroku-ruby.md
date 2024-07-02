@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/guide/collect-heroku-logs
   tag: ドキュメント
   text: Heroku ログの収集
-kind: ガイド
 title: Datadog で Heroku の Ruby on Rails アプリケーションをインスツルメント
 ---
 

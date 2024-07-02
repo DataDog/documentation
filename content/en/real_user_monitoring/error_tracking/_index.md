@@ -1,6 +1,5 @@
 ---
 title: Error Tracking for Web and Mobile Applications
-kind: documentation
 description: Learn how to search and manage errors collected from your web and mobile applications.
 further_reading:
 - link: "https://www.datadoghq.com/blog/error-tracking/"

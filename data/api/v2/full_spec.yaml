@@ -373,6 +373,14 @@ components:
       required: true
       schema:
         type: string
+    OrgConfigName:
+      description: The name of an Org Config.
+      in: path
+      name: org_config_name
+      required: true
+      schema:
+        example: monitor_timezone
+        type: string
     PageNumber:
       description: Specific page number to return.
       in: query
@@ -3982,6 +3990,68 @@ components:
       required:
       - complianceRuleOptions
       type: object
+    CloudConfigurationRulePayload:
+      description: The payload of a cloud configuration rule.
+      properties:
+        cases:
+          description: 'Description of generated findings and signals (severity and
+            channels to be notified in case of a signal). Must contain exactly one
+            item.
+
+            '
+          items:
+            $ref: '#/components/schemas/CloudConfigurationRuleCaseCreate'
+          type: array
+        complianceSignalOptions:
+          $ref: '#/components/schemas/CloudConfigurationRuleComplianceSignalOptions'
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message in markdown format for generated findings and signals.
+          example: '#Description
+
+            Explanation of the rule.
+
+
+            #Remediation
+
+            How to fix the security issue.
+
+            '
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/CloudConfigurationRuleOptions'
+        tags:
+          description: Tags for generated findings and signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/CloudConfigurationRuleType'
+      required:
+      - name
+      - isEnabled
+      - options
+      - complianceSignalOptions
+      - cases
+      - message
+      type: object
     CloudConfigurationRuleType:
       description: The rule type.
       enum:
@@ -6176,7 +6246,7 @@ components:
           type: string
         finished_at:
           description: Unix timestamp in nanoseconds when the incident finished. It
-            should not be older than 3 hours.
+            should not be older than 1 hour.
           example: 1693491984000000000
           format: int64
           type: integer
@@ -7353,10 +7423,15 @@ components:
           example: '@error.type'
           type: string
         limit:
-          description: The maximum number of groups to return.
+          default: 10
+          description: 'The maximum buckets to return for this group by. Note: at
+            most 10000 buckets are allowed.
+
+            If grouping by multiple facets, the product of limits must not exceed
+            10000.'
           example: 10
           format: int32
-          maximum: 2147483647
+          maximum: 10000
           type: integer
         sort:
           $ref: '#/components/schemas/EventsGroupBySort'
@@ -10516,6 +10591,58 @@ components:
         project_key:
           description: Jira project key
           type: string
+      type: object
+    ListAPIsResponse:
+      description: Response for `ListAPIs`.
+      properties:
+        data:
+          description: List of API items.
+          items:
+            $ref: '#/components/schemas/ListAPIsResponseData'
+          type: array
+        meta:
+          $ref: '#/components/schemas/ListAPIsResponseMeta'
+      type: object
+    ListAPIsResponseData:
+      description: Data envelope for `ListAPIsResponse`.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ListAPIsResponseDataAttributes'
+        id:
+          $ref: '#/components/schemas/ApiID'
+      type: object
+    ListAPIsResponseDataAttributes:
+      description: Attributes for `ListAPIsResponseData`.
+      properties:
+        name:
+          description: API name.
+          example: Payments API
+          type: string
+      type: object
+    ListAPIsResponseMeta:
+      description: Metadata for `ListAPIsResponse`.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/ListAPIsResponseMetaPagination'
+      type: object
+    ListAPIsResponseMetaPagination:
+      description: Pagination metadata information for `ListAPIsResponse`.
+      properties:
+        limit:
+          description: Number of items in the current page.
+          example: 20
+          format: int64
+          type: integer
+        offset:
+          description: Offset for pagination.
+          example: 0
+          format: int64
+          type: integer
+        total_count:
+          description: Total number of items.
+          example: 35
+          format: int64
+          type: integer
       type: object
     ListApplicationKeysResponse:
       description: Response for a list of application keys.
@@ -13739,6 +13866,104 @@ components:
           items:
             $ref: '#/components/schemas/OpsgenieServiceResponseData'
           type: array
+      required:
+      - data
+      type: object
+    OrgConfigGetResponse:
+      description: A response with a single Org Config.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConfigRead'
+      required:
+      - data
+      type: object
+    OrgConfigListResponse:
+      description: A response with multiple Org Configs.
+      properties:
+        data:
+          description: An array of Org Configs.
+          items:
+            $ref: '#/components/schemas/OrgConfigRead'
+          type: array
+      required:
+      - data
+      type: object
+    OrgConfigRead:
+      description: A single Org Config.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrgConfigReadAttributes'
+        id:
+          description: A unique identifier for an Org Config.
+          example: abcd1234
+          type: string
+        type:
+          $ref: '#/components/schemas/OrgConfigType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    OrgConfigReadAttributes:
+      description: Readable attributes of an Org Config.
+      properties:
+        description:
+          description: The description of an Org Config.
+          example: Frobulate the turbo encabulator manifold
+          type: string
+        modified_at:
+          description: The timestamp of the last Org Config update (if any).
+          format: date-time
+          nullable: true
+          type: string
+        name:
+          description: The machine-friendly name of an Org Config.
+          example: monitor_timezone
+          type: string
+        value:
+          description: The value of an Org Config.
+        value_type:
+          description: The type of an Org Config value.
+          example: bool
+          type: string
+      required:
+      - name
+      - description
+      - value_type
+      - value
+      type: object
+    OrgConfigType:
+      description: Data type of an Org Config.
+      enum:
+      - org_configs
+      example: org_configs
+      type: string
+      x-enum-varnames:
+      - ORG_CONFIGS
+    OrgConfigWrite:
+      description: An Org Config write operation.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OrgConfigWriteAttributes'
+        type:
+          $ref: '#/components/schemas/OrgConfigType'
+      required:
+      - type
+      - attributes
+      type: object
+    OrgConfigWriteAttributes:
+      description: Writable attributes of an Org Config.
+      properties:
+        value:
+          description: The value of an Org Config.
+      required:
+      - value
+      type: object
+    OrgConfigWriteRequest:
+      description: A request to update an Org Config.
+      properties:
+        data:
+          $ref: '#/components/schemas/OrgConfigWrite'
       required:
       - data
       type: object
@@ -17613,6 +17838,47 @@ components:
       - GEO_DATA
       - EVENT_COUNT
       - NONE
+    SecurityMonitoringRuleQueryPayload:
+      description: Payload to test a rule query with the expected result.
+      properties:
+        expectedResult:
+          description: Expected result of the test.
+          example: true
+          type: boolean
+        index:
+          description: Index of the query under test.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+        payload:
+          $ref: '#/components/schemas/SecurityMonitoringRuleQueryPayloadData'
+      type: object
+    SecurityMonitoringRuleQueryPayloadData:
+      additionalProperties: {}
+      description: Payload used to test the rule query.
+      properties:
+        ddsource:
+          description: Source of the payload.
+          example: nginx
+          type: string
+        ddtags:
+          description: Tags associated with your data.
+          example: env:staging,version:5.1
+          type: string
+        hostname:
+          description: The name of the originating host of the log.
+          example: i-012345678
+          type: string
+        message:
+          description: The message of the payload.
+          example: 2019-11-19T14:37:58,995 INFO [process.name][20081] Hello World
+          type: string
+        service:
+          description: The name of the application or service generating the data.
+          example: payment
+          type: string
+      type: object
     SecurityMonitoringRuleResponse:
       description: Create a new rule.
       oneOf:
@@ -17634,6 +17900,36 @@ components:
       - MEDIUM
       - HIGH
       - CRITICAL
+    SecurityMonitoringRuleTestPayload:
+      description: Test a rule.
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRuleTestPayload'
+    SecurityMonitoringRuleTestRequest:
+      description: Test the rule queries of a rule (rule property is ignored when
+        applied to an existing rule)
+      properties:
+        rule:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTestPayload'
+        ruleQueryPayloads:
+          description: Data payloads used to test rules query with the expected result.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleQueryPayload'
+          type: array
+      type: object
+    SecurityMonitoringRuleTestResponse:
+      description: Result of the test of the rule queries.
+      properties:
+        results:
+          description: 'Assert results are returned in the same order as the rule
+            query payloads.
+
+            For each payload, it returns True if the result matched the expected result,
+
+            False otherwise.'
+          items:
+            type: boolean
+          type: array
+      type: object
     SecurityMonitoringRuleThirdPartyOptions:
       description: Options on third party rules.
       properties:
@@ -17684,6 +17980,13 @@ components:
       - WORKLOAD_SECURITY
       - CLOUD_CONFIGURATION
       - APPLICATION_SECURITY
+    SecurityMonitoringRuleTypeTest:
+      description: The rule type.
+      enum:
+      - log_detection
+      type: string
+      x-enum-varnames:
+      - LOG_DETECTION
     SecurityMonitoringRuleUpdatePayload:
       description: Update an existing rule.
       properties:
@@ -17729,8 +18032,8 @@ components:
             type: string
           type: array
         thirdPartyCases:
-          description: Cases for generating signals from third party rules. Only available
-            for third party rules.
+          description: Cases for generating signals from third-party rules. Only available
+            for third-party rules.
           example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCase'
@@ -17742,6 +18045,12 @@ components:
           maximum: 2147483647
           type: integer
       type: object
+    SecurityMonitoringRuleValidatePayload:
+      description: Validate a rule.
+      oneOf:
+      - $ref: '#/components/schemas/SecurityMonitoringStandardRulePayload'
+      - $ref: '#/components/schemas/SecurityMonitoringSignalRulePayload'
+      - $ref: '#/components/schemas/CloudConfigurationRulePayload'
     SecurityMonitoringSignal:
       description: Object description of a security signal.
       properties:
@@ -17936,6 +18245,66 @@ components:
       type: object
     SecurityMonitoringSignalRuleCreatePayload:
       description: Create a new signal correlation rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message for generated signals.
+          example: ''
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting signals which are part of the rule.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSignalRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSignalRuleType'
+      required:
+      - name
+      - isEnabled
+      - queries
+      - options
+      - cases
+      - message
+      type: object
+    SecurityMonitoringSignalRulePayload:
+      description: The payload of a signal correlation rule.
       properties:
         cases:
           description: Cases for generating signals.
@@ -18368,8 +18737,75 @@ components:
             type: string
           type: array
         thirdPartyCases:
-          description: Cases for generating signals from third party rules. Only available
-            for third party rules.
+          description: Cases for generating signals from third-party rules. Only available
+            for third-party rules.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCaseCreate'
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeCreate'
+      required:
+      - name
+      - isEnabled
+      - queries
+      - options
+      - cases
+      - message
+      type: object
+    SecurityMonitoringStandardRulePayload:
+      description: The payload of a rule.
+      properties:
+        cases:
+          description: Cases for generating signals.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message for generated signals.
+          example: ''
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        thirdPartyCases:
+          description: Cases for generating signals from third-party rules. Only available
+            for third-party rules.
           example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCaseCreate'
@@ -18505,8 +18941,8 @@ components:
             type: string
           type: array
         thirdPartyCases:
-          description: Cases for generating signals from third party rules. Only available
-            for third party rules.
+          description: Cases for generating signals from third-party rules. Only available
+            for third-party rules.
           example: []
           items:
             $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCase'
@@ -18521,6 +18957,73 @@ components:
           description: The version of the rule.
           format: int64
           type: integer
+    SecurityMonitoringStandardRuleTestPayload:
+      description: The payload of a rule to test
+      properties:
+        cases:
+          description: Cases for generating signals.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringRuleCaseCreate'
+          type: array
+        filters:
+          description: Additional queries to filter matched events before they are
+            processed. This field is deprecated for log detection, signal correlation,
+            and workload security rules.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringFilter'
+          type: array
+        hasExtendedTitle:
+          description: Whether the notifications include the triggering group-by values
+            in their title.
+          example: true
+          type: boolean
+        isEnabled:
+          description: Whether the rule is enabled.
+          example: true
+          type: boolean
+        message:
+          description: Message for generated signals.
+          example: ''
+          type: string
+        name:
+          description: The name of the rule.
+          example: My security monitoring rule.
+          type: string
+        options:
+          $ref: '#/components/schemas/SecurityMonitoringRuleOptions'
+        queries:
+          description: Queries for selecting logs which are part of the rule.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringStandardRuleQuery'
+          type: array
+        tags:
+          description: Tags for generated signals.
+          example:
+          - env:prod
+          - team:security
+          items:
+            description: Tag.
+            type: string
+          type: array
+        thirdPartyCases:
+          description: Cases for generating signals from third-party rules. Only available
+            for third-party rules.
+          example: []
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringThirdPartyRuleCaseCreate'
+          type: array
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringRuleTypeTest'
+      required:
+      - name
+      - isEnabled
+      - queries
+      - options
+      - cases
+      - message
+      type: object
     SecurityMonitoringSuppression:
       description: The suppression rule's properties.
       properties:
@@ -22951,6 +23454,8 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            cases_read: View Cases.
+            cases_write: Create and update cases.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
@@ -23244,6 +23749,71 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+  /api/v2/apicatalog/api:
+    get:
+      description: List APIs and their IDs.
+      operationId: ListAPIs
+      parameters:
+      - description: Filter APIs by name
+        in: query
+        name: query
+        required: false
+        schema:
+          example: payments
+          type: string
+      - description: Number of items per page.
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 20
+          format: int64
+          minimum: 1
+          type: integer
+      - description: Offset for pagination.
+        in: query
+        name: page[offset]
+        required: false
+        schema:
+          default: 0
+          format: int64
+          minimum: 0
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAPIsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_read
+      summary: List APIs
+      tags:
+      - API Management
+      x-menu-order: 4
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/apicatalog/api/{id}:
     delete:
       description: Delete a specific API by ID.
@@ -23278,10 +23848,15 @@ paths:
           description: API not found error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_write
       summary: Delete an API
       tags:
       - API Management
-      x-menu-order: 4
+      x-menu-order: 5
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -23327,6 +23902,11 @@ paths:
           description: API not found error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_read
       summary: Get an API
       tags:
       - API Management
@@ -23385,6 +23965,11 @@ paths:
           description: API not found error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_write
       summary: Update an API
       tags:
       - API Management
@@ -23399,11 +23984,10 @@ paths:
       description: 'Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html)
         specification given.
 
-        It supports version `2.0`, `3.0` and `3.1` of the specification. A specific
-        extension section, `x-datadog`,
+        See the [API Catalog documentation](https://docs.datadoghq.com/api_catalog/add_metadata/)
+        for additional
 
-        let you specify the `teamHandle` for your team responsible for the API in
-        Datadog.
+        information about the possible metadata.
 
         It returns the created API ID.
 
@@ -23436,6 +24020,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_write
       summary: Create a new API
       tags:
       - API Management
@@ -24122,7 +24711,6 @@ paths:
       tags:
       - AuthN Mappings
       x-menu-order: 4
-      x-permission: OPEN()
       x-undo:
         type: safe
     post:
@@ -24177,7 +24765,6 @@ paths:
               \"authn_mappings\"\n  }\n}"
           step: there is a valid "authn_mapping" in the system
       x-menu-order: 5
-      x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         operationId: DeleteAuthNMapping
         parameters:
@@ -24216,7 +24803,6 @@ paths:
       tags:
       - AuthN Mappings
       x-menu-order: 3
-      x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         type: idempotent
     get:
@@ -24253,7 +24839,6 @@ paths:
       tags:
       - AuthN Mappings
       x-menu-order: 1
-      x-permission: OPEN()
       x-undo:
         type: safe
     patch:
@@ -24316,7 +24901,6 @@ paths:
       - AuthN Mappings
       x-codegen-request-body-name: body
       x-menu-order: 2
-      x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         type: idempotent
   /api/v2/cases:
@@ -24358,6 +24942,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
       summary: Search cases
       tags:
       - Case Management
@@ -24395,6 +24984,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Create a case
       tags:
       - Case Management
@@ -24433,6 +25027,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
       summary: Get all projects
       tags:
       - Case Management
@@ -24466,6 +25065,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Create a project
       tags:
       - Case Management
@@ -24495,6 +25099,11 @@ paths:
           description: API error response
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Remove a project
       tags:
       - Case Management
@@ -24523,6 +25132,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
       summary: Get the details of a project
       tags:
       - Case Management
@@ -24552,6 +25166,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
       summary: Get the details of a case
       tags:
       - Case Management
@@ -24588,6 +25207,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Archive case
       tags:
       - Case Management
@@ -24624,6 +25248,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Assign case
       tags:
       - Case Management
@@ -24660,6 +25289,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Update case priority
       tags:
       - Case Management
@@ -24696,6 +25330,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Update case status
       tags:
       - Case Management
@@ -24732,6 +25371,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Unarchive case
       tags:
       - Case Management
@@ -24768,6 +25412,11 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
       summary: Unassign case
       tags:
       - Case Management
@@ -25380,10 +26029,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 1
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_READ
       x-undo:
         type: safe
     post:
@@ -25425,10 +26070,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 3
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_WRITE
       x-undo:
         type: idempotent
   /api/v2/cost/aws_cur_config/{cloud_account_id}:
@@ -25463,10 +26104,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 4
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_WRITE
       x-undo:
         type: idempotent
     patch:
@@ -25504,10 +26141,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 2
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_WRITE
       x-undo:
         type: idempotent
   /api/v2/cost/aws_related_accounts:
@@ -25553,10 +26186,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 5
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_READ
       x-undo:
         type: safe
   /api/v2/cost/azure_uc_config:
@@ -25587,10 +26216,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 6
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_READ
       x-undo:
         type: safe
     post:
@@ -25632,10 +26257,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 8
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_WRITE
       x-undo:
         type: idempotent
   /api/v2/cost/azure_uc_config/{cloud_account_id}:
@@ -25670,10 +26291,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 9
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_WRITE
       x-undo:
         type: idempotent
     patch:
@@ -25717,10 +26334,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 7
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_WRITE
       x-undo:
         type: idempotent
   /api/v2/cost/enabled:
@@ -25751,10 +26364,6 @@ paths:
       tags:
       - Cloud Cost Management
       x-menu-order: 10
-      x-permission:
-        operator: OR
-        permissions:
-        - CLOUD_COST_MANAGEMENT_READ
       x-undo:
         type: safe
   /api/v2/cost_by_tag/active_billing_dimensions:
@@ -26395,9 +27004,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta.
+      x-unstable: '**Note**: This endpoint is in public beta.
 
-        If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/dora/incident:
     post:
       description: 'Use this API endpoint to provide data about incidents for DORA
@@ -26448,9 +27057,9 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta.
+      x-unstable: '**Note**: This endpoint is in public beta.
 
-        If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -28433,10 +29042,6 @@ paths:
       - Confluent Cloud
       x-codegen-request-body-name: body
       x-menu-order: 1
-      x-permission:
-        operator: OR
-        permissions:
-        - STANDARD
       x-undo:
         type: idempotent
   /api/v2/integrations/fastly/accounts:
@@ -31550,6 +32155,105 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/org_configs:
+    get:
+      description: Returns all Org Configs (name, description, and value).
+      operationId: ListOrgConfigs
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgConfigListResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: List Org Configs
+      tags:
+      - Organizations
+      x-menu-order: 100
+      x-undo:
+        type: safe
+  /api/v2/org_configs/{org_config_name}:
+    get:
+      description: Return the name, description, and value of a specific Org Config.
+      operationId: GetOrgConfig
+      parameters:
+      - $ref: '#/components/parameters/OrgConfigName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgConfigGetResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get a specific Org Config value
+      tags:
+      - Organizations
+      x-menu-order: 101
+      x-undo:
+        type: safe
+    patch:
+      description: Update the value of a specific Org Config.
+      operationId: UpdateOrgConfig
+      parameters:
+      - $ref: '#/components/parameters/OrgConfigName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrgConfigWriteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrgConfigGetResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - org_management
+      summary: Update a specific Org Config
+      tags:
+      - Organizations
+      x-menu-order: 102
+      x-undo:
+        type: idempotent
   /api/v2/permissions:
     get:
       description: Returns a list of all permissions, including name, description,
@@ -32828,7 +33532,6 @@ paths:
       - Roles
       x-codegen-request-body-name: body
       x-menu-order: 12
-      x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         operationId: DeleteRole
         parameters:
@@ -34469,6 +35172,45 @@ paths:
         - name: rule_id
           source: id
         type: unsafe
+  /api/v2/security_monitoring/rules/test:
+    post:
+      description: Test a rule.
+      operationId: TestSecurityMonitoringRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleTestRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleTestResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Test a rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 9
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/rules/validation:
     post:
       description: Validate a detection rule.
@@ -34477,7 +35219,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SecurityMonitoringRuleCreatePayload'
+              $ref: '#/components/schemas/SecurityMonitoringRuleValidatePayload'
         required: true
       responses:
         '204':
@@ -34497,7 +35239,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 8
+      x-menu-order: 10
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules/{rule_id}:
@@ -34602,6 +35344,47 @@ paths:
       x-menu-order: 6
       x-undo:
         type: idempotent
+  /api/v2/security_monitoring/rules/{rule_id}/test:
+    post:
+      description: Test an existing rule.
+      operationId: TestExistingSecurityMonitoringRule
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringRuleID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringRuleTestRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringRuleTestResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_rules_write
+      summary: Test an existing rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
   /api/v2/security_monitoring/signals:
     get:
       description: 'The list endpoint returns security signals that match a search
@@ -34680,7 +35463,7 @@ paths:
       summary: Get a quick list of security signals
       tags:
       - Security Monitoring
-      x-menu-order: 10
+      x-menu-order: 12
       x-pagination:
         cursorParam: page[cursor]
         cursorPath: meta.page.after
@@ -34724,7 +35507,7 @@ paths:
       tags:
       - Security Monitoring
       x-codegen-request-body-name: body
-      x-menu-order: 9
+      x-menu-order: 11
       x-pagination:
         cursorParam: body.page.cursor
         cursorPath: meta.page.after

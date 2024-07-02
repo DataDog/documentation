@@ -1,7 +1,7 @@
 ---
 title: Dogshell
 description: "Use Datadog's API from Terminal or Shell"
-kind: guide
+
 aliases:
   - /developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
 ---
@@ -99,7 +99,7 @@ For reference, [find the code for Dogshell][4]. But once you have Dogshell insta
 
 * `dog metric`
 * `dog event`
-* `dog status_check`
+* `dog service_check`
 * `dog monitor`
 * `dog downtime`
 * `dog timeboard`

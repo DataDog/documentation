@@ -1,6 +1,5 @@
 ---
 title: Rehydrating from Archives
-kind: Documentation
 description: "Capture log events from your archives back into Datadog."
 aliases:
   - /logs/historical-views

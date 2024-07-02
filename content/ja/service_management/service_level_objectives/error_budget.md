@@ -6,7 +6,6 @@ further_reading:
 - link: /service_management/service_level_objectives/
   tag: Documentation
   text: サービスレベル目標の概要
-kind: documentation
 title: エラー予算アラート
 ---
 

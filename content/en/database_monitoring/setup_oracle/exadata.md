@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for Oracle Exadata
-kind: documentation
 description: Install and configure Database Monitoring for Oracle Exadata
 further_reading:
 - link: "/integrations/oracle/"

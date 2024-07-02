@@ -12,7 +12,6 @@ further_reading:
   tag: Blog
   text: Mejora tu prestación de servicios con los widgets de dashboard móviles de
     Datadog
-kind: documentation
 title: Configuración de Enterprise
 ---
 La aplicación móvil de Datadog es totalmente compatible con [AppConfig][1] y los proveedores de gestión de dispositivos móviles (MDM) compatibles con AppConfig.

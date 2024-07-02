@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Monitors
-kind: documentation
 aliases:
   - /getting_started/application/monitors
 further_reading:
@@ -41,15 +40,17 @@ To verify that the Datadog Agent is running, check that your [Infrastructure Lis
 
 ## Create a monitor
 
-To create a monitor, navigate to **[Monitors > New Monitor > Metric][5]**.
+To create a monitor, navigate to **[Monitors > New Monitor][5]** and select **Metric**.
 
 ## Configure
 
 The main components of monitor configuration are:
-- **Detection method**: How are you measuring what will be alerted on? Are you concerned about a metric value crossing a threshold, a change in a value crossing a threshold, an anomalous value, or something else?
+
+- **Choose the detection method**: How are you measuring what will be alerted on? Are you concerned about a metric value crossing a threshold, a change in a value crossing a threshold, an anomalous value, or something else?
 - **Define the metric**: What value are you monitoring to alert? The disk space in your system? The number of errors encountered for logins?
-- **Alert conditions**: When does an engineer need to be woken up? 
-- **Notification**: What information needs to be in the alert?
+- **Set the alert conditions**: When does an engineer need to be woken up? 
+- **Configure notifications and automations**: What information needs to be in the alert?
+- **Define permissions and audit notifications**: Who has access to these alerts, and who should be notified if the alert is modified?
 
 ### Choose the detection method
 
@@ -59,7 +60,7 @@ When you create a metric monitor, **Threshold Alert** is automatically selected 
 
 To get an alert on low disk space, use the `system.disk.in_use` metric from the [Disk integration][6] and average the metric over `host` and `device`:
 
-{{< img src="getting_started/monitors/define_the_metric.png" alt="Define the metric for system.disk.in_use avg by host and device" >}}
+{{< img src="getting_started/monitors/monitor_query.png" alt="Define the metric for system.disk.in_use avg by host and device" style="width:100%" >}}
 
 ### Set alert conditions
 
@@ -75,9 +76,11 @@ Warning threshold: > 0.8
 
 For this example, leave the other settings in this section on the defaults. For more details, see the [Metric Monitors][7] documentation.
 
-### Notification
+{{< img src="getting_started/monitors/monitor_alerting_conditions.png" alt="Set the alert and warning thresholds for the monitor to trigger alerts" style="width:80%" >}}
 
-When this monitor is triggered to alert, a notification message is sent. In this message, you can include conditional values, instructions for resolution, or a summary of what the alert is. At minimum, a notification must have a title and message.
+### Notifications and automations
+
+When this monitor is triggered to alert, a notification message is sent. In this message, you can include conditional values, instructions for resolution, or a summary of what the alert is. At a minimum, a notification must have a title and message.
 
 #### Title
 
@@ -101,19 +104,21 @@ To add conditional messages based on alert vs. warning thresholds, see the avail
 
 #### Notify your services and your team members
 
-Send notifications to your team through Email, Slack, PagerDuty, and more. You can search for team members and connected accounts with the dropdown box. When an `@notification` is added to this box, the notification is automatically added to the message box:
+Send notifications to your team through email, Slack, PagerDuty, and more. You can search for team members and connected accounts with the dropdown box. 
 
-{{< img src="getting_started/monitors/message_notify.png" alt="Message with conditional variables and @notification" style="width:90%;" >}}
+{{< img src="getting_started/monitors/monitor_notification.png" alt="Add a monitor message and automations to your alert notification" style="width:100%;" >}}
 
-Removing the `@notification` from either section removes it from both sections.
+To add a workflow from [Workflow Automation][14] or a case from [Case Management][15] to the alert notification, click **Add Workflow** or **Add Case**. You can also tag [Datadog Team][16] members by using the `@team` handle.
 
 Leave the other sections as-is. For more information on what each configuration option does, see the [Monitor configuration][9] documentation.
 
 ### Permissions
 
-{{< img src="getting_started/monitors/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
+Click **Edit Access** to restrict the editing of your monitor to its creator and to specific roles in your org. Optionally, select `Notify` to be alerted when the monitor is modified.
 
-Use this option to restrict the editing of your monitor to its creator and to specific roles in your org. For more information about roles, see [Role Based Access Control][10].
+{{< img src="getting_started/monitors/monitor_permissions.png" alt="Set access permissions for a monitor and options for audit notifications" style="width:80%;" >}}
+
+For more information about roles, see [Role Based Access Control][10].
 
 ## View Monitors and Triage Alerts on Mobile
 
@@ -138,3 +143,6 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 [11]: /service_management/mobile/
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
+[14]: /service_management/workflows/
+[15]: /service_management/case_management/
+[16]: /account_management/teams/

@@ -1,5 +1,4 @@
 ---
-kind: documentación
 title: Métricas de uso estimadas
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: RUM Expo Setup
-kind: documentation
 description: Monitor your React Native projects using Expo and Expo Go with Datadog.
 aliases:
     - /real_user_monitoring/reactnative/expo/
@@ -30,7 +29,7 @@ The RUM React Native SDK supports Expo and Expo Go. To use it, install `expo-dat
 
 `expo-datadog` supports Expo starting from SDK 45 and the plugin's versions follow Expo versions. For example, if you use Expo SDK 45, use `expo-datadog` version `45.x.x`. Datadog recommends using **Expo SDK 45** as a minimum version; previous versions may require manual steps.
 
-If you experience any issues setting up the Datadog SDK with an Expo application, you can see our [example application][8] as a reference.
+If you experience any issues setting up the Datadog SDK with an Expo application, you can see our [example application][1] as a reference.
 
 ## Setup
 
@@ -44,6 +43,49 @@ To install with Yarn, run:
 
 ```sh
 yarn add expo-datadog @datadog/mobile-react-native
+```
+
+### Track view navigation
+
+To see RUM sessions populate in Datadog, you need to implement view tracking, which can be initialized manually or automatically.
+
+#### Manual tracking
+
+You can manually start and stop a view using the following `startView()` and `stopview()` methods.
+
+```js
+import {
+    DdRum
+} from 'expo-datadog';
+
+// Start a view with a unique view identifier, a custom view name, and an object to attach additional attributes to the view
+DdRum.startView(
+    '<view-key>', // <view-key> has to be unique, for example it can be ViewName-unique-id
+    'View Name',
+    { 'custom.foo': 'something' },
+    Date.now()
+);
+// Stops a previously started view with the same unique view identifier, and an object to attach additional attributes to the view
+DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
+```
+
+#### Automatic tracking
+
+Automatic view tracking is supported for the the following modules:
+
+- React Navigation: [@Datadog/mobile-react-navigation][2]
+- React Native Navigation: [@Datadog/mobile-react-native-navigation][3]
+
+In this Datadog example project, View Tracking is achieved through `@datadog/mobile-react-navigation` and is configured using the `NavigationContainer`:
+
+```tsx
+<NavigationContainer
+          ref={navigationRef}
+          onReady={() => {
+            DdRumReactNavigationTracking.startTrackingViews(
+              navigationRef.current,
+            );
+          }}>
 ```
 
 ## Usage
@@ -83,7 +125,7 @@ await DdSdkReactNative.initialize(config);
 
 #### Sample RUM sessions
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Expo SDK][9] as a percentage between 0 and 100. To set this rate, use the `config.sessionSamplingRate` parameter. 
+To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM Expo SDK][4] as a percentage between 0 and 100. To set this rate, use the `config.sessionSamplingRate` parameter. 
 
 ### Upload source maps on EAS builds
 
@@ -115,11 +157,11 @@ yarn add -D @datadog/datadog-ci
 
 Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `DATADOG_SITE` to the host of your Datadog site (for example, `datadoghq.com`).
 
-For information about tracking Expo crashes, see [Expo Crash Reporting and Error Tracking][6].
+For information about tracking Expo crashes, see [Expo Crash Reporting and Error Tracking][5].
 
 ## Tracking Expo Router screens
 
-If you are using [Expo Router][7], track your screens in your `app/_layout.js` file:
+If you are using [Expo Router][6], track your screens in your `app/_layout.js` file:
 
 ```javascript
 import { useEffect } from 'react';
@@ -145,10 +187,10 @@ If you are using Expo Go, switch to development builds (recommended), or keep us
 
 ### Switch from Expo Go to development builds
 
-Your application's [development builds][3] are debug builds that contain the `expo-dev-client` package.
+Your application's [development builds][7] are debug builds that contain the `expo-dev-client` package.
 
-1. Enable the [custom native code to run][4] with `expo run:android` and `expo run:ios`.
-2. To start using your development application, run `expo install expo-dev-client` and `expo start --dev-client`. This installs and starts the [`expo-dev-client` package][5] to execute the added native code in dev mode.
+1. Enable the [custom native code to run][8] with `expo run:android` and `expo run:ios`.
+2. To start using your development application, run `expo install expo-dev-client` and `expo start --dev-client`. This installs and starts the [`expo-dev-client` package][9] to execute the added native code in dev mode.
 
 ### Develop with Expo Go
 
@@ -205,7 +247,7 @@ DdSdkReactNative.initialize(config);
 
 ### App produces a lot of /logs RUM Resources
 
-When Resource tracking is enabled and SDK verbosity is set to `DEBUG`, each RUM Resource triggers a `/logs` call to the Expo dev server to print the log, which will itself create a new RUM resource, creating an infinite loop.
+When Resource tracking is enabled and SDK verbosity is set to `DEBUG`, each RUM Resource triggers a `/logs` call to the Expo dev server to print the log, which itself creates a new RUM resource, creating an infinite loop.
 The most common patterns of Expo dev server host URL are filtered by the SDK, therefore, you may not encounter this error in most situations.
 If this error occurs, add the following RUM Resource mapper to filter out the calls:
 
@@ -225,16 +267,16 @@ config.resourceEventMapper = event => {
 };
 ```
 
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[3]: https://docs.expo.dev/development/introduction/
-[4]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
-[5]: https://docs.expo.dev/development/getting-started/
-[6]: /real_user_monitoring/error_tracking/expo/
-[7]: https://expo.github.io/router/docs/
-[8]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo#initialize-the-library-with-application-context
+[1]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-expo-react-navigation
+[2]: https://www.npmjs.com/package/@datadog/mobile-react-navigation
+[3]: https://www.npmjs.com/package/@datadog/mobile-react-native-navigation
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo#initialize-the-library-with-application-context
+[5]: /real_user_monitoring/error_tracking/mobile/expo/
+[6]: https://expo.github.io/router/docs/
+[7]: https://docs.expo.dev/development/introduction/
+[8]: https://docs.expo.dev/workflow/customizing/#releasing-apps-with-custom-native-code-to
+[9]: https://docs.expo.dev/development/getting-started/

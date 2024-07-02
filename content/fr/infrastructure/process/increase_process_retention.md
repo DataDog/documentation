@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/
   tag: Blog
   text: Conseils utiles pour dimensionner parfaitement vos charges de travail Kubernetes
-kind: documentation
 title: Optimiser la rétention des processus
 ---
 

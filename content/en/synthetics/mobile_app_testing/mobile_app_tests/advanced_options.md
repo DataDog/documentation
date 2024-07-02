@@ -1,6 +1,5 @@
 ---
 title: Advanced Options for Mobile App Testing Steps
-kind: documentation
 description: Configure advanced options for Mobile Test Steps
 aliases:
 - /mobile_testing/mobile_app_tests/advanced_options
@@ -19,14 +18,6 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Synthetic Monitoring Data Security"
 ---
-
-{{< site-region region="us,us5,eu" >}}
-<div class="alert alert-warning">Mobile Application Testing is Generally Available for US1, US5, and EU sites.</div>
-{{< /site-region >}}
-
-{{< site-region region="us3,ap1" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
-{{< /site-region >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>

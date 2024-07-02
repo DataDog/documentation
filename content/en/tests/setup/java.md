@@ -1,6 +1,5 @@
 ---
 title: Java Tests
-kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
@@ -9,13 +8,22 @@ aliases:
   - /continuous_integration/tests/java
   - /continuous_integration/tests/setup/java
 further_reading:
-    - link: "/continuous_integration/tests/containers/"
+    - link: "/tests/containers/"
       tag: "Documentation"
       text: "Forwarding Environment Variables for Tests in Containers"
-    - link: "/continuous_integration/tests"
+    - link: "/tests/explorer"
       tag: "Documentation"
       text: "Explore Test Results and Performance"
-    - link: "/continuous_integration/troubleshooting/"
+    - link: "/tests/early_flake_detection"
+      tag: "Documentation"
+      text: "Detect test flakiness with Early Flake Detection"
+    - link: "/tests/auto_test_retries"
+      tag: "Documentation"
+      text: "Retry failing test cases with Auto Test Retries"
+    - link: "/tests/correlate_logs_and_tests"
+      tag: "Documentation"
+      text: "Correlate logs and test traces"
+    - link: "/tests/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI Visibility"
 ---

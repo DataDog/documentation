@@ -1,6 +1,6 @@
 ---
 title: Monitor Electron Applications Using the Browser SDK
-kind: guide
+
 description: Learn how to monitor desktop applications built with Electron through the browser RUM SDK.
 further_reading:
   - link: '/real_user_monitoring/'
@@ -57,6 +57,6 @@ An issue with local storage replication latency between windows can cause a shor
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.electronjs.org/
-[2]: /real_user_monitoring/browser/#setup
+[2]: /real_user_monitoring/browser/setup
 [3]: https://www.electronjs.org/docs/latest/tutorial/process-model#the-renderer-process
 [4]: /real_user_monitoring/explorer/

@@ -21,7 +21,6 @@ further_reading:
   tag: blog
   text: Analysez vos dépenses liées à Kubernetes et ECS avec la solution Cloud Cost
     Management de Datadog
-kind: documentation
 title: Amazon ECS
 ---
 
@@ -229,7 +228,7 @@ Exécutez plutôt l'Agent en mode Pont, avec le mappage des ports, afin de facil
 {{% site-region region="gov" %}}
 #### Proxy FIPS pour les environnements GOVCLOUD
 
-Pour envoyer des données au centre de données GOVCLOUD de Datadog, ajoutez le conteneur sidecar `fips-proxy` et ouvrez les ports du conteneur afin que [toutes les fonctionnalités](https://github.com/DataDog/datadog-agent/blob/7.45.x/pkg/config/config.go#L1564-L1577) fonctionnent correctement.
+Pour envoyer des données au centre de données GOVCLOUD de Datadog, ajoutez le conteneur sidecar `fips-proxy` et ouvrez les ports du conteneur afin que [les fonctionnalités prises en charge](https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations) fonctionnent correctement.
 
 **Remarque** : cette fonction est uniquement disponible sous Linux.
 
@@ -239,7 +238,7 @@ Pour envoyer des données au centre de données GOVCLOUD de Datadog, ajoutez le 
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:0.5.3",
+            "image": "datadog/fips-proxy:1.1.3",
             "portMappings": [
                 {
                     "containerPort": 9803,
@@ -295,6 +294,14 @@ Pour envoyer des données au centre de données GOVCLOUD de Datadog, ajoutez le 
                 },
                 {
                     "containerPort": 9816,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9817,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9818,
                     "protocol": "tcp"
                 }
             ],

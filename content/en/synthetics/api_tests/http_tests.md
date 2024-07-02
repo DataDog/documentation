@@ -1,6 +1,5 @@
 ---
 title: HTTP Testing
-kind: documentation
 description: Simulate HTTP requests to monitor public and internal API endpoints.
 aliases:
   - /synthetics/http_test
@@ -224,7 +223,7 @@ You can restrict access to an HTTP test based on the roles in your organization.
 [4]: https://restfulapi.net/json-jsonpath/
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[7]: /monitors/notify/#notify-your-team
+[7]: /monitors/notify/#configure-notifications-and-automations
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /synthetics/guide/synthetic-test-monitors

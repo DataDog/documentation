@@ -1,6 +1,6 @@
 ---
 title: Logs RBAC Permissions
-kind: guide
+
 further_reading:
 - link: "/logs/guide/logs-rbac"
   tag: "Documentation"
@@ -290,7 +290,7 @@ These permissions are globally enabled by default for all users.
 [Logs Read Data](#logs_read_data) permission comes on top of these legacy permissions. For instance, say a user is restricted to the query `service:api`.
 
 * If this user has scoped [Read Index Data](#logs_read_index_data) permission on `audit` and `errors` indexes, this user only sees `service:api` logs within these indexes.
-* If this user has [livetail](#logs_live_tail) permission, this users sees only sees `service:api` logs in the livetail.
+* If this user has [livetail](#logs_live_tail) permission, this user only sees `service:api` logs in the livetail.
 
 
 ### `logs_read_index_data`

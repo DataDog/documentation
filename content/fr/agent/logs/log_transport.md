@@ -16,7 +16,6 @@ further_reading:
 - link: agent/logs/advanced_log_collection/#regles-globales-de-traitement
   tag: Documentation
   text: Règles globales de traitement
-kind: documentation
 title: Transport de l'Agent pour les logs
 ---
 
@@ -115,12 +114,12 @@ Pour imposer le transport TCP, mettez à jour le [fichier de configuration princ
 ```yaml
 logs_enabled: true
 logs_config:
-  use_tcp: true
+  force_use_tcp: true
 ```
 Pour envoyer des logs avec des variables d'environnement, configurez ce qui suit :
 
 * `DD_LOGS_ENABLED=true`
-* `DD_LOGS_CONFIG_USE_TCP=true`
+* `DD_LOGS_CONFIG_FORCE_USE_TCP=true`
 
 Par défaut, l'Agent Datadog envoie ses logs à Datadog via le protocole TCP chiffré par TLS. Cela nécessite une communication sortante (sur le port `10516` pour le site américain de Datadog ou `443` pour le site européen).
 

@@ -20,7 +20,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Validation des bases&
   text: Participer à une session interactive sur le tagging efficace avec Datadog
-kind: documentation
 title: Débuter avec les tags
 ---
 

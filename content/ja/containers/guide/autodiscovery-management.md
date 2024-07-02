@@ -7,7 +7,6 @@ further_reading:
 - link: /agent/kubernetes/integrations/
   tag: Documentation
   text: オートディスカバリーのインテグレーションテンプレートの作成とロード
-kind: ガイド
 title: コンテナディスカバリー管理
 ---
 

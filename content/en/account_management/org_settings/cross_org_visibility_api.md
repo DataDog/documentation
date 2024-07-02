@@ -1,6 +1,5 @@
 ---
 title: Cross-Organization Connections API
-kind: documentation
 is_beta: true
 ---
 

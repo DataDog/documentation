@@ -1,6 +1,5 @@
 ---
 title: Android Crash Reporting and Error Tracking
-kind: documentation
 description: Set up Error Tracking for your Android applications.
 aliases:
     - /real_user_monitoring/error_tracking/android
@@ -9,7 +8,7 @@ code_lang: android
 code_lang_weight: 10
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
-  tag: 'Error Tracking'
+  tag: 'Documentation'
   text: 'Get started with Error Tracking'
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
@@ -65,6 +64,13 @@ Non-fatal ANRs may or may not have led to the application being terminated (cras
 For any Android version, you can override the default setting for reporting non-fatal ANRs by setting `trackNonFatalAnrs` to `true` or `false` when initializing the RUM SDK.
 
 ## Get deobfuscated stack traces
+
+Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+
+Depending on the [Android Gradle plugin][1] version, the matching of stack traces and mapping files relies on different fields:
+
+- Version 1.13.0 uses the `build_id` field
+- Older versions use a combination of the `service`, `version`, and `variant` fields
 
 ### Upload your mapping file
 

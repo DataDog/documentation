@@ -12,7 +12,6 @@ further_reading:
 - link: logs/explorer/visualize
   tag: 설명서
   text: 로그에서 시각화 생성
-kind: 설명서
 title: 로그 내보내기
 ---
 

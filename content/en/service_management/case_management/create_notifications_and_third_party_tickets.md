@@ -1,6 +1,5 @@
 ---
 title: Create notifications and third party tickets 
-kind: documentation
 further_reading:
 - link: "/service_management/case_management/troubleshooting"
   tag: "Documentation"

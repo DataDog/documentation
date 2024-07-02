@@ -15,7 +15,6 @@ further_reading:
 - link: https://securitylabs.datadoghq.com/
   tag: Security Labs
   text: Datadog のセキュリティリサーチ、レポート、ヒント、ビデオ
-kind: documentation
 title: Cloud Security Management の概要
 ---
 
