@@ -466,7 +466,7 @@ To set up unified service tagging in an OpenTelemetry environment:
     ```
 
    
-1. To [correlate OpenTelemetry language SDK logs and traces][18], translate the OpenTelemetry `TraceId` and `SpanId` properties (a 128-bit unsigned int and 64-bit unsigned int represented as a 32-hex-character and 16-hex-character lowercase string) into the Datadog format and add them as attributes in your logs. 
+1. To [correlate OpenTelemetry language SDK logs and traces][18], translate the OpenTelemetry `TraceId` and `SpanId` properties (a 128-bit unsigned integer and 64-bit unsigned integer represented as a 32-character and 16-character hexadecimal string) into the Datadog format and add them as attributes in your logs. 
 
    The following table outlines the key differences between OpenTelemetry and Datadog schemas for tracing and unified service tagging:
 
