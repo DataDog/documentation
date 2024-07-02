@@ -4,7 +4,7 @@
     "description": "",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build-markdoc-integration": "rimraf ./dist && npx tsc && cp ./src/variables.config.yaml ./dist/variables.config.yaml",
+        "build-markdoc-integration": "rimraf ./dist && npx tsc",
         "build-prod-renderer": "npx esbuild ./src/barkdoc-client-renderer.js --bundle --minify > ./dist/barkdoc-client-renderer.min.js",
         "build-dev-renderer": "npx esbuild ./src/barkdoc-client-renderer.js --bundle > ./dist/barkdoc-client-renderer.js",
         "build": "npm run build-markdoc-integration && npm run build-dev-renderer && npm run build-prod-renderer"
