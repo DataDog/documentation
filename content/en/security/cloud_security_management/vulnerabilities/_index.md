@@ -28,6 +28,10 @@ further_reading:
 <div class="alert alert-warning">Cloud Security Management Vulnerabilities is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
+{{< youtube id=9A-WaQFSWo8 loading=lazy >}}
+
+<br>
+
 ## Overview
 
 Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proactively secure your cloud infrastructure by detecting, prioritizing, and managing vulnerabilities across your container images and hosts. It leverages deep [observability context][6] and industry insights to help you remediate vulnerabilities that are most important to you at a given point in time. 
@@ -66,11 +70,9 @@ The [Vulnerabilities Explorer][1] also offers triaging options for detected vuln
 
 {{< img src="security/vulnerabilities/csm_remediate.png" alt="Details explorer of a specific vulnerability highlighting the ability to remediate and assign to team member" width="100%">}}
 
-## Video walkthrough
+## Further reading
 
-The following video provides an overview of how to enable and use CSM Vulnerabilities:
-
-{{< img src="security/csm/how-to-use-csm-vulnerabilities.mp4" alt="Video that provides an overview of how to install and use CSM Vulnerabilities" video=true >}}
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/csm/vm
 [2]: https://app.datadoghq.com/containers/images
@@ -79,8 +81,3 @@ The following video provides an overview of how to enable and use CSM Vulnerabil
 [5]: /security/application_security/software_composition_analysis/
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
-
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
