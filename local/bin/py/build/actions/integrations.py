@@ -7,7 +7,9 @@ import linecache
 import re
 import shutil
 import sys
+from bs4 import BeautifulSoup as bs
 from collections import defaultdict
+import requests
 
 import yaml
 import markdown2
@@ -875,6 +877,17 @@ class Integrations:
             #         print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
             #         remove(out_name)
 
+    def retrieve_page_description(self, page_url):
+        page = requests.get(page_url, timeout=1)
+        page_content = bs(page.content, 'html.parser')
+        page_description = None
+        og_description = page_content.find('meta', property='og:title')
+        if og_description:
+            page_description = og_description.get('content', fr"{page_content.title.string}")
+            page_description = page_description.replace(" | Datadog", "")
+        
+        return page_description
+    
     def add_integration_frontmatter(
         self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None, extra_fm=None
     ):
@@ -916,6 +929,19 @@ class Integrations:
                 item["draft"] = not item.get("is_public", False)
                 item["integration_id"] = item.get("integration_id", integration_id)
                 item["integration_version"] = item.get("integration_version", integration_version)
+                # if tile.resources exists, add it to the front matter as further reading
+                further_reading = []
+                for resource in item.get("tile", {}).get("resources", []):
+                    description = self.retrieve_page_description(resource.get("url"))
+                    if description:
+                        further_reading_link = {
+                                "link": resource.get("url"),
+                                "tag": resource.get("resource_type"),
+                                "text": description
+                            }
+                        further_reading.append(further_reading_link)
+                if further_reading:
+                    item["further_reading"] = further_reading
                 # remove aliases that point to the page they're located on
                 # get the current slug from the doc_link
                 if item.get('name'):
