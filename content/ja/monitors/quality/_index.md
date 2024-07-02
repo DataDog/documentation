@@ -20,7 +20,7 @@ Datadog の Monitor Quality 機能は、60 日以上ミュートされている�
 
 チーム、クリエーター、サービス、環境に基づいて [Monitor Quality ページ][7]をフィルタリングして表示し、リストを整理して管理します。
 
-{{< img src="monitors/quality/filter_monitor_quality.png" alt="Monitor Quality ページで利用できるクリエーター、チーム、サービス、環境のフィルタリングドロップダウンオプション” style="width:100%;" >}}
+{{< img src="monitors/quality/filter_monitor_quality.png" alt="Monitor Quality ページで利用できるクリエーター、チーム、サービス、環境のフィルタリングドロップダウンオプション" style="width:100%;" >}}
 
 ## モニターを改善してベストプラクティスに従う
 

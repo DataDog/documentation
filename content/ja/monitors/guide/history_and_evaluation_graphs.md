@@ -45,7 +45,7 @@ Datadog に生データポイントを送信してモニタリングすると、
 
 数式内に `as_count` メトリクスを含むクエリは、異なる評価パスを使用します。この評価では、式の前に集計が適用されます。例えば `A / B` を使用しており、どちらも `as_count` 評価パスを使用している場合、次のように評価されます。
 ```
-(1+2+3+4+5) / (10+10+10+10+10) 
+(1+2+3+4+5) / (10+10+10+10+10)
 ```
 
 詳細については、[モニター評価の as_count()][2] ガイドを参照してください。
@@ -88,13 +88,13 @@ Datadog に生データポイントを送信してモニタリングすると、
 
 | 構成                 | モニター     | Query Value ウィジェット |
 | -------------                 | ----------- | ------------------ |
-| メトリクスクエリ                  |{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_monitor_query.png" alt="過去 5 分間の p95 のクエリ集計と p95 のモニター評価集計を持つメトリクスを示す構成例" style="width:100%;" >}}|{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_widget_query.png" alt=“メトリクスクエリに一致するフィールドをハイライトする Query Value ウィジェットの構成" style="width:100%;" >}}|
-| モニター集計            |{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_monitor_aggregation.png" alt="p95 のクエリ集計を持つメトリクスが、p95 のモニター評価集計をハイライトする構成例" style="width:100%;" >}}|{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_widget_aggregation.png" alt=“モニター集計に一致するフィールドをハイライトする Query Value ウィジェットの構成" style="width:100%;" >}}|
-| 評価ウィンドウ            |{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_monitor_eval_window.png" alt=“過去 5 分間のモニター評価ウィンドウをハイライトする p95 のクエリ集計を持つメトリクスを示す構成例" style="width:100%;" >}}|{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_widget_eval_window.png" alt=“モニター評価ウィンドウに一致するフィールドをハイライトする Query Value ウィジェットの構成" style="width:100%;" >}}|
+| メトリクスクエリ                  |{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_monitor_query.png" alt="過去 5 分間の p95 のクエリ集計と p95 のモニター評価集計を持つメトリクスを示す構成例" style="width:100%;" >}}|{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_widget_query.png" alt="メトリクスクエリに一致するフィールドをハイライトする Query Value ウィジェットの構成" style="width:100%;" >}}|
+| モニター集計            |{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_monitor_aggregation.png" alt="p95 のクエリ集計を持つメトリクスが、p95 のモニター評価集計をハイライトする構成例" style="width:100%;" >}}|{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_widget_aggregation.png" alt="モニター集計に一致するフィールドをハイライトする Query Value ウィジェットの構成" style="width:100%;" >}}|
+| 評価ウィンドウ            |{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_monitor_eval_window.png" alt="過去 5 分間のモニター評価ウィンドウをハイライトする p95 のクエリ集計を持つメトリクスを示す構成例" style="width:100%;" >}}|{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_widget_eval_window.png" alt="モニター評価ウィンドウに一致するフィールドをハイライトする Query Value ウィジェットの構成" style="width:100%;" >}}|
 
 ### 数式による評価グラフのトラブルシューティング
 
-{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_formula_eval_graph.png" alt=“カーソルを合わせたときに 13:55:29 に 9.17 のデータポイントを示す評価グラフ" style="width:100%;" >}}
+{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_formula_eval_graph.png" alt="カーソルを合わせたときに 13:55:29 に 9.17 のデータポイントを示す評価グラフ" style="width:100%;" >}}
 
 この例では、Notebook Query Value ウィジェットを使用して、複数のクエリと数式を含むモニター評価グラフの値をトラブルシューティングします。評価グラフで調査したいデータポイントにカーソルを合わせます。この例では、13:55:29 に表示されている `9.17` の評価グラフの値をトラブルシューティングします。
 
