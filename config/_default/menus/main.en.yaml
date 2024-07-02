@@ -4789,6 +4789,11 @@ menu:
       parent: csm_setup
       identifier: csm_setup_cloudtrail_logs
       weight: 106
+    - name: Source Code Integrations
+      url: security/cloud_security_management/setup/source_code_integrations
+      parent: csm_setup
+      identifier: csm_setup_source_code_integrations
+      weight: 106
     - name: Threats
       url: security/threats/
       parent: csm
