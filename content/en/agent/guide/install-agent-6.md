@@ -58,7 +58,7 @@ Enable or disable integrations in `/opt/datadog-agent/etc/conf.d.`
 
 ## Windows
 
-Starting with release 6.11.0, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account, created at install time, instead of running under the `LOCAL_SYSTEM` account, as was the case for prior versions. If you're upgrading from a Datadog Agent version6.x to 6.11 or greater, review the [Windows Agent user][10] documentation before your upgrade.
+Starting with release 6.11.0, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account and are created at install time, instead of running under the `LOCAL_SYSTEM` account. If you're upgrading from a Datadog Agent version6.x to 6.11 or greater, review the [Windows Agent user][10] documentation before your upgrade.
 
 Links to all available versions of the Windows installer are available in [JSON format][6].
 
@@ -189,7 +189,6 @@ DD_API_KEY=MY_API_KEY bash -c "$(curl -L https://raw.githubusercontent.com/DataD
    sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
 
    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-   curl https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
    curl https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
    curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
@@ -688,7 +687,7 @@ For a full list of the available installation script environment variables, see 
 
 {{% tab "Kubernetes" %}}
 
-Run the Datadog Agent in your Kubernetes cluster directly to start collecting your cluster and applications metrics, traces, and logs. You can deploy the Agent with a Helm chart, [the Datadog Operator][101] or directly with [a DaemonSet][102]. For more information about installing the Datadog Agent on different distributions, see the [Kubernetes distributions documentation][103].
+Run the Datadog Agent directly in your Kubernetes cluster to start collecting your cluster and applications metrics, traces, and logs. You can deploy the Agent with a Helm chart, [the Datadog Operator][101] or directly with [a DaemonSet][102]. For more information about installing the Datadog Agent on different distributions, see the [Kubernetes distributions documentation][103].
 
 ### Installing the Datadog Agent
 
@@ -1063,7 +1062,6 @@ Refer to the [GitHub repository of the module][103] for more examples and advanc
 [101]: https://forge.puppetlabs.com/modules/datadog/datadog_agent/readme
 [102]: https://github.com/DataDog/puppet-datadog-agent/tree/main/manifests/integrations
 [103]: https://github.com/DataDog/puppet-datadog-agent
-[104]: 
 
 {{% /tab %}}
 
