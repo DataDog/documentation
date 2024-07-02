@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { FileRenderer } from './FileRenderer';
-import { GlobalVariableConfig, GlobalVariableConfigSchema } from './types';
+import { GlobalVariableConfig, GlobalVariableConfigSchema } from './oldSchemas';
 import yaml from 'js-yaml';
 
 // Script -------------------------------------------------------------

@@ -9,7 +9,7 @@ import {
     Frontmatter,
     FrontmatterSchema,
     GlobalVariableConfig
-} from './types';
+} from './oldSchemas';
 
 export class FileRenderer {
     ast: Node;
