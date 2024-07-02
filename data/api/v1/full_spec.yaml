@@ -15173,6 +15173,13 @@ components:
 
         to delete.'
       properties:
+        force_delete_dependencies:
+          description: 'Delete the Synthetic test even if it''s referenced by other
+            resources
+
+            (for example, SLOs and composite monitors).'
+          example: false
+          type: boolean
         public_ids:
           description: An array of Synthetic test IDs you want to delete.
           example: []
