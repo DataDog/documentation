@@ -22,6 +22,13 @@ To use Azure Cloud Cost Management in Datadog, you must set up the Datadog Azure
 
 Datadog provides cost visibility on a Subscription, Resource Group, and Billing Account Level. Microsoft Customer Agreements (MCA) can only set up at the Subscription level. Pay as you go (PAYG) and CSP accounts are not supported.
 
+| Agreement Type       | Subscription          | Resource Group       | Billing Account Level |
+| -------------------- | --------------------- | -------------------- | --------------------- |
+| Microsoft Customer Agreements (MCA).| supported| NOT supported| NOT supported|
+| Pay as you go (PAYG}| NOT supported| NOT supported|| NOT supported|
+| Certified Partner Agreement (CSA)| NOT supported| NOT supported|| NOT supported|
+| Enterprise Agreement| ?? | ?? | ??|
+
 ## Setup
 
 
