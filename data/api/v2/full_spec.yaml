@@ -23800,6 +23800,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_read
       summary: List APIs
       tags:
       - API Management
@@ -23843,6 +23848,11 @@ paths:
           description: API not found error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_write
       summary: Delete an API
       tags:
       - API Management
@@ -23892,6 +23902,11 @@ paths:
           description: API not found error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_read
       summary: Get an API
       tags:
       - API Management
@@ -23950,6 +23965,11 @@ paths:
           description: API not found error
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_write
       summary: Update an API
       tags:
       - API Management
@@ -24000,6 +24020,11 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_api_catalog_write
       summary: Create a new API
       tags:
       - API Management
