@@ -1,5 +1,5 @@
 ---
-title: Agent v6 Status Page
+title: Agent Status Page
 aliases:
 - /agent/guide/agent-status-page
 further_reading:
@@ -16,7 +16,7 @@ algolia:
   tags: ['status page']
 ---
 
-The Agent v6 status page displays information about your running Agent. See [Agent Commands][1] to find the status command for your environment. The sections below provide details on the contents of the status page.
+The Agent status page displays information about your running Agent. See [Agent Commands][1] to find the status command for your environment. The sections below provide details on the contents of the status page.
 
 **Note**: The status page may have minor differences between Agent versions.
 

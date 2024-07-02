@@ -1,21 +1,12 @@
 ---
-title: Agent Commands
-aliases:
-    - /agent/faq/agent-status-and-information
-    - /agent/faq/start-stop-restart-the-datadog-agent
-    - /agent/faq/agent-commands
-    - /agent/guide/agent-commands
-further_reading:
-- link: "/agent/troubleshooting/"
-  tag: "Documentation"
-  text: "Agent Troubleshooting"
-algolia:
-  tags: ['agent status command']
+title: Agent 6 Commands
+kind: Guide
+disable_toc: false
 ---
 
-<div class="alert alert-warning">
-For Linux based systems where the <code>service</code> wrapper command is not available, <a href="/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands">consult the list of alternatives</a>.
-</div>
+## Overview
+
+This page covers Agent 6 commands. Datadog recommends installing or upgrading to Agent 7 for the latest features. For information on installing the latest version of the Agent, follow the [Agent 7 Installation Instructions][1]. For information on upgrading to Agent 7 from an earlier version, see [Upgrade to Datadog Agent v7][2].
 
 ## Start, stop, and restart the Agent
 
@@ -26,12 +17,12 @@ List of commands to start the Datadog Agent:
 | Platform   | Command                                                            |
 |------------|--------------------------------------------------------------------|
 | AIX        | `startsrc -s datadog-agent`                                        |
-| Linux      | See the [Agent documentation][1] for your OS.                      |
-| Docker     | Use the [installation command][2].                                 |
+| Linux      | See the [Agent documentation][3] for your OS.                      |
+| Docker     | Use the [installation command][4].                                 |
 | Kubernetes | `kubectl create -f datadog-agent.yaml`                             |
 | macOS      | `launchctl start com.datadoghq.agent` *or* through the systray app |
 | Source     | `sudo service datadog-agent start`                                 |
-| Windows    | See the [Windows Agent documentation][3].                          |
+| Windows    | See the [Windows Agent documentation][5].                          |
 
 ### Stop the Agent
 
@@ -40,12 +31,12 @@ List of commands to stop the Datadog Agent:
 | Platform   | Command                                                                          |
 |------------|----------------------------------------------------------------------------------|
 | AIX        | `stopsrc -s datadog-agent`                                                       |
-| Linux      | See the [Agent documentation][1] for your OS.                                    |
+| Linux      | See the [Agent documentation][3] for your OS.                                    |
 | Docker     | `docker exec -it <CONTAINER_NAME> agent stop`                                    |
 | Kubernetes | `kubectl delete pod <AGENT POD NAME>`—note: the pod is automatically rescheduled |
 | macOS      | `launchctl stop com.datadoghq.agent` *or* through the systray app                |
 | Source     | `sudo service datadog-agent stop`                                                |
-| Windows    | See the [Windows Agent documentation][3].                                        |
+| Windows    | See the [Windows Agent documentation][5].                                        |
 
 ### Restart the Agent
 
@@ -53,13 +44,12 @@ List of commands to restart the Datadog Agent:
 
 | Platform   | Command                                                                          |
 |------------|----------------------------------------------------------------------------------|
-| Linux      | See the [Agent documentation][1] for your OS.                                    |
-| Docker     | Use the [installation command][2].                                               |
+| Linux      | See the [Agent documentation][3] for your OS.                                    |
+| Docker     | Use the [installation command][4].                                               |
 | Kubernetes | `kubectl delete pod <AGENT POD NAME>`—note: the pod is automatically rescheduled |
 | macOS      | run `stop` then `start`, *or* through the systray app                            |
 | Source     | *unsupported Platform*                                                           |
 | Windows    | See the [Windows Agent documentation][3].                                        |
-
 
 ## Agent status and information
 
@@ -70,13 +60,12 @@ List of commands to display the status of the Datadog Agent:
 | Platform        | Command                                                                       |
 |-----------------|-------------------------------------------------------------------------------|
 | AIX             | `lssrc -s datadog-agent`                                                      |
-| Linux           | See the [Agent documentation][1] for your OS.                                 |
+| Linux           | See the [Agent documentation][3] for your OS.                                 |
 | Docker (Debian) | `sudo docker exec -it <CONTAINER_NAME> s6-svstat /var/run/s6/services/agent/` |
 | Kubernetes      | `kubectl exec -it <POD_NAME> -- s6-svstat /var/run/s6/services/agent/`        |
 | macOS           | `launchctl list com.datadoghq.agent` *or* through the systray app             |
 | Source          | `sudo service datadog-agent status`                                           |
 | Windows         | See the [Windows Agent documentation][5].                                     |
-| Cluster Agent (Kubernetes) | `datadog-cluster-agent status`                                     |
 
 ### Agent information
 
@@ -88,10 +77,9 @@ List of commands to display the status of your Datadog Agent and enabled integra
 | Linux      | `sudo datadog-agent status`                          |
 | Docker     | `sudo docker exec -it <CONTAINER_NAME> agent status` |
 | Kubernetes | `kubectl exec -it <POD_NAME> -- agent status`        |
-| macOS      | `datadog-agent status` or through the [web GUI][4]   |
+| macOS      | `datadog-agent status` or through the [web GUI][7]   |
 | Source     | `sudo datadog-agent status`                          |
 | Windows    | See the [Windows Agent documentation][5].            |
-| Cluster Agent (Kubernetes) | `datadog-cluster-agent status`       |
 
 A properly configured integration is displayed under **Running Checks** with no warnings or errors, as seen below:
 
@@ -109,7 +97,7 @@ Running Checks
 
 ## Other commands
 
-The Agent command-line interface is sub-command based. To see the list of available sub-commands, run:
+The Agent v6 command-line interface is sub-command based. To see the list of available sub-commands, run:
 ```shell
 <AGENT_BINARY> --help
 ```
@@ -127,10 +115,10 @@ Some options have flags and options detailed under `--help`. For example, use he
 | Subcommand        | Notes                                                                       |
 |-------------------|-----------------------------------------------------------------------------|
 | `check`           | Run the specified check.                                                    |
-| `config`          | [Runtime configuration management][6].                                      |
+| `config`          | [Runtime configuration management][8].                                      |
 | `configcheck`     | Print all configurations loaded & resolved of a running Agent.              |
 | `diagnose`        | Execute connectivity diagnosis on your system.                              |
-| `flare`           | [Collect a flare and send it to Datadog][7].                                |
+| `flare`           | [Collect a flare and send it to Datadog][9].                                |
 | `health`          | Print the current Agent health.                                             |
 | `help`            | Help about any command.                                                     |
 | `hostname`        | Print the hostname used by the Agent.                                       |
@@ -143,14 +131,12 @@ Some options have flags and options detailed under `--help`. For example, use he
 | `stopservice`     | Stop the Agent within the service control manager. Windows only.            |
 | `version`         | Print version info.                                                         |
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /agent/
-[2]: /agent/docker/
-[3]: /agent/basic_agent_usage/windows/
-[4]: /agent/basic_agent_usage/#gui
-[5]: /agent/basic_agent_usage/windows/#status-and-information
-[6]: /agent/troubleshooting/config/
-[7]: /agent/troubleshooting/send_a_flare/
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[2]: /agent/versions/upgrade_to_agent_v7/
+[3]: /agent/
+[4]: /agent/docker/
+[5]: /agent/basic_agent_usage/windows/
+[6]: /agent/docker/?tab=standard#setup
+[7]: /agent/basic_agent_usage/#gui
+[8]: /agent/troubleshooting/config/
+[9]: /agent/troubleshooting/send_a_flare/
