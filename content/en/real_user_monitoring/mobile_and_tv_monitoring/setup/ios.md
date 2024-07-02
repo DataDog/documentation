@@ -53,10 +53,21 @@ Declare the library as a dependency depending on your package manager:
 {{% tab "CocoaPods" %}}
 
 You can use [CocoaPods][1] to install `dd-sdk-ios`:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
 ```
 pod 'DatadogCore'
 pod 'DatadogRUM'
 ```
+{{% /tab %}}
+
+{{% tab "Objective-C" %}}
+```
+pod 'DatadogObjc'
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 
 [1]: https://cocoapods.org/
@@ -69,10 +80,21 @@ To integrate using Apple's Swift Package Manager, add the following as a depende
 ```
 
 In your project, link the following libraries:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
 ```
 DatadogCore
 DatadogRUM
 ```
+{{% /tab %}}
+
+{{% tab "Objective-C" %}}
+```
+DatadogObjc
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /tab %}}
 {{% tab "Carthage" %}}
@@ -83,12 +105,25 @@ github "DataDog/dd-sdk-ios"
 ```
 
 In Xcode, link the following frameworks:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
 ```
 DatadogInternal.xcframework
 DatadogCore.xcframework
 DatadogRUM.xcframework
 ```
+{{% /tab %}}
 
+{{% tab "Objective-C" %}}
+```
+DatadogInternal.xcframework
+DatadogCore.xcframework
+DatadogRUM.xcframework
+DatadogObjc.xcframework
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: https://github.com/Carthage/Carthage
 {{% /tab %}}
@@ -395,7 +430,7 @@ configuration.sessionSampleRate = 50;
 
 ### Instrument views
 
-The Datadog iOS SDK for RUM allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. 
+The Datadog iOS SDK for RUM allows you to instrument views of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
 To instrument a `SwiftUI.View`, add the following method to your view declaration:
 
@@ -418,7 +453,7 @@ The `trackRUMView(name:)` method starts and stops a RUM view when the `SwiftUI` 
 
 ### Instrument tap actions
 
-The Datadog iOS SDK for RUM allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications. 
+The Datadog iOS SDK for RUM allows you to instrument tap actions of `SwiftUI` applications. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
 
 To instrument a tap action on a `SwiftUI.View`, add the following method to your view declaration:
 
