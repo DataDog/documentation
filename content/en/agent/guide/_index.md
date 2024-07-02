@@ -42,6 +42,10 @@ cascade:
     {{< nextlink href="agent/guide/python-3" >}}Python 2 to 3 Custom Check Migration{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Agent 6 guides:" >}}
+    {{< nextlink href="agent/guide/install-agent-6" >}}Install Agent 6{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="Agent 5 guides:" >}}
     {{< nextlink href="agent/guide/install-agent-5" >}}Install Agent 5{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery in Agent v5{{< /nextlink >}}
