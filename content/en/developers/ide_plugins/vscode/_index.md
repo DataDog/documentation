@@ -160,7 +160,7 @@ Once the configuration file is created, the static analyzer runs automatically i
 
 Exception Replay allows you to navigate through the stack trace frames of any Error Tracking code insight and get information about the values of the variables of the code running in production.
 
-In order to get access to this feature, you have to enable [Error Tracking Exception Replay][29].
+In order to get access to this feature, you have to enable [Error Tracking Exception Replay][29] on Datadog.
 
 Once enabled, a new `Exception Replay` button appears next to the stack trace section of any instrumented Error Tracking code insight. If you click over it, you can access all the information Datadog has about the different frames, and navigate through the production code and the value of the different variables involved.
 
