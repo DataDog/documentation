@@ -36,7 +36,7 @@ Daily Datadog costs in Cloud Cost Management are in private beta. To request acc
 
 Daily Datadog costs give you visibility into daily Datadog spending across dashboards, notebooks, [cost monitors][2], and Cloud Cost Analytics, along with your entire organization's cloud provider and [SaaS costs][3]. 
 
-You can view daily Datadog costs in [Cloud Cost Management][1], and access additional [Datadog costs capabilities][7] like Cost Summary and Cost Chargebacks on the [**Usage & Cost** page][4].
+You can view daily Datadog costs in [Cloud Cost Management][1], and access additional [Datadog costs capabilities][7] like [Cost Summary][9] and [Cost Chargebacks][10] on the [**Usage & Cost** page][4].
 
 <div class="alert alert-info">Costs outside of <a href="https://app.datadoghq.com/billing/usage">Plan and Usage</a> are based on usage only and do not include historical credits and adjustments.</div>
 
@@ -78,3 +78,5 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 [6]: /account_management/rbac/permissions
 [7]: /account_management/plan_and_usage/cost_details/
 [8]: /account_management/billing/usage_attribution/
+[9]: /account_management/plan_and_usage/cost_details/#cost-summary
+[10]: /account_management/plan_and_usage/cost_details/#cost-chargebacks
