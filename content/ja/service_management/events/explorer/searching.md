@@ -1,49 +1,49 @@
 ---
+title: Search Syntax
+kind: Documentation
 further_reading:
 - link: logs/explorer/search_syntax
-  tag: ドキュメント
-  text: ログ検索構文
-kind: ドキュメント
-title: 検索構文
+  tag: Documentation
+  text: Log Search Syntax
 ---
 
-## 概要
+## Overview
 
-イベント検索は[ログ検索構文][1]を使用します。ログ検索と同様に、イベント検索は以下を許可します。
+Events search uses the [logs search syntax][1]. Like logs search, events search permits:
 
-- `AND`、`OR`、および `-` 演算子
-- ワイルドカード
-- エスケープ文字
-- `key:value` でタグとファセットを検索する
-- `@` プレフィックスで属性内を検索する
+- `AND`, `OR`, and `-` operators
+- Wildcards
+- Escape characters
+- Searching tags and facets with `key:value`
+- Searching within attributes with the `@` prefix
 
-## クエリの例
+## Example queries
 
 `source:(github OR chef)`
-: GitHub または Chef からのイベントを表示します。
+: Show events from GitHub OR Chef.
 
 `host:(i-0ade23e6 AND db.myapp.com)`
-: `i-0ade23e6` および `db.myapp.com` からのイベントを表示します。
+: Show events from `i-0ade23e6` AND `db.myapp.com`.
 
 `service:kafka`
-: `kafka` サービスからのイベントを表示します。
+: Show events from the `kafka` service.
 
 `status:error`
-: `error` ステータスのイベントを表示します (サポートされるステータス: `error`、`warning`、`info`、`ok`)。
+: Show events with an `error` status (supports: `error`, `warning`, `info`, `ok`).
 
 `availability-zone:us-east-1a`
-: `us-east-1a` AWS アベイラビリティーゾーン (AZ) でイベントを表示します。
+: Show events in the `us-east-1a` AWS availability zone (AZ).
 
 `container_id:foo*`
-: ID が `foo` で始まるすべてのコンテナからのイベントを表示します。
+: Show events from all containers with an ID beginning with `foo`.
 
 `@evt.name:foo`
-: 属性 `evt.name` が `foo` と等しいイベントを表示します。
+: Show the events with attribute `evt.name` equal to `foo`.
 
-詳細については、[ログ検索構文][1]を参照してください。
+See [Logs Search Syntax][1] for more details.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/explorer/search_syntax/
+[1]: /logs/explorer/search_syntax/

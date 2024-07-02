@@ -1,131 +1,131 @@
 ---
+title: Library Rules
+kind: documentation
 further_reading:
-- link: /sensitive_data_scanner/
-  tag: ドキュメント
-  text: 機密データスキャナーのセットアップ
-kind: ドキュメント
-title: ライブラリルール
+    - link: /sensitive_data_scanner/
+      tag: Documentation
+      text: Set up Sensitive Data Scanner
 ---
 
-## 概要
+## Overview
 
-スキャンルールライブラリとは、メールアドレスやクレジットカード番号、API キー、認証トークンなどの一般的なパターンを検出するための、あらかじめ定義されたルールをまとめたコレクションです。
+The Scanning Rule Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. 
 
-{{< whatsnext desc="ライブラリのルールは、以下のカテゴリーに分類されます。">}}
-  {{< nextlink href="/sensitive_data_scanner/library_rules#secrets-and-credentials">}}シークレットと資格情報{{< /nextlink >}}
-  {{< nextlink href="/sensitive_data_scanner/library_rules#credit-cards-and-banking">}}クレジットカードと銀行取引情報{{< /nextlink >}}
-  {{< nextlink href="/sensitive_data_scanner/library_rules#personal-identifiable-information-pii">}}個人を特定できる情報 (PII){{< /nextlink >}}
-  {{< nextlink href="/sensitive_data_scanner/library_rules#network-and-device-information">}}ネットワークとデバイスの情報{{< /nextlink >}}
+{{< whatsnext desc="The library rules are organized into the following categories:">}}
+  {{< nextlink href="/sensitive_data_scanner/library_rules#secrets-and-credentials">}}Secrets and credentials{{< /nextlink >}}
+  {{< nextlink href="/sensitive_data_scanner/library_rules#credit-cards-and-banking">}}Credit cards and banking{{< /nextlink >}}
+  {{< nextlink href="/sensitive_data_scanner/library_rules#personal-identifiable-information-pii">}}Personal identifiable information (PII){{< /nextlink >}}
+  {{< nextlink href="/sensitive_data_scanner/library_rules#network-and-device-information">}}Network and device information{{< /nextlink >}}
 {{< /whatsnext >}}
 
-これらのルールは Datadog でも確認することができます。
+These rules can also be viewed in Datadog:
 
-1. [機密データスキャナー][1]に移動します。
-1. ページの右上にある **Scanning Rules Library** をクリックします。
-1. ライブラリからスキャングループにルールを追加するには:   
-  a. 追加したいルールを選択します。
-  b. **Add Rules to Scanning Group** をクリックします。
-  c. [機密データスキャナーの設定][2]の手順に従い、設定を完了します。
+1. Navigate to [Sensitive Data Scanner][1].
+1. Click **Scanning Rules Library** on the top right side of the page.
+1. To add rules from the library to a scanning group:   
+  a. Select the rules you want to add.   
+  b. Click **Add Rules to Scanning Group**.   
+  c. Follow the steps in [Set Up Sensitive Data Scanner][2] to finish the setup
 
-## シークレットと資格情報
+## Secrets and credentials
 
-| ライブラリルール                                       | デフォルトのキーワード                                                                                                      |
+| Library rule                                       | Default Keywords                                                                                                      |
 | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| AWS アクセスキー ID スキャナー                          | aws_access_key_id、access key、aws access                                                                             |
-| AWS シークレットアクセスキースキャナー                      | aws_secret_access_key、credentials、secret access key、secret key、set-awscredential                                  |
-| Dynatrace トークンスキャナー                            | dynatrace、token                                                                                                      |
-| Facebook アクセストークンスキャナー                      | facebook、access、token                                                                                               |
-| Gitlab トークンスキャナー                               | gitlab、token                                                                                                         |
-| Instagram トークンスキャナー                            | Instagram、token                                                                                                      |
-| JSON Web トークンスキャナー                             | \-                                                                                                                    |
-| Mailchimp API キースキャナー                          | mailchimp、api key                                                                                                    |
-| Mailgun API キースキャナー                            | mailgun、api key                                                                                                      |
-| Okta API トークンスキャナー                             | okta、api token                                                                                                       |
-| Slack アクセストークンスキャナー                         | slack、access、token                                                                                                  |
-| Stripe API キースキャナー                             | stripe、api key                                                                                                       |
-| Stripe 制限付き API キースキャナー                  | stripe、api key                                                                                                       |
-| Twilio API キースキャナー                             | twilio、api key                                                                                                       |
-| Square アクセストークンスキャナー                        | square、access、token                                                                                                 |
-| Square OAuth シークレットスキャナー                        | square、oauth、secret、authorization、authentication                                                                  |
-| Google API キースキャナー                             | g_places_key、gcp api key、gcp key、google cloud key、google-api-key、google-cloud-apikeys、googlekey、x-goog-api-key |
-| Google OAuth アクセストークンスキャナー                  | google、oauth、 access、token、authorization、authentication                                                           |
-| RSA 秘密鍵スキャナー                            | rsa、private key                                                                                                      |
-| Send Grid API トークンスキャナー                        | send grid、api token                                                                                                  |
-| Heroku API キースキャナー                             | heroku、api key                                                                                                       |
-| SSH キースキャナー                                    | ssh、ssh key                                                                                                          |
-| PGP 秘密鍵スキャナー                            | pgp、key                                                                                                              |
-| Paypal Braintree アクセストークンスキャナー              | paypal、braintree、access、token                                                                                      |
-| Amazon マーケットプレイス Web サービス認証トークンスキャナー | amazon、marketplace、aws、auth、token、authorization、authentication                                                  |
-| Azure 個人用アクセストークンスキャナー                | azure、access、token                                                                                                  |
-| Azure SQL 接続文字列スキャナー                | azure、sql、connection string                                                                                         |
-| Azure サブスクリプションキースキャナー                     | azure、subscription key                                                                                               |
-| Bearer トークンスキャナー                               | bearer、token                                                                                                         |
-| Checkout.com シークレットスキャナー                        | checkout、secret                                                                                                      |
-| Databricks 個人用アクセストークンスキャナー           | databricks、access、token                                                                                             |
-| Docker Swarm 参加トークンスキャナー                    | docker、docker swarm、join token                                                                                      |
-| Docker Swarm アンロックキースキャナー                    | docker、docker swarm、unlock key                                                                                      |
-| Github アクセストークンスキャナー                        | github、access、token                                                                                                 |
-| Github 更新トークンスキャナー                       | github、refresh token                                                                                                 |
-| JIRA API トークンスキャナー                             | jira、api token                                                                                                       |
-| LinkedIn シークレットスキャナー                            | linkedin、secret                                                                                                      |
-| Shopify アクセストークンスキャナー                       | shopify、access、token                                                                                                |
-| Shopify 共有シークレットスキャナー                      | shopify、shared secret                                                                                                |
-| Slack Webhook シークレットスキャナー                       | slack、webhook、secret                                                                                                |
+| AWS Access Key ID Scanner                          | aws_access_key_id, access key, aws access                                                                             |
+| AWS Secret Access Key Scanner                      | aws_secret_access_key, credentials, secret access key, secret key, set-awscredential                                  |
+| Dynatrace Token Scanner                            | dynatrace, token                                                                                                      |
+| Facebook Access Token Scanner                      | facebook, access, token                                                                                               |
+| Gitlab Token Scanner                               | gitlab, token                                                                                                         |
+| Instagram Token Scanner                            | Instagram, token                                                                                                      |
+| JSON Web Token Scanner                             | \-                                                                                                                    |
+| Mailchimp API Key Scanner                          | mailchimp, api key                                                                                                    |
+| Mailgun API Key Scanner                            | mailgun, api key                                                                                                      |
+| Okta API Token Scanner                             | okta, api token                                                                                                       |
+| Slack Access Token Scanner                         | slack, access, token                                                                                                  |
+| Stripe API Key Scanner                             | stripe, api key                                                                                                       |
+| Stripe Restricted API Key Scanner                  | stripe, api key                                                                                                       |
+| Twilio API Key Scanner                             | twilio, api key                                                                                                       |
+| Square Access Token Scanner                        | square, access, token                                                                                                 |
+| Square OAuth Secret Scanner                        | square, oauth, secret, authorization, authentication                                                                  |
+| Google API Key Scanner                             | g_places_key, gcp api key, gcp key, google cloud key, google-api-key, google-cloud-apikeys, googlekey, x-goog-api-key |
+| Google OAuth Access Token Scanner                  | google, oauth, access, token, authorization, authentication                                                           |
+| RSA Private Key Scanner                            | rsa, private key                                                                                                      |
+| Send Grid API Token Scanner                        | send grid, api token                                                                                                  |
+| Heroku API Key Scanner                             | heroku, api key                                                                                                       |
+| SSH Key Scanner                                    | ssh, ssh key                                                                                                          |
+| PGP Private Key Scanner                            | pgp, key                                                                                                              |
+| Paypal Braintree Access Token Scanner              | paypal, braintree, access, token                                                                                      |
+| Amazon Marketplace Web Services Auth Token Scanner | amazon, marketplace, aws, auth, token, authorization, authentication                                                  |
+| Azure Personal Access Token Scanner                | azure, access, token                                                                                                  |
+| Azure SQL Connection String Scanner                | azure, sql, connection string                                                                                         |
+| Azure Subscription Key Scanner                     | azure, subscription key                                                                                               |
+| Bearer Token Scanner                               | bearer, token                                                                                                         |
+| Checkout.com Secret Scanner                        | checkout, secret                                                                                                      |
+| Databricks Personal Access Token Scanner           | databricks, access, token                                                                                             |
+| Docker Swarm Join Token Scanner                    | docker, docker swarm, join token                                                                                      |
+| Docker Swarm Unlock Key Scanner                    | docker, docker swarm, unlock key                                                                                      |
+| Github Access Token Scanner                        | github, access, token                                                                                                 |
+| Github Refresh Token Scanner                       | github, refresh token                                                                                                 |
+| JIRA API Token Scanner                             | jira, api token                                                                                                       |
+| LinkedIn Secret Scanner                            | linkedin, secret                                                                                                      |
+| Shopify Access Token Scanner                       | shopify, access, token                                                                                                |
+| Shopify Shared Secret Scanner                      | shopify, shared secret                                                                                                |
+| Slack Webhook Secret Scanner                       | slack, webhook, secret                                                                                                |
 
-## クレジットカードと銀行取引情報
+## Credit cards and banking
 
-| ライブラリルール                                   | デフォルトのキーワード                                                                                                                                                                                                                                                                                            |
+| Library rule                                   | Default Keywords                                                                                                                                                                                                                                                                                            |
 | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Twitter シークレットスキャナー                         | twitter、secret                                                                                                                                                                                                                                                                                             |
-| Visa カードスキャナー (4x4 桁)                 | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、electron、pan、payment account number、payment card number、pcn、union pay、visa                                                                                           |
-| Visa カードスキャナー (2x8 桁)                 | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、electron、pan、payment account number、payment card number、pcn、union pay、visa                                                                                           |
-| Visa カードスキャナー (1x16 & 1x19 桁)         | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、electron、pan、payment account number、payment card number、pcn、union pay、visa                                                                                           |
-| MasterCard スキャナー (4x4 桁)                | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、mastercard、mc、pan、payment account number、payment card number、pcn、union pay                                                                                           |
-| MasterCard スキャナー (2x8 桁)                | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、mastercard、mc、pan、payment account number、payment card number、pcn、union pay                                                                                           |
-| MasterCard スキャナー (1x16 桁)               | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、mastercard、mc、pan、payment account number、payment card number、pcn、union pay                                                                                           |
-| Discover カードスキャナー (4x4 桁)             | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、discover、pan、payment account number、payment card number、pcn                                                                                                            |
-| Discover カードスキャナー (2x8 桁)             | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、discover、pan、payment account number、payment card number、pcn                                                                                                            |
-| Discover カードスキャナー (1x16 桁)            | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、discover、pan、payment account number、payment card number、pcn                                                                                                            |
-| American Express カードスキャナー (4+6+5 桁)   | account number、american express、amex、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、pan、payment account number、payment card number、pcn、union pay                                                                                   |
-| American Express カードスキャナー (4+4+4+3 桁) | account number、american express、amex、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、pan、payment account number、payment card number、pcn、union pay                                                                                   |
-| American Express カードスキャナー (8+7 桁)     | account number、american express、amex、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、pan、payment account number、payment card number、pcn、union pay                                                                                   |
-| American Express カードスキャナー (1x15 桁)    | account number、american express、amex、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、pan、payment account number、payment card number、pcn、union pay                                                                                   |
-| Diners カードスキャナー (4+6+4 桁)             | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、diners club、mastercard、mc、pan、payment account number、payment card number、pcn                                                                                         |
-| Diners カードスキャナー (4+4+4+2 桁)           | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、diners club、mastercard、mc、pan、payment account number、payment card number、pcn                                                                                         |
-| Diners カードスキャナー (8+6 桁)               | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、diners club、mastercard、mc、pan、payment account number、payment card number、pcn                                                                                         |
-| Diners カードスキャナー (1x14 桁)              | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、diners club、mastercard、mc、pan、payment account number、payment card number、pcn                                                                                         |
-| JCB カードスキャナー (4x4 桁)                  | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、japanese card bureau、jcb、pan、payment account number、payment card number、pcn                                                                                           |
-| JCB カードスキャナー (2x8 桁)                  | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、japanese card bureau、jcb、pan、payment account number、payment card number、pcn                                                                                           |
-| JCB カードスキャナー (1x16 桁)                 | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、japanese card bureau、jcb、pan、payment account number、payment card number、pcn                                                                                           |
-| Maestro カードスキャナー (4x4 桁)              | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、mastercard、mc、pan、payment account number、payment card number、pcn                                                                                                      |
-| Maestro カードスキャナー (2x8 桁)              | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、mastercard、mc、pan、payment account number、payment card number、pcn                                                                                                      |
-| Maestro カードスキャナー (1x16 桁)             | account number、bank card、card、card num、card number、cc #、ccn、check card、credit、credit card#、dankort、debit、debit card、mastercard、mc、pan、payment account number、payment card number、pcn                                                                                                      |
-| 標準 IBAN コードスキャナー                     | bank account、bank acct、checking account、checking acct、deposit account、deposit acct、savings account、savings acct、chequing account、chequing acct、iban、account code、account number、accountno#、accountnumber#、bban、customer account id、customer account number、customer bank account id、sepa |
+| Twitter Secret Scanner                         | twitter, secret                                                                                                                                                                                                                                                                                             |
+| Visa Card Scanner (4x4 digits)                 | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, electron, pan, payment account number, payment card number, pcn, union pay, visa                                                                                           |
+| Visa Card Scanner (2x8 digits)                 | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, electron, pan, payment account number, payment card number, pcn, union pay, visa                                                                                           |
+| Visa Card Scanner (1x16 & 1x19 digits)         | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, electron, pan, payment account number, payment card number, pcn, union pay, visa                                                                                           |
+| MasterCard Scanner (4x4 digits)                | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, mastercard, mc, pan, payment account number, payment card number, pcn, union pay                                                                                           |
+| MasterCard Scanner (2x8 digits)                | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, mastercard, mc, pan, payment account number, payment card number, pcn, union pay                                                                                           |
+| MasterCard Scanner (1x16 digits)               | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, mastercard, mc, pan, payment account number, payment card number, pcn, union pay                                                                                           |
+| Discover Card Scanner (4x4 digits)             | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, discover, pan, payment account number, payment card number, pcn                                                                                                            |
+| Discover Card Scanner (2x8 digits)             | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, discover, pan, payment account number, payment card number, pcn                                                                                                            |
+| Discover Card Scanner (1x16 digits)            | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, discover, pan, payment account number, payment card number, pcn                                                                                                            |
+| American Express Card Scanner (4+6+5 digits)   | account number, american express, amex, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, pan, payment account number, payment card number, pcn, union pay                                                                                   |
+| American Express Card Scanner (4+4+4+3 digits) | account number, american express, amex, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, pan, payment account number, payment card number, pcn, union pay                                                                                   |
+| American Express Card Scanner (8+7 digits)     | account number, american express, amex, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, pan, payment account number, payment card number, pcn, union pay                                                                                   |
+| American Express Card Scanner (1x15 digits)    | account number, american express, amex, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, pan, payment account number, payment card number, pcn, union pay                                                                                   |
+| Diners Card Scanner (4+6+4 digits)             | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, diners club, mastercard, mc, pan, payment account number, payment card number, pcn                                                                                         |
+| Diners Card Scanner (4+4+4+2 digits)           | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, diners club, mastercard, mc, pan, payment account number, payment card number, pcn                                                                                         |
+| Diners Card Scanner (8+6 digits)               | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, diners club, mastercard, mc, pan, payment account number, payment card number, pcn                                                                                         |
+| Diners Card Scanner (1x14 digits)              | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, diners club, mastercard, mc, pan, payment account number, payment card number, pcn                                                                                         |
+| JCB Card Scanner (4x4 digits)                  | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, japanese card bureau, jcb, pan, payment account number, payment card number, pcn                                                                                           |
+| JCB Card Scanner (2x8 digits)                  | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, japanese card bureau, jcb, pan, payment account number, payment card number, pcn                                                                                           |
+| JCB Card Scanner (1x16 digits)                 | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, japanese card bureau, jcb, pan, payment account number, payment card number, pcn                                                                                           |
+| Maestro Card Scanner (4x4 digits)              | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, mastercard, mc, pan, payment account number, payment card number, pcn                                                                                                      |
+| Maestro Card Scanner (2x8 digits)              | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, mastercard, mc, pan, payment account number, payment card number, pcn                                                                                                      |
+| Maestro Card Scanner (1x16 digits)             | account number, bank card, card, card num, card number, cc #, ccn, check card, credit, credit card#, dankort, debit, debit card, mastercard, mc, pan, payment account number, payment card number, pcn                                                                                                      |
+| Standard Iban Code Scanner                     | bank account, bank acct, checking account, checking acct, deposit account, deposit acct, savings account, savings acct, chequing account, chequing acct, iban, account code, account number, accountno#, accountnumber#, bban, customer account id, customer account number, customer bank account id, sepa |
 
-## 個人を特定できる情報 (PII)
+## Personal identifiable information (PII)
 
-| ライブラリルール                             | デフォルトのキーワード                                                                                                                                                                                                                                       |
+| Library rule                             | Default Keywords                                                                                                                                                                                                                                       |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 標準メールアドレススキャナー           | \-                                                                                                                                                                                                                                                     |
-| 米国パスポートスキャナー                      | passport、travel document                                                                                                                                                                                                                              |
-| 米国車両識別番号スキャナー | fahrgestellnummer、niv、numarul de identificare、numarul seriei de sasiu、numer vin、número de identificação do veículo、número de identificación de automóviles、numéro d'identification du véhicule、vehicle identification number、vin、vin numeris |
-| 英国国民保険番号スキャナー     | national health service、nhs                                                                                                                                                                                                                           |
-| カナダ社会保険番号スキャナー | canada healthcare number、msp number、personal healthcare number、phn、soins de santé                                                                                                                                                                  |
+| Standard Email Address Scanner           | \-                                                                                                                                                                                                                                                     |
+| US Passport Scanner                      | passport, travel document                                                                                                                                                                                                                              |
+| US Vehicle Identification Number Scanner | fahrgestellnummer, niv, numarul de identificare, numarul seriei de sasiu, numer vin, número de identificação do veículo, número de identificación de automóviles, numéro d'identification du véhicule, vehicle identification number, vin, vin numeris |
+| UK National Insurance Number Scanner     | national health service, nhs                                                                                                                                                                                                                           |
+| Canadian Social Insurance Number Scanner | canada healthcare number, msp number, personal healthcare number, phn, soins de santé                                                                                                                                                                  |
 
-## ネットワークとデバイスの情報
+## Network and device information
 
-| ライブラリルール                             | デフォルトのキーワード |
+| Library rule                             | Default Keywords |
 | ---------------------------------------- | ---------------- |
-| IPv4 アドレススキャナー                     | \-               |
-| IPv6 アドレススキャナー                     | \-               |
-| 標準 MAC アドレススキャナー             | \-               |
-| HTTP Basic 認証ヘッダースキャナー | \-               |
-| HTTP Cookie スキャナー                      | cookie           |
-| HTTP URL スキャナー                      | \-               |
+| IPv4 Address Scanner                     | \-               |
+| IPv6 Address Scanner                     | \-               |
+| Standard Mac Address Scanner             | \-               |
+| HTTP Basic Authentication Header Scanner | \-               |
+| HTTP Cookie Scanner                      | cookie           |
+| HTTP(S) URL Scanner                      | \-               |
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/
-[2]: /ja/sensitive_data_scanner/?#add-scanning-rules
+[2]: /sensitive_data_scanner/?#add-scanning-rules

@@ -1,6 +1,6 @@
 ---
-core_product:
-- cloud siem
 title: Investigator
+core_product:
+  - cloud siem
 ---
-Investigator は、影響を受けるエンティティから別のエンティティにピボットし、ユーザーの行動とそれがクラウド環境に与える影響を確認するために使用できるグラフィカルインターフェイスです。
+Investigator is a graphical interface that users can use to pivot from one affected entity to another and see user behavior and its impact on their cloud environment.

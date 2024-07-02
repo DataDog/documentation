@@ -1,3 +1,3 @@
 ---
-title: ケースプロジェクト
+title: Cases Projects
 ---

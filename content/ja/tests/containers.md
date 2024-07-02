@@ -1,24 +1,24 @@
 ---
+title: Tests in Containers
+kind: documentation
 aliases:
-- /ja/continuous_integration/setup_tests/containers
-- /ja/continuous_integration/tests/containers
+  - /continuous_integration/setup_tests/containers
+  - /continuous_integration/tests/containers
 further_reading:
 - link: /tests
-  tag: ドキュメント
-  text: Test Visibility について
-kind: ドキュメント
-title: コンテナ内のテスト
+  tag: Documentation
+  text: Learn about Test Visibility
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 Test Visibility は利用できません。</div>
+<div class="alert alert-warning">Test Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## 概要
+## Overview
 
-ビルド内で自分で起動したコンテナ内でテストを実行する場合 (たとえば、[`docker run`][1] または [`docker-compose`][2] を使用)、使用している CI プロバイダーに応じて以下の環境変数をコンテナに転送します。これにより、Datadog トレーサーによるビルド情報の自動検出が可能になります。
+If you run your tests inside a container that you launch yourself within the build (for example, using [`docker run`][1] or [`docker-compose`][2]), forward the following environment variables to the container depending on your CI provider. This enables the Datadog tracer to autodetect the build information.
 
-さらに、[言語別のテストインスツルメンテーション手順][3]に記載されているとおり、トレーサーの構成に必要な環境変数で渡す必要があります (`DD_SERVICE`、`DD_ENV`、およびコンテナ内からアクセス可能な、有効な `DD_TRACE_AGENT_URL` など)。
+Additionally, you need to pass in the environment variables required to configure the tracer as described in the [per-language test instrumentation instructions][3] (such as `DD_SERVICE`, `DD_ENV`, and a valid `DD_TRACE_AGENT_URL` that is accessible from within the container).
 
 {{< tabs >}}
 {{% tab "AppVeyor" %}}
@@ -38,7 +38,7 @@ title: コンテナ内のテスト
 - `APPVEYOR_REPO_COMMIT_AUTHOR`
 - `APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL`
 
-[AppVeyor により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by AppVeyor][1]
 
 
 [1]: https://www.appveyor.com/docs/environment-variables/
@@ -65,7 +65,7 @@ title: コンテナ内のテスト
 - `SYSTEM_STAGEDISPLAYNAME`
 - `SYSTEM_JOBDISPLAYNAME`
 
-[Azure Pipelines により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by Azure Pipelines][1]
 
 
 [1]: https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops
@@ -81,7 +81,7 @@ title: コンテナ内のテスト
 - `BITBUCKET_BRANCH`
 - `BITBUCKET_TAG`
 
-[Bitbucket Pipelines により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by Bitbucket Pipelines][1]
 
 
 [1]: https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/
@@ -108,7 +108,7 @@ title: コンテナ内のテスト
 - `GIT_CLONE_COMMIT_COMMITER_NAME`
 - `GIT_CLONE_COMMIT_COMMITER_EMAIL`
 
-[Bitrise により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by Bitrise][1]
 
 
 [1]: https://devcenter.bitrise.io/en/references/available-environment-variables.html
@@ -134,7 +134,7 @@ title: コンテナ内のテスト
 - `BUILDKITE_AGENT_ID`
 - `BUILDKITE_AGENT_META_DATA_*`
 
-[Buildkite により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by Buildkite][1]
 
 
 [1]: https://buildkite.com/docs/pipelines/environment-variables
@@ -153,7 +153,7 @@ title: コンテナ内のテスト
 - `CIRCLE_TAG`
 - `CIRCLE_JOB`
 
-[CircleCI により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by CircleCI][1]
 
 
 [1]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
@@ -167,7 +167,7 @@ title: コンテナ内のテスト
 - `CF_BRANCH`
 - `CF_REVISION`
 
-[Codefresh により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by Codefresh][1]
 
 
 [1]: https://codefresh.io/docs/docs/pipelines/variables/
@@ -187,7 +187,7 @@ title: コンテナ内のテスト
 - `GITHUB_REF`
 - `GITHUB_JOB`
 
-[GitHub Actions により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by GitHub Actions][1]
 
 
 [1]: https://docs.github.com/en/free-pro-team@latest/actions/reference/environment-variables#default-environment-variables
@@ -215,7 +215,7 @@ title: コンテナ内のテスト
 - `CI_COMMIT_MESSAGE`
 - `CI_COMMIT_TIMESTAMP`
 
-[GitLab CI により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by GitLab CI][1]
 
 
 [1]: https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
@@ -235,10 +235,10 @@ title: コンテナ内のテスト
 - `GIT_BRANCH`
 - `NODE_NAME`
 - `NODE_LABELS`
-- `DD_CUSTOM_TRACE_ID` ([Jenkins Datadog Plugin][2] で設定されるカスタム変数)
+- `DD_CUSTOM_TRACE_ID` (custom variable set by the [Jenkins Datadog Plugin][2])
 - `DD_CUSTOM_PARENT_ID` (idem)
 
-[Jenkins により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by Jenkins][1]
 
 
 [1]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
@@ -249,9 +249,9 @@ title: コンテナ内のテスト
 - `TEAMCITY_VERSION`
 - `TEAMCITY_BUILDCONF_NAME`
 - `BUILD_URL`
-- `DATADOG_BUILD_ID` ([Datadog TeamCity インテグレーション][2]で設定されるカスタム変数)
+- `DATADOG_BUILD_ID` (custom variable set by the [Datadog TeamCity Integration][2])
 
-[TeamCity により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by TeamCity][1]
 
 
 [1]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
@@ -273,7 +273,7 @@ title: コンテナ内のテスト
 - `TRAVIS_PULL_REQUEST_BRANCH`
 - `TRAVIS_COMMIT_MESSAGE`
 
-[Travis CI により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by Travis CI][1]
 
 
 [1]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
@@ -293,17 +293,17 @@ title: コンテナ内のテスト
 - `BUDDY_EXECUTION_REVISION_COMMITTER_NAME`
 - `BUDDY_EXECUTION_REVISION_COMMITTER_EMAIL`
 
-[Buddy CI により提供されたビルド環境変数の完全リスト][1]
+[Full list of build environment variables provided by Buddy CI][1]
 
 
 [1]: https://buddy.works/docs/pipelines/environment-variables#default-environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.docker.com/engine/reference/run/
 [2]: https://docs.docker.com/compose/reference/
-[3]: /ja/tests/
+[3]: /tests/

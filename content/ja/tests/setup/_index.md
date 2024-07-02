@@ -1,15 +1,15 @@
 ---
-aliases:
-- /ja/continuous_integration/tests/setup/
-kind: ドキュメント
-title: Test Visibility の構成
+title: Configure Test Visibility
+kind: documentation
 type: multi-code-lang
+aliases:
+- /continuous_integration/tests/setup/
 ---
 
-[Test Visibility][1] の構成オプションについては、言語を選択してください。
+For information about configuration options for [Test Visibility][1], choose your language:
 
 {{< partial name="continuous_integration/ci-tests-setup.html" >}}
 
 <br>
 
-[1]: /ja/continuous_integration/tests
+[1]: /continuous_integration/tests

@@ -1,51 +1,51 @@
 ---
+title: Instrumenting your Swift tests with RUM
+kind: documentation
+description: Learn how to use CI Visibility and RUM to connect your Swift test results with browser sessions and session replays.
 aliases:
-- /ja/continuous_integration/guides/rum_swift_integration
-- /ja/continuous_integration/integrate_tests/swift_tests
-- /ja/continuous_integration/tests/swift_tests
-description: CI Visibility と RUM を使用して、Swift のテスト結果をブラウザセッションおよびセッションリプレイと連携させる方法をご紹介します。
+- /continuous_integration/guides/rum_swift_integration
+- /continuous_integration/integrate_tests/swift_tests
+- /continuous_integration/tests/swift_tests
 further_reading:
 - link: /continuous_integration/tests
-  tag: ドキュメント
-  text: Test Visibility について
+  tag: Documentation
+  text: Learn about Test Visibility
 - link: /real_user_monitoring/ios
-  tag: ドキュメント
-  text: RUM iOS と tvOS のモニタリングについて
-kind: ドキュメント
-title: RUM による Swift テストのインスツルメント
+  tag: Documentation
+  text: Learn about RUM iOS and tvOS Monitoring
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
+<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## 概要
+## Overview
 
-[Test Visibility][3] がすでに Swift に設定されていることを確認してください。
+Ensure that [Test Visibility][3] is already set up for Swift.
 
-### 互換性
+### Compatibility
 
-CI Visibility - RUM のインテグレーションは、以下のバージョンの `dd-sdk-swift-testing` と `dd-sdk-ios` で利用可能です。
+The CI Visibility - RUM integration is available for these versions of `dd-sdk-swift-testing` and `dd-sdk-ios`:
 
 * `dd-sdk-swift-testing` >= 2.0.0
 * `dd-sdk-ios` >= 1.10.0
 
-## Swift テストとRUM の接続
+## Connect Swift tests and RUM
 
-UI テストに `dd-sdk-swift-testing` をリンクし、テスト対象のアプリケーションが[リアルユーザーモニタリング][1]を使用してインスツルメンテーションされている場合、テスト結果と生成された RUM ブラウザセッションおよびセッションリプレイは自動的にリンクされます。
+If you link `dd-sdk-swift-testing` for your UI tests and the application being tested is instrumented using [Real User Monitoring][1], your test results and their generated RUM browser sessions and session replays are automatically linked.
 
-Test Visibility のテスト詳細サイドパネルに、**RUM Sessions** タブが表示されます。
+A **RUM Sessions** tab appears in the Test Visibility test detail side panel.
 
-{{< img src="ci/ci-swift-rum-session-tab.png" alt="テスト詳細のブラウザセッションタブ" style="width:100%;">}}
+{{< img src="ci/ci-swift-rum-session-tab.png" alt="Browser Session Tab in Test Detail" style="width:100%;">}}
 
-RUM セッションには、[RUM が通常収集する][2]データがすべて含まれているため、ユーザー名のエラーや予期せぬエラーなど、iOS テストで起こりうる問題をデバッグすることができます。
+The RUM session has all the data that [RUM normally collects][2] so you can debug potential issues in your iOS tests, such as user name or unexpected errors.
 
-{{< img src="ci/ci-swift-rum-session-tab-errors.png" alt="テスト詳細のブラウザセッションタブエラー" style="width:100%;">}}
+{{< img src="ci/ci-swift-rum-session-tab-errors.png" alt="Browser Session Tab Errors in Test Detail" style="width:100%;">}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/ios/
-[2]: /ja/real_user_monitoring/ios/data_collected/
-[3]: /ja/continuous_integration/tests/swift/
+[1]: /real_user_monitoring/ios/
+[2]: /real_user_monitoring/ios/data_collected/
+[3]: /continuous_integration/tests/swift/

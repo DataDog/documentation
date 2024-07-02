@@ -1,225 +1,225 @@
 ---
+title: Regular Expression Syntax
+kind: documentation
 disable_toc: false
 further_reading:
-- link: /sensitive_data_scanner/
-  tag: ドキュメント
-  text: 機密データスキャナーの設定
-kind: ドキュメント
-title: 正規表現の構文
+    - link: /sensitive_data_scanner/
+      tag: Documentation
+      text: Set up Sensitive Data Scanner
 ---
 
-## 概要
+## Overview
 
-[Sensitive Data Scanner][1] では、スキャンルールによってデータ内でマッチする機密情報を検出します。機密情報のスキャンのために[スキャンルールライブラリ][2]のルールを使用することも、正規表現 (regex) パターンを使ってカスタムスキャンルールを作成することも可能です。Sensitive Data Scanner の正規表現構文は、[PCRE2][3] のサブセットです。
+In [Sensitive Data Scanner][1], the scanning rule determines what sensitive information to match within the data. You can use rules from the [Scanning Rule Library][2] or you can create custom scanning rules using regular expression (regex) patterns to scan for sensitive information. The Sensitive Data Scanner regex syntax is a subset of [PCRE2][3].
 
-{{< whatsnext desc=“カスタムルールで使用可能な正規表現構文は以下のカテゴリーに分けられます。" >}}
-    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#alternation" >}}交替{{< /nextlink >}}
-    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#assertions" >}}アサーション{{< /nextlink >}}
-    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#ascii-classes" >}}ASCII クラス{{< /nextlink >}}
-    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#character-classes" >}}文字クラス{{< /nextlink >}}
-    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#character-escapes" >}}文字のエスケープ{{< /nextlink >}}
-    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#custom-character-classes" >}}カスタム文字クラス{{< /nextlink >}}
-    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#groups" >}}グループ{{< /nextlink >}}
-    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#quantifiers" >}}量指定子{{< /nextlink >}}
-    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#quoting" >}}クォート{{< /nextlink >}}
-    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#setting-flags" >}}フラグの設定{{< /nextlink >}}
-    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#unicode-properties" >}}Unicode プロパティ{{< /nextlink >}}
+{{< whatsnext desc="The available regex syntax for custom rules are broken down into the following categories:" >}}
+    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#alternation" >}}Alternation{{< /nextlink >}}
+    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#assertions" >}}Assertions{{< /nextlink >}}
+    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#ascii-classes" >}}ASCII classes{{< /nextlink >}}
+    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#character-classes" >}}Character classes{{< /nextlink >}}
+    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#character-escapes" >}}Character escapes{{< /nextlink >}}
+    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#custom-character-classes" >}}Custom character classes{{< /nextlink >}}
+    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#groups" >}}Groups{{< /nextlink >}}
+    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#quantifiers" >}}Quantifiers{{< /nextlink >}}
+    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#quoting" >}}Quoting{{< /nextlink >}}
+    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#setting-flags" >}}Setting flags{{< /nextlink >}}
+    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#unicode-properties" >}}Unicode properties{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## 交替
+## Alternation
 
-交替を使うと、最初に一致する式を選ぶことができます。交替内の式は空のままにすることができ、これにより何にでも一致し、交替式全体がオプションになります。
+Use alternation to choose the first expression that matches. An expression in an alteration can be left empty, which means it matches to anything and makes the entire alternation expression optional.
 
-| 正規表現構文      | 説明                              |
+| Regex Syntax      | Description                              |
 | ------------------| ---------------------------------------- |
-| `...\|...\|...`   | 交替。                          |
-| `...\|...\|`      | 空式との交替。 |
+| `...\|...\|...`   | An alternation.                          |
+| `...\|...\|`      | An alternation with an empty expression. |
 
-## アサーション
+## Assertions
 
-| アサーション | 説明                                                                    |
+| Assertion | Description                                                                    |
 | --------- | ------------------------------------------------------------------------------ |
-| `\b `     | 単語境界。                                                               |
-| `\B`      | 単語境界でない。                                                           |
-| `^`       | 行頭。                                                               |
-| `$`       | 行末。                                                                 |
-| `/A`      | テキストの開始。                                                                 |
-| `\z`      | テキストの終わり。                                                                   |
-| `\Z`      | テキストの終わり (または、テキストの終わりの直前にある `\n` の前)。 |
+| `\b `     | A word boundary.                                                               |
+| `\B`      | Not a word boundary.                                                           |
+| `^`       | Start of a line.                                                               |
+| `$`       | End of a line.                                                                 |
+| `/A`      | Start of text.                                                                 |
+| `\z`      | End of text.                                                                   |
+| `\Z`      | End of text (or before a `\n` that is immediately before the end of the text). |
 
-## ASCII クラス
+## ASCII classes
 
-[カスタム文字クラス](#custom-character-classes)で使用できる名前クラスで、例えば `[[:ascii:]]` などです。これらは ASCII 文字にのみマッチします。
+Names classes that can be used in [custom character classes](#custom-character-classes), for example `[[:ascii:]]`. These only match ASCII characters.
 
-| 名前クラス | 説明                                       |
+| Names Class | Description                                       |
 | ----------- | ------------------------------------------------- |
-| `alnum`     | 英数字。                                     |
-| `alpha`     | アルファベット。                                       |
-| `ascii`     | 任意の ASCII 文字。                              |
-| `blank`     | スペースまたはタブ。                                   |
-| `cntrl`     | 制御文字。                              |
-| `digit`     | 任意の数字。                                        |
-| `graph`     | 任意のグラフィック文字または印刷文字 (スペースは不可)。|
-| `lower`     | 任意の小文字。                             |
-| `print`     | 印刷可能な文字 (スペースを含む)。       |
-| `punct`     | 任意の句読点文字。                        |
-| `space`     | 空白文字。                                     |
-| `upper`     | 任意の大文字。                             |
-| `word`      | `/w` と同じ。                                 |
-| `xdigit`    | 任意の 16 進数。                            |
+| `alnum`     | Alphanumeric.                                     |
+| `alpha`     | Alphabetic.                                       |
+| `ascii`     | Any ASCII character.                              |
+| `blank`     | A space or tab.                                   |
+| `cntrl`     | A control character.                              |
+| `digit`     | Any digit.                                        |
+| `graph`     | Any graphical or printing character (not a space).|
+| `lower`     | Any lowercase letter.                             |
+| `print`     | Any printable character (including spaces).       |
+| `punct`     | Any punctuation character.                        |
+| `space`     | A whitespace.                                     |
+| `upper`     | Any uppercase letter.                             |
+| `word`      | The same as `/w`.                                 |
+| `xdigit`    | Any hexadecimal digit.                            |
 
-## 文字エスケープ
+## Character escapes
 
-| 正規表現構文     | 説明                                                         |
+| Regex Syntax     | Description                                                         |
 | --------------- | -------------------------------------------------------------------- |
-| `\xhh`          | 16 進コード `hh` を持つ文字をエスケープします (2 桁まで使用可能)。  |
-| `\x{hhhhhh}`    | 16 進コード `hhhhhh` を持つ文字をエスケープします (1 桁から 6 桁まで)。  |
-| `\a`            | ベル `(\x{7})` をエスケープします。                                            |
-| `\b`            | バックスペース `(\x{8})` をエスケープします。これはカスタム文字クラス (例えば `[\b]`) でのみ動作し、それ以外では単語境界として扱われます。 |
-| `\cx`           | 制御シーケンスをエスケープします。`x` は `A-Z` (大文字または小文字) です。例: `\cA` = `\x{0}`, `\cB` = `\x{1}`,... `\cZ` = `\x{19}`。 |
-| `\e`            | ASCII エスケープ文字 (`\x{1B}`) をエスケープします。                       |
-| `\f`            | フォームフィード (`\x{C}`) をエスケープします。                                       |
-| `\n`            | 改行 (`\x{A}`) をエスケープします。                                         |
-| `\r`            | 復帰改行をエスケープ (`\x{D}`) します。                                  |
-| `\t`            | タブをエスケープ (`\x{9}`) します。                                             |
-| `\v`            | 垂直タブ (`\x{B}`) をエスケープします。                                    |
+| `\xhh`          | Escapes characters with hex code `hh` (up to 2 digits are allowed).  |
+| `\x{hhhhhh}`    | Escapes characters with hex code `hhhhhh` (between 1 and 6 digits).  |
+| `\a`            | Escapes a bell `(\x{7})`.                                            |
+| `\b`            | Escapes a backspace `(\x{8})`. This only works in a custom character class (for example, `[\b]`), otherwise it is treated as a word boundary. |
+| `\cx`           | Escapes a control sequence, where `x` is `A-Z` (upper or lowercase). For example: `\cA` = `\x{0}`, `\cB` = `\x{1}`,...`\cZ` = `\x{19}`. |
+| `\e`            | Escapes the ASCII escape character (`\x{1B}`).                       |
+| `\f`            | Escapes a form feed (`\x{C}`).                                       |
+| `\n`            | Escapes a newline (`\x{A}`).                                         |
+| `\r`            | Escapes a carriage return (`\x{D}`)                                  |
+| `\t`            | Escapes a tab (`\x{9}`).                                             |
+| `\v`            | Escapes a vertical tab (`\x{B}`).                                    |
 
-## 文字クラス
+## Character classes
 
-| 正規表現構文    | 説明                                                                                   |
+| Regex Syntax    | Description                                                                                   |
 | --------------- | --------------------------------------------------------------------------------------------- |
-| `.`             | 任意の文字にマッチ (`\n` 以外) します。`s` フラグを有効にすると `\n` を含むすべての文字にマッチします。|
-| `\d`            | 任意の ASCII 数字 (`[0-9]`) にマッチします。                                                            |
-| `\D `           | `\d` でマッチしないものにマッチします。                                               |
-| `\h`            | スペースまたはタブにマッチします (`[\x{20}\t]`)。                                                        |
-| `\H`            | `\h` とマッチしないものにマッチします。                                               |
-| `\s`            | 任意の ASCII 空白文字にマッチします (`[\r\n\t\x{C}\x{B}\x{20}]`)。                                    |
-| `\S`            | `\s` とマッチしないものにマッチします。                                               |
-| `\v`            | ASCII の縦書きスペースにマッチします (`[\x{B}\x{A}\x{C}\x{D}]`)。                                      |
-| `\V`            | `\v` とマッチしないものにマッチします。                                               |
-| `\w`            | 任意の ASCII 単語文字 (`[a-zA-Z0-9_]`) にマッチします。                                            |
-| `\W`            | `\w` とマッチしないものにマッチします。                                               |
-| `\p{x}`         | Unicode プロパティ `x` にマッチするものにマッチします。完全なリストは [Unicode プロパティ](#unicode-properties)を参照してください。|
+| `.`             | Matches any character except `\n`. Enable the `s` flag to match any character, including `\n`.|
+| `\d`            | Matches any ASCII digit (`[0-9]`).                                                            |
+| `\D `           | Matches anything that does not match with `\d`.                                               |
+| `\h`            | Matches a space or tab (`[\x{20}\t]`).                                                        |
+| `\H`            | Matches anything that does not match with `\h`.                                               |
+| `\s`            | Matches any ASCII whitespace (`[\r\n\t\x{C}\x{B}\x{20}]`).                                    |
+| `\S`            | Matches anything that does not match with `\s`.                                               |
+| `\v`            | Matches ASCII vertical space (`[\x{B}\x{A}\x{C}\x{D}]`).                                      |
+| `\V`            | Matches anything that does not match with `\v`.                                               |
+| `\w`            | Matches any ASCII word character (`[a-zA-Z0-9_]`).                                            |
+| `\W`            | Matches anything that does not match with `\w`.                                               |
+| `\p{x}`         | Matches anything that matches the unicode property `x`. See [Unicode Properties](#unicode-properties) for a full list.|
 
-## カスタム文字クラス
+## Custom character classes
 
-| 正規表現構文                    | 説明                                                                         |
+| Regex Syntax                    | Description                                                                         |
 | ------------------------------- | ----------------------------------------------------------------------------------- |
-|`[...]`                          | 括弧内にリストされた任意の文字にマッチします。                                   |
-| `[^...]`                        | 括弧の中にリストされていないものにマッチします。                            |
-| `[a-zA-Z]`                      | 大文字でも小文字でも `A - Z` の範囲内のものにマッチします。                         |
-| `[\s\w\d\S\W\D\v\V\h\H\p{x}...]`| 上記で定義された他のクラスも使用可能です (リテラルとして扱われる `.` を除く)。 |
-| `[[:ascii_class:]]`             | 特殊な名前の [ASCII クラス](#ascii-classes)にマッチします。                              |
-| `[[:^ascii_class:]]`            | 反転した [ASCII クラス](#ascii-classes)にマッチします。                                   |
+|`[...]`                          | Matches any character listed inside the brackets.                                   |
+| `[^...]`                        | Matches anything that is not listed inside the brackets.                            |
+| `[a-zA-Z]`                      | Matches anything in the range `A - Z` (upper or lowercase).                         |
+| `[\s\w\d\S\W\D\v\V\h\H\p{x}...]`| Other classes defined above are allowed (except `.` which is treated as a literal). |
+| `[[:ascii_class:]]`             | Matches special named [ASCII classes](#ascii-classes).                              |
+| `[[:^ascii_class:]]`            | Matches inverted [ASCII classes](#ascii-classes).                                   |
 
-## グループ
+## Groups
 
-優先順位の変更やフラグの設定にはグループを使用します。Sensitive Data Scanner ではキャプチャは使用されないため、キャプチャグループは非キャプチャグループと同じように動作します。同様に、キャプチャグループ名も無視されます。
+Use groups to change precedence or set flags. Since captures are not used in Sensitive data Scanner, capturing groups behave like non-capturing groups. Similarly, capture group names are ignored.
 
-| 正規表現構文                                           | 説明            |
+| Regex Syntax                                           | Description            |
 | ------------------------------------------------------ | ---------------------- |
-| `(...)`                                                | キャプチャグループ。       |
-| `(?<name>...)`                                         | 名前付きキャプチャグループ。 |
-| `(?P<name>...)`                                        | 名前付きキャプチャグループ。 |
-| `(?'name'...)`                                         | 名前付きキャプチャグループ。 |
-| `(?:...)`                                              | 非キャプチャグループ。 |
+| `(...)`                                                | A capture group.       |
+| `(?<name>...)`                                         | A named capture group. |
+| `(?P<name>...)`                                        | A named capture group. |
+| `(?'name'...)`                                         | A named capture group. |
+| `(?:...)`                                              | A non-capturing group. |
 
-## フラグの設定
+## Setting flags
 
-正規表現の動作を変更するにはフラグを使います。フラグを指定する方法は 2 つあります。
-1. `(?imsx:...)`: 非キャプチャグループ内の式にのみ適用されるフラグを設定します。
-2. `(?imsx)...`: 現在のグループの残りの部分に適用されるフラグを設定します。
+Use flags to modify the regex behavior. There are two ways to specify flags:
+1. `(?imsx:...)`: Set flags that only apply to the expression inside of a non-capturing group.
+2. `(?imsx)...`: Set flags that apply to the rest of the current group.
 
-`-` の後に記載されたフラグは、以前に設定されていた場合は解除されます。
+Flags listed after a `-` are removed if they were previously set.
 
-`imsx`フラグの設定を解除するには `(?-imsx)` を使用します。
+Use `(?-imsx)` to unset the `imsx` flags.
 
-### 使用可能なフラグ
+### Available flags
 
-| フラグ | 名前             | 説明                                                                           |
+| Flag | Name             | Description                                                                           |
 | ---- | ---------------- | ------------------------------------------------------------------------------------- |
-| `i`  | 大文字小文字を区別しない | 大文字と小文字の両方にマッチします。                                              |
-| `m`  | 複数行モード  | `^` と `$` は行頭と行末にマッチします。                                      |
-| `s`  | 単一行      | 通常は `\n` 以外の文字にマッチする `.` が任意の文字にマッチするようにします。     |
-| `x`  | 拡張         | 空白文字は無視されます (カスタム文字クラスを除く)。                           |
+| `i`  | Case insensitive | Letters match both upper and lower case.                                              |
+| `m`  | Multi-line mode  | `^` and `$` match the beginning and end of line.                                      |
+| `s`  | Single line      | Allows `.` to match any character, when it usually matches anything except `\n`).     |
+| `x`  | Extended         | Whitespace is ignored (except in a custom character class).                           |
 
-## 引用
+## Quoting
 
-正規表現構文 `\Q...\E` を使うと、`\Q` と `\E` の間をすべてリテラルとして扱えます。
+Use the regex syntax `\Q...\E` to treat everything between `\Q` and `\E` as a literal.
 
 
-## 量指定子
+## Quantifiers
 
-量指定子は前の式を繰り返します。Greedy は、できるだけ多く繰り返し、マッチを見つけるために必要なときだけ繰り返しを減らします。Lazy は最小限の繰り返しを行い、必要に応じて繰り返しを増やします。
+Quantifiers repeat the previous expression. Greedy means that the most number of repetitions are taken, and are only given back as needed to find a match. Lazy takes the minimum number of repetitions and adds more as needed.
 
-| 正規表現構文 | 説明                                                                   |
+| Regex Syntax | Description                                                                   |
 | ------------ | ----------------------------------------------------------------------------- |
-| `?`          | `0` または `1` 回繰り返します (Greedy)。                                              |
-| `??`         | `0` または `1` 回繰り返します (Lazy)。                                                |
-| `+`          | `1` 回以上繰り返します (Greedy)。                                            |
-| `+?`         | `1` 回以上繰り返します (Lazy)。                                              |
-| `*`          | `0` 回以上繰り返します (Greedy)。                                            |
-| `*?`         | `0` 回以上繰り返します (Lazy)。                                              |
-| `{n}`        | ちょうど `n` 回繰り返します (Lazy 修飾子はここで受け付けられますが、無視されます)。 |
-| `{n,m}`      | 最低でも `n` 回、最大でも `m` 回繰り返します (Greedy)。               |
-| `{n,m}?`     | 最低でも `n 回`、最大でも `m` 回繰り返します (Lazy)。                 |
-| `{n,}`       | 少なくとも `n` 回繰り返します (Greedy)。                                           |
-| `{n,}?`      | 少なくとも `n` 回繰り返します (Lazy)。                                             |
+| `?`          | Repeat `0` or `1` time (greedy).                                              |
+| `??`         | Repeat `0` or `1` time (lazy).                                                |
+| `+`          | Repeat `1` or more times (greedy).                                            |
+| `+?`         | Repeat `1` or more times (lazy).                                              |
+| `*`          | Repeat `0` or more times (greedy).                                            |
+| `*?`         | Repeat `0` or more times (lazy).                                              |
+| `{n}`        | Repeat exactly `n` times (the lazy modifier is accepted here but is ignored). |
+| `{n,m}`      | Repeat at least `n` times, but no more than `m` times (greedy).               |
+| `{n,m}?`     | Repeat at least `n times`, but no more than `m` times (lazy).                 |
+| `{n,}`       | Repeat at least `n` times (greedy).                                           |
+| `{n,}?`      | Repeat at least `n` times (lazy).                                             |
 
-**注**: `{,m}` は無効で、リテラルとして扱われます。同様に、中括弧の中に空白を入れるなどの構文の違いは、量化指定をリテラルとして扱います。
+**Note**: `{,m}`is not valid and is treated as a literal. Similarly, any syntax differences such as adding spaces inside the braces cause the quantifier to be treated as a literal instead.
 
-## Unicode プロパティ
+## Unicode properties
 
-文字クラス `\p{x}` における `x` の Unicode プロパティです。
+Unicode properties for `x` in the character class `\p{x}`.
 
-| Unicode プロパティ| 説明           |
+| Unicode Properties| Description           |
 | ------------------| --------------------- |
-| `C`               | その他                 |
+| `C`               | Other                 |
 | `Cc`              | Control               |
-| `Cf`              | 形式                |
-| `Cn`              | 未割り当て            |
-| `Co`              | 私用           |
-| `Cs`              | 代理             |
-| `L`               | 文字                |
-| `Ll`              | 小文字      |
-| `Lm`              | 修飾文字       |
-| `Lo`              | その他の文字          |
-| `Lt`              | タイトルケース文字     |
-| `Lu`              | 大文字      |
-| `M`               | マーク                  |
-| `Mc`              |スペーシングマーク           |
-| `Me`              | 囲みマーク        |
-| `Mn`              | ノンスペーシングマーク      |
-| `N`               | 数値                |
-| `Nd`              | 10 進数        |
-| `Nl`              | 文字による数         |
-| `No`              | その他の数          |
-| `P`               | 句読点           |
-| `Pc`              | コネクタ句読点 |
-| `Pd`              | ダッシュ句読点      |
-| `Pe`              | クローズ句読点     |
-| `Pf`              | 終止句読点     |
-| `Pi`              | 開始句読点   |
-| `Po`              | その他の句読点     |
-| `Ps`              | 開放句読点      |
-| `S`               | 記号                |
-| `Sc`              | 通貨記号       |
-| `Sk`              | 修飾記号       |
-| `Sm`              | 数学記号   |
-| `So`              | その他の記号          |
-| `Z`               | 区切り文字             |
-| `Zl`              | 行区切り記号        |
-| `Zp`              | 段落区切り記号   |
-| `Zs`              | スペース区切り記号       |
+| `Cf`              | Format                |
+| `Cn`              | Unassigned            |
+| `Co`              | Private use           |
+| `Cs`              | Surrogate             |
+| `L`               | Letter                |
+| `Ll`              | Lowercase letter      |
+| `Lm`              | Modifier letter       |
+| `Lo`              | Other letter          |
+| `Lt`              | Title case letter     |
+| `Lu`              | Uppercase letter      |
+| `M`               | Mark                  |
+| `Mc`              |Spacing mark           |
+| `Me`              | Enclosing mark        |
+| `Mn`              | Non-spacing mark      |
+| `N`               | Number                |
+| `Nd`              | Decimal number        |
+| `Nl`              | Letter number         |
+| `No`              | Other number          |
+| `P`               | Punctuation           |
+| `Pc`              | Connector punctuation |
+| `Pd`              | Dash punctuation      |
+| `Pe`              | Close punctuation     |
+| `Pf`              | Final punctuation     |
+| `Pi`              | Initial punctuation   |
+| `Po`              | Other punctuation     |
+| `Ps`              | Open punctuation      |
+| `S`               | Symbol                |
+| `Sc`              | Currency symbol       |
+| `Sk`              | Modifier symbol       |
+| `Sm`              | Mathematical symbol   |
+| `So`              | Other symbol          |
+| `Z`               | Separator             |
+| `Zl`              | Line separator        |
+| `Zp`              | Paragraph separator   |
+| `Zs`              | Space separator       |
 
-スクリプト名はスクリプトの任意の文字にマッチさせるために使用できます。使用できる文字は以下の通りです。
+Script names can be used to match any character from the script. The following are allowed:
 
-`アドラム語`、`アホム語`、`アナトリア象形文字`、`アラビア語`、`アルメニア語`、`アヴェスタ語`、`バリ語`、`バムン語`、`バッサ・ヴァー`、`バタク語`、`ベンガル語`、`バイクスキ語`、`ボポモフォ`、`ブラーフミー`、`点字`、`ブギス語`、`ブヒッド語`、`カナダ先住民文字`、`カリア語`、`カフカス・アルバニア語`、`チャクマ語`、`チャム語`、`チェロキー語`、`コラシュム語`、`共通語`、`コプト語`、`楔形文字`、`キュプロス文字`、`キュプロ・ミノア語`、`キリル文字`、`デゼレト文字`、`デーヴァナーガリー文字`、`ディヴェース・アクル語`、`ドグラ語`、`デュプロイ語`、`エジプト象形文字`、`エルバサン語`、`エリマイ語`、`エチオピア語`、`グルジア語`、`グラゴル文字`、`ゴート文字`、`グランタ文字`、`ギリシャ語`、`グジャラート語`、`グンジャラ・ゴンディ語`、`グルムキー語`、`漢字`、`ハングル`、`ハニフィ・ロヒンギャ語`、`ハヌヌー語`、`ハトラン語`、`ヘブライ語`、`ひらがな`、`インペリアル・アラム語`、`継承文字`、`碑文パフラヴィ語`、`碑文パルティア語`、`ジャワ語`、`カイティ語`、`カンナダ語`、`カタカナ`、`カヤー・リ語`、`カローシュティー文字`、`契丹小字`、`クメール語`、`コージキ語`、`フダワディ語`、`ラオ語`、`ラテン語`、`レプチャ語`、`リンブ語`、`線文字A`、`線文字B`、`リス語`、`リキア語`、`リディア語`、`マハジャニ語`、`マカサル語`、`マラヤーラム語`、`マンディア語`、`マニ教文字`、`マルチェン語`、`マサラム・ゴンディ語`、`メデファイドリン語`、`メータイ・マイエク語`、`メンデ・キカクイ語`、`メロエ筆記体`、`メロエ象形文字`、`ミャオ語`、`モディ語`、`モンゴル語`、`モロ語`、`ムルタニ語`、`ミャンマー語`、`ナバタイ語`、`ナンディナガリ語`、`新タイ・ルー語`、`ネワ語`、`ンコ語`、`女書`、`オガム文字`、`オル・チキ文字`、`古ハンガリー文字`、`古イタリック文字`、`古北アラビア語`、`古ペルム文字`、`古ペルシア語`、`古ソグド語`、`古南アラビア語`、`古トルコ語`、`古ウイグル語`、`オリヤー語`、`オセージ語`、`オスマニア文字`、`パハウ・モン語`、`パルミラ文字`、`パウ・チン・ハウ文字`、`ファグス・パ文字`、`フェニキア文字`、`詩篇パフラヴィ語`、`レジャン語`、`ルーン文字`、`サマリア文字`、`サウラスター語`、`シャーラダ語`、`ショー文字`、`シッダム文字`、`サインライティング`、`シンハラ語`、`ソグド語`、`ソラ・ソンペン語`、`ソヨンボ文字`、`スンダ語`、`シロティ・ナーグリ文字`、`シリア語`、`タガログ語`、`タグバンワ語`、`タイ・レ語`、`タイ・タム語`、`タイ・ベト語`、`タクリ語`、`タミル語`、`タンサ語`、`タングート文字`、`テルグ語`、`ターナ文字`、`タイ語`、`チベット語`、`ティフィナグ文字`、`ティルフタ語`、`トト語`、`ウガリット文字`、`ヴァイ語`、`ヴィトクチ語`、`ワンチョ語`、`ワラン・チティ文字`、`イェズィーディー語`、`イ語`、`ザナバザル方形文字`
+`Adlam`, `Ahom`, `Anatolian_Hieroglyphs`, `Arabic`, `Armenian`, `Avestan`, `Balinese`, `Bamum`, `Bassa_Vah`, `Batak`, `Bengali`, `Bhaiksuki`, `Bopomofo`, `Brahmi`, `Braille`, `Buginese`, `Buhid`, `Canadian_Aboriginal`, `Carian`, `Caucasian_Albanian`, `Chakma`, `Cham`, `Cherokee`, `Chorasmian`, `Common`, `Coptic`, `Cuneiform`, `Cypriot`, `Cypro_Minoan`, `Cyrillic`, `Deseret`, `Devanagari`, `Dives_Akuru`, `Dogra`, `Duployan`, `Egyptian_Hieroglyphs`, `Elbasan`, `Elymaic`, `Ethiopic`, `Georgian`, `Glagolitic`, `Gothic`, `Grantha`, `Greek`, `Gujarati`, `Gunjala_Gondi`, `Gurmukhi`, `Han`, `Hangul`, `Hanifi_Rohingya`, `Hanunoo`, `Hatran`, `Hebrew`, `Hiragana`, `Imperial_Aramaic`, `Inherited`, `Inscriptional_Pahlavi`, `Inscriptional_Parthian`, `Javanese`, `Kaithi`, `Kannada`, `Katakana`, `Kayah_Li`, `Kharoshthi`, `Khitan_Small_Script`, `Khmer`, `Khojki`, `Khudawadi`, `Lao`, `Latin`, `Lepcha`, `Limbu`, `Linear_A`, `Linear_B`, `Lisu`, `Lycian`, `Lydian`, `Mahajani`, `Makasar`, `Malayalam`, `Mandaic`, `Manichaean`, `Marchen`, `Masaram_Gondi`, `Medefaidrin`, `Meetei_Mayek`, `Mende_Kikakui`, `Meroitic_Cursive`, `Meroitic_Hieroglyphs`, `Miao`, `Modi`, `Mongolian`, `Mro`, `Multani`, `Myanmar`, `Nabataean`, `Nandinagari`, `New_Tai_Lue`, `Newa`, `Nko`, `Nushu`, `Ogham`, `Ol_Chiki`, `Old_Hungarian`, `Old_Italic`, `Old_North_Arabian`, `Old_Permic`, `Old_Persian`, `Old_Sogdian`, `Old_South_Arabian`, `Old_Turkic`, `Old_Uyghur`, `Oriya`, `Osage`, `Osmanya`, `Pahawh_Hmong`, `Palmyrene`, `Pau_Cin_Hau`, `Phags_Pa`, `Phoenician`, `Psalter_Pahlavi`, `Rejang`, `Runic`, `Samaritan`, `Saurashtra`, `Sharada`, `Shavian`, `Siddham`, `SignWriting`, `Sinhala`, `Sogdian`, `Sora_Sompeng`, `Soyombo`, `Sundanese`, `Syloti_Nagri`, `Syriac`, `Tagalog`, `Tagbanwa`, `Tai_Le`, `Tai_Tham`, `Tai_Viet`, `Takri`, `Tamil`, `Tangsa`, `Tangut`, `Telugu`, `Thaana`, `Thai`, `Tibetan`, `Tifinagh`, `Tirhuta`, `Toto`, `Ugaritic`, `Vai`, `Vithkuqi`, `Wancho`, `Warang_Citi`, `Yezidi`, `Yi`, `Zanabazar_Square`.
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/sensitive_data_scanner/
-[2]: /ja/sensitive_data_scanner/library_rules/
+[1]: /sensitive_data_scanner/
+[2]: /sensitive_data_scanner/library_rules/
 [3]: https://www.pcre.org/current/doc/html/pcre2syntax.html

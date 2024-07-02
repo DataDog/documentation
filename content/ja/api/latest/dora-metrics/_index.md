@@ -1,3 +1,3 @@
 ---
-title: DORA メトリクス
+title: DORA Metrics
 ---

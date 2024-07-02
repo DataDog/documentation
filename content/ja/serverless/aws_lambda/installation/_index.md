@@ -1,48 +1,48 @@
 ---
+title: Install Serverless Monitoring for AWS Lambda
+kind: documentation
 aliases:
-- /ja/serverless/installation/installing_the_library/
-- /ja/serverless/installation
+    - /serverless/installation/installing_the_library/
+    - /serverless/installation
 further_reading:
-- link: /serverless/configuration/
-  tag: ドキュメント
-  text: サーバーレスモニタリングの構成
-- link: /integrations/amazon_lambda/
-  tag: ドキュメント
-  text: AWS Lambda インテグレーション
-kind: ドキュメント
-title: AWS Lambda のためのサーバーレスモニタリングのインストール
+    - link: /serverless/configuration/
+      tag: Documentation
+      text: Configure Serverless Monitoring
+    - link: /integrations/amazon_lambda/
+      tag: Documentation
+      text: AWS Lambda Integration
 ---
 
-## クイックスタート
+## Quick start
 
-Datadog を初めて利用する場合は、[Datadog アカウントにサインアップ][1]して、[AWS Lambda][2] の Datadog Agent インストール手順に従って、Datadog を素早く始めるために Lambda 関数をインスツルメントします。手順を完了すると、Lambda 関数がリアルタイムのメトリクス、ログ、トレースを Datadog に送信するように構成されます。
+If you are new to Datadog, [sign up for a Datadog account][1], then follow the Datadog Agent installation instructions for [AWS Lambda][2] to instrument your Lambda function for a quick start with Datadog. Completing the steps configures your Lambda functions to send real-time metrics, logs, and traces to Datadog.
 
 {{< beta-callout-private url="https://docs.google.com/forms/d/e/1FAIpQLScw8XBxCyN_wjBVU2tWm-zX5oPIGF7BwUKcLSHY6MJsem259g/viewform?usp=sf_link" >}}
-Datadog の UI から直接 AWS Lambda を一括インスツルメンテーションすることに興味はありますか？参加を希望する場合は、今後実施予定のリモート Lambda インスツルメンテーションの非公開ベータ版へのアクセスをリクエストしてください。
+Interested in bulk-instrumenting AWS Lambdas directly from the Datadog UI? To participate, request access to the upcoming remote Lambda instrumentation private beta.
 {{< /beta-callout-private >}}
 
-クイックスタートプロセスでは、Lambda 関数をその場で構成します。Lambda 関数を恒久的にインスツルメントするには、次のセクションの詳細なインストール手順を参照してください。
+The quick start process configures your Lambda functions on the fly. To instrument Lambda functions permanently, see the detailed installation instructions in the next section.
 
-## インストール手順
+## Installation instructions
 
-詳細なインストール方法については、以下の Lambda ランタイムを選択してください。
+For the detailed installation instructions, select the Lambda runtime below:
 
 {{< partial name="serverless/getting-started-languages.html" >}}
 
-## 高度な構成
+## Advanced Configurations
 
-インストールが終わり、テレメトリー収集の設定が済んだら、[高度な構成][3]を使って以下を行います。
+After you're done with installation and you've set up telemetry collection, you can use [advanced configurations][3] to:
 
-- タグを使ってメトリクス、トレース、ログを接続する
-- API Gateway、AppSync、Step Functions などの AWS リソースからテレメトリーを収集する
-- 個々の Lambda 呼び出しのリクエストとレスポンスのペイロードを取得する
-- Lambda 関数のエラーをソースコードにリンクする
-- ログまたはトレースから機密情報をフィルタリングまたはスクラブする
+- connect your metrics, traces, and logs using tags
+- collect telemetry from AWS resources such as API Gateway, AppSync, and Step Functions
+- capture the request and response payloads for individual Lambda invocations
+- link errors of your Lambda functions to your source code
+- filter or scrub sensitive information from logs or traces
 
-## その他の参考資料
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/signup/
 [2]: https://app.datadoghq.com/signup/agent#lambda
-[3]: /ja/serverless/configuration/
+[3]: /serverless/configuration/

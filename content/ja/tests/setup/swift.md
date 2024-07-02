@@ -1,89 +1,89 @@
 ---
-aliases:
-- /ja/continuous_integration/setup_tests/swift
-- /ja/continuous_integration/tests/swift
-- /ja/continuous_integration/tests/setup/swift
+title: Swift Tests
+kind: documentation
 code_lang: swift
-code_lang_weight: 50
-further_reading:
-- link: /continuous_integration/tests
-  tag: ドキュメント
-  text: テスト結果とパフォーマンスを確認する
-- link: /continuous_integration/intelligent_test_runner/swift
-  tag: ドキュメント
-  text: Intelligent Test Runner でテストジョブを高速化する
-- link: /continuous_integration/troubleshooting/
-  tag: ドキュメント
-  text: CI Visibility のトラブルシューティング
-kind: ドキュメント
-title: Swift テスト
 type: multi-code-lang
+code_lang_weight: 50
+aliases:
+  - /continuous_integration/setup_tests/swift
+  - /continuous_integration/tests/swift
+  - /continuous_integration/tests/setup/swift
+further_reading:
+    - link: /continuous_integration/tests
+      tag: Documentation
+      text: Explore Test Results and Performance
+    - link: /continuous_integration/intelligent_test_runner/swift
+      tag: Documentation
+      text: Speed up your test jobs with Intelligent Test Runner
+    - link: /continuous_integration/troubleshooting/
+      tag: Documentation
+      text: Troubleshooting CI Visibility
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-選択された Datadog サイト ({{< region-param key="dd_site_name" >}}) はサポートされていません。
+The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not supported.
 </div>
 {{< /site-region >}}
 
-## 互換性
+## Compatibility
 
-対応言語:
+Supported languages:
 
-| 言語 | バージョン | 注 |
+| Language | Version | Notes |
 |---|---|---|
-| Swift | >= 5.2 | Swift Concurrency を使用している場合、非同期タスクの正確なスパン表現には Xcode 13.2 以上が必要です。 |
+| Swift | >= 5.2 | If you are using Swift Concurrency, you need Xcode >= 13.2 for precise span representation of asynchronous tasks. |
 | Objective-C | >= 2.0 | |
 
-対応プラットフォーム:
+Supported platforms:
 
-| プラットフォーム | バージョン |
+| Platform | Version |
 |---|---|
 | iOS | >= 11.0 |
 | macOS | >= 10.13 |
 | tvOS | >= 11.0 |
 
-## Swift テスト用 SDK のインストール
+## Installing the Swift testing SDK
 
-テストフレームワークのインストール方法は 3 つあります。
+There are three ways you can install the testing framework:
 
 {{< tabs >}}
-{{% tab "Swift パッケージマネージャー" %}}
+{{% tab "Swift Package Manager" %}}
 
-### Xcode プロジェクトの使用
+### Using Xcode Project
 
-1. プロジェクトに `dd-sdk-swift-testing` パッケージを追加します。これは、[`https://github.com/DataDog/dd-sdk-swift-testing`][1] にあります。
+1. Add `dd-sdk-swift-testing` package to your project. It is located at [`https://github.com/DataDog/dd-sdk-swift-testing`][1].
 
-{{< img src="continuous_integration/swift_package.png" alt="Swift パッケージ" >}}
+{{< img src="continuous_integration/swift_package.png" alt="Swift Package" >}}
 
 
-2. パッケージに含まれるライブラリ `DatadogSDKTesting` とテストターゲットをリンクします。
+2. Link your test targets with the library `DatadogSDKTesting` from the package.
 
 {{< img src="continuous_integration/swift_link2.png" alt="Swift Linking SPM" >}}
 
-3. UITests を実行する場合は、テストを実行するアプリもこのライブラリでリンクします。
+3. If you run UITests, also link the app running the tests with this library.
 
-### Swift パッケージプロジェクトの使用
+### Using Swift Package Project
 
-1. パッケージの依存関係の配列に `dd-sdk-swift-testing` を追加します。例:
+1. Add `dd-sdk-swift-testing` to your package dependencies array, for example:
 
 {{< code-block lang="swift" >}}
 .package(url: "https://github.com/DataDog/dd-sdk-swift-testing.git", from: "2.2.0")
 {{< /code-block >}}
 
-2. テスト対象の依存関係にテストフレームワークを追加するには、以下の行をテスト対象の依存関係の配列に追加します。
+2. To add the testing framework to your testing targets' dependencies, add the following line to your test targets dependencies array:
 {{< code-block lang="swift" >}}
 .product(name: "DatadogSDKTesting", package: "dd-sdk-swift-testing")
 {{< /code-block >}}
 
-3. UITests を実行する場合は、テストを実行するアプリケーションにも依存関係を追加します。
+3. If you run UITests, also add the dependency to your applications running the tests.
 
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing
 {{% /tab %}}
 {{% tab "Cocoapods" %}}
 
-1. `DatadogSDKTesting` 依存関係を `Podfile` のテストターゲットに追加します。
+1. Add the `DatadogSDKTesting` dependency to the test targets of your `Podfile`:
 
 {{< code-block lang="ruby" >}}
 target 'MyApp' do
@@ -96,52 +96,49 @@ target 'MyApp' do
 end
 {{< /code-block >}}
 
-2. UITests を実行する場合は、テストを実行するアプリにも依存関係を追加します。
+2. If you run UITests, also add the dependency to the app running the tests.
 
 {{% /tab %}}
-{{% tab "フレームワークのリンク" %}}
+{{% tab "Framework linking" %}}
 
-1. [リリース][1]のページから `DatadogSDKTesting.zip` をダウンロードし、解凍します。
+1. Download and decompress `DatadogSDKTesting.zip` from the [release][1] page.
 
-2. 出来上がった XCFramework にテストターゲットをコピーしてリンクします。
+2. Copy and link your test targets with the resulting XCFramework.
 
 {{< img src="continuous_integration/swift_link.png" alt="Swift Linking XCFramework" >}}
 
-3. UITests を実行する場合は、テストを実行するアプリもこのライブラリでリンクします。
+3. If you run UITests, also link the app running the tests with this library.
 
 [1]: https://github.com/DataDog/dd-sdk-swift-testing/releases
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
-GitHub を使用している場合、GitHub Marketplace から [Swift テストアクション][1]を使用して、テストを自動的に構成して実行することができます。デフォルトでは、このページで説明されている残りの構成はスキップできますが (アクション自体の構成を除く)、設定環境変数を使って、追加機能の無効化や設定をすることができます。
+If you use GitHub, you can use the [Swift test action][1] from GitHub Marketplace to automatically configure and run your tests. By default, the rest of the configuration described on this page can be skipped (except the configuration of the action itself), but you can use the configuration environment variables for disabling or configuring additional functionality.
 
-Cocoapods やフレームワークのリンクなど他の方法と比較して、Swift テストアクションオプションは設定や実行の柔軟性に欠ける可能性がありますが、コードの変更は必要ありません。
+Compared to other methods, such as Cocoapods and Framework linking, the Swift test action option may be less flexible to configure and run, but requires no code changes.
 
 [1]: https://github.com/marketplace/actions/swift-test-action-for-datadog
 {{% /tab %}}
 {{< /tabs >}}
-<div class="alert alert-warning"><strong>注</strong>: このフレームワークはテストにのみ有用であり、テストを実行するときのみアプリケーションとリンクさせる必要があります。フレームワークをユーザーに配布しないでください。 </div>
+<div class="alert alert-warning"><strong>Note</strong>: This framework is useful only for testing and should only be linked with the application when running tests. Do not distribute the framework to your users. </div>
 
+## Instrumenting your tests
 
+### Configuring Datadog
 
+#### Using Xcode Project
 
-## テストのインスツルメンテーション
+To enable testing instrumentation, add the following environment variables to your test target or in the `Info.plist` file as [described below](#using-infoplist-for-configuration). You **must** select your main target in `Expand variables based on` or `Target for Variable Expansion` if you are using test plans:
 
-### Datadog の構成
+{{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
 
-#### Xcode プロジェクトの使用
+<div class="alert alert-warning">You should have your main target in the variables expansion of the environment variables; if not selected, variables are not valid. </div>
 
-テストのインスツルメンテーションを有効にするには、テストターゲットに以下の環境変数を追加するか、または[以下で説明](#using-infoplist-for-configuration)されているとおり `Info.plist` ファイルに追加します。テストプランを使用している場合は、`Expand variables based on` または `Target for Variable Expansion` でメインターゲットを選択する**必要があります**。
+For UITests, environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
-{{< img src="continuous_integration/swift_env.png" alt="Swift 環境" >}}
+#### Using Swift Package Project
 
-<div class="alert alert-warning">環境変数の変数展開にはメインターゲットを設定する必要があります。選択されていない場合、変数は無効になります。 </div>
-
-UITests の場合、フレームワークがこれらの値をアプリケーションに自動で注入するため、環境変数はテストターゲットにのみ設定する必要があります。
-
-#### Swift パッケージプロジェクトの使用
-
-テストのインスツルメンテーションを有効にするには、以下の環境変数をテストのコマンドライン実行に設定する必要があります。代わりに、テストを実行する前に環境に設定することもできますし、コマンドに前置きすることもできます。
+To enable testing instrumentation, you must set the following environment variables to your commandline execution for the tests. You can alternatively set them in the environment before running the tests or you can prepend them to the command:
 
 <pre>
 <code>
@@ -154,54 +151,54 @@ DD_TEST_RUNNER=1 DD_API_KEY=<your API_KEY> DD_APPLICATION_KEY=<your APPLICATION_
 </pre>
 
 
-テストターゲットにこれらすべての変数を設定します。
+Set all these variables in your test target:
 
 `DD_TEST_RUNNER`
-: テストのインスツルメンテーションを有効または無効にします。この値を `$(DD_TEST_RUNNER)` に設定すると、テストプロセスの外部 (CI ビルドなど) で定義された環境変数を使用してテストインスツルメンテーションを有効または無効にできます。<br/>
-**デフォルト**: `false`<br/>
-**推奨**: `$(DD_TEST_RUNNER)`
+: Enables or disables the instrumentation of tests. Set this value to `$(DD_TEST_RUNNER)` so you can enable and disable test instrumentation with a environment variable defined outside of the test process (for example, in the CI build).<br/>
+**Default**: `false`<br/>
+**Recommended**: `$(DD_TEST_RUNNER)`
 
 `DD_API_KEY`
-: テスト結果のアップロードに使用される [Datadog API キー][2]。<br/>
-**デフォルト**: `(empty)`
+: The [Datadog API key][2] used to upload the test results.<br/>
+**Default**: `(empty)`
 
 `DD_APPLICATION_KEY`
-: テスト結果のアップロードに使用される [Datadog アプリケーションキー][5]。<br/>
-**デフォルト**: `(empty)`
+: The [Datadog Application key][5] used to upload the test results.<br/>
+**Default**: `(empty)`
 
 `DD_SERVICE`
-: テスト対象のサービスまたはライブラリの名前。<br/>
-**デフォルト**: リポジトリ名<br/>
-**例**: `my-ios-app`
+: Name of the service or library under test.<br/>
+**Default**: The repository name<br/>
+**Example**: `my-ios-app`
 
 `DD_ENV`
-: テストが実行されている環境の名前。この値を `$(DD_ENV)` に設定して、実行時に環境変数を使用して設定できるようにします。<br/>
-**デフォルト**: `none`<br/>
-**推奨**: `$(DD_ENV)`<br/>
-**例**: `ci`、`local`
+: Name of the environment where tests are being run. Set this value to `$(DD_ENV)` so you can use an environment variable at runtime for setting it.<br/>
+**Default**: `none`<br/>
+**Recommended**: `$(DD_ENV)`<br/>
+**Examples**: `ci`, `local`
 
 `SRCROOT`
-: プロジェクトの場所へのパス。Xcode を使用している場合、この値は自動的に設定されるため、`$(SRCROOT)` を使用します。<br/>
-**デフォルト**: `(empty)`<br/>
-**推奨**: `$(SRCROOT)`<br/>
-**例**: `/Users/ci/source/MyApp`
+: The path to the project location. If using Xcode, use `$(SRCROOT)` for the value, because it is automatically set by it.<br/>
+**Default**: `(empty)`<br/>
+**Recommended**: `$(SRCROOT)`<br/>
+**Example**: `/Users/ci/source/MyApp`
 
-`service` と `env` の予約タグの詳細については、[統合サービスタグ付け][8]を参照してください。
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][8].
 
-さらに、選択したサイトを使用するように Datadog サイトを構成します ({{< region-param key="dd_site_name" >}}):
+Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
-`DD_SITE` (必須)
-: 結果をアップロードする [Datadog サイト][3]。<br/>
-**デフォルト**: `datadoghq.com`<br/>
-**選択したサイト**: {{< region-param key="dd_site" code="true" >}}
+`DD_SITE` (Required)
+: The [Datadog site][3] to upload results to.<br/>
+**Default**: `datadoghq.com`<br/>
+**Selected site**: {{< region-param key="dd_site" code="true" >}}
 
-## Git のメタデータを収集する
+## Collecting Git metadata
 
 {{% ci-git-metadata %}}
 
-### テストの実行
+### Running tests
 
-インストール後、通常どおりにテストを実行します。たとえば、`xcodebuild test` コマンドを使用します。テスト、ネットワークリクエスト、アプリケーションクラッシュは自動的に記録されます。CI でテストを実行するときに、環境変数を渡します。次に例を示します。
+After installation, run your tests as you normally do, for example using the `xcodebuild test` command. Tests, network requests, and application crashes are instrumented automatically. Pass your environment variables when running your tests in the CI, for example:
 
 <pre>
 <code>
@@ -213,95 +210,95 @@ DD_TEST_RUNNER=1 DD_ENV=ci DD_SITE={{< region-param key="dd_site" >}} xcodebuild
 </code>
 </pre>
 
-### UI テスト
+### UI tests
 
-UITests では、テストターゲットと UITests から実行されるアプリケーションの両方がフレームワークとリンクしている必要があります。フレームワークがこれらの値をアプリケーションに自動で注入するため、環境変数はテストターゲットにのみ設定する必要があります。
+For UITests, both the test target and the application running from the UITests must link with the framework. Environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
 
-### RUM インテグレーション
+### RUM Integration
 
-テスト対象のアプリケーションが RUM を使用してインスツルメンテーションされている場合、UI テストの結果と生成された RUM セッションは自動的にリンクされます。RUM の詳細については、[RUM iOS インテグレーション][4]ガイドを参照してください。iOS RUM バージョン 1.10 以上が必要です。
+If the application being tested is instrumented using RUM, your UI tests results and their generated RUM sessions are automatically linked. Learn more about RUM in the [RUM iOS Integration][4] guide. An iOS RUM version >= 1.10 is needed.
 
 
-## 追加のオプション構成
+## Additional optional configuration
 
-以下の構成設定の場合:
- - `Boolean` 変数には `1`、`0`、`true`、`false`、`YES`、`NO` のいずれかを使用できます
- - `String` リスト変数には `,` または `;` で区切られた要素の一覧が許可されます
+For the following configuration settings:
+ - `Boolean` variables can use any of: `1`, `0`, `true`, `false`, `YES`, or `NO`
+ - `String` list variables accept a list of elements separated by `,` or `;`
 
-### 自動インスツルメンテーションの有効化
+### Enabling auto-instrumentation
 
 `DD_ENABLE_STDOUT_INSTRUMENTATION`
-: `stdout` に書き込まれたメッセージ (例えば `print()`) をキャプチャして、ログとして報告します。これは請求額に影響を与える可能性があります。(ブール値)
+: Captures messages written to `stdout` (for example, `print()`) and reports them as logs. This may impact your bill. (Boolean)
 
 `DD_ENABLE_STDERR_INSTRUMENTATION`
-: `stderr` に書き込まれたメッセージ (例えば `NSLog()` や UITest のステップ) をキャプチャして、ログとして報告します。これは請求額に影響を与える可能性があります。(ブール値)
+: Captures messages written to `stderr` (for example, `NSLog()`, UITest steps) and reports them as logs. This may impact your bill. (Boolean)
 
-### 自動インスツルメンテーションの無効化
+### Disabling auto-instrumentation
 
-このフレームワークでは、サポートされているすべてのライブラリの自動インスツルメンテーションが可能ですが、これが望ましくない場合もあります。次の環境変数を（または[以下で説明](#using-infoplist-for-configuration)されているとおり `Info.plist` ファイルに）設定することにより、特定のライブラリの自動インスツルメンテーションを無効にできます。
+The framework enables auto-instrumentation of all supported libraries, but in some cases this might not be desired. You can disable auto-instrumentation of certain libraries by setting the following environment variables (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)):
 
 `DD_DISABLE_NETWORK_INSTRUMENTATION`
-: すべてのネットワークインスツルメンテーションを無効化します (Boolean)
+: Disables all network instrumentation (Boolean)
 
 `DD_DISABLE_RUM_INTEGRATION`
-: RUMセッションとのインテグレーションを無効にします (Boolean)
+: Disables integration with RUM Sessions (Boolean)
 
 `DD_DISABLE_SOURCE_LOCATION`
-: テストのソースコードの場所と Codeowners を無効にします (ブール値)
+: Disables test source code location and Codeowners (Boolean)
 
 `DD_DISABLE_CRASH_HANDLER`
-: クラッシュの処理およびレポートを無効化します (Boolean)
-<div class="alert alert-warning"><strong>重要</strong>: クラッシュレポートを無効にすると、クラッシュしたテストはまったく報告されず、テストの失敗として表示されません。いずれかのテストでクラッシュ処理を無効にする必要がある場合は、それらを個別のターゲットとして実行し、他のテストでは無効にしないようにします。</div>
+: Disables crash handling and reporting. (Boolean)
+<div class="alert alert-warning"><strong>Important</strong>: If you disable crash reporting, tests that crash are not reported at all, and don't appear as test failures. If you need to disable crash handling for any of your tests, run them as a separate target, so you don't disable it for the others.</div>
 
-### ネットワークの自動インスツルメンテーション
+### Network auto-instrumentation
 
-ネットワークの自動インスツルメンテーションでは、以下の追加設定を構成できます。
+For Network auto-instrumentation, you can configure these additional settings:
 
 `DD_DISABLE_HEADERS_INJECTION`
-: トレースヘッダーのすべての挿入を無効化します (Boolean)
+: Disables all injection of tracing headers (Boolean)
 
 `DD_INSTRUMENTATION_EXTRA_HEADERS`
-: ログを作成する特定の追加ヘッダー (文字列リスト)
+: Specific extra headers that you want to log (String List)
 
 `DD_EXCLUDED_URLS`
-: ログの作成またはヘッダーの挿入を行わない URL (文字列リスト)
+: URLs that you don't want to log or inject headers into (String List)
 
 `DD_ENABLE_RECORD_PAYLOAD`
-: リクエストおよび応答内のペイロードのサブセット (1024 バイト) のレポートを有効化します (Boolean)
+: Enables reporting a subset (1024 bytes) of the payloads in requests and responses (Boolean)
 
 `DD_MAX_PAYLOAD_SIZE`
-: ペイロードから報告される最大サイズを設定します。デフォルトは `1024` (整数)
+: Sets the maximum size reported from the payload. Default `1024` (Integer)
 
 `DD_DISABLE_NETWORK_CALL_STACK`
-: ネットワークスパンのコールスタック情報を無効にします (ブール値)
+: Disables the call stack information in the network spans (Boolean)
 
 `DD_ENABLE_NETWORK_CALL_STACK_SYMBOLICATED`
-: メソッド名だけでなく、正確なファイルや行の情報を含むコールスタック情報を表示します。テストのパフォーマンスに影響を与える可能性があります (ブール値)
+: Shows the call stack information with not only the method name, but also the precise file and line information. May impact your tests' performance (Boolean)
 
-### インフラストラクチャーテストの相関
+### Infrastructure test correlation
 
-自身のインフラストラクチャーでテストを実行している場合 (macOS やシミュレータのテスト)、Datadog Agent をインストールして以下を設定することで、テストとインフラストラクチャーのメトリクスを関連付けることができます。
+If you are running tests in your own infrastructure (macOS or simulator tests), you can correlate your tests with your infrastructure metrics by installing the Datadog Agent and setting the following:
 
 `DD_CIVISIBILITY_REPORT_HOSTNAME`
-: テストを開始するマシンのホスト名を報告します (ブール値)
+: Reports the hostname of the machine launching the tests (Boolean)
 
-モジュール `DatadogSDKTesting` をインポートしクラス: `DDInstrumentationControl` を使用することで、Swift または Objective-C の一部のテストで特定の自動インスツルメンテーションを有効/無効にすることも可能です。
+You can also disable or enable specific auto-instrumentation in some of the tests from Swift or Objective-C by importing the module `DatadogSDKTesting` and using the class: `DDInstrumentationControl`.
 
-## カスタムタグ
+## Custom tags
 
-### 環境変数
+### Environment variables
 
-`DD_TAGS` 環境変数を（または[以下で説明](#using-infoplist-for-configuration)されているとおり `Info.plist` ファイルに）使用できます。スペース区切りの `key:tag` のペアを含む必要があります。例:
+You can use `DD_TAGS` environment variable (or in the `Info.plist` file as [described below](#using-infoplist-for-configuration)). It must contain pairs of `key:tag` separated by spaces. For example:
 {{< code-block lang="bash" >}}
 DD_TAGS=tag-key-0:tag-value-0 tag-key-1:tag-value-1
 {{< /code-block >}}
 
-値の 1 つが `$` の文字で始まる場合、同じ名前（存在する場合）の環境変数に置換されます。例:
+If one of the values starts with the `$` character, it is replaced with an environment variable of the same name (if it exists), for example:
 {{< code-block lang="bash" >}}
 DD_TAGS=home:$HOME
 {{< /code-block >}}
 
-`$` 文字を使うことで、値の先頭にある環境変数を置換することもサポートされます。ただし、その値には環境変数に対応しない文字 (`a-z`、`A-Z` または `_`) が含まれている必要があります。例:
+Using the `$` character also supports replacing an environment variable at the beginning of a value if contains non-environment variable supported characters (`a-z`,  `A-Z` or `_`), for example:
 {{< code-block lang="bash" >}}
 FOO = BAR
 DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
@@ -309,9 +306,9 @@ DD_TAGS=key1:$FOO-v1 // expected: key1:BAR-v1
 
 ### OpenTelemetry
 
-**注**: OpenTelemetry の使用は Swift でのみサポートされています。
+**Note**: Using OpenTelemetry is only supported for Swift.
 
-Datadog Swift テストフレームワークは、内部的に [OpenTelemetry][6] をトレーシングテクノロジーとして使用します。OpenTelemetry トレーサーには、`DDInstrumentationControl.openTelemetryTracer` を使用してアクセスでき、OpenTelemetry API を使用します。たとえば、タグまたは属性を追加するには、
+Datadog Swift testing framework uses [OpenTelemetry][6] as the tracing technology under the hood. You can access the OpenTelemetry tracer using `DDInstrumentationControl.openTelemetryTracer` and use any OpenTelemetry API. For example, to add a tag or attribute:
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
@@ -323,26 +320,26 @@ span?.setAttribute(key: "OTTag2", value: "OTValue2")
 span?.end()
 {{< /code-block >}}
 
-テストターゲットは、`opentelemetry-swift` で明示的にリンクする必要があります。
+The test target needs to link explicitly with `opentelemetry-swift`.
 
-### コードカバレッジを報告する
+### Reporting code coverage
 
-コードカバレッジが利用できる場合、Datadog SDK (v2.2.7+) は、テストセッションの `test.code_coverage.lines_pct` タグでそれを報告します。
+When code coverage is available, the Datadog SDK (v2.2.7+) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-Xcode では、Test Scheme でコードカバレッジの報告を有効にすることができます。
+In Xcode, you can enable the reporting of code coverage in your Test Scheme.
 
-テストセッションの **Coverage** タブで、テストカバレッジの推移を見ることができます。
+You can see the evolution of the test coverage in the **Coverage** tab of a test session.
 
-## 構成に Info.plist を使用する
+## Using Info.plist for configuration
 
-または、環境変数を設定する代わりに、構成の値を（アプリバンドルではなく）テストバンドルの `Info.plist` ファイルに追加して提供することも可能です。環境変数と `Info.plist` ファイルに同じ設定がされている場合は、環境変数が優先されます。
+Alternatively to setting environment variables, all configuration values can be provided by adding them to the `Info.plist` file of the Test bundle (not the App bundle). If the same setting is set both in an environment variable and in the `Info.plist` file, the environment variable takes precedence.
 
-## CI プロバイダーの環境変数
+## CI provider environment variables
 
 {{< tabs >}}
 {{% tab "Jenkins" %}}
 
-| 環境変数 | 値                  |
+| Environment variable | Value                  |
 | -------------------- | ---------------------- |
 | `JENKINS_URL`        | `$(JENKINS_URL)`       |
 | `WORKSPACE`          | `$(WORKSPACE)`         |
@@ -352,9 +349,9 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `JOB_NAME`           | `$(JOB_NAME)`          |
 | `DD_CUSTOM_TRACE_ID` | `$(DD_CUSTOM_TRACE_ID)`|
 
-物理デバイスのテストのための追加 Git 構成:
+Additional Git configuration for physical device testing:
 
-| 環境変数 | 値           |
+| Environment variable | Value           |
 | -------------------- | --------------- |
 | `GIT_COMMIT`         | `$(GIT_COMMIT)` |
 | `GIT_URL`            | `$(GIT_URL)`    |
@@ -364,7 +361,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 {{% /tab %}}
 {{% tab "CircleCI" %}}
 
-| 環境変数       | 値                         |
+| Environment variable       | Value                         |
 | -------------------------- | ----------------------------- |
 | `CIRCLECI`                 | `$(CIRCLECI)`                 |
 | `CIRCLE_WORKING_DIRECTORY` | `$(CIRCLE_WORKING_DIRECTORY)` |
@@ -373,9 +370,9 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `CIRCLE_WORKFLOW_ID`       | `$(CIRCLE_WORKFLOW_ID)`       |
 | `CIRCLE_PROJECT_REPONAME`  | `$(CIRCLE_PROJECT_REPONAME)`  |
 
-物理デバイスのテストのための追加 Git 構成:
+Additional Git configuration for physical device testing:
 
-| 環境変数    | 値                      |
+| Environment variable    | Value                      |
 | ----------------------- | -------------------------- |
 | `CIRCLE_SHA1`           | `$(CIRCLE_SHA1)`           |
 | `CIRCLE_REPOSITORY_URL` | `$(CIRCLE_REPOSITORY_URL)` |
@@ -385,7 +382,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 {{% /tab %}}
 {{% tab "GitLab CI" %}}
 
-| 環境変数 | 値                |
+| Environment variable | Value                |
 | -------------------- | -------------------- |
 | `GITLAB_CI`          | `$(GITLAB_CI)`       |
 | `CI_PROJECT_DIR`     | `$(CI_PROJECT_DIR)`  |
@@ -399,9 +396,9 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `CI_PROJECT_URL`     | `$(CI_PROJECT_URL)`  |
 
 
-物理デバイスのテストのための追加 Git 構成:
+Additional Git configuration for physical device testing:
 
-| 環境変数 | 値                  |
+| Environment variable | Value                  |
 | -------------------- | ---------------------- |
 | `CI_COMMIT_SHA`      | `$(CI_COMMIT_SHA)`     |
 | `CI_REPOSITORY_URL`  | `$(CI_REPOSITORY_URL)` |
@@ -414,7 +411,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 {{% /tab %}}
 {{% tab "Travis" %}}
 
-| 環境変数       | 値                         |
+| Environment variable       | Value                         |
 | -------------------------- | ----------------------------- |
 | `TRAVIS`                   | `$(TRAVIS)`                   |
 | `TRAVIS_BUILD_DIR`         | `$(TRAVIS_BUILD_DIR)`         |
@@ -425,9 +422,9 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `TRAVIS_REPO_SLUG`         | `$(TRAVIS_REPO_SLUG)`         |
 | `TRAVIS_PULL_REQUEST_SLUG` | `$(TRAVIS_PULL_REQUEST_SLUG)` |
 
-物理デバイスのテストのための追加 Git 構成:
+Additional Git configuration for physical device testing:
 
-| 環境変数         | 値                           |
+| Environment variable         | Value                           |
 | ---------------------------- | ------------------------------- |
 | `TRAVIS_PULL_REQUEST_BRANCH` | `$(TRAVIS_PULL_REQUEST_BRANCH)` |
 | `TRAVIS_BRANCH`              | `$(TRAVIS_BRANCH)`              |
@@ -438,7 +435,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
-| 環境変数 | 値                   |
+| Environment variable | Value                   |
 | -------------------- | ----------------------- |
 | `GITHUB_WORKSPACE`   | `$(GITHUB_WORKSPACE)`   |
 | `GITHUB_REPOSITORY`  | `$(GITHUB_REPOSITORY)`  |
@@ -449,9 +446,9 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `GITHUB_SERVER_URL`  | `$(GITHUB_SERVER_URL)`  |
 | `GITHUB_RUN_ATTEMPT` | `$(GITHUB_RUN_ATTEMPT)` |
 
-物理デバイスのテストのための追加 Git 構成:
+Additional Git configuration for physical device testing:
 
-| 環境変数 | 値                  |
+| Environment variable | Value                  |
 | -------------------- | ---------------------- |
 | `GITHUB_REF`         | `$(GITHUB_REF)`        |
 | `GITHUB_HEAD_REF`    | `$(GITHUB_HEAD_REF)`   |
@@ -460,7 +457,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 {{% /tab %}}
 {{% tab "Buildkite" %}}
 
-| 環境変数            | 値                              |
+| Environment variable            | Value                              |
 | ------------------------------- | ---------------------------------- |
 | `BUILDKITE`                     | `$(BUILDKITE)`                     |
 | `BUILDKITE_BUILD_CHECKOUT_PATH` | `$(BUILDKITE_BUILD_CHECKOUT_PATH)` |
@@ -470,9 +467,9 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `BUILDKITE_PIPELINE_SLUG`       | `$(BUILDKITE_PIPELINE_SLUG)`       |
 | `BUILDKITE_JOB_ID`              | `$(BUILDKITE_JOB_ID)`              |
 
-物理デバイスのテストのための追加 Git 構成:
+Additional Git configuration for physical device testing:
 
-| 環境変数           | 値                             |
+| Environment variable           | Value                             |
 | ------------------------------ | --------------------------------- |
 | `BUILDKITE_COMMIT`             | `$(BUILDKITE_COMMIT)`             |
 | `BUILDKITE_REPO`               | `$(BUILDKITE_REPO)`               |
@@ -485,16 +482,16 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 {{% /tab %}}
 {{% tab "Bitbucket Pipelines" %}}
 
-| 環境変数       | 値                         |
+| Environment variable       | Value                         |
 | -------------------------- | ----------------------------- |
 | `BITBUCKET_CLONE_DIR`      | `$(BITBUCKET_CLONE_DIR)`      |
 | `BITBUCKET_BUILD_NUMBER`   | `$(BITBUCKET_BUILD_NUMBER)`   |
 | `BITBUCKET_PIPELINE_UUID`  | `$(BITBUCKET_PIPELINE_UUID)`  |
 | `BITBUCKET_REPO_FULL_NAME` | `$(BITBUCKET_REPO_FULL_NAME)` |
 
-物理デバイスのテストのための追加 Git 構成:
+Additional Git configuration for physical device testing:
 
-| 環境変数       | 値                         |
+| Environment variable       | Value                         |
 | -------------------------- | ----------------------------- |
 | `BITBUCKET_COMMIT`         | `$(BITBUCKET_COMMIT)`         |
 | `BITBUCKET_GIT_SSH_ORIGIN` | `$(BITBUCKET_GIT_SSH_ORIGIN)` |
@@ -504,7 +501,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 {{% /tab %}}
 {{% tab "AppVeyor" %}}
 
-| 環境変数     | 値                       |
+| Environment variable     | Value                       |
 | ------------------------ | --------------------------- |
 | `APPVEYOR`               | `$(APPVEYOR)`               |
 | `APPVEYOR_BUILD_FOLDER`  | `$(APPVEYOR_BUILD_FOLDER)`  |
@@ -513,9 +510,9 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `APPVEYOR_REPO_TAG_NAME` | `$(APPVEYOR_REPO_TAG_NAME)` |
 | `APPVEYOR_REPO_NAME`     | `$(APPVEYOR_REPO_NAME)`     |
 
-物理デバイスのテストのための追加 Git 構成:
+Additional Git configuration for physical device testing:
 
-| 環境変数                     | 値                                       |
+| Environment variable                     | Value                                       |
 | ---------------------------------------- | ------------------------------------------- |
 | `APPVEYOR_REPO_COMMIT`                   | `$(APPVEYOR_REPO_COMMIT)`                   |
 | `APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH` | `$(APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH)` |
@@ -527,7 +524,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 {{% /tab %}}
 {{% tab "Azure Pipelines" %}}
 
-| 環境変数             | 値                               |
+| Environment variable             | Value                               |
 | -------------------------------- | ----------------------------------- |
 | `TF_BUILD`                       | `$(TF_BUILD)`                       |
 | `BUILD_SOURCESDIRECTORY`         | `$(BUILD_SOURCESDIRECTORY)`         |
@@ -540,9 +537,9 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `SYSTEM_JOBDISPLAYNAME`          | `$(SYSTEM_JOBDISPLAYNAME)`          |
 | `SYSTEM_STAGEDISPLAYNAME`          | `$(SYSTEM_STAGEDISPLAYNAME)`          |
 
-物理デバイスのテストのための追加 Git 構成:
+Additional Git configuration for physical device testing:
 
-| 環境変数                     | 値                                       |
+| Environment variable                     | Value                                       |
 | ---------------------------------------- | ------------------------------------------- |
 | `BUILD_SOURCEVERSION`                    | `$(BUILD_SOURCEVERSION)`                    |
 | `BUILD_REPOSITORY_URI`                   | `$(BUILD_REPOSITORY_URI)`                   |
@@ -557,7 +554,7 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 {{% /tab %}}
 {{% tab "Bitrise" %}}
 
-| 環境変数   | 値                     |
+| Environment variable   | Value                     |
 | ---------------------- | ------------------------- |
 | `BITRISE_SOURCE_DIR`   | `$(BITRISE_SOURCE_DIR)`   |
 | `BITRISE_TRIGGERED_WORKFLOW_ID`  | `$(BITRISE_TRIGGERED_WORKFLOW_ID)`  |
@@ -565,9 +562,9 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 | `BITRISE_BUILD_NUMBER` | `$(BITRISE_BUILD_NUMBER)` |
 | `BITRISE_BUILD_URL`    | `$(BITRISE_BUILD_URL)`    |
 
-物理デバイスのテストのための追加 Git 構成:
+Additional Git configuration for physical device testing:
 
-| 環境変数               | 値                                 |
+| Environment variable               | Value                                 |
 | ---------------------------------- | ------------------------------------- |
 | `GIT_REPOSITORY_URL`               | `$(GIT_REPOSITORY_URL)`               |
 | `BITRISE_GIT_COMMIT`               | `$(BITRISE_GIT_COMMIT)`               |
@@ -585,9 +582,9 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 {{% /tab %}}
 {{% tab "Xcode Cloud" %}}
 
-| 環境変数    | 値                   |
+| Environment variable    | Value                   |
 | ----------------------- | ----------------------- |
-| `DD_GIT_REPOSITORY_URL` | リポジトリ URL      |
+| `DD_GIT_REPOSITORY_URL` | The repository URL      |
 | `CI_WORKSPACE`          | `$(CI_WORKSPACE)`       |
 | `CI_COMMIT`             | `$(CI_COMMIT)`          |
 | `CI_BUILD_ID`           | `$(CI_BUILD_ID)`        |
@@ -600,119 +597,119 @@ Xcode では、Test Scheme でコードカバレッジの報告を有効にす�
 {{% /tab %}}
 {{< /tabs >}}
 
-## 手動テスト API
+## Manual testing API
 
-Swift プロジェクトで XCTests を使用している場合、`DatadogSDKTesting`フレームワークが自動的にインスツルメントし、Datadog バックエンドに結果を送信します。XCTest を使用しない場合、代わりに Swift/Objective-C の手動テスト API を使用することができ、これもバックエンドにテスト結果を報告します。
+If you use XCTests with your Swift projects, the `DatadogSDKTesting` framework automatically instruments them and sends the results to the Datadog backend. If you don't use XCTest, you can instead use the Swift/Objective-C manual testing API, which also reports test results to the backend.
 
-この API は、*テストモジュール*、*テストスイート*、*テスト*の 3 つの概念に基づいています。
+The API is based around three concepts: *test module*, *test suites*, and *tests*.
 
-### テストモジュール
+### Test module
 
-テストモジュールは、テストを含むライブラリやバンドルの読み込みを表します。
+A test module represents the load of a library or bundle that includes the tests.
 
-テストモジュールを開始するには、`DDTestModule.start()` を呼び出して、テストするモジュールまたはバンドルの名前を渡します。
+To start a test module, call `DDTestModule.start()` and pass the name of the module or bundle to test.
 
-すべてのテストが終了したら、`module.end()` を呼び出し、これによりライブラリは残っているテスト結果をすべてバックエンドに送信します。
+When all your tests have finished, call `module.end()`, which forces the library to send all remaining test results to the backend.
 
-### テストスイート
+### Test Suites
 
-テストスイートは、共通の機能を共有するテストのセットで構成されます。これらのテストは、共通の初期化および終了を共有することができ、また、いくつかの変数を共有することができます。
+A test suite comprises a set of tests that share common functionality. They can share a common initialization and teardown, and can also share some variables.
 
-`module.suiteStart()` を呼び出し、テストスイートの名前を渡すことでテストモジュール内にテストスイートを作成します。
+Create test suites in the test module by calling `module.suiteStart()` and passing the name of the test suite.
 
-スイートの中の関連するテストがすべて実行を終えたら `suite.end()` を呼び出します。
+Call `suite.end()` when all the related tests in the suite have finished their execution.
 
-### テスト
+### Tests
 
-各テストはスイート内で実行され、`pass`、`fail`、`skip` のいずれかのステータスで終了する必要があります。テストは、オプションで属性やエラー情報などの追加情報を持つことができます。
+Each test runs inside a suite and must end in one of these three statuses: `pass`, `fail`, or `skip`. A test can optionally have additional information like attributes or error information.
 
-`suite.testStart()` を呼び出し、テストの名前を渡すことで、スイート内のテストを作成します。テストが終了したら、定義済みのステータスのいずれかを設定する必要があります。
+Create tests in a suite by calling `suite.testStart()` and passing the name of the test. When a test ends, one of the predefined statuses must be set.
 
-### API インターフェイス
+### API interface
 
 {{< code-block lang="swift" >}}
 class DDTestModule {
-    // モジュールを開始します。
-    // - パラメーター:
-    //   - bundleName: テストするモジュールまたはバンドルの名前。
-    //   - startTime: オプション。モジュールが開始された時間。
+    // Starts the module.
+    // - Parameters:
+    //   - bundleName: Name of the module or bundle to test.
+    //   - startTime: Optional. The time the module started.
     static func start(bundleName: String, startTime: Date? = nil) -> DDTestModule
     //
-    // モジュールを終了します。
-    // - パラメーター:
-    //   - endTime: オプション。モジュールが終了した時間。
+    // Ends the module.
+    // - Parameters:
+    //   - endTime: Optional. The time the module ended.
     func end(endTime: Date? = nil)
-    // テストモジュールにタグ/属性を追加します。タグはいくつでも追加可能です。
-    // - パラメーター:
-    //   - key: タグの名前。同じ名前のタグが既に存在する場合、
-    //     その値は新しい値で置き換えられます。
-    //   - value: タグの値。数値または文字列を指定することができます。
+    // Adds a tag/attribute to the test module. Any number of tags can be added.
+    // - Parameters:
+    //   - key: The name of the tag. If a tag with the same name already exists,
+    //     its value will be replaced by the new value.
+    //   - value: The value of the tag. Can be a number or a string.
     func setTag(key: String, value: Any)
     //
-    // このモジュールでスイートを開始します。
-    // - パラメーター:
-    //   - name: スイートの名前。
-    //   - startTime: オプション。スイートの開始時間。
+    // Starts a suite in this module.
+    // - Parameters:
+    //   - name: Name of the suite.
+    //   - startTime: Optional. The time the suite started.
     func suiteStart(name: String, startTime: Date? = nil) -> DDTestSuite
 }
     //
 public class DDTestSuite : NSObject {
-    // テストスイートを終了します。
-    // - パラメーター:
-    //   - endTime: オプション。スイートが終了した時間。
+    // Ends the test suite.
+    // - Parameters:
+    //   - endTime: Optional. The time the suite ended.
     func end(endTime: Date? = nil)
-    // タグ/属性をテストスイートに追加します。タグはいくつでも追加することができます。
-    // - パラメーター:
-    //   - key: タグの名前。同じ名前のタグが既に存在する場合、
-    //     その値は新しい値で置き換えられます。
-    //   - value: タグの値。数値または文字列を指定することができます。
+    // Adds a tag/attribute to the test suite. Any number of tags can be added.
+    // - Parameters:
+    //   - key: The name of the tag. If a tag with the same name already exists,
+    //     its value will be replaced by the new value.
+    //   - value: The value of the tag. Can be a number or a string.
     func setTag(key: String, value: Any)
     //
-    // このスイートのテストを開始します。
-    // - パラメーター:
-    //   - name: テストの名前。
-    //   - startTime: オプション。テストが開始された時間。
+    // Starts a test in this suite.
+    // - Parameters:
+    //   - name: Name of the test.
+    //   - startTime: Optional. The time the test started.
     func testStart(name: String, startTime: Date? = nil) -> DDTest
 }
     //
 public class DDTest : NSObject {
-    // テストにタグ/属性を追加します。タグはいくつでも追加することができます。
-    // - パラメーター:
-    //   - key: タグの名前。同じ名前のタグが既に存在する場合、
-    //     その値は新しい値で置き換えられます。
-    //   - value: タグの値。数値または文字列を指定することができます。
+    // Adds a tag/attribute to the test. Any number of tags can be added.
+    // - Parameters:
+    //   - key: The name of the tag. If a tag with the same name already exists,
+    //     its value will be replaced by the new value.
+    //   - value: The value of the tag. Can be a number or a string.
     func setTag(key: String, value: Any)
     //
-    // テストにエラー情報を追加します。1 つのテストが報告できるエラー情報は 1 つだけです。
-    // - パラメーター:
-    //   - type: 報告されるエラーのタイプ。
-    //   - message: エラーに関連するメッセージ。
-    //   - callstack: オプション。エラーに関連するコールスタック。
+    // Adds error information to the test. Only one errorInfo can be reported by a test.
+    // - Parameters:
+    //   - type: The type of error to be reported.
+    //   - message: The message associated with the error.
+    //   - callstack: Optional. The callstack associated with the error.
     func setErrorInfo(type: String, message: String, callstack: String? = nil)
     //
-    // テストを終了します。
-    // - パラメーター:
-    //   - status: このテストについて報告されたステータス。
-    //   - endTime: オプション。テストが終了した時間。
+    // Ends the test.
+    // - Parameters:
+    //   - status: The status reported for this test.
+    //   - endTime: Optional. The time the test ended.
     func end(status: DDTestStatus, endTime: Date? = nil)
 }
     //
-// テストによって報告される可能性のあるステータス:
+// Possible statuses reported by a test:
 enum DDTestStatus {
-  // テストは合格しました。
+  // The test passed.
   case pass
   //
-  // テストは失敗しました。
+  //The test failed.
   case fail
   //
-  // テストはスキップされました。
+  //The test was skipped.
   case skip
 }
 {{< /code-block >}}
 
-### コード例
+### Code example
 
-次のコードは、API の簡単な使い方を表しています。
+The following code represents a simple usage of the API:
 
 {{< code-block lang="swift" >}}
 import DatadogSDKTesting
@@ -731,38 +728,38 @@ let suite2 = module.suiteStart(name: "ManualSuite 2")
 module.end()
 {{< /code-block >}}
 
-最後に必ず `module.end()` を呼び出し、すべてのテスト情報を Datadog に流すようにします。
+Always call `module.end()` at the end so that all the test info is flushed to Datadog.
 
-## ベストプラクティス
+## Best practices
 
-テストフレームワークと CI 表示を最大限に活用するために、以下のプラクティスに従ってください。
+Follow these practices to take full advantage of the testing framework and CI Visibility.
 
-### ビルド時にシンボルファイルを生成する
+### Generate symbols file when building
 
-Xcode で `DWARF with dSYM File` (または `swift` でビルドする場合は `-Xswiftc -debug-info-format=dwarf`) を使用してコードをビルドします
+Build your code in Xcode using `DWARF with dSYM File` (or `-Xswiftc -debug-info-format=dwarf` if building with `swift`)
 
-テストフレームワークは、クラッシュのシンボル化、テストソースの位置の報告、コードの所有者の報告など、いくつかの機能でシンボルファイルを使用します。デバッグシンボルがバイナリに埋め込まれている場合、シンボルファイルを自動的に生成しますが、読み込みに余分な時間がかかることがあります。
+The testing framework uses symbol files for some of its functionality, including: symbolicating crashes, reporting test source location, and reporting code owners. It automatically generates the symbol file when debug symbols are embedded in the binaries, but it can take some extra time to load.
 
-### macOS の UI テストのサンドボックスを無効化する
+### Disable sandbox for UI Tests on macOS
 
-一部の Xcode のバージョンでは、UI Test バンドルはデフォルトでサンドボックス付きでビルドされています。サンドボックスに付属する設定は、一部のシステムコマンドで `xcrun` を使ってテストフレームワークを実行することを妨げるので、それを無効にする必要があります。
+In some Xcode versions, UI Test bundles are built with a sandbox by default. The settings that come with a sandbox prevent the testing framework from being run by some system commands with `xcrun`, so you need to disable it.
 
-UI Test ランナーバンドルに Entitlements を追加し、それらに `App Sandbox = NO` を追加してサンドボックスを無効にします。また、`.entitlement` ファイルを作成し、Signing Build Settings に追加することができます。このファイルには、以下の内容を含める必要があります。
+Disable the sandbox by adding Entitlements to the UI Test runner bundle, then adding `App Sandbox = NO` to them. You can also create an `.entitlement` file and add it to the Signing Build Settings. This file should should include the following content:
 
 {{< code-block lang="xml" >}}
 <key>com.apple.security.app-sandbox</key>
  <false/>
 {{< /code-block >}}
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/continuous_integration/tests/#test-suite-level-visibility
+[1]: /continuous_integration/tests/#test-suite-level-visibility
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: /ja/getting_started/site/
-[4]: /ja/continuous_integration/guides/rum_swift_integration
+[3]: /getting_started/site/
+[4]: /continuous_integration/guides/rum_swift_integration
 [5]: https://app.datadoghq.com/organization-settings/application-keys
 [6]: https://opentelemetry.io/
-[7]: /ja/continuous_integration/intelligent_test_runner/
-[8]: /ja/getting_started/tagging/unified_service_tagging
+[7]: /continuous_integration/intelligent_test_runner/
+[8]: /getting_started/tagging/unified_service_tagging

@@ -1,66 +1,66 @@
 ---
+title: Pipeline Scanner
+kind: documentation
 disable_toc: false
 further_reading:
-- link: https://www.datadoghq.com/blog/log-pipeline-scanner-datadog/
-  tag: ブログ
-  text: Datadog Log Pipeline Scanner でログ処理を調査する
-- link: /logs/log_configuration/pipelines/
-  tag: ドキュメント
-  text: ログパイプラインについて
-- link: /logs/log_configuration/processors/
-  tag: ドキュメント
-  text: ログプロセッサーについて
-kind: ドキュメント
-title: パイプラインスキャナー
+    - link: "https://www.datadoghq.com/blog/log-pipeline-scanner-datadog/"
+      tag: Blog
+      text: Investigate your log processing with the Datadog Log Pipeline Scanner
+    - link: /logs/log_configuration/pipelines/
+      tag: Documentation
+      text: Learn more about log pipelines
+    - link: /logs/log_configuration/processors/
+      tag: Documentation
+      text: Learn more about log processors
 ---
 
-## 概要
+## Overview
 
-Log Pipeline Scanner を使用すると、ログパイプラインをリアルタイムでスキャンし、特定のログをトレースして、どのパイプラインと処理ルールがそのフィールドに変更を加えたかを特定できます。組織は、膨大なログの処理にログパイプラインに依存し、 各チームは、セキュリティ監視、コンプライアンス監査、DevOps など、特定のユースケースに合わせてログを再構築、リッチ化しています。
+Log Pipeline Scanner allows you to scan log pipelines in real time, trace specific logs, and identify which pipelines and processing rules made changes to its fields. Organizations rely on log pipelines to process extensive log volumes, each team restructuring and enriching logs differently for their specific use cases, such as security monitoring, compliance audits, and DevOps.
 
-Pipeline Scanner を使用して、
+Use Pipeline Scanner to:
 
-- パースされていないログ、タグの欠落、ログ構造の予期せぬ変更など、ログ処理の問題をトラブルシューティングします。
-- 競合する、または冗長な処理ルールを特定し、削除します。
-- ログパイプラインを経由するログがセキュリティおよびコンプライアンス要件を満たしていることを確認します。
+- Troubleshoot log processing issues, such as unparsed logs, missing tags, or unexpected changes to the log structure.
+- Determine and remove conflicting or redundant processing rules.
+- Ensure that logs going through log pipelines are meeting security and compliance requirements.
 
-{{< img src="logs/log_configuration/pipeline_scanner/pipeline_scanner.png" alt="クエリに一致する 2 つのログ、選択されたログの詳細、クエリされたログを変更している 2 つのパイプラインを表示する Pipeline Scanner" style="width:80%;" >}}
+{{< img src="logs/log_configuration/pipeline_scanner/pipeline_scanner.png" alt="The Pipeline Scanner showing two logs that match the query, log details for the selected log, and the two pipelines modifying the queried logs" style="width:80%;" >}}
 
-## ログを変更しているパイプラインとプロセッサーの特定
+## Identify pipelines and processors modifying a log
 
-Pipeline Scanner は、検索クエリに一致するログをサンプリングし、それらが通過している異なる処理ステップでアノテーションを付けます。これにより、ログに対するすべての変更を特定できるようになります。
+The Pipeline Scanner samples and annotates logs matching the search query with the different processing steps they are going through, making it possible to identify all changes to your logs.
 
-1. [ログエクスプローラー][1]に移動します。
-1. どのパイプラインやプロセッサーがログを変更しているかを調べたいログをクリックします。
-1. パネル右上の Pipeline Scanner アイコンをクリックします。アイコンにカーソルを合わせると、`View pipelines for similar logs` と表示されます。
-    または、ログパネルで属性をクリックし、**Scan pipelines for** を選択します。
-1. [Pipeline Scanner][2] ページで、クエリをさらに絞り込むことができます。このクエリはセッション開始後に変更することはできません。
-1. **Launch this session** をクリックします。
-    次の 15 分間、クエリに一致するログには、どのパイプラインとプロセッサーがそれらのログを変更しているかという情報がタグ付けされます。スキャナーの Live Tail は、どのパイプラインといくつのパイプラインがそれぞれのログに一致するかを示します。
-1. ログをクリックすると、そのログに一致するパイプラインとプロセッサーのリストが表示されます。Live Tail はこの時点で一時停止されます。
+1. Navigate to [Log Explorer][1].
+1. Click on a log where you want to find out which pipelines and processors are modifying it.
+1. Click the Pipeline Scanner icon in the upper right corner of the panel. If you hover over the icon, it says `View pipelines for similar logs`.
+    Alternatively, click on an attribute in the log panel and select **Scan pipelines for**. 
+1. You can further refine your query in the [Pipeline Scanner][2] page. This query cannot be changed after a session is started.
+1. Click **Launch this session**.   
+    For the next 15 minutes, logs matching your query are tagged with information about which pipelines and processors are modifying those logs. The Live Tail in the scanner shows which pipelines and how many pipelines match each of the logs.
+1. Click a log to see the list of pipelines and processors matched to that log. Live Tail is paused at this point.
 
-右側のパネルでパイプラインとプロセッサーを変更できます。変更した内容は、すでに処理されたログには影響しません。更新されたパイプラインとプロセッサーによって変更された新しいログを表示するには、**Play** をクリックします。
+You can modify the pipelines and processors in the right side panel. The modifications you make do not affect the logs that have already been processed. Click **Play** to view the new logs that have been modified by the updated pipelines and processors.
 
-Pipeline Scanner には、ログパイプラインページからもアクセスできます。
+You can also access Pipeline Scanner from the Log Pipelines page:
 
-1. [ログパイプライン][3]に移動します。
-2. **Pipeline Scanner** をクリックします。
-3. 検査したいログのクエリを定義します。
+1. Navigate to [Log Pipelines][3]. 
+2. Click **Pipeline Scanner**.
+3. Define the query for the logs you want to inspect.
 
-### 制限
+### Limitations
 
-Pipeline Scanner を使用するには `logs_write_pipelines` 権限が必要です。詳細は[ログ管理 RBAC 権限][4]を参照してください。
+The `logs_write_pipelines` permission is required to use the Pipeline Scanner. See [Log Management RBAC permissions][4] for more information.
 
-起動できるセッションの数には以下の制限があります。
+The number of sessions you can launch is limited to:
 
-- 同時セッションは最大 3 つ。
-- 12 時間のスライディングウィンドウで最大 12 セッション。
+- A maximum of 3 concurrent sessions.
+- A maximum of 12 sessions over a 12-hour sliding window.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs
 [2]: https://app.datadoghq.com/logs/pipelines?query=source:*
 [3]: https://app.datadoghq.com/logs/pipelines
-[4]: /ja/account_management/rbac/permissions/#log-management
+[4]: /account_management/rbac/permissions/#log-management
