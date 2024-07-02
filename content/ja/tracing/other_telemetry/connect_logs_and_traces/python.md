@@ -20,7 +20,7 @@ further_reading:
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: ガイド
   text: クロスプロダクト相関で容易にトラブルシューティング。
-title: Python ログとトレースの接続
+title: Python ログとトレースの相関付け
 type: multi-code-lang
 ---
 
@@ -28,14 +28,38 @@ type: multi-code-lang
 
 ### 標準ライブラリロギング
 
-[トレース][1]とログを相関付けるには、ログレコードから必要な属性を含むようにログフォーマットを更新し、`ddtrace.patch(logging=True)` を呼び出します。
+[トレース][1]とログを相関付けるには、以下の手順を実行します。
+
+  1. [自動インスツルメンテーションを有効にする](#step-1---activate-automatic-instrumentation).
+  2. [ログレコードから必要な属性を含める](#step-2---include-required-attributes).
+
+#### ステップ 1 - 自動インスツルメンテーションを有効にする
+
+以下のいずれかのオプションを使用して、自動インスツルメンテーションを有効にします。
+
+オプション 1: [ライブラリインジェクション][5]:
+  1. アプリケーションの `deployment/manifest` ファイルで環境変数 `DD_LOGS_INJECTION=true` を設定します。
+  2. [ライブラリインジェクション][5]の手順に従って、トレーシングを設定します。
+
+オプション 2: `ddtrace-run`:
+  1. アプリケーションを実行している環境で環境変数 `DD_LOGS_INJECTION=true` を設定します。
+  2. **ddtrace** をアプリケーションにインポートします。
+  3. `ddtrace-run` でアプリケーションを実行します (例: `ddtrace-run python appname.py`)。
+
+オプション 3: `patch`:
+  1. **ddtrace** をアプリケーションにインポートします。
+  2. `ddtrace.patch(logging=True)` をアプリケーションコードの先頭に追加します。
+
+#### ステップ 2 - 必要な属性を含める
+
+ログレコードから必要な属性を含むように、ログフォーマットを更新します。
+
 
 ログレコードの ``dd.env``、``dd.service``、``dd.version``、``dd.trace_id``、``dd.span_id`` 属性を、フォーマット文字列に含めます。
 
 以下は、`logging.basicConfig` を使用して、ログ挿入の構成を行う例です。
 
 ``` python
-from ddtrace import patch; patch(logging=True)
 import logging
 from ddtrace import tracer
 
@@ -53,6 +77,8 @@ def hello():
 hello()
 ```
 
+ログインジェクションの詳細については、[ddtrace のドキュメント][6]をお読みください。
+
 ### 標準ライブラリロギングなし
 
 標準ライブラリの `logging` モジュールを使用していない場合は、以下のコードスニペットを使用してトレーサー情報をログに挿入することができます。
@@ -61,7 +87,7 @@ hello()
 from ddtrace import tracer
 
 span = tracer.current_span()
-correlation_ids = (span.trace_id, span.span_id) if span else (None, None)
+correlation_ids = (str((1 << 64) - 1 & span.trace_id), span.span_id) if span else (None, None)
 ```
 以下の例では、ログ出力にトレーサーフィールドを追加するために、`structlog` 内で *processor* として関数を定義しています。
 
@@ -74,7 +100,7 @@ import structlog
 def tracer_injection(logger, log_method, event_dict):
     # 現在のトレーサーコンテキストから相関 ID を取得
     span = tracer.current_span()
-    trace_id, span_id = (span.trace_id, span.span_id) if span else (None, None)
+    trace_id, span_id = (str((1 << 64) - 1 & span.trace_id), span.span_id) if span else (None, None)
 
     # structlog イベントの辞書に ID を追加
     event_dict['dd.trace_id'] = str(trace_id or 0)
@@ -107,7 +133,7 @@ log = structlog.get_logger()
 
 [Python ロギングのドキュメントを参照][2]して Python ログインテグレーションを適切に構成し、Python ログが自動的にパースされるようにしてください。
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -115,3 +141,5 @@ log = structlog.get_logger()
 [2]: /ja/logs/log_collection/python/#configure-the-datadog-agent
 [3]: /ja/logs/log_configuration/processors/#trace-remapper
 [4]: /ja/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
+[5]: /ja/tracing/trace_collection/library_injection_local/
+[6]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#logs-injection
