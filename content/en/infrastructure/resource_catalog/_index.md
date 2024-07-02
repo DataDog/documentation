@@ -103,7 +103,7 @@ Click the **Share** button and select **Share event** to share a link to the cur
 
 Use the **Recent Changes** tab on a resource's side panel to see a 7-day history of changes to the resource and its configuration. To forward change events from your cloud environments, follow the links for your cloud providers in the sections below.
 
-**Note**: To collect resource change events from your cloud environments, ensure that you have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [integration tile][7].
+**Note**: To collect resource change events from your cloud environments, ensure that you have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [integration tile][7]. If you haven't already, [request access to the private beta][9].
 
 #### AWS
 
@@ -125,3 +125,4 @@ See the [Resource change collection][8] section of the Google Cloud Platform int
 [6]: /integrations/amazon_config/#events
 [7]: https://app.datadoghq.com/integrations
 [8]: /integrations/google_cloud_platform/#resource-change-collection
+[9]: https://www.datadoghq.com/private-beta/recent-changes-tab/
