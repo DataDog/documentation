@@ -7,6 +7,8 @@ aliases:
 
 This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
 
+{{< img src="security/datadog_security_coverage_aws_fargate.png" alt="CSM graphic" width="75%">}}
+
 ## Full stack coverage for AWS Fargate
 
 Datadog Security provides multiple layers of visibility for AWS Fargate. Use the products in combination with one another to gain full stack coverage, as shown in the following tables:
