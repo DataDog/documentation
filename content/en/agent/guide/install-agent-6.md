@@ -24,7 +24,7 @@ Run the following command, replacing `MY_API_KEY` with your Datadog API key:
 DD_AGENT_MAJOR_VERSION=6 DD_API_KEY=MY_API_KEY DD_SITE="${site}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 {{< /code-block >}}
 
-Using this method, the Agent runs at login. You can disable it from the system tray.
+The Agent runs at login. You can disable it from the system tray.
 
 #### LaunchDaemon
 
@@ -34,7 +34,7 @@ The Datadog Agent can be installed as a system-wide LaunchDaemon by specifying `
 DD_SYSTEMDAEMON_INSTALL=true DD_SYSTEMDAEMON_USER_GROUP=username:groupname DD_AGENT_MAJOR_VERSION=6 DD_API_KEY=MY_API_KEY DD_SITE="datad0g.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 {{< /code-block >}}
 
-Using this method, the Agent runs at system startup. A valid non-root user and its group must be provided using the `DD_SYSTEMDAEMON_USER_GROUP` variable. The agent process runs under this user and group.
+The Agent runs at system startup. A valid non-root user and its group must be provided using the `DD_SYSTEMDAEMON_USER_GROUP` variable. The agent process runs under this user and group.
 
 The system tray app is not supported under system-wide LaunchDaemon installs.
 
