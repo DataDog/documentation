@@ -23,7 +23,7 @@
 "categories":
 - developer tools
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/tcp_queue_length/README.md"
 "display_on_public_website": true
@@ -60,9 +60,9 @@
 
 This check monitors the usage of the Linux TCP receive and send queues. It can detect if a TCP receive or send queue is full for individual containers.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 `tcp_queue_length` is a core Agent 6/7 check that relies on an eBPF part implemented in `system-probe`. Agent version 7.24.1/6.24.1 or above is required.
 
@@ -81,7 +81,7 @@ yum install -y kernel-devel-$(uname -r)
 
 **Note**: Windows and CentOS/RHEL versions earlier than 8 are not supported.
 
-### Configuration
+### 構成
 
 Enabling the `tcp_queue_length` integration requires both the `system-probe` and the core agent to have the configuration option enabled.
 
@@ -138,21 +138,21 @@ spec:
 
 [Run the Agent's `status` subcommand][2] and look for `tcp_queue_length` under the checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "tcp_queue_length" >}}
 
 
-### Service Checks
+### サービスチェック
 
 The TCP Queue Length check does not include any service checks.
 
-### Events
+### イベント
 
 The TCP Queue Length check does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

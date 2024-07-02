@@ -46,7 +46,7 @@ If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL
 
 Alternatively, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport. For more information, read [DogStatsD over Unix Domain Socket][7].
 
-## Data Collected
+## 収集データ
 
 The following metrics are collected by default after enabling .NET metrics.
 

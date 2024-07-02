@@ -1,8 +1,9 @@
 ---
-title: 回帰
+title: Regression
 aliases:
-  - /ja/graphing/functions/regression/
+    - /graphing/functions/regression/
 ---
+
 ## ロバスト回帰
 
 | 関数         | 説明                                          | 例                              |

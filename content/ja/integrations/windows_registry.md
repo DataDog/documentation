@@ -18,7 +18,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - os & system
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/windows_registry/README.md"
 "display_on_public_website": true
@@ -57,13 +57,13 @@ Watch for changes in Windows Registry keys and forward them to Datadog. Enable t
 - Understand system and application level health and state through Windows Registry values.
 - Monitor for unexpected changes impacting security and compliance requirements.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Windows Registry integration is included in the [Datadog Agent][1] package. No additional installation is needed.
 
-### Configuration
+### 構成
 
 This integration collects and reports Windows Registry information using both of the following methods:
 
@@ -86,9 +86,9 @@ This integration collects and reports Windows Registry information using both of
 
 Check the information page in the Datadog Agent Manager or run the Agent's `status` [subcommand][7] and look for `windows_registry` under the **Checks** section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 All metrics collected by the Windows Registry integration are forwarded to Datadog as [custom metrics][11], which may impact your billing.
 
@@ -96,11 +96,11 @@ All metrics collected by the Windows Registry integration are forwarded to Datad
 
 All logs collected by the Windows Registry integration are forwarded to Datadog, and are subject to [Logs billing][8].
 
-### Service Checks
+### サービスチェック
 
 The Windows Registry integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9] with an [Agent Flare][10].
 

@@ -10,43 +10,43 @@ further_reading:
   text: Learn more about monitoring authentication logs
 ---
 
-## Overview
+## 概要
 
-Being able to log, monitor, and analyze all authentication events is key for identifying security threats and managing customer records for compliance purposes. Authentication logs from different sources and parts of your environment might have different formats and be managed by different teams or implemented using multiple third-party services.
+認証イベントのすべてをログに記録し、監視して分析することは、セキュリティ対策および顧客の記録管理を徹底しコンプライアンスを遵守するために大変重要です。さまざまなソースや環境からの認証ログは、さまざまな形式を持ち、さまざまなチームにより管理され、複数のサードパーティサービスにより実装されています。
 
-This guide walks you through best practices and tips for managing and formatting authentication logs so you can use authentication log data to monitor and detect security threats with [Datadog Security and Compliance Monitoring][1].
+このガイドでは、[Datadog セキュリティおよびコンプライアンスモニタリング][1]で認証ログデータを使用しセキュリティへの脅威を監視し、検出することができるよう、認証ログの管理およびフォーマット化に役立つベストプラクティスをご紹介します。
 
-## Prerequisites
+## 前提条件
 
-Log collection must be enabled to use Security and Compliance Monitoring. This guide recommends log collection enabled at the [application level][2].
+セキュリティおよびコンプライアンスモニタリングを使用するには、ログの収集が有効である必要があります。このガイドでは、ログ収集を[アプリケーションレベル][2]で有効にすることをおすすめしています。
 
-## Manage and format authentication logs
+## 認証ログの管理とフォーマット化
 
-Before you begin monitoring for security threats, follow the best practices below to ensure you have sufficient log data flowing into Datadog.
+セキュリティ上の脅威を監視するには、以下のベストプラクティスを実行し、Datadog へ十分なログデータのフローがあることを確認します。
 
-### Log events from all login flows
+### すべてのログインフローのログイベント
 
-To gain visibility into all of your authentication activity, ensure log events for all login flows are at the application level. This eliminates gaps in your monitoring coverage. It also gives you more control over how you log authentication events and what data you are collecting.
+認証アクティビティのすべてを確認するためには、すべてのログインフローのログイベントがアプリケーションレベルである必要があります。これにより、監視範囲の漏れをなくすことができます。また、認証イベントのログ方法や収集データをより細かく制御することが可能になります。
 
-### Ensure your logs contain useful data
+### 有用なデータを含むログ
 
-By logging all authentication events at the application level, you can ensure that your logs contain the most useful data for [monitoring and detecting security threats](#monitor-and-detect-security-threats).
+すべての認証イベントをアプリケーションレベルで記録することで、[セキュリティ上の脅威の検出および監視](#monitor-and-detect-security-threats)に最も有用なデータをログに含めることができます。
 
 {{< code-block lang="bash" >}}
 2020-01-01 12:00:01 google oauth login success by John Doe from 1.2.3.4
 {{< /code-block >}}
 
-Logs that contain the "who" (John Doe), "what" (login success), and when (2020-01-01 12:00:01) of an event provide the best level of detail for you to perform complex analysis in Datadog.
+イベントについて、「誰が」(John Doe)、「何を」(login success)、「いつ」(2020-01-01 12:00:01) を含むログは、Datadog で複雑な分析を行うために最高レベルの情報を提供します。
 
-### Log in a standard, parsable format
+### 標準的な、解析可能な形式でログイン
 
-Ensure your application writes logs in a key-value format using `=` as a separator. Using this format means that a key-value parser, such as Datadog's [Grok Parser][3], can process them. For example, if a log is in the following format:
+アプリケーションでは、必ず `=` をセパレーターとして使用する key-value 形式でログを作成します。この形式を使用すると、Datadog の [Grok Parser][3] などの key-value パーサーが処理できます。たとえば、ログが以下の形式の場合:
 
 {{< code-block lang="bash" >}}
 INFO 2020-01-01 12:00:01 usr.id="John Doe" evt.category=authentication evt.name="google oauth" evt.outcome=success network.client.ip=1.2.3.4
 {{< /code-block >}}
 
-Datadog can then parse this as the following JSON:
+Datadog で以下の JSON として解析できます。
 
 {{< code-block lang="json" >}}
 {
@@ -66,7 +66,7 @@ Datadog can then parse this as the following JSON:
 }
 {{< /code-block >}}
 
-It's important to use a [standard naming convention][4] for the attributes in your logs to ensure that you can search and aggregate data across all attributes, regardless of where they come from. It is recommended that your authentication logs include the following [standard attributes][5]:
+送信元に関わらずすべての属性のデータを検索、収集できるよう、ログの属性には[標準的な命名規則][4]を使用することが重要です。認証ログには、以下の[標準属性][5]を含めることが推奨されています。
 
 - [`usr.id`][6]
 - [`evt.category`][7]
@@ -74,33 +74,33 @@ It's important to use a [standard naming convention][4] for the attributes in yo
 - [`evt.outcome`][7]
 - [`network.client.ip`][8]
 
-Use the same format across all of your authentication logs so you can properly use log attributes to filter and organize log data in Datadog. For example, with standard attributes you can look for which users (`usr.id`) have the highest number of failed logins (`evt.outcome:failure`).
+Datadog でログ属性を適切に使用しログデータを絞り込んだり管理したりできるよう、すべての認証ログには同じ形式を使用します。たとえば、標準属性を使用すると、最も多くログインに失敗した (`evt.outcome:failure`) ユーザー (`usr.id`) を検索できます。
 
-A key-value format also simplifies the process to add custom attributes to logs. For example, you could add a [reCAPTCHA v3][9] score to identify possible bot activity. Use quotes to wrap any attribute values that may contain spaces. This ensures that you capture the full value in a way that is parsable.
+また、key-value 形式を使用することで、ログにカスタム属性を追加するプロセスがシンプルになります。たとえば、[reCAPTCHA v3][9] スコアを追加して、ボットアクティビティの可能性を特定できます。スペースを含む属性値を囲むには、引用符を使用します。こうすることで、解析できる方法で全値をキャプチャできます。
 
-## Monitor and detect security threats
+## セキュリティ上の脅威の監視、検出
 
-To properly monitor and detect security threats, there are key patterns you should take note of. For example, if you see a significant number of failed login attempts from a single user within a short period of time, it could indicate a [**brute force attack**][10]. If those failed login attempts are followed by a successful one, it could be a successful account takeover that you should investigate immediately.
+セキュリティ上の脅威を適切に監視し検出するには、気を付けるべき重要なパターンがあります。たとえば、短期間内に 1 人のユーザーのログイン試行が相当回数失敗している場合、[**ブルートフォース攻撃**][10]の可能性があります。このログイン失敗の連続が最終的に成功した場合、アカウントの乗っ取りの可能性があるため、ただちに調査する必要があります。
 
-Another common authentication attack technique is [**credential stuffing**][11]. Credential stuffing is when an attacker mixes and matches breached login credentials to try to match a real user account. To detect this type of attack, look for logins using multiple `usr.id` values all coming from the same `network.client.ip`.
+認証システムへの攻撃として一般的な方法には、他に[**クレデンシャルスタッフィング**][11]があります。クレデンシャルスタッフィングは、セキュリティ侵害を受けたログイン情報をランダムに使用して、本当に動作するユーザーアカウントを見つけ出す攻撃です。このタイプの攻撃を検出するには、同じ `network.client.ip` から送信されてくる複数の `usr.id` の値を使用したログインをチェックします。
 
-Datadog offers pre-configured [Detection Rules][12] that scan your ingested logs in real time for common attacker techniques like the two mentioned above. If any log triggers one of these rules, Datadog automatically generates a [Security Signal][13]. This signal includes key data about the event, such as the type of attack detected and suggestions on how to respond and remedy the situation. You can view, filter, and sort all of your Security Signals in the explorer to triage them and see where to best focus your efforts.
+Datadog では、上記のような一般的な攻撃に対し、収集されたログをリアルタイムでスキャンすることのできる、事前設定済みの[検出ルール][12]を提供しています。このルールをトリガーするログがあると、Datadog により自動的に[セキュリティシグナル][13]が生成されます。このシグナルには、検出された攻撃の種類や対応方法、状況への対処方法など、イベントに関する重要なデータが含まれます。セキュリティシグナルは、エクスプローラーで表示、絞り込み、並べ替えることが可能で、情報をトリアージして重点的に作業をすべき点を確認できます。
 
 For signals triggered from the `Credential Stuffing Attack` Detection Rule, there is an [out-of-the-box runbook][14] available to help with response and remediation. This runbook guides you through investigating a potential credential stuffing attack and includes graphs of related logs. To use this runbook, save a copy and set the time frame, document your investigation in markdown, and share it with teammates [for commenting][15].
 
-### Use dashboards to investigate
+### 調査にはダッシュボードを使用
 
-Datadog provides out-of-the-box dashboards, such as the [IP investigation dashboard][16] and [user investigation dashboard][17]. These correlate key data from your authentication logs with relevant data from the rest of your environment to assist in your investigations.
+Datadog では、[IP 調査ダッシュボード][16]や[ユーザーアカウント調査ダッシュボード][17]など、すぐに使用できるダッシュボードを提供しています。ここでは、認証ログの重要なデータを環境内の他の関連データと結びつけ、調査に役立てることができます。
 
-For example, if a specific IP address or user is triggering multiple security signals, click on the IP address or user in a dashboard list or graph and select **View related Security Signals**. This populates all triggered security signals for that IP address or user in the Security Signals Explorer. If the data permits, this view is helpful when trying to correlate an IP address to a specific user, or vice versa. From here, you can examine and verify each rule to remediate attacks. Click on any rule and review the triage and response information in the **Rule Details** tab to properly assess and remediate the issue.
+たとえば、特定の IP アドレスまたはユーザーが複数のセキュリティシグナルをトリガーしている場合、ダッシュボードのリストまたはグラフでその IP アドレスまたはユーザーをクリックし、**View related Security Signals** を選択します。すると、該当する IP アドレスまたはユーザーにトリガーされたすべてのセキュリティシグナルがセキュリティシグナルエクスプローラーに表示されます。十分なデータがあれば、このビューで IP アドレスをユーザーに、またはその逆を関連付けることができます。そして、各ルールを調査・検証して攻撃に対処します。ルールをクリックして **Rule Details** タブでトリアージおよび対処に関する情報を確認し、この問題を適切に評価して対処を実行します。
 
-You can also create custom dashboards to visualize key authentication data like counts of logins by source and outcome. This provides you with a high-level view of activity across your entire user base and helps you see trends to identify suspicious spikes that you should investigate.
+カスタムダッシュボードを作成して、キーとなる認証データ（ソース別ログイン回数と結果など）を視覚化することも可能です。ユーザーベース全体のアクティビティを高いレベルで確認し、トレンドを理解して調査すべき疑わしいスパイクを検出することができます。
 
-### Use Log Rehydration&trade; for future investigations
+### Log Rehydration&trade; で今後の調査に利用
 
-Datadog ingests and analyzes [all of your logs][18], ensuring that you can detect threats across your entire environment. You can archive any logs that you [don't want to index][19], and then quickly [rehydrate them][20] in the future for investigations, audits, and compliance purposes.
+Datadog では、[すべてのログ][18]を取り込み分析し、環境全体において脅威を検出します。[インデックス化の必要のない][19]ログはアーカイブし、調査や監査、またはコンプライアンスのために必要になった時に、すばやく[リハイドレート][20]できます。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -18,7 +18,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - containers
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/podman/README.md"
 "display_on_public_website": true
@@ -59,19 +59,19 @@ This check reports a set of metrics on any running containers, regardless of the
 
 **NOTE**: The `container` check report standardizes metrics for all containers found on the system, regardless of the container runtime.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To monitor containers managed by [Podman][1], see the [installation instructions][3] for the [container Agent check][2].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 See [metadata.csv][4] for a list of metrics provided by this integration.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][1].
 

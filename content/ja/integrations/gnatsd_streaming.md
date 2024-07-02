@@ -23,7 +23,7 @@
   "support_email": "dev@goldstar.com"
 "categories":
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/gnatsd_streaming/README.md"
 "display_on_public_website": true
@@ -66,11 +66,11 @@ Get metrics from gnatsd_streaming service in real time to:
 - Visualize and monitor gnatsd_streaming states
 - Be notified about gnatsd_streaming failovers and events.
 
-## Setup
+## セットアップ
 
 The gnatsd_streaming check is not included in the [Datadog Agent][1] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the gnatsd_streaming check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -82,7 +82,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the gnatsd_s
 
 2. Configure your integration similar to core [integrations][3].
 
-### Configuration
+### 構成
 
 1. Edit the `gnatsd_streaming.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4] to start collecting your GnatsD streaming [metrics](#metrics).
    See the [sample gnatsd_streaming.d/conf.yaml][5] for all available configuration options.
@@ -97,23 +97,23 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the gnatsd_s
 
 The gnatsd_streaming check is compatible with all major platforms
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "gnatsd_streaming" >}}
 
 
 Nats Streaming Server metrics are tagged with names like "nss-cluster_id"
 
-### Events
+### イベント
 
 If you are running Nats Streaming Server in a Fault Tolerant group, a Nats Streaming Failover event is issued when the status of a server changes between `FT_STANDBY` and `FT_ACTIVE`.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "gnatsd_streaming" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

@@ -10,7 +10,7 @@
 "categories":
 - metrics
 - tracing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rum_angular/README.md"
 "display_on_public_website": true
@@ -64,7 +64,7 @@ Monitor your Angular applications from end-to-end by:
 
 
 
-## Setup
+## セットアップ
 
 ### Collect RUM events 
 
@@ -78,9 +78,9 @@ Your Angular application automatically sends traces to Datadog.
 
 To start forwarding your Angular application's logs to Datadog, see [JavaScript Log Collection][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Angular integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][4].
 
@@ -92,7 +92,7 @@ For more information about events and attributes, see [RUM Browser Data Collecte
 
 The Angular integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog Support][6]. 
 

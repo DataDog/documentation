@@ -6,7 +6,7 @@
 - issue tracking
 - provisioning
 - source control
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure DevOps metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_devops"
@@ -45,13 +45,13 @@
 - Track durations of completed builds and work items.
 - Keep track of work items and updates.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 In Datadog, click the install button in the [Azure DevOps integration tile][2].
 
-### Configuration
+### 構成
 
 Use a service hook to create events and metrics in Datadog in response to events from Azure DevOps services:
 
@@ -101,13 +101,13 @@ You can also use Datadog monitors as gates to [control release deployments][6] i
 
 To view the source code, see the [Azure Devops Monitor Gate Extension repo][9]."
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_devops" >}}
 
 
-### Events
+### イベント
 
 The Azure DevOps integration supports the following [service hook event types][11]:
 
@@ -116,11 +116,11 @@ The Azure DevOps integration supports the following [service hook event types][1
 - Code
 
 
-### Service Checks
+### サービスチェック
 
 The Azure DevOps integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][12].
 

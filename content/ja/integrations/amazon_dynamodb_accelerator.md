@@ -4,7 +4,7 @@
 - caching
 - cloud
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon DynamoDB Accelerator (DAX) metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_dynamodb_accelerator/"
@@ -29,9 +29,9 @@ Amazon DynamoDB Accelerator (DAX) is a DynamoDB-compatible caching service that 
 
 Enable this integration to see all your Amazon DynamoDB Accelerator (DAX) metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -41,21 +41,21 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
    under metric collection.
 2. Install the [Datadog - Amazon DynamoDB Accelerator integration][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_dynamodb_accelerator" >}}
 
 
-### Events
+### イベント
 
 The Amazon DynamoDB Accelerator (DAX) integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon DynamoDB Accelerator (DAX) integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

@@ -1,7 +1,7 @@
 ---
+title: Query to the Graph
 aliases:
-- /ja/dashboards/faq/query-to-the-graph
-title: クエリからグラフまで
+    - /dashboards/faq/query-to-the-graph
 ---
 
 このページでは主に、さまざまなグラフ設定を選択する際の参考になるように、クエリからグラフまで、Datadog のグラフ作成システムを実行する手順について説明します。
@@ -85,7 +85,7 @@ Datadog のバックエンドは、クエリに対応するソースごとにロ
 
 ## 空間集計に進む
 
-次に、さまざまなソースから取得したデータを 1 つの折れ線グラフにまとめます。
+Next, you can mix data from different sources into a single line.
 
 ソースごとに最大 300 個のポイントがあり、それぞれのポイントが 1 分を表します。
 この例では、Datadog は 1 分ごとにすべてのソースの平均を計算し、その結果、以下のようなグラフが作成されます。
@@ -158,13 +158,13 @@ Datadog は、次の 4 つの空間集計関数を提供しています。
 詳細については、[ StatsD メトリクスをカウントグラフで視覚化する方法][9]を参照してください。
 [StatsD/DogStatsD][10] のドキュメントもご覧いただけます。
 
-[1]: /ja/dashboards/#timeboards
-[2]: /ja/dashboards/#screenboards
-[3]: /ja/agent/
-[4]: /ja/metrics/custom_metrics/
-[5]: /ja/dashboards/querying/#aggregate-and-rollup
-[6]: /ja/dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
-[7]: /ja/dashboards/functions/rollup/
-[8]: /ja/metrics/guide/different-aggregators-look-same/
+[1]: /dashboards/#get-started
+[2]: /dashboards/#screenboards
+[3]: /agent/
+[4]: /metrics/custom_metrics/
+[5]: /dashboards/querying/#aggregate-and-rollup
+[6]: /dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs/
+[7]: /dashboards/functions/rollup/
+[8]: /metrics/guide/different-aggregators-look-same/
 [9]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[10]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
+[10]: /metrics/custom_metrics/dogstatsd_metrics_submission/

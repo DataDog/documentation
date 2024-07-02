@@ -3,15 +3,15 @@
 - "Source Control"
 - "Collaboration"
 - "issue tracking"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "See which commits and pull requests affect performance across your services."
+"description": "サービス全体のパフォーマンスに影響するコミットやプルリクエストを確認。"
 "doc_link": "https://docs.datadoghq.com/integrations/bitbucket/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/understand-code-changes-impact-system-performance-bitbucket-datadog/"
-  "tag": "Blog"
-  "text": "Bitbucket + Datadog: See how code changes impact your infrastructure"
+  "tag": "ブログ"
+  "text": "Bitbucket + Datadog: コード変更のインフラストラクチャーへの影響の確認方法"
 "git_integration_title": "bitbucket"
 "has_logo": true
 "integration_id": "bitbucket"
@@ -57,7 +57,7 @@ https://app.datadoghq.com/intake/webhook/bitbucket?api_key=<YOUR_DATADOG_API_KEY
 
 See Bitbucket's documentation to [Manage IP addresses][2] ensure you have the correct IP ranges allow-listed for outgoing connections so events are received as expected. 
 
-### Configuration
+### 構成
 
 The [Bitbucket integration][3] is configured through the integration tile.
 
@@ -77,21 +77,21 @@ Each entry in the integration tile is validated when you enter it.
 
 Overlay Bitbucket events on your dashboard graphs by typing `sources:bitbucket` in the top left search bar. See the example GIF at the top of this page.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Bitbucket integration does not include any metric.
 
-### Events
+### イベント
 
 Bitbucket events, including commits and pull requests from both Bitbucket Cloud and Server, are forwarded to Datadog.
 
-### Service Checks
+### サービスチェック
 
 The Bitbucket integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

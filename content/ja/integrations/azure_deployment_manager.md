@@ -2,7 +2,7 @@
 "categories":
 - cloud
 - azure
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Use Datadog to monitor Canary Deployments in Azure Deployment Manager."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_deployment_manager/"
@@ -31,13 +31,13 @@ Azure Deployment Manager (ADM) allows you to manage a staged roll-out for safely
 
 Use Datadog to create a health check for the Azure Deployment Manager, and to stop your deployment if issues are detected.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To use Datadog as a health check for ADM, you need an active Datadog account and an active instance of Azure Deployment Manager.
 
-### Configuration
+### 構成
 
 1. Start by setting up monitors in Datadog for your deployment. Start with a monitor for each region. Depending on the complexity of your application, you may want to have monitors for different parts of the deployment in each region. Completing the [Tutorial: Use Azure Deployment Manager with Resource Manager templates][1] may help you decide where to monitor. For monitor ideas, check out [the blog][2].
 2. If you end up with multiple monitors for each region, create a [composite monitor][3] for each rollout step or region. Each composite monitor is a logical combination of other monitors that together indicate the overall status of a deployment step.
@@ -187,21 +187,21 @@ Azure Deployment Manager parses the response using the regex provided in the tem
 
 If `overall_status: OK` is found, the check is considered healthy. If the status is `Warn`, `No Data`, or `Alert`, then the check is considered unhealthy, and Azure Deployment Manager stops the deployment.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Azure Deployment Manager does not report any metrics.
 
-### Events
+### イベント
 
 The Azure Deployment Manager does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Deployment Manager does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

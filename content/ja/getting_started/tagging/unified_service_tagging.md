@@ -53,7 +53,7 @@ With these three tags, you can:
 
 - Unified service tagging requires knowledge of configuring tags. If you are unsure of how to configure tags, read the [Getting Started with Tagging][1] and [Assigning Tags][5] documentation before proceeding to configuration.
 
-## Configuration
+## 構成
 
 To start configuring unified service tagging, choose your environment:
 
@@ -72,7 +72,7 @@ To setup unified service tagging in a containerized environment:
 
 3. Configure your environment that corresponds to your container orchestration service based on either full configuration or partial configuration as detailed below.
 
-#### Configuration
+#### 構成
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -322,11 +322,11 @@ To form a single point of configuration for all telemetry emitted directly from 
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
    {{% /tab %}}
 
-   {{% tab "RUM & Session Replay" %}}
+{{% tab "RUM とセッションリプレイ" %}}
 
    If you're using [connected RUM and traces][1], specify the browser application in the `service` field, define the environment in the `env` field, and list the versions in the `version` field of your initialization file.
 
-   When you [create a RUM application][2], confirm the `env` and `service` names.
+[RUM アプリケーションの作成][2]の際に、`env` と `service` の名前を確認します。
 
 
 [1]: /real_user_monitoring/platform/connect_rum_and_traces/
@@ -337,32 +337,32 @@ To form a single point of configuration for all telemetry emitted directly from 
 
    If you're using [connected Synthetic browser tests and traces][1], specify a URL to send headers to under the **APM Integration for Browser Tests** section of the [Integration Settings page][2].
 
-   You can use `*` for wildcards, for example: `https://*.datadoghq.com`.
+ワイルドカードとして `*` を使用することができます。例えば、`https://*.datadoghq.com` のように指定します。
 
 [1]: /synthetics/apm/
 [2]: https://app.datadoghq.com/synthetics/settings/integrations
    {{% /tab %}}
 
-   {{% tab "Custom Metrics" %}}
+{{% tab "カスタムメトリクス" %}}
 
-   Tags are added in an append-only fashion for [custom StatsD metrics][1]. For example, if you have two different values for `env`, the metrics are tagged with both environments. There is no order in which one tag overrides another of the same name.
+タグは、[カスタム StatsD メトリクス][1]の付加のみの方法で追加されます。たとえば、`env` に 2 つの異なる値がある場合、メトリクスは両方の環境でタグ付けされます。1 つのタグが同じ名前の別のタグをオーバーライドする順序はありません。
 
-   If your service has access to `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, then the DogStatsD client automatically adds the corresponding tags to your custom metrics.
+サービスが `DD_ENV`、`DD_SERVICE`、`DD_VERSION` にアクセスできる場合、DogStatsD クライアントは対応するタグをカスタムメトリクスに自動的に追加します。
 
-   **Note**: The Datadog DogStatsD clients for .NET and PHP do not support this functionality.
+**注**: .NET および PHP 用の Datadog DogStatsD クライアントは、この機能をサポートしていません。
 
 [1]: /metrics/
    {{% /tab %}}
 
-   {{% tab "System Metrics" %}}
+{{% tab "システムメトリクス" %}}
 
-   You can add `env` and `service` tags to your infrastructure metrics. In non-containerized contexts, tagging for service metrics is configured at the Agent level.
+インフラストラクチャーメトリクスには、`env` タグと `service` タグを追加することができます。コンテナ化されていないコンテキストでは、サービスメトリクスのタグ付けは Agent レベルで構成されます。
 
-   Because this configuration does not change for each invocation of a service's process, adding `version` is not recommended.
+この構成はサービスのプロセスを起動するたびに変更されるわけではないので、`version` を追加することは推奨されません。
 
-#### Single service per host
+#### ホスト毎の単一サービス
 
-Set the following configuration in the Agent's [main configuration file][1]:
+Agent の[メインコンフィギュレーションファイル][1]に、以下のコンフィギュレーションを適用します。
 
 ```yaml
 env: <ENV>
@@ -370,17 +370,17 @@ tags:
   - service:<SERVICE>
 ```
 
-This setup guarantees consistent tagging of `env` and `service` for all data emitted by the Agent.
+この設定により、Agent が送信するすべてのデータに対する `env` と `service` のタグ付けの一貫性が保証されます。
 
-#### Multiple services per host
+#### ホスト毎の複数のサービス
 
-Set the following configuration in the Agent's [main configuration file][1]:
+Agent の[メインコンフィギュレーションファイル][1]に、以下のコンフィギュレーションを適用します。
 
 ```yaml
 env: <ENV>
 ```
 
-To get unique `service` tags on CPU, memory, and disk I/O metrics at the process level, configure a [process check][2] in the Agent's configuration folder (for example, in the `conf.d` folder under `process.d/conf.yaml`):
+CPU、メモリ、ディスク I/O のメトリクスに一意の `service` タグをプロセスレベルで取得するには、Agent の構成フォルダ (例えば、`process.d/conf.yaml` 下の `conf.d` フォルダ) で[プロセスチェック][2]を構成します。
 
 ```yaml
 init_config:
@@ -395,17 +395,17 @@ instances:
       service: nginx-web-app
 ```
 
-**Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended to configure the `service` tag only in the configuration of the process check.
+**注**: Agent のメインコンフィギュレーションファイルで既に `service` タグをグローバルに設定している場合は、プロセスのメトリクスが 2 つのサービスにタグ付けされます。これによってメトリクスの解釈に相違が生じることがあるため、`service` タグはプロセスチェックのコンフィギュレーションのみで構成することをお勧めします。
 
 [1]: /agent/configuration/agent-configuration-files
 [2]: /integrations/process
     {{% /tab %}}
     {{< /tabs >}}
 
-### Serverless environment
+### サーバーレス環境
 
-For more information about AWS Lambda functions, see [how to connect your Lambda telemetry using tags][15].
-## Further Reading
+AWS Lambda 関数については、[タグを使った Lambda のテレメトリー接続方法][15]を参照してください。
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

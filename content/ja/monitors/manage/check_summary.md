@@ -15,26 +15,26 @@ further_reading:
   text: Manage your monitors
 ---
 
-## Overview
+## 概要
 
-Datadog checks report a status on each run. The [check summary page][1] displays your checks reported in the past day. Potential statuses are:
+Datadog チェックの実行ごとにステータスを報告します。過去 24 時間に報告されたチェックが[チェックのサマリーページ][1]に表示されます。報告されるステータスには以下の 4 つがあります。
 
 - `OK`
 - `WARNING`
 - `CRITICAL`
 - `UNKNOWN`
 
-## Search
+## 検索
 
-To find a specific check, use the `filter checks` search box on the check summary page. Click on a check name to see the statuses and tags associated with the check. Filter the list further by using the `filter checks` search box inside the check panel:
+特定のチェックを探すには、サマリーページで `filter checks` 検索ボックスを使用します。チェック名をクリックして、そのチェックに紐づくステータスとタグを確認します。一覧をさらに絞り込むには、チェックパネル内の `filter checks` 検索ボックスを使用します。
 
-{{< img src="monitors/check_summary/check_search.png" alt="Check details" style="width:100%;">}}
+{{< img src="monitors/check_summary/check_search.png" alt="チェック詳細" style="width:100%;">}}
 
-## Dashboards
+## ダッシュボード
 
-To view your check status on a dashboard, utilize the [Check Status Widget][2].
+ダッシュボードにチェックステータスを表示するには、[チェックステータスウィジェット][2]を使用します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -11,13 +11,13 @@ aliases:
 - /monitors/faq/how-do-i-monitor-ephemeral-servers-for-reboots
 ---
 
-Ephemeral environments spin up and terminate hosts constantly, which can make it challenging to distinguish new hosts from rebooted hosts.
+エフェメラル環境では、ホストのスピンアップとターミネーションを常に繰り返すため、新しいホストと再起動したホストを区別するのが難しい場合があります。
 
-You can use a metric monitor on the `system.uptime` metric can to address this. The uptime metric is an ever increasing timer which resets to 0 when a host boots up. You can use the `diff()` function with the metric to distinguish between a new server, which has an uptime of 0 (new server), and a rebooted server, which will show a change (diff) from a running uptime value to a 0.
+この問題に対処するために、`system.uptime` メトリクスのメトリクスモニターを使用することができます。uptime メトリクスは増え続けるタイマーで、ホストが起動すると 0 にリセットされます。このメトリクスで `diff()` 関数を使用すると、アップタイムが 0 の新しいサーバーと、実行中のアップタイム値から 0 への変化 (diff) を示す再起動したサーバーを区別することができます。
 
-The example shown below captures how you can set this up:
+以下に示す例は、この設定方法をキャプチャしたものです。
 
-{{< img src="monitors/guide/ephemeral_set_up.png" alt="ephemeral_set_up" >}}
+{{< img src="monitors/guide/ephemeral_set_up.png" alt="エフェメラルサーバー用の設定" >}}
 
 
 {{< partial name="whats-next/whats-next.html" >}}

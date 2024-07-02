@@ -8,101 +8,101 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-## Overview
+## 概要
 
-This guide describes how to programmatically set up pipeline executions in CI Visibility and defines the types of pipeline execution that CI Visibility supports. 
+このガイドでは、CI Visibility でパイプライン実行をプログラムで設定する方法を説明し、CI Visibility がサポートするパイプライン実行のタイプを定義します。
 
-This guide applies to pipelines created using the [public CI Visibility Pipelines API][3]. Integrations with other CI providers may vary.
+このガイドは、[公開 CI Visibility Pipelines API][3] を使用して作成されたパイプラインに適用されます。他の CI プロバイダとのインテグレーションは異なる場合があります。
 
-## Data model
+## データモデル
 
 Pipeline executions are modeled as traces, similar to an [APM distributed trace][1], where spans represent the execution of different parts of the pipeline. The CI Visibility data model for representing pipeline executions consists of four levels:
 
-| Level Name | Description |
+| レベル名 | 説明 |
 | ---------- | ----------- |
-| Pipeline (required)  | The top-level root span that contains all other levels as children. It represents the overall execution of a pipeline from start to finish. This level is sometimes called `build` or `workflow` in some CI providers. |
-| Stage      | Serves as a grouping of jobs under a user-defined name. Some CI providers do not have this level. |
-| Job        | The smallest unit of work where commands are executed. All tasks at this level should be performed on a single node. |
-| Step       | In some CI providers, this level represents a shell script or an action executed within a job. |
+| パイプライン (必須)  | 他のすべてのレベルを子として含む、最上位のルートスパン。パイプラインの開始から終了までの全体的な実行を表します。CI プロバイダーによっては、このレベルを `build` や `workflow` と呼ぶこともあります。 |
+| ステージ      | Serves as a grouping of jobs under a user-defined name. Some CI providers do not have this level. |
+| ジョブ        | コマンドが実行される最小の作業単位。このレベルのタスクはすべて 1 つのノードで実行する必要があります。 |
+| 手順       | CI プロバイダーによっては、このレベルはシェルスクリプトやジョブ内で実行されるアクションを表します。 |
 
-When a pipeline, stage, job, or step finishes, execution data is sent to Datadog. To set up Pipeline Visibility, see the list of [supported CI providers][2]. If your CI provider or workflow is not supported, you can use the [public API endpoint][3] to send your pipeline executions to CI Visibility.
+パイプライン、ステージ、ジョブ、ステップが終了すると、実行データが Datadog に送信されます。Pipeline Visibility を設定するには、[サポートされている CI プロバイダー][2]のリストを参照してください。CI プロバイダーまたはワークフローがサポートされていない場合は、[公開 API エンドポイント][3]を使用してパイプラインの実行データを CI Visibility に送信できます。
 
-{{< img src="ci/ci-pipeline-execution.png" alt="Example of a pipeline execution trace" style="width:100%;">}}
+{{< img src="ci/ci-pipeline-execution.png" alt="パイプライン実行トレースの例" style="width:100%;">}}
 
 Stages, jobs, and steps are expected to have the exact same pipeline name as their parent pipeline. In the case of a mismatch, some pipelines may be missing stage, job, and step information. For example, missing jobs in the job summary tables.
 
-### Pipeline unique IDs
+### パイプライン固有 ID
 
 All pipeline executions within a level must have an unique identifier. For example, a pipeline and a job may have the same unique ID, but not two pipelines.
 
 When sending repeated IDs with different timestamps, the user interface may exhibit undesirable behavior. For example, flame graphs may display span tags from a different pipeline execution. If duplicate IDs with the same timestamps are sent, only the values of the last pipeline execution received are stored.
 
-## Pipeline execution types
+## パイプライン実行タイプ
 
-### Normal run
+### 通常の実行
 
-The normal run of a pipeline execution follows the flow depicted below:
+パイプラインの通常の実行は、以下のフローに従います。
 
-{{< img src="ci/pipeline-normal-execution-flow.png" alt="Depiction of a normal pipeline execution" style="width:100%;">}}
+{{< img src="ci/pipeline-normal-execution-flow.png" alt="通常のパイプライン実行の描写" style="width:100%;">}}
 
-Depending on the provider, some levels may be missing. For example, stages may not exist, and jobs may run in parallel or sequence, or a combination of both.
+プロバイダーによっては、いくつかのレベルが欠落している場合があります。例えば、ステージは存在しないかもしれませんし、ジョブは並行して実行されるかもしれませんし、順番に実行されるかもしれません。
 
-After the completion of each component, a payload must be sent to Datadog with all the necessary data to represent the execution. Datadog processes this data, stores it as a pipeline event, and displays it in [CI Visibility][2]. Pipeline executions must end before sending them to Datadog.
+各コンポーネントの完了後、実行を表すために必要な全てのデータを含むペイロードを Datadog に送信する必要があります。Datadog はこのデータを処理し、パイプラインイベントとして保存し、[CI Visibility][2] に表示します。パイプラインの実行は Datadog に送信する前に終了する必要があります。
 
-### Full retries
+### 完全なリトライ
 
 Full retries of a pipeline must have different pipeline unique IDs. 
 
 In the public API endpoint, you can populate the `previous_attempt` field to link to previous retries. Retries are treated as separate pipeline executions in Datadog, and the start and end time should only encompass that retry.
 
-### Partial retries
+### 部分的なリトライ
 
-When retrying a subset of jobs within a pipeline, you must send a new pipeline event with a new pipeline unique ID. The payload for any new jobs must be linked to the new pipeline unique ID. To link them to the previous retry, add the `previous_attempt` field. 
+パイプライン内のジョブのサブセットをリトライする場合は、新しいパイプライン固有 ID を持つ新しいパイプラインイベントを送信する必要があります。新しいジョブのペイロードは、新しいパイプライン固有 ID にリンクされていなければなりません。前回のリトライとリンクさせるには、`previous_attempt` フィールドを追加します。
 
 Partial retries are treated as separate pipelines as well. The start and end time must not include the time of the original retry. For a partial retry, do not send payloads for jobs that ran in the previous attempt. Also, set the `partial_retry` field to `true` on partial retries to exclude them from aggregation when calculating run times.
 
-For example, a pipeline named `P` has three different jobs, namely `J1`, `J2`, and `J3`, executed sequentially. In the first run of `P`, only `J1` and `J2` are executed, and `J2` fails. 
+例えば、`P` という名前のパイプラインには `J1`、`J2`、`J3` という 3 つのジョブがあり、順次実行されます。`P` の最初の実行では、`J1` と `J2` のみが実行され、`J2` は失敗します。
 
-Therefore, you need to send a total of three payloads:
+したがって、合計 3 つのペイロードを送信する必要があります。
 
-1. Job payload for `J1`, with ID `J1_1` and pipeline ID `P_1`.
-2. Job payload for `J2`, with ID `J2_1` and pipeline ID `P_1`.
-3. Pipeline payload for `P`, with ID `P_1`.
+1. `J1` のジョブペイロード。ID は `J1_1`、パイプライン ID は `P_1`。
+2. `J2` のジョブペイロード。ID は `J2_1`、パイプライン ID は `P_1`。
+3. `P` のパイプラインペイロード。ID は `P_1`。
 
-Suppose there is a partial retry of the pipeline starting from `J2`, where all the remaining jobs succeed. 
+`J2` から始まるパイプラインの部分的なリトライがあり、残りのジョブがすべて成功したとします。
 
-You need to send three additional payloads:
+さらに 3 つのペイロードを送信する必要があります。
 
-1. Job payload for `J2`, with ID `J2_2` and pipeline ID `P_2`.
-2. Job payload for `J3`, with ID `J3_1` and pipeline ID `P_2`.
-3. Pipeline payload for `P`, with ID `P_2`.
+1. `J2` のジョブペイロード。ID は `J2_2`、パイプライン ID は `P_2`。
+2. `J3` のジョブペイロード。ID は `J3_1`、パイプライン ID は `P_2`。
+3. `P` のパイプラインペイロード。ID は `P_2`。
 
 The actual values of the IDs are not important. What matters is that they are correctly modified based on the pipeline run as specified above.
 
-### Blocked pipelines
+### ブロッ クされたパイプライン
 
-If a pipeline is indefinitely blocked due to requiring manual intervention, a pipeline event payload must be sent as soon as the pipeline reaches the blocked state. The pipeline status must be set to `blocked`. 
+パイプラインが手動介入を必要とするために無期限にブロックされる場合、パイプラインがブロッ クされた状態になるとすぐにパイプラインイベントペイロードを送信しなければなりません。パイプラインのステータスは `blocked` に設定されていなければなりません。
 
-{{< img src="ci/pipeline-blocked-pipeline-execution.png" alt="Flow of a blocked pipeline execution" style="width:100%;">}}
+{{< img src="ci/pipeline-blocked-pipeline-execution.png" alt="ブロックされたパイプライン実行の流れ" style="width:100%;">}}
 
 The remaining pipeline data must be sent in separate payloads with a different pipeline unique ID. In the second pipeline, you can set `is_resumed` to `true` to signal that the execution was resumed from a blocked pipeline.
 
-### Downstream pipelines
+### ダウンストリームパイプライン
 
-If a pipeline is triggered as a child of another pipeline, the `parent_pipeline` field should be populated with details of the parent pipeline.
+パイプラインが他のパイプラインの子としてトリガーされた場合、`parent_pipeline` フィールドには親パイプラインの詳細を入力する必要があります。
 
-### Manual pipelines
+### 手動パイプライン
 
-If a pipeline is triggered manually, the `is_manual` field must be set to true.
+パイプラインが手動でトリガーされる場合、`is_manual` フィールドを true に設定する必要があります。
 
-## Git information
+## Git 情報
 
 Providing Git information of the commit that triggered the pipeline execution is strongly encouraged. Pipeline executions without Git information don't appear on the [Recent Code Changes page][4]. At a minimum, the repository URL, commit SHA, and author email are required. For more information, see the [public API endpoint specification][3].
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

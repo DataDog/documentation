@@ -25,7 +25,7 @@
 "categories":
 - containers
 - kubernetes
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/container/README.md"
 "display_on_public_website": true
@@ -67,9 +67,9 @@ This check reports a set of metrics about any running containers, regardless of 
 **NOTE**: The `container` check is different from the `containerd` check. The `container` checks report standardized metrics for all containers found on the system, regardless of the container runtime.
 The `containerd` is dedicated to `containerd` runtime and publishes metrics in the `containerd.*` namespace.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Container is a core Datadog Agent check and is automatically activated if any supported container runtime is detected.
 Configuring access to supported container runtimes (Docker, containerd) may be required depending on your environment.
@@ -78,7 +78,7 @@ Configuring access to supported container runtimes (Docker, containerd) may be r
 
 The `container` check requires some folders to be mounted to allow for automatic activation. This is handled by the official Helm Chart, the Datadog Operator, and as documented set ups for Kubernetes, Docker, ECS, and ECS Fargate.
 
-### Configuration
+### 構成
 
 The `container` check does not expose any specific configuration settings. To customize common fields or to force the activation of the `container` check, follow these steps:
 
@@ -93,13 +93,13 @@ Some metrics may not be available depending on your environment (Linux / Windows
 
 [Run the Agent's `status` subcommand][1] and look for `container` under the **Checks** section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 See [metadata.csv][2] for a list of metrics provided by this integration.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

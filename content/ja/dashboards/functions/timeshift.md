@@ -1,11 +1,11 @@
 ---
+title: Timeshift
 aliases:
-- /ja/graphing/functions/timeshift/
+    - /graphing/functions/timeshift/
 further_reading:
 - link: /dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/
-  tag: よくあるご質問
-  text: 以前の値から現在の値への変化率をグラフ化する
-title: タイムシフト
+  tag: FAQ
+  text: Graph the percentage change between an earlier value and a current value.
 ---
 
 ここでは、`<TIMEPERIOD>_before()` という形式の関数について説明します。これらの関数は、対応する期間の値をグラフに表示します。この値自体に大きな意味はありませんが、現在値と組み合わせることで、アプリケーションのパフォーマンスについて有益なインサイトを得られることがあります。
@@ -52,7 +52,7 @@ timeshift(avg:system.load.1{*}, -1209600)
 
 {{< img src="dashboards/functions/timeshift/simple_week_before_example.png" alt="week before の例" style="width:80%;">}}
 
-### 1 か月前
+## 1 か月前
 
 | 関数         | 説明                                                                                | 例                          |
 |:-----------------|:-------------------------------------------------------------------------------------------|:---------------------------------|
@@ -61,6 +61,19 @@ timeshift(avg:system.load.1{*}, -1209600)
 例として、`aws.ec2.cpuutilization` の `month_before()` 値を細実線で示します。
 
 {{< img src="dashboards/functions/timeshift/simple_month_before_example.png" alt="month before の例" style="width:80%;">}}
+
+
+## Calendar shift
+
+<div class="alert alert-info">The calendar shift feature is only available for Cloud Cost data sources on <em>private</em> dashboards.</div>
+
+| 関数           | 説明                                                                                   | 例                            |
+|:-------------------|:----------------------------------------------------------------------------------------------|:-----------------------------------|
+| `calendar_shift()` | Graph values from the previous day, week, or month from the current timestamp for the metric. | `calendar_shift(<METRIC_NAME>{*})` |
+
+To access the calendar_shift() function click the **Add function** button, select **Timeshift > Month before**. The calendar shift allows you to compare the same metric across equivalent timeframes. Here is an example of cloud cost metric `aws.cost.net.amortized` with the calendar_shift() value from two weeks ago compared to the current value.
+
+{{< img src="dashboards/functions/timeshift/calendar_shift_two_weeks.png" alt="Example of a calendar_shift() function used to compare the `aws.cost.net.amortized ` metric value from two weeks ago and the present" style="width:80%;" >}}
 
 ## その他の関数
 
@@ -77,6 +90,6 @@ timeshift(avg:system.load.1{*}, -1209600)
     {{< nextlink href="/dashboards/functions/smoothing" >}}スムーシング: メトリクスの変動を滑らかにします。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

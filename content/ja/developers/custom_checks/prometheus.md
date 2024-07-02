@@ -1,6 +1,5 @@
 ---
 title: Custom OpenMetrics Check
-kind: documentation
 further_reading:
 - link: /agent/kubernetes/prometheus
   tag: Documentation
@@ -16,29 +15,29 @@ aliases:
   - /developers/prometheus/
 ---
 
-## Overview
+## 概要
 
-This page dives into the `OpenMetricsBaseCheckV2` interface for more advanced usage, including an example of a simple check that collects timing metrics and status events from [Kong][1]. For details on configuring a basic OpenMetrics check, see [Kubernetes Prometheus and OpenMetrics metrics collection][2].
+ここでは、[Kong][1] からタイミングメトリクスとステータスイベントを収集する簡単なチェックを例に挙げて、`OpenMetricsBaseCheckV2` インターフェイスの高度な使用方法について説明します。基本的な OpenMetrics チェックの構成について、詳しくは [Kubernetes Prometheus および OpenMetrics メトリクスの収集][2]を参照してください。
 
-**Note**: `OpenMetricsBaseCheckV2` is available in Agent v`7.26.x`+ and requires Python 3.
+**注**: `OpenMetricsBaseCheckV2` は Agent v`7.26.x`+ で利用可能で、Python 3 が必要です。
 
 <div class="alert alert-info">
-If you are looking for the legacy implementation or <code>OpenMetricsBaseCheck</code> interface custom check guide, please see <a href="https://docs.datadoghq.com/developers/faq/legacy-openmetrics/">Custom Legacy OpenMetrics Check</a>.
+レガシー実装または <code>OpenMetricsBaseCheck</code> インターフェイスのカスタムチェックガイドをお探しの場合は、<a href="https://docs.datadoghq.com/developers/faq/legacy-openmetrics/">Custom Legacy OpenMetrics Check</a> をご覧ください。
 </div>
 
-## Advanced usage: OpenMetrics check interface
+## 高度な使用方法: OpenMetrics チェックインターフェイス
 
-If you have more advanced needs than the generic check, such as metrics preprocessing, you can write a custom `OpenMetricsBaseCheckV2`. It's the [base class][3] of the generic check, and it provides a structure and some helpers to collect metrics, events, and service checks exposed with Prometheus. The minimal configuration for checks based on this class include:
+汎用のチェックより高度なチェック (メトリクスの前処理など) が必要な場合は、カスタム `OpenMetricsBaseCheckV2` を作成してください。これは汎用チェックの[基本クラス][3]です。Prometheus で公開されるメトリクス、イベント、サービスチェックを収集するための構造とヘルパーを提供します。このクラスに基づいてチェックを構成するには、少なくとも以下が必要です。
 
-- Creating a default instance with `namespace` and `metrics` mapping.
-- Implementing the `check()` method AND/OR:
-- Creating a method named after the OpenMetric metric handled (see `self.prometheus_metric_name`).
+- `namespace` と `metrics` マッピングを使用したデフォルトインスタンスの作成。
+- `check()` メソッドの実装および/または
+- 処理される OpenMetric メトリクスの名前を付けたメソッドの作成 (例: `self.prometheus_metric_name`)
 
-See this [example in the Kong integration][4] where the Prometheus metric `kong_upstream_target_health` value is used as service check.
+Prometheus メトリクスである `kong_upstream_target_health` の値をサービスチェックとして使用しているこの [Kong インテグレーションの例][4]をご覧ください。
 
-## Writing a custom OpenMetrics check
+## カスタム OpenMetrics チェックの書き方
 
-This is a simple example of writing a Kong check to illustrate usage of the `OpenMetricsBaseCheckV2` class. The example below replicates the functionality of the following generic Openmetrics check:
+ここでは、簡単な Kong チェックの記述例を示して、`OpenMetricsBaseCheckV2` クラスの使用方法について説明します。次の例は、以下の汎用 Openmetrics チェックの機能を再現します。
 
 ```yaml
 instances:
@@ -58,25 +57,25 @@ instances:
       - kong_stream_status: stream.status
 ```
 
-### Configuration
+### 構成
 
 <div class="alert alert-warning">
-The names of the configuration and check files must match. If your check is called <code>mycheck.py</code> your configuration file <em>must</em> be named <code>mycheck.yaml</code>.
+構成とチェックファイルは、名前が一致していなければなりません。チェックが <code>mycheck.py</code> という名前なら、構成ファイルは <code>mycheck.yaml</code> という名前にしなければなりません。
 </div>
 
-Configuration for an Openmetrics check is almost the same as a regular [Agent check][5]. The main difference is to include the variable `openmetrics_endpoint` in your `check.yaml` file. This goes into `conf.d/kong.yaml`:
+Openmetrics チェックの構成は、標準の [Agent チェック][5]とほぼ同じです。主な違いは、`check.yaml` ファイルに変数 `openmetrics_endpoint` を入れることです。`conf.d/kong.yaml` は以下のようになります。
 
 ```yaml
 init_config:
 
 instances:
-    # URL of the Prometheus metrics endpoint
+    # Prometheus のメトリクスエンドポイントの URL
   - openmetrics_endpoint: http://localhost:8001/status/
 ```
 
-### Writing the check
+### チェックの書き方
 
-All OpenMetrics checks inherit from the [`OpenMetricsBaseCheckV2` class][6]:
+すべての OpenMetrics チェックは、[`OpenMetricsBaseCheckV2` クラス][6]を継承します。
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheckV2
@@ -84,9 +83,9 @@ from datadog_checks.base import OpenMetricsBaseCheckV2
 class KongCheck(OpenMetricsBaseCheckV2):
 ```
 
-## Define the integration namespace
+## インテグレーションネームスペースの定義
 
-The value of `__NAMESPACE__` will prefix all metrics and service checks collected by this integration.
+`__NAMESPACE__` の値は、このインテグレーションによって収集されたすべてのメトリクスとサービスチェックの前に置かれます。
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheckV2
@@ -96,9 +95,9 @@ class KongCheck(OpenMetricsBaseCheckV2):
 
 ```
 
-#### Define a metrics mapping
+#### メトリクスマッピングの定義
 
-The [metrics][7] mapping allows you to rename the metric name and override the native metric type.
+[メトリクス][7]のマッピングでは、メトリクス名の変更とネイティブメトリクスタイプのオーバーライドが可能です。
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheckV2
@@ -125,10 +124,10 @@ class KongCheck(OpenMetricsBaseCheckV2):
         }
 ```
 
-#### Define a default instance
+#### デフォルトインスタンスの定義
 
-A default instance is the basic configuration used for the check. The default instance should override `metrics`, and `openmetrics_endpoint`.
-[Override][8] the `get_default_config` in OpenMetricsBaseCheckV2 with your default instance.
+デフォルトのインスタンスは、チェックに使用される基本的なコンフィギュレーションです。デフォルトのインスタンスは、`metrics` と `openmetrics_endpoint` をオーバーライドする必要があります。
+OpenMetricsBaseCheckV2 の `get_default_config` を、デフォルトのインスタンスで[オーバーライド][8]します。
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheckV2
@@ -159,11 +158,11 @@ class KongCheck(OpenMetricsBaseCheckV2):
 ```
 
 
-#### Implementing the check method
+#### check メソッドの実装
 
-If you want to implement additional features, override the `check()` function.
+さらに機能を実装したい場合は、`check()` 関数をオーバーライドします。
 
-From `instance`, use `endpoint`, which is the Prometheus or OpenMetrics metrics endpoint to poll metrics from:
+`instance` から、メトリクスをポーリングするための Prometheus または OpenMetrics のメトリクスエンドポイント `endpoint` を使用します。
 
 ```python
 def check(self, instance):
@@ -171,9 +170,9 @@ def check(self, instance):
 ```
 
 
-##### Exceptions
+##### 例外
 
-If a check cannot run because of improper configuration, a programming error, or because it could not collect any metrics, it should raise a meaningful exception. This exception is logged and is shown in the Agent [status command][9] for debugging. For example:
+不正なコンフィギュレーション、プログラミングエラー、メトリクスを収集できないなどの理由でチェックを実行できない場合は、わかりやすい例外を生成する必要があります。デバッグのために、この例外はログに記録され、Agent の[ステータスコマンド][9]に表示されます。以下に例を示します。
 
     $ sudo /etc/init.d/datadog-agent info
 
@@ -185,7 +184,7 @@ If a check cannot run because of improper configuration, a programming error, or
           - instance #0 [ERROR]: Unable to find openmetrics_endpoint in config file.
           - Collected 0 metrics & 0 events
 
-Improve your `check()` method with `ConfigurationError`:
+`ConfigurationError` を使用して `check()` メソッドを補強します。
 
 ```python
 from datadog_checks.base import ConfigurationError
@@ -196,7 +195,7 @@ def check(self, instance):
         raise ConfigurationError("Unable to find openmetrics_endpoint in config file.")
 ```
 
-Then as soon as you have data available, flush:
+次に、データを取得するとすぐにフラッシュします。
 
 ```python
 
@@ -208,7 +207,7 @@ def check(self, instance):
     super().check(instance)
 ```
 
-### Putting it all together
+### ここまでのまとめ
 
 ```python
 from datadog_checks.base import OpenMetricsBaseCheckV2
@@ -247,25 +246,24 @@ class KongCheck(OpenMetricsBaseCheckV2):
 
 ```
 
-## Going further
+## さらに改良するには
 
-To read more about Prometheus and OpenMetrics base integrations, see the integrations [developer docs][10].
+Prometheus および OpenMetrics の基本インテグレーションに関する詳細は、インテグレーションの[デベロッパ用ドキュメント][10]をご参照ください。
 
-To see all configuration options available in Openmetrics, see the [conf.yaml.example][11].
-You can improve your OpenMetrics check by including default values for additional configuration options:
+Openmetrics で利用できるすべてのコンフィギュレーションオプションを見るには、[conf.yaml.example][11] を参照してください。
+追加のコンフィギュレーションオプションにデフォルト値を含めることで、OpenMetrics のチェック機能を向上させることができます。
 
 `exclude_metrics`
-: Some metrics are ignored because they are duplicates or introduce a high cardinality. Metrics included in this list are silently skipped without an `Unable to handle metric` debug line in the logs.
-In order to exclude all metrics but the ones matching a specific filter, you can use a negative lookahead regex like: ` - ^(?!foo).*$`
+: 一部のメトリクスは、重複していたり、高いカーディナリティをもたらすため、無視されます。このリストに含まれるメトリクスは、ログに `Unable to handle metric` というデバッグ行が表示されることなく、静かにスキップされます。
+特定のフィルターにマッチするもの以外のすべてのメトリクスを除外するには、` - ^(?!foo).*$` のような負のルックアヘッド正規表現を使用します。
 
 `share_labels`
-: If the `share_labels` mapping is provided, the mapping allows for the sharing of labels across multiple metrics. The keys represent the
-exposed metrics from which to share labels, and the values are mappings that configure the sharing behavior. Each mapping must have at least one of the following keys: `labels`, `match`, or `values`.
+: `share_labels` マッピングが提供された場合、複数のメトリクスでラベルを共有することができます。キーはラベルを共有する公開メトリクスを表し、値は共有の動作を構成するマッピングです。各マッピングは、`labels`、`match`、`values` のキーのうち少なくとも 1 つを持つ必要があります。
 
 `exclude_labels`
-: `exclude_labels` is an array of labels to exclude. Those labels are not added as tags when submitting the metric.
+: `exclude_labels` は、除外するラベルの配列です。除外されるラベルは、メトリクスの送信時にタグとして追加されません。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

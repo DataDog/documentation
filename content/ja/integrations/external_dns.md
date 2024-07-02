@@ -23,7 +23,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/external_dns/README.md"
 "display_on_public_website": true
@@ -96,7 +96,7 @@ metadata:
 
 [Run the Agent's `status` subcommand][5] and look for `external_dns` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "external_dns" >}}

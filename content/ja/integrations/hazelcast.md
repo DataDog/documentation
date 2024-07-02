@@ -29,7 +29,7 @@
 - data stores
 - caching
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/hazelcast/README.md"
 "display_on_public_website": true
@@ -67,42 +67,42 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Hazelcast][1] v4.0+.
+このチェックは [Hazelcast][1] v4.0+ を監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Hazelcast check is included in the [Datadog Agent][2] package.
-No additional installation is needed on your server.
+Hazelcast チェックは [Datadog Agent][2] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `hazelcast.d/conf.yaml` file, in the `conf.d/` folder at the root of your
-   Agent's configuration directory to start collecting your Hazelcast performance data.
-   See the [sample hazelcast.d/conf.yaml][1] for all available configuration options.
+1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `hazelcast.d/conf.yaml` ファイルを編集して、
+   Hazelcast パフォーマンスデータの収集を開始します。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hazelcast.d/conf.yaml][1] を参照してください。
 
-   This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in [the status page][2].
-   You can specify the metrics you are interested in by editing the configuration below.
-   To learn how to customize the metrics to collect, see the [JMX Checks documentation][3] for more detailed instructions.
-   If you need to monitor more metrics, contact [Datadog support][4].
+   このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、[ステータスページ][2]に表示されます。
+   以下で説明する構成を編集することで、関心があるメトリクスを指定できます。
+   収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][3]で詳細な手順を参照してください。
+   制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][4]までお問い合わせください。
 
-2. [Restart the Agent][5].
+2. [Agent を再起動します][5]。
 
-##### Log collection
+##### ログ収集
 
-1. Hazelcast supports many different [logging adapters][6]. Here is an example of a `log4j2.properties` file:
+1. Hazelcast は数々の多様な[ロギングアダプター][6]をサポートします。これは、`log4j2.properties` ファイルの例です。
 
    ```text
    rootLogger=file
@@ -139,21 +139,21 @@ To configure this check for an Agent running on a host:
    #log4j.logger.com.hazelcast.hibernate=debug
    ```
 
-2. By default, Datadog's integration pipeline supports the following conversion [pattern][7]:
+2. Datadog のインテグレーションパイプラインは、デフォルトで次の変換[パターン][7]をサポートします。
 
    ```text
    %d{yyyy-MM-dd HH:mm:ss} [%thread] %level{length=10} %c{1}:%L - %m%n
    ```
 
-    Clone and edit the [integration pipeline][8] if you have a different format.
+    フォーマットが異なる場合は、[インテグレーションパイプライン][8]を複製して編集してください。
 
-3. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+3. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-4. Add the following configuration block to your `hazelcast.d/conf.yaml` file. Change the `path` and `service` parameter values based on your environment. See the [sample hazelcast.d/conf.yaml][1] for all available configuration options.
+4. 次のコンフィギュレーションブロックを `hazelcast.d/conf.yaml` ファイルに追加します。環境に基づいて、`path` パラメーターと `service` パラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル hazelcast.d/conf.yaml][1] を参照してください。
 
    ```yaml
    logs:
@@ -167,7 +167,7 @@ To configure this check for an Agent running on a host:
            pattern: \d{4}\.\d{2}\.\d{2}
    ```
 
-5. [Restart the Agent][5].
+5. [Agent を再起動します][5]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/hazelcast/datadog_checks/hazelcast/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
@@ -178,30 +178,30 @@ To configure this check for an Agent running on a host:
 [7]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
 [8]: https://docs.datadoghq.com/logs/processing/#integration-pipelines
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-##### Metric collection
+##### メトリクスの収集
 
-For containerized environments, see the [Autodiscovery with JMX][1] guide.
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker log collection][2].
+Datadog Agent では、ログの収集がデフォルトで無効になっています。これを有効にするには、[Docker ログの収集][2]を参照してください。
 
-| Parameter      | Value                                              |
+| パラメーター      | 値                                              |
 | -------------- | -------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "hazelcast", "service": "<SERVICE_NAME>"}` |
+| `<LOG_CONFIG>` | `{"source": "hazelcast", "service": "<サービス名>"}` |
 
 [1]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [2]: https://docs.datadoghq.com/agent/docker/log/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][3] and look for `hazelcast` under the **JMXFetch** section:
+[Agent の status サブコマンドを実行][3]し、**JMXFetch** セクションで `hazelcast` を探します。
 
 ```text
 ========
@@ -217,19 +217,19 @@ JMXFetch
       status : OK
 ```
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "hazelcast" >}}
 
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "hazelcast" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][4].
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
 

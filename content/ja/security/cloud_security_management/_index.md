@@ -54,24 +54,24 @@ cascade:
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
-CSM leverages the Datadog Agent and platform-wide cloud integrations and includes:
+CSM は、Datadog Agent とプラットフォーム全体のクラウドインテグレーションを活用し、以下を備えています。
 
-- [**Threats**][1]: Monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure.
-- [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
-- [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
-- [**Vulnerabilities**][9]: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization's containers and hosts.
+- [**Threats**][1]: 環境全体のファイル、ネットワーク、プロセスのアクティビティを監視し、インフラストラクチャーへの脅威をリアルタイムで検出します。
+- [**Misconfigurations**][2]: 本番環境のセキュリティ衛生およびコンプライアンスポスチャを追跡し、監査証拠の収集を自動化し、攻撃に対する脆弱性を残す誤構成を修正することができます。
+- [**Identity Risks**][8]: 組織の AWS IAM リスクを詳細に視覚化し、アイデンティティリスクの継続的な検出と解決を可能にします。
+- [**Vulnerabilities**][9]: インフラストラクチャーの観測可能性を活用し、組織のコンテナやホストの脆弱性を検出、優先順位付け、管理します。
 
 {{< img src="security/csm/csm_overview_2.png" alt="Cloud Security Management in Datadog" width="100%">}}
 
-## Track your organization's health
+## 組織の健全性の追跡
 
-Available for [CSM Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
+[CSM Misconfigurations][2] で利用可能な[セキュリティポスチャスコア][5]は、組織全体の健全性を追跡するのに役立ちます。このスコアは、すぐに使えるアクティブなクラウドとインフラストラクチャーのコンプライアンスルールをすべて満たしている環境の割合を示します。
 
-Improve your organization's score by remediating misconfigurations, either by resolving the underlying issue or by muting the misconfiguration.
+誤構成の修正によって、根本的な問題を解決するか、または誤構成をミュートすることで、組織のスコアを向上させます。
 
-{{< img src="security/csm/health_scores.png" alt="The posture score on the CSM overview page tracks your organization's overall health" width="100%">}}
+{{< img src="security/csm/health_scores.png" alt="CSM 概要ページに表示されるポスチャスコアは、組織の全体的な健全性を追跡します" width="100%">}}
 
-## Explore and remediate issues
+## 問題の確認と修正
 
 Use the [Explorers][7] to review and remediate your organization's security detections. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
@@ -93,11 +93,11 @@ Use the [Resource Catalog][12] to view specific misconfigurations and threats th
 
 Receive a weekly summary of Cloud Security Management activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
 
-## Next steps
+## 次のステップ
 
 To get started with CSM, navigate to the [**Cloud Security Management Setup**][3] page in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

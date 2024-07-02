@@ -10,7 +10,7 @@
 "categories":
 - "notifications"
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/snmpwalk/README.md"
 "display_on_public_website": true
@@ -80,7 +80,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the SNMP wal
 
 [Run the Agent's `status` subcommand][7] and look for `snmpwalk` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 

@@ -1,5 +1,5 @@
 ---
-title: DORA Metrics
+title: DORA メトリクス
 kind: documentation
 description: Learn how to use DORA metrics to measure and improve your organization's software delivery processes.
 aliases:
@@ -10,7 +10,7 @@ further_reading:
   tag: Release Notes
   text: Check out the latest Software Delivery releases! (App login required)
 - link: "https://www.datadoghq.com/blog/dora-metrics-software-delivery/"
-  tag: Blog
+  tag: ブログ
   text: Best practices for using DORA metrics to improve software delivery
 - link: /continuous_delivery/deployments
   tag: Documentation
@@ -19,10 +19,10 @@ further_reading:
   tag: Documentation
   text: Learn about Event Management
 - link: /monitors/types/metric
-  tag: Documentation
+  tag: ドキュメント
   text: Learn about Metric Monitors
 - link: /service_catalog
-  tag: Documentation
+  tag: ドキュメント
   text: Learn about the Service Catalog
 ---
 
@@ -32,7 +32,7 @@ further_reading:
 
 <div class="alert alert-warning">DORA Metrics is in public beta.</div>
 
-## Overview
+## 概要
 
 DevOps Research and Assessment (DORA) metrics are [four key metrics][1] that indicate the velocity and stability of software development. 
 
@@ -48,9 +48,9 @@ Change failure rate
 Time to restore service
 : How long it takes an organization to recover from a failure in production.
 
-Defining and tracking DORA metrics can help you identify areas of improvement for your team or organization's speed and quality of software delivery.
+DORA メトリクスを定義し追跡することで、チームや組織のソフトウェアデリバリのスピードと品質の改善点を特定することができます。
 
-## Set up DORA Metrics
+## DORA メトリクスのセットアップ
 
 To start configuring data sources to send deployment and incident events to Datadog, see the [Setup documentation][2].
 
@@ -78,7 +78,7 @@ Export your visualization widgets to dashboards or notebooks, add them to existi
 
 Click the **Export** icon on any visualization to add it to an incident, dashboard, or notebook. For more information about the metrics calculated by DORA Metrics, see the [Data Collected documentation][3].
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

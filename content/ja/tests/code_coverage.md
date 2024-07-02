@@ -108,13 +108,13 @@ The Datadog Tracer's built-in code coverage has support for both `Coverlet` and 
 
 #### Coverlet options
 
-| Option                   | Summary                                                                                                                                                         |
+| Option                   | サマリー                                                                                                                                                         |
 |:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ExcludeByAttribute       | Exclude methods, classes or assemblies decorated with attributes from code coverage.                                                                                                                |
 | ExcludeByFile            | Exclude specific source files from code coverage.                                                                                                                |
 | Exclude                  | Exclude from code coverage analysis using filter expressions.                                                                                                  |
 
-##### Attributes
+##### 属性
 
 You can exclude a method, an entire class, or assembly from code coverage by creating and applying the `ExcludeFromCodeCoverage` attribute present in the `System.Diagnostics.CodeAnalysis` namespace.
 
@@ -151,7 +151,7 @@ Filters provide fine-grained control over what gets excluded using **filter expr
 
 See [Customize code coverage analysis][102] in the Microsoft documentation for additional information.
 
-| Option                   | Summary                                                                                                                                                         |
+| Option                   | サマリー                                                                                                                                                         |
 |:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Attributes\Exclude       | Exclude methods, classes, or assemblies decorated with attributes from code coverage.                                                                                                                |
 | Sources\Exclude          | Exclude specific source files from code coverage.                                                                                                                |

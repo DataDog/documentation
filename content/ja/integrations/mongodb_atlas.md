@@ -30,7 +30,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - metrics
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/mongodb_atlas/README.md"
 "display_on_public_website": true
@@ -62,58 +62,58 @@
   "resources":
   - "resource_type": blog
     "url": "https://www.datadoghq.com/blog/monitor-atlas-performance-metrics-with-datadog/"
-  - "resource_type": other
+  - "resource_type": その他
     "url": "https://www.mongodb.com/products/platform/atlas-for-government"
   "support": "README.md#Support"
   "title": MongoDB Atlas
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-## Overview
+## 概要
 
-MongoDB Atlas can push calculated metrics into Datadog to:
+MongoDB Atlas は、算出メトリクスを Datadog にプッシュして、以下のことができます。
 
-- Visualize key MongoDB Atlas metrics.
-- Correlate MongoDB Atlas performance with the rest of your applications.
+- MongoDB Atlas のキーメトリクスを視覚化できます。
+- MongoDB Atlas のパフォーマンスをアプリケーションの他の部分と関連付けることができます。
 
-The integration includes out-of-the-box monitors and dashboard that enable you to view Atlas health and performance metrics, monitor throughput metrics, track the average latency of read and write operations over time, and create monitors that alert you when the number of current connections is approaching the maximum limit.
+このインテグレーションには、すぐに使えるモニターとダッシュボードが含まれており、Atlas の健全性およびパフォーマンスのメトリクスの表示、スループットメトリクスの監視、読み取りおよび書き込み操作の平均レイテンシーの経時的な追跡、現在の接続数が上限に近づいた場合にアラートを出すモニターの作成が可能です。
 
-**Note**: The MongoDB Atlas integration is only available on M10+ clusters.
+**注**: MongoDB Atlas インテグレーションは M10+ クラスターでのみ利用可能です。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-You can install the MongoDB Atlas integration by logging in to your Atlas portal.
+MongoDB Atlas インテグレーションは、Atlas ポータルにログインすることによってインストールできます。
 
-### Configuration
+### 構成
 
-1. Retrieve or create a Datadog [API key][1].
-2. In the [Atlas portal][2], enter a Datadog API key under **Integrations** -> **Datadog Settings**.
+1. Datadog [API キー][1]を取得または作成します。
+2. [Atlas ポータル][2]の **Integrations** -> **Datadog Settings** で、Datadog API キーを入力します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "mongodb_atlas" >}}
 
 
-### Events
+### イベント
 
-MongoDB Atlas can push [alerts][4] to Datadog as events.
+MongoDB Atlas は、Datadog に[アラート][4]をイベントとしてプッシュできます。
 
-### Service Checks
+### サービスチェック
 
-The MongoDB Atlas integration does not include any service checks.
+MongoDB Atlas インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? [Contact Datadog Support][5]
+ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor MongoDB Atlas with Datadog][6]
+- [Datadog を使用した MongoDB Atlas の監視][6]
 - [MongoDB Atlas for Government][7]
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys

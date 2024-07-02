@@ -2,9 +2,9 @@
 title: New CSV headers for Cost Chargebacks
 ---
 
-CSV header changes take effect the week of February 19, 2024. Below is an example of the new CSV structure. Use this table to update CSV headers your automation depends on:
+CSV ヘッダーの変更は、2024 年 2 月 19 日の週から適用されます。以下は、新しい CSV 構造の例です。このテーブルを使用して、オートメーションが依存する CSV ヘッダーを更新してください。
 
-| Organization Name | Public ID | Month | Product Name | Cost | 
+| 組織名 | パブリック ID | 月 | 製品名 | コスト | 
 |----| ---| ---| ---| ---| 
-|Org 1 | public_id_1 | 2024-01 | Infra Hosts    | $100.18   |
-|Org 1 | public_id_1 | 2024-01 | Custom Metrics | $50.00    | 
+|組織 1 | public_id_1 | 2024-01 | インフラホスト    | $100.18   |
+|組織 1 | public_id_1 | 2024-01 | カスタムメトリクス | $50.00    | 

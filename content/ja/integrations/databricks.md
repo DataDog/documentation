@@ -1,58 +1,60 @@
 ---
-app_id: databricks
-app_uuid: f99b6e79-f50a-479d-b916-955a577e4f41
-assets:
-  integration:
-    auto_install: true
-    configuration: {}
-    events:
-      creates_events: false
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10152
-    source_type_name: Databricks
-  logs:
-    source: spark
-author:
-  homepage: https://www.datadoghq.com
-  name: Datadog
-  sales_email: info@datadoghq.com (日本語対応)
-  support_email: help@datadoghq.com
-categories:
+"app_id": "databricks"
+"app_uuid": "f99b6e79-f50a-479d-b916-955a577e4f41"
+"assets":
+  "integration":
+    "auto_install": true
+    "configuration": {}
+    "events":
+      "creates_events": false
+    "service_checks":
+      "metadata_path": assets/service_checks.json
+    "source_type_id": !!int "10152"
+    "source_type_name": Databricks
+  "logs":
+    "source": spark
+"author":
+  "homepage": "https://www.datadoghq.com"
+  "name": Datadog
+  "sales_email": info@datadoghq.com
+  "support_email": help@datadoghq.com
+"categories":
 - cloud
+- コスト管理
 - ログの収集
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/databricks/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: databricks
-integration_id: databricks
-integration_title: Databricks
-integration_version: ''
-is_public: true
-custom_kind: integration
-manifest_version: 2.0.0
-name: databricks
-public_title: Databricks
-short_description: Databricks クラスターで Apache Spark を監視する
-supported_os:
+"custom_kind": "インテグレーション"
+"dependencies":
+- "https://github.com/DataDog/integrations-core/blob/master/databricks/README.md"
+"display_on_public_website": true
+"draft": false
+"git_integration_title": "databricks"
+"integration_id": "databricks"
+"integration_title": "Databricks"
+"integration_version": ""
+"is_public": true
+"manifest_version": "2.0.0"
+"name": "databricks"
+"public_title": "Databricks"
+"short_description": "Monitor the performance, reliability, and cost of your Apache Spark and Databricks jobs."
+"supported_os":
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Category::Cloud
-  - Category::Log Collection
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  configuration: README.md#Setup
-  description: Databricks クラスターで Apache Spark を監視する
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: Databricks
+"tile":
+  "changelog": CHANGELOG.md
+  "classifier_tags":
+  - "Category::Cloud"
+  - "Category::Cost Management"
+  - "Category::Log Collection"
+  - "Supported OS::Linux"
+  - "Supported OS::Windows"
+  - "Supported OS::macOS"
+  "configuration": "README.md#Setup"
+  "description": Monitor the performance, reliability, and cost of your Apache Spark and Databricks jobs.
+  "media": []
+  "overview": "README.md#Overview"
+  "support": "README.md#Support"
+  "title": Databricks
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
@@ -68,13 +70,13 @@ tile:
 
 機能の詳細については、[Datadog を使用した Databricks の監視][4]を参照してください。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 Databricks Spark アプリケーションを [Datadog Spark インテグレーション][5]で監視します。適切なクラスターの[構成](#configuration)方法に従って、クラスターに [Datadog Agent][6] をインストールしてください。その後、Datadog に [Spark インテグレーション][5]をインストールし、Databricks Overview ダッシュボードを自動インストールします。
 
-### ブラウザトラブルシューティング
+### 構成
 
 Databricks で Apache Spark クラスターを監視し、システムと Spark のメトリクスを収集するように Sparkインテグレーションを構成します。
 
@@ -147,7 +149,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     DD_HOST_TAGS=\$DD_TAGS \
     DD_HOSTNAME="\$(hostname | xargs)" \
     DD_SITE="\${DD_SITE:-datadoghq.com}" \
-    bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 
   # ポート 6062 での競合を回避
   echo "process_config.expvar_port: 6063" >> /etc/datadog-agent/datadog.yaml
@@ -229,7 +231,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     DD_HOST_TAGS=\$DD_TAGS \
     DD_HOSTNAME="\$(hostname | xargs)" \
     DD_SITE="\${DD_SITE:-datadoghq.com}" \
-    bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 
   echo "Datadog Agent is installed"
 
@@ -275,7 +277,7 @@ else
   # 最新の Datadog Agent 7 をドライバーノードとワーカーノードにインストールする
   # バージョン 7.40 以上で Agent が失敗しないように、datadog.yaml でホスト名を明確に構成する
   # 変更については https://github.com/DataDog/datadog-agent/issues/14152 をご覧ください
-  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS DD_HOSTNAME="\$(hostname | xargs)" bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS DD_HOSTNAME="\$(hostname | xargs)" bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 
   echo "Datadog Agent is installed"
 fi
@@ -346,7 +348,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     DD_HOST_TAGS=\$DD_TAGS \
     DD_HOSTNAME="\$(hostname | xargs)" \
     DD_SITE="\${DD_SITE:-datadoghq.com}" \
-    bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 
   # ポート 6062 での競合を回避
   echo "process_config.expvar_port: 6063" >> /etc/datadog-agent/datadog.yaml
@@ -426,7 +428,7 @@ if [[ \${DB_IS_DRIVER} = "TRUE" ]]; then
     DD_HOST_TAGS=\$DD_TAGS \
     DD_HOSTNAME="\$(hostname | xargs)" \
     DD_SITE="\${DD_SITE:-datadoghq.com}" \
-    bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+    bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 
   echo "Datadog Agent is installed"
 
@@ -472,7 +474,7 @@ else
   # 最新の Datadog Agent 7 をドライバーノードとワーカーノードにインストールする
   # バージョン 7.40 以上で Agent が失敗しないように、datadog.yaml でホスト名を明確に構成する
   # 変更については https://github.com/DataDog/datadog-agent/issues/14152 をご覧ください
-  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS DD_HOSTNAME="\$(hostname | xargs)" bash -c "\$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+  DD_INSTALL_ONLY=true DD_API_KEY=\$DD_API_KEY DD_HOST_TAGS=\$DD_TAGS DD_HOSTNAME="\$(hostname | xargs)" bash -c "\$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 
   echo "Datadog Agent is installed"
 fi
@@ -491,21 +493,21 @@ chmod a+x /tmp/start_datadog.sh
 {{% /tab %}}
 {{< /tabs >}}
 
-## リアルユーザーモニタリング
+## 収集データ
 
-### データセキュリティ
+### メトリクス
 
 収集されたメトリクスのリストについては、[Spark インテグレーションドキュメント][8]を参照してください。
 
-### ヘルプ
+### サービスチェック
 
 収集されたサービスチェックのリストについては、[Spark インテグレーションドキュメント][9]を参照してください。
 
-### ヘルプ
+### イベント
 
 Databricks インテグレーションには、イベントは含まれません。
 
-## ヘルプ
+## トラブルシューティング
 
 [Databricks Web ターミナル][10]を有効にするか、[Databricks ノートブック][11]を使用することで、問題を自分でトラブルシューティングできます。有用なトラブルシューティング手順については、[Agent のトラブルシューティング][12]のドキュメントを参照してください。
 
@@ -518,14 +520,14 @@ Databricks インテグレーションには、イベントは含まれません
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/databricks/images/databricks_dashboard.png
 [2]: https://databricks.com/
-[3]: https://docs.datadoghq.com/ja/integrations/spark/?tab=host
+[3]: https://docs.datadoghq.com/integrations/spark/?tab=host
 [4]: https://www.datadoghq.com/blog/databricks-monitoring-datadog/
 [5]: https://app.datadoghq.com/integrations/spark
 [6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: https://docs.databricks.com/clusters/init-scripts.html#global-init-scripts
-[8]: https://docs.datadoghq.com/ja/integrations/spark/#metrics
-[9]: https://docs.datadoghq.com/ja/integrations/spark/#service-checks
+[8]: https://docs.datadoghq.com/integrations/spark/#metrics
+[9]: https://docs.datadoghq.com/integrations/spark/#service-checks
 [10]: https://docs.databricks.com/en/clusters/web-terminal.html
 [11]: https://docs.databricks.com/en/notebooks/index.html
-[12]: https://docs.datadoghq.com/ja/agent/troubleshooting/
-[13]: https://docs.datadoghq.com/ja/help/
+[12]: https://docs.datadoghq.com/agent/troubleshooting/
+[13]: https://docs.datadoghq.com/help/

@@ -34,7 +34,7 @@ products:
 
 Detection rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule is matched over a given period of time, a security signal is generated. You can view these signals in the [Signals Explorer][16].
 
-## Out-of-the-box detection rules
+## すぐに使える検出ルール
 
 Datadog provides [out-of-the-box detection rules][1] to flag attacker techniques and potential misconfigurations. When new detection rules are released, they are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration.
 
@@ -45,11 +45,11 @@ Out-of-the box rules are available for the following security products:
     - [CSM Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
     - [CSM Threats][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
     - [CSM Identity Risks][14] uses detection rules to detect IAM-based risks in your cloud infrastructure.
-- [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
+- [Application Security Management][6] (ASM) は、Datadog [APM][7]、[Datadog Agent][8]、検出ルールを活用し、アプリケーション環境における脅威を検出します。
 
-## Beta detection rules
+## ベータ検出ルール
 
-Datadog's Security Research team continually adds new OOTB security detection rules. While the aim is to deliver high quality detections with the release of integrations or other new features, the performance of the detection at scale often needs to be observed before making the rule generally available. This gives Datadog's Security Research the time to either refine or deprecate detection opportunities that do not meet our standards.
+Datadog のセキュリティリサーチチームは、継続的に新しいすぐに使えるセキュリティ検出ルールを追加しています。その目的は、インテグレーションやその他の新機能のリリースとともに高品質の検出を提供することですが、そのルールを一般的に利用可能にする前に、多くの場合、大規模での検出のパフォーマンスを観察する必要があります。これにより、Datadog のセキュリティリサーチは、当社の基準を満たさない検出の機会を改善したり、非推奨にしたりする時間を得ることができます。
 
 ## Custom detection rules
 
@@ -59,7 +59,7 @@ To [create custom rules](#create-detection-rules), you can clone the default rul
 
 ## Search and filter detection rules
 
-To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security Settings**][15] page. Rules are listed on separate pages for each product (Application Security, Cloud Security Management, and Cloud SIEM).
+Datadog ですぐに使える検出ルールとカスタム検出ルールを表示するには、[**Security Settings**][15] ページに移動します。ルールは、各製品 (Application Security、Cloud Security Management、Cloud SIEM) の個別のページにリストされています。
 
 To search and filter the rules, use the search box and facets to query by value. For example, to only show rules for a given rule type, hover over the rule type and select `only`. You can also filter by facets such as `source` and `severity` when investigating and triaging incoming issues.
 
@@ -78,16 +78,16 @@ For detailed instructions, see the following articles:
 
 ## Manage detection rules
 
-### Enable or disable rules
+### ルールの有効化・無効化
 
 To enable or disable a rule, toggle the switch to the right of the rule name.
 
-You can also bulk enable or disable rules:
+また、ルールの一括有効化、無効化も可能です。
 
-1. Click **Select Rules**.
-1. Select the rules you want to enable or disable.
+1. **Select Rules** をクリックします。
+1. 有効化または無効化したいルールを選択します。
 1. Click the **Edit Rules** dropdown menu.
-1. Select **Enable Rules** or **Disable Rules**.
+1. **Enable Rules** または **Disable Rules** を選択します。
 
 ### Edit a rule
 
@@ -100,9 +100,9 @@ For out-of-the-box detection rules, you can only add or edit a suppression query
 
 To clone a rule, click the vertical three-dot menu for the rule and select **Clone rule**.
 
-Cloning a rule is helpful if you wish to duplicate an existing rule and lightly modify settings to cover other areas of detection. For example, you could duplicate a log detection rule and modify it from **Threshold** to **Anomaly** to add a new dimension to threat detection using the same queries and triggers.
+ルールの複製は、既存のルールを複製して軽く設定を変更し、他の検出領域をカバーしたい場合に便利です。例えば、ログ検出ルールを複製し、**Threshold** から **Anomaly** に変更することで、同じクエリとトリガーを使用して脅威検出に新しい次元を追加することができます。
 
-### Delete a rule
+### ルールを削除
 
 To delete a custom rule, click the vertical three-dot menu for the rule and select **Delete rule**.
 
@@ -114,17 +114,17 @@ By default, all users have full access to the detection rules. To use granular a
 
 1. Click the vertical three-dot menu for the rule and select **Permissions**.
 1. Click **Restrict Access**. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown menu to select one or more roles, teams, or users that may edit the security rule.
-1. Click **Add**.
-1. Click **Save**.
+1. ドロップダウンメニューを使用して、セキュリティルールを編集できるロール、チーム、またはユーザーを 1 つ以上選択します。
+1. **Add** をクリックします。
+1. **Save** をクリックします。
 
 **Note:** To maintain your edit access to the rule, the system requires you to include at least one role that you are a member of before saving.
 
 To restore access to a rule:
 
 1. Click the vertical three-dot menu for the rule and select **Permissions**.
-1. Click **Restore Full Access**.
-1. Click **Save**.
+1. **Restore Full Access** をクリックします。
+1. **Save** をクリックします。
 
 ### View generated signals
 
@@ -134,20 +134,20 @@ To view the security signals for a rule in the [Signals Explorer][16], click the
 
 To export a copy of a rule as JSON, click the vertical three-dot menu for the rule and select **Export as JSON**.
 
-## Rule deprecation
+## ルール非推奨
 
 Regular audits of all detection rules are performed to maintain high fidelity signal quality. Deprecated rules are replaced with an improved rule.
 
-The rule deprecation process is as follows:
+ルール非推奨のプロセスは以下の通りです。
 
-1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
-    - Signal side panel's **Rule Details > Playbook** section
-    - Misconfigurations side panel (CSM Misconfigurations only)
+1. ルールに非推奨の日付が書かれた警告が表示されています。UI では、警告が以下に表示されます。
+    - シグナルサイドパネルの **Rule Details > Playbook** セクション
+    - Misconfigurations サイドパネル (CSM Misconfigurations のみ)
     - [Rule editor][15] for that specific rule 
 2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#clone-a-rule) in the UI.
-3. Once the rule is deleted, you can no longer clone and re-enable it.
+3. 一度削除されたルールは、複製して再度有効にすることはできません。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

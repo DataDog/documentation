@@ -28,7 +28,7 @@
 - kubernetes
 - log collection
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/README.md"
 "display_on_public_website": true
@@ -67,60 +67,60 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Kube Scheduler dashboard][1]
+![Kube Scheduler ダッシュボード][1]
 
-## Overview
+## 概要
 
-This check monitors [Kubernetes Scheduler][2], part of the Kubernetes control plane.
+このチェックは、Kubernetes Control Plane の一部である [Kubernetes Scheduler][2] を監視します。
 
-**Note**: This check does not collect data for Amazon EKS clusters, as those services are not exposed.
+**注**: サービスが公開されていないため、このチェックは Amazon EKS クラスターのデータを収集しません。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Kubernetes Scheduler check is included in the [Datadog Agent][3] package.
-No additional installation is needed on your server.
+Kubernetes Scheduler チェックは [Datadog Agent][3] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-See the [Autodiscovery Integration Templates][4] for guidance on applying the parameters below.
+[オートディスカバリーのインテグレーションテンプレート][4]のガイドを参照して、次のパラメーターを適用してください。
 
-#### Metric collection
+#### メトリクスの収集
 
-1. Edit the `kube_scheduler.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your kube_scheduler performance data. See the [sample kube_scheduler.d/conf.yaml][5] for all available configuration options.
+1. kube_scheduler のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `kube_scheduler.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル kube_scheduler.d/conf.yaml][5] を参照してください。
 
-2. [Restart the Agent][6].
+2. [Agent を再起動します][6]。
 
-#### Log collection
+#### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][7].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][7]を参照してください。
 
-| Parameter      | Value                                     |
+| パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
-| `<LOG_CONFIG>` | `{"source": "kube_scheduler", "service": "<SERVICE_NAME>"}` |
+| `<LOG_CONFIG>` | `{"source": "kube_scheduler", "service": "<サービス名>"}` |
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][8] and look for `kube_scheduler` under the Checks section.
+[Agent の status サブコマンドを実行][8]し、Checks セクションで `kube_scheduler` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "kube_scheduler" >}}
 
 
-### Events
+### イベント
 
-Kube Scheduler does not include any events.
+Kube Scheduler には、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "kube_scheduler" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][11].
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kube_scheduler/images/kube_scheduler_screenshot.jpeg
 [2]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler

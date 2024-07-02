@@ -28,7 +28,7 @@
 - cloud
 - ai/ml
 - developer tools
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -77,7 +77,7 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
 1. In the [AWS integration page][2], ensure that `CodeWhisperer` is enabled under the `Metric Collection` tab.
 2. Install the [Datadog - Amazon CodeWhisperer integration][3].
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "amazon_codewhisperer" >}}

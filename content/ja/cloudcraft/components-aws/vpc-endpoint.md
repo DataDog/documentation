@@ -1,27 +1,27 @@
 ---
 title: "VPC Endpoint Component"
 ---
-## Overview
+## 概要
 
-Use the VPC Endpoint component to visualize VPC endpoints from your Amazon Web Services architecture.
+VPC エンドポイントコンポーネントを使用して、Amazon Web Services アーキテクチャから VPC エンドポイントを視覚化します。
 
-{{< img src="cloudcraft/components-aws/vpc-endpoint/component-vpc-endpoint-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected AWS components." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/vpc-endpoint/component-vpc-endpoint-diagram.png" alt="相互接続された AWS コンポーネントを示す、等角投影された Cloudcraft 図のスクリーンショット。" responsive="true" style="width:60%;">}}
 
-## Toolbar
+## ツールバー
 
-Use the toolbar to configure and customize the component. The following options are available:
+ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
-- **Type**: Select the type for your VPC endpoint.
-- **Data processed (GB)**: Enter the total volume of data processed by the endpoint, in gigabytes. Not available for the gateway type.
+- **Color**: コンポーネント本体の塗りつぶし色とシンボルのアクセントカラーを選択します。2D ビューと 3D ビューで同じ色を使用することも、それぞれ異なる色を使用することもできます。
+- **Type**: VPC エンドポイントのタイプを選択します。
+- **Data processed (GB)**: エンドポイントが処理したデータの総量をギガバイト単位で入力します。ゲートウェイタイプでは使用できません。
 
 ## API
 
-Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。
 
-### Schema
+### スキーマ
 
-The following is an example JSON object of a VPC Endpoint component:
+以下は、VPC エンドポイントコンポーネントの JSON オブジェクトの例です。
 
 ```json
 {
@@ -43,21 +43,21 @@ The following is an example JSON object of a VPC Endpoint component:
 }
 ```
 
-- **type: string**: The type of component. Must be a string of value `vpcendpoint` for this component.
-- **id: string, uuid**: The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
-- **arn: string**: The globally unique identifier for the component within AWS, known as the [Amazon Resource Names][2].
-- **region: string**: The AWS region for the component. All global regions are supported, [except for AWS China][3].
-- **mapPos: array**": The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
-- **endpointType: string**: The type of endpoint. Accepts one of the following options, `interface`, `gateway`, or `gatewayloadbalancer`. Defaults to `interface`.
-- **dataGb: number**: The total volume of data processed by the endpoint, in gigabytes. Defaults to `10`.
-- **color: object**: The fill color for the component body.
-  - **isometric: string**: A hexadecimal color for the component body in the 3D view. Defaults to `#ECECED`.
-  - **2d: string**: A hexadecimal color for the component body in the 2D view. Defaults to `#CC2264`.
-- **accentColor: object**: The accent color for the component logo.
-  - **isometric: string**: A hexadecimal color for the component logo in the 3D view. Defaults to `#4286C5`.
-  - **2d: string**: A hexadecimal color for the component logo in the 2D view. Defaults to `#FFFFFF`.
-- **link: string, uri**: A URI that links the component to another diagram or an external website. Accepts one of the following formats: `blueprint://` or `https://`.
-- **locked: boolean**: Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
+- **type: 文字列**: コンポーネントのタイプ。このコンポーネントの値 `vpcendpoint` の文字列でなければなりません。
+- **id: 文字列、uuid**: コンポーネントの一意な識別子。API は内部的に UUID v4 を使用しますが、任意の一意な文字列を受け付けます。
+- **arn: 文字列**: [Amazon Resource Name][2] として知られる、AWS 内でのコンポーネントのグローバルに一意な識別子。
+- **region: 文字列**: コンポーネントの AWS リージョン。[AWS China を除く][3]、すべてのグローバルリージョンがサポートされています。
+- **mapPos: 配列**: x 座標と y 座標のペアで表される、ブループリント内のコンポーネントの位置。
+- **endpointType: 文字列**: エンドポイントのタイプ。`interface`、`gateway`、`gatewayloadbalancer` のいずれかのオプションを指定します。デフォルトは `interface` です。
+- **dataGb: 数値**: エンドポイントが処理したデータの総量 (ギガバイト単位)。デフォルトは `10` です。
+- **color: オブジェクト**: コンポーネント本体の塗りつぶし色。
+  - **isometric: 文字列**: 3D ビューでのコンポーネント本体の 16 進数カラー。デフォルトは `#ECECED` です。
+  - **2d: 文字列**: 2D ビューでのコンポーネント本体の 16 進数カラー。デフォルトは `#CC2264` です。
+- **accentColor: オブジェクト**: コンポーネントロゴのアクセントカラー。
+  - **isometric: 文字列**: 3D ビューでのコンポーネントロゴの 16 進数カラー。デフォルトは `#4286C5` です。
+  - **2d: 文字列**: 2D ビューでのコンポーネントロゴの 16 進数カラー。デフォルトは `#FFFFFF` です。
+- **link: 文字列、uri**: コンポーネントを別の図や外部の Web サイトにリンクする URI。`blueprint://` または `https://` の 2 つの形式のどちらかを指定します。
+- **locked: ブール値**: Web インターフェイスを通してコンポーネントの位置の変更を許可するかどうか。デフォルトは `false` です。
 
 [1]: https://developers.cloudcraft.co/
 [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html

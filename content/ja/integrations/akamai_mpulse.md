@@ -36,13 +36,13 @@ Use Datadog's out-of-the-box dashboard and monitors to:
 
 Correlate metrics with real-time data from [Akamai DataStream 2][1], [NGINX][2], [MYSQL][3], and more than 600 other technologies for a frontend to backend view of your webstack.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Install the integration with the Datadog [Akamai mPulse integration tile][4].
 
-### Configuration
+### 構成
 
 An `apiKey` and `apiToken` are required to configure the Akamai mPulse integration. 
 
@@ -66,21 +66,21 @@ See the [Akamai documentation for API token][5] then:
 2. Go to My Settings on the leftmost panel.
 3. Click "Generate" in the API token area.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "akamai_mpulse" >}}
 
 
-### Events
+### イベント
 
 The Akamai mPulse integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Akamai mPulse integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

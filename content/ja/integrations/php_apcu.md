@@ -26,7 +26,7 @@
   "support_email": noname@withgod.jp
 "categories":
 - caching
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/php_apcu/README.md"
 "display_on_public_website": true
@@ -66,11 +66,11 @@
 
 This check monitors [PHP APCu][1] through the Datadog Agent.
 
-## Setup
+## セットアップ
 
 The PHP APCu check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the PHP APCu check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -100,7 +100,7 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 </Location>
 ```
 
-### Configuration
+### 構成
 
 1. Edit the `php_apcu.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your `php_apcu` performance data. See the [sample `php_apcu.d/conf.yaml` file][5] for all available configuration options.
     ```
@@ -114,21 +114,21 @@ Alias /apcu-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/datad
 
 Run the [Agent's status subcommand][7] and look for `php_apcu` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "php_apcu" >}}
 
 
-### Events
+### イベント
 
 The PHP APCu integration does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "php_apcu" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

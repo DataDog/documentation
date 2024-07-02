@@ -5,9 +5,9 @@
 - "developer tools"
 - "orchestration"
 - "provisioning"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Capture and search for deploys, overlay them onto key metrics graphs."
+"description": "デプロイをキャプチャおよび検索し、主要メトリクスのグラフに重ねて表示。"
 "doc_link": "https://docs.datadoghq.com/integrations/capistrano/"
 "draft": false
 "git_integration_title": "capistrano"
@@ -35,9 +35,9 @@ Install the Capistrano Datadog integration to:
 
 Once you enable this integration for a given `Capfile`, each Capistrano task that completes is submitted as an event to Datadog. Role information and logging output are submitted too.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Install the `dogapi` Ruby gem:
 
@@ -45,7 +45,7 @@ Install the `dogapi` Ruby gem:
 sudo gem install dogapi --version ">=1.10.0"
 ```
 
-### Configuration
+### 構成
 
 Add the following to the beginning of any `Capfile` whose tasks you want to send to Datadog:
 
@@ -64,21 +64,21 @@ After you've configured your `Capfile` and have run at least one Capistrano task
 
 {{< img src="integrations/capistrano/capistranoevents.mp4" video="true" >}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Capistrano integration does not include any metric.
 
-### Events
+### イベント
 
 The Capistrano integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Capistrano integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

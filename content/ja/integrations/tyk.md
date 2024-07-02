@@ -29,7 +29,7 @@
   "support_email": yaara@tyk.io
 "categories":
 - metrics
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/tyk/README.md"
 "display_on_public_website": true
@@ -83,13 +83,13 @@ When running the Datadog Agent, DogstatsD gets the `request_time` metric from `T
 
 The custom metric Tyk is using is of type [DD_HISTOGRAM_AGGREGATES][5].
 
-## Setup
+## セットアップ
 
 Tyk's integration is included in the `tyk-pump` package, so you only need to set configuration in the `pump.conf` (and there's no need to install anything on your Tyk platform).
 
 ### Installation
 
-#### Installation
+#### インストール
 
 For this integration you need to have a running Tyk installation. You can install [Tyk self managed][6] or [Tyk OSS][7]. Both options include the `tyk-pump`.
 
@@ -102,7 +102,7 @@ Run the Datadog [Agent][9] in your K8s cluster, as a Docker container, on your M
 For containerized environments, see the [Autodiscovery Integration Templates][10] for more guidance. To validate that the changes are applied, [run the Agent's status subcommands][11]
 
 
-### Configuration
+### 構成
 
 #### Tyk-pump
 To set a Datadog pump follow the instructions in [the DogstatsD section][12] of the pump README.
@@ -169,13 +169,13 @@ Create a dashboard or import [the sample][19] and add a widget. In the section *
 
 In the example above, it's `tyk`. Once you start typing, all the available metrics are displayed.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "tyk" >}}
 
 
-### Dashboards
+### ダッシュボード
 
 With Datadog, you can create dashboards that display statistics about your API services and their consumption.
 
@@ -185,15 +185,15 @@ Here's an example for such a dashboard:
 
 **Note: You can [import][19] the above dashboard and use it as an example or baseline for your own dashboard.**
 
-### Events
+### イベント
 
 The Tyk integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Tyk integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][22].
 

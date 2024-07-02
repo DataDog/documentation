@@ -12,10 +12,10 @@ type: multi-code-lang
 code_lang_weight: 30
 further_reading:
 - link: "https://github.com/DataDog/dd-sdk-unity"
-  tag: Source Code
+  tag: ソースコード
   text: Source code for dd-sdk-unity
 - link: "https://github.com/DataDog/unity-package"
-  tag: Source Code
+  tag: ソースコード
   text: Package URL for Unity SDK
 - link: real_user_monitoring/explorer/
   tag: Documentation
@@ -33,7 +33,7 @@ Unity Monitoring is in public beta.
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze user journeys of your application's individual users.
 
-## Setup
+## セットアップ
 
 <div class="alert alert-info">
 Datadog supports Unity Monitoring for iOS and Android for Unity LTS 2022+.
@@ -74,48 +74,47 @@ You can control the data your application sends to Datadog RUM during instrument
    }
    ```
 
-5. After adding the Datadog Unity SDK, configure Datadog from your Project Settings:
+5. Datadog Unity SDK を追加したら、Project Settings から Datadog を構成します。
 
-    1. Enable Datadog and RUM
-    2. Copy your `Client Token` and `Application Id` into the fields in the settings window.
-    3. Verify that your `Site` is correct.
+    1. Datadog と RUM を有効にする
+    2. `Client Token` と `Application Id` を設定ウィンドウのフィールドにコピーします。
+    3. `Site` が正しいことを確認します。
 
-## Using Datadog
+## Datadog の使用
 
-### Setting tracking consent
+### 追跡に関する同意の設定
 
-In order to be compliant with data protection and privacy policies, the Datadog Unity SDK requires setting a tracking consent value.
+データ保護とプライバシーポリシーに準拠するため、Datadog Unity SDK は追跡に関する同意の値の設定を求めます。
 
-The `trackingConsent` setting can be one of the following values:
+`trackingConsent` 設定は以下のいずれかの値で示されます。
 
-  * `TrackingConsent.Pending`: The Unity SDK starts collecting and batching the data but does not send it to Datadog. The Unity SDK waits for the new tracking consent value to decide what to do with the batched data.
-  * `TrackingConsent.Granted`: The Unity SDK starts collecting the data and sends it to Datadog.
-  * `TrackingConsent.NotGranted`: The Unity SDK does not collect any data. No logs are sent to Datadog.
+  * `TrackingConsent.Pending`: Unity SDK はデータの収集とバッチ処理を開始しますが、Datadog には送信しません。Unity SDK は新しい追跡に関する同意の値を待って、バッチされたデータをどうするかを決定します。
+  * `TrackingConsent.Granted`: Unity SDK はデータの収集を開始し、Datadog へ送信します。
+  * `TrackingConsent.NotGranted`: Unity SDK はデータを収集しません。ログが Datadog に送信されることはありません。
 
-Before Datadog sends any data, we need to confirm the user's `Tracking Consent`. This is set to `TrackingConsent.Pending` during initialization,
-and needs to be set to `TrackingConsent.Granted` before Datadog sends any information.
+Datadog がデータを送信する前に、ユーザーの `Tracking Consent` を確認する必要があります。これは初期化時に `TrackingConsent.Pending` に設定され、Datadog が情報を送信する前に `TrackingConsent.Granted` に設定される必要があります。
 
 ```cs
 DatadogSdk.Instance.SetTrackingConsent(TrackingConsent.Granted);
 ```
 
-### Logging
+### ロギング
 
-You can intercept and send logs from Unity's default debug logger by enabling the option and threshold in your projects settings.
+プロジェクトの設定でオプションとしきい値を有効にすることで、Unity のデフォルトのデバッグロガーからログを傍受して送信できます。
 
-Datadog maps the Unity levels to the following in Datadog's Logging Levels:
+Datadog は、Datadog の Logging Levels で Unity レベルを以下にマップします。
 
 | Unity LogType  | Datadog Log Level |
 | -------------- | ----------------- |
-| Log            |  Info             |
+| ログ            |  情報             |
 | Error          |  Error            |
-| Assert         |  Critical         |
+| Assert         |  クリティカル         |
 | Warning        |  Warn             |
-| Exception      |  Critical         |
+| Exception      |  クリティカル         |
 
-You can access this default logger to add attributes or tags through the `DatadogSdk.DefaultLogger` property.
+`DatadogSdk.DefaultLogger` プロパティを通して、このデフォルトのロガーにアクセスし、属性やタグを追加することができます。
 
-You can also create additional loggers for more fine grained control of thresholds, service names, logger names, or to supply additional attributes.
+また、しきい値、サービス名、ロガー名をより細かく制御すしたり、追加属性を供給するために、追加のロガーを作成することもできます。
 
 ```cs
 var logger = DatadogSdk.Instance.CreateLogger(new DatadogLoggingOptions()
@@ -141,9 +140,9 @@ logger.Debug("Hello with attributes", new()
 
 ### Real User Monitoring (RUM)
 
-#### Manual Scene (View) Tracking
+#### シーン (ビュー) の手動追跡
 
-To manually track new Scenes (`Views` in Datadog), use the `StartView` and `StopView` methods:
+新しいシーン (Datadog では `Views`) を手動で追跡するには、`StartView` と `StopView` メソッドを使用します。
 
 ```cs
 public void Start()
@@ -155,19 +154,19 @@ public void Start()
 }
 ```
 
-Starting a new view automatically ends the previous view.
+新しいビューを開始すると、前のビューは自動的に終了します。
 
-#### Automatic Scene Tracking
+#### シーンの自動追跡
 
-You can also set `Enable Automatic Scene Tracking` in your Project Settings to enable automatically tracking active scenes. This uses Unity's `SceneManager.activeSceneChanged` event to automatically start new scenes.
+Project Settings で `Enable Automatic Scene Tracking` を設定すると、アクティブなシーンを自動的に追跡できるようになります。これは Unity の `SceneManager.activeSceneChanged` イベントを使用して、自動的に新しいシーンを開始します。
 
-#### Web Requests / Resource Tracking
+#### Web リクエスト / リソース追跡
 
-Datadog offers `DatadogTrackedWebRequest`, which is a `UnityWebRequest` wrapper intended to be a drop-in replacement for `UnityWebRequest`. `DatadogTrackedWebRequest` enables [Datadog Distributed Tracing][7].
+Datadog は `DatadogTrackedWebRequest` を提供しています。これは `UnityWebRequest` のラッパーであり、`UnityWebRequest` の代替として簡単に利用できることを意図しています。`DatadogTrackedWebRequest` は [Datadog 分散型トレーシング][7] を有効にします。
 
-To enable Datadog Distributed Tracing, you must set the `First Party Hosts` in your project settings to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `Tracing Sampling Rate`.
+Datadog 分散型トレーシングを有効にするには、プロジェクトの設定で `First Party Hosts` を分散型トレーシングをサポートするドメインに設定する必要があります。また、`Tracing Sampling Rate`を設定することで、分散型トレーシングのサンプリングレートを変更することができます。
 
-`First Party Hosts` does not allow wildcards, but matches any subdomains for a given domain. For example, api.example.com matches staging.api.example.com and prod.api.example.com, but not news.example.com.
+`First Party Hosts` ではワイルドカードは使用できませんが、指定されたドメインの任意のサブドメインとマッチします。例えば、api.example.com は staging.api.example.com と prod.api.example.com にはマッチしますが、news.example.com にはマッチしません。
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /account_management/api-app-keys/#client-tokens

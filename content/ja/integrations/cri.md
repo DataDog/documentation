@@ -25,7 +25,7 @@
 "categories":
 - containers
 - kubernetes
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/cri/README.md"
 "display_on_public_website": true
@@ -62,9 +62,9 @@
 
 This check monitors a Container Runtime Interface
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 CRI is a core [Datadog Agent][1] check that needs to be configured in the `datadog.yaml` with the `cri.d/conf.yaml`.
 
@@ -109,7 +109,7 @@ spec:
 
 **Note:** The `/var/run` directory must be mounted from the host to run the integration without issues.
 
-### Configuration
+### 構成
 
 1. Edit the `cri.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your crio performance data. See the [sample cri.d/conf.yaml][2] for all available configuration options.
 
@@ -119,21 +119,21 @@ spec:
 
 Run the Agent's [status subcommand][3] and look for `cri` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "cri" >}}
 
 
-### Service Checks
+### サービスチェック
 
 CRI does not include service checks.
 
-### Events
+### イベント
 
 CRI does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

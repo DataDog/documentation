@@ -9,8 +9,8 @@ cascade:
         subcategory: CI Visibility Guides
 ---
 
-{{< whatsnext desc="Pipeline Visibility Guides:" >}}
-    {{< nextlink href="/continuous_integration/guides/ingestion_control" >}}Creating Exclusion Filters for Ingestion Control{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/pipeline_data_model" >}}Understanding the Pipeline Data Model and Execution Types{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/infrastructure_metrics_with_gitlab" >}}Correlating Infrastructure Metrics with GitLab Jobs in Datadog{{< /nextlink >}}
+{{< whatsnext desc="Pipeline Visibility ガイド:" >}}
+    {{< nextlink href="/continuous_integration/guides/ingestion_control" >}}取り込み制御の除外フィルターを作成する{{< /nextlink >}}
+    {{< nextlink href="/continuous_integration/guides/pipeline_data_model" >}}パイプラインのデータモデルと実行タイプについて理解する{{< /nextlink >}}
+{{< nextlink href="/continuous_integration/guides/infrastructure_metrics_with_gitlab" >}}Datadog で GitLab ジョブとインフラストラクチャーメトリクスを相関させる{{< /nextlink >}}
 {{< /whatsnext >}}

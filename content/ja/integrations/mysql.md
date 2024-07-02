@@ -37,7 +37,7 @@
 "categories":
 - "data stores"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/mysql/README.md"
 "display_on_public_website": true
@@ -50,7 +50,7 @@
 "manifest_version": "2.0.0"
 "name": "mysql"
 "public_title": "MySQL"
-"short_description": "Collect performance schema metrics, query throughput, custom metrics, and more."
+"short_description": "パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。"
 "supported_os":
 - "linux"
 - "macos"
@@ -62,9 +62,9 @@
   - "Supported OS::macOS"
   - "Supported OS::Windows"
   - "Category::Data Stores"
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   "configuration": "README.md#Setup"
-  "description": "Collect performance schema metrics, query throughput, custom metrics, and more."
+  "description": "パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -74,40 +74,40 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![MySQL Dashboard][1]
+![MySQL ダッシュボード][1]
 
-## Overview
+## 概要
 
-The MySQL integration tracks the performance of your MySQL instances. It collects metrics related to throughput, connections, errors, and InnoDB metrics.
+MySQL インテグレーションは、MySQL インスタンスのパフォーマンスを追跡します。スループット、接続、エラー、InnoDB に関するメトリクスを収集します。
 
-Enable [Database Monitoring][2] (DBM) for enhanced insights into query performance and database health. In addition to the standard integration, Datadog DBM provides query-level metrics, live and historical query snapshots, wait event analysis, database load, and query explain plans.
+[データベースモニタリング][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーションに加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画が提供されます。
 
-## Setup
+## セットアップ
 
-<div class="alert alert-info">This page describes the MySQL Agent standard integration. If you are looking for the Database Monitoring product for MySQL, see <a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog Database Monitoring</a>.</div>
+<div class="alert alert-info">このページでは、MySQL Agent の標準的なインテグレーションについて説明します。MySQL のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### Installation
+### インストール
 
-The MySQL check is included in the [Datadog Agent][3] package. No additional installation is needed on your MySQL server.
+MySQL チェックは [Datadog Agent][3] パッケージに含まれています。MySQL サーバーに追加でインストールする必要はありません。
 
-#### Prepare MySQL
+#### MySQL の準備
 
-**Note**: To install Database Monitoring for MySQL, select your hosting solution in the [Database Monitoring documentation][4] for instructions.
+**注**: MySQL 用のデータベースモニタリングをインストールするには、[データベースモニタリングドキュメント][4]でご利用のホスティングソリューションを選択して、手順を確認してください。
 
-Proceed with the following steps in this guide only if you are installing the standard integration alone.
+標準のインテグレーションを単体でインストールする場合のみ、このガイドの下記の手順に進んでください。
 
-On each MySQL server, create a database user for the Datadog Agent.
+各 MySQL サーバーで、Datadog Agent 用のデータベースユーザーを作成します。
 
-The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See [MySQL Adding Accounts, Assigning Privileges, and Dropping Accounts][5] for more info.
+次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL アカウントの追加、特権の割り当て、アカウントの削除][5]を参照してください。
 
-Create the `datadog` user with the following command:
+以下のコマンドで `datadog` ユーザーを作成します。
 
 ```shell
 mysql> CREATE USER 'datadog'@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-Verify the user was created successfully using the following commands - replace `<UNIQUEPASSWORD>` with the password you created above:
+次のコマンドを使用して、ユーザーが問題なく作成されたことを検証します。`<一意のパスワード>` は上記で作成したパスワードに置き換えます。
 
 ```shell
 mysql -u datadog --password=<UNIQUEPASSWORD> -e "show status" | \
@@ -115,16 +115,16 @@ grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
 echo -e "\033[0;31mCannot connect to MySQL\033[0m"
 ```
 
-The Agent needs a few privileges to collect metrics. Grant the `datadog` user only the following limited privileges.
+Agent がメトリクスを収集するには、いくつかの権限が必要です。次のように、限られた権限のみを `datadog` ユーザーに付与してください。
 
-For MySQL versions 5.6 and 5.7, grant `replication client` and set `max_user_connections` with the following command:
+MySQL バージョン 5.6 および 5.7 の場合は、 `replication client` を付与し、次のコマンドで `max_user_connections` を設定します。
 
 ```shell
 mysql> GRANT REPLICATION CLIENT ON *.* TO 'datadog'@'%' WITH MAX_USER_CONNECTIONS 5;
 Query OK, 0 rows affected, 1 warning (0.00 sec)
 ```
 
-For MySQL 8.0 or greater, grant `replication client` and set `max_user_connections` with the following commands:
+MySQL 8.0 以上の場合は、`replication client` を付与し、次のコマンドで `max_user_connections` を設定します。
 
 ```shell
 mysql> GRANT REPLICATION CLIENT ON *.* TO 'datadog'@'%'
@@ -133,22 +133,22 @@ mysql> ALTER USER 'datadog'@'%' WITH MAX_USER_CONNECTIONS 5;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-Grant the `datadog` user the process privilege:
+`datadog` ユーザーに PROCESS 権限を付与します。
 
 ```shell
 mysql> GRANT PROCESS ON *.* TO 'datadog'@'%';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-Verify the replication client. Replace `<UNIQUEPASSWORD>` with the password you created above:
+レプリケーションクライアントを検証します。`<UNIQUEPASSWORD>` は上記で作成したパスワードに置き換えます。
 
 ```shell
-mysql -u datadog --password=<UNIQUEPASSWORD> -e "show slave status" && \
+mysql -u datadog --password=<一意のパスワード> -e "show slave status" && \
 echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
 echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 ```
 
-If enabled, metrics can be collected from the `performance_schema` database by granting an additional privilege:
+有効になると、追加の権限を付与することで、`performance_schema` データベースからメトリクスを収集できます。
 
 ```shell
 mysql> show databases like 'performance_schema';
@@ -163,26 +163,26 @@ mysql> GRANT SELECT ON performance_schema.* TO 'datadog'@'%';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-### Configuration
+### 構成
 
-Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Docker](?tab=docker#docker), [Kubernetes](?tab=kubernetes#kubernetes), or [ECS](?tab=ecs#ecs) sections.
+ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
 
-**Note**: For a full list of available configuration options, see the [sample mysql.d/conf.yaml][6].
+**注**: 利用可能な構成オプションの完全なリストについては、[mysql.d/conf.yaml のサンプル][6]を参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MySQL [metrics](#metric-collection) and [logs](#log-collection).
+MySQL の[メトリクス](#metric-collection)と[ログ](#log-collection)の収集を開始するには、[Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `mysql.d/conf.yaml` ファイルを編集します。
 
-For a full list of available configuration options, see the [sample `mysql.d/conf.yaml`][2].
+利用可能な構成オプションの完全なリストについては、[`mysql.d/conf.yaml` のサンプル][2]を参照してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-- Add this configuration block to your `mysql.d/conf.yaml` to collect your [MySQL metrics](#metrics):
+- [MySQL メトリクス](#metrics)を収集するには、`mysql.d/conf.yaml` に次の構成ブロックを追加します。
 
   ```yaml
   init_config:
@@ -201,22 +201,22 @@ For a full list of available configuration options, see the [sample `mysql.d/con
         disable_innodb_metrics: false
   ```
 
-**Note**: Wrap your password in single quotes in case a special character is present.
+**注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。
 
-To collect `extra_performance_metrics`, your MySQL server must have `performance_schema` enabled - otherwise set `extra_performance_metrics` to `false`. For more information on `performance_schema`, see [MySQL Performance Schema Quick Start][3].
+`extra_performance_metrics` を収集するには、MySQL サーバーで `performance_schema` が有効になっている必要があります。それ以外の場合は、`extra_performance_metrics` を `false` に設定します。`performance_schema` の詳細については、[MySQL パフォーマンススキーマクイックスタート][3]を参照してください。
 
-**Note**: The `datadog` user should be set up in the MySQL integration configuration as `host: 127.0.0.1` instead of `localhost`. Alternatively, you may also use `sock`.
+**注**: `datadog` ユーザーは、`localhost` ではなく `host: 127.0.0.1` として MySQL インテグレーション構成内にセットアップされる必要があります。または、`sock` を使用することもできます。
 
-[Restart the Agent][4] to start sending MySQL metrics to Datadog.
+[Agent を再起動][4]すると、Datadog への MySQL メトリクスの送信が開始されます。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. By default MySQL logs everything in `/var/log/syslog` which requires root access to read. To make the logs more accessible, follow these steps:
+1. MySQL は、デフォルトでは `/var/log/syslog` 内のすべてをログに記録しますが、これには、読み取りのルートアクセス許可が必要です。ログへのアクセス可能性を高めるには、以下の手順に従ってください。
 
-   - Edit `/etc/mysql/conf.d/mysqld_safe_syslog.cnf` and remove or comment the lines.
-   - Edit `/etc/mysql/my.cnf` and add following lines to enable general, error, and slow query logs:
+   - `/etc/mysql/conf.d/mysqld_safe_syslog.cnf` を編集して、行を削除またはコメントにします。
+   - `/etc/mysql/my.cnf` を編集し、次の行を追加して、一般ログ、エラーログ、および低速なクエリログを有効にします。
 
      ```conf
        [mysqld_safe]
@@ -231,10 +231,10 @@ _Available for Agent versions >6.0_
        long_query_time = 2
      ```
 
-   - Save the file and restart MySQL using following commands:
+   - ファイルを保存し、次のコマンドを使用して MySQL を再起動します。
      `service mysql restart`
-   - Make sure the Agent has read access on the `/var/log/mysql` directory and all of the files within. Double-check your logrotate configuration to make sure those files are taken into account and that the permissions are correctly set there as well.
-   - In `/etc/logrotate.d/mysql-server` there should be something similar to:
+   - Agent が `/var/log/mysql` ディレクトリとその中のすべてのファイルに対する読み取りアクセス許可を持つことを確認します。logrotate 構成もチェックして、これらのファイルが考慮され、アクセス許可が正しく設定されていることを確認します。
+   - `/etc/logrotate.d/mysql-server` の内容は次のようになります。
 
      ```text
        /var/log/mysql.log /var/log/mysql/mysql.log /var/log/mysql/mysql_slow.log {
@@ -246,13 +246,13 @@ _Available for Agent versions >6.0_
        }
      ```
 
-2. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+2. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-3. Add this configuration block to your `mysql.d/conf.yaml` file to start collecting your MySQL logs:
+3. MySQL のログの収集を開始するには、次の構成ブロックを `mysql.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -295,9 +295,9 @@ _Available for Agent versions >6.0_
        #     pattern: \t\t\s*\d+\s+|\d{6}\s+\d{,2}:\d{2}:\d{2}\t\s*\d+\s+
    ```
 
-    See the [sample mysql.yaml][2] for all available configuration options, including those for custom metrics.
+   カスタムメトリクスのオプションなど、使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mysql.yaml][2] を参照してください。
 
-4. [Restart the Agent][4].
+4. [Agent を再起動します][4]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
@@ -307,11 +307,11 @@ _Available for Agent versions >6.0_
 {{% tab "Docker" %}}
 #### Docker
 
-To configure this check for an Agent running on a container:
+コンテナで実行中の Agent に対してこのチェックを構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integration Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
@@ -319,14 +319,14 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"server": "%%host%%", "username": "datadog","password": "<UNIQUEPASSWORD>"}]'
 ```
 
-See [Autodiscovery template variables][2] for details on using `<UNIQUEPASSWORD>` as an environment variable instead of a label.
+`<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][2]を参照してください。
 
-#### Log collection
+#### ログ収集
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker Log Collection][3].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][3]を参照してください。
 
-Then, set [Log Integrations][4] as Docker labels:
+次に、[ログインテグレーション][4]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"mysql","service":"mysql"}]'
@@ -341,13 +341,13 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"mysql","service":"mysql"}]'
 
 #### Kubernetes
 
-To configure this check for an Agent running on Kubernetes:
+このチェックを、Kubernetes で実行している Agent に構成します。
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Alternatively, you can configure templates with a [file, configmap, or key-value store][2].
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][2]を使用してテンプレートを構成することもできます。
 
-**Annotations v1** (for Datadog Agent < v7.36)
+**Annotations v1** (Datadog Agent < v7.36 向け)
 
 ```yaml
 apiVersion: v1
@@ -372,7 +372,7 @@ spec:
     - name: mysql
 ```
 
-**Annotations v2** (for Datadog Agent v7.36+)
+**Annotations v2** (Datadog Agent v7.36+ 向け)
 
 ```yaml
 apiVersion: v1
@@ -399,14 +399,14 @@ spec:
     - name: mysql
 ```
 
-See [Autodiscovery template variables][3] for details on using `<UNIQUEPASSWORD>` as an environment variable instead of a label.
+`<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][3]を参照してください。
 
-#### Log collection
+#### ログ収集
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][4].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][4]を参照してください。
 
-Then, set [Log Integrations][5] as pod annotations. Alternatively, you can configure this with a [file, configmap, or key-value store][6].
+次に、[ログインテグレーション][5]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][6]を使用してこれを構成することもできます。
 
 **Annotations v1/v2**
 
@@ -432,11 +432,11 @@ metadata:
 
 #### ECS
 
-To configure this check for an Agent running on ECS:
+このチェックを、ECS で実行している Agent に構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```json
 {
@@ -452,15 +452,15 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 }
 ```
 
-See [Autodiscovery template variables][2] for details on using `<UNIQUEPASSWORD>` as an environment variable instead of a label.
+`<UNIQUEPASSWORD>` をラベルではなく環境変数として使う方法について、詳細は[オートディスカバリーテンプレート変数][2]を参照してください。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [ECS Log Collection][3].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][3]を参照してください。
 
-Then, set [Log Integrations][4] as Docker labels:
+次に、[ログインテグレーション][4]を Docker ラベルとして設定します。
 
 ```yaml
 {
@@ -480,21 +480,21 @@ Then, set [Log Integrations][4] as Docker labels:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][7] and look for `mysql` under the Checks section.
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `mysql` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "mysql" >}}
 
 
-The check does not collect all metrics by default. Set the following boolean configuration options to `true` to enable the respective metrics:
+このチェックは、デフォルトではすべてのメトリクスを収集しません。以下のブール値構成オプションを `true` に設定することで、対応するメトリクスが有効になります。
 
-`extra_status_metrics` adds the following metrics:
+`extra_status_metrics` は、次のメトリクスを追加します。
 
-| Metric name                                  | Metric type |
+| メトリクス名                                  | メトリクスタイプ |
 | -------------------------------------------- | ----------- |
 | mysql.binlog.cache_disk_use                  | GAUGE       |
 | mysql.binlog.cache_use                       | GAUGE       |
@@ -528,11 +528,11 @@ The check does not collect all metrics by default. Set the following boolean con
 | mysql.performance.table_locks_immediate      | GAUGE       |
 | mysql.performance.table_locks_immediate.rate | RATE        |
 | mysql.performance.threads_cached             | GAUGE       |
-| mysql.performance.threads_created            | MONOTONIC   |
+| mysql.performance.threads_created            | 単調増加 (MONOTONIC)   |
 
-`extra_innodb_metrics` adds the following metrics:
+`extra_innodb_metrics` は、次のメトリクスを追加します。
 
-| Metric name                                 | Metric type |
+| メトリクス名                                 | メトリクスタイプ |
 | ------------------------------------------- | ----------- |
 | mysql.innodb.active_transactions            | GAUGE       |
 | mysql.innodb.buffer_pool_data               | GAUGE       |
@@ -544,7 +544,7 @@ The check does not collect all metrics by default. Set the following boolean con
 | mysql.innodb.buffer_pool_read_ahead         | RATE        |
 | mysql.innodb.buffer_pool_read_ahead_evicted | RATE        |
 | mysql.innodb.buffer_pool_read_ahead_rnd     | GAUGE       |
-| mysql.innodb.buffer_pool_wait_free          | MONOTONIC   |
+| mysql.innodb.buffer_pool_wait_free          | 単調増加 (MONOTONIC)   |
 | mysql.innodb.buffer_pool_write_requests     | RATE        |
 | mysql.innodb.checkpoint_age                 | GAUGE       |
 | mysql.innodb.current_transactions           | GAUGE       |
@@ -620,44 +620,44 @@ The check does not collect all metrics by default. Set the following boolean con
 | mysql.innodb.x_lock_spin_rounds             | RATE        |
 | mysql.innodb.x_lock_spin_waits              | RATE        |
 
-`extra_performance_metrics` adds the following metrics:
+`extra_performance_metrics` は、次のメトリクスを追加します。
 
-| Metric name                                     | Metric type |
+| メトリクス名                                     | メトリクスタイプ |
 | ----------------------------------------------- | ----------- |
 | mysql.performance.query_run_time.avg            | GAUGE       |
 | mysql.performance.digest_95th_percentile.avg_us | GAUGE       |
 
-`schema_size_metrics` adds the following metric:
+`schema_size_metrics` は、次のメトリクスを追加します。
 
-| Metric name            | Metric type |
+| メトリクス名            | メトリクスタイプ |
 | ---------------------- | ----------- |
 | mysql.info.schema.size | GAUGE       |
 
-### Events
+### イベント
 
-The MySQL check does not include any events.
+MySQL チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "mysql" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-- [Connection Issues with the SQL Server Integration][8]
-- [MySQL Localhost Error - Localhost VS 127.0.0.1][9]
-- [Can I use a named instance in the SQL Server integration?][10]
-- [Can I set up the dd-agent MySQL check on my Google CloudSQL?][11]
-- [MySQL Custom Queries][12]
-- [Use WMI to collect more SQL Server performance metrics][13]
-- [How can I collect more metrics from my SQL Server integration?][14]
-- [Database user lacks privileges][15]
-- [How to collect metrics with a SQL Stored Procedure?][16]
+- [SQL Server インテグレーションでの接続の問題][8]
+- [MySQL Localhost エラー - Localhost と 127.0.0.1][9]
+- [SQL Server インテグレーションで名前付きインスタンスを使用できますか][10]
+- [Google CloudSQL で dd-agent MySQL チェックをセットアップできますか][11]
+- [MySQL カスタムクエリ][12]
+- [WMI を使用して、より多くの SQL Server パフォーマンスメトリクスを収集する][13]
+- [SQL Server インテグレーションからさらに多くのメトリクスを収集するには？][14]
+- [データベースユーザーに権限がありません][15]
+- [SQL ストアドプロシージャを使用してメトリクスを収集する方法][16]
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitoring MySQL performance metrics][17]
+- [MySQL パフォーマンスメトリクスの監視][17]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mysql/images/mysql-dash-dd-2.png

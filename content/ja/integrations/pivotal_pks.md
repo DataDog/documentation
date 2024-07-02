@@ -22,7 +22,7 @@
 - log collection
 - network
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/pivotal_pks/README.md"
 "display_on_public_website": true
@@ -64,7 +64,7 @@
 
 This integration monitors [Pivotal Container Service][1] clusters.
 
-## Setup
+## セットアップ
 
 Since Datadog already integrates with Kubernetes, it is ready-made to monitor Pivotal Kubernetes Service (PKS). You can use the Datadog [Cluster Monitoring tile][2] along with this integration to monitor your cluster.
 
@@ -85,7 +85,7 @@ You can also take advantage of DaemonSets to [automatically deploy the Datadog A
 
 Follow the [container log collection steps][6] to learn more about those environment variables and discover more advanced setup options.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

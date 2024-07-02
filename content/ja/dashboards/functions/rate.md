@@ -1,11 +1,11 @@
 ---
+title: Rate
 aliases:
-- /ja/graphing/functions/rate/
+    - /graphing/functions/rate/
 further_reading:
 - link: /monitors/guide/alert-on-no-change-in-value/
-  tag: ドキュメント
-  text: 値に変化がない場合のアラート
-title: レート
+  tag: Documentation
+  text: Alert on no change in value
 ---
 
 ## 毎秒
@@ -32,6 +32,8 @@ title: レート
 |:---------|:---------------------------------------------------------------|:-----------------------|
 | `dt()`   | 送信されたポイント間の時間の差 (秒単位) をグラフ化します。 | `dt(<METRIC_NAME>{*})` |
 
+dt() 関数は、いくつのグループが関与しているかに関係なく、1 つの時系列だけを返します。その 1 つの時系列の中で、さまざまなグループにわたるすべての送信ポイントの時間差を考慮します。
+
 ## 値の差
 
 | 関数 | 説明                    | 例                  |
@@ -52,6 +54,12 @@ title: レート
 |:---------------|:----------------------------------------------|:-------------------------------|
 | `derivative()` | メトリクスの微分係数 (diff/dt) をグラフ化します。 | `derivative(<METRIC_NAME>{*})` |
 
+## スループット
+
+| 関数       | 説明                                                                                                                                        | 例                          |
+|:---------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+| `throughput()` | Converts a timeseries into a rate per second, by dividing each value by the number of seconds in the time bucket to produce the per-second value. | `throughput(<METRIC_NAME>{*})` |
+
 ## その他の関数
 
 {{< whatsnext desc="他に利用できる関数を参照します。" >}}
@@ -67,6 +75,6 @@ title: レート
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -3,25 +3,25 @@ title: Build diagrams with Mermaid JS
 disable_toc: false
 ---
 
-## Overview
+## 概要
 
-Datadog Notebooks support Mermaid JS in any Markdown cell.
-Mermaid is a JavaScript-based tool for creating diagrams and flowcharts in Markdown. Learn more about Mermaid in the [official documentation][1] or by using the [Mermaid live editor][2].
+Datadog ノートブックは、任意の Markdown セルで Mermaid JS をサポートします。
+Mermaid は Markdown で図やフローチャートを作成するための JavaScript ベースのツールです。[公式ドキュメント][1]または [Mermaid ライブエディター][2]で Mermaid について詳しく知ることができます。
 
-## Setup
+## セットアップ
 
-To create a new diagram in your notebook:
-1. Add a new text cell.
-1. Select **Code Block** from inside the Markdown editor.
-1. Select **Mermaid-JS**.
+ノートブックに新しいダイアグラムを作成するには
+1. 新しいテキストセルを追加します。
+1. Markdown エディター内から **Code Block** を選択します。
+1. **Mermaid-JS** を選択します。
 
-In the Datadog site, there is also a [Build Diagrams with Mermaid JS][3] template, which you can use to get started and to see diagram examples.
+Datadog のサイトには、[Build Diagrams with Mermaid JS][3] というテンプレートもあり、これを利用すると、図のサンプルを見ることができます。
 
-Use the [mermaid syntax][4] to build flowcharts, sequence diagrams, user journeys, gantt charts, and more.
+[Mermaid 構文][4]を使って、フローチャート、シーケンス図、ユーザージャーニー、ガントチャートなどを作成することができます。
 
-## Example
+## 例
 
-Build a basic flowchart with a top down orientation:
+トップダウンで基本的なフローチャートを構築します。
 
 {{< code-block lang="bash" disable_copy="true" >}}
 ```mermaid
@@ -33,9 +33,9 @@ graph TD;
 ```
 {{< /code-block >}}
 
-Copy the example flowchart syntax into the mermaid code block. After you click **Done** the cell will populate the diagram.
+フローチャートの例の構文を Mermaid コードブロックにコピーします。**Done** をクリックすると、セルに図が入力されます。
 
-{{< img src="/notebooks/guide/build_diagrams_with_mermaidjs/build-diagram-mermaidjs.mp4" alt="Setup steps with example flowchart syntax" video=true style="width:100%;" >}}
+{{< img src="/notebooks/guide/build_diagrams_with_mermaidjs/build-diagram-mermaidjs.mp4" alt="フローチャート構文例によるセットアップ手順" video=true style="width:100%;" >}}
 
 [1]: https://mermaid.js.org/intro/
 [2]: https://mermaid.live/

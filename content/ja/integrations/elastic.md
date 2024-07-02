@@ -39,7 +39,7 @@
 - "data stores"
 - "log collection"
 - "tracing"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/elastic/README.md"
 "display_on_public_website": true
@@ -52,7 +52,7 @@
 "manifest_version": "2.0.0"
 "name": "elastic"
 "public_title": "ElasticSearch"
-"short_description": "Monitor overall cluster status down to JVM heap usage and everything in between."
+"short_description": "クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視"
 "supported_os":
 - "linux"
 - "windows"
@@ -61,7 +61,7 @@
   "changelog": "CHANGELOG.md"
   "classifier_tags":
   - "Category::Data Stores"
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Category::Tracing"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
@@ -71,7 +71,7 @@
   - "Submitted Data Type::Traces"
   - "Submitted Data Type::Events"
   "configuration": "README.md#Setup"
-  "description": "Monitor overall cluster status down to JVM heap usage and everything in between."
+  "description": "クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -81,32 +81,32 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Elastic search dashboard][1]
+![Elastic search ダッシュボード][1]
 
-## Overview
+## 概要
 
-Stay up-to-date on the health of your Elasticsearch cluster, from its overall status down to JVM heap usage and everything in between. Get notified when you need to revive a replica, add capacity to the cluster, or otherwise tweak its configuration. After doing so, track how your cluster metrics respond.
+Elasticsearch クラスターの健全性について、全体的なステータスから JVM のヒープ使用量まで、クラスター内のすべての情報を最新の状態で把握します。レプリカを回復したり、クラスターに容量を追加したり、構成を調整したりする必要があるときに通知を受けます。その後、クラスターメトリクスがどのように反応するかを追跡します。
 
-The Datadog Agent's Elasticsearch check collects metrics for search and indexing performance, memory usage and garbage collection, node availability, shard statistics, disk space and performance, pending tasks, and many more. The Agent also sends events and service checks for the overall status of your cluster.
+Datadog Agent の Elasticsearch チェックは、検索とインデックス化のパフォーマンス、メモリ使用量とガベージコレクション、ノード可用性、シャード統計、ディスク容量とパフォーマンス、保留状態のタスクなど多数のメトリクスを収集します。Agent は、クラスターの全体的なステータスに関するイベントとサービスチェックも送信します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Elasticsearch check is included in the [Datadog Agent][2] package. No additional installation is necessary.
+Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `elastic.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your Elasticsearch [metrics](#metrics). See the [sample elastic.d/conf.yaml][2] for all available configuration options.
+1. Elasticsearch の[メトリクス](#metrics)を収集するには、[Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `elastic.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションについては、[サンプル elastic.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -119,10 +119,10 @@ To configure this check for an Agent running on a host:
      - url: http://localhost:9200
    ```
 
-    **Notes**:
+   **注**:
 
-      - If you're collecting Elasticsearch metrics from just one Datadog Agent running outside the cluster, such as using a hosted Elasticsearch, set `cluster_stats` to `true`.
-      - [Agent-level tags][3] are not applied to hosts in a cluster that is not running the Agent. Use integration level tags in `<integration>.d/conf.yaml` to ensure **ALL** metrics have consistent tags. For example:
+      - クラスターの外で実行されている 1 つの Datadog Agent からのみ Elasticsearch メトリクスを収集する場合は (ホステッド Elasticsearch を使用する場合など)、`cluster_stats` を `true` に設定します。
+      - [Agent レベルのタグ][3]は、Agent を実行していないクラスターのホストには適用されません。**すべての** メトリクスが一定のタグを持つようにするには、`<integration>.d/conf.yaml` でインテグレーションレベルのタグを使用します。
 
         ```yaml
         init_config:
@@ -137,12 +137,12 @@ To configure this check for an Agent running on a host:
             - env:%%env_DD_ENV%%
         ```
 
-      - To use the Agent's Elasticsearch integration for the AWS Elasticsearch services, set the `url` parameter to point to your AWS Elasticsearch stats URL.
-      - All requests to the Amazon ES configuration API must be signed. See the [Making and signing OpenSearch Service requests][4] for details.
-      - The `aws` auth type relies on [boto3][5] to automatically gather AWS credentials from `.aws/credentials`. Use `auth_type: basic` in the `conf.yaml` and define the credentials with `username: <USERNAME>` and `password: <PASSWORD>`.
-      - You must create a user and a role (if you don't already have them) in Elasticsearch with the proper permissions to monitor. This can be done through the REST API offered by Elasticsearch, or through the Kibana UI.
-      - If you have enabled security features in Elastic Search, you can use `monitor` or `manage` privilege while using the API to make the calls to the Elastic Search indices.
-      - Include the following properties in the created role:
+      - AWS Elasticsearch サービスに Agent の Elasticsearch インテグレーションを使用するには、`url` パラメーターを AWS Elasticsearch stats の URL に設定します。
+      - Amazon ES コンフィギュレーション API へのすべてのリクエストには、署名が必要です。詳細は、[OpenSearch サービスリクエストの作成と署名][4]を参照してください。
+      - `aws` の認証タイプは、[boto3][5] に依存して `.aws/credentials` から自動的に AWS 認証情報を収集します。`conf.yaml` で `auth_type: basic` を使用して、認証情報を `username: <USERNAME>`、`password: <PASSWORD>` で定義します。
+      - 監視するためには、適切な権限を持つユーザーとロール (まだ持っていない場合) を Elasticsearch で作成する必要があります。これは、Elasticsearch が提供する REST API、または Kibana UI を通じて行うことができます。
+      - Elastic Search のセキュリティ機能を有効にしている場合、API を使用して Elastic Search のインデックスを呼び出す際に、`monitor` または `manage` 権限を使用することができます。
+      - 作成したロールに以下のプロパティを含めます。
         ```json
         name = "datadog"
         indices {
@@ -151,20 +151,20 @@ To configure this check for an Agent running on a host:
         }
         cluster = ["monitor"]
         ```
-        Add the role to the user:
+        ユーザーにロールを追加します。
         ```json
         roles = [<created role>, "monitoring_user"]
         ```
-        For more information, see [create or update roles][6] and [create or update users][7].
+        詳しくは、[ロールの作成または更新][6]および[ユーザーの作成または更新][7]を参照してください。
 
 
-2. [Restart the Agent][8].
+2. [Agent を再起動します][8]。
 
-###### Custom Queries
+###### カスタムクエリ
 
-The ElasticSearch integration allows you to collect custom metrics through custom queries by using the `custom_queries` configuration option. 
+ElasticSearch とのインテグレーションでは、`custom_queries` 構成オプションを使用することで、カスタムクエリによるカスタムメトリクスの収集が可能です。
 
-**Note:** When running custom queries, use a read only account to ensure that the ElasticSearch instance does not change.
+**注:** カスタムクエリを実行する際は、ElasticSearch のインスタンスが変更されないよう、読み取り専用アカウントを使用してください。
 
 ```yaml
 custom_queries:
@@ -184,9 +184,9 @@ custom_queries:
    tags:
    - custom_tag:1
 ```
-The custom query sends as a `GET` request. If you use an optional `payload` parameter, the request sends as a `POST` request. 
+カスタムクエリは `GET` リクエストとして送信されます。オプションの `payload` パラメーターを使用すると、`POST` リクエストとして送信されます。
 
-`value_path` may either be string keys or list indices. Example:
+`value_path` には文字列キーまたはリストインデックスを指定します。例:
 ```json
 {
   "foo": {
@@ -198,28 +198,28 @@ The custom query sends as a `GET` request. If you use an optional `payload` para
 }
 ```
 
-`value_path: foo.bar.1` returns the value `result1`.
+`value_path: foo.bar.1` は値 `result1` を返します。
 
-##### Trace collection
+##### トレースの収集
 
-Datadog APM integrates with Elasticsearch to see the traces across your distributed system. Trace collection is enabled by default in the Datadog Agent v6+. To start collecting traces:
+Datadog APM は、Elasticsearch と統合して分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
-1. [Enable trace collection in Datadog][9].
-2. [Instrument your application that makes requests to ElasticSearch][10].
+1. [Datadog でトレースの収集を有効にします][9]。
+2. [ElasticSearch へのリクエストを作成するアプリケーションをインスツルメントします][10]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in the `datadog.yaml` file with:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. To collect search slow logs and index slow logs, [configure your Elasticsearch settings][11]. By default, slow logs are not enabled.
+2. 検索スローログを収集してスローログのインデックスを作成するには、[Elasticsearch 設定を構成][11]します。デフォルトでは、スローログは有効になっていません。
 
-   - To configure index slow logs for a given index `<INDEX>`:
+   - 特定のインデックス `<インデックス>` のインデックススローログを構成するには
 
      ```shell
      curl -X PUT "localhost:9200/<INDEX>/_settings?pretty" -H 'Content-Type: application/json' -d' {
@@ -232,7 +232,7 @@ _Available for Agent versions >6.0_
      }'
      ```
 
-   - To configure search slow logs for a given index `<INDEX>`:
+   - 特定のインデックス `<インデックス>` の検索スローログを構成するには
 
      ```shell
      curl -X PUT "localhost:9200/<INDEX>/_settings?pretty" -H 'Content-Type: application/json' -d' {
@@ -247,7 +247,7 @@ _Available for Agent versions >6.0_
      }'
      ```
 
-3. Add this configuration block to your `elastic.d/conf.yaml` file to start collecting your Elasticsearch logs:
+3. Elasticsearch のログの収集を開始するには、次の構成ブロックを `elastic.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -257,7 +257,7 @@ _Available for Agent versions >6.0_
        service: "<SERVICE_NAME>"
    ```
 
-   - Add additional instances to start collecting slow logs:
+   - インスタンスを追加して、スローログの収集を開始します。
 
      ```yaml
      - type: file
@@ -273,9 +273,9 @@ _Available for Agent versions >6.0_
        service: "<SERVICE_NAME>"
      ```
 
-     Change the `path` and `service` parameter values and configure them for your environment.
+     `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
 
-4. [Restart the Agent][8].
+4. [Agent を再起動します][8]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/elastic/datadog_checks/elastic/data/conf.yaml.example
@@ -293,11 +293,11 @@ _Available for Agent versions >6.0_
 
 #### Docker
 
-To configure this check for an Agent running on a container:
+コンテナで実行中の Agent に対してこのチェックを構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["elastic"]'
@@ -305,32 +305,32 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"url": "http://%%host%%:9200"}]'
 ```
 
-##### Log collection
+##### ログ収集
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"elasticsearch","service":"<SERVICE_NAME>"}]'
 ```
 
-##### Trace collection
+##### トレースの収集
 
-APM for containerized apps is supported on Agent v6+ but requires extra configuration to begin collecting traces.
+コンテナ化されたアプリケーションの APM は、Agent v6 以降でサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
 
-Required environment variables on the Agent container:
+Agent コンテナで必要な環境変数
 
-| Parameter            | Value                                                                      |
+| パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-See [Tracing Kubernetes Applications][4] and the [Kubernetes Daemon Setup][5] for a complete list of available environment variables and configuration.
+利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][4]および [Kubernetes Daemon のセットアップ][5]を参照してください。
 
-Then, [instrument your application container][6] and set `DD_AGENT_HOST` to the name of your Agent container.
+次に、[アプリケーションコンテナをインスツルメント][6]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
 
 
 [1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
@@ -344,13 +344,13 @@ Then, [instrument your application container][6] and set `DD_AGENT_HOST` to the 
 
 #### Kubernetes
 
-To configure this check for an Agent running on Kubernetes:
+このチェックを、Kubernetes で実行している Agent に構成します。
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Aside from this, templates can also be configured with [a file, a configmap, or a key-value store][2].
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
 
-**Annotations v1** (for Datadog Agent < v7.36)
+**Annotations v1** (Datadog Agent < v7.36 向け)
 
 ```yaml
 apiVersion: v1
@@ -371,7 +371,7 @@ spec:
     - name: elasticsearch
 ```
 
-**Annotations v2** (for Datadog Agent v7.36+)
+**Annotations v2** (Datadog Agent v7.36+ 向け)
 
 ```yaml
 apiVersion: v1
@@ -395,12 +395,12 @@ spec:
     - name: elasticsearch
 ```
 
-##### Log collection
+##### ログ収集
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Kubernetes Log Collection][3].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
-Then, set [Log Integrations][4] as pod annotations. This can also be configured with [a file, a configmap, or a key-value store][5].
+次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
 
 **Annotations v1/v2**
 
@@ -416,21 +416,21 @@ spec:
     - name: elasticsearch
 ```
 
-##### Trace collection
+##### トレースの収集
 
-APM for containerized apps is supported on hosts running Agent v6+ but requires extra configuration to begin collecting traces.
+コンテナ化されたアプリケーションの APM は、Agent v6 以降を実行するホストでサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
 
-Required environment variables on the Agent container:
+Agent コンテナで必要な環境変数
 
-| Parameter            | Value                                                                      |
+| パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-See [Tracing Kubernetes Applications][6] and the [Kubernetes Daemon Setup][7] for a complete list of available environment variables and configuration.
+利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][6]および [Kubernetes Daemon のセットアップ][7]を参照してください。
 
-Then, [instrument your application container][8] and set `DD_AGENT_HOST` to the name of your Agent container.
+次に、[アプリケーションコンテナをインスツルメント][8]し、Agent コンテナ名に `DD_AGENT_HOST` を設定します。
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes
 [2]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
@@ -445,11 +445,11 @@ Then, [instrument your application container][8] and set `DD_AGENT_HOST` to the 
 
 #### ECS
 
-To configure this check for an Agent running on ECS:
+このチェックを、ECS で実行している Agent に構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```json
 {
@@ -465,12 +465,12 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 }
 ```
 
-##### Log collection
+##### ログ収集
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [ECS Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```json
 {
@@ -484,21 +484,21 @@ Then, set [Log Integrations][3] as Docker labels:
 }
 ```
 
-##### Trace collection
+##### トレースの収集
 
-APM for containerized apps is supported on Agent v6+ but requires extra configuration to begin collecting traces.
+コンテナ化されたアプリケーションの APM は、Agent v6 以降でサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
 
-Required environment variables on the Agent container:
+Agent コンテナで必要な環境変数
 
-| Parameter            | Value                                                                      |
+| パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-See [Tracing Kubernetes Applications][4] and the [Kubernetes Daemon Setup][5] for a complete list of available environment variables and configuration.
+利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][4]および [Kubernetes Daemon のセットアップ][5]を参照してください。
 
-Then, [instrument your application container][6] and set `DD_AGENT_HOST` to the [EC2 private IP address][7].
+次に、[アプリケーションのコンテナをインスツルメント][6]し、[EC2 プライベート IP アドレス][7]に `DD_AGENT_HOST` を設定します。
 
 
 [1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
@@ -511,39 +511,39 @@ Then, [instrument your application container][6] and set `DD_AGENT_HOST` to the 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][3] and look for `elastic` under the Checks section.
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `elastic` を探します。
 
-## Data Collected
+## 収集データ
 
-By default, not all of the following metrics are sent by the Agent. To send all metrics, configure flags in `elastic.yaml` as shown above.
+デフォルトでは、次のすべてのメトリクスが Agent によって送信されるわけではありません。すべてのメトリクスを送信するには、上述のように `elastic.yaml` でフラグを構成します。
 
-- `pshard_stats` sends **elasticsearch.primaries.\*** and **elasticsearch.indices.count** metrics
-- `index_stats` sends **elasticsearch.index.\*** metrics
-- `pending_task_stats` sends **elasticsearch.pending\_\*** metrics
-- `slm_stats` sends **elasticsearch.slm.\*** metrics
+- `pshard_stats` は、**elasticsearch.primaries.\*** および **elasticsearch.indices.count** メトリクスを送信します。
+- `index_stats` は、**elasticsearch.index.\*** メトリクスを送信します。
+- `pending_task_stats` は、**elasticsearch.pending\_\*** メトリクスを送信します。
+- `slm_stats` は、**elasticsearch.slm.\*** メトリクスを送信します
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "elastic" >}}
 
 
-### Events
+### イベント
 
-The Elasticsearch check emits an event to Datadog each time the overall status of your Elasticsearch cluster changes - red, yellow, or green.
+Elasticsearch チェックは、Elasticsearch クラスターの全体的なステータスが赤、黄、緑に変化するたびに、Datadog にイベントを送信します。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "elastic" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-- [Agent can't connect][4]
-- [Why isn't Elasticsearch sending all my metrics?][5]
+- [Agent が接続できない][4]
+- [Elasticsearch からすべてのメトリクスが送信されないのはなぜですか？][5]
 
-## Further Reading
+## その他の参考資料
 
-- [How to monitor Elasticsearch performance][6]
+- [Elasticsearch のパフォーマンスを監視する方法][6]
 
 
 

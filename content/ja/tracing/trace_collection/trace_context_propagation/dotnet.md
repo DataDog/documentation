@@ -1,6 +1,5 @@
 ---
 title: Propagating .NET Trace Context
-kind: documentation
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 80
@@ -14,30 +13,30 @@ further_reading:
 ---
 
 
-The Datadog APM Tracer supports [B3][5] and [W3C Trace Context][6] headers extraction and injection for distributed tracing.
+Datadog APM トレーサーは、分散型トレーシングのための [B3][5] と [W3C Trace Context][6] のヘッダー抽出と挿入をサポートしています。
 
-You can configure injection and extraction styles for distributed headers.
+分散ヘッダーの挿入と抽出のスタイルを構成することができます。
 
-The .NET Tracer supports the following styles:
+.NET トレーサーは、以下のスタイルをサポートしています。
 
-- W3C Trace Context: `tracecontext` (`W3C` alias is deprecated)
+- W3C Trace Context: `tracecontext` (`W3C` エイリアスは非推奨)
 - Datadog: `datadog`
-- B3 Multi Header: `b3multi` (`B3` alias is deprecated)
-- B3 Single Header: `B3 single header` (`B3SingleHeader` alias is deprecated)
+- B3 マルチヘッダー: `b3multi` (`B3` エイリアスは非推奨)
+- B3 シングルヘッダー: `B3 single header` (`B3SingleHeader` エイリアスは非推奨)
 
-You can use the following environment variables to configure injection and extraction styles:
+以下の環境変数を使用して、挿入および抽出のスタイルを構成することができます。
 
 - `DD_TRACE_PROPAGATION_STYLE_INJECT=tracecontext, datadog, b3multi`
 - `DD_TRACE_PROPAGATION_STYLE_EXTRACT=tracecontext, datadog, b3multi`
 
-The environment variable values are comma-separated lists of header styles enabled for injection or extraction. If multiple extraction styles are enabled, the extraction attempt is completed in the order of configured styles, and uses the first successful extracted value.
+環境変数の値は、挿入または抽出に有効なヘッダースタイルのカンマ区切りリストです。複数の抽出スタイルが有効な場合、抽出は構成されたスタイルの順に行われ、最初に抽出に成功した値を使用します。
 
-**Notes**: 
+**注**: 
 
 - Starting from version [2.48.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.48.0), the default propagation style is `datadog, tracecontext`, so the Datadog headers are used, followed by the W3C Trace Context. Prior to version 2.48.0, the order was `tracecontext, Datadog` for both extraction and injection propagation.  Prior to version [2.22.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.22.0), only the `Datadog` injection style was enabled.
 - Starting from version [2.42.0](https://github.com/DataDog/dd-trace-dotnet/releases/tag/v2.42.0), when multiple extractors are specified, the `DD_TRACE_PROPAGATION_EXTRACT_FIRST=true` configuration specifies whether context extraction should exit immediately upon detecting the first valid `tracecontext`. The default value is `false`.
 
-In most cases, headers extraction and injection are transparent. There are some known cases where your distributed trace can be disconnected. For instance, when reading messages from a distributed queue, some libraries may lose the span context. It also happens if you set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false` when consuming Kafka messages. In that case, you can add a custom trace using the following code:
+ほとんどの場合、ヘッダーの抽出と注入は透過的に行われます。分散トレースが切断される可能性があるケースも知られています。例えば、分散キューからメッセージを読み込むとき、ライブラリによってはスパンコンテキストを失うことがあります。また、Kafka メッセージを消費する際に `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` を `false` に設定した場合にも発生することがあります。そのような場合、以下のコードを使ってカスタムトレースを追加することができます。
 
 ```csharp
 var spanContextExtractor = new SpanContextExtractor();
@@ -46,9 +45,9 @@ var spanCreationSettings = new SpanCreationSettings() { Parent = parentContext }
 using var scope = Tracer.Instance.StartActive("operation", spanCreationSettings);
 ```
 
-Provide the `GetHeaderValues` method. The way this method is implemented depends on the structure that carries `SpanContext`.
+`GetHeaderValues` メソッドを提供します。このメソッドの実装方法は、`SpanContext` を保持する構造に依存します。
 
-Here are some examples:
+以下はその例です。
 
 ```csharp
 // Confluent.Kafka
@@ -62,7 +61,7 @@ IEnumerable<string> GetHeaderValues(Headers headers, string name)
         }
         catch (Exception)
         {
-            // ignored
+            // 無視
         }
     }
 
@@ -83,8 +82,8 @@ IEnumerable<string> GetHeaderValues(IDictionary<string, object> headers, string 
 // SQS
 public static IEnumerable<string> GetHeaderValues(IDictionary<string, MessageAttributeValue> headers, string name)
 {
-    // For SQS, there are a maximum of 10 message attribute headers,
-    // so the Datadog headers are combined into one header with the following properties:
+    // SQS の場合、メッセージ属性ヘッダーは最大 10 個なので、
+    // Datadog のヘッダーは以下のプロパティを持つ 1 つのヘッダーに統合されます。
     // - Key: "_datadog"
     // - Value: MessageAttributeValue object
     //   - DataType: "String"
@@ -102,9 +101,9 @@ public static IEnumerable<string> GetHeaderValues(IDictionary<string, MessageAtt
 }
 ```
 
-When using the `SpanContextExtractor` API to trace Kafka consumer spans, set `DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` to `false`. This ensures the consumer span is correctly closed immediately after the message is consumed from the topic, and the metadata (such as `partition` and `offset`) is recorded correctly. Spans created from Kafka messages using the `SpanContextExtractor` API are children of the producer span, and siblings of the consumer span.
+Kafka コンシューマースパンをトレースするために `SpanContextExtractor` API を使用する場合、`DD_TRACE_KAFKA_CREATE_CONSUMER_SCOPE_ENABLED` を `false` に設定します。これにより、メッセージがトピックから消費された直後にコンシューマースパンが正しく閉じられ、メタデータ (`partition` や `offset` など) が正しく記録されることが保証されます。`SpanContextExtractor` API を使用して Kafka メッセージから作成されたスパンは、プロデューサーのスパンの子であり、コンシューマーのスパンの兄弟になります。
 
-If you need to propagate trace context manually (for libraries that are not instrumented automatically, like the WCF client), you can use the `SpanContextInjection` API. Here is an example for WCF where `this` is the WCF client:
+(WCF クライアントのように自動的にインスツルメンテーションされないライブラリに対して) トレースコンテキストを手動で伝播する必要がある場合、`SpanContextInjection` API を使用することができます。以下は WCF の例で、`this` は WCF クライアントです。
 
 ```csharp
 
@@ -122,7 +121,7 @@ void SetHeaderValues(MessageHeaders headers, string name, string value)
 }
 ```
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

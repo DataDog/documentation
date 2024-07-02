@@ -3,19 +3,19 @@ title: Troubleshooting DBM Setup for Postgres
 description: Troubleshoot Database Monitoring setup for Postgres
 ---
 
-This page details common issues with setting up and using Database Monitoring with Postgres, and how to resolve them. Datadog recommends staying on the latest stable Agent version and adhering to the latest [setup documentation][1], as it can change with Agent version releases.
+このページでは、Postgres によるデータベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Datadog では、Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
 
-## Diagnosing common problems
+## 一般的な問題の診断
 
-### No data is showing after configuring Database Monitoring
+### データベースモニタリングを構成してもデータが表示されない
 
-If you do not see any data after following the [setup instructions][1] and configuring the Agent, there is most likely an issue with the Agent configuration or API key. Ensure you are receiving data from the Agent by following the [troubleshooting guide][2].
+[セットアップ手順][1]に従って Agent を構成してもデータが表示されない場合は、Agent のコンフィギュレーションまたは API キーに問題がある可能性があります。[トラブルシューティングガイド][2]に従って、Agent からデータを受信していることを確認してください。
 
-If you are receiving other data such as system metrics, but not Database Monitoring data (such as query metrics and query samples), there is probably an issue with the Agent or database configuration. Ensure your Agent configuration looks like the example in the [setup instructions][1], double-checking the location of the configuration files.
+システムメトリクスなどの他のデータは受信しているが、データベースモニタリングのデータ (クエリメトリクスやクエリサンプルなど) を受信していない場合、Agent またはデータベースのコンフィギュレーションに問題がある可能性があります。Agent のコンフィギュレーションが[セットアップ手順][1]の例と同様であることを確認し、コンフィギュレーションファイルの場所を再確認してください。
 
-To debug, start by running the [Agent status command][3] to collect debugging information about data collected and sent to Datadog.
+デバッグを行うには、まず[Agent のステータスコマンド][3]を実行して、収集されたデータや Datadog に送信されたデータのデバッグ情報を収集します。
 
-Check the `Config Errors` section to ensure the configuration file is valid. For instance, the following indicates a missing instance configuration or invalid file:
+`Config Errors` セクションをチェックして、コンフィギュレーションファイルが有効であることを確認してください。例えば、次のような場合は、インスタンスコンフィギュレーションが存在しないか、ファイルが無効であることを示しています。
 
 ```
   Config Errors
@@ -25,7 +25,7 @@ Check the `Config Errors` section to ensure the configuration file is valid. For
       Configuration file contains no valid instances
 ```
 
-If the configuration is valid, the output looks like this:
+コンフィギュレーションが有効であれば、次のように表示されます。
 
 ```
 =========
@@ -54,64 +54,64 @@ Collector
         version.scheme: semver
 ```
 
-Ensure that these lines are in the output and have values greater than zero:
+これらの行が出力され、値がゼロより大きいことを確認してください。
 
 ```
 Database Monitoring Query Metrics: Last Run: 2, Total: 24,274
 Database Monitoring Query Samples: Last Run: 1, Total: 17,921
 ```
-When you are confident the Agent configuration is correct, [check the Agent logs][4] for warnings or errors attempting to run the database integrations.
+Agent のコンフィギュレーションが正しいことを確認したら、[Agent のログ][4]でデータベースのインテグレーション実行時に警告やエラーが発生していないかをチェックします。
 
-You can also explicitly execute a check by running the `check` CLI command on the Datadog Agent and inspecting the output for errors:
+Datadog Agent で `check` CLI コマンドを実行し、出力にエラーがないかを検査することで、明示的にチェックを実行することもできます。
 
 ```bash
-# For self-hosted installations of the Agent
+# Agent をセルフホストでインストールした場合
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check sqlserver -t 2
 
-# For container-based installations of the Agent
+# Agent をコンテナベースでインストールした場合
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
 ```
-### Query metrics are missing
+### クエリメトリクスが見つからない
 
-Before following these steps to diagnose missing query metric data, ensure the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query metrics.
+クエリメトリクスデータの欠落を診断する手順を実行する前に、Agent が正常に動作しており、[Agent データの欠落を診断する手順](#no-data-is-show-after-configuring-database-monitoring)を実行していることを確認してください。クエリメトリクスが見つからない場合、以下のような原因が考えられます。
 
-#### pg_stat_statements extension not loaded {#pg-stat-statements-not-loaded}
-The `pg_stat_statements` extension is not loaded. The extension must be loaded through `shared_preload_libraries` in your Postgres configuration (**Note**: A server restart is required to take effect after modifying this variable). For additional details on how to load the extension, see the [setup instructions][1].
+#### pg_stat_statements 拡張機能がロードされていない {#pg-stat-statements-not-loaded}
+`pg_stat_statements` 拡張機能がロードされていません。この拡張機能は、Postgres の構成にある `shared_preload_libraries` によってロードする必要があります (**注**: この変数を変更した後、有効にするにはサーバーの再起動が必要です)。拡張機能のロード方法に関する詳細は、[設定方法][1]を参照してください。
 
-#### pg_stat_statements extension not created in database {#pg-stat-statements-not-created}
-The `pg_stat_statements` extension is not installed in the correct database. You must run `CREATE EXTENSION pg_stat_statements` in all databases the Agent connects to. By default, the Agent connects to the `postgres` database. For additional details on configuring this variable in your setup, see the [setup instructions][1].
+#### pg_stat_statements 拡張機能がデータベースに作成されていない {#pg-stat-statements-not-created}
+`pg_stat_statements` 拡張機能が正しいデータベースにインストールされていません。Agent が接続するすべてのデータベースで `CREATE EXTENSION pg_stat_statements` を実行する必要があります。デフォルトでは、Agent は `postgres` データベースに接続します。この変数の設定に関する詳細は、[設定方法][1]を参照してください。
 
-To verify `pg_stat_statements` is installed and accessible to the `datadog` user, connect to the `postgres` database and attempt to query as the `datadog` user. There should be at least one row returned successfully. For example:
+`pg_stat_statements` がインストールされており、`datadog` ユーザーがアクセスできることを確認するために、`postgres` データベースに接続して `datadog` ユーザーとしてクエリを試行します。少なくとも 1 つの行が正常に返されるはずです。例えば、以下のようになります。
 
 ```bash
 psql -h localhost -U datadog -d postgres -c "select * from pg_stat_statements LIMIT 1;"
 ```
 
-If you specified a `dbname` other than the default `postgres` in your Agent config, you must run `CREATE EXTENSION pg_stat_statements` in that database.
+Agent のコンフィギュレーションでデフォルト `postgres` 以外の `dbname` を指定した場合は、そのデータベースで `CREATE EXTENSION pg_stat_statements` を実行する必要があります。
 
-If you created the extension in your target database and you still see this warning, the extension may have been created in a schema that is not accessible to the `datadog` user. To verify this, run this command to check which schema `pg_stat_statements` was created in:
+ターゲットデータベースで拡張機能を作成してもこの警告が表示される場合は、拡張機能が `datadog` ユーザーがアクセスできないスキーマで作成された可能性があります。これを確認するには、このコマンドを実行して `pg_stat_statements` がどのスキーマで作成されたかを確認します。
 
 ```bash
 psql -h localhost -U datadog -d postgres -c "select nspname from pg_extension, pg_namespace where extname = 'pg_stat_statements' and pg_extension.extnamespace = pg_namespace.oid;"
 ```
 
-Then, run this command to check which schemas are visible to the `datadog` user:
+次に、このコマンドを実行して、`datadog` ユーザーがどのスキーマを見ることができるかを確認します。
 
 ```bash
 psql -h localhost -U datadog -d <your_database> -c "show search_path;"
 ```
 
-If you do not see the `pg_stat_statements` schema in the `datadog` user's `search_path`, you need to add it to the `datadog` user. For example:
+もし、`pg_stat_statements` スキーマが `datadog` ユーザーの `search_path` にない場合は、`datadog` ユーザーに追加する必要があります。例:
 
 ```sql
 ALTER ROLE datadog SET search_path = "$user",public,schema_with_pg_stat_statements;
 ```
 
-### Certain queries are missing
+### 特定のクエリが見つからない
 
 If you have data from some queries, but do not see a particular query or set of queries in Database Monitoring that you're expecting to see, follow this guide.
 | Possible cause                         | Solution                                  |
@@ -124,37 +124,37 @@ If you have data from some queries, but do not see a particular query or set of 
 | The `pg_stat_statements.max` Postgres configuration parameter may be too low for your workload. | If a large number of normalized queries are executed in a short period of time (thousands of unique normalized queries in 10 seconds), then the buffer in `pg_stat_statements` may not be able to hold all of the normalized queries. Increasing this value can improve the coverage of tracked normalized queries and reduce the impact of high churn from generated SQL. **Note**: Queries with unordered column names or using ARRAYs of variable lengths can significantly increase the rate of normalized query churn. For instance `SELECT ARRAY[1,2]` and `SELECT ARRAY[1,2,3]` are tracked as separate queries in `pg_stat_statements`. For more information about tuning this setting, see [Advanced configuration][7]. |
 | The query has been executed only once since the agent last restarted. | Query metrics are only emitted after having been executed at least once over two separate ten second intervals since the Agent was restarted. |
 
-### Query samples are truncated
+### クエリサンプルが切り捨てられる
 
-Longer queries may not show their full SQL text due to database configuration. Some tuning is necessary to adjust for your workload.
+長いクエリの場合、データベースのコンフィギュレーション上 SQL の全文が表示されないことがあります。お客様のワークロードに合わせて多少のチューニングが必要です。
 
-The Postgres setting `track_activity_query_size` indicates the maximum size of the SQL statement Postgres stores and makes visible to the Agent. By default, this value is 1024 bytes. Raising this value to 4096 captures most queries for most workloads. However, a higher value may be appropriate if your queries are complex or use long arrays.
+Postgres の設定 `track_activity_query_size` は、Postgres が保存し、Agent に対して表示する SQL 文の最大サイズを示します。デフォルトでは、この値は 1024 バイトです。この値を 4096 まで上げると、ほとんどのワークロードのクエリをキャプチャすることができます。しかし、クエリが複雑であったり、長い配列を使用する場合はより高い値が適切となる可能性があります。
 
-For example, the database will truncate a query with an array with many items such as:
+例えば、以下のような項目数の多い配列を持つクエリは、データベースでは切り捨てられます。
 
 ```sql
 SELECT DISTINCT address FROM customers WHERE id = ANY(ARRAY[11, 12, 13, ... , 9999, 10000 ]) LIMIT 5
 ```
 
-The resulting normalized query will appear in the app as:
+正規化されたクエリは、アプリ内で次のように表示されます。
 
 ```sql
 SELECT DISTINCT address FROM customers WHERE id = ANY(ARRAY[ ?
 ```
 
-To avoid this, raise the `track_activity_query_size` setting to a value large enough to accommodate the largest expected text size of your queries. For further information, see the Postgres documentation on [runtime statistics][8].
+これを避けるために、クエリの予想される最大のテキストサイズに対応できるよう、`track_activity_query_size` の設定値を大きくしてください。詳細は、[ランタイム統計][8]についての Postgres ドキュメントを参照してください。
 
-### Queries are missing explain plans
+### クエリに実行計画が欠けている
 
-Some or all queries may not have plans available. This can be due to unsupported query commands, queries made by unsupported client applications, an outdated Agent, or incomplete database setup. Below are possible causes for missing explain plans.
+一部またはすべてのクエリで計画が利用できない場合があります。これは、サポートされていないクエリコマンドである、クエリがサポートされていないクライアントアプリケーションせ生成された、Agent のバージョンが古い、データベースのセットアップが不完全であることなどが原因です。以下は、実行計画の欠落の原因として考えられるものです。
 
-#### Missing explain function {#undefined-explain-function}
+#### 実行関数の欠落 {#undefined-explain-function}
 
-Problem: The Agent is unable to execute a required function in the `datadog` schema of the database.
+問題: Agent が、データベースの `datadog` スキーマで必要な関数を実行できない。
 
-Solution: The Agent requires the `datadog.explain_statement(...)` function to exist in **all databases** the Agent can collect queries from.
+解決方法: Agent は、`datadog.explain_statement(...)` 関数が、Agent がクエリを収集できる**すべてのデータベース**に存在することを必要とします。
 
-Create the function **in every database** to enable the Agent to collect explain plans.
+Agent が実行計画を収集できるように、**すべてのデータベース**に関数を作成します。
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
@@ -178,75 +178,74 @@ LANGUAGE 'plpgsql'
 RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
-#### Agent is running an unsupported version
-Ensure that the Agent is running version 7.36.1 or newer. Datadog recommends regular updates of the Agent to take advantage of new features, performance improvements, and security updates.
+#### Agent がサポートされていないバージョンで動作している
+Agent のバージョンが 7.36.1 以上であることを確認してください。Datadog では、新機能、より良いパフォーマンス、およびセキュリティアップデートをご利用いただくために、定期的な Agent のアップデートをお勧めします。
 
-#### Queries are truncated
-See the section on [truncated query samples](#query-samples-are-truncated) for instructions on how to increase the size of sample query text.
+#### クエリが切り捨てられる。
+クエリのサンプルテキストのサイズを大きくする方法については、[切り捨てられたクエリサンプル](#query-samples-are-truncated)のセクションを参照してください。
 
-#### Postgres extended query protocol
+#### Postgres 拡張クエリプロトコル
 
-If a client is using the Postgres [extended query protocol][9] or prepared statements, the Datadog Agent is unable to collect explain plans due to the separation of the parsed query and raw bind parameters. Below are a few options for addressing the problem.
+クライアントが Postgres [拡張クエリプロトコル][9]またはプリペアドステートメントを使用している場合、パースされたクエリと生のバインドパラメーターが分離されているため、Datadog Agent は説明プランを収集することができません。以下は、この問題に対処するためのいくつかの選択肢です。
 
-For Postgres version 12 or newer, enable the following beta feature in the [Postgres integration config][19].
+Postgres バージョン 12 以降の場合、[Postgres インテグレーション構成][19]で以下のベータ機能を有効にします。
 ```
 query_samples:
   explain_parameterized_queries: true
   ...
 ```
 
-For versions prior to Postgres 12, this feature is not supported. However, if your client provides an option to force using the simple query protocol, the Datadog Agent is enabled to collect execution plans.
+Postgres 12 より前のバージョンでは、この機能はサポートされていません。ただし、クライアントがシンプルクエリプロトコルを強制的に使用するオプションを提供している場合、Datadog Agent は実行プランを収集することが可能です。
 
-| Language | Client | Configuration for simple query protocol|
+| 言語 | クライアント | シンプルクエリプロトコルの構成|
 |----------|--------|----------------------------------------|
-| Go       | [pgx][10] | Set `PreferSimpleProtocol` to switch to the simple query protocol (See the [ConnConfig documentation][11]).Alternatively, you can apply this per query or call by using the [QuerySimpleProtocol][24] flag as the first argument on `Query` or `Exec` calls.
-| Java     | [Postgres JDBC Client][12] | Set `preferQueryMode = simple` to switch to the simple query protocol (See the [PreferQueryMode documentation][13]). |
-| Python   | [asyncpg][14]              | Uses the extended query protocol, which cannot be disabled. Disabling prepared statements does not solve the problem. To enable the collection of execution plans, format SQL Queries using [psycopg sql][15] (or some other comparable SQL formatter that does proper escaping of SQL values) before passing them to the DB client.                                                  |
-| Python   | [psycopg][16]             | `psycopg2` does not use the extended query protocol so execution plans should be collected without issue. <br/> `psycopg3` uses the extended query protocol by default and cannot be disabled. Disabling prepared statements does not solve the problem. To enable the collection of execution plans, format SQL Queries using [psycopg sql][15] before passing them to the DB client. |
-| Node     | [node-postgres][17]       | Uses the extended query protocol and cannot be disabled. To enable the Datadog Agent to collect execution plans, use [pg-format][18] to format SQL Queries before passing them to [node-postgres][17].|
+| Go       | [pgx][10] | `PreferSimpleProtocol` を設定して、シンプルなクエリプロトコルに切り替えます ([ConnConfig のドキュメント][11]を参照)。また、`Query` または `Exec` 呼び出しの最初の引数として [QuerySimpleProtocol][24] フラグを使って、クエリまたは呼び出しごとに適用することが可能です。
+| Java     | [Postgres JDBC クライアント][12] | `preferQueryMode = simple` と設定すると、シンプルクエリプロトコルに切り替わります ([PreferQueryMode のドキュメント][13]を参照してください)。 |
+| Python   | [asyncpg][14]              | 無効化できない拡張クエリプロトコルを使用します。プリペアドステートメントを無効にしても、問題は解決しません。実行計画の収集を可能にするには、SQL クエリを DB クライアントに渡す前に [psycopg sql][15] (または SQL 値を適切にエスケープする他の同等の SQL フォーマッタ) を使ってフォーマットしてください。                                                  |
+| Python   | [psycopg][16]             | `psycopg2` は拡張クエリプロトコルを使用しないので、実行計画は問題なく収集されるはずです。<br/> `psycopg3` はデフォルトで拡張クエリプロトコルを使用し、無効にすることはできません。プリペアドステートメントを無効にしても、問題は解決しません。実行計画の収集を有効にするには、DB クライアントに渡す前に [psycopg sql][15] を使って SQL クエリをフォーマットしてください。 |
+| Node     | [node-postgres][17]       | 拡張クエリプロトコルを使用するため、無効化することはできません。Datadog Agent が実行計画を収集できるようにするには、[pg-format][18] を使用して、SQL クエリを [node-postgres][17] に渡す前にフォーマットしてください。|
 
-#### Query is in a database ignored by the Agent instance config
+#### クエリが Agent インスタンスの構成で無視されるデータベースにある
 The query is in a database ignored by the Agent instance config `ignore_databases`. Default databases such as the `rdsadmin` and the `azure_maintenance` databases are ignored in the `ignore_databases` setting. Queries in these databases do not have samples or explain plans. Check the value of this setting in your instance config and the default values in the [example config file][19].
 
-**Note:** The `postgres` database is also ignored by default in Agent versions <7.41.0.
+**注:** Agent バージョン <7.41.0 では、`postgres` データベースもデフォルトで無視されます。
 
-#### Query cannot be explained
-Some queries such as BEGIN, COMMIT, SHOW, USE, and ALTER queries cannot yield a valid explain plan from the database. Only SELECT, UPDATE, INSERT, DELETE, and REPLACE queries have support for explain plans.
+#### クエリが実行されない
+BEGIN、COMMIT、SHOW、USE、ALTER などの一部のクエリでは、データベースから有効な実行計画を得ることができません。SELECT、UPDATE、INSERT、DELETE、REPLACE の各クエリのみが実行計画をサポートしています。
 
-#### Query is relatively infrequent or executes quickly
-The query may not have been sampled for selection because it does not represent a significant proportion of the database's total execution time. Try [raising the sampling rates][23] to capture the query.
+#### クエリの実行頻度が比較的低い、または実行速度が速い。
+このクエリはデータベースの総実行時間の中で大きな割合を占めていないため、選択のためにサンプリングされていない可能性があります。クエリをキャプチャするために、[サンプリングレートを上げる][23]ことを試みてください。
 
 
-#### Application is relying on search paths for specifying which schema to query
-Because Postgres does not expose the current [search path][20] in [`pg_stat_activity`][21], the Datadog Agent cannot find out which search path is being used for any active Postgres processes. The workaround for this limitation is to alter the search path for the user defined in the Postgres integration config to include the schema.
+#### アプリケーションは、どのスキーマに問い合わせるかを指定するために、検索パスに依存している
+Postgres は、[`pg_stat_activity`][21] で現在の[検索パス][20]を公開しないため、Datadog Agent は、アクティブな Postgres プロセスで使用されている検索パスを確認することができません。この制限を回避するには、Postgres インテグレーションで定義されたユーザーの検索パスを変更して、スキーマを含めるようにします。
 ```sql
 ALTER ROLE datadog SET search_path = "$user",public,schema1,schema2,etc;
 ```
 
-### Setup fails on `create extension pg_stat_statements`
+### `create extension pg_stat_statements` のセットアップの失敗
 
-Example error output from `create extension pg_stat_statements`:
+`create extension pg_stat_statements` からの出力エラー例:
 ```
 create extension pg_stat_statements;
 ERROR:  could not open extension control file "<path>/share/postgresql/extension/pg_stat_statements.control": No such file or directory
 SQL State: 58P01
 ```
 
-This error happens when you are missing the `postgresql-contrib` package that includes the `pg_stat_statements` extension. How to install the missing package varies depending on the host's distribution and your Postgres version. As an example, to install the `contrib` package on Ubuntu for Postgres 10, run:
+このエラーは、`pg_stat_statements` 拡張機能を含む `postgresql-contrib` パッケージがない場合に発生します。不足パッケージのインストール方法は、ホストの分布および Postgres のバージョンにより異なります。一例として、Ubuntu で Postgres 10 の `contrib` パッケージをインストールするには、以下を実行します。
 
 ```
 sudo apt-get install postgresql-contrib-10
 ```
 
-For more information, see the appropriate version of the [Postgres `contrib` documentation][22].
+詳細については、[Postgres `contrib` ドキュメント][22]の適切なバージョンを参照してください。
 
-### Queries from Agent are slow and/or have a high impact on the database
+### Agent からのクエリが遅い、またはデータベースへの影響が大きい
 
-The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. Below are possible reasons for Agent queries to require more resources.
+データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。Agent クエリがより多くのリソースを必要とする理由として、以下が考えられます。
 
-#### High value for `pg_stat_statements.max` {#high-pg-stat-statements-max-configuration}
-The recommended value for `pg_stat_statements.max` is `10000`. Setting this configuration to a higher value
-may cause the collection query to take longer to run which can lead to query timeouts and gaps in query metric collection. If the Agent reports this warning, make sure that `pg_stat_statements.max` is set to `10000` on the database. 
+#### `pg_stat_statements.max` の値が大きい {#high-pg-stat-statements-max-configuration}
+`pg_stat_statements.max` の推奨値は `10000` です。この構成を高い値に設定すると、収集クエリの実行に時間がかかり、クエリのタイムアウトやクエリメトリクスの収集のギャップにつながる可能性があります。Agent がこの警告を表示した場合は、データベースで `pg_stat_statements.max` が `10000` に設定されていることを確認します。
 
 
 [1]: /database_monitoring/setup_postgres/

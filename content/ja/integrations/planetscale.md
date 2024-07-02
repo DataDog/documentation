@@ -24,7 +24,7 @@
   "support_email": support@planetscale.com
 "categories":
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/planetscale/README.md"
 "display_on_public_website": true
@@ -58,7 +58,7 @@
 
 PlanetScale can push metrics into Datadog to assist your team with understanding database usage and performance.
 
-## Setup
+## セットアップ
 
 Follow the steps below to configure your PlanetScale organization to push metrics into Datadog.
 
@@ -67,17 +67,17 @@ Follow the steps below to configure your PlanetScale organization to push metric
 
 ![PlanetScale Organization Settings][3]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "planetscale" >}}
 
 
-### Service Checks
+### サービスチェック
 
 Planetscale does not include any service checks.
 
-### Events
+### イベント
 
 Planetscale does not include any events.
 

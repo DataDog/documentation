@@ -28,32 +28,32 @@ algolia:
 ---
 
 After you set up [log collection][1], you can customize your collection configuration:
-* [Filter logs](#filter-logs)
-* [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
-* [Aggregate multi-line logs](#multi-line-aggregation)
-* [Copy commonly used examples](#commonly-used-log-processing-rules)
-* [Use wildcards to monitor directories](#tail-directories-using-wildcards)
-* [Specify log file encodings](#log-file-encodings)
-* [Define global processing rules](#global-processing-rules)
+* [ログをフィルター](#filter-logs)
+* [ログの機密データのスクラビング](#scrub-sensitive-data-from-your-logs)
+* [複数行のログを集計する](#multi-line-aggregation)
+* [よく使われる例をコピーする](#commonly-used-log-processing-rules)
+* [ディレクトリを監視するためにワイルドカードを使用する](#tail-directories-using-wildcards)
+* [ログファイルのエンコーディングを指定する](#log-file-encodings)
+* [グローバルな処理ルールを定義する](#global-processing-rules)
 
-To apply a processing rule to all logs collected by a Datadog Agent, see the [Global processing rules](#global-processing-rules) section.
+Datadog Agent によって収集されたすべてのログに同一の処理ルールを適用する場合は、[グローバルな処理ルール](#global-processing-rules)のセクションを参照してください。
 
-**Notes**:
-- If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
-- Processing rule patterns must conform to [Golang regexp syntax][2].
-- The `log_processing_rules` parameter is used in integration configurations to customize your log collection configuration. While in the Agent's [main configuration][5], the `processing_rules` parameter is used to define global processing rules.
+**注**:
+- 複数の処理ルールを設定した場合、ルールは順次適用され、各ルールは直前のルールの結果に適用されます。
+- 処理ルールのパターンは [Golang の正規構文][2]に従う必要があります。
+- `log_processing_rules` パラメーターは、インテグレーションの構成で、ログ収集の構成をカスタマイズするために使用されます。Agent の[メインの構成][5]では、グローバルな処理ルールを定義するために `processing_rules` パラメーターが使用されます。
 
-## Filter logs
+## ログの絞り込み
 
-To send only a specific subset of logs to Datadog, use the `log_processing_rules` parameter in your configuration file with the `exclude_at_match` or `include_at_match` type.
+ログの一部分のみを Datadog に送信するには、構成ファイル内の `log_processing_rules` パラメーターを使用して、type に `exclude_at_match` または `include_at_match` を指定します。
 
-### Exclude at match
+### 一致時に除外
 
-| Parameter          | Description                                                                                        |
+| パラメーター          | 説明                                                                                        |
 |--------------------|----------------------------------------------------------------------------------------------------|
-| `exclude_at_match` | If the specified pattern is contained in the message, the log is excluded and not sent to Datadog. |
+| `exclude_at_match` | 指定されたパターンがメッセージに含まれる場合、そのログは除外され、Datadog に送信されません。 |
 
-For example, to **filter out** logs that contain a Datadog email address, use the following `log_processing_rules`:
+たとえば、Datadog メールアドレスを含むログを**除外する**には、次の `log_processing_rules` を使用します。
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -67,14 +67,14 @@ logs:
     log_processing_rules:
     - type: exclude_at_match
       name: exclude_datadoghq_users
-      ## Regexp can be anything
+      ## 任意の正規表現
       pattern: \w+@datadoghq.com
 ```
 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `log_processing_rules`, for example:
+Docker 環境では、`log_processing_rules` を指定するために、**フィルターしたいログを送るコンテナ**のラベル `com.datadoghq.ad.logs` を使用します。例:
 
 ```yaml
  labels:
@@ -92,12 +92,12 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
-**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**注**: ラベルの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To apply a specific configuration to a given container, Autodiscovery identifies containers by name, NOT image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image.` To configure using Autodiscovery to collect container logs on a given `<CONTAINER_IDENTIFIER>` within your pod, add the following annotations to your pod's `log_processing_rules`:
+特定のコンフィギュレーションを特定のコンテナに適用するために、オートディスカバリーはコンテナをイメージではなく、名前で識別します。つまり、`<CONTAINER_IDENTIFIER>` は、`.spec.containers[0].image.` とではなく `.spec.containers[0].name` との一致が試みられます。オートディスカバリーを使用して構成してポッド内の特定の `<CONTAINER_IDENTIFIER>` でコンテナログを収集するには、以下のアノテーションをポッドの `log_processing_rules` に追加します。
 
 ```yaml
 apiVersion: apps/v1
@@ -131,19 +131,19 @@ spec:
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
-**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**注**: アノテーションの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Include at match
+### 一致時に含める
 
-| Parameter          | Description                                                                       |
+| パラメーター          | 説明                                                                       |
 |--------------------|-----------------------------------------------------------------------------------|
-| `include_at_match` | Only logs with a message that includes the specified pattern are sent to Datadog. If multiple `include_at_match` rules are defined, all rules patterns must match in order for the log to be included. |
+| `include_at_match` | 指定されたパターンを含むメッセージを持つログだけが Datadog に送信されます。複数の `include_at_match` ルールが定義されている場合、ログを含めるにはすべてのルールパターンが一致している必要があります。 |
 
 
-For example, use the following `log_processing_rules` configuration to **filter in** logs that contain a Datadog email address:
+たとえば、Datadog のメールアドレスを含むログに**絞り込む**には、次のような `log_processing_rules` の構成を使用します。
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -157,11 +157,11 @@ logs:
     log_processing_rules:
     - type: include_at_match
       name: include_datadoghq_users
-      ## Regexp can be anything
+      ## 任意の正規表現
       pattern: \w+@datadoghq.com
 ```
 
-If you want to match one or more patterns, you must define them in a single expression:
+1 つ以上のパターンを一致させるには、単一の表現内で定義します。
 
 ```yaml
 logs:
@@ -175,7 +175,7 @@ logs:
       pattern: abc|123
 ```
 
-If the patterns are too long to fit legibly on a single line, you can break them into multiple lines:
+パターンが一行に収まらないほど長い場合は、それを複数行に分割することができます。
 
 ```yaml
 logs:
@@ -194,7 +194,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on the container that is sending the logs you want to filter, to specify the `log_processing_rules`. For example:
+Docker 環境では、フィルターを適用するログの送信元のコンテナでラベル `com.datadoghq.ad.logs` を使用して、`log_processing_rules` を指定します。例:
 
 ```yaml
  labels:
@@ -212,12 +212,12 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the container 
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
-**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**注**: ラベルの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
+Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。例: 
 
 ```yaml
 apiVersion: apps/v1
@@ -251,22 +251,22 @@ spec:
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
-**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**注**: アノテーションの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Scrub sensitive data from your logs
+## ログの機密データのスクラビング
 
 {{< callout url="https://www.datadoghq.com/private-beta/sensitive-data-scanner-using-agent-in-your-premises/" >}}
   Sensitive Data Scanner using the Agent is in private beta. See the <a href="https://www.datadoghq.com/blog/sensitive-data-scanner-using-the-datadog-agent/">blog post</a> and <a href="https://docs.datadoghq.com/sensitive_data_scanner/">documentation</a> for more information. To request access, fill out this form.
 {{< /callout >}}
 
-If your logs contain sensitive information that need redacting, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the `mask_sequences` type.
+編集が必要な機密データがログに含まれている場合は、機密要素をスクラビングするように Datadog Agent を構成します。それには、構成ファイルで `log_processing_rules` パラメーターを使用して、type に `mask_sequences` を指定します。
 
-This replaces all matched groups with the value of the `replace_placeholder` parameter.
+これにより、一致したすべてのグループが `replace_placeholder` パラメーターの値に置換されます。
 
-For example, to redact credit card numbers:
+以下は、クレジットカード番号を編集する例です。
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -281,14 +281,14 @@ logs:
       - type: mask_sequences
         name: mask_credit_cards
         replace_placeholder: "[masked_credit_card]"
-        ##One pattern that contains capture groups
+        ## キャプチャするグループを含む 1 つのパターン
         pattern: (?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})
 ```
 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`. For example:
+Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。例: 
 
 ```yaml
  labels:
@@ -307,12 +307,12 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
-**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**注**: ラベルの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
+Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。例: 
 
 ```yaml
 apiVersion: apps/v1
@@ -347,23 +347,23 @@ spec:
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
-**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**注**: アノテーションの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-With Agent version 7.17+, the `replace_placeholder` string can expand references to capture groups such as `$1`, `$2` and so forth. If you want a string to follow the capture group with no space in between, use the format `${<GROUP_NUMBER>}`.
+Agent バージョン 7.17 以降をご利用の場合、文字列 `replace_placeholder` はリファレンスを展開して `$1`、`$2` などのグループをキャプチャすることが可能です。キャプチャするグループとの間にスペースを入れずに文字列を続けるには、`${<グループ番号>}` のフォーマットを使用します。
 
-For instance, to scrub user information from the log `User email: foo.bar@example.com`, use:
+たとえば、ログ `User email: foo.bar@example.com` からユーザー情報をスクラビングするには、以下を使用します。
 
 * `pattern: "(User email: )[^@]*@(.*)"`
 * `replace_placeholder: "$1 masked_user@${2}"`
 
-This sends the following log to Datadog: `User email: masked_user@example.com`
+これにより、次のログが Datadog に送信されます: `User email: masked_user@example.com`
 
-## Multi-line aggregation
+## 複数行の集約
 
-If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. Use the `multi_line` type in the `log_processing_rules` parameter to aggregates all lines into a single entry until the given pattern is detected again.
+送信されるログが JSON 形式でない場合に、複数の行を 1 つのエントリに集約するには、1 行に 1 つのログを入れる代わりに、正規表現パターンを使用して新しいログを検出するように Datadog Agent を構成します。`log_processing_rules` パラメーターを使用して、type に `multi_line`  を指定すれば、指定されたパターンが再度検出されるまで、すべての行が 1 つのエントリに集約されます。
 
 For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format. These lines include a stack trace that can be sent as two logs:
 
@@ -395,7 +395,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`. For example:
+Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。例: 
 
 ```yaml
  labels:
@@ -414,7 +414,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
+Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。例: 
 
 ```yaml
 apiVersion: apps/v1
@@ -448,16 +448,16 @@ spec:
 
 **Note**: Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
-**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
+**注**: アノテーションの値は JSON 構文に従う必要があり、末尾にカンマやコメントを入れることはできません。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning"><strong>Important!</strong> Regex patterns for multi-line logs must start at the <em>beginning</em> of a log. Patterns cannot be matched mid-line. <em>A never matching pattern may cause log line losses.</em></div>
+<div class="alert alert-warning"><strong>重要！</strong> 複数行ログの正規表現パターンは、ログの<em>先頭</em>に開始する必要があります。行途中では一致できません。<em>一致しないパターンは、ログ行の損失につながる場合があります。</em></div>
 
-More examples:
+その他の例:
 
-| **Raw string**           | **Pattern**                                       |
+| **文字列の例**           | **パターン**                                       |
 |--------------------------|---------------------------------------------------|
 | 14:20:15                 | `\d{2}:\d{2}:\d{2}`                               |
 | 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                             |
@@ -466,19 +466,19 @@ More examples:
 | 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
-### Automatic multi-line aggregation
+### 自動複数行集計
 With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][3] automatically. 
 
-Enable `auto_multi_line_detection` globally in the `datadog.yaml` file:
+`datadog.yaml` ファイルで `auto_multi_line_detection` をグローバルに有効化します。
 
 ```yaml
 logs_config:
   auto_multi_line_detection: true
 ```
 
-For containerized deployments, you can enable `auto_multi_line_detection` with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true` environment variable.
+コンテナ化されたデプロイメントでは、環境変数 `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true` で `auto_multi_line_detection` を有効にすることが可能です。
 
-It can also be enabled or disabled (overriding the global config) per log configuration:
+また、ログ構成ごとに有効・無効 (グローバル構成をオーバーライド) を設定することができます。
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -492,7 +492,7 @@ logs:
     auto_multi_line_detection: true
 ```
 
-Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file:
+複数行の自動検出は、一般的な正規表現のリストを使用して、ログとのマッチングを試みます。組み込みのリストでは不十分な場合、`datadog.yaml` ファイルにカスタムパターンを追加することもできます。
 
 ```yaml
 logs_config:
@@ -505,7 +505,7 @@ logs_config:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`. For example:
+Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用して `log_processing_rules` を指定します。例: 
 
 ```yaml
  labels:
@@ -549,28 +549,28 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. After the detection threshold is met, all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
+この機能を有効にすると、新しいログファイルが開かれたとき、Agent はパターンの検出を試みます。このプロセスの間、ログは 1 行で送信されます。検出しきい値に達すると、そのソースの将来のすべてのログは、検出されたパターンで集計され、パターンが見つからない場合は 1 行で集計されます。検出には、最大 30 秒または最初の 500 ログ (いずれか早い方) が必要です。
 
-**Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The Agent reuses a previously detected pattern on the newly rotated file to avoid re-running detection.
+**注**: ローテーションされたログの命名パターンを制御できる場合、ローテーションされたファイルが、同じ名前で以前アクティブだったファイルを置き換えることを確認してください。Agent は、新しくローテーションされたファイル上で以前に検出されたパターンを再利用し、検出の再実行を回避します。
 
-Automatic multi-line detection detects logs that begin and comply with the following date/time formats: RFC3339, ANSIC, Unix Date Format, Ruby Date Format, RFC822, RFC822Z, RFC850, RFC1123, RFC1123Z, RFC3339Nano, and default Java logging SimpleFormatter date format.
+複数行の自動検出は、以下の日付/時刻形式から始まり、それに準拠するログを検出します: RFC3339、ANSIC、Unix Date Format、Ruby Date Format、RFC822、RFC822Z、RFC850、RFC1123、RFC1123Z、RFC3339Nano、Java ロギング SimpleFormatter デフォルト日付書式。
 
-## Commonly used log processing rules
+## 良く使用されるログの処理ルール
 
 See the dedicated [Commonly Used Log Processing Rules FAQ][4] to see a list of examples.
 
-## Tail directories using wildcards
+## ワイルドカードを使用したディレクトリのテール
 
-If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones using wildcards in the `path` attribute. If you want to exclude some files matching the chosen `path`, list them in the `exclude_paths` attribute.
+ログファイルに日付のラベルが付いているか、すべてのログファイルが同じディレクトリに保存されている場合は、すべてのファイルを監視して、新しいファイルを自動的に検出するように Datadog Agent を構成できます。それには、`path` 属性にワイルドカードを使用します。選択した `path` と一致するファイルを除外する場合は、`exclude_paths` 属性にリストします。
 
-* Using `path: /var/log/myapp/*.log`:
-  * Matches all `.log` file contained in the `/var/log/myapp/` directory.
-  * Doesn't match `/var/log/myapp/myapp.conf`.
+* `path: /var/log/myapp/*.log` を使用する場合
+  * `/var/log/myapp/` ディレクトリ内のすべての `.log` ファイルに一致します。
+  * `/var/log/myapp/myapp.conf` には一致しません。
 
-* Using `path: /var/log/myapp/*/*.log`:
-  * Matches `/var/log/myapp/log/myfile.log`.
-  * Matches `/var/log/myapp/errorLog/myerrorfile.log`
-  * Doesn't match `/var/log/myapp/mylogfile.log`.
+* `path: /var/log/myapp/*/*.log` を使用する場合
+  * `/var/log/myapp/log/myfile.log` に一致します。
+  * `/var/log/myapp/errorLog/myerrorfile.log` に一致します。
+  * `/var/log/myapp/mylogfile.log` には一致しません。
 
 Configuration example for Linux:
 
@@ -585,7 +585,7 @@ logs:
     source: go
 ```
 
-The example above matches `/var/log/myapp/log/myfile.log` and excludes `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log`.
+上記の例では、`/var/log/myapp/log/myfile.log` にマッチし、`/var/log/myapp/log/debug.log` と `/var/log/myapp/log/trace.log` は除外しています。
 
 Configuration example for Windows:
 
@@ -604,26 +604,26 @@ The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
 **Note2**: The path and exclude_paths values are case sensitive.
 
-## Tail most recently modified files first
+## 最近更新されたファイルを最初に追跡する
 
-When prioritizing files to tail, the Datadog Agent sorts the filenames in the directory path by reverse lexicographic order. To sort files based on file modification time, set the configuration option `logs_config.file_wildcard_selection_mode` to the value `by_modification_time`.
+Datadog Agent は、ファイルを優先的に追跡する際、ディレクトリパスのファイル名を逆辞典順でソートします。ファイルの修正時間に基づいてファイルをソートするには、構成オプション `logs_config.file_wildcard_selection_mode` に値 `by_modification_time` を設定します。
 
-This option is helpful when the number of total log file matches exceeds `logs_config.open_files_limit`. Using `by_modification_time` ensures that the most recently updated files are tailed first in the defined directory path.
+このオプションは、ログファイルの合計マッチ数が `logs_config.open_files_limit` を超える場合に有用です。`by_modification_time` を使用すると、定義されたディレクトリパスで最も新しく更新されたファイルが最初に追跡されるようになります。
 
-To restore default behavior, set the configuration option `logs_config.file_wildcard_selection_mode` to the value`by_name`.
+デフォルトの動作に戻すには、構成オプション `logs_config.file_wildcard_selection_mode` を値 `by_name` に設定します。
 
-This feature requires Agent version 7.40.0 or above.
+この機能を使用するには、Agent バージョン 7.40.0 以降が必要です。
 
-## Log file encodings
+## ログファイルのエンコーディング
 
-By default, the Datadog Agent assumes that logs use UTF-8 encoding. If your application logs use a different encoding, specify the `encoding` parameter in the logs configuration setting.
+デフォルトでは、Datadog Agent は、ログが UTF-8 エンコーディングを使用すると仮定しています。アプリケーションログが異なるエンコーディングを使用する場合、ログ構成設定で `encoding` パラメーターを指定します。
 
-The list below gives the supported encoding values. If you provide an unsupported value, the Agent ignores the value and reads the file as UTF-8.
+以下のリストは、サポートされているエンコーディングの値を示しています。サポートされていない値を指定した場合、Agent はその値を無視し、ファイルを UTF-8 として読み取ります。
  * `utf-16-le` - UTF-16 little-endian (Datadog Agent **v6.23/v7.23**)
  * `utf-16-be` - UTF-16 big-endian (Datadog Agent **v6.23/v7.23**)
  * `shift-jis` - Shift-JIS (Datadog Agent **v6.34/v7.34**)
 
-Configuration example:
+構成例:
 
 ```yaml
 logs:
@@ -635,16 +635,16 @@ logs:
     encoding: utf-16-be
 ```
 
-**Note**: The `encoding` parameter is only applicable when the `type` parameter is set to `file`.
+**注**: `encoding` パラメーターは `type` パラメーターが `file` に設定されている場合のみ適用可能です。
 
-## Global processing rules
+## グローバルな処理ルール
 
 For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
 
-In the `datadog.yaml` file:
+`datadog.yaml` ファイルで、以下のようにします。
 
 ```yaml
 logs_config:
@@ -659,9 +659,9 @@ logs_config:
 ```
 
 {{% /tab %}}
-{{% tab "Environment Variable" %}}
+{{% tab "環境変数" %}}
 
-Use the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to configure global processing rules, for example:
+グローバルな処理ルールを構成するには、環境変数 `DD_LOGS_CONFIG_PROCESSING_RULES` を使用します。以下に例を示します。
 
 ```shell
 DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_email", "replace_placeholder": "MASKED_EMAIL", "pattern" : "\\w+@datadoghq.com"}]'
@@ -699,16 +699,16 @@ datadog:
 
 {{% /tab %}}
 {{< /tabs >}}
-All the logs collected by the Datadog Agent are impacted by the global processing rules.
+Datadog Agent によって収集されるすべてのログが、グローバルな処理ルールの影響を受けます。
 
 **Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][6] to troubleshoot any issues.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-*Logging without Limits is a trademark of Datadog, Inc.
+*Logging without Limits は Datadog, Inc. の商標です。
 
 [1]: /agent/logs/
 [2]: https://golang.org/pkg/regexp/syntax/

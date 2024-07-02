@@ -18,74 +18,74 @@ The [Samples page][1] helps you understand which queries were running at a given
 
 The Samples page shows a snapshot in time of running and recently finished queries. Because it's a snapshot in time, it doesn't necessarily show a representation of _all_ queries, but can indicate proportions.
 
-## Search and filter
+## 検索とフィルター
 
 The Samples page shows queries on all supported database products together (unlike on the Query Metrics page where you select which database you want to dive into). Filter on the `source` facet to see data for a particular database (Postgres or MySQL).
 
-Enter tags into the Search field to filter the list of query samples, or use the facets listed on the left side. The facets include:
+検索フィールドにタグを入力してクエリサンプルのリストをフィルタリングするか、左側に表示されるファセットを使用します。ファセットには次のようなものがあります。
 
-- **Core**: Services, database product sources (Postgres or MySQL), host, and duration.
-- **Network**: Client IP address and ports for applications or proxies that connect to the database.
-- **Database**: Database names, an explain plan cost slider, indexes, a row count slider for the number of rows returned or affected by queries, query statements, and users.
-- **Postgres and MySQL specific facets**
+- **Core**: サービス、データベース製品のソース (Postgres または MySQL)、ホスト、実行時間。
+- **Network**: データベースに接続するアプリケーションやプロキシのクライアント IP アドレスとポート。
+- **Database**: データベース名、実行計画のコストスライダー、インデックス、クエリで返されるまたは影響を受ける行数を示す行数スライダー、クエリステートメント、およびユーザー。
+- **Postgres と MySQL 特有のファセット**
 
-Click **Options** to add columns to the table. Click on column headers to sort by a particular metric.
+**Options** をクリックして、テーブルに列を追加します。列の見出しをクリックすると、特定のメトリクスで並べ替えを行うことができます。
 
-### Explain plan cost
+### 実行計画のコスト
 
-Explain plan cost is a unitless measure that the database uses to compare two plans with each other. It roughly corresponds to number of _things_ on the database---blocks or pages---but it is primarily useful for relative comparisons of two plans, not in absolute terms for a single plan. Explain plan cost calculation helps the database choose which plan it's going to use.
+実行計画のコストは、データベースが 2 つのプランを相互に比較するために使用する単位のない尺度のことです。これは、データベース上の「_モノ_」の数 (ブロックやページ) にほぼ対応していますが、主に 2 つのプランを相対的に比較する際に有効で、1 つのプランを絶対的に用いる際には使用しません。実行計画のコスト計算は、データベースがどのプランを使用するかを選択するのに役立ちます。
 
-The Query Samples page lets you filter, sort, and compare the explain plan costs of multiple queries. In this context, explain plan cost is not to be taken absolutely. A query with an explain plan cost of 8.5 is not necessarily performing better than one with a cost of 8.7. But if two queries have vastly different costs when you'd expect them to be similar, it can be beneficial to investigate why. Also, you can sort your queries by cost to see what your expensive queries are, separate from external factors like network latency.
+Query Samples ページでは、複数のクエリの実行計画コストをフィルタリング、並べ替え、比較することができます。この文脈では、実行計画コストは絶対的なものではありません。実行計画コストが 8.5 のクエリは、コストが 8.7 のクエリよりもパフォーマンスが良いとは限りません。しかし、2 つのクエリのコストが似ているはずなのに大きく異なる場合は、その理由を調査すると良いでしょう。また、クエリをコストで並べ替えることで、ネットワークのレイテンシーなどの外部要因とは別にコストの高いクエリを確認することができます。
 
-### Indexes
+### インデックス
 
-You can filter queries that have explain plans by database index, so you can see which queries are using a specific index. Alternatively, you can find infrequently used indexes by selecting a long time frame such as a week (so a good representation of query samples over time), and looking at least used indexes (the lowest number in the list of index facets). You can then consider whether the performance gained from having that index is worth the cost of keeping it in the database.
+実行計画を持つクエリをデータベースインデックスでフィルタリングすることで、どのクエリが特定のインデックスを使用しているかを確認することができます。また、1 週間などの長い期間 (時間経過に伴うクエリのサンプルをよく表すデータ) を選択して、最も使用されていないインデックス (インデックスファセットのリストで最も低い番号) を調べることで、使用頻度の低いインデックスを見つけることもできます。そして、そのインデックスを持つことで得られるパフォーマンスが、データベースに保持するためのコストに見合うかどうかを検討します。
 
-### Row count
+### 行数
 
-Filter or sort to find queries that return or affect a large number of rows, over the time frame selected.
+データのフィルタリングまたは並べ替えを行って、選択した時間枠内で多くの行を返したり、影響を与えたりするクエリを見つけます。
 
 ### Duration
 
-Filter or sort to find queries that take the longest to run over the time frame selected. If you're looking to optimize your overall performance, you can track down the owner of these slow queries and discuss improving them.
+フィルタリングや並べ替えを行うことで、選択した時間枠の中で実行に最も時間がかかるクエリを見つけることができます。全体的なパフォーマンスを最適化したい場合は、これらの遅いクエリの所有者を追跡し、その改善について話し合うのが良いでしょう。
 
-### Sample details
+### 結果の詳細
 
-Click on a query in the table to open its Sample Details page. Use the Source, Host, and Client IP tiles at the top to filter the Sample Queries page by the values for this sample, or to navigate to other Datadog information such as the host's dashboard or Network traffic metrics for the client IP.
+テーブル内のクエリをクリックすると、そのサンプルの詳細ページが表示されます。上部の Source、Host、および Client IP タイルを使用して、Sample Queries ページをこのサンプルの値でフィルタリングしたり、ホストのダッシュボードやクライアント IP のネットワークトラフィックメトリクスなど、Datadog 内の他の情報に移動することができます。
 
-{{< img src="database_monitoring/dbm_sd_actions.png" alt="Sample details action tiles" style="width:100%;">}}
+{{< img src="database_monitoring/dbm_sd_actions.png" alt="結果詳細のアクションタイル" style="width:100%;">}}
 
-For example, by opening the Network traffic page and grouping by service, you can see what service is running the query from that IP.
+たとえば、ネットワークトラフィックのページを開いてサービスごとにグループ化することで、その IP からどのサービスがクエリを実行しているかを確認することができます。
 
-Graphs show the query's performance metrics---number of executions, duration, and rows per query---over the specified time frame _if it is a [top query][2]_, with a line indicating the performance for the sample snapshot you're looking at. If metrics aren't available because it's not a top query, the graphs are blank.
+グラフには、_[トップクエリ][2]の場合_、指定された期間におけるクエリのパフォーマンスメトリクス (実行回数、実行時間、クエリごとの行数) が表示され、参照しているサンプルスナップショットのパフォーマンスを示す線が表示されます。トップクエリでないためにメトリクスが利用できない場合は、グラフは空白になります。
 
-{{< img src="database_monitoring/dbm_sd_graphs.png" alt="Query performance metrics graphs with This Query indicator" style="width:100%;">}}
+{{< img src="database_monitoring/dbm_sd_graphs.png" alt="このクエリに関するクエリのパフォーマンスメトリクスグラフ" style="width:100%;">}}
 
-The Explain Plan section shows Duration and Cost stats for the current sample _and_ averages and p90 for all collected snapshots across the time frame.
+実行計画セクションには、現在のサンプルの実行時間とコストの統計、_および_期間中に収集されたすべてのスナップショットの平均値と p90 が表示されます。
 
 The explain plan also shows measures for each node (step) in the plan: startup cost, total cost, plan rows, and plan width. Hover over the column heading to see a description of each measure.
 
-{{< img src="database_monitoring/dbm_sd_explain_plan.png" alt="Explain plan samples statistics and step metrics" style="width:100%;">}}
+{{< img src="database_monitoring/dbm_sd_explain_plan.png" alt="実行計画のサンプル統計とステップのメトリクス" style="width:100%;">}}
 
-## Explore other visualizations
+## その他の視覚化ウィジェットを使用する
 
-Besides the default list view, you can view query samples data as timeseries, top lists, or tables by clicking one of the **Visualize as** buttons. This can bring to light powerful ways of looking at the data. For example, to see the slowest queries running in a data center, select **Timeseries**, group by `Statement` and graph the average duration:
+デフォルトのリスト表示以外にも、**Visualize as** ボタンをクリックすることで、クエリサンプルのデータをタイムスケール、トップリスト、テーブルとして表示することができます。これらを活用することで、データをさらに詳しく把握できます。たとえば、あるデータセンターで実行されている最も遅いクエリを見るには、**Timeseries** を選択し、`Statement` でグループ化して平均時間をグラフ化します。
 
-{{< img src="database_monitoring/dbm_qs_timeseries_viz.png" alt="Finding slowest queries" style="width:100%;">}}
+{{< img src="database_monitoring/dbm_qs_timeseries_viz.png" alt="最も遅いクエリを特定する" style="width:100%;">}}
 
-Or find an outlier such as a query that _usually_ runs quickly, but occasionally runs slowly by graphing its p90 or p99 duration.
+また、p90 や p99 の実行時間をグラフ化することで、_通常は_速く実行されるが、時々遅くなるクエリなどの外れ値を見つけることができます。
 
-Use table visualizations to produce report-like summaries to share with others. For example, create a table of worst-performing queries (p75 Duration), and include the average plan cost values for each query:
+テーブルの視覚化機能を使用して、レポートのようなサマリーを作成し、他の人と共有することができます。たとえば、最もパフォーマンスの低いクエリの表を作成し (実行時間 p75)、各クエリの平均計画コストの値を記載します。
 
-{{< img src="database_monitoring/dbm_qs_p75_duration_table.png" alt="Table of p75 duration queries" style="width:100%;">}}
+{{< img src="database_monitoring/dbm_qs_p75_duration_table.png" alt="実行時間 p75 のクエリテーブル" style="width:100%;">}}
 
-Use the **Export** button to share the data with your engineering team to start a discussion about where to focus improvement efforts.
+**Export** ボタンを使ってデータをエンジニアリングチームと共有し、どこに改善の焦点を当てるべきかを話し合うことができます。
 
-## Database Monitoring dashboards
+## データベースモニタリングダッシュボード
 
-For quick access to dashboards that showcase database-related infrastructure and query metrics visualizations, click the **Dashboards** link at to top of the page. Use the out-of-the-box dashboards, or clone and customize them to suit your needs.
+データベース関連のインフラストラクチャーとクエリメトリクスの視覚化を示すダッシュボードにすばやくアクセスするには、ページの上部にある **Dashboards** リンクをクリックします。すぐに使用できるダッシュボードを使用するか、必要に応じてクローンを作成してカスタマイズします。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

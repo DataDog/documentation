@@ -30,7 +30,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "configuration & deployment"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/nomad/README.md"
 "display_on_public_website": true
@@ -77,13 +77,13 @@ Gather metrics from your Nomad clusters to:
 
 Recommended monitors are available to get notified on different Nomad events.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Nomad emits metrics to Datadog through DogStatsD. To enable the Nomad integration, [install the Datadog Agent][2] on each client and server host.
 
-### Configuration
+### 構成
 
 Once the Datadog Agent is installed, add a Telemetry stanza to the Nomad configuration for your clients and servers:
 
@@ -99,21 +99,21 @@ telemetry {
 
 Next, reload or restart the Nomad agent on each host. You should start to see Nomad metrics flowing to your Datadog account.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "nomad" >}}
 
 
-### Events
+### イベント
 
 The Nomad check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Nomad check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

@@ -236,7 +236,7 @@ If you are using a version of `com.android.tools.build:gradle` below `5.0` in yo
 android.jetifier.ignorelist=dd-sdk-android-core
 ```
 
-### Troubleshooting
+### トラブルシューティング
 
 #### Android build fails with `Unable to make field private final java.lang.String java.io.File.path accessible`
 
@@ -323,7 +323,7 @@ dependencies:
   'datadog_flutter_plugin: ^2.0.0
 ```
 
-## Troubleshooting
+## トラブルシューティング
 
 ### Duplicate interface (iOS)
 

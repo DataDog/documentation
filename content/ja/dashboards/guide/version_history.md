@@ -1,16 +1,16 @@
 ---
+title: Version History for Dashboards
 disable_toc: false
 further_reading:
 - link: /dashboards/
   tag: documentation
-  text: ダッシュボードの概要
+  text: Dashboards Overview
 - link: /account_management/audit_trail/
   tag: documentation
-  text: 監査証跡の概要
-- link: https://www.datadoghq.com/blog/dashboards-notebooks-version-history/
+  text: Audit Trail Overview
+- link: "https://www.datadoghq.com/blog/dashboards-notebooks-version-history/"
   tag: blog
-  text: バージョン履歴で Datadog ダッシュボードとノートブックに対する変更を追跡する
-title: ダッシュボードのバージョン履歴
+  text: Track changes to Datadog dashboards and notebooks with version history
 ---
 
 ## 概要
@@ -39,7 +39,7 @@ Version History サイドパネルから任意のバージョンをクリック�
 ## バージョンの復元
 ダッシュボードを以前のバージョンに復元するには、2 つの方法があります。
 
-{{< img src="/dashboards/guide/version_history/dashboard_version_history_options.png" alt="画像の説明" style="width:100%;" >}}
+{{< img src="/dashboards/guide/version_history/dashboard_version_history_options.png" alt="Version History side panel shows past dashboard versions and ways to restore them." style="width:100%;" >}}
 
 - Version History サイドパネルから復元するバージョンを決め、ユーザープロファイルの右側にあるケバブメニューをクリックし、**Restore this version** を選択します。
 - Version History サイドパネルが開いた際に、ページ上部に **Restore this version** ボタンが表示されます。
@@ -57,8 +57,8 @@ Version History サイドパネルから任意のバージョンをクリック�
 | 監査証跡が**有効**な場合  | 90 日 |
 
 
-[1]:/ja/account_management/audit_trail/
+[1]: /account_management/audit_trail/
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

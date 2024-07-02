@@ -1,12 +1,12 @@
 ---
+title: Querying
 aliases:
-- /ja/graphing/using_graphs/
-description: データを問い合わせてインサイトを得る
+  - /graphing/using_graphs/
+description: Query your data to gain insight
 further_reading:
-- link: https://learn.datadoghq.com/courses/building-better-dashboards
-  tag: ラーニングセンター
-  text: ダッシュボードをより効果的に活用する
-title: クエリ
+- link: "https://learn.datadoghq.com/courses/building-better-dashboards"
+  tag: Learning Center
+  text: Building Better Dashboards
 ---
 
 ## 概要
@@ -137,7 +137,7 @@ JSON ビューの使用方法については、[JSON を使用したグラフ作
 
 分析のニーズに応じて、割合、微分係数、平滑化など、他の数学関数をクエリに適用することもできます。詳細については、[使用可能な関数のリスト][12]をご参照ください。
 
-また、Datadog では、さまざまな算術演算によりメトリクス、ログ、トレース、その他のデータソースをグラフ化できます。グラフに表示される 値を変更するには、`+`、`-`、`/`、`*` を使用します。この構文では、整数値、および複数のメトリクスを使用した演算の両方を使用できます。
+また、Datadog では、さまざまな算術演算によりメトリクス、ログ、トレース、その他のデータソースをグラフ化できます。グラフに表示される 値を変更するには、`+`、`-`、`/`、`*`、`min`、および `max` を使用します。この構文では、整数値、および複数のメトリクスを使用した演算の両方を使用できます。
 
 各メトリクスを別々にグラフに表示するには、コンマ (`,`) を使用します（例: `a, b, c`）。
 
@@ -172,6 +172,23 @@ status:error / status:info
 {{< img src="dashboards/querying/arithmetic_6.png" alt="数式の例 - ログ比率" style="width:75%;" >}}
 
 **注**: 数式に文字は割り当てられません。数式間では演算できません。
+
+#### Minimum or Maximum between two queries
+Here is an example using the `max` operator to find the maximum CPU usage between two availability zones.  
+
+```text
+max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2}) 
+```
+
+{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'max' showing max count value between two metric queries" style="width:75%;" >}}
+
+Additionally, you can also calculate the maximum (or minimum) between two queries on different products. Here is another example using the `min` operator to find the minimum between logs with error statuses and warning statuses.
+
+```text
+min(status:error, status:warn)
+```
+
+{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
 
 ### エイリアスを作成する
 
@@ -218,19 +235,19 @@ status:error / status:info
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/graphing_json/
-[2]: /ja/dashboards/guide/quick-graphs/
-[3]: /ja/dashboards/widgets/
+[1]: /dashboards/graphing_json/
+[2]: /dashboards/guide/quick-graphs/
+[3]: /dashboards/widgets/
 [4]: https://app.datadoghq.com/metric/explorer
 [5]: https://app.datadoghq.com/notebook/list
 [6]: https://app.datadoghq.com/metric/summary
-[7]: /ja/metrics/advanced-filtering/
-[8]: /ja/getting_started/tagging/
-[9]: /ja/metrics/#time-aggregation
-[10]: /ja/dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
-[11]: /ja/dashboards/functions/rollup/
-[12]: /ja/dashboards/functions/#function-types
-[13]: /ja/metrics/advanced-filtering/#boolean-filtered-queries
-[14]: /ja/logs/explorer/search_syntax/
-[15]: /ja/dashboards/widgets/timeseries/#event-overlay
-[16]: /ja/dashboards/template_variables/
+[7]: /metrics/advanced-filtering/
+[8]: /getting_started/tagging/
+[9]: /metrics/#time-aggregation
+[10]: /dashboards/functions/rollup/#rollup-interval-enforced-vs-custom
+[11]: /dashboards/functions/rollup/
+[12]: /dashboards/functions/#function-types
+[13]: /metrics/advanced-filtering/#boolean-filtered-queries
+[14]: /logs/explorer/search_syntax/
+[15]: /dashboards/widgets/timeseries/#event-overlay
+[16]: /dashboards/template_variables/

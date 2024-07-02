@@ -5,7 +5,7 @@ aliases:
   - /logs/languages/ruby
 further_reading:
 - link: "https://github.com/roidrage/lograge"
-  tag: Source Code
+  tag: ソースコード
   text: Lograge Documentation
 - link: /logs/log_configuration/processors
   tag: Documentation

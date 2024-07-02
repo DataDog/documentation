@@ -42,7 +42,7 @@
 "categories":
 - "caching"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/tomcat/README.md"
 "display_on_public_website": true
@@ -55,7 +55,7 @@
 "manifest_version": "2.0.0"
 "name": "tomcat"
 "public_title": "Tomcat"
-"short_description": "Track requests per second, bytes served, cache hits, servlet metrics, and more."
+"short_description": "毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。"
 "supported_os":
 - "linux"
 - "windows"
@@ -63,13 +63,13 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Caching"
-  - "Category::Log Collection"
+  - "Category::キャッシュ"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Track requests per second, bytes served, cache hits, servlet metrics, and more."
+  "description": "毎秒のリクエスト数、処理バイト数、キャッシュヒット数、サーブレットメトリクスなどを追跡。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -79,61 +79,61 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Tomcat Dashboard][1]
+![Tomcat ダッシュボード][1]
 
-## Overview
+## 概要
 
-This check collects Tomcat metrics, for example:
+このチェックは、次のような Tomcat メトリクスを収集します。
 
-- Overall activity metrics: error count, request count, processing times, etc.
-- Thread pool metrics: thread count, number of threads busy, etc.
-- Servlet processing times
+- 全体的なアクティビティメトリクス: エラー数、リクエスト数、処理時間など
+- スレッドプールメトリクス: スレッド数、ビジースレッド数など
+- サーブレット処理時間
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Tomcat check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Tomcat servers.
+Tomcat チェックは [Datadog Agent][2] パッケージに含まれています。Tomcat サーバーに追加でインストールする必要はありません。
 
-This check is JMX-based, so you need to enable JMX Remote on your Tomcat servers. Follow the instructions in [Monitoring and Managing Tomcat][3].
+このチェックは JMX ベースなので、Tomcat サーバーで JMX リモートを有効にする必要があります。この方法については、[Tomcat の監視と管理][3]の手順に従ってください。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `tomcat.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to collect Tomcat metrics and [logs](#log-collection). See the [sample tomcat.d/conf.yaml][2] for all available configuration options.
+1. Tomcat のメトリクスと[ログ](#ログ収集)を収集するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `tomcat.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[tomcat.d/conf.yaml のサンプル][2]を参照してください。
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-See the [JMX Check documentation][4] for a list of configuration options usable by all JMX-based checks.
+JMX ベースのすべてのチェックで使用可能なコンフィギュレーションオプションのリストについては、[JMX チェックに関するドキュメント][4]を参照してください。
 
-#### List of metrics
+#### メトリクスのリスト
 
-The `conf` parameter is a list of metrics to be collected by the integration. Only two keys are allowed:
+`conf` パラメーターは、インテグレーションによって収集されるメトリクスのリストです。次の 2 つのキーのみが許可されます。
 
-- `include` (**mandatory**): A dictionary of filters. Any attribute that matches these filters is collected unless it also matches the `exclude` filters (see below).
-- `exclude` (**optional**): A dictionary of filters. Attributes that match these filters are not collected.
+- `include` (**必須**): フィルターの辞書。これらのフィルターに一致する属性は、`exclude` フィルターにも一致している場合を除き、収集されます (以下を参照)。
+- `exclude` (**任意**): フィルターの辞書。これらのフィルターに一致する属性は収集されません。
 
-For a given bean, metrics get tagged in the following manner:
+特定の Bean に対して、メトリクスは次のようにタグ付けされます。
 
 ```text
 mydomain:attr0=val0,attr1=val1
 ```
 
-In this example, your metric is `mydomain` (or some variation depending on the attribute inside the bean) and has the tags `attr0:val0`, `attr1:val1`, and `domain:mydomain`.
+この例では、メトリクスは `mydomain` (Bean 内の属性によっては多少異なる) になり、タグ `attr0:val0`、`attr1:val1`、`domain:mydomain` が付きます。
 
-If you specify an alias in an `include` key that is formatted as _camel case_, it is converted to _snake case_. For example, `MyMetricName` is shown in Datadog as `my_metric_name`.
+`include` キー内の指定したエイリアスが_キャメルケース_として書式設定されている場合、_スネークケース_に変換されます。たとえば `MyMetricName` は、Datadog では `my_metric_name` と表示されます。
 
-##### The attribute filter
+##### 属性フィルター
 
-The `attribute` filter can accept two types of values:
+`attribute` フィルターは、次の 2 種類の値を受け入れます。
 
-- A dictionary whose keys are attributes names (see below). For this case, you can specify an alias for the metric that becomes the metric name in Datadog. You can also specify the metric type as a gauge or counter. If you choose counter, a rate per second is computed for the metric.
+- キーが属性名の辞書（以下を参照）。この場合、メトリクスのエイリアスを指定でき、それが Datadog でメトリクス名になります。ゲージまたはカウンターとしてメトリクスタイプを指定することもできます。カウンターを選択した場合は、メトリクスの秒あたりの速度が計算されます。
 
   ```yaml
   conf:
@@ -150,7 +150,7 @@ The `attribute` filter can accept two types of values:
           metric_type: counter
   ```
 
-- A list of attributes names (see below). For this case, the metric type is a gauge, and the metric name is `jmx.\[DOMAIN_NAME].\[ATTRIBUTE_NAME]`.
+- 属性名のリスト（以下を参照）。この場合、メトリクスタイプはゲージで、メトリクス名は `jmx.\[ドメイン名].\[属性名]` です。
 
   ```yaml
   conf:
@@ -168,10 +168,10 @@ The `attribute` filter can accept two types of values:
         - RecentHitRate
   ```
 
-#### Log collection
+#### ログ収集
 
 
-1. To submit logs to Datadog, Tomcat uses the `log4j` logger. For versions of Tomcat before 8.0, `log4j` is configured by default. For Tomcat 8.0+, you must configure Tomcat to use `log4j`, see [Using Log4j][5]. In the first step of those instructions, edit the `log4j.properties` file in the `$CATALINA_BASE/lib` directory as follows:
+1. ログを Datadog に送信する際、Tomcat は `log4j` ロガーを使用します。バージョン 8.0 より前の Tomcat では、`log4j` がデフォルトで構成されています。バージョン 8.0+ の Tomcat では、Tomcat を構成し `log4j` を使用する必要があります。[Log4 の使用][5]を参照してください。この手順の初めに、以下の要領で  `$CATALINA_BASE/lib` ディレクトリにある `log4j.properties` ファイルを編集します。
 
    ```conf
      log4j.rootLogger = INFO, CATALINA
@@ -214,24 +214,24 @@ The `attribute` filter can accept two types of values:
      log4j.logger.org.apache.catalina.core.ContainerBase.[Catalina].[localhost].[/host-manager] =\
        INFO, HOST-MANAGER
    ```
-   Then follow the remaining steps in [the Tomcat docs][5] for configuring `log4j`.
+   そして、[Tomcat ドキュメント][5] の残りの手順に従い `log4j` を構成します。
 
-2. By default, Datadog's integration pipeline support the following conversion patterns:
+2. Datadog のインテグレーションパイプラインは、デフォルトで、次の変換パターンをサポートします。
 
    ```text
      %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
      %d [%t] %-5p %c - %m%n
    ```
 
-    Clone and edit the [integration pipeline][6] if you have a different format. See [Logging in Tomcat][7] for details on Tomcat logging capabilities.
+    フォーマットが異なる場合は、[インテグレーションパイプライン][6]を複製して編集します。Tomcat のログ機能については、[Tomcat のログ][7]を参照してください。
 
-3. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+3. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-4. Add this configuration block to your `tomcat.d/conf.yaml` file to start collecting your Tomcat Logs:
+4. Tomcat のログの収集を開始するには、次の構成ブロックを `tomcat.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -246,9 +246,9 @@ The `attribute` filter can accept two types of values:
        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment. See the [sample tomcat.yaml][2] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル tomcat.yaml][2] を参照してください。
 
-5. [Restart the Agent][3].
+5. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/conf.yaml.example
@@ -258,37 +258,37 @@ The `attribute` filter can accept two types of values:
 [6]: https://docs.datadoghq.com/logs/processing/#integration-pipelines
 [7]: https://tomcat.apache.org/tomcat-7.0-doc/logging.html
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery with JMX][1] guide.
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
 [1]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][4] and look for `tomcat` under the **Checks** section.
+[Agent の status サブコマンドを実行][4]し、**Checks** セクションで `tomcat` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "tomcat" >}}
 
 
-### Events
+### イベント
 
-The Tomcat check does not include any events.
+Tomcat チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "tomcat" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-### Missing `tomcat.*` metrics
+### `tomcat.*` メトリクスの欠落
 
 The Datadog Agent collects JMX metrics with either `Catalina` or `Tomcat` as bean domain names with the Datadog Agent version **7.49.0** or later. Older versions only collect metrics with `Catalina` as the bean domain name.
 Standalone Tomcat deployments have metrics under domain `Catalina`, but embedded Tomcat deployments (such as with Spring Boot) have metrics under domain `Tomcat`.
@@ -311,9 +311,9 @@ If the Datadog Agent version is older than **7.49.0**, and if the exposed Tomcat
         metric_type: gauge
 ```
 
-See the [JMX Check documentation][5] for more detailed information.
+詳細については、[JMX Check ドキュメント][5]を参照してください。
 
-### Commands to view the available metrics
+### 使用可能なメトリクスを表示するコマンド
 
 The `datadog-agent jmx` command allows you to run troubleshooting commands on JMXFetch integrations. On Linux systems, you will need to prepend the command with `sudo -u dd-agent` so that the Datadog Agent runs as the correct user.
 
@@ -330,12 +330,12 @@ The `datadog-agent jmx list` has a number of available subcommands:
 - `with-metrics` - List attributes and metrics data that match at least one of your instances' configurations.
 - `with-rate-metrics` - List attributes and metrics data that match at least one of your instances' configurations, including rates and counters.
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor Tomcat metrics with Datadog][6]
-- [Key metrics for monitoring Tomcat][7]
+- [Datadog を使用した Tomcat メトリクスの監視][6]
+- [Tomcat 監視のためのキーメトリクス][7]
 - [Analyzing Tomcat logs and metrics with Datadog][8]
 
 

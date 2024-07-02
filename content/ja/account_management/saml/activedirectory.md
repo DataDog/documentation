@@ -11,19 +11,19 @@ further_reading:
   text: Configuring Teams & Organizations with Multiple Accounts
 ---
 
-The Datadog SAML integration for SSO provides a pathway for linking an organization to an external user management system so that credentials can be kept and managed in a central system. This doc is meant to be used as an add-on to the main [Single Sign On With SAML][1] documentation, which gives an overview of single sign-on from the Datadog perspective.
+Datadog の SSO 用 SAML インテグレーションは、オーガニゼーションを外部のユーザー管理システムにリンクして、一元的なシステムで資格情報を維持および管理するための手段を提供します。このドキュメントは、Datadog 目線でシングルサインオンの概要を説明したメインの「[SAML を使用したシングルサインオン][1]」ドキュメントのアドオンとして使用してください。
 
-To begin configuration of SAML for Active Directory Federation Service (AD FS), see Microsoft's [Configure a SAML 2.0 provider for portals with AD FS][2] docs.
+Active Directory フェデレーションサービス (AD FS) 用の SAML コンフィギュレーションを開始するには、Microsoft の「[AD FS を使用してポータルに SAML 2.0 プロバイダーを構成する][2]」ドキュメントを参照してください。
 
-Once SAML is configured, users can login by using the link provided in the [SAML configuration page][3]. Keep in mind that users still need to be invited and activated before they're able to login. Be sure to invite new users by using the email address corresponding to their Active Directory user records; otherwise they may be denied as shown below.
+SAML の構成が完了すると、ユーザーは [SAML コンフィギュレーションページ][3]で提供されるリンクを使ってログインできるようになります。ただし、ユーザーがログインするには招待とアクティベーションが必要ですのでご注意ください。新しいユーザーを招待する際には、必ず Active Directory のユーザーレコードに対応するメールアドレスを使用してください。アドレスが一致しない場合は以下のように拒否される可能性があります。
 
 {{< img src="account_management/saml/6TsPUla.png" alt="6TsPUla" style="width:60%;">}}
 
-In most setups, a user's `user@domain` is their Microsoft login, but this is not enforced. You can confirm the email address used within the user record as shown below.
+ほとんどの設定では、ユーザーの `user@domain` は Microsoft のログイン名になりますが、そのように制限されているわけではありません。ユーザーレコード内で使用される電子メールアドレスは、以下のように確認できます。
 
 {{< img src="account_management/saml/0R81SaK.png" alt="0R81SaK" style="width:60%;">}}
 
-For questions regarding Datadog in-app errors pertaining to SAML, contact [the Datadog support team][4]. For errors pertaining to AD FS SAML setup and errors, contact [Microsoft support][5].
+SAML に関連する Datadog のアプリ内エラーに関する質問は、[Datadog サポートチーム][4]にお問い合わせください。AD FS の SAML 設定やエラーに関するお問い合わせは、[Microsoft サポート][5]までご連絡ください。
 
 {{< partial name="whats-next/whats-next.html" >}}
 

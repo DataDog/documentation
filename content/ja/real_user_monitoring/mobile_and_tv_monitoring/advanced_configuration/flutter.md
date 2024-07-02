@@ -13,7 +13,7 @@ aliases:
     - /real_user_monitoring/flutter/otel_support/
 further_reading:
 - link: "https://github.com/DataDog/dd-sdk-flutter"
-  tag: Source Code
+  tag: ソースコード
   text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation
@@ -324,41 +324,41 @@ You can access the RUM session ID at runtime without waiting for the `sessionSta
 final sessionId = await DatadogSdk.instance.rum?.getCurrentSessionId()
 ```
 
-## Set tracking consent (GDPR & CCPA compliance)
+## トラッキングの同意を設定（GDPR と CCPA の遵守）
 
-In order to be compliant with data protection and privacy policies, the Flutter RUM SDK requires the tracking consent value at initialization.
+データ保護とプライバシーポリシーに準拠するため、Flutter RUM SDK は初期化時に追跡に関する同意を求めます。
 
-The `trackingConsent` setting can be one of the following values:
+`trackingConsent` 設定は以下のいずれかの値で示されます。
 
-1. `TrackingConsent.pending`: The Flutter RUM SDK starts collecting and batching the data but does not send it to Datadog. The Flutter RUM SDK waits for the new tracking consent value to decide what to do with the batched data.
-2. `TrackingConsent.granted`: The Flutter RUM SDK starts collecting the data and sends it to Datadog.
-3. `TrackingConsent.notGranted`: The Flutter RUM SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
+1. `TrackingConsent.pending`: Flutter RUM SDK はデータの収集とバッチ処理を開始しますが、Datadog には送信しません。Flutter RUM SDK は新しい追跡に関する同意の値を待って、バッチされたデータをどうするかを決定します。
+2. `TrackingConsent.granted`: Flutter RUM SDK はデータの収集を開始し、Datadog へ送信します。
+3. `TrackingConsent.notGranted`: Flutter RUM SDK はデータを収集しません。ログ、トレース、RUM イベントなどが Datadog に送信されることはありません。
 
-To change the tracking consent value after the Flutter RUM SDK is initialized, use the `DatadogSdk.setTrackingConsent` API call. The Flutter RUM SDK changes its behavior according to the new value.
+Flutter RUM SDK の初期化後に追跡同意値を変更するには、`DatadogSdk.setTrackingConsent` API 呼び出しを使用します。Flutter RUM SDK は、新しい値に応じて動作を変更します。
 
-For example, if the current tracking consent is `TrackingConsent.pending` and you change the value to `TrackingConsent.granted`, the Flutter RUM SDK sends all previously recorded and future data to Datadog.
+例えば、現在の追跡同意が `TrackingConsent.pending` で、その値を `TrackingConsent.granted` に変更すると、Flutter RUM SDK は以前に記録したデータと今後のデータをすべて Datadog に送ります。
 
-Likewise, if you change the value from `TrackingConsent.pending` to `TrackingConsent.notGranted`, the Flutter RUM SDK wipes all data and does not collect any future data.
+同様に、値を `TrackingConsent.pending` から `TrackingConsent.notGranted` に変更すると、Flutter RUM SDK はすべてのデータを消去し、今後データを収集しないようにします。
 
-## Flutter-specific performance metrics
+## Flutter 固有のパフォーマンスメトリクス
 
-To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `DatadogRumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][17].
+Flutter 固有のパフォーマンスメトリクスの収集を有効にするには、`DatadogRumConfiguration` で `reportFlutterPerformance: true` を設定します。ウィジェットのビルド時間とラスター時間は[モバイルバイタル][17]に表示されます。
 
-## Sending data when device is offline
+## デバイスがオフラインの時のデータ送信
 
-RUM ensures availability of data when your user device is offline. In cases of low-network areas, or when the device battery is too low, all RUM events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough to ensure the Flutter RUM SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+RUM では、ユーザーのデバイスがオフラインのときにもデータを確実に利用できます。ネットワークの状態が悪いエリアやデバイスのバッテリーが非常に少ないなどの場合でも、すべての RUM イベントは最初にローカルデバイスにバッチで格納されます。ネットワークが利用可能で、Flutter RUM SDK がエンドユーザーのエクスペリエンスに影響を与えないようにバッテリーの残量が十分にあれば、バッチはすぐに送信されます。アプリケーションがフォアグラウンドで実行している状態でネットワークが利用できない場合、またはデータのアップロードが失敗した場合、バッチは正常に送信されるまで保持されます。
 
-This means that even if users open your application while offline, no data is lost.
+つまり、ユーザーがオフラインでアプリケーションを開いても、データが失われることはありません。
 
-**Note**: The data on the disk is automatically deleted if it gets too old to ensure the Flutter RUM SDK does not use too much disk space.
+**注**: ディスク上のデータは、古すぎる場合は Flutter RUM SDK がディスク容量を使いすぎないようにするために自動的に削除されます。
 
 ## OpenTelemetry setup
 
 The [Datadog Tracking HTTP Client][12] package and [gRPC Interceptor][13] package both support distributed traces through both automatic header generation and header ingestion. This section describes how to use OpenTelemetry with RUM Flutter.
 
-### Datadog header generation
+### Datadog のヘッダー生成
 
-When configuring your tracking client or gRPC Interceptor, you can specify the types of tracing headers you want Datadog to generate. For example, if you want to send `b3` headers to `example.com` and `tracecontext` headers for `myapi.names`, you can do so with the following code:
+追跡クライアントや gRPC インターセプターを構成する際に、Datadog に生成させたい追跡ヘッダーの種類を指定することができます。例えば、`example.com` には `b3` ヘッダーを、`myapi.names` には `tracecontext` ヘッダーを送信したい場合、以下のコードで実現できます。
 
 ```dart
 final hostHeaders = {
@@ -367,7 +367,7 @@ final hostHeaders = {
 };
 ```
 
-You can use this object during initial configuration:
+このオブジェクトは、初期構成時に使用することができます。
 
 ```dart
 // For default Datadog HTTP tracing:
@@ -377,11 +377,11 @@ final configuration = DatadogConfiguration(
 );
 ```
 
-You can then enable tracing as usual.
+その後、通常通りトレースを有効にすることができます。
 
 This information is merged with any hosts set on `DatadogConfiguration.firstPartyHosts`. Hosts specified in `firstPartyHosts` generate Datadog Tracing Headers by default.
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

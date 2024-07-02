@@ -7,9 +7,9 @@
 - "data stores"
 - "log collection"
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Amazon Elastic Filesystem metrics."
+"description": "Amazon Elastic Filesystem のキーメトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_efs/"
 "draft": false
 "git_integration_title": "amazon_efs"
@@ -32,9 +32,9 @@ Amazon EFS provides simple, scalable file storage for use with AWS Lambda functi
 
 Enable this integration to collect all your EFS metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -75,23 +75,23 @@ Configure Amazon EFS to send logs either to a S3 bucket or to CloudWatch.
 
     - `elasticfilesystem:DescribeAccessPoints`: Lists active EFS connected to Lambda functions
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_efs" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The AWS Elastic File System integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS Elastic File System integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][12].
 

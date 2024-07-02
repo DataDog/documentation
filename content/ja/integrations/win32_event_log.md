@@ -24,7 +24,7 @@
 "categories":
 - "os & system"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/win32_event_log/README.md"
 "display_on_public_website": true
@@ -37,17 +37,17 @@
 "manifest_version": "2.0.0"
 "name": "win32_event_log"
 "public_title": "Windows Event Log"
-"short_description": "Send Windows events to your Datadog event stream."
+"short_description": "Windows のイベントを Datadog イベントストリームへ送信。"
 "supported_os":
 - "windows"
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
   - "Supported OS::Windows"
-  - "Category::OS & System"
-  - "Category::Log Collection"
+  - "Category::OS とシステム"
+  - "Category::ログの収集"
   "configuration": "README.md#Setup"
-  "description": "Send Windows events to your Datadog event stream."
+  "description": "Windows のイベントを Datadog イベントストリームへ送信。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -57,61 +57,61 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
 This integration watches for Windows Event Logs and forwards them to Datadog.
 
-Enable this integration to:
+このインテグレーションを有効にすると、
 
-- Track system and application events in Datadog.
-- Correlate system and application events with the rest of your application.
+- システムとアプリケーションのイベントを Datadog で追跡できます。
+- システムとアプリケーションのイベントを他のアプリケーションと関連付けることができます。
 
-For more information, see the [Windows Event Logging documentation][1].
+詳細については、[Windows のイベントログのドキュメント][1]を参照してください。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Windows Event Log check is included in the [Datadog Agent][2] package. There is no additional installation required. 
 
-### Configuration
+### 構成
 
-Windows Event Logs can be collected as one or both of the following methods.
+Windows Event Log の収集方法は、以下のいずれか、または両方があります。
 
-- As [Datadog Events][3]
-- As [Datadog Logs][4]
+- [Datadog イベント][3]として
+- [Datadog ログ][4]として
 
 Both methods are configured in `win32_event_log.d/conf.yaml` in the `conf.d/` folder at the root of your [Agent's configuration directory][5]. See the [sample win32_event_log.d/conf.yaml][6] for all available configuration options. For a quickstart option to send Security event logs, see [Send default Security logs](#send-default-security-logs).
 
 This integration also comes with an out-of-the-box [Windows Event Log Overview][7] dashboard available in-app.
 
-#### List Windows Event channels
+#### Windows Event チャンネルをリストアップ
 
-First, identify the Windows Event Log channels you want to monitor. 
+まず、監視したい Windows Event Log チャンネルを特定します。
 
-Depending on collection method, the channel name can be used for the following configuration parameters:
+収集方法によって、チャンネル名は以下の構成パラメーターに使用することができます。
 
-- Datadog Logs: `channel_path`
-- Datadog Events: `path`
-- Datadog Events (legacy): `log_file`
+- Datadog ログ: `channel_path`
+- Datadog イベント: `path`
+- Datadog イベント (レガシー): `log_file`
 
 ##### PowerShell
 
-To see a list of channels, run the following command in PowerShell:
+チャンネルの一覧を表示するには、PowerShell で以下のコマンドを実行します。
 
 ```powershell
 Get-WinEvent -ListLog *
 ```
 
-To see the most active channels, run the following command in PowerShell:
+最もアクティブなチャンネルを表示するには、PowerShell で以下のコマンドを実行します。
 
 ```powershell
 Get-WinEvent -ListLog * | sort RecordCount -Descending
 ```
 
-This command displays channels in the format `LogMode MaximumSizeInBytes RecordCount LogName`. 
+このコマンドは、チャンネルを `LogMode MaximumSizeInBytes RecordCount LogName` の形式で表示します。
 
-Example response:
+応答例
 
 ```text
 LogMode  MaximumSizeInBytes RecordCount LogName 
@@ -119,25 +119,25 @@ Circular          134217728      249896 Security
 Circular            5242880        2932 <CHANNEL_2>
 ```
 
-The value under the column `LogName` is the name of the channel. In the example above, the channel name is `Security`.
+`LogName` 列の値は、チャンネルの名前です。上の例では、チャンネル名は `Security` です。
 
 ##### Windows Event Viewer
 
-To find the channel name for an Event Log in the Windows Event Viewer, open the Event Log Properties window and refer to the `Full Name` field. In the following example, the channel name is `Microsoft-Windows-Windows Defender/Operational`.
+Windows Event Viewer で Event Log のチャンネル名を見つけるには、Event Log Properties ウィンドウを開き、`Full Name` フィールドを参照します。次の例では、チャンネル名は `Microsoft-Windows-Windows Defender/Operational` です。
 
 ![Windows Event Log][8]
 
 {{< tabs >}}
 
-{{% tab "Logs" %}}
+{{% tab "ログ" %}}
 
-#### Log collection
+#### ログ収集
 
-_Available for Agent versions 6.0 or later_
+_Agent バージョン 6.0 以降で利用可能_
 
-Log collection is disabled by default in the Datadog Agent. To collect Windows Event Logs as Datadog logs, [activate log collection][1] by setting `logs_enabled: true` in your `datadog.yaml` file.
+Datadog Agent では、ログ収集はデフォルトで無効になっています。Windows Event Log を Datadog ログとして収集するには、`datadog.yaml` ファイルで `logs_enabled: true` を設定して[ログ収集を有効化][1]します。
 
-To collect Windows Event Logs as Datadog logs, configure channels under the `logs:` section of your `win32_event_log.d/conf.yaml` configuration file. This example shows entries for the `Security` and `<CHANNEL_2>` channels:
+Windows Event Log を Datadog ログとして収集するには、`win32_event_log.d/conf.yaml` コンフィギュレーションファイルの `logs:` セクションの下にチャンネルを設定します。この例では、`Security` と `<CHANNEL_2>` チャンネルのエントリーを示しています。
 
 ```yaml
 logs:
@@ -152,22 +152,22 @@ logs:
     service: myservice
 ```
 
-Set the corresponding `source` parameter to `windows.events` to benefit from the [integration automatic processing pipeline][2].
+対応する `source` パラメーターに `windows.events` を設定すると、[インテグレーション自動処理パイプライン][2]の恩恵を受けることができます。
 
 [1]: https://docs.datadoghq.com/agent/logs/#activate-log-collection
 [2]: https://docs.datadoghq.com/logs/processing/pipelines/#integration-pipelines
 {{% /tab %}}
 {{% tab "Events" %}}
 
-#### Event collection using the Event Log API (Recommended)
+#### Event Log API を使ったイベント収集 (推奨)
 
-The Datadog Agent can be configured to collect Windows Event Logs as Datadog events using the Event Log API. Datadog recommends using the Event Log API because it has better performance than the legacy method below. Note, each method has its own configuration syntax for channels and for filters. For more information, see [Filtering Events](?tab=events#filtering-events). 
+Datadog Agent は、Event Log API を用いて Windows イベントログを Datadog イベントとして収集するよう構成できます。Datadog は、下記の従来方法よりもパフォーマンスが優れているため、Event Log API の使用を推奨しています。注: 各方法には、チャンネルとフィルターのための独自の構成構文があります。詳細については、 [イベントのフィルタリング](?tab=events#filtering-events)を参照してください。
 
-To collect Windows Event Logs as Datadog events, configure channels under the `instances:` section of your `win32_event_log.d/conf.yaml` configuration file. 
+Windows Event Log を Datadog イベントとして収集するには、`win32_event_log.d/conf.yaml` コンフィギュレーションファイルの `instances:` セクションでチャンネルを設定します。
 
-  </br> Set `legacy_mode: false` in each instance. If `legacy_mode: false` is set, the `path` is required to be set in the `\win32_event_log.d\conf.yaml` file. 
+  </br> 各インスタンスで `legacy_mode: false` を設定します。`legacy_mode: false` を設定すると、`path` を `\win32_event_log.d\conf.yaml` ファイルに設定する必要があります。
 
-  </br> This example shows entries for the `Security` and `<CHANNEL_2>` channels:
+  </br> この例では、`Security` と `<CHANNEL_2>` チャンネルのエントリーを示します。
 
   ```yaml
   init_config:
@@ -182,7 +182,7 @@ To collect Windows Event Logs as Datadog events, configure channels under the `i
       filters: {}
   ```
 
-Agent versions 7.49 and later support setting `legacy_mode` in the shared `init_config` section. This sets the default for all instances and no longer requires you to set `legacy_mode` individually for each instance. However, the option can still be set on a per-instance basis.
+Agent バージョン 7.49 以降では、共有された `init_config` セクションで `legacy_mode` を設定できるようになりました。これにより、すべてのインスタンスのデフォルトが設定され、インスタンスごとに `legacy_mode` を設定する必要がなくなりました。しかし、このオプションはインスタンスごとに設定することもできます。
 
   ```yaml
   init_config:
@@ -196,20 +196,20 @@ Agent versions 7.49 and later support setting `legacy_mode` in the shared `init_
       filters: {}
   ```
 
-#### Event collection using Legacy Mode (Deprecated)
+#### レガシーモードを使用したイベント収集 (非推奨)
 
-The legacy method uses WMI (Windows Management Instrumentation) and was deprecated in Agent version 7.20. 
+従来の方法では、WMI (Windows Management Instrumentation) を使用していましたが、Agent バージョン 7.20 で非推奨になりました。
 
-To collect Windows Event Logs as Datadog events, configure channels under the `instances:` section of your `win32_event_log.d/conf.yaml` configuration file.
+Windows Event Log を Datadog イベントとして収集するには、`win32_event_log.d/conf.yaml` コンフィギュレーションファイルの `instances:` セクションでチャンネルを設定します。
 
-  </br> To use Legacy Mode, set `legacy_mode` to `true`. Then, set at least one of the following filters: `source_name`, `event_id`, `message_filters`, `log_file`, or `type`.
+  </br> レガシーモードを使用するには、`legacy_mode` を `true` に設定します。次に、フィルター `source_name`、`event_id`、`message_filters`、`log_file`、`type` のうち少なくとも 1 つを設定します。
 
-  </br> This example shows entries for the `Security` and `<CHANNEL_2>` channels:
+  </br> この例では、`Security` と `<CHANNEL_2>` チャンネルのエントリーを示します。
 
   ```yaml
   init_config:
   instances:
-    - # WMI (default)
+    - # WMI (デフォルト)
       legacy_mode: true
       log_file:
         - Security
@@ -219,38 +219,38 @@ To collect Windows Event Logs as Datadog events, configure channels under the `i
         - "<CHANNEL_2>"
   ```
 
-  For more information, see [Add event log files to the `Win32_NTLogEvent` WMI class][1].
+  詳しくは、[イベントログファイルを `Win32_NTLogEvent` WMI クラスに追加する][1]を参照してください。
 
 [1]: https://docs.datadoghq.com/integrations/guide/add-event-log-files-to-the-win32-ntlogevent-wmi-class/
 {{% /tab %}}
 {{< /tabs >}}
 
-Edit the `<CHANNEL_2>` parameters with the Windows channel name you want to collect events from.
+`<CHANNEL_2>` パラメーターに、イベントを収集したい Windows チャンネル名を入力します。
 
 Finally, [restart the Agent][9].
 
-**Note**: For the Security logs channel, add your Datadog Agent user to the `Event Log Readers` user group.
+**注**: Security ログチャンネルの場合は、Datadog Agent ユーザーを `Event Log Readers` ユーザーグループに追加してください。
 
-### Filtering events
+### イベントの絞り込み
 
-Configure one or more filters for the event log. A filter allows you to choose what log events you want to get into Datadog.
+イベントログに 1 つ以上のフィルターを構成します。フィルターを使用すると、Datadog に取り込むログイベントを選択できます。
 
 {{< tabs >}}
 
-{{% tab "Logs" %}}
+{{% tab "ログ" %}}
 
-You can use the `query`, as well as the `log_processing_rules` regex option, to filter event logs. Datadog recommends using the `query` option which is faster at high rates of Windows Event Log generation and requires less CPU and memory than the `log_processing_rules` filters. When using the `log_processing_rules` filters, the Agent is forced to process and format each event, even if it will be excluded by `log_processing_rules` regex. With the `query` option, these events are not reported to the Agent.
+イベントログのフィルターには、 `log_processing_rules` 正規表現オプションと同様に `query` を使用することができます。Datadog では、Windows Event Log の生成速度が速く、CPU とメモリの使用量が `log_processing_rules` フィルターよりも少ない `query` オプションの使用を推奨しています。`log_processing_rules` フィルターを使用すると、Agent は各イベントを処理し、正規表現で除外されてもフォーマットするように強制されます。`query` オプションを使用すると、これらのイベントは Agent に報告されません。
 
-You can use the `query` option to filter events with an [XPATH or structured XML query][1]. The `query` option can reduce the number of events that are processed by `log_processing_rules` and improve performance. There is an expression limit on the syntax of XPath and XML queries. For additional filtering, use `log_processing_rules` filters.
+`query` オプションを使用すると、[XPATH または構造化 XML クエリ][1]でイベントをフィルターすることができます。`query` オプションは `log_processing_rules` によって処理されるイベントの数を減らし、パフォーマンスを向上させることができます。XPath や XML クエリの構文には式の制限があります。フィルターを追加するには、`log_processing_rules` フィルターを使用してください。
 
-Datadog recommends creating and testing the query in Event Viewer's filter editor until the events shown in Event Viewer match what you want the Agent to collect.
+Datadog は、Event Viewer に表示されるイベントが Agent に収集させたいものと一致するまで、Event Viewer のフィルターエディタでクエリを作成してテストすることを推奨します。
 
 ![Filter Current Log][2]
 
-Then, copy and paste the query into the Agent configuration. 
+次に、Agent 構成にクエリをコピーアンドペーストします。
 
 ```yaml
-  # collect Critical, Warning, and Error events
+  # Critical、Warning、Error イベントを収集します
   - type: windows_event
     channel_path: Application
     source: windows.events
@@ -271,9 +271,9 @@ Then, copy and paste the query into the Agent configuration.
 
 ![XML Query][3]
 
-In addition to the `query` option, events can be further filtered with log processing rules.
+`query` オプションに加えて、ログ処理ルールでイベントをさらにフィルターすることができます。
 
-Some example filters include the following:
+フィルターの例としては、以下のようなものがあります。
 
 ```yaml
   - type: windows_event
@@ -313,7 +313,7 @@ Some example filters include the following:
       pattern: '"level":"((?i)warning|error)"'
 ```
 
-Here is an example regex pattern to only collect Windows Events Logs from a certain EventID:
+以下は、特定の EventID から Windows イベントログを収集するための正規表現パターンの例です。
 
 ```yaml
 logs:
@@ -327,19 +327,19 @@ logs:
         pattern: '"EventID":(?:{"value":)?"(101|201|301)"'
 ```
 
-**Note**: The pattern may vary based on the format of the logs. The [Agent `stream-logs` subcommand][4] can be used to view this format.
+**注**: このパターンはログの形式によって異なる場合があります。[Agent `stream-logs` サブコマンド][4]を使用すると、この形式を表示することができます。
 
-For more examples of filtering logs, see the [Advanced Log Collection documentation][5].
+ログをフィルタリングする例については、[高度なログ収集のドキュメント][5]を参照してください。
 
-#### Legacy events
-_Applies to Agent versions < 7.41_
+#### レガシーイベント
+_Agent バージョン 7.41 未満に適用されます_
 
-Legacy Provider EventIDs have a `Qualifiers` attribute that changes the format of the log, as seen in the [Windows Event Schema][6]. These events have the following XML format, visible in Windows Event Viewer:
+Legacy Provider EventID は、[Windows Event Schema][6] で見られるように、ログの形式を変更する `Qualifiers` 属性を持っています。これらのイベントは、Windows イベントビューアで見ることができる、次のような XML 形式を持っています。
 ```xml
 <EventID Qualifiers="16384">3</EventID>
 ```
 
-The following regex must be used to match these EventIDs:
+これらの EventID にマッチするように、以下の正規表現を使用する必要があります。
 ```yaml
 logs:
   - type: windows_event
@@ -349,10 +349,10 @@ logs:
     log_processing_rules:
       - type: include_at_match
         name: include_legacy_x01
-        pattern: '"EventID":(?:{"value":)?"(101|201|301)"'
+        pattern: '"EventID":{"value":"(101|201|301)"'
 ```
 
-Agent versions 7.41 or later normalize the EventID field. This removes the need for the substring, `(?:{"value":)?`, from legacy pattern as it is no longer applicable. A shorter regex pattern can be used from versions 7.41 or later as seen below:
+Agent バージョン 7.41 以降では、EventID フィールドが正規化されます。このため、レガシーパターンから部分文字列 `(?:{"value":)?` が不要になりました。バージョン 7.41 以降では、以下のような短い正規表現パターンを使用することができます。
 
 ```yaml
 logs:
@@ -375,38 +375,38 @@ logs:
 {{% /tab %}}
 {{% tab "Events" %}}
 
-Use the Windows Event Viewer GUI to list all the event logs available for capture with this integration.
+Windows イベントビューア GUI を使用して、このインテグレーションを使用してキャプチャできるすべてのイベントログをリストします。
 
-To determine the exact values, set your filters to use the following PowerShell command:
+正確な値を決定するには、次の PowerShell コマンドを使用してフィルターを設定します。
 
 ```text
 Get-WmiObject -Class Win32_NTLogEvent
 ```
 
-For example, to see the latest event logged in the `Security` log file, use the following:
+たとえば、`Security` ログファイルに記録された最新のイベントを表示するには、次のコマンドを使用します。
 
 ```text
 Get-WmiObject -Class Win32_NTLogEvent -Filter "LogFile='Security'" | select -First 1
 ```
 
-The values listed in the output of the command can be set in `win32_event_log.d/conf.yaml` to capture the same kind of events.
+コマンドの出力にリストされる値を `win32_event_log.d/conf.yaml` で設定して、同種のイベントをキャプチャできます。
 
 <div class="alert alert-info">
-The information given by the  <code>Get-EventLog</code> PowerShell command or the Windows Event ViewerGUI may slightly differ from <code>Get-WmiObject</code>.<br> Double check your filters' values with <code>Get-WmiObject</code> if the integration does not capture the events you set up.
+<code>Get-EventLog</code> PowerShell コマンドまたは Windows イベントビューア GUI から提供される情報が、<code>Get-WmiObject</code> から提供される情報とは多少異なる場合があります。<br>設定したイベントがインテグレーションによってキャプチャされない場合は、<code>Get-WmiObject</code> を使用してフィルターの値をダブルチェックしてください。
 </div>
 
-#### Filtering events using the Event Log API (Recommended)
+#### Event Log API を使ったイベントのフィルタリング (推奨)
 
-The configuration option using the Event Log API includes the following filters:
+Event Log API を使用する構成オプションには、以下のフィルターがあります。
 
-  - `path`: `Application`, `System`, `Setup`, `Security`
-  - `type`: `Critical`, `Error`, `Warning`, `Information`, `Success Audit`, `Failure Audit`
-  - `source`: Any available source name
+  - `path`: `Application`、`System`、`Setup`、`Security`
+  - `type`: `Critical`、`Error`、`Warning`、`Information`、`Success Audit`、`Failure Audit`
+  - `source`: 使用可能な任意のソース名
   - `id`: event_id: Windows EventLog ID
 
-  See the [sample win32_event_log.d/conf.yaml][1] for all available filter options. 
+  利用可能なすべてのフィルターオプションについては、[サンプル win32_event_log.d/conf.yaml][1] を参照してください。
 
-  This example filter uses Event Log API method.
+  このフィルター例では、Event Log API の方法を使用しています。
 
   ```yaml
   instances:
@@ -426,12 +426,12 @@ The configuration option using the Event Log API includes the following filters:
         - 7036
   ```
 
-You can use the [`query` option][2] to filter events with an [XPATH or structured XML query][3]. Datadog recommends creating the query in Event Viewer's filter editor until the events shown in Event Viewer match what you want the Datadog Agent to collect. The `filters` option is ignored when the `query` option is used.
+[`query` オプション][2]を使用して、[XPATH または構造化 XML クエリ][3]でイベントをフィルターすることができます。Datadog は、Event Viewer に表示されるイベントが Datadog Agent に収集させたいものと一致するまで、Event Viewer のフィルターエディタでクエリを作成することを推奨します。`filters` オプションは `query` オプションを使用すると無視されます。
 
   ```yaml
   init_config:
   instances:
-    # collect Critical, Warning, and Error events
+    # Critical、Warning、Error イベントを収集します
     - path: Application
       legacy_mode: false
       query: '*[System[(Level=1 or Level=2 or Level=3)]]'
@@ -446,16 +446,16 @@ You can use the [`query` option][2] to filter events with an [XPATH or structure
         </QueryList>
  ```
 
-#### Filtering events using Legacy Mode (Deprecated)
+#### レガシーモードを使用したイベントのフィルタリング (非推奨)
 
-The configuration option using the Legacy Mode includes the following filters:
+レガシーモードを使用する構成オプションには、以下のフィルターがあります。
 
-  - `log_file`: `Application`, `System`, `Setup`, `Security`
-  - `type`: `Critical`, `Error`, `Warning`, `Information`, `Audit Success`, `Audit Failure`
-  - `source_name`: Any available source name
+  - `log_file`: `Application`、`System`、`Setup`、`Security`
+  - `type`: `Critical`、`Error`、`Warning`、`Information`、`Audit Success`、`Audit Failure`
+  - `source_name`: 使用可能な任意のソース名
   - `event_id`: Windows EventLog ID
 
-  This example filter uses the Legacy Mode method.
+  このフィルター例では、レガシーモードの方法を使用しています。
 
   ```yaml
   instances:
@@ -480,7 +480,7 @@ The configuration option using the Legacy Mode includes the following filters:
       log_file:
         - System
   ```
-The legacy method does not support the `query` option. Only the Event Log API method (setting `legacy_mode: false`) and the Logs Tailer supports the `query` option.
+従来の方法は `query` オプションをサポートしていません。Event Log API の方法 (`legacy_mode: false` を設定) と Logs Tailer だけが `query` オプションをサポートしています。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/win32_event_log/datadog_checks/win32_event_log/data/conf.yaml.example
 [2]: https://github.com/DataDog/integrations-core/blob/10296a69722b75098ed0b45ce55f0309a1800afd/win32_event_log/datadog_checks/win32_event_log/data/conf.yaml.example#L74-L89
@@ -490,14 +490,14 @@ The legacy method does not support the `query` option. Only the Event Log API me
 
 When you're done setting up filters, [restart the Agent][9] using the Agent Manager, or restart the service.
 
-### Validation
+### 検証
 
 {{< tabs >}}
-{{% tab "Logs" %}}
+{{% tab "ログ" %}}
 
-Check the information page in the Datadog Agent Manager or run the [Agent's `status` subcommand][1] and look for `win32_event_log` under the Logs Agent section. 
+Datadog Agent Manager の情報ページを確認するか、[Agent の `status` サブコマンド][1]を実行し、Logs Agent セクションで `win32_event_log` を探します。
 
-It should display a section similar to the following:
+以下のようなセクションが表示されるはずです。
 
 ```shell
 Logs Agent
@@ -516,9 +516,9 @@ Logs Agent
 {{% /tab %}}
 {{% tab "Events" %}}
 
-Check the information page in the Datadog Agent Manager or run the [Agent's `status` subcommand][1] and look for `win32_event_log` under the Checks section. 
+Datadog Agent Manager の情報ページを確認するか、[Agent の `status` サブコマンド][1]を実行し、Checks セクションで `win32_event_log` を探します。
 
-It should display a section similar to the following:
+以下のようなセクションが表示されるはずです。
 
 ```shell
 Checks
@@ -561,30 +561,30 @@ Starting with Agent 7.54, you can automatically send Security Events to Datadog 
 Teams can change which event IDs are associated with `low` or `high` settings by editing these profiles. 
 
 
-3. [Restart the Agent][9].
+3. [Agent を再起動します][9]。
 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-The Windows Event Log check does not include any metrics.
+Windows Event Log チェックには、メトリクスは含まれません。
 
-### Events
+### イベント
 
-All Windows events are forwarded to Datadog.
+すべての Windows イベントが Datadog に転送されます。
 
-### Service Checks
+### サービスチェック
 
-The Windows Event Log check does not include any service checks.
+Windows Event Log チェックには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][14] with an [Agent Flare][15].
 
-### Log processing rules are not working
+### ログ処理ルールが機能しない
 
-If you are using log processing rules to filter out logs, verify that the raw logs match the regular expression (regex) pattern you configured. In the configuration below, log levels must be either `warning` or `error`. Any other value is excluded.
+ログを除外するためにログ処理ルールを使用している場合、生のログが構成した正規表現 (regex) パターンに一致することを確認してください。以下の構成では、ログレベルは `warning` または `error` のいずれかでなければなりません。それ以外の値は除外されます。
 
 ```yaml
     - type: windows_event
@@ -597,14 +597,14 @@ If you are using log processing rules to filter out logs, verify that the raw lo
         pattern: '"level":"((?i)warning|error)"'
 ```
 
-To troubleshoot your log processing rules:
-1. Remove or comment out the `log_processing_rules` stanza.
-2. Restart the Agent.
-3. Send a test log that includes the values you're attempting to catch. If the log appears in Datadog, there is probably an issue with your regex. Compare your regex against the log file to make sure you're capturing the right phrases.
+ログ処理ルールをトラブルシューティングするには
+1. `log_processing_rules` スタンザを削除するかコメントアウトします。
+2. Agent を再起動します。
+3. キャッチしようとしている値を含むテストログを送信します。ログが Datadog に表示される場合は、正規表現に問題がある可能性があります。正規表現とログファイルを比較して、正しいフレーズをキャプチャしていることを確認してください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
 - [Advanced Log Collection][16]
 - [Monitoring Windows Server 2012][17]

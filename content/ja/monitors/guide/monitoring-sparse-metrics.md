@@ -9,61 +9,61 @@ further_reading:
   text: Learn more about interpolation
 ---
 
-## Overview
+## 概要
 
-Monitors that report data infrequently, can have unexpected results and queries may not evaluate as intended. There are tools and behaviors that you can use to ensure a monitor's settings are appropriate for your data and expected evaluations. 
+データの報告頻度が低いモニターは、予期しない結果が出たり、クエリが意図した値を返さないことがあります。その場合、実際のデータや想定される値に応じてモニターが適切に設定されていることを確認するために使用できるツールや動作が用意されています。
 
-This guide covers the following ways of troubleshooting and configuring monitors with sparse data:
-- [Determine if you have sparse metrics](#how-to-determine-whether-you-have-a-sparse-metric)
-- Consider the source of your monitor -> [Metric-based monitor](#metric-based-monitor), [Event-based monitor](#event-based-monitor)
-- [Is the monitor running on a schedule?](#schedule-based-monitoring)
+このガイドでは、疎なデータを持つモニターのトラブルシューティングと構成に使える以下の方法について説明します。
+- [メトリクスが疎であるかどうかを判断する](#how-to-determine-whether-you-have-a-sparse-metric)
+- モニターのソースを検討する -> [メトリクスベースのモニター](#metric-based-monitor)、[イベントベースのモニター](#event-based-monitor)
+- [モニターはスケジュールどおりに実行されているか？](#schedule-based-monitoring)
 
 
-## How to determine whether you have a sparse metric
+## メトリクスが疎であるかどうかを判断する方法
 
-You can use a dashboard widget, a notebook, or even an [existing monitor's history graph][1] and hover over the datapoints to see if the datapoints seem continuous, as opposed to straight lines filling the gaps between each point.
+ダッシュボードウィジェット、ノートブック、あるいは[既存のモニターの履歴グラフ][1]を利用してデータポイントにカーソルを合わせると、各ポイント間のギャップが直線で埋められておらず、データポイントが連続的に見えるかどうかを確認することができます。
 
-In a notebook, or widget, select the **Bars** display option to see the points of data and their frequency.
+ノートブックまたはウィジェットで **Bars** 表示オプションを選択すると、データのポイントとその頻度が表示されます。
 
-A metric displayed in a widget may look like this:
+ウィジェットに表示されるメトリクスは、次のようになる場合があります。
 
-{{< img src="monitors/guide/sparse_metrics/line_graph_sparse.png" alt="Metric graph with Line graph display going up and down in straight lines" style="width:90%;" >}}
+{{< img src="monitors/guide/sparse_metrics/line_graph_sparse.png" alt="メトリクスのグラフで、折れ線グラフの直線が上下に移動している様子" style="width:90%;" >}}
 
-But when the **Bars** style is applied, it looks like this:
+しかし、**Bars** スタイルを適用すると、次のようになります。
 
-{{< img src="monitors/guide/sparse_metrics/bar_graph_sparse.png" alt="Same data as the Metric Line graph above, except with bars for each datapoint, highlighting gaps in between bars of sparse metrics" style="width:90%;" >}}
+{{< img src="monitors/guide/sparse_metrics/bar_graph_sparse.png" alt="上のメトリクスの折れ線グラフと同じデータで、各データポイントが棒で表示され、疎なメトリクスの棒と棒の間のギャップが目立つ" style="width:90%;" >}}
 
-With the bar graph display, you can visualize the gaps between datapoints more clearly. 
+棒グラフ表示では、データポイント間のギャップをより明確に視覚化することができます。 
 
-If the graph editor does not have multiple options to change the graph style, you can apply the function `default_zero()` to the metric, which helps reveal the gaps in data. For more information on this function, see the [Interpolation][2] documentation.
+グラフエディターにグラフスタイルを変更するオプションが複数用意されていない場合は、関数 `default_zero()` をメトリクス に適用することで、データ間のギャップを明らかにすることができます。この関数については、[補間][2]のドキュメントを参照してください。
 
-## Metric-based monitor
+## メトリクスベースのモニター
 
-Is this a [metric][3], [change][4], [anomaly][5], [forecast][6], or [outlier][7] monitor? Adjust the following settings:
+このモニターの種類が[メトリクス][3]、[変化][4]、[異常値][5]、[予測][6]、[外れ値][7]のいずれかの場合は、以下の設定を調整します。
 
-* Under *Advanced options*, select **Do not require** a full window of data for evaluation.
-* Is the data often delayed? Consider adding time (in seconds) to the monitor evaluation delay. Under *Advanced options* add a value to the **Delay monitor evaluation by X seconds** field.
-* Adjust the evaluation (avg by, max by, min by, sum by) based on the expected frequency. The default evaluation is **avg by**, which may not be suited for sparse metrics.
-* If you are using the **avg by** aggregator, consider adding an [interpolation function][2] like `default_zero()` to ensure the gaps in the metric are evaluated as zero.
-* If you are using arithmetic in your query, take a look at [Monitor Arithmetic and Sparse Metrics][8] for some further guidance.
+* *Advanced options* で、評価の際にデータウィンドウが一杯である必要があるかどうかに関して **Do not require** を選択します。
+* データの遅延が頻繁に発生する場合は、モニターの評価遅延の時間を延ばすことを検討してください (秒単位)。*Advanced options* で、**Delay monitor evaluation by X seconds** フィールドに値を追加します。
+* 予想される頻度に基づいて評価 (avg by、max by、min by、sum by) を調整します。デフォルトの評価は **avg by** ですが、疎なメトリクスには適さない可能性があります。
+* 集計関数の **avg by** を使用している場合は、`default_zero()` のような[補間関数][2]を追加して、メトリクス間のギャップをゼロとして評価することを検討してください。
+* クエリで算術演算を使用している場合は、[演算メトリクスと疎なメトリクスの監視][8]でより詳しい使い方を確認してください。
 
-## Event-based monitor 
+## イベントベースのモニター
 
-Is this a [log][9], [event][10], [audit trail][11], or [error tracking][12] monitor? Look at the following:
+このモニターの種類が[ログ][9]、[イベント][10]、[監査証跡][11]、[エラー追跡][12]のいずれかの場合は、以下をご覧ください。
 
-* Verify the "Missing data" setting corresponds to your expected monitor behavior: **Evaluate as zero**, **Show NO DATA**, **Show NO DATA and notify**, or **Show OK**
-  {{< img src="monitors/guide/sparse_metrics/data_is_missing.png" alt="Selection options for missing data in the 'Set alert conditions' section of monitor configurations" style="width:80%;" >}}
-* Adjust the evaluation period. If datapoints are expected to be available every 30 minutes, then the evaluation period should account for that.
+* "Missing data" の設定 (*Evaluate as zero**、**Show NO DATA**、**Show NO DATA and notify**、または **Show OK**) が、想定されるモニターの挙動に対応していることを確認してください。
+  {{< img src="monitors/guide/sparse_metrics/data_is_missing.png" alt="モニター構成の 'Set alert conditions' セクションの欠落データに関する選択オプション" style="width:80%;" >}}
+* 評価期間を調整します。データポイントが 30 分ごとに利用可能になると予想される場合は、それを考慮した評価期間はする必要があります。
 
-## Schedule-based monitoring
+## スケジュールベースのモニタリング
 
-Are you monitoring an event that needs to happen at certain times of the day, week, month? A CRON task such as a backup job or export? Consider using [Custom Schedules][13], which allow you to set RRULES to define when the monitor should evaluate and notify.
+監視しているのは、1 日、1 週間、1 か月のうちの特定の時点で発生する必要のあるイベントですか？バックアップジョブやエクスポートなどの CRON タスクですか？その場合は、[カスタムスケジュール][13]の利用を検討してください。RRULES を設定して、モニターがいつ評価と通知を行うべきかを定義できます。
 
-## Troubleshooting
+## トラブルシューティング
 
-[Reach out to the Datadog support team][14] if you have any questions regarding monitoring sparse data.
+疎なデータの監視に関するご質問は、[Datadog のサポートチームまでお問い合わせください][14]。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

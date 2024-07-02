@@ -26,7 +26,7 @@
 "categories":
 - containers
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/harbor/README.md"
 "display_on_public_website": true
@@ -63,44 +63,44 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Harbor][1] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [Harbor][1] を監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Harbor check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
+Harbor チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `harbor.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your Harbor performance data. See the [sample harbor.d/conf.yaml][2] for all available configuration options.
+1. Harbor のパフォーマンスデータを収集するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `harbor.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル harbor.d/conf.yaml][2] を参照してください。
 
-    **Note**: You can specify any type of user in the config but an account with admin permissions is required to fetch disk metrics. The metric `harbor.projects.count` only reflects the number of projects the provided user can access.
+    **注**: コンフィギュレーションではいずれのタイプのユーザーも指定できますが、ディスクメトリクスを取得するには、管理者アクセス許可を持つアカウントが必要です。メトリクス `harbor.projects.count` には、指定したユーザーがアクセスできるプロジェクトの数だけが反映されます。
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `harbor.d/conf.yaml` file to start collecting your Harbor logs:
+2. Harbor のログの収集を開始するには、次の構成ブロックを `harbor.d/conf.yaml` ファイルに追加します。
 
    ```yaml
      logs:
@@ -110,62 +110,62 @@ _Available for Agent versions >6.0_
          service: '<SERVICE_NAME>'
    ```
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/
 [2]: https://github.com/DataDog/integrations-core/blob/master/harbor/datadog_checks/harbor/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                                                                 |
+| パラメーター            | 値                                                                                 |
 | -------------------- | ------------------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `harbor`                                                                              |
-| `<INIT_CONFIG>`      | blank or `{}`                                                                         |
-| `<INSTANCE_CONFIG>`  | `{"url": "https://%%host%%", "username": "<USER_ID>", "password": "<USER_PASSWORD>"}` |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                         |
+| `<INSTANCE_CONFIG>`  | `{"url": "https://%%host%%", "username": "<ユーザー_ID>", "password": "<ユーザーパスワード>"}` |
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                               |
+| パラメーター      | 値                                               |
 | -------------- | --------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "harbor", "service": "<SERVICE_NAME>"}` |
+| `<LOG_CONFIG>` | `{"source": "harbor", "service": "<サービス名>"}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][3] and look for `harbor` under the Checks section.
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `harbor` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "harbor" >}}
 
 
-### Events
+### イベント
 
-The Harbor integration does not include any events.
+Harbor インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "harbor" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][4].
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
 

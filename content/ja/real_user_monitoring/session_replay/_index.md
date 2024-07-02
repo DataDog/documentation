@@ -1,6 +1,5 @@
 ---
 title: Session Replay
-kind: documentation
 description: Learn about how to capture and visually replay your users' web browsing or mobile app experience with Session Replay.
 aliases:
 - /real_user_monitoring/guide/session-replay-getting-started/
@@ -22,23 +21,23 @@ further_reading:
   text: Detect and aggregate CSP violations with Datadog
 ---
 
-## Overview
+## 概要
 
-Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing or mobile app experience of your users. Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your application's usage patterns and design pitfalls.
+セッションリプレイは、ユーザーの Web 閲覧またはモバイルアプリの体験をキャプチャして視覚的に再生できるようにすることで、ユーザーエクスペリエンスモニタリングを拡張します。セッションリプレイを RUM パフォーマンスデータと組み合わせると、エラーの識別、再現、解決に有益で、アプリケーションの使用パターンと設計上の落とし穴に対する洞察をもたらすこともできます。
 
-## Browser Session Replay
+## ブラウザセッションリプレイ
 
-Browser Session Replay expands your user experience monitoring by allowing you to capture and visually replay the web browsing experience of your users. Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application's usage patterns and design pitfalls.
+ブラウザセッションリプレイは、ユーザーの Web 閲覧体験をキャプチャして視覚的に再生できるようにすることで、ユーザーエクスペリエンスモニタリングを拡張します。セッションリプレイを RUM パフォーマンスデータと組み合わせると、エラーの識別、再現、解決に有益で、Web アプリケーションの使用パターンと設計上の落とし穴に対する洞察をもたらすこともできます。
 
-The RUM Browser SDK is [open source][1] and leverages the open source [rrweb][2] project.
+RUM ブラウザ SDK は[オープンソース][1]であり、オープンソースの [rrweb][2] プロジェクトを活用したものです。
 
-Learn more about the [Session Replay for Browsers][3].
+[ブラウザ向けセッションリプレイ][3]について詳しくはこちらをご覧ください。
 
-## Mobile Session Replay
+## モバイルセッションリプレイ
 
-Mobile Session Replay expands visibility into your mobile applications by visually replaying each user interaction, such as taps, swipes, and scrolls. It is available for native apps on both Android and iOS. Visually replaying user interactions on your applications makes it easier to reproduce crashes and errors, as well as understand the user journey for making UI improvements.
+モバイルセッションリプレイは、タップ、スワイプ、スクロールなどの各ユーザー操作を視覚的に再生することで、モバイルアプリケーションの可視性を拡大します。Android と iOS の両方のネイティブアプリで利用できます。アプリケーション上のユーザーインタラクションを視覚的に再生することで、クラッシュやエラーの再現が容易になり、UI を改善するためのユーザージャーニーの理解も容易になります。
 
-Learn more about the [Session Replay for Mobile][4].
+[モバイル向けセッションリプレイ][4]について詳しくはこちらをご覧ください。
 
 ## Extend data retention
 
@@ -48,31 +47,31 @@ To extend Session Replay data retention to 15 months, you can enable _Extended R
 
 To access any Session Replay at a later time, Datadog recommends saving the URL or adding it to a [Playlist][8].
 
-Extended Retention only applies to Session Replay and does not include associated events. The 15 months start when Extended Retention is enabled, not when the session is collected.
+Extended Retention はセッションリプレイにのみ適用され、関連イベントは含まれません。15 か月は、セッションが収集されたときではなく、Extended Retention が有効になったときに開始します。
 
-You can disable Extended Retention at any time. If the session replay is still within its default 30 days of retention, the replay expires at the end of the initial 30 day window. If you disable Extended Retention on a session replay that is older than 30 days, the replay immediately expires.
+Extended Retention はいつでも無効にできます。セッションリプレイの保持期間がまだデフォルトの 30 日以内である場合、リプレイは最初の 30 日間のウィンドウの終了時に失効します。30 日を過ぎたセッションリプレイで Extended Retention を無効にすると、リプレイは直ちに失効します。
 
-{{< img src="real_user_monitoring/session_replay/session-replay-extended-retention.png" alt="Enable extended retention" style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/session-replay-extended-retention.png" alt="Extended Retention を有効にする" style="width:100%;" >}}
 
 Refer to the below diagram to understand what data is retained with extended retention.
 
 {{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
 
-## Playback history
+## 再生履歴
 
-You can see who has watched a given session replay by clicking the **watched** count displayed on the player page. This feature allows you to check whether someone you'd like to share the recording with has already watched it.
+プレーヤーページに表示される **watched** カウントをクリックすると、指定したセッションリプレイを誰が視聴したかを確認できます。この機能により、記録を共有したい相手がすでに視聴しているかどうかを確認することができます。
 
-{{< img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="Check who has watched a session's recording" style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="セッションの記録を誰が見たかを確認" style="width:100%;" >}}
 
-The history includes only playbacks that occurred in the player page or in an embedded player, like in a [Notebook][5] or side panel. Included playbacks also generate an [Audit Trail][6] event. Thumbnail previews are not included in history.
+履歴には、プレーヤーページまたは[ノートブック][5]やサイドパネルのような埋め込みプレーヤーでの再生のみが含まれます。含まれる再生は、[監査証跡][6]イベントも生成します。サムネイルプレビューは履歴に含まれません。
 
-To view your own playback history, check out the [My Watch History][7] playlist.
+自分の再生履歴を見るには、プレイリストの [My Watch History][7] をご覧ください。
 
-## Playlists
+## プレイリスト
 
-You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][8].
+セッションリプレイのプレイリストを作成して、気づいたパターンで整理することができます。[セッションリプレイプレイリスト][8]について詳しくはこちらをご覧ください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

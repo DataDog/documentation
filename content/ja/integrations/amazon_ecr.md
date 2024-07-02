@@ -2,7 +2,7 @@
 "categories":
 - cloud
 - aws
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon ECR metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_ecr/"
@@ -27,9 +27,9 @@ Amazon Elastic Container Registry (Amazon ECR) is a fully managed Docker contain
 
 Enable this integration to see all your ECR metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -39,21 +39,21 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
    under metric collection.
 2. Install the [Datadog - ECR integration][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_ecr" >}}
 
 
-### Events
+### イベント
 
 The ECR integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The ECR integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

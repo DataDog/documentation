@@ -9,11 +9,11 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-- metrics
+- モニター
 - mobile
 - network
 - tracing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rum_react_native/README.md"
 "display_on_public_website": true
@@ -71,7 +71,7 @@ Monitor the end-to-end health of your React Native application by:
 - Debugging crashes faster by unifying client-side and server-side metrics, traces, and logs
 - Unifying full-stack monitoring in a single platform for frontend and backend teams
 
-## Setup
+## セットアップ
 
 ### Collect RUM events 
 
@@ -85,9 +85,9 @@ Your React Native application automatically sends traces to Datadog.
 
 To start forwarding your React Native application's logs to Datadog, see [React Native Log Collection][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The React Native integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][4].
 
@@ -99,7 +99,7 @@ For more information about events and attributes, see [RUM React Native Monitori
 
 The React Native integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog Support][6]. 
 

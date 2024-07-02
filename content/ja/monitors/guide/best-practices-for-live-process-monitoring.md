@@ -2,50 +2,50 @@
 title: Best Practices for Live Process Monitoring
 ---
 
-## Overview
+## 概要
 
-With the Live Processes product, you can monitor the number of running processes across your entire infrastructure. Live process monitors are most useful for adding observability to non-containerized processes.
+ライブプロセス製品を使用すると、インフラストラクチャー全体の実行中のプロセス数を監視できます。ライブプロセスモニターは、コンテナ化されていないプロセスに可観測性を追加するのに最適です。
 
-Use live process monitors to:
+ライブプロセスモニターを使用すると、以下が可能になります。
 
-- Ensure that you have enough replicas of a process to serve customers.
-- Alert when a specific process is running.
+- 顧客にサービスを提供するのに十分なプロセスの複製があることを確認します。
+- 特定のプロセスが実行されている際のアラート。
 
-An improperly configured monitor is prone to false positives. This guide covers the recommended best practices for creating a reliable live process monitor. For a detailed overview of the monitor creation process, see [Live process monitor creation][3].
+不適切に構成されたモニターは、誤検出を引き起こしやすいです。このガイドでは、信頼性の高いライブプロセスモニターを作成するための推奨ベストプラクティスを説明します。モニター作成プロセスの詳細については、[ライブプロセスモニターの作成][3]を参照してください。
 
-## Best practices
+## ベストプラクティス
 
-### Scoping the monitor
+### モニターのスコープ
 
-Datadog recommends scoping your monitor to no more than a few thousand processes. Because text search is fuzzy, tags are the most accurate way to adjust the scope of your monitor.
+Datadog は、モニターのスコープを数千プロセス以下にすることを推奨します。テキスト検索は曖昧なので、タグはモニターのスコープを調整する最も正確な方法です。
 
-Example workflow:
+ワークフローの例:
 
-1. Navigate to the [**Monitors > New Monitor > Live Process**][4] page.
+1. [**Monitors > New Monitor > Live Process**][4] ページに移動します。
 
-2. Add tags to the monitor in the **by tags** field. 
-    - For example, use `command:puma` to monitor processes associated with the `puma` command.
+2. **by tags** フィールドでモニターにタグを追加します。
+    - 例えば、`command:puma` を使用して `puma` コマンドに関連するプロセスを監視します。
 
-{{< img src="monitors/monitor_types/process/tag-scoped-process-monitor.png" alt="A live process monitor that has been scoped using a tag" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/process/tag-scoped-process-monitor.png" alt=“タグを使用してスコープされたライブプロセスモニター" style="width:100%;" >}}
 
-3. Optionally, refine the monitor's scope by adding search text to the **by text** field. In the example below, only processes whose command line matches `cluster worker` are included.
+3. オプションで、**by text** フィールドに検索テキストを追加して、モニターのスコープを絞り込みます。以下の例では、コマンドラインが `cluster worker` に一致するプロセスのみが含まれます。
 
-{{< img src="monitors/monitor_types/process/text-scoped-process-monitor.png" alt="A live process monitor that has been scoped using text search" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/process/text-scoped-process-monitor.png" alt=“テキスト検索を使ってスコープされたライブプロセスモニター" style="width:100%;" >}}
 
-4. If your monitor's scope still exceeds a few thousand processes total across all monitor groups, use additional tags to break it into multiple monitors. 
-    - For example, you can use the `env` tag to create separate monitors for `prod` and `staging`.
+4. モニターのスコープがまだすべてのモニターグループで数千プロセスを超える場合、追加のタグを使用して複数のモニターに分割します。
+    - 例えば、`env` タグを使って `prod` と `staging` 用の別々のモニターを作成できます。
 
-### Choosing a time frame
+### 時間枠の選択
 
-A common misconception is that increasing the evaluation window leads to slower responses or missed alerts, but a monitor continuously assesses data no matter what query evaluation interval you choose. The evaluation interval only determines how many datapoints are used to decide whether an anomaly exists.
+評価ウィンドウを大きくするとレスポンスが遅くなったり、アラートを見逃したりするという誤解がありますが、モニターはどのクエリ評価間隔を選んでも継続的にデータを評価します。評価間隔は、異常が存在するかどうかを判断するために使用されるデータポイントの数を決定するだけです。
 
-By increasing the evaluation window, you can ensure that you are only alerted if a behavior is happening consistently, not temporarily.
+評価ウィンドウを大きくすることで、ある動作が一時的ではなく一貫して発生している場合にのみアラートされるようにすることができます。
 
-- To avoid false positives, use a minimum interval of **5 minutes**.
-- If your monitor uses tags that come from a cloud provider integration, use a minimum interval of **15 minutes**.
-- To avoid delayed alerts, use a maximum interval of **1 hour**.
+- 誤検出を避けるには、最小間隔を **5 分**に設定してください。
+- モニターがクラウドプロバイダーのインテグレーションに由来するタグを使用する場合、**15 分**の最小間隔を設定してください。
+- アラートの遅延を避けるには、**1 時間**の最大間隔を設定してください。
 
-For additional guidelines, see [Best Practices to Prevent Alert Fatigue][2].
+その他のガイドラインについては、[アラート過多による疲弊を防ぐためのベストプラクティス][2]を参照してください。
 
 [1]: https://app.datadoghq.com/process
 [2]: https://www.datadoghq.com/blog/best-practices-to-prevent-alert-fatigue/#increase-your-evaluation-window

@@ -3,7 +3,7 @@
 "categories":
 - notifications
 - ai/ml
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Correlate Datadog alerts and create actionable incidents with BigPanda."
 "doc_link": "https://docs.datadoghq.com/integrations/bigpanda/"
@@ -28,13 +28,13 @@ Connect BigPanda to Datadog to help your team by:
 
 - Correlating information by receiving alerts from Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The BigPanda integration is installed using the [integration tile][1] on the Datadog site.
 
-### Configuration
+### 構成
 
 1. In your BigPanda account, go to the Integrations page and select New Integration.
 2. Click _Datadog_ --> _Add Integration_, then create the App Key.
@@ -49,26 +49,26 @@ The BigPanda integration is installed using the [integration tile][1] on the Dat
 - The maximum number of BigPanda accounts currently supported is 5.
 - To Enable the **Route All Monitor Events** option and automatically send all monitor events to BigPanda, contact [Datadog support][2]. By default, only monitor events containing **@bigpanda-<account-name>** are sent.
 
-### Usage
+### 使用方法
 
 BigPanda creates incidents as it begins to receive events from Datadog. Incidents maintain relevant information such as the name of the monitor that was triggered and the condition causing the alert. 
 Incidents can move from Active to Resolved as monitors undergo transition changes. To stop Datadog from sending alerts to BigPanda, remove the desired account from the integration tile.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The BigPanda integration does not provide any metrics.
 
-### Events
+### イベント
 
 The BigPanda integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The BigPanda integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][2].
 

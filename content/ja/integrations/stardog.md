@@ -22,7 +22,7 @@
   "support_email": "support@stardog.com"
 "categories":
 - "data stores"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/stardog/README.md"
 "display_on_public_website": true
@@ -65,11 +65,11 @@ Get metrics from the Stardog service in real time to:
 - Visualize and monitor Stardog states.
 - Be notified about Stardog failovers and events.
 
-## Setup
+## セットアップ
 
 The Stardog check is not included in the [Datadog Agent][1] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Stardog check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -81,7 +81,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Stardog 
 
 2. Configure your integration similar to core [integrations][3].
 
-### Configuration
+### 構成
 
 1. Edit the `stardog.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4] to start collecting your Stardog [metrics](#metrics). See the [sample stardog.d/conf.yaml][5] for all available configuration options.
 
@@ -91,21 +91,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Stardog 
 
 [Run the Agent's status subcommand][7] and look for `stardog` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "stardog" >}}
 
 
-### Events
+### イベント
 
 The Stardog check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Stardog check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

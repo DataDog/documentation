@@ -1,7 +1,7 @@
 ---
 title: Sinatra
 name: Sinatra
-custom_kind: integration
+custom_kind: インテグレーション
 description: 'Gather Sinatra application logs.'
 short_description: 'Gather Sinatra application logs.'
 categories:

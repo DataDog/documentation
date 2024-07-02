@@ -33,7 +33,7 @@
 "categories":
 - collaboration
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/syncthing/README.md"
 "display_on_public_website": true
@@ -74,11 +74,11 @@
 
 Syncthing synchronizes files between two or more computers in real time. This integration allows you to monitor [Syncthing][1] using Datadog.
 
-## Setup
+## セットアップ
 
 The Syncthing check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Syncthing check on your host. See [Use Community Integrations][3] to install the Syncthing check with the Docker Agent or earlier versions of the Agent.
 
@@ -90,7 +90,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Syncthin
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `syncthing.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5] to start collecting your Syncthing [metrics](#metrics). See the [sample syncthing.d/conf.yaml][6] for all available configuration options.
 
@@ -100,21 +100,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Syncthin
 
 Run the [Agent's status subcommand][8] and look for `syncthing` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "syncthing" >}}
 
 
-### Events
+### イベント
 
 Syncthing does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "syncthing" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][11].
 

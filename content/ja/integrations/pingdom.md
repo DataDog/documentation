@@ -1,9 +1,9 @@
 ---
 "categories":
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Manage and migrate existing configuration of legacy Pingdom monitoring endpoints."
+"description": "レガシー Pingdom モニタリングエンドポイントの既存の構成を管理し、移行します。"
 "doc_link": "https://docs.datadoghq.com/integrations/pingdom/"
 "draft": false
 "git_integration_title": "pingdom"
@@ -37,25 +37,25 @@ Pingdom events can be added by configuring the relevant [Integration Status Moni
 Metrics can only be imported for Pingdom customers at the Starter level or above.
 </div>
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 1. Open the Pingdom integration tile.
 2. Enter the username and password to your Pingdom account. (If you have a Team account, you can use your own credentials and specify the account you wish to pull checks from.)
 3. You can ignore some checks by unchecking them or add some tags to the events that are going to be generated.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "pingdom" >}}
 
 
-### Events
+### イベント
 
 The Pingdom integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Pingdom integration pulls in transaction checks and reports them as service checks.
 
@@ -68,7 +68,7 @@ For the `pingdom.status` check, the following table explains which Pingdom trans
 | `WARNING`      | `unconfirmed_down`  |
 | `UNKNOWN`      | `unknown`, `paused` |
 
-## Troubleshooting
+## トラブルシューティング
 
 ### Error when updating username or password
 

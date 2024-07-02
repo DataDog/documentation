@@ -32,34 +32,34 @@ Passkeys in Synthetic Monitoring are handled by Virtual Authenticator global var
 ### Add passkeys to a browser test
 
 1. Click [Digital Experience > New Test > Browser Test][3].
-2. Click **Save & Edit Recording**.
+2. **Save & Edit Recording** をクリックします。
 3. On the recording page, click **Add Variable** > **Create variable from Global Variable**.
 4. Supply the passkeys stored in your virtual authenticator global variable that you created in the [previous step](#create-your-virtual-authenticator-global-variable).
 
 {{< img src="synthetics/guide/browser-tests-passkeys/synthetics_add_variable.png" alt="Adding your Virtual Authenticator global variable to your browser test" style="width:70%;" >}}
 
-### Test a registration flow
+### 登録フローのフロー
 
-To test a registration flow using passkeys in your [browser tests][3]:
+[ブラウザテスト][3]で、パスキーを使用して登録をテストする方法
 
-1. [Import your Virtual Authenticator global variable][5] into your test. 
-2. Navigate to the page to register your passkey. When recording your test, Datadog automatically generates and stores a new passkey by using the imported virtual authenticator global variable.
-3. After recording your test steps, click **Save & Launch Test**.
+1. テストに [Virtual Authenticator グローバル変数をインポート][5]します。
+2. パスキーを登録するページに移動します。テストを記録する際、Datadog はインポートされた Virtual Authenticator グローバル変数を使って新規のパスワードを自動的に作成し、保存します。
+3. テストの手順を記録したら、**Save & Launch Test** をクリックします。
 
-### Test a login flow
+### ログインフローのテスト
 
-To test a login flow using a passkey in your [browser tests][3], you need to first register your Datadog passkey on the web application (see section above). This is required once per passkey and application.
+[ブラウザテスト][3]でパスキーを使ってログインフローをテストするには、まず Datadog パスキーを Web アプリケーションに登録する必要があります (上記セクション参照)。この作業は、パスキーとアプリケーションごとに 1 回必要です。
 
-You can either:
+次のいずれかの方法を選択できます。
 
-- Complete the registration flow from within the recorder, but without recording the registration steps, or
-- Create a test that embeds both steps for the registration and login flows.
+- レコーダー内から登録フローを完了する。ただし、登録のステップは記録しない。
+- 登録フローとログインフローの両方のステップを埋め込んだテストを作成する。
 
-1. [Import your virtual authenticator global variable][5]. 
-2. Navigate to the page to login with your passkey. When recording your test, Datadog automatically logs in using the passkey previously registered on the web application with the selected virtual authenticator.
-3. After recording your test steps, click **Save & Launch Test**.
+1. [Virtual Authenticator グローバル変数をインポート][5]します。 
+2. パスキーでログインするページに移動します。テストを記録する際、Datadog は選択された Virtual Authenticator を使って Web アプリケーションにあらかじめ登録されたパスキーを使用して、自動的にログインします。
+3. テストの手順を記録したら、**Save & Launch Test** をクリックします。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

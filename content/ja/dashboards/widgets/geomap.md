@@ -1,15 +1,15 @@
 ---
+title: Geomap Widget
+widget_type: geomap
 aliases:
-- /ja/graphing/widgets/geomap/
+- /graphing/widgets/geomap/
 further_reading:
-- link: /ja/dashboards/graphing_json/
+- link: /dashboards/graphing_json/
   tag: Documentation
-  text: JSON を使用したダッシュボードの構築
+  text: Building Dashboards using JSON
 - link: /notebooks/
   tag: Documentation
-  text: ノートブック
-title: ジオマップ ウィジェット
-widget_type: ジオマップ
+  text: Notebooks
 ---
 
 ジオマップウィジェットは、陰影をつけた地域や点を使って地理データを視覚化します。これにより、以下のようなことが可能になります。
@@ -20,11 +20,11 @@ widget_type: ジオマップ
 
 {{< img src="/dashboards/widgets/geomap/geomap-points.png" alt="ポイントオーバーレイによるジオマップの視覚化" >}}
 
-## 計画と使用
+## セットアップ
 
 {{< img src="dashboards/widgets/geomap/geomap_setup2.png" alt="ウィジェット構成の Geomap Graph your data セクション">}}
 
-### ブラウザトラブルシューティング
+### 構成
 1. 視覚化レイヤーを選択します。
     * **Regions**: 国レベルでメジャーを集計します。
     * **Points**: イベントをマップ上でポイントとしてオーバーレイし、地理的なイベントデータを表示します。
@@ -71,7 +71,7 @@ widget_type: ジオマップ
 
 [コンテキストリンク][7]はデフォルトで有効になっていますが、有効/無効を切り替えることができます。コンテキストリンクは、ダッシュボードウィジェットと他のページ (Datadog 内またはサードパーティ) を接続します。
 
-## ヘルプ
+## API
 
 このウィジェットは **[Dashboards API][8]** で使用できます。[ウィジェット JSON スキーマ定義][9]については、以下の表を参照してください。
 
@@ -81,12 +81,12 @@ widget_type: ジオマップ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/logs/log_configuration/processors/#geoip-parser
-[2]: /ja/getting_started/tagging/#define-tags
-[3]: /ja/logs/search_syntax/
-[4]: /ja/logs/logs_to_metrics/
-[5]: /ja/dashboards/querying/
-[6]: /ja/real_user_monitoring/explorer/search_syntax/
-[7]: /ja/dashboards/guide/context-links/
-[8]: /ja/api/latest/dashboards/
-[9]: /ja/dashboards/graphing_json/widget_json/
+[1]: /logs/log_configuration/processors/#geoip-parser
+[2]: /getting_started/tagging/#define-tags
+[3]: /logs/search_syntax/
+[4]: /logs/logs_to_metrics/
+[5]: /dashboards/querying/
+[6]: /real_user_monitoring/explorer/search_syntax/
+[7]: /dashboards/guide/context-links/
+[8]: /api/latest/dashboards/
+[9]: /dashboards/graphing_json/widget_json/

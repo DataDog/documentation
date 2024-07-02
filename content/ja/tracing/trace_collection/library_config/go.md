@@ -1,15 +1,14 @@
 ---
 title: Configuring the Go Tracing Library
-kind: documentation
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
-  tag: Source Code
+  tag: ソースコード
   text: Source code
 - link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
-  tag: External Site
+  tag: 外部サイト
   text: Package page
 - link: /tracing/glossary/
   tag: Documentation
@@ -19,13 +18,13 @@ further_reading:
   text: Propagating trace context
 ---
 
-After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], optionally configure the tracing library as desired.
+[コードを使用してトレーシングライブラリをセットアップし、APM データを収集するように Agent を構成し、Go インテグレーションをアクティブ化][1]した後、オプションで、必要に応じてトレーシングライブラリを構成してください。
 
-Datadog recommends using `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services.
+Datadog では、`DD_ENV`、`DD_SERVICE`、`DD_VERSION` を使用して、サービスの `env`、`service`、`version` を設定することを推奨します。
 
-Read the [Unified Service Tagging][2] documentation for recommendations on how to configure these environment variables. These variables are available for versions 1.24.0+ of the Go tracer.
+これらの環境変数の構成方法に関する推奨事項は、[統合サービスタグ付け][2]のドキュメントをお読みください。これらの変数は、Go トレーサーのバージョン 1.24.0 以降で利用可能です。
 
-You may also elect to provide `env`, `service`, and `version` through the tracer's API:
+トレーサーの API を通じて、`env`、`service`、`version` を指定することもできます。
 
 ```go
 package main
@@ -41,35 +40,35 @@ func main() {
         tracer.WithServiceVersion("abc123"),
     )
 
-    // When the tracer is stopped, it will flush everything it has to the Datadog Agent before quitting.
-    // Make sure this line stays in your main function.
+    // トレーサーが停止すると、終了する前にトレーサー内のすべてのデータが Datadog Agent にフラッシュされます。
+    // この行は主要な関数内に残すようにしてください。
     defer tracer.Stop()
 }
 ```
 
-The Go tracer supports additional environment variables and functions for configuration.
-See all available options in the [configuration documentation][3].
+Go トレーサーは、コンフィギュレーション用の追加の環境変数と関数をサポートしています。
+[コンフィギュレーションドキュメント][3]で利用可能なすべてのオプションを参照してください。
 
 `DD_VERSION`
-: Set the application's version, for example: `1.2.3`, `6c44da20`, `2020.02.13`
+: アプリケーションのバージョン (例: `1.2.3`、`6c44da20`、 `2020.02.13`) を設定します。
 
 `DD_SERVICE`
-: The service name to be used for this application.
+: このアプリケーションで使用されるサービス名。
 
 `DD_ENV`
-: Set the application's environment, for example: prod, pre-prod, staging.
+: アプリケーションの環境を設定します。例: prod、pre-prod、staging
 
 `DD_AGENT_HOST`
-: **Default**: `localhost` <br>
-Override the default trace Agent host address for trace submission.
+: **デフォルト**: `localhost` <br>
+トレース送信のためのデフォルトのトレース Agent ホストアドレスをオーバーライドします。
 
 `DD_TRACE_AGENT_PORT`
-: **Default**: `8126` <br>
-Overrides the default trace Agent port for Datadog trace submission. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
+: **デフォルト**: `8126` <br>
+Datadog トレース送信のためのデフォルトのトレース Agent ポートをオーバーライドします。[Agent の構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、ライブラリ構成の `DD_DOGSTATSD_PORT` はそれに合わせなければなりません。
 
 `DD_DOGSTATSD_PORT`
-: **Default**: `8125` <br>
-Overrides the default trace Agent port for DogStatsD metric submission. If the [Agent configuration][13] sets `dogstatsd_port` or `DD_DOGSTATSD_PORT` to something other than the default `8125`, then the library configuration `DD_DOGSTATSD_PORT` must match it.
+: **デフォルト**: `8125` <br>
+DogStatsD メトリクス送信のためのデフォルトのトレース Agent ポートをオーバーライドします。[Agent の構成][13]で `dogstatsd_port` や `DD_DOGSTATSD_PORT` をデフォルトの `8125` 以外に設定した場合、ライブラリ構成の `DD_DOGSTATSD_PORT` はそれに合わせなければなりません。
 
 `DD_TRACE_SAMPLING_RULES`
 : **Default**: `nil`<br>
@@ -79,13 +78,13 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`
 
   For more information, see [Ingestion Mechanisms][4].<br>
   **Examples:**<br>
-  - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
-  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`.
+  - サンプルレートを 20% に設定: `'[{"sample_rate": 0.2}]'`
+  - 'a' で始まるサービスとスパン名 'b' のサービスのサンプルレートを 10% に、それ以外のサービスのサンプルレートを 20% に設定: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
   - Set the sample rate to 40% for services that have `HTTP GET` resource name: `'[{"resource": "HTTP GET", "sample_rate": 0.4}]'`.
   - Set the sample rate to 100% for services that have a `tier` tag with the value `premium`: `'[{"tags": {"tier":"premium"}, "sample_rate": 1}]'`.
 
 `DD_TRACE_SAMPLE_RATE`
-: Enable ingestion rate control.
+: インジェストレートコントロールを有効にします。
 
 `DD_SPAN_SAMPLING_RULES`
 : **Default**: `nil`<br>
@@ -95,50 +94,50 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`
 
   For more information, see [Ingestion Mechanisms][5].<br>
   **Example:**<br>
-  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+  - サービス名 `my-service` と演算子名 `http.request` のスパンサンプリングレートを 50% に設定し、1 秒間に最大 50 トレースします: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
   - Set the sample rate to 100% for services that have a `priority` tag with the value `high`: `'[{"tags": {"priority":"high"}, "sample_rate": 1}]'`.
 
 `DD_TRACE_RATE_LIMIT`
-: Maximum number of spans to sample per-second, per-Go process. Defaults to 100 when DD_TRACE_SAMPLE_RATE is set. Otherwise, delegates rate limiting to the Datadog Agent.
+: 1 秒あたり、Go プロセスごとにサンプリングするスパンの最大数。DD_TRACE_SAMPLE_RATE が設定されている場合、デフォルトは 100 です。それ以外の場合は、Datadog Agent にレート制限を委ねます。
 
 `DD_TAGS`
-: **Default**: [] <br>
-A list of default tags to be added to every span and profile. Tags can be separated by commas or spaces, for example: `layer:api,team:intake,key:value` or `layer:api team:intake key:value`.
+: **デフォルト**: [] <br>
+すべてのスパンとプロファイルに追加されるデフォルトタグのリスト。タグはカンマやスペースで区切ることができます。例えば、 `layer:api,team:intake,key:value` や `layer:api team:intake key:value` などです。
 
 `DD_TRACE_STARTUP_LOGS`
-: **Default**: `true` <br>
-Enable startup configuration and the diagnostic log.
+: **デフォルト**: `true` <br>
+スタートアップコンフィグレーションと診断ログを有効にします。
 
 `DD_TRACE_DEBUG`
-: **Default**: `false` <br>
-Enable debug logging in the tracer.
+: **デフォルト**: `false`<br>
+トレーサーでデバッグロギングを有効化します。
 
 `DD_TRACE_ENABLED`
-: **Default**: `true` <br>
-Enable web framework and library instrumentation. When false, the application code doesn't generate any traces.
+: **デフォルト**: `true`<br>
+Web フレームワークとライブラリインスツルメンテーションを有効にします。false の場合、アプリケーションコードはトレースを生成しません。
 
 `DD_SERVICE_MAPPING`
-: **Default**: `null` <br>
-Dynamically rename services through configuration. Services can be separated by commas or spaces, for example: `mysql:mysql-service-name,postgres:postgres-service-name`, `mysql:mysql-service-name postgres:postgres-service-name`.
+: **デフォルト**: `null` <br>
+構成により、サービス名を動的に変更することができます。サービス名はカンマやスペースで区切ることができ、例えば `mysql:mysql-service-name,postgres:postgres-service-name`、`mysql:mysql-service-name postgres:postgres-service-name` のようにすることができます。
 
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
-: **Default**: `true` <br>
-Datadog may collect [environmental and diagnostic information about your system][6] to improve the product. When false, this telemetry data will not be collected.
+: **デフォルト**: `true` <br>
+Datadog は、製品の改良のため、[システムの環境・診断情報][6]を収集することがあります。false の場合、このテレメトリーデータは収集されません。
 
 `DD_TRACE_PARTIAL_FLUSH_ENABLED`
-: **Default**: `false` <br>
-Enables incrementally flushing large traces to the Datadog Agent, reducing the chance of rejection by the Agent. Use only when you have long-lived traces or traces with many spans. Valid values are `true` or `false`.
-Added in version 1.54.0. Only compatible with the Datadog Agent 7.26.0+.
+: **デフォルト**: `false`<br>
+Datadog Agent への大規模トレースのフラッシュをインクリメント形式で有効化し、Agent に拒否される可能性を低減します。保持期間が長いトレースまたは多数のスパンを持つトレースがある場合にのみ使用してください。有効な値は `true` または `false` です。
+バージョン 1.54.0 で追加されました。Datadog Agent 7.26.0 以降とのみ互換性を有しています。
 
 `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`
-: **Default**: `1000`<br>
-Number of spans within a trace that can be partially flushed to the Datadog Agent. `DD_TRACE_PARTIAL_FLUSH_ENABLED` must be `true` for partial flushing to occur.
-Added in version 1.54.0. Only compatible with the Datadog Agent 7.26.0+.
+: **デフォルト**: `1000`<br>
+Datadog Agent に部分的にフラッシュできるトレース内のスパン数。`DD_TRACE_PARTIAL_FLUSH_ENABLED` が `true` でないと、部分的なフラッシュは行われません。
+バージョン 1.54.0 で追加されました。Datadog Agent 7.26.0 以降とのみ互換性を有しています。
 
 `DD_TRACE_CLIENT_IP_ENABLED`
-: **Default**: `false` <br>
-Enable client IP collection from relevant IP headers in HTTP request spans.
-Added in version 1.47.0
+: **デフォルト**: `false` <br>
+HTTP リクエストスパンの関連 IP ヘッダーからクライアント IP の収集を可能にします。
+バージョン 1.47.0 で追加されました
 
 `DD_TRACE_HEADER_TAGS`
 : **Default**: `null` <br>
@@ -148,12 +147,12 @@ List of comma-separated HTTP headers to be used as span tags. Optionally specify
   - Capture request headers `my-header-1` and `my-header-2`: `"DD_TRACE_HEADER_TAGS=my-header1,my-header-2"`
   - Capture request header `my-header` and rename it to `my-tag`: `"DD_TRACE_HEADER_TAGS=my-header:my-tag"`
 
-## Configure APM environment name
+## APM 環境名の構成
 
-The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][3] start option of the tracer.
+[APM 環境名][7]は、[Agent 内][8]またはトレーサーの [WithEnv][3] スタートオプションを使用して構成できます。
 
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

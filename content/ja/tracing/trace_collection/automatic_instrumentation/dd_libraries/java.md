@@ -14,7 +14,7 @@ type: multi-code-lang
 code_lang_weight: 0
 further_reading:
     - link: "https://github.com/DataDog/dd-trace-java"
-      tag: Source Code
+      tag: ソースコード
       text: Datadog Java APM source code
     - link: tracing/glossary/
       tag: Documentation
@@ -142,42 +142,42 @@ set JAVA_OPTS=%JAVA_OPTS% -javaagent:"c:\path\to\dd-java-agent.jar"
 {{% /tab %}}
 {{% tab "JBoss" %}}
 
-- In standalone mode:
+- スタンドアロンモードの場合:
 
-  Add the following line to the end of `standalone.conf`:
+  `standalone.conf` の末尾に次の行を追加します。
 
 ```text
 JAVA_OPTS="$JAVA_OPTS -javaagent:/path/to/dd-java-agent.jar"
 ```
 
-- In standalone mode and on Windows, add the following line to the end of `standalone.conf.bat`:
+- スタンドアロンモードと Windows の場合、`standalone.conf.bat` の最後に以下の行を追加します。
 
 ```text
 set "JAVA_OPTS=%JAVA_OPTS% -javaagent:X:/path/to/dd-java-agent.jar"
 ```
 
-- In domain mode:
+- ドメインモードの場合:
 
-  Add the following line in the file `domain.xml`, under the tag server-groups.server-group.jvm.jvm-options:
+  ファイル `domain.xml` の server-groups.server-group.jvm.jvm-options というタグの下に、以下の行を追加します。
 
 ```text
 <option value="-javaagent:/path/to/dd-java-agent.jar"/>
 ```
 
-For more details, see the [JBoss documentation][1].
+詳細については、[JBoss のドキュメント][1]を参照してください。
 
 
 [1]: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/configuring_jvm_settings
 {{% /tab %}}
 {{% tab "Jetty" %}}
 
-If you use `jetty.sh` to start Jetty as a service, edit it to add:
+`jetty.sh` を使用して Jetty をサービスとして開始する場合は、編集して次を追加します。
 
 ```text
 JAVA_OPTIONS="${JAVA_OPTIONS} -javaagent:/path/to/dd-java-agent.jar"
 ```
 
-If you use `start.ini` to start Jetty, add the following line (under `--exec`, or add `--exec` line if it isn't there yet):
+`start.ini` を使用して Jetty を起動する場合は、次の行を追加します(`--exec` の下に。まだ存在しない場合は `--exec` 行を追加します)。
 
 ```text
 -javaagent:/path/to/dd-java-agent.jar
@@ -186,53 +186,53 @@ If you use `start.ini` to start Jetty, add the following line (under `--exec`, o
 {{% /tab %}}
 {{% tab "WebSphere" %}}
 
-In the administrative console:
+管理コンソールで:
 
-1. Select **Servers**. Under **Server Type**, select **WebSphere application servers** and select your server.
-2. Select **Java and Process Management > Process Definition**.
-3. In the **Additional Properties** section, click **Java Virtual Machine**.
-4. In the **Generic JVM arguments** text field, enter:
+1. **Servers** を選択します。**Server Type** で、**WebSphere application servers** を選択し、サーバーを選択します。
+2. **Java and Process Management > Process Definition** を選択します。
+3. **Additional Properties** セクションで、**Java Virtual Machine** をクリックします。
+4. **Generic JVM arguments** テキストフィールドに次のように入力します。
 
 ```text
 -javaagent:/path/to/dd-java-agent.jar
 ```
 
-For additional details and options, see the [WebSphere docs][1].
+詳細とオプションについては、[WebSphere のドキュメント][1]を参照してください。
 
 [1]: https://www.ibm.com/support/pages/setting-generic-jvm-arguments-websphere-application-server
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**
+**注**
 
-- If you're adding the `-javaagent` argument to your `java -jar` command, it needs to be added _before_ the `-jar` argument, as a JVM option, not as an application argument. For example:
+- `-javaagent` 引数を `java -jar` コマンドに追加する場合は、アプリケーション引数としてではなく、JVM オプションとして `-jar` 引数の_前_に追加する必要があります。例:
 
    ```text
    java -javaagent:/path/to/dd-java-agent.jar -jar my_app.jar
    ```
 
-     For more information, see the [Oracle documentation][7].
+     詳細については、[Oracle のドキュメント][7]を参照してください。
 
-- Never add `dd-java-agent` to your classpath. It can cause unexpected behavior.
+- classpath に `dd-java-agent` を追加しないでください。予期せぬ挙動が生じる場合があります。
 
-## Automatic instrumentation
+## 自動インスツルメンテーション
 
-Automatic instrumentation for Java uses the `java-agent` instrumentation capabilities [provided by the JVM][8]. When a `java-agent` is registered, it can modify class files at load time.
+Java の自動インスツルメンテーションは、[JVM によって提供される][8] `java-agent` インスツルメンテーション機能を使用します。`java-agent` が登録されている場合は、ロード時にクラスファイルを変更することができます。
 
-**Note:** Classes loaded with remote ClassLoader are not instrumented automatically.
+**注:** リモート ClassLoader でロードされたクラスは、自動的にインスツルメンテーションされません。
 
-Instrumentation may come from auto-instrumentation, the OpenTracing API, or a mixture of both. Instrumentation generally captures the following info:
+インスツルメンテーションの由来は自動インスツルメンテーション、OpenTracing API、または両者の混合になる場合があります。一般的に、インスツルメンテーションは次の情報を取得します:
 
-- Timing duration is captured using the JVM's NanoTime clock unless a timestamp is provided from the OpenTracing API
-- Key/value tag pairs
-- Errors and stack traces which are unhandled by the application
-- A total count of traces (requests) flowing through the system
+- OpenTracing API からタイムスタンプが提供されない限り、JVM の NanoTime クロックを使ってタイミング時間が取得されます
+- キー/値タグペア
+- アプリケーションによって処理されていないエラーとスタックトレース
+- システムを通過するトレース (リクエスト) の合計数
 
-## Configuration
+## 構成
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][9] for details.
+必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][9]を参照してください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

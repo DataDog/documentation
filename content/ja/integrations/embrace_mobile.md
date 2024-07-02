@@ -13,7 +13,7 @@
 - metrics
 - mobile
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/embrace_mobile/README.md"
 "display_on_public_website": true
@@ -78,7 +78,7 @@ each and every user experience, Embrace extracts powerful insights to fuel your 
 After app installation, Embrace provides dashboards that track key mobile health metrics. For any regression, you can inspect
 the full details of every affected user session without having to manually reproduce it.
 
-## Setup
+## セットアップ
 
 1. Start a free trial and follow the [Embrace documentation][2]. **You need to follow this documentation before seeing metrics in Datadog.**
 1. After completing setup of the Embrace integration, navigate back to Datadog to connect both platforms.

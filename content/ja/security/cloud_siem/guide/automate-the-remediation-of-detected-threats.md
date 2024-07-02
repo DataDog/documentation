@@ -9,33 +9,33 @@ aliases:
   - /security_platform/cloud_siem/guide/automate-the-remediation-of-detected-threats/
 ---
 
-## Overview
+## 概要
 
-[Cloud SIEM][1] allows you to set Detection Rules that trigger auto-remediation workflows. With Datadog's [webhook integration][2], set up webhooks to deliver payloads to the services you want to automate whenever a [Detection Rule][3] is triggered. Every webhook payload contains information about the triggering event and a custom message that can be used to initiate services downstream. Automate commands for any service that has a webhook URL. Security orchestration and automation response tools accept incoming HTTP requests and these webhooks initiate any workflow you have defined.
+[Cloud SIEM][1] では、自動修復ワークフローのトリガーとなる検出ルールを設定することができます。Datadog の [Webhook インテグレーション][2]では、[検出ルール][3]がトリガーされたときに、自動化したいサービスにペイロードを配信する Webhookを設定します。すべての Webhook ペイロードには、トリガーとなったイベントに関する情報と、下流のサービスを開始するために使用できるカスタムメッセージが含まれています。Webhook の URL を持つすべてのサービスのコマンドを自動化できます。セキュリティオーケストレーションツールや自動化応答ツールが受信した HTTP リクエストを受け入れ、これらの Webhook は定義した任意のワークフローを開始します。
 
-Choose a security scenario below to begin automating remediation.
+以下のセキュリティシナリオを選択して、修復の自動化を開始します。
 
-## Delete misconfigured security groups
+## 誤って構成されたセキュリティグループを削除する
 
-In a cloud environment, it's important to delete a misconfigured resource as soon as it is created. In this scenario, you can configure a [webhook integration][2] to send a [webhook][2] to your cloud provider's API management service.
+クラウド環境では、誤って構成されたリソースが作成されたらすぐに削除することが重要です。このシナリオでは [Webhook インテグレーション][2]を構成し、クラウドプロバイダーの API 管理サービスに [Webhook][2] を送信するよう設定します。
 
-{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="A diagram for a webhook sent to a cloud provider's API" >}}
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="クラウドプロバイダーの API に送信される Webhook の図" >}}
 
 Once configured, if an AWS user creates a poorly configured resource (for example, an overly permissive security group, or user role) within your AWS environment, Datadog Log Management ingests the related log, which triggers a security group-based Detection Rule. This process automatically sends the webhook's JSON payload to the designated Amazon API Gateway URL, which in turn activates an AWS Lambda function that automatically deletes the offending resource.
 
-## Ban a suspicious IP address
+## 不審な IP アドレスを禁止する
 
-A sign-in from an unrecognized IP address might represent an attacker manipulating a trusted user's credentials, with which they can then access your data and gain persistence in your environment.
+認識できない IP アドレスからのサインインは、攻撃者が信頼されているユーザーの認証情報を操作してデータにアクセスしたり、お使いの環境内でのパーシステンスを獲得したりしている可能性があります。
 
-To combat this type of attack, you can use the [New Value detection method][4], which analyzes your account's historical data over a chosen period of time and alerts on previously unseen values in your cloud logs.
+この種の攻撃に対抗するには、選択した期間のアカウントの履歴データを分析し、クラウドログのこれまで見られなかった値を警告する[新値検出方法][4]が有効です。
 
-First, set up a [new Detection Rule][5] using the New Value detection method.
+まず、新値検出方法で[新しい検出ルール][5]を設定します。
 
-Then, set up a [webhook][2] that sends a payload to your cloud's identity and access management (IAM) service to ban the unknown IP when this rule is triggered.
+そして、このルールがトリガーされたときに未知の IP を禁止するために、クラウドの Identity and Access Management (IAM) サービスにペイロードを送信する [Webhook][2] を設定します。
 
-{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="A new webhook that bans an unknown IP address" >}}
+{{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/webhook-ip.png" alt="未知の IP アドレスを禁止する新しい Webhook" >}}
 
-The following example illustrates what the relevant webhook payload could look like when a security signal is produced by Datadog:
+次の例は、Datadog によってセキュリティシグナルが生成されたときに、関連する Webhook ペイロードがどのように見えるかを示しています。
 
 {{< code-block lang="json" filename="webhook-payload.json" >}}
 {
@@ -53,11 +53,11 @@ The following example illustrates what the relevant webhook payload could look l
 }
 {{< /code-block >}}
 
-## Application abuse and fraud
+## アプリケーションの悪用および詐欺
 
-With Datadog Cloud SIEM, you can uncover patterns of [abuse or fraud][6] across your application. For example, set up a [Detection Rule][7] that is triggered when a user repeatedly attempts to purchase something in your application with invalid credit card details. Then, set up a webhook that sends a payload with remediation instructions to a service that will disable the user's credentials.
+Datadog Cloud SIEM を使用すると、アプリケーション全体の[悪用や詐欺][6]のパターンを発見することができます。例えば、ユーザーがアプリケーション内で無効なクレジットカード情報を使って何度も購入しようとした場合にトリガーされる[検知ルール][7]を設定します。次に、ユーザーの認証情報を無効にするサービスに対して修復指示を含むペイロードを送信する Webhook を設定します。
 
-The following example illustrates what the relevant webhook payload could look like when a security signal is produced by Datadog:
+次の例は、Datadog によってセキュリティシグナルが生成されたときに、関連する Webhook ペイロードがどのように見えるかを示しています。
 
 {{< code-block lang="json" filename="webhook-payload.json" >}}
 {
@@ -82,9 +82,9 @@ The following example illustrates what the relevant webhook payload could look l
 }
 {{< /code-block >}}
 
-Datadog generates the Security Signal, which details the offense as well as the suspicious user's information, such as their IP address and user ID, and the webhook payload sends remediation instructions to a service to disable the user's credentials.
+Datadog はセキュリティシグナルを生成し、違反行為だけでなく、IP アドレスやユーザー ID などの不審なユーザーの情報を詳細に説明します。また、Webhook ペイロードを使用してサービスに修復指示を送信し、ユーザーの認証情報を無効化します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

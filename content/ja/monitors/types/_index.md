@@ -48,7 +48,7 @@ further_reading:
 {{< /whatsnext >}}
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -4,9 +4,9 @@
 - "data stores"
 - "google cloud"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track the resource usage of your Spanner instances."
+"description": "Spanner インスタンスのリソースの使用状況を追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_spanner/"
 "draft": false
 "git_integration_title": "google_cloud_spanner"
@@ -32,11 +32,11 @@ Get metrics from Google Spanner to:
 - Visualize the performance of your Spanner databases.
 - Correlate the performance of your Spanner databases with your applications.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
-#### Installation
+#### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
@@ -54,21 +54,21 @@ Once this is done, export your Google Cloud Spanner logs from Google Cloud Loggi
 
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloud_spanner" >}}
 
 
-### Events
+### イベント
 
 The Google Cloud Spanner integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Cloud Spanner integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

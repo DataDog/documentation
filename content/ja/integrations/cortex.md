@@ -22,7 +22,7 @@
   "support_email": support@getcortexapp.com
 "categories":
 - incidents
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/cortex/README.md"
 "display_on_public_website": true
@@ -62,11 +62,11 @@
 
 The [Cortex][1] integration enables you to trigger Datadog incidents directly from the Cortex dashboard.
 
-## Setup
+## セットアップ
 
 To set up this integration, you must have a Cortex account, along with Datadog API and Application keys.
 
-### Configuration
+### 構成
 
 1. Contact Cortex for a demo if not a current customer.
 2. Create a [Datadog API key][2].
@@ -83,21 +83,21 @@ To set up this integration, you must have a Cortex account, along with Datadog A
 6. You should get a message on screen that says: "Incident has been triggered! Click here to see it in Datadog."
 7. Additionally, the new incident should be displayed under "Incidents".
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 Cortex does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 Cortex does not include any service checks.
 
-### Events
+### イベント
 
 Cortex does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [support@getcortexapp.com][7].
 

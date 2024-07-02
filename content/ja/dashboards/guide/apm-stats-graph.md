@@ -1,12 +1,12 @@
 ---
-aliases:
-- /ja/dashboards/querying/#configuring-an-apm-stats-graph
+title: Configuring An APM Stats Graph
 disable_toc: false
+aliases:
+- "/dashboards/querying/#configuring-an-apm-stats-graph"
 further_reading:
 - link: /dashboards/querying/
   tag: Documentation
-  text: グラフのクエリ方法について
-title: APM 統計グラフの構成
+  text: Learn how to query graphs
 ---
 
 ## 概要
@@ -26,8 +26,8 @@ APM 統計データを使用してグラフを構成するには、次の手順�
 
 詳細レベルが `resource` または `span` の場合、一部のウィジェットタイプでは、クエリの範囲を狭めるためにリソース名 (`resource`) を選択する必要もあります。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/widgets/
+[1]: /dashboards/widgets/

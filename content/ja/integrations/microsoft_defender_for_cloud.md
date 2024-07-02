@@ -22,7 +22,7 @@
 - cloud
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -62,13 +62,13 @@ Defender for Cloud is a cloud-native application protection platform (CNAPP) tha
 
 Enable Datadog Cloud SIEM to use out-of-the-box security rules to monitor your Azure environment along side your other security infrastructure.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 This integration requires that the Datadog Azure integration is enabled. It forwards logs to Datadog through Azure using event hubs. The integration requires that the log forwarder be at least version `1.0.1` or later.
 
-### Configuration
+### 構成
 
 Configure Defender for Cloud to [continuously export logs][2] to the event hub. No additional configuration is needed within Datadog.
 
@@ -84,21 +84,21 @@ If using Datadog Cloud SIEM, confirm that the Microsoft Defender for Cloud detec
 1. Scroll down and expand the section titled **Azure**. Scroll through the list to find the Microsoft Defender for Cloud rules. Make sure the rules are toggled on.
 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 Microsoft Defender for Cloud does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 Microsoft Defender for Cloud does not include any service checks.
 
-### Events
+### イベント
 
 Microsoft Defender for Cloud does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 To confirm that Cloud SIEM is receiving Defender for Cloud Alerts, follow these steps: 
 1. In the Datadog menu, go to **Security** > **Configuration** and expand **Cloud SIEM**.

@@ -29,7 +29,7 @@
 - cloud
 - log collection
 - tracing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/hasura_cloud/README.md"
 "display_on_public_website": true
@@ -75,7 +75,7 @@ secure, production-ready GraphQL API over your data sources.
 The Datadog integration is an observability feature of Hasura Cloud that exports
 your Hasura Cloud project's operation logs, metrics, and traces to your Datadog dashboard. 
 
-## Setup
+## セットアップ
 
 To set up the Hasura Cloud Datadog integration for your Hasura Cloud project, provide a Datadog API key and region to Hasura Cloud.
 
@@ -92,21 +92,21 @@ See the [Datadog Log Facets documentation][4] for information regarding creating
 
 Logs, metrics, and traces from your Hasura Cloud project are automatically sent to Datadog when your project receives traffic.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "hasura_cloud" >}}
 
 
-### Service Checks
+### サービスチェック
 
 The Hasura Cloud integration does not include any service checks.
 
-### Events
+### イベント
 
 The Hasura Cloud integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

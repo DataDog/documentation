@@ -33,7 +33,7 @@
 "categories":
 - "data stores"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md"
 "display_on_public_website": true
@@ -46,7 +46,7 @@
 "manifest_version": "2.0.0"
 "name": "pgbouncer"
 "public_title": "PGBouncer"
-"short_description": "Track connection pool metrics and monitor traffic to and from your application."
+"short_description": "接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視"
 "supported_os":
 - "linux"
 - "macos"
@@ -56,9 +56,9 @@
   - "Supported OS::Linux"
   - "Supported OS::macOS"
   - "Category::Data Stores"
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   "configuration": "README.md#Setup"
-  "description": "Track connection pool metrics and monitor traffic to and from your application."
+  "description": "接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -68,31 +68,31 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-The PgBouncer check tracks connection pool metrics and lets you monitor traffic to and from your application.
+PgBouncer チェックは、接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックの監視を可能にします。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The PgBouncer check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your PgBouncer nodes.
+PgBouncer チェックは [Datadog Agent][1] パッケージに含まれています。PgBouncer ノードに追加でインストールする必要はありません。
 
-This check needs an associated user to query your PgBouncer instance:
+このチェックには、PgBouncer インスタンスを照会するための関連ユーザーが必要です。
 
-1. Create a Datadog user in your PgBouncer `pgbouncer.ini` file:
+1. PgBouncer の `pgbouncer.ini` ファイルに Datadog ユーザーを作成します。
 
    ```ini
    stats_users = datadog
    ```
 
-2. Add an associated password for the `datadog` user in your PgBouncer `userlist.txt` file:
+2. PgBouncer の `userlist.txt` ファイルに `datadog` ユーザーの関連パスワードを追加します。
 
    ```text
    "datadog" "<PASSWORD>"
    ```
 
-3. To verify the credentials, run the following command:
+3. 認証情報を確認するには、次のコマンドを実行します。
 
    ```shell
    psql -h localhost -U datadog -p 6432 pgbouncer -c \
@@ -101,20 +101,20 @@ This check needs an associated user to query your PgBouncer instance:
    || echo -e "\e[0;31mCannot connect to pgBouncer\e[0m"
    ```
 
-   When it prompts for a password, enter the password you added to the `userlist.txt`.
+   パスワードの入力を要求されたら、`userlist.txt` に追加したパスワードを入力します。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `pgbouncer.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample pgbouncer.d/conf.yaml][2] for all available configuration options:
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `pgbouncer.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル pgbouncer.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -126,21 +126,21 @@ To configure this check for an Agent running on a host:
      - database_url: "postgresql://datadog:<PASSWORD>@<HOSTNAME>:<PORT>/<DATABASE_URL>?sslmode=require"
    ```
 
-   **Note**: If your instance of PgBouncer does not have SSL support, replace `sslmode=require` with `sslmode=allow` to avoid server errors. For details, see the Postgres documentation on [SSL support][3].
+   **注**: PgBouncer のインスタンスに SSL サポートがない場合は、`sslmode=require` を `sslmode=allow` と置換してサーバーエラーを防ぎます。詳細は、[SSL サポート][3]の Postgres ドキュメントを参照してください。
 
-2. [Restart the Agent][4].
+2. [Agent を再起動します][4]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `pgbouncer.d/conf.yaml` file to start collecting your Pgbouncer logs:
+2. Pgbouncer のログの収集を開始するには、次の構成ブロックを `pgbouncer.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -150,9 +150,9 @@ _Available for Agent versions >6.0_
        service: "<SERVICE_NAME>"
    ```
 
-   Change the `path` and `service` parameter values and configure them for your environment. See the [sample pgbouncer.d/conf.yaml][2] for all available configuration options.
+   `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル pgbouncer.d/conf.yaml][2] を参照してください。
 
-3. [Restart the Agent][5].
+3. [Agent を再起動します][5]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/pgbouncer/datadog_checks/pgbouncer/data/conf.yaml.example
@@ -160,27 +160,27 @@ _Available for Agent versions >6.0_
 [4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [5]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                                                                                  |
+| パラメーター            | 値                                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------------------ |
 | `<INTEGRATION_NAME>` | `pgbouncer`                                                                                            |
-| `<INIT_CONFIG>`      | blank or `{}`                                                                                          |
-| `<INSTANCE_CONFIG>`  | `{"database_url": "postgresql://datadog:<PASSWORD>@%%host%%:%%port%%/<DATABASE_URL>?sslmode=require"}` |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                          |
+| `<INSTANCE_CONFIG>`  | `{"database_url": "postgresql://datadog:<パスワード>@%%host%%:%%port%%/<データベース_URL>?sslmode=require"}` |
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                           |
+| パラメーター      | 値                                           |
 | -------------- | ----------------------------------------------- |
 | `<LOG_CONFIG>` | {"source": "pgbouncer", "service": "pgbouncer"} |
 
@@ -189,29 +189,29 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][2] and look for `pgbouncer` under the Checks section.
+[Agent の status サブコマンドを実行][2]し、Checks セクションで `pgbouncer` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "pgbouncer" >}}
 
 
-**Note**: Not all metrics are available with all versions of PgBouncer.
+**注**: PgBouncer のバージョンによっては、すべてのメトリクスを使用できないことがあります。
 
-### Events
+### イベント
 
-The PgBouncer check does not include any events.
+PgBouncer チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "pgbouncer" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][3].
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 
 

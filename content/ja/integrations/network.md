@@ -21,13 +21,13 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/network/README.md"
 "display_on_public_website": true
 "draft": false
-"git_integration_title": "network"
-"integration_id": "system"
+"git_integration_title": "ネットワーク"
+"integration_id": "システム"
 "integration_title": "Network"
 "integration_version": "3.3.0"
 "is_public": true
@@ -156,7 +156,7 @@ spec:
 
 [Run the Agent's `status` subcommand][8] and look for `network` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "network" >}}

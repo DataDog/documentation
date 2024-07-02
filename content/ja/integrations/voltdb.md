@@ -32,7 +32,7 @@
 "categories":
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/voltdb/README.md"
 "display_on_public_website": true
@@ -69,24 +69,24 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [VoltDB][1] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [VoltDB][1] を監視します。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-**Note**: This check should only be configured on one Agent per cluster. If you are monitoring a cluster spread across several hosts, install an Agent on each host. However, do not enable the VoltDB integration on more than one host, as this results in duplicate metrics.
+**注**: このチェックは、クラスター当たり 1 つの Agent に構成される必要があります。複数ホストに及ぶクラスターを監視する場合は、各ホストに 1 つの Agent をインストールします。ただし、メトリクスが重複してしまうため、1 つ以上のホストで VoltDB インテグレーションを有効にしないでください。
 
-### Installation
+### インストール
 
-The VoltDB check is included in the [Datadog Agent][3] package.
-No additional installation is needed on your server.
+VoltDB チェックは [Datadog Agent][3] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-1. Add a `datadog-agent` user. You can do so by editing your VoltDB `deployment.xml` file. **Note**: No specific roles are required, so assign the built-in `user` role.
+1. VoltDB `deployment.xml` ファイルを編集し、`datadog-agent` ユーザーを追加します。**注**: 特別なロールは必要ないため、組み込みの `user` ロールを割り当てます。
 
     ```xml
     <users>
@@ -95,7 +95,7 @@ No additional installation is needed on your server.
     </users>
     ```
 
-2. Edit the `voltdb.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your VoltDB performance data. See the [sample voltdb.d/conf.yaml][4] for all available configuration options.
+2. VoltDB のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `voltdb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル voltdb.d/conf.yaml][4] を参照してください。
 
     ```yaml
     init_config:
@@ -106,25 +106,25 @@ No additional installation is needed on your server.
         password: "<PASSWORD>"
     ```
 
-3. [Restart the Agent][5].
+3. [Agent を再起動します][5]。
 
-#### TLS support
+#### TLS サポート
 
-If [TLS/SSL][6] is enabled on the client HTTP port:
+[TLS/SSL][6] がクライアントの HTTP ポートで有効になっている場合:
 
-1. Export your certificate CA file in PEM format:
+1. CA 証明書ファイルを PEM フォーマットでエクスポートします。
 
     ```bash
     keytool -exportcert -file /path/to/voltdb-ca.pem -keystore <KEYSTORE> -storepass <PASSWORD> -alias voltdb -rfc
     ```
 
-1. Export your certificate in PEM format:
+1. 証明書を PEM フォーマットでエクスポート:
 
     ```bash
     openssl pkcs12 -nodes -in <KEYSTORE> -out /path/to/voltdb.pem -password pass:<PASSWORD>
     ```
 
-    The resulting file should contain the _unencrypted_ private key and the certificate:
+    結果のファイルには、_暗号化されていない_ 秘密キーと証明書が含まれています。
 
     ```
     -----BEGIN PRIVATE KEY-----
@@ -135,7 +135,7 @@ If [TLS/SSL][6] is enabled on the client HTTP port:
     -----END CERTIFICATE-----
     ```
 
-2. In your instance configuration, point `url` to the TLS-enabled client endpoint, and set the `tls_cert` and `tls_ca_cert` options. For example:
+2. インスタンスのコンフィギュレーションで、`url` を TLS が有効になっているクライアントのエンドポイントに指定し、`tls_cert` および `tls_ca_cert` のオプションを設定します。例:
 
     ```yaml
     instances:
@@ -145,17 +145,17 @@ If [TLS/SSL][6] is enabled on the client HTTP port:
       tls_ca_cert: /path/to/voltdb-ca.pem
     ```
 
-3. [Restart the Agent][5].
+3. [Agent を再起動します][5]。
 
-#### Log collection
+#### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Add this configuration block to your `voltdb.d/conf.yaml` file to start collecting your VoltDB logs:
+2. VoltDB のログの収集を開始するには、次の構成ブロックを `voltdb.d/conf.yaml` ファイルに追加します。
 
     ```yaml
     logs:
@@ -164,35 +164,35 @@ If [TLS/SSL][6] is enabled on the client HTTP port:
         source: voltdb
     ```
 
-  Change the `path` value based on your environment. See the [sample `voltdb.d/conf.yaml` file][4] for all available configuration options.
+  `path` の値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[`voltdb.d/conf.yaml` ファイルのサンプル][4]を参照してください。
 
-  3. [Restart the Agent][5].
+  3. [Agent を再起動します][5]。
 
-  To enable logs for Kubernetes environments, see [Kubernetes Log Collection][7].
+  Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][7]を参照してください。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][8] and look for `voltdb` under the Checks section.
+[Agent のステータスサブコマンドを実行][8]し、Checks セクションで `voltdb` を検索します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "voltdb" >}}
 
 
-### Events
+### イベント
 
-This check does not include any events.
+このチェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "voltdb" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][11].
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -27,7 +27,7 @@
 - developer tools
 - network
 - testing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/speedtest/README.md"
 "display_on_public_website": true
@@ -69,11 +69,11 @@
 
 This check monitors [Speedtest][1] through the Datadog Agent.
 
-## Setup
+## セットアップ
 
 The Speedtest check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Speedtest check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -87,7 +87,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Speedtes
 
 **Note**: For all hosts, you need to install the [Speedtest CLI][1] and accept the agreement as the Datadog Agent user prior to use, for example: `sudo -u dd-agent speedtest`.
 
-### Configuration
+### 構成
 
 1. Edit the `speedtest.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Speedtest performance data. See the [sample speedtest.d/conf.yaml][5] for all available configuration options.
 
@@ -97,21 +97,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Speedtes
 
 Run the [Agent's status subcommand][7] and look for `speedtest` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "speedtest" >}}
 
 
-### Events
+### イベント
 
 The Speedtest check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "speedtest" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

@@ -26,7 +26,7 @@
 "categories":
 - notifications
 - testing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/neoload/README.md"
 "display_on_public_website": true
@@ -76,7 +76,7 @@ With the NeoLoad integration, you can track NeoLoad test performance metrics to:
 - Correlate application performance with load testing metrics in NeoLoad.
 - Analyze and visualize NeoLoad metrics in Datadog like throughput, errors, and performance using the out-of-the-box dashboard or [Metrics Explorer][2].
 
-## Setup
+## セットアップ
 
 ### Configuration
 
@@ -85,7 +85,7 @@ For detailed instructions on NeoLoad configuration, follow the [NeoLoad document
 Install the NeoLoad integration in Datadog to add the default NeoLoad dashboard to your dashboard list.
 
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "neoload" >}}

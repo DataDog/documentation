@@ -2,12 +2,12 @@
 title: New CSV headers for Individual Organizations Summary
 ---
 
-CSV header changes take effect the week of February 19, 2024. The following example demonstrates the new CSV structure. 
+CSV ヘッダーの変更は、2024 年 2 月 19 日の週から適用されます。以下は、新しい CSV 構造の例です。
 
-Use this table to update CSV headers that your automation depends on:
+このテーブルを使用して、自動化で使用される CSV ヘッダーを更新してください。
 
 
-| Organization Name | Public ID | Month | Product Name | Cost | 
+| 組織名 | パブリック ID | 月 | 製品名 | コスト | 
 |----| ---| ---| ---| ---| 
-|Org 1 | public_id_1 | 2024-01 | Infra Hosts    | $100.18   |
-|Org 1 | public_id_1 | 2024-01 | Custom Metrics | $50.00    | 
+|組織 1 | public_id_1 | 2024-01 | インフラホスト    | $100.18   |
+|組織 1 | public_id_1 | 2024-01 | カスタムメトリクス | $50.00    | 

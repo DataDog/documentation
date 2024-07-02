@@ -28,7 +28,7 @@ further_reading:
     tag: Blog
     text: Best practices for monitoring software testing in CI/CD
   - link: "https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/"
-    tag: Blog
+    tag: ブログ
     text: Monitor your CI/CD modernizations with Datadog CI Pipeline Visibility
 cascade:
     algolia:
@@ -37,40 +37,40 @@ cascade:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">This page is about bringing your continuous integration (CI) metrics and data into Datadog dashboards. If you want to run Continuous Testing tests in your CI pipelines, see the <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing and CI/CD</a> section.</div>
+<div class="alert alert-info">このページでは、継続的インテグレーション (CI) のメトリクスとデータを Datadog のダッシュボードに取り込む方法について説明します。CI パイプラインで Continuous Testing テストを実行したい場合は、<a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing と CI/CD</a> のセクションを参照してください。</div>
 
-## Overview
+## 概要
 
-Datadog Continuous Integration (CI) Visibility provides a unified view of pipeline results, performance, trends, and reliability across your CI environments. By integrating Datadog with your CI pipelines, you can create monitors, display data within [Datadog dashboards][1] and [notebooks][2], and create visualizations for your organization's CI health.
+Datadog Continuous Integration (CI) Visibility は、CI 環境全体のパイプラインの結果、パフォーマンス、トレンド、信頼性を統合的に表示します。CI パイプラインに Datadog を統合することで、モニターを作成したり、[Datadog ダッシュボード][1]や[ノートブック][2]にデータを表示したり、組織の CI の健全性を可視化したりすることができます。
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/664357090/rendition/1080p/file.mp4?loc=external&signature=5ef9bc02bd8fb18c07a4a41ea3ac08b72bd0ab0b5d914429da049120d1e9e9b7" poster="/images/poster/ci.png" >}}
 
 </br>
 
-CI Visibility helps developers understand the causes of pipeline disruptions and monitor trends in pipeline execution times. It also offers build engineers insights into cross-organization CI health and pipeline performance over time.
+CI Visibility は、開発者がパイプラインの中断の原因を理解し、パイプラインの実行時間の傾向を監視するのに役立ちます。また、ビルドエンジニアは、組織横断的な CI の健全性とパイプラインのパフォーマンスの経時変化に関する洞察を得ることができます。
 
-## Improve pipeline reliability and create traces
+## パイプラインの信頼性を向上させ、トレースを作成
 
-CI Visibility helps you troubleshoot pipeline failures and broken builds by connecting the most significant development outages to the commits that caused them. You can instrument your pipelines and trace them as they execute, enabling deeper insights into pipeline performance.
+CI Visibility は、最も重大な開発障害とその原因となったコミットを結びつけることで、パイプラインの障害やビルドの失敗のトラブルシューティングを支援します。パイプラインをインスツルメントし、その実行をトレースすることで、パイプラインのパフォーマンスについてより深い洞察を得ることができます。
 
-## Increase efficiency through seamless integrations
+## シームレスなインテグレーションで効率アップ
 
-Datadog integrates with a variety of CI providers to collect metrics that track the performance of your CI pipelines from commit to deployment. These metrics are used to identify performance trends and improvement opportunities.
+Datadog は、様々な CI プロバイダーと統合し、コミットからデプロイまでの CI パイプラインのパフォーマンスを追跡するメトリクスを収集します。これらのメトリクスは、パフォーマンスの傾向と改善の機会を特定するために使用されます。
 
 {{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
 
 </br>
 
-You can use the `datadog-ci` CLI to [trace commands][8] and add [custom tags and measures][9], which allows you to add user-defined text and numerical tags in your pipeline traces.
+`datadog-ci` CLI を使用して[コマンドのトレース][8]や[カスタムタグと測定値][9]の追加を行うことができます。これにより、ユーザー定義のテキストおよび数値タグをパイプライントレースに追加することができます。
 
-## Ready to start?
+## 準備はいいですか？
 
-Visit [Pipeline Visibility][3] for instructions on setting up CI Visibility with your CI providers, including details on compatibility requirements and steps for configuring data collection. Then, start exploring details about your pipeline executions in the [CI Visibility Explorer][7] and export your search query into a [CI Pipeline Monitor][6].
+互換性要件の詳細やデータ収集の構成手順など、CI プロバイダーで CI Visibility をセットアップする手順については、[Pipeline Visibility][3] を参照してください。その後、[CI Visibility Explorer][7] でパイプライン実行の詳細を調査し、検索クエリを [CI Pipeline Monitor][6] にエクスポートしてください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

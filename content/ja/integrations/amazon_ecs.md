@@ -6,18 +6,18 @@
 - "containers"
 - "aws"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Monitor container statuses, track resource usage, and more."
+"description": "コンテナ ステータスのモニタリングやリソース使用状況のトラッキングなど。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_ecs/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/amazon-ecs-metrics"
-  "tag": "Blog"
-  "text": "Key ECS metrics to monitor"
+  "tag": "ブログ"
+  "text": "キー ECS メトリクスの監視"
 - "link": "https://docs.datadoghq.com/integrations/ecs_fargate"
   "tag": "Documentation"
-  "text": "ECS Fargate Integration"
+  "text": "ECS Fargate インテグレーション"
 "git_integration_title": "amazon_ecs"
 "has_logo": true
 "integration_id": ""
@@ -42,9 +42,9 @@ Amazon ECS on EC2 is a highly scalable, high performance container management se
 
 Collect ECS metrics automatically from CloudWatch using the Amazon ECS Datadog integration. Expand on those metrics by querying the ECS API for ECS events, tags, and the status of container instances, tasks, and services.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -68,7 +68,7 @@ When metric collection is enabled, an [out-of-the-box dashboard][5] that provide
 
 ## Data collected
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_ecs" >}}
 
 
@@ -76,7 +76,7 @@ Each of the metrics retrieved from AWS is assigned the same tags that appear in 
 
 **Note**: Metrics prefixed with `ecs.containerinsights.*` can be collected by enabling `Collect custom metrics` under the `Metric Collection` tab of the [AWS Integration page][4].
 
-### Events
+### イベント
 
 To reduce noise, the Amazon ECS integration is automatically set up to include only events that contain the following words: `drain`, `error`, `fail`, `insufficient memory`, `pending`, `reboot`, `terminate`. See example events below:
 
@@ -84,11 +84,11 @@ To reduce noise, the Amazon ECS integration is automatically set up to include o
 
 To remove the inclusion list and receive all events from your Datadog Amazon ECS integration, reach out to [Datadog support][8].
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "amazon_ecs" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

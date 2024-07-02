@@ -1,12 +1,12 @@
 ---
-cascade:
-  algolia:
-    rank: 70
-further_reading:
-- link: https://www.datadoghq.com/blog/collaborative-screen-sharing-with-datadog-coscreen/
-  tag: GitHub
-  text: Datadog CoScreen による共同画面共有の活用
 title: CoScreen
+further_reading:
+- link: "https://www.datadoghq.com/blog/collaborative-screen-sharing-with-datadog-coscreen/"
+  tag: Blog
+  text: Leverage collaborative screen sharing with Datadog CoScreen
+cascade:
+    algolia:
+        rank: 70
 ---
 
 {{< img src="coscreen/collab-v2.mp4" alt="3 人のユーザーが同時に 3 つのウィンドウを共有。" width=80% video="true">}}
@@ -22,7 +22,7 @@ CoScreen は、Windows 10 および macOS v10.15 Catalina 以降で利用可能�
 
 [CoScreen をダウンロードします][1]。
 
-CoScreen をインストール後、デスクトップアプリを起動します。Datadog アカウントでサインインできます。
+After installing CoScreen, launch the desktop app. You can sign in with your Datadog account.
 
 [1]: https://www.coscreen.co/download
 {{% /tab %}}
@@ -36,21 +36,21 @@ CoScreen Web アプリの機能は限られています。CoScreen の機能を�
 {{< /tabs >}}
 
 ## 使用方法
-### CoScreen に参加する
+### Join a CoScreen
 
 CoScreen に招待された場合は、リンクをクリックしてください。**Join from browser** をクリックして Web アプリから CoScreen に参加することも、デスクトップアプリを起動することもできます。また、ミーティングリンクまたは ID を入力して手動で参加することもできます。
 
 CoScreen に参加すると、メインメニューの _Recent CoScreens_ のリストに追加されます。これらはいつでも再参加することができます。
 
-デスクトップアプリでノイズ除去を有効にするには、**Settings** > **Audio**に移動し、_Apply noise reduction to my microphone (マイクにノイズ除去を適用する)_を選択してください。
+To enable noise reduction in the desktop app, go to **Settings** > **Audio** and select _Apply noise reduction to my microphone_.
 
-macOS の場合は、**Settings** > **Camera** > **Video Effects** から背景ぼかしを有効にすることができます。.
+On macOS, you can enable background blurring under **Settings** > **Camera** > **Video Effects**.
 
 ### コラボレーターを招待する
 
 リンクを共有することで、コラボレーターを招待することができます。
 
-また、メインメニューの _Your Collaborators_ のリストに、よく連携するコラボレーターを追加することができます。コラボレーターがあなたのリクエストを受け入れた後、その人がオンラインで利用可能かどうかを確認し、ワンクリックで呼び出すことができます。
+You can also add your closest collaborators to the list of _Your Collaborators_ in the main menu. After a collaborator accepts your request, you can see if they are online and available and call them with a click.
 
 ### ウィンドウを共有する
 
@@ -82,27 +82,21 @@ CoScreen に参加すると、画面共有はデフォルトで無効化され�
 
 リモート参加者が共有ウィンドウ上でマウスポインタを動かすと、リモート参加者のマウスポインタを見ることができます。リモートウィンドウを表示すると、2 つのタブが表示されます。**Control** はウィンドウの操作、ボタンのクリック、テキストフィールドへの入力を可能にし、**Draw** はウィンドウへの描画を可能にします。
 
-### 共有ターミナル CoTerm での共同作業
+### Collaborate in a shared terminal
 
-CoTerm は CoScreen に組み込まれた共同ターミナルで、ユーザーがコマンドを実行したり、一緒にコードを書いたりデバッグしたりすることができます。
+CoScreen includes a shared, collaborative terminal that enables users to run commands and to write and debug code together.
 
-共有ターミナルを起動するには、ミーティングメニューの **Share terminal** ボタンをクリックします。
+To start a shared terminal, click on the **Share terminal** button in the meeting menu:
 
 {{< img src="coscreen/share_terminal.png" alt="CoScreen デスクトップ UI のボタンパネル。「Share terminal」ボタンがハイライトされている。" style="width:70%;">}}
 
-次に、オンボーディングダイアログを確認します。
+The shared terminal appears for you and all other participants in the CoScreen session. If you enable remote control in CoScreen, other users can type and click into your terminal.
 
-{{< img src="coscreen/coterm_dialog.png" alt="リモートコントロールを許可するオプションが選択された CoTerm オンボーディングダイアログ。" style="width:50%;">}}
-
-あなたと CoScreen セッションの他の参加者全員に共有ターミナルが表示されます。CoScreenでリモートコントロールを有効にすると、他のユーザーがあなたのターミナルでタイピングやクリックをすることができます。
-
-{{< img src="coscreen/coterm.png" alt="CoTerm ウィンドウ。" style="width:60%;">}}
+{{< img src="coscreen/coterm.png" alt="A shared CoScreen terminal window." style="width:60%;">}}
 
 共有を停止するには、ターミナルウィンドウの **Unshare** タブをクリックするか、ミーティングメニューのボタンをクリックします。
 
-プライバシーのために、CoTerm は[機密データスキャナー][8]とエントロピーフィルターを使って機密データを検出し、難読化します。
-
-**注**: 共有を解除するとターミナルが閉じます。
+For privacy, CoScreen uses [Sensitive Data Scanner][8] and entropy filters to detect and obfuscate sensitive data.
 
 ### インテグレーション
 
@@ -131,11 +125,11 @@ CoScreen は、あなたと他の参加者が直接接続できる場合 (例え
 
 CoScreen は、共有情報 (例えば、共有ウィンドウ、オーディオ、ビデオ、リモコン入力など) を記録または保存しません。
 
-CoScreen は、使用されたアプリの機能やセッションの統計など、一般的な利用データをキャプチャして、バグや利用パターンを調査しています。CoScreen は、ウィンドウのコンテンツやコントロールを仲間と交換できるようにする以外には、共有ウィンドウやコントロール入力を記録したりアクセスしたりすることはありません。詳しくは、[CoScreen のプライバシーポリシー][6]をご覧ください。
+CoScreen captures general usage data, like used app features and session statistics, to learn about bugs and usage patterns. CoScreen never records or accesses shared windows or control input apart from enabling you to exchange window content and controls with your peers. See [CoScreen's Privacy Policy][6] for more details.
 
 CoScreen がどのように安全なコラボレーションを可能にするかの詳細については、[CoScreen Security Whitepaper][7] をご覧ください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -146,4 +140,4 @@ CoScreen がどのように安全なコラボレーションを可能にする�
 [5]: https://chrome.google.com/webstore/detail/coscreen/pahmjnapohdeedmdhmbeddgmhebhegme
 [6]: https://www.datadoghq.com/legal/privacy/
 [7]: https://www.coscreen.co/security
-[8]: /ja/sensitive_data_scanner/
+[8]: /sensitive_data_scanner/

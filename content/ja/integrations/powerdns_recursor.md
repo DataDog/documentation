@@ -32,7 +32,7 @@
 - "caching"
 - "log collection"
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/README.md"
 "display_on_public_website": true
@@ -45,7 +45,7 @@
 "manifest_version": "2.0.0"
 "name": "powerdns_recursor"
 "public_title": "Power DNS Recursor"
-"short_description": "Keep an eye on strange traffic to and from your PowerDNS recursors."
+"short_description": "PowerDNS Recursor の異常な送受信トラフィックを常に監視。"
 "supported_os":
 - "linux"
 - "windows"
@@ -53,14 +53,14 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Caching"
-  - "Category::Log Collection"
-  - "Category::Network"
+  - "Category::キャッシュ"
+  - "Category::ログの収集"
+  - "Category::ネットワーク"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Keep an eye on strange traffic to and from your PowerDNS recursors."
+  "description": "PowerDNS Recursor の異常な送受信トラフィックを常に監視。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -70,52 +70,52 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-Track the performance of your PowerDNS Recursor and monitor strange or worrisome traffic. This Agent check collects a variety of metrics from your recursors, including those for:
+PowerDNS Recursor のパフォーマンスを追跡し、異常または注意が必要なトラフィックを監視します。この Agent チェックでは、Recursor から以下のような多様なメトリクスを収集することができます。
 
-- Query answer times-see how many responses take less than 1ms, 10ms, 100ms, 1s, or greater than 1s.
-- Query timeouts.
-- Cache hits and misses.
-- Answer rates by type: SRVFAIL, NXDOMAIN, NOERROR.
-- Ignored and dropped packets.
+- クエリ回答時間: 1 ミリ秒、10 ミリ秒、100 ミリ秒、1 秒未満、および 1 秒以上の時間がかかった応答の数を確認します。
+- クエリのタイムアウト
+- キャッシュヒット数およびミス数
+- タイプごとの回答率: SRVFAIL、NXDOMAIN、NOERROR
+- 無視および削除されたパケット数
 
-And many more.
+その他にも多数あります。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The PowerDNS Recursor check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your recursors.
+PowerDNS Recursor チェックは [Datadog Agent][1] パッケージに含まれています。Recursor に追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-#### Prepare PowerDNS
+#### PowerDNS の準備
 
-This check collects performance statistics using PowerDNS Recursor's statistics API. Versions of pdns_recursor before 4.1 do not enable the stats API by default. If you're running an older version, enable it by adding the following to your recursor config file, for example `/etc/powerdns/recursor.conf`:
+このチェックは、PowerDNS Recursor の統計 API を使ってパフォーマンス統計を収集します。4.1 より前のバージョンの pdns_recursor は、デフォルトで統計 API が有効ではありません。古いバージョンを実行している場合は、Recursor 構成ファイル (たとえば `/etc/powerdns/recursor.conf`) に次の行を追加して有効にしてください。
 
 ```conf
 webserver=yes
-api-key=changeme             # only available since v4.0
-webserver-readonly=yes       # default no
-#webserver-port=8081         # default 8082
-#webserver-address=0.0.0.0   # default 127.0.0.1
+api-key=changeme             # v4.0 以降でのみ使用可能
+webserver-readonly=yes       # デフォルトは no
+#webserver-port=8081         # デフォルトは 8082
+#webserver-address=0.0.0.0   # デフォルトは 127.0.0.1
 ```
 
-If you're running pdns_recursor 3.x, prepend `experimental-` to these option names, for example: `experimental-webserver=yes`.
+pdns_recursor 3.x を実行している場合は、これらのオプション名の前に `experimental-` を付けてください。たとえば、`experimental-webserver=yes` とします。
 
-If you're running pdns_recursor >= 4.1, just set `api-key`.
+pdns_recursor 4.1 以上を実行している場合は、`api-key` のみを設定します。
 
-Restart the recursor to enable the statistics API.
+Recursor を再起動すると、統計 API が有効になります。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `powerdns_recursor.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample powerdns_recursor.d/conf.yaml][2] for all available configuration options:
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `powerdns_recursor.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル powerdns_recursor.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -152,22 +152,22 @@ To configure this check for an Agent running on a host:
        version: 3
    ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add the `dd-agent` user to the `systemd-journal` group by running:
+2. 以下を実行して、`systemd-journal` グループに `dd-agent` ユーザーを追加します。
    ```text
    usermod -a -G systemd-journal dd-agent
    ```
 
-3. Add this configuration block to your `powerdns_recursor.d/conf.yaml` file to start collecting your PowerDNS Recursor Logs:
+3. PowerDNS Recursor のログの収集を開始するには、次のコンフィギュレーションブロックを `powerdns_recursor.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -175,31 +175,31 @@ To configure this check for an Agent running on a host:
        source: powerdns
    ```
 
-    See the [sample powerdns_recursor.d/conf.yaml][2] for all available configuration options.
+    使用可能なすべての構成オプションの詳細については、[サンプル powerdns_recursor.d/conf.yaml][2] を参照してください。
 
-4. [Restart the Agent][3].
+4. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/powerdns_recursor/datadog_checks/powerdns_recursor/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-| Parameter            | Value                                                                            |
+| パラメーター            | 値                                                                            |
 | -------------------- | -------------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `powerdns_recursor`                                                              |
-| `<INIT_CONFIG>`      | blank or `{}`                                                                    |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                    |
 | `<INSTANCE_CONFIG>`  | `{"host":"%%host%%", "port":8082, "api_key":"<POWERDNS_API_KEY>", "version": 3}` |
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                     |
+| パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
 | `<LOG_CONFIG>` | `{"source": "powerdns"}`                  |
 
@@ -208,27 +208,27 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's `status` subcommand][2] and look for `powerdns_recursor` under the Checks section.
+[Agent の `status` サブコマンドを実行][2]し、Checks セクションで `powerdns_recursor` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "powerdns_recursor" >}}
 
 
-### Events
+### イベント
 
-The PowerDNS Recursor check does not include any events.
+PowerDNS Recursor チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "powerdns_recursor" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][3].
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 
 

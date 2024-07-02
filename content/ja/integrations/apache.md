@@ -38,7 +38,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/apache/README.md"
 "display_on_public_website": true
@@ -51,7 +51,7 @@
 "manifest_version": "2.0.0"
 "name": "apache"
 "public_title": "Apache"
-"short_description": "Track requests per second, bytes served, worker threads, uptime, and more."
+"short_description": "毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡"
 "supported_os":
 - "linux"
 - "windows"
@@ -59,12 +59,12 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Track requests per second, bytes served, worker threads, uptime, and more."
+  "description": "毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -74,34 +74,34 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Apache Dashboard][1]
+![Apache ダッシュボード][1]
 
-## Overview
+## 概要
 
-The Apache check tracks requests per second, bytes served, number of worker threads, service uptime, and more.
+Apache チェックは、毎秒のリクエスト数、処理されたバイト数、ワーカースレッド数、サービスアップタイムなどを追跡します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Apache check is packaged with the [Datadog Agent][2]. To start gathering your Apache metrics and logs, you need to:
+Apache チェックは [Datadog Agent][2] にパッケージ化されています。Apache のメトリクスとログの収集を開始するには、以下を行います。
 
-1. [Install the Agent][3] on your Apache servers.
+1. Apache サーバーに [Agent をインストール][3]します。
 
-2. Install `mod_status` on your Apache servers and enable `ExtendedStatus`.
+2. Apache サーバーに `mod_status` をインストールし、`ExtendedStatus` を有効にします。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `apache.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your Apache metrics. See the [sample apache.d/conf.yaml][2] for all available configuration options.
+1. Apache メトリクスの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `apache.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル apache.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -113,19 +113,19 @@ To configure this check for an Agent running on a host:
      - apache_status_url: http://localhost/server-status?auto
    ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent. Enable it in `datadog.yaml`:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。`datadog.yaml` で有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `apache.d/conf.yaml` file to start collecting your Apache logs, adjusting the `path` and `service` values to configure them for your environment:
+2. このコンフィギュレーションブロックを `apache.d/conf.yaml` ファイルに追加して、Apache ログの収集を開始します。このとき、お使いの環境に応じて構成するために `path` と `service` の値が調整されます。
 
    ```yaml
    logs:
@@ -142,9 +142,9 @@ _Available for Agent versions >6.0_
        sourcecategory: http_web_error
    ```
 
-    See the [sample apache.d/conf.yaml][2] for all available configuration options.
+    使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル apache.d/conf.yaml][2] を参照してください。
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
@@ -154,11 +154,11 @@ _Available for Agent versions >6.0_
 
 #### Docker
 
-To configure this check for an Agent running on a container:
+コンテナで実行中の Agent に対してこのチェックを構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["apache"]'
@@ -166,12 +166,12 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"apache_status_url": "http://%%host%%/server-status?auto"}]'
 ```
 
-##### Log collection
+##### ログ収集
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source": "apache", "service": "<SERVICE_NAME>"}]'
@@ -185,13 +185,13 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "apache", "service": "<SERVICE_NAME>"
 
 #### Kubernetes
 
-To configure this check for an Agent running on Kubernetes:
+このチェックを、Kubernetes で実行している Agent に構成します。
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Aside from this, templates can also be configured with [a file, a configmap, or a key-value store][2].
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
 
-**Annotations v1** (for Datadog Agent < v7.36)
+**Annotations v1** (Datadog Agent < v7.36 向け)
 
 ```yaml
 apiVersion: v1
@@ -212,7 +212,7 @@ spec:
     - name: apache
 ```
 
-**Annotations v2** (for Datadog Agent v7.36+)
+**Annotations v2** (Datadog Agent v7.36+ 向け)
 
 ```yaml
 apiVersion: v1
@@ -236,12 +236,12 @@ spec:
     - name: apache
 ```
 
-##### Log collection
+##### ログ収集
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][3].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
-Then, set [Log Integrations][4] as pod annotations. This can also be configured with [a file, a configmap, or a key-value store][5].
+次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
 
 **Annotations v1/v2**
 
@@ -268,11 +268,11 @@ spec:
 
 #### ECS
 
-To configure this check for an Agent running on ECS:
+このチェックを、ECS で実行している Agent に構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```json
 {
@@ -288,12 +288,12 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 }
 ```
 
-##### Log collection
+##### ログ収集
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [ECS Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```json
 {
@@ -313,40 +313,40 @@ Then, set [Log Integrations][3] as Docker labels:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][4] and look for `apache` under the Checks section.
+[Agent の status サブコマンドを実行][4]し、Checks セクションの `apache` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "apache" >}}
 
 
-### Events
+### イベント
 
-The Apache check does not include any events.
+Apache チェックにはイベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "apache" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-### Apache status URL
+### Apache のステータス URL
 
-If you are having issues with your Apache integration, it is mostly like due to the Agent not being able to access your Apache status URL. Try running curl for the `apache_status_url` listed in [your `apache.d/conf.yaml` file][5] (include your login credentials if applicable).
+Apache インテグレーションで問題が発生する場合の多くは、Agent が Apache のステータス URL にアクセスできないことが原因です。[`apache.d/conf.yaml` ファイル][5]に一覧表示されている `apache_status_url` に対して curl を実行してみてください (必要に応じてログイン資格情報を指定)。
 
-- [Apache SSL certificate issues][6]
+- [Apache SSL 証明書に関する問題][6]
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Deploying and configuring Datadog with CloudFormation][7]
-- [Monitoring Apache web server performance][8]
-- [How to collect Apache performance metrics][9]
-- [How to monitor Apache web server with Datadog][10]
+- [CloudFormation を使用した Datadog のデプロイと構成][7]
+- [Apache Web サーバーのパフォーマンスの監視][8]
+- [Apache パフォーマンスメトリクスを収集する方法][9]
+- [Datadog で Apache Web サーバーを監視する方法][10]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/apache/images/apache_dashboard.png

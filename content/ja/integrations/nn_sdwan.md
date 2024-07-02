@@ -31,7 +31,7 @@
 "categories":
 - network
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/nn_sdwan/README.md"
 "display_on_public_website": true
@@ -76,11 +76,11 @@ information can then be used for aggregated dashboarding and notifications on co
 
 Currently, only Cisco vManage devices are supported as SD-WAN controller targets.
 
-## Setup
+## セットアップ
 
 The Netnology Cisco SD-WAN integration is not included in the [Datadog Agent][2] package, so you need to install it manually.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -92,7 +92,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the check on
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `nn_sdwan.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Cisco SD-WAN performance data. See [sample nn_sdwan.d/conf.yaml][5] for all available configuration options.
 
@@ -102,21 +102,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the check on
 
 [Run the Agent's status subcommand][7] and look for `nn_sdwan` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "nn_sdwan" >}}
 
 
-### Events
+### イベント
 
 The Netnology Cisco SD-WAN integration does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "nn_sdwan" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

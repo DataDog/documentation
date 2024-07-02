@@ -30,7 +30,7 @@
 "categories":
 - "configuration & deployment"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/linkerd/README.md"
 "display_on_public_website": true
@@ -77,22 +77,22 @@
 This integration sends your Linkerd metrics to Datadog, including application success rates, latency, and saturation.
 
 
-## Setup
+## セットアップ
 
 This OpenMetrics-based integration has a latest mode (enabled by setting `openmetrics_endpoint` to point to the target endpoint) and a legacy mode (enabled by setting `prometheus_url` instead). To get all the most up-to-date features, Datadog recommends enabling the latest mode. For more information, see [Latest and Legacy Versioning For OpenMetrics-based Integrations][2].
 
 Metrics marked as `[OpenMetrics V1]` or `[OpenMetrics V2]` are only available using the corresponding mode of the Linkerd integration. Metrics not marked are collected by all modes.
 
-### Installation
+### インストール
 
 The Linkerd check is included in the [Datadog Agent][3] package, so you don't need to install anything else on your server.
 
-### Configuration
+### 構成
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -154,9 +154,9 @@ To increase the verbosity of the data plane logs, see [Modifying the Proxy Log L
 
 Run the [Agent's status subcommand][4] and look for `linkerd` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 See [metadata.csv][5] for a list of metrics provided by this integration.
 
@@ -177,11 +177,11 @@ If you need to use a metric that is not provided by default, you can add an entr
 For more information, see the examples in the [default configuration][8].
 
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "linkerd" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

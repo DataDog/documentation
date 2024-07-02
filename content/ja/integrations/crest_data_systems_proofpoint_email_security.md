@@ -35,7 +35,7 @@
 - marketplace
 - data stores
 - event management
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -54,7 +54,7 @@
   "metric": datadog.marketplace.crest_data_systems_proofpoint_email_security
   "product_id": proofpoint-email-security
   "short_description": Per registered Proofpoint user
-  "tag": users
+  "tag": webhooks-integration
   "unit_label": Registered Proofpoint users
   "unit_price": !!float "1.0"
 "public_title": "Proofpoint Email Security"
@@ -143,7 +143,7 @@ This integration monitors:
 
 ## Support
 
-For support or feature requests, contact Crest Data through the following channels:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
 - Support Email: [datadog.integrations@crestdata.ai][5]
 - Sales Email: [datadog-sales@crestdata.ai][6]

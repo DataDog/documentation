@@ -31,7 +31,7 @@
 - containers
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/open_policy_agent/README.md"
 "display_on_public_website": true
@@ -71,11 +71,11 @@
 
 This check collects metrics from [Open Policy Agent][1].
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a Kubernetes cluster. See also the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### Installation
+### インストール
 
 To install the open_policy_agent check on your Kubernetes cluster:
 
@@ -165,7 +165,7 @@ Once you have created the facets, generate the needed metric for the Dashboard t
 
 ![OPA Decision Metric][8]
 
-### Configuration
+### 構成
 
 1. Edit the `open_policy_agent/conf.yaml` file, in the `/confd` folder that you added to the Agent pod to start collecting your OPA performance data. See the [sample open_policy_agent/conf.yaml][9] for all available configuration options.
 
@@ -175,21 +175,21 @@ Once you have created the facets, generate the needed metric for the Dashboard t
 
 [Run the Agent's status subcommand][11] and look for `open_policy_agent` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "open_policy_agent" >}}
 
 
-### Events
+### イベント
 
 open_policy_agent does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "open_policy_agent" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][14].
 

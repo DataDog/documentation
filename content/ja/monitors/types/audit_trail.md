@@ -16,41 +16,41 @@ further_reading:
   text: Schedule a downtime to mute a monitor
 ---
 
-## Overview
+## 概要
 
-Audit Trail monitors alert you when a specified type of audit event exceeds a user-defined threshold over a given period of time.
+監査証跡モニターは、指定された種類の監査イベントが、ユーザー定義のしきい値を一定時間超えた場合にアラートを生成します。
 
-## Monitor creation
+## モニターの作成
 
-To create an [Audit Trail monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Audit Trail*.
+Datadog で[監査証跡モニター][1]を作成するには、メインナビゲーションで *Monitors --> New Monitor --> Audit Trail* の順に進みます。
 
-### Define the search query
+### 検索クエリを定義する
 
-Define a search query for your Audit Events. Search queries follow the same [search syntax][2] as in the Log Explorer.
+監査イベントの検索クエリを定義します。検索クエリは、ログエクスプローラーと同じ[検索構文][2]に従います。
 
-For example, if you want to be alerted when a specific API key is making a certain number of requests, set `count by` to that API key ID, `@metadata.api_key.id`. You can then group by a specific user ID, `@usr.id`, or user email, `@usr.email`, to receive a notification specifying which user is making the request.
+例えば、特定の API キーが一定数のリクエストを行った際にアラートを出したい場合、`count by` にその API キー ID である `@metadata.api_key.id` を設定します。その後、特定のユーザーID、`@usr.id` やユーザーのメールアドレス、`@usr.email` でグループ化し、どのユーザーがリクエストしているのかを指定した通知を受け取ることができます。
 
-### Set alert conditions
+### アラートの条件を設定する
 
-Set an alert threshold for the value you want to be alerted on. For example, if you want to be alerted when the number of API requests reaches 15 or above, set the alert threshold for number of API requests to `Alert threshold > 15`. Set the warning threshold to any number before 15 to receive a warning prior to a threshold being met.
+アラートさせたい値にアラート閾値を設定します。例えば、API リクエスト数が 15 以上になったときにアラートを出したい場合は、API リクエスト数のアラート閾値を `Alert threshold > 15` に設定します。警告閾値を 15 より前の任意の数値に設定すると、閾値に達する前に警告を受け取ることができます。
 
-You can also choose to never resolve, or to automatically resolve, an event from a triggered state. Set a value between `[Never]` (default) and `After 24 Hours`.
+また、トリガーされた状態からイベントを解決しない、または自動的に解決することを選択することができます。`[Never]` (デフォルト) と `After 24 Hours` の間で値を設定します。
 
 ### Say what's happening
 
-Create a notification name. For example, `API requests threshold met for {{[@usr.id].name}}`. You can use [variables][3] to automatically populate a username, email, etc. in the title to quickly gain insight into which account or user is triggering an alert.
+通知名を作成します。例えば、`API requests threshold met for {{[@usr.id].name}}` といった具合です。[変数][3]を使用して、タイトルにユーザー名、メールなどを自動的に入力し、どのアカウントまたはユーザーがアラートをトリガーしているかをすばやく把握することができます。
 
-Create a monitor message. This can include the steps required for team members to resolve an incident if one is occurring.
+モニターメッセージを作成します。これには、インシデントが発生している場合に、チームメンバーが解決するために必要なステップを含めることができます。
 
-You can then select a value from `[Never]` to `Every 24 Hours` to renotify you if the monitor has not been resolved. You can also set tags and priority to better correlate data in the event of an incident.
+そして、`[Never]` から `Every 24 Hours` までの値を選択し、モニターが解決されなかった場合に再通知することが可能です。また、タグや優先順位を設定することで、インシデント発生時のデータの関連付けをより適切に行うことができます。
 
-### Configure notifications and automations
+### 通知と自動化の構成
 
-Select services and team members to notify. For example, you can alert your on-call compliance team with PagerDuty, or alert your team by Slack or email to begin assessment of the alert.
+通知するサービスやチームメンバーを選択します。例えば、PagerDuty でオンコールのコンプライアンスチームに警告したり、Slack やメールでチームに警告して、警告の評価を開始することができます。
 
-You can also select if you want to notify a service or team when an alert is modified with the `Do Not Notify` dropdown option.
+また、アラートが変更されたときにサービスやチームに通知するかどうかを、`Do Not Notify` ドロップダウンオプションで選択することができます。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

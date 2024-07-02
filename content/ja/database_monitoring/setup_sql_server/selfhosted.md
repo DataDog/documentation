@@ -17,25 +17,25 @@ further_reading:
 
 ---
 
-Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
+データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
-Do the following steps to enable Database Monitoring with your database:
+データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
 
 1. [Grant the Agent access](#grant-the-agent-access)
-1. [Install the Agent](#install-the-agent)
+1. [Agent をインストールする](#install-the-agent)
 
-## Before you begin
+## はじめに
 
-Supported SQL Server versions
-: 2012, 2014, 2016, 2017, 2019, 2022
+サポートされている SQL Server バージョン
+: 2012、2014、2016、2017、2019、2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
-## Grant the Agent access
+## Agent にアクセスを付与する
 
-The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
+Datadog Agent が統計やクエリを収集するためには、データベース サーバーへの読み取り専用のアクセスが必要となります。
 
-Create a read-only login to connect to your server and grant the required permissions:
+サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
 
 {{< tabs >}}
 {{% tab "SQL Server 2014+" %}}
@@ -65,7 +65,7 @@ GRANT VIEW ANY DEFINITION to datadog;
 -- GRANT SELECT to datadog;
 ```
 
-Create the `datadog` user in each additional application database:
+追加した各アプリケーションデータベースに `datadog` ユーザーを作成します。
 ```SQL
 USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
@@ -73,9 +73,9 @@ CREATE USER datadog FOR LOGIN datadog;
 {{% /tab %}}
 {{< /tabs >}}
 
-## Install the Agent
+## Agent のインストール
 
-It's recommended to install the agent directly on the SQL Server host as that enables the agent to collect a variety of system telemetry (CPU, memory, disk, network) in addition to SQL Server specific telemetry.
+Agent を SQL Server ホストに直接インストールすることをお勧めします。そうすることで、SQL Server 固有のテレメトリーに加え、様々なシステムテレメトリー (CPU、メモリ、ディスク、ネットワーク) を収集することができるからです。
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
@@ -96,9 +96,9 @@ It's recommended to install the agent directly on the SQL Server host as that en
 {{% /tab %}}
 {{< /tabs >}}
 
-## Example Agent Configurations
+## Agent の構成例
 {{% dbm-sqlserver-agent-config-examples %}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

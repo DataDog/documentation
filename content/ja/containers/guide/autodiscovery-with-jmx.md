@@ -17,16 +17,16 @@ further_reading:
       text: Dynamically assign and collect tags from your application
 ---
 
-In containerized environments there are a few differences in how the Agent connects to the JMX server. Autodiscovery features make it possible to dynamically setup these integrations. Use Datadog's JMX based integrations to collect JMX applications metrics from your pods in Kubernetes. 
+コンテナ環境では、Agent が JMX サーバーに接続する方法にいくつかの違いがあります。オートディスカバリー機能により、これらのインテグレーションを動的にセットアップできます。Datadog の JMX ベースのインテグレーションを使用して、Kubernetes のポッドから JMX アプリケーションのメトリクスを収集しす。
 
-If you are using the Java tracer for your applications, you can alternatively take advantage of the [Java runtime metrics][2] feature to send these metrics to the Agent.
+アプリケーションに Java トレーサーを使用している場合、代わりに [Java ランタイムメトリクス][2]機能を利用して、これらのメトリクスを Agent に送信することができます。
 
-## Installation
+## インストール
 
-### Use a JMX-enabled Agent
-JMX utilities are not installed in the Agent by default. To set up a JMX integration, append `-jmx` to your Agent's image tag. For example, `gcr.io/datadoghq/agent:latest-jmx`.
+### JMX 対応 Agent の使用
+JMX ユーティリティはデフォルトでは Agent にインストールされません。JMX インテグレーションを設定するには、Agent のイメージタグに `-jmx` を追加します。例えば、`gcr.io/datadoghq/agent:latest-jmx` です。
 
-If you are using Datadog Operator or Helm, the following configurations append `-jmx` to your Agent's image tag:
+Datadog Operator または Helm を使用している場合、以下の構成で Agent のイメージタグに `-jmx` を追加します。
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -54,18 +54,18 @@ agents:
 
 
 
-## Configuration
+## 構成
 
-Use one of the following methods:
+以下のいずれかの方法を使用します。
 
-- [Autodiscovery annotations](#autodiscovery-annotations) (recommended)
-- [Autodiscovery configuration files](#autodiscovery-configuration-files): for heavy customization of configuration parameters
+- [オートディスカバリーアノテーション](#autodiscovery-annotations) (recommended)
+- [オートディスカバリーコンフィギュレーションファイル](#autodiscovery-configuration-files): 構成パラメーターを大幅にカスタマイズする場合
 
-### Autodiscovery annotations
+### オートディスカバリーアノテーション
 
-In this method, a JMX check configuration is applied using annotations on your Java-based Pods. This allows the Agent to automatically configure the JMX check when a new container starts. Ensure these annotations are on the created Pod, and not on the object (Deployment, DaemonSet, etc.) creating the Pod. 
+この方法では、Java ベースのポッド上のアノテーションを使用して JMX チェック構成が適用されます。これにより、新しいコンテナの起動時に Agent が自動的に JMX チェックを構成できるようになります。これらのアノテーションが、ポッドを作成するオブジェクト (デプロイ、DaemonSet など) 上ではなく、作成されたポッド上にあることを確認してください。
 
-Use the following template for Autodiscovery annotations:
+オートディスカバリーのアノテーションには、以下のテンプレートを使用します。
 
 ```yaml
 apiVersion: v1
@@ -107,19 +107,19 @@ spec:
             -Djava.rmi.server.hostname=$(POD_IP)
 ```
 
-In this example:
-- `<POD_NAME>` is the name of your pod.
-- `<CONTAINER_IDENTIFIER>` matches the desired container within your pod.
-- `<INTEGRATION_NAME>` is the name of the desired JMX integration. See the list of [available JMX integrations](#available-jmx-integrations).
-- Set `<JMX_PORT>` as desired, as long as it matches between the annotations and `JAVA_OPTS`.
+この例では
+- `<POD_NAME>` はポッドの名前です。
+- `<CONTAINER_IDENTIFIER>` はポッド内の希望するコンテナにマッチします。
+- `<INTEGRATION_NAME>` は希望する JMX インテグレーションの名前です。利用可能な JMX インテグレーション](#available-jmx-integrations)のリストを参照してください。
+- `<JMX_PORT>` は、アノテーションと `JAVA_OPTS` 間で一致する限り、任意に設定します。
 
-With this configuration, the Datadog Agent discovers this pod and makes a request to the JMX server relative to the `%%host%%` [Autodiscovery template variable][3]—this request resolves to the IP address of the discovered pod. This is why `java.rmi.server.hostname` is set to the `POD_IP` address previously populated with the [Kubernetes downward API][5].
+この構成では、Datadog Agent はこのポッドを検出し、`%%host%%` [オートディスカバリーテンプレート変数][3]に相対する JMX サーバーにリクエストを行います。このリクエストは、検出されたポッドの IP アドレスに解決されます。このため、`java.rmi.server.hostname` には、[Kubernetes downward API][5] で事前に入力された `POD_IP` アドレスが設定されます。
 
-**Note**: The `JAVA_OPTS` environment variable is commonly used in Java-based container images as a startup parameter (for example, `java $JAVA_OPTS -jar app.jar`). If you are using a custom application, or if your application does not follow this pattern, set these system properties manually.
+**注**: `JAVA_OPTS` 環境変数は、Java ベースのコンテナイメージで起動パラメーターとして一般的に使用されます (例えば、`java $JAVA_OPTS -jar app.jar`)。カスタムアプリケーションを使用している場合や、アプリケーションがこのパターンに従っていない場合は、これらのシステムプロパティを手動で設定してください。
 
 
-#### Example annotation: Tomcat
-The following configuration runs the [Tomcat][81] JMX integration against port `9012`:
+#### アノテーション例: Tomcat
+以下の構成では、ポート `9012` に対して [Tomcat][81] JMX インテグレーションを実行します。
 
 ```yaml
 apiVersion: v1
@@ -164,8 +164,8 @@ spec:
             -Djava.rmi.server.hostname=$(POD_IP)
 ```
 
-#### Custom metric annotation template
-If you need to collect additional metrics from these integrations, add them to the `init_config` section:
+#### カスタムメトリクスアノテーションテンプレート
+これらのインテグレーションから追加のメトリクスを収集する必要がある場合は、`init_config` セクションに追加します。
 
 ```yaml
 ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
@@ -195,25 +195,25 @@ ad.datadoghq.com/<CONTAINER_IDENTIFIER>.checks: |
   }
 ```          
 
-See the [JMX integration][6] documentation for more information about the formatting for these metrics.
+これらのメトリクスのフォーマットについての詳細は、[JMX インテグレーション][6]ドキュメントを参照してください。
 
-### Autodiscovery configuration files
+### オートディスカバリーコンフィギュレーションファイル
 
-If you need to pass a more complex custom configuration for your Datadog-JMX integration, you can use [Autodiscovery Container Identifiers][1] to pass custom integration configuration files as well as a custom `metrics.yaml` file.
+Datadog-JMX インテグレーションのより複雑なカスタム構成を渡す必要がある場合は、[オートディスカバリーコンテナ識別子][1]を使用して、カスタムインテグレーションコンフィギュレーションファイルとカスタム `metrics.yaml` ファイルを渡すことができます。
 
-#### 1. Compose configuration file
+#### 1. コンフィギュレーションファイルを構成する
 
-When using this method, the Agent needs a configuration file and an optional `metrics.yaml` file for the metrics to collect. These files can either be mounted into the Agent pod or built into the container image. 
+この方法を使用する場合、Agent はコンフィギュレーションファイルと、収集するメトリクス用の `metrics.yaml` ファイル (オプション) を必要とします。これらのファイルは、Agent ポッドにマウントするか、コンテナイメージに組み込みます。
 
-The configuration file naming convention is to first identify your desired integration name from the [prerequisite steps of available integrations](#available-jmx-integrations). Once this is determined, the Agent needs a configuration file named relative to that integration—_or_ within that integration's config directory. 
+コンフィギュレーションファイルの命名規則は、まず [利用可能なインテグレーションの前提ステップ](#available-jmx-integrations)から希望のインテグレーション名を特定します。これが決まったら、Agent はそのインテグレーションに相対する名前のコンフィギュレーションファイル_または_そのインテグレーションの構成ディレクトリ内のコンフィギュレーションファイルを必要とします。
 
-For example, for the [Tomcat][81] integration, create _either_:
-- `/etc/datadog-agent/conf.d/tomcat.yaml`, or
+例えば、[Tomcat][81] インテグレーションでは、以下の_いずれか_を作成します。
+- `/etc/datadog-agent/conf.d/tomcat.yaml`、または
 - `/etc/datadog-agent/conf.d/tomcat.d/conf.yaml`
 
-If you are using a custom `metrics.yaml` file, include it in the integration's config directory. (For example: `/etc/datadog-agent/conf.d/tomcat.d/metrics.yaml`.)
+カスタム `metrics.yaml` ファイルを使用している場合は、インテグレーションの構成ディレクトリにこれを含めます (例: `/etc/datadog-agent/conf.d/tomcat.d/metrics.yaml`)。
 
-This configuration file should include `ad_identifiers`:
+このコンフィギュレーションファイルには `ad_identifiers` を含める必要があります。
 
 ```yaml
 ad_identifiers:
@@ -229,19 +229,19 @@ instances:
     port: "<JMX_PORT>"
 ```
 
-Replace `<SHORT_IMAGE>` with the short image name of your desired container. For example, the container image `gcr.io/CompanyName/my-app:latest` has a short image name of `my-app`. As the Datadog Agent discovers that container, it sets up the JMX configuration as described in this file.
+`<SHORT_IMAGE>` は、希望するコンテナのショートイメージ名に置き換えてください。例えば、コンテナイメージ `gcr.io/CompanyName/my-app:latest` のショートイメージ名は `my-app` です。Datadog Agent がこのコンテナを検出すると、このファイルに記述されているように JMX 構成を設定します。
 
-You can alternatively reference and specify [custom identifiers to your containers][4] if you do not want to base this on the short image name.
+ショートイメージ名を基にしたくない場合は、[コンテナへのカスタム識別子][4]を参照して指定することもできます。
 
-Like Kubernetes annotations, configuration files can use [Autodiscovery template variables][3]. In this case, the `host` configuration uses `%%host%%` to resolve to the IP address of the discovered container.
+Kubernetes アノテーションと同様に、コンフィギュレーションファイルも[オートディスカバリーテンプレート変数][3]を使用できます。この場合、`host` 構成は `%%host%%` を使用して、検出されたコンテナの IP アドレスに解決します。
 
-See the [JMX integration][6] documentation (as well as the [example configurations for the pre-provided integrations](#available-jmx-integrations)) for more information about structuring your `init_config` and `instances` configuration for the `<METRICS_TO_COLLECT>`.
+`<METRICS_TO_COLLECT>` の `init_config` と `instances` の構成の構築の詳細については、[JMX インテグレーション][6]のドキュメント (および、[事前提供のインテグレーションの構成例](#available-jmx-integrations))を参照してください。
 
-#### 2. Mount configuration file
+#### 2. コンフィギュレーションファイルをマウントする
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-If you are using Datadog Operator, add an override:
+Datadog Operator を使用している場合は、オーバーライドを追加します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -271,7 +271,7 @@ spec:
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-In Helm, use the `datadog.confd` option:
+Helm で、`datadog.confd` オプションを使用します。
 
 ```yaml
 datadog:
@@ -292,7 +292,7 @@ datadog:
 {{% tab "Custom image" %}}
 If you cannot mount these files in the Agent container (for example, on Amazon ECS) you can build an Agent Docker image containing the desired configuration files.
 
-For example:
+例:
 
 ```Dockerfile
 FROM gcr.io/datadoghq/agent:latest-jmx
@@ -300,13 +300,13 @@ COPY <PATH_JMX_CONF_FILE> conf.d/tomcat.d/
 COPY <PATH_JMX_METRICS_FILE> conf.d/tomcat.d/
 ```
 
-Then use this new custom image as your regular containerized Agent.
+ その後、この新しいカスタムイメージを正規のコンテナ化された Agent として使用します。
 {{% /tab %}}
 
 {{< /tabs >}}
 
-#### 3. Expose JMX server
-Set up the JMX server in a way that allows the Agent to access it:
+#### 3. JMX サーバーを公開する
+Agent がアクセスできるように JMX サーバーを設定します。
 
 ```yaml
 spec:
@@ -328,10 +328,10 @@ spec:
           -Djava.rmi.server.hostname=$(POD_IP)   
 ```          
 
-## Available JMX integrations
-The Datadog Agent comes with several JMX integrations pre-configured.
+## 利用可能な JMX インテグレーション
+Datadog Agent には、いくつかの JMX インテグレーションが事前に構成されています。
 
-| Integration Name         | Metrics file       | Configuration file      |
+| インテグレーション名         | メトリクスファイル       | 構成ファイル      |
 |--------------------------|--------------------|-------------------------|
 | [activemq][41]           | [metrics.yaml][42] | [conf.yaml.example][43] |
 | [cassandra][44]          | [metrics.yaml][45] | [conf.yaml.example][46] |
@@ -349,11 +349,11 @@ The Datadog Agent comes with several JMX integrations pre-configured.
 | [tomcat][81]             | [metrics.yaml][82] | [conf.yaml.example][83] |
 | [weblogic][84]           | [metrics.yaml][85] | [conf.yaml.example][86] |
 
-Each integration in the above table has a `metrics.yaml` file predefined to match the expected pattern of the returned JMX metrics per application. Use the listed integration names as `<INTEGRATION_NAME>` in your Autodiscovery annotations or configuration files.
+上記の表にある各インテグレーションには、アプリケーションごとに返される JMX メトリクスの予想されるパターンに一致するように事前に定義された `metrics.yaml` ファイルがあります。オートディスカバリーのアノテーションまたはコンフィギュレーションファイルで、`<INTEGRATION_NAME>` としてリストされたインテグレーション名を使用してください。
 
-Alternatively use `jmx` as your `<INTEGRATION_NAME>` to set up a basic JMX integration and collect the default `jvm.*` metrics only.
+あるいは、`<INTEGRATION_NAME>` に `jmx` を指定して、基本的な JMX インテグレーションをセットアップし、デフォルトの `jvm.*` メトリクスのみを収集することもできます。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

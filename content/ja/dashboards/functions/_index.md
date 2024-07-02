@@ -1,27 +1,27 @@
 ---
+title: Functions
 aliases:
-- /ja/examples/
-- /ja/examples/aws-metrics/
-- /ja/examples/month_before/
-- /ja/examples/graphing-functions/
-- /ja/examples/day_before/
-- /ja/examples/json-editing/
-- /ja/examples/nginx-metrics/
-- /ja/examples/dashboards/
-- /ja/examples/hour_before/
-- /ja/examples/os-metrics/
-- /ja/examples/week_before/
-- /ja/examples/cassandra-metrics/
-- /ja/graphing/miscellaneous/functions
-- /ja/graphing/miscellaneous/
-- /ja/getting_started/from_the_query_to_the_graph
-- /ja/graphing/miscellaneous/from_the_query_to_the_graph
-- /ja/graphing/functions/
+  - /examples/
+  - /examples/aws-metrics/
+  - /examples/month_before/
+  - /examples/graphing-functions/
+  - /examples/day_before/
+  - /examples/json-editing/
+  - /examples/nginx-metrics/
+  - /examples/dashboards/
+  - /examples/hour_before/
+  - /examples/os-metrics/
+  - /examples/week_before/
+  - /examples/cassandra-metrics/
+  - /graphing/miscellaneous/functions
+  - /graphing/miscellaneous/
+  - /getting_started/from_the_query_to_the_graph
+  - /graphing/miscellaneous/from_the_query_to_the_graph
+  - /graphing/functions/
 further_reading:
-- link: /metrics/#querying-metrics
-  tag: ドキュメント
-  text: メトリクスのクエリ
-title: 関数
+- link: "/metrics/#querying-metrics"
+  tag: Documentation
+  text: Querying metrics
 ---
 
 ## 概要
@@ -53,10 +53,10 @@ title: 関数
     {{< nextlink href="/dashboards/functions/beta" >}}ベータ版: メトリクスのローリングアベレージを計算します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/metrics/#time-aggregation
-[2]: /ja/metrics/#space-aggregation
-[3]: /ja/metrics/#anatomy-of-a-metric-query
+[1]: /metrics/#time-aggregation
+[2]: /metrics/#space-aggregation
+[3]: /metrics/#anatomy-of-a-metric-query

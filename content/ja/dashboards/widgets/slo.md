@@ -21,22 +21,22 @@ SLOs (service-level objectives) are an agreed-upon target that must be achieved 
 - **Set your preferred sorting order for the SLO groups in the widget**: For all SLO types, sort groups based on any of the available time windows in the widget. Quickly identify the best and worst performing SLO groups for different time periods.
 - **Easily identify time periods with missing data in an SLO**: For all SLO types, the SLO widget shows time periods with missing data as "-". The "-" is displayed for any time window where the entire window is missing data.
 
-## Setup
+## セットアップ
 
 Use the SLO widget to visualize a [Service Level Objective (SLO)][1] on a dashboard.
 
 {{< img src="/dashboards/widgets/slo/slo-summary-widget-new.png" alt="metric-based slo summary widget graph editor " >}}
 
-### Configuration
+### 構成
 
 1. Select an SLO from the dropdown menu. 
 2. **For metric-based and Time Slice SLOs**: You can filter your query with tags and leverage [template variables][2] to dynamically scope your results:
     - Take advantage of template variables by using the *filter by* field to scope the SLO statuses the widget displays. For example, `filter by $env` scopes your SLO query to whatever value you choose in the dashboard for the *env* template variable.
-    - Add additional scope and context to your SLO metric queries even if the tags were not included in the original SLO configuration. For example, if the original SLO query is `sum:trace.flask.request.hits{*} by {resource_name}.as_count()` and you filter by `env:prod` in the widget, your data will be scoped to only that from your `prod` environment.
+    - タグが元の SLO 構成に含まれていない場合でも、SLO メトリクスクエリに追加のスコープとコンテキストを追加します。例えば、元の SLO クエリが `sum:trace.flask.request.hits{*} by {resource_name}.as_count()` で、ウィジェットで `env:prod` でフィルターした場合、データは `prod` 環境からのもののみにスコープされます。
 3. Set up to three different time windows.
 4. Select your display preferences.
 
-### Options
+### オプション
 
 #### Set the time windows
 
@@ -47,21 +47,21 @@ Select up to three different time windows from the following:
 
 **Note:** To display an error budget and color-code your `Global time` SLO status value as green or red, you need to specify an SLO target. If the SLO input target is not specified, only the SLO status is shown, and the font color remains gray.
 
-#### Display preferences
+#### 表示設定
 
 Select whether to show or hide remaining error budget by toggling the `Show error budget` option. 
 
 If you are visualizing an SLO with multiple groups or a monitor-based SLO with multiple monitors, select your `View mode`:
 
 - For SLOs with groups (metric-based or Time Slice SLO with groups, or monitor-based SLOs with a single monitor broken into groups), there are the following three view modes:
-  - `Overall`: displays the overall SLO status percentages and targets
-  - `Groups`: displays a table of status percentages for each group
-  - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each group
+  - `Overall`: 全体の SLO ステータスのパーセンテージとターゲットを表示します
+  - `Groups`: 各グループのステータス割合を表形式で表示します
+  - `Both`: 総合 SLO ステータスの割合と目標、各グループのステータス割合表の両方を表示します
 
-- For monitor-based SLOs configured with multiple monitors, there are the following three view modes:
-  - `Overall`: displays the overall SLO status percentages and targets
-  - `Monitors`: displays a table of status percentages for each monitor
-  - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
+- 複数モニターでモニターベースの SLO を構成している場合は、以下の 3 つのビューモードが利用可能です。
+  - `Overall`: 全体の SLO ステータスのパーセンテージとターゲットを表示します
+  - `Monitors`: 各モニターのステータス割合を表形式で表示します
+  - `Both`: 総合 SLO ステータスの割合と目標、各モニターのステータス割合表の両方を表示します
 
 When you set the `View mode` to `Groups`, `Monitors`, or `Both`:
 - The groups are sorted by ascending status in the smallest time window by default. After adding the widget to a dashboard, you have the ability to sort by status for any of the configured time windows through the widget UI.
@@ -74,11 +74,11 @@ When you set the `View mode` to `Groups`, `Monitors`, or `Both`:
 
 ## API
 
-This widget can be used with the **[Dashboards API][3]**. See the following table for the [widget JSON schema definition][4]:
+このウィジェットは **[Dashboards API][3]** で使用できます。[ウィジェット JSON スキーマ定義][4]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

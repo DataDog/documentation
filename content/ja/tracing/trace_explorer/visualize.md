@@ -1,6 +1,5 @@
 ---
 title: Span Visualizations
-kind: documentation
 description: 'View spans in a list, or aggregate spans into timeseries, top lists and more.'
 further_reading:
     - link: tracing/trace_explorer/
@@ -8,27 +7,27 @@ further_reading:
       text: Trace Explorer
 ---
 
-## Overview
+## 概要
 
-Visualizations define how the queried span data is displayed. Select relevant visualizations to surface valuable information, such as a **list** for individual events, or as **timeseries** or **top lists** for aggregates. 
+視覚化は、クエリされたスパンデータをどのように表示するかを定義します。個々のイベントの場合は**リスト**として、集計の場合は**時系列**または**トップリスト**として、価値ある情報を表示するために関連する視覚化を選択します。
 
-## List view
+## リストビュー
 
-The list view displays a list of spans that match the selected context, defined by the [search bar query][1] filter and a [time range][2].
+リストビューには、[検索バーのクエリ][1]フィルターと[時間範囲][2]で定義した、選択したコンテキストに合致するスパンのリストが表示されます。
 
-In the table, choose which information of interest to display as columns. Manage the columns by either:
+テーブルで、どの情報を列として表示するかを選択します。列の管理は、以下のいずれかの方法で行います。
 
-- interacting with the table header row to **sort**, **rearrange**, or **remove** columns.
-- selecting a facet from the facet panel on the left, or from the trace side panel after clicking on a specific span, to **add** a column for a field. You can also add columns from with the **Options** button.
+- テーブルのヘッダー行を操作して、列の**ソート**、*並べ替え**、*削除**を行う。
+- 左側のファセットパネルからファセットを選択するか、特定のスパンをクリックした後にトレースサイドパネルから、フィールドの列を**追加**する。また、**Options** ボタンから列を追加することもできます。
 
-{{< img src="tracing/trace_explorer/visualize/list_view_table_controls.mp4" alt="Configuring the display table" video=true style="width:80%;">}}
+{{< img src="tracing/trace_explorer/visualize/list_view_table_controls.mp4" alt="表示テーブルを構成する" video=true style="width:80%;">}}
 
-The default sort for spans in the list visualization is by timestamp, with the most recent spans on top. To surface spans with lowest or highest value for a measure first, or to sort your spans lexicographically for the value of a tag, specify that column as the **by** column.
+リスト視覚化におけるスパンの既定の並べ替えは、タイムスタンプによるもので、最新のスパンが上に表示されます。メジャーの値が最小または最大のスパンを最初に表示したり、タグの値でスパンを辞書順にソートしたりするには、その列を **by** 列として指定します。
 
 
-The configuration of the columns is stored alongside other elements of your troubleshooting context in saved views.
+列のコンフィギュレーションは、トラブルシューティングコンテキストの他の要素と一緒に保存ビューに保存されます。
 
-The `Latency Breakdown` of the trace might be missing for some spans if the trace is malformed or incomplete. For instance, the error and the rare samplers capture pieces of traces, without the guarantee of capturing the complete trace. In this case, the data is omitted to avoid displaying inconsistent or misleading latency information that would only make sense when the trace is complete.
+トレースが不正または不完全な場合、トレースの `Latency Breakdown` はいくつかのスパンで欠落している可能性があります。例えば、エラーサンプラーやレアサンプラーは、完全なトレースをキャプチャする保証なく、トレースの断片をキャプチャします。この場合、トレースが完全である場合にのみ意味をなす、一貫性のないまたは誤解を招くレイテンシー情報を表示するのを避けるために、データが省略されます。
 
 When the query is filtered on error spans, select the **Group into Issues** option to visualize a list of [Error Tracking][5] issues instead of individual error spans. Click on any issue in the issue list to open the issue panel and access additional information about this group of errors.
 
@@ -40,57 +39,57 @@ From the issue details, click `See all errors` to view individual error spans gr
 
 ## Timeseries
 
-Use timeseries to visualize the evolution of a [measure][3] (or a count of unique tag values) over a selected time frame, and optionally split the data by up to three tags (grouping).
+時系列を使用して、選択した時間枠における[メジャー][3] (またはユニークなタグ値のカウント) の進化を視覚化し、オプションで最大 3 つのタグでデータを分割 (グループ化) することができます。
 
-**Note**: The [Live Explorer][4] (15 minutes) allows grouping by only one dimension.
+**注**: [ライブエクスプローラー][4] (15 分) では、1 つのディメンションのみでのグループ化が可能です。
 
-Aggregated views use additional query options, to define the **measured tag dimension**, the dimensions to **group** the query by, and the **aggregation period**. For example:
+集計ビューでは、追加のクエリオプションを使用して、**測定されたタグのディメンション**、クエリを**グループ化**するディメンション、および**集計期間**を定義します。例:
 
-1. Choose to view the `Duration` measure.
+1. `Duration` メジャーを表示するように選択します。
 
-   {{< img src="tracing/trace_explorer/visualize/group_by_measured_dimension.png" alt="Measured Dimension" style="width:100%;">}}
+   {{< img src="tracing/trace_explorer/visualize/group_by_measured_dimension.png" alt="測定されたディメンション" style="width:100%;">}}
 
-2. Select the aggregation function for the `Duration` measure. Selecting a measure lets you choose the aggregation function whereas selecting a qualitative attribute displays the unique count.
+2. `Duration` メジャーの集計関数を選択します。メジャーを選択すると集計関数が選択され、定性属性を選択すると一意のカウントが表示されます。
 
-   {{< img src="tracing/trace_explorer/visualize/group_by_aggregation_function.png" alt="Aggregation Function" style="width:100%;">}}
+   {{< img src="tracing/trace_explorer/visualize/group_by_aggregation_function.png" alt="集計関数" style="width:100%;">}}
 
-3. Group the query by a dimension, for example, `Resource`.
+3. `Resource` などのディメンションでクエリをグループ化します。
 
-   {{< img src="tracing/trace_explorer/visualize/group_by_dimension.png" alt="Split Dimension" style="width:100%;">}}
+   {{< img src="tracing/trace_explorer/visualize/group_by_dimension.png" alt="スプリットディメンション" style="width:100%;">}}
 
-4. Choose to display a number of either top or bottom values according to the selected tag.
+4. 選択されたタグに従って、トップまたはボトムのいずれかの数値を表示するかどうかを選択します。
 
-    {{< img src="tracing/trace_explorer/visualize/group_by_top_bottom.png" alt="Top Bottom X values" style="width:100%;">}}
+    {{< img src="tracing/trace_explorer/visualize/group_by_top_bottom.png" alt="トップボトム X 値" style="width:100%;">}}
 
-5. Choose the rollup period, for example, `10min`.
+5. ロールアップ期間を、例えば `10min` のように選択します。
 
-    {{< img src="tracing/trace_explorer/visualize/group_by_rollup_period.png" alt="Rollup Period" style="width:100%;">}}
+    {{< img src="tracing/trace_explorer/visualize/group_by_rollup_period.png" alt="ロールアップ期間" style="width:100%;">}}
 
-The following Trace Explorer timeseries view shows the evolution of the top ten resource names of the service `shopist-web-ui` according to the 95th percentile of `Duration` over the past four hours:
+次のトレースエクスプローラーの時系列ビューは、過去 4 時間における、サービス `shopist-web-ui` の上位 10 リソース名の、`Duration` の 95 パーセンタイルによる推移を表しています。
 
-{{< img src="tracing/trace_explorer/visualize/timeseries_view.png" alt="Timeseries view" style="width:100%;">}}
+{{< img src="tracing/trace_explorer/visualize/timeseries_view.png" alt="時系列表示" style="width:100%;">}}
 
 Choose additional display options for timeseries: the **roll-up interval**, whether you **display** results as **bars** (recommended for counts and unique counts), **lines** (recommended for statistical aggregations) or **areas**, and the **colorset**.
 
-## Top list
+## Toplist
 
-Use a top list to visualize a span count, a count of unique tag values, or a measure split by one tag dimension.
+トップリストを使用して、スパンカウント、ユニークなタグ値のカウント、または 1 つのタグディメンションで分割されたメジャーを視覚化することができます。
 
-For example, the following top list shows the top ten website customers that experienced an error at checkout over the past day, based on the span count.
+例えば、次のトップリストは、過去 1 日間にチェックアウト時にエラーが発生した Web サイト顧客のうち、スパンカウントに基づく上位 10 名を示しています。
 
-{{< img src="tracing/trace_explorer/visualize/top_list_view.png" alt="Top list view" style="width:100%;">}}
+{{< img src="tracing/trace_explorer/visualize/top_list_view.png" alt="トップリストビュー" style="width:100%;">}}
 
-## Table
+## 表
 
-Use a table to visualize the top values from up to three dimension combinations according to a chosen measure or span count.
+選択したメジャーやスパン数に応じて、最大 3 つのディメンションの組み合わせから上位の値を視覚化するためのテーブルを使用します。
 
-**Note**: A table visualization grouped by a single dimension is the same as a Top List, just with a different display.
+**注**: 1 つのディメンションでグループ化されたテーブルの視覚化は、表示が異なるだけで、トップリストと同じです。
 
-The following table shows the error spans count by `Env`, `Service`, and `Error type`.
+以下のテーブルは、`Env`、`Service`、`Error type` ごとのエラースパンカウントを表しています。
 
-{{< img src="tracing/trace_explorer/visualize/table_view.png" alt="Table view" style="width:100%;">}}
+{{< img src="tracing/trace_explorer/visualize/table_view.png" alt="テーブルビュー" style="width:100%;">}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -16,7 +16,7 @@ The following application security capabilities are supported in the PHP library
 | Threat Protection  | 0.86.0                     |
 | Customize response to blocked requests | 0.86.0 |
 | Software Composition Analysis (SCA) | 0.90.0              |
-| Code Security        | not supported              |
+| コードセキュリティ        | not supported              |
 | Automatic user activity event tracking | 0.89.0                     |
 | API Security | 0.98.0 |
 

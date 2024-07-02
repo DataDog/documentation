@@ -4,7 +4,7 @@
 - cloud
 - configuration & deployment
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon Keyspaces metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_keyspaces/"
@@ -29,9 +29,9 @@ Amazon Keyspaces (for Apache Cassandra) is a scalable, highly available, and man
 
 Enable this integration to see all your Keyspaces metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -40,21 +40,21 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
 1. In the [AWS integration page][2], ensure that `Cassandra` is enabled under the `Metric Collection` tab.
 2. Install the [Datadog - Amazon Keyspaces (for Apache Cassandra) integration][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_keyspaces" >}}
 
 
-### Events
+### イベント
 
 The Amazon Keyspaces integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Keyspaces integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

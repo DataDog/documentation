@@ -1,10 +1,10 @@
 ---
+title: How does weighted() work?
 disable_toc: false
 further_reading:
 - link: /dashboards/functions/smoothing
   tag: Documentation
-  text: スムーシング
-title: weighted() の仕組みは？
+  text: Smoothing
 ---
 
 すべてのメトリクスクエリには、標準的な評価順序があります (簡単な復習として、[クエリの構造][1]をご覧ください)。例えば、次のようなクエリは、次のように計算されます。
@@ -56,8 +56,8 @@ title: weighted() の仕組みは？
 
 `weighted()` 関数は、送信率に対して関数を重み付けすることで、短命なタグの矛盾した挙動を改善します
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/metrics/#anatomy-of-a-metric-query
+[1]: /metrics/#anatomy-of-a-metric-query

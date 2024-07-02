@@ -7,21 +7,21 @@
 - "cloud"
 - "log collection"
 - "tracing"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track lambda run times, errors, invocation counts, and more."
+"description": "Lambda の実行、エラー、呼び出しの回数などを追跡"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_lambda/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/how-to-monitor-lambda-functions/"
-  "tag": "Blog"
-  "text": "How to monitor Lambda functions"
+  "tag": "ブログ"
+  "text": "Lambda 関数の監視方法"
 - "link": "https://www.datadoghq.com/blog/datadog-lambda-layer/"
-  "tag": "Blog"
-  "text": "Datadog's Lambda Layer: Monitor custom serverless metrics"
+  "tag": "ブログ"
+  "text": "Datadog の Lambda レイヤー: カスタムサーバーレスメトリクスの監視"
 - "link": "https://www.datadoghq.com/blog/datadog-lambda-extension/"
-  "tag": "Blog"
-  "text": "Introducing Datadog's Lambda extension"
+  "tag": "ブログ"
+  "text": "Datadog の Lambda 関数について"
 "git_integration_title": "amazon_lambda"
 "has_logo": true
 "integration_id": "amazon-lambda"
@@ -44,9 +44,9 @@ AWS Lambda is a compute service that runs code in response to events and automat
 
 Enable this integration to begin collecting CloudWatch metrics. This page also describes how to set up custom metrics, logging, and tracing for your Lambda functions.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -67,21 +67,21 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
 
 Once this is completed, view all of your Lambda Functions in the [Datadog Serverless view][6]. This page brings together metrics, traces, and logs from your AWS Lambda functions running serverless applications into one view. Detailed documentation on this feature can be found in the [Datadog Serverless documentation][7].
 
-## Data Collected
+## 収集データ
 
 <div class="alert alert-warning">When using AWS Lambda extensions, the <em>duration</em> metric reported by AWS includes the <em>post_runtime_extensions_duration</em> consumed by Lambda extensions <a href="https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/">performing activities after the function response is returned</a>. To monitor the actual performance of the function, use <em>duration - post_runtime_extensions_duration</em> or the <a href="https://docs.datadoghq.com/serverless/enhanced_lambda_metrics/">Datadog enhanced metric</a> <em>aws.lambda.enhanced.runtime_duration</em>.</div>
 
 Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to function name, security-groups, and more.
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_lambda" >}}
 
 
-### Events
+### イベント
 
 The AWS Lambda integration collects Lambda deployment events from AWS CloudTrail if [Datadog serverless deployment tracking][9] is enabled.
 
-### Service Checks
+### サービスチェック
 
 The AWS Lambda integration does not include any service checks.
 
@@ -114,7 +114,7 @@ The AWS Lambda integration provides ready-to-use monitoring capabilities to moni
 - AWS Lambda Dashboard: Gain a comprehensive overview of your Lambda functions using the out-of-the-box [AWS Lambda dashboard][14].
 - Recommended Monitors: Enable [Recommended AWS Lambda monitors][15] to proactively detect issues and receive timely alerts.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][16].
 

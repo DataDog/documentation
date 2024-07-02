@@ -16,17 +16,17 @@ further_reading:
 
 This instrumentation method uses `serverless-init` and provides the following additional monitoring capabilities for containerized Linux Azure App Service workloads:
 
-- Fully distributed APM tracing using automatic instrumentation.
-- Customized APM service and trace views showing relevant Azure App Service metrics and metadata.
-- Support for manual APM instrumentation to customize spans.
-- `Trace_ID` injection into application logs.
-- Support for submitting custom metrics using [DogStatsD][1].
+- 自動インスツルメンテーションを用いた完全分散型 APM トレーシング。
+- カスタマイズされた APM サービスとトレースビューは、関連する Azure App Service のメトリクスとメタデータを表示します。
+- スパンのカスタマイズが可能な、手動 APM インスツルメンテーション機能。
+- アプリケーションログへの `Trace_ID` 挿入。
+- [DogStatsD][1] を使用したカスタムメトリクス送信のサポート。
 
-### Prerequisites
+### 前提条件
 
-Make sure you have a [Datadog API Key][6] and are using a programming language [supported by a Datadog tracing library][2].
+[Datadog API キー][6]を取得済みであることと、[Datadog トレーシングライブラリがサポートする][2]プログラミング言語を使用していることを確認してください。
 
-## Instrument your application
+## アプリケーションをインスツルメントする
 
 ### Dockerfile
 
@@ -36,11 +36,11 @@ Datadog publishes new releases of the serverless-init container image to Google'
 | ---- | ---- | ---- |
 | datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
 
-Images are tagged based on semantic versioning, with each new version receiving three relevant tags:
+イメージはセマンティックバージョニングに基づいてタグ付けされ、新しいバージョンごとに 3 つの関連タグが付与されます。
 
-* `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
-* `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
-* `latest`, `latest-alpine`: use these to follow the latest version release, which may include breaking changes
+* `1`、`1-alpine`: 重大な変更がない最新のマイナーリリースを追跡する場合、これらを使用します
+* `1.x.x`、`1.x.x-alpine`: ライブラリの正確なバージョンにピン留めする場合、これらを使用します
+* `latest`、`latest-alpine`: 重大な変更が含まれる可能性がある最新のバージョンリリースに従う場合、これらを使用します
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
 {{< programming-lang lang="nodejs" >}}
@@ -80,59 +80,59 @@ Images are tagged based on semantic versioning, with each new version receiving 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-### 2. Configure your application
+### 2. アプリケーションを構成する
 
-Once the container is built and pushed to your registry, the last step is to set the required environment variables for the Datadog Agent:
-- `DD_API_KEY`: Datadog API key, used to send data to your Datadog account. It should be configured as a [Azure Secret][7] for privacy and safety issue.
-- `DD_SITE`: Datadog endpoint and website. Select your site on the right side of this page. Your site is: {{< region-param key="dd_site" code="true" >}}.
-- `DD_TRACE_ENABLED`: Set to `true` to enable tracing.
+コンテナが構築され、レジストリにプッシュされたら、最後の手順として Datadog Agent 用に必要な環境変数を設定します。
+- `DD_API_KEY`: データを Datadog アカウントに送信するために使用する Datadog API キー。プライバシーと安全性の問題を考慮して、[Azure シークレット][7]に設定する必要があります。
+- `DD_SITE`: Datadog のエンドポイントと Web サイト。このページの右側で自分のサイトを選択します。あなたのサイトは {{< region-param key="dd_site" code="true" >}} です。
+- `DD_TRACE_ENABLED`: `true` に設定してトレースを有効にします。
 
-For more environment variables and their function, see [Additional Configurations](#additional-configurations).
+環境変数とその機能の詳細については、[追加の構成](#additional-configurations)を参照してください。
 
-### 3. Results
+### 3. 結果
 
-Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
+デプロイが完了すると、メトリクスとトレースが Datadog に送信されます。Datadog で **Infrastructure->Serverless** に移動すると、サーバーレスメトリクスとトレースを確認できます。
 
-## Deployment
+## デプロイ
 
 {{% aas-workflow-linux %}}
 
-## Additional configurations
+## 追加の構成
 
-- **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.
+- **高度なトレース:** Datadog Agent は、一般的なフレームワーク向けに基本的なトレース機能をすでにいくつか提供しています。さらに詳しい情報については、[高度なトレースガイド][2]に従ってください。
 
-- **Logs:** If you use the [Azure integration][1], your logs are already being collected. Alternatively, you can set the `DD_LOGS_ENABLED` environment variable to `true` to capture application logs through the serverless instrumentation directly.
+- **ログ:** [Azure インテグレーション][1]を使用している場合は、すでにログが収集されています。また、環境変数 `DD_LOGS_ENABLED` を `true` に設定することで、サーバーレスインスツルメンテーションを通じて直接アプリケーションログをキャプチャすることも可能です。
 
-- **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][3]. For monitoring Cloud Run and other serverless applications, use [distribution][8] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][9]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
+- **カスタムメトリクス:** [DogStatsd クライアント][3]を使って、カスタムメトリクスを送信することができます。Cloud Run やその他のサーバーレスアプリケーションの監視には、[ディストリビューション][8]メトリクスを使用します。ディストリビューションは、デフォルトで `avg`、`sum`、`max`、`min`、`count` の集計データを提供します。Metric Summary ページでは、パーセンタイル集計 (p50、p75、p90、p95、p99) を有効にすることができ、タグの管理も可能です。ゲージメトリクスタイプの分布を監視するには、[時間集計と空間集計][9]の両方で `avg` を使用します。カウントメトリクスタイプの分布を監視するには、時間集計と空間集計の両方で `sum` を使用します。
 
-- **Trace Sampling:**  To manage the APM traced request sampling rate for serverless applications, set the DD_TRACE_SAMPLE_RATE environment variable on the function to a value between 0.000 (no tracing of Container App requests) and 1.000 (trace all Container App requests).
+- **トレースサンプリング:** サーバーレスアプリケーションの APM トレースリクエストサンプリングレートを管理するには、関数の DD_TRACE_SAMPLE_RATE 環境変数を 0.000 (コンテナアプリのリクエストをトレースしない) から 1.000 (すべてのコンテナアプリのリクエストをトレースする) の間の値に設定します。
 
-Metrics are calculated based on 100% of the application’s traffic, and remain accurate regardless of any sampling configuration.
+メトリクスは、アプリケーションの 100% のトラフィックに基づいて計算され、どのようなサンプリング構成であっても正確な値を維持します。
 
-### Environment Variables
+### 環境変数
 
-| Variable | Description |
+| 変数 | 説明 |
 | -------- | ----------- |
-|`DD_API_KEY`| [Datadog API Key][6] - **Required**|
-| `DD_SITE` | [Datadog site][4] - **Required** |
-| `DD_LOGS_ENABLED` | When true, send logs (stdout and stderr) to Datadog. Defaults to false. |
-| `DD_LOGS_INJECTION`| When true, enrich all logs with trace data for supported loggers in [Java][10], [Node.js][11], [.NET][12], and [PHP][13]. See additional docs for [Python][14], [Go][15], and [Ruby][16]. |
-| `DD_TRACE_SAMPLE_RATE`|  Controls the trace ingestion sample rate `0.0` and `1.0`|
-| `DD_SERVICE`      | See [Unified Service Tagging][5].                                       |
-| `DD_VERSION`      | See [Unified Service Tagging][5].                                       |
-| `DD_ENV`          | See [Unified Service Tagging][5].                                       |
-| `DD_SOURCE`       | See [Unified Service Tagging][5].                                       |
-| `DD_TAGS`         | See [Unified Service Tagging][5].                                       |
+|`DD_API_KEY`| [Datadog API キー][6] - **必須**|
+| `DD_SITE` | [Datadog サイト][4] - **必須** |
+| `DD_LOGS_ENABLED` | true の場合、ログ (stdout と stderr) を Datadog に送信します。デフォルトは false です。 |
+| `DD_LOGS_INJECTION`| true の場合、[Java][10]、[Node.js][11]、[.NET][12]、および [PHP][13] でサポートされているロガーのトレースデータですべてのログをリッチ化します。[Python][14]、[Go][15]、[Ruby][16] については追加のドキュメントを参照してください。 |
+| `DD_TRACE_SAMPLE_RATE`|  トレース取り込みのサンプルレート `0.0` と `1.0` をコントロールします|
+| `DD_SERVICE`      | [統合サービスタグ付け][5]を参照してください。                                       |
+| `DD_VERSION`      | [統合サービスタグ付け][5]を参照してください。                                       |
+| `DD_ENV`          | [統合サービスタグ付け][5]を参照してください。                                       |
+| `DD_SOURCE`       | [統合サービスタグ付け][5]を参照してください。                                       |
+| `DD_TAGS`         | [統合サービスタグ付け][5]を参照してください。                                       |
 
-## Troubleshooting
+## トラブルシューティング
 
-If you are not receiving traces or custom metric data as expected, enable **App Service logs** to receive debugging logs.
+トレースやカスタムメトリクスデータを期待通りに受信できない場合は、**App Service logs** を有効にしてデバッグログを受信してください。
 
 {{< img src="serverless/azure_app_service/app-service-logs.png" style="width:100%;" >}}
 
-Share the content of the **Log stream** with [Datadog Support][14].
+[Datadog サポート][14]と **Log stream** の内容を共有してください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

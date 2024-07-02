@@ -2,41 +2,41 @@
 title: Connect an Amazon EKS Cluster with Cloudcraft
 ---
 
-By scanning your Amazon EKS clusters, Cloudcraft allows you to generate system architecture diagrams to help visualize your deployed workloads and pods.
+Amazon EKS クラスターをスキャンすることで、Cloudcraft はシステムアーキテクチャ図を生成し、デプロイされたワークロードとポッドの視覚化をサポートします。
 
-Cloudcraft uses the [role-based access control (RBAC) authorization method provided by Kubernetes][1] to authorize [Cloudcraft's existing read-only IAM entity role][2]. That means Cloudcraft requires no special software or agent.
+Cloudcraft は [Kubernetes][1] が提供する[ロールベースのアクセス制御 (RBAC) 認可方法]を使用して、[Cloudcraft の既存の読み取り専用の IAM エンティティロール][2]を認可します。つまり、Cloudcraft は特別なソフトウェアやエージェントを必要としません。
 
-To learn more about RBAC configuration and IAM entities, see [Managing users or IAM roles for your cluster][3].
+RBAC の構成と IAM エンティティの詳細については、[クラスターのユーザーまたは IAM ロールの管理][3]を参照してください。
 
-<div class="alert alert-info">The ability to scan Amazon EKS clusters and AWS accounts is only available to Cloudcraft Pro subscribers. Check out <a href="https://www.cloudcraft.co/pricing">our pricing page</a> for more information.</div>
+<div class="alert alert-info">Amazon EKS クラスターおよび AWS アカウントをスキャンする機能は、Cloudcraft Pro の契約者のみが利用できます。詳細については、<a href="https://www.cloudcraft.co/pricing">料金ページを</a>ご覧ください。</div>
 
-## Prerequisites
+## 前提条件
 
-Before connecting your Amazon EKS clusters with Cloudcraft, you must connect your AWS account and generate diagrams that include your clusters.
+Amazon EKS クラスターを Cloudcraft に接続する前に、まず AWS アカウントを接続し、クラスターを含めた構成図を作成する必要があります。
 
-To connect your AWS account and familiarize yourself with Cloudcraft, see the following articles:
-- [Connect your AWS account with Cloudcraft][4]
-- [Create your first live AWS diagram][5]
+AWS アカウントを接続し、Cloudcraft についてより詳しく知るには、以下の記事をご覧ください。
+- [AWS アカウントを Cloudcraft に接続する][4]
+- [初めての AWS リアルタイム構成図を作成する][5]
 
-You should also [install and configure `kubectl`][7], a tool that allows you to control Kubernetes clusters through the command line. Cloudcraft recommends using the latest version to avoid issues.
+また、コマンドラインから Kubernetes クラスターを制御できるツール、[`kubectl` のインストールと構成][7]も必要です。Cloudcraft では、問題を避けるために最新バージョンの使用を推奨しています。
 
-## Authorizing the Cloudcraft IAM role for view-only
+## Cloudcraft IAM ロールを読み取り専用に認可する
 
-Start by opening a blueprint with an existing Amazon EKS cluster or using the **Auto Layout** feature to generate a new blueprint.
+まず、既存の Amazon EKS クラスターでブループリントを開くか、**自動レイアウト**機能を使用して、新しいブループリントを生成します。
 
-With your AWS environment mapped into a blueprint, select the Amazon EKS cluster that you wish to scan, and click the **Enable cluster scanning** button that appears in the component toolbar.
+AWS 環境をブループリントにマッピングした状態で、スキャンしたい Amazon EKS クラスターを選択し、コンポーネントツールバーに表示される **Enable cluster scanning** ボタンをクリックします。
 
-{{< img src="cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft/enable-cluster-scanning.png" alt="Interactive Cloudcraft diagram showing an AWS EKS cluster with enable cluster scanning button highlighted." responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft/enable-cluster-scanning.png" alt="AWS EKS クラスターとハイライト表示された enable cluster scanning ボタンを示すインタラクティブな Cloudcraft の構成図。" responsive="true" style="width:100%;">}}
 
-The next screen provides step-by-step commands to run in Terminal.
+次の画面では、ターミナルで実行するコマンドが順を追って表示されます。
 
-As the Amazon EKS cluster creator or user with admin access, open the aws-auth ConfigMap file with `kubectl`.
+Amazon EKS クラスターの作成者または管理者アクセス権を持つユーザーとして、AWS-auth ConfigMap ファイルを `kubectl` で開きます。
 
 ```
 kubectl edit -n kube-system configmap/aws-auth
 ```
 
-With the `aws-auth.yaml` file open in a text editor, add the role details to the *mapRoles* section of the file, just after under the *data* section.
+テキストエディタで `aws-auth.yaml` ファイルを開き、*data* セクションのすぐ後にある *mapRoles* セクションにロールの詳細を追加します。
 
 ```
 data:
@@ -46,19 +46,19 @@ data:
         - cloudcraft-view-only
 ```
 
-If the section does not exist, add it. Once done, save the file and exit.
+該当のセクションが存在しない場合は追加します。完了したら、ファイルを保存して終了します。
 
-<div class="alert alert-info">`groups` refer to groups in your cluster to which the role is mapped. For more information, see [Default Roles and Role Bindings][8] in the Kubernetes documentation.</div>
+<div class="alert alert-info">`groups` は、ロールがマップされるクラスター内のグループを指します。詳細については、Kubernetes のドキュメントの[デフォルトのロールとロールバインディング][8]を参照してください。</div>
 
-<div class="alert alert-danger">Typos and syntax errors can affect the permissions of all IAM users and roles updated in the ConfigMap file. To prevent this from occuring, Cloudcraft recommends adding a YAML linter to your text editor.</div>
+<div class="alert alert-danger">タイプミスや構文エラーは、ConfigMap ファイルで更新されたすべての IAM ユーザーとロールの権限に影響する可能性があります。これを防ぐため、Cloudcraft ではテキストエディタに YAML 解析ツール (リンター) を追加することを推奨しています。</div>
 
-## Granting view-only access to the Cloudcraft IAM role
+## Cloudcraft IAM ロールに読み取り専用アクセスを付与する
 
-Next, use [ClusterRoleBinding][6] to bind the IAM role to a Kubernetes role.
+次に、[ClusterRoleBinding][6] を使用して、IAM ロールを Kubernetes ロールにバインドします。
 
-A ClusterRoleBinding grants permissions defined in a role to a user or set of users in all namespaces in a cluster. Kubernetes defines some default user-facing roles. For Cloudcraft, use the predefined "view" role that allows view-only access to most objects in a namespace.
+ClusterRoleBinding は、ロールで定義されたアクセス許可を、クラスターのすべてのネームスペースの 1 人または複数のユーザーに付与します。Kubernetes では、ユーザー向けのデフォルトのロールをいくつか定義しています。Cloudcraft の場合は、事前定義された「view」ロールを使用します。これにより、ネームスペース内のほとんどのオブジェクトに対する読み取り専用アクセスが許可されます。
 
-Enter the following multi-line command to create the ClusterRoleBinding and grant view-only permission to users in the **cloudcraft-view-only** group.
+以下の複数行コマンドを入力して、ClusterRoleBinding を作成し、**cloudcraft-view-only** グループのユーザーに読み取り専用のアクセス許可を付与します。
 
 ```
 cat << EOF | kubectl apply -f -
@@ -76,13 +76,13 @@ roleRef:
 EOF
 ```
 
-## Testing access to the cluster
+## クラスターへのアクセスをテストする
 
-To test that Cloudcraft can access to the cluster, click **Test cluster access** at the bottom of the **Enable Kubernetes Cluster Scanning** screen.
+Cloudcraft がクラスターにアクセスできることをテストするには、**Enable Kubernetes Cluster Scanning** 画面の一番下にある **Test cluster access** をクリックします。
 
-{{< img src="cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft/test-cluster-access.png" alt="Cloudcraft interface showing Kubernetes cluster role configuration with a 'Test Cluster Access' button highlighted by an arrow." responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft/test-cluster-access.png" alt="Kubernetes クラスターロールの構成と矢印でハイライト表示された 'Test Cluster Access' ボタンを示すCloudcraft インターフェース。" responsive="true" style="width:100%;">}}
 
-To scan other clusters, repeat the process as many times as needed.
+他のクラスターをスキャンする場合は、上記のプロセスを必要な回数繰り返します。
 
 [1]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
 [2]: /cloudcraft/faq/how-cloudcraft-connects-to-aws/

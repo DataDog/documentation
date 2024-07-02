@@ -3,21 +3,21 @@
 - "languages"
 - "log collection"
 - "tracing"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Send custom metrics from your Ruby applications with Datadog client libraries."
+"description": "Datadog クライアントライブラリを使用して Ruby アプリケーションからカスタムメトリクスを送信。"
 "doc_link": "https://docs.datadoghq.com/integrations/ruby/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/monitoring-rails-with-datadog/"
-  "tag": "Blog"
-  "text": "Monitoring Rails applications with Datadog"
+  "tag": "ブログ"
+  "text": "Datadog を使用した Rails アプリケーションの監視"
 - "link": "https://www.datadoghq.com/blog/managing-rails-logs-with-datadog/"
-  "tag": "Blog"
-  "text": "Collecting and monitoring Rails logs with Datadog"
+  "tag": "ブログ"
+  "text": "Datadog を使用した Rails ログの収集および監視"
 - "link": "https://www.datadoghq.com/blog/managing-rails-application-logs/"
-  "tag": "Blog"
-  "text": "How to collect, customize, and manage Rails application logs"
+  "tag": "ブログ"
+  "text": "Rails アプリケーションログを収集、カスタマイズ、管理する方法"
 "git_integration_title": "ruby"
 "has_logo": true
 "integration_id": "ruby"
@@ -36,7 +36,7 @@
 
 The Ruby integration allows you to collect and monitor your Ruby application logs, traces, and custom metrics.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
@@ -56,7 +56,7 @@ See the dedicated documentation on how to [setup Ruby log collection][3] to forw
 
 See the dedicated documentation for [enabling the Ruby profiler][4].
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

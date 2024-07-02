@@ -12,7 +12,7 @@
   "vendor_id": instabug
 "categories":
 - marketplace
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -78,35 +78,35 @@
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## Overview
+## 概要
 Instabug allows mobile application teams to balance stability, performance, and feature development throughout the entire development lifecycle. Based on a lightweight SDK, Instabug provides a unique set of insights enabling mobile teams to release with confidence, align on key performance metrics, identify and resolve critical issues before they impact end users.
 
-With Instabug, extend your team’s visibility and consistently deliver a superior mobile app experience.
+Instabug を使えば、チームの可視性を高め、優れたモバイルアプリ体験を一貫して提供することができます。
 
 ### Release Centered
-Track your mobile performance and compare version adoption, stability, and performance. Quickly identify issues, monitor issues by release, and resolve regressed issues efficiently.
+モバイルのパフォーマンスを追跡し、バージョンの採用、安定性、パフォーマンスを比較します。問題をすばやく特定し、リリースごとに問題を監視し、回帰した問題を効率的に解決します。
 
 ### Unified Performance Monitoring
-Align your team around a single application performance metric while monitoring issues beyond crash free sessions, such as slow screen transitions, network errors, fatal app hangs, OOM crashes, and more.
+クラッシュのないセッションにとどまらず、画面遷移の遅れ、ネットワークエラー、致命的なアプリのハングアップ、OOM クラッシュなどの問題をモニタリングしながら、単一のアプリケーションパフォーマンスメトリクスを中心にチームをまとめます。
 
 ### Comprehensive Debugging
-Quickly identify performance, quality, or stability issues throughout the application's lifecycle before users are impacted by accessing logs, screenshots, device details, all out-of-the-box.
+ログ、スクリーンショット、デバイスの詳細へのアクセスにすぐに使えるので、ユーザーが影響を受ける前に、アプリケーションのライフサイクルを通じてパフォーマンス、品質、安定性の問題を素早く特定できます。
 
 ### Secure by Design
-Protect the privacy of your users by hiding sensitive views with an overlay and excluding personal information from your reports. Instabug is fully GDPR compliant.
+機密性の高いビューをオーバーレイで隠し、レポートから個人情報を除外することで、ユーザーのプライバシーを保護します。Instabug は GDPR に完全に準拠しています。
 
 ### Seamless Integrations
-Sync your workflow with integrations including Jira, GitHub, Slack, and more.
+Jira、GitHub、Slack などのインテグレーションで、ワークフローを同期させます。
 
-## Support
+## サポート
 
-For support or feature requests, contact Instabug through the following channel:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Instabug にお問い合わせください。
 
-- Email: [contactus@instabug.com][2]
+- メール: [contactus@instabug.com][2]
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
 - [Instabug Documentation][4]
 
@@ -116,4 +116,4 @@ Additional helpful documentation, links, and articles:
 [4]: https://docs.instabug.com
 
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/instabug-instabug" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/instabug-instabug" target="_blank">こちらをクリック</a>してください。

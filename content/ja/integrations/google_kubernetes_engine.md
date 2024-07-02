@@ -6,7 +6,7 @@
 - kubernetes
 - log collection
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Monitor your GKE resource usage."
 "doc_link": "https://docs.datadoghq.com/integrations/google_kubernetes_engine/"
@@ -43,11 +43,11 @@ The standard dashboard provides observability in GKE with a simple configuration
 
 Unlike self-hosted Kubernetes clusters, the GKE control plane is managed by Google and not accessible by a Datadog Agent running in the cluster. Therefore, observability into the GKE control plane requires the Google integration even if you are primarily using the Datadog Agent to monitor your clusters.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
-#### Installation
+#### インストール
 
 1. If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps for the standard metrics and preset dashboard.
 
@@ -69,21 +69,21 @@ Once this is done, export your Google Kubernetes Engine logs from Google Cloud L
 
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_kubernetes_engine" >}}
 
 
-### Events
+### イベント
 
 The Google Kubernetes Engine integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Kubernetes Engine integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

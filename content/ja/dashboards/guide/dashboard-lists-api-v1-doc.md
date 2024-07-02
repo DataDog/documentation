@@ -1,8 +1,8 @@
 ---
+title: Dashboard Lists API (v1)
 aliases:
-- /ja/graphing/faq/dashboard-lists-api-doc
-- /ja/graphing/guide/dashboard-lists-api-v1-doc
-title: ダッシュボードリスト API (v1)
+  - /graphing/faq/dashboard-lists-api-doc
+  - /graphing/guide/dashboard-lists-api-v1-doc
 ---
 
 APIを介してすべてのダッシュボードを簡単に整理、検索、およびチームや組織と共有できます。
@@ -623,7 +623,7 @@ curl -X ADD -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-## ダッシュボードリストのアイテムを更新する
+## ダッシュボードリストの項目を更新
 
 <div class="alert alert-danger">
 このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api#update-items-of-a-dashboard-list">ダッシュボードリストのアイテムを更新する v2 エンドポイント</a>を使用してください。
@@ -876,7 +876,7 @@ curl -X UPDATE -H "Content-type: application/json" \
 {{% /tab %}}
 {{< /tabs >}}
 
-## ダッシュボードリストからアイテムを削除する
+## ダッシュボードリストから項目を削除
 
 <div class="alert alert-danger">
 このエンドポイントは旧バージョンです。代わりに、<a href="https://docs.datadoghq.com/api#delete-items-from-a-dashboard-list">ダッシュボードリストからアイテムを削除する v2 エンドポイント</a>を使用してください。

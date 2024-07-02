@@ -25,7 +25,7 @@
 "categories":
 - configuration & deployment
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/launchdarkly/README.md"
 "display_on_public_website": true
@@ -68,7 +68,7 @@
     "media_type": image
   "overview": "README.md#Overview"
   "resources":
-  - "resource_type": other
+  - "resource_type": その他
     "url": "https://launchdarkly.com"
   - "resource_type": documentation
     "url": "https://docs.launchdarkly.com/integrations/datadog/events"
@@ -79,45 +79,45 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
 
 {{% site-region region="gov" %}}
-**The LaunchDarkly integration is not supported for the Datadog {{< region-param key="dd_site_name" >}} site**.
+**Datadog {{< region-param key="dd_site_name" >}} サイトでは LaunchDarkly インテグレーションはサポートされていません**。
 {{% /site-region %}}
 
 
-LaunchDarkly provides the following integrations with Datadog:
+LaunchDarkly は、Datadog と以下のインテグレーションを提供しています。
 
-### Events integration
+### イベントインテグレーション
 
-The [LaunchDarkly][1] events integration for Datadog brings flag event markers to your monitoring dashboards, so you can see the effects of your LaunchDarkly feature deployments on your customer's services or systems. For instance, if a deployed feature causes a service to slow down, you can see the cause within Datadog.
+Datadog の [LaunchDarkly][1] イベントインテグレーションは、モニタリングダッシュボードにフラグイベントマーカーをもたらし、顧客のサービスやシステムに対する LaunchDarkly 機能のデプロイの効果を確認することができるようにします。例えば、デプロイされた機能が原因でサービスが遅くなった場合、Datadog 内でその原因を確認することができます。
 
-### Feature flag tracking integration
+### 機能フラグ追跡インテグレーション
 
-LaunchDarkly's feature flag tracking integration enriches your RUM data with your feature flags to provide visibility into performance monitoring and behavioral changes. Determine which users are shown a user experience and if it is negatively affecting the user's performance.
+LaunchDarkly の機能フラグ追跡インテグレーションは、RUM データを機能フラグで強化し、パフォーマンスの監視と行動の変化を可視化します。どのユーザーにユーザーエクスペリエンスが表示され、それがユーザーのパフォーマンスに悪影響を及ぼしているかどうかを判断します。
 
-### Dashboard widget
+### ダッシュボードウィジェット
 
-LaunchDarkly's dashboard widget lets you pin a subset feature flag targeting toggles to your Datadog dashboards to monitor and perform a feature go-live from a single window.
+LaunchDarkly のダッシュボードウィジェットでは、サブセット機能のフラグターゲティングトグルを Datadog ダッシュボードに固定し、1 つのウィンドウから機能の稼働を監視・実行することができます。
 
-### Relay proxy metrics integration
+### リレープロキシメトリクスのインテグレーション
 
-If you are using the [LaunchDarkly Relay Proxy][2], you can configure it to export metrics, such as active and cumulative connections, to Datadog.
+[LaunchDarkly Relay Proxy][2] を使用している場合、アクティブ接続や累積接続などのメトリクスを Datadog にエクスポートするように構成することができます。
 
-## Setup
+## セットアップ
 
-### Events integration
+### イベントインテグレーション
 
-The LaunchDarkly events integration uses a [Datadog API key][3], which can be created by a Datadog admin. Once you obtain a Datadog API key, see the [LaunchDarkly documentation for the Datadog integration][4] to learn how to setup the LaunchDarkly events integration for Datadog.
+LaunchDarkly イベントインテグレーションは、Datadog の管理者が作成できる [Datadog API キー][3]を使用します。Datadog API キーを取得したら、[Datadog インテグレーションの LaunchDarkly ドキュメント][4]を参照して、Datadog 用の LaunchDarkly イベントインテグレーションを設定する方法を学びます。
 
-### Feature flag tracking setup
+### 機能フラグ追跡の設定
 
-Feature flag tracking is available in the RUM Browser SDK. For detailed set up instructions, visit the [Getting started with Feature Flag data in RUM][5] guide.
+機能フラグ追跡は、RUM ブラウザ SDK で利用可能です。詳細なセットアップ方法は、[RUM での機能フラグデータの概要][5]ガイドをご覧ください。
 
-1. Update your Browser RUM SDK version 4.25.0 or above.
-2. Initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with `["feature_flags"]`.
-3. Initialize LaunchDarkly's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code shown below.
+1. ブラウザ RUM SDK バージョン 4.25.0 以上に更新します。
+2. RUM SDK を初期化し、`["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+3. LaunchDarkly の SDK を初期化し、以下に示すコードのスニペットを使用して、Datadog へのインスペクターレポート機能フラグ評価を作成します。
 
 ```
 const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
@@ -133,55 +133,55 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 });
 ```
 
-### Dashboard widget
+### ダッシュボードウィジェット
 
-1. On the [LaunchDarkly integration tile][6], make sure the LaunchDarkly integration is installed.
-1. In Datadog, navigate to an existing dashboard or create a new one.
-1. Press the **Add Widgets** button to expose the widget drawer.
-1. Search for **LaunchDarkly** to find the LaunchDarkly widget in the **Apps** section of the widget drawer.
-1. Click or drag the LaunchDarkly widget icon to add it your your dashboard and open the **LaunchDarkly editor** modal.
-1. Press the **Connect** button to connect your LaunchDarkly account. A new window opens, prompting you to authorize Datadog.
-1. Click **Authorize**, which should navigate you back to Datadog.
-1. Next, configure the following widget options in the **LaunchDarkly editor**:
+1. [LaunchDarkly インテグレーションタイル][6]で、LaunchDarkly インテグレーションがインストールされていることを確認します。
+1. Datadog で、既存のダッシュボードに移動するか、新しいダッシュボードを作成します。
+1. **Add Widgets** ボタンを押すと、ウィジェットドローワが表示されます。
+1. **LaunchDarkly** と検索すると、ウィジェットドローワの **Apps** セクションに LaunchDarkly ウィジェットが見つかります。
+1. LaunchDarkly ウィジェットアイコンをクリックまたはドラッグしてダッシュボードに追加し、**LaunchDarkly editor** モーダルを開きます。
+1. LaunchDarkly アカウントを接続するには、**Connect** ボタンを押します。新しいウィンドウが開き、Datadog を認証するよう促されます。
+1. **Authorize** をクリックすると、Datadog に戻ります。
+1. 次に、**LaunchDarkly editor** で、以下のウィジェットオプションを構成します。
 
-   - **LaunchDarkly project**: The name of the LaunchDarkly project you wish to associate with the dashboard widget.
-   - **LaunchDarkly environment**: The name of the LaunchDarkly environment you wish to associate with the dashboard widget.
-   - **Environment template variable**: An optional [Datadog template variable][7] used to override the **LaunchDarkly environment** option.
-   - **LaunchDarkly tag filter**: An optional `+` separated list tags used to filter the feature flags displayed in the widget. If multiple tags are included, only flags that match **all** included tags appear in the widget. If omitted, all of the project's feature flags appear in the widget.
-   - **Sort**: The order the flags are displayed in the widget. Defaults to **Newest**.
+   - **LaunchDarkly project**: ダッシュボードウィジェットに関連付けたい LaunchDarkly プロジェクトの名前です。
+   - **LaunchDarkly environment**: ダッシュボードウィジェットに関連付けたい LaunchDarkly 環境の名前です。
+   - **Environment template variable**: **LaunchDarkly environment** オプションを上書きするために使用されるオプションの [Datadog テンプレート変数][7]です。
+   - **LaunchDarkly tag filter**: オプションの `+` 区切りリストタグで、ウィジェットに表示される機能フラグをフィルタリングすることができます。複数のタグが含まれている場合、含まれているすべてのタグにマッチするフラグのみがウィジェットに表示されます。省略された場合は、プロジェクトのすべての機能フラグがウィジェットに表示されます。
+   - **Sort**: ウィジェットに表示されるフラグの順番。デフォルトは **Newest** です。
 
-1. Optionally, give the widget a title.
-1. Press **Save** to finish configuring the Datadog dashboard widget.
+1. オプションでウィジェットのタイトルを指定します。
+1. **Save** を押して、Datadog ダッシュボードウィジェットの構成を完了します。
 
-### Relay Proxy metrics
+### Relay Proxy メトリクス
 
-Follow the Relay Proxy's [Metrics integrations documentation][8] to configure this feature.
+Relay Proxy の[メトリクスインテグレーションのドキュメント][8]に従って、この機能を構成することができます。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-The LaunchDarkly Relay Proxy can be configured to send the following metrics to Datadog:
+LaunchDarkly Relay Proxy は、以下のメトリクスを Datadog に送信するように構成することができます。
 
-- **`connections`**: The number of currently existing stream connections from SDKs to the Relay Proxy.
-- **`newconnections`**: The cumulative number of stream connections that have been made to the Relay Proxy since it started up.
-- **`requests`**: The cumulative number of requests received by all of the Relay Proxy's [service endpoints][9] (except for the status endpoint) since it started up.
+- **`connections`**: SDK から Relay Proxy への現在存在するストリーム接続数。
+- **`newconnections`**: Relay Proxy が起動してからのストリーム接続の累積数。
+- **`requests`**: Relay Proxy のすべての[サービスエンドポイント][9] (ステータスエンドポイントを除く) が起動してから受け取ったリクエストの累積数。
 
-### Events
+### イベント
 
-The LaunchDarkly events integration sends flag, project, and environment events from LaunchDarkly to Datadog.
+LaunchDarkly イベントインテグレーションは、LaunchDarkly から Datadog にフラグ、プロジェクト、環境イベントを送信します。
 
-### Service Checks
+### サービスチェック
 
-The LaunchDarkly integration does not include any service checks.
+LaunchDarkly インテグレーションには、サービスのチェック機能は含まれません。
 
-## Support
+## サポート
 
-Need help? Contact [Datadog Support][10].
+ご不明な点は、[Datadog のサポートチーム][10]までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-Learn more about [LaunchDarkly][1] and the [Datadog events integration][4].
+[LaunchDarkly][1] と [Datadog イベントインテグレーション][4]の詳細をご覧ください。
 
 [1]: https://launchdarkly.com
 [2]: https://docs.launchdarkly.com/home/relay-proxy

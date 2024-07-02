@@ -23,7 +23,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/statsd/README.md"
 "display_on_public_website": true
@@ -36,7 +36,7 @@
 "manifest_version": "2.0.0"
 "name": "statsd"
 "public_title": "StatsD"
-"short_description": "Monitor the availability of StatsD servers and track metric counts."
+"short_description": "StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。"
 "supported_os":
 - "linux"
 - "windows"
@@ -44,12 +44,12 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Monitor the availability of StatsD servers and track metric counts."
+  "description": "StatsD サーバーの可用性を監視し、メトリクスカウントを追跡。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -59,28 +59,28 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors the availability and uptime of non-Datadog StatsD servers. It also tracks the number of metrics, by metric type, received by StatsD.
+このチェックは、Datadog 以外の StatsD サーバーの可用性とアップタイムを監視します。また、StatsD が受け取ったメトリクス数をメトリクスタイプ別に追跡します。
 
-This check does **NOT** forward application metrics from StatsD servers to Datadog. It collects metrics about StatsD itself.
+このチェックは、アプリケーションメトリクスを StatsD サーバーから Datadog に**転送しません**。これは、StatsD 自体に関するメトリクスを収集します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The StatsD check is included in the [Datadog Agent][1] package, so you don't need to install anything else on any servers that run StatsD.
+StatsD チェックは [Datadog Agent][1] パッケージに含まれています。StatsD を実行するサーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `statsd.d/conf.yaml` in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample statsd.d/conf.yaml][2] for all available configuration options:
+1. [Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `statsd.d/conf.yaml` を編集します。使用可能なすべての構成オプションの詳細については、[サンプル statsd.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -90,37 +90,37 @@ To configure this check for an Agent running on a host:
        port: 8126 # or wherever your statsd listens
    ```
 
-2. [Restart the Agent][3] to start sending StatsD metrics and service checks to Datadog.
+2. [Agent を再起動][3]すると、Datadog への StatsD メトリクスおよびサービスチェックの送信が開始されます。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/statsd/datadog_checks/statsd/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-| Parameter            | Value                                 |
+| パラメーター            | 値                                 |
 | -------------------- | ------------------------------------- |
 | `<INTEGRATION_NAME>` | `statsd`                              |
-| `<INIT_CONFIG>`      | blank or `{}`                         |
+| `<INIT_CONFIG>`      | 空白または `{}`                         |
 | `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port":"8126"}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Log collection
+#### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `statsd.d/conf.yaml` file to start collecting your Supervisord Logs:
+2. Supervisord ログの収集を開始するには、次のコンフィギュレーションブロックを `statsd.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -129,39 +129,39 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
        source: statsd
    ```
 
-   Change the `path` parameter value and configure it for your environment. 
-   See the [sample statsd.d/conf.yaml][2] for all available configuration options.
+   `path` のパラメーター値を変更し、環境に合わせて構成してください。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル statsd.d/conf.yaml][2] を参照してください。
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
-### Validation
+### 検証
 
-Run the [Agent's status subcommand][4] and look for `statsd` under the Checks section.
+[Agent の status サブコマンド][4]を実行し、Checks セクションで `statsd` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "statsd" >}}
 
 
-### Events
+### イベント
 
-The StatsD check does not include any events.
+StatsD チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "statsd" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [StatsD, what it is and how it can help you][6]
-- [Visualize StatsD metrics with Counts Graphing][7]
+- [StatsD とは何か、そしてどのように役立つのか][6]
+- [Counts Graphing による StatsD メトリクスの可視化][7]
 
 
 

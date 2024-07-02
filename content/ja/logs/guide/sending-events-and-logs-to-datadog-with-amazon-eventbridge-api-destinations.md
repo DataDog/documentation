@@ -13,11 +13,11 @@ further_reading:
 
 Amazon EventBridge is a serverless event bus that enables you to build event-driven applications. EventBridge can integrate with your AWS services, but the API destinations feature lets you push and pull data from outside of AWS using APIs. This guide gives steps for sending your events and logs from EventBridge to Datadog. For more information about pushing your events from Datadog to EventBridge, [see the EventBridge integration docs][1].
 
-## Setup
+## セットアップ
 
 Before you begin, you need a [Datadog account][2], with [an API key][3], and you need access to [Amazon Eventbridge API destinations][4].
 
-### Configuration
+### 構成
 
 1. Follow the steps in the [Amazon Create an API destination docs][5] to add Datadog as an API destination.
     - Use API key authorization, with `DD-API-KEY` as your key name and your [Datadog API key][3] as the value.
@@ -32,7 +32,7 @@ Before you begin, you need a [Datadog account][2], with [an API key][3], and you
     ```
 4. Once events and logs are sending, after about five minutes, the data is available in the Datadog [Logs Console][12] or [Events Explorer][13], depending on which endpoint you are sending them to.
 
-## Troubleshooting
+## トラブルシューティング
 
 To see more details about the payloads sent to Datadog and to view the response of the API endpoints, set up an Amazon SQS queue:  
 1. Create a queue in [Amazon SQS][14].

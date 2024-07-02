@@ -1,6 +1,5 @@
 ---
 title: Advanced Options for Browser Testing Steps
-kind: documentation
 description: Configure advanced options for Browser Test Steps
 aliases:
   - /synthetics/guide/browser-tests-switch-tabs/
@@ -14,93 +13,93 @@ further_reading:
   text: Learn more about Browser Test Steps
 ---
 
-## Overview
+## 概要
 
-This page describes advanced options for Synthetic browser tests. 
+このページでは、Synthetic ブラウザテストの高度なオプションについて説明します。
 
 
-## Locate an element
+## 要素を探す
 
-### Datadog algorithm
+### Datadog アルゴリズム
 
-Flakiness is a pain point in end-to-end testing because tests occasionally fail when a frontend team implements changes, causing an identifier in your test to alert instead of an actual application issue.
+エンドツーエンドのテストでは、不安定であることがネックになります。なぜなら、フロントエンドのチームが変更を加えたときにテストが失敗し、実際のアプリケーションの問題ではなく、テスト内の識別子がアラートを発することがあるからです。
 
-To prevent flaky tests, Datadog uses an algorithm that leverages a set of locators to target elements in browser tests. A small change in the UI may modify an element (for example, moving it to another location). The browser test automatically locates the element again based on points of reference that were not affected by the change. 
+Datadog では、不安定なテストを防ぐために、ロケータのセットを活用したアルゴリズムを使って、ブラウザテストで要素をターゲットにしています。UI の小さな変更により、要素が変更されることがあります (例えば、別の場所に移動する)。ブラウザテストは、変更によって影響を受けなかった参照ポイントに基づいて、自動的に要素の位置を再確認します。
 
-When the test runs successfully, the browser test recomputes (or "self heals") any broken locators with updated values, ensuring your tests do not break from simple UI updates and that your tests are automatically adapting to your application's UI. 
+テストが正常に実行されると、ブラウザテストは壊れたロケータを更新された値で再計算 (または「自己修復」) し、単純な UI の更新でテストが壊れることがなく、テストがアプリケーションの UI に自動的に適応することを保証します。
 
-To ensure that your browser test does not validate an unexpected change, use [assertions][5] in your test creation. Assertions allow you to define what is and what is not expected behavior associated with the test step journey. 
+ブラウザテストで予期せぬ変更を検証しないようにするために、テスト作成時に[アサーション][5]を使用します。アサーションによって、テストステップのジャーニーに関連する期待される動作と期待されない動作とを定義することができます。
 
-### User specified locator
+### ユーザー指定のロケーター
 
-By default, browser tests use the Datadog locator system. When a test searches for a specific element to interact with (for example, a checkout button), instead of looking at an element with a specific XPath or a specific CSS selector, the test uses several different points of reference to locate the element (for example, XPath, text, classes, and nearby elements). 
+デフォルトでは、ブラウザテストは Datadog のロケータシステムを使用します。テストが対話する特定の要素 (例えばチェックアウトボタン) を探すとき、特定の XPath や特定の CSS セレクタで要素を探すのではなく、テストは要素を探すために複数の異なるポイント (例えば XPath、テキスト、クラス、近くの要素など) を使用するのです。
 
-These points of reference become a set of locators, each of which uniquely define the element. You should only use custom selectors in edge cases because the Datadog locator system enables tests to be self-maintaining.
+これらの参照点はロケータのセットとなり、それぞれが要素を一意に定義します。Datadog のロケータシステムは、テストの自己メンテナンスを可能にするため、カスタムセレクターはエッジケースにのみ使用する必要があります。
 
-Custom selectors are created by performing a step of interest in the recorder (such as a **click**, **hover**, or **assert**) on any element of your page. This specifies the kind of step that needs to be performed.
+カスタムセレクターは、レコーダーで興味のあるステップ (**クリック**、**ホバー**、**アサート**など) をページの任意の要素に実行することで作成されます。これは、実行する必要があるステップの種類を指定します。
 
-To use a specific identifier (for example, to click on the `nth` element in a dropdown menu regardless of what the content of the element is):
+特定の識別子を使用するには (例えば、要素の内容が何であるかに関係なく、ドロップダウンメニューの `nth` 要素をクリックする場合など)
 
-1. Record or manually add a [step][1] to your recording.
-2. Click on the recorded step and click **Advanced options**.
-3. Enter an XPath 1.0 selector or CSS class/ID under **User Specified Locator**, for example: `div`, `h1`, or `.hero-body`, for the HTML element.
-4. Once you have defined an element, click **Test** to highlight the element in the recording to the right.
+1. 記録するか、手動で[ステップ][1]を追加します。
+2. 記録されたステップをクリックし、**Advanced options** をクリックします。
+3. HTML 要素の **User Specified Locator** に XPath 1.0 セレクタまたは CSS クラス/ID (例: `div`、`h1`、または `.hero-body`) を入力します。
+4. 要素を定義した後、**Test** をクリックすると、記録中の要素が右の画面でハイライト表示されます。
 
-By default, the **If user specified locator fails, fail test** checkbox is selected. This means that if the defined locator fails, the test is considered a failure.
+デフォルトで、**If user specified locator fails, fail test** のチェックボックスはオンになっています。つまり、定義したロケータが失敗した場合、テストは失敗と見なされます。
 
-{{< img src="synthetics/browser_tests/advanced_options/css.mp4" alt="Test Highlighted Element" video=true >}}
+{{< img src="synthetics/browser_tests/advanced_options/css.mp4" alt="テストハイライト要素" video=true >}}
 
-You can decide to fall back on the regular browser test algorithm by clearing the **If user specified locator fails, fail test** box.
+通常のアルゴリズムでブラウザテストを行う場合は、**If user specified locator fails, fail test** チェックボックスをオフにしてください。
 
-{{< img src="synthetics/browser_tests/advanced_options/fail_test.png" alt="Fail test option" style="width:70%">}}
+{{< img src="synthetics/browser_tests/advanced_options/fail_test.png" alt="テスト失敗時のオプション" style="width:70%">}}
 
-## Timeout
+## タイムアウト
 
-If a browser test cannot locate an element, it retries the step for 60 seconds.
+ブラウザテストが要素を特定できない場合、ステップを 60 秒間再試行します。
 
-You can decide to decrease or increase this time out up to 300 seconds if you want your test to wait for less or more time to be able to find the step targeted element.
+このタイムアウト時間は、最長 300 秒まで増やしたり減らしたりできます。ターゲットの要素を特定できるまで待機する時間を変更するには、この秒数を指定してください。
 
-{{< img src="synthetics/browser_tests/advanced_options/time_before_fail.png" alt="Time before fail" style="width:50%">}}
+{{< img src="synthetics/browser_tests/advanced_options/time_before_fail.png" alt="エラーまでの時間" style="width:50%">}}
 
-## Optional step
+## オプションステップ
 
-In some cases, such as in the event of a pop-up, you may want to make some steps optional. To configure this option, select **Allow this step to fail**. If the step fails after the amount of minutes specified on the timeout option (60 seconds by default), then the test moves on and executes the next step.
+たとえばポップアップイベントなどで、いくつかのステップをオプションで追加することが必要になるかもしれません。その場合は、**Allow this step to fail** を選択してください。ステップが失敗したまま、タイムアウトオプションに指定した時間 (デフォルトでは 60 秒) を経過した場合に、テストが次のステップへと移動して実行されます。
 
-{{< img src="synthetics/browser_tests/advanced_options/timeout.png" alt="Timeout" style="width:25%">}}
+{{< img src="synthetics/browser_tests/advanced_options/timeout.png" alt="タイムアウト" style="width:25%">}}
 
-## Prevent screenshot capture
+## スクリーンショットのキャプチャを防ぐ
 
-You can prevent a step screenshot from being captured at test execution. This is helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failure troubleshooting more difficult. For more information, see [Synthetic Monitoring Data Security][2].
+テストの実行時に手順のスクリーンショットがキャプチャされないようにできます。テスト結果に機密データを含めたくない場合に有用です。障害発生時のトラブルシューティングに影響を及ぼす可能性があるため、慎重に使用してください。詳しくは、[Synthetic Monitoring Data Security][2] をご覧ください。
 
-{{< img src="synthetics/browser_tests/advanced_options/screenshot_capture_option.png" alt="Screenshot capture option" style="width:50%">}}
+{{< img src="synthetics/browser_tests/advanced_options/screenshot_capture_option.png" alt="スクリーンショットのキャプチャオプション" style="width:50%">}}
 
-**Note:** This feature is also available at the global test level as an [advanced option][3] in your browser test configuration.
+**注:** この機能は、ブラウザテストのコンフィギュレーションの[高度なオプション][3]として、グローバルテストレベルでも利用可能です。
 
-## Subtests
+## サブテスト
 
-The advanced options for [subtests][4] allow you to choose where you want your subtest to be played and set the behavior of your browser test if the subtest fails.
+[サブテスト][4]の高度なオプションでは、サブテストを再生する場所を選択したり、サブテストが失敗した場合のブラウザテストの動作を設定することができます。
 
-{{< img src="synthetics/browser_tests/advanced_options/subtest_advanced.png" alt="Advanced options for subtests in browser tests" style="width:60%">}}
+{{< img src="synthetics/browser_tests/advanced_options/subtest_advanced.png" alt="ブラウザテストにおけるサブテストの高度なオプション" style="width:60%">}}
 
-### Set the subtest window
+### サブテストウィンドウを設定する
 
-* **Main (default)**: Subtest is played in your main window, in sequence with other steps.
-* **New**: Subtest is played in a new window, which is closed at the end of the subtest. This means the window cannot be reused.
-* **Specific window**: Subtest is played in a numbered window, which can be reused by other subtests.
+* **Main（デフォルト）**: サブテストはメインのウィンドウで、他のステップに続いて実行されます。
+* **New**: サブテストは新しいウィンドウで実行され、終了時にタブが閉じます。つまり、他のテストではそのウィンドウを使用できません。
+* **Specific window**: サブテストは番号の付いたウィンドウで実行されます。そのため、他のテストでもそのウィンドウを使用できます。
 
-Opening your subtest in the main window means that your subtest is the continuation of your main test as it uses the URL from the previous step. Opening your subtest in a new window, or in a specific window, means that the test starts running from the subtest start URL.
+サブテストをメインウィンドウで開くと、サブテストはメインのテストに続いて、先行するステップと同じ URL で実行されます。新しいウィンドウまたは特定のウィンドウで開くと、テストはサブテストの開始 URL で実行されます。
 
-### Set failure behavior
+### 失敗時の動作を設定する
 
-Click **Continue with test if this step fails** and **Consider entire test as failed if this step fails** to ensure your browser test continues if the subtest fails, or fails entirely if the subtest fails.
+**Continue with test if this step fails** (このステップが失敗した場合はテストを続行する) と **Consider entire test as failed if this step fails** (このステップが失敗した場合はテスト全体を失敗とみなす) をクリックして、サブテストが失敗した場合はブラウザテストを継続し、サブテストが失敗した場合は完全に失敗するようにします。
 
-### Override variables in subtests
+### サブテストの変数をオーバーライドする
 
-To override a variable value in a browser test subtest, name the variable in the subtest and use the same variable name in the parent test, and the browser test overrides the subtest value.
+ブラウザテストのサブテストの変数値をオーバーライドするには、サブテストで変数名を付け、親テストで同じ変数名を使用すると、ブラウザテストはサブテストの値をオーバーライドします。
 
-For more information, see [Browser Test Steps][4].
+詳しくは、[ブラウザテストステップ][4]をご覧ください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

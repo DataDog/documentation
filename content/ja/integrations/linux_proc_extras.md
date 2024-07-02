@@ -21,13 +21,13 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/linux_proc_extras/README.md"
 "display_on_public_website": true
 "draft": false
 "git_integration_title": "linux_proc_extras"
-"integration_id": "system"
+"integration_id": "システム"
 "integration_title": "Linux Proc Extras"
 "integration_version": "2.5.0"
 "is_public": true
@@ -60,13 +60,13 @@ Get metrics from linux_proc_extras service in real time to:
 - Visualize and monitor linux_proc_extras states
 - Be notified about linux_proc_extras failovers and events.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Linux_proc_extras check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
 
-### Configuration
+### 構成
 
 1. Edit the `linux_proc_extras.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][2]. See the [sample linux_proc_extras.d/conf.yaml][3] for all available configuration options.
 
@@ -76,21 +76,21 @@ The Linux_proc_extras check is included in the [Datadog Agent][1] package, so yo
 
 [Run the Agent's status subcommand][5] and look for `linux_proc_extras` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "linux_proc_extras" >}}
 
 
-### Events
+### イベント
 
 The Linux Proc Extras check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Linux Proc Extras check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

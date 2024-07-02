@@ -23,7 +23,7 @@
   "support_email": brent@bmontague.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/resin/README.md"
 "display_on_public_website": true
@@ -63,13 +63,13 @@
 
 This check monitors [Resin][1] through the Datadog Agent.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Resin check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Configuration
+### 構成
 
 1. Configure the [resin default server][3] to enable JMX by adding the following JVM arguments:
 
@@ -104,21 +104,21 @@ logs_enabled: true
         source: resin
     ```
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "resin" >}}
 
 
-### Events
+### イベント
 
 Resin does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "resin" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

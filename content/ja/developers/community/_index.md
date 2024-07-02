@@ -9,13 +9,13 @@ further_reading:
   text: Introducing the Datadog Open Source Hub
 ---
 
-Datadog loves our awesome open source community! We wouldn't be able to do it without you.
+私たちは皆様のおかげで成り立つこの素晴らしいオープンソースコミュニティを大切にしています。
 
-{{< whatsnext desc="Check out our community resources:" >}}
-    {{< nextlink href="https://opensource.datadoghq.com/">}}Visit the Open Source Hub, a central, dedicated space where you can learn about the open source projects Datadog is engaged in.{{< /nextlink >}}
-    {{< nextlink href="developers/community/libraries" >}}Datadog supported and community supported open source libraries and SDKs.{{< /nextlink >}}
+{{< whatsnext desc="コミュニティリソースをチェック:" >}}
+    {{< nextlink href="https://opensource.datadoghq.com/">}}Datadog が取り組んでいるオープンソースプロジェクトについて学べる中央の専用スペース、Open Source Hub にアクセスしてください。{{< /nextlink >}}
+    {{< nextlink href="developers/community/libraries" >}}Datadog およびコミュニティによってサポートされるオープンソースライブラリと SDK。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

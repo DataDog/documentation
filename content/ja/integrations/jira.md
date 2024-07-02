@@ -4,9 +4,9 @@
 - "developer tools"
 - "issue tracking"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "This integration allows you to create tickets from triggered alerts in Datadog, and update existing tickets with new information as it arises. Additionally, you can see Jira ticket creations as events within Datadog to overlay with all of your metrics."
+"description": "このインテグレーションにより、Datadog でトリガーされたアラートからチケットを作成し、新しい情報が発生すると既存のチケットを更新することができます。さらに、Jira チケットの作成を Datadog 内のイベントとして表示し、すべてのメトリクスと重ね合わせることができます。"
 "doc_link": "https://docs.datadoghq.com/integrations/jira/"
 "draft": false
 "git_integration_title": "jira"
@@ -27,7 +27,7 @@
 
 Jira is an issue and project tracking system for software teams. The Datadog Jira integration allows you to create issues from triggered alerts, incidents, and cases in Datadog and view issues created in Jira as Datadog events.
 
-## Setup
+## セットアップ
 
 ### Create an application link in Jira
 
@@ -65,79 +65,78 @@ Jira is an issue and project tracking system for software teams. The Datadog Jir
 3. Click **Connect** and follow the instructions on the Jira authorization page. Datadog recommends having a dedicated (non-personal) Jira service account specifically for this integration for optimal and more consistent results. Be sure to log into this account before hitting **Connect**.
 **Note**: The Datadog Jira integration can connect to On-Prem/Jira Server and Jira Data Center instances. However, many of these instances blacklist IP ranges. For the integration to work, follow the IP filtering documentation below.
 
-### IP filtering
+### IP フィルタリング
 
-If your Jira instance filters traffic by IP address, you need to allow connections from the **Webhooks** 
-IP prefixes belonging to Datadog in order for the integration to work. For a list of **Webhooks** IP prefixes for your region, see [Datadog IP Ranges][2].
+Jira インスタンスが IP アドレスによってトラフィックをフィルタリングする場合、インテグレーションが機能するためには、Datadog に属する **Webhooks** IP プレフィックスからの接続を許可する必要があります。お住まいの地域の **Webhooks** IP プレフィックスのリストについては、[Datadog IP 範囲][2]を参照してください。
 
-### Further configuration
+### 詳細なコンフィギュレーション
 
-To configure automated Jira issue creation with bidirectional syncing in Case Management, see the instructions for [Configuring a Jira webhook](#configure-a-jira-webhook) and the [Case Management][3] documentation. 
+Case Management で双方向同期による Jira 課題の自動作成を構成するには、[Jira webhook の構成](#configure-a-jira-webhook)の説明および [Case Management][3] のドキュメントを参照してください。
 
-To create Jira issues from Datadog monitor alerts, see [Configure an issue template](#configure-an-issue-template). 
+Datadog モニターアラートから Jira 課題を作成するには、[課題テンプレートの構成](#configure-an-issue-template)を参照してください。
 
-## Configure a Jira webhook
+## Jira webhook の構成
 
-Configuring a webhook enables cases created in Case Management to automatically create issues in Jira and keep both resources synced. 
+Webhook を構成することで、Case Management で作成されたケースが自動的に Jira に課題を作成し、両方のリソースを同期させることができます。
 
-To create a Jira webhook:
-1. In Jira, click the **Gear** icon in the top right corner and select **System**.
-1. In the left menu under *Advanced*, click **Webhooks**.
-1. Click **Create a Webhook** in the right corner.
-1. Enter `Datadog Webhook` as the webhook name.
-1. Keep the status as **Enabled**.
-1. Navigate to the [Datadog Jira integration tile][4].
-1. Under the Webhooks section, copy the webhook URL.
-1. Navigate back to Jira and paste the webhook URL under *URL*.
-1. Enable the following issue-related events. If you only want to send a subset of issue events, you can use JQL to filter them. In this example we are filtering only for projects AB and CD.
-    {{< img src="integrations/jira/jira_issue_events.png" alt="Jira Issue Events" style="width:80%;">}}
-1. Enable the `deleted` project-related events.
-1. Leave everything else unchecked.
-1. Click the **Create** button at the bottom of the page.
+Jira webhook を作成するには
+1. Jira で右上の**歯車**アイコンをクリックし、**System** を選択します。
+1. 左メニューの *Advanced* で、**Webhooks** をクリックします。
+1. 右隅の **Create a Webhook** をクリックします。
+1. webhook 名には `Datadog Webhook` と入力します。
+1. ステータスを **Enabled** のままにします。
+1. [Datadog Jira インテグレーションタイル][4]に移動します。
+1. Webhooks セクションで、webhook URL をコピーします。
+1. Jira に戻り、*URL* の下に webhook URL を貼り付けます。
+1. 以下の課題関連イベントを有効にします。課題イベントのサブセットのみを送信したい場合は、JQL を使用してフィルタリングできます。この例では、プロジェクト AB と CD のみをフィルタリングしています。
+    {{< img src="integrations/jira/jira_issue_events.png" alt="Jira 課題イベント" style="width:80%;">}}
+1. `deleted` プロジェクト関連のイベントを有効にします。
+1. その他の項目はチェックを入れないでください。
+1. ページ下部の **Create** ボタンをクリックします。
 
-## Configure an issue template
+## 課題テンプレートを構成する
 
-Issue templates define how issues are created in Jira from Datadog alert events.
+課題テンプレートは、Datadog のアラートイベントから Jira で課題がどのように作成されるかを定義します。
 
-To create an issue template:
+課題テンプレートを作成するには
 
-1. In Datadog, click **New Issue Template** in the **Connect Jira to Monitor Notifications** section.
-2. Enter a name for your issue template. This name, prefixed with `jira-`, becomes the handle you can use in your monitor to send notifications to (such as `jira-my-issue-template-name`).
-3. Select a Jira account.
-4. Select the project and issue type (such as **Story**, **Epic**, **Task**, or **Bug**).
-5. A list of configurable fields appears. Enter values in the desired fields and click **Save**.
+1. Datadog で、**Connect Jira to Monitor Notifications** セクションの **New Issue Template** をクリックします。
+2. 課題テンプレートの名前を入力します。この名前の前に `jira-` を付けると、モニターで通知を送るためのハンドルになります (`jira-my-issue-template-name` のように)。
+3. Jira アカウントを選択します。
+4. プロジェクトと課題の種類 (**Story**、*Epic**、*Task**、*Bug**など) を選択します。
+5. 構成可能なフィールドのリストが表示されます。必要な項目に値を入力し、** Save** をクリックします。
 
-### Configure issue fields
+### 課題のフィールドを構成する
 
-Issue template fields define the data that is included when creating issues in Jira. For example, you can configure your template to create issues with a specific priority or a default assignee.
+課題テンプレートフィールドは、Jira で課題を作成する際に含まれるデータを定義します。たとえば、特定の優先度やデフォルトの担当者で課題を作成するようにテンプレートを構成することができます。
 
-You can use data from the alert event to populate values in the issue fields using template variables such as `${EVENT_TITLE}`. For a list of possible variables, see the [Datadog Webhooks integration][5]. 
+`${EVENT_TITLE}` などのテンプレート変数を使用すると、アラートイベントのデータを使用して、課題フィールドに値を入力することができます。使用可能な変数の一覧は、[Datadog Webhooks インテグレーション][5]を参照してください。
 
-## Usage
+## 使用方法
 
-#### Automatically create issues from Datadog alerts
+#### Datadog アラートから自動的に課題を作成する
 
-To create Jira issues from Datadog alert events, enter the notification handle of one or more issue templates such as `@jira-my-issue-template` when creating a monitor in the **Notify your team** or **Say what's happening** sections.
+Datadog のアラートイベントから Jira 課題を作成するには、**Notify your team** または **Say what's happening** セクションでモニターを作成する際に `@jira-my-issue-template` などの 1 つまたは複数の課題テンプレートの通知ハンドルを入力する必要があります。
 
-Issues are created when the monitor triggers. New issues are not created by the monitor until the monitor is resolved.
+課題は、モニターがトリガーされたときに作成されます。モニターが解決されるまで、モニターによって新しい課題が作成されることはありません。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-The Jira integration does not include any metrics.
+Jira インテグレーションには、メトリクスは含まれません。
 
-### Events
+### イベント
 
-All created Jira issues appear as events within Datadog.
+作成されたすべての Jira の課題は、Datadog 内にイベントとして表示されます。
 
-### Service Checks
+### サービスチェック
 
-The Jira integration does not include any service checks.
+Jira インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][6].
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://app.datadoghq.com/integrations/jira
 [2]: https://docs.datadoghq.com/api/latest/ip-ranges/

@@ -9,32 +9,32 @@ further_reading:
 
 {{% site-region region="us3,us5,eu,ap1,gov" %}}
 <div class="alert alert-warning">
-PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
+APM およびログ管理における PCI DSS 準拠は、<a href="/getting_started/site/">US1 サイト</a>の Datadog 組織でのみ利用可能です。
 </div>
 {{% /site-region %}}
 
 {{% site-region region="us" %}}
 <div class="alert alert-warning">
-PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
+APM およびログ管理における PCI DSS 準拠は、<a href="/getting_started/site/">US1 サイト</a>の Datadog 組織でのみ利用可能です。
 </div>
 
-## Overview
+## 概要
 
-The Payment Card Industry (PCI) Data Security Standard (DSS) has rigorous monitoring and data security requirements for all merchants, service providers, and financial institutions. To meet these requirements, organizations have had to separate out PCI-regulated data and non-regulated data to different applications for monitoring.
+Payment Card Industry (PCI) データセキュリティ基準 (DSS) には、すべての加盟店、サービスプロバイダー、および金融機関を対象とした厳格な監視およびデータセキュリティの要件が定められています。これらの要件を満たすために、組織は PCI で規制されるデータと規制されないデータを別のアプリケーションに分離して監視する必要がありました。
 
-Datadog offers PCI-compliant Log Management and Application Performance Monitoring (APM) within the [US1 site][1] so that you can collect all of your logs, whether they are PCI-regulated or not, in one place. See [Set up a PCI-compliant Datadog organization](#set-up-a-pci-compliant-datadog-organization) on how to get started.
+Datadog は、PCI に準拠したログ管理およびアプリケーションパフォーマンス監視 (APM) の機能を [US1 サイト][1]内で提供しており、PCI の規制対象かどうかにかかわらず、すべてのログを 1 か所に集めることができます。開始方法については、[PCI 準拠の Datadog 組織をセットアップする](#set-up-a-pci-compliant-Datadog-organization)を参照してください。
 
-## Set up a PCI-compliant Datadog organization
+## PCI 準拠の Datadog 組織をセットアップする
 
 {{< tabs >}}
 
-{{% tab "Log Management" %}}
+{{% tab "ログ管理" %}}
 
 <div class="alert alert-danger">
-<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> must be enabled and remain enabled for PCI DSS compliance.
+PCI DSS 準拠のためには、<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">監査証跡</a>を有効にし、その状態を維持する必要があります。
 </div>
 
-To set up a PCI-compliant Datadog organization, follow these steps:
+PCI 準拠の Datadog 組織をセットアップするには、以下の手順に従います。
 
 {{% pci-logs %}}
 
@@ -43,10 +43,10 @@ To set up a PCI-compliant Datadog organization, follow these steps:
 {{% tab "APM" %}}
 
 <div class="alert alert-danger">
-<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> must be enabled and remain enabled for PCI DSS compliance.
+PCI DSS 準拠のためには、<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">監査証跡</a>を有効にし、その状態を維持する必要があります。
 </div>
 
-To set up a PCI-compliant Datadog organization, follow these steps:
+PCI 準拠の Datadog 組織をセットアップするには、以下の手順に従います。
 
 {{% pci-apm %}}
 
@@ -58,6 +58,6 @@ To set up a PCI-compliant Datadog organization, follow these steps:
 
 {{% /site-region %}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

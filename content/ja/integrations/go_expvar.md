@@ -23,7 +23,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "languages"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/go_expvar/README.md"
 "display_on_public_website": true
@@ -67,13 +67,13 @@ Track the memory usage of your Go services and collect metrics instrumented from
 
 If you prefer to instrument your Go code using only [dogstats-go][2], you can still use this integration to collect memory-related metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Go Expvar check is packaged with the Agent, so [install the Agent][3] anywhere you run Go services to collect metrics.
 
-### Configuration
+### 構成
 
 #### Prepare the service
 
@@ -82,7 +82,7 @@ If your Go service doesn't use the [expvar package][4] already, import it (`impo
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -123,21 +123,21 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
 
 [Run the Agent's status subcommand][6] and look for `go_expvar` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "go_expvar" >}}
 
 
-### Events
+### イベント
 
 The Go-Expvar check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Go-Expvar check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

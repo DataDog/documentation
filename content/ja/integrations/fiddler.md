@@ -27,7 +27,7 @@
 - alerting
 - metrics
 - ai/ml
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/fiddler/README.md"
 "display_on_public_website": true
@@ -90,11 +90,11 @@
 Fiddler's Model Performance Management platform monitors Machine Learning model performance by sending real-time alerts when model performance metrics drop, allowing users to analyze inference data to understand why model performance is degrading. This integration includes metrics and an out-of-the-box dashboard that displays performance metrics such as accuracy, traffic, and drift.
 
 
-## Setup
+## セットアップ
 
 The Fiddler check is not included in the [Datadog Agent][1] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Fiddler check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -106,7 +106,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Fiddler 
 
 2. Configure your integration similar to Agent-based [integrations][3].
 
-### Configuration
+### 構成
 
 1. Edit the `fiddler.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Fiddler performance data. See the [sample `fiddler.d/conf.yaml`][4] for all available configuration options. The `url`, `org`, and `fiddler_api_key` parameters need to be updated for the Fiddler environment you wish the integration to query. Fiddler also suggests setting the `minimum_collection_interval` setting in the `conf.yaml` file to `300` (5 minutes).
 
@@ -116,17 +116,17 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Fiddler 
 
 [Run the Agent's status subcommand][6] and look for `fiddler` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 See [metadata.csv][7] for a list of metrics provided by this check.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "fiddler" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Fiddler support][9].
 

@@ -22,7 +22,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "security"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rbltracker/README.md"
 "display_on_public_website": true
@@ -65,7 +65,7 @@ Connect your [RBLTracker][1] account to Datadog to:
 - Push listing events from RBLTracker to your dashboard.
 - Push de-listing events from RBLTracker to your dashboard.
 
-## Setup
+## セットアップ
 
 Setting up RBLTracker using webhooks:
 
@@ -76,21 +76,21 @@ Setting up RBLTracker using webhooks:
 
 RBLTracker sends listing and delisting alerts to your Datadog events dashboard. See [Adding a Datadog Contact Type][3] for a full integration guide.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The RBLTracker check does not include any metrics.
 
-### Events
+### イベント
 
 Push your RBLTracker listing/de-listing events into your [Datadog Event Stream][4].
 
-### Service Checks
+### サービスチェック
 
 The RBLTracker check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

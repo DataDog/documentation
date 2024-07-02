@@ -23,7 +23,7 @@
 "categories":
 - security
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/lacework/README.md"
 "display_on_public_website": true
@@ -64,11 +64,11 @@
 
 Use the Datadog-Lacework integration to forward your Lacework logs and events to Datadog.
 
-## Setup
+## セットアップ
 
 All configuration happens on Lacework Dashboard. Find details on how to set it up in the [Lacework Documentation][1]. Datadog automatically enables the right logs processing pipeline when it detects Lacework logs.
 
-### Installation
+### インストール
 
 1. In Lacework, go to _Settings_ and select _Integrations_.
 2. In the _Outgoing_ section (on the left panel) select Datadog.
@@ -89,13 +89,13 @@ All configuration happens on Lacework Dashboard. Find details on how to set it u
    - **API KEY**: Enter your [Datadog API key][2].
    - **Alert Security Level**: Select the minimum log severity level of forwarded logs
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Lacework integration does not collect any metrics.
 
-### Service Checks
+### サービスチェック
 
 The Lacework integration does not include any service checks.
 
@@ -103,11 +103,11 @@ The Lacework integration does not include any service checks.
 
 The Lacework integration can be configured to send Logs.
 
-### Events
+### イベント
 
 The Lacework integration can be configured to send Events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

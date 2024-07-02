@@ -2,9 +2,9 @@
 "categories":
 - "provisioning"
 - "configuration & deployment"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track Puppet runs: know when they fail, succeed, or make big changes."
+"description": "Puppet の実行を追跡。失敗、成功、大きな変更を把握。"
 "doc_link": "https://docs.datadoghq.com/integrations/puppet/"
 "draft": false
 "git_integration_title": "puppet"
@@ -29,27 +29,27 @@ Connect Puppet to Datadog in order to:
 - Track key Puppet performance metrics across all your servers.
 - Quickly identify and discuss failed Puppet runs with your team
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To install the Datadog Agent with Puppet, see the [Datadog Puppet Agent repository][1] on GitHub.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "puppet" >}}
 
 
-### Events
+### イベント
 
 The Puppet integration includes status events for failure, success, changed, and unchanged resources.
 
-### Service Checks
+### サービスチェック
 
 The Puppet integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

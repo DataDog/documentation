@@ -23,7 +23,7 @@
   "support_email": KosukeKamiya@users.noreply.github.com
 "categories":
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md"
 "display_on_public_website": true
@@ -66,11 +66,11 @@ Connect to Zabbix to:
 - Monitor [Zabbix][1] through the Datadog Agent.
 - Send Zabbix alerts to Datadog to see the alerts as events in your Datadog event stream.
 
-## Setup
+## セットアップ
 
 The Zabbix check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Zabbix check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -82,7 +82,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Zabbix c
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Make sure that your Zabbix server timezone is set to UTC. More information about Zabbix time zones can be found on the [Zabbix documentation][5].
 
@@ -154,21 +154,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Zabbix c
 
 Run the [Agent's status subcommand][8] and look for `zabbix` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "zabbix" >}}
 
 
-### Events
+### イベント
 
 Zabbix alerts are collected as events in the Datadog event stream.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "zabbix" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][11].
 

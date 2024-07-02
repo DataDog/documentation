@@ -24,7 +24,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/datazoom/README.md"
 "display_on_public_website": true
@@ -63,51 +63,51 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
-Datazoom is a video data platform that gathers data from endpoints through an ecosystem of collectors.
+Datazoom は、コレクターのエコシステムを通じてエンドポイントからデータを収集するビデオデータプラットフォームです。
 
-The [Datazoom Datadog Connector][1] sends collector data to Datadog, where you can query the data in your [Log Explorer][2].
+[Datazoom Datadog Connector][1] は、コレクターのデータを Datadog に送信し、[ログエクスプローラー][2]でデータをクエリすることができます。
 
-Datazoom sends data set at the INFO level.
+Datazoom は INFO レベルに設定されたデータを送信します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Datazoom integration emits logs to Datadog. No installation is required on the Datadog side.
+Datazoom インテグレーションは、Datadog にログを出力します。Datadog 側でのインストールは必要ありません。
 
-### Configuration
+### 構成
 
-- Visit Datazoom's integration [documentation][1] for details on how to configure the Datazoom Datadog Connector.
+- Datazoom Datadog Connector の構成方法の詳細については、Datazoom のインテグレーション[ドキュメント][1]をご覧ください。
 
-### Dashboard
+### ダッシュボード  
 
-See the [Datazoom logs dashboard][3].
+[Datazoom ログダッシュボード][3]をご覧ください。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-Datazoom does not include any metrics.
+Datazoom には、メトリクスは含まれません。
 
-### Service Checks
+### サービスチェック
 
-Datazoom does not include any service checks.
+Datazoom には、サービスのチェック機能は含まれません。
 
-### Events
+### イベント
 
-Datazoom does not include any events.
+Datazoom には、イベントは含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][4].
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Blog: Monitor Datazoom telemetry with Datadog][5]
+- [ブログ: Datadog で Datazoom のテレメトリーを監視する][5]
 
 [1]: https://help.datazoom.io/hc/en-us/articles/360042494512-Datadog
 [2]: https://app.datadoghq.com/logs

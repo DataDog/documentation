@@ -26,7 +26,7 @@
 - incidents
 - issue tracking
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/squadcast/README.md"
 "display_on_public_website": true
@@ -73,7 +73,7 @@ Connect Squadcast to Datadog in order to:
 - Tackle alerts or incidents and set up escalation policies as they occur
 - Define on-call schedules and set up customizable reminders of who is on-call
 
-## Setup
+## セットアップ
 
 **Note**: Only Squadcast users with the correct team-level privileges can configure services in Squadcast. At least one escalation policy must be configured before a service can be added.
 
@@ -153,20 +153,20 @@ Follow these steps in Datadog:
 
 **Note**: Once the Webhook for Squadcast is configured, select the same as a channel under **Notify your team** in the Datadog monitor's configuration.
 
-## Data Collected
-### Metrics
+## 収集データ
+### メトリクス
 
 Squadcast integration does not include any metrics.
 
-### Events
+### イベント
 
 Your Squadcast triggered and resolved events display in your Squadcast platform dashboard.
 
-### Service Checks
+### サービスチェック
 
 Squadcast integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 Need help? Contact [Datadog Support][3].
 
 

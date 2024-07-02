@@ -37,7 +37,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "metrics"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/php_fpm/README.md"
 "display_on_public_website": true
@@ -79,20 +79,20 @@
 
 The PHP-FPM check monitors the state of your FPM pool and tracks request performance.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The PHP-FPM check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
 
-### Configuration
+### 構成
 
 Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Containerized](#containerized) section.
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -203,21 +203,21 @@ If your PHP-FPM installation uses unix sockets, you have to use the below syntax
 
 [Run the Agent's `status` subcommand][3] and look for `php_fpm` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "php_fpm" >}}
 
 
-### Events
+### イベント
 
 The PHP-FPM check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "php_fpm" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

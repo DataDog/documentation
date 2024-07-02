@@ -34,7 +34,7 @@
 - kubernetes
 - log collection
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/coredns/README.md"
 "display_on_public_website": true
@@ -70,33 +70,33 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-Get metrics from CoreDNS in real time to visualize and monitor DNS failures and cache hits or misses.
+CoreDNS からリアルタイムにメトリクスを取得して、DNS エラーとキャッシュのヒットまたはミスを視覚化および監視します。
 
-## Setup
+## セットアップ
 
 
-Starting with version 1.11.0, this OpenMetrics-based integration has a latest mode (enabled by setting `openmetrics_endpoint` to point to the target endpoint) and a legacy mode (enabled by setting `prometheus_url` instead). To get all the most up-to-date features, Datadog recommends enabling the latest mode. For more information, see [Latest and Legacy Versioning For OpenMetrics-based Integrations][1].
+バージョン 1.11.0 から、この OpenMetrics ベースのインテグレーションには、最新モード (ターゲットエンドポイントを指すように `openmetrics_endpoint` を設定することで有効) とレガシーモード (代わりに `prometheus_url` を設定することで有効) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。詳細は [OpenMetrics ベースのインテグレーションにおける最新バージョンとレガシーバージョン][1]を参照してください。
 
-The latest mode of the CoreDNS check requires Python 3 and submits `.bucket` metrics and submits the `.sum` and `.count` histogram samples as monotonic count type. These metrics were previously submitted as `gauge` type in the legacy mode. See the [`metadata.csv` file][2] for a list of metrics available in each mode. 
+CoreDNS チェックの最新モードは Python 3 を必要とし、`.bucket` メトリクスを送信し、`.sum` と `.count` ヒストグラムサンプルを単調カウント型として送信します。これらのメトリクスはレガシーモードでは `gauge` 型で送信されていました。各モードで利用できるメトリクスの一覧は [`metadata.csv` ファイル][2]を参照してください。
 
-For hosts unable to use Python 3, or if you previously implemented this integration mode, see the `legacy` mode [configuration example][3]. For Autodiscovery users relying on the `coredns.d/auto_conf.yaml` file, this file enables the `prometheus_url` option for the `legacy` mode of the check by default. See the sample [coredns.d/auto_conf.yaml][4] for the default configuration options and the sample [coredns.d/conf.yaml.example][5] for all available configuration options.
+Python 3 を使用できないホスト、または以前にこのインテグレーションモードを実装した場合は、`legacy` モードの[構成例][3]を参照してください。`coredns.d/auto_conf.yaml` ファイルに依存しているオートディスカバリーのユーザーのために、このファイルはデフォルトで `legacy` モードのチェックのために `prometheus_url` オプションを有効にします。デフォルトの構成オプションについては [coredns.d/auto_conf.yaml][4] のサンプルを、利用可能なすべての構成オプションについては [coredns.d/conf.yaml.example][5] のサンプルを参照してください。
 
-### Installation
+### インストール
 
-The CoreDNS check is included in the [Datadog Agent][6] package, so you don't need to install anything else on your servers.
+CoreDNS チェックは [Datadog Agent][6] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 {{< tabs >}}
 {{% tab "Docker" %}}
 #### Docker
 
-To configure this check for an Agent running on a container:
+コンテナで実行中の Agent に対してこのチェックを構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integration Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["coredns"]'
@@ -104,23 +104,23 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]'
 ```
 
-To enable the legacy mode of this OpenMetrics-based check, replace `openmetrics_endpoint` with `prometheus_url`:
+この OpenMetrics ベースのチェックのレガシーモードを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えます。
 
 ```yaml
 LABEL "com.datadoghq.ad.instances"='[{"prometheus_url":"http://%%host%%:9153/metrics", "tags":["dns-pod:%%host%%"]}]' 
 ```
 
-**Notes**:
+**注**:
 
-- The shipped `coredns.d/auto_conf.yaml` file enables the `prometheus_url` option by default for legacy mode. 
-- The `dns-pod` tag keeps track of the target DNS pod IP. The other tags are related to the Datadog Agent that is polling the information using the service discovery.
-- The service discovery annotations need to be done on the pod. In case of a deployment, add the annotations to the metadata of the template's specifications. Do not add it at the outer specification level.
+- 出荷時の `coredns.d/auto_conf.yaml` ファイルは、レガシーモードのデフォルトで `prometheus_url` オプションを有効にします。
+- `dns-pod` タグは、対象の DNS ポッド IP を追跡します。他のタグは、サービスディスカバリーを使用して情報をポーリングする Datadog Agent に関連します。
+- ポッドでサービスディスカバリーアノテーションを実行する必要があります。デプロイの場合は、テンプレートの仕様のメタデータにアノテーションを追加します。外側のレベルの仕様には追加しないでください。
 
-#### Log collection
+#### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"coredns","service":"<SERVICE_NAME>"}]'
@@ -134,13 +134,13 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"coredns","service":"<SERVICE_NAME>"}]
 
 #### Kubernetes
 
-To configure this check for an Agent running on Kubernetes:
+このチェックを、Kubernetes で実行している Agent に構成します。
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Alternatively, you can configure templates with a [file, configmap, or key-value store][2].
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][2]を使用してテンプレートを構成することもできます。
 
-**Annotations v1** (for Datadog Agent < v7.36)
+**Annotations v1** (Datadog Agent < v7.36 向け)
 
 ```yaml
 apiVersion: v1
@@ -164,7 +164,7 @@ spec:
     - name: coredns
 ```
 
-**Annotations v2** (for Datadog Agent v7.36 or later)
+**Annotations v2** (Datadog Agent v7.36 以降向け)
 
 ```yaml
 apiVersion: v1
@@ -191,9 +191,9 @@ spec:
     - name: coredns
 ```
 
-To enable the legacy mode of this OpenMetrics-based check, replace `openmetrics_endpoint` with `prometheus_url`:
+この OpenMetrics ベースのチェックのレガシーモードを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えます。
 
-**Annotations v1** (for Datadog Agent < v7.36)
+**Annotations v1** (Datadog Agent < v7.36 向け)
 
 ```yaml
     ad.datadoghq.com/coredns.instances: |
@@ -205,7 +205,7 @@ To enable the legacy mode of this OpenMetrics-based check, replace `openmetrics_
       ]
 ```
 
-**Annotations v2** (for Datadog Agent v7.36 or later)
+**Annotations v2** (Datadog Agent v7.36 以降向け)
 
 ```yaml
           "instances": [
@@ -216,17 +216,17 @@ To enable the legacy mode of this OpenMetrics-based check, replace `openmetrics_
           ]
 ```
 
-**Notes**:
+**注**:
 
-- The shipped `coredns.d/auto_conf.yaml` file enables the `prometheus_url` option by default for legacy mode. 
-- The `dns-pod` tag keeps track of the target DNS pod IP. The other tags are related to the Datadog Agent that is polling the information using the service discovery.
-- The service discovery annotations need to be done on the pod. In case of a deployment, add the annotations to the metadata of the template's specifications. Do not add it at the outer specification level.
+- 出荷時の `coredns.d/auto_conf.yaml` ファイルは、レガシーモードのデフォルトで `prometheus_url` オプションを有効にします。
+- `dns-pod` タグは、対象の DNS ポッド IP を追跡します。他のタグは、サービスディスカバリーを使用して情報をポーリングする Datadog Agent に関連します。
+- ポッドでサービスディスカバリーアノテーションを実行する必要があります。デプロイの場合は、テンプレートの仕様のメタデータにアノテーションを追加します。外側のレベルの仕様には追加しないでください。
 
-#### Log collection
+#### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][3].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
-Then, set [Log Integrations][4] as pod annotations. Alternatively, you can configure this with a [file, configmap, or key-value store][5].
+次に、[ログインテグレーション][4]をポッドアノテーションとして設定します。または、[ファイル、コンフィギュレーションマップ、または Key-Value ストア][5]を使用してこれを構成することもできます。
 
 **Annotations v1/v2**
 
@@ -251,11 +251,11 @@ metadata:
 
 #### ECS
 
-To configure this check for an Agent running on ECS:
+このチェックを、ECS で実行している Agent に構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```json
 {
@@ -271,23 +271,23 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 }
 ```
 
-To enable the legacy mode of this OpenMetrics-based check, replace `openmetrics_endpoint` with `prometheus_url`:
+この OpenMetrics ベースのチェックのレガシーモードを有効にするには、`openmetrics_endpoint` を `prometheus_url` に置き換えます。
 
 ```json
       "com.datadoghq.ad.instances": "[{\"prometheus_url\":\"http://%%host%%:9153/metrics\", \"tags\":[\"dns-pod:%%host%%\"]}]"
 ```
 
-**Notes**:
+**注**:
 
-- The shipped `coredns.d/auto_conf.yaml` file enables the `prometheus_url` option by default for legacy mode. 
-- The `dns-pod` tag keeps track of the target DNS pod IP. The other tags are related to the Datadog Agent that is polling the information using the service discovery.
-- The service discovery annotations need to be done on the pod. In case of a deployment, add the annotations to the metadata of the template's specifications. Do not add it at the outer specification level.
+- 出荷時の `coredns.d/auto_conf.yaml` ファイルは、レガシーモードのデフォルトで `prometheus_url` オプションを有効にします。
+- `dns-pod` タグは、対象の DNS ポッド IP を追跡します。他のタグは、サービスディスカバリーを使用して情報をポーリングする Datadog Agent に関連します。
+- ポッドでサービスディスカバリーアノテーションを実行する必要があります。デプロイの場合は、テンプレートの仕様のメタデータにアノテーションを追加します。外側のレベルの仕様には追加しないでください。
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [ECS Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```yaml
 {
@@ -306,35 +306,35 @@ Then, set [Log Integrations][3] as Docker labels:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's `status` subcommand][7] and look for `coredns` under the Checks section.
+[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `coredns` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "coredns" >}}
 
 
-### Events
+### イベント
 
-The CoreDNS check does not include any events.
+CoreDNS チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "coredns" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][8].
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Key metrics for CoreDNS monitoring][9]
-- [Tools for collecting metrics and logs from CoreDNS][10]
-- [How to monitor CoreDNS with Datadog][11]
+- [CoreDNS モニタリングのキーメトリクス][9]
+- [CoreDNS からメトリクスとログを収集するためのツール][10]
+- [Datadog を使用した CoreDNS の監視方法][11]
 
 
 

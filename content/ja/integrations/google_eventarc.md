@@ -18,7 +18,7 @@
 "categories":
 - cloud
 - google cloud
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -49,57 +49,57 @@
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## Overview
+## 概要
 
-Send your Datadog events to [Eventarc][1] for delivery to Google services, enabling you to initiate Eventarc-driven workflows with Datadog monitor notifications.
+Datadog のイベントを [Eventarc][1] に送信して Google サービスに配信し、Datadog のモニター通知で Eventarc 主導のワークフローを開始できるようにします。
 
-## Setup
+## セットアップ
 
-1. Ensure that the main [GCP integration][2] is installed for each GCP Project that receives notifications.
+1. 通知を受け取る各 GCP プロジェクトに、メインの [GCP インテグレーション][2]がインストールされていることを確認します。
 
-2. [Create an Eventarc channel][3] in the Google Cloud Console.
+2. Google Cloud Console で [Eventarc チャネルの作成][3]を行います。
 
-3. Within the Datadog application, set your channel name and activation token in a monitor's [notification section][4] using the syntax as shown in the example below:
+3. Datadog アプリケーション内で、以下の例に示すような構文を使用して、モニターの[通知セクション][4]にチャンネル名とアクティベーショントークンを設定します。
 
-{{< img src="integrations/google_eventarc/eventarc_channel_notification.png" alt="The say what's happening section of a Datadog monitor configuration page with the title HDD Disk Size Above Capacity and a line in the notification body which sends the an eventarc channel with the following example: The alert notification will be sent to @eventarc-datadog-sandbox_us-central1_my-channel that will trigger Cloud Function: Bump Quota." >}}
+{{< img src="integrations/google_eventarc/eventarc_channel_notification.png" alt="Datadog モニター構成ページの say what's happening セクションに、タイトル HDD Disk Size Above Capacity と、通知本文に以下の例の eventarc チャンネルを送信する行があります: The alert notification will be sent to @eventarc-datadog-sandbox_us-central1_my-channel that will trigger Cloud Function: Bump Quota" >}}
 
-### Validation
+### 検証
 
-Once the integration is activated, the channel goes from **Pending** to **Active** in the Google Cloud Console.
+インテグレーションが有効になると、Google Cloud Console でチャンネルが **Pending** から **Active** になります。
 
-### Automated actions
+### 自動化されたアクション
 
-Set up new outbound notification channels for monitors to initiate automated actions with the GCP Eventarc integration. With automated actions, you can configure your GCP resources to:
+GCP Eventarc インテグレーションを使用して、モニター用の新しい送信通知チャンネルを設定し、自動化されたアクションを開始することができます。自動化されたアクションを使用すると、GCP リソースを構成して以下のことを行うことができます。
 
-  - Use Datadog monitors to kick off Eventarc workflows
-  - Within Google, link Cloud Functions, BigQuery, etc. to Datadog monitors
-  - Use the information within the alert event to execute auto-remediation pipelines and runbooks, run analytics queries, and more
+  - Datadog のモニターを使用して Eventarc ワークフローをキックオフする
+  - Google 内で、Cloud Functions、BigQuery などを Datadog のモニターにリンクさせる
+  - アラートイベント内の情報を使用して、自動修復パイプラインやランブックの実行、分析クエリの実行などを行う
 
-The full list of resources you can target is available in the [GCP documentation][5].
+ターゲットにできるリソースの完全なリストは、[GCP ドキュメント][5]にあります。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-The Google Eventarc integration does not include any metrics.
+Google Eventarc インテグレーションには、メトリクスは含まれません。
 
-### Events
+### イベント
 
-The Google Eventarc integration does not include any events.
+Google Eventarc インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The Google Eventarc integration does not include any service checks.
+Google Eventarc インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][6].
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-## Further reading
+## 参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Automate incident response workflows with Eventarc and Datadog][7]
+- [Eventarc と Datadog でインシデント対応のワークフローを自動化する][7]
 
 [1]: https://cloud.google.com/eventarc/docs
 [2]: https://docs.datadoghq.com/integrations/google_cloud_platform/

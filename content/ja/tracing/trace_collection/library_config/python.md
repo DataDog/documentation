@@ -6,10 +6,10 @@ type: multi-code-lang
 code_lang_weight: 20
 further_reading:
     - link: "https://github.com/DataDog/dd-trace-py"
-      tag: Source Code
+      tag: ソースコード
       text: Source code
     - link: "https://ddtrace.readthedocs.io/en/stable/"
-      tag: External Site
+      tag: 外部サイト
       text: API Docs
     - link: /tracing/trace_collection/trace_context_propagation/python/
       tag: Documentation
@@ -18,7 +18,7 @@ further_reading:
       tag: Documentation
       text: Explore your services, resources and traces
     - link: tracing/
-      tag: Documentation
+      tag: ドキュメント
       text: Advanced Usage
 ---
 

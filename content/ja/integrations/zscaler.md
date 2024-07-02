@@ -26,7 +26,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - cloud
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/zscaler/README.md"
 "description": "TODO"
@@ -74,7 +74,7 @@
 
 A Zscaler Cloud NSS subscription is required.
 
-## Setup
+## セットアップ
 
 ### ZIA Web Logs
 
@@ -177,21 +177,21 @@ A Zscaler Cloud NSS subscription is required.
 
 [Run the Agent's status subcommand][3] and look for `zscaler` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 Zscaler does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 Zscaler does not include any service checks.
 
-### Events
+### イベント
 
 Zscaler does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

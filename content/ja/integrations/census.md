@@ -27,7 +27,7 @@
   "support_email": support@getcensus.com
 "categories":
 - automation
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/census/README.md"
 "display_on_public_website": true
@@ -79,7 +79,7 @@ Census integrates with Datadog to provide developers the ability to monitor thei
 
 A Census Platform tier (or higher) subscription is required to enable this integration.
 
-## Setup
+## セットアップ
 
 1. Login to your [Census account][2].
 2. Navigate to the Census workspace that you wish to connect to your Datadog account.
@@ -91,21 +91,21 @@ A Census Platform tier (or higher) subscription is required to enable this integ
 
 Execute a sync on your Census workspace, and check for the corresponding metrics and events on the Census dashboard in your Datadog account. Events and metrics for a sync may take up to a couple of minutes to be transmitted to Datadog after sync completion.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "census" >}}
 
 
-### Service Checks
+### サービスチェック
 
 Census does not include any service checks.
 
-### Events
+### イベント
 
 This integration sends sync completion events to Datadog.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

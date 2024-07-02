@@ -28,8 +28,8 @@
 - aws
 - azure
 - google cloud
-- metrics
-"custom_kind": "integration"
+- モニター
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/yugabytedb_managed/README.md"
 "display_on_public_website": true
@@ -95,10 +95,10 @@
 - Read/write operation throughput and latencies (both YSQL and YCQL).
 - Advanced Master and Tablet Server telemetry (for example, internal RPC throughput/latencies and WAL read/write throughput).
 
-## Setup
+## セットアップ
 **Note**: This feature is not available for [Sandbox Clusters][3].
 
-### Installation
+### インストール
 
 To enable the YugabyteDB Managed integration with Datadog:
 
@@ -130,17 +130,17 @@ To disable metrics being exported to Datadog:
 
 **Note**: Your cluster cannot associate a configuration when paused or when another operation is in progress.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "yugabytedb_managed" >}}
 
 
-### Service Checks
+### サービスチェック
 
 YugabyteDB Managed does not include any service checks.
 
-### Events
+### イベント
 
 YugabyteDB Managed does not include any events.
 

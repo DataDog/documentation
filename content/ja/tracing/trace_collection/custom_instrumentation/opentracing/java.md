@@ -16,7 +16,7 @@ code_lang_weight: 0
 
 Datadog integrates with the [OpenTracing API][1].
 
-## Setup
+## セットアップ
 
 For Maven, add this to `pom.xml`:
 ```xml

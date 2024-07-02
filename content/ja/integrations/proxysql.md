@@ -27,7 +27,7 @@
 - data stores
 - log collection
 - caching
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/proxysql/README.md"
 "display_on_public_website": true
@@ -65,22 +65,22 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [ProxySQL][1] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [ProxySQL][1] を監視します。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The ProxySQL integration is included in the [Datadog Agent][3] package, so you don't need to install anything else on your servers.
+ProxySQL インテグレーションは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-#### Enabling SSL
-To connect to ProxySQL using full SSL/TLS validation, enable the `tls_verify` option in `conf.yaml`. Include certificates and passwords needed to connect with SSL/TLS.
+#### SSL の有効化
+フル SSL/TLS 検証を使用して ProxySQL に接続するには、`conf.yaml` ファイルで `tls_verify` オプションを有効にします。SSL/TLS による接続に必要な証明書とパスワードを含めます。
 
 ```yaml
     tls_verify: true
@@ -88,25 +88,25 @@ To connect to ProxySQL using full SSL/TLS validation, enable the `tls_verify` op
 ```
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `proxysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your ProxySQL performance data. See the [sample proxysql.d/conf.yaml][2] for all available configuration options.
+1. ProxySQL のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1] のルートにある `conf.d/` フォルダーの `proxysql.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル proxysql.d/conf.yaml][2] を参照してください。
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add the log files you are interested in to your `proxysql.d/conf.yaml` file to start collecting your ProxySQL logs:
+2. ProxySQL のログの収集を開始するには、該当のログファイルを `proxysql.d/conf.yaml` ファイルに追加します。
 
    ```yaml
      logs:
@@ -129,62 +129,62 @@ To configure this check for an Agent running on a host:
          service: "<SERVICE_NAME>"
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment. See the [sample proxysql.d/conf.yaml][2] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル proxysql.d/conf.yaml][2] を参照してください。
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/proxysql/datadog_checks/proxysql/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-#### Metric collection
+#### メトリクスの収集
 
-| Parameter            | Value                                                      |
+| パラメーター            | 値                                                      |
 |----------------------|------------------------------------------------------------|
 | `<INTEGRATION_NAME>` | `proxysql`                                                   |
-| `<INIT_CONFIG>`      | blank or `{}`                                              |
-| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port": "%%port%%", "username": "<USER>", "password": "<PASSWORD>"}`       |
+| `<INIT_CONFIG>`      | 空白または `{}`                                              |
+| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                     |
+| パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
-| `<LOG_CONFIG>` | `{"source": "proxysql", "service": "<SERVICE_NAME>"}` |
+| `<LOG_CONFIG>` | `{"source": "proxysql", "service": "<サービス名>"}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][4] and look for `proxysql` under the Checks section.
+[Agent の status サブコマンドを実行][4]し、Checks セクションで `proxysql` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "proxysql" >}}
 
 
-### Events
+### イベント
 
-The ProxySQL check does not include any events.
+ProxySQL チェックにはイベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "proxysql" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 

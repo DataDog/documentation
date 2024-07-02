@@ -11,7 +11,7 @@
 - metrics
 - mobile
 - tracing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rum_ios/README.md"
 "display_on_public_website": true
@@ -65,7 +65,7 @@ Monitor the end-to-end health of your iOS application by:
 - Debugging crashes faster by unifying client-side and server-side metrics, traces, and logs
 - Unifying full-stack monitoring in a single platform for frontend and backend teams
 
-## Setup
+## セットアップ
 
 ### Collect RUM events 
 
@@ -79,9 +79,9 @@ To start sending your iOS application's traces to Datadog, see [iOS Trace Collec
 
 To start forwarding your iOS application's logs to Datadog, see [iOS Log Collection][5].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The iOS integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][6].
 
@@ -93,7 +93,7 @@ For more information about events and attributes, see [RUM iOS Data Collected][7
 
 The iOS integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog Support][8]. 
 

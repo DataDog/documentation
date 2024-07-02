@@ -1,58 +1,40 @@
 ---
-kind: ガイド
-title: Amazon Aurora DB クラスターに対する Database Monitoring の構成
+title: Configuring Database Monitoring for Amazon Aurora DB Clusters
+kind: guide
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Aurora クラスターのオートディスカバリーはベータ機能です。この機能に関するフィードバックがありましたら、support@datadoghq.com までご連絡ください。
+Autodiscovery for Aurora clusters is a beta feature. If you have any feedback about this feature, contact support at support@datadoghq.com.
 {{< /beta-callout >}}
 
-このガイドでは、Amazon Aurora [Postgres][1] または [MySQL][11] データベースに対して Database Monitoring を構成していることを前提としています。
+This guide assumes you have configured Database Monitoring for your Amazon Aurora [Postgres][1] or [MySQL][11] databases.
 
-## はじめに
+## Before you begin
 
-対応データベース
-: Postgres、MySQL
+Supported databases
+: Postgres, MySQL
 
-サポート対象の Agent バージョン
-: 7.53.0 以降 (ベータ版)
+Supported Agent versions
+: 7.53.0+
 
-この機能を使用するには、Agent のベータ版をインストールする必要があります。このページの [Datadog Agent 7.53.0 以降のインストール](#install-datadog-agent-7530)セクションを参照してください。
+## Overview
 
-## 概要
+Datadog's [Autodiscovery][4] enables you to configure monitoring in dynamic infrastructures. You can use this feature to monitor your Aurora clusters without having to list individual database host endpoints. This is especially helpful for clusters that use [Aurora Auto Scaling][6], which dynamically adjusts the number of Aurora Replicas in response to variations in connectivity or workload. Autodiscovery automatically discovers and monitors both primary and replica endpoint instances.
 
-Datadog の[オートディスカバリー][4]を使用すると、動的インフラストラクチャーでモニタリングを構成することができます。この機能を使用すると、個々のデータベースホストエンドポイントをリストすることなく、Aurora クラスターを監視することができます。これは、接続性やワークロードの変動に応じて Aurora Replica の数を動的に調整する [Aurora Auto Scaling][6] を使用するクラスターに特に役立ちます。オートディスカバリーは、プライマリとレプリカの両方のエンドポイントインスタンスを自動的に発見し監視します。
+With Autodiscovery and Database Monitoring, you can define configuration templates for Postgres or MySQL checks and specify which clusters to apply each check to.
 
-オートディスカバリーと Database Monitoring を使用すると、Postgres または MySQL チェックの構成テンプレートを定義し、各チェックを適用するクラスターを指定できます。
+## Enabling Autodiscovery for Aurora clusters
 
-## Aurora クラスターでオートディスカバリーを有効にする
+1. [Grant AWS permissions](#grant-aws-permissions)
+2. [Configure Aurora tags](#configure-aurora-tags)
+3. [Configure the Datadog Agent](#configure-the-datadog-agent)
+4. [Create a configuration template](#create-a-configuration-template)
 
-1. [Datadog Agent 7.53.0 以降のインストール](#install-datadog-agent-7530)
-2. [AWS 権限の付与](#grant-aws-permissions)
-3. [Aurora タグの構成](#configure-aurora-tags)
-4. [Datadog Agent の構成](#configure-the-datadog-agent)
-5. [構成テンプレートの作成](#create-a-configuration-template)
+### Grant AWS permissions
 
-### Datadog Agent 7.53.0 以降のインストール
+The Datadog Agent requires permission to run `rds:DescribeDBClusters` and `rds:DescribeDBInstances` in your AWS account. Datadog recommends that you attach an IAM role policy to the EC2 instance where the Agent is running.
 
-この機能を使用するには、Agent の[ベータ版][9]をインストールする必要があります。
-
-以下のコマンドを実行することで、Agent インストールスクリプトを使用して正しいバージョンをインストールできます。
-
-```bash
-DD_API_KEY=<API_KEY> DD_SITE="{{< region-param key="dd_site" code="true" >}}" \
-DD_AGENT_DIST_CHANNEL=beta DD_AGENT_MAJOR_VERSION=7 \
-DD_AGENT_MINOR_VERSION=52.0~dbm~aurora~autodiscovery~beta~0.3-1 \
-bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-```
-
-Datadog Agent のインストールの詳細については、[Amazon Linux の基本的な Agent の使い方][10]を参照してください。
-
-### AWS 権限の付与
-
-Datadog Agent が AWS アカウント内で `rds:DescribeDBClusters` および `rds:DescribeDBInstances` を実行するためには権限が必要です。Datadog は、Agent を実行している EC2 インスタンスに IAM ロールポリシーを割り当てることを推奨しています。
-
-これらの権限を与えるポリシーの例:
+An example policy that grants these permissions:
 
 ```json
 {
@@ -73,17 +55,17 @@ Datadog Agent が AWS アカウント内で `rds:DescribeDBClusters` および `
 }
 ```
 
-また、[`AmazonRDSReadOnlyAccess`][3] ポリシーを割り当てることもできます。
+You can also attach the [`AmazonRDSReadOnlyAccess`][3] policy.
 
-### Aurora タグの構成
+### Configure Aurora tags
 
-デフォルトでは、リスナーは Agent が動作しているアカウントとリージョンで、`datadoghq.com/scrape:true` タグが適用されているすべての Aurora クラスターを発見します。特定のタグを持つクラスターを発見するように Agent を構成することもできます。
+By default, the listener discovers all Aurora clusters in the account and region where the Agent is running that have the `datadoghq.com/scrape:true` tag applied. You can also configure the Agent to discover clusters with specific tags.
 
-これらのタグは DB クラスター (ロール: `Regional cluster`) に適用する必要があります。RDS リソースへのタグ付けの詳細については、[AWS ドキュメント][7]を参照してください。
+You must apply these tags to the DB cluster (Role: `Regional cluster`). For more information on tagging RDS resources, see the [AWS documentation][7].
 
-### Datadog Agent の構成
+### Configure the Datadog Agent
 
-オートディスカバリーは Agent サービスリスナーを使用します。Agent サービスリスナーは Aurora クラスター内のすべてのデータベースホストエンドポイントを発見し、発見されたエンドポイントを既存の Agent チェックスケジューリングパイプラインに転送します。リスナーは `datadog.yaml` ファイルで構成できます。
+Autodiscovery uses an Agent service listener, which discovers all database host endpoints in an Aurora cluster and forwards discovered endpoints to the existing Agent check scheduling pipeline. You can configure the listener in the `datadog.yaml` file:
 
 ```yaml
 database_monitoring:
@@ -92,7 +74,7 @@ database_monitoring:
       enabled: true
 ```
 
-**注**: Agent は、Agent と同じリージョンで実行している Aurora インスタンスのみを発見します。インスタンスのリージョンを決定するために、Agent は [IMDS (Instance Metadata Service)][8] を使用します。EC2 インスタンスが `IMDSv2` を必要とする場合、以下のように `datadog.yaml` で `ec2_prefer_imdsv2: true` を設定して、Agent が `IMDSv2` を使用するように構成する必要があります。
+**Note**: The Agent only discovers Aurora instances running in the same region as the Agent. To determine the region of the instance, the Agent uses [IMDS (Instance Metadata Service)][8]. If your EC2 instance requires `IMDSv2`, you must configure the Agent to use `IMDSv2` by setting `ec2_prefer_imdsv2: true` in `datadog.yaml`, as shown below:
 
 ```yaml
 ec2_prefer_imdsv2: true
@@ -102,9 +84,9 @@ database_monitoring:
       enabled: true
 ```
 
-デフォルトでは、リスナーは Agent が動作しているアカウントとリージョンの Aurora クラスターと、`datadoghq.com/scrape:true` タグを持つ Aurora クラスターのみを発見します。特定のタグを持つクラスターを発見するようにリスナーを構成することもできます。
+By default, the listener only discovers Aurora clusters in the account and region where the Agent is running, and only those with the `datadoghq.com/scrape:true` tag. You can also configure the listener to discover clusters with specific tags.
 
-`datadog.yaml` ファイルに Aurora クラスター発見用のカスタムタグを指定するには
+To specify custom tags for Aurora cluster discovery in the `datadog.yaml` file:
 
 ```yaml
 database_monitoring:
@@ -115,7 +97,7 @@ database_monitoring:
         - "my-cluster-tag-key:value"
 ```
 
-リスナーは AWS API にホストのリストを繰り返しクエリします。リスナーが AWS API にクエリする頻度は秒単位で、`datadog.yaml` ファイルで構成できます。
+The listener queries the AWS API for the list of hosts in a loop. The frequency with which the listener queries the AWS API, in seconds, is configurable in the `datadog.yaml` file:
 
 ```yaml
 database_monitoring:
@@ -125,23 +107,23 @@ database_monitoring:
       discovery_interval: 300
 ```
 
-### 構成テンプレートの作成
+### Create a configuration template
 
-Datadog Agent は、Postgres と MySQL インテグレーション用の構成テンプレートをサポートしています。監視したい Aurora クラスターの構成テンプレートを定義します。
+The Datadog Agent supports configuration templates for the Postgres and MySQL integrations. Define a configuration template for the Aurora clusters you wish to monitor.
 
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
-まず、構成テンプレート (`postgres.d/conf_aws_aurora.yaml`) ファイルに Aurora が管理する Postgres 用の`ad_identifier`を追加します。
+First, add an `ad_identifier` for Aurora-managed Postgres to your configuration template (`postgres.d/conf_aws_aurora.yaml`) file:
 
 ```yaml
 ad_identifiers:
   - _dbm_postgres_aurora
 ```
 
-次に、テンプレートの残りの部分を定義します。`host` や `port` のような変更される可能性のあるパラメーターには[テンプレート変数](#supported-template-variables)を使用します。
+Then, define the remainder of the template. Use [template variables](#supported-template-variables) for parameters that may change, such as `host` and `port`.
 
-以下の構成テンプレートの例は、Aurora クラスターで発見されたすべてのインスタンスに適用されます。
+The following example configuration template is applied to every instance discovered in the Aurora cluster:
 
 ```yaml
 ad_identifiers:
@@ -160,9 +142,9 @@ instances:
     - "region:%%extra_region%%"
 ```
 
-この例では、テンプレート変数 `%%host%%`、`%%port%%`、`%%extra_dbclusteridentifier%%`、`%%extra_region%%` に Aurora クラスターからの情報が動的に入力されます。
+In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%`, and `%%extra_region%%` are dynamically populated with information from the Aurora cluster.
 
-[IAM 認証][2]を使用して Aurora クラスターに接続するには、以下のテンプレートを使用します。
+To use [IAM authentication][2] to connect to your Aurora cluster, use the following template:
 
 ```yaml
 ad_identifiers:
@@ -183,21 +165,21 @@ instances:
       - "region:%%extra_region%%"
 ```
 
-インスタンスが IAM 認証を使用している場合、テンプレート変数 `%%extra_managed_authentication_enabled%%` は `true` に解決されます。
+The template variable `%%extra_managed_authentication_enabled%%` resolves to `true` if the instance is using IAM authentication.
 
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
-まず、Aurora が管理する Postgres に対応する構成テンプレート (`mysql.d/conf_aws_aurora.yaml`) ファイルに `ad_identifier` を追加します。
+First, add an `ad_identifier` for Aurora-managed MySQL to your configuration template (`mysql.d/conf_aws_aurora.yaml`) file:
 
 ```yaml
 ad_identifiers:
   - _dbm_mysql_aurora
 ```
 
-次に、テンプレートの残りの部分を定義します。`host` や `port` のような変更される可能性のあるパラメーターには[テンプレート変数](#supported-template-variables)を使用します。
+Then, define the remainder of the template. Use [template variables](#supported-template-variables) for parameters that may change, such as `host` and `port`.
 
-以下の構成テンプレートの例は、Aurora クラスターで発見されたすべてのインスタンスに適用されます。
+The following example configuration template is applied to every instance discovered in the Aurora cluster:
 
 ```yaml
 ad_identifiers:
@@ -215,31 +197,31 @@ instances:
     - "region:%%extra_region%%"
 ```
 
-この例では、テンプレート変数 `%%host%%`、`%port%%`、`%extra_dbclusteridentifier%%`、`%extra_region%%` が Aurora クラスターからの情報で動的に置き換えられます。
+In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%`, and `%%extra_region%%` are dynamically populated with information from the Aurora cluster.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-インテグレーションによるオートディスカバリーの構成の詳細については、[オートディスカバリーのドキュメント][5]を参照してください。
+For more information on configuring Autodiscovery with integrations, see the [Autodiscovery documentation][5].
 
-#### サポートされているテンプレート変数
+#### Supported template variables
 
-| テンプレート変数                        | ソース                                                                                                                                        |
+| Template variable                        | Source                                                                                                                                        |
 |:-----------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
-| %%host%%                                 | Aurora インスタンスエンドポイント                                                                                                                  |
-| %%port%%                                 | Aurora インスタンスのポート                                                                                                               |
-| %%extra_region%%                         | インスタンスが配置されている AWS リージョン                                                                                                  |
-| %%extra_dbclusteridentifier%%            | 発見された Aurora クラスターのクラスター識別子                                                                                       |
-| %%extra_managed_authentication_enabled%% | クラスターで IAM 認証が有効かどうか。<br/>これは Postgres でマネージド認証を使用するかどうかを決定するために使用されます。 |
+| %%host%%                                 | The Aurora instance endpoint                                                                                                                  |
+| %%port%%                                 | The port of the Aurora instance                                                                                                               |
+| %%extra_region%%                         | The AWS region where the instance is located                                                                                                  |
+| %%extra_dbclusteridentifier%%            | The cluster identifier of the discovered Aurora cluster                                                                                       |
+| %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for Postgres. |
 
-[1]: /ja/database_monitoring/setup_postgres/aurora/?tab=postgres10
-[2]: /ja/database_monitoring/guide/managed_authentication/#configure-iam-authentication
+[1]: /database_monitoring/setup_postgres/aurora/?tab=postgres10
+[2]: /database_monitoring/guide/managed_authentication/#configure-iam-authentication
 [3]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AmazonRDSReadOnlyAccess.html
-[4]: /ja/getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
-[5]: /ja/containers/docker/integrations/?tab=dockeradv2
+[4]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
+[5]: /containers/docker/integrations/?tab=dockeradv2
 [6]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Integrating.AutoScaling.html
 [7]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#Tagging.HowTo
 [8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
 [9]: https://yum.datadoghq.com/beta/7/x86_64/datadog-agent-7.52.0~dbm~aurora~autodiscovery~beta~0.3-1.x86_64.rpm
-[10]: https://docs.datadoghq.com/ja/agent/basic_agent_usage/amazonlinux/?tab=agentv6v7
-[11]: /ja/database_monitoring/setup_mysql/aurora?tab=mysql56
+[10]: https://docs.datadoghq.com/agent/basic_agent_usage/amazonlinux/?tab=agentv6v7
+[11]: /database_monitoring/setup_mysql/aurora?tab=mysql56

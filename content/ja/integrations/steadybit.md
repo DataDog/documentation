@@ -25,7 +25,7 @@
 "categories":
 - incidents
 - testing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/steadybit/README.md"
 "display_on_public_website": true
@@ -82,7 +82,7 @@
 
 The Steadybit integration uses the status of Datadog monitors within chaos engineering experiments. This integration provides your team insight into chaos engineering activity such as the experiment's environment, start and end time, and the result of the experiment through Datadog events.
 
-## Setup
+## セットアップ
 
 The integration between Datadog and Steadybit is done through the [Steadybit Datadog extension][2]. The extension interacts with Datadog's API to gather information about monitors and report events to Datadog.
 
@@ -90,7 +90,7 @@ The integration between Datadog and Steadybit is done through the [Steadybit Dat
 
 You need a [free or paid Steadybit license][3]. The integration supports Steadybit's SAAS and on-premises offering.
 
-### Installation
+### インストール
 
 Several [installation methods are supported][4]. For the best experience, install the Steadybit Datadog extension through the dedicated Helm chart, as shown below. To learn more about the supported values for `datadog.siteParameter` and `datadog.siteUrl`, see the [Datadog sites][5] page.
 
@@ -115,21 +115,21 @@ helm upgrade steadybit-extension-datadog \
 
 Once the Steadybit Datadog extension is running, see a list of Datadog monitors within the *Landscape* tab in Steadybit.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 Steadybit does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 Steadybit does not include any service checks.
 
-### Events
+### イベント
 
 Steadybit reports events to Datadog indicating chaos engineering activity. All such events carry the `source:steadybit` tag.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Steadybit's support][6].
 

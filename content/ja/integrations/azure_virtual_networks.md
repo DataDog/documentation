@@ -3,7 +3,7 @@
 - azure
 - cloud
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure Virtual Network metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_virtual_networks/"
@@ -35,26 +35,26 @@ Get metrics from Azure Virtual Network to:
 
 **The metrics from this integration are not available from Azure Monitor**. Datadog generates them by querying Azure metadata APIs and converting the responses to timeseries data points. They are provided in Datadog as standard metrics from the Azure integration.
 
-## Setup
+## セットアップ
 
 **Note**: Usages for gateway subnets are not supported by Azure and return a value of (-1) for both available and assigned address space. Be sure to take this into account when looking at aggregate usage across virtual networks containing gateway subnets.
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## Data Collected
-### Metrics
+## 収集データ
+### メトリクス
 {{< get-metrics-from-git "azure_virtual_networks" >}}
 
 
-### Events
+### イベント
 The Azure Virtual Network integration does not include any events.
 
-### Service Checks
+### サービスチェック
 The Azure Virtual Network integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 Need help? Contact [Datadog support][3].
 
 [1]: https://docs.datadoghq.com/integrations/azure/

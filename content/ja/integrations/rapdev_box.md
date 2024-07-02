@@ -32,7 +32,7 @@
 - marketplace
 - metrics
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -105,7 +105,7 @@
  + [User Source Object](https://developer.box.com/guides/events/event-triggers/event-source/#user-source-object)
  + [Shield Events](https://developer.box.com/guides/events/event-triggers/shield-alert-events/)
  + [Sign Events](https://developer.box.com/guides/events/event-triggers/sign-events/)
-### Metrics
+### メトリクス
 This integration collects storage metrics about users in your Box enterprise account.
 The following metrics are submitted:
 ```
@@ -208,7 +208,7 @@ The following triggers are submitted to Datadog as logs:
     }
 }
  ```
-### Dashboards
+### ダッシュボード
 This integration provides an out-of-the-box dashboard named **Box Integration Overview**. The dashboard populates as metrics and logs are collected. 
 
 In order for the Agent to collect logs, set `logs_enabled: true` in the main `datadog.yaml` file.

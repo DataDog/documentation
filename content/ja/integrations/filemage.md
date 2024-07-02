@@ -27,7 +27,7 @@
   "support_email": tmoore@dopensource.com
 "categories":
 - cloud
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/filemage/README.md"
 "display_on_public_website": true
@@ -70,7 +70,7 @@
 
 This check monitors [FileMage][1].
 
-## Setup
+## セットアップ
 
 ### Installing the package
 
@@ -85,7 +85,7 @@ datadog-agent integration install -t datadog-filemage==1.0.0
 
 2. Configure your integration similar to an Agent-based [integration][3].
 
-### Configuration
+### 構成
 
 1. Edit the `filemage.d/conf.yaml.example` file in the `conf.d/` folder at the root of your [Agent Configuration Directory][4] to start collecting your FileMage [metrics](#metrics).  
    Once complete, save the modified file as `filemage.d/conf.yaml`.  
@@ -120,19 +120,19 @@ Run the [Agent's `status` subcommand][7] and look for `filemage` under the Runni
 ```
 
 
-## Data Collected
+## 収集データ
 
 This integration tracks the number of times each FTP command is run.
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "filemage" >}}
 
 
-### Events
+### イベント
 
 The FileMage integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [dOpenSource][10].
 

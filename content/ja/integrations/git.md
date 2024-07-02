@@ -4,9 +4,9 @@
 - "developer tools"
 - "issue tracking"
 - "source control"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Send commits and pull requests from your self-hosted Git server to Datadog."
+"description": "自己ホスト型 Git サーバーから Datadog へコミットとプルリクエストを送信。"
 "doc_link": "https://docs.datadoghq.com/integrations/git/"
 "draft": false
 "git_integration_title": "git"

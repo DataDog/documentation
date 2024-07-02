@@ -2,7 +2,7 @@
 title: Compose and the Datadog Agent
 further_reading:
     - link: "https://github.com/DataDog/docker-compose-example"
-      tag: Source Code
+      tag: ソースコード
       text: Using Docker Compose with Datadog Example
     - link: /agent/docker/
       tag: Documentation
@@ -15,13 +15,13 @@ aliases:
     - /agent/guide/compose-and-the-datadog-agent
 ---
 
-[Compose][1] is a Docker tool that simplifies building applications on Docker by allowing you to define, build and run multiple containers as a single application.
+[Compose][1] は、複数のコンテナを 1 つのアプリケーションとして定義、ビルド、実行できるようにすることで、Docker 上でのアプリケーション構築を簡素化する Docker ツールです。
 
-While the [single container installation instructions][2] gets the stock Datadog Agent container running, you may want to enable integrations for other containerized services that are part of your Compose application. To do this, you need to combine integration YAML files with the base Datadog Agent image to create your Datadog Agent container. Then, add your container to the Compose YAML.
+[単一コンテナのインストール手順][2]では、純正の Datadog Agent コンテナが実行されますが、Compose アプリケーションの一部である他のコンテナ化されたサービスに対してインテグレーションを有効にしたい場合があります。そのためには、インテグレーション用の YAML ファイルと Datadog Agent のベースイメージを組み合わせて、Datadog Agent コンテナを作成する必要があります。その後、コンテナを Compose YAML に追加します。
 
-### Redis example
+### Redis の例
 
-The following is an example of how you can monitor a Redis container using Compose. The file structure is:
+以下は、Compose を使用して Redis コンテナを監視する例です。ファイル構造は
 
 ```text
 |- docker-compose.yml
@@ -31,7 +31,7 @@ The following is an example of how you can monitor a Redis container using Compo
     |-redisdb.yaml
 ```
 
-The `docker-compose.yml` file describes how your containers work together and sets some of the configuration details for the containers.
+`docker-compose.yml` ファイルは、コンテナがどのように連携するかを記述し、コンテナの構成に関するいくつかの詳細を設定します。
 
 ```yaml
 version: '3'
@@ -50,7 +50,7 @@ services:
      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
 ```
 
-The `redisdb.yaml` is patterned after the [redisdb.yaml.example file][3] and tells the Datadog Agent to look for Redis on the host named `redis` (defined in `docker-compose.yaml` above) and to use the standard Redis port:
+`redisdb.yaml` は [redisdb.yaml.example ファイル][3]に倣い、Datadog Agent に `redis`というホスト (上記の `docker-compose.yaml` で定義) を探し、Redis の標準ポートを使用するよう指示します。
 
 ```yaml
 init_config:
@@ -60,7 +60,7 @@ instances:
       port: 6379
 ```
 
-The `Dockerfile` is used to instruct Docker compose to build a Datadog Agent image including the `redisdb.yaml` file at the right location:
+`Dockerfile` は、Docker compose が適切な場所に `redisdb.yaml` ファイルを含む Datadog Agent イメージをビルドするよう指示するために使用されます。
 
 ```
 FROM gcr.io/datadoghq/agent:latest
@@ -68,9 +68,9 @@ ADD conf.d/redisdb.yaml /etc/datadog-agent/conf.d/redisdb.yaml
 ```
 
 
-### Log collection
+### ログ収集
 
-The `docker-compose.yml` can be extended to allow the Datadog Agent to collect container logs.
+Datadog Agent がコンテナログを収集できるように、`docker-compose.yml` を拡張することが可能です。
 
 ```yaml
 version: '3'
@@ -93,10 +93,10 @@ services:
      - /var/lib/docker/containers:/var/lib/docker/containers:ro
 ```
 
-**Note**: The above configuration only collects logs from the `Redis` container. Logs can be collected from the Datadog Agent by adding a similar `com.datadoghq.ad.logs` label. Log collection can also be explicitly enabled for all containers by setting the environment variable `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` to `true`. See the complete [Docker log collection documentation][4] for additional details.
+**注**: 上記の構成では、`Redis` コンテナからログを収集するのみです。同様の `com.datadoghq.ad.logs` ラベルを追加することで、Datadog Agent からログを収集することができます。また、環境変数 `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL` を `true` に設定することにより、全てのコンテナに対して明示的にログ収集を有効にすることができます。詳細は [Docker ログ収集ドキュメント][4]を参照してください。
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

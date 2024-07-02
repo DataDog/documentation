@@ -1,8 +1,8 @@
 ---
+title: Upgrade to Datadog Agent v6
 aliases:
-- /ja/agent/faq/upgrade-to-agent-v6
-- /ja/agent/guide/upgrade-to-agent-v6
-title: Datadog Agent v6 へのアップグレード
+  - /agent/faq/upgrade-to-agent-v6
+  - /agent/guide/upgrade-to-agent-v6
 ---
 
 <div class="alert alert-info">

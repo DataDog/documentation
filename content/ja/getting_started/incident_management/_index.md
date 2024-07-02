@@ -144,7 +144,7 @@ You can add any Slack comment in the incident channel to the timeline so that yo
     All task additions and changes are recorded in the _Timeline_.
     You can also add post-incident tasks in the _Remediation_ section to keep track of them.
 
-#### Notifications
+#### 通知
 
 **Scenario:** The issue has been mitigated, and the team is monitoring the situation. The incident status is stable.
 

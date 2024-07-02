@@ -5,20 +5,20 @@ aliases:
   - /agent/guide/how-to-import-datadog-resources-into-terraform
 ---
 
-## Overview
+## 概要
 
-Terraform supports an out-of-the-box way to import existing resources into your terraform state via the [`terraform import`][1] command.
-This can be done via the `terraform import <resource_type>.<resource_name> <existing_id>`.
+Terraform はすぐに使える方法として、[`terraform import`][1] コマンドで既存のリソースを terraform の状態にインポートすることができます。
+これは `terraform import <resource_type>.<resource_name> <existing_id>` というコマンドで実行することができます。
 
-This approach is `state only` and requires already having the HCL resource fully defined in your terraform configuration files. To import the configuration fully, you can use a tool like Terraformer.
+この方法は `state only` であり、HCL リソースを terraform のコンフィギュレーションファイルに完全に定義しておく必要があります。構成を完全にインポートするには、Terraformer のようなツールを使用することができます。
 
 ## Terraformer
 
-The [terraformer project][2] allows you to import a resource as both state and HCL configuration.
+[terraformer project][2] では、リソースを状態と HCL 構成の両方としてインポートすることができます。
 
-Once installed, you can setup a terraform directory with a basic `main.tf`
+インストールしたら、terraform ディレクトリに基本的な `main.tf` をセットアップします。
 
-This uses terraform 0.13+ syntax, but you can find more configurations on the [official datadog provider docs][3]
+terraform 0.13+ の構文を使用していますが、その他の構成は [Datadog プロバイダー公式ドキュメント][3]に記載されています。
 
 ```hcl
 # main.tf
@@ -31,17 +31,17 @@ terraform {
   }
 }
 
-# Configure the Datadog provider
+# Datadog プロバイダーの構成
 provider "datadog" {}
 ```
 
-Then run `terraform init` from within this directory to pull the datadog terraform provider.
+次に、このディレクトリから `terraform init` を実行し、Datadog terraform プロバイダーを引き込みます。
 
-Now you can use `terraformer` to start importing resources. For example, to import Dashboard `abc-def-ghi` you can run
+これで `terraformer` を使ってリソースのインポートを開始することができるようになりました。例えば、Dashboard `abc-def-ghi` をインポートするには、次のように実行します。
 
 `terraformer import datadog --resources=dashboard --filter=dashboard=abc-def-ghi --api-key <YOUR_API_KEY> --app-key <YOUR_APP_KEY> --api-url <YOUR_DATADOG_SITE_URL>`
 
-This generates a folder `generated` that contains both a terraform state file, as well as HCL terraform config files representing the imported resource.
+これにより、terraform の状態ファイルと、インポートしたリソースを表す HCL terraform コンフィギュレーションファイルの両方を含むフォルダ `generated` が生成されます。
 
 ```
 generated
@@ -53,34 +53,34 @@ generated
         └── terraform.tfstate
 ```
 
-* `dashboard.tf`: The HCL configuration file for the newly imported dashboard
-* `outputs.tf`: An HCL containing outputs to use potentially in other configurations
-* `provider.tf`: An HCL initialization of the provider, similar to whats in our `main.tf` file
-* `terraform.tfstate`: The terraform state representing the imported dashboard
+* `dashboard.tf`: 新しくインポートされたダッシュボードの HCL コンフィギュレーションファイル
+* `outputs.tf`: 他の構成で潜在的に使用するための出力を含む HCL
+* `provider.tf`: `main.tf` ファイルにあるような、プロバイダーの HCL 初期化
+* `terraform.tfstate`: インポートしたダッシュボードを表す terraform の状態
 
-## Other examples of running terraformer
+## terraformer の他の実行例
 
-All example commands require the `--api-key`, `--app-key`, and `--api-url` flags.
+すべての例のコマンドは `--api-key`、`--app-key`、`--api-url` フラグを必要とします。
 
-* Import all monitors: `terraformer import datadog --resources=monitor`
-* Import monitor with id 1234: `terraformer import datadog --resources=monitor --filter=monitor=1234`
-* Import monitors with id 1234 and 12345: `terraformer import datadog --resources=monitor --filter=monitor=1234:12345`
-* Import all monitors and dashboards: `terraformer import datadog --resources=monitor,dashboard`
-* Import monitor with id 1234 and dashboard with id abc-def-ghi: `terraformer import datadog --resources=monitor,dashboard --filter=monitor=1234,dashboard=abc-def-ghi`
+* すべてのモニターをインポートします: `terraformer import datadog --resources=monitor`
+* ID が 1234 のモニターをインポートします: `terraformer import datadog --resources=monitor --filter=monitor=1234`
+* ID が 1234 と 12345 のモニターをインポートします: `terraformer import datadog --resources=monitor --filter=monitor=1234:12345`
+* すべてのモニターとダッシュボードをインポートします: `terraformer import datadog --resources=monitor,dashboard`
+* ID が 1234 のモニターと ID が abc-def-ghi のダッシュボードをインポートします: `terraformer import datadog --resources=monitor,dashboard --filter=monitor=1234,dashboard=abc-def-ghi`
 
-## Generating resources with Terraform v0.13+
+## Terraform v0.13+ でのリソースの生成
 
-As of version `0.8.10`, Terraformer generates `tf`/`json` and `tfstate` files using Terraform `v0.12.29`. To ensure compatibility, run the upgrade command `terraform 0.13upgrade .` using Terraform `v0.13.x`. See [official Terraform docs][4] for upgrading.
+バージョン `0.8.10` から、Terraformer は Terraform `v0.12.29` を使用して `tf`/`json` と `tfstate` ファイルを生成します。互換性を確保するために、Terraform `v0.13.x` を使用してアップグレードコマンド `terraform 0.13upgrade .` を実行します。アップグレードについては [Terraform 公式ドキュメント][4]を参照してください。
 
-##### Upgrading the generated files for Terraform v0.13+:
+##### Terraform v0.13+ 用に生成されたファイルをアップグレード:
 
-1. Import resource using terraformer.
+1. terraformer でリソースをインポートします。
 
-2. Using Terraform `v0.13.x`, `cd` into the generated resource directory and run `terraform 0.13upgrade .`.
+2. Terraform `v0.13.x` を使用して、生成されたリソースディレクトリに `cd` して `terraform 0.13upgrade .` を実行します。
 
-3. Run `terraform init` to re-run the provider installer.
+3. `terraform init` を実行して、プロバイダーのインストーラーを再実行します。
 
-4. Run `terraform apply` to apply upgrades to Terraform state files.
+4. `terraform apply` を実行して、Terraform の状態ファイルにアップグレードを適用します。
 
 [1]: https://www.terraform.io/docs/import/index.html
 [2]: https://github.com/GoogleCloudPlatform/terraformer

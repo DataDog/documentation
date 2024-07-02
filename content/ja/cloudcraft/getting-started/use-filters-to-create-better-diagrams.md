@@ -2,65 +2,65 @@
 title: Using Filters to Create Better Diagrams
 ---
 
-The number of components rendered at once for large environment diagrams can introduce performance and readability issues, making for a poor experience.
+大規模な環境図において一度にレンダリングされるコンポーネントの多さは、パフォーマンスと可読性の問題を生じさせ、ユーザー体験を低下させます。
 
-To avoid these issues, Cloudcraft recommends that you use the **Filtered layout** feature to apply filters, or exclude services when placing live components.
+このような問題を回避するため、Cloudcraft では **Filtered layout** 機能を使用してフィルターを適用したり、ライブコンポーネントを配置する際にサービスを除外したりすることを推奨しています。
 
-Building smaller diagrams makes managing them much easier. It also gives viewers more control over how they ingest information.
+より小さな図を作成することで、図の管理がより簡単になります。また、これにより閲覧者は情報の取り込み方をよりコントロールしやすくなります。
 
 <div class="alert alert-info">If you are using Cloudcraft's New Live Experience, see this documentation: <a href="https://docs.datadoghq.com/cloudcraft/getting-started/crafting-better-diagrams/" title="Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering">Crafting Better Diagrams: Cloudcraft's Live Diagramming and Filtering</a>.</div>
 
-## Search patterns
+## 検索パターン
 
-{{< img src="cloudcraft/getting-started/use-filters-to-create-better-diagrams/search-patterns.png" alt="Search patterns being used in Cloudcraft." responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/use-filters-to-create-better-diagrams/search-patterns.png" alt="Cloudcraft で使用されている検索パターン。" responsive="true" style="width:100%;">}}
 
-The search box on the **Live** tab allows you to enter patterns that affect your scan result.
+**Live** タブの検索ボックスでは、スキャン結果に影響するパターンを入力できます。
 
-The patterns the application supports include:
+アプリケーションがサポートするパターンには次のようなものがあります。
 
-- Matching component's name or ID. For example, `i-052g93wu49qed3hxw`.
-- Matching component's type. For example, `type=ec2`.
-- Matching component's IP address. For example, `172.31.42.142`.
-- Matching tagged components. For example, `environment=prod` or `environment`.
-- Matching components inside a VPC, security group, or subnet. For example, `vpc-088c40abeb9ce0c1d`.
+- 一致するコンポーネントの名前または ID。例: `i-052g93wu49qed3hxw`
+- 一致するコンポーネントのタイプ。例: `type=ec2`
+- 一致するコンポーネントの IP アドレス。例: `172.31.42.142`
+- 一致するタグ付きコンポーネント。例: `environment=prod` または `environment`
+- VPC、セキュリティグループ、またはサブネット内の一致するコンポーネント。例: `vpc-088c40abeb9ce0c1d`
 
-You can also use operators:
+演算子を使うこともできます。
 
-- AND (`type=ec2 AND env=prod`).
+- AND (`type=ec2 AND env=prod`)
 - OR (`type=ec2 OR type=rds`)
 - NOT (`NOT platform=linux`)
-- (...) (`type=rds AND (env=staging OR env=prod)`).
+- (...) (`type=rds AND (env=staging OR env=prod)`)
 
-Combine these two features, and you can build powerful filters, allowing you to scope your diagram to one or more applications.
+この 2 つの機能を組み合わせることで、強力なフィルターを構築し、図を 1 つまたは複数のアプリケーションにスコープすることができます。
 
-## Excluding services
+## サービスの除外
 
-{{< img src="cloudcraft/getting-started/use-filters-to-create-better-diagrams/excluding-services.png" alt="AWS services being excluded from a Cloudcraft diagram." responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/getting-started/use-filters-to-create-better-diagrams/excluding-services.png" alt="Cloudcraft 図から除外されている AWS サービス" responsive="true" style="width:100%;">}}
 
-Search patterns may be overkill if you only want to exclude a few services, so Cloudcraft offers an easier way to accomplish this task.
+数個のサービスを除外したいだけであれば、検索パターンの使用は過剰かもしれません。そのため、Cloudcraftではこの作業をもっと簡単に行える方法を提供しています。
 
-After scanning your AWS account, click **Auto Layout** on the **Live** tab to view a two-column list with services from your AWS environment.
+AWS アカウントをスキャンした後、**Live** タブの **Auto Layout** をクリックすると、AWS 環境のサービスが 2 列のリストで表示されます。
 
-You can move services from the **Included services** to the **Excluded services** column—or vice versa—by clicking them.
+サービスをクリックすることで、**Included services** 列から **Excluded services** 列へ、またはその逆へ移動させることができます。
 
-## Using search patterns and applying filters
+## 検索パターンの使用とフィルターの適用
 
-Let us put some of these concepts into practice.
+これらのコンセプトのいくつかを実践してみましょう。
 
-Imagine you're creating an architecture diagram but only want to show EC2 instances and EBS volumes tagged with `service=wirecraft`. You also want to ignore any EC2 instances in the "Stopped" state.
+アーキテクチャ図を作成しているときに、`service=wirecraft` のタグが付いた EC2 インスタンスと EBS ボリュームだけを表示したいとします。また、"Stopped" 状態の EC2 インスタンスは無視したいとします。
 
-You already scanned your AWS environment, and Cloudcraft shows a list of components from your account in your inventory. What's next?
+すでに AWS 環境をスキャンし、Cloudcraft はインベントリにアカウントのコンポーネントのリストを表示しています。次は何をしますか？
 
-1. On the **Live** tab, type the search pattern that corresponds to your query in the search box. In this example, the pattern is `service=wirecraft AND (type=ec2 running OR type=ebs)`. Notice that the button **Auto Layout** now says **Filtered Layout**.
-2.  Click **Filtered Layout**.
-3. Click **Layout**. The components in the diagram now match the pattern in Step 1.
+1. **Live** タブで、検索ボックスにクエリに対応する検索パターンを入力します。この例では、パターンは `service=wirecraft AND (type=ec2 running OR type=ebs)` です。ボタン **Auto Layout** が **Filtered Layout** と表示されていることに注意してください。
+2.  **Filtered Layout** をクリックします。
+3. **Layout** をクリックします。図内のコンポーネントが、手順 1 のパターンに一致するようになりました。
 
-Other alternatives include:
+その他の選択肢は以下の通りです。
 
-- Running the same query on another AWS region. Before you click **Layout**, select **Include existing components** from the **Options** dropdown. Doing so would perform a filtered layout on all the components for the secondary region currently in your inventory and all the components already on the diagram.
-- Combining **Filtered layout** with the **Blueprint link** feature to break down larger environments into multiple diagrams that link to each other. You can also have an overview diagram that provides a quick glance of your whole cloud architecture with no performance penalties.
+- 別の AWS リージョンで同じクエリを実行します。**Layout** をクリックする前に、**Options** ドロップダウンから **Include existing components** を選択します。そうすることで、現在インベントリにあるセカンダリリージョンのすべてのコンポーネントと、すでに図上にあるすべてのコンポーネントに対して、フィルタリングされたレイアウトが実行されます。
+- **Filtered layout** と **Blueprint link** 機能を組み合わせることで、大規模な環境を複数の図に分割し、相互にリンクさせることができます。また、クラウドアーキテクチャ全体を一目で見渡せる概要図を、パフォーマンス上のペナルティなしに作成することもできます。
 
-{{< img src="cloudcraft/getting-started/use-filters-to-create-better-diagrams/filtered-layout-search-patterns-wb5btuyldh4q.mp4" alt="A 53 seconds video showing a Cloudcraft user creating a filtered diagram." video="true">}}
+{{< img src="cloudcraft/getting-started/use-filters-to-create-better-diagrams/filtered-layout-search-patterns-wb5btuyldh4q.mp4" alt="Cloudcraft ユーザーがフィルタリングされた図を作成する 53 秒のビデオ。" video="true">}}
 
 [1]: https://www.cloudcraft.co/request-demo
 [2]: https://app.cloudcraft.co/support

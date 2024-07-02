@@ -7,9 +7,9 @@
 - "cloud"
 - "log collection"
 - "security"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Alert on suspicious AWS account activity."
+"description": "不審な AWS アカウントアクティビティを警告。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_cloudtrail/"
 "draft": false
 "git_integration_title": "amazon_cloudtrail"
@@ -39,9 +39,9 @@ AWS CloudTrail provides an audit trail for your AWS account. Datadog reads this 
 For information on other AWS services, see the [Amazon Web Services integration page][1]
 
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][2] first.
 
@@ -101,13 +101,13 @@ Go to the [Log Explorer][10] to start exploring your logs.
 
 For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda Function][11].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The AWS CloudTrail integration does not include any metrics.
 
-### Events
+### イベント
 
 The AWS CloudTrail integration creates many different events based on the AWS CloudTrail audit trail. All events are tagged with `#cloudtrail` in your Datadog [events explorer][12]. You can set their priority in the integration configuration.
 
@@ -144,11 +144,11 @@ CloudTrail events that can be set to a normal priority (they appear in the Event
 * signin 
 * ssm
 
-### Service Checks
+### サービスチェック
 
 The AWS CloudTrail integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 ### The CloudTrail tile is missing or there are no accounts listed
 

@@ -35,7 +35,7 @@
 "categories":
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/vault/README.md"
 "display_on_public_website": true
@@ -72,33 +72,33 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Vault][1] cluster health and leader changes.
+このチェックは、[Vault][1] クラスターの健全性とリーダーの変更を監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Vault check is included in the [Datadog Agent][2] package.
-
-
-Starting with version 3.4.0, this OpenMetrics-based integration has a *latest* mode (`use_openmetrics`: true) and a *legacy* mode (`use_openmetrics`: false). To get all the most up-to-date features, Datadog recommends enabling the *latest* mode. Note that *latest* mode requires Python 3. For more information, see [Latest and Legacy Versioning For OpenMetrics-based Integrations][3].
-
-1. Ensure you have enabled [Prometheus metrics in the Vault configuration][4].
+Vault チェックは [Datadog Agent][2] パッケージに含まれています。
 
 
-2. For the Vault check to work properly, you need to either enable unauthenticated access to Vault metrics (using Vault version 1.3.0 or later) or provide a Vault client token:
+バージョン 3.4.0 以降、この OpenMetrics ベースのインテグレーションには、*最新*モード (`use_openmetrics`: true) と*レガシー*モード (`use_openmetrics`: false) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。*最新*モードには Python 3 が必要です。詳しくは、[OpenMetrics ベースのインテグレーションにおける最新バージョニングとレガシーバージョニング][3]を参照してください。
 
-   * To enable unauthenticated access, set Vault's [`unauthenticated_metrics_access`][5] configuration to `true`. This allows unauthenticated access to the `/v1/sys/metrics` endpoint.
+1. [Vault 構成で Prometheus メトリクス][4]が有効になっていることを確認します。
 
-     **Note**: The `/sys/metrics` endpoint requires Vault v1.1.0 or later to collect metrics.
 
-   * To use a Vault client token, follow the example below. The example uses the JWT auth method, but you can also use additional [auth methods][6]. 
+2. Vault チェックが正しく機能するには、Vault メトリクスへの未認証アクセスを有効にする (Vault バージョン 1.3.0 以降を使用) か、Vault クライアントトークンを提供する必要があります。
 
-The Vault integration requires the following capabilities:
+   * 未認証アクセスを有効にするには、Vault の [`unauthenticated_metrics_access`][5] 構成を `true` に設定します。これにより、`/v1/sys/metrics` エンドポイントへの未認証アクセスが許可されます。
 
-* Content of `metrics_policy.hcl`:
+     **注**: `/sys/metrics` エンドポイントでメトリクスを収集するには Vault v1.1.0 以降が必要です。
+
+   * Vault クライアントトークンを使用するには、以下の例を参照してください。JWT 認証方法を使用した例ですが、追加の[認証方法][6]を使用することもできます。
+
+Vault インテグレーションには以下の機能が必要です。
+
+* `metrics_policy.hcl` のコンテンツ:
 
   ```text
   path "sys/metrics*" {
@@ -106,7 +106,7 @@ The Vault integration requires the following capabilities:
   }
   ```
 
-* Setup policy and role:
+* セットアップポリシーとロール:
 
   ```text
   $ vault policy write metrics /path/to/metrics_policy.hcl
@@ -116,7 +116,7 @@ The Vault integration requires the following capabilities:
   $ vault agent -config=/path/to/agent_config.hcl
   ```
 
-* Content of `agent_config.hcl`:
+* `agent_config.hcl` のコンテンツ:
 
   ```
   exit_after_auth = true
@@ -142,18 +142,18 @@ The Vault integration requires the following capabilities:
   }
   ```
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `vault.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your vault performance data. See the [sample vault.d/conf.yaml][2] for all available configuration options.
+1. vault のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `vault.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル vault.d/conf.yaml][2] を参照してください。
 
-    Configuration for running the integration without a token (with the Vault configuration `unauthenticated_metrics_access` set to true):
+   トークンなしでインテグレーションを実行するための構成 (Vault 構成 `unauthenticated_metrics_access` が true に設定されている場合):
 
     ```yaml
     init_config:
@@ -170,7 +170,7 @@ To configure this check for an Agent running on a host:
         no_token: true
     ```
 
-    Configuration for running the integration with a client token:
+   クライアントトークンとのインテグレーションを実行するためのコンフィギュレーション:
 
     ```yaml
     init_config:
@@ -193,46 +193,46 @@ To configure this check for an Agent running on a host:
         # client_token_path: <CLIENT_TOKEN_PATH>
     ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/vault/datadog_checks/vault/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-| Parameter            | Value                                    |
+| パラメーター            | 値                                    |
 | -------------------- | ---------------------------------------- |
 | `<INTEGRATION_NAME>` | `vault`                                  |
-| `<INIT_CONFIG>`      | blank or `{}`                            |
+| `<INIT_CONFIG>`      | 空白または `{}`                            |
 | `<INSTANCE_CONFIG>`  | `{"api_url": "http://%%host%%:8200/v1"}` |
 
-`INSTANCE_CONFIG` needs to be customized depending on your vault authentication config. See example in Host section above. 
+Vault の認証コンフィギュレーションに応じて、`INSTANCE_CONFIG` をカスタマイズする必要があります。上記のホストセクションの例を参照してください。
 
-#### Log collection
+#### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Configure Vault to enable audit and server logs.
+2. Vault を構成し、監査とサーバーログを有効にします。
 
-   - Audit logs must be enabled by a privileged user with the appropriate policies. See [Enabling audit devices][2] for more information.
+   - 監査ログは、適切なポリシーを持つ特権ユーザーが有効にする必要があります。詳細は、[監査デバイスの有効化][2]を参照してください。
 
      ```shell
      vault audit enable file file_path=/vault/vault-audit.log
      ```
 
-   - Make sure that [server logs][3] are written to file. You can configure static server logs in the [Vault systemd startup script][4].
-     The following script is outputting the logs to `/var/log/vault.log`.
+   - [サーバーログ][3]がファイルに必ず書き込まれるようにしてください。[Vault systemd 起動スクリプト][4]で静的サーバーログを構成することができます。
+     以下のスクリプトは、`/var/log/vault.log`へログを出力します。
 
      ```text
      ...
@@ -242,7 +242,7 @@ _Available for Agent versions >6.0_
      ...
      ```
 
-3. Add this configuration block to your `vault.d/conf.yaml` file to start collecting your Vault logs:
+3. 次の構成ブロックを `vault.d/conf.yaml` ファイルに追加し、Vault ログの収集を始めます。
 
    ```yaml
    logs:
@@ -263,40 +263,40 @@ _Available for Agent versions >6.0_
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-Run the [Agent's status subcommand][7] and look for `vault` under the Checks section.
+[Agent の status サブコマンド][7]を実行し、Checks セクションで `vault` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "vault" >}}
 
 
 
-[Metrics starting with `vault.replication.fetchRemoteKeys`, `vault.replication.merkleDiff`, and `vault.replication.merkleSync`] are not reported unless the replication is in an unhealthy state. 
+[`vault.replication.fetchRemoteKeys`、`vault.replication.merkleDiff`、`vault.replication.merkleSync` で始まるメトリクス]は、レプリケーションが不健全状態でなければ報告されません。
 
-### Events
+### イベント
 
 `vault.leader_change`:
-This event fires when the cluster leader changes.
+このイベントは、クラスターリーダーが変更されると発生します。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "vault" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][8].
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor HashiCorp Vault with Datadog][9]
-- [Monitor HashiCorp Vault metrics and logs][10]
-- [Tools for HashiCorp Vault monitoring][11]
-- [How to monitor HashiCorp Vault with Datadog][12]
+- [Datadog を使用した HashiCorp Vault の監視][9]
+- [HashiCorp Vault のメトリクスおよびログの監視][10]
+- [HashiCorp Vault 監視用ツール][11]
+- [Datadog を使用した HashiCorp Vault の監視方法][12]
 
 
 [1]: https://www.vaultproject.io

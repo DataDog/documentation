@@ -1,5 +1,5 @@
 ---
-title: Saved Views
+title: 保存ビュー
 kind: documentation
 further_reading:
 - link: /quality_gates/explorer/search_syntax/

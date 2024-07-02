@@ -31,7 +31,7 @@
 "categories":
 - cloud
 - metrics
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md"
 "display_on_public_website": true
@@ -71,47 +71,47 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
-Apache APISIX is a dynamic, real-time, high-performance API gateway, and it provides rich traffic management features such as load balancing, dynamic upstream, canary release, circuit breaking, authentication, observability, and more. For example, use Apache APISIX to handle traditional north-south traffic, as well as east-west traffic between services. It can also be used as a Kubernetes ingress controller.
+Apache APISIX は動的でリアルタイムな高性能 API ゲートウェイであり、ロードバランシング、ダイナミックアップストリーム、カナリアリリース、サーキットブレーキング、認証、観測性などの豊富なトラフィック管理機能を提供します。例えば、Apache APISIX を使用して、従来の南北方向のトラフィックだけでなく、サービス間の東西方向のトラフィックも処理することができます。また、Kubernetes のイングレスコントローラーとしても使用できます。
 
-The [APISIX-Datadog plugin][1] pushes its custom metrics to the DogStatsD server and comes bundled with the Datadog Agent over the UDP connection. DogStatsD is an implementation of StatsD protocol. It collects the custom metrics for [Apache APISIX][2] agent, aggregates it into a single data point, and sends it to the configured Datadog server.
+[APISIX-Datadog プラグイン][1]は、Datadog Agent にバンドルされている DogStatsD サーバーに、UDP 接続でカスタムメトリクスをプッシュします。DogStatsD は StatsD プロトコルの実装です。[Apache APISIX][2] Agent のカスタムメトリクスを収集し、1 つのデータポイントに集約して、設定された Datadog サーバーに送信します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-Follow the configuration instructions below.
+以下の構成方法に従ってください。
 
-### Configuration
+### 構成
 
-1. If you are already using Datadog and have the Datadog Agent installed, make sure port 8125/UDP is allowed through your firewall. For example, the Apache APISIX agent can reach port 8125 of the Datadog Agent. If you already have this configured, you can skip to step 3.
+1. すでに Datadog を使用していて、Datadog Agent がインストールされている場合は、ポート 8125/UDP がファイアウォールで許可されていることを確認してください。例えば、Apache APISIX Agent は、Datadog Agent のポート 8125 に到達することができます。すでにこれを構成している場合は、ステップ 3 までスキップできます。
 
-> To learn more about how to install the Datadog Agent, see the [Agent documentation][3].
+> Datadog Agent のインストール方法の詳細については、[Agent のドキュメント][3]を参照してください。
 
-2. If you are new to Datadog:
+2. Datadog を初めて利用する場合
 
-   1. First, create an account by visiting the [Datadog website][4] and click on the Get Started Free button.
-   2. Generate an API Key.
-      ![Generate an API Key][5]
+   1. まず、[Datadog のウェブサイト][4]にアクセスし、Get Started Free ボタンをクリックしてアカウントを作成します。
+   2. API キーを生成します。
+      ![API キーの生成][5]。
 
-3. The APISIX-Datadog plugin requires only the DogStatsD component of `datadog/agent` as the plugin asynchronously send metrics to the DogStatsD server following the statsd protocol over standard UDP socket. That's why APISIX recommends using the standalone `datadog/dogstatsd` image instead of using the full agent. It's extremely lightweight (only ~11 MB in size) compared to ~2.8GB of `datadog/agent` image.
+3. APISIX-Datadog プラグインは標準的な UDP ソケットを介して statsd プロトコルに従って DogStatsD サーバーに非同期にメトリクスを送信するので、`datadog/agent` の DogStatsD コンポーネントのみを必要とします。これが APISIX が完全な Agent を使うのではなく、スタンドアロンの `datadog/dogstatsd` イメージを使うことを推奨している理由です。`datadog/agent` イメージの ~2.8GB に比べて非常に軽量です (サイズは ~11MB のみ)。
 
-To run it as a container:
+コンテナとして実行するには
 
 ```shell
-# pull the latest image
+# 最新イメージをプルします
 $ docker pull datadog/dogstatsd:latest
-# run a detached container
+# 切り離されたコンテナを実行します
 $ docker run -d --name dogstatsd-agent -e DD_API_KEY=<Your API Key from step 2> -p 8125:8125/udp  datadog/dogstatsd
 ```
 
-If you are using Kubernetes in your production environment, you can deploy `dogstatsd` as a `Daemonset` or as a `Multi-Container Pod` alongside Apache APISIX agent.
+Kubernetes を使用している場合、`dogstatsd` を Apache APISIX Agent と一緒に `Daemonset` または `Multi-Container Pod` としてデプロイすることができます。
 
-4. The following is an example on how to activate the Datadog plugin for a specific route. This assumes the `dogstatsd` agent is already up and running.
+4. 以下は、特定のルートに対して Datadog プラグインを有効化する方法の例です。これは、`dogstatsd` Agent が既に稼働していることを前提としています。
 
 ```shell
-# enable plugin for a specific route
+# 特定のルートでプラグインを有効にします
 $ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
 {
   "plugins": {
@@ -127,12 +127,12 @@ $ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f
 }'
 ```
 
-Now any requests to endpoint URI `/hello` will generate the above metrics and push it to local DogStatsD server of the Datadog Agent.
+これで、エンドポイント URI である `/hello` へのリクエストがあれば、上記のメトリクスが生成され、Datadog Agent のローカル DogStatsD サーバーにプッシュされるようになります。
 
-5. To deactivate the plugin, remove the corresponding JSON configuration in the plugin configuration to disable  `datadog`. APISIX plugins are hot-reloaded, therefore there is no need to restart APISIX.
+5. プラグインを無効にするには、プラグインコンフィギュレーション内の対応する JSON コンフィギュレーションを削除して `datadog` を無効にしてください。APISIX のプラグインはホットロードされるため、APISIX を再起動する必要はありません。
 
 ```shell
-# disable plugin for a route
+# ルートに対してプラグインを無効にします
 curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
 {
   "uri": "/hello",
@@ -146,29 +146,29 @@ curl http://127.0.0.1:9080/apisix/admin/routes/1 -H 'X-API-KEY: edd1c9f034335f13
 }'
 ```
 
-5. See the [Datadog Plugin][1] documentation for additional custom configuration options.
+5. その他のカスタム構成オプションについては、[Datadog Plugin][1] のドキュメントを参照してください。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][6] and look for `apisix` under the Checks section.
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `apisix` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "apache-apisix" >}}
 
 
-### Events
+### イベント
 
-The Apache APISIX check does not include any events.
+Apache APISIX チェックにはイベントは含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][8].
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-- [Cloud Monitoring with Datadog in Apache APISIX][9]
+- [Apache APISIX における Datadog によるクラウドモニタリング][9]
 
 [1]: https://apisix.apache.org/docs/apisix/plugins/datadog
 [2]: https://apisix.apache.org/

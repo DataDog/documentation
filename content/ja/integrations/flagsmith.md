@@ -25,7 +25,7 @@
 "categories":
 - issue tracking
 - developer tools
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/flagsmith/README.md"
 "display_on_public_website": true
@@ -78,7 +78,7 @@ All flag change events are sent to Datadog. These events are tagged with the env
 
 Flagsmith's dashboard widget lets you view your Flagsmith Flags and Audit Logs directly in Datadog.
 
-## Setup
+## セットアップ
 
 In the [Flagsmith Dashboard][2], select the Integrations Menu and then add the Datadog Integration. Enter your [Datadog API Key][3]. For Base URL, enter `https://api.datadoghq.com` if you are using the US Datadog site, or `https://api.datadoghq.eu` if you are using the EU Datadog site.
 
@@ -95,21 +95,21 @@ In the [Flagsmith Dashboard][2], select the Integrations Menu and then add the D
 1. Select the page size and, optionally, a widget title and Flagsmith Tag to filter on.
 1. Click **Save** to finish configuring the dashboard widget.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Flagsmith integration does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 The Flagsmith integration does not include any service checks.
 
-### Events
+### イベント
 
 All Flagsmith events are sent to the Datadog event stream.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? See the [Flagsmith documentation][5] or contact [Datadog Support][6].
 

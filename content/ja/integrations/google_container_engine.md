@@ -4,9 +4,9 @@
 - "containers"
 - "google cloud"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Monitor your GCE containers' resource usage."
+"description": "GCE コンテナのリソースの使用状況を監視。"
 "doc_link": "https://docs.datadoghq.com/integrations/google_container_engine/"
 "draft": false
 "git_integration_title": "google_container_engine"
@@ -29,21 +29,21 @@
 This integration is deprecated. Instead, see the <a href="https://docs.datadoghq.com/integrations/google_kubernetes_engine">Google Kubernetes Engine integration</a> documentation. For more details about deprecated metrics, see the <a href="https://cloud.google.com/monitoring/api/metrics_gcp#gcp-container">Google Cloud metrics</a> documentation.
 </div>
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_container_engine" >}}
 
 
-### Events
+### イベント
 
 The Google Container Engine integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Container Engine integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][2].
 

@@ -11,25 +11,25 @@ further_reading:
   text: Getting Started with Tags
 ---
 
-Datadog Network Device Monitoring (NDM) supports regular expressions to create metric tags in the format `<KEY>:<VALUE>`.
+Datadog ネットワークデバイスモニタリング (NDM) は、正規表現に対応し `<KEY>:<VALUE>` の形式でメトリクスタグを作成します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Follow the [setup instructions][1] to install Datadog Network Device Monitoring, and start collecting SNMP Metrics and Traps.
 
-### Configuration
+### 構成
 
-In the [SNMP conf.yaml][2], you can specify `metric_tags` from an OID. To create multiple tags for devices, use regular expressions to separate the resulting value into multiple tags, or get a substring using the regular [Python engine][3].
+[SNMP conf.yaml][2] で、OID から `metric_tags` を指定します。デバイスに対し複数のタグを作成するには、正規表現を使用して結果の値を複数のタグに分けるか、正規表現の [Python エンジン][3]を使用して部分文字列を取得します。
 
 #### OID
 
-The example below creates two tags using regex matching on the OID's value. So, if the OID's value is `41ba948911b9`, the tags `host_prefix:41` and `host:ba948911b9` are added to the corresponding metrics.
+以下の例では、OID の値に一致する正規表現を使用して 2 つのタグを作成しています。OID の値が `41ba948911b9` の場合、対応するメトリクスにタグ `host_prefix:41` と `host:ba948911b9` が追加されます。
 
 ```yaml
     metric_tags:
-     - # From an OID:
+     - # OID より:
        symbol:
           OID: 1.3.6.1.2.1.1.5.0
           name: sysName
@@ -39,7 +39,7 @@ The example below creates two tags using regex matching on the OID's value. So, 
            host: \2
 ```
 
-The example below creates tags using regex for a table:
+以下の例では、正規表現を使用してテーブルにタグを作成します。
 
 ```yaml
 metrics:
@@ -60,7 +60,7 @@ metrics:
          - suffix: '\2'
 ```
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

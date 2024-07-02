@@ -24,7 +24,7 @@
 "categories":
 - os & system
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/kernelcare/README.md"
 "display_on_public_website": true
@@ -67,11 +67,11 @@
 
 This integration allows you to forward the Kernelcare metrics through the Datadog Agent.
 
-## Setup
+## セットアップ
 
 The Kernelcare check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Kernelcare check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -83,7 +83,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Kernelca
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `kernelcare.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your kernelcare performance data. See the [sample kernelcare.d/conf.yaml][5] for all available configuration options.
 
@@ -93,21 +93,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Kernelca
 
 Run the [Agent's status subcommand][7] and look for `kernelcare` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "kernelcare" >}}
 
 
-### Events
+### イベント
 
 The Kernelcare integration does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "kernelcare" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

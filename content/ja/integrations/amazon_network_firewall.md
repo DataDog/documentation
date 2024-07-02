@@ -2,7 +2,7 @@
 "categories":
 - cloud
 - aws
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Monitor your AWS Network Firewall."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_network_firewall/"
@@ -27,9 +27,9 @@ AWS Network Firewall is a stateful, service that allows customers to filter traf
 
 Enable this integration to see all of your AWS Network Firewall metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -55,23 +55,23 @@ Configure AWS Network Firewall to send logs either to a S3 bucket or to CloudWat
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_network_firewall" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The AWS Network Firewall integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS Network Firewall integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

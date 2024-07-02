@@ -23,7 +23,7 @@
 "categories":
 - cloud
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/traefik/README.md"
 "display_on_public_website": true
@@ -64,11 +64,11 @@
 
 Send [Traefik][1] metrics, logs, and traces to Datadog to monitor your Traefik services.
 
-## Setup
+## セットアップ
 
 The Traefik check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Traefik check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -80,7 +80,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Traefik 
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 {{< tabs >}}
 {{% tab "v2" %}}
@@ -247,21 +247,21 @@ For v2, see the list of [Traefik metrics][6] sent to Datadog.
 
 For v1, see the list of [metrics][7] provided by the integration.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "traefik" >}}
 
 
-### Events
+### イベント
 
 The Traefik check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "traefik" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

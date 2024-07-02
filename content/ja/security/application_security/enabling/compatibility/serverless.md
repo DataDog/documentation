@@ -58,7 +58,7 @@ Go
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
 
-|Type               | Threat Detection  |  Software Composition Analysis    | Code Security     |
+|Type               | Threat Detection  |  Software Composition Analysis    | コードセキュリティ     |
 | ---       |   ---                     |           ----                    |           ----                            |
 | Java          | beta          | beta                              |                       |
 | .NET      | beta          | beta                                  |                       |
@@ -75,7 +75,7 @@ Only *web applications* are supported. Azure Functions are not supported.
 
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
 
-|Type       | OS                 |Threat Detection  |  Software Composition Analysis     | Code Security    |
+|Type       | OS                 |Threat Detection  |  Software Composition Analysis     | コードセキュリティ    |
 |-----------|--------------------|------------------|------------------------------------|------------------------------------------|
 | Java      | Windows, Linux     | {{< X >}}        | {{< X >}}                          | beta                                     |
 | .NET      | Windows, Linux     | {{< X >}}        | {{< X >}}                          |                                          |

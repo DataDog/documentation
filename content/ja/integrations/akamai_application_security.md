@@ -21,7 +21,7 @@
 "categories":
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -101,9 +101,9 @@ other Akamai product instructions in the same format.
 3. The config ID for the selected configuration is found in the URL. The URL is in the format: `http\://control.akamai.com/apps/security-config/#/next/configs/**CONFIG_ID**`.
 4. Under your account, click **Add New** and enter the config ID that was found in the previous step.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Akamai integration does not include any metrics.
 
@@ -112,15 +112,15 @@ The Akamai integration does not include any metrics.
 The Akamai integration collects logs from your Akamai account's security events. Due to limitations on Akamai's APIs, 
 Datadog can only collect up to the past 12 hours of historical events. 
 
-### Events
+### イベント
 
 The Akamai integration does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "akamai_application_security" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

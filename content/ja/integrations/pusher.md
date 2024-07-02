@@ -25,7 +25,7 @@
 "categories":
 - "metrics"
 - "message queues"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -58,54 +58,54 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 {{< img src="integrations/pusher/pusher_dashboard.png" alt="Pusher dashboard" popup="true">}}
 
-## Overview
+## 概要
 
-Monitor your realtime messages and connection analytics across your Pusher apps:
+Pusher アプリ全体のリアルタイムメッセージと接続分析を監視して、以下のことができます。
 
-- Visualize concurrent connections in realtime.
-- Track messages sent by type, including broadcast, client events, webhooks, and API messages.
-- Get a statistical breakdown of message size, including average, median, max, and 95th percentile.
-- Monitor usage within billing timetables.
+- 同時接続をリアルタイムに視覚化します。
+- ブロードキャスト、クライアントイベント、Webhook、API メッセージなどのタイプ別に、送信されたメッセージを追跡できます。
+- 平均値、中央値、最大値、95 パーセンタイルなど、メッセージサイズの統計詳細データを取得できます。
+- 課金タイムテーブル内の使用状況を監視できます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-In order to monitor your metrics from Pusher:
+Pusher からのメトリクスを監視するには、以下の手順に従ってください。
 
-1. Copy your [Datadog API key][1].
+1. [Datadog API キー][1]をコピーします。
 
-2. Go to your Pusher account settings and select **Datadog Integration** or [sign in][2].
+2. Pusher アカウント設定に移動して**Datadog インテグレーション**を選択するか、[サインイン][2]します。
 
-3. Paste your Datadog API key and click **Save**.
+3. Datadog API キーを貼り付け、**Save** をクリックします。
 
-4. Return to your Datadog dashboard to see metrics begin to populate the default Pusher dashboard view.
+4. Datadog ダッシュボードに戻り、デフォルトの Pusher ダッシュボードビューにメトリクスの表示が開始されたことを確認します。
 
 <div class="alert alert-info">
-Metrics populate in real time. Your historical data populates once your integration is successfully installed.
+メトリクスはリアルタイムで入力されます。過去のデータは、インテグレーションが正常にインストールされた時点で入力されます。
 </div>
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "pusher" >}}
 
 
-### Events
+### イベント
 
-The Pusher integration does not include any events.
+Pusher インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The Pusher integration does not include any service checks.
+Pusher インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][4].
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
 - [Introducing real-time monitoring for Pusher][5]
 

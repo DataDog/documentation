@@ -4,27 +4,27 @@ aliases:
  - /agent/guide/build-container-agent
 ---
 
-Follow the instructions below to build the Datadog Docker Agent image for a given `<AGENT_VERSION>` Agent version (above v6.0).
+Datadog Docker Agent を特定の `<AGENT_VERSION>` でビルドするには、以下の手順に従います。Agent のバージョンは v6.0 以降です。
 
-1. Clone the Datadog Agent repository:
+1. Datadog Agent レポジトリを複製します。
 
     ```shell
     git clone https://github.com/DataDog/datadog-agent.git
     ```
 
-2. Go into the `datadog-agent/Dockerfiles/agent/` folder:
+2. `datadog-agent/Dockerfiles/agent/` フォルダに移動します。
 
     ```shell
     cd datadog-agent/Dockerfiles/agent/
     ```
 
-3. Switch to the Agent version branch you want to build the Agent from:
+3. ビルドする Agent のバージョンのブランチに切り替えます。
 
     ```shell
     git branch <AGENT_VERSION> && git checkout <AGENT_VERSION>
     ```
 
-4. Download the Agent Debian package that corresponds to the Agent version you want. Choose between the AMD and ARM architecture:
+4. その Agent バージョンに対応する Agent Debian パッケージをダウンロードします。AMD と ARM のいずれかのアーキテクチャを選択してください。
 
     {{< tabs >}}
 {{% tab "AMD" %}}
@@ -43,9 +43,9 @@ curl https://s3.amazonaws.com/apt.datadoghq.com/pool/d/da/datadog-agent_<AGENT_V
 {{% /tab %}}
 {{< /tabs >}}
 
-    **Note**: The full list of Debian packages available can be found [on this APT listing][1].
+    **注**: 利用可能な Debian パッケージの一覧は、[こちらの APT リスト][1]を参照してください。
 
-5. Build the Agent image by running:
+5. 以下を実行して Agent イメージをビルドします。
 
     {{< tabs >}}
 {{% tab "AMD" %}}
@@ -64,18 +64,17 @@ docker build --build-arg <BUILD_ARGS> --file arm64/Dockerfile --pull --tag <IMAG
 {{% /tab %}}
 {{< /tabs >}}
 
-    For instance to build the Agent version 7.17.0 on the AMD architecture you would run:
+    たとえば、AMD アーキテクチャで Agent バージョン 7.17.0 のイメージをビルドするには、以下を実行します。
 
     ```shell
     docker build --build-arg DD_AGENT_ARTIFACT=./datadog-agent_7.17.0-1_amd64.deb --file amd64/Dockerfile --pull --tag documentation-example .
     ```
 
-     Available `<BUILD_ARGS>` are:
-
-    | Argument          | Definition                                                                  | Default |
+     `<BUILD_ARGS>` には以下を定義できます。
+    | 引数          | 定義                                                                  | デフォルト |
     | ----------------- | --------------------------------------------------------------------------- | ------- |
-    | PYTHON_VERSION    | The Python runtime version for your Agent check.                            | `-`     |
-    | WITH_JMX          | If set to `true`, the Agent container contains the JMX fetch logic.         | `false` |
-    | DD_AGENT_ARTIFACT | Path to the Agent Debian artifact package to use if not in the same folder. | `-`     |
+    | PYTHON_VERSION    | Agent チェックに必要な Python ランタイムのバージョン。                            | `-`     |
+    | WITH_JMX          | `true` に設定すると、Agent コンテナに JMX フェッチのロジックが含まれます。         | `false` |
+    | DD_AGENT_ARTIFACT | 使用する Agent Debian アーティファクトパッケージのパス（同じフォルダにない場合）　 | `-`     |
 
 [1]: http://apt.datadoghq.com/pool/d/da/

@@ -37,7 +37,7 @@
 - data stores
 - marketplace
 - sap
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -100,7 +100,7 @@
 
 The MaxDB integration monitors data and log areas and volumes, caches, sessions, locks, and other metrics for MaxDB instances to ensure the databases are running as they should be. The integration comes with a dashboard which can be filtered by database, as well as database host. The MaxDB integration also comes with monitors for some common metrics that relate to the overall health of the database.
 
-### Monitors
+### モニター
 1. MaxDB Connection Check
 2. MaxDB State
 3. MaxDB Data Volume Usage

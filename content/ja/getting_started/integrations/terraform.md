@@ -27,7 +27,7 @@ The [AWS integration resource][9], [Azure integration resource][10], and [Google
 
 See the [Manage Logs and Metrics with Terraform guide][20] for instructions on managing your logs and metrics with Terraform.
 
-### Monitors
+### モニター
 
 With data flowing into your Datadog account, implement [alerting with Datadog monitors][8] to be notified about any unexpected changes or anomalous behavior. Use the [monitor resource][4] to create and manage your monitors, or use the [monitor JSON resource][5] to use JSON definitions for your monitors. See the [create a monitor][6] section of the main Terraform documentation for an example `monitor.tf` file that creates a [Live Process monitor][7].
 
@@ -35,7 +35,7 @@ With data flowing into your Datadog account, implement [alerting with Datadog mo
 
 See the [Manage Datadog with Terraform guide][19] for instructions on managing your Datadog account with Terraform.
 
-### Dashboards
+### ダッシュボード
 
 To further analyze or display your data for an audience, create [Datadog dashboards][18]. Terraform provides the [dashboard resource][15] for this, or you can use the [dashboard JSON resource][16] to create dashboards with JSON definitions. You can also [restrict the editing of a dashboard][17] by configuring restricted roles.
 

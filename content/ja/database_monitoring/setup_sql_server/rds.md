@@ -12,58 +12,58 @@ further_reading:
 
 ---
 
-Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
+データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
-Do the following steps to enable Database Monitoring with your database:
+データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
 
-1. [Configure the AWS integration](#configure-the-aws-integration)
+1. [AWS インテグレーションを構成する](#configure-the-aws-integration)
 1. [Grant the Agent access](#grant-the-agent-access)
-1. [Install the Agent](#install-the-agent)
-1. [Install the RDS integration](#install-the-rds-integration)
+1. [Agent をインストールする](#install-the-agent)
+1. [RDS インテグレーションをインストールする](#install-the-rds-integration)
 
-## Before you begin
+## はじめに
 
-Supported SQL Server versions
-: 2014, 2016, 2017, 2019, 2022
+サポートされている SQL Server バージョン
+: 2014、2016、2017、2019、2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
-## Configure the AWS integration
+## AWS インテグレーションの構成
 
-Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][2].
+[Amazon Web Services インテグレーションタイル][2]の **Resource Collection** セクションで **Standard Collection** を有効にします。
 
-## Grant the Agent access
+## Agent にアクセスを付与する
 
-The Datadog Agent requires read-only access to the database server to collect statistics and queries.
+Datadog Agent が統計やクエリを収集するためには、データベースサーバーへの読み取り専用のアクセスが必要となります。
 
-Create a read-only login to connect to your server and grant the required permissions:
+サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
 
 ```SQL
 USE [master];
 CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 GO
---Set context to msdb database and create datadog user
+--コンテキストを msdb データベースに設定し、datadog ユーザーを作成します。
 USE [msdb];
 CREATE USER datadog FOR LOGIN datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next line:
+-- Log Shipping Monitoring (Agent v7.50 以降で利用可能) を使用するには、次の行のコメントを外します。
 -- GRANT SELECT to datadog;
 GO
---Switch back to master and grant datadog user server permissions
+--master に戻り、datadog ユーザーにサーバー権限を付与します
 USE [master];
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
 GO
 ```
 
-Create the `datadog` user in each additional application database:
+追加した各アプリケーションデータベースに `datadog` ユーザーを作成します。
 ```SQL
 USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-This is required because RDS does not permit granting `CONNECT ANY DATABASE`. The Datadog Agent needs to connect to each database to collect database-specific file I/O statistics.
+これは、RDS が `CONNECT ANY DATABASE` の付与を許可していないため、必要です。Datadog Agent は、データベース固有のファイル I/O 統計情報を収集するために、各データベースに接続する必要があります。
 
-## Install the Agent
+## Agent のインストール
 
 Because AWS does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
@@ -86,14 +86,14 @@ Because AWS does not grant direct host access, the Datadog Agent must be install
 {{% /tab %}}
 {{< /tabs >}}
 
-## Example Agent Configurations
+## Agent の構成例
 {{% dbm-sqlserver-agent-config-examples %}}
 
-## Install the RDS integration
+## RDS インテグレーションをインストールする
 
-To collect more comprehensive database metrics and logs from AWS, install the [RDS integration][1].
+AWS からより包括的なデータベースメトリクスとログを収集するには、[RDS インテグレーション][1]をインストールします。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

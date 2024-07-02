@@ -19,7 +19,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/wmi_check/README.md"
 "display_on_public_website": true
@@ -62,9 +62,9 @@ Get metrics from your Windows applications and servers with Windows Management I
 - Visualize their performance.
 - Correlate their activity with the rest of your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you are only collecting standard metrics from Microsoft Windows and other packaged applications, there are no installation steps. If you need to define new metrics to collect from your application, then you have a few options:
 
@@ -78,7 +78,7 @@ If you assign the new metric a category of My_New_Metric, the WMI path is
 
 If the metric isn't showing up in WMI, try running `winmgmt /resyncperf` to force the computer to reregister the performance libraries with WMI.
 
-### Configuration
+### 構成
 
 1. Click the **Install Integration** button on the WMI Integration Tile.
 2. Open the Datadog Agent Manager on the Windows server.
@@ -226,21 +226,21 @@ The setting `[IDProcess, Win32_Process, Handle, CommandLine]` tags each process 
 
 Run the [Agent's status subcommand][10] and look for `wmi_check` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 All metrics collected by the WMI check are forwarded to Datadog as [custom metrics][11], which may impact your [billing][12].
 
-### Events
+### イベント
 
 The WMI check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The WMI check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][13].
 

@@ -30,7 +30,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/spark/README.md"
 "display_on_public_website": true
@@ -43,7 +43,7 @@
 "manifest_version": "2.0.0"
 "name": "spark"
 "public_title": "Spark"
-"short_description": "Track failed task rates, shuffled bytes, and much more."
+"short_description": "タスクの失敗率、シャッフルされたバイト数などを追跡します。"
 "supported_os":
 - "linux"
 - "windows"
@@ -51,12 +51,12 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Track failed task rates, shuffled bytes, and much more."
+  "description": "タスクの失敗率、シャッフルされたバイト数などを追跡します。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -66,33 +66,33 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Spark Graph][1]
+![Spark のグラフ][1]
 
-## Overview
+## 概要
 
-This check monitors [Spark][2] through the Datadog Agent. Collect Spark metrics for:
+このチェックは、Datadog Agent を通じて [Spark][2] を監視します。以下の Spark メトリクスを収集します。
 
-- Drivers and executors: RDD blocks, memory used, disk used, duration, etc.
-- RDDs: partition count, memory used, and disk used.
-- Tasks: number of tasks active, skipped, failed, and total.
-- Job state: number of jobs active, completed, skipped, and failed.
+- ドライバーとエグゼキューター: RDD ブロック、使用メモリ量、使用ディスク容量、処理時間など
+- RDD: パーティション数、使用メモリ量、使用ディスク容量。
+- タスク: アクティブなタスク数、スキップされたタスク数、失敗したタスク数、合計タスク数。
+- ジョブの状態: アクティブなジョブ数、完了したジョブ数、スキップされたジョブ数、失敗したジョブ数。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Spark check is included in the [Datadog Agent][3] package. No additional installation is needed on your Mesos master (for Spark on Mesos), YARN ResourceManager (for Spark on YARN), or Spark master (for Spark Standalone).
+Spark チェックは [Datadog Agent][3] パッケージに含まれています。Mesos マスター（Mesos の Spark）、YARN ResourceManager（YARN の Spark）、Spark マスター（Spark Standalone）に追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `spark.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. The following parameters may require updating. See the [sample spark.d/conf.yaml][2] for all available configuration options.
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `spark.d/conf.yaml` ファイルを編集します。以下のパラメーターは、更新が必要な場合があります。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル spark.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -113,37 +113,37 @@ To configure this check for an Agent running on a host:
        # spark_proxy_enabled: true # if you have enabled the spark UI proxy
    ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/spark/datadog_checks/spark/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-| Parameter            | Value                                                             |
+| パラメーター            | 値                                                             |
 | -------------------- | ----------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `spark`                                                           |
-| `<INIT_CONFIG>`      | blank or `{}`                                                     |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                     |
 | `<INSTANCE_CONFIG>`  | `{"spark_url": "%%host%%:8080", "cluster_name":"<CLUSTER_NAME>"}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Log collection
+### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
       ```yaml
        logs_enabled: true
      ```
 
-2. Uncomment and edit the logs configuration block in your `spark.d/conf.yaml` file. Change the `type`, `path`, and `service` parameter values based on your environment. See the [sample spark.d/conf.yaml][4] for all available configuration options.
+2. `spark.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、 `type`、`path`、`service` パラメーターの値を変更してください。使用可能なすべての構成オプションの詳細については、[サンプル spark.d/conf.yaml][4] を参照してください。
 
       ```yaml
        logs:
@@ -158,47 +158,47 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
            #     name: new_log_start_with_date
      ```
 
-3. [Restart the Agent][5].
+3. [Agent を再起動します][5]。
 
-To enable logs for Docker environments, see [Docker Log Collection][6].
+Docker 環境のログを有効にするには、[Docker ログ収集][6]を参照してください。
 
-### Validation
+### 検証
 
-Run the Agent's [status subcommand][7] and look for `spark` under the Checks section.
+Agent の [status サブコマンド][7]を実行し、Checks セクションで `spark` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "spark" >}}
 
 
-### Events
+### イベント
 
-The Spark check does not include any events.
+Spark チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "spark" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-### Spark on AWS EMR
+### AWS EMR 上の Spark
 
-To receive metrics for Spark on AWS EMR, [use bootstrap actions][8] to install the [Datadog Agent][9]:
+AWS EMR 上の Spark のメトリクスを受信するには、[ブートストラップアクションを使用][8]して [Datadog Agent][9] をインストールします。
 
-For Agent v5, create the `/etc/dd-agent/conf.d/spark.yaml` configuration file with the [proper values on each EMR node][10].
+Agent v5 の場合は、[各 EMR ノードに正しい値が指定][10]された `/etc/dd-agent/conf.d/spark.yaml` 構成ファイルを作成します。
 
-For Agent v6/7, create the `/etc/datadog-agent/conf.d/spark.d/conf.yaml` configuration file with the [proper values on each EMR node][10].
+Agent v6/7 の場合は、[各 EMR ノードに正しい値が指定][10]された `/etc/datadog-agent/conf.d/spark.d/conf.yaml` 構成ファイルを作成します。
 
-### Successful check but no metrics are collected
+### チェックは成功したが、メトリクスは収集されない
 
-The Spark integration only collects metrics about running apps. If you have no currently running apps, the check will just submit a health check.
+Spark インテグレーションは、実行中のアプリに関するメトリクスのみを収集します。現在実行中のアプリがない場合、チェックはヘルスチェックを送信するだけです。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Hadoop and Spark monitoring with Datadog][11]
+- [Datadog を使用した Hadoop と Spark の監視][11]
 - [Monitoring Apache Spark applications running on Amazon EMR][12]
 
 

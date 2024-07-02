@@ -7,27 +7,27 @@
 - "iot"
 - "log collection"
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Collect a wealth of GCP metrics and visualize your instances in a host map."
+"description": "豊富な GCP メトリクスを収集してホストマップ内のインスタンスを視覚化。"
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_platform/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/cspm-for-gcp-with-datadog/"
-  "tag": "Blog"
-  "text": "Improve the compliance and security posture of your Google Cloud environment with Datadog"
+  "tag": "ブログ"
+  "text": "Datadog による Google Cloud 環境のコンプライアンスとセキュリティポスチャの改善"
 - "link": "https://www.datadoghq.com/blog/google-cloud-vertex-ai-monitoring-datadog/"
-  "tag": "Blog"
-  "text": "Monitor Google Cloud Vertex AI with Datadog"
+  "tag": "ブログ"
+  "text": "Datadog による Google Cloud Vertex AI の監視"
 - "link": "https://www.datadoghq.com/blog/monitor-dataflow-pipelines-with-datadog/"
-  "tag": "Blog"
-  "text": "Monitor your Dataflow pipelines with Datadog"
+  "tag": "ブログ"
+  "text": "Datadog による Dataflow パイプラインの監視"
 - "link": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_gcp_sts"
   "tag": "Terraform"
-  "text": "Create and manage your Google Cloud integration with Terraform"
+  "text": "Terraform による Google Cloud インテグレーションの作成と管理"
 - "link": "https://www.datadoghq.com/blog/track-bigquery-costs-performance/"
-  "tag": "Blog"
-  "text": "Monitor BigQuery with Datadog"
+  "tag": "ブログ"
+  "text": "Datadog による BigQuery の監視"
 "git_integration_title": "google_cloud_platform"
 "has_logo": true
 "integration_id": "google-cloud-platform"
@@ -87,7 +87,7 @@ Datadog's GCP integration is built to collect <a href="https://cloud.google.com/
 | [Vertex AI][33]                     | Build, train and deploy custom machine learning (ML) models.                          |
 | [VPN][34]                           | Managed network functionality                                                         |
 
-## Setup
+## セットアップ
 
 Set up Datadog's Google Cloud integration to collect metrics and logs from your Google Cloud services.
 
@@ -348,43 +348,43 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 
 4. Under **Optional Parameters**, check `Include full Pub/Sub message in the payload`.
 
-5. If you created a secret in Secret Manager with your Datadog API key value as mentioned in [step 1](#1-create-a-cloud-pubsub-topic-and-subscription), enter the **resource name** of the secret in the **Google Cloud Secret Manager ID** field.  
+5. [ステップ 1](#1-create-a-cloud-pubsub-topic-and-subscription) で言及したように Datadog API キーの値で Secret Manager にシークレットを作成した場合は、シークレットの**リソース名**を **Google Cloud Secret Manager ID** フィールドに入力します。
 
-{{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Optional parameters in the Datadog Dataflow template with Google Cloud Secret Manager ID and Source of the API key passed fields both highlighted" style="width:80%;">}}  
+{{< img src="integrations/google_cloud_platform/dataflow_template_optional_parameters.png" alt="Datadog Dataflow テンプレートのオプションパラメーター。Google Cloud Secret Manager ID と Source of the API key passed フィールドが両方ハイライトされています" style="width:80%;">}}  
 
-See [Template parameters][55] in the Dataflow template for details on using the other available options:
+その他の使用可能なオプションの詳細については、Dataflow テンプレートの[テンプレートパラメーター][55]を参照してください。
 
-   - `apiKeySource=KMS` with `apiKeyKMSEncryptionKey` set to your [Cloud KMS][71] key ID and `apiKey` set to the encrypted API key
-   - **Not recommended**: `apiKeySource=PLAINTEXT` with `apiKey` set to the plaintext API key
+   - `apiKeyKMSEncryptionKey` を [Cloud KMS][71] のキー ID に設定し、`apiKey` を暗号化された API キーに設定した `apiKeySource=KMS`
+   - **非推奨**: `apiKeySource=PLAINTEXT` で、`apiKey` にプレーンテキストの API キーを設定
 
-6. If you created a custom worker service account, select it in the **Service account email** dropdown.  
+6. カスタムワーカーサービスアカウントを作成した場合は、**Service account email** ドロップダウンでそれを選択します。
 
-{{< img src="integrations/google_cloud_platform/dataflow_template_service_account.png" alt="Optional parameters in the Datadog Dataflow template with the service account email dropdown highlighted" style="width:80%;">}}
+{{< img src="integrations/google_cloud_platform/dataflow_template_service_account.png" alt="Datadog Dataflow テンプレートのオプションパラメーター。サービスアカウントのメールドロップダウンがハイライトされています" style="width:80%;">}}
 
-7. Click **RUN JOB**.
+7. **RUN JOB** をクリックします。
 
-**Note**: If you have a shared VPC, see the [Specify a network and subnetwork][72] page in the Dataflow documentation for guidelines on specifying the `Network` and `Subnetwork` parameters.
+**注**: 共有 VPC を使用している場合は、Dataflow ドキュメントの[ネットワークとサブネットワークを指定する][72]ページで `Network` と `Subnetwork` パラメーターの指定に関するガイドラインを参照してください。
 
-#### Validation
+#### 検証
 
-New logging events delivered to the Cloud Pub/Sub topic appear in the [Datadog Log Explorer][73].
+Cloud Pub/Sub トピックに配信された新しいログイベントは、[Datadog ログエクスプローラー][73]に表示されます。
 
-**Note**: You can use the [Google Cloud Pricing Calculator][74] to calculate potential costs.
+**注**: [Google Cloud Pricing Calculator][74] を使用して、潜在的なコストを計算できます。
 
-#### Monitor the Cloud Pub/Sub log forwarding
+#### Cloud Pub/Sub ログの転送を監視する
 
-The [Google Cloud Pub/Sub integration][30] provides helpful metrics to monitor the status of the log forwarding:
+[Google Cloud Pub/Sub インテグレーション][30]は、ログ転送のステータスを監視するのに役立つメトリクスを提供します。
 
-   - `gcp.pubsub.subscription.num_undelivered_messages` for the number of messages pending delivery
-   - `gcp.pubsub.subscription.oldest_unacked_message_age` for the age of the oldest unacknowledged message in a subscription
+   - `gcp.pubsub.subscription.num_undelivered_messages` は配信保留中のメッセージ数を表します
+   - `gcp.pubsub.subscription.oldest_unacked_message_age` は、サブスクリプション内の最も古い未承認メッセージの年齢を表します
 
-Use the metrics above with a [metric monitor][75] to receive alerts for the messages in your input and deadletter subscriptions.
+上記のメトリクスを[メトリクスモニター][75]とともに使用すると、入力およびデッドレターサブスクリプション内のメッセージに対するアラートを受け取ることができます。
 
-#### Monitor the Dataflow pipeline
+#### Dataflow パイプラインを監視する
 
-Use Datadog's [Google Cloud Dataflow integration][9] to monitor all aspects of your Dataflow pipelines. You can see all your key Dataflow metrics on the out-of-the-box dashboard, enriched with contextual data such as information about the GCE instances running your Dataflow workloads, and your Pub/Sub throughput.
+Datadog の [Google Cloud Dataflow インテグレーション][9]を使用して、Dataflow パイプラインのあらゆる側面を監視することができます。すぐに使えるダッシュボード上で、Dataflow ワークロードを実行している GCE インスタンスに関する情報や Pub/Sub スループットなどのコンテキストデータでリッチ化された、すべての Dataflow 主要メトリクスを確認できます。
 
-You can also use a preconfigured [Recommended Monitor][76] to set up notifications for increases in backlog time in your pipeline. For more information, read [Monitor your Dataflow pipelines with Datadog][77] in the Datadog blog.
+また、あらかじめ構成されている [Recommended Monitor][76] を使用して、パイプラインのバックログ時間の増加に対する通知をセットアップすることもできます。詳細は、Datadog ブログの [Datadog による Dataflow パイプラインの監視][77]を参照してください。
 
 ### Resource change collection
 
@@ -486,44 +486,44 @@ Datadog recommends setting the `asset-types` parameter to the regular expression
 
 See the [gcloud asset feeds create][88] reference for the full list of configurable parameters.
 
-#### Validation
+#### 検証
 
 Find your asset change events in the [Datadog Event Explorer][89].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-See the individual Google Cloud integration pages for metrics.
+メトリクスについては、個別の Google Cloud インテグレーションのページを参照してください。
 
-#### Cumulative metrics
+#### 累積メトリクス
 
-Cumulative metrics are imported into Datadog with a `.delta` metric for each metric name. A cumulative metric is a metric where the value constantly increases over time. For example, a metric for `sent bytes` might be cumulative. Each value records the total number of bytes sent by a service at that time. The delta value represents the change since the previous measurement.
+累積メトリクスは、メトリクス名ごとに `.delta` メトリクスを伴って Datadog にインポートされます。累積メトリクスとは、値が時間の経過とともに常に増加するメトリクスです。たとえば、`sent bytes` のメトリクスは累積的である可能性があります。各値は、その時点でサービスによって送信された総バイト数を記録します。デルタ値は、前回の測定からの変化を表します。
 
-For example:
+例:
 
  `gcp.gke.container.restart_count` is a CUMULATIVE metric. While importing this metric as a cumulative metric, Datadog adds the `gcp.gke.container.restart_count.delta` metric which includes the delta values (as opposed to the aggregate value emitted as part of the CUMULATIVE metric). See [Google Cloud metric kinds][90] for more information.
 
-### Events
+### イベント
 
 All service events generated by your Google Cloud Platform are forwarded to your [Datadog Events Explorer][91].
 
-### Service Checks
+### サービスチェック
 
-The Google Cloud Platform integration does not include any service checks.
+Google Cloud Platform インテグレーションには、サービスのチェック機能は含まれません。
 
-### Tags
+### タグ
 
-Tags are automatically assigned based on a variety of Google Cloud Platform and Google Compute Engine configuration options. The `project_id` tag is added to all metrics. Additional tags are collected from the Google Cloud Platform when available, and varies based on metric type.
+タグは、Google Cloud Platform と Google Compute Engine の様々な構成オプションに基づいて自動的に割り当てられます。`project_id` タグは、すべてのメトリクスに追加されます。追加のタグは、利用可能な場合に Google Cloud Platform から収集され、メトリクスの種類に応じて異なります。
 
-Additionally, Datadog collects the following as tags:
+また、Datadog は以下をタグとして収集します。
 
-- Any hosts with `<key>:<value>` labels.
-- Custom labels from Google Pub/Sub, GCE, Cloud SQL, and Cloud Storage.
+- `<キー>:<値>` ラベルが付けられたホスト。
+- Custom labels from Google Pub/Sub、GCE、Cloud SQL、Cloud Storage のカスタムラベル
 
-## Troubleshooting
+## トラブルシューティング
 
-### Incorrect metadata for user defined _gcp.logging_ metrics?
+### ユーザー定義の _gcp.logging_ メトリクスに不正なメタデータが適用される
 
 For non-standard _gcp.logging_ metrics, such as metrics beyond [Datadog's out of the box logging metrics][92], the metadata applied may not be consistent with Google Cloud Logging.
 
@@ -531,7 +531,7 @@ In these cases, the metadata should be manually set by navigating to the [metric
 
 Need help? Contact [Datadog support][94].
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

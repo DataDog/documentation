@@ -21,7 +21,7 @@
 - network
 - notifications
 - snmp
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/snmp_hewlett_packard_enterprise/README.md"
 "display_on_public_website": true
@@ -67,27 +67,27 @@ Configure the HPE integration and collect SNMP metrics from devices such as HP i
 
 For details of monitored metrics, see the [SNMP Data Collected][1] section.
 
-## Setup
+## セットアップ
 
 To install and configure the SNMP integration, see the [Network Device Monitoring][2] documentation.
 
-## Vendor profiles
+## ベンダープロファイル
 
-Specific supported vendor profiles for this integration can be found on the [network vendors][3] page.
+このインテグレーションでサポートされている具体的なベンダープロファイルは、[ネットワークベンダー][3]のページで確認できます。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-For details of monitored metrics, see the [SNMP Data Collected][1] section.
+監視対象となるメトリクスの詳細については、[収集される SNMP データ][1]のセクションを参照してください。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][4].
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
 * [Monitor SNMP with Datadog][5]
 

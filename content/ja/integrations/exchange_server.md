@@ -25,7 +25,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/exchange_server/README.md"
 "display_on_public_website": true
@@ -38,16 +38,16 @@
 "manifest_version": "2.0.0"
 "name": "exchange_server"
 "public_title": "Microsoft Exchange Server"
-"short_description": "Collect and graph Microsoft Exchange Server metrics"
+"short_description": "Microsoft Exchange Server のメトリクスを収集してグラフ化"
 "supported_os":
 - "windows"
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Supported OS::Windows"
   "configuration": "README.md#Setup"
-  "description": "Collect and graph Microsoft Exchange Server metrics"
+  "description": "Microsoft Exchange Server のメトリクスを収集してグラフ化"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -57,35 +57,35 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-Get metrics from Microsoft Exchange Server
+Microsoft Exchange Server からメトリクスを取得して、以下のことができます。
 
-- Visualize and monitor Exchange server performance
+- Exchange サーバーのパフォーマンスを視覚化および監視できます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Exchange check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
+Exchange チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-1. Edit the `exchange_server.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][2] to start collecting your Exchange Server performance data.
+1. Exchange Server のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `exchange_server.d/conf.yaml` ファイルを編集します。
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-**Note**: Versions 1.11.0 or later of this check use a new implementation for metric collection, which requires Python 3. For hosts that are unable to use Python 3, or if you would like to use a legacy version of this check, refer to the following [config][4].
+**注**: このチェックのバージョン 1.11.0 以降では、メトリクスの収集に新しい実装を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][4]を参照してください。
 
-### Log collection
+### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `exchange_server.d/conf.yaml` file to start collecting your Exchange Server Logs:
+2. Exchange Server のログの収集を開始するには、次のコンフィギュレーションブロックを `exchange_server.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -99,35 +99,35 @@ The Exchange check is included in the [Datadog Agent][1] package, so you don't n
        path: "C:\\Program Files\\Microsoft\\Exchange Server\\V15\\TransportRoles\\Logs\\Hub\\Connectivity\\*"
        source: exchange-server
    ```
-    **Note**: The only logs supported are CommonDiagnosticsLog, ThrottlingService, and Connectivity logs due to Exchange Server outputting many different types of logs. Contact [Datadog support][5] to request other logs formats.
+   **注**: Exchange Server はさまざまな種類のログを出力するため、サポートされるログは CommonDiagnosticsLog、ThrottlingService、および Connectivity Logs のみです。他のログ形式をご希望の場合は、[Datadog サポート][5]までお問い合わせください。
 
-   Change the `path` parameter value and configure it for your environment.
-   See the [sample exchange_server.d/conf.yaml][6] for all available configuration options.
+   `path` のパラメーター値を変更し、環境に合わせて構成してください。
+   使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル exchange_server.d/conf.yaml][6] を参照してください。
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][7] and look for `exchange_server` under the Checks section.
+[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `exchange_server` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "exchange_server" >}}
 
 
-### Events
+### イベント
 
-The Exchange server check does not include any events.
+Exchange Server チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The Exchange server check does not include any service checks.
+Exchange Server チェックには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory

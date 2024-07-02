@@ -23,7 +23,7 @@
 "categories":
 - developer tools
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/ping/README.md"
 "display_on_public_website": true
@@ -71,11 +71,11 @@ This check uses the system ping command, rather than generating the ICMP echo re
 
 **Note for Windows users**: This check might not work properly if the language for the installed Windows is not set to English.
 
-## Setup
+## セットアップ
 
 The ping check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the ping check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -95,7 +95,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the ping che
 
 3. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `ping.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your ping performance data. See the [sample ping.d/conf.yaml][5] for all available configuration options.
 
@@ -105,21 +105,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the ping che
 
 Run the [Agent's status subcommand][7] and look for `ping` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "ping" >}}
 
 
-### Events
+### イベント
 
 The Ping check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "ping" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 ### `SubprocessOutputEmptyError: get_subprocess_output expected output but had none` Error
 While running the Ping integration, you may see an error like the following:

@@ -152,7 +152,7 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 | `DD_SOURCE`       | See [Unified Service Tagging][6].                                  |
 | `DD_TAGS`         | See [Unified Service Tagging][6].                                  |
 
-## Troubleshooting
+## トラブルシューティング
 
 This integration depends on your runtime having a full SSL implementation. If you are using a slim image, you may need to add the following command to your Dockerfile to include certificates.
 

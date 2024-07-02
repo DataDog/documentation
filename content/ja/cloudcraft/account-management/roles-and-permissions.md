@@ -2,92 +2,92 @@
 title: Roles and Permissions
 ---
 
-Members of a Cloudcraft team may be assigned one of three different user roles:
+Cloudcraft チームのメンバーには、3 種類の異なるユーザーロールのいずれかが割り当てられます。
 
-- Account Owner
-- Administrator
-- User
+- アカウントオーナー
+- 管理者
+- ユーザー
 
-## User roles and default permissions
+## ユーザーロールとデフォルトの権限
 
-**Note**: To grant read-only access to blueprints, you can create a shareable blueprint link and embed the blueprint in an internal wiki page.
+**注**: ブループリントへの読み取り専用アクセスを許可するには、共有可能なブループリントリンクを作成し、内部 wiki ページにブループリントを埋め込むことができます。
 
-### Account Owner
+### アカウントオーナー
 
-The Account Owner has access to everything in your Cloudcraft account and is the only role that can change subscription settings, or view and change billing information.
+アカウントオーナーは、Cloudcraft アカウントのすべての要素にアクセスでき、サブスクリプション設定の変更や、請求情報の表示および変更ができる唯一のロールになります。
 
-By default, the person who signed up for a paid Cloudcraft subscription is the Account Owner. To assign the role to other members of your team, [contact Support][1].
+デフォルトでは、Cloudcraft の有料サブスクリプションにサインアップした人がアカウントオーナーになります。チームの他のメンバーにロールを割り当てるには、[サポートにご連絡ください][1]。
 
-**Permissions:**
+**権限:**
 
-- Create, edit, and delete private and team-shared blueprints
-- Manage subscription settings
-- Manage SSO settings (Enterprise)
-- Manage team settings
-  - Create new teams (Enterprise)
-  - Invite new administrators and users
-  - Delete administrators and users
-  - Revoke team invitations to join your Cloudcraft team
-- Manage AWS accounts
-  - Connect new AWS accounts
-  - Remove AWS accounts
-  - Manage team-shared AWS accounts
-- Manage API keys
-  - Create API keys
-  - Delete API keys
-  - Manage team-shared API keys
+- プライベートおよびチーム共有のブループリントの作成、編集、削除
+- サブスクリプション設定の管理
+- SSO 設定の管理 (Enterprise)
+- チーム設定の管理
+  - 新規チームの作成 (Enterprise)
+  - 新規管理者とユーザーの招待
+  - 管理者とユーザーの削除
+  - Cloudcraft チームへの招待の取り消し
+- AWS アカウントの管理
+  - 新しい AWS アカウントの接続
+  - AWS アカウントの削除
+  - チーム共有 AWS アカウントの管理
+- API キーの管理
+  - API キーの作成
+  - API キーの削除
+  - チーム共有 API キーの管理
 
-### Administrator
+### 管理者
 
-Administrators are the second-most privileged role in Cloudcraft, and have access to everything but billing and subscription information.
+管理者は Cloudcraft で 2 番目に特権的なロールで、請求とサブスクリプション情報以外のすべてにアクセスできます。
 
-This role is for project leads who require permission to manage their team or sub-teams within Cloudcraft.
+このロールは、Cloudcraft 内でチームやサブチームの管理権限を必要とするプロジェクトリーダー向けです。
 
-**Permissions:**
+**権限:**
 
-- Create, edit, and delete private and team-shared blueprints
-- Manage team settings (for teams they are assigned)
-  - Invite new administrators and users
-  - Delete administrators and users
-  - Revoke team invitations to join your Cloudcraft team
-- Manage AWS accounts
-  - Connect new AWS accounts
-  - Remove AWS accounts
-  - Manage team-shared AWS accounts
-- Manage API keys
-  - Create API keys
-  - Delete API keys
-  - Manage team-shared API keys
+- プライベートおよびチーム共有のブループリントの作成、編集、削除
+- チーム設定の管理 (担当チームのみ)
+  - 新規管理者とユーザーの招待
+  - 管理者とユーザーの削除
+  - Cloudcraft チームへの招待の取り消し
+- AWS アカウントの管理
+  - 新しい AWS アカウントの接続
+  - AWS アカウントの削除
+  - チーム共有 AWS アカウントの管理
+- API キーの管理
+  - API キーの作成
+  - API キーの削除
+  - チーム共有 API キーの管理
 
-### User
+### ユーザー
 
-Users are the least-privileged role type in Cloudcraft. Users are members of teams with whom they can share blueprints, collaborate on AWS accounts, and generally work together.
+ユーザーは Cloudcraft で最も権限の少ないロールタイプです。ユーザーはチームのメンバーであり、ブループリントを共有したり、AWS アカウントで共同作業したり、一般的な共同作業を行うことができます。
 
-**Permissions:**
+**権限:**
 
-- Create, edit, and delete private and team-shared blueprints
-- View-only access to the team for which they are a member
-- Live scan AWS accounts that an Account Owner or Administrator has shared with their team
-- View-only access to the existence of API keys (unable to generate or view active API keys)
+- プライベートおよびチーム共有のブループリントの作成、編集、削除
+- 所属するチームへの閲覧専用アクセス
+- アカウントオーナーまたは管理者がチームと共有した AWS アカウントのライブスキャン
+- API キーの存在に対する閲覧専用アクセス (アクティブな API キーの生成や閲覧は不可)
 
-## Cross-organizational teams
+## 組織横断型チーム
 
-For Enterprise customers, Cloudcraft also offers the ability to create cross-organizational teams. The members of a cross-organizational team are added to the list of members of every non-cross-organizational team, and inherit their cross-organizational roles — unless they are already a member of another team.
+Cloudcraft では、Enterprise をご利用のお客様に、組織横断型チームを作成する機能も提供しています。組織横断型チームのメンバーは、非組織横断型チームのメンバーリストに追加され、すでに別のチームのメンバーでない限り、組織横断型チームのロールを継承します。
 
-Here is an example to make this easier to understand:
+このことを理解しやすいように、以下にその一例を示します。
 
-- Example Company
-  - Cross-org Team 1
-    - User 1
-  - Team 2
-    - User 2
-    - [User 1 from Cross-org Team 1]
-  - Team 3
-    - User 3
-    - User 1
-    - [User 1 from Cross-org Team 1, but explicit membership determines the team role]
+- 会社 A
+  - 組織横断型チーム 1
+    - ユーザー 1
+  - チーム 2
+    - ユーザー 2
+    - [組織横断型チーム 1 のユーザー 1]
+  - チーム 3
+    - ユーザー 3
+    - ユーザー 1
+    - [組織横断型チーム 1 のユーザー 1、ただし、チームにおけるロールは明示的なメンバーシップによって決まる]。
 
-In this example, if "Team 1" is an auditing team with read-only members, "User 1" will implicitly have read-only access to "Team 2", while the role explicitly assigned to the user in "Team 3" takes precedence.
+この例では、「チーム 1」が読み取り専用メンバーを持つ監査チームである場合、「ユーザー 1」は暗黙的に「チーム 2」への読み取り専用アクセス権を持つが、「チーム 3」のユーザーに明示的に割り当てられたロールが優先される。
 
 [1]: https://app.cloudcraft.co/support
 [2]: https://app.cloudcraft.co/app/support

@@ -18,7 +18,7 @@ further_reading:
 
 For more details and information, view the [OpenTracing API][1].
 
-## Setup
+## セットアップ
 For OpenTracing support, add the `Datadog.Trace.OpenTracing` [NuGet package][2] to your application. During application start-up, initialize the OpenTracing SDK:
 
 ```csharp

@@ -115,9 +115,9 @@ Watchdog starts finding anomalies after the minimum required history is availabl
 
 Watchdog scans all services and resources to look for anomalies on the following metrics:
 
-  * Error rate
-  * Latency
-  * Hits (request rate)
+  * エラー率
+  * レイテンシー
+  * ヒット数（リクエスト率）
 
 Watchdog filters out minimally-used endpoints and services to reduce noise and avoid anomalies on small amounts of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is ignored. 
 
@@ -173,16 +173,16 @@ Watchdog starts finding anomalies after the minimum required history is availabl
 Watchdog uses the same seasonal algorithms that power monitors and dashboards. To look for anomalies on other metrics or to customize the sensitivity, the following algorithms are available:
 
 * [Anomaly monitors][10]
-* [Forecast monitors][11]
+* [予測モニター][11]
 * [Outlier monitors][12]
 
 ## Where to find Watchdog Alerts
 
-Watchdog Alerts appear in the following places within Datadog:
+Datadog 内で Watchdog アラートが表示される場所は以下の通りです。
 
 * The [Watchdog Alert Explorer][1]
 * On any individual [APM Service Page][3]
-* In the [Service Catalog][7]
+* [サービスカタログ][7]内
 * In the [Watchdog Insights panel][8], available on all explorers 
 
 ### Watchdog binoculars on APM pages
@@ -193,19 +193,19 @@ When Watchdog detects an irregularity in an APM metric, the pink Watchdog binocu
 
 You can see greater detail about a metric anomaly by navigating to the top of a [Service Page][3] with the [Watchdog Insights][8] carousel.
 
-You can also find the Watchdog icon on metric graphs.
+Watchdog のアイコンは、メトリクスグラフにも表示されます。
 
-{{< img src="watchdog/latency_graph.png" alt="A graph showing service latency, in seconds, on the y-axis and the time of day on the x-axis. The entire graph is highlighted in pink, and the words May 2: 13:31 Ongoing appear at the top" style="width:75%;" >}}
+{{< img src="watchdog/latency_graph.png" alt="サービスのレイテンシー (秒) をY軸に、時間帯を X 軸にとったグラフ。グラフ全体がピンク色で表示され、上部に「May 2: 13:31 Ongoing」と表示されている" style="width:75%;" >}}
 
 Click on the binoculars icon to see a Watchdog Alert card with more details.
 
-## Manage archived alerts
+## アーカイブされたアラートの管理
 
 To archive a Watchdog Alert, open the side panel and click the folder icon in the upper-right corner. Archiving hides the alert from the explorer, as well as other places in Datadog, like the home page. If an alert is archived, the pink Watchdog binoculars icon does not show up next to the relevant service or resource.
 
 To see archived alerts, select the checkbox option to **Show _N_ archived alerts** in the top left of the [Watchdog Alert Explorer][1]. The option is only available if at least one alert is archived. You can see who archived each alert and when it was archived, and restore archived alerts to your feed.
 
-**Note**: Archiving does not prevent Watchdog from flagging future issues related to the service or resource.
+**注**: アーカイブ後であっても、Watchdog はサービスやリソースに関連する問題にフラグを立てます。
 
 [1]: /watchdog
 [3]: /tracing/services/service_page/

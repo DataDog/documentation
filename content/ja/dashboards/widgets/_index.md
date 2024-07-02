@@ -1,13 +1,14 @@
 ---
+title: Widgets
 aliases:
-- /ja/graphing/dashboards/widgets
-- /ja/graphing/faq/widgets
-- /ja/graphing/widgets
+    - /graphing/dashboards/widgets
+    - /graphing/faq/widgets
+    - /graphing/widgets
 further_reading:
-- link: /dashboards/guide/context-links/
-  tag: ドキュメント
-  text: カスタムリンク
-title: ウィジェット
+    - link: /dashboards/guide/context-links/
+      tag: Documentation
+      text: Custom Links
+
 ---
 
 ## 概要
@@ -43,13 +44,13 @@ title: ウィジェット
 {{< /whatsnext >}}
 
 ### グループ
-{{< whatsnext desc="グループの下にウィジェットを表示します。 ">}}
+{{< whatsnext desc="Display your widgets under groups: ">}}
     {{< nextlink href="/dashboards/widgets/group"
-        img="dashboards/widgets/icons/group_default_light_large.svg">}} グループ{{< /nextlink >}}
+        img="dashboards/widgets/icons/group_default_light_large.svg">}} Group{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/powerpack"
-        img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} パワーパック{{< /nextlink >}}
+        img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} Powerpack{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/split_graph"
-        img="dashboards/widgets/icons/group-split_light_small.svg">}} スプリットグラフ{{< /nextlink >}}
+        img="dashboards/widgets/icons/group-split_light_small.svg">}} Split Graph{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### アノテーションと埋め込み
@@ -127,7 +128,7 @@ img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /
 
 ## 単位のオーバーライド
 
-ウィジェットに表示される単位値をカスタマイズして、データにコンテキストを追加できます。その他のユースケースや情報については、[単位のオーバーライドで視覚化をカスタマイズする][3]を参照してください。
+Customize unit values displayed on widgets to add context to your data. For more use cases and information, see the [Customize your visualizations with unit overrides][3].
 - **Unit override**: 選択することで、「メモリ」ファミリーの単位が表示され、Datadog がデータに応じて適切なスケールを表示するようにします (メガバイトやギガバイトなど)。
 - **Unit and scale override**: 単位を単一のスケールに固定します (値に関係なくデータをメガバイトで表示)。
 - **Define custom units**: 完全にカスタマイズされた単位を定義します (一般的なカウントの代わりに「テスト」のような)。
@@ -148,9 +149,9 @@ img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /
 
 ## ウィジェットのコピーと貼り付け
 
-<div class="alert alert-warning">この機能を使用するには、<a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>dashboard_public_share</code> 権限</a>を持ち、Organization Settings で <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a> を有効にする必要があります。</div>
+<div class="alert alert-warning">You must have <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>dashboard_public_share</code> permissions</a> and enable <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a> in your Organization Settings to use this feature.</div>
 
-`Ctrl + C` (Mac の場合は `Cmd + C`) を使用するか、共有アイコンを選択して "Copy" を選択することで、ウィジェットは[ダッシュボード][4]、[ノートブック][5]、[APM サービス][6]、および [APM リソース][7]ページにコピーできます。
+Widgets can be copied on [Dashboards][4], [Notebooks][5], [APM Service][6], and the [APM resource][7] page by using `Ctrl + C` (`Cmd + C` for Mac), or by selecting the share icon and choosing "Copy".
 
 コピーされたウィジェットは、次の場所で `Ctrl + V`（Mac の場合は `Cmd + V`）を使用して Datadog 内に貼り付けることができます。
 
@@ -198,14 +199,14 @@ img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/widgets/timeseries/#full-screen
-[2]: /ja/dashboards/guide/context-links/
-[3]: /ja/dashboards/guide/unit-override
-[4]: /ja/dashboards/
-[5]: /ja/notebooks/
-[6]: /ja/tracing/services/service_page/
-[7]: /ja/tracing/services/resource_page/
-[8]: /ja/logs/explorer/
-[9]: /ja/tracing/trace_explorer/
-[10]: /ja/profiler/profile_visualizations/
-[11]: /ja/dashboards/guide/custom_time_frames/
+[1]: /dashboards/widgets/timeseries/#full-screen
+[2]: /dashboards/guide/context-links/
+[3]: /dashboards/guide/unit-override
+[4]: /dashboards/
+[5]: /notebooks/
+[6]: /tracing/services/service_page/
+[7]: /tracing/services/resource_page/
+[8]: /logs/explorer/
+[9]: /tracing/trace_explorer/
+[10]: /profiler/profile_visualizations/
+[11]: /dashboards/guide/custom_time_frames/

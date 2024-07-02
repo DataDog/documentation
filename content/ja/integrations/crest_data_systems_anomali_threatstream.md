@@ -33,7 +33,7 @@
 - data stores
 - alerting
 - event management
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -108,7 +108,7 @@ This integration monitors `Observables` triggered in Anomali ThreatStream as wel
 
 ## Support
 
-For support or feature requests, contact Crest Data through the following channels:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
 - Support Email: [datadog.integrations@crestdata.ai][5]
 - Sales Email: [datadog-sales@crestdata.ai][6]

@@ -186,35 +186,35 @@ The most common errors include the following:
 : The request could not be performed. See the dedicated [error][16] page for more information.
 
 `INVALID_REQUEST` 
-: The configuration of the test is invalid (for example, a typo in the URL).
+: テストのコンフィギュレーションが無効です (URL に入力ミスがあるなど)。
 
 `SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][12].
+: SSL 接続を実行できませんでした。[詳細については、個別のエラーページを参照してください][12]。
 
 `TIMEOUT`
-: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
-  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
+: リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
+  各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
+  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、テスト時間 (リクエスト＋アサーション) が最大時間 (60.5s) に達したことを示しています。
 
 `MALFORMED_RESPONSE` 
-: The remote server responded with a payload that does not comply with HTTP specifications.
+: リモートサーバーが HTTP 仕様に準拠していないペイロードで応答しました。
 
-## Permissions
+## 権限
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][13].
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][13]を持つユーザーのみが、Synthetic HTTP テストを作成、編集、削除できます。Synthetic HTTP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][13]のいずれかにアップグレードします。
 
-If you are using the [custom role feature][14], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions.
+[カスタムロール機能][14]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
 
-### Restrict access
+### アクセス制限
 
-Access restriction is available for customers using [custom roles][15] on their accounts.
+アカウントに[カスタムロール][15]を使用しているお客様は、アクセス制限が利用可能です。
 
-You can restrict access to an HTTP test based on the roles in your organization. When creating an HTTP test, choose which roles (in addition to your user) can read and write your test. 
+組織内の役割に基づいて、HTTP テストへのアクセスを制限することができます。HTTP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
-{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="テストの権限の設定" style="width:70%;" >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

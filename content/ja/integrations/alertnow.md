@@ -26,7 +26,7 @@
 - collaboration
 - incidents
 - mobile
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/alertnow/README.md"
 "display_on_public_website": true
@@ -81,7 +81,7 @@ What AlertNow offers:
 
 ![alertnow overview][1]
 
-## Setup
+## セットアップ
 
 ### AlertNow
 

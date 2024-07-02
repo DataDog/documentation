@@ -4,9 +4,9 @@ description: Setting up Database Monitoring on a Postgres database
 disable_sidebar: true
 ---
 
-### Postgres versions supported
+### サポートされる Postgres バージョン
 
-|  | Self-hosted | Amazon RDS | Amazon Aurora | Google Cloud SQL | Azure |
+|  | セルフホスト | Amazon RDS | Amazon Aurora | Google Cloud SQL | Azure |
 |--|------------|---------|------------|------------------|---------|
 | Postgres 9.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Postgres 10 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
@@ -17,7 +17,7 @@ disable_sidebar: true
 | Postgres 15 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Postgres 16 | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |
 
-For setup instructions, select your hosting type:
+ホスティングタイプを選択して設定の手順を確認します。
 
 {{< partial name="dbm/dbm-setup-postgres" >}}
 

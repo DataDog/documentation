@@ -31,7 +31,7 @@
 "categories":
 - ai/ml
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/weaviate/README.md"
 "display_on_public_website": true
@@ -150,7 +150,7 @@ spec:
 
 [Run the Agent's status subcommand][12] and look for `weaviate` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "weaviate" >}}

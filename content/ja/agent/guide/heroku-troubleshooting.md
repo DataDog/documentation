@@ -4,42 +4,42 @@ aliases:
   - /agent/faq/heroku-troubleshooting/
 ---
 
-To start debugging Heroku, use the `agent-wrapper` command with the information/debugging commands listed in the [Agent documentation][1].
+Heroku のデバッグを開始するには、[Agent ドキュメント][1]に記載されている情報/デバッグコマンドを使用して、`agent-wrapper` コマンドを使用します。
 
-For example, to display the status of your Datadog Agent and enabled integrations, run:
+たとえば、Datadog Agent と有効なインテグレーションのステータスを表示するには、以下を実行します。
 
 ```shell
 agent-wrapper status
 ```
 
-Next, verify the Datadog Agent is listening by sending a custom metric. From your project directory, run:
+次に、カスタムメトリクスを送信して、Datadog Agent がリスニングしていることを確認します。プロジェクトディレクトリから、以下を実行します。
 
 ```shell
 heroku run bash
 
-# Once your Dyno has started and you are at the command line
+# Dyno が起動し、コマンドラインを表示したら
 echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
 ```
 
-After a few moments, use the metrics explorer to verify that the metric was received.
+しばらくして、メトリクスエクスプローラーで、メトリクスが受信されたことを確認します。
 
-It can also be helpful to obtain Agent and Trace Agent logs from your running dyno.
+また、実行中の dyno から Agent と Trace Agent のログを取得することも有効です。
 
-Download Datadog Agent logs:
+Datadog Agent のログをダウンロードします。
 
 ```shell
 heroku ps:copy /app/.apt/var/log/datadog/datadog.log --dyno=<YOUR DYNO NAME>
 ```
 
-Download Datadog Trace Agent logs:
+Datadog Trace Agent のログをダウンロードします。
 
 ```shell
 heroku ps:copy /app/.apt/var/log/datadog/datadog-apm.log --dyno=<YOUR DYNO NAME>
 ```
 
-## Send a flare
+## フレアの送信
 
-Generate a flare by running the [`agent-wrapper` command][1]:
+[`agent-wrapper` コマンド][1]を実行して、フレアを生成します。
 
 ```shell
 agent-wrapper flare

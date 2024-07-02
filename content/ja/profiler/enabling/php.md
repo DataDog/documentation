@@ -17,30 +17,30 @@ aliases:
   - /tracing/profiler/enabling/php/
 ---
 
-## Requirements
+## 要件
 
-For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+すべての言語におけるランタイムとトレーサーの最小バージョンと推奨バージョンの要約については、[サポートされている言語とトレーサーのバージョン][14]をお読みください。
 
-The Datadog Profiler requires at least PHP 7.1, on 64-bit Linux.
+Datadog Profiler を使用するには、64 ビットの Linux で、少なくとも PHP 7.1 が必要です。
 
 PHP ZTS builds are supported since `dd-trace-php` version 0.99+, while PHP debug builds are **not** supported.
 
 {{< tabs >}}
 {{% tab "GNU C Linux" %}}
 
-An operating system with glibc 2.17 or newer is required. The following versions or newer meet this requirement:
-  - CentOS 7.
-  - Debian 8, which has reached end of life (EOL).
-  - Ubuntu 14.04, which is EOL.
+glibc 2.17 以降を搭載した OS が必要です。以下のバージョン以降がこの要件を満たしています。
+  - CentOS 7
+  - EOL (End of Life) を迎えた Debian 8
+  - EOL となった Ubuntu 14.04
 
-Datadog recommends running an OS version that is not EOL.
+Datadog では、EOL ではない OS のバージョンを実行することを推奨しています。
 
 {{% /tab %}}
 {{% tab "Alpine Linux" %}}
 
-Version 3.13 or newer of Alpine Linux is required because the profiler is built against musl v1.2.
+プロファイラーは musl v1.2 に対してビルドされているため、Alpine Linux のバージョン 3.13 以降が必要です。
 
-Additionally you need to install `libgcc_s` with:
+また、次のコマンドを使用して `libgcc_s` をインストールする必要があります。
 
 ```shell
 apk add libgcc
@@ -51,23 +51,23 @@ apk add libgcc
 
 The following profiling features are available in the following minimum versions of the `dd-trace-php` library:
 
-|      Feature              | Required `dd-trace-php` version          |
+|      機能              | Required `dd-trace-php` version          |
 |---------------------------|------------------------------------------|
 | [Code Hotspots][12]       | 0.71+                                    |
 | [Endpoint Profiling][13]  | 0.79.0+                                  |
 | [Timeline][15]            | 0.98.0+ (beta since 0.89.0+)             |
 
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
-## Installation
+## インストール
 
-To begin profiling applications:
+アプリケーションのプロファイリングを開始するには
 
 1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
-2. Download the `datadog-setup.php` script from the [GitHub release page][3]. Version 0.69.0 is the first tracer release to include this installer.
+2. [GitHub リリースページ][3]から `datadog-setup.php` スクリプトをダウンロードします。バージョン 0.69.0 は、このインストーラーを含む最初のトレーサーのリリースです。
 
-3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
+3. トレーサーとプロファイラーの両方をインストールするために、例えば `php datadog-setup.php --enable-profiling` のようにインストーラーを実行します。このスクリプトは対話型で、検出された PHP の位置のどれにインストールするかを尋ねます。スクリプトの最後には、今後の使用のために非対話型バージョンのコマンド引数を出力します。
 
 4. Configure the profiler using config mode through the `datadog-setup.php`:
 
@@ -88,13 +88,13 @@ settings.
 
     See the [configuration docs][4] for more INI settings.
 
-5. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
+5. リクエストを受け取ってから 1～2 分後、[APM > Profiler ページ][5]にプロファイルが表示されます。
 
-## Not sure what to do next?
+## 次のステップ
 
-The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+[プロファイラーの概要][6]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

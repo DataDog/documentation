@@ -26,7 +26,7 @@
   "vendor_id": rapdev
 "categories":
 - marketplace
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -77,17 +77,17 @@ The purpose of this Agent check is to create a zipped backup for a Datadog accou
 and notebooks. That backup can then be stored on a local machine or in one of the other supported platforms
 (such as AWS, Azure, and GitHub).
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 This integration does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 This integration has the service check `rapdev.backup.can_connect` which returns `OK` if the Agent can communicate with the Datadog API otherwise it reports `CRITICAL`. 
 
-### Events
+### イベント
 
 This integration does not include any events.
 

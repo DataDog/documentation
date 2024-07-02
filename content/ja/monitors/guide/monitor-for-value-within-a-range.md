@@ -2,34 +2,34 @@
 title: Monitoring Ranges
 ---
 
-## Overview
+## 概要
 
-If a monitor supports alerting when a given value is above or below a given threshold, it is possible to be notified if a given value is inside or outside of a range.
+特定の値が特定のしきい値を上回ったり下回ったりしたときにモニターがアラートをサポートしている場合、特定の値が範囲内または範囲外であるかどうかを通知することができます。
 
-## Examples
-### Metric
+## 例
+### メトリクス
 
-Metric `a` reports discrete values from `0` to `10` representing a status and you want to be notified if the metric is not between `4` and `8`.
-Mathematically, the difference between the metric and the center of the range (6) should never be more than 2. 
+メトリクス `a` は、ステータスを表す `0` から `10` までの離散値を報告し、メトリクスが `4` と `8` の間にない場合に通知が必要です。
+数学的には、メトリクスと範囲の中心 (6) の差が 2 を超えてはなりません。
 
 ```
 8 > a > 4 <=> abs(6-a) < 2 <=> abs(6-a) - 2 < 0
 ```
 
-- To be notified if the value is outside the range, the monitor condition should be `abs(6-a) - 2 > 0`.
-- To be notified if the value is inside the range, the monitor condition should be `2 - abs(6-a) > 0`.
+- 値が範囲外にある場合に通知を受けるには、モニター条件は `abs(6-a) - 2 > 0` である必要があります。
+- 値が範囲内にある場合に通知を受けるには、モニター条件は `2 - abs(6-a) > 0` である必要があります。
 
-{{< img src="monitors/faq/monitor_range.png" alt="metric monitor on a range" >}}
+{{< img src="monitors/faq/monitor_range.png" alt="範囲のメトリクスモニター" >}}
 
-### Theoretical
+### 理論
 
-A range is defined by `x > a > y` with `a` being the metric in question. 
+範囲は `x > a > y` で定義され、`a` が問題のメトリクスです。
 
-- To be notified if the value is outside the range, the monitor condition should be: `abs(x - (x-y)/2 - a) - (x-y)/2 > 0`.
-- To be notified if the value is inside the range, the monitor condition should be: `(x-y)/2 - abs(x - (x-y)/2 - a) > 0`.
+- 値が範囲外にある場合に通知を受けるには、モニター条件は `abs(x - (x-y)/2 - a) - (x-y)/2 > 0` である必要があります。
+- 値が範囲内にある場合に通知を受けるには、モニター条件は `(x-y)/2 - abs(x - (x-y)/2 - a) > 0` である必要があります。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][1].
+ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 
 [1]: /help/

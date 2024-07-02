@@ -31,7 +31,7 @@
 - configuration & deployment
 - containers
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/gatekeeper/README.md"
 "display_on_public_website": true
@@ -73,11 +73,11 @@ This check collects metrics from [OPA Gatekeeper][1].
 
 ![Gatekeeper Overview Dashboard][2]
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a Kubernetes cluster. See also the [Autodiscovery Integration Templates][3] for guidance on applying these instructions.
 
-### Installation
+### インストール
 
 #### Agent versions >=7.26.0 or >=6.26.0
 
@@ -161,7 +161,7 @@ To install the gatekeeper check on your Kubernetes cluster:
 
 12. Restart the Datadog Agent pods.
 
-### Configuration
+### 構成
 
 1. Edit the `gatekeeper/conf.yaml` file, in the `/confd` folder that you added to the Agent pod to start collecting your gatekeeper performance data. See the [sample gatekeeper/conf.yaml][6] for all available configuration options.
 
@@ -171,21 +171,21 @@ To install the gatekeeper check on your Kubernetes cluster:
 
 [Run the Agent's status subcommand][8] and look for `gatekeeper` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "gatekeeper" >}}
 
 
-### Events
+### イベント
 
 Gatekeeper does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "gatekeeper" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][11].
 

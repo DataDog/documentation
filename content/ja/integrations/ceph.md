@@ -33,7 +33,7 @@
 - "data stores"
 - "os & system"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/ceph/README.md"
 "display_on_public_website": true
@@ -46,7 +46,7 @@
 "manifest_version": "2.0.0"
 "name": "ceph"
 "public_title": "Ceph"
-"short_description": "Collect per-pool performance metrics and monitor overall cluster status."
+"short_description": "プールごとのパフォーマンスメトリクスを収集し、クラスター状態全体を監視。"
 "supported_os":
 - "linux"
 - "macos"
@@ -56,10 +56,10 @@
   - "Supported OS::Linux"
   - "Supported OS::macOS"
   - "Category::Data Stores"
-  - "Category::OS & System"
-  - "Category::Log Collection"
+  - "Category::OS とシステム"
+  - "Category::ログの収集"
   "configuration": "README.md#Setup"
-  "description": "Collect per-pool performance metrics and monitor overall cluster status."
+  "description": "プールごとのパフォーマンスメトリクスを収集し、クラスター状態全体を監視。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -69,52 +69,52 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Ceph dashboard][1]
+![Ceph ダッシュボード][1]
 
-## Overview
+## 概要
 
-Enable the Datadog-Ceph integration to:
+Datadog-Ceph インテグレーションを有効にすると、以下のことができます。
 
-- Track disk usage across storage pools
-- Receive service checks in case of issues
-- Monitor I/O performance metrics
+- ストレージプール全体のディスク使用状況を追跡できます。
+- 問題が発生した場合にサービスチェックを受信できます。
+- I/O パフォーマンスメトリクスを監視できます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Ceph check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Ceph servers.
+Ceph チェックは [Datadog Agent][2] パッケージに含まれています。Ceph サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-Edit the file `ceph.d/conf.yaml` in the `conf.d/` folder at the root of your [Agent's configuration directory][3].
-See the [sample ceph.d/conf.yaml][4] for all available configuration options:
+[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `ceph.d/conf.yaml` ファイルを編集します。
+使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル ceph.d/conf.yaml][4] を参照してください。
 
 ```yaml
 init_config:
 
 instances:
   - ceph_cmd: /path/to/your/ceph # default is /usr/bin/ceph
-    use_sudo: true # only if the ceph binary needs sudo on your nodes
+    use_sudo: true # ご利用のノードで ceph バイナリが sudo を必要とする場合のみ
 ```
 
-If you enabled `use_sudo`, add a line like the following to your `sudoers` file:
+`use_sudo` を有効にした場合は、`sudoers` ファイルに以下のような行を追加します。
 
 ```text
 dd-agent ALL=(ALL) NOPASSWD:/path/to/your/ceph
 ```
 
-#### Log collection
+#### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Next, edit `ceph.d/conf.yaml` by uncommenting the `logs` lines at the bottom. Update the logs `path` with the correct path to your Ceph log files.
+2. 次に、下部にある `logs` 行のコメントを解除して、`ceph.d/conf.yaml` を編集します。ログの `path` を Ceph ログファイルの正しいパスで更新してください。
 
    ```yaml
    logs:
@@ -124,35 +124,35 @@ _Available for Agent versions >6.0_
        service: "<APPLICATION_NAME>"
    ```
 
-3. [Restart the Agent][5].
+3. [Agent を再起動します][5]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][6] and look for `ceph` under the Checks section.
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `ceph` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "ceph" >}}
 
 
-**Note**: If you are running Ceph luminous or later, the `ceph.osd.pct_used` metric is not included.
+**注**: Ceph luminous またはそれ以降を実行している場合、`ceph.osd.pct_used` メトリクスは含まれません。
 
-### Events
+### イベント
 
-The Ceph check does not include any events.
+Ceph チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "ceph" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][9].
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-- [Monitor Ceph: From node status to cluster-wide performance][10]
+- [Ceph の監視: ノードステータスからクラスター全体のパフォーマンスまで][10]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ceph/images/ceph_dashboard.png
 [2]: https://app.datadoghq.com/account/settings/agent/latest

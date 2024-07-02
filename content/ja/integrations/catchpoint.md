@@ -26,7 +26,7 @@
 - "metrics"
 - "issue tracking"
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -65,13 +65,13 @@ The Catchpoint integration allows you to:
 -   Access direct links to Analysis Charts in the Catchpoint Portal.
 -   Set Alert Type tags to filter events more effectively.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 No installation is required.
 
-### Configuration
+### 構成
 
 To get Catchpoint alerts into your Event Stream, login to the Catchpoint Portal and go to _Settings_ > _API_.
 
@@ -821,21 +821,21 @@ To receive Catchpoint metrics in Datadog, create a Test Data Webhook in the Catc
 }
 ```
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "catchpoint" >}}
 
 
-### Events
+### イベント
 
 Events from Catchpoint appear in the Event Stream widget on the [Catchpoint Dashboard][4].
 
-### Service Checks
+### サービスチェック
 
 The Catchpoint integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

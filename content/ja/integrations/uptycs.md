@@ -24,7 +24,7 @@
 - alerting
 - compliance
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/uptycs/README.md"
 "display_on_public_website": true
@@ -106,12 +106,12 @@ Each detection contains the following main components:
    7. Asset details: Asset ID and host name.
    8. Uptycs URL to navigate to the Uptycs platform.
 
-## Setup
+## セットアップ
 
 To set up this integration, you must have an Uptycs account. If you are not an Uptycs customer, [contact us][2] for an Uptycs account.
 You'll also need Datadog API keys.
 
-### Configuration
+### 構成
 
 1. Create a [Datadog API key][3].
 2. Create a Datadog Integration Destination on the Uptycs platform using your Datadog API key:
@@ -142,7 +142,7 @@ You'll also need Datadog API keys.
    5. Click **Save**.
 6. Once Uptycs generates an alert or detection, it will be delivered as a Datadog Event.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Support][7].
 

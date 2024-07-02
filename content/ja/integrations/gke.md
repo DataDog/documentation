@@ -18,7 +18,7 @@
 "categories":
 - containers
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/gke/README.md"
 "display_on_public_website": true
@@ -59,7 +59,7 @@
 
 Google Kubernetes Engine (GKE), a service on the Google Cloud Platform (GCP), is a hosted platform for running and orchestrating containerized applications. Similar to Amazon's Elastic Container Service (ECS), GKE manages Docker containers deployed on a cluster of machines. However, unlike ECS, GKE uses Kubernetes.
 
-## Setup
+## セットアップ
 
 ### Prerequisites
 
@@ -106,11 +106,11 @@ Deploy a [containerized version of the Datadog Agent][1] on your Kubernetes clus
 
 Follow the instructions in the GKE [Autopilot section][1] of the Kubernetes distributions page.
 
-#### Admission Controller
+#### アドミッションコントローラー
 
-To use [Admission Controller][2] with Autopilot, set the [`configMode`][3] of the Admission Controller to either `service` or `hostip`. 
+[Admission Controller][2] を Autopilot で使用するには、Admission Controller の [`configMode`][3] を `service` または `hostip` に設定します。
 
-Because Autopilot does not allow `socket` mode, Datadog recommends using `service` (with `hostip` as a fallback) to provide a more robust layer of abstraction for the controller. 
+Autopilot では `socket` モードが許可されていないため、Datadog はコントローラーにより堅牢な抽象化レイヤーを提供するため `service` (フォールバックオプションとして `hostip`) の使用を推奨します。
 
 
 
@@ -120,12 +120,12 @@ Because Autopilot does not allow `socket` mode, Datadog recommends using `servic
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 
-- [Monitor GKE Autopilot with Datadog][7]
-- [Monitor GKE with Datadog][8]
-- [Monitor your T2A-powered GKE workloads with Datadog][9]
-- [New GKE dashboards and metrics provide deeper visibility into your environment][10]
+- [Datadog を使用した GKE Autopilot の監視][7]
+- [Datadog を使用した GKE の監視][8]
+- [Datadog を使用した T2A による GKE ワークロードの監視][9]
+- [新しい GKE ダッシュボードとメトリクスによる、環境の視覚化の向上][10]
 
 
 [1]: https://cloud.google.com/resource-manager/docs/creating-managing-projects

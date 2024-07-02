@@ -14,31 +14,31 @@ further_reading:
   text: Announcing PCI-Compliant Log Management and APM from Datadog
 ---
 
-<div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security/" target="_blank">Security</a> section.</div>
+<div class="alert alert-info">このページでは、Datadog に送信されるデータのセキュリティについて説明します。クラウドやアプリケーションのセキュリティ製品や機能をお探しの場合は、<a href="/security/" target="_blank">セキュリティ</a>のセクションをご覧ください。</div>
 
-The Log Management product supports multiple [environments and formats][1], allowing you to submit to Datadog nearly any data you choose. This article describes the main security guarantees and filtering controls available to you when submitting logs to Datadog.
+ログ管理は、複数の[環境と形式][1]をサポートし、ほぼどのようなデータでも選択して Datadog に送信することができます。ここでは、Datadog にログを送信する際に利用できる主なセキュリティ保護とフィルタリング制御について説明します。
 
-**Note**: Logs can be viewed in various Datadog products. All logs viewed in the Datadog UI, including logs viewed in APM trace pages, are part of the Log Management product.
+**注**: ログは、様々な Datadog 製品で閲覧することができます。APM トレースページで表示されるログを含め、Datadog UI で表示されるすべてのログは、ログ管理製品に含まれるものです。
 
-## Information security
+## 情報セキュリティ
 
-The Datadog Agent submits logs to Datadog either through HTTPS or through TLS-encrypted TCP connection on port 10516, requiring outbound communication (see [Agent Transport for logs][2]).
+Datadog Agent は、HTTPS または TLS で暗号化された TCP 接続（ポート 10516、要アウトバウンド通信）を介して、ログを Datadog に送信します（[Agent によるログの転送]を参照[3]）。
 
-Datadog uses symmetric encryption at rest (AES-256) for indexed logs. Indexed logs are deleted from the Datadog platform once their retention period, as defined by you, expires.
+Datadog は、インデックス化されたログに対して対称暗号化保存 (AES-256) を使用します。インデックス化されたログは、ユーザー定義の保存期間が過ぎると、Datadog プラットフォームから削除されます。
 
-## Logs filtering
+## ログのフィルタリング
 
-In version 6 or above, the Agent can be configured to filter logs sent by the Agent to the Datadog application. To prevent the submission of specific logs, use the `log_processing_rules` [setting][3], with the **exclude_at_match** or **include_at_match** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to filter out logs based on the inclusion or exclusion rules supplied.
+バージョン 6 以降の場合は、Agent から Datadog アプリケーションに送信されるログをフィルターするように Agent を設定できます。特定のログが送信されないようにするには、`type` に **exclude_at_match** または **include_at_match** を指定して `log_processing_rules` [設定][3]を使用します。これで、1 つ以上の正規表現からなるリストを作成することで、指定された包含/除外規則に基づいて一部のログを除外するように Agent に指示できます。
 
-## Logs obfuscation
+## ログの難読化
 
-As of version 6, the Agent can be configured to obfuscate specific patterns within logs sent by the Agent to the Datadog application. To mask sensitive sequences within your logs, use the `log_processing_rules` [setting][4], with the  **mask_sequences** `type`. This setting enables the creation of a list containing one or more regular expressions, which instructs the Agent to redact sensitive data within your logs.
+バージョン 6 の場合は、Agent から Datadog アプリケーションに送信されるログに含まれる特定のパターンを難読化するように Agent を設定できます。ログに含まれる機密要素をマスクするには、`type` に **mask_sequences** を指定して `log_processing_rules` [設定][4]を使用します。これで、1 つ以上の正規表現からなるリストを作成することで、ログ内の機密データを編集するように Agent に指示できます。
 
-## HIPAA-enabled customers
+## HIPAA 対応ユーザー
 
 {{% hipaa-customers %}}
 
-## PCI DSS compliance for Log Management
+## ログ管理における PCI DSS 準拠
 
 {{< site-region region="us" >}}
 
@@ -46,11 +46,11 @@ As of version 6, the Agent can be configured to obfuscate specific patterns with
 PCI DSS compliance for Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 
-Datadog allows customers to send logs to PCI DSS compliant Datadog organizations upon request. To set up a PCI-compliant Datadog org, follow these steps:
+Datadog では、リクエストに応じて、お客様が PCI DSS 準拠の Datadog 組織にログを送信することができます。PCI 準拠の Datadog 組織を設定するには、以下の手順に従います。
 
 {{% pci-logs %}}
 
-See [PCI DSS Compliance][1] for more information. To enable PCI compliance for APM, see [PCI DSS compliance for APM][1].
+詳しくは [PCI DSS 準拠][1]を参照してください。APM で PCI 準拠を実現するためには、[APM の PCI DSS 準拠][1]を参照してください。
 
 [1]: /data_security/pci_compliance/
 [2]: /data_security/pci_compliance/?tab=apm
@@ -59,7 +59,7 @@ See [PCI DSS Compliance][1] for more information. To enable PCI compliance for A
 
 {{< site-region region="us3,us5,eu,gov,ap1" >}}
 
-PCI DSS compliance for Log Management is not available for the {{< region-param key="dd_site_name" >}} site.
+ログ管理の PCI DSS 準拠は、{{< region-param key="dd_site_name" >}} サイトではご利用いただけません。
 
 {{< /site-region >}}
 
@@ -72,7 +72,7 @@ All log submission endpoints are encrypted. These legacy endpoints are still sup
 * `gcp-encrypted-intake.logs.datadoghq.com`
 * `http-encrypted-intake.logs.datadoghq.com`
 
-### Further Reading
+### その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

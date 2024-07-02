@@ -10,10 +10,10 @@ further_reading:
     text: Network Device Monitoring
 ---
 
-Datadog Network Performance Monitoring (NPM) automatically detects API calls to AppEngine, Google DNS, Gmail, and other GCP services listed below:
+Datadog ネットワークパフォーマンスモニタリング (NPM) は、AppEngine、Google DNS、Gmail、および以下にリストされているその他の GCP サービスへの API 呼び出しを自動的に検出します。
 
 {{< get-npm-integrations "gcp" >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

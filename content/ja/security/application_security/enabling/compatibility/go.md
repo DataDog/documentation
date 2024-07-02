@@ -17,7 +17,7 @@ The following application security capabilities are supported in the Go library,
 | Threat Protection |  1.50.0   |
 | Customize response to blocked requests | 1.53.0 |
 | Software Composition Analysis (SCA) | 1.49.0 |
-| Code Security  | not supported |
+| コードセキュリティ  | not supported |
 | Automatic user activity event tracking | not supported |
 
 The minimum tracer version to get all supported application security capabilities for Go is 1.59.0.
@@ -45,7 +45,7 @@ You must be running Datadog Agent v5.21.1+
 
 Starting from tracer version 1.53.0, application security capabilities do not require [CGO][15].
 
-## Integrations
+## インテグレーション
 
 The Go tracer includes support for the following frameworks, data stores and libraries.
 

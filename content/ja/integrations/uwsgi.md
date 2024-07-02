@@ -1,7 +1,7 @@
 ---
 title: uWSGI
 name: uwsgi
-custom_kind: integration
+custom_kind: インテグレーション
 description: 'Collect uWSGI logs in order to track requests per second, bytes served, request status, and more.'
 short_description: 'Collect logs to track requests per second, bytes served, request status, and more.'
 categories:

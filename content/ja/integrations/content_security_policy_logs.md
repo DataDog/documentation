@@ -9,7 +9,7 @@ dependencies:
 has_logo: true
 integration_title: Content Security Policy
 is_public: true
-custom_kind: integration
+custom_kind: インテグレーション
 name: content_security_policy_logs
 public_title: Datadog-Content Security Policy
 short_description: 'Detect CSP violations'

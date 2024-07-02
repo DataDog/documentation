@@ -31,7 +31,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/hudi/README.md"
 "display_on_public_website": true
@@ -67,21 +67,21 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Hudi][1].
-It is compatible with Hudi [versions][2] `0.10.0` and above.
+このチェックは [Hudi][1] を監視しています。
+Hudi [バージョン][2] `0.10.0` 以降と互換性があります。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Hudi check is included in the [Datadog Agent][3] package.
-No additional installation is needed on your server.
+Hudi チェックは [Datadog Agent][3] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-1. [Configure][4] the [JMX Metrics Reporter][5] in Hudi:
+1. Hudi で [JMX Metrics Reporter][5] を[構成][4]します。
 
     ```
     hoodie.metrics.on=true
@@ -91,34 +91,34 @@ No additional installation is needed on your server.
     ```
 
 
-2. Edit the `hudi.d/conf.yaml` file, in the `conf.d/` folder at the root of your
-   Agent's configuration directory to start collecting your hudi performance data.
-   See the [sample hudi.d/conf.yaml][6] for all available configuration options.
+2. Agent の構成ディレクトリのルートにある `conf.d/` フォルダーの `hudi.d/conf.yaml` ファイルを編集して、
+   hudi パフォーマンスデータの収集を開始します。
+   使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル hudi.d/conf.yaml][6] を参照してください。
 
-   This check has a limit of 350 metrics per instance. The number of returned metrics is indicated when running the Datadog Agent [status command][7].
-   You can specify the metrics you are interested in by editing the [configuration][6].
-   To learn how to customize the metrics to collect see the [JMX Checks documentation][8] for more detailed instructions.
-   If you need to monitor more metrics, contact [Datadog support][9].
+   このチェックは、1 インスタンスあたり 350 メトリクスの制限があります。返されたメトリクスの数は、Datadog Agent の [status コマンド][7]を実行したときに表示されます。
+   [構成][6]を編集することで、関心があるメトリクスを指定できます。
+   収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][8]で詳細な手順を参照してください。
+    制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-3. [Restart the Agent][10]
+3. [Agent を再起動します][10]
 
 
-### Validation
+### 検証
 
-[Run the Agent's `status` subcommand][11] and look for `hudi` under the Checks section.
+[Agent の `status` サブコマンドを実行][11]し、Checks セクションで `hudi` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "hudi" >}}
 
 
 
-### Log collection
+### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Hudi uses the `log4j` logger by default. To customize the format, edit the `log4j.properties` file in either your [Flink][13] or [Spark][14] `conf` directory. An example `log4j.properties` file is:
+1. Hudi はデフォルトで `log4j` というロガーを使用します。フォーマットをカスタマイズするには、[Flink][13] または [Spark][14] の `conf` ディレクトリにある `log4j.properties` ファイルを編集してください。以下に `log4j.properties` ファイルの例を挙げます。
 
    ```conf
     log4j.rootCategory=INFO, file
@@ -129,23 +129,23 @@ _Available for Agent versions >6.0_
     log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n
    ```
 
-2. By default, Datadog's integration pipeline supports the following conversion pattern:
+2. Datadog のインテグレーションパイプラインは、デフォルトで、次の変換パターンをサポートします。
 
     ```text
     %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n
     ```
 
-     An example of a valid timestamp is: `2020-02-03 18:43:12,251`.
+   タイムスタンプの部分には、たとえば `2020-02-03 18:43:12,251` などが入ります。
 
-     Clone and edit the [integration pipeline][15] if you have a different format.
+     フォーマットが異なる場合は、[インテグレーションパイプライン][15]を複製して編集してください。
 
-3. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+3. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-4. Uncomment and edit the logs configuration block in your `hudi.d/conf.yaml` file. Change the `path` and `service` parameter values based on your environment. See the [sample hudi.d/conf.yaml][6] for all available configuration options.
+4. `hudi.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、`path` パラメーターと `service` パラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[hudi.d/conf.yaml のサンプル][6]を参照してください。
 
    ```yaml
    logs:
@@ -157,17 +157,17 @@ _Available for Agent versions >6.0_
            pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
            name: new_log_start_with_date
    ```
-### Events
+### イベント
 
-The Hudi integration does not include any events.
+Hudi インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "hudi" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][9].
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 
 [1]: https://hudi.apache.org/

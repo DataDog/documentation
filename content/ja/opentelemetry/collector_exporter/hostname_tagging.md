@@ -14,7 +14,7 @@ To extract the correct hostname and host tags, Datadog Exporter uses the [resour
 
 For more information, see the OpenTelemetry project documentation for the [resource detection][2] and [Kubernetes attributes][3] processors.
 
-## Setup
+## セットアップ
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -290,7 +290,7 @@ processors:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Data collected
+## データ収集
 
 | OpenTelemetry attribute | Datadog Tag | Processor |
 |---|---|---|

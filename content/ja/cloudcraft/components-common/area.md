@@ -1,25 +1,25 @@
 ---
 title: "Area Component"
 ---
-## Overview
+## 概要
 
-The Area component is one of the best components available to design and organize large diagrams. Along with the Text label component, it can be used to visually represent subnet and IP addresses, separate public and private cloud architectures, among others uses.
+Area コンポーネントは、大規模な図を設計・整理するのに最適なコンポーネントの 1 つです。Text label コンポーネントとともに、サブネットや IP アドレスを視覚的に表現したり、パブリッククラウドとプライベートクラウドのアーキテクチャを分けたりするなどの用途に使用できます。
 
-{{< img src="cloudcraft/components-common/area/component-area.png" alt="Screenshot of a 3D representation of the area component in Cloudcraft" responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-common/area/component-area.png" alt="Cloudcraft の Area コンポーネントの 3D 表現のスクリーンショット" responsive="true" style="width:60%;">}}
 
-## Toolbar
+## ツールバー
 
-Use the toolbar to configure and customize the component. The following options are available:
+ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
 
-- **Fill color**: Select a predefined color to fill the center of the area component, or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
-- **Raise**: Raise the area component above other areas.
-- **Lower**: Lower the area component below other areas.
-- **Edge color**: Select a predefined color to fill the edges of the area component, or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
-- **Add shadow**: Add or remove shadow from the edges to increase contrast.
+- **Fill color**: Area コンポーネントの中心を塗りつぶす定義済みの色を選択するか、色の 16 進値を入力します。2D ビューと 3D ビューの両方に同じ色を使用することも、それぞれに異なる色を使用することもできます。
+- **Raise**: Area コンポーネントを他のエリアより高くします。
+- **Lower**: Area コンポーネントを他のエリアより低くします。
+- **Edge color**: Area コンポーネントの端を塗りつぶす定義済みの色を選択するか、色の 16 進値を入力します。2D ビューと 3D ビューの両方に同じ色を使用することも、それぞれに異なる色を使用することもできます。
+- **Add shadow**: コントラストを上げるために、端に影を追加または削除します。
 
 ## API
 
-Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of a Area component:
+[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。以下は、Area コンポーネントの JSON オブジェクトの例です。
 
 ```json
 {
@@ -46,18 +46,18 @@ Use [the Cloudcraft API][1] to programmatically access and render your architect
 }
 ```
 
-- **type: area**: The type of component.
-- **id: string**: A unique identifier for the component in the `uuid` format.
-- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as a x,y coordinate pair.
-- **shadow: boolean**: If true, add a shadow to the edge of the area to increase contrast. Defaults to false.
-- **points: [number, number]**: The position of the points used to create the edges of the area.
-- **color: object**: The fill color for the component body.
-  - **isometric: string**: Fill color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**: Fill color for the component in 2D view. Must be an hexadecimal color.
-- **borderColor: object**: The color for the edge of the area.
-  - **isometric: string**: Edge color for the area in 3D view. Must be an hexadecimal color.
-  - **2d: string**: Edge color for the area in 2D view. Must be an hexadecimal color.
-- **link: uri**: Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
-- **locked: boolean**: If true, changes to the component through the application are disabled until unlocked.
+- **type: area**: コンポーネントのタイプ。
+- **id: 文字列**: `uuid` 形式のコンポーネントの一意な識別子。
+- **mapPos: [数値, 数値]**: x 座標と y 座標のペアで表される、ブループリント内のコンポーネントの位置。
+- **shadow: ブール値**: true の場合、 エリアの端に影を追加してコントラストを増加させます。デフォルトは false です。
+- **points: [数値, 数値]**: エリアの端を作成するために使用される点の位置。
+- **color: オブジェクト**: コンポーネント本体の塗りつぶし色。
+  - **isometric: 文字列**: 3D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
+  - **2d: 文字列**: 2D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
+- **borderColor: オブジェクト**: エリアの端の色。
+  - **isometric: 文字列**: 3D ビューでのエリアの端の色。16 進数で指定します。
+  - **2d: 文字列**: 2D ビューでのエリアの端の色。16 進数で指定します。
+- **link: uri**: コンポーネントを、`blueprint://ID` フォーマットで別の図にリンクするか、`https://LINK` フォーマットで外部の Web サイトにリンクします。
+- **locked: ブール値**: true の場合、アプリケーション通じたコンポーネントへの変更は、ロックが解除されるまで無効になります。
 
 [1]: https://developers.cloudcraft.co/

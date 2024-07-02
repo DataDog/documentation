@@ -30,7 +30,7 @@
 - cloud
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/cockroachdb/README.md"
 "display_on_public_website": true
@@ -71,33 +71,33 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-The CockroachDB check monitors the overall health and performance of a [CockroachDB][1] cluster.
+CockroachDB チェックは、[CockroachDB][1] クラスターの全体的な健全性とパフォーマンスを監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The CockroachDB check is included in the [Datadog Agent][2] package, so you do not
-need to install anything else on your server.
+CockroachDB チェックは [Datadog Agent][2] パッケージに含まれているため、
+サーバーに追加でインストールする必要はありません。
 
-Starting with version 1.9.0, this OpenMetrics-based integration has a latest mode (enabled by setting `openmetrics_endpoint` to point to the target endpoint) and a legacy mode (enabled by setting `prometheus_url` instead). To get all the most up-to-date features, Datadog recommends enabling the latest mode. Note that the latest mode requires Python 3. For more information, see [Latest and Legacy Versioning For OpenMetrics-based Integrations][3].
+バージョン 1.9.0 から、この OpenMetrics ベースのインテグレーションには、最新モード (ターゲットエンドポイントを指すように `openmetrics_endpoint` を設定することで有効) とレガシーモード (代わりに `prometheus_url` を設定することで有効) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。なお、最新モードには Python 3 が必要です。詳細は [OpenMetrics ベースのインテグレーションにおける最新バージョンとレガシーバージョン][3]を参照してください。
 
-For hosts unable to use Python 3, or to use legacy mode, see the following [configuration][4].
+Python 3 を使えないホストやレガシーモードを使うホストについては、以下の[構成][4]を参照してください。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `cockroachdb.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your CockroachDB performance data. For a multi-node cluster, configure a separate check instance for each node. See the [sample cockroachdb.d/conf.yaml][2] for all available configuration options.
+1. CockroachDB のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `cockroachdb.d/conf.yaml` ファイルを編集します。マルチノードクラスターの場合、各ノードに対して個別のチェックインスタンスを構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cockroachdb.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -109,19 +109,19 @@ To configure this check for an Agent running on a host:
      - openmetrics_endpoint: http://localhost:8080/_status/vars
    ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent version 6.0 or later_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent. Enable it in `datadog.yaml`:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。`datadog.yaml` で有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `cockroachdb.d/conf.yaml` file to start collecting your CockroachDB logs:
+2. CockroachDB のログの収集を開始するには、次のコンフィギュレーションブロックを `cockroachdb.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -135,31 +135,31 @@ _Available for Agent version 6.0 or later_
         pattern: [A-Z]\d{6}\s\d+\:\d+\:\d+\.\d+
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment. See the [sample cockroachdb.d/conf.yaml][2] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル cockroachdb.d/conf.yaml][2] を参照してください。
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/
 [2]: https://github.com/DataDog/integrations-core/blob/master/cockroachdb/datadog_checks/cockroachdb/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-| Parameter            | Value                                                    |
+| パラメーター            | 値                                                    |
 | -------------------- | -------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `cockroachdb`                                            |
-| `<INIT_CONFIG>`      | blank or `{}`                                            |
+| `<INIT_CONFIG>`      | 空白または `{}`                                            |
 | `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint":"http://%%host%%:8080/_status/vars"}` |
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see the [Docker Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
-Then, set [log integrations][2] as Docker labels:
+次に、[ログインテグレーション][2]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source": "cockroachdb", "service": "<SERVICE_NAME>"}]'
@@ -170,33 +170,33 @@ LABEL "com.datadoghq.ad.logs"='[{"source": "cockroachdb", "service": "<SERVICE_N
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's `status` subcommand][5] and look for `cockroachdb` under the Checks section.
+[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `cockroachdb` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "cockroachdb" >}}
 
 
-### Service Checks
+### サービスチェック
 
-The CockroachDB check does not include any service checks.
+CockroachDB チェックには、サービスのチェック機能は含まれません。
 
-### Events
+### イベント
 
-The CockroachDB check does not include any events.
+CockroachDB チェックには、イベントは含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][6].
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor CockroachDB performance metrics with Datadog][7]
+- [Datadog を使用した CockroachDB パフォーマンスメトリクスの監視][7]
 
 
 [1]: https://www.cockroachlabs.com/product/cockroachdb

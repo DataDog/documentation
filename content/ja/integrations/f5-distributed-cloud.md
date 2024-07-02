@@ -15,7 +15,7 @@
 - cloud
 - configuration & deployment
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/f5-distributed-cloud/README.md"
 "display_on_public_website": true
@@ -54,82 +54,82 @@
     "media_type": image
   "overview": "README.md#Overview"
   "resources":
-  - "resource_type": other
+  - "resource_type": その他
     "url": "https://www.f5.com/cloud"
   "support": "README.md#Support"
   "title": F5 Distributed Cloud Services
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
-## Overview
+## 概要
 
-F5 Distributed Cloud (XC) Services provides customers with a global cloud native platform that can deploy, manage, and secure their applications in hybrid environments (public cloud, private data centers, or colocations). ADN and CDN services are also available. 
+F5 Distributed Cloud (XC) Services は、ハイブリッド環境 (パブリッククラウド、プライベートデータセンター、コロケーション) において、アプリケーションをデプロイ、管理、保護できるグローバルなクラウドネイティブプラットフォームをお客様に提供します。また、ADN と CDN のサービスも利用可能です。
 
-The F5 XC platform includes the Global Log Receiver, which can be configured to securely send logs to a Datadog HTTPS logging endpoint. Configuration can be done through the [F5 XC Console UI][1].
-
-
-This integration includes:
-
-- Dashboard - *Access Log Overview*
-- Saved View - *Including facets for commonly queried fields*
-
-## Setup
-
-Global log streaming is available for either system namespace or in shared namespace:
-- Shared Namespaces support streaming logs from all shared namespaces in your account, or a specific list of shared namespaces that you can specify.
-- System Namespaces only support streaming logs from system namespaces.
-
-Below is an example of configuring a global log receiver in a system namespace. For a step-by-step video, see the [Configuring Remote Logging to Datadog official Datadog Youtube instructions][2].
-
-**Step 1: To create a global log receiver**
-
-1. In the F5® Distributed Cloud Console, navigate to the Shared Configuration service.
-2. Select Manage > Global Log Receiver.
-3. Select Global Log Receiver in case of Cloud and Edge Sites service.
-4. Click add Global Log Receiver button
+F5 XC プラットフォームには、Datadog HTTPS ロギングエンドポイントにログを安全に送信するよう構成できる Global Log Receiver が搭載されています。構成は、[F5 XC Console UI][1] から行うことができます。
 
 
+このインテグレーションには、以下のものが含まれます。
 
-**Step 2: Configure global log receiver properties**
+- ダッシュボード - *アクセスログの概要*
+- 保存ビュー - *よくクエリされるフィールドのためのファセットを含む*
 
-Do the following in the Global Log Receiver section:
+## セットアップ
 
-1. Within the Global Log Receiver section, enter a name in the metadata section. Optional: set labels and add a description.
-2. Select Request Logs or Security Events for the Log Type field. Note: Request logs are set by default.
-3. Select events to be streamed based on namespace from the following options:  
-    a. Select logs from the current namespace - streams logs from the shared namespace.  
-    b. Select logs from all namespaces - streams logs from all namespaces.  
-    c. Select logs in specific namespaces - streams logs from specified namespaces. Enter the namespace name in the displayed namespaces list. To add more than one namespace, select Add item. Note: Namespaces provide logical grouping and isolation of objects within a distributed cloud tenant.  
-4. Select Datadog for the Receiver Configuration box. Configure the following for the Datadog receiver:  
-    a. Set the site name to datadoghq.com.  
-    b. Navigate to Datadog and [create an API key][3] within the organization settings.  
-    c. Copy the API key.  
-    d.  Navigate back to F5 and paste in the Datadog API key in the Datadog receiver fields.  
+グローバルログストリーミングは、システムネームスペースまたは共有ネームスペースで利用できます。
+- 共有ネームスペースは、アカウント内のすべての共有ネームスペース、または指定できる特定の共有ネームスペースのリストからのログのストリーミングをサポートしています。
+- システムネームスペースは、システムネームスペースからのストリーミングログのみをサポートします。
 
-**Optional Step 3: Configure advanced settings**
+以下は、システムネームスペースにグローバルログレシーバーを構成する例です。ステップバイステップのビデオは、[Datadog へのリモートログの構成の Datadog 公式 Youtube 説明書][2]をご覧ください。
 
-Advanced settings include configuring batch options and TLS. You can apply limits such as a maximum number of messages bytes or a timeout for a batch of logs to be sent to the receiver.
+**ステップ 1: グローバルログレシーバーを作成するには**
 
-1. Select the Show Advanced Fields toggle
-2. Within the Batch Options section:  
-    a. Select Timeout Seconds for the Batch Timeout Options and enter a timeout value in the Timeout Seconds box.  
-    b. Select Max Events for the Batch Max Events and enter a value between 32 and 2000 in the Max Events box.  
-    c. Select Max Bytes for the Batch Bytes and enter a value between 4096 and 1048576 in the Batch Bytes box. Logs are sent after the batch size equals or exceeds the specified byte size.  
-3. Within the TLS section:  
-    a. Select Use TLS for the TLS field.  
-    b. Select Server CA Certificates for the Trusted CA field. Enter the certificates in PEM or Base64 format in the Server CA Certificates box.  
-    c. Select Enable mTLS for mTLS config and enter the client certificate in PEM or Base64 format in the Client Certificate box.  
-    d. Select Configure in the Client Private Key field, and enter the secret in the box with type selected as Text.  
-    e. Select Blindfold, wait for the operation to complete, and click Apply.  
+1. F5® Distributed Cloud Console で、Shared Configuration サービスに移動します。
+2. Manage > Global Log Receiver を選択します。
+3. Cloud and Edge Sites サービスの場合は、Global Log Receiver を選択します。
+4. Global Log Receiver の追加ボタンをクリックします。
 
-**Step 4: Finish F5XC set up**
 
-- Select Save & Exit to complete creating the global log receiver. Verify that [logs][4] are received into your Datadog account.
 
-**Step 5: Create Datadog Log Facets**
-Once logs begin to arrive, it will be necessary to create [log facets][5] for data analysis and dashboard visualization. Log facet creation is straightforward and can be accomplished from the Datadog log side panel with guidance available [here][6]. 
+**ステップ 2: グローバルログレシーバーのプロパティを構成する**
 
-Create facets for the following fields:
+Global Log Receiver セクションで以下を実行します。
+
+1. Global Log Receiver セクション内で、メタデータセクションに名前を入力します。オプション: ラベルを設定し、説明を追加します。
+2. Log Type フィールドで Request Logs または Security Events を選択します。注: デフォルトでリクエストログが設定されています。
+3. 以下のオプションから、ネームスペースに基づいてストリームするイベントを選択します。
+    a. Select logs from the current namespace - 共有ネームスペースからログをストリームします。 
+    b. Select logs from all namespaces - すべてのネームスペースからログをストリームします。
+    c. Select logs in specific namespaces - 指定したネームスペースからログをストリームします。表示されたネームスペースのリストにネームスペース名を入力します。複数のネームスペースを追加するには、Add item を選択します。注: ネームスペースは、分散クラウドテナント内のオブジェクトの論理的なグループ化と分離を提供します。 
+4. Receiver Configuration ボックスで Datadog を選択します。Datadog レシーバーに以下を構成します。
+    a. サイト名を datadoghq.com に設定します。
+    b. Datadog に移動し、組織設定内で [API キーの作成][3]を行います。 
+    c. API キーをコピーします。
+    d.  F5 に戻り、Datadog の API キーを Datadog receiver フィールドに貼り付けます。 
+
+**オプションステップ 3: 高度な設定の構成**
+
+高度な設定には、バッチオプションと TLS の構成が含まれます。メッセージの最大バイト数や、ログのバッチがレシーバーに送信されるまでのタイムアウトなどの制限を適用することができます。
+
+1. Show Advanced Fields トグルを選択します
+2. Batch Options セクション内で
+    a. Batch Timeout Options で Timeout Seconds を選択し、Timeout Seconds ボックスにタイムアウト値を入力します。 
+    b. Batch Max Events で Max Events を選択し、Max Events のボックスに 32 から 2000 の値を入力します。 
+    c. Batch Bytes で Max Bytes を選択し、Batch Bytes ボックスに 4096 から 1048576 の間の値を入力します。バッチサイズが指定されたバイトサイズと同じかそれ以上になると、ログが送信されます。 
+3. TLS セクション内で
+    a. TLS フィールドの Use TLS を選択します。 
+    b. Trusted CA フィールドで Server CA Certificates を選択します。Server CA Certificates ボックスに、PEM または Base64 形式の証明書を入力します。 
+    c. mTLS 構成で Enable mTLS を選択し、Client Certificate ボックスに PEM または Base64 形式のクライアント証明書を入力します。 
+    d. Client Private Key フィールドで Configure を選択し、Type を Text にしたボックスに秘密鍵を入力します。 
+    e. Blindfold を選択し、オペレーションが完了するのを待ち、Apply をクリックします。 
+
+**ステップ 4: F5XC のセットアップを終了する*
+
+- Save & Exit を選択して、グローバルログレシーバーの作成を完了します。Datadog アカウントに[ログ][4]が受信されることを確認します。
+
+**ステップ 5: Datadog ログファセットを作成する**
+ログが届くようになったら、データ分析やダッシュボードの可視化のために、[ログファセット][5]を作成する必要があります。ログファセットの作成は簡単で、Datadog のログサイドパネルから行うことができ、ガイダンスも[こちら][6]にあります。
+
+以下のフィールドに対してファセットを作成します。
 
 - namespace
 - domain
@@ -143,13 +143,13 @@ Create facets for the following fields:
 - path
 - connection_state
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog Support][7] or [F5 Support][8].
+ヘルプが必要ですか？[Datadog サポート][7]または [F5 サポート][8]にお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-Learn more about [F5 Distributed Cloud Services][9].
+[F5 Distributed Cloud Services][9] の詳細についてはこちらをご覧ください。
 
 [1]: https://www.f5.com/cloud/products/distributed-cloud-console
 [2]: https://youtu.be/VUtXCUngiw8

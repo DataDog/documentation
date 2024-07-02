@@ -10,7 +10,7 @@ further_reading:
   text: Learn about the Datadog Browser SDK for Logs
 ---
 
-## Overview
+## 概要
 
 Datadog Real User Monitoring (RUM) provides deep insight into your application's frontend performance. Monitor real user data to optimize your web experience and provide exceptional user experiences. Correlate synthetic tests, backend metrics, traces, and logs in a single place to identify and troubleshoot performance issues across the stack.
 
@@ -27,13 +27,13 @@ With the Datadog RUM Browser SDK, you can also:
 
 {{< img src="real_user_monitoring/browser/rum-browser-overview.png" alt="RUM performance summary dashboard" style="width:100%;">}}
 
-## Getting started
+## はじめに
 
 To get started with the RUM Browser SDK, follow the steps to [create a JavaScript RUM application][1].
 
 From here, you can modify the [data and context][2] the RUM Browser SDK collects to support your specific needs. Learn how to override default settings in [Advanced Configuration][3].
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

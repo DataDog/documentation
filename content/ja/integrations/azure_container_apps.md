@@ -4,7 +4,7 @@
 - azure
 - cloud
 - containers
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Get metrics from Azure Container Apps."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_container_apps/"
@@ -27,27 +27,27 @@
 
 Azure Container Apps allow you to build and deploy modern apps and microservices using serverless containers. For more information, see [Microsoft's documentation][1] for Azure Container Apps.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration first][2]. 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_container_apps" >}}
 
 
-### Events
+### イベント
 
 The Azure Container Apps integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Container Apps integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

@@ -3,9 +3,9 @@
 - "/integrations/sumologic/"
 "categories":
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Send logs from Sumo Logic to Datadog; send Datadog notifications to Sumo Logic."
+"description": "Sumo Logic から Datadog にログを送信。Datadog 通知を Sumo Logic に送信。"
 "doc_link": "https://docs.datadoghq.com/integrations/sumologic/"
 "draft": false
 "git_integration_title": "sumo_logic"
@@ -26,9 +26,9 @@
 
 Datadog integrates with Sumo Logic in two ways: you can forward Sumo Logic log data to your Datadog event stream, and you can use Sumo Logic as a notification channel from Datadog alerts and events. In other words, each service can inform the other.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 #### Datadog to Sumo Logic
 

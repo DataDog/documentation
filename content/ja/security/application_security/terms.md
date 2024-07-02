@@ -17,51 +17,51 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Application Security Management はサポートされていません。</div>
 {{< /site-region >}}
 
-Datadog Application Security Management (ASM) monitors threats and provides protection against application-level attacks that aim to exploit code-level vulnerabilities. It leverages runtime code execution context, trace and error data, and user attribution.
+Datadog Application Security Management (ASM) は、脅威を監視し、コードレベルの脆弱性を悪用しようとするアプリケーションレベルの攻撃に対する保護を提供します。実行時のコード実行コンテキスト、トレースおよびエラーデータ、ユーザーの属性を利用します。
 
-## General application security terms
+## 一般的なアプリケーションセキュリティ用語
 
-attack attempt
-: Which security rule was triggered by the trace.
+攻撃の試み
+: トレースにより、どのセキュリティルールがトリガーされたか。
 
 Datadog library
 : _also_ tracer, tracing library
 : A programming language-specific library embedded in web applications. ASM uses the library to monitor and protect. APM uses the same library to instrument code for tracing telemetry.
 
-detection rule
-: A conditional logic definition that is applied to ingested data and cloud configurations. When at least one case defined in a rule is matched over a given period of time, Datadog generates a _security signal_.
-: See [Detection rules][10].
+検出ルール
+: 取り込まれたデータやクラウド構成に適用される条件付きロジックの定義。ルールで定義された条件の少なくとも 1 つが一定期間内に満たされると、Datadog は_セキュリティシグナル_を生成します。
+: [検出ルール][10]を参照してください。
 
 passlist (formerly exclusion filter)
 : A mechanism for discarding security traces flagged through the ASM library and the In-App WAF rules. Passlist is applied as requests are ingested into Datadog (intake). Passlist helps manage false positives and intake costs.
 : See [Exclusion filters][11] in the app.
 
-In-App WAF rules (formerly event rules)
-: A set of rules executed in the Datadog libraries to catch security activity. These include Web Application Firewall (WAF) patterns that monitor for attempts to exploit known vulnerabilities.
-: See [In-App WAF rules][12].
+アプリ内 WAF ルール (旧イベントルール)
+: Datadog ライブラリで実行される、セキュリティアクティビティを検出するためのルールセット。これには、既知の脆弱性を悪用する試みを監視する Web Application Firewall (WAF) のパターンが含まれています。
+: [アプリ内 WAF ルール][12]を参照してください。
 
-interactive application security testing (IAST)
-: An application security testing method that proactively detects vulnerabilities while the app is run by an automated test, human tester, or any activity interacting with the application functionality.
+インタラクティブアプリケーションセキュリティテスティング (IAST)
+: 自動テストや人間のテスター、またはアプリケーションの機能とインタラクションを持つ任意のアクティビティによってアプリが実行されている際に、積極的に脆弱性を検出するアプリケーションセキュリティテスティングの手法。
 
-Remote Configuration
-: A Datadog platform mechanism that enables the Agent configuration to be updated remotely. Used by ASM to update In-App WAF rules, activate the product, and block attackers.
-: See [How Remote Configuration Works][8].
+リモート構成
+: Agent の構成をリモートで更新できる Datadog プラットフォームの仕組み。アプリ内 WAF ルールの更新、製品の有効化、攻撃者のブロックのために ASM で使用されます。
+: [リモート構成の仕組み][8]を参照してください。
 
-service
-: A single web application, microservice, API, or function. Usually serves a business function.
+サービス
+: 単一の Web アプリケーション、マイクロサービス、API、または関数。通常、ビジネス機能を果たします。
 
-signal
-: A detection of an application attack that impacts your services. Signals identify meaningful threats for you to review, and should be triaged with a high priority.
-: See [Signals Explorer][13] in the app.
+シグナル
+: サービスに影響を与えるアプリケーション攻撃の検出。シグナルは、確認する価値のある脅威を特定し、高優先度でトリアージすべきものです。
+: アプリの[シグナルエクスプローラー][13]を参照してください。
 
-software composition analysis (SCA)
-: Comparing the open source libraries loaded by your services to databases of known vulnerabilities. SCA helps you identify vulnerable dependencies, outdated libraries, and licensing issues in the open source libraries that your web services load.
+ソフトウェア構成分析 (SCA)
+: サービスが読み込むオープンソースライブラリと、既知の脆弱性を含むデータベースを比較します。SCA は、Web サービスが読み込むオープンソースライブラリにおける脆弱な依存関係、古いライブラリ、およびライセンス問題を特定するのに役立ちます。
 
-severity
-: An indicator of how quickly an attack attempt should be triaged and addressed. Based on a combination of factors, including the attack's potential impact and risk. Values are Critical, High, Medium, Low, Info.
+重大度
+: 攻撃試行をどれだけ迅速にトリアージし、対処すべきかを示す指標。攻撃の潜在的な影響やリスクを含む複数の要因に基づいています。値は、Critical、High、Medium、Low、Info です。
 
 security trace
 : A distributed trace for which security activity has been flagged by In-App WAF rules. The underlying trace is shared with APM, allowing deeper and faster investigations.
@@ -73,8 +73,8 @@ user attribution
 : A mechanism that maps suspicious requests to known users in your systems.
 : See [Tracking User Activity][14].
 
-vulnerability
-: Passive risk within an application. From [OWASP][1]: "A vulnerability is a hole or a weakness in the application, which can be a design flaw or an implementation bug, that allows an attacker to cause harm to the stakeholders of an application. Stakeholders include the application owner, application users, and other entities that rely on the application."
+脆弱性
+: アプリケーション内の潜在的なリスク。[OWASP][1]より: "脆弱性とは、攻撃者がアプリケーションの利害関係者に危害を加えることを可能にする、設計上の欠陥あるいは実装バグである、アプリケーションの穴または弱点のことを指します。利害関係者には、アプリケーションの所有者、アプリケーションのユーザー、および、アプリケーションに依存する他のエンティティが含まれます。"
 
 trace qualification
 : The process by which Datadog helps understand the impact of traces, labeling
@@ -93,10 +93,10 @@ flagged attackers
 : IPs that send large amounts of attack traffic. We recommend reviewing and blocking Flagged IPs. Thresholds are not user-configurable.
 : See [Attacker Explorer][17]
 
-## Attacks and known vulnerabilities terms
+## 攻撃と既知の脆弱性の用語
 
-Open Web Application Security Project (OWASP)
-: A nonprofit foundation with several projects to enhance web application security. OWASP is best known for the [OWASP Top 10][2], a broad consensus about the most critical security risks to web applications.
+オープン Web アプリケーションセキュリティプロジェクト (OWASP)
+: Web アプリケーションのセキュリティを強化するために、複数のプロジェクトを行っている非営利財団。OWASP は、Web アプリケーションの最も重要なセキュリティリスクについての幅広い合意である [OWASP Top 10][2] で最もよく知られています。
 
 Cross-Site Scripting (XSS)
 : A type of injection attack in which malicious scripts are injected into otherwise benign and trusted websites.
@@ -107,27 +107,27 @@ Structured Query Language Injection (SQLi, SQL Injection)
 : **Related**: Cassandra Query Language Injection (CQLi), NoSQL Injection (NoSQLi) - Similar to SQLi but for the Cassandra Query Language and NoSQL.
 : See [SQL Injection on OWASP][4].
 
-Server-Side Request Forgery (SSRF)
-: A vulnerability where a web application fetches a remote resource without validating the user-supplied URL. It allows an attacker to coerce the application to send a crafted request to an unexpected destination, even when protected by a firewall, VPN, or another type of network access control list (ACL).
-: See [Server-Side Request Forgery on OWASP][5].
+サーバーサイドリクエストフォージェリ (SSRF)
+: Web アプリケーションが、ユーザーが提供した URL を検証することなく、リモートリソースを取得する脆弱性。ファイアウォールや VPN、その他のネットワークアクセス制御リスト (ACL) で保護されている場合でも、攻撃者はアプリケーションに細工したリクエストを強制的に送信し、予期しない宛先に送信することができます。
+: [OWASP のサーバーサイドリクエストフォージェリ][5]を参照してください。
 
 Local File Inclusion (LFI)
 : A vulnerability that allows an attacker to include a file locally present on the server during the processing of the request. In most cases this allows the attacker to read sensitive information stored in files on the server. In more severe cases exploitation can lead to cross-site scripting or remote code execution.
 : See [Testing for LFI on OWASP][6].
 
-Remote File Inclusion (RFI)
-: A vulnerability similar to Local File Inclusion, but allows an attacker to include a remote file during the processing of the request. The files used in Remote File Inclusion attacks most commonly contain malicious code for PHP, JSP, or similar technologies.
+リモートファイルインクルージョン (RFI)
+: ローカルファイルインクルージョンに似た脆弱性ですが、攻撃者がリクエストの処理中にリモートファイルを含めることが可能です。リモートファイルインクルージョン攻撃で使用されるファイルは、主に PHP、JSP、または同様の技術のための悪意のあるコードを含んでいます。
 
-Remote Code Execution (RCE)
-: A vulnerability that allows an attacker to remotely execute code on a machine.
+リモートコード実行 (RCE)
+: 攻撃者がリモートでマシンのコードを実行することを可能にする脆弱性。
 
-Object-Graph Navigation Language Injection (OGNLi)
-: A vulnerability that allows an attacker to execute their own OGNL expression in a Java application, most commonly leading to remote code execution.
-: See [OGNLi in OWASP Top 10][7].
+オブジェクトグラフナビゲーション言語インジェクション (OGNLi)
+: Java アプリケーションにおいて、攻撃者が自分の OGNL 式を実行することを可能にする脆弱性で、通常はリモートコード実行につながります。
+: [OWASP Top 10 の OGNLi][7] を参照してください。
 
 
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

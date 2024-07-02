@@ -1,90 +1,93 @@
 ---
-description: すべてのテスト実行を調査し、失敗したテスト結果のトラブルシューティングを行います。
+title: Search Test Runs
+kind: documentation
+description: Examine all of your test runs and troubleshoot failing test results.
 further_reading:
 - link: /continuous_testing/explorer
-  tag: ドキュメント
-  text: Synthetic Monitoring &amp; Continuous Testing Explorer について
-title: テスト実行の検索
+  tag: Documentation
+  text: Learn about the Synthetic Monitoring & Testing Results Explorer
 ---
 
-## 概要
+## Overview
 
-右上のドロップダウンメニューから時間帯を選択した後、[Synthetic Monitoring & Continuous Testing Explorer][1] の **Test Runs** イベントタイプをクリックすると、テスト実行を検索することができます。
+After selecting a time frame from the dropdown menu on the top right, you can search for test runs by clicking on the **Test Runs** event type in the [Synthetic Monitoring & Testing Results Explorer][1].
 
-ファセットを使用すると、以下のアクションを実行できます。
+{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
-- 再試行を必要とする最新のテスト実行を観測します。
-- 失敗した API テスト実行を HTTP ステータスコードで集計し、傾向をプロットします。
+You can use facets to accomplish the following actions:
 
-## ファセットの確認
+- Observe the latest test runs that required retries.
+- Aggregate failed API test runs by HTTP status code and plot trends. 
 
-左側のファセットパネルには、テスト実行を検索するために使用できる複数のファセットが表示されます。検索クエリのカスタマイズを開始するには、**Common** で始まるファセットリストをクリックします。
+## Explore facets
 
-### Common テスト実行属性
+The facets panel on the left lists several facets you can use to search through your test runs. To start customizing the search query, click through the list of facets starting with **Common**.
 
-**Commmon** ファセットを使用すると、テスト実行の属性でフィルタリングできます。
+### Common test run attributes
 
-| ファセット            | 説明                                                                                             |
+**Common** facets allow you to filter on your test runs' attributes.
+
+| Facet            | Description                                                                                             |
 |------------------|---------------------------------------------------------------------------------------------------------|
-| `Batch ID`        | テスト実行に関連付けられたバッチ ID。                                               |
-| <code>実行ルール</code> | CI バッチのテスト結果に関連付けられた実行ルール: `Blocking`、`Non Blocking`、`Skipped`。 |
-| `Location`       | バッチのテスト結果に関連付けられたロケーション。                                              |
-| `Passed`        | テスト実行の全体的なステータス。                                               |
-| `Run Type`      | テスト実行の実行タイプ。スケジュール、CI、または手動トリガーにすることができます。                                             |
+| `Batch ID`        | The batch ID associated with the test run.                                               |
+| <code>Execution&nbsp;Rule</code> | The execution rule associated with the test result of the CI batch: `Blocking`, `Non Blocking`, and `Skipped`. |
+| `Location`       | The location associated with the test result of the batch.                                              |
+| `Passed`        | The overall status of the test run.                                               |
+| `Run Type`      | The run type of the test run. It can be scheduled, CI, or manually triggered.                                             |
 
-### Timings 属性
+### Timings attributes
 
-**Timings** ファセットでは、API テスト実行のタイミングに関連する属性でフィルターをかけることができます。
+**Timings** facets allow you to filter on timing-related attributes for API test runs.
 
-| ファセット          | 説明                                 |
+| Facet          | Description                                 |
 |----------------|---------------------------------------------|
-| `DNS`  | API テスト実行のための DNS 名解決に費やされた時間。  |
-| `ダウンロード`     | API テスト実行で、レスポンスのダウンロードにかかった時間。     |
-| `First Byte`      | API テスト実行で、レスポンスの 1 バイト目を受信するまでにかかった時間。      |
-| `Open`  | WebSocket テスト実行で、WebSocket が開かれたままの全体の時間。  |
-| `Received` | WebSocket テスト実行で、WebSocket 接続がデータの受信に費やした全体の時間。 |
-| `TCP` | API テスト実行のための TCP 接続の確立にかかった時間。 |
-| `Total` | API テスト実行の総レスポンスタイム。 |
+| `DNS`  | The time spent resolving the DNS name for an API test run.  |
+| `Download`     | The time spent downloading the response for an API test run.     |
+| `First Byte`      | The time spent waiting for the first byte of the response to be received for an API test run.      |
+| `Open`  | The overall time a websocket remained open for a WebSocket test run.  |
+| `Received` | The overall time a websocket connection spent receiving data for a WebSocket test run. |
+| `TCP` | The time spent establishing a TCP connection for an API test run. |
+| `Total` | The total response time for an API test run. |
 
-### HTTP 属性
+### HTTP attributes
 
-**HTTP** ファセットを使用すると、HTTP 属性でフィルタリングできます。
+**HTTP** facets allow you to filter on HTTP attributes.
 
-| ファセット          | 説明                                 |
+| Facet          | Description                                 |
 |----------------|---------------------------------------------|
-| `HTTP Status Code`  | テスト実行の HTTP ステータスコード。  |
+| `HTTP Status Code`  | The HTTP status code for the test run.  |
 
-### gRPC 属性
+### gRPC attributes
 
-**gRPC** ファセットは、gRPC テスト実行に関連するものです。
+**gRPC** facets are related to gRPC test runs.
 
-| ファセット       | 説明                               |
+| Facet       | Description                               |
 |-------------|-------------------------------------------|
-| `Health Check Status`       | gRPC テストのヘルスチェックのステータス。ステータスは `Serving` または `Failing` です。    |
+| `Health Check Status`       | The health check status for the gRPC test. Statuses are `Serving` or `Failing`.    |
 
-### SSL 属性
+### SSL attributes
 
-**SSL** ファセットは、SSL テスト実行に関連するものです。
+**SSL** facets are related to SSL test runs.
 
-| ファセット       | 説明                               |
+| Facet       | Description                               |
 |-------------|-------------------------------------------|
-| `AltNames`       |SSL 証明書に関連付けられた代替レコード名。    |
+| `AltNames`       |Alternative record names associated with an SSL certificate.    |
 
-### TCP 属性
+### TCP attributes
 
-**TCP** ファセットは、テスト実行中の TCP 接続に関連するものです。
+**TCP** facets are related to TCP connections during test runs.
 
-| ファセット       | 説明                               |
+| Facet       | Description                               |
 |-------------|-------------------------------------------|
-| `Connection Outcome`       | TCP 接続のステータス。結果は `established`、`timeout`、または `refused` となります。    |
+| `Connection Outcome`       | The connection status for the TCP connection. Outcomes can be `established`, `timeout`, or `refused`.    |
 
-再試行されたテストにフィルターをかけるには、`@result.isFastRetry:true` を使用して検索クエリを作成します。また、`@result.isLastRetry:true` フィールドを使用して、再試行が行われたテストの最後の実行を取得することができます。
+To filter on test runs that are retries, create a search query using `@result.isFastRetry:true`. You can also retrieve the last run for a test with retries using the `@result.isLastRetry:true` field.
 
-テスト実行の検索については、[検索構文][2]を参照してください。
+For more information about searching for test runs, see [Search Syntax][2].
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/synthetics/explorer/
-[2]: /ja/continuous_testing/explorer/search_syntax
+[2]: /continuous_testing/explorer/search_syntax

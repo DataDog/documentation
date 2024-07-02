@@ -25,7 +25,7 @@
 "categories":
 - cloud
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/tidb_cloud/README.md"
 "display_on_public_website": true
@@ -72,27 +72,27 @@ Use the TiDB Cloud Datadog integration to export metrics from TiDB Cloud cluster
 >
 > - For TiDB clusters on premises, see the [TiDB Integration][2].
 
-## Setup
+## セットアップ
 
 To set up the TiDB Cloud Datadog integration for your cluster, provide a Datadog API key and region to TiDB Cloud.
 
 See [TiDB Cloud Preferences][3] to configure the Datadog integration for your TiDB Cloud project.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "tidb_cloud" >}}
 
 
-### Service Checks
+### サービスチェック
 
 The TiDB Cloud integration does not include any service checks.
 
-### Events
+### イベント
 
 The TiDB Cloud integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

@@ -29,7 +29,7 @@
 - cloud
 - data stores
 - provisioning
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/silk/README.md"
 "display_on_public_website": true
@@ -71,16 +71,16 @@
 
 This check monitors [Silk][1] through the Datadog Agent.
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### Installation
+### インストール
 
 The Silk check is included in the [Datadog Agent][3] package.
 No additional installation is needed on your server.
 
-### Configuration
+### 構成
 
 1. Edit the `silk.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Silk performance data. See the [sample silk.d/conf.yaml][4] for all available configuration options.
 
@@ -90,13 +90,13 @@ No additional installation is needed on your server.
 
 [Run the Agent's status subcommand][6] and look for `silk` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "silk" >}}
 
 
-### Events
+### イベント
 
 The Silk integration records events emitted by the Silk server. The event levels are mapped as the following:
 
@@ -108,11 +108,11 @@ The Silk integration records events emitted by the Silk server. The event levels
 | `CRITICAL`                | `error`                            |
 
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "silk" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

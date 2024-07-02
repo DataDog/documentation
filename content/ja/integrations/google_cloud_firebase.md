@@ -4,9 +4,9 @@
 - "google cloud"
 - "log collection"
 - "mobile"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track network and data store usage attributable to your Firebase services."
+"description": "Firebase サービスに関するネットワークとデータストアの使用状況を追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_firebase/"
 "draft": false
 "git_integration_title": "google_cloud_firebase"
@@ -32,9 +32,9 @@ Get metrics from Google Firebase to:
 - Visualize the performance of your Firebase databases and hosting services.
 - Correlate the performance of your Firebase tools with your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration first][1]. There are no other installation steps that need to be performed.
 
@@ -49,21 +49,21 @@ Once this is done, export your Google Firebase logs from Google Cloud Logging to
 3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloud_firebase" >}}
 
 
-### Events
+### イベント
 
 The Google Firebase integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Firebase integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

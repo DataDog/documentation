@@ -11,7 +11,7 @@
 "categories":
 - cost management
 - cloud
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/cloudzero/README.md"
 "display_on_public_website": true
@@ -64,15 +64,15 @@ CloudZero helps engineering teams build cost-effective software. Use its platfor
 
 Once connected, the CloudZero platform regularly ingests your Datadog billing information for both committed and on-demand costs across all Datadog products. CloudZero unifies this data with the rest of your cloud costs, giving you a comprehensive assessment of your total cloud investment. The platform then puts all of your cloud spend through numerous analytics features, revealing opportunities for efficiency and letting you craft and send custom reports.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Click **Install Integration** on the [Datadog integration tile][1]. Once the integration is installed, click **Connect Accounts** under the **Configure** tab to authorize CloudZero to access your Datadog account. This will take you to the CloudZero application where you will create a connection adding a name and selecting the site to which your parent Datadog account is assigned.
 
 Once a connection is created, click **Continue** to authorize CloudZero to pull data from your Datadog account into the CloudZero platform.
 
-### Configuration
+### 構成
 
 You can adjust settings from the connection details page for your Datadog connection in CloudZero.
 
@@ -87,7 +87,7 @@ You can adjust settings from the connection details page for your Datadog connec
 - Once this integration has been uninstalled, any previous authorizations are revoked.
 - Additionally, ensure that all API keys associated with this integration have been disabled by searching for the integration name on the [API Keys page][4].
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [CloudZero support][5].
 

@@ -23,7 +23,7 @@
 "categories":
 - metrics
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -79,7 +79,7 @@ Pingdom V3 Integration acts similarly to the [Datadog Pingdom Integration (Depre
 2. Enter the name and API Token into the corresponding fields. Metrics and checks configured in Pingdom are collected into Datadog.
 3. Manage tags of checks in Pingdom. Tags added to a check in Pingdom are automatically added to a check in Datadog. Exclude checks by adding the `datadog-exclude` tag. 
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "pingdom_v3" >}}

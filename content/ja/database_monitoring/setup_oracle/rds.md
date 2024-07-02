@@ -10,17 +10,17 @@ further_reading:
 
 {{% dbm-oracle-definition %}}
 
-The Agent collects telemetry directly from the database by logging in as a read-only user.
+読み取り専用ユーザーとしてログインし、Agent でデータベースから直接テレメトリーを収集します。
 
-## Before you begin
+## はじめに
 
 {{% dbm-supported-oracle-versions %}}
 
 {{% dbm-supported-oracle-agent-version %}}
 
-Performance impact
-: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
+パフォーマンスへの影響
+: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。<br/><br/>
+データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
 Proxies, load balancers, and connection poolers
 : The Agent must connect directly to the host being monitored. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. Each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
@@ -28,13 +28,13 @@ Proxies, load balancers, and connection poolers
 Data security considerations
 : See [Sensitive information][6] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
-## Setup
+## セットアップ
 
 Complete the following steps to enable Database Monitoring with your Oracle database:
 
 1. [Create the Datadog user](#create-the-datadog-user)
 1. [Grant the user access to the database](#grant-the-user-access-to-the-database)
-1. [Install the Agent](#install-the-agent)
+1. [Agent をインストールする](#install-the-agent)
 1. [Configure the Agent](#configure-the-agent)
 1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
 1. [Validate the setup](#validate-the-setup)
@@ -56,7 +56,6 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('V_$INSTANCE','DATADOG','SELECT',p_
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_FEATURE_USAGE_STATISTICS','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PROCESS','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SESSION','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CON_SYSMETRIC','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_TABLESPACE_USAGE_METRICS','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_TABLESPACES','DATADOG','SELECT',p_grant_option => false);
@@ -68,9 +67,6 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PDBS','DATADOG','SELECT',p_gran
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_SERVICES','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$OSSTAT','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PARAMETER','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLSTATS','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PGASTAT','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$ASM_DISKGROUP','DATADOG','SELECT',p_grant_option => false);
@@ -84,13 +80,13 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_DATA_FILES','DATADOG','SELECT'
 exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 ```
 
-### Install the Agent
+### Agent のインストール
 
-See the [DBM Setup Architecture][10] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
+Agent をどこにインストールするかについては、[DBM セットアップアーキテクチャ][10]のドキュメントを参照してください。Agent は外部の Oracle クライアントを必要としません。
 
 For installation steps, see the [Agent installation instructions][8].
 
-### Configure the Agent
+### Agent の構成
 
 Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][9] for all available configuration options.
 
@@ -100,19 +96,19 @@ Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`
 init_config:
 instances:
   - server: '<RDS_INSTANCE_ENDPOINT_1>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
+    service_name: "<SERVICE_NAME>" # Oracle CDB サービス名
     username: 'datadog'
     password: '<PASSWORD>'
     dbm: true
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<RDS_INSTANCE_ENDPOINT_2>:<PORT>'
-    service_name: "<SERVICE_NAME>" # The Oracle CDB service name
+    service_name: "<SERVICE_NAME>" # Oracle CDB サービス名
     username: 'datadog'
     password: '<PASSWORD>'
     dbm: true
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
@@ -133,11 +129,11 @@ On the Integrations page in Datadog, install the [Oracle integration][7] for you
 
 [Run the Agent's status subcommand][3] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][5] and [Databases][4] page in Datadog to get started.
 
-## Custom queries
+## カスタムクエリ
 
 Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][9] to learn more about the configuration options available.
 
-<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
+<div class="alert alert-warning">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
 
 [1]: /database_monitoring/agent_integration_overhead/?tab=oracle
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
@@ -150,6 +146,6 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [9]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
 [10]: /database_monitoring/architecture/
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

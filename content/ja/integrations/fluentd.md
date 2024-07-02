@@ -32,7 +32,7 @@
 "categories":
 - "log collection"
 - "metrics"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/fluentd/README.md"
 "display_on_public_website": true
@@ -78,9 +78,9 @@ Get metrics from Fluentd to:
 - Visualize Fluentd performance.
 - Correlate the performance of Fluentd with the rest of your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Fluentd check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Fluentd servers.
 
@@ -96,12 +96,12 @@ In your Fluentd configuration file, add a `monitor_agent` source:
 </source>
 ```
 
-### Configuration
+### 構成
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -245,21 +245,21 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
 
 [Run the Agent's status subcommand][3] and look for `fluentd` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "fluentd" >}}
 
 
-### Events
+### イベント
 
 The FluentD check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "fluentd" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

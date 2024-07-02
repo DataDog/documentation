@@ -28,7 +28,7 @@
 - incidents
 - notifications
 - ai/ml
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/insightfinder/README.md"
 "display_on_public_website": true
@@ -74,9 +74,9 @@
 
 This bidirectional integration provides advanced AIOps capabilities. InsightFinder ingests data from Datadog through standard APIs and finds anomalous events before your business is impacted. Alerts for these anomalous events can then be sent into Datadog to notify your team.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To configure the integration and send data to InsightFinder, see the [InsightFinder-Datadog Integration][2]. You need a Datadog [API key and application key][3].
 

@@ -11,41 +11,41 @@ algolia:
   tags: [usage attribution, cost attribution]
 ---
 
-## Overview
+## 概要
 
 <div class="alert alert-warning">
-Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
+Usage Attribution は、Enterprise プランに含まれる高度な機能です。他のプランをご利用中で、この機能をご希望の場合は、アカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> までお問い合わせください。
 </div>
 
 Administrators or users with the Usage Read permission can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
 
-- Lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to three tag keys).
+- 使用方法が分類されている既存のタグキーを一覧表示し、新しいタグキー（最大 3 つ）を変更および追加する機能を提供します。
 - Summarizes usage at the end of each month and visualizes usage over time broken out by tags.
 - Generates month-to-date and hourly CSV files.
 
 This feature does not support product usage that cannot be tagged during instrumentation. For example, Incident Management Users, CI Pipeline and Test Users, Parallel Testing Slots, and Audit Trail. 
 
-## Getting started
+## はじめに
 
 To start receiving daily data, an administrator needs to choose tags for the report.
 
-{{< img src="account_management/billing/usage_attribution/advanced-usage-reporting.png" alt="Getting Started with Usage Attribution in Datadog" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/advanced-usage-reporting.png" alt="Datadog で使用量属性を始める" style="width:100%;" >}}
 
 The **Edit Tags** popover allows:
 
-- Entering up to three tag keys from a dropdown. The dropdown is pre-populated with existing tags on both the root account and any child organizations under the account.
-- Deleting and editing existing tags.
+- ドロップダウンから最大 3 つのタグキーを入力できます。ドロップダウンには、ルートアカウントとアカウントの子オーガニゼーションの両方の既存のタグが事前に入力されています。
+- 既存のタグの削除と編集ができます。
 
 {{< img src="account_management/billing/usage_attribution/Edit-Tags-Popover.png" alt="Edit Tags in Usage Attribution" style="width:80%;" >}}
 
 - Once the tags are configured, it takes 24 hours for the first report to be generated.
-- The reports are generated on an ongoing basis.
-- If tags are changed, the new report reflects the new tags. However, the previous reports keep the old tags.
+- レポートは継続的に生成されます。
+- タグを変更すると、新しいレポートには新しいタグが反映されますが、以前のレポートはそのまま古いタグを維持します。
 - Monthly reports reflect the latest set of tags. If tags are changed in the middle of a month, partial month reports are created for each reporting period.
 
-## Total usage
+## 合計使用量
 
-### Monthly usage attribution
+### 月次使用属性
 
 Monthly reports are updated daily and provide a month-to-date aggregation of usage data.
 
@@ -53,38 +53,38 @@ Monthly reports are updated daily and provide a month-to-date aggregation of usa
 
 - Data for specific products, tags, and organizations can be selected using the facet selector.
 - Data can be grouped and ungrouped by the tag keys selected.
-- Value and Percentage options are available for table display. 
-- Data shown on the table can be edited to include select products. 
-- If multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
-- Previous months' reports are accessible through the time selector.
+- テーブルの表示には、Value と Percentage のオプションが用意されています。
+- テーブルのデータは、一部の製品を含むように編集することができます。
+- マルチオーガニゼーションを有効にすると、使用方法は親アカウントの全 Datadog オーガニゼーションが要約されます。
+- 前の月のレポートには、タイムセレクターからアクセスできます。
 - Reports are downloadable in CSV format. These CSV reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks. Percentages are calculated on a per-organization basis.
 
 Monthly data can also be pulled using the API. For more information, see the [API endpoint documentation][1].
 
-### Hourly usage attribution
+### 1 時間ごとの使用量属性
 
 Hourly data can be pulled using the API. For more information, see the [API endpoint documentation][2].
 
-### Interpreting the data
+### データの解釈
 
-The table below shows a sample daily report for Infra usage by two tags: `app` and `service`.
+次のテーブルは、`app` タグと `service` タグ別のインフラ使用量の日次レポート例です。
 
-| public_id | hour                | app          | service                  | total_usage |
+| public_id | 時間                | app          | サービス                  | total_usage |
 | --------- | ------------------- | ------------- | ------------------------| --------------------- |
 | publicid1 | 2022-03-31 00:00:00 | &lt;empty&gt; | service1 &#124; service2  | 50                  |
 | publicid1 | 2022-03-31 09:00:00 | app1         |                          | 28                    |
 | publicid1 | 2022-03-31 18:00:00 | app2         | service3                 | 1023                  |
 
-- An `<empty>` value means the resource was tagged with the respective tag but did not have a value.
-- No value means the resource was not tagged with that particular tag.
-- `|` (pipe) separated values (for example, `service1 | service2`) mean that a particular tag was applied multiple times on the resource.
-- A valid tag value (see the [Defining Tags documentation][3]) refers to the actual value of the respective tag.
+- 値が`<empty>` というのは、リソースがそれぞれのタグでタグ付けされたものの、そこに値が無いことを意味します。
+- 値が無いというのは、リソースがその特定のタグにタグ付けされていないという意味です。
+- パイプ (|) 区切り値 (例、`service1 | service2`) は、特定のタグがリソースに複数回適用されたことを意味します。
+- 有効なタグの値 ([タグの定義に関するドキュメント]を参照[3]) は、それぞれのタグの実際の値を意味します。
 
-#### Further data analysis
+#### 詳細なデータ分析
 
-When using multiple tags, both the Hourly and Monthly Usage Attribution reports contain data for all possible combinations of those tags, and are suitable to use as base datasets for further data analysis tasks. For instance, you can use grouping or pivoting to produce views focused on a subset of the tags, or to perform aggregations across custom date ranges.
+複数のタグを使用する場合、時間単位および月次使用属性レポートにはタグの全通りの組み合わデータが含まれるため、詳細なデータ分析タスクのベースデータセットとして使用することができます。たとえば、グループ化やピボットでタグのサブセットに注目したビューを表示したり、任意の日付範囲の中で集計を行うことができます。
 
-## Tracking usage
+## 使用量の追跡
 
 A timeseries of Usage Attribution data can be viewed by clicking on "Track Usage"
 - Data for specific products, organization, or tag keys can be selected using the facet selector.
@@ -102,7 +102,7 @@ For direct billing customers, month-end cost attribution reports are generated a
 
 {{< img src="account_management/billing/usage_attribution/Cost-Attribution-Monthly.png" alt="Cost Attribution report" style="width:100%;" >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

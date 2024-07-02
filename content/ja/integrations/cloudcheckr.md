@@ -27,7 +27,7 @@ further_reading:
 
 With the Datadog-CloudCheckr integration, you can make data-driven decisions based on current and past resource consumption to maintain an agile, cost-effective infrastructure.
 
-## Setup
+## セットアップ
 
 To connect your Datadog account to your CloudCheckr account:
 

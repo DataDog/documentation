@@ -2,26 +2,26 @@
 title: Plan and Usage Settings
 ---
 
-[Administrators][1] can access the [organization settings][2] by clicking Plan & Usage from the Account menu in the bottom of the left side navigation or by selecting Plan & Usage from the header dropdown at the top of the Personal Settings page.
+[管理者][1]は、左ナビゲーションの下部にある Account メニューで Plan & Usage をクリックするか、Personal Settings ページの上部にあるドロップダウンメニューで Plan & Usage を選択すると、[オーガニゼーションの設定][2]にアクセスできます。
 
-## Usage reports
+## 使用状況レポート
 
-View hourly usage of your account across all billable parameters as well as the top 5000 custom metrics submitted. If your organization is the parent-organization in a [multi-org account][3], you can also view the usage of child-organization accounts by toggling between "Overall" and "Individual Organizations" at the top of the page. Individual child-organization accounts are isolated. They are only able to view their own usage and custom metrics.
+すべての課金可能なパラメーターと送信されたカスタムメトリクス上位 5000 について、アカウントの使用状況が毎時表示されます。ユーザーのオーガニゼーションが[マルチオーガニゼーションのアカウント][3]の親オーガニゼーションである場合は、ページ上部の "Overall" または "Individual Organizations" のボタンを切り替えることで、子オーガニゼーションアカウントの使用状況も表示できます。それぞれの子オーガニゼーションアカウントは隔離され、自分の使用状況とカスタムメトリクスのみを表示できます。
 
-**Note**: Allow up to 72 hours for this section to update.
+**注**: このセクションは、更新までに最大 72 時間かかります。
 
-Further detailed usage reports can also be created [on request][4] by your account representative.
+アカウント担当者からの[リクエスト][4]によってさらに詳細な使用状況レポートを作成することもできます。
 
-## Plan settings
+## プランの設定
 
-Upgrade or downgrade your account from the **Plan** tab on the Plan & Usage section.
+Plan & Usage セクションの **Plan** タブからアカウントをアップグレードまたはダウングレードします。
 
-**Note**: Contact your account representative or [success@datadoghq.com][4] to add or remove paid features that are not part of standard plans.
+**注**: 標準プランに含まれない有料機能を追加または削除する場合は、アカウント担当者または [success@datadoghq.com][4] にお問い合わせください。
 
 
-## Billing history
+## 課金履歴
 
-Your account billing history is available from the **Billing History** tab in the [Plan & Usage section][2]. For specific billing questions, contact your account representative or [success@datadoghq.com][4].
+アカウントの請求履歴は、[Plan & Usage セクション][2]の **Billing History** タブに表示されます。請求に関する個別の照会は、アカウント担当者または [success@datadoghq.com][4] にお問い合わせください。
 
 
 [1]: /account_management/users/default_roles/

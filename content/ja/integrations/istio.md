@@ -44,7 +44,7 @@
 - "log collection"
 - "network"
 - "tracing"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/istio/README.md"
 "display_on_public_website": true
@@ -57,7 +57,7 @@
 "manifest_version": "2.0.0"
 "name": "istio"
 "public_title": "Istio"
-"short_description": "Collect performance schema metrics, query throughput, custom metrics, and more."
+"short_description": "パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。"
 "supported_os":
 - "linux"
 - "windows"
@@ -65,8 +65,8 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Log Collection"
-  - "Category::Network"
+  - "Category::ログの収集"
+  - "Category::ネットワーク"
   - "Category::Tracing"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
@@ -75,7 +75,7 @@
   - "Submitted Data Type::Logs"
   - "Submitted Data Type::Traces"
   "configuration": "README.md#Setup"
-  "description": "Collect performance schema metrics, query throughput, custom metrics, and more."
+  "description": "パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -85,45 +85,45 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-Datadog monitors every aspect of your Istio environment, so you can:
-- Assess the health of Envoy and the Istio control plane with [logs](#log-collection).
-- Break down the performance of your service mesh with [request, bandwidth, and resource consumption metrics](#metrics).
-- Map network communication between containers, pods, and services over the mesh with [Network Performance Monitoring][1].
-- Drill into distributed traces for applications transacting over the mesh with [APM][2].
+Datadog は、Istio 環境のあらゆる側面を監視するため、以下を実現できます。
+- [ログ](#log-collection)を使用して、Envoy および Istio の Control Plane の健全性を評価。
+- [リクエスト、帯域幅、リソース消費のメトリクス](#metrics)でサービスメッシュのパフォーマンスを詳しく確認。
+- [ネットワークパフォーマンスモニタリング][1]で、コンテナ、ポッド、サービス間のネットワークコミュニケーションをメッシュ状にマッピング。
+- [APM[[2] でメッシュを実行してアプリケーションの分散型トレースの詳細を確認。
 
-To learn more about monitoring your Istio environment with Datadog, [see the Monitor blog post][3].
+Istio 環境での Datadog の使用について、詳細は[モニターのブログ記事をご参照ください][3]。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][4] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][4]のガイドを参照してこの手順を行ってください。
 
-This OpenMetrics-based integration has a latest mode (`use_openmetrics`: true) and a legacy mode (`use_openmetrics`: false). To get all the most up-to-date features, Datadog recommends enabling the latest mode. For more information, see [Latest and Legacy Versioning For OpenMetrics-based Integrations][5].
+この OpenMetrics ベースのインテグレーションには、最新モード (`use_openmetrics`: true) とレガシーモード (`use_openmetrics`: false) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。詳しくは、[OpenMetrics ベースのインテグレーションにおける最新バージョニングとレガシーバージョニング][5]を参照してください。
 
-If you have multiple instances of Datadog collecting Istio metrics, make sure you are using the same mode for all of them. Otherwise, metrics data may fluctuate on the Datadog site.
+Istio メトリクスを収集する Datadog のインスタンスが複数ある場合は、すべてのインスタンスで同じモードを使用していることを確認してください。そうしないと、Datadog サイトでメトリクスデータが変動する可能性があります。
 
-Metrics marked as `[OpenMetrics V1]`, `[OpenMetrics V2]`, or `[OpenMetrics V1 and V2]` are only available using the corresponding mode of the Istio integration. Metrics marked as `Istio v1.5+` are collected using Istio version 1.5 or later.
+`[OpenMetrics V1]`、`[OpenMetrics V2]`、または `[OpenMetrics V1 and V2]` とマークされたメトリクスは、Istio インテグレーションの対応するモードでのみ利用可能です。`Istio v1.5+` とマークされたメトリクスは Istio バージョン 1.5 以降で収集されます。
 
-### Installation
+### インストール
 
-Istio is included in the Datadog Agent. [Install the Datadog Agent][6] on your Istio servers or in your cluster and point it at Istio.
+Istio は Datadog Agent に含まれています。Istio サーバーまたはクラスターに [Datadog Agent をインストール][6]し、Istio で Agent を指定します。
 
 #### Envoy
 
-If you want to monitor the Envoy proxies in Istio, configure the [Envoy integration][7].
+Envoy プロキシ を Istioで監視する場合は、[Envoy インテグレーション][7]を構成します。
 
-### Configuration
+### 構成
 
-Edit the `istio.d/conf.yaml` file (in the `conf.d/` folder at the root of your [Agent's configuration directory][8]) to connect to Istio. See the [sample istio.d/conf.yaml][9] for all available configuration options.
+Istio に接続するには、`istio.d/conf.yaml` ファイル ([Agent のコンフィギュレーションディレクトリ][8]のルートにある `conf.d/` フォルダー内) を編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル istio.d/conf.yaml][9] を参照してください。
 
-#### Metric collection
-To monitor the `istiod` deployment and `istio-proxy` in Istio `v1.5+` there are two key components involved to collect the Prometheus-formatted metrics. Aligning with the [Istio architecture][10], there is the **data plane** (the `istio-proxy` sidecar containers) and the **control plane** (the `istiod` service managing the proxies). These are both run as `istio` Agent checks, but have different responsibilities, and they are configured separately, as described below.
+#### メトリクスの収集
+Istio `v1.5+` の `istiod` デプロイメントと `istio-proxy` を監視するために、Prometheus 形式のメトリクスを収集するための 2 つの主要なコンポーネントがあります。[Istio アーキテクチャ][10]に沿って、**データプレーン** (`istio-proxy` サイドカーコンテナ) と**コントロールプレーン** (プロキシを管理する `istiod` サービス) が存在します。これらは両方とも `istio` Agent チェックとして実行されますが、異なる責任を負っており、以下に説明するように別々に構成されます。
 
-##### Data plane configuration
-To monitor the Istio data plane, the Agent includes an [`istio.d/auto_conf.yaml`][11] file to automatically set up the monitoring for each of the `istio-proxy` sidecar containers. The Agent initializes this check for each sidecar container that it detects automatically. This configuration enables the reporting of `istio.mesh.*` metrics for the data exposed by each of these sidecar containers.
+##### データプレーン構成
+Istio データプレーンを監視するために、Agent は [`istio.d/auto_conf.yaml`][11] ファイルを含み、`istio-proxy` サイドカーコンテナごとに監視を自動的にセットアップするようになっています。Agent は、自動的に検出した各サイドカーコンテナに対してこのチェックを初期化します。この構成により、各サイドカーコンテナから公開されるデータの `istio.mesh.*` メトリクスをレポートすることができます。
 
-To customize the data plane portion of the integration, create an equivalent [configuration file][12] for Istio. Set `ad_identifiers` and `istio_mesh_endpoint` appropriately to set up the integration when an `istio-proxy` sidecar container is discovered. Refer to the provided [`istio.d/auto_conf.yaml`][11] and the [example configuration file][9] for all available configuration options. When you customize, set `use_openmetrics: true` and the `exclude_labels` to the following configuration:
+インテグレーションのデータプレーン部分をカスタマイズするには、Istio 用に同等の[コンフィギュレーションファイル][12]を作成します。`ad_identifiers` と `istio_mesh_endpoint` を適切に設定し、`istio-proxy` サイドカーコンテナが検出された場合のインテグレーションをセットアップします。利用可能なすべての構成オプションは、提供されている [`istio.d/auto_conf.yaml`][11] と[コンフィギュレーションファイル例][9]を参照してください。カスタマイズの際には、`use_openmetrics: true` と `exclude_labels` を以下の構成に設定します。
 ```yaml
     exclude_labels:
       - source_version
@@ -142,8 +142,8 @@ To customize the data plane portion of the integration, create an equivalent [co
       - connection_security_policy
 ```
 
-##### Control plane configuration
-To monitor the Istio control plane and report the `mixer`, `galley`, `pilot`, and `citadel` metrics, you must configure the Agent to monitor the `istiod` deployment. In Istio v1.5 or later, apply the following Autodiscovery Annotations as pod annotations for the deployment `istiod` in the `istio-system` namespace:
+##### コントロールプレーン構成
+Istio のコントロールプレーンを監視し、`mixer`、`galley`、`pilot`、`citadel` のメトリクスをレポートするには、`istiod` デプロイメントを監視するように Agent を構成する必要があります。Istio v1.5 以降では、`istio-system` ネームスペースにある `istiod` デプロイメントのポッドアノテーションとして、以下のオートディスカバリーアノテーションを適用してください。
 
 ```yaml
 ad.datadoghq.com/discovery.check_names: '["istio"]'
@@ -156,17 +156,17 @@ ad.datadoghq.com/discovery.instances: |
        }
      ]
 ```
-The method for applying these annotations varies depending on the [Istio deployment strategy (Istioctl, Helm, Operator)][13] used. Consult the [Istio documentation][10] for the proper method to apply these pod annotations.
+これらのアノテーションの適用方法は、使用する [Istio のデプロイメント戦略 (Istioctl、Helm、Operator)][13] によって異なります。これらのポッドアノテーションを適用するための適切な方法については、[Istio のドキュメント][10]を参照してください。
 
-These annotations reference `discovery` as the `<CONTAINER_IDENTIFIER>` to match the default container name of the pods for the `istiod` deployment. If your container name is different, adjust accordingly.
+これらのアノテーションは、`discovery` を `<CONTAINER_IDENTIFIER>` として参照し、`istiod` デプロイメントのポッドのデフォルトコンテナ名と一致するようにします。もし、コンテナ名が異なる場合は、適宜調整してください。
 
-#### Disable sidecar injection for Datadog Agent pods
+#### Datadog Agent ポッドのサイドカーインジェクションを無効化
 
-If you are installing the [Datadog Agent in a container][14], Datadog recommends that you first disable Istio's sidecar injection.
+[コンテナに Datadog Agent][14] をインストールする場合は、その前に Istio のサイドカーインジェクションを無効にすることをお勧めします。
 
-_Istio versions >= 1.10:_
+_Istio バージョン >= 1.10:_
 
-Add the `sidecar.istio.io/inject: "false"` **label** to the `datadog-agent` DaemonSet:
+`sidecar.istio.io/inject: "false"` **ラベル**を `datadog-agent` DaemonSet に追加します。
 
 ```yaml
 # (...)
@@ -178,15 +178,15 @@ spec:
     # (...)
 ```
 
-This can also be done with the `kubectl patch` command.
+これは、`kubectl patch` コマンドでも実行できます。
 
 ```shell
 kubectl patch daemonset datadog-agent -p '{"spec":{"template":{"metadata":{"labels":{"sidecar.istio.io/inject":"false"}}}}}'
 ```
 
-_Istio versions <= 1.9:_
+_Istio バージョン <= 1.9:_
 
-Add the `sidecar.istio.io/inject: "false"` **annotation** to the `datadog-agent` DaemonSet:
+`sidecar.istio.io/inject: "false"` **アノテーション**を `datadog-agent` DaemonSet に追加します。
 
 ```yaml
 # (...)
@@ -198,72 +198,72 @@ spec:
     # (...)
 ```
 
-Using the `kubectl patch` command:
+`kubectl patch` コマンドを使用します。
 
 ```shell
 kubectl patch daemonset datadog-agent -p '{"spec":{"template":{"metadata":{"annotations":{"sidecar.istio.io/inject":"false"}}}}}'
 ```
 
-#### Log collection
+#### ログ収集
 
-Istio contains two types of logs: Envoy access logs that are collected with the [Envoy integration][15] and [Istio logs][16].
+Istio には 2 種類のログがあります。[Envoy インテグレーション][15]、あるいは [Istio logs][16] で収集される Envoy アクセスログです。 
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-See the [Autodiscovery Integration Templates][4] for guidance on applying the parameters below.
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][17].
+[オートディスカバリーのインテグレーションテンプレート][4]のガイドを参照して、次のパラメーターを適用してください。
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][17]を参照してください。
 
-| Parameter      | Value                                                |
+| パラメーター      | 値                                                |
 | -------------- | ---------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "istio", "service": "<SERVICE_NAME>"}`   |
+| `<LOG_CONFIG>` | `{"source": "istio", "service": "<サービス名>"}`   |
 
-### Validation
+### 検証
 
-[Run the Agent's `info` subcommand][18] and look for `istio` under the Checks section.
+[Agent の `info` サブコマンドを実行][18]し、Checks セクションで `istio` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "istio" >}}
 
 
-### Events
+### イベント
 
-The Istio check does not include any events.
+Istio チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "istio" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-### Invalid chunk length error
-If you see the following error on the legacy mode of the Istio integration (Istio integration version `3.13.0` or earlier):
+### 無効なチャンク長のエラー
+Istio インテグレーション (Istio インテグレーションバージョン `3.13.0` 以前) のレガシーモードで以下のエラーが表示された場合
 
 ```python
   Error: ("Connection broken: InvalidChunkLength(got length b'', 0 bytes read)",
   InvalidChunkLength(got length b'', 0 bytes read))
 ```
 
-You can use the latest mode of the OpenMetrics-based Istio integration to resolve this error.
+このエラーを解決するには、OpenMetrics ベースの Istio インテグレーションの最新モードを使用できます。
 
-You must upgrade to at minimum Agent `7.31.0` and Python 3. See the [Configuration](#configuration) section to enable OpenMetrics.
+最低でも Agent `7.31.0` と Python 3 にアップグレードする必要があります。OpenMetrics を有効にするには、[構成](#configuration)のセクションを参照してください。
 
-### Using the generic OpenMetrics integration in an Istio deployment
+### Istio のデプロイメントで一般的な OpenMetrics インテグレーションを使用する
 
-If Istio proxy sidecar injection is enabled, monitoring other Prometheus metrics using the [OpenMetrics integration][21] with the same metrics endpoint as `istio_mesh_endpoint` can result in high custom metrics usage and duplicated metric collection.
+Istio のプロキシサイドカーインジェクションが有効な場合、`istio_mesh_endpoint` と同じメトリクスエンドポイントで [OpenMetrics インテグレーション][21]を使用して他の Prometheus メトリクスを監視すると、カスタムメトリクス使用量が多く、メトリクス収集が二重になることがあります。
 
-To ensure that your OpenMetrics configuration does not redundantly collect metrics, either:
+OpenMetrics の構成により、メトリクスの収集が重複しないようにするためには、以下のどちらかを行います。
 
-1. Use specific metric matching in the `metrics` configuration option, or
-2. If using the wildcard `*` value for `metrics`, consider using the following OpenMetrics integration options to exclude metrics already supported by the Istio and Envoy integrations.
+1. 構成オプション `metrics` で特定のメトリクスのマッチングを使用するか、または
+2. `metrics` にワイルドカード `*` 値を使用する場合、以下の OpenMetrics インテグレーションオプションを使用して、Istio および Envoy インテグレーションで既にサポートされているメトリクスを除外することを検討します。
 
-#### OpenMetrics latest mode configuration with generic metric collection
+#### 汎用的なメトリクス収集を使用した OpenMetrics の最新モード構成
 
-Be sure to exclude Istio and Envoy metrics from your configuration to avoid high custom metrics billing. Use `exclude_metrics` if `openmetrics_endpoint` is enabled.
+カスタムメトリクスの高額請求を避けるため、必ず Istio と Envoy のメトリクスを構成から除外してください。`openmetrics_endpoint` が有効になっている場合は `exclude_metrics` を使用します。
 
 ```yaml
-## Every instance is scheduled independent of the others.
+## 各インスタンスは、他のインスタンスとは独立してスケジュールされます。
 #
 instances:
   - openmetrics_endpoint: <OPENMETRICS_ENDPOINT>
@@ -274,9 +274,9 @@ instances:
 
 ```
 
-#### OpenMetrics legacy mode configuration with generic metric collection
+#### 汎用的なメトリクス収集を使用した OpenMetrics のレガシーモード構成
 
-Be sure to exclude Istio and Envoy metrics from your configuration to avoid high custom metrics billing. Use `ignore_metrics` if `prometheus_url` is enabled.
+カスタムメトリクスの高額請求を避けるため、必ず Istio と Envoy のメトリクスを構成から除外してください。`prometheus_url` が有効になっている場合は `ignore_metrics` を使用します。
 
 ```yaml
 instances:
@@ -288,15 +288,15 @@ instances:
       - envoy_*
 ```
 
-Need help? Contact [Datadog support][22].
+ご不明な点は、[Datadog のサポートチーム][22]までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor your Istio service mesh with Datadog][23]
-- [Learn how Datadog collects key metrics to monitor Istio][24]
-- [How to monitor Istio with Datadog][3]
+- [Datadog を使用した Istio サービスメッシュの監視][23]
+- [Datadog でキーメトリクスを収集して Istio を監視する][24]
+- [Datadog を使用した Istio の監視方法][3]
 
 [1]: https://www.datadoghq.com/blog/monitor-istio-with-npm/
 [2]: https://docs.datadoghq.com/tracing/setup_overview/proxy_setup/?tab=istio

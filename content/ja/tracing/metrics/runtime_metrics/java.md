@@ -42,7 +42,7 @@ Alternatively, the Agent can ingest metrics with a Unix Domain Socket (UDS) as a
 - To associate JVM metrics within flame graphs, ensure the `env: tag` (case-sensitive) is set and matching across your environment.
 - For JVM metrics to appear on the service page when using Fargate, ensure that `DD_DOGSTATSD_TAGS` is set on your Agent task, and matches the `env: tag` of that service.
 
-## Data Collected
+## 収集データ
 
 The following metrics are collected by default per JVM process after enabling JVM metrics.
 

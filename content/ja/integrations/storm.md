@@ -23,7 +23,7 @@
 "categories":
 - "metrics"
 - "event management"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/storm/README.md"
 "display_on_public_website": true
@@ -67,11 +67,11 @@ Get metrics from Storm service in real time to:
 - Visualize and monitor Storm cluster and topology metrics.
 - Be notified about Storm failovers and events.
 
-## Setup
+## セットアップ
 
 The Storm check is not included in the [Datadog Agent][1] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Storm check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -83,7 +83,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Storm ch
 
 2. Configure your integration similar to core [integrations][3].
 
-### Configuration
+### 構成
 
 1. Edit the `storm.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4] to start collecting your Storm [metrics](#metrics). See the [sample storm.d/conf.yaml][5] for all available configuration options.
 
@@ -93,21 +93,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Storm ch
 
 Run the [Agent's status subcommand][7] and look for `storm` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "storm" >}}
 
 
-### Events
+### イベント
 
 The Storm check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "storm" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

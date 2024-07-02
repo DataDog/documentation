@@ -36,7 +36,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/iis/README.md"
 "display_on_public_website": true
@@ -68,39 +68,39 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![IIS Graph][1]
+![IIS グラフ][1]
 
-## Overview
+## 概要
 
-Collect IIS metrics aggregated across all of your sites, or on a per-site basis. The IIS Agent check collects metrics for active connections, bytes sent and received, request count by HTTP method, and more. It also sends a service check for each site, letting you know whether it's up or down.
+すべてのサイトを集計して、またはサイトごとに IIS メトリクスを収集します。IIS Agent チェックは、アクティブな接続数、送信および受信バイト数、HTTP メソッド別のリクエスト数などのメトリクスを収集します。サイトごとのサービスチェックも送信されるため、サイトが稼働しているか停止しているかを把握できます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The IIS check is packaged with the Agent. To start gathering your IIS metrics and logs, [install the Agent][2] on your IIS servers.
+IIS チェックは Agent にパッケージ化されています。IIS メトリクスとログの収集を開始するには、[Agent をインストールします][2]。
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `iis.d/conf.yaml` file in the [Agent's `conf.d` directory][3] at the root of your [Agent's configuration directory][4] to start collecting your IIS site data. See the [sample iis.d/conf.yaml][5] for all available configuration options.
+1. IIS のサイトデータの収集を開始するには、[Agent の構成ディレクトリ][4]のルートにある [Agent の `conf.d` ディレクトリ][3]の `iis.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル iis.d/conf.yaml][5] を参照してください。
 
-2. [Restart the Agent][6] to begin sending IIS metrics to Datadog.
+2. [Agent を再起動][6]すると、Datadog への IIS メトリクスの送信が開始されます。
 
-**Note**: Versions 2.14.0 or later of this check use a new implementation for metric collection, which requires Python 3. For hosts that are unable to use Python 3, or if you would like to use a legacy version of this check, refer to the following [config][7].
+**注**: このチェックのバージョン 2.14.0 以降では、メトリクスの収集に新しい実装を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][7]を参照してください。
 
-##### Log collection
+##### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `iis.d/conf.yaml` file to start collecting your IIS Logs:
+2. IIS のログの収集を開始するには、次の構成ブロックを `iis.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -110,34 +110,34 @@ To configure this check for an Agent running on a host:
        source: iis
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment. See the [sample iis.d/conf.yaml][5] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル iis.d/conf.yaml][5] を参照してください。
 
-3. [Restart the Agent][6].
+3. [Agent を再起動します][6]。
 
-**Note**: Ensure the `datadog-agent` user has read and execute access to tail the log files you want to collect from. When IIS creates a new sub-folder (such as when a new site is created), the permissions of the parent folder are not automatically inherited. See [Permission issues tailing log files][8] for more information.
+**注**: `datadog-agent` ユーザーが、収集したいログファイルをテールするための読み取りアクセスと実行アクセスを持っていることを確認してください。IIS が新しいサブフォルダを作成するとき (新しいサイトが作成されるときなど)、親フォルダの権限は自動的に継承されません。詳細については、[ログファイルのテールに関する権限の問題][8]を参照してください。
 
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][9] and look for `iis` under the Checks section.
+[Agent の status サブコマンドを実行][9]し、Checks セクションで `iis` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "iis" >}}
 
 
-### Events
+### イベント
 
-The IIS check does not include any events.
+IIS チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "iis" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][12].
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/iis/images/iisgraph.png

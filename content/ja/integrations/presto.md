@@ -32,7 +32,7 @@
 "categories":
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/presto/README.md"
 "display_on_public_website": true
@@ -69,45 +69,45 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check collects [Presto][1] metrics, for example:
+このチェックは、次のような [Presto][1] メトリクスを収集します。
 
-- Overall activity metrics: completed/failed queries, data input/output size, execution time.
-- Performance metrics: cluster memory, input CPU, execution CPU time.
+- 全体的なアクティビティメトリクス: 完了/失敗したクエリ、データ入力/出力サイズ、実行時間。
+- パフォーマンスメトリクス: クラスターメモリ、入力 CPU 時間、実行 CPU 時間。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The Presto check is included in the [Datadog Agent][3] package.
-No additional installation is needed on your server. Install the Agent on each Coordinator and Worker node from which you wish to collect usage and performance metrics.
+Presto チェックは [Datadog Agent][3] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。使用状況メトリクスとパフォーマンスメトリクスを収集するコーディネーターノードおよびワーカーノードごとに Agent をインストールします。
 
-### Configuration
+### 構成
 
-1. Edit the `presto.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Presto performance data. See the [sample presto.d/conf.yaml][4] for all available configuration options.
+1. Presto のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `presto.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル presto.d/conf.yaml][4] を参照してください。
 
     This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in [the status page][5]. You can specify the metrics you are interested in by editing the configuration below. To learn how to customize the metrics to collect, see the [JMX Checks documentation][6] for more detailed instructions. If you need to monitor more metrics, contact [Datadog support][7].
 
-2. [Restart the Agent][8].
+2. [Agent を再起動します][8]。
 
-#### Metric collection
+#### メトリクスの収集
 
-Use the default configuration of your `presto.d/conf.yaml` file to activate the collection of your Presto metrics. See the sample [presto.d/conf.yaml][4] for all available configuration options.
+presto.d/conf.yaml ファイルのデフォルトコンフィギュレーションを使用して、Presto メトリクスの収集を有効にします。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル presto.d/conf.yaml][4] を参照してください。
 
-#### Log collection
+#### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `presto.d/conf.yaml` file to start collecting your Presto logs:
+2. Presto のログの収集を開始するには、次のコンフィギュレーションブロックを `presto.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -117,31 +117,31 @@ _Available for Agent versions >6.0_
        service: "<SERVICE_NAME>"
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment. See the sample [presto.d/conf.yaml][4] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル presto.d/conf.yaml][4] を参照してください。
 
-3. [Restart the Agent][8].
+3. [Agent を再起動します][8]。
 
-### Validation
+### 検証
 
 Run the [Agent's status subcommand][5] and look for `presto` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "presto" >}}
 
 
-### Events
+### イベント
 
-Presto does not include any events.
+Presto には、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "presto" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][7].
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 
 [1]: https://docs.datadoghq.com/integrations/presto/

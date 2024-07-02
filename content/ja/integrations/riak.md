@@ -26,7 +26,7 @@
 "categories":
 - "data stores"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/riak/README.md"
 "display_on_public_website": true
@@ -39,7 +39,7 @@
 "manifest_version": "2.0.0"
 "name": "riak"
 "public_title": "Riak"
-"short_description": "Track node, vnode and ring performance metrics for RiakKV or RiakTS."
+"short_description": "RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡"
 "supported_os":
 - "linux"
 - "macos"
@@ -51,9 +51,9 @@
   - "Supported OS::macOS"
   - "Supported OS::Windows"
   - "Category::Data Stores"
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   "configuration": "README.md#Setup"
-  "description": "Track node, vnode and ring performance metrics for RiakKV or RiakTS."
+  "description": "RiakKV または RiakTS について、ノード、vnode、およびリングのパフォーマンスメトリクスを追跡"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -65,28 +65,28 @@
 
 ![Riak Graph][1]
 
-## Overview
+## 概要
 
-This check lets you track node, vnode, and ring performance metrics from RiakKV or RiakTS.
+このチェックを使用して、RiakKV または RiakTS から取得されるノード、vnode、およびリングのパフォーマンスメトリクスを追跡します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Riak check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Riak servers.
+Riak チェックは [Datadog Agent][2] パッケージに含まれています。Riak サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `riak.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample riak.yaml][2] for all available configuration options:
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `riak.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル riak.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -98,19 +98,19 @@ To configure this check for an Agent running on a host:
      - url: http://127.0.0.1:8098/stats
    ```
 
-2. [Restart the Agent][3] to start sending Riak metrics to Datadog.
+2. [Agent を再起動][3]すると、Datadog への Riak メトリクスの送信が開始されます。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `riak.d/conf.yaml` file to start collecting your Riak logs:
+2. Riak のログの収集を開始するには、次の構成ブロックを `riak.d/conf.yaml` ファイルに追加します。
 
    ```yaml
      logs:
@@ -138,33 +138,33 @@ _Available for Agent versions >6.0_
              pattern: \d{4}\-\d{2}\-\d{2}
    ```
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                  |
+| パラメーター            | 値                                  |
 | -------------------- | -------------------------------------- |
 | `<INTEGRATION_NAME>` | `riak`                                 |
-| `<INIT_CONFIG>`      | blank or `{}`                          |
+| `<INIT_CONFIG>`      | 空白または `{}`                          |
 | `<INSTANCE_CONFIG>`  | `{"url":"http://%%host%%:8098/stats"}` |
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                                                                                                                                        |
+| パラメーター      | 値                                                                                                                                                        |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `<LOG_CONFIG>` | `{"source": "riak", "service": "riak", "log_processing_rules": {"type": "multi_line", "name": "new_log_Start_with_date", "pattern": "\d{4}\-\d{2}\-\d{2}"}}` |
 
@@ -173,27 +173,27 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][3] and look for `riak` under the Checks section.
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `riak` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "riak" >}}
 
 
-### Events
+### イベント
 
-The Riak check does not include any events.
+Riak チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "riak" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][4].
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
 

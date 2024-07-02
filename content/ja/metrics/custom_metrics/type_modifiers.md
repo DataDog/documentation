@@ -14,99 +14,99 @@ further_reading:
   text: Official and Community created API and DogStatsD client libraries
 ---
 
-A [metric type][1] is an indication of what you are trying to represent with your metric and its emission source. The `COUNT` and `RATE` metric types are quite similar to each other, as they represent the same concept: the variation of a metric value over time. However, they use different logic:
+メトリクスタイプは、メトリクスとそのエミッションソースで表す指標です。`COUNT` および `RATE` メトリクスタイプは、同じコンセプトである「経時的なメトリクス値の変化」を表すため、お互いとてもよく似ていますが、それぞれ異なるロジックを使用します。
 
-* `RATE`: Normalized value variation over time (_per second_).
-* `COUNT`: Absolute value variation over a given time interval.
+* `RATE`: 正規化された値の経時的な変化（1秒ごと）。
+* `COUNT`: 特定の時間間隔における絶対値の変化。
 
-Depending on your use case and submission method, one metric type may be more suited than the other for submission. For instance:
+送信に適したメトリクスタイプは、使用例や送信方法によりそれぞれ異なります。たとえば、
 
-| Metric type submitted | Use case                                                                                                                                                                               |
+| 送信されたメトリクスタイプ | 使用例                                                                                                                                                                               |
 |-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `RATE`                | You want to monitor the number of requests received over time across several hosts.                                                                                                    |
-| `RATE`                | You do not have control over the consistency of temporal count submissions across your sources, so you're normalizing by each individual interval to be able to compare them upstream. |
-| `COUNT`               | You want to count the number of times a function is called.                                                                                                                            |
-| `COUNT`               | Counting the amount of revenue that have been made over a given amount of time.                                                                                                        |
+| `RATE`                | 複数のホストにおいて受信したリクエストの数を経時的にモニターしたい場合。                                                                                                    |
+| `RATE`                | ソースでの経時的なカウント送信の一貫性をコントロールできないため、アップストリームで比較できるように個々の間隔で正規化します。 |
+| `COUNT`               | 関数が呼び出された回数をカウントしたい場合。                                                                                                                            |
+| `COUNT`               | 指定された期間内の収益を数える場合。                                                                                                        |
 
-Since `RATE` and `COUNT` aren't the same metric type, they don't have the same behavior or shape within Datadog graphs and monitors. To change metrics on the fly between `RATE` and `COUNT` representations, use Datadog's in-application modifier functions within your graphs and monitors.
+`RATE` および `COUNT` は同じメトリクスタイプではないため、Datadog のグラフおよびモニターにおける行動や形状が異なります。`RATE` と `COUNT` が表すメトリクスを調整するには、グラフやモニターで Datadog のアプリケーション内モディファイアー関数を使用します。
 
-## In-application modifiers
+## アプリ内モディファイアー
 
-The two main in-application modifiers are `as_count()` and `as_rate()`.
+主要なアプリ内モディファイアーは `as_count()` と `as_rate()` の2つです。
 
-| Modifiers    | Description                                                                                                                                                                                                                                                                   |
+| モディファイアー    | 説明                                                                                                                                                                                                                                                                   |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `as_count()` | Sets the operations necessary to display the given metric in `COUNT` form, giving you the absolute variation of a metric value over [a rollup interval][2]. **Note:** Because it depends on the rollup interval, [graphing a longer time interval changes your graph shape][3]. |
-| `as_rate()`  | Sets the operations necessary to display the given metric in `RATE` form, giving you the absolute variation of a metric value per second.                                                                                                                                     |
+| `as_count()` | `COUNT` 形式で指定されたメトリクスを表示するのに必要な操作を設定し、[rollup 間隔][2]のメトリクス値の絶対変数を取得します。**注:** Rollup 間隔に依存するため、[長めの間隔でグラフを作成するとグラフの形が変化します][3]。 |
+| `as_rate()`  | `RATE` 形式で指定されたメトリクスを表示するのに必要な操作を設定し、1秒あたりのメトリクス値の絶対変数を取得します。                                                                                                                                     |
 
-Depending on the metric type you applied them to, the behavior differs:
+適用したメトリクスタイプに応じて、動作は異なります。
 
 {{< tabs >}}
 {{% tab "COUNT" %}}
 
-* Effect of `as_count()`:
-  * Disables any [interpolation][1].
-  * Sets the time aggregator to `SUM`.
-* Effect of `as_rate()`:
-  * Disables any [interpolation][1].
-  * Sets the time aggregator to `SUM`.
-  * Divides the result post-aggregation by the sampling interval in order to normalize it. For example, the following points submitted every second `[1,1,1,1].as_rate()` with a rollup interval of 20s would produce `[0.05, 0.05, 0.05, 0.05]`.
+* `as_count()` の効果
+  * [補間][1]を無効にします。
+  * 時間集計関数を `SUM` に設定します。
+* `as_rate()` の効果
+  * [補間][1]を無効にします。
+  * 時間集計関数を `SUM` に設定します。
+  * 正規化するため、集計後の結果をサンプル間隔で除算します。たとえば、rollup 間隔が 20 秒で毎秒  `[1,1,1,1].as_rate()` を送信する次のポイントは、`[0.05, 0.05, 0.05, 0.05]` を生成します。
 
-**Note**: There is no normalization on tiny intervals (when no time aggregation occurs), thus the raw metric value counts are returned.
+**注**: 間隔が短くて時間集計が発生しない場合、正規化は行われず、未加工のメトリクス値カウントが戻されます。
 
 [1]: /metrics/guide/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-* Effect of `as_count()`:
-  * Disable any [interpolation][1].
-  * Sets the time aggregator to SUM.
-  * Multiply the result post-aggregation by the sampling interval. For example, the following points submitted every second `[0.05, 0.05, 0.05, 0.05].as_count()` with a rollup interval of 20s would produce `[1,1,1,1]`.
-* Effect of `as_rate()`:
-  * Disables any [interpolation][1].
-  * Sets the time aggregator to `SUM`.
+* `as_count()` の効果
+  * [補間][1]を無効にします。
+  * 時間集計関数を SUM に設定します。
+  * 集計後の結果をサンプル間隔で乗算します。たとえば、rollup 間隔が 20 秒で毎秒 `[0.05, 0.05, 0.05, 0.05].as_count()` を送信する次のポイントは、`[1,1,1,1]` を生成します。
+* `as_rate()` の効果
+  * [補間][1]を無効にします。
+  * 時間集計関数を `SUM` に設定します。
 
 [1]: /metrics/guide/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-`GAUGE` metric types represent the absolute and final value of a metric; `as_count()` and `as_rate()` modifiers have no effect on them.
+`GAUGE` メトリクスタイプはメトリクスの絶対値と最終値を表します。`as_count()` や `as_rate()` モディファイアーは影響しません。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### The `weighted()` modifier
+### 修飾子 `weighted()`
 
 Tags such as `pod name` or `container_name` cause high tag churn, especially when creating queries for cost management, capacity planning, or autoscaling for containerized applications. To ensure mathematical accuracy of queries on gauges regardless of tag churn, you can use a `.weighted()` in-application modifier. The `.weighted()` modifier enables Datadog to properly weight metric values based on the lifespan of these frequently churning tags. 
 
 The `.weighted()` modifier is automatically appended to queries on gauges only if both of the following conditions are met:
 
-- The gauge metric is submitted regularly, such that there is no interpolation over gaps.
-- The submission interval is correctly defined and set. 
+- 隙間なく補間することができるように、ゲージメトリクスが定期的に送信されている。
+- 送信間隔が正しく定義され、設定されている。
 
-Either the Datadog Agent or an integration sets the submission interval for a metric at time of intake. Modify submission intervals on the [Metrics Summary page][4].
+Datadog Agent またはインテグレーションのいずれかが、取り込み時にメトリクスの送信間隔を設定します。[Metrics Summary ページ][4]で送信間隔を変更します。
 
 ## Modify a metric's type within Datadog
 
-While it is not normally required, it is possible to change a metric's type in the [Metrics Summary page][4]:
+通常は必要ありませんが、[Metrics Summary ページ][4]でメトリクスのタイプを変更することができます。
 
-{{< img src="metrics/custom_metrics/type_modifiers/metric_type.png" alt="Metric Type" style="width:70%;">}}
+{{< img src="metrics/custom_metrics/type_modifiers/metric_type.png" alt="メトリクスタイプ" style="width:70%;">}}
 
 Example use case:
 
-1. You have a metric `app.requests.served` that counts requests served, but accidentally submitted it from StatsD as a `GAUGE`. The metric's Datadog type is, therefore, `GAUGE`.
+1. 処理されたリクエスト数をカウントする `app.requests.served` というメトリクスを、誤って StatsD から `GAUGE` として送信しました。そのため、そのメトリクスの Datadog タイプは `GAUGE` になっています。
 
-2. You wanted to submit `app.requests.served` as a StatsD `COUNT` metric for time aggregation. This would help answer questions like _"How many total requests were served in the past day?"_ by querying `sum:app.requests.served{*}` (this would not make sense for a `GAUGE` metric type.)
+2. 時間集計のため、`app.requests.served` は、StatsD の `COUNT` メトリクスとして送信するつもりでした。そうすれば、「昨日処理されたリクエスト数の合計はいくつか」という質問には、`sum:app.requests.served{*}` というクエリで答えることができます (`GAUGE` メトリクスタイプでは意味がないクエリです)。
 
-3. You like the name `app.requests.served`, so rather than submitting a new metric name with a more appropriate `COUNT` type, you could change the type of `app.requests.served` by updating:
-  * Your submission code, calling `dogstatsd.increment('app.requests.served', N)` after N requests are served, and
-  * The Datadog in-app type from the metric summary page to `RATE`.
+3. しかし、`app.requests.served` という名前を引き続き使いたいので、適切な `COUNT` タイプの新しいメトリクス名を送信するのではなく、`app.requests.served` のタイプを変更することにしました。
+  * N 個のリクエストが処理された後で `dogstatsd.increment('app.requests.served', N)` を呼び出すように、送信コードを更新します。
+  * メトリクスサマリーページから Datadog アプリ内タイプを `RATE` に更新します。
 
-This causes data submitted before the type change for `app.requests.served` to behave incorrectly. This is because it was stored in a format to be interpreted as an in-app `GAUGE` (not a `RATE`). Data submitted after step 3 is interpreted properly.
+この結果、`app.requests.served` のタイプを変更する前に送信されたデータは、正しく動作しません。これは、アプリ内タイプ `RATE` ではなく `GAUGE` として解釈される形式で保存されているためです。手順 3 の後に送信されるデータは、正しく解釈されます。
 
-If you are not willing to lose the historical data submitted as a `GAUGE`, create a new metric name with the new type, leaving the type of `app.requests.served` unchanged.
+`GAUGE` として送信された履歴データを失いたくない場合は、`app.requests.served` のタイプは変更せずに、適切なタイプの新しいメトリクス名を作成します。
 
-**Note**: For the AgentCheck, `self.increment` does not calculate the delta for a monotonically increasing counter; instead, it reports the value passed in at the check run. To send the delta value on a monotonically increasing counter, use `self.monotonic_count`.
+**注**: Agent チェックの `self.increment` は、単調増加カウンターの増分を計算するのではなく、チェック実行時に渡された値を報告します。単調増加カウンターの増分値を送信する場合は、`self.monotonic_count` を使用してください。
 
 [1]: /metrics/types/
 [2]: /metrics/introduction/#time-aggregation

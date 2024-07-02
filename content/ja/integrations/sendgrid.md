@@ -23,9 +23,9 @@
   "sales_email": info@datadoghq.com
   "support_email": help@datadoghq.com
 "categories":
-- metrics
+- モニター
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -65,7 +65,7 @@
 
 Twilio SendGrid is an email platform that businesses use for sending transactional and marketing email. Use this integration to collect your SendGrid email delivery and engagement metrics and logs.
 
-## Setup
+## セットアップ
 
 ### Generate SendGrid API Key
 
@@ -76,7 +76,7 @@ Twilio SendGrid is an email platform that businesses use for sending transaction
 5. Fill out the _API Key Name_. Select **Full Access** or, for restricted access, **Stats** - **Read Access** and **User Account** - **Read Access**.
 6. Copy the API Key to somewhere secure. The API key will be needed when you set up the SendGrid Integration on Datadog's user interface.
 
-### Configuration
+### 構成
 
 #### Send metrics
 
@@ -98,9 +98,9 @@ Twilio SendGrid is an email platform that businesses use for sending transaction
 9. Enable the **Event Webhook Status**.
 10. Click **Save**.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "sendgrid" >}}
 
 
@@ -108,15 +108,15 @@ Twilio SendGrid is an email platform that businesses use for sending transaction
 
 Sendgrid delivery and engagement events will show up as logs under the source `sendgrid`.
 
-### Events
+### イベント
 
 The SendGrid integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The SendGrid integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

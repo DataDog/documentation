@@ -33,17 +33,17 @@ Provide insight into operations taken on Azure resources at the [data plane][1].
 
 To send Azure resource logs to Datadog, select **Send Azure resource logs for all defined resources**. The types of Azure resource logs are listed in the [Azure Monitor Resource Log categories][2]. When this option is selected, all resource logs are sent to Datadog, including any new resources created in the subscription.
 
-You can optionally filter the set of Azure resources sending logs to Datadog using Azure resource tags.
+オプションで、Azure リソースタグを使用して Datadog にログを送信する Azure リソースを絞り込むことができます。
 
-### Tag rules for sending logs
+### ログ送信のタグルール
 
-- Azure resources with `include` tags send logs to Datadog.
-- Azure resources with `exclude` tags don't send logs to Datadog.
-- If there's a conflict between inclusion and exclusion rules, exclusion takes priority.
+- `include` タグのある Azure リソースは Datadog にログを送信します。
+- `exclude` タグのある Azure リソースは Datadog にログを送信しません。
+- 包含および除外ルールの間で競合がある場合は、除外が優先されます。
 
-For example, the screenshot below shows a tag rule where only those virtual machines, virtual machine scale sets, and app service plans tagged as `Datadog = True` send metrics and logs to Datadog.
+たとえば、下記のスクリーンショットは、`Datadog = True` とタグ付けされた仮想マシン、仮想マシンスケールセット、アプリサービスプランのみがメトリクスおよびログを Datadog に送信するというタグルールを示したものです。
 
-{{< img src="integrations/azure/azure-us3-create-dd-resource3.png" alt="Azure US3 create a Datadog resource logs" responsive="true" style="width:90%;">}}
+{{< img src="integrations/azure/azure-us3-create-dd-resource3.png" alt="Azure US3 Datadog リソースログの作成" responsive="true" style="width:90%;">}}
 
 ## Azure Active Directory (Azure AD) logs 
 
@@ -64,6 +64,6 @@ Azure AD logs contain the history of sign-in activity and an audit trail of chan
 
 {{< /site-region >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -11,7 +11,7 @@
 "categories":
 - cost management
 - cloud
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/vantage/README.md"
 "display_on_public_website": true
@@ -63,13 +63,13 @@
 
 Vantage is a cloud cost transparency and optimization platform. This integration allows Datadog users to import their Datadog costs into Vantage and track them alongside their other infrastructure spending, such as AWS, Snowflake, and Kubernetes.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Visit [Vantage][1] to sign up for free. Once registered, visit the [Vantage integrations page][2] and add a Datadog integration. This guides you through the Datadog OAUTH2 flow to grant Vantage access to your billing and usage data.
 
-### Configuration
+### 構成
 
 Once integrated, begin exploring your Datadog costs within Vantage. You can create filters for specific Datadog organizations and services alongside costs from any of the other supported Vantage providers.
 

@@ -40,7 +40,7 @@
 - marketplace
 - cloud
 - collaboration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -110,12 +110,12 @@
 
 The Zoom Integration has the capability of monitoring Meetings, Rooms, Users, Network Statistics, and Geolocation Overviews to provide an optimal experience for your employees, no matter where they are located around the world. The integration comes pre-built with four fully customizable dashboards that bring the most crucial information to the surface. Additionally, we've designed our visuals to be deliverable without changes to C-Level Executives, Managers, Tech Leads, Engineers, and much more!
 
-### Monitors
+### モニター
 
 1. Zoom Room Has Problem
 2. Zoom Room's Component Has A Problem 
 
-### Dashboards
+### ダッシュボード
 
 1. RapDev Zoom Meetings Overview
 2. RapDev Zoom Rooms Dashboard

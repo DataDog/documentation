@@ -4,9 +4,9 @@
 - "data stores"
 - "google cloud"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track database metrics for performance, health, and replication."
+"description": "パフォーマンス、健全性、レプリケーションに関するデータベースメトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloudsql/"
 "draft": false
 "git_integration_title": "google_cloudsql"
@@ -32,15 +32,15 @@ Get metrics from Google Cloud SQL to:
 - Visualize the performance of your Cloud SQL databases.
 - Correlate the performance of your Cloud SQL databases with your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 #### Metric collection
 
 If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
-#### Configuration
+#### 構成
 
 To collect custom Cloud SQL labels as tags, enable the cloud asset inventory permission.
 
@@ -68,22 +68,22 @@ Once this is done, export your Google Cloud SQL logs from Google Cloud Logging t
 
 {{< /site-region >}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloudsql" >}}
 
 
-### Events
+### イベント
 
 The Google Cloud SQL integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 **gcp.cloudsql.database.state**
 The current serving state of the Cloud SQL instance.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

@@ -27,7 +27,7 @@
 - containers
 - kubernetes
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md"
 "display_on_public_website": true
@@ -69,18 +69,18 @@
 
 This check monitors [Kube_metrics_server][1] v0.3.0+, a component used by the Kubernetes control plane.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Kube_metrics_server check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
 
-### Configuration
+### 構成
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -121,21 +121,21 @@ If your endpoint is secured, additional configuration is required:
 
 [Run the Agent's status subcommand][4] and look for `kube_metrics_server` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "kube_metrics_server" >}}
 
 
-### Events
+### イベント
 
 kube_metrics_server does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "kube_metrics_server" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

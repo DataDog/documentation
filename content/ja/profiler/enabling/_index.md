@@ -16,15 +16,15 @@ further_reading:
       text: Fix problems you encounter while using the profiler
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
 
-Select your language below to learn how to enable a profiler for your application:
+アプリケーションでプロファイラーを有効にする方法については、以下で言語を選択してください。
 
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

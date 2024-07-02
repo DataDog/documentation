@@ -9,13 +9,13 @@ further_reading:
   text: Learn more about Interpolation Functions
 ---
 
-{{< img src="metrics/guide/graph_fill_example.png" alt="Fill() function in the graph options" style="width:100%;" >}}
+{{< img src="metrics/guide/graph_fill_example.png" alt="グラフオプションの Fill() 関数" style="width:100%;" >}}
 
-## Why interpolation?
+## なぜ補間なのか？
 
-Interpolation is not about filling arbitrary large gaps in a metric series, but aligning several series together, to make it possible to perform aggregation across sources.
+補間は、メトリクス系列の任意の大きなギャップを埋めることではなく、いくつかの系列を一緒に揃え、ソース間で集計を実行できるようにすることです。
 
-Most of the time graphing in Datadog is about mixing together data from separate sources into a single line for your graph. However, separate sources might not submit data at the same time and with the same frequency.
+Datadog でグラフを作成する場合、ほとんどの場合、別々のソースからのデータを 1 本の線にまとめてグラフにすることになります。しかし、別々のソースが同じ時間、同じ頻度でデータを送信するとは限りません。
 
 ```text
 net.bytes_rcvd    |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
@@ -26,7 +26,7 @@ net.bytes_rcvd    |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
     sum (1+2)     |    15?      10?               25?      40?
 ```
 
-The above example shows that merging sources directly produces absurd results just because sources are not naturally aligned. Interpolation solves this problem by providing relevant values just for calculations.
+上記の例では、ソースが自然に配置されていないため、ソースを直接マージすると、不合理な結果が生じることがわかります。補間は、計算のためだけに適切な値を提供することで、この問題を解決します。
 
 ```text
 net.bytes_rcvd    |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
@@ -37,47 +37,47 @@ net.bytes_rcvd    |  3:00:00  3:00:10  3:00:20  3:00:30  3:00:40 ...
     sum (1+2)     |   15 + Y    28.3              55       40 + X
 ```
 
-Where X and Y are interpolated using data after and before the interval displayed.
+ここで、X と Y は表示されている区間の前後のデータを使って補間されます。
 
-## In which cases does interpolation occur?
+## どのような場合に補間が発生するのか？
 
-Interpolation occurs when more than one source corresponds to your graph query, for example:
+グラフクエリに複数のソースが対応する場合、補間が行われます。例:
 
-* With space aggregation (`avg:system.cpu.user{env:prod}`), if you have two or more hosts with the tag `env:prod`, Datadog computes the average over time using interpolation.
-* With group queries (`net.bytes_rcvd{*} by {host}`, no computation across sources may be performed, but providing aligned series makes the graph line mouse-over and comparisons easier.
+* 空間集計 (`avg:system.cpu.user{env:prod}`) では、`env:prod` タグを持つホストが 2 つ以上ある場合、Datadog は補間を用いて時間の平均値を計算します。
+* グループクエリ (`net.bytes_rcvd{*} by {host}`) では、ソース間の計算を行わない場合もありますが、整列した系列を提供することでグラフラインのマウスオーバーや比較を容易にすることができます。
 
-Interpolation is not needed when you graph one metric submitted from one source, for example `avg:net.bytes_rcvd{host:a}` assuming `host:a` always submits the metric `net.bytes_rcvd` with the same tags.
+例えば、`avg:net.bytes_rcvd{host:a}` のように、1 つの送信元から送信された 1 つのメトリクスをグラフ化する場合、`host:a` が常に同じタグで `net.bytes_rcvd` を送信すると仮定すると補間は必要ありません。
 
-Interpolation is not performed for multi-part queries, for example: `avg:system.cpu.user{env:prod},avg:system.cpu.user{env:dev}`
+マルチパートクエリの場合、補間は行われません。例: `avg:system.cpu.user{env:prod},avg:system.cpu.user{env:dev}`
 
-## How to control interpolation?
+## 補間の制御方法は？
 
-The default interpolation for all metric types is linear and performed up to five minutes after real samples. Interpolation is disabled by the `.as_count()` and `.as_rate()` modifiers when used on any [metric type][1], with the exception of Gauge type metrics. See [Metric Type Modifiers][2] for more information.
+すべてのメトリクスタイプのデフォルトの補間は線形であり、実際のサンプルが取得された後、最大で 5 分間行われます。補間は、Gauge タイプのメトリクスを除いて、どの[メトリクスタイプ][1]に対しても、`.as_count()` および `.as_rate()` 修飾子が使用された場合には無効化されます。詳しくは [メトリクスタイプ修飾子][2]を参照してください。
 
-The `.fill()` modifier controls interpolation parameters:
+修飾子 `.fill()` は、補間パラメータを制御します。
 
-| Modifier          | Description                                                          |
+| 修飾子          | 説明                                                          |
 |-------------------|----------------------------------------------------------------------|
-| `fill(linear, X)` | Gives you a linear interpolation up to X seconds after real samples. |
-| `fill(last, X)`   | Replicates the last sample value up to X secs.                       |
-| `fill(zero, X)`   | Inserts 0 where the interpolation is needed up to X secs.            |
-| `fill(null, X)`   | Disables interpolation, the value of X doesn't matter.               |
+| `fill(linear, X)` | 実サンプルから X 秒後までの線形補間を行います。 |
+| `fill(last, X)`   | 最後のサンプル値を X 秒まで複製します。                       |
+| `fill(zero, X)`   | X 秒までの補間が必要な場所に 0 を挿入します。            |
+| `fill(null, X)`   | 補間を無効にします。X の値は重要ではありません。               |
 
-## FAQ
+## よくあるご質問
 
-### There's a metric gap, fill(zero) doesn't do anything, there's still a long straight line on the graph
-Since graphs are just a series of data points joined by lines, a long period without any data translates into a long straight line and has no need for interpolation to fill values. Interpolation is about aligning series to make aggregation and multi-line graphs possible.
+### メトリクスにギャップがあり、fill(zero) では何もできず、グラフ上に長い直線が残っています
+グラフはデータ点を線で結んだだけのものなので、データのない期間が長いと長い直線に変換され、値を埋めるための補間の必要はありません。補間は、集計や複数行のグラフを可能にするために、系列を揃えることです。
 
-In contrast, a monitor uses a rollup of a time frame to evaluate interpolated values and calculate averages.
+これに対し、モニターは時間軸のロールアップで補間値を評価し、平均値を算出するものです。
 
-### Choose the interpolation method
-The default interpolation method (which is chosen based on a metric's type) is usually fine, but it is sometimes desirable to override these defaults.
+### 補間方法を選択する
+通常、デフォルトの補間方法 (メトリクスのタイプに基づいて選択される) で問題ありませんが、これらのデフォルトをオーバーライドすることが望ましい場合もあります。
 
-Linear interpolation is a great fit for metrics reported on a steady basis from the same sources. For sparse metrics or metrics reported from varying sources over time, it's often more interesting to disable interpolation. This makes sense if you send data points only when the value of the thing you measure changes.
+線形補間は、同じソースから定常的に報告されるメトリクスに最適です。疎なメトリクスや、時とともに変化するソースから報告されるメトリクスでは、補間を無効にした方が興味深いことがよくあります。これは、測定するものの値が変化したときだけデータポイントを送信する場合に意味があります。
 
-Null prevents graphs from displaying interpolated values 5 min after the last real value.
+Null にすると、最後の実測値から 5 分後に補間された値がグラフに表示されるのを防ぐことができます。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

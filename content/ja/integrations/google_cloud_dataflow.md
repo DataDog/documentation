@@ -3,7 +3,7 @@
 - cloud
 - google cloud
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Google Cloud Dataflow metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_dataflow/"
@@ -34,11 +34,11 @@ Google Cloud Dataflow is a fully-managed service for transforming and enriching 
 
 Use the Datadog Google Cloud integration to collect metrics from Google Cloud Dataflow.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
-#### Installation
+#### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
@@ -53,9 +53,9 @@ Once this is done, export your Google Cloud Dataflow logs from Google Cloud Logg
 3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloud_dataflow" >}}
 
 
@@ -63,15 +63,15 @@ Once this is done, export your Google Cloud Dataflow logs from Google Cloud Logg
 When using Google Cloud Dataflow to monitor Apache Beam pipeline metrics, note that metrics generated from <a href="https://beam.apache.org/releases/javadoc/current/org/apache/beam/sdk/metrics/Metrics.html">Gauge static methods</a> are not collected. If you need to monitor these metrics, you can use <a href="https://micrometer.io/docs">Micrometer</a>.
 </div>
 
-### Events
+### イベント
 
 The Google Cloud Dataflow integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Cloud Dataflow integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

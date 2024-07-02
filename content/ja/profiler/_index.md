@@ -21,19 +21,19 @@ further_reading:
       text: Focus on code that matters with source code previews in Continuous Profiler      
     - link: "https://www.datadoghq.com/blog/introducing-datadog-profiling/"
       tag: Blog
-      text: Introducing always-on production profiling in Datadog
+      text: Datadog に常時接続型の本番環境プロファイリングが登場
     - link: "https://www.datadoghq.com/blog/datadog-github-action-vulnerability-analysis/"
       tag: Blog
-      text: Datadog GitHub Action for continuous vulnerability analysis
+      text: 継続的な脆弱性分析のための Datadog GitHub アクション
     - link: "https://www.datadoghq.com/blog/code-optimization-datadog-profile-comparison/"
       tag: Blog
-      text: Compare and optimize your code with Datadog Profile Comparison.
+      text: Datadog プロファイル比較を使用してコードを比較および最適化します。
     - link: "https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/"
       tag: Blog
-      text: How we optimized our Akka application using Datadog's Continuous Profiler
+      text: Datadog の Continuous Profiler を使用して Akka アプリケーションを最適化した方法
     - link: "https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/"
-      tag: Blog
-      text: Analyze Ruby code performance with Datadog Continuous Profiler
+      tag: ブログ
+      text: Datadog Continuous Profiler で Ruby のコードパフォーマンスを分析
 cascade:
     algolia:
         rank: 70
@@ -43,63 +43,63 @@ cascade:
 
 </br>
 
-Find CPU, memory, and IO bottlenecks, broken down by method name, class name, and line number, to significantly reduce end-user latency and infrastructure costs.
+発見した CPU、メモリ、IO のボトルネックをメソッド名、クラス名、行番号で分類して、エンドユーザー側での遅延とインフラストラクチャーにかかるコストを大幅に削減することができます。
 
-### Low impact in production
+### 実環境での影響を最小限に
 
-Continuous profiler runs in production across all services by leveraging technologies such as JDK Flight Recorder to have minimal impact on your host's CPU and memory usage.
+Continuous Profiler は、JDK Flight Recorder などの技術を活用し、すべてのサービスの実環境で実行します。こうすることでホストの CPU とメモリ使用量への影響を最小限に抑えることができます。
 
-## Getting started
+## はじめに
 
-Profiling your service to visualize all your stack traces in one place takes just minutes.
+お使いのサービスでプロファイリングを行うことで、すべてのスタックトレースを一つの管理画面で可視化することができます。設定方法はとても簡単です。
 
-### Instrument your application
+### アプリケーションをインスツルメントする
 
 {{< partial name="profiling/profiling-languages.html" >}}
 
-## Guide to using the profiler
+## プロファイラーの使用ガイド
 
-The [Getting Started with Profiler][1] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+[プロファイラーの概要][1]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
-## Explore Datadog profiler
+## Datadog でのプロファイラー確認
 
-After you configure your application to send profiles to Datadog, start getting insights into your code performance.  
+アプリケーションからプロファイルを Datadog に送信するための構成が完了した後は、コードのパフォーマンスに関するインサイトを確認してみましょう。
 
-By default, profiles are retained for seven days, and metrics generated from profile data are retained for one month.
+デフォルトでは、プロファイルは 7 日間、プロファイルデータから生成されたメトリクスは 1 か月間保持されます。
 
 {{< learning-center-callout header="Try Diagnose Code Performance Issues in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/continuous-profiler-course">}}
   The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to investigate and improve application code performance in production with Datadog Continuous Profiler.
 {{< /learning-center-callout >}}
 
-### Profile types
+### プロファイルタイプ
 
-See [Profile Types][6] for descriptions of the kinds of profile data collected for each supported language.
+対応言語ごとに収集されるプロファイルデータの種類については、[プロファイルのデータタイプ][6]を参照してください。
 
-{{< img src="profiler/profile-types.png" alt="The list of profile types collected for Java applications" style="width:100%;" >}}
+{{< img src="profiler/profile-types.png" alt="Java アプリケーションで収集されるプロファイルタイプのリスト" style="width:100%;" >}}
 
-### Search profiles by tags
+### タグを使用してプロファイルを検索
 
-[Use tags to search profiles][2] across any dimension—whether it's a specific host, service, version, or any combination.
+[タグを使用してプロファイルを検索][2]します。特定のホスト、サービス、バージョン、あるいはいずれかの組み合わせなど、すべてのディメンションのデータを表示させることができます。
 
-{{< img src="profiler/search_profiles2.mp4" alt="Search profiles by tags" video=true >}}
+{{< img src="profiler/search_profiles2.mp4" alt="タグによるプロファイルの検索" video=true >}}
 
-### Track function performance over deployments
+### デプロイメントでの機能パフォーマンスを追跡する
 
-Obtain key profiling metrics from services such as top CPU usage by method, top memory allocations by thread, and CPU usage by version to visualize in your dashboards.
+メソッドごとの主な CPU 使用率、スレッドごとの主なメモリ割り当て状況、バージョンごとの CPU 使用状況など、主要なプロファイリングメトリクスをサービスから取得してダッシュボードを可視化することができます。
 
-{{< img src="profiler/profiling-metric-dashboard.mp4" alt="Add profiling metrics to your dashboards." video=true >}}
+{{< img src="profiler/profiling-metric-dashboard.mp4" alt="ダッシュボードにプロファイリングのメトリクスを追加。" video=true >}}
 
-### Connect traces to profiling data
+### プロファイリングデータにトレースを接続する
 
-Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Code Hotspots tab][4] to find specific lines of code related to performance issues.
+[APM 分散型トレーシング][3]と Continuous Profiler の双方が有効化されたアプリケーションプロセスは自動的にリンクされるため、[Code Hotspots タブ][4]でスパン情報からプロファイリングデータを直接開き、パフォーマンスの問題に関連する特定のコード行を見つけることができます。
 
-{{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots tab shows profiling information for a APM trace span" video=true >}}
+{{< img src="profiler/code_hotspots_tab.mp4" alt="Code Hotspots タブで APM トレーススパンのプロファイリング情報を確認" video=true >}}
 
-### Find changes in performance by comparing profiles
+### プロファイルの比較により、パフォーマンスにおける変化を発見
 
-Comparing similar profiles from different times, environments, or deployments can help you understand the possible causes of and solutions to performance problems. The Datadog profiler offers [comparison visualizations][5] to make sense of why profiles are different based on time frames or tags that you scope by. 
+異なる時間、環境、またはデプロイメントの似たようなプロファイルの比較は、パフォーマンスの問題に対する原因や解決策の把握に役立ちます。Datadog プロファイラーでは、 [比較が視覚化][5]されるため、時間枠やスコープされたタグによってなぜプロファイルが異なるか、よく理解できます。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

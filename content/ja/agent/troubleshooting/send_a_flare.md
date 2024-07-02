@@ -4,17 +4,17 @@ aliases:
   - /agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:
 - link: /agent/troubleshooting/debug_mode/
-  tag: Documentation
+  tag: ドキュメント
   text: Agent Debug Mode
 - link: /agent/troubleshooting/agent_check_status/
-  tag: Documentation
+  tag: ドキュメント
   text: Get the Status of an Agent Check
 algolia:
   tags: [agent flare]
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Sending an Agent Flare is not supported for this site.</div>
+<div class="alert alert-warning">Agent Flare の送信はこのサイトではサポートされていません。</div>
 {{< /site-region >}}
 
 A flare allows you to send necessary troubleshooting information to the Datadog support team.
@@ -26,7 +26,7 @@ This page covers:
 
 A flare gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information, including passwords, API keys, Proxy credentials, and SNMP community strings.
 
-The Datadog Agent is completely open source, which allows you to [verify the code's behavior][1]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
+Datadog Agent は完全にオープンソースなので、[コードの動作を検証][1]することができます。フレアは、アップロードの前に確認を求めるため、必要に応じて送信前にフレアを確認できます。
 
 ## Send a flare using the `flare` command
 
@@ -39,32 +39,32 @@ If you don't have a case ID, enter your email address used to log in to Datadog 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-| Platform   | Command                                                 |
+| プラットフォーム   | コマンド                                                 |
 |------------|---------------------------------------------------------|
 | AIX        | `datadog-agent flare <CASE_ID>`                         |
 | Docker     | `docker exec -it dd-agent agent flare <CASE_ID>`        |
-| macOS      | `datadog-agent flare <CASE_ID>` or via the [web GUI][1] |
+| macOS      | `datadog-agent flare <CASE_ID>` または [Web GUI][1] を使用 |
 | CentOS     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Debian     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Kubernetes | `kubectl exec -it <AGENT_POD_NAME> -- agent flare <CASE_ID>`  |
 | Fedora     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Redhat     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                    |
-| Source     | `sudo datadog-agent flare <CASE_ID>`                    |
-| Windows    | Consult the dedicated [Windows documentation][2]        |
-| Heroku     | Consult the dedicated [Heroku documentation][3]         |
+| ソース     | `sudo datadog-agent flare <CASE_ID>`                    |
+| Windows    | [Windows][2]に関する個別のドキュメントをご参照ください。        |
+| Heroku     | [Heroku][3]に関する個別のドキュメントをご参照ください。         |
 | PCF     | `sudo /var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent flare <CASE_ID>`             |
 
-## Dedicated containers
+## 専用コンテナ
 
 When using Agent v7.19+ and using the Datadog Helm Chart with the [latest version][4] or a DaemonSet where the Datadog Agent and Trace Agent are in separate containers, you deploy an Agent Pod containing:
 
-* One container with the Agent process (Agent + Log Agent)
-* One container with the process-agent process
-* One container with the trace-agent process
-* One container with the system-probe process
+* Agent プロセスを含む 1 つのコンテナ (Agent + Log Agent)
+* process-agent プロセスを含む 1 つのコンテナ
+* trace-agent プロセスを含む 1 つのコンテナ
+* system-probe プロセスを含む 1 つのコンテナ
 
-To get a flare from each container, run the following commands:
+各コンテナからフレアを取得するには、次のコマンドを実行します。
 
 ### Agent
 
@@ -72,13 +72,13 @@ To get a flare from each container, run the following commands:
 kubectl exec -it <AGENT_POD_NAME> -c agent -- agent flare <CASE_ID>
 ```
 
-### Process Agent
+### プロセスエージェント
 
 ```bash
 kubectl exec -it <AGENT_POD_NAME> -c process-agent -- agent flare <CASE_ID> --local
 ```
 
-### Trace Agent
+### トレースエージェント
 
 ```bash
 kubectl exec -it <AGENT_POD_NAME> -c trace-agent -- agent flare <CASE_ID> --local
@@ -90,9 +90,9 @@ kubectl exec -it <AGENT_POD_NAME> -c trace-agent -- agent flare <CASE_ID> --loca
 kubectl exec -it <AGENT_POD_NAME> -c security-agent -- security-agent flare <CASE_ID>
 ```
 
-### System probe
+### システムプローブ
 
-The system-probe container cannot send a flare so get container logs instead:
+system-probe コンテナはフレアを送信できないため、代わりにコンテナログを取得します:
 
 ```bash
 kubectl logs <AGENT_POD_NAME> -c system-probe > system-probe.log
@@ -120,20 +120,20 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
-| Platform   | Command                                                                 |
+| プラットフォーム   | コマンド                                                                 |
 |------------|-------------------------------------------------------------------------|
 | Docker     | `docker exec -it dd-agent /etc/init.d/datadog-agent flare <CASE_ID>`    |
 | macOS      | `datadog-agent flare <CASE_ID>`                                         |
 | CentOS     | `sudo service datadog-agent flare <CASE_ID>`                            |
 | Debian     | `sudo service datadog-agent flare <CASE_ID>`                            |
-| Kubernetes | `kubectl exec <POD_NAME> -it /etc/init.d/datadog-agent flare <CASE_ID>` |
+| Kubernetes | `kubectl exec <ポッド名> -it /etc/init.d/datadog-agent flare <ケース_ID>` |
 | Fedora     | `sudo service datadog-agent flare <CASE_ID>`                            |
 | Redhat     | `sudo service datadog-agent flare <CASE_ID>`                            |
 | SUSE       | `sudo service datadog-agent flare <CASE_ID>`                            |
-| Source     | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                       |
-| Windows    | Consult the dedicated [Windows documentation][1]                        |
+| ソース     | `sudo ~/.datadog-agent/bin/agent flare <CASE_ID>`                       |
+| Windows    | [Windows][1]に関する個別のドキュメントをご参照ください。                        |
 
-**Note**: If you are using a Linux based system and the `service` wrapper command is not available, [consult the list of alternatives][2].
+**メモ**: Linux ベースのシステムを使用していて `service` ラッパーコマンドを使用できない場合は、[代替手段の一覧][2]をご参照ください。
 
 [1]: /agent/basic_agent_usage/windows/#agent-v5
 [2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
@@ -141,7 +141,7 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 {{% tab "Cluster Agent" %}}
 
-| Platform      | Command                                                                     |
+| プラットフォーム      | コマンド                                                                     |
 |---------------|-----------------------------------------------------------------------------|
 | Kubernetes    | `kubectl exec -n <NAMESPACE> -it <CLUSTER_POD_NAME> -- datadog-cluster-agent flare <CASE_ID>` |
 | Cloud Foundry | `/var/vcap/packages/datadog-cluster-agent/datadog-cluster-agent-cloudfoundry flare -c /var/vcap/jobs/datadog-cluster-agent/config <CASE_ID>` |
@@ -157,18 +157,18 @@ To send a flare from the Datadog site, make sure you've enabled [Fleet Automatio
 
 {{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
 
-## Manual submission
+## 手動送信
 
-The Agent flare protocol collects configurations and logs into an archive file first located in the local `/tmp` directory.
-Manually obtain this file and provide it to support if there are any issues with Agent connectivity.
+Agent フレアプロトコルは、コンフィギュレーションとログをまずローカルの `/tmp` ディレクトリにあるアーカイブファイルに収集します。
+Agent のデータ収集に問題がある場合は、このファイルを手動で取得してサポートに送信してください。
 
 ### Kubernetes
-To obtain the archive file in Kubernetes, use the kubectl command:
+Kubernetes でアーカイブファイルを取得するには、kubectl コマンドを使用します。
 ```
 kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zip -c agent
 ```
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

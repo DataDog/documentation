@@ -8,9 +8,9 @@
 - "cloud"
 - "configuration & deployment"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Amazon ElasicCache metrics."
+"description": "Amazon ElasicCache のキーメトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_elasticache/"
 "draft": false
 "git_integration_title": "amazon_elasticache"
@@ -104,25 +104,25 @@ Here's an example of setting up a graph to combine cache hit metrics from Elasti
 
 {{< img src="integrations/awselasticache/elasticache4.png" alt="ElastiCache and Cache metrics" >}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_elasticache" >}}
 
 
 Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The Amazon ElastiCache integration includes events for cluster, cache security groups, and cache parameter groups. See example events below:
 
 {{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Amazon Elasticache Events" >}}
 
-### Service Checks
+### サービスチェック
 
 The Amazon ElastiCache integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

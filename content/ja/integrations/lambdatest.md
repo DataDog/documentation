@@ -31,7 +31,7 @@
 - incidents
 - issue tracking
 - testing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/lambdatest/README.md"
 "display_on_public_website": true
@@ -89,11 +89,11 @@ Here's all that you can do with LambdaTest:
 - Help is always available with 24/7 chat support.
 - Lifetime free access to the platform with 100 free automation testing minutes.
 
-## Setup
+## セットアップ
 
 All configuration happens on the LambdaTest Dashboard. See the [LambdaTest-Datadog integration][1] setup documentation.
 
-### Configuration
+### 構成
 
 Here's how you can track incidents in Datadog with LambdaTest:
 

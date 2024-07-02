@@ -5,18 +5,18 @@
 - "languages"
 - "log collection"
 - "tracing"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Send custom metrics from your Node.js services via DogStatsD or our API."
+"description": "Node.js サービスから DogStatsD または Datadog API 経由でカスタムメトリクスを送信。"
 "doc_link": "https://docs.datadoghq.com/integrations/nodejs/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/node-logging-best-practices/"
-  "tag": "Blog"
-  "text": "How to collect, customize, and centralize Node.js logs"
+  "tag": "ブログ"
+  "text": "Node.js ログを収集、カスタマイズ、一元化する方法"
 - "link": "https://www.datadoghq.com/blog/node-monitoring-apm/"
-  "tag": "Blog"
-  "text": "Node.js monitoring with Datadog APM and distributed tracing"
+  "tag": "ブログ"
+  "text": "Datadog APM と分散型トレーシングを使用した Node.js の監視。"
 "git_integration_title": "node"
 "has_logo": true
 "integration_id": "node"
@@ -35,7 +35,7 @@
 
 The Node.js integration allows you to collect and monitor your Node.js application logs, traces, and custom metrics.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
@@ -85,7 +85,7 @@ See the dedicated documentation to set up [Node.js log collection][3] for forwar
 
 See the dedicated documentation for [enabling the Node.js profiler][4].
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

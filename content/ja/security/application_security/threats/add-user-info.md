@@ -12,45 +12,45 @@ further_reading:
   text: Other setup considerations and configuration options
 ---
 
-## Overview
+## 概要
 
-Instrument your services and track user activity to detect and block bad actors.
+サービスをインスツルメンテーションし、ユーザーのアクティビティを追跡することで、悪質なユーザーを検出・ブロックします。
 
 [Add authenticated user information on traces](#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability) to identify and block bad actors targeting your authenticated attack surface. To do this, set the user ID tag on the running APM trace, providing the necessary instrumentation for ASM to block authenticated attackers. This allows ASM to associate attacks and business logic events to users.
 
 [Track user logins and activity](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
 
 <div class="alert alert-info">
-<strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, read <a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
+<strong>ユーザーアクティビティの自動検出:</strong> Datadog トレーシングライブラリは、ユーザーアクティビティイベントを自動的に検出してレポートしようとします。詳細については、<a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">ユーザーアクティビティイベントの自動追跡を無効にする</a>を参照してください。
 </div>
 
-The custom user activity for which out-of-the-box detection rules are available are as follow:
+すぐに使える検出ルールとして、以下のようなカスタムユーザーアクティビティがあります。
 
-| Built-in event names   | Required metadata                                    | Related rules                                                                                                                                                                                                       |
+| 内蔵のイベント名   | 必要なメタデータ                                    | 関連ルール                                                                                                                                                                                                       |
 |------------------------|------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [Rate limited activity from IP][4]<br>[Unauthorized activity detected][5] |
-| `users.login.success`  | User ID is mandatory, optional metadata can be added | [Credential Stuffing attack][6]<br>[Bruteforce attack][12]<br>[Distributed Credential Stuffing][13]               |
+| `activity.sensitive`   | `{ "name": "coupon_use", "required_role": "user" }`  | [IP からのレート制限アクティビティ][4]<br>[不正なアクティビティの検出][5] |
+| `users.login.success`  | ユーザー ID は必須で、オプションでメタデータを追加できます | [Credential Stuffing attack][6]<br>[Bruteforce attack][12]<br>[Distributed Credential Stuffing][13]               |
 | `users.login.failure`  | User ID and `usr.exists` are mandatory, optional metadata can be added | [Credential Stuffing attack][6]<br>[Bruteforce attack][12]<br>[Distributed Credential Stuffing][13]  |
-| `users.signup`         | `{ "usr.id": "12345" }`                              | [Excessive account creations from an IP][7]                                                                                                    |
-| `users.delete`         | `{ "usr.id": "12345" }`                              | [Excessive account deletion from an IP][8]                                                                                           |
-| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [Password reset brute force attempts][9]                                                                                                         |
-| `payment.attempt`      | `{ "status": "failed" }`                             | [Excessive payment failures from IP][10]                                                                                                        |
+| `users.signup`         | `{ "usr.id": "12345" }`                              | [IP からの過剰なアカウント作成][7]                                                                                                    |
+| `users.delete`         | `{ "usr.id": "12345" }`                              | [IP からの過剰なアカウント削除][8]                                                                                           |
+| `users.password_reset` | `{ "usr.id": "12345", "exists": true }`              | [パスワードリセットのブルートフォース試行][9]                                                                                                         |
+| `payment.attempt`      | `{ "status": "failed" }`                             | [IP からの過剰な支払い失敗][10]                                                                                                        |
 
-## Adding authenticated user information to traces and enabling user blocking capability
+## 認証されたユーザー情報をトレースに追加し、ユーザーブロック機能を有効にする
 
-You can [add custom tags to your root span][3], or use the instrumentation functions described below. 
+[ルートスパンにカスタムタグを追加する][3]方法と、後述のインスツルメンテーション関数を利用する方法があります。
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 
 {{< programming-lang lang="java" >}}
 
-Use the Java tracer's API for adding custom tags to a root span and add user information so that you can monitor authenticated requests in the application.
+ルートスパンにカスタムタグを追加するための Java トレーサーの API を使用し、アプリケーションで認証されたリクエストを監視できるように、ユーザー情報を追加します。
 
-User monitoring tags are applied on the root span and start with the prefix `usr` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user's name.
+ユーザーモニタリングタグは、ルートスパンに適用され、プレフィックス `usr` の後にフィールド名が続きます。例えば、`usr.name` は、ユーザーの名前を追跡するユーザーモニタリングタグです。
 
-**Note**: Check that you have added [necessary dependencies to your application][1].
+**注**: [アプリケーションに必要な依存関係][1]が追加されていることを確認してください。
 
-The example below shows how to obtain the root span, add the relevant user monitoring tags, and enable user blocking capability:
+以下の例では、ルートスパンを取得し、関連するユーザー監視タグを追加し、ユーザーブロック機能を有効にする方法を示しています。
 
 ```java
 import io.opentracing.Span;
@@ -58,13 +58,13 @@ import io.opentracing.util.GlobalTracer;
 import datadog.appsec.api.blocking.Blocking;
 import datadog.trace.api.interceptor.MutableSpan;
 
-// Get the active span
+// アクティブスパンの取得
 final Span span = GlobalTracer.get().activeSpan();
 if ((span instanceof MutableSpan)) {
    MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
-   // Setting the mandatory user id tag
+   // 必須ユーザー ID タグの設定
    localRootSpan.setTag("usr.id", "d131dd02c56eec4");
-   // Setting optional user monitoring tags
+   // オプションのユーザーモニタリングタグの設定
    localRootSpan.setTag("usr.name", "Jean Example");
    localRootSpan.setTag("usr.email", "jean.example@example.com");
    localRootSpan.setTag("usr.session_id", "987654321");
@@ -82,9 +82,9 @@ Blocking
 
 {{< programming-lang lang="dotnet" >}}
 
-The .NET tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace.
+.NET トレーサーパッケージは `SetUser()` 関数を提供し、トレースにユーザー情報を追加することで認証されたリクエストを監視できるようにします。
 
-The example below shows how to add the relevant user monitoring tags and enable user blocking capability:
+以下の例では、関連するユーザー監視タグを追加し、ユーザーブロック機能を有効にする方法を示しています。
 
 ```csharp
 
@@ -94,21 +94,21 @@ using Datadog.Trace;
 
     var userDetails = new UserDetails()
     {
-        // the systems internal identifier for the users
+        // ユーザーに対するシステム内部識別子
         Id = "d41452f2-483d-4082-8728-171a3570e930",
-        // the email address of the user
+        // ユーザーのメールアドレス
         Email = "test@adventure-works.com",
-        // the user's name, as displayed by the system
+        // システムによって表示されるユーザー名
         Name = "Jane Doh",
-        // the user's session id
+        // ユーザーのセッション ID
         SessionId = "d0632156-132b-4baa-95b2-a492c5f9cb16",
-        // the role the user is making the request under
+        // ユーザーがリクエストしたロール
         Role = "standard",
     };
     Tracer.Instance.ActiveScope?.Span.SetUser(userDetails);
 ```
 
-For information and options, read [the .NET tracer documentation][1].
+情報およびオプションについては、[.NET トレーサーのドキュメント][1]をお読みください。
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/docs/Datadog.Trace#user-identification
 
@@ -116,16 +116,16 @@ For information and options, read [the .NET tracer documentation][1].
 
 {{< programming-lang lang="go" >}}
 
-The Go tracer package provides the `SetUser()` function, which allows you to monitor authenticated requests by adding user information to the trace. For more options, see [the Go tracer documentation][1].
+Go トレーサーパッケージは `SetUser()` 関数を提供し、トレースにユーザー情報を追加することで認証されたリクエストを監視できるようにします。他のオプションについては、[Go トレーサーのドキュメント][1]をご覧ください。
 
-This example shows how to retrieve the current tracer span, use it to set user monitoring tags, and enable user blocking capability:
+この例では、現在のトレーサースパンを取得し、それを使用してユーザー監視タグを設定し、ユーザーブロック機能を有効にする方法を説明します。
 
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 func handler(w http.ResponseWriter, r *http.Request) {
   if appsec.SetUser(r.Context(), "my-uid") != nil {
-    // The user must be blocked by aborting the request handler asap.
-    // The blocking response is automatically handled and sent by the appsec middleware.
+    // 早急にリクエストハンドラーを中止して、ユーザーをブロックする必要があります。
+    // ブロック応答は、appsec ミドルウェアによって自動的に処理され、送信されます。
     return 
   }
 }
@@ -136,36 +136,36 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 {{< programming-lang lang="ruby" >}}
 
-Use one of the following APIs to add user information to a trace so that you can monitor authenticated requests in the application:
+以下の API のいずれかを使用して、トレースにユーザー情報を追加し、アプリケーションで認証されたリクエストを監視できるようにします。
 
 {{< tabs >}}
 
 {{% tab "set_user" %}}
 
-Starting with `ddtrace` 1.1.0, the `Datadog::Kit::Identity.set_user` method is available. This is the recommended API for adding user information to traces:
+`ddtrace` 1.1.0 からは、`Datadog::Kit::Identity.set_user` メソッドが使用できるようになりました。これは、トレースにユーザ情報を追加するための推奨 API です。
 
 ```ruby
-# Get the active trace
+# アクティブトレースを取得する
 trace = Datadog::Tracing.active_trace
 
-# Set mandatory user id tag
+# 必須ユーザー ID タグを設定する
 Datadog::Kit::Identity.set_user(trace, id: 'd131dd02c56eeec4')
 
-# Or set any of these optional user monitoring tags
+# または、オプションのユーザーモニタリングタグを設定する
 Datadog::Kit::Identity.set_user(
   trace,
 
-  # mandatory id
+  # 必須 ID
   id: 'd131dd02c56eeec4',
 
-  # optional tags with known semantics
+  #セマティクスが分かっているオプションタグ
   name: 'Jean Example',
   email:, 'jean.example@example.com',
   session_id:, '987654321',
   role: 'admin',
   scope: 'read:message, write:files',
 
-  # optional free-form tags
+  # オプションの自由形式タグ
   another_tag: 'another_value',
 )
 ```
@@ -174,31 +174,31 @@ Datadog::Kit::Identity.set_user(
 
 {{% tab "set_tag" %}}
 
-If `Datadog::Kit::Identity.set_user` does not meet your needs, you can use `set_tag` instead.
+`Datadog::Kit::Identity.set_user` がニーズに合わない場合は、代わりに `set_tag` を使用することができます。
 
-User monitoring tags are applied on the trace and start with the prefix `usr.` followed by the name of the field. For example, `usr.name` is a user monitoring tag that tracks the user's name.
+ユーザーモニタリングタグは、トレースに適用され、プレフィックス `usr.` の後にフィールド名が続きます。例えば、`usr.name` は、ユーザーの名前を追跡するユーザーモニタリングタグです。
 
-The example below shows how to obtain the active trace and add relevant user monitoring tags:
+以下の例では、アクティブトレースを取得し、関連するユーザーモニタリングタグを追加する方法を示しています。
 
-**Notes**:
-- Tag values must be strings.
-- The `usr.id` tag is mandatory.
+**注**:
+- タグの値は文字列でなければなりません。
+- `usr.id` タグは必須です。
 
 ```ruby
-# Get the active trace
+# アクティブトレースを取得する
 trace = Datadog::Tracing.active_trace
 
-# Set mandatory user id tag
+# 必須ユーザー ID タグを設定する
 trace.set_tag('usr.id', 'd131dd02c56eeec4')
 
-# Set optional user monitoring tags with known sematics
+# セマティクスが分かっているユーザーモニタリングタグをオプションで設定する
 trace.set_tag('usr.name', 'Jean Example')
 trace.set_tag('usr.email', 'jean.example@example.com')
 trace.set_tag('usr.session_id', '987654321')
 trace.set_tag('usr.role', 'admin')
 trace.set_tag('usr.scope', 'read:message, write:files')
 
-# Set free-form tags:
+# 自由形式のタグを設定する
 trace.set_tag('usr.another_tag', 'another_value')
 ```
 
@@ -210,20 +210,20 @@ trace.set_tag('usr.another_tag', 'another_value')
 
 {{< programming-lang lang="php" >}}
 
-The PHP tracer provides the `\DDTrace\set_user()` function, which allows you to monitor and block authenticated requests.
+PHP トレーサーは `\DDTrace\set_user()` 関数を提供し、認証されたリクエストを監視したりブロックしたりすることができます。
 
-`\DDTrace\set_user()` adds the relevant user tags and metadata to the trace and automatically performs user blocking.
+`\DDTrace\set_user()` はトレースに関連するユーザータグとメタデータを追加し、ユーザーブロックを自動的に実行します。
 
-The following example shows how to set user monitoring tags and enable user blocking:
+以下の例では、ユーザー監視タグを設定し、ユーザーブロックを有効にする方法を示します。
 
 ```php
 <?php
-// Blocking is performed internally through the set_user call.
+// ブロッキングは、set_user コールにより内部で行われます。
 \DDTrace\set_user(
-    // A unique identifier of the user is required.
+    // ユーザーの一意な識別子が必要です。
     '123456789',
 
-    // All other fields are optional.
+    // その他のフィールドはすべてオプションです。
     [
         'name' =>  'Jean Example',
         'email' => 'jean.example@example.com',
@@ -239,37 +239,37 @@ The following example shows how to set user monitoring tags and enable user bloc
 
 {{< programming-lang lang="nodejs" >}}
 
-The Node tracer package provides the `tracer.setUser(user)` function, which allows you to monitor authenticated requests by adding user information to the trace.
+Node トレーサーパッケージは `tracer.setUser(user)` 関数を提供し、トレースにユーザー情報を追加することで認証されたリクエストを監視できるようにします。
 
-The example below shows how to add relevant user monitoring tags and enable user blocking capability:
+以下の例では、関連するユーザー監視タグを追加し、ユーザーブロック機能を有効にする方法を示しています。
 
 ```javascript
 const tracer = require('dd-trace').init()
 
 function handle () {
   tracer.setUser({
-    id: '123456789', // *REQUIRED* Unique identifier of the user.
+    id: '123456789', // *必須* ユーザーの一意な識別子。
 
-    // All other fields are optional.
-    email: 'jane.doe@example.com', // Email of the user.
-    name: 'Jane Doe', // User-friendly name of the user.
-    session_id: '987654321', // Session ID of the user.
-    role: 'admin', // Role the user is making the request under.
-    scope: 'read:message, write:files', // Scopes or granted authorizations the user currently possesses.
+    // その他のフィールドはすべてオプションです。
+    email: 'jane.doe@example.com', // ユーザーのメールアドレス。
+    name: 'Jane Doe', // ユーザーのユーザーフレンドリーな名前。
+    session_id: '987654321', // ユーザーのセッション ID。
+    role: 'admin', // ユーザーがリクエストしたロール。
+    scope: 'read:message, write:files', // ユーザーが現在持っているスコープまたは付与された権限。
 
-    // Arbitrary fields are also accepted to attach custom data to the user (RBAC, Oauth, etc...)
+    // ユーザーへのカスタムデータ (RBAC、Oauth など) をアタッチするために、任意のフィールドも受け付けます
     custom_tag: 'custom data'
   })
 
-// Set the currently authenticated user and check whether they are blocked
-if (tracer.appsec.isUserBlocked(user)) {  // also set the currently authenticated user
-  return tracer.appsec.blockRequest(req, res) // blocking response is sent
+// 現在認証されているユーザーを設定し、ブロックされているかどうかを確認します
+if (tracer.appsec.isUserBlocked(user)) {  // また、現在認証されているユーザーを設定します
+  return tracer.appsec.blockRequest(req, res) // ブロック応答が送信されます
   }
 
 }
 ```
 
-For information and options, read [the Node.js tracer documentation][1].
+情報およびオプションについては、[Node.js トレーサーのドキュメント][1]をお読みください。
 
 
 
@@ -278,14 +278,14 @@ For information and options, read [the Node.js tracer documentation][1].
 
 {{< programming-lang lang="python" >}}
 
-Monitor authenticated requests by adding user information to the trace with the `set_user` function provided by the Python tracer package.
+Python トレーサーパッケージが提供する `set_user` 関数を用いて、トレースにユーザー情報を追加することで、認証済みリクエストを監視します。
 
-This example shows how to set user monitoring tags and enable user blocking capability:
+この例では、ユーザー監視タグを設定し、ユーザーブロック機能を有効にする方法を示します。
 
 ```python
 from ddtrace.contrib.trace_utils import set_user
 from ddtrace import tracer
-# Call set_user() to trace the currently authenticated user id
+# set_user() を呼び出し、現在認証されているユーザー ID をトレースします
 user_id = "some_user_id"
 set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
          role="manager", session_id="session_id", propagate=True)
@@ -295,17 +295,17 @@ set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope"
 
 {{< /programming-lang-wrapper >}}
 
-## Adding business logic information (login success, login failure, any business logic) to traces
+## ビジネスロジック情報 (ログイン成功、ログイン失敗、任意のビジネスロジック) のトレースへの追加
 
 {{< programming-lang-wrapper langs="java,dotnet,go,ruby,php,nodejs,python" >}}
 {{< programming-lang lang="java" >}}
 
-Starting in dd-trace-java v1.8.0, you can use the Java tracer's API to track user events. 
+dd-trace-java v1.8.0 からは、Java トレーサーの API を使用してユーザーイベントを追跡することができます。
 
-The following examples show how to track login events or custom events (using signup as an example).
+次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
 {{< tabs >}}
-{{% tab "Login success" %}}
+{{% tab "ログイン成功" %}}
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -330,7 +330,7 @@ public class LoginController {
 ```
 {{% /tab %}}
 
-{{% tab "Login failure" %}}
+{{% tab "ログイン失敗" %}}
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -361,7 +361,7 @@ public class LoginController {
 ```
 {{% /tab %}}
 
-{{% tab "Custom business logic" %}}
+{{% tab "カスタムビジネスロジック" %}}
 ```java
 import datadog.trace.api.EventTracker;
 import datadog.trace.api.GlobalTracer;
@@ -369,14 +369,14 @@ import datadog.trace.api.GlobalTracer;
 public class LoginController {
 
     private User doSignup(String userId, String email) {
-        // this is where you create your user account
+        // ここで、ユーザーアカウントを作成します
         User user = createUser(userId, email);
 
         Map<String, String> metadata = new HashMap<>();
         metadata.put("email", user.getEmail());
         metadata.put("id", user.getId());
 
-        // track user signup events
+        // ユーザーサインアップイベントを追跡します
         GlobalTracer
             .getEventTracker()
             .trackCustomEvent("users.signup", metadata);
@@ -392,18 +392,18 @@ public class LoginController {
 
 {{< programming-lang lang="dotnet" >}}
 
-Starting in dd-trace-dotnet v2.23.0, you can use the .NET tracer's API to track user events. 
+dd-trace-dotnet v2.23.0 からは、.NET トレーサーの API を使用してユーザーイベントを追跡することができます。
 
-The following examples show how to track login events or custom events (using signup as an example).
+次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
 {{< tabs >}}
-{{% tab "Login success" %}}
+{{% tab "ログイン成功" %}}
 ```csharp
 using Datadog.Trace.AppSec;
 
 void OnLogonSuccess(string userId, ...)
 {
-    // metadata is optional
+    // metadata はオプションです
     var metadata = new Dictionary<string, string>()
     {
         { "customKey", "customValue" }
@@ -415,7 +415,7 @@ void OnLogonSuccess(string userId, ...)
 
 ```
 {{% /tab %}}
-{{% tab "Login failure" %}}
+{{% tab "ログイン失敗" %}}
 ```csharp
 using Datadog.Trace.AppSec;
 
@@ -435,16 +435,16 @@ void OnLogonFailure(string userId, bool userExists, ...)
 
 {{% /tab %}}
 
-{{% tab "Custom business logic" %}}
+{{% tab "カスタムビジネスロジック" %}}
 ```csharp
 void OnUserSignupComplete(string userId, ...)
 {
-    // the metadata parameter is optional, but adding the "usr.id"
+    // metadata パラメーターはオプションですが、"usr.id" を追加します
     var metadata = new Dictionary<string, string>()
     {
         { "usr.id", userId }
     };
-    // Leveraging custom business logic tracking to track user signups
+    // カスタムビジネスロジックの追跡を活用し、ユーザーのサインアップを追跡します
     EventTrackingSdk.TrackCustomEvent("users.signup", metadata);
 
     // ...
@@ -458,12 +458,12 @@ void OnUserSignupComplete(string userId, ...)
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
-Starting in dd-trace-go v1.47.0, you can use the Go tracer's API to track user events. 
+dd-trace-go v1.47.0 からは、Go トレーサーの API を使用してユーザーイベントを追跡することができます。
 
-The following examples show how to track login events or custom events (using signup as an example).
+次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
 {{< tabs >}}
-{{% tab "Login success" %}}
+{{% tab "ログイン成功" %}}
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
@@ -480,7 +480,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 {{% /tab %}}
-{{% tab "Login failure" %}}
+{{% tab "ログイン失敗" %}}
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
@@ -493,14 +493,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 ```
 {{% /tab %}}
 
-{{% tab "Custom business logic" %}}
+{{% tab "カスタムビジネスロジック" %}}
 ```go
 import "gopkg.in/DataDog/dd-trace-go.v1/appsec"
 
 func handler(w http.ResponseWriter, r *http.Request) {
   metadata := map[string]string{"usr.id": "my-uid"}
 
-  // Leveraging custom business logic tracking to track user signups
+  // カスタムビジネスロジックの追跡を活用し、ユーザーのサインアップを追跡します
   appsec.TrackCustomEvent(r.Context(), "users.signup", metadata)
 }
 ```
@@ -511,14 +511,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-Starting in dd-trace-rb v1.9.0, you can use the Ruby tracer's API to track user events.
+dd-trace-rb v1.9.0 からは、Ruby トレーサーの API を使用してユーザーイベントを追跡することができます。
 
-The following examples show how to track login events or custom events (using signup as an example).
+次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
-Traces containing login success/failure events can be queried using the following query `@appsec.security_activity:business_logic.users.login.success` or `@appsec.security_activity:business_logic.users.login.failure`.
+ログインの成功/失敗イベントを含むトレースは、以下のクエリ `@appsec.security_activity:business_logic.users.login.success` または `@appsec.security_activity:business_logic.users.login.failure` を使用してクエリすることができます。
 
 {{< tabs >}}
-{{% tab "Login success" %}}
+{{% tab "ログイン成功" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
 
@@ -528,7 +528,7 @@ Datadog::Kit::AppSec::Events.track_login_success(trace, user: { id: 'my_user_id'
 ```
 {{% /tab %}}
 
-{{% tab "Login failure" %}}
+{{% tab "ログイン失敗" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
@@ -543,12 +543,12 @@ Datadog::Kit::AppSec::Events.track_login_failure(trace, user_id: 'my_user_id', u
 ```
 {{% /tab %}}
 
-{{% tab "Custom business logic" %}}
+{{% tab "カスタムビジネスロジック" %}}
 ```ruby
 require 'datadog/kit/appsec/events'
 trace = Datadog::Tracing.active_trace
 
-# Leveraging custom business logic tracking to track user signups
+# カスタムビジネスロジックの追跡を活用し、ユーザーのサインアップを追跡します
 Datadog::Kit::AppSec::Events.track('users.signup', trace)
 ```
 {{% /tab %}}
@@ -557,12 +557,12 @@ Datadog::Kit::AppSec::Events.track('users.signup', trace)
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
-Starting in dd-trace-php v0.84.0, you can use the PHP tracer's API to track user events.
+dd-trace-php v0.84.0 からは、PHP トレーサーの API を使用してユーザーイベントを追跡することができます。
 
-The following examples show how to track login events or custom events (using signup as an example).
+次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
 {{< tabs >}}
-{{% tab "Login success" %}}
+{{% tab "ログイン成功" %}}
 ```php
 <?php
 \datadog\appsec\track_user_login_success_event($id, ['email' => $email])
@@ -570,7 +570,7 @@ The following examples show how to track login events or custom events (using si
 ```
 {{% /tab %}}
 
-{{% tab "Login failure" %}}
+{{% tab "ログイン失敗" %}}
 ```php
 <?php
 // If no numeric userId is available, you may use any unique string as userId instead (username, email...)
@@ -580,7 +580,7 @@ The following examples show how to track login events or custom events (using si
 ```
 {{% /tab %}}
 
-{{% tab "Custom business logic" %}}
+{{% tab "カスタムビジネスロジック" %}}
 ```php
 <?php
 \datadog\appsec\track_custom_event('users.signup', ['id' => $id, 'email' => $email]);
@@ -593,12 +593,12 @@ The following examples show how to track login events or custom events (using si
 
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
-Starting in dd-trace-js v3.13.1, you can use the NodeJS tracer's API to track user events.
+dd-trace-js v3.13.1 からは、NodeJS トレーサーの API を使用してユーザーイベントを追跡することができます。
 
-The following examples show how to track login events or custom events (using signup as an example).
+次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
 {{< tabs >}}
-{{% tab "Login success" %}}
+{{% tab "ログイン成功" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -614,7 +614,7 @@ tracer.appsec.trackUserLoginSuccessEvent(user, metadata) // metadata is optional
 ```
 {{% /tab %}}
 
-{{% tab "Login failure" %}}
+{{% tab "ログイン失敗" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -628,11 +628,11 @@ tracer.appsec.trackUserLoginFailureEvent(userId, userExists, metadata)
 ```
 {{% /tab %}}
 
-{{% tab "Custom business logic" %}}
+{{% tab "カスタムビジネスロジック" %}}
 ```javascript
 const tracer = require('dd-trace')
 
-// in a controller:
+// コントローラーで
 const eventName = 'users.signup'
 const metadata = { 'usr.id': 'user-id' }
 
@@ -647,25 +647,25 @@ tracer.appsec.trackCustomEvent(eventName, metadata)
 
 {{< programming-lang lang="python" >}}
 
-Starting in dd-trace-py v1.9.0, you can use the Python tracer's API to track user events.
+dd-trace-py v1.9.0 からは、Python トレーサーの API を使用してユーザーイベントを追跡することができます。
 
-The following examples show how to track login events or custom events (using signup as an example).
+次の例は、ログインイベントやカスタムイベント (サインアップを例とする) を追跡する方法を示しています。
 
 {{< tabs >}}
 
-{{% tab "Login success" %}}
+{{% tab "ログイン成功" %}}
 
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_success_event
 from ddtrace import tracer
 metadata = {"custom": "customvalue"}
-# name, email, scope, role, session_id and propagate are optional arguments which 
-# default to None except propagate that defaults to True. They'll be 
-# passed to the set_user() function
+# name、email、scope、role、session_id、propagate はオプションの引数で、
+# デフォルトは None ですが propagate はデフォルトが True になります。
+# これらは set_user() 関数に渡されます
 track_user_login_success_event(tracer, "userid", metadata)
 ```
 {{% /tab %}}
-{{% tab "Login failure" %}}
+{{% tab "ログイン失敗" %}}
 ```python
 from ddtrace.appsec.trace_utils import track_user_login_failure_event
 from ddtrace import tracer
@@ -677,7 +677,7 @@ track_user_login_failure_event(tracer, "userid", exists, metadata)
 ```
 {{% /tab %}}
 
-{{% tab "Custom business logic" %}}
+{{% tab "カスタムビジネスロジック" %}}
 
 ```python
 from ddtrace.appsec.trace_utils import track_custom_event
@@ -694,51 +694,51 @@ track_custom_event(tracer, event_name, metadata)
 
 {{< /programming-lang-wrapper >}}
 
-### Tracking business logic information without modifying the code
+### コードを変更せずにビジネスロジック情報を追跡する
 
-If your service has ASM enabled and [Remote Configuraton][1] enabled, you can create a custom WAF rule to flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
+サービスで ASM が有効になっており、[リモート構成][1]が有効になっている場合、カスタムのビジネスロジックタグと一致するリクエストにフラグを立てるカスタム WAF ルールを作成することができます。この場合、アプリケーションを変更する必要はなく、すべて Datadog から行うことができます。
 
-To get started, navigate to the [Custom WAF Rule page][2] and click on "Create New Rule".
+まず、[Custom WAF Rule ページ][2]に移動し、"Create New Rule" をクリックします。
 
-{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Access the Custom WAF Rule Menu from the ASM homepage by clicking on Protection, then In-App WAF and Custom Rules" style="width:100%;" >}}
+{{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="ASM ホームページから Protection、In-App WAF、Custom Rules の順にクリックして、Custom WAF Rule メニューにアクセス" style="width:100%;" >}}
 
-This will open a menu in which you may define your custom WAF rule. By selecting the "Business Logic" category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to _instrument_. When the condition matches, the library tags the trace and flags it to be forwarded to ASM. If you don't need the condition, you may set a broad condition to match everything.
+カスタム WAF ルールを定義するためのメニューが開きます。"Business Logic" カテゴリーを選択すると、イベントタイプ (例: `users.password_reset`) を構成できるようになります。次に、追跡したいサービスと特定のエンドポイントを選択します。また、ルール条件を使用して特定のパラメーターをターゲットにし、_インスツルメント_したいコードフローを特定することもできます。条件が一致すると、ライブラリがトレースにタグを付け、それを ASM に転送するフラグを立てます。条件が不要な場合は、すべてに一致する大まかな条件を設定することもできます。
 
-{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Screenshot of the form that appear when you click on the Create New Rule button" style="width:50%;" >}}
+{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Create New Rule ボタンをクリックした際に表示されるフォームのスクリーンショット" style="width:50%;" >}}
 
-Once saved, the rule is deployed to instances of the service that have Remote Configuration enabled.
+ルールが保存されると、リモート構成が有効になっているサービスのインスタンスにデプロイされます。
 
 
 [1]: /agent/remote_config?tab=configurationyamlfile#application-security-management-asm
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
 
-## Automatic user activity event tracking
+## ユーザーアクティビティイベントの自動追跡
 
-When ASM is enabled, recent Datadog Tracing Libraries attempt to detect user activity events automatically.
+ASM を有効にすると、最近の Datadog トレーシングライブラリは、ユーザーアクティビティイベントの自動検出を試みます。
 
-The events that can be automatically detected are:
+自動検出できるイベントは以下の通りです。
 
 - `users.login.success`
 - `users.login.failure`
 - `users.signup`
 
-### Automatic user activity event tracking mode
+### ユーザーアクティビティイベント自動追跡モード
 
-Automatic user activity tracking offers two modes: <code>safe</code>, and <code>extended</code>
+ユーザーアクティビティの自動追跡には、<code>safe</code> モードと <code>extended</code> モードの 2 種類があります
 
-In <code>safe</code> mode, the trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+<code>safe</code> モードでは、トレースライブラリはイベントのメタデータに PII 情報を含めません。トレーサーライブラリはユーザー ID の収集を試みますが、ユーザー ID が有効な [GUID][10] である場合のみです
 
-In <code>extended</code> mode, the trace library tries to collect the user ID, and the user email. In this mode, we do not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
+<code>extended</code> モードでは、トレースライブラリはユーザー ID とユーザーのメールアドレスを収集しようとします。このモードでは、ユーザー ID のタイプが GUID であるかどうかをチェックしません。トレースライブラリは、イベントから抽出できる値であれば何でもレポートします。
 
-To configure automatic user event tracking mode, you can set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>safe</code> or <code>extended</code>. By default, the tracer library uses the <code>safe</code> mode.
+ユーザーイベント自動追跡モードを構成するには、環境変数 <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> を <code>safe</code> または <code>extended</code> に設定します。デフォルトでは、トレーサーライブラリは <code>safe</code> モードを使用します。
 
-**Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, we recommend using the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
+**注**: トレースライブラリがユーザーイベントから情報を抽出できない場合があります。イベントは空のメタデータでレポートされます。そのような場合は、[SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) を使用して、ユーザーイベントを手動でインスツルメンテーションすることをお勧めします。
 
-## Disabling automatic user activity event tracking
+## ユーザーアクティビティイベントの自動追跡を無効にする
 
-If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
+これらのイベントの検出を無効にするには、環境変数 <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> を <code>disabled</code> に設定します。これは、Datadog Agent ではなく、Datadog トレーシングライブラリをホストするアプリケーションで設定する必要があります。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

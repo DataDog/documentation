@@ -26,7 +26,7 @@
 - incidents
 - issue tracking
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/signl4/README.md"
 "display_on_public_website": true
@@ -75,7 +75,7 @@ Connect SIGNL4 to Datadog in order to:
 
 ![SIGNL4 App][2]
 
-## Setup
+## セットアップ
 
 ### SIGNL4
 
@@ -209,21 +209,21 @@ You need to configure the following:
 - Datadog Application Key: Your Datadog application key. You can find or create an application key in Datadog under your account, Organization Settings -> Application Keys.  
 - Acknowledgement as Stable: Acknowledgements set the incident status to Stable.  
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The SIGNL4 integration does not include any metrics.
 
-### Events
+### イベント
 
 SIGNL4 triggered and resolved events appear in your SIGNL4 app and web portal.
 
-### Service Checks
+### サービスチェック
 
 The SIGNL4 integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 Need help? Contact [SIGNL4 Support][9].
 
 

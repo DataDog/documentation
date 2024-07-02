@@ -23,7 +23,7 @@
 "categories":
 - metrics
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/nobl9/README.md"
 "display_on_public_website": true
@@ -81,7 +81,7 @@ With the Datadog Nobl9 integration, you can:
 ### Service health dashboard
 ![Service Health Dashboard][4]
 
-## Setup
+## セットアップ
 
 All configuration happens on the Nobl9 SLO Platform.
 
@@ -93,7 +93,7 @@ All configuration happens on the Nobl9 SLO Platform.
 
 For more information about creating SLOs on the Nobl9 platform, see Nobl9's [User Guide][5].
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Nobl9 Support][6] or [Datadog Support][7].
 

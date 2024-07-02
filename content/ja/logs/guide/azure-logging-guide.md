@@ -182,7 +182,7 @@ See [Azure Event Hubs trigger for Azure Functions][202] for more information.
 3. For the **Development environment** field, select **Develop in portal**.
 3. Under **Select a template**, choose [Azure Event Hub trigger][202].
 4. Under **Event Hub connection**, select your namespace and Event Hub.
-5. Click **Create**.
+5. **Create** をクリックします。
 
 See [Getting started with Azure functions][215] for more information.
 
@@ -304,7 +304,7 @@ If you already have a function app configured for this purpose, skip to [Add a n
 4. Under **Select a template**, choose [Azure Blob storage trigger][313].
 5. Select your **Storage account connection**.
    **Note**: See [Configure a connection string for an Azure storage account][311] for more information.
-6. Click **Create**.
+6. **Create** をクリックします。
 
 See [Getting started with Azure Functions][307] for more information.
 

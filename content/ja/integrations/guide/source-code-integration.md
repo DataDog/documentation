@@ -17,30 +17,30 @@ further_reading:
   text: Learn about Serverless Monitoring
 - link: /tests/developer_workflows/
   tag: Documentation
-  text: Learn about Test Visibility
+  text: Test Visibility について
 - link: /code_analysis/
   tag: Documentation
-  text: Learn about Code Analysis
+  text: Code Analysis について
 - link: /security/application_security/
   tag: Documentation
   text: Learn about Application Security Monitoring
 - link: /logs/error_tracking/
-  tag: Documentation
+  tag: ドキュメント
   text: Learn about Error Tracking for logs
 ---
 
-## Overview
+## 概要
 
 Datadog's source code integration allows you to connect your telemetry with your Git repositories. It allows debugging stack traces, slow profiles, and other issues by accessing the relevant lines of your source code.
 
-{{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Inline code snippet of a Java RuntimeException with a button to view the code in GitHub" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/inline-code-snippet.png" alt="Java RuntimeException のインラインコードスニペットと GitHub でコードを見るためのボタン" style="width:100%;">}}
 
 
-## Setup
+## セットアップ
 
-Datadog Agent v7.35.0 or later is required.
+Datadog Agent v7.35.0 以降が必要です。
 
-If you have [APM][6] set up already, navigate to [**Integrations** > **Link Source Code**][7] and configure the source code integration for your backend services.
+[APM][6] をすでに設定している場合は、[**Integrations** > **Link Source Code**][7] に移動し、バックエンドサービスのソースコードインテグレーションを構成してください。
 
 ## Tag your telemetry with Git information
 
@@ -54,14 +54,14 @@ For other languages and configurations, you can [configure telemetry tagging](#c
 
 You can embed the repository URL and commit hash in your build artifact. The [Datadog Tracing Libraries][9] use this information to automatically add the right tags to your APM service telemetry.
 
-Select one of the following languages that supports embedding git information:
+git 情報の埋め込みに対応している言語を、次の中から 1 つ選択します。
 
 {{< tabs >}}
 {{% tab "Go" %}}
 
 <div class="alert alert-info">The Go client library version 1.48.0 or later is required.</div>
 
-#### Containers
+#### コンテナ
 
 If you are using Docker containers, you have three options: using Docker, using the Datadog tracing library, or configuring your application with `DD_GIT_*` environment variables.
 
@@ -77,7 +77,7 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 {{% sci-dd-git-env-variables %}}
 
-#### Serverless
+#### サーバーレス
 
 If you are using Serverless, you have three options depending on your serverless application's setup.
 
@@ -93,7 +93,7 @@ If you are using Serverless, you have three options depending on your serverless
 
 {{% sci-dd-git-env-variables %}}
 
-#### Host
+#### ホスト
 
 If you are using a host, you have two options.
 
@@ -116,7 +116,7 @@ If you are using a host, you have two options.
 
 <div class="alert alert-info">The Python client library version 1.12.0 or later is required.</div>
 
-#### Containers
+#### コンテナ
 
 If you are using Docker containers, you have three options: using Docker, using the Datadog tracing library, or configuring your application with `DD_GIT_*` environment variables.
 
@@ -135,7 +135,7 @@ If you are using Docker containers, you have three options: using Docker, using 
 [101]: https://github.com/DataDog/dd-trace-go
 [102]: https://github.com/DataDog/hatch-datadog-build-metadata#readme
 
-#### Serverless
+#### サーバーレス
 
 If you are using Serverless, you have three options depending on your serverless application's setup.
 
@@ -151,7 +151,7 @@ If you are using Serverless, you have three options depending on your serverless
 
 {{% sci-dd-git-env-variables %}}
 
-#### Host
+#### ホスト
 
 If you are using a host, you have two options.
 
@@ -168,7 +168,7 @@ If you are using a host, you have two options.
 
 <div class="alert alert-info">The .NET client library version 2.24.1 or later is required.</div>
 
-#### Containers
+#### コンテナ
 
 If you are using Docker containers, you have three options: using Docker, using Microsoft SourceLink, or configuring your application with `DD_GIT_*` environment variables.
 
@@ -184,7 +184,7 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 {{% sci-dd-git-env-variables %}}
 
-#### Serverless
+#### サーバーレス
 
 If you are using Serverless, you have three options depending on your serverless application's setup.
 
@@ -200,9 +200,9 @@ If you are using Serverless, you have three options depending on your serverless
 
 {{% sci-dd-git-env-variables %}}
 
-#### Host
+#### ホスト
 
-If you are using a host, you have two options: using Microsoft SourceLink or configuring your application with `DD_GIT_*` environment variables.
+ホストを使用している場合、Microsoft SourceLink を使用するか、`DD_GIT_*` 環境変数でアプリケーションを構成するかの 2 つのオプションがあります。
 
 ##### Option 1: Microsoft SourceLink
 
@@ -217,7 +217,7 @@ If you are using a host, you have two options: using Microsoft SourceLink or con
 
 <div class="alert alert-info">The NodeJS client library version 3.21.0 or later is required.</div>
 
-#### Containers
+#### コンテナ
 
 If you are using Docker containers, you have two options: using Docker or configuring your application with `DD_GIT_*` environment variables.
 
@@ -229,7 +229,7 @@ If you are using Docker containers, you have two options: using Docker or config
 
 {{% sci-dd-git-env-variables %}}
 
-#### Serverless
+#### サーバーレス
 
 If you are using Serverless, you have two options depending on your serverless application's setup.
 
@@ -241,7 +241,7 @@ If you are using Serverless, you have two options depending on your serverless a
 
 {{% sci-dd-git-env-variables %}}
 
-#### Host
+#### ホスト
 
 If you are using a host, configure your application with `DD_GIT_*` environment variables.
 
@@ -252,7 +252,7 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 
 <div class="alert alert-info">The Ruby client library version 1.6.0 or later is required.</div>
 
-#### Containers
+#### コンテナ
 
 If you are using Docker containers, you have two options: using Docker or configuring your application with the `DD_TAGS` environment variable.
 
@@ -264,7 +264,7 @@ If you are using Docker containers, you have two options: using Docker or config
 
 {{% sci-dd-tags-env-variable %}}
 
-#### Serverless
+#### サーバーレス
 
 If you are using Serverless, you have two options depending on your serverless application's setup.
 
@@ -276,7 +276,7 @@ If you are using Serverless, you have two options depending on your serverless a
 
 {{% sci-dd-tags-env-variable %}}
 
-#### Host
+#### ホスト
 
 If you are using a host, configure your application with the `DD_TAGS` environment variable.
 
@@ -297,7 +297,7 @@ If you are using Docker containers, you have two options: using Docker or config
 
 {{% sci-dd-git-env-variables %}}
 
-#### Serverless
+#### サーバーレス
 
 If you are using Serverless, you have two options depending on your serverless application's setup.
 
@@ -309,7 +309,7 @@ If you are using Serverless, you have two options depending on your serverless a
 
 {{% sci-dd-git-env-variables %}}
 
-#### Host
+#### ホスト
 
 If you are using a host, configure your application with `DD_GIT_*` environment variables.
 
@@ -318,11 +318,11 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Build inside a Docker container
+### Docker コンテナ内でのビルド
 
 If your build process is executed in CI within a Docker container, perform the following steps to ensure that the build can access Git information:
 
-1. Add the following text to your `.dockerignore` file. This ensures that the build process is able to access a subset of the `.git` folder, enabling it to determine the git commit hash and repository URL.
+1. 次のテキストを `.dockerignore` ファイルに追加します。これにより、ビルドプロセスが `.git` フォルダのサブセットにアクセスできるようになり、git のコミットハッシュとリポジトリの URL を特定できるようになります。
 
    ```
    !.git/HEAD
@@ -330,7 +330,7 @@ If your build process is executed in CI within a Docker container, perform the f
    !.git/refs
    ```
 
-2. Add the following line of code to your `Dockerfile`. Ensure that it is placed before the actual build is ran.
+2. 以下のコードを `Dockerfile` に追加してください。実際のビルドが実行される前に配置されていることを確認してください。
 
    ```
    COPY .git ./.git
@@ -348,22 +348,22 @@ To link your telemetry with source code, your repository metadata must be synchr
 
 The source code integration supports the following Git providers:
 
-| Provider | Context Links Support | Code Snippets Support |
+| プロバイダー | Context Links Support | Code Snippets Support |
 |---|---|---|
 | GitHub SaaS (github.com) | Yes | Yes |
 | GitHub Enterprise Server | Yes | Yes |
-| GitLab SaaS (gitlab.com) | Yes | Yes |
+| GitLab SaaS (gitlab.com) | Yes | はい |
 | GitLab self-managed | Yes | No |
 | Bitbucket | Yes | No |
-| Azure DevOps Services | Yes | No |
-| Azure DevOps Server | Yes | No |
+| Azure DevOps Services | はい | いいえ |
+| Azure DevOps Server | はい | いいえ |
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
 Install Datadog's [GitHub integration][101] on the [GitHub integration tile][102] to allow Datadog to synchronize your repository metadata automatically. When specifying permissions on the integration tile, select at least **Read** permissions for **Contents**.
 
-Setting up the GitHub integration also allows you to see inline code snippets in [**Error Tracking**][103], [**Continuous Profiler**][104], [**Serverless Monitoring**][105], [**CI Visibility**][106], and [**Application Security Monitoring**][107].
+GitHub インテグレーションを設定することで、[**Error Tracking**][103]、[**Continuous Profiler**][104]、[**Serverless Monitoring**][105]、[**CI Visibility**][106]、[**Application Security Monitoring**][107] でインラインコードスニペットを確認することもできます。
 
 [101]: https://docs.datadoghq.com/integrations/github/
 [102]: https://app.datadoghq.com/integrations/github/
@@ -382,17 +382,17 @@ Repositories from self-managed GitLab instances are not supported out-of-the-box
 
 To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][2] command.
 
-When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
+Git リポジトリ内で `datadog-ci git-metadata upload` を実行すると、Datadog はリポジトリの URL、現在のブランチのコミット SHA、そして追跡したファイルのパスのリストを受け取ります。
 
 Run this command for every commit that you need to be synchronized with Datadog.
 
 If you are using [gitlab.com][1], this also allows you to see inline code snippets in [**Error Tracking**][3], [**Continuous Profiler**][4], [**Serverless Monitoring**][5], [**CI Visibility**][6], and [**Application Security Monitoring**][7].
 
-### Validation
+### 検証
 
-To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline.
+データが収集されていることを確認するために、CI パイプラインで `datadog-ci git-metadata upload` を実行します。
 
-You can expect to see the following output:
+以下のような出力が期待できます。
 
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
@@ -409,7 +409,7 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my
 [7]: /security/application_security/
 
 {{% /tab %}}
-{{% tab "Other Git Providers" %}}
+{{% tab "その他の Git プロバイダー" %}}
 
 <div class="alert alert-warning">
 Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the source code integration. To enable this feature, <a href="/help">contact Support</a>.
@@ -417,15 +417,15 @@ Repositories on self-hosted instances or private URLs are not supported out-of-t
 
 To link telemetry with your source code, upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command.
 
-When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
+Git リポジトリ内で `datadog-ci git-metadata upload` を実行すると、Datadog はリポジトリの URL、現在のブランチのコミット SHA、そして追跡したファイルのパスのリストを受け取ります。
 
 Run this command for every commit that you need to be synchronized with Datadog.
 
-### Validation
+### 検証
 
-To ensure the data is being collected, run `datadog-ci git-metadata upload` in your CI pipeline.
+データが収集されていることを確認するために、CI パイプラインで `datadog-ci git-metadata upload` を実行します。
 
-You can expect to see the following output:
+以下のような出力が期待できます。
 
 ```
 Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my-git-server.com:my-org/my-repository.git.
@@ -437,17 +437,17 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@my
 {{% /tab %}}
 {{< /tabs >}}
 
-## Usage
+## 使用方法
 
-### Links to Git providers
+### Git プロバイダーへのリンク
 
 {{< tabs >}}
-{{% tab "Error Tracking" %}}
-You can see links from stack frames to their source repository in [Error Tracking][1].
+{{% tab "エラー追跡" %}}
+[エラー追跡][1]でスタックフレームからソースリポジトリへのリンクを見ることができます。
 
-1. Navigate to [**APM** > **Error Tracking**][2].
-2. Click on an issue. The **Issue Details** panel appears on the right.
-3. Under **Latest Event**, click the **View** button on the right of a frame or select **View file**, **View Git blame**, or **View commit** to be redirected to your source code management tool.
+1. [**APM** > **Error Tracking**][2] の順に移動します。
+2. 課題をクリックします。右側に **Issue Details** パネルが表示されます。
+3. **Latest Event** の下で、フレームの右側にある **View** ボタンをクリックするか、**View file**、**View Git blame**、**View commit** を選択すると、ソースコード管理ツールにリダイレクトされます。
 
 {{< img src="integrations/guide/source_code_integration/error-tracking-panel-full.png" alt="A view repository button with three options (view file, view blame, and view commit) available on the right side of an error stack trace in Error Tracking, along with inline code snippets in the stack trace" style="width:100%;">}}
 
@@ -461,7 +461,7 @@ If you're using the GitHub integration, or if you're hosting your repositories o
 
 You can see a source code preview for profile frames in the [Continuous Profiler][1].
 
-1. Navigate to [**APM** > **Profile Search**][2].
+1. [**APM** > **Profile Search**][2] の順に移動します。
 2. Hover your cursor over a method in the flame graph.
 3. If needed, press `Opt` or `Alt` to enable the preview.
 
@@ -469,11 +469,11 @@ You can see a source code preview for profile frames in the [Continuous Profiler
 
 You can also see links from profile frames to their source repository. This is supported for profiles broken down by line, method, or file.
 
-1. Navigate to [**APM** > **Profile Search**][2].
+1. [**APM** > **Profile Search**][2] の順に移動します。
 2. Hover your cursor over a method in the flame graph. A kebab icon with the **More actions** label appears on the right.
-3. Click **More actions** > **View in repo** to open the trace in its source code repository.
+3. *More actions** > **View in repo** をクリックし、トレースをソースコードリポジトリで開きます。
 
-{{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
+{{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Continuous Profiler から GitHub へのリンク" style="width:100%;">}}
 
 [1]: /profiler/
 [2]: https://app.datadoghq.com/profiling/search
@@ -540,7 +540,7 @@ If you're using the GitHub integration, click **Connect to preview** on error fr
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

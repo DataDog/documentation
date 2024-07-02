@@ -25,7 +25,7 @@
 "categories":
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md"
 "display_on_public_website": true
@@ -66,15 +66,15 @@
 
 This integration allows [PerimeterX][1] customers to forward their PerimeterX related logs and events to Datadog.
 
-## Setup
+## セットアップ
 
 All configuration is done by PerimeterX. See the [PerimeterX documentation][2] regarding third party integrations.
 
-### Installation
+### インストール
 
 No installation is required on your host.
 
-### Configuration
+### 構成
 
 1. Generate a new Integration API Key in your [Datadog portal][3].
 2. Open a support ticket with [PerimeterX Support][4] and request the Datadog log export integration. Support needs the following information:
@@ -91,21 +91,21 @@ Once PerimeterX Support has confirmed the Datadog integration is complete, perfo
 3. Perform a search with a query filter of "Source:perimeterx"
 4. Confirm you are receiving logs from PerimeterX (it may take a few minutes before logs start appearing).
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 PerimeterX does not include metrics for [requests][5].
 
-### Service Checks
+### サービスチェック
 
 PerimeterX does not include any service checks.
 
-### Events
+### イベント
 
 PerimeterX does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

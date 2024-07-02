@@ -25,7 +25,7 @@
   "support_email": zjohnson@ns1.com
 "categories":
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/ns1/README.md"
 "display_on_public_website": true
@@ -66,62 +66,62 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
-This integration monitors [NS1][1] services through the Datadog Agent
+このインテグレーションは、Datadog Agent を通じて [NS1][1] サービスを監視します。
 
 ![Snap][2]
 
-## Setup
+## セットアップ
 
-The NS1 check is not included in the [Datadog Agent][3] package, so you need to install it.
+NS1 チェックは [Datadog Agent][3] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### Installation
+### インストール
 
-For Agent v7.21+ / v6.21+, follow the instructions below to install the NS1 check on your host. See [Use Community Integrations][4] to install with the Docker Agent or earlier versions of the Agent.
+Agent v7.21 / v6.21 以降の場合は、下記の手順に従い NS1 チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][4]をご参照ください。
 
-1. Run the following command to install the Agent integration:
+1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
    ```shell
    datadog-agent integration install -t datadog-ns1==<INTEGRATION_VERSION>
    ```
 
-2. Configure your integration similar to core [integrations][5].
+2. コアの[インテグレーション][5]と同様にインテグレーションを構成します。
 
-### Configuration
+### 構成
 
-1. Edit the `ns1.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting NS1 metrics. See the sample [ns1.d/conf.yaml][6] for all available configuration options.
+1. NS1 メトリクスの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ns1.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、サンプル [ns1.d/conf.yaml][6] を参照してください。
 
-2. [Restart the Agent][7].
+2. [Agent を再起動します][7]。
 
-### Validation
+### 検証
 
-Run the [Agent's status subcommand][5] and look for `ns1` under the Checks section.
+[Agent の status サブコマンド][5]を実行し、Checks セクションで `ns1` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "ns1" >}}
 
 
-### Events
+### イベント
 
-The NS1 integration does not include any events.
+NS1 インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "ns1" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][10].
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [NS1 + Datadog Integration (Outbound) Quick Start Guide][11]
-- [Monitor NS1 with Datadog][12]
+- [NS1 + Datadog インテグレーション (アウトバウンド) クイックスタートガイド][11]
+- [Datadog での NS1 モニタリング][12]
 
 
 [1]: https://ns1.com/

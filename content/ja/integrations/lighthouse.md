@@ -22,7 +22,7 @@
   "support_email": mustin.eric@gmail.com
 "categories":
 - developer tools
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/lighthouse/README.md"
 "display_on_public_website": true
@@ -61,11 +61,11 @@ Get metrics from [Google Chrome Lighthouse][1] in real time to:
 - Visualize and monitor Lighthouse stats.
 - Track and audit scores for your websites accessibility, best practices, performance, PWA, and SEO audit scores.
 
-## Setup
+## セットアップ
 
 The Lighthouse check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Lighthouse check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -77,7 +77,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Lighthou
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `lighthouse.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5] to start collecting your Lighthouse [metrics](#metrics).
    See the [sample lighthouse.d/conf.yaml][6] for all available configuration options.
@@ -155,21 +155,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Lighthou
 
 [Run the Agent's status subcommand][12] and look for `lighthouse` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "lighthouse" >}}
 
 
-### Events
+### イベント
 
 The Lighthouse integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Lighthouse integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][14].
 

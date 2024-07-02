@@ -16,9 +16,9 @@ The correlation between Datadog APM and Datadog Log Management is improved by th
 
 It is recommended to configure your application's tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best experience for adding `env`, `service`, and `version`. See the [unified service tagging][2] documentation for more details.
 
-Before correlating traces with logs, ensure your logs are either sent as JSON, or [parsed by the proper language level log processor][3]. Your language level logs _must_ be turned into Datadog attributes in order for traces and logs correlation to work.
+トレースとログに相関性を持たせる前に、ログが JSON として送信されているか、[適切な言語レベルログプロセッサーによってパースされている][3]ことを確認します。トレースとログの相関が機能するためには、言語レベルログが Datadog 属性に変換される_必要があります_。
 
-To learn more about automatically or manually connecting your logs to your traces, select your language below:
+自動または手動でログをトレースに接続する方法の詳細については、以下から言語を選択してください。
 
 {{< partial name="apm/apm-connect-logs-and-traces.html" >}}
 

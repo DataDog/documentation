@@ -15,7 +15,7 @@
 - incidents
 - issue tracking
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/pagerduty/README.md"
 "display_on_public_website": true
@@ -112,7 +112,7 @@ PagerDuty without having to context switch between tools.
 - Ability to navigate into PagerDuty to view individual incidents and their services as well as into your incident list
 
 
-## Setup
+## セットアップ
 
 1. In your Datadog account, navigate to Dashboards. Select the dashboard that you would like to add the Status Dashboard widget to, or [create a new dashboard][1].
 

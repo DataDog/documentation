@@ -9,100 +9,100 @@ further_reading:
   text: Write an Agent Custom Check
 ---
 
-Functions are used to submit metrics with a [custom Agent check][1]. Different functions are available depending on the [metric type][2]. Depending on the function used, the submission and actual metric type stored within Datadog might differ.
+関数は、[カスタム Agent チェック][1]を使用してメトリクスを送信する際に使います。[メトリクスタイプ][2]に応じ、さなざまな関数が利用できます。使用した関数により、Datadog 内に保存されるメトリクスタイプと送信時のものが異なる場合があります。
 
-## Functions
+## 関数
 
 {{< tabs >}}
 {{% tab "Count" %}}
 
 ### `monotonic_count()`
 
-This function is used to track a raw COUNT metric that always increases. The Datadog Agent calculates the delta between each submission. Samples that have a lower value than the previous sample are ignored. Lower values usually indicate the underlying raw COUNT metric has been reset. The function can be called multiple times during a check's execution.
+この関数は、増加し続ける未加工の COUNT メトリクスを追跡するために使います。Datadog Agent は各送信の間の差を計算します。直前のサンプルより小さな値を持つサンプルは無視されます。これは通常、基になる未加工の COUNT メトリクスがリセットされたことを意味します。関数はチェックの実行中に複数回呼び出すことができます。
 
-For example, submitting samples 2, 3, 6, 7 sends a value of 5 (7-2) during the first check execution. Submitting the samples 10, 11 on the same `monotonic_count` sends a value of 4 (11-7) during the second check execution.
+例えば、サンプル 2、3、6、7 を送信すると、最初のチェックの実行中に 5 (7-2) が送信されます。同じ `monotonic_count` でサンプル 10、11 を送信すると、次のチェックの実行中に 4 (11-7) が送信されます。
 
-**Note**: Metrics submitted with this function are stored with a `COUNT` metric type in Datadog. Each value in the stored timeseries is a delta of the metric's value between samples (not time-normalized).
+**注**: この関数で送信されたメトリクスは、Datadog に `COUNT` メトリクスタイプで保存されます。時系列に保存される値は、(時間正規化されない) サンプル間のメトリクス値の差分です。
 
-Function template:
+関数テンプレート：
 
 ```python
 self.monotonic_count(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Parameter     | Type            | Required | Default Value | Description                                                                         |
+| パラメーター     | タイプ            | 必須 | デフォルト値 | 説明                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | String          | Yes      | -             | The name of the metric.                                                             |
-| `value`       | Float           | Yes      | -             | The value for the metric.                                                           |
-| `tags`        | List of strings | No       | -             | A list of tags to associate with this metric.                                       |
-| `hostname`    | String          | No       | Current host  | A hostname to associate with this metric.                                           |
-| `device_name` | String          | No       | -             | Deprecated. Adds a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
+| `name`        | 文字列          | はい      | -             | メトリクスの名前                                                             |
+| `value`       | Float           | はい      | -             | メトリクスの値                                                           |
+| `tags`        | 文字列のリスト | いいえ       | -             | メトリクスに関連付けられているタグのリスト                                       |
+| `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
+| `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
 ### `count()`
 
-This function submits the number of events that occurred during the check interval. It can be called multiple times during a check's execution, each sample being added to the value that is sent.
+この関数は、チェック間隔の間に発生したイベントの数を送信します。チェックの実行中に複数回呼び出すことができます。各サンプルは、送信される値に追加されます。
 
-**Note**: Metrics submitted with this function are stored with a `COUNT` metric type in Datadog. Each value in the stored timeseries is a delta of the metric's value between samples (not time-normalized).
+**注**: この関数で送信されたメトリクスは、Datadog に `COUNT` メトリクスタイプで保存されます。時系列に保存される値は、(時間正規化されない) サンプル間のメトリクス値の差分です。
 
-Function template:
+関数テンプレート：
 
 ```python
 self.count(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Parameter     | Type            | Required | Default Value | Description                                                                         |
+| パラメーター     | タイプ            | 必須 | デフォルト値 | 説明                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | String          | Yes      | -             | The name of the metric.                                                             |
-| `value`       | Float           | Yes      | -             | The value for the metric.                                                           |
-| `tags`        | List of strings | No       | -             | A list of tags to associate with this metric.                                       |
-| `hostname`    | String          | No       | current host  | A hostname to associate with this metric.                                           |
-| `device_name` | String          | No       | -             | Deprecated. Adds a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
+| `name`        | 文字列          | はい      | -             | メトリクスの名前                                                             |
+| `value`       | Float           | はい      | -             | メトリクスの値                                                           |
+| `tags`        | 文字列のリスト | いいえ       | -             | メトリクスに関連付けられているタグのリスト                                       |
+| `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
+| `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
 {{% /tab %}}
 {{% tab "Gauge" %}}
 
 ### `gauge()`
 
-This function submits the value of a metric at a given timestamp. If called multiple times during a check's execution for a metric only the last sample is used.
+この関数は、特定のタイムスタンプでメトリクスの値を送信します。チェックの実行中に複数回呼び出されると、メトリクスの最後のサンプルだけが使用されます。
 
-**Note**: Metrics submitted with this function are stored with a `GAUGE` metric type in Datadog.
+**注**: この関数で送信されたメトリクスは、Datadog に `GAUGE` メトリクスタイプで保存されます。
 
-Function template:
+関数テンプレート：
 
 ```python
 self.gauge(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Parameter     | Type            | Required | Default Value | Description                                                                         |
+| パラメーター     | タイプ            | 必須 | デフォルト値 | 説明                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | String          | Yes      | -             | The name of the metric.                                                             |
-| `value`       | Float           | Yes      | -             | The value for the metric.                                                           |
-| `tags`        | List of strings | No       | -             | A list of tags to associate with this metric.                                       |
-| `hostname`    | String          | No       | current host  | A hostname to associate with this metric.                                           |
-| `device_name` | String          | No       | -             | Deprecated. Adds a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
+| `name`        | 文字列          | はい      | -             | メトリクスの名前                                                             |
+| `value`       | Float           | はい      | -             | メトリクスの値                                                           |
+| `tags`        | 文字列のリスト | いいえ       | -             | メトリクスに関連付けられているタグのリスト                                       |
+| `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
+| `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
 {{% /tab %}}
 {{% tab "Rate" %}}
 
 ### `rate()`
 
-This function submits the sampled raw value of your RATE metric. The Datadog Agent calculates the delta of that metric's value between two submission, and divides it by the submission interval to get the rate. This function should only be called once during a check, otherwise it throws away any value that is less than a previously submitted value.
+この関数は、サンプリングされた RATE メトリクスの未加工の値を送信します。Datadog Agent は、2 つの送信の間のメトリクス値の差分を送信の間隔で割ることで、レートを算出します。この関数は 1 回のチェックで 1 度だけ呼び出すことができます。複数回呼び出すと、以前送信された値より小さな値は無視されます。
 
-**Note**: Metrics submitted with this function are stored as a `GAUGE` metric type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value between samples.
+**注**: この関数で送信されたメトリクスは、Datadog に `GAUGE` メトリクスタイプで保存されます。時系列に保存される値は、サンプル間のメトリクス値の時間正規化された差分です。
 
-Function template:
+関数テンプレート：
 
 ```python
 self.rate(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Parameter     | Type            | Required | Default Value | Description                                                                         |
+| パラメーター     | タイプ            | 必須 | デフォルト値 | 説明                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | String          | Yes      | -             | The name of the metric.                                                             |
-| `value`       | Float           | Yes      | -             | The value for the metric.                                                           |
-| `tags`        | List of strings | No       | -             | A list of tags to associate with this metric.                                       |
-| `hostname`    | String          | No       | current host  | A hostname to associate with this metric.                                           |
-| `device_name` | String          | No       | -             | Deprecated. Adds a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
+| `name`        | 文字列          | はい      | -             | メトリクスの名前                                                             |
+| `value`       | Float           | はい      | -             | メトリクスの値                                                           |
+| `tags`        | 文字列のリスト | いいえ       | -             | メトリクスに関連付けられているタグのリスト                                       |
+| `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
+| `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
 {{% /tab %}}
 
@@ -110,40 +110,40 @@ self.rate(name, value, tags=None, hostname=None, device_name=None)
 
 ### `histogram()`
 
-This function submits the sample of a histogram metric that occurred during the check interval. It can be called multiple times during a check's execution. Each sample is added to the statistical distribution of the set of values for this metric.
+この関数は、チェック間隔の間に発生したヒストグラムメトリクスのサンプルを送信します。チェックの実行中に複数回呼び出すことができます。各サンプルは、このメトリクスの値セットの統計的分布に追加されます。
 
-**Note**: All metric aggregation produced are stored as a `GAUGE` metric type in Datadog, except the `<METRIC_NAME>.count` that is stored as a `RATE` metric type in Datadog.
+**注**: 生成されるすべてのメトリクス集計は、`RATE` メトリクスタイプとして保存される `<METRIC_NAME>.count` を除き、`GAUGE` メトリクスタイプとして Datadog に保存されます。 
 
-Function template:
+関数テンプレート：
 
 ```python
 self.histogram(name, value, tags=None, hostname=None, device_name=None)
 ```
 
-| Parameter     | Type            | Required | Default Value | Description                                                                         |
+| パラメーター     | タイプ            | 必須 | デフォルト値 | 説明                                                                         |
 |---------------|-----------------|----------|---------------|-------------------------------------------------------------------------------------|
-| `name`        | String          | Yes      | -             | The name of the metric.                                                             |
-| `value`       | Float           | Yes      | -             | The value for the metric.                                                           |
-| `tags`        | List of strings | No       | -             | A list of tags to associate with this metric.                                       |
-| `hostname`    | String          | No       | current host  | A hostname to associate with this metric.                                           |
-| `device_name` | String          | No       | -             | Deprecated. Adds a tag in the form `device:<DEVICE_NAME>` to the tags list instead. |
+| `name`        | 文字列          | はい      | -             | メトリクスの名前                                                             |
+| `value`       | Float           | はい      | -             | メトリクスの値                                                           |
+| `tags`        | 文字列のリスト | いいえ       | -             | メトリクスに関連付けられているタグのリスト                                       |
+| `hostname`    | 文字列          | いいえ       | 現在のホスト  | メトリクスに関連付けられているホスト名                                           |
+| `device_name` | 文字列          | いいえ       | -             | 推奨されません。代わりにタグリストに `device:<DEVICE_NAME>` 形式のタグを追加します。 |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Tutorial
+## チュートリアル
 
-Follow the steps below to create a [custom Agent check][2] that sends all metric types periodically:
+以下の手順に従い、すべてのメトリクスタイプを定期的に送信する[カスタム Agent チェック][2]を作成します。
 
-1. Create the directory `metrics_example.d/` in the `conf.d/` folder at the root of your [Agent's configuration directory][3].
+1. [Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーにディレクトリ `metrics_example.d/` を作成します。
 
-2. In `metrics_example.d/` folder, create an empty configuration file named `metrics_example.yaml` with the following content:
+2. `metrics_example.d/` フォルダーに次の内容で空のコンフィギュレーションファイルを作成し、`metrics_example.yaml` と名付けます。
 
     ```yaml
     instances: [{}]
     ```
 
-3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder. Create a custom check file named `metrics_example.py` with the content below:
+3. `conf.d/` フォルダーの 1 つ上のレベルで、`checks.d/` フォルダーに移動します。次の内容でカスタムチェックファイルを作成し、`metrics_example.py` と名付けます。
 
     ```python
     import random
@@ -199,8 +199,8 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
             )
     ```
 
-4. [Restart the Agent][4].
-5. Validate your custom check is running correctly with the [Agent's status subcommand][5]. Look for `metrics_example` under the Checks section:
+4. [Agent を再起動します][4]。
+5. [Agent の status サブコマンド][5]を使用して、カスタムチェックが正しく実行されていることを確認します。Checks セクションで `metrics_example` を探します。
 
     ```text
     =========
@@ -224,9 +224,9 @@ Follow the steps below to create a [custom Agent check][2] that sends all metric
         (...)
     ```
 
-6. Verify your metrics are reporting to Datadog on your [Metric Summary page][6].
+6. [メトリクスの概要ページ][6]でメトリクスが Datadog に報告を行っているかを確認します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

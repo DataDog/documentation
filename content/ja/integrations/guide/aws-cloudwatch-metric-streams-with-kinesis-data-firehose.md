@@ -142,7 +142,7 @@ If you set streaming up through the [AWS Console](?tab=awsconsole#installation):
 
 Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][4] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
 
-## Troubleshooting
+## トラブルシューティング
 
 To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][5].
 

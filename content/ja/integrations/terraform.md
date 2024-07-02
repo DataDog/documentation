@@ -20,7 +20,7 @@
 - configuration & deployment
 - developer tools
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/terraform/README.md"
 "display_on_public_website": true
@@ -62,13 +62,13 @@
 
 The Datadog Terraform provider allows you to interact with the Datadog API through a Terraform configuration. You can manage your Datadog resources, such as Dashboards, Monitors, Logs Configuration, etc, with this configuration.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Datadog Terraform provider is available through the [Terraform Registry][1].
 
-### Configuration
+### 構成
 
 1. [Install Terraform][2].
 2. Create a directory to contain the Terraform configuration files, for example: `terraform_config/`.
@@ -143,21 +143,21 @@ Send a `terraform destroy` event:
   dogwrap -n "terraform destroy" -k $DD_API_KEY --submit_mode all --tags="source:terraform" "terraform destroy -no-color"
   ```
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 Terraform does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 Terraform does not include any service checks.
 
-### Events
+### イベント
 
 Terraform does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

@@ -1,11 +1,11 @@
 ---
+title: Compatible semantic tags
 aliases:
-- /ja/dashboards/guide/semantic_colors
+- /dashboards/guide/semantic_colors
 further_reading:
-- link: /dashboards/guide/widget_colors/#categorical-palettes
+- link: "/dashboards/guide/widget_colors/#categorical-palettes"
   tag: Documentation
-  text: グラフに適した色の選択
-title: 互換性のあるセマンティックタグ
+  text: Selecting the right colors for your graphs
 ---
 
 ## 概要
@@ -36,6 +36,6 @@ title: 互換性のあるセマンティックタグ
 
 {{% semantic-color %}}
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

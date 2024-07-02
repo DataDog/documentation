@@ -25,7 +25,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - containers
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/crio/README.md"
 "display_on_public_website": true
@@ -65,13 +65,13 @@
 
 This check monitors [CRI-O][1].
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The integration relies on the `--enable-metrics` option of CRI-O that is disabled by default, when enabled metrics are exposed at `127.0.0.1:9090/metrics`.
 
-### Configuration
+### 構成
 
 1. Edit the `crio.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your CRI-O performance data. See the [sample crio.d/conf.yaml][2] for all available configuration options.
 
@@ -81,20 +81,20 @@ The integration relies on the `--enable-metrics` option of CRI-O that is disable
 
 [Run the Agent's status subcommand][4] and look for `crio` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 CRI-O collects metrics about the count and latency of operations that are done by the runtime.
 The Datadog-CRI-O integration collects CPU and memory usage of the CRI-O golang binary itself.
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "crio" >}}
 
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "crio" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

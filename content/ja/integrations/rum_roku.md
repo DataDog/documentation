@@ -9,10 +9,10 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-- metrics
+- モニター
 - network
 - tracing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rum_roku/README.md"
 "display_on_public_website": true
@@ -50,56 +50,56 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
 With the Datadog [Roku integration][1], you can spend less time triaging issues and more time releasing new features by:
 
 - Debugging the root cause of slow performance issues and application crashes, network requests, or large media files
 - Improving application responsiveness, setting up service level indicators (SLIs), and diagnosing issues with out-of-the-box dashboards and real-time metrics
-- Intelligently grouping high-volume application errors into a manageable set of unique issues
+- 大量のアプリケーションエラーを管理可能な固有の問題群にインテリジェントにグループ化
 
-Correlate the impact of the user experience on your business by:
+ユーザーエクスペリエンスがビジネスに与える影響を関連付けます。
 
 - Analyzing critical user experience data such as screen engagement by demographics, version releases, or any custom attributes, to reach your business KPIs
-- Understanding user behavior trends with customizable analytics and geographical maps
+- カスタマイズ可能なアナリティクスと地理的マップによりユーザー行動傾向を把握
 
-Monitor the end-to-end health of your application by:
+アプリケーションのエンドツーエンドの健全性を監視します。
 
-- Pivoting from your user experience data to backend traces, runtime metrics, and logs for the complete context when investigating issues
-- Debugging crashes faster by unifying client-side and server-side metrics, traces, and logs
-- Unifying full-stack monitoring in a single platform for frontend and backend teams
+- ユーザーエクスペリエンスデータからバックエンドトレース、ランタイムメトリクス、ログに視点を移し、問題を調査する際の完全なコンテクストを提供
+- クライアントサイドとサーバーサイドのメトリクス、トレース、ログを統合し、クラッシュのデバッグを高速化
+- フロントエンドとバックエンドのチーム向けに、フルスタックモニタリングを単一プラットフォームで実現
 
-## Setup
+## セットアップ
 
-### Collect RUM events
+### RUM イベントの収集
 
 To start collecting Real User Monitoring events from your application, see [Roku Monitoring][2]. Additionally, you can [Connect RUM and Traces][3].
 
-### Collect logs
+### ログの収集
 
 To start forwarding your Roku application's logs to Datadog, see [Roku Log Collection][4].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Roku integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][5]. 
 
-### Events
+### イベント
 
 For more information about events and attributes, see [RUM Roku Data Collected][6].
 
-### Service Checks
+### サービスチェック
 
 The Roku integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog Support][7].
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
 - [RUM Roku Channel Monitoring][2] documentation
 - [Monitor your Roku channels with Datadog RUM][8] blog post

@@ -33,7 +33,7 @@
 "categories":
 - log collection
 - developer tools
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/temporal/README.md"
 "display_on_public_website": true
@@ -72,42 +72,42 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Temporal][1] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [Temporal][1] を監視します。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The Temporal check is included in the [Datadog Agent][3] package.
-No additional installation is needed on your server.
+Temporal チェックは [Datadog Agent][3] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-1. Configure your Temporal services to expose metrics via a `prometheus` endpoint by following the [official Temporal documentation][4].
+1. [Temporal の公式ドキュメント][4]に従って、`prometheus` エンドポイント経由でメトリクスを公開するように Temporal サービスを構成してください。
 
-2. Edit the `temporal.d/conf.yaml` file located in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Temporal performance data. 
+2. Temporal のパフォーマンスデータの収集を開始するには、Agent の構成ディレクトリのルートの `conf.d/` フォルダーにある `temporal.d/conf.yaml` ファイルを編集します。
 
-To get started, configure the `openmetrics_endpoint` option to match the `listenAddress` and `handlerPath` options from your Temporal server configuration.
+まずは、Temporal サーバーの構成にある `listenAddress` と `handlerPath` オプションに合うように `openmetrics_endpoint` オプションを構成します。
 
-Note that when Temporal services in a cluster are deployed independently, every service exposes its own metrics. As a result, you need to configure the `prometheus` endpoint for every service that you want to monitor and define a separate `instance` on the integration's configuration for each of them.
+クラスター内の Temporal サービスが独立してデプロイされている場合、各サービスは独自のメトリクスを公開することに注意してください。そのため、監視したいサービスごとに `prometheus` エンドポイントを構成し、それぞれのサービスに対してインテグレーションの構成で別の `instance` を定義する必要があります。
 
-See the [sample temporal.d/conf.yaml][5] for all available configuration options.
+使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル temporal.d/conf.yaml][5] を参照してください。
 
-#### Log collection
+#### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Configure your Temporal Cluster to output logs to a file by following the [official documentation][6].
+2. [公式ドキュメント][6]に従って、Temporal Cluster がログをファイルに出力するように構成します。
 
-3. Uncomment and edit the logs configuration block in your `temporal.d/conf.yaml` file, and set the `path` to point to the file you configured on your Temporal Cluster:
+3. `temporal.d/conf.yaml` ファイルの logs 構成ブロックのコメントを解除して編集し、`path` が Temporal Cluster で構成したファイルを指すように設定します。
 
   ```yaml
   logs:
@@ -116,37 +116,37 @@ See the [sample temporal.d/conf.yaml][5] for all available configuration options
       source: temporal
   ```
 
-4. [Restart the Agent][7].
+4. [Agent を再起動します][7]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][8] and look for `temporal` under the Checks section.
+[Agent のステータスサブコマンドを実行][8]し、Checks セクションで `temporal` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "temporal" >}}
 
 
-### Events
+### イベント
 
-The Temporal integration does not include any events.
+Temporal インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "temporal" >}}
 
 
-### Logs
+### ログ
 
-The Temporal integration can collect logs from the Temporal Cluster and forward them to Datadog. 
+Temporal インテグレーションは、Temporal Cluster からログを収集し、Datadog に転送することができます。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][11].
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
 - [Monitor the health of your Temporal Server with Datadog][12]
 

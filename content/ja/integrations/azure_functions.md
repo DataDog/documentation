@@ -3,7 +3,7 @@
 - azure
 - cloud
 - provisioning
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure Functions metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_functions/"
@@ -31,27 +31,27 @@ Get metrics from Azure Functions to:
 - Visualize your function performance and utilization.
 - Correlate the performance of your Azure Functions with the rest of your apps.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_functions" >}}
 
 
-### Events
+### イベント
 
 The Azure Functions integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Functions integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

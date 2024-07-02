@@ -30,7 +30,7 @@
 - marketplace
 - cloud
 - metrics
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -98,7 +98,7 @@ GitLab is a DevOps software package that combines the ability to develop, secure
 + Installed runners
 + Total and open issues
 
-### Dashboards
+### ダッシュボード
 This integration provides an out-of-the-box dashboard called **RapDev GitLab Dashboard** which displays data submitted to Datadog over time, and includes environment variables to further narrow down a search on a specific project or host.
 
 ## Support

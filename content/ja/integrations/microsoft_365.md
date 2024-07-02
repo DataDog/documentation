@@ -2,7 +2,7 @@
 "categories":
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Connect to Microsoft 365 to pull an organization's audit logs into Datadog's logging platform."
 "doc_link": "https://docs.datadoghq.com/integrations/microsoft_365/"
@@ -34,9 +34,9 @@ Integrate with Microsoft 365 to:
 - Set monitors on events from your Microsoft 365 platform
 - Leverage the Datadog suite of security tools to set security rules
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Use the [Datadog Microsoft 365 tile][1] to install the integration.
 
@@ -46,7 +46,7 @@ Optionally add comma separated custom tags that get attached to every log for th
 
 **Note**: Your organization must have [audit logging enabled][2] to use Datadog audit logging.
 
-## Data Collected
+## 収集データ
 
 ### Logs
 
@@ -149,7 +149,7 @@ You can use Datadog's [Cloud SIEM][28] to detect real-time threats in your envir
 
 {{< img src="integrations/microsoft_365/microsoft_365_rules.png" alt="The out of the box security rules page with Cloud SIEM selected and Microsoft 365 entered in the search bar" style="width:80;" popup="true">}}
 
-### Metrics
+### メトリクス
 
 The Microsoft 365 integration does not collect any metrics.
 
@@ -157,7 +157,7 @@ The Microsoft 365 integration does not collect any metrics.
 
 The Microsoft 365 integration does not collect any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Datadog's log intake only supports backdating log events up to 18 hours in the past. Log events with an earlier timestamp are discarded.
 

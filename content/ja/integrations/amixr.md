@@ -27,7 +27,7 @@
 - incidents
 - notifications
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md"
 "display_on_public_website": true
@@ -80,13 +80,13 @@ Use Amixr to manage alerts with a Slack integration:
 
 ![Amixr_Interface][1]
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 No additional installation is needed on your server.
 
-### Configuration
+### 構成
 
 In Amixr:
 
@@ -113,21 +113,21 @@ In Amixr:
 
 1. Navigate to **Incidents** from the sidebar to check if the alert was received.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Amixr integration does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 The Amixr integration does not include any service checks.
 
-### Events
+### イベント
 
 The Amixr integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Amixr support][2].
 

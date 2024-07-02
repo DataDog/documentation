@@ -25,9 +25,9 @@
 "categories":
 - aws
 - cloud
-- metrics
+- モニター
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -58,40 +58,40 @@
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## Overview
+## 概要
 
-Amazon MemoryDB for Redis is a durable, in-memory database service delivering both in-memory performance and multi-Availability Zone durability.
+Amazon MemoryDB for Redis は、高いインメモリパフォーマンスと複数アベイラビリティゾーンにわたる耐久性を兼ね備えた、堅牢なインメモリデータベースサービスです。
 
-Enable this integration to see all your MemoryDB metrics in Datadog.
+このインテグレーションを有効にすると、Datadog にすべての MemoryDB メトリクスを表示できます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-If you haven't already, set up the [Amazon Web Services integration][1] first.
+[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
-### Metric collection
+### メトリクスの収集
 
-1. In the [AWS integration page][2], ensure that `MemoryDB` is enabled under the `Metric Collection` tab.
-2. Install the [Datadog - Amazon MemoryDB integration][3].
+1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `MemoryDB` が有効になっていることを確認します。
+2. [Datadog - Amazon MemoryDB インテグレーション][3]をインストールします。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_memorydb" >}}
 
 
-### Events
+### イベント
 
-The Amazon MemoryDB integration does not include any events.
+Amazon MemoryDB インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The Amazon MemoryDB integration does not include any service checks.
+Amazon MemoryDB インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

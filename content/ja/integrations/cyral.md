@@ -26,7 +26,7 @@
 "categories":
 - data stores
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/cyral/README.md"
 "display_on_public_website": true
@@ -63,11 +63,11 @@
 
 This check monitors a [Cyral][1] MySQL sidecar through the Datadog Agent.
 
-## Setup
+## セットアップ
 
 The Cyral check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Cyral check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -79,7 +79,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Cyral ch
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `cyral.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your cyral performance data. See the [sample cyral.d/conf.yaml][5] for all available configuration options.
 
@@ -97,21 +97,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Cyral ch
 
 [Run the Agent's status subcommand][7] and look for `cyral` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "cyral" >}}
 
 
-### Service Checks
+### サービスチェック
 
 Cyral does not include any service checks.
 
-### Events
+### イベント
 
 Cyral does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 ### Agent cannot connect
 

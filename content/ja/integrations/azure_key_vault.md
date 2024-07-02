@@ -4,7 +4,7 @@
 "categories":
 - cloud
 - azure
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure Key Vault metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_key_vault/"
@@ -33,19 +33,19 @@ Azure Key Vault is used to safeguard and manage cryptographic keys and secrets u
 
 Use the Datadog Azure integration to collect metrics from Azure Key Vault.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_key_vault" >}}
 
 
-### Events
+### イベント
 
 Datadog sends *credential expiry events*, which grant visibility into credential expirations for Azure app registrations, Key Vault keys, Key Vault secrets, and Key Vault certificates. The *Azure Key Vault* integration must be installed to receive events for Key Vault keys, Key Vault secrets, and Key Vault certificates.
 
@@ -59,11 +59,11 @@ You can view these events in [Event Explorer][3].
 - To collect Azure app registration expiration events, [enable access to the Microsoft Graph API][4].
 - If a certificate and its associated key and secret expire at the exact same time, one expiration event is sent for all resources.
 
-### Service Checks
+### サービスチェック
 
 The Azure Key Vault integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

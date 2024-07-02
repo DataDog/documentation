@@ -27,7 +27,7 @@
 - log collection
 - message queues
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/ibm_mq/README.md"
 "display_on_public_website": true
@@ -65,35 +65,35 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [IBM MQ][1] versions 9.1 and above.
+このチェックは [IBM MQ][1] バージョン 9.1 以降を監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The IBM MQ check is included in the [Datadog Agent][2] package.
+IBM MQ チェックは [Datadog Agent][2] パッケージに含まれています。
 
-To use the IBM MQ check, ensure that an [IBM MQ Client][3] version 9.1+ is installed (unless a compatible version of IBM MQ server is already installed on the Agent host). For example the [9.3 Redistributable client][4]. Currently, the IBM MQ check does not support connecting to an IBM MQ server on z/OS.
+IBM MQ チェックを使用するには、[IBM MQ クライアント][3]バージョン 9.1+ がインストールされていることを確認してください (Agent ホストに互換バージョンの IBM MQ サーバーがすでにインストールされている場合を除く)。例えば、[9.3 再頒布可能クライアント][4]です。現在、IBM MQ チェックは z/OS 上の IBM MQ サーバーへの接続をサポートしていません。
 
-#### On Linux
+#### Linux の場合
 
-Update your `LD_LIBRARY_PATH` to include the location of the libraries. Create this environment variable if it doesn't exist yet.
-For example, if you installed the client under `/opt`:
+ライブラリの場所を含めるために `LD_LIBRARY_PATH` を更新してください。この環境変数がまだ存在しない場合は作成してください。
+例えば、クライアントを `/opt` の下にインストールした場合
 
 ```text
 export LD_LIBRARY_PATH=/opt/mqm/lib64:/opt/mqm/lib:$LD_LIBRARY_PATH
 ```
 
-**Note**: Agent v6+ uses `upstart`, `systemd` or `launchd` to orchestrate the datadog-agent service. Environment variables may need to be added to the service configuration files at the default locations of:
+**注**: Agent v6 以上は、`upstart`、`systemd`、または `launchd` を使用して datadog-agent サービスをオーケストレーションします。場合によっては、サービス構成ファイルに環境変数を追加する必要があります。サービス構成ファイルのデフォルトの場所は、以下の通りです。
 
 - Upstart (Linux): `/etc/init/datadog-agent.conf`
 - Systemd (Linux): `/lib/systemd/system/datadog-agent.service`
 - Launchd (MacOS): `~/Library/LaunchAgents/com.datadoghq.agent.plist`
-  - This only works if MacOS SIP is disabled (might not be recommended depending on your security policy). This is due to [SIP purging `LD_LIBRARY_PATH` environ variable][5].
+  - これは、MacOS SIP が無効になっている場合にのみ機能します (セキュリティポリシーによっては推奨されない場合があります)。これは [SIP パージ `LD_LIBRARY_PATH` 環境変数][5]が原因です。
 
-Example of the configuration for `systemd`:
+以下は、`systemd` の構成の例です。
 
 ```yaml
 [Unit]
@@ -115,7 +115,7 @@ ExecStart=/opt/datadog-agent/bin/agent/agent run -p /opt/datadog-agent/run/agent
 WantedBy=multi-user.target
 ```
 
-Example of the configuration for `upstart`:
+以下は、`upstart` の構成の例です。
 
 ```conf
 description "Datadog Agent"
@@ -140,9 +140,9 @@ end script
 post-stop script
   rm -f /opt/datadog-agent/run/agent.pid
 end script
-```
+```Agent
 
-Example of the configuration for `launchd`:
+以下は、`launchd` の構成の例です。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -178,33 +178,33 @@ Example of the configuration for `launchd`:
 </plist>
 ```
 
-Each time there is an Agent update, these files are wiped and need to be updated again.
+Agent が更新されるたびに、これらのファイルは消去されるため、再更新する必要があります。
 
-Alternatively, if you are using Linux, after the MQ Client is installed ensure the runtime linker can find the libraries. For example, using ldconfig:
+または、Linux を使用している場合は、MQ クライアントのインストール後に、ランタイムリンカがライブラリを見つけることができることを確認します。たとえば、ldconfig を使用します。
 
-Put the library location in an ld configuration file.
+ld 構成ファイルにライブラリの場所を追加します。
 
 ```shell
 sudo sh -c "echo /opt/mqm/lib64 > /etc/ld.so.conf.d/mqm64.conf"
 sudo sh -c "echo /opt/mqm/lib > /etc/ld.so.conf.d/mqm.conf"
 ```
 
-Update the bindings:
+バインディングを更新します。
 
 ```shell
 sudo ldconfig
 ```
 
-#### On Windows
+#### Windows の場合
 
-There is a file called `mqclient.ini` in the IBM MQ data directory. It is normally `C:\ProgramData\IBM\MQ`.
-Configure the environment variable `MQ_FILE_PATH`, to point at the data directory.
+IBM MQ のデータディレクトリに `mqclient.ini` というファイルがあります。通常は `C:\ProgramData\IBM\MQ` です。
+環境変数 `MQ_FILE_PATH` を構成し、データディレクトリを指すようにします。
 
-### Permissions and authentication
+### アクセス許可と認証
 
-There are many ways to set up permissions in IBM MQ. Depending on how your setup works, create a `datadog` user within MQ with read only permissions and, optionally, `+chg` permissions. `+chg` permissions are required to collect metrics for [reset queue statistics][6] (`MQCMD_RESET_Q_STATS`). If you do not wish to collect these metrics you can disable `collect_reset_queue_metrics` on the configuration. Collecting reset queue statistics performance data will also reset the performance data.
+IBM MQ で権限を設定する方法はたくさんあります。セットアップの方法にもよりますが、MQ 内に `datadog` ユーザーを作成して、読み取り専用権限と、オプションで `+chg` 権限を設定します。`+chg` 権限は、[リセットキュー統計][6] (`MQCMD_RESET_Q_STATS`) のメトリクスを収集するために必要です。これらのメトリクスを収集したくない場合は、構成で `collect_reset_queue_metrics` を無効にできます。リセットキュー統計のパフォーマンスデータを収集すると、パフォーマンスデータもリセットされます。
 
-**Note**: "Queue Monitoring" must be enabled on the MQ server and set to at least "Medium". This can be done using the MQ UI or with an `mqsc` command in the server's host:
+**注**: MQ サーバーで "Queue Monitoring" を有効にして、少なくとも "Medium" に設定する必要があります。これは、サーバーのホストで MQ UI または `mqsc` コマンドを使用して実行できます。
 
 ```text
 > /opt/mqm/bin/runmqsc
@@ -222,29 +222,29 @@ No commands have a syntax error.
 All valid MQSC commands were processed.
 ```
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `ibm_mq.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your IBM MQ performance data. See the [sample ibm_mq.d/conf.yaml][1] for all available configuration options.
-   There are many options to configure IBM MQ, depending on how you're using it.
+1. IBM MQ のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ibm_mq.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ibm_mq.d/conf.yaml][1] を参照してください。
+   IBM MQ を構成するオプションはいくつもあり、使用方法によって構成は変わります。
 
-   - `channel`: The IBM MQ channel
-   - `queue_manager`: The Queue Manager named
-   - `host`: The host where IBM MQ is running
-   - `port`: The port that IBM MQ has exposed
-   - `convert_endianness`: You need to enable this if your MQ server is running on AIX or IBM i
+   - `channel`: IBM MQ チャンネル
+   - `queue_manager`: 指定されたキューマネージャー
+   - `host`: IBM MQ が実行されているホスト
+   - `port`: IBM MQ が公開しているポート
+   - `convert_endianness`: MQ サーバーが AIX または IBM i で動作している場合、これを有効にする必要があります
 
-    If you are using a username and password setup, you can set the `username` and `password`. If no username is set, the Agent process owner (`dd-agent`) is used.
+    ユーザー名とパスワードのセットアップを使用している場合、`username` と `password` を設定できます。ユーザー名が設定されていない場合、Agent プロセスの所有者 (`dd-agent`) が使用されます。
 
-    **Note**: The check only monitors the queues you have set with the `queues` parameter
+    **注**: このチェックは、`queues` パラメーターで設定したキューのみを監視します
 
     ```yaml
     queues:
@@ -252,19 +252,19 @@ To configure this check for an Agent running on a host:
       - ADMIN.QUEUE.1
     ```
 
-2. [Restart the Agent][2].
+2. [Agent を再起動します][2]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Next, point the config file to the proper MQ log files. You can uncomment the lines at the bottom of the MQ integration's config file, and amend them as you see fit:
+2. 次に、構成ファイルで適切な MQ ログファイルを指定します。MQ インテグレーションの構成ファイルの下部にある行のコメントを解除し、適宜修正してください。
 
    ```yaml
      logs:
@@ -278,100 +278,99 @@ _Available for Agent versions >6.0_
              pattern: "\d{2}/\d{2}/\d{4}"
    ```
 
-3. [Restart the Agent][2].
+3. [Agent を再起動します][2]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/ibm_mq/datadog_checks/ibm_mq/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                                                                                                           |
+| パラメーター            | 値                                                                                                                           |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `ibm_mq`                                                                                                                        |
-| `<INIT_CONFIG>`      | blank or `{}`                                                                                                                   |
-| `<INSTANCE_CONFIG>`  | `{"channel": "DEV.ADMIN.SVRCONN", "queue_manager": "datadog", "host":"%%host%%", "port":"%%port%%", "queues":["<QUEUE_NAME>"]}` |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                                                   |
+| `<INSTANCE_CONFIG>`  | `{"channel": "DEV.ADMIN.SVRCONN", "queue_manager": "datadog", "host":"%%host%%", "port":"%%port%%", "queues":["<キュー名>"]}` |
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                                                                                                                                              |
+| パラメーター      | 値                                                                                                                                                              |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `<LOG_CONFIG>` | `{"source": "ibm_mq", "service": "<SERVICE_NAME>", "log_processing_rules": {"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{2}/\d{2}/\d{4}"}}` |
+| `<LOG_CONFIG>` | `{"source": "ibm_mq", "service": "<サービス名>", "log_processing_rules": {"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{2}/\d{2}/\d{4}"}}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][7] and look for `ibm_mq` under the Checks section.
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `ibm_mq` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "ibm_mq" >}}
 
 
-### Events
+### イベント
 
-IBM MQ does not include any events.
+IBM MQ には、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "ibm_mq" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-### Reset queue statistics MQRC_NOT_AUTHORIZED permission warning
-If you are getting the following warning:
+### リセットキュー統計 MQRC_NOT_AUTHORIZED 権限の警告
+以下の警告が表示される場合
 
 ```
 Warning: Error getting pcf queue reset metrics for SAMPLE.QUEUE.1: MQI Error. Comp: 2, Reason 2035: FAILED: MQRC_NOT_AUTHORIZED
 ```
 
-This is due to the `datadog` user not having the `+chg` permission to collect reset queue metrics. To fix this, you can either give `+chg` permissions to the `datadog` user [using `setmqaut`][8] and collect queue reset metrics, or you can disable the `collect_reset_queue_metrics`:
+これは、`datadog` ユーザーがリセットキューのメトリクスを収集するための `+chg` 権限を持っていないことが原因です。これを解決するには、`datadog` ユーザーに `+chg` 権限を与えて [`setmqaut`][8] キューのリセットメトリクスを収集するか、あるいは `collect_reset_queue_metrics` を無効にしてください。
 ```yaml
     collect_reset_queue_metrics: false
 ```
 
-### High resource utilization
-The IBM MQ check performs queries on the server, sometimes these queries can be expensive and cause a degradation on the check.
+### 高いリソース利用率
+IBM MQ チェックはサーバー上でクエリを実行しますが、これらのクエリが高価になり、チェックに劣化をもたらすことがあります。
 
-If you observe that the check is taking a long time to execute or that is consuming many resources on your host,
-you can potentially reduce the scope of the check by trying the following:
+チェックの実行に時間がかかったり、ホスト上で多くのリソースを消費していることが確認された場合、以下を試してチェックの範囲を縮小できる可能性があります。
 
-* If you are using `auto_discover_queues`, try using `queue_patterns` or `queue_regex` instead to only discover certain queues. This is particularly relevant if your system creates dynamic queues.
-* If you are autodiscovering queues with `queue_patterns` or `queue_regex`, try tightening the pattern or regex so it matches _less_ queues.
-* Disable `auto_discover_channels` if you have too many channels.
-* Disable `collect_statistics_metrics`.
+* `auto_discover_queues` を使用している場合は、代わりに `queue_patterns` や `queue_regex` を使用して、特定のキューのみを検出するようにしてください。これは、システムが動的なキューを生成している場合に特に有効です。
+* `queue_patterns` や `queue_regex` を使用してキューを自動検出する場合は、パターンや正規表現を絞り込んで、より少ないキューにしかマッチしないようにしてみてください。
+* チャンネル数が多すぎる場合は `auto_discover_channels` を無効にしてください。
+* `collect_statistics_metrics` を無効にします。
 
-### Errors in the logs
-* `Unpack for type ((67108864,)) not implemented`: If you're seeing errors like this, and your MQ server is running on a IBM OS, enable `convert_endianness` and restart your Agent.
+### ログのエラー
+* `Unpack for type ((67108864,)) not implemented`: このようなエラーが発生し、MQ サーバーが IBM OS で動作している場合は、`convert_endianness` を有効にして Agent を再起動します。
 
-### Warnings in the logs
-* `Error getting [...]: MQI Error. Comp: 2, Reason 2085: FAILED: MQRC_UNKNOWN_OBJECT_NAME`: If you're seeing messages like this, it is because the integration is trying to collect metrics from a queue that doesn't exist. This can be either due to misconfiguration or, if you're using `auto_discover_queues`,  the integration can discover a [dynamic queue][9] and then, when it tries to gather its metrics, the queue no longer exists. In this case you can mitigate the issue by providing a stricter `queue_patterns` or `queue_regex`, or just ignore the warning.  
-
-
-### Other
-
-Need help? Contact [Datadog support][10].
+### ログに表示される警告
+* `Error getting [...]: MQI Error. Comp: 2, Reason 2085: FAILED: MQRC_UNKNOWN_OBJECT_NAME`: このようなメッセージが表示される場合、インテグレーションが存在しないキューからメトリクスを収集しようとしていることが原因です。これは、構成ミスか、`auto_discover_queues` を使用している場合、インテグレーションが[ダイナミックキュー][9]を発見して、メトリクスを収集しようとしたときに、そのキューがもはや存在しないことが原因です。この場合、より厳格な `queue_patterns` や `queue_regex` を指定して問題を軽減するか、あるいは警告を無視することができます。 
 
 
-## Further Reading
+### その他
 
-Additional helpful documentation, links, and articles:
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
-- [Monitor IBM MQ metrics and logs with Datadog][11]
+
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog を使用した IBM MQ メトリクスおよびログの監視][11]
 
 
 [1]: https://www.ibm.com/products/mq

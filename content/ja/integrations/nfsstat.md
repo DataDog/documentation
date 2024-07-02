@@ -24,7 +24,7 @@
 "categories":
 - "os & system"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/nfsstat/README.md"
 "display_on_public_website": true
@@ -37,17 +37,17 @@
 "manifest_version": "2.0.0"
 "name": "nfsstat"
 "public_title": "Nfsstat"
-"short_description": "nfsstat gets nfsiostat-sysstat metrics."
+"short_description": "nfsstat は nfsiostat-sysstat メトリクスを取得します。"
 "supported_os":
 - "linux"
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
   - "Supported OS::Linux"
-  - "Category::OS & System"
-  - "Category::Log Collection"
+  - "Category::OS とシステム"
+  - "Category::ログの収集"
   "configuration": "README.md#Setup"
-  "description": "nfsstat gets nfsiostat-sysstat metrics."
+  "description": "nfsstat は nfsiostat-sysstat メトリクスを取得します。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -57,31 +57,31 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-The NFS integration collects metrics about mount points on the NFS client as it uses the `nfsiostat` tool that displays NFS client per-mount [statistics][1].
+NFS インテグレーションは、マウントごとの NFS クライアント[統計][1]を表示する `nfsiostat` ツールを使用して、NFS クライアント上のマウントポイントに関するメトリクスを収集します。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host.
+以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
 
-### Installation
+### インストール
 
-The NFSstat check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your servers.
+NFSstat チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-Edit the `nfsstat.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][3]. Point to your nfsiostat binary script, or use the one included with the binary installer. See the [sample nfsstat.d/conf.yaml][4] for all available configuration options.
+[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `nfsstat.d/conf.yaml` ファイルを編集します。nfsiostat バイナリスクリプトを指定するか、バイナリインストーラーに含まれているスクリプトを使用します。使用可能なすべてのコンフィギュレーションオプションについては、[nfsstat.d/conf.yaml のサンプル][4]を参照してください。
 
-### Log collection
+### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, so to enable it in `datadog.yaml`, update this setting:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。`datadog.yaml` ファイルでこれを有効にするには、以下の設定を更新します。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `nfsstat.d/conf.yaml` file to start collecting your NFSstat Logs:
+2. NFSstat のログの収集を開始するには、次のコンフィギュレーションブロックを `nfsstat.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -90,33 +90,33 @@ Edit the `nfsstat.d/conf.yaml` file, in the `conf.d/` folder at the root of your
        source: nfsstat
    ```
 
-   Change the `path` parameter value and configure it for your environment.
-   See the [sample nfsstat.d/conf.yaml][4] for all available configuration options.
+   `path` のパラメーター値を変更し、環境に合わせて構成してください。
+   使用可能なすべての構成オプションの詳細については、[サンプル nfsstat.d/conf.yaml][4] を参照してください。
 
-3. [Restart the Agent][5].
+3. [Agent を再起動します][5]。
 
 
-### Validation
+### 検証
 
-[Run the Agent's `status` subcommand][6] and look for `nfsstat` under the Checks section.
+[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `nfsstat` を探します。
 
-## Data Collected
-### Metrics
+## 収集データ
+### メトリクス
 {{< get-metrics-from-git "nfsstat" >}}
 
 
-### Events
-The Nfsstat check does not include any events.
+### イベント
+Nfsstat チェックには、イベントは含まれません。
 
-### Service Checks
-The Nfsstat check does not include any service checks.
+### サービスチェック
+Nfsstat チェックには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
-Need help? Contact [Datadog support][8].
+## トラブルシューティング
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-- [Built a network monitor on an http check][9]
+- [HTTP チェックでネットワークモニターを構築][9]
 
 [1]: http://man7.org/linux/man-pages/man8/nfsiostat.8.html
 [2]: https://app.datadoghq.com/account/settings/agent/latest

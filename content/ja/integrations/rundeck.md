@@ -25,7 +25,7 @@
 - incidents
 - notifications
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rundeck/README.md"
 "display_on_public_website": true
@@ -80,12 +80,12 @@ Some example use cases are:
 
 Use the instructions below to configure your Datadog/Rundeck integration.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 Prepare at least one Rundeck job that you would like to trigger using a Datadog alert.
 
-### Configuration
+### 構成
 
 #### Rundeck
 
@@ -122,21 +122,21 @@ Add this integration to any alert notification in Datadog by adding the recipien
 
 Other plugins, such as Advanced Run Job, can also be used, depending on your use case.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Rundeck integration does not provide any metrics.
 
-### Service Checks
+### サービスチェック
 
 The Rundeck integration does not include any service checks.
 
-### Events
+### イベント
 
 The Rundeck integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

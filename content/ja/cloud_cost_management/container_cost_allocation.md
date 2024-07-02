@@ -5,7 +5,7 @@ description: Learn how to allocate Cloud Cost Management spending across your or
 further_reading:
 - link: /cloud_cost_management/
   tag: Documentation
-  text: Learn about Cloud Cost Management
+  text: Cloud Cost Management について
 ---
 
 {{< site-region region="gov" >}}
@@ -14,7 +14,7 @@ further_reading:
 
 {{< jqmath-vanilla >}}
 
-## Overview
+## 概要
 
 Datadog Cloud Cost Management (CCM) automatically allocates the costs of your cloud clusters to individual services and workloads running in those clusters. Use cost metrics enriched with tags from pods, nodes, containers, and tasks to visualize container workload cost in the context of your entire cloud bill.
 
@@ -28,7 +28,7 @@ CCM displays costs for resources including CPU, memory, and more depending on th
 
 {{< img src="cloud_cost/container_cost_allocation/container_allocation.png" alt="Cloud cost allocation table showing requests and idle costs over the past month on the Containers page" style="width:100%;" >}}
 
-## Prerequisites
+## 前提条件
 
 {{< tabs >}}
 {{% tab "AWS" %}}
@@ -37,9 +37,9 @@ CCM allocates costs of AWS ECS clusters as well as all Kubernetes clusters, incl
 
 The following table presents the list of collected features and the minimal Agent and Cluster Agent versions for each.
 
-| Feature | Minimal Agent version | Minimal Cluster Agent version |
+| 機能 | 最低限必要な Agent のバージョン | 最低限必要な Cluster Agent のバージョン |
 |---|---|---|
-| Container Cost Allocation | 7.27.0 | 1.11.0 |
+| コンテナコスト割当 | 7.27.0 | 1.11.0 |
 | AWS Persistent Volume Allocation | 7.46.0 | 1.11.0  |
 
 1. Configure the AWS Cloud Cost Management integration on the [Cloud Costs Setup page][101].
@@ -60,9 +60,9 @@ CCM allocates costs of all Kubernetes clusters, including those managed through 
 
 The following table presents the list of collected features and the minimal Agent and Cluster Agent versions for each.
 
-| Feature | Minimal Agent version | Minimal Cluster Agent version |
+| 機能 | 最低限必要な Agent のバージョン | 最低限必要な Cluster Agent のバージョン |
 |---|---|---|
-| Container Cost Allocation | 7.27.0 | 1.11.0 |
+| コンテナコスト割当 | 7.27.0 | 1.11.0 |
 
 1. Configure the Azure Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
@@ -78,9 +78,9 @@ CCM allocates costs of all Kubernetes clusters, including those managed through 
 
 The following table presents the list of collected features and the minimal Agent and Cluster Agent versions for each.
 
-| Feature | Minimal Agent version | Minimal Cluster Agent version |
+| 機能 | 最低限必要な Agent のバージョン | 最低限必要な Cluster Agent のバージョン |
 |---|---|---|
-| Container Cost Allocation | 7.27.0 | 1.11.0 |
+| コンテナコスト割当 | 7.27.0 | 1.11.0 |
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Costs Setup page][101].
 1. Install the [**Datadog Agent**][102] in a Kubernetes environment and ensure that you enable the [**Orchestrator Explorer**][103] in your Agent configuration.
@@ -92,7 +92,7 @@ The following table presents the list of collected features and the minimal Agen
 {{% /tab %}}
 {{< /tabs >}}
 
-## Allocate costs
+## コストの割り当て
 
 Cost allocation divides host compute and other resource costs from your cloud provider into individual tasks or pods associated with them. These divided costs are then enriched with tags from related resources so you can break down costs by any associated dimensions.
 
@@ -107,7 +107,7 @@ These divided costs are enriched with tags from nodes, pods, tasks, and volumes.
 
 For Kubernetes compute allocation, a Kubernetes node is joined with its associated host instance costs. The node's cluster name and all node tags are added to the entire compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
 
-Next, Datadog looks at all of the pods running on that node for the day. The cost of the node is allocated to the pod based on the resources it has used and the length of time it ran. This calculated cost is enriched with all of the pod's tags.
+次に、Datadog はその日に該当ノード上で動作していたすべてのポッドを調査します。ノードのコストは、ポッドが使用したリソースとその実行時間に基づいて割り当てられます。この算出されたコストは、ポッドのすべてのタグを含めて詳細化されます。
 
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][101] and [pods][102].
 
@@ -121,9 +121,9 @@ Next, Datadog looks at all of the pods that claimed the volume on that day. The 
 
 ### AWS ECS on EC2
 
-For ECS allocation, Datadog determines which tasks ran on each EC2 instance used for ECS. If you enable AWS Split Cost Allocation, the metrics allocate ECS costs by usage instead of reservation, providing more granular detail.
+ECS の割り当てにおいて、Datadog は ECS に使用された各 EC2 インスタンスでどのタスクが実行されたかを判定します。AWS Split Cost Allocation を有効にすると、メトリクスは予約ではなく使用量に基づいて ECS コストを割り当てるため、より細かい詳細が得られます。
 
-Based on resources the task has used, Datadog assigns the appropriate portion of the instance's compute cost to that task. The calculated cost is enriched with all of the task's tags and all of the container tags (except container names) running in the task.
+タスクが使用したリソースに基づいて、Datadog はインスタンスのコンピュートコストの適切な部分をそのタスクに割り当てます。算出されたコストは、タスクのすべてのタグおよびタスク内で動作しているコンテナの全てのタグ (コンテナ名を除く) によって詳細化されます。
 
 ### AWS ECS on Fargate
 
@@ -140,7 +140,7 @@ ECS tasks that run on Fargate are already fully allocated [in the CUR][103]. CCM
 
 For Kubernetes compute allocation, a Kubernetes node is joined with its associated host instance costs. The node's cluster name and all node tags are added to the entire compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
 
-Next, Datadog looks at all of the pods running on that node for the day. The cost of the node is allocated to the pod based on the resources it has used and the length of time it ran. This calculated cost is enriched with all of the pod's tags.
+次に、Datadog はその日に該当ノード上で動作していたすべてのポッドを調査します。ノードのコストは、ポッドが使用したリソースとその実行時間に基づいて割り当てられます。この算出されたコストは、ポッドのすべてのタグを含めて詳細化されます。
 
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][101] and [pods][102].
 
@@ -156,7 +156,7 @@ All other costs are given the same value and tags as the source metric `azure.co
 
 For Kubernetes compute allocation, a Kubernetes node is joined with its associated host instance costs. The node's cluster name and all node tags are added to the entire compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
 
-Next, Datadog looks at all of the pods running on that node for the day. The cost of the node is allocated to the pod based on the resources it has used and the length of time it ran. This calculated cost is enriched with all of the pod's tags.
+次に、Datadog はその日に該当ノード上で動作していたすべてのポッドを調査します。ノードのコストは、ポッドが使用したリソースとその実行時間に基づいて割り当てられます。この算出されたコストは、ポッドのすべてのタグを含めて詳細化されます。
 
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][101] and [pods][102].
 
@@ -184,7 +184,7 @@ To enable GKE cost allocation, see the [official GKE documentation][105].
 {{% /tab %}}
 {{< /tabs >}}
 
-## Understanding spend
+## 支出の把握
 
 Use the `allocated_spend_type` tag to visualize the spend category associated with your costs at various levels, including the Kubernetes node, container orchestration host, storage volume, or entire cluster level.
 
@@ -197,9 +197,9 @@ The cost of a host instance is split into two components: 60% for the CPU and 40
 
 Costs are allocated into the following spend types:
 
-| Spend type | Description    |
+| Spend type | 説明    |
 | -----------| -----------    |
-| Usage | Cost of resources (such as memory and CPU) used by workloads, based on the average usage on that day. |
+| 使用方法 | Cost of resources (such as memory and CPU) used by workloads, based on the average usage on that day. |
 | Workload idle | Cost of resources (such as memory and CPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
 | Cluster idle | Cost of resources (such as memory and CPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 
@@ -207,9 +207,9 @@ Costs are allocated into the following spend types:
 
 The cost of an AWS EBS volume has three components: IOPS, throughput, and storage. Each is allocated according to a pod's usage when the volume is mounted.
 
-| Spend type | Description    |
+| Spend type | 説明    |
 | -----------| -----------    |
-| Usage | Cost of provisioned IOPS, throughput, or storage used by workloads. Storage cost is based on the maximum amount of volume storage used that day, while IOPS and throughput costs are based on the average amount of volume storage used that day. |
+| 使用方法 | Cost of provisioned IOPS, throughput, or storage used by workloads. Storage cost is based on the maximum amount of volume storage used that day, while IOPS and throughput costs are based on the average amount of volume storage used that day. |
 | Workload idle | Cost of provisioned IOPS, throughput, or storage that are reserved and allocated but not used by workloads. Storage cost is based on the maximum amount of volume storage used that day, while IOPS and throughput costs are based on the average amount of volume storage used that day. This is the difference between the total resources requested and the average usage. **Note:** This tag is only available if you have enabled `Resource Collection` in your [**AWS Integration**][101]. To prevent being charged for `Cloud Security Posture Management`, ensure that during the `Resource Collection` setup, the `Cloud Security Posture Management` box is unchecked. |
 | Cluster idle | Cost of provisioned IOPS, throughput, or storage that are not reserved by any pods that day. This is the difference between the total cost of the resources and what is allocated to workloads. |
 
@@ -226,9 +226,9 @@ The cost of a host instance is split into two components: 60% for the CPU and 40
 
 Costs are allocated into the following spend types:
 
-| Spend type | Description    |
+| Spend type | 説明    |
 | -----------| -----------    |
-| Usage | Cost of resources (such as memory and CPU) used by workloads, based on the average usage on that day. |
+| 使用方法 | Cost of resources (such as memory and CPU) used by workloads, based on the average usage on that day. |
 | Workload idle | Cost of resources (such as memory and CPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
 | Cluster idle | Cost of resources (such as memory and CPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 
@@ -241,9 +241,9 @@ The cost of a host instance is split into two components: 60% for the CPU and 40
 
 Costs are allocated into the following spend types:
 
-| Spend type | Description    |
+| Spend type | 説明    |
 | -----------| -----------    |
-| Usage | Cost of resources (such as memory and CPU) used by workloads, based on the average usage on that day. |
+| 使用方法 | Cost of resources (such as memory and CPU) used by workloads, based on the average usage on that day. |
 | Workload idle | Cost of resources (such as memory and CPU) that are reserved and allocated but not used by workloads. This is the difference between the total resources requested and the average usage. |
 | Cluster idle | Cost of resources (such as memory and CPU) that are not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads. |
 | Not monitored | Cost of resources where the spend type is unknown. To resolve this, install the Datadog Agent on these clusters or nodes. |
@@ -258,7 +258,7 @@ Depending on the cloud provider, certain resources may or may not be available f
 | Resource | AWS | Azure | Google Cloud |
 |---:|---:|---|---|
 | CPU | {{< X >}} | {{< X >}} | {{< X >}} |
-| Memory | {{< X >}} | {{< X >}} | {{< X >}} |
+| メモリ | {{< X >}} | {{< X >}} | {{< X >}} |
 | {{< ccm-details title="Persistent volumes" >}}Storage resources within a cluster, provisioned by administrators or dynamically, that persist data independently of pod lifecycles.{{< /ccm-details >}} | {{< X >}} |  |  |
 | {{< ccm-details title="Managed service fees" >}}Cost of associated fees charged by the cloud provider for managing the cluster, such as fees for managed Kubernetes services or other container orchestration options.{{< /ccm-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | ECS costs | {{< X >}} | N/A | N/A |
@@ -268,14 +268,14 @@ Depending on the cloud provider, certain resources may or may not be available f
 
 `Limited*` resources have been identified as part of your Kubernetes spend, but are not fully allocated to specific workloads or pods. These resources are host-level costs, not pod or namespace-level costs, and are identified with `allocated_spend_type:<resource>_not_supported`.
 
-## Cost metrics
+## コストメトリクス
 
 When the prerequisites are met, the following cost metrics automatically appear.
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-| Cost Metric                    | Description    |
+| Cost Metric                    | 説明    |
 | ---                                | ----------- |
 | `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. Also includes allocated EBS costs. <br> *Based on `aws.cost.amortized`* |
 | `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. Also includes allocated AWS EBS costs. <br> *Based on `aws.cost.net.amortized`, if available* |
@@ -283,14 +283,14 @@ When the prerequisites are met, the following cost metrics automatically appear.
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-| Cost Metric                    | Description    |
+| Cost Metric                    | 説明    |
 | ---                                | ----------- |
 | `azure.cost.amortized.shared.resources.allocated` | Azure VM costs allocated by the CPU & memory used by a pod or container task, using a 60:40 split for CPU & memory respectively. Also includes allocated Azure costs. <br> *Based on `azure.cost.amortized`* |
 
 {{% /tab %}}
 {{% tab "Google" %}}
 
-| Cost Metric                    | Description    |
+| Cost Metric                    | 説明    |
 | ---                                | ----------- |
 | `gcp.cost.amortized.shared.resources.allocated` | Google Compute Engine costs allocated by the CPU & memory used by a pod, using 60:40 split for CPU & memory respectively. This allocation method is used when the bill does not already provide a specific split between CPU and memory usage. <br> *Based on `gcp.cost.amortized`* |
 
@@ -312,10 +312,10 @@ Datadog consolidates and applies the following tags from various sources to cost
 
 In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaustive list of out-of-the-box tags are applied to cost metrics:
 
-| Out-of-the-box tag  |  Description |
+| すぐに使えるタグ  |  説明 |
 | ---                 | ------------ |
 | `orchestrator:kubernetes` | The orchestration platform associated with the item is Kubernetes. |
-| `kube_cluster_name` | The name of the Kubernetes cluster. |
+| `kube_cluster_name` | Kubernetes クラスターの名前。 |
 | `kube_namespace` | The namespace where workloads are running. |
 | `kube_deployment` | The name of the Kubernetes Deployment. |
 | `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
@@ -327,7 +327,7 @@ Conflicts are resolved by favoring higher-specificity tags such as pod tags over
 
 In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the-box tags are applied to cost metrics.
 
-| Out-of-the-box tag                      | Description                                                                                                                                  |
+| すぐに使えるタグ                      | 説明                                                                                                                                  |
 | ---                                     |----------------------------------------------------------------------------------------------------------------------------------------------|
 | `persistent_volume_reclaim_policy`      | The Kubernetes Reclaim Policy on the Persistent Volume.                                                                                      |
 | `storage_class_name`                    | The Kubernetes Storage Class used to instantiate the Persistent Volume.                                                                      |
@@ -340,13 +340,13 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 
 **Note**: Most tags from ECS containers are applied (excluding `container_name`).
 
-| Out-of-the-box tag      |  Description |
+| すぐに使えるタグ      |  説明 |
 | ---                     | ------------ |
 | `orchestrator:ecs`      | The orchestration platform associated with the item is AWS ECS. |
-| `ecs_cluster_name`      | The name of the ECS cluster. |
-| `is_aws_ecs`            | All costs associated with running ECS. |
-| `is_aws_ecs_on_ec2`     | All EC2 compute costs associated with running ECS on EC2. |
-| `is_aws_ecs_on_fargate` | All costs associated with running ECS on Fargate. |
+| `ecs_cluster_name`      | ECS クラスターの名前。 |
+| `is_aws_ecs`            | ECS の実行に関連するすべてのコスト。 |
+| `is_aws_ecs_on_ec2`     | EC2 上の ECS の実行に関連するすべての EC2 コンピュートコスト。 |
+| `is_aws_ecs_on_fargate` | Fargate 上の ECS の実行に関連するすべてのコスト。 |
 
 {{% /tab %}}
 {{% tab "Azure" %}}
@@ -355,10 +355,10 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 
 In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaustive list of out-of-the-box tags are applied to cost metrics:
 
-| Out-of-the-box tag                         | Description                                                                                                                                                   |
+| すぐに使えるタグ                         | 説明                                                                                                                                                   |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
 | `orchestrator:kubernetes`                  | The orchestration platform associated with the item is Kubernetes.                                                                                            |
-| `kube_cluster_name` | The name of the Kubernetes cluster. |
+| `kube_cluster_name` | Kubernetes クラスターの名前。 |
 | `kube_namespace` | The namespace where workloads are running. |
 | `kube_deployment` | The name of the Kubernetes Deployment. |
 | `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
@@ -373,10 +373,10 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 
 In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaustive list of out-of-the-box tags are applied to cost metrics:
 
-| Out-of-the-box tag                         | Description                                                                                                                                                   |
+| すぐに使えるタグ                         | 説明                                                                                                                                                   |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
 | `orchestrator:kubernetes`                  | The orchestration platform associated with the item is Kubernetes.                                                                                            |
-| `kube_cluster_name` | The name of the Kubernetes cluster. |
+| `kube_cluster_name` | Kubernetes クラスターの名前。 |
 | `kube_namespace` | The namespace where workloads are running. |
 | `kube_deployment` | The name of the Kubernetes Deployment. |
 | `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
@@ -389,7 +389,7 @@ In addition to Kubernetes pod and Kubernetes node tags, the following non-exhaus
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

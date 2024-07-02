@@ -26,7 +26,7 @@
 "categories":
 - developer tools
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/tls/README.md"
 "display_on_public_website": true
@@ -72,19 +72,19 @@ This check monitors [TLS][1] protocol versions, certificate expiration and valid
 1. Only TCP is supported.
 2. Only leaf / end user certificates are verified (not intermediate and root certificates).
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The TLS check is included in the [Datadog Agent][2] package.
 No additional installation is needed on your server.
 
-### Configuration
+### 構成
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -117,21 +117,21 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
 
 [Run the Agent's status subcommand][3] and look for `tls` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "tls" >}}
 
 
-### Events
+### イベント
 
 TLS does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "tls" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

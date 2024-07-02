@@ -9,17 +9,17 @@ further_reading:
       text: APM Troubleshooting
 ---
 
-## Missing profiles in the profile search page
+## プロファイル検索ページにないプロファイル
 
-If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+プロファイラを設定してもプロファイル検索ページにプロファイルが表示されない場合は、[デバッグモード][1]をオンにし、デバッグファイルと次の情報で[サポートチケットを開いてください][2]。
 
-- Operating system type and version (for example, Linux Ubuntu 20.04)
-- Runtime type, version, and vendor (for example, Python 3.9.5)
+- オペレーティングシステムのタイプとバージョン (例: Linux Ubuntu 20.04)
+- ランタイムのタイプ、バージョン、ベンダー (例: Python 3.9.5)
 
-Refer to the python APM client [troubleshooting documentation][3] for additional guidance.  
+その他のガイダンスについては、Python APM クライアントの[トラブルシューティングドキュメント][3]を参照してください。
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

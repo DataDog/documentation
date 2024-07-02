@@ -19,7 +19,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/journald/README.md"
 "display_on_public_website": true
@@ -60,14 +60,14 @@
 Systemd-journald is a system service that collects and stores logging data. 
 It creates and maintains structured, indexed journals based on logging information from a variety of sources.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The journald check is included in the [Datadog Agent][1] package.
 No additional installation is needed on your server.
 
-### Configuration
+### 構成
 
 Journal files, by default, are owned and readable by the systemd-journal system group. To start collecting your journal logs, you need to:
 
@@ -229,21 +229,21 @@ This works automatically when the Agent is running from the host. If you are usi
 
 Run the Agent's [status subcommand][3] and look for `journald` under the Logs Agent section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 journald does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 journald does not include any service checks.
 
-### Events
+### イベント
 
 journald does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

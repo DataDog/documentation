@@ -22,7 +22,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - os & system
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/oom_kill/README.md"
 "display_on_public_website": true
@@ -58,9 +58,9 @@
 
 This check monitors the kernel OOM (out of memory) kill process through the Datadog Agent and the System Probe.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The OOM Kill check is included in the [Datadog Agent][1] package. It relies on an eBPF program implemented in the System Probe.
 
@@ -80,7 +80,7 @@ yum install -y kernel-devel-$(uname -r)
 **Note**: Kernel version 4.9 or later is required for the OOM Kill check to work.
 In addition, Windows and CentOS/RHEL versions earlier than 8 are not supported.
 
-### Configuration
+### 構成
 
 1. In the `system-probe.yaml` file at the root of your Agent's configuration directory, add the following configuration:
 
@@ -155,21 +155,21 @@ spec:
 
 [Run the Agent's status subcommand][5] and look for `oom_kill` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "oom_kill" >}}
 
 
-### Service Checks
+### サービスチェック
 
 The OOM Kill check does not include any service checks.
 
-### Events
+### イベント
 
 The OOM Kill check submits an event for each OOM Kill that includes the killed process ID and name, as well as the triggering process ID and name.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

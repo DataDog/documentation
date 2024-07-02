@@ -29,73 +29,73 @@ algolia:
   tags: [custom metrics]
 ---
 
-## Overview
+## 概要
 
-If a metric is not submitted from one of the [more than {{< translate key="integration_count" >}} Datadog integrations][1] it's considered a custom metric. Custom metrics help you track your application KPIs: number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm. Certain [standard integrations](#standard-integrations) can also potentially emit custom metrics. 
+メトリクスが [{{< translate key="integration_count" >}} 種以上の Datadog インテグレーション][1]以外から送信された場合、そのメトリクスはカスタムメトリクスとみなされます。カスタムメトリクスを使うと、訪問者数、平均顧客バスケットサイズ、リクエストレイテンシー、カスタムアルゴリズムのパフォーマンス分布など、アプリケーションの KPI を追跡することができます。特定の[標準インテグレーション](#standard-integrations)は、カスタムメトリクスを出力する可能性もあります。
 
-A custom metric is identified by **a unique combination of a metric's name and tag values (including the host tag)**. In general, any metric you send using [DogStatsD][3] or through a [custom Agent Check][4] is a custom metric.
+カスタムメトリクスは、**メトリクス名とタグ値 (ホストタグを含む) の組み合わせ**により、一意に識別されます。一般に、[DogStatsD][3] または[カスタム Agent チェック][4]を使用して送信されるメトリクスはすべて、カスタムメトリクスとなります。
 
-**Note**: Users with the Datadog Admin role or `usage_read` permission can see the monthly average number of custom metrics per hour and the top 5000 custom metrics for their account in the [usage details page][5]. Learn more about [how custom metrics are counted][6].
+**注**: Datadog 管理者のロールまたは `usage_read` 権限を持つユーザーは、[使用量の詳細ページ][5]で、アカウントの 1 時間当たりのカスタムメトリクスの月平均数と、上位 5000 個のカスタムメトリクスを参照できます。詳しくは、[カスタムメトリクスの数え方][6]を参照してください。
 
-## Custom metrics properties
+## カスタムメトリクスのプロパティ
 
-A Datadog custom metric has the properties below. Read the [metrics introduction][7] to learn how to graph metrics within Datadog.
+Datadog のカスタムメトリクスには、以下のプロパティがあります。Datadog 内でメトリクスをグラフ化する方法については、[メトリクスの概要][7]をお読みください。
 
-| Property         | Description                                                                                                                                                  |
+| プロパティ         | 説明                                                                                                                                                  |
 |------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<METRIC_NAME>`  | The [name of your metric](#naming-custom-metrics).                                                                                                                  |
-| `<METRIC_VALUE>` | The value of your metric. **Note**: Metric values must be 32-bit. Values should not reflect dates or timestamps.                                                                                                                                |
-| `<TIMESTAMP>`    | The timestamp associated with the metric value. **Note**: Metric timestamps cannot be more than ten minutes in the future or more than one hour in the past. |
-| `<TAGS>`         | The set of tags associated with your metric.                                                                                                                 |
-| `<METRIC_TYPE>`  | The type of your metric. Read about [metric types][8].                                                                                             |
-| `<INTERVAL>`     | If the `<TYPE>` of the metric is [RATE][9] or [COUNT][10], it defines the corresponding [interval][11].                                                       |
+| `<METRIC_NAME>`  | [メトリクスの名前](#naming-custom-metrics)。                                                                                                                  |
+| `<METRIC_VALUE>` | メトリクスの値。**注**: メトリクスの値は 32 ビットである必要があります。値は日付またはタイムスタンプを反映できません。                                                                                                                                |
+| `<タイムスタンプ>`    | メトリクスの値に関連付けられたタイムスタンプ。**注**: メトリクスのタイムスタンプは、未来は 10 分、過去は 1 時間を超えることはできません。 |
+| `<タグ>`         | メトリクスに関連付けられているタグセット。                                                                                                                 |
+| `<METRIC_TYPE>`  | メトリクスのタイプ。[メトリクスのタイプ][8]をお読みください。                                                                                             |
+| `<INTERVAL>`     | メトリクスの `<TYPE>` が [RATE][9] または [COUNT][10] の場合は、その[間隔][11]を定義します。                                                       |
 
-### Naming custom metrics
+### カスタムメトリクスの名前
 
-The following custom metric naming convention must be followed:
+カスタムメトリクスの名前は、以下の命名規則に従う必要があります。
 
-* Metric names must start with a letter.
-* Metric names must only contain ASCII alphanumerics, underscores, and periods.
-  * Other characters, including spaces, are converted to underscores.
-  * Unicode is _not_ supported.
-* Metric names must not exceed 200 characters. Fewer than 100 is preferred from a UI perspective.
+* メトリクス名は文字で開始する必要があります。
+* メトリクス名に使用できるのは、ASCII 英数字、アンダースコア、およびピリオドだけです。
+  * スペースなどの他の文字はアンダースコアに変換されます。
+  * Unicode はサポートされません。
+* メトリクス名は 200 文字以内で作成できますが、ユーザーインターフェイスの観点からは、100 文字未満をお勧めします。
 
-**Note**: Metric names are case sensitive in Datadog.
+**注**: Datadog のメトリクス名は大文字と小文字が区別されます。
 
 ### Metric units
 
 Set metric units through [Metrics Summary][12] or set custom metric units with the [Unit override][13] feature in the graph editor of your visualizations. For more information, see the [Metrics Units][14] documentation.
 
-## Submitting custom metrics
+## カスタムメトリクスの送信
 
-{{< whatsnext desc="There are multiple ways to send metrics to Datadog:">}}
-    {{< nextlink href="/metrics/custom_metrics/agent_metrics_submission" >}}Custom Agent check{{< /nextlink >}}
+{{< whatsnext desc="メトリクスを Datadog に送信する方法は複数あります。">}}
+    {{< nextlink href="/metrics/custom_metrics/agent_metrics_submission" >}}カスタム Agent チェック{{< /nextlink >}}
     {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/metrics/custom_metrics/powershell_metrics_submission" >}}PowerShell{{< /nextlink >}}
     {{< nextlink href="/serverless/custom_metrics" >}}AWS Lambda{{< /nextlink >}}
-    {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog's HTTP API{{< /nextlink >}}
-    {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}Generate Log-based metrics{{< /nextlink >}}
-    {{< nextlink href="/tracing/generate_metrics/" >}}Generate APM span-based metrics{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/platform/generate_metrics/" >}}Generate RUM event-based metrics{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}Generate live process-based metrics{{< /nextlink >}}
+    {{< nextlink href="/api/v1/metrics/#submit-metrics" >}}Datadog の HTTP API{{< /nextlink >}}
+    {{< nextlink href="/logs/log_configuration/logs_to_metrics/#generate-a-log-based-metric" >}}ログベースのメトリクスを生成する{{< /nextlink >}}
+    {{< nextlink href="/tracing/generate_metrics/" >}}APM スパンベースのメトリクスを生成する{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/platform/generate_metrics/" >}}RUM イベントベースのメトリクスを生成する{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/process/increase_process_retention/#generate-a-process-based-metric" >}}ライブプロセスベースのメトリクスを生成する{{< /nextlink >}}
 {{< /whatsnext >}}
 
 You can also use one of the [Datadog official and community contributed API and DogStatsD client libraries][15] to submit your custom metrics
 
-**Note**: There are no enforced fixed rate limits on custom metric submission. If your default allotment is exceeded, you are billed according to [Datadog's billing policy for custom metrics][6].
+**注**: カスタムメトリクスの送信に適用される[固定のレート制限][5]はありません。デフォルトの割り当てを超えた場合は、[Datadog のカスタムメトリクスの課金ポリシー][6]に従って課金されます。
 
-## Standard integrations
+## 標準インテグレーション
 
-The following standard integrations can potentially emit custom metrics.
+以下の標準インテグレーションでは、カスタムメトリクスを生成することができます。
 
-| Type of integrations                           | Integrations                                                                       |
+| インテグレーションの種類                           | インテグレーション                                                                       |
 |------------------------------------------------|------------------------------------------------------------------------------------|
-| Limited to 350 custom metrics by default.      | [ActiveMQ XML][16] / [Go-Expvar][17] / [Java-JMX][18]                              |
-| No default limit on custom metrics collection. | [Nagios][19] /[PDH Check][20] /[OpenMetrics][21] /[Windows performance counters][22] /[WMI][23] /[Prometheus][21] |
-| Can be configured to collect custom metrics.   | [MySQL][24] /[Oracle][25] /[Postgres][26] /[SQL Server][27]                        |
-| Custom metrics sent from cloud integrations    | [AWS][28]                                                                          |
+| デフォルトで上限 350 個のカスタムメトリクス。      | [ActiveMQ XML][16] / [Go-Expvar][17] / [Java-JMX][18]                              |
+| カスタムメトリクスの収集では既定の上限なし。 | [Nagios][19] /[PDH チェック][20] /[OpenMetrics][21] /[Windows パフォーマンスカウンター][22] /[WMI][23] /[Prometheus][21] |
+| カスタムメトリクス収集の構成が可能。   | [MySQL][24] /[Oracle][25] /[Postgres][26] /[SQL Server][27]                        |
+| クラウドインテグレーションから送信されたカスタムメトリクス    | [AWS][28]                                                                          |
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -18,7 +18,7 @@
 "categories":
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -69,9 +69,9 @@ Datadog’s Workday integration collects logs using [Workday’s User Activity L
 - The total amount of requests made
 - Other metadata related to the event, such as device type and IP address
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 **Step 1: Enable User Activity Logging at the tenant level**
 
@@ -120,23 +120,23 @@ Datadog’s Workday integration collects logs using [Workday’s User Activity L
    - Enter the values that you saved into the Datadog Configuration Tab.
    - Enter the domain part of the URL: **https://DOMAIN/**
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 Workday does not include any metrics.
 
 ### Logs
 
-### Events
+### イベント
 
 The Workday integration does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "workday" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

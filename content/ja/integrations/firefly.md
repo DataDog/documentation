@@ -13,7 +13,7 @@
 - configuration & deployment
 - developer tools
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/firefly/README.md"
 "display_on_public_website": true
@@ -82,7 +82,7 @@ Get real-time notifications of any discrepancy between your Infrastructure-as-Co
 ### Detect and fix policy violations
 Use the Firefly unified policy engine to find hazardous misconfigurations or costly underutilizations, and get alerts on policy violations for both custom and pre-made policies.
 
-## Setup
+## セットアップ
 
 ### Configure Firefly - Datadog integration
 1. Create a new Datadog application key and API key.

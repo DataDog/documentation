@@ -3,7 +3,7 @@ title: Workflow Automation
 kind: documentation
 disable_toc: false
 algolia:
-  tags: [workflow, workflows, workflow automation]
+  tags: [workflow, workflows/, workflow automation]
 aliases:
 - /workflows
 further_reading:

@@ -4,7 +4,7 @@
 - google cloud
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track query count, execution times, uploaded bytes and rows, and more."
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_alloydb/"
@@ -33,9 +33,9 @@ Get metrics from Google AlloyDB to:
 - Visualize the performance of your AlloyDB Clusters.
 - Correlate the performance of your AlloyDB instances with your databases.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration first][1]. There are no other installation steps that need to be performed.
 
@@ -50,21 +50,21 @@ Once this is done, export your Google AlloyDB logs from Google Cloud Logging to 
 3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloud_alloydb" >}}
 
 
-### Events
+### イベント
 
 The Google AlloyDB integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google AlloyDB integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

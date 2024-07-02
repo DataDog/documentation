@@ -27,19 +27,19 @@ further_reading:
 
 ---
 
-<div class="alert alert-info">This page is about running Continuous Testing tests in your continuous integration (CI) and continuous delivery (CD) pipelines. If you want to bring your CI/CD metrics and data into Datadog dashboards, see the <a href="/continuous_integration/" target="_blank">CI Visibility</a> section.</div>
+<div class="alert alert-info">このページでは、継続的インテグレーション (CI) と継続的デリバリー (CD) のパイプラインの Continuous Testing テストの実行について説明します。CI のメトリクスやデータを Datadog のダッシュボードに取り込みたい場合は、<a href="/continuous_integration/" target="_blank">CI Visibility</a> のセクションを参照してください。</div>
 
-## Overview
+## 概要
 
-In addition to running tests at predefined intervals, you can reuse your Datadog Synthetic tests and run them on-demand using the `@datadog/datadog-ci` package or the API. Run Datadog Continuous Testing tests in your continuous integration (CI) pipelines to block branches from being deployed and breaking your application in production.
+あらかじめ定義された間隔でテストを実行するだけでなく、`@datadog/datadog-ci` パッケージや API を使用して Datadog Synthetic テストを再利用してオンデマンドでこれを実行することができます。継続的インテグレーション (CI) パイプラインで Datadog Continuous Testing テストを実行すると、ブランチがデプロイされて本番でアプリケーションが壊れるのを防ぐことができます。
 
-Use Continuous Testing and CI/CD to also run tests as part of your continuous delivery (CD) process and evaluate the state of your applications and services in production immediately after a deployment finishes, or a new release is freshly cut. You can detect potential regressions that may impact your users and automatically trigger a rollback when a critical test fails.
+Continuous Testing と CI/CD を使用して、継続的デリバリー (CD) プロセスの一環としてテストを実行し、デプロイメントが終了した直後や新しいリリースが切られた直後に本番環境でアプリケーションとサービスの状態を評価することもできます。ユーザーに影響を与える可能性のある回帰を検出し、重要なテストが失敗したときに自動的にロールバックを起動することができます。
 
-This functionality reduces time spent fixing issues in production by proactively catching bugs and regressions earlier in the process, allowing your engineering teams to focus on non-urgent work instead. 
+この機能により、バグや回帰を早期に発見することで、本番環境での問題解決にかかる時間を短縮し、エンジニアリングチームは緊急性のない作業に集中することができます。
 
-To get started, see [Integrations](#integrations) and [use the API](#use-the-api) or the [open-source CLI package](#use-the-cli). 
+まずは、[インテグレーション](#integrations)を参照し、[API](#use-the-api) または[オープンソース CLI パッケージ](#use-the-cli)を使用します。
 
-## Integrations
+## インテグレーション
 
 {{< whatsnext desc="With Continuous Testing and CI/CD, you can run Continuous Testing tests in any CI platform provider of choice. See the documentation for information about the following integrations, or read more about the Datadog CI NPM package:">}}
     {{< nextlink href="continuous_testing/cicd_integrations/azure_devops_extension" >}}Azure DevOps Extension{{< /nextlink >}}
@@ -52,27 +52,27 @@ To get started, see [Integrations](#integrations) and [use the API](#use-the-api
     {{< nextlink href="continuous_testing/cicd_integrations/configuration" >}}NPM package{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Use the CLI
+## CLI を使用する
 
-The [`@datadog/datadog-ci` package][1] allows you to run Continuous Testing tests directly within your CI/CD pipeline. To use the [`@datadog/datadog-ci` NPM package][2], see [Configuration][3].
+[`@datadog/datadog-ci` パッケージ][1]を使うと、CI/CD パイプラインの中で直接 Continuous Testing テストを実行することができます。[`@datadog/datadog-ci` NPM パッケージ][2]を使用するには、[構成][3]を参照してください。
 
-You can trigger tests by searching with tags. For example, use `"ci": "datadog-ci synthetics run-tests --config fileconfig.json -s 'tag:staging'"`. This command works as an argument. Do not use this in your configuration files.
+タグを使った検索でテストをトリガーすることができます。例えば、`"ci": "datadog-ci synthetics run-tests --config fileconfig.json -s 'tag:staging'"` を使用します。このコマンドは引数として動作します。コンフィギュレーションファイルでは使用しないでください。
 
-## Use the API
+## API を使用する
 
-The Synthetics API endpoints allow you to launch tests at any stage in your staging and deployment lifecycle. For example, after a canary deployment with an automated rollback.
+Synthetics API のエンドポイントでは、ステージングとデプロイのライフサイクルのどの段階でもテストを開始できます。例えば、自動ロールバックされたカナリアデプロイメントの後などです。
 
-Use the API endpoints to quickly verify that a new deployment does not introduce any regression. See the [Trigger tests from CI/CD pipelines][4] and [Get details of batch][5] endpoints to use them within your CI through cURL or a supported client.
+API エンドポイントを使用して、新しいデプロイメントが回帰をもたらしていないことを迅速に検証します。[CI/CD パイプラインからテストを起動する][4]と[バッチの詳細の取得][5]エンドポイントを参照して、cURL またはサポートされているクライアントを通して CI 内でそれらを使用します。
 
-### Trigger tests from CI/CD pipelines
+### CI/CD パイプラインからテストをトリガー
 
-The test triggering endpoint supports up to 100 tests in one request.
+エンドポイントをトリガーするテストは、1 回のリクエストで最大 100 件のテストに対応します。
 
 * **Endpoint**: `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/tests/trigger/ci`
 * **Method**: `POST`
-* **Argument**: A JSON object containing the list of all tests to trigger and their configuration override.
+* **Argument**: トリガーする全テストのリストと各テストのコンフィギュレーションオーバーライドを含む JSON オブジェクト。
 
-#### Request data structure
+#### リクエストデータの構造
 
 ```json
 {
@@ -80,23 +80,23 @@ The test triggering endpoint supports up to 100 tests in one request.
 }
 ```
 
-The `TEST_TO_TRIGGER` objects compose of the required `public_id` for the test you want to trigger and the optional configuration overrides. For descriptions of each field, see [Configure tests][6].
+`TEST_TO_TRIGGER` オブジェクトは、トリガーしたいテストに必要な `public_id` と、オプションのコンフィギュレーションオーバーライドで構成されます。各フィールドの説明については、[テストの構成][6]を参照してください。
 
-A test's public identifier is either the identifier of the test found in the URL of a test's details page (for example: the identifier for `https://app.datadoghq.com/synthetics/details/abc-def-ghi` is `abc-def-ghi`) or the full URL of a test's details page (for example: `https://app.datadoghq.com/synthetics/details/abc-def-ghi`).
+テストの公開識別子は、テストの詳細ページの URL にあるテストの識別子 (たとえば `https://app.datadoghq.com/synthetics/details/abc-def-ghi` の識別子は `abc-def-ghi`) か、テストの詳細ページの完全な URL (たとえば `https://app.datadoghq.com/synthetics/details/abc-def-ghi`) のどちらかです。
 
-For more information, see the [Synthetics API endpoint documentation][4].
+詳しくは、[Synthetics API エンドポイントのドキュメント][4]をご覧ください。
 
-### Get details of batch
+### バッチの詳細を取得
 
-The get batch details endpoint retrieves results for the group of tests triggered in your CI/CD pipeline, otherwise known as a batch. You must provide the `batch_id` for the relevant CI execution.
+バッチの詳細の取得エンドポイントは、CI/CD パイプラインでトリガーされたテスト群 (バッチと呼ばれます) の結果を取得します。関連する CI の実行のための `batch_id` を提供する必要があります。
 
-* **Endpoint**: `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/ci/batch/{batch_id}`
+* **エンドポイント**: `https://api.{{< region-param key="dd_site" >}}/api/v1/synthetics/ci/batch/{batch_id}`
 * **Method**: `GET`
-* **Parameters**: The `batch_id` for the batch of test results you want to inspect.
+* **パラメーター**: 検査したいテスト結果のバッチの `batch_id`。
 
-For more information, see the [Synthetics API endpoint documentation][5].
+詳しくは、[Synthetics API エンドポイントのドキュメント][5]をご覧ください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

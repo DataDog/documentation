@@ -6,7 +6,7 @@
 - log collection
 - network
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Ingest Amazon Security Lake logs."
 "doc_link": ""
@@ -35,7 +35,7 @@ Amazon Security Lake is a security data lake for aggregating and managing securi
 
 This integration ingests security logs stored in Amazon Security Lake into Datadog for further investigation and real-time threat detection. To learn more about Amazon Security Lake, visit the [Amazon Security Lake user guide][1] in AWS.
 
-## Setup
+## セットアップ
 
 ### Prerequisites
 
@@ -107,23 +107,23 @@ This integration ingests security logs stored in Amazon Security Lake into Datad
 
 To learn more about how you can use this integration for real-time threat detection, check out the [blog][8].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Amazon Security Lake integration does not include any metrics.
 
-### Events
+### イベント
 
 The Amazon Security Lake integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Security Lake integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
-### Permissions
+### 権限
 
 Review the [troubleshooting guide][9] to make sure your AWS account has correctly set up the IAM role for Datadog.
 

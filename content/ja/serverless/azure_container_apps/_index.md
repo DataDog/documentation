@@ -131,7 +131,7 @@ Metrics are calculated based on 100% of the application's traffic, and remain ac
 | `DD_SOURCE`       | See [Unified Service Tagging][5].                                       |
 | `DD_TAGS`         | See [Unified Service Tagging][5].                                       |
 
-## Troubleshooting
+## トラブルシューティング
 
 This integration depends on your runtime having a full SSL implementation. If you are using a slim image for Node, you may need to add the following command to your Dockerfile to include certificates.
 

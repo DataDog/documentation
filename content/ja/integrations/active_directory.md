@@ -29,7 +29,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md"
 "display_on_public_website": true
@@ -65,15 +65,15 @@
 
 Get metrics from Microsoft Active Directory to visualize and monitor its performances.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Agent's Active Directory check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
 
 If installing the Datadog Agent on a domain environment, see [the installation requirements for the Agent][2]
 
-### Configuration
+### 構成
 
 #### Metric collection
 
@@ -87,21 +87,21 @@ If installing the Datadog Agent on a domain environment, see [the installation r
 
 [Run the Agent's status subcommand][7] and look for `active_directory` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "active_directory" >}}
 
 
-### Events
+### イベント
 
 The Active Directory check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Active Directory check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

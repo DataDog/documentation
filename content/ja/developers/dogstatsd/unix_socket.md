@@ -30,7 +30,7 @@ Instead of using an `IP:port` pair to establish connections, Unix Domain Sockets
 * By design, UDS traffic is local to the host, which means the Datadog Agent must run on every host you send metrics from.
 * UDS is not supported on Windows.
 
-## Setup
+## セットアップ
 
 To set up DogStatsD with Unix Domain Socket, enable the DogStatsD server through the `dogstatsd_socket` parameter. Then, configure the [DogStatsD client](#dogstatsd-client-configuration) in your code.
 

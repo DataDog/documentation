@@ -27,7 +27,7 @@
 - notifications
 - orchestration
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/torq/README.md"
 "display_on_public_website": true
@@ -70,7 +70,7 @@
 
 The [Torq][1] integration enables you to trigger workflows in response to Datadog alerts, providing alert enrichment. You can then send back events directly from your Torq workflows to your Datadog event stream and dedicated Torq dashboard.
 
-## Setup
+## セットアップ
 
 To set up this integration, you must have an active [Torq account][2] and an Account Owner role in that account. You must also have proper admin permissions in Datadog.
 
@@ -169,21 +169,21 @@ This integration enables you to use Datadog steps in your Torq workflows.
 
 2. Enter a meaningful name for the integration such as `Datadog-<monitor_type>` and click **Add**.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Torq integration does not provide any metrics.
 
-### Events
+### イベント
 
 The Torq integration allows you to send events to your Datadog event stream from a Torq workflow using the Datadog Post Event step. You can use the step with your playbooks to notify Datadog about successful mitigations and execution failures. You can also send enriched alert data back to Datadog.
 
-### Service Checks
+### サービスチェック
 
 The Torq integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

@@ -16,36 +16,36 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-<code>ddprof</code> is in beta. Datadog recommends evaluating the profiler in a non-sensitive environment before deploying in production.
+<code>ddprof</code> はベータ版です。Datadog では、本番環境にデプロイする前に重要でない環境でプロファイラーを評価することを推奨しています。
 </div>
 
-The native profiler for compiled languages (`ddprof`) uses OS level APIs to collect profiling data. It is ideally suited for applications written in compiled languages, such as C, C++, or Rust.
-Profiles sent from `ddprof` show up under the _native_ runtime in the Datadog web app.
+コンパイル済み言語用ネイティブプロファイラー (`ddprof`) は、OS レベルの API を使用してプロファイリングデータを収集します。C、C++、Rust などのコンパイルされた言語で書かれたアプリケーションに最適です。
+`ddprof` から送信されたプロファイラーが、Datadog Web アプリの_ネイティブ_ランタイムに表示されます。
 
-## Requirements
+## 要件
 
-For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][7].
+すべての言語におけるランタイムとトレーサーの最小バージョンと推奨バージョンの要約については、[サポートされている言語とトレーサーのバージョン][7]をお読みください。
 
-Supported operating systems
-: Linux (glibc or musl)
+対応 OS
+: Linux (glibc または musl)
 
-Supported architecture
-: `amd64` or `arm64` processors
+対応アーキテクチャ
+: `amd64` プロセッサーまたは `arm64` プロセッサー
 
-Serverless
-: `ddprof` is not supported on serverless platforms, such as AWS Lambda.
+サーバーレス
+: `ddprof` は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
-OS Settings
-: `perf_event_paranoid` kernel setting is 2 or less (see [Troubleshooting][1])
+OS 設定
+: `perf_event_paranoid` カーネル設定は 2 以下です ([トラブルシューティング][1]を参照してください)。
 
-Debugging information
-: Symbols should be available. The profiler cannot provide human-readable function names if the symbol table is stripped.
+デバッグ情報
+: シンボルが利用可能である必要があります。シンボルテーブルが削除されると、プロファイラーが人間が読める関数名を提供できません。
 
-## Installation
+## インストール
 
-The profiler can be used either as a standalone executable or as a library. Skip to [library installation instructions](#library) if you want to use it as a library.
+プロファイラーは、スタンドアロン実行ファイルとして、またはライブラリとして使用することができます。ライブラリとして使用する場合は、[ライブラリのインストール方法](#library)までスキップしてください。
 
-### Standalone
+### スタンドアロン
 
 1. Download the latest [`ddprof` release][2]. For example, here is one way to pull the latest release for an `amd64` (also known as `x86_64`) platform:
 
@@ -55,13 +55,13 @@ The profiler can be used either as a standalone executable or as a library. Skip
    mv ddprof/bin/ddprof INSTALLATION_TARGET
    ```
 
-   Where `INSTALLATION_TARGET` specifies the location you'd like to store the `ddprof` binary. The examples that follow assume `INSTALLATION_TARGET` is set to `./ddprof`.
+   ここで、`INSTALLATION_TARGET` は `ddprof` のバイナリを保存する場所を指定します。この後の例では、`INSTALLATION_TARGET` は `./ddprof` に設定されていると仮定しています。
 
    Use `arm64` instead of `amd64` for `aarch64` platform.
 
-3. Modify your service invocation to include the profiler. Your usual command is passed as the last arguments to the `ddprof` executable.
+3. プロファイラーを含むようにサービス呼び出しを修正します。いつものコマンドは `ddprof` 実行ファイルへの最後の引数として渡されます。
    {{< tabs >}}
-{{% tab "Environment variables" %}}
+{{% tab "環境変数" %}}
 
 ```bash
 export DD_ENV=prod
@@ -69,13 +69,13 @@ export DD_SERVICE=my-web-app
 export DD_VERSION=1.0.3
 ./ddprof myapp --arg1 --arg2
 ```
-**Note**: If you usually launch your application using a shell builtin, for example:
+**注**: 通常、シェルビルトインを使用してアプリケーションを起動する場合、例えば、
 
 ```bash
 exec myapp --arg1 --arg2
 ```
 
-Then you must invoke `ddprof` with that builtin instead:
+その場合は、代わりにそのビルトインで `ddprof` を呼び出す必要があります。
 
 ```bash
 export DD_ENV=prod
@@ -85,19 +85,19 @@ exec ./ddprof myapp --arg1 --arg2
 ```
 
 {{% /tab %}}
-{{% tab "Parameters" %}}
+{{% tab "パラメーター" %}}
 
 ```bash
 ./ddprof --environment prod --service my-web-app --service_version 1.0.3 myapp --arg1 --arg2
 ```
 
-**Note**: If you usually launch your application using a shell builtin, for example:
+**注**: 通常、シェルビルトインを使用してアプリケーションを起動する場合、例えば、
 
 ```bash
 exec myapp --arg1
 ```
 
-Then you must invoke `ddprof` with that builtin instead:
+その場合は、代わりにそのビルトインで `ddprof` を呼び出す必要があります。
 
 ```bash
 exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 myapp --arg1 --arg2
@@ -107,20 +107,20 @@ exec ./ddprof --environment prod --service my-web-app --service_version 1.0.3 my
 {{< /tabs >}}
 
 
-5. A few minutes after starting your application, your profiles appear on the [Datadog APM > Profiler page][3].
+5. アプリケーションの起動数分後、[Datadog APM > Profiler ページ][3]にプロファイルが表示されます。
 
-### Library
+### ライブラリ
 
-The library exposes a C API.
+このライブラリは、C 言語の API を公開しています。
 
-1. Download a release of [ddprof][2] with library support (v0.8.0 or later) and extract the tarball. For example:
+1. [ddprof][2] のライブラリサポート付きリリース (v0.8.0 以降) をダウンロードし、tarball を抽出します。例:
 
    ```bash
    curl -Lo ddprof-linux.tar.xz https://github.com/DataDog/ddprof/releases/latest/download/ddprof-amd64-linux.tar.xz
    tar xvf ddprof-linux.tar.xz --directory /tmp
    ```
 
-2. In your code, start the profiler using the `ddprof_start_profiling()` interface, defined in the `_dd_profiling.h_` header provided by the release. The profiler stops automatically when your program closes. To stop the profiler manually, use `ddprof_stop_profiling(ms)` with the `ms` parameter indicating the maximum block time of the function in milliseconds. Here is a standalone example (`profiler_demo.c`) in C:
+2. コード内で、リリースで提供される `_dd_profiling.h_` ヘッダーで定義される `ddprof_start_profiling()` インターフェイスを使用して、プロファイラーを開始します。プログラムが終了すると、プロファイラーは自動的に停止します。プロファイラーを手動で停止させるには、 `ddprof_stop_profiling(ms)` を使用します。`ms` パラメーターは、関数の最大ブロック時間をミリ秒で表します。以下は、C 言語のスタンドアロン例 (`profiler_demo.c`) です。
    ```cpp
    #include <stdlib.h>
    #include "dd_profiling.h"
@@ -149,71 +149,71 @@ The library exposes a C API.
    }
    ```
 
-3. Pass the `include` and `lib` subdirectories of the extracted directory to your build system and link against `libdd_profiling`. For the above example:
+3. 抽出したディレクトリの `include` と `lib` サブディレクトリをビルドシステムに渡し、 `libdd_profiling` に対してリンクします。上記の例の場合:
    ```bash
    gcc -I/tmp/ddprof/include -L/tmp/ddprof/lib profiler_demo.c -o profiler_demo -ldd_profiling
    ```
 
-### Deploying the shared library
+### 共有ライブラリのデプロイ
 
-The shared library must be present in the system's library search path. Otherwise, the application will fail to start. Using the example from before:
+共有ライブラリは、システムのライブラリ検索パスに存在する必要があります。そうでない場合は、アプリケーションの起動に失敗します。先ほどの例で言うと:
 ```bash
 ./profiler_demo
 ./profiler_demo: error while loading shared libraries: libdd_profiling.so: cannot open shared object file: No such file or directory
 ```
 
-Avoid this by linking against the static library.
+スタティックライブラリに対してリンクすることで、これを回避することができます。
 
-#### Installing the library
+#### ライブラリのインストール
 
-Add the library to the search path by copying it to any existing search directory. To find out what your search directories are, on Linux systems, run:
+ライブラリを既存の検索ディレクトリにコピーして、検索パスに追加します。検索ディレクトリを調べるには、Linux システムで、以下を実行します。
 ```bash
 ld --verbose | grep SEARCH_DIR | tr -s ' ;' \\n
 ```
 
-#### Appending a search directory
+#### 検索ディレクトリの追加
 
-Use the `LD_LIBRARY_PATH` environment variable to add additional search paths to the runtime linker. For example, using the directory layout from before:
+環境変数 `LD_LIBRARY_PATH` を使って、ランタイムリンカーに追加の検索パスを追加します。例えば、先ほどのディレクトリレイアウトを使って:
 
 ```bash
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp/ddprof/lib
 ```
 
-## Configuration
+## 構成
 
-The `environment`, `service`, and `service_version` settings are recommended, as they are used by the Profiling UI.
+`environment`、`service`、`service_version` の設定は、プロファイリング UI で使用されるため、推奨されます。
 
-See the [full list of parameters][5] or use the command line.
+[パラメーターの全リスト][5]を参照するか、コマンドラインを使用してください。
 
 ```bash
 ddprof --help
 ```
 
-### Logging
+### ロギング
 
-You can configure logging to one of several endpoints:
-- `stdout` prints the logs to standard output stream (the default).
-- `stderr` prints the logs to the standard error stream.
-- `syslog` publishes the logs to syslog, attempting to adhere to the specification in RFC 3164.
-- `disable` disables the logs entirely.
-- Any other value is treated as a file path, with a leading `/` designating an absolute path.
+複数のエンドポイントのうちの 1 つにログを構成することができます。
+- `stdout` はログを標準出力ストリームに出力します (デフォルト)。
+- `stderr` はログを標準エラーストリームに出力します。
+- `syslog` は、RFC 3164 の仕様に準拠するように、ログを syslog に発行します。
+- `disable` はログを完全に無効にします。
+- それ以外の値はファイルパスとして扱われ、先頭の `/` は絶対パスを意味します。
 
-### Global
+### グローバル
 
-If you want to instrument all running process, you can try out the `--global` option.
-Global mode is intended for debug purposes. This requires elevated permissions. Depending on your setup, this can mean running as root, granting `CAP_PERFMON`, `CAP_SYSADMIN`, or setting `perf_event_paranoid` to `-1`.
+実行中のすべてのプロセスをインスツルメンテーションしたい場合は、`--global` オプションを試してみてください。
+グローバルモードはデバッグ用です。このモードでは権限の昇格が必要です。セットアップによっては、root で実行し、`CAP_PERFMON` や `CAP_SYSADMIN` を許可するか、`perf_event_paranoid` を `-1` に設定する必要があります。
 
 ```bash
 ./ddprof --environment staging --global --service_version full-host-profile
 ```
 
-For most configurations, this consists of all processes visible within the profiler's PID namespace.
+ほとんどの構成では、これはプロファイラーの PID ネームスペースで見えるすべてのプロセスで構成されます。
 
-## Not sure what to do next?
+## 次のステップ
 
-The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+[プロファイラーの概要][6]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

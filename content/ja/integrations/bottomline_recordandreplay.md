@@ -27,7 +27,7 @@
   "vendor_id": bottomline
 "categories":
 - mainframes
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/bottomline_recordandreplay/README.md"
 "display_on_public_website": true
@@ -80,19 +80,19 @@ Bottomline's Mainframe Record and Replay solution is non-invasive in its capabil
 
 With this integration, you can monitor Bottomline's' Record and Replay sessions in Datadog to provide visibility into resource utilization, resource performance, user activity, security events, and system monitors. Customers can also directly access user session replays through Datadog.
 
-### Monitors
+### モニター
 
 This integration includes a monitor that reports when a Mainframe Resource is experiencing a problem.
 
-### Metrics
+### メトリクス
 
 See [metadata.csv][1] for a list of metrics provided by this check.
 
-### Dashboards
+### ダッシュボード
 
 **Bottomline Record and Replay Overview**: This dashboard gives visibility into what resources are being used, resource performance, user activity, security events, and system monitors.
 
-## Setup
+## セットアップ
 
 Follow the step-by-step instructions below to install and configure this check for an Agent running on a host. 
 
@@ -105,7 +105,7 @@ The following items are required for this integration to run as intended:
   - A Windows desktop to install Bottomline's Enterprise Manager for configuring Record and Replay.
 
 
-### Setup
+### セットアップ
 
 If you are not already a customer of Bottomline, visit [Bottomline's Marketplace listing][2] to purchase a license.
 

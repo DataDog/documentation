@@ -4,30 +4,30 @@
 - "network"
 - "oracle"
 - "tracing"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Collect custom metrics from your applications using the Yammer Metrics library."
+"description": "Yammer メトリクスライブラリを使用して、アプリケーションからカスタムメトリクスを収集。"
 "doc_link": "https://docs.datadoghq.com/integrations/java/"
 "draft": false
 "further_reading":
 - "link": "https://docs.datadoghq.com/integrations/faq/i-have-a-matching-bean-for-my-jmx-integration-but-nothing-on-collect"
-  "tag": "FAQ"
-  "text": "I Have a Matching Bean for my JMX integration but nothing on Collect!"
+  "tag": "よくあるご質問"
+  "text": "JMX インテグレーションに一致する Bean がありますが、データが収集できません。"
 - "link": "https://docs.datadoghq.com/integrations/faq/view-jmx-data-in-jconsole-and-set-up-your-jmx-yaml-to-collect-them/"
-  "tag": "FAQ"
-  "text": "View JMX data in jConsole and set up your jmx.yaml to collect them"
+  "tag": "よくあるご質問"
+  "text": "jConsole で JMX データを表示し、jmx.yaml でデータの収集をセットアップする"
 - "link": "https://docs.datadoghq.com/integrations/faq/jmx-yaml-error-include-section/"
-  "tag": "FAQ"
+  "tag": "よくあるご質問"
   "text": "jmx.yaml error: Include Section"
 - "link": "https://docs.datadoghq.com/integrations/faq/collecting-composite-type-jmx-attributes/"
-  "tag": "FAQ"
-  "text": "Collecting Composite type JMX attributes"
+  "tag": "よくあるご質問"
+  "text": "複合型の JMX 属性を収集する"
 - "link": "https://docs.datadoghq.com/integrations/guide/running-jmx-commands-in-windows/"
-  "tag": "Guide"
-  "text": "Running JMX commands in Windows"
+  "tag": "ガイド"
+  "text": "Windows で JMX コマンドを実行する"
 - "link": "https://docs.datadoghq.com/integrations/guide/use-bean-regexes-to-filter-your-jmx-metrics-and-supply-additional-tags/"
-  "tag": "Guide"
-  "text": "Use Bean regexes to filter your JMX metrics and supply additional tags"
+  "tag": "ガイド"
+  "text": "Bean 正規表現を使用して JMX メトリクスをフィルタリングし、追加のタグを提供する"
 "git_integration_title": "java"
 "has_logo": true
 "integration_id": "java"
@@ -46,7 +46,7 @@
 
 The Java integration allows you to collect metrics, traces, and logs from your Java application.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 <div class="alert alert-warning">
@@ -63,11 +63,11 @@ If your application exposes [JMX][1] metrics, a lightweight Java plugin named JM
 
 **Note**: When submitting a RATE metric type through DogStatsD, the metric appears as a GAUGE in-app to ensure relevant comparison across different Agents. For more information, see the [Metric Submission: DogStatsD documentation][3].
 
-#### Installation
+#### インストール
 
 Make sure [you can open a JMX remote connection][4]. A remote connection is required for the Datadog Agent to connect to the JVM, even when the two are on the same host. For security reasons, it is recommended not to use `0.0.0.0` for the listening address, and using `com.sun.management.jmxremote.host=127.0.0.1` for a colocated JVM and Agent is recommended.
 
-#### Configuration
+#### 構成
 
 If running the Agent as a binary on a host, configure your JMX check as any [other Agent integrations][5]. If running the Agent as a DaemonSet in Kubernetes, configure your JMX check using [auto-discovery][6].
 
@@ -280,9 +280,9 @@ See the dedicated documentation on how to [setup Java log collection][11] to for
 
 After [enabling trace collection with your Agent][12], see the dedicated documentation for [instrumenting your Java application][13] to send its traces to Datadog.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 {{< get-metrics-from-git >}}
 
@@ -295,11 +295,11 @@ jvm.gc.parnew.time => jvm.gc.minor_collection_time
                       jvm.gc.major_collection_time
 ```
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "java" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Consult the list of [JMX troubleshooting commands and FAQs][16].
 

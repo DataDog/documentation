@@ -5,27 +5,27 @@ dependencies:
 - "https://github.com/DataDog/synthetics-test-automation-circleci-orb/blob/main/README.md"
 title: Continuous Testing and CircleCI Orb
 ---
-## Overview
+## 概要
 
 [![CircleCI Build Status](https://circleci.com/gh/DataDog/synthetics-test-automation-circleci-orb.svg?style=shield 'CircleCI Build Status')](https://circleci.com/gh/DataDog/synthetics-test-automation-circleci-orb) [![CircleCI Orb Version](https://badges.circleci.com/orbs/datadog/synthetics-ci-orb.svg)](https://circleci.com/orbs/registry/orb/datadog/synthetics-ci-orb) [![Apache 2.0 License](https://shields.io/badge/license-Apache--2.0-lightgray)](https://raw.githubusercontent.com/DataDog/synthetics-ci-orb/main/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
-Run Synthetic tests in your CircleCI pipelines using the Datadog CircleCI orb.
+Datadog CircleCI orb を使用して、CircleCI パイプラインで Synthetic テストを実行します。
 
-The CircleCI command orb installs [datadog-ci][1] and uses the `datadog-ci synthetics run-tests` [command][2] to execute [Datadog Synthetic tests][3].
+CircleCI コマンド orb は [datadog-ci][1] をインストールし、`datadog-ci synthetics run-tests` [コマンド][2]で [Datadog Synthetic テスト][3]を実行するものです。
 
-## Setup
+## セットアップ
 
-To get started:
+始めるには
 
-1. Add your Datadog API and application keys as environment variables to your CircleCI project. For more information, see [API and Application Keys][2].
-2. Ensure the image running the orb is a Linux x64 base image with cURL installed.
-3. Customize your workflow by creating a [`run-tests.yml`][14] file and following the naming conventions to specify [inputs](#inputs) for your workflow.
+1. Datadog の API キーとアプリケーションキーを環境変数として CircleCI プロジェクトに追加します。詳しくは、[API とアプリケーションキー][2]を参照してください。
+2. orb を実行しているイメージが、cURL がインストールされた Linux x64 のベースイメージであることを確認します。
+3. [`run-tests.yml`][14] ファイルを作成し、命名規則に従ってワークフローの[入力](#inputs)を指定することで、ワークフローをカスタマイズします。
 
-Your workflow can be [simple](#simple-usage) or [complex](#complex-usage).
+ワークフローは[シンプル](#simple-usage)または[複雑](#complex-usage)にすることができます。
 
-## Simple usage
+## シンプルの使用
 
-### Example orb usage using public IDs
+### 公開 ID を使用した orb 使用の例
 
 ```yml
 version: 2.1
@@ -47,9 +47,9 @@ workflows:
       - e2e-tests
 ```
 
-### Example orb usage using a global configuration override
+### グローバルコンフィグレーションのオーバーライドを使用した orb 使用の例
 
-This orb overrides the path to the pattern for [test files][18].
+この orb では、[テストファイル][18]のパターンへのパスがオーバーライドされます。
 
 ```yml
 version: 2.1
@@ -71,11 +71,11 @@ workflows:
       - e2e-tests
 ```
 
-For another example pipeline that triggers Synthetic tests, see the [`simple-example.yml` file][15].
+Synthetic テストをトリガーするパイプラインの別の例については、[`simple-example.yml` ファイル][15]を参照してください。
 
-## Complex usage
+## 複雑の使用
 
-### Example orb usage using the `test_search_query`
+### `test_search_query` を使用した orb 使用の例
 
 ```yml
 version: 2.1
@@ -97,7 +97,7 @@ workflows:
       - e2e-tests
 ```
 
-### Example orb usage using the [Continuous Testing Tunnel][10]
+### [Continuous Testing Tunnel][10] を使用した orb 使用の例
 
 ```yml
 version: 2.1
@@ -130,42 +130,42 @@ workflows:
             - build-image
 ```
 
-For additional options such as customizing the `pollingTimeout` for your CircleCI pipelines, see [CI/CD Integrations Configuration][18]. For another example pipeline that starts a local server and triggers Synthetic tests using the Continuous Testing Tunnel, see the [`advanced-example.yml` file][16].
+CircleCI パイプラインの `pollingTimeout` をカスタマイズするなどの追加オプションについては、[CI/CD インテグレーション構成][18]を参照してください。ローカルサーバーを起動し、Continuous Testing Tunnel を使用して Synthetic テストをトリガーする別のサンプルパイプラインについては、[`advanced-example.yml` ファイル][16]を参照してください。
 
-## Inputs
+## 入力
 
-To customize your workflow, you can set the following parameters in a [`run-tests.yml` file][14]:
+ワークフローをカスタマイズするために、[`run-tests.yml` ファイル][14]に以下のパラメーターを設定することができます。
 
-| Name                      | Type         | Default                                   | Description                                                                                                                                                                                                             |
+| 名前                      | タイプ         | デフォルト                                   | 説明                                                                                                                                                                                                             |
 | ------------------------- | ------------ | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `api_key`                 | env var name | `DATADOG_API_KEY`                         | The name of the environment variable containing the API key.                                                                                                                                                            |
-| `app_key`                 | env var name | `DATADOG_APP_KEY`                         | The name of the environment variable containing the APP key.                                                                                                                                                            |
-| `background`              | boolean      | `false`                                   | Whether or not this step should run in the background. [See official CircleCI documentation](https://circleci.com/docs/configuration-reference/#run).                                                                   |
-| `config_path`             | string       | `datadog-ci.json`                         | The global JSON configuration used when launching tests.                                                                                                                                                                |
-| `fail_on_critical_errors` | boolean      | `false`                                   | Fail if tests were not triggered or results could not be fetched.                                                                                                                                                       |
-| `fail_on_missing_tests`   | boolean      | `false`                                   | Fail if at least one specified test with a public ID (using `public_ids` or listed in a [test file][18]) is missing in a run (for example, if it has been deleted programmatically or on the Datadog site).             |
-| `fail_on_timeout`         | boolean      | `true`                                    | Force the CI to fail (or pass) if one of the results exceeds its test timeout.                                                                                                                                          |
-| `files`                   | string       | `{,!(node_modules)/**/}*.synthetics.json` | A list of glob patterns to detect Synthetic tests config files, separated by new lines.                                                                                                                                 |
-| `junit_report`            | string       | _none_                                    | The filename for a JUnit report if you want to generate one.                                                                                                                                                            |
-| `locations`               | string       | _values in [test files][18]_              | String of locations separated by semicolons to override the locations where your tests run.                                                                                                                             |
-| `no_output_timeout`       | string       | _30 minutes_                              | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as “20m”, “1.25h”, “5s”. [See official CircleCI documentation](https://circleci.com/docs/configuration-reference/#run). |
-| `polling_timeout`         | number       | _30 minutes_                              | The duration (in milliseconds) after which the action stops polling for test results. At the CI level, test results completed after this duration are considered failed.                                                |
-| `public_ids`              | string       | _values in [test files][18]_              | A list of test IDs for Synthetic tests you want to trigger, separated by new lines or commas.                                                                                                                          |
-| `site`                    | string       | `datadoghq.com`                           | The [Datadog site][17] to send data to. If the `DD_SITE` environment variable is set, it takes preference.                                                                                                              |
-| `subdomain`               | string       | `app`                                     | The name of the custom subdomain set to access your Datadog application.                                                                                                                                                |
-| `test_search_query`       | string       | _none_                                    | Trigger tests corresponding to a search query.                                                                                                                                                                          |
-| `tunnel`                  | boolean      | `false`                                   | Use the Continuous Testing Tunnel to trigger tests.                                                                                                                                                                     |
-| `variables`               | string       | _none_                                    | A list of global variables to use for Synthetic tests, separated by new lines or commas. For example: `START_URL=https://example.org,MY_VARIABLE="My title"`.                                                           |
+| `api_key`                 | 環境変数名 | `DATADOG_API_KEY`                         | API キーが格納されている環境変数名。                                                                                                                                                            |
+| `app_key`                 | 環境変数名 | `DATADOG_APP_KEY`                         | APP キーが格納されている環境変数名。                                                                                                                                                            |
+| `background`              | ブール値      | `false`                                   | Whether or not this step should run in the background. [See official CircleCI documentation](https://circleci.com/docs/configuration-reference/#run).                                                                   |
+| `config_path`             | 文字列       | `datadog-ci.json`                         | テストを起動する際に使用するグローバルな JSON 構成。                                                                                                                                                                |
+| `fail_on_critical_errors` | ブール値      | `false`                                   | テストがトリガーされなかったか、結果を取得できなかった場合に失敗します。                                                                                                                                                       |
+| `fail_on_missing_tests`   | ブール値      | `false`                                   | パブリック ID (`public_ids` を使用するか、[テストファイル][12]にリストされている) を持つ指定されたテストが少なくとも 1 つ実行中に見つからない場合 (例えば、プログラム上または Datadog サイトで削除された場合)、失敗します。             |
+| `fail_on_timeout`         | ブール値      | `true`                                    | テストタイムアウトを超えた場合、CI を強制的に失敗 (または合格) させます。                                                                                                                                          |
+| `files`                   | 文字列       | `{,!(node_modules)/**/}*.synthetics.json` | A list of glob patterns to detect Synthetic tests config files, separated by new lines.                                                                                                                                 |
+| `junit_report`            | 文字列       | _なし_                                    | JUnit レポートを生成したい場合のファイル名。                                                                                                                                                            |
+| `locations`               | 文字列       | _[テストファイル][18]の値_              | テストが実行される場所をオーバーライドするための、セミコロンで区切られた場所の文字列。                                                                                                                             |
+| `no_output_timeout`       | 文字列       | _30 分_                              | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as “20m”, “1.25h”, “5s”. [See official CircleCI documentation](https://circleci.com/docs/configuration-reference/#run). |
+| `polling_timeout`         | 数値       | _30 分_                              | アクションがテスト結果のポーリングを停止するまでの時間 (ミリ秒単位)。CI レベルでは、この時間以降に完了したテスト結果は失敗とみなされます。                                                |
+| `public_ids`              | 文字列       | _[テストファイル][18]の値_              | A list of test IDs for Synthetic tests you want to trigger, separated by new lines or commas.                                                                                                                          |
+| `site`                    | 文字列       | `datadoghq.com`                           | データ送信先となる [Datadog のサイト][17]。環境変数 `DD_SITE` が設定されている場合は、そちらが優先されます。                                                                                                              |
+| `subdomain`               | 文字列       | `app`                                     | Datadog アプリケーションにアクセスするために設定されたカスタムサブドメインの名前。                                                                                                                                                |
+| `test_search_query`       | 文字列       | _なし_                                    | 検索クエリに対応するテストをトリガーします。                                                                                                                                                                          |
+| `tunnel`                  | ブール値      | `false`                                   | Continuous Testing Tunnel を使用してテストをトリガーします。                                                                                                                                                                     |
+| `variables`               | 文字列       | _なし_                                    | A list of global variables to use for Synthetic tests, separated by new lines or commas. For example: `START_URL=https://example.org,MY_VARIABLE="My title"`.                                                           |
 
-To learn about additional options for your CircleCI pipelines, see [Continuous Testing & CI/CD Integrations Configuration][12].
+CircleCI パイプラインの追加オプションについては、[Continuous Testing と CI/CD インテグレーション構成][12]を参照してください。
 
-## Further reading
+## 参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Continuous Testing and CI/CD Configuration][6]
-- [Continuous Testing and CI GitHub Actions][11]
-- [Best practices for continuous testing with Datadog][13]
+- [Continuous Testing と CI/CD の構成][6]
+- [Continuous Testing と CI GitHub アクション][11]
+- [Datadog を使った継続的テストのベストプラクティス][13]
 - [Continuous Testing Tunnel][10]
 
 [1]: https://github.com/DataDog/datadog-ci/

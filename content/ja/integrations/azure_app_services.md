@@ -2,9 +2,9 @@
 "categories":
 - "cloud"
 - "azure"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Azure App Services metrics."
+"description": "Azure App Services のキーメトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/azure_app_services/"
 "draft": false
 "git_integration_title": "azure_app_services"
@@ -46,29 +46,29 @@ Use Azure App Service view to:
 
 To enable Datadog APM and custom metrics for your applications running in Azure App Service, see the documentation for the [Datadog Azure App Service extension][1].
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration first][2]. There are no other installation steps that need to be performed.
 
 For additional monitoring options, including logs and trace ID injection, see the [Azure App Service extension][1].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_app_services" >}}
 
 
-### Events
+### イベント
 
 The Azure App Service integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure App Service integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

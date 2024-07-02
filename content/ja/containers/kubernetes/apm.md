@@ -26,11 +26,11 @@ further_reading:
 
 This page describes how to set up and configure [Application Performance Monitoring (APM)][10] for your Kubernetes application.
 
-{{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="The APM troubleshooting pipeline: The tracer sends traces and metrics data from the application pod to the Agent pod, which sends it to the Datadog backend to be shown in the Datadog UI.">}}
+{{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="APM のトラブルシューティングパイプライン: トレーサーは、アプリケーションポッドから Agent ポッドにトレースとメトリクスデータを送信し、Agent ポッドはそれを Datadog バックエンドに送信して Datadog UI に表示させることができます。">}}
 
 You can send traces over Unix Domain Socket (UDS), TCP (`IP:Port`), or Kubernetes service. Datadog recommends that you use UDS, but it is possible to use all three at the same time, if necessary.
 
-## Setup
+## セットアップ
 1. If you haven't already, [install the Datadog Agent][1] in your Kubernetes environment.
 2. [Configure the Datadog Agent](#configure-the-datadog-agent-to-collect-traces) to collect traces.
 3. [Configure application pods](#configure-your-application-pods-to-submit-traces-to-datadog-agent) to submit traces to the Datadog Agent.
@@ -60,7 +60,7 @@ spec:
         path: /var/run/datadog/apm.socket # default
 ```
 
-When APM is enabled, the default configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `features.apm.unixDomainSocketConfig.path` configuration value.
+APM が有効になると、デフォルトのコンフィギュレーションにより、ホスト上にディレクトリが作成され、Agent 内にマウントされます。次に Agent はソケットファイル `/var/run/datadog/apm/apm.socket` を作成し、リッスンします。アプリケーションポッドも同様に、このボリュームをマウントして、この同じソケットに書き込むことができます。`features.apm.unixDomainSocketConfig.path` のコンフィギュレーション値で、パスとソケットを変更することが可能です。
 
 {{% k8s-operator-redeploy %}}
 
@@ -79,7 +79,7 @@ datadog:
     socketEnabled: true    
 ```
 
-The default configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `datadog.apm.hostSocketPath` and `datadog.apm.socketPath` configuration values.
+デフォルトのコンフィギュレーションにより、ホスト上にディレクトリが作成され、Agent 内にマウントされます。次に Agent はソケットファイル `/var/run/datadog/apm.socket` を作成し、リッスンします。アプリケーションポッドも同様に、このボリュームをマウントして、この同じソケットに書き込むことができます。`datadog.apm.hostSocketPath` と `datadog.apm.socketPath` のコンフィギュレーション値で、パスとソケットを変更することが可能です。
 
 ```yaml
 datadog:
@@ -100,14 +100,14 @@ To disable APM, set `datadog.apm.socketEnabled` to `false`.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configure your application pods to submit traces to Datadog Agent
+### Datadog Agent にトレースを送信するためのアプリケーションポッドの構成
 
 {{< tabs >}}
 
 {{% tab "Datadog Admission Controller" %}}
-The Datadog Admission Controller is a component of the Datadog Cluster Agent that simplifies your application pod configuration. Learn more by reading the [Datadog Admission Controller documentation][1].
+Datadog Admission Controller は、Datadog Cluster Agent のコンポーネントで、アプリケーションポッドの構成を簡素化します。詳しくは、[Datadog Admission Controller ドキュメント][1]をお読みください。
 
-Use the Datadog Admission Controller to inject environment variables and mount the necessary volumes on new application pods, automatically configuring pod and Agent trace communication. Learn how to automatically configure your application to submit traces to Datadog Agent by reading the [Injecting Libraries Using Admission Controller][2] documentation.
+Datadog Admission Controller を使用して環境変数を挿入し、新しいアプリケーションポッドに必要なボリュームをマウントすることで、ポッドと Agent のトレース通信を自動で構成します。Datadog Agent にトレースを送信するためにアプリケーションを自動的に構成する方法については、[Admission Controller を使ったライブラリの挿入][2]のドキュメントを参照してください。
 
 [1]: /agent/cluster_agent/admission_controller/
 [2]: /tracing/trace_collection/library_injection_local/
@@ -137,14 +137,14 @@ kind: Deployment
           name: apmsocketpath
 ```
 
-### Configure your application tracers to emit traces:
+### アプリケーショントレーサーがトレースを発するように構成します。
 After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog tracer into your applications to emit the traces. Once this is done, the tracer sends the traces to the appropriate `DD_TRACE_AGENT_URL` endpoint.
 
 {{% /tab %}}
 
 
 {{% tab TCP %}}
-If you are sending traces to the Agent by using TCP (`<IP_ADDRESS>:8126`) supply this IP address to your application pods—either automatically with the [Datadog Admission Controller][1], or manually using the downward API to pull the host IP. The application container needs the `DD_AGENT_HOST` environment variable that points to `status.hostIP`:
+TCP (`<IP_ADDRESS>:8126`) を使用して Agent にトレースを送信している場合、この IP アドレスをアプリケーションポッドに供給します ([Datadog Admission Controller][1] で自動的に、または手動で下位 API を使用してホスト IP をプルします)。アプリケーションコンテナには、`status.hostIP` を指す環境変数 `DD_AGENT_HOST` が必要です。
 
 ```yaml
 apiVersion: apps/v1
@@ -160,21 +160,21 @@ kind: Deployment
               fieldRef:
                 fieldPath: status.hostIP
 ```
-**Note:** This configuration requires the Agent to be configured to accept traces over TCP
+**注:** この構成では、Agent が TCP 上のトレースを受け入れるように構成されている必要があります。
 
-### Configure your application tracers to emit traces:
-After configuring your Datadog Agent to collect traces and giving your application pods the configuration on *where* to send traces, install the Datadog tracer into your applications to emit the traces. Once this is done, the tracer automatically sends the traces to the appropriate `DD_AGENT_HOST` endpoint.
+### アプリケーショントレーサーがトレースを発するように構成します。
+Datadog Agent がトレースを収集するように構成し、アプリケーションポッドにトレースの送信先に関する構成を行った後、Datadog トレーサーをアプリケーションにインストールして、トレースを送信します。これが完了すると、トレーサーは適切な `DD_AGENT_HOST` エンドポイントにトレースを自動的に送出します。
 
 [1]: /agent/cluster_agent/admission_controller/
 {{% /tab %}}
 
 {{< /tabs >}}
 
-Refer to the [language-specific APM instrumentation docs][2] for more examples.
+その他の例については、[言語ごとの APM インスツルメンテーションドキュメント][2]を参照してください。
 
-## Additional configuration
+## 追加構成
 
-### Configure the Datadog Agent to accept traces over TCP
+### TCP 経由でトレースを受け取るように Datadog Agent を構成する
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
@@ -276,7 +276,7 @@ spec:
 
 List of environment variables available for configuring APM:
 
-| Environment variable | Description |
+| 環境変数 | 説明 |
 | -------------------- | ----------- |
 | `DD_APM_ENABLED`           | When set to `true`, the Datadog Agent accepts trace metrics. <br/>**Default**: `true` (Agent 7.18+) |
 | `DD_APM_ENV`           | Sets the `env:` tag on collected traces.  |
@@ -291,7 +291,7 @@ List of environment variables available for configuring APM:
 | `DD_APM_MAX_CPU_PERCENT`     | The CPU percentage that the Datadog Agent aims to use. If surpassed, the API rate limits incoming requests. <br/>**Default**: `50` |
 | `DD_APM_FILTER_TAGS_REQUIRE`     | Collects only traces that have root spans with an exact match for the specified span tags and values. <br/>See [Ignoring unwanted resources in APM][11]. |
 | `DD_APM_FILTER_TAGS_REJECT`     | Rejects traces that have root spans with an exact match for the specified span tags and values. <br/>See [Ignoring unwanted resources in APM][11]. |
-| `DD_APM_REPLACE_TAGS` | [Scrub sensitive data from your span's tags][4]. |
+| `DD_APM_REPLACE_TAGS` | [スパンのタグから機密データをスクラブします][4]。 |
 | `DD_APM_IGNORE_RESOURCES`  | Configure resources for the Agent to ignore. Format should be comma separated, regular expressions. <br/>For example: `GET /ignore-me,(GET\|POST) /and-also-me` |
 | `DD_APM_LOG_FILE`  | Path to file where APM logs are written. |
 | `DD_APM_CONNECTION_LIMIT`  | Maximum connection limit for a 30 second time window. <br/>**Default**: 2000 |
@@ -300,12 +300,12 @@ List of environment variables available for configuring APM:
 | `DD_BIND_HOST`             | Set the StatsD and receiver hostname. |
 | `DD_DOGSTATSD_PORT`        | For tracing over TCP, set the DogStatsD port. |
 | `DD_ENV`                   | Sets the global `env` for all data emitted by the Agent. If `env` is not present in your trace data, this variable is used. |
-| `DD_HOSTNAME`         | Manually set the hostname to use for metrics if autodetection fails, or when running the Datadog Cluster Agent. |
+| `DD_HOSTNAME`         | 自動検出が失敗した場合、または Datadog Cluster Agent を実行する場合に、メトリクスに使用するホスト名を手動で設定します。 |
 | `DD_LOG_LEVEL`             | Set the logging level. <br/>**Values**: `trace`, `debug`, `info`, `warn`, `error`, `critical`, `off` |
-| `DD_PROXY_HTTPS`     | Set up the URL for the proxy to use. |
+| `DD_PROXY_HTTPS`     | 使用するプロキシの URL をセットアップします。 |
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

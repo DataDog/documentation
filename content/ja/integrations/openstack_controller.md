@@ -32,7 +32,7 @@
 - provisioning
 - orchestration
 - configuration & deployment
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/openstack_controller/README.md"
 "display_on_public_website": true
@@ -136,7 +136,7 @@ Create a `datadog` user that is used in your `openstack_controller.d/conf.yaml` 
 
 [Run the Agent's `status` subcommand][6] and look for `openstack_controller` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "openstack_controller" >}}

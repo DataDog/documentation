@@ -100,8 +100,8 @@ data:
 
 `cd-visibility-trigger` is the name of the trigger, and `cd-visibility-template` is a reference to the template created above.
 
-After the service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
-Modify the annotations of the Argo CD application by either using the Argo CD UI or modifying the application definition with the following annotations:
+サービス、トリガー、およびテンプレートが構成マップに追加されたら、インテグレーションに Argo CD アプリケーションをサブスクライブできます。
+Argo CD UI を使用するか、以下のアノテーションでアプリケーション定義を変更することで、Argo CD アプリケーションのアノテーションを変更します。
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -113,25 +113,25 @@ metadata:
     dd_service: <YOUR_SERVICE>
 ```
 
-There are three annotations:
-1. The notifications annotation subscribes the Argo CD application to the notification setup created above.
+アノテーションは 3 つあります。
+1. notifications アノテーションは、上記で作成した通知セットアップに Argo CD アプリケーションをサブスクライブします。
 2. The `dd_env` annotation configures the environment of the application. Replace `YOUR_ENV` above with the environment
    to which this application is deploying (for example: `staging` or `prod`). If you don't set this annotation,
    the environment defaults to `none`.
-3. The `dd_service` annotation configures the service of the application. Replace `YOUR_SERVICE` above with the service
-   that the Argo CD application is deploying (for example: `transaction-service`). When this annotation is used, the service
-   name is added to all the deployment executions generated from the application. Moreover, if your service is
-   registered in [Service Catalog][13], the team name is also added to all the deployment executions. Omit this annotation
-   if your Argo CD application is configured to deploy more than one service.
+3. `dd_service` アノテーションはアプリケーションのサービスを構成します。上記の `YOUR_SERVICE` を、
+   Argo CD アプリケーションがデプロイしているサービス (例えば `transaction-service`) に置き換えます。このアノテーションを使用すると、
+   アプリケーションから生成されるすべてのデプロイメント実行にサービス名が追加されます。さらに、サービスが
+   [サービスカタログ][13]に登録されている場合、チーム名もすべてのデプロイメント実行に追加されます。Argo CD アプリケーションが
+   複数のサービスをデプロイするように構成されている場合は、このアノテーションを省略します。
 
 See the [Argo CD official guide][12] for more details on applications subscriptions.
 
 After this final step is completed, you can start monitoring your Argo CD deployments in Datadog.
 
-## Adding custom tags to deployment executions
+## デプロイメント実行にカスタムタグを追加する
 
-You can optionally add custom tags to the deployment executions generated from Argo CD applications deployments. These tags can be used to filter, group, and aggregate deployment executions in Datadog.
-To add custom tags, add the `dd_customtags` annotation to your Argo CD application annotations and set the value to a comma-separated list of tags, structured as `key:value` pairs. For example:
+Argo CD アプリケーションのデプロイメントから生成されたデプロイメント実行には、オプションでカスタムタグを追加できます。これらのタグは、Datadog でデプロイメント実行をフィルタリング、グループ化、集計するために使用できます。
+カスタムタグを追加するには、`dd_customtags` アノテーションを Argo CD アプリケーションのアノテーションに追加し、`key:value` ペアとして構造化されたタグのカンマ区切りリストを値に設定します。例:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -147,12 +147,12 @@ metadata:
 
 The [**Deployments**][6] and [**Executions**][7] pages populate with data after a deployment is executed. For more information, see [Search and Manage][9] and [CD Visibility Explorer][10].
 
-## Troubleshooting
+## トラブルシューティング
 
 If notifications are not sent, examine the logs of the `argocd-notification-controller` pod. The controller logs when it is sending a notification (for example: `Sending notification ...`) and when it fails to notify a recipient
 (for example: `Failed to notify recipient ...`). For additional troubleshooting scenarios, see the [official Argo CD documentation][8].
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

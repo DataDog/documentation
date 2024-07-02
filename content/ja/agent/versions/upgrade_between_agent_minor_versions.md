@@ -5,52 +5,52 @@ aliases:
   - /agent/guide/upgrade-between-agent-minor-versions
 ---
 
-## Upgrade between minor versions of Agent 6 and 7
+## Agent 6 と 7 のマイナーバージョン間のアップグレード
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-The recommended way to upgrade between minor versions of Agent 6 and 7 is to use the `install_script_agent6.sh` and `install_script_agent7.sh` scripts. The following commands work on all supported Linux distributions.
+Agent 6 と 7 のマイナーバージョン間のアップグレードは、`install_script_agent6.sh` および `install_script_agent7.sh` スクリプトを使用することをお勧めします。以下のコマンドは、サポートされているすべての Linux ディストリビューションで動作します。
 
-Upgrading to a given Agent 6 minor version:
+所定の Agent 6 マイナーバージョンにアップグレードします。
 
 : `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent6.sh)"`
 
-Upgrading to the latest Agent 6 minor version:
+最新の Agent 6 マイナーバージョンにアップグレードします。
 
 : `bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent6.sh)"`
 
-Upgrading to a given Agent 7 minor version:
+所定の Agent 7 マイナーバージョンにアップグレードします。
 
 : `DD_AGENT_MINOR_VERSION=<target_minor> bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent7.sh)"`
 
-Upgrading to the latest Agent 7 minor version:
+最新の Agent 7 マイナーバージョンにアップグレードします。
 
 : `bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Download and install the specific version's installation package.
+特定のバージョンのインストールパッケージをダウンロードし、インストールします。
 
-URL to download a specific Agent 6 minor version:
+特定の Agent 6 マイナーバージョンをダウンロードするための URL:
 
 : `https://ddagent-windows-stable.s3.amazonaws.com/ddagent-cli-6.<minor_version>.<bugfix_version>.msi`
 
-URL to download a specific Agent 7 minor version
+特定の Agent 7 マイナーバージョンをダウンロードするための URL:
 
 : `https://ddagent-windows-stable.s3.amazonaws.com/ddagent-cli-7.<minor_version>.<bugfix_version>.msi`
 
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
-**Note**: It is not possible to upgrade to a specific minor version.
+**注**: 特定のマイナーバージョンにアップグレードすることはできません。
 
-Command to upgrade to the latest Agent 6 minor version:
+最新の Agent 6 マイナーバージョンにアップグレードするためのコマンド:
 
 : `DD_AGENT_MAJOR_VERSION=6 bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_mac_os.sh)"`
 
-Command to upgrade to the latest Agent 7 minor version:
+最新の Agent 7 マイナーバージョンにアップグレードするためのコマンド:
 
 : `DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://dd-agent.s3.amazonaws.com/scripts/install_mac_os.sh)"`
 

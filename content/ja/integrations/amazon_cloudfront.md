@@ -7,9 +7,9 @@
 - "cloud"
 - "log collection"
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track error rates, request counts, and bytes downloaded and uploaded."
+"description": "エラー率、リクエストカウント数、ダウンロードバイト数、アップロードバイト数を追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_cloudfront/"
 "draft": false
 "git_integration_title": "amazon_cloudfront"
@@ -32,9 +32,9 @@ Amazon CloudFront is a global content delivery network (CDN) service that accele
 
 Enable this integration to see in Datadog all your CloudFront metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -108,23 +108,23 @@ You can also configure a consumer, such as Amazon Data Firehose, to send real-ti
 {{% /tab %}}
 {{< /tabs >}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_cloudfront" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to `aws_account`, `region`, and `distributionid`.
 
-### Events
+### イベント
 
 The Amazon CloudFront integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon CloudFront integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

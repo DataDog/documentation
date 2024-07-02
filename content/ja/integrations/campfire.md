@@ -1,15 +1,15 @@
 ---
 "categories":
 - "Collaboration"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Send selected Datadog alerts and graphs to your team's Campfire channel."
+"description": "選択した Datadog のアラートとグラフをチームの Campfire チャンネルに送信。"
 "doc_link": "https://docs.datadoghq.com/integrations/campfire/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/solve-performance-problems-faster-with-campfire-and-datadog/"
-  "tag": "Blog"
-  "text": "Solve performance problems faster with Campfire and Datadog"
+  "tag": "ブログ"
+  "text": "Campfire と Datadog によるパフォーマンス問題の迅速な解決"
 "git_integration_title": "campfire"
 "has_logo": true
 "integration_id": ""
@@ -34,27 +34,27 @@ The Campfire integration enables you to:
 - Be notified when someone posts on your stream.
 - Be notified when a metric alert is triggered.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Sign in with your [Basecamp account][2].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Campfire integration does not include any metric.
 
-### Events
+### イベント
 
 The Campfire integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Campfire integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

@@ -1,6 +1,6 @@
 ---
 title: Account Management
-description: "Manage your Datadog account and organization"
+description: "Datadog アカウントと組織を管理する"
 aliases:
     - /guides/billing
     - /account_management/settings
@@ -9,88 +9,88 @@ cascade:
         rank: 70
 ---
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">The Datadog for Government site only supports SAML login.</div>
+<div class="alert alert-warning">Datadog for Government site では、SAML ログインのみをサポートします。</div>
 {{< /site-region >}}
 
-## Personal settings
+## 個人設定
 
-The personal settings pages in Datadog allow you to control how you appear to others in your organization, switch or leave organizations, and manage your notification preferences.
+Datadog の個人設定ページでは、組織内の他のユーザーへの表示方法の制御、組織の切り替えまたは退会、通知設定の管理を行うことができます。
 
-### Profile
+### プロファイル
 
-Your profile is how others in your organization recognize you in Datadog. Set or update your name, email address, and title from the [Profile tab][11] within the **Personal Settings** page.
+自分の情報が Datadog 内で組織の他のメンバーにどのように表示されるかはプロファイルによって決まります。**Personal Settings** ページ内の [Profile タブ][11]から自分の名前、メールアドレス、肩書きを設定または更新します。
 
-To update your picture, create an account on [Gravatar][1] and associate it with your email address.
+写真を更新するためには、[Gravatar][1] でアカウントを作成し、自分のメールアドレスと関連付けます。
 
-If you log in to Datadog using Google authentication, your email address is provided by your Google account and is **not** editable within Datadog. To change your email address in Google, see the [Google documentation][2].
+Google 認証を使用して Datadog にログインする場合、メールアドレスは Google アカウントで提供されます。Datadog では**ありません**。Google でメールアドレスを変更するには、[Google のドキュメント][2]を参照してください。
 
-### Preferences
+### 設定
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
-You can manage your timezone, visual accessibility preference, and email subscriptions from the [Preferences tab][3] within the **Personal Settings** page. 
+**Personal Settings** ページ内の [Preferences タブ][3]から、タイムゾーン、ビジュアルアクセシビリティの環境設定、メールサブスクリプションを管理することができます。
 
-#### Email subscriptions
+#### メールサブスクリプション
 
-Under email subscriptions, you have access to the following reports:
+メールサブスクリプションでは、以下のレポートにアクセスできます。
 
-* Daily Digest
-* Weekly Digest
+* 1 日のダイジェスト
+* 週間ダイジェスト
 
-If you are unsure if an email digest is relevant to you, you can view an example by clicking the **Example** link next to each email subscription. You can also use the **Unsubscribe From All** button to unsubscribe from all email subscriptions.
+メールダイジェストが自分に関連しているかどうかわからない場合は、各メールサブスクリプションの横にある **Example** リンクをクリックして例を表示することができます。**Unsubscribe From All** ボタンを使用して、すべてのメールサブスクリプションから退会することもできます。
 {{% /site-region %}}
 
 
 {{% site-region region="gov" %}}
-You can manage your timezone and visual accessibility preference from the [**Preferences** tab][3] within the **Personal Settings** page.
+**Personal Settings** ページ内の [**Preferences** タブ][3]から、タイムゾーンおよびビジュアルアクセシビリティの環境設定を管理することができます。
 {{% /site-region %}}
 
-#### Visual accessibility
+#### ビジュアルアクセシビリティ
 
-The visual accessibility preference has five different settings to address color vision deficiency, low visual acuity, and sensitivity to bright colors. If you opt in to an accessible color setting, Datadog translates all graphs that use the classic color palette to an accessible set of colors catered to your visual needs.
+ビジュアルアクセシビリティの環境設定には、 色覚障害、視力低下、明るい色への過敏性に対応するための 5 つの設定があります。アクセシブルカラー設定を選択すると、Datadog は、クラシックカラーパレットを使用するすべてのグラフを、視覚的ニーズに合わせたアクセシブルカラーに変換します。
 
-**Note**: Your visual accessibility preference is saved locally in your browser. If you use a different browser or clear your cache, the preference is set to the default setting.
+**注**: ビジュアルアクセシビリティの環境設定は、ブラウザにローカルに保存されます。別のブラウザを使用するか、キャッシュをクリアすると、環境設定はデフォルト設定になります。
 
-### Organizations
+### 組織
 
-The [Organizations tab][12] in **Personal Settings** lists all of the organizations you are associated with. Switch between these organizations from this page or by hovering over the account menu in the left-side navigation.
+**Personal Settings** の [Organizations タブ][12]には、自分が関連付けられているすべての組織が一覧表示されます。このページから組織を切り替えることができます。なお、組織の切り替えは左側のナビゲーションのアカウントメニューにカーソルを合わせることでも行えます。
 
-**Note**: If you leave an organization, you cannot rejoin unless invited by an administrator in that organization.
+**注**: 組織を退出すると、組織の管理者が招待するまで参加し直すことはできません。
 
-To join an existing organization, you must be invited by an administrator. After you are invited, you are sent an email with the subject "You've been invited to join <Organization Name>". Click the **Join Account** button in the email.
+既存の組織に参加するには、管理者から招待される必要があります。招待された後、"You've been invited to join <Organization Name>" という件名のメールが届きます。メールの **Join Account** ボタンをクリックします。
 
-If you are an organization administrator, reference the additional documentation to:
+組織の管理者の方は、以下ののドキュメントをご参考になさってください。
 
-* [Manage users in your organization][4]
-* [Configure single sign on with SAML][5]
-* [Rename your organization][6]
-* [Manage multi-organization accounts][7]
-* [Change your Datadog plan and view usage and billing history][8]
+* [組織内のユーザーの管理][4]
+* [SAML でのシングルサインオンの構成][5]
+* [組織名の変更][6]
+* [複数の組織のアカウントの管理][7]
+* [Datadog プランを変更して使用状況と請求履歴を表示する][8]
 
-### Security
+### セキュリティ
 
-#### Application keys
+#### アプリケーションキー
 
-The [Application Keys tab][13] in **Personal Settings** allows you to manage your application keys. To copy a key, hover over it until the **Copy Key** icon appears to the right, and click on it. You can also click into a specific key to edit its name, view when it was created, view the profile of the key's owner, copy it, or revoke it.
+**Personal Settings** の [Application Keys タブ][13]では、アプリケーションキーを管理できます。キーをコピーするには、**Copy Key** アイコンが右側に表示されるまでキーにカーソルを合わせてクリックします。特定のキーをクリックして、その名前を編集したり、作成された日時を表示したり、キーの所有者のプロファイルを表示したり、コピーしたり、取り消したりすることもできます。
 
 #### Apps
 
-The [Apps tab][14] in **Personal Settings** allows you to manage apps that have been installed or created by members of your organization. You can filter apps with a search string, or choose to view only enabled or disabled apps using checkboxes.
+**Personal Settings** の [Apps タブ][14]では、組織のメンバーがインストールまたは作成したアプリを管理できます。検索文字列を使用してアプリをフィルタリングしたり、チェックボックスを使用して有効または無効のアプリのみを表示するように選択できます。
 
-When you hover over an app, the option to enable or disable it appears on the right of the app listing.
+アプリにカーソルを合わせると、アプリ一覧の右側に有効または無効にするオプションが表示されます。
 
-## Appearance
+## 外観
 
-View Datadog in dark mode by hovering over your avatar in the sidebar, or by pressing `Ctrl+Opt+D` / `Ctrl+Alt+D`.
+Datadog をダークモードで表示するには、サイドバーにあるアバターの上にマウスを置くか、`Ctrl+Opt+D` / `Ctrl+Alt+D` を押します。
 
-To adapt to your computer's appearance setting, select the *System* option. This automatically matches Datadog's appearance to the theme you've set at the OS level.
+コンピューターの表示設定をそのまま使う場合は、*System* オプションを選択します。これにより、OS の側で設定したテーマが Datadog の表示にも使用されます。
 
-## Connecting to GitHub
+## GitHub への接続
 
-If you have installed the [GitHub integration][9] to create events in Datadog, link your personal GitHub account to your Datadog user account. By linking your accounts, any comments you post to GitHub events in Datadog are automatically posted back into the corresponding issue or pull request in GitHub.
+[GitHub インテグレーション][9]をインストールして Datadog でイベントを作成するには、自分の GitHub アカウントを Datadog ユーザーアカウントにリンクする必要があります。アカウントをリンクすることで、Datadog で GitHub イベントに投稿したコメントは自動的に GitHub の対応する問題またはプルリクエストに投稿し直されます。
 
-## Disabling your organization's account
+## 組織のアカウントを無効にする
 
-To disable your Datadog organization account, contact [Datadog support][10].
+Datadog の組織アカウントを無効にするには、[Datadog サポート][10]にお問い合わせください。
 
 [1]: https://gravatar.com
 [2]: https://support.google.com/accounts/answer/19870?hl=en

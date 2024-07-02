@@ -5,16 +5,16 @@ aliases:
 further_reading:
 - link: /agent/basic_agent_usage/
   tag: Documentation
-  text: Basic Agent Usage
+  text: Agent の基本的な使い方
 algolia:
   tags: [uninstall]
 ---
 
-For information on uninstalling the Agent on your system, consult the [Basic Agent Usage][1] page for your operating system, platform, or configuration tool.
+システム上にある Agent のアンインストールについては、ご利用のオペレーティングシステム、プラットフォーム、または構成ツールに対応した[基本的な Agent の利用方法][1] ページをご覧ください。
 
 {{< uninstall-agent >}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,17 +1,20 @@
 ---
+title: Heatmap Widget
+description: "Build temporal heat map over a given metric."
+widget_type: "heatmap"
 aliases:
-- /ja/graphing/widgets/heat_map/
-- /ja/dashboards/widgets/heat_map/
-description: 特定のメトリクスの時系列ヒートマップを構築する
+    - /graphing/widgets/heat_map/
+    - /dashboards/widgets/heat_map/
 further_reading:
-- link: /ja/dashboards/graphing_json/
+- link: /product_analytics/heatmaps/
   tag: Documentation
-  text: JSON を使用したダッシュボードの構築
-- link: https://www.datadoghq.com/blog/visualize-behavior-datadog-heatmaps/
-  tag: ブログ
-  text: Datadog Heatmaps でユーザー行動を視覚化する
-title: ヒートマップウィジェット
-widget_type: ヒートマップ
+  text: Learn more about heatmaps
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Building Dashboards using JSON
+- link: "https://www.datadoghq.com/blog/visualize-behavior-datadog-heatmaps/"
+  tag: Blog
+  text: Visualize user behavior with Datadog Heatmaps
 ---
 
 {{< img src="dashboards/widgets/heatmap/heatmap.png" alt="ヒートマップグラフの視覚化例" style="width:100%;">}}
@@ -20,7 +23,7 @@ widget_type: ヒートマップ
 
 ## セットアップ
 
-### コンフィギュレーション
+### 構成
 
 通常通り、メトリクスクエリを構成します。'counters' ヒストグラムモードを使用して、OpenTelemetry ヒストグラムをグラフ化します。
 
@@ -44,17 +47,15 @@ Y 軸の目盛を変更するには、Y-Axis Controls ボタンを展開しま�
 
 | オプション                | 必須 | 説明                                                                                                                                                                                                       |
 |-----------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Min`/`Max`           | ✕       | Y 軸に表示する最小値または最大値、またはその両方を指定します。数値または `Auto` (デフォルト値を使用) を指定します。                                                                                                   |
-| `Scale`               | ✕       | 目盛のタイプを指定します。使用可能な値:<br>- linear: 線形目盛 (デフォルト)<br>- log: 対数目盛<br>- pow: 2 の累乗目盛 (2 はデフォルトです。JSON で変更できます)<br>- sqrt: 平方根目盛 |
-| `Always include zero` | ✕       | 常に 0 を含めるか、軸をデータの範囲に合わせるかを指定します。デフォルトは、常に 0 を含めます。                                                                                                                     |
+| `Min`/`Max`           | いいえ       | Y 軸に表示する最小値または最大値、またはその両方を指定します。数値または `Auto` (デフォルト値を使用) を指定します。                                                                                                   |
+| `Scale`               | いいえ       | 目盛のタイプを指定します。使用可能な値:<br>- linear: 線形目盛 (デフォルト)<br>- log: 対数目盛<br>- pow: 2 の累乗目盛 (2 はデフォルトです。JSON で変更できます)<br>- sqrt: 平方根目盛 |
+| `Always include zero` | いいえ       | 常に 0 を含めるか、軸をデータの範囲に合わせるかを指定します。デフォルトは、常に 0 を含めます。                                                                                                                     |
 
 **注**: 対数関数には負の値を適用できないため、Datadog の対数目盛は、値の符号がすべて同じ (すべて正またはすべて負) の場合にのみ機能します。そうでない場合は、空のグラフが返されます。
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] を参照してください。
-
-ヒートマップウィジェットの[ウィジェット JSON スキーマ定義][3]は、以下の表を参照してください。
+このウィジェットは **[Dashboards API][2]** で使用できます。[ウィジェット JSON スキーマ定義][3]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
@@ -62,6 +63,6 @@ Y 軸の目盛を変更するには、Y-Axis Controls ボタンを展開しま�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/events/explorer/#search-syntax
-[2]: /ja/api/latest/dashboards/
-[3]: /ja/dashboards/graphing_json/widget_json/
+[1]: /events/explorer/#search-syntax
+[2]: /api/latest/dashboards/
+[3]: /dashboards/graphing_json/widget_json/

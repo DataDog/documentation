@@ -26,7 +26,7 @@ further_reading:
   tag: Foundation Enablement
   text: Join an interactive session on creating effective monitors and SLOs
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
-  tag: External Site
+  tag: 外部サイト
   text: Create and manage SLOs with Terraform
 ---
 
@@ -61,11 +61,11 @@ When creating SLOs, you can choose from the following types:
 
 For a full comparison, see the [SLO Type Comparison][1] chart.
 
-## Setup
+## セットアップ
 
 Use Datadog's [Service Level Objectives status page][2] to create new SLOs or to view and manage all your existing SLOs. 
 
-### Configuration
+### 構成
 
 1. On the [SLO status page][2], select **New SLO +**.
 2. Select the SLO type. You can create an SLO with any of the following types: [Metric-based][3], [Monitor-based][4], or [Time Slices][5].
@@ -96,7 +96,7 @@ Setting a 100% target means having an error budget of 0% since error budget is e
 
 To edit an SLO, hover over the SLO's row in the list view and click the edit pencil icon that appears at the right of the row, or click on the row to open the details side panel and select the edit button from the cog icon in the top right of the panel.
 
-## Permissions
+## 権限
 
 ### Role based access
 

@@ -27,52 +27,52 @@ algolia:
 <div class="alert alert-warning">Remote Configuration is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## Overview
-Remote Configuration is a Datadog capability that allows you to remotely configure and change the behavior of Datadog components (for example, Agents, tracing libraries, and Observability Pipelines Worker) deployed in your infrastructure, for select product features. Use Remote Configuration to apply configurations to Datadog components in your environment on demand, decreasing management costs, reducing friction between teams, and accelerating issue resolution times.
+## 概要
+リモート構成は Datadog の機能で、インフラストラクチャーにデプロイされた Datadog コンポーネント (Agent、トレーシングライブラリ、観測可能性パイプラインワーカーなど) の動作を、一部の製品機能に対してリモートで構成および変更することが可能です。リモート構成を使用すると、オンデマンドで環境内の Datadog コンポーネントに構成を適用し、管理コストを削減し、チーム間の摩擦を減らし、問題解決時間を短縮することができます。
 
-For Datadog security products, Application Security Management and Cloud Security Management Threats (CSM Threats), Remote Configuration-enabled Agents and compatible tracing libraries provide real-time security updates and responses, enhancing security posture for your applications and cloud infrastructure.
+Datadog のセキュリティ製品である Application Security Management と Cloud Security Management Threats (CSM Threats) については、リモート構成対応の Agent と互換性のあるトレーシングライブラリにより、リアルタイムにセキュリティアップデートとレスポンスを提供し、アプリケーションやクラウドインフラストラクチャーのセキュリティ体制を強化することができます。
 
-## How it works
+## 仕組み
 When Remote Configuration is enabled on the Datadog Agent, it periodically polls the configured [Datadog site][1], to determine whether there are configuration changes to apply to your Remote Configuration-enabled Agents or tracing libraries.
 
-After you submit configuration changes in the respective Datadog product UI for a Remote Configuration-enabled product feature, the changes are stored in Datadog.
+リモート構成が有効な製品機能に対して、それぞれの Datadog 製品 UI で構成変更を送信すると、その変更が Datadog に保存されます。
 
-The following diagram illustrates how Remote Configuration works:
+リモート構成の仕組みを下図に示します。
 
 {{<img src="agent/remote_config/RC_Diagram_v5.png" alt="Users configure features in the UI, the config is stored in Datadog, the Agent requests config updates." width="90%" style="center">}}
 
-1. You configure select product features in the Datadog UI.
-2. The product feature configurations are securely stored within Datadog.
-3. Agents in your environments securely poll, receive, and automatically apply configuration updates from Datadog. Tracing libraries, deployed in your environments, communicate with Agents to request and receive configuration updates from Datadog.
+1. Datadog の UI で選択した製品機能を構成します。
+2. 製品の機能構成は、Datadog 内に安全に保存されます。
+3. 環境内の Agent は、Datadog からの構成アップデートを安全にポーリングし、受信し、自動的に適用します。環境にデプロイされたトレーシングライブラリは、Agent と通信し、Datadog からの構成アップデートをリクエスト、受信します。
 
 ## Configuration order precedence
 Configurations set by higher-priority sources take precedence in the active configuration displayed in Fleet Automation. 
 
 Sources from highest to lowest priority:
 
-1. Remote Configuration
+1. リモート構成
    **Note**: Configuration changes applied through Remote Configuration are not shown in your local configuration file (`datadog.yaml`).
 2. Environment variables set by tools like Helm
 3. Configuration files (`datadog.yaml`) that are managed locally or by configuration management tools like Ansible, Chef, or Puppet
 
 Configurations issued by higher-priority sources override configurations issued by lower-priority sources.
 
-## Supported products and feature capabilities
-The following products and features are supported with Remote Configuration:
+## 対応製品と機能
+リモート構成では、以下の製品・機能に対応しています。
 
-### Fleet Automation
+### フリートオートメーション
 **[Send flares][27] directly from the Datadog site**. Seamlessly troubleshoot the Datadog Agent without directly accessing the host.
 
 ### Application Security Management (ASM)
 
-- **1-click ASM activation**: Enable ASM in 1-click from the Datadog UI.
-- **In-App attack patterns updates**: Receive the newest Web Application Firewall (WAF) attack patterns automatically as Datadog releases them, following newly disclosed vulnerabilities or attack vectors.
-- **Protect**: Block attackers' IPs, authenticated users, and suspicious requests that are flagged in ASM Security Signals and Traces temporarily or permanently through the Datadog UI.
+- **1 クリック ASM アクティベーション**: Datadog UI から 1 クリックで ASM を有効化します。
+- **アプリ内攻撃パターンアップデート**: 新たに公開された脆弱性や攻撃ベクトルに従って Datadog が最新の Web Application Firewall (WAF) 攻撃パターンをリリースすると、これを自動的に受け取ることができます。
+- **保護**: Datadog UI を通じて、攻撃者の IP、認証済みユーザー、ASM セキュリティシグナルとトレースでフラグが立った疑わしいリクエストを一時的または永続的にブロックします。
 
 ### Application Performance Monitoring (APM)
 
 - **Configuration at runtime** (Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Service Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
-- **Remotely set Agent sampling rate** (Public Beta): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
+- **Agent のサンプリングレートをリモートで設定する** (公開ベータ版): Datadog Agent を再起動することなく、Datadog Agent のトレースサンプリング速度を変更し、組織のトレース取り込みをニーズに応じて拡張するためのルールをリモートで設定します。
 
 
 ### Dynamic Instrumentation
@@ -81,40 +81,40 @@ The following products and features are supported with Remote Configuration:
 
 ### CSM Threats
 
-- **Automatic default Agent rule updates**: Automatically receive and update the default Agent rules maintained by Datadog as new Agent detections and enhancements are released. See [Setting Up CSM Threats][3] for more information.
-- **Automatic deployment of custom Agent rules**: Automatically deploy your custom Agent rules to designated hosts (all hosts or a defined subset of hosts).
+- **自動デフォルト Agent ルールアップデート**: 新しい Agent の検出や機能強化がリリースされると、Datadog が管理しているデフォルトの Agent ルールを自動的に受信し、更新します。詳しくは、[CSM Threats の設定][3]をご覧ください。
+- **カスタム Agent ルールの自動デプロイ**: カスタム Agent ルールを指定したホスト (すべてのホストまたは定義したホストのサブセット) に自動的にデプロイします。
 
 ### Observability Pipelines
 
 - **Remotely deploy and update [Observability Pipelines Workers][4] (OPW)**: Build and edit pipelines in the Datadog UI, rolling out your configuration changes to OPW instances running in your environment.
 
-## Security considerations
+## セキュリティへの配慮
 
-Datadog implements the following safeguards to protect the confidentiality, integrity, and availability of configurations received and applied by your Datadog components:
+Datadog は、Datadog コンポーネントが受信し適用した構成の機密性、完全性、可用性を保護するために、以下のセーフガードを実装しています。
 
-* Agents deployed in your infrastructure request configurations from Datadog.
-* Datadog never sends configurations unless requested by Agents, and only sends configurations relevant to the requesting Agent.
+* インフラストラクチャーにデプロイされた Agent が Datadog に構成をリクエストします。
+* Datadog は、Agent からリクエストされない限り構成を送信せず、リクエストした Agent に関連する構成のみを送信します。
 * Because the configuration requests are initiated from your Agents to Datadog over HTTPS (port 443), there is no need to open additional ports in your network firewall.
-* The communication between your Agents and Datadog is encrypted using HTTPS, and is authenticated and authorized using your Datadog API key.
-* Only users with the [`api_keys_write`][5] permissions are authorized to enable or disable Remote Configuration capability on the API key and use the supported product features.
+* お客様の Agent と Datadog 間の通信は、HTTPS を使用して暗号化され、お客様の Datadog API キーを使用して認証と認可が行われます。
+* [`api_keys_write`][5] 権限を持つユーザーのみが、API キーでリモート構成機能を有効または無効にし、サポートされている製品機能を使用することが認可されます。
 * Your configuration changes submitted through the Datadog UI are signed and validated on the Agent and requesting Datadog components, verifying integrity of the configuration.
 
-## Enabling Remote Configuration
+## リモート構成を有効にする
 
-### Prerequisites
+### 前提条件
 
 - Datadog Agent version `7.41.1`  (`7.42.0` for APM sampling rate, `7.43.0` for APM Remote Instrumentation) or higher installed on your hosts or containers.
-- For Datadog products that use tracing libraries, you also need to upgrade your tracing libraries to a Remote Configuration-compatible version. For ASM Protection capabilities and ASM 1-click activation, see [ASM compatibility requirements][6]. For Dynamic Instrumentation, see [Dynamic Instrumentation prerequisites][20].
+- トレーシング ライブラリを使用する Datadog 製品の場合は、トレーシングライブラリもリモート構成に対応したバージョンにアップグレードする必要があります。ASM Protection 機能および ASM 1 クリックアクティベーションについては、 [ASM 互換性の要件][6]を参照してください。ダイナミックインスツルメンテーションについては、[ダイナミックインスツルメンテーションの前提条件][20]を参照してください。
 
-### Setup
+### セットアップ
 
-To enable Remote Configuration:
+リモート構成を有効にするには
 
-1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
+1. RBAC 権限に [`org_management`][7] が含まれていることを確認し、組織のリモート構成を有効にすることができるようにします。
 
-2. Ensure your RBAC permissions include [`api_keys_write`][5], so you can create a new API key with the Remote Configuration capability, or add the capability to an existing API key. Contact your organization's Datadog administrator to update your permissions if you don't have it. A key with this capability allows you to authenticate and authorize your Agent to use Remote Configuration.
+2. RBAC 権限に [`api_keys_write`][5] が含まれていることを確認し、リモート構成機能で新しい API キーを作成したり、既存の API キーに機能を追加できるようにします。もし、権限を持っていない場合は、組織の Datadog 管理者に連絡して、権限を更新してください。この機能を持つキーを使用して、Agent がリモート構成を使用するための認証と認可を行うことができます。
 
-3. On the [Remote Configuration][8] page, enable Remote Configuration. This enables Datadog components across your organization to receive configurations from Datadog.
+3. [リモート構成][8]ページで、リモート構成を有効にします。これにより、組織全体の Datadog コンポーネントが Datadog から構成を受信できるようになります。
 **Note:** Beginning April 8, 2024, Remote Configuration is on-by-default for:
 * New child organizations that are created by existing Datadog customers who already have enabled Remote Configuration at the parent organization level **and** are in the same Datadog site as their parent organization.
 * Organizations created by new Datadog customers.
@@ -125,12 +125,12 @@ To opt-out of Remote Configuration use, see the [opt-out section][23].
 
    {{<img src="agent/remote_config/RC_Key_updated.png" alt="API Key properties with Remote Configuration capability Enable button." width="90%" style="center">}}
 
-5. Update your Agent configuration file:
+5. Agent コンフィギュレーションファイルを更新します。
 **Note:** This step is required only for Agent versions 7.46.0 or lower. Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. To opt-out of Remote Configuration use, see the [opt-out section][23].
 
 {{< tabs >}}
-{{% tab "Configuration YAML file" %}}
-Add the following to your configuration YAML file, specifying the API key that has Remote Configuration capability enabled:
+{{% tab "コンフィギュレーション YAML ファイル" %}}
+リモート構成の機能を有効にした API キーを指定し、コンフィギュレーション YAML ファイルに以下を追加します。
 ```yaml
 api_key: xxx
 remote_configuration:
@@ -138,8 +138,8 @@ remote_configuration:
 ```
 
 {{% /tab %}}
-{{% tab "Environment variable" %}}
-Add the following to your Datadog Agent manifest, specifying the API key that has Remote Configuration capability enabled:
+{{% tab "環境変数" %}}
+Datadog Agent マニフェストに以下を追加し、リモート構成機能が有効になっている API キーを指定します。
 ```yaml
 DD_API_KEY=xxx
 DD_REMOTE_CONFIGURATION_ENABLED=true
@@ -147,7 +147,7 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-Add the following to your Helm chart, specifying the API key that has Remote Configuration capability enabled:
+Helm チャートに以下を追加し、リモート構成機能が有効になっている API キーを指定します。
 ```yaml
 datadog:
   apiKey: xxx
@@ -161,27 +161,27 @@ remoteConfiguration:
 
 6. Restart your Agent for the changes to take effect.
 
-After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
-- [CSM Threats default agent rules][9] update automatically as released.
+これらの手順を実行すると、Agent は Datadog に構成をリクエストし、リモート構成を使用する機能が有効になります。
+- [CSM Threats デフォルト Agent ルール][9]は、リリースされると自動的に更新されます。
 - [APM Agent-level sampling rates][10] are applied.
-- [Dynamic Instrumentation][11] is enabled.
-- [ASM 1-Click enablement, IP blocking, and attack pattern updates][12] are enabled.
+- [ダイナミックインスツルメンテーション][11]が有効になります。
+- [ASM 1 クリック有効化、IP ブロック、攻撃パターン更新][12]が有効になります。
 
-## Best practices
+## ベストプラクティス
 
-### Datadog Audit Trail
+### Datadog 監査証跡
 
 Use [Datadog Audit Trail][13] to monitor organization access and Remote Configuration enabled events. Audit Trail allows your administrators and security teams to track the creation, deletion, and modification of Datadog API and application keys. After Audit Trail is configured, you can view events related to Remote Configuration enabled features and who has requested these changes. Audit Trail allows you to reconstruct sequences of events, and establish robust Datadog monitoring for Remote Configuration.
 
-### Monitors
+### モニター
 
-Configure [monitors][14] to receive notifications when an event of interest is encountered.
+[モニター][14]を構成して、興味のあるイベントが発生したときに通知を受け取るようにします。
 
-## Troubleshooting
+## トラブルシューティング
 
-If you experience issues using Remote Configuration, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][15].
+リモート構成を使用して問題が発生した場合、以下のトラブルシューティングガイドラインを使用してください。さらに支援が必要な場合は、[Datadog サポート][15]に連絡してください。
 
-### Restart the Agent
+### Agent を再起動します。
 
 After the Agent configuration is updated in the [`datadog.yaml`][16] file, restart the Agent for this change to take effect.
 
@@ -189,15 +189,15 @@ After the Agent configuration is updated in the [`datadog.yaml`][16] file, resta
 
 To use Remote Configuration, both the Agent and the Observability Pipelines Worker deployed in your environment communicate to Datadog Remote Configuration [endpoints][17]. For private network connection between your environment and Datadog, you can also connect to Remote Configuration Virtual Private Cloud [endpoints][25]. Ensure that outbound HTTPS has access to Remote Configuration endpoints from your environment. If you also have a proxy in between Datadog and your environment, update your [proxy settings][18] to incorporate Remote Configuration endpoints.
 
-### Enable Remote Configuration at the organization level
+### 組織レベルでリモート構成を有効にする
 
 To enable Remote Configuration at the [Organization][8] level in the Datadog UI, go to the [Remote Configuration Setup][26] page in your **Organization Settings**. This allows your authenticated and authorized Datadog components to remotely receive configurations and security detection rules of supported features from Datadog. Only users who have the [`org_management`][7] RBAC permission can enable Remote Configuration at the Organization level.
 
-### Enable Remote Configuration on the API key
+### API キーのリモート構成を有効にする
 
 To authenticate and authorize the Agent to receive configurations and security detection rules, and to allow the Observability Pipelines Worker to receive configurations, enable Remote Configuration on the relevant API Key. Only users who have the [`api_keys_write`][5] RBAC permission can enable Remote Configuration on the API Key.
 
-**Note:** If you have [`api_keys_write`][5] RBAC permission, but are missing Remote Configuration [Organization][8] level permissions, you cannot enable Remote Configuration on a new or an existing API Key. You only have permission to disable Remote Configuration on an existing API Key.
+**注:** [`api_keys_write`][5] の RBAC 権限があり、リモート構成の[組織][8]レベルの権限がない場合、新規または既存の API キーに対してリモート構成を有効にすることはできません。既存の API キーでリモート構成を無効にする権限のみがあります。
 
 ### Review Remote Configuration status of Agents and Tracing libraries
 
@@ -205,18 +205,18 @@ Gain visibility into the Remote Configuration status of your Agent and Tracing l
 
 The following table describes the meaning of each Agent status:
 
-  | Agent Status     | Description                                      |
+  | Agent のステータス     | 説明                                      |
   |------------------|--------------------------------------------------|
-  | CONNECTED      | The Agent deployed in your environment is able to reach, authenticate, and authorize successfully to Datadog. This is the optimal state you want your Agents to be in for Remote Configuration.                                               |
-  | UNAUTHORIZED          | The Agent deployed in your environment is able to reach Datadog but is not able to authenticate and authorize with Datadog for Remote Configuration operation. The most likely cause is the API Key used by the Agent is not Remote Configuration-enabled. To fix the issue, enable Remote Configuration capability on the API Key used by the Agent.                                                 |
+  | CONNECTED      | 環境にデプロイされた Agent は、Datadog に正常にアクセス、認証、認可することができます。これは、Agent がリモート構成に最適な状態です。                                               |
+  | UNAUTHORIZED          | 環境にデプロイされた Agent は Datadog にアクセスすることができますが、リモート構成操作のために Datadog との認証と認可を行うことができません。最も考えられる原因は、Agent が使用している API キーがリモート構成に対応していないことです。この問題を解決するには、Agent が使用する API キーのリモート構成機能を有効にしてください。                                                 |
   | CONNECTION ERROR        |   The Agent deployed in your environment has `remote_config.enabled` set to true in its `datadog.yaml` configuration file, however, the Agent cannot be found in the Remote Configuration service. The most likely cause is that the Agent is unable to reach Remote Configuration [endpoints][17]. To fix the issue, allow outbound HTTPS access to Remote Configuration endpoints from your environment. This status displays when the Agent version is `7.45.0` or higher.
-  | DISABLED       |   The Agent deployed in your environment has `remote_config.enabled` set to false in its `datadog.yaml` configuration file. Set `remote_config.enabled` to true if you want to enable Remote Configuration on the Agent. This status displays when the Agent version is `7.45.0` or higher. |
-  | NOT CONNECTED       | The Agent cannot be found in the Remote Configuration service and could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings. This status displays when the Agent version is higher than `7.41.1` but lower than `7.45.0`.            |
-  | UNSUPPORTED AGENT   | The Agent is on a version that is not Remote Configuration capable. To fix this issue, update the Agent to the latest available version. |
+  | DISABLED       |   環境にデプロイされた Agent は、`datadog.yaml` コンフィギュレーションファイルで `remote_config.enabled` が false に設定されています。Agent でリモート構成を有効にしたい場合は、`remote_config.enabled` を true に設定してください。このステータスは、Agent のバージョンが `7.45.0` 以上の場合に表示されます。 |
+  | NOT CONNECTED       | Agent がリモート構成サービスで見つからず、`datadog.yaml` コンフィギュレーションファイルで `remote_config.enabled` が true または false に設定されている可能性があります。ローカルの Agent 構成またはプロキシ設定を確認してください。このステータスは、Agent のバージョンが `7.41.1` よりも高く、`7.45.0` よりも低い場合に表示されます。            |
+  | UNSUPPORTED AGENT   | Agent のバージョンがリモート構成に対応していません。この問題を解決するには、Agent を最新のバージョンに更新してください。 |
 
 The following table describes the meaning of each Tracing library status:
 
-  | Tracing library Status| Description                                      |
+  | Tracing library Status| 説明                                      |
   |------------------|--------------------------------------------------|
   | CONNECTED      | The Tracing library is successfully connected to the Remote Configuration service through the associated Agent. This is the optimal state you want your Tracing library to be in for Remote Configuration.                                               |
   | UNAUTHORIZED          | The Tracing library is associated with an Agent which doesn't have `Remote Config Read` permission on its API key. To fix the issue, you need to enable Remote Configuration capability on the API Key used by the Agent associated with the Tracing library.|
@@ -239,18 +239,18 @@ Disable Remote Configuration at the organization level on the [Remote Configurat
 Disable the API key of your choice on the [API Keys][24] page. You need the [`api_keys_write`][5] permission to disable Remote Configuration on an API key.
 
 ### At the Agent level
-Starting with Agent version 7.47.0, `remote_configuration.enabled` is set to `true` by default in the Agent. This setting causes the Agent to request configuration updates from the Datadog site.
+Agent バージョン 7.47.0 以降は、デフォルトで `remote_configuration.enabled` が Agent 内で `true` に設定されています。この設定により、Agent は Datadog サイトから構成のアップデートをリクエストするようになります。
 
-To receive configurations from Datadog, you also need to take the following steps:
-- Enable Remote Configuration at the organization level.
-- Enable Remote Configuration capability on your API Key from the Datadog UI.
-- Allow outbound HTTPS access to Remote Configuration [endpoints][17] from your environment.
+Datadog から構成を受信するには、以下の手順も必要です。
+- 組織レベルでリモート構成を有効にします。
+- Datadog UI から API キーのリモート構成機能を有効にします。
+- 環境からリモート構成[エンドポイント][17]へのアウトバウンド HTTPS アクセスを許可します。
 
-If you don't want your Agent to send configuration requests to Datadog, you can set `remote_configuration.enabled` to `false` in the Agent.
+Agent から Datadog に構成リクエストを送信したくない場合は、Agent で `remote_configuration.enabled` を `false` に設定します。
 
 {{< tabs >}}
-{{% tab "Configuration YAML file" %}}
-Change `remote_configuration.enabled` from `true` to `false` in your [configuration YAML file][101]:
+{{% tab "コンフィギュレーション YAML ファイル" %}}
+[コンフィギュレーション YAML ファイル][101]の `remote_configuration.enabled` を `true` から `false` に変更します。
 ```yaml
 remote_configuration:
   enabled: false
@@ -258,15 +258,15 @@ remote_configuration:
 
 [101]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 {{% /tab %}}
-{{% tab "Environment variable" %}}
-Add the following to your Datadog Agent manifest:
+{{% tab "環境変数" %}}
+Datadog Agent マニフェストに以下を追加します。
 ```yaml
 DD_REMOTE_CONFIGURATION_ENABLED=false
 ```
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-Add the following to your Helm chart:
+Helm チャートに以下を追加します。
 ```yaml
 datadog:
   remoteConfiguration:
@@ -280,7 +280,7 @@ datadog:
 
 Remote Configuration works in environments where the Datadog Agent is deployed. For a Serverless Container service like AWS Fargate, the underlying hosts do not appear in the Remote Configuration onboarding workflow. Remote Configuration does not support Serverless Container Managed Apps (AWS App Runner, Azure Container Apps, Google Cloud Run) and Functions deployed with Container Packaging (AWS Lambda, Azure Functions, Google Cloud Functions)
 .
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

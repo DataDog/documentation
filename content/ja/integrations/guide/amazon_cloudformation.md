@@ -146,7 +146,7 @@ The Datadog-Amazon CloudFormation resources are available on the CloudFormation 
 
 **Note**: To privately register a resource in any other region, use the provided packages.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][15].
 

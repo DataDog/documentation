@@ -4,9 +4,9 @@
 - "data stores"
 - "google cloud"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Google Cloud Storage metrics."
+"description": "Google Cloud Storage の主要メトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_storage/"
 "draft": false
 "git_integration_title": "google_cloud_storage"
@@ -32,13 +32,13 @@ Get metrics from Google Storage to:
 - Visualize the performance of your Storage services.
 - Correlate the performance of your Storage services with your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
-#### Configuration
+#### 構成
 
 To collect custom Cloud Storage labels as tags, enable the cloud asset inventory permission.
 
@@ -53,21 +53,21 @@ Once this is done, export your Google Cloud Storage logs from Google Cloud Loggi
 3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloud_storage" >}}
 
 
-### Events
+### イベント
 
 The Google Cloud Storage integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Cloud Storage integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

@@ -1,30 +1,30 @@
 ---
 title: "Elasticsearch Component"
 ---
-## Overview
+## 概要
 
-Use the Elasticsearch component to represent Elasticsearch clusters from your Amazon Web Services architecture.
+Elasticsearch コンポーネントを使用して、Amazon Web Services アーキテクチャの Elasticsearch クラスターを表現します。
 
-{{< img src="cloudcraft/components-aws/elasticsearch/component-elasticsearch-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Elasticsearch' AWS component." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/elasticsearch/component-elasticsearch-diagram.png" alt="'Elasticsearch' AWS コンポーネントを示す、等角投影された Cloudcraft 図のスクリーンショット。" responsive="true" style="width:60%;">}}
 
-## Toolbar
+## ツールバー
 
-Use the toolbar to configure and customize the component. The following options are available:
+ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Role**: Select the role of the Elasticsearch instance.
-- **Instance count**: Enter the number of instances for the Elasticsearch cluster.
-- **Instance type**: Select the type of instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
-- **Size**: Select the size of the instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
-- **Billing option**: The pricing model used for the instance.
+- **Color**: 定義済みの色を選択するか、コンポーネントとそのアクセントの色の 16 進値を入力します。コンポーネントは、2D ビューと 3D ビューの両方に同じ色を使用することも、それぞれに異なる色を使用することもできます。
+- **Role**: Elasticsearch インスタンスのロールを選択します。
+- **Instance count**: Elasticsearch クラスターのインスタンス数を入力します。
+- **Instance type**: インスタンスのタイプを選択します。インスタンスのタイプを変更すると、ツールバーに表示されるハードウェアの詳細も変更され、ハイパーバイザーによって使用されるものが反映されます。
+- **Size**: インスタンスのサイズを選択します。インスタンスのタイプと同様、ツールバーに表示されるハードウェアの詳細がサイズを反映して変更されます。
+- **Billing option**: インスタンスで使用される価格モデル。
 
 ## API
 
-Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。
 
-### Schema
+### スキーマ
 
-The following is an example JSON object of a Elasticsearch component:
+以下は、Elasticsearch コンポーネントの JSON オブジェクトの例です。
 
 ```json
 {
@@ -54,52 +54,52 @@ The following is an example JSON object of a Elasticsearch component:
 }
 ```
 
-- **type: es**: The type of component.
-- **id: string**: A unique identifier for the component in the `uuid` format.
-- **region: string**: The AWS region the Elasticsearch instance is deployed in. All global regions are supported except `cn-` regions.
-- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
-- **role: string**: The role used for the Elasticsearch instance. Accepted values are `data` and `master`.
-- **instanceCount: number**: The number of instances in the Elasticsearch cluster. Defaults to `1`.
-- **instanceType: string**: The type of instance. [See [Accepted values for `instanceType`](#accepted-values-for-instancetype) for more information.
-- **instanceSize: string**: The size of the instance. See [Accepted values for `instanceSize`](#accepted-values-for-instancesize) for more information.
-- **billingOptions: object**: The pricing model used for the instance. See [Accepted values for `billingOptions`](#accepted-values-for-billingoptions) for more information.
-- **color: object**: The fill color for the component body.
-  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
-  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
-- **accentColor: object**: The accent color used to display the component logo on the block.
-  - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
-  - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
-- **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to external website using the `https://LINK` format.
-- **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
+- **type: es**: コンポーネントのタイプ。
+- **id: 文字列**: `uuid` 形式のコンポーネントの一意な識別子。
+- **region: 文字列**: この Elasticsearch インスタンスがデプロイされる AWS リージョン。`cn-` リージョン以外のすべてのグローバルリージョンがサポートされています。
+- **mapPos: [数値, 数値]**: x 座標と y 座標のペアで表される、ブループリント内のコンポーネントの位置。
+- **role: string**: Elasticsearch インスタンスで使用されるロール。指定できる値は `data` および `master` です。
+- **instanceCount: 数値**: Elasticsearch クラスター内のインスタンス数。デフォルトは `1` です。
+- **instanceType: 文字列**: インスタンスのタイプ。詳しくは [`instanceType` で許容される値](#accepted-values-for-instancetype)を参照してください。
+- **instanceSize: 文字列**: インスタンスのサイズ。詳しくは [`instanceSize` で許容される値](#accepted-values-for-instancesize)を参照してください。
+- **billingOptions: オブジェクト**: インスタンスで使用される価格モデル。詳しくは [`billingOptions` で許容される値](#accepted-values-for-billingoptions) を参照してください。
+- **color: オブジェクト**: コンポーネント本体の塗りつぶし色。
+  - **isometric: 文字列**: 3D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
+  - **2d: 文字列**: 2D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
+- **accentColor: オブジェクト**: ブロック上のコンポーネントロゴを表示するために使用されるアクセントカラー。
+  - **isometric: 文字列**: 3D ビューでのコンポーネントのアクセントカラー。16 進数で指定します。
+  - **2d: 文字列**: 2D ビューでのコンポーネントのアクセントカラー。16 進数で指定します。
+- **link: uri**: コンポーネントを、`blueprint://ID` フォーマットを使用して別の図にリンクするか、`https://LINK` フォーマットを使用して外部の Web サイトにリンクします。
+- **locked: ブール値**: `true` の場合、アプリケーションを使用してコンポーネントに加えられた変更は、ロックが解除されるまで無効になります。
 
-The Elasticsearch component can be added to [VPCs][2], [security groups][3], and [subnets][4].
+Elasticsearch コンポーネントは [VPC][2]、[セキュリティグループ][3]、[サブネット][4]に追加することができます。
 
-## Accepted values for `instanceType`
+## `instanceType` で許容される値
 
-The `instanceType` key accepts the following values:
-
-```
-c4, c5, i2, i3, m3, m4, m5, r3, r4, r5, t2, t3, ultrawarm1
-```
-
-## Accepted values for `instanceSize`
-
-The `instanceSize` key accepts the following values:
+`instanceType` キーは以下の値を受け付けます。
 
 ```
-micro, small, medium, large, xlarge, 2xlarge, 4xlarge, 8xlarge, 9xlarge, 10xlarge, 12xlarge, 16xlarge, 18xlarge, 24xlarge, 32xlarge
+c4、c5、i2、i3、m3、m4、m5、r3、r4、r5、t2、t3、ultrawarm1
 ```
 
-## Accepted values for `billingOptions`
+## `instanceSize` で許容される値
 
-The `billingOptions` key supports all billing options accepted by the Cloudcraft web application:
+`instanceSize` キーは以下の値を受け付けます。
 
-- On-demand
-- Reserved instance
+```
+micro、small、medium、large、xlarge、2xlarge、4xlarge、8xlarge、9xlarge、10xlarge、12xlarge、16xlarge、18xlarge、24xlarge、32xlarge
+```
 
-Each option is represented differently inside the `billingOptions` object.
+## `billingOptions` で許容される値
 
-### On-demand
+`billingOptions` キーは、Cloudcraft Web アプリケーションによって認められているすべての請求オプションをサポートしています。
+
+- オンデマンド
+- リザーブドインスタンス
+
+各オプションは、`billingOptions` オブジェクト内では異なる形で表現されています。
+
+### オンデマンド
 
 ```json
 {
@@ -110,10 +110,10 @@ Each option is represented differently inside the `billingOptions` object.
 }
 ```
 
-- **type: od**: The billing option value for on-demand is always `od`.
-- **utilization: number**: A floating number representing how much the instance is used in a given month.
+- **type: od**: オンデマンドの請求オプションの値は常に `od` です。
+- **utilization: 数値**: 指定された月にインスタンスがどれくらい使用されたかを表す浮動小数点数。
 
-### Reserved instance
+### リザーブドインスタンス
 
 ```json
 {
@@ -125,9 +125,9 @@ Each option is represented differently inside the `billingOptions` object.
 }
 ```
 
-- **type: ri**: The billing option value for a reserved instance is always `ri`.
-- **leaseContractLength: number**: The length of time the instance is reserved. Accepted values are `12` or `36`.
-- **purchaseOption: string**: The purchase option for the instance. Accepted values are `No Upfront`, `Partial Upfront`, and `All Upfront`.
+- **type: ri**: リザーブドインスタンスの請求オプションの値は常に `ri` です。
+- **leaseContractLength: 数値**: インスタンスが予約されている期間の長さ。許容される値は `12` または `36` です。
+- **purchaseOption: 文字列**: インスタンスの購入オプション。許容される値は `No Upfront`、`Partial Upfront`、および `All Upfront` です。
 
 [1]: https://developers.cloudcraft.co/
 [2]: /cloudcraft/components-aws/vpc/

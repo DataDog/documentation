@@ -9,7 +9,7 @@
   "support_email": insights@fairwinds.com
 "categories":
 - kubernetes
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/fairwinds_insights_ui/README.md"
 "display_on_public_website": true
@@ -55,7 +55,7 @@ Fairwinds Insights protects and optimizes your mission-critical Kubernetes appli
 
 Fairwinds Insights uncovers issues in your Kubernetes clusters related to Security, Efficiency, and Reliability. This app allows you to see your newest Action Items directly within the Datadog dashboard, where you can assign them to other members of your organization or mark them as resolved.
 
-## Setup
+## セットアップ
 
 You need to have an account at insights.fairwinds.com to use this app. You can also sign up for Fairwinds
 Insights in the Datadog Marketplace.

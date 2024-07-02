@@ -3,7 +3,7 @@
 - collaboration
 - log collection
 - provisioning
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track Netlify logs."
 "doc_link": "https://docs.datadoghq.com/integrations/netlify/"
@@ -39,26 +39,26 @@ Integrate Netlify with Datadog to:
 * Visualize your function duration and see corresponding logs for each request
 * Monitor frontend performance with [Datadog's Synthetic Monitoring][3]
 
-## Setup
+## セットアップ
 
 1. Generate a [Datadog API key][4].
 2. Configure your [Netlify Log Drains][5] to send logs to Datadog.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Netlify integration does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 The Netlify integration does not include any service checks.
 
-### Events
+### イベント
 
 The Netlify integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

@@ -9,50 +9,50 @@ further_reading:
 ---
 
 {{< site-region region="gov,ap1" >}}
-<div class="alert alert-warning">Symbol Database is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Symbol Database はサポートされていません。</div>
 {{< /site-region >}}
 
 {{< beta-callout-private url="https://forms.gle/UG9EELAy8Li6z2jW8" >}}
-Interested in an improved user experience when creating Dynamic Instrumentation probes? Join the Symbol Database private beta here.
+ダイナミックインスツルメンテーションプローブ作成時のユーザーエクスペリエンスの改善にご興味がおありですか？こちらから、Symbol Database の非公開データ版にご参加ください。
 {{< /beta-callout-private >}}
 
-## Overview
+## 概要
 
-Symbol Database enhances the user experience of [Dynamic Instrumentation][1]  by adding IDE-like features like search and autocomplete. 
+Symbol Database は、検索やオートコンプリートといった IDE 同様の機能を追加することで、[ダイナミックインスツルメンテーション][1]のユーザーエクスペリエンスを向上させます。
 
-Symbol Database uploads nonsensitive symbols and metadata from your application to Datadog. The uploaded data includes the names of classes, methods, arguments, fields, and local variables, along with related metadata, like line numbers.
+Symbol Database は、アプリケーションから Datadog に機密でないシンボルやメタデータをアップロードします。アップロードされるデータには、クラス、メソッド、属性、フィールド、ローカル変数の名前のほか、行番号などの関連するメタデータが含まれます。
 
-## Getting started
+## はじめに
 
-### Prerequisites
+### 前提条件
 
-Symbol Database requires the following:
+Symbol Database には以下が必要です。
 
-- [Dynamic Instrumentation][1] is enabled for your service.
-- [Datadog Agent][2] 7.45.0 or higher is installed alongside your service.
-- [Remote Configuration][3] is enabled in the Agent.
-- The [Unified Service Tagging][4] tags `service`, `env`, and `version` are applied to your deployment.
+- サービスで[ダイナミックインスツルメンテーション][1]が有効になっていること。
+- [Datadog Agent][2] 7.45.0 以降がサービスと一緒にインストールされていること。
+- その Agent で[リモート構成][3]が有効になっていること。
+- [統合サービスタグ付け][4]タグ `service`、`env`、`version` がデプロイメントに適用されていること。
 
-### Enable Symbol Database for your service
+### サービスで Symbol Database を有効にする
 
-Select your runtime below:
+以下でランタイムを選択します。
 
 {{< partial name="dynamic_instrumentation/symbol-database-languages.html" >}}
 
-## Explore Symbol Database
+## Symbol Database を使ってみる
 
-With Symbol Database, the user experience of Dynamic Instrumentation is improved to behave more like an IDE.
+Symbol Database は、より IDE に近い形で使用でき、ダイナミックインスツルメンテーションのユーザーエクスペリエンスが向上します。
 
-Symbol Database provides search for class and method names:
-{{< img src="dynamic_instrumentation/symdb_method_search.png" alt="Search for methods when creating a Dynamic Instrumentation log probe" style="width:60%;" >}}
+Symbol Database は、クラス名およびメソッド名の検索機能を提供します。
+{{< img src="dynamic_instrumentation/symdb_method_search.png" alt="ダイナミックインスツルメンテーションログプローブ作成時のメソッドの検索" style="width:60%;" >}}
 
-When you select a method in the Dynamic Instrumentation configuration, the code for that method is displayed:
-{{< img src="dynamic_instrumentation/symdb_method_highlight.png" alt="Symbol Database highlights the selected method" >}}
+ダイナミックインスツルメンテーションの構成でメソッドを選択すると、そのメソッドのコードが表示されます。
+{{< img src="dynamic_instrumentation/symdb_method_highlight.png" alt="Symbol Database で選択したメソッドがハイライト表示" >}}
 
-Symbol Database also provides autocomplete for log templates and other templates that use the [Dynamic Instrumentation expression language][5]:
-{{< img src="dynamic_instrumentation/symdb_completion.png" alt="Autocomplete suggestions for log templates" style="width:80%;" >}}
+また、Symbol Database は、ログテンプレートや[ダイナミックインスツルメンテーション式言語][5]を使用するその他のテンプレートを対象に、オートコンプリート機能も提供します。
+{{< img src="dynamic_instrumentation/symdb_completion.png" alt="ログテンプレートを対象としたオートコンプリートによる提案" style="width:80%;" >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

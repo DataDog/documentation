@@ -36,7 +36,7 @@
 - "configuration & deployment"
 - "log collection"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/teamcity/README.md"
 "display_on_public_website": true
@@ -49,7 +49,7 @@
 "manifest_version": "2.0.0"
 "name": "teamcity"
 "public_title": "TeamCity"
-"short_description": "Track builds and understand the performance impact of every deploy."
+"short_description": "ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。"
 "supported_os":
 - "linux"
 - "windows"
@@ -57,14 +57,14 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Configuration & Deployment"
-  - "Category::Log Collection"
+  - "Category::構成 & デプロイ"
+  - "Category::ログの収集"
   - "Category::Notifications"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Track builds and understand the performance impact of every deploy."
+  "description": "ビルドを追跡し、各デプロイのパフォーマンス上の影響を調査。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -74,60 +74,60 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This integration connects to your TeamCity server to submit metrics, service checks, and events, allowing you to monitor the health of your TeamCity projects' build configurations, build runs, server resources, and more.
+このインテグレーションは、TeamCity サーバーに接続してメトリクス、サービスチェック、イベントを送信し、TeamCity プロジェクトのビルド構成、ビルド実行、サーバーリソースなどの健全性を監視することができます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The TeamCity check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your TeamCity servers.
+TeamCity チェックは [Datadog Agent][1] パッケージに含まれています。TeamCity サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-#### Prepare TeamCity
+#### TeamCity の準備
 
-You can enable [Guest login](#guest-login), or identify [user credentials](#user-credentials) for basic HTTP authentication.
+[ゲストログイン](#guest-login)を有効にするか、Basic HTTP 認証の[ユーザー資格情報](#user-credentials)を識別することができます。
 
-##### Guest login
+##### ゲストログイン
 
-1. [Enable guest login][2].
+1. [ゲストログインを有効にします][2]。
 
-2. Enable `Per-project permissions` to allow assigning project-based permissions to the Guest user. See [Changing Authorization Mode][3].
-![Enable Guest Login][4]
-3. Use an existing or create a new Read-only role and add the `View Usage Statistics` permission to the role. See [Managing Roles and Permissions][5].
-![Create Read-only Role][6]
+2. プロジェクト単位の権限を Guest ユーザーに割り当てられるように、`Per-project permissions` を有効にします。[認可モードの変更][3]を参照してください。
+![ゲストログインを有効にする][4]
+3. 既存のロールを使用するか、新しい読み取り専用ロールを作成し、そのロールに`View Usage Statistics` 権限を追加します。[ロールと権限の管理][5]を参照してください。
+![読み取り専用ロールの作成][6]
 
-3. _[Optional]_ To enable the check to automatically detect build configuration type during event collection, add the `View Build Configuration Settings` permission to the Read-only role.
-![Assign View Build Config Settings Permission][7]
+3. _[オプション]_ イベント収集時にビルド構成の種類を自動的に検出するチェックを有効にするには、読み取り専用ロールに `View Build Configuration Settings` 権限を追加します。
+![View Build Config Settings 権限の付与][7]
 
-4. Assign the Read-only role to the Guest user. See [Assigning Roles to Users][8].
-![Guest user settings][9]
-![Assign Role][10]
+4. Guest ユーザーに[読み取り専用]ロールを割り当てます。[ユーザーへのロールの割り当て][8]を参照してください。
+![ゲストユーザー設定][9]
+![ロールの割り当て][10]
 
-##### User credentials
+##### ユーザー資格情報
 
-For basic HTTP authentication
-- Specify an identified `username` and `password` in the `teamcity.d/conf.yaml` file in the `conf.d/` folder of your [Agent's configuration directory][11].
-- If you encounter an `Access denied. Enable guest authentication or check user permissions.` error, ensure the user has the correct permissions:
-  - Per-project and View Usage Statistics permissions enabled.
-  - If collecting Agent Workload Statistics, assign the View Agent Details and View Agent Usage Statistics permissions as well.
+Basic HTTP 認証の場合
+- [Agent の構成ディレクトリ][11]の `conf.d/` フォルダ内の `teamcity.d/conf.yaml` ファイルに、識別された `username` と `password` を指定します。
+- `Access denied. Enable guest authentication or check user permissions.` (アクセスが拒否されました。ゲスト認証を有効にするか、ユーザー権限を確認してください。) というエラーが発生した場合は、ユーザーの権限が正しいことを確認してください。 
+  - プロジェクト単位および View Usage Statistics 権限が有効になっている。
+  - Agent Workload Statistics を収集する場合は、View Agent Details および View Agent Usage Statistics 権限も割り当てます。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-Edit the `teamcity.d/conf.yaml` in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample teamcity.d/conf.yaml][2] for all available configuration options:
+[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `teamcity.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル teamcity.d/conf.yaml][2] を参照してください。
 
-The TeamCity check offers two methods of data collection. To optimally monitor your TeamCity environment, configure two separate instances to collect metrics from each method. 
+TeamCity チェックは、データ収集の 2 つのメソッドを提供します。TeamCity 環境を最適にモニターするには、2 つの別々のインスタンスを構成して、それぞれの方法からメトリクスを収集します。
 
 1. OpenMetrics method (requires Python version 3):
 
-   Enable `use_openmetrics: true` to collect metrics from the TeamCity `/metrics` Prometheus endpoint.
+   TeamCity の `/metrics` Prometheus エンドポイントからメトリクスを収集するために `use_openmetrics: true` を有効化します。
 
    ```yaml
    init_config: 
@@ -198,27 +198,27 @@ instances:
     build_configuration: <BUILD_CONFIGURATION_ID>
 ```
 
-[Restart the Agent][5] to start collecting and sending TeamCity events to Datadog.
+[Agent を再起動][5]すると、TeamCity イベントが収集され、Datadog に送信されます。
 
-##### Log collection
+##### ログ収集
 
-1. Configure TeamCity [logging settings][6].
+1. TeamCity [ログ設定][6]を構成します。
 
-2. By default, Datadog's integration pipeline supports the following kind of log format:
+2. デフォルトでは、Datadog のインテグレーションパイプラインは以下のログフォーマットをサポートします。
 
    ```text
    [2020-09-10 21:21:37,486]   INFO -  jetbrains.buildServer.STARTUP - Current stage: System is ready
    ```
 
-   Clone and edit the [integration pipeline][7] if you defined different conversion [patterns][8].
+   別の変換[パターン][8]を定義する場合は、[インテグレーションパイプライン][7]を複製して編集してください。
 
-3. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+3. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-4. Uncomment the following configuration block in your `teamcity.d/conf.yaml` file. Change the `path` parameter value based on your environment. See the [sample teamcity.d/conf.yaml][2] for all available configuration options.
+4. `teamcity.d/conf.yaml` ファイルで以下のコンフィギュレーションブロックのコメントを削除します。環境に基づいて、`path` パラメーターの値を変更します。使用可能なすべてのコンフィギュレーションオプションについては、[teamcity.d/conf.yaml のサンプル][2]を参照してください。
 
    ```yaml
    logs:
@@ -242,7 +242,7 @@ instances:
        source: teamcity
    ```
 
-5. [Restart the Agent][5].
+5. [Agent を再起動します][5]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/teamcity/datadog_checks/teamcity/data/conf.yaml.example
@@ -253,23 +253,23 @@ instances:
 [7]: https://docs.datadoghq.com/logs/log_configuration/pipelines/#integration-pipelines
 [8]: https://logging.apache.org/log4j/2.x/manual/layouts.html#Patterns
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-| Parameter            | Value                                                                                             |
+| パラメーター            | 値                                                                                             |
 | -------------------- | ------------------------------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `teamcity`                                                                                        |
-| `<INIT_CONFIG>`      | blank or `{}`                                                                                     |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                     |
 | `<INSTANCE_CONFIG>`  | `{"server": "%%host%%", "use_openmetrics": "true"}`                                               |
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes log collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                                |
+| パラメーター      | 値                                                |
 | -------------- | ---------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "teamcity"}` |
 
@@ -278,29 +278,29 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's `status` subcommand][12] and look for `teamcity` under the Checks section.
+[Agent の `status` サブコマンドを実行][12]し、Checks セクションで `teamcity` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "teamcity" >}}
 
 
-### Events
+### イベント
 
-TeamCity events representing successful and failed builds are forwarded to Datadog.
+ビルドの成功と失敗を表す TeamCity イベントが Datadog に転送されます。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "teamcity" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][13].
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
 - [Track performance impact of code changes with TeamCity and Datadog][14]
 

@@ -32,7 +32,7 @@
 - log collection
 - provisioning
 - marketplace
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -109,14 +109,14 @@ Cisco Identity Services Engine (ISE) is a next-generation identity and access co
 The administrator can then use that information to make proactive governance decisions by tying identity to various network elements including access switches, wireless LAN controllers (WLCs), virtual private network (VPN) gateways, and data center switches.
 
 This integration has visualizations for the following types of logs:
-   * Authentication
+   * 認証
    * Posture 
    * Profiler
    * Client Provisioning
 
 ## Support
 
-For support or feature requests, contact Crest Data through the following channels:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
 - Support Email: [datadog.integrations@crestdata.ai][2]
 - Sales Email: [datadog-sales@crestdata.ai][3]

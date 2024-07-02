@@ -9,9 +9,9 @@ further_reading:
 
 {{% dbm-oracle-definition %}}
 
-The Agent collects telemetry directly from the database by logging in as a read-only user.
+読み取り専用ユーザーとしてログインし、Agent でデータベースから直接テレメトリーを収集します。
 
-## Before you begin
+## はじめに
 
 {{% dbm-supported-oracle-versions %}}
 
@@ -27,14 +27,14 @@ Proxies, load balancers, and connection poolers
 Data security considerations
 : See [Sensitive information][5] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
-## Setup
+## セットアップ
 
 Complete the following to enable Database Monitoring with your Oracle database:
 
 1. [Create the Datadog user](#create-the-datadog-user)
 1. [Grant the user access to the database](#grant-the-user-access-to-the-database)
 1. [Create a view](#create-a-view)
-1. [Install the Agent](#install-the-agent)
+1. [Agent をインストールする](#install-the-agent)
 1. [Configure the Agent](#configure-the-agent)
 1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
 1. [Validate the setup](#validate-the-setup)
@@ -43,10 +43,10 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 If you already have the legacy Oracle integration installed, skip this step, because the user already exists.
 
-Create a read-only login to connect to your server and grant the required permissions:
+サーバーに接続するための読み取り専用ログインを作成し、必要な権限を付与します。
 
 {{< tabs >}}
-{{% tab "Multi-tenant" %}}
+{{% tab "マルチテナント" %}}
 ```SQL
 CREATE USER c##datadog IDENTIFIED BY &password CONTAINER = ALL ;
 
@@ -69,7 +69,7 @@ CREATE USER datadog IDENTIFIED BY &password ;
 
 ### Grant the user access to the database
 
-Log on as `sysdba`, and grant the following permissions:
+`sysdba` としてログオンし、以下の権限を付与します。
 
 {{< tabs >}}
 
@@ -87,9 +87,9 @@ Log on as `sysdba`, and grant the following permissions:
 
 {{< /tabs >}}
 
-### Create a view
+### ビューの作成
 
-Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Agent user access to it:
+`sysdba` としてログオンし、`sysdba` スキーマに新しい `view` を作成し、Agent ユーザーにアクセス権を与えます。
 
 {{< tabs >}}
 
@@ -107,35 +107,35 @@ Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Age
 
 {{< /tabs >}}
 
-### Install the Agent
+### Agent のインストール
 
 For installation steps, see the [Agent installation instructions][1].
 
-### Configure the Agent
+### Agent の構成
 
 Create the Oracle Agent conf file `/etc/datadog-agent/conf.d/oracle.d/conf.yaml`. See the [sample conf file][4] for all available configuration options.
 
 **Note:** The configuration subdirectory for the Agent releases below `7.53.0` is `oracle-dbm.d`.
 
 {{< tabs >}}
-{{% tab "Multi-tenant" %}}
+{{% tab "マルチテナント" %}}
 ```yaml
 init_config:
 instances:
   - server: '<HOSTNAME_1>:<PORT>'
-    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
+    service_name: "<CDB_SERVICE_NAME>" # Oracle CDB サービス名
     username: 'c##datadog'
     password: '<PASSWORD>'
     dbm: true
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
   - server: '<HOSTNAME_2>:<PORT>'
-    service_name: "<CDB_SERVICE_NAME>" # The Oracle CDB service name
+    service_name: "<CDB_SERVICE_NAME>" # Oracle CDB サービス名
     username: 'c##datadog'
     password: '<PASSWORD>'
     dbm: true
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
 ```
@@ -153,7 +153,7 @@ The Agent connects only to the root multitenant container database (CDB). It que
 {{% /tab %}}
 {{< /tabs >}}
 
-Once all Agent configuration is complete, [restart the Datadog Agent][9].
+すべての Agent の構成が完了したら、[Datadog Agent を再起動][9]します。
 
 ### Install or verify the Oracle integration
 
@@ -169,11 +169,11 @@ On the Integrations page in Datadog, install the [Oracle integration][7] for you
 
 [Run the Agent's status subcommand][8] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][2] and [Databases][3] page in Datadog to get started.
 
-## Custom queries
+## カスタムクエリ
 
 Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][4] to learn more about the configuration options available.
 
-<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
+<div class="alert alert-warning">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
@@ -185,6 +185,6 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [8]: /agent/configuration/agent-commands/#agent-status-and-information
 [9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

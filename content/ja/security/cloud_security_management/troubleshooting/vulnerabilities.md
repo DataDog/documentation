@@ -14,7 +14,7 @@ further_reading:
   text: Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring
 ---
 
-## Overview
+## 概要
 
 If you experience issues with Cloud Security Management (CSM) Vulnerabilities, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
@@ -22,17 +22,17 @@ If you experience issues with Cloud Security Management (CSM) Vulnerabilities, u
 
 ### Disk space requirements
 
-Ensure your free disk space is equal to the size of your largest container image. This space is needed for the Datadog Agent to scan the container image for vulnerabilities (1 GB by default).
+最大のコンテナイメージのサイズに等しいディスクの空き容量があることを確認してください。この空き容量は、Datadog Agent がコンテナイメージの脆弱性をスキャンするために必要です (デフォルトでは 1 GB)。
 
 The resulting error appears as:
 ```sh
 Error: failed to check current disk usage: not enough disk space to safely collect sbom, 192108482560 available, 1073741824000 required
 ```
 
-Workaround: 
+回避策: 
 
-- Increase the available disk space to at least 1 GB. If your images are larger than 1 GB, increase your disk space accordingly.
-- If all of your images are smaller than 1 GB, you can decrease the default Agent request disk space with the environment variable: `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` (default value 1GB).
+- 利用可能なディスク容量を少なくとも 1 GB に増やしてください。イメージが 1 GB を超える場合は、それに応じてディスク容量を増やしてください。
+- すべてのイメージが 1 GB 未満の場合、環境変数 `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` を使用して、デフォルトの Agent 要求ディスク容量を減らすことができます (デフォルト値は 1GB です)。
 
 ### Uncompressed container image layers
 
@@ -55,7 +55,7 @@ The workaround for this issue is to set the configuration option `discard_unpack
     -  `datadog.agent.sbom_errors`: Number of sbom failures by `source`, `type`, and `reason`.
     -  `datadog.agent.export_size`: The size of the archive written on disk. 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

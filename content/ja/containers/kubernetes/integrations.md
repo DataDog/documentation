@@ -37,10 +37,10 @@ To monitor integrations that are not compatible with Autodiscovery, you can use 
 
 Some integrations require setup steps, such as creating an access token or granting read permission to the Datadog Agent. Follow the instructions in the **Setup** section of your integration's documentation.
 
-### Community integrations
+### コミュニティのインテグレーション
 To use an integration that is not packaged with the Datadog Agent, you must build a custom image that contains your desired integration. See [Use Community Integrations][13] for instructions.
 
-## Configuration
+## 構成
 
 Some commonly-used integrations come with default configuration for Autodiscovery. See [Autodiscovery auto-configuration][20] for details, including a list of auto-configured integrations and their corresponding default configuration files. If your integration is in this list, and the default configuration is sufficient for your use case, no further action is required.
 
@@ -121,7 +121,7 @@ You can store Autodiscovery templates as local files inside the mounted `conf.d`
      <LOGS_CONFIG>
    ```
 
-2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
+2. ホスト の `conf.d/` フォルダーをコンテナ化 Agent の `conf.d` フォルダーにマウントします。
 
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
@@ -153,7 +153,7 @@ data:
 
 You can source Autodiscovery templates from [Consul][1], [etcd][2], or [ZooKeeper][3]. You can configure your key-value store in the `datadog.yaml` configuration file (and subsequently mount this file inside the Agent container), or as environment variables in the Agent container.
 
-**Configure in datadog.yaml**:
+**datadog.yaml での構成**
 
 In `datadog.yaml`, set the `<KEY_VALUE_STORE_IP>` address and `<KEY_VALUE_STORE_PORT>` of your key-value store:
 
@@ -188,9 +188,9 @@ In `datadog.yaml`, set the `<KEY_VALUE_STORE_IP>` address and `<KEY_VALUE_STORE_
 
 [Restart the Datadog Agent][4] to apply your changes.
 
-**Configure in environment variables**:
+**環境変数での構成**
 
-With the key-value store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`. Autodiscovery expects a key-value hierarchy like this:
+key-value ストアがテンプレートソースとして有効になっている場合、Agent はキー `/datadog/check_configs` の下でテンプレートを探します。オートディスカバリーは、以下のような key-value 階層を前提とします。
 
 ```yaml
 /datadog/
@@ -467,7 +467,7 @@ spec:
        service: "pg_service"
    ```
 
-2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
+2. ホスト の `conf.d/` フォルダーをコンテナ化 Agent の `conf.d` フォルダーにマウントします。
 {{% /tab %}}
 {{% tab "ConfigMap" %}}
 
@@ -528,7 +528,7 @@ etcdctl set /datadog/check_configs/postgres/init_configs '[{}]'
 etcdctl set /datadog/check_configs/postgres/instances '[{"host": "%%host%%","port":"5432","username":"datadog","password":"%%env_PG_PASSWORD%%"}]'
 ```
 
-Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
+3 つの値がそれぞれリストであることに注目してください。オートディスカバリーは、共有リストインデックスに基づいて、リスト項目をインテグレーション構成に集約します。この例の場合は、`check_names[0]`、`init_configs[0]`、および `instances[0]` から最初 (かつ唯一) のチェック構成が作成されます。
 
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
@@ -590,7 +590,7 @@ These templates make use of [Autodiscovery template variables][16]:
 
 For more examples, including how to configure multiple checks for multiple sets of containers, see [Autodiscovery: Scenarios & Examples][24].
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

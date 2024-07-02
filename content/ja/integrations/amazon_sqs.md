@@ -27,7 +27,7 @@
 - "metrics"
 - "cloud"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -64,9 +64,9 @@ Amazon Simple Queue Service (SQS) is a fast, reliable, scalable, fully managed m
 
 Enable this integration to see all your SQS metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -100,9 +100,9 @@ See [Logging Amazon SQS API Calls Using AWS CloudTrail][6] to configure your tra
 
 Once the trigger has been added, use the [Datadog Log Explorer][8] to view your logs.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_sqs" >}}
 
 

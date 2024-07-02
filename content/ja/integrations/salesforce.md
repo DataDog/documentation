@@ -2,7 +2,7 @@
 "categories":
 - cloud
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Collect Salesforce real-time platform events as Datadog logs."
 "doc_link": "https://docs.datadoghq.com/integrations/salesforce/"
@@ -39,17 +39,17 @@ Integrate Salesforce with Datadog to:
 - Leverage the Datadog [Security Platform][4] to monitor and detect threats across your Salesforce Platform.
 - Monitor your Salesforce API usage to ensure you are operating under API limits.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 No installation is required.
 
-### Configuration
+### 構成
 
 To configure Salesforce to send data to Datadog, you need to have access to [Salesforce Event Monitoring][5], enable storage on your Salesforce events, and connect your Salesforce org to Datadog.
 
-#### Permissions
+#### 権限
 
 If you are using [Salesforce Shield][6], you have the required permissions for all events. If you do not have Shield, you need the [Event Monitoring add-on][7].
 
@@ -86,21 +86,21 @@ After some time, [logs][1] appear under the `salesforce` source. Salesforce writ
 
 {{< img src="integrations/salesforce/salesforce_dashboard_logs.png" alt="The Salesforce Log Stream widget in the out of the box Salesforce dashboard" popup="true">}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "salesforce" >}}
 
 
-### Events
+### イベント
 
 For the full list of Log events, see [Real-Time Event Monitoring Data Storage][12] and [EventLogFile Events][13].
 
-### Service Checks
+### サービスチェック
 
 The Salesforce integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 If you encounter an `The authenticated connection does not have access` error in the Configuration tab, you may be missing permissions to access requested events. You can temporarily enable admin permissions for the Datadog role in Salesforce to confirm any missing access permissions.
 

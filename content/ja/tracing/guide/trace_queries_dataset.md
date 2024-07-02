@@ -48,7 +48,7 @@ To find spans that are sampled by the 1% flat sampling or the diversity sampling
 
 Spans indexed by the Intelligent retention filter are excluded from APM queries in:
 
-- Dashboards
+- ダッシュボード
 - Notebooks
 - [Trace Analytics monitor][5] evaluations
 

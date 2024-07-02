@@ -5,36 +5,36 @@ aliases:
   - /agent/faq/agent-5-kubernetes-basic-agent-usage
 ---
 
-{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes Dashboard" >}}
+{{< img src="integrations/kubernetes/k8sdashboard.png" alt="Kubernetes ダッシュボード" >}}
 
 <div class="alert alert-warning">
-The Datadog Agent v5 is supported up to Kubernetes version 1.8, for latest version of Kubernetes use the Datadog Agent v6.
+Datadog Agent v5 は、バージョン 1.8 以前の Kubernetes をサポートしています。最新バージョンの Kubernetes には Datadog Agent v6 をご使用ください。
 </div>
 
-## Overview
+## 概要
 
-Get metrics from Kubernetes in real time to:
+Kubernetes からメトリクスをリアルタイムに取得すると、以下のことが可能になります。
 
-* Visualize and monitor Kubernetes states
-* Be notified about Kubernetes failovers and events
+* Kubernetes の状態を視覚化および監視できます。
+* Kubernetes のフェイルオーバーとイベントの通知を受ける
 
-For Kubernetes, it's recommended to run the [Agent in a DaemonSet][1]. A [Docker image][2] is available with both the Docker and the Kubernetes integrations enabled.
+Kubernetes の場合は、[DaemonSet で Agent を実行][1]することをお勧めします。Docker と Kubernetes 両方のインテグレーションを有効にして、[Docker イメージ][2]を利用可能です。
 
-You can also just [run the Datadog Agent on your host][3] and configure it to gather your Kubernetes metrics.
+[ホストで Datadog Agent を実行][3]して構成するだけで、Kubernetes メトリクスを収集できます。
 
-## Set up Kubernetes
+## Kubernetes のセットアップ
 
-### Installation
+### インストール
 
-#### Container installation
+#### コンテナのインストール
 
-Thanks to Kubernetes, you can take advantage of DaemonSets to automatically deploy the Datadog Agent on all your nodes (or on specific nodes by using nodeSelectors).
+Kubernetes では、DaemonSet を利用して、すべてのノード (または nodeSelectors を使用して特定のノード) に Datadog Agent を自動的にデプロイできます。
 
-*If DaemonSets are not an option for your Kubernetes cluster, [install the Datadog Agent][4] as a deployment on each Kubernetes node.*
+DaemonSet がご使用の Kubernetes クラスターのオプションになっていない場合は、各 Kubernetes ノードにデプロイとして [Datadog Agent をインストール][4]します。
 
-If your Kubernetes has RBAC enabled, see how to configure RBAC permissions with your [Datadog-Kubernetes integration][5].
+Kubernetes で RBAC が有効になっている場合は、[Datadog-Kubernetes インテグレーションで RBAC アクセス許可を設定する方法][5]を参照してください。
 
-* Create the following `dd-agent.yaml` manifest:
+* 次の `dd-agent.yaml` マニフェストを作成します。
 
 ```yaml
 
@@ -82,22 +82,22 @@ spec:
           name: cgroups
 ```
 
-Replace `DATADOG_API_KEY` with [your api key][6] or use [Kubernetes secrets][7] to set your API key [as an environment variable][8].
+`DATADOG_API_キー` を[独自の API キー][6]に置き換えるか、[Kubernetes シークレット][7]を使用して API キーを[環境変数][8]として設定します。
 
-* Deploy the DaemonSet with the command:
+* 次のコマンドで DaemonSet をデプロイします。
   ```shell
   kubectl create -f dd-agent.yaml
   ```
 
-**Note**: This manifest enables the Autodiscovery, auto-configuration feature. To disable it, remove the `SD_BACKEND` environment variable definition. To learn how to configure Autodiscovery, see the [Autodiscovery documentation][9].
+**注**: このマニフェストは、オートディスカバリーの自動構成機能を有効にします。無効にするには、`SD_BACKEND` 環境変数の定義を削除します。オートディスカバリーの構成方法については、[オートディスカバリーのドキュメント][9]を参照してください。
 
-#### Host installation
+#### ホストのインストール
 
-Install the `dd-check-kubernetes` package manually or with your favorite configuration manager.
+`dd-check-kubernetes` パッケージを手動または任意の構成マネージャーを使用してインストールします。
 
-### Configuration
+### 構成
 
-Edit the `kubernetes.yaml` file to point to your server and port, set the masters to monitor:
+`kubernetes.yaml` ファイルを編集して、サーバーとポートを指定し、監視するマスターを設定します。
 
 ```yaml
 
@@ -107,28 +107,28 @@ instances:
     method: http
 ```
 
-See the [example kubernetes.yaml][10] for all available configuration options.
+使用可能なすべての構成オプションの詳細については、[kubernetes.yaml のサンプル][10] を参照してください。
 
-### Validation
+### 検証
 
-#### Container running
+#### コンテナの実行
 
-To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
+現在の環境で Datadog Agent が DaemonSet として動作していることを検証するには、次を実行します。
 
 ```shell
 kubectl get daemonset
 ```
 
-If the Agent is deployed, a similar output to the text below is displayed, where **desired** and **current** are equal to the number of nodes running in your cluster.
+Agent がデプロイされている場合は、以下のような出力が表示されます。ここで、**desired** と **current** は、クラスター内で実行中のノードの数と一致します。
 
 ```text
 NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
 dd-agent   3         3         <none>          11h
 ```
 
-#### Agent check running
+#### Agent チェックの実行
 
-[Run the Agent's `info` subcommand][11] and look for `kubernetes` under the Checks section:
+[Agent の `info` サブコマンドを実行][11]し、Checks セクションの `kubernetes` を探します。
 
 ```text
 Checks
@@ -139,15 +139,15 @@ Checks
       - Collected 39 metrics, 0 events & 7 service checks
 ```
 
-## Setup Kubernetes state
+## Kubernetes State のセットアップ
 
-### Installation
+### インストール
 
-#### Container installation
+#### コンテナのインストール
 
-If you are running Kubernetes >= 1.2.0, you can use the [kube-state-metrics][12] project to provide additional metrics (identified by the `kubernetes_state` prefix in the metrics list below) to Datadog.
+Kubernetes 1.2.0 以降を実行している場合は、[kube-state-metrics][12] プロジェクトを使用して、追加のメトリクス (下のメトリクスリストでは `kubernetes_state` プレフィックスで識別) を Datadog に提供できます。
 
-To run kube-state-metrics, create a `kube-state-metrics.yaml` file using the following manifest to deploy the kube-state-metrics service:
+kube-state-metrics を実行するには、次のマニフェストを使用して `kube-state-metrics.yaml` ファイルを作成し、kube-state-metrics サービスをデプロイします。
 
 ```yaml
 apiVersion: extensions/v1beta1
@@ -191,42 +191,42 @@ spec:
     app: kube-state-metrics
 ```
 
-Then deploy it by running:
+次に、以下を実行して、これをデプロイします。
 
 ```shell
 kubectl create -f kube-state-metrics.yaml
 ```
 
-The manifest above uses Google's publicly available `kube-state-metrics` container, which is also available on [Quay][13]. If you want to build it manually, see the [official project documentation][12].
+上記のマニフェストでは、Google が公開している `kube-state-metrics` コンテナを使用していますが、[Quay][13] も利用できます。このコンテナを手動でビルドする場合は、[プロジェクトの公式ドキュメント][12]を参照してください。
 
-If you configure your Kubernetes State Metrics service to run on a different URL or port, you can configure the Datadog Agent by setting the `kube_state_url` parameter in `conf.d/kubernetes_state.yaml`, then restarting the Agent.
-For more information, see the [kubernetes_state.yaml.example file][14]. If you have enabled [Autodiscovery][9], the kube state URL is configured and managed automatically.
+Kubernetes State Metrics サービスを別の URL またはポートで実行するように構成する場合は、`conf.d/kubernetes_state.yaml` で `kube_state_url` パラメーターを設定し、Datadog Agent を再起動することで構成を行います。
+詳細については、[kubernetes_state.yaml.example ファイル][14]を参照してください。[オートディスカバリー][9]を有効にしている場合は、kube state URL が自動的に構成および管理されます。
 
-#### Host installation
+#### ホストのインストール
 
-Install the `dd-check-kubernetes_state` package manually or with your favorite configuration manager (On CentOS/AWS, download the [rpm package][15] and see the [installation instructions][16].
-Then edit the `kubernetes_state.yaml` file to point to your server and port and set the masters to monitor. See the [example kubernetes_state.yaml][14] for all available configuration options.
+`dd-check-kubernetes_state` パッケージを手動または任意の構成マネージャーを使用してインストールします (CentOS/AWS 上)。[rpm パッケージ][15]をダウンロードし、[インストール手順][16]を参照してください。
+次に、`kubernetes_state.yaml` ファイルを編集して、サーバーとポートを指定し、監視するマスターを設定します。使用可能なすべての構成オプションの詳細については、[kubernetes_state.yaml のサンプル][14] を参照してください。
 
-### Validation
+### 検証
 
-#### Container validation
+#### コンテナの検証
 
-To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
+現在の環境で Datadog Agent が DaemonSet として動作していることを検証するには、次を実行します。
 
 ```shell
 kubectl get daemonset
 ```
 
-If the Agent is deployed, you receive a similar output to the text below, where **desired** and **current** are equal to the number of running nodes in your cluster.
+Agent がデプロイされている場合、以下のような出力が表示されます。ここで、**desired** と **current** は、クラスター内で実行中のノードの数と一致します。
 
 ```bash
 NAME       DESIRED   CURRENT   NODE-SELECTOR   AGE
 dd-agent   3         3         <none>          11h
 ```
 
-#### Agent check validation
+#### Agent チェックの検証
 
-[Run the Agent's info subcommand][11] and look for `kubernetes_state` under the Checks section:
+[Agent の info サブコマンドを実行][11]し、Checks セクションで `kubernetes_state` を探します。
 
 ```bash
 Checks
@@ -237,19 +237,19 @@ Checks
       - Collected 39 metrics, 0 events & 7 service checks
 ```
 
-## Setup Kubernetes DNS
+## Kubernetes DNS のセットアップ
 
-### Installation
+### インストール
 
-Install the `dd-check-kube_dns` package manually or with your favorite configuration manager.
+`dd-check-kube_dns` パッケージを手動または任意の構成マネージャーを使用してインストールします。
 
-### Configuration
+### 構成
 
-Edit the `kube_dns.yaml` file to point to your server and port, set the masters to monitor. See the [sample kube_dns.yaml][17] for all available configuration options.
+`kube_dns.yaml` ファイルを編集してサーバーとポートを指定し、監視するマスターを設定します。使用可能なすべてのコンフィギュレーションオプションについては、[kube_dns.yaml のサンプル ][17]を参照してください。
 
-#### Using with service discovery
+#### サービスディスカバリーの使用
 
-If you are using one `dd-agent` pod per Kubernetes worker node, you could use the following annotations on your kube-dns pod to retrieve the data automatically.
+Kubernetes ワーカーノードごとに 1 つの `dd-agent` ポッドを使用している場合は、kube-dns ポッドで以下のアノテーションを使用して、データを自動的に取得できます。
 
 ```yaml
 
@@ -261,14 +261,14 @@ metadata:
     service-discovery.datadoghq.com/kubedns.instances: '[[{"prometheus_endpoint":"http://%%host%%:10055/metrics", "tags":["dns-pod:%%host%%"]}]]'
 ```
 
-**Notes:**
+**注:**
 
-* Notice the "dns-pod" tag keeps track of the target DNS pod IP. The other tags are related to the `dd-agent` that is polling the information using service discovery.
-* The service discovery annotations need to be applied to the pod. In case of a deployment, add the annotations to the metadata of the template's spec.
+* "dns-pod" タグは、対象の DNS ポッド IP を追跡します。他のタグは、サービスディスカバリーを使用して情報をポーリングする `dd-agent` に関連します。
+* ポッドにサービスディスカバリーアノテーションを適用する必要があります。デプロイの場合は、テンプレートの spec のメタデータにアノテーションを追加します。
 
-### Validation
+### 検証
 
-[Run the Agent's info subcommand][11] and look for `kube_dns` under the Checks section:
+[Agent の info サブコマンドを実行][11]し、Checks セクションで `kube_dns` を探します。
 
 ```bash
 Checks

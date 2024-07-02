@@ -398,77 +398,76 @@ SSL encrypted TCP connection, set this parameter to true.
 `DdFetchStepFunctionsTags`
 : Let the Forwarder fetch Step Functions tags using GetResources API calls and apply them to logs and traces (if Step Functions tracing is enabled). If set to true, permission `tag:GetResources` will be automatically added to the Lambda execution IAM role.
 
-### Log scrubbing (optional)
+### ログスクラビング (オプション)
 
 `RedactIp`
-: Replace text matching `\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}` with `xxx.xxx.xxx.xxx`.
+:  `\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}` に一致するテキストを `xxx.xxx.xxx.xxx` に置き換えます。
 
 `RedactEmail`
-: Replace text matching `[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+` with `xxxxx@xxxxx.com`.
+:  `[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+` に一致するテキストを `xxxxx@xxxxx.com` に置き換えます。
 
 `DdScrubbingRule`
-: Replace text matching the supplied regular expression with `xxxxx` (default) or `DdScrubbingRuleReplacement` (if supplied). Log scrubbing rule is applied to the full JSON-formatted log, including any metadata that is automatically added by the Lambda function. Each instance of a pattern match is replaced until no more matches are found in each log. Using inefficient regular expression, such as `.*`, may slow down the Lambda function.
+:  指定された正規表現に一致するテキストを `xxxxx` (デフォルト) または `DdScrubbingRuleReplacement` (指定されている場合) に置き換えます。ログスクラビング規則は、完全な JSON 形式のログに適用されます。これには、Lambda 関数によって自動的に追加されたメタデータも含まれます。各ログで、パターンマッチが見つからなくなるまですべての一致が置換されます。`.*` など、非効率な正規表現を使用すると、Lambda 関数の遅延につながります。
 
-`DdScrubbingRuleReplacement`
-: Replace text matching DdScrubbingRule with the supplied text.
+`DdScrubbingRuleReplacement`に一致するテキストを、指定されたテキストで置き換えます。
 
-### Log filtering (optional)
+### ログのフィルタリング (オプション)
 
 `ExcludeAtMatch`
-: Do not send logs matching the supplied regular expression. If a log matches both the `ExcludeAtMatch` and `IncludeAtMatch`, it is excluded.
+: 指定された正規表現に一致するログを送信しません。ログが `ExcludeAtMatch` と `IncludeAtMatch` の両方に一致する場合、そのログは除外されます。
 
 `IncludeAtMatch`
-: Only send logs matching the supplied regular expression, and not excluded by `ExcludeAtMatch`.
+: 指定された正規表現に一致するログのみを送信し、`ExcludeAtMatch` によって除外されません。
 
-Filtering rules are applied to the full JSON-formatted log, including any metadata that is automatically added by the Forwarder. However, transformations applied by [log pipelines][21], which occur after logs are sent to Datadog, cannot be used to filter logs in the Forwarder. Using an inefficient regular expression, such as `.*`, may slow down the Forwarder.
+フィルタリング規則は、完全な JSON 形式のログに適用されます。これには、Forwarder によって自動的に追加されたメタデータも含まれます。ただし、[ログパイプライン][21]による変換はログが Datadog に送信された後に行われるため、Forwarder でログをフィルタリングする際には使用できません。`.*` など、非効率な正規表現を使用すると、Forwarder の遅延につながります。
 
-Some examples of regular expressions that can be used for log filtering:
+ログのフィルタリングに使用できる正規表現の例：
 
-- Include (or exclude) Lambda platform logs: `"(START|END) RequestId:\s`. The preceding `"` is needed to match the start of the log message, which is in a JSON blob (`{"message": "START RequestId...."}`). Datadog recommends keeping the `REPORT` logs, as they are used to populate the invocations list in the serverless function views.
-- Include CloudTrail error messages only: `errorMessage`.
-- Include only logs containing an HTTP 4XX or 5XX error code: `\b[4|5][0-9][0-9]\b`.
-- Include only CloudWatch logs where the `message` field contains a specific JSON key/value pair: `\"awsRegion\":\"us-east-1\"`.
-  - The message field of a CloudWatch log event is encoded as a string. For example,`{"awsRegion": "us-east-1"}` is encoded as `{\"awsRegion\":\"us-east-1\"}`. Therefore, the pattern you provide must include `\` escape characters, like this: `\"awsRegion\":\"us-east-1\"`.
+- Lambda プラットフォームログの包含 (または除外): `"(START|END) RequestId:\s`。先行する `"` は、 JSON blob (`{"message": "START RequestId...."}`) 内にあるログメッセージの先頭文字と一致させるために必要です。Datadog では、`REPORT` ログを残すことを推奨しています。これは、サーバーレス関数のビューで呼び出しリストを生成するために使用されるからです。
+- CloudTrail エラーメッセージのみ含める: `errorMessage`
+- HTTP 4XX または 5XX のエラーコードを含むログのみを含める: `\b[4|5][0-9][0-9]\b`
+- `message` フィールドに特定の JSON キー/値ペアを含む CloudWatch ログのみを含める: `\"awsRegion\":\"us-east-1\"`
+  - CloudWatch のログイベントのメッセージフィールドは、文字列としてエンコードされています。例えば、`{"awsRegion": "us-east-1"}` は `{\"awsRegion\":\"us-east-1\"}` としてエンコードされます。したがって、提供するパターンには、`\"awsRegion\":\"us-east-1\"` のように `\` エスケープ文字を含める必要があります。
 
-To test different patterns against your logs, turn on [debug logs](#troubleshooting).
+ログに対してさまざまなパターンをテストするには、[デバッグログ](#troubleshooting)をオンにします。
 
-### Advanced (optional)
+### 高度 (オプション)
 
 `SourceZipUrl`
-: Do not change unless you know what you are doing. Override the default location of the function source code.
+: 実行内容を理解できない場合は、変更しないでください。関数のソースコードのデフォルトの場所を上書きします。
 
 `PermissionsBoundaryArn`
-: ARN for the Permissions Boundary Policy.
+: Permissions Boundary Policy の ARN。
 
-`DdUsePrivateLink` (DEPRECATED)
-: Set to true to enable sending logs and metrics through AWS PrivateLink. See [Connect to Datadog over AWS PrivateLink][2].
+`DdUsePrivateLink` (非推奨)
+: AWS PrivateLink を介したログとメトリクスの送信を有効にするには、true に設定します。[AWS PrivateLink で Datadog に接続する][2]を参照してください。
 
 `DdHttpProxyURL`
-: Sets the standard web proxy environment variables HTTP_PROXY and HTTPS_PROXY. These are the URL endpoints your proxy server exposes. Do not use this in combination with AWS Private Link. Make sure to also set `DdSkipSslValidation` to true.
+: 標準の Web プロキシ環境変数 HTTP_PROXY および HTTPS_PROXY を設定します。これらは、プロキシサーバーが公開する URL エンドポイントです。これを AWS Private Link と組み合わせて使用しないでください。`DdSkipSslValidation` も true に設定してください。
 
 `DdNoProxy`
-: Sets the standard web proxy environment variable `NO_PROXY`. It is a comma-separated list of domain names that should be excluded from the web proxy.
+: 標準の Web プロキシ環境変数 `NO_PROXY` を設定します。これは、Web プロキシから除外する必要があるドメイン名のコンマ区切りのリストです。
 
 `VPCSecurityGroupIds`
-: Comma separated list of VPC Security Group IDs. Used when AWS PrivateLink is enabled.
+: VPC セキュリティグループ ID のカンマ区切りリスト。AWS PrivateLink が有効な場合に使用されます。
 
 `VPCSubnetIds`
-: Comma separated list of VPC Subnet IDs. Used when AWS PrivateLink is enabled.
+: VPC サブネット ID のカンマ区切りリスト。AWS PrivateLink が有効な場合に使用されます。
 
 `AdditionalTargetLambdaArns`
-: Comma separated list of Lambda ARNs that will get called asynchronously with the same `event` the Datadog Forwarder receives.
+: Datadog Forwarder が受信するのと同一の  `event` と非同期で呼び出される Lambda ARN のコンマ区切りリスト。
 
 `InstallAsLayer`
-: Whether to use the layer-based installation flow. Set to false to use the legacy installation flow, which installs a second function that copies the forwarder code from GitHub to an S3 bucket. Defaults to true.
+: レイヤーベースのインストールフローを使用するかどうか。フォワーダーコードを GitHub から S3 バケットにコピーする 2 番目の関数をインストールするレガシーインストールフローを使用するには、false に設定します。デフォルトは true です。
 
 `LayerARN`
-: ARN for the layer containing the forwarder code. If empty, the script will use the version of the layer the forwarder was published with. Defaults to empty.
+: フォワーダーコードを含むレイヤーの ARN。空の場合、スクリプトはフォワーダーが公開されたレイヤーのバージョンを使用します。デフォルトは空です。
 
-## Permissions
+## 権限
 
-To deploy the CloudFormation Stack with the default options, you need to have the permissions below to save your Datadog API key as a secret and create an S3 bucket to store the Forwarder's code (ZIP file), and create Lambda functions (including execution roles and log groups).
+CloudFormation Stack をデフォルトのオプションでデプロイするには、Datadog API キーをシークレットとして保存し、Forwarder のコード (ZIP ファイル) を格納する S3 バケットを作成し、Lambda 関数 (実行ロールとロググループを含む) を作成します。
 
-**IAM statements**:
+**IAM ステートメント**:
 
 ```json
 {
@@ -502,16 +501,16 @@ To deploy the CloudFormation Stack with the default options, you need to have th
 }
 ```
 
-The following capabilities are required when creating a CloudFormation stack:
+CloudFormation スタックを作成するには、次の機能が必要です。
 
-- CAPABILITY_AUTO_EXPAND, because the forwarder template uses macros such as the [AWS SAM macro][23].
-- CAPABILTY_IAM/NAMED_IAM, because the Forwarder creates IAM roles.
+- CAPABILITY_AUTO_EXPAND、Forwarder テンプレートが [AWS SAM マクロ][23]などのマクロを使用するためです。
+- CAPABILTY_IAM/NAMED_IAM、Forwarder は IAM ロールを作成するためです。
 
-The CloudFormation Stack creates following IAM roles:
+CloudFormation Stack は、次の IAM ロールを作成します。
 
-- ForwarderRole: The execution role for the Forwarder Lambda function to read logs from S3, fetch your Datadog API key from Secrets Manager, and write its own logs.
+- ForwarderRole: Forwarder Lambda 関数が S3 からログを読み取り、Secrets Manager から Datadog API キーをフェッチし、独自のログを書き込むための実行ロール。
 
-**IAM statements**
+**IAM ステートメント**
 
 ```json
 [
@@ -537,9 +536,9 @@ The CloudFormation Stack creates following IAM roles:
 ]
 ```
 
-- `ForwarderZipCopierRole`: The execution role for the ForwarderZipCopier Lambda function to download the Forwarder deployment ZIP file to a S3 bucket.
+- `ForwarderZipCopierRole`: ForwarderZipCopier Lambda 関数が S3 バケットに Forwarder デプロイの ZIP ファイルをダウンロードするための実行ロール。
 
-**IAM statements**:
+**IAM ステートメント**:
 
 ```json
 [
@@ -565,11 +564,11 @@ The CloudFormation Stack creates following IAM roles:
 ]
 ```
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Send AWS Services Logs With The Datadog Lambda Function][2]
+- [Datadog の Lambda 関数で AWS サービスのログを送信する][2]
 
 [1]: https://github.com/DataDog/datadog-lambda-extension
 [2]: https://docs.datadoghq.com/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/

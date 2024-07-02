@@ -27,116 +27,116 @@ cascade:
         rank: 70
 ---
 
-<div class="alert alert-info">This page is about the tools and security for protecting data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security/" target="_blank">Security</a> section.</div>
+<div class="alert alert-info">このページでは、Datadog に送信されるデータを保護するためのツールやセキュリティについて説明します。クラウドやアプリケーションのセキュリティ製品や機能をお探しの場合は、<a href="/security/" target="_blank">セキュリティ</a>のセクションをご覧ください。</div>
 
-In the normal course of using Datadog as intended, you send data to Datadog. Datadog works together with you to reduce data risk by providing you tools to appropriately limit the data you send and securing data during and after its transmission.
+Datadog を意図したとおりに使用する通常の過程で、お客様は Datadog にデータを送信します。Datadog は、お客様とともに、送信するデータを適切に制限するツールを提供し、送信中および送信後のデータを保護することで、データリスクを低減します。
 
-You may also wish to review the information available at [Datadog Security][1] and the terms of our [Privacy Policy][2].
+また、[Datadog セキュリティ][1]で公開されている情報、および当社の[プライバシーポリシー][2]の条件もご確認ください。
 
-## How data gets from you to Datadog
+## お客様から Datadog へのデータの流れ
 
-Datadog allows you to send data to Datadog in multiple ways, including from the Agent, [DogStatsD][3], the public API, and integrations. In addition, Real User Monitoring SDKs and tracing libraries generate data based on your application and services code and send it to Datadog. 
+Datadog では、Agent、[DogStatsD][3]、公開 API、インテグレーションなど、複数の方法で Datadog にデータを送信することができます。また、Real User Monitoring SDK やトレーシングライブラリは、お客様のアプリケーションやサービスのコードに基づいてデータを生成し、Datadog に送信します。
 
-Data in motion through Datadog provided tools is protected with TLS and HSTS. Data stored by Datadog is protected by encryption, access controls, and authentication. For specifics, read more at [Datadog Security][1].
+Datadog が提供するツールを介して移動するデータは、TLS と HSTS で保護されます。Datadog が保存するデータは、暗号化、アクセス制御、認証によって保護されます。詳細については、[Datadog セキュリティ][1]をご覧ください。
 
-### The Datadog Agent
+### Datadog Agent
 
-The Agent is the main channel for data getting from your systems to Datadog. [Read all about data security measures in the Agent][4]. 
+Agent は、お客様のシステムから Datadog にデータを取得するための主要なチャンネルです。[Agent のデータセキュリティ対策についてはこちらをご覧ください][4]。
 
-To learn how to avoid storing secrets in plaintext in the Agent's configuration files, see [Secrets Management][5].
+Agent のコンフィギュレーションファイルに平文でシークレットを保存しない方法については、[シークレット管理][5]を参照してください。
 
-### Third party services integrations
+### サードパーティサービスとのインテグレーション
 
-The integrations for some third party services are configured directly in Datadog and might require you to provide credentials to allow Datadog to connect to the service on your behalf. The credentials you provide are encrypted and stored by Datadog in a secure credential datastore. 
+一部のサードパーティサービスとのインテグレーションは、Datadog で直接構成され、Datadog がお客様に代わってサービスに接続するための資格情報を提供する必要がある場合があります。提供された資格情報は暗号化され、Datadog によって安全な資格情報データストアに保存されます。
 
-All data through these integrations is encrypted when at-rest in Datadog's systems and encrypted in-transit. Access to the secure credential datastore is controlled and audited, and specific services or actions within the third party services are limited to only what is necessary. Anomalous behavior detection tools continuously monitor for unauthorized access. Datadog employee access for maintenance purposes is limited to a select subset of engineers.
+これらのインテグレーションを通じたすべてのデータは、Datadog のシステムで静止しているときは暗号化され、移動中も暗号化されます。セキュアな資格情報データストアへのアクセスは制御および監査され、サードパーティサービス内の特定のサービスやアクションは必要なものだけに制限されます。異常行動検出ツールが、不正なアクセスを継続的に監視します。また、Datadog の従業員によるメンテナンス目的のアクセスは、一部のエンジニアに限定されています。
 
-### Cloud integrations
+### クラウドインテグレーション
 
-Due to their sensitive nature, additional security measures are implemented, where possible, when integrating with cloud providers, including the use of Datadog-dedicated credentials with limited permissions. For example:
+機密性を考慮して、クラウドプロバイダーとのインテグレーションには、アクセス許可を限定した Datadog 専用の資格情報を利用するなど、可能であれば追加的なセキュリティ対策が施されます。たとえば、以下のとおりです。
 
-* The [integration with Amazon Web Services][6] requires you to configure role delegation using AWS IAM, as per the [AWS IAM Best Practices guide][7], and to grant specific permissions with an AWS Policy.
-* The integration with [Microsoft Azure][8] relies on you defining a tenant for Datadog, with access to a specific application granted only the "reader" role for the subscriptions you would like to monitor.
-* The integration with [Google Cloud Platform][9] relies on you defining a service account for Datadog, and granting it only the "Compute Viewer" and "Monitoring Viewer" roles.
+* [Amazon Web Services][6] とのインテグレーションでは、[AWS の IAM ベストプラクティスガイド][7]に従い、AWS IAM を使用してロール委任を設定し、AWS ポリシーを使用して特定のアクセス許可を付与する必要があります。
+* [Microsoft Azure][8] とのインテグレーションでは Datadog のテナントを定義し、特定のアプリケーションへのアクセスには監視するサブスクリプションに対する "閲覧者" ロールのみを付与します。
+* [Google Cloud Platform][9] とのインテグレーションでは、Datadog のサービスアカウントを定義し、"Compute Viewer" または "Monitoring Viewer" ロールのみを付与します。
 
-## Measures you can implement to reduce your data risk
+## データリスクを低減するために実施可能な対策
 
-Datadog's purpose is to gather observability information from many sources around your infrastructure and services and to bring it together in one place for you to analyze and investigate. This involves you sending a wide range of types of data content to Datadog's servers. Most of the data gathered for the intended use of the Datadog products has little chance of containing private or personal data. For the data that may contain unnecessary private or personal data, we provide instructions, tools, and recommendations to enable you to strip out, obfuscate, and otherwise reduce the inclusion of private or personal data in the data shared with Datadog.
+Datadog の目的は、お客様のインフラストラクチャーやサービスに関する多くのソースから観測可能性情報を収集し、お客様が分析・調査できるように 1 つの場所にまとめることです。このため、お客様は様々な種類のデータコンテンツを Datadog のサーバーに送信することになります。Datadog 製品の使用目的のために収集されたデータのほとんどは、個人情報を含む可能性はほとんどありません。不要な個人情報を含む可能性のあるデータについては、お客様が Datadog と共有するデータに含まれる個人情報を削除、難読化、その他の方法で削減できるよう、指示、ツール、推奨事項を提供します。
 
-### Sensitive Data Scanner
+### センシティブ データ スキャナー
 
-Sensitive Data Scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. With implementation, your security and compliance teams can introduce a line of defense in preventing sensitive data from leaking outside your organization. For information about the scanner and setting it up, read [Sensitive Data Scanner][10].
+機密データスキャナーは、ストリームベースのパターンマッチングサービスであり、機密データを識別、タグ付け、およびオプションで編集またはハッシュするために使用できます。導入することで、セキュリティチームとコンプライアンスチームは、機密データが組織の外部に漏洩するのを防ぐための防衛線を導入できます。スキャナーの詳細と設定については、[機密データスキャナー][10]をお読みください。
 
-### Logs Management
+### ログ管理
 
-Logs are records produced by your systems and services and the activities that happen within them. Read about logs data security considerations, including information about how you can filter and obfuscate logs data in [Log Management Data Security][11]. 
+ログは、システムやサービス、およびその内部で発生した活動によって生成される記録です。ログデータのセキュリティに関する考察については、[ログ管理データのセキュリティ][11]で、ログデータのフィルタリングや難読化の方法についての情報を含めてお読みください。
 
-Dive deep into controlling logs data with the [Controlling sensitive logs data][12] guide and [Agent Advanced Configuration for Logs][13].
+ログデータの制御については、[機密ログデータの制御][12]と[ログのための Agent の高度な構成][13]を参照してください。
 
-A key approach to reducing risk around logs data security is access control. Read [How to set up RBAC for Logs][14] and [Logs RBAC Permissions][15] to learn how to do this in Datadog.
+ログデータのセキュリティに関するリスクを低減するための重要なアプローチは、アクセス制御です。Datadog でこれを行う方法については、[ログに RBAC を設定する方法][14]と[ログの RBAC 権限][15]をお読みください。
 
-### Live processes and containers
+### ライブプロセスとコンテナ
 
-To prevent leaking sensitive data when you're monitoring live processes and live containers, Datadog provides some default sensitive keyword scrubbing in process arguments and in Helm charts. You can obfuscate additional sensitive sequences within process commands or arguments by using the [`custom_sensitive_words` setting][16], and add to the container scrubbing word list by using the [`DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` environment variable][17].
+ライブプロセスやライブコンテナを監視しているときに機密データが漏れるのを防ぐために、Datadog はプロセスの引数や Helm チャートで、いくつかのデフォルトの機密キーワードスクラビングを提供します。[`custom_sensitive_words` 設定][16]を使用してプロセスコマンドまたは引数内の追加の機密シーケンスを難読化し、[`DD_ORCHESTRATOR_EXPLORER_CUSTOM_SENSITIVE_WORDS` 環境変数][17]を使用してコンテナスクラビングワードリストに追加できます。
 
-### APM and other tracing library based products
+### APM などのトレーシングライブラリ系製品
 
-The Datadog tracing libraries are used to instrument your applications, services, tests, and pipelines, and send performance data through the Agent to Datadog. Trace and span data (along with much more) is generated for the following products to use:
+Datadog のトレーシングライブラリは、アプリケーション、サービス、テスト、パイプラインをインスツルメントし、Agent を通じて Datadog にパフォーマンスデータを送信するために使用されます。トレースとスパンのデータ (およびその他多数) は、以下の製品で使用するために生成されます。
 
 - Application Performance Monitoring (APM)
 - Continuous Profiler
 - CI Visibility
 - Application Security Management
 
-For detailed information about how tracing-library sourced data is managed, default basic security settings, and custom obfuscating, scrubbing, excluding, and modifying of trace-related elements, read [Configuring Agent and Tracer for trace data security][18].
+トレーシングライブラリのソースデータの管理方法、デフォルトの基本的なセキュリティ設定、トレース関連要素のカスタム難読化、スクラビング、除外、および変更についての詳細情報は、[トレースデータのセキュリティのための Agent とトレーサーの構成][18]を参照してください。
 
-### Serverless distributed tracing
+### サーバーレス分散型トレーシング
 
-You can use Datadog to collect and visualize the JSON request and response payloads of AWS Lambda functions. To prevent any sensitive data within request or response JSON objects from being sent to Datadog (like account IDs or addresses), you can scrub specific parameters from being sent to Datadog. Read [Obfuscating AWS Lambda payload contents][19] for more information.
+Datadog を使用すると、AWS Lambda 関数の JSON リクエストおよびレスポンスのペイロードを収集し、視覚化することができます。リクエストまたはレスポンスの JSON オブジェクト内の機密データ (アカウント ID やアドレスなど) が Datadog に送信されないようにするには、特定のパラメーターが Datadog に送信されないようにスクラブすることができます。詳しくは、[AWS Lambda のペイロードコンテンツの難読化][19]をお読みください。
 
 ### Synthetic Monitoring
 
-Synthetic testing simulates requests and business transactions from testing locations around the world. Read about the encryption considerations for configurations, assets, results, and credentials, as well as how to use testing privacy options, in [Synthetic Monitoring Data Security][20].
+Synthetic テストは、世界中のテスト拠点からのリクエストとビジネストランザクションをシミュレートします。構成、アセット、結果、資格情報の暗号化に関する考慮事項や、テストのプライバシーオプションの使用方法については、[Synthetic モニタリングのデータセキュリティ][20]をお読みください。
 
-### RUM & Session Replay
+### RUM & セッションリプレイ
 
-You can modify the data collected by Real User Monitoring in the browser to protect personally identifiable information and to sample the RUM data you're collecting. Read [Modifying RUM Data and Context][21] for details.
+個人を特定できる情報を保護し、収集する RUM データをサンプリングするために、ブラウザで Real User Monitoring が収集するデータを変更することができます。詳しくは、[RUM データとコンテキストの変更][21]をお読みください。
 
-Session Replay privacy options default to protecting end-user privacy and preventing sensitive organizational information from being collected. Read about masking, overriding, and hiding elements from a session replay in [Session Replay Privacy Options][22].
+セッションリプレイのプライバシー オプションのデフォルトは、エンドユーザーのプライバシーを保護し、組織の機密情報が収集されないようにすることです。セッションリプレイの要素のマスク、オーバーライド、非表示については、[セッションリプレイのプライバシー オプション][22]を参照してください。
 
 ### Database Monitoring
 
-The Database Monitoring Agent obfuscates all query bind parameters sent to the Datadog intake. Thus passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database will not be viewable in query metrics, query samples, or explain plans. To read about mitigating risk for other types of data involved in database performance monitoring, read [Database Monitoring Data Collected][23].
+データベースモニタリング Agent は、Datadog インテークに送信されたすべてのクエリのバインドパラメータを難読化します。このため、データベースに保存されているパスワード、PII (個人を特定できる情報) などの機密情報は、クエリのメトリクス、クエリサンプル、または説明プランで表示不可能になります。データベースのパフォーマンスモニタリングに関わる他の種類のデータに対するリスク軽減については、[データベースモニタリングデータの収集][23]をお読みください。
 
-## Other sources of potentially sensitive data 
+## その他の潜在的な機密データのソース
 
-In addition to the sensitive data that you can automatically scrub, obfuscate, and otherwise avoid collecting, a lot of the data collected by Datadog is the names and descriptions of things. We recommend not including private or personal information in the text you are sending. Consider the following (non-exhaustive) list of text data you send to Datadog in the intended use of the product:
+自動的にスクラブ、難読化、その他の方法で収集を避けることができる機密データに加え、Datadog が収集するデータの多くは、物の名前や説明です。送信するテキストには、個人情報を含めないことをお勧めします。製品の意図的な使用において、Datadog に送信するテキストデータについては、以下のリスト (非網羅的) を参照してください。
 
-Metadata and tags
-: Metadata consists primarily of [tags][24] in the `key:value` format, for example, `env:prod`. Metadata is used by Datadog to filter and group data to help you derive meaningful information. 
+メタデータとタグ
+: メタデータは主に、`key:value` 形式の[タグ][24]から構成されており、例えば、`env:prod` のような形式があります。メタデータは、Datadog がデータのフィルタリングやグループ化に使用し、意味のある情報を導き出すのに役立ちます。
 
-Dashboards, notebooks, alerts, monitors, alerts, incidents, SLOs
-: The text descriptions, titles, and names you give the things you create in Datadog are data. 
+ダッシュボード、ノートブック、アラート、モニター、アラート、インシデント、SLO
+: Datadog で作成したものにつけるテキストの説明、タイトル、名前はデータです。
 
-Metrics
-: Metrics, including infrastructure metrics and metrics generated from integrations and other ingested data such as logs, traces, RUM, and synthetic tests, are timeseries used to populate graphs. They usually have associated tags.
+メトリクス
+: メトリクスには、インフラストラクチャーメトリクス、インテグレーションから生成されたメトリクス、およびログ、トレース、RUM、Synthetic テストなどのその他の取り込みデータが含まれ、グラフに入力するために使用される時系列データです。通常、関連するタグが付いています。
 
-APM data
-: APM data includes services, resources, profiles, traces, and spans, along with associated tags. Read [the APM Glossary][25] for an explanation about each. 
+APM データ
+: APM データには、サービス、リソース、プロファイル、トレース、スパン、および関連するタグが含まれます。それぞれの説明は、[APM 用語集][25]をお読みください。
 
-Database query signatures
-: Database monitoring data consists of metrics and samples, along with their associated tags, collected by the Agent and used to track historical performance of normalized queries. The granularity of this data is defined by its normalized query signature and unique host identifier. All query parameters are obfuscated and discarded from collected samples before being sent to Datadog.
+データベースクエリのシグネチャ
+: データベースモニタリングデータは、Agent が収集したメトリクスとサンプル、および関連するタグで構成され、正規化されたクエリの履歴パフォーマンスを追跡するために使用されます。このデータの粒度は、正規化されたクエリシグネチャと一意のホスト識別子によって定義されます。すべてのクエリパラメーターは難読化され、Datadog に送信される前に収集されたサンプルから削除されます。
 
-Process information
-: Processes consist of metrics and data from the `proc` filesystem, which acts as an interface to internal data structures in the kernel. Process data may contain the process command (including its path and arguments), the associated username, the ID of the process and its parent, the process state, and the working directory. Process data usually also has tag metadata associated with it.
+プロセス情報
+: プロセスは、`proc` ファイルシステムのメトリクスとデータで構成されています。このファイルシステムは、カーネルの内部データ構造へのインターフェイスとして動作します。プロセスデータには、プロセスコマンド (パスと引数を含む)、関連ユーザー名、プロセスの ID とその親、プロセスの状態、および作業ディレクトリを含めることができます。また、プロセスデータには通常、タグのメタデータも付随しています。
 
-Events and comments
-: Events data is aggregated from multiple sources into a consolidated view, including triggered monitors, events submitted by integrations, events submitted by the application itself, and comments sent by users or through the API. Events and comments usually have associated tags metadata.
+イベントとコメント
+: イベントデータは、トリガーされたモニター、インテグレーションによって送信されたイベント、アプリケーション自体によって送信されたイベント、ユーザーによってまたは API を通して送信されたコメントなど、複数のソースから統合ビューに集約されます。イベントとコメントには、通常、関連するタグのメタデータがあります。
 
-Continuous Integration pipelines and tests
-: The names of branches, pipelines, tests, and test suites are all data sent to Datadog.
+Continuous Integration のパイプラインとテスト
+: ブランチ、パイプライン、テスト、テストスイートの名前は、すべて Datadog に送信されるデータです。
 
-### Further Reading
+### その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

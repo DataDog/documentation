@@ -8,151 +8,151 @@ aliases:
 further_reading:
 - link: "/account_management/saml/"
   tag: "Documentation"
-  text: "Configure SAML for your Datadog account"
+  text: "Datadog アカウントで SAML を設定"
 - link: "/account_management/billing/usage_details"
   tag: "Documentation"
-  text: "Learn about Usage Details"
+  text: "使用量の詳細について"
 - link: "/account_management/billing/usage_attribution"
   tag: "Documentation"
-  text: "Set-up Usage Attribution"
+  text: "使用属性のセットアップ"
 - link: "/account_management/org_settings/cross_org_visibility"
   tag: "Documentation"
   text: "Cross-Organization Visibility"
 ---
 
-## Overview
+## 概要
 
-It is possible to manage multiple child-organizations from one parent-organization account. This is typically used by managed service providers that have customers which should not have access to each others' data. 
+1 つの親組織アカウントから複数の子組織を管理することができます。これは通常、お互いのデータにアクセスできない顧客を持つマネージドサービスプロバイダーが使用します。
 
-The multi-organization account feature is not enabled by default. Contact [Datadog support][1] to have it enabled.
+複数組織アカウント機能は、デフォルトでは有効になりません。有効にするには、[Datadog のサポートチーム][1]にご連絡ください。
 
-## Capabilities
+## 機能
 
-Users can be added to the parent-organization and multiple child-organizations. Users switch between organizations from the [user account settings menu][2]. 
+親組織と複数の子組織にユーザーを追加することができます。ユーザーは、[ユーザーアカウント設定メニュー][2]から組織を切り替えることができます。
 
-Organizations within a parent organization do not have access to each other's data. To enable cross-organization metric queries, see [cross-organization visibility][3].
+親組織内の組織は、お互いのデータにアクセスできません。組織間のメトリクスクエリを有効にするには、[Cross-Organization Visibility][3] を参照してください。
 
-The parent-organization can view the usage of individual child-organizations, allowing the parent to track usage trends.
+親組織は、個々の子組織の利用状況を見ることができるため、利用傾向を追跡することができます。
 
-Account settings, such as allow-listed IP addresses, are not inherited by child-organizations from their parent-organization.
+アカウント設定 (許可リスト入りの IP アドレスなど) は、親オーガニゼーションから子オーガニゼーションへ継承されません。
 
-## Child organizations
+## 子オーガニゼーション
 
-### Create
+### 作成
 
-1. After the feature is enabled, see the [New Organization Page][4].
-2. Enter the name of the child-organization you wish to create. **The child-organization name cannot exceed 32 characters.**
-3. Optionally, invite admin users to your child-organization:
-    - Enter one or more email addresses.
-    - Invited users are assigned the [Datadog Admin role][5]. You can invite more users in
-Organization Settings after creating your organization.
-    - If the user does not have a password, Datadog sends an email invitation with a link to set a password and join the new child-organization.
-4. Click **Create**.
+1. 機能を有効にしたら、[New Organization Page][4] を参照します。
+2. 作成する子オーガニゼーションの名前を入力します。**子オーガニゼーション名は最大 32 文字です。**
+3. オプションで、子組織に管理者ユーザーを招待することができます。
+    - 1 つまたは複数のメールアドレスを入力します。
+    - 招待されたユーザーには、[Datadog Admin ロール][5]が割り当てられます。組織を作成後、
+組織の設定でさらにユーザーを招待することができます。
+    - ユーザーがパスワードを持っていない場合、Datadog は、パスワードを設定し、新しい子組織に参加するためのリンクを持つ招待メールを送信します。
+4. **作成**をクリックします。
 
-The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][6].
+新しい子組織は、親組織のプランを継承し、親組織の請求アカウントに追加されます。子組織の請求を更新する場合は、[営業担当者][6]にお問い合わせください。
 
-### Content
+### 内容
 
-Onboarding a new sub-organization with a set of baseline dashboards and monitors can be done programmatically with the [Datadog API][7] and tools such as Terraform, see [Managing Datadog with Terraform][8]. Additionally, scripts can be used to backup existing dashboards and [monitors][9] as code.
+ベースラインのダッシュボードとモニターを使用して新しいサブ組織をオンボードするには、[Datadog API][7] と Terraform などのツールをプログラムで使用します。[Terraform を使用した Datadog の管理][8]を参照してください。さらに、スクリプトを使用して、既存のダッシュボードと[モニター][9]をコードとしてバックアップできます。
 
-### Custom sub-domains
+### カスタムサブドメイン
 
-The custom sub-domain feature is not enabled by default. Contact [Datadog support][1] to have it enabled.
+カスタムサブドメイン機能は、デフォルトでは有効になりません。有効にするには、[Datadog のサポートチーム][1]にご連絡ください。
 
-If you are a member of multiple organizations, custom sub-domains help you identify the source of an alert or notification. Also, they can immediately switch you to the organization associated with the sub-domain.
+複数のオーガニゼーションに属しているユーザーには、カスタムサブドメインを使用すると、アラートや通知のソースを特定するために便利です。そのようなユーザーをサブドメインに関連付けられているオーガニゼーションに即座に切り替えることもできます。
 
-For example, the URL `https://app.datadoghq.com/event/event?id=1` is associated with an event in Organization A. If a user is a member of both Organization A and Organization B, but is viewing Datadog within the context of Organization B, then that URL returns a `404 Not Found error`. The user must switch to Organization A using the [user account settings menu][2], then revisit the URL. However, with custom sub-domains, the user could navigate to `https://org-a.datadoghq.com/event/event?id=1` which would automatically switch the user's context to Organization A and display the correct page.
+たとえば、URL `https://app.datadoghq.com/event/event?id=1` が組織 A のイベントに関連付けられています。組織 A と組織 B のメンバーであるユーザーが、組織 B のコンテキストで Datadog を表示している場合、上の URL は `404 Not Found error` を返します。その場合は、[ユーザーアカウント設定メニュー][2]を使用して組織 A に切り替えてから、URL に再度アクセスする必要があります。一方、カスタムサブドメインを使用し、`https://org-a.datadoghq.com/event/event?id=1` に移動すれば、自動的にユーザーのコンテキストが組織 A に切り替わり、正しいページを表示することができます。
 
-**Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to `https://**app**.datadoghq.com/account/settings` becomes `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings`.
+**注**: カスタム Datadog サブドメインを持っている場合、Datadog ドキュメントからリンクを手動で（サブドメイン名を追加して）編集してください。たとえば、`https://**app**.datadoghq.com/account/settings` へリダイレクトするリンクは `https://**<custom_sub-domain_name>**.datadoghq.com/account/settings` となります。
 
-## Set up SAML
+## SAML のセットアップ
 
-SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually.
+SAML セットアップは、親オーガニゼーションから子オーガニゼーションへ継承 _されません_。各子オーガニゼーションで個別に SAML が構成される必要があります。
 
-To configure SAML for multi-organizations:
+SAML をマルチオーガニゼーションに構成するには
 
 1. Create a new organization.
-2. Invite SAML users.
-3. Login as a SAML user and [set up SAML][10].
+2. SAML ユーザーを招待します。
+3. SAML ユーザーとしてログインし、[SAML をセットアップ][10]します。
 
-### SAML strict parent organizations
+### SAML に厳しい親組織
 
-Under some circumstances, you may be unable to access a newly created child organization. When an organization requires users to log in using SAML, its user accounts may lack passwords. Since child organizations do not inherit SAML settings from their parents, logging into the child organization requires a password that does not exist.
+状況によっては、新しく作成した子組織にアクセスできないことがあります。組織がユーザーに SAML を使用してログインすることを要求する場合、そのユーザーアカウントにはパスワードがないことがあります。子組織は親組織から SAML 設定を継承しないため、子組織にログインするには存在しないパスワードが必要になります。
 
-To ensure that you can log into a child organization created from a SAML strict parent organization, take the following steps in the parent organization:
-1. Click **Organization Settings** from the account menu in the bottom of the left side navigation, or select **Organization Settings** from the header dropdown at the top of the Personal Settings page.
-2. In the left page menu, select **Users**.
-3. Select your user profile.
-4. Set the **Override Default Login Methods** toggle to the on position.
-5. Under **Select user's login methods**, place a checkmark in the **Password** checkbox.
-6. Ensure your account has a password. If you need help setting a password, contact [Datadog support][1].
+SAML に厳しい親組織から作成された子組織に確実にログインするには、親組織で次の手順を実行します。
+1. 左ナビゲーションの下部にあるアカウントメニューで **Organization Settings** をクリックするか、Personal Settings ページの上部にあるドロップダウンで **Organization Settings** を選択します。
+2. 左ページのメニューで、**Users** を選択します。
+3. ユーザープロファイルを選択します。
+4. **Override Default Login Methods** トグルをオンに設定します。
+5. **Select user's login methods** の下で、**Password** のチェックボックスにチェックを入れます。
+6. アカウントにパスワードが設定されていることを確認します。パスワードの設定にお困りの場合は、[Datadog サポート][1]にお問い合わせください。
 
-Following the steps above ensures that you can log into the parent account using an email and password combination. After creating your child organization, you can also log into it using your email and password.
+上記の手順で、メールアドレスとパスワードの組み合わせで親アカウントにログインできるようになります。子組織を作成した後、メールアドレスとパスワードを使ってログインすることも可能です。
 
-If you already created the child organization and are locked out, following the procedure allows you to log in.
+すでに子組織を作成していてロックアウトされている場合は、手順に沿って操作することでログインできます。
 
-## Multi-org usage
+## マルチオーガニゼーションの使用量
 
 The parent-organization can view the total and billable usage of all their organizations (child and parent organizations) by hovering over their username on the bottom left corner and navigating to [**Plan & Usage** > **Usage & Cost**][11].
 
-The Usage page shows the aggregate usage of the parent-organization and all its child-organizations. There are two tabs on the Usage page:
+Usage ページには、親組織およびそのすべての子組織の使用量の集計が表示されます。Usage ページには、2 つのタブがあります。
 
 * Overall
 * Individual Organizations
 
-### Overall usage
+### 全体使用量
 
-This tab contains a Month-to-Date Total Usage section and an Overall Usage section.
+このタブには、Month-to-Date Total Usage セクションと Overall Usage セクションが含まれています。
 
-The Month-to-Date Total Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you've used during the month, across your parent-organization and all its child-organizations.
+Month-to-Date Total Usage セクションには、親オーガニゼーションとそのすべての子オーガニゼーションで月内に使用したホスト、コンテナ、カスタムメトリクスなどのプラットフォーム各部について、当月の使用量概要が表示されます。
 
-{{< img src="account_management/multi-org-v2.png" alt="Month-to-Date Usage" >}}
+{{< img src="account_management/multi-org-v2.png" alt="当月使用量" >}}
 
-Most accounts by default can view "Billable" usage, which shows usage that contributes to your final bill. This view also breaks out on-demand usage above your commitments and allocations. The "All" view shows you all usage, including non-billable usage such as product trials.
+ほとんどのアカウントは、デフォルトで「請求対象の」使用量を表示できます。これは、最終的な請求に寄与する使用量を示します。このビューでは、コミットメントと割り当てを超えるオンデマンドの使用量も分類されます。"All" ビューには、製品の試用版などの請求対象外の使用量を含む、すべての使用量が表示されます。
 
-The Overall Usage section shows the monthly aggregate usage across all organizations over the past 6 months. The usage shown here is "All" usage not "Billable" usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill. This information can be downloaded as a CSV file.
+Overall Usage セクションには、すべてのオーガニゼーションの過去 6 か月の使用量の月間集計が表示されます。ここに表示される使用量は "請求対象" ではなく "すべて" であるため、トライアル期間など、最終的な請求書に反映される各種変更事項の調整は含まれていません。この情報は CSV ファイルとしてダウンロードできます。
 
-{{< img src="account_management/multi-org-v2-trends.png" alt="Overall Usage Long-term trends" >}}
+{{< img src="account_management/multi-org-v2-trends.png" alt="全体使用量 長期的な傾向" >}}
 
-Both the Month-to-Date Total Usage section and the Overall Usage section can be filtered by clicking on product specific sub-tabs. In the "Log Management" sub-tab, you can view the Logs Usage by Index table, which displays your month-to-date and last month's indexed log usage by:
+製品固有のサブタブをクリックすると、Month-to-Date Total Usage セクションと Overall Usage セクションの両方をフィルタリングできます。"Log Management" サブタブでは、Logs Usage by Index テーブルを表示できます。このテーブルには、当月および先月のインデックス付きログ使用量が次のように表示されます。
 
-* Index name
+* インデックス名
 * Organization
-* Retention period in days
-* Indexed log count broken down between live and rehydrated logs
-* The index's contribution percentage to the overall indexed log usage
+* 保持期間（日数）
+* ライブログとリハイドレートされたログの間で分類されたインデックス付きログ数
+* インデックス付きログの全体的な使用量に対するインデックスの貢献率
 
-This data can be downloaded as a CSV file.
+このデータは CSV ファイルとしてダウンロードできます。
 
-{{< img src="account_management/multi-org-v2-logs-by-index.png" alt="Multi-org Logs Usage by Index" >}}
+{{< img src="account_management/multi-org-v2-logs-by-index.png" alt="インデックス別の複数オーガニゼーションログの使用量" >}}
 
 ### Individual organization usage
 
-On the **Individual Organizations** usage tab, you can view the usage of your child organizations in absolute units or as a percentage of total usage.
+**Individual Organizations** の使用量タブでは、子組織の使用量を絶対単位または総使用量に対する割合で表示することができます。
 
-The default view is the "Billable" view, which shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations, and other adjustments that provide a more accurate summary of what drives your bill. Switch to the "All" view to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
+デフォルトのビューは "Billable" ビューで、最終的な請求に寄与する使用量が表示されます。このビューでは、トライアルオーガニゼーションなどの請求対象ではない子オーガニゼーションや、請求対象のより正確な要約を提供するその他の調整が削除されます。"All" ビューに切り替えると、親オーガニゼーションとすべての子オーガニゼーションの使用量を未調整かつ生の状態で確認することができます。どちらのビューも CSV ファイルとしてダウンロードできます。
 
 To view the [Usage Details][12] of a child-organization, you can click on the child-organization's name.
 
-## Usage attribution
+## 使用属性
 
 The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][13] page. Admins can hover over their username at the bottom left, then navigate to: [**Plan & Usage > Usage Attribution**][14].
 
-When enabled at the parent-organization level, usage attribution shows usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
+親オーガニゼーションレベルで有効化されている場合、使用属性にはすべてのオーガニゼーションの使用量集計が表示されます。これは、子オーガニゼーションの使用量を特定のプロジェクトまたはチームの属性とするなど、グループ化する場合に便利です。
 
-Functionalities include:
+機能:
 
-* Changing and adding new tag keys (up to three).
-* Accessing monthly usage in both the UI and as a .tsv download (tab separated values)
-* Accessing daily usage in a .tsv file for most usage types.
+* 新規タグキーの変更及び追加（最大 3 つ）
+* UI および .tsv ダウンロードとして月間使用量にアクセス（タブ区切り値）
+* ほとんどの種類の日次使用量（.tsv ファイル）にアクセス
 
-{{< img src="account_management/billing/usage_attribution/Usage-Attribution-Monthly-Facets.png" alt="Monthly Usage Attribution Report" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-Monthly-Facets.png" alt="月次使用量属性レポート" style="width:100%;" >}}
 
-Usage attribution can also be enabled at the child-organization level. When enabled at this level, the tags are only applied to that specific child-organization and can only be viewed in that child-organization. Tags applied at the child-organization level do not rollup and cannot be viewed in the parent-organization.
+使用属性は、子オーガニゼーションレベルで有効にすることも可能です。このレベルで有効にした場合、タグはその子オーガニゼーションのみに適用され、その子オーガニゼーションでのみ表示されます。子オーガニゼーションレベルで適用されたタグはロールアップされず、親オーガニゼーションでは表示されません。
 
-Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a>.
+使用属性は、Enterprise プランに含まれる高度な機能です。他のプランをご利用中の場合は、アカウント担当者または <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

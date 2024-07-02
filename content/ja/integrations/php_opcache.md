@@ -24,7 +24,7 @@
   "sales_email": noname@withgod.jp
   "support_email": noname@withgod.jp
 "categories": []
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/php_opcache/README.md"
 "display_on_public_website": true
@@ -63,11 +63,11 @@
 
 This check monitors [PHP OPcache][1] through the Datadog Agent.
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### Installation
+### インストール
 
 To install the `php_opcache` check on your host:
 
@@ -102,7 +102,7 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 </Location>
 ```
 
-### Configuration
+### 構成
 
 1. Edit the `php_opcache.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your `php_opcache` performance data. See the [sample `php_opcache.d/conf.yaml` file][6] for all available configuration options.
     ```
@@ -115,21 +115,21 @@ Alias /opcache-status /opt/datadog-agent/embedded/lib/python3.8/site-packages/da
 
 [Run the Agent's status subcommand][8] and look for `php_opcache` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "php_opcache" >}}
 
 
-### Events
+### イベント
 
 The PHP OPcache integration does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "php_opcache" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][11].
 

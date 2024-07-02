@@ -18,77 +18,77 @@ further_reading:
 title: Create an Agent Integration
 description: Learn how to develop and publish a Datadog Agent integration.
 ---
-## Overview
+## 概要
 
-This page walks Technology Partners through how to create a Datadog Agent integration, which you can list as out-of-the-box on the [Integrations page][23], or for a price on the [Marketplace page][24]. 
+このページでは、Datadog Agent インテグレーションを作成する方法について、テクノロジーパートナーに説明します。このインテグレーションは、[Integrations ページ][23]ですぐに使えるものとして、または [Marketplace ページ][24]で価格を付けて出品することができます。
 
-## Agent-based integrations
+## Agent ベースのインテグレーション
 
-Agent-based integrations use the [Datadog Agent][17] to submit data through checks written by the developer. Checks can emit [metrics][34], [events][18], and [service checks][25] into a customer's Datadog account. The Agent itself can submit [logs][26] as well, but that is configured outside of the check. 
+Agent ベースのインテグレーションでは、[Datadog Agent][17] を使用して、開発者が書いたチェックを介してデータを送信します。チェックは、[メトリクス][34]、[イベント][18]、[サービスチェック][25]を顧客の Datadog アカウントに送信できます。Agent 自体も同様に[ログ][26]を送信することができますが、これはチェックの外側で構成されます。
 
-The implementation code for these integrations is hosted by Datadog. Agent integrations are best suited for collecting data from systems or applications that live in a local area network (LAN) or virtual private cloud (VPC). Creating an Agent integration requires you to publish and deploy your solution as a Python wheel (`.whl`).
+これらのインテグレーションの実装コードは、Datadog がホスティングしています。Agent インテグレーションは、ローカルエリアネットワーク (LAN) や仮想プライベートクラウド (VPC) に存在するシステムまたはアプリケーションからデータを収集するのに最適な方法です。Agent インテグレーションの作成では、ソリューションを Python ホイール (`.whl`) として公開およびデプロイする必要があります。
 
-You can include out-of-the-box assets such as [monitors][27], [dashboards][28], and [log pipelines][29] with your Agent-based integration. When a user clicks **Install** on your integration tile, they are prompted to follow the setup instructions, and all out-of-the-box dashboards will appear in their account. Other assets, such as log pipelines, will appear for users after proper installation and configuration of the integration.
+Agent ベースのインテグレーションには、[モニター][27]、[ダッシュボード][28]、[ログパイプライン][29]などのすぐに使えるアセットを含めることができます。ユーザーがインテグレーションタイルの **Install** をクリックすると、セットアップ手順に従うよう促され、すぐに使えるすべてのダッシュボードがアカウントに表示されます。ログパイプラインなどの他のアセットは、インテグレーションを適切にインストールおよび構成した後に、ユーザーに表示されます。
 
-## Development process
+## 開発プロセス
 
-The process to build an Agent-based integration looks like this: 
+Agent ベースのインテグレーションを構築するプロセスは、次のようになります。
 
-1. Once you've been accepted to the [Datadog Partner Network][32], you will meet with the Datadog Technology Partner team to discuss your offering and use cases.
-2. Request a Datadog sandbox account for development through the Datadog Partner Network portal.
-3. Begin development of your integration, which includes writing the integration code on your end as well as building and installing a Python wheel (`.whl`).
-4. Test your integration in your Datadog sandbox account.
-5. Once your development work is tested and complete, populate your tile assets by providing information like setup instructions, images, support information, and more that will make up your integration tile that's displayed on the **Integrations** or **Marketplace** page.
-6. Once your pull request is submitted and approved, the Datadog Technology Partner team will schedule a demo for a final review of your integration.
-7. You will have the option of testing the tile and integration in your Datadog sandbox account before publishing, or immediately publishing the integration for all customers.  
+1. [Datadog パートナーネットワーク][32]に合格すると、Datadog テクノロジーパートナーチームと面談し、提供する製品やユースケースについて話し合います。
+2. Datadog パートナーネットワークポータルから、開発用の Datadog サンドボックスアカウントをリクエストします。
+3. インテグレーションの開発を開始します。これには、あなたの側でインテグレーションコードを書くことと、Python ホイール (`.whl`) を構築してインストールすることが含まれます。
+4. Datadog サンドボックスアカウントでインテグレーションをテストします。
+5. 開発作業をテストして完了したら、**Integrations** または **Marketplace** ページに表示されるインテグレーションタイルを構成するセットアップ手順、イメージ、サポート情報などの情報を提供し、タイルアセットを作成します。
+6. プルリクエストが送信され、承認されると、Datadog テクノロジーパートナーチームは、インテグレーションを最終確認するためのデモをスケジュールします。
+7. Datadog のサンドボックスアカウントでタイルとインテグレーションをテストしてから公開するか、すべての顧客向けにインテグレーションをすぐに公開するかのオプションがあります。 
 
-## Prerequisites
+## 前提条件
 
-The required Datadog Agent integration development tools include the following:
+必要な Datadog Agent インテグレーション開発ツールは以下の通りです。
 
 - Python v3.11, [pipx][2], and the Agent Integration Developer Tool (`ddev`). For installation instructions, see [Install the Datadog Agent Integration Developer Tool][3].
-- [Docker][4] to run the full test suite.
-- The git [command line][5] or [GitHub Desktop client][19].
+- フルテストスイートを実行するための [Docker][4]。
+- git [コマンドライン][5]または [GitHub デスクトップクライアント][19]。
 
-<div class="alert alert-info">Select a tab for instructions on building an out-of-the-box Agent-based integration on the Integrations page, or an Agent-based integration on the Marketplace page.</div>
+<div class="alert alert-info">すぐに使える Agent ベースのインテグレーションを Integrations ページで、または Agent ベースのインテグレーションを Marketplace ページで構築する手順について、タブを選択します。</div>
 
 {{< tabs >}}
-{{% tab "Build an out-of-the-box integration" %}}
+{{% tab "すぐに使えるインテグレーションを構築する" %}}
 
-To build an out-of-the-box integration:
+すぐに使えるインテグレーションを構築するには
 
-Create a `dd` directory:
+`dd` ディレクトリを作成します。
 
 ```shell
 mkdir $HOME/dd && cd $HOME/dd
 ```
 
-   The Datadog Development Toolkit expects you to work in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps. 
+Datadog Development Toolkit は、`$HOME/dd/` ディレクトリで作業することを想定しています。これは必須ではありませんが、異なるディレクトリで作業する場合は、追加の構成手順が必要です。
 
-1. Fork the [`integrations-extras` repository][101].
+1. [`integrations-extras` リポジトリ][101]をフォークします。
 
-1. Clone your fork into the `dd` directory:
+1. フォークを `dd` ディレクトリに複製します。
    ```shell
    git clone git@github.com:<YOUR USERNAME>/integrations-extras.git
    ```
 
-1. Create a feature branch to work in:
+1. 作業するフィーチャーブランチを作成します。
    ```shell
    git switch -c <YOUR INTEGRATION NAME> origin/master
    ```
 
-## Configure the developer tool
+## デベロッパーツールの構成
 
-The Agent Integration Developer Tool allows you to create scaffolding when you are developing an integration by generating a skeleton of your integration tile's assets and metadata. For instructions on installing the tool, see [Install the Datadog Agent Integration Developer Tool][102].
+Agent Integration Developer Tool を使用すると、インテグレーションを開発する際に、インテグレーションタイルのアセットとメタデータのスケルトンを生成して、スキャフォールディングを作成することができます。ツールのインストール方法については、[Datadog Agent Integration Developer Tool をインストールする][102]を参照してください。
 
-To configure the tool for the `integrations-extras` repository:
+`integrations-extras` リポジトリに対応したツールを構成するには
 
-1. Optionally, if your `integrations-extras` repo is somewhere other than `$HOME/dd/`, adjust the `ddev` configuration file:
+1. オプションとして、`integrations-extras` リポジトリが `$HOME/dd/` 以外の場所にある場合は、`ddev` 構成ファイルを調整します。
    ```shell
    ddev config set extras "/path/to/integrations-extras"
    ```
 
-1. Set `integrations-extras` as the default working repository:
+1. デフォルトの作業用リポジトリとして `integrations-extras` を設定します。
    ```shell
    ddev config set repo extras
    ```
@@ -98,35 +98,35 @@ To configure the tool for the `integrations-extras` repository:
 
 {{% /tab %}}
 
-{{% tab "Build a Marketplace integration" %}}
+{{% tab "Marketplace インテグレーションを構築する" %}}
 
-To build an integration:
+インテグレーションを構築するには
 
-1. See [Build a Marketplace Offering][102] to request access to the [Marketplace repository][101].
-1. Create a `dd` directory:
+1. [Marketplace リポジトリ][101]へのアクセスリクエストは、[Marketplace 製品の構築][102]を参照してください。
+1. `dd` ディレクトリを作成します。
 
    ```shell
    mkdir $HOME/dd```
 
-   The Datadog Development Toolkit command expects you to be working in the `$HOME/dd/` directory. This is not mandatory, but working in a different directory requires additional configuration steps.
+   Datadog Development Toolkit コマンドは、`$HOME/dd/` ディレクトリで作業していることを想定しています。これは必須ではありませんが、異なるディレクトリで作業する場合は、追加の構成手順が必要です。
 
-1. Once you have been granted access to the Marketplace repository, create the `dd` directory and clone the `marketplace` repository:
+1. マーケットプレイスのリポジトリへのアクセスが許可されたら、`dd` ディレクトリを作成し、`marketplace` リポジトリを複製します。
 
    ```shell
    git clone git@github.com:DataDog/marketplace.git```
 
-1. Create a feature branch to work in:
+1. 作業するフィーチャーブランチを作成します。
 
    ```shell
    git switch -c <YOUR INTEGRATION NAME> origin/master```
 
-## Install and configure the Datadog development toolkit
+## Datadog Development Toolkit をインストールして構成する
 
-The Agent Integration Developer Tool allows you to create scaffolding when you are developing an integration by generating a skeleton of your integration tile's assets and metadata. For instructions on installing the tool, see [Install the Datadog Agent Integration Developer Tool][103].
+Agent Integration Developer Tool を使用すると、インテグレーションを開発する際に、インテグレーションタイルのアセットとメタデータのスケルトンを生成して、スキャフォールディングを作成することができます。ツールのインストール方法については、[Datadog Agent Integration Developer Tool をインストールする][103]を参照してください。
 
-Once you have installed the Agent Integration Developer Tool, configure it for the Marketplace repository.
+Agent Integration Developer Tool をインストールしたら、Marketplace のリポジトリ用に構成します。
 
-1. Set `marketplace` as the default working repository:
+1. デフォルトの作業用リポジトリとして `marketplace` を設定します。
 
    ```shell
 
@@ -134,7 +134,7 @@ Once you have installed the Agent Integration Developer Tool, configure it for t
    ddev config set repo marketplace
    ```
 
-1. If you used a directory other than `$HOME/dd` to clone the `marketplace` directory, use the following command to set your working repository:
+1. `marketplace` ディレクトリの複製に `$HOME/dd` 以外のディレクトリを使用した場合は、以下のコマンドを使用して作業リポジトリを設定します。
 
    ```shell
 
@@ -150,51 +150,51 @@ Once you have installed the Agent Integration Developer Tool, configure it for t
 
 {{< /tabs >}}
 
-## Create your integration
+## インテグレーションを作成する
 
-Once you've downloaded Docker, installed an appropriate version of Python, and prepared your development environment, you can start creating an Agent-based integration. 
+Docker をダウンロードし、適切なバージョンの Python をインストールし、開発環境を準備したら、Agent ベースのインテグレーションを作成し始めることができます。
 
-The following instructions use an example integration called `Awesome`. Follow along using the code from Awesome, or replace Awesome with your own code, as well as the name of your integration within the commands. For example, use `ddev create <your-integration-name>` instead of `ddev create Awesome`. 
+以下の説明では、`Awesome` というインテグレーションを例にしています。Awesome のコードを使うか、Awesome を自分のコードに置き換えて、コマンドの中にインテグレーション名を入れてください。例えば、`ddev create Awesome` の代わりに `ddev create <your-integration-name>` を使用します。
 
-### Create scaffolding for your integration
+### インテグレーションのためのスキャフォールディングを作成する
 
-The `ddev create` command runs an interactive tool that creates the basic file and path structure (or scaffolding) necessary for an Agent-based integration.
+`ddev create` コマンドは、Agent ベースのインテグレーションに必要な基本的なファイルとパスの構造 (またはスキャフォールディング) を作成するインタラクティブツールを実行します。
 
-1. Before you create your first integration directory, try a dry-run using the `-n/--dry-run` flag, which doesn't write anything to the disk:
+1. 最初のインテグレーションディレクトリを作る前に、ディスクに何も書き込まない `-n/--dry-run` フラグを使って、ドライランを試してみてください。
    ```shell
    ddev create -n Awesome
    ```
 
-   This command displays the path where the files would have been written, as well as the structure itself. Make sure the path in the first line of output matches your repository location.
+   このコマンドで、ファイルが書き込まれるパスと、パス構造自体が表示されます。出力の 1 行目のパスがリポジトリの場所と一致していることを確認します。
 
-1. Run the command without the `-n` flag. The tool asks you for an email and name and then creates the files you need to get started with an integration.
+1. コマンドを `-n` フラグを付けずに実行します。このツールは、メールと名前の入力を求め、インテグレーションを始めるために必要なファイルを作成します。
 
-    <div class="alert alert-info">If you are creating an integration for the Datadog Marketplace, ensure that your directory follows the pattern of {partner name}_{integration name}.</div>
+    <div class="alert alert-info">Datadog Marketplace 用のインテグレーションを作成する場合、ディレクトリが {パートナー名}_{インテグレーション名} のパターンに従っていることを確認してください。</div>
 
    ```shell
    ddev create Awesome
    ```
 
-## Write an Agent check
+## Agent チェックを書く
 
-At the core of each Agent-based integration is an *Agent Check* that periodically collects information and sends it to Datadog. 
+Agent ベースの各インテグレーションの中核には、定期的に情報を収集し Datadog に送信する *Agent Check* があります。
 
-[Checks][30] inherit their logic from the `AgentCheck` base class and have the following requirements:
+[チェック][30]は、`AgentCheck` ベースクラスからロジックを継承し、以下の要件を備えています。
 
-- Integrations running on the Datadog Agent v7 or later must be compatible with Python 3. Integrations running on the Datadog Agent v5 and v6 still use Python 2.7.
-- Checks must derive from `AgentCheck`.
-- Checks must provide a method with this signature: `check(self, instance)`.
-- Checks are organized in regular Python packages under the `datadog_checks` namespace. For example, the code for Awesome lives in the `awesome/datadog_checks/awesome/` directory.
-- The name of the package must be the same as the check name.
-- There are no restrictions on the name of the Python modules within that package, nor on the name of the class implementing the check.
+- Datadog Agent v7 以降で実行するインテグレーションは、Python 3 に対応している必要があります。Datadog Agent v5 と v6 で実行されるインテグレーションは、依然として Python 2.7 を使用しています。
+- チェックは `AgentCheck` から派生している必要があります。
+- チェックは、このシグネチャを持つメソッド `check(self, instance)` を提供しなければなりません。
+- チェックは通常の Python パッケージの中で、`datadog_checks` ネームスペースの下にまとめられています。例えば、Awesome のコードは `awesome/datadog_checks/awesome/` ディレクトリに格納されています。
+- パッケージ名は、チェック名と同じでなければなりません。
+- そのパッケージ内の Python モジュールの名称や、チ ェックを実装するクラスの名称には制限がありません。
 
-### Implement check logic
+### チェックロジックの実装
 
-For Awesome, the Agent Check is composed of a [service check][25] named `awesome.search` that searches for a string on a web page. It results in `OK` if the string is present, `WARNING` if the page is accessible but the string was not found, and `CRITICAL` if the page is inaccessible. 
+Awesome の場合、Agent Check は、Web ページ上の文字列を検索する `awesome.search` という名前の[サービスチェック][25]で構成されています。文字列が存在する場合は `OK`、ページにはアクセスできるが文字列が見つからない場合は `WARNING`、ページにアクセスできない場合は `CRITICAL` という結果が得られます。
 
-To learn how to submit metrics with your Agent Check, see [Custom Agent Check][7].
+Agent Check でメトリクスを送信する方法については、[カスタムAgent Check][7] を参照してください。
 
-The code contained within `awesome/datadog_checks/awesome/check.py` looks something like this:
+`awesome/datadog_checks/awesome/check.py` のコードは次のようになります。
 
 {{< code-block lang="python" filename="check.py" collapsible="true" >}}
 
@@ -204,55 +204,55 @@ from datadog_checks.base import AgentCheck, ConfigurationError
 
 
 class AwesomeCheck(AgentCheck):
-    """AwesomeCheck derives from AgentCheck, and provides the required check method."""
+    """AwesomeCheck は AgentCheck を継承し、必要なチェックメソッドを提供します。"""
 
     def check(self, instance):
         url = instance.get('url')
         search_string = instance.get('search_string')
 
-        # It's a very good idea to do some basic sanity checking.
-        # Try to be as specific as possible with the exceptions.
+        # 基本的なサニティチェックを行うことをお勧めします。
+        # 例外についてはできるだけ具体的に記述してください。
         if not url or not search_string:
             raise ConfigurationError('Configuration error, please fix awesome.yaml')
 
         try:
             response = requests.get(url)
             response.raise_for_status()
-        # Something went horribly wrong
+        # 大きな間違いがある場合
         except Exception as e:
-            # Ideally we'd use a more specific message...
+            # もう少し具体的なメッセージを用意してください...
             self.service_check('awesome.search', self.CRITICAL, message=str(e))
-        # Page is accessible
+        # ページがアクセス可能な場合
         else:
-            # search_string is present
+            # search_string が見つかった場合
             if search_string in response.text:
                 self.service_check('awesome.search', self.OK)
-            # search_string was not found
+            # search_string が見つからなかった場合
             else:
                 self.service_check('awesome.search', self.WARNING)
 {{< /code-block >}}
 
-To learn more about the base Python class, see [Anatomy of a Python Check][8].
+基本 Python クラスの詳細は、[Python チェックの構造][8]を参照してください。
 
-## Write validation tests
+## 検証テストを書く
 
-There are two types of tests:
+テストには 2 種類あります。
 
-- [Unit tests for specific functionality](#write-a-unit-test)
-- [Integration tests that execute the `check` method and verify proper metrics collection](#write-an-integration-test)
+- [特定の機能のユニットテスト](#write-a-unit-test)
+- [`check` メソッドを実行し、適切なメトリクス収集を検証するインテグレーションテスト](#write-an-integration-test)
 
-[pytest][9] and [hatch][10] are used to run the tests. Tests are required in order to publish your integration.
+[pytest][9] と [hatch][10] はテストを実行するために使用されます。インテグレーションを公開するためには、テストが必要です。
 
-### Write a unit test
+### ユニットテストを書く
 
-The first part of the `check` method for Awesome retrieves and verifies two elements from the configuration file. This is a good candidate for a unit test. 
+Awesome の `check` メソッドの前半では、2 つの要素をコンフィギュレーションファイルから取得して検証しています。これは、ユニットテストにかける候補として適切です。
 
-Open the file at `awesome/tests/test_awesome.py` and replace the contents with the following:
+`awesome/tests/test_awesome.py` ファイルを開き、内容を次に書き換えます。
 
 {{< code-block lang="python" filename="test_awesome.py" collapsible="true" >}}
 import pytest
 
-    # Don't forget to import your integration
+    # インテグレーションをインポートするのを忘れないでください
 
 from datadog_checks.awesome import AwesomeCheck
 from datadog_checks.base import ConfigurationError
@@ -263,38 +263,38 @@ def test_config():
     instance = {}
     c = AwesomeCheck('awesome', {}, [instance])
 
-    # empty instance
+    # 空のインスタンス
     with pytest.raises(ConfigurationError):
         c.check(instance)
 
-    # only the url
+    # URL のみ
     with pytest.raises(ConfigurationError):
         c.check({'url': 'http://foobar'})
 
-    # only the search string
+    # 検索文字列のみ
     with pytest.raises(ConfigurationError):
         c.check({'search_string': 'foo'})
 
-    # this should not fail
+    # これは失敗しません
     c.check({'url': 'http://foobar', 'search_string': 'foo'})
 {{< /code-block >}}
 
-`pytest` has the concept of markers that can be used to group tests into categories. Notice that `test_config` is marked as a `unit` test.
+`pytest` はマーカーをサポートし、これを使用してテストをカテゴリにグループ化できます。`test_config` が `unit` テストとしてマークされていることに注目してください。
 
-The scaffolding is set up to run all the tests located in `awesome/tests`. To run the tests, run the following command:
+スキャフォールディングは、`awesome/tests` にあるすべてのテストを実行するように設定されています。テストを実行するには、以下のコマンドを実行します。
 ```
 ddev test awesome
 ```
 
-### Write an integration test
+### インテグレーションテストを書く
 
-The [unit test above](#write-a-unit-test) doesn't check the collection logic. To test the logic, you need to [create an environment for an integration test](#create-an-environment-for-the-integration-test) and [write an integration test](#add-an-integration-test).
+[上記のユニットテスト](#write-a-unit-test)では、コレクションロジックはチェックされません。ロジックをテストするには、[インテグレーションテストのための環境を作り](#create-an-environment-for-the-integration-test)、[インテグレーションテストを書く](#add-an-integration-test)必要があります。
 
-#### Create an environment for the integration test
+#### インテグレーションテスト用の環境を作成する
 
-The toolkit uses `docker` to spin up an NGINX container and lets the check retrieve the welcome page.
+このツールキットは `docker` を使って NGINX コンテナをスピンアップし、チェックにウェルカムページを取得させることができます。
 
-To create an environment for the integration test, create a docker-compose file at `awesome/tests/docker-compose.yml` with the following contents:
+インテグレーションテスト用の環境を作成するために、`awesome/tests/docker-compose.yml` に以下の内容で docker-compose ファイルを作成します。
 
 {{< code-block lang="yaml" filename="docker-compose.yml" collapsible="true" >}}
 version: "3"
@@ -307,7 +307,7 @@ services:
 
 {{< /code-block >}}
 
-Next, open the file at `awesome/tests/conftest.py` and replace the contents with the following:
+次に、`awesome/tests/conftest.py` ファイルを開き、内容を次に書き換えます。
 
 {{< code-block lang="python" filename="conftest.py" collapsible="true" >}}
 import os
@@ -325,11 +325,11 @@ INSTANCE = {'url': URL, 'search_string': SEARCH_STRING}
 def dd_environment():
     compose_file = os.path.join(get_here(), 'docker-compose.yml')
 
-    # This does 3 things:
+    # これには 3 つの意味があります。
     #
-    # 1. Spins up the services defined in the compose file
-    # 2. Waits for the url to be available before running the tests
-    # 3. Tears down the services when the tests are finished
+    # 1. Compose ファイルで定義されたサービスをスピンアップします
+    # 2. テストを実行する前に、URL が利用可能になるまで待ちます
+    # 3. テスト終了後、サービスを撤収します
     with docker_run(compose_file, endpoints=[URL]):
         yield INSTANCE
 
@@ -339,9 +339,9 @@ def instance():
     return INSTANCE.copy()
 {{< /code-block >}}
 
-#### Add an integration test
+#### インテグレーションテストを追加する
 
-After you've setup an environment for the integration test, add an integration test to the `awesome/tests/test_awesome.py` file:
+インテグレーションテストのための環境を整えたら、`awesome/tests/test_awesome.py` ファイルにインテグレーションテストを追加します。
 
 {{< code-block lang="python" filename="test_awesome.py" collapsible="true" >}}
 @pytest.mark.integration
@@ -349,77 +349,77 @@ After you've setup an environment for the integration test, add an integration t
 def test_service_check(aggregator, instance):
     c = AwesomeCheck('awesome', {}, [instance])
 
-    # the check should send OK
+    # このチェックは OK を送信するはずです
     c.check(instance)
     aggregator.assert_service_check('awesome.search', AwesomeCheck.OK)
 
-    # the check should send WARNING
+    # このチェックは WARNING を送信するはずです
     instance['search_string'] = 'Apache'
     c.check(instance)
     aggregator.assert_service_check('awesome.search', AwesomeCheck.WARNING)
 {{< /code-block >}}
 
-To speed up development, use the `-m/--marker` option to run integration tests only:
+開発をスピードアップするために、`-m/--marker` オプションを使って、インテグレーションテストのみを実行することができます。
    ```
    ddev test -m integration awesome
    ```
-Your integration is almost complete. Next, add the necessary check assets.
+インテグレーションはほぼ完了です。次に、必要なチェックアセットを追加します。
 
-## Populate integration assets
+## インテグレーションアセットを入力する
 
-The following set of assets created by the `ddev` scaffolding **must** be populated with relevant information to your integration:
+`ddev` スキャフォールディングによって作成された以下のアセットセットには、インテグレーションに関連する情報を入力する**必要があります**。
 
 `README.md`
-: This contains the documentation for your Agent Check, how to set it up, which data it collects, and support information.
+: これには、Agent チェックのドキュメント、その設定方法、収集するデータ、サポート情報が含まれます。
 
 `spec.yaml`
-: This is used to generate the `conf.yaml.example` using the `ddev` tooling. For more information, see [Configuration Specification][11].
+: これは `ddev` ツールを使用して `conf.yaml.example` を生成するために使用されます。詳しくは、[構成仕様][11]を参照してください。
 
 `conf.yaml.example`
-: This contains default (or example) configuration options for your Agent Check. **Do not edit this file by hand**. It is generated from the contents of `spec.yaml`. For more information, see the [Configuration file reference documentation][12].
+: これには、Agent チェックのデフォルト（または一例として）のコンフィギュレーションオプションが含まれます。**このファイルを手動で編集しないでください**。これは `spec.yaml` のコンテンツから生成されます。詳しくは、[コンフィギュレーションファイルのリファレンスドキュメント][12]を参照してください。
 
 `manifest.json`
-: This contains the metadata for your Agent Check such as the title and categories. For more information, see the [Manifest file reference documentation][13].
+: タイトルやカテゴリーなど、Agent チェックのメタデータが格納されています。詳しくは、[マニフェストファイルリファレンスドキュメント][13]を参照してください。
 
 `metadata.csv`
-: This contains the list of all metrics collected by your Agent Check. For more information, see the [Metrics metadata file reference documentation][14].
+: これには、Agent チェックによって収集されたすべてのメトリクスのリストが含まれます。詳細については、[メトリクスメタデータファイルのリファレンスドキュメント][14]を参照してください。
 
 `service_check.json`
-: This contains the list of all Service Checks collected by your Agent Check. For more information, see the [Service check file reference documentation][15].
+: Agent チェックによって収集されたすべてのサービスチェックのリストが含まれています。詳しくは、[サービスチェックファイルリファレンスドキュメント][15]を参照してください。
 
-For more information about the `README.md` and `manifest.json` files, see [Create a Tile][20] and [Integrations Asset Reference][33].
+`README.md` と `manifest.json` ファイルの詳細については、[タイルの作成][20]と[インテグレーションアセットリファレンス][33]をご覧ください。
 
-## Build the wheel
+## ホイールのビルド
 
-The `pyproject.toml` file provides the metadata that is used to package and build the wheel. The wheel contains the files necessary for the functioning of the integration itself, which includes the Agent Check, configuration example file, and artifacts generated during the wheel build.
+`pyproject.toml` ファイルは、ホイールのパッケージ化とビルドに使用されるメタデータを提供します。ホイールはインテグレーションを機能させるために必要なファイルを含んでおり、これには Agent Check、構成例ファイル、ホイールビルド中に生成される成果物が含まれます。
 
-All additional elements, including the metadata files, are not meant to be contained within the wheel, and are used elsewhere by the Datadog platform and ecosystem. 
+メタデータファイルを含むすべての追加要素は、ホイールに含まれることを意図しておらず、Datadog プラットフォームとエコシステムによって他の場所で使用されます。
 
-To learn more about Python packaging, see [Packaging Python Projects][16].
+Python のパッケージングについてより詳しく知りたい場合は、[Python プロジェクトのパッケージング][16]を参照してください。
 
-Once your `pyproject.toml` is ready, create a wheel using one of the following options:
+`pyproject.toml` の準備ができたら、以下のオプションのいずれかを使用してホイールを作成します。
 
-- (Recommended) With the `ddev` tooling: `ddev release build <INTEGRATION_NAME>`.
-- Without the `ddev` tooling: `cd <INTEGRATION_DIR> && pip wheel . --no-deps --wheel-dir dist`.
+- (推奨) `ddev` ツールを使用する: `ddev release build <INTEGRATION_NAME>`
+- `ddev` ツールを使用しない: `cd <INTEGRATION_DIR> && pip wheel . --no-deps --wheel-dir dist`
 
-## Install the wheel
+## ホイールのインストール
 
-The wheel is installed using the Agent `integration` command, available in [Agent v6.10.0 or later][17]. Depending on your environment, you may need to execute this command as a specific user or with specific privileges:
+Wheel は、[Agent v6.10.0 以降][17]で提供されている Agent の `integration` コマンドを使ってインストールされます。このコマンドは、環境に応じて、特定のユーザーとして、または特定の権限で実行する必要があります。
 
-**Linux** (as `dd-agent`):
+**Linux** (`dd-agent` として)
 ```bash
 sudo -u dd-agent datadog-agent integration install -w /path/to/wheel.whl
 ```
 
-**OSX** (as admin):
+**OSX** (管理者として)
 ```bash
 sudo datadog-agent integration install -w /path/to/wheel.whl
 ```
 
-**Windows PowerShell** (Ensure that your shell session has _administrator_ privileges):
+**Windows PowerShell** (シェルセッションが administrator 権限を持っていること)
 
 <details>
-  <summary>Agent <code>v6.11</code> or earlier</summary>
+  <summary>Agent <code>v6.11</code> 以前</summary>
 
   ```ps
   & "C:\Program Files\Datadog\Datadog Agent\embedded\agent.exe" integration install -w /path/to/wheel.whl
@@ -428,16 +428,16 @@ sudo datadog-agent integration install -w /path/to/wheel.whl
 </details>
 
 <details open>
-  <summary>Agent<code>v6.12</code> or later</summary>
+  <summary>Agent<code>v6.12</code> 以降</summary>
 
   ```ps
   & "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" integration install -w /path/to/wheel.whl
   ```
 </details>
 
-## Populate your tile and publish your integration
+## タイルを入力し、インテグレーションを公開する
 
-Once you have created your Agent-based integration, see the [Create a tile][20] documentation for information on populating the remaining [required assets][31] that appear on your integration tile, and opening a pull request.
+Agent ベースのインテグレーションを作成したら、インテグレーションタイルに表示される残りの[必須アセット][31]を入力し、プルリクエストを開くための情報については、[タイルの作成][20]ドキュメントを参照してください。
 
 ## Update your integration
 To update your integration, edit the relevant files and open a new pull request to your integration's directory in the [`integrations-extras`][21] or [`marketplace`][22] repository. 
@@ -467,7 +467,7 @@ In addition to any code changes, the following is required when bumping an integ
    ```
 3. Update all references to the version number mentioned in `README.md` and elsewhere. Installation instructions in `README.md` often include the version number, which needs to be updated.
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

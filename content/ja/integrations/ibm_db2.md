@@ -26,7 +26,7 @@
 "categories":
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/ibm_db2/README.md"
 "display_on_public_website": true
@@ -63,21 +63,21 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![default dashboard][1]
+![デフォルトのダッシュボード][1]
 
-## Overview
+## 概要
 
-This check monitors [IBM Db2][2] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [IBM Db2][2] を監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The IBM Db2 check is included in the [Datadog Agent][3] package.
+IBM Db2 チェックは [Datadog Agent][3] パッケージに含まれています。
 
-#### Dependencies
+#### 依存関係
 
-The [ibm_db][4] client library is required. To install it, ensure you have a working compiler and run:
+[ibm_db][4] クライアントライブラリが必要です。これをインストールするには、コンパイラーが用意されていることを確認し、次を実行します。
 
 ##### Unix
 
@@ -85,54 +85,54 @@ The [ibm_db][4] client library is required. To install it, ensure you have a wor
 sudo -Hu dd-agent /opt/datadog-agent/embedded/bin/pip install ibm_db==3.1.0
 ```
 
-Note: If you are on an Agent running Python 2, use `ibm_db==3.0.1` instead of `ibm_db=3.1.0`.
+注: Python 2 が動作する Agent をお使いの場合は、`ibm_db=3.1.0` の代わりに `ibm_db==3.0.1` を使用してください。
 
 ##### Windows
 
-For Agent versions <= 6.11:
+Agent バージョン < 6.11 の場合
 
 ```text
 "C:\Program Files\Datadog\Datadog Agent\embedded\python.exe" -m pip install ibm_db==3.0.1
 ```
 
-For Agent versions >= 6.12 and < 7.0:
+Agent バージョン >= 6.12 および < 7.0 の場合
 
 ```text
 "C:\Program Files\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe" -m pip install ibm_db==3.0.1
 ```
 
-For Agent versions >= 7.0:
+Agent バージョン >= 7.0 の場合
 
 ```text
 "C:\Program Files\Datadog\Datadog Agent\embedded3\python.exe" -m pip install ibm_db==3.1.0
 ```
 
-On Linux there may be need for XML functionality. If you encounter errors during
-the build process, install `libxslt-dev` (or `libxslt-devel` for RPM).
+Linux では、XML 機能が必要になる場合があります。ビルドプロセス中にエラーが発生した場合は、
+`libxslt-dev` (RPM では `libxslt-devel`) をインストールしてください。
 
-#### Enable monitoring
+#### モニタリングを有効にする
 
-The IBM Db2 integration pulls data using the following table functions: 
+IBM Db2 インテグレーションは、以下のテーブル関数を使用してデータを取り出します。
 * `MON_GET_TABLESPACE`
 * `MON_GET_TRANSACTION_LOG`
 * `MON_GET_BUFFERPOOL`
 * `MON_GET_DATABASE`
 * `MON_GET_INSTANCE`
 
-For more information about these table functions, see the [official IBM documentation][5].
+これらのテーブル関数の詳細については、[IBM 公式ドキュメント][5]を参照してください。
 
-To monitor a Db2 instance, create a Db2 user with either the `EXECUTE` permission on the above five table functions, or grant the Db2 user one of the following roles:
-* `DATAACCESS` authority
-* `DBADM` authority
-* `SQLADM` authority
+Db2 インスタンスを監視するには、上記の 5 つのテーブル関数に `EXECUTE` 権限を持つ Db2 ユーザーを作成するか、Db2 ユーザーに以下のロールのいずれかを付与します。
+* `DATAACCESS` 権限
+* `DBADM` 権限
+* `SQLADM` 権限
 
-To monitor the health of an instance, its associated databases, and database objects, enable the database system monitor switches for each of the objects you want to monitor: 
-* Statement
+インスタンス、関連するデータベース、およびデータベースオブジェクトの健全性を監視するには、監視したいオブジェクトごとにデータベースシステムモニタスイッチを有効にします。
+* ステートメント
 * Lock
-* Tables
-* Buffer pool
+* テーブル
+* バッファプール
 
-Switch to the instance master user and run these commands at the `db2` prompt:
+インスタンスマスターユーザーに切り替えて、`db2` プロンプトで以下のコマンドを実行します。
 
 ```text
 update dbm cfg using HEALTH_MON on
@@ -142,7 +142,7 @@ update dbm cfg using DFT_MON_TABLE on
 update dbm cfg using DFT_MON_BUFPOOL on
 ```
 
-Next, run `get dbm cfg` and you should see the following:
+次に、`get dbm cfg` を実行すると、以下のように表示されるはずです。
 
 ```text
  Default database monitor switches
@@ -156,32 +156,32 @@ Next, run `get dbm cfg` and you should see the following:
  Monitor health of instance and databases   (HEALTH_MON) = ON
 ```
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `ibm_db2.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your `ibm_db2` performance data. See the [sample ibm_db2.d/conf.yaml][1] for all available configuration options.
+1. `ibm_db2` のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ibm_db2.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ibm_db2.d/conf.yaml][1] を参照してください。
 
-2. [Restart the Agent][2].
+2. [Agent を再起動します][2]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `ibm_db2.d/conf.yaml` file to start collecting your IBM Db2 logs:
+2. IBM Db2 のログの収集を開始するには、次の構成ブロックを `ibm_db2.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -195,32 +195,32 @@ _Available for Agent versions >6.0_
            pattern: \d{4}\-(0?[1-9]|[12][0-9]|3[01])\-(0?[1-9]|1[012])
    ```
 
-3. [Restart the Agent][2].
+3. [Agent を再起動します][2]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/ibm_db2/datadog_checks/ibm_db2/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                                                                                         |
+| パラメーター            | 値                                                                                                         |
 | -------------------- | ------------------------------------------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `ibm_db2`                                                                                                     |
-| `<INIT_CONFIG>`      | blank or `{}`                                                                                                 |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                                 |
 | `<INSTANCE_CONFIG>`  | `{"db": "<DB_NAME>", "username":"<USERNAME>", "password":"<PASSWORD>", "host":"%%host%%", "port":"%%port%%"}` |
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                                                                                                                                                                                |
+| パラメーター      | 値                                                                                                                                                                                                |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "ibm_db2", "service": "<SERVICE_NAME>", "log_processing_rules": {"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-(0?[1-9]|[12][0-9]|3[01])\-(0?[1-9]|1[012])"}}` |
 
@@ -229,46 +229,46 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][6] and look for `ibm_db2` under the Checks section.
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `ibm_db2` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "ibm_db2" >}}
 
 
-### Events
+### イベント
 
-- `ibm_db2.tablespace_state_change` is triggered whenever the state of a tablespace changes.
+- テーブルスペースの状態が変化するたびに、`ibm_db2.tablespace_state_change` がトリガーされます。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "ibm_db2" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-### CLI Driver SQL1531N error
+### CLI Driver SQL1531N エラー
 
-If you encounter an issue that produces error logs like the following:
+以下のようなエラーログが表示される問題が発生した場合
 
 ```
 2023-08-10 23:34:47 UTC | CORE | ERROR | (pkg/collector/python/datadog_agent.go:129 in LogMessage) | ibm_db2:c051131490335a94 | (ibm_db2.py:563) | Unable to connect to database `datadog` as user `db2inst1`: [IBM][CLI Driver] SQL1531N  The connection failed because the name specified with the DSN connection string keyword could not be found in either the db2dsdriver.cfg configuration file or the db2cli.ini configuration file.  Data source name specified in the connection string: "DATADOG". SQLCODE=-1531
 ```
 
-Then it's most likely caused by one of the following scenarios:
-- The configuration (conf.yaml) is missing a host and port configuration
-- The CLI Driver isn't able to locate the database due to the absence of `db2cli.ini` and `db2dsdriver.cfg`
+その場合、以下のシナリオのいずれかが原因である可能性が高いです。
+- 構成 (conf.yaml) にホストとポートの構成がない
+- `db2cli.ini` と `db2dsdriver.cfg` が存在しないため、CLI Driver がデータベースを検索できない
 
-The Agent requires the information in both of the above scenarios to determine where to properly connect to the database. To solve this issue, you can either include a host and port parameter for every instance of the `ibm_db2` check experiencing this issue. Alternatively, if you want to use the DSNs defined in either the `db2cli.ini` or `db2dsdriver.cfg` files, you can copy those files over to the `clidriver` directory that the Agent uses. Under normal circumstances, that directory is located at `/opt/datadog-agent/embedded/lib/python3.9/site-packages/clidriver/cfg` for Linux.
+Agent はデータベースに正しく接続する場所を決定するために、上記の両方の情報を必要とします。この問題を解決するには、この問題が発生している `ibm_db2` チェックのすべてのインスタンスにホストとポートのパラメーターを含めるようにします。あるいは、`db2cli.ini` または `db2dsdriver.cfg` ファイルで定義された DSN を使用したい場合は、これらのファイルを Agent が使用する `clidriver` ディレクトリにコピーします。通常、このディレクトリは Linux の場合 `/opt/datadog-agent/embedded/lib/python3.9/site-packages/clidriver/cfg` にあります。
 
-### Installing `ibm_db` client library offline
+### オフラインで `ibm_db` クライアントライブラリをインストールする
 
-If you're in an air gapped environment, or on a restricted network where it's not possible to run `pip install ibm_db==x.y.z` where `x.y.z` is the version number, you can install `ibm_db` using the following method:
+エアギャップ環境、または制限されたネットワーク上で `pip install ibm_db==x.y.z` (`x.y.z` はバージョン番号) を実行できない場合、以下の方法で `ibm_db` をインストールすることが可能です。
 
 
-1. On a machine with network access, download the source tarballs for [the `ibm_db` library][7] and [the ODBC and CLI][8]. The ODBC and CLI are required to be downloaded separately because the `ibm_db` library requires them, but it cannot download them via `pip`. The following script installs the archive file for `ibm_db==x.y.z` on a Linux machine, where `x.y.z` is the version number:
+1. ネットワークにアクセスできるマシンで、[`ibm_db` ライブラリ][7]と [ODBC と CLI][8] のソース tarball をダウンロードします。ODBC と CLI は `ibm_db` ライブラリが必要とするため、別途ダウンロードする必要がありますが、`pip` 経由ではダウンロードできません。以下のスクリプトは `ibm_db==x.y.z`  (`x.y.z` はバージョン番号) のアーカイブファイルを Linux マシンにインストールします。
 
    ```
    curl -Lo ibm_db.tar.gz https://github.com/ibmdb/python-ibmdb/archive/refs/tags/vx.y.z.tar.gz
@@ -276,7 +276,7 @@ If you're in an air gapped environment, or on a restricted network where it's no
    curl -Lo linuxx64_odbc_cli.tar.gz https://public.dhe.ibm.com/ibmdl/export/pub/software/data/db2/drivers/odbc_cli/linuxx64_odbc_cli.tar.gz
    ```
 
-1. Transport the two files over to the restricted host, and then extract the archive.
+1. 制限されたホストに 2 つのファイルを転送し、アーカイブを展開します。
 
    ```
    tar -xvf ibm_db.tar.gz
@@ -284,19 +284,19 @@ If you're in an air gapped environment, or on a restricted network where it's no
    tar -xvf linuxx64_odbc_cli.tar.gz
    ```
 
-1. Set the `IBM_DB_HOME` environment variable to the location of where `/clidriver` was extracted from `linuxx64_odbc_cli.tar.gz`. This will prevent the `ibm_db` library from installing a new version of the ODBC and CLI since that would fail.
+1. 環境変数 `IBM_DB_HOME` に `/clidriver` が `linuxx64_odbc_cli.tar.gz` から展開された場所を設定します。これにより、`ibm_db` ライブラリが新しいバージョンの ODBC と CLI をインストールするのを防ぐことができます (これは失敗するため)。
 
    ```
    export IBM_DB_HOME=/path/to/clidriver
    ```
 
-1. Using the embedded [`pip`][9] on the Agent, install the `ibm_db` library locally. This library's files are contained within the extracted `python-ibmdb-x.y.z` from `ibm_db.tar.gz`.
+1. Agent に組み込まれた [`pip`][9] を使用して、`ibm_db` ライブラリをローカルにインストールします。このライブラリのファイルは `ibm_db.tar.gz` から展開された `python-ibmdb-x.y.z` にコンテナとして含まれています。
 
    ```
    /opt/datadog-agent/embedded/bin/pip install --no-index --no-deps --no-build-isolation  /path/to/python-ibmdb-x.y.z/IBM_DB/ibm_db/
    ```
 
-If you get the following error:
+以下のエラーが発生した場合
 
 ```
   error: subprocess-exited-with-error
@@ -315,15 +315,15 @@ If you get the following error:
       [end of output]
 ```
 
-You may need to install `gcc`.
+`gcc` をインストールする必要があるかもしれません。
 
-Need help? Contact [Datadog support][10].
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor IBM DB2 with Datadog][11]
+- [Datadog を使用した IBM DB2 の監視][11]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ibm_db2/images/dashboard_overview.png

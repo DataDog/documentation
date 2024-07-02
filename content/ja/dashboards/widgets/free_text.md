@@ -1,13 +1,13 @@
 ---
-aliases:
-- /ja/graphing/widgets/free_text/
-description: ダッシュボードウィジェットにテキストを表示します。
-further_reading:
-- link: /ja/dashboards/graphing_json/
-  tag: ドキュメント
-  text: JSON を使用したダッシュボードの構築
-title: フリーテキストウィジェット
+title: Free Text Widget
 widget_type: free_text
+description: "Display text in a dashboard widget."
+aliases:
+- /graphing/widgets/free_text/
+further_reading:
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Building Dashboards using JSON
 ---
 
 フリーテキストは、[スクリーンボード][1]に見出しを追加できるウィジェットです。
@@ -18,7 +18,7 @@ widget_type: free_text
 
 ## セットアップ
 
-### コンフィギュレーション
+### 構成
 
 1. 表示するテキストを入力します。
 2. テキストの書式を選択します。
@@ -33,6 +33,6 @@ widget_type: free_text
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/#screenboards
-[2]: /ja/api/latest/dashboards/
-[3]: /ja/dashboards/graphing_json/widget_json/
+[1]: /dashboards/#screenboards
+[2]: /api/latest/dashboards/
+[3]: /dashboards/graphing_json/widget_json/

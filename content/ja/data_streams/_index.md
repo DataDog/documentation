@@ -27,75 +27,75 @@ cascade:
 
 {{% site-region region="gov,ap1" %}}
 <div class="alert alert-warning">
-    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+    Data Streams Monitoring は、{{< region-param key="dd_site_name" >}} サイトでは使用できません。
 </div>
 {{% /site-region %}}
 
-Data Streams Monitoring provides a standardized method for teams to understand and manage pipelines at scale by making it easy to:
-* Measure pipeline health with end-to-end latencies for events traversing across your system.
-* Pinpoint faulty producers, consumers or queues, then pivot to related logs or clusters to troubleshoot faster.
-* Prevent cascading delays by equipping service owners to stop backed up events from overwhelming downstream services.
+Data Streams Monitoring は、大規模なパイプラインを理解し管理するための標準的な方法を提供し、以下を容易にします。
+* システム内を通過するイベントのエンドツーエンドのレイテンシーでパイプラインの健全性を測定します。
+* 障害のあるプロデューサー、コンシューマー、キューを特定し、関連するログやクラスターにピボットして、トラブルシューティングを迅速に行います。
+* バックアップされたイベントがダウンストリームのサービスを圧倒するのを阻止するために、サービスオーナーが装備することによって、連鎖的な遅延を防止します。
 
-## Setup
+## セットアップ
 
-To get started, follow the installation instructions to configure services with Data Streams Monitoring:
+まずは、インストールの説明に従って、Data Streams Monitoring でサービスを構成してください。
 
 {{< partial name="data_streams/setup-languages.html" >}}
 
 <br/>
 
-| Runtime | Supported technologies |
+| ランタイム | 対応テクノロジー |
 |---|----|
-| Java/Scala | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS |
-| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
-| .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
-| Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, Amazon SQS |
-| Go | All (with [manual instrumentation][1]) |
+| Java/Scala | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、HTTP、gRPC、Amazon SQS |
+| Python | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、Amazon SQS |
+| .NET | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、Amazon SQS |
+| Node.js | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、Amazon SQS |
+| Go | 全て ([手動インスツルメンテーション][1]で) |
 
-## Explore Data Streams Monitoring
+## Data Streams Monitoring の調査
 
-### Measure end-to-end pipeline health with new metrics
+### 新しいメトリクスでエンドツーエンドのパイプラインの健全性を測定する
 
-Once Data Streams Monitoring is configured, you can measure the time it usually takes for events to traverse between any two points in your asynchronous system:
+Data Streams Monitoring を構成すると、非同期システム内の任意の 2 点間をイベントが通過するのにかかる時間を測定することができます。
 
-| Metric Name | Notable Tags | Description |
+| メトリクス名 | 注目タグ | 説明 |
 |---|---|-----|
-| data_streams.latency | `start`, `end`, `env` | End to end latency of a pathway from a specified source to destination service. |
-| data_streams.kafka.lag_seconds | `consumer_group`, `partition`, `topic`, `env` | Lag in seconds between producer and consumer. Requires Java Agent v1.9.0 or later. |
-| data_streams.payload_size | `consumer_group`, `topic`, `env` | Incoming and outgoing throughput in bytes.|
+| data_streams.latency | `start`、`end`、`env` | 指定された送信元から宛先までの経路のエンドツーエンドのレイテンシー。 |
+| data_streams.kafka.lag_seconds | `consumer_group`、`partition`、`topic`、`env` | プロデューサーとコンシューマーとの間のラグ (秒単位)。Java Agent v1.9.0 以降が必要。 |
+| data_streams.payload_size | `consumer_group`、`topic`、`env` | 着信および発信のスループット (バイト単位)。|
 
 
-You can also graph and visualize these metrics on any dashboard or notebook:
+また、これらのメトリクスを任意のダッシュボードやノートブックでグラフ化し、視覚化することができます。
 
-{{< img src="data_streams/data_streams_metric_monitor.png" alt="Datadog Data Streams Monitoring monitor" style="width:100%;" >}}
+{{< img src="data_streams/data_streams_metric_monitor.png" alt="Datadog Data Streams Monitoring モニター" style="width:100%;" >}}
 
-### Monitor end-to-end latency of any pathway
+### あらゆる経路のエンドツーエンドのレイテンシーを監視する
 
-Depending on how events traverse through your system, different paths can lead to increased latency. With the [**Measure** tab][7], you can select a start service and end service for end-to-end latency information to identify bottlenecks and optimize performance. Easily create a monitor for that pathway, or export to a dashboard.
+イベントがシステム内をどのように通過するかによって、異なる経路でレイテンシーが増加する可能性があります。[**Measure** タブ][7]では、測定開始地点のサービスと終了地点のサービスを選択し、エンドツーエンドのレイテンシー情報を取得し、ボトルネックの特定とパフォーマンスの最適化を行うことができます。その経路のモニターを簡単に作成したり、ダッシュボードにエクスポートすることができます。
 
-Alternatively, click a service to open a detailed side panel and view the **Pathways** tab for latency between the service and upstream services.
+あるいは、サービスをクリックして詳細なサイドパネルを開き、**Pathways** タブを表示して、サービスとアップストリームサービス間のレイテンシーを確認します。
 
-### Alert on slowdowns in event-driven applications
+### イベント駆動型アプリケーションの速度低下にアラートを設定する
 
-Slowdowns caused by high consumer lag or stale messages can lead to cascading failures and increase downtime. With out-of-the-box alerts, you can pinpoint where bottlenecks occur in your pipelines and respond to them right away. For supplementary metrics, Datadog provides additional integrations for message queue technologies like [Kafka][4] and [SQS][5].
+コンシューマーラグや古いメッセージの増加によって引き起こされる速度低下は、連鎖的な不具合につながり、ダウンタイムが増加する可能性があります。すぐに使えるアラートを利用することで、パイプラインのどこでボトルネックが発生しているかを特定し、すぐに対応することができます。補助的なメトリクスとして、Datadog は [Kafka][4] や [SQS][5] などのメッセージキューテクノロジーに対応した追加のインテグレーションを提供しています。
 
-Through Data Stream Monitoring's out-of-the-box recommended monitors, you can setup monitors on metrics like consumer lag, throughput, and latency in one click. 
+Data Stream Monitoring のすぐに使える推奨モニターを通じて、コンシューマーラグ、スループット、レイテンシーなどのメトリクスに関するモニターをワンクリックで設定できます。
 
-{{< img src="data_streams/add_monitors_and_synthetic_tests.png" alt="Datadog Data Streams Monitoring Recommended Monitors" style="width:100%;" caption="Click 'Add Monitors and Synthetic Tests' to view Recommended Monitors" >}}
+{{< img src="data_streams/add_monitors_and_synthetic_tests.png" alt="Datadog Data Streams Monitoring 推奨モニター" style="width:100%;" caption="「Add Monitors and Synthetic Tests」をクリックすると、推奨モニターが表示されます" >}}
 
-### Attribute incoming messages to any queue, service, or cluster
+### 受信したメッセージを任意のキュー、サービス、クラスターに属性付けする
 
-High lag on a consuming service, increased resource use on a Kafka broker, and increased RabbitMQ or Amazon SQS queue size are frequently explained by changes in the way adjacent services are producing to or consuming from these entities.
+消費型サービスでの遅延の増加、Kafka ブローカーでのリソース使用の増加、RabbitMQ または Amazon SQS のキューサイズの増加は、隣接するサービスがこれらのエンティティに生成またはエンティティから消費する方法の変更によって、頻繁に説明されます。
 
-Click on the **Throughput** tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Service Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
+Data Streams Monitoring の任意のサービスやキューで **Throughput** タブをクリックすると、スループットの変化と、その変化がどの上流または下流のサービスに起因するものかを迅速に検出できます。[サービスカタログ][2]を構成すると、対応するチームの Slack チャンネルやオンコールエンジニアにすぐにピボットすることができます。
 
-By filtering to a single Kafka, RabbitMQ, or Amazon SQS cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
+単一の Kafka、RabbitMQ または Amazon SQS のクラスターにフィルターをかけることで、そのクラスター上で動作するすべての検出されたトピックまたはキューについて、送受信トラフィックの変化を検出することができます。
 
-### Quickly pivot to identify root causes in infrastructure, logs, or traces 
+### インフラストラクチャー、ログ、トレースから根本原因を特定するために素早くピボットする
 
-Datadog automatically links the infrastructure powering your services and related logs through [Unified Service Tagging][3], so you can easily localize bottlenecks. Click the **Infra**, **Logs** or **Traces** tabs to further troubleshoot why pathway latency or consumer lag has increased.
+Datadog は、[統合サービスタグ付け][3]を通して、サービスを駆動するインフラストラクチャーと関連するログを自動的にリンクするので、ボトルネックを簡単に特定することができます。経路のレイテンシーやコンシューマーの遅延が増加した理由をさらにトラブルシューティングするには、**Infra**、**Logs**、または **Traces** タブをクリックします。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

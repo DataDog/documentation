@@ -24,7 +24,7 @@
 - "cloud"
 - "network"
 - "security"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/vns3/README.md"
 "display_on_public_website": true
@@ -78,27 +78,27 @@ Get state information regarding your VNS3 topology's IPSec endpoints/tunnels, VN
 
   ![ipsec][3]
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
 To capture metrics, deploy Cohesive Networks' Datadog container, set up the VNS3 firewall, and configure the container. For more details, see the [Cohesive Networks guide][4] or watch the [video][5].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "vns3" >}}
 
 
-### Events
+### イベント
 
 The VNS3 check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The VNS3 check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

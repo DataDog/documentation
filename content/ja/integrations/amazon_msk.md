@@ -3,7 +3,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon Managed Streaming for Apache Kafka (MSK) metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_msk/"
@@ -32,11 +32,11 @@ Amazon Managed Streaming for Apache Kafka (MSK) is a fully managed service that 
 
 This integration uses a crawler that collects metrics from CloudWatch. Read the [Amazon MSK (Agent)][1] page for information about monitoring MSK through the Datadog Agent.
 
-## Setup
+## セットアップ
 
 Enable the Amazon MSK crawler to see MSK metrics from CloudWatch in Datadog.
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][2] first.
 
@@ -64,21 +64,21 @@ Configure Amazon MSK to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][6]
     - [Add a manual trigger on the CloudWatch Log Group][7]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_msk" >}}
 
 
-### Events
+### イベント
 
 The Amazon MSK crawler does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon MSK integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

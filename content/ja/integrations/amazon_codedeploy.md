@@ -8,9 +8,9 @@
 - "configuration & deployment"
 - "log collection"
 - "provisioning"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "See deployments as they happen and track how long they take."
+"description": "行われているデプロイをリアルタイムで表示し、その所要時間を追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_codedeploy/"
 "draft": false
 "git_integration_title": "amazon_codedeploy"

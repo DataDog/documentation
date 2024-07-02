@@ -2,9 +2,9 @@
 "categories":
 - "collaboration"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Send Datadog alerts and graphs to your team's Hipchat room."
+"description": "Datadog のアラートとグラフをチームの Hipchat ルームに送信。"
 "doc_link": "https://docs.datadoghq.com/integrations/hipchat/"
 "draft": false
 "git_integration_title": "hipchat"

@@ -5,7 +5,7 @@
 - cost management
 - log collection
 - provisioning
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key AWS Trusted Advisor metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_trusted_advisor/"
@@ -36,9 +36,9 @@ Enable this integration to see all your Trusted Advisor metrics in Datadog.
 
 **Note**: This integration only works for AWS customers with a Business or Enterprise support plan.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -64,17 +64,17 @@ Configure AWS Trusted Advisor to send logs either to a S3 bucket or to CloudWatc
     - [Add a manual trigger on the S3 bucket][6]
     - [Add a manual trigger on the CloudWatch Log Group][7]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_trusted_advisor" >}}
 
 
-### Events
+### イベント
 
 The AWS Trusted Advisor integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS Trusted Advisor integration does not include any service checks.
 
@@ -88,7 +88,7 @@ To populate data on your AWS Trusted Advisor integration dashboard:
 
 The Datadog Trusted Advisor Dashboard needs access to the full set of [AWS Trusted Advisor checks][9]. AWS makes these only available for upgraded AWS support plans. Make sure that your AWS plan includes full access.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

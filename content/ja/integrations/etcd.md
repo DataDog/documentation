@@ -36,7 +36,7 @@
 - "containers"
 - "configuration & deployment"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/etcd/README.md"
 "display_on_public_website": true
@@ -49,7 +49,7 @@
 "manifest_version": "2.0.0"
 "name": "etcd"
 "public_title": "etcd"
-"short_description": "Track writes, updates, deletes, inter-node latencies, and more Etcd metrics."
+"short_description": "書き込み、更新、削除、ノード間レイテンシー、さまざまな Etcd メトリクスを追跡。"
 "supported_os":
 - "linux"
 - "macos"
@@ -60,12 +60,12 @@
   - "Supported OS::Linux"
   - "Supported OS::macOS"
   - "Supported OS::Windows"
-  - "Category::Orchestration"
-  - "Category::Containers"
-  - "Category::Configuration & Deployment"
-  - "Category::Log Collection"
+  - "Category::オーケストレーション"
+  - "Category::コンテナ"
+  - "Category::構成 & デプロイ"
+  - "Category::ログの収集"
   "configuration": "README.md#Setup"
-  "description": "Track writes, updates, deletes, inter-node latencies, and more Etcd metrics."
+  "description": "書き込み、更新、削除、ノード間レイテンシー、さまざまな Etcd メトリクスを追跡。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -75,45 +75,45 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Etcd Dashboard][1]
+![Etcd ダッシュボード][1]
 
-## Overview
+## 概要
 
-Collect Etcd metrics to:
+Etcd のメトリクスを収集して、以下のことができます。
 
-- Monitor the health of your Etcd cluster.
-- Know when host configurations may be out of sync.
-- Correlate the performance of Etcd with the rest of your applications.
+- Etcd クラスターの健全性を監視できます。
+- ホスト構成が同期されていない可能性があることに気付くことができます。
+- Etcd のパフォーマンスを他のアプリケーションと関連付けることができます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Etcd check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Etcd instance(s).
+Etcdチェックは [Datadog Agent][2] パッケージに含まれています。Etcd インスタンスに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `etcd.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your Etcd performance data. See the [sample etcd.d/conf.yaml][2] for all available configuration options.
-2. [Restart the Agent][3]
+1. Etcd のパフォーマンスデータを収集するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `etcd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル etcd.d/conf.yaml][2] を参照してください。
+2. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Uncomment and edit this configuration block at the bottom of your `etcd.d/conf.yaml`:
+2. `etcd.d/conf.yaml` の下部にある、コンフィギュレーションブロックのコメントを解除して編集します。
 
     ```yaml
     logs:
@@ -123,33 +123,33 @@ To configure this check for an Agent running on a host:
         service: "<SERVICE_NAME>"
     ```
 
-    Change the `path` and `service` parameter values based on your environment. See the [sample etcd.d/conf.yaml][2] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[etcd.d/conf.yaml のサンプル][2]を参照してください。
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                                |
+| パラメーター            | 値                                                |
 | -------------------- | ---------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `etcd`                                               |
-| `<INIT_CONFIG>`      | blank or `{}`                                        |
+| `<INIT_CONFIG>`      | 空白または `{}`                                        |
 | `<INSTANCE_CONFIG>`  | `{"prometheus_url": "http://%%host%%:2379/metrics"}` |
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes log collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                             |
+| パラメーター      | 値                                             |
 | -------------- | ------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "etcd", "service": "<SERVICE_NAME>"}` |
 
@@ -158,37 +158,37 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's `status` subcommand][3] and look for `etcd` under the Checks section.
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `etcd` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "etcd" >}}
 
 
-Etcd metrics are tagged with `etcd_state:leader` or `etcd_state:follower`, depending on the node status, so you can easily aggregate metrics by status.
+Etcd メトリクスは、ノードのステータスに応じて `etcd_state:leader` または `etcd_state:follower` がタグ付けされるため、メトリクスをステータスごとに簡単に集計できます。
 
-### Events
+### イベント
 
-The Etcd check does not include any events.
+Etcd チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "etcd" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][4].
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-- [Kubernetes Control Plane Monitoring][5]
-- [Monitor etcd performance to ensure consistent Docker configuration][6]
-- [How to monitor etcd with Datadog][7]
-- [Tools for collecting etcd metrics and logs][8]
-- [Key metrics for monitoring etcd][9]
+- [Kubernetes Control Plane モニタリング][5]
+- [etcd のパフォーマンスを監視し、一貫した Docker の構成を確保する][6]
+- [Datadog を使用した etcd の監視方法][7]
+- [etcd のメトリクスとログを収集するツール][8]
+- [etcd 監視のためのキーメトリクス][9]
 
 
 

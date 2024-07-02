@@ -23,13 +23,13 @@
 "author":
   "homepage": "https://www.datadoghq.com"
   "name": Datadog
-  "sales_email": info@datadoghq.com
+  "sales_email": info@datadoghq.com (日本語対応)
   "support_email": help@datadoghq.com
 "categories":
 - google cloud
-- metrics
-- cloud
-"custom_kind": "integration"
+- モニター
+- クラウド
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -41,7 +41,7 @@
 "manifest_version": "2.0.0"
 "name": "google_cloud_apis"
 "public_title": "Google Cloud APIs"
-"short_description": "Google Cloud APIs allow you to access Google Cloud Platform products from your code."
+"short_description": "Google Cloud APIs を使用すると、Google Cloud Platform 製品にコードからアクセスできます。"
 "supported_os": []
 "tile":
   "changelog": CHANGELOG.md
@@ -51,7 +51,7 @@
   - "Category::Cloud"
   - "Queried Data Type::Metrics"
   "configuration": "README.md#Setup"
-  "description": Google Cloud APIs allow you to access Google Cloud Platform products from your code.
+  "description": Google Cloud APIs を使用すると、Google Cloud Platform 製品にコードからアクセスできます。
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -59,35 +59,35 @@
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## Overview
+## 概要
 
-Google Cloud APIs allow you to access Google Cloud Platform products from your code.
+Google Cloud APIs を使用すると、Google Cloud Platform 製品にコードからアクセスできます。
 
-Use the Datadog Google Cloud Platform integration to collect metrics from Google Cloud APIs.
+Datadog Google Cloud Platform インテグレーションを使用して、Google Cloud APIs からメトリクスを収集できます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
+[Google Cloud Platform インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloud_apis" >}}
 
 
-### Events
+### イベント
 
-The Google Cloud APIs integration does not include any events.
+Google Cloud APIs インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The Google Cloud APIs integration does not include any service checks.
+Google Cloud APIs インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][3].
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://docs.datadoghq.com/integrations/google_cloud_platform/
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/google_cloud_apis/google_cloud_apis_metadata.csv

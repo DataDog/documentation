@@ -50,7 +50,7 @@
 - log collection
 - marketplace
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -124,49 +124,49 @@
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## Overview
+## 概要
 
-AtomWatch by Kitepipe is an Agent-based integration that collects metrics from Boomi processes, cluster nodes, and related infrastructure to inform both Datadog and Boomi customers about the health of the integration.
+Kitepipe の AtomWatch は Agent ベースのインテグレーションで、Boomi プロセス、クラスターノード、関連インフラストラクチャーからメトリクスを収集し、Datadog と Boomi の両方のお客様にインテグレーションの健全性を知らせることができます。
 
 AtomWatch version 1.0 contains 4 dashboards, 13 custom metrics, and 13 monitors that report on Boomi execution statistics, cluster status, and infrastructure health. These metrics are available to Datadog and Boomi customers for extended time-trending analysis (over the standard of 30 days for Boomi Process Reporting availability).
 
-Datadog customers who purchase AtomWatch must manage the Boomi Java Runtime in either an Atom or Molecule configuration. Kitepipe includes a one hour set-up and configuration session with the initial 14 Day Free Trial.
+AtomWatch を購入した Datadog のお客様は、Boomi Java Runtime を Atom または Molecule のいずれかの構成で管理する必要があります。Kitepipe では、14 日間の無料トライアルに 1 時間のセットアップと構成セッションが含まれています。
 
-### About Kitepipe
+### Kitepipe について
 
-Kitepipe is a Boomi Platinum Implementation Partner, and is the premier Boomi integration development team in North America. Kitepipe was founded in 2011 in response to the need for a Boomi-focused services team that could deliver all the promises of this powerful integration platform. 
+Kitepipe は Boomi Platinum Implementation Partner であり、北米における最高峰の Boomi インテグレーション開発チームです。Kitepipe は、この強力なインテグレーションプラットフォームのすべての約束を実現できる、Boomi に特化したサービスチームの必要性に応えて、2011 年に設立されました。
 
-Today, the Kitepipe team of certified Boomi on-shore developers help dozens of Boomi customers quickly achieve business value with the industry-leading Boomi integration platform.
+現在、Kitepipe の Boomi 認定オンショア開発者チームは、業界をリードする Boomi インテグレーションプラットフォームで、数十社の Boomi のお客様が迅速にビジネス価値を達成できるよう支援しています。
 
-The Datadog service AtomWatch is a new offering from Kitepipe with a focus on Boomi managed services in AWS. Kitepipe is the leader in a number of integration areas, verticals, and domains, including AWS migrations of Boomi processes, AWS managed Boomi, Biotech vertical solutions built on Boomi, NetSuite, SAP, Coupa, Workday, and HRIS, Data Mart/BI, and more endpoints.
+Datadog のサービス AtomWatch は、AWS における Boomi マネージドサービスを中心とした Kitepipe の新しい提案です。Kitepipe は、Boomi プロセスの AWS マイグレーション、AWS マネージド Boomi、Boomi で構築されたバイオテクノロジーの垂直ソリューション、NetSuite、SAP、Coupa、Workday、HRIS、Data Mart/BI などのエンドポイントを含む多くのインテグレーション分野、業界、ドメインでリーダーとして活躍しています。
 
-### Log Collection
+### ログ収集
 
-This integration makes API calls to the Boomi Platform on your behalf, retrieving execution records and sending them to Datadog as logs.
+このインテグレーションは、お客様に代わって Boomi プラットフォームへの API 呼び出しを行い、実行レコードを取得し、Datadog にログとして送信します。
 
-### Events
+### イベント
 
-This integration retrieves AuditLog records from the Boomi API, and sends them to Datadog as events. The events are visible in filtered form in the Boomi Workload Monitoring Dashboard or in the [Events Explorer][1]. You can build your own monitors to inspect the unfiltered AuditLog records.
+このインテグレーションは、Boomi API から AuditLog レコードを取得し、Datadog にイベントとして送信します。イベントは、Boomi Workload Monitoring Dashboard または[イベントエクスプローラー][1]でフィルターされた形で見ることができます。フィルタリングされていない AuditLog レコードを検査するために、独自のモニターを構築することができます。
 
-### Metrics
+### メトリクス
 
-This integration submits metrics. You can explore a list of metrics in the **Data Collected** tab. 
+このインテグレーションは、メトリクスを送信します。メトリクスの一覧は、**Data Collected** タブで確認することができます。
 
-## Support
+## サポート
 
-For support or feature requests, reach out to AtomWatch through the following channel:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから AtomWatch にお問い合わせください。
 
-- Email: [AtomWatch.Support@kitepipe.com][11]
+- メール: [AtomWatch.Support@kitepipe.com][11]
 
-Kitepipe support hours for AtomWatch are designated during the business hours of 9AM to 3PM across US and Canadian time zones. AtomWatch troubleshooting requests will be answered within 24 to 48 hours from the notification receipt to the AtomWatch email alias.
+Kitepipe の AtomWatch のサポート時間は、米国とカナダのタイムゾーンで午前 9 時から午後 3 時の営業時間内に指定されています。AtomWatch のトラブルシューティングリクエストは、AtomWatch のメールエイリアスへの通知受信から 24 時間から 48 時間以内に回答されます。
 
-For best response results, include the customer name, Boomi configuration, and a brief description of the event or troubleshooting question. Enhanced support programs are available from Kitepipe upon request.
+お客様名、Boomi の構成、イベントやトラブルシューティングの質問の簡単な説明を含めると、最高の回答結果が得られます。リクエストに応じて、Kitepipe の強化されたサポートプログラムをご利用いただけます。
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [AtomWatch Documentation][9]
+- [AtomWatch ドキュメント][9]
 - [Monitor your Boomi integrations with Kitepipe's offering in the Datadog Marketplace][12]
 
 [1]: https://app.datadoghq.com/event/explorer
@@ -183,4 +183,4 @@ Additional helpful documentation, links, and articles:
 [12]: https://www.datadoghq.com/blog/kitepipe-datadog-marketplace/
 
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/kitepipe-atomwatch" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/kitepipe-atomwatch" target="_blank">こちらをクリック</a>してください。

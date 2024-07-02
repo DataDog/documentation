@@ -4,7 +4,7 @@
 - data stores
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Monitor Amazon DocumentDB metrics and logs."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_documentdb/"
@@ -31,9 +31,9 @@
 
 Amazon DocumentDB is a fast, scalable, highly available, and fully managed document database service that supports MongoDB workloads.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -58,23 +58,23 @@ Configure Amazon DocumentDB to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_documentdb" >}}
 
 
 Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to dbinstanceidentifier, dbclusteridentifier, and more.
 
-### Events
+### イベント
 
 The Amazon DocumentDB integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon DocumentDB integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

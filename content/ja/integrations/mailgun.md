@@ -24,8 +24,8 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-- metrics
-"custom_kind": "integration"
+- モニター
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Monitor Mailgun's email delivery and engagement statistics with Datadog."
 "display_on_public_website": true
@@ -69,7 +69,7 @@ Mailgun is an API-based email delivery platform that allows you to:
 
 Integrate with Datadog to collect email delivery and engagement metrics and logs to track the performance of your Mailgun services.
 
-## Setup
+## セットアップ
 
 ### Add and verify domain
 
@@ -111,9 +111,9 @@ Datadog. See the section **Tracking Messages - Webhooks** [in the Mailgun docume
 7. Paste in the generated URL in step 1 under **URL**.
 8. Click **Create Webhook**.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "mailgun" >}}
 
 
@@ -121,15 +121,15 @@ Datadog. See the section **Tracking Messages - Webhooks** [in the Mailgun docume
 
 Mailgun events will show up as logs under the source `mailgun`.
 
-### Events
+### イベント
 
 The Mailgun integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Mailgun integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

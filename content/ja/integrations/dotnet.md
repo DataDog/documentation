@@ -1,7 +1,7 @@
 ---
 "categories":
 - languages
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Send runtime metrics from your .NET applications with Datadog client libraries."
 "doc_link": "https://docs.datadoghq.com/integrations/dotnet/"
@@ -25,7 +25,7 @@
 
 The .NET integration allows you to collect and monitor your .NET application logs, traces, and custom metrics.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
@@ -45,21 +45,21 @@ See the dedicated documentation on how to [setup .NET log collection][3] to forw
 
 See the dedicated documentation for [enabling the .NET profiler][4].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "dotnet" >}}
 
 
-### Events
+### イベント
 
 The .NET integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The .NET integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

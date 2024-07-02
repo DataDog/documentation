@@ -23,9 +23,9 @@ cascade:
     algolia:
         rank: 70
 ---
-Datadog Database Monitoring provides deep visibility into databases across all of your hosts. Dig into historical query performance metrics, explain plans, and host-level metrics all in one place, to understand the health and performance of your databases and troubleshoot issues as they arise.
+Datadog Database Monitoring は、すべてのホストにわたるデータベースの詳細な可視性を提供します。データベースの正常性とパフォーマンスを理解し、問題が発生したときにトラブルシューティングを行うために、過去のクエリパフォーマンスメトリクスを掘り下げ、計画とホストレベルのメトリクスをすべて 1 か所で説明します。
 
-## Getting started
+## はじめに
 
 Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **Oracle**, and **SQL Server**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
 
@@ -49,43 +49,43 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 <p></p>
 
-## Explore Datadog Database Monitoring
+## Datadog Database Monitoring の調査
 
-Navigate to [Database Monitoring][1] in Datadog.
+Datadog の [Database Monitoring][1] に移動します。
 
-### Dig into query performance metrics
+### クエリパフォーマンスメトリクスを掘り下げる
 
-The [Query Metrics view][2] shows historical query performance for normalized queries. Visualize performance trends by infrastructure or custom tags such as datacenter availability zone, and set alerts for anomalies.
+[クエリメトリクスビュー][2]には、正規化されたクエリの過去のクエリパフォーマンスが表示されます。インフラストラクチャーまたはデータセンターのアベイラビリティーゾーンなどのカスタムタグによってパフォーマンスの傾向を視覚化し、異常についてアラートを設定します。
 
-- Identify slow queries and which queries are consuming the most time.
-- Show database-level metrics not captured by APM such as rows updated/returned.
-- Filter and group queries by arbitrary dimensions such as team, user, cluster, and host.
+- 遅いクエリと、最も時間を消費しているクエリを特定します。
+- 更新/返された行など、APM によってキャプチャされないデータベースレベルのメトリクスを表示します。
+- チーム、ユーザー、クラスター、ホストなどの任意のディメンションでクエリをフィルタリングおよびグループ化します。
 
 {{< img src="database_monitoring/dbm-query-metrics-2.png" alt="Database Monitoring" style="width:100%;">}}
 
-### Explore query samples
+### クエリサンプルを確認する
 
-The [Query Samples view][3] helps you understand which queries are running at a given time. Compare each execution to the average performance of the query and related queries.
+[Query Samples ビュー][3]は、特定の時間に実行されているクエリを理解するのに役立ちます。各実行を、クエリおよび関連するクエリの平均パフォーマンスと比較します。
 
-- Identify unusually slow but infrequent queries not captured by metrics.
-- Find outliers in a query's execution time or execution cost.
-- Attribute a specific query execution to a user, application, or client host.
+- メトリクスによってキャプチャされない、異常に遅いがまれなクエリを識別します。
+- クエリの実行時間または実行コストの外れ値を見つけます。
+- 特定のクエリ実行をユーザー、アプリケーション、またはクライアントホストに関連付けます。
 
 {{< img src="database_monitoring/dbm-query-sample-2.png" alt="Database Monitoring" style="width:100%;">}}
 
-### Understand before you run
+### 実行する前に理解する
 
-[Explain Plans][4] help you understand how the database plans to execute your queries.
+[Explain Plans][4] は、データベースがクエリの実行をどのように計画しているかを理解するのに役立ちます。
 
-- Step through each operation to identify bottlenecks.
-- Improve query efficiency and save on costly sequential scans on large tables.
-- See how a query's plan changes over time.
+- 各操作をステップスルーして、ボトルネックを特定します。
+- クエリの効率を改善し、大きなテーブルでのコストのかかる順次スキャンを節約します。
+- クエリの計画が時間の経過とともにどのように変化するかを確認します。
 
 {{< img src="database_monitoring/dbm-explain-plan-3.png" alt="Database Monitoring" style="width:100%;">}}
 
-### Visualize everything on enriched dashboards
+### 強化されたダッシュボードですべてを視覚化
 
-Quickly pinpoint problem areas by viewing database and system metrics together on enriched integration dashboards for both self-hosted and cloud-managed instances. Clone dashboards for customization and enhancement with your own custom metrics. Click the **Dashboards** link at the top of the Query Metrics and Query Samples pages to go to the Database Monitoring dashboards.
+セルフホストインスタンスとクラウド管理インスタンスの両方の強化されたインテグレーションダッシュボードでデータベースとシステムのメトリクスを一緒に表示することにより、問題のある領域をすばやく特定します。ダッシュボードのクローンを作成して、独自のカスタムメトリクスを使用してカスタマイズおよび拡張します。Query Metrics ページと Query Samples ページの上部にある **Dashboards** リンクをクリックして、Database Monitoring ダッシュボードに移動します。
 
 {{< img src="database_monitoring/dbm-dashboard-postgres.png" alt="Database Monitoring" style="width:100%;">}}
 
@@ -95,10 +95,10 @@ On the [Databases page][1], you can assess the health and activity of your datab
 
 {{< img src="database_monitoring/databases-list.png" alt="The Databases page in Datadog" style="width:90%;" >}}
 
-## Further Reading
+## その他の参考資料
 
-{{< learning-center-callout header="Try Monitoring a Postgres Database with Datadog DBM in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
-  The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to identify inefficiencies and optimize your Postgres database.
+{{< learning-center-callout header="ラーニングセンターで Datadog DBM による Postgres データベースの監視をお試しください" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/database-monitoring">}}
+  Datadog ラーニングセンターは、このトピックに関する実践的なコースが充実しており、無料で参加することで Postgres データベースの非効率性を特定し、最適化することができます。
 {{< /learning-center-callout >}}
 
 {{< partial name="whats-next/whats-next.html" >}}

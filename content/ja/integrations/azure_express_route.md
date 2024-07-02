@@ -5,7 +5,7 @@
 - azure
 - cloud
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure ExpressRoute metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_express_route/"
@@ -30,27 +30,27 @@ Use the Azure ExpressRoute service to extend your on-premises networks into the 
 
 Use the Datadog Azure integration to collect metrics from Azure ExpressRoute.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_express_route" >}}
 
 
-### Events
+### イベント
 
 The Azure ExpressRoute integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure ExpressRoute integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

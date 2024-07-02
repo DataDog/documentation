@@ -52,7 +52,7 @@ data-postman-collection-url="entityId=20651290-809b13c1-4ada-46c1-af65-ab276c434
 
 After the Postman collection is imported, a full list of available Datadog API calls is structured by folder in the left pane of Postman.
 
-#### Authentication
+#### 認証
 
 Add your Datadog API and application keys to the [collection variables][6] for authentication.
 

@@ -7,7 +7,7 @@
 - kubernetes
 - log collection
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Collect metrics and logs from Knative for Anthos clusters and analyze them in Datadog."
 "doc_link": "https://docs.datadoghq.com/integrations/knative_for_anthos/"
@@ -32,11 +32,11 @@ Knative for Anthos is a flexible serverless development platform for hybrid and 
 
 Use the Datadog Google Cloud Platform integration to collect metrics from Knative for Anthos.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
-#### Installation
+#### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration][2].
 
@@ -62,21 +62,21 @@ Once this is done, export your Google Cloud Run logs from Google Cloud Logging t
 
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "knative_for_anthos" >}}
 
 
-### Events
+### イベント
 
 The Knative for Anthos integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Knative for Anthos integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

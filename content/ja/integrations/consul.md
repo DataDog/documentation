@@ -40,7 +40,7 @@
 - "network"
 - "notifications"
 - "orchestration"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/consul/README.md"
 "display_on_public_website": true
@@ -53,7 +53,7 @@
 "manifest_version": "2.0.0"
 "name": "consul"
 "public_title": "Consul"
-"short_description": "Alert on Consul health checks, see service-to-node mappings, and much more."
+"short_description": "Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他"
 "supported_os":
 - "linux"
 - "windows"
@@ -61,17 +61,17 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Configuration & Deployment"
-  - "Category::Containers"
-  - "Category::Log Collection"
-  - "Category::Network"
+  - "Category::構成 & デプロイ"
+  - "Category::コンテナ"
+  - "Category::ログの収集"
+  - "Category::ネットワーク"
   - "Category::Notifications"
-  - "Category::Orchestration"
+  - "Category::オーケストレーション"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Alert on Consul health checks, see service-to-node mappings, and much more."
+  "description": "Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -81,45 +81,45 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Consul Dash][1]
+![Consul ダッシュ][1]
 
-## Overview
+## 概要
 
-The Datadog Agent collects many metrics from Consul nodes, including those for:
+Datadog Agent は、以下のような多くのメトリクスを Consul ノードから収集します。
 
-- Total Consul peers
-- Service health - for a given service, how many of its nodes are up, passing, warning, critical?
-- Node health - for a given node, how many of its services are up, passing, warning, critical?
-- Network coordinates - inter- and intra-datacenter latencies
+- Consul ピアの合計数
+- サービス健全性 - 特定のサービスに対して、UP、PASSING、WARNING、CRITICAL なノードの数
+- ノード健全性 - 特定のノードに対して、UP、PASSING、WARNING、CRITICAL なサービスの数
+- ネットワーク座標系 - データセンター間およびデータセンター内のレイテンシー
 
-The _Consul_ Agent can provide further metrics with DogStatsD. These metrics are more related to the internal health of Consul itself, not to services which depend on Consul. There are metrics for:
+_Consul_ Agent は DogStatsD を使ってさらに多くのメトリクスを提供できます。これらは、Consul に依存するサービスではなく、Consul 自体の内部健全性に関連するメトリクスです。以下のメトリクスがあります。
 
-- Serf events and member flaps
-- The Raft protocol
-- DNS performance
+- Serf のイベントとメンバーフラップ
+- Raft プロトコル
+- DNS パフォーマンス
 
-And many more.
+その他にも多数あります。
 
-Finally, in addition to metrics, the Datadog Agent also sends a service check for each of Consul's health checks, and an event after each new leader election.
+メトリクスに加えて、Datadog Agent は Consul の健全性チェックごとにサービスチェックを送信し、新しいリーダー選出ごとにイベントを送信します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Datadog Agent's Consul check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Consul nodes.
+Datadog Agent の Consul チェックは [Datadog Agent][2] パッケージに含まれています。Consul ノードに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `consul.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your Consul metrics. See the [sample consul.d/conf.yaml][2] for all available configuration options.
+1. Consul のメトリクスの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `consul.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル consul.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -133,15 +133,15 @@ To configure this check for an Agent running on a host:
      - url: http://localhost:8500
    ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
 ###### OpenMetrics
 
-Optionally, you can enable the `use_prometheus_endpoint` configuration option to get an additional set of metrics from the Consul Prometheus endpoint.
+オプションで、`use_prometheus_endpoint` コンフィギュレーションオプションを有効にして、Consul Prometheus エンドポイントから追加のメトリクスセットを取得できます。
 
-**Note**: Use the DogStatsD or Prometheus method, do not enable both for the same instance.
+**注**: DogStatsD または Prometheus メソッドを使用し、同じインスタンスに両方を有効化しないようご注意ください。
 
-1. Configure Consul to expose metrics to the Prometheus endpoint. Set the [`prometheus_retention_time`][4] nested under the top-level `telemetry` key of the main Consul configuration file:
+1. Consul を構成し、Prometheus のエンドポイントにメトリクスを公開します。[`prometheus_retention_time`][4] を、メインの Consul コンフィギュレーションファイルの最上位レベルの `telemetry` キーにネストするよう設定します。
 
     ```conf
     {
@@ -153,20 +153,20 @@ Optionally, you can enable the `use_prometheus_endpoint` configuration option to
     }
     ```
 
-2. Edit the `consul.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start using the Prometheus endpoint.
+2. Prometheus エンドポイントの使用を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーで `consul.d/conf.yaml` ファイルを編集します。
     ```yaml
     instances:
         - url: <EXAMPLE>
           use_prometheus_endpoint: true
     ```
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 ##### DogStatsD
 
-Instead of using the Prometheus endpoint, you can configure Consul to send the same set of additional metrics to the Agent through [DogStatsD][5].
+Prometheus エンドポイントを使用する代わりに、[DogStatsD][5] を介して同じ追加メトリクスのセットを Agent に送信するように Consul を構成できます。
 
-1. Configure Consul to send DogStatsD metrics by adding the `dogstatsd_addr` nested under the top-level `telemetry` key in the main Consul configuration file:
+1. Consul のメインのコンフィギュレーションファイルで、最上位レベルの `telemetry` キーの下にネストした `dogstatsd_addr` を追加することで、DogStatsD メトリクスを送信するよう Consul を構成します。
 
     ```conf
     {
@@ -178,7 +178,7 @@ Instead of using the Prometheus endpoint, you can configure Consul to send the s
     }
     ```
 
-2. Update the [Datadog Agent main configuration file][6] `datadog.yaml` by adding the following configs to ensure metrics are tagged correctly:
+2. メトリクスが正しくタグ付けされるよう下記のコンフィギュレーションを追加し、[Datadog Agent のメインコンフィギュレーションファイル][6]である `datadog.yaml` を更新します。
 
    ```yaml
    # dogstatsd_mapper_cache_size: 1000  # default to 1000
@@ -209,19 +209,19 @@ Instead of using the Prometheus endpoint, you can configure Consul to send the s
              peer_id: "$1"
    ```
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in `datadog.yaml` with:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Edit this configuration block in your `consul.yaml` file to collect Consul logs:
+2. `consul.yaml` ファイルでこのコンフィギュレーションブロックを編集して、Consul ログを収集します。
 
    ```yaml
    logs:
@@ -231,10 +231,10 @@ _Available for Agent versions >6.0_
        service: myservice
    ```
 
-   Change the `path` and `service` parameter values and configure them for your environment.
-   See the [sample consul.d/conf.yaml][2] for all available configuration options.
+   `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル consul.d/conf.yaml][2] を参照してください。
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/consul/datadog_checks/consul/data/conf.yaml.example
@@ -243,29 +243,29 @@ _Available for Agent versions >6.0_
 [5]: https://docs.datadoghq.com/developers/dogstatsd/
 [6]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                              |
+| パラメーター            | 値                              |
 | -------------------- | ---------------------------------- |
 | `<INTEGRATION_NAME>` | `consul`                           |
-| `<INIT_CONFIG>`      | blank or `{}`                      |
+| `<INIT_CONFIG>`      | 空白または `{}`                      |
 | `<INSTANCE_CONFIG>`  | `{"url": "https://%%host%%:8500"}` |
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                               |
+| パラメーター      | 値                                               |
 | -------------- | --------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "consul", "service": "<SERVICE_NAME>"}` |
+| `<LOG_CONFIG>` | `{"source": "consul", "service": "<サービス名>"}` |
 
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
@@ -273,11 +273,11 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][3] and look for `consul` under the Checks section.
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `consul` を探します。
 
-**Note**: If your Consul nodes have debug logging enabled, the Datadog Agent's regular polling shows in the Consul log:
+**注**: Consul ノードでデバッグログが有効になっている場合は、Datadog Agent の通常のポーリングが Consul ログに以下を表示します。
 
 ```text
 2017/03/27 21:38:12 [DEBUG] http: Request GET /v1/status/leader (59.344us) from=127.0.0.1:53768
@@ -289,49 +289,49 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 2017/03/27 21:38:12 [DEBUG] http: Request GET /v1/coordinate/nodes (84.95us) from=127.0.0.1:53780
 ```
 
-#### Consul Agent to DogStatsD
+#### Consul Agent から DogStatsD へ
 
-Use `netstat` to verify that Consul is sending its metrics, too:
+`netstat` を使用して、Consul のメトリクスも送信されていることを確認します。
 
 ```shell
 $ sudo netstat -nup | grep "127.0.0.1:8125.*ESTABLISHED"
 udp        0      0 127.0.0.1:53874         127.0.0.1:8125          ESTABLISHED 23176/consul
 ```
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "consul" >}}
 
 
-See [Consul's Telemetry doc][4] for a description of metrics the Consul Agent sends to DogStatsD.
+Consul Agent が DogStatsD に送信するメトリクスの詳細については、[Consul の Telemetry に関するドキュメント][4]を参照してください。
 
-See [Consul's Network Coordinates doc][5] for details on how the network latency metrics are calculated.
+ネットワークレイテンシーメトリクスの計算方法については、[Consul のネットワーク座標系に関するドキュメント][5]を参照してください。
 
-### Events
+### イベント
 
 **consul.new_leader**:<br>
-The Datadog Agent emits an event when the Consul cluster elects a new leader, tagging it with `prev_consul_leader`, `curr_consul_leader`, and `consul_datacenter`.
+Datadog Agent は、Consul クラスターが新しいリーダーを選出すると、`prev_consul_leader`、`curr_consul_leader`、および `consul_datacenter` のタグを付けてイベントを送信します。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "consul" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][6].
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitoring HCP Consul with Datadog][7]
-- [Monitor Consul health and performance with Datadog][8]
-- [Consul at Datadog][9]
-- [Key metrics for monitoring Consul][10]
-- [Consul monitoring tools][11]
-- [How to monitor Consul with Datadog][12]
-- [Datadog NPM now supports Consul networking][13]
+- [Datadog を使用した HCP Consul の監視][7]
+- [Datadog を使用した Consul の健全性とパフォーマンスの監視][8]
+- [Datadog と Consul][9]
+- [Consul 監視のためのキーメトリクス][10]
+- [Consul 監視ツール][11]
+- [Datadog を使用した Consul の監視方法][12]
+- [Datadog NPM が Consul ネットワーキングに対応][13]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/consul/images/consul-dash.png

@@ -6,9 +6,9 @@
 - "notifications"
 - "aws"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Send Amazon SNS messages to Datadog, or send Datadog alerts to SNS."
+"description": "Amazon SNS メッセージを Datadog に、Datadog アラートを SNS に送信。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_sns/"
 "draft": false
 "git_integration_title": "amazon_sns"

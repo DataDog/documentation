@@ -21,7 +21,7 @@
 - configuration & deployment
 - containers
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/amazon_eks_blueprints/README.md"
 "display_on_public_website": true
@@ -68,15 +68,15 @@ Amazon EKS Blueprints is a framework that consolidates cluster configuration and
 
 The Datadog Blueprints add-on uses Blueprints to deploy the Datadog Agent on Amazon EKS.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 ```
 npm install @datadog/datadog-eks-blueprints-addon
 ```
 
-### Usage
+### 使用方法
 
 #### Using an existing Kubernetes secret
 
@@ -154,10 +154,10 @@ Monitoring EKS requires that you set up one of the following Datadog integration
 
 Also set up the integrations for any other AWS services that you are running with EKS, such as [ELB][5].
 
-## Data Collected
+## 収集データ
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

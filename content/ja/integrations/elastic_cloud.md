@@ -23,8 +23,8 @@
   "sales_email": info@datadoghq.com
   "support_email": help@datadoghq.com
 "categories":
-- metrics
-"custom_kind": "integration"
+- モニター
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -62,13 +62,13 @@ The integration provides metrics for your Elastic Cloud services, including the 
 - Node and index statistics
 - Resource utilization metrics
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 No installation steps required.
 
-### Configuration
+### 構成
 
 #### Metric collection
 
@@ -137,9 +137,9 @@ To include the Datadog IP prefixes:
 1. Find the Datadog IP ranges [here][3].
 2. Enter each prefix under **webhooks** into the traffic rule set as a **source**.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "elastic_cloud" >}}
 
 
@@ -147,15 +147,15 @@ To include the Datadog IP prefixes:
 
 The Elastic Cloud integration does not include any logs.
 
-### Events
+### イベント
 
 The Elastic Cloud integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Elastic Cloud integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

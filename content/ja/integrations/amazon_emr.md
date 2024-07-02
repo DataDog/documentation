@@ -5,7 +5,7 @@
 - "aws"
 - "cloud"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon EMR metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_emr/"
@@ -30,9 +30,9 @@ Amazon EMR is a web service that makes it easy to quickly and cost-effectively p
 
 Enable this integration to see EMR metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -64,23 +64,23 @@ Configure Amazon EMR to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][7]
     - [Add a manual trigger on the CloudWatch Log Group][8]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_emr" >}}
 
 
 Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The Amazon EMR integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon EMR integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

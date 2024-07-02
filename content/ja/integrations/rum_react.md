@@ -11,7 +11,7 @@
 - metrics
 - network
 - tracing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rum_react/README.md"
 "display_on_public_website": true
@@ -69,7 +69,7 @@ Monitor your React applications from end-to-end by:
 - Analyzing and contextualizing every user session with attributes such as user ID, email, name, and more
 - Unifying full-stack monitoring in one platform for frontend and backend development teams
 
-## Setup
+## セットアップ
 
 ### Collect RUM events 
 
@@ -83,9 +83,9 @@ Your React application automatically sends traces to Datadog.
 
 To start forwarding your React application's logs to Datadog, see [React Log Collection][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The React integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][4].
 
@@ -97,7 +97,7 @@ For more information about events and attributes, see [RUM React Data Collected]
 
 The React integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog Support][6]. 
 

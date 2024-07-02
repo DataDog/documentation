@@ -1,7 +1,7 @@
 ---
 title: Kubernetes Audit Logs
 name: kubernetes_audit_logs
-custom_kind: integration
+custom_kind: インテグレーション
 description: 'Track everything that happens inside your Kubernetes clusters'
 short_description: 'Track inside Kubernetes clusters'
 dependencies:

@@ -26,7 +26,7 @@
 "categories":
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/openldap/README.md"
 "display_on_public_website": true
@@ -63,34 +63,34 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-Use the OpenLDAP integration to get metrics from the `cn=Monitor` backend of your OpenLDAP servers.
+OpenLDAP インテグレーションを使用すると、OpenLDAP サーバーの `cn=Monitor` バックエンドからメトリクスを取得できます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The OpenLDAP integration is packaged with the Agent. To start gathering your OpenLDAP metrics:
+OpenLDAP インテグレーションは Agent とパッケージ化されています。OpenLDAP メトリクスの収集を開始するには、以下を実行します。
 
-1. Have the `cn=Monitor` backend configured on your OpenLDAP servers.
-2. [Install the Agent][1] on your OpenLDAP servers.
+1. OpenLDAP サーバーで `cn=Monitor` バックエンドを構成します。
+2. OpenLDAP サーバーに [Agent をインストール][1]します。
 
-### Configuration
+### 構成
 
-#### Prepare OpenLDAP
+#### OpenLDAP の準備
 
-If the `cn=Monitor` backend is not configured on your server, follow these steps:
+サーバーで `cn=Monitor` バックエンドが構成されていない場合は、以下の手順に従ってください。
 
-1. Check if monitoring is enabled on your installation:
+1. インストールでモニターが有効化されていることを確認します。
 
    ```shell
     sudo ldapsearch -Y EXTERNAL -H ldapi:/// -b cn=module{0},cn=config
    ```
 
-   If you see a line with `olcModuleLoad: back_monitor.la`, monitoring is already enabled, go to step 3.
+   `olcModuleLoad: back_monitor.la` という行が表示される場合は、モニターはすでに有効化されています。手順 3 に進んでください。
 
-2. Enable monitoring on your server:
+2. サーバーでモニタリングを有効にします。
 
    ```text
        cat <<EOF | sudo ldapmodify -Y EXTERNAL -H ldapi:///
@@ -101,8 +101,8 @@ If the `cn=Monitor` backend is not configured on your server, follow these steps
        EOF
    ```
 
-3. Create an encrypted password with `slappasswd`.
-4. Add a new user:
+3. `slappasswd` で暗号化パスワードを作成します。
+4. 新しいユーザーを追加します。
 
    ```text
        cat <<EOF | ldapadd -H ldapi:/// -D <YOUR BIND DN HERE> -w <YOUR PASSWORD HERE>
@@ -115,7 +115,7 @@ If the `cn=Monitor` backend is not configured on your server, follow these steps
        EOF
    ```
 
-5. Configure the monitor database:
+5. モニターデータベースを構成します。
 
    ```text
        cat <<EOF | sudo ldapadd -Y EXTERNAL -H ldapi:///
@@ -127,18 +127,18 @@ If the `cn=Monitor` backend is not configured on your server, follow these steps
        EOF
    ```
 
-#### Configure the OpenLDAP integration
+#### OpenLDAP インテグレーションの構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-###### Metric collection
+###### メトリクスの収集
 
-1. Edit your `openldap.d/conf.yaml` in the `conf.d` folder at the root of your Agent's configuration directory. See the [sample openldap.d/conf.yaml][1] for all available configuration options.
+1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d` フォルダーの `openldap.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル openldap.d/conf.yaml][1] を参照してください。
 
    ```yaml
    init_config:
@@ -161,19 +161,19 @@ To configure this check for an Agent running on a host:
        password: "<PASSWORD>"
    ```
 
-2. [Restart the Agent][2].
+2. [Agent を再起動します][2]。
 
-###### Log collection
+###### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `openldap.d/conf.yaml` file to start collecting your OpenLDAP logs:
+2. OpenLDAP のログの収集を開始するには、次のコンフィギュレーションブロックを `openldap.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -183,67 +183,67 @@ _Available for Agent versions >6.0_
        service: "<SERVICE_NAME>"
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment. See the [sample openldap.d/conf.yaml][1] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル openldap.d/conf.yaml][1] を参照してください。
 
-3. [Restart the Agent][2].
+3. [Agent を再起動します][2]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/openldap/datadog_checks/openldap/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-###### Metric collection
+###### メトリクスの収集
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-| Parameter            | Value                                                                                           |
+| パラメーター            | 値                                                                                           |
 | -------------------- | ----------------------------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `openldap`                                                                                      |
-| `<INIT_CONFIG>`      | blank or `{}`                                                                                   |
-| `<INSTANCE_CONFIG>`  | `{"url":"ldaps://%%host%%:636","username":"<USER_DISTINGUISHED_NAME>","password":"<PASSWORD>"}` |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                   |
+| `<INSTANCE_CONFIG>`  | `{"url":"ldaps://%%host%%:636","username":"<ユーザーの識別名>","password":"<パスワード>"}` |
 
-###### Log collection
+###### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                                 |
+| パラメーター      | 値                                                 |
 | -------------- | ----------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "openldap", "service": "<SERVICE_NAME>"}` |
+| `<LOG_CONFIG>` | `{"source": "openldap", "service": "<サービス名>"}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][2] and look for `openldap` under the Checks section.
+[Agent の status サブコマンドを実行][2]し、Checks セクションで `openldap` を探します。
 
-## Compatibility
+## 互換性
 
-The check is compatible with all major platforms.
+このチェックは、すべての主要プラットフォームと互換性があります。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "openldap" >}}
 
 
-### Events
+### イベント
 
-The openldap check does not include any events.
+openldap チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "openldap" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][3].
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 
 

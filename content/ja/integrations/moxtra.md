@@ -2,9 +2,9 @@
 "categories":
 - "cloud"
 - "collaboration"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Send Datadog alerts and graphs to Moxtra."
+"description": "Datadog アラートとグラフを Moxtra に送信。"
 "doc_link": "https://docs.datadoghq.com/integrations/moxtra/"
 "draft": false
 "git_integration_title": "moxtra"
@@ -30,9 +30,9 @@ Integrate Moxtra to:
 - Be notified when a metric alert is triggered
 - Share your graphs with your team
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To enable this integration...
 
@@ -41,21 +41,21 @@ To enable this integration...
 3. Add your Webhook URL to Datadog's webhooks-enabled services [Datadog-Webhook tile][1].
 4. Click the **Install Integration** button on the [Moxtra Integration Tile][2].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Moxtra integration does not include any metric.
 
-### Events
+### イベント
 
 The Moxtra integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Moxtra integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

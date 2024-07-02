@@ -1,6 +1,5 @@
 ---
 title: Trace Explorer
-kind: documentation
 aliases:
     - /tracing/tracing_without_limits/
     - /tracing/livesearch/
@@ -12,120 +11,120 @@ further_reading:
   text: Search Spans
 ---
 
-{{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Explorer" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースエクスプローラー" >}}
 
-## Overview
+## 概要
 
-The [Trace Explorer][1] gives you the ability to search all ingested or indexed spans using any tag on any span. The spans found by your query change depending on whether you are searching Live (all spans ingested in the last 15 minutes, rolling) or indexed spans (spans retained for 15 days by your custom filters).
+[トレースエクスプローラー][1]を使用すると、任意のスパンの任意のタグを使用して、取り込まれたかインデックス化されたすべてのスパンを検索できます。Live (過去 15 分間に取り込まれたすべてのスパン、ローリング) またはインデックス化されたスパン (カスタムフィルターにより 15 日間保存されたスパン) のどちらを検索するかによって、クエリで発見されるスパンは変化します。
 
-Instrumented applications send 100% of their traces to Datadog for [ingestion][2], making the traces available as Live traces for a rolling window of 15 minutes.
+インスツルメントされたアプリケーションは、トレースの 100% を Datadog に送信します。[取り込まれ][2]たトレースは、Live トレースとして 15 分間ローリングウィンドウで使用可能になります。
 
-The Trace Explorer shows a **Live Search - All ingested data** indicator whenever you are in Live mode:
+トレースエクスプローラーには、Live モードの時は常に **Live Search - All ingested data** のインジケータが表示されます。
 
-{{< img src="tracing/trace_explorer/live_search.png" alt="Live Search Indicator" style="width:75%;" >}}
+{{< img src="tracing/trace_explorer/live_search.png" alt="Live Search の表示" style="width:75%;" >}}
 
-All ingested traces are then passed through:
-- [Custom retention filters][3] that you can create to determine which spans to index. Once indexed through a custom retention filter, traces are retained for **15 days**.
-- The default [intelligent retention filter][4] that retains a diverse set of traces. When indexed through the intelligent retention filter, traces are retained for **30 days**.
+そして、取り込まれたトレースはすべて以下を通過させます。
+- インデックス化するスパンを決定するために作成できる[カスタム保持フィルター][3]。カスタム保持フィルターでインデックス化すると、トレースは **15 日間**保持されます。
+- 多様なトレースを保持するデフォルトの[インテリジェント保持フィルター][4]。インテリジェント保持フィルターでインデックス化すると、トレースは **30 日間**保持されます。
 
-The Trace Explorer shows an **Search - Only Indexed Data** indicator whenever you search [indexed spans][5]:
+トレースエクスプローラーには、[インデックス化されたスパン][5]の検索時は常に **Search - Only Indexed Data** インジケータが表示されます。
 
-{{< img src="tracing/trace_explorer/historical_search.png" alt="Only Indexed Data indicator" style="width:75%;" >}}
+{{< img src="tracing/trace_explorer/historical_search.png" alt="Only Indexed Data の表示" style="width:75%;" >}}
 
-Live Search is the default view on the Traces page. Switch from Live Search to Indexed Data Search by using the time selector in the top right-hand corner.
+Live Search は、トレースページのデフォルトの表示です。Live Search から Indexed Data Search に切り替えるには、右上のタイムセレクターを使用します。
 
-### Trace volume control
+### トレースボリュームコントロール
 
-You can customize settings for both [ingestion and retention][6] to send and keep exactly what data is most relevant to you.
+[取り込みおよび保持][6]の両方で、設定をカスタマイズして最も関連性の高いデータを送信、維持することができます。
 
-#### Ingestion
+#### 取り込み
 
-Control your volume globally with [Datadog Agent configuration options][7] or set precise [ingestion rules][8] per service instrumented with Datadog APM.
+[Datadog Agent の構成オプション][7]でグローバルにボリュームを制御したり、Datadog APM でインスツルメンテーションされたサービスごとに正確な[取り込みルール][8]を設定することができます。
 
 
-#### Indexing
+#### インデックス化
 
-After you instrument your services and ingest traces, set tag-based [retention filters][3] within the Datadog app so that Datadog retains spans that are relevant to you.
+サービスをインスツルメントし、トレースを取り込んだら、タグベースの[保持フィルター][3]を Datadog アプリ内に設定すると、関連性の高いスパンを Datadog で保持できます。
 
-**Note:** Both ingested and indexed spans may impact your bill. For more information, see [APM Billing][9].
+**注:** 取り込まれたスパンおよびインデックス化されたスパンはどちらも請求に影響を与える場合があります。詳細は [APM 料金][9]を参照してください。
 
-## Live Search for 15 minutes
+## 15 分間の Live Search
 
-{{< img src="tracing/apm_lifecycle/trace_explorer_live_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Live Search" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer_live_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ライブ検索" >}}
 
-When you use Live Search, Datadog displays spans as soon as they are sent by the Datadog Agent and before they have been indexed by your retention filters. All ingested spans are available for the last 15 minutes (rolling window), displayed without any sampling.
+Live Search を使用すると、スパンは、Datadog Agent から送信された時点で、保持フィルターによりインデックス化する前に Datadog に表示されます。取り込まれたすべてのスパンは、15 分間利用可能になり（ローリングウィンドウ）、サンプリングなしで表示されます。
 
 {{< tabs >}}
-{{% tab "List view" %}}
+{{% tab "リスト表示" %}}
 
-{{< img src="tracing/live_search/live-search.mp4" alt="Live Search List view" video="true" >}}
+{{< img src="tracing/live_search/live-search.mp4" alt="Live Search リスト表示" video="true" >}}
 
-With the **List view**, you can:
+**List view** では、以下のことが可能です。
 
-- Monitor whether a new deployment went smoothly by filtering on `version_id` of all tags.
-- View outage-related information in real time by searching 100% of ingested traces for a particular `org_id` or `customer_id` that is associated with a problematic child span.
-- Check if a process has correctly started by typing `process_id` and autocompleting the new process ID as a tag on child spans.
-- Monitor load test and performance impact on your endpoints by filtering on the duration of a child resource.
-- Run one-click search queries on any span or tag directly from the trace panel view.
-- Add, remove, and sort columns from span tags for a customized view.
+- すべてのタグの `version_id` でフィルタリングすることで、新しいデプロイがスムーズに行われたかを監視。
+- 取り込まれたトレースの 100% を検索して、問題のある子スパンに関連付けられた特定の `org_id` または `customer_id` を見つけ、機能停止に関する情報をリアルタイムで確認。
+- `process_id` を入力して新しいプロセス ID が子スパンのタグとして自動入力されるかどうかを確認し、プロセスが適切に開始されたことをチェック。
+- 子リソースの持続時間でフィルタリングし、エンドポイントでの負荷テストやパフォーマンスへの影響を監視。
+- トレースパネルビューから、直接スパンやタグに対する検索クエリをワンクリックで実行できます。
+- スパンタグから列を追加、削除、並び替えてビューをカスタマイズできます。
 
-The number of received spans per second is displayed at the top of the traces table. Since a stream of thousands of spans per second is not human readable, high throughput span streams show some spans for visual clarity. You can search for all available spans in the search query. Use the Live Search query bar filtering features to filter the spans stream and the **Pause/Play** button at the top right of the screen to pause or resume the stream.
+1 秒間に受け取ったスパンの数がトレーステーブルの上部に表示されます。1 秒間に数千のスパンのストリームを受け取るような場合は、人間の目では確認できないため、スループットが高いスパンストリームは確認しやすいように一部のスパンを表示します。検索クエリで利用可能なすべてのスパンを検索することができます。Live Search のクエリバーフィルター機能を使用して、スパンストリームを絞り込んだり、画面右上の **Pause/Play** ボタンを使用して、ストリームを一時停止または再開したりできます。
 
-{{< img src="tracing/live_search/play-pause-button.png" alt="Pause or Play the Live Stream" style="width:75%;" >}}
+{{< img src="tracing/live_search/play-pause-button.png" alt="ライブストリームを一時停止/再開" style="width:75%;" >}}
 
-**Note**: Selecting any span pauses the stream and displays more details about the selected span in the trace side panel.
+**注**: スパンを選択すると、ストリームが一時停止し、そのスパンの詳細がトレース側のパネルに表示されます。
 
 {{% /tab %}}
-{{% tab "Timeseries View" %}}
+{{% tab "時系列表示" %}}
 
-{{< img src="tracing/live_search/live-analytics.mp4" alt="Live Search Timeseries view" video="true" >}}
+{{< img src="tracing/live_search/live-analytics.mp4" alt="Live Search 時系列表示" video="true" >}}
 
-Visualize your spans as timeseries instead of a list using the **Timeseries view**. The Live Search Timeseries view is useful for graphing requests or errors that correspond to specified criteria, such as:
+スパンをリストではなく時系列で可視化する **Timeseries view** を使用します。Live Search の時系列表示は、次のような指定された条件に対応するリクエストやエラーをグラフ化するのに便利です。
 
-- Errors for the `ShoppingCart##checkout` service and endpoint, with a cart value of at least `$100`, with the ability to view traces matching these criteria individually.
+- カートの金額が少なくとも `$100` の `ShoppingCart##checkout` サービスやエンドポイントのエラー、という基準に個々に一致するトレースを表示することができます 。
 
-- Monitor a canary deployment of a critical application update in real time.
+- アプリケーションの重要なアップデートのカナリアデプロイをリアルタイムで監視。
 
-- Compare latency across geographic regions scoped to the latest version of your iOS application.
+- iOS アプリケーションの最新バージョンの、指定地域間のレイテンシーを比較。
 
-In addition to showing timeseries for requests that match your queries, you can also visualize your spans as a top list of the most impacted customers, availability zones, or any other tag during an outage or investigation.
+クエリに一致するリクエストの時系列が表示されるだけでなく、停止または調査中に最も影響を受けた顧客、アベイラビリティーゾーン、またはその他のタグの上位リストとしてスパンを可視化することもできます。
 
-**Note:** Exporting to dashboards and monitors is only possible using retained spans.
+**注:** 保持済みのスパンを使用した場合のみ、ダッシュボードとモニターへのエクスポートが可能です。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Filtering
+### フィルタリング
 
-{{< img src="tracing/live_search/service_entry_root_spans.mp4" alt="Searching all spans" video="true" >}}
+{{< img src="tracing/live_search/service_entry_root_spans.mp4" alt="すべてのスパンを検索する" video="true" >}}
 
-A valid query in the search bar displays traces that match your search criteria across **all spans**. The search syntax is the same in the Live Search views as in the other trace views, but here, your query is matched against all of the ingested traces across **any span** and **any tag**, and not just the indexed ones.
+検索バーに有効なクエリを入力すると、**すべてのスパン**にわたり検索条件に一致するトレースが表示されます。Live Search ビューの検索構文は他のトレースビューのものと同じですが、クエリはインデックス化されたトレースだけでなく、**任意のスパン**と**任意のタグ**で収集されたすべてのトレースと照合されます。
 
-You can choose to query the [service entry spans][10], the [root spans][11], or all spans by changing the selection to the box above the trace table. Use this feature on high traffic applications to reduce the number of spans displayed and view only the entry point spans of the services or the entry point of the trace. Selecting this box only filters the spans shown in the list; the others are still shown in the flame graph when clicking on a span to view the trace details.
+トレーステーブルの上のボックスに選択を変更することで、[サービスエントリスパン][10]、[ルートスパン][11]、またはすべてのスパンをクエリすることが可能です。トラフィックの多いアプリケーションでこの機能を使用すると、表示されるスパンの数を減らし、サービスのエントリポイントのスパンまたはトレースのエントリポイントのみを表示することができます。このボックスを選択すると、リストに表示されるスパンのみがフィルターされます。スパンをクリックしてトレースの詳細を表示しても、他のスパンはフレームグラフに表示されます。
 
-You can also filter on attributes that are not defined as facets. For example, to filter on the `cart.value` attribute, there are two options:
+ファセットとして定義されていない属性でも絞り込むことができます。たとえば、`cart.value` 属性で絞り込むには、以下の 2 つの方法があります。
 
-- Click on the `cart.value` attribute in the trace details panel and add it to the search query:
-{{< img src="tracing/live_search/add-attribute-to-query.mp4" alt="Adding an attribute to the query" video="true" >}}
+- トレース詳細パネルで `cart.value` 属性をクリックし、検索クエリに追加します。
+{{< img src="tracing/live_search/add-attribute-to-query.mp4" alt="クエリに属性を追加する" video="true" >}}
 
-- Filter on all spans with a `cart.value` attribute by typing "cart.value" in the search query bar:
-{{< img src="tracing/live_search/filter-by-attribute2.mp4" alt="Live Search filter by attribute" video="true" >}}
+- 検索クエリバーに "cart.value" と入力して、すべてのスパンを `cart.value` 属性で絞り込みます。
+{{< img src="tracing/live_search/filter-by-attribute2.mp4" alt="Live Search の属性による絞り込み" video="true" >}}
 
-## Indexed spans search with 15 day retention
+## 15 日間保持のインデックス化されたスパンの検索
 
-{{< img src="tracing/apm_lifecycle/trace_explorer_indexed_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Indexed Search" >}}
+{{< img src="tracing/apm_lifecycle/trace_explorer_indexed_search.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="インデックス検索" >}}
 
-You can search retained traces in the same way as you do a Live Search. To switch from searching live data to searching retained data, change the time selector to any period of time greater than 15 minutes. All spans that are indexed by retention filters are accessible from search. These spans are kept by Datadog for 15 days after being indexed by a retention filter.
+Live Search と同じように、保持されたトレースを検索することができます。ライブデータ検索から保持データ検索に切り替えるには、タイムセレクターを 15 分以上の任意の期間に変更します。保持フィルターによってインデックス化されたすべてのスパンは、検索からアクセスできます。これらのスパンは、保持フィルターによってインデックス化された後、Datadog によって 15 日間保持されます。
 
-{{< img src="tracing/live_search/searching-retained-traces.mp4" alt="Searching retained traces" video="true" >}}
+{{< img src="tracing/live_search/searching-retained-traces.mp4" alt="保持されたトレースを検索する" video="true" >}}
 
 {{< tabs >}}
-{{% tab "List view" %}}
+{{% tab "リスト表示" %}}
 
-All spans indexed by custom retention filters *and* the intelligent retention filter are available to be searched in the List view. However, if you filter by a tag that appears only on spans that are not indexed by any retention filter, your search does not return any results, unlike when using [Live Search](#live-search-for-15-minutes).
+カスタム保持フィルターとインテリジェント保持フィルターでインデックス化されたすべてのスパンは、リスト表示で検索することが可能です。ただし、どの保持フィルターにもインデックス化されていないスパンにのみ表示されるタグでフィルタリングすると、[Live Search](#live-search-for-15-minutes) の場合と異なり、検索結果は何も返されません。
 
 {{% /tab %}}
-{{% tab "Timeseries View" %}}
+{{% tab "時系列表示" %}}
 
 All spans indexed by custom retention filters or the intelligent retention filter are available to be searched when using trace analytics.
 
@@ -141,11 +140,11 @@ From the timeseries view, export your query to a [dashboard][1], [monitor][2], o
 {{% /tab %}}
 {{< /tabs >}}
 
-### Retention configuration
+### 保持構成
 
-You can customize which spans are retained and at what retention rates. By default, [the Datadog intelligent retention filter][4] is applied, which automatically retains traces with error and latency diversity as well as low-throughput resources. To learn more about the default intelligent retention filter and how to create your own additional filters, see the [retention filters documentation][3]. Go to the [Retention Filters page][12] within the Datadog app to create or modify your own filters.
+保持されるスパンと保持率をカスタマイズできます。デフォルトでは、[Datadog インテリジェント保持フィルター][4]が適用され、エラーおよびレイテンシーの多様性や、低スループットのリソースを含むトレースを自動的に保持します。デフォルトのインテリジェント保持フィルターの詳細と独自の追加フィルターの作成方法については、[保持フィルターのドキュメント][3]を参照してください。独自のフィルターを作成または変更するには、Datadog アプリの[保持フィルターのページ][12]にアクセスしてください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

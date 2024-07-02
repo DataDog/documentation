@@ -3,18 +3,18 @@
 - "languages"
 - "log collection"
 - "tracing"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Collect metrics, traces, logs, and profile data from your Python applications."
 "doc_link": "https://docs.datadoghq.com/integrations/python/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/tracing-async-python-code/"
-  "tag": "Blog"
-  "text": "Tracing asynchronous Python code with Datadog APM"
+  "tag": "ブログ"
+  "text": "Datadog APM による非同期 Python のトレーシング"
 - "link": "https://www.datadoghq.com/blog/python-logging-best-practices/"
-  "tag": "Blog"
-  "text": "How to collect, customize, and centralize Python logs"
+  "tag": "ブログ"
+  "text": "Python ログの収集、カスタマイズ、一元化方法"
 "git_integration_title": "python"
 "has_logo": true
 "integration_id": "python"
@@ -33,7 +33,7 @@
 
 The Python integration allows you to collect and monitor your Python application logs, traces, and custom metrics.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
@@ -53,7 +53,7 @@ See the dedicated documentation on how to [setup Python log collection][3] to fo
 
 See the dedicated documentation for [enabling the Python profiler][4]. 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

@@ -2,7 +2,7 @@
 "categories":
 - cloud
 - azure
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure App Configuration metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_app_configuration/"
@@ -27,23 +27,23 @@ Azure App Configuration provides a central service to manage application setting
 
 By using the [Datadog Azure integration][1], you can collect metrics from Azure App Configuration to monitor incoming requests, latency, and throttling errors.
 
-## Setup
-### Installation
+## セットアップ
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][2] first. There are no other installation steps.
 
-## Data Collected
-### Metrics
+## 収集データ
+### メトリクス
 {{< get-metrics-from-git "azure_app_configuration" >}}
 
 
-### Events
+### イベント
 The Azure App Configuration integration does not include any events.
 
-### Service Checks
+### サービスチェック
 The Azure App Configuration integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 Need help? Contact [Datadog support][4].
 
 [1]: https://docs.datadoghq.com/integrations/azure/

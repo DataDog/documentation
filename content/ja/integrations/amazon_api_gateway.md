@@ -30,13 +30,13 @@
 - "aws"
 - "metrics"
 - "cloud"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
 "git_integration_title": "amazon_api_gateway"
 "integration_id": "amazon-api-gateway"
-"integration_title": "Amazon Api Gateway"
+"integration_title": "Amazon API Gateway"
 "integration_version": ""
 "is_public": true
 "manifest_version": "2.0.0"
@@ -65,9 +65,9 @@ Amazon API Gateway is a fully managed service that makes it easy for developers 
 
 Enable this integration to see all of your API Gateway metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1].
 
@@ -123,22 +123,22 @@ To enable API Gateway logging:
 
 Once completed, navigate to the [Logs page][6] to start exploring your logs!
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_api_gateway" >}}
 
 
 
-### Events
+### イベント
 
 The Amazon API Gateway integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon API Gateway integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

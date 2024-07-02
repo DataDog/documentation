@@ -19,7 +19,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - metrics
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/openmetrics/README.md"
 "display_on_public_website": true
@@ -63,17 +63,17 @@ Extract custom metrics from any OpenMetrics or Prometheus endpoints.
 
 The integration is compatible with both the [Prometheus exposition format][1] as well as with the [OpenMetrics specification][2].
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][3] for guidance on applying these instructions.
 
 This integration has a latest mode (enabled by setting `openmetrics_endpoint` to point to the target endpoint) and a legacy mode (enabled by setting `prometheus_url` instead). To get all the most up-to-date features, Datadog recommends enabling the latest mode. For more information, see [Latest and Legacy Versioning For OpenMetrics-based Integrations][4].
 
-### Installation
+### インストール
 
 The OpenMetrics check is packaged with the [Datadog Agent v6.6.0 or later][5].
 
-### Configuration
+### 構成
 
 Edit the `conf.d/openmetrics.d/conf.yaml` file at the root of your [Agent's configuration directory][6]. See the [sample openmetrics.d/conf.yaml][7] for all available configuration options. This is the latest OpenMetrics check example as of Datadog Agent version 7.32.0. If you previously implemented this integration, see the [legacy example][8].
 
@@ -95,21 +95,21 @@ If you need to monitor more metrics, contact [Datadog support][11].
 
 [Run the Agent's status subcommand][9] and look for `openmetrics` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 All metrics collected by the OpenMetrics check are forwarded to Datadog as custom metrics.
 
-### Events
+### イベント
 
 The OpenMetrics check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The OpenMetrics check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 ### High custom metrics billing
 

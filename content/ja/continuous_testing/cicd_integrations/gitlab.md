@@ -12,24 +12,24 @@ further_reading:
   text: Set up Tracing on a GitLab Pipeline
 ---
 
-## Overview
+## 概要
 
-Run Continuous Testing tests in your [GitLab][1] pipelines, block deployments, and trigger rollbacks to ensure your code is added in production when your essential business workflows are functioning as expected.
+[GitLab][1] パイプラインで Continuous Testing テストを実行し、デプロイをブロックし、ロールバックをトリガーして、重要なビジネスワークフローが期待通りに機能するときに、コードが本番環境に追加されていることを確認します。
 
-To integrate Continuous Testing tests with a [GitLab pipeline][2], you can use the [datadog-ci npm package][3].
+Continuous Testing テストを [GitLab パイプライン][2]にインテグレーションするには、[datadog-ci npm パッケージ][3]を使用します。
 
-## Setup
+## セットアップ
 
-To get started:
+始めるには
 
-1. Add your Datadog API and application keys as variables in your GitLab project.
-2. Ensure your GitLab runner has a version of Node.js >= 10.24.1 installed.
+1. GitLab プロジェクトに Datadog の API キーとアプリケーションキーを変数として追加します。
+2. GitLab ランナーに Node.js >= 10.24.1 がインストールされていることを確認します。
 
-For more information, see [CI/CD Integrations Configuration][4].
+詳しくは、[CI/CD インテグレーション構成][4]をご覧ください。
 
-## Simple configuration
+## シンプルな構成
 
-### Run tests using test IDs
+### テスト ID を使ったテストの実行
 
 {{< code-block lang="yaml" >}}
 stages: 
@@ -41,7 +41,7 @@ synthetic-tests:
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" --public-id xtf-w5p-z5n --public-id eif-van-tu7
 {{< /code-block >}}
 
-### Run tests using tags
+### タグを使ったテストの実行
 
 {{< code-block lang="yaml" >}}
 stages: 
@@ -53,9 +53,9 @@ synthetic-tests:
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s 'tag:e2e-tests'
 {{< /code-block >}}
 
-### Run tests using variable overrides
+### 変数のオーバーライドを使ったテストの実行
 
-If you have different test users or data specific to your CI/CD environment, you can override these variables with the `-v` command. For more information, see the Synthetics command](https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics) in the `datadog-ci` NPM package.
+もし、CI/CD 環境に固有のテストユーザーやデータがある場合は、`-v` コマンドでこれらの変数をオーバーライドすることができます。詳しくは、NPM パッケージ `datadog-ci` の [Synthetics コマンド](https://github.com/DataDog/datadog-ci/tree/master/src/commands/synthetics)を参照してください。
 
 {{< code-block lang="yaml" >}}
 stages: 
@@ -67,11 +67,11 @@ synthetic-tests:
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" -s 'tag:e2e-tests' -v PASSWORD="$PASSWORD"
 {{< /code-block >}}
 
-## Advanced configuration
+## 高度なコンフィギュレーション
 
-### Run tests using a custom configuration file
+### カスタムコンフィギュレーションファイルを使ったテストの実行
 
-Add a custom `config.json` file to your pipeline repository and access it in your pipeline configuration.
+カスタム `config.json` ファイルをパイプラインリポジトリに追加し、パイプラインの構成でアクセスします。
 
 {{< code-block lang="yaml" >}}
 stages: 
@@ -83,18 +83,18 @@ synthetic-tests:
     - datadog-ci synthetics run-tests --apiKey "$DATADOG_API_KEY" --appKey "$DATADOG_APP_KEY" --config synthetics_global.json -f synthetic_test.json
 {{< /code-block >}}
 
-### Test output
+### テスト出力
 
-This example demonstrates the pipeline has identified the configuration file and is running the test:
+この例では、パイプラインがコンフィギュレーションファイルを識別し、テストを実行していることを示しています。
 
-{{< img src="synthetics/cicd_integrations/gitlab/synthetic_test_run.png" alt="A Synthetic test running in GitLab" style="width:100%;" >}}
+{{< img src="synthetics/cicd_integrations/gitlab/synthetic_test_run.png" alt="GitLab で実行する Synthetic テスト" style="width:100%;" >}}
 
-A successful test output returns the following in GitLab:
+テスト出力に成功すると、GitLab で次のように返されます。
 
-{{< img src="synthetics/cicd_integrations/gitlab/successful_test_run.png" alt="A successful Synthetic test run result in a GitLab pipeline" style="width:100%;" >}}
+{{< img src="synthetics/cicd_integrations/gitlab/successful_test_run.png" alt="GitLab パイプラインでの Synthetic テスト実行結果の成功例" style="width:100%;" >}}
 
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

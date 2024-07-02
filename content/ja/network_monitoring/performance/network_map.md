@@ -18,72 +18,72 @@ further_reading:
       text: Collect your Network Data with the Datadog Agent.
 ---
 
-## Overview
+## 概要
 
-The [network map][1] provides a topology view of your network to help you visualize network partitions, dependencies, and bottlenecks. By consolidating network data into a directional map, this page can be used to cut through the noise and isolate problematic areas.
+[ネットワークマップ][1]では、ネットワークのトポロジーを表示することにより、ネットワークのパーティション、依存関係、ボトルネックを可視化できます。ネットワークデータを方向性マップに統合できるため、このページを使用して不要な情報をカットし、問題が疑われる領域だけに注目することができます。
 
-{{< img src="network_performance_monitoring/network_map/network_map_3.png" alt="network_map" >}}
+{{< img src="network_performance_monitoring/network_map/network_map_3.png" alt="ネットワークマップ" >}}
 
-## Setup
+## セットアップ
 
-The network map visualizes data collected by the Datadog Agent automatically. Once installed, no extra steps are necessary.
+ネットワークマップには、Datadog Agent により収集されたデータが自動的に表示されます。インストールさえすれば、あとは何も必要ありません。
 
-## Usage
+## 使用方法
 
-Select the **Map** tab to configure your network map:
+**Map** タブを選択し、以下の手順でネットワークマップを構成します。
 
-{{< img src="network_performance_monitoring/network_map/network_map_search.png" alt="Network map page search bar" >}}
+{{< img src="network_performance_monitoring/network_map/network_map_search.png" alt="ネットワークマップページの検索バー" >}}
 
-1. Choose the tag you want your **Nodes** to represent with the first selector at the top of the page. Available tags are the same as those offered in the network page.
+1. ページの最上部にある最初のセレクターで、表示する*ノード**のタグを選択します。ネットワークページで使用可能なものと同じタグを選択できます。
 
-    {{< img src="network_performance_monitoring/network_map/network_map_search_additional_filter.png" alt="Network map page search bar" >}}
+    {{< img src="network_performance_monitoring/network_map/network_map_search_additional_filter.png" alt="ネットワークマップページの検索バー" >}}
 
-    - If there are too many nodes, a second tag is automatically added to the grouping. You can change the tag in the **By** dropdown menu. See [Clustering](#map-clusters) more information.
-2. Select the metric you want your **Edges** to represent:
+    - ノード数が多すぎる場合は、2 つ目のタグが自動的にグループ分けに追加されます。タグは **By** ドロップダウンメニューで変更できます。詳しくは、[クラスター化](#map-clusters)の項を参照してください。
+2. **エッジ** について表示するメトリクスを以下から選択します。
 
-    - Throughput sent
-    - Throughput received
-    - TCP Retransmits
+    - 送信スループット
+    - 受信スループット
+    - TCP 再送回数
     - TCP Latency
     - TCP Jitter
-    - Established Connnections
-    - Closed Connections
+    - 確立された接続の数
+    - クローズされた接続の数
 
-3. Filter the connections you want to display. You can choose whether or not to:
+3. 表示するコネクションをフィルタリングします。以下を選択できます。
 
-    - Filter traffic to a particular environment, namespace, or any other tag(s)
-    - Filter your tags based on a fuzzy string match.
-      {{< img src="network_performance_monitoring/network_map/filtering_npm_map_search.mp4" alt="Filtering network map with search" video="true" >}}
+    - 環境、ネームスペース、その他のタグを指定してトラフィックをフィルタリングするかどうか。
+    - 文字列のファジーマッチに基づいてタグをフィルタリングするかどうか。
+      {{< img src="network_performance_monitoring/network_map/filtering_npm_map_search.mp4" alt="ネットワークマップを検索でフィルタリング" video="true" >}}
 
-    - **Show unresolved traffic**.
-    - Hide network traffic outside a specified percentile range of the active network metric.
-        {{< img src="network_performance_monitoring/network_map/filtering_network_map.mp4" alt="Filtering network map flows" video="true" width="50%" >}}
+    - **未解決のトラフィックを表示するかどうか**。
+    - アクティブなネットワークメトリクスの指定されたパーセンタイル範囲外にある、ネットワークトラフィックを非表示にするかどうか。
+        {{< img src="network_performance_monitoring/network_map/filtering_network_map.mp4" alt="ネットワークマップのフローのフィルタリング" video="true" width="50%" >}}
 
-## Inspection
+## 検査
 
-Hovering over a node highlights it and animates the directionality of the network traffic it sends and receives:
+ノードにマウスを合わせると、ノードがハイライト表示され、ネットワークの送受信トラフィックはその方向が動く点線で表示されます。
 
-{{< img src="network_performance_monitoring/network_map/network_map_highlight.mp4" alt="Network Map" video="true" width="70%" >}}
+{{< img src="network_performance_monitoring/network_map/network_map_highlight.mp4" alt="ネットワークマップ" video="true" width="70%" >}}
 
-Click on a node and select _Inspect_ from the menu to contextualize it within the larger network:
+ノードをクリックし、メニューから _Inspect_ を選択すると、ネットワークを拡大したコンテキストでノードを表示できます。
 
-{{< img src="network_performance_monitoring/network_map/network_entity_zoom.mp4" alt="Network entity zoom" video="true" width="70%">}}
+{{< img src="network_performance_monitoring/network_map/network_entity_zoom.mp4" alt="ネットワークエンティティの拡大" video="true" width="70%">}}
 
-## Map clusters
+## マップクラスター
 
-For complex networks, the map's query editor includes additional grouping fields. This enables you to render datasets that would otherwise have too many nodes to show at once on the map. Using the additional grouping fields also improves the performance of high cardinality queries.
+マップのクエリエディターには、複雑なネットワークで使えるグループ化用のフィールドが追加で用意されています。これにより、ノード数が多すぎて通常はマップ上に一度に表示できないようなデータセットをレンダリングできます。また、追加のグループ化用フィールドを使用することで、カーディナリティの高いクエリのパフォーマンスを改善することもできます。
 
-{{< img src="network_performance_monitoring/network_map/network_map_search_additional_filter.png" alt="Network map page search bar" >}}
+{{< img src="network_performance_monitoring/network_map/network_map_search_additional_filter.png" alt="ネットワークマップページの検索バー" >}}
 
-{{< img src="network_performance_monitoring/network_map/network_map_3.png" alt="network_map" >}}
+{{< img src="network_performance_monitoring/network_map/network_map_3.png" alt="ネットワークマップ" >}}
 
-Clustering adds an additional dimension for grouping the nodes in the map. Large maps are automatically clustered to improve load time and readability of the map. To view the nodes within a cluster, click the cluster to expand it. To collapse the cluster, click the gray area surrounding the nodes.
+クラスター化により、マップ内のノードがもう一つ別の次元でグループ化されます。大規模なマップは自動的にクラスター化され、ロード時間と可読性が向上します。クラスター内のノードを表示するには、クラスターをクリックして展開表示させます。クラスターを折りたたむには、ノードの周りのグレーの領域をクリックします。
 
-A red border around a cluster indicates that at least one alerting monitor carries a tag that matches the tag by which the nodes are grouped. For example, if the map is grouped by service, then the map looks for monitors with the tag `service:<nodeName>`. If the monitor is in an alert state, the map outlines any clusters containing `<nodeName>` in red.  
+クラスターを囲む赤色の枠線は、ノードのグループ化に使用されるタグと一致するタグが設定されたモニターの少なくとも 1 つで、アラートが発生していることを示します。例えば、マップがサービス単位でグループ化される場合、マップは  `service:<nodeName>` のタグが設定されたモニターを探します。該当のモニターがアラート状態の場合、マップは `<nodeName>` が含まれるクラスターを赤色の枠線で囲みます。
 
-{{< img src="network_performance_monitoring/network_map/expanded_network_cluster.png" alt="expanded network cluster map view" >}}
+{{< img src="network_performance_monitoring/network_map/expanded_network_cluster.png" alt="ネットワーククラスターマップの展開表示" >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

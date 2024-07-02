@@ -1,7 +1,7 @@
 ---
 integration_title: VMware Tanzu Application Service
 name: vmware_tanzu_application_service
-custom_kind: integration
+custom_kind: インテグレーション
 aliases:
     - /integrations/cloud_foundry/
     - /integrations/pivotal_platform/
@@ -44,7 +44,7 @@ There are three main components for the VMware Tanzu Application Service integra
 
 Use the [VMware Tanzu installation and configuration][4] guide to install the integration through the Tanzu Ops Manager. For manual setup steps, read the [Monitor your applications][5] section in the manual setup guide.
 
-### Configuration
+### 構成
 
 #### Metric collection
 
@@ -117,7 +117,7 @@ If the connection fails to establish and log collection does not start, an event
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="An event in Datadog with the title Log endpoint cannot be reached - Log collection not started and a message stating that a TCP connection could not be established" >}}
 
-### Tags
+### タグ
 
 In order to add custom tags to your application, set the `DD_TAGS` environment variable through the `manifest.yml` file or the CF CLI command:
 
@@ -141,9 +141,9 @@ You can use [DogStatsD][10] to send custom application metrics to Datadog. See [
 
 Use the [VMware Tanzu installation and configuration][13] guide to install the integration through the Tanzu Ops Manager. For manual setup steps, read the [Monitor your VMware Tanzu Application Service cluster][14] section in the manual setup guide.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The following metrics are sent by the Datadog Firehose Nozzle and are prefixed with `cloudfoundry.nozzle`. The Datadog Agent sends metrics from any Agent checks you configure in the Director runtime configuration, and [system][15], [network][16], [disk][17], and [NTP][18] metrics by default.
 

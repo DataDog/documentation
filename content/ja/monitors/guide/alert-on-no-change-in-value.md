@@ -11,29 +11,29 @@ further_reading:
   text: Configure your monitor notifications
 ---
 
-A simple way to trigger an alert when a metric value does not change over a set period of time is to start by using the `diff()` function on your query. This will produce the delta values from consecutive data points.
+メトリクス値が設定された期間にわたって変化しないときにアラートをトリガーする簡単な方法は、クエリで `diff()` 関数を使用して開始することです。これにより、連続するデータポイントからデルタ値が生成されます。
 
 * `diff(avg:system.mem.free{*})`
 
-Next, apply the abs() function to take the absolute value of these deltas.
+次に、abs() 関数を適用して、これらのデルタの絶対値を取得します。
 
 * `abs(diff(avg:system.mem.free{*}))`
 
-These functions can be applied to your query in the UI.
+これらの関数は UI のクエリに適用できます。
 
-{{< img src="monitors/guide/alert_value_difference.png" alt="Apply diff function through Sigma icon > Rate > Value difference" >}}
+{{< img src="monitors/guide/alert_value_difference.png" alt="シグマアイコン > Rate > Value difference から差分関数を適用" >}}
 
-Alternatively, your complex query can be manually entered in the 'edit monitor' UI, via the Source tab (or applied programmatically via the [API][1]). See image below.
+または、複雑なクエリを 'edit monitor' UI に手動で入力するか、[API][1] を介してプログラムで適用することもできます。下の画像を参照してください。
 
-For [alert conditions][2] in the metric monitor itself, configure as follows:
+メトリクスモニター自体の[アラート条件][2]については、次のように構成します。
 
-* Select threshold alert
-* Set the "Trigger when the metric is..." dropdown selector to **below** or **equal to**
-* Set the "Alert Threshold" field to 0 (zero)
+* しきい値アラートを選択します
+* "Trigger when the metric is..." ドロップダウンセレクターを **below** または **equal to** に設定します
+* "Alert Threshold" フィールドを 0 (ゼロ) に設定します
 
-This configuration will trigger an alert event when no change in value has been registered over the selected timeframe.
+このコンフィギュレーションでは、選択した時間枠で値の変更が登録されていない場合にアラートイベントがトリガーされます。
 
-Other [alert conditions/options][2] can be set to preference. Your monitor's UI configuration should end up looking something like this:
+他の[アラート条件/オプション][2]を設定することもできます。モニターの UI コンフィギュレーションは、次のようになります。
 
 {{< img src="monitors/faq/zero_alert.png" alt="zero_alert" >}}
 

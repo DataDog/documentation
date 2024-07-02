@@ -4,7 +4,7 @@
 - cloud
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon S3 Storage Lens metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_s3_storage_lens"
@@ -33,9 +33,9 @@ Amazon S3 Storage Lens provides a single view of usage and activity across your 
 
 Enable this integration to see all your S3 Storage Lens metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -47,21 +47,21 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
 
 **Note:** S3 Storage Lens metrics are daily metrics and are published to CloudWatch once per day. 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_s3_storage_lens" >}}
 
 
-### Events
+### イベント
 
 The Amazon S3 Storage Lens integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon S3 Storage Lens integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

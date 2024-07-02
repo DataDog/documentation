@@ -3,24 +3,24 @@
 - "collaboration"
 - "incidents"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Generate PagerDuty alerts from Datadog metrics and events."
+"description": "Datadog のメトリクスとイベントから PagerDuty アラートを生成。"
 "doc_link": "https://docs.datadoghq.com/integrations/pagerduty/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/mobile-incident-management-datadog/"
-  "tag": "Blog"
-  "text": "Manage incidents on the go with the Datadog mobile app"
+  "tag": "ブログ"
+  "text": "Datadog モバイルアプリで外出先からインシデントを管理"
 - "link": "https://www.datadoghq.com/blog/how-pagerduty-deploys-safely-with-datadog/"
-  "tag": "Blog"
-  "text": "How PagerDuty deploys safely with Datadog"
+  "tag": "ブログ"
+  "text": "Datadog で PagerDuty を安全にデプロイする方法"
 - "link": "https://docs.datadoghq.com/tracing/service_catalog/integrations/#pagerduty-integration"
-  "tag": "Blog"
-  "text": "Using Integrations with Service Catalog"
+  "tag": "ブログ"
+  "text": "サービスカタログとのインテグレーションを利用する"
 - "link": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_pagerduty"
   "tag": "Terraform"
-  "text": "Create and manage the Datadog Pagerduty integration with Terraform"
+  "text": "Terraform による Datadog Pagerduty インテグレーションの作成と管理"
 "git_integration_title": "pagerduty"
 "has_logo": true
 "integration_id": ""
@@ -47,7 +47,7 @@ Connect PagerDuty to Datadog in order to:
 - See incidents and escalations in your stream as they occur
 - Get a daily reminder of who's on-call
 
-## Setup
+## セットアップ
 
 See the [Datadog Integration Guide][1] from Pagerduty.
 
@@ -55,21 +55,21 @@ See the [Datadog Integration Guide][1] from Pagerduty.
 Once you have Pagerduty integrated, you can check out Datadog's custom Pagerduty Incident Trends.
 {{< /site-region >}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The PagerDuty integration does not include any metrics.
 
-### Events
+### イベント
 
 Your PagerDuty Triggered/Resolved events appear in the [Events Explorer][2].
 
-### Service Checks
+### サービスチェック
 
 The PagerDuty integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 ### Send a notification to a specific PagerDuty service
 

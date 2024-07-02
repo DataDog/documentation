@@ -17,55 +17,55 @@ aliases:
   - /tracing/profiler/enabling/python/
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
 
-## Requirements
+## 要件
 
-For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+すべての言語におけるランタイムとトレーサーの最小バージョンと推奨バージョンの要約については、[サポートされている言語とトレーサーのバージョン][14]をお読みください。
 
 The Datadog Profiler requires Python 2.7+.
 
 The following profiling features are available depending on your Python version. For more details, read [Profile Types][8]:
 
-|      Feature         | Supported Python versions          |
+|      機能         | サポート対象の Python バージョン          |
 |----------------------|------------------------------------|
-| Wall time profiling  | Python 2.7+                      |
-| CPU time profiling   | Python 2.7+ on POSIX platforms   |
-| Exception profiling  | Python 3.7+ on POSIX platforms   |
-| Lock profiling       | Python 2.7+                      |
-| Memory profiling     | Python 3.5+                      |
+| Wall Time プロファイリング  | Python 2.7 以降                      |
+| CPU タイムプロファイリング   | POSIX プラットフォームの Python 2.7 以降   |
+| 例外プロファイリング  | POSIX プラットフォームの Python 3.7 以降   |
+| ロックプロファイリング       | Python 2.7 以降                      |
+| メモリプロファイリング     | Python 3.5 以降                      |
 
-The installation requires pip version 18 or above.
+インストールには pip バージョン 18 以上が必要です。
 
-The following profiling features are available in the following minimum versions of the `dd-trace-py` library:
+以下のプロファイリング機能は、`dd-trace-py` ライブラリの以下の最小バージョンで利用可能です。
 
-| Feature                  | Required `dd-trace-py` version |
+| 機能                  | 必要な `dd-trace-py` のバージョン |
 |--------------------------|--------------------------------|
-| [Code Hotspots][12]      | 0.44.0+                        |
-| [Endpoint Profiling][13] | 0.54.0+                        |
+| [Code Hotspots][12]      | 0.44.0 以降                        |
+| [Endpoint Profiling][13] | 0.54.0 以降                        |
 
-## Installation
+## インストール
 
 Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
-Install `ddtrace`, which provides both tracing and profiling functionalities:
+トレーシングとプロファイリング機能の双方を提供する `ddtrace` をインストールします。
 
 ```shell
 pip install ddtrace
 ```
 
-**Note**: Profiling requires the `ddtrace` library version 0.40+.
+**注**: プロファイリングには `ddtrace` ライブラリのバージョン 0.40+ が必要です。
 
-If you are using a platform where `ddtrace` binary distribution is not available, first install a development environment.
+`ddtrace` のバイナリディストリビューションに対応していないプラットフォームを使用している場合は、まず開発環境をインストールしてください。
 
-For example, on Alpine Linux, this can be done with:
+たとえば、Alpine Linux では以下を実行します。
 ```shell
 apk install gcc musl-dev linux-headers
 ```
 
-## Usage
+## 使用方法
 
-To automatically profile your code, set the `DD_PROFILING_ENABLED` environment variable to `true` when you use `ddtrace-run`:
+コードを自動的にプロファイリングするには、`ddtrace-run` を使用する際に、`DD_PROFILING_ENABLED` 環境変数を `true` に設定します。
 
     DD_PROFILING_ENABLED=true \
     DD_ENV=prod \
@@ -73,59 +73,54 @@ To automatically profile your code, set the `DD_PROFILING_ENABLED` environment v
     DD_VERSION=1.0.3 \
     ddtrace-run python app.py
 
-See [Configuration](#configuration) for more advanced usage.
+より高度な使い方については、[構成](#configuration)を参照してください。
 
 Optionally, set up [Source Code Integration][4] to connect your profiling data with your Git repositories.
 
 After a couple of minutes, visualize your profiles on the [Datadog APM > Profiler page][5].
 
-If you want to manually control the lifecycle of the profiler, use the `ddtrace.profiling.Profiler` object:
+プロファイラーのライフサイクルを手動で制御するには、`ddtrace.profiling.Profiler` オブジェクトを使用します。
 
 ```python
 from ddtrace.profiling import Profiler
 
 prof = Profiler(
-    env="prod",  # if not specified, falls back to environment variable DD_ENV
-    service="my-web-app",  # if not specified, falls back to environment variable DD_SERVICE
-    version="1.0.3",   # if not specified, falls back to environment variable DD_VERSION
+    env="prod",  # 指定しない場合は、環境変数 DD_ENV にフォールバックします
+    service="my-web-app",  # 指定しない場合は、環境変数 DD_SERVICE にフォールバックします
+    version="1.0.3",   # 指定しない場合は、環境変数 DD_VERSION にフォールバックします
 )
-prof.start()  # Should be as early as possible, eg before other imports, to ensure everything is profiled
+prof.start()  # できるだけ早く、例えば他のインポートの前に、すべてのプロファイルを確保する必要があります
 ```
 
-## Caveats
+## 注意事項
 
-When your process forks using `os.fork`, the profiler needs to be started in
-the child process. In Python 3.7+, this is done automatically. In Python < 3.7,
-you need to manually start a new profiler in your child process:
+プロセスが `os.fork` を使ってフォークするとき、プロファイラーは子プロセスで起動される必要があります。Python 3.7+ では、これは自動的に行われます。Python &lt; 3.7 では、子プロセスで新しいプロファイラーを手動で開始する必要があります。
 
 ```python
-# For ddtrace-run users, call this in your child process
-ddtrace.profiling.auto.start_profiler()  # Should be as early as possible, eg before other imports, to ensure everything is profiled
+# ddtrace-run ユーザーの場合は、子プロセスでこれを呼び出します
+ddtrace.profiling.auto.start_profiler()  # できるだけ早く、例えば他のインポートより前に、すべてのプロファイルを確保する必要があります
 
-# Alternatively, for manual instrumentation,
-# create a new profiler in your child process:
+# また、手動でインスツルメンテーションを行う場合は、
+# 子プロセスに新しいプロファイラーを作成します。
 from ddtrace.profiling import Profiler
 
 prof = Profiler(...)
-prof.start()  # Should be as early as possible, eg before other imports, to ensure everything is profiled
+prof.start()  # できるだけ早く、例えば他のインポートより前に、すべてのプロファイルを確保する必要があります
 ```
 
-## Configuration
+## 構成
 
 You can configure the profiler using the [environment variables][6].
 
-### Code provenance
+### コードプロベナンス
 
-The Python profiler supports code provenance reporting, which provides
-insight into the library that is running the code. While this is
-disabled by default, you can turn it on by setting
-`DD_PROFILING_ENABLE_CODE_PROVENANCE=1`.
+Python プロファイラーはコードプロベナンスレポートをサポートしており、コードを実行しているライブラリについての洞察を得ることができます。この機能はデフォルトでは無効になっていますが、`DD_PROFILING_ENABLE_CODE_PROVENANCE=1` を設定することで有効にすることができます。
 
-## Not sure what to do next?
+## 次のステップ
 
-The [Getting Started with Profiler][7] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+[プロファイラーの概要][7]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

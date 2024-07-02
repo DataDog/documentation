@@ -20,7 +20,7 @@
   "sales_email": info@datadoghq.com
   "support_email": help@datadoghq.com
 "categories": []
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/datadog_operator/README.md"
 "display_on_public_website": true
@@ -59,27 +59,27 @@
 
 This check monitors the [Datadog Operator][1] through the Datadog Agent.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Please see the documentation for [Datadog Operator][1].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "datadog_operator" >}}
 
 
-### Events
+### イベント
 
 The Datadog Operator integration does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "datadog_operator" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

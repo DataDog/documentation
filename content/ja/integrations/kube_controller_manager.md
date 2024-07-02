@@ -27,7 +27,7 @@
 - containers
 - kubernetes
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md"
 "display_on_public_website": true
@@ -73,14 +73,14 @@ This check monitors the [Kubernetes Controller Manager][2], part of the Kubernet
 
 **Note**: This check does not collect data for Amazon EKS clusters, as those services are not exposed.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Kubernetes Controller Manager check is included in the [Datadog Agent][3] package, so you do not
 need to install anything else on your server.
 
-### Configuration
+### 構成
 
 1. Edit the `kube_controller_manager.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your kube_controller_manager performance data. See the [sample kube_controller_manager.d/conf.yaml][4] for all available configuration options.
 
@@ -95,21 +95,21 @@ This integration requires access to the controller manager's metric endpoint. To
 
 [Run the Agent's `status` subcommand][6] and look for `kube_controller_manager` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "kube_controller_manager" >}}
 
 
-### Events
+### イベント
 
 The Kubernetes Controller Manager check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "kube_controller_manager" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog Support][9].
 

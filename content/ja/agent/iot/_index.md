@@ -6,68 +6,68 @@ further_reading:
     text: Getting Started with the Agent
 ---
 
-## Overview
+## 概要
 
-The Datadog IoT Agent is a version of the Agent optimized for monitoring IoT devices and embedded applications. Customers use the IoT Agent to monitor a wide variety of devices from digital displays to security devices running image detection algorithms.
+Datadog IoT Agent は、IoT デバイスおよび埋め込み型アプリケーションの監視に最適化された、Agent の バージョンです。IoT Agent を使用すると、デジタルディスプレイからセキュリティデバイスまで、画像検知アルゴリズムを実行するさまざまなデバイスを監視することができます。
 
-## Capabilities
+## 機能
 
-The IoT Agent includes the following system checks. Configuration for IoT devices is identical to other types of hosts.
+IoT Agent には、以下のシステムチェックが含まれています。IoT デバイスのコンフィギュレーションは、ほかのタイプのホストの場合と同様です。
 
-- [System][1] (includes CPU, IO, load, memory, swap, and uptime)
-- [Disk][2]
-- [Network][3]
+- [システム][1] (CPU、IO、負荷、メモリ、スワップ、アップタイムを含む)
+- [ディスク][2]
+- [ネットワーク][3]
 - [Systemd][4]
 - [NTP][5]
 
-The IoT Agent also supports:
+さらに、IoT Agent は以下にも対応します。
 
-- Custom metric collection using an embedded [DogStatsD][6] server
-- Log collection using [tailing files][7], [TCP/UDP][8], and [journald][9]
+- 埋め込み [DogStatsD][6] サーバーを使用したカスタムメトリクスの収集
+- [ファイルテーリング][7]、[TCP/UDP][8]、[journald][9] を使用したログ収集
 
-The IoT Agent does not include the Python interpreter and other integrations pre-packaged with the standard Agent. It also doesn't support tracing for APM, live process monitoring, or network performance monitoring.
+IoT Agent には、Python インタープリターおよび標準 Agent にパッケージ化されているその他のインテグレーションは含まれません。また、APM のトレース、ライブプロセスモニタリング、ネットワークパフォーマンスモニタリングもサポートしていません。
 
-## Setup
+## セットアップ
 
-### Requirements
+### 要件
 
-The IoT Agent is available as DEB and RPM packages for Linux devices running on x64, arm64 (ARMv8), and ARMv7 architectures.
+IoT Agent は、x64、arm64 (ARMv8)、ARMv7 アーキテクチャで実行中の Linux デバイスに DEB および RPM パッケージとしてご利用いただけます。
 
-#### Resources
+#### リソース
 
-IoT devices are typically more resource constrained than cloud infrastructure hosts. The IoT Agent is built to have a minimal footprint and consume minimal network bandwidth.
+通常、IoT デバイスはクラウドインフラストラクチャーホストより多くのリソース制限があります。IoT Agent は、最低限のフットプリントで最小限のネットワーク帯域幅を消費するよう設計されています。
 
-Exact resource requirements depend on usage. Datadog found the following when testing the IoT Agent (v7.20) internally:
+具体的なリソース要件は、使用状況により異なります。Datadog における IoT Agent (v7.20) 内部テストでは、以下がわかっています。
 
-- CPU: 0.5% (on a VM with 2 Intel Xeon VCPUs)
-- Memory: 36 MB
-- Network bandwidth: 237 bps up / 79 bps down
-- Disk: 63 MB
+- CPU: 0.5% (2 Intel Xeon VCPU を使用した VM 上)
+- メモリ: 36 MB
+- ネットワーク帯域幅: 237 bps アップ / 79 bps ダウン
+- ディスク: 63 MB
 
-### Installation
+### インストール
 
-#### Automatic
+#### 自動
 
-To automatically download and install the correct IoT Agent for your operating system and chipset architecture, use the following command:
+ご使用中のオペレーティングシステムおよびチップセットアーキテクチャに適切な IoT Agent を自動的にダウンロードしてインストールするには、以下のコマンドを使用します。
 
 ```shell
 DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_AGENT_FLAVOR=datadog-iot-agent bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-#### Manual
+#### 手動
 
 {{< tabs >}}
 {{% tab "DEB" %}}
 
-To manually install the IoT Agent on Debian-based operating systems, run the following commands:
+Debian ベースのオペレーティングシステムに IoT Agent を手動でインストールするには、以下のコマンドを実行します。
 
-1. Update `apt` and install `apt-transport-https` to download through HTTPS and `curl` and `gnupg` to obtain the signing keys:
+1. `apt` を更新し、`apt-transport-https` をインストールして HTTPS 経由でダウンロードし、`curl` と `gnupg` をインストールして署名キーを取得します。
     ```bash
     sudo apt-get update
     sudo apt-get install apt-transport-https curl gnupg
     ```
 
-2. Set up the Datadog deb repo on your system and import Datadog's apt keys:
+2. システム上に Datadog deb リポジトリをセットアップし、Datadog の APT キーをインポートします。
     ```bash
     sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable 7' > /etc/apt/sources.list.d/datadog.list"
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
@@ -78,29 +78,29 @@ To manually install the IoT Agent on Debian-based operating systems, run the fol
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
-3. If running Ubuntu 14 or earlier or Debian 8 or earlier, copy the keyring to `/etc/apt/trusted.gpg.d`:
+3. Ubuntu 14 以前または Debian 8 以前を実行している場合は、キーリングを `/etc/apt/trusted.gpg.d` にコピーします。
 
    ```shell
    sudo cp /usr/share/keyrings/datadog-archive-keyring.gpg /etc/apt/trusted.gpg.d
    ```
 
-4. Update `apt` and install the IoT Agent:
+4. `apt` を更新し、IoT Agent をインストールします。
     ```shell
     sudo apt-get update
     sudo apt-get install datadog-iot-agent datadog-signing-keys
     ```
 
-5. Copy the example config and plug in your API key:
+5. 構成サンプルをコピーし、適切な API キーを指定します。
     ```shell
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-6. Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
+6. Datadog サイトを {{< region-param key="dd_site" code="true" >}} に設定します。デフォルトは `datadoghq.com`。
     ```shell
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
     ```
 
-7. Start the IoT Agent:
+7. IoT Agent を起動します。
     ```shell
     sudo systemctl restart datadog-agent.service
     ```
@@ -108,9 +108,9 @@ To manually install the IoT Agent on Debian-based operating systems, run the fol
 {{% /tab %}}
 {{% tab "RPM" %}}
 
-To manually install the IoT Agent on RPM-based operating systems, run the following commands:
+RPM ベースのオペレーティングシステムに IoT Agent を手動でインストールするには、以下のコマンドを実行します。
 
-1. Set up Datadog's Yum repo on your system by creating `/etc/yum.repos.d/datadog.repo` with the contents:
+1. 以下の内容で `/etc/yum.repos.d/datadog.repo` を作成して、システム上に Datadog の Yum リポジトリをセットアップします。
     ```
     [datadog]
     name = Datadog, Inc.
@@ -124,30 +124,30 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
-    **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on RHEL/CentOS 8.1.
+   **注**: [dnf にバグ][1]が発生しているため、RHEL/CentOS 8.1 では `repo_gpgcheck=1` の代わりに `repo_gpgcheck=0` を使用してください。
 
-    The `baseurl` is dependent on your host OS:
+    `baseurl` は、ホスト OS に依存します。
     - x86_64 - `https://yum.datadoghq.com/stable/7/x86_64/`
     - arm64 - `https://yum.datadoghq.com/stable/7/aarch64/`
     - ARMv7 - `https://yum.datadoghq.com/stable/7/armv7hl/`
 
-2. Update your local yum repo and install the Agent:
+2. ローカルの Yum リポジトリを更新し、Agent をインストールします。
     ```shell
     sudo yum makecache
     sudo yum install datadog-iot-agent
     ```
 
-3. Copy the example config and plug in your API key:
+3. 構成サンプルをコピーし、適切な API キーを指定します。
     ```shell
     DD_API_KEY=<YOUR_DD_API_KEY> ; sudo sh -c "sed 's/api_key:.*/api_key:$DD_API_KEY/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
     ```
 
-4. Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Defaults to `datadoghq.com`.
+4. Datadog サイトを {{< region-param key="dd_site" code="true" >}} に設定します。デフォルトは `datadoghq.com`。
     ```shell
     sudo sh -c "sed 's/# site:.*/site: <YOUR_DD_SITE>/' /etc/datadog-agent/datadog.yaml > /etc/datadog-agent/datadog.yaml.new && mv /etc/datadog-agent/datadog.yaml.new /etc/datadog-agent/datadog.yaml"
     ```
 
-5. Start the IoT Agent:
+5. IoT Agent を起動します。
     ```shell
     sudo systemctl restart datadog-agent.service
     ```
@@ -158,28 +158,28 @@ To manually install the IoT Agent on RPM-based operating systems, run the follow
 
 ## CLI
 
-The IoT Agent supports the same [CLI commands][10] as the standard Agent.
+IoT Agent は、標準 Agent と同じ [CLI コマンド][10]をサポートします。
 
-## Uninstall
+## アンインストール
 
 ```shell
 sudo apt-get remove datadog-iot-agent -y
 ```
 
-This command removes the Agent, but does not remove:
+このコマンドでは、Agent は削除されますが以下は削除されません。
 
-* The `datadog.yaml` configuration file
-* User-created files in the `/etc/datadog-agent` configuration folder
-* User-created files in the `/opt/datadog-agent` folder
-* The `dd-agent` user
+* `datadog.yaml` コンフィギュレーションファイル
+* `/etc/datadog-agent` コンフィギュレーションフォルダ内のユーザー作成ファイル
+* `/opt/datadog-agent` フォルダ内のユーザー作成ファイル
+* `dd-agent` ユーザー
 
-If you also want to remove those elements, use this command instead:
+以上の要素も削除したい場合は、次のコマンドを使用します。
 
 ```shell
 sudo apt-get remove --purge datadog-iot-agent -y
 ```
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

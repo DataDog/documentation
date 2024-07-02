@@ -5,9 +5,9 @@
 - "aws"
 - "cloud"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track index utilization, successful request count, and more."
+"description": "インデックスの使用率、正常に完了したリクエストの数などを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/awscloudsearch/"
 "draft": false
 "git_integration_title": "amazon_cloudsearch"
@@ -30,9 +30,9 @@ Amazon CloudSearch is a managed service in the AWS Cloud that makes it simple an
 
 Enable this integration to see in Datadog all your CloudSearch metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -57,23 +57,23 @@ Configure Amazon CloudSearch to send logs either to a S3 bucket or to CloudWatch
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_cloudsearch" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The Amazon CloudSearch integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon CloudSearch integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

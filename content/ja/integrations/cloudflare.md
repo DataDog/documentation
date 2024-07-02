@@ -28,11 +28,11 @@
   "sales_email": info@datadoghq.com
   "support_email": help@datadoghq.com
 "categories":
-- metrics
+- モニター
 - log collection
 - caching
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -85,17 +85,17 @@ The integration works with [Datadog Cloud SIEM][2] to provide out-of-the-box thr
 
 Mitigate security threats more quickly with the included Workflow Automation blueprints, such as blocking an IP address or creating a case in Datadog.
 
-## Setup
+## セットアップ
 
 Before you begin, you need a [Datadog account][3], with an [API key][4], and access to [Cloudflare Logpush][5], which requires an Enterprise account plan. 
 
 When using a Cloudflare API token, ensure it has the **Zone** > **Zone** > **Read** and **Zone** > **Analytics** > **Read** permissions.
 
-### Installation
+### インストール
 
 Install the integration with the Datadog [Cloudflare integration tile][6].
 
-### Configuration
+### 構成
 
 1. Go to the **Configuration** tab inside the Datadog [Cloudflare integration tile][6].
 2. Enter the email addresses and API keys or token of the accounts you want to monitor. Your Cloudflare API key and API token are available in your Cloudflare account under **My profile** > **Api Tokens**.
@@ -213,13 +213,13 @@ If you install the Cloudflare integration pipeline, it automatically remaps cert
 3. Enter the Datadog API key you used to set-up your Datadog Cloudflare integration tile.
 4. After validating access, you should see "Ready to push!" under **Prove ownership**. Click `Push` to complete.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "cloudflare" >}}
 
 
-#### Permissions
+#### 権限
 Verify your Cloudflare API token has these permissions enabled:
 
 | Scope       | Permission         |   Status    |
@@ -228,19 +228,19 @@ Verify your Cloudflare API token has these permissions enabled:
 | Account     | Account Setting    |    Read     |
 | Account     | Worker Scripts     |    Read     |
 | Zone        | Zone               |    Read     |
-| Zone        | Analytics          |    Read     |
+| Zone        | 分析          |    Read     |
 | Zone        | Worker Routes      |    Read     |
 | Zone        | Load Balancers     |    Read     |
 
-### Events
+### イベント
 
 The Cloudflare integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Cloudflare integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][11].
 

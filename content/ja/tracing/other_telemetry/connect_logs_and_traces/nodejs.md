@@ -1,6 +1,5 @@
 ---
 title: Correlating Node.js Logs and Traces
-kind: documentation
 description: 'Connect your Node.js logs and traces to correlate them in Datadog.'
 code_lang: nodejs
 type: multi-code-lang
@@ -22,29 +21,29 @@ further_reading:
       text: Ease troubleshooting with cross product correlation.
 ---
 
-## Automatic injection
+## 自動挿入
 
-Enable injection with the environment variable `DD_LOGS_INJECTION=true` or by configuring the tracer directly:
+環境変数 `DD_LOGS_INJECTION=true` か、直接トレーサーを構成することで挿入を有効にします:
 
 ```javascript
-// This line must come before importing the logger.
+// この行は、ロガーをインポートする前に記述する必要があります。
 const tracer = require('dd-trace').init({
     logInjection: true
 });
 ```
 
-This enables automatic trace ID injection for `bunyan`, `paperplane`, `pino`, and `winston`.
+これにより、`bunyan`、`paperplane`、`pino`、`winston` の自動トレース ID 挿入が有効になります。
 
-If you haven't done so already, configure the Node.js tracer with `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`. This will provide the best
-experience for adding `env`, `service`, and `version` (see [Unified Service Tagging][1] for more details).
+まだの場合は、Node.js トレーサーを `DD_ENV`、`DD_SERVICE`、`DD_VERSION` で構成します。これは、
+`env`、`service`、`version` を追加する際のベストプラクティスです (詳細は、[統合サービスタグ付け][1]を参照)。
 
-**Note**: Automatic injection only works for logs formatted as JSON.
+**注**: 自動挿入が機能するのは JSON 形式のログのみです。
 
-## Manual injection
+## 手動挿入
 
-If you are using a logging library not supported for automatic injection but are using JSON format, it's possible to do manual injection directly in your code.
+自動挿入に対応していないロギングライブラリを使っているが、JSON 形式を使っている場合は、コード内で直接手動挿入を実行することができます。
 
-Example using `console` as the underlying logger:
+`console` を基底のロガーとして使う例:
 
 ```javascript
 const tracer = require('dd-trace');
@@ -67,7 +66,7 @@ class Logger {
 module.exports = Logger;
 ```
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

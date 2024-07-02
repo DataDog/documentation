@@ -35,7 +35,7 @@
 - "caching"
 - "data stores"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/cassandra/README.md"
 "display_on_public_website": true
@@ -48,7 +48,7 @@
 "manifest_version": "2.0.0"
 "name": "cassandra"
 "public_title": "Cassandra"
-"short_description": "Track cluster performance, capacity, overall health, and much more."
+"short_description": "クラスターのパフォーマンス、容量、全体的な健全性などを追跡"
 "supported_os":
 - "linux"
 - "windows"
@@ -56,14 +56,14 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Caching"
+  - "Category::キャッシュ"
   - "Category::Data Stores"
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Track cluster performance, capacity, overall health, and much more."
+  "description": "クラスターのパフォーマンス、容量、全体的な健全性などを追跡"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -73,44 +73,44 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Cassandra default dashboard][1]
+![Cassandra のデフォルトのダッシュボード][1]
 
-## Overview
+## 概要
 
-Get metrics from Cassandra in real time to:
+Cassandra からメトリクスをリアルタイムに取得すると、以下のことができます。
 
-- Visualize and monitor Cassandra states.
-- Be notified about Cassandra failovers and events.
+- Cassandra の状態を視覚化および監視できます。
+- Cassandra のフェイルオーバーとイベントの通知を受けることができます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Cassandra check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Cassandra nodes. It's recommended to use Oracle's JDK for this integration.
+Cassandra チェックは [Datadog Agent][2] パッケージに含まれています。Cassandra ノードに追加でインストールする必要はありません。このインテグレーションには、Oracle の JDK を使用することをお勧めします。
 
-**Note**: This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in [the status page][3]. You can specify the metrics you are interested in by editing the configuration below. To learn how to customize the metrics to collect see the [JMX documentation][4] for detailed instructions. If you need to monitor more metrics, contact [Datadog support][5].
+**注**: このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、[ステータスページ][3]に表示されます。以下で説明する構成を編集することで、関心があるメトリクスを指定できます。収集するメトリクスをカスタマイズする方法については、[JMX のドキュメント][4]で詳細な手順を参照してください。制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-### Configuration
+### 構成
 
-##### Metric collection
+##### メトリクスの収集
 
-1. The default configuration of your `cassandra.d/conf.yaml` file activate the collection of your [Cassandra metrics](#metrics). See the [sample cassandra.d/conf.yaml][6] for all available configuration options.
+1. `cassandra.d/conf.yaml` ファイルは、デフォルトの構成で、[Cassandra メトリクス](#metrics)の収集が有効になっています。使用可能なすべての構成オプションの詳細については、[サンプル cassandra.d/conf.yaml][6] を参照してください。
 
-2. [Restart the Agent][7].
+2. [Agent を再起動します][7]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-For containerized environments, follow the instructions on the [Kubernetes Log Collection][8] or [Docker Log Collection][9] pages.
+コンテナ環境の場合は、[Kubernetes Log Collection][8] または [Docker Log Collection][9] のページの指示に従ってください。
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `cassandra.d/conf.yaml` file to start collecting your Cassandra logs:
+2. Cassandra のログの収集を開始するには、次の構成ブロックを `cassandra.d/conf.yaml` ファイルに追加します。
 
    ```yaml
      logs:
@@ -125,68 +125,68 @@ For containerized environments, follow the instructions on the [Kubernetes Log C
               pattern: '[A-Z]+ +\[[^\]]+\] +\d{4}-\d{2}-\d{2}'
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment. See the [sample cassandra.d/conf.yaml][6] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル cassandra.d/conf.yaml][6] を参照してください。
 
-    To make sure that stacktraces are properly aggregated as one single log, a [multiline processing rule][10] can be added.
+    スタックトレースが単一のログとして適切に集計されるようにするために、[複数行の処理ルール][10]を追加できます。
 
-3. [Restart the Agent][7].
+3. [Agent を再起動します][7]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][3] and look for `cassandra` under the Checks section.
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `cassandra` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "cassandra" >}}
 
 
-### Events
+### イベント
 
-The Cassandra check does not include any events.
+Cassandra チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "cassandra" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-- [How to monitor Cassandra performance metrics][11]
-- [How to collect Cassandra metrics][12]
-- [Monitoring Cassandra with Datadog][13]
+- [Cassandra パフォーマンスメトリクスの監視方法][11]
+- [Cassandra メトリクスの収集方法][12]
+- [Datadog を使用した Cassandra の監視][13]
 
 
 
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-## Cassandra Nodetool Integration
+## Cassandra Nodetool インテグレーション
 
-![Cassandra default dashboard][14]
+![Cassandra デフォルトダッシュボード][14]
 
-## Overview
+## 概要
 
-This check collects metrics for your Cassandra cluster that are not available through [jmx integration][15]. It uses the `nodetool` utility to collect them.
+このチェックは [jmx インテグレーション][15] では取得できない Cassandra クラスターのメトリクスを収集します。これには `nodetool` ユーティリティを用います。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Cassandra Nodetool check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Cassandra nodes.
+Cassandra Nodetool チェックは [Datadog Agent][2] パッケージに含まれているので、Cassandra ノードに別途インストールする必要はありません。
 
-### Configuration
+### 構成
 
-Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Containerized](#containerized) section.
+ホスト上で実行されている Agent に対してこのチェックを構成するには、以下の手順に従ってください。コンテナ環境については、[コンテナ化](#containerized)セクションを参照してください。
 
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Host" xxx -->
 
-#### Host
+#### ホスト
 
-1. Edit the file `cassandra_nodetool.d/conf.yaml` in the `conf.d/` folder at the root of your [Agent's configuration directory][16]. See the [sample cassandra_nodetool.d/conf.yaml][17] for all available configuration options:
+1. [Agent のコンフィギュレーションディレクトリ][16]のルートにある `conf.d/` フォルダーの `cassandra_nodetool.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル cassandra_nodetool.d/conf.yaml][17] を参照してください。
 
    ```yaml
    init_config:
@@ -201,49 +201,49 @@ Follow the instructions below to configure this check for an Agent running on a 
          - "<KEYSPACE_2>"
    ```
 
-2. [Restart the Agent][7].
+2. [Agent を再起動します][7]。
 
-#### Log collection
+#### ログ収集
 
-Cassandra Nodetool logs are collected by the Cassandra integration. See the [log collection instructions for Cassandra][18].
+Cassandra Nodetool ログは Cassandra インテグレーションにより収集されます。[Cassandra のログ収集の手順][18]をご確認ください。
 
 <!-- xxz tab xxx -->
-<!-- xxx tab "Containerized" xxx -->
+<!-- xxx tab "コンテナ化" xxx -->
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, use the official [Prometheus exporter][19] in the pod, and then use Autodiscovery in the Agent to find the pod and query the endpoint.
+コンテナ環境では、ポッドに公式の [Prometheus エクスポーター][19]を使用し、Agent のオートディスカバリーでポッドを見つけ、エンドポイントをクエリします。
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
 
-### Validation
+### 検証
 
-[Run the Agent's `status` subcommand][3] and look for `cassandra_nodetool` under the Checks section.
+[Agent の `status` サブコマンドを実行][3]し、Checks セクションで `cassandra_nodetool` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "cassandra_nodetool" >}}
 
 
-### Events
+### イベント
 
-The Cassandra_nodetool check does not include any events.
+Cassandra_nodetool チェックには、イベントは含まれません。
 
-### Service Checks
-{{< get-service-checks-from-git "cassandra_nodetool" >}}
+### サービスチェック
+{{< get-service-checks-from-git "cassandra_nodetool" >}} 
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-- [How to monitor Cassandra performance metrics][11]
-- [How to collect Cassandra metrics][12]
-- [Monitoring Cassandra with Datadog][13]
+- [Cassandra パフォーマンスメトリクスの監視方法][11]
+- [Cassandra メトリクスの収集方法][12]
+- [Datadog を使用した Cassandra の監視][13]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/cassandra/images/cassandra_dashboard_2.png

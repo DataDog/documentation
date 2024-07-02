@@ -11,7 +11,7 @@
 - configuration & deployment
 - issue tracking
 - developer tools
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/flagsmith-rum/README.md"
 "display_on_public_website": true
@@ -62,7 +62,7 @@
 
 The Datadog Flagsmith RUM integration enriches your RUM data with your feature flags to provide visibility into performance monitoring and behavioral changes. Determine which users are shown a user experience and if it is negatively affecting the user's performance.
 
-## Setup
+## セットアップ
 
 Feature flag tracking is available in the RUM Browser SDK. For detailed set up instructions, visit the [Getting started with Feature Flag data in RUM][2] guide.
 
@@ -80,7 +80,7 @@ flagsmith.init({
 })
 ```
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? See the [Flagsmith documentation][3] or contact [Datadog Support][4].
 

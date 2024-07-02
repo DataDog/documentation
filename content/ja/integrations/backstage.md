@@ -22,7 +22,7 @@
   "support_email": oss@roadie.io
 "categories":
 - developer tools
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/backstage/README.md"
 "display_on_public_website": true
@@ -62,9 +62,9 @@
 
 [Backstage][1] is an open platform for building Developer Portals. This integration enables you to embed Datadog graphs and dashboards into your Backstage instance.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 1. Install the Datadog plugin into Backstage:
 
@@ -92,21 +92,21 @@ metadata:
 
 Open your Backstage instance Overview tab to confirm your Datadog dashboard or graph is rendered as expected.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Backstage integration does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 The Backstage integration does not include any service checks.
 
-### Events
+### イベント
 
 The Backstage integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Reach out to the [Backstage Community][4].
 

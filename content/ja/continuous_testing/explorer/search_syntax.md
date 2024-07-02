@@ -1,39 +1,40 @@
 ---
+title: Search Syntax
+kind: documentation
+description: Learn how to create a search query in the Synthetic Monitoring & Testing Results Explorer.
 aliases:
-- /ja/synthetics/explorer/search_syntax
-description: CI Results Explorer で検索クエリを作成する方法について説明します。
+  - /synthetics/explorer/search_syntax
 further_reading:
 - link: /continuous_testing/explorer
-  tag: ドキュメント
-  text: Synthetic Monitoring & Continuous Testing Explorer について
-title: 検索構文
+  tag: Documentation
+  text: Learn about the Synthetic Monitoring & Testing Results Explorer
 ---
 
-## 概要
+## Overview
 
-クエリは条件と演算子で構成されます。
+A query is composed of terms and operators. 
 
-条件には 2 種類あります。
+There are two types of terms:
 
-- **単一条件**は、1 つの単語です (`test`、`hello` など)。
-- **シーケンス**は、二重引用符で囲まれた単語のグループです (`"hello dolly"` など)。
+- A **single term** is a single word such as `test` or `hello`.
+- A **sequence** is a group of words surrounded by double quotes, such as `"hello dolly"`.
 
-複合クエリで複数の条件を組み合わせるには、以下のブール演算子を使用します。
+To combine multiple terms into a complex query, you can use any of the following Boolean operators:
 
-| 演算子 | 説明                                                                                        |
+| Operator | Description                                                                                        |
 |--------------|------------------------------------------------------------------------------------------------------- |
-| `AND`        | **Intersection**: 両方の項が選択されたビューに含まれます。演算子を使用しない場合、デフォルトで `AND` が使用されます。 |
-| `OR`         | **和**: 選択されたビューからいずれかの条件を含む結果を検索します。                                             |
-| `-`          | **除外**: ビューからこの条件を除いた結果を検索します。                                                  |
+| `AND`        | **Intersection**: Both terms are in the selected views. If no operator is used, `AND` is used by default. |
+| `OR`         | **Union**: Either term is contained in the selected views.                                             |
+| `-`          | **Exclusion**: The following term is not in the view.                                                  |
 
-## オートコンプリート
+## Autocomplete
 
-検索バーのオートコンプリート機能を使用すると、既存の値でクエリを完成させることができます。
+Use the search bar's autocomplete functionality to complete your queries with existing values.
 
-## 数値
+## Numerical values
 
-特定の範囲内の数値属性を検索することができます。例えば、**Duration** ファセットで平均継続時間が 2～10 ナノ秒のすべてのバッチを取得します。検索クエリは `Duration:[2-10]` で更新されます。
+You can search for a numerical attribute within a specific range. For example, retrieve all batches with an average duration between two and ten nanoseconds in the **Duration** facet. The search query updates with `Duration:[2-10]`.
 
-## その他の参考資料
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

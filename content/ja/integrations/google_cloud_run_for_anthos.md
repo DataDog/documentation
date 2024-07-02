@@ -4,7 +4,7 @@
 - orchestration
 - google cloud
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Collect metrics and logs from Cloud Run for Anthos clusters and analyze them in Datadog."
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_run_for_anthos/"
@@ -33,11 +33,11 @@ Google Cloud Run for Anthos is a flexible serverless development platform for hy
 
 Use the Datadog Google Cloud Platform integration to collect metrics from Google Cloud Run for Anthos.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
-#### Installation
+#### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration][3].
 
@@ -71,21 +71,21 @@ Use the [Datadog Admission Controller][8] to configure APM tracers and DogStatsD
 
 To prevent pods from receiving environment variables, add the `admission.datadoghq.com/enabled: "false"` label. This works even if you set `mutateUnlabelled: true`. For more information, see the [Datadog Admission Controller][8] documentation. 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloud_run_for_anthos" >}}
 
 
-### Events
+### イベント
 
 The Google Cloud Run for Anthos integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Cloud Run for Anthos integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

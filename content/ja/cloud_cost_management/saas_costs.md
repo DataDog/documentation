@@ -58,47 +58,47 @@ Navigate to [**Infrastructure > Cloud Costs > Settings > Accounts**][8] and clic
 
 <div class="alert alert-warning">The Databricks SaaS Cost integration is in private beta.</div>
 
-1. Navigate to the [Databricks integration tile][101] in Datadog and click **Add Account**.
-2. Enter a `System Tables SQL Warehouse ID` corresponding to your Databricks instance's warehouse to query for system table billing data.
-3. Under the **Resources** section, click the toggle for each account to enable `Databricks Cost Data Collection`.
-4. Click **Save**.
+1. Datadog の [Databricks インテグレーションタイル][101]に移動し、**Add Account** をクリックします。
+2. Databricks インスタンスのデータウェアハウスに対応する `System Tables SQL Warehouse ID` を入力して、システムテーブルの請求データをクエリします。
+3. **Resources** セクションで、各アカウントのトグルをクリックして `Databricks Cost Data Collection` を有効にします。
+4. **Save** をクリックします。
 
-Your Databricks cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+過去 15 か月間の Databricks コストデータは、24 時間後に Cloud Cost Management でアクセスできます。各 SaaS Cost インテグレーションで収集されたデータにアクセスするには、[収集データセクション](#data-collected)を参照してください。
 
-{{< img src="cloud_cost/saas_costs/databricks_setup.png" alt="Integrate with Databricks to collect cost data." style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/databricks_setup.png" alt="Databricks とインテグレーションしてコストデータを収集します。" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/databricks
 
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
 
-<div class="alert alert-warning">The Confluent Cloud SaaS Cost integration is in public beta.</div>
+<div class="alert alert-warning">Confluent Cloud SaaS Cost インテグレーションは公開ベータ版です。</div>
 
-1. Create or acquire an API key with the organizational admin role in Confluent Cloud.
-2. Navigate to the [Confluent Cloud integration tile][101] in Datadog and click **Add Account**.
-3. Enter your Confluent Cloud account name, API key, API secret, and optionally, specify tags.
-4. Under the **Additional Options** section, click the toggle for `Collecting Billing Data`.
-5. Click **Save**.
+1. Confluent Cloud の組織管理者ロールで API キーを作成または取得します。
+2. Datadog の [Confluent Cloud インテグレーションタイル][101]に移動し、**Add Account** をクリックします。
+3. Confluent Cloud アカウント名、API キー、API シークレットを入力し、オプションでタグを指定します。
+4. **Additional Options** セクションで、`Collecting Billing Data` のトグルをクリックします。
+5. **Save** をクリックします。
 
-Your Confluent Cloud cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+過去 15 か月間の Confluent Cloud コストデータは 24 時間後に Cloud Cost Management でアクセスできます。各 SaaS Cost インテグレーションで収集されたデータにアクセスするには、[収集データセクション](#data-collected)を参照してください。
 
-{{< img src="cloud_cost/saas_costs/confluent_setup.png" alt="Integrate with Confluent to collect cost data." style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/confluent_setup.png" alt="Confluent とインテグレーションしてコストデータを収集します。" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/confluent-cloud
 
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
-<div class="alert alert-warning">The MongoDB SaaS Cost integration is in private beta.</div>
+<div class="alert alert-warning">MongoDB の SaaS Cost インテグレーションは非公開ベータ版です。</div>
 
-1. [Create an API token][101] in MongoDB with `Organization Member` permissions, and add `Organization Read Only` permissions for cluster resource tags.
-2. Navigate to the [MongoDB Cost Management integration tile][102] in Datadog and click **Add New**.
-3. Enter your MongoDB account name, public key, private key, organizational ID, and optionally, specify tags.
-4. Click **Save**.
+1. MongoDB で [API トークンを作成][101]し、`Organization Member` 権限を付与し、クラスターのリソースタグに `Organization Read Only` 権限を追加します。
+2. Datadog の [MongoDB Cost Management インテグレーションタイル][102]に移動し、**Add New** をクリックします。
+3. MongoDB アカウント名、公開キー、秘密キー、組織 ID を入力し、オプションでタグを指定します。
+4. **Save** をクリックします。
 
-Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+過去 15 か月間の MongoDB コストデータは、24 時間後に Cloud Cost Management でアクセスできます。各 SaaS Cost インテグレーションで収集されたデータにアクセスするには、[収集データセクション](#data-collected)を参照してください。
 
-{{< img src="cloud_cost/saas_costs/mongodb_setup.png" alt="Integrate with MongoDB to collect cost data." style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/mongodb_setup.png" alt="MongoDB とインテグレーションしてコストデータを収集します。" style="width:100%" >}}
 
 [101]: https://www.mongodb.com/docs/cloud-manager/reference/user-roles/#organization-roles
 [102]: https://app.datadoghq.com/integrations/mongodb-cost-management
@@ -106,15 +106,15 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
 {{% /tab %}}
 {{% tab "Snowflake" %}}
 
-<div class="alert alert-warning">The Snowflake SaaS Cost integration is in public beta.</div>
+<div class="alert alert-warning">Snowflake の SaaS Cost インテグレーションは公開ベータ版です。</div>
 
-1. Navigate to the [Snowflake integration tile][101] in Datadog and click **Add Snowflake Account**.
-2. Enter your Snowflake account URL, for example: `https://xyz12345.us-east-1.snowflakecomputing.com`.
-3. Under the **Connect your Snowflake account** section, click the toggle to enable Snowflake in Cloud Cost Management.
-4. Enter your Snowflake user name in the `User Name` field.
-5. Create a Datadog-specific role and user to monitor Snowflake. 
+1. Datadog の [Snowflake インテグレーションタイル][101]に移動し、**Add Snowflake Account** をクリックします。
+2. 例えば、`https://xyz12345.us-east-1.snowflakecomputing.com` のように、Snowflake アカウントの URL を入力します。
+3. **Connect your Snowflake account** セクションで、Cloud Cost Management で Snowflake を有効にするトグルをクリックします。
+4. `User Name` フィールドに Snowflake のユーザー名を入力します。
+5. Snowflake を監視する Datadog 固有のロールとユーザーを作成します。
 
-   Run the following in Snowflake to create a custom role:
+   Snowflake で以下を実行してカスタムロールを作成します。
 
    ```shell
    -- Create a new role intended to monitor Snowflake usage.
@@ -140,17 +140,17 @@ Your MongoDB cost data for the past 15 months can be accessed in Cloud Cost Mana
    grant role DATADOG to user <USER>
    ```
 
-4. Configure the key-value pair authentication:
+4. キーと値のペア認証を構成します。
 
-   - Generate a private key by following the [official Snowflake documentation][102] and upload the private key file by clicking **Upload Key**.
-   - Generate a public key by following the [official Snowflake documentation][103].
-   - Assign the public key to the user created in Step 5 by following the [official Snowflake documentation][104].
+   - [公式 Snowflake ドキュメント][102]に従って秘密鍵を生成し、**Upload Key** をクリックして秘密キーファイルをアップロードします。
+   - [公式 Snowflake ドキュメント][103]に従って公開キーを生成します。
+   - [公式 Snowflake ドキュメント][104]に従って、ステップ 5 で作成したユーザーに公開キーを割り当てます。
 
-5. Click **Save**.
+5. **Save** をクリックします。
 
-Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+過去 15 か月分の Snowflake コストデータは、24 時間後に Cloud Cost Management でアクセスできます。各 SaaS Cost インテグレーションで収集されたデータにアクセスするには、[収集データセクション](#data-collected)を参照してください。
 
-{{< img src="cloud_cost/saas_costs/snowflake_setup.png" alt="Integrate with Snowflake to collect cost data." style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/snowflake_setup.png" alt="Snowflake とインテグレーションしてコストデータを収集します。" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/snowflake-web
 [102]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
@@ -160,17 +160,17 @@ Your Snowflake cost data for the past 15 months can be accessed in Cloud Cost Ma
 {{% /tab %}}
 {{% tab "OpenAI" %}}
 
-<div class="alert alert-warning">The OpenAI SaaS Cost integration is in public beta.</div>
+<div class="alert alert-warning">OpenAI の SaaS Cost インテグレーションは公開ベータ版です。</div>
 
-1. [Create an API key][101] in your account settings in OpenAI.
-2. Navigate to the [OpenAI integration tile][102] in Datadog and click **Add Account**.
-3. Enter your OpenAI account name, input your API key, and optionally, specify tags.
-4. Under the **Resources** section, click the toggle for each account to enable `OpenAI Billing Usage Data Collection`.
-5. Click **Save**.
+1. OpenAI のアカウント設定で [API キーを作成][101]します。
+2. Datadog の [OpenAI インテグレーションタイル][102]に移動し、**Add Account** をクリックします。
+3. OpenAI のアカウント名を入力し、API キーを入力し、オプションでタグを指定します。
+4. **Resources** セクションで、各アカウントのトグルをクリックして、`OpenAI Billing Usage Data Collection` を有効にします。
+5. **Save** をクリックします。
 
-Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+過去 15 か月の OpenAI コストデータは、24 時間後に Cloud Cost Management でアクセスできます。各 SaaS Cost インテグレーションで収集されたデータにアクセスするには、[収集データセクション](#data-collected)を参照してください。
 
-{{< img src="cloud_cost/saas_costs/openai_setup.png" alt="Integrate with OpenAI to collect cost data." style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/openai_setup.png" alt="OpenAI とインテグレーションしてコストデータを収集します。" style="width:100%" >}}
 
 [101]: https://platform.openai.com/docs/quickstart/account-setup
 [102]: https://app.datadoghq.com/integrations/openai
@@ -178,17 +178,17 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{% /tab %}}
 {{% tab "Fastly" %}}
 
-<div class="alert alert-warning">The Fastly SaaS Cost integration is in public beta.</div>
+<div class="alert alert-warning">Fastly の SaaS Cost インテグレーションは公開ベータ版です。</div>
 
-1. Create an API token with at least the `"global:read"` scope and `"Billing"` role on the [Personal API tokens][101] page in Fastly.
-2. Navigate to the [Fastly integration tile][102] in Datadog and click **Add Account**.
-3. Enter your Fastly account name and API token. 
-4. Click the checkbox for `Collect Billing Data`.
-5. Click **Save**.
+1. Fastly の [Personal API tokens][101] ページで、少なくとも `"global:read"` スコープと `"Billing"` ロールを持つ API トークンを作成します。
+2. Datadog の [Fastly インテグレーションタイル][102]に移動し、**Add Account** をクリックします。
+3. Fastly アカウント名と API トークンを入力します。
+4. `Collect Billing Data` のチェックボックスをクリックします。
+5. **Save** をクリックします。
 
-Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+過去 15 か月間の Fastly コストデータは、24 時間後に Cloud Cost Management でアクセスできます。各 SaaS Cost インテグレーションで収集されたデータにアクセスするには、[収集データセクション](#data-collected)を参照してください。
 
-{{< img src="cloud_cost/saas_costs/fastly_setup.png" alt="Integrate with Fastly to collect cost data." style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/fastly_setup.png" alt="Fastly とインテグレーションしてコストデータを収集します。" style="width:100%" >}}
 
 [101]: https://manage.fastly.com/account/personal/tokens
 [102]: https://app.datadoghq.com/integrations/fastly
@@ -196,122 +196,122 @@ Your Fastly cost data for the past 15 months can be accessed in Cloud Cost Manag
 {{% /tab %}}
 {{% tab "Twilio" %}}
 
-<div class="alert alert-warning">The Twilio SaaS Cost integration is in private beta.</div>
+<div class="alert alert-warning">Twilio の SaaS Cost インテグレーションは、非公開ベータ版です。</div>
 
-1. Navigate to the [Twilio integration tile][101] in Datadog and click **Add Account**.
-2. Under the **Resources** section, click the toggle for each account to enable `Twilio in Cloud Cost Management`.
-3. Enter an `Account SID` for your Twilio account.
-4. Click **Save**.
+1. Datadog の [Twilio インテグレーションタイル][101]に移動し、**Add Account** をクリックします。
+2. **Resources** セクションで、各アカウントのトグルをクリックして、`Twilio in Cloud Cost Management` を有効にします。
+3. Twilio アカウントの `Account SID` を入力します。
+4. **Save** をクリックします。
 
-Your Twilio cost data for the past 15 months can be accessed in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+過去 15 か月の Twilio コストデータは、24 時間後に Cloud Cost Management でアクセスできます。各 SaaS Cost インテグレーションで収集されたデータにアクセスするには、[収集データセクション](#data-collected)を参照してください。
 
-{{< img src="cloud_cost/saas_costs/twilio_setup.png" alt="Integrate with Twilio to collect cost data." style="width:100%" >}}
+{{< img src="cloud_cost/saas_costs/twilio_setup.png" alt="Twilio とインテグレーションしてコストデータを収集します。" style="width:100%" >}}
 
 [101]: https://app.datadoghq.com/integrations/twilio
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Data Collected
+## 収集データ
 
-You can view cost data on the [**Cloud Costs Analytics** page][3], the [Cloud Costs Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other cloud cost metrics or observability metrics.
+コストデータは、[**Cloud Costs Analytics** ページ][3]、[Cloud Costs Tag Explorer][4]、[ダッシュボード][5]、[ノートブック][6]、[モニター][7]で確認できます。また、これらのコストメトリクスを他のクラウドコストメトリクスや可観測性メトリクスと組み合わせることもできます。
 
-The following table contains a non-exhaustive list of out-of-the-box tags associated with each SaaS Cost integration.
+次の表は、各 SaaS Cost インテグレーションに関連付けられたすぐに使えるタグの非網羅的なリストです。
 
 {{< tabs >}}
 {{% tab "Databricks" %}}
 
-| Tag Name | Tag Description |
+| タグ名 | タグの説明 |
 |---|---
-| `record_id` | Unique ID for this record. |
-| `account_id` | ID of the account this report was generated for. |
-| `workspace_id` | ID of the Workspace this usage was associated with. |
-| `cloud` | Cloud this usage is relevant for. Possible values are AWS, AZURE, and GCP. |
-| `custom_tags` | Custom tags applied to the usage, usually as key-value pairs for additional metadata or categorization. |
-| `usage_metadata` | Metadata related to the usage, which might include details like usage type, service category, or other relevant information. |
+| `record_id` | このレコードの一意の ID。 |
+| `account_id` | このレポートが生成されたアカウントの ID。 |
+| `workspace_id` | この使用量が関連付けられたワークスペースの ID。 |
+| `cloud` | この使用量が関連するクラウド。指定できる値は AWS、AZURE、GCP です。 |
+| `custom_tags` | 使用状況に適用されるカスタムタグで、通常は追加のメタデータや分類のためのキーと値のペアです。 |
+| `usage_metadata` | 使用量に関連するメタデータで、使用量タイプ、サービスカテゴリー、その他の関連情報などの詳細が含まれる場合があります。 |
 
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
 
-| Tag Name | Tag Description |
+| タグ名 | タグの説明 |
 |---|---
-| `resource_id` | The unique identifier of the Confluent resource. |
-| `resource_name` | The name of the Confluent resource. |
-| `environment_id` | The unique identifier for the environment. |
-| `network_access_type` | Network access type for the cluster. Possible values are `INTERNET`, `TRANSIT_GATEWAY`, `PRIVATE_LINK`, and `PEERED_VPC`. |
-| `product` | Product name. Possible values include `KAFKA`, `CONNECT`, `KSQL`, `AUDIT_LOG`, `STREAM_GOVERNANCE`, `CLUSTER_LINK`, `CUSTOM_CONNECT`, `FLINK`, `SUPPORT_CLOUD_BASIC`, `SUPPORT_CLOUD_DEVELOPER`, `SUPPORT_CLOUD_BUSINESS`, and `SUPPORT_CLOUD_PREMIER`. |
+| `resource_id` | Confluent リソースの一意の識別子。 |
+| `resource_name` | Confluent リソースの名前。 |
+| `environment_id` | 環境の一意の識別子。 |
+| `network_access_type` | クラスターのネットワークアクセスタイプ。指定できる値は `INTERNET`、`TRANSIT_GATEWAY`、`PRIVATE_LINK`、`PEERED_VPC` です。 |
+| `product` | 製品名。指定できる値には `KAFKA`、`CONNECT`、`KSQL`、`AUDIT_LOG`、`STREAM_GOVERNANCE`、`CLUSTER_LINK`、`CUSTOM_CONNECT`、`FLINK`、`SUPPORT_CLOUD_BASIC`、`SUPPORT_CLOUD_DEVELOPER`、`SUPPORT_CLOUD_BUSINESS`、および `SUPPORT_CLOUD_PREMIER` が含まれます。 |
 
 {{% /tab %}}
 {{% tab "MongoDB" %}}
 
-| Tag Name | Tag Description |
+| タグ名 | タグの説明 |
 |---|---|
-| `invoice_id` | The unique identifier of the invoice. |
-| `status` | State of the payment. |
-| `mongo_org_id` | MongoDB organization ID. |
-| `cluster_name` | The name of the cluster that incurred the charge. |
-| `group_id` | ID of the project with which the line item is associated. |
-| `replica_set_name` | Name of the replica set with which the line item is associated. |
-| `resource_tags` | Arbitrary tags on clusters set by users, usually as key-value pairs. |
+| `invoice_id` | 請求書の一意の識別子。 |
+| `status` | 支払いの状態。 |
+| `mongo_org_id` | MongoDB の組織 ID。 |
+| `cluster_name` | 請求が発生したクラスターの名前。 |
+| `group_id` | 明細が関連付けられているプロジェクトの ID。 |
+| `replica_set_name` | 明細が関連付けられているレプリカセットの名前。 |
+| `resource_tags` | ユーザーが設定したクラスターの任意のタグ (通常はキーと値のペア)。 |
 
 {{% /tab %}}
 {{% tab "Snowflake" %}}
 
-| Tag Name | Tag Description |
+| タグ名 | タグの説明 |
 |---|---|
-| `organization_name` | Name of the organization. |
-| `contract_number` | Snowflake contract number for the organization. |
-| `account_name` | Name of the account where the usage was consumed. |
-| `account_locator` | Locator for the account where the usage was consumed. |
-| `region` | Name of the region where the account is located. |
-| `service_level` | Service level (edition) of the Snowflake account (Standard, Enterprise, or Business Critical). |
-| `balance_source` | Source of the funds used to pay for the daily usage. The source can be one of the following:<br>- **capacity**: Usage paid with credits remaining on an organization’s capacity commitment.<br>- **rollover**: Usage paid with rollover credits. When an organization renews a capacity commitment, unused credits are added to the balance of the new contract as rollover credits.<br>- **free usage**: Usage covered by the free credits provided to the organization.<br>- **overage**: Usage that was paid at on-demand pricing, which occurs when an organization has exhausted its capacity, rollover, and free credits.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization. |
-| `service_type` | Type of usage. Possible service types include:<br>- **automatic_clustering**: Refer to Automatic Clustering.<br>- **cloud_services**: Refer to Cloud service credit usage.<br>- **data_transfer**: Refer to Understanding data transfer cost.<br>- **logging**: Refer to Logging and Tracing Overview.<br>- **materialized_view**: Refer to Working with Materialized Views.<br>- **replication**: Refer to Introduction to replication and failover across multiple accounts.<br>- **query_acceleration**: Refer to Using the Query Acceleration Service.<br>- **search_optimization**: Refer to Search Optimization Service.<br>- **serverless_task**: Refer to Introduction to tasks.<br>- **snowpipe**: Refer to Snowpipe.<br>- **snowpipe_streaming**: Refer to Snowpipe Streaming.<br>- **storage**: Refer to Understanding storage cost.<br>- **warehouse_metering**: Refer to Virtual warehouse credit usage. Does not indicate usage of serverless or cloud services compute. |
-| `rating_type` | Indicates how the usage in the record is rated, or priced. Possible values include:<br>- **compute**<br>- **data_transfer**<br>- **storage**<br>- **Other** |
-| `billing_type` | Indicates what is being charged or credited. Possible billing types include:<br>- **consumption**: Usage associated with compute credits, storage costs, and data transfer costs.<br>- **rebate**: Usage covered by the credits awarded to the organization when it shared data with another organization.<br>- **priority support**: Charges for priority support services. This charge is associated with a stipulation in a contract, not with an account.<br>- **vps_deployment_fee**: Charges for a Virtual Private Snowflake deployment.<br>- **support_credit**: Snowflake Support credited the account to reverse charges attributed to an issue in Snowflake. |
+| `organization_name` | 組織の名前。 |
+| `contract_number` | 組織の Snowflake 契約番号。 |
+| `account_name` | 使用量が消費されたアカウントの名前。 |
+| `account_locator` | 使用量が消費されたアカウントのロケータ。 |
+| `region` | アカウントが存在する地域の名前。 |
+| `service_level` | Snowflake アカウントのサービスレベル (エディション) (Standard、Enterprise、または Business Critical)。 |
+| `balance_source` | 毎日の使用量の支払いに使用される資金の出所。出所は以下のいずれかになります。<br>- **capacity**: 組織のキャパシティコミットメントに残っているクレジットで支払われる使用量。<br>- **rollover**: ロールオーバークレジットで支払われる使用量。組織がキャパシティコミットメントを更新すると、未使用のクレジットが新しい契約の残高にロールオーバークレジットとして追加されます。<br>- **free usage**: 組織に提供された無料クレジットでカバーされる使用量。<br>- **overage**: オンデマンド価格で支払われる使用量。これは、組織がキャパシティ、ロールオーバー、および無料クレジットを使い果たした場合に発生します。<br>- **rebate**: 他の組織とデータを共有したときに組織に付与されたクレジットでカバーされる使用量。 |
+| `service_type` | 使用タイプ。指定できるサービスタイプは以下の通りです。<br>- **automatic_clustering**: 自動クラスタリングを参照してください。<br>- **cloud_services**: クラウドサービスのクレジット使用を参照してください。<br>- **data_transfer**: データ転送コストを理解するを参照してください。<br>- **logging**: ログおよびトレースの概要を参照してください。<br>- **materialized_view**: マテリアライズドビューの操作を参照してください。<br>- **replication**: 複数アカウント間のレプリケーションとフェイルオーバーの概要を参照してください。<br>- **query_acceleration**: クエリアクセラレーションサービスの使用を参照してください。<br>- **search_optimization**: 検索最適化サービスを参照してください。<br>- **serverless_task**: タスクの概要を参照してください。<br>- **snowpipe**: Snowpipe を参照してください。<br>- **snowpipe_streaming**: Snowpipe Streaming を参照してください。<br>- **storage**: ストレージコストを理解するを参照してください。<br>- **warehouse_metering**: 仮想ウェアハウスのクレジット使用を参照してください。これはサーバーレスまたはクラウドサービスのコンピュート利用を示すものではありません。 |
+| `rating_type` | レコードの使用量がどのように評価されるか、または価格設定されるかを示します。指定できる値は以下の通りです。<br>- **compute**<br>- **data_transfer**<br>- **storage**<br>- **その他** |
+| `billing_type` | 課金またはクレジットの内容を示します。指定できる請求タイプは以下の通りです。<br>- **consumption**: コンピュートクレジット、ストレージコスト、データ転送コストに関連する使用量。<br>- **rebate**: 他の組織とデータを共有したときに組織に付与されたクレジットでカバーされる使用量。<br>- **priority support**: 優先サポートサービスの料金。この料金はアカウントではなく、契約に付随しています。<br>- **vps_deployment_fee**: 仮想プライベート Snowflake デプロイの料金。<br>- **support_credit**: Snowflake サポートが Snowflake の問題に起因する課金を取り消すためにアカウントに入金したクレジット。 |
 
 {{% /tab %}}
 {{% tab "OpenAI" %}}
 
-| Tag Name | Tag Description |
+| タグ名 | タグの説明 |
 |---|---|
-| `organization_id` | The unique identifier of the organization. |
-| `project_id` | The unique identifier of the project (can be null). |
-| `project_name` | The name of the project. |
-| `organization_name` | The name of the organization. |
+| `organization_id` | 組織の一意の識別子。 |
+| `project_id` | プロジェクトの一意の識別子 (NULL でも可)。 |
+| `project_name` | プロジェクトの名前。 |
+| `organization_name` | 組織の名前。 |
 
 {{% /tab %}}
 {{% tab "Fastly" %}}
 
-| Tag Name | Tag Description |
+| タグ名 | タグの説明 |
 |---|---|
-| `service_no` | Internal service number. |
-| `aria_invoice_id` | The ID for the invoice in Aria. |
-| `rate_schedule_no` | The internal ID of the rate schedule. |
-| `rate_schedule_tier_no` | The internal ID of the rate schedule tier. |
-| `usage_type_no` | ID associated with the usage type. |
-| `usage_type_cd` | Name of the usage type. |
-| `plan_no` | ID associated with the plan. |
-| `Plan_name` | Name of the plan. |
-| `client_service_id` | Client-specific service identifier. |
-| `service_name` | The name of the Fastly service. |
+| `service_no` | 内部サービス番号。 |
+| `aria_invoice_id` | Aria の請求書 ID。 |
+| `rate_schedule_no` | 料金スケジュールの内部 ID。 |
+| `rate_schedule_tier_no` | 料金スケジュール階層の内部 ID。 |
+| `usage_type_no` | 使用タイプに関連付けられた ID。 |
+| `usage_type_cd` | 使用タイプの名前。 |
+| `plan_no` | プランに関連付けられた ID。 |
+| `Plan_name` | プランの名前。 |
+| `client_service_id` | クライアント固有のサービス識別子。 |
+| `service_name` | Fastly サービスの名前。 |
 
 {{% /tab %}}
 {{% tab "Twilio" %}}
 
-| Tag Name | Tag Description |
+| タグ名 | タグの説明 |
 |---|---|
-| `account_sid` | Alphanumeric string identifying the Twilio account. |
-| `category` | The category of usage. For more information, see [Usage Categories][101]. |
-| `count_unit` | The units in which count is measured, such as calls for calls or messages for SMS. |
-| `usage_unit` | The units in which usage is measured, such as minutes for calls or messages for SMS. |
+| `account_sid` | Twilio アカウントを識別する英数字文字列。 |
+| `category` | 使用カテゴリー。詳細については、[使用カテゴリー][101]を参照してください。 |
+| `count_unit` | カウントを計測する単位 (例: 通話なら通話単位、SMS ならメッセージ単位)。 |
+| `usage_unit` | 使用量を計測する単位 (例: 通話なら分単位、SMS ならメッセージ単位)。 |
 
 [101]: https://www.twilio.com/docs/usage/api/usage-record#usage-categories
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -22,7 +22,7 @@
 "categories":
 - cloud
 - automation
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/mendix/README.md"
 "display_on_public_website": true
@@ -79,27 +79,27 @@ With Mendix, you can easily create, change, integrate, test, and deploy your app
 
 **Note**: This integration is applicable to Mendix Cloud and Mendix Cloud Dedicated deployment models.
 
-## Setup
+## セットアップ
 
 To enable the Datadog integration for Mendix applications running on Mendix Cloud, see the [Datadog for Mendix cloud documentation][4].
 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 For a list of metrics available once the integration is enabled, see the [official Mendix documentation][5].
 
-### Events
+### イベント
 
 The Mendix integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Mendix integration does not include any service checks.
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Mendix support][6].
 

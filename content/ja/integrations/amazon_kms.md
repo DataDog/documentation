@@ -6,7 +6,7 @@
 - "security"
 - "aws"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track AWS KMS key expiration."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_kms/"
@@ -31,9 +31,9 @@ AWS Key Management Service (KMS) is a managed service that makes it easy for you
 
 Enable this integration to see in Datadog all your KMS metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -59,23 +59,23 @@ Configure AWS KMS to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_kms" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The AWS KMS integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS KMS integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

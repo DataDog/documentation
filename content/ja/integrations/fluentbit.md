@@ -1,7 +1,7 @@
 ---
 title: Fluent Bit
 name: fluentbit
-custom_kind: integration
+custom_kind: インテグレーション
 description: 'Configure Fluent Bit to collect, parse, and forward log data from several sources.'
 short_description: 'Collect, parse, and forward log data from several sources.'
 categories:

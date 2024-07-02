@@ -29,7 +29,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/cockroachdb_dedicated/README.md"
 "display_on_public_website": true
@@ -135,7 +135,7 @@ To deactivate the integration:
 
 After deactivating an integration, the metrics data will remain in Datadog for a default [retention period][11]. 
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 

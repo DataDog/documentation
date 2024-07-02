@@ -16,7 +16,7 @@
 - issue tracking
 - kubernetes
 - marketplace
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false

@@ -2,26 +2,26 @@
 title: Add AWS accounts via the Cloudcraft API
 ---
 
-Cloudcraft currently doesn't offer a way to add multiple AWS accounts at once using the web interface, but you can do so via [the API][1].
+Cloudcraft は現在、Web インターフェイスを使用して複数の AWS アカウントを一度に追加する方法を提供していませんが、これは [API][1] を介して可能です。
 
-<div class="alert alert-info">The ability to add and scan AWS accounts, as well as to use Cloudcraft's developer API, is only available to Pro subscribers. Check out <a href="https://www.cloudcraft.co/pricing">Cloudcraft's pricing page</a> for more information.</div>
+<div class="alert alert-info">AWS アカウントの追加とスキャン、および Cloudcraft の開発者 API の使用は、Pro 契約者のみが利用できます。詳しくは <a href="https://www.cloudcraft.co/pricing">Cloudcraft の料金ページ</a>をご覧ください。</div>
 
-## Prerequisites
+## 前提条件
 
-Before you begin, make sure you have the following:
+始める前に、以下があることを確認してください。
 
-- A Cloudcraft user with the [Owner or Administrator role][2].
-- An active [Cloudcraft Pro subscription][3].
-- An AWS account with permission to create IAM roles.
-- A Unix-like environment, such as Linux, macOS, or WSL on Windows with cURL and [the AWS CLI][4] installed.
-- A basic understanding of the command-line interface.
-- A basic understanding of how to use APIs.
+- [オーナーまたは管理者ロール][2]を持つ Cloudcraft ユーザー。
+- 有効な [Cloudcraft Pro サブスクリプション][3]。
+- IAM ロールの作成権限を持つ AWS アカウント。
+- cURL と [AWS CLI][4] がインストールされた Linux、macOS、または Windows 上の WSL など、Unix ライクな環境。
+- コマンドラインインターフェイスの基本的な理解。
+- API の使い方の基本的な理解。
 
-## Getting the AWS IAM role parameters
+## AWS IAM ロールパラメーターの取得
 
-Start by using the [Get my AWS IAM Role parameters][5] endpoint of Cloudcraft's API and saving the response.
+まずは Cloudcraft の API の [Get my AWS IAM Role パラメーター][5]エンドポイントを使用し、レスポンスを保存することから始めます。
 
-To accomplish this, open the command line and enter the following cURL command:
+そのためには、コマンドラインを開き、以下の cURL コマンドを入力します。
 
 {{< code-block lang="shell" >}}
 curl \
@@ -33,7 +33,7 @@ curl \
   --header "Authorization: Bearer ${API_KEY}"
 {{< /code-block >}}
 
-Replace `API_KEY` with your Cloudcraft API key. The response should look something like this:
+`API_KEY` を Cloudcraft の API キーに置き換えます。レスポンスは以下のようになります。
 
 {{< code-block lang="json" filename="cloudcraft-response.json" >}}
 {
@@ -43,11 +43,11 @@ Replace `API_KEY` with your Cloudcraft API key. The response should look somethi
 }
 {{< /code-block >}}
 
-Save a copy of the `accountId` and `externalId` fields, as you'll need them when creating the IAM role in the next step.
+次のステップで IAM ロールを作成する際に必要になるので、`accountId` フィールドと `externalId` フィールドのコピーを取っておきます。
 
-## Creating the IAM role
+## IAM ロールの作成
 
-Next, use the _create-role_ command in the AWS CLI to create the IAM role.
+次に、AWS CLI で _create-role_ コマンドを使用して IAM ロールを作成します。
 
 {{< code-block lang="shell" >}}
 aws iam create-role \
@@ -59,11 +59,11 @@ aws iam create-role \
   --output 'text'
 {{< /code-block >}}
 
-Replace `ACCOUNT_ID` and `EXTERNAL_ID` with the values you got in the previous step.
+`ACCOUNT_ID` と `EXTERNAL_ID` を前のステップで取得した値に置き換えます。
 
-If successful, a response with the role's account ARN is displayed. Save this value for later.
+成功すると、ロールのアカウント ARN がレスポンスとして表示されます。この値は保存しておいてください。
 
-However, the role has no permission attached to it yet. To connect the `ReadOnlyAccess` role, use the `attach-role-policy` command in the AWS CLI.
+しかし、このロールにはまだ権限が割り当てられていません。`ReadOnlyAccess` ロールを接続するには、AWS CLI で `attach-role-policy` コマンドを使用します。
 
 {{< code-block lang="shell" >}}
 aws iam attach-role-policy \
@@ -71,11 +71,11 @@ aws iam attach-role-policy \
   --policy-arn 'arn:aws:iam::aws:policy/ReadOnlyAccess'
 {{< /code-block >}}
 
-**Note**: If you gave the role a different name in the previous step, make sure you replace _cloudcraft_ with the name you used.
+**注**: 前のステップでロールに別の名前を付けた場合は、_cloudcraft_ を使用した名前に必ず置き換えてください。
 
-## Adding the AWS account to Cloudcraft
+## Cloudcraft への AWS アカウントの追加
 
-Finally, once you've created the IAM role, you can add the AWS account to Cloudcraft. You can do that by using the ARN of the role you created and calling [Cloudcraft's developer API][7].
+最後に、IAM ロールを作成したら、AWS アカウントを Cloudcraft に追加できます。このためには、作成したロールの ARN を使って [Cloudcraft の開発者 API][7] を呼び出します。
 
 {{< code-block lang="shell" >}}
 curl \
@@ -88,9 +88,9 @@ curl \
   --data-raw '{"name":"AWS_ACCOUNT_NAME","roleArn":"ROLE_ARN","region":"us-east-1"}' \
 {{< /code-block >}}
 
-Replace `AWS_ACCOUNT_NAME` with the name you want the account to have in Cloudcraft and `ROLE_ARN` with the ARN of the role you created in the previous step. You must also replace `us-east-1` with the region you want the account to be checked from, and `API_KEY` with your API key.
+`AWS_ACCOUNT_NAME` を Cloudcraft でアカウントに付けたい名前に、`ROLE_ARN` を前のステップで作成したロールの ARN に置き換えます。また、`us-east-1` はアカウントをチェックするリージョンに、`API_KEY` は API キーに置き換えます。
 
-After you successfully add the account, you can use the same command to add additional accounts to Cloudcraft.
+アカウントの追加に成功したら、同じコマンドを使用して Cloudcraft に他のアカウントを追加できます。
 
 [1]: https://developers.cloudcraft.co/
 [2]: https://help.cloudcraft.co/article/85-roles-and-permissions

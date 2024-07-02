@@ -29,7 +29,7 @@
 - caching
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/scylla/README.md"
 "display_on_public_website": true
@@ -67,37 +67,37 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This Datadog-[Scylla][1] integration collects a majority of the exposed metrics by default, with the ability to customize additional groups based on specific user needs.
+Datadog-[Scylla][1] のインテグレーションは、デフォルトで公開されたメトリクスの大部分を収集します。その際、ユーザー特有のニーズを基づいて追加のグループをカスタマイズすることもできます。
 
-Scylla is an open-source NoSQL data store that can act as "a drop-in Apache Cassandra alternative." It has rearchitected the Cassandra model tuned for modern hardware, reducing the size of required clusters while improving theoretical throughput and performance.
+Scylla は「ドロップインの Apache Cassandra 代替」として使用できる、オープンソースの NoSQL データストアです。Cassandra モデルを最新のハードウェアに対応するように再設計し、必要なクラスターのサイズを減らしながら理想的なスループットとパフォーマンスを向上させています。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host.
+以下の手順に従って、このチェックをインストールし、ホストで実行中の Agent に対して構成します。
 
-### Installation
+### インストール
 
-The Scylla check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
+Scylla チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 1. Edit the `scylla.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your scylla performance data. See the [sample scylla.d/conf.yaml][3] for all available configuration options. If you previously implemented this integration, see the [legacy example][4].
 
-2. [Restart the Agent][5].
+2. [Agent を再起動します][5]。
 
-##### Log collection
+##### ログ収集
 
 Scylla has different modes of outputting logs depending on the environment it's running in. See the [Scylla documentation][6] for more specifics on how the application generates logs.
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
       ```yaml
        logs_enabled: true
      ```
 
-2. Uncomment and edit the logs configuration block in your `scylla.d/conf.yaml` file. Change the `type`, `path`, and `service` parameter values based on your environment. See the [sample scylla.d/conf.yaml][3] for all available configuration options.
+2. `scylla.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、 `type`、`path`、`service` パラメーターの値を変更してください。使用可能なすべての構成オプションの詳細については、[サンプル scylla.d/conf.yaml][3] を参照してください。
 
       ```yaml
        logs:
@@ -112,31 +112,31 @@ Scylla has different modes of outputting logs depending on the environment it's 
            #    name: new_log_start_with_date
      ```
 
-3. [Restart the Agent][5].
+3. [Agent を再起動します][5]。
 
-To enable logs for Kubernetes environments, see [Kubernetes Log Collection][7].
+Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][7]を参照してください。
 
-### Validation
+### 検証
 
 [Run the Agent's status subcommand][8] and look for `scylla` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "scylla" >}}
 
 
-### Events
+### イベント
 
-The Scylla check does not include any events.
+Scylla チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "scylla" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][11].
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 
 [1]: https://scylladb.com

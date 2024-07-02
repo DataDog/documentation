@@ -23,7 +23,7 @@
 "categories":
 - caching
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/unbound/README.md"
 "display_on_public_website": true
@@ -68,11 +68,11 @@ Get metrics from unbound service in real time to:
 
 - Visualize and monitor unbound states
 
-## Setup
+## セットアップ
 
 The Unbound check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Unbound check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -84,7 +84,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Unbound 
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `unbound.d/conf.yaml` file, in the `conf.d/` folder at the root of
    your Agent's configuration directory to start collecting unbound metrics. See
@@ -96,21 +96,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Unbound 
 
 [Run the Agent's status subcommand][7] and look for `unbound` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "unbound" >}}
 
 
-### Events
+### イベント
 
 The Unbound check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "unbound" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

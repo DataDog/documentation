@@ -3,9 +3,9 @@
 - "network"
 - "metrics"
 - "oracle"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Monitor zone changes and track queries per second by zone or record."
+"description": "ゾーン変更を監視し、ゾーンまたはレコード別に秒単位でクエリを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/dyn/"
 "draft": false
 "git_integration_title": "dyn"
@@ -36,9 +36,9 @@ Monitor your zones with advanced graphs and events.
 - Keep track of the changes made when a zone is updated.
 - Analyze the QPS made by zone or record type thanks to advanced graphing tools.
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
 If you have not created a `datadog` read-only user on Dyn yet, [log in to Dyn][1] and follow these instructions:
 
@@ -65,23 +65,23 @@ Dyn `QPS` metrics are collected for all zones by default.
 IP ACLs must be disabled for the Dyn integration.
 </div>
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "dyn" >}}
 
 
 **Note**: The `dyn.qps` metric is made available to Datadog about 90 minutes after the current time.
 
-### Events
+### イベント
 
 The Dyn integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Dyn integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

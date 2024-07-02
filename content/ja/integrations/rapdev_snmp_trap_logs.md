@@ -16,7 +16,7 @@
 - marketplace
 - network
 - snmp
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -72,34 +72,31 @@
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
-## Overview
-The RapDev SNMP Trap Logs package enables converting SNMP Trap messages into Datadog Logs for thousands of different
-SNMP devices. We have collected as many MIB files as we could find, and have converted them to a format allowing for
-the translation of SNMP traps into human-readable log messages.
+## 概要
+RapDev SNMP Trap Logs パッケージは、何千もの異なる SNMP デバイスの SNMP Trap メッセージを Datadog Logs に変換することが可能です。できるだけ多くの MIB ファイルを収集し、SNMP トラップを人間が読めるログメッセージに翻訳できるような形式に変換しています。
 
-This package comes with an install script to setup Logstash as an SNMP trap receiver, with the proper configurations
-and MIB files to translate your messages, allowing you to alert on network events within Datadog.
+このパッケージには、Logstash を SNMP トラップレシーバーとして設定するためのインストールスクリプトが付属しており、適切な構成と MIB ファイルを使用してメッセージを翻訳し、Datadog 内のネットワークイベントにアラートすることができます。
 
-For a list of all MIBs that are included with this package, see the [mib_yamls.txt file][4].
+本パッケージに含まれる全 MIB の一覧は、[mib_yamls.txt ファイル][4]をご参照ください。
 
-## Support
+## サポート
 
-For support or feature requests, contact RapDev.io through the following channels:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
-- Email: [support@rapdev.io][7]
-- Chat: [rapdev.io][3]
-- Phone: 855-857-0222
+- メール: [support@rapdev.io][7]
+- チャット: [rapdev.io][3]
+- 電話: 855-857-0222
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor and diagnose network performance issues with SNMP Traps][8]
+- [SNMP トラップによるネットワークパフォーマンスの問題の監視と診断][8]
 
 ---
-Made with ❤️ in Boston
+ボストンより ❤️ を込めて
 
-*This isn't the integration you're looking for? Missing a critical feature for your organization? Drop RapDev a [note](mailto:support@rapdev.io), and we'll build it!!*
+*お探しのインテグレーションが見つかりませんか？組織に役立つ重要なツールの導入をお考えですか？RapDev へ[お問い合わせ](mailto:support@rapdev.io)ください！導入のサポートをいたします。*
 
 [1]: https://docs.datadoghq.com/logs/guide/enrichment-tables
 [2]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#log-message-remapper
@@ -110,4 +107,4 @@ Made with ❤️ in Boston
 [7]: mailto:support@rapdev.io
 [8]: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/rapdev-snmp-trap-logs" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-snmp-trap-logs" target="_blank">こちらをクリック</a>してください。

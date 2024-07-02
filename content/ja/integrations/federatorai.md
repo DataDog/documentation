@@ -36,7 +36,7 @@
 - kubernetes
 - ai/ml
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md"
 "display_on_public_website": true
@@ -209,11 +209,11 @@ For additional information on Federator.ai, see the [ProphetStor Federator.ai Fe
    - This graph shows the highest predicted monthly cost of the namespaces in the current cluster.
 
 
-## Setup
+## セットアップ
 
 * Follow the instructions below to download and set up Federator.ai.
 
-### Installation
+### インストール
 
 1. Log in to your OpenShift/Kubernetes cluster
 2. Install Federator.ai for OpenShift/Kubernetes with the following command:
@@ -293,7 +293,7 @@ For additional information on Federator.ai, see the [ProphetStor Federator.ai Fe
 4. Log in to Federator.ai GUI, URL and login credential could be found in the output of Step 2.
 
 
-### Configuration
+### 構成
 
 1. Log in to Datadog with your account and get an [API key and application key][9] for using the Datadog API.
 
@@ -306,22 +306,22 @@ For additional information on Federator.ai, see the [ProphetStor Federator.ai Fe
 3. See the [Federator.ai - Installation and Configuration Guide][11] and [User Guide][12] for more details. 
 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "federatorai" >}}
 
 
 
-### Service Checks
+### サービスチェック
 
 Federator.ai does not include any service checks.
 
-### Events
+### イベント
 
 Federator.ai does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Read the [Federator.ai - Installation and Configuration Guide][11] or contact [Datadog support][14].
 

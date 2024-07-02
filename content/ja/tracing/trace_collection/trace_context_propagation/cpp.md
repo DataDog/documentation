@@ -23,7 +23,7 @@ Distributed headers injection and extraction is controlled by configuring inject
 - B3: `b3`
 - W3C: `tracecontext`
 
-### Configuration
+### 構成
 
 {{< tabs >}}
 

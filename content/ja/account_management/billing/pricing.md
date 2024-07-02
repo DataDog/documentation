@@ -6,87 +6,87 @@ further_reading:
   text: Datadog Pricing
 ---
 
-Datadog has many pricing plans to fit your needs. For more information, see the [Pricing][1] page. Unless otherwise stated in your order, Datadog calculates fees based on product usage during each calendar month. Here are the most common pricing units:
+Datadog では、ニーズに合わせてさまざまな料金プランをご用意しています。詳細については[料金][1]ページをご確認ください。注文書に特に記載のない限り、Datadog の料金は、カレンダー月ごとの製品の使用状況に基づいて計算されます。最も一般的な価格単位を以下に記載しました。
 
-## Infrastructure monitoring
+## インフラストラクチャーの監視
 
-* A **host** is a physical or virtual operating system instance. Each hour, Datadog records the number of unique hosts you are monitoring in the Infrastructure service.
-  * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement.
-  * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
-* A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Infrastructure service. Datadog charges monthly based on the fractional hours of monitored containers.
-* A [**custom metric**][2] is a single, unique combination of a metric name, host ID and any tags. Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour.
-* A **device** is a physical sensor comprising one or more single-board computers in a frame. Datadog records and charges for the number of devices and hosts you are concurrently monitoring in the Datadog Infrastructure service.
-* An AWS **Fargate task** is a collection of containers setup through AWS's ECS container orchestration platform. Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored.
+* **ホスト**は、物理または仮想のオペレーティングシステムインスタンスです。Datadog では、お客様がインフラストラクチャーサービスで監視しているホストのユニーク数を 1 時間ごとに記録します。
+  * Datadog の最高水準プラン (HWMP) では、月末にこの 1 時間ごとの測定結果が最高から最低まで順序付けられ、そのうち 9 番目に高い測定値に基づいて課金されます。2 月は例外で、Datadog は 8 番目に高い測定値に基づいて課金します。
+  * 月単位/時間単位混合プラン (MHP) では、月単位の最低契約量に対して課金され、ホスト数がその契約量を超えた時間については、時間単位の料金が課金されます。
+* **コンテナ**は、アプリケーションソフトウェアと限定的なオペレーティングシステムライブラリおよび設定からなる自己完結型のオペレーティング環境です。5 分ごとに 1 回、Datadog は、お客様が Datadog インフラストラクチャーサービスで監視している一意のコンテナ数を記録します。監視されたコンテナの時間数 (端数を含む) に基づいて月単位で課金されます。
+* [**カスタムメトリクス**][2]とは、メトリクス名、ホスト ID、任意のタグからなる単一かつ一意の組み合わせです。1 時間に Datadog インフラストラクチャーサービスに送信されたユニークカスタムメトリクス数の月平均に基づいて課金されます。
+* **デバイス**は、1 フレーム内の 1 つ以上のシングルボードコンピューターで構成される物理センサーです。お客様が Datadog インフラストラクチャーサービスで同時に監視しているデバイス数およびホスト数を記録し、それに対して課金されます。
+* AWS **Fargate タスク**は、AWS の ECS コンテナオーケストレーションプラットフォームを通じてセットアップされたコンテナのコレクションです。Datadog は、お客様が Datadog インフラストラクチャー (または APM) サービスで監視しているタスクインスタンス数を 5 分間隔で記録します。月末にこの間隔に基づく測定値を集計し、アプリケーションが実行されて監視された合計時間数に基づいて課金されます。
 
 ## APM
 
-* If an application running on a host (defined in [Infrastructure monitoring](#infrastructure-monitoring)) generates traces and submits them to the Datadog SaaS application, Datadog counts that host as one **APM host**.
+* ホスト ([インフラストラクチャーモニタリング](#infrastructure-monitoring)で定義) 上で動作するアプリケーションがトレースを生成して Datadog SaaS アプリケーションに送信すると、Datadog はそのホストを 1 つの **APM ホスト**とカウントします。
   * On a high watermark plan (HWMP), the hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the ninth highest measurement.
-  * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
-* An **Indexed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed by [retention filters][3] within Datadog APM.
-* An **Ingested Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested into Datadog APM.
+  * 月単位/時間単位混合プラン (MHP) では、月単位の最低契約量に対して課金され、ホスト数がその契約量を超えた時間については、時間単位の料金が課金されます。
+* **Indexed Span** は、スタック内の個々のサービスに対する個別のリクエストです。Datadog APM 内の[保持フィルター][3]によりインデックス化されたスパンの合計数に基づき課金されます。
+* **Ingested Span** は、スタック内の個々のサービスに対する個別のリクエストです。Datadog APM に取り込まれたスパンのギガバイトの総数に基づき課金されます。
 
-You can put controls in place for both Indexed and Ingested span volumes. For more information, read the [Trace Ingestion][4] and [Retention][5] documentation.
+Indexed Span のボリュームと Ingested Span のボリュームの両方にコントロールを配置できます。詳細については、[トレースの取り込み][4]と[保持][5]のドキュメントを参照してください。
 
 ## Database Monitoring
 
-* Datadog records the number of unique database hosts you are monitoring with Datadog Database Monitoring each hour.
-  * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement.
-  * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
-* Datadog charges based on the total number of configured [normalized queries][6] being tracked at any given time.
+* Datadog は、お客様が Datadog データベースモニタリングで監視しているデータベースのユニークホスト数を 1 時間ごとに記録します。
+  * Datadog の最高水準プラン (HWMP) では、月末にこの 1 時間ごとの測定結果が最高から最低まで順序付けられ、そのうち 9 番目に高い測定値に基づいて課金されます。2 月は例外で、Datadog は 8 番目に高い測定値に基づいて課金します。
+  * 月単位/時間単位混合プラン (MHP) では、月単位の最低契約量に対して課金され、ホスト数がその契約量を超えた時間については、時間単位の料金が課金されます。
+* Datadog は、任意の時点で追跡されている構成された[正規化クエリ][6]の総数に基づいて課金します。
 
-## Log management
+## ログ管理
 
-* A **log** is a text-based record of activity generated by an operating system, an application, or by other sources. Datadog charges for ingested logs based on the total number of gigabytes submitted to the Datadog Logs service.
-* A **log event** is a log that is indexed by the Datadog Logs service. Datadog charges per million log events submitted for indexing at the rate designated for the retention policy you selected.
+* **ログ**は、オペレーティングシステム、アプリケーション、または他のソースによって生成されたテキストベースのアクティビティの記録です。Datadog ログサービスに送信されたギガバイトの合計数に基づいて、収集されたログに対して課金されます。
+* **ログイベント**は、Datadog ログサービスによってインデックス化された 1 つのログです。お客様が選択した保持ポリシーに指定されている料金で、インデックス化のために送信されたログイベントの 100 万個ごとに課金されます。
 
 ## Cloud SIEM
 
-* An **analyzed log** is a text-based record of activity generated by an operating system, an application, or by other sources analyzed to detect potential security threats. Datadog charges for analyzed logs based on the total number of gigabytes ingested and analyzed by the Datadog Cloud SIEM service.
+* **分析ログ**は、オペレーティングシステム、アプリケーション、または潜在的なセキュリティの脅威を検出するために分析された他のソースによって生成されたアクティビティのテキストベースの記録です。Datadog Cloud SIEM サービスによって取り込みおよび分析されたギガバイトの合計数に基づいて、分析ログに課金されます。
 
-## Synthetic monitoring
+## Synthetic モニタリング
 
-* An **API test** is an HTTP or HTTPS request against a single URL. Datadog charges per ten thousand API tests runs executed to the Datadog Synthetic Monitoring service.
-* A **browser test** is a simulation of a scripted sequence of user actions on a web-based application using a virtualized web browser. Datadog charges per thousand browser tests executed to the Datadog Synthetic Monitoring
- service.
+* **API テスト**は、1 つの URL に対する 1 回の HTTP または HTTPS リクエストです。Datadog Synthetic モニタリングサービスに対して実行された API テストランの 1 万回ごとに課金されます。
+* **ブラウザテスト**は、仮想ウェブブラウザを使用してウェブベースアプリケーションでスクリプトを使用して実行する連続したユーザーアクションのシミュレーションです。Datadog Synthetic モニタリングサービスに対して実行されたブラウザテスト 1,000 回ごとに
+ 課金されます。
 
-## Network Performance Monitoring
+## ネットワークパフォーマンス監視
 
-* Datadog records the number of **Network Performance Monitoring** (NPM) hosts you are concurrently monitoring with the Datadog NPM service once per hour.
+* Datadog は、お客様が Datadog NPM サービスで同時に監視している**ネットワークパフォーマンスモニタリング** (NPM) ホストのユニーク数を 1 時間ごとに記録します。
   * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement.
-* Additionally, Datadog measures the total number of flows used by all NPM hosts per month. A **flow** is a record of traffic sent and received between a source (IP:Port) and destination (IP:Port), as measured over a five-minute time period.
+* さらに、Datadog は、すべての NPM ホストによって使用されるフローの合計数を月ごとに測定します。**フロー**とは、 送信元 (IP:Port) と送信先 (IP:Port) の間で送受信されるトラフィックを5 分間にわたり測定した記録です。
 
 ## Real User Monitoring
 
-* A **session** is a user journey on your web application. It expires after either 15 minutes of inactivity, or 4 hours of continuous activity.
+* **セッション**とは、ウェブアプリケーションでユーザーが行う操作 (カスタマージャーニー) です。15 分間操作が行われない、または 4 時間以上継続して操作が行われるとセッションは無効になります。
 
-* Datadog collects all the pages visited by your end users along with the telemetry that matters: resources loading (XHRs, images, CSS files, JS scripts, etc), frontend errors, and long tasks. All of this is included in the user session. Datadog charges per one thousand (1,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
+* Datadog は、エンドユーザーが訪問したすべてのページを、読み込みリソース (XHR、イメージ、CSS ファイル、JS スクリプト等)、フロントエンドエラー、長時間のタスクなど、重要なテレメトリーと一緒に収集します。これらはすべてユーザーセッションに含まれるデータです。Datadog リアルユーザーモニタリング (RUM) サービスで収集されたセッション 1,000 件ごとに課金されます。
 
 ## Continuous Profiler
 
-* Datadog records the number of unique Continuous Profiler hosts you are concurrently monitoring with the Datadog Continuous Profiler service once per hour.
+* Datadog は、お客様が Datadog Continuous Profiler サービスで同時に監視している一意の Continuous Profiler ホストの数を 1 時間に一度記録します。
   * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement.
-  * Each host is allowed up to four profiled containers for free. Containers over this are priced at $2 per container.
-    **Note**: This allotment is aggregated across all hosts so if you have four containers on average across all your hosts, you are not charged as if you have more on a host-by-host basis.
-* Datadog measures the total number of containers that are being profiled. A container is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Continuous Profiler service. Datadog charges monthly based on the fractional hours of monitored containers. For Continuous Profiler, Datadog only counts the containers that are running the Continuous Profiler service towards the total monitored container count.
+  * 各ホストには、最大 4 つのプロファイルコンテナが無料で許可されます。これを超えるコンテナの価格は、コンテナあたり 2 ドルになります。
+    **注**: この割り当てはすべてのホストで集計されるため、すべてのホストのコンテナが平均して 4 つになる場合、ホストごとに追加があるとして課金されることはありません。
+* Datadog はプロファイリングされているコンテナの総数を測定します。コンテナは、アプリケーションソフトウェアと限定的なオペレーティングシステムライブラリおよび設定からなる自己完結型のオペレーティング環境です。5 分ごとに 1 回、Datadog は、Datadog Continuous Profiler サービスで監視している一意のコンテナの数を記録します。Datadog は、監視対象のコンテナの端数時間に基づいて毎月課金します。Continuous Profiler では、Datadog は、Continuous Profiler サービスを実行しているコンテナのみをカウントして、監視対象のコンテナの総数を求めます。
 
 ## Incident Management
 
-* Datadog tracks the number of monthly active users who participate in incident management and response.
- * An **active user** is only counted if they contribute comments or signals (graphs, links, etc.) to an incident. Anyone who only opens or closes an incident or anyone who only views the incident are not counted. Additionally, these are not named seats, so you do not need to determine which specific users have access.
+* Datadog は、インシデントの管理と対応に参加する月間アクティブユーザーの数を追跡します。
+ * インシデントにコメントやシグナル（グラフ、リンクなど）を送信して貢献したユーザーのみが **アクティブユーザー** としてカウントされます。インシデントを開く/閉じる、または表示しただけのユーザーはカウントされません。また、名前は必要ないため、アクセス権のあるユーザーを特定する必要はありません。
 
 ## CI Visibility
 
-* Datadog tracks the number of unique committers who send test and pipeline data to the CI Visibility service.
-* A **committer** means an active git committer, identified by their git author email address. A committer is counted towards billing if they commit at least three times in a given month.
-  * In the event that a pipeline is not associated with a git repository, or git metadata is unavailable, the username of the person triggering the pipeline execution is used as the billable committer.
-* For Pipeline Visibility, every pipeline, pipeline stage, and pipeline job counts as a **pipeline span**. For Testing Visibility, every individual test run counts as a **test span**.
+* Datadog は、CI Visibility サービスにテストとパイプラインのデータを送信する一意のコミッターの数を追跡します。
+* **コミッター**とは、アクティブな git コミッターのことで、git 作成者のメールアドレスで識別されます。コミッターは、ある月に少なくとも 3 回コミットすれば課金対象としてカウントされます。
+  * パイプラインが git リポジトリに関連付けられていない場合や、git メタデータが利用できない場合、パイプライン実行のトリガーとなった人のユーザー名が請求可能なコミッターとして使用されます。
+* Pipeline Visibilityでは、すべてのパイプライン、パイプラインステージ、パイプラインジョブが**パイプラインスパン**としてカウントされます。Testing Visibilityでは、個々のテスト実行が 1 つの**テストスパン**としてカウントされます。
 
-## Troubleshooting
+## トラブルシューティング
 
-For technical questions, contact [Datadog support][7].
+技術的な質問については、[Datadog サポートチーム][7]にお問い合わせください。
 
-Contact [Sales][8] or your [Customer Success][9] Manager to discuss hourly pricing or billing for your account.
+アカウントの 1 時間ごとの料金または請求については、[セールス][8]または[カスタマーサクセス][9]マネージャーにお問い合わせください。
 
 [1]: https://www.datadoghq.com/pricing
 [2]: /metrics/custom_metrics/

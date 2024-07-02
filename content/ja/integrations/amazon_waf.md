@@ -6,20 +6,20 @@
 - "security"
 - "aws"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track allowed versus blocked requests."
+"description": "許可およびブロックされたリクエストを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_waf/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/aws-waf-metrics/"
-  "tag": "Blog"
+  "tag": "ブログ"
   "text": "Key metrics for monitoring AWS WAF"
 - "link": "https://www.datadoghq.com/blog/aws-waf-monitoring-tools/"
-  "tag": "Blog"
+  "tag": "ブログ"
   "text": "Tools for collecting AWS WAF data"
 - "link": "https://www.datadoghq.com/blog/aws-waf-datadog/"
-  "tag": "Blog"
+  "tag": "ブログ"
   "text": "Monitor AWS WAF activity with Datadog"
 "git_integration_title": "amazon_waf"
 "has_logo": true
@@ -29,73 +29,73 @@
 "is_public": true
 "manifest_version": "1.0"
 "name": "amazon_waf"
-"public_title": "Datadog-AWS WAF Integration"
-"short_description": "Track allowed versus blocked requests."
+"public_title": "Datadog-AWS WAF インテグレーション"
+"short_description": "許可およびブロックされたリクエストを追跡。"
 "version": "1.0"
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/dogweb -->
-## Overview
+## 概要
 
-AWS WAF is a web application firewall that helps protect your web applications from common web exploits.
+AWS WAF は、一般的な Web エクスプロイトから Web アプリケーションを保護するために役立つ Web アプリケーションファイアウォールです。
 
-Enable this integration to see your WAF metrics in Datadog.
+このインテグレーションを有効にすると、WAF メトリクスを Datadog に表示できます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-If you haven't already, set up the [Amazon Web Services integration][1] first.
+[Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
-### Metric collection
+### メトリクスの収集
 
-1. In the [AWS integration page][2], ensure that `WAF` or `WAFV2` is enabled under the `Metric Collection` tab, depending on which endpoint you are using.
+1. [AWS インテグレーションページ][2]で、使用しているエンドポイントに応じて、`Metric Collection` タブで `WAF` または `WAFV2` が有効になっていることを確認します。
 
-2. Install the [Datadog - AWS WAF integration][3].
+2. [Datadog - AWS WAF インテグレーション][3]をインストールします。
 
-### Log collection
+### ログ収集
 
-#### Audit logs
+#### 監査ログ
 
-Enable Web Application Firewall audit logs to get detailed information about your web ACL analyzed traffic:
+Web Application Firewall 監査ログを有効にして、Web ACL で分析されたトラフィックに関する詳細情報を取得します。
 
-1. Create an `Amazon Data Firehose` with a name starting with `aws-waf-logs-`.
-2. In the `Amazon Data Firehose` destination, pick `Amazon S3` and make sure you add `waf` as prefix.
-3. Select the wanted web ACL and send its logs to the newly created Firehose ([detailed steps][4]).
+1. `aws-waf-logs-` から始まる名前で `Amazon Data Firehose` を作成します。
+2. `Amazon Data Firehose` の送信先で `Amazon S3` を選択し、`waf` をプレフィックスとして必ず追加してください。
+3. 必要な Web ACL を選択し、そのログを新しく作成した Firehose に送信します ([詳細な手順はこちら][4])。
 
-The WAF logs are collected and sent to a S3 bucket.
+WAF ログが収集され、S3 バケットに送信されます。
 
-#### Send logs to Datadog
+#### ログを Datadog に送信する方法
 
-1. If you haven't already, set up the [Datadog Forwarder Lambda function][5].
-2. Once the Lambda function is installed, manually add a trigger on the S3 bucket that contains your WAF logs in the AWS console, in your Lambda, click on S3 in the trigger list:
-   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 trigger configuration" popup="true" style="width:70%;">}}
-   Configure your trigger by choosing the S3 bucket that contains your WAF logs and change the event type to `Object Created (All)` then click on the add button.
-   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda trigger configuration" popup="true" style="width:70%;">}}
+1. [Datadog Forwarder Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
+2. Lambda 関数がインストールされたら、AWS コンソールで WAF ログを含む S3 バケットに手動でトリガーを追加します。Lambda で、トリガーリストから S3 をクリックします。
+   {{< img src="integrations/amazon_s3/s3_trigger_configuration.png" alt="S3 トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
+   WAF ログを含む S3 バケットを選択してトリガーを構成し、イベントタイプを `Object Created (All)` に変更して、Add ボタンをクリックします。
+   {{< img src="integrations/amazon_s3/s3_lambda_trigger_configuration.png" alt="S3 Lambda トリガーコンフィギュレーション" popup="true" style="width:70%;">}}
 
-**Note**: The Datadog Lambda forwarder automatically transforms arrays of nested object in WAF logs into a `key:value` format for ease of use.
+**注**: Datadog Lambda Forwarder は、WAF ログのネストされたオブジェクトの配列を、使いやすいように自動的に `key:value` 形式に変換します。
 
-## Data collected
+## データ収集
 
 ### Metrics
 {{< get-metrics-from-git "amazon_waf" >}}
 
 
-**Note**: Both `aws.waf.*` and `waf.*` metrics are reported due to the historic format of the CloudWatch metric APIs for WAF.
+**注**: WAF の CloudWatch メトリクス API の履歴形式により、`aws.waf.*` と `waf.*` の両メトリクスが報告されます。
 
-Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
+AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### Events
+### イベント
 
-The AWS WAF integration does not include any events.
+AWS WAF インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The AWS WAF integration does not include any service checks.
+AWS WAF インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][7].
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

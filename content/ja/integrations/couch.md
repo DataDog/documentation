@@ -34,7 +34,7 @@
 - "caching"
 - "data stores"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/couch/README.md"
 "display_on_public_website": true
@@ -47,7 +47,7 @@
 "manifest_version": "2.0.0"
 "name": "couch"
 "public_title": "CouchDB"
-"short_description": "Track and graph your CouchDB activity and performance metrics."
+"short_description": "CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化"
 "supported_os":
 - "linux"
 - "windows"
@@ -55,14 +55,14 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Caching"
+  - "Category::キャッシュ"
   - "Category::Data Stores"
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Track and graph your CouchDB activity and performance metrics."
+  "description": "CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -72,35 +72,35 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![CouchDB dashboard][1]
+![CouchDB ダッシュボード][1]
 
-## Overview
+## 概要
 
-Capture CouchDB data in Datadog to:
+Datadog で CouchDB データをキャプチャすると、以下のことが可能です。
 
-- Visualize key CouchDB metrics.
-- Correlate CouchDB performance with the rest of your applications.
+- CouchDB のキーメトリクスを視覚化できます。
+- CouchDB のパフォーマンスをアプリケーションの他の部分と関連付けることができます。
 
-For performance reasons, the CouchDB version you're using is cached, so you cannot monitor CouchDB instances with different versions with the same agent instance.
+パフォーマンス上の理由から、現在使用している CouchDB バージョンはキャッシュされます。そのため、同じ Agent インスタンスを使用して、異なるバージョンの CouchDB インスタンスを監視することはできません。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The CouchDB check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your CouchDB servers.
+CouchDB チェックは [Datadog Agent][2] パッケージに含まれています。CouchDB サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `couch.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your CouchDB performance data. See the [sample couch.d/conf.yaml][2] for all available configuration options:
+1. CouchDB のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `couch.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル couch.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -112,21 +112,21 @@ To configure this check for an Agent running on a host:
      - server: http://localhost:5984
    ```
 
-    **Note**: provide a `db_include` and `db_exclude` to control which databases the Agent should and should not collect metrics from.
+    **注**: `db_include` と `db_exclude` を指定して、どのデータベースから Agent がメトリクスを収集する/しないを制御できます。
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `couch.d/conf.yaml` file to start collecting your CouchDB Logs:
+2. CouchDB のログの収集を開始するには、次の構成ブロックを `couch.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -136,68 +136,68 @@ _Available for Agent versions >6.0_
        service: couch
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment. See the [sample couch.d/conf.yaml][2] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル couch.d/conf.yaml][2] を参照してください。
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/couch/datadog_checks/couch/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                |
+| パラメーター            | 値                                |
 | -------------------- | ------------------------------------ |
 | `<INTEGRATION_NAME>` | `couch`                              |
-| `<INIT_CONFIG>`      | blank or `{}`                        |
+| `<INIT_CONFIG>`      | 空白または `{}`                        |
 | `<INSTANCE_CONFIG>`  | `{"server": "http://%%host%%:5984"}` |
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                                |
+| パラメーター      | 値                                                |
 | -------------- | ---------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "couchdb", "service": "<SERVICE_NAME>"}` |
+| `<LOG_CONFIG>` | `{"source": "couchdb", "service": "<サービス名>"}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][3] and look for `couch` under the Checks section.
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `couch` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "couch" >}}
 
 
-### Events
+### イベント
 
-The Couch check does not include any events.
+Couch チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "couch" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][4].
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-- [Monitoring CouchDB performance with Datadog][5]
+- [Datadog を使用した CouchDB パフォーマンスの監視][5]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/couch/images/couchdb_dashboard.png

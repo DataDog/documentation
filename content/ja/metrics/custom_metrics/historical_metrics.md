@@ -12,60 +12,60 @@ further_reading:
   text: Official and Community created API and DogStatsD client libraries
 ---
 
-## Overview
+## 概要
 
-Enabling Historical Metrics Ingestion allows you to collect metric values with timestamps older than one hour from the time of submission, but no older than your total metric retention period (default of 15 months).
+過去のメトリクスの取り込みを有効にすると、送信時刻よりも 1 時間以上前のタイムスタンプを持つメトリクス値を収集できますが、メトリクスの総保持期間 (デフォルトは 15 か月) を過ぎたものは収集できません。
 
-Having Historical Metrics Ingestion enabled on your metrics can be helpful for a variety of use cases such as recovering from an outage, correcting erroneous values, and managing IoT delays.
+過去のメトリクスの取り込みをメトリクスで有効にすると、障害からの復旧、誤った値の修正、IoT の遅延管理など、さまざまなユースケースで役立ちます。
 
-## What is Historical Metrics Ingestion?
+## 過去のメトリクスの取り込みとは？
 
-{{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="Diagram showing the ingestion flow for Historical Metrics enabled" >}}
+{{< img src="/metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240202.png" alt="過去のメトリクスの取り込みフローが有効であることを示す図" >}}
 
-Datadog classifies *historical metrics* as metric points with timestamps that are older than an hour relative to the time of submission. If Historical Metrics Ingestion is not enabled, a metric's values older than an hour from submission are not ingested.
+Datadog では、タイムスタンプの時刻から 1 時間経過した後に送信されたメトリクスポイントを、*過去のメトリクス*として分類しています。過去のメトリクスの取り込みが有効になっていない場合、1 時間経過した後に送信された送信されたメトリクスの値は取り込まれません。
 
-For example, your metric (`exampleMetricA`) emits a value to Datadog at 1:00 PM EST, and the timestamp on that value is 10:00 AM EST. This metric value is classified as _historical_ because it has a timestamp 3 hours older relative to the time of submission.
+例えば、メトリクス (`exampleMetricA`) が午後 1 時 00 分 (EST) に Datadog に値を送信し、その値のタイムスタンプが午前 10 時 00 分 (EST) だとします。このメトリクスの値は、タイムスタンプが送信時刻よりも 3 時間古いため、_過去_に分類されます。
 
-With Historical Metrics Ingestion enabled, if you submit multiple values with the same timestamp and same tag-value combination to Datadog, Datadog preserves the most recently submitted value. That is, If within the same timestamp, you submit a metric with a value of X, and also send that metric with a value of Y, whichever value is the most recently submitted will be preserved.
+過去のメトリクスの取り込みを有効にして、同じタイムスタンプと、同じタグ-値の組み合わせを持つ複数の値を Datadog に送信した場合、Datadog  はより直近で送信された値を保持します。つまり、同じタイムスタンプで、X の値を持つメトリクスと Y の値を持つメトリクスを送信した場合、より直近で送信された値が保持されることになります。
 
-You can start ingesting historical metric values by enabling Historical Metrics Ingestion on the [Metrics Summary Page][1] for *counts, rates, and gauges* metric types.  
+[Metrics Summary ページ][1]で、*カウント、レート、ゲージ*のメトリクスタイプについて過去のメトリクスの取り込みを有効にすることで、過去のメトリクスの取り込みを開始することができます。
 
-**Note**: Historical Metrics Ingestion is not available for distribution metrics.
+**注**: 過去のメトリクスの取り込みは、ディストリビューションメトリクスでは利用できません。
 
-## Configuration
+## 構成
 
-To enable the ingestion of historical metrics for a specific metric:
-1. Navigate to the [Metrics Summary Page][1].
-1. Click on the metric name you want to enable Historical Metrics Ingestion for to open the metric's details side panel.
-1. Within the *Advanced* section of the side panel, click **Configure**.
-1. Select the **Enable historical metrics** toggle and press **Save**.
+特定のメトリクスについて過去のメトリクスの取り込みを有効にするには:
+1. [Metrics Summary ページ][1]に移動します。
+1. 過去のメトリクスの取り込みを有効にしたいメトリクスの名前をクリックして、メトリクスの詳細サイドパネルを開きます。
+1. サイドパネルの *Advanced* セクションで **Configure** をクリックします。
+1. **Enable historical metrics** トグルを選択し、**Save** を押します。
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Metrics Summary page showing the Historical Metrics facets panel and the Advanced section of an open Metric detail panel with the Enable historical metrics option selected" style="width:100%;" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Metrics Summary ページで、Historical Metrics ファセットパネルが表示され、Metric 詳細パネルの Advanced セクションで Enable historical metrics のオプションが選択されている様子" style="width:100%;" >}}
 
-### Bulk configuration for multiple metrics
+### 複数のメトリクスの一括構成
 
-You can enable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
+複数のメトリクスについても、個別に構成を行うのではなく、過去のメトリクスの取り込みをまとめて有効にすることができます。
 
-1.  Navigate to the [Metrics Summary Page][1] and click the **Configure Metrics** dropdown.
-1. Select **Enable historical metrics**.
-1. Specify a metric namespace prefix to enable Historical Metrics Ingestion on all metrics that match that namespace.
+1.  [Metrics Summary ページ][1]に移動し、**Configure Metrics** ドロップダウンをクリックします。
+1. **Enable historical metrics** を選択します。
+1. メトリクスのネームスペースの接頭辞を指定すると、そのネームスペースに一致するすべてのメトリクスで、過去のメトリクスの取り込みを有効にできます。
 
-{{< img src="metrics/custom_metrics/historical_metrics/enable_bulk_historical_metrics.mp4" alt="Walkthrough of bulk enabling historic metric ingestion" video=true >}}
+{{< img src="metrics/custom_metrics/historical_metrics/enable_bulk_historical_metrics.mp4" alt="過去のメトリクスの取り込みを一括で有効にする方法のチュートリアル" video=true >}}
 
-## Historical metrics submission
+## 過去のメトリクスの送信
 
-After enabling Historical Metrics Ingestion, you can submit metric values with historical timestamps through the [API](#api) or through the [Agent](#agent).
+過去のメトリクスの取り込みを有効にした後は、[API](#api) または [Agent](#agent) を通じて過去のタイプスタンプを持つメトリクス値を送信できます。
 
 ### API 
 
-With the API, you can submit metric values with historical timestamps in the payload (as long as the metric name has already been enabled to accept historical metrics through the user interface described above).
+API を使用すると、ペイロードに過去のタイムスタンプを含むメトリクス 値を送信することができます (上記のユーザーインターフェイスを通じて、そのメトリクス名で過去のメトリクスの受け入れが有効になっている場合)。
 
 {{< programming-lang-wrapper langs="python,java,go,ruby,typescript,curl" collapsible="true">}}
 
 {{< programming-lang lang="python">}}
 ```python
 """
-Submit metrics returns "Payload accepted" response
+メトリクスを送信すると、"Payload accepted" の応答が返されます
 """
 
 from datetime import datetime
@@ -85,7 +85,7 @@ body = MetricPayload(
             points=[
                 MetricPoint(
 
-                    """ Add historical timestamp here """
+                    """ ここで過去のタイプスタンプを追加します """
                     timestamp=int(datetime.now().timestamp()),
                     """ *********************** """
 
@@ -113,7 +113,7 @@ with ApiClient(configuration) as api_client:
 
 {{< programming-lang lang="java" >}}
 ```java
-// Submit metrics returns "Payload accepted" response
+// メトリクスを送信すると、"Payload accepted" の応答が返されます
 import com.datadog.api.client.ApiClient;
 import com.datadog.api.client.ApiException;
 import com.datadog.api.client.v2.api.MetricsApi;
@@ -142,7 +142,7 @@ public class Example {
                             Collections.singletonList(
                                 new MetricPoint()
 
-                                    //Add historical timestamp here
+                                    //ここで過去のタイプスタンプを追加します
                                     .timestamp(OffsetDateTime.now().toInstant().getEpochSecond())
                                     //***********************
 
@@ -168,7 +168,7 @@ public class Example {
 
 {{< programming-lang lang="go" >}}
 ```go
-// Submit metrics returns "Payload accepted" response
+// メトリクスを送信すると、"Payload accepted" の応答が返されます
 
 package main
 
@@ -191,7 +191,7 @@ func main() {
                 Type:   datadogV2.METRICINTAKETYPE_UNSPECIFIED.Ptr(),
                 Points: []datadogV2.MetricPoint{
                     {   
-                        //Add historical timestamp here
+                        //ここで過去のタイプスタンプを追加します
                         Timestamp: datadog.PtrInt64(time.Now().Unix()),
                         //***********************
 
@@ -226,7 +226,7 @@ func main() {
 
 {{< programming-lang lang="ruby" >}}
 ```ruby
-# Submit metrics returns "Payload accepted" response
+# メトリクスを送信すると、"Payload accepted" の応答が返されます
 
 require "datadog_api_client"
 api_instance = DatadogAPIClient::V2::MetricsAPI.new
@@ -239,7 +239,7 @@ body = DatadogAPIClient::V2::MetricPayload.new({
       points: [
         DatadogAPIClient::V2::MetricPoint.new({
 
-          #Add historical timestamp here  
+          #ここで過去のタイプスタンプを追加します  
           timestamp: Time.now.to_i,
           #***********************  
 
@@ -262,7 +262,7 @@ p api_instance.submit_metrics(body)
 {{< programming-lang lang="typescript" >}}
 ```typescript
 /**
- * Submit metrics returns "Payload accepted" response
+ * メトリクスを送信すると、"Payload accepted" の応答が返されます
  */
 
 import { client, v2 } from "@datadog/datadog-api-client";
@@ -278,7 +278,7 @@ const params: v2.MetricsApiSubmitMetricsRequest = {
         type: 0,
         points: [
           {
-            //Add historical timestamp here
+            //ここで過去のタイプスタンプを追加します
             timestamp: Math.round(new Date().getTime() / 1000),
             //***********************
 
@@ -309,11 +309,11 @@ apiInstance
 
 {{< programming-lang lang="curl" >}}
 ```shell
-## Dynamic Points
-# Post time-series data that can be graphed on Datadog’s dashboards.
-# Template variables
+## ダイナミックポイント
+# Datadog のダッシュボードでグラフ化可能な時系列データをPostします。
+# テンプレート変数
 export NOW="$(date +%s)"
-# Curl command
+# Curl コマンド
 curl -X POST "https://api.datadoghq.com/api/v2/series" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
@@ -326,7 +326,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/series" \
       "type": 0,
       "points": [
         {
-            # Add historical timestamp here
+            # ここで過去のタイプスタンプを追加します
           "timestamp": 1636629071,
             # ***********************
 
@@ -350,7 +350,7 @@ EOF
 
 ### Agent
 
-To submit historical metrics with the Agent, make sure you have Agent version 7.40.0 or later installed. This version includes an updated DogStatsD interface, which supports **Java**, **GoLang**, and **.NET**. This allows you to send delayed metric points through the Agent.
+Agent を使って過去のメトリクスを送信するには、Agent バージョン 7.40.0 以降がインストールされていることを確認します。このバージョンには、新しい DogStatsD インターフェースが含まれ、**Java**、**GoLang**、**.NET** をサポートします。これにより、Agent を通じて過去のメトリクスポイントを送信することが可能になります。
 
 {{< programming-lang-wrapper langs="java,go,.NET" >}}
 
@@ -429,26 +429,26 @@ public class DogStatsdClient
 
 {{< /programming-lang-wrapper >}}
 
-## Historical Metrics Ingestion's latency
+## 過去のメトリクスの取り込みのレイテンシー
 
-Historical Metrics Ingestion has varying latency depending on how far in the past your metrics' timestamps are.
+過去のメトリクスの取り込みは、メトリクスのタイプスタンプがどれくらい過去のものかによってレイテンシーが変わります。
 
-| Metric Delayed by:   | Ingestion Latency                     |
+| メトリクスの遅延   | 取り込みのレイテンシー                     |
 |----------------------|---------------------------------------|
-| 1-12 hours           | Near Real-Time Ingestion (1 hour MAX) |
-| 12 hours - 30 days   | Up to 14 hour latency                 |
-| +30 days             | +14 hours latency                     |
+| 1-12 時間           | ほぼリアルタイムで取り込み (最大 1 時間) |
+| 12 時間 - 30 日   | 最大 14 時間のレイテンシー                 |
+| 30 日超             | 14 時間超のレイテンシー                     |
 
 
-## Historical Metrics Ingestion billing
+## 過去のメトリクスの取り込みに対する請求
 
-Historical Metrics are counted and billed as indexed custom metrics. Billable custom metrics are determined by the **timestamp of the metrics submitted**, regardless of whether they have a timestamp of today or 15 months into the past. As long as that metric name and tag value combination is actively reporting ANY value (regardless of the timestamp), it would be considered active in the hour that it was submitted. For more information, see the [Custom Metrics billing][3] documentation.
+過去のメトリクスは、インデックス化されたカスタムメトリクスとしてカウントされ、請求されます。請求対象のカスタムメトリクスは、**送信されたメトリクスのタイムスタンプ**によって決まります。タイムスタンプが今日であろうと 15 か月前であろうと関係ありません。そのメトリクス名とタグ値の組み合わせで (タイムスタンプに関係なく) 何らかの値がアクティブに報告されている限り、それが送信された時点でアクティブであるとみなされます。詳細については、[カスタムメトリクスの請求][3]のドキュメントを参照してください。
 
-Track your indexed historical metrics through the Usage Summary section of the [Plan and Usage page][4].
+インデックス化された過去のメトリクスは、[Plan and Usage ページ][4]の Usage Summary セクションで追跡できます。
 
-{{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Usage Summary section of the Plan and Usage page, which shows both custom indexed and historical indexed metrics" style="width:100%;" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="インデックス化されたカスタムメトリクスと過去のメトリクスの両方が表示されたPlan and Usage ページの Usage Summary セクション" style="width:100%;" >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

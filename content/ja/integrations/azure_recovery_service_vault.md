@@ -2,7 +2,7 @@
 "categories":
 - cloud
 - azure
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure Recovery Service Vault metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_recovery_service_vault/"
@@ -27,27 +27,27 @@ The Azure Recovery Service Vault integration helps you monitor the health of a R
 
 The Datadog Azure integration can collect metrics from the Azure Recovery Service Vault, but it is [recommended][1] that you install the Datadog Agent on your VMs. If your organization is on Datadog's US3 site and you've configured the Datadog resource in Azure, use the instructions on the [Azure Native Integration Manual Setup Guide][2]. **All sites** can use the instructions on the [Azure Integration Manual Setup Guide][3] or [Azure Programmatic Management Guide][4].
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][5] first. There are no other installation steps.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_recovery_service_vault" >}}
 
 
-### Events
+### イベント
 
 The Azure Recovery Service Vault integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Recovery Service Vault integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

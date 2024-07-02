@@ -26,7 +26,7 @@
 "categories":
 - cloud
 - os & system
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/hyperv/README.md"
 "display_on_public_website": true
@@ -63,13 +63,13 @@
 
 This check monitors [Hyper-V][1] through the Datadog Agent.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Hyper-V check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
 
-### Configuration
+### 構成
 
 1. Edit the `hyperv.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to collect your Hyper-V performance data. See the [sample hyperv.d/conf.yaml][3] for all available configuration options.
 
@@ -81,21 +81,21 @@ The Hyper-V check is included in the [Datadog Agent][2] package. No additional i
 
 [Run the Agent's status subcommand][6] and look for `hyperv` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "hyperv" >}}
 
 
-### Service Checks
+### サービスチェック
 
 Hyper-V does not include any service checks.
 
-### Events
+### イベント
 
 Hyper-V does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

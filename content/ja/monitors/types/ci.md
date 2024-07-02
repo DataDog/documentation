@@ -20,97 +20,97 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-## Overview
+## 概要
 
-Once [CI Visibility is enabled][1] for your organization, you can create a CI Pipeline or CI Test monitor.
+[CI Visibility を有効にする][1]と、CI Pipeline または CI Test モニターを作成することができます。
 
-CI monitors allow you to visualize CI data and set up alerts on it. For example, create a CI Pipeline monitor to receive alerts on a failed pipeline or a job. Create a CI Test monitor to receive alerts on failed or slow tests.
+CI モニターでは、CI データを視覚化し、それに対するアラートを設定することができます。例えば、CI Pipeline モニターを作成し、パイプラインやジョブが失敗した場合のアラートを受信します。CI Test モニターを作成し、失敗したテストや遅いテストに関するアラートを受信します。
 
-## Monitor creation
+## モニターの作成
 
-To create a [CI monitor][2] in Datadog, use the main navigation: *Monitors -> New Monitor --> CI*.
+Datadog で [CI モニター][2]を作成するには、メインナビゲーションで *Monitors -> New Monitor --> CI* の順に進みます。
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 CI monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
+<div class="alert alert-info"><strong>注</strong>: アカウント当たり上限 1000 件の CI モニターがデフォルトで設定されています。この制限を解除するには、<a href="/help/">サポートまでお問い合わせ</a>ください。</div>
 
-Choose between a **Pipelines** or a **Tests** monitor:
+**Pipelines** または **Tests** のどちらかのモニターを選択します。
 
 {{< tabs >}}
 {{% tab "Pipelines" %}}
 
-### Define the search query
+### 検索クエリを定義する
 
-1. Construct a search query using the same logic as a CI Pipeline explorer search.
-2. Select the CI Pipeline events level:
-    * **Pipeline**: Evaluates the execution of an entire pipeline, usually composed of one or more jobs.
-    * **Stage**: Evaluates the execution of a group of one or more jobs in CI providers that support it.
-    * **Job**: Evaluates the execution of a group of commands.
-    * **Command**: Evaluates manually instrumented [custom command][1] events, which are individual commands being executed in a job.
-    * **All**: Evaluates all types of events.
-3. Choose to monitor over a CI Pipeline event count, facet, or measure:
-    * **CI Pipeline event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
-    * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
-    * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline measure (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-4. Group CI Pipeline events by multiple dimensions (optional):
-    * All CI Pipeline events matching the query are aggregated into groups based on the value of up to four facets.
-5. Configure the alerting grouping strategy (optional):
-   * If the query has a `group by`, multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@ci.pipeline.name` to receive a separate alert for each CI Pipeline name when the number of errors is high.
+1. CI エクスプローラーでの検索と同じロジックを使用して検索クエリを作成します。
+2. CI パイプラインイベントのレベルを選択します。
+    * **Pipeline**: 通常、1 つ以上のジョブで構成されるパイプライン全体の実行を評価します。
+    * **Stage**: 1 つ以上のジョブのグループをサポートする CI プロバイダーでの実行を評価します。
+    * **Job**: コマンド群の実行を評価します。
+    * **Command**: ジョブで実行される個々のコマンドである、手動でインスツルメントされた[カスタムコマンド][1]イベントを評価します。
+    * **All**: あらゆる種類のイベントを評価します。
+3. CI パイプラインのイベント数、ファセット、またはメジャーのモニタリングを選択します。
+    * **CI Pipeline event count**: 検索バーを使用し (任意)、ファセットまたはメジャーは選択**しません**。選択されたタイムフレームで Datadog が CI パイプラインイベント数を評価し、それをしきい値の条件と比較します。
+    * **Dimension**: ディメンション (質的ファセット) を選択し、そのファセットの `Unique value count` に対してアラートを表示します。
+    * **Measure**: CI Pipeline メジャーの数値に対してアラートを出すためのメジャー (定量ファセット) を選択します (メトリクスモニターに似ています)。集計方法 (`min`、`avg`、`sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`) を選択します。
+4. 複数のディメンションで CI パイプラインイベントをグループ化する (オプション):
+    * クエリに一致するすべての CI パイプラインイベントは、最大 4 つのファセットの値に基づいてグループに集約されます。
+5. アラート設定のグループ化方法を構成します（任意）:
+   * クエリに `group by` が含まれる場合、グループパラメーターに従い、複数のアラートを各ソースに適用します。アラートイベントは、設定された条件を満たすと各グループに生成されます。たとえば、クエリを `@ci.pipeline.name` でグループ化すると、エラーの数が多い場合に CI パイプラインごとに個別のアラートを受信することができます。
 
-{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Test Name" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query.png" alt="テスト名でグループ化されるよう設定される CI Status:Error のクエリ" style="width:100%;" >}}
 
-#### Using formulas and functions
+#### 数式と関数の使用
 
-You can create CI Pipeline monitors using formulas and functions. This can be used, for example, to create monitors on the **rate** of an event happening, such as the rate of a pipeline failing (error rate).
+数式と関数を使用して CI パイプラインを作成できます。これは、たとえばパイプラインの失敗率(エラー率）など、イベントの発生**率**のモニターを作成する場合に使用できます。
 
-The following example is of a pipeline error rate monitor using a formula that calculates the ratio of "number of failed pipeline events" (`ci.status=error`) over "number of total pipeline events" (no filter), grouped by `ci.pipeline.name` (to be alerted once per pipeline). To learn more, see the [Functions Overview][2].
-{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query-fnf.png" alt="Monitor being defined with steps a, b, and c, where steps a and b are queries and step c calculates the rate from them." style="width:1000%;" >}}
+次の例は、`ci.pipeline.name` (パイプラインごとに 1 回アラートする) でグループ化された "全パイプラインイベント数” (フィルターなし) に対する "失敗パイプラインイベント数” (`ci.status=error`) の割合を計算する式を使ったパイプラインエラー率モニターの例です。詳しくは、[関数の概要][2]を参照してください。
+{{< img src="monitors/monitor_types/ci_pipelines/define-the-search-query-fnf.png" alt="モニターは、ステップ a、b、c で定義され、ステップ a と b はクエリし、ステップ c はそれらからレートを計算します。" style="width:1000%;" >}}
 
-<div class="alert alert-info"><strong>Note</strong>: Only up to 2 queries can be used to build the evaluation formula per monitor.</div>
+<div class="alert alert-info"><strong>注</strong>: 各モニターに評価数式の構築には、最大 2 つのクエリまで使用できます。</div>
 
 [1]: /continuous_integration/pipelines/custom_commands/
 [2]: /dashboards/functions/#overview
 {{% /tab %}}
 {{% tab "Tests" %}}
 
-### Define the search query
+### 検索クエリを定義する
 
-1. Common monitor types: (optional) Provides a template query for each of the **New Flaky Test**, **Test Failures**, and **Test Performance** common monitor types, which you can then customize. Learn more about this feature by reading [Track new flaky tests](#track-new-flaky-tests).
-2. Construct a search query using the same logic as a CI Test explorer search. For example, you can search failed tests for the `main` branch of the `myapp` test service using the following query: `@test.status:fail @git.branch:main @test.service:myapp`.
-3. Choose to monitor over a CI Test event count, facet, or measure:
-    * **CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline test events over a selected time frame, then compares it to the threshold conditions.
-    * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
-    * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline facet (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-4. Group CI Test events by multiple dimensions (optional):
-    * All CI Test events matching the query are aggregated into groups based on the value of up to four facets.
-5. Configure the alerting grouping strategy (optional):
-    * If the query has a `group by`, an alert is sent for every source according to the group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@test.full_name` to receive a separate alert for each CI Test full name when the number of errors is high. Test full name is a combination of a test suite and test name, for example: `MySuite.myTest`. In Swift, test full name is a combination of a test bundle, and suite and name, for example: `MyBundle.MySuite.myTest`.
+1. 共通モニタータイプ: (オプション) **New Flaky Test**、**Test Failures**、**Test Performance** 共通モニタータイプごとにテンプレートクエリを提供し、カスタマイズすることが可能です。この機能の詳細については、[新しい不安定なテストの追跡](#track-new-flaky-tests)を参照してください。
+2. CI Test エクスプローラーの検索と同じロジックで検索クエリを作成します。たとえば、`myapp` というテストサービスの `main` ブランチに対して失敗したテストを検索するには、クエリ `@test.status:fail @git.branch:main @test.service:myapp` を使用します。
+3. CI Test のイベント数、ファセット、またはメジャーのモニタリングを選択します。
+    * **CI Test event count**: 検索バーを使用し (任意)、ファセットまたはメジャーは選択**しません**。選択されたタイムフレームで Datadog が CI パイプラインテストイベント数を評価し、それをしきい値の条件と比較します。
+    * **Dimension**: ディメンション (質的ファセット) を選択し、そのファセットの `Unique value count` に対してアラートを表示します。
+    * **Measure**: CI Pipeline ファセットの数値に対してアラートを出すためのメジャー (定量ファセット) を選択します (メトリクスモニターに似ています)。集計方法 (`min`、`avg`、`sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`) を選択します。
+4. 複数のディメンションで CI Test イベントをグループ化する (オプション):
+    * クエリに一致するすべての CI Test イベントは、最大 4 つのファセットの値に基づいてグループに集約されます。
+5. アラート設定のグループ化方法を構成します（任意）:
+    * クエリに `group by` がある場合、グループパラメーターにしたがって、すべてのソースに対してアラートが送信されます。設定された条件を満たす各グループに対してアラートイベントが生成されます。例えば、クエリを `@test.full_name` でグループ化し、エラー数が多い場合に CI Test フルネーム毎に個別のアラートを受信することができます。テストのフルネームはテストスイートとテスト名の組み合わせで、例えば `MySuite.myTest` のようなものです。Swift では、テストのフルネームはテストバンドルとスイートと名前の組み合わせで、例えば `MyBundle.MySuite.myTest` のような名前になります。
 
-{{< img src="monitors/monitor_types/ci_tests/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Pipeline Name" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/ci_tests/define-the-search-query.png" alt="パイプライン名でグループ化されるよう設定される CI Status:Error のクエリ" style="width:100%;" >}}
 
-#### Test runs with different parameters or configurations
-Use `@test.fingerprint` in the monitor `group by` when you have tests with the same test full name, but different test parameters or configurations. This way, alerts trigger for test runs with specific test parameters or configurations. Using `@test.fingerprint` provides the same granularity level as the Test Stats, Failed, and Flaky Tests section on the **Commit Overview** page.
+#### 異なるパラメーターや構成でのテスト実行
+同じテストのフルネームで、異なるテストパラメーターや構成のテストがある場合、モニターの `group by` で `@test.fingerprint` を使用します。こうすることで、特定のパラメーターや構成でテストを実行した場合に警告を発することができます。`@test.fingerprint` を使用すると、**Commit Overview** ページにある Test Stats, Failed and Flaky Tests セクションと同じ粒度レベルが提供されます。
 
-For example, if a test with the same full name failed on Chrome, but passed on Firefox, then using the fingerprint only triggers the alert on the Chrome test run.
+例えば、同じフルネームのテストが Chrome では失敗し、Firefoxでは合格した場合、フィンガープリントを使用すると、Chrome のテスト実行時にのみアラートが発生します。
 
-Using `@test.full_name` in this case triggers the alert, even though the test passed on Firefox.
+この場合、`@test.full_name` を使用すると、Firefox 上でテストに合格していても、警告が表示されます。
 
-#### Formulas and functions
+#### 数式と関数
 
-You can create CI Test monitors using formulas and functions. For example, this can be used to create monitors on the **rate** of an event happening, such as the rate of a test failing (error rate).
+数式と関数を使用して CI Test を作成できます。たとえば、これはテストの失敗率 (エラー率) など、イベントの発生**率**のモニターを作成する場合に使用できます。
 
-The following example is a test error rate monitor using a formula that calculates the ratio of "number of failed test events" (`@test.status:fail`) over "number of total test events" (no filter), grouped by `@test.full_name` (to be alerted once per test). To learn more, see the [Functions Overview][1].
+以下は、テストエラー率モニターの例です。「テストイベント総数」(フィルターなし) に対する「失敗したテストイベント」(`@test.status:fail`) の割合を計算する数式を使用し、`@test.full_name` でグループ化 (テストごとにアラート) されています。詳しくは、[関数の概要][1]をご覧ください。
 
-{{< img src="monitors/monitor_types/ci_tests/define-the-search-query-fnf.png" alt="Monitor being defined with steps a, b, and c, where steps a and b are queries and step c calculates the rate from them." style="width:100%;" >}}
+{{< img src="monitors/monitor_types/ci_tests/define-the-search-query-fnf.png" alt="ステップ a、b、c で定義されたモニター。ステップ a および b はクエリで、ステップ c はそこから割合を算出します。" style="width:100%;" >}}
 
-#### Using CODEOWNERS for notifications
+#### CODEOWNERS を利用した通知
 
-You can send the notification to different teams using the `CODEOWNERS` information available in the test event.
+テストイベントで利用可能な `CODEOWNERS` の情報を使って、異なるチームに通知を送信することができます。
 
-The example below configures the notification with the following logic:
-* If the test code owner is `MyOrg/my-team`, then send the notification to the `my-team-channel` Slack channel.
-* If the test code owner is `MyOrg/my-other-team`, then send the notification to the `my-other-team-channel` Slack channel.
+以下の例では、次のロジックで通知を構成しています。
+* もしテストコードのオーナーが `MyOrg/my-team` ならば、`my-team-channel` Slack チャンネルに通知を送ります。
+* もしテストコードのオーナーが `MyOrg/my-other-team` ならば、`my-other-team-channel` Slack チャンネルに通知を送ります。
 
 {{< code-block lang="text" >}}
 {{#is_match "citest.attributes.test.codeowners" "MyOrg/my-team"}}
@@ -121,87 +121,87 @@ The example below configures the notification with the following logic:
 {{/is_match}}
 {{< /code-block >}}
 
-In the `Notification message` section of your monitor, add text similar to the code snippet above to configure monitor notifications. You can add as many `is_match` clauses as you need. For more information on Notification variables, see [Monitors Conditional Variables][2].
+モニターの `Notification message` セクションに、上記のコードスニペットのようなテキストを追加して、モニター通知の設定をします。`is_match` 句は必要なだけ追加することができます。Notification 変数については、[条件付き変数の監視][2]を参照してください
 
 [1]: /dashboards/functions/#overview
 [2]: /monitors/notify/variables/?tab=is_match#conditional-variables
 {{% /tab %}}
 {{< /tabs >}}
-### Set alert conditions
+### アラートの条件を設定する
 
-* Trigger when the metric is `above`, `above or equal to`, `below`, or `below or equal to`
-* The threshold during the last `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between `1 minute` and `2 days`
-* Alert threshold `<NUMBER>`
-* Warning threshold `<NUMBER>`
+* メトリクスが `above`、`above or equal to`、`below`、`below or equal to` の場合にトリガーされる
+* 過去 `5 minutes`、`15 minutes`、`1 hour` の間のしきい値、または `custom` に `1 minute` ～ `2 days` の値を設定します。
+* アラートのしきい値 `<数値>`
+* 警告のしきい値 `<数値>`
 
-#### Advanced alert conditions
+#### 高度なアラート条件
 
-For detailed instructions on the advanced alert options (such as evaluation delay), see the [Monitor configuration][3] page.
+高度なアラートオプション (評価遅延など) の詳細な手順については、[モニターコンフィギュレーション][3]ページを参照してください。
 
-### Notifications
+### 通知
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
 
-#### Samples and breaching values top list
+#### ログのサンプルと違反値トップリスト
 
-When a CI Test or Pipeline monitor is triggered, samples or values can be added to the notification message.
+CI テストまたはパイプラインモニターがトリガーされると、サンプルまたは値が通知メッセージに追加されます。
 
-| Monitor Setup                    | Can be added to notification message |
+| モニター設定                    | 通知メッセージに追加可能な値 |
 |----------------------------------|--------------------------------------|
-| Ungrouped Simple-Alert count     | Up to 10 samples.                    |
-| Grouped Simple-Alert count       | Up to 10 facet or measure values.    |
-| Grouped Multi-Alert count        | Up to 10 samples.                    |
-| Ungrouped Simple-Alert measure   | Up to 10 samples.                    |
-| Grouped Simple-Alert measure     | Up to 10 facet or measure values.    |
-| Grouped Multi-Alert measure        | Up to 10 facet or measure values.    |
+| グループ化されていない Simple-Alert 数     | 最大 10 個のサンプル。                    |
+| グループ化された Simple-Alert 数       | 最大 10 個のファセット値またはメジャー値。    |
+| グループ化された Multi-Alert 数        | 最大 10 個のサンプル。                    |
+| グループ化されていない Simple-Alert メジャー   | 最大 10 個のサンプル。                    |
+| グループ化された Simple-Alert メジャー     | 最大 10 個のファセット値またはメジャー値。    |
+| グループ化された Multi-Alert メジャー        | 最大 10 個のファセット値またはメジャー値。    |
 
-These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
+これらの通知の送信に、Slack、Jira、webhooks、Microsoft Teams、Pagerduty、電子メールを使用することができます。**注**: サンプルはリカバリ通知には表示されません。
 
-To disable samples, uncheck the box at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping (as stated above).
+サンプルを無効にするには、**Say what's happening** セクションの一番下にあるチェックボックスをオフにします。チェックボックスの隣に表示されるテキストは、モニターのグループ化によって変わります（上記を参照）。
 
-#### Sample examples
+#### サンプル例
 
-Include a table of CI Test 10 samples in the alert notification:
-{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="Top 10 CI Test samples" style="width:60%;" >}}
+アラート通知に CI テスト 10 サンプルのテーブルを含めます。
+{{< img src="monitors/monitor_types/ci_tests/10_ci_tests_samples.png" alt="CI テストサンプルトップ 10" style="width:60%;" >}}
 
-Include a table of CI Pipeline 10 samples in the alert notification:
-{{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="Top 10 CI Pipeline samples" style="width:60%;" >}}
+アラート通知に CI パイプライン 10 サンプルのテーブルを含めます。
+{{< img src="monitors/monitor_types/ci_pipelines/10_ci_pipelines_samples.png" alt="CI Pipeline サンプルトップ 10" style="width:60%;" >}}
 
-#### Notifications behavior when there is no data
+#### データがない時の通知行動
 
-A monitor that uses an event count for its evaluation query will resolve after the specified evaluation period with no data, triggering a notification. For example, a monitor configured to alert on the number of pipeline errors with an evaluation window of five minutes will automatically resolve after five minutes without any pipeline executions.
+評価クエリにイベントカウントを使用するモニターは、指定された評価期間の後にデータがなく解決され、通知をトリガーします。例えば、5 分の評価ウィンドウでパイプラインエラーの数にアラートするように構成されたモニターは、パイプラインの実行がない 5 分後に自動的に解決されます。
 
-As an alternative, Datadog recommends using rate formulas. For example, instead of using a monitor on the number of pipeline failures (count), use a monitor on the rate of pipeline failures (formula), such as `(number of pipeline failures)/(number of all pipeline executions)`. In this case, when there's no data, the denominator `(number of all pipeline executions)` will be `0`, making the division `x/0` impossible to evaluate. The monitor will keep the previous known state instead of evaluating it to `0`.
+代替案として、Datadog はレートフォーミュラの使用を推奨しています。例えば、パイプラインの失敗数 (カウント) のモニターを使う代わりに、`(パイプラインの失敗数)/(全パイプライン実行数)` のようなパイプライン失敗の割合 (式) のモニターを使います。この場合、データがないときには分母の `(全パイプライン実行数)` は `0` となり、割り算 `x/0` は評価できません。モニターは `0` に評価する代わりに、以前の既知の状態を維持します。
 
-This way, if the monitor triggers because there's a burst of pipeline failures that makes the error rate go above the monitor threshold, it will not clear until the error rate goes below the threshold, which can be at any time afterwards.
+この方法では、パイプラインの故障が多発してエラーレートがモニターのしきい値を超えたためにモニターがトリガーされた場合、エラーレートがしきい値を下回るまでクリアされません (その後、いつでもクリアできます)。
 
-## Example monitors
-Common monitor use cases are outlined below. Monitor queries can be modified to filter for specific branches, authors, or any other in-app facet.
+## モニター例
+一般的なモニターの使用例を以下に示します。モニタークエリは、特定のブランチ、作成者、その他のアプリ内のファセットに対してフィルターをかけるように変更することができます。
 
-### Trigger alerts for performance regressions
-The `duration` metric can be used to identify pipeline and test performance regressions for any branch. Alerting on this metric can prevent performance regressions from being introduced into your codebase.
+### パフォーマンス低下のアラートをトリガーする
+`duration` メトリクスは、パイプラインやテストのパフォーマンス低下を特定するために使うことができます。このメトリクスでアラートを出すことで、コードベースへのパフォーマンス後退を防ぐことができます。
 
-{{< img src="ci/regression_monitor.png" alt="CI pipeline regression monitor" style="width:100%;">}}
+{{< img src="ci/regression_monitor.png" alt="CI パイプラインの低下モニター" style="width:100%;">}}
 
-### Track new flaky tests
-Test monitors have the `New Flaky Test`, `Test Failures`, and `Test Performance` common monitor types for simple monitor setup. This monitor sends alerts when new flaky tests are added to your codebase. The query is grouped by `Test Full Name` so you don't get alerted on the same new flaky test more than once.
+### 新しい不安定なテストを追跡する
+テストモニターには、`New Flaky Test`、`Test Failures`、`Test Performance` という共通のモニタータイプがあり、簡単にモニターを設定することができます。このモニターは、新しい不安定なテストがコードベースに追加されたときにアラートを送信します。クエリは `Test Full Name` によってグループ化されているので、同じ新しい不安定なテストに対して何度もアラートが送られることはありません。
 
-A test run is marked as `flaky` if it exhibits flakiness within the same commit after some retries. If it exhibits flakiness multiple times (because multiple retries were executed), the `is_flaky` tag is added to the first test run that is detected as flaky.
+テスト実行が何度か再試行された後、同じコミット内で不安定性が発生した場合、`flaky` とマークされます。もし複数回不安定性が発生した場合 (複数のリトライが実行されたため)、`is_flaky` タグは不安定として検出された最初のテストランに追加されます。
 
-A test run is marked as `new flaky` if that particular test has not been detected to be flaky within the same branch or default branch. Only the first test run that is detected as new flaky is marked with the `is_new_flaky` tag (regardless of the number of retries).
+同じブランチやデフォルトブランチ内でそのテストが不安定であると検出されていない場合、そのテスト実行は `new flaky` としてマークされます。新しい不安定として検出された最初のテスト実行だけが、(再試行の回数に関係なく) `is_new_flaky` タグでマークされます。
 
-{{< img src="ci/flaky_test_monitor.png" alt="CI flaky test monitor" style="width:100%;">}}
+{{< img src="ci/flaky_test_monitor.png" alt="CI の不安定なテストモニター" style="width:100%;">}}
 
-For more information, see [Search and Manage CI Tests][6].
+詳しくは、[CI テストの検索と管理][6]を参照してください。
 
-### Maintain code coverage percentage
-[Custom metrics][5], such as code coverage percentage, can be created and used within monitors. The monitor below sends alerts when code coverage dips below a certain percentage, which can help with maintaining test performance over time.
+### コードカバレッジ率の維持
+コードカバレッジ率などの[カスタムメトリクス][5]を作成し、モニター内で使用することができます。以下のモニターは、コードカバレッジが一定の割合以下になるとアラートを送信し、長期間にわたってテストのパフォーマンスを維持するのに役立ちます。
 
-{{< img src="ci/codecoveragepct_monitor_light.png" alt="CI flaky test monitor" style="width:100%;">}}
+{{< img src="ci/codecoveragepct_monitor_light.png" alt="CI の不安定なテストモニター" style="width:100%;">}}
 
-For more information, see [Code Coverage][7].
+詳しくは、[コードカバレッジ][7]を参照してください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

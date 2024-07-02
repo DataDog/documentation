@@ -20,18 +20,18 @@ further_reading:
   text: Troubleshoot change alert monitors
 ---
 
-## Overview
+## 概要
 
-Metric monitors are useful for a continuous stream of data. Any metric sent to Datadog can be alerted upon if they cross a threshold over a given period of time.
+メトリクスモニターは連続的なデータのストリームに役立ちます。Datadog に送信されるメトリクスのいずれかが、一定の期間にしきい値から外れると、アラートを送信します。
 
 To create a metric monitor in Datadog, navigate to [**Monitors > New Monitor**][1] and select the **Metric** monitor type.
 
-## Choose the detection method
+## 検出方法を選択します。
 
 {{< tabs >}}
-{{% tab "Threshold" %}}
+{{% tab "しきい値" %}}
 
-A threshold alert compares metric values to a static threshold.
+しきい値アラートは、メトリクス値を静的なしきい値と比較します。
 
 On each alert evaluation, Datadog calculates the average, minimum, maximum, or sum over the selected period and checks if it is above, below, equal to, or not equal to the threshold. This is for standard alert cases where you know the expected values. The [distribution metric type][1] offers the additional threshold option of calculating percentiles over the selected period.
 
@@ -39,45 +39,45 @@ For more information, see the [Set alert conditions](#set-alert-conditions) sect
 
 [1]: /metrics/distributions/
 {{% /tab %}}
-{{% tab "Change" %}}
+{{% tab "変化" %}}
 
-A change alert compares the absolute or relative (%) change in value between `N` minutes ago and now against a given threshold. The compared data points aren't single points but are computed using the parameters in the *define the metric* section.
+変化アラートは、`N` 分前の値と現在の値との絶対変化量または相対変化量を指定のしきい値と比較します。比較されるデータポイントは、単一ポイントではなく、*define the metric* セクションのパラメーターを使用して計算された値です。
 
-On each alert evaluation, Datadog calculates the raw difference (a positive or negative value) between the series now and `N` minutes ago, then computes the average/minimum/maximum/sum over the selected period. An alert is triggered when this computed series crosses the threshold.
+アラートの評価には、現在の系列と `N` 分前の系列の差分 (正または負の値) を計算し、その値の選択された期間における平均、最小、最大、合計を計算します。その結果、系列がしきい値から外れる場合にアラートがトリガーされます。
 
-This type of alert is useful to track spikes, drops, or slow changes in a metric when there is not an unexpected threshold.
+このタイプのアラートは、しきい値を常に予測できる場合に、メトリクスのスパイク、ドロップ、あるいは緩やかな変化を追跡するのに役立ちます。
 
 For more information, see the [Change alert monitors][1] guide.
 
 [1]: /monitors/types/change-alert/
 {{% /tab %}}
-{{% tab "Anomaly" %}}
+{{% tab "異常" %}}
 
-An anomaly detection alert uses past behavior to detect when a metric is behaving abnormally.
+異常検出アラートは、過去の動作を使用して、メトリクスの異常な動作を検出します。
 
-Anomaly alerts calculate an expected range of values for a series based on the past. Some of the anomaly algorithms use the time-of-day and day-of-week to determine the expected range, thus capturing abnormalities that could not be detected by a simple threshold alert. For example, the series is unusually high for 5AM even though it would be considered normal at 10 AM.
+異常検出アラートは、過去の値を基に、系列に対して予期される値の範囲を計算します。異常検出アルゴリズムには、予期される範囲を時刻や曜日を使用して判断し、シンプルなしきい値アラートでは検出できない異常の検出を行うものがあります。たとえば、午前 10 時なら正常であっても、午前 5 時なら異常に高いと判断される系列を検出できます。
 
-On each alert evaluation, Datadog calculates the percentage of the series that falls above, below, and outside of the expected range. An alert is triggered when this percentage crosses the configured threshold.
+アラートの評価には、予期される範囲の内、外、上、下にある系列の割合を計算します。この割合がしきい値から外れる場合にアラートがトリガーされます。
 
 For more information, see the [Anomaly Monitor][1] page.
 
 [1]: /monitors/types/anomaly/
 {{% /tab %}}
-{{% tab "Outliers" %}}
+{{% tab "外れ値" %}}
 
-Outlier monitors detect when a member of a group (hosts, availability zones, partitions, etc.) is behaving unusually compared to the rest.
+外れ値モニターは、グループの他のメンバー (ホスト、アベイラビリティーゾーン、パーティションなど) と比較して動作が異常であるメンバーを検出します。
 
-On each alert evaluation, Datadog checks whether or not all groups are clustered together and exhibiting the same behavior. An alert is triggered when one or more groups diverges from the rest of the groups.
+アラートの評価では、すべてのグループが一緒にクラスター化され、同じ動作を示しているかをチェックします。1 つ以上のグループの動作が他のグループと異なる場合にアラートがトリガーされます。
 
 For more information, see the [Outlier Monitor][1] page.
 
 [1]: /monitors/types/outlier/
 {{% /tab %}}
-{{% tab "Forecast" %}}
+{{% tab "予測値" %}}
 
-A forecast alert predicts the future behavior of a metric and compares it to a static threshold. It is well-suited for metrics with strong trends or recurring patterns.
+予測値アラートは、メトリクスの今後の動作を予測し、それを静的なしきい値と比較します。強い傾向や繰り返しパターンがあるメトリクスに適しています。
 
-On each alert evaluation, a forecast alert predicts the future values of the metric along with the expected deviation bounds. An alert is triggered when any part of the bounds crosses the configured threshold.
+アラートの評価では、偏差の範囲を考慮してメトリクスの今後の値を予測します。この範囲のいずれかの部分がしきい値から外れる場合にアラートがトリガーされます。
 
 For more information, see the [Forecast Monitor][1] page.
 
@@ -85,74 +85,74 @@ For more information, see the [Forecast Monitor][1] page.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Define the metric
+## メトリクスを定義する
 
-Any metric reporting to Datadog is available for monitors. Use the editor and the steps below to define the metric. The query parameters vary slightly based on the chosen detection method.
+Datadog に報告する任意のメトリクスは、モニターに利用できます。エディタと以下のステップを使用して、メトリクスを定義します。クエリパラメーターは、選択した検出方法に基づいて若干変化します。
 
 {{< tabs >}}
-{{% tab "Threshold" %}}
+{{% tab "しきい値" %}}
 
 {{< img src="monitors/monitor_types/metric/metric_threshold_config.png" alt="define the metric for threshold detection metric monitor" style="width:100%;">}}
 
-| Step                              | Required | Default        | Example           |
+| 手順                              | 必須 | デフォルト        | 例           |
 |-----------------------------------|----------|----------------|-------------------|
-| Select a metric                   | Yes      | None           | `system.cpu.user` |
-| Define the `from`                 | No       | Everywhere     | `env:prod`        |
-| Specify metric aggregation        | Yes      | `avg by`       | `sum by`          |
-| Group by                          | No       | Everything     | `host`            |
-| Specify monitor query aggregation | No       | `average`      | `sum`             |
-| Evaluation window                 | No       | `5 minutes`    | `1 day`           |
+| メトリクスの選択                   | はい      | なし           | `system.cpu.user` |
+| `from` を定義する                 | いいえ       | すべての場所     | `env:prod`        |
+| メトリクス集計を指定する        | はい      | `avg by`       | `sum by`          |
+| グループ化                          | いいえ       | すべての条件     | `host`            |
+| モニタークエリの集計を指定する | いいえ       | `average`      | `sum`             |
+| 評価ウィンドウ                 | いいえ       | `5 minutes`    | `1 day`           |
 
-**Definitions**
+**定義**
 
-| Option           | Description                                                                                                                                                                   |
+| オプション           | 説明                                                                                                                                                                   |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| average          | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query.                                   |
-| max              | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the max() function to your monitor query. See the Notes section for additional threshold behavior. |
-| min              | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the min() function to your monitor query. See the Notes section for additional threshold behavior.|
-| sum              | If the summation of every point in the series crosses the threshold, an alert is triggered. It adds the `sum()` function to your monitor query.                               |
-| percentile(pXX)  | If pXX percentage of points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a `percentile` function to your monitor query. Only available for the distribution metric type.
-| Evaluation window| The time period the monitor evaluates. Use preset time windows like `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 1 minute and 730 hours (1 month). |
+| 平均          | 系列の平均値が算出され、単一の値が生成されます。この値がしきい値と比較されます。このオプションは、モニタークエリに `avg()` 関数を追加します。                                   |
+| 最大              | 生成された系列で、どれか一つの値がしきい値を超えたら、アラートがトリガーされます。これは、max() 関数をモニタークエリに追加します。しきい値のその他の挙動については、「注」セクションを参照してください。 |
+| 最小              | クエリの評価ウィンドウ内のすべてのポイントがしきい値を超えたら、アラートがトリガーされます。これは、min() 関数をモニタークエリに追加します。しきい値のその他の挙動については、「注」セクションを参照してください。|
+| 合計              | 系列内のすべてのポイントの合計値がしきい値から外れている場合に、アラートがトリガーされます。このオプションは、モニタークエリに `sum()` 関数を追加します。                               |
+| percentile(pXX)  | クエリの評価ウィンドウ内のポイントの pXX パーセンテージがしきい値から外れている場合に、アラートがトリガーされます。このオプションは、比較方法の選択に基づいて、モニタークエリに `percentile` 関数を追加します。ディストリビューションメトリクスタイプにのみ利用可能です。
+| 評価ウィンドウ| モニターが評価する時間帯を指定します。`5 minutes`、`15 minutes`、`1 hour`、`custom` といったプリセットされた時間枠を使用して、1 分～730 時間 (1 ヶ月) の間で設定します。 |
 
 {{% /tab %}}
-{{% tab "Change" %}}
+{{% tab "変化" %}}
 
 {{< img src="monitors/monitor_types/metric/metric_change_alert_config.png" alt="define the metric for change detection metric monitor" style="width:100%;">}}
 
-| Step                              | Required | Default        | Example           |
+| 手順                              | 必須 | デフォルト        | 例           |
 |-----------------------------------|----------|----------------|-------------------|
-| Select a metric                   | Yes      | None           | `system.cpu.user` |
-| Define the `from`                 | No       | Everywhere     | `env:prod`        |
-| Specify metric aggregation        | No       | `avg by`       | `sum by`          |
-| Group by                          | No       | Everything     | `host`            |
-| Specify monitor query aggregation | No       | `average`      | `sum`             |
-| Select a change type              | No       | `change `      | `% change`        |
-| Evaluation window                 | No       | `5 minutes`    | `1 day`           |
-| Comparison window                 | No       | `5 minutes`    | `1 month`         |
+| メトリクスの選択                   | はい      | なし           | `system.cpu.user` |
+| `from` を定義する                 | いいえ       | すべての場所     | `env:prod`        |
+| メトリクス集計を指定する        | いいえ       | `avg by`       | `sum by`          |
+| グループ化                          | いいえ       | すべての条件     | `host`            |
+| モニタークエリの集計を指定する | いいえ       | `average`      | `sum`             |
+| 変更タイプを選択する              | いいえ       | `change `      | `% change`        |
+| 評価ウィンドウ                 | いいえ       | `5 minutes`    | `1 day`           |
+| 比較ウィンドウ                 | いいえ       | `5 minutes`    | `1 month`         |
 
-**Definitions**
+**定義**
 
-| Option           | Description                                                                                                                                                                   |
+| オプション           | 説明                                                                                                                                                                   |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| change           | The absolute change of the value.                                                                                                                                             |
-| %&nbsp;change    | The percentage change of the value compared to its previous value. For example, the percentage change for a previous value of 2 with a current value of 4 is 100%.            |
-| average          | The series is averaged to produce a single value that is checked against the threshold. It adds the `avg()` function to your monitor query.                                   |
-| max              | If any single value in the generated series crosses the threshold, then an alert is triggered. It adds the max() function to your monitor query. See the Notes section for additional threshold behavior. |
-| min              | If all points in the evaluation window for your query cross the threshold, then an alert is triggered. It adds the min() function to your monitor query. See the Notes section for additional threshold behavior. |
-| sum              | If the summation of every point in the series crosses the threshold, an alert is triggered. It adds the `sum()` function to your monitor query.                               |
-| percentile(pXX)  | If pXX percentage of points in the evaluation window for your query cross the threshold, then an alert is triggered. This option adds a `percentile` function to your monitor query. Only available for the distribution metric type.
-| Evaluation window| The time period the monitor evaluates. Use preset time windows like `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 1 minute and 730 hours (1 month). |
+| 変化           | 値の絶対変化量です。                                                                                                                                             |
+| %&nbsp;change    | 過去の値と比較した値の変化率です。たとえば、過去の値が 2 で現在の値が 4 の場合、% change は 100% になります。            |
+| 平均          | 系列の平均値が算出され、単一の値が生成されます。この値がしきい値と比較されます。このオプションは、モニタークエリに `avg()` 関数を追加します。                                   |
+| 最大              | 生成された系列で、どれか一つの値がしきい値を超えたら、アラートがトリガーされます。これは、max() 関数をモニタークエリに追加します。しきい値のその他の挙動については、「注」セクションを参照してください。 |
+| 最小              | クエリの評価ウィンドウ内のすべてのポイントがしきい値を超えたら、アラートがトリガーされます。これは、min() 関数をモニタークエリに追加します。しきい値のその他の挙動については、「注」セクションを参照してください。 |
+| 合計              | 系列内のすべてのポイントの合計値がしきい値から外れている場合に、アラートがトリガーされます。このオプションは、モニタークエリに `sum()` 関数を追加します。                               |
+| percentile(pXX)  | クエリの評価ウィンドウ内のポイントの pXX パーセンテージがしきい値から外れている場合に、アラートがトリガーされます。このオプションは、比較方法の選択に基づいて、モニタークエリに `percentile` 関数を追加します。ディストリビューションメトリクスタイプにのみ利用可能です。
+| 評価ウィンドウ| モニターが評価する時間帯を指定します。`5 minutes`、`15 minutes`、`1 hour`、`custom` といったプリセットされた時間枠を使用して、1 分～730 時間 (1 ヶ月) の間で設定します。 |
 
 {{% /tab %}}
 {{< /tabs >}}
 
-**Notes:**
+**注:**
   - If using a distribution metric with a percentile aggregator, a matching percentile threshold is automatically specified. Metrics with percentile aggregators do not generate a snapshot graph in the notifications message.
-  - **max/min**: These descriptions of max and min assume that the monitor alerts when the metric goes above the threshold. For monitors that alert when below the threshold, the max and min behavior is reversed.
-  - Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
-  - There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][3] for details.
+  - **max/min**: これらの max と min の説明は、メトリクスがしきい値を上回ったときにモニターがアラートすることを想定しています。しきい値を下回ったときにアラートするモニターでは、max と min の動作は逆になります。
+  - モニターを作成するメトリクスの定義は、グラフを作成するメトリクスの定義と似ています。`Advanced...` オプションの使用について詳しくは、[高度なグラフの作成][2]を参照してください。
+  - `as_count()` を使用する場合は動作が異なります。詳しくは、[モニター評価での as_count()][3] を参照してください。
 
-## Set alert conditions
+## アラートの条件を設定する
 
 Trigger when the metric is one of the following:
 - `above`
@@ -164,54 +164,54 @@ Trigger when the metric is one of the following:
 
 If the value is between zero and one, a leading zero is required. For example, `0.3`.
 
-### Advanced alert conditions
+### 高度なアラート条件
 
-#### Data window
+#### データウィンドウ
 
-`Require` or `Do not require` a full window of data for evaluation.
+評価の際に、データウィンドウが一杯であることを判断するかどうかを `Require` または `Do not require` で指定できます。
 
-This setting allows you to change when the alerting engine considers a monitor as a candidate for evaluation.
+この設定では、モニターを評価するタイミングをアラートエンジンが判断する方法を変更できます。
 
-**Do not require** (Default): A monitor is evaluated as soon as it is recognized. Consider using this value if your data points might be sparse. With this configuration, the monitor evaluates even if there is a single data point in the evaluation timeframe.
+**Do not require** (デフォルト): モニターは認識されるとすぐに評価されます。データポイントがまばらである可能性がある場合は、この値の使用を検討します。この構成では、評価タイムフレームに単一のデータポイントがある場合でも、モニターが評価されます。
 
-**Require**: A monitor is not evaluated until the evaluation window is considered to be `filled` with data. To be notified if there is data over the entire evaluation timeframe, use this option.
+**Require**: 評価ウィンドウがデータで `filled` (満たされている) と見なされるまで、モニターは評価されません。評価期間全体にわたってデータがある場合に通知を受けるには、このオプションを使用します。
 
-To define if the evaluation timeframe is `filled` with data, the timeframe is split into smaller buckets.
+評価タイムフレームがデータで `filled` (満たされている) かどうかを定義するために、タイムフレームはより小さなバケットに分割されます。
 
-The following logic determines the bucket size:
+次のロジックがバケットサイズを決定します。
 
-* Evaluation timeframe in minutes: bucket size is 1 minute
-* Evaluation timeframe in hours: bucket size is 10 minutes
-* Evaluation timeframe in days: bucket size is 1 hour
-* Evaluation timeframe in month: bucket size is 4 hours
+* 分単位の評価タイムフレーム: バケットサイズは 1 分です
+* 時間単位の評価タイムフレーム: バケットサイズは 10 分です
+* 日単位の評価タイムフレーム: バケットサイズは 1 時間です
+* 月単位の評価タイムフレーム: バケットサイズは 4 時間です
 
-In order to be considered as a "full window", the monitor requires:
+「フルウィンドウ」と見なされるには、モニターに次のものが必要です。
 
-1. At least one data point in the first bucket. The first bucket is chronologically the earliest bucket in the window.
-2. At most three buckets in total with no data points (including the first one).
+1. 最初のバケットに少なくとも 1 つのデータポイント。最初のバケットは、ウィンドウで時系列的に一番早いバケットです。
+2. データポイントのない合計で最大 3 つのバケット (最初のバケットを含む)。
 
-If the conditions are met, the monitor is evaluated. Otherwise, the evaluation is canceled and the monitor state is unchanged.
+条件が満たされると、モニターが評価されます。それ以外の場合、評価はキャンセルされ、モニターの状態は変更されません。
 
-For example, a monitor that evaluates over the last `2h` is split in 12 buckets of 10 minutes. The monitor is considered full if the first bucket has data and at most three buckets in total are empty.
+たとえば、過去 `2 時間` の評価を行うモニターは、10 分単位の 12 個のバケットに分割されます。最初のバケットにデータがあり、空のバケットが合計で 3 つまでの場合、モニターはフルであるみなされます。
 
-| data   | B0 | B1 | B2 | B3 | B4 | B5 | B6 | B7 | B8 | B9 | B10 | B11 | Full window?|
+| データ   | B0 | B1 | B2 | B3 | B4 | B5 | B6 | B7 | B8 | B9 | B10 | B11 | フルウィンドウ？|
 |--------|----|----|----|----|----|----|----|----|----|----|-----|-----|-------------|
-| case 1 | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | Yes         |
-| case 2 | x  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | No          |
-| case 3 | 1  | 1  | x  | x  | x  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | Yes         |
-| case 4 | 1  | x  | x  | x  | 1  | 1  | 1  | 1  | x  | x  | 1   | 1   | No          |
+| ケース 1 | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | はい         |
+| ケース 2 | x  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | いいえ          |
+| ケース 3 | 1  | 1  | x  | x  | x  | 1  | 1  | 1  | 1  | 1  | 1   | 1   | はい         |
+| ケース 4 | 1  | x  | x  | x  | 1  | 1  | 1  | 1  | x  | x  | 1   | 1   | いいえ          |
 
-For more information on the Evaluation Window, see the [Monitor configuration][5] page.
+評価ウィンドウについて、詳しくは[モニターの構成][5]ページを参照してください。
 
-#### Other options
+#### その他のオプション
 
 For instructions on the advanced alert options (no data, auto resolve), see the [Monitor configuration][6] page.
 
-## Notifications
+## 通知
 
 For instructions on the **Configure notifications and automations** section, see the [Notifications][7] and [Monitor configuration][8] pages.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

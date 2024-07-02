@@ -2,7 +2,7 @@
 "categories":
 - languages
 - tracing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Send runtime metrics from your Go applications with Datadog client libraries."
 "doc_link": "https://docs.datadoghq.com/integrations/go/"
@@ -32,7 +32,7 @@
 
 The Go integration allows you to collect and monitor your Go application logs, traces, and custom metrics.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
@@ -52,21 +52,21 @@ See the dedicated documentation on how to [setup Go log collection][3] to forwar
 
 See the dedicated documentation for [enabling the Go profiler][4].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "go" >}}
 
 
-### Events
+### イベント
 
 The Go integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Go integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

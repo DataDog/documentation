@@ -27,7 +27,7 @@
 - cloud
 - configuration & deployment
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/altostra/README.md"
 "display_on_public_website": true
@@ -72,13 +72,13 @@ Altostra integrates with cloud computing services to provide your development te
 
 The Datadog Altostra integration enables you to automatically instrument your Altostra projects during deployment to send logs and metrics to your Datadog account. Control the integration configuration per deployment environment.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Datadog Altostra integration is built-in. No installation is required.
 
-### Configuration
+### 構成
 
 The Datadog integration is available in the Altostra Web Console under [integrations][1] on the account settings page.
 
@@ -97,7 +97,7 @@ The Datadog integration is available in the Altostra Web Console under [integrat
 2. Invoke the Lambda function.
 3. You should see the Lambda function logs appear in the _Logs_ view in Datadog.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog Support][3].
 

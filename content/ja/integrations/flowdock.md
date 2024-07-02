@@ -2,9 +2,9 @@
 "categories":
 - "collaboration"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Send Datadog alerts and graphs to your team's flows."
+"description": "Datadog のアラートとグラフをチームのフローに送信。"
 "doc_link": "https://docs.datadoghq.com/integrations/flowdock/"
 "draft": false
 "git_integration_title": "flowdock"

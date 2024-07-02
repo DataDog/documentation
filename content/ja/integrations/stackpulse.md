@@ -28,7 +28,7 @@
 - incidents
 - notifications
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/stackpulse/README.md"
 "display_on_public_website": true
@@ -72,7 +72,7 @@
 
 The [StackPulse][1] integration enables you to trigger automatic playbooks in response to Datadog alerts, providing alert enrichment, incident mitigation, and collaboration. You can then send back events from your playbook executions directly to your Datadog event stream and dedicated StackPulse dashboard.
 
-## Setup
+## セットアップ
 
 To set up this integration, you must have an active [StackPulse account][2] and an Account Owner role in that account. You must also have proper admin permissions in Datadog.
 
@@ -143,21 +143,21 @@ To set up this integration, you must have an active [StackPulse account][2] and 
 
 2. Provide a meaningful name for the integration and click **Add**.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The StackPulse integration does not provide any metrics.
 
-### Events
+### イベント
 
 The StackPulse integration allows you to send events to your Datadog event stream using the [Datadog Post Event][6] step. You can use the step with your playbooks to notify Datadog about successful mitigations, execution failures and send enriched alert data back to Datadog.
 
-### Service Checks
+### サービスチェック
 
 The StackPulse integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

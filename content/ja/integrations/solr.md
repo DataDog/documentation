@@ -31,7 +31,7 @@
 - "caching"
 - "data stores"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/solr/README.md"
 "display_on_public_website": true
@@ -44,7 +44,7 @@
 "manifest_version": "2.0.0"
 "name": "solr"
 "public_title": "Solr"
-"short_description": "Monitor request rate, handler errors, cache misses and evictions, and more."
+"short_description": "リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視"
 "supported_os":
 - "linux"
 - "windows"
@@ -52,14 +52,14 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Caching"
+  - "Category::キャッシュ"
   - "Category::Data Stores"
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Monitor request rate, handler errors, cache misses and evictions, and more."
+  "description": "リクエスト率、ハンドラーエラー、キャッシュミス、エビクションなどを監視"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -69,30 +69,30 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Solr Graph][1]
+![Solr グラフ][1]
 
-## Overview
+## 概要
 
-The Solr check tracks the state and performance of a Solr cluster. It collects metrics for the number of documents indexed, cache hits and evictions, average request times, average requests per second, and more.
+Solr チェックは、Solr クラスターの状態とパフォーマンスを追跡します。インデックス化されたドキュメント数、キャッシュのヒット数、エビクション数、平均リクエスト時間、毎秒の平均リクエスト数などのメトリクスを収集します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Solr check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Solr nodes.
+Solr チェックは [Datadog Agent][2] パッケージに含まれています。Solr ノードに追加でインストールする必要はありません。
 
-This check is JMX-based, so you need to enable JMX Remote on your Solr servers. See the [JMX Check documentation][3] for more details.
+このチェックは JMX ベースなので、Solr サーバーで JMX リモートを有効にする必要があります。詳細については、[JMX チェックに関するドキュメント][3]を参照してください。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `solr.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample solr.d/conf.yaml][2] for all available configuration options.
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `solr.d/conf.yaml` ファイルを編集します。使用可能な全コンフィギュレーションオプションの詳細については、[サンプル solr.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -117,30 +117,30 @@ To configure this check for an Agent running on a host:
        port: 9999
    ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-#### List of metrics
+#### メトリクスのリスト
 
-The `conf` parameter is a list of metrics to be collected by the integration. Only 2 keys are allowed:
+`conf` パラメーターは、インテグレーションによって収集されるメトリクスのリストです。次の 2 つのキーのみが許可されます。
 
-- `include` (**mandatory**): A dictionary of filters, any attribute that matches these filters are collected unless it also matches the `exclude` filters (see below).
-- `exclude` (**optional**): A dictionary of filters, attributes that match these filters are not collected.
+- `include` (**必須**): フィルターの辞書。これらのフィルターに一致する属性は、`exclude` フィルターにも一致している場合を除き、収集されます (以下を参照)。
+- `exclude` (**オプション**): フィルターの辞書。これらのフィルターに一致する属性は収集されません。
 
-For a given bean, metrics get tagged in the following manner:
+特定の Bean に対して、メトリクスは次のようにタグ付けされます。
 
 ```text
 mydomain:attr0=val0,attr1=val1
 ```
 
-In this example, your metric is `mydomain` (or some variation depending on the attribute inside the bean) and has the tags `attr0:val0`, `attr1:val1`, and `domain:mydomain`.
+この例では、メトリクスは `mydomain` (Bean 内の属性によっては多少異なる) になり、タグ `attr0:val0`、`attr1:val1`、`domain:mydomain` が付きます。
 
-If you specify an alias in an `include` key that is formatted as _camel case_, it is converted to _snake case_. For example, `MyMetricName` is shown in Datadog as `my_metric_name`.
+`include` キー内の指定したエイリアスが_キャメルケース_として書式設定されている場合、_スネークケース_に変換されます。たとえば `MyMetricName` は、Datadog では `my_metric_name` と表示されます。
 
-##### The attribute filter
+##### 属性フィルター
 
-The `attribute` filter can accept two types of values:
+`attribute` フィルターは、次の 2 種類の値を受け入れます。
 
-- A dictionary whose keys are attributes names (see below). For this case, you can specify an alias for the metric that becomes the metric name in Datadog. You can also specify the metric type as a gauge or counter. If you choose counter, a rate per second is computed for the metric.
+- キーが属性名の辞書（以下を参照）。この場合、メトリクスのエイリアスを指定でき、それが Datadog でメトリクス名になります。ゲージまたはカウンターとしてメトリクスタイプを指定することもできます。カウンターを選択した場合は、メトリクスの秒あたりの速度が計算されます。
 
   ```yaml
   conf:
@@ -157,7 +157,7 @@ The `attribute` filter can accept two types of values:
           metric_type: counter
   ```
 
-- A list of attributes names (see below). For this case, the metric type is a gauge, and the metric name is `jmx.\[DOMAIN_NAME].\[ATTRIBUTE_NAME]`.
+- 属性名のリスト（以下を参照）。この場合、メトリクスタイプはゲージで、メトリクス名は `jmx.\[ドメイン名].\[属性名]` です。
 
   ```yaml
   conf:
@@ -175,9 +175,9 @@ The `attribute` filter can accept two types of values:
         - RecentHitRate
   ```
 
-#### Older versions
+#### 以前のバージョン
 
-List of filters is only supported in Datadog Agent > 5.3.0. If you are using an older version, use singletons and multiple `include` statements instead.
+フィルターのリストは、5.3.0 よりも新しい Datadog Agent でのみサポートされます。以前のバージョンを使用している場合は、代わりにシングルトンと複数の `include` ステートメントを使用します。
 
 ```yaml
 # Datadog Agent > 5.3.0
@@ -201,30 +201,30 @@ List of filters is only supported in Datadog Agent > 5.3.0. If you are using an 
 [2]: https://github.com/DataDog/integrations-core/blob/master/solr/datadog_checks/solr/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery with JMX][1] guide.
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### Log collection
+##### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
       ```yaml
        logs_enabled: true
      ```
 
-2. Solr uses the `log4j` logger by default. To customize the logging format, edit the [`server/resources/log4j2.xml`][2] file. By default, Datadog's integration pipeline supports the following conversion [pattern][3]:
+2. Solr はデフォルトで `log4j` ロガーを使用します。ログ出力のフォーマットをカスタマイズするには、[`server/resources/log4j2.xml`][2] ファイルを編集します。デフォルトでは、Datadog のインテグレーションパイプラインが以下のコンバージョン[パターン][3]をサポートします。
 
    ```text
    %maxLen{%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p (%t) [%X{collection} %X{shard} %X{replica} %X{core}] %c{1.} %m%notEmpty{ =>%ex{short}}}{10240}%n
    ```
 
-    Clone and edit the [integration pipeline][4] if you have a different format.
+    フォーマットが異なる場合は、[インテグレーションパイプライン][4]を複製して編集してください。
 
 
-3. Uncomment and edit the logs configuration block in your `solr.d/conf.yaml` file. Change the `type`, `path`, and `service` parameter values based on your environment. See the [sample solr.d/solr.yaml][5] for all available configuration options.
+3. `solr.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、 `type`、`path`、`service` パラメーターの値を変更してください。使用可能なすべての構成オプションの詳細については、[サンプル solr.d/solr.yaml][5] を参照してください。
 
       ```yaml
        logs:
@@ -238,9 +238,9 @@ For containerized environments, see the [Autodiscovery with JMX][1] guide.
            #     name: new_log_start_with_date
      ```
 
-4. [Restart the Agent][6].
+4. [Agent を再起動します][6]。
 
-To enable logs for Kubernetes environments, see [Kubernetes Log Collection][7].
+Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][7]を参照してください。
 
 [1]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [2]: https://lucene.apache.org/solr/guide/configuring-logging.html#permanent-logging-settings
@@ -252,55 +252,55 @@ To enable logs for Kubernetes environments, see [Kubernetes Log Collection][7].
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][4] and look for `solr` under the Checks section.
+[Agent の status サブコマンドを実行][4]し、Checks セクションで `solr` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "solr" >}}
 
 
-### Events
+### イベント
 
-The Solr check does not include any events.
+Solr チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "solr" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-### Commands to view the available metrics
+### 使用可能なメトリクスを表示するコマンド
 
-The `datadog-agent jmx` command was added in version 4.1.0.
+バージョン 4.1.0 で `datadog-agent jmx` コマンドが追加されました。
 
-- List attributes that match at least one of your instances configuration:
+- 1 つ以上のインスタンス構成に一致する属性をリストする:
   `sudo datadog-agent jmx list matching`
-- List attributes that do match one of your instances configuration but that are not being collected because it would exceed the number of metrics that can be collected:
+- インスタンス構成の 1 つに一致するが、収集可能なメトリクス数を超えるために収集されない属性をリストする:
   `sudo datadog-agent jmx list limited`
-- List attributes expected to be collected by your current instances configuration:
+- 現在のインスタンス構成によって収集されると予想される属性をリストします。
   `sudo datadog-agent jmx list collected`
-- List attributes that don't match any of your instances configuration:
+- どのインスタンス構成にも一致しない属性をリストする:
   `sudo datadog-agent jmx list not-matching`
-- List every attributes available that has a type supported by JMXFetch:
+- JMXFetch でサポートされているタイプのすべての使用可能な属性をリストする:
   `sudo datadog-agent jmx list everything`
-- Start the collection of metrics based on your current configuration and display them in the console:
+- 現在の構成に基づいてメトリクスの収集を開始し、コンソールに表示する:
   `sudo datadog-agent jmx collect`
 
-## Further Reading
+## その他の参考資料
 
-### Parsing a string value into a number
+### 文字列値を数値にパースする
 
-If your jmxfetch returns only string values like **false** and **true** and you want to transform it into a Datadog gauge metric for advanced usages. For instance if you want the following equivalence for your jmxfetch:
+jmxfetch が **false** や **true** といった文字列値のみを返す場合は、それを Datadog のゲージメトリクスに変換して使用できます。たとえば、jmxfetch で次のような値を返すとします。
 
 ```text
 "myJmxfetch:false" = myJmxfetch:0
 "myJmxfetch:true" = myJmxfetch:1
 ```
 
-You may use the `attribute` filter as follow:
+次のように `attribute` フィルターを使用します。
 
 ```yaml
 # ...

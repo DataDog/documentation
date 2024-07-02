@@ -12,36 +12,36 @@ further_reading:
 
 A scatter plot identifies a possible relationship between changes observed in two different sets of variables. It provides a visual and statistical means to test the strength of a relationship between two variables. The scatter plot visualization allows you to graph a chosen scope over two different metrics with their respective aggregations.
 
-{{< img src="dashboards/widgets/scatterplot/scatterplot.png" alt="Scatter Plot" >}}
+{{< img src="dashboards/widgets/scatterplot/scatterplot.png" alt="散布図" >}}
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
-1. Select a metric or other data set, and an aggregation for the X and Y axis.
-1. Define the scope for each point of the scatter plot, such as `host`, `service`, `app`, or `region`.
-1. Optional: enable a color-by tag.
-1. Optional: set X and Y axis controls.
-1. Choose whether your widget has a custom timeframe or the dashboard's global timeframe.
-1. Give your graph a title or leave the box blank for the suggested title.
+1. X 軸と Y 軸それぞれのメトリクスまたはその他のデータセットと、集計を選択します。
+1. 散布図の各ポイントのスコープ (`host`、`service`、`app`、または `region` など) を定義します。
+1. オプション: color-by タグを有効にします。
+1. オプション: X 軸および Y 軸コントロールを設定します。
+1. ウィジェットにカスタムタイムフレームがあるか、ダッシュボードのグローバルタイムフレームがあるかを選択します。
+1. グラフにタイトルを付けるか、提案されたタイトルを使用するにはボックスを空白のままにします。
 
-### Options
+### オプション
 
-#### Context links
+#### コンテキストリンク
 
-[Context links][1] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
+[コンテキストリンク][4]は、デフォルトで有効になっており、オンまたはオフに切り替えることができます。コンテキストリンクは、ダッシュボードウィジェットと Datadog またはサードパーティアプリケーションの他のページの橋渡しをします。
 
-#### Global time
+#### グローバルタイム
 
-Choose whether your widget has a custom timeframe or the dashboard's global timeframe.
+ウィジェットにカスタムタイムフレームがあるか、ダッシュボードのグローバルタイムフレームがあるかを選択します。
 
 ## API
 
-This widget can be used with the **[Dashboards API][2]**. See the following table for the [widget JSON schema definition][3]:
+このウィジェットは **[Dashboards API][2]** で使用できます。[ウィジェット JSON スキーマ定義][3]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

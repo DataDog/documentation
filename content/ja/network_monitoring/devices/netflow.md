@@ -13,31 +13,31 @@ further_reading:
   text: Monitor and diagnose network performance issues with SNMP Traps
 ---
 
-## Overview
+## 概要
 
-Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your NetFlow-enabled devices.
+Datadog で NetFlow Monitoring を使用すると、NetFlow 対応デバイスからのフローレコードを視覚化して監視することができます。
 
 {{< img src="network_device_monitoring/netflow/home.png" alt="The NetFlow Monitoring page containing tabs for top sources, destinations, protocols, source ports, destination ports, and device trends" style="width:100%;" >}}
 
-## Installation
+## インストール
 
-To use NetFlow Monitoring with Network Device Monitoring, ensure you are using the [Agent][1] version 7.45 or newer.
+ネットワークデバイスモニタリングで NetFlow Monitoring を使用するには、[Agent][1] のバージョン 7.45 以降を使用していることを確認してください。
 
-**Note:** Configuring [metric collection from Network Device Monitoring][2] is not a requirement for sending NetFlow data, although it is strongly recommended as this extra data can be used to enrich your flow records with information such as the device name, model, and vendor, as well as the inbound/outbound interface name.
+**注:** NetFlow データの送信には、[ネットワークデバイスモニタリングからのメトリクス収集][2]の構成は必須ではありませんが、この追加データを使用してデバイス名、モデル、ベンダー、インバウンド/アウトバウンドインターフェイス名などの情報でフローレコードをリッチ化できるため、強く推奨されています。
 
-## Configuration
+## 構成
 
 To configure your devices to send NetFlow, jFlow, sFlow, or IPFIX traffic to the Agent NetFlow server, your devices must be configured to send traffic to the IP address that the Datadog Agent is installed on, specifically the `flow_type` and `port`.
 
-Edit your [`datadog.yaml`][3] Agent configuration file to enable NetFlow:
+NetFlow を有効にするために、Agent コンフィグレーションファイル [`datadog.yaml`][3] を編集します。
 
 ```yaml
 network_devices:
   netflow:
     enabled: true
     listeners:
-      - flow_type: netflow9   # choices: netflow5, netflow9, ipfix, sflow5
-        port: 2055            # devices must send traffic to this port
+      - flow_type: netflow9   # 選択肢: netflow5、netflow9、ipfix、sflow5
+        port: 2055            # デバイスはこのポートにトラフィックを送信する必要があります
       - flow_type: netflow5
         port: 2056
       - flow_type: ipfix
@@ -46,13 +46,13 @@ network_devices:
         port: 6343
 ```
 
-After saving your changes, [restart the Agent][4].
+変更内容を保存したら、[Agent を再起動][4]します。
 
-## Aggregation
+## 集計
 
 The Datadog Agent automatically aggregates the received NetFlow data in order to limit the number of records sent to the platform while maintaining most of the information. By default there is a five-minute aggregation interval, during which flow recordings which share the same identifying information (source and destination address and port, protocol, and so forth) are aggregated together. Additionally, the Datadog Agent can detect ephemeral ports and remove them. As a result, you may see Flows with `port:*`.
 
-## Enrichment
+## リッチ化
 
 Your NetFlow data is processed by the Datadog backend and enriched with the available metadata from your devices and interfaces. Enrichment is based on the NetFlow exporter IP and the interface indexes. To disambiguate possible collisions between reused private IPs, you can configure a different `namespace` for each Agent configuration file (with the setting `network_devices.namespace`).
 
@@ -78,7 +78,7 @@ From the **Configuration** tab in NetFlow, click **Add Enrichment** to upload th
 
 {{< img src="network_device_monitoring/netflow/new_enrichment.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="80%" >}}
 
-## Visualization
+## 視覚化
 
 You can access the data collected by NetFlow Monitoring on the [**NetFlow** page][5]. Hover over a flow from the list for additional information about hosts, pods, and containers, and access related network connections.
 
@@ -99,7 +99,7 @@ The following fields represent details about the ingress and egress interfaces.
 | Ingress Interface Index | Index of the ingress interface. |
 | Ingress Interface Name | Name of the ingress interface. |
 
-### Device information
+### デバイス情報
 
 The following fields represent details related to the device generating NetFlow records.
 
@@ -108,7 +108,7 @@ The following fields represent details related to the device generating NetFlow 
 | Device IP | IP address used to map to a device in NDM for enrichment purposes. |
 | Exporter IP | IP address from which NetFlow packets originate. |
 | Device Model | Model of the device. |
-| Device Name | Name of the device. |
+| Device Name | デバイスの名前。 |
 | Device Namespace | Namespace of the device. |
 | Device Vendor | Vendor of the device. |
 
@@ -118,7 +118,7 @@ The following fields represent characteristics of the network flow.
 
 | Field Name | Field Description |
 |---|---|
-| Direction | Indicates whether the flow is inbound or outbound. |
+| 方向 | Indicates whether the flow is inbound or outbound. |
 | Start Time | Timestamp of the first network packet between the source and destination IP addresses. |
 | End Time | Timestamp of the last network packet between the source and destination IP addresses. |
 | Ether Type | Type of Ethernet frame encapsulation (IPv4 or IPv6). |
@@ -195,13 +195,20 @@ This data is also available in dashboards and notebooks, enabling precise querie
 
 {{< img src="network_device_monitoring/netflow/dashboard.png" alt="Create a dashboard with NetFlow data" width="100%" >}}
 
-## Retention
+## Sampling rate
+
+NetFlow's sampling rate is taken into account in the computation of bytes and packets by default. The displayed values for bytes and packets are computed with the sampling rate applied.
+Additionally, you can query for **Bytes (Adjusted) (@adjusted_bytes)** and **Packets (Adjusted) (@adjusted_packets)** in dashboards and notebooks to visualize them.
+
+To visualize the real data sent by your devices, you can query for **Bytes (Sampled) (@bytes)** and **Packets (Sampled) (@packets)** in dashboards and notebooks.
+
+## 保持
 
 NetFlow data is retained for 30 days by default, with options for 15, 30, 60, and 90 day retention. 
 
 <div class="alert alert-danger">To retain NetFlow data for longer periods of time, contact your account representative.</div>
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

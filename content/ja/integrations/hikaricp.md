@@ -22,7 +22,7 @@
   "sales_email": damien.bertau@blablacar.com
   "support_email": damien.bertau@blablacar.com
 "categories": []
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/hikaricp/README.md"
 "display_on_public_website": true
@@ -61,9 +61,9 @@
 [HikariCP][1] is a lightweight and fast JDBC connection pooling framework.
 This check monitors HikariCP through the Datadog Agent.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To install the HikariCP check on your host:
 
@@ -79,7 +79,7 @@ To install the HikariCP check on your host:
  run `datadog-agent integration install -w
  path/to/hikaricp/dist/<ARTIFACT_NAME>.whl`.
 
-### Configuration
+### 構成
 
 1. Edit the `hikaricp/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your HikariCP performance data. See the [sample hikaricp/conf.yaml][4] for all available configuration options.
 
@@ -89,17 +89,17 @@ To install the HikariCP check on your host:
 
 [Run the Agent's status subcommand][6] and look for `hikaricp` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "hikaricp" >}}
 
 
-### Events
+### イベント
 
 HikariCP does not include any events. 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

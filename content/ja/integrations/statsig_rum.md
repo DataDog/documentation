@@ -13,7 +13,7 @@
 - configuration & deployment
 - developer tools
 - event management
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/statsig_rum/README.md"
 "display_on_public_website": true
@@ -61,7 +61,7 @@
 
 Statsig's feature flag tracking integration enriches your Datadog RUM data with feature gate information, allowing you to measure causality between your product features and your system and performance metrics.
 
-## Setup
+## セットアップ
 
 ### Feature flag tracking setup
 

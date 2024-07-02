@@ -28,7 +28,7 @@
 - metrics
 - data stores
 - ai/ml
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -75,25 +75,25 @@
 
 - **Locate and triage unexpected spikes in usage or latency:** Quickly visualize anomalies in usage or latency in Pinecone’s Datadog dashboard. View metrics over time to better understand trends and determine the severity of a spike.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 1. Login to your [Pinecone account][1].
 2. Navigate to **API Keys** tab.
 3. Create an API key.
 4. Copy the created API Key to your clipboard.
 
-### Configuration
+### 構成
 
 1. Navigate to the configuration tab inside Datadog [Pinecone integration tile][2].
 2. Enter your project Id.
 3. Enter your environment, which could be found when copying your API key to clipboard.
 4. Enter your copied API key.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "pinecone" >}}
 
 
@@ -101,15 +101,15 @@
 
 Pinecone does not include collectings logs.
 
-### Service Checks
+### サービスチェック
 
 Pinecone does not include any service checks.
 
-### Events
+### イベント
 
 Pinecone does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

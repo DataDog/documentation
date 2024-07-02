@@ -11,7 +11,7 @@
 - automation
 - data stores
 - developer tools
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/eversql/README.md"
 "display_on_public_website": true
@@ -67,16 +67,16 @@
 
 EverSQL is non-intrusive, and doesn't access any of your databases' sensitive data.
 
-### Usage
+### 使用方法
 
 Slow SQL queries found in the Datadog Database Monitoring dashboard can be optimized using EverSQL. Copy the slow SQL query from Datadog and paste it directly into EverSQL's [SQL Optimization][2] process. Learn more about troubleshooting a slow query in the [Getting Started with Database Monitoring][3] guide.
 
 ### Supported Databases: 
 MySQL, PostgreSQL, AWS Aurora, Google Cloud SQL, Azure DB, Percona, MariaDB.
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 To speed up slow SQL queries identified by Datadog:
 1. Navigate to the [Datadog Database Monitoring][4] dashboard and locate the slow SQL queries table.
 2. Add a filter for the relevant database, and sort by a relevant performance metric, such as Average Latency.
@@ -85,17 +85,17 @@ To speed up slow SQL queries identified by Datadog:
 5. From the optimization report, copy and create the optimal indexes in your database.
 6. Copy the rewritten optimized query to your application code.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 EverSQL does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 EverSQL does not include any service checks.
 
-### Events
+### イベント
 
 EverSQL does not include any events.
 

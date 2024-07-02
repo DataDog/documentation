@@ -22,7 +22,7 @@
   "support_email": dev@onemorecloud.com
 "categories":
 - metrics
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/bonsai/README.md"
 "display_on_public_website": true
@@ -66,7 +66,7 @@ Track request level metrics for your Bonsai clusters to:
 
 ![snapshot][1]
 
-## Setup
+## セットアップ
 
 Integrating your cluster with Datadog requires submitting your API key to the bonsai app.
 
@@ -92,9 +92,9 @@ If your key is valid, you should see the integration as active.
 
 Within a few minutes, request metrics are available in your Datadog dashboard.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "bonsai" >}}
 
 
@@ -104,15 +104,15 @@ Metrics are tagged for each cluster, so you can segment based on clusters. The t
 cluster:my-cluster-slug
 ```
 
-### Events
+### イベント
 
 The Bonsai integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Bonsai integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog Support][8].
 

@@ -27,7 +27,7 @@
 "categories":
 - data stores
 - os & system
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/purefa/README.md"
 "display_on_public_website": true
@@ -88,24 +88,24 @@ You can monitor multiple FlashArrays and aggregate these into a single dashboard
  - Python 3
  - The Pure Storage OpenMetrics exporter is installed and running in a containerized environment. Refer to the [GitHub repo][3] for installation instructions.
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the Autodiscovery Integration Templates for guidance on applying these instructions.
 
-### Installation
+### インストール
 
 1. [Download and launch the Datadog Agent][2].
 2. Manually install the Pure FlashArray integration. See [Use Community Integrations][4] for more details based on your environment.
 
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host, run `sudo -u dd-agent -- datadog-agent integration install -t datadog-purefa==<INTEGRATION_VERSION>`.
 
 Note:  `<INTEGRATION_VERSION>` can be found within the [CHANGELOG.md][5] for Datadog Integration Extras. 
   * e.g. `sudo -u dd-agent -- datadog-agent integration install -t datadog-purefa==1.2.0`
 
-### Configuration
+### 構成
 
 1. Create a local user on your FlashArray with the Read-Only role and generate an API token for this user.
    ![Generate an API Key][6] 
@@ -185,7 +185,7 @@ When migrating from [Pure Storage Prometheus exporter][10] to the [Pure Storage 
 
 In future versions of the PureFA Agent Check, the metric names from the Pure Storage Prometheus exporter will be removed.
 
-### Troubleshooting
+### トラブルシューティング
 
 #### Arrays are not showing in dashboard
 
@@ -207,17 +207,17 @@ min_collection_interval: 120
 ```
 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "purefa" >}}
 
 
-### Events
+### イベント
 
 The PureFA integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 See [service_checks.json][13] for a list of service checks provided by this integration.
 

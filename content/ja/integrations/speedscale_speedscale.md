@@ -15,7 +15,7 @@
 - kubernetes
 - marketplace
 - testing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -77,24 +77,24 @@
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## Overview
-Many businesses struggle to discover problems with their cloud services before they impact customers. For developers, writing tests is manual and time-intensive. Speedscale helps Kubernetes engineering and DevOps teams gain confidence in how new code will perform in real-world scenarios. Speedscale can collect and replay API traffic, simulate load or chaos, and measure latency, throughput, saturation, and errors before the code is released. Speedscale Traffic Replay is an alternative to legacy testing approaches which take days or weeks to run and do not scale well for modern architectures.
+## 概要
+多くの企業は、クラウドサービスの問題が顧客に影響を与える前に発見することに苦労しています。開発者にとって、テストを書くことは手作業で時間がかかるものです。Speedscale は、Kubernetes のエンジニアリングと DevOps チームが、新しいコードが実世界のシナリオでどのように実行されるかに自信を持てるよう支援します。Speedscale は、コードをリリースする前に、API トラフィックの収集と再生、負荷やカオスのシミュレーション、レイテンシー、スループット、飽和、エラーの計測を行うことができます。Speedscale トラフィックリプレイは、実行に数日または数週間かかり、最新のアーキテクチャにうまく対応できない従来のテスト手法に代わるものです。
 
-To publish traffic replay results from Speedscale into Datadog, install the [Speedscale Integration][1]. This integration lets you combine your observability data from Datadog with the results of a particular Speedscale replay to investigate the root cause of poor performance.
+Speedscale のトラフィックリプレイ結果を Datadog に公開するには、[Speedscale インテグレーション][1]をインストールします。このインテグレーションにより、Datadog の観測可能性データと Speedscale の特定のリプレイ結果を組み合わせて、パフォーマンス低下の根本原因を調査することができます。
 
-## Support
+## サポート
 
-For support or feature requests, contact Speedscale through the following channels:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Speedscale にお問い合わせください。
 
-- Email: [support@speedscale.com][5]
+- メール: [support@speedscale.com][5]
 - Slack: [Community][4]
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Stress test your Kubernetes application with Speedscale’s offering in the Datadog Marketplace][6]
-- [Speedscale Documentation][3]
+- [Datadog Marketplace で Speedscale の製品を使って Kubernetes アプリケーションのストレステストを実行する][6]
+- [Speedscale ドキュメント][3]
 
 [1]: /integrations/speedscale
 [3]: https://docs.speedscale.com/
@@ -102,4 +102,4 @@ Additional helpful documentation, links, and articles:
 [5]: mailto:support@speedscale.com
 [6]: https://www.datadoghq.com/blog/stress-test-kubernetes-with-speedscale/
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/speedscale-speedscale" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/speedscale-speedscale" target="_blank">こちらをクリック</a>してください。

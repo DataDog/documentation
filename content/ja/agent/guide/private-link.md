@@ -10,87 +10,87 @@ further_reading:
 ---
 
 {{% site-region region="us3,us5,eu,gov" %}}
-<div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
+<div class="alert alert-warning">Datadog PrivateLink は、選択した Datadog サイトをサポートしていません。</div>
 {{% /site-region %}}
 
 {{% site-region region="us,ap1" %}}
 
-This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog.
+このガイドでは、Datadog で使用するための [AWS PrivateLink][1] の構成方法を説明します。
 
-## Overview
+## 概要
 
-The overall process consists of configuring an internal endpoint in your VPC that local Datadog Agents can send data to. Your VPC endpoint is then peered with the endpoint within Datadog's VPC.
+全体的なプロセスは、ローカルの Datadog Agent がデータを送信できる VPC に内部エンドポイントを構成することで成り立ちます。その後、VPC エンドポイントは、Datadog の VPC 内のエンドポイントにピアリングされます。
 
-{{< img src="agent/guide/private_link/vpc_diagram_schema.png" alt="VPC diagram Schema" >}}
+{{< img src="agent/guide/private_link/vpc_diagram_schema.png" alt="VPC ダイアグラムスキーマ" >}}
 
-## Setup
+## 設定
 
-Datadog exposes AWS PrivateLink endpoints in **{{< region-param key="aws_region" >}}**.
+Datadog は、**{{< region-param key="aws_region" >}}** の AWS PrivateLink エンドポイントを公開しています。
 
-However, to route traffic to Datadog's PrivateLink offering in {{< region-param key="aws_region" code="true" >}} from other regions, use inter-region [Amazon VPC peering][2]. Inter-region VPC peering enables you to establish connections between VPCs across different AWS regions. This allows VPC resources in different regions to communicate with each other using private IP addresses. For more details, see [Amazon VPC peering][2].
+ただし、他のリージョンから {{< region-param key="aws_region" code="true" >}} の Datadog の PrivateLink オファリングにトラフィックをルーティングするには、リージョン間の [Amazon VPC ピアリング][2]を使用します。リージョン間 VPC ピアリングは、異なる AWS リージョンをまたがる VPC 間の接続を確立することを可能にします。これにより、異なるリージョンの VPC リソース同士がプライベート IP アドレスを使用して通信できるようになります。詳細は [Amazon VPC ピアリング][2]をご参照ください。
 
 {{< tabs >}}
-{{% tab "Connect from same region" %}}
+{{% tab "同じリージョンからの接続" %}}
 
-1. Connect the AWS Console to region **{{< region-param key="aws_region" >}}** and create a VPC endpoint.
+1. AWS Console をリージョン **{{< region-param key="aws_region" >}}** に接続し、VPC エンドポイントを作成します。
 
-   {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:60%;" >}}
+   {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="VPC エンドポイントの作成" style="width:60%;" >}}
 
-2. Select **Find service by name**.
-3. Fill the _Service Name_ text box according to which service you want to establish AWS PrivateLink for:
+2. **Find service by name** を選択します。
+3. AWS PrivateLink を構築したいサービスに応じて、_Service Name_ テキストボックスに入力します。
 
-    {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:70%;" >}}
+    {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC サービス名" style="width:70%;" >}}
 
-| Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
+| Datadog | PrivateLink サービス名 | プライベート DNS 名 |
 |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint" code="true">}}              |
-| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | {{< region-param key="http_endpoint" code="true">}}                    |
-| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | <code>api.{{< region-param key="dd_site" >}}</code>                    |
-| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | <code>metrics.agent.{{< region-param key="dd_site" >}}</code>          |
-| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | <code>orchestrator.{{< region-param key="dd_site" >}}</code>           |
-| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | <code>process.{{< region-param key="dd_site" >}}</code>                |
-| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
-| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | <code>trace.agent.{{< region-param key="dd_site" >}}</code>            |
-| Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | <code>dbm-metrics-intake.{{< region-param key="dd_site" >}}</code>     |
-| Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | <code>config.{{< region-param key="dd_site" >}}</code>                 |
+| ログ (Agent HTTP インテーク)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} | {{< region-param key="agent_http_endpoint" code="true">}} |
+| ログ (ユーザー HTTP インテーク)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}} | {{< region-param key="http_endpoint" code="true">}} |
+| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}} | <code>api.{{< region-param key="dd_site" >}}</code>                    |
+| メトリクス                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}} | <code>metrics.agent.{{< region-param key="dd_site" >}}</code>          |
+| コンテナ                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}} | <code>orchestrator.{{< region-param key="dd_site" >}}</code>           |
+| プロセス                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}} | <code>process.{{< region-param key="dd_site" >}}</code>                |
+| プロファイリング                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}} | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
+| トレース                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}} | <code>trace.agent.{{< region-param key="dd_site" >}}</code> |
+| データベースモニタリング | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}} | <code>dbm-metrics-intake.{{< region-param key="dd_site" >}}</code> |
+| リモート構成 | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}} | <code>config.{{< region-param key="dd_site" >}}</code> |
 
-4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
-5. Choose the VPC and subnets that should be peered with the Datadog VPC service endpoint.
-6. Make sure that for **Enable DNS name**, _Enable for this endpoint_ is checked:
+4. **Verify** をクリックします。_Service name found_ と表示されない場合は、[Datadog サポート][1]までお問い合わせください。
+5. Datadog VPC サービスエンドポイントとピアリングされるべき VPC とサブネットを選択します。
+6. *Enable DNS name** の _Enable for this endpoint_ がチェックされていることを確認します。
 
    {{< img src="agent/guide/private_link/enabled_dns_private.png" alt="Enable DNS private" style="width:80%;" >}}
 
-7. Choose the security group of your choice to control what can send traffic to this VPC endpoint.
+7. この VPC エンドポイントへのトラフィックを送信できるものを制御するために、自由にセキュリティグループを選択します。
 
-    **Note**: **The security group must accept inbound traffic on TCP port `443`**.
+    **注**: **セキュリティグループは TCP ポート `443` 上のインバウンドトラフィックを受け入れなければなりません**。
 
-8. Click **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
+8. 画面下部の **Create endpoint** をクリックします。成功すると以下のように表示されます。
 
-   {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:60%;" >}}
+   {{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC エンドポイントが作成されました" style="width:60%;" >}}
 
-9. Click on the VPC endpoint ID to check its status.
-10. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes. Once it shows _Available_, you can use AWS PrivateLink.
+9. ステータスを確認するには、VPC エンドポイント ID をクリックします。
+10. ステータスが _Pending_ から _Available_ に変わるのを待ちます。これには最大 10 分かかります。_Available_ が表示されたら、AWS PrivateLink を利用できます。
 
-    {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:60%;" >}}
+    {{< img src="agent/guide/private_link/vpc_status.png" alt="VPC ステータス" style="width:60%;" >}}
 
-11. If you are collecting logs data, ensure your Agent is configured to send logs over HTTPS. If the data is not already there, add the following to the [Agent `datadog.yaml` configuration file][2]:
+11. ログデータを収集している場合、Agent が HTTPS 経由でログを送信するように構成されていることを確認してください。データがまだ存在しない場合は、[Agent `datadog.yaml` コンフィギュレーションファイル][2]に以下を追加します。
 
     ```yaml
     logs_config:
         use_http: true
     ```
 
-    If you are using the container Agent, set the following environment variable instead:
+    Container Agent を使用している場合は、代わりに以下の環境変数を設定します。
 
     ```
     DD_LOGS_CONFIG_USE_HTTP=true
     ```
 
-    This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][3].
+    この構成は、AWS PrivateLink と Datadog Agent でログを Datadog に送信する場合に必要で、Lambda 拡張機能では不要です。詳細は [Agent ログ収集][3]を参照してください。
 
-12. If your Lambda Extension loads the Datadog API Key from AWS Secrets Manager using the ARN specified by the environment variable `DD_API_KEY_SECRET_ARN`, you need to [create a VPC endpoint for Secrets Manager][4].
+12. 環境変数 `DD_API_KEY_SECRET_ARN` で指定した ARN を使用して AWS Secrets Manager から Datadog API Key をロードする Lambda 拡張機能の場合、[Secrets Manager 用の VPC エンドポイントを作成する][4]必要があります。
 
-13. [Restart your Agent][5] to send data to Datadog through AWS PrivateLink.
+13. [Agent を再起動][5]し、AWS PrivateLink 経由で Datadog にデータを送信します。
 
 
 
@@ -101,78 +101,78 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 [5]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 
-{{% tab "Connect from another region using VPC Peering" %}}
+{{% tab "VPC ピアリングを使用した他のリージョンからの接続" %}}
 
-### Amazon VPC peering
+### Amazon VPC ピアリング
 
-1. Connect the AWS Console to region **{{< region-param key="aws_region" >}}** and create a VPC endpoint.
+1. AWS Console をリージョン **{{< region-param key="aws_region" >}}** に接続し、VPC エンドポイントを作成します。
 
-{{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="Create VPC endpoint" style="width:80%;" >}}
+{{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="VPC エンドポイントの作成" style="width:80%;" >}}
 
-2. Select **Find service by name**.
-3. Fill the _Service Name_ text box according to the service you want to establish AWS PrivateLink for:
+2. **Find service by name** を選択します。
+3. AWS PrivateLink を構築したいサービスに応じて _Service Name_ テキストボックスに入力します。
 
-{{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC service name" style="width:90%;" >}}
+{{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC サービス名" style="width:90%;" >}}
 
-| Datadog                   | PrivateLink service name                                                               |
+| Datadog                   | PrivateLink サービス名 |
 |---------------------------|----------------------------------------------------------------------------------------|
-| Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        |
-| Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         |
-| API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               |
-| Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           |
-| Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        |
-| Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           |
-| Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         |
-| Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            |
-| Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               |
-| Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     |
+| ログ (Agent HTTP インテーク)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} |
+| ログ (ユーザー HTTP インテーク) | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}} |
+| API | {{< region-param key="aws_private_link_api_service_name" code="true" >}} |
+| メトリクス | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}} |
+| コンテナ | {{< region-param key="aws_private_link_containers_service_name" code="true" >}} |
+| プロセス | {{< region-param key="aws_private_link_process_service_name" code="true" >}} |
+| プロファイリング | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}} |
+| トレース | {{< region-param key="aws_private_link_traces_service_name" code="true" >}} |
+| データベースモニタリング | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}} |
+| リモート構成 | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}} |
 
-4. Click **Verify**. If this does not return _Service name found_, reach out to [Datadog support][1].
+4. **Verify** をクリックします。_Service name found_ と表示されない場合は、[Datadog サポート][1]までお問い合わせください。
 
-5. Next, choose the VPC and subnets that should be peered with the Datadog VPC service endpoint. Do not select **Enable DNS name** as VPC peering requires DNS to be manually configured.
+5. 次に、Datadog VPC サービスエンドポイントでピアリングされるべき VPC とサブネットを選択します。VPC ピアリングでは DNS を手動で構成する必要があるため、**Enable DNS name** は選択しないでください。
 
-6. Choose the security group of your choice to control what can send traffic to this VPC endpoint.
+6. この VPC エンドポイントへトラフィックを送信できるものを制御するために、自由にセキュリティグループを選択します。
 
-    **Note**: **The security group must accept inbound traffic on TCP port `443`**.
+    **注**: **セキュリティグループは TCP ポート `443` 上のインバウンドトラフィックを受け入れなければなりません**。
 
-7. Click **Create endpoint** at the bottom of the screen. If successful, the following is displayed:
+7. 画面下部の **Create endpoint** をクリックします。成功すると以下のように表示されます。
 
-{{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC endpoint created" style="width:80%;" >}}
+{{< img src="agent/guide/private_link/vpc_endpoint_created.png" alt="VPC エンドポイントが作成されました" style="width:80%;" >}}
 
-8. Click on the VPC endpoint ID to check its status.
-9. Wait for the status to move from _Pending_ to _Available_. This can take up to 10 minutes.
-10. After creating the endpoint, use VPC peering to make the PrivateLink endpoint available in another region to send telemetry to Datadog over PrivateLink. For more information, read the [Work With VPC Peering connections][2] page in AWS.
+8. ステータスを確認するには、VPC エンドポイント ID をクリックします。
+9. ステータスが _Pending_ から _Available_ に変わるのを待ちます。最大 10 分かかります。
+10. エンドポイントの作成後、VPC ピアリングを使用して PrivateLink エンドポイントを別のリージョンで利用できるようにし、PrivateLink 経由で Datadog にテレメトリーを送信します。詳細については、AWS の [VPC ピアリング接続の使用][2]ページをお読みください。
 
-{{< img src="agent/guide/private_link/vpc_status.png" alt="VPC status" style="width:80%;" >}}
+{{< img src="agent/guide/private_link/vpc_status.png" alt="VPC ステータス" style="width:80%;" >}}
 
 ### Amazon Route53
 
-1. Create a [Route53 private hosted zone][3] for each service you have created an AWS PrivateLink endpoint for. Attach the private hosted zone to the VPC in {{< region-param key="aws_region" code="true" >}}.
+1. AWS PrivateLink エンドポイントを作成したサービスごとに、[Route53 プライベートホストゾーン][3]を作成します。プライベートホストゾーンを {{< region-param key="aws_region" code="true" >}} の VPC にアタッチします。
 
-{{< img src="agent/guide/private_link/create-a-route53-private-hosted-zone.png" alt="Create a Route53 private hosted zone" style="width:80%;" >}}
+{{< img src="agent/guide/private_link/create-a-route53-private-hosted-zone.png" alt="Route53 プライベートホストゾーンの作成" style="width:80%;" >}}
 
-Use the list below to map service and DNS name to different parts of Datadog:
+以下のリストを使用して、サービス名と DNS 名を Datadog のさまざまな部分にマッピングします。
 
-  | Datadog                   | PrivateLink service name                                                               | Private DNS name                                                       |
-  |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
-  | Logs (Agent HTTP intake)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | <code>agent-http-intake.logs.{{< region-param key="dd_site" >}}</code> |
-  | Logs (User HTTP intake)   | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}}         | <code>http-intake.logs.{{< region-param key="dd_site" >}}</code>       |
-  | API                       | {{< region-param key="aws_private_link_api_service_name" code="true" >}}               | <code>api.{{< region-param key="dd_site" >}}</code>                    |
-  | Metrics                   | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}}           | <code>metrics.agent.{{< region-param key="dd_site" >}}</code>          |
-  | Containers                | {{< region-param key="aws_private_link_containers_service_name" code="true" >}}        | <code>orchestrator.{{< region-param key="dd_site" >}}</code>           |
-  | Process                   | {{< region-param key="aws_private_link_process_service_name" code="true" >}}           | <code>process.{{< region-param key="dd_site" >}}</code>                |
-  | Profiling                 | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}}         | <code>intake.profile.{{< region-param key="dd_site" >}}</code>         |
-  | Traces                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | <code>trace.agent.{{< region-param key="dd_site" >}}</code>            |
-  | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | <code>dbm-metrics-intake.{{< region-param key="dd_site" >}}</code>     |
-  | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | <code>config.{{< region-param key="dd_site" >}}</code>                 |
+  | Datadog                   | PrivateLink サービス名 | プライベート DNS 名 |
+|---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
+  | ログ (Agent HTTP インテーク)  | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}} | <code>agent-http-intake.logs.{{< region-param key="dd_site" >}}</code> |
+| ログ (ユーザー HTTP インテーク) | {{< region-param key="aws_private_link_logs_user_service_name" code="true" >}} | <code>http-intake.logs.{{< region-param key="dd_site" >}}</code> |
+| API | {{< region-param key="aws_private_link_api_service_name" code="true" >}} | <code>api.{{< region-param key="dd_site" >}}</code> |
+| メトリクス | {{< region-param key="aws_private_link_metrics_service_name" code="true" >}} | <code>metrics.agent.{{< region-param key="dd_site" >}}</code> |
+| コンテナ | {{< region-param key="aws_private_link_containers_service_name" code="true" >}} | <code>orchestrator.{{< region-param key="dd_site" >}}</code> |
+| プロセス | {{< region-param key="aws_private_link_process_service_name" code="true" >}} | <code>process.{{< region-param key="dd_site" >}}</code> |
+| プロファイリング | {{< region-param key="aws_private_link_profiling_service_name" code="true" >}} | <code>intake.profile.{{< region-param key="dd_site" >}}</code> |
+| トレース | {{< region-param key="aws_private_link_traces_service_name" code="true" >}} | <code>trace.agent.{{< region-param key="dd_site" >}}</code> |
+| データベースモニタリング | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}} | <code>dbm-metrics-intake.{{< region-param key="dd_site" >}}</code> |
+| リモート構成 | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}} | <code>config.{{< region-param key="dd_site" >}}</code> |
 
-  You can also find this information by interrogating the AWS API, `DescribeVpcEndpointServices`, or by using the following command: 
+  この情報は、AWS API の `DescribeVpcEndpointServices` に問い合わせるか、以下のコマンドを使用しても見つけることができます。
 
   ```bash
   aws ec2 describe-vpc-endpoint-services --service-names <service-name>`
   ```
 
-  For example, in the case of the Datadog metrics endpoint for {{< region-param key="aws_region" code="true" >}}:
+  例えば、{{< region-param key="aws_region" code="true" >}} の Datadog メトリクスエンドポイントの場合
 
 <div class="site-region-container">
   <div class="highlight">
@@ -180,60 +180,60 @@ Use the list below to map service and DNS name to different parts of Datadog:
   </div>
 </div>
 
-This returns <code>metrics.agent.{{< region-param key="dd_site" >}}</code>, the private hosted zone name that you need in order to associate with the VPC which the Agent traffic originates in. Overriding this record grabs all Metrics-related intake hostnames.
+これは、Agent トラフィックの発信元となる VPC と関連付けるために必要な、プライベートホストゾーン名である <code>metrics.agent.{{< region-param key="dd_site" >}}</code> を返します。このレコードを上書きすると、メトリクスに関連するインテークホスト名がすべて取得されます。
 
-2. Within each new Route53 private hosted zone, create an A record with the same name. Toggle the **Alias** option, then under **Route traffic to**, choose **Alias to VPC endpoint**, **{{< region-param key="aws_region" >}}**, and enter the DNS name of the VPC endpoint associated with the DNS name.
+2. それぞれの新しい Route53 プライベートホストゾーン内に、同じ名前で A レコードを作成します。**Alias** オプションをトグルし、**Route traffic to** で、**Alias to VPC endpoint**、**{{< region-param key="aws_region" >}}** を選び、DNS 名と関連付けられた VPC エンドポイントの DNS 名を入力します。
 
-   **Notes**:
-      - To retrieve your DNS name, see the [View endpoint service private DNS name configuration documentation.][4]
-      - The Agent sends telemetry to versioned endpoints, for example, <code>[version]-app.agent.{{< region-param key="dd_site" >}}</code> which resolves to <code>metrics.agent.{{< region-param key="dd_site" >}}</code> through a CNAME alias. Therefore, you only need to set up a private hosted zone for <code>metrics.agent.{{< region-param key="dd_site" >}}</code>.
+   **注**:
+      - DNS 名を取得するには、[エンドポイントサービスのプライベート DNS 名構成ドキュメントを表示する][4]を参照してください。
+      - Agent は、バージョン管理されたエンドポイントにテレメトリーを送信します。例えば、<code>[version]-app.agent.{{< region-param key="dd_site" >}}</code> は、CNAME エイリアスを介して <code>metrics.agent.{{< region-param key="dd_site" >}}</code> に解決されます。したがって、必要なのは <code>metrics.agent.{{< region-param key="dd_site" >}}</code> 用のプライベートホストゾーンを設定することだけです。
 
-{{< img src="agent/guide/private_link/create-an-a-record.png" alt="Create an A record" style="width:90%;" >}}
+{{< img src="agent/guide/private_link/create-an-a-record.png" alt="A レコードの作成" style="width:90%;" >}}
 
-3. Configure VPC peering and routing between the VPC in {{< region-param key="aws_region" code="true" >}} that contains the Datadog PrivateLink endpoints and the VPC in the region where the Datadog Agents run.
+3. Datadog PrivateLink のエンドポイントを含む {{< region-param key="aws_region" code="true" >}} の VPC と、Datadog Agent を実行するリージョンの VPC の間で、VPC ピアリングとルーティングを構成します。
 
-4. If the VPCs are in different AWS accounts, the VPC containing the Datadog Agent must be authorized to associate with the Route53 private hosted zones before continuing. Create a [VPC association authorization][5] for each Route53 private hosted zone using the region and VPC ID of the VPC where the Datadog Agent runs. This option is not available in the AWS Console. It must be configured using the AWS CLI, SDK, or API.
+4. VPC が異なる AWS アカウントにある場合、続行する前に Datadog Agent を含む VPC が Route53 プライベートホストゾーンとの関連付けを許可されている必要があります。Datadog Agent が実行する VPC のリージョンと VPC ID を使用して、各 Route53 プライベートホストゾーンに対して [VPC 関連付け承認][5]を作成します。このオプションは、AWS Console では利用できません。AWS CLI、SDK、または API を使用して構成する必要があります。
 
-5. Edit the Route53 hosted zone to add VPCs for other regions.
+5. Route53 ホストゾーンを編集して、他のリージョンの VPC を追加します。
 
-{{< img src="agent/guide/private_link/edit-route53-hosted-zone.png" alt="Edit a Route53 private hosted zone" style="width:80%;" >}}
+{{< img src="agent/guide/private_link/edit-route53-hosted-zone.png" alt="Route53 のプライベートホストゾーンを編集する" style="width:80%;" >}}
 
-6. VPCs that have the Private Hosted Zone (PHZ) attached need to have certain settings toggled on, specifically `enableDnsHostnames` and `enableDnsSupport` in the VPCs that the PHZ is associated with. See [Considerations when working with a private hosted zone][6].
+6. プライベートホストゾーン (PHZ) が接続されている VPC では、特定の設定、特に `enableDnsHostnames` と `enableDnsSupport` をオンにする必要があります。[プライベートホストゾーンを使用する際の注意点][6]を参照してください。
 
-7. [Restart the Agent][7] to send data to Datadog through AWS PrivateLink.
+7. [Agent を再起動][7]し、AWS PrivateLink 経由で Datadog にデータを送信します。
 
-#### Troubleshooting DNS resolution and connectivity
+#### DNS の解決と接続のトラブルシューティング
 
-The DNS names should resolve to IP addresses contained within the CIDR block of the VPC in {{< region-param key="aws_region" code="true" >}}, and connections to `port 443` should succeed.
+DNS 名は、{{< region-param key="aws_region" code="true" >}} の VPC の CIDR ブロックに含まれる IP アドレスに解決され、`port 443` への接続に成功するはずです。
 
-{{< img src="agent/guide/private_link/successful-setup.png" alt="Connection to port 443 should be successful" style="width:80%;" >}}
+{{< img src="agent/guide/private_link/successful-setup.png" alt="443 番ポートへの接続に成功" style="width:80%;" >}}
 
-If DNS is resolving to public IP addresses, then the Route53 zone has **not** been associated with the VPC in the alternate region, or the A record does not exist.
+DNS がパブリック IP アドレスに解決している場合、Route53 ゾーンが代替地域の VPC に関連付けされて**いない**か、A レコードが存在しないことが原因です。
 
-If DNS resolves correctly, but connections to `port 443` are failing, then VPC peering or routing may be misconfigured, or port 443 may not be allowed outbound to the CIDR block of the VPC in {{< region-param key="aws_region" code="true" >}}.
+DNS は正しく解決しているのに、`port 443` への接続に失敗する場合、VPC のピアリングまたはルーティングが誤って構成されているか、ポート 443 が {{< region-param key="aws_region" code="true" >}} の VPC の CIDR ブロックへのアウトバウンドを許可されていない可能性があります。
 
-The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settings toggled on. Specifically, `enableDnsHostnames` and `enableDnsSupport` need to be turned on in the VPCs that the PHZ is associated with. See [Amazon VPC settings][6].
+プライベートホストゾーン (PHZ) が接続されている VPC は、いくつかの設定をオンにする必要があります。具体的には、PHZ が関連付けられている VPC で、`enableDnsHostnames` と `enableDnsSupport` がオンになっている必要があります。[Amazon VPC 設定][6]を参照してください。
 
 ### Datadog Agent
 
-1. If you are collecting logs data, ensure your Agent is configured to send logs over HTTPS. If the data is not already there, add the following to the [Agent `datadog.yaml` configuration file][8]:
+1. ログデータを収集する場合は、Agent が HTTPS 経由でログを送信するように構成されていることを確認してください。データがまだない場合は、[Agent `datadog.yaml` コンフィギュレーションファイル][8]に以下を追加します。
 
     ```yaml
     logs_config:
         force_use_http: true
     ```
 
-    If you are using the container Agent, set the following environment variable instead:
+   コンテナ Agent をお使いの場合は、代わりに環境変数を設定してください。
 
     ```
     DD_LOGS_CONFIG_FORCE_USE_HTTP=true
     ```
 
-    This configuration is required when sending logs to Datadog with AWS PrivateLink and the Datadog Agent, and is not required for the Lambda Extension. For more details, see [Agent log collection][9].
+   この構成は、AWS PrivateLink と Datadog Agent で Datadog にログを送信する際に必要で、Lambda Extension では必要ありません。詳しくは、[Agent のログ収集][9]をご参照ください。
 
-2. If your Lambda Extension loads the Datadog API Key from AWS Secrets Manager using the ARN specified by the environment variable `DD_API_KEY_SECRET_ARN`, you need to [create a VPC endpoint for Secrets Manager][10].
+2. Lambda 拡張機能で、環境変数 `DD_API_KEY_SECRET_ARN` で指定した ARN を使って AWS Secrets Manager から Datadog API キーを読み込む場合、[Secrets Manager 用の VPC エンドポイントを作成][10]する必要があります。
 
-3. [Restart the Agent][7].
+3. [Agent を再起動します][7]。
 
 
 [1]: /help/
@@ -254,6 +254,6 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 [2]: https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html
 {{% /site-region %}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

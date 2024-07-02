@@ -1,8 +1,9 @@
 ---
-title: カウント
+title: Count
 aliases:
-  - /ja/graphing/functions/count/
+    - /graphing/functions/count/
 ---
+
 ## 0 以外のカウント
 
 | 関数          | 説明                           | 例                           |
@@ -44,4 +45,4 @@ aliases:
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ja/getting_started/tagging/
+[1]: /getting_started/tagging/

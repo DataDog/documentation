@@ -5,7 +5,7 @@
 - azure
 - cloud
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure DB for MySQL metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_db_for_mysql/"
@@ -33,27 +33,27 @@ Get metrics from Azure Database for MySQL to:
 - Visualize the performance of your MySQL databases.
 - Correlate the performance of your MySQL databases with your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps that need to be performed.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_db_for_mysql" >}}
 
 
-### Events
+### イベント
 
 The Azure Database for MySQL integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Database for MySQL integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

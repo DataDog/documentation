@@ -1,6 +1,5 @@
 ---
 title: Custom Instrumentation
-kind: Documentation
 further_reading:
     - link: tracing/guide/instrument_custom_method
       text: Instrument a custom method to get deep visibility into your business logic
@@ -14,13 +13,13 @@ algolia:
   tags: [apm custom instrumentation]
 ---
 
-## Overview
+## 概要
 
 Custom instrumentation allows for precise monitoring of specific components in your application. It allows you to capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. Automatic instrumentation includes [Single Step Instrumentation][5] or using [Datadog tracing libraries][6].
 
 Custom instrumentation involves embedding tracing code directly into your application code. This allows for the programmatic creation, modification, or deletion of traces to send to Datadog.
 
-## Use cases
+## ユースケース
 
 Some situations when you might use custom instrumentation include:
 
@@ -29,7 +28,7 @@ Some situations when you might use custom instrumentation include:
 - Precisely monitoring specific sequences of operations or user interactions that require fine-grained control.
 - Removing unwanted spans from traces.
 
-## Getting started
+## はじめに
 
 Before you begin, make sure you've already [installed and configured the Agent][7].
 
@@ -58,7 +57,7 @@ Datadog tracing libraries provide an implementation of the OpenTelemetry API for
 
 {{% tab "OpenTracing (legacy)" %}}
 
-If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported. 
+[OpenTelemetry][1] や [`ddtrace`][2] のカスタムインスツルメンテーションがうまく機能しない場合、サポートされている各言語は [OpenTracing][3] データを Datadog に送信するサポートも備えています。OpenTracing はアーカイブされ、プロジェクトはサポートされていません。
 
 {{< partial name="apm/apm-opentracing-custom.html" >}}
 
@@ -71,7 +70,7 @@ If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

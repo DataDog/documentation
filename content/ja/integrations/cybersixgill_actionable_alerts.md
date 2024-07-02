@@ -26,7 +26,7 @@
 "categories":
 - security
 - event management
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/cybersixgill_actionable_alerts/README.md"
 "display_on_public_website": true
@@ -104,7 +104,7 @@ datadog-agent integration install -t datadog-cybersixgill-actionable-alerts==1.0
 ### Validation
 Verify that Cybersixgill events are generated in the [Datadog Events Explorer][4].
 
-## Data Collected
+## 収集データ
 
 ### Service Checks
 {{< get-service-checks-from-git "cybersixgill_actionable_alerts" >}}

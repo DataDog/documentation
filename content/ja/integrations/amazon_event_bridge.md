@@ -3,7 +3,7 @@
 - aws
 - cloud
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "A serverless event bus that processes events from AWS services, SaaS, and your apps in near real time."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_event_bridge/"
@@ -38,11 +38,11 @@ Datadog’s integration with Amazon EventBridge offers the following features:
 
 {{< img src="integrations/amazon_event_bridge/eventbridge_monitor_notification.png" alt="A monitor notification being sent to EventBridge" >}}
 
-## Setup
+## セットアップ
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
-### Installation
+### インストール
 
 1. Ensure that the main [AWS integration][1] is installed for each AWS account that receives alert notifications.
 2. Ensure the following permissions exist in the permissions policy for Datadog AWS Role(s):
@@ -51,58 +51,58 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
 
 **Note**: You can also use the [API][2] or [Terraform][3] to set up an Amazon EventBridge source. 
 
-### Configuration
+### 構成
 
 `events:CreateEventBus` and `events:PutPartnerEvents` permissions are required to send alert notifications to your event buses. If you do not have these permissions set, read the [Datadog IAM permissions documentation][4] to enable permissions prior to further configuration.
 
 1. Navigate to the [Datadog - Amazon EventBridge integration][5] tile to see a list of AWS accounts integrated in Datadog where you can create Event Bridges.
-2. Within the AWS account of choice, create a new event bus by providing a name and selecting the region where you want it to exist.
-3. Within Datadog alerts, use the `@awseventbridge-<MY_EVENT_BUS>` syntax to send alert notifications to your event buses.
+2. 選択した AWS アカウントで、イベントバスの名前を指定し、そのイベントバスを置くリージョンを選択して、新しいイベントバスを作成します。
+3. Datadog アラートで、`@awseventbridge-<MY_EVENT_BUS>` 構文を使用して、イベントバスにアラート通知を送信します。
 4. Within AWS, connect your event buses to targets such as Lambda, Kinesis, and [many other services][6] to create event-driven workflows.
     **Note**: Examples of Datadog use cases can be found on Datadog's partner page in the [AWS Console][7].
 5. After setting up an event bus in Datadog, navigate to the [Amazon EventBridge console][8] and select `Rules` in the navigation pane.
-6. Select `Create Rule` and add a name and description for your rule.
-7. Under **Define Pattern**, select `Event Pattern`. Select `Predefined by service` as the **event matching pattern**. For **service provider**, select `Service partners`. For **service name**, select `Datadog`. This populates the event buses that are in Datadog. Add any additional information for your rule., then **Save** the rule.
-8. To disconnect an event bus in Datadog, hover over the event bus of your choice and press the trash icon.
-    **Note**: This action disconnects the event bus from AWS, but does not delete the event bus itself within AWS.
+6. `Create Rule` を選択し、ルールの名前と説明を追加します。
+7. **Define Pattern** で `Event Pattern` を選択します。**イベントマッチングパターン**として `Predefined by service` を選択します。**サービスプロバイダー**では、`Service partners` を選択します。**サービス名**では、`Datadog` を選択します。これにより、Datadog にあるイベントバスが入力されます。ルールの追加情報を追加してから、ルールを**保存**します。
+8. Datadog でイベントバスの接続を解除するには、該当するイベントバスの上にマウスポインターを合わせ、ゴミ箱アイコンをクリックします。
+   **注**: このアクションにより イベントバスの接続が AWS から解除されますが、AWS 内でイベントバスそのものが削除されるわけではありません。
 
-**Note**: EventBridge rules are not imported into Datadog unless the rule is active and has been triggered. 
+**注**: EventBridge ルールは、ルールがアクティブでトリガーされない限り、Datadog にインポートされません。
 
-### Automated actions
+### 自動化されたアクション
 
-Set up new outbound notification channels for monitors and snapshots from Datadog with the Amazon EventBridge integration. With automated actions, you can configure your AWS resources to:
+Amazon EventBridge インテグレーションを使用して、Datadog のモニターやスナップショット用に新しいアウトバウンド通知チャネルをセットアップします。自動化されたアクションを使用して、AWS リソースを次のように構成できます。
 
 * Restart a process if process ends for [live process monitoring][9]
-* Prompt EC2 reboots
-* Prompt ECS Task (kick off another task when one task ends)
-* Apply an Ansible Playbook (make any change on hosts)
-* Run remote patches
-* Run remote SSH scripts
-* Run Windows Updates or install applications
+* EC2 の再起動を促します
+* ECS タスクを促します (1 つのタスクが終了したら別のタスクを開始する)
+* Ansible Playbook を適用します (ホストで変更を加える)
+* リモートパッチを実行します
+* リモート SSH スクリプトを実行します
+* Windows Update を実行するか、アプリケーションをインストールします
 
 The full list of resources you can target is available on the [AWS website][10].
 
-Find below an example of how to send a snapshot to trigger this process. Once triggered, you can specify the actions receipt in AWS.
+このプロセスをトリガーするためにスナップショットを送信する方法の例を以下に示します。トリガーされると、AWS でアクション受信を指定できます。
 
 {{< wistia uezo3fh61j >}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-The Amazon EventBridge integration does not include any metrics.
+Amazon EventBridge インテグレーションには、メトリクスは含まれません。
 
-### Events
+### イベント
 
-The Amazon EventBridge integration does not include any events.
+Amazon EventBridge インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The Amazon EventBridge integration does not include any service checks.
+Amazon EventBridge インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][11].
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/
 [2]: https://docs.datadoghq.com/api/latest/aws-integration/#create-an-amazon-eventbridge-source

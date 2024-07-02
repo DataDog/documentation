@@ -1,8 +1,9 @@
 ---
-title: ランク
+title: Rank
 aliases:
-  - /ja/graphing/functions/rank/
+    - /graphing/functions/rank/
 ---
+
 ## トップ
 
 | 関数 | 説明               | 例                                              |

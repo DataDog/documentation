@@ -4,9 +4,9 @@
 - "cloud"
 - "iot"
 - "provisioning"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Azure IOT Hub metrics."
+"description": "Azure IOT Hub のキーメトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/azure_iot_hub/"
 "draft": false
 "git_integration_title": "azure_iot_hub"
@@ -34,27 +34,27 @@ Get metrics from Azure IOT Hub to:
 
 Azure Provisioning Service is a helper service for IoT Hub that enables zero-touch, just-in-time provisioning to the right IoT hub without requiring human intervention, allowing customers to provision millions of devices in a secure and scalable manner.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration first][1]. There are no other installation steps that need to be performed.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_iot_hub" >}}
 
 
-### Events
+### イベント
 
 The Azure IoT Hub integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure IoT Hub integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

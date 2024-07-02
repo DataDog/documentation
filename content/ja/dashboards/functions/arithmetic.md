@@ -1,7 +1,7 @@
 ---
+title: Arithmetic
 aliases:
-- /ja/graphing/functions/arithmetic/
-title: 算術演算
+    - /graphing/functions/arithmetic/
 ---
 
 ## 絶対値
@@ -87,4 +87,4 @@ title: 算術演算
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ja/monitors/configuration/?tab=thresholdalert#cumulative-time-windows
+[1]: /monitors/configuration/?tab=thresholdalert#cumulative-time-windows

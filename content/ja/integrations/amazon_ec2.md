@@ -7,9 +7,9 @@
 - "os & system"
 - "aws"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track instance resource usage, monitor status checks, and more."
+"description": "インスタンスリソースの使用状況の追跡、ステータスチェックの監視など。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_ec2/"
 "draft": false
 "git_integration_title": "amazon_ec2"
@@ -36,13 +36,13 @@ Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizab
 
 Enable this integration to see in Datadog all your EC2 metrics, and additional events like scheduled maintenances.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
-### Configuration
+### 構成
 
 1. In the [AWS integration page][2], ensure that `EC2` is enabled under the `Metric Collection` tab.
 
@@ -132,9 +132,9 @@ Click the **Run** button and a confirmation page displays showing the status. Wa
 
 Use the [Datadog Agent][18] or another [log shipper][19] to send your logs to Datadog.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_ec2" >}}
 
 
@@ -144,7 +144,7 @@ Each of the metrics retrieved from AWS is assigned the same tags that appear in 
    - `aws.ec2.instance_age` is not collected by default with the Datadog - EC2 integration. Contact [Datadog support][21] to enable this metric collection.
    - `aws.ec2.host_ok` is collected by default, even if you disable metric collection for the Amazon EC2 integration, and can lead to unexpected hosts appearing in the infrastructure list. To filter the unwanted hosts, assign an AWS tag, such as `datadog:true`, to those EC2 instances. Then specify that tag in the **Limit metric collection to specific resources** textbox under the **Metric Collection** tab in your [Datadog AWS integration page][2].
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "amazon_ec2" >}}
 
 
@@ -155,7 +155,7 @@ The Amazon EC2 integration provides ready-to-use monitoring capabilities to moni
 - Amazon EC2 Overview Dashboard: Gain a comprehensive overview of your EC2 instances using the out-of-the-box [Amazon EC2 Overview dashboard][23].
 - Recommended Monitors: Enable [Recommended Amazon EC2 monitors][24] to proactively detect issues and receive timely alerts.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][21].
 

@@ -24,7 +24,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "metrics"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -59,9 +59,9 @@ Enable this integration to see in Datadog all your OpenSearch Service custom tag
 
 Note: This integration requires the permissions 'es:ListTags', 'es:ListDomainNames' and 'es:DescribeElasticsearchDomains' to be fully enabled.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][2] first.
 
@@ -70,21 +70,21 @@ If you haven't already, set up the [Amazon Web Services integration][2] first.
 1. In the [AWS integration page][3], ensure that `ES` is enabled under the `Metric Collection` tab.
 2. Install the [Datadog - Amazon OpenSearch Service integration][4].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_es" >}}
 
 
-### Events
+### イベント
 
 The Amazon OpenSearch Service integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon OpenSearch Service integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

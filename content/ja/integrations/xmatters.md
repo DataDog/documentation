@@ -20,7 +20,7 @@
 - "collaboration"
 - "incidents"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -64,9 +64,9 @@ Connect Datadog to xMatters to:
 - Configure response options that trigger other xMatters integrations and drive workflow for tasks such as creating tickets, updating consoles, sending additional notifications, and initiating chat & conference-call collaboration
 - Add additional reporting and analytics to your operational processes
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To set up the xMatters-Datadog integration:
 
@@ -74,21 +74,21 @@ To set up the xMatters-Datadog integration:
 - [Configure xMatters][2] workflow.
 - Configure each of the xMatters webhooks with the [Datadog webhooks integration][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The xMatters integration does not include any metrics.
 
-### Events
+### イベント
 
 The xMatters integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The xMatters integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

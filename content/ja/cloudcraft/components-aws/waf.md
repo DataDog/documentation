@@ -1,27 +1,27 @@
 ---
 title: "WAF Component"
 ---
-## Overview
+## 概要
 
-Use the WAF component to represent visualize web application firewalls from your Amazon Web Services architecture.
+WAF コンポーネントを使用して、Amazon Web Services アーキテクチャの Web アプリケーションファイアウォールを表現し視覚化します。
 
-{{< img src="cloudcraft/components-aws/waf/component-waf-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected AWS components." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/waf/component-waf-diagram.png" alt="相互接続された AWS コンポーネントを示す、等角投影された Cloudcraft 図のスクリーンショット。" responsive="true" style="width:60%;">}}
 
-## Toolbar
+## ツールバー
 
-Use the toolbar to configure and customize the component. The following options are available:
+ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
 
--  **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
--  **Rules & Groups**: Enter the number of rules and groups you want per web ACL.
--  **Requests (millions/mo)**: Enter the number of web requests your WAF receives per month, in millions.
+-  **Color**: コンポーネント本体の塗りつぶし色とシンボルのアクセントカラーを選択します。2D ビューと 3D ビューで同じ色を使用することも、それぞれ異なる色を使用することもできます。
+-  **Rules & Groups**: Web ACL ごとに必要なルールとグループの数を入力します。
+-  **Requests (millions/mo)**: WAF がひと月に受け取る Web リクエストの数を百万単位で入力します。
 
 ## API
 
-Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。
 
-### Schema
+### スキーマ
 
-The following is an example JSON object of a WAF component:
+以下は、WAF コンポーネントの JSON オブジェクトの例です。
 
 ```json
 {
@@ -46,22 +46,22 @@ The following is an example JSON object of a WAF component:
 }
 ```
 
-- **type: string**: The type of component. Must be a string of value `waf` for this component.
-- **id: string, uuid**: The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
-- **arn: string**: The globally unique identifier for the component within AWS, known as the [Amazon Resource Names][2].
-- **region: string**: The AWS region for the component. All global regions are supported, [except for AWS China][3].
-- **mapPos: array**: The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
-- **aclCount: number**: The number of web access control lists used. Defaults to `1`.
-- **ruleCount: number**: The number of rules added per web access control list. Defaults to `0`.
-- **requestMillions: number**: The number of web requests received per month, in millions. Defaults to `0`.
-- **color: object**: The fill color for the component body.
-  - **isometric: string**: A hexadecimal color for the component body in the 3D view. Defaults to `#607D8B`.
-  - **2d: string**: A hexadecimal color for the component body in the 2D view. Defaults to `#D6242D`.
-- **accentColor: object**: The accent color for the component logo.
-  - **isometric: string**: A hexadecimal color for the component logo in the 3D view. Defaults to `#FF5722`.
-  - **2d: string**: A hexadecimal color for the component logo in the 2D view. Defaults to `#FFFFFF`.
-- **link: string, uri**: A URI that links the component to another diagram or an external website. Accepts one of the following formats: `blueprint://` or `https://`.
-- **locked: boolean**: Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
+- **type: 文字列**: コンポーネントのタイプ。このコンポーネントの値 `waf` の文字列でなければなりません。
+- **id: 文字列、uuid**: コンポーネントの一意な識別子。API は内部的に UUID v4 を使用しますが、任意の一意な文字列を受け付けます。
+- **arn: 文字列**: [Amazon Resource Name][2] として知られる、AWS 内でのコンポーネントのグローバルに一意な識別子。
+- **region: 文字列**: コンポーネントの AWS リージョン。[AWS China を除く][3]、すべてのグローバルリージョンがサポートされています。
+- **mapPos: 配列**: x 座標と y 座標のペアで表される、ブループリント内のコンポーネントの位置。
+- **aclCount: 数値**: 使用する Web アクセスコントロールリストの数。デフォルトは `1` です。
+- **ruleCount: 数値**: Web アクセスコントロールリストごとに追加されるルールの数。デフォルトは `0` です。
+- **requestMillions: 数値**: ひと月に受け取った Web リクエストの数 (単位は百万)。デフォルトは `0` です。
+- **color: オブジェクト**: コンポーネント本体の塗りつぶし色。
+  - **isometric: 文字列**: 3D ビューでのコンポーネント本体の 16 進数カラー。デフォルトは `#607D8B` です。
+  - **2d: 文字列**: 2D ビューでのコンポーネント本体の 16 進数カラー。デフォルトは `#D6242D` です。
+- **accentColor: オブジェクト**: コンポーネントロゴのアクセントカラー。
+  - **isometric: 文字列**: 3D ビューでのコンポーネントロゴの 16 進数カラー。デフォルトは `#FF5722` です。
+  - **2d: 文字列**: 2D ビューでのコンポーネントロゴの 16 進数カラー。デフォルトは `#FFFFFF` です。
+- **link: 文字列、uri**: コンポーネントを別の図や外部の Web サイトにリンクする URI。`blueprint://` または `https://` の 2 つの形式のどちらかを指定します。
+- **locked: ブール値**: Web インターフェイスを通してコンポーネントの位置の変更を許可するかどうか。デフォルトは `false` です。
 
 [1]: https://developers.cloudcraft.co/
 [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html

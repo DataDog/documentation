@@ -1,12 +1,11 @@
 ---
 title: Configuring the Java Tracing Library
-kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
 further_reading:
     - link: "https://github.com/DataDog/dd-trace-java"
-      tag: Source Code
+      tag: ソースコード
       text: Datadog Java APM source code
     - link: tracing/glossary/
       tag: Documentation
@@ -16,11 +15,11 @@ further_reading:
       text: Propagating trace context with headers
 ---
 
-After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
+コードを使用してトレーシングライブラリをセットアップし、APM データを収集するように Agent を構成した後、オプションで[統合サービスタグ付け][1]のセットアップなど、必要に応じてトレーシングライブラリを構成してください。
 
-All configuration options below have system property and environment variable equivalents.
-If the same key type is set for both, the system property configuration takes priority.
-System properties can be set as JVM flags.
+以下のすべてのコンフィギュレーションオプションには、同等のシステムプロパティと環境変数があります。
+両方に同じキータイプが設定されている場合は、システムプロパティコンフィギュレーションが優先されます。
+システムプロパティは、JVM フラグとして設定できます。
 
 ### Converting between system properties and environment variables
 Unless otherwise stated, you can convert between system properties and environment variables with the following transformations:
@@ -32,28 +31,28 @@ Unless otherwise stated, you can convert between system properties and environme
 
 **Note**: When using the Java tracer's system properties, list the properties before `-jar`. This ensures the properties are read in as JVM options.
 
-## Configuration options
+## コンフィギュレーションオプション
 
 `dd.service`
-: **Environment Variable**: `DD_SERVICE`<br>
-**Default**: `unnamed-java-app`<br>
-The name of a set of processes that do the same job. Used for grouping stats for your application. Available for versions 0.50.0+.
+: **環境変数**: `DD_SERVICE`<br>
+**デフォルト**: `unnamed-java-app`<br>
+同一のジョブを実行するプロセスセットの名前。アプリケーションの統計のグループ化に使われます。バージョン 0.50.1 以降で利用可能。
 
 `dd.tags`
-: **Environment Variable**: `DD_TAGS`<br>
-**Default**: `null`<br>
-**Example**: `layer:api,team:intake,key:value`<br>
-A list of default tags to be added to every span, profile, and JMX metric. If DD_ENV or DD_VERSION is used, it overrides any env or version tag defined in DD_TAGS. Available for versions 0.50.0+.
+: **環境変数**: `DD_TAGS`<br>
+**デフォルト**: `null`<br>
+**例**: `layer:api,team:intake,key:value`<br>
+すべてのスパン、プロファイル、JMX メトリクスに追加されるデフォルトタグのリスト。DD_ENV または DD_VERSION が使用される場合、DD_TAGS で定義される env または version タグをオーバーライドします。バージョン 0.50.0 以降で利用可能。
 
 `dd.env`
-: **Environment Variable**: `DD_ENV`<br>
-**Default**: `none`<br>
-Your application environment (for example, production, staging). Available for versions 0.48+.
+: **環境変数**: `DD_ENV`<br>
+**デフォルト**: `none`<br>
+アプリケーション環境 (例: production、staging)。0.48 以降のバージョンで利用可能。
 
 `dd.version`
-: **Environment Variable**: `DD_VERSION`<br>
-**Default**: `null`<br>
-Your application version (for example, 2.5, 202003181415, 1.3-alpha). Available for versions 0.48+.
+: **環境変数**: `DD_VERSION`<br>
+**デフォルト**: `null`<br>
+アプリケーションバージョン (例: 2.5、202003181415、1.3-alpha)。0.48 以降のバージョンで利用可能。
 
 `dd.logs.injection`
 : **Environment Variable**: `DD_LOGS_INJECTION`<br>
@@ -62,20 +61,20 @@ Enabled automatic MDC key injection for Datadog trace and span IDs. See [Advance
 **Beta**: Starting in version 1.18.3, if [Agent Remote Configuration][3] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][4] UI.
 
 `dd.trace.config`
-: **Environment Variable**: `DD_TRACE_CONFIG`<br>
-**Default**: `null`<br>
-Optional path to a file where configuration properties are provided one per each line. For instance, the file path can be provided as via `-Ddd.trace.config=<FILE_PATH>.properties`, with setting the service name in the file with `dd.service=<SERVICE_NAME>`
+: **環境変数**: `DD_TRACE_CONFIG`<br>
+**デフォルト**: `null`<br>
+構成プロパティが行ごとに 1 つ提供されている、ファイルへのオプションパス。たとえば、ファイルパスは `-Ddd.trace.config=<ファイルパス>.properties` 経由として、ファイルのサービス名に `dd.service=<SERVICE_NAME>` を設定して提供することができます。
 
 `dd.service.mapping`
-: **Environment Variable**: `DD_SERVICE_MAPPING`<br>
-**Default**: `null`<br>
-**Example**: `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db`<br>
-Dynamically rename services via configuration. Useful for making databases have distinct names across different services.
+: **環境変数**: `DD_SERVICE_MAPPING`<br>
+**デフォルト**: `null`<br>
+**例**: `mysql:my-mysql-service-name-db, postgresql:my-postgres-service-name-db`<br>
+コンフィギュレーション経由でサービス名を動的に変更します。サービス間でデータベースの名前を区別する場合に便利です。
 
 `dd.writer.type`
-: **Environment Variable**: `DD_WRITER_TYPE`<br>
-**Default**: `DDAgentWriter`<br>
-Default value sends traces to the Agent. Configuring with `LoggingWriter` instead writes traces out to the console.
+: **環境変数**: `DD_WRITER_TYPE`<br>
+**デフォルト**: `DDAgentWriter`<br>
+デフォルト値はトレースを Agent に送信します。代わりに `LoggingWriter` で構成すると、トレースがコンソールに書き出されます。
 
 `dd.agent.host`
 : **Environment Variable**: `DD_AGENT_HOST`<br>
@@ -88,9 +87,9 @@ Hostname for where to send traces to. If using a containerized environment, conf
 The port number the Agent is listening on for configured host. If the [Agent configuration][6] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it.
 
 `dd.trace.agent.unix.domain.socket`
-: **Environment Variable**: `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`<br>
-**Default**: `null`<br>
-This can be used to direct trace traffic to a proxy, to later be sent to a remote Datadog Agent.
+: **環境変数**: `DD_TRACE_AGENT_UNIX_DOMAIN_SOCKET`<br>
+**デフォルト**: `null`<br>
+これは、トレーストラフィックをプロキシに送り、その後リモート Datadog Agent に送信するために使うことができます。
 
 `dd.trace.agent.url`
 : **Environment Variable**: `DD_TRACE_AGENT_URL`<br>
@@ -98,9 +97,9 @@ This can be used to direct trace traffic to a proxy, to later be sent to a remot
 The URL to send traces to. If the [Agent configuration][6] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `dd.trace.agent.port` or `dd.trace.agent.url` must match it. The URL value can start with `http://` to connect using HTTP or with `unix://` to use a Unix Domain Socket. When set this takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. Available for versions 0.65+.
 
 `dd.trace.agent.timeout`
-: **Environment Variable**: `DD_TRACE_AGENT_TIMEOUT`<br>
-**Default**: `10`<br>
-Timeout in seconds for network interactions with the Datadog Agent.
+: **環境変数**: `DD_TRACE_AGENT_TIMEOUT`<br>
+**デフォルト**: `10`<br>
+Datadog Agent とのネットワークインタラクションのタイムアウト (秒)。
 
 `dd.trace.header.tags`
 : **Environment Variable**: `DD_TRACE_HEADER_TAGS`<br>
@@ -116,25 +115,25 @@ Prior to version 0.96.0 this setting only applied to request header tags. To cha
 Maximum number of spans to sample per second, per process, when `DD_TRACE_SAMPLING_RULES` or `DD_TRACE_SAMPLE_RATE` is set. Otherwise, the Datadog Agent controls rate limiting.
 
 `dd.trace.request_header.tags`
-: **Environment Variable**: `DD_TRACE_REQUEST_HEADER_TAGS`<br>
-**Default**: `null`<br>
-**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
-Accepts a map of case-insensitive header keys to tag names and automatically applies matching request header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>`.<br>
-Available since version 0.96.0.
+: **環境変数**: `DD_TRACE_REQUEST_HEADER_TAGS`<br>
+**デフォルト**: `null`<br>
+**例**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
+大文字・小文字を区別しないヘッダーキーとタグ名のマップを受け取り、一致するリクエストヘッダー値を自動的にタグとしてトレースに適用します。また、タグ名を指定しないエントリーも受け入れ、`http.request.headers.<header-name>` という形式のタグに自動的にマップされます。<br>
+バージョン 0.96.0 以降で利用可能です。
 
 `dd.trace.response_header.tags`
-: **Environment Variable**: `DD_TRACE_RESPONSE_HEADER_TAGS`<br>
-**Default**: `null`<br>
-**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
-Accepts a map of case-insensitive header keys to tag names and automatically applies matching response header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.response.headers.<header-name>`.<br>
-Available since version 0.96.0.
+: **環境変数**: `DD_TRACE_RESPONSE_HEADER_TAGS`<br>
+**デフォルト**: `null`<br>
+**例**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
+大文字・小文字を区別しないヘッダーキーとタグ名のマップを受け取り、一致するレスポンスヘッダー値を自動的にタグとしてトレースに適用します。また、タグ名を指定しないエントリーも受け入れ、`http.response.headers.<header-name>` という形式のタグに自動的にマップされます。<br>
+バージョン 0.96.0 以降で利用可能です。
 
 `dd.trace.header.baggage`
-: **Environment Variable**: `DD_TRACE_HEADER_BAGGAGE`<br>
-**Default**: `null`<br>
-**Example**: `CASE-insensitive-Header:my-baggage-name,User-ID:userId,My-Header-And-Baggage-Name`<br>
-Accepts a map of case-insensitive header keys to baggage keys and automatically applies matching request header values as baggage on traces. On propagation the reverse mapping is applied: Baggage is mapped to headers.<br>
-Available since version 1.3.0.
+: **環境変数**: `DD_TRACE_HEADER_BAGGAGE`<br>
+**デフォルト**: `null`<br>
+**例**: `CASE-insensitive-Header:my-baggage-name,User-ID:userId,My-Header-And-Baggage-Name`<br>
+<br>大文字・小文字を区別しないヘッダキーとバゲッジキーのマップを受け取り、 一致したリクエストヘッダ値をトレース時にバゲッジとして自動的に適用します。伝搬時には、逆のマッピングが適用されます。バゲッジはヘッダーにマップされます。
+バージョン 1.3.0 以降で利用可能です。
 
 `dd.trace.annotations`
 : **Environment Variable**: `DD_TRACE_ANNOTATIONS`<br>
@@ -143,32 +142,32 @@ Available since version 1.3.0.
 A list of method annotations to treat as `@Trace`.
 
 `dd.trace.methods`
-: **Environment Variable**: `DD_TRACE_METHODS`<br>
-**Default**: `null`<br>
-**Example**: `package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]`<br>
-List of class/interface and methods to trace. Similar to adding `@Trace`, but without changing code. **Note:** The wildcard method support (`[*]`) does not accommodate constructors, getters, setters, synthetic, toString, equals, hashcode, or finalizer method calls
+: **環境変数**: `DD_TRACE_METHODS`<br>
+**デフォルト**: `null`<br>
+**例**: `package.ClassName[method1,method2,...];AnonymousClass$1[call];package.ClassName[*]`<br>
+トレースするクラス/インターフェイスとメソッドのリスト。`@Trace` の追加と似ていますが、コードの変更はありません。**注:** ワイルドカード型メソッドのサポート (`[*]`) は、コンストラクター、get アクセス操作子、set アクセス操作子、synthetic、toString、等号、ハッシュコード、またはファイナライザーメソッドのコールに対応しません。
 
 `dd.trace.classes.exclude`
-: **Environment Variable**: `DD_TRACE_CLASSES_EXCLUDE`<br>
-**Default**: `null`<br>
-**Example**: `package.ClassName,package.ClassName$Nested,package.Foo*,package.other.*`<br>
-A list of fully qualified classes (that may end with a wildcard to denote a prefix) which will be ignored (not modified) by the tracer. Must use the jvm internal representation for names (eg package.ClassName$Nested and not package.ClassName.Nested)
+: **環境変数**: `DD_TRACE_CLASSES_EXCLUDE`<br>
+**デフォルト**: `null`<br>
+**例**: `package.ClassName,package.ClassName$Nested,package.Foo*,package.other.*`<br>
+トレーサーによって無視される (変更されない) 完全修飾クラス (プレフィックスを示すワイルドカードで終わる場合があります) のリスト。名前には jvm 内部表現を使用する必要があります (例: package.ClassName$Nested and not package.ClassName.Nested)
 
 `dd.trace.partial.flush.min.spans`
-: **Environment Variable**: `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`<br>
-**Default**: `1000`<br>
-Set a number of partial spans to flush on. Useful to reduce memory overhead when dealing with heavy traffic or long running traces.
+: **環境変数**: `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS`<br>
+**デフォルト**: `1000`<br>
+フラッシュする部分スパンの数を設定します。大量のトラフィック処理や長時間のトレース実行時にメモリのオーバーヘッドを軽減する際に役立ちます。
 
 `dd.trace.split-by-tags`
-: **Environment Variable**: `DD_TRACE_SPLIT_BY_TAGS`<br>
-**Default**: `null`<br>
-**Example**: `aws.service`<br>
-Used to rename the service name associated with spans to be identified with the corresponding span tag
+: **環境変数**: `DD_TRACE_SPLIT_BY_TAGS`<br>
+**デフォルト**: `null`<br>
+**例**: `aws.service`<br>
+対応するスパンタグで特定されるよう、スパンに関連付けられたサービス名の名前を変更するために使われます
 
-`dd.trace.db.client.split-by-instance`
-: **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` <br>
-**Default**: `false`<br>
-When set to `true` db spans get assigned the instance name as the service name
+`dd.trace.db.client.split-by-instance` 
+: **環境変数**: `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE` <br>
+**デフォルト**: `false`<br>
+`true` に設定すると、db スパンにインスタンス名がサービス名として割り当てられます
 
 `dd.trace.db.client.split-by-host`
 : **Environment Variable**: `DD_TRACE_DB_CLIENT_SPLIT_BY_HOST` <br>
@@ -176,96 +175,96 @@ When set to `true` db spans get assigned the instance name as the service name
 When set to `true` db spans get assigned the remote database hostname as the service name
 
 `dd.trace.elasticsearch.body.enabled`
-: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_BODY_ENABLED` <br>
-**Default**: `false`<br>
-When set to `true`, the body is added to Elasticsearch and OpenSearch spans.
+: **環境変数**: `DD_TRACE_ELASTICSEARCH_BODY_ENABLED` <br>
+**デフォルト**: `false`<br>
+`true` に設定すると、Elasticsearch と OpenSearch のスパンに body が追加されます。
 
 `dd.trace.elasticsearch.params.enabled`
-: **Environment Variable**: `DD_TRACE_ELASTICSEARCH_PARAMS_ENABLED` <br>
-**Default**: `true`<br>
-When set to `true`, the query string parameters are added to Elasticsearch and OpenSearch spans.
+: **環境変数**: `DD_TRACE_ELASTICSEARCH_PARAMS_ENABLED` <br>
+**デフォルト**: `true`<br>
+`true` に設定すると、Elasticsearch と OpenSearch のスパンに query string パラメーターが追加されます。
 
 `dd.trace.health.metrics.enabled`
-: **Environment Variable**: `DD_TRACE_HEALTH_METRICS_ENABLED`<br>
-**Default**: `true`<br>
-When set to `true` sends tracer health metrics
+: **環境変数**: `DD_TRACE_HEALTH_METRICS_ENABLED`<br>
+**デフォルト**: `true`<br>
+`true` に設定すると、トレーサーヘルスメトリクスが送信されます
 
 `dd.trace.health.metrics.statsd.host`
-: **Environment Variable**: `DD_TRACE_HEALTH_METRICS_STATSD_HOST`<br>
-**Default**: Same as `dd.jmxfetch.statsd.host` <br>
-Statsd host to send health metrics to
+: **環境変数**: `DD_TRACE_HEALTH_METRICS_STATSD_HOST`<br>
+**デフォルト**: `dd.jmxfetch.statsd.host` と同じ<br>
+ヘルスメトリクスの送信先の Statsd ホスト
 
 `dd.trace.health.metrics.statsd.port`
-: **Environment Variable**: `DD_TRACE_HEALTH_METRICS_STATSD_PORT`<br>
-**Default**: Same as `dd.jmxfetch.statsd.port` <br>
-Statsd port to send health metrics to
+: **環境変数**: `DD_TRACE_HEALTH_METRICS_STATSD_PORT`<br>
+**デフォルト**: `dd.jmxfetch.statsd.port` と同じ<br>
+ヘルスメトリクスの送信先の Statsd ポート
 
 `dd.http.client.tag.query-string`
-: **Environment Variable**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
-**Default**: `false`<br>
-When set to `true` query string parameters and fragment get added to web client spans
+: **環境変数**: `DD_HTTP_CLIENT_TAG_QUERY_STRING`<br>
+**デフォルト**: `false`<br>
+`true` に設定すると、クエリ文字列パラメーターとフラグメントが Web クライアントスパンに追加されます
 
 `dd.http.client.error.statuses`
-: **Environment Variable**: `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
-**Default**: `400-499`<br>
-A range of errors can be accepted. By default 4xx errors are reported as errors for http clients. This configuration overrides that. Ex. `dd.http.client.error.statuses=400-403,405,410-499`
+: **環境変数**: `DD_HTTP_CLIENT_ERROR_STATUSES`<br>
+**デフォルト**: `400-499`<br>
+許容可能なエラーの範囲。デフォルトで 4xx エラーは HTTP クライアントのエラーとしてレポートされます。この構成はこれをオーバーライドします。例: `dd.http.client.error.statuses=400-403,405,410-499`
 
 `dd.http.server.error.statuses`
-: **Environment Variable**: `DD_HTTP_SERVER_ERROR_STATUSES`<br>
-**Default**: `500-599`<br>
-A range of errors can be accepted. By default 5xx status codes are reported as errors for http servers. This configuration overrides that. Ex. `dd.http.server.error.statuses=500,502-599`
+: **環境変数**: `DD_HTTP_SERVER_ERROR_STATUSES`<br>
+**デフォルト**: `500-599`<br>
+許容可能なエラーの範囲。デフォルトで 5xx ステータスコードは HTTP サーバーのエラーとしてレポートされます。この構成はこれをオーバーライドします。例: `dd.http.server.error.statuses=500,502-599`
 
 `dd.http.server.tag.query-string`
-: **Environment Variable**: `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
-**Default**: `true`<br>
-When set to `true` query string parameters and fragment get added to web server spans
+: **環境変数**: `DD_HTTP_SERVER_TAG_QUERY_STRING`<br>
+**デフォルト**: `true`<br>
+`true` に設定すると、クエリ文字列パラメーターとフラグメントが Web サーバースパンに追加されます
 
 `dd.http.server.route-based-naming`
-: **Environment Variable**: `DD_HTTP_SERVER_ROUTE_BASED_NAMING`<br>
-**Default**: `true`<br>
-When set to `false` http framework routes are not used for resource names. _This can change resource names and derived metrics if changed._
+: **環境変数**: `DD_HTTP_SERVER_ROUTE_BASED_NAMING`<br>
+**デフォルト**: `true`<br>
+`false` に設定すると、http フレームワークのルートはリソース名に使用されません。_この場合、変更されるとリソース名と派生メトリクスが変更される可能性があります。_
 
 `dd.trace.enabled`
-: **Environment Variable**: `DD_TRACE_ENABLED`<br>
-**Default**: `true`<br>
-When `false` tracing agent is disabled.
+: **環境変数**: `DD_TRACE_ENABLED`<br>
+**デフォルト**: `true`<br>
+`false` の場合、トレース Agent は無効になります。
 
 `dd.jmxfetch.enabled`
-: **Environment Variable**: `DD_JMXFETCH_ENABLED`<br>
-**Default**: `true`<br>
-Enable collection of JMX metrics by Java Tracing Agent.
+: **環境変数**: `DD_JMXFETCH_ENABLED`<br>
+**デフォルト**: `true`<br>
+Java トレース Agent による JMX メトリクスの収集を有効にします。
 
 `dd.jmxfetch.config.dir`
-: **Environment Variable**: `DD_JMXFETCH_CONFIG_DIR`<br>
-**Default**: `null`<br>
-**Example**: `/path/to/directory/etc/conf.d`<br>
-Additional configuration directory for JMX metrics collection. The Java Agent looks for `jvm_direct:true` in the `instance` section in the `yaml` file to change configuration.
+: **環境変数**: `DD_JMXFETCH_CONFIG_DIR`<br>
+**デフォルト**: `null`<br>
+**例**: `/path/to/directory/etc/conf.d`<br>
+JMX メトリクスコレクションの追加構成ディレクトリ。Java Agent は `yaml` ファイルの `instance` セクションの `jvm_direct:true` を探して構成を変更します。
 
 `dd.jmxfetch.config`
-: **Environment Variable**: `DD_JMXFETCH_CONFIG`<br>
-**Default**: `null`<br>
-**Example**: `path/to/file/conf.yaml,other/path/to/file/conf.yaml`<br>
-Additional metrics configuration file for JMX metrics collection. The Java Agent looks for `jvm_direct:true` in the `instance` section in the `yaml` file to change configuration.
+: **環境変数**: `DD_JMXFETCH_CONFIG`<br>
+**デフォルト**: `null`<br>
+**例**: `path/to/file/conf.yaml,other/path/to/file/conf.yaml`<br>
+JMX メトリクスコレクションの追加メトリクスコンフィギュレーションファイル。Java Agent は `yaml` ファイルの `instance` セクションの `jvm_direct:true` を探して構成を変更します。
 
 `dd.jmxfetch.check-period`
-: **Environment Variable**: `DD_JMXFETCH_CHECK_PERIOD`<br>
-**Default**: `1500`<br>
-How often to send JMX metrics (in ms).
+: **環境変数**: `DD_JMXFETCH_CHECK_PERIOD`<br>
+**デフォルト**: `1500`<br>
+JMX メトリクスの送信頻度 (ms)。
 
 `dd.jmxfetch.refresh-beans-period`
-: **Environment Variable**: `DD_JMXFETCH_REFRESH_BEANS_PERIOD`<br>
-**Default**: `600`<br>
-How often to refresh list of available JMX beans (in seconds).
+: **環境変数**: `DD_JMXFETCH_REFRESH_BEANS_PERIOD`<br>
+**デフォルト**: `600`<br>
+利用可能な JMX Bean のリストのリフレッシュ頻度 (秒)。
 
 `dd.jmxfetch.statsd.host`
-: **Environment Variable**: `DD_JMXFETCH_STATSD_HOST`<br>
-**Default**: Same as `agent.host`<br>
-Statsd host to send JMX metrics to. If you are using Unix Domain Sockets, use an argument like 'unix://PATH_TO_UDS_SOCKET'. Example: `unix:///var/datadog-agent/dsd.socket`
+: **環境変数**: `DD_JMXFETCH_STATSD_HOST`<br>
+**デフォルト**: `agent.host` と同じ<br>
+JMX メトリクスの送信先の Statsd ホスト。Unix Domain Sockets を使用している場合、'unix://PATH_TO_UDS_SOCKET' のような引数を使用します。例: `unix:///var/datadog-agent/dsd.socket`
 
 `dd.jmxfetch.statsd.port`
-: **Environment Variable**: `DD_JMXFETCH_STATSD_PORT`<br>
-**Default**: `8125`<br>
-StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 0.
+: **環境変数**: `DD_JMXFETCH_STATSD_PORT`<br>
+**デフォルト**: `8125`<br>
+JMX メトリクスの送信先の StatsD ポート。Unix Domain Sockets を使用している場合、0 を入力します。
 
 `dd.jmxfetch.<integration-name>.enabled`
 : **Environment Variable**: `DD_JMXFETCH_<INTEGRATION_NAME>_ENABLED`<br>
@@ -273,34 +272,34 @@ StatsD port to send JMX metrics to. If you are using Unix Domain Sockets, input 
 JMX integration to enable (for example, Kafka or ActiveMQ).
 
 `dd.trace.obfuscation.query.string.regexp`
-: **Environment Variable**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
-**Default**: `null`<br>
-A regex to redact sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with <redacted>).
+: **環境変数**: `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`<br>
+**デフォルト**: `null`<br>
+`http.url` タグで報告されるリクエストのクエリ文字列から機密データを削除するための正規表現 (マッチした場合は <redacted> に置き換え)。
 
 `dd.integration.opentracing.enabled`
-: **Environment Variable**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
-**Default**: `true`<br>
-By default the tracing client detects if a GlobalTracer is being loaded and dynamically registers a tracer into it. By turning this to false, this removes any tracer dependency on OpenTracing.
+: **環境変数**: `DD_INTEGRATION_OPENTRACING_ENABLED`<br>
+**デフォルト**: `true`<br>
+デフォルトで、トレーシングクライアントは GlobalTracer がロードされており、トレーサーを動的に登録しているかどうかを検出します。これを false に設定すると、OpenTracing 上のトレーサーの依存関係がすべて消去されます。
 
 `dd.hystrix.tags.enabled`
-: **Environment Variable**: `DD_HYSTRIX_TAGS_ENABLED`<br>
-**Default**: `false`<br>
-By default the Hystrix group, command, and circuit state tags are not enabled. This property enables them.
+: **環境変数**: `DD_HYSTRIX_TAGS_ENABLED`<br>
+**デフォルト**: `false`<br>
+デフォルトでは、Hystrix のグループ、コマンド、サーキット状態のタグは有効になっていません。このプロパティにより有効になります。
 
-`dd.trace.servlet.async-timeout.error`
-: **Environment Variable**: `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` <br>
-**Default**: `true`<br>
-By default, long running asynchronous requests will be marked as an error, setting this value to false allows to mark all timeouts as successful requests.
+`dd.trace.servlet.async-timeout.error` 
+: **環境変数**: `DD_TRACE_SERVLET_ASYNC_TIMEOUT_ERROR` <br>
+**デフォルト**: `true`<br>
+デフォルトでは、長時間実行されている非同期リクエストはエラーとしてマークされます。この値を false に設定すると、すべてのタイムアウトを成功したリクエストとしてマークできます。
 
 `dd.trace.startup.logs`
-: **Environment Variable**: `DD_TRACE_STARTUP_LOGS`<br>
-**Default**: `true`<br>
-When `false`, informational startup logging is disabled. Available for versions 0.64+.
+: **環境変数**: `DD_TRACE_STARTUP_LOGS`<br>
+**デフォルト**: `true`<br>
+`false` の場合は起動ログの収集が無効化されます。バージョン 0.64 以上で使用可能です。
 
 `dd.trace.servlet.principal.enabled`
-: **Environment Variable**: `DD_TRACE_SERVLET_PRINCIPAL_ENABLED`<br>
-**Default**: `false`<br>
-When `true`, user principal is collected. Available for versions 0.61+.
+: **環境変数**: `DD_TRACE_SERVLET_PRINCIPAL_ENABLED`<br>
+**デフォルト**: `false`<br>
+`true` の場合は、ユーザープリンシパルが収集されます。バージョン 0.61 以降で使用可能です。
 
 `dd.instrumentation.telemetry.enabled`
 : **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
@@ -322,117 +321,117 @@ When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecima
 **Default**: `false`<br>
 When `true`, OpenTelemetry-based tracing for [custom][16] instrumentation is enabled.
 
-**Note**:
+**注**:
 
-- If the same key type is set for both, the system property configuration takes priority.
-- System properties can be used as JVM parameters.
-- By default, JMX metrics from your application are sent to the Datadog Agent thanks to DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][9].
+- 両方に同じキータイプが設定された場合、システムプロパティ構成が優先されます。
+- システムプロパティは JVM パラメーターとして使用できます。
+- デフォルトで、アプリケーションからの JMX メトリクスは、DogStatsD によりポート `8125` で Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっている][9]ことを確認してください。
 
-  - If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to `true`][10], and that port `8125` is open on the Agent container.
-  - In Kubernetes, [bind the DogStatsD port to a host port][11]; in ECS, [set the appropriate flags in your task definition][12].
+  - Agent をコンテナとして実行している場合は、`DD_DOGSTATSD_NON_LOCAL_TRAFFIC` が [`true` に設定されている][10]ことと、Agent コンテナでポート `8125` が開いていることを確認してください。
+  - Kubernetes の場合は、[DogStatsD ポートをホストポートにバインドします][11]。ECS の場合は、[タスク定義で適当なフラグを設定します][12]。
 
-### Integrations
+### インテグレーション
 
-See how to disable integrations in the [integrations][13] compatibility section.
+インテグレーションを無効にする方法については、[インテグレーション][13]の互換性セクションを参照してください。
 
-### Examples
+### 例
 
 #### `dd.service.mapping`
 
-**Example with system property**:
+**システムプロパティの例**:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.service.mapping=postgresql:web-app-pg -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/service_mapping.png" alt="service mapping" >}}
+{{< img src="tracing/setup/java/service_mapping.png" alt="サービスマッピング" >}}
 
 #### `dd.tags`
 
-**Setting a global env for spans and JMX metrics**:
+**スパンと JMX メトリクスにグローバルな env を設定**:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_global_tags.png" alt="trace global tags" >}}
+{{< img src="tracing/setup/java/trace_global_tags.png" alt="グローバルタグのトレース" >}}
 
 #### `dd.trace.span.tags`
 
-**Example with adding project:test to every span**:
+**すべてのスパンに project:test を追加する例**:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_span_tags.png" alt="trace span tags" >}}
+{{< img src="tracing/setup/java/trace_span_tags.png" alt="スパンタグのトレース" >}}
 
 #### `dd.trace.jmx.tags`
 
-**Setting custom.type:2 on a JMX metric**:
+**JMX メトリクスに custom.type:2 を設定**:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.span.tags=project:test -Ddd.trace.jmx.tags=custom.type:2 -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="trace JMX tags" >}}
+{{< img src="tracing/setup/java/trace_jmx_tags.png" alt="JMX タグのトレース" >}}
 
 #### `dd.trace.methods`
 
-**Example with system property**:
+**システムプロパティの例**:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.trace.methods="hello.GreetingController[doSomeStuff,doSomeOtherStuff];hello.Randomizer[randomize]" -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/trace_methods.png" alt="trace methods" >}}
+{{< img src="tracing/setup/java/trace_methods.png" alt="メソッドのトレース" >}}
 
 #### `dd.trace.db.client.split-by-instance`
 
-Example with system property:
+システムプロパティの例:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=dev -Ddd.service=web-app -Ddd.trace.db.client.split-by-instance=TRUE -jar path/to/application.jar
 ```
 
-DB Instance 1, `webappdb`, now gets its own service name that is the same as the `db.instance` span metadata:
+これで、DB インスタンス 1 である `webappdb` に、`db.instance` スパンのメタデータと同じサービス名が付けられます。
 
-{{< img src="tracing/setup/java/split_by_instance_1.png" alt="instance 1" >}}
+{{< img src="tracing/setup/java/split_by_instance_1.png" alt="インスタンス 1" >}}
 
-DB Instance 2, `secondwebappdb`, now gets its own service name that is the same as the `db.instance` span metadata:
+これで、DB インスタンス 2 である `secondwebappdb` に、`db.instance` スパンのメタデータと同じサービス名が付けられます。
 
-{{< img src="tracing/setup/java/split_by_instance_2.png" alt="instance 2" >}}
+{{< img src="tracing/setup/java/split_by_instance_2.png" alt="インスタンス 2" >}}
 
-Similarly on the service map, you would now see one web app making calls to two different Postgres databases.
+同様に、サービスマップで、1 つの Web アプリが 2 つの異なる Postgres データベースに呼び出しを行っていることがわかります。
 
 #### `dd.http.server.tag.query-string`
 
-Example with system property:
+システムプロパティの例:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.service=web-app -Ddd.env=dev -Ddd.http.server.tag.query-string=TRUE -jar path/to/application.jar
 ```
 
-{{< img src="tracing/setup/java/query_string.png" alt="query string" >}}
+{{< img src="tracing/setup/java/query_string.png" alt="クエリ文字列" >}}
 
 #### `dd.trace.enabled`
 
-**Example with system property and debug app mode**:
+**システムプロパティとデバッグアプリのモードの例**:
 
 ```shell
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.trace.enabled=false -Ddatadog.slf4j.simpleLogger.defaultLogLevel=debug -jar path/to/application.jar
 ```
 
-Debug app logs show that `Tracing is disabled, not installing instrumentations.`
+デバッグアプリのログに、`Tracing is disabled, not installing instrumentations.` と表示されます。
 
-#### `dd.jmxfetch.config.dir` and `dd.jmxfetch.config`
+#### `dd.jmxfetch.config.dir` と `dd.jmxfetch.config`
 
-Example configuration:
+構成サンプル
 
-- Either the combination of: `DD_JMXFETCH_CONFIG_DIR=<DIRECTORY_PATH>` + `DD_JMXFETCH_CONFIG=conf.yaml`
-- Or directly: `DD_JMXFETCH_CONFIG=<DIRECTORY_PATH>/conf.yaml`
+- 以下のいずれかのコンビネーションを使用: `DD_JMXFETCH_CONFIG_DIR=<ディレクトリパス>` + `DD_JMXFETCH_CONFIG=conf.yaml`
+- または直接指定: `DD_JMXFETCH_CONFIG=<DIRECTORY_PATH>/conf.yaml`
 
-With the following content for `conf.yaml`:
+`conf.yaml` で以下の内容を使用します。
 
 ```yaml
 init_config:
@@ -449,12 +448,12 @@ instances:
                         alias: sb.usage.used
 ```
 
-Would produce the following result:
+次の結果が生成されます。
 
-{{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX fetch example" >}}
+{{< img src="tracing/setup/java/jmxfetch_example.png" alt="JMX のフェッチ例" >}}
 
-See the [Java integration documentation][14] to learn more about Java metrics collection with JMX fetch.
-### Headers extraction and injection
+JMX フェッチを使った Java メトリクス収集についての詳細は [Java インテグレーションドキュメント][14]を参照してください。
+### ヘッダーの抽出と挿入
 
 For information about valid values and using the following configuration options, see [Propagating Java Trace Context][15].
 
@@ -481,23 +480,23 @@ Available since version 1.9.0
 **Default**: `false`<br>
 When set to `true`, stop extracting trace context when a valid one is found.
 
-#### Deprecated extraction and injection settings
+#### 非推奨の抽出と挿入の設定
 
 These extraction and injection settings have been deprecated in favor of the `dd.trace.propagation.style.inject`, `dd.trace.propagation.style.extract`, and `dd.trace.propagation.style` settings since version 1.9.0. See [Propagating Java Trace Context][15]. The previous `b3` setting for both B3 multi header and B3 single header has been replaced with the new settings `b3multi` and `b3single`.
 
 `dd.propagation.style.inject`
-: **Environment Variable**: `DD_PROPAGATION_STYLE_INJECT`<br>
-**Default**: `datadog`<br>
-A comma-separated list of header formats to include to propagate distributed traces between services.<br>
-Deprecated since version 1.9.0
+: **環境変数**: `DD_PROPAGATION_STYLE_INJECT`<br>
+**デフォルト**: `datadog`<br>
+サービス間で分散型トレーシングを伝播するために含めるべきヘッダー形式のカンマ区切りリスト。<br>
+バージョン 1.9.0 以降、非推奨
 
 `dd.propagation.style.extract`
-: **Environment Variable**: `DD_PROPAGATION_STYLE_EXTRACT`<br>
-**Default**: `datadog`<br>
-A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
-Deprecated since version 1.9.0
+: **環境変数**: `DD_PROPAGATION_STYLE_EXTRACT`<br>
+**デフォルト**: `datadog`<br>
+分散型トレーシングの伝播データの抽出を試みるヘッダーフォーマットのカンマ区切りのリスト。完全で有効なヘッダーを持つ最初のフォーマットが、トレースを継続するために定義するために使用されます。<br>
+バージョン 1.9.0 以降、非推奨
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

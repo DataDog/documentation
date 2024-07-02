@@ -25,7 +25,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/ibm_ace/README.md"
 "display_on_public_website": true
@@ -61,17 +61,17 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [IBM ACE][1] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [IBM ACE][1] を監視します。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
 ### IBM MQ
 
-An [IBM MQ][3] server is required for consuming metric messages from IBM ACE.
+IBM ACE からメトリクスメッセージを消費するためには、[IBM MQ][3] サーバーが必要です。
 
 <div class="alert alert-warning">
 For Linux, make sure to set the LD_LIBRARY_PATH environment variable as described in the <a href="https://docs.datadoghq.com/integrations/ibm_mq/">IBM MQ setup</a> before continuing.
@@ -79,8 +79,8 @@ For Linux, make sure to set the LD_LIBRARY_PATH environment variable as describe
 
 ### IBM ACE
 
-1. Ensure at least version 12.0.2.0 is installed.
-2. Apply an [MQEndpoint policy][4] file named in the form `<MQ_POLICY_NAME>.policyxml` that would look like this:
+1. バージョン 12.0.2.0 以上がインストールされていることを確認します。
+2. 以下のような `<MQ_POLICY_NAME>.policyxml` という形式の [MQEndpoint ポリシー][4]ファイルを適用します。
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <policies>
@@ -94,8 +94,8 @@ For Linux, make sure to set the LD_LIBRARY_PATH environment variable as describe
         </policy>
     </policies>
     ```
-3. [Set][5] the credentials by running: `mqsisetdbparms -n mq::<MQ_SECURITY_IDENTITY> -u <user> -p <password>`
-4. Update your `server.conf.yaml` file with the following config:
+3. `mqsisetdbparms -n mq::<MQ_SECURITY_IDENTITY> -u <user> -p <password>` を実行して、資格情報を[設定][5]します。
+4. `server.conf.yaml` ファイルを以下の構成で更新します。
     ```yaml
     remoteDefaultQueueManager: '{DefaultPolicies}:<MQ_POLICY_NAME>'
     Events:
@@ -125,40 +125,40 @@ For Linux, make sure to set the LD_LIBRARY_PATH environment variable as describe
       consoleLog: true
       consoleLogFormat: ibmjson
     ```
-5. Restart IBM ACE.
+5. IBM ACE を再起動します。
 
-### Installation
+### インストール
 
-The IBM ACE check is included in the [Datadog Agent][6] package.
-No additional installation is needed on your server.
+IBM ACE チェックは [Datadog Agent][6] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-1. Edit the `ibm_ace.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your ibm_ace performance data. See the [sample ibm_ace.d/conf.yaml][7] for all available configuration options.
+1. ibm_ace のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ibm_ace.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ibm_ace.d/conf.yaml][7] を参照してください。
 
-2. [Restart the Agent][8].
+2. [Agent を再起動します][8]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][9] and look for `ibm_ace` under the Checks section.
+[Agent の status サブコマンドを実行][9]し、Checks セクションで `ibm_ace` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "ibm_ace" >}}
 
 
-### Events
+### イベント
 
-The IBM ACE integration does not include any events.
+IBM ACE インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "ibm_ace" >}}
 
 
-### Log collection
+### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
@@ -175,9 +175,9 @@ The IBM ACE integration does not include any events.
 
     Change the `path` parameter value based on your environment. See the [sample `ibm_ace.d/conf.yaml` file][7] for all available configuration options.
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][12].
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 
 [1]: https://www.ibm.com/docs/en/app-connect/12.0?topic=overview-app-connect-enterprise-introduction

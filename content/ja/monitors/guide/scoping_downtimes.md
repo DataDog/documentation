@@ -13,122 +13,122 @@ further_reading:
   text: Suppress Alerts through the Downtimes API and UI
 ---
 
-## Overview
+## 概要
 
-Downtimes are scheduled for system shutdowns, off-line maintenance, or upgrades without triggering your monitors. Downtimes silence all monitor alerts and notifications, but do not prevent monitor state transitions.
+ダウンタイムは、システムのシャットダウン、オフラインのメンテナンス、またはアップグレードのために、モニターをトリガーせずにスケジュールされます。ダウンタイムは、すべてのモニターのアラートと通知をサイレントにしますが、モニターの状態遷移を妨げません。
 
-In most cases, you don't want to completely mute **all** monitor notifications due to the risk of missing important alerts that are not related to any scheduled maintenance.
+ほとんどの場合、スケジュールされたメンテナンスとは関係のない重要なアラートを見逃す危険性があるため、**すべての**モニター通知を完全にミュートにはしたくありません。
 
-This guide illustrates how proper scoping of Downtimes can be done through the UI.Scoping Downtimes is a two-step process:
-1. [Select the monitor or monitors you want to apply the downtime.](#choose-which-monitors-to-silence)
-2. [Scope the query to filter the _exact_ notifications to mute for each of the monitors.](#granularly-scope-downtimes)
+このガイドでは、UI を通じてダウンタイムの適切なスコープを設定する方法を説明します。
+1. [ダウンタイムを適用するモニターを選択します。](#choose-which-monitors-to-silence)
+2. [クエリをスコープして、各モニターのミュートする_正確な_通知をフィルターします。](#granularly-scope-downtimes)
 
-## Choose which monitors to silence
+## サイレントにするモニターを選択する
 
-Define which monitors you want the downtime to target. There are three different options: target one specific monitor, multiple monitors, or all monitors.
+ダウンタイムの対象とするモニターを定義します。特定のモニター、複数のモニター、全モニターの 3 つのオプションがあります。
 
-### Target one specific monitor
+### 特定のモニターを対象にする
 
-You can choose to temporarily mute one specific monitor. For example, if the monitor is sending many alerts at the moment or if it is the only monitor impacted by an upcoming maintenance.
+特定のモニターを一時的にミュートすることができます。例えば、そのモニターが現在多くのアラートを送信している場合、またはそのモニターだけが今後のメンテナンスの影響を受ける場合などです。
 
-In the downtime configuration, select **By Monitor Name** and search for the monitor in question.
+ダウンタイム構成で、**By Monitor Name** を選択し、問題のモニターを検索します。
 
-### Target multiple monitors based on monitor tags
+### モニタータグに基づいて複数のモニターを対象にする
 
-<div class="alert alert-info">Monitor tags are independent of tags sent by the Agent or integrations and tags assigned to the data you are querying.</div>
+<div class="alert alert-info">モニタータグは、Agent やインテグレーションから送信されるタグや、クエリするデータに割り当てられたタグとは独立しています。</div>
 
-Downtimes can be scheduled for monitors based on their monitor tags, and further scoped down by tags grouped in the monitor query. Select `By Monitor Tags` and enter the monitor tags that you want to target.
+ダウンタイムは、モニタータグに基づいてモニターにスケジュールすることができ、さらにモニタークエリでグループ化されたタグによってスコープダウンすることができます。`By Monitor Tags` を選択し、対象とするモニタータグを入力します。
 
 **Note**: Tags are additive, meaning that an input of `env:dev team:automations` will target monitors that are tagged with **both**, `env:dev` AND `team:automations`.
 
-### Target all monitors
+### すべてのモニターを対象にする
 
-For both `By Monitor Name` or `By Monitor Tags` options, you can scope to target all monitors by selecting the first item in the dropdown menu labeled `All Monitors`.
+`By Monitor Name` または `By Monitor Tags` のどちらのオプションでも、ドロップダウンメニューの最初の項目 `All Monitors` を選択することで、すべてのモニターを対象にすることができます。
 
-## Granularly scope downtimes
+## きめ細かなダウンタイムのスコープ
 
-Use group scope to apply additional filters to your downtime and have granular control over which monitors to mute. The group scope of a downtime is matched **after** the monitor specific target. If you target multiple monitors by using monitor tags, it first needs to find monitors that are tagged accordingly before it matches the group scope.
+グループスコープを使用して、ダウンタイムに追加のフィルターを適用し、どのモニターをミュートにするかを細かくコントロールすることができます。ダウンタイムのグループスコープは、モニター固有の対象の**後に**マッチします。モニタータグを使用して複数のモニターを対象にする場合、グループスコープに一致させる前に、まず、それに応じてタグ付けされたモニターを見つける必要があります。
 
-The examples in this guide show how the `Group scope` may be applied to monitors where [multi alert grouping][2] is configured
+このガイドの例では、[マルチアラートグループ化][2]が構成されているモニターに `Group scope` を適用する方法を示します
 
-### Mute monitors for a specific tag
+### 特定のタグのモニターをミュートする
 
-1. To schedule a downtime on only one group (in this case, `service:web-store`), enter that group in the `Group scope` field.
-2. Click **Preview affected monitors** to verify that the monitor chosen is still in scope, so alerts for the group `service:web-store` are muted during the scheduled downtime.
+1. 1 つのグループ (この場合は `service:web-store`) のみでダウンタイムをスケジュールするには、そのグループを `Group scope` フィールドに入力します。
+2. **Preview affected monitors** をクリックして、選択したモニターがまだスコープ内にあることを確認します。これにより、グループ `service:web-store` のアラートはスケジュールされたダウンタイム中にミュートされます。
 
-{{< img src="monitors/downtimes/downtime_example_byname.png" alt="Downtime example of 'By Monitor Name' with preview of affected monitors" style="width:90%;">}}
+{{< img src="monitors/downtimes/downtime_example_byname.png" alt="'By Monitor Name' のダウンタイム例 (影響を受けるモニターのプレビュー付き)" style="width:90%;">}}
 
-After the scheduled downtime begins, only alerts for the group `service:web-store` are muted for this monitor.
+スケジュールされたダウンタイムが始まると、このモニターではグループ `service:web-store` のアラートのみがミュートされます。
 
-{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.png" alt="Evaluation graph showing downtime for group service:web-store" style="width:90%;">}}
+{{< img src="monitors/downtimes/downtime_examplebyname1_monitor.png" alt="グループ service:web-store のダウンタイムを示す評価グラフ" style="width:90%;">}}
 
-This mutes any alerts that includes the tag `service:web-store`, for example:
+これは、`service:web-store` タグを含むアラートをミュートします。例:
 
-| Monitor Group                | Muted |
+| モニターグループ                | ミュート |
 | ---------------------------  | --- |
-| `host:A`, `service:web-store`| Yes |
-| `host:A`, `host:B`, `service:synthesizer`, `service:demo`, `service:web-store`| Yes |
-| `host:A`, `host:B`, `service:synthesizer`| No (missing `service:web-store`) |
+| `host:A`、`service:web-store`| はい |
+| `host:A`、`host:B`、`service:synthesizer`、`service:demo`、`service:web-store`| はい |
+| `host:A`、`host:B`、`service:synthesizer`| いいえ (`service:web-store` がない) |
 
 
-### Mute monitors scoped to multiple tags
+### 複数のタグにスコープされたモニターをミュートする
 
-1. To schedule a downtime on multiple groups (for example, `service:web-store` and `env:prod`), enter that group in the `Group scope` field.
-2. Click **Preview affected monitors** to verify the monitors that are in scope.
-3. After the scheduled downtime begins, alerts are muted for the group:
+1. 複数のグループ (例えば、`service:web-store` と `env:prod`) にダウンタイムをスケジュールするには、`Group scope` フィールドにそのグループを入力します。
+2. **Preview affected monitors** をクリックして、スコープ内のモニターを確認します。
+3. スケジュールされたダウンタイムが開始すると、そのグループのアラートはミュートされます。
 `env:prod` **AND** `service:web-store`
 
-| Monitor Group                                                                    | Muted |
+| モニターグループ                                                                    | ミュート |
 | -----------                                                                      | ----  |
-| `env:prod`, `service:web-store`                                                  | Yes |
-| `env:prod`, `env:dev`, `service:synthesizer`, `service:demo`, `service:web-store`| Yes |
-| `env:dev`, `env:demo`, `service:web-store`                                       | No (missing `env:prod`) |
-| `env:prod`, `env:demo`, `service:synthesizer`                                    | No (missing `service:web-store`) |
+| `env:prod`、`service:web-store`                                                  | はい |
+| `env:prod`、`env:dev`、`service:synthesizer`、`service:demo`、`service:web-store`| はい |
+| `env:dev`、`env:demo`、`service:web-store`                                       | いいえ (`env:prod` がない) |
+| `env:prod`、`env:demo`、`service:synthesizer`                                    | いいえ (`service:web-store` がない) |
 
 
-### Mute monitors by the union of tags
+### タグの結合でモニターをミュートする
 
-To combine multiple tag values into a more complex scope, use `OR` unions in a single downtime. For instance, you want to mute all notifications related to either your development or staging environments. Use `env:(dev OR staging)` as your scope query.
+複数のタグ値を組み合わせてより複雑なスコープにするには、`OR` 結合を 1 つのダウンタイムで使用します。例えば、開発環境かステージング環境のどちらかに関連するすべての通知をミュートしたいとします。スコープクエリには `env:(dev OR staging)` を使います。
 
-**Note**: The union of different tags (for example, `env:dev OR service:web-store`) is not supported. For such cases, you need to create a separate downtime for each tag.
+**注**: 異なるタグの結合はサポートされていません (例えば、`env:dev OR service:web-store`)。このような場合は、タグごとに個別のダウンタイムを作成する必要があります。
 
-Query `env:(dev OR staging)`
-| Monitor Group                                                                    | Muted |
+クエリ `env:(dev OR staging)`
+| モニターグループ                                                                    | ミュート |
 | -----------                                                                      | ----  |
-| `env:staging`, `service:web-store`                                               | Yes |
-| `env:dev`, `env:prod`, `service:web-store`                                       | Yes |
-| `env:demo`, `env:staging`, `service:web-store`                                   | Yes |
-| `env:demo`, `env:prod`, `service:web-store  `                                    | No (missing both `env:dev` and `env:staging`) |
+| `env:staging`、`service:web-store`                                               | はい |
+| `env:dev`、`env:prod`、`service:web-store`                                       | はい |
+| `env:demo`、`env:staging`、`service:web-store`                                   | はい |
+| `env:demo`、`env:prod`、`service:web-store  `                                    | いいえ (`env:dev` と `env:staging` の両方がない) |
 
-### Mute monitors with wildcard scopes
+### ワイルドカードスコープでモニターをミュートする
 
-Running large upgrades within your infrastructure is not uncommon. Downtimes can help mute all impacted entities, without much extra scripting. For instance, you could be upgrading all hosts of a given service. These hosts could follow certain naming conventions in your organization, such as being prefixed with their related application. This could result in hundreds of hosts named something like `host:mydemoapplication-host-1`and `host:mydemoapplication-host-2`.
+インフラストラクチャー内で大規模なアップグレードを実行することは珍しくありません。ダウンタイムは、スクリプトを追加することなく、影響を受けるすべてのエンティティをミュートするのに役立ちます。例えば、あるサービスのすべてのホストをアップグレードするとします。これらのホストは、関連するアプリケーションのプレフィックスを付けるなど、組織内の特定の命名規則に従っている可能性があります。その結果、`host:mydemoapplication-host-1` や `host:mydemoapplication-host-2`のような名前のホストが何百と存在することになります。
 
-Create a downtime scoped by `host:mydemoapplication-*`. This matches and mutes all hosts that are prefixed accordingly. You can also apply the inverse where the downtime is scoped by `host:*-mydemoapplication`. This matches and mutes all hosts that end with `mydemoapplication`.
+`host:mydemoapplication-*` でスコープしたダウンタイムを作成します。これはプレフィックスを持つすべてのホストにマッチし、ミュートされます。その逆で、`host:*-mydemoapplication` でスコープしたダウンタイムを作成することもできます。これは `mydemoapplication` で終わる全てのホストにマッチし、そのホストをミュートします。
 
-### Exclude groups from being muted
+### ミュートからグループを除外
 
-If you are running your application and infrastructure on multiple environments, you likely have one production environment and multiple non-production environments (for example, testing, regression checks, or demo). To avoid receiving alerts for non-production environments, you could set up a downtime that is scoped with: `env:* -env:prod`. This scope targets all alerts that have the `env` tag set and then excludes your production environment as a secondary step.
+アプリケーションとインフラストラクチャーを複数の環境で運用している場合、おそらく 1 つの本番環境と複数の非本番環境 (例えば、テスト、回帰チェック、デモ) があるでしょう。非本番環境のアラートを受け取らないようにするには、`env:* -env:prod` でスコープしたダウンタイムを設定します。このスコープは `env` タグが設定されているすべてのアラートを対象とし、二次的なステップとして本番環境を除外します。
 
-### Multiple monitors scoped with the same tag
+### 同じタグでスコープされた複数のモニター
 
-1. *Monitor A* is a multi alert monitor for hosts reporting a metric averaged across multiple `service` groups.
-2. *Monitor B* is a multi alert monitor for hosts reporting the same metric for `service:web-store`.
-3. Downtime is scheduled for any monitor that has the `downtime:true` monitor tag.
-4. This downtime is constrained to the group `service:web-store`.
-5. Click **Preview affected monitors** to verify the monitors that are in scope. In this example, it shows both monitors have the group `service:web-store` in scope.
+1. *モニター A* は、複数の `service` グループにわたって平均されたメトリクスを報告するホスト用のマルチアラートモニターです。
+2. *モニター B* は、`service:web-store` に対して同じメトリクスを報告するホスト用のマルチアラートモニターです。
+3. ダウンタイムは、`downtime:true` モニタータグを持つすべてのモニターに対してスケジュールされます。
+4. このダウンタイムは、グループ  `service:web-store` に制限されています。
+5. **Preview affected monitors** をクリックして、スコープ内のモニターを確認します。この例では、両方のモニターで `service:web-store` グループがスコープに含まれています。
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_downtime.png" alt="downtime example of 'By Monitor Tags' with preview of affected monitors" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebytag1_downtime.png" alt="'By Monitor Tags' のダウンタイム例 (影響を受けるモニターのプレビュー付き)" style="width:80%;">}}
 
-6. *Monitor A* shows downtime has started, but only for the group in scope: `service:web-store`
+6. *モニター A* は、ダウンタイムが開始されたことを示していますが、スコープ内のグループのみです: `service:web-store`
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_monitor.png" alt="Evaluation graph showing downtime for group service:web-store" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebytag1_monitor.png" alt="グループ service:web-store のダウンタイムを示す評価グラフ" style="width:80%;">}}
 
-7. *Monitor B* shows downtime has started for `service:web-store`. Because all the monitor's groups (by `host`) belong to `service:web-store`, the result is that all hosts are muted during downtime for this monitor.
+7. *モニター B* は、`service:web-store` のダウンタイムが開始されたことを示しています。すべてのモニターのグループ (`host` ごと) は `service:web-store` に属しているため、このモニターのダウンタイム中にすべてのホストがミュートされます。
 
-{{< img src="monitors/downtimes/downtime_examplebytag1_monitor2.png" alt="Evaluation graph showing downtime for group service:web-store and both affected hosts" style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_examplebytag1_monitor2.png" alt="グループ service:web-store と影響を受ける両ホストのダウンタイムを示す評価グラフ" style="width:80%;">}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

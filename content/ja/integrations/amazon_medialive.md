@@ -24,7 +24,7 @@
 - aws
 - metrics
 - cloud
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -59,9 +59,9 @@ AWS Elemental MediaLive is a broadcast-grade live video processing service.
 
 Enable this integration to see all your MediaLive metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -71,21 +71,21 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
    under metric collection.
 2. Install the [Datadog - MediaLive integration][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_medialive" >}}
 
 
-### Events
+### イベント
 
 The MediaLive integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The MediaLive integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

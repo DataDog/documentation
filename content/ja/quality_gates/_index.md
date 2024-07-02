@@ -8,16 +8,16 @@ further_reading:
   tag: Release Notes
   text: Check out the latest Software Delivery releases! (App login required)
 - link: "https://www.datadoghq.com/blog/datadog-quality-gates/"
-  tag: Blog
+  tag: ブログ
   text: Enhance code reliability with Datadog Quality Gates
 - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
-  tag: Blog
+  tag: ブログ
   text: Use Datadog monitors as quality gates for GitHub Actions deployments
 - link: /quality_gates/explorer
   tag: Documentation
   text: Learn about the Quality Gates Explorer
 - link: /account_management/audit_trail/
-  tag: Documentation
+  tag: ドキュメント
   text: Learn about Audit Trail
 ---
 
@@ -25,7 +25,7 @@ further_reading:
 <div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-## Overview
+## 概要
 
 Quality Gates allow you to control software quality by configuring rules to block substandard code from deployment. You have control over what is merged into the default branch and deployed to production, and can ensure that the code running in production adheres to high quality standards, reducing incidents and minimizing unwanted behaviors.
 
@@ -57,7 +57,7 @@ You can configure Quality Gates rules for the following categories:
 
 By integrating Quality Gates [into your CI/CD pipelines][7], you can create a robust framework for maintaining and improving software quality that aligns with your organization's operational goals and business objectives. 
 
-## Setup
+## セットアップ
 
 Quality Gates offers the following rule types:
 
@@ -114,7 +114,7 @@ You can search and filter for quality gates or rule executions, create visualiza
 {{< img src="quality_gates/explorer/gates_1.png" alt="Quality Gate results in the Quality Gates Explorer" style="width:100%" >}}
 
 {{% /tab %}}
-{{% tab "Rule Executions" %}}
+{{% tab "ルール実行" %}}
 
 {{< img src="quality_gates/explorer/executions_1.png" alt="Quality Gate rule execution results in the Quality Gates Explorer" style="width:100%" >}}
 
@@ -123,15 +123,15 @@ You can search and filter for quality gates or rule executions, create visualiza
 
 For more information, see the [Quality Gates Explorer documentation][8].
 
-## Track changes in rules
+## ルール変更の追跡
 
-You can view information about who created, modified, and deleted Quality Gates rules in [Audit Trail][3].
+[監査証跡][3]では、Quality Gates ルールを作成した人、変更した人、削除した人の情報を確認できます。
 
 {{< img src="/quality_gates/audit_event.png" alt="A Quality Gates event in Datadog Audit Trail" style="width:100%" >}}
 
 For more information, see the [Audit Trail documentation][4].
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

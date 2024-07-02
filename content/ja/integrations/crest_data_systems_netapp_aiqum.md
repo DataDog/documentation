@@ -36,7 +36,7 @@
 "categories":
 - data stores
 - marketplace
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -114,13 +114,13 @@
 
 This integration monitors the performance and usage of NetApp AIQUM Cluster, Aggregate, QTree, Interface, Port, FibreChannel, and Volume. It captures crucial metrics and provides insight into the storage and performance of the NetApp AIQUM Data.
 
-### Monitors
+### モニター
 
 This integration monitors NetApp AIQUM Cluster, Aggregate, QTree, Interface, Port, FibreChannel, and Volume.
 
 ## Support
 
-For support or feature requests, contact Crest Data through the following channels:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
 - Support Email: [datadog.integrations@crestdata.ai][9]
 - Sales Email: [datadog-sales@crestdata.ai][10]

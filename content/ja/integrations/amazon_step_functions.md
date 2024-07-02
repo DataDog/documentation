@@ -3,7 +3,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key AWS Step Functions metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_step_functions/"
@@ -30,9 +30,9 @@ Enable this integration to see all your Step Functions metrics in Datadog.
 
 <div class="alert alert-warning">Native AWS Step Function monitoring in Datadog is available in public beta. To instrument your Step Functions with enhanced metrics and traces, visit the <a href="https://docs.datadoghq.com/serverless/step_functions">Serverless documentation<a></div>
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first. Then, add the following permissions to the policy document for your AWS/Datadog Role:
 
@@ -54,12 +54,12 @@ If your Step Functions states are Lambda functions, installing this integration 
 
 Datadog can also generate metrics for your Step Functions to help you track the average or p99 of individual step durations. To collect [enhanced metrics for AWS Step Functions][6], you must use Datadog APM.
 
-### Log collection
+### ログ収集
 
 1. Configure AWS Step Functions to [send logs to CloudWatch][7]. **Note**: Use the default CloudWatch log group prefix `/aws/vendedlogs/states` for Datadog to identify the source of the logs and parse them automatically.
 2. [Send the logs to Datadog][8].
 
-### Trace collection
+### トレースの収集
 
 You can enable trace collection in two ways: through Datadog APM for Step Functions, or through AWS X-Ray. 
 
@@ -80,29 +80,29 @@ To enable distributed tracing for your AWS Step Functions, see the installation 
 To collect traces from your AWS Step Functions through AWS X-Ray:
 
 1. Enable the [Datadog AWS X-Ray integration][10].
-1. Log in to the AWS Console.
-2. Browse to **Step Functions.**
-3. Select one of your Step Functions and click **Edit.**
-4. Scroll to the **Tracing** section at the bottom of the page and check the box to **Enable X-Ray tracing.**
+1. AWS コンソールにログインします。
+2. **Step Functions** にアクセスします。
+3. Step Functions の 1 つを選択して、**Edit** をクリックします。
+4. ページの下部にある **Tracing** セクションまでスクロールし、**Enable X-Ray tracing** チェックボックスをオンにします。
 5. Recommended: [Install the AWS X-Ray tracing library][11] in your functions for more detailed traces.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_step_functions" >}}
 
 
-### Events
+### イベント
 
-The AWS Step Functions integration does not include any events.
+AWS Step Functions インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The AWS Step Functions integration does not include any service checks.
+AWS Step Functions インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][13].
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
 [1]: /integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

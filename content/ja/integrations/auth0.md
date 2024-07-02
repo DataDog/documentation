@@ -24,7 +24,7 @@
 - incidents
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/auth0/README.md"
 "display_on_public_website": true
@@ -85,7 +85,7 @@ Identity information can be used to quickly identify security and performance in
 
 By configuring thresholds, security teams can set up alerts to notify them when suspicious events take place, allowing them to more quickly respond to security incidents.
 
-## Setup
+## セットアップ
 
 All configuration happens on the [Auth0 Dashboard][1]. 
 
@@ -113,25 +113,25 @@ View logs in Datadog:
 1. Navigate to **Logs** > **Livetail**.
 2. See Auth0 logs by setting `source:auth0`.
 
-## Data Collected
+## 収集データ
 
 ### Log collection
 
 Auth0 logs are collected and sent to Datadog. The types of logs that could be returned are outlined in the [Log Event Type Codes][4].
 
-### Metrics
+### メトリクス
 
 auth0 does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 auth0 does not include any service checks.
 
-### Events
+### イベント
 
 auth0 does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 Read more about this integration in our [blog post][6].

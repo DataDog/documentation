@@ -1,30 +1,30 @@
 ---
 title: "API Gateway Component"
 ---
-## Overview
+## 概要
 
-Use the API Gateway component to represent RESTful, HTTP, and WebSocket APIs from your Amazon Web Services architecture.
+API Gateway コンポーネントを使用して、Amazon Web Services アーキテクチャから RESTful、HTTP、WebSocket API を表現します。
 
-{{< img src="cloudcraft/components-aws/api-gateway/component-api-gateway-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'API gateway' AWS component." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/api-gateway/component-api-gateway-diagram.png" alt="'API gateway' AWS コンポーネントを示す、等角投影された Cloudcraft 図のスクリーンショット。" responsive="true" style="width:60%;">}}
 
-## Toolbar
+## ツールバー
 
-Use the toolbar to configure and customize your component. The following options are available:
+ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Rotate item**: Rotate the component and change its direction.
-- **API Type**: Select the API type for the gateway.
-- **M req./month**: Enter the number of requests sent per month, in the millions.
-- **M min./month**: Enter the number of messages sent per minute, in the millions. Only available for APIs of type `websocket`.
-- **Cache Memory (GB)**. Select the amount of memory used for caching API responses, in gigabytes. Only available for APIs of type `rest`.
+- **Color**: 定義済みの色を選択するか、コンポーネントとそのアクセントの色の 16 進値を入力します。コンポーネントは、2D ビューと 3D ビューの両方に同じ色を使用することも、それぞれに異なる色を使用することもできます。
+- **Rotate item**: コンポーネントを回転させ、その方向を変更します。
+- **API Type**: ゲートウェイの API タイプを選択します。
+- **M req./month**: ひと月ごとに送信されるリクエスト数を百万単位で入力します。
+- **M min./month**: 1 分ごと送信されるメッセージの数を百万単位で入力します。`websocket` タイプの API でのみ使用可能です。
+- **Cache Memory (GB)**: API レスポンスのキャッシュに使用するメモリ量をギガバイト単位で選択します。`rest` タイプの API でのみ使用可能です。
 
 ## API
 
-Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。
 
-### Schema
+### スキーマ
 
-The following is an example JSON object of an API Gateway:
+以下は、API Gateway の JSON オブジェクトの例です。
 
 ```json
 {
@@ -50,27 +50,27 @@ The following is an example JSON object of an API Gateway:
 }
 ```
 
-- **type: apigateway**: The type of component.
-- **id: string**: A unique identifier for the component in the `uuid` format.
-- **region: string**: The AWS region where the API Gateway is deployed in. All global regions are supported except for `cn-` regions.
-- **mapPos: [number, number]**. The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
-- **direction: string**: The rotation or direction of the component. Accepted values are  `down` or  `right`. Defaults to `down`.
-- **apiType: string**: The type of API used for the gateway. Accepted values are `rest`, `http`, and `websocket`.
-- **apiCalls: number**: The number of API calls made per month, in the millions. Defaults to `5`.
-- **connectionMinutes: number**: The number of messages sent per minute, in the millions. Only applicable if `apiType` is set to `websocket`. Defaults to `0`.
-- **cache: number**: The amount of memory used for caching API responses, in gigabytes. Only applicable if `apiType` is set to `rest`. See [Accepted values for cache](#accepted-values-for-cache) for more information.
-- **color: object**: The fill color for the component body.
-  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
-  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
-- **accentColor: object**: The accent color used to display the component logo on the block.
-  - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
-  - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
-- **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
-- **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
+- **type: apigateway**: コンポーネントのタイプ。
+- **id: 文字列**: `uuid` 形式のコンポーネントの一意な識別子。
+- **region: 文字列**: API Gateway がデプロイされる AWS リージョン。`cn-` リージョン以外のすべてのグローバルリージョンがサポートされています。
+- **mapPos: [数値, 数値]**: x 座標と y 座標のペアで表される、ブループリント内のコンポーネントの位置。
+- **direction: 文字列**: コンポーネントの回転または方向。指定できる値は、`down` または `right` です。デフォルトは `down` です。
+- **apiType: 文字列**: ゲートウェイで使用する API のタイプ。指定できる値は `rest`、`http` および `websocket` です。
+- **apiCalls: 数値**: ひと月ごとの API コール数。デフォルトは `5` です。
+- **connectionMinutes: 数値**: 1 分ごとに送信されるメッセージの数 (百万単位)。`apiType` が `websocket` に設定されている場合のみ適用可能です。デフォルトは `0` です。
+- **cache: 数値**: API レスポンスのキャッシュに使用するメモリの量 (ギガバイト単位)。`apiType` が `rest` に設定されている場合にのみ適用可能です。詳細は [cache で許容される値](#accepted-values-for-cache)を参照してください。
+- **color: オブジェクト**: コンポーネント本体の塗りつぶし色。
+  - **isometric: 文字列**: 3D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
+  - **2d: 文字列**: 2D ビューでのコンポーネントの塗りつぶし色。16 進数で指定します。
+- **accentColor: オブジェクト**: ブロック上のコンポーネントロゴを表示するために使用されるアクセントカラー。
+  - **isometric: 文字列**: 3D ビューでのコンポーネントのアクセントカラー。16 進数で指定します。
+  - **2d: 文字列**: 2D ビューでのコンポーネントのアクセントカラー。16 進数で指定します。
+- **link: uri**: コンポーネントを、`blueprint://ID` フォーマットを使用して別の図にリンクするか、`https://LINK` フォーマットを使用して外部の Web サイトにリンクします。
+- **locked: ブール値**: `true` の場合、アプリケーションを使用してコンポーネントに加えられた変更は、ロックが解除されるまで無効になります。
 
-## Accepted values for cache
+## cache で許容される値
 
-The `cache` key defaults to `1.6` and accepts the following values:
+`cache` キーのデフォルトは `1.6` で、以下の値を指定できます。
 
 ```
 0, 0.5, 1.6, 6.1, 13.5, 28.4, 58.2, 118.0, 237.0

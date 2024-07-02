@@ -93,14 +93,14 @@
 
 This Workday integration monitors the state of your integrations in Workday, offering rich metrics regarding job executions, including total job executions, failure job executions, and the duration of each job execution. This integration also retrieves job execution logs and provides monitors that alert on the state of each integration.
 
-### Monitors
+### モニター
 
 This integration includes the following recommended monitors:
 
 1. Connect to Workday, which monitors your connection to Workday.
 2. Workday Integration Status, a multi-monitor that is grouped by integrations and checks the last Workday integration event state.
 
-### Dashboards
+### ダッシュボード
 
 This integration includes an out-of-the-box dashboard named **Workday Integrations Trends** that provides a visual summary of Workday job executions, as well as the state of the monitors configured for each Workday integration.
 

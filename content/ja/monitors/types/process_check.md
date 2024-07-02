@@ -16,70 +16,70 @@ further_reading:
   text: Check your monitor status
 ---
 
-## Overview
+## 概要
 
-A process check monitor watches the status produced by the Agent check `process.up`. At the Agent level you can [configure your check thresholds][1] based on the number of matching processes.
+プロセスチェックモニターは、Agent チェック `process.up` が生成するステータスを監視します。Agent レベルで、一致するプロセスの数に基づいて[チェックしきい値を構成][1]できます。
 
-## Monitor creation
+## モニターの作成
 
-To create a [process check monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Process Check*.
+Datadog で[プロセスチェックモニター][2]を作成するには、メインナビゲーションを使用して次のように移動します: Monitors --> New Monitor --> Process Check。
 
-### Pick a process
+### プロセスを選択する
 
-From the dropdown list, select a process to monitor. Filter the list by entering your search criteria.
+ドロップダウンリストから、監視するプロセスを選択します。検索条件を入力してリストをフィルターします。
 
-### Pick monitor scope
+### モニターのスコープを選択
 
-Select the hosts to monitor by choosing host names, tags, or choose `All Monitored Hosts`. Only hosts or tags reporting a status for the selected process are displayed. If you need to exclude certain hosts, use the second field to list names or tags.
+ホスト名、タグ、または `All Monitored Hosts` を選択して、監視するホストを決定します。選択したプロセスのステータスを報告するホストまたはタグのみが表示されます。特定のホストを除外する必要がある場合は、2 番目のフィールドに名前やタグをリストアップします。
 
-* The include field uses `AND` logic. All listed host names and tags must be present on a host for it to be included.
-* The exclude field uses `OR` logic. Any host with a listed name or tag is excluded.
+* インクルードフィールドでは `AND` ロジックを使用します。リストアップされたすべてのホスト名とタグが存在するホストがスコープに含まれます。
+* エクスクルードフィールドでは `OR` ロジックを使用します。リストアップされた名前やタグを持つホストはスコープから除外されます。
 
-### Set alert conditions
+### アラートの条件を設定する
 
 {{< tabs >}}
 {{% tab "Check Alert" %}}
 
-A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds. For process check monitors, the groups are static: `host` and `process`.
+チェックアラートは、チェックグループごとに送信されたステータスを連続的にトラックし、しきい値と比較します。プロセスチェックモニターの場合、グループは静的です（`host` と `process`）。
 
-Set up the check alert:
+チェックアラートをセットアップする
 
-1. Trigger the alert after selected consecutive failures: `<NUMBER>`
+1. 何回連続して失敗したらアラートをトリガーするか、回数 `<数値>` を選択します。
 
-    Each check run submits a single status of `OK`, `WARN`, or `CRITICAL`. Choose how many consecutive runs with the `WARN` and `CRITICAL` status trigger a notification. For example, your process might have a single blip where connection fails. If you set this value to `> 1`, the blip is ignored but a problem with more than one consecutive failure triggers a notification.
+    各チェックは `OK`、`WARN`、`CRITICAL` のいずれか 1 つのステータスを送信します。`WARN` と `CRITICAL` ステータスが連続して何回送信されたら通知をトリガーするか選択します。たとえば、プロセスで接続に失敗する異常が 1 回発生したとします。値を `> 1` に設定した場合、この異常は無視されますが、2 回以上連続で失敗した場合は通知をトリガーします。
 
-2. Resolve the alert after selected consecutive successes: `<NUMBER>`
+2. 何回連続して成功したらアラートを解決するか、回数 `<数値>` を選択します。
 
-    Choose how many consecutive runs with the `OK` status resolves the alert.
+    何回連続して `OK` ステータスが送信されたらアラートを解決するか、回数を選択します。
 
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
-A cluster alert calculates the percent of process checks in a given status and compares it to your thresholds.
+クラスターアラートは、既定のステータスでプロセスチェックの割合を計算し、しきい値と比較します。
 
-Set up a cluster alert:
+クラスターアラートをセットアップする
 
-1. Decide whether or not to group your process checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per group basis.
+1. タグによりプロセスチェックをグループ化するかどうか決定します。`Ungrouped` はすべてのソースでステータスのパーセンテージを計算します。`Grouped` は各グループごとのステータスのパーセンテージを計算します。
 
-2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
+2. アラートと警告のしきい値の割合を選択します。1 つの設定（アラートまたは警告）のみ必須です。
 
-Each check tagged with a distinct combination of tags is considered to be a distinct check in the cluster. Only the status of the last check of each combination of tags is taken into account in the cluster percentage calculation.
+タグの個別の組み合わせでタグ付けされた各チェックは、クラスター内の個別のチェックと見なされます。タグの各組み合わせの最後のチェックのステータスのみが、クラスターのパーセンテージの計算で考慮されます。
 
-{{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="Cluster Check Thresholds" style="width:90%;">}}
+{{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="クラスターチェックのしきい値" style="width:90%;">}}
 
-For example, a cluster check monitor grouped by environment can alert if more that 70% of the checks on any of the environments submit a `CRITICAL` status, and warn if more that 70% of the checks on any of the environments submit a `WARN` status.
+たとえば、環境ごとにグループ化されたクラスターチェックモニターは、いずれかの環境のチェックの 70% 以上が `CRITICAL` ステータスを送信した場合にアラートし、いずれかの環境のチェックの70% 以上が `WARN` ステータスを送信した場合に警告できます。
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Advanced alert conditions
+#### 高度なアラート条件
 
-See the [Monitor configuration][3] documentation for information on [No data][4], [Auto resolve][5], and [New group delay][6] options.
+[データなし][4]、[自動解決][5]、[新しいグループ遅延][6]の各オプションに関する情報は、[モニターコンフィギュレーション][3]ドキュメントを参照してください。
 
-### Notifications
+### 通知
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][7] page.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

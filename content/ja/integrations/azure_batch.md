@@ -3,9 +3,9 @@
 - "cloud"
 - "configuration & deployment"
 - "azure"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Azure Batch Service metrics."
+"description": "Azure Batch Service のキーメトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/azure_batch/"
 "draft": false
 "git_integration_title": "azure_batch"
@@ -29,27 +29,27 @@ Azure Batch Service is a managed task scheduler and processor for your Azure app
 - Visualize the performance of your Batch Accounts.
 - Correlate the performance of your Batch Accounts with your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration first][1]. There are no other installation steps that need to be performed.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_batch" >}}
 
 
-### Events
+### イベント
 
 The Azure Batch Service integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Batch Service integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

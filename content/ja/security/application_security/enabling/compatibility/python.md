@@ -15,14 +15,14 @@ The following application security capabilities are supported in the Python libr
 | Threat Protection | 1.10.0  |
 | Customize response to blocked requests | 1.19.0 |
 | Software Composition Analysis (SCA) | 1.5.0  |
-| Code Security         |  private beta  |
+| コードセキュリティ         |  private beta  |
 | Automatic user activity event tracking | 1.17.0 |
 | API Security | 2.6.0 |
 
 **Note**: Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
-### Supported deployment types
-| Type        | Threat Detection support | Software Composition Analysis |
+### サポートされるデプロイメントタイプ
+| タイプ        | Threat Detection のサポート | Software Composition Analysis |
 |-------------|--------------------------|-------------------------------|
 | Docker      | {{< X >}}                | {{< X >}}                     |
 | Kubernetes  | {{< X >}}                | {{< X >}}                     |
@@ -31,74 +31,74 @@ The following application security capabilities are supported in the Python libr
 | AWS Lambda  | {{< X >}}                |                               |
 
 
-## Language and framework compatibility
+## 言語とフレームワークの互換性
 
-### Supported Python versions
+### サポート対象の Python バージョン
 
 The Python Application Security Client library follows a [versioning policy][3] that specifies the support level for the different versions of the library and Python runtime.
 
-Two release branches are supported:
+2 つのリリースブランチに対応しています。
 
-| Release    | Support level        |
+| リリース    | サポートレベル        |
 |------------|----------------------|
-| `<1`       | Maintenance           |
-| `>=1.0,<2` | General Availability |
+| `<1`       | メンテナンス           |
+| `>=1.0,<2` | 一般提供 |
 
-And the library supports the following runtimes:
+また、このライブラリは以下のランタイムをサポートしています。
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
+| OS      | CPU                   | ランタイム | ランタイムバージョン | ddtrace のバージョンに対応 |
 |---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| Linux   | x86-64、i686、AArch64 | CPython | 2.7、3.5-3.11   | `<2`                     |
+| MacOS   | Intel、Apple Silicon  | CPython | 2.7、3.5-3.11   | `<2`                     |
+| Windows | 64bit、32bit          | CPython | 2.7、3.5-3.11   | `<2`                     |
 
 
-### Web framework compatibility
+### Web フレームワークの互換性
 
-- Attacker source HTTP request details
-- Tags for the HTTP request (status code, method, etc)
-- Distributed Tracing to see attack flows through your applications
+- 攻撃元の HTTP リクエストの詳細
+- HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
+- アプリケーション内の攻撃フローを確認するための分散型トレーシング
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks
 
-### Supported frameworks
+### サポートされているフレームワーク
 
 
-| Framework                | Versions    | Threat Detection supported? | Threat Protection supported? |
+| フレームワーク                | バージョン    | Threat Detection のサポートの有無 | Threat Protection のサポートの有無 |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
 | Django    | 1.8   |  {{< X >}} | {{< X >}}  |
 | Flask     | 0.10  |  {{< X >}} | {{< X >}}  |
 
-Support for query strings is not available for Flask.
+Flask では、クエリ文字列のサポートはありません。
 
-<div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
 
-### Data store compatibility
+### データストアの互換性
 
 
-**Datastore tracing provides:**
+**データストアのトレーシングでは以下の確認が可能です**
 
-- timing request to response
-- query info (for example, a sanitized query string)
-- error and stacktrace capturing
+- リクエストの応答タイミング
+- クエリ情報 (サニタイジングされたクエリ文字列など)
+- エラーとスタックトレースの取得
 
 ##### Application Security Capability Notes
 - **Software Composition Analysis** is supported on all frameworks.
-- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
+- **Threat Protection** は HTTP リクエスト (input) レイヤーでも機能するため、下表に掲載されていなくても、デフォルトですべてのデータベースで機能します。
 -
-The Python library supports the [database API specifications][4] and supports all generic SQL databases. This includes databases such as SQLite, Mysql, Postgres and MariaDB.
+Python ライブラリは[データベース API 仕様][4]をサポートしており、すべての汎用 SQL データベースをサポートしています。これには SQLite、Mysql、Postgres、MariaDB などのデータベースが含まれます。
 
-### User Authentication Frameworks compatibility
+### User Authentication Frameworks の互換性
 
-**Integrations to User Authentication Frameworks provide:**
+**User Authentication Frameworks へのインテグレーションは以下を提供します。**
 
-- User login events, including the user IDs
-- Account Takeover detection monitoring for user login events
+- ユーザー ID を含むユーザーログインイベント
+- ユーザーログインイベントのアカウント乗っ取り検出モニタリング
 
-| Framework         | Framework Versions   |
+| フレームワーク         | フレームワークバージョン   |
 |-------------------| --------------------------- |
-| Django            | 1.11, 2.2, 3.2, >= 4.0
+| Django            | 1.11、2.2、3.2、>= 4.0
 
 [1]: /tracing/trace_collection/compatibility/python/
 [2]: /agent/remote_config/#enabling-remote-configuration

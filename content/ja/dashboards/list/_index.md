@@ -1,14 +1,14 @@
 ---
-description: リストによるダッシュボードの整理と管理
+title: Dashboard List
+description: "Organize and manage dashboards with lists"
 disable_toc: false
 further_reading:
-- link: serverless/enhanced_lambda_metrics
-  tag: ドキュメント
-  text: ダッシュボードの概要
+- link: dashboards/
+  tag: Documentation
+  text: Dashboards Overview
 - link: dashboards/guide/maintain-relevant-dashboards
-  tag: ガイド
-  text: 適切なダッシュボードを維持するためのベストプラクティス
-title: ダッシュボードリスト
+  tag: Guide
+  text: Best practices for maintaining relevant dashboards
 ---
 
 ## 概要
@@ -29,7 +29,7 @@ title: ダッシュボードリスト
 | スター       | 現在のユーザーがスターを付けたすべてのダッシュボード。                                              |
 | 名前       | カスタムダッシュボードまたはプリセットダッシュボードの名前。                                              |
 | Author     | ダッシュボードの作成者のプロフィールアイコン。                                             |
-| ヘルプ      | ダッシュボードに割り当てられた[チーム][2]。                                                    |
+| チーム      | ダッシュボードに割り当てられた[チーム][2]。                                                    |
 | Modified   | カスタムダッシュボードの最終更新日。                                            |
 | 人気度 (Popularity) | 組織のダッシュボードの相対的な[人気度](#人気度)。           |
 | アイコン       | ダッシュボードの種類 (タイムボードまたはスクリーンボード) を示すアイコン。                     |
@@ -41,7 +41,7 @@ title: ダッシュボードリスト
 
 **注**: 公開ダッシュボード URL のトラフィックは、人気度に反映されません。
 
-## ヘルプ
+## チーム
 
 **My Teams** トグルを使用して、すべてのダッシュボードを表示するか、自分の[チーム][2]が所有するダッシュボードのみを表示するかを切り替えることができます。
 
@@ -80,7 +80,7 @@ Favorite lists (お気に入りリスト) は、現在ログインしている�
 | Recently Deleted         | 過去 30 日以内に削除されたダッシュボード。このリストから[削除されたダッシュボードを復元します](#restore-deleted-dashboards)。|
 | セキュリティとコンプライアンス  | すぐに使えるセキュリティダッシュボード。                                       |
 
-### ダウンタイム
+### 削除したダッシュボードを復元
 
 削除されたダッシュボードを復元するには、プリセットの **Recently Deleted** リストを使用します。リストから、復元するすべてのダッシュボードを選択し、**Restore to** をクリックします。ダッシュボードを復元する特定のリストを選択するか、カスタムリストなしで復元する場合は **All Custom** を選択します。**Recently Deleted** にあるダッシュボードは、30 日後に完全に削除されます。
 
@@ -91,4 +91,4 @@ Favorite lists (お気に入りリスト) は、現在ログインしている�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dashboard/lists
-[2]: /ja/account_management/teams/
+[2]: /account_management/teams/

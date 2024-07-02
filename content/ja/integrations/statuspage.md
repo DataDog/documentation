@@ -19,7 +19,7 @@
 - "incidents"
 - "issue tracking"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -83,7 +83,7 @@ You can correlate Statuspage events with your own metrics and events for analysi
 
 Under the **Statuspage URLs** section in the [integration tile][3], enter the Statuspage URL for whichever service you want to monitor. Enter any custom tags you wish to associate with the page.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 

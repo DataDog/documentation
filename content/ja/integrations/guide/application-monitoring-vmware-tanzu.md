@@ -45,7 +45,7 @@ Datadog Application Monitoring for VMware Tanzu has the following requirements:
 * You must have or create a [Datadog account][4] before configuring the tile.
 * You must generate a [Datadog API key][3].
 
-## Installation
+## インストール
 
 1. Download the product file for **Datadog Application Monitoring for VMware Tanzu** from the [Tanzu Network][10].
 2. Go to the Tanzu Ops Manager Installation Dashboard and click **Import a Product** to upload the product file.

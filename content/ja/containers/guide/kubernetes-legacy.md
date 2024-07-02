@@ -16,39 +16,39 @@ further_reading:
   text: Kubernetes Metrics
 ---
 
-The default configuration targets Kubernetes 1.7.6 and later, as the Agent relies on features and endpoints introduced in this version. More installation steps are required for older versions:
+デフォルトの構成は Kubernetes 1.7.6 以降を対象にしています。これは、Agent がこのバージョンから導入された機能とエンドポイントに依存しているためです。古いバージョンの方がインストール手順が多くなっています。
 
-- [RBAC objects][1] (`ClusterRoles` and `ClusterRoleBindings`) are available since Kubernetes 1.6 and OpenShift 3.3, but are available under different `apiVersion` prefixes:
+- [RBAC オブジェクト][1] (`ClusterRoles` と `ClusterRoleBindings`) は Kubernetes 1.6 および OpenShift 3.3 から利用可能ですが、複数の `apiVersion` プレフィックスがあります。
 
-  * `rbac.authorization.k8s.io/v1` in Kubernetes 1.8+ (and OpenShift 3.9+), the default apiVersion
-  * `rbac.authorization.k8s.io/v1beta1` in Kubernetes 1.5 to 1.7 (and OpenShift 3.7)
-  * `v1` in Openshift 3.3 to 3.6
+  * Kubernetes 1.8+ (および OpenShift 3.9+) の場合は `rbac.authorization.k8s.io/v1`。これはデフォルトの apiVersion です。
+  * Kubernetes 1.5 ～ 1.7 (および OpenShift 3.7) の場合は `rbac.authorization.k8s.io/v1beta1`
+  * Openshift 3.3 ～ 3.6 の場合は `v1`
 
-    Apply the Datadog Agent yaml manifests with the following `sed` invocations:
+    次の `sed` 呼び出しを使用して、Datadog Agent yaml マニフェストを適用します。
 
     ```
     sed "s%authorization.k8s.io/v1%authorization.k8s.io/v1beta1%" clusterrole.yaml | kubectl apply -f -
     sed "s%authorization.k8s.io/v1%authorization.k8s.io/v1beta1%" clusterrolebinding.yaml | kubectl apply -f -
     ```
 
-    or for Openshift 3.3 to 3.6:
+    Openshift 3.3 ～ 3.6 の場合は次のようにします。
 
     ```
     sed "s%rbac.authorization.k8s.io/v1%v1%" clusterrole.yaml | oc apply -f -
     sed "s%rbac.authorization.k8s.io/v1%v1%" clusterrolebinding.yaml | oc apply -f -
     ```
 
-- The `kubelet` check retrieves metrics from the Kubernetes 1.7.6+ (OpenShift 3.7.0+) prometheus endpoint. [Enable cAdvisor port mode][2] for older versions.
+- `kubelet` チェックは、Kubernetes 1.7.6+ (OpenShift 3.7.0+) Prometheus エンドポイントからメトリクスを取得します。古いバージョンでは、[cAdvisor ポートモードを有効にします][2]。
 
-- The default DaemonSet makes use of the [downward API][3] to pass the kubelet's IP to the agent. This only works on versions 1.7 and up. For older versions, here are other ways to enable kubelet connectivity:
+- デフォルトの DaemonSet は、[Downward API][3] を利用して kubelet の IP をエージェントに渡します。これはバージョン 1.7 以降で機能します。古いバージョンで kubelet 接続を有効にするには、別の方法があります。
 
-  * On version 1.6, use `fieldPath: spec.nodeName` and verify your node name is resolvable and reachable from the pod.
-  * If `DD_KUBERNETES_KUBELET_HOST` is unset, the Agent retrieves the node hostname from docker and tries to connect there. See `docker info | grep "Name:"` and verify the name is resolvable and reachable.
-  * If the IP of the docker default gateway is constant across your cluster, pass that IP in the `DD_KUBERNETES_KUBELET_HOST` envvar. You can retrieve the IP with the `ip addr show | grep docker0` command.
+  * バージョン 1.6 では、`fieldPath: spec.nodeName` を使用し、ノード名が解決可能かつポッドから到達可能であることを検証します。
+  * `DD_KUBERNETES_KUBELET_HOST` が設定されていない場合、Agent は、docker からノードのホスト名を取得し、そこへの接続を試みます。`docker info | grep "Name:"` を参照し、名前が解決可能かつ到達可能であることを検証します。
+  * クラスター全体で docker のデフォルトゲートウェイの IP が同じ場合は、その IP を `DD_KUBERNETES_KUBELET_HOST` 環境変数で渡します。IP は `ip addr show | grep docker0` コマンドで取得できます。
 
-- The default configuration relies on [bearer token authentication][4] to the API server and kubelet. On 1.3, the kubelet does not support bearer token auth, setup client certificates for the `datadog-agent` serviceaccount and pass them to the agent.
+- デフォルトの構成は、API サーバーと kubelet への[ベアラートークン認証][4]に依存します。1.3 では、kubelet がベアラートークン認証をサポートしません。`datadog-agent` サービスアカウントのクライアント証明書をセットアップし、それをエージェントに渡します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

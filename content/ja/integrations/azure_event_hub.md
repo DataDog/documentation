@@ -4,9 +4,9 @@
 - "cloud"
 - "log collection"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Azure Event Hub metrics."
+"description": "Azure Event Hub のキーメトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/azure_event_hub/"
 "draft": false
 "git_integration_title": "azure_event_hub"
@@ -32,9 +32,9 @@ Get metrics from Azure Event Hub to:
 - Visualize the performance of your Event Hubs.
 - Correlate the performance of your Event Hubs with your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps needed.
 
@@ -52,21 +52,21 @@ To collect logs from Event Hubs follow this general process:
 
 For detailed instructions follow the main [Azure log documentation][2].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_event_hub" >}}
 
 
-### Events
+### イベント
 
 The Azure Event Hub integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Event Hub integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

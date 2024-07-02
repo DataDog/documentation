@@ -26,7 +26,7 @@ further_reading:
 
 Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for Logs in Datadog, navigate to [**Logs** > **Error Tracking**][1].
 
-## Setup
+## セットアップ
 
 Error Tracking for Logs processes properly configured error logs with stack traces.
 

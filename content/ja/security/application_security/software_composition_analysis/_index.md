@@ -79,23 +79,23 @@ On the Details Explorer for a vulnerability, you can view impacted infrastructur
 
 Within ASM, the vulnerability severity base score is modified using existing attacks and the business sensitivity of the environment where the vulnerability is detected. For example, if no production environment is detected, the severity is reduced.
 
-The adjusted vulnerability score includes the full context of each service:
+調整後の脆弱性スコアは、各サービスの完全なコンテキストを含んでいます。
 
-- The original vulnerability severity
-- Evidence of suspicious requests
-- Sensitive or internet-exposed environments
+- 元の脆弱性の重大度
+- 不審なリクエストの証拠
+- 機密性の高い環境、インターネットに接続された環境
 
-{{< img src="security/application_security/vulnerability-score-modified_3.png" alt="Vulnerability details page showing a modified severity score" style="width:100%;" >}}
+{{< img src="security/application_security/vulnerability-score-modified_3.png" alt="変更された重大度スコアを表示する脆弱性詳細ページ" style="width:100%;" >}}
 
-See [Getting Started with Software Composition Analysis][7] for more information on the adjusted vulnerability score.
+調整後の脆弱性スコアの詳細については、[Software Composition Analysis を始める][7]を参照してください。
 
-## Remediation
+## 修復
 
 The Vulnerability Explorer offers remediation recommendations for detected vulnerabilities. Recommendations enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. They also include a collection of links and references to websites or information sources to help you understand the context behind each vulnerability.
 
-**Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][10] documentation.
+**注**: SCA の脆弱性の Jira 課題を作成するには、Jira インテグレーションを構成し、 `manage_integrations` 権限を持っている必要があります。詳細な手順については、[Jira インテグレーション][11]のドキュメント、および[ロールベースのアクセス制御][10]のドキュメントを参照してください。
 
-{{< img src="getting_started/appsec/appsec-vuln-remediation_3.png" alt="Application Vulnerability Management vulnerability details page showing affected services, links to infrastructure, suggested remediation, and links to more information." style="width:100%;" >}}
+{{< img src="getting_started/appsec/appsec-vuln-remediation_3.png" alt="Application Vulnerability Management の脆弱性の詳細ページでは、影響を受けるサービス、インフラストラクチャーへのリンク、推奨される改善策、および詳細情報へのリンクが表示されます。" style="width:100%;" >}}
 
 ## Configure Software Composition Analysis
 
@@ -105,15 +105,15 @@ To configure vulnerabilities in your CI pipelines, navigate to [Security -> Appl
 
 In **Software Composition Analysis (SCA)**, click **Get Started** to enable Software Composition Analysis, and select your repositories and services.
 
-See [Getting Started with Software Composition Analysis][7] for more detailed instructions.
+より詳細な手順については、[Software Composition Analysis を始める][7]を参照してください。
 
-## Risk information in APM views
+## APM ビューにおけるリスク情報
 
-Software Composition Analysis enriches the information APM is already collecting, and flags libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Service Catalog][2].
+Software Composition Analysis は、APM がすでに収集している情報をリッチ化し、現在の脆弱性勧告と一致するライブラリにフラグを立てます。潜在的に脆弱なサービスは、[APM サービスカタログ][2]に組み込まれた **Security** ビューで直接ハイライト表示されます。
 
 {{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="Vulnerability information shown in the APM Service Catalog" style="width:100%;" >}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -38,47 +38,47 @@ further_reading:
   tag: Blog
   text: Threat modeling with Datadog Application Security Management
 - link: "https://www.datadoghq.com/blog/aws-waf-datadog/"
-  tag: Blog
+  tag: ブログ
   text: Monitor AWS WAF activity with Datadog
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Application Security Management はサポートされていません。</div>
 {{< /site-region >}}
 
-{{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
+{{< img src="/security/application_security/app-sec-landing-page.png" alt="攻撃フローとフレームグラフが表示された Datadog のセキュリティシグナルパネル" width="75%">}}
 
-Datadog Application Security Management (ASM) provides protection against application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). You can monitor and protect apps hosted directly on a server, Docker, Kubernetes, Amazon ECS, and (for supported languages) AWS Fargate.
+Datadog Application Security Management (ASM) は、サーバーサイドリクエストフォージェリー (SSRF)、SQL インジェクション、Log4Shell、反射型クロスサイトスクリプティング (XSS) など、コードレベルの脆弱性を悪用しようとするアプリケーションレベルの攻撃に対する保護を提供します。サーバー、Docker、Kubernetes、Amazon ECS、AWS Fargate (対応言語の場合のみ) で直接ホストされたアプリを監視・保護することができます。
 
-ASM leverages Datadog [tracing libraries][1], and the [Datadog Agent][2] to identify services exposed to application attacks. Once configured, ASM leverages in-app detection rules to detect and protect against threats in your application environment and trigger security signals whenever an attack impacts your production system, or a vulnerability is triggered from the code.
+ASM では、Datadog の[トレーシングライブラリ][1]と [Datadog Agent][2] を利用してアプリケーション攻撃にさらされているサービスを特定します。構成が完了すると、アプリ内検出ルールを利用してアプリケーション環境の脅威を検出して保護を行い、実稼働システムに影響を与える攻撃やコードによる脆弱性が発生した場合にはシグナルをトリガーします。
 
-When a threat is detected, a security signal is generated in Datadog. For `HIGH` or `CRITICAL` severity security signals, notifications can be sent to Slack, email, or PagerDuty to notify your team and provide real-time context around threats.
+脅威が検出されると、Datadog でセキュリティシグナルが生成されます。重大度が `HIGH` または `CRITICAL` のセキュリティシグナルの場合、Slack、メール、または PagerDuty に通知を送信してチームに伝え、脅威に関するリアルタイムのコンテキストを提供することが可能です。
 
-Once a security signal is triggered, quickly pivot to investigate and protect in Datadog. Leverage the deep observability data provided by ASM and APM distributed tracing, in one view, to resolve application issues. Analyze attack flows, view flame graphs, and review correlated trace and log data to pinpoint application vulnerabilities. Eliminate context switching by flowing through application data into remediation and mitigation steps, all within the same panel.
+セキュリティシグナルがトリガーされたら、即座に Datadog へ移動して調査と保護を行います。ASM および APM 分散型トレーシングにより提供された詳しい観測データを 1 か所で確認しながら、アプリケーションの問題を解決します。攻撃フローの分析、フレームグラフの表示、関連するトレースおよびログデータの確認により、アプリケーションの脆弱性を特定します。アプリケーションのデータから修復・緩和手順まで、すべてを同じパネル内でスムーズに行えるため、異なるコンテキスト間を移動する手間を省けます。
 
-With ASM, you can cut through the noise of continuous trace data to focus on securing and protecting your environment.
+ASM を使用すると、継続的なトレースデータからノイズを取り除き、環境の安全と保護のみに集中できます。
 
-Until you fully remediate the potential vulnerabilities in your application code, ASM enables you to slow down attackers by blocking their IPs temporarily or permanently, with a single click.
+ASM ならワンクリックで攻撃者の IP を一時的または永久にブロックでき、アプリケーションコード内の潜在的な脆弱性を完全に緩和できるまで攻撃を遅らせることができます。
 
-## Understanding how application security is implemented in Datadog
+## Datadog に実装されたアプリケーションセキュリティの仕組みの理解
 
-If you're curious how Application Security Management is structured and how it uses tracing data to identify security problems, read [How Application Security Management Works][3].
+Application Security Management がどのように構成され、トレースデータをどのように使用してセキュリティ問題を特定するのかに興味がある方は、[Application Security Management の仕組み][3]をご覧ください。
 
-## Configure your environment
+## 環境を構成する
 
-Powered by provided [out-of-the-box rules][4], ASM detects threats without manual configuration. If you already have Datadog [APM][1] configured on a physical or virtual host, setup only requires setting one environment variable to get started.
+[独自の規則][4]を利用する ASM なら、手動でコンフィギュレーションをせずに脅威を検出できます。すでに Datadog [APM][1] を物理ホストまたは仮想ホストにすでに構成している場合、環境変数を 1 つ設定するだけですぐに開始できます。
 
-To start configuring your environment to detect and protect threats with ASM, follow the [Enabling documentation][5]. Once ASM is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
+環境を構成し、ASM で脅威の検出と保護を開始するには、[有効化のドキュメント][5]の手順に従います。ASM の構成が完了すると、[セキュリティシグナルエクスプローラー][6]でセキュリティシグナルの調査およびその修復を開始できます。
 
-## Investigate and remediate security signals
+## セキュリティシグナルの調査と修復
 
-In the [Security Signals Explorer][6], click on any security signal to see what happened and the suggested steps to mitigate the attack. In the same panel, view traces with their correlated attack flow and request information to gain further context.
+[セキュリティシグナルエクスプローラー][6]でセキュリティシグナルをクリックすると、その概要と攻撃緩和の推奨手順を確認できます。同じパネル内で、その関連する攻撃フローがわかるトレースの表示や、さらにコンテキストを取得するための情報をリクエストすることができます。
 
-## Investigate risk introduced in upstream open source libraries and dependencies
+## アップストリームのオープンソースライブラリや依存関係に潜むリスクの調査
 
-[Software Composition Analysis (SCA)][8] shows you when your services are at risk because they use or have dependencies on open source libraries that have known vulnerabilities. Investigate vulnerability findings and secure your software by following remediation advice or researching the cause of the vulnerability.
+[Software Composition Analysis (SCA)][8] は、サービスが、既知の脆弱性を持つオープンソースライブラリを使用している、またはそれに依存しているためにリスクにさらされている場合を示します。脆弱性の発見について調査し、修正アドバイスに従ったり、脆弱性の原因を研究したりすることで、ソフトウェアを安全に保護します。
 
-## Next steps
+## 次のステップ
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -28,7 +28,7 @@
 "categories":
 - "log collection"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/nagios/README.md"
 "display_on_public_website": true
@@ -41,7 +41,7 @@
 "manifest_version": "2.0.0"
 "name": "nagios"
 "public_title": "Nagios"
-"short_description": "Send Nagios service flaps, host alerts, and more to your Datadog event stream."
+"short_description": "Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。"
 "supported_os":
 - "linux"
 - "windows"
@@ -49,13 +49,13 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Category::Notifications"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Send Nagios service flaps, host alerts, and more to your Datadog event stream."
+  "description": "Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -65,41 +65,41 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-Send events from your Nagios-monitored infrastructure to Datadog for richer alerting and to help correlate Nagios events with metrics from your Datadog-monitored infrastructure.
+Nagios が監視するインフラストラクチャーから Datadog にイベントを送信してアラートを強化すると共に、Datadog が監視するインフラストラクチャーから取得されたメトリクスを Nagios のイベントと関連付けることができます。
 
-This check watches your Nagios server's logs and sends events to Datadog for the following:
+このチェックは、Nagios サーバーのログを監視し、以下のイベントを Datadog に送信します。
 
-- Service flaps
-- Host state changes
-- Passive service checks
-- Host and service downtimes
+- サービスフラップ
+- ホストの状態変化
+- パッシブサービスチェック
+- ホストとサービスのダウンタイム
 
-This check can also send Nagios performance data as metrics to Datadog.
+このチェックは、Nagios のパフォーマンスデータを Datadog にメトリクスとして送信することもできます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Nagios check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Nagios servers.
+Nagios チェックは [Datadog Agent][1] パッケージに含まれています。Nagios サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Containerized](#containerized) section.
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `nagios.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample nagios.d/conf.yaml][2] for all available configuration options.
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `nagios.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル nagios.d/conf.yaml][2] を参照してください。
 
-2. [Restart the Agent][3] to start sending Nagios events and (optionally) performance data metrics to Datadog.
+2. [Agent を再起動][3]すると、Datadog への Nagios イベントおよび (オプションで) パフォーマンスデータメトリクスの送信が開始されます。
 
-**Note**: The Nagios check can potentially emit [custom metrics][4], which may impact your [billing][5].
+**注**: Nagios チェックでは[カスタムメトリクス][4]を送信することができますが、これはお客様の[課金][5]に影響します。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/nagios/datadog_checks/nagios/data/conf.yaml.example
@@ -107,43 +107,43 @@ To configure this check for an Agent running on a host:
 [4]: https://docs.datadoghq.com/developers/metrics/custom_metrics/
 [5]: https://docs.datadoghq.com/account_management/billing/custom_metrics/
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-| Parameter            | Value                                        |
+| パラメーター            | 値                                        |
 | -------------------- | -------------------------------------------- |
 | `<INTEGRATION_NAME>` | `nagios`                                     |
-| `<INIT_CONFIG>`      | blank or `{}`                                |
-| `<INSTANCE_CONFIG>`  | `{"nagios_conf": "/etc/nagios3/nagios.cfg"}` |
+| `<INIT_CONFIG>`      | 空白または `{}`                                |
+| `<INSTANCE_CONFIG>`  | `{&quot;nagios_conf&quot;: &quot;/etc/nagios3/nagios.cfg&quot;}` |
 
-**Note**: The containerized Agent should be able to access the `/etc/nagios3/nagios.cfg` file to enable the Datadog-Nagios integration.
+**注**: コンテナ化された Agent から `/etc/nagios3/nagios.cfg` ファイルにアクセスして Datadog-Nagios インテグレーションを有効化できます。
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][2] and look for `nagios` under the Checks section.
+[Agent の status サブコマンドを実行][2]し、Checks セクションで `nagios` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-With the default configuration, the Nagios check doesn't collect any metrics. But if you set `collect_host_performance_data` and/or `collect_service_performance_data` to `True`, the check watches for Nagios performance data and submits it as gauge metrics to Datadog.
+デフォルトの構成では、Nagios チェックはメトリクスを収集しません。ただし、`collect_host_performance_data` や `collect_service_performance_data` を `True` に設定すると、チェックは Nagios パフォーマンスデータを監視し、それをゲージメトリクスとして Datadog に送信します。
 
-### Log collection
+### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Add this configuration block to your `nagios.d/conf.yaml` file to start collecting your Nagios logs:
+2. Nagios のログの収集を開始するには、次の構成ブロックを `nagios.d/conf.yaml` ファイルに追加します。
 
     ```yaml
     logs:
@@ -152,13 +152,13 @@ With the default configuration, the Nagios check doesn't collect any metrics. Bu
         source: nagios
     ```
 
-    Change the `path` parameter value based on your environment, see `log_file` value in your nagios configuration file. See the [sample nagios.d/conf.yaml][3] for all available configuration options.
+    `path` パラメーターの値を環境に合わせて変更します。nagios コンフィギュレーションファイルの `log_file` 値を参照してください。使用可能なすべてのコンフィギュレーションオプションについては、[nagios.d/conf.yaml のサンプル][3]を参照してください。
 
-3. [Restart the Agent][4].
+3. [Agent を再起動します][4]。
 
-### Events
+### イベント
 
-The check watches the Nagios events log for log lines containing these strings, emitting an event for each line:
+このチェックは Nagios イベントログを監視して、次の文字列を含むログ行を検出すると、行ごとにイベントを送信します。
 
 - SERVICE FLAPPING ALERT
 - ACKNOWLEDGE_SVC_PROBLEM
@@ -170,17 +170,17 @@ The check watches the Nagios events log for log lines containing these strings, 
 - PROCESS_SERVICE_CHECK_RESULT
 - SERVICE DOWNTIME ALERT
 
-### Service Checks
+### サービスチェック
 
-The Nagios check does not include any service checks.
+Nagios チェックには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-- [Understand your Nagios alerts with Datadog][6]
+- [Datadog を使用した Nagios アラートの把握][6]
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest

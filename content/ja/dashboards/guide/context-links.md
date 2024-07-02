@@ -1,9 +1,9 @@
 ---
+title: Context Links
 further_reading:
 - link: /dashboards/widgets
-  tag: ドキュメント
-  text: ダッシュボードウィジェット一覧
-title: コンテキストリンク
+  tag: Documentation
+  text: Dashboard widget list
 ---
 
 ## 概要
@@ -43,7 +43,7 @@ title: コンテキストリンク
 | APM トレース     | [トレースエクスプローラー][12]にリンクする基礎となるトレースを表示するサイドパネルを開きます。|
 | RUM イベント     | [RUM エクスプローラー][13]にリンクします。                                                      |
 | プロファイル       | APM [プロファイルエクスプローラー][14]にリンクします。                                              |
-| ログ管理           | [ログエクスプローラー][15]にリンクする基礎となるログを表示するサイドパネルを開きます。    |
+| Logs           | [ログエクスプローラー][15]にリンクする基礎となるログを表示するサイドパネルを開きます。    |
 
 該当する場合、コンテキストリンクは以下を埋め込みます。
 
@@ -143,11 +143,11 @@ URL に変数を追加すると、テンプレートリンクが `https://acme.z
 
 ### ダッシュボードから AWS コンソールへのリンク
 
-次の例では、ダッシュボードウィジェット内のホストから、AWS コンソールの対応する Amazon EC2 インスタンスページへのリンクを作成する方法を説明します。
+The following example explains how to create a link from a host in a dashboard widget to its corresponding Amazon EC2 instance page in the AWS Console.
 
 #### コンテキスト
 
-プラットフォームは [Amazon EC2][19] インスタンス上にホストされており、プラットフォームのアップスケールとダウンスケールの手順は、ほとんど手作業です。
+Your platform is hosted on [Amazon EC2][19] instances, and the procedures to upscale and downscale your platform are mostly manual.
 
 Datadog のダッシュボードには、インフラストラクチャーの主要なヘルスメトリクスが集約されています。
 
@@ -155,7 +155,7 @@ Datadog のダッシュボードには、インフラストラクチャーの主
 
 #### アプローチ
 
-典型的な Amazon EC2 インスタンスの概要リンクは `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` であり、そこで以下を確認することができます。
+A typical Amazon EC2 instance summary link is `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94`, where you can read:
 
 * `eu-west-3`: サブドメインと URL のパラメーターとして表示される、データセンターのリージョン。
 * `i-04b737b9f8bf94a94`: ハッシュパラメーターとして表示されるホスト ID。
@@ -166,21 +166,21 @@ Datadog のダッシュボードには、インフラストラクチャーの主
 
 * リージョンがクエリ集計の一部である場合 (例えば、以下のスクリーンショット)、テンプレートリンクは `https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}` で、ここで `{{region.value}}` は **query** 変数です。
 
-{{< img src="dashboards/guide/context_links/ec2_query.png" alt="Amazon EC2 クエリ" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_query.png" alt="Amazon EC2 Query" style="width:90%;" >}}
 
 * リージョンがクエリ集計の一部である場合 (例えば、以下のスクリーンショット)、テンプレートリンクは `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}` で、ここで `{{region.value}}` は **template** 変数です。
 
-{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="Amazon EC2 クエリ" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="Amazon EC2 Query" style="width:90%;" >}}
 
 #### 結果
 
 ダッシュボードウィジェットには、AWS コンソールの適切なホストに移動するためのリンクが含まれています。
 
-{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="Amazon EC2 クエリコンテキストリンク" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="Amazon EC2 Query context link" style="width:90%;" >}}
 
-**Amazon EC2 Instance Summary** のリンクをクリックすると、AWS コンソールの Amazon EC2 インスタンスページに移動します。
+Clicking the **Amazon EC2 Instance Summary** link directs you to the Amazon EC2 instance page in the AWS Console.
 
-{{< img src="dashboards/guide/context_links/ec2_result.png" alt="Amazon EC2 クエリの結果" style="width:70%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_result.png" alt="Amazon EC2 Query Result" style="width:70%;" >}}
 
 ### ダッシュボードから Datadog の保存ビューとリマップされた属性へのリンク
 
@@ -253,26 +253,26 @@ service:backend (env:{{$env.value}})
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/monitors/notify/
-[2]: /ja/notebooks/
-[3]: /ja/dashboards/configure/#permissions
+[1]: /monitors/notify/
+[2]: /notebooks/
+[3]: /dashboards/configure/#permissions
 [4]: https://app.datadoghq.com/apm/traces/
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/rum/explorer/
-[7]: /ja/real_user_monitoring/data_collected/
-[8]: /ja/infrastructure/hostmap/#overview
-[9]: /ja/getting_started/dashboards/#explore-out-of-the-box-dashboards
-[10]: /ja/infrastructure/livecontainers/
-[11]: /ja/infrastructure/process/?tab=linuxwindows
-[12]: /ja/tracing/trace_explorer/?tab=listview
-[13]: /ja/real_user_monitoring/explorer/
-[14]: /ja/profiler/profile_visualizations/
-[15]: /ja/logs/explorer/
-[16]: /ja/dashboards/widgets/
-[17]: /ja/real_user_monitoring/
-[18]: /ja/security/cloud_siem/
-[19]: /ja/integrations/amazon_ec2/
+[7]: /real_user_monitoring/data_collected/
+[8]: /infrastructure/hostmap/#overview
+[9]: /getting_started/dashboards/#explore-out-of-the-box-dashboards
+[10]: /infrastructure/livecontainers/
+[11]: /infrastructure/process/?tab=linuxwindows
+[12]: /tracing/trace_explorer/?tab=listview
+[13]: /real_user_monitoring/explorer/
+[14]: /profiler/profile_visualizations/
+[15]: /logs/explorer/
+[16]: /dashboards/widgets/
+[17]: /real_user_monitoring/
+[18]: /security/cloud_siem/
+[19]: /integrations/amazon_ec2/
 [20]: https://aws.amazon.com/console/
-[21]: /ja/logs/
-[22]: /ja/integrations/#cat-log-collection
-[23]: /ja/logs/explorer/saved_views/
+[21]: /logs/
+[22]: /integrations/#cat-log-collection
+[23]: /logs/explorer/saved_views/

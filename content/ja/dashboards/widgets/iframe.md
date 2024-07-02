@@ -1,13 +1,13 @@
 ---
-aliases:
-- /ja/graphing/widgets/iframe/
-description: Datadog のダッシュボードに iframe を含める
-further_reading:
-- link: /ja/dashboards/graphing_json/
-  tag: ドキュメント
-  text: JSON を使用したダッシュボードの構築
-title: Iframe ウィジェット
+title: Iframe Widget
 widget_type: iframe
+description: "Include an Iframe in your Datadog dashboards."
+aliases:
+- /graphing/widgets/iframe/
+further_reading:
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Building Dashboards using JSON
 ---
 
 インラインフレーム (iframe) は、ドキュメント内に別の HTML ページを読み込む HTML 要素です。iframe ウィジェットを使用すると、他の Web ページの一部をダッシュボードに埋め込むことができます。
@@ -28,5 +28,5 @@ iframe 内に表示するページの URL を入力します。HTTPS URL を使�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/latest/dashboards/
-[2]: /ja/dashboards/graphing_json/widget_json/
+[1]: /api/latest/dashboards/
+[2]: /dashboards/graphing_json/widget_json/

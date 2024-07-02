@@ -6,59 +6,59 @@ further_reading:
   text: Upgrade to Agent v7
 ---
 
-If you are using Agent v6, Datadog recommends that you [upgrade to Agent v7][1]. Agent v7 only includes support for Python 3.
+Agent v6 を使用している場合、Datadog は [Agent v7 へのアップグレード][1]を推奨しています。Agent v7 は、Python 3 のみのサポートとなります。
 
-However, there may be a case where you wish to continue using Agent v6 while updating to Python 3. Starting with Datadog Agent v6.14.0, Agent v6 integrates both Python 2 and Python 3 runtimes. This means that Agent Checks can be run either with Python 2 or Python 3, depending on the Agent configuration.
+ただし、Python 3 にアップデートしても Agent v6 を使い続けたい場合があります。Datadog Agent v6.14.0 以降、Agent v6 は Python 2 および Python 3 ランタイムと互換性を持ちます。つまり、Agent のコンフィギュレーションにより、Python 2 または Python 3 のいずれでも Agent チェックを実行できます。
 
-## Use Python 3 with Datadog Agent v6
+## Datadog Agent v6 で Python 3 を使用する
 
-By default, the Agent v6 uses the Python 2 runtime. Below are instructions for how to configure Agent v6 to use the Python 3 runtime:
+デフォルトでは、Agent v6 は Python 2 ランタイムを使用します。以下は、Python 3 ランタイムを使用するように Agent v6 を構成する方法です。
 
-- [Host Agent](#host-agent)
-- [Container Agent](#container-agent)
+- [ホスト Agent](#host-agent)
+- [コンテナ Agent](#container-agent)
   - [Helm](?tab=helm#container-agent)
   - [Datadog Operator](?tab=datadogoperator#container-agent)
   - [DaemonSet](?tab=daemonset#container-agent)
-- [Deployment tools](#deployment-tools)
+- [デプロイメントツール](#deployment-tools)
   - [Chef](?tab=chef#deployment-tools)
   - [Puppet](?tab=puppet#deployment-tools)
   - [Ansible](?tab=ansible#deployment-tools)
 
-This configuration is not supported for the Azure VM Extension.
+この構成は、Azure VM Extensionではサポートされていません。
 
-### Host Agent
+### ホスト Agent
 
-1. Set the `python_version` configuration option in your [`datadog.yaml`][2] configuration file:
+1. [`datadog.yaml`][2] コンフィギュレーションファイルで `python_version` コンフィギュレーションオプションを設定します。
 
     ```yaml
     python_version: 3
     ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-Alternatively, specify which Python runtime you want to use by setting the `DD_PYTHON_VERSION` environment variable to `2` or `3`. Environment variables take precedence over configuration options in `datadog.yaml`. For example, by setting the `DD_PYTHON_VERSION` environment variable, the `python_version` option in `datadog.yaml` is ignored.
+または、環境変数 `DD_PYTHON_VERSION` に `2` または `3` を設定して、どの Python ランタイムを使用するかを指定します。環境変数は `datadog.yaml` 内の構成オプションよりも優先されます。例えば、環境変数 `DD_PYTHON_VERSION` を設定すると、 `datadog.yaml` にある `python_version` オプションは無視されます。
 
-This is an Agent-wide configuration option. **All Python checks launched by an Agent use the same Python runtime**.
+これは、Agent 全体のコンフィギュレーションオプションです。**Agent により起動されたすべての Python チェックは、同じ Python ランタイムを使用します**。
 
 
-### Container Agent
+### コンテナ Agent
 
-Datadog provides Agent container images for Python 2 and Python 3. 
+Datadog は、Python 2 および Python 3 用の Agent コンテナイメージを提供しています。
 
-* Image tags starting with `6.`, like `6.34.0` or `6.34.0-jmx`, are images containing the Python 2 runtime.
-* Image tags starting with `7.`, like `7.34.0` or `7.34.0-jmx`, are images containing the Python 3 runtime.
+* `6.34.0` や `6.34.0-jmx` のような `6.` で始まるイメージタグは、Python 2 ランタイムを含むイメージです。
+* `7.34.0` や `7.34.0-jmx` のような `7.` で始まるイメージタグは、Python 3 ランタイムを含むイメージです。
 
-To switch from Python 2 to Python 3, update the image tag used to deploy the Agent.
+Python 2 から Python 3 に変更するには、Agent のデプロイに使用するイメージタグを更新します。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
-By default, the [Datadog Helm chart][1] uses the Agent 7 image that embeds the Python 3 runtime.
+デフォルトでは、[Datadog Helm チャート][1]は、Python 3 ランタイムを埋め込んだ Agent 7 イメージを使用します。
 
 To keep the Datadog Agent updated, edit your `datadog-values.yaml` to remove any information under the `agent.image` and the `clusterChecksRunner.image` sections.
 
-To use a specific container registry, set it with `agent.image.repository` and `clusterChecksRunner.image.repository`. Ensure that `agents.image.tag` and  `clusterChecksRunner.image.tag` are undefined.
+特定のコンテナレジストリを使用する場合は、`agent.image.repository` と `clusterChecksRunner.image.repository` で設定します。`agents.image.tag` と `clusterChecksRunner.image.tag` が未定義であることを確認してください。
 
-The default registry is `gcr.io/datadoghq/agent`.
+デフォルトのレジストリは、`gcr.io/datadoghq/agent` です。
 
 ```yaml
 agent:
@@ -70,7 +70,7 @@ clusterChecksRunner:
     repository: public.ecr.aws/datadog/agent
 ```
 
-To set the Agent to a specific version, set `agents.image.tag` and  `clusterChecksRunner.image.tag`. All image tags starting with `7.*` embed the Python 3 runtime.
+Agent を特定のバージョンに設定するには、`agents.image.tag` と `clusterChecksRunner.image.tag` を設定します。`7.*` で始まるすべてのイメージタグは Python 3 ランタイムを埋め込みます。
 
 ```yaml
 agent:
@@ -82,7 +82,7 @@ clusterChecksRunner:
     tag: 7.34.0
 ````
 
-You can use both options at the same time.
+両方のオプションを同時に使用することができます。
 
 ```yaml
 agent:
@@ -100,11 +100,11 @@ clusterChecksRunner:
 
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
-By default, the [Datadog Operator][1] uses an `agent:7.*.*` image that embeds the Python 3 runtime.
+デフォルトでは、[Datadog Operator][1] は、Python 3 ランタイムを埋め込んだ `agent:7.*.*` イメージを使用します。
 
-If the image information is not specified in the `DatadogAgent` resource, the Operator deploys a Python 3 Datadog Agent image.
+イメージ情報が `DatadogAgent` リソースに指定されていない場合、Operator は Python 3 Datadog Agent イメージをデプロイします。
 
-If you have previously pinned the image version:
+以前にイメージバージョンを固定したことがある場合
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -120,7 +120,7 @@ spec:
         tag: 6.33.0
 ```
 
-or you are using `image.name`:
+または `image.name` を使用している場合
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -142,11 +142,11 @@ spec:
         name: gcr.io/datadoghq/agent:6.33.0
 ```
 
-Use the `spec.global.registry` if you need to change the default registry. The default is `gcr.io/datadoghq/agent`.
+デフォルトのレジストリを変更する必要がある場合は、`spec.global.registry` を使用します。デフォルトは `gcr.io/datadoghq/agent` です。
 
-Then, pin the Agent 7 image tag in `spec.override.nodeAgent.image.tag`.
+次に、Agent 7 のイメージタグを `spec.override.nodeAgent.image.tag` で固定します。
 
-If you have enabled cluster check runners deployment, also pin the Agent 7 image tag in `spec.override.clusterChecksRunner.image.tag`.
+クラスターチェックランナーのデプロイメントを有効にした場合、Agent 7 のイメージタグも `spec.override.clusterChecksRunner.image.tag` で固定します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -167,9 +167,9 @@ spec:
         tag: 7.33.0
 ```
 
-**Note**: Datadog recommends that you do not set the `*.image.tag`. Instead, let the Datadog Operator keep the Agent image tag up-to-date with an Agent 7 image.
+**注**: Datadog では、`*.image.tag` を設定しないことを推奨しています。代わりに、Datadog Operator に Agent 7 のイメージタグを最新に保つようにさせます。
 
-If you need to use an Agent JMX image, you can set it without specifying the Agent `*.image.tag`:
+Agent JMX イメージを使用する必要がある場合、Agent `*.image.tag` を指定せずに設定することができます。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -191,16 +191,16 @@ spec:
 
 [1]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
-{{% tab "Manual (DaemonSet)" %}}
+{{% tab "手動 (DaemonSet)" %}}
 
-In your DaemonSet manifest, update the image tag in each container definition:
+DaemonSet マニフェストで、各コンテナ定義のイメージタグを更新します。
 
-* Each `spec.template.spec.containers[*].image` value
-* Each `spec.template.spec.initContainers[*].image` value
+* 各 `spec.template.spec.containers[*].image` の値
+* 各 `spec.template.spec.initContainers[*].image` の値
 
-For example, if your previous image value was `gcr.io/datadoghq/agent:6.33.0`, update it to `gcr.io/datadoghq/agent:7.33.0`.
+例えば、以前のイメージ値が `gcr.io/datadoghq/agent:6.33.0` だった場合、`gcr.io/datadoghq/agent:7.33.0` に更新します。
 
-**Before**:
+**前**:
 
 ```yaml
 apiVersion: apps/v1
@@ -214,7 +214,7 @@ spec:
 
 ```
 
-**After**:
+**後**:
 
 ```yaml
 apiVersion: apps/v1
@@ -230,12 +230,12 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Deployment tools
+### デプロイメントツール
 
 {{< tabs >}}
 {{% tab "Chef" %}}
 
-Use the `extra_config` field to set the ` python_version` field to `3`:
+`extra_config` フィールドを使用して、` python_version` フィールドを `3` に設定します。
 
 ```
 default_attributes(
@@ -250,7 +250,7 @@ default_attributes(
 {{% /tab %}}
 {{% tab "Puppet" %}}
 
-Use the `agent_extra_config` field to set the `python_version`field to `3`:
+`agent_extra_config` フィールドを使用して、`python_version` フィールドを `3` に設定します。
 
 ```
 class { "datadog_agent":
@@ -263,7 +263,7 @@ class { "datadog_agent":
 {{% /tab %}}
 {{% tab "Ansible" %}}
 
-Set the `python_version` to `3` inside of your `datadog_config`:
+`datadog_config` 内で、`python_version` を `3` に設定します。
 ```
 datadog_config:
   python_version: 3
@@ -272,7 +272,7 @@ datadog_config:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -11,52 +11,52 @@ further_reading:
   text: Simulation data format reference
 ---
 
-Datadog Network Device Monitoring uses profiles for collecting metrics from network devices. These are defined narrowly by a MIB, or to collect metrics from a specific device make and model. This tutorial shows the steps for building a basic NDM profile that collects OID metrics from HP iLO4 devices.
+Datadog ネットワークデバイスモニタリングは、プロファイルを使用してネットワークデバイスからメトリクスを収集します。これらは MIB により狭義されており、特定のデバイスメーカーおよびモデルからメトリクスを収集します。このチュートリアルでは、HP iLO4 デバイスから OID メトリクスを収集する基本の NDM プロファイルを構築するためのステップをご説明します。
 
-NDM profiles use SNMP concepts. For basic details on SNMP, refer to the [terminology][1].
+NDM プロファイルは SNMP コンセプトを使用します。SNMP の基本情報については、[用語][1]を参照してください。
 
 <div class="alert alert-info">
 This guide is for advanced users. Most devices can be configured using the GUI based experience in the <a href="/network_monitoring/devices/guide/device_profiles/">Getting Started with Device Profiles</a> documentation, or by using <a href="/network_monitoring/devices/profiles#metric-definition-by-profile">Datadog profiles</a>.
 </div>
 
-## Research
+## 調査
 
-The first step to building an NDM profile is researching the device and determining the metrics to collect.
+NDM プロファイルを構築する最初のステップは、デバイスを調査して収集するメトリクスを決定することです。
 
-### Device information
+### デバイス情報
 
-Refer to the manufacturer's website or search the web to find the following information:
+メーカーのウェブサイトを確認するか、インターネットで以下の情報を検索します。
 
-- Device name, manufacturer, and [system object identifier][1].
+- デバイス名、メーカー、および[システムオブジェクト識別子][1]。
 
-- Understand the device and its use case. Metrics vary between routers, switches, bridges, etc. For example, according to the [HP iLO Wikipedia page][2], iLO4 devices are used by system administrators for remote management of embedded servers.
+- デバイスとそのユースケースを把握します。ルーター、スイッチ、ブリッジなど、機器の種類によってメトリクスは異なります。たとえば、[HP iLO Wikipedia ページ][2]によると、iLO4 デバイスは組み込みサーバーのリモート管理を行う目的でシステム管理者により使用されます。
 
-- Available versions of the device, and the versions to target. For example, HP iLO devices exist in multiple versions. This tutorial is specifically targeting HP iLO4.
+- デバイスの利用可能なバージョン、および対象のバージョン。たとえば、HP iLO デバイスは複数のバージョンで利用可能です。このチュートリアルでは HP iLO4 を取り上げてご説明しています。
 
-- Supported MIBs (ASN1, textual format), OIDs, and associated MIB files. For example, HP provides a MIB package for iLO devices [their website][3]. **Note**: The MIB is not required with the profile to collect metrics.
+- サポート対象の MIB (ASN1、テキスト形式)、OID、および関連する MIB ファイル。たとえば、HP は iLO デバイス向けのMIB パッケージを提供しています ([サイトはこちら][3])。**注**: メトリクスを収集するプロファイルでは MIB は不要です。
 
-**Note**: For more details on device use cases, see [Networking hardware][4].
+**注**: デバイスのユースケースに関する詳細は、[ネットワークハードウェア][4]を参照してください。
 
-### Metrics selection
+### メトリクスの選定
 
-Next, decide the metrics to collect. Devices often expose thousands of metrics and OIDs that can span dozens of MIBs.
+次に、収集するメトリクスを決定します。デバイスは通常数千のメトリクスと OID を公開しており、これは数十の MIB にまたがる場合もあります。
 
-Some guidelines to help you in this process:
+このプロセスで役立つガイドラインは次の通りです。
 
-- Keep the number of metrics between 10 and 40.
-- Explore base profiles to see which ones could be applicable to the device.
-- Explore manufacturer-specific MIB files looking for metrics such as:
-    - General health: status gauges
-    - Network traffic: bytes in/out, errors in/out
-    - CPU and memory usage
-    - Temperature: temperature sensors, thermal condition
-    - Power supply: on/off or total branch
+- メトリクスの数を 10 ～ 40 に維持する。
+- 基本のプロファイルをチェックして、どれが対象のデバイスに適用可能かを確認する。
+- メーカー固有の MIB ファイルを確認し、以下のようなメトリクスを検索する。
+    - 一般的な健全性: ステータスゲージ
+    - ネットワークトラフィック: バイト I/O、エラー I/O
+    - CPU およびメモリ使用量
+    - 温度: 温度センサー、熱的条件
+    - 電源供給: オン/オフまたはブランチ合計
 
-## Implementation
+## 実装
 
-### Add a profile
+### プロファイルの追加
 
-First, add a profile by creating a `.yaml` file with the `sysobjectid` and metrics, for example:
+まず、`sysobjectid` およびメトリクスで `.yaml` ファイルを作成してプロファイルを追加します。例:
 
 ```yaml
 sysobjectid: 1.3.6.1.4.1.232.9.4.10
@@ -68,13 +68,13 @@ metrics:
       name: cpqHeSysUtilLifeTime
 ```
 
-**Note**: `sysobjectid` can be a wildcard pattern to match a sub-tree of devices, for example: `1.3.6.1.131.12.4.*`.
+**注**: `sysobjectid` を、デバイスのサブツリーに一致するワイルドカードパターンとすることもできます。例: `1.3.6.1.131.12.4.*`
 
-## Test the profile
+## プロファイルのテスト
 
-Second, test the profile by targeting an IP address of a device that will use the profile.
+次に、対象のプロファイルを使用するデバイスのIP アドレスをターゲティングし、プロファイルをテストします。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

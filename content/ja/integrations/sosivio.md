@@ -29,7 +29,7 @@
 - network
 - notifications
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/sosivio/README.md"
 "display_on_public_website": true
@@ -75,7 +75,7 @@ Sosivio is a Predictive Troubleshooting platform built specifically for Kubernet
 
 Sosivio's Datadog integration allows users to see Sosivio Failure Alerts directly in Datadog dashboards and instantly be redirected to the Sosivio UI to remediate those failures (with Sosivio Premium license). You can also add context around Datadog's signals with Sosivio's root cause determination for critical failures.
 
-## Setup
+## セットアップ
 
 If you don't have a Sosivio account, [create an account][1] and sign up for a free 4-week trial of Sosivio Premium directly from our website (no credit card required). At the end of the 4-week trial, your license converts to the Sosivio Community Version, which is free, forever. With the account set up, you are ready to start using the Sosivio integration in Datadog.
 
@@ -83,7 +83,7 @@ If you don't have a Sosivio account, [create an account][1] and sign up for a fr
 Sosivio is installed under one namespace (labeled "sosivio") which creates all the required components for the product. 
 
 
-### Installation
+### インストール
 
 1. In the Sosivio Dashboard Configuration page, add your [Datadog API key][2] and Datadog URL (if not the default datadoghq.com site). See [Datadog sites][3] to learn more.
 2. Click **Install**.

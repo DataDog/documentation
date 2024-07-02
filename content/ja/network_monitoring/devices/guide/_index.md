@@ -21,6 +21,6 @@ further_reading:
     {{< nextlink href="network_monitoring/devices/guide/migrating-to-snmp-core-check" >}}Migrating to the SNMP Core Check (in Go) from the Python-based Check{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

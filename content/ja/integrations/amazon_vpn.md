@@ -4,7 +4,7 @@
 - cloud
 - log collection
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key AWS VPN metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_vpn/"
@@ -29,9 +29,9 @@ AWS VPN lets you establish a secure and private tunnel from your network or devi
 
 Enable this integration to see all your VPN metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -56,21 +56,21 @@ Configure AWS VPN to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_vpn" >}}
 
 
-### Events
+### イベント
 
 The AWS VPN integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS VPN integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

@@ -23,7 +23,7 @@
   "sales_email": help@datadoghq.com
   "support_email": help@datadoghq.com
 "categories": []
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/hcp_vault/README.md"
 "display_on_public_website": true
@@ -66,9 +66,9 @@ HCP Vault metrics streaming is available for all production grade cluster tiers.
 
 For details on metrics scope and interpretation, see the [HCP Vault Metrics Guidance][1]
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Follow the Configuration instructions below.
 
@@ -77,7 +77,7 @@ Follow the Configuration instructions below.
 - Your Datadog region and your [Datadog API key][2]
 - An account with Admin or Contributor [role assigned in HCP][3]
 
-### Configuration
+### 構成
 
 To enable metrics streaming:
 
@@ -99,21 +99,21 @@ To enable metrics streaming:
 6. Navigate to Datadog, and enable the integration by clicking Install on the integration tile. This installs a HCP Vault dashboard with widgets that make the most of your HCP Vault telemetry. You can find the dashboard by searching for "HCP Vault Overview" in the dashboard list.
    **Note**: On the dashboard, give the values of `cluster` & `project_id` to select the metrics for the right cluster. The `cluster` is the name of the cluster that you have set on cluster creation. The `project_id` is the present in the URL on HCP portal `https://portal.cloud.hashicorp.com/orgs/xxxx/projects/xxxx`
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 For details on metrics scope and interpretation, see the [HCP Vault Metrics Guidance][1].
 
-### Service Checks
+### サービスチェック
 
 The HCP Vault integration does not include any service checks.
 
-### Events
+### イベント
 
 The HCP Vault integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

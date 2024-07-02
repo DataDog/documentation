@@ -3,7 +3,7 @@
 - azure
 - cloud
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure Data Explorer metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_data_explorer/"
@@ -31,23 +31,23 @@ Get metrics from Azure Data Explorer to:
 * Track ingestion, processing, and latency performance of your Data Explorer instances.
 * Monitor the utilization of your Data Explorer compute, memory, and network resources.
 
-## Setup
-### Installation
+## セットアップ
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## Data Collected
-### Metrics
+## 収集データ
+### メトリクス
 {{< get-metrics-from-git "azure_data_explorer" >}}
 
 
-### Events
+### イベント
 The Azure Data Explorer integration does not include any events.
 
-### Service Checks
+### サービスチェック
 The Azure Data Explorer integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 Need help? Contact [Datadog support][3].
 
 [1]: https://docs.datadoghq.com/integrations/azure/

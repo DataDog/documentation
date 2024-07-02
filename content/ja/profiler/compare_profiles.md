@@ -20,58 +20,58 @@ further_reading:
       text: How we optimized our Akka application using Datadog's Continuous Profiler
 ---
 
-The Continuous Profiler can compare two profiles or profile aggregations with each other to help you identify code performance improvements, regressions, and structural changes. You can compare a profile with:
+Continuous Profiler は、2 つのプロファイルまたはプロファイル集計を相互に比較して、コードパフォーマンスの向上、回帰、構造の変更を特定するのに役立ちます。プロファイルは次のものと比較できます。
 
-- Profiles taken at a different time,
-- An average of the service's profiles over time, or
-- Profiles with a different set of Datadog tags (for example, environment, version, or data center). 
+- 別の時間に取得されたプロファイル、
+- 時間の経過に伴うサービスのプロファイルの平均、または
+- 異なる Datadog タグのセット (環境、バージョン、データセンターなど) を持つプロファイル。
 
-This helps you see if the service is taking more or less time, using more or less memory, making more or fewer allocations, throwing more or fewer exceptions, or involving more or less code and calls than it was in the past.
+これは、以前と比べてサービスにかかる時間が長いのか短いのか、メモリの使用量が多いのか少ないのか、割り当てが多いのか少ないのか、例外が多いのか少ないのか、またはコードと呼び出しが多いのか少ないのかを確認するのに役立ちます。
 
-## Comparison scenarios
+## 比較シナリオ
 
-Comparisons work best when the application is experiencing a similar workload (total requests) as it was in the past.
+比較が最適に機能するのは、アプリケーションで以前と同様のワークロード (リクエストの総数) が発生している場合です。
 
-Some common scenarios to use comparison are:
+比較を使用する一般的なシナリオは次のとおりです。
 
-- Comparing two latest deployments. For example, verify if the latest deployed fix lowers the number of memory allocations your method makes.
+- 2 つの最新のデプロイを比較します。たとえば、最新のデプロイされた修正により、メソッドが行うメモリ割り当ての数が減少するかどうかを確認します。
 
-- Comparing two distinct time periods. For example, calculate the CPU consumption for today compared to the past week. What methods get better or worse in terms of CPU consumption?
+- 2 つの異なる期間を比較します。たとえば、先週と比較した今日の CPU 消費量を計算します。CPU 消費量について、どのメソッドが良いか悪いかを検討します。
 
-- Comparing two different sets of tags. For example, compare profiles between different environments, availability zones, pods, canaries, or other custom Datadog tags.
+- 2 つの異なるタグのセットを比較します。たとえば、異なる環境、アベイラビリティーゾーン、ポッド、カナリア、またはその他のカスタム Datadog タグ間でプロファイルを比較します。
 
-## Accessing the comparison view
+## 比較ビューへのアクセス
 
-You can open different types of comparisons from different places in the UI. 
+UI のさまざまな場所からさまざまなタイプの比較を開くことができます。
 
-### Comparing a profile to a previous time period 
+### プロファイルを前の期間と比較する
 
-On the Profiler Search view, select a profile from the list. Click **Compare** to open the comparison view. By default, the selected profile is shown as Profile B. For Profile A, select an aggregation time frame and tags, or a specific profile ID. 
+プロファイラー検索ビューで、リストからプロファイルを選択します。**Compare** をクリックして比較ビューを開きます。デフォルトでは、選択したプロファイルはプロファイル B として表示されます。プロファイル A の場合、集計タイムフレームとタグ、または特定のプロファイル ID を選択します。
 
-Select the metric you want to compare (the list varies based on code language). This can be helpful, for example, for looking at allocation spikes while investigating CPU profiles.
+比較するメトリクスを選択します (リストはコード言語によって異なります)。これは、たとえば、CPU プロファイルの調査中に割り当ての急増を確認する場合に役立ちます。
 
-{{< img src="profiler/compare_time_frames.mp4" alt="Opening the comparison view to compare a profile with an aggregation for a time frame." video="true">}}
+{{< img src="profiler/compare_time_frames.mp4" alt="比較ビューを開いて、プロファイルをタイムフレームの集計と比較します。" video="true">}}
 
-Take note of the legend colors, which show:
- - Deepening shades of red for methods that take more time in profile B.
- - Deepening shades of green for methods that take less time in profile B.
- - Blue for methods that are only in profile A.
- - Purple for methods that are only in profile B.
+以下を示す凡例の色に注意してください。
+ - プロファイル B で時間が長いメソッドの場合、赤の色合いが濃くなります。
+ - プロファイル B で時間が短いのメソッドの場合、緑の色合いが濃くなります。
+ - プロファイル A のみにあるメソッドの場合は青。
+ - プロファイル B のみにあるメソッドの場合は紫色。
 
-These colors help you identify structural changes in your code between versions, time ranges, or canaries, and how they affect performance.
+これらの色は、バージョン、時間範囲、またはカナリア間のコードの構造的変化と、それらがパフォーマンスにどのように影響するかを識別するのに役立ちます。
 
-{{< img src="profiler/comparison_legend.png" alt="Legend for profile comparison." >}}
+{{< img src="profiler/comparison_legend.png" alt="プロファイル比較の凡例。" >}}
 
-Hover over methods in the profile to see specific metrics about the methods that are taking more or less time, or making fewer or more allocations, than in the compared profile.
+プロファイル内のメソッドにカーソルを合わせると、比較対象のプロファイルよりも時間が長いか短い、または割り当てが少ないか多いメソッドに関する特定のメトリクスが表示されます。
 
-{{< img src="profiler/compare_hover.png" alt="Hover over a method in the profile to see metrics comparison" >}}
+{{< img src="profiler/compare_hover.png" alt="プロファイル内のメソッドにカーソルを合わせると、メトリクスの比較が表示されます" >}}
 
-### Comparing recent versions
+### 最近のバージョンの比較
 
-On the Aggregation view, select a service to see its aggregated profile for a particular metric (for example, wall time) over the selected time frame. Then click **Compare** to compare it to the aggregated profile of another version. 
+集計ビューで、サービスを選択して、選択したタイムフレームでの特定のメトリック (たとえば、実時間) の集計プロファイルを表示します。次に、**Compare** をクリックして、別のバージョンの集計プロファイルと比較します。
 
-{{< img src="profiler/compare_recent_versions.mp4" alt="Opening the comparison view for two versions." video="true">}}
+{{< img src="profiler/compare_recent_versions.mp4" alt="2 つのバージョンの比較ビューを開きます。" video="true">}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

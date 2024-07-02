@@ -14,18 +14,18 @@ further_reading:
   text: Send an Agent Flare
 ---
 
-To start troubleshooting the Docker Agent Autodiscovery, run the `configcheck` init script command:
+Docker Agent オートディスカバリーのトラブルシューティングを開始するには、`configcheck` 初期化スクリプトコマンドを実行します。
 
 ```shell
-docker exec -it <AGENT_CONTAINER_NAME> agent configcheck -v
+docker exec -it <AGENT_コンテナ名> agent configcheck -v
 ```
 
-**Note**: The `-v` option allows you to see all templates including the one that are unresolved.
+**注**: `-v` オプションを使用すると、未解決のテンプレートも含め、すべてのテンプレートを確認できます。
 
-For example, the following example is a valid Autodiscovery configuration for a Redis template being loaded from a Docker label annotation&mdash;not the default `redisdb.d/auto_conf.yaml` file:
+以下は、デフォルトの `redisdb.d/auto_conf.yaml` ファイルではなく、Docker ラベルアノテーションから読み込み中の Redis テンプレートの有効なオートディスカバリーコンフィギュレーションの例を示しています。
 
 ```text
-# docker exec -it <AGENT_CONTAINER_NAME> agent configcheck -v
+# docker exec -it <AGENT_コンテナ名> agent configcheck -v
 .
 ..
 ...
@@ -45,10 +45,10 @@ Auto-discovery IDs:
 * docker://81e66fd4c948a502b4428417d8cf2ebc58caaff55a6e5879a41887057342aec2
 ```
 
-The following examples show issues that could appear when failing to load a valid Autodiscovery configuration for a Redis template:
+次の例は、Redis テンプレートの有効なオートディスカバリーコンフィギュレーションの読み込みに失敗した場合に表示される問題を示しています。
 
 ```text
-# docker exec -it <AGENT_CONTAINER_NAME> agent configcheck -v
+# docker exec -it <AGENT_コンテナ名> agent configcheck -v
 .
 ..
 ...
@@ -68,9 +68,9 @@ instances:
   port: '%%port%%'
 ```
 
-If you're still unsure about the issue, reach out to the [Datadog support team][1] with [a flare][2] from your Agent.
+問題について懸念がある場合は、Agent の[フレア][2]を使用して [Datadog サポートチーム][1]までご連絡ください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

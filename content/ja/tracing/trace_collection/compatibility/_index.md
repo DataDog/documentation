@@ -1,6 +1,5 @@
 ---
 title: Compatibility Requirements
-kind: documentation
 type: multi-code-lang
 description:
 further_reading:
@@ -14,12 +13,12 @@ aliases:
   - /tracing/setup_overview/compatibility_requirements/
 ---
 
-Choose your language to see the compatibility requirements and supported integrations for Datadog APM.
+Datadog APM の互換性要件とサポートされているインテグレーションを確認するには、言語を選択してください。
 
 {{< partial name="apm/apm-compatibility.html" >}}
 
 <br>
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

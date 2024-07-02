@@ -26,7 +26,7 @@
 "categories":
 - data stores
 - sap
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md"
 "display_on_public_website": true
@@ -67,9 +67,9 @@
 
 This check monitors [SAP HANA][1] 2.0, SPS 2 through the Datadog Agent.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The SAP HANA check is included in the [Datadog Agent][2] package. To use this integration, you need to manually install the [hdbcli][3] library.
 
@@ -148,7 +148,7 @@ To learn how to set the port number for HANA tenant, single-tenant, and system d
    GRANT DD_MONITOR TO <USER>;
    ```
 
-### Configuration
+### 構成
 
 1. Edit the `sap_hana.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your sap_hana performance data. See the [sample sap_hana.d/conf.yaml][5] for all available configuration options.
 
@@ -158,21 +158,21 @@ To learn how to set the port number for HANA tenant, single-tenant, and system d
 
 Run the [Agent's status subcommand][7] and look for `sap_hana` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "sap_hana" >}}
 
 
-### Events
+### イベント
 
 SAP HANA does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "sap_hana" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

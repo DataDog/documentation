@@ -4,7 +4,7 @@
 - cloud
 - log collection
 - mobile
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon Cognito metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_cognito/"
@@ -29,9 +29,9 @@ Amazon Cognito is a service that you can use to create unique identities for you
 
 Enable this integration to see your Cognito Advanced Security metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -60,21 +60,21 @@ Configure Amazon Cognito to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][6]
     - [Add a manual trigger on the CloudWatch Log Group][7]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_cognito" >}}
 
 
-### Events
+### イベント
 
 The Amazon Cognito integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Cognito integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

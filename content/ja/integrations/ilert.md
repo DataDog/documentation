@@ -26,7 +26,7 @@
 - incidents
 - issue tracking
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/ilert/README.md"
 "display_on_public_website": true
@@ -78,7 +78,7 @@ Integrate with ilert to:
 - Tackle incidents and set up escalation policies as they occur
 - Set up a daily reminder of who is on-call
 
-## Setup
+## セットアップ
 
 ### ilert
 
@@ -135,21 +135,21 @@ Integrate with ilert to:
 
 4. Click Save.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The ilert integration does not include any metrics.
 
-### Events
+### イベント
 
 Your ilert triggered and resolved events appear in the ilert platform dashboard.
 
-### Service Checks
+### サービスチェック
 
 The ilert integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog Support][9].
 

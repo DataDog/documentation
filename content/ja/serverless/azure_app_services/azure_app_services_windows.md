@@ -74,7 +74,7 @@ For example:
 - Extension `2.3.101` uses the Tracer v`2.3.1`
 - Extension `2.3.200` uses the Tracer v`2.3.2`
 
-### Installation
+### インストール
 
 1. Configure the [Azure integration][1] to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_services.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and improves the overall experience of using Datadog with Azure App Services.
 
@@ -177,7 +177,7 @@ Learn more about [custom metrics][12].
 
 4. Datadog recommends doing regular updates to the latest version of the extension to ensure optimal performance, stability, and availability of features. Note that both the initial install and subsequent updates require your web app to be fully stopped in order to install/update successfully.
 
-### Installation
+### インストール
 
 1. Configure the [Azure integration][1] to monitor your web app or function. Verify it is configured correctly by ensuring that you see the corresponding `azure.app_service.count` or `azure.functions.count` metric in Datadog. **Note**: This step is critical for metric/trace correlation, functional trace panel views, and avoiding various broken user experiences on the Datadog site.
 
@@ -251,7 +251,7 @@ If you haven't already, set up the [Datadog-Azure integration][1] first.
 
 Datadog's Azure App Service Node.js extension supports Azure App Service Web Apps. Function Apps are not supported.
 
-### Installation
+### インストール
 
 1. Configure the [Datadog-Azure integration][1] to monitor your Azure Web App. To verify, check that your Web App is counted in the `azure.app_service.count` metric in Datadog. 
 
@@ -445,7 +445,7 @@ Many organizations use [Azure Resource Management (ARM) templates][8] to impleme
 
 {{% aas-workflow-windows %}}
 
-## Troubleshooting
+## トラブルシューティング
 
 ### If your apps are identified as being misconfigured in the Serverless View and/or you are missing corresponding metrics for your traces
 

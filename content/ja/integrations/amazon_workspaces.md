@@ -5,9 +5,9 @@
 - "cloud"
 - "aws"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track failed connections, session latency, unhealthy workspaces, and more."
+"description": "失敗した接続、セッションのレイテンシー、正常に動作していないワークスペースなどを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_workspaces/"
 "draft": false
 "git_integration_title": "amazon_workspaces"
@@ -30,9 +30,9 @@ Amazon WorkSpaces is a fully managed, secure desktop computing service which run
 
 Enable this integration to see in Datadog all your Amazon WorkSpaces metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first. There are no other installation steps that need to be performed.
 
@@ -57,23 +57,23 @@ Configure Amazon WorkSpaces to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_workspaces" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The Amazon WorkSpaces integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon WorkSpaces integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

@@ -30,7 +30,7 @@
 "categories":
 - "cloud"
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/vsphere/README.md"
 "display_on_public_website": true
@@ -73,13 +73,13 @@
 
 This check collects resource usage metrics from your vSphere cluster-CPU, disk, memory, and network usage. It also watches your vCenter server for events and emits them to Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The vSphere check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your vCenter server.
 
-### Configuration
+### 構成
 
 In the **Administration** section of vCenter, add a read-only user called `datadog-readonly` and apply the read-only user permissions to the resources that need monitoring. To monitor all child objects in the resource hierarchy, select the "Propagate to children" option. 
 
@@ -99,11 +99,11 @@ If you are configuring the integration for the first time or if you want to bene
 
 Run the [Agent's status subcommand][6] and look for `vsphere` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 Depending of the `collection_level` value you set in your check configuration, not all metrics below are collected. See [Data Collection Levels][7] to display metrics collected for a given collection.
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "vsphere" >}}
 
 
@@ -124,7 +124,7 @@ collect_per_instance_filters:
 
 `disk` metrics are specific for each disk on the host, therefore these metrics need to be enabled using `collect_per_instance_filters` to be collected.
 
-### Events
+### イベント
 
 This check watches vCenter's Event Manager for events and emits them to Datadog. The check defaults to emit the following event types:
 
@@ -140,25 +140,25 @@ This check watches vCenter's Event Manager for events and emits them to Datadog.
 
 However, events can be added or removed using the `vsphere.d/conf.yaml` file. See the `include_events` parameter section in the [sample vsphere.d/conf.yaml][4].
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "vsphere" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-- [Troubleshooting duplicated hosts with vSphere][11]
+- [vSphere による重複ホストのトラブルシューティング][11]
 
-### Limiting VMs
+### VM を制限する
 
-You can limit the number of VMs pulled in with the VMWare integration using the `vsphere.d/conf.yaml` file. See the `resource_filters` parameter section in the [sample vsphere.d/conf.yaml][4].
+VMWare インテグレーションで取り込む VM の数は、`vsphere.d/conf.yaml` ファイルを使用して制限することができます。[サンプル vsphere.d/conf.yaml][4] の `resource_filters` パラメーターのセクションを参照してください。
 
-### Monitoring vSphere Tanzu Kubernetes Grid (TKG)
+### vSphere Tanzu Kubernetes Grid (TKG) の監視
 
-The Datadog vSphere integration collects metrics and events from your [TKG][12] VMs and control plane VMs automatically. To collect more granular information about your TKG cluster, including container-, pod-, and node-level metrics, you can install the [Datadog Agent][13] on your cluster. See the [distribution documentation][14] for example configuration files specific to TKG.
+Datadog vSphere インテグレーションは、[TKG][12] VM とコントロールプレーン VM からメトリクスとイベントを自動的に収集します。コンテナ、ポッド、ノードレベルのメトリクスを含む、TKG クラスターのより詳細な情報を収集するには、クラスターに [Datadog Agent][13] をインストールすることができます。TKG に特化したコンフィギュレーションファイルの例については、[ディストリビューションドキュメント][14]を参照してください。
 
-## Further Reading
+## その他の参考資料
 
-- [Monitor vSphere with Datadog][15]
+- [Datadog で vSphere を監視する][15]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/vsphere/images/vsphere_graph.png

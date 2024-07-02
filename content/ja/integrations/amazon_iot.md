@@ -6,7 +6,7 @@
 - "cloud"
 - "iot"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key AWS IoT Core metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_iot/"
@@ -31,9 +31,9 @@ AWS IoT Core is a managed cloud platform that lets connected devices easily and 
 
 Enable this integration to see in Datadog all your IOT metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -58,23 +58,23 @@ Configure AWS IoT Core to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_iot" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The AWS IoT Core integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS IoT Core integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

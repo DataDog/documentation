@@ -11,20 +11,20 @@ further_reading:
   text: Get started with the Cluster Agent
 ---
 
-## Overview
+## 概要
 
-If you are using Docker, there are several container images available through GCR and ECR that you may want to use within your environment:
+Docker を使用している場合は、GCR と ECR を介して利用できる、環境内で使用できるコンテナイメージが複数あります。
 
 {{< tabs >}}
 {{% tab "GCR" %}}
 
-| Datadog service                          | GCR                                      | GCR Pull Command                                                  |
+| Datadog サービス                          | GCR                                      | GCR プルコマンド                                                  |
 |------------------------------------------|------------------------------------------|-------------------------------------------------------------------|
 | [Docker Agent][1]                        | [Docker Agent (v6+)][2]                  | `docker pull gcr.io/datadoghq/agent`                              |
 | Docker Agent (v 5)                       | [Docker Agent (v5)][2]                   | `docker pull gcr.io/datadoghq/docker-dd-agent`                    |
 | [DogStatsD][3]                           | [DogStatsD][4]                           | `docker pull gcr.io/datadoghq/dogstatsd`                          |
-| [Datadog Cluster Agent][5]               | [Cluster Agent][6]                       | `docker pull gcr.io/datadoghq/cluster-agent`                      |
-| [Synthetics Private Location Worker][7]  | [Synthetics Private Location Worker][8]  | `docker pull gcr.io/datadoghq/synthetics-private-location-worker` |
+| [Datadog クラスター Agent][5]               | [クラスター Agent][6]                       | `docker pull gcr.io/datadoghq/cluster-agent`                      |
+| [Synthetics プライベートロケーションワーカー][7]  | [Synthetics プライベートロケーションワーカー][8]  | `docker pull gcr.io/datadoghq/synthetics-private-location-worker` |
 
 
 [1]: /agent/docker/
@@ -38,13 +38,13 @@ If you are using Docker, there are several container images available through GC
 {{% /tab %}}
 {{% tab "ECR" %}}
 
-| Datadog service                         | Docker Hub                               | Docker Pull Command                                                     |
+| Datadog サービス                         | Docker Hub                               | Docker プルコマンド                                                     |
 |-----------------------------------------|------------------------------------------|-------------------------------------------------------------------------|
 | [Docker Agent][1]                       | [Docker Agent (v6+)][2]                  | `docker pull public.ecr.aws/datadog/agent`                              |
 | Docker Agent (v 5)                      | [Docker Agent (v5)][3]                   | `docker pull public.ecr.aws/datadog/docker-dd-agent`                    |
 | [DogStatsD][4]                          | [DogStatsD][5]                           | `docker pull public.ecr.aws/datadog/dogstatsd`                          |
-| [Datadog Cluster Agent][6]              | [Cluster Agent][7]                       | `docker pull public.ecr.aws/datadog/cluster-agent`                      |
-| [Synthetics Private Location Worker][8] | [Synthetics Private Location Worker][9]  | `docker pull public.ecr.aws/datadog/synthetics-private-location-worker` |
+| [Datadog クラスター Agent][6]              | [クラスター Agent][7]                       | `docker pull public.ecr.aws/datadog/cluster-agent`                      |
+| [Synthetics プライベートロケーションワーカー][8] | [Synthetics プライベートロケーションワーカー][9]  | `docker pull public.ecr.aws/datadog/synthetics-private-location-worker` |
 
 
 [1]: /agent/docker/
@@ -59,9 +59,9 @@ If you are using Docker, there are several container images available through GC
 {{% /tab %}}
 {{< /tabs >}}
 
-If you need to use Docker Hub, see [Docker Hub][1].
+Docker Hub を使用する必要がある場合は、[Docker Hub][1] を参照してください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

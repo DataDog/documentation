@@ -15,54 +15,54 @@ further_reading:
 
 The treemap widget allows you to display proportions of one or more datasets. This widget can display a single dataset with corresponding proportions, or multiple datasets with nested proportions.
 
-{{< img src="dashboards/widgets/treemap/treemap_overview.png" alt="A treemap widget with unique page views stemming from the Real User Monitoring (RUM) dataset are shown at both the country and browser level. The outer groups - distinguished by color - shows the user's country.">}}
+{{< img src="dashboards/widgets/treemap/treemap_overview.png" alt="リアルユーザーモニタリング (RUM) データセットから得られたユニークなページビューを、国とブラウザレベルで表示したツリーマップウィジェットです。外側のグループ (色で区別) は、ユーザーの国を示しています。">}}
 
-## Configuration
+## 構成
 
-1. Select from the available data sources. 
-2. Configure the query, see the following resources for more information:
-    * Metrics: See the [querying ][1] documentation to configure a metric query.
-    * Events: See the [log search][2] documentation to configure a log event query.
-3. (Optional) Modify query with a [formula][3].
-4. Customize your graph.
+1. 利用可能なデータソースから選択します。
+2. クエリを構成します。詳しくは、次の資料をご覧ください。
+    * メトリクス: メトリクスのクエリを構成するには、[クエリ作成][1]のドキュメントを参照してください。
+    * イベント: ログイベントクエリの構成については、[ログ検索][2]に関するドキュメントを参照してください。
+3. (オプション) [式][3]でクエリを修正します。
+4. グラフをカスタマイズします。
 
-## Customization
+## カスタマイズ
 
-### Context links
+### コンテキストリンク
 
-[Context links][4] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages (in Datadog, or third-party).
+[コンテキストリンク][4]は、デフォルトで有効になっており、オンまたはオフに切り替えることができます。コンテキストリンクは、ダッシュボードウィジェットと他のページ (Datadog 内、またはサードパーティ製) の橋渡しをします。
 
-## Display and interaction
+## 表示とインタラクション
 
-### Filter and focus
+### フィルターとフォーカス
 
-In the case where multiple groups of data are plotted at once, you can filter the widget to a single category and view proportions within it.
+複数のデータ群を一度にプロットする場合、ウィジェットを 1 つのカテゴリーにフィルターし、その中での比率を表示することが可能です。
 
-To filter and focus on a single category, hover over the outer portion of the category, and click. To go back to the previous view, click the **back** button on the top left header of the widget.
+フィルタリングして 1 つのカテゴリーにフォーカスするには、カテゴリーの外側の部分にカーソルを合わせてクリックします。前のビューに戻るには、ウィジェットの左上のヘッダーにある **back** ボタンをクリックします。
 
-{{< img src="dashboards/widgets/treemap/focus_animation.mp4" alt="Animation showing how to filter and view a single category at a time in the treemap widget." video="true">}}
+{{< img src="dashboards/widgets/treemap/focus_animation.mp4" alt="ツリーマップウィジェットで、カテゴリーを 1 つずつフィルタリングして表示する方法をアニメーションで説明します。" video="true">}}
 
-### Accessing the context menu
+### コンテキストメニューにアクセスする
 
-To access the context menu, first hover over an individual category: this can be a nested category, or group - such as **Canada**, or **Canada > Edge** in the following example. This reveals a dropdown button in the top right corner. When clicked, the context menu appears.
+コンテキストメニューにアクセスするには、まず個々のカテゴリーにカーソルを合わせます。カテゴリーは、ネストしたカテゴリーやグループ (次の例では **Canada** や **Canada &gt; Edge** など) であることがあります。これにより、右上隅にドロップダウンボタンが表示されます。クリックすると、コンテキストメニューが表示されます。
 
-{{< img src="dashboards/widgets/treemap/context_menu_dropdown.png" alt="The dropdown arrow button is revealed when hovering over a category">}}
+{{< img src="dashboards/widgets/treemap/context_menu_dropdown.png" alt="カテゴリーにカーソルを合わせると、ドロップダウンボタンが表示されます">}}
 
-### Full-screen
+### 全画面
 
-Viewing the treemap widget in full-screen reveals the standard set of [full-screen options][5].
+ツリーマップウィジェットを全画面表示すると、標準の[全画面表示オプション][5]のセットが表示されます。
 
-## Pie chart widget
+## 円グラフウィジェット
 
-Like the treemap widget, the [pie chart widget][8] can also be used to display nested proportions. The primary difference between the two is that the pie chart displays proportions in radial slices, and the treemap displays nested rectangles.
+ツリーマップウィジェットのように、[円グラフウィジェット][8]もネストされた比率を表示するために使用することができます。両者の主な違いは、円グラフは放射状のスライスで比率を表示し、ツリーマップはネストされた長方形を表示する点です。
 
 ## API
 
-This widget can be used with the **[Dashboards API][6]**. See the following table for the [widget JSON schema definition][7]:
+このウィジェットは **[Dashboards API][6]** で使用できます。[ウィジェット JSON スキーマ定義][7]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

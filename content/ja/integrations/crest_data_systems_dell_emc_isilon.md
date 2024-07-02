@@ -41,7 +41,7 @@
 - caching
 - data stores
 - marketplace
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -113,34 +113,34 @@
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## Overview
+## 概要
 
-This integration monitors the performance and usage of Dell EMC Isilon cluster and nodes. It captures crucial metrics and provides insights into the health and operation of the Dell EMC Isilon cluster. This integration also supports monitors to alert for the CPU, Memory, and Disk Usage of each Node and Cluster.
+このインテグレーションは、Dell EMC Isilon クラスターとノードのパフォーマンスと使用量を監視します。重要なメトリクスを取得し、Dell EMC Isilon クラスターの健全性と運用に関する洞察を提供します。このインテグレーションは、各ノードおよびクラスターの CPU、メモリ、およびディスクの使用量を警告するモニターもサポートします。
 
-| Dashboard Name      | Description                                                                             |
+| ダッシュボード名      | 説明                                                                             |
 | ------------------- | --------------------------------------------------------------------------------------- |
-| Cluster Information | This dashboard provides cluster level information.                                      |
-| Node Details        | This dashboard provides node level information.                                         |
-| Protocol Details    | This dashboard provides cluster wide protocol details.                                  |
-| File System         | This dashboard provides file system details at the node level.                          |
-| Quota Information   | This dashboard provides quota information.                                              |
-| Monitors Summary    | This dashboard provides a summary of monitors, which are supported by this integration. |
+| クラスター情報 | このダッシュボードでは、クラスターレベルの情報を提供します。                                      |
+| ノードの詳細        | このダッシュボードでは、ノードレベルの情報を提供します。                                         |
+| プロトコルの詳細    | このダッシュボードでは、クラスター全体のプロトコルの詳細を提供します。                                  |
+| ファイルシステム         | このダッシュボードでは、ノードレベルのファイルシステムの詳細を提供します。                          |
+| クォータ情報   | このダッシュボードでは、クォータ情報を提供します。                                              |
+| モニター概要    | このダッシュボードでは、このインテグレーションでサポートされるモニターの概要を提供します。 |
 
-## Support
+## サポート
 
-For support or feature requests, contact Crest Data through the following channels:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data にお問い合わせください。
 
 - Support Email: [datadog.integrations@crestdata.ai][10]
 - Sales Email: [datadog-sales@crestdata.ai][11]
 - Website: [crestdata.ai][3]
-- FAQ: [Crest Data Datadog Marketplace Integrations FAQ][8]
+- よくあるご質問: [Crest Data Datadog Marketplace インテグレーションのよくあるご質問][8]
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
 - [Monitor Dell EMC Isilon with the Crest Data integration in the Datadog Marketplace][1]
-- [Setup Guide: Dell EMC Isilon Monitors in Datadog Platform][2]
+- [セットアップガイド: Datadog Platform における Dell EMC Isilon モニター][2]
 
 [1]: https://www.datadoghq.com/blog/dell-emc-isilon-monitoring-crest-data-systems-datadog-marketplace/
 [2]: https://www.crestdata.ai/data_sheet/datadog-setup-monitor/
@@ -154,4 +154,4 @@ Additional helpful documentation, links, and articles:
 [10]: mailto:datadog.integrations@crestdata.ai
 [11]: mailto:datadog-sales@crestdata.ai
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-dell-emc-isilon" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-dell-emc-isilon" target="_blank">こちらをクリック</a>してください。

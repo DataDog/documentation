@@ -1,6 +1,5 @@
 ---
 title: Understand API Test Timings And Troubleshoot Variations
-kind: documentation
 description: Understand API test timings and troubleshoot their variations.
 aliases:
 - /synthetics/api_test_timing_variations
@@ -11,116 +10,116 @@ further_reading:
 ---
 
 
-## Overview
+## 概要
 
-You can identify bottlenecks in the communication between your server and the client with [timing metrics][1] collected by Synthetic API tests.
-
-
-## Timing Metrics
+Synthetic API テストで収集した[タイミングメトリクス][1]を用いて、サーバーとクライアント間の通信におけるボトルネックを特定することができます。
 
 
-Synthetic tests collect [metrics][1] that measure the following: 
+## タイミングメトリクス
 
 
-### Redirection time
-
-The `synthetics.http.redirect.time` metric measures the total time spent in redirects. All other network timings (such as DNS resolution and TCP connection) correspond to the last request. 
-
-For example, an HTTP test with **Follow Redirects** selected loads Page A for a total of `35 ms`, which redirects to Page B, which loads for a total of `40 ms`, and redirects to Page C. The redirect timing is calculated as `35 ms + 40 ms = 75 ms` and the load time of Page C is split among all other timings including DNS resolution and TCP connection.
-
-For more information about follow redirects, see [HTTP Tests][2].
+Synthetic テストは以下を測定する[メトリクス][1]を収集します。
 
 
-The `synthetics.http.redirect.time` metric is only measured if redirects occur during the Synthetics HTTP test run. 
+### リダイレクト時間
 
-### DNS resolution time
+`synthetics.http.redirect.time` メトリクスは、リダイレクトに費やされた合計時間を測定します。その他のネットワークのタイミング (DNS の解決や TCP 接続など) はすべて最後のリクエストに対応します。
 
-The `synthetics.dns.response.time` metric and `*.dns.time` metrics measure the time spent resolving the domain name. Synthetic API tests use common DNS servers for domain name resolution, such as Google, CloudFlare, AWS, and Azure. You can override these servers with [private locations][3] or [DNS tests][4]. 
+例えば、**Follow Redirects** を選択した HTTP テストでは、ページ A を合計 `35 ms` で読み込み、ページ B に読み込み時間合計 `40 ms` でリダイレクトした後、ページ C にリダイレクトします。リダイレクトのタイミングは `35 ms + 40 ms = 75 ms` で計算でき、ページ C の読み込み時間は DNS 解決と TCP その他接続を含むその他すべてのタイミングで分割されます。
 
-These metrics are only measured when the API test URL field contains a domain name. If you use an IP address, DNS resolution is skipped and no timeseries appear for these metrics.
-
-
-In case of any redirection, the DNS resolution time only corresponds to the last request.
-
-### TCP connection time
-
-The `*.connect.time` metrics measure the total time spent establishing a TCP connection with the server. 
-
-In case of any redirection, the TCP connection time only corresponds to the last request.
-
-### SSL handshake time
-
-The `synthetics.http.ssl.time` and the `synthetics.ssl.hanshake.time` metrics measure the time spent in SSL handshake. 
-
-These metrics are only collected if the request goes over HTTPS, and not HTTP. 
-
-In case of any redirection, the SSL handshake timing only corresponds to the last request.
+これに続くリダイレクトについて詳しくは、[HTTP テスト][2]を参照してください。
 
 
-### Time to first byte
+`synthetics.http.redirect.time` メトリクスは、Synthetics HTTP テストの実行中にリダイレクトが発生した場合のみ測定されます。
 
-The `synthetics.http.firstbyte.time` metric measures the time between the moment the connection was established and the moment the Datadog client received the first byte of the response. This timing includes all time spent sending data in the request. 
+### DNS 解決時間
+
+`synthetics.dns.response.time` メトリクスと `*.dns.time`メトリクスは、ドメイン名の解決にかかった時間を測定します。Synthetic API テストでは、ドメイン名の解決に Google、CloudFlare、AWS、Azure などの一般的なDNS サーバーを使用しています。これらのサーバーは[プライベートロケーション][3]または [DNS テスト][4]でオーバーライドできます。
+
+これらのメトリクスは、API テストの URL フィールドにドメイン名が含まれている場合にのみ計測されます。IP アドレスを使用すると、DNS 解決がスキップされ、これらのメトリクスの時系列データは表示されません。
 
 
+リダイレクトがあった場合、DNS 解決時間は最後のリクエストにのみ対応します。
 
-In case of any redirection, the time to first byte only corresponds to the last request.
+### TCP 接続時間
 
-### Download time
+`*.connect.time` メトリクスは、サーバーとの TCP 接続の確立に要した総時間を測定します。
 
-The `synthetics.http.download.time` metric measures the time between the moment the Datadog client receives the first byte of the response and the moment it finishes downloading the entire response. Generally, the bigger the response body, the higher this timing will be. 
+リダイレクトがあった場合、TCP 接続時間は最後のリクエストにのみ対応します。
 
-In the case the response does not have a body, this timing is null.
+### SSL ハンドシェイク時間
 
-In case of any redirection, the download time only corresponds to the last request.
+`synthetics.http.ssl.time` および `synthetics.ssl.hanshake.time` メトリクスは、SSL ハンドシェイクに費やした時間を測定します。
 
-### Total response time
+これらのメトリクスは、リクエストが HTTP ではなく HTTPS を経由した場合にのみ収集されます。
 
-The `*.response.time` metrics measure the total time between the moment Synthetics starts and the moment Synthetic finishes the request. The response time is the sum of all network timings. 
+リダイレクトがあった場合、SSL ハンドシェイク時間は最後のリクエストにのみ対応します。
 
-For example, the total response time for an HTTP test with no redirections on an HTTPS endpoint:  `synthetics.http.response.time = synthetics.http.dns.time + synthetics.http.connect.time + synthetics.http.ssl.time + synthetics.http.firstbyte.time + synthetics.http.download.time`.
 
-## Timing variations
+### 最初のバイト受信時間
 
-Variations in API test network timing metrics can occur when there is a bottleneck or delay in any stage of the request, from the redirection to the download of the response body. 
-
-Identify the following behaviors: 
-
-- If the variation is observed as a general trend or a sudden spike
-- If the variation only occurs at a specific stage of the request. For example, on the DNS timings.
-- If the impacted Synthetics test is running from multiple locations, whether the variation is localized to a single location or widespread
-- If the variation only occurs for a single URL, domain, or subdomain; or if it is impacting all tests
+`synthetics.http.firstbyte.time` メトリクスは、接続が確立されてから Datadog クライアントが応答の最初のバイトを受信した時までの時間を測定します。これには同じリクエストでのデータ送信に費やしたすべての時間が含まれます。
 
 
 
-For every timing metric measured, you can describe variations with the following factors:
+リダイレクトがあった場合、最初のバイト受信時間は最後のリクエストにのみ対応します。
 
-### Redirection time
-The redirection time is the sum of all redirects in a request. Variations at any stage of the HTTP request, from the DNS resolution to the download, can noticeably increase the redirection timing. 
+### ダウンロード時間
 
-For example, any delay in DNS resolution impacts the redirection timing because redirections require API tests to resolve multiple domains.
+`synthetics.http.download.time` メトリクスは、Datadog クライアントが応答の最初のバイトを受信してから全体の応答のダウンロードが終了した時までの時間を測定します。一般的に、応答の本文が大きいほど時間も長くなります。
+
+応答に本文がない場合、このタイミングは null となります。
+
+リダイレクトがあった場合、ダウンロード時間は最後のリクエストにのみ対応します。
+
+### 合計応答時間
+
+`*.response.time` メトリクスは、Synthetics が起動してから Synthetics がリクエストを終了するまでの時間を測定します。応答時間はすべてのネットワーク時間の合計となります。
+
+例えば、HTTPS エンドポイントでリダイレクトを行わない HTTP テストの総応答時間などがこれにあたります: `synthetics.http.response.time = synthetics.http.dns.time + synthetics.http.connect.time + synthetics.http.ssl.time + synthetics.http.firstbyte.time + synthetics.http.download.time`
+
+## タイミングのバリエーション
+
+API テストネットワークのタイミングメトリクスのバリエーションは、リダイレクトから応答本文のダウンロードまで、リクエストのあらゆる段階でボトルネックや遅延が発生した場合に起こります。
+
+次の動作を確認してください。
+
+- バリエーションが全体的な傾向としてみられるのか、突如急増しているのか
+- バリエーションがリクエストの特定の段階でのみ発生していないか (例: DNS のタイミングなど)
+- 影響を受けた Synthetics テストが複数の場所で実行されている場合、バリエーションが 1 つの場所に限定されているのか、それとも広範囲に渡っているか
+- バリエーションが単一の URL、ドメイン、サブドメインでのみ発生しているのか、またはすべてのテストに影響が及んでいるか
 
 
-### DNS resolution time
-An increase in DNS resolution time can occur with additional latency from authoritative servers.
 
-### TCP connection time
-Variations of the TCP handshake can occur because of the network and server load, the size of the request and response messages, and the distance between the Synthetics managed or [private location][5] and the server.
+測定するすべてのタイミングメトリクスについて、以下のような要素でバリエーションを確認することができます。
 
-### SSL handshake time
-Variations of the SSL handshake time can occur because of the server load (SSL handshakes are usually CPU intensive), the network load, and the distance between the Synthetics managed or [private location][5] and the server. Issues with CDN can increase SSL handshake time.
+### リダイレクト時間
+リダイレクト時間は、リクエストに含まれるすべてのリダイレクトの合計です。DNS 解決からダウンロードまで、HTTP リクエストのどの段階でもバリエーションが発生するとリダイレクトのタイミングが顕著に増加します。
 
-### Time To first byte
-Variations of the Time to first byte can occur because of the network and server load and the distance between the Synthetics managed or [private location][5] and the server. For example, a higher network load or the rerouting of traffic caused by an unavailable CDN can negatively impact Time to First Byte timing.
-
-### Download time
-Variations in download time can occur because of changes in the response size. The downloaded body size is available on test results and the `synthetics.http.response.size` metric.
-
-Wherever variations can occur because of network load, you can use [Network Performance Monitoring][6] and [Synthetics ICMP Tests][7] to identify potential bottlenecks.
-
-In cases where variations can occur because of server load, use the [Datadog Agent][8] and its [integrations][9] to identify potential delays. 
+例えば、リダイレクトには複数のドメインを解決するための API テストが必要となるため、DNS 解決が遅れるとリダイレクトのタイミングにも影響が生じます。
 
 
-## Further Reading
+### DNS 解決時間
+信頼できるサーバーからのレイテンシーが加わることで、DNS 解決時間が増加することがあります。
+
+### TCP 接続時間
+TCP ハンドシェイクのバリエーションは、ネットワークやサーバーの負荷、リクエストメッセージや応答メッセージのサイズ、Synthetics のマネージドまたは[プライベートロケーション][5]とサーバーとの距離などによって発生します。
+
+### SSL ハンドシェイク時間
+SSL ハンドシェイク時間のバリエーションは、サーバーの負荷 (SSL ハンドシェイクは通常、CPU に負荷がかかります)、ネットワークの負荷、および Syntheticsのマネージドまたは[プライベートロケーション][5]からサーバーまでの距離によって発生します。また、CDN の問題により SSL ハンドシェイク時間が長くなることがあります。
+
+### 最初のバイト受信時間
+最初のバイト受信時間のバリエーションは、ネットワークやサーバーの負荷、および Synthetics のマネージドまたは[プライベートロケーション][5]からサーバーまでの距離によって発生します。例えば、ネットワークの負荷が高くなったり、CDN が利用できないことによるトラフィックのリルートが発生したりすると、最初のバイト受信時間のタイミングに悪影響が生じます。
+
+### ダウンロード時間
+応答サイズの変化により、ダウンロード時間のバリエーションが発生することがあります。ダウンロードされた本文のサイズは、テスト結果と`synthetics.http.response.size` メトリクスで確認できます。
+
+ネットワークの負荷によりバリエーションが起こりうる場所では、[ネットワークパフォーマンスモニタリング][6]や[Synthetics ICMP テスト][7]を用いてて潜在的なボトルネックを特定することができます。
+
+サーバーの負荷によりバリエーションが起こりうる場合には、[Datadog Agent][8]とその[インテグレーション][9]を使用して、潜在的な遅延を特定します。
+
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

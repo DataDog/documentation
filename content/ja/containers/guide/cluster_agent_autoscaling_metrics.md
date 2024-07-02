@@ -22,30 +22,30 @@ further_reading:
   text: Troubleshooting the Datadog Cluster Agent
 ---
 
-## Overview
+## 概要
 
-Horizontal Pod Autoscaling, introduced in [Kubernetes v1.2][1], allows autoscaling off of basic metrics like `CPU`, but it requires a resource called `metrics-server` to run alongside your application. As of Kubernetes v1.6, it is possible to autoscale off of [custom metrics][2].
+[Kubernetes v1.2][1] で導入された Horizontal Pod Autoscaling は、`CPU` などの基本的なメトリクスからオートスケールが可能ですが、アプリケーションと一緒に実行するために `metrics-server` というリソースが必要になります。Kubernetes v1.6 では、[カスタムメトリクス][2]からオートスケールを行うことができます。
 
-Custom metrics are user defined and are collected from within the cluster. As of Kubernetes v1.10, support for external metrics was introduced to autoscale off any metric from outside the cluster, such as those collected by Datadog.
+カスタムメトリクスは、ユーザー定義で、クラスター内から収集されます。Kubernetes v1.10 では、外部メトリクスのサポートが導入され、Datadog によって収集されたメトリクスなどのクラスター外からの任意のメトリクスに基づいてオートスケールされるようになりました。
 
-You must first register the Cluster Agent as the External Metrics Provider. Next, adapt your HPAs to rely on the Cluster Agent's provided metrics.
+まずは、Cluster Agent を External Metrics Provider として登録する必要があります。次に、Cluster Agent の提供するメトリクスに依拠するよう HPA を調整します。
 
-As of v1.0.0, the Custom Metrics Server in the Datadog Cluster Agent implements the External Metrics Provider interface for external metrics. This page explains how to set it up and how to autoscale your Kubernetes workload based on your Datadog metrics.
+v1.0.0 の時点で、Datadog Cluster Agent のカスタムメトリクスサーバーは、外部メトリクス用の External Metrics Provider インターフェイスを実装しています。このページでは、その設定方法と、Datadog メトリクスに基づいて Kubernetes ワークロードをオートスケーリングする方法について説明します。
 
-## Setup
+## セットアップ
 
-### Requirements
+### 要件
 
-1. Kubernetes >v1.10: you must register the External Metrics Provider resource against the API server.
-2. Enable the Kubernetes [aggregation layer][3].
+1. Kubernetes >v1.10: API サーバーに対して External Metrics Provider リソースを登録する必要があります。
+2. Kubernetes の[集計層][3]を有効化します。
 3. A valid [Datadog API Key **and** Application Key][4].
 
-### Installation
+### インストール
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-To enable the external metrics server with your Cluster Agent managed by the Datadog Operator, first [set up the Datadog Operator][1]. Then, provide a valid Datadog API Key, Application Key, and set the `features.externalMetricsServer.enabled` to `true` in your `DatadogAgent` custom resource:
+Datadog Operator で管理する Cluster Agent で外部メトリクスサーバーを有効にするには、まず [Datadog Operator のセットアップ][1]を行います。次に、有効な Datadog API キー、アプリケーションキーを提供し、`DatadogAgent` カスタムリソースで `features.externalMetricsServer.enabled` を `true` に設定します。
 
   ```yaml
   apiVersion: datadoghq.com/v2alpha1
@@ -63,9 +63,9 @@ To enable the external metrics server with your Cluster Agent managed by the Dat
         enabled: true
   ```
 
-The Operator automatically updates the necessary RBAC configurations and sets the corresponding `Service` and `APIService` for Kubernetes to use.
+Operator により必要な RBAC コンフィギュレーションが自動的に更新され、Kubernetes が利用可能な `Service` と `APIService` がそれぞれ設定されます。
 
-The keys can alternatively be set by referencing the names of pre-created `Secrets` and the data keys storing your Datadog API and Application Keys.
+キーは、あらかじめ作成された `Secrets` の名前と、Datadog API およびアプリケーションキーを格納したデータキーを参照することで設定することもできます。
   ```yaml
   apiVersion: datadoghq.com/v2alpha1
   kind: DatadogAgent
@@ -100,35 +100,35 @@ To enable the external metrics server with your Cluster Agent in Helm, update yo
 
   clusterAgent:
     enabled: true
-    # Enable the metricsProvider to be able to scale based on metrics in Datadog
+    # metricsProvider を有効化して Datadog のメトリクスに基づきスケール可能に設定
     metricsProvider:
       # clusterAgent.metricsProvider.enabled
-      # Set this to true to enable Metrics Provider
+      # メトリクスプロバイダーを有効にする場合は、true に設定
       enabled: true
   ```
 
-This automatically updates the necessary RBAC configurations and sets up the corresponding `Service` and `APIService` for Kubernetes to use.
+これにより必要な RBAC コンフィギュレーションが自動的に更新され、Kubernetes が利用可能な `Service` と `APIService` がそれぞれ設定されます。
 
-The keys can alternatively be set by referencing the names of pre-created `Secrets` containing the data keys `api-key` and `app-key` with the configurations `datadog.apiKeyExistingSecret` and `datadog.appKeyExistingSecret`.
+キーは、データキー `api-key` と `app-key` を含む、事前に作成された `Secrets` の名前を `datadog.apiKeyExistingSecret` と `datadog.appKeyExistingSecret` という構成で参照することで設定することもできます。
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 
 {{% tab "Manual (DaemonSet)" %}}
 
-#### Custom metrics server
+#### カスタムメトリクスサーバー
 
-To enable the Custom Metrics Server, first follow the instructions to [set up the Datadog Cluster Agent][1] within your cluster. Once you have verified a successful base deployment, edit your `Deployment` manifest for the Datadog Cluster Agent with the following steps:
+カスタムメトリクスサーバーを有効にするには、まずクラスタ内で [Datadog Cluster Agent のセットアップ][1] の指示に従います。ベースのデプロイが成功したことを確認したら、次の手順で Datadog Cluster Agent の `Deployment` マニフェストを編集します:
 
-1. Set `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` environment variable to `true`.
-2. Ensure you have **both** your environment variables `DD_APP_KEY` and `DD_API_KEY` set.
-3. Ensure you have your `DD_SITE` environment variable set to your Datadog site: {{< region-param key="dd_site" code="true" >}}. It defaults to the `US` site `datadoghq.com`.
+1. `DD_EXTERNAL_METRICS_PROVIDER_ENABLED` 環境変数を `true` に設定します。
+2. 環境変数 `DD_APP_KEY` と `DD_API_KEY` セットの**双方**があることを確認します。
+3. `DD_SITE` 環境変数を Datadog サイトに設定したことを確認します:  {{< region-param key="dd_site" code="true" >}}。デフォルトは `US` サイト `datadoghq.com` となります。
 
-#### Register the external metrics provider service
+#### 外部メトリクスプロバイダーサービスを登録する
 
-Once the Datadog Cluster Agent is up and running, apply some additional RBAC policies and set up the `Service` to route the corresponding requests.
+Datadog Cluster Agent が稼働したらいくつかの追加 RBAC ポリシーを適用し、`Service` を設定して対応するリクエストのルーティングを行います。
 
-1. Create a `Service` named `datadog-custom-metrics-server`, exposing the port `8443` with the following `custom-metric-server.yaml` manifest:
+1. `datadog-custom-metrics-server` という名前で `Service` を作成し、以下の `custom-metric-server.yaml` マニフェストでポート `8443` を公開します:
 
     ```yaml
     kind: Service
@@ -143,11 +143,11 @@ Once the Datadog Cluster Agent is up and running, apply some additional RBAC pol
         port: 8443
         targetPort: 8443
     ```
-    **Note:** The Cluster Agent by default is expecting these requests over port `8443`. However, if your Cluster Agent `Deployment` has set the environment variable `DD_EXTERNAL_METRICS_PROVIDER_PORT` to some other port value, change the `targetPort` of this `Service` accordingly.
+    **注意:** Cluster Agent はデフォルトで、これらのリクエストをポート  `8443` で受け取るようにになっています。しかし、Cluster Agent の `Deployment` が環境変数 `DD_EXTERNAL_METRICS_PROVIDER_PORT` に他のポート値を設定している場合は、それに応じてこの `Service` の `targetPort` を変更してください。
 
-    Apply this `Service` by running `kubectl apply -f custom-metric-server.yaml`
-2. Download the [`rbac-hpa.yaml` RBAC rules file][2].
-3. Register the Cluster Agent as an external metrics provider by applying this file:
+   `kubectl apply -f custom-metric-server.yaml` を実行してこの `Service` を適用します
+2.  [`rbac-hpa.yaml` RBAC ルールファイル][2]をダウンロードします。
+3. このファイルを適用して Cluster Agent を外部メトリクスプロバイダーに登録します:
     ```
     kubectl apply -f rbac-hpa.yaml
     ```
@@ -157,36 +157,36 @@ Once the Datadog Cluster Agent is up and running, apply some additional RBAC pol
 {{% /tab %}}
 {{< /tabs >}}
 
-Once enabled, the Cluster Agent is ready to fetch metrics for the HPA. There are two options:
-- [Autoscaling with DatadogMetric Queries](#autoscaling-with-datadogmetric-queries)
-- [Autoscaling without DatadogMetric Queries](#autoscaling-without-datadogmetric-queries)
+Cluster Agent が有効になれば、HPA 用のメトリクスの取得準備は完了です。以下の 2 つのオプションがあります。
+- [DatadogMetric クエリを使ったオートスケーリング](#autoscaling-with-datadogmetric-queries)
+- [DatadogMetric クエリを使わないオートスケーリング](#autoscaling-without-datadogmetric-queries)
 
-Datadog recommends using the `DatadogMetric` option. While this does require an additional step of deploying the `DatadogMetric` CustomResourceDefinition (CRD), this provides a lot more flexibility in the queries performed. If you do not use `DatadogMetric` queries, your HPAs use the native Kubernetes external metrics format, which the Cluster Agent translates into a Datadog metric query.
+Datadog は、`DatadogMetric` オプションの使用を推奨しています。これには、`DatadogMetric` CustomResourceDefinition (CRD) のデプロイという追加の手順が必要ですが、実行するクエリの柔軟性が高まります。`DatadogMetric` クエリを使用しない場合、HPA では Kubernetes のネイティブな外部メトリクス形式が使用され、これを Cluster Agent が Datadog のメトリクスクエリに変換します。
 
 If you are dual-shipping your metrics to multiple Datadog organizations, you can configure the Cluster Agent to fetch from these multiple endpoints for high availability. For more information, see the [Dual Shipping][5] documentation.
 
-## Autoscaling with DatadogMetric queries
+## DatadogMetric クエリを使ったオートスケーリング
 
-You can autoscale on a Datadog query by using the `DatadogMetric` [Custom Resource Definition (CRD)][6] and Datadog Cluster Agent versions `1.7.0` or above. This is a more flexible approach and allows you to scale with the exact Datadog query you would use in-app.
+`DatadogMetric` [Custom Resource Definition (CRD)][6] と Datadog Cluster Agent のバージョン `1.7.0` 以上を使用することで、Datadog のクエリでオートスケールを行うことができます。これはより柔軟なアプローチであり、アプリ内で使用する正確な Datadog クエリでのスケールが可能となります。
 
-### Requirements
+### 要件
 
-For autoscaling to work correctly, custom queries must follow these rules:
+オートスケールが正常に動作するには、カスタムクエリが以下のルールに従う必要があります。
 
-- The query **must** be syntactically correct, otherwise it prevents the refresh of **ALL** metrics used for autoscaling (effectively stopping autoscaling).
-- The query result **must** output only one series (otherwise, the results are considered invalid).
-- The query **should** yield at least two non-null timestamped points (it's possible to use a query that returns a single point, though in this case, autoscaling may use incomplete points).
+- クエリの構文は正確で**なければなりません**。正確でない場合、オートスケールに使用される**すべて**のメトリクスが更新されません (オートスケールが停止します)。
+- クエリ結果は 1 つの系列のみを出力**しなければなりません** (それ以上の場合、結果は無効とみなされます)。
+- クエリからは、少なくとも 2 つの非 NULL タイムスタンプを持つポイントの結果が得られる**必要があります** (1 つのポイントを返すクエリの使用も可能ですが、この場合オートスケールは不完全なポイントを使用する可能性があります)。
 
-**Note**: While the query is arbitrary, the start and end times are still set at `Now() - 5 minutes` and `Now()` by default.
+**注**: クエリは任意ですが、開始および終了時間はデフォルトで `Now() - 5 minutes` および `Now()` に設定されます
 
-### Setup DatadogMetric CRD
+### DatadogMetric CRD のセットアップ
 
-The Custom Resource Definition (CRD) for the `DatadogMetric` object can be added to your Kubernetes cluster by using Helm, the Datadog Operator, or Daemonset:
+`DatadogMetric` オブジェクトの Custom Resource Definition (CRD) は、Helm、Datadog Operator、または Daemonset を使用して Kubernetes クラスターに追加することができます。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` custom resource and set `features.externalMetricsServer.useDatadogMetrics` to `true`.
+`DatadogMetric` CRD の使用をアクティブにするには、`DatadogAgent` カスタムリソースを更新し、`features.externalMetricsServer.useDatadogMetrics` を `true` に設定します。
 
   ```yaml
   kind: DatadogAgent
@@ -204,12 +204,12 @@ To activate the usage of the `DatadogMetric` CRD update your `DatadogAgent` cust
         useDatadogMetrics: true
   ```
 
-The Operator automatically updates the necessary RBAC configurations and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
+Operator により必要な RBAC コンフィギュレーションが自動的に更新され、Cluster Agent に `DatadogMetric` リソースを介してこれらの HPA クエリを管理するよう指示します。
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-To activate usage of the `DatadogMetric` CRD update your [values.yaml][1] Helm configuration to set `clusterAgent.metricsProvider.useDatadogMetrics` to `true`. Then redeploy your Datadog Helm chart:
+`DatadogMetric` CRD の使用を有効にするには、[values.yaml][1] Helm のコンフィギュレーションを更新して、`clusterAgent.metricsProvider.useDatadogMetrics` を `true` に設定します。 その後、Datadog Helm チャートを再デプロイします:
 
   ```yaml
   clusterAgent:
@@ -217,41 +217,41 @@ To activate usage of the `DatadogMetric` CRD update your [values.yaml][1] Helm c
     metricsProvider:
       enabled: true
       # clusterAgent.metricsProvider.useDatadogMetrics
-      # Enable usage of DatadogMetric CRD to autoscale on arbitrary Datadog queries
+      # DatadogMetric CRD の使用を有効化し、任意の Datadog クエリでオートスケールを実行
       useDatadogMetrics: true
   ```
 
-**Note:** This attempts to install the `DatadogMetric` CRD automatically. If that CRD already exists prior to the initial Helm installation, it may conflict.
+**注意:** 操作を実行すると CRD の自動インストールが開始されます。CRD が初回の Herm のインストール前に既に存在している場合は競合が発生する可能性があります。
 
-This automatically updates the necessary RBAC files and directs the Cluster Agent to manage these HPA queries through these `DatadogMetric` resources.
+これにより必要な RBAC ファイルが自動的に更新され、Cluster Agent に `DatadogMetric` リソースを介してこれらの HPA クエリを管理するよう指示します。
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Manual (DaemonSet)" %}}
 To activate usage of the `DatadogMetric` CRD, follow these extra steps:
 
-1. Install the `DatadogMetric` CRD in your cluster.
+1. `DatadogMetric` CRD をクラスターにインストールします。
 
     ```shell
     kubectl apply -f "https://raw.githubusercontent.com/DataDog/helm-charts/master/crds/datadoghq.com_datadogmetrics.yaml"
     ```
 
-2. Update Datadog Cluster Agent RBAC manifest, it has been updated to allow usage of `DatadogMetric` CRD.
+2. Datadog Cluster Agent RBAC マニフェストを更新します (`DatadogMetric` CRD の使用を許可するために更新されています)。
 
     ```shell
     kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent-datadogmetrics/cluster-agent-rbac.yaml"
     ```
 
-3. Set the `DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` to `true` in the deployment of the Datadog Cluster Agent.
+3. Datadog Cluster Agent のデプロイで、`DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` を `true` に設定します。
 {{% /tab %}}
 {{< /tabs >}}
 
-### Create the DatadogMetric object
-Once the `DatadogMetric` custom resource has been added to your cluster, you can create `DatadogMetric` objects for your HPAs to reference. While any HPA can reference any `DatadogMetric`, Datadog recommends creating them in the same namespace as your HPA.
+### DatadogMetric オブジェクトの作成
+ `DatadogMetric` カスタムリソースがクラスターに追加されたら、HPA が参照する `DatadogMetric` オブジェクトを作成できます。どの HPA も任意の `DatadogMetric` を参照できますが、Datadog では HPA と同じネームスペースに作成することを推奨しています。
 
-**Note**: Multiple HPAs can use the same `DatadogMetric`.
+**注**: 複数の HPA を同じ `DatadogMetric` で使用できます。
 
-You can create a `DatadogMetric` with the following manifest:
+以下のマニフェストで `DatadogMetric` を作成できます。
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -262,8 +262,8 @@ spec:
   query: <CUSTOM_QUERY>
 ```
 
-#### Example DatadogMetric object
-For example, a `DatadogMetric` object to autoscale an NGINX deployment based on the `nginx.net.request_per_s` Datadog metric:
+#### サンプル DatadogMetric オブジェクト
+例えば、Datadog メトリクス `nginx.net.request_per_s` に基づいて NGINX デプロイをオートスケールする `DatadogMetric` オブジェクト:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -274,13 +274,13 @@ spec:
   query: max:nginx.net.request_per_s{kube_container_name:nginx}.rollup(60)
 ```
 
-### Use DatadogMetric in HPA
-Once your Cluster Agent has been set up and `DatadogMetric` created, update your HPA to reference this `DatadogMetric` relative to its namespace and name. The general format is to specify the metric for the HPA as a `type: External` and specify the metric name like `datadogmetric@<NAMESPACE>:<DATADOG_METRIC_NAME>`.
+### HPA での DatadogMetric の利用
+Cluster Agent をセットアップして、 `DatadogMetric` が作成されたら、HPA を更新して、そのネームスペースと名前に対応する `DatadogMetric` を参照するようにします。一般的なフォーマットとしては、HPA 用のメトリクスを `type: External` として指定し、`datadogmetric@<NAMESPACE>:<DATADOG_METRIC_NAME>` のようにメトリクス名を指定します。
 
-#### Example HPAs with DatadogMetric
-An HPA using the `DatadogMetric` named `nginx-requests`, assuming both objects are in namespace `nginx-demo`.
+#### DatadogMetric を使った HPA の例
+`nginx-requests` という名前の `DatadogMetric` を使用する HPA。両方のオブジェクトがネームスペース `nginx-demo` にあると想定。
 
-Using `apiVersion: autoscaling/v2`:
+`apiVersion: autoscaling/v2` を使用する場合: 
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -304,7 +304,7 @@ spec:
         value: 9
 ```
 
-Using `apiVersion: autoscaling/v2beta1`:
+`apiVersion: autoscaling/v2beta1` を使用する場合:
 
 ```yaml
 apiVersion: autoscaling/v2beta1
@@ -325,15 +325,15 @@ spec:
       targetValue: 9
 ```
 
-In these manifests:
-- The HPA is configured to autoscale the deployment called `nginx`.
-- The maximum number of replicas created is `3`, and the minimum is `1`.
-- The HPA relies on the `DatadogMetric` `nginx-requests` in the `nginx-demo` namespace.
+上記マニフェストの内容:
+- HPAは、`nginx` と呼ばれるデプロイを自動スケーリングするように構成されています。
+- 作成されるレプリカの最大数は `3` で、最小数は `1` です。
+- HPA は ネームスペース `nginx-demo` の `DatadogMetric` `nginx-requests` に依拠します。
 
-Once the `DatadogMetric` is linked to an HPA, the Datadog Cluster Agent marks it as active. The Cluster Agent then makes requests to Datadog for the query, stores the results in the `DatadogMetric` object, and provides the values to the HPA.
+`DatadogMetric` が HPA にリンクされたら、Datadog Cluster Agent がこれをアクティブに変更します。その後、Cluster Agent は Datadog にクエリをリクエストし、結果を `DatadogMetric` オブジェクトに格納し、その値を HPA に提供します。
 
-## Autoscaling without DatadogMetric queries
-If you do not want to autoscale with the `DatadogMetric` you can still create your HPAs with the native Kubernetes format. The Cluster Agent converts the HPA format into a Datadog metric query.
+## DatadogMetric クエリを使わないオートスケーリング
+`DatadogMetric` を使ったオートスケーリングを希望しない場合は、Kubernetes のネイティブな形式を使用して HPA を作成することができます。Cluster Agent が HPA の形式を Datadog メトリクスクエリに変換します。
 
 Once you have the Datadog Cluster Agent running and the service registered, create an [HPA][7] manifest and specify `type: External` for your metrics. This notifies the HPA to pull the metrics from the Datadog Cluster Agent's service:
 
@@ -348,8 +348,8 @@ spec:
             <TAG_KEY>: <TAG_VALUE>
 ```
 
-### Example HPAs without DatadogMetric
-An HPA manifest to autoscale off an NGINX deployment based off of the `nginx.net.request_per_s` Datadog metric using `apiVersion: autoscaling/v2`:
+### DatadogMetric を使わない HPA の例
+`apiVersion: autoscaling/v2` を使用し、Datadog メトリクス `nginx.net.request_per_s` に基づいて NGINX デプロイをオートスケールする HPA マニフェストです:
 
 ```yaml
 apiVersion: autoscaling/v2
@@ -373,7 +373,7 @@ spec:
         value: 9
 ```
 
-The following is the same HPA manifest as above using `apiVersion: autoscaling/v2beta1`:
+次のマニフェストは上の HPA マニフェストと同じですが、`apiVersion: autoscaling/v2beta1` を使用しています:
 ```yaml
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
@@ -396,30 +396,30 @@ spec:
       targetValue: 9
 ```
 
-In these manifests:
+上記マニフェストの内容:
 
-- The HPA is configured to autoscale the deployment called `nginx`.
-- The maximum number of replicas created is `3`, and the minimum is `1`.
-- The metric used is `nginx.net.request_per_s`, and the scope is `kube_container_name: nginx`. This format corresponds to Datadog's metrics format.
+- HPAは、`nginx` と呼ばれるデプロイを自動スケーリングするように構成されています。
+- 作成されるレプリカの最大数は `3` で、最小数は `1` です。
+- 使用されるメトリクスは `nginx.net.request_per_s` であり、スコープは `kube_container_name: nginx` です。この形式は、Datadog のメトリクス形式に対応しています。
 
 Every 30 seconds, Kubernetes queries the Datadog Cluster Agent to get the value of this metric and autoscales proportionally if necessary. For advanced use cases, it is possible to have several metrics in the same HPA. As noted in [Kubernetes horizontal pod autoscaling][8], the largest of the proposed values is the one chosen.
 
-### Migration
+### 移行
 
-Existing HPAs are automatically migrated using external metrics.
+既存の HPA は、外部メトリクスを使用して自動的に移行されます。
 
-When you set `DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` to `true` but you still have HPAs that do **not** reference a `DatadogMetric`, normal syntax (without referencing a `DatadogMetric` through `datadogmetric@...`) is still supported.
+`DD_EXTERNAL_METRICS_PROVIDER_USE_DATADOGMETRIC_CRD` を `true` に設定したものの、依然として `DatadogMetric` を参照**しない** HPA がある場合、通常の構文 (`datadogmetric@...` を使用した `DatadogMetric` を参照しない) がサポートされます。
 
-The Datadog Cluster Agent automatically creates `DatadogMetric` resources in its own namespace (their name starts with `dcaautogen-`) to accommodate this, allowing a smooth transition to `DatadogMetric`.
+Datadog Cluster Agent は、自動的にそのネームスペース (`dcaautogen-` で始まる名前) で `DatadogMetric` リソースを作成するため、`DatadogMetric` への移行がスムーズになります。
 
-If you choose to migrate an HPA later on to reference a `DatadogMetric`, the automatically generated resource is cleaned up by the Datadog Cluster Agent after a few hours.
+後で HPA を移行して `DatadogMetric` を参照するようにした場合、自動生成されたリソースは数時間後に Datadog Cluster Agent によりクリーンアップされます。
 
-## Cluster Agent querying
-The Cluster Agent performs the queries for the `DatadogMetric` objects every 30 seconds. The Cluster Agent also batches the metric queries performed into groups of 35. Therefore, 35 `DatadogMetric` queries are included in a single request to the Datadog metrics API.
+## Cluster Agent によるクエリの実行
+Cluster Agent は `DatadogMetric` オブジェクト用に 30 秒ごとにクエリを実行します。また、Cluster Agent は、実行されたメトリクスクエリを 35 件ずつグループ化します。したがって、Datadog メトリクス API に対する 1 つのリクエストには 35 件の`DatadogMetric` クエリが含まれます。
 
-By batching these queries, the Cluster Agent can perform them more efficiently and avoid being rate-limited.
+これらのクエリをまとめることで、Cluster Agent はより効率的にクエリを実行し、レート制限を避けることができます。
 
-This means that the Cluster Agent performs roughly 120 API requests per hour per 35 `DatadogMetric` objects. As you add more `DatadogMetric` objects or add the autoscaling functionality to additional Kubernetes clusters, this increases the number of calls to fetch metrics within the same org.
+以上のことから、Cluster Agent は  `DatadogMetric` オブジェクト 35 個あたり、1 時間につき約 120 件の API リクエストを実行することがわかります。`DatadogMetric` オブジェクトをさらに追加したり、オートスケーリング機能を別の Kubernetes クラスターにも追加したりすると、同一組織内でメトリクスを取得するコール数が増加します。
 
 The Cluster Agent also queries for the past five minutes of data by default for each of these metric queries. This is to ensure the Cluster Agent is scaling off *recent* data. However, if your metric queries are relying on data from one of the cloud integrations (AWS, Azure, GCP, etc.), these are [fetched at a slight delay][9] and are not covered within the five minute interval. In these cases, provide the environment variables to the Cluster Agent to increase the date range and data age allowed for the metric queries.
 
@@ -430,18 +430,18 @@ The Cluster Agent also queries for the past five minutes of data by default for 
   value: "900"
 ```
 
-## Troubleshooting
+## トラブルシューティング
 
-### DatadogMetric Status
-The Datadog Cluster Agent takes care of updating the `status` subresource of all `DatadogMetric` resources to reflect results from queries to Datadog. This is the main source of information to understand what happens if something is failing. You can run the following to get this information outputted for you:
+### DatadogMetric のステータス
+Datadog Cluster Agent は、Datadog へのクエリの結果を反映させるために、すべての `DatadogMetric` リソースの `status` サブリソースの更新を行います。これは動作が失敗した場合に起こる状況を理解するための主な情報源となります。以下を実行してこの情報を出力することができます:
 
 ```shell
 kubectl describe datadogmetric <RESOURCE NAME>
 ```
 
-#### Example
+#### 例
 
-The `status` part of a `DatadogMetric`:
+`DatadogMetric` の `status` 部分:
 
 ```yaml
 status:
@@ -465,21 +465,21 @@ status:
   currentValue: "1977.2"
 ```
 
-The four conditions give you insights on the current state of your `DatadogMetric`:
+4 種類の表示により、`DatadogMetric` の現在の状態がわかります。
 
-- `Active`: Datadog considers a `DatadogMetric` active if at least one HPA is referencing it. Inactive `DatadogMetrics` are not updated to minimize API usage.
-- `Valid`: Datadog considers a `DatadogMetric` valid when the answer for the associated query is valid. An invalid status probably means that your custom query is not semantically correct. See the `Error` field for details.
-- `Updated`: This condition is **always** updated when the Datadog Cluster Agent touches a `DatadogMetric`.
-- `Error`: If processing this `DatadogMetric` triggers an error, this condition is true and contains error details.
+- `Active`: Datadog では、少なくとも 1つの HPA が参照している場合に `DatadogMetric` をアクティブとみなします。非アクティブな `DatadogMetrics` は、API の使用を最小化するため更新されません。
+- `Valid`: 関連するクエリの回答が有効である場合、`DatadogMetric` が有効であると表示されます。「有効でない」状態とは、カスタムクエリが意味的に正しくないことを意味します。詳しくは、`Error` フィールドを参照してください。
+- `Updated`: この表示は、Datadog Cluster Agent が `DatadogMetric` に触れると**必ず**更新されます。
+- `Error`: この `DatadogMetric` の処理がエラーをトリガーすると、この状態が true となりエラーの詳細を表示します。
 
-The `currentValue` is the value gathered from Datadog and returned to the HPAs.
+`currentValue` は Datadog から収集された値で、HPA へ返されます。
 
-### Value vs AverageValue for the target metric
-The HPAs in these example use the target type of `Value` instead of `AverageValue`. Both options are supported. Adjust your Datadog metric queries accordingly.
+### ターゲットメトリクスの Value と AverageValue
+上記の例では、HPA は ターゲットタイプとして `AverageValue` の代わりに `Value` を使用しています。どちらのオプションもサポートされています。状況に応じて、Datadog メトリクスクエリを調整してください。
 
-When using `Value`, the metric value returned by the Datadog metric query is provided exactly as-is to the HPA for its scaling decision. When using `AverageValue`, the metric value returned is divided by the current number of pods. Set your `<Metric Value>` accordingly to how you want your HPA to scale based on your query and returned value.
+`Value` を使用する場合、Datadog メトリクスクエリから返されるメトリクス値は HPA にそのまま正確に提供され、スケーリングの判断が行われます。 `AverageValue` を使用する場合は、返されるメトリクス値が現在のポッド数で割られます。クエリと戻り値に基づいて HPA をどのようにスケーリングさせたいかに応じて、`<Metric Value>` を設定してください。
 
-Using `apiVersion: autoscaling/v2`, the target metric configuration for `Value` looks like:
+`apiVersion: autoscaling/v2` を使用する場合、ターゲットメトリクスで `Value` を使用する構成は次のようになります。
 ```yaml
   metrics:
   - type: External
@@ -491,7 +491,7 @@ Using `apiVersion: autoscaling/v2`, the target metric configuration for `Value` 
         value: <METRIC_VALUE>
 ```
 
-Whereas `AverageValue` looks like:
+一方、`AverageValue` の場合は次のようになります。
 ```yaml
   metrics:
   - type: External
@@ -503,9 +503,9 @@ Whereas `AverageValue` looks like:
         averageValue: <METRIC_VALUE>
 ```
 
-For `apiVersion: autoscaling/v2beta1` the respective options are `targetValue` and `targetAverageValue`.
+`apiVersion: autoscaling/v2beta1` の場合、対応するオプションはそれぞれ `targetValue` と `targetAverageValue` になります。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

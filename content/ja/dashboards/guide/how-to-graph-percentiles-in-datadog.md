@@ -1,9 +1,10 @@
 ---
-title: Datadog でパーセンタイルグラフを作成する方法
+title: How to graph percentiles in Datadog?
 aliases:
-  - /ja/graphing/faq/how-to-graph-percentiles-in-datadog
-  - /ja/graphing/guide/how-to-graph-percentiles-in-datadog
+  - /graphing/faq/how-to-graph-percentiles-in-datadog
+  - /graphing/guide/how-to-graph-percentiles-in-datadog
 ---
+
 ## DogStatsD の実装
 
 Datadog では、DogStatsD からヒストグラムメトリクスとしてデータを送信することで、パーセンタイルを取得できます。Agent に組み込まれている [DogStatsD][1] サーバーは、[DogStatsD][1] パケットを受け取り、[データ集計を実行][2]して、最終的にパーセンタイルメトリクスを Datadog に送信します。
@@ -43,8 +44,8 @@ Agent の構成ファイルの「histogram_percentiles」行を使用して、�
 
 [Datadog のヒストグラムの特性については、こちらを参照してください][5]。
 
-[1]: /ja/metrics/dogstatsd_metrics_submission/
+[1]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [2]: https://github.com/DataDog/dd-agent/blob/master/aggregator.py
-[3]: /ja/developers/community/libraries/
-[4]: /ja/metrics/types/?tab=histogram#metric-types
-[5]: /ja/developers/faq/characteristics-of-datadog-histograms/
+[3]: /developers/community/libraries/
+[4]: /metrics/types/?tab=histogram#metric-types
+[5]: /developers/faq/characteristics-of-datadog-histograms/

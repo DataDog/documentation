@@ -5,9 +5,9 @@
 - "google cloud"
 - "log collection"
 - "mobile"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track Datastore read/write performance, request counts, and more."
+"description": "Datastore の読み取り/書き込みパフォーマンス、リクエスト数などを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_datastore/"
 "draft": false
 "git_integration_title": "google_cloud_datastore"
@@ -33,9 +33,9 @@ Get metrics from Google Datastore to:
 - Visualize the performance of your Datastores.
 - Correlate the performance of your Datastores with your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration first][1]. There are no other installation steps that need to be performed.
 
@@ -50,21 +50,21 @@ Once this is done, export your Google Cloud Datastore logs from Google Cloud Log
 3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloud_datastore" >}}
 
 
-### Events
+### イベント
 
 The Google Cloud Datastore integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Cloud Datastore integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

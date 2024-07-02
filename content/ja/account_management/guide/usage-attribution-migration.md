@@ -6,49 +6,41 @@ further_reading:
   text: Plan and Usage Settings
 ---
 
-## Summary
+## サマリー
 
-This guide provides instructions for migrating from the v1 usage attribution APIs to the v2 APIs. The v1 APIs are
-deprecated, and there are two types: The monthly
-API ([Get usage attribution][1]), and the file
-based APIs ([Get the list of available daily custom reports][2], [Get specified daily custom reports][3],
-[Get the list of available monthly custom reports][4], and
-[Get specified monthly custom reports][5]). To use this guide, find the section below for the v1 APIs you are currently using, and follow the instructions to migrate to the corresponding v2 APIs.
+このガイドでは、使用量属性 API (v1) から v2 API への移行方法を説明します。v1 API は非推奨であり、月次 API ([使用量属性を取得する][1]) とファイルベース API ([使用可能な日次カスタムレポートのリストを取得する][2]、[指定した日次カスタムレポートを取得する][3]、[使用可能な月次カスタムレポートのリストを取得する][4]、[指定した月次カスタムレポートを取得する][5]) の 2 種類あります。このガイドを使用するには、現在使用している v1 API の以下のセクションを見つけ、対応する v2 API に移行するための指示に従います。
 
-**Note**: Any mention of v1 and v2 in this document does not refer to the version in the URL path. All APIs this documentation are the first versions with their respective paths, and so use `v1` in the URL path.
+**注**: このドキュメントで v1 や v2 について言及する場合、URL パスのバージョンは参照されません。このドキュメントのすべての API は、それぞれのパスを持つ最初のバージョンであるため、URL パスには `v1` を使用します。
 
-## Monthly API
+## 月次 API
 
-### [Get usage attribution][6]
+### [使用属性を取得する][6]
 
-This API provides monthly usage attribution.
+この API は、月次使用量属性を提供します。
 
-The v2 monthly usage attribution API [Get monthly usage attribution][7] also provides monthly usage attribution and supports querying by combinations of tags.
+v2 月次使用量属性 API [月次使用量属性を取得する][7] も月次使用量属性を提供し、タグの組み合わせによるクエリをサポートしています。
 
-See the sections below for the differences between the v1 and v2 API, and recommendations for migrating to the v2 API.
+v1 API と v2 API の違い、および v2 API への移行に関する推奨事項については、以下のセクションを参照してください。
 
-#### Pagination
+#### ページ区切り
 
-In the v1 API, you configure pagination through the query parameters `offset` and `limit`. The value in
-`metadata.pagination.total_number_of_records` provides the total number of records in all pages.
+v1 API では、クエリパラメーター `offset` と `limit` を用いてページ送りを構成することができます。`metadata.pagination.total_number_of_records` の値は、全ページのレコード数の合計を提供します。
 
-In the v2 API, you configure pagination through the `next_record_id` query parameter. The starting value for the next page is
-returned in `metadata.pagination.next_record_id`. There is no total number of records in the response.
+v2 API では、クエリパラメーター `next_record_id` でページ区切りの設定を行います。次のページの開始値は `metadata.pagination.next_record_id` で返されます。レスポンスに含まれるレコードの総数などはありません。
 
-To migrate to the v2 API, use the `next_record_id` to advance through pages as described on the API documentation page.
+v2 API に移行するには、API ドキュメントページに記載されているように `next_record_id` を使ってページを進めてください。
 
-#### Tag Breakdown
+#### タグの内訳
 
-In the v1 API, the usage data is broken down for each tag separately in the same response. This leads to seemingly duplicate data, in which the same resource is counted by multiple tags such as `a`, `b`, and `c` separately.
+v1 API では、使用量データは同じレスポンスの中でタグごとに別々に分解されます。そのため、同じリソースが `a`、`b`、`c` などの複数のタグで別々にカウントされ、一見すると重複したデータになっていることがあります。
 
-In the v2 API, you can select the tag breakdown by supplying a tag configuration in the `tag_breakdown_keys` parameter. You can specify one tag at a time, or multiple tags as a comma separated list. Supplying multiple tags returns usage filtered by the combination of those tags.
+v2 API では、`tag_breakdown_keys` パラメーターにタグの構成を指定することで、タグの内訳を選択することができます。タグは 1 つずつ指定することも、複数のタグをカンマ区切りで指定することも可能です。複数のタグを指定すると、それらのタグの組み合わせでフィルタリングされた使用量が返されます。
 
-To migrate to the v2 API, specify the tags to use in the `tag_breakdown_keys` parameter. To get
-the same breakdowns as the v1 API, make separate requests for each tag.
+v2 API に移行するには、`tag_breakdown_keys` パラメーターに使用するタグを指定します。v1 API と同じ内訳を取得するには、各タグに対して個別のリクエストを行います。
 
-#### Aggregates
+#### 集計
 
-In the v1 API, the `aggregates` section contains sums of all possible records, resulting in three times the real total because data is triplicated across three different tags. Example:
+v1 API では、`aggregates` セクションにすべての可能なレコードの合計が含まれ、データが 3 つの異なるタグに渡って 3 倍になるため、結果として実際の合計が 3 倍になります。例:
 
 ```json
 {
@@ -58,7 +50,7 @@ In the v1 API, the `aggregates` section contains sums of all possible records, r
 },
 ```
 
-In the v2 API, the `aggregates` section only contains sums of the records for the tag combination used. Example:
+v2 API では、`aggregates` セクションには、使用したタグの組み合わせのレコードの合計のみが格納されます。例:
 
 ```
 {
@@ -68,75 +60,71 @@ In the v2 API, the `aggregates` section only contains sums of the records for th
 },
 ```
 
-To migrate to the v2 API, use the aggregates, as those values represent the total usage for the organization for the months requested.
+v2 API に移行する場合、これらの値は要求された月の組織の使用量の合計を表すので、集計を使用してください。
 
-#### Decimal Values
+#### 10 進数値
 
-In the v1 API, some usage is returned with decimal precision. Example:
+v1 API では、一部の使用量は 10 進数で返されます。例:
 `"cws_containers_usage": 1105642.92`
 
-In the v2 API, usage is returned with integer precision. Example:
+v2 API では、使用量は整数値で返されます。例:
 `"cws_containers_usage": 1105643`
 
-It is not possible to convert from the integer values to the decimal values. The integer values are the rounded decimal values.
+整数値から 10 進数値への変換はできません。整数値は 10 進数を丸めた値となります。
 
-#### Product families
+#### 製品ファミリー
 
-In the v1 API, usage for serverless monitoring is under:
+v1 API では、サーバーレスモニタリングの使用量は以下の下にあります。
 
 * `lambda_functions_usage`
 * `lambda_functions_percentage`
 * `lambda_invocations_usage`
 * `lambda_invocations_percentage`
 
-In the v2 API, usage for serverless monitoring is under:
+v2 API では、サーバーレスモニタリングの使用量は以下の下にあります。
 
 * `functions_usage`
 * `functions_percentage`
 * `invocations_usage`
 * `invocations_percentage`
 
-These usage types are functionally equivalent; the only difference is the new field name.
+これらの使用量タイプは機能的に同等で、唯一の違いは新しいフィールド名です。
 
-## File Based APIs
+## ファイルベース API
 
-This set of APIs provides links to download zip files of the usage attribution data, in daily and monthly granularity.
+この API セットは、日次および月次の使用量属性データの ZIP ファイルをダウンロードするためのリンクを提供します。
 
-### [Get the list of available daily custom reports][2]
+### [利用可能な日次カスタムレポートの一覧を取得する][2]
 
-This API produces a list of available downloads. As the file downloads are deprecated, there is no replacement for
-this API.
+この API は、利用可能なダウンロードのリストを生成します。ファイルダウンロードは廃止されたため、この API に代わるものはありません。
 
-### [Get specified daily custom reports][3]
+### [指定した日次カスタムレポートを取得する][3]
 
-This API returns a link to download a zip file of the usage attribution data for all products for a given day. The zip
-file contains a TSV (tab separated value) file for each product.
+この API は、指定された日の全製品の使用量属性データの zip ファイルをダウンロードするためのリンクを返します。zip ファイルには、各プロダクトのTSV (タブ区切り値) ファイルが含まれています。
 
-The [Get hourly usage attribution][8]
-API provides this same data.
+[時間単位使用量属性を取得する][8] API では、これと同じデータが提供されます。
 
-See the sections below for differences between the v1 and v2 API and recommendations for migrating to the v2 API.
+v1 API と v2 API の違い、および v2 API への移行に関する推奨事項については、以下のセクションを参照してください。
 
-#### Response format
+#### レスポンスフォーマット
 
-In the v1 API, the response contains a link to a ZIP file, that contains a TSV file per product.
+v1 API では、レスポンスに製品ごとの TSV ファイルを含む ZIP ファイルへのリンクが含まれます。
 
-In the v2 API, the response returns the usage attribution data in JSON format.
+v2 API では、レスポンスとして使用量属性データを JSON 形式で返します。
 
-To migrate to the v2 API, your processes must handle the data in JSON format. You can apply transformations
-as needed to the JSON data to create the format that best suits your needs.
+v2 API に移行するためには、プロセスで JSON 形式のデータを扱う必要があります。必要に応じて JSON データに変換を施し、ニーズに合った形式を作成することができます。
 
-#### Tag breakdown
+#### タグの内訳
 
-In the v1 API, usage data is broken down by all chosen tags.
+v1 API では、使用量データは選択されたすべてのタグで分解されます。
 
-In the v2 API, you can select the tag breakdown by supplying a tag configuration in `tag_breakdown_keys`, as a comma-separated list.
+v2 API では、`tag_breakdown_keys` にタグの構成をカンマ区切りで指定することで、タグの内訳を選択することができます。
 
-To migrate to the v2 API, specify all chosen tags in the `tag_breakdown_keys` query parameter.
+v2 API に移行するには、`tag_breakdown_keys` クエリパラメーターに選択したすべてのタグを指定します。
 
-#### Tag keys
+#### タグキー
 
-In the v1 API, chosen tag keys are presented as headers in the TSV file. Example:
+v1 API では、選択されたタグキーは TSV ファイルのヘッダーとして表示されます。例:
 
 ```
 public_id       formatted_timestamp     env     service total_usage
@@ -144,7 +132,7 @@ abc123          2022-01-01 00:00:00     prod    web     100
 ...
 ```
 
-In the v2 API, chosen tags are keys in the `tags` object of each item in the usage array of the response. Example:
+v2 API では、選択されたタグは、レスポンスの使用量配列の各項目の `tags` オブジェクトのキーとなります。例:
 
 ```
 ...
@@ -159,14 +147,13 @@ In the v2 API, chosen tags are keys in the `tags` object of each item in the usa
 ...
 ```
 
-To migrate to the v2 API, retrieve from the `tags` object on each response row.
+v2 API に移行する場合は、各レスポンス行の `tags` オブジェクトから取得します。
 
-#### Tag values
+#### タグ値
 
-In the v1 API, if a resource has the same tag multiple times, it appears as a pipe (`|`) separated string
-in the column of the tag.
+v1 API では、リソースが同じタグを複数回持つ場合、タグの列にパイプ (`|`) で区切られた文字列として表示されます。
 
-Example:
+例:
 
 ```
 public_id       formatted_timestamp     env     service               total_usage
@@ -174,10 +161,9 @@ abc123          2022-01-01 00:00:00     prod    authentication|web    100
 ...
 ```
 
-In the v2 API, the value corresponding to each tag key in the `tags` object is an array. If a resource has the
-same tag multiple times, then it indicates that there are multiple items in this list.
+v2 API では、`tags` オブジェクトの各タグキーに対応する値は配列です。あるリソースに同じタグが複数回設定されている場合、このリストには複数のアイテムが存在することを示します。
 
-Example:
+例:
 
 ```
 ...
@@ -193,84 +179,76 @@ Example:
 ...
 ```
 
-To migrate to the v2 API, your processes must handle resources with the same tag applied multiple times.
-Tag values in the v2 response array appear in the same order as they appear in the pipe-separated string in the v1
-response, so you can join the array with pipe characters to produce the same tag values as the v1 response.
+v2 API に移行するためには、同じタグが複数回適用されたリソースをプロセスで処理する必要があります。
+v2 レスポンスの配列に含まれるタグの値は、v1 レスポンスのパイプで区切られた文字列と同じ順番で現れるため、配列をパイプ文字で結合すれば v1 レスポンスと同じタグ値を生成することができます。
 
-#### Total usage
+#### 合計使用量
 
-In the v1 API, the total usage is called `total_usage` in the CSV header.
+v1 API では、CSV ヘッダーの中で、使用量の合計を `total_usage` と呼びます。
 
-In the v2 API, the total usage is called `total_usage_sum`, and is a key in each object in the usage array.
+v2 API では、使用量の合計は `total_usage_sum` と呼ばれ、使用量配列の各オブジェクトのキーとなります。
 
-To migrate to the v2 API, use the key `total_usage_sum` to extract the usage value.
+v2 API に移行する場合は、キー `total_usage_sum` を使用して使用量を抽出します。
 
-#### Total usage data type
+#### 総使用量データ型
 
-The v1 API uses CSV, which has no way to specify data types (although total usage is always a number).
+v1 API は CSV を使用しており、データ型を指定する方法がありません (ただし、総使用量は常に数値です)。
 
-In the v2 API, total usage is an integer.
+v2 API では、総使用量は整数値です。
 
-To migrate to the v2 API, handle the total usage as an integer.
+v2 API に移行するには、総使用量を整数値で扱います。
 
-#### Time format
+#### 時間フォーマット
 
-In the v1 API, time is formatted `YYYY-MM-DD hh:mm:ss`.
+v1 API では、時刻は `YYYY-MM-DD hh:mm:ss` というフォーマットで表されます。
 
-In the v2 API, time is formatted `YYYY-MM-DDThh`.
+v2 API では、時刻は `YYYY-MM-DDThh` というフォーマットで表されます。
 
-Data in the v1 format always has the value `0` for minute and second (the data is hourly). The data in the v2 format can be parsed and treated as equivalent to the parsed time of the v1 format.
+v1 フォーマットのデータは、分と秒の値が常に `0` になります (データは 1 時間単位です)。v2 フォーマットのデータはパースして、v1 フォーマットのパースされた時刻と同等に扱うことができます。
 
-#### Child organizations
+#### 子オーガニゼーション
 
-In the v1 API, the file contains only data for the tag configuration set on the parent org. This includes any child orgs of the parent, because tag configurations are also applied to child orgs.
+v1 API では、このファイルは親組織に設定されたタグ構成のデータのみを含みます。タグの構成は子組織にも適用されるため、このファイルには親組織の子組織がすべて含まれます。
 
-In the v2 API, if the parameter `include_descendants=true` is supplied (this is the default), then the response contains data for the parent org and all children of the parent. This includes all data from tag configurations inherited from the parent org to the child orgs, and also includes any tag configurations set directly on those child orgs. The origin of a given tag configuration can be discerned from the `tag_config_source` field.
+v2 API では、もし `include_descendants=true` パラメーターが与えられると (これがデフォルトです)、レスポンスは親組織とそのすべての子組織のデータを含みます。これは、親組織から子組織へ継承されたタグ構成からのすべてのデータを含み、また、それらの子組織に直接設定されたすべてのタグ構成も含まれます。与えられたタグ構成の起源は `tag_config_source` フィールドから判別することができます。
 
-To migrate to the v2 API, pass the `include_descendants=true` parameter. To get the same values as the v1
-response, filter out any records in the response that do not match the `tag_config_source` of the tag configuration
-from the parent org.
+v2 API に移行するには、`include_descendants=true` パラメーターを渡します。v1 のレスポンスと同じ値を取得するには、親組織からのタグ構成の `tag_config_source` と一致しないレスポンス内のレコードをフィルターで除外します。
 
-#### Data range
+#### データ範囲
 
-In the v1 API, data is returned for one day at a time. The date is specified in the `record_id` parameter of the
-request.
+v1 API では、データは一度に 1 日分ずつ返されます。日付はリクエストの `record_id` パラメーターで指定します。
 
-In the v2 API, you can retrieve data for arbitrary time bounds, up to 24 hours at a time, using the `start_hr`
-and `end_hr` parameters.
+v2 API では、`start_hr` と `end_hr` パラメーターを使用して、一度に 24 時間までの任意の時間枠でデータを取得することができます。
 
-To migrate to the v2 API, request data with `start_hr` as midnight (`00` hour) on the desired day
-and `end_hr` as midnight on the next day.
+v2 API に移行するには、`start_hr`を希望日の午前 0 時 (`00` 時)、`end_hr` を翌日の午前 0 時としたデータをリクエストします。
 
-#### Pagination
+#### ページ区切り
 
-In the v1 API, data is not paginated. This can result in very large files.
+v1 API では、データはページは区切られません。そのため、ファイルサイズが非常に大きくなることがあります。
 
-In the v2 API, data is paginated. If a response takes up more than one page, the id for fetching the next page is
-provided in the field `metadata.pagination.next_record_id`. This can be supplied in the query parameter `next_record_id`
-to retrieve the next page.
+v2 API では、データはページ区切りされます。レスポンスが複数のページを占める場合、次のページを取得するための ID が `metadata.pagination.next_record_id` フィールドで提供されます。これをクエリパラメーター `next_record_id` で指定すると、次のページを取得することができます。
 
-To migrate to the v2 API, retrieve all pages for the given day.
+v2 API に移行するには、指定された日の全ページを取得します。
 
-#### Data cardinality
+#### データカーディナリティ
 
-In the v1 API, data is broken down by all three tags.
+v1 API では、データは 3 つのタグすべてで分解されます。
 
-In the v2 API, data is broken down as specified in the query parameter `tag_breakdown_keys`.
+v2 API では、クエリパラメーター `tag_breakdown_keys` で指定されたとおりにデータが分解されます。
 
-To migrate to the v2 API, supply all chosen tags in the parameter `tag_breakdown_keys`.
+v2 API に移行するには、パラメーター `tag_breakdown_keys` に選択したすべてのタグを指定します。
 
-#### Usage type names
+#### 使用量タイプ名
 
-In the v1 API, files are named `daily_<product>_<date>.tsv`.
+v1 API では、ファイル名は `daily_<product>_<date>.tsv` となります。
 
-In the v2 API, usage types always have the `_usage` suffix.
+v2 API では、使用量タイプには常に `_usage` というサフィックスが付きます。
 
-To migrate to the v2 API, provide the `_usage` suffix to all usage types.
+v2 API に移行するには、すべての使用量に `_usage` というサフィックスを付けます。
 
-#### Usage types renamed
+#### 使用量名の変更
 
-The v1 API contains files for:
+v1 API には、以下のファイルが含まれています。
 
 * `apm`
 * `infra`
@@ -280,7 +258,7 @@ The v1 API contains files for:
 * `npm`
 * `profiled_hosts`
 
-In the v2 API, the corresponding usage types are:
+v2 API では、対応する使用量タイプは以下の通りです。
 
 * `apm_host_usage`
 * `infra_host_usage`
@@ -290,80 +268,67 @@ In the v2 API, the corresponding usage types are:
 * `npm_host_usage`
 * `profiled_host_usage`
 
-To migrate to the v2 API, map specified usage types to the updated names.
+v2 API に移行するには、指定された使用量タイプを更新後の名称にマッピングします。
 
-#### Timeseries usage type
+#### 時系列使用量タイプ
 
-In the v1 API, the timeseries file contains usage for both standard and custom timeseries.
+v1 API では、時系列ファイルは標準時系列とカスタム時系列の両方の使用量を含んでいます。
 
-In the v2 API, there is one `custom_timeseries_usage` usage type.
+v2 API では、`custom_timeseries_usage` という使用量タイプが 1 つ存在します。
 
-Datadog only bills for custom timeseries usage, so standard timeseries usage is not needed.
+Datadog はカスタム時系列の使用量に対してのみ請求しますので、標準時系列の使用量は必要ありません。
 
-#### Synthetics usage type
+#### Synthetics 使用量タイプ
 
-In the v1 API, the synthetics file contains usage for both API and browser tests.
+v1 API では、Synthetics ファイルに API テストとブラウザテストの両方の使用量が含まれています。
 
-In the v2 API, there are two synthetics usage types, `api_usage` and `browser_usage`.
+v2 API では、`api_usage` と `browser_usage` という 2 種類の Synthetics の使用量タイプが用意されています。
 
-To migrate to the v2 API, use the new usage types for retrieving synthetics usage.
+v2 API に移行するには、Synthetic の使用量を取得するために新しい使用量タイプを使用します。
 
-### [Get the list of available monthly custom reports](https://docs.datadoghq.com/api/latest/usage-metering/#get-the-list-of-available-monthly-custom-reports)
+### [使用可能な月次カスタムレポートのリストを取得する](https://docs.datadoghq.com/api/latest/usage-metering/#get-the-list-of-available-monthly-custom-reports)
 
-This API produces a list of available downloads. Since the file downloads are deprecated, there is no replacement for
-this API.
+この API は、利用可能なダウンロードのリストを生成します。ファイルダウンロードは廃止されたため、この API に代わるものはありません。
 
-### [Get specified monthly custom reports][5]
+### [指定した月次カスタムレポートを取得する][5]
 
-This API returns a link to download a ZIP file of the usage attribution data for all products for a given month. The ZIP
-file contains a TSV file for each product, as well as a summary file for each tag. The approaches to replicate the two different types of files are described below.
+この API は、指定された月の全製品の使用量属性データの ZIP ファイルをダウンロードするためのリンクを返します。ZIP ファイルには、各製品の TSV ファイルと、各タグのサマリーファイルが含まれています。この 2 種類のファイルを複製するためのアプローチを以下に説明します。
 
-### Hourly data by product files
+### 製品別時間単位データファイル
 
-The hourly data files use the naming format `monthly_<product>_<date>.tsv`. Each product file is a concatenated
-version of the daily zip files available
-from [Get specified daily custom reports][3]
-.
+時間単位データファイルは、`monthly_<product>_<date>.tsv` という命名形式を使用しています。各製品ファイルは、[指定した日次カスタムレポートを取得する][3]から入手できる日次の zip ファイルを連結したものです。
 
-The [Get hourly usage attribution][8]
-API provides this same data.
+[時間単位使用量属性を取得する][8] API では、これと同じデータが提供されます。
 
-As the hourly data files are very similar to files available
-from [Get specified daily custom reports][3]
-, the same guide applies, except the recommendation for time ranges. To migrate from the v1 monthly files,
-request all pages for each day in the month. Requests are limited to 24 hours at a time in the v2 API.
+時間単位データファイルは、[指定した日次カスタムレポートを取得する][3]で利用できるファイルと非常によく似ているため、時間範囲に関する推奨事項を除き、同じガイドが適用されます。v1 の月次ファイルから移行するには、その月の各日の全ページをリクエストします。v2 API では、リクエストは一度に 24 時間に制限されています。
 
-### Monthly summary by tag files
+### タグ別月次サマリーファイル
 
-The monthly summary files use the naming format `summary_<tag>_<date>.tsv`. They provide a rollup for all usage across
-the month for each tag. The [Get monthly usage attribution][7]
-API provides this same data.
+月次サマリーファイルは、`summary_<tag>_<date>.tsv` というファイル名形式を採用しています。これらのファイルは、各タグについて、その月のすべての使用量のロールアップを提供します。[月次使用量属性を取得する][7] API はこれと同じデータを提供します。
 
-See the sections below for differences between the v1 API and v2 API and recommendations for migrating to the v2 API.
+v1 API と v2 API の違い、および v2 API への移行に関する推奨事項については、以下のセクションを参照してください。
 
-#### Response format
+#### レスポンスフォーマット
 
-The v1 API response contains a link to a ZIP file, containing a TSV file for each chosen tag.
+v1 API のレスポンスには、選択された各タグの TSV ファイルを含む ZIP ファイルへのリンクが含まれます。
 
-The v2 API response returns the usage attribution data in JSON format.
+v2 API のレスポンスは、使用量属性データを JSON 形式で返します。
 
-To migrate to the v2 API, your processes must handle the data in JSON format. You can apply transformations
-as needed to the JSON data to create the format that best suits your needs.
+v2 API に移行するためには、プロセスで JSON 形式のデータを扱う必要があります。必要に応じて JSON データに変換を施し、ニーズに合った形式を作成することができます。
 
-#### Tag breakdown
+#### タグの内訳
 
-In the v1 API, there is a separate TSV file for each chosen tag.
+v1 API では、選択されたタグごとに個別の TSV ファイルが存在します。
 
-In the v2 API, you can select the tag breakdown by supplying a tag configuration in `tag_breakdown_keys` as a comma-separated list.
+v2 API では、`tag_breakdown_keys` にタグの構成をカンマ区切りで指定することで、タグの内訳を選択することができます。
 
-To migrate to the v2 API, make requests with each tag specified individually in `tag_breakdown_keys`.
+v2 API に移行するには、`tag_breakdown_keys` で各タグを個別に指定してリクエストします。
 
-#### Tag values
+#### タグ値
 
-In the v1 API, if a resource is tagged with the same tag multiple times, it appears as a pipe (`|`) separated string
-in the column of the tag.
+v1 API では、リソースに同じタグを複数回付けられている場合、タグの列にパイプ (`|`) で区切られた文字列として表示されます。
 
-Example:
+例:
 
 ```
 month   public_id       team        infra_host_usage ....
@@ -371,10 +336,9 @@ month   public_id       team        infra_host_usage ....
 ...
 ```
 
-In the v2 API, the value corresponding to each tag key in the `tags` object is an array. If a resource is tagged with the
-same tag multiple times, there are multiple items in this list.
+v2 API では、`tags` オブジェクトの各タグキーに対応する値は配列です。あるリソースに同じタグが複数回付けられている場合、このリストには複数のアイテムが存在します。
 
-Example:
+例:
 
 ```
 ...
@@ -387,60 +351,57 @@ Example:
 ...
 ```
 
-To migrate to the v2 API, your processes must handle resources with the same tag applied multiple times.
-Tag values in the v2 response array appear in the same order as they appear in the pipe-separated string in the v1
-response, so you can join the array with pipe characters to produce the same tag values as the v1 response.
+v2 API に移行するためには、同じタグが複数回適用されたリソースをプロセスで処理する必要があります。
+v2 レスポンスの配列に含まれるタグの値は、v1 レスポンスのパイプで区切られた文字列と同じ順番で現れるため、配列をパイプ文字で結合すれば v1 レスポンスと同じタグ値を生成することができます。
 
-#### Total usage
+#### 合計使用量
 
-In the v1 API, the second row of the file contains aggregated usage for all tags.
+v1 API では、ファイルの 2 行目に全タグの使用量を集計しています。
 
-In the v2 API, the `metadata.aggregates` section of the response contains aggregated usage for all tags.
+v2 API では、レスポンスの `metadata.aggregates` セクションに、すべてのタグの使用量が集計されます。
 
-To migrate to the v2 API, retrieve total usage from the `metadata.aggregates` section.
+v2 API に移行するには、`metadata.aggregates` セクションから使用量の合計を取得します。
 
-#### Usage data type
+#### 使用量データ型
 
-In the v1 API, some usage is returned with decimal precision. Example:
+v1 API では、一部の使用量は 10 進数で返されます。例:
 
 ```
 container_usage
 55.4
 ```
 
-In the v2 API, usage is returned with integer precision. Example:
+v2 API では、使用量は整数値で返されます。例:
 `"container_usage": 55`
 
-It is not possible to convert from the integer values to the decimal values. The integer values are the rounded decimal values.
+整数値から 10 進数値への変換はできません。整数値は 10 進数を丸めた値となります。
 
-#### Child organizations
+#### 子オーガニゼーション
 
-In the v1 API, the file contains only data for the tag configuration set on the parent org. This includes any child orgs
-of the parent, because tag configurations are also applied to child orgs.
+v1 API では、このファイルは親組織に設定されたタグ構成のデータのみを含みます。タグの構成は子組織にも適用されるため、このファイルには親組織の子組織がすべて含まれます。
 
-In the v2 API, if the parameter `include_descendants=true` is supplied (this is the default), the response contains data for the parent org and all children of the parent. This includes all data from tag configurations
-inherited from the parent org to the child orgs, and also includes any tag configurations set directly on those child orgs. The origin of a given tag configuration can be discerned from the `tag_config_source` field.
+v2 API では、もし `include_descendants=true` パラメーターが与えられると (これがデフォルトです)、レスポンスは親組織とそのすべての子組織のデータを含みます。これは、親組織から子組織へ継承されたタグ構成からのすべてのデータを含み、また、それらの子組織に直接設定されたすべてのタグ構成も含まれます。与えられたタグ構成の起源は `tag_config_source` フィールドから判別することができます。
 
 
-#### Serverless Monitoring Usage
+#### サーバーレスモニタリング使用量
 
-In the v1 API, usage for serverless monitoring uses the names:
+v1 API では、サーバーレスモニタリングの使用量は以下の名前を使用します。
 
 * `lambda_functions_usage`
 * `lambda_functions_percentage`
 * `lambda_invocations_usage`
 * `lambda_invocations_percentage`
 
-In the v2 API, usage for serverless monitoring uses the names:
+v2 API では、サーバーレスモニタリングの使用量は以下の名前を使用します。
 
 * `functions_usage`
 * `functions_percentage`
 * `invocations_usage`
 * `invocations_percentage`
 
-To migrate to the v2 API, look for serverless monitoring usage under the updated field names. These usage types are functionally equivalent; the only difference is the new field name.
+v2 API に移行するには、更新されたフィールド名でサーバーレスモニタリングの使用量を探します。これらの使用量は、機能的に同等であり、唯一の違いは新しいフィールド名です。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

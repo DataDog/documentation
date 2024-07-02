@@ -54,7 +54,7 @@
 - cost management
 - marketplace
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -143,7 +143,7 @@ In addition to physical health monitoring, **Hardware Sentry** also reports the 
 
 **100% Software**: No smart PDUs required, even for systems that are not equipped with an internal power sensor!
 
-### Dashboards
+### ダッシュボード
 
 This integration comes with a set of dashboards that leverage the metrics collected by **[Hardware Sentry OpenTelemetry Collector][4]**:
 

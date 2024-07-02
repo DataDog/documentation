@@ -21,8 +21,8 @@
   "support_email": help@datadoghq.com
 "categories":
 - caching
-- metrics
-"custom_kind": "integration"
+- モニター
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -75,7 +75,7 @@ Edgecast is a global network platform that provides a content delivery network (
 4. Optionally, add custom tags to associate them with all metrics collected for this integration.
    * Metrics are automatically tagged with the Edgecast name associated with the origin. 
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "edgecast_cdn" >}}

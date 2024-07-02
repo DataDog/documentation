@@ -24,7 +24,7 @@
   "support_email": hello@unitq.com
 "categories":
 - metrics
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/unitq/README.md"
 "display_on_public_website": true
@@ -67,9 +67,9 @@ unitQ is your consolidated, searchable platform for user feedback. Our AI techno
 
 The unitQ Datadog integration allows you to forward metrics from unitQ to Datadog. By delivering unitQ metrics to Datadog, users can leverage Datadog's graphing and alerting capabilities to track user feedback - ensuring a happy customer base.
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
 1. In unitQ, go to **Integrations**.
 2. Select the Datadog tile
@@ -79,21 +79,21 @@ The unitQ Datadog integration allows you to forward metrics from unitQ to Datado
      - Enter `https://api.datadoghq.eu` if you use the Datadog EU region.
    - **API Key**: Enter your [Datadog API key][1].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "unitq" >}}
 
 
-### Service Checks
+### サービスチェック
 
 unitQ does not include any service checks.
 
-### Events
+### イベント
 
 unitQ does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

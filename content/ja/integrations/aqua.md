@@ -26,7 +26,7 @@
 - containers
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/aqua/README.md"
 "display_on_public_website": true
@@ -70,11 +70,11 @@ This check monitors [Aqua][1].
 
 The Aqua check alerts the user if total high-severity vulnerability is reached, or if a container is running inside a host not registered by Aqua. Aqua also sends data alerts regarding blocked events in runtime, and it is possible to trigger a webhook to scale infrastructure if more Aqua scanners are required.
 
-## Setup
+## セットアップ
 
 The Aqua check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Aqua check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -86,7 +86,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Aqua che
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 #### Metric collection
 
@@ -141,21 +141,21 @@ For the Aqua Enforcer logs: **Available for Agent >6.0**
 
 [Run the Agent's `status` subcommand][11] and look for `aqua` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "aqua" >}}
 
 
-### Events
+### イベント
 
 Aqua does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "aqua" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][14].
 

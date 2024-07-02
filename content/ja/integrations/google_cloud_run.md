@@ -5,7 +5,7 @@
 - google cloud
 - log collection
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Collect metrics, traces, and logs from across your clusters and analyze them in Datadog."
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_run/"
@@ -39,17 +39,17 @@ Enable this integration and instrument your container to see all of your Cloud R
 
 For more information about Cloud Run for Anthos, see the [Google Cloud Run for Anthos documentation][1].
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
-#### Installation
+#### インストール
 
 Set up the [Google Cloud Platform integration][2] to begin collecting out-of-the-box metrics. To set up custom metrics, see the [Serverless documentation][3]. 
 
 ### Log collection
 
-#### Integration
+#### インテグレーション
 Google Cloud Run also exposes [audit logs][4].
 Google Cloud Run logs are collected with Google Cloud Logging and sent to a Dataflow job through a Cloud Pub/Sub topic. If you haven't already, [set up logging with the Datadog Dataflow template][5].
 
@@ -66,26 +66,26 @@ Once this is done, export your Google Cloud Run logs from Google Cloud Logging t
 #### Direct Logging
 For more information about direct application logging to Datadog from your Cloud Run services, see the [Serverless documentation][3].
 
-### Tracing
+### トレーシング
 
 For more information about specialized Agent setup instructions for fully managed Google Cloud Run, see the [Serverless documentation][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloud_run" >}}
 
 
-### Events
+### イベント
 
 The Google Cloud Functions integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Cloud Functions integration does not include any service checks.
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

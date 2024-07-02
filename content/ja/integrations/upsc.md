@@ -22,7 +22,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/upsc/README.md"
 "display_on_public_website": true
@@ -61,11 +61,11 @@ Get metrics from UPSD service through UPSC in real time to:
 - Visualize and monitor UPS battery health and states
 - Be notified about UPS failovers and events.
 
-## Setup
+## セットアップ
 
 The UPSC check is not included in the [Datadog Agent][1] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the UPSC check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -77,7 +77,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the UPSC che
 
 2. Configure your integration similar to core [integrations][3].
 
-### Configuration
+### 構成
 
 1. Edit the `upsc.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4] to start collecting your UPSC [metrics](#metrics). See the [sample upsc.d/conf.yaml][5] for all available configuration options.
 
@@ -87,21 +87,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the UPSC che
 
 Run the [Agent's status subcommand][7] and look for `upsc` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "upsc" >}}
 
 
-### Events
+### イベント
 
 The UPSC check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The UPSC check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

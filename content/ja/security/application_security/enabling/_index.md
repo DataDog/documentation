@@ -29,10 +29,10 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Application Security Management はサポートされていません。</div>
 {{< /site-region >}}
 
-## Prerequisites
+## 前提条件
 
 Before setting up Application Security capabilities, ensure the following prerequisites are met:
 - **Datadog Agent installation:** The [Datadog Agent][5] is installed and configured for your application's operating system or container, cloud, or virtual environment.
@@ -52,7 +52,7 @@ Run a one-line installation command to install the Datadog Agent and enable Appl
 Add an environment variable or a new argument to your [Datadog Tracing Library][4] configuration.
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

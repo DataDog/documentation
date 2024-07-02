@@ -22,7 +22,7 @@
   "support_email": support@statsig.com
 "categories":
 - configuration & deployment
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/statsig/README.md"
 "display_on_public_website": true
@@ -61,48 +61,48 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
-The Datadog-Statsig integration enables Statsig to send events and metrics to help you monitor your product and services and visualize how feature gate rollouts or configuration changes affect the rest of your ecosystem.
+Datadog-Statsig インテグレーションにより、Statsig でイベントおよびメトリクスを送信できるようになるため、製品やサービスを監視し、機能のロールアウトまたはコンフィギュレーションの変更がエコシステムに与える影響を可視化できます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-No installation is required to setup the Statsig integration.
+Statsig のインテグレーションセットアップにインストールは必要ありません。
 
-### Configuration
+### 構成
 
-1. Copy your Datadog API key.
-2. [Navigate to the Integrations tab in the Statsig console][1].
-3. Click on the Datadog card.
-4. Paste in your API key in the top field and click Confirm.
+1. Datadog API キーをコピーします。
+2. [Statsig コンソールで Integrations タブに移動します][1]。
+3. Datadog カードをクリックします。
+4. 上部のフィールドに API キーを貼り付け、Confirm をクリックします。
 
-## Data Collected
+## 収集データ
 
-The Statsig integration does not collect any data from Datadog.
+Statsig インテグレーションでは、Datadog からのデータは収集されません。
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "statsig" >}}
 
 
-### Service Checks
+### サービスチェック
 
-The Statsig integration does not include any service checks.
+Statsig インテグレーションには、サービスのチェック機能は含まれません。
 
-### Events
+### イベント
 
-The Statsig integration sends configuration change events on Statsig to Datadog. For instance, updated feature gates or new integrations.
+Statsig インテグレーションにより、Statsig でのコンフィギュレーション変更イベントが Datadog に送信されます（たとえば、更新された機能ゲートまたは新しいインテグレーション）。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Statsig support][3] or see the [Statsig website][4].
+ヘルプが必要ですか？[Statsig サポート][3]にお問い合わせいただくか、[Statsig ウェブサイト][4]をご覧ください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor feature releases with Statsig's offering in the Datadog Marketplace][5]
+- [Datadog マーケットプレイスの Statsig の提供とモニター機能のリリース][5]
 
 [1]: https://console.statsig.com/integrations
 [2]: https://github.com/DataDog/integrations-extras/blob/master/statsig/metadata.csv

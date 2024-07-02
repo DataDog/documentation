@@ -29,7 +29,7 @@
 - notifications
 - orchestration
 - provisioning
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/sedai/README.md"
 "display_on_public_website": true
@@ -82,7 +82,7 @@ Enable this integration to receive notifications in Datadog about actions that S
 
 * **Proactive Actions:** Safely acts in production on your behalf to ensure that resources avoid availability issues and run optimally at all times.
 
-## Setup
+## セットアップ
 
 In Sedai:
 
@@ -102,7 +102,7 @@ In Sedai:
 
    ![Enable Datadog Notifications][5]
 
-## Data Collected
+## 収集データ
 
 This integration sends events into Datadog.
 

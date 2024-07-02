@@ -25,7 +25,7 @@
   "support_email": support@singlestore.com
 "categories":
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/singlestoredb_cloud/README.md"
 "display_on_public_website": true
@@ -75,7 +75,7 @@ Connect SinglestoreDB Cloud to Datadog in order to:
 - Observe query rate & performance
 - Correlate SinglestoreDB performance with the rest of your applications
 
-## Setup
+## セットアップ
 
 ### Install the SingleStoreDB Cloud integration in Datadog
 
@@ -108,21 +108,21 @@ Additionally, remove all the API keys associated with this integration.
 
 To stop monitoring a specific workspace group (and retain the integration), navigate to the SingleStore DB Cloud Portal and select **Delete** (**Cloud Portal > Monitoring > Integration**) to remove the Datadog configuration for this workspace group.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "singlestoredb_cloud" >}}
 
 
-### Service Checks
+### サービスチェック
 
 SingleStoreDB Cloud does not include any service checks. 
 
-### Events
+### イベント
 
 SingleStoreDB Cloud does not include any events. 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

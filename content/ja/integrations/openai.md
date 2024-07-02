@@ -31,9 +31,9 @@
   "support_email": help@datadoghq.com
 "categories":
 - ai/ml
-- metrics
+- モニター
 - cost management
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/openai/README.md"
 "display_on_public_website": true
@@ -87,34 +87,34 @@
 
 Get cost estimation, prompt and completion sampling, error tracking, performance metrics, and more out of [OpenAI][1] account-level, Python, and Node.js library requests using Datadog metrics, APM, and logs.
 
-## Setup
+## セットアップ
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
 **Note**: This setup method does not collect `openai.api.usage.*` metrics. To collect these metrics, also follow the API key setup instructions.
 
-### Installation
+### インストール
 
 #### Web: Get Account-level Usage and Cost Metrics
 
 **Note**: This setup method only collects `openai.api.usage*` metrics, and if you enable OpenAI in Cloud Cost Management, you will also get cost metrics, no additional permissions or setup required. Use the agent setup below for additional metrics.
 
 1. Login to your [OpenAI Account][1].
-2. Navigate to **View API Keys** under account settings.
-3. Click the **Create a new secret key** button.
-4. Copy the created API Key to your clipboard.
+2. アカウント設定の **View API Keys** に移動します。
+3. **Create a new secret key** ボタンをクリックします。
+4. 作成した API キーをクリップボードにコピーします。
 5. Navigate to the configuration tab inside Datadog [OpenAI integration tile][2].
-6. Enter an account name and OpenAI API key copied above in the accounts configuration.
+6. アカウント構成に、上記でコピーしたアカウント名と OpenAI API キーを入力します。
 7. If you use [Cloud Cost Management][3] and enable collecting cost data, it will be visible in Cloud Cost Management within 24 hours. ([collected data][4])
 
-<!-- NOTE: This section is overwritten by the OpenAI configuration component exported in -->
-<!-- web-ui. Make sure to update the markdown / code there to see any changes take -->
-<!-- effect on the tile. -->
+<!-- 注: このセクションは web-ui でエクスポートされた OpenAI 構成コンポーネントによって上書きされます。 -->
+<!-- 変更がタイルに反映されるのを確認するために、マークダウン/コードを -->
+<!-- 更新してください。 -->
 
 #### APM: Get Usage Metrics for Python and Node.js Applications
 
-1. Enable APM and StatsD in your Datadog Agent. For example, in Docker:
+1. Datadog Agent で APM と StatsD を有効化します。例えば、Docker で:
 
 ```shell
 docker run -d
@@ -131,7 +131,7 @@ docker run -d
   gcr.io/datadoghq/agent:latest
 ```
 
-2. Install the Datadog APM Python library.
+2. Datadog APM Python ライブラリをインストールします。
 
 ```shell
 pip install ddtrace
@@ -143,7 +143,7 @@ pip install ddtrace
 DD_SERVICE="my-service" DD_ENV="staging" ddtrace-run python <your-app>.py
 ```
 
-**Notes**:
+**注**:
 
 
 {{% site-region region="us3,us5,eu,gov,ap1" %}}
@@ -154,41 +154,41 @@ DD_SERVICE="my-service" DD_ENV="staging" ddtrace-run python <your-app>.py
 
 See the [APM Python library documentation][5] for more advanced usage.
 
-### Configuration
+### 構成
 
 See the [APM Python library documentation][6] for all the available configuration options.
 
-#### Log Prompt & Completion Sampling
+#### ログプロンプトとコンプリーションサンプリング
 
 To enable log prompt and completion sampling, set the `DD_OPENAI_LOGS_ENABLED="true"` environment variable. By default, 10% of traced requests will emit logs containing the prompts and completions.
 
 To adjust the log sample rate, see the [APM library documentation][6].
 
-**Note**: Logs submission requires `DD_API_KEY` to be specified when running `ddtrace-run`.
+**注**: ログを送信するには、`ddtrace-run` を実行する際に `DD_API_KEY` を指定する必要があります。
 
-### Validation
+### 検証
 
-Validate that the APM Python library can communicate with your Agent using:
+APM Python ライブラリを使用して Agent と通信できることを確認します。
 
 ```shell
 ddtrace-run --info
 ```
 
-You should see the following output:
+次の出力が表示されるはずです。
 
 ```
     Agent error: None
 ```
 
-#### Debug Logging
+#### デバッグロギング
 
-Pass the `--debug` flag to `ddtrace-run` to enable debug logging.
+`ddtrace-run` に `--debug` フラグを渡すと、デバッグロギングが有効になります。
 
 ```shell
 ddtrace-run --debug
 ```
 
-This displays any errors sending data:
+データ送信時のエラーを表示します。
 
 ```
 ERROR:ddtrace.internal.writer.writer:failed to send, dropping 1 traces to intake at http://localhost:8126/v0.5/traces after 3 retries ([Errno 61] Connection refused)
@@ -207,9 +207,9 @@ DEBUG:ddtrace.contrib.openai._logging.py:sent 2 logs to 'http-intake.logs.datado
 
 **Note**: This setup method does not collect `openai.api.usage.*` metrics. To collect these metrics, also follow the API key setup instructions.
 
-### Installation
+### インストール
 
-1. Enable APM and StatsD in your Datadog Agent. For example, in Docker:
+1. Datadog Agent で APM と StatsD を有効化します。例えば、Docker で:
 
 ```shell
 docker run -d
@@ -226,13 +226,13 @@ docker run -d
   gcr.io/datadoghq/agent:latest
 ```
 
-2. Install the Datadog APM Node.js library.
+2. Datadog APM Node.js ライブラリをインストールします。
 
 ```shell
 npm install dd-trace
 ```
 
-3. Inject the library into your OpenAI Node.js application.
+3. ライブラリを OpenAI Node.js アプリケーションに挿入します。
 
 ```shell
 DD_TRACE_DEBUG=1 DD_TRACE_BEAUTIFUL_LOGS=1 DD_SERVICE="my-service" \
@@ -240,25 +240,25 @@ DD_TRACE_DEBUG=1 DD_TRACE_BEAUTIFUL_LOGS=1 DD_SERVICE="my-service" \
   NODE_OPTIONS='-r dd-trace/init' node app.js
 ```
 
-**Note**: If the Agent is using a non-default hostname or port, you must also set `DD_AGENT_HOST`, `DD_TRACE_AGENT_PORT`, or `DD_DOGSTATSD_PORT`.
+**注**: Agent がデフォルト以外のホスト名やポートを使用している場合、`DD_AGENT_HOST`、`DD_TRACE_AGENT_PORT`、`DD_DOGSTATSD_PORT` も設定する必要があります。
 
-See the [APM Node.js OpenAI documentation][1] for more advanced usage.
+より高度な使い方については、[APM Node.js OpenAI のドキュメント][1]を参照してください。
 
-### Configuration
+### 構成
 
-See the [APM Node.js library documentation][2] for all the available configuration options.
+利用可能なすべての構成オプションについては、[APM Node.js ライブラリドキュメント][2]を参照してください。
 
-#### Log prompt and completion sampling
+#### ログプロンプトとコンプリーションサンプリング
 
-To enable log prompt and completion sampling, set the `DD_OPENAI_LOGS_ENABLED=1` environment variable. By default, 10% of traced requests emit logs containing the prompts and completions.
+ログのプロンプトとコンプリーションサンプリングを有効にするには、環境変数 `DD_OPENAI_LOGS_ENABLED=1` を設定します。デフォルトでは、トレースされたリクエストの 10% がプロンプトとコンプリーションを含むログを出力します。
 
-To adjust the log sample rate, see the [APM library documentation][3].
+ログのサンプルレートを調整するには、[APM ライブラリのドキュメント][3]を参照してください。
 
-**Note**: Logs submission requires `DD_API_KEY` to be specified.
+**注**: ログを送信するには、`DD_API_KEY` を指定する必要があります。
 
-### Validation
+### 検証
 
-Validate that the APM Node.js library can communicate with your Agent by examining the debugging output from the application process. Within the section titled "Encoding payload," you should see an entry with a `name` field and a correlating value of `openai.request`. See below for a truncated example of this output:
+APM Node.js ライブラリが Agent と通信できることを、アプリケーションプロセスのデバッグ出力で確認します。"Encoding payload" というタイトルのセクションに、`name` フィールドと関連する値として `openai.request` というエントリがあるはずです。この出力の例を以下に示します。
 
 ```json
 {
@@ -290,30 +290,30 @@ Validate that the APM Node.js library can communicate with your Agent by examini
 {{% /tab %}}
 {{< /tabs >}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "openai" >}}
 
 
-### Events
+### イベント
 
-The OpenAI integration does not include any events.
+OpenAI インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The OpenAI integration does not include any service checks.
+OpenAI インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][2].
+ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor your OpenAI usage with Datadog][3]
-- [Monitor Azure OpenAI with Datadog][4]
+- [Datadog で OpenAI の利用状況を監視する][3]
+- [Datadog で Azure OpenAI を監視する][4]
 - [OpenAI Monitor Templates][5]
 
 

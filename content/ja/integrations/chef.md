@@ -7,9 +7,9 @@
 - "issue tracking"
 - "log collection"
 - "provisioning"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track Chef client runs: know when they fail, succeed, or make big changes."
+"description": "Chef クライアントの実行を追跡。失敗、成功、大きな変更を把握。"
 "doc_link": "https://docs.datadoghq.com/integrations/chef/"
 "draft": false
 "git_integration_title": "chef"

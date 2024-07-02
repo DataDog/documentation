@@ -15,31 +15,31 @@ further_reading:
   text: Monitor SNMP with Datadog
 ---
 
-## Installation
+## インストール
 
-Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package. Ensure you are using Agent v7.32+. No additional installation is necessary.
+ネットワークデバイスモニタリングは [Datadog Agent][1] パッケージに含まれている SNMP インテグレーションに依存します。Agent v7.32+ を使用していることを確認してください。追加のインストールは必要ありません。
 
-## Configuration
+## 構成
 
-Datadog Network Device Monitoring supports collecting metrics from individual devices, or auto-discovering devices (unique IP addresses) on entire subnets.
+Datadog ネットワークデバイスモニタリングは、個々のデバイスからのメトリクスの収集、またはサブネット全体のデバイス (一意の IP アドレス) の自動検出をサポートします。
 
-Choose your collection strategy based on the number of devices present on your network, and how dynamic your network is (meaning frequency of adding or removing devices):
+ネットワーク上に存在するデバイスの数、およびネットワークがどれだけ動的か (つまり、デバイスが追加または削除される頻度) に基づき、収集戦略を選択します。
 
-- For small and mostly static networks, see [Monitoring individual devices](#monitoring-individual-devices).
-- For larger or dynamic networks, see [Autodiscovery](#autodiscovery).
+- 小規模でほとんど静的なネットワークについては、[個々のデバイスの監視](#monitoring-individual-devices)をご覧ください。
+- 大規模なネットワークや動的なネットワークについては、[オートディスカバリー](#autodiscovery)をご覧ください。
 
-Regardless of the collection strategy, leverage Datadog's [sysObjectID mapped device profiles][2] to automatically collect relevant metrics from your devices.
+収集戦略に関係なく、Datadog の [sysObjectID マップデバイスプロファイル][2]を利用して、デバイスから関連するメトリクスを自動的に収集できます。
 
-### Monitoring individual devices
+### 個々のデバイスの監視
 
-To monitor individual devices:
+個々のデバイスを監視するには
 
-- Include the IP address and any additional devices metadata (as tags) in the `snmp.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][3]. See the [sample snmp.d/conf.yaml][4] for all available configuration options.
+- `snmp.d/conf.yaml` ファイル ([Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダー内) の IP アドレスと追加デバイスのメタデータを (タグとして) 含めます。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル snmp.d/conf.yaml][4] を参照してください。
 
 {{< tabs >}}
 {{% tab "SNMPv2" %}}
 
-- For SNMPv2, configure an instance specifying the IP address and _community string_ of the device:
+- SNMPv2 の場合 デバイスの IP アドレスおよびデバイスの_コミュニティ文字列_を指定してインスタンスを構成します。
 
     ```yaml
     init_config:
@@ -56,7 +56,7 @@ To monitor individual devices:
 {{% /tab %}}
 {{% tab "SNMPv3" %}}
 
-- For SNMPv3, configure an instance specifying the IP address and SNMPv3 credentials of the device (as appropriate), for example: `user`, `authProtocol`, `authKey`, `privProtocol`, and `privKey`:
+- SNMPv3 の場合は、デバイスの IP アドレスおよび SNMPv3 資格情報 (デバイスに応じて) を指定してインスタンスを構成します。例: `user`、`authProtocol`、`authKey`、`privProtocol`、`privKey`:
 
     ```yaml
     init_config:
@@ -78,26 +78,26 @@ To monitor individual devices:
 {{% /tab %}}
 {{< /tabs >}}
 
-- [Restart the Agent][5].
+- [Agent を再起動します][5]。
 
-After setup, the Agent collects relevant metrics by matching your devices to one of [Datadog's device profiles][6].
+セットアップしたら、Agent は、[Datadog のデバイスプロファイル][6]の 1 つとデバイスを照合して、関連するメトリクスを収集します。
 
-To expand your setup:
+セットアップを拡張するには
 
-* Add more instances to collect metrics from more devices on your network.
-* Use [Autodiscovery](#autodiscovery) if you need to collect metrics from lots of devices across a dynamic network.
+* さらにインスタンスを追加して、ネットワーク上のより多くのデバイスからメトリクスを収集します。
+* 動的ネットワーク上の多数のデバイスからメトリクスを収集する必要がある場合は、[オートディスカバリー](#autodiscovery)を使用します。
 
-### Autodiscovery
+### オートディスカバリー
 
 An alternative to specifying individual devices is to use Autodiscovery to automatically discover all the devices on your network.
 
-Autodiscovery polls each IP on the configured subnet, and checks for a response from the device. Then, the Datadog Agent looks up the `sysObjectID` of the discovered device and maps it to one of [Datadog's device profiles][6]. The profiles contain lists of predefined metrics to collect for various types of devices.
+オートディスカバリーは、構成されたサブネット上の各 IP をポーリングし、デバイスからの応答を確認します。次に、Datadog Agent は、検出されたデバイスの `sysObjectID` を検索し、それを [Datadog のデバイスプロファイル][6]の 1 つにマップします。このプロファイルには、さまざまなタイプのデバイスについて収集される事前定義メトリクスのリストが含まれます。
 
-To use Autodiscovery with Network Device Monitoring:
+ネットワークデバイスモニタリングでオートディスカバリーを使用するには
 
-1. Install or upgrade the Datadog Agent to v7.27+. For platform specific instructions, see the [Datadog Agent][7] documentation.
+1. Datadog Agent をインストールまたは v7.27 以上にアップグレードします。プラットフォーム固有の手順については、[Datadog Agent][7] のドキュメントを参照してください。
 
-2. Edit the [`datadog.yaml`][8] Agent configuration file to include all the subnets for Datadog to scan. The following sample config provides required parameters, default values, and examples for Autodiscovery.
+2. [`datadog.yaml`][8] Agent コンフィギュレーションファイルを編集し、Datadog がスキャンするすべてのサブネットを含めます。以下のサンプルコンフィギュレーションは、オートディスカバリーに必要なパラメーター、デフォルト値、そして例を示しています。
 
 {{< tabs >}}
 {{% tab "SNMPv2" %}}
@@ -165,7 +165,7 @@ network_devices:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: The Datadog Agent automatically configures the SNMP check with each of the IPs that are discovered. A discovered device is an IP that responds successfully when being polled using SNMP.
+**注**: Datadog Agent は検出された各 IP の SNMP チェックを自動で構成します。検出されたデバイスは、SNMP を使用してポールされた際に正常に応答する IP となります。
 
 **Note**: Make sure you are on Agent 7.53+ for this syntax. For previous versions, see the [previous config_template.yaml][10]
 
@@ -246,11 +246,11 @@ ping:
   enabled: true
 ```
 
-## Validation
+## 検証
 
-[Run the Agent's status subcommand][9] and look for `snmp` under the Checks section.
+[Agent のステータスサブコマンドを実行][9]し、Checks セクションで `snmp` を探します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

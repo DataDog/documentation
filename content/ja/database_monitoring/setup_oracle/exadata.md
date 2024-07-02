@@ -10,9 +10,9 @@ further_reading:
 
 {{% dbm-oracle-definition %}}
 
-The Agent collects telemetry directly from the database by logging in as a read-only user.
+読み取り専用ユーザーとしてログインし、Agent でデータベースから直接テレメトリーを収集します。
 
-## Before you begin
+## はじめに
 
 {{% dbm-supported-oracle-versions %}}
 
@@ -28,12 +28,12 @@ Proxies, load balancers, and connection poolers
 Data security considerations
 : See [Sensitive information][7] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
-## Setup
+## セットアップ
 
 Complete the following to enable Database Monitoring with your Oracle database:
 
 1. [Create the Datadog user](#create-the-datadog-user)
-1. [Install the Agent](#install-the-agent)
+1. [Agent をインストールする](#install-the-agent)
 1. [Configure the Agent](#configure-the-agent)
 1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
 1. [Validate the setup](#validate-the-setup)
@@ -42,19 +42,19 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 {{% dbm-create-oracle-user %}}
 
-### Install the Agent
+### Agent のインストール
 
 See the [DBM Setup Architecture][12] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
 
 For installation steps, see the [Agent installation instructions][9].
 
-### Configure the Agent
+### Agent の構成
 
-#### Multi-node Exadata
+#### マルチノード Exadata
 
 Configure the Agent for each node by following the instructions for [Oracle RAC][4].
 
-#### Single-node Exadata
+#### シングルノード Exadata
 
 Configure the Agent by following the instructions for [self-hosted Oracle databases][3].
 
@@ -72,11 +72,11 @@ On the Integrations page in Datadog, install the [Oracle integration][10] for yo
 
 [Run the Agent's status subcommand][1] and look for `oracle` under the **Checks** section. Navigate to the [Dashboard][11] and the [Databases][2] page in Datadog to get started.
 
-## Custom queries
+## カスタムクエリ
 
 Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][5] to learn more about the configuration options available.
 
-<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
+<div class="alert alert-warning">カスタムクエリを実行すると、Oracle によって追加コストまたは手数料が課される場合があります。</div>
 
 [1]: /agent/configuration/agent-commands/#agent-status-and-information
 [2]: https://app.datadoghq.com/databases
@@ -91,6 +91,6 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [11]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [12]: /database_monitoring/architecture/
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

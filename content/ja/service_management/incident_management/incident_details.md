@@ -1,6 +1,5 @@
 ---
 title: Incident Details Page
-kind: documentation
 description: Manage the context and work for an incident
 aliases:
 - /monitors/incident_management/incident_details
@@ -10,144 +9,144 @@ further_reading:
   text: Incident Management Analytics
 ---
 
-## Overview
+## 概要
 
-{{< img src="/service_management/incidents/incident_details/incident_overview_page.png" alt="Incident details page of an Active SEV-4 incident." style="width:100%;">}}
+{{< img src="/service_management/incidents/incident_details/incident_overview_page.png" alt="Active SEV-4 インシデントのインシデント詳細ページ。" style="width:100%;">}}
 
-Every incident in Datadog has its own Incident Details page where you can manage your incident's property fields, signals, tasks, documents, responders, and notifications. An Incident Details page is available after you [create a new incident][1]. The Incident Details page contains a global header for quick access to key actions, while the remaining body of the page is divided into different sections using tabs to group related incident data together. The first of these sections is the Overview.
+Datadog のすべてのインシデントには、インシデントのプロパティフィールド、シグナル、タスク、ドキュメント、対応者、および通知を管理できる独自の Incident Details ページがあります。Incident Details ページは、[新しいインシデントを作成][1]した後に利用できます。Incident Details ページには、キーアクションに素早くアクセスするためのグローバルヘッダーがあり、残りのページ本体は、関連するインシデントデータをグループ化するためのタブによって、異なるセクションに分かれています。最初のセクションは Overview です。
 
-## Global header
+## グローバルヘッダー
 
-The global header provides access to the [Status and Severity][2] selectors, and links to your [Incident Integrations][3]. For more information on how to configure automatic links with every new incident for Slack and Microsoft Teams links, see [Incident Settings][4].
+グローバルヘッダーは、[Status and Severity][2] セレクタへのアクセス、および [Incident Integrations][3] へのリンクを提供します。Slack および Microsoft Teams のリンクについて、新しいインシデントごとに自動リンクを構成する方法の詳細については、[インシデントの設定][4]を参照してください。
 
-After you've moved an incident to the resolved status, an option appears in the header to generate a postmortem Notebook using a [postmortem template][5]. Configure your postmortem templates in the [Incident Settings][6] page to predefine the structure and content of your postmortems.
+インシデントを解決済みステータスに移動すると、[事後分析テンプレート][5]を使用して事後分析ノートブックを生成するオプションがヘッダーに表示されます。[Incident Settings][6] ページで事後分析テンプレートを構成して、事後分析の構造と内容を事前に定義します。
 
-## Incident details overview section
+## インシデント詳細の概要セクション
 
-Use the Overview section to specify an incident's properties and define customer impact. 
+Overview セクションを使用して、インシデントのプロパティを指定し、顧客への影響を定義します。
 
-By default, all incidents have the following properties:
+デフォルトでは、すべてのインシデントには以下のプロパティがあります。
 
 * Root Cause
-* Services
-* Teams
-* Detection Method
-* Summary
+* サービス
+* チーム
+* 検出方法
+* サマリー
 
-Properties are divided into the following three sections:
+プロパティは以下の 3 つのセクションに分かれています。
 
-* What happened
-* Why it happened
-* Attributes
+* 発生した事象
+* 発生原因
+* 属性
 
-In [Incident Settings][7], add additional property fields using the `<KEY>:<VALUE>` pairs from your Datadog metric tags, or create custom ones. Assign values to an incident's properties to enable you to search for a subset of incidents on the [Incident Homepage][8] and to form queries when using [Incident Management Analytics][9]. You can also reorder your property fields and move them to different headings so the most important properties are in prominent locations.
+[Incident Settings][7] で、Datadog メトリクスタグから `<KEY>:<VALUE>` ペアを使用してプロパティフィールドを追加するか、カスタムフィールドを作成します。インシデントのプロパティに値を割り当てると、[Incident Homepage][8] でインシデントのサブセットを検索したり、[Incident Management Analytics][9] を使用する際にクエリを形成したりできます。プロパティフィールドを並べ替えたり、異なる見出しに移動させたりして、最も重要なプロパティを目立つ場所に配置することもできます。
 
-If your incident is customer-facing, specify the details in the Impact section:
+インシデントが顧客向けの場合は、Impact セクションで詳細を指定します。
 
-1. Click **Add**.
-2. Specify a start date and time for the impact.
-3. Specify an end date and time for the impact or leave blank if the impact is still ongoing.
-4. Describe the nature of the impact on customers in `Scope of impact`.
-5. Click **Save**.
+1. **Add** をクリックします。
+2. 影響の開始日時を指定します。
+3. 影響の終了日時を指定するか、影響が継続中の場合は空白のままにします。
+4. `Scope of impact` に顧客に対する影響の性質を記述します。
+5. **Save** をクリックします。
 
-In addition to housing your property fields, the Overview section also provides the following at-a-glance summary modules:
+プロパティフィールドの他に、Overview セクションには以下のような一目でわかるサマリーモジュールがあります。
 
-1. *Condensed Timeline*: Displays the times when the incident changes state as well as when impact started and ended for a high-level view of the incident's lifecycle.
-2. *Latest Notifications*: Displays the most recent notification sent for the incident, with quick access to the full list of notifications in the [Notification section](#notifications-section).
-3. *Pending Tasks*: Displays the most recent incomplete task, with quick access to the full list of tasks in the [Remediation section](#remediation-section).
-4. *Responders*: Displays the current incident commander and avatars for the remaining responders assigned to the incident.
-5. *Recent timeline entries*: Displays the five most recent entries in the incident timeline, with quick access to see the entire [Timeline section](#timeline-section).
+1. *Condensed Timeline*: インシデントのライフサイクルの概要を把握できるように、インシデントが状態を変更した時間、影響が開始した時間と終了した時間が表示されます。
+2. *Latest Notifications*: [Notification セクション](#notifications-section)にある通知の全リストに素早くアクセスできるように、インシデントに対して送信された最新の通知が表示されます。
+3. *Pending Tasks*: [Remediation セクション](#remediation-section)にあるタスクの全リストに素早くアクセスできるように、最新の未完了タスクが表示されます。
+4. *Responders*: 現在のインシデントコマンダーと、インシデントに割り当てられている残りの対応者のアバターが表示されます。
+5. *Recent timeline entries*: [Timeline セクション](#timeline-section)全体に素早くアクセスできるように、インシデントタイムラインの最新の 5 つのエントリが表示されます。
 
-## Timeline section
+## Timeline セクション
 
-{{< img src="/service_management/incidents/incident_details/incident_details_timeline.png" alt="Incident details Timeline view showing progression of a case escalated to an incident" style="width:100%;">}}
+{{< img src="/service_management/incidents/incident_details/incident_details_timeline.png" alt="インシデントにエスカレーションされたケースの進行を示すインシデントの詳細の Timeline ビュー" style="width:100%;">}}
 
-The Incident Timeline is the primary source of information for the work done during an incident. As actions are performed, new cells are added to the timeline in chronological order to capture the changes made, the person who made the change, and the time the changes were made. 
+Incident Timeline は、インシデント中に行われた作業の主な情報源です。アクションが実行されると、新しいセルが時系列でタイムラインに追加され、変更内容、変更者、変更時刻がキャプチャされます。
 
 ### Content types
 
-Each cell has its own content type that indicates the kind of information the cell contains:
+各セルには、そのセルに含まれる情報の種類を示す独自のコンテンツタイプがあります。
 
-|  Content type      | Description                                                                                            |
+|  Content type      | 説明                                                                                            |
 | ------------------ | ------------------------------------------------------------------------------------------------------ |
-| Responder note     | A note manually written by an incident responder. Responder notes have the following sub-types:<br>- *Graph*: The responder note contains one or more Datadog graphs<br>- *Link*: The responder note contains a hyperlink<br>- *Code*: The responder note contains text wrapped in Markdown syntax for code blocks
-| Incident update    | Any changes made to an incident's properties (including status and severity) or its impact.
-| Integration update | Any changes made through the Incident Management product's [integrations][3].
-| Task               | Any changes made to incident tasks in the Remediation section of the Incident Details page.
-| Notification sent  | An update when a manual notification is sent by an incident responder.
+| Responder note     | インシデント対応者が手動で書いたメモ。対応者メモには以下のサブタイプがあります。<br>- *Graph*: 対応者メモに 1 つ以上の Datadog グラフが含まれている<br>- *Link*: 対応者メモにハイパーリンクが含まれている<br>- *Code*: 対応者メモにコードブロックの Markdown 構文でラップされたテキストが含まれている
+| Incident update    | インシデントのプロパティ (ステータスや重大度を含む) やその影響に加えられた変更。
+| Integration update | Incident Management 製品の[インテグレーション][3]を通じて行われた変更。
+| Task               | Incident Details ページの Remediation セクションでインシデントタスクに加えられたすべての変更。
+| Notification sent  | インシデント対応者から手動通知が送信された場合の更新。
 
-Add responder notes directly to the timeline using the text box just underneath the tabs for switching between the different sections of the Incident Details page. Customize the timestamp of the responder note at creation time to capture important information that was relevant at an earlier point in time in the chronological order of the timeline. For responder notes you've authored, you can edit the content or timestamp, or delete the note entirely. You can also copy a link to a specific cell to share with teammates. Responder notes can be [added to the timeline from Slack][10].
+Incident Details ページのセクションを切り替えるタブのすぐ下にあるテキストボックスを使って、タイムラインに直接対応者メモを追加します。作成時の対応者メモのタイムスタンプをカスタマイズすることで、タイムラインの時系列で、以前の時点に関連する重要な情報をキャプチャすることができます。自分が作成した対応者メモについては、内容やタイムスタンプを編集したり、メモを完全に削除したりできます。また、特定のセルへのリンクをコピーして、チームメイトと共有することもできます。対応者メモは [Slack からタイムラインに追加][10]することができます。
 
-For graph cells specifically, graph definitions are stored using share URLs for graphs if enabled in your [Organization Settings][11]. When a graph cell is added to the timeline, it has full interactive hover states as found in Dashboards, Notebooks, and other pages. After 24 hours of being added to the timeline, the graphs are replaced with static images capturing what the graph was displaying. This is to ensure that graphs that are displaying short retention data have backup images captured even after the live data in the graphs has expired.
+グラフセルに限り、[組織設定][11]で有効化されている場合、グラフの定義はグラフの共有 URL を用いて保存されます。タイムラインにグラフセルを追加すると、ダッシュボード、ノートブック、その他のページに見られる完全なインタラクティブホバー状態を備えています。タイムラインに追加されてから 24 時間後、グラフはグラフが表示していたものをキャプチャした静止イメージに置き換えられます。これにより、短期間保持されるデータを表示するグラフについても、グラフ内のライブデータが失効した後でもバックアップイメージが取得されることを保証します。
 
-By default, timeline cells are sorted in `oldest first` order, but this can be changed to `newest first` using the button at the top of the timeline.
+デフォルトでは、タイムラインのセルは `oldest first` (古い順) にソートされますが、タイムラインの一番上にあるボタンを使って `newest first` (新しい順) に変更することができます。
 
-## Remediation section
+## Remediation セクション
 
-Use the Remediation section to store any documents or resources that are relevant to the remediation process of an incident, as well as to track key tasks for the remediation process. 
+インシデントの修復プロセスに関連するドキュメントやリソースを保存したり、修復プロセスの主要タスクを追跡するには、Remediation セクションを使用します。
 
-Documents can be added by pasting the document URL and giving the link a human-readable name for quick access.
+ドキュメントを追加するには、ドキュメントの URL を貼り付け、素早くアクセスできるようにリンクに人間が読める名前を付けます。
 
-Incident tasks are created directly in the Remediation section, as well as through Datadog's [Slack integration][12]. 
+インシデントタスクは、Datadog の [Slack インテグレーション][12]と同様に、Remediation セクションで直接作成することができます。
 
-From the Remediation section, type the description of your task in the creation text box. To assign a task to a Datadog user, type `@` in the description text box, or use the `Assignees` column after the task has been created. An incident task can have more than one assignee. After a task has been created, it can also be assigned a due date. 
+Remediation セクションの creation テキストボックスにタスクの説明を入力します。タスクを Datadog ユーザーに割り当てるには、説明テキストボックスに `@` と入力するか、タスク作成後に `Assignees` 列を使用します。インシデントタスクは複数の担当者を持つことができます。タスクの作成後、期限を割り当てることもできます。
 
-As work for different tasks is finished, individual tasks can be marked as completed by clicking the checkbox to the left of the task's description. If you have a large number of tasks, you can filter them down by searching for key words or by hiding completed tasks from view.
+異なるタスクの作業が終了すると、タスクの説明の左にあるチェックボックスをクリックすることで、個々のタスクに完了マークを付けることができます。タスクの数が多い場合は、キーワードで検索したり、完了したタスクを非表示にすることで絞り込むことができます。
 
-## Response Team section
+## Response Team セクション
 
 <div class="alert alert-warning">
-This feature is in open beta.
+これはオープンベータ版の機能です。
 </div>
 
-{{< img src="/service_management/incidents/incident_details/incident_response_team.png" alt="Incident details reponse team section showing the assigned Incident Commander, Responder, and Communications Lead" style="width:100%;" >}}
+{{< img src="/service_management/incidents/incident_details/incident_response_team.png" alt="割り当てられたインシデントコマンダー、対応者、コミュニケーションリードを示すインシデント詳細対応チームセクション" style="width:100%;" >}}
 
-In the Response Team section, you can form your response team by adding other users and assigning them roles to carry out in the process of resolving an incident. The two default responder types provided by Datadog are:
+対応チームセクションでは、他のユーザーを追加し、インシデントの解決プロセスで実行するロールを割り当てることで、対応チームを編成することができます。Datadog が提供するデフォルトの対応者タイプは以下の 2 つです。
 
-1. `Incident Commander` - The individual responsible for leading the response team 
-3. `Responder` - An individual that actively contributes to investigating an incident and resolving its underlying issue
+1. `Incident Commander` - 対応チームのリーダーを務める責任者
+3. `Responder` - インシデントの調査やその根本的な問題の解決に積極的に貢献している人
 
-If you wish to create custom responder roles, you can do so in the [Incident Settings for Responder Types][13]. This allows you to create new responder types with custom names and descriptions. It also allows you to choose if a responder type should be a one person role or a multi person role.
+カスタムの対応者ロールを作成したい場合は、[Incident Settings の Responder Types][13] で行うことができます。これにより、カスタムの名前と説明で新しい対応者タイプを作成できます。また、対応者タイプが one person role か multi person role かを選択することも可能です。
 
-**Note:** These roles are unrelated to those found in the [Role Based Access Control (RBAC)][14] system. RBAC roles control a user's permissions to access certain features in Datadog. The Responder Types system in Incident Management does not change a user's permissions in any capacity. It is instead about inviting responders to your incidents and giving them documented roles in your response process for visibility. 
+**注:** これらのロールは、[ロールベースのアクセス制御 (RBAC)][14] システムにおけるロールとは無関係です。RBAC のロールは、Datadog の特定の機能に対するユーザーのアクセス許可を制御します。インシデント管理における対応者タイプシステムは、いかなる点においてもユーザーのアクセス許可を変更するものではありません。それよりも、対応者をインシデントに招待し、対応プロセスにおいて文書化されたロールを付与することで可視性を高めることが目的です。
 
-If you add an individual as a responder, they are notified through the email associated with their Datadog account. Anyone is able to change the role of a responder, but you can only remove an individual from an incident's Response Team if they have the general `Responder` role assigned and have no activity in the incident. If there is already an `Incident Commander` assigned to an incident, assigning another individual as the `Incident Commander` transfers that role over to them. The previous `Incident Commander` is reassigned the general `Responder` role. A similar reassignment happens whenever you reassign one of your custom one person roles.
+個人を対応者として追加すると、その人の Datadog アカウントに関連付けられたメールを通じて通知されます。対応者のロールは誰でも変更できますが、インシデントの対応チームから個人を削除できるのは、その個人が一般的な `Responder` のロールを持ち、インシデントで何の活動も行っていない場合のみです。インシデントにすでに `Incident Commander` が割り当てられている場合、別の個人を `Incident Commander` に指定すると、そのロールはその個人に引き継がれます。以前の `Incident Commander` には `Responder` のロールが再割り当てされます。カスタムの one person role を再割り当てした場合も、必ず同様の再割り当てが発生します。
 
-The Response Team list also saves the date and time when an individual was originally added to the response team of an incident, as well as the date and time when they last contributed something to the Incident Timeline.
+対応チームリストには、個人が最初にインシデントの対応チームに追加された日付と時間、およびその個人がインシデントタイムラインに最後に何かを投稿した日付と時間も保存されます。
 
-## Notifications section
+## 通知セクション
 
-{{< img src="service_management/incidents/incident_notifications.jpeg" alt="Incident Notifications" style="width:80%;">}}
+{{< img src="service_management/incidents/incident_notifications.jpeg" alt="インシデント通知" style="width:80%;">}}
 
-All stakeholder notifications for an incident are consolidated in the Notifications section.
-You can manually create, save as draft, and send notifications directly from this page. Automated notifications sent by [Notification Rules][15] for the incident in question are also listed in this section.
+インシデントに対するすべてのステークホルダーからの通知は、通知セクションに集約されます。
+このページから直接、通知を手動で作成、下書きとして保存、送信することができます。当該インシデントの[通知ルール][15]によって送信された自動通知も、このセクションにリストされます。
 
-To create a manual notification: 
+手動で通知を作成するには
 
-1. Click the **+ New Notification** button in the top right of the section.
-2. Enter your desired recipients. These can be any notification handles supported by Datadog including emails, Slack channels, PagerDuty handles, webhooks, and more.
-3. Select a [Message Template][16].
-4. Edit the title and message of your notification as necessary using Markdown and any supported incident template variable by typing `{{`. 
-   - Template variables are based on the properties of an incident. Before a message is sent, all template variables are replaced by the corresponding value of the referenced property that is available to the message when it was sent.
-5. Use the `{{incident.created}}` variable to customize your message timezone. This template variable will display the option to set your variable time zone.
-6. Send your notification or save it as a draft.
+1. セクションの右上にある **+ New Notification** ボタンをクリックします。
+2. 希望する受信者を入力します。メール、Slack チャンネル、PagerDuty ハンドル、Webhook など、Datadog がサポートする通知ハンドルであれば、どれでもかまいません。
+3. [メッセージテンプレート][16]を選択します。
+4. Markdown とサポートされているインシデントテンプレート変数を使用して、必要に応じて通知のタイトルとメッセージを編集し、`{{` と入力します。
+   - テンプレート変数は、インシデントのプロパティに基づきます。メッセージが送信される前に、すべてのテンプレート変数は、メッセージが送信されたときに利用可能な参照プロパティの対応する値で置き換えられます。
+5. メッセージのタイムゾーンをカスタマイズするには `{{incident.created}}` 変数を使います。このテンプレート変数はタイムゾーンを設定するオプションを表示します。
+6. 通知を送信するか、下書きとして保存します。
 
-The Notifications section is separated into lists: Drafts and Sent.
+通知セクションは、下書きリストと送信済みリストに分かれています。
 
-Both lists display:
+両方のリストに以下が表示されます。
 
-1. The (intended) recipients of a notification 
-2. The contents of the notification's message and any renotification messages that were sent
-3. When the notification was last updated 
-4. The original author of the notification
+1. 通知の (意図された) 受信者
+2. 通知のメッセージの内容、および送信された再通知メッセージ
+3. 通知が最後にいつ更新されたか
+4. 通知の元の作成者
 
-The Sent list also displays if a notification was manually or automatically sent by a notification rule. If the notification was automated, the rule that triggered the notification is displayed.
+送信済みリストには、通知が通知ルールによって手動で送信されたのか、自動的に送信されたのかも表示されます。通知が自動送信された場合、通知のトリガーとなったルールが表示されます。
 
-## Getting started
+## はじめに
 
-Work through an example workflow in the [Getting Started with Incident Management][17] guide.
+[Incident Management 入門][17]ガイドのワークフロー例を実行してください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

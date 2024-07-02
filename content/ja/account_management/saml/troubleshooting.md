@@ -3,18 +3,18 @@ title: SAML Troubleshooting
 description: Troubleshoot SAML issues for your Datadog account
 further_reading:
 - link: "https://www.samltool.com/online_tools.php"
-  tag: External Site
+  tag: 外部サイト
   text: Identify your assertions with developer SAML tools
 
 ---
 
-## Overview
+## 概要
 
-This page provides troubleshooting instructions for common errors during Security Assertion Markup Language (SAML) authentication.
+このページでは、SAML (Security Assertion Markup Language) 認証時によく発生するエラーのトラブルシューティングを説明します。
 
-## Common errors
+## よくあるエラー
 
-If you come across an error message from the list below, there may be an issue with your mappings configuration in Datadog or in your identity provider (IdP) configuration.
+以下のリストにあるエラーメッセージに遭遇した場合、Datadog のマッピング構成または IDP (ID プロバイダー) の構成に問題がある可能性があります。
 
 - `SAML is not enabled for this org`
 - `Arf. Unknown User`
@@ -23,53 +23,53 @@ If you come across an error message from the list below, there may be an issue w
 - `SAML NO HANDLE ERROR`
 - `No active account for a user`
 
-To resolve, see the section below for the specific error.
+解決するには、具体的なエラーについて、以下のセクションを参照してください。
 
 ### SAML is not enabled for this org
 
-SAML is turned off for your account. Navigate to [Login Methods][1]. In the SAML section, ensure that **Enabled by Default** is set to **On**.
+アカウントで SAML がオフになっています。[ログイン方法][1]に移動します。SAML セクションで、**Enabled by Default** が **On** に設定されていることを確認します。
 
-**Note:** Configuring SAML requires the Datadog Admin Role or the Org Management (`org_management`) permission.
+**注:** SAML の構成には、Datadog の Admin Role または Org Management (`org_management`) 権限が必須です。
 
 ### There are no authn mappings for this user
 
-There is a mismatch with your mappings configuration in Datadog and your configuration in your IdP. See [Roles errors](#roles-errors).
+Datadog のマッピングコンフィギュレーションと IdP のコンフィギュレーションにミスマッチがあります。[ロールエラー](#roles-errors)を参照してください。
 
 ### Assertion could not be validated
 
-After enabling IdP initiated login in Datadog, the [Assertion Consumer Service (ACS) URLs][2] in your IdP configuration may be incorrect. Alternatively, your assertions may be unsigned. For more information, see [Assertions and attributes][3].
+Datadog で IdP 起動ログインを有効にした後、IdP コンフィギュレーションの [Assertion Consumer Service (ACS) URL][2] が正しくないことがあります。または、アサーションが未署名である可能性もあります。詳細については、[アサーションと属性][3]を参照してください。
 
 ### SAML no handle error
 
-Your assertion may be missing the required `eduPersonPrincipalName` attribute. Confirm that this attribute is set in your configuration. For more information, see [Assertions and attributes][3].
+アサーションに必要な `eduPersonPrincipalName` 属性が欠けている可能性があります。コンフィギュレーションにこの属性が設定されていることを確認してください。詳細については、[アサーションと属性][3]を参照してください。
 
 ### No active account for a user
 
-This error can occur as a result of the following scenarios:
-  - If you've enabled Just-In-Time (JIT) provisioning, and a user still sees this error when trying to log in, check to see if you have already sent an email invitation to this user prior to enabling JIT. JIT does not apply to users who have already been invited. To resolve this, have the user accept the email invitation. Or, if the invitation has expired, have the admin send a new invitation.
-  - If a user is no longer enabled in a Datadog organization that has JIT provisioning enabled and they try to log in again through SAML and the `There is no active account for error` occurs, re-enable the user in [User settings][4].
+このエラーは、次のような場合に発生する可能性があります。
+  - ジャストインタイム (JIT) プロビジョニングを有効にしても、ユーザーがログインしようとするとこのエラーが表示される場合は、JIT を有効にする前に、このユーザーに招待メールを送信していないかどうか確認してください。JIT は、すでに招待されているユーザーには適用されません。この問題を解決するには、ユーザーに招待メールを受け入れてもらいます。または、招待状の有効期限が切れている場合は、管理者が新しい招待状を送信してください。
+  - JIT プロビジョニングが有効な Datadog 組織でユーザーが有効でなくなり、SAML で再ログインしようとして `There is no active account for error` が発生した場合、[User settings][4] でユーザーを再有効化してください。
 
 ## IdP metadata file errors
 
-If you are having trouble updating your IdP metadata file, verify that the metadata file you are trying to upload is valid.
+IdP メタデータファイルの更新に問題がある場合、アップロードしようとするメタデータファイルが有効であることを確認してください。
 
-To validate your metadata file:
+メタデータファイルの検証を行うには
 
-1. Choose a SAML validation tool, such as the [SAML developer tool][5] by OneLogin.
-2. Paste your metadata into the XML field and select **Metadata** in the XSD (schema file) field.
-3. Click **Validate XML With the XSD Schema**.
+1. OneLogin の [SAML 開発者ツール][5]などの SAML 検証ツールを選択します。
+2. XML フィールドにメタデータを貼り付け、XSD (スキーマファイル) フィールドで **Metadata** を選択します。
+3. **Validate XML With the XSD Schema** をクリックします。
 
 ## Roles errors
 
-When mappings are enabled, users logging in with SAML to a Datadog account are permanently stripped of their current roles. Datadog assigns new roles based on the details in the SAML assertion passed on from your IdP.
+マッピングを有効にすると、Datadog アカウントに SAML でログインするユーザーは、現在のロールを永久に剥奪されます。Datadog は、IdP から渡された SAML アサーションの詳細に基づいて、新しいロールを割り当てます。
 
-Users who log in with SAML and do not have values that map to a Datadog role are permanently stripped of all roles. That user may no longer log in.
+SAML でログインし、Datadog のロールに対応する値を持っていないユーザーは、すべてのロールが永久に剥奪されます。そのユーザーは、今後ログインすることができなくなります。
 
-{{< img src="account_management/saml/unknown_user_error.png" alt="No AuthNMappings for this user" style="width:80%;">}}
+{{< img src="account_management/saml/unknown_user_error.png" alt="このユーザーには AuthNMappings がありません" style="width:80%;">}}
 
-If you have group mappings set and are not able to see your roles, your group mappings in the Datadog application may appear differently in your IdP. To verify:
+グループマッピングを設定してもロールが表示されない場合、Datadog アプリケーションのグループマッピングが IdP で異なって表示される可能性があります。確認するには
 
-1. Retrieve your IdP's SAML assertion for your account. Use browser tooling, such as [extensions][6], to retrieve your SAML assertion. For example:
+1. アカウントの IdP の SAML アサーションを取得します。[拡張機能][6]などのブラウザツールを使用して、SAML アサーションを取得します。たとえば、以下のようになります。
 
   ```xml
   <saml2:Attribute Name="member_of"
@@ -82,61 +82,61 @@ If you have group mappings set and are not able to see your roles, your group ma
   </saml2:Attribute>
   ```
 
-2. Navigate to your profile and select **Organization Settings** in the bottom left corner of Datadog.
-3. Select [**SAML Group Mappings**][7].
-4. Compare the attributes provided by your IdP in your SAML assertion to the attributes set in the [**SAML Group Mappings**][7] tab.
+2. 自分のプロファイルに移動し、Datadog の左下にある **Organization Settings** を選択します。
+3. [**SAML Group Mappings**][7] を選択します。
+4. SAML アサーションで IdP が提供する属性を、[**SAML Group Mappings**][7] タブで設定された属性と比較します。
 
-  {{< img src="account_management/saml/saml_mappings_example.png" alt="SAML mappings in Datadog" style="width:80%;">}}
+  {{< img src="account_management/saml/saml_mappings_example.png" alt="Datadog の SAML マッピング" style="width:80%;">}}
 
-5. Resolve any discrepancies in either the Datadog SAML Group Mappings settings, or within your IdP settings. For example, if `memberof` is a set attribute in Datadog, and it's `member_Of` in your SAML assertion, resolve accordingly.
+5. Datadog SAML Group Mappings の設定、または IdP の設定のいずれかに矛盾がある場合は解決してください。たとえば、`memberof` が Datadog の set 属性であり、SAML アサーションでは `member_Of` である場合、それに応じて解決します。
 
-Discrepancies may occur when there is no match or a mismatch between the attribute key and value. For example, if you see a key value pair of `memberOf` and `name_of_your_group_goes_here` in **SAML Group Mappings**, you run into an issue because this pair is not included in the assertion sent over from your IdP.
+属性キーと値の間に一致がない、またはミスマッチがある場合、不一致が発生することがあります。たとえば、**SAML Group Mappings** で `memberOf` と `name_of_your_group_goes_here` というキーと値のペアがあった場合、このペアは IdP から送信されるアサーションに含まれていないため、問題に直面することになります。
 
-If you are having trouble logging in because of a role-based error, contact your Administrator to complete the troubleshooting steps above.
+ロールベースのエラーが原因でログインに問題がある場合、管理者に連絡して上記のトラブルシューティング手順を完了させてください。
 
-**Notes**:
+**注**:
 
-- Each IdP provides different types of attributes, and different ways to set attributes. For example, Azure uses [object IDs][8] for their attribute, or if you're using Okta, you must set attributes in [Okta settings][9]. Reference your IdP's attribute documentation for information.
+- 各 IdP は異なる種類の属性を提供し、属性の設定方法も異なります。例えば、Azure では[オブジェクト ID][8] を属性に使用していますが、Okta を使用している場合は [Okta 設定][9]で属性を設定する必要があります。詳しくは、IdP の属性に関するドキュメントを参照してください。
 
-- When you disable **SAML Group Mappings**, users are allowed to log in with SAML and have the same roles they are assigned to—even if the group membership changed in your IdP.
+- **SAML Group Mappings** を無効にすると、IdP でグループメンバーシップが変更された場合でも、ユーザーは SAML でログインし、割り当てられた同じロールを持つことができるようになります。
 
 ## Identity provider (IdP) errors
 
 If you encounter an error coming from your IdP such as Google, Active Directory, Azure, Okta, and more:
 
-- If you encounter an issue in Google's Admin Console, see [SAML app error messages][10].
-- If you encounter an issue in Active Directory, see [Debug SAML-based single sign-on to applications in Azure Active Directory][11].
-- If you encounter an issue in AuthO, see [Troubleshoot SAML Configurations][12].
-- If you encounter an issue in Azure, see [An app page shows an error message after the user signs in][13].
-- If you encounter an issue in Google, see [Datadog cloud application][14].
-- If you encounter an issue in Okta, see [Receiving 404 error when attempting to sign into application][16].
-- If you encounter an issue in SafeNet, see [SafeNet Trusted Access for Datadog][17].
+- Google の Admin Console で問題が発生した場合は、[SAML アプリのエラーメッセージ][10]を参照してください。
+- Active Directory で問題が発生した場合は、[Azure Active Directory における SAML ベースのアプリケーションへのシングルサインオンをデバッグする][11]を参照してください。
+- AuthO で問題が発生した場合は、[SAML コンフィギュレーションのトラブルシューティング][12]を参照してください。
+- Azure で問題が発生した場合は、[ユーザーがサインインした後に、アプリのページにエラーメッセージが表示される][13]を参照してください。
+- Google で問題が発生した場合は、[Datadog クラウドアプリケーション][14]を参照してください。
+- Oktaで問題が発生した場合は、[アプリケーションにサインインしようとすると 404 エラーが発生する][16]を参照してください。
+- SafeNet で問題が発生した場合は、[SafeNet Trusted Access for Datadog][17] を参照してください。
 
-### Identity provider certificates
+### ID プロバイダー証明書
 
-If you are unable to log in to your account, an IdP certificate may have expired and rotated, prompting a general SAML error.
+アカウントにログインできない場合、IdP 証明書が期限切れでローテーションされ、一般的な SAML エラーが発生している可能性があります。
 
-Some questions to ask yourself that can help narrow down whether you have a certificate issue:
+証明書の問題があるかどうかを絞り込むために、いくつかの質問をします。
 
-- Are you the only account that is unable to log in? If the issue involves multiple accounts, it could be that an IdP-based certificate has expired or rotated.
-- Did anything recently change in your SAML configuration?
-- If your users are using multiple IdPs, are the issues persisting across multiple IdPs, or only one?
-- Did you recently enable [**SAML Group Mappings**](#roles-errors)?
+- ログインできないアカウントはあなただけですか？複数のアカウントに問題がある場合、IdP ベースの証明書が期限切れまたはローテーションしている可能性があります。
+- 最近、SAML コンフィギュレーションに何か変更がありましたか？
+- ユーザーが複数の IdP を使用している場合、問題は複数の IdP にまたがっていますか？それとも 1 つの IdP にしかありませんか？
+- 最近、[**SAML グループマッピング**](#roles-errors)を有効にしましたか？
 
-To resolve, ensure IdP certificates are up-to-date within your IdP's settings and that you have uploaded the most recent metadata file from your IdP in Datadog.
+解決するには、IdP の証明書が IdP の設定内で最新であることと、Datadog で IdP から最新のメタデータファイルをアップロードしていることを確認してください。
 
-## Support
+## サポート
 
-If you are still having trouble logging into Datadog, contact [Datadog support][18].
+それでも Datadog にログインできない場合は、[Datadog サポート][18]に連絡してください。
 
-In your message, provide a screen recording of your login process and include responses to the following questions:
+メッセージの中で、ログインプロセスの画面記録を提供し、以下の質問に対する回答も含めてください。
 
-- Are you the only account that is unable to log in or are all users unable to log in?
-- Which organization are you trying to log in to and how are you trying to log in?
+- ログインできないのはあなたのアカウントだけですか？それともすべてのユーザーがログインできませんか？
+- どの組織に、どのようにログインしようとしているのですか？
 
-Before reaching out to Datadog support, contact your Administrator. You may need to also reach out your identity provider to resolve login issues.
+Datadog のサポートに連絡する前に、管理者に連絡してください。また、ログインの問題を解決するために、ID プロバイダーに連絡する必要がある場合があります。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

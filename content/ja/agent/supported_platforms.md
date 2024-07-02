@@ -16,11 +16,11 @@ The Datadog Agent is supported on a range of widely used operating systems and p
 
 <table>
   <thead>
-    <th>Operating system</th>
-    <th>OS versions</th>
-    <th>Agent 5 versions</th>
-    <th>Agent 6 versions</th>
-    <th>Agent 7 versions</th>
+    <th>オペレーティングシステム</th>
+    <th>OS バージョン</th>
+    <th>Agent 5 バージョン</th>
+    <th>Agent 6 バージョン</th>
+    <th>Agent 7 バージョン</th>
   </thead>
   <tr>
     <th rowspan='3'><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
@@ -149,10 +149,10 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 <table>
   <thead>
-    <th>Operating system</th>
-    <th>OS versions</th>
-    <th>Agent 6 versions</th>
-    <th>Agent 7 versions</th>
+    <th>オペレーティングシステム</th>
+    <th>OS バージョン</th>
+    <th>Agent 6 バージョン</th>
+    <th>Agent 7 バージョン</th>
   </thead>
   <tr>
     <th rowspan=3><a href='/agent/basic_agent_usage/amazonlinux/'>Amazon Linux</a></th>
@@ -214,12 +214,12 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 <table>
   <thead>
-    <th>Operating system</th>
-    <th>OS versions</th>
-    <th>Agent 5 versions</th>
-    <th>Agent 6 versions</th>
-    <th>Agent 7 versions</th>
-    <th>Notes</th>
+    <th>オペレーティングシステム</th>
+    <th>OS バージョン</th>
+    <th>Agent 5 バージョン</th>
+    <th>Agent 6 バージョン</th>
+    <th>Agent 7 バージョン</th>
+    <th>注</th>
   </thead>
   <tr>
     <th rowspan=3><a href='/agent/basic_agent_usage/windows/'>Windows Server</a></th>
@@ -227,7 +227,7 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
     <td><i class='icon-check-bold'></td>
     <td><= 6.45.1</td>
     <td><= 7.45.1</td>
-    <td>Server 2008 R2 is affected by a <a href="https://github.com/golang/go/issues/24489">known issue with clock drift and Go</a>.</td>
+    <td>Server 2008 R2 には、<a href="https://github.com/golang/go/issues/24489">クロックドリフトと Go に関する既知の問題</a>があります。</td>
   </tr>
   <tr>
     <td>2012/R2</td>
@@ -269,7 +269,7 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
 A check mark ({{< X >}}) indicates support for all minor and patch versions.
 
-To install a specific version of the Windows Agent, see the [installer list][8].
+Windows Agent の特定のバージョンをインストールするには、[インストーラーリスト][8]を参照してください。
 
 [8]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
 
@@ -278,7 +278,7 @@ To install a specific version of the Windows Agent, see the [installer list][8].
 
 ## 64-BIT X86
 
-| macOS version | Agent 5 | Agent 6 | Agent 7 |
+| macOS バージョン | Agent 5 | Agent 6 | Agent 7 |
 |---------------|---------|---------|---------|
 | 10.10 - 10.11 | <= 5.11.3 |||
 | 10.12 || <= 6.34.0 | <= 7.34.0 |
@@ -287,31 +287,31 @@ To install a specific version of the Windows Agent, see the [installer list][8].
 
 ## Apple ARM64
 
-| macOS version  | Agent 7 |
+| macOS バージョン  | Agent 7 |
 |----------------|---------|
 | >= 11.0 | >= 7.39.0 |
 
 {{% /tab %}}
 
-{{% tab "Cloud and containers" %}}
+{{% tab "クラウドとコンテナ" %}}
 
 ## 64-BIT X86 support
 
 | Agent | [Docker][5] | [Kubernetes][6] | [Azure Stack HCI OS][7]  |
 |-------|-------------|-----------------|--------------------------|
 | 5 | >= 1.14 | 1.3 - 1.8 ||
-| 6 | >= 1.14 | >= 1.3 | All versions |
-| 7 | >= 1.14 | >= 1.3 | All versions |
+| 6 | >= 1.14 | 1.3 以降 | All versions |
+| 7 | >= 1.14 | 1.3 以降 | All versions |
 
 
 ## 64-BIT ARM V8 support
 
 Agent 6 and 7 support the following 64-BIT ARM V8 platforms:
 
-| Platform    | Supported versions | 64-BIT ARM V8 support | 64-BIT X86 support |
+| プラットフォーム    | サポートされるバージョン | 64-BIT ARM V8 support | 64-BIT X86 support |
 |-------------|--------------------|-----------------------|--------------------|
 | [Docker][5] | >= 1.14     | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
-| [Kubernetes][6] | >= 1.3   | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
+| [Kubernetes][6] | 1.3 以降   | <i class='icon-check-bold'> | <i class='icon-check-bold'> |
 
 
 [5]: /agent/docker/
@@ -322,7 +322,7 @@ Agent 6 and 7 support the following 64-BIT ARM V8 platforms:
 
 {{% tab "Unix" %}}
 
-Agent 6 and 7 support the following [AIX][1] versions:
+Agent 6 および 7 は、以下の [AIX][1] バージョンをサポートしています。
 
 - 6.1 TL9 SP6
 - 7.1 TL5 SP3
@@ -333,7 +333,7 @@ Agent 6 and 7 support the following [AIX][1] versions:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

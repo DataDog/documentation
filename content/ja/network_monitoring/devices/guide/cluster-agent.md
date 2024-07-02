@@ -11,87 +11,87 @@ further_reading:
   text: Cluster Checks
 ---
 
-For Kubernetes environments, the [Datadog Cluster Agent][1] (DCA) can be configured to use the Network Device Monitoring (NDM) auto-discovery logic as a source of [cluster checks][2].
+Kubernetes 環境では、Network Device Monitoring (NDM) のオートディスカバリー論理を[クラスターチェック][2]のソースとして使用するよう [Datadog Cluster Agent][1] (DCA) を構成することが可能です。
 
-Agent auto-discovery combined with the DCA is scalable. It can monitor a large number of devices.
+Agent のオートディスカバリーを DCA と組み合わせるとスケーラブルになり、大量のデバイスを監視することができます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-1. Ensure the [DCA][1] is installed.
+1. [DCA][1] がインストールされていることを確認します。
 
-2. Set up the DCA with NDM auto-discovery using Datadog `helm-chart` by adding the Datadog Helm repository:
+2. Datadog Helm リポジトリを追加して Datadog `helm-chart` を使用し、NDM オートディスカバリで DCA をセットアップします。
 
     ```
     helm repo add datadog https://helm.datadoghq.com
     helm repo update
     ```
 
-3. Then, install `datadog-monitoring` and set your [Datadog API key][3].
+3. 次に、`datadog-monitoring` をインストールし、[Datadog API キー][3]を設定します。
 
     ```
     helm install datadog-monitoring --set datadog.apiKey=<YOUR_DD_API_KEY> -f cluster-agent-values.yaml datadog/datadog
     ```
 
-### Configuration
+### 構成
 
-Below is an example of the `cluster-agent-values.yaml`:
+以下は、`cluster-agent-values.yaml` の例です。
 
 {{< code-block lang="yaml" filename="cluster-agent-values.yaml" >}}
 datadog:
-  ## @param apiKey - string - required
-  ## Set this to your Datadog API key before the Agent runs.
+  ## @param apiKey - 文字列 - 必須
+  ## Agent を実行する前に、これを Datadog API キーに設定します。
   ## ref: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
   #
   apiKey: <DATADOG_API_KEY>
 
-  ## @param clusterName - string - optional
-  ## Set a unique cluster name to allow scoping hosts and Cluster Checks easily
-  ## The name must be unique and must be dot-separated tokens where a token can be up to 40 characters with the following restrictions:
-  ## * Lowercase letters, numbers, and hyphens only.
-  ## * Must start with a letter.
-  ## * Must end with a number or a letter.
-  ## Compared to the rules of GKE, dots are allowed whereas they are not allowed on GKE:
+  ## @param clusterName - 文字列 - 任意
+  ## 一意のクラスター名を設定すると、ホストおよびクラスターチェックを容易にスコーピングできます
+  ## 一意の名前を設定します。ドット区切りのトークンで、トークンは以下の制限を満たし、かつ 40 文字以内である必要があります。
+  ## * 英字小文字、数字、ハイフンのみ。
+  ## * 文字が先頭であること。
+  ## * 数字または文字が末尾であること。
+  ## GKE のルールと比較すると、GKE では許可されないドットが許可されています。
   ## https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1beta1/projects.locations.clusters#Cluster.FIELDS.name
   #
   clusterName: my-snmp-cluster
 
-  ## @param clusterChecks - object - required
-  ## Enable the Cluster Checks feature on both the cluster-agents and the daemonset
+  ## @param clusterChecks - オブジェクト - 必須
+  ## cluster-agents および daemonset の両方でクラスターチェックを有効にします
   ## ref: https://docs.datadoghq.com/agent/autodiscovery/clusterchecks/
-  ## Autodiscovery via Kube Service annotations is automatically enabled
+  ## Kube サービスのアノテーションを介したオートディスカバリーは自動的に有効です
   #
   clusterChecks:
     enabled: true
 
-  ## @param tags  - list of key:value elements - optional
-  ## List of tags to attach to every metric, event and service check collected by this Agent.
+  ## @param タグ  - key:value 要素のリスト - 任意
+  ## この Agent により収集されるすべてのメトリクス、イベント、サービスチェックにアタッチされるタグのリスト。
   ##
-  ## Learn more about tagging: https://docs.datadoghq.com/tagging/
+  ## タグ付けに関する詳細: https://docs.datadoghq.com/tagging/
   #
   tags:
     - 'env:test-snmp-cluster-agent'
 
-## @param clusterAgent - object - required
-## This is the Datadog Cluster Agent implementation that handles cluster-wide
-## metrics more cleanly, separates concerns for better rbac, and implements
-## the external metrics API so you can autoscale HPAs based on datadog metrics
+## @param clusterAgent - オブジェクト - 必須
+## これが、クラスターワイドのメトリクスをよりクリーンに扱い、懸念を分離して
+## RBAC を向上し、外部メトリクス API を実装する Datadog Cluster Agent の実装で、
+## Datadog のメトリクスに基づき HPA をオートスケールできます
 ## ref: https://docs.datadoghq.com/agent/kubernetes/cluster/
 #
 clusterAgent:
-  ## @param enabled - boolean - required
-  ## Set this to true to enable Datadog Cluster Agent
+  ## @param enabled - boolean - 必須
+  ## Datadog Cluster Agent を有効にするには、これを true に設定します
   #
   enabled: true
 
-  ## @param confd - list of objects - optional
-  ## Provide additional cluster check configurations
-  ## Each key will become a file in /conf.d
+  ## @param confd - オブジェクトのリスト - 任意
+  ## 追加のクラスターチェックコンフィギュレーションを提供します
+  ## 各キーは /conf.d のファイルになります
   ## ref: https://docs.datadoghq.com/agent/autodiscovery/
   #
   confd:
-     # Static checks
+     # 静的チェック
      http_check.yaml: |-
        cluster_check: true
        instances:
@@ -101,7 +101,7 @@ clusterAgent:
            url: http://example.net
          - name: 'Check Example Site3'
            url: http://example.net
-     # Autodiscovery template needed for `snmp_listener` to create instance configs
+     # `snmp_listener` がインスタンスのコンフィグを作成するために必要なオートディスカバリーのテンプレート
      snmp.yaml: |-
       cluster_check: true
       ad_identifiers:
@@ -109,103 +109,102 @@ clusterAgent:
       init_config:
       instances:
         -
-          ## @param ip_address - string - optional
-          ## The IP address of the device to monitor.
+          ## @param ip_address - 文字列 - 任意
+          ## 監視するデバイスの IP アドレス。
           #
           ip_address: "%%host%%"
 
-          ## @param port - integer - optional - default: 161
-          ## Default SNMP port.
+          ## @param port - 整数 - 任意 - default: 161
+          ## デフォルトの SNMP ポート。
           #
           port: "%%port%%"
 
-          ## @param snmp_version - integer - optional - default: 2
-          ## If you are using SNMP v1 set snmp_version to 1 (required)
-          ## If you are using SNMP v3 set snmp_version to 3 (required)
+          ## @param snmp_version - 整数 - 任意 - デフォルト: 2
+          ## SNMP v1 を使用する場合は snmp_version を 1 に設定 (必須)
+          ## SNMP v3 を使用する場合は snmp_version を 3 に設定 (必須)
           #
           snmp_version: "%%extra_version%%"
 
-          ## @param timeout - integer - optional - default: 5
-          ## Amount of second before timing out.
+          ## @param timeout - 整数 - 任意 - デフォルト: 5
+          ## タイムアウト前の秒数。
           #
           timeout: "%%extra_timeout%%"
 
-          ## @param retries - integer - optional - default: 5
-          ## Amount of retries before failure.
+          ## @param retries - 整数 - 任意 - デフォルト: 5
+          ## 失敗前の試行回数。
           #
           retries: "%%extra_retries%%"
 
-          ## @param community_string - string - optional
-          ## Only useful for SNMP v1 & v2.
+          ## @param community_string - 文字列 - 任意
+          ## SNMP v1 & v2 にのみ有用。
           #
           community_string: "%%extra_community%%"
 
-          ## @param user - string - optional
-          ## USERNAME to connect to your SNMP devices.
+          ## @param user - 文字列 - 任意
+          ## SNMP デバイスに接続する USERNAME。
           #
           user: "%%extra_user%%"
 
-          ## @param authKey - string - optional
-          ## Authentication key to use with your Authentication type.
+          ## @param authKey - 文字列 - 任意
+          ## 認証タイプに使用する認証キー。
           #
           authKey: "%%extra_auth_key%%"
 
-          ## @param authProtocol - string - optional
-          ## Authentication type to use when connecting to your SNMP devices.
-          ## It can be one of: MD5, SHA, SHA224, SHA256, SHA384, SHA512.
-          ## Default to MD5 when `authKey` is specified.
+          ## @param authProtocol - 文字列 - 任意
+          ## SNMP デバイスに接続する際に使用する認証タイプ。
+          ## 以下のいずれか: MD5、SHA、SHA224、SHA256、SHA384、SHA512。
+          ## `authKey` が指定されている場合はデフォルトで MD5。
           #
           authProtocol: "%%extra_auth_protocol%%"
 
-          ## @param privKey - string - optional
-          ## Privacy type key to use with your Privacy type.
+          ## @param privKey - 文字列 - 任意
+          ## プライバシータイプに使用するプライバシータイプキー。
           #
           privKey: "%%extra_priv_key%%"
 
-          ## @param privProtocol - string - optional
-          ## Privacy type to use when connecting to your SNMP devices.
-          ## It can be one of: DES, 3DES, AES, AES192, AES256, AES192C, AES256C.
-          ## Default to DES when `privKey` is specified.
+          ## @param privProtocol - 文字列 - 任意
+          ## SNMP デバイスに接続する際に使用するプライバシータイプ。
+          ## 以下のいずれか: DES、3DES、AES、AES192、AES256、AES192C、AES256C。
+          ## `privKey` が指定されている場合はデフォルトで DES。
           #
           privProtocol: "%%extra_priv_protocol%%"
 
-          ## @param context_engine_id - string - optional
-          ## ID of your context engine; typically unneeded.
-          ## (optional SNMP v3-only parameter)
+          ## @param context_engine_id - 文字列 - 任意
+          ## コンテキストエンジンの ID; 通常は不要。
+          ## (任意の SNMP v3 のみパラメーター)
           #
           context_engine_id: "%%extra_context_engine_id%%"
 
-          ## @param context_name - string - optional
-          ## Name of your context (optional SNMP v3-only parameter).
+          ## @param context_name - 文字列 - 任意
+          ## コンテキストの名前 (任意の SNMP v3 のみパラメーター)
           #
           context_name: "%%extra_context_name%%"
 
-          ## @param tags - list of key:value element - optional
-          ## List of tags to attach to every metric, event and service check emitted by this integration.
+          ## @param tags - key:value 要素のリスト - 任意
+          ## このインテグレーションにより送信されるすべてのメトリクス、イベント、サービスチェックにアタッチされるタグのリスト。
           ##
-          ## Learn more about tagging: https://docs.datadoghq.com/tagging/
+          ## タグ付けに関する詳細: https://docs.datadoghq.com/tagging/
           #
           tags:
-            # The autodiscovery subnet the device is part of.
-            # Used by Agent autodiscovery to pass subnet name.
+            # デバイスが属するオートディスカバリーのサブネット。
+            # Agent のオートディスカバリーによりサブネット名をパスするために使用。
             - "autodiscovery_subnet:%%extra_autodiscovery_subnet%%"
 
-          ## @param extra_tags - string - optional
-          ## Comma separated tags to attach to every metric, event and service check emitted by this integration.
-          ## Example:
-          ##  extra_tags: "tag1:val1,tag2:val2"
+          ## @param extra_tags - 文字列 - 任意
+          ## このインテグレーションによって送信されるすべてのメトリクス、イベント、およびサービスチェックにアタッチされるコンマ区切りのタグ。
+          ## 例:
+          ## extra_tags: "tag1:val1,tag2:val2"
           #
           extra_tags: "%%extra_tags%%"
 
-          ## @param oid_batch_size - integer - optional - default: 60
-          ## The number of OIDs handled by each batch. Increasing this number improves performance but
-          ## uses more resources.
-          #
-          oid_batch_size: "%%extra_oid_batch_size%%"
+          ## @param oid_batch_size - 整数 - 任意 - デフォルト: 60
+          ## 各バッチによる OIDs 処理の数。増加するほどパフォーマンスが向上するが
+          ## リソースの使用量も増加。
+          # oid_batch_size: "%%extra_oid_batch_size%%"
 
 
-  ## @param datadog-cluster.yaml - object - optional
-  ## Specify custom contents for the datadog cluster agent config (datadog-cluster.yaml).
+  ## @param datadog-cluster.yaml - オブジェクト - 任意
+  ## Datadog Cluster Agent のコンフィグにカスタムコンテンツを指定します (datadog-cluster.yaml)。
   #
   datadog_cluster_yaml:
 
@@ -225,7 +224,7 @@ clusterAgent:
 {{< /code-block >}}
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

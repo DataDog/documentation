@@ -3,7 +3,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon Managed Workflows for Apache Airflow (MWAA) metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_mwaa/"
@@ -30,9 +30,9 @@ in the cloud.
 
 Enable this integration to see all your Amazon MWAA metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -46,21 +46,21 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
 1. Configure AWS MWAA to [send logs to CloudWatch][4].
 2. [Send the logs to Datadog][5].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_mwaa" >}}
 
 
-### Events
+### イベント
 
 The Amazon Managed Workflows for Apache Airflow (MWAA) integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Managed Workflows for Apache Airflow (MWAA) integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

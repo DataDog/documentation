@@ -20,18 +20,18 @@ further_reading:
   text: Troubleshooting the Datadog Cluster Agent
 ---
 
-## Cluster Agent commands
+## Cluster Agent のコマンド
 
-The available commands for the Datadog Cluster Agents are:
+Datadog Cluster Agent には次のコマンドがあります。
 
 `datadog-cluster-agent status`              
-: Gives an overview of the components of the Agent and their health.
+: Agent のコンポーネントの概要と健全性を示します。
 
-`datadog-cluster-agent metamap <NODE_NAME>` 
-: Queries the local cache of the mapping between the pods living on `NODE_NAME`, and the cluster level metadata they are associated with, such as endpoints. Not specifying the `NODE_NAME` runs the mapper on all the nodes of the cluster.
+`datadog-cluster-agent metamap <NODE_NAME>`
+: `NODE_NAME` 上に存在するポッドと、エンドポイントなど関連するクラスターレベルのメタデータのマッピングをローカルキャッシュに問い合わせます。`NODE_NAME` を指定しない場合は、クラスターのすべてのノードでマッパーが実行されます。
 
-`datadog-cluster-agent flare <CASE_ID>`     
-: Similarly to the node-based Agent, the Cluster Agent can aggregate the logs and the configurations used and forward an archive to the support team, or be deflated and used locally. **Note**: this command runs from within the Cluster Agent pod.
+`datadog-cluster-agent flare <CASE_ID>`
+ノードベース Agent と同様に、Cluster Agent は、ログや使用された構成を集計し、サポートチームにアーカイブを転送したり、圧縮してローカルで使用したりすることもできます。**注**: このコマンドは Cluster Agent ポッド内から実行されます。
 
 ## Cluster Agent environment variables
 
@@ -65,34 +65,34 @@ clusterAgent:
 {{% /tab %}}
 {{< /tabs >}}
 
-The following environment variables are supported:
+次の環境変数がサポートされています。
 
 `DD_API_KEY`                                  
-: Your [Datadog API key][1].
+: [Datadog API キー][1]。
 
-`DD_CLUSTER_CHECKS_ENABLED`                   
-: Enable Cluster Check Autodiscovery. Defaults to `false`.
+`DD_CLUSTER_CHECKS_ENABLED`
+クラスターチェックのオートディスカバリーを有効にします。デフォルトは `false` です。
 
 `DD_CLUSTER_AGENT_AUTH_TOKEN`                 
 : 32-character token that needs to be shared between the node Agent and the Datadog Cluster Agent.
 
-`DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`    
-: Name of the Kubernetes service through which Cluster Agents are exposed. Defaults to `datadog-cluster-agent`.
+`DD_CLUSTER_AGENT_KUBERNETES_SERVICE_NAME`
+Cluster Agent が公開される Kubernetes サービスの名前。デフォルトは `datadog-cluster-agent` です。
 
-`DD_CLUSTER_NAME`                             
-: Cluster name. Added as an instance tag to all cluster check configurations.
+`DD_CLUSTER_NAME`
+クラスター名。インスタンスタグとしてすべてのクラスターチェック構成に追加されます。
 
 `DD_CLUSTER_CHECKS_ENABLED`
 : When true, enables dispatching logic on the leader Cluster Agent. Default: `false`.
 
-`DD_CLUSTER_CHECKS_NODE_EXPIRATION_TIMEOUT`   
-: Time (in seconds) after which node-based Agents are considered down and removed from the pool. Defaults to `30` seconds.
+`DD_CLUSTER_CHECKS_NODE_EXPIRATION_TIMEOUT`
+ノードベースの Agent が停止していると見なされてプールから削除されるまでの時間（秒単位）。デフォルトは `30` 秒です。
 
-`DD_CLUSTER_CHECKS_WARMUP_DURATION`           
-: Delay (in seconds) between acquiring leadership and starting the Cluster Checks logic, allowing for all node-based Agents to register first. Default is `30` seconds.
+`DD_CLUSTER_CHECKS_WARMUP_DURATION`
+リーダーシップの取得からクラスターチェックロジックの開始までの遅延（秒単位）。すべてのノードベースの Agent が先に登録されるようにします。デフォルトは `30` 秒です。
 
-`DD_CLUSTER_CHECKS_CLUSTER_TAG_NAME`          
-: Name of the instance tag set with the `DD_CLUSTER_NAME` option. Defaults to `cluster_name`.
+`DD_CLUSTER_CHECKS_CLUSTER_TAG_NAME`
+`DD_CLUSTER_NAME` オプションによって設定されるインスタンスタグの名前。デフォルトは `cluster_name` です。
 
 `DD_CLUSTER_CHECKS_EXTRA_TAGS`                
 : Adds extra tags to cluster check metrics.
@@ -103,73 +103,73 @@ The following environment variables are supported:
 `DD_CLUSTER_CHECKS_CLC_RUNNERS_PORT`
 : The port used by the Cluster Agent client to reach cluster-level check runners and collect their stats. Default: `5005`.
 
-`DD_HOSTNAME`                                 
-: Hostname to use for the Datadog Cluster Agent.
+`DD_HOSTNAME`
+Datadog Cluster Agent に使用するホスト名。
 
-`DD_ENV`                                      
-: Sets the `env` tag for data emitted by the Cluster Agent. Recommended only if the Cluster Agent monitors services within a single environment.
+`DD_ENV`
+Cluster Agent によって発行されたデータの `env` タグを設定します。Cluster Agent が単一環境内のサービスを監視する場合にのみ推奨されます。
 
-`DD_USE_METADATA_MAPPER`                      
-: Enables cluster level metadata mapping. Defaults to `true`.
+`DD_USE_METADATA_MAPPER`
+クラスターレベルのメタデータマッピングを有効にします。デフォルトは `true` です。
 
-`DD_COLLECT_KUBERNETES_EVENTS`                
-: Configures the Agent to collect Kubernetes events. Defaults to `false`.
+`DD_COLLECT_KUBERNETES_EVENTS`
+: Kubernetes イベントを収集するように Agent を構成します。デフォルトは `false` です。
 
-`DD_LEADER_ELECTION`                          
-: Activates leader election. Set `DD_COLLECT_KUBERNETES_EVENTS` to `true` to activate this feature. Defaults to `false`.
+`DD_LEADER_ELECTION`
+「リーダー選出」を有効にします。この機能を有効にするには、 `DD_COLLECT_KUBERNETES_EVENTS` を `true` に設定します。デフォルトは `false` です。
 
-`DD_LEADER_LEASE_DURATION`                    
-: Used only if leader election is activated. Value in seconds, 60 by default.
+`DD_LEADER_LEASE_DURATION`
+: リーダー選出が有効になっている場合にのみ使用されます。値は秒単位で、デフォルトは 60 です。
 
-`DD_KUBE_RESOURCES_NAMESPACE`                 
-: Configures the namespace where the Cluster Agent creates the configmaps required for the leader election, event collection (optional), and horizontal pod autoscaling.
+`DD_KUBE_RESOURCES_NAMESPACE`
+Cluster Agent がリーダー選出、イベント収集 (オプション)、および水平ポッドオートスケーリングに必要な ConfigMap を作成する場所となるネームスペースを構成します。
 
-`DD_KUBERNETES_INFORMERS_RESYNC_PERIOD`       
-: Frequency (in seconds) for querying the API server to resync the local cache. The default is 5 minutes, or `300` seconds.
+`DD_KUBERNETES_INFORMERS_RESYNC_PERIOD`
+ローカルキャッシュを再同期するために API サーバーに問い合わせる頻度 (秒単位)。デフォルトは 5 分 (`300` 秒) です。
 
-`DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`  
-: Timeout (in seconds) of the client communicating with the API server. Defaults to `60` seconds.
+
+API サーバーと通信しているクライアントのタイムアウト (秒単位)。デフォルトは `60` 秒です。
 
 `DD_METRICS_PORT`                              
-: Port to expose Datadog Cluster Agent metrics. Defaults to port `5000`.
+: Datadog Cluster Agent のメトリクスを公開するポート。デフォルトはポート `5000` です。
 
-`DD_EXTERNAL_METRICS_PROVIDER_BATCH_WINDOW`   
-: Time waited (in seconds) to process a batch of metrics from multiple autoscalers. Defaults to `10` seconds.
+`DD_EXTERNAL_METRICS_PROVIDER_BATCH_WINDOW`
+複数のオートスケーラーからのメトリクスバッチを処理するための待機時間 (秒単位)。デフォルトは `10` 秒です。
 
-`DD_EXTERNAL_METRICS_PROVIDER_MAX_AGE`        
-: Maximum age (in seconds) of a datapoint before considering it invalid to be served. Default to `120` seconds.
+`DD_EXTERNAL_METRICS_PROVIDER_MAX_AGE`
+データポイントが無効になって使用できないと見なされるまでの最大時間 (秒単位)。デフォルトは `120` 秒です。
 
-`DD_EXTERNAL_METRICS_AGGREGATOR`     
-: Aggregator for Datadog metrics. Applies to all autoscalers processed. Choose from `sum`/`avg`/`max`/`min`.
+`DD_EXTERNAL_METRICS_AGGREGATOR`
+Datadog メトリクスの集計関数。処理されるすべてのオートスケーラーに適用されます。`sum`/`avg`/`max`/`min` から選択します。
 
-`DD_EXTERNAL_METRICS_PROVIDER_BUCKET_SIZE`    
-: Size of the window (in seconds) used to query metrics from Datadog. Defaults to `300` seconds.
+`DD_EXTERNAL_METRICS_PROVIDER_BUCKET_SIZE`
+Datadog からのメトリクスの問い合わせに使用するウィンドウのサイズ (秒単位)。デフォルトは `300` 秒です。
 
-`DD_EXTERNAL_METRICS_LOCAL_COPY_REFRESH_RATE` 
-: Rate to resync local cache of processed metrics with the global store. Useful when there are several replicas of the Cluster Agent.
+`DD_EXTERNAL_METRICS_LOCAL_COPY_REFRESH_RATE`
+処理済みメトリクスのローカルキャッシュをグローバルストアと再同期する頻度。Cluster Agent のレプリカが複数ある場合に便利です。
 
-`DD_EXTRA_CONFIG_PROVIDERS`                   
-: Additional Autodiscovery configuration providers to use.
+`DD_EXTRA_CONFIG_PROVIDERS`
+追加で使用するオートディスカバリー構成プロバイダー。
 
-`DD_EXTRA_LISTENERS`                          
-: Additional Autodiscovery listeners to run.
+`DD_EXTRA_LISTENERS`
+追加で実行するオートディスカバリーリスナー。
 
-`DD_PROXY_HTTPS`                
-: Sets a proxy server for HTTPS requests.
+`DD_PROXY_HTTPS`
+: HTTPS リクエスト用のプロキシサーバーを設定します。
 
-`DD_PROXY_HTTP`                
-: Sets a proxy server for HTTP requests.
+`DD_PROXY_HTTP`
+: HTTP リクエスト用のプロキシサーバーを設定します。
 
-`DD_PROXY_NO_PROXY`                
-: Sets a list of hosts that should bypass the proxy. The list is space-separated.
+`DD_PROXY_NO_PROXY`
+: プロキシをバイパスするホストのリストを設定します。リストはスペース区切りです。
 
 `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_CPU`
-: Configures the CPU request and limit for the init containers.
+: init コンテナの CPU リクエストと制限を構成します。
 
 `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_MEMORY`
-: Configures the memory request and limit for the init containers.
+: init コンテナのメモリリクエストと制限を構成します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

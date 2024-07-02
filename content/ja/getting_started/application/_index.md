@@ -29,7 +29,7 @@ This page provides a high-level overview of capabilities available on the [Datad
 
 The Datadog site navigation varies based on the width of your browser. You can have up to three types of navigation. To change the navigation type, adjust your browser width.
 
-## Integrations
+## インテグレーション
 
 {{< img src="getting_started/application/integrations-2024.png" alt="Integrations" >}}
 
@@ -38,7 +38,7 @@ The Datadog site navigation varies based on the width of your browser. You can h
 - The Agent is [open source][4].
 - Once integrations have been configured, all data is treated the same throughout Datadog, whether it is living in a datacenter or in an online service.
 
-## Dashboards
+## ダッシュボード
 
 [Dashboards][12] contain graphs with real-time performance metrics.
 

@@ -6,9 +6,9 @@
 - "cloud"
 - "data stores"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Amazon Redshift metrics."
+"description": "Amazon Redshift のキーメトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_redshift/"
 "draft": false
 "git_integration_title": "amazon_redshift"
@@ -31,9 +31,9 @@ Amazon Redshift is a fast, fully managed, petabyte-scale data warehouse service 
 
 Enable this integration to see all your Redshift metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -77,23 +77,23 @@ Go to the [Log Explorer][10] to start exploring your logs.
 
 For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda Function][11].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_redshift" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The Amazon Redshift integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Redshift integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][13].
 
