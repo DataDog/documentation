@@ -100,13 +100,13 @@ The following table shows which RUM capabilities are supported on each platform:
 | Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
 | Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
 | Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay is in public beta for native mobile apps. |
-| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
+| フラストレーションシグナル | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | すべての**モバイル**および **Roku** デバイスは部分的にサポートされています |
 
-## Supported endpoints for SDK domains
+## SDK ドメインでサポートされるエンドポイント
 
-All Datadog SDKs traffic is transmitted over SSL (default 443) to the following domains:
+Datadog SDK のトラフィックはすべて SSL (デフォルト 443) で以下のドメインに送信されます。
 
-| Site | Site URL                                      |
+| サイト | サイト URL                                      |
 |------|-----------------------------------------------|
 | US1  | `https://browser-intake-datadoghq.com`        |
 | US3  | `https://browser-intake-us3-datadoghq.com`    |
@@ -115,55 +115,55 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 
-## Explore Datadog RUM
+## Datadog RUM を探索する
 
-Access RUM by navigating to [**Digital Experience > Performance Summary**][1].
+[**Digital Experience > Performance Summary**][1] に移動して、RUM にアクセスします。
 
-### Out-of-the-box dashboards
+### すぐに使えるダッシュボード
 
-Analyze information about your user sessions, performance, mobile applications, frustration signals, network resources, and errors collected automatically with [out-of-the-box RUM dashboards][2].
+[すぐに使える RUM ダッシュボード][2]で自動的に収集されたユーザーセッション、パフォーマンス、モバイルアプリケーション、フラストレーションシグナル、ネットワークリソース、エラーに関する情報を分析することができます。
 
-{{< img src="real_user_monitoring/rum-out-of-the-box-dashboard.png" alt="RUM dashboard" >}}
+{{< img src="real_user_monitoring/rum-out-of-the-box-dashboard.png" alt="RUM ダッシュボード" >}}
 
-### RUM Explorer and visualizations
+### RUM エクスプローラーと視覚化
 
-View user sessions in segments, such as checking when latency impacts your premium customers, with [visualizations][3]. Explore data, save views, and create [monitors][4] on your customized searches.
+[視覚化][3]を使用して、レイテンシーがプレミアム顧客に影響を与えるタイミングを確認するなど、ユーザーセッションをセグメントで表示します。カスタマイズした検索で、データを探索し、ビューを保存し、[モニター][4]を作成します。
 
-{{< img src="real_user_monitoring/explorer/analytics/rum_analytics.mp4" alt="RUM Analytics" video=true >}}
+{{< img src="real_user_monitoring/explorer/analytics/rum_analytics.mp4" alt="RUM 分析" video=true >}}
 
-### Integration with logs, APM, and profiler
+### ログ、APM、プロファイラーとのインテグレーション
 
-View your [backend traces, logs, and infrastructure metrics][5] down to the exact line of code impacting your application performance, corresponding to user experiences and reported issues.
+[バックエンドトレース、ログ、インフラストラクチャーメトリクス][5]を、ユーザーエクスペリエンスと報告された問題に対応して、アプリケーションのパフォーマンスに影響を与えるコードの正確な行まで表示します。
 
-{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM and APM" >}}
+{{< img src="real_user_monitoring/connect_rum_and_traces/rum_apm_logs.png" alt="RUM と APM" >}}
 
-### Error tracking and crash reporting
+### エラー追跡とクラッシュレポート
 
 Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][6].
 
-{{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM error tracking" video=true >}}
+{{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM エラー追跡" video=true >}}
 
-### Web and mobile vitals
+### Web とモバイルバイタル
 
-View performance scores and telemetry for [browser applications][7] such as Core Web Vitals and Mobile Vitals for [iOS and tvOS][8] or [Android and Android TV applications][9].
+[iOS および tvOS][8] または [Android および Android TV アプリケーション][9]の Core Web Vitals および Mobile Vitals などの[ブラウザアプリケーション][7]のパフォーマンススコアとテレメトリーを表示します。
 
-### Web view tracking
+### Web ビュー追跡
 
-Collect information from your native web applications and explore hybrid views with Web View Tracking for [iOS and tvOS][10] or [Android and Android TV][11].
+[iOS と tvOS][10] または [Android と Android TV][11] 用の Web ビュー追跡を使用して、ネイティブ Web アプリケーションから情報を収集し、ハイブリッドビューを調査します。
 
-{{< img src="real_user_monitoring/webview_tracking/webview_tracking_light.png" alt="Web Views captured in a user session in the RUM Explorer" >}}
+{{< img src="real_user_monitoring/webview_tracking/webview_tracking_light.png" alt="RUM エクスプローラーのユーザーセッションで取得した Web ビュー" >}}
 
-## Explore Datadog Session Replay
+## Datadog のセッションリプレイを見る
 
-### Session replays
+### セッションリプレイ
 
-Watch [browser recordings][12] of real users interacting with your website and set [privacy controls][13] for your organization.
+Web サイトを利用する実際のユーザーの[ブラウザ記録][12]を見て、組織の[プライバシーコントロール][13]を設定します。
 
-### Developer tools
+### 開発ツール
 
-Access triggered logs, errors, and performance information when troubleshooting application issues using [Browser Dev Tools][14].
+[ブラウザ開発ツール][14]を使用してアプリケーションの問題をトラブルシューティングする際に、トリガーされたログ、エラー、およびパフォーマンス情報にアクセスできます。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,7 +1,7 @@
 ---
 "categories":
 - cloud
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Integrate your Alibaba Cloud services with Datadog."
 "doc_link": "https://docs.datadoghq.com/integrations/alibaba_cloud/"

@@ -6,7 +6,7 @@
 - network
 - tracing
 "creates_events": false
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "AWS App Mesh is an open source edge and service proxy."
 "display_name": "AWS App Mesh"
@@ -41,7 +41,7 @@
 [AWS App Mesh][1] is a service mesh that provides application-level networking to your micro services running on Amazon ECS Fargate or AWS EKS clusters.
 
 
-## Setup
+## セットアップ
 
 {{< tabs >}}
 {{% tab "EKS" %}}
@@ -223,21 +223,21 @@ Enable log collection with the instructions in the [ECS integration documentatio
 {{% /tab %}}
 {{< /tabs >}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 See the [Envoy integration][2] for a list of metrics.
 
-### Events
+### イベント
 
 The AWS App Mesh integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS App Mesh integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

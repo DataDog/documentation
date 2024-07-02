@@ -1,6 +1,5 @@
 ---
 title: Datadog WatchdogTM
-kind: Documentation
 description: Automatically detect potential application and infrastructure issues
 aliases:
   - /tracing/watchdog
@@ -32,7 +31,7 @@ cascade:
     algolia:
         rank: 70
 ---
-## Overview
+## 概要
 
 Watchdog is Datadog's AI engine, providing you with automated alerts, insights, and root cause analyses that draw from observability data across the entire Datadog platform. Watchdog continuously monitors your infrastructure and calls attention to the signals that matter most, helping you to detect, troubleshoot, and resolve issues. 
 
@@ -66,11 +65,11 @@ To help investigation, Watchdog shows context-based insights in all explorers, s
   {{< nextlink href="/watchdog/impact_analysis">}}<u>Impact Analysis</u>: How Watchdog identifies when an anomaly adversely impacts users.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][1].
+ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

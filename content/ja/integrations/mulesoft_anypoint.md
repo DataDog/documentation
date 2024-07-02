@@ -183,20 +183,20 @@ Also, correlate the logs generated within a transaction in a single trace to nar
 
 Need help? Contact [support_ddp@ioconnectservices.com][9].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "mulesoft_anypoint" >}}
 
 
-### Service Checks
+### サービスチェック
 
 The mulesoft_anypoint included the following service checks:
 
 1. MuleSoft Anypoint. This service check shows whether the metrics were correctly collected from MuleSoft Anypoint.
 2. MuleSoft integration license. This service check helps to understand if the license of this MuleSoft integration for Datadog is valid.
 
-### Events
+### イベント
 
 The Datadog Mule® Integration does not include any events.
 

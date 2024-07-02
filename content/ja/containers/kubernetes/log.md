@@ -20,25 +20,25 @@ further_reading:
   text: Assign tags to all data emitted by a container
 ---
 
-This page discusses collecting logs from Kubernetes log files.
+このページでは、Kubernetes ログファイルからのログの収集について説明します。
 
-The Datadog Agent has two ways to collect logs: from Kubernetes log files, or from the [Docker socket][1]. Datadog recommends using Kubernetes log files when:
+Datadog Agent のログの収集方法は 2 通りあり、Kubernetes ログファイルか [Docker ソケット][1]を使用します。Datadog では、以下の場合、Kubernetes ログファイルの使用を推奨しています。
 
-* Docker is not the runtime, **or**
-* More than 10 containers are used on each node
+* Docker がランタイムではない、**または**
+* 各ノードで 10 個を超えるコンテナが使用されている
 
-The Docker API is optimized to get logs from one container at a time. When there are many containers in the same node, collecting logs through the Docker socket may consume more resources than collecting logs through Kubernetes log files. To see how to collect logs using the Docker socket, see [Log collection with Docker socket][1].
+Docker API は、一度に 1 つのコンテナからログを取得するように最適化されています。同じノードに多数のコンテナがある場合、Docker ソケットからログを収集すると、Kubernetes ログファイルを通じて収集するより多くのリソースを消費する可能性があります。Docker ソケットを使用したログの収集方法については、[Docker ソケットによるログ収集][1]を参照してください。
 
-## Log collection
+## ログ収集
 
-Before you start collecting application logs, ensure that you are running the Datadog Agent in your Kubernetes cluster. 
+アプリケーションログの収集を開始する前に、Kubernetes クラスターで Datadog Agent が実行されていることを確認してください。
 
-To configure log collection using a DaemonSet, see [DaemonSet Log Collection][9]. Otherwise, follow the instructions below:
+DaemonSet を使用したログ収集の構成については、[DaemonSet ログ収集][9]を参照してください。それ以外の場合は、以下の手順に従ってください。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Update your `datadog-agent.yaml` manifest with:
+`datadog-agent.yaml` マニフェストを次のように更新します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -56,17 +56,17 @@ spec:
       containerCollectAll: true
 ```
 
-Then apply the new configuration:
+次に、新しいコンフィギュレーションを適用します。
 
 ```shell
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
-See the sample [manifest with logs and metrics collection enabled][1] for a complete example. You can set `features.logCollection.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
+完全な例は、[ログとメトリクスの収集が有効なマニフェスト][1]例を参照してください。`features.logCollection.containerCollectAll` を `true` に設定すると、デフォルトで検出されたすべてのコンテナからログを収集することができます。`false` (デフォルト) に設定すると、ログ収集を有効にするためにオートディスカバリーのログ構成を指定する必要があります。
 
-### Unprivileged
+### 非特権
 
-(Optional) To run an unprivileged installation, add the following to the [DatadogAgent custom resource][2]:
+(オプション) 非特権インストールを実行するには、[DatadogAgent カスタムリソース][2] に以下を追加します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -91,15 +91,15 @@ spec:
           - <DOCKER_GROUP_ID>
 ```
 
-- Replace `<USER_ID>` with the UID to run the Agent
-- Replace `<DOCKER_GROUP_ID>` with the group ID that owns the Docker or containerd socket.
+- `<USER_ID>` を Agent を実行する UID に置き換えます。
+- `<DOCKER_GROUP_ID>` を Docker または containerd ソケットを所有するグループ ID に置き換えます。
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/v2alpha1/datadog-agent-with-logs-apm.yaml
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-To enable log collection with Helm, update your [datadog-values.yaml][1] file with the following log collection configuration, then upgrade your Datadog Helm chart:
+Helm によるログの収集を有効にするには、次のログ収集コンフィギュレーションで [datadog-values.yaml][1] ファイルを更新してから、Datadog Helm チャートをアップグレードします。
 
 ```yaml
 datadog:
@@ -108,11 +108,11 @@ datadog:
     containerCollectAll: true
 ```
 
-You can set `datadog.logs.containerCollectAll` to `true` to collect logs from all discovered containers by default. When set to `false` (default), you need to specify Autodiscovery log configurations to enable log collection.
+`datadog.logs.containerCollectAll` を `true` に設定すると、デフォルトで検出されたすべてのコンテナからログを収集することができます。`false` (デフォルト) に設定すると、ログ収集を有効にするためにオートディスカバリーのログ構成を指定する必要があります。
 
-### Unprivileged
+### 非特権
 
-(Optional) To run an unprivileged installation, add the following in the `values.yaml` file:
+(オプション) 非特権インストールを実行するには、`values.yaml` ファイルに以下を追加します。
 
 ```yaml
 datadog:
@@ -122,100 +122,100 @@ datadog:
         - <DOCKER_GROUP_ID>
 ```
 
-- Replace `<USER_ID>` with the UID to run the Agent.
-- Replace `<DOCKER_GROUP_ID>` with the group ID that owns the Docker or containerd socket.
+- `<USER_ID>` を Agent を実行する UID に変更します。
+- `<DOCKER_GROUP_ID>` を Docker または containerd ソケットを所有するグループ ID に置き換えます。
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
 <div class="alert alert-warning">
-<strong>Warning for unprivileged installations</strong>
+<strong>非特権インストールに関する警告</strong>
 <br/><br/>
-When running an unprivileged installation, the Agent needs to be able to read log files in <code>/var/log/pods</code>.
+非特権インストールを実行する場合、Agent は <code>/var/log/pods</code> にあるログファイルを読み取ることができる必要があります。
 <br/><br/>
-If you are using the containerd runtime, the log files in <code>/var/log/pods</code> are readable by members of the <code>root</code> group. With the above instructions, the Agent runs with the <code>root</code> group. No action is required.
+containerd ランタイムを使用している場合、<code>/var/log/pods</code> にあるログファイルは、<code>root</code> グループのメンバーが読み取り可能です。上記の手順により、Agent は <code>root</code> グループで実行されます。何も作業は必要はありません。
 <br/><br/>
-If you are using the Docker runtime, the log files in <code>/var/log/pods</code> are symbolic links to <code>/var/lib/docker/containers</code>, which is traversable only by the <code>root</code> user. Consequently, with the Docker runtime, it is not possible for a non-<code>root</code> Agent to read logs in <code>/var/log/pods</code>. The Docker socket must be mounted in the Agent container, so that it can get pod logs through the Docker daemon.
+Docker ランタイムを使用している場合、<code>/var/log/pods</code> にあるログファイルは、<code>root</code> ユーザーのみがトラバース可能な <code>/var/lib/docker/containers</code> へのシンボリックリンクになります。そのため、Docker ランタイムを使用すると、<code>root</code> 以外の Agent が<code>/var/log/pods</code> 内のログを読み取ることはできません。Agent コンテナ に Docker ソケットをマウントし、Docker デーモンを介してポッドログを取得できるようにする必要があります。
 <br/><br/>
-To collect logs from <code>/var/log/pods</code> when the Docker socket is mounted, set the environment variable <code>DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE</code> (or <code>logs_config.k8s_container_use_file</code> in <code>datadog.yaml</code>) to <code>true</code>. This forces the Agent to use file collection mode.
+Docker ソケットがマウントされている場合に <code>/var/log/pods</code> からログを収集するには、環境変数 <code>DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE</code> (または <code>Datadog.yaml</code> の <code>logs_config.k8s_container_use_file</code>) を <code>true</code> に設定します。これにより、Agent がファイル収集モードを使用するようになります。
 </div>
 
-## Integration logs
+## インテグレーションログ
 
-[Autodiscovery][10] enables you to use templates to configure log collection (and other capabilities) on containers.
+[オートディスカバリー][10]では、テンプレートを使ってコンテナ上でログ収集 (およびその他の機能) の構成を行うことができます。
 
-To configure log collection for an integration with Autodiscovery, use the following parameter:
+オートディスカバリーを使用してインテグレーションのログ収集を構成するには、以下のパラメーターを使用します。
 
-| Parameter            | Required | Description                                                                                       |
+| パラメーター            | 必須 | 説明                                                                                       |
 |----------------------|----------|---------------------------------------------------------------------------------------------------|
-| `<LOG_CONFIG>`       | No       | For Agent v6.5+, configuration for the `logs:` section for the given Datadog-`<INTEGRATION_NAME>` |
+| `<LOG_CONFIG>`       | いいえ       | Agent v6.5 以上における、特定の Datadog-`<INTEGRATION_NAME>` の `logs:` セクションの構成 |
 
-The schema for `<LOG_CONFIG>` depends on the integration. You can find this schema in each integration's `conf.yaml.example` file.
+`<LOG_CONFIG>` のスキーマはインテグレーションに依存します。このスキーマは、各インテグレーションの `conf.yaml.example` ファイルで確認できます。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Kubernetes Pod Annotations" %}}
-With Autodiscovery, the Agent automatically searches all pod annotations for integration templates.
+{{% tab "Kubernetes ポッドアノテーション" %}}
+Autodiscovery では、Agent が自動的にすべてのポッドアノテーションを対象にインテグレーションテンプレートを検索します。
 
-To apply a specific configuration to a given container, Autodiscovery identifies containers by name, **not** image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image`. 
+オートディスカバリーは、特定の構成を特定のコンテナに適用するために、イメージ**ではなく**名前でコンテナを識別します。`<CONTAINER_IDENTIFIER>` を `.spec.containers[0].image` ではなく、`.spec.containers[0].name` と一致させようと試みます。
 
 <div class="alert alert-info">
-If you define your Kubernetes pods <i>directly</i> (with <code>kind:Pod</code>), add each pod's annotations in its <code>metadata</code> section, as shown in the following sections.
+Kubernetes ポッドを (<code>kind:Pod</code> で) <i>直接</i>定義する場合は、次のセクションに示すように、各ポッドのアノテーションを <code>metadata</code> セクションに追加します。
 <br/><br/>
-If you define your Kubernetes pods <i>indirectly</i> (with replication controllers, ReplicaSets, or deployments), add pod annotations under <code>.spec.template.metadata</code>.</div>
+Kubernetes ポッドを<i>間接的に</i> (レプリケーションコントローラー、ReplicaSets、またはデプロイメントを使用して) 定義する場合は、<code>.spec.template.metadata</code> の下にポッドアノテーションを追加します。</div>
 
-#### Configure a single container
-To configure log collection for a given `<CONTAINER_IDENTIFIER>` within your pod, add the following annotations to your pod:
+#### 単一コンテナの構成
+ポッド内の特定の `<CONTAINER_IDENTIFIER>` についてログ収集を構成するには、次のアノテーションをポッドに追加します。
 
 ```yaml
 apiVersion: v1
 kind: Pod
 # (...)
 metadata:
-  name: '<POD_NAME>'
+  name: '<ポッド名>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: '[<LOG_CONFIG>]'
+    ad.datadoghq.com/<コンテナ識別子>.logs: '[<ログ_コンフィグ>]'
     # (...)
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER>'
+    - name: '<コンテナ識別子>'
 # (...)
 ```
 
-#### Configure two different containers
-To apply two different integration templates to two different containers within your pod, `<CONTAINER_IDENTIFIER_1>` and `<CONTAINER_IDENTIFIER_2>`, add the following annotations to your pod:
+#### 2 つの異なるコンテナの構成
+ポッド内の 2 つの異なるコンテナ `<CONTAINER_IDENTIFIER_1>` と `<CONTAINER_IDENTIFIER_2>` に 2 つの異なるインテグレーションテンプレートを適用するには、次のアノテーションをポッドに追加します。
 
 ```yaml
 apiVersion: v1
 kind: Pod
 # (...)
 metadata:
-  name: '<POD_NAME>'
+  name: '<ポッド名>'
   annotations:
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER_1>.logs: '[<LOG_CONFIG_1>]'
+    ad.datadoghq.com/<コンテナ識別子_1>.logs: '[<ログ_コンフィグ_1>]'
     # (...)
-    ad.datadoghq.com/<CONTAINER_IDENTIFIER_2>.logs: '[<LOG_CONFIG_2>]'
+    ad.datadoghq.com/<コンテナ識別子_2>.logs: '[<ログ_コンフィグ_2>]'
 spec:
   containers:
-    - name: '<CONTAINER_IDENTIFIER_1>'
+    - name: '<コンテナ識別子_1>'
     # (...)
-    - name: '<CONTAINER_IDENTIFIER_2>'
+    - name: '<コンテナ識別子_2>'
 # (...)
 ```
 
 {{% /tab %}}
 
-{{% tab "Key-value store" %}}
+{{% tab "Key-value ストア" %}}
 
-Autodiscovery can use [Consul][1], Etcd, and Zookeeper as integration template sources. 
+オートディスカバリーでは、[Consul][1]、Etcd、および Zookeeper をインテグレーションテンプレートソースとして使用できます。
 
-To use a key-value store, configure it in the Agent `datadog.yaml` configuration file and mount this file inside the containerized Agent. Alternatively, pass your key-value store as environment variables to the containerized Agent.
+key-value ストアを使用するには、Agent の `datadog.yaml` コンフィギュレーションファイルでストアを構成し、このファイルをコンテナ化 Agent 内にマウントします。または、key-value ストアを環境変数としてコンテナ化 Agent に渡します。
 
-#### In `datadog.yaml`
+#### `datadog.yaml` の場合
 
-In the `datadog.yaml` file, set the `<KEY_VALUE_STORE_IP>` address and `<KEY_VALUE_STORE_PORT>` of your key-value store:
+`datadog.yaml` ファイルで、key-value ストアの `<KEY_VALUE_STORE_IP>` アドレスと `<KEY_VALUE_STORE_PORT>` を以下のように設定します。
 
   ```yaml
   config_providers:
@@ -246,34 +246,34 @@ In the `datadog.yaml` file, set the `<KEY_VALUE_STORE_IP>` address and `<KEY_VAL
       password:
   ```
 
-Then [restart the Agent][2] to apply the configuration change.
+次に、[Agent を再起動][2]して、構成の変更を適用します。
 
-#### In environment variables
+#### 環境変数の場合
 
-With the key-value store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`. Autodiscovery expects a key-value hierarchy like this:
+key-value ストアがテンプレートソースとして有効になっている場合、Agent はキー `/datadog/check_configs` の下でテンプレートを探します。オートディスカバリーは、以下のような key-value 階層を前提とします。
 
 ```yaml
 /datadog/
   check_configs/
-    <CONTAINER_IDENTIFIER>/
-      - logs: ["<LOGS_CONFIG>"]
+    <コンテナ識別子>/
+      - logs: ["<ログ_コンフィグ>"]
     ...
 ```
 
-**Note**: To apply a specific configuration to a given container, Autodiscovery identifies containers by **image** when using the key-value stores by trying to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].image`.
+**注**: key-value ストアを使用している場合、オートディスカバリーは特定の構成を特定のコンテナに適用するために、`<CONTAINER_IDENTIFIER>` と `.spec.containers[0].image` の一致を試みることで、コンテナを**イメージ**で識別します。
 
 [1]: /integrations/consul/
 [2]: /agent/configuration/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Examples
-#### Datadog-Redis integration
+### 例
+#### Datadog-Redis インテグレーション
 
 {{< tabs >}}
-{{% tab "Kubernetes Pod Annotation" %}}
+{{% tab "Kubernetes ポッドアノテーション" %}}
 
-The following pod annotation defines the integration template for Redis containers. It tags all logs with `source` and `service` attributes, including custom tags:
+以下のポッドアノテーションは、Redis コンテナのインテグレーションテンプレートを定義します。すべてのログに `source` および `service` 属性でタグ付けします (カスタムタグを含む)。
 
 ```yaml
 apiVersion: v1
@@ -307,29 +307,29 @@ spec:
 
 {{% /tab %}}
 {{% tab "Key-value store" %}}
-The following etcd commands create a Redis integration template with a custom `password` parameter and tags all its logs with the correct `source` and `service` attributes:
+以下の etcd コマンドは、カスタム `password` パラメーターを使用して Redis インテグレーションテンプレートを作成し、すべてのログに正しい `source` および `service` 属性でタグ付けします。
 
 ```conf
 etcdctl mkdir /datadog/check_configs/redis
 etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis", "tags": ["env:prod"]}]'
 ```
 
-Notice that each of the three values is a list. Autodiscovery assembles list items into the integration configurations based on shared list indexes. In this case, it composes the first (and only) check configuration from `check_names[0]`, `init_configs[0]` and `instances[0]`.
+3 つの値がそれぞれリストであることに注目してください。オートディスカバリーは、共有リストインデックスに基づいて、リスト項目をインテグレーション構成に集約します。この例の場合は、`check_names[0]`、`init_configs[0]`、および `instances[0]` から最初 (かつ唯一) のチェック構成が作成されます。
 
-Unlike auto-conf files, **key-value stores may use the short OR long image name as container identifiers**, for example, `redis` OR `redis:latest`.
+auto-conf ファイルとは異なり、**key-value ストアの場合は、コンテナ識別子として短いイメージ名 (`redis` など) も長いイメージ名 (`redis:latest` など) も使用できます**。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-For more information about `source` and `service` attributes, see [Reserved Attributes][11].
+`source` および `service` 属性の詳細については、[予約済み属性][11]を参照してください。
 
-#### From a file configured in an annotation
+#### アノテーションで構成したファイルから
 
-Datadog recommends that you use the `stdout` and `stderr` output streams for containerized applications, so that you can more automatically set up log collection. However, the Agent can also directly collect logs from a file based on an annotation. To collect these logs, use `ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` with a `type: file` and `path` configuration. Logs collected from files with such an annotation are automatically tagged with the same set of tags as logs coming from the container itself.
+Datadog では、より自動的にログ収集を設定できるように、コンテナ化されたアプリケーションには `stdout` と `stderr` の出力ストリームを使用することを推奨しています。しかし、Agent は、アノテーションに基づいてファイルから直接ログを収集することもできます。これらのログを収集するには、`ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs` を `type: file` と `path` の構成で使用します。このようなアノテーションを持つファイルから収集されたログは、コンテナ自体から来るログと同じタグのセットで自動的にタグ付けされます。
 
-These file paths are **relative** to the Agent. Therefore, the directory containing the log file needs to be mounted into both the application and Agent container so the Agent can have proper visibility.
+これらのファイルパスは、Agent に対して **相対的** なものです。したがって、ログファイルを含むディレクトリをアプリケーションと Agent コンテナの両方にマウントして、Agent が適切に可視化できるようにする必要があります。
 
-For example, you can do this with a shared `hostPath` volume. The Pod below is emitting logs into the file `/var/log/example/app.log`. This is done in the `/var/log/example` directory, where a volume and volumeMount have set this as a `hostPath`.
+例えば、共有の `hostPath` ボリュームを使用してこれを行うことができます。下記の Pod は `/var/log/example/app.log` というファイルにログを出力しています。これは `/var/log/example` ディレクトリで行われ、ボリュームと volumeMount がこれを `hostPath` として設定しています。
 
 ```yaml
 apiVersion: v1
@@ -359,7 +359,7 @@ spec:
          path: /var/log/example
 ```
 
-The equivalent volume and volumeMount path need to be set in the Agent container so it can read that same log file.
+Agent コンテナに同等のボリュームと VolumeMount パスを設定し、同じログファイルを読み込むことができるようにする必要があります。
 
 ```yaml
   containers:
@@ -376,7 +376,7 @@ The equivalent volume and volumeMount path need to be set in the Agent container
     # (...)
 ```
 
-**Note:** When using this kind of annotation with a container, `stdout` and `stderr` logs are not collected automatically from the container. If collection from both the container and a file are needed it should be explicitly enabled in the annotation. For example:
+**注:** この種のアノテーションをコンテナで使用する場合、`stdout` と `stderr` ログはコンテナから自動的に収集されません。コンテナとファイルの両方からの収集が必要な場合は、アノテーションで明示的に有効にする必要があります。次に例を示します。
 
 ```yaml
 ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: |
@@ -386,33 +386,33 @@ ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: |
   ]
 ```
 
-When using this kind of combination, `source` and `service` have no default value for logs collected from a file and should be explicitly set in the annotation.
+この種の組み合わせを使用する場合、`source` と `service` にはファイルから収集されたログのデフォルト値がないため、アノテーションで明示的に設定する必要があります。
 
-## Advanced log collection
+## 高度なログの収集
 
-Use Autodiscovery log labels to apply advanced log collection processing logic, for example:
+オートディスカバリーログラベルを使用し、高度なログ収集の処理ロジックを適用します。たとえば、
 
-* [Filter logs before sending them to Datadog][5].
-* [Scrub sensitive data from your logs][6].
-* [Proceed to multi-line aggregation][7].
+* [Datadog へ送信する前にログを絞り込む][5]。
+* [ログの機密データのスクラビング][6]。
+* [複数行の集約の実行][7]。
 
-## Filter containers
+## コンテナを絞り込む
 
-It is possible to manage from which containers you want to collect logs. This can be useful to prevent the collection of the Datadog Agent logs. See the [Container Discovery Management][8] to learn more.
+ログの収集元となる対象コンテナを管理することができます。Datadog Agent のログを収集しないようにするには便利な方法です。詳細については[コンテナのディスカバリー管理][8]を参照してください。
 
-## Short lived containers
+## 存続期間が短いコンテナ
 
-By default the Agent looks every 5 seconds for new containers.
+デフォルトでは、Agent は 5 秒ごとに新しいコンテナを探します。
 
-For Agent v6.12+, short lived container logs (stopped or crashed) are automatically collected when using the K8s file log collection method (through `/var/log/pods`). This also includes the collection init container logs.
+Agent v6.12+ では、K8s ファイルログ収集方法 (`/var/log/pods` 経由) を使用している場合、存続期間の短いコンテナのログ (停止またはクラッシュ) が自動的に収集されます。これには、収集初期化コンテナログも含まれます。
 
-## Troubleshooting
+## トラブルシューティング
 
-#### Missing tags on new containers or pods
+#### 新しいコンテナやポッドでタグが欠落している場合
 
-When sending logs to Datadog from newly created containers or pods, the Datadog Agent's internal tagger may not yet have the related container/pod tags. As a result, tags may be missing from these logs.
+新しく作成されたコンテナまたはポッドからログを Datadog に送信する場合、Datadog Agent の内部タグ設定機能が、関連するコンテナまたはポッドのタグをまだ持っていない可能性があります。その結果、これらのログからタグが欠落することがあります。
 
-To remediate this issue, you can use the environment variable `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` to configure a duration (in seconds) for the Datadog Agent to wait before it begins to send logs from newly created containers and pods. The default value is `0`.
+この問題を解決するには、環境変数 `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` を使用して、Datadog Agent が新しく作成されたコンテナやポッドからログの送信を開始するまでの待機時間 (秒単位) を構成します。デフォルト値は `0` です。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -436,13 +436,13 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Missing host-level tags on new hosts or nodes
+#### 新しいホストまたはノードでホストレベルのタグが欠落している場合
 
-Host-level tags are those seen in the infrastructure list for a given host, and are sourced from either a cloud provider or the Datadog Agent. Common host-level tags include `kube_cluster_name`, `region`, `instance-type`, and `autoscaling-group`.
+ホストレベルタグは、特定のホストのインフラストラクチャーリストに表示されるタグで、クラウドプロバイダーまたは Datadog Agent のいずれかから供給されます。代表的なホストレベルタグは、`kube_cluster_name`、`region`、`instance-type`、`autoscaling-group` などです。
 
-When sending logs to Datadog from a newly created host or node, it can take a few minutes for host-level tags to be [inherited][12]. As a result, host-level tags may be missing from these logs. 
+新しく作成されたホストまたはノードから Datadog にログを送信する場合、ホストレベルタグが[継承][12]されるまでに数分かかることがあります。その結果、ホストレベルタグがこれらのログから欠落する可能性があります。 
 
-To remediate this issue, you can use the environment variable `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` to configure a duration (in minutes). For this duration, the Datadog Agent to manually attaches the host-level tags that it knows about to each sent log. After this duration, the Agent reverts to relying on tag inheritance at intake.
+この問題を解決するには、環境変数 `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` を使用して、継続時間 (分単位) を構成できます。この期間中、Datadog Agent は、知っているホストレベルタグを、送信された各ログに手動でアタッチします。この期間を過ぎると、Agent は取り込み時のタグの継承に依拠するようになります。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -465,7 +465,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

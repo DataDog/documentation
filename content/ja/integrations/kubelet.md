@@ -21,7 +21,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "containers"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/kubelet/README.md"
 "display_on_public_website": true
@@ -64,13 +64,13 @@ This integration gets container metrics from kubelet
 - Visualize and monitor kubelet stats
 - Be notified about kubelet failovers and events.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Kubelet check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
 
-### Configuration
+### 構成
 
 Edit the `kubelet.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][2]. See the [sample kubelet.d/conf.yaml][3] for all available configuration options.
 
@@ -107,9 +107,9 @@ The check can still collect:
 - pod limits and requests
 - node capacity metrics
 
-## Data Collected
+## 収集データ
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "kubelet" >}}
 
 
@@ -119,7 +119,7 @@ To restrict the data collected to a subset of the containers deployed, set the [
 
 For network metrics reported at the pod level, containers cannot be excluded based on `name` or `image name` since other containers can be part of the same pod. So, if `DD_CONTAINER_EXCLUDE` applies to a namespace, the pod-level metrics are not reported if the pod is in that namespace. However, if `DD_CONTAINER_EXCLUDE` refers to a container name or image name, the pod-level metrics are reported even if the exclusion rules apply to some containers in the pod.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

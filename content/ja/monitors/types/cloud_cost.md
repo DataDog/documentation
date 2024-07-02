@@ -22,55 +22,55 @@ further_reading:
   text: Empower engineers to take ownership of Google Cloud costs with Datadog
 ---
 
-## Overview
-Get proactive notifications on cost changes to help mitigate unexpected cloud spend. Cloud Cost Monitors help you identify cost changes quickly so you can investigate the cause. You can configure your alerts to catch unexpected changes.
+## 概要
+コスト変化を事前に通知することで、予期せぬクラウド利用を抑制することができます。クラウドコストモニターは、コスト変動を迅速に特定し、その原因を調査するのに役立ちます。アラートを構成することで、予期せぬ変化をキャッチすることができます。
 
-In order to configure Cloud Cost monitors, you need to have [Cloud Cost Management][1] set up. After it's set up, you can configure monitors to alert when costs increase or decrease.
+クラウドコストモニターを構成するためには、[クラウドコストマネジメント][1]をセットアップする必要があります。設定後、コストの増減をアラートするモニターを構成することができます。
 
-## Monitor creation
+## モニターの作成
 
-To create a Cloud Cost monitor in Datadog, use the main navigation: **Monitors** --> **New Monitor** --> **Cloud Cost**.
+Datadog でクラウドコストモニターを作成するには、メインナビゲーションを使用します: **Monitors** --> **New Monitor** --> **Cloud Cost**
 
-You can also create Cloud Cost monitors from [Cloud Costs Analytics][2]. Click on **+Export to Monitor** above the table of costs.
+[Cloud Costs Analytics][2] からもクラウドコストモニターを作成することができます。コスト表の上にある **+Export to Monitor** をクリックします。
 
-{{< img src="/monitors/monitor_types/cloud_cost/cloud_cost_analytics.png" alt="'Export to Monitor' button in Cloud Costs Analytics page" style="width:100%;" >}}
+{{< img src="/monitors/monitor_types/cloud_cost/cloud_cost_analytics.png" alt="'Cloud Costs Analytics のページにある Export to Monitor ボタン" style="width:100%;" >}}
 
-## Select a cost monitor type
+## コストモニタータイプを選択する
 
-Choose between a **Compare Costs Over Time** or a **Set Daily Cost Threshold** monitor type.
+モニタータイプは、**Compare Costs Over Time** または **Set Daily Cost Threshold** のいずれかを選択します。
 
-| Cost Type | Description | Usage Examples |
+| コストタイプ | 説明 | 使用例 |
 | ---  | ----------- | ----------- |
-| Cost Changes  | Compare costs on a daily, weekly or monthly basis | Alert when the difference between today's cost and the week before is over 5% |
-| Cost Threshold | Set alerts on total costs exceeding a threshold in a day | Set alerts when today's total cost exceeds $10,000 |
+| Cost Changes  | 日、週、月単位でコストを比較する | 今日のコストと前週のコストの差が 5% 以上になるとアラート |
+| Cost Threshold | 1 日の総コストがしきい値を超えた場合のアラートを設定する | 今日の総コストが 1 万ドルを超え場合のアラートを設定する |
 
-## Specify which costs to track
+## 追跡するコストを指定する
 
-Any cost type or metric reporting to Datadog is available for monitors. You can use custom metrics or observability metrics alongside a cost metric to monitor unit economics. For more information, see the [Cloud Cost Management][1] page. Use the editor to define the cost types or exports. 
+Datadog に報告されているコストタイプやメトリクスはすべてモニターに利用できます。カスタムメトリクスや観測可能性メトリクスをコストメトリクスと一緒に使用して、ユニットエコノミクスをモニタリングすることができます。詳しくは、[クラウドコストマネジメント][1]ページを参照してください。エディタを使用して、コストタイプまたはエクスポートを定義します。
 
-| Step                              | Required | Default              | Example             |
+| 手順                              | 必須 | デフォルト              | 例             |
 |-----------------------------------|----------|----------------------|---------------------|
-| Select the cost metric                 | Yes      | `aws.cost.amortized` | `azure.cost.actual` |
-| Define the `filter by`            | No       | Everything           | `aws_product:s3`    |
-| Group by                          | No       | Everything           | `aws_availability_zone` |
-| Add observability metric | No      | `system.cpu.user` | `aws.s3.all_requests` |
+| コストメトリクスを選択する                 | はい      | `aws.cost.amortized` | `azure.cost.actual` |
+| `filter by` を定義する            | いいえ       | すべての条件           | `aws_product:s3`    |
+| グループ化                          | いいえ       | すべての条件           | `aws_availability_zone` |
+| 観測可能性メトリクスの追加 | いいえ      | `system.cpu.user` | `aws.s3.all_requests` |
 
-{{< img src="monitors/monitor_types/cloud_cost/ccm_metrics_source.png" alt="Cloud Cost and Metrics data source options for specifying which costs to track" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/cloud_cost/ccm_metrics_source.png" alt="追跡するコストを指定するための、クラウドコストとメトリクスのデータソースオプション" style="width:100%;" >}}
 
-## Set alert conditions
+## アラートの条件を設定する
 
-If the cost monitor type is **Cost Threshold**, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to` a threshold.  
+コストモニタータイプが **Cost Threshold** の場合、クラウドコストがしきい値より `above` (上)、`below` (下)、`above or equal` (以上)、または `below or equal to` (以下) になったときに、アラートをトリガーすることができます。
 
-If the cost monitor type is **Cost Changes**, you can trigger an alert when the cost `increases` or `decreases` more than the defined threshold. The threshold can be set to either a **Percentage Change** or set to **Dollar Amount**.
+コストモニタータイプが **Cost Changes** の場合、コストが定義されたしきい値よりも `increases` (増加) または `decreases` (減少) した場合に、アラートをトリガーすることができます。しきい値には、**Percentage Change** (変化率) または **Dollar Amount** (ドル額) のいずれかを設定することができます。
 
-**Note**: For the **Percentage Change**, you can also filter out changes that are below a certain dollar threshold.
-Example: alert when there is a cost change above 5% for any change that is above $500
+**注**: **Percentage Change** では、あるドルのしきい値以下の変化をフィルターで除外することも可能です。
+例: 500 ドル以上の変更に対して、5% 以上のコスト変更があった場合にアラートを出す
 
-## Configure notifications and automations
+## 通知と自動化の構成
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

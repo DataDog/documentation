@@ -19,7 +19,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/pdh_check/README.md"
 "display_on_public_website": true
@@ -59,13 +59,13 @@ Get metrics from Windows performance counters in real time to:
 
 - Visualize and monitor Windows performance counters through the PDH API.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The PDH check is included in the [Datadog Agent][2] package. No additional installation is needed.
 
-### Configuration
+### 構成
 
 1. Edit the `pdh_check.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][3] to collect Windows performance data. See the [sample pdh_check.d/conf.yaml][4] for all available configuration options.
 
@@ -75,21 +75,21 @@ The PDH check is included in the [Datadog Agent][2] package. No additional insta
 
 Run the [Agent's status subcommand][6] and look for `pdh_check` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 All metrics collected by the PDH check are forwarded to Datadog as [custom metrics][7], which may impact your [billing][8].
 
-### Events
+### イベント
 
 The PDH check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The PDH check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

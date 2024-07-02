@@ -3,9 +3,9 @@
 - "cloud"
 - "configuration & deployment"
 - "google cloud"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Collect metrics for your project and compare them across project versions."
+"description": "プロジェクトのメトリクスを収集してプロジェクトバージョン間で比較。"
 "doc_link": "https://docs.datadoghq.com/integrations/google_app_engine/"
 "draft": false
 "git_integration_title": "google_app_engine"
@@ -32,9 +32,9 @@ Install the Google App Engine integration in your project to:
 
 You can also send custom metrics to Datadog through the [API][1] or [DogStatsD][2].
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration][3] first. There are no other installation steps.
 
@@ -49,21 +49,21 @@ Once this is done, export your Google App Engine logs from Google Cloud Logging 
 3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_app_engine" >}}
 
 
-### Events
+### イベント
 
 The Google App Engine integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google App Engine integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

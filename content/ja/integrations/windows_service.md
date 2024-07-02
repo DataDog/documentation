@@ -19,7 +19,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/windows_service/README.md"
 "display_on_public_website": true
@@ -55,13 +55,13 @@
 
 This check monitors the state of any Windows Service and submits a service check to Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Windows Service check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Windows hosts.
 
-### Configuration
+### 構成
 
 The configuration is located in the `windows_service.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][2]. See the [sample windows_service.d/conf.yaml][3] for all available configuration options. When you are done editing the configuration file, [restart the Agent][4] to load the new configuration.
 
@@ -124,7 +124,7 @@ services:
     trigger_start: true
 ```
 
-#### Tags
+#### タグ
 
 The check automatically tags the Windows service name to each service check in the `windows_service:<SERVICE>` tag. The `<SERVICE>` name in the tag uses lowercase and special characters are replaced with underscores. See [Getting Started with Tags][7] for more information.
 
@@ -134,41 +134,41 @@ Beginning with Agent version 7.40, the check can add a `windows_service_startup_
 
 Beginning with Agent version 7.55, the check can add a `display_name:<DISPLAY_NAME>` tag to each service check to indicate the display name of the service. Set the `collect_display_name_as_tag` option to `true` to include this tag with each service check.
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][9] and look for `windows_service` under the **Checks** section.
+[Agent の status サブコマンドを実行][9]し、**Checks** セクションで `windows_service` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-The Windows Service check does not include any metrics.
+Windows Service チェックには、メトリクスは含まれません。
 
-### Events
+### イベント
 
-The Windows Service check does not include any events.
+Windows Service チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "windows_service" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][11].
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
-### Service permissions
-If a service is present and matches the configuration, but the Datadog Agent does not report a service check for the service, the Datadog Agent might have insufficient permissions. For example, by default the Datadog Agent does not have access to the NTDS Active Directory Domain Services service. To verify this, run the check from an **elevated (run as Admin)** PowerShell shell.
+### サービス権限
+サービスが存在し、構成と一致しているにもかかわらず、Datadog Agent がそのサービスのサービスチェックを報告しない場合、Datadog Agent の権限が不十分である可能性があります。例えば、デフォルトでは、Datadog Agent は NTDS Active Directory Domain Services サービスへのアクセス権を持っていません。これを確認するには、**昇格した (管理者として実行する)** PowerShell シェルからチェックを実行します。
 
 ```powershell
 & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" check windows_service
 ```
-If the service is present in the output, permissions are the issue. To give the Datadog Agent permission [grant `Read` access on the service][12] to the [Datadog Agent User][13]. We recommend [granting `Read` access with Group Policy][14] to ensure the permissions persist through Windows Updates.
+出力にそのサービスが表示されている場合、問題は権限にあります。Datadog Agent に権限を与えるには、[Datadog Agent User][13] に[サービスの `Read` アクセスを許可][12]してください。Windows Update を経ても権限が持続するように、[グループポリシーで `Read` アクセスを許可する][14]ことをお勧めします。
 
-## Further Reading
+## その他の参考資料
 
-- [Monitoring Windows Server 2012][15]
-- [How to collect Windows Server 2012 metrics][16]
-- [Monitoring Windows Server 2012 with Datadog][17]
+- [Windows Server 2012 の監視][15]
+- [Windows Server 2012 メトリクスの収集方法][16]
+- [Datadog を使用した Windows Server 2012 の監視][17]
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory

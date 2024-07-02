@@ -24,7 +24,7 @@
 "categories":
 - "caching"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/squid/README.md"
 "display_on_public_website": true
@@ -37,7 +37,7 @@
 "manifest_version": "2.0.0"
 "name": "squid"
 "public_title": "Squid"
-"short_description": "Track metrics from your squid-cache servers with Datadog"
+"short_description": "Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡"
 "supported_os":
 - "linux"
 - "windows"
@@ -45,13 +45,13 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Caching"
-  - "Category::Log Collection"
+  - "Category::キャッシュ"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Track metrics from your squid-cache servers with Datadog"
+  "description": "Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -61,42 +61,42 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Squid][1] metrics from the Cache Manager through the Datadog Agent.
+このチェックは、Datadog Agent を通してキャッシュマネージャーから取得された [Squid][1] メトリクスを監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Agent's Squid check is included in the [Datadog Agent][2] package. No additional installation is needed on your Squid server.
+Agent の Squid チェックは [Datadog Agent][2] パッケージに含まれています。Squid サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `squid.d/conf.yaml`, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample squid.d/conf.yaml][2] for all available configuration options.
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `squid.d/conf.yaml` を編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル squid.d/conf.yaml][2] を参照してください。
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Uncomment and edit this configuration block at the bottom of your `squid.d/conf.yaml` file:
+2. `squid.d/conf.yaml` の下部にある、コンフィギュレーションブロックのコメントを解除して編集します。
 
    ```yaml
    logs:
@@ -110,35 +110,35 @@ _Available for Agent versions >6.0_
        source: squid
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/squid/datadog_checks/squid/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                                                  |
+| パラメーター            | 値                                                                  |
 | -------------------- | ---------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `squid`                                                                |
-| `<INIT_CONFIG>`      | blank or `{}`                                                          |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                          |
 | `<INSTANCE_CONFIG>`  | `{"name": "<SQUID_INSTANCE_NAME>", "host": "%%host%%", "port":"3128"}` |
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                               |
+| パラメーター      | 値                                               |
 | -------------- | --------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "squid", "service": "<YOUR_APP_NAME>"}` |
 
@@ -147,27 +147,27 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][3] and look for `squid` under the Checks section.
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `squid` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "squid" >}}
 
 
-### Events
+### イベント
 
-The Squid check does not include any events.
+Squid チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "squid" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][4].
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
 

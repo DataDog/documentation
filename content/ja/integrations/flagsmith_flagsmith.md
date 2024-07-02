@@ -14,7 +14,7 @@
 - configuration & deployment
 - marketplace
 - testing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -76,43 +76,43 @@
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## Overview
+## 概要
 
-[Flagsmith][1] helps you release features with confidence and manages feature flags across web, mobile, and server-side applications. Use the Flagsmith-hosted API, deploy to your own private cloud, or run on-premise.
+[Flagsmith][1] は、安心して機能をリリースできるよう支援し、Web、モバイル、サーバーサイドのアプリケーションで機能フラグを管理します。Flagsmith がホストする API を使用したり、プライベートクラウドにデプロイしたり、オンプレミスで実行したりすることができます。
 
-Flagsmith provides an all-in-one platform for developing, implementing, and managing your feature flags. Whether you are moving off an in-house solution or using toggles for the first time, Flagsmith will provide both power and efficiency.
+Flagsmith は、機能フラグの開発、実装、管理のためのオールインワンプラットフォームを提供します。社内のソリューションから移行する場合でも、初めてトグルを使用する場合でも、Flagsmith はパワーと効率の両方を提供します。
 
-### Manage Flags across multiple platforms
+### 複数のプラットフォームでフラグを管理
 
-Flagsmith makes it easy to create and manage feature toggles across web, mobile, and server-side applications. Wrap a section of code with a flag, and then use Flagsmith to manage that feature.
+Flagsmith は、Web、モバイル、サーバーサイドのアプリケーションで、機能トグルの作成と管理を容易にします。コードのセクションをフラグでラップし、Flagsmith を使ってその機能を管理します。
 
-### Powerful Segmenting rules
+### 強力なセグメンテーションルール
 
-Manage feature flags by development environment and by user group—including individual users, a segment of users, or a percentage. This allows you to implement practices like canary deployments.
+機能フラグを開発環境ごと、ユーザーグループごと (個人ユーザー、ユーザーセグメント、パーセンテージなど) に管理することができます。これにより、カナリアデプロイのようなプラクティスを実装することができます。
 
-### Drive A/B and Multivariate Tests
+### A/B テストや多変量テストの推進
 
-Multivariate flags allow you to use a percentage split across two or more variations for precise A/B/n testing and experimentation.
+多変量フラグにより、2 つ以上のバリエーションでパーセンテージ分割を行い、正確なA/B/n テストや実験が可能です。
 
-### Dashboards
+### ダッシュボード
 
-View and control Flagsmith flags directly from your existing Datadog dashboards.
+Flagsmith のフラグを既存の Datadog ダッシュボードから直接表示し、制御することができます。
 
-### Events
+### イベント
 
-Send flag change events from Flagsmith into your Datadog event stream with the [Datadog Flagsmith integration][2].
+[Datadog Flagsmith インテグレーション][2]により、Flagsmith から Datadog のイベントストリームにフラグ変更イベントを送信します。
 
-## Support
+## サポート
 
-For support or feature requests, contact Flagsmith through the following channel:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Flagsmith にお問い合わせください。
 
-- [Flagsmith Support][4]
+- [Flagsmith サポート][4]
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Release features faster and track their impact with Flagsmith's integration and Datadog Marketplace offering][5]
+- [Flagsmith のインテグレーションと Datadog Marketplace の製品を使って、機能をより早くリリースし、その影響を追跡する][5]
 
 [1]: https://flagsmith.com/
 [2]: https://app.datadoghq.com/integrations/flagsmith
@@ -120,4 +120,4 @@ Additional helpful documentation, links, and articles:
 [4]: https://flagsmith.com/contact-us/
 [5]: https://www.datadoghq.com/blog/flagsmith-datadog-marketplace/
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/flagsmith-platform" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/flagsmith-platform" target="_blank">こちらをクリック</a>してください。

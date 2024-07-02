@@ -33,7 +33,7 @@
   "support_email": support@agora.io
 "categories":
 - collaboration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/agora_analytics/README.md"
 "display_on_public_website": true
@@ -80,21 +80,21 @@ Agora Analytics tracks and interprets real-time voice and video usage, quality, 
 
 This integration sends metrics including usage, quality, and performance data directly to your Datadog account.
 
-## Setup
+## セットアップ
 
 See the Agora Analytics integration [documentation][1] for details on configuring the Agora Analytics Datadog Connector.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 Agora Analytics emits metrics to Datadog.
 
-### Events
+### イベント
 
 Agora Analytics does not include any events.
 
-### Service Checks
+### サービスチェック
 
 Agora Analytics does not include any service checks.
 

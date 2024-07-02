@@ -39,7 +39,7 @@ Health Checks
 
 gRPC tests can run from both [managed](#select-locations) and [private locations][2] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
-## Configuration
+## 構成
 
 After choosing to create a `gRPC` test, define your test's request.
 
@@ -194,7 +194,7 @@ These reasons include the following:
   For each request, only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request and assertions) hits the maximum duration of 60.5 seconds.
 
-## Permissions
+## 権限
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][12] can create, edit, and delete Synthetic gRPC tests. To get create, edit, and delete access to Synthetic gRPC tests, upgrade your user to one of those two [default roles][12].
 

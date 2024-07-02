@@ -11,43 +11,43 @@ aliases:
 - /monitors/faq/how-to-update-anomaly-monitor-timezone  
 ---
 
-Datadog monitors use UTC time, which by default does not track local time zones. Depending on the type of system you have, your data could be impacted by local activity happening in your time zone. For example, a lunch surge could cause a spike in the middle of the day, and this surge could be detected as an unexpected anomaly. If you are getting unexpected anomalies caused by local activity, update your anomaly detection monitor to account for your local timezone.
+Datadog のモニターは UTC 時間を使用しており、デフォルトではローカルタイムゾーンを追跡しません。システムの種類によっては、タイムゾーンで起きているローカルな活動によってデータが影響を受ける可能性があります。たとえば、昼休みにランチが急増し、この急増が予期せぬ異常として検出される可能性があります。ローカルな活動によって予期しない異常が発生する場合、ローカルタイムゾーンを考慮するように異常検知モニターを更新してください。
 
-If you are using the agile or robust anomaly detection algorithms with weekly or daily seasonality, you can update your anomaly detection monitor to account for a local timezone using both the API and the UI.
+Agile または Robust 異常検知アルゴリズムを Weekly または Daily 季節性と共に使用する場合は、API と UI の両方でローカルタイムゾーンを考慮するように異常検知モニターを更新できます。
 
-Here is an example of a monitor before it is set to account for a local timezone:
+以下は、ローカルタイムゾーンを考慮した設定にする前のモニターの例です。
 
-{{< img src="monitors/guide/dst-off.png" alt="DST tracking turned off" >}}
+{{< img src="monitors/guide/dst-off.png" alt="DST 追跡がオフ" >}}
 
-Here is an example of a monitor when daylight savings time is being taken into account:
+以下は、サマータイムを考慮した場合のモニターの例です。
 
-{{< img src="monitors/guide/dst-on.png" alt="DST tracking turned on" >}}
+{{< img src="monitors/guide/dst-on.png" alt="DST 追跡がオン" >}}
 
 ## UI
 
-To update an anomaly detection monitor to account for a local timezone in the UI, navigate to the [Create a new monitor][1] > [Anomaly monitor][2] section in the UI. In section 3, Set Alert Conditions, open the Advanced panel and toggle on the switch to take daylight savings into account while evaluating the monitor. Then, set the timezone dropdown to match the timezone you want tracked.
+UI でローカルタイムゾーンを考慮して異常検知モニターを更新するには、UI の [Create a new monitor][1] &gt; [Anomaly monitor][2] セクションに移動します。セクション 3 の Set Alert Conditions で、Advanced パネルを開き、モニターの評価中にサマータイムを考慮するスイッチをオンに切り替えます。次に、タイムゾーンドロップダウンを追跡したいタイムゾーンに合わせます。
 
-{{< img src="monitors/guide/anomaly_monitor_timezone_ui.png" alt="DST tracking in the UI" >}}
+{{< img src="monitors/guide/anomaly_monitor_timezone_ui.png" alt="UI の DST 追跡" >}}
 
 ## API
 
-1. You need the following information to make the update request through the monitor API:
-  - Your [Datadog API key and application key][3] for authentication
-  - The monitor ID and query from your anomaly detection monitor:
-    {{< img src="monitors/guide/anomaly_monitor_timezone.png" alt="Monitor ID and Query" >}}
-  - The TZ identification string for the time zone related to your metric, for example `America/New_York` or `Europe/Paris`. Locate your preferred time zone in the TZ column on the [List of tz database time zones][4] (canonical format recommended).<br><br>
-2. Create an updated version of the monitor query by adding a `timezone` argument to the anomalies() function call.
-  - For example, if you wanted to change the query shown above to use New York's local time, the query would be updated to:
+1. モニター API で更新リクエストを行うには、次の情報が必要です。
+  - 認証に使用する [Datadog API キーとアプリケーションキー][3]
+  - 異常検知モニターからのモニター ID とクエリ
+    {{< img src="monitors/guide/anomaly_monitor_timezone.png" alt="モニター ID とクエリ" >}}
+  - `America/New_York` や `Europe/Paris` など、メトリクスに関連するタイムゾーンの TZ 識別文字列。[tz データベースタイムゾーン一覧][4]の TZ 列で、希望するタイムゾーンを探します (正規の形式を推奨)。<br><br>
+2. anomalies() 関数の呼び出しに `timezone` 引数を追加して、更新版のモニタークエリを作成します。
+  - 例えば、上に示したクエリをニューヨークの現地時間を使うように変更したい場合、クエリは次のように更新されます。
 
     ```
     avg(last_4h):anomalies(avg:system.cpu.user{role:trace-cassandra} by {host}, 'basic', 2, direction='both', alert_window='last_15m', interval=60, count_default_zero='true', timezone='America/New_York') >= 1
     ```
 
-3. Use the [Edit a Monitor][5] API to update the monitor's definition.
-  - Examples are available in Python, Ruby, and cURL.
-  - Only include the ID and query in the request to avoid overriding existing settings. The name, message, options, and tags are not required.
+3. モニターの定義を更新するには、[Edit a Monitor][5] API を使用します。
+  - Python、Ruby、cURL の例があります。
+  - 既存の設定をオーバーライドしないように、ID とクエリのみをリクエストに含めます。名前、メッセージ、オプション、タグは必須ではありません。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

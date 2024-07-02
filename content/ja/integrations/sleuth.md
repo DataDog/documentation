@@ -26,7 +26,7 @@
 - issue tracking
 - orchestration
 - source control
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/sleuth/README.md"
 "display_on_public_website": true
@@ -67,7 +67,7 @@
 
 Sleuth is a deployment tracking tool that enables you to track software deployments through your complete DevOps stack. With a Datadog integration, Sleuth provides you with insightful, meaningful, and actionable real-time data that enable you and your team to see, with clarity, the impact of the changes you make to your code.
 
-## Setup
+## セットアップ
 
 To add the Datadog integration:
 
@@ -86,11 +86,11 @@ To add the Datadog integration:
 
 ![][3]
 
-### Installation
+### インストール
 
 The Datadog Sleuth integration is installed exclusively from your Sleuth account. There are no settings or additional configuration needed from your Datadog account except to provide your Datadog API and application keys in Sleuth.
 
-### Configuration
+### 構成
 
 - Click the **Add metric** dropdown and select a Sleuth project to process incoming Datadog metrics. All projects within your Sleuth organization are displayed in the dropdown.
 
@@ -101,17 +101,17 @@ The Datadog Sleuth integration is installed exclusively from your Sleuth account
 Once configuration is complete, Sleuth displays Datadog metrics in your deploys. Read [**Dashboard**][5] for more information on how metrics are communicated in Sleuth's deploy cards.
 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Sleuth integration does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 The Sleuth integration does not include any service checks.
 
-### Events
+### イベント
 
 The Sleuth integration does not include any events.
 
@@ -122,7 +122,7 @@ The Sleuth integration does not include any events.
 
 The Datadog integration is disconnected and is no longer available to any projects within that organization. Any project-level modifications you made to the Datadog integration is lost.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact the [maintainer][6] of this integration.
 

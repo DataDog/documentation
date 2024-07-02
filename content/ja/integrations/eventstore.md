@@ -24,7 +24,7 @@
 "categories":
 - caching
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md"
 "display_on_public_website": true
@@ -68,11 +68,11 @@ Get metrics from EventStore in real time to:
 * Visualize and monitor EventStore queues
 * Capture all available metrics within the following API endpoints: stats, node info, non-transient projections, subscriptions, cluster gossip (the list of endpoints to scrape is configurable)
 
-## Setup
+## セットアップ
 
 The EventStore check is not included in the [Datadog Agent][1] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the EventStore check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -84,7 +84,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the EventSto
 
 2. Configure your integration similar to core [integrations][3].
 
-### Configuration
+### 構成
 
 1. Edit the `eventstore.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4] to start collecting your EventStore [metrics](#metrics).
    See the [sample eventstore.d/conf.yaml][5] for all available configuration options.
@@ -99,21 +99,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the EventSto
 
 The check is compatible with all major platforms.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "eventstore" >}}
 
 
-### Events
+### イベント
 
 The eventstore check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The eventstore check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact the [maintainer][9] of this integration.
 

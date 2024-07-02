@@ -156,7 +156,7 @@ To set up a monitor that alerts when the amount of test failures exceeds a thres
 1. Set the alert conditions to trigger when the evaluated value is above the threshold, and specify values for the alert or warning thresholds, such as `Alert threshold > 1`.
 1. Define the monitor notification.
 1. Set permissions for the monitor.
-1. Click **Create**.
+1. **Create** をクリックします。
 
 For more information, see the [CI Monitor documentation][13]. 
 

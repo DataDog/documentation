@@ -3,7 +3,7 @@
 - azure
 - cloud
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure DB for MariaDB metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_db_for_mariadb/"
@@ -31,27 +31,27 @@ Get metrics from Azure Database for MariaDB to:
 - Visualize the performance of your MariaDB databases
 - Correlate the performance of your MariaDB databases with your applications
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_db_for_mariadb" >}}
 
 
-### Events
+### イベント
 
 The Azure Database for MariaDB integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Database for MariaDB integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

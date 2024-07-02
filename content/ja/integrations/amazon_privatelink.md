@@ -4,7 +4,7 @@
 - cloud
 - log collection
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key AWS PrivateLink metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_privatelink/"
@@ -31,9 +31,9 @@ Enable this integration to monitor the health and performance of your VPC endpoi
 
 **Important:** If you would like to send telemetry data to Datadog through PrivateLink, follow [these instructions][1].
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][2] first.
 
@@ -43,21 +43,21 @@ If you haven't already, set up the [Amazon Web Services integration][2] first.
    under the `Metric Collection` tab.
 2. Install the [Datadog - AWS PrivateLink integration][4].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_privatelink" >}}
 
 
-### Events
+### イベント
 
 The AWS PrivateLink integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS PrivateLink integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

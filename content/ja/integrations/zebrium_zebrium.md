@@ -14,7 +14,7 @@
 - notifications
 - automation
 - marketplace
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -80,27 +80,27 @@
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## Overview
+## 概要
 
-**Sign up for a Zebrium SaaS license on the Datadog Marketplace.**
+**Datadog Marketplace で Zebrium SaaS ライセンスにサインアップしてください。**
 
-When you know there's a problem and you're not sure what caused it, [Zebrium][1] works to automatically show you the root cause directly on your Datadog dashboards. Zebrium's solution applies machine learning to logs, but you don't need to manually train the data or set up any rules, and it achieves accuracy in less than 24 hours.
+問題があることは分かっていても、その原因が分からない場合、[Zebrium][1] は Datadog のダッシュボードに直接根本原因を自動的に表示するように動作します。Zebrium のソリューションは、ログに機械学習を適用しますが、手動でデータを学習させたり、ルールを設定したりする必要はなく、24 時間以内に精度を達成することができます。
 
-Using Zebrium is simple. When you're troubleshooting a problem, instead of digging around, just scroll to the Zebrium app on your Datadog dashboard and look at the corresponding detection.
+Zebrium の使用方法は簡単です。トラブルシューティングを行う際、あちこち調べるのではなく、Datadog のダッシュボードで Zebrium アプリにスクロールし、対応する検出を見るだけでいいのです。
 
 Once you are a Zebrium customer, you can begin using the two points of integration between Zebrium and Datadog: 1) a Zebrium Datadog App with a custom dashboard widget and 2) a Datadog integration that sends in events and metrics from Zebrium. For installation, visit the [Integrations page][4] and search for Zebrium.
 
-## Support
+## サポート
 
-For support or feature requests, contact Zebrium through the following channel:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Zebrium にお問い合わせください。
 
-- Email: [support@zebrium.com][2]
+- メール: [support@zebrium.com][2]
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Find the root cause faster with Datadog and Zebrium][5]
+- [Datadog と Zebrium で根本原因を迅速に発見][5]
 
 [1]: https://www.zebrium.com
 [2]: mailto:support@zebrium.com
@@ -109,4 +109,4 @@ Additional helpful documentation, links, and articles:
 [5]: https://www.datadoghq.com/blog/find-the-root-cause-faster-with-zebrium/
 
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/zebrium-zebrium" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/zebrium-zebrium" target="_blank">こちらをクリック</a>してください。

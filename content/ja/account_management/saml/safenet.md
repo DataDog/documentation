@@ -6,29 +6,29 @@ further_reading:
   text: Configure SAML for your Datadog account
 ---
 
-## Setup
+## セットアップ
 
-Follow the [main SAML configuration instructions][1], then see the [SafeNet Trusted Access for Datadog][2] docs to configure SafeNet as your SAML IdP.
+[メインの SAML コンフィギュレーション手順ガイド][1]に従い、[SafeNet Trusted Access for Datadog][2] のドキュメントを参照して、SafeNet をSAML IdP として設定します。
 
 ## Datadog
 
-* The IdP metadata is available in the SafeNet Trusted Access console by clicking the **Download Metadata** button.
-* In Datadog, ensure the **Identity Provider (IdP) Initiated Login** box is checked.
-* Datadog's [Service Provider metadata][3] is needed.
+* IdP メタデータは、SafeNet Trusted Access コンソールで **Download Metadata** ボタンをクリックして入手できます。
+* Datadog で、**Identity Provider (IdP) Initiated Login** チェックボックスをオンにします。
+* Datadog の[サービスプロバイダーメタデータ][3]が必要です。
 
-## Verify authentication
+## 認証の検証
 
-### Using STA console
+### STA コンソールの使用
 
-Navigate to the Datadog login URL. Once redirected to the SafeNet Trusted Access sign-in page, enter your primary directory login information and approve the two-factor authentication. This redirects you back to Datadog after authentication.
+Datadog のログイン URL にアクセスします。SafeNet Trusted Access のサインインページにリダイレクトされたら、プライマリディレクトリのログイン情報を入力し、二要素認証を承認してください。認証後に Datadog にリダイレクトされます。
 
-**Note**: For IdP initiated mode, enter the **Assertion Consumer Service URL** found in Datadog on the SafeNet Trusted Access console.
+**注**: IdP 始動モードの場合は、SafeNet Trusted Access コンソールで、Datadog に表示される **Assertion Consumer Service URL** を入力します。
 
-### Using STA user portal
+### STA ユーザーポータルの使用
 
-Navigate to the User Portal URL to log in to the STA User Portal dashboard. The dashboard shows you a list of applications to which you have access. Click on the Datadog application icon, which redirects you to Datadog after authentication.
+ユーザーポータル URL にアクセスし、STA ユーザーポータルダッシュボードにログインします。ダッシュボードには、アクセス可能なアプリケーションの一覧が表示されます。Datadog アプリケーションアイコンをクリックすると、認証後に Datadog にリダイレクトされます。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

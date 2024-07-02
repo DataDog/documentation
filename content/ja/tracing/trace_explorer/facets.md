@@ -1,6 +1,5 @@
 ---
 title: Span Facets
-kind: documentation
 description: 'Trace Facets and Facet Panel'
 further_reading:
 - link: tracing/trace_explorer/
@@ -8,21 +7,21 @@ further_reading:
   text: Learn about the Trace Explorer
 ---
 
-## Overview
+## 概要
 
-Facets are user-defined tags and attributes from your spans. They are useful for both [qualitative](#qualitative-facets) and [quantitative](#quantitative-facets-measures) data analysis. Facets allow you to manipulate spans in your [Trace Analytics monitors][3], and in APM queries that appear on [dashboards][4] and in [notebooks][5].
+ファセットとは、スパンからユーザーが定義したタグや属性のことです。これらは、[定性的](#qualitative-facets)および[定量的](#quantitative-facets-measures)なデータ分析に役立ちます。ファセットによって、[トレース分析モニター][3]や[ダッシュボード][4]、[ノートブック][5]に表示される APM クエリでスパンを操作することができるようになります。
 
-The [Trace Explorer][6] includes out-of-the-box facets such as `Status` and `Service`. You can use facets in the Trace Explorer to:
+[トレースエクスプローラー][6]には、すぐに使える `Status` や `Service` などのファセットが含まれています。トレースエクスプローラーでファセットを使用すると、次のことが可能になります。
 
-- [Search for and filter spans][1]
-- Perform trace analytics
-- Start troubleshooting once your spans are ingested
+- [スパンの検索と絞り込み][1]
+- トレース分析の実行
+- スパンが取り込まれたら即座にトラブルシューティングを開始する
 
-{{< img src="tracing/trace_explorer/facets/facet_panel.png" alt="The Facets panel in the Trace Explorer" style="width:90%;">}}
+{{< img src="tracing/trace_explorer/facets/facet_panel.png" alt="トレースエクスプローラーのファセットパネル" style="width:90%;">}}
 
 {{< site-region region="us,eu,us3,us5,ap1" >}}
 
-[Creating facets](#creating-facets) is **not required** for [searching spans][1], [generating metrics from spans][2], or [indexing spans with retention filters][3]. In these contexts, autocomplete capabilities use existing facets, but also any input that matches incoming spans applies.
+[ファセットの作成](#creating-facets)は、[スパンの検索][1]、[スパンからのメトリクス生成][2]、[保持フィルターによるスパンのインデックス化][3]には**必要ではありません**。これらのコンテキストにおいて、オートコンプリート機能は既存のファセットを使用しますが、受信したスパンに一致する任意の入力値も適用されます。
 
 [1]: /tracing/trace_explorer/search
 [2]: /tracing/trace_pipeline/generate_metrics
@@ -30,97 +29,97 @@ The [Trace Explorer][6] includes out-of-the-box facets such as `Status` and `Ser
 
 {{< /site-region >}}
 
-### Qualitative facets
+### 定性的ファセット
 
-Use qualitative facets when you need to:
+次が必要な場合は、定性的ファセットを使用します。
 
-- **Get relative insights** for values. For example, create a facet on a `datacenter` span tag to scope down the investigation to one specific region when slow requests are detected.
-- **Count unique values**. For example, create a facet on `usr.email` to see how many distinct users experience errors while loading a specific resource.
-- Frequently **filter** your spans against particular values. For example, create a facet on an environment tag to scope troubleshooting down to development, staging, or production environments.<br>
+- 値の**相対的な洞察を得る**。例えば、`datacenter` スパンタグにファセットを作成し、遅いリクエストが検出されたときに、特定の地域に調査を絞り込むことができます。
+- **ユニークな値を数える**。例えば、`usr.email` にファセットを作成して、特定のリソースをロードする際に、何人の異なるユーザーがエラーを経験したかを確認します。
+- 特定の値に対してスパンを頻繁に**フィルタリング**する。たとえば、環境タグのファセットを作成して、トラブルシューティングを開発、ステージング、または本番環境にまで絞り込みます。<br>
 
-**Note:** Although facets are not required for filtering on tags, defining facets for tags that you often use during investigations can help reduce your time to resolution.
+**注:** タグのフィルタリングにファセットは必須ではありませんが、調査中に頻繁に使用するタグのファセットを定義すると、解決までの時間を短縮するのに役立ちます。
 
-### Quantitative facets (measures)
+### 定量的ファセット (メジャー)
 
-Use measures when you need to:
-- **Aggregate** values from multiple traces. For example, create a measure on the number of rows in Cassandra and view the p95 or top-most referrers per sum of file size requested.
-- Numerically compute the **highest latency services**, for example, for shopping cart values over $1000.
-- **Filter continuous values**, for example, the size in bytes of each payload chunk of a video stream.
+次が必要な場合は、メジャーを使用します。
+- 複数のトレースから値を**集計**する。たとえば、Cassandra の行数にメジャーを作成し、リクエストされたファイルサイズの合計ごとに最上位の参照元または p95 を表示します。
+- ショッピングカートの値が $1000 を超えるなど、サービスの**最もレイテンシーの高いもの**を数値的に計算する。
+- **連続する値をフィルタリングする**。たとえば、ビデオストリームの各ペイロードチャンクのサイズ (バイト単位)。
 
-#### Measure types
+#### メジャータイプ
 
-Measures have either a (long) integer or double value, for equivalent capabilities.
+メジャーには、同等の機能のために、(長) 整数またはダブル値があります。
 
-#### Units
+#### 単位
 
-Measures support units (**time** in seconds or **size** in bytes) for handling of orders of magnitude at query time and display time. The unit is a property of the measure itself, not of the field.
+メジャーは、クエリ時および表示時の桁数を処理するための単位 (**time** (秒) または **size** (バイト)) をサポートしています。単位は、メジャー自体のプロパティであり、フィールドのプロパティではありません。
 
-For example, consider a `duration` measure in nanoseconds. Suppose spans from `service:A` have `duration:1000`, meaning `1000 milliseconds`. Supposed spans from `service:B` have `duration:500`, meaning `500 microseconds`. Use `duration:>20ms` to consistently query span tags from both services at once. Read [query syntax][1] for more reference information about queries.
+例えば、`duration` というメジャーをナノ秒単位で考えてみましょう。例えば、`service:A` からのスパンが `duration:1000` で、`1000 milliseconds` を意味するとします。`service:B` からのスパンは `duration:500` で、`500 microseconds` を意味すると仮定します。`duration:>20ms` を使用すると、一度に両方のサービスのスパンタグを一貫してクエリすることができます。クエリに関するより詳しい情報は、[クエリ構文][1]を参照してください。
 
-## Facet panel
+## ファセットパネル
 
-The search bar provides the most comprehensive set of interactions to filter and group your data. However, for many cases, the facet panel is a straightforward way to navigate into your data. Open a facet to see a summary of its content for the scope of the current query.
+検索バーを使うと、包括的かつインタラクティブにデータをフィルタリングしグループ化することができます。ただし、多くの場合は、ファセットパネルを使った方がよりわかりやすくデータに移動できます。ファセットを開くと、現在のクエリのスコープのコンテンツのサマリーが表示されます
 
-The search bar and URL automatically reflect your selections from the facet panel.
+検索バーと URL には、ファセットパネルで選択した内容が自動的に反映されます。
 
-- **Facets (qualitative)** come with a top list of unique values, and a count of spans matching each of them.
-- **Measures (quantitative)** come with a slider indicating minimum and maximum values. Use the slider, or input numerical values, to scope the search query to different bounds.
+- **ファセット (定性的)** には、一意の値の上位リストと、それぞれに一致するスパンの数が用意されています。
+- **メジャー (定量的)** には、最小値と最大値を示すスライダーが付いています。スライダーを使用するか、数値を入力して、検索クエリを別の範囲に絞り込みます。
 
-### Hiding facets
+### ファセットを非表示にする
 
-Your organization has many facets to address use cases across the various teams that use traces. Most likely, only a subset of these facets is valuable to you in a specific troubleshooting context.
+組織には、トレースを使用するさまざまなチーム全体でユースケースに対処するための多くのファセットがあります。ほとんどの場合、これらのファセットのサブセットのみが、特定のトラブルシューティングのコンテキストで価値があります。
 
-**Hide facets** that you don't need on a routine basis, to keep only the most relevant facets for your troubleshooting sessions.
+日常的に必要としない**ファセットを非表示にし**、トラブルシューティングセッションに最も関連性の高いファセットのみを残すことができます。
 
-{{< img src="tracing/trace_explorer/facets/hide_facets.png" alt="Hide Facet" style="width:30%;">}}
+{{< img src="tracing/trace_explorer/facets/hide_facets.png" alt="ファセットを非表示にする" style="width:30%;">}}
 
-Hidden facets are still visible in the facet search (see the [Filter Facet](#filtering-facets) section) in case you need it. Unhide hidden facets from facet search.
+必要に応じて、ファセットは非表示にしてもファセット検索に表示されます（[ファセットのフィルター](#filtering-facets)セクションを参照）。ファセット検索から非表示のファセットを再表示します。
 
-{{< img src="logs/explorer/facet/unhide_facet.png" alt="Unhide Facet" style="width:30%;">}}
+{{< img src="logs/explorer/facet/unhide_facet.png" alt="ファセットを再表示する" style="width:30%;">}}
 
-#### Hidden facets and teammates
+#### 非表示のファセットとチームメイト
 
-Hiding facets is specific to your own troubleshooting context and does not impact your teammates' view, unless you update a saved view. Hidden facets is part of the context saved in a saved view.
+ファセットの非表示は、自身のトラブルシューティングコンテキストに固有の操作で、保存ビューを更新しない限り、チームメイトのビューには影響を与えません。非表示のファセットは、保存ビューに保存されたコンテキストの一部です。
 
-### Grouping facets
+### ファセットのグループ化
 
-Facets are grouped into meaningful themes in the facet list. Assigning or reassigning a group for a facet affects only the facet list, and has no impact on search or analytics.
+ファセットは、ファセットリスト内で意味のあるテーマにグループ化されます。ファセットグループの割り当てや再割り当てはファセットリストにしか影響せず、検索や分析には影響しません。
 
-{{< img src="tracing/trace_explorer/facets/group_facets.png" alt="Group Facets" style="width:30%;">}}
+{{< img src="tracing/trace_explorer/facets/group_facets.png" alt="ファセットをグループ化" style="width:30%;">}}
 
-### Filtering facets
+### ファセットのフィルタリング
 
-Use the search facets box on the facet panel to scope the whole facet list and navigate more quickly to the one facet you need to interact with. Search facets uses the facet display name and field name to scope results.
+ファセットパネルのファセットの検索ボックスを使用して、ファセットリスト全体を絞り込み、操作する必要がある 1 つのファセットにすばやく移動することができます。ファセット検索では、ファセット表示名とフィールド名を使用して、結果の範囲を絞り込みます。
 
-{{< img src="tracing/trace_explorer/facets/filter_facets.png" alt="Search Facet" style="width:30%;">}}
+{{< img src="tracing/trace_explorer/facets/filter_facets.png" alt="ファセットを検索" style="width:30%;">}}
 
-## Creating facets
+## ファセットの作成
 
-Creating a facet on a span attribute/tag is not a mandatory step to search for spans. Facets are useful if you wish to add a meaningful description to a specific span attribute, or if you want the span attribute values to appear on the Facet list on the left-hand side of the span list.
+スパン属性/タグにファセットを作成することは、スパンを検索するための必須の手順ではありません。ファセットは、特定のスパン属性に意味のある説明を追加したい場合や、スパン属性の値をスパン リストの左側にあるファセット リストに表示させたい場合に便利です。
 
-### Creating facets from the trace side panel
+### トレースサイドパネルからのファセット作成
 
-The easiest way to create a facet is to add it from the trace side panel so that most of the facet details (such as the field path and underlying type) are pre-filled. In the [Trace Explorer][1], navigate to a span of interest that contains the field to create a facet on. Open the trace side-panel for this span by selecting the span from the list. Click on the desired field (either in span tags or in infrastructure tags) and create a facet from there:
+ファセットを作成する最も簡単な方法は、ファセットの詳細の大部分 (フィールドパスや基礎となるタイプなど) が事前に入力されるように、トレースサイドパネルからファセットを追加することです。[トレースエクスプローラー][1]で、ファセットの作成対象となるフィールドを含む任意のスパンに移動します。リストからスパンを選択し、そのスパンのトレースサイドパネルを開きます。目的のフィールドをクリックし (スパンタグまたはインフラストラクチャータグのいずれか)、そこからファセットを作成します。
 
-- If the field has a numerical value, you can create either a facet or a measure.
-- If the field has a string value, only facet creation is available.
+- フィールドに数値がある場合、ファセットまたはメジャーのいずれかを作成できます。
+- フィールドに文字列値がある場合、ファセットの作成のみが可能です。
 
-{{< img src="tracing/trace_explorer/facets/create_facet.png" alt="Add Facet from tags" style="width:50%;">}}
+{{< img src="tracing/trace_explorer/facets/create_facet.png" alt="タグからファセットを追加する" style="width:50%;">}}
 
-### Creating facets from the facet list
+### ファセットリストからのファセット作成
 
-If finding a span that has the desired field is not an option, create a facet directly from the facet panel by clicking **+ Add**.
+目的のフィールドを持つスパンを見つけることができない場合は、**+ Add** をクリックして、ファセットパネルから直接ファセットを作成します。
 
-Define the underlying field (key) name for this facet:
+このファセットの基底のフィールド（キー）名を定義します。
 
-- Use tag key name for infrastructure tags.
-- Use the attribute path for span attributes, with `@` prefix.
+- インフラストラクチャータグにタグキー名を使用します。
+- プレフィックス `@` がある、スパン属性の属性パスを使用します。
 
-Autocomplete based on the content in spans of the current views helps you to define the proper field name. But you can use virtually any value here, specifically in the case that you don't yet have matching spans received by Datadog.
+現在のビューのスパンの内容に基づいてオートコンプリート機能が働くためは、適切なフィールド名を定義しやすくなっています。ただしここでは、特に Datadog が受信したスパンに一致するものがない場合は、実際はどんな値でも使用できます。
 
-{{< img src="tracing/trace_explorer/facets/create_facet_from_scratch.png" alt="Add Facet from scratch" style="width:30%;">}}
+{{< img src="tracing/trace_explorer/facets/create_facet_from_scratch.png" alt="一からファセットを追加する" style="width:30%;">}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

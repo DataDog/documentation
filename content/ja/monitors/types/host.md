@@ -19,68 +19,68 @@ further_reading:
   text: Consult your monitor status
 ---
 
-## Overview
+## 概要
 
 Infrastructure monitoring provides visibility into your entire IT environment, including cloud-hosted and on-prem servers, through many integrations. Use the Host monitor to stay informed on which hosts are or are not submitting data to ensure continuous visibility.
 
-Every Datadog Agent reports a service check called `datadog.agent.up` with the status `OK`. You can monitor this check across one or more hosts by using a host monitor.
+すべての Datadog Agent は、ステータスが `OK` の `datadog.agent.up` というサービスチェックを報告します。ホストモニターを使用して、1 つ以上のホストでこのチェックを監視できます。
 
-## Monitor creation
+## モニターの作成
 
-To create a [host monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Host*.
+Datadog で[ホストモニター][1]を作成するには、メインナビゲーションを使用して次のように移動します: *Monitors --> New Monitor --> Host*。
 
-### Pick hosts by name or tag
+### ホストを名前またはタグで選ぶ
 
-Select the hosts to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
+ホスト名、タグ、または `All Monitored Hosts` を選択して、監視するホストを決定します。特定のホストを除外する必要がある場合は、2 番目のフィールドに名前やタグをリストアップします。
 
-- The include field uses `AND` logic. All listed names and tags must be present on a host for it to be included.
-- The exclude field uses `OR` logic. Any host with a listed name or tag is excluded.
+- インクルードフィールドでは `AND` ロジックを使用します。ホストに存在するリストアップされたすべての名前とタグはスコープに含まれます。
+- エクスクルードフィールドでは `OR` ロジックを使用します。リストアップされた名前やタグを持つホストはスコープから除外されます。
 
-#### Examples
+#### 例
 
-| Monitor                                                | Include               | Exclude     |
+| モニター                                                | 含める               | 除外する     |
 |--------------------------------------------------------|-----------------------|-------------|
-| Include all hosts with the tag `env:prod`              | `env:prod`            | leave empty |
-| Include all hosts except hosts with the tag `env:test` | `All Monitored Hosts` | `env:test`  |
+| タグ `env:prod` を持つすべてのホストを含めます              | `env:prod`            | 空のままにする |
+| タグ `env:test` を持つホストを除くすべてのホストを含めます | `All Monitored Hosts` | `env:test`  |
 
-### Set alert conditions
+### アラートの条件を設定する
 
-In this section, choose between a **Check Alert** or **Cluster Alert**:
+このセクションで、**Check Alert** または **Cluster Alert** を選択します。
 
 {{< tabs >}}
 {{% tab "Check Alert" %}}
 
-A check alert tracks if a host stops reporting for a given amount of time. Too much time following a check run can be a sign of problems with data submission from the host.
+チェックアラートは、ホストが一定時間レポートを停止したかどうかを追跡します。チェック実行後の時間が長すぎると、ホストからのデータ送信に関する問題の兆候になります。
 
-Enter the number of minutes to check for missing data. The default value is 2 minutes.
+欠落データを確認する分数を入力します。デフォルト値は 2 分です。
 
-If `datadog.agent.up` stops reporting an `OK` status for more than the minutes specified, an alert is triggered.
+`datadog.agent.up` が指定された分数以上 `OK` ステータスのレポートを停止すると、アラートがトリガーされます。
 
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
-A cluster alert tracks if some percentage of hosts have stopped reporting for a given amount of time.
+クラスターアラートは、一定時間、ホストの一部がレポートを停止したかどうかを追跡します。
 
-To set up a cluster alert:
+クラスターアラートをセットアップするには
 
-1. Decide whether or not to group your hosts according to a tag. `Ungrouped` calculates the status percentage across all included hosts. `Grouped` calculates the status percentage on a per group basis.
-2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
-3. Enter the number of minutes to check for missing data. The default value is 2 minutes.
+1. タグによりホストをグループ化するかどうか決定します。`Ungrouped` は含まれるすべてのホストでステータスのパーセンテージを計算します。`Grouped` は各グループごとのステータスのパーセンテージを計算します。
+2. アラートと警告のしきい値の割合を選択します。1 つの設定（アラートまたは警告）のみ必須です。
+3. 欠落データを確認する分数を入力します。デフォルト値は 2 分です。
 
-If `datadog.agent.up` stops reporting an `OK` status for more than the minutes specified and the percentage threshold is reached, an alert is triggered.
+`datadog.agent.up` が指定された分数以上 `OK` ステータスのレポートを停止し、パーセンテージのしきい値に達すると、アラートがトリガーされます。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Advanced alert conditions
+### 高度なアラート条件
 
-For detailed instructions on the advanced alert options (auto resolve, new group delay, etc.), see the [Monitor Configuration][2] page.
+高度なアラートオプション (自動解決、新しいグループ遅延など) の詳細な手順については、[モニターコンフィギュレーション][2]ページを参照してください。
 
-### Notifications
+### 通知
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][3] page.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

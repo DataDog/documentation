@@ -50,9 +50,9 @@ This matches **any** `httpd` container image on your host. If you have one conta
 
 When using short image names as Autodiscovery container identifiers, the Agent cannot distinguish between identically named images from different sources or with different tags.
 
-### Multiple identifiers
+### 複数の識別子
 
-Specify multiple image names by adding to the `ad_identifiers` list, for example:
+`ad_identifiers` に次のように追加することで、複数のイメージ名を指定できます。
 
 ```yaml
 ad_identifiers:
@@ -62,7 +62,7 @@ ad_identifiers:
 
 This matches **any** container images on your host that match `httpd` **or** `my-custom-httpd-image`.
 
-## Custom Autodiscovery container identifiers
+## カスタムなオートディスカバリーコンテナ識別子
 
 To apply different Autodiscovery configuration templates to containers running the same image, choose a custom value to supply as `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`. Then, apply a Docker label or Kubernetes annotation to your container that contains this custom value.
 
@@ -104,7 +104,7 @@ Replace `<CONTAINER_IDENTIFIER>` with the container name within the pod.
 {{< /tabs >}}
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -5,7 +5,7 @@
 - cloud
 - log collection
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Gather your Amazon VPC logs."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_vpc/"
@@ -32,9 +32,9 @@
 
 Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into your virtual network. VPC Flow Logs is a feature that allows you to capture information about the IP traffic going to and from network interfaces in your VPC.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -88,23 +88,23 @@ Go to the [Log Explorer][7] to start exploring your logs.
 
 For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda Function][8].
 
-## Data collected
+## データ収集
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_vpc" >}}
 
 
 Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The Amazon VPC integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon VPC integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

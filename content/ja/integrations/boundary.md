@@ -28,7 +28,7 @@
 "categories":
 - configuration & deployment
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/boundary/README.md"
 "display_on_public_website": true
@@ -65,24 +65,24 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Boundary][1] through the Datadog Agent. The minimum supported version of Boundary is `0.8.0`.
+このチェックは、Datadog Agent を通じて [Boundary][1] を監視するものです。Boundary の最小サポートバージョンは、`0.8.0` です。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The Boundary check is included in the [Datadog Agent][3] package.
-No additional installation is needed on your server.
+Boundary チェックは [Datadog Agent][3] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-#### Listener
+#### リスナー
 
-A listener with an `ops` purpose must be set up in the `config.hcl` file to enable metrics collection. Here's an example listener stanza:
+メトリクスを収集できるようにするには、`config.hcl` ファイルに `ops` 目的のリスナーを設定する必要があります。以下はリスナーのスタンザの例です。
 
 ```hcl
 controller {
@@ -103,7 +103,7 @@ listener "tcp" {
 }
 ```
 
-The `boundary.controller.health` [service check](#service-checks) submits as `WARNING` when the controller is shutting down. To enable this shutdown grace period, update the `controller` block with a defined wait duration:
+コントローラーがシャットダウンしているとき、`boundary.controller.health` [サービスチェック](#service-checks)は `WARNING` として送信されます。このシャットダウン猶予期間を有効にするには、`controller` ブロックを更新して、待ち時間を定義します。
 
 ```hcl
 controller {
@@ -117,31 +117,31 @@ controller {
 
 #### Datadog Agent
 
-1. Edit the `boundary.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your boundary performance data. See the [sample boundary.d/conf.yaml][4] for all available configuration options.
+1. boundary のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `boundary.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[boundary.d/conf.yaml のサンプル][4]を参照してください。
 
-2. [Restart the Agent][5].
+2. [Agent を再起動します][5]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][6] and look for `boundary` under the Checks section.
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `boundary` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "boundary" >}}
 
 
-### Events
+### イベント
 
-The Boundary integration does not include any events.
+Boundary インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "boundary" >}}
 
 
-### Log collection
+### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
@@ -158,9 +158,9 @@ The Boundary integration does not include any events.
 
     Change the `path` parameter value based on your environment. See the [sample `boundary.d/conf.yaml` file][4] for all available configuration options.
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][9].
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://www.boundaryproject.io
 [2]: https://docs.datadoghq.com/agent/kubernetes/integrations/

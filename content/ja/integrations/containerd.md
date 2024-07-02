@@ -23,7 +23,7 @@
 "categories":
 - containers
 - kubernetes
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/containerd/README.md"
 "display_on_public_website": true
@@ -62,9 +62,9 @@
 
 This check monitors the Containerd container runtime.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Containerd is a core [Datadog Agent][1] check. You must configure Containerd in both `datadog.yaml` and `containerd.d/conf.yaml`.
 
@@ -143,7 +143,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configuration
+### 構成
 
 1. Edit the `containerd.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Containerd performance data. See the [sample containerd.d/conf.yaml][2] for all available configuration options.
 
@@ -153,23 +153,23 @@ spec:
 
 [Run the Agent's `status` subcommand][4] and look for `containerd` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "containerd" >}}
 
 
 This integration works on Linux and Windows, but some metrics are OS dependent. Look at `metadata.csv` for the list of OS dependent metrics. 
 
-### Events
+### イベント
 
 The Containerd check can collect events. Use `filters` to select the relevant events. See the [sample containerd.d/conf.yaml][2] to have more details.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "containerd" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

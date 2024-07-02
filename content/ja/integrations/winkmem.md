@@ -22,7 +22,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - os & system
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/winkmem/README.md"
 "display_on_public_website": true
@@ -60,13 +60,13 @@ Get Windows kernel memory usage to create visualizations and monitors in Datadog
 
 **Note:** The list of metrics collected by this integration may change between minor Agent versions. Such changes may not be mentioned in the Agent's changelog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Windows Kernel Memory integration is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
 
-### Configuration
+### 構成
 
 1. Edit the `winkmem.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][2]. See the [sample winkmem.d/conf.yaml.example][3] for all available configuration options.
 
@@ -76,21 +76,21 @@ The Windows Kernel Memory integration is included in the [Datadog Agent][1] pack
 
 [Run the Agent's status subcommand][5] and look for `winkmem` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "winkmem" >}}
 
 
-### Events
+### イベント
 
 The Windows Kernel Memory integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Windows Kernel Memory integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

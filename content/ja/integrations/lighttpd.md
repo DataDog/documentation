@@ -29,7 +29,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/lighttpd/README.md"
 "display_on_public_website": true
@@ -42,7 +42,7 @@
 "manifest_version": "2.0.0"
 "name": "lighttpd"
 "public_title": "Lighttpd"
-"short_description": "Track uptime, bytes served, requests per second, response codes, and more."
+"short_description": "アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。"
 "supported_os":
 - "linux"
 - "windows"
@@ -50,12 +50,12 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Track uptime, bytes served, requests per second, response codes, and more."
+  "description": "アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -65,30 +65,30 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Lighttpd Dashboard][1]
+![Lighttpd ダッシュボード][1]
 
-## Overview
+## 概要
 
-The Agent's lighttpd check tracks uptime, bytes served, requests per second, response codes, and more.
+Agent の lighttpd チェックは、アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Lighttpd check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Lighttpd servers.
+Lighttpd チェックは [Datadog Agent][2] パッケージに含まれています。Lighttpd サーバーに追加でインストールする必要はありません。
 
-In addition, install `mod_status` on your Lighttpd servers.
+加えて、Lighttpd サーバーに `mod_status` をインストールします。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `lighttpd.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample lighttpd.d/conf.yaml][2] for all available configuration options:
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `lighttpd.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル lighttpd.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -100,37 +100,37 @@ To configure this check for an Agent running on a host:
      - lighttpd_status_url: http://localhost/server-status?auto
    ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/lighttpd/datadog_checks/lighttpd/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-| Parameter            | Value                                                           |
+| パラメーター            | 値                                                           |
 | -------------------- | --------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `lighttpd`                                                      |
-| `<INIT_CONFIG>`      | blank or `{}`                                                   |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                   |
 | `<INSTANCE_CONFIG>`  | `{"lighttpd_status_url": "http://%%host%%/server-status?auto"}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Log collection
+#### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `lighttpd.d/conf.yaml` file to start collecting your lighttpd Logs:
+2. lighttpd ログの収集を開始するには、次のコンフィギュレーションブロックを `lighttpd.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -139,36 +139,36 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
        source: lighttpd
    ```
 
-   Change the `path` parameter value and configure it for your environment.
-   See the [sample lighttpd.d/conf.yaml][3] for all available configuration options.
+   `path` のパラメーター値を変更し、環境に合わせて構成してください。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル lighttpd.d/conf.yaml][3] を参照してください。
 
-3. [Restart the Agent][4].
+3. [Agent を再起動します][4]。
 
-### Validation
+### 検証
 
-[Run the Agent's `status` subcommand][5] and look for `lighttpd` under the Checks section.
+[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `lighttpd` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "lighttpd" >}}
 
 
-### Events
+### イベント
 
-The Lighttpd check does not include any events.
+Lighttpd チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "lighttpd" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][6].
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-- [Monitor Lighttpd web server metrics with Datadog][7].
+- [Datadog で Lighttpd の Web サーバーメトリクスを監視します][7]。
 
 
 

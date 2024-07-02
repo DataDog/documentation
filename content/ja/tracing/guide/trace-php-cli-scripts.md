@@ -3,10 +3,10 @@ title: Tracing PHP CLI Scripts
 kind: guide
 further_reading:
 - link: /tracing/trace_collection/dd_libraries/php/
-  tag: Documentation
+  tag: ドキュメント
   text: Set up PHP trace collection
 - link: /tracing/troubleshooting/
-  tag: Documentation
+  tag: ドキュメント
   text: Troubleshooting
 ---
 

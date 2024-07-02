@@ -24,7 +24,7 @@
 - "cloud"
 - "configuration & deployment"
 - "containers"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/convox/README.md"
 "display_on_public_website": true
@@ -65,67 +65,67 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
-Get metrics from Convox in real time to visualize your containers' performance.
+Convox からリアルタイムにメトリクスを取得して、コンテナのパフォーマンスを視覚化します。
 
-![Convox integration dashboard widget][1]
+![Convox インテグレーションダッシュボードウィジェット][1]
 
-## Setup
+## セットアップ
 
-See the [Convox documentation][2] to set up the Datadog integration.
+[Convox ドキュメント][2]を参照して、Datadog インテグレーションを設定してください。
 
-### Deploy the Datadog Agent
+### Datadog Agent のデプロイ
 
-You can deploy the Datadog Agent as a Convox app by using a `docker-compose.yml` manifest. Use a `count` that matches the `InstanceCount` parameter of your Rack.
+Datadog Agent は、`docker-compose.yml` マニフェストを使用することで、Convox アプリとしてデプロイすることができます。Rack の `InstanceCount` パラメーターと一致する `count` を使用します。
 
 ```shell
-# check out the repo
+# リポジトリを確認
 $ git clone https://github.com/convox-examples/datadog.git
 $ cd dd-agent
 
-# deploy the agent app and secret
+# Agent アプリとシークレットをデプロイ
 $ convox apps create
 $ convox env set DD_API_KEY=<your api key>
 $ convox deploy
 $ convox scale agent --count=3 --cpu=10 --memory=128
 ```
 
-Run `convox deploy` to deploy Datadog Agent into ECS.
+`convox deploy` を実行して、Datadog Agent を ECS にデプロイします。
 
-### Auto scaling
+### オートスケーリング
 
-If autoscaling is enabled on your Rack, you need to dynamically scale the Datadog Agent count to match the Rack instance count.
+Rack でオートスケーリングが有効になっている場合は、Rack のインスタンス数に合わせて Datadog Agent の数を動的にスケーリングする必要があります。
 
-For more information, see the [Listening for ECS CloudWatch Events][3] tutorial.
+詳しくは、[Listening for ECS CloudWatch Events][3] チュートリアルをご覧ください。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-The Convox integration does not include any metrics.
+Convox インテグレーションには、メトリクスは含まれません。
 
-### Events
+### イベント
 
-The Convox integration does not include any events.
+Convox インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The Convox integration does not include any service checks.
+Convox インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-When configuring environment variables in the `convox.yml` file, the `environment` parameter must be defined on the same level as the `services` parameter.
+環境変数を `convox.yml` ファイルで構成する場合、`environment` パラメーターは `services` パラメーターと同じレベルで定義する必要があります。
 
-![The Environment and Services parameters defined on the same level][4]
+![同じレベルで定義された Environment と Services のパラメーター][4]
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor your AWS ECS platform with Convox and Datadog][6]
+- [Convox と Datadog で AWS ECS プラットフォームを監視する][6]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/convox/images/snapshot.png
 [2]: https://docs.convox.com/integrations/monitoring/datadog

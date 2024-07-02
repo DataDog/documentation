@@ -5,7 +5,7 @@ disable_toc: false
 aliases:
 - /workflows/build
 algolia:
-  tags: [workflow, workflows, workflow automation]
+  tags: [workflow, workflows/, workflow automation]
 further_reading:
 - link: /getting_started/workflow_automation/
   tag: Documentation
@@ -185,9 +185,9 @@ You can specify the number of times you want your workflow to retry a failed ste
 ### Retries
 
 To configure retries for a step:
-1. Click on the step in the workflow canvas.
+1. ワークフローキャンバスのステップをクリックします。
 1. In the **Retries** section, adjust the **Interval** and **Max retries** values.
-1. Save your workflow to apply the changes.
+1. ワークフローを保存して、変更を適用します。 
 
 ### Add an error path
 
@@ -207,7 +207,7 @@ To add an error path:
 Some actions allow you to add a condition that must be met before a workflow can mark a step as complete and continue.
 
 To add a condition:
-1. Click on the step in the workflow canvas.
+1. ワークフローキャンバスのステップをクリックします。
 1. In the **Wait until condition** section, use the dropdown to select a preconfigured condition, or select **Configure custom wait condition** and build your own conditional.
    - The list of available preconfigured conditions depends on the action.
    - Conditional statement variables can be either a String, a Number, a Boolean, or a step output variable.
@@ -216,13 +216,13 @@ To add a condition:
 
 {{< img src="service_management/workflows/wait-until-condition.png" alt="An example of wait until condition" style="width:100%;" >}}
 
-## Edit a workflow with JSON
+## JSON でワークフローを編集する
 
-Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. The JSON editor also allows you to:
-- **Format JSON**: Beautify your JSON.
-- **Export JSON**: Download the workflow.
+ワークフローのページで **Edit JSON Spec** をクリックすると、JSON でワークフローを編集することができます。また、JSON エディターでは、以下のことが可能です。
+- **Format JSON**: JSON を美しくします。
+- **Export JSON**: ワークフローをダウンロードします。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

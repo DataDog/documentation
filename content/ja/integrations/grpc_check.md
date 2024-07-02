@@ -24,7 +24,7 @@
   "sales_email": help@datadoghq.com
   "support_email": keisuke.umegaki.630@gmail.com
 "categories": []
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/grpc_check/README.md"
 "display_on_public_website": true
@@ -63,13 +63,13 @@
 
 This check monitors endpoints implementing [gRPC Health Checking Protocol][1] through the Datadog Agent.
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### Installation
+### インストール
 
-#### Host
+#### ホスト
 
 To install the grpc_check check on your host:
 
@@ -87,7 +87,7 @@ RUN agent integration install -r -t datadog-grpc-check==1.0.2 \
   && /opt/datadog-agent/embedded/bin/pip3 install grpcio grpcio-health-checking
 ```
 
-### Configuration
+### 構成
 
 1. Edit the `grpc_check.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your grpc_check performance data. See the [sample grpc_check.d/conf.yaml][3] for all available configuration options.
 
@@ -97,21 +97,21 @@ RUN agent integration install -r -t datadog-grpc-check==1.0.2 \
 
 [Run the Agent's status subcommand][5] and look for `grpc_check` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "grpc_check" >}}
 
 
-### Events
+### イベント
 
 The grpc_check integration does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "grpc_check" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

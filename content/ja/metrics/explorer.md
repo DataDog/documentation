@@ -13,46 +13,46 @@ further_reading:
 
 ---
 
-## Overview
+## 概要
 
-The [Metrics Explorer][1] is a basic interface for examining your metrics in Datadog. For more advanced options, create a [notebook][2] or dashboard ([screenboard][3], or [timeboard][4]).
+[メトリクスエクスプローラー][1]は、メトリクスを Datadog で調査するための基本のインターフェースです。より高度なオプションを使用するには、[ノートブック][2]またはダッシュボード（[スクリーンボード][3]や[タイムボード][4]）を作成します。
 
-## Graphing
+## グラフ
 
-Use the query editor to customize the graph displayed on the Metrics Explorer page.
+クエリエディタを使用して、Metrics Explorer ページに表示されるグラフをカスタマイズします。
 
-You can specify the time frame in the top right corner of the page. The default is **Past 1 Hour**.
+ページの右上にある時間帯を指定することができます。デフォルトは **Past 1 Hour** です。
 
-{{< img src="metrics/explorer/metrics_explorer.png" alt="Metrics Explorer displaying two queries on a bar graph" style="width:80%;" >}}
+{{< img src="metrics/explorer/metrics_explorer.png" alt="2 つのクエリを棒グラフで表示するメトリクスエクスプローラー" style="width:80%;" >}}
 
-Metrics that are not reported in the last 24 hours do not appear in the query editor. You can add these metrics to your graphs manually by entering the metric name or full query.
+過去 24 時間に報告されていないメトリクスは、クエリエディタに表示されません。メトリクス名または完全なクエリを入力することで、これらのメトリクスをグラフに手動で追加することができます。
 
-### Scope
+### スコープ
 
-Define a filtering scope with the **from** text box by selecting or searching for tag values. For example, you can use the **from** text box to filter metric values from a specific host, cluster, environment, or region.
+**from** テキストボックスでタグの値を選択または検索すると、スコープを定義できます。たとえば、**from** テキストボックスを使用して、メトリクスの値を特定のホスト、クラスター、環境、リージョンで絞り込むことができます。
 
-### Space aggregation
+### 空間集計
 
-Define the [space aggregation][5] used to combine a metric's values.
+メトリクスの値を結合するために使用される[空間集計][5]を定義します。
 
-The possible options are:
+利用可能なオプションは次のとおりです。
 
-* Average of reported values (default)
-* Max of reported values
-* Min of reported values
-* Sum of reported values
+* 報告された値の平均値（デフォルト）
+* 報告された値の最大値
+* 報告された値の最小値
+* 報告された値の合計値
 
-**Note**: The options may differ based on the metric type selected.
+**注**: これらのオプションは、選択したメトリクスのタイプによって変わります。
 
 ### Functions and formulas
 
 You can optionally add functions to your query using the function button. Not all functions are available for all metric types. For more information, see the [querying][6] documentation. 
 
-### Export
+### エクスポート
 
-Export your graph to a dashboard or notebook with the buttons at the top right. You can also use **Split Graph in Notebook** to view the data split into individual graphs by things like region, service, or environment.
+右上のボタンで、グラフをダッシュボードやノートブックにエクスポートします。また、**Split Graph in Notebook** を使用すると、データをリージョン、サービス、環境などで個別のグラフに分割して表示することも可能です。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

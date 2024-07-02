@@ -4,38 +4,38 @@ description: Install the Datadog Agent Integration Developer Tool.
 ---
 This document covers how to setup a Python environment to work on Agent-based Integrations, including installing the interpreter and developer tool.
 
-## Install Python
+## Python のインストール
 
 Many operating systems come with a pre-installed version of Python. However, the version of Python installed by default may not be the same as the one used by the latest Agent. To ensure that you have everything you need to get an integration running, install a dedicated Python interpreter.
 
 {{< tabs >}}
 
 {{% tab "MacOS" %}}
-Install Python 3.11 using [Homebrew][1]:
+[Homebrew][1] を使って Python 3.11 をインストールします。
 
-1. Update Homebrew:
+1. Homebrew を更新します。
    ```
    brew update
    ```
 
-2. Install Python:
+2. Python をインストールします。
    ```
    brew install python@3.11
    ```
 
-3. Check the Homebrew installation output and run any additional commands recommended by the installation script.
+3. Homebrew のインストール出力を確認し、インストールスクリプトが推奨する追加のコマンドを実行します。
 
 4. Verify that the Python binary is installed in your `PATH` and that have installed the correct version:
    ```
    which python3.11
    ```
 
-   You should see the following output depending on your Mac architecture:
-   - ARM (M1+) machines:
+   お使いの Mac のアーキテクチャに応じて、以下の出力が表示されるはずです。
+   - ARM (M1+) マシン:
      ```
      /opt/homebrew/bin/python3.11
      ```
-   - MacOS on Intel machines:
+   - Intel マシンの MacOS:
      ```
      /usr/local/bin/python3.11
      ```
@@ -44,11 +44,11 @@ Install Python 3.11 using [Homebrew][1]:
 {{% /tab %}}
 
 {{% tab "Windows" %}}
-1. Download the [Python 3.11 64-bit executable installer][1] and run it.
-1. Select the option to add Python to your PATH.
-1. Click **Install Now**.
-1. After the installation has completed, restart your machine.
-1. Verify that the Python binary is installed in your `PATH`:
+1. [Python 3.11 64 ビット版の実行形式インストーラー][1]をダウンロードして実行します。
+1. Python を PATH に追加するオプションを選択します。
+1. **Install Now** をクリックします。
+1. インストールが完了したら、マシンを再起動します。
+1. Python のバイナリが `PATH` にインストールされていることを確認します。
    ```
    > where python
 
@@ -59,7 +59,7 @@ Install Python 3.11 using [Homebrew][1]:
 {{% /tab %}}
 
 {{% tab "Linux" %}}
-For Linux installations, avoid modifying your system Python. Datadog recommends installing Python 3.11 using [pyenv][1] or [miniconda][2].
+Linux でのインストールでは、システム Python の変更は避けてください。Datadog では [pyenv][1] や [miniconda][2] を使用して Python 3.11 をインストールすることを推奨しています。
 
 [1]: https://github.com/pyenv/pyenv#automatic-installer
 [2]: https://conda.io/projects/conda/en/stable/user-guide/install/linux.html

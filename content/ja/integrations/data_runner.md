@@ -9,7 +9,7 @@
   "sales_email": sales@datadog.com
   "support_email": help@datadoghq.com
 "categories": []
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/data_runner/README.md"
 "display_on_public_website": true
@@ -56,7 +56,7 @@ This extension is made possible by [Datadog apps][1] which extends the user-inte
 
 For more details about Data Runner, see [stuartlangridge/data-runner][2] on GitHub.
 
-## Setup
+## セットアップ
 
 1. To display Data Runner on your dashboard, open the [dashboard][3] to which you want to add your widget.
 
@@ -64,17 +64,17 @@ For more details about Data Runner, see [stuartlangridge/data-runner][2] on GitH
 
 3. Choose a metric for the game character to find.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 Data Runner does not provide any metrics.
 
-### Events
+### イベント
 
 Data Runner does not include any events.
 
-### Service Checks
+### サービスチェック
 
 Data Runner does not include any service checks.
 

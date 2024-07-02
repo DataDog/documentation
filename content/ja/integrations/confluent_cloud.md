@@ -29,10 +29,10 @@
   "sales_email": info@datadoghq.com
   "support_email": help@datadoghq.com
 "categories":
-- cost management
-- metrics
-- message queues
-"custom_kind": "integration"
+- コスト管理
+- モニター
+- メッセージキュー
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -60,92 +60,92 @@
     "media_type": image
   "overview": "README.md#Overview"
   "resources":
-  - "resource_type": other
+  - "resource_type": その他
     "url": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_account"
-  - "resource_type": other
+  - "resource_type": その他
     "url": "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_confluent_resource"
   "support": "README.md#Support"
   "title": Confluent Cloud
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## Overview
+## 概要
 
 
 {{< site-region region="gov" >}}
-**The Confluent Cloud integration is not supported for the Datadog {{< region-param key="dd_site_name" >}} site**.
+**Datadog {{< region-param key="dd_site_name" >}} サイトでは Confluent Cloud インテグレーションはサポートされていません**。
 {{< /site-region >}}
 
 
-Confluent Cloud is a fully managed, cloud-hosted streaming data service. Connect Datadog with Confluent Cloud to visualize and alert on key metrics for your Confluent Cloud resources.
+Confluent Cloud はフルマネージドの、クラウドホスティングのストリーミングデータサービスです。Datadog と Confluent Cloud を接続することで、Confluent Cloud リソースの主要メトリクスを視覚化し、アラートを発します。
 
-Datadog's out-of-the-box Confluent Cloud dashboard shows you key cluster metrics for monitoring the health and performance of your environment, including information such as the rate of change in active connections and your ratio of average consumed to produced records.
+Datadog のすぐに使える Confluent Cloud ダッシュボードには、アクティブな接続の変化率や、平均消費レコードと生成レコードの比率などの情報を含め、環境の健全性とパフォーマンスをモニタリングするための主要なクラスターメトリクスが表示されます。
 
-You can use recommended monitors to notify and alert your team when topic lag is getting too high, or use these metrics to create your own.
+推奨モニターを使用して、トピックのラグが大きくなりすぎた場合にチームに通知してアラートを出すことも、これらのメトリクスを使用して独自のメトリクスを作成することもできます。
 
-If you would benefit from visualizing the topology of your streaming data pipelines, or from investigating localized bottlenecks within your data streams setup, check out [Data Streams Monitoring][1].
+ストリーミングデータパイプラインのトポロジーを視覚化したり、データストリームセットアップ内の局所的なボトルネックを調査したりすることが有益な場合は、[Data Streams Monitoring][1] をご覧ください。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-Install the integration with the [Datadog Confluent Cloud integration tile][2].
+[Datadog の Confluent Cloud インテグレーションタイル][2]を使用して、インテグレーションをインストールします。
 
-### Configuration
+### 構成
 
-1. In the integration tile, navigate to the **Configuration** tab.
-2. Click **+ Add API Key** to enter your [Confluent Cloud API Key and API Secret](#api-key-and-secret).
-3. Click **Save**. Datadog searches for accounts associated with those credentials.
-4. Add your Confluent Cloud [Cluster ID](#cluster-id) or [Connector ID](#connector-id). Datadog crawls the Confluent Cloud metrics and loads metrics within minutes.
+1. インテグレーションタイルで、**Configuration** タブに移動します。
+2. [Confluent Cloud API Key と API Secret](#api-key-and-secret) を入力し、**+ Add API Key** をクリックします。
+3. **Save** をクリックします。Datadog は、これらの資格情報に関連するアカウントを検索します。
+4. Confluent Cloud の [Cluster ID](#cluster-id) または [Connector ID](#connector-id) を追加します。Datadog は Confluent Cloud のメトリクスをクロールし、数分以内にメトリクスをロードします。
 5. If you use Cloud Cost Management and enable collecting cost data
    - Please ensure that the API key has the [BillingAdmin role][3] enabled.
    - It will be visible in [Cloud Cost Management][4] within 24 hours. ([collected data][5])
 
-#### API Key and secret
+#### API Key と Secret
 
 To create your Confluent Cloud API Key and Secret, see [Add the MetricsViewer role to a new service account in the UI][6].
 
 #### Cluster ID
 
-To find your Confluent Cloud Cluster ID:
+Confluent Cloud Cluster ID を検索するには
 
-1. In Confluent Cloud, navigate to **Environment Overview** and select the cluster you want to monitor.
-2. In the left-hand navigation, click **Cluster overview** > **Cluster settings**.
+1. Confluent Cloud で、**Environment Overview** に移動し、監視したいクラスターを選択します。
+2. 左側のナビゲーションで、**Cluster overview** > **Cluster settings** をクリックします。
 3. Under **Identification**, copy the Cluster ID beginning with `lkc`.
 
 #### Connector ID
 
 To find your Confluent Cloud Connector ID:
 
-1. In Confluent Cloud, navigate to **Environment Overview** and select the cluster you want to monitor.
-2. In the left-hand navigation, click **Data integration** > **Connectors**.
+1. Confluent Cloud で、**Environment Overview** に移動し、監視したいクラスターを選択します。
+2. 左側のナビゲーションで、**Data integration** > **Connectors** をクリックします。
 3. Under **Connectors**, copy the Connector ID beginning with `lcc`.
 
-## Dashboards
+## ダッシュボード
 
-After configuring the integration, see the out-of-the-box Confluent Cloud dashboard for an overview of Kafka cluster and connector metrics.
+インテグレーションの構成後、すぐに使える Confluent Cloud ダッシュボードで Kafka クラスターとコネクタのメトリクスの概要をご覧ください。
 
 By default, all metrics collected across Confluent Cloud are displayed.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "confluent_cloud" >}}
 
 
-### Events
+### イベント
 
-The Confluent Cloud integration does not include any events.
+Confluent Cloud インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The Confluent Cloud integration does not include any service checks.
+Confluent Cloud インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][8].
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-## Further reading
+## 参考資料
 
 - [Create and manage Confluent accounts with Terraform][9]
 - [Create and manage Confluent resources with Terraform][10]

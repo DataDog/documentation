@@ -9,7 +9,7 @@ further_reading:
   tag: Blog
   text: PHP monitoring with Datadog APM and distributed tracing
 - link: "https://github.com/DataDog/dd-trace-php"
-  tag: Source Code
+  tag: ソースコード
   text: Source code
 - link: /tracing/trace_collection/trace_context_propagation/php/
   tag: Documentation
@@ -204,43 +204,43 @@ When enabled, the tracer sends stats to DogStatsD. In addition, where `sigaction
 
 `DD_TRACE_AGENT_CONNECT_TIMEOUT`
 : **INI**: `datadog.trace.agent_connect_timeout`<br>
-**Default**: `100`<br>
-The Agent connection timeout (in milliseconds).
+**デフォルト**: `100`<br>
+Agent 接続のタイムアウト (ミリ秒)
 
 `DD_TRACE_AGENT_PORT`
 : **INI**: `datadog.trace.agent_port`<br>
-**Default**: `8126`<br>
-The Agent port number. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
+**デフォルト**: `8126`<br>
+Agent のポート番号。[Agent 構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに一致させる必要があります。
 
 `DD_TRACE_AGENT_TIMEOUT`
 : **INI**: `datadog.trace.agent_timeout`<br>
-**Default**: `500`<br>
-The Agent request transfer timeout (in milliseconds).
+**デフォルト**: `500`<br>
+Agent リクエスト転送のタイムアウト (ミリ秒)。
 
 `DD_TRACE_AGENT_URL`
 : **INI**: `datadog.trace.agent_url`<br>
-**Default**: `null`<br>
-The Agent URL; takes precedence over `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT`. For example: `https://localhost:8126`. If the [Agent configuration][13] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
+**デフォルト**: `null`<br>
+Agent の URL。`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` よりも優先されます。例: `https://localhost:8126` [Agent 構成][13]で `receiver_port` や `DD_APM_RECEIVER_PORT` をデフォルトの `8126` 以外に設定した場合、`DD_TRACE_AGENT_PORT` や `DD_TRACE_AGENT_URL` をそれに一致させる必要があります。
 
 `DD_DOGSTATSD_URL`
 : **INI**: `datadog.dogstatsd_url`<br>
-**Default**: `null`<br>
-The URL used to negotiate connection to DogStatsD. This setting takes precedence over `DD_AGENT_HOST` and `DD_DOGSTATSD_PORT`. Supports `udp://` or `unix://` schemas only.
+**デフォルト**: `null`<br>
+DogStatsD への接続をネゴシエートするために使用する URL。この設定は `DD_AGENT_HOST` と `DD_DOGSTATSD_PORT` よりも優先されます。`udp://` または `unix://` スキーマのみをサポートします。
 
 `DD_DOGSTATSD_PORT`
 : **INI**: `datadog.dogstatsd_port`<br>
-**Default**: `8125`<br>
-The port used to connect to DogStatsD, used in combination with `DD_AGENT_HOST` to negotiate connection to DogStatsD when `DD_TRACE_HEALTH_METRICS_ENABLED` is enabled.
+**デフォルト**: `8125`<br>
+`DD_TRACE_HEALTH_METRICS_ENABLED` が有効な場合に、DogStatsD への接続をネゴシエートするために `DD_AGENT_HOST` と組み合わせて使用されるポート。
 
 `DD_TRACE_AUTO_FLUSH_ENABLED`
 : **INI**: `datadog.trace.auto_flush_enabled`<br>
-**Default**: `0`<br>
-Automatically flush the tracer when all the spans are closed; set to `1` in conjunction with `DD_TRACE_GENERATE_ROOT_SPAN=0` to trace [long-running processes][14].
+**デフォルト**: `0`<br>
+すべてのスパンが終了されたタイミングでトレーサーを自動的にフラッシュします。[長時間実行されるプロセス][14]をトレースするために、`DD_TRACE_GENERATE_ROOT_SPAN=0` と併せて `1` に設定されます。
 
 `DD_TRACE_CLI_ENABLED`
 : **INI**: `datadog.trace.cli_enabled`<br>
-**Default**: `0`<br>
-Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts][15].
+**デフォルト**: `0`<br>
+CLI から送られた PHP スクリプトのトレーシングを有効にします。 [CLI スクリプトのトレーシング][15]を参照してください。
 
 `DD_TRACE_DEBUG`
 : **INI**: `datadog.trace.debug`<br>
@@ -259,28 +259,28 @@ Specifies a log file. If none is specified, logs go to the default PHP error loc
 
 `DD_TRACE_FORKED_PROCESS`
 : **INI**: `datadog.trace.forked_process`<br>
-**Default**: `1`<br>
-Indicates whether to trace a forked process. Set to `1` to trace forked processes, or to `0` to disable tracing in forked processes. If set to `0`, you can still manually re-enable a process' trace in code with `ini_set("datadog.trace.enabled", "1");`, but it will be presented as a fresh trace. Forked process traces are shown as whole distributed traces only when both `DD_TRACE_FORKED_PROCESS` and `DD_DISTRIBUTED_TRACING` are configured to `1` (on).
+**デフォルト**: `1`<br>
+フォークされたプロセスをトレースするかどうかを示します。`1` に設定するとフォークされたプロセスをトレースし、`0` に設定するとフォークされたプロセスのトレースを無効にします。`0` に設定した場合でも、コード内で `ini_set("datadog.trace.enabled", "1");` を使って手動でプロセスのトレースを再有効化することができますが、新しいトレースとして表示されることになります。フォークされたプロセスのトレースは、`DD_TRACE_FORKED_PROCESS` と `DD_DISTRIBUTED_TRACING` の両方が `1` (オン) に構成されている場合にのみ、全体の分散型トレースとして表示されるようになりました。
 
 `DD_TRACE_ENABLED`
 : **INI**: `datadog.trace.enabled`<br>
-**Default**: `1`<br>
-Enable the tracer globally.
+**デフォルト**: `1`<br>
+トレーサーをグローバルに有効化します
 
 `DD_TRACE_GENERATE_ROOT_SPAN`
 : **INI**: `datadog.trace.generate_root_span`<br>
-**Default**: `1`<br>
-Automatically generate a top-level span; set to `0` in conjunction with `DD_TRACE_AUTO_FLUSH_ENABLED=1` to trace [long-running processes][14].
+**デフォルト**: `1`<br>
+トップレベルのスパンを自動生成します。[長時間実行されるプロセス][14]をトレースするために、`DD_TRACE_AUTO_FLUSH_ENABLED=1` と併せて `0` に設定されます。
 
 `DD_TAGS`
 : **INI**: `datadog.tags`<br>
-**Default**: `null`<br>
-Tags to be set on all spans, for example: `key1:value1,key2:value2`.
+**デフォルト**: `null`<br>
+`key1:value1,key2:value2` など、すべてのスパンに設定されるタグ。
 
 `DD_TRACE_HEADER_TAGS`
 : **INI**: `datadog.trace.header_tags`<br>
-**Default**: `null`<br>
-CSV of header names that are reported on the root span as tags.
+**デフォルト**: `null`<br>
+ルートスパンでタグとして報告されたヘッダー名の CSV。
 
 `DD_TRACE_DB_CLIENT_SPLIT_BY_INSTANCE`
 : **INI**: `datadog.trace.db_client_split_by_instance`<br>
@@ -289,29 +289,29 @@ Set the service name of HTTP requests to `pdo-<hostname>`. For example, a `PDO->
 
 `DD_TRACE_HTTP_CLIENT_SPLIT_BY_DOMAIN`
 : **INI**: `datadog.trace.http_client_split_by_domain`<br>
-**Default**: `0`<br>
-Set the service name of HTTP requests to `host-<hostname>`, for example a `curl_exec()` call to `https://datadoghq.com` has the service name `host-datadoghq.com` instead of the default service name of `curl`.
+**デフォルト**: `0`<br>
+HTTP リクエストのサービス名を `host-<hostname>` に設定します。例: `https://datadoghq.com` に対する `curl_exec()` コールのサービス名は、デフォルトのサービス名 `curl` ではなく `host-datadoghq.com` となります。
 
 `DD_TRACE_REDIS_CLIENT_SPLIT_BY_HOST`
 : **INI**: `datadog.trace.redis_client_split_by_host`<br>
-**Default**: `0`<br>
-Set the service name of Redis clients operations to `redis-<hostname>`.
+**デフォルト**: `0`<br>
+Redis クライアントオペレーションのサービス名を `redis-<hostname>` に設定します。
 
 `DD_TRACE_<INTEGRATION>_ENABLED`
 : **INI**: `datadog.trace.<INTEGRATION>_enabled`<br>
-**Default**: `1`<br>
-Enable or disable an integration; all integrations are enabled by default (see [Integration names](#integration-names)).
+**デフォルト**: `1`<br>
+インテグレーションを有効または無効にします。すべてのインテグレーションはデフォルトで有効になっています ([インテグレーション名](#integration-names)を参照してください)。
 
 `DD_TRACE_MEASURE_COMPILE_TIME`
 : **INI**: `datadog.trace.measure_compile_time`<br>
-**Default**: `1`<br>
-Record the compile time of the request (in milliseconds) onto the top-level span.
+**デフォルト**: `1`<br>
+リクエストのコンパイル時間 (ミリ秒) をトップレベルのスパン上に記録します。
 
 `DD_TRACE_REMOVE_AUTOINSTRUMENTATION_ORPHANS`
 : **INI**: `datadog.trace.remove_autoinstrumentation_orphans`<br>
-**Default**: `false`<br>
-Automatically remove orphaned spans generated by auto-instrumentation. Currently, this only applies to some Redis and Laravel calls used in the context of Laravel Horizon. Added in version `0.88.0`.<br><br>
-**Note:** These orphaned spans are flushed but not recorded in the trace. Moreover, the specific single-span traces that are removed with this configuration option are:
+**デフォルト**: `false`<br>
+<br>自動インスツルメンテーションによって生成された孤児スパンを自動的に削除します。現在のところ、これは Laravel Horizon のコンテキストで使用される一部の Redis と Laravel の呼び出しにのみ適用されます。バージョン `0.88.0` で追加されました。<br>
+**注:** これらの孤児スパンは、フラッシュされますが、トレースには記録されません。さらに、この構成オプションで削除される特定の単一スパンのトレースは次の通りです。
   - `laravel.event.handle`
   - `laravel.provider.load`
   - `Predis.Client.__construct`
@@ -320,8 +320,8 @@ Automatically remove orphaned spans generated by auto-instrumentation. Currently
 
 `DD_TRACE_REMOVE_ROOT_SPAN_LARAVEL_QUEUE`
 : **INI**: `datadog.trace.remove_root_span_laravel_queue`<br>
-**Default**: `true`<br>
-Automatically disable root span generation (see `DD_TRACE_GENERATE_ROOT_SPAN`) and enable auto-flushing (see `DD_TRACE_AUTO_FLUSH_ENABLED`) for Laravel Queue/Horizon commands. Added in version `0.88.0`.
+**デフォルト**: `true`<br>
+Laravel Queue/Horizon コマンドの root スパン生成を自動的に無効にし (`DD_TRACE_GENERATE_ROOT_SPAN` を参照)、自動フラッシュを有効にします (`DD_TRACE_AUTO_FLUSH_ENABLED` を参照)。バージョン `0.88.0` で追加されました。
 
 `DD_TRACE_LARAVEL_QUEUE_DISTRIBUTED_TRACING`
 : **INI**: `datadog.trace.laravel_queue_distributed_tracing`<br>
@@ -330,29 +330,29 @@ Disables the creation of an additional `laravel.queue.process` span and relies s
 
 `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 : **INI**: `datadog.trace.resource_uri_fragment_regex`<br>
-**Default**: `null`<br>
-CSV of regexes that identifies path fragments corresponding to IDs (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
+**デフォルト**: `null`<br>
+ID に対応するパスフラグメントを特定する正規表現のCSV ([リソース名を正規化された URI にマッピング](#map-resource-names-to-normalized-uri) を参照してください)。
 
 `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`
 : **INI**: `datadog.trace.resource_uri_mapping_incoming`<br>
-**Default**: `null`<br>
-CSV of URI mappings to normalize resource naming for incoming requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
+**デフォルト**: `null`<br>
+受信リクエストのリソース名を正規化するための URI マッピングの CSV ([リソース名を正規化された URI にマッピング](#map-resource-names-to-normalized-uri) を参照してください)。
 
 `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
 : **INI**: `datadog.trace.resource_uri_mapping_outgoing`<br>
-**Default**: `null`<br>
-CSV of URI mappings to normalize resource naming for outgoing requests (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
+**デフォルト**: `null`<br>
+発信リクエストのリソース名を正規化するための URI マッピングの CSV ([リソース名を正規化された URI にマッピング](#map-resource-names-to-normalized-uri) を参照してください)。
 
 `DD_TRACE_RETAIN_THREAD_CAPABILITIES`
 : **INI**: `datadog.trace.retain_thread_capabilities`<br>
-**Default**: `0`<br>
-Works for Linux. Set to `true` to retain capabilities on Datadog background threads when you change the effective user ID. This option does not affect most setups, but some modules - to date Datadog is only aware of [Apache's mod-ruid2][5] - may invoke `setuid()` or similar syscalls, leading to crashes or loss of functionality as it loses capabilities.<br><br>
-**Note:** Enabling this option may compromise security. This option, standalone, does not pose a security risk. However, an attacker being able to exploit a vulnerability in PHP or web server may be able to escalate privileges with relative ease, if the web server or PHP were started with full capabilities, as the background threads will retain their original capabilities. Datadog recommends restricting the capabilities of the web server with the `setcap` utility.
+**デフォルト**: `0`<br>
+Linux で動作します。`true` に設定すると、有効なユーザー ID を変更しても Datadog のバックグラウンドスレッド機能を維持することができます。このオプションはほとんどの設定には影響しませんが、一部のモジュールで影響が出る場合があります。現時点で Datadog が確認している限りでは、[Apache の mod-ruid2][5] で `setuid()` や類似の syscall を呼び出した場合に影響が生じ、クラッシュや機能の不具合につながる可能性があります。<br><br>
+**注:** このオプションを有効にすると、セキュリティが損なわれる可能性があります。このオプションは単独ならセキュリティ上のリスクをもたらす心配はありません。しかし、Web サーバーや PHP がフル機能で起動されている場合はバックグラウンドスレッドが元の機能を維持しているため、攻撃者は PHP や Web サーバーの脆弱性を悪用して比較的容易に権限を昇格できる可能性があります。Datadog では、`setcap` ユーティリティを使用して Web サーバーの機能を制限することをお勧めしています。
 
 `DD_HTTP_SERVER_ROUTE_BASED_NAMING`
 : **INI**: `datadog.http_server_route_based_naming`<br>
-**Default**: `true`<br>
-Enable route-based naming for HTTP server requests. Set to `true` to use the integration-specific root span's resource name format. When `false`, the HTTP method and path are used instead. Added in version `0.89.0`.
+**デフォルト**: `true`<br>
+HTTP サーバーリクエストのルートベースの命名を有効にします。インテグレーション固有の root スパンのリソース名フォーマットを使用するには `true` に設定します。`false` に設定すると、HTTP メソッドとパスが代わりに使用されます。バージョン `0.89.0` で追加されました。
 
 `DD_TRACE_SAMPLE_RATE`
 : **INI**: `datadog.trace.sample_rate`<br>
@@ -361,8 +361,8 @@ The sampling rate for the traces, a number between `0.0` and `1.0`. The default 
 
 `DD_TRACE_SAMPLING_RULES`
 : **INI**: `datadog.trace.sampling_rules`<br>
-**Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Examples: Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`. Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'` (see [Integration names](#integration-names)). The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character. The service matching takes `DD_SERVICE_MAPPING` into account (starting version `0.90.0`). The name and service must be a valid regular expression. Rules that are not valid regular expressions are ignored.
+**デフォルト**: `null`<br>
+JSON でエンコードされた文字列で、サンプリングレートを構成します。例: サンプルレートを 20% に設定する場合は `'[{"sample_rate": 0.2}]'` となります。'a' ではじまる、スパン名が 'b' のサービスのサンプルレートを 10% に、その他のサービスのサンプルレートを 20% に設定する場合は `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`  のようになります ([インテグレーション名](#integration-names) を参照してください) 。二重引用符 (`"`) のエスケープ処理による問題を防ぐため、JSON オブジェクトは**必ず**単一引用符 (`'`) で囲むようにしてください。サービスのマッチングでは `DD_SERVICE_MAPPING` が考慮されます (バージョン `0.90.0` から)。名前とサービスは有効な正規表現でなければなりません。有効な正規表現でないルールは無視されます。
 
 `DD_TRACE_SAMPLING_RULES_FORMAT`
 : **INI**: `datadog.trace.sampling_rules_format`<br>
@@ -371,45 +371,45 @@ Rules the format (`regex` or `glob`) used for sampling rules defined by `DD_TRAC
 
 `DD_TRACE_RATE_LIMIT`
 : **INI**: `datadog.trace.rate_limit`<br>
-**Default**: `0`<br>
-Maximum number of spans to sample per second. All processes in an Apache or FPM pool share the same limiter. When unset (0) rate limiting is delegated to the Datadog Agent.
+**デフォルト**: `0`<br>
+1 秒間にサンプリングするスパンの最大数。Apache または FPM プール内のすべてのプロセスは、同じリミッターを共有します。未設定 (0) の場合、レート制限は Datadog Agent に委ねられます。
 
 `DD_TRACE_SPANS_LIMIT`
 : **INI**: `datadog.trace.spans_limit`<br>
 **Default**: `1000`<br>
-The maximum number of spans that are generated within one trace. If the maximum number of spans is reached, then spans are no longer generated. If the limit is increased, then the amount of memory that is used by a pending trace will increase and might reach the PHP maximum amount of allowed memory. The maximum amount of allowed memory can be increased with the PHP INI system setting `memory_limit`.
+1 つのトレース内で生成されるスパンの最大数。最大数に達すると、その後スパンは生成されなくなります。上限を増大すると、保留中のトレースに使用されるメモリの量が増加し、許可されるメモリの PHP 最大量に達する可能性があります。許可されるメモリの最大量は、PHP INI システム設定の `memory_limit` で増加できます。
 
 `DD_SPAN_SAMPLING_RULES`
 : **INI**: `datadog.span_sampling_rules`<br>
-**Default**: `null`<br>
-A JSON encoded string to configure the sampling rate. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). <br>
-**Example**: Set the span sample rate to 50% for the service 'my-service' and operation name 'http.request', up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`. The JSON object **must** be surrounded by single quotes (`'`) to avoid problems with escaping of the double quote (`"`) character.<br>
-For more information, see [Ingestion Mechanisms][6].<br>
+**デフォルト**: `null`<br>
+サンプリングレートを構成するための JSON エンコードされた文字列。ルールは、スパンのサンプルレートを決定するために構成された順序で適用されます。`sample_rate` の値は 0.0 から 1.0 の間でなければなりません (この値を含む)。 <br>
+**例**: サービス名 'my-service'、演算子名 ‘http.request' に対して、スパンのサンプルレートを 50％ に設定、最大で 50 トレース/秒に設定: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`JSON オブジェクトは、ダブルクォート (`'`) 文字のエスケープの問題を避けるために、シングルクォート (`"`) で囲む**必要があります**。<br>
+詳しくは、[取り込みメカニズム][6]をご覧ください。<br>
 
 
 `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED`
 : **INI**: `datadog.trace.url_as_resource_names_enabled`<br>
-**Default**: `1`<br>
-Enable URL's as resource names (see [Map resource names to normalized URI](#map-resource-names-to-normalized-uri)).
+**デフォルト**: `1`<br>
+リソース名として URL を有効にします ([リソース名を正規化された URI にマッピング](#map-resource-names-to-normalized-uri)を参照してください)。
 
 `DD_VERSION`
 : **INI**: `datadog.version`<br>
-**Default**: `null`<br>
-Set an application's version in traces and logs, for example: `1.2.3`, `6c44da20`, `2020.02.13`. Starting version `0.90.0`, changes to `datadog.version` at runtime through `ini_set` are also applied to the current root span.
+**デフォルト**: `null`<br>
+トレースとログにアプリケーションのバージョンを設定します (例: `1.2.3`、`6c44da20`、`2020.02.13`)。バージョン `0.90.0` から、実行時に `ini_set` によって `datadog.version` に加えられた変更は、現在のルートスパンにも適用されます。
 
 `DD_TRACE_HTTP_URL_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_url_query_param_allowed`<br>
-**Default**: `*`<br>
-A comma-separated list of query parameters to be collected as part of the URL. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
+**デフォルト**: `*`<br>
+URL の一部として収集するクエリパラメータのカンマ区切りリスト。パラメータを収集しない場合は空、すべてのパラメータを収集する場合は `*` を設定します。バージョン `0.74.0` で追加されました。
 
 `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED`
 : **INI**: `datadog.trace.http_post_data_param_allowed`<br>
-**Default**: ""<br>
-A comma-separated list of HTTP POST data fields to be collected. Leave empty if you don't want to collect any posted values. When setting this value to the wildcard `*`, all posted data is collected, but the values for fields that match the `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` obfuscation rule are redacted. If specific fields are given, then only these fields' values are visible, while the values for all other fields are redacted. Added in version `0.86.0`.<br>
-**Example**:
-  - The posted data is `qux=quux&foo[bar][password]=Password12!&foo[bar][username]=admin&foo[baz][bar]=qux&foo[baz][key]=value`
-  - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` is set to `foo.baz,foo.bar.password`
-  - In this scenario, the collected metadata is:
+**デフォルト**: ""<br>
+収集される HTTP POST データフィールドのカンマ区切りリスト。POST 送信された値を収集しない場合は、空のままにします。この値をワイルドカードの `*` に設定した場合、POST 送信されたすべてのデータが収集されますが、`DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP` 難読化ルールに一致するフィールドの値は編集されます。特定のフィールドが指定された場合、これらのフィールドの値のみが表示され、その他すべてのフィールドの値は編集されます。バージョン `0.86.0` で追加されました。<br>
+**例**:
+  - 投稿されたデータは `qux=quux&foo[bar][password]=Password12!&foo[bar][username]=admin&foo[baz][bar]=qux&foo[baz][key]=value`
+  - `DD_TRACE_HTTP_POST_DATA_PARAM_ALLOWED` は `foo.baz,foo.bar.password` に設定されている
+  - このシナリオでは、収集されたメタデータは次のとおりです。
     - `http.request.foo.bar.password=Password12!`
     - `http.request.foo.bar.username=<redacted>`
     - `http.request.foo.baz.bar=qux`
@@ -418,26 +418,26 @@ A comma-separated list of HTTP POST data fields to be collected. Leave empty if 
 
 `DD_TRACE_RESOURCE_URI_QUERY_PARAM_ALLOWED`
 : **INI**: `datadog.trace.resource_uri_query_param_allowed`<br>
-**Default**: `*`<br>
-A comma-separated list of query parameters to be collected as part of the resource URI. Set to empty to prevent collecting any parameters, or `*` to collect all parameters. Added in version `0.74.0`.
+**デフォルト**: `*`<br>
+リソース URI の一部として収集するクエリパラメータのカンマ区切りリスト。パラメータを収集しない場合は空、すべてのパラメータを収集する場合は `*` を設定します。バージョン `0.74.0` で追加されました。
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : **INI**: `datadog.trace.client_ip_enabled`<br>
-**Default**: `false`<br>
-Enables IP collection client side. Added in version `0.84.0`.
+**デフォルト**: `false`<br>
+クライアント側で IP 収集を有効にします。バージョン `0.84.0` で追加されました。
 
 `DD_TRACE_CLIENT_IP_HEADER`
 : **INI**: `datadog.trace.client_ip_header`<br>
-**Default**: `null`<br>
-The IP header to be used for client IP collection, for example: `x-forwarded-for`. Added in version `0.84.0` (`0.76.0` when using ASM).
+**デフォルト**: `null`<br>
+クライアント IP の収集に使用する IP ヘッダー。例: `x-forwarded-for`。バージョン `0.84.0` (ASM を使用している場合は `0.76.0`) で追加されました。
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : **INI**: `datadog.trace.obfuscation_query_string_regexp`<br>
-**Default**:
+**デフォルト**: 
   ```
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```
-  Regular expression used to obfuscate the query string included as part of the URL. This expression is also used in the redaction process for HTTP POST data. Added in version `0.76.0`.
+ URL の一部として含まれるクエリ文字列を難読化するために使用される正規表現。この式は、HTTP POST データの編集処理でも使用されます。バージョン `0.76.0` で追加されました。
 
 `DD_TRACE_OTEL_ENABLED`
 : Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation. <br>
@@ -451,7 +451,7 @@ Propagation styles to use when injecting tracing headers. If using multiple styl
 
   - [tracecontext][10]
   - [b3multi][7]
-  - [B3 single header][8]
+  - [B3 シングルヘッダ][8]
   - Datadog
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
@@ -461,13 +461,13 @@ Propagation styles to use when extracting tracing headers. If using multiple sty
 
   - [tracecontext][10]
   - [b3multi][7]
-  - [B3 single header][8]
+  - [B3 シングルヘッダ][8]
   - Datadog
 
 `DD_TRACE_WORDPRESS_ADDITIONAL_ACTIONS`
 : **INI**: `datadog.trace.wordpress_additional_actions`<br>
-**Default**: `null`<br>
-A comma-separated list of WordPress action hooks to be instrumented. This feature is only available when `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` is enabled. Added in version `0.91.0`.
+**デフォルト**: `null`<br>
+インスツルメンテーションする WordPress アクションフックのカンマ区切りリスト。この機能は `DD_TRACE_WORDPRESS_ENHANCED_INTEGRATION` が有効な場合にのみ利用可能です。バージョン `0.91.0` で追加されました。
 
 `DD_TRACE_WORDPRESS_CALLBACKS`
 : **INI**: `datadog.trace.wordpress_callbacks`<br>
@@ -476,23 +476,23 @@ Enables WordPress action hook callbacks instrumentation. This feature is only av
 
 `DD_DBM_PROPAGATION_MODE`
 : **INI**: `datadog.dbm_propagation_mode`<br>
-**Default**: `'disabled'`<br>
-Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`.<br>
-The `'service'` option enables the connection between DBM and APM services. Available for Postgres, MySQL and SQLServer.<br>
-The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
+**デフォルト**: `'disabled'`<br>
+`'service'` または `'full'` に設定すると、APM から送信されるデータとデータベースモニタリング製品との連携が可能になります。<br>
+`'service'` オプションは、DBM と APM のサービス間の接続を有効にします。Postgres、MySQL、SQLServer で利用可能です。<br>
+`'full'` オプションは、データベースクエリイベントを持つデータベーススパン間の接続を可能にします。Postgres と MySQL で利用可能です。<br>
 
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : **INI**: `datadog.instrumentation_telemetry_enabled`<br>
-**Default**: `true`<br>
-Datadog may collect [environmental and diagnostic information about your system][16] to improve the product. When false, this telemetry data will not be collected.
+**デフォルト**: `true` <br>
+Datadog は、製品の改良のため、[システムの環境・診断情報][16]を収集することがあります。false の場合、このテレメトリーデータは収集されません。
 
-#### Integration names
+#### インテグレーション名
 
-The table below specifies the default service names for each integration. Change the service names with `DD_SERVICE_MAPPING`.
+以下の表は、各インテグレーションに紐付くデフォルトのサービス名をまとめたものです。サービス名は `DD_SERVICE_MAPPING` に変更してください。
 
-Use the name when setting integration-specific configuration such as, `DD_TRACE_<INTEGRATION>_ENABLED`, for example: Laravel is `DD_TRACE_LARAVEL_ENABLED`.
+インテグレーション固有のコンフィギュレーションを設定する場合は、`DD_TRACE_<INTEGRATION>_ENABLED` 形式で名前を付けてください。例: Laravel の場合、 `DD_TRACE_LARAVEL_ENABLED`。
 
-| Integration   | Service Name    |
+| インテグレーション   | サービス名    |
 | ------------- | --------------- |
 | AMQP          | `amqp`          |
 | CakePHP       | `cakephp`       |
@@ -523,73 +523,73 @@ Use the name when setting integration-specific configuration such as, `DD_TRACE_
 | Yii           | `yii`           |
 | ZendFramework | `zendframework` |
 
-#### Map resource names to normalized URI
+#### リソース名を正規化された URI にマッピング
 
 <div class="alert alert-warning">
 Note that setting any of the following: <code>DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX</code>, <code>DD_TRACE_RESOURCE_URI_MAPPING_INCOMING</code>, and <code>DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING</code> will opt-in to the new resource normalization approach and any value in <code>DD_TRACE_RESOURCE_URI_MAPPING</code> will be ignored.
 </div>
 
-For HTTP server and client integrations, the URL is used to form the trace resource name in the format `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>`, with the query string removed from the URL. This allows better visibility in any custom framework that is not automatically instrumented by normalizing the URLs and grouping together generic endpoints under one resource.
+HTTP サーバーとクライアントインテグレーションでは、URL はクエリ文字列が URL から削除された状態で、トレースリソース名を作成するために `<HTTP_REQUEST_METHOD> <NORMALIZED_URL>` の形式で使用されます。URL を正規化し 1 つのリソースの下に一般的なエンドポイントをグループ化することで、自動インスツルメンテーションされないカスタムフレームワークにおける可視性を向上することができます。
 
-| HTTP Request                       | Resource Name |
+| HTTP リクエスト                       | リソース名 |
 | :--------------------------------- | :------------ |
 | **GET** request to `/foo?a=1&b=2`  | `GET /foo`    |
 | **POST** request to `/bar?foo=bar` | `POST /bar`   |
 
-Numeric IDs, UUIDs (with and without dashes), and 32-to-512-bit hexadecimal hashes are automatically replaced with a `?` character.
+数値 ID、UUID (ダッシュの有無不問)、32〜512 ビットの 16 進数ハッシュは、自動的に `?` に置換されます。
 
-| URL (GET request)                              | Resource Name      |
+| URL (GET リクエスト）                              | リソース名      |
 | :--------------------------------------------- | :----------------- |
 | `/user/123/show`                               | `GET /user/?/show` |
 | `/widget/b7a992e0-3300-4030-8617-84553b11c993` | `GET /widget/?`    |
 | `/api/v2/b7a992e033004030861784553b11c993/123` | `GET /api/v2/?/?`  |
 | `/book/0dbf3596`                               | `GET /book/?`      |
 
-You can turn this functionality OFF using `DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=0`.
+`DD_TRACE_URL_AS_RESOURCE_NAMES_ENABLED=0` を使用してこの機能をオフにすることも可能です。
 
-##### Custom URL-to-resource mapping
+##### URL からリソースへのマッピングをカスタマイズ
 
-There are a few cases that are not covered by the automatic normalization that is applied.
+適用された自動正規化ではカバーされないケースがいくつかあります。
 
-| URL (GET request)                | Expected Resource Name        |
+| URL (GET リクエスト）                | 考えられるリソース名        |
 | :------------------------------- | :---------------------------- |
 | `/using/prefix/id123/for/id`     | `GET /using/prefix/?/for/id`  |
 | `/articles/slug-of-title`        | `GET /articles/?`             |
 | `/cities/new-york/rivers`        | `GET /cities/?/rivers`        |
 | `/nested/cities/new-york/rivers` | `GET /nested/cities/?/rivers` |
 
-There are two classes of scenarios that are not covered by automatic normalization:
+自動正規化ではカバーされないシナリオには、次の 2 つのクラスがあります。
 
-  - The path fragment to normalize has a reproducible pattern and can be present in any part of the url, for example `id<number>` in the example above. This scenario is covered by the setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` below.
-  - The path fragment can be anything, and the previous path fragment indicates that a value has to be normalized. For example `/cities/new-york` tells us that `new-york` has to be normalized as it is the name of a city. This scenario is covered by settings `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` and `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` for incoming and outgoing requests respectively.
+  - 正規化するパスフラグメントには再現可能なパターンがあり、URL の任意の部分で存在できます（上記の例では `id<number>`）。このシナリオは、次の `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` 設定でカバーされます。
+  - 何でもパスフラグメントになれますが、前のパスフラグメントは値が正規化されるべきことを示します。たとえば `/cities/new-york` は、`new-york` は都市名のため正規化する必要があることが分かります。このシナリオは以下の設定でカバーされます `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING`、 `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`（それぞれ、受信リクエストと発信リクエスト）。 
 
 ###### `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX`
 
-This setting is a CSV of one or more regular expressions that are applied to every path fragment independently. For example, setting `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` to `^id\d+$` for a path of `/using/prefix/id123/for/id` applies the regex to each of the fragments: `using`, `prefix`, `id123`, `for`, and `id`.
+この設定は、各パスフラグメントに個々に適用される正規表現の CSV です。たとえば、 `/using/prefix/id123/for/id` のパスとして `DD_TRACE_RESOURCE_URI_FRAGMENT_REGEX` を `^id\d+$` に設定すると、各フラグメント（`using`、`prefix`、`id123`、`for`、`id`）に正規表現が適用されます。
 
-| URL                          | regex     | Expected Resource Name       |
+| URL                          | 正規表現     | 考えられるリソース名       |
 | :--------------------------- | :-------- | :--------------------------- |
 | `/using/prefix/id123/for/id` | `^id\d+$` | `GET /using/prefix/?/for/id` |
 
-Note that because the format of this variable is a CSV, the comma character `,` is not escaped and cannot be used in your regular expressions.
+この変数の形式は CSV であるため、カンマ記号 `,` はエスケープされず、正規表現では使用できないことに注意してください。
 
-###### `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` and `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
+###### `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` および `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING`
 
-This setting is a CSV of patterns that can contain a wildcard `*`. For example, adding the pattern `cities/*` means that every time the fragment `cities` is found while analyzing a URL, then the next fragment, if any, will be replaced with `?`. Patterns are applied at any depth, so applying the following rule will both normalize `/cities/new-york` and `/nested/cities/new-york` in the table above.
+この設定はワイルドカード `*` を含むことのできるパターンの CSV です。たとえば、パターン `cities/*` を追加すると、URL を分析中にフラグメント `cities` が見つかる度に、次のフラグメントがある場合 `?` に置き換えられます。パターンは深さを問わず適用されるため、次の規則を適用することで、上記の表の `/cities/new-york` と `/nested/cities/new-york` の両方が正規化されます。
 
-Patterns can be applied to a part of a specific fragment. For example `path/*-fix` would normalize the url `/some/path/changing-fix/nested` to `/some/path/?-fix/nested`
+パターンは特定のフラグメントの一部に適用することもできます。たとえば、`path/*-fix` は URL `/some/path/changing-fix/nested` を `/some/path/?-fix/nested` に正規化します。
 
-Note that `DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` applies to only incoming requests (for example web frameworks) while `DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` only applies to outgoing requests (for example `curl` and `guzzle` requests).
+`DD_TRACE_RESOURCE_URI_MAPPING_INCOMING` は受信リクエスト（ウェブフレームワークなど）のみに適用され、`DD_TRACE_RESOURCE_URI_MAPPING_OUTGOING` は発信リクエスト（`curl` や `guzzle` リクエストなど）のみに適用されることに、ご注意ください。
 
-### `open_basedir` restrictions
+### `open_basedir` 制限
 
-When [`open_basedir`][9] setting is used, then `/opt/datadog-php` should be added to the list of allowed directories.
-When the application runs in a docker container, the path `/proc/self` should also be added to the list of allowed directories.
+[`open_basedir`][9] 設定が使用される場合、許可されるディレクトリに `/opt/datadog-php` を追加する必要があります。
+アプリケーションを Docker コンテナで実行する場合は、許可されるディレクトリにパス `/proc/self` も追加する必要があります。
 
-### Headers extraction and injection
+### ヘッダーの抽出と挿入
 
-Read [Trace Context Propagation][11] for information about configuring the PHP tracing library to extract and inject headers for propagating distributed trace context.
-## Further Reading
+分散トレースコンテキストの伝播を目的としてヘッダーの抽出と挿入を行うための PHP トレーシングライブラリの構成については、[トレースコンテキストの伝播][11]をお読みください。
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

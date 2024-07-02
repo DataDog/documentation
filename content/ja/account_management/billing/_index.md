@@ -2,116 +2,116 @@
 title: Billing
 ---
 
-## Overview
+## 概要
 
-The billing cycle begins the first of the month (UTC) regardless of when you sign up. Your first month is prorated based on your actual sign-up date.
+課金サイクルは、いつサインアップしたかに関係なく月初から始まります。最初の月 (UTC) は、実際のサインアップ日に基づいて日割り計算されます。
 
-Datadog meters the count of hosts and custom metrics hourly. The billable count of hosts is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours. Datadog excludes the top 1% to reduce the impact of spikes in usage on your bill. The billable count of custom metrics is based on the average number of custom metric hours for the month. See your [Usage][1] in Datadog. Billing pages are only accessible to users with the Datadog Admin Role.
+Datadog は、ホストとカスタムメトリクスの数を毎時間測定します。ホストの課金対象数は、この下位 99% の時間の最大数として月末に計算されます。上位 1% を除外することで、使用量の短期急上昇が課金額に影響しないようにしています。カスタムメトリクスの課金対象数は、その月のカスタムメトリクスの時間平均として計算されます。Datadog で[使用量][1]を確認できます。請求ページは Datadog の管理者権限を有するユーザーのみアクセス可能です。
 
-### Hosts
+### ホスト
 
 A host is any physical or virtual OS instance that you monitor with Datadog. It could be a server, VM, node (in the case of Kubernetes), App Service Plan instance (in the case of Azure App Service), or Heroku dyno (in the case of the Heroku platform). Hosts can be instances with the Datadog Agent installed plus any Amazon EC2s, Google Cloud, Azure, or vSphere VMs monitored with Datadog integrations. Any EC2s or VMs with the Agent installed count as a single instance (no double-billing).
 
-Non-reporting hosts (status `INACTIVE` in your [Infrastructure list][2]) do not count towards billing. It could take up to 2 hours for these hosts to drop out of the [Infrastructure List][2]. Datadog retains the historical data for these hosts (paid accounts). Metrics can be graphed on a dashboard by knowing the specific host name or tags.
+報告を行っていないホスト ([インフラストラクチャーリスト][2]でステータスが `INACTIVE`) は、課金の対象になりません。そのようなホストが[インフラストラクチャーリスト][2]から除外されるまで、最大 2 時間かかることがあります。Datadog は、これらのホスト (有料アカウント) の履歴データを保持します。ホスト名またはタグがわかれば、メトリクスをダッシュボードでグラフ化できます。
 
-### Containers
+### コンテナ
 
-It is recommended that containers are monitored with a single containerized Agent per host. This Agent collects both container and host metrics. If you choose to install the Agent directly in each container, each container is counted as a host from a billing perspective. More details can be found in the [Agent installation][3] documentation.
+ホストごとに 1 つのコンテナ Agent を使用してコンテナを監視することをお勧めします。この Agent は、コンテナとホストの両方のメトリクスを収集します。Agent をコンテナに直接インストールした場合は、各コンテナが課金対象のホストとしてカウントされます。詳細については、[Agent のインストールに関するドキュメント][3]を参照してください。
 
-### Serverless
+### サーバーレス
 
-Datadog bills based on the average number of functions per hour across the month for your accounts. Every hour, Datadog records the number of functions that were executed one or more times and monitored by your Datadog account. At the end of the month, Datadog charges by calculating the average of the hourly number of functions recorded. Pro and Enterprise plans include five custom metrics per billable function.
+請求は、アカウントの 1 か月間の 1 時間あたりの平均関数の数に基づきます。Datadog では、1 回以上実行された、Datadog アカウントで監視されている関数の数を 1 時間ごとに記録します。月末に、記録された関数の時間当たり平均数が算出され、請求に反映されます。Pro プランと Enterprise プランには、請求対象関数ごとに 5 つのカスタムメトリクスが含まれています。
 
-Billing for serverless APM is based on the sum of AWS Lambda invocations connected to APM ingested spans in a given month. You will also be billed for the total number of [indexed spans][4] submitted to the Datadog APM service exceeding the bundled quantity at the end of the month. There are no billable [APM Hosts][4] when using serverless.
+サーバーレス APM の請求は、ある月の APM 取り込みスパンに接続された AWS Lambda の呼び出しの合計に基づきます。また、月末に Datadog APM サービスに送信された[インデックス化スパン][4]の合計がバンドル数量を超えた場合、請求されます。サーバーレス利用時に請求対象となる [APM ホスト][4]はありません。
 
-For more information, see the [Serverless billing page][5] and the [Datadog Pricing page][6].
+詳細については、[サーバーレス請求ページ][5]および[Datadog 料金ページ][6]を参照してください。
 
 ### IoT
 
-Datadog meters the count of IoT devices hourly. The billable count of IoT devices is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours, excluding the top 1% to reduce the impact of spikes in usage on your bill.
+Datadog は、IoT デバイスの数を毎時間測定します。IoT デバイスの課金対象数は、この下位 99 % の時間の最大数として月末に計算されます。上位 1% を除外することで、使用量の短期的な急上昇が課金額に影響しないようにしています。
 
-For more information about IoT billing, see the [Datadog Pricing page][7].
+IoT のご請求に関する詳細については、[Datadog 料金ページ][7]をご参照ください。
 
-## Plan details
+## プランの詳細
 
-To manage your **Payment Method** and view **Subscription Details**, you must be a Datadog Admin user.
+**支払い方法**を管理し、**サブスクリプションの詳細**を表示するには、Datadog 管理者ユーザーである必要があります。
 
-Alternately, roles with Billing Read (`billing_read`) and Billing Edit (`billing_edit`) [permissions][8] can access this data.
+あるいは、Billing Read (`billing_read`) および Billing Edit  (`billing_edit`) [権限][8]を持つロールは、このデータにアクセスすることができます。
 
-### Managing your payment method
+### 支払い方法の管理
 
-The [**Payment Method**][9] section contains details on your payment options. 
+[**Payment Method**][9] セクションには、支払い方法の詳細が記載されています。
 
-{{< img src="account_management/billing/PaymentMethodOverview.png" alt="Payment method on the Plan page" style="width:90%;" >}}
+{{< img src="account_management/billing/PaymentMethodOverview.png" alt="プランページの支払い方法" style="width:90%;" >}}
 
-**Edit Payment** provides options to manage payment methods. You can edit or remove cards, and request to change your payment method from card to invoice and vice versa. 
+**Edit Payment** は、支払い方法を管理するためのオプションを提供します。カードの編集や削除、カードから請求書、またはその逆への支払い方法の変更を依頼することができます。
 
-{{< img src="account_management/billing/PaymentSettingsDetails.png" alt="Payment settings on the Plan page" style="width:90%;" >}}
+{{< img src="account_management/billing/PaymentSettingsDetails.png" alt="プランページの支払い設定" style="width:90%;" >}}
 
-### Managing your billing contact details
+### 請求先情報の管理
 
-You can view your billing contact details on the [**Billing Contact Details**][9] section. 
+請求先情報は、[**Billing Contact Details**][9] セクションで確認することができます。
 
-{{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="Billing contact details on the Plan page" style="width:90%;" >}}
+{{< img src="account_management/billing/BillingContactDetailsOverview.png" alt="プランページの請求先情報" style="width:90%;" >}}
 
-**Edit Details** to add, edit, or remove your billing address. You can also specify the email addresses where invoices should be sent.
+請求先住所の追加、編集、削除は、**Edit Details** から行います。また、請求書を送付するメールアドレスを指定することができます。
 
-{{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="Editing billing contact details on the Plan page" style="width:90%;" >}}
+{{< img src="account_management/billing/BillingContactDetailsEdit.png" alt="プランページでの請求先情報の編集" style="width:90%;" >}}
 
-**Note**: The email address does not need to be a team member within Datadog. For example, you could use `invoices@example.com`.
+**注**: このメールアドレスは、Datadog 内のチームメンバーでなくてもかまいません。たとえば、`invoices@example.com` を使用できます。
 
-### View your subscription details
+### サブスクリプションの詳細を表示する
 
-The [Subscription Details][9] section includes the quantity, contract price, and on-demand price for all committed products.
+[Subscription Details][9] セクションには、コミットされたすべての製品の数量、契約価格、オンデマンド価格が記載されています。
 
-{{< img src="/account_management/billing/subscription_details.png" alt="Account Plan & Usage page highlighting Subscription Details section" style="width:90%;" >}}
+{{< img src="/account_management/billing/subscription_details.png" alt="Account Plan & Usage ページで Subscription Details セクションをハイライトしています" style="width:90%;" >}}
 
-**Note**: If your billing is managed directly through a Datadog Partner, Subscription Details are not supported.
+**注**: 請求が Datadog パートナーを通じて直接管理されている場合、Subscription Details はサポートされていません。
 
-## Payment
+## 支払い
 
-There are two choices for payment method:
-- Credit card
-- Invoicing (ACH, wire, or check)
+お支払い方法には 2 つの選択肢があります。
+- クレジットカード
+- 請求 (ACH、電信送金、または小切手)
 
-### Credit card
+### クレジットカード
 
-If you pay by credit card, receipts are available to [Administrators][10] for previous months under [Billing History][11]. For copies of your invoice, email [Datadog billing][13].
+クレジットカード払いの場合は、[管理者][10]に [Billing History][11] で前月の領収書が発行されます。請求書のコピーについては、[Datadog の請求担当][13]にメールでお問い合わせください。
 
-See [Credit Card Billing][12] for more details.
+詳細については、[クレジットカード請求][12]を参照してください。
 
-### Invoicing
+### 請求
 
-If you pay by check, ACH, or wire, invoices are emailed to the billing email addresses near the 10th business day of each month. To request an additional copy, email [Datadog billing][13]. Details on where to remit payment can be found on the invoice.
+小切手、ACH、または電信送金でお支払いの場合、請求書は毎月 10 営業日近くに請求先のメールアドレスにメールで送信されます。追加のコピーをリクエストするには、[Datadog の請求担当][13]にメールを送信してください。支払い先の詳細は請求書に記載されています。
 
-## Contact
+## お問い合わせ
 
-| Question or concern                                                                                                                                                                               | Contact                      |
+| ご質問等                                                                                                                                                                               | お問い合わせ                      |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
-| Dispute and credit request<br>Usage<br>Payment method change<br>Payment concern<br>General account concerns<br>Update contacts<br>Statement of account<br>Update billing and shipping information | success@datadoghq.com        |
-| Invoice copies<br>Time sensitive charge requests<br>Billing breakdown<br>Portal invitation                                                                                                        | billing@datadoghq.com        |
-| Payment remittance                                                                                                                                                                                | remittances@datadoghq.com    |
-| Purchase order copies                                                                                                                                                                             | purchaseorders@datadoghq.com |
+| 異議申し立てとクレジットリクエスト<br>使用量<br>支払い方法の変更<br>お支払いに関する問題<br>一般的なアカウントに関する問題<br>ご連絡先の更新<br>アカウントの明細<br>請求および配送情報の更新 | success@datadoghq.com        |
+| 請求書のコピー<br>時間に余裕のない請求リクエスト<br>請求の内訳<br>ポータルへの招待                                                                                                        | billing@datadoghq.com        |
+| 送金                                                                                                                                                                                | remittances@datadoghq.com    |
+| 注文書のコピー                                                                                                                                                                             | purchaseorders@datadoghq.com |
 
-## Further Reading
+## その他の参考資料
 
-{{< whatsnext desc="Specific billing topics:">}}
-    {{< nextlink href="account_management/billing/pricing/" >}}Pricing{{< /nextlink >}}
-    {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}Usage details{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_metrics/" >}}Usage Metrics{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/credit_card/" >}}Credit card{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/custom_metrics/" >}}Custom metrics{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/containers/" >}}Containers{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/log_management/" >}}Log management{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (Distributed Tracing & Continuous Profiler){{< /nextlink >}}
-    {{< nextlink href="account_management/billing/serverless/" >}}Serverless{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/rum/" >}}Real User Monitoring{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/aws/" >}}AWS integration{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/azure/" >}}Azure integration{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba integration{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/google_cloud/" >}}Google Cloud integration{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/vsphere/" >}}vSphere integration{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_attribution/" >}}Usage attribution{{< /nextlink >}}
+{{< whatsnext desc="課金に関するトピック:">}}
+    {{< nextlink href="account_management/billing/pricing/" >}}料金{{< /nextlink >}}
+    {{< nextlink href="account_management/plan_and_usage/usage_details/" >}}使用量の詳細{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_metrics/" >}}使用量のメトリクス{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/credit_card/" >}}クレジットカード{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/custom_metrics/" >}}カスタムメトリクス{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/containers/" >}}コンテナ{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/log_management/" >}}ログ管理{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/apm_tracing_profiler/" >}}APM (分散型トレーシング & 継続的プロファイリング){{< /nextlink >}}
+    {{< nextlink href="account_management/billing/serverless/" >}}サーバーレス{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/rum/" >}}リアルユーザーモニタリング{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/aws/" >}}AWS インテグレーション{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/azure/" >}}Azure インテグレーション{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/alibaba/" >}}Alibaba インテグレーション{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/google_cloud/" >}}Google Cloud インテグレーション{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/vsphere/" >}}vSphere インテグレーション{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_attribution/" >}}使用属性{{< /nextlink >}}
 {{< /whatsnext >}}
 
 

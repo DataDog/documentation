@@ -9,28 +9,28 @@ further_reading:
 
 ---
 
-Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
+データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
-Complete the following steps to enable Database Monitoring with your database:
+データベースでデータベースモニタリングを有効にするには、以下の手順を実行します。
 
-1. [Grant the Agent access to the database](#grant-the-agent-access)
+1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
 2. [Install and configure the Agent](#install-and-configure-the-agent)
-3. [Install the Cloud SQL integration](#install-the-cloud-sql-integration)
+3. [Cloud SQL インテグレーションをインストールする](#install-the-cloud-sql-integration)
 
-## Before you begin
+## はじめに
 
-Supported SQL Server versions
-: 2014, 2016, 2017, 2019, 2022
+サポートされている SQL Server バージョン
+: 2014、2016、2017、2019、2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
-## Grant the Agent access
+## Agent にアクセスを付与する
 
-The Datadog Agent requires read-only access to the database server to collect statistics and queries.
+Datadog Agent が統計やクエリを収集するためには、データベースサーバーへの読み取り専用のアクセスが必要となります。
 
-Create a `datadog` user [on the Cloud SQL instance][1].
+[Cloud SQL インスタンスに][1] `datadog` ユーザーを作成します。
 
-To maintain read-only access for the agent, remove the `datadog` user from the default `CustomerDbRootRole`. Instead, grant only the explicit permissions required by the agent.
+Agent の読み取り専用アクセスを維持するために、デフォルトの `CustomerDbRootRole` から `datadog` ユーザーを削除してください。その代わりに、Agent が必要とする明示的な権限のみを付与します。
 
 ```SQL
 GRANT VIEW SERVER STATE to datadog as CustomerDbRootRole;
@@ -38,23 +38,23 @@ GRANT VIEW ANY DEFINITION to datadog as CustomerDbRootRole;
 ALTER SERVER ROLE CustomerDbRootRole DROP member datadog;
 ```
 
-Create the `datadog` user in each additional application database:
+追加した各アプリケーションデータベースに `datadog` ユーザーを作成します。
 ```SQL
 USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-This is required because Google Cloud SQL does not permit granting `CONNECT ANY DATABASE`. The Datadog Agent needs to connect to each database to collect database-specific file I/O statistics.
+これは、Google Cloud SQL が `CONNECT ANY DATABASE` の付与を許可していないため、必要です。Datadog Agent は、データベース固有のファイル I/O 統計情報を収集するために、各データベースに接続する必要があります。
 
-## Install and configure the Agent
+## Agent のインストールと構成
 
-Google Cloud does not grant direct host access, meaning the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
+Google Cloud はホストへの直接アクセスを許可しません。つまり、Datadog Agent は SQL Server ホストと通信可能な別のホストにインストールする必要があります。Agent のインストールと実行には、いくつかのオプションがあります。
 
 {{< tabs >}}
-{{% tab "Windows Host" %}}
-To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
+{{% tab "Windows ホスト" %}}
+SQL Server テレメトリーの収集を開始するには、まず [Datadog Agent をインストール][1]します。
 
-Create the SQL Server Agent conf file `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml`. See the [sample conf file][2] for all available configuration options.
+SQL Server Agent のコンフィギュレーションファイル `C:\ProgramData\Datadog\conf.d\sqlserver.d\conf.yaml` を作成します。使用可能なすべての構成オプションは、[サンプルコンフィギュレーションファイル][2]を参照してください。
 
 ```yaml
 init_config:
@@ -65,47 +65,47 @@ instances:
     password: '<PASSWORD>'
     connector: adodbapi
     provider: MSOLEDBSQL
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Google Cloud (GCP) インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
 
-See the [SQL Server integration spec][3] for additional information on setting `project_id` and `instance_id` fields.
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][3]を参照してください。
 
-To use [Windows Authentication][4], set `connection_string: "Trusted_Connection=yes"` and omit the `username` and `password` fields.
+[Windows 認証][4]を利用する場合は、`connection_string: "Trusted_Connection=yes"` と設定し、`username` と `password` フィールドを省略します。
 
-Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] on how these tags are used throughout Datadog.
+`service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog 全体でどのように使用されるかについては、[統合サービスタグ付け][5]を参照してください。
 
-### Supported Drivers
+### 対応ドライバー
 
 #### Microsoft ADO
 
-The recommended [ADO][6] provider is [Microsoft OLE DB Driver][7]. Ensure the driver is installed on the host where the agent is running.
+推奨する [ADO][6] プロバイダーは、[Microsoft OLE DB Driver][7] です。Agent が動作しているホストにドライバーがインストールされていることを確認してください。
 ```yaml
 connector: adodbapi
-adoprovider: MSOLEDBSQL19  # Replace with MSOLEDBSQL for versions 18 and lower
+adoprovider: MSOLEDBSQL19  # バージョン 18 以下の MSOLEDBSQL に置き換えます
 ```
 
-The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by Microsoft and should no longer be used.
+他の 2 つのプロバイダー、`SQLOLEDB` と `SQLNCLI` は、Microsoft によって非推奨とされており、もはや使用するべきではありません。
 
 #### ODBC
 
-The recommended ODBC driver is [Microsoft ODBC Driver][8]. Starting with Agent 7.51, ODBC Driver 18 for SQL Server is included in the agent for Linux. For Windows, ensure the driver is installed on the host where the Agent is running.
+推奨される ODBC ドライバーは [Microsoft ODBC Driver][8] です。Agent 7.51 以降、SQL Server 用 ODBC Driver 18 が Linux 用 Agent に含まれています。Windows の場合は、Agent を実行するホストにドライバーがインストールされていることを確認してください。
 
 ```yaml
 connector: odbc
 driver: '{ODBC Driver 18 for SQL Server}'
 ```
 
-Once all Agent configuration is complete, [restart the Datadog Agent][9].
+すべての Agent の構成が完了したら、[Datadog Agent を再起動][9]します。
 
-### Validate
+### UpdateAzureIntegration
 
-[Run the Agent's status subcommand][10] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][11] page in Datadog to get started.
+[Agent の status サブコマンドを実行][10]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][11]のページへ移動して開始します。
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
@@ -120,14 +120,14 @@ Once all Agent configuration is complete, [restart the Datadog Agent][9].
 [10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
-{{% tab "Linux Host" %}}
-To start collecting SQL Server telemetry, first [install the Datadog Agent][1].
+{{% tab "Linux ホスト" %}}
+SQL Server テレメトリーの収集を開始するには、まず [Datadog Agent をインストール][1]します。
 
-On Linux, the Datadog Agent additionally requires an ODBC SQL Server driver to be installed—for example, the [Microsoft ODBC driver][2]. Once an ODBC SQL Server is installed, copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
+Linux では、Datadog Agent の他に、ODBC SQL Server ドライバー (例えば、[Microsoft ODBC ドライバー][2]) がインストールされていることが必須となります。ODBC SQL Server がインストールされたら、`odbc.ini` と `odbcinst.ini` ファイルを `/opt/datadog-agent/embedded/etc` フォルダーにコピーします。
 
-Use the `odbc` connector and specify the proper driver as indicated in the `odbcinst.ini` file.
+`odbc` コネクターを使用し、`odbcinst.ini` ファイルに示されているように、適切なドライバーを指定します。
 
-Create the SQL Server Agent conf file `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml`. See the [sample conf file][3] for all available configuration options.
+SQL Server Agent のコンフィギュレーションファイル `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml` を作成します。使用可能なすべての構成オプションは、[サンプルコンフィギュレーションファイル][3]を参照してください。
 
 ```yaml
 init_config:
@@ -138,24 +138,24 @@ instances:
     password: '<PASSWORD>'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Google Cloud (GCP) インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
 
-See the [SQL Server integration spec][4] for additional information on setting `project_id` and `instance_id` fields.
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][4]を参照してください。
 
-Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][5] on how these tags are used throughout Datadog.
+`service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog 全体でどのように使用されるかについては、[統合サービスタグ付け][5]を参照してください。
 
-Once all Agent configuration is complete, [restart the Datadog Agent][6].
+すべての Agent の構成が完了したら、[Datadog Agent を再起動][6]します。
 
-### Validate
+### UpdateAzureIntegration
 
-[Run the Agent's status subcommand][7] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][8] page in Datadog to get started.
+[Agent の status サブコマンドを実行][7]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][8]のページへ移動して開始します。
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
@@ -168,11 +168,11 @@ Once all Agent configuration is complete, [restart the Datadog Agent][6].
 [8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
-To configure the Database Monitoring Agent running in a Docker container, set the [Autodiscovery Integration Templates][1] as Docker labels on your Agent container.
+Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
-**Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
+**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットに対する読み取り権限が与えられている必要があります。
 
-Replace the values to match your account and environment. See the [sample conf file][2] for all available configuration options.
+アカウントや環境に合わせて、値を置き換えます。利用可能なすべての構成オプションについては、[サンプルコンフィギュレーションファイル][2]を参照してください。
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -202,13 +202,13 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
-See the [SQL Server integration spec][3] for additional information on setting `project_id` and `instance_id` fields.
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][3]を参照してください。
 
-Use the `service` and `env` tags to link your database telemetry to other telemetry through a common tagging scheme. See [Unified Service Tagging][4] on how these tags are used throughout Datadog.
+`service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog 全体でどのように使用されるかについては、[統合サービスタグ付け][4]を参照してください。
 
-### Validate
+### UpdateAzureIntegration
 
-[Run the Agent's status subcommand][5] and look for `sqlserver` under the **Checks** section. Alternatively, navigate to the [Databases][6] page in Datadog to get started.
+[Agent の status サブコマンドを実行][5]し、**Checks** セクションで `sqlserver` を探します。または、Datadog の[データベース][6]のページへ移動して開始します。
 
 [1]: /agent/faq/template_variables/
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
@@ -218,9 +218,9 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 [6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
-If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
+Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
 
-If cluster checks are not already enabled in your Kubernetes cluster, follow the instructions to [enable cluster checks][2]. You can configure the Cluster Agent either with static files mounted in the Cluster Agent container, or by using Kubernetes service annotations:
+Kubernetes クラスターでクラスターチェックがまだ有効になっていない場合は、指示に従って[クラスターチェックを有効化][2]します。Cluster Agent の構成は、Cluster Agent コンテナにマウントされた静的ファイル、または Kubernetes サービスアノテーションのいずれかを使用することができます。
 
 ### Helm
 
@@ -266,9 +266,9 @@ For Windows, append <code>--set targetSystem=windows</code> to the <code>helm in
 [2]: /getting_started/site
 [3]: /containers/kubernetes/installation/?tab=helm#installation
 
-### Configure with mounted files
+### マウントされたファイルで構成する
 
-To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path: `/conf.d/sqlserver.yaml`:
+マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/sqlserver.yaml` にマウントします。
 
 ```yaml
 cluster_check: true  # Make sure to include this flag
@@ -281,18 +281,18 @@ instances:
     password: '<PASSWORD>'
     connector: "odbc"
     driver: "ODBC Driver 18 for SQL Server"
-    tags:  # Optional
+    tags:  # オプション
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Google Cloud (GCP) インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
 
-### Configure with Kubernetes service annotations
+### Kubernetes サービスアノテーションで構成する
 
-Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+ファイルをマウントせずに、インスタンスのコンフィギュレーションを Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
 
 
 ```yaml
@@ -313,7 +313,7 @@ metadata:
           "password": "<PASSWORD>",
           "connector": "odbc",
           "driver": "ODBC Driver 18 for SQL Server",
-          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # オプション
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"
@@ -328,11 +328,11 @@ spec:
     name: sqlserver
 ```
 
-See the [SQL Server integration spec][4] for additional information on setting `project_id` and `instance_id` fields.
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[SQL Server インテグレーション仕様][4]を参照してください。
 
-The Cluster Agent automatically registers this configuration and begins running the SQL Server check.
+Cluster Agent は自動的にこのコンフィギュレーションを登録し、SQL Server チェックを開始します。
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax.
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][5]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
@@ -342,14 +342,14 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 {{% /tab %}}
 {{< /tabs >}}
 
-## Example Agent Configurations
+## Agent の構成例
 {{% dbm-sqlserver-agent-config-examples %}}
 
-## Install the Google Cloud SQL integration
+## Google Cloud SQL インテグレーションをインストールする
 
-To collect more comprehensive database metrics from Google Cloud SQL, install the [Google Cloud SQL integration][2].
+Google Cloud SQL からより包括的なデータベースメトリクスを収集するには、[Google Cloud SQL インテグレーション][2]をインストールします。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

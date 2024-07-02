@@ -30,7 +30,7 @@
 "categories":
 - "data stores"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/kyototycoon/README.md"
 "display_on_public_website": true
@@ -43,7 +43,7 @@
 "manifest_version": "2.0.0"
 "name": "kyototycoon"
 "public_title": "Kyoto Tycoon"
-"short_description": "Track get, set, and delete operations; monitor replication lag."
+"short_description": "取得/設定/削除操作の追跡とレプリケーションラグの監視。"
 "supported_os":
 - "linux"
 - "macos"
@@ -55,9 +55,9 @@
   - "Supported OS::macOS"
   - "Supported OS::Windows"
   - "Category::Data Stores"
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   "configuration": "README.md#Setup"
-  "description": "Track get, set, and delete operations; monitor replication lag."
+  "description": "取得/設定/削除操作の追跡とレプリケーションラグの監視。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -67,19 +67,19 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-The Agent's KyotoTycoon check tracks get, set, and delete operations, and lets you monitor replication lag.
+Agent の KyotoTycoon チェックは、取得/設定/削除の操作を追跡し、レプリケーションラグを監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The KyotoTycoon check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your KyotoTycoon servers.
+KyotoTycoon チェックは [Datadog Agent][1] パッケージに含まれています。KyotoTycoon サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-1. Edit the `kyototycoon.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][2]. See the [sample kyototycoon.d/conf.yaml][3] for all available configuration options:
+1. [Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `kyototycoon.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル kyototycoon.d/conf.yaml][3] を参照してください。
 
    ```yaml
    init_config:
@@ -91,17 +91,17 @@ The KyotoTycoon check is included in the [Datadog Agent][1] package, so you don'
      - report_url: http://localhost:1978/rpc/report
    ```
 
-2. [Restart the Agent][4].
+2. [Agent を再起動します][4]。
 
-##### Log collection
+##### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Add this configuration block to your `kyototycoon.d/conf.yaml` file to start collecting Kyoto Tycoon logs:
+2. Kyoto Tycoon のログの収集を開始するには、次の構成ブロックを `kyototycoon.d/conf.yaml` ファイルに追加します。
 
     ```yaml
     logs:
@@ -110,31 +110,31 @@ The KyotoTycoon check is included in the [Datadog Agent][1] package, so you don'
         source: kyototycoon
     ```
 
-    Change the `path` parameter value based on your environment. See the [sample kyototycoon.d/conf.yaml][3] for all available configuration options.
+    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[kyototycoon.d/conf.yaml のサンプル][3]を参照してください。
 
-3. [Restart the Agent][4].
+3. [Agent を再起動します][4]。
 
-### Validation
+### 検証
 
-[Run the Agent's `status` subcommand][5] and look for `kyototycoon` under the Checks section.
+[Agent の `status` サブコマンドを実行][5]し、Checks セクションで `kyototycoon` を検索します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "kyototycoon" >}}
 
 
-### Events
+### イベント
 
-The KyotoTycoon check does not include any events.
+KyotoTycoon チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "kyototycoon" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][8].
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest

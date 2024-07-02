@@ -11,36 +11,36 @@ further_reading:
     text: Create a New Integration
 ---
 
-## Overview
+## 概要
 
-Community developed integrations for the Datadog Agent are stored in the Datadog [integrations-extra][1] GitHub repository. They are not packaged with the Agent, but can be installed as add-ons.
+Datadog Agent のコミュニティ開発のインテグレーションは、Datadog の [Integrations-extra][1] GitHub リポジトリに格納されています。これらは Agent にはパッケージ化されていませんが、アドオンとしてインストールできます。
 
-## Setup
+## セットアップ
 
-For new users, download and install the latest version of the [Datadog Agent][2].
+新規ユーザーの方は、最新版の [Datadog Agent][2] をダウンロードおよびインストールしてください。
 
-### Installation
+### インストール
 
 {{< tabs >}}
-{{% tab "Agent v7.21+ / v6.21+" %}}
+{{% tab "Agent v7.21 / v6.21 以降" %}}
 
-For Agent v7.21+ / v6.21+:
+Agent v7.21 / v6.21 以降の場合:
 
-1. Run the following command to install the Agent integration:
+1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
     ```
     datadog-agent integration install -t datadog-<INTEGRATION_NAME>==<INTEGRATION_VERSION>
     ```
-   The version for the integration can be found in the respective changelog on the integration's Github repository
-2. Configure your integration similar to core [integrations][1].
-3. [Restart the Agent][2].
+   インテグレーションのバージョンは、インテグレーションの Github リポジトリにあるそれぞれの変更履歴で確認できます
+2. コアの[インテグレーション][1]と同様にインテグレーションを構成します。
+3. [Agent を再起動します][2]。
 
-**Note**: If necessary, prepend `sudo -u dd-agent` to the install command.
+**注**: I必要に応じて、インストールコマンドの先頭に `sudo -u dd-agent` を追加します。
 
 [1]: /getting_started/integrations/
 [2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 To use a community or Marketplace integration in a containerized environment, you must build a custom image that includes your desired community integration.
 
@@ -61,17 +61,17 @@ Use [Autodiscovery][1] to enable and configure the integration.
 [2]: https://github.com/DataDog/integrations-extras
 {{% /tab %}}
 
-{{% tab "Agent earlier versions" %}}
+{{% tab "Agent の以前のバージョン" %}}
 
-For Agent < v7.21 / v6.21:
+Agent v7.21 / v6.21 以前の場合:
 
-1. Download the files in the `<INTEGRATION_NAME>/datadog_checks/<INTEGRATION_NAME>/` folder from the [integrations-extra repository][1].
-2. Place `<INTEGRATION_NAME>.py` and any other Python files in the Agent's `checks.d` directory.
-3. Create a new `<INTEGRATION_NAME>.d/` folder in your [Agent configuration directory][2].
-4. Place the `conf.yaml.example` file from the `<INTEGRATION_NAME>/datadog_checks/<INTEGRATION_NAME>/data/` folder in the created directory.
-4. Rename this file to `conf.yaml`.
-5. Configure your integration similar to core [integrations][3].
-6. [Restart the Agent][4].
+1. `<INTEGRATION_NAME>/datadog_checks/<INTEGRATION_NAME>/` フォルダーに ファイルを [integrations-extra リポジトリ][1]からダウンロードします
+2. `<INTEGRATION_NAME>.py` とその他の Python ファイルを Agent の `checks.d` ディレクトリに配置します。
+3. [Agent のコンフィギュレーションディレクトリ][2]に新しい `<INTEGRATION_NAME>.d/` フォルダーを作成します。
+4. 作成したディレクトリに、`<INTEGRATION_NAME>/datadog_checks/<INTEGRATION_NAME>/data/` から `conf.yaml.example` ファイルを配置します。
+4. このファイルの名前を `conf.yaml` に変更します。
+5. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
+6. [Agent を再起動します][4]。
 
 
 
@@ -82,13 +82,13 @@ For Agent < v7.21 / v6.21:
 {{% /tab %}}
 {{< /tabs >}}
 
-If your site restricts network access, ensure you have added all of the [`ip-ranges`][3] to your inclusion list, or download the integration manually.
+サイトがネットワークアクセスを制限している場合は、[`ip-ranges`][3] をすべて包含リストに追加していることを確認するか、インテグレーションを手動でダウンロードしてください。
 
 
 
 <br>
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

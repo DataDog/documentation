@@ -33,7 +33,7 @@
 "categories":
 - marketplace
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -90,11 +90,11 @@
 
 The Sophos Integration monitors the overall health of your Sophos managed endpoints to make sure your managed devices are in good health. The integration comes pre-built with 1 dashboard that provides a broad overview of several metrics that can be used to monitor the health of your devices. The Sophos Integration also comes with 2 monitors that can be used to alert when a device is no longer in good health, or if one of the Sophos services on the device stops.
 
-### Monitors
+### モニター
 1. Managed Endpoint Health has Changed
 2. Sophos Service on Managed Endpoint is Stopped
 
-### Dashboards
+### ダッシュボード
 1. RapDev Sophos Dashboard
 
 ## Support

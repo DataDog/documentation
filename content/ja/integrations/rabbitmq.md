@@ -41,7 +41,7 @@
 "categories":
 - "log collection"
 - "message queues"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/rabbitmq/README.md"
 "display_on_public_website": true
@@ -54,7 +54,7 @@
 "manifest_version": "2.0.0"
 "name": "rabbitmq"
 "public_title": "RabbitMQ"
-"short_description": "Track queue size, consumer count, unacknowledged messages, and more."
+"short_description": "キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡"
 "supported_os":
 - "linux"
 - "windows"
@@ -62,13 +62,13 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Category::Message Queues"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Track queue size, consumer count, unacknowledged messages, and more."
+  "description": "キューサイズ、コンシューマーカウント、未承認メッセージなどを追跡"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -78,35 +78,35 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![RabbitMQ Dashboard][1]
+![RabbitMQ ダッシュボード][1]
 
-## Overview
+## 概要
 
-This check monitors [RabbitMQ][2] through the Datadog Agent. It allows you to:
+このチェックは、Datadog Agent を通じて [RabbitMQ][2] を監視します。
 
 - Track queue-based stats: queue size, consumer count, unacknowledged messages, redelivered messages, and more.
 - Track node-based stats: waiting processes, used sockets, used file descriptors, and more.
 - Monitor vhosts for aliveness and number of connections.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The RabbitMQ check is included in the [Datadog Agent][3] package. No additional installation is needed on your server.
+RabbitMQ チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 RabbitMQ exposes metrics in two ways: the [RabbitMQ Management Plugin][4] and the [RabbitMQ Prometheus Plugin][5]. The Datadog integration supports both versions. Follow the configuration instruction in this file that pertain to the version you intend to use. The Datadog integration also comes with an out-of-the-box dashboard and monitors for each version, as labeled by the Dashboard and Monitor titles.
 
-#### Prepare RabbitMQ
+#### RabbitMQ の準備
 
-##### [RabbitMQ Prometheus Plugin][5].
+##### [RabbitMQ Prometheus Plugin][5]。
 
 *Starting with RabbitMQ v3.8, the [RabbitMQ Prometheus Plugin][5] is enabled by default.*
 
 *The Prometheus plugin version of RabbitMQ requires Python 3 support by the Datadog Agent, and so can only be supported by Agent v6 or later. Please ensure your agent is updated before configuring the Prometheus plugin version of the integration.*
 
-Configure the `prometheus_plugin` section in your instance configuration. When using the `prometheus_plugin` option, settings related to the Management Plugin are ignored.
+インスタンス構成で `prometheus_plugin` セクションを設定します。`prometheus_plugin` オプションを使用する場合、Management Plugin に関連する設定は無視されます。
 
  ```yaml
  instances:
@@ -114,7 +114,7 @@ Configure the `prometheus_plugin` section in your instance configuration. When u
        url: http://<HOST>:15692
  ```
 
- This enables scraping of the [`/metrics` endpoint][6] on one RabbitMQ node. Datadog can also collect data from the [`/metrics/detailed` endpoint][7].
+これにより、1 つの RabbitMQ ノードで [`/metrics` エンドポイント][6]のスクレイピングが可能になります。また、Datadog は [`/metrics/detailed` エンドポイント][7]からもデータを収集することができます。
 
  ```yaml
  instances:
@@ -122,61 +122,61 @@ Configure the `prometheus_plugin` section in your instance configuration. When u
        url: http://<HOST>:15692
        unaggregated_endpoint: detailed?family=queue_coarse_metrics
  ```
- This enables scraping of the [`/metrics/detailed` endpoint][7] to collect queue coarse metrics.
+ これにより、[`/metrics/detailed` エンドポイント][7]をスクレイピングして、キューの粗いメトリクスを収集することができます。
 
-##### [RabbitMQ Management Plugin][4].
+##### [RabbitMQ Management Plugin][4]。
 
-Enable the plugin. The Agent user then needs at least the `monitoring` tag and these required permissions:
+プラグインを有効化します。Agent ユーザーは、少なくとも`monitoring`タグとこれらの必要な権限が必要です。
 
-| Permission | Command            |
+| アクセス許可 | コマンド            |
 | ---------- | ------------------ |
 | **conf**   | `^aliveness-test$` |
 | **write**  | `^amq\.default$`   |
 | **read**   | `.*`               |
 
-Create an Agent user for your default vhost with the following commands:
+次のコマンドで、デフォルトの vhost 用に Agent ユーザーを作成します。
 
 ```text
-rabbitmqctl add_user datadog <SECRET>
+rabbitmqctl add_user datadog <シークレット>
 rabbitmqctl set_permissions  -p / datadog "^aliveness-test$" "^amq\.default$" ".*"
 rabbitmqctl set_user_tags datadog monitoring
 ```
 
-Here, `/` refers to the default host. Set this to your specified virtual host name. See the [RabbitMQ documentation][8] for more information.
+ここで、`/` はデフォルトのホストを表します。これを、指定した仮想ホスト名に設定してください。詳細については、[RabbitMQ のドキュメント][8]を参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `rabbitmq.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your RabbitMQ metrics. See the [sample rabbitmq.d/conf.yaml][2] for all available configuration options.
+1. RabbitMQ メトリクスの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `rabbitmq.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル rabbitmq.d/conf.yaml][2] を参照してください。
 
-    **Note**: The Agent checks all queues, vhosts, and nodes by default, but you can provide lists or regexes to limit this. See the [rabbitmq.d/conf.yaml][2] for examples.
+   **注**: Agent は、デフォルトですべてのキュー、vhost、ノードをチェックしますが、リストまたは正規表現を指定してこれを制限できます。例については、[rabbitmq.d/conf.yaml][2] を参照してください。
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. To modify the default log file location either set the `RABBITMQ_LOGS` environment variable or add the following to your RabbitMQ configuration file (`/etc/rabbitmq/rabbitmq.conf`):
+1. デフォルトのログファイルの場所を変更するには、`RABBITMQ_LOGS` 環境変数を設定するか、以下の行を RabbitMQ 構成ファイル (`/etc/rabbitmq/rabbitmq.conf`) に追加します。
 
    ```conf
      log.dir = /var/log/rabbit
      log.file = rabbit.log
    ```
 
-2. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+2. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-3. Edit the `logs` section of your `rabbitmq.d/conf.yaml` file to start collecting your RabbitMQ logs:
+3. RabbitMQ ログの収集を開始するには、`rabbitmq.d/conf.yaml` ファイルの `logs` セクションを編集します。
 
    ```yaml
    logs:
@@ -190,35 +190,35 @@ _Available for Agent versions >6.0_
            pattern: "="
    ```
 
-4. [Restart the Agent][3].
+4. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
 You can take advantage of Datadog's [Docker container Autodiscovery][1], see the `auto_conf.yaml` example configuration for RabbitMQ-specific settings.
 
-For container environments such as Kubernetes, see the [Autodiscovery Integration Templates][2] for guidance on applying the parameters below.
+Kubernetes などのコンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                        |
+| パラメーター            | 値                                        |
 | -------------------- | -------------------------------------------- |
 | `<INTEGRATION_NAME>` | `rabbitmq`                                   |
-| `<INIT_CONFIG>`      | blank or `{}`                                |
+| `<INIT_CONFIG>`      | 空白または `{}`                                |
 | `<INSTANCE_CONFIG>`  | `{"prometheus_plugin": {"url": "http://%%host%%:15692"}}` |
 
-##### Log collection
+##### ログ収集
 
 _Available for Agent v6.0 or later_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][3].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
-| Parameter      | Value                                                                                                                                               |
+| パラメーター      | 値                                                                                                                                               |
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "rabbitmq", "service": "rabbitmq", "log_processing_rules": [{"type":"multi_line","name":"logs_starts_with_equal_sign", "pattern": "="}]}` |
 
@@ -228,49 +228,49 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][9] and look for `rabbitmq` under the Checks section.
+[Agent の status サブコマンドを実行][9]し、Checks セクションで `rabbitmq` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "rabbitmq" >}}
 
 
-### Events
+### イベント
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "rabbitmq" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-### Migrating to Prometheus Plugin
+### Prometheus Plugin への移行
 
-The Prometheus Plugin exposes a different set of metrics from the Management Plugin.
-Here is what to be aware of as you migrate from the Management to the Prometheus Plugin.
+Prometheus Plugin は、Management Plugin とは異なるメトリクスを公開します。
+ここでは、Management Plugin から Prometheus Plugin に移行する際に注意すべき点を説明します。
 
 - Look up your metrics in [this table][10]. If a metric's description contains an `[OpenMetricsV2]` tag, then it is available in the Prometheus Plugin. Metrics available only in the Management Plugin do not have any tags in their descriptions.
-- Any dashboards and monitors using Management Plugin metrics do not function. Switch to the dashboards and monitors marked as *OpenMetrics Version*.
-- The default configuration collects aggregated metrics. This means, for example, that there are no metrics tagged by queue. Configure the option `prometheus_plugin.unaggregated_endpoint` to get metrics without aggregation.
-- The `rabbitmq.status` service check is replaced by `rabbitmq.openmetrics.health`. The service check `rabbitmq.aliveness` has no equivalent in the Prometheus Plugin.
+- Management Plugin のメトリクスを使用しているダッシュボードやモニターは機能しません。*OpenMetrics Version* と表示されているダッシュボードやモニターに切り替えてください。
+- デフォルトの構成では、集計されたメトリクスが収集されます。これは、例えば、キューによってタグ付けされたメトリクスが存在しないことを意味します。オプション `prometheus_plugin.unaggregated_endpoint` を構成すると、集計せずにメトリクスを取得することができます。
+- サービスチェックの `rabbitmq.status` は `rabbitmq.openmetrics.health` に置き換えられました。サービスチェックの `rabbitmq.aliveness` は、Prometheus Plugin では同等のものはありません。
 
-The Prometheus Plugin changes some tags. The table below describes the changes to the more common tags.
+Prometheus Plugin では、いくつかのタグが変更されます。以下の表は、より一般的なタグの変更点を説明したものです。
 
-| Management          | Prometheus                               |
+| 管理          | Prometheus                               |
 |:--------------------|:-----------------------------------------|
 | `queue_name`        | `queue`                                  |
-| `rabbitmq_vhost`    | `vhost`, `exchange_vhost`, `queue_vhost` |
+| `rabbitmq_vhost`    | `vhost`、`exchange_vhost`、`queue_vhost` |
 | `rabbitmq_exchange` | `exchange`                               |
 
 For more information, see [Tagging RabbitMQ queues by tag family][11].
 
-Need help? Contact [Datadog support][12].
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
 - [Key metrics for RabbitMQ monitoring][13]
 - [Collecting metrics with RabbitMQ monitoring tools][14]

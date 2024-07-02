@@ -20,24 +20,24 @@ further_reading:
   text: Assign tags to all data emitted by a container
 ---
 
-Collect your exposed Prometheus and OpenMetrics metrics from your application running inside your containers by using the Datadog Agent, and the [Datadog-OpenMetrics][1] or [Datadog-Prometheus][2] integrations.
+Datadog Agent と [Datadog-OpenMetrics][1] または [Datadog-Prometheus][2] インテグレーションを併用して、コンテナ内で実行されているアプリケーションから、公開されている Prometheus および OpenMetrics メトリクスを収集します。
 
-## Overview
+## 概要
 
-Starting with version 6.5.0, the Agent includes [OpenMetrics][3] and [Prometheus][4] checks capable of scraping Prometheus endpoints. Datadog recommends using the OpenMetrics check since it is more efficient and fully supports Prometheus text format. For more advanced usage of the `OpenMetricsCheck` interface, including writing a custom check, see the [Developer Tools][5] section. Use the Prometheus check only when the metrics endpoint does not support a text format.
+バージョン 6.5.0 より、Agent には [OpenMetrics][3] および [Prometheus][4] チェックが用意され、Prometheus エンドポイントをスクレイピングできます。Prometheus テキスト形式を効率よくフルにサポートできるため、Datadog では OpenMetrics チェックの 使用をお勧めします。カスタムチェックの記述を含む `OpenMetricsCheck` インターフェイスの高度な使用方法については、[開発ツール][5]のセクションを参照してください。Prometheus チェックは、メトリクスのエンドポイントがテキスト形式をサポートしていない場合にのみ使用してください。
 
-This page explains the basic usage of these checks, enabling you to import all your Prometheus exposed metrics within Datadog.
+このページでは、これらのチェックの基本的な使用方法について説明します。これにより、Datadog 内のすべての Prometheus 公開メトリクスをインポートできるようになります。
 
-The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
+このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-Launch the Docker Agent next to your other containers by replacing `<DATADOG_API_KEY>` with the API key for your organization in the command below:
+以下のコマンドで、`<DATADOG_API_KEY>` を自身のオーガニゼーションの API キーに置き換えて、その他のコンテナに隣接する Docker Agent を起動します。
 
 {{< tabs >}}
-{{% tab "Standard" %}}
+{{% tab "標準" %}}
 
 ```shell
 docker run -d --cgroupns host \
@@ -51,7 +51,7 @@ docker run -d --cgroupns host \
 ```
 
 {{% /tab %}}
-{{% tab "Amazon Linux version < 2" %}}
+{{% tab "Amazon Linux バージョン < 2" %}}
 
 ```shell
 docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -74,11 +74,11 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Your Datadog site is {{< region-param key="dd_site" code="true" >}}.
+**注**: Datadog サイトは {{< region-param key="dd_site" code="true" >}} です。
 
-### Configuration
+### 構成
 
-The Agent detects if it's running on Docker and automatically searches all container labels for Datadog-OpenMetrics labels. Autodiscovery expects labels to look like these examples, depending on the file type:
+Agent は、Docker 上で実行されているかどうかを検出し、すべてのコンテナラベルの中から Datadog-OpenMetrics ラベルを自動検索します。オートディスカバリーは、ファイルの種類に応じて、ラベルが以下の例のようになっていることを前提とします。
 
 {{< tabs >}}
 {{% tab "Dockerfile" %}}
@@ -86,15 +86,15 @@ The Agent detects if it's running on Docker and automatically searches all conta
 ```conf
 LABEL "com.datadoghq.ad.check_names"='["openmetrics"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
+LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint":"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>","namespace":"<NAMESPACE>","metrics":[{"<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"}]}]'
 ```
 
-#### Multiple endpoints example
+#### 複数のエンドポイントの例
 
 ```conf
 LABEL "com.datadoghq.ad.check_names"='["openmetrics","openmetrics"]'
 LABEL "com.datadoghq.ad.init_configs"='[{},{}]'
-LABEL "com.datadoghq.ad.instances"='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}", "{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
+LABEL "com.datadoghq.ad.instances"='[{"openmetrics_endpoint":"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>","namespace":"<NAMESPACE>","metrics":[{"<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"}]}, {"openmetrics_endpoint":"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>","namespace":"<NAMESPACE>","metrics":[{"<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"}]}]'
 ```
 
 {{% /tab %}}
@@ -116,7 +116,7 @@ labels:
     ]
 ```
 
-**Multiple endpoints example**:
+**複数のエンドポイントの例**:
 
 ```yaml
 labels:
@@ -142,7 +142,7 @@ labels:
 ```
 
 {{% /tab %}}
-{{% tab "Docker run command" %}}
+{{% tab "Docker 実行コマンド" %}}
 
 ```shell
 # single metric
@@ -166,7 +166,7 @@ labels:
 -l com.datadoghq.ad.instances="[{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>\",\"namespace\":\"<NAMESPACE>\",\"metrics\":[\".*\"]}]"
 ```
 
-**Multiple endpoints example**:
+**複数のエンドポイントの例**:
 
 ```shell
 -l com.datadoghq.ad.check_names='["openmetrics", "openmetrics"]' -l com.datadoghq.ad.init_configs='[{},{}]' -l com.datadoghq.ad.instances='["{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}", "{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT> \",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}"]'
@@ -175,28 +175,28 @@ labels:
 {{% /tab %}}
 {{< /tabs >}}
 
-With the following configuration placeholder values:
+コンフィギュレーションには次のプレースホルダー値を使用します。
 
-| Placeholder             | Description                                                                                                                               |
+| プレースホルダー             | 説明                                                                                                                               |
 |-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| `<PROMETHEUS_PORT>`     | Port to connect to in order to access the Prometheus endpoint. Can alternatively use the [Autodiscovery Template Variable][6] `%%port%%`. |
-| `<PROMETHEUS_ENDPOINT>` | URL path for the metrics served by the container, in Prometheus format.                                                                   |
-| `<NAMESPACE>`           | Set namespace to be prefixed to every metric when viewed in Datadog.                                                                      |
-| `<METRIC_TO_FETCH>`     | Prometheus metrics key to be fetched from the Prometheus endpoint.                                                                        |
-| `<NEW_METRIC_NAME>`     | Transforms the `<METRIC_TO_FETCH>` metric key to `<NEW_METRIC_NAME>` in Datadog.                                                          |
+| `<PROMETHEUS_PORT>`     | Prometheus のエンドポイントにアクセスするための接続先ポート。代わりに[オートディスカバリーテンプレート変数][6] `%%port%%` を使用することも可能です。 |
+| `<PROMETHEUS_ENDPOINT>` | コンテナによって処理されたメトリクスの URL パス (Prometheus 形式)。                                                                   |
+| `<NAMESPACE>`           | Datadog で表示するときに、すべてのメトリクスの前にネームスペースを付加します。                                                                      |
+| `<METRIC_TO_FETCH>`     | Prometheus エンドポイントから取得される Prometheus メトリクスキー。                                                                        |
+| `<NEW_METRIC_NAME>`     | Datadog の `<METRIC_TO_FETCH>` メトリクスキーを `<NEW_METRIC_NAME>` に変換します。                                                          |
 
 
-The `metrics` configuration is a list of metrics to retrieve as custom metrics. Include each metric to fetch and the desired metric name in Datadog as key value pairs, for example, `{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}`. You can alternatively provide a list of metric names strings, interpreted as regular expressions, to bring the desired metrics with their current names. **Note:** Regular expressions can potentially send a lot of custom metrics.
+`metrics` の構成は、カスタムメトリクスとして取得するメトリクスのリストです。取得する各メトリクスと Datadog で希望するメトリクス名をキー値のペアで、例えば `{"<METRIC_TO_FETCH>":"<NEW_METRIC_NAME>"}` のように記載します。代わりに、正規表現として解釈されるメトリクス名の文字列のリストを提供し、現在の名前で必要なメトリクスをもたらすことができます。**注:** 正規表現では、多くのカスタムメトリクスを送信できる可能性があります。
 
-For a full list of available parameters for instances, including `namespace` and `metrics`, see the [sample configuration openmetrics.d/conf.yaml][7].
+`namespace` や `metrics` など、インスタンスで利用可能なパラメーターの一覧は、[構成例 openmetrics.d/conf.yaml][7] を参照してください。
 
-## Getting started
+## はじめに
 
-### Simple metric collection
+### シンプルなメトリクスの収集
 
-To get started with collecting metrics exposed by Prometheus running within a container, follow these steps:
+コンテナ内で動作する Prometheus によって公開されたメトリクスの収集を開始するには、次の手順に従います。
 
-1. Launch the Datadog Agent:
+1. Datadog Agent を起動します。
     {{< tabs >}}
     {{% tab "Standard" %}}
 
@@ -220,9 +220,9 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
     {{% /tab %}}
     {{< /tabs >}}
 
-2. Launch a Prometheus container exposing example metrics for the Agent to collect, with the Autodiscovery Labels for the OpenMetrics Check.
+2. OpenMetrics チェック用の Autodiscovery Labels を使用して、Agent が収集するサンプルメトリクスを公開する Prometheus コンテナを起動します。
 
-    The following labels will have the Agent collect the metrics `promhttp_metric_handler_requests`, `promhttp_metric_handler_requests_in_flight`, and all exposed metrics starting with `go_memory`.
+   &nbsp;以下のラベルは、Agent が `promhttp_metric_handler_requests`、`promhttp_metric_handler_requests_in_flight`、および `go_memory` で始まるすべての公開メトリクスを収集することを意味します。
 
     ```yaml
     labels:
@@ -241,23 +241,23 @@ docker run -d -e DD_API_KEY="<DATADOG_API_KEY>" \
           }
         ]
     ```
-    To launch an example Prometheus container with these labels you can run:
+   これらのラベルで Prometheus コンテナのサンプルを起動するには、次を実行します。
 
     ```shell
     docker run -d -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances='[{"openmetrics_endpoint":"http://%%host%%:%%port%%/metrics","namespace":"documentation_example_docker","metrics":[{"promhttp_metric_handler_requests":"handler.requests"},{"promhttp_metric_handler_requests_in_flight":"handler.requests.in_flight"},"go_memory.*"]}]' prom/prometheus
     ```
 
-3. Go into your [Metric summary][8] page to see the collected metrics:
+3. [Metric summary][8] ページにアクセスし、収集したメトリクスを確認します。
 
-    {{< img src="integrations/guide/prometheus_docker/openmetrics_v2_collected_metric_docker.png" alt="Prometheus metric collected docker">}}
+    {{< img src="integrations/guide/prometheus_docker/openmetrics_v2_collected_metric_docker.png" alt="Docker で収集された Prometheus メトリクス">}}
 
-## From custom to official integration
+## カスタムインテグレーションを公式インテグレーションに
 
-By default, all metrics retrieved by the generic Prometheus check are considered custom metrics. If you are monitoring off-the-shelf software and think it deserves an official integration, don't hesitate to [contribute][5]!
+デフォルトでは、汎用の Prometheus チェックによって取得されるすべてのメトリクスが、カスタムメトリクスだと見なされます。既製ソフトウェアを監視されて、公式のインテグレーションにするべきだと思われた場合は、[ぜひご提供をお願いします][5]。
 
-Official integrations have their own dedicated directories. There's a default instance mechanism in the generic check to hardcode the default configuration and metrics metadata. For example, reference the [kube-proxy][9] integration.
+公式インテグレーションは、それぞれ専用のディレクトリを持ちます。汎用のチェックには、デフォルトの構成とメトリクスメタデータをハードコードするためのデフォルトのインスタンスメカニズムがあります。たとえば、[kube-proxy][9] インテグレーションを参照します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -23,7 +23,7 @@
 "categories":
 - cloud
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/neutrona/README.md"
 "display_on_public_website": true
@@ -66,11 +66,11 @@ This check monitors [Neutrona][1] cloud connectivity services to:
 
 - Azure (ExpressRoute)
 
-## Setup
+## セットアップ
 
 The Neutrona check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Neutrona check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -82,7 +82,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Neutrona
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `neutrona.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5] to start collecting your Neutrona [metrics](#metrics).
    See the [sample neutrona.d/conf.yaml][6] for all available configuration options.
@@ -93,21 +93,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Neutrona
 
 [Run the Agent's status subcommand][8] and look for `neutrona` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "neutrona" >}}
 
 
-### Service Checks
+### サービスチェック
 
 Neutrona does not include any service checks at this time.
 
-### Events
+### イベント
 
 Neutrona does not include any events at this time.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

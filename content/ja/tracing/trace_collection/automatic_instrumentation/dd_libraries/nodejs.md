@@ -16,16 +16,16 @@ type: multi-code-lang
 code_lang_weight: 30
 further_reading:
     - link: "https://github.com/DataDog/dd-trace-js"
-      tag: Source Code
+      tag: ソースコード
       text: Source code
     - link: "https://datadog.github.io/dd-trace-js"
       tag: Documentation
       text: API documentation
     - link: tracing/glossary/
-      tag: Documentation
+      tag: ドキュメント
       text: Explore your services, resources and traces
     - link: tracing/
-      tag: Documentation
+      tag: ドキュメント
       text: Advanced Usage
 ---
 ## Compatibility requirements
@@ -36,7 +36,7 @@ The latest Node.js Tracer supports Node.js versions `>=18`. For a full list of D
 
 Before you begin, make sure you've already [installed and configured the Agent][13]. Then, complete the following steps to add the Datadog tracing library to your Node.js application to instrument it. 
 
-### Install the Datadog tracing library
+### Datadog トレーシングライブラリのインストール
 
 To install the Datadog tracing library using npm for Node.js 18+, run:
 
@@ -113,27 +113,27 @@ node --loader dd-trace/loader-hook.mjs entrypoint.js
 node --import dd-trace/register.js entrypoint.js
 ```
 
-### Bundling
+### バンドル
 
-`dd-trace` works by intercepting `require()` calls that a Node.js application makes when loading modules. This includes modules that are built-in to Node.js, like the `fs` module for accessing the filesystem, as well as modules installed from the NPM registry, like the `pg` database module.
+`dd-trace` は Node.js アプリケーションがモジュールをロードする際に行う `require()` 呼び出しを傍受することで動作します。これには、ファイルシステムにアクセスするための `fs` モジュールのような Node.js に組み込まれているモジュールや、`pg` データベースモジュールのような NPM レジストリからインストールされたモジュールが含まれます。
 
-Bundlers crawl all of the `require()` calls that an application makes to files on disk. It replaces the `require()` calls with custom code and combines all of the resulting JavaScript into one "bundled" file. When a built-in module is loaded, such as `require('fs')`, that call can then remain the same in the resulting bundle.
+バンドラーはアプリケーションがディスク上のファイルに対して行う `require()` 呼び出しをすべてクロールします。`require()` の呼び出しをカスタムコードに置き換え、その結果の JavaScript を 1 つの "バンドルされた" ファイルにまとめます。`require('fs')` のような組み込みモジュールがロードされたとき、その呼び出しは結果として生成されるバンドルにそのまま残ります。
 
-APM tools like `dd-trace` stop working at this point. They can continue to intercept the calls for built-in modules but don't intercept calls to third party libraries. This means that when you bundle a `dd-trace` app with a bundler it is likely to capture information about disk access (through `fs`) and outbound HTTP requests (through `http`), but omit calls to third party libraries. For example:
-- Extracting incoming request route information for the `express` framework. 
-- Showing which query is run for the `mysql` database client.
+`dd-trace` のような APM ツールはこの時点で機能しなくなります。組み込みモジュールの呼び出しは引き続き傍受できますが、サードパーティライブラリの呼び出しは傍受しません。つまり、`dd-trace` アプリをバンドラーでバンドルすると、ディスクアクセス (`fs` 経由) とアウトバウンド HTTP リクエスト (`http` 経由) の情報はキャプチャしますが、サードパーティライブラリの呼び出しは省略する可能性が高くなります。例:
+- `express` フレームワークの受信リクエストルート情報を抽出する。
+- データベースクライアント `mysql` に対して実行されるクエリを表示する。
 
-A common workaround is to treat all third party modules that the APM needs to instrument as being "external" to the bundler. With this setting the instrumented modules remain on disk and continue to be loaded with `require()` while the non-instrumented modules are bundled. However, this results in a build with many extraneous files and starts to defeat the purpose of bundling.
+一般的な回避策は、APM がインスツルメンテーションする必要のあるすべてのサードパーティモジュールを、バンドラーの "外部" として扱うことです。この設定では、インスツルメンテーションされたモジュールはディスク上に残り、`require()` でロードされ続け、インスツルメンテーションされていないモジュールはバンドルされます。しかし、これでは余計なファイルがたくさんあるビルドになってしまい、バンドルする意味がなくなってしまいます。
 
-Datadog recommends you have custom-built bundler plugins. These plugins are able to instruct the bundler on how to behave, inject intermediary code and intercept the "translated" `require()` calls. As a result, more packages are included in the bundled JavaScript file. 
+Datadog では、カスタムビルトバンドラープラグインを推奨しています。このプラグインは、バンドラーに動作を指示したり、中間コードを挿入したり、"翻訳された" `require()` 呼び出しを傍受したりすることができます。その結果、より多くのパッケージがバンドルされた JavaScript ファイルに含まれるようになります。
 
-**Note**: Some applications can have 100% of modules bundled, however native modules still need to remain external to the bundle.
+**注**: アプリケーションによっては、100% のモジュールをバンドルすることができますが、ネイティブモジュールはまだバンドルの外部に残しておく必要があります。
 
-#### Esbuild support
+#### Esbuild サポート
 
-This library provides experimental esbuild support in the form of an esbuild plugin, and requires at least Node.js v16.17 or v18.7. To use the plugin, make sure you have `dd-trace@3+` installed, and then require the `dd-trace/esbuild` module when building your bundle.
+このライブラリは esbuild プラグインの形で実験的な esbuild サポートを提供し、少なくとも Node.js v16.17 または v18.7 が必要です。プラグインを使用するには、`dd-trace@3+` がインストールされていることを確認し、バンドルをビルドするときに `dd-trace/esbuild` モジュールを要求します。
 
-Here's an example of how one might use `dd-trace` with esbuild:
+以下は esbuild で `dd-trace` を使う例です。
 
 ```javascript
 const ddPlugin = require('dd-trace/esbuild')
@@ -144,21 +144,21 @@ esbuild.build({
   bundle: true,
   outfile: 'out.js',
   plugins: [ddPlugin],
-  platform: 'node', // allows built-in modules to be required
+  platform: 'node', // 組み込みモジュールの使用を可能にします
   target: ['node16'],
   external: [
-    // esbuild cannot bundle native modules
+    // esbuild はネイティブモジュールをバンドルできません
     '@datadog/native-metrics',
 
-    // required if you use profiling
+    // プロファイリングを使用する場合は必須です
     '@datadog/pprof',
 
-    // required if you use Datadog security features
+    // Datadog のセキュリティ機能を使用する場合は必須です
     '@datadog/native-appsec',
     '@datadog/native-iast-taint-tracking',
     '@datadog/native-iast-rewriter',
 
-    // required if you encounter graphql errors during the build step
+    // ビルドステップで graphql エラーが発生した場合は必須です
     'graphql/language/visitor',
     'graphql/language/printer',
     'graphql/utilities'
@@ -169,9 +169,9 @@ esbuild.build({
 })
 ```
 
-**Note**: Due to the usage of native modules in the tracer, which are compiled C++ code, (usually ending with a `.node` file extension), you need to add entries to your `external` list. Currently native modules used in the Node.js tracer live inside of `@datadog` prefixed packages. This will also require that you ship a `node_modules/` directory alongside your bundled application. You don't need to ship your entire `node_modules/` directory as it would contain many superfluous packages that should be contained in your bundle.
+**注**: トレーサーでは、コンパイルされた C++ コードであるネイティブモジュール (通常、拡張機能が `.node` で終わる) を使用するため、 `external` リストにエントリを追加する必要があります。現在、Node.js トレーサーで使用されているネイティブモジュールは `@datadog` プレフィックス付きパッケージの中にあります。このため、バンドルしたアプリケーションと共に `node_modules/` ディレクトリも配布する必要があります。 ディレクトリには、バンドル内に含まれるべき多くの不要なパッケージがあるため、`node_modules/` ディレクトリ全体を配布する必要はありません。
 
-To generate a smaller `node_modules/` directory with only the required native modules, (and their dependencies) you can first determine the versions of packages that you need, then create a temporary directory to install them into, and copy the resulting `node_modules/` directory from it. For example:
+必要なネイティブモジュール (とその依存関係) だけを含む、より小さな `node_modules/` ディレクトリを生成するには、まず必要なパッケージのバージョンを決定し、それらをインストールするための一時ディレクトリを作成し、そこから結果の `node_modules/` ディレクトリをコピーします。例:
 
 ```sh
 cd path/to/project
@@ -187,15 +187,15 @@ npm install @datadog/native-metrics@2.0.0 @datadog/pprof@5.0.0
 cp -R ./node_modules path/to/bundle
 ```
 
-At this stage you should be able to deploy your bundle, (which is your application code and most of your dependencies), with the `node_modules/` directory, which contains the native modules and their dependencies.
+この段階で、バンドル (アプリケーションコードと依存関係の大部分) と、ネイティブモジュールとその依存関係を含む `node_modules/` ディレクトリをデプロイできるはずです。
 
-## Configuration
+## 構成
 
-If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][4] for details.
+必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][4]を参照してください。
 
-Read [tracer settings][3] for a list of initialization options.
+初期化のオプションについては、[トレーサー設定][3]をお読みください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

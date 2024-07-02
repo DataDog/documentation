@@ -24,7 +24,7 @@
 - log collection
 - orchestration
 - provisioning
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/eks_anywhere/README.md"
 "display_on_public_website": true
@@ -74,7 +74,7 @@ Amazon Elastic Kubernetes Service (EKS) is a managed Kubernetes service that aut
 
 [Amazon EKS Anywhere][2] is a deployment option that enables you to create and operate Kubernetes clusters on-premises, including virtual machines (for example, VMware vSphere) and bare metal servers.
 
-## Setup
+## セットアップ
 
 Because Datadog already integrates with Kubernetes and AWS, it is ready-made to monitor EKS. If you're running the Agent in a Kubernetes cluster and plan to migrate to EKS, you can continue monitoring your cluster with Datadog. 
 
@@ -119,7 +119,7 @@ Use DaemonSets to [automatically deploy the Datadog Agent on all of your nodes][
 
 Follow the [container log collection instructions][12] to learn more about environment variables and advanced setup options.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][13].
 

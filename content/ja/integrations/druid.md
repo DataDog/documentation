@@ -27,7 +27,7 @@
 - caching
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/druid/README.md"
 "display_on_public_website": true
@@ -65,36 +65,36 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Druid Dashboard][1]
+![Druid ダッシュボード][1]
 
-## Overview
+## 概要
 
-The Datadog Agent collects metrics from Druid using [DogStatsD][2]. DogStatsD collects metrics on Druid queries, ingestion, and coordination data. For more information, see the [Druid metrics documentation][3].
+Datadog Agent は [DogStatsD][2] を使用して Druid からメトリクスを収集します。DogStatsD は Druid のクエリ、取り込み、コーディネーションデータに関するメトリクスを収集します。詳細については、[Druid メトリクスドキュメント][3]をご参照ください。
 
-In addition to collecting metrics, the Agent also sends a Service Check related to Druid's health.
+メトリクスの収集に加え、Agent はDruid の健全性に関連するサービスチェックも送信します。
 
-## Setup
+## セットアップ
 
-### Prerequisite
+### 前提条件
 
-Druid 0.16 or above is required for this integration to work properly.
+このインテグレーションが正常に動作するには Druid 0.16 以上が必要です。
 
-### Installation
+### インストール
 
-Both steps below are needed for Druid integration to work properly. Before you begin, you should [install the Datadog Agent][4].
+Druid インテグレーショが正常に動作するためには、下記の 2 ステップを実施する必要があります。ステップを開始する前に [Datadog Agent][4] をインストールしてください。
 
-#### Step 1: Configure Druid to collect health metrics and service checks
+#### ステップ 1: 健全性メトリクスとサービスチェックを収集するように Druid を構成する
 
-Configure the Druid check included in the [Datadog Agent][5] package to collect health metrics and service checks.
+健全性メトリクスとサービスチェックを収集するように、[Datadog Agent][5] パッケージに含まれている Druid チェックを構成します。
 
-1. Edit the `druid.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your druid service checks. See the [sample druid.d/conf.yaml][6] for all available configuration options.
-2. [Restart the Agent][7].
+1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/`  フォルダーで `druid.d/conf.yaml` ファイルを編集し、Druid サービスチェックの収集を開始します。利用可能なすべてのコンフィギュレーションオプションについては、[ druid.d/conf.yaml のサンプル][6]をご参照ください。
+2. [Agent を再起動します][7]。
 
-#### Step 2: Connect Druid to DogStatsD (included in the Datadog Agent) by using the extension `statsd-emitter` to collect metrics
+#### ステップ 2: 拡張子 `statsd-emitter` を使用して Druid をDogStatsD (Datadog Agent に含まれる) に関連付け、メトリクスの収集を開始する
 
-Step to configure `statsd-emitter` extension to collect the majority of [Druid metrics][3].
+`statsd-emitter` 拡張子を構成して多数の [Druid メトリクス][3]を収集するためのステップを以下に示します。
 
-1. Install the Druid extension [`statsd-emitter`][8].
+1. Druid 拡張子 [`statsd-emitter`][8] をインストールします。
 
    ```shell
    $ java \
@@ -106,9 +106,9 @@ Step to configure `statsd-emitter` extension to collect the majority of [Druid m
      -c "org.apache.druid.extensions.contrib:statsd-emitter:0.15.0-incubating"
    ```
 
-    More info about this step can be found on the [official guide for loading Druid extensions][9]
+    本ステップの詳細情報については、[Druid 拡張子のロードに関する公式ガイド][9]をご確認ください。
 
-2. Update Druid java properties by adding the following configs:
+2. 下記のコンフィギュレーションを追加して、Druid Java プロパティを更新します。
 
    ```conf
    # Add `statsd-emitter` to the extensions list to be loaded
@@ -130,23 +130,23 @@ Step to configure `statsd-emitter` extension to collect the majority of [Druid m
    druid.emitter.statsd.dogstatsdServiceAsTag=true
    ```
 
-3. Restart Druid to start sending your Druid metrics to the Agent through DogStatsD.
+3. Druid を再起動すると、DogStatsD を通して Agent に向けて Druid メトリクスの送信が開始されます。
 
-#### Integration Service Checks
+#### インテグレーションサービスチェック
 
-Use the default configuration of your `druid.d/conf.yaml` file to activate the collection of your Druid service checks. See the sample [druid.d/conf.yaml][6] for all available configuration options.
+`druid.d/conf.yaml` ファイルのデフォルトコンフィギュレーションを使用して、Druid サービスチェックの収集を有効にします。利用可能なすべてのコンフィギュレーションオプションについては、[druid.d/conf.yaml][6]  のサンプルをご参照ください。
 
-#### Log collection
+#### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your datadog.yaml file:
+1. デフォルトでは、Datadog Agent のログの収集は無効化されています。以下のように `datadog.yaml` ファイルを使用して有効化します。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Uncomment and edit this configuration block at the bottom of your `druid.d/conf.yaml`:
+2. `druid.d/conf.yaml` の下部にある、コンフィギュレーションブロックのコメントを解除して編集します。
 
    ```yaml
    logs:
@@ -160,31 +160,31 @@ _Available for Agent versions >6.0_
            pattern: \d{4}\-\d{2}\-\d{2}
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
 
-3. [Restart the Agent][7].
+3. [Agent を再起動します][7]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][10] and look for `druid` under the Checks section.
+[Agent のステータスサブコマンドを実行][10]し、Checks セクションで `druid` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "druid" >}}
 
 
-### Events
+### イベント
 
-The Druid check does not include any events.
+Druid チェックには イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "druid" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][13].
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/druid/images/druid_dashboard_overview.png

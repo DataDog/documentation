@@ -5,9 +5,9 @@
 - "log collection"
 - "orchestration"
 - "provisioning"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track failed tasks and see playbook runs in your event stream."
+"description": "失敗したタスクを追跡し、イベントストリームにプレイブックの実行を表示。"
 "doc_link": "https://docs.datadoghq.com/integrations/ansible/"
 "draft": false
 "git_integration_title": "ansible"

@@ -6,15 +6,15 @@ further_reading:
   text: Learn about RUM & Session Replay
 ---
 
-## Overview
+## 概要
 
-This page contains common questions and answers about billing topics for RUM & Session Replay.
+このページでは、RUM とセッションリプレイの課金に関するよくある質問とその回答を掲載しています。
 
-## How is a session defined?
+## セッションはどのように定義されますか？
 
-A session is a user journey on your web or mobile application. A session usually includes multiple page views with their associated telemetry.
+セッションとは、ウェブアプリケーションまたはモバイルアプリケーションでユーザーが行う操作 (カスタマージャーニー) です。通常、セッションには複数ページの表示とそれに関連するテレメトリーが含まれます。
 
-## When does a session expire?
+## セッションに期限はありますか？
 
 A session expires after 15 minutes of inactivity, and its duration is limited to 4 hours. After 4 hours, a new session is automatically created.
 
@@ -22,33 +22,33 @@ A session expires after 15 minutes of inactivity, and its duration is limited to
 
 Session Replay recordings can vary based on the session length. For example, if you're observing short, 5-8 second Session Replays, that means the user ended their session after 5-8 seconds.
 
-## What data does Datadog RUM & Session Replay collect?
+## Datadog の RUM とセッションリプレイは、どのようなデータを収集するのですか？
 
-Datadog collects all the pages visited by your end users along with the telemetry that matters, such as resources loading (XHRs, images, CSS files, and JS scripts), frontend errors, crash reports, and long tasks. All of this is included in the user session. For Session Replay, Datadog creates an iframe based on snapshots of the DOM. Datadog charges per one thousand (1,000) sessions ingested in the Datadog Real User Monitoring (RUM) service.
+Datadog は、エンドユーザーが訪問したすべてのページを、読み込みリソース (XHR、イメージ、CSS ファイル、JS スクリプト)、フロントエンドエラー、クラッシュレポート、長時間のタスクなど、重要なテレメトリーと一緒に収集します。これらはすべてユーザーセッションに含まれるデータです。セッションリプレイでは、Datadog は DOM のスナップショットに基づいて iframe を作成します。Datadog リアルユーザーモニタリング (RUM) サービスで収集されたセッション 1,000 件ごとに課金されます。
 
-## Does Datadog handle single page applications?
+## Datadog はシングルページアプリケーションに対応していますか？
 
-Yes, without any configuration on your side. Datadog RUM automatically tracks page changes.
+はい。お客様側でのコンフィギュレーションは必要ありません。Datadog RUM が自動的にページの変更を追跡します。
 
-## How do you view endpoint requests end-to-end?
+## エンドポイントリクエストをエンドツーエンドでどのように表示しますか？
 
-With the out-of-the-box APM integration, you can tie any XHR or Fetch request to its corresponding backend trace.
+付属の APM インテグレーションを使用して、あらゆる XHR または Fetch リクエストを、対応するバックエンドのトレースに紐付けることができます。
 
-## How do you view logs from the browser collector in RUM?
+## RUM のブラウザコレクターからのログをどのように表示しますか？
 
-Browser logs are automatically tied to the corresponding RUM session, enabling you to monitor when they happen during the end user journey.
+ブラウザのログは自動的に対応する RUM セッションに紐付けられるため、エンドユーザーのジャーニーで発生したログを監視できます。
 
-## Does Datadog use cookies?
+## Datadog はクッキーを使用しますか？
 
-Yes. Datadog uses cookies to stitch together the various steps of your users into a session. This process does not use cross-domain cookies, and it does not track the actions of your users outside your applications.
+はい。Datadog ではクッキーを使用して、セッションまでのユーザーのさまざまなステップをまとめます。ただし、クロスドメインクッキーは使用しないほか、アプリケーション外部のユーザーアクションは追跡されません。
 
-## My Usage page shows RUM sessions billed under the Browser RUM & Session Replay Plan, but I have not configured capturing session recordings for my application.
+## 使用量ページには、Browser RUM & セッションリプレイプランで課金された RUM セッションが表示されていますが、私のアプリケーションではセッション記録のキャプチャが構成されていません。
 
-The **Browser RUM & Session Replay** Plan unlocks session recordings (replays).
+**Browser RUM & セッションリプレイ**プランは、セッションの記録 (リプレイ) をアンロックします。
 
-- If you are collecting replays, you are billed for the sessions under the Replay Plan.
+- リプレイを収集している場合は、リプレイプランでの課金となります。
 
-- If you want to disable session recordings from being captured, see the [Session Replay documentation][1].
+- セッションの記録をキャプチャしないようにするには、[セッションリプレイのドキュメント][1]を参照してください。
 
 ## How do webviews in mobile applications impact session recordings and billing?
 
@@ -58,7 +58,7 @@ In other words, only the one RUM mobile session is visible in Datadog and theref
 
 {{< img src="account_management/billing/rum/rum-webviews-impact-on-billing-2.png" alt="If you've instrumented both your web and mobile applications with Datadog SDKs, you are only be billed for the mobile session." >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

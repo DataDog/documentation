@@ -1,8 +1,8 @@
 ---
+title: Timeboard API
 aliases:
-- /ja/graphing/faq/timeboard-api-doc
-- /ja/graphing/guide/timeboard-api-doc
-title: タイムボード API
+  - /graphing/faq/timeboard-api-doc
+  - /graphing/guide/timeboard-api-doc
 ---
 
 <div class="alert alert-danger">
@@ -559,3 +559,4 @@ curl "https://api.datadoghq.com/api/v1/dash?api_key=${api_key}&application_key=$
 
 {{% /tab %}}
 {{< /tabs >}}
+

@@ -28,7 +28,7 @@
 - cloud
 - network
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/buoyant_cloud/README.md"
 "display_on_public_website": true
@@ -96,13 +96,13 @@
 
 [Buoyant Cloud][1] provides fully managed Linkerd on your cluster to monitor the health of Linkerd and deployments. With this integration, you can monitor and be alerted on Linkerd's health, workload traffic, rollout events, and metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 You need to have an account at [Buoyant Cloud][1] to use this integration. You can also sign up for Buoyant Cloud in the Datadog Marketplace.
 
-### Configuration
+### 構成
 
 1. Click the **Connect Accounts** button on the tile to complete the OAuth flow.
 2. Browse to the [Buoyant Cloud Notifications][2] page.
@@ -121,9 +121,9 @@ As Buoyant Cloud creates events, they appear in the Datadog [event explorer][3].
 
 Additionally, ensure that all API keys associated with this integration have been disabled by searching for the integration name on the [API Keys page][6].
 
-## Data Collected
+## 収集データ
 
-### Events
+### イベント
 
 Buoyant Cloud sends [events][3] to Datadog, including:
 
@@ -133,11 +133,11 @@ Buoyant Cloud sends [events][3] to Datadog, including:
 - Workload rollouts
 - Manual events
 
-### Metrics
+### メトリクス
 
 See [metadata.csv][7] for a list of metrics provided by this integration.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Get support from the following sources:
 

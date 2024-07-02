@@ -25,7 +25,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/README.md"
 "display_on_public_website": true
@@ -61,53 +61,53 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [JBoss][1] and [WildFly][2] applications.
+このチェックは [JBoss][1] および [WildFly][2] アプリケーションを監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The JBoss/WildFly check is included in the [Datadog Agent][3] package so you don't need to install anything else on your JBoss/WildFly host.
+JBoss/WildFly チェックは [Datadog Agent][3] パッケージに含まれています。JBoss/WildFly ホストに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in [the status page][4]. You can specify the metrics you are interested in by editing the configuration below. To learn how to customize the collected metrics, see the [JMX Checks documentation][5] for more detailed instructions. If you need to monitor more metrics, contact [Datadog support][6].
+このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、[ステータスページ][4]に表示されます。下記の構成を編集することで、関心のあるメトリクスを指定できます。収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][5]で詳細な手順を参照してください。制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][6]までお問い合わせください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `jboss_wildfly.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your JBoss or WildFly application server's performance data. See the [sample jboss_wildfly.d/conf.yaml][1] for all available configuration options.
+1. JBoss または WildFly アプリケーションサーバーのパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `jboss_wildfly.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[jboss_wildfly.d/conf.yaml のサンプル][1] を参照してください。
 
-    Depending on your server setup (particularly when using the `remote+http` JMX scheme), you may need to specify a custom JAR to connect to the server. Place the JAR on the same machine as your Agent, and add its path to the `custom_jar_paths` option in your `jboss_wildfly.d/conf.yaml` file.
+   サーバーのセットアップによっては（特に `remote+http` JMX スキームを使用している場合は）、サーバーに接続するためにカスタムな JAR を指定する必要がでてきます。Agent と同じマシンに JAR を配置し、`jboss_wildfly.d/conf.yaml` ファイルの`custom_jar_paths` オプションにパスを追加します。
 
-    **Note**: The JMX url scheme is different according to your WildFly version:
+    **注**: JMX URL スキームは WildFly のバージョンにより異なります。
 
-   - For Wildfly 9 and older: `service:jmx:http-remoting-jmx://<HOST>:<PORT> `
-   - For Wildfly 10+: `service:jmx:remote+http://<HOST>:<PORT>`
+   - Wildfly 9 以降: `service:jmx:http-remoting-jmx://<ホスト>:<ポート> `
+   - Wildfly 10 以降: `service:jmx:remote+http://<ホスト>:<ポート>`
 
-    See the [WildFly JMX subsystem configuration page][2] for more information.
+    詳細については、[WildFly JMX サブシステムコンフィギュレーションページ][2]を参照してください。
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Next, edit `jboss_wildfly.d/conf.yaml` by uncommenting the `logs` lines at the bottom. Update the logs `path` with the correct path to your JBoss log files.
+2. 次に、下部にある `logs` 行のコメントを解除して、`jboss_wildfly.d/conf.yaml` を編集します。ログの `path` を JBoss ログファイルの正しいパスで更新してください。
 
    ```yaml
    logs:
@@ -117,50 +117,50 @@ _Available for Agent versions >6.0_
        service: '<APPLICATION_NAME>'
    ```
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/jboss_wildfly/datadog_checks/jboss_wildfly/data/conf.yaml.example
 [2]: https://docs.jboss.org/author/display/WFLY9/JMX%20subsystem%20configuration.html
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-##### Metric collection
+##### メトリクスの収集
 
-For containerized environments, see the [Autodiscovery with JMX][1] guide.
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                                      |
+| パラメーター      | 値                                                      |
 | -------------- | ---------------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "jboss_wildfly", "service": "<SERVICE_NAME>"}` |
+| `<LOG_CONFIG>` | `{"source": "jboss_wildfly", "service": "<サービス名>"}` |
 
 [1]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
 [2]: https://docs.datadoghq.com/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][4] and look for `jboss_wildfly` under the Checks section.
+[Agent の status サブコマンドを実行][4]し、Checks セクションで `jboss_wildfly` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "jboss_wildfly" >}}
 
 
-### Events
+### イベント
 
-The JBoss/WildFly integration does not include any events.
+JBoss/WildFly インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "jboss_wildfly" >}}
 
 
@@ -169,9 +169,9 @@ The JBoss/WildFly integration does not include any events.
 You can configure the Datadog Agent to collect Java application metrics through [JMXFetch][7]. To collect the default metrics configured for the JBoss/Wildfly Datadog integration, set the system property
 `Ddd.jmxfetch.jboss_wildfly.enabled=true`. 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][6].
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 
 

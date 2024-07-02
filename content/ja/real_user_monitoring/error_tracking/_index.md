@@ -35,7 +35,7 @@ Issues from RUM errors include the stack trace, user session timelines, and meta
 
 Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for RUM, navigate to [**Digital Experience** > **Error Tracking**][1].
 
-## Setup
+## セットアップ
 
 {{< whatsnext desc="To get started with Datadog Error Tracking for RUM, see the corresponding documentation:" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}

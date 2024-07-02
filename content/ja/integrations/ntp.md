@@ -20,7 +20,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/ntp/README.md"
 "display_on_public_website": true
@@ -91,7 +91,7 @@ The Agent enables the NTP check by default. To configure the check yourself, edi
 
 [Run the Agent's `status` subcommand][5] and look for `ntp` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "ntp" >}}

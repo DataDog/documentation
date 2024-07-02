@@ -5,7 +5,7 @@
 - "cloud"
 - "aws"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key AWS Direct Connect metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_directconnect/"
@@ -28,9 +28,9 @@
 
 This integration collects metrics from AWS Direct Connect, such as connection state, bit rate ingress and egress, packet rate ingress and egress, and more.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -62,23 +62,23 @@ Configure AWS Direct Connect to send logs either to a S3 bucket or to CloudWatch
     - [Add a manual trigger on the S3 bucket][7]
     - [Add a manual trigger on the CloudWatch Log Group][8]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_directconnect" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The AWS Direct Connect integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS Direct Connect integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

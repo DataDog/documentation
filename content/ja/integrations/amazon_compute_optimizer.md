@@ -5,7 +5,7 @@
 "categories":
 - cloud
 - aws
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "provide resource configuration recommendations to help users rightsize their workloads."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_compute_optimizer/"
@@ -30,9 +30,9 @@ AWS Compute Optimizer is a web service that provides resource configuration reco
 
 This integration enables you to get better EC2 instance type recommendations in AWS Compute Optimizer using memory utilization data from the Datadog Agent. For more information on Compute Optimizer, read [What is AWS Compute Optimizer?][1] in the AWS documentation.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 #### AWS
 1. In the AWS Compute Optimizer console, go to the **Accounts** page and set your account-level preferences for external metrics ingestion to `Datadog`.
@@ -57,21 +57,21 @@ For all EC2 instances monitored by both [Datadog's AWS Integration][2] and the [
 **Note:** The Datadog memory utilization metrics are integrated directly with the AWS Compute Optimizer service and not your AWS account. No additional IAM permissions are needed for this integration since Datadog is not interacting with your AWS account directly.
 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The AWS Compute Optimizer integration does not include any metrics.
 
-### Events
+### イベント
 
 The AWS Compute Optimizer integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS Compute Optimizer integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

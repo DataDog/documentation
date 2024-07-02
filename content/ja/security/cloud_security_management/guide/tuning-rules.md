@@ -5,21 +5,21 @@ aliases:
   - /security_platform/cloud_security_management/guide/tuning-rules/
 ---
 
-## Overview 
+## 概要 
 
-Cloud Security Management Threats (CSM Threats) monitors suspicious activity occurring at the workload level. However, in some cases, benign activities are flagged as malicious because of particular settings in the user's environment. When a benign expected activity is triggering a signal, you can suppress the trigger on the activity to limit noise. 
+Cloud Security Management Threats (CSM Threats) は、ワークロードレベルで発生する不審なアクティビティを監視しています。しかし、ユーザーの環境における特定の設定のために、良性のアクティビティが悪意のあるものとしてフラグ付けされるケースもあります。良性であると想定されるアクティビティがシグナルをトリガーしている場合、そのアクティビティのトリガーを抑制してノイズを抑制することができます。
 
-This guide provides considerations for best practices and steps for fine-tuning signal suppression.
+このガイドでは、ベストプラクティスのための考察と、シグナル抑制を微調整するためのステップを説明します。
 
-## Suppression strategy
+## 抑制戦略
 
-Before suppressing benign patterns, identify common characteristics in signals based on the type of detection activity. The more specific combinations of attributes are, the more precise the suppression is.
+良性パターンを抑制する前に、検出アクティビティの種類に基づいて、シグナルに共通する特性を特定します。属性の組み合わせが具体的であればあるほど、より正確な抑制が可能になります。
 
-From a risk management perspective, suppressing based on fewer attributes increases the possibility of tuning out actual malicious activities. To fine-tune effectively and without losing coverage of any malicious behaviors, consider the following list of common key attributes, categorized by activity types:
+リスクマネジメントの観点からは、より少ない属性に基づく抑制は、実際の悪意あるアクティビティを除外してしまう可能性が高くなります。悪意のある行動を見逃すことなく、効果的な微調整を行うには、一般的な主要属性をアクティビティの種類別に分類した以下のリストを参考にするとよいでしょう。
 
-### Process activity
+### プロセスアクティビティ
 
-Common keys:
+共通キー:
 - `@process.args`
 - `@process.executable.name`
 - `@process.group`
@@ -35,32 +35,32 @@ Common keys:
 
 To determine if a process is legitimate, review its parent process in the process tree. The process ancestry tree traces a process back to its origin, providing context for its execution flow. This helps in understanding the sequence of events leading up to the current process.
 
-Usually, it's sufficient to suppress based on both the parent process and on unwanted process attributes.
+通常、親プロセスと不要なプロセスの属性の両方に基づいて抑制すれば十分です。
 
-Example combination:
+組み合わせ例:
 - `@process.args`
 - `@process.executable.group`
 - `@process.parent.executable.comm`
 - `@process.parent.executable.args`
 - `@process.user`
 
-If you decide to suppress on a wide time frame, avoid using processes that have arguments with temporary values because the suppression stops being effective when the value changes.
+広い時間軸で抑制することにした場合、値が変わると抑制が効かなくなるので、一時的な値を引数に持つ処理の使用は避けてください。
 
-For example, certain programs when rebooting or executing use temporary files (`/tmp`). Building suppressions based on these values isn't effective in the event a similar activity is detected.
+例えば、再起動や実行時に特定のプログラムは一時ファイル (`/tmp`) を使用します。このような値に基づいて抑制を構築しても、同様のアクティビティが検出された場合には有効ではありません。
 
-Suppose you want to completely suppress noise of all signals from a particular activity on a container. You choose the full command within the process tree that initiates the process to spin up the container. While executing, the process accesses files which exist for as long as the container exists. If the behavior you intend to target is instead tied to your workload logic, the suppression definition based on ephemeral process instances becomes ineffective for tuning out similar activities on other containers.
+例えば、コンテナ上の特定のアクティビティからのすべてのシグナルのノイズを完全に抑制したいとします。コンテナをスピンアップするプロセスを開始するプロセスツリー内のフルコマンドを選択します。実行中、プロセスは、コンテナが存在する限り、存在するファイルにアクセスします。対象とする動作がワークロードロジックと結びついている場合、エフェメラルプロセスインスタンスに基づく抑制定義は、他のコンテナ上の同様のアクティビティを調整するのに有効でなくなります。
 
-### File activity
+### ファイルアクティビティ
 
-Refine your file activity-related suppression based on attributes that reflect identifying information about your workloads, the file in question, and the process that is accessing the file.
+ワークロード、該当ファイル、ファイルにアクセスするプロセスに関する識別情報を反映した属性に基づいて、ファイルアクティビティ関連の抑制を絞り込むことができます。
 
-Common keys:
-- Workload tags:
+共通キー:
+- ワークロードタグ:
   - `kube_container_name`
   - `kube_service`
   - `host`
   - `env`
-- Process:
+- プロセス:
   - `@process.args`
   - `@process.executable.path`
   - `@process.executable.user`
@@ -70,14 +70,14 @@ Common keys:
   - `@process.parent.args`
   - `@process.parent.executable.path`
   - `@process.user`
-- File:
+- ファイル:
   - `@file.path` 
   - `@file.inode`
   - `@file.mode`
 
-To determine an actual malicious activity while inspecting a signal, validate if the context in which the process is accessing and modifying the file is expected. To avoid suppressing intended behaviors on files across all of your infrastructure, you should always have a combination that gathers all relevant context information from the common keys listed above.
+シグナルの検査中に実際の悪意のあるアクティビティを判断するには、プロセスがファイルにアクセスし、変更する際のコンテキストが予想通りであるかどうかを検証します。インフラストラクチャー全体でファイルに対する意図的な動作を抑制することを避けるために、上記の共通キーから関連するすべてのコンテキスト情報を収集する組み合わせを常に持つ必要があります。
 
-Example combination: 
+組み合わせ例:
   - `@process.args`
   - `@process.executable.path`
   - `@process.user`
@@ -86,105 +86,105 @@ Example combination:
   - `host`
   - `kube_container_name`
 
-### Network DNS based activity
+### ネットワーク DNS ベースのアクティビティ
 
-Network Activity Monitoring checks DNS traffic and aims to detect suspicious behaviors which can compromise your network of servers. While checking for queries made to your DNS server by certain IPs, it can trigger on benign access from a known set of IP addresses, such as Private Network IPs or Cloud Network IPs.
+ネットワークアクティビティモニタリングは、DNS トラフィックをチェックし、サーバーのネットワークを危険にさらす可能性のある不審な行動を検出することを目的としています。特定の IP から DNS サーバーへのクエリをチェックしながら、プライベートネットワーク IP やクラウドネットワーク IP など、既知の IP アドレスからの良性アクセスに対してトリガーをかけることが可能です。
 
-Common keys:
-- Process:
+共通キー:
+- プロセス:
   - `@process.args`
   - `@process.executable.group`
   - `@process.executable.path`
   - `@process.parent.executable.comm`
   - `@process.parent.executable.args`
   - `@process.user`
-- Network/DNS related:
+- ネットワーク/DNS 関連:
   - `@dns.question.name`
   - `@network.destination.ip/port`
   - `@network.ip/port`
 
-Whenever a local application makes connections to resolve a DNS name, the first characteristics you are looking to check are the list of IPs that instigated the lookup as well as the DNS query.
+ローカルアプリケーションが DNS 名を解決するために接続を行う場合、最初にチェックしたい特性は、DNS クエリと同様にルックアップを開始した IP のリストです。
 
-Example combination:
+組み合わせ例:
   - `@network.ip/port`
   - `@network.destination.ip/port`
   - `@dns.question.*`
 
-### Kernel activity
+### カーネルアクティビティ
 
-With kernel related signals, noise usually comes from your workload logic or vulnerabilities associated with a certain kernel version. Consider the following attributes before deciding what to suppress:
+カーネル関連のシグナルでは、ノイズは通常、ワークロードのロジックや特定のカーネルバージョンに関連する脆弱性から発生します。何を抑制するかを決定する前に、以下の属性を考慮してください。
 
-Common keys:
-- Process
+共通キー:
+- プロセス
   - `@process.args`
   - `@process.executable.group`
   - `@process.executable.path`
   - `@process.parent.executable.comm`
   - `@process.parent.executable.args`
   - `@process.user`
-- File
+- ファイル
   - `@file.path `
   - `@file.inode`
   - `@file.mode`
 
-Defining a combination for this type of activity is similar to file or process activities, with some additional specificity tied to the system call used for the attack. 
+このタイプのアクティビティに対する組み合わせの定義は、ファイルまたはプロセスのアクティビティに似ていますが、攻撃に使用されるシステムコールに関連するいくつかの特異性が追加されています。
 
-For example the Dirty Pipe exploitation is a privilege escalation vulnerability. Since it becomes critical if local users escalate their privileges on the system leveraging this attack, it makes sense to suppress noise created from root users running expected processes. 
+例えば、Dirty Pipe の悪用は、特権昇格の脆弱性です。この攻撃を利用してローカルユーザーがシステム上で特権を拡大した場合、重大な事態になるため、ルートユーザーが期待するプロセスを実行することで発生するノイズを抑制することは理にかなっています。
 - `@process.executable.user`
 - `@process.executable.uid`
 
-Additionally you might notice that signals are created even when some of your machines are running patched kernel versions (for example, Linux versions 5.16.11, 5.15.25, and 5.10 that are patched for Dirty Pipe vulnerability). In this case, add a workload level tag such as `host`, `kube_container_name`, or `kube_service` to the combination. However, when you use a workload level attribute or tag, be aware that it applies to a wide range of candidates which decreases your detection surface and coverage. To prevent that from happening, always combine a workload level tag with process or file based attributes to define a more granular suppression criteria.
+さらに、一部のマシンでパッチが適用されたカーネルバージョン (例えば、Dirty Pipe 脆弱性のパッチが適用された Linux バージョン 5.16.11、5.15.25、5.10 など) を実行していても、シグナルが作成されることに気づくかもしれません。この場合、組み合わせに `host`、`kube_container_name`、`kube_service` などのワークロードレベルのタグを追加します。ただし、ワークロードレベルの属性やタグを使用する場合、広範囲の候補に適用されるため、検出対象範囲やカバレッジが減少することに注意してください。このような事態を防ぐには、ワークロードレベルのタグとプロセスまたはファイルベースの属性を常に組み合わせて、よりきめ細かい抑制基準を定義する必要があります。
 
-## Adding a suppression from the signal
+## シグナルから抑制を加える
 
-When you are in the process of investigating a potential threat reported by CSM Threats detection rules, you can encounter some signals that alert on known benign behaviors that are specific to your environment.  
+CSM Threats の検出ルールから報告された潜在的な脅威を調査する過程で、環境に特有の既知の良性の動作についてアラートを発するシグナルに遭遇することがあります。
 
-Consider a Java process utility exploitation. An attacker intentionally targets vulnerabilities in your application code that runs Java processes. This kind of attack entails persistent access to your application by spawning its own Java shell utility. 
+Java プロセスユーティリティの悪用について考えてみましょう。攻撃者は、Java プロセスを実行するアプリケーションコードの脆弱性を意図的に狙います。この種の攻撃は、独自の Java シェルユーティリティを生成することにより、アプリケーションへの永続的なアクセスを伴います。
 
-In some cases, CSM Threats rules might also detect expected activity, for example from your security team running a pentest session to evaluate the robustness of your applications. In this case, you can evaluate the accuracy of alerts reported and suppress noise.
+場合によっては、CSM Threats のルールは、例えば、セキュリティチームがアプリケーションの堅牢性を評価するためにペンテストセッションを実行しているような、予想されるアクティビティを検出することもあります。この場合、報告されたアラートの精度を評価し、ノイズを抑制することができます。
 
-Open the signal details side panel and navigate from one tab to the other to gain context, including key process metadata like command-line arguments and environment variable keys. For containerized workloads, the information includes the relevant image, pod, Kubernetes cluster, and more.
+シグナルの詳細サイドパネルを開き、タブからタブに移動して、コマンドライン引数や環境変数キーなどの主要なプロセスメタデータを含むコンテキストを取得します。コンテナ化されたワークロードの場合、関連するイメージ、ポッド、Kubernetes クラスターなどの情報が含まれます。
 
-{{< img src="/security/cws/guide/cws-tuning-rules.png" alt="A signal side-panel showing events, logs, and other data related to a signal." width="75%">}}
+{{< img src="/security/cws/guide/cws-tuning-rules.png" alt="シグナルに関連するイベント、ログ、その他のデータを表示するシグナルのサイドパネルです。" width="75%">}}
 
-To define suppression criteria, click on any attribute value and select **Never trigger signals for**.
+抑制条件を定義するには、任意の属性値をクリックし、**Never trigger signals for** を選択します。
 
-In this example, assess whether the use of these environment variables were actually preceded by actions that escalated privileges within the process ancestry tree. Tags can indicate where in your infrastructure the action occurred and help in decreasing its severity. With all of this information, you can decide to tune out the rule on any process that has inherited these environment variables.
+この例では、これらの環境変数の使用に先立って、プロセスの祖先ツリー内で特権をエスカレートさせるアクションが実際に行われたかどうかを評価します。タグは、インフラストラクチャー内のどこでアクションが発生したかを示し、その重大度を低減するのに役立ちます。これらの情報があれば、これらの環境変数を継承しているプロセスに対して、ルールを調整することを決定できます。
 
-If you do decide to tune down a rule, the combination of certain attributes in your signals improves your suppression precision. It's usually best to use the following common keys, which increase suppression effectiveness:
+ルールの調整を行う場合、シグナルの特定の属性を組み合わせることで、抑制の精度を向上させることができます。通常、抑制効果を高める以下の共通キーを使用するのが最適です。
 
-- `@process.parent.comm`: The context in which the process responsible for the signal was called. This key helps you assess whether its execution was expected. Usually, the parent process contextualizes the execution and so is a good candidate to tune out similar benign behaviors.
-- `@process.parent.path`: Similarly, adding the parent process's corresponding binary path complements the suppression by specifying its location.
-- `host`: If the host in question is not running in a vulnerable environment, for example, a staging environment, you could suppress signals from being triggered whenever events come from it.
-- `container.id`: Suppressing becomes more efficient if attributes related to your workloads are also in the mix. If you are aware that a container is dedicated to a benign activity, add its name or ID to substantially decrease noise.
-- `@user.id`: If you have identified a user as a known member of your team, you can suppress activity related to that user.
+- `@process.parent.comm`: シグナルを担当したプロセスが呼び出されたときのコンテキスト。このキーは、その実行が予期されたものであるかどうかを評価するのに役立ちます。通常、親プロセスはその実行をコンテキスト化するので、類似の良性動作を調整する良い候補となります。
+- `@process.parent.path`: 同様に、親プロセスの対応するバイナリパスを追加すると、その場所を指定することで抑制が補完されます。
+- `host`: 当該ホストが脆弱な環境、例えばステージング環境で動作していない場合、そこからイベントが発生するたびにシグナルがトリガーされるのを抑制することができます。
+- `container.id`: ワークロードに関連する属性が混在している場合、抑制はより効率的になります。あるコンテナが良質のアクティビティ専用であることが分かっている場合、そのコンテナ名や ID を追加することでノイズを大幅に減らすことができます。
+- `@user.id`: あるユーザーを既知のメンバーとして識別した場合、そのユーザーに関連するアクティビティを抑制することができます。
 
-For additional granularity, the following attributes provide information about past processes when reassembling the execution chain. They can be found under the prefix `@process.ancestors.*`:
+さらなる粒度のために、以下の属性は実行チェーンを再構築する際に過去のプロセスに関する情報を提供します。これらはプレフィックス `@process.ancestors.*` の下で見つけることができます。
 - `file.name`
 - `args`
 - `file.path`
 
-## Adding a suppression from the rule editor
+## ルールエディターから抑制を加える
 
-Signals surface relevant context within security alerts. Although event data can be leveraged for suppression filters, the observability data that the detection rule is built on may offer a better tuning candidate.
+シグナルは、セキュリティアラート内の関連するコンテキストを表面化させます。イベントデータは抑制フィルターに活用できますが、検出ルールが構築される観測可能性データはより良い調整候補を提供する可能性があります。
 
-In CSM Threats, the runtime Agent logs are generated from collected kernel events. You can preview the logs from the signal side-panel without context switching. 
+CSM Threats では、収集したカーネルイベントからランタイム Agent のログが生成されます。シグナルサイドパネルからコンテキストスイッチなしでログをプレビューすることができます。
 
-1. Go to your chosen signal details side-panel and click the Events tab. 
-2. Click **View in Log Explorer** to navigate to Log Management, which displays the full list of logs that instigate this signal.
-   Because there can be many logs, the signal side-panel combines these logs and their shared attributes into a JSON structure.
+1. 選択したシグナルの詳細サイドパネルで、[Events] タブをクリックします。
+2. **View in Log Explorer** をクリックして、ログ管理に移動し、このシグナルを発生させるログの完全なリストを表示します。
+   ログは多数存在するため、シグナルサイドパネルでは、これらのログとその共有属性を JSON 構造にまとめます。
 3. Go back to the Events tab and scroll to the end of the panel. Expand the JSON dropdown to access all log attributes contained in runtime Agent events.
-4. Identify key-value pairs to suppress signals by common keys, including `@process.args`, `@process.group`, `@process.ancestors.comm`, or `@process.ancestors.args`.
-5. Open the rule in the Rule editor and in the **Exclude benign activity with suppression queries**. Add the list of key-value pairs that you identified as helpful.
+4. シグナルを抑制するキーと値のペアを、`@process.args`、`@process.group`、`@process.ancestors.comm`、または `@process.ancestors.args` などの共通のキーで特定することができるようになります。
+5. ルールエディターでルールを開き、**Exclude benign activity with suppression queries** (抑制クエリを使用した良性アクティビティを除外する) で 役に立つと特定したキーと値のペアのリストを追加します。
 
-For example, suppose you have a `Java process spawned shell/utility` rule that you want to suppress for the following combination of attributes:
+例えば、`Java process spawned shell/utility` (Java プロセスが生成したシェル/ユーティリティ) というルールがあり、次のような属性の組み合わせで抑制したいとします。
 - `@process.args:+x`
 - `@process.executable.group:exec`
 - `@process.ancestors.executable.comm:root`
 - `@process.ancestors.executable.args:init`
 
-Enter these key values under **This rule will not generate a signal if there is a match** to suppress undesired signals.
+**This rule will not generate signal if there is match** (このルールは、一致がある場合、シグナルを発生させません) にこれらのキー値を入力し、不要なシグナルを抑制します。
 
-If, on the other hand, you want to fire signals under specific conditions by identifying the right set of attributes, specify the combination **Only generate a signal if there is a match**.
+一方、正しい属性セットを識別して特定の条件でシグナルを発生させたい場合は、**Only generate a signal if there is a match** (一致がある場合、シグナルのみを発生させる) の組み合わせを指定します。
 
 

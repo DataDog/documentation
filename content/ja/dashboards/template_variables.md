@@ -1,28 +1,28 @@
 ---
+title: Template Variables
 aliases:
-- /ja/graphing/dashboards/template_variables/correlate-metrics-and-events-using-dashboard-template-variables
-- /ja/graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
-- /ja/graphing/dashboards/template_variables/
+    - /graphing/dashboards/template_variables/correlate-metrics-and-events-using-dashboard-template-variables
+    - /graphing/dashboards/template_variables/how-do-i-overlay-events-onto-my-dashboards
+    - /graphing/dashboards/template_variables/
 further_reading:
-- link: https://www.datadoghq.com/blog/template-variable-associated-values/
-  tag: ブログ
-  text: 関連するテンプレート変数を使用してダッシュボードを調整
-- link: https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/
-  tag: ブログ
-  text: 動的テンプレート変数構文でダッシュボードのワークフローを高速化
-- link: https://www.datadoghq.com/blog/template-variable-available-values/
-  tag: ブログ
-  text: テンプレート変数で利用可能な値でダッシュボードのフィルタリングを高速化
+- link: "https://www.datadoghq.com/blog/template-variable-associated-values/"
+  tag: Blog
+  text: Use associated template variables to refine your dashboards
+- link: "https://www.datadoghq.com/blog/dynamic-template-variable-syntax-dashboards/"
+  tag: Blog
+  text: Speed up dashboard workflows with dynamic template variable syntax
+- link: "https://www.datadoghq.com/blog/template-variable-available-values/"
+  tag: Blog
+  text: Filter dashboards faster with template variable available values
 - link: /dashboards/
   tag: Documentation
-  text: Datadog でダッシュボードを作成
+  text: Create Dashboards in Datadog
 - link: /dashboards/sharing/
-  tag: ドキュメント
-  text: Datadogの外部でグラフを共有
+  tag: Documentation
+  text: Share your Graphs outside of Datadog
 - link: /dashboards/widgets/
-  tag: ドキュメント
-  text: ダッシュボードのウィジェットについて
-title: テンプレート変数
+  tag: Documentation
+  text: Discover Widgets for your Dashboard
 ---
 
 ## 概要
@@ -88,7 +88,7 @@ title: テンプレート変数
 
 **Default view** を変更するには、鉛筆アイコンをクリックしてテンプレート変数の値を更新します。次に、**Done** をクリックして保存します。他のビューで値を更新した場合は、その値を新規のビューとして保存し、元のビューを削除します。
 
-## API
+## 使用方法
 
 テンプレート変数は、ウィジェットとイベントオーバーレイに使用されます。
 
@@ -100,7 +100,7 @@ title: テンプレート変数
 
 **注**: このタイプのテンプレート変数に **Add to all** を適用すると、すべてのログ、APM、RUM ウィジェットに変数が追加されます。
 
-### 分散型トレーシング
+### ウィジェット
 
 ウィジェットを作成または編集する場合、既存のテンプレート変数が `from` フィールドにオプションとして表示されます。例えば、テンプレート変数 `environment` を構成した場合、`$environment` オプションはウィジェット内の動的変数として利用できます。
 
@@ -152,7 +152,7 @@ title: テンプレート変数
 
 **注**: 検索を実行する際に *enter* を押すと、`$region.value` がテンプレート変数ドロップダウンメニューの値に更新されます。
 
-#### 分散型トレーシング
+#### ウィジェット
 
 以下のフォーマットで、ウィジェットからテンプレート変数を使用したイベントのタイミングをオーバーレイします。
 
@@ -166,6 +166,6 @@ $<TEMPLATE_VARIABLE_NAME>
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/getting_started/tagging/#define-tags
-[2]: /ja/logs/explorer/facets/
-[3]: /ja/real_user_monitoring/explorer/?tab=facets#setup-facets-measures
+[1]: /getting_started/tagging/#define-tags
+[2]: /logs/explorer/facets/
+[3]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures

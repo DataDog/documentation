@@ -4,7 +4,7 @@
 - data stores
 - google cloud
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Google Cloud Memorystore for Redis metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_redis/"
@@ -29,9 +29,9 @@ Google Cloud Memorystore for Redis provides a fully managed in-memory data store
 
 Use the Datadog Google Cloud Platform integration to collect metrics from Google Cloud Memorystore for Redis.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
@@ -46,21 +46,21 @@ Once this is done, export your Google Cloud Memorystore for Redis logs from Goog
 3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloud_redis" >}}
 
 
-### Events
+### イベント
 
 The Google Cloud Memorystore for Redis integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Cloud Memorystore for Redis integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

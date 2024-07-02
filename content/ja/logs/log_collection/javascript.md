@@ -376,7 +376,7 @@ Options that must have a matching configuration when using the `RUM` SDK:
 | `usePartitionedCrossSiteSessionCookie` | Boolean | No       | `false` | Use a partitioned secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`. |
 | `useCrossSiteSessionCookie`            | Boolean | No       | `false` | **Deprecated**, see `usePartitionedCrossSiteSessionCookie`.                                                                                                              |
 
-## Usage
+## 使用方法
 
 ### Custom logs
 

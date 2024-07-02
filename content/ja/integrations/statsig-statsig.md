@@ -26,7 +26,7 @@
 "categories":
 - configuration & deployment
 - marketplace
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -90,42 +90,42 @@
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## Overview
+## 概要
 
-[Statsig][1] helps companies safely A/B test features in production before rolling them out, avoiding product debates and costly ship mistakes. But what makes Statsig unique is that by simply logging events, experiments are run automatically, showing you the impact of all new features without extra configuration. Other platforms make it difficult to know how a feature is performing, requiring you to create metrics, calculate sample sizes and segment users for every experiment you want to run. Statsig is different: we automate the grunt work away such that A/B tests are always running, automatically, and you will always know how your features are performing.
+[Statsig][1] を使用すると、機能のリリース前に安全に A/B テストを実施し、製品に関する議論や納品ミスによるコストロスを削減できます。さらに、Statsig はイベントのログを作成するだけで試験が自動的に実行され、追加のコンフィギュレーションなしですべての新機能による影響が表示されるという点が特徴です。他のプラットフォームでは、実行するそれぞれの試験についてメトリクスを作成しサンプルサイズおよびセグメントのユーザーを計算する必要があるため、機能のパフォーマンスの確認が困難ですが、Statsig なら面倒な作業を省いて自動的に A/B テストが常に実行され、機能のパフォーマンスを常時確認できます。
 
-As a team of former Facebook engineers, we created Statsig to give everyone the same infrastructure that enables hundreds of teams to launch thousands of features with precision.
+Facebook のエンジニア経験者からなるチームにより、さまざまなチームが数千の機能を正確にローンチできる同等のインフラストラクチャーを提供できるよう、Statsig が作成されました。
 
-This offering in the Datadog Marketplace provides access to Statsig's platform. If you are already a Statsig customer, you can connect your account to Datadog with the [Datadog Statsig integration][2] to set up the integration.
+Datadog Marketplace の製品には、Statsig のプラットフォームへのアクセスが含まれています。すでに Statsig をご利用の場合は、[Datadog Statsig インテグレーション][2]で アカウントを Datadog に接続してインテグレーションをセットアップできます。
 
 {{< img src="marketplace/statsig-statsig/images/statsig_pulse.png" alt="Statsig Pulse" >}}
 
 {{< img src="marketplace/statsig-statsig/images/statsig_gates.png" alt="Statsig Gates" >}}
 
-{{< img src="marketplace/statsig-statsig/images/statsig_metrics.png" alt="Statsig Metrics" >}}
+{{< img src="marketplace/statsig-statsig/images/statsig_metrics.png" alt="Statsig メトリクス" >}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-See [metadata.csv][3] for a list of metrics provided by this integration.
+このインテグレーションによって提供されるメトリクスのリストについては、[metadata.csv][3] を参照してください。
 
-### Events
+### イベント
 
-The Statsig integration sends configuration change events on Statsig to Datadog. For instance, new or updated feature gates or new integrations enabled.
+Statsig インテグレーションにより、Statsig でのコンフィギュレーション変更イベントが Datadog に送信されます（たとえば、新規または更新された機能ゲートまたは新しいインテグレーションが有効になった時）。
 
-## Support
+## サポート
 
-For support or feature requests, contact Statsig Support through the following channels:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Statsig サポートにお問い合わせください。
 
-- Email: [support@statsig.com][4] 
-- Support: [Statsig][5]
+- メール: [support@statsig.com][4] 
+- サポート: [Statsig][5]
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor feature releases with Statsig's offering in the Datadog Marketplace][6]
+- [Datadog マーケットプレイスの Statsig の提供とモニター機能のリリース][6]
 
 [1]: https://www.statsig.com
 [2]: https://app.datadoghq.com/integrations/statsig
@@ -135,4 +135,4 @@ Additional helpful documentation, links, and articles:
 [6]: https://www.datadoghq.com/blog/feature-monitoring-statsig-datadog-marketplace/
 
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/statsig-statsig" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/statsig-statsig" target="_blank">こちらをクリック</a>してください。

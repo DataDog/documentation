@@ -24,7 +24,7 @@
 - "configuration & deployment"
 - "notifications"
 - "event management"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/split/README.md"
 "display_on_public_website": true
@@ -74,7 +74,7 @@ Integrate Split with Datadog to:
 
 To enrich Real User Monitoring (RUM) data with your Split feature flags for visibility into performance and behavioral changes, see the [Split-RUM integration page][3].
 
-## Setup
+## セットアップ
 
 - **In Datadog**: Create an API Key <span class="hidden-api-key">\${api_key}</span>
 
@@ -92,21 +92,21 @@ Split data should be flowing into Datadog.
 
 See the [Split-RUM integration page][3] for information about setting up feature flag tracking with the RUM Browser SDK.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Split check does not include any metrics.
 
-### Events
+### イベント
 
 Push your Split listing/de-listing events into your [Datadog Event Stream][6].
 
-### Service Checks
+### サービスチェック
 
 The Split check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

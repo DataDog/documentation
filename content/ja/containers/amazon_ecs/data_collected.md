@@ -14,29 +14,29 @@ further_reading:
   text: Collect ECS metrics
 ---
 
-## Data collected
+## データ収集
 
-### Metrics
+### メトリクス
 
-Amazon ECS on EC2 is a container management service for Docker containers running on EC2 instances. Metrics collected by the Agent for Amazon ECS:
+Amazon ECS on EC2 は、EC2 インスタンス上で動作する Docker コンテナ向けのコンテナ管理サービスです。Agent for Amazon ECS によって収集されたメトリクス:
 
 {{< get-metrics-from-git "amazon_ecs" >}}
 
-Metrics collected by the Agent when deployed in a Docker container also include the same metrics collected by the Docker integration. See the [Docker integration metrics][1] for a complete list of metrics.
+Docker コンテナでのデプロイ時に Agent により収集されたメトリクスにも Docker インテグレーションにより収集されたものと同じメトリクスが含まれます。すべてのメトリクスのリストは、[Docker のインテグレーションメトリクス][1]を参照してください。
 
 Metrics prefixed with `ecs.containerinsights.*` can be collected by enabling **collect custom metrics** under the Metric Collection tab of the AWS Integration.
 
-**Note**: Docker metrics are tagged accordingly with the following tags: `container_name`, `task_arn`, `task_family`, `task_name`, `task_version`. No further configuration is required.
+**注**: Docker メトリクスは以下のタグに基づいてタグ付けされます: `container_name`, `task_arn`, `task_family`, `task_name`, `task_version`。追加のコンフィギュレーションは不要です。
 
-### Events
+### イベント
 
-To reduce noise, the Amazon ECS integration is automatically set up to include only events that contain the following words: `drain`, `error`, `fail`, `insufficient memory`, `pending`, `reboot`, `terminate`. See example events below:
+ノイズを減らすため、Amazon ECS インテグレーションは次の単語を含むイベントのみを収集するように自動的に設定されます。`drain`、`error`、`fail`、`insufficient memory`、`pending`、`reboot`、`terminate`。以下にイベントの例を示します。
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="Amazon ECS Events" >}}
 
-To remove this include list and receive all events from your Datadog Amazon ECS integration, reach out to [Datadog support][2].
+このリストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][2]までお問い合わせください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

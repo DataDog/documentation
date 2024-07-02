@@ -2,23 +2,23 @@
 title: "AKS Pod Component"
 ---
 
-## Overview
+## 概要
 
-You can use the AKS Pod component to represent and visualize application containers from your Azure environment with Cloudcraft.
+AKS Pod コンポーネントを使用すると、Cloudcraft で Azure 環境のアプリケーションコンテナを表現して視覚化できます。
 
-{{< img src="cloudcraft/components-azure/aks-pod/component-aks-pod-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected Azure components." responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-azure/aks-pod/component-aks-pod-diagram.png" alt="相互接続された Azure コンポーネントを示す、等角投影された Cloudcraft 図のスクリーンショット。" responsive="true" style="width:60%;">}}
 
-## Toolbar
+## ツールバー
 
-Use the toolbar to configure and customize the component. The following options are available:
+ツールバーを使用して、コンポーネントの構成とカスタマイズを行います。以下のオプションがあります。
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
+- **Color**: コンポーネント本体の塗りつぶし色とシンボルのアクセントカラーを選択します。2D ビューと 3D ビューで同じ色を使用することも、それぞれ異なる色を使用することもできます。
 
 ## API
 
-Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of an AKS Pod component:
+[Cloudcraft API][1] を使用して、プログラムでアーキテクチャ図にアクセスし、JSON オブジェクトとしてレンダリングします。以下は、AKS Pod コンポーネントの JSON オブジェクトの例です。
 
-### Schema
+### スキーマ
 
 ```json
 {
@@ -40,18 +40,18 @@ Use [the Cloudcraft API][1] to programmatically access and render your architect
 }
 ```
 
-- **type: string**. The type of component. Must be a string of value `azureakspod` for this component.
-- **id: string, uuid**. The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
-- **resourceId: string**. The globally unique identifier for the component within Azure.
-- **region: string**. The Azure region for the component. The API supports all global regions, except China.
-- **mapPos: array**. The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
-- **color: object**. The fill color for the component body.
-  - **isometric: string**. A hexadecimal color for the component body in 3D view. Defaults to `#075693`.
-  - **2d: string**. A hexadecimal color for the component body in 2D view. Defaults to `#075693`.
-- **accentColor: object**. The accent color for the component logo.
-  - **isometric: string**. A hexadecimal color for the component logo in 3D view. Defaults to `#2EC8EA`.
-  - **2d: string**. A hexadecimal color for the component logo in 2D view. Defaults to `#2EC8EA`.
-- **link: string, uri**. A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
-- **locked: boolean**. Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
+- **type: 文字列**: コンポーネントのタイプ。このコンポーネントの値 `azureakspod` の文字列でなければなりません。
+- **id: 文字列、uuid**: コンポーネントの一意な識別子。API は内部的に UUID v4 を使用しますが、任意の一意な文字列を受け付けます。
+- **resourceId: 文字列**: Azure 内のコンポーネントのグローバルに一意な識別子。
+- **region: 文字列**: コンポーネントの Azure リージョン。API は、中国を除くすべてのグローバルリージョンをサポートしています。
+- **mapPos: 配列**: ブループリント内のコンポーネントの位置。API では、一意の X 座標と Y 座標のペアを使用して位置を表現します。
+- **color: オブジェクト**: コンポーネント本体の塗りつぶし色。
+  - **isometric: 文字列**: 3D ビューでのコンポーネント本体の 16 進数カラー。デフォルトは `#075693` です。
+  - **2d: 文字列**: 2D ビューでのコンポーネント本体の 16 進数カラー。デフォルトは `#075693` です。
+- **accentColor: オブジェクト**: コンポーネントロゴのアクセントカラー。
+  - **isometric: 文字列**: 3D ビューでのコンポーネントロゴの 16 進数カラー。デフォルトは `#2EC8EA` です。
+  - **2d: 文字列**: 2D ビューでのコンポーネントロゴの 16 進数カラー。デフォルトは `#2EC8EA` です。
+- **link: 文字列、uri**: コンポーネントを別の図や外部の Web サイトにリンクする URI。`blueprint://` または `https://` の 2 つの形式のどちらかを指定します。
+- **locked: ブール値**: Web インターフェイスを通してコンポーネントの位置の変更を許可するかどうか。デフォルトは `false` です。
 
 [1]: https://developers.cloudcraft.co/

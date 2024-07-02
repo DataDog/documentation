@@ -27,9 +27,9 @@ This check collects metrics from Mesos masters for:
 
 And many more.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The installation is the same on Mesos with and without DC/OS. Run the datadog-agent container on each of your Mesos master nodes:
 
@@ -46,7 +46,7 @@ docker run -d --name datadog-agent \
 
 Substitute your Datadog API key and Mesos Master's API URL into the command above.
 
-### Configuration
+### 構成
 
 If you passed the correct Master URL when starting datadog-agent, the Agent is already using a default `mesos_master.d/conf.yaml` to collect metrics from your masters. See the [sample mesos_master.d/conf.yaml][3] for all available configuration options.
 
@@ -87,21 +87,21 @@ To enable logs for Kubernetes environments, see [Kubernetes Log Collection][5].
 
 In Datadog, search for `mesos.cluster` in the Metrics Explorer.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "mesos_master" >}}
 
 
-### Events
+### イベント
 
 The Mesos-master check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "mesos_master" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 
@@ -129,13 +129,13 @@ And many more.
 
 This check also creates a service check for every executor task.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 See [Installing Datadog on Mesos with DC/OS][7] to install the Datadog Agent on each Mesos agent node with the DC/OS web UI.
 
-### Configuration
+### 構成
 
 #### DC/OS
 
@@ -258,21 +258,21 @@ Under the Services tab in the DC/OS web UI you should see the Datadog Agent show
 
 If you are not using DC/OS, then datadog-agent is in the list of running applications with a healthy status. In Datadog, search for `mesos.slave` in the Metrics Explorer.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "mesos_slave" >}}
 
 
-### Events
+### イベント
 
 The Mesos-slave check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "mesos_slave" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

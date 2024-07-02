@@ -32,7 +32,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/impala/README.md"
 "display_on_public_website": true
@@ -68,38 +68,38 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Impala][1] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [Impala][1] を監視します。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The Impala check is included in the [Datadog Agent][3] package.
-No additional installation is needed on your server.
+Impala チェックは [Datadog Agent][3] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-1. Edit the `impala.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Impala performance data. See the [sample impala.d/conf.yaml][4] for all available configuration options.
+1. Impala のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `impala.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル impala.d/conf.yaml][4] を参照してください。
 
-Here is an example monitoring a daemon:
+ここでは、デーモンを監視する例を示します。
 
 ```yaml
 init_config:
 
 instances:
-  ## @param service_type - string - required
-  ## The Impala service you want to monitor. Possible values are `daemon`, `statestore`, and `catalog`.
+  ## @param service_type - 文字列 - 必須
+  ## 監視したい Impala サービス。使用可能な値は、`daemon`、`statestore`、`catalog` です。
   #
 - service_type: daemon
 
-  ## @param openmetrics_endpoint - string - required
-  ## The URL exposing metrics in the OpenMetrics format.
+  ## @param openmetrics_endpoint - 文字列 - 必須
+  ## OpenMetrics 形式のメトリクスを公開する URL。
   ##
-  ## The default port for the services are:
+  ## サービスのデフォルトポートは以下の通りです。
   ## - Daemon: 25000
   ## - Statestore: 25010
   ## - Catalog: 25020
@@ -107,7 +107,7 @@ instances:
   openmetrics_endpoint: http://%%host%%:25000/metrics_prometheus
 ```
 
-You can also monitor several services at the same time with the same agent:
+また、同じ Agent で複数のサービスを同時に監視することも可能です。
 
 ```yaml
 init_config:
@@ -126,37 +126,37 @@ instances:
   openmetrics_endpoint: http://<CATALOG-IP>:25020/metrics_prometheus
 ```
 
-2. [Restart the Agent][5].
+2. [Agent を再起動します][5]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][6] and look for `impala` under the Checks section.
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `impala` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "impala" >}}
 
 
-### Events
+### イベント
 
-The Impala integration does not include any events.
+Impala インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "impala" >}}
 
 
-### Logs
+### ログ
 
-The Impala integration can collect logs from the Impala services and forward them to Datadog. 
+Impala インテグレーションは、Impala のサービスからログを収集し、Datadog に転送することができます。
 
-1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Uncomment and edit the logs configuration block in your `impalad.d/conf.yaml` file. Here's an example with the daemon process:
+2. `impalad.d/conf.yaml` ファイルのログ構成ブロックのコメントを解除して編集します。ここでは、デーモンプロセスでの例を示します。
 
    ```yaml
    logs:
@@ -198,11 +198,11 @@ The Impala integration can collect logs from the Impala services and forward the
          name: new_log_start_with_log_level_and_date
    ```
 
-See [the example configuration file][9] on how to collect all logs.
+すべてのログを収集する方法については、[コンフィギュレーションファイルの例][9]を参照してください。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][10].
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
 [1]: https://impala.apache.org

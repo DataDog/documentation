@@ -4,60 +4,60 @@ description: "Getting started with Datadog for Sales & Services Partners"
 private: true
 ---
 
-Datadog provides insights into your clients' hybrid cloud infrastructures and applications. The intuitive UI and powerful API allows you to onboard, provision, and manage your clients' diverse environments, while establishing data security in each account.
+Datadog は、クライアントのハイブリッドクラウドインフラストラクチャーとアプリケーションに対するインサイトを提供します。直感的な UI と強力な API により、クライアントの多様な環境のオンボード、プロビジョニング、管理を実現し、各アカウントのデータセキュリティを確立することができます。
 
-## Getting started
+## はじめに
 
-Learn about best practices and get started monitoring your clients' environments.
+ベストプラクティスを学び、クライアント環境の監視を始めましょう。
 
-- [Laying the Groundwork][1]: Contains information about how to get started and which key decisions you should make at the very beginning.
-- [Data Intake][2]: Explains how data can be fed into Datadog and which prerequisites need to be met in your environments.
-- [Delivering Value][3]: Walks through recommended steps after you have data flowing into Datadog.
+- [基礎固め][1]: どのように始めるか、最初の段階でどのような重要な決定を下すかについての情報が記載されています。
+- [データの取り込み][2]: Datadog にデータを取り込む方法と、環境で満たす必要のある前提条件について説明します。
+- [価値の提供][3]: Datadog にデータを流した後の推奨ステップを説明します。
 - [Billing and Usage Reporting][4]: Covers monitoring individual client and aggregate usage of the Datadog platform in single and multi-organization account setups.
 
-## Partner Sales Enablement guide
+## パートナーセールスイネーブルメントガイド
 
-Consult the [Partner Sales Enablement guide][5] for a training roadmap that prepares you for the Datadog sales engineering process.
-## Staying up to date with Datadog
+Datadog のセールスエンジニアリングプロセスに備えるためのトレーニングロードマップについては、[パートナーセールスイネーブルメントガイド][5]を参照してください。
+## Datadog の最新情報
 
-There are multiple ways you can stay up to date with Datadog and learn about new features:
-- You can [view the release notes][6] on the Datadog site
-- As a Datadog Partner Network member, you have exclusive access to the [Datadog Partner Network portal][7]. There you will find:
-  - Collateral and training materials
-  - The Quarterly DPN Live Briefing Webinar: view the recorded sessions in the Asset library or watch for the invite in your inbox.
-- Datadog shares the many lessons learned about scalable, distributed systems in the cloud with the [Datadog on...][8] series.
+Datadog の最新情報を入手し、新機能を知るための方法は複数あります。
+- Datadog サイトで[リリースノートを見る][6]ことができます
+- Datadog Partner Network のメンバーは、[Datadog Partner Network ポータル][7]に特別にアクセスすることができます。そこには、以下のものがあります。
+  - 資料・トレーニング教材
+  - 四半期ごとの DPN ライブブリーフィングウェビナー: 録画セッションをアセットライブラリで見るか、受信トレイで招待状を確認します。
+- Datadog は、クラウドにおけるスケーラブルな分散システムについて学んだ多くの教訓を、[Datadog on...][8] シリーズで紹介しています。
 
-### Status information
+### ステータス情報
 
-Datadog provides the following resources for you to get up-to-date service status information:
-- US region: [https://status.datadoghq.com][9]
-- EU region: [https://status.datadoghq.eu][10]
+Datadog は、最新のサービスステータス情報を取得するために、以下のリソースを提供しています。
+- US 地域: [https://status.datadoghq.com][9]
+- EU 地域: [https://status.datadoghq.eu][10]
 
-Subscribe to this page to receive notifications about status changes.
+このページを購読すると、ステータス変更に関するお知らせを受け取ることができます。
 
-If you would like to see the status of third party integrations you might have enabled with Datadog, see: [https://datadogintegrations.statuspage.io][11].
+Datadog で有効化したサードパーティインテグレーションのステータスを確認したい場合は、[https://datadogintegrations.statuspage.io][11] を参照してください。
 
-### Other resources
+### その他のリソース
 
-Explore other important resources to stay up to date with Datadog:
+Datadog の最新情報を入手するためのその他の重要なリソースをご覧ください。
 
-{{< whatsnext desc="GitHub repositories" >}}
-    {{< nextlink href="https://github.com/DataDog/datadog-agent/" >}}Datadog Agent: The source code of the Datadog Agent version 7 and version 6. {{< /nextlink >}}
-    {{< nextlink href="https://github.com/DataDog/integrations-core/" >}}Integrations core: Agent Integrations that Datadog officially develops and supports.{{< /nextlink >}}
-    {{< nextlink href="https://github.com/DataDog/integrations-extras/" >}}Integrations extras: Community-maintained Datadog Integrations.{{< /nextlink >}}
-    {{< nextlink href="https://github.com/DataDog/Miscellany" >}}Miscellany: Miscellaneous scripts and tools from Datadog.{{< /nextlink >}}
+{{< whatsnext desc="GitHub リポジトリ" >}}
+    {{< nextlink href="https://github.com/DataDog/datadog-agent/" >}}Datadog Agent: Datadog Agent バージョン 7 とバージョン 6 のソースコード。 {{< /nextlink >}}
+    {{< nextlink href="https://github.com/DataDog/integrations-core/" >}}インテグレーションコア: Datadog が公式に開発・サポートする Agent インテグレーション。{{< /nextlink >}}
+    {{< nextlink href="https://github.com/DataDog/integrations-extras/" >}}インテグレーションエクストラ: コミュニティが管理する Datadog インテグレーション。{{< /nextlink >}}
+    {{< nextlink href="https://github.com/DataDog/Miscellany" >}}その他: Datadog の各種スクリプトとツール。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Datadog blog and social media" >}}
-    {{< nextlink href="www.datadoghq.com/blog/" >}}Datadog blog{{< /nextlink >}}
+{{< whatsnext desc="Datadog のブログとソーシャルメディア" >}}
+    {{< nextlink href="www.datadoghq.com/blog/" >}}Datadog ブログ{{< /nextlink >}}
     {{< nextlink href="https://www.linkedin.com/company/datadog/" >}}LinkedIn{{< /nextlink >}}
     {{< nextlink href="https://twitter.com/datadoghq" >}}Twitter{{< /nextlink >}}
     {{< nextlink href="https://www.facebook.com/datadoghq/" >}}Facebook{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="YouTube" >}}
-    {{< nextlink href="https://www.youtube.com/user/DatadogHQ" >}}Official YouTube channel{{< /nextlink >}}
-    {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE" >}}Tips and Tricks playlist{{< /nextlink >}}
+    {{< nextlink href="https://www.youtube.com/user/DatadogHQ" >}}YouTube 公式チャンネル{{< /nextlink >}}
+    {{< nextlink href="https://www.youtube.com/playlist?list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE" >}}ヒントとコツのプレイリスト{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Dash Conferences playlists" >}}

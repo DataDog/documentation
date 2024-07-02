@@ -24,7 +24,7 @@
 - aws
 - cloud
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/appkeeper/README.md"
 "display_on_public_website": true
@@ -64,7 +64,7 @@
 
 SIOS AppKeeper automatically restarts failed Amazon EC2 services when notifications are received from Datadog, removing the need for expensive manual intervention. When Datadog triggers an alert, it restarts the EC2 service using the AppKeeper Recovery API.
 
-## Setup
+## セットアップ
 
 ### Get the SIOS AppKeeper API key
 
@@ -103,13 +103,13 @@ Results of recoveries by AppKeeper are listed in AppKeeper's GUI.
 
 For more information see the [AppKeeper's Integration documentation][7].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 See [metadata.csv][8] for a list of metrics provided by this integration.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

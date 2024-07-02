@@ -26,7 +26,7 @@
 "categories":
 - containers
 - kubernetes
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/README.md"
 "display_on_public_website": true
@@ -69,13 +69,13 @@
 
 This check monitors [Kube_apiserver_metrics][2].
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Kube_apiserver_metrics check is included in the [Datadog Agent][3] package, so you do not need to install anything else on your server.
 
-### Configuration
+### 構成
 
 The main use case to run the kube_apiserver_metrics check is as a Cluster Level Check.
 See the documentation for [Cluster Level Checks][4].
@@ -102,21 +102,21 @@ Finally, if you run the Datadog Agent on the master nodes, you can rely on [Auto
 
 [Run the Agent's status subcommand][9] and look for `kube_apiserver_metrics` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "kube_apiserver_metrics" >}}
 
 
-### Service Checks
+### サービスチェック
 
 Kube_apiserver_metrics does not include any service checks.
 
-### Events
+### イベント
 
 Kube_apiserver_metrics does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][11].
 

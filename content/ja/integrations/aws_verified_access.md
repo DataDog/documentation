@@ -5,7 +5,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Collect AWS Verified Access logs."
 "doc_link": "https://docs.datadoghq.com/integrations/aws_verified_access/"
@@ -33,9 +33,9 @@
 With AWS Verified Access, you can provide secure access to your corporate applications without requiring the use of a virtual private network (VPN). Verified Access evaluates each application request and helps ensure that users can access each application only when they meet the specified security requirements.
 
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -68,13 +68,13 @@ Go to the [Log Explorer][5] to start exploring your logs.
 
 For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda function][6].
 
-## Data collected
+## データ収集
 
-### Metrics
+### メトリクス
 
 The AWS Verified Access integration does not include any metric collection.
 
-### Events
+### イベント
 
 The AWS Verified Access integration does not include any events.
 
@@ -82,11 +82,11 @@ The AWS Verified Access integration does not include any events.
 
 The AWS Verified Access integration includes [Verified Access logs][7]. 
 
-### Service Checks
+### サービスチェック
 
 The AWS Verified Access integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

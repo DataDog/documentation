@@ -24,7 +24,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - iot
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/nvidia_jetson/README.md"
 "display_on_public_website": true
@@ -61,14 +61,14 @@
 This check monitors an [Nvidia Jetson][1] board.
 It reports the metrics collected from `tegrastats`.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Nvidia Jetson check is included in the [Datadog Agent][2] package.
 No additional installation is needed on your server.
 
-### Configuration
+### 構成
 
 1. Create a `jetson.d/conf.yaml` file in the `conf.d/` folder at the root of your
    Agent's configuration directory to start collecting your Jetson performance data.
@@ -80,9 +80,9 @@ No additional installation is needed on your server.
 
 Run the [Agent's status subcommand][5] and look for `jetson` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "nvidia_jetson" >}}
 
 
@@ -94,15 +94,15 @@ Some metrics are reported only if `use_sudo` is set to true:
 - `nvidia.jetson.gpu.freq`
 - `nvidia.jetson.cpu.freq`
 
-### Service Checks
+### サービスチェック
 
 The Nvidia Jetson integration does not include any service checks.
 
-### Events
+### イベント
 
 The Nvidia Jetson integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

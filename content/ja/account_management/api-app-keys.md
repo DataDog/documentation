@@ -8,121 +8,121 @@ algolia:
   tags: [api key]
 ---
 
-## API keys
+## API キー
 
-API keys are unique to your organization. An [API key][1] is required by the Datadog Agent to submit metrics and events to Datadog.
+API キーは組織に固有で、Datadog Agent でメトリクスとイベントを Datadog に送信するには、[API キー][1]が必要です。
 
-## Application keys
+## アプリケーションキー
 
-[Application keys][2], in conjunction with your organization's API key, give users access to Datadog's programmatic API. Application keys are associated with the user account that created them and by default have the permissions and scopes of the user who created them.
+組織の API キーと組み合わせて[アプリケーションキー][2]を使用すると、ユーザーは Datadog のプログラム API に完全にアクセスできます。アプリケーションキーは、これを作成したユーザーアカウントに関連付けられており、デフォルトで作成したユーザーのアクセス許可とスコープを備えています。
 
-### Scopes 
+### スコープ
 
-To better protect and secure your applications, you can specify [authorization scopes][3] for your application keys to define more granular permissions and minimize the access that applications have to your Datadog data. This gives you fine-grained access control over your applications and minimizes security vulnerabilities by limiting extraneous access. For example, an application that only reads dashboards does not need admin rights to manage users or delete any of your organization's data.
+アプリケーションの保護と安全性を高めるために、アプリケーションキーに[認可スコープ][3]を指定して、より細かい権限を定義し、アプリケーションが Datadog のデータにアクセスできる範囲を最小化することが可能です。これにより、アプリケーションに対するきめ細かなアクセス制御が可能になり、余計なアクセスを制限することでセキュリティの脆弱性を最小限に抑えることができます。例えば、ダッシュボードを読むだけのアプリケーションには、ユーザーを管理したり、組織のデータを削除したりするための管理者権限は必要ありません。
 
-The recommended best practice for scoping application keys is to grant your keys the minimal privileges and least permissions necessary for an application to function as intended. Scoped application keys are granted only the scopes specified by the user, and no other additional permissions. While you can modify the authorization scopes of your application keys anytime, consider how those changes may impact the existing functionality or access of your application. 
+アプリケーションキーのスコープに関する推奨されるベストプラクティスは、アプリケーションが意図したとおりに機能するために必要な最小限の特権と最小限の権限をキーに与えることです。スコープされたアプリケーションキーには、ユーザーが指定したスコープのみが与えられ、それ以外の追加的な許可は与えられません。アプリケーションキーの認可スコープはいつでも変更できますが、 その変更がアプリケーションの既存の機能やアクセスにどのような影響を及ぼすかを考慮してください。
 
-**Notes:**
+**注:**
 
-- Users or service accounts with [permissions][4] to create or edit application keys can scope application keys. A user must have the `user_app_keys` permission to scope their own application keys, or the `org_app_keys_write` permission to scope application keys owned by any user in their organization. A user must have the `service_account_write` permission to scope application keys for service accounts.
-- Application owners cannot authorize an application if they are missing any required permissions, even if they scope an application key with authorization scopes that they do not have.
-- Errors due to missing permissions when writing application keys or authorizing applications will display a `403 Forbidden` error. More information about various error responses can be found in the [Datadog API][5] documentation.
-- If a user's role or permissions change, authorization scopes specified for their application keys remain unchanged.
+- アプリケーションキーの作成または編集の[権限][4]を持つユーザーまたはサービスアカウントは、アプリケーションキーのスコープを行うことができます。ユーザーは自分のアプリケーションキーをスコープするためには `user_app_keys` 権限、または自分の組織内の任意のユーザーが所有するアプリケーションキーをスコープするためには `org_app_keys_write` 権限が必要です。サービスアカウントのアプリケーションキーをスコープするには、`service_account_write` 権限が必要です。
+- アプリケーションの所有者は、必要な権限が不足している場合、自分が持っていない認可スコープでアプリケーションキーをスコープしても、アプリケーションを認可することができません。
+- アプリケーションキーの書き込みやアプリケーションの認可時に権限が不足していることによるエラーは、`403 Forbidden` エラーを表示します。様々なエラーレスポンスについての詳細は、[Datadog API][5] のドキュメントを参照してください。
+- ユーザーのロールや権限が変更されても、アプリケーションキーに指定された認可スコープは変更されません。
 
-## Client tokens
+## クライアントトークン
 
-For security reasons, API keys cannot be used to send data from a browser, mobile, or TV app, as they would be exposed client-side. Instead, end user facing applications use client tokens to send data to Datadog.
+セキュリティ上の理由から、API キーはクライアント側で公開されるため、ブラウザ、モバイル、TV アプリからのデータ送信には使用できません。その代わりに、エンドユーザー向けアプリケーションでは、クライアントトークンを使用して Datadog にデータを送信します。
 
- Several types of clients submit data that requires a client token, including the following examples:
+以下の例を含む、いくつかのタイプのクライアントが、クライアントトークンを必要とするデータを送信します。
 - The log collectors for [web browser][6], [Android][7], [iOS][8], [React Native][9], [Flutter][10], and [Roku][11] submit logs.
 - [Real User Monitoring][12] applications submit events and logs.
 
-Client tokens are unique to your organization. To manage your client tokens, go to **Organization Settings**, then click the **Client Tokens** tab.
+クライアントトークンは、組織に固有のものです。クライアントトークンを管理するには、**Organization Settings** に移動し、**Client Tokens** タブをクリックします。
 
-**Note**: When a user who created a client token is deactivated, the client token remains active.
+**注**: クライアントトークンを作成したユーザーが非アクティブ化されても、クライアントトークンはアクティブなままです。
 
-## Add an API key or client token
+## API キーまたはクライアントトークンを追加する
 
-To add a Datadog API key or client token:
+Datadog API キーまたはクライアントトークンを追加するには
 
 1. Navigate to Organization settings, then click the [**API keys**][1] or [**Client Tokens**][13] tab.
-2. Click the **New Key** or **New Client Token** button, depending on which you're creating.
-3. Enter a name for your key or token.
-4. Click **Create API key** or **Create Client Token**.
+2. 作成するものに応じて、**New Key** (新しいキー) または **New Client Token** (新しいクライアントトークン) ボタンをクリックします。
+3. キーまたはトークンの名前を入力します。
+4. **Create API key** (API キーの作成) または **Create Client Token** (クライアントトークンの作成) をクリックします。
 
 {{< img src="account_management/api-key.png" alt="Navigate to the API Keys page for your organization in Datadog" style="width:80%;" >}}
 
-**Notes:**
+**注:**
 
-- Your org must have at least one API key and at most 50 API keys.
-- Key names must be unique across your organization.
+- 組織には、少なくとも最低 1 つ、最大 50 の API キーが必要です。
+- キー名は、オーガニゼーション全体で一意である必要があります。
 
-## Remove API keys or client tokens
+## API キーまたはクライアントトークンを削除する
 
-To remove a Datadog API key or client token, navigate to the list of keys or tokens, and click the **trash can** icon with **Revoke** next to the key or token you want to remove.
+Datadog API キーまたはクライアントトークンを削除するには、キーまたはトークンのリストに移動し、削除するキーまたはトークンの横にある **Revoke** のある**ごみ箱**アイコンをクリックします。
 
-## Add application keys
+## アプリケーションキーを追加する
 
 To add a Datadog application key, navigate to [**Organization Settings** > **Application Keys**][2]. If you have the [permission][4] to create application keys, click **New Key**.
 
 {{< img src="account_management/app-key.png" alt="Navigate to the Application Keys page for your organization in Datadog" style="width:80%;" >}}
 
-**Notes:**
+**注:**
 
-- Application key names cannot be blank.
+- アプリケーションキー名を空白にすることはできません。
 
-## Remove application keys
+## アプリケーションキーを削除する
 
 To remove a Datadog application key, navigate to [**Organization Settings** > **Application Keys**][2]. If you have the [permission][4] to create and manage application keys, you can see your own keys and click **Revoke** next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and click **Revoke** next to it.
 
-## Scope application keys 
+## アプリケーションキーのスコープ
 
 To specify [authorization scopes][3] for application keys, [make a request to the Datadog API][5] or the UI to create or edit an application key. Scopes can be specified for application keys owned by [the current user][14] or a [service account][15]. If this field is unspecified, application keys by default have all the same scopes and permissions as the user who created them.
 
-**Notes:**
+**注:**
 
-- Scope names are case-sensitive.
+- スコープ名の大文字と小文字は区別されます。
 
-## Using multiple API keys
+## 複数の API キーの使用
 
-Consider setting up multiple API keys for your organization. For example, use different API keys for each of your various deployment methods: one for deploying an Agent on Kubernetes in AWS, one for deploying it on prem with Chef, one for Terraform scripts that automate your dashboards or monitors, and one for developers deploying locally.
+組織に複数の API キーを設定することを検討します。たとえば、デプロイ方法ごとに異なる API キーを使用します（たとえば、AWS の Kubernetes に Agent をデプロイする用、Chef を使用してオンプレミスでデプロイする用、ダッシュボードやモニターを自動化する Terraform スクリプト用、ローカルでデプロイする開発者用など）。
 
-Using multiple API keys lets you rotate keys as part of your security practice, or revoke a specific key if it's inadvertently exposed or if you want to stop using the service it's associated with.
+複数の API キーを使用することで、セキュリティ対策の一環としてキーをローテーションしたり、特定のキーが誤って公開された場合やそのキーに関連づけられたサービスを停止したい場合に取り消すことができます。
 
 If your organization needs more than the built-in limit of 50 API keys, contact [Support][16] to ask about increasing your limit.
 
-## Disabling a user account
+## ユーザーアカウントの無効化
 
-If a user's account is disabled, any application keys that the user created are revoked. Any API keys that were created by the disabled account are not deleted, and are still valid.
+ユーザーのアカウントが無効になった場合、ユーザーが作成したアプリケーションキーはすべて取り消されます。無効なアカウントによって作成された API キーは削除されず、引き続き有効です。
 
-## Transferring keys
+## キーの転送
 
 Due to security reasons, Datadog does not transfer application keys from one user to another. If you need to share an application key, use a [service account][17].
 
-## What to do if an API or Application key was exposed
+## API キーやアプリケーションキーが流出した場合の対処法
 
-If a private key has been compromised or publicly exposed, steps should be taken as quickly as possible to ensure the security of your account. Removing the file containing the key from a public site such as GitHub **does not** guarantee it was not already accessed by another party.
+プライベートキーが漏洩したり、一般に公開された場合、アカウントのセキュリティを確保するために、できるだけ早く措置を講じる必要があります。GitHub などの公開サイトからキーの入ったファイルを削除しても、それがすでに他の者によってアクセスされていないことを保証するものでは**ありません**。
 
-Follow these steps to help safeguard your account:
+以下の手順で、アカウントを保護してください。
 
-**Note:** Revoking an active key may cause an impact to your services. If the scope of usage is large or undetermined, consider steps 2-5 **before** revoking the affected key.
+**注:** 有効なキーを無効にすると、サービスに影響を与える可能性があります。使用範囲が広い場合や未確定の場合は、対象となるキーを無効にする**前に**、手順 2～5 の検討をお願いします。
 
-1. Revoke the affected key.
-2. Remove code containing the private key from any publicly accessible files:
-    - Publish the sanitized file to your public repository.
-    - Remove the sensitive data from your commit history.
-3. Create a new key.
-4. Update affected services with the new key.
-5. Review your account for any unapproved access:
-    - Users that have been recently added
-    - New resources
-    - Roles or permission changes
+1. 影響を受けるキーを無効にします。
+2. 一般にアクセス可能なファイルから、プライベートキーを含むコードを削除します。
+    - サニタイズしたファイルを公開リポジトリに公開します。
+    - コミット履歴から機密データを削除します。
+3. 新しいキーを作成します。
+4. 影響を受けるサービスを新しいキーで更新します。
+5. 未承認のアクセスがないか、アカウントを確認します。
+    - 最近追加されたユーザー
+    - 新しいリソース
+    - ロールまたは権限の変更
 
 If any unusual activity is identified, or you need additional help securing your account, contact [Datadog support][16].
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][16].
+ご不明な点は、[Datadog のサポートチーム][16]までお問合せください。
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/access/application-keys

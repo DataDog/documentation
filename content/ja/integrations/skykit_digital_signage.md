@@ -12,7 +12,7 @@
   "vendor_id": skykit
 "categories":
 - marketplace
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -79,30 +79,30 @@
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
-## Overview
+## 概要
 
-### What is Skykit
+### Skykit とは
 
-Skykit is a leading digital signage and workplace experience solution provider. We offer a comprehensive content management system that allows you to bring your real-time Datadog dashboards to your TVs, screens, or digital displays.
+Skykit は、デジタルサイネージとワークプレイスエクスペリエンスソリューションのリーディングプロバイダーです。Datadog のリアルタイムダッシュボードをテレビ、スクリーン、デジタルディスプレイに表示するための包括的なコンテンツ管理システムを提供しています。
 
-### Connecting Datadog Dashboards to Skykit
+### Datadog のダッシュボードと Skykit の接続
 
-Unlock the power of your data by sharing it across digital signage throughout your offices. When you connect your Datadog dashboards to Skykit Beam (our easy-to-use digital signage CMS), your dashboards are displayed quickly, securely, and easily on the screens you choose. Simply connect the Skykit-provided media player (1 free device during trial period) to your display, log into our CMS, and securely add your Datadog dashboard to a program. 
+オフィス内のデジタルサイネージでデータを共有し、データのパワーを引き出しましょう。Datadog のダッシュボードを使いやすいデジタルサイネージ CMS である Skykit Beam に接続すると、ダッシュボードを迅速、安全、簡単に選択したスクリーンに表示することができます。Skykit が提供するメディアプレーヤー (試用期間中は 1 台無料) をディスプレイに接続し、CMS にログインして Datadog のダッシュボードを安全にプログラムに追加するだけです。
 
-[See how Skykit works today!][1]
+[Skykit の仕組みをご覧ください。][1]
 
-## Support
+## サポート
 
-For support, feature requests, or for organizations outside of North America, contact Skykit through the following channel:
+サポート、機能リクエスト、北米以外の組織の場合は、以下のチャンネルで Skykit にお問い合わせください。
 
-- Email: [sales@skykit.com][2]
+- メール: [sales@skykit.com][2]
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Showcase dashboards securely and effortlessly with Skykit’s offering in the Datadog Marketplace][3]
-- [Getting Started with Skykit Beam and Datadog Dashboards][4]
+- [Datadog Marketplace の Skykit の製品を使ってダッシュボードを安全かつ簡単に表示する][3]
+- [Skykit Beam と Datadog ダッシュボードの概要][4]
 
 [1]: https://www.skykit.com/products/dashboards/connections/datadog-trial/
 [2]: mailto:sales@skykit.com
@@ -110,4 +110,4 @@ Additional helpful documentation, links, and articles:
 [4]: https://support.skykit.com/docs/getting-started-with-skykit-beam-and-datadog-dashboards
 
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/skykit-digital-signage-license" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/skykit-digital-signage-license" target="_blank">こちらをクリック</a>してください。

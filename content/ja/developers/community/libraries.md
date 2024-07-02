@@ -6,47 +6,47 @@ aliases:
    - /developers/libraries/
 ---
 
-## API and DogStatsD client libraries
+## API と DogStatsD クライアントライブラリ
 
-The following table lists Datadog-official and community contributed API and [DogStatsD][1] client libraries. A few libraries support both the API and DogStatsD, but most focus on one or the other.
+<mrk mid="5" mtype="seg">次の表に、Datadog 公式およびコミュニティ寄稿の[DogStatsD][1]クライアントライブラリを示します。</mrk><mrk mid="6" mtype="seg"/>
 
 {{< classic-libraries-table >}}
 
-## APM & Continuous Profiler client libraries
+## APM & Continuous Profiler クライアントライブラリ
 
-The following table lists Datadog-official and community contributed [trace][2] client libraries.
+次の表は、Datadog の公式およびコミュニティ寄稿の[トレース][2]クライアントライブラリの一覧です。
 
 {{< tracing-libraries-table >}}
 
-## Serverless client libraries
+## サーバーレスクライアントライブラリ
 
-The following table lists Datadog-official and community contributed [serverless][3] client libraries.
+次の表は、Datadog の公式およびコミュニティ寄稿の[サーバーレス][3]クライアントライブラリの一覧です。
 
 {{< serverless-libraries-table >}}
 
-## Log management client libraries
+## ログ管理クライアントライブラリ
 
-The following table lists Datadog-official and community contributed log management client libraries.
+次の表は、Datadog の公式およびコミュニティ寄稿のログ管理クライアントライブラリの一覧です。
 
 {{< log-libraries-table >}}
 
-## Datadog client community libraries
+## Datadog クライアントコミュニティライブラリ
 
-### Dashboards backup
+### ダッシュボードバックアップ
 
-Using Datadog [APIs][4], it's possible to write a script to backup your Dashboard definitions as code. See the following projects as examples of how these backups can be accomplished:
+Datadog [API][4] を使用すると、ダッシュボード定義をコードとしてバックアップするスクリプトを作成できます。このバックアップを実行する方法の例として、次のプロジェクトを参照してください。
 
-| Language   | Library          | Author          |
+| 言語   | ライブラリ          | Author          |
 |------------|------------------|-----------------|
 | JavaScript | [dog-watcher][5] | [Brightcove][6] |
 | Ruby       | [doggy][7]       | [Shopify][8]    |
 | Ruby       | [kennel][9]      | [Zendesk][10]    |
 
-### Managing monitors
+### モニターの管理
 
-There are multiple community projects available to maintain, manage, or backup monitors using the Datadog [API][4]:
+Datadog [API][4] を使用してモニターを維持、管理、またはバックアップするために利用できる複数のコミュニティプロジェクトがあります。
 
-| Language  | Library          | Author               |
+| 言語  | ライブラリ          | Author               |
 |-----------|------------------|----------------------|
 | Python    | [DogPush][11]              | [TrueAccord][12]     |
 | Ruby      | [barkdog][13]              | [codenize-tools][14] |
@@ -55,108 +55,108 @@ There are multiple community projects available to maintain, manage, or backup m
 | Terraform | [Terraform][19]            | [Terraform][20]      |
 | Terraform | [datadog-to-terraform][21] | [Intercom][22]       |
 
-## Community integrations
+## コミュニティのインテグレーション
 
 ### Ansible
 
-In addition to the official Ansible integration, the [monitoring section][23] of the [ansible-modules-extras][24] repository contains modules that interact with Datadog.
+公式の Ansible インテグレーションに加えて、[ansible-modules-extras][24] リポジトリの[監視セクション][23]には、Datadog とやり取りするモジュールが含まれています。
 
 ### Aptible
 
-Enclave delivers your metrics to a Datadog account. [Consult the dedicated Aptible help center to learn how][25].
+Enclave は Datadog アカウントにメトリクスを送信します。方法については、[専用の Aptible ヘルプセンター][25]を参照してください。
 
-### CLI management
+### CLI 管理
 
-A [set of tools][27] to backup/restore dashboards and monitors, and configure users through a command line interface.
+コマンドラインインターフェイスからダッシュボードやモニターをバックアップ/復元したり、ユーザーを構成するための[ツールセット][27]です。
 
 ### Consul
 
-Publish Consul service counts into Datadog from [DogStatsD][1] with the [Consul library][28].
+[Consul ライブラリ][28]を使用して、[DogStatsD][1] から Datadog に Consul サービス数を公開できます。
 
 ### Dogscaler
 
-Scale up auto-scale groups based on the results of a Datadog query with [Dogscaler][29].
+[Dogscaler][29] を使用すると、Datadog クエリの結果に基づいて自動スケーリンググループをスケールアップできます。
 
 ### FreeSwitch
 
-This is for a [FreeSwitch ESL][30] application to export statistics to Datadog using the DogStatsD API and is written by [WiMacTel][31].
+[FreeSwitch ESL][30] アプリケーションが DogStatsD API を使用して Datadog へ統計情報をエクスポートするために使用します。開発元は [WiMacTel][31] です。
 
 ### Heroku
 
-Heroku emits dyno metrics through logs. To convert these logs into metrics and send them to Datadog, use one of the following log drains. To send your Heroku logs to Datadog, see [Collect Heroku logs][34].
+Heroku は、dyno メトリクスをログから生成します。ログをメトリクスに変換して Datdog に送信するために、以下のログドレインのいずれかを使用します。Heroku のログの Datadog への送信方法については、[Heroku ログの収集][34]を参照してください。
 
-* [Heroku Datadog Log Drain][35] written in Nodejs by [Oz][36].
-* [Heroku Datadog Log Drain][37] written in Go by [Apiary][38].
+* [Oz][36] による Nodejs 版 [Heroku Datadog ログドレイン][35]
+* [Apiary][38] による Go 版 [Heroku Datadog ログドレイン][37]
 
-To use the PHP tracer or profiler on Heroku, use the following buildpack.
+Heroku で PHP トレーサーやプロファイラーを使用するには、以下のビルドパックを使用します。
 
-* [Heroku Datadog PHP Tracer and Profiler Buildpack][65] maintained by [SpeedCurve][66].
+* [SpeedCurve][66] によって保守されている [Heroku Datadog PHP Tracer and Profiler Buildpack][65]。
 
 ### K6
 
-K6, a load and performance regression testing tool developed by Load Impact, can send test results to Datadog using [DogStatsD][1]. To enable this feature, see [the tutorial][40].
+Load Impact が開発した負荷およびパフォーマンスの回帰テストツールである K6 は、[DogStatsD][1] を使用してテスト結果を Datadog に送信できます。この機能を有効にするには、[チュートリアル][40]を参照してください。
 
 ### LaunchDarkly
 
-A [LaunchDarkly][41] webhook handler that records changes as Datadog events.
+変更を Datadog イベントとして記録する [LaunchDarkly][41] webhook ハンドラー。
 
-### Logstash output
+### Logstash 出力
 
-* [Logstash output for Datadog][42]
-* [Logstash output for DogStatsD][43]
+* [Datadog の Logstash 出力][42]
+* [DogStatsD の Logstash 出力][43]
 
 ### Moogsoft
 
-A Moogsoft [listener][44] that ingests Datadog notifications.
+Datadog 通知を取り込む Moogsoft [リスナー][44]。
 
 ### NGINX LUA
 
-* Emit [custom metrics][45] directly from NGINX configurations using the [nginx_lua_datadog][46] module in your LUA scripts.
-* [lua-resty-dogstatsd][47] is an extension developed by [mediba inc][48] (forked by [Dailymotion][49]). It enables emitting metrics, events, and service checks through the [DogStatsD][1] protocol. `lua-resty-dogstatsd` is released as GPLv3 and relies on the Nginx cosocket API.
+* LUA スクリプトの [nginx_lua_datadog][46] モジュールを使用して、NGINX 構成から[カスタムメトリクス][45]を直接送信します。
+* [lua-resty-dogstatsd][47] は、[mediba inc][48] によって開発された拡張機能です ([Dailymotion][49] によってフォークされています)。[DogStatsD][1] プロトコルを介して、メトリクス、イベント、サービスチェックを発行できます。`lua-resty-dogstatsd` は GPLv3 としてリリースされ、Nginx コソケット API に依存しています。
 
 ### OpenVPN
 
-* Send OpenVPN [licensing information][51] to Datadog.
+* OpenVPN [ライセンス情報][51]を Datadog に送信します。
 
 ### Phusion Passenger
 
-Send health metrics from Phusion's Passenger server using the [passenger-datadog-monitor][52] written by [Stevenson Jean-Pierre][53]
+[Stevenson Jean-Pierre][53] が作成した [passenger-datadog-monitor][52] を使用して、Phusion の Passenger サーバーからヘルスメトリクスを送信します。
 
 ### Pid-stats
 
-This [library][54] allows you to generate process information from StatsD, given pid files. It was created by [GitterHQ][55].
+この[ライブラリ][54]を使用すると、pid ファイルを指定して StatsD からプロセス情報を生成できます。これは [GitterHQ][55] によって作成されました。
 
 ### Pulumi
-The Datadog [resource provider][67] for Pulumi lets you configure Datadog resources.
+Pulumi 用の Datadog [リソースプロバイダー][67]を使用すると、Datadog リソースを構成することができます。
 
 ### SaltStack
 
 * [Datadog SaltStack Formula][56]
-* [Datadog SaltStack][57] written by [Luca Cipriani][58].
+* [Luca Cipriani][58] が作成した [Datadog SaltStack][57]。
 
 ### Sensu
 
-Use these Sensu [handlers][59] to automatically send both metrics and events to Datadog.
+これらの Sensu [ハンドラー][59]を使用して、メトリクスとイベントの両方を Datadog に自動的に送信します。
 
 ### StackStorm
 
-This StackStorm Datadog [integration pack][60] supplies action integration for Datadog.
+この StackStorm Datadog [インテグレーションパック][60]は、Datadog のアクションインテグレーションを提供します。
 
 ### Winston
 
-A Winston Datadog [transport][61].
+Winston Datadog [転送][61]。
 
-## Community Agent ports
+## コミュニティ Agent ポート
 
 ### FreeBSD
 
-[FreeBSD dd-agent port][62]
+[FreeBSD dd-agent ポート][62]
 
 ### NixOS
 
 [dd-agent nixpkg][63]
 
-If you've written a Datadog library and would like to add it to this page, send an email to [opensource@datadoghq.com][64].
+Datadog ライブラリを作成し、このページに追加する場合は、[opensource@datadoghq.com][64] にメールを送信してください。
 
 [1]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [2]: /tracing/

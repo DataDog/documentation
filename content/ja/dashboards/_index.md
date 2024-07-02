@@ -1,42 +1,40 @@
 ---
+title: Dashboards
 aliases:
-- /ja/guides/templating/
-- /ja/graphing/dashboards/
-- /ja/guides/graphing
-- /ja/graphing/miscellaneous/metrics_arithmetic
-- /ja/graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
-- /ja/graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
-- /ja/graphing/
-- /ja/dashboards/dashboards/
-- /ja/dashboards/screenboards/
-- /ja/dashboards/timeboards/
-cascade:
-  algolia:
-    rank: 70
-    tags:
-    - スナップショット
-    - ダッシュボード
-description: データを可視化して詳細な情報を把握
+    - /guides/templating/
+    - /graphing/dashboards/
+    - /guides/graphing
+    - /graphing/miscellaneous/metrics_arithmetic
+    - /graphing/faq/is-there-a-way-for-me-to-set-the-maximum-and-minimum-values-on-the-y-axis-of-a-graph
+    - /graphing/faq/is-it-possible-to-adjust-the-y-axis-for-my-graphs
+    - /graphing/
+    - /dashboards/dashboards/
+    - /dashboards/screenboards/
+    - /dashboards/timeboards/
+description: Visualize your data to gain insight
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=Dashboards
-  tag: リリースノート
-  text: Datadog ダッシュボードの最新リリースをチェック！ (アプリログインが必要です)。
-- link: /dashboards/sharing/
-  tag: ドキュメント
-  text: Datadogの外部でグラフを共有
-- link: https://www.datadoghq.com/blog/datadog-clipboard/
-  tag: ブログ
-  text: ダッシュボードウィジェットをクリップボードに追加する
-- link: https://www.datadoghq.com/blog/datadog-dashboards/
-  tag: ブログ
-  text: 新しい Datadog ダッシュボードエクスペリエンス
-- link: https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices
-  tag: ベストプラクティス
-  text: 優れたインテグレーションダッシュボードを作成する
-- link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: ダッシュボードで視覚化を改善するためのインタラクティブセッションにご参加ください
-title: ダッシュボード
+  - link: "https://app.datadoghq.com/release-notes?category=Dashboards"
+    tag: Release Notes
+    text: Check out the latest Datadog Dashboards releases! (App login required).
+  - link: /dashboards/sharing/
+    tag: Documentation
+    text: Share your Graphs outside of Datadog
+  - link: "https://www.datadoghq.com/blog/datadog-clipboard/"
+    tag: Blog
+    text: Add Dashboard widgets to your clipboard
+  - link: "https://www.datadoghq.com/blog/datadog-dashboards/"
+    tag: Blog
+    text: The new Datadog dashboards experience
+  - link: "https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices"
+    tag: Best Practices
+    text: Create great integration dashboards
+  - link: "https://dtdg.co/fe"
+    tag: Foundation Enablement
+    text: Join an interactive session on better visualizations with Dashboards
+cascade:
+    algolia:
+        rank: 70
+        tags: [snapshot, dashboards]
 ---
 
 ## 概要
@@ -58,7 +56,7 @@ title: ダッシュボード
     {{< nextlink href="/dashboards/change_overlays" >}}オーバーレイ: 変更イベントを自動的にグラフにオーバーレイ{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## はじめに
+## 詳細はこちら
 
 {{< whatsnext desc="以下のリソースをご覧ください:" >}}
    {{< nextlink href="/getting_started/dashboards/" >}}ダッシュボードを始める{{< /nextlink >}}
@@ -109,9 +107,11 @@ title: ダッシュボード
 
 ## その他の参考資料
 
+{{< learning-center-callout header="Try Creating Graph Widgets in the Datadog Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboard-graph-widgets">}} Explore timeseries, query value, top list, table, distribution, and pie chart widgets. Learn how to configure the widgets and develop an understanding of when each widget type should be utilized. {{< /learning-center-callout >}}
+
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/service_management/mobile/
+[1]: /service_management/mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
 [4]: https://app.datadoghq.com/dashboard/lists

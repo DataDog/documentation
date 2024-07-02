@@ -18,7 +18,7 @@
 "categories":
 - "collaboration"
 - "issue tracking"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -49,51 +49,51 @@
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/sentry/sentry.png" alt="sentry event" popup="true">}}
+{{< img src="integrations/sentry/sentry.png" alt="sentry イベント" popup="true">}}
 
-## Overview
+## 概要
 
-Sentry provides self-hosted and cloud-based application performance monitoring and error tracking that helps software teams see clearer, solve quicker, and learn continuously. 
+Sentry は、セルフホスト型およびクラウド型のアプリケーションパフォーマンスモニタリングとエラー追跡を提供し、ソフトウェアチームがより明確な情報を把握し、迅速に解決し、継続的に学習できるようにします。
 
-The Datadog Sentry integration automatically forwards Sentry events to the Datadog event stream, allowing you to search and comment on errors and bug fixes and correlate Sentry errors with metrics and data from your other systems.
+Datadog Sentry インテグレーションは、Sentry イベントを自動的に Datadog イベントストリームに転送し、エラーやバグ修正の検索やコメント、Sentry エラーと他のシステムのメトリクスやデータとの相関付けを可能にします。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-Setting up Sentry integration:
+次の手順で Sentry インテグレーションをセットアップします。
 
-1. Log into Sentry.
-2. Navigate to **Settings > Projects** and select the appropriate project.
-3. On the left side, select **Legacy Integrations**.
-4. Scroll down to the **Webhooks integration**, click the slider toggle to enable it, and then click **Configure Plugin**.
-5. Under **Callback URLs'**, enter the callback URL copied from the integration tile.
-6. Click **Save changes**.
-7. Enable the integration if necessary by clicking **Enable Plugin**.
+1. Sentry にログインします。
+2. **Settings > Projects** に移動し、適切なプロジェクトを選択します。
+3. 左側で、**Legacy Integrations** を選択します。
+4. **Webhooks integration** までスクロールダウンし、スライダートグルをクリックしてインテグレーションを有効化し、次に **Configure Plugin** をクリックします。
+5. **Callback URLs’** の下に、インテグレーションタイルからコピーしたコールバック URL を入力します。
+6. **Save changes** をクリックします。
+7. 必要に応じて、**Enable Plugin** をクリックしてインテグレーションを有効にします。
 
-By default, Sentry pings the Webhook with event data every time there is a new exception (as opposed to a new instance of an already-logged exception). If you want different (or additional) triggers, you can configure them in the Alerts section of your project settings.
+デフォルトでは、Sentry は、(既にログに記録された例外の新しいインスタンスではなく) 新しい例外が発生するたびに、Webhook にイベントデータを ping します。別の (または追加の) トリガーが必要な場合は、プロジェクト設定の Alerts セクションで構成できます。
 
-### Add a host name to errors (optional)
+### エラーにホスト名を追加する (オプション)
 
-Occasionally, the server name which Sentry reports may not match the host name recognized by Datadog. To overcome this, set a custom value for the `server_name` tag, which is attached to each event.
+Sentry が報告するサーバー名が Datadog が認識するホスト名と一致しないことがあります。これを解決するには、各イベントにアタッチされている `server_name` タグにカスタム値を設定します。
 
-To use a different host name while preserving Sentry's default `server_name` value, set a `hostname` tag on your events. See Sentry's documentation on [Customizing Tags][1] for your specific language.
+Sentry のデフォルトの `server_name` の値を保持したまま、別のホスト名を使用するには、イベントに `hostname` タグを設定します。特定の言語については、Sentry の [タグのカスタマイズ][1]のドキュメントを参照してください。
 
-## Troubleshooting
+## トラブルシューティング
 
-### Sentry errors missing in Datadog
+### Datadog で Sentry のエラーが消えている
 
-If Sentry errors are missing from Datadog, your Sentry Webhook probably isn't triggering. This could be due to the following scenarios:
+Datadog から Sentry のエラーが消えている場合、Sentry Webhook がトリガーされていない可能性があります。これは以下のシナリオが原因であることが考えられます。
 
-**Alerts are only sent when a rule is triggered**:<br>
-For example, if the rule condition is when "an event is first seen", an alert is not dispatched until a new issue is created. Depending on how many unique issues your project is receiving, this can take some time.
+**規則がトリガーされた場合にのみ、アラートが送信される**。<br>
+たとえば、規則条件が「イベントが最初に表示されたとき」である場合、新しい問題が作成されるまで、アラートはディスパッチされません。プロジェクトが受信している問題のユニーク数によっては、少し時間がかかります。
 
-**The notification integration is disabled**:<br>
-Ensure that the notification integration is enabled under the rule actions, either as the specific service, or covered under "all enabled services".
+**通知インテグレーションが無効化されている**。<br>
+通知インテグレーションが、規則アクションで特定のサービスとして有効化されている、または「すべての有効化されたサービス」に含まれていることを確認してください。
 
-## Further reading
+## 参考資料
 
-- [Collaborative Bug Fixing with Datadog's Sentry Integration][2]
+- [Datadog の Sentry インテグレーションによる共同バグ修正][2]
 
 [1]: https://docs.sentry.io/platforms/java/enriching-events/tags/
 [2]: https://www.datadoghq.com/blog/datadog-sentry-integration-collaborative-bug-fixing/

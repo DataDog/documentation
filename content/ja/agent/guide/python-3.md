@@ -10,40 +10,40 @@ further_reading:
 ---
 
 <div class="alert alert-info">
-Only Agent v7+ supports running Python 3 custom checks by default. <a href="/agent/versions/upgrade_to_agent_v7">Upgrade to the latest Agent version</a> to run your Python 3 custom checks natively. Or <a href="/agent/guide/agent-v6-python-3">enable the Python 3 runtime</a> for your Agent v6.14+ if you would like to test your custom checks migration without upgrading your Agent.
+Python 3 カスタムチェックの実行をデフォルトでサポートするのは、Agent v7 以降のみです。Python 3 カスタムチェックをネイティブで実行するには、<a href="/agent/versions/upgrade_to_agent_v7">最新バージョンの Agent にアップグレード</a>してください。Agent をアップグレードせずにカスタムチェックの移行をテストする場合は、Agent v6.14 以降の <a href="/agent/guide/agent-v6-python-3">Python 3 ランタイムを有効化</a>します。
 </div>
 
-## Overview
+## 概要
 
-This guide provides information and best practices on migrating checks between Python 2 and 3. Use Datadog's [Custom Check Compatibility][1] tool to see whether your custom checks are compatible with Python 3 or need to be migrated.
+本ガイドには、Python 2 から Python 3 への移行チェックに関する情報とベストプラクティスが記載されています、Datadog の[カスタムチェックの互換性][1] ツールを使用して、ご利用のカスタムチェックについて、Python 3 との互換性や移行の必要性をご確認ください。
 
-To provide flexibility in allowing code to run multiple on versions of the Agent, this guide focuses on retaining backwards compatibility.
+複数の Agent バージョンでコードを実行できる柔軟性を提供するため、本ガイドでは下位互換性の保持に重点を置いています。
 
-## Editors and tools
+## エディターおよびツール
 
 ### Pylint
 
-Pylint contains functions to help you [verify that your custom checks are compatible with Python 3][2].
+Pylint には [カスタムチェックと Python 3 の互換性を検証][2]できる機能が含まれています。
 
-#### Installation
+#### インストール
 
-Start by installing with [pip][3] on Python 2:
+[pip][3] から Python 2 にインストールして開始します。
 
 ```bash
 $ python2 -m pip install pylint
 ```
 
-Replace `python2` in the above command if the path to your Python 2 interpreter is different.
+Python 2 インタープリターへのパスが異なる場合は、上記のコマンドで `python2` を置換してください。
 
-#### Usage
+#### 使用方法
 
-Run the `pylint` command to verify that your custom check or integration runs on Python 3. Replace `CHECK` with a valid path to a Python module or package folder:
+`pylint` コマンドを実行して、カスタムチェックまたはインテグレーションが Python 3 で実行されるか検証します。`CHECK` を Python モジュールまたはパッケージフォルダーへの有効なパスと置換します。
 
 ```bash
 $ python2 -m pylint -sn --py3k CHECK
 ```
 
-For example:
+例:
 
 ```bash
 $ python2 -m pylint -sn --py3k ~/dev/my-check.py
@@ -53,40 +53,40 @@ W:  7,22: Calling a dict.iter*() method (dict-iter-method)
 W:  9, 8: division w/o __future__ statement (old-division)
 ```
 
-After addressing the incompatibilities, the same command returns nothing:
+非互換性が解消されると、同じコマンドで何も返されなくなります。
 
 ```bash
 $ python2 -m pylint -sn --py3k ~/dev/my-check.py
 $ 
 ```
 
-While `pylint` catches any issue that could prevent the Python 3 interpreter from running code at all, it cannot check for logical validity. After code changes are made, make sure to run the check and validate the output.
+`pylint` は Python 3 インタープリターのコード実行を妨げる問題を検知するものの、論理的な妥当性は確認できません。コードを変更したら、必ずチェックを実行し、アウトプットを検証してください。
 
 ### 2to3
 
-[2to3][4] converts Python 2 code to Python 3 code. If you have a custom check that is named `foo.py`, run 2to3:
+[2to3][4] により、Python 2 コードを Python 3 コードに変換します。`foo.py`という名称のカスタムチェックを使用している場合は 2to3 を実行します。
 
 ```bash
 $ 2to3 foo.py
 ```
 
-Running 2to3 prints a diff against the original source file. For more details about 2to3, see the official [2to3 documentation][4] .
+2to3 を実行すると、元のソースファイルとの差分が表示されます。2to3 の詳細については、公式 [2to3 ドキュメント][4]を参照してください。
 
-### Editors
+### エディター
 
-Most modern IDEs and editors provide advanced linting automatically. Make sure that they are pointed to a Python 3 executable, so that when you open a legacy Python 2 only file, any linting errors or warnings show up on the side as a colorful tick in [PyCharm][5] or as a clickable box on the bottom in [Visual Studio Code][6].
+最新の IDE およびエディターでは、自動的に高度な lint が実行されます。lint が実行可能な Python 3 を参照していることを確認してください。これにより、Python 2 専用のレガシーファイルを開くと、lint のエラーや警告が [PyCharm][5] の横側に色付きのチェックとして表示されるか、[Visual Studio Code][6] の底部にクリックできるボックスとして表示されます。
 
-## Python migration
+## Python の移行
 
-### Package imports
+### パッケージのインポート
 
-To standardize Datadog package namespacing, with Python3, all resources live under the base subpackage. For example:
+Python3 で Datadog パッケージのネームスペースを標準化するには、すべてのリソースがベースサブパッケージ下に存在している必要があります。例えば、
 
 ```python
 from datadog_checks.checks import AgentCheck
 ```
 
-becomes
+は次のようになります。
 
 ```python
 from datadog_checks.base.checks import AgentCheck
@@ -94,13 +94,13 @@ from datadog_checks.base.checks import AgentCheck
 
 ### Six
 
-[Six][7] is a Python 2/3 compatibility library intended to allow developers to ship Python code that works in both Python 2 and Python3. Some of the examples below make use of six to make legacy Python 2 code compatible with Python 3.
+[Six][7] は、Python 2 と Python3 の双方で機能する Python コードを開発者が使用できるように考えられた、双方に互換性のあるライブラリです。Six を使用して Python 2 のレガシーコードを Python 3 と互換性のあるコードに変換させた例をいくつか以下に示します。
 
-### Dictionary methods
+### 辞書型メソッド
 
-In Python 3, the `dict.iterkeys()`, `dict.iteritems()` and `dict.itervalues()` methods are not available.
+Python 3 では、`dict.iterkeys()`、`dict.iteritems()`、`dict.itervalues()` の各メソッドを使用できません。
 
-| Python 2                                                         | Python 2 and 3                                                                                         |
+| Python 2                                                         | Python 2 および 3                                                                                         |
 |------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
 | `for key in mydict.iterkeys():` <br/> &nbsp;&nbsp;`  ...`        | `for key in mydict:`<br/> &nbsp;&nbsp;`  ...`                                                          |
 | `for key, value in mydict.iteritems():`<br/> &nbsp;&nbsp;`  ...` | `from six import iteritems` <br/><br/> `for key, value in iteritems(mydict):`<br/> &nbsp;&nbsp;`  ...` |
@@ -108,60 +108,60 @@ In Python 3, the `dict.iterkeys()`, `dict.iteritems()` and `dict.itervalues()` m
 
 Also, in Python 3, the `dict.keys()`, `dict.items()`, `dict.values()` methods return iterators. Therefore, if the dictionary needs to be modified during iteration, make a copy first. To retrieve a dictionary's keys/items/values as a list:
 
-| Python 2                        | Python 2 and 3                       |
+| Python 2                        | Python 2 および 3                       |
 |---------------------------------|--------------------------------------|
 | `mykeylist = mydict.keys()`     | `mykeylist = list(mydict)`           |
 | `myitemlist = mydict.items()`   | `myitemlist = list(mydict.items())`  |
 | `myvaluelist = mydict.values()` | `myvaluelist = list(mydict.values()` |
 
-The `dict.has_key()` method is deprecated in Python 2 and is removed in Python 3. Use the `in` operator instead.
+`dict.has_key()` メソッドは Python 2 で廃止予定となっており、Python 3 では削除されています。代わりに `in` 演算子を使用してください
 
-| Python 2                             | Python 2 and 3  |
+| Python 2                             | Python 2 および 3  |
 |--------------------------------------|-----------------|
-| `mydict.has_key('foo') //deprecated` | `foo in mydict` |
+| `mydict.has_key('foo') //非推奨` | `foo in mydict` |
 
-### Standard library changes
+### 標準ライブラリの変更
 
-Python 3 features a reorganized standard library, where several modules and functions were renamed or moved. Importing moved modules through `six.moves` works on both Python versions.
+Python 3 には、再編成された標準ライブラリ機能があります。ここでは、いくつかのモジュールや関数が名称変更または移動されています。Python の両バージョンで、`six.moves` で移動されたモジュールをインポートできます。
 
-| Python 2            | Python 3             | Python 2 and 3                      |
+| Python 2            | Python 3             | Python 2 および 3                      |
 |---------------------|----------------------|-------------------------------------|
 | `import HTMLParser` | `import html.parser` | `from six.moves import html_parser` |
 
-Consult the [Six documentation][7] for the list of renamed modules. **Note**: The `urllib`, `urllib2`, and `urlparse` modules have been heavily reorganized.
+名称が変更されたモジュールのリストについては、[Six ドキュメント][7]を確認してください。**注**: `urllib`、`urllib2`、`urlparse` の各モジュールは大幅に再編成されています。
 
 ### Unicode
 
-Python 2 treats Unicode text and binary-encoded data the same, and tries to automatically convert between bytes and strings. This works as long as all characters are ASCII, but leads to unexpected behavior when it encounters non-ASCII characters.
+Python 2 は Unicode テキストとバイナリコード化されたデータを同様に扱い、バイトと文字列間の自動変換を試みます。すべての文字が ASCII であれば問題なく動作しますが、非 ASCII 文字にぶつかると不測の挙動につながります。
 
-| type    | literal | Python 2 | Python 3 |
+| type    | リテラル | Python 2 | Python 3 |
 |---------|---------|----------|----------|
-| bytes   | b'...'  | binary   | binary   |
-| str     | '...'   | binary   | text     |
-| unicode | u'...'  | text     | text     |
+| バイト   | b'...'  | バイナリ   | binary   |
+| str     | '...'   | バイナリ   | テキスト     |
+| unicode | u'...'  | テキスト     | text     |
 
-Text data is Unicode code points; you must encode with `.encode(encoding)` for storage or transmission. Binary data is encoded code points represented as a sequence of bytes that must be decoded with `.decode(encoding)` back to text. When reading text from a file, the `open` function from the `io` package is handy because the data read is already decoded into Unicode:
+テキストデータは Unicode コードポイントです。ストレージとトランスミッションは `.encode(encoding)` を使用してエンコードする必要があります。バイナリデータは、バイトシーケンスとして表現されるエンコードされたコードポイントです。テキストに戻すには `.decode(encoding)`  を使用してデコードする必要があります。ファイルからテキストを読み取る際は、`io` パッケージの `open` 関数が便利です。データの読み取りはすでに Unicode にデコードされています。
 
 ```python
 from io import open
 
 f = open('textfile.txt', encoding='utf-8')
-contents = f.read()  # contents will be decoded to unicode using 'utf-8'; these are not bytes!
+contents = f.read()  # コンテンツは 'utf-8' を使用してユニコードにデコードされます。これは、バイトではありません！
 ```
 
-Consult Ned Batchelder's [Pragmatic Unicode][8] for further details.
+詳細については Ned Batchelder の[実用的な Unicode][8] を参照してください。
 
-### Print
+### 印刷
 
-In Python 3, print is explicitly treated as a function; to turn print into a function regardless of the Python version, put `from __future__ import print_function` at the top of any file using the old print statement and add parentheses to perform the function call.
+Python 3 では、印刷は明確に関数として扱われています。印刷を関数にするには、Python のバージョンに関わらず、古い印刷ステートメントを使用して `from __future__ import print_function` をファイルの先頭に記述し、括弧を追加して関数コールを実行します。
 
-| Python 2      | Python 2 and 3                                                    |
+| Python 2      | Python 2 および 3                                                    |
 |---------------|-------------------------------------------------------------------|
 | `print "foo"` | `from __future__ import print_function` <br/><br/> `print("foo")` |
 
-### Integer division
+### 整数の除算
 
-In Python 2, the `/` operator performs floor division on integers.
+Python 2 では `/` 演算子が整数の切り捨て除算を実行します。
 
 #### Python 2
 
@@ -170,7 +170,7 @@ In Python 2, the `/` operator performs floor division on integers.
 2
 ```
 
-In Python 3, the `/` operator performs float division. The `//` operator performs floor division.
+Python 3 では、 `/` 演算子が浮動小数点除算を実行します。`//` 演算子は切り捨て除算を実行します。
 
 #### Python 3
 
@@ -181,11 +181,11 @@ In Python 3, the `/` operator performs float division. The `//` operator perform
 2
 ```
 
-To replicate the same behavior of Python 3 regardless of the Python version, put `from __future__ import division` at the top of any file that uses division and use `//` for flooring division results.
+Python 3 の同じ挙動を再現するには、バージョンに関わらず、`from __future__ import division` を除算を使用するファイルの先頭に記述し、`//` を使用して切り捨て除算の結果を導きます。
 
-### Rounding
+### 丸め
 
-In Python 2 the standard library round method uses the Round Half Up Strategy while Python 3 uses the Round To Even strategy.
+Python 2 では、標準ライブラリの丸めメソッドに Round Half Up 法、Python 3 では Round To Even 法を使用します。
 
 #### Python 2
 
@@ -205,22 +205,22 @@ In Python 2 the standard library round method uses the Round Half Up Strategy wh
 4
 ```
 
-Datadog provides a utility function, `round_value`, in `datadog_checks_base` to allow the replication of the Python 2 behavior in both Python 2 and 3.
+Datadog では `datadog_checks_base` でユーティリティ関数の  `round_value` を提供して、Python 2 と Python 3 の両方で Python 2 の挙動を再現できるようにしています。
 
-### Exceptions
+### 例外
 
-Python 3 features different syntax for except and raise.
+Python 3 では except と raise に異なる構文を使用します。
 
-| Python 2                                                                                     | Python 2 and 3                                                                                 |
+| Python 2                                                                                     | Python 2 および 3                                                                                 |
 |----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
 | `try:` <br/> &nbsp;&nbsp; `...` <br/> `except Exception, variable:` <br/> &nbsp;&nbsp; `...` | `try:` <br/> &nbsp;&nbsp; `...` <br/> `except Exception as variable:` <br/> &nbsp;&nbsp; `...` |
 | `raise Exception, args`                                                                      | `raise Exception(args)`                                                                        |
 
-### Relative imports
+### 相対インポート
 
-In Python 3, relative imports must be made explicit, using the dot (`.`) syntax.
+Python 3 では、ドット (`.`) 構文を使用して、相対インポートを明示する必要があります。
 
-Suppose your package is structured like this:
+パッケージが以下のような構造だとします。
 
 ```text
 mypackage/
@@ -233,35 +233,35 @@ Suppose also that `math.py` contains a function called `gcd`—which contains su
 
 In Python 2, if you are inside a package, this package's own modules take precedence before global modules. Using `from math import gcd` imports the `gcd` from `mypackage/math.py`.
 
-In Python 3, import forms not starting with `.` are interpreted as absolute imports. Using `from math import gcd` imports the `gcd` from the standard library.
+Python 3 では、`.` 以外で始まるインポート形式は絶対インポートとして解釈されます。`from math import gcd` を使用して標準ライブラリから `gcd` をインポートします。
 
-| Python 2               | Python 2 and 3          |
+| Python 2               | Python 2 および 3          |
 |------------------------|-------------------------|
 | `from math import gcd` | `from .math import gcd` |
 
-Or, for extra readability:
+または、さらに読みやすくするには
 
-| Python 2               | Python 2 and 3                   |
+| Python 2               | Python 2 および 3                   |
 |------------------------|----------------------------------|
 | `from math import gcd` | `from mypackage.math import gcd` |
 
-### Iterators
+### イテレータ
 
-Several functions in Python 2 that return lists return iterators in Python 3. These include `map`, `filter`, and `zip`.
+Python 2 でリストを返していたいくつかの関数は、Python 3 ではイテレータを返します。`map`、`filter`、`zip` などがこれに該当します。
 
-The simplest fix to retain Python 2 behavior is to wrap these functions with a call to `list`:
+Python 2 の挙動を保持する最も簡単な解決策は、`list` へのコールでこれらの関数を括る方法です。
 
-| Python 2                         | Python 2 and 3                         |
+| Python 2                         | Python 2 および 3                         |
 |----------------------------------|----------------------------------------|
 | `map(myfunction, myiterable)`    | `list(map(myfunction, myiterable))`    |
 | `filter(myfunction, myiterable)` | `list(filter(myfunction, myiterable))` |
 | `zip(myiterable1, myiterable2)`  | `list(zip(myiterable1, myiterable2))`  |
 
-The `xrange` function is removed in Python 3; instead, the `range` function returns an iterable `range` object. Import `range` with `from six.moves import range`.
+Python 3 では `xrange` 関数は削除されています。代わりに、`range` 関数が反復可能な `range` オブジェクトを返します。`from six.moves import range` で `range` をインポートします。
 
-Use the built-in `next` function instead of calling the `next` method. For instance, rewrite `iterator.next()` as `next(iterator)`.
+`next` メソッドを呼び出す代わりに、組み込み型 `next` 関数を使用します。例えば、`iterator.next()` を `next(iterator)` に書き換えます。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

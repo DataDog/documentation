@@ -17,7 +17,7 @@ Audit Event Forwarding is not available in the US1-FED site.
 <div class="alert alert-warning">Audit Event Forwarding is in beta. </div>
 {{% /site-region %}}
 
-## Overview
+## 概要
 
 Audit Event Forwarding allows you to send audit events from Datadog to custom destinations like Splunk, Elasticsearch, and HTTP endpoints. Audit events are forwarded in JSON format. You can add up to three destinations for each Datadog org.
 
@@ -31,32 +31,32 @@ Audit Event Forwarding allows you to send audit events from Datadog to custom de
 2. Navigate to [Audit Trail Settings][2].
 3. Click **Add Destination** in the **Audit Event Forwarding** section.
 4. Enter the query to filter your audit events for forwarding. For example, add `@action:login` as the query to filter if you only want to forward login events to your SIEM or custom destination. See [Search Syntax][3] for more information.
-5. Select the **Destination Type**.
+5. **Destination Type** を選択します。
 
 {{< tabs >}}
 {{% tab "HTTP" %}}
 
-6. Enter a name for the destination.
-7. In the **Define endpoint** field, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`.
-    - For example, if you want to send logs to Sumo Logic, follow their [Configure HTTP Source for Logs and Metrics documentation][1] to get the HTTP Source Address URL to send data to their collector. Enter the HTTP Source Address URL in the **Define endpoint** field.
-8. In the **Configure Authentication** section, select one of the following authentication types and provide the relevant details:
-    - Basic Authentication: Provide the username and password for the account to which you want to send logs.
+6. 宛先の名前を入力します。
+7. **Define endpoint** フィールドで、ログを送信するエンドポイントを入力します。エンドポイントは、`https://` で始まる必要があります。
+    - 例えば、Sumo Logic にログを送信する場合、[ログとメトリクスのための HTTP ソースの構成ドキュメント][1] に従って HTTP Source Address URL を取得し、コレクターにデータを送信します。HTTP Source Address URL を **Define endpoint** フィールドに入力します。
+8. **Configure Authentication** セクションで、以下の認証タイプのいずれかを選択し、関連する詳細を入力します。
+    - Basic Authentication: ログの送信先となるアカウントのユーザー名とパスワードを入力します。
     - Request Header: Provide the header name and value. For example, if you use the Authorization header and the username for the account to which you want to send logs is `myaccount` and the password is `mypassword`:
         - Enter `Authorization` for the **Header Name**.
-        - The header value is in the format of `Basic username:password`, where `username:password` is encoded in base64. For this example, the header value is `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=`. 
-  9. Click **Save**.
+        - ヘッダー値は `Basic username:password` というフォーマットで、`username:password` は base64 でエンコードされています。この例では、ヘッダー値は `Basic bXlhY2NvdW50Om15cGFzc3dvcmQ=` となります。
+  9. **Save** をクリックします。
 
 [1]: https://help.sumologic.com/docs/send-data/hosted-collectors/http-source/logs-metrics/
 {{% /tab %}}
 
 {{% tab "Splunk" %}}
 
-6. Enter a name for the destination.
-7. In the **Configure Destination** section, enter the endpoint to which you want to send the logs. The endpoint must start with `https://`. For example, enter `https://<your_account>.splunkcloud.com:8088`. **Note**: `/services/collector/event` is automatically appended to the endpoint.
-8. In the **Configure Authentication** section, enter the Splunk HEC token. See [Set up and use HTTP Event Collector][1] for more information about the Splunk HEC token.
-9. Click **Save**.
+6. 宛先の名前を入力します。
+7. **Configure Destination** セクションで、ログを送信するエンドポイントを入力します。エンドポイントは、`https://` で始まる必要があります。例えば、`https://<your_account>.splunkcloud.com:8088`と入力します。**注**: エンドポイントには `/services/collector/event` が自動的に付加されます。
+8. **Configure Authentication** セクションで、Splunk HEC トークンを入力します。Splunk HEC トークンの詳細については、[HTTP Event Collector のセットアップと使用][1]を参照してください。
+9. **Save** をクリックします。
 
-**Note**: The [indexer acknowledgment][2] needs to be disabled.
+**注**: [インデクサ確認応答][2]を無効にする必要があります。
 
 [1]: https://docs.splunk.com/Documentation/Splunk/9.0.1/Data/UsetheHTTPEventCollector
 [2]: https://docs.splunk.com/Documentation/Splunk/9.0.3/Data/AboutHECIDXAck
@@ -64,7 +64,7 @@ Audit Event Forwarding allows you to send audit events from Datadog to custom de
 
 {{% tab "Elasticsearch" %}}
 
-6. Enter a name for the destination.
+6. 宛先の名前を入力します。
 7. In the **Configure Destination** section, enter the following details:
 
    a. The endpoint to which you want to send the logs. The endpoint must start with `https://`. An example endpoint for Elasticsearch: `https://<your_account>.us-central1.gcp.cloud.es.io`.
@@ -73,13 +73,13 @@ Audit Event Forwarding allows you to send audit events from Datadog to custom de
 
    c. Optionally, select the index rotation for how often you want to create a new index: `No Rotation`, `Every Hour`, `Every Day`, `Every Week`, or `Every Month`. The default is `No Rotation`.
 
-8. In the **Configure Authentication** section, enter the username and password for your Elasticsearch account.
-9. Click **Save**.
+8. **Configure Authentication** セクションで、Elasticsearch アカウントのユーザー名とパスワードを入力します。
+9. **Save** をクリックします。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

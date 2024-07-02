@@ -4,7 +4,7 @@ kind: documentation
 description: Collect logs from your iOS applications.
 further_reading:
 - link: "https://github.com/DataDog/dd-sdk-ios"
-  tag: Source Code
+  tag: ソースコード
   text: dd-sdk-ios Source code
 - link: logs/explorer
   tag: Documentation

@@ -30,7 +30,7 @@
 - marketplace
 - notifications
 - ai/ml
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -97,27 +97,27 @@
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## Overview
-BigPanda helps businesses prevent and resolve IT outages with our SaaS platform for Event Correlation and Automation, powered by AIOps. BigPanda automatically collects alerts from Datadog, as well as those from any third-party tool, and correlates them into context-rich incidents that help prevent outages and reduce the pain of incident management.
+## 概要
+BigPanda を使用すると、AIOps によるイベント相関および自動化のための SaaS プラットフォームで IT の停止を予防、解決することができます。BigPanda で、Datadog およびその他のサードパーティツールからのアラートが収集され、コンテキストリッチなインシデントに創刊されるため、中断を防ぎインシデント管理の手間を削減できます。
 
-BigPanda has out-of-the-box integrations with all of Datadog’s monitoring products, including [Infrastructure][5], [Log Management][6], and [APM][7]. These integrations enable the ingestion of alerts and rich topology information to drive correlation and root-cause analysis before incidents become outages. BigPanda also ingests CMDB data from ITSM platforms to provide additional alert enrichment, and a full-stack view of the relationship between services in and out of Datadog.
+BigPanda は、[インフラストラクチャー][5]、[ログ管理][6]、[APM][7] を含むすべての Datadog モニタリング製品とともにすぐに使えるインテグレーションです。このインテグレーションにより、アラートおよびリッチなトポロジー情報を取り込み、インシデントが停止を招く前に、相関性および根本原因の分析を行うことができます。また、BigPanda では ITSM プラットフォームから CMDB データを取り込み、アラートを強化してDatadog 内外のサービス間の関係のフルスタックビューを提供します。
 
-The end result: IT Ops, NOC, DevOps, and SRE teams are able to quickly get a holistic view of their alerts, and understand the root cause of a poorly-performing application, system or service all while significantly reducing alert noise in users’ environments and improving MTTR.
+最終的に、IT Ops、NOC、DevOps、SRE チームがアラートの全体像をすばやく把握し、低パフォーマンスのアプリケーション、システム、またはサービスの根本原因を理解することができるうえ、ユーザー環境におけるアラートノイズの削減およ MTTR の向上を実現できます。
 
-This offering in the Datadog Marketplace provides access to the BigPanda platform. If you are already a BigPanda customer and need to connect your instance to Datadog, [set up the integration][1].
+Datadog マーケットプレイスでのご提供には、BigPanda プラットフォームへのアクセスが含まれています。すでに BigPanda をご利用で、インスタンスを Datadog に接続する必要があるお客様は、[インテグレーションをセットアップ][1]してください。
 
-## Support
+## サポート
 
-For support or feature requests, contact BigPanda through the following channel:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから BigPanda にお問い合わせください。
 
-- Email: [support@bigpanda.io][2]
+- メール: [support@bigpanda.io][2]
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Streamline incident management with BigPanda's offering in the Datadog Marketplace][3]
-- [BigPanda Documentation][4]
+- [Datadog Marketplace の BigPanda の製品を使ってインシデントマネジメントを効率化する][3]
+- [BigPanda ドキュメント][4]
 
 [1]: https://app.datadoghq.com/integrations/bigpanda
 [2]: mailto:support@bigpanda.io
@@ -127,4 +127,4 @@ Additional helpful documentation, links, and articles:
 [6]: https://docs.datadoghq.com/logs
 [7]: https://docs.datadoghq.com/tracing
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/bigpanda-bigpanda" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/bigpanda-bigpanda" target="_blank">こちらをクリック</a>してください。

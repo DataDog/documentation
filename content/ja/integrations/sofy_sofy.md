@@ -24,7 +24,7 @@
 "categories":
 - testing
 - mobile
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/sofy_sofy/README.md"
 "display_on_public_website": true
@@ -82,44 +82,44 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
-Sofy is a no-code platform for creating automated tests on mobile apps. Users can integrate with their CI/CD pipelines to execute tests on real devices and view the results of their functional tests, along with performance metrics.
+Sofy は、モバイルアプリの自動テストを作成するためのノーコードプラットフォームです。ユーザーは CI/CD パイプラインとインテグレーションすることで、実際のデバイス上でテストを実行し、パフォーマンスメトリクスとともに機能テストの結果を確認することができます。
 
-This integration provides deeper insight into your testing process by visualizing key metrics and trends such as load time, network, memory utilization, and CPU. The out-of-the-box dashboard provides real-time visibility into your Sofy test results, enabling you to monitor and analyze performance over time, and make data-driven decisions to improve overall software quality.
+このインテグレーションは、ロードタイム、ネットワーク、メモリ使用率、CPU などのキーとなるメトリクスとトレンドを可視化することで、テストプロセスに対するより深い洞察を提供します。すぐに使えるダッシュボードは、Sofy のテスト結果をリアルタイムで可視化し、長期的なパフォーマンスの監視と分析を可能にし、ソフトウェア全体の品質を向上させるためのデータ駆動型の意思決定を行うことができます。
 
-## Data Collected
-### Metrics
+## 収集データ
+### メトリクス
 
-See [metadata.csv][1] for the full list of metrics provided by this check.
-
-
-## Setup
-To set up the Sofy integration:
-
-1. Go to your [Datadog Integrations page][2] and click on the Sofy tile.
-
-2. Go to the **Configuration** tab and click **Install Integration** at the bottom.
-
-3. Click **Connect Accounts** to redirect to the [Integration tab][3] under Account Settings in Sofy.
-
-4. Log into [Sofy][4], then click the **Connect** button on the Datadog tile to begin the integration process.
-
-5. Sofy will prompt you to follow a series of OAuth steps to authorize the integration with Datadog. Follow these steps carefully, making sure to grant the necessary permissions to allow Sofy to send data to Datadog.
-
-6. Once the integration is complete, navigate to the App Manager page by selecting it from the left-hand menu. From there, click on the monitoring tab on the right-hand side of the page. Enable Datadog monitoring for the selected app by toggling the appropriate switch.
-
-7. Sofy now starts sending data to Datadog after each run in the selected app, allowing you to monitor and analyze the results in real time.
+このチェックによって提供されるメトリクスの完全なリストについては、[metadata.csv][1] を参照してください。
 
 
-## Uninstallation
-* Ensure that all API keys associated with this integration have been disabled by searching for Sofy on the [API Keys management page][5] in Datadog.
+## セットアップ
+Sofy インテグレーションを設定するには
 
-## Support
-Need help? Contact [Sofy support][6].
+1. [Datadog インテグレーションページ][2]に移動し、Sofy タイルをクリックします。
 
-## Further Reading
-Additional helpful documentation, links, and articles:
+2. **Configuration** タブを開き、一番下の **Install Integration** をクリックします。
+
+3. **Connect Accounts** をクリックすると、Sofy の Account Settings の [Integration タブ][3]にリダイレクトします。
+
+4. [Sofy][4] にログインし、Datadog タイルの **Connect** ボタンをクリックし、インテグレーションを開始します。
+
+5. Datadog とのインテグレーションを認可するために、一連の OAuth ステップに従うよう Sofy から指示があります。Sofy が Datadog にデータを送信できるようにするために必要な権限を付与することを確認しながら、このステップに注意深く従ってください。
+
+6. インテグレーションが完了したら、左側のメニューからアプリマネージャーのページを選択し、アプリマネージャーのページに移動します。そこから、ページの右側にあるモニタリングタブをクリックします。適切なスイッチを切り替えて、選択したアプリの Datadog モニタリングを有効にします。
+
+7. これで Sofy は、選択したアプリで実行するたびに Datadog へのデータ送信を開始し、リアルタイムで結果を監視・分析できるようになります。
+
+
+## アンインストール
+* Datadog の [API キー管理ページ][5]で Sofy を検索し、このインテグレーションに関連するすべての API キーが無効化されていることを確認します。
+
+## サポート
+ご不明な点は、[Sofy サポート][6]までお問い合わせください。
+
+## その他の参考資料
+お役に立つドキュメント、リンクや記事:
 * [Monitor your mobile tests with Sofy's offering in the Datadog Marketplace][7]
 * [Sofy Documentation][8]
 

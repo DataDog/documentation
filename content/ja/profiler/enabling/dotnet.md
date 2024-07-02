@@ -20,85 +20,85 @@ aliases:
   - /tracing/profiler/enabling/dotnet/
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to enabling the profiler.
+プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][5]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
 
-## Requirements
+## 要件
 
-For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+すべての言語におけるランタイムとトレーサーの最小バージョンと推奨バージョンの要約については、[サポートされている言語とトレーサーのバージョン][14]をお読みください。
 
-Supported operating systems for .NET Framework
+.NET Framework の対応オペレーティングシステム
 : Windows 10<br/>
-Windows Server starting from version 2012
+Windows Server バージョン 2012 以降
 
-Supported operating systems for .NET Core and .NET 5+
-: Linux with glibc 2.17+ (for example, CentOS 7+) and musl-based (Alpine) <br/>
+.NET Core および .NET 5+ の対応オペレーティングシステム
+: glibc 2.17 以上の Linux (例: CentOS 7 以上) と musl-based (Alpine)<br/>
 Windows 10<br/>
-Windows Server starting from version 2012
+Windows Server バージョン 2012 以降
 
 Serverless
 : Azure App Service Windows and Linux - Web Apps only, Function Apps are not supported
 
-Supported .NET runtimes (64-bit applications)
+対応する .NET ランタイム (64 ビットアプリケーション)
 : .NET Framework 4.6.1+<br/>
-.NET Core 2.1, 3.1<br/>
+.NET Core 2.1、3.1<br/>
 .NET 5<br/>
 .NET 6<br/>
 .NET 7<br/>
 .NET 8
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> For containers, <strong>at least one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
+  <strong>注:</strong> コンテナの場合、<strong>少なくとも 1 つのコア</strong>が必要です。詳しくは<a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">トラブルシューティングのドキュメント</a>をお読みください。
 </div>
 
-Supported languages
-: Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
+対応言語
+: C#、F#、Visual Basic など、.NET ランタイムをターゲットとするあらゆる言語。
 
-The following profiling features are available in the following minimum versions of the `dd-trace-dotnet` library:
+以下のプロファイリング機能は、`dd-trace-dotnet` ライブラリの以下の最小バージョンで利用可能です。
 
-| Feature                   | Required `dd-trace-dotnet` version | Required .NET Runtime versions                                                           |
+| 機能                   | 必要な `dd-trace-dotnet` のバージョン | 必要な .NET Runtime のバージョン                                                           |
 |---------------------------|------------------------------------|------------------------------------------------------------------------------------------|
-| Wall time profiling       | 2.7.0+                             | All supported runtime versions.                                                          |
-| CPU profiling             | 2.15.0+                            | All supported runtime versions.                                                          |
-| Exceptions profiling      | 2.31.0+                            | All supported runtime versions.                                                          |
-| Allocations profiling     | beta, 2.18.0+                      | .NET 6+                                                                                  |
-| Lock Contention profiling | 2.49.0+                            | .NET Framework beta (requires Datadog Agent 7.51+) and .NET 5+                           |
-| Live heap profiling       | beta, 2.22.0+                      | .NET 7+                                                                                  |
-| [Code Hotspots][12]       | 2.7.0+                             | All supported runtime versions.                                                          |
-| [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
-| Timeline                  | 2.30.0+                            | All supported runtime versions (except .NET 5+ required for garbage collection details). |
+| Wall Time プロファイリング       | 2.7.0+                             | サポートされているすべてのランタイムバージョン。                                                          |
+| CPU プロファイリング             | 2.15.0+                            | サポートされているすべてのランタイムバージョン。                                                          |
+| 例外プロファイリング      | 2.31.0+                            | サポートされているすべてのランタイムバージョン。                                                          |
+| アロケーションプロファイリング     | ベータ版、2.18.0+                      | .NET 6+                                                                                  |
+| ロックコンテンションプロファイリング | 2.49.0+                            | .NET Framework beta (requires Datadog Agent 7.51+) and .NET 5+                           |
+| ライブヒーププロファイリング       | ベータ版、2.22.0+                      | .NET 7+                                                                                  |
+| [Code Hotspots][12]       | 2.7.0+                             | サポートされているすべてのランタイムバージョン。                                                          |
+| [Endpoint Profiling][13]  | 2.15.0+                            | サポートされているすべてのランタイムバージョン。                                                          |
+| 沿革                  | 2.30.0+                            | サポートされているすべてのランタイムバージョン (ガベージコレクションの詳細のために必要な .NET 5+ を除く) 。 |
 
-## Installation
+## インストール
 
 Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][1]. The profiler ships together with the tracing library (beginning with v2.8.0), so if you are already using [APM to collect traces][5] for your application, you can skip installing the library and go directly to [Enabling the profiler](#enabling-the-profiler).
 
-Otherwise, install the profiler using the following steps, depending on your operating system.
+そうでない場合は、お使いの OS に応じて、以下の手順でプロファイラーをインストールしてください。
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> Datadog's automatic instrumentation relies on the .NET CLR Profiling API. Since this API allows only one subscriber, run only one APM solution in your application environment.
+<strong>**注**:</strong> Datadog 自動インスツルメンテーションは、.NET CLR Profiling API に依存します。この API に許可されるサブスクライバーは 1 つのみなので、アプリケーション環境で 1 つの APM ソリューションのみを実行してください。
 </div>
 
 
-You can install the Datadog .NET Profiler machine-wide so that all services on the machine can be instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the **Windows** or **Linux** tab. To see per-application installation instructions, click the **NuGet** tab.
+Datadog .NET Profiler は、マシン上のすべてのサービスがインスツルメントできるようにマシン全体にインストールすることも、アプリケーションごとにインストールすることも可能で、開発者はアプリケーションの依存関係を通じてインスツルメンテーションを管理することができます。マシン全体のインストール手順を見るには、**Windows** または **Linux** タブをクリックします。アプリケーションごとのインストール手順を見るには、**NuGet** タブをクリックします。
 
 {{< tabs >}}
 
 {{% tab "Linux" %}}
-To install the .NET Profiler machine-wide:
+.NET Profiler をマシン全体にインストールするには
 
-1. Download the latest [.NET Tracer package][1] that supports your operating system and architecture.
+1. お使いの OS とアーキテクチャに対応した最新の [.NET Tracer パッケージ][1]をダウンロードします。
 
-2. Run one of the following commands to install the package and create the .NET log directory `/var/log/datadog/dotnet` with the appropriate permissions:
+2. 以下のコマンドのいずれかを実行して、パッケージをインストールし、適切な権限で .NET のログディレクトリ `/var/log/datadog/dotnet` を作成します。
 
-   Debian or Ubuntu
+   Debian または Ubuntu
    : `sudo dpkg -i ./datadog-dotnet-apm_<TRACER_VERSION>_amd64.deb && sudo /opt/datadog/createLogPath.sh`
 
-   CentOS 7+ or Fedora
+   CentOS 7+ または Fedora
    : `sudo rpm -Uvh datadog-dotnet-apm<TRACER_VERSION>-1.x86_64.rpm && sudo /opt/datadog/createLogPath.sh`
 
-   Alpine or other musl-based distributions
+   Alpine などの musl ベースの分布
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm<TRACER_VERSION>-musl.tar.gz && sudo sh /opt/datadog/createLogPath.sh`
 
-   Other distributions
+   その他の分布
    : `sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && sudo /opt/datadog/createLogPath.sh`
 
 
@@ -107,11 +107,11 @@ To install the .NET Profiler machine-wide:
 
 {{% tab "Windows" %}}
 
-To install the .NET Profiler machine-wide:
+.NET Profiler をマシン全体にインストールするには
 
-1. Install or upgrade to the latest version, using the [.NET Monitoring MSI installer][1]. Continuous Profiler supports 64-bit Windows, so you need the file like `datadog-dotnet-apm-<VERSION>-x64.msi`.
+1. [.NET Monitoring MSI インストーラー][1]を使って、最新版をインストールまたはアップグレードしてください。Continuous Profiler は 64-bit Windows をサポートしていますので、`datadog-dotnet-apm-<VERSION>-x64.msi` のようなファイルが必要です。
 
-2. Run the installer with administrator privileges.
+2. インストーラーを管理者権限で実行します。
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
@@ -119,12 +119,12 @@ To install the .NET Profiler machine-wide:
 {{% tab "NuGet" %}}
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> This installation does not instrument applications running in IIS. For applications running in IIS, follow the Windows machine-wide installation process.
+  <strong>注:</strong> このインストールは、IIS で動作するアプリケーションをインスツルメントするものではありません。IIS で実行されるアプリケーションについては、Windows マシン全体のインストールプロセスに従ってください。
 </div>
 
-To install the .NET Profiler per-application:
+.NET Profiler をアプリケーション単位でインストールするには
 
-1. Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
+1. `Datadog.Trace.Bundle` [NuGet パッケージ][1]をアプリケーションに追加します。
 
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
@@ -135,7 +135,7 @@ To install the .NET Profiler per-application:
   <strong>Note:</strong> Only Web Apps are supported. Functions are not supported.
 </div>
 
-To install the .NET Profiler per-webapp:
+.NET Profiler を Web アプリ単位でインストールするには
 1. Install the Azure App Service Datadog APM Extension [for Windows][1] or use the [Linux setup][2] for your webapp.
 
 [1]: /serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
@@ -146,15 +146,15 @@ To install the .NET Profiler per-webapp:
 
 <br>
 
-## Enabling the Profiler
+## プロファイラーの有効化
 
 <div class="alert alert-info">
-  <strong>Note</strong>: Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. If you do have enabled it machine-wide, read the <a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#avoid-enabling-the-profiler-machine-wide">Troubleshooting documentation</a> for information about reducing the overhead that is associated with enabling the profiler for all system applications.
+  <strong>注</strong>: Datadog では、マシンレベルまたはすべての IIS アプリケーションでプロファイラーを有効にすることを推奨していません。マシンレベルで有効にしている場合は、すべてのシステムアプリケーションでプロファイラーを有効にすることに関連するオーバーヘッドを削減するための情報として、<a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#avoid-enabling-the-profiler-machine-wide">トラブルシューティングドキュメント</a>をお読みください。
 </div>
 
 {{< tabs >}}
 {{% tab "Linux" %}}
-3. Set the following required environment variables for automatic instrumentation to attach to your application:
+3. 自動インスツルメンテーションをアプリケーションにアタッチするために、以下の必要な環境変数を設定します。
 
    ```
    CORECLR_ENABLE_PROFILING=1
@@ -167,9 +167,9 @@ To install the .NET Profiler per-webapp:
    DD_VERSION=1.2.3
    ```
 
-4. For standalone applications, manually restart the application as you normally would.
+4. スタンドアロンアプリケーションの場合は、通常通り手動でアプリケーションを再起動します。
 
-5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+5. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
@@ -185,9 +185,9 @@ To install the .NET Profiler per-webapp:
    DD_VERSION=1.2.3
    ```
 
-2. For standalone applications, manually restart the application as you normally would.
+2. スタンドアロンアプリケーションの場合は、通常通り手動でアプリケーションを再起動します。
 
-3. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+3. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
 [2]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentationbeta
@@ -195,16 +195,16 @@ To install the .NET Profiler per-webapp:
 
 {{% tab "Internet Information Services (IIS)" %}}
 
-3. Set needed environment variables to configure and enable Profiler.
- To enable the Profiler for IIS applications, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry under `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` nodes.
+3. プロファイラーを構成し、有効にするために必要な環境変数を設定します。
+ IIS アプリケーションのプロファイラーを有効にするには、レジストリの `HKLM\System\CurrentControlSet\Services\WAS` と `HKLM\System\CurrentControlSet\Services\W3SVC` ノードで環境変数 `DD_PROFILING_ENABLED` を設定する必要があります。
 
-   <div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> or <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
+   <div class="alert alert-info">v2.14.0 より、MSI を使用してトレーサーをインストールした場合、<code>CORECLR_PROFILER</code> または <code>COR_PROFILER</code> を設定する必要がありません。</div>
 
-   **With the Registry Editor:**
+   **レジストリエディターを使用:**
 
-   In the Registry Editor, modify the multi-string value called `Environment` in the `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` nodes and set the value data as follows:
+   レジストリエディターで、`HKLM\System\CurrentControlSet\Services\WAS` と `HKLM\System\CurrentControlSet\Services\W3SVC` ノード内の `Environment` という複数文字列値を変更し、以下のように値を設定します。
 
-   For .NET Core and .NET 5+:
+   .NET Core と .NET 5+ の場合:
    ```text
    CORECLR_ENABLE_PROFILING=1
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
@@ -213,9 +213,9 @@ To install the .NET Profiler per-webapp:
    DD_VERSION=1.2.3
    ```
 
-   {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a .NET Core application in IIS" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="レジストリエディターを使用して、IIS の .NET Core アプリケーションの環境変数を作成する" style="width:90%" >}}
 
-   For .NET Framework:
+   .NET Framework の場合:
    ```text
    COR_ENABLE_PROFILING=1
    COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
@@ -223,11 +223,11 @@ To install the .NET Profiler per-webapp:
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
-   {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a .NET Framework application in IIS" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="レジストリエディターを使用して、IIS の .NET Framework アプリケーションの環境変数を作成する" style="width:90%" >}}
 
-   <strong>Note</strong>: the environment variables are applied for <em>all</em> IIS applications. Starting with IIS 10, you can set environment variables for each IIS application in the <a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:\Windows\System32\inetsrv\config\applicationhost.config</code> file</a>. Read the <a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">Microsoft documentation</a> for more details.
+   <strong>注</strong>: 環境変数は、<em>すべての</em> IIS アプリケーションに適用されます。IIS 10 以降、<a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:indexWindowsSystem32/inetsrv/config/applicationhost.config</code> ファイル</a>に IIS アプリケーションごとの環境変数が設定できるようになりました。詳細は、<a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">Microsoft のドキュメント</a>を参照してください。
 
-4. Completely stop and start IIS by running the following commands as an administrator:
+4. 管理者権限で以下のコマンドを実行し、IIS を完全に停止・起動します。
 
    ```cmd
    net stop /y was
@@ -238,21 +238,21 @@ To install the .NET Profiler per-webapp:
      <strong>Note:</strong> Use <code>stop</code> and <code>start</code> commands. A reset or restart does not always work.
    </div>
 
-5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+5. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
 
-{{% tab "Windows services" %}}
-3. Set needed environment variables to configure and enable Profiler. To enable the Profiler for your service, it is required to set the `DD_PROFILING_ENABLED` environment variable in the Registry key associated to the service. If the profiler is running alone (the tracer is deactivated), you can optionally add the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables.
+{{% tab "Windows サービス" %}}
+3. プロファイラーを構成し、有効にするために必要な環境変数を設定します。サービスのプロファイラーを有効にするには、サービスに関連付けられたレジストリキーに `DD_PROFILING_ENABLED` 環境変数を設定することが必要です。プロファイラーが単独で動作している場合 (トレーサーは非アクティブ)、オプションで `DD_SERVICE`、`DD_ENV`、`DD_VERSION` 環境変数を追加することができます。
 
-   <div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> or <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
+   <div class="alert alert-info">v2.14.0 より、MSI を使用してトレーサーをインストールした場合、<code>CORECLR_PROFILER</code> または <code>COR_PROFILER</code> を設定する必要がありません。</div>
 
-   **With the Registry Editor:**
+   **レジストリエディターを使用:**
 
-   In the Registry Editor, create a multi-string value called `Environment` in the  `HKLM\System\CurrentControlSet\Services\MyService` key and set the value data to:
+   レジストリエディターで、`HKLM\System\CurrentControlSet\Services\MyService` キーに `Environment` 複数の文字列値を作成します。
 
-   For .NET Core and .NET 5+:
+   .NET Core と .NET 5+ の場合:
    ```text
    CORECLR_ENABLE_PROFILING=1
    CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
@@ -261,9 +261,9 @@ To install the .NET Profiler per-webapp:
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
-   {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="レジストリエディターを使用して Windows サービスに環境変数を作成" style="width:90%" >}}
 
-   For .NET Framework:
+   .NET Framework の場合:
    ```text
    COR_ENABLE_PROFILING=1
    COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
@@ -272,11 +272,11 @@ To install the .NET Profiler per-webapp:
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
-   {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a Windows service" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="レジストリエディターを使用して Windows サービスに環境変数を作成" style="width:90%" >}}
 
-   **With a PowerShell script:**
+   **PowerShell スクリプトを使用:**
 
-   For .NET Core and .NET 5+:
+   .NET Core と .NET 5+ の場合:
    ```powershell
    [string[]] $v = @(
        "CORECLR_ENABLE_PROFILING=1",
@@ -289,7 +289,7 @@ To install the .NET Profiler per-webapp:
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\MyService -Name Environment -Value $v
    ```
 
-   For .NET Framework:
+   .NET Framework の場合:
    ```powershell
    [string[]] $v = @(
        "COR_ENABLE_PROFILING=1",
@@ -302,18 +302,18 @@ To install the .NET Profiler per-webapp:
    Set-ItemProperty HKLM:SYSTEM\CurrentControlSet\Services\MyService -Name Environment -Value $v
    ```
 
-4. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
+4. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
 
-{{% tab "Windows Standalone applications" %}}
+{{% tab "Windows スタンドアロンアプリケーション" %}}
 
-   <div class="alert alert-info">Starting v2.14.0, you don't need to set <code>CORECLR_PROFILER</code> or <code>COR_PROFILER</code> if you installed the tracer using the MSI.</div>
+<div class="alert alert-info">v2.14.0 より、MSI を使用してトレーサーをインストールした場合、<code>CORECLR_PROFILER</code> または <code>COR_PROFILER</code> を設定する必要がありません。</div>
 
-3. Set needed environment variables to configure and enable Profiler for a non-service application, such as console, ASP.NET (Core), Windows Forms, or WPF. To enable the Profiler for Standalone applications, it is required to set the `DD_PROFILING_ENABLED` environment variable. If the profiler is running alone (the tracer is deactivated), you can optionally set the `DD_SERVICE`, `DD_ENV` and `DD_VERSION` environment variables. The recommended approach is to create a batch file that sets these and starts the application, and run your application using the batch file.
+3. コンソール、ASP.NET (Core)、Windows Forms、WPF などの非サービスアプリケーションでプロファイラーを構成して有効にするために、必要な環境変数を設定します。スタンドアロンアプリケーションのプロファイラーを有効にするには、`DD_PROFILING_ENABLED` 環境変数を設定する必要があります。プロファイラーが単独で動作している場合 (トレーサーは無効)、オプションで環境変数 `DD_SERVICE`、`DD_ENV`、`DD_VERSION` を設定することが可能です。推奨される方法は、これらを設定しアプリケーションを起動するバッチファイルを作成し、そのバッチファイルを使用してアプリケーションを実行することです。
 
-   For .NET Core and .NET 5+:
+   .NET Core と .NET 5+ の場合:
    ```cmd
    SET CORECLR_ENABLE_PROFILING=1
    SET CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
@@ -325,7 +325,7 @@ To install the .NET Profiler per-webapp:
    REM start the application here
    ```
 
-   For .NET Framework:
+   .NET Framework の場合:
    ```cmd
    SET COR_ENABLE_PROFILING=1
    SET COR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
@@ -337,14 +337,14 @@ To install the .NET Profiler per-webapp:
    REM start the application here
    ```
 
-4. A minute or two after you start your application, your profiles appear on the [Datadog APM > Profiler page][1].
+4. アプリケーションの起動 1〜2 分後、[Datadog APM > Profiler ページ][1]にプロファイルが表示されます。
 
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
 
 {{% tab "NuGet" %}}
 
-2. Set the following required environment variables for profiling to attach to your application:
+2. プロファイリングをアプリケーションにアタッチするために、以下の必要な環境変数を設定します。
 
    ```
    CORECLR_ENABLE_PROFILING=1
@@ -358,9 +358,9 @@ To install the .NET Profiler per-webapp:
    DD_DOTNET_TRACER_HOME=<APP_DIRECTORY>/datadog
    ```
 
-   The value for the `<APP_DIRECTORY>` placeholder is the path to the directory containing the application's `.dll` files. The value for the `CORECLR_PROFILER_PATH` environment variable varies based on the system where the application is running:
+   `<APP_DIRECTORY>` のプレースホルダーの値は、アプリケーションの `.dll` ファイルがあるディレクトリへのパスです。環境変数 `CORECLR_PROFILER_PATH` の値は、アプリケーションが動作しているシステムに応じて変化します。
 
-   Operating System and Process Architecture | CORECLR_PROFILER_PATH Value | LD_PRELOAD Value
+   オペレーティングシステムとプロセスアーキテクチャ｜CORECLR_PROFILER_PATH の値 | LD_PRELOAD の値
    ------------------------------------------|-------------------------------------|---------------------------
    Alpine Linux x64 | `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`| `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Linux.ApiWrapper.x64.so`
    Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so` | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Linux.ApiWrapper.x64.so`
@@ -368,15 +368,15 @@ To install the .NET Profiler per-webapp:
    Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll` | N/A
    Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll` | N/A
 
-3. For Docker images running on Linux, configure the image to run the `createLogPath.sh` script:
+3. Linux 上で動作する Docker イメージの場合、`createLogPath.sh` スクリプトを実行するように構成します。
 
    ```
    RUN /<APP_DIRECTORY>/datadog/createLogPath.sh
    ```
 
-   Docker examples are available in the [`dd-trace-dotnet` repository][1].
+   Docker のサンプルは [`dd-trace-dotnet` リポジトリ][1]で公開されています。
 
-4. For standalone applications, manually restart the application.
+4. スタンドアロンアプリケーションの場合は、手動でアプリケーションを再起動します。
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 {{% /tab %}}
@@ -392,40 +392,40 @@ To install the .NET Profiler per-webapp:
 {{< /tabs >}}
 
 
-## Configuration
+## 構成
 
-You can configure the profiler using the following environment variables. Note that most of these settings also apply to the Tracer configuration. Restart the application after any of these settings is changed.
+プロファイラーを構成するには、以下の環境変数を使用します。これらの設定のほとんどは、トレーサーの構成にも適用されることに注意してください。これらの設定を変更した後は、アプリケーションを再起動します。
 
-| Environment variable                             | Type          | Description                                                                                      |
+| 環境変数                             | タイプ          | 説明                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_ENV`                   | String        | The [environment][3] name, for example, `production`. If not set, will be `unspecified-environment` |
-| `DD_SERVICE`               | String        | The [service][3] name, for example, `web-backend`. If this is not specified, the .NET Profiler tries to determine the service name automatically from the application name (process entry assembly or process name).    |
-| `DD_VERSION`               | String        | The [version][3] of your service. If not set, will be `unspecified-version` |
-| `DD_TAGS`                  | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
-| `DD_AGENT_HOST`            | String        | Sets the host where profiles are sent (the host running the Agent). Can be a hostname or an IP address. Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to `localhost`.  |
-| `DD_TRACE_AGENT_PORT`      | String        | Sets the port where profiles are sent (the port where the Agent is listening for connections). Ignored if `DD_TRACE_AGENT_URL` is set. Defaults to`8126`.  |
-| `DD_TRACE_AGENT_URL`       | String        | Sets the URL endpoint where profiles are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. Defaults to `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>`.  |
-| `DD_TRACE_DEBUG`           | Boolean        | Enables or disables debug logging (Could help in case of troubleshooting investigation). Valid values are: `true` or `false`. Defaults to `false`.  |
-| `DD_PROFILING_LOG_DIR`     | String        | Sets the directory for .NET Profiler logs. Defaults to `%ProgramData%\Datadog .NET Tracer\logs\`. (Prior to v2.24, the default directory was `%ProgramData%\Datadog-APM\logs\`)  |
-| `DD_PROFILING_ENABLED`     | Boolean        | If set to `true`, enables the .NET Profiler. Defaults to `false`.  |
-| `DD_PROFILING_WALLTIME_ENABLED` | Boolean        | If set to `false`, disables the Wall time profiling. Defaults to `true`.  |
-| `DD_PROFILING_CPU_ENABLED` | Boolean        | If set to `false`, disables the CPU profiling. Defaults to `true`.  |
-| `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | If set to `true`, enables the Exceptions profiling (beta). Defaults to `false`.  |
-| `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | If set to `true`, enables the Allocations profiling (beta). Defaults to `false`.  |
-| `DD_PROFILING_LOCK_ENABLED` | Boolean        | If set to `true`, enables the Lock Contention profiling (beta). Defaults to `false`.  |
-| `DD_PROFILING_HEAP_ENABLED` | Boolean        | If set to `true`, enables the Live Heap profiling (beta). Defaults to `false`.  |
-| `DD_PROFILING_GC_ENABLED` | Boolean        | If set to `false`, disable Garbage Collection profiling used in Timeline user interface. Defaults to `true`.  |
+| `DD_ENV`                   | 文字列        | [環境][3]名、例えば `production` です。設定されていない場合は、 `unspecified-environment` となります。 |
+| `DD_SERVICE`               | 文字列        | [サービス][3]名、例えば `web-backend` です。これが指定されていない場合、.NET Profiler はアプリケーション名 (プロセスエントリアセンブリまたはプロセス名) から自動的にサービス名を決定しようとします。    |
+| `DD_VERSION`               | 文字列        | サービスの[バージョン][3]。設定されていない場合は、`unspecified-version` となります。 |
+| `DD_TAGS`                  | 文字列        | アップロードされたプロファイルに適用するタグ。`<key>:<value>` のように、コンマ区切り形式のリストである必要があります（例、`layer:api,team:intake`）。   |
+| `DD_AGENT_HOST`            | 文字列        | プロファイルが送信されるホストを設定します (Agent を実行するホスト)。ホスト名または IP アドレスにできます。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。デフォルトは `localhost` です。  |
+| `DD_TRACE_AGENT_PORT`      | 文字列        | プロファイルが送信されるポートを設定します (Agent が接続のためにリッスンしているポート)。`DD_TRACE_AGENT_URL` が設定されている場合は無視されます。デフォルトは `8126` です。  |
+| `DD_TRACE_AGENT_URL`       | 文字列        | プロファイルが送信される URL エンドポイントを設定します。設定された場合、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` をオーバーライドします。デフォルトは `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` です。  |
+| `DD_TRACE_DEBUG`           | Boolean        | デバッグログを有効または無効にします (トラブルシューティングの調査時に役立ちます)。有効な値は `true` または `false` です。デフォルトは `false` です。  |
+| `DD_PROFILING_LOG_DIR`     | 文字列        | .NET Profiler のログを保存するディレクトリを設定します。デフォルトは `%ProgramData%\Datadog .NET Tracer\logs\` です。(v2.24 以前は、デフォルトのディレクトリは `%ProgramData%\Datadog-APM\logs\` でした)  |
+| `DD_PROFILING_ENABLED`     | Boolean        | `true` に設定すると、.NET Profiler が有効になります。デフォルトは `false` です。  |
+| `DD_PROFILING_WALLTIME_ENABLED` | Boolean        | `false` に設定すると、Wall time プロファイリングが無効になります。デフォルトは `true` です。  |
+| `DD_PROFILING_CPU_ENABLED` | Boolean        | `false` に設定すると、CPU プロファイリングが無効になります。デフォルトは `true` です。  |
+| `DD_PROFILING_EXCEPTION_ENABLED` | Boolean        | `true` に設定すると、Exceptions プロファイリングが有効になります (ベータ版)。デフォルトは `false` です。  |
+| `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | `true` に設定すると、Allocations プロファイリングが有効になります (ベータ版)。デフォルトは `false` です。  |
+| `DD_PROFILING_LOCK_ENABLED` | Boolean        | `true` に設定すると、Lock Contention プロファイリングが有効になります (ベータ版)。デフォルトは `false` です。  |
+| `DD_PROFILING_HEAP_ENABLED` | Boolean        | `true` に設定すると、Live Heap プロファイリングが有効になります (ベータ版)。デフォルトは `false` です。  |
+| `DD_PROFILING_GC_ENABLED` | Boolean        | `false` に設定すると、Timeline のユーザーインターフェイスで使用される Garbage Collection のプロファイリングを無効にします。デフォルトは `true` です。  |
 
 <div class="alert alert-warning">
-<strong>Note</strong>: For IIS applications, you must set environment variables in the Registry (under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes) as shown in the <a href="?tab=windowsservices#installation">Windows Service tab, above</a>. The environment variables are applied for <em>all</em> IIS applications.
-Starting with IIS 10, you can set environment variables for each IIS application in the <a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:\Windows\System32\inetsrv\config\applicationhost.config</code> file</a>. Read the <a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">Microsoft documentation</a> for more details.
+<strong>注</strong>: IIS アプリケーションでは、<a href="?tab=windowsservices#installation">上記の Windows Service タブ</a>のように、レジストリ(<code>HKLM\System\CurrentControlSet\Services\WAS</code> および <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> ノード) で環境変数の設定を行う必要があります。この環境変数は、<em>すべての</em> IIS アプリケーションに適用されます。
+IIS 10 以降では、<a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:\Windows\System32\inetsrv\config\applicationhost.config</code> ファイル</a>で、IIS アプリケーションごとの環境変数を設定できます。詳細は、<a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">Microsoft のドキュメント</a>を参照してください。
 </div>
 
 <br>
 
-## Further Reading
+## その他の参考資料
 
-The [Getting Started with Profiler][4] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+[プロファイラーの概要][4]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
 {{< partial name="whats-next/whats-next.html" >}}
 

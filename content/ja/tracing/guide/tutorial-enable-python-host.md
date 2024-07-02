@@ -3,19 +3,19 @@ title: Tutorial - Enabling Tracing for a Python Application on the Same Host as 
 kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
-  tag: Documentation
+  tag: ドキュメント
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/python/
-  tag: Documentation
+  tag: ドキュメント
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/python/
-  tag: Documentation
+  tag: ドキュメント
   text: Supported Python frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/python/
-  tag: Documentation
+  tag: ドキュメント
   text: Manually configuring traces and spans
 - link: "https://github.com/DataDog/dd-trace-py"
-  tag: Source Code
+  tag: ソースコード
   text: Tracing library open source code repository
 ---
 

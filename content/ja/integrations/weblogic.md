@@ -36,7 +36,7 @@
 "categories":
 - log collection
 - oracle
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/weblogic/README.md"
 "display_on_public_website": true
@@ -73,57 +73,57 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-Oracle WebLogic is a platform for developing, running and deploying enterprise Java applications both on-premises and in the cloud. It centralizes application services that include web server functionality, business components such as messaging, and access to backend enterprise systems such as databases. 
+Oracle WebLogic は、オンプレミスおよびクラウドの両方で、エンタープライズ Java アプリケーションを開発、実行、導入するためのプラットフォームです。Web サーバー機能、メッセージングなどのビジネスコンポーネント、データベースなどのバックエンドエンタープライズシステムへのアクセスなどのアプリケーションサービスを一元管理します。
 
-Oracle WebLogic monitoring with Datadog enables you to:
-- Gain awareness of increasing heap size in your Java Virtual Machine (JVM)
-- Track server response time
-- Monitor session details of web applications
-- Track thread pool and messaging services
-- Track database connection pool usage
+Datadog による Oracle WebLogic のモニタリングでは、以下のことが可能です。
+- Java 仮想マシン (JVM) のヒープサイズの増大を意識する
+- サーバーの応答時間を追跡する
+- Web アプリケーションのセッションの詳細を監視する
+- スレッドプールとメッセージングサービスを追跡する
+- データベース接続プールの使用量を追跡する
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The WebLogic check is included in the [Datadog Agent][1] package.
-No additional installation is needed on your server.
+WebLogic チェックは [Datadog Agent][1] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-1. This check is JMX-based and collects metrics from the Platform MBean Server exported by the JVM, so your WebLogic servers must have JMX Remote Monitoring enabled. See [Remote Monitoring and Management][2] for installation instructions.
+1. このチェックは JMX ベースで、JVM によりエキスポートされた プラットフォーム MBean サーバーからメトリクスを収集するため、WebLogic サーバーで JMX リモートモニタリングが有効になっている必要があります。インストール手順については、[リモートモニタリングおよび管理][2]を参照してください。
 
-2. Set the system property `-Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder` to enable these metrics on the Platform MBean Server. This may be enabled in either the WebLogic Server Administration Console or in the server startup scripts:
+2. Set the system property `-Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder` to enable these metrics on the Platform MBean Server. This should be enabled in both the WebLogic Server Administration Console and in the server startup scripts. **Note**: This can and should be done more than once.
 
 
-   _**Enable in the Administration Console**_
+   _**管理コンソールで有効化**_
 
    ```
    Domain => Configuration => General => Advanced => Platform MBean Server Enabled
    ```
 
-   _**Enable in Server Startup Scripts**_
+   _**サーバー起動スクリプトで有効化**_
 
    ```yaml
    -Djavax.management.builder.initial=weblogic.management.jmx.mbeanserver.WLSMBeanServerBuilder
    ```
 
-   For more information, see the [WebLogic documentation][3].
+   詳細については、[WebLogic のドキュメント][3]を参照してください。
 
 
-3. Verify that the [`PlatformMBeanServerUsed`][4] attribute value is set to `true` in the WebLogic Server Administration Console. The default value is `true` in WebLogic Server versions 10.3.3.0 and above. This setting can be found in the WebLogic Server Administration Console or configured using the WebLogic Scripting Tool (WSLT). 
+3. WebLogic サーバー管理コンソールで [`PlatformMBeanServerUsed`][4] 属性の値が `true` に設定されていることを確認します。WebLogic サーバーのバージョン 10.3.3.0 以上で、デフォルト値は `true` です。この設定は、WebLogic サーバー管理コンソールにあります。または、WebLogic Scripting Tool (WSLT) を使用して構成できます。
 
-   _**Enable in the Administration Console**_
+   _**管理コンソールで有効化**_
 
    ```
    Domain (<WEBLOGIC_SERVER>) => Configuration => General => (Advanced) => Platform MBeanServer Enabled
    ```
 
-   _**Enable in WLST**_
+   _**WLST で有効化**_
 
-   Start an edit session. Navigate to the JMX directory for the domain and use `cmo.setPlatformMBeanServerUsed(true)` to enable the attribute if it is set to `false`.
+   編集セッションを開始します。ドメインの JMX ディレクトリに移動し、`false` に設定されている場合は `cmo.setPlatformMBeanServerUsed(true)` を使用して有効にします。
 
-   For example:
+   例:
    ```
    # > java weblogic.WLST
    (wlst) > connect('weblogic','weblogic')
@@ -135,42 +135,42 @@ No additional installation is needed on your server.
    (wlst) > exit()
    ```
 
-   Activate the changes and restart the WebLogic server.
+   変更をアクティブにして、WebLogic サーバーを再起動します。
 
-### Configuration
+### 構成
 
-1. Edit the `weblogic.d/conf.yaml` file, in the `conf.d/` folder at the root of your
-   Agent's configuration directory to start collecting your WebLogic performance data.
-   See the [sample weblogic.d/conf.yaml][5] for all available configuration options.
+1. Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `weblogic.d/conf.yaml` ファイルを編集して、
+   WebLogic パフォーマンスデータの収集を開始します。 
+   使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル weblogic.d/conf.yaml][5] を参照してください。
 
-   This check has a limit of 350 metrics per instance. The number of returned metrics is indicated when running the Datadog Agent [status command][6].
-   You can specify the metrics you are interested in by editing the [configuration][5].
+   このチェックは、1 インスタンスあたり 350 メトリクスの制限があります。返されたメトリクスの数は、Datadog Agent の [status コマンド][6]を実行したときに表示されます。
+   [構成][5]を編集することで、関心があるメトリクスを指定できます。
 
-   To learn how to customize the metrics to collect, see the [JMX Checks documentation][7] for more detailed instructions.
-   If you need to monitor more metrics, contact [Datadog support][8].
+   収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][7]で詳細な手順を参照してください。
+   制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][8]までお問い合わせください。
 
-2. [Restart the Agent][9]
+2. [Agent を再起動します][9]
 
-### Validation
+### 検証
 
-[Run the Agent's `status` subcommand][6] and look for `weblogic` under the Checks section.
+[Agent の `status` サブコマンドを実行][6]し、Checks セクションで `weblogic` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "weblogic" >}}
 
 
-### Log collection
+### ログ収集
 
-1. WebLogic logging services use an implementation based on the Java Logging APIs by default. Clone and edit the [integration pipeline][11] if you have a different format.
+1. WebLogic ロギングサービスは、Java ロギング API に基づく実装をデフォルトで使用します。別のフォーマットを使用する場合は、[インテグレーションパイプライン][11]のクローンを作成し編集します。
 
-2. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+2. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
    ```yaml
    logs_enabled: true
    ```
 
-3. Uncomment and edit the logs configuration block in your `weblogic.d/conf.yaml` file. Change the path and service parameter values based on your environment. See the [sample weblogic.d/conf.yaml][5] for all available configuration options.
+3. `weblogic.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、パスおよびサービスのパラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[weblogic.d/conf.yaml のサンプル][5]を参照してください。
    ```yaml
     - type: file
       path: <DOMAIN_DIR>/servers/<ADMIN_SERVER_NAME>/logs/<ADMIN_SERVER_NAME>.log
@@ -205,22 +205,22 @@ No additional installation is needed on your server.
           name: new_log_start_with_date
           pattern: .*\[\d{2}\/(\w{3}|\w{4})\/\d{4}:\d{2}:\d{2}:\d{2} (\+|-)\d{4}\]
    ```
-4. [Restart the Agent][9]
+4. [Agent を再起動します][9]
 
-### Containerized
-For containerized environments, see the [Autodiscovery with JMX][12] guide.
+### コンテナ化
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][12]のガイドを参照してください。
 
-### Events
+### イベント
 
-The WebLogic integration does not include any events.
+WebLogic インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "weblogic" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][8].
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest

@@ -18,7 +18,7 @@
 "categories":
 - "event management"
 - "issue tracking"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -50,9 +50,9 @@
 
 Honeybadger provides exception and uptime monitoring to keep your web apps error-free. Connect Honeybadger to Datadog to get Honeybadger alerts in your Datadog event stream.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To capture errors from Honeybadger:
 
@@ -64,21 +64,21 @@ To capture errors from Honeybadger:
 6. Save the integration.
 7. Click the **Install Integration** button on the [Honeybadger Integration Tile][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Honeybadger integration does not include any metrics.
 
-### Events
+### イベント
 
 The Honeybadger integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Honeybadger integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

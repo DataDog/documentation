@@ -1,7 +1,7 @@
 ---
-title: Trace Queries
+title: トレースクエリ
 kind: documentation
-description: "Trace Queries"
+description: "トレースクエリ"
 is_beta: true
 aliases:
  - /tracing/trace_queries
@@ -11,7 +11,7 @@ further_reading:
   text: Analyze the root causes and business impact of production issues with Trace Queries
 - link: tracing/trace_explorer
   tag: Documentation
-  text: Trace Explorer
+  text: トレースエクスプローラー
 - link: /tracing/trace_explorer/query_syntax/
   tag: Documentation
   text: Span Query Syntax
@@ -54,78 +54,78 @@ Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace qu
 | `=>` | **Direct relationship**: Traces that contain a span matching the left query that is the direct parent of a span matching the right query | Traces where the service `checkoutservice` is directly calling the service `shippingservice`: <br/>`service:checkoutservice => service:shippingservice` |
 | `NOT` | **Exclusion**: Traces that **do not** contain spans matching the query | Traces that contain spans from the service `web-store`, but not from the service `payments-go`:  <br/>`service:web-store && NOT(service:payments-go)` |
 
-### Trace-level filters
+### トレースレベルのフィルター
 
-Filter the result set of traces further by applying filters on trace-level attributes like the number of spans or the end-to-end duration of the trace in the  **Where** statement:
+**Where** ステートメントで、スパン数やトレースのエンドツーエンドの持続時間のようなトレースレベルの属性にフィルターを適用することで、トレースの結果セットをさらにフィルタリングします。
 
-{{< img src="/tracing/trace_queries/where_statement.png" alt="Trace-level filters example" style="width:100%;" >}}
+{{< img src="/tracing/trace_queries/where_statement.png" alt="トレースレベルのフィルターの例" style="width:100%;" >}}
 
 
-| Filter | Description | Example |
+| フィルター | 説明 | 例 |
 |-----|-----|-----|
-| `span_count(a)` | Number of occurrences of a span | Traces that contain more than 10 calls to a mongo database: <br/>- **queryA**:`service:web-store-mongo @db.statement:"SELECT * FROM stores`<br/>- **Traces matching**:`a`<br/>- **Where**:`span_count(a):>10`|
-| `total_span_count` | Number of spans in the trace | Traces that contain more than 1000 spans: <br/>**Where**`total_span_count:>1000` |
-| `trace_duration` | End to end trace duration | Traces for which the end-to-end execution time is more than 5 seconds : <br/>**Where**:`trace_duration:>2s` |
+| `span_count(a)` | スパンの発生回数 | 10 回を超える mongo データベースへの呼び出しを含むトレース: <br/>- **queryA**:`service:web-store-mongo @db.statement:"SELECT * FROM stores`<br/>- **Traces matching**:`a`<br/>- **Where**:`span_count(a):>10`|
+| `total_span_count` | トレース内のスパン数 | 1000 を超えるスパンを含むトレース: <br/>**Where**`total_span_count:>1000` |
+| `trace_duration` | エンドツーエンドのトレース期間 | エンドツーエンドの実行時間が 5 秒を超えるトレース : <br/>**Where**:`trace_duration:>2s` |
 
-## Flow Map
+## フローマップ
 
-{{< img src="tracing/trace_queries/trace_flow_map.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Flow Map" >}}
+{{< img src="tracing/trace_queries/trace_flow_map.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースフローマップ" >}}
 
-The Flow Map helps you understand the request path and service dependencies from the resulting traces that match the Trace Query. Use the map to identify error paths, unusual service dependencies, or abnormally high request rates to a database.
+フローマップを使用すると、Trace Queries にマッチする結果のトレースから、リクエストパスとサービスの依存関係を理解することができます。マップを使用して、エラーパス、異常なサービス依存関係、またはデータベースへのリクエストレートが異常に高いことを特定します。
 
-**Note**: The Flow Map is powered by [a sample of the ingested traffic](#the-data-that-trace-queries-are-based-on).
+**注**: フローマップは[取り込みトラフィックのサンプル](#the-data-that-trace-queries-are-based-on)によって生成されます。
 
-Service nodes that match span queries are highlighted to show you which parts of the trace your query conditions are targeting.
+スパンクエリにマッチするサービスノードはハイライトされ、クエリ条件がトレースのどの部分を対象としているかを示します。
 
-To get more information about **a single service**, hover on the service's node to see its metrics for request rate and error rate. To see metrics for the request rate and the error rate **between two services**, hover on an edge connecting the two services.
+**1 つのサービス**に関する詳細情報を得るには、そのサービスのノードにカーソルを合わせると、そのリクエストレートとエラーレートのメトリクスが表示されます。**2 つのサービス間**のリクエストレートとエラーレートのメトリクスを表示するには、2 つのサービスを接続するエッジにカーソルを合わせます。
 
-To filter out traces that do not contain a dependency on a particular service, click on the service's node on the map.
+特定のサービスへの依存を含まないトレースを除外するには、マップ上のそのサービスのノードをクリックします。
 
-## Trace list
+## トレースリスト
 
-{{< img src="tracing/trace_queries/trace_list.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace List" >}}
+{{< img src="tracing/trace_queries/trace_list.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="トレースリスト" >}}
 
-The Trace list shows up to fifty sample traces that match the query and are within the selected time range.
-Hover on the Latency Breakdown to get a sense of where (in which services) time is spent during the request execution.
+トレースリストには、選択した時間範囲内でクエリにマッチする最大 50 のサンプルトレースが表示されます。
+レイテンシーブレイクダウンにカーソルを合わせると、リクエスト実行中にどこに (どのサービスに) 時間が費やされたかを知ることができます。
 
-**Note**: Information displayed in the table are attributes from the root span of the trace, including the duration, which **does not** represent the end-to-end duration of the trace.
+**注**: テーブルに表示される情報は、トレースの root スパンからの属性であり、期間を含みます。トレースのエンドツーエンド期間を表すものでは**ありません**。
 
-## Analytics
+## 分析
 
-Select one of the other visualizations, such as `Timeseries`, `Top List`, or `Table` to aggregate results over time, grouped by one or multiple dimensions. Read [Span Visualizations][2] for more information on the aggregation options. 
+`Timeseries`、`Top List`、`Table` などの他の視覚化のいずれかを選択すると、1 つまたは複数のディメンションでグループ化された結果を経時的に集計することができます。集計オプションの詳細については、[スパンの視覚化][2]を参照してください。
 
-In addition to those aggregation options, you must also select which span query (`a`, `b`, `c`, and so on) you want to aggregate the spans from. Select the query that matches the spans from which you're using the tags and attributes in the aggregation options.
+これらの集計オプションに加えて、どのスパンクエリ (`a`、`b`、`c` など) からスパンを集計するかを選択する必要もあります。集計オプションでタグと属性を使用するスパンにマッチするクエリを選択してください。
 
-For example, if you query for traces that contain a span from the service `web-store` (query `a`) and a span from the service `payments-go` with some errors (query `b`), and you visualize a count of spans grouped by `@merchant.tier`, use spans from query `a`, because `merchant.tier` is an attribute from the spans of the service `web-store`, not from the service `payments-go`.
+例えば、サービス `web-store` のスパン (クエリ `a`) と、いくつかのエラーを含むサービス `payments-go` のスパン (クエリ `b`) を含むトレースをクエリし、`@merchant.tier` でグループ化されたスパンのカウントを視覚化する場合、クエリ `a` のスパンを使用します。これは、`merchant.tier` がサービス `payments-go` の属性ではなく、サービス `web-store` のスパンの属性であるためです。
 
-{{< img src="tracing/trace_queries/timeseries_using_spans_from.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Timeseries view" >}}
+{{< img src="tracing/trace_queries/timeseries_using_spans_from.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="時系列ビュー" >}}
 
 
-## How Trace Queries source data
+## Trace Queries ソースデータの仕組み
 
 Datadog uses the [Intelligent Retention Filter][3] to index data for Trace Queries. It does so by performing: 
 
-- [Flat sampling](#1-flat-sampling): A uniform 1% sample of ingested spans.
-- [Diversity sampling](#diversity-sampling): A representative, diverse selection of traces to keep visibility over each environment, service, operation, and resource.
+- [フラットサンプリング](#1-flat-sampling): 取り込まれたスパンの均一な 1% サンプル。
+- [多様性サンプリング](#diversity-sampling): 各環境、サービス、オペレーション、リソースの可視性を維持するための、代表的で多様なトレースの選択。
 
 These two sampling mechanisms capture **complete traces**, meaning that all spans of a trace are always indexed to ensure that Trace Queries return accurate results.
 
-{{< img src="tracing/trace_queries/trace_queries_new_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling & Diversity Sampling" >}}
+{{< img src="tracing/trace_queries/trace_queries_new_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% フラットサンプリングと多様性サンプリング" >}}
 
-**Note**: Spans indexed by flat sampling and diversity sampling do not count towards the usage of indexed spans, and therefore, **do not impact your bill**.
+**注**: フラットサンプリングと多様性サンプリングによってインデックス化されたスパンは、インデックス化されたスパンの使用量にカウントされないため、**請求には影響しません**。
 
-### 1% flat sampling
+### 1% フラットサンプリング
 `retained_by:flat_sampled`
 
 Flat 1% sampling is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision. To learn more, read the [one percent flat sampling documentation][4].
 
-### Diversity sampling
+### 多様性サンプリング
 `retained_by:diversity_sampling`
 
 Every 15 minutes, diversity sampling retains at least one span and the associated trace for each combination of environment, service, operation, and resource. This occurs for the `p75`, `p90`, and `p95` percentile of latencies to ensure that you can always find example traces in service and resource pages, even for low traffic endpoints. To learn more, read the [diversity sampling documentation][5].
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

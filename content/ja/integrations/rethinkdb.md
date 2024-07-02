@@ -30,7 +30,7 @@
 "categories":
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/rethinkdb/README.md"
 "display_on_public_website": true
@@ -67,43 +67,39 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-[RethinkDB][1] is a distributed documented-oriented NoSQL database, with first class support for realtime
-change feeds.
+[RethinkDB][1] は分散型のドキュメント指向 NoSQL データベースです。リアルタイムな変更フィードに対してファーストクラスのサポートを提供します。
 
-This check monitors a RethinkDB cluster through the Datadog Agent and collects metrics about performance,
-data availability, cluster configuration, and more.
+このチェックは Datadog Agent を使用して RethinkDB クラスターを監視し、パフォーマンス、データ可用性、クラスター コンフィギュレーションなどのメトリクスを収集します。
 
-**Note**: this integration is compatible with RethinkDB **version 2.3.6 and above**.
+**注**: このインテグレーションには、RethinkDB **バージョン 2.3.6 以降**が必要です。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For
-containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these
-instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The RethinkDB check is included in the [Datadog Agent][3] package. No additional installation is needed on your server.
+RethinkDB チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-1. If using RethinkDB 2.4+, add a `datadog-agent` user with read-only permissions on the `rethinkdb`
-database. You can use the following ReQL commands, and see [Permissions and user accounts][4] for
-details:
+1. RethinkDB 2.4 以降を使用する場合は、`rethinkdb` データベースに対して読み取り専用のアクセス許可を持つ `datadog-agent` ユーザーを追加してください。
+以下の ReQL コマンドを使用できます。詳しくは、[アクセス許可とユーザーアカウント][4]を
+参照してください。
 
     ```python
     r.db('rethinkdb').table('users').insert({'id': 'datadog-agent', 'password': '<PASSWORD>'})
     r.db('rethinkdb').grant('datadog-agent', {'read': True})
     ```
 
-    **Note**: on RethinkDB 2.3.x, granting permissions on the `rethinkdb` database is not supported. Skip
-    this step and use your [admin account][5] below instead.
+    **注**: RethinkDB 2.3.x の場合、`rethinkdb` データベースに対するアクセス許可の付与はサポートされていません。
+   この手順をスキップし、下記の[管理者アカウント][5]を使用してください。
 
-2. Edit the `rethinkdb.d/conf.yaml` file in the `conf.d/` folder at the root of your
-[Agent's configuration directory][6]. See the [sample rethinkdb.d/conf.yaml][7] for all available
-configuration options.
+2. [Agent のコンフィギュレーションディレクトリ][6]のルートにある `conf.d/` フォルダーの `rethinkdb.d/conf.yaml` ファイルを編集します。
+使用可能なすべてのコンフィギュレーションオプションについては、[rethinkdb.d/conf.yaml のサンプル][7]を
+参照してください。
 
     ```yaml
     init_config:
@@ -115,20 +111,20 @@ configuration options.
         password: "<PASSWORD>"
     ```
 
-3. [Restart the Agent][8].
+3. [Agent を再起動します][8]。
 
-**Note**: this integration collects metrics from all servers in the cluster, so you only need a single Agent.
+**注**: このインテグレーションはクラスター内のすべてのサーバーからメトリクスを収集します。したがって、Agent は 1 つしか必要ありません。
 
-#### Log collection
+#### ログ収集
 
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Edit this configuration block in your `rethinkdb.d/conf.yaml` file to start collecting your RethinkDB logs:
+2. RethinkDB ログの収集を開始するには、次のコンフィギュレーションブロックを `rethinkdb.d/conf.yaml` ファイルで編集します。
 
     ```yaml
     logs:
@@ -139,33 +135,33 @@ configuration options.
     ```
 
 
-    Change the `path` parameter value based on your environment. See the [sample conf.yaml][7] for all available configuration options.
+    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[conf.yaml のサンプル][7]を参照してください。
 
-3. [Restart the Agent][8].
+3. [Agent を再起動します][8]。
 
-To enable logs for Kubernetes environments, see [Kubernetes Log Collection][9].
+Kubernetes 環境のログを有効にするには、[Kubernetes ログ収集][9]を参照してください。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][10] and look for `rethinkdb` under the Checks section.
+[Agent のステータスサブコマンドを実行][10]し、Checks セクションで `rethinkdb` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "rethinkdb" >}}
 
 
-### Events
+### イベント
 
-RethinkDB does not include any events.
+RethinkDB には、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "rethinkdb" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][13].
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
 
 [1]: https://rethinkdb.com

@@ -3,53 +3,52 @@ dependencies:
 - "https://github.com/DataDog/chef-datadog/blob/main/README.md"
 title: Chef
 ---
-The Datadog Chef recipes are used to deploy Datadog's components and configuration automatically. The cookbook includes support for:
+Datadog Chef レシピは Datadog のコンポーネントとコンフィギュレーションを自動的にデプロイするために使用します。クックブックは次のバージョンに対応しています。
 
-* Datadog Agent v7.x (default)
+* Datadog Agent v7.x (デフォルト)
 * Datadog Agent v6.x
 * Datadog Agent v5.x
 
-**Note**: This page may discuss features that are not available for your selected version. Check the README of the
-git tag or gem version for your version's documentation.
+**注**: 本ページには、ご利用のバージョンでは使用できない機能が記載されている場合があります。ご利用のバージョンのドキュメントについては、Git タグの README または gem バージョンをご確認ください。
 
-## Setup
+## セットアップ
 
-### Requirements
+### 要件
 
-The Datadog Chef cookbook is compatible with `chef-client` >= 12.7. If you need support for Chef < 12.7, use a [release 2.x of the cookbook][2]. See the [CHANGELOG][3] for more info.
+Datadog Chef クックブックは 12.7 以降の `chef-client` と互換性があります。12.7 以前の Chef を使用されている場合は、[クックブックのリリース 2.x][2] をご使用ください。詳細については [CHANGELOG][3] 参照してください。
 
-#### Platforms
+#### プラットフォーム
 
-The following platforms are supported:
+下記のプラットフォームに対応しています。
 
-* AlmaLinux (requires Chef 16 >= 16.10.8 or Chef >= 17.0.69)
+* AlmaLinux (Chef 16 >= 16.10.8 または Chef >= 17.0.69 が必要です)
 * Amazon Linux
 * CentOS
 * Debian
-* RedHat (RHEL 8 requires Chef >= 15)
-* Rocky (requires Chef 16 >= 16.17.4 or Chef >= 17.1.35)
+* RedHat (RHEL 8 には Chef 15 以降が必要)
+* Rocky (Chef 16 >= 16.17.4 または Chef >= 17.1.35 が必要です)
 * Scientific Linux
 * Ubuntu
 * Windows
-* SUSE (requires Chef >= 13.3)
+* SUSE (Chef 13.3 以降が必要)
 
-#### Cookbooks
+#### クックブック
 
-The following Opscode cookbooks are dependencies:
+下記の Opscode クックブックには依存性があります。
 
 * `apt`
 * `chef_handler`
 * `yum`
 
-**Note**: `apt` cookbook v7.1+ is needed to install the Agent on Debian 9+.
+**注**: `apt` クックブック v7.1 以降では、Agent を Debian 9 以降にインストールする必要があります。
 
 #### Chef
 
-**Chef 13 users**: With Chef 13 and `chef_handler` 1.x, you may have trouble using the `dd-handler` recipe. The known workaround is to update your dependency to `chef_handler` >= 2.1.
+**Chef 13 ユーザー**: Chef 13 と `chef_handler` 1.x を使用している場合、`dd-handler` レシピを使用できないことがあります。現在のところ、依存性のあるクックブック `chef_handler` を 2.1 以降へアップデートすることで、これを回避できます。
 
-### Installation
+### インストール
 
-1. Add the cookbook to your Chef server with [Berkshelf][5] or [Knife][6]:
+1. [Berkshelf][5] または [Knife][6] を使用して、クックブックを Chef サーバーに追加します。
     ```text
     # Berksfile
     cookbook 'datadog', '~> 4.0'
@@ -60,46 +59,46 @@ The following Opscode cookbooks are dependencies:
     knife cookbook site install datadog
     ```
 
-2. Set the [Datadog-specific attributes](#datadog-attributes) in a role, environment, or another recipe:
+2. ロール、環境、または他のレシピに [Datadog 固有の属性](#Datadog の属性)を設定します。
     ```text
     node.default['datadog']['api_key'] = "<YOUR_DD_API_KEY>"
 
     node.default['datadog']['application_key'] = "<YOUR_DD_APP_KEY>"
     ```
 
-3. Upload the updated cookbook to your Chef server:
+3. 更新したクックブックを Chef サーバーにアップロードします。
     ```shell
     berks upload
     # or
     knife cookbook upload datadog
     ```
 
-4. After uploading, add the cookbook to your node's `run_list` or `role`:
+4. アップロードが完了したら、ノードの `run_list` または `role` にクックブックを追加します。
     ```text
     "run_list": [
       "recipe[datadog::dd-agent]"
     ]
     ```
 
-5. Wait for the next scheduled `chef-client` run or trigger it manually.
+5. 次に予定されている `chef-client` の実行を待つか、手動でこれをトリガーします。
 
-#### Datadog attributes
+#### Datadog の属性
 
-The following methods are available for adding your [Datadog API and application keys][4]:
+[Datadog API キーとアプリケーションキー][4]の追加には、下記のメソッドを使用できます。
 
-* As node attributes with an `environment` or `role`.
-* As node attributes by declaring the keys in another cookbook at a higher precedence level.
-* In the node `run_state` by setting `node.run_state['datadog']['api_key']` in another cookbook preceding Datadog's recipes in the `run_list`. This approach does not store the credential in clear text on the Chef Server.
+* `environment` または `role` と一緒にノード属性として追加。
+* 上位の優先レベルで他のクックブックにキーを宣言することで、ノード属性として追加。
+* ノード `run_state` で、`run_list` の優先する他の Datadog のレシピに `node.run_state['datadog']['api_key']` を設定することで追加。この手法では、Chef  サーバー上のプレーンテキストの認証情報は保存されません。
 
-**Note**: When using the run state to store your API and application keys, set them at compile time before `datadog::dd-handler` in the run list.
+**注**: API キーとアプリケーションキーを保存するために実行状態を使用している場合は、これらを実行リストの `datadog::dd-handler` 以前のコンパイル時間に設定してください。
 
-#### Extra configuration
+#### 追加のコンフィギュレーション
 
-To add additional elements to the Agent configuration file (typically `datadog.yaml`) that are not directly available as attributes of the cookbook, use the `node['datadog']['extra_config']` attribute. This is a hash attribute, which is marshaled into the configuration file accordingly.
+クックブックの属性として直接利用できない Agent コンフィギュレーションファイル (通常 `datadog.yaml`) に要素をさらに追加するには、`node['datadog']['extra_config']` 属性を使用します。これは、状況に応じてコンフィギュレーションファイルに配置されているハッシュ属性です。
 
-##### Examples
+##### 例
 
-The following code sets the field `secret_backend_command` in the configuration file `datadog.yaml`:
+次のコードは、コンフィギュレーションファイル `datadog.yaml` にフィールド `secret_backend_command` を設定します。
 
 ```ruby
  default_attributes(
@@ -111,38 +110,38 @@ The following code sets the field `secret_backend_command` in the configuration 
  )
 ```
 
-The `secret_backend_command` can also be set using:
+`secret_backend_command` は、下記を使用して設定することもできます。
 
 ```text
 default['datadog']['extra_config']['secret_backend_command'] = '/sbin/local-secrets'
 ```
 
-For nested attributes, use object syntax. The following code sets the field `logs_config` in the configuration file `datadog.yaml`:
+ネストされた属性にはオブジェクト構文を使用します。下記のコードはコンフィギュレーションファイル `datadog.yaml` にフィールド `logs_config` を設定します。
 
 ```ruby
 default['datadog']['extra_config']['logs_config'] = { 'use_port_443' => true }
 ```
 
-#### AWS OpsWorks Chef deployment
+#### AWS OpsWorks Chef のデプロイメント
 
-Follow the steps below to deploy the Datadog Agent with Chef on AWS OpsWorks:
+下記のステップに従って、Datadog Agent を Chef と一緒に AWS OpsWorks でデプロイします。
 
-1. Add Chef custom JSON:
+1. Chef カスタム JSON を追加します。
   ```json
   {"datadog":{"agent_major_version": 7, "api_key": "<API_KEY>", "application_key": "<APP_KEY>"}}
   ```
 
-2. Include the recipe in the `install-lifecycle` recipe:
+2. `install-lifecycle` レシピにレシピをインクルードします。
   ```ruby
   include_recipe '::dd-agent'
   ```
 
-### Integrations
+### インテグレーション
 
-Enable Agent integrations by including the [recipe](#recipes) and configuration details in your role’s run-list and attributes.
-**Note**: You can use the `datadog_monitor` resource for enabling Agent integrations without a recipe.
+ロールの実行リストと属性に[レシピ](#レシピ)とコンフィギュレーションの詳細を含めることで、Agent インテグレーションを有効化します。
+**注**: `datadog_monitor `リソースを使用して、レシピなしで Agent インテグレーションを有効にすることができます。
 
-Associate your recipes with the desired `roles`, for example `role:chef-client` should contain `datadog::dd-handler` and `role:base` should start the Agent with `datadog::dd-agent`. Below is an example role with the `dd-handler`, `dd-agent`, and `mongo` recipes:
+レシピを適切な `roles` に関連付けます。たとえば、`role:chef-client` に `datadog::dd-handler` が含まれ、`role:base` は Agent を `datadog::dd-agent` で開始する必要があります。下記は、`dd-handler`、`dd-agent`、`mongo` レシピを使用したロールの例です。
 
 ```ruby
 name 'example'
@@ -168,43 +167,43 @@ run_list %w(
 )
 ```
 
-**Note**: `data_bags` are not used in this recipe because it is unlikely to have multiple API keys with only one application key.
+**注**: API キーを複数持ち、アプリケーションキーを 1 つしか持たない可能性は低いため、`data_bags` はこのレシピでは使用されていません。
 
-## Versions
+## バージョン
 
-By default, the current major version of this cookbook installs Agent v7. The following attributes are available to control the Agent version installed:
+デフォルトでは、このクックブックの現在の主要バージョンは Agent v7 をインストールします。インストール済みの  Agent  バージョンを管理するには、下記の属性を利用できます。
 
-| Parameter              | Description                                                                                                                                                                         |
+| パラメーター              | 説明                                                                                                                                                                         |
 |------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `agent_major_version`  | Pin the major version of the Agent to 5, 6, or 7 (default).                                                                                                                         |
-| `agent_version`        | Pin a specific Agent version (recommended).                                                                                                                                         |
-| `agent_package_action` | (Linux only) Defaults to `'install'` (recommended), `'upgrade'` to get automatic Agent updates (not recommended, use the default and change the pinned `agent_version` to upgrade). |
-| `agent_flavor` | (Linux only) Defaults to `'datadog-agent'` to install the datadog-agent, can be set to `'datadog-iot-agent'` to install the IOT agent. |
+| `agent_major_version`  | Agent の主要バージョンを 5、6 または 7 (デフォルト) に固定する。                                                                                                                         |
+| `agent_version`        | 特定の Agent バージョンに固定する (推奨)。                                                                                                                                         |
+| `agent_package_action` | (Linux のみ) `'install'` をデフォルトに設定 (推奨)、Agent の自動アップデートを実施する場合は `'upgrade'` に設定 (非推奨。アップグレードするには、デフォルトを使用して、固定の `agent_version` を変更するようにしてください)。 |
+| `agent_flavor` | (Linux のみ) datadog-agent をインストールするためのデフォルト `'datadog-agent'` は、IOT エージェントのインストールには `'datadog-iot-agent'` に設定できます。 |
 
-See the sample [attributes/default.rb][1] for your cookbook version for all available attributes.
+すべての利用可能な属性については、ご利用のクックブックバージョンのサンプル [attributes/default.rb][1] を参照してください。
 
-### Upgrade
+### アップグレード
 
-Some attribute names have changed from version 3.x to 4.x of the cookbook. Use this reference table to update your configuration:
+クックブックのバージョン 3.x から 4.x にかけて、一部の属性名が変更されています。下記の参照テーブルをご確認のうえ、ご利用のコンフィギュレーションを更新してください。
 
-| Action                | Cookbook 3.x                                          | Cookbook 4.x                              |
+| アクション                | クックブック 3.x                                          | クックブック 4.x                              |
 |-----------------------|-------------------------------------------------------|-------------------------------------------|
-| Install Agent 7.x     | Not supported                                         | `'agent_major_version' => 7`              |
-| Install Agent 6.x     | `'agent6' => true`                                    | `'agent_major_version' => 6`              |
-| Install Agent 5.x     | `'agent6' => false`                                   | `'agent_major_version' => 5`              |
-| Pin agent version     | `'agent_version'` or `'agent6_version'`               | `'agent_version'` for all versions        |
-| Change package_action | `'agent_package_action'` or `'agent6_package_action'` | `'agent_package_action'` for all versions |
-| Change APT repo URL   | `'aptrepo'` or `'agent6_aptrepo'`                     | `'aptrepo'` for all versions              |
-| Change APT repo distribution  | `'aptrepo_dist'` or `'agent6_aptrepo_dist'`   | `'aptrepo_dist'` for all versions         |
-| Change YUM repo       | `'yumrepo'` or `'agent6_yumrepo'`                     | `'yumrepo'` for all versions              |
-| Change SUSE repo      | `'yumrepo_suse'` or `'agent6_yumrepo_suse'`           | `'yumrepo_suse'` for all versions         |
+| Agent 7.x のインストール     | サポート対象外                                         | `'agent_major_version' => 7`              |
+| Agent 6.x のインストール     | `'agent6' => true`                                    | `'agent_major_version' => 6`              |
+| Agent 5.x のインストール     | `'agent6' => false`                                   | `'agent_major_version' => 5`              |
+| Agent のバージョンを固定     | `'agent_version'` または `'agent6_version'`               | 全バージョンで `'agent_version'`        |
+| package_action の変更 | `'agent_package_action'` または `'agent6_package_action'` | 全バージョンで `'agent_package_action'` |
+| APT repo URL の変更   | `'aptrepo'` または `'agent6_aptrepo'`                     | 全バージョンで `'aptrepo'`              |
+| APT リポジトリディストリビューションの変更  | `'aptrepo_dist'` または `'agent6_aptrepo_dist'`   | 全バージョンで `'aptrepo_dist'`         |
+| YUM repo の変更       | `'yumrepo'` または `'agent6_yumrepo'`                     | 全バージョンで `'yumrepo'`              |
+| SUSE repo の変更      | `'yumrepo_suse'` または `'agent6_yumrepo_suse'`           | 全バージョンで `'yumrepo_suse'`         |
 
-Use one of the following methods to upgrade from Agent v6 to v7:
+Agent v6 から v7 へアップグレードするには、下記のメソッドのいずれか 1 つを使用します。
 
-* Set `agent_major_version` to `7`, `agent_package_action` to `install`, and pin a specific v7 version as `agent_version` (recommended).
-* Set `agent_major_version` to `7` and `agent_package_action` to `upgrade`.
+* `agent_major_version` を `7` に設定し、`agent_package_action` を `install` に設定したのち、特定の v7 バージョンを `agent_version` として固定します (推奨)。
+* `agent_major_version` を `7` に設定し、`agent_package_action` を `upgrade` に設定します。
 
-The following example upgrades from Agent v6 to v7. The same applies if you are upgrading from Agent v5 to v6.
+下記の例では Agent v6 から v7 へアップグレードします。Agent v5 から v6 へアップグレードする場合も、同様に適用できます。
 
 ```ruby
 default_attributes(
@@ -216,11 +215,11 @@ default_attributes(
 )
 ```
 
-### Downgrade
+### ダウングレード
 
-To downgrade the Agent version, set the `'agent_major_version'`, `'agent_version'`, and `'agent_allow_downgrade'`.
+Agent のバージョンをダウングレードするには、`'agent_major_version'`、`'agent_version'`、`'agent_allow_downgrade'` を設定します。
 
-The following example downgrades to Agent v6. The same applies if you are downgrading to Agent v5.
+下記の例では Agent v6 にダウングレードします。Agent v5 にダウングレードする場合も、同様に適用できます。
 
 ```ruby
   default_attributes(
@@ -232,17 +231,17 @@ The following example downgrades to Agent v6. The same applies if you are downgr
   )
 ```
 
-### Uninstall
+### アンインストール
 
-To uninstall the Agent, remove the `dd-agent` recipe and add the `remove-dd-agent` recipe with no attributes.
+Agent をアンインストールするには、`dd-agent` レシピを削除し、属性なしで `remove-dd-agent` レシピを追加します。
 
-### Custom Agent repository
+### カスタム Agent リポジトリ
 
-To use an Agent from a custom repository, you can set the `aptrepo` option. 
+カスタムリポジトリから Agent を使用するには、`aptrepo` オプションを設定します。
 
-By default, this option is equal to `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] apt.datadoghq.com`. If a custom value is set, another `signed-by` keyring can also be set `[signed-by=custom-repo-keyring-path] custom-repo`.
+デフォルトでは、このオプションは `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] apt.datadoghq.com` と等しくなります。カスタム値が設定されている場合、別の `signed-by` キーリングを `[signed-by=custom-repo-keyring-path] custom-repo` に設定することもできます。
 
-The example below uses the staging repository:
+以下の例では、ステージングリポジトリを使用しています。
 
 ```ruby
   default_attributes(
@@ -252,96 +251,96 @@ The example below uses the staging repository:
   }
 ```
 
-## Recipes
+## レシピ
 
-Access the [Datadog Chef recipes on GitHub][7].
+[GitHub で Datadog Chef レシピ][7]にアクセスします。
 
-### Default
+### デフォルト
 
-The [default recipe][8] is a placeholder.
+[デフォルトのレシピ][8]はプレースホルダーです。
 
 ### Agent
 
-The [dd-agent recipe][9] installs the Datadog Agent on the target system, sets your [Datadog API key][4], and starts the service to report on local system metrics.
+[dd-agent レシピ][9]が、対象システムに Datadog Agent をインストールし、[Datadog API キー][4]を設定して、ローカルのシステムメトリクスに関するレポートを送信するサービスを開始します。
 
-**Note**: Windows users upgrading the Agent from versions <= 5.10.1 to >= 5.12.0, set the `windows_agent_use_exe` attribute to `true`. For more details, see the [dd-agent wiki][10].
+**注**: Windows で Agent を 5.10.1 以前のバージョン から 5.12.0 以降のバージョンにアップグレードする場合は、`windows_agent_use_exe` 属性を `true` に設定します。詳細については、[dd-agent wiki][10] を参照してください。
 
-### Handler
+### ハンドラー
 
-The [dd-handler recipe][11] installs the [chef-handler-datadog][12] gem and invokes the handler at the end of a Chef run to report the details to the news feed.
+[dd-handler レシピ][11]が [chef-handler-datadog][12] gem をインストールし、Chef の実行が終了した時点でハンドラーを起動させ、ニュースフィードに詳細をレポートします。
 
 ### DogStatsD
 
-To install a language-specific library that interacts with DogStatsD:
+DogStatsD と交信する言語固有のライブラリをインストールするには
 
-- Ruby: [dogstatsd-ruby recipe][13]
-- Python: Add a dependency on the `poise-python` cookbook to your custom/wrapper cookbook, and use the resource below. For more details, see the [poise-python repository][14].
+- Ruby: [dogstatsd-ruby レシピ][13]
+- Python: `poise-python` クックブックへの依存性をカスタム/ラッパークックブックに追加して、下記のリソースを使用します。詳細については、[poise-python レポジトリ][14]を参照してください。
     ```ruby
     python_package 'dogstatsd-python' # assumes python and pip are installed
     ```
 
-### Tracing
+### トレーシング
 
-To install a language-specific library for application tracing (APM):
+アプリケーショントレーシング (APM) に言語固有のライブラリをインストールするには
 
-- Ruby: [ddtrace-ruby recipe][15]
-- Python: Add a dependency on the `poise-python` cookbook to your custom/wrapper cookbook, and use the resource below. For more details, see the [poise-python repository][14].
+- Ruby: [ddtrace-ruby レシピ][15]
+- Python: `poise-python` クックブックへの依存性をカスタム/ラッパークックブックに追加して、下記のリソースを使用します。詳細については、[poise-python レポジトリ][14]を参照してください。
     ```ruby
     python_package 'ddtrace' # assumes python and pip are installed
     ```
 
-### Integrations
+### インテグレーション
 
-There are many [recipes][7] to assist you with deploying Agent integration configuration files and dependencies.
+Agent インテグレーションのコンフィギュレーションファイルと依存性のデプロイに役立つ[レシピ][7]が数多く用意されています。 
 
-### System-probe
+### システムプローブ
 
-The [system-probe recipe][17] is automatically included by default. It writes the `system-probe.yaml` file. This behavior can be disabled by setting `node['datadog']['system_probe']['manage_config']` to false.
+デフォルトで [system-probe recipe][17] が自動的に含まれます。これは `system-probe.yaml` ファイルを書き込みます。この動作は `node['datadog']['system_probe']['manage_config']` を false に設定することで無効化することができます。
 
-To enable [Network Performance Monitoring][7] (NPM) in `system-probe.yaml`, set `node['datadog']['system_probe']['network_enabled']` to true.
+`system-probe.yaml` で [Network Performance Monitoring][7] (NPM) を有効にするには、` node ['datadog'] ['system_probe'] ['network_enabled'] ` を true に設定します。
 
-To enable [Universal Service Monitoring][7] (USM) in `system-probe.yaml`, set `node['datadog']['system_probe']['service_monitoring_enabled']` to true.
+`system-probe.yaml` で [ユニバーサルサービスモニタリング][7] (USM) を有効にするには、`node['datadog']['system_probe']['service_monitoring_enabled']` を true に設定します。
 
-**Note for Windows users**: NPM is supported on Windows with Agent v6.27+ and v7.27+. It ships as an optional component that is only installed if `node['datadog']['system_probe']['network_enabled']` is set to true when the Agent is installed or upgraded. Because of this, existing installations might need to do an uninstall and reinstall of the Agent once to install the NPM component, unless the Agent is upgraded at the same time.
+**Windows をご利用の方へのご注意**: NPM は Agent v6.27+ と v7.27+ で Windows 上でサポートされています。NPM はオプションコンポーネントとして出荷され、Agent のインストールまたはアップグレード時に `node['datadog']['system_probe']['network_enabled']` が true に設定された場合にのみインストールされます。このため、Agent を同時にアップグレードしない限り、既存のインストールでは NPM コンポーネントをインストールするために一旦 Agent をアンインストールして再インストールする必要があるかもしれません。
 
-## Resources
+## リソース
 
-### Integrations without recipes
+### レシピなしのインテグレーション
 
-Use the `datadog_monitor` resource for enabling Agent integrations without a recipe.
+レシピを使用せずに Agent インテグレーションを有効化するには `datadog_monitor`  リソースを使用します。
 
-#### Actions
+#### アクション
 
-- `:add`: (default) Enables the integration by setting up the configuration file, adding the correct permissions to the file, and restarting the Agent.
-- `:remove`: Disables an integration.
+- `:add`: (デフォルト) コンフィギュレーションファイルを設定し、ファイルに適切なアクセス許可を追加し、Agent を再起動して、インテグレーションを有効化します。
+- `:remove`: インテグレーションを無効化します。
 
-#### Syntax
+#### 構文
 
 ```ruby
 datadog_monitor 'name' do
-  init_config                       Hash # default value: {}
-  instances                         Array # default value: []
-  logs                              Array # default value: []
-  use_integration_template          true, false # default value: false
-  action                            Symbol # defaults to :add
+  init_config                       Hash # デフォルト値: {}
+  instances                         Array # デフォルト値: []
+  logs                              Array # デフォルト値: []
+  use_integration_template          true, false # デフォルト値: false
+  action                            Symbol # デフォルトに設定 :add
 end
 ```
 
-#### Properties
+#### プロパティ
 
-| Property                   | Description                                                                                                                                                                                                                                                                                    |
+| プロパティ                   | 説明                                                                                                                                                                                                                                                                                    |
 |----------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `'name'`                   | The name of the Agent integration to configure and enable.                                                                                                                                                                                                                                     |
-| `instances`                | The fields used to fill values under the `instances` section in the integration configuration file.                                                                                                                                                                                            |
-| `init_config`              | The fields used to fill values under the the `init_config` section in the integration configuration file.                                                                                                                                                                                      |
-| `logs`                     | The fields used to fill values under the the `logs` section in the integration configuration file.                                                                                                                                                                                             |
-| `use_integration_template` | Set to `true` (recommended) to use the default template, which writes the values of `instances`, `init_config`, and `logs` in the YAML under their respective keys. This defaults to `false` for backward compatibility, but may default to `true` in a future major version of the cookbook. |
+| `'name'`                   | 構成し、有効化する Agent インテグレーションの名前。                                                                                                                                                                                                                                     |
+| `instances`                | インテグレーションコンフィギュレーションファイルの `instances` セクションで値を入力するために使用されるフィールド。                                                                                                                                                                                            |
+| `init_config`              | インテグレーションコンフィギュレーションファイルの `init_config` セクションで値を入力するために使用されるフィールド。                                                                                                                                                                                      |
+| `logs`                     | インテグレーションコンフィギュレーションファイルの `logs` セクションで値を入力するために使用されるフィールド。                                                                                                                                                                                             |
+| `use_integration_template` | `instances`、`init_config`、`logs` の値を記述するデフォルトテンプレートを使用するには、それぞれのキーの YAML で `true` (推奨) に設定します。下位互換性ではデフォルトで `false` に設定されていますが、今後のクックブックの主要バージョンではデフォルトで `true` に設定される可能性があります。 |
 
-#### Example
+#### 例
 
-This example enables the ElasticSearch integration by using the `datadog_monitor` resource. It provides the instance configuration (in this case: the URL to connect to ElasticSearch) and sets the `use_integration_template` flag to use the default configuration template. Also, it notifies the `service[datadog-agent]` resource to restart the Agent.
+この例では、`datadog_monitor` リソースを使用して ElasticSearch インテグレーションを有効化します。これにより、インスタンスコンフィギュレーション (この場合、ElasticSearch に接続する URL) を条件付け、`use_integration_template` フラグを設定してデフォルトのコンフィギュレーションテンプレートを使用します。また、Agent を再起動するよう `service[datadog-agent]` リソースに通知します。
 
-**Note**: The Agent installation must be above this recipe in the run list.
+**注**: Agent のインストールは実行リストでこのレシピより上に定義されている必要があります。
 
 ```ruby
 include_recipe '::dd-agent'
@@ -353,38 +352,38 @@ datadog_monitor 'elastic' do
 end
 ```
 
-See the [Datadog integration Chef recipes][7] for additional examples.
+その他の例については [Datadog インテグレーション Chef レシピ][7]を参照してください。
 
-### Integration versions
+### インテグレーションバージョン
 
-To install a specific version of a Datadog integration, use the `datadog_integration` resource.
+Datadog インテグレーションの特定のバージョンをインストールするには、`datadog_integration` リソースを使用します。
 
-#### Actions
+#### アクション
 
-- `:install`: (default) Installs an integration with the specified version.
-- `:remove`: Removes an integration.
+- `:install`: (デフォルト) 特定のバージョンのインテグレーションをインストールします。
+- `:remove`: インテグレーションを削除します。
 
-#### Syntax
+#### 構文
 
 ```ruby
 datadog_integration 'name' do
-  version                      String         # version to install for :install action
-  action                       Symbol         # defaults to :install
-  third_party                  [true, false]  # defaults to :false
+  version                      String         # インストールするバージョン :install action
+  action                       Symbol         # デフォルトに設定 :install
+  third_party                  [true, false]  # デフォルトに設定 :false
 end
 ```
 
-#### Properties
+#### プロパティ
 
-- `'name'`: The name of the Agent integration to install, for example: `datadog-apache`.
-- `version`: The version of the integration to install (only required with the `:install` action).
-- `third_party`: Set to false if installing a Datadog integration, true otherwise. Available for Datadog Agents version 6.21/7.21 and higher only.
+- `'name'`: インストールする Agent インテグレーションの名前。例: `datadog-apache`。
+- `version`: インストールするインテグレーションのバージョン (`:install` アクションでのみ必須)。
+- `third_party`: Datadog インテグレーションをインストールする場合は false に設定し、それ以外の場合は true に設定します。Datadog Agent バージョン 6.21/7.21 以降でのみ使用できます。
 
-#### Example
+#### 例
 
-This example installs version `1.11.0` of the ElasticSearch integration by using the `datadog_integration` resource.
+以下の例では、`datadog_integration` リソースを使用して、ElasticSearch インテグレーションのバージョン `1.11.0` をインストールします。
 
-**Note**: The Agent installation must be above this recipe in the run list.
+**注**: Agent のインストールは実行リストでこのレシピより上に定義されている必要があります。
 
 ```ruby
 include_recipe '::dd-agent'
@@ -394,34 +393,34 @@ datadog_integration 'datadog-elastic' do
 end
 ```
 
-To get the available versions of the integrations, see the integration-specific `CHANGELOG.md` in the [integrations-core repository][16].
+利用可能なインテグレーションバージョンを取得するには、[integrations-core レポジトリ][16]でインテグレーション固有の `CHANGELOG.md` を参照してください。
 
-**Note**: For Chef Windows users, the `chef-client` must have read access to the `datadog.yaml` file when the `datadog-agent` binary available on the node is used by this resource.
+**注**: Chef Windows では、ノードで利用可能な `datadog-agent` バイナリがこのリソースによって使用されている場合、`chef-client` は `datadog.yaml` ファイルに対する読み込みアクセス権があります。
 
-## Development
+## 開発
 
-### Dockerized environment
+### Docker 化された環境
 
-To build a Docker environment with which to run kitchen tests, use the files under `docker_test_env`:
+キッチンテストを実行するための Docker 環境を構築するには、`docker_test_env` の下のファイルを使用します。
 
 ```
 cd docker_test_env
 docker build -t chef-datadog-test-env .
 ```
 
-To run the container use:
+コンテナを実行するには、以下を使用します。
 
 ```
 docker run -d -v /var/run/docker.sock:/var/run/docker.sock chef-datadog-test-env
 ```
 
-Then attach a console to the container or use the VS Code remote-container feature to develop inside the container.
+次に、コンソールをコンテナにアタッチするか、VS Code リモートコンテナ機能を使用してコンテナ内で開発します。
 
-To run kitchen-docker tests from within the container:
+コンテナ内から kitchen-docker のテストを実行するには
 
 ```
-# Note: Also set KITCHEN_DOCKER_HOSTNAME=host.docker.internal if on MacOS or Windows
-# Run this under a login shell (otherwise `bundle` won't be found)
+# 注: MacOS または Windows の場合は、KITCHEN_DOCKER_HOSTNAME=host.docker.internal も設定してください
+# ログインシェルでこれを実行します (そうしないと `bundle` が見つかりません)
 KITCHEN_LOCAL_YAML=kitchen.docker.yml bundle exec rake circle
 ```
 

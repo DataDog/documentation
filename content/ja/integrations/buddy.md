@@ -24,7 +24,7 @@
 - "automation"
 - "developer tools"
 - "event management"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/buddy/README.md"
 "display_on_public_website": true
@@ -73,7 +73,7 @@ The Buddy integration enables you to:
 
 ![datadog-integration][1]
 
-## Setup
+## セットアップ
 
 - In your Datadog account settings go to [Integrations -> APIs][2] and copy the **API Key** token.
 
@@ -97,21 +97,21 @@ ${'${execution.to_revision.revision} - ${execution.to_revision.message}'}
 
 ![snapshot][5]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Buddy check does not include any metrics.
 
-### Events
+### イベント
 
 All Buddy deployment events are sent to your [Datadog Event Stream][6]
 
-### Service Checks
+### サービスチェック
 
 The Buddy check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

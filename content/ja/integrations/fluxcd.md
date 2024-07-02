@@ -37,7 +37,7 @@
 "categories":
 - kubernetes
 - developer tools
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/fluxcd/README.md"
 "display_on_public_website": true
@@ -145,7 +145,7 @@ See the [Autodiscovery Integration Templates][2] for guidance on applying the pa
 
 [Run the Agent's status subcommand][7] and look for `fluxcd` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "fluxcd" >}}

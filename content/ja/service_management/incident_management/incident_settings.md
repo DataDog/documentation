@@ -130,7 +130,7 @@ The following features are available to use with the Incident Management Slack i
 - You can also automatically add [team members][6] to an incident Slack channel when a team is added to the incident. Only members who have connected their Slack and Datadog accounts by running the "/datadog connect" command in Slack are added to the channel.
 - Automatically archive a slack channel after a certain amount of time.
 
-## Notifications
+## 通知
 
 ### Message templates
 
@@ -149,7 +149,7 @@ To create a message template:
 
 **Note:** Template variables are supported in both the message's title and body.
 
-### Rules
+### ルール
 
 {{< img src="service_management/incidents/notification_rules_example.jpeg" alt="Notification Rules Example" style="width:80%;">}}
 

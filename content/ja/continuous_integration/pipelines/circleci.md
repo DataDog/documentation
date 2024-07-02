@@ -14,7 +14,7 @@ further_reading:
       text: Troubleshooting CI Visibility
     - link: /continuous_integration/pipelines/custom_tags_and_measures/
       tag: Documentation
-      text: Extend Pipeline Visibility by adding custom tags and measures
+      text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
 ---
 
 {{< site-region region="gov" >}}
@@ -93,13 +93,13 @@ To install and configure this integration, follow the [CircleCI setup guide][11]
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for CircleCI jobs can be identified by the <code>datadog.product:cipipeline</code> and <code>source:circleci</code> tags.</div>
 
-## Visualize pipeline data in Datadog
+## Datadog でパイプラインデータを視覚化する
 
 The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the workflows finish.
 
 The **CI Pipeline List** page shows data for only the default branch of each repository.
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

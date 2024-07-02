@@ -11,7 +11,7 @@ further_reading:
       text: Troubleshooting CI Visibility
     - link: /continuous_integration/pipelines/custom_tags_and_measures/
       tag: Documentation
-      text: Extend Pipeline Visibility by adding custom tags and measures
+      text: カスタムタグと測定値を追加してパイプラインの可視性を拡張する
     - link: "https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/"
       tag: blog
       text: Monitor your GitHub Actions workflows with Datadog CI Visibility
@@ -85,30 +85,26 @@ Immediately after toggling logs collection, workflow job logs are forwarded to D
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in Logs Settings. Logs for GitHub jobs can be identified by the <code>datadog.product:cipipeline</code> and <code>source:github</code> tags.</div>
 
-### Correlate infrastructure metrics to jobs
+### インフラストラクチャーメトリクスとジョブの相関付け
 
-If you are using self-hosted GitHub runners, you can correlate jobs to the host that is running them. To do this, make sure the GitHub runner name
-matches the hostname of the machine it is running on. CI Visibility uses this to link to
-infrastructure metrics. To see the metrics, click on a job span in the trace view and in the window a new tab named **Infrastructure** is
-shown which contains the host metrics.
+セルフホスト型の GitHub ランナーを使用している場合は、ジョブとそれを実行しているホストを関連付けることができます。これを行うには、GitHub ランナー名が実行されているマシンのホスト名と一致することを確認します。CI Visibility はこれを利用して、インフラストラクチャーのメトリクスにリンクします。メトリクスを見るには、トレースビューでジョブスパンをクリックすると、ウィンドウ内にホストメトリクスを含む **Infrastructure** という新しいタブが表示されます。
 
-## Visualize pipeline data in Datadog
+## Datadog でパイプラインデータを視覚化する
 
 The [**CI Pipeline List**][7] and [**Executions**][8] pages populate with data after the pipelines finish.
 
 The **CI Pipeline List** page shows data for only the default branch of each repository.
 
-## Disable GitHub Actions tracing
+## GitHub Actions のトレースを無効にする
 
-To disable the CI Visibility GitHub Actions integration, make sure the GitHub app is no longer subscribed to the
-workflow job and workflow run events. To remove the events:
+CI Visibility GitHub Actions のインテグレーションを無効にするには、GitHub アプリがワークフロージョブおよびワークフロー実行イベントのサブスクリプションを終了していることを確認します。イベントを削除するには
 
-1. Go to the [GitHub Apps][9] page.
-2. Click **Edit > Permission & events** on the relevant Datadog GitHub App (if you have multiple apps, you will have to repeat the process for each).
-3. Scroll to the **Subscribe to events** section, and make sure that **Workflow job** and **Workflow run** are not selected.
+1. [GitHub Apps][9] のページに移動します。
+2. 該当する Datadog GitHub アプリの **Edit > Permission & events** をクリックします (複数のアプリがある場合は、それぞれのアプリでこのプロセスを繰り返す必要があります)。
+3. **Subscribe to events** セクションまでスクロールし、**Workflow job** および **Workflow run** が選択されていないことを確認します。
 
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

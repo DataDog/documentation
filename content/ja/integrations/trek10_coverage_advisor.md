@@ -29,7 +29,7 @@
 "categories":
 - marketplace
 - aws
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -91,21 +91,21 @@ The dashboard shows a view of your Datadog's account monitoring status and lets 
 
 *Have a specific request for this Datadog tool, looking for 24/7 managed services for AWS with a platform built on Datadog, or need expertise on AWS or Datadog? Reach out to our sales team [sales team](https://trek10.com/contact) and let us explore how we can help you*
 
-### Metrics
+### メトリクス
 * Trek10 will push a metric nightly, trek10.coverage.aws_metric_count, that can be used to see how many metrics are currently being ingested into your Datadog account that don't have monitors for them. The metric will have the tag `metric_type` that can be filtered down to the values `all_metrics`, `metrics_monitored`, and `monitoring_recommendations`. 
 
 
-### Events
+### イベント
 * Trek10 also pushes events when we find unmonitored services. The event will link you back to the primary dashboard so you can see recent recommendations as well generate a report.
 
 
-### Monitors
+### モニター
 * Trek10 provides two monitors to alert you when you have unmonitored services.
 
-### Dashboards
+### ダッシュボード
 * Trek10 provides a centralized, high level, dashboard that allows you to see a count of unmonitored metrics, see recent recommendations, generate a PDF report of all recommendations, and control whether the integration checks your account nightly for new recommendations.
 
-### Usage
+### 使用方法
 The main use of this integration is to allow you to quickly see which AWS metrics you have in your account that you don't have corresponding monitors for. You can check in on the dashboard weekly and generate a report, or you can set up monitors to alert you daily if you would rather be notified that way. 
 
 ### Vendor Information

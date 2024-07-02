@@ -13,10 +13,10 @@
   "vendor_id": rapdev
 "categories":
 - marketplace
-- metrics
+- モニター
 - alerting
 - cost management
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false

@@ -3,7 +3,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon Rekognition metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_rekognition/"
@@ -28,9 +28,9 @@ Amazon Rekognition makes it easy to add image and video analysis to your applica
 
 Enable this integration to see all your Rekognition metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -55,21 +55,21 @@ Configure Amazon Rekognition to send logs either to a S3 bucket or to CloudWatch
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_rekognition" >}}
 
 
-### Events
+### イベント
 
 The Amazon Rekognition integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Rekognition integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

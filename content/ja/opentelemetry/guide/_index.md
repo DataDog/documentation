@@ -3,7 +3,7 @@ title: OpenTelemetry Guides and Resources
 private: true
 ---
 
-## Guides
+## ガイド
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/guide/otlp_histogram_heatmaps/" >}}Visualizing OTLP Histograms as heatmaps{{< /nextlink >}}
@@ -12,7 +12,7 @@ private: true
     {{< nextlink href="/opentelemetry/guide/otel_demo_to_datadog/" >}}Sending Data from OpenTelemetry Demo to Datadog{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Read more on the blog
+## ブログで詳しく見る
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="https://www.datadoghq.com/blog/opentelemetry-instrumentation/" >}}Datadog's partnership with OpenTelemetry{{< /nextlink >}}

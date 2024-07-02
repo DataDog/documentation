@@ -2,14 +2,14 @@
 title: Send metrics with Micrometer
 further_reading:
 - link: "https://docs.micrometer.io/micrometer/reference/implementations/otlp.html"
-  tag: External Site
+  tag: 外部サイト
   text: Micrometer OTLP
 - link: "https://docs.micrometer.io/micrometer/reference/implementations/prometheus.html"
-  tag: External Site
+  tag: 外部サイト
   text: Micrometer Prometheus
 ---
 
-## Overview
+## 概要
 
 [Micrometer][1] is a vendor-neutral interface that allows access to metrics with the ability to analyze them across their dimensions. Often used with a Java Spring Boot application as an abstraction layer to submit metrics.
 
@@ -33,7 +33,7 @@ Use the Prometheus or OpenMetrics integrations to send your application metrics 
     {{< nextlink href="/containers/docker/prometheus/?tab=standard" >}}Docker Prometheus and OpenMetrics metrics collection{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

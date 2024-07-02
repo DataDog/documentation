@@ -277,7 +277,7 @@ Select or click on a section of the graph to either zoom in the graph or see the
 
 {{< img src="tracing/app_analytics/analytics/view_traces.png" alt="view Traces" style="width:40%;">}}
 
-## Export
+## エクスポート
 
 {{< img src="tracing/app_analytics/analytics/export_button.png" alt="Export your analytics button" style="width:40%;">}}
 

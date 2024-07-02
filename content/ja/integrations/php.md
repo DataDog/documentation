@@ -3,18 +3,18 @@
 - "languages"
 - "log collection"
 - "tracing"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Collect metrics, traces, logs, and profile data from your PHP applications."
+"description": "PHP アプリケーションのメトリクス、トレース、ログ、プロファイルデータを収集します。"
 "doc_link": "https://docs.datadoghq.com/integrations/php/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/monitor-php-performance/"
-  "tag": "Blog"
-  "text": "PHP monitoring with Datadog APM and distributed tracing."
+  "tag": "ブログ"
+  "text": "Datadog APM と分散型トレーシングを使用した PHP の監視。"
 - "link": "https://www.datadoghq.com/blog/php-logging-guide/"
-  "tag": "Blog"
-  "text": "How to collect, customize, and analyze PHP logs."
+  "tag": "ブログ"
+  "text": "PHP ログを収集、カスタマイズ、分析する方法。"
 "git_integration_title": "php"
 "has_logo": true
 "integration_id": "php"
@@ -33,7 +33,7 @@
 
 The Datadog-PHP integration allows you to collect and monitor your PHP application logs, traces, and custom metrics.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
@@ -53,7 +53,7 @@ See the dedicated documentation on how to [setup PHP log collection][3] to forwa
 
 See the dedicated documentation for [enabling the PHP profiler][4].
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

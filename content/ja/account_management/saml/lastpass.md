@@ -12,9 +12,9 @@ further_reading:
   text: Configuring Teams & Organizations with Multiple Accounts
 ---
 
-Follow the [LastPass Datadog App Integration][1] setup and configuration docs to use LastPass as your SAML IdP.
+[LastPass Datadog アプリインテグレーション][1]のセットアップおよびコンフィギュレーションのドキュメントに従い、LastPass を SAML IdP として使用します。
 
-**Note**: NoPassword was acquired by LogMeIn, the creator of LastPass. The NoPassword Datadog SAML integration is no longer available. Follow the LastPass integration instructions above.
+**注**: NoPassword は、LastPass の開発元である LogMeIn に買収されました。NoPassword Datadog SAML インテグレーションはご利用いただけません。上記の LastPass インテグレーション手順に従ってください。
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -5,7 +5,7 @@
 - configuration & deployment
 - log collection
 - provisioning
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key AWS App Runner metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_app_runner/"
@@ -30,9 +30,9 @@ AWS App Runner enables you to deploy an application from source code or a contai
 
 Enable this integration to see all your App Runner metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -61,21 +61,21 @@ AWS App Runner sends both service and operation status change events to EventBri
 2. Create an EventBridge rule to act on AWS App Runner events (see [Handling App Runner events in EventBridge][8]). Choose the API Destination as the target.
 3. Start viewing new status change events in the Datadog Event Stream.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_app_runner" >}}
 
 
-### Events
+### イベント
 
 The AWS App Runner integration supports both service and operation status change events from EventBridge.
 
-### Service Checks
+### サービスチェック
 
 The AWS App Runner integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

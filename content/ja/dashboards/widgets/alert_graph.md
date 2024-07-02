@@ -1,13 +1,13 @@
 ---
-aliases:
-- /ja/graphing/widgets/alert_graph/
-description: システムで定義されているモニターの現在のステータスをグラフ化する
-further_reading:
-- link: /ja/dashboards/graphing_json/
-  tag: ドキュメント
-  text: JSON を使用したダッシュボードの構築
-title: アラートグラフウィジェット
+title: Alert Graph Widget
 widget_type: alert_graph
+description: "Graph the current status of any monitor defined on your system."
+aliases:
+    - /graphing/widgets/alert_graph/
+further_reading:
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Building Dashboards using JSON
 ---
 
 アラートグラフは、システムで定義されているほとんどのモニターの現在のステータスを表示する時系列グラフです。
@@ -36,5 +36,5 @@ widget_type: alert_graph
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/latest/dashboards/
-[2]: /ja/dashboards/graphing_json/widget_json/
+[1]: /api/latest/dashboards/
+[2]: /dashboards/graphing_json/widget_json/

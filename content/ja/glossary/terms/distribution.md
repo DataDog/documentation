@@ -1,7 +1,7 @@
 ---
 title: distribution
 core_product:
-  - metrics
+  - モニター
 related_terms:
   - flush interval
   - heatmap

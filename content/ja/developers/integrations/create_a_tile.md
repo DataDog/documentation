@@ -194,40 +194,40 @@ Once you have created a `README.md` file, add the following sections as H2s (`##
 When adding links to the `README.md` file, format them using [reference-style links][30]. For example, instead of embedding the URL directly in the text, write `see the [official Datadog documentation][1]` and define the link reference at the bottom of the file like `[1]: https://docs.datadoghq.com/`.
 
 For additional grammar and style advice, see also the [Datadog documentation contributors guidelines][31].
-### Media carousel
+### メディアカルーセル
 
-A media carousel of images and a video is displayed on each tile, allowing users to better understand the functionality and value of your offering through visual aids. To add a video to your tile, send a copy or a download link of your video to <a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a>. The Marketplace team uploads the video and provides a `vimeo_link` that should be added to the `manifest.json` file.
+各タイルには、イメージとビデオのメディアカルーセルが表示され、ユーザーは視覚的な説明によって、製品の機能や価値をよりよく理解することができます。タイルにビデオを追加するには、ビデオのコピーまたはダウンロードリンクを <a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a> に送信してください。Marketplace チームがビデオをアップロードし、`manifest.json` ファイルに追加すべき `vimeo_link` を提供します。
 
-#### Video
+#### ビデオ
 
-The video must meet the following requirements:
+ビデオは以下の要件を満たしている必要があります。
 
-| Video Requirements | Description                                                                           |
+| ビデオ要件 | 説明                                                                           |
 |--------------------|---------------------------------------------------------------------------------------|
-| Type               | MP4 H.264                                                                             |
-| Size               | The maximum video size is 1GB.                                                        |
-| Dimensions         | The aspect ratio must be 16:9 exactly and the resolution must be 1920x1080 or higher. |
-| Name               | The video file name must be `partnerName-appName.mp4`.                                |
-| Video Length       | The maximum video length is 60 seconds.                                               |
-| Description        | The maximum number of characters allowed is 300.                                      |
+| タイプ               | MP4 H.264                                                                             |
+| サイズ               | ビデオサイズは最大 1GB です。                                                        |
+| ディメンション         | アスペクト比は正確に 16:9、解像度は 1920x1080 以上でなければなりません。 |
+| 名前               | ビデオファイル名は、`partnerName-appName.mp4` でなければなりません。                                |
+| ビデオの長さ       | ビデオの長さは最大 60 秒です。                                               |
+| 説明        | 最大許容文字数は 300 文字です。                                      |
 
-#### Images
+#### 画像
 
-Technology Partners can add up to eight images (seven if you are including a video) in a tile's media carousel.
+テクノロジーパートナーは、タイルのメディアカルーセルに最大 8 枚 (ビデオを含む場合は 7 枚) の画像を追加することができます。
 
-The images must meet the following requirements:
+イメージは以下の要件を満たしている必要があります。
 
-| Image Requirements | Description                                                                                                                                       |
+| イメージ要件 | 説明                                                                                                                                       |
 |--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| Type               | `.jpg` or `.png`.                                                                                                                                 |
-| Size               | The average is around 500KB. The maximum image size is 1MB.                                                                                       |
-| Dimensions         | The aspect ratio must be 16:9 exactly and fit these specifications:<br><br>- Width: 1440px<br>- Minimum height: 810px<br>- Maximum height: 2560px |
-| Name               | Use letters, numbers, underscores, and hyphens. Do not use spaces.                                                                           |
-| Color Mode         | RGB                                                                                                                                               |
-| Color Profile      | sRGB                                                                                                                                              |
-| Description        | The maximum number of characters allowed is 300.                                                                                                  |
+| タイプ               | `.jpg` または `.png`。                                                                                                                                 |
+| サイズ               | 平均は 500KB 程度です。最大イメージサイズは 1MB です。                                                                                       |
+| ディメンション         | アスペクト比は正確に 16:9 で、以下の仕様に適合している必要があります。<br><br>- 幅: 1440px<br>- 最低高さ: 810px<br>- 最大高さ: 2560px |
+| 名前               | 英字、数字、アンダースコア、ハイフンを使用してください。スペースは使用しないでください。                                                                           |
+| カラーモード         | RGB                                                                                                                                               |
+| カラープロファイル      | sRGB                                                                                                                                              |
+| 説明        | 最大許容文字数は 300 文字です。                                                                                                  |
 
-Follow this template to define the `media` object in the `manifest.json` file which includes an image, a video thumbnail, and a video:
+このテンプレートに従って、イメージ、ビデオサムネイル、ビデオを含む `manifest.json` ファイルの `media` オブジェクトを定義してください。
 
 {{< code-block lang="json" filename="manifest.json" collapsible="true" >}}
 "media": [
@@ -245,58 +245,58 @@ Follow this template to define the `media` object in the `manifest.json` file wh
     ],
 {{< /code-block >}}
 
-For more information, see [Integrations Assets Reference][22].
+詳しくは、[インテグレーションアセットリファレンス][22]をご覧ください。
 
-## Open a pull request
+## プルリクエストを開く
 
-Before you open a pull request, run the following command to catch any problems with your integration:
+プルリクエストを出す前に、以下のコマンドを実行して、インテグレーションに問題がないことを確認します。
 
 ```
 ddev validate all <INTEGRATION_NAME>
 ```
 
-Complete the following steps:
+以下のステップを完了します。
 
-1. Commit all changes to your feature branch.
+1. すべての変更をフィーチャーブランチにコミットします。
 2. Push your changes to the remote repository.
 3. Open a pull request that contains your integration tile's asset files (including images) in the [`marketplace`][18] or [`integrations-extras`][26] repository.
 
-After you've created your pull request, automatic checks run to verify that your pull request is in good shape and contains all the required content to be updated.
+プルリクエストを作成すると、自動チェックが実行され、プルリクエストが正常な状態であること、更新に必要なコンテンツがすべて含まれていることが確認されます。
 
-## Review process
+## レビュープロセス
 
-Once your pull request passes all checks, reviewers from the `Datadog/agent-integrations`, `Datadog/ecosystems-review`, and `Datadog/documentation` teams provide suggestions and feedback on best practices.
+プルリクエストが全てのチェックを通過すると、`Datadog/agent-integrations`、`Datadog/ecosystems-review`、`Datadog/documentation` チームのレビュアーが、ベストプラクティスに関する提案やフィードバックを提供します。
 
-Once you have addressed the feedback and re-requested reviews, these reviewers approve your pull request. Contact the Marketplace team if you would like to preview the tile in your sandbox account. This allows you to validate and preview your tile before your tile goes live to all customers.
+フィードバックに対応し、レビューを再要求すると、これらのレビュアーがあなたのプルリクエストを承認します。サンドボックスアカウントでタイルをプレビューしたい場合は、マーケットプレイスチームに連絡してください。これにより、タイルがすべての顧客に公開される前に、タイルの検証やプレビューを行うことができます。
 
-## Troubleshoot errors
+## エラーの解決
 
 Out-of-the-box integrations in the `integrations-extras` repository can run into validation errors when the forked repository is out of date with the origin.
 
 To resolve validation errors, update the forked repository on the GitHub web app:
 
-1. In [GitHub][29], navigate to your forked `integrations-extras` repository.
-1. Click **Sync fork** and click **Update branch**.
+1. [GitHub][29] で、フォークした `integrations-extras` リポジトリに移動します。
+1. **Sync fork** をクリックし、**Update branch** をクリックします。
 
-To rebase and push changes:
+リベースして変更をプッシュするには
 
-1. Update your local `master` branch:
+1. ローカルの `master` ブランチを更新します。
    ```shell
    git checkout master
    git pull origin master
    ```
-1. Merge `master` into your feature branch:
+1. `master` をフィーチャーブランチにマージします。
    ```shell
    git checkout <your working branch>
    git merge master
    ```
-1. If there are any merge conflicts, resolve them. Then, run `git push origin <your working branch>`.
+1. もし、マージの競合があれば、それを解決します。その後`git push origin <your working branch>` を実行します。
 
-## Go-to-Market (GTM) opportunities
+## 市場開拓 (GTM) の機会
 
-Datadog offers GTM support for Marketplace listings only. To learn more about the Datadog Marketplace, see [Create a Marketplace Offering][28].
+Datadog では、Marketplace の出品にのみ GTM サポートを提供しています。Datadog Marketplace の詳細については、[Marketplace 製品の作成][28]を参照してください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -309,12 +309,12 @@ For more information about initializing the ConfigCat React SDK, see ConfigCat's
 {{% /tab %}}
 {{< /tabs >}}
 
-### Custom feature flag management
+### カスタム機能フラグ管理
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "ブラウザ" %}}
 
-Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
 ```javascript
 datadogRum.addFeatureFlagEvaluation(key, value);
@@ -323,7 +323,7 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
    ```swift
    RUMMonitor.shared().addFeatureFlagEvaluation(key, value);
@@ -332,7 +332,7 @@ Each time a feature flag is evaluated, add the following function to send the fe
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
    ```kotlin
    GlobalRumMonitor.get().addFeatureFlagEvaluation(key, value);
@@ -341,7 +341,7 @@ Each time a feature flag is evaluated, add the following function to send the fe
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
    ```dart
    DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
@@ -349,7 +349,7 @@ Each time a feature flag is evaluated, add the following function to send the fe
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
    ```javascript
    DdRum.addFeatureFlagEvaluation(key, value);
@@ -361,7 +361,7 @@ Each time a feature flag is evaluated, add the following function to send the fe
 ### DevCycle integration
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "ブラウザ" %}}
 
 Initialize DevCycle's SDK and subscribe to the `variableEvaluated` event, choosing to subscribe to all variable evaluations `variableEvaluated:*` or particular variable evaluations `variableEvaluated:my-variable-key`.
 
@@ -375,7 +375,7 @@ const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
 dvcClient.subscribe(
     "variableEvaluated:*",
     (key, variable) => {
-        // track all variable evaluations
+        // すべての変数評価を追跡します
         datadogRum.addFeatureFlagEvaluation(key, variable.value);
     }
 )
@@ -383,7 +383,7 @@ dvcClient.subscribe(
 dvcClient.subscribe(
     "variableEvaluated:my-variable-key",
     (key, variable) => {
-        // track a particular variable evaluation
+        // 特定の変数評価を追跡します
         datadogRum.addFeatureFlagEvaluation(key, variable.value);
     }
 )
@@ -422,7 +422,7 @@ DevCycle does not support this integration. Create a ticket with DevCycle to req
 ### Eppo integration
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "ブラウザ" %}}
 
 Initialize Eppo's SDK and create an assignment logger that additionally reports feature flag evaluations to Datadog using the snippet of code shown below.
 
@@ -516,17 +516,17 @@ await eppoInit({
 {{% /tab %}}
 {{< /tabs >}}
 
-### Flagsmith Integration
+### Flagsmith インテグレーション
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "ブラウザ" %}}
 
-Initialize Flagsmith's SDK with the `datadogRum` option, which reports feature flag evaluations to Datadog using the snippet of code shown below.
+Flagsmith の SDK に `datadogRum` オプションを付けて初期化すると、以下に示すコードのスニペットを使用して Datadog に機能フラグの評価を報告することができるようになります。
 
-   Optionally, you can configure the client so that Flagsmith traits are sent to Datadog via `datadogRum.setUser()`. For more information about initializing Flagsmith's SDK, check out [Flagsmith's JavaScript SDK documentation][1].
+ オプションとして、`datadogRum.setUser()` を介して Flagsmith の Trait が Datadog に送信されるようにクライアントを構成することができます。Flagsmith の SDK の初期化についての詳細は、[Flagsmith の JavaScript SDK ドキュメント][1]を参照してください。
 
    ```javascript
-    // Initialize the Flagsmith SDK
+    // Flagsmith SDK を初期化します
     flagsmith.init({
         datadogRum: {
             client: datadogRum,
@@ -557,19 +557,19 @@ Flagsmith does not support this integration. Create a ticket with Flagsmith to r
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Flagsmith does not currently support this integration. Create a ticket with Flagsmith to request this feature.
+Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### LaunchDarkly integration
+### LaunchDarkly インテグレーション
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "ブラウザ" %}}
 
-Initialize LaunchDarkly's SDK and create an inspector reporting feature flags evaluations to Datadog using the snippet of code shown below.
+LaunchDarkly の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
 
- For more information about initializing LaunchDarkly's SDK, see [LaunchDarkly's JavaScript SDK documentation][1].
+LaunchDarkly の SDK の初期化については、[LaunchDarkly の JavaScript SDK ドキュメント][1]を参照してください。
 
 ```javascript
 const client = LDClient.initialize("<CLIENT_SIDE_ID>", "<CONTEXT>", {
@@ -608,21 +608,21 @@ LaunchDarkly does not support this integration. Create a ticket with LaunchDarkl
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-LaunchDarkly does not currently support this integration. Create a ticket with LaunchDarkly to request this feature.
+LaunchDarkly は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
 
-### Split Integration
+### Split インテグレーション
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "ブラウザ" %}}
 
-Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
+Split の SDK を初期化し、以下に示すコードスニペットを使用して Datadog に機能フラグの評価を報告するインプレッションリスナーを作成します。
 
-For more information about initializing Split's SDK, see Split's [JavaScript SDK documentation][1].
+Split の SDK の初期化については、[Split の JavaScript SDK ドキュメント][1]を参照してください。
 
 ```javascript
 const factory = SplitFactory({
@@ -649,9 +649,9 @@ const client = factory.client();
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Initialize Split's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+Split の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
 
-For more information about initializing Split's SDK, see Split's [iOS SDK documentation][1].
+Split の SDK の初期化については、[Split の iOS SDK ドキュメント][1]を参照してください。
 
 ```swift
   let config = SplitClientConfig()
@@ -669,14 +669,14 @@ For more information about initializing Split's SDK, see Split's [iOS SDK docume
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Initialize Split's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+Split の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
 
-For more information about initializing Split's SDK, see Split's [Android SDK documentation][1].
+Split の SDK の初期化については、[Split の Android SDK ドキュメント][1]を参照してください。
 
 ```kotlin
   internal class DatadogSplitImpressionListener : ImpressionListener {
     override fun log(impression: Impression) {
-        // Send the feature flag when Split reports the impression
+        // Split でインフレが報告された際に機能フラグを送信
         GlobalRumMonitor.get().addFeatureFlagEvaluation(
             impression.split(),
             impression.treatment()
@@ -686,7 +686,7 @@ For more information about initializing Split's SDK, see Split's [Android SDK do
     }
   }
 
-  // In initialization:
+  // 初期化時:
   val apikey = BuildConfig.SPLIT_API_KEY
   val config = SplitClientConfig.builder()
       .impressionListener(DatadogSplitImpressionListener())
@@ -698,7 +698,7 @@ For more information about initializing Split's SDK, see Split's [Android SDK do
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Initialize Split's SDK and create an inspector reporting feature flag evaluations to Datadog using the snippet of code below.
+Split の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
 
 For more information about initializing Split's SDK, see Split's [Flutter plugin documentation][1].
 
@@ -718,9 +718,9 @@ For more information about initializing Split's SDK, see Split's [Flutter plugin
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Initialize Split's SDK and and create an impression listener reporting feature flag evaluations to Datadog using the following snippet of code:
+Split の SDK を初期化し、以下に示すコードスニペットを使用して Datadog に機能フラグの評価を報告するインプレッションリスナーを作成します。
 
-For more information about initializing Split's SDK, see Split's [React Native SDK documentation][1].
+Split の SDK の初期化については、Split の [React Native SDK ドキュメント][1]を参照してください。
 
 ```javascript
 const factory = SplitFactory({
@@ -747,16 +747,16 @@ const client = factory.client();
 {{% /tab %}}
 {{< /tabs >}}
 
-### Statsig Integration
+### Statsig インテグレーション
 
 {{< tabs >}}
-{{% tab "Browser" %}}
+{{% tab "ブラウザ" %}}
 
 Initialize Statsig's SDK with `statsig.initialize`.
 
-1. Update your Browser RUM SDK version 4.25.0 or above.
-2. Initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with `["feature_flags"]`.
-3. Initialize Statsig's SDK (`>= v4.34.0`) and implement the `gateEvaluationCallback` option as shown below:
+1. ブラウザ RUM SDK バージョン 4.25.0 以上に更新します。
+2. RUM SDK を初期化し、`["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+3. Statsig の SDK (`>= v4.34.0`) を初期化し、以下のように `gateEvaluationCallback` オプションを実装します。
 
    ```javascript
     await statsig.initialize('client-<STATSIG CLIENT KEY>',
@@ -773,80 +773,80 @@ Initialize Statsig's SDK with `statsig.initialize`.
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Statsig does not support this integration. Contact support@statsig.com to request this feature.
+Statsig はこのインテグレーションをサポートしていません。この機能のリクエストは、support@statsig.com までご連絡ください。
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Statsig does not support this integration. Contact support@statsig.com to request this feature.
+Statsig はこのインテグレーションをサポートしていません。この機能のリクエストは、support@statsig.com までご連絡ください。
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-Statsig does not support this integration. Contact support@statsig.com to request this feature.
+Statsig はこのインテグレーションをサポートしていません。この機能のリクエストは、support@statsig.com までご連絡ください。
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-Statsig does not currently support this integration. Contact support@statsig.com to request this feature.
+Statsig は現在このインテグレーションをサポートしていません。この機能のリクエストは、support@statsig.com までご連絡ください。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Analyze your Feature Flag performance in RUM
+## RUM で機能フラグのパフォーマンスを分析する
 
-Feature flags appear in the context of your RUM Sessions, Views, and Errors as a list.
+機能フラグは、RUM のセッション、ビュー、およびエラーのコンテキストにリストとして表示されます。
 
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="Feature Flag list of attributes in RUM Explorer" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature-flag-list-rum-event.png" alt="RUM エクスプローラーの属性の機能フラグリスト" style="width:75%;">}}
 
-### Search feature flags using the RUM Explorer
-Search through all the data collected by RUM in the [RUM Explorer][2] to surface trends on feature flags, analyze patterns with greater context, or export them into [dashboards][3] and [monitors][4]. You can search your Sessions, Views, or Errors in the RUM Explorer, with the `@feature_flags.{flag_name}` attribute.
+### RUM エクスプローラーを使用した機能フラグの検索
+[RUM エクスプローラー][2]で RUM が収集したすべてのデータを検索し、機能フラグの傾向を把握したり、より大きな文脈でパターンを分析したり、[ダッシュボード][3]や[モニター][4]にエクスポートしたりすることが可能です。RUM エクスプローラーでは、`@feature_flags.{flag_name}` 属性でセッション、ビュー、またはエラーを検索することができます。
 
-#### Sessions
-Filtering your **Sessions** with the `@feature_flags.{flag_name}` attribute, you can find all sessions in the given time frame where your feature flag was evaluated.
+#### セッション
+**Sessions** を `@feature_flags.{flag_name}` 属性でフィルタリングすると、指定した時間枠で機能フラグが評価されたすべてのセッションを見つけることができます。
 
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-session-feature-flag-search.png" alt="Search Sessions for Feature Flags in the RUM Explorer" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-session-feature-flag-search.png" alt="RUM エクスプローラーでの機能フラグのセッション検索" style="width:75%;">}}
 
-#### Views
-Filtering your **Views** with the `@feature_flags.{flag_name}` attribute, you can find the specific views in the given time frame where your feature flag was evaluated.
+#### ビュー
+**Views** を `@feature_flags.{flag_name}` 属性でフィルタリングすると、指定した時間枠で機能フラグが評価された特定のビューを見つけることができます。
 
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-view-feature-flag-search.png" alt="Search Views for Feature Flags in the RUM Explorer" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-view-feature-flag-search.png" alt="RUM エクスプローラーでの機能フラグのビュー検索" style="width:75%;">}}
 
-#### Errors
-Filtering your **Errors** with the `@feature_flags.{flag_name}` attribute, you can find all the errors in the given time frame that occurred on the View where your feature flag was evaluated
+#### エラー
+**Errors** を `@feature_flags.{flag_name}` 属性でフィルタリングすると、指定した時間枠で機能フラグが評価されたビューで発生したすべてのエラーを見つけることができます。
 
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="Search Errors for Feature Flags in the RUM Explorer" style="width:75%;">}}
+{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="RUM エクスプローラーでの機能フラグのエラー検索" style="width:75%;">}}
 
-## Troubleshooting
+## トラブルシューティング
 
-### Why doesn't my feature flag data reflect what I expect to see?
-Feature flags show up in the context of events where they are evaluated, meaning they should show up on the views that the feature flag code logic is run on.
+### 機能フラグのデータが期待通りに反映されないのはなぜですか？
+機能フラグは、それが評価されるイベントのコンテキストに表示されます。つまり、機能フラグのコードロジックが実行されるビューに表示されるはずです。
 
-Depending on how you've structured your code and set up your feature flags, you may see unexpected feature flags appear in the context of some events.
+コードの構成や機能フラグの設定によっては、予期せぬ機能フラグがイベントのコンテキストに表示されることがあります。
 
-For example, to see what **Views** your feature flag is being evaluated on, you can use the RUM Explorer to make a similar query:
-
-
-{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="Search Views for Feature Flags in the RUM Explorer" style="width:75%;">}}
+例えば、機能フラグがどの**ビュー**で評価されているかを確認するには、RUM エクスプローラーを使用して同様のクエリを行うことができます。
 
 
-Here are a few examples of reasons why your feature flag is being evaluated on unrelated Views that can help with your investigations:
+{{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/feature_flag_view_query.png" alt="RUM エクスプローラーでの機能フラグのビュー検索" style="width:75%;">}}
 
-- A common react component that appears on multiple pages which evaluates feature flags whenever they run.
-- A routing issue where components with a feature flag evaluation are rendered before/after URL changes.
 
-When performing your investigations, you can also scope your data for `View Name`'s that are relevant to your feature flag.
+機能フラグが無関係なビューで評価されている理由の例をいくつか紹介しますので、調査の参考にしてください。
 
-### Feature flag naming
+- 実行されるたびに機能フラグを評価する、複数のページに表示される共通のリアクトコンポーネント。
+- 機能フラグを評価したコンポーネントが、URL の変更前/変更後にレンダリングされるルーティングの問題。
 
-The following special characters are not supported for [Feature Flag Tracking][5]: `.`, `:`, `+`, `-`, `=`, `&&`, `||`, `>`, `<`, `!`, `(`, `)`, `{`, `}`, `[`, `]`, `^`, `"`, `“`, `”`, `~`, `*`, `?`, `\`. Datadog recommends avoiding these characters when possible in your feature flag names. If you are required to use one of these characters, replace the character before sending the data to Datadog. For example:
+調査を行う際、機能フラグに関連する `View Name` のデータをスコープすることも可能です。
+
+### 機能フラグの命名
+
+以下の特殊文字は [機能フラグ追跡][5] ではサポートされていません: `.`、`:`、`+`、`-`、`=`、`&&`、`||`、`>`、`<`、`!`、`(`、`)`、`{`、`}`、`[`、`]`、`^`、`"`、`"`、`~`、`*`、`?`、``。Datadogでは、機能フラグ名にこれらの文字を使用しないことを推奨しています。これらの文字を使用する必要がある場合は、 Datadog にデータを送信する前に文字を置き換えてください。例:
 
 ```javascript
 datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
 ```
 
 
-## Further Reading
+## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/browser/setup

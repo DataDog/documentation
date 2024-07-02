@@ -26,10 +26,10 @@ further_reading:
       text: Monitor Tanzu Kubernetes Grid on vSphere
 ---
 
-## Overview
+## 概要
 
-This section aims to document specifics and to provide good base configuration for all major Kubernetes distributions.
-These configuration can then be customized to add any Datadog feature.
+このセクションの目的は、すべての主要な Kubernetes ディストリビューションに向けた特定の事項を文書化し、適切な基本コンフィギュレーションを提供することです。
+これらのコンフィギュレーションをカスタマイズして、Datadog 機能を追加できます。
 
 * [AWS Elastic Kubernetes Service (EKS)](#EKS)
 * [Azure Kubernetes Service (AKS)](#AKS)
@@ -41,9 +41,9 @@ These configuration can then be customized to add any Datadog feature.
 
 ## AWS Elastic Kubernetes Service (EKS) {#EKS}
 
-No specific configuration is required.
+特殊なコンフィギュレーションは必要ありません。
 
-If you are using AWS Bottlerocket OS on your nodes, add the following to enable container monitoring (`containerd` check):
+ノードで AWS Bottlerocket OS を使用している場合、コンテナモニタリング (`containerd` チェック) を有効化するために以下を追加してください:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -99,7 +99,7 @@ datadog:
 
 ## Azure Kubernetes Service (AKS) {#AKS}
 
-AKS requires a specific configuration for the `Kubelet` integration due to how AKS has setup the SSL Certificates. Additionally, the optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
+AKS では、SSL 証明書の設定方法によって、`Kubelet` インテグレーションに特定の構成が必要です。また、オプションの [Admission Controller][1] 機能では、Webhook の照合時にエラーが発生しないよう、特定の構成が必要です。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -139,7 +139,7 @@ Custom `datadog-values.yaml`:
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Required as of Agent 7.35. See Kubelet Certificate note below.
+  # Agent 7.35 から必要です。以下の Kubelet 証明書に関する注記を参照してください。
   kubelet:
     tlsVerify: false
 
@@ -148,19 +148,19 @@ providers:
     enabled: true
 ```
 
-The `providers.aks.enabled` option sets the necessary environment variable `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"` for you.
+`providers.aks.enabled` オプションは、必要な環境変数 `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"` を設定します。
 
 {{% /tab %}}
 
 {{< /tabs >}}
 
-The `kubelet.tlsVerify=false` sets the environment variable `DD_KUBELET_TLS_VERIFY=false` for you to deactivate verification of the server certificate.
+`kubelet.tlsVerify=false` は、環境変数 `DD_KUBELET_TLS_VERIFY=false` を設定して、サーバー証明書の検証を無効化することができます。
 
-### AKS Kubelet certificate
+### AKS Kubelet 証明書
 
-There is a known issue with the format of the AKS Kubelet certificate in older node image versions. As of Agent 7.35, it is required to use `tlsVerify: false` as the certificates did not contain a valid Subject Alternative Name (SAN).
+古いノードイメージのバージョンでは、AKS Kubelet 証明書のフォーマットに既知の問題があります。Agent 7.35 では、証明書に有効な Subject Alternative Name (SAN) が含まれていないため、`tlsVerify: false` を使用することが必要です。
 
-If all the nodes within your AKS cluster are using a supported node image version, you can use Kubelet TLS Verification. Your version must be at or above the [versions listed here for the 2022-10-30 release][2]. You must also update your Kubelet configuration to use the node name for the address and map in the custom certificate path.
+AKS クラスター内のすべてのノードがサポートされているノードイメージのバージョンを使用している場合、Kubelet TLS Verification を使用できます。バージョンは、[2022-10-30 リリースについてここに記載されているバージョン][2]以上である必要があります。また、カスタム証明書パスのアドレスとマップにノード名を使用するように、Kubelet 構成を更新する必要があります。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -203,7 +203,7 @@ Custom `datadog-values.yaml`:
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
-  # Requires supported node image version
+  # サポートされているノードイメージのバージョンが必要です
   kubelet:
     host:
       valueFrom:
@@ -223,25 +223,25 @@ Using `spec.nodeName` keeps TLS verification. In some setups, DNS resolution for
 
 ## Google Kubernetes Engine (GKE) {#GKE}
 
-GKE can be configured in two different mode of operation:
+GKE は 2 つの異なる運用モードで構成することができます:
 
-- **Standard**: You manage the cluster's underlying infrastructure, giving you node configuration flexibility.
-- **Autopilot**: GKE provisions and manages the cluster's underlying infrastructure, including nodes and node pools, giving you an optimized cluster with a hands-off experience.
+- **Standard**: クラスターの基盤となるインフラを管理し、ノードの構成を柔軟に変更することができます。
+- **Autopilot**: GKEは、ノードやノードプールなどクラスターの基盤となるインフラのプロビジョニングおよび管理を行い、最適なクラスターを提供します。
 
-Depending on the operation mode of your cluster, the Datadog Agent needs to be configured differently.
+お使いのクラスターの運用モードに応じて、Datadog Agent で異なる設定を行う必要があります。
 
-### Standard
+### 標準的な方法
 
-Since Agent 7.26, no specific configuration is required for GKE (whether you run `Docker` or `containerd`).
+Agent 7.26 以降では、GKE 向けの特殊なコンフィギュレーションは不要です (`Docker` または `containerd` をお使いの場合)。
 
-**Note**: When using COS (Container Optimized OS), the eBPF-based `OOM Kill` and `TCP Queue Length` checks are supported starting from the version 3.0.1 of the Helm chart. To enable these checks, configure the following setting:
-- `datadog.systemProbe.enableDefaultKernelHeadersPaths` to `false`.
+**注**: COS (Container Optimized OS) を使用する場合、eBPF ベースの `OOM Kill` と `TCP Queue Length` チェックが Helm チャートのバージョン 3.0.1 以降でサポートされるようになりました。これらのチェックを有効にするには、以下の設定を行います。
+- `datadog.systemProbe.enableDefaultKernelHeadersPaths` を `false` にします。
 
 ### Autopilot
 
-GKE Autopilot requires some configuration, shown below.
+GKE Autopilot にはコンフィギュレーションが必要です（以下を参照）。
 
-Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may lead the Agent container to quickly OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
+Datadog では、Agent コンテナにリソースの上限を指定することをおすすめします。Autopilot は、比較的低いデフォルトの上限 (50m CPU、100Mi メモリ) を設定するため、ご使用の環境によってはすぐに Agent コンテナが OOMKill に達する可能性があります。該当する場合は、Trace Agent および Process Agent のコンテナにもリソース上限を指定することをおすすめします。さらに、Agent が確実にスケジュールされるように、Agent の優先クラスを作成することができます。
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -292,9 +292,9 @@ providers:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Spot pods and instances
+### Spot ポッドとインスタンス
 
-Using Spot Pods in GKE Autopilot clusters introduces taints to these GKE nodes. To use Spot Pods, additional configuration is required to provide the Datadog Agent with tolerations.
+GKE Autopilot クラスターで Spot ポッドを使用すると、GKE ノードに taint が導入されます。Spot ポッドを使用するには、Datadog Agent に許容範囲を与えるための追加の構成が必要です。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -320,7 +320,7 @@ spec:
 ```yaml
 agents:
   #(...)
-  # agents.tolerations -- Allow the DaemonSet to schedule on tainted nodes (requires Kubernetes >= 1.6)
+  # agents.tolerations -- taint が適用されたノードで DaemonSet のスケジュールを可能にします (Kubernetes >= 1.6  が必要)
   tolerations:
   - effect: NoSchedule
     key: cloud.google.com/gke-spot
@@ -334,21 +334,20 @@ agents:
 
 ## Red Hat OpenShift {#Openshift}
 
-OpenShift comes with hardened security by default (SELinux, SecurityContextConstraints), thus requiring some specific configuration:
-- Create SCC for Node Agent and Cluster Agent
-- Specific CRI socket path as OpenShift uses CRI-O container runtime
-- Kubelet API certificates may not always be signed by cluster CA
-- Tolerations are required to schedule the Node Agent on `master` and `infra` nodes
-- Cluster name should be set as it cannot be retrieved automatically from cloud provider
+OpenShift にはデフォルトで強化されたセキュリティ (SELinux、SecurityContextConstraints) が搭載されているため、特定のコンフィギュレーションが必要になります:
+- Node Agent と Cluster Agent 用の SCC を作成
+- OpenShift が CRI-O コンテナランタイムを使用しているため、特定の CRI ソケットパスが必要
+- Kubelet API 証明書は、クラスター CA によって署名されない場合がある
+- Node Agent を `master` および `infra` ノード上にスケジュールするための許容範囲が必要
+- クラスター名には、クラウドプロバイダーが自動で取得されない値を設定
 
-This configuration supports OpenShift 3.11 and OpenShift 4, but works best with OpenShift 4.
+このコンフィギュレーションは OpenShift 3.11 および OpenShift 4をサポートしていますが、OpenShift 4 で最も良い状態で動作します。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-When using the Datadog Operator in OpenShift, it is recommended that you install it through OperatorHub or RedHat Marketplace.
-The configuration below is meant to work with this setup (due to SCC/ServiceAccount setup), when the
-Agent is installed in the same namespace as the Datadog Operator.
+OpenShift で Datadog Operator を使用する場合、OperatorHub または RedHat Marketplace からインストールすることが推奨されています。
+以下のコンフィギュレーションは、(SCC/ServiceAccountの設定のため)、この設定と合わせて、Agent が Datadog Operator と同じネームスペースにインストールされている場合を前提として動作します。
 
 ```yaml
 kind: DatadogAgent
@@ -413,7 +412,7 @@ spec:
           effect: NoSchedule
 ```
 
-**Note**: The nodeAgent Security Context override is necessary for Log Collection and APM Trace Collection with the `/var/run/datadog/apm/apm.socket` socket. If these features are not enabled, you can omit this override.
+**注**: nodeAgent Security Context のオーバーライドは、`/var/run/datadog/apm/apm.socket` ソケットを使用したログ収集と APM トレース収集に必要です。これらの機能が有効になっていない場合は、このオーバーライドを省略できます。
 
 {{% /tab %}}
 {{% tab "Helm" %}}
@@ -542,9 +541,9 @@ agents:
 
 ## Oracle Container Engine for Kubernetes (OKE) {#OKE}
 
-No specific configuration is required.
+特殊なコンフィギュレーションは必要ありません。
 
-To enable container monitoring, add the following (`containerd` check):
+コンテナのモニタリングを有効にするには、以下を追加します (`containerd` check):
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -598,7 +597,7 @@ More `datadog-agent.yaml` examples can be found in the [Datadog Operator reposit
 
 ## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
 
-TKG requires some small configuration changes, shown below. For example, setting a toleration is required for the controller to schedule the Node Agent on the `master` nodes.
+TKG では、以下に示すような小さな構成変更が必要です。例えば、コントローラが `master` ノード上の Node Agent をスケジュールするために、許容量を設定することが必要です。
 
 
 {{< tabs >}}
@@ -644,14 +643,14 @@ datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
   kubelet:
-    # Set tlsVerify to false since the Kubelet certificates are self-signed
+    # Kubelet の証明書は自己署名なので、tlsVerify を false に設定します
     tlsVerify: false
-  # Disable the `kube-state-metrics` dependency chart installation.
+  # `kube-state-metrics` 依存性チャートのインストールを無効化します。
   kubeStateMetricsEnabled: false
-  # Enable the new `kubernetes_state_core` check.
+  # 新しい `kubernetes_state_core` のチェックを有効にします。
   kubeStateMetricsCore:
     enabled: true
-# Add a toleration so that the agent can be scheduled on the control plane nodes.
+# コントロールプレーンノードで Agent をスケジュールできるように許容範囲を追加します。
 agents:
   tolerations:
     - key: node-role.kubernetes.io/master

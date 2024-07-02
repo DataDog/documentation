@@ -13,7 +13,7 @@ further_reading:
   tag: Documentation
   text: RUM Flutter Advanced Configuration
 - link: "https://github.com/DataDog/dd-sdk-flutter"
-  tag: Source Code
+  tag: ソースコード
   text: Source code for dd-sdk-flutter
 - link: real_user_monitoring/explorer/
   tag: Documentation

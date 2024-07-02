@@ -29,7 +29,7 @@
 "categories":
 - caching
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/teradata/README.md"
 "display_on_public_website": true
@@ -70,11 +70,11 @@
 
 This check monitors Teradata through the Datadog Agent. Enable the Datadog-Teradata integration to view Teradata performance, disk usage, and resource consumption.
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### Installation
+### インストール
 
 The Teradata check is included in the [Datadog Agent][3] package.
 
@@ -153,7 +153,7 @@ tables:
         - <TABLE_3>
 ```
 
-### Configuration
+### 構成
 
 1. Edit the `teradata.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your teradata performance data. See the [sample teradata.d/conf.yaml][9] for all available configuration options.
 
@@ -163,21 +163,21 @@ tables:
 
 [Run the Agent's status subcommand][11] and look for `teradata` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "teradata" >}}
 
 
-### Events
+### イベント
 
 The Teradata integration does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "teradata" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][14].
 

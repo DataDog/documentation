@@ -41,11 +41,11 @@ Running a test multiple times increases the likelihood of exposing random condit
 
 You can choose to block the merge of the feature branch with a [Quality Gate][4]. For more information, see the [Quality Gates documentation][5].
 
-## Setup
+## セットアップ
 
 Before implementing Early Flake Detection, you must configure [Test Visibility][6] for your development environment. If you are reporting data through the Datadog Agent, use v6.40 or 7.40 and later.
 
-### Configuration
+### 構成
 
 After you have set up your Datadog library for Test Visibility, you can configure Early Flake Detection from the [Test Service Settings page][7].
 

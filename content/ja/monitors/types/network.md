@@ -16,78 +16,78 @@ further_reading:
   text: Check your monitor status
 ---
 
-## Overview
+## 概要
 
-Network monitors cover the TCP and HTTP checks available in the Agent. For details on Agent configuration, see the [HTTP check][1] or [TCP check][2] documentation.
+ネットワークモニターは、Agent で使用できる TCP チェックと HTTP チェックを対象とします。Agent 構成の詳細については、[HTTP チェック][1]または [TCP チェック][2]のドキュメントを参照してください。
 
-## Monitor creation
+## モニターの作成
 
-To create a [network monitor][3] in Datadog, use the main navigation: *Monitors --> New Monitor --> Network*.
+Datadog で[ネットワークモニター][3]を作成するには、メインナビゲーションを使用して次のように移動します: Monitors --> New Monitor --> Network。
 
-### Network status
+### ネットワークステータス
 
-#### Pick a check
+#### チェックを選択する
 
-* Choose a network check type (`ssl`, `http`, or `tcp`).
-* Choose a specific endpoint or `All monitored <TYPE> endpoints`.
+* ネットワークチェックタイプ（`ssl`、`http`、または `tcp`）を選択します。
+* 特定のエンドポイントまたは `All monitored <タイプ> endpoints` を選択します。
 
-#### Pick monitor scope
+#### モニターのスコープを選択
 
-Select the scope to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
+ホスト名、タグ、または `All Monitored Hosts` を選択して、監視するスコープを決定します。特定のホストを除外する必要がある場合は、2 番目のフィールドに名前やタグをリストアップします。
 
-* The include field uses `AND` logic. All listed hostnames and tags must be present on a host for it to be included.
-* The exclude field uses `OR` logic. Any host with a listed hostname or tag is excluded.
+* インクルードフィールドでは `AND` ロジックを使用します。ホストに存在するリストアップされたすべてのホスト名とタグはスコープに含まれます。
+* エクスクルードフィールドでは `OR` ロジックを使用します。リストアップされたホスト名やタグを持つホストはスコープから除外されます。
 
-#### Set alert conditions
+#### アラートの条件を設定する
 
-In this section, choose between a **Check Alert** or **Cluster Alert**:
+このセクションで、**Check Alert** または **Cluster Alert** を選択します。
 
 {{< tabs >}}
 {{% tab "Check Alert" %}}
 
-A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds.
+チェックアラートは、各チェックグループにつき、送信されたステータスを連続的にトラックし、しきい値と比較します。
 
-Set up the check alert:
+チェックアラートをセットアップする
 
-1. Trigger a separate alert for each `<GROUP>` reporting your check.
+1. チェックレポートを送信する各 `<グループ>` に対し、アラートを個別にトリガーします。
 
-    Check grouping is specified either from a list of known groupings or by you. For network monitors, the per-check grouping is explicitly known. For example, the HTTP check is tagged with `host`, `instance`, and `url`.
+    チェックグループは既存のグループリストから指定するか、独自に指定します。ネットワークモニターでは、チェックごとのグループを明確にします。たとえば HTTP チェックなら、`host`、`instance`、`url` でタグ付けします。
 
-2. Trigger the alert after selected consecutive failures: `<NUMBER>`
+2. 何回連続して失敗したらアラートをトリガーするか、回数 `<数値>` を選択します。
 
-    Each check run submits a single status of `OK`, `WARN`, or `CRITICAL`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your HTTP check might have a single blip where the connection fails. If you set this value to `> 1`, the blip is ignored, but a problem with more than one consecutive failure triggers a notification.
+    各チェックは `OK`、`WARN`、`CRITICAL` のいずれか 1 つのステータスを送信します。`CRITICAL` ステータスが連続して何回送信されたら通知をトリガーするか選択します。たとえば、HTTP チェックで接続に失敗する異常が 1 回発生したとします。値を `> 1` に設定した場合、この異常は無視されますが、2 回以上連続で失敗した場合は通知をトリガーします。
 
-3. Resolve the alert after selected consecutive successes: `<NUMBER>`
+3. 何回連続して成功したらアラートを解決するか、回数 `<数値>` を選択します。
 
-    Choose how many consecutive runs with the `OK` status resolve the alert.
+    何回連続して `OK` ステータスが送信されたらアラートを解決するか、回数を選択します。
 
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
-A cluster alert calculates the percent of checks in a given status and compares it to your thresholds.
+クラスターアラートは、既定のステータスでチェックの割合を計算し、しきい値と比較します。
 
-Set up a cluster alert:
+クラスターアラートをセットアップする
 
-1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per-group basis.
+1. タグによりチェックをグループ化するかどうか決定します。`Ungrouped` はすべてのソースでステータスのパーセンテージを計算します。`Grouped` は各グループごとのステータスのパーセンテージを計算します。
 
-2. Select the percentage for the alert threshold.
+2. アラートのしきい値となるパーセンテージを選択します。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Advanced alert conditions
+#### 高度なアラート条件
 
-See the [Monitor configuration][4] documentation for information on [No data][5], [Auto resolve][6], and [New group delay][7] options.
+[データなし][5]、[自動解決][6]、[新しいグループ遅延][7]の各オプションに関する情報は、[モニターコンフィギュレーション][4]ドキュメントを参照してください。
 
-#### Notifications
+#### 通知
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
 
-### Network metric
+### ネットワークメトリクス
 
 Create a network metric monitor by following the instructions in the [metric monitor][10] documentation. Using the network metric monitor type ensures the monitor can be selected by the network monitor type facet on the [Manage Monitors][9] page.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

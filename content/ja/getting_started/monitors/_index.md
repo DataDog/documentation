@@ -53,29 +53,29 @@ The main components of monitor configuration are:
 - **Configure notifications and automations**: What information needs to be in the alert?
 - **Define permissions and audit notifications**: Who has access to these alerts, and who should be notified if the alert is modified?
 
-### Choose the detection method
+### 検出方法を選択します。
 
-When you create a metric monitor, **Threshold Alert** is automatically selected as the detection method. A threshold alert compares metric values against user-defined thresholds. The goal for this monitor is to alert on a static threshold, so no change is necessary.
+メトリクスモニターを作成すると、検出方法として **Threshold Alert (しきい値アラート)** が自動的に選択されます。しきい値アラートは、メトリクス値をユーザー定義のしきい値と比較します。このモニターの目的は静的なしきい値に基づいてアラートを生成することなので、変更は必要ありません。
 
-### Define the metric
+### メトリクスを定義する
 
-To get an alert on low disk space, use the `system.disk.in_use` metric from the [Disk integration][6] and average the metric over `host` and `device`:
+ディスク容量不足のアラートを取得するには、[Disk インテグレーション][6]から `system.disk.in_use` メトリクスを使用して、`host` と `device` のメトリクスの平均を計算します。
 
 {{< img src="getting_started/monitors/monitor_query.png" alt="Define the metric for system.disk.in_use avg by host and device" style="width:100%" >}}
 
-### Set alert conditions
+### アラートの条件を設定する
 
-According to the [Disk integration documentation][6], `system.disk.in_use` is *the amount of disk space in use as a fraction of the total*. So, when this metric is reporting a value of `0.7`, the device is 70% full.
+[Disk インテグレーションのドキュメント][6]によると、`system.disk.in_use` は、使用中のディスク容量が全体に占める割合を示します。したがって、このメトリクスが報告している値が `0.7` ならば、デバイスは 70% 使用されています。
 
-To alert on low disk space, the monitor should trigger when the metric is `above` the threshold. The threshold values are based on your preference. For this metric, values between `0` and `1` are appropriate:
+ディスク容量不足のアラートを発生させるには、メトリクスがしきい値を`超えた`ときにモニターをトリガーする必要があります。しきい値はオプションで設定します。このメトリクスの場合、適切な値の範囲は `0` から `1` です。
 
-Set the following thresholds:
+以下のしきい値を設定します。
 ```
 Alert threshold: > 0.9
 Warning threshold: > 0.8
 ```
 
-For this example, leave the other settings in this section on the defaults. For more details, see the [Metric Monitors][7] documentation.
+この例では、このセクションの他の設定はデフォルトのままにします。詳細については、[メトリクスモニター][7]のドキュメントを参照してください。
 
 {{< img src="getting_started/monitors/monitor_alerting_conditions.png" alt="Set the alert and warning thresholds for the monitor to trigger alerts" style="width:80%" >}}
 
@@ -83,16 +83,16 @@ For this example, leave the other settings in this section on the defaults. For 
 
 When this monitor is triggered to alert, a notification message is sent. In this message, you can include conditional values, instructions for resolution, or a summary of what the alert is. At a minimum, a notification must have a title and message.
 
-#### Title
+#### タイトル
 
-The title must be unique for each monitor. Since this is a multi alert monitor, names are available for each group element (`host` and `device`) with message template variables:
+タイトルはモニターごとに一意である必要があります。これはマルチアラートモニターなので、メッセージテンプレート変数を使用してグループ要素 (`host` と `device`) ごとに名前を付けることができます。
 ```text
 Disk space is low on {{device.name}} / {{host.name}}
 ```
 
-#### Message
+#### メッセージ
 
-Use the message to tell your team how to resolve the issue, for example:
+次の例のように、メッセージを使用して問題の解決方法をチームに伝達します。
 ```text
 Steps to free up disk space:
 1. Remove unused packages
@@ -101,9 +101,9 @@ Steps to free up disk space:
 4. Remove duplicate files
 ```
 
-To add conditional messages based on alert vs. warning thresholds, see the available [Notification Variables][8] you can include in your message.
+アラートと警告のしきい値に基づいて条件付きメッセージを追加するには、メッセージに含めることができる利用可能な[通知変数][8]を参照してください。
 
-#### Notify your services and your team members
+#### サービスとチームメンバーへの通知
 
 Send notifications to your team through email, Slack, PagerDuty, and more. You can search for team members and connected accounts with the dropdown box. 
 
@@ -111,9 +111,9 @@ Send notifications to your team through email, Slack, PagerDuty, and more. You c
 
 To add a workflow from [Workflow Automation][14] or a case from [Case Management][15] to the alert notification, click **Add Workflow** or **Add Case**. You can also tag [Datadog Team][16] members by using the `@team` handle.
 
-Leave the other sections as-is. For more information on what each configuration option does, see the [Monitor configuration][9] documentation.
+他のセクションはそのままにしておきます。各構成オプションの詳細については、[モニター構成][9]のドキュメントを参照してください。
 
-### Permissions
+### 権限
 
 Click **Edit Access** to restrict the editing of your monitor to its creator and to specific roles in your org. Optionally, select `Notify` to be alerted when the monitor is modified.
 
@@ -121,13 +121,13 @@ Click **Edit Access** to restrict the editing of your monitor to its creator and
 
 For more information about roles, see [Role Based Access Control][10].
 
-## View Monitors and Triage Alerts on Mobile
+## モバイルでモニターとトリアージアラートを見る
 
-You can view Monitor Saved Views from your mobile home screen or view and mute monitors by downloading the [Datadog Mobile App][11], available on the [Apple App Store][12] and [Google Play Store][13]. This helps with triaging when you are away from your laptop or desktop.
+[Apple App Store][12] および [Google Play ストア][13]で入手できる [Datadog モバイルアプリ][11]をダウンロードすれば、モバイルのホーム画面からモニター保存ビューを閲覧したり、モニターの表示やミュートを行うことができます。これは、ラップトップやデスクトップから離れているときのトリアージに役立ちます。
 
-{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidents on Mobile App">}}
+{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのインシデント">}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

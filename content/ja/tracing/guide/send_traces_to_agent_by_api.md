@@ -50,7 +50,7 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource` and so on
 | `error`      | int32   | Set this value to 1 to indicate if an error occurred. If an error occurs, you should pass additional information, such as the error message, type and stack information in the meta property. |
 | `meta`       | object  | A set of key-value metadata. Keys and values must be strings. |
 | - `<any-key>` | string | Additional properties for key-value metadata. |
-| metrics    | object  | A set of key-value metadata. Keys must be strings and values must be 64-bit floating point numbers. |
+| モニター    | object  | A set of key-value metadata. Keys must be strings and values must be 64-bit floating point numbers. |
 | - `<any-key>` | double | Additional properties for key-value metrics. |
 | name       | string  | The span name. The span name must not be longer than 100 characters. |
 | `parent_id`  | int64   | The span integer ID of the parent span. |

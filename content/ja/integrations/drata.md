@@ -20,7 +20,7 @@
 - compliance
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/drata/README.md"
 "display_on_public_website": true
@@ -65,11 +65,11 @@ Drata is a security and compliance automation platform that continuously monitor
 
 This integration allows [Drata][1] customers to forward their compliance-related logs and events from Datadog to Drata through an API integration.
 
-## Setup
+## セットアップ
 
 To set up this integration, you must have an active [Drata account][2]. You must also have proper [admin permissions][3] in Datadog.
 
-### Installation
+### インストール
 
 1. To install this integration, you need to create an API and App key.
 2. We recommend creating a Service Account in Datadog and applying the "Datadog Read Only" Role to give this connection limited permissions.

@@ -42,8 +42,8 @@ You can also create metrics from an Analytics search by selecting the "Generate 
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Create a Logs to metric" style="width:80%;">}}
 
-1. **Input a query to filter the log stream**: The query syntax is the same as for the [Log Explorer Search][6]. Only logs ingested with a timestamp within the past 20 minutes are considered for aggregation.
-2. **Select the field you would like to track**: Select `*` to generate a count of all logs matching your query or enter a log attribute (for example, `@network.bytes_written`) to aggregate a numeric value and create its corresponding `count`, `min`, `max`, `sum`, and `avg` aggregated metrics. If the log attribute facet is a [measure][7], the value of the metric is the value of the log attribute.
+1. **クエリを入力してログストリームを絞り込み**: クエリの構文は[ログエクスプローラーでの検索][6]と同じです。過去 20 分以内のタイムスタンプで取り込まれたログのみが集計の対象となります。
+2. **追跡するフィールドを選択**: `*` を選択してクエリに一致するすべてのログカウントを生成するか、ログ属性 (例: `@network.bytes_written`) を入力して数値を集計し、該当する `count`、`min`、`max`、`sum`、`avg` の集計メトリクスを作成します。ログ属性のファセットが[メジャー][7]の場合、メトリクスの値はログ属性の値になります。
 3. **Add dimensions to `group by`**: By default, metrics generated from logs do not have any tags unless explicitly added. Any attribute or tag dimension that exists in your logs (for example, `@network.bytes_written`, `env`) can be used to create metric [tags][8]. Metric tags names are equal to the originating attribute or tag name, without the @.
 4. **Add percentile aggregations**: For distribution metrics, you can optionally generate p50, p75, p90, p95, and p99 percentiles. Percentile metrics are also considered custom metrics, and [billed accordingly][9].
 5. **Name your metric**: Log-based metric names must follow the [custom metric naming convention][10].

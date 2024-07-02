@@ -5,9 +5,9 @@
 - "aws"
 - "cloud"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Amazon Kinesis metrics."
+"description": "Amazon Kinesis のキーメトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_kinesis/"
 "draft": false
 "git_integration_title": "amazon_kinesis"
@@ -30,9 +30,9 @@ Amazon Kinesis is a fully managed, cloud-based service for real-time processing 
 
 Enable this integration to see in Datadog all your Kinesis metrics, and collect custom Kinesis tags.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1]. There are no other installation steps that need to be performed.
 
@@ -68,23 +68,23 @@ However, if you log to an S3 bucket, then use the AWS Lambda function. Make sure
     - [Add a manual trigger on the S3 bucket][9]
     - [Add a manual trigger on the CloudWatch Log Group][10]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_kinesis" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The Amazon Kinesis integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Kinesis integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][12].
 

@@ -21,7 +21,7 @@
 - network
 - notifications
 - snmp
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/snmp_check_point/README.md"
 "display_on_public_website": true
@@ -65,17 +65,17 @@ Check Point is a provider of software and hardware products for IT security, inc
 
 Configure the Check Point integration and collect SNMP metrics from devices such as Check Point firewalls.
 
-## Setup
+## セットアップ
 
 To install and configure the SNMP integration, see the [Network Device Monitoring][1] documentation.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 For details of monitored metrics see the [SNMP Data Collected][2] section.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

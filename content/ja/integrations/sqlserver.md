@@ -34,7 +34,7 @@
 "categories":
 - "data stores"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/sqlserver/README.md"
 "display_on_public_website": true
@@ -47,7 +47,7 @@
 "manifest_version": "2.0.0"
 "name": "sqlserver"
 "public_title": "SQL Server"
-"short_description": "Collect important SQL Server performance and health metrics."
+"short_description": "SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。"
 "supported_os":
 - "linux"
 - "macos"
@@ -59,9 +59,9 @@
   - "Supported OS::macOS"
   - "Supported OS::Windows"
   - "Category::Data Stores"
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   "configuration": "README.md#Setup"
-  "description": "Collect important SQL Server performance and health metrics."
+  "description": "SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -71,37 +71,37 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![SQL server Graph][1]
+![SQL Server のグラフ][1]
 
-## Overview
+## 概要
 
-The SQL Server integration tracks the performance of your SQL Server instances. It collects metrics for number of user connections, rate of SQL compilations, and more.
+SQL Server インテグレーションを使用して、SQL Server インスタンスのパフォーマンスを追跡できます。ユーザー接続の数、SQL のコンパイル率などのメトリクスを収集できます。
 
-Enable [Database Monitoring][2] (DBM) for enhanced insight into query performance and database health. In addition to the standard integration, Datadog DBM provides query-level metrics, live and historical query snapshots, wait event analysis, database load, query explain plans, and blocking query insights.
+[データベースモニタリング][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーションに加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画、ブロッキングを引き起こしているクエリについてのインサイトが提供されます。
 
 All editions of SQL Server 2012 and above are supported.
 
-## Setup
+## セットアップ
 
-<div class="alert alert-info">This page describes the SQL Server Agent standard integration. If you are looking for the Database Monitoring product for SQL Server, see <a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog Database Monitoring</a>.</div>
+<div class="alert alert-info">このページでは、SQL Server Agent の標準インテグレーションについて説明します。SQL Server のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### Installation
+### インストール
 
-The SQL Server check is included in the [Datadog Agent][3] package. No additional installation is necessary on your SQL Server instances.
+SQL Server チェックは [Datadog Agent][3] パッケージに含まれています。SQL Server インスタンスに追加でインストールする必要はありません。
 
-Make sure that your SQL Server instance supports SQL Server authentication by enabling "SQL Server and Windows Authentication mode" in the server properties:
+サーバーのプロパティで "SQL Server and Windows Authentication mode" を有効にして、SQL Server インスタンスが SQL Server 認証をサポートするよう、次のように指定します。
 
 _Server Properties_ -> _Security_ -> _SQL Server and Windows Authentication mode_
 
-### Prerequisite
+### 前提条件
 
-**Note**: To install Database Monitoring for SQL Server, select your hosting solution on the [documentation site][4] for instructions.
+**注**: Database Monitoring for SQL Server をインストールするには、[ドキュメントサイト][4]でホスティングソリューションを選択し、手順を確認してください。
 
 Supported versions of SQL Server for the SQL Server check are the same as for Database Monitoring. Visit the [Setting up SQL Server page][5] to see the currently supported versions under the **Self-hosted** heading.
 
-Proceed with the following steps in this guide only if you are installing the standard integration alone.
+標準のインテグレーションを単体でインストールする場合のみ、このガイドの下記の手順に進んでください。
 
-1. Create a read-only login to connect to your server:
+1. 読み取り専用ログインを作成してサーバーに接続します。
 
     ```SQL
         CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
@@ -116,22 +116,22 @@ Proceed with the following steps in this guide only if you are installing the st
        GRANT CONNECT ANY DATABASE to datadog; 
    ```
 
-2. (Required for AlwaysOn and `sys.master_files` metrics) To gather AlwaysOn and `sys.master_files` metrics, grant the following additional permission:
+2. (AlwaysOn および `sys.master_files` メトリクスの場合に必要metrics) AlwaysOn および `sys.master_files` メトリクスを収集するには、以下の追加権限を付与します。
 
     ```SQL
         GRANT VIEW ANY DEFINITION to datadog;
     ```
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `sqlserver.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample sqlserver.d/conf.yaml][2] for all available configuration options:
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `sqlserver.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル sqlserver.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -153,27 +153,27 @@ To configure this check for an Agent running on a host:
       ```
 
 
-2. [Restart the Agent][4].
+2. [Agent を再起動します][4]。
 
 ##### Linux
 
-Extra configuration steps are required to get the SQL Server integration running on a Linux host:
+Linux ホスト上で SQL Server インテグレーションを実行するには、以下のような追加の構成設定が必要です。
 
-1. Install an ODBC SQL Server driver, for example the [Microsoft ODBC driver][5] or the [FreeTDS driver][6].
-2. Copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
-3. Configure the `conf.yaml` file to use the `odbc` connector and specify the proper driver as indicated in the `odbcinst.ini` file.
+1. ODBC SQL Server ドライバー ([Microsoft ODBC ドライバー][5]または [FreeTDS ドライバー][6]) をインストールします。
+2. `odbc.ini` ファイルと `odbcinst.ini` ファイルを `/opt/datadog-agent/embedded/etc` フォルダーにコピーします。
+3. `odbc` コネクターを使用し、`odbcinst.ini` ファイルで指定された正しいドライバーを指定するように `conf.yaml` ファイルを構成します。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Add this configuration block to your `sqlserver.d/conf.yaml` file to start collecting your SQL Server logs:
+2. SQL Server のログの収集を開始するには、次の構成ブロックを `sqlserver.d/conf.yaml` ファイルに追加します。
 
     ```yaml
     logs:
@@ -184,9 +184,9 @@ _Available for Agent versions >6.0_
         service: "<SERVICE_NAME>"
     ```
 
-    Change the `path` and `service` parameter values based on your environment. See the [sample sqlserver.d/conf.yaml][2] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を環境に合わせて変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[sqlserver.d/conf.yaml のサンプル][2]を参照してください。
 
-3. [Restart the Agent][4].
+3. [Agent を再起動します][4]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
@@ -195,29 +195,29 @@ _Available for Agent versions >6.0_
 [5]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-2017
 [6]: http://www.freetds.org/
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                                                                                                            |
+| パラメーター            | 値                                                                                                                            |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `sqlserver`                                                                                                                      |
-| `<INIT_CONFIG>`      | blank or `{}`                                                                                                                    |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                                                    |
 | `<INSTANCE_CONFIG>`  | `{"host": "%%host%%,%%port%%", "username": "datadog", "password": "<UNIQUEPASSWORD>", "connector": "odbc", "driver": "FreeTDS"}` |
 
-See [Autodiscovery template variables][2] for details on passing `<UNIQUEPASSWORD>` as an environment variable instead of a label.
+`<UNIQUEPASSWORD>` をラベルではなく環境変数として渡す方法について、詳細は[オートディスカバリーテンプレート変数][2]を参照してください。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][3].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
-| Parameter      | Value                                             |
+| パラメーター      | 値                                             |
 | -------------- | ------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "sqlserver", "service": "sqlserver"}` |
 
@@ -227,29 +227,29 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][7] and look for `sqlserver` under the Checks section.
+[Agent の status サブコマンドを実行][7]し、Checks セクションの `sqlserver` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "sqlserver" >}}
 
 
-Most of these metrics come from your SQL Server's `sys.dm_os_performance_counters` table.
+これらのメトリクスのほとんどは、SQL Server の `sys.dm_os_performance_counters` テーブルにあります。
 
-### Events
+### イベント
 
-The SQL server check does not include any events.
+SQL Server チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "sqlserver" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][8].
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 If you are running the Agent on an ARM aarch64 processor, there is a known issue starting in version 14.0.0 of this check, which is bundled with Agent version 7.48.0. A Python dependency fails to load, and you'll see the following message when running [the Agent's status subcommand][7]:
 
@@ -268,14 +268,14 @@ Loading Errors
 
 This is fixed in version 15.2.0 of the check and in Agent versions 7.49.1 and above.
 
-## Further Reading
+## その他の参考資料
 
-- [Monitor your Azure SQL Databases with Datadog][9]
-- [Key metrics for SQL Server monitoring][10]
-- [SQL Server monitoring tools][11]
-- [Monitor SQL Server performance with Datadog][12]
-- [Custom SQL Server metrics for detailed monitoring][13]
-- [Strategize your Azure migration for SQL workloads with Datadog][14]
+- [Datadog を使用した Azure SQL Database の監視][9]
+- [SQL Server 監視のためのキーメトリクス][10]
+- [SQL Server 監視ツール][11]
+- [Datadog を使用した SQL Server パフォーマンスの監視][12]
+- [カスタム SQL Server メトリクスによる詳細な監視][13]
+- [Datadog で SQL ワークロードの Azure 移行を戦略化する][14]
 - [Optimize SQL Server performance with Datadog Database Monitoring][15]
 
 

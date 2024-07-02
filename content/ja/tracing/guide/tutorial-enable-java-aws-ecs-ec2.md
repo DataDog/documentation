@@ -3,19 +3,19 @@ title: Tutorial - Enabling Tracing for a Java Application on Amazon ECS with EC2
 kind: guide
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
-  tag: Documentation
+  tag: ドキュメント
   text: Additional tracing library configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
-  tag: Documentation
+  tag: ドキュメント
   text: Detailed tracing library setup instructions
 - link: /tracing/trace_collection/compatibility/java/
-  tag: Documentation
+  tag: ドキュメント
   text: Supported Java frameworks for automatic instrumentation
 - link: /tracing/trace_collection/custom_instrumentation/java/
-  tag: Documentation
+  tag: ドキュメント
   text: Manually configuring traces and spans
 - link: "https://github.com/DataDog/dd-trace-java"
-  tag: Source Code
+  tag: ソースコード
   text: Tracing library open source code repository
 ---
 

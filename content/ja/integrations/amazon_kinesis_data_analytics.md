@@ -3,7 +3,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon Kinesis Data Analytics metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_kinesis_data_analytics/"
@@ -30,9 +30,9 @@ analyze streaming data in real-time using Apache Flink.
 Enable this integration to see all your Amazon Kinesis Data Analytics metrics in
 Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -41,22 +41,22 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
 1. In the [AWS integration page][2], ensure that `Kinesis Analytics` is enabled under the `Metric Collection` tab.
 2. Install the [Datadog - Amazon Kinesis Data Analytics integration][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_kinesis_data_analytics" >}}
 
 
-### Events
+### イベント
 
 The Amazon Kinesis Data Analytics integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Kinesis Data Analytics integration does not include any service
 checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

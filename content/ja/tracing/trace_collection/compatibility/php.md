@@ -16,24 +16,23 @@ further_reading:
 <div class="alert alert-info">This documentation is for the PHP tracer v1.x. If you are looking for the PHP tracer v0.x documentation, see the legacy <a href="/tracing/trace_collection/compatibility/php_v0/">PHP Compatibility Requirements
 </a> documentation.</div>
 
-## Runtime support policy for PHP APM
+## PHP APM のランタイムサポートポリシー
 
-The PHP Datadog Trace library is open source - view the [GitHub repository][1] for more information.
+PHP Datadog Trace ライブラリはオープンソースです。詳細については、[GitHub リポジトリ][1]をご覧ください。
 
-Datadog APM for PHP is built upon dependencies defined in specific versions of the host operating system, PHP runtime,
-certain PHP libraries, and the Datadog Agent or API.
-When these versions are no longer supported by their maintainers, Datadog APM for PHP limits its support for these as well.
+Datadog APM for PHP は、ホスト OS や PHP ランタイム、特定の PHP ライブラリ、 Datadog Agent や API の特定のバージョンで定義される依存関係に基づいて構築されています。
+これらのバージョンがメンテナによってサポートされなくなった場合、 Datadog APM for PHP はこれらのサポートにも制限をかけます。
 
-#### Levels of support
+#### サポートレベル
 
-| **Level**                                              | **Support provided**                                                                                                                                                          |
+| **レベル**                                              | **サポート内容**                                                                                                                                                          |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact our customer support team for special requests.][2]                                                             |
-| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug, and security fixes provided on a best-effort basis.                                    |
-| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug, and security fixes.                                                                                    |
-| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug and security fixes only.                                                              |
-| <span id="support-legacy">Legacy</span>                |  Legacy implementation. May have limited function, but no maintenance provided. [Contact the support team][2] for special requests. |
-| <span id="support-eol">End-of-life (EOL)</span>        |  No support. The version can still be used but no bug fixes are provided.                                                                                                  |
+| <span id="support-unsupported">非対応</span>      |  実装していません。[特別なご要望はカスタマーサポートチームにお問い合わせください][2]。                                                             |
+| <span id="support-beta">ベータ版</span>                    |  初期実装です。まだすべての機能が含まれていない可能性があります。新機能のサポート、バグやセキュリティの修正は、ベストエフォートで提供されます。                                    |
+| <span id="support-ga">一般提供 (GA)</span> |  全機能の完全実装。新機能、バグ、セキュリティフィックスを完全サポート。                                                                                    |
+| <span id="support-maintenance">メンテナンス</span>      |  既存機能の完全実装。新機能は受けません。バグフィックス、セキュリティフィックスのみの対応となります。                                                              |
+| <span id="support-legacy">レガシー</span>                |  レガシーな実装。機能は限定されますが、メンテナンスは提供されません。[特別なご要望がある場合は、サポートチームにお問い合わせください。 |
+| <span id="support-eol">サポート終了 (EOL)</span>        |  サポートなし。このバージョンはまだ使用可能ですが、バグ修正は提供されません。                                                                                                  |
 
 
 PHP APM supports the following PHP versions (both ZTS and NTS):
@@ -47,143 +46,143 @@ If you are using PHP 5.x version in your application and have a feature request 
 It's recommended to use <a href="https://www.php.net/supported-versions">officially supported versions</a> of PHP, especially 8.0+.
 </div>
 
-| PHP Version    | Support level        | Package version |
+| PHP バージョン    | サポートレベル        | パッケージバージョン |
 |:---------------|:---------------------|:----------------|
-| 8.3.x          | General Availability | > `0.93.0+`     |
-| 8.2.x          | General Availability | > `0.82.0+`     |
-| 8.1.x          | General Availability | > `0.66.0+`     |
-| 8.0.x          | General Availability | > `0.52.0+`     |
-| 7.4.x          | General Availability | All             |
-| 7.3.x          | General Availability | All             |
-| 7.2.x          | General Availability | All             |
-| 7.1.x          | General Availability | All             |
-| 7.0.x          | General Availability | All             |
+| 8.3.x          | 一般提供 | > `0.93.0+`     |
+| 8.2.x          | 一般提供 | > `0.82.0+`     |
+| 8.1.x          | 一般提供 | > `0.66.0+`     |
+| 8.0.x          | 一般提供 | > `0.52.0+`     |
+| 7.4.x          | 一般提供 | All             |
+| 7.3.x          | 一般提供 | All             |
+| 7.2.x          | 一般提供 | All             |
+| 7.1.x          | 一般提供 | All             |
+| 7.0.x          | 一般提供 | All             |
 | 5.6.x          | EOL                  | < `1.0.0`      |
 | 5.5.x          | EOL                  | < `1.0.0`      |
 | 5.4.x          | EOL                  | < `1.0.0`      |
 
-PHP APM supports the following SAPI's:
+PHP APM は以下の SAPI に対応しています。
 
-| SAPI           | Support type               |
+| SAPI           | サポートの種類               |
 |:---------------|:---------------------------|
-| apache2handler | All supported PHP versions |
-| cli            | All supported PHP versions |
-| fpm-fcgi       | All supported PHP versions |
-| cgi-fcgi       | All supported PHP versions |
-| FrankenPHP     | All supported PHP versions |
+| apache2handler | サポートされているすべての PHP バージョン |
+| cli            | サポートされているすべての PHP バージョン |
+| fpm-fcgi       | サポートされているすべての PHP バージョン |
+| cgi-fcgi       | サポートされているすべての PHP バージョン |
+| FrankenPHP     | サポートされているすべての PHP バージョン |
 
 
-## Supported processor architectures
+## 対応プロセッサアーキテクチャー
 
-PHP APM supports the following architectures:
+PHP APM は以下のアーキテクチャに対応しています。
 
-| Processor architectures                 | Support level     | Package version | Support Type               |
+| プロセッサアーキテクチャー                 | サポートレベル     | パッケージバージョン | サポートの種類               |
 |-----------------------------------------|-------------------|---------------|----------------------------|
-| Linux GNU amd64 (`x86-64-linux-gnu`)    | [GA](#support-ga) | All           | All supported PHP versions |
-| Linux MUSL amd64 (`x86-64-linux-musl`)  | [GA](#support-ga) | All           | All supported PHP versions |
-| Linux GNU arm64 (`aarch64-linux-gnu`)   | [GA](#support-ga) | > `0.78.0`    | All supported PHP versions |
-| Linux MUSL arm64 (`aarch64-linux-musl`) | [GA](#support-ga) | > `0.78.0`    | All supported PHP versions |
+| Linux GNU amd64 (`x86-64-linux-gnu`)    | [GA](#support-ga) | All           | サポートされているすべての PHP バージョン |
+| Linux MUSL amd64 (`x86-64-linux-musl`)  | [GA](#support-ga) | All           | サポートされているすべての PHP バージョン |
+| Linux GNU arm64 (`aarch64-linux-gnu`)   | [GA](#support-ga) | > `0.78.0`    | サポートされているすべての PHP バージョン |
+| Linux MUSL arm64 (`aarch64-linux-musl`) | [GA](#support-ga) | > `0.78.0`    | サポートされているすべての PHP バージョン |
 | Windows amd64 (`x86_64-windows`)        | [GA](#support-ga) | > `0.98.0`    | PHP 7.2+                   |
 
-### Integrations
+### インテグレーション
 
-#### Web framework compatibility
+#### Web フレームワークの互換性
 
-By default, Datadog **supports all PHP web frameworks** out of the box, with either framework-level instrumentation, or generic web tracing.
+Datadog はデフォルトで、**すべての PHP Web フレームワークをサポート**し、フレームワークレベルのインスツルメンテーション、または一般的な Web トレースを行うことができます。
 
-Framework-level instrumentation includes tracing of internal methods and framework specific tagging.
+フレームワークレベルのインスツルメンテーションには、内部メソッドのトレースとフレームワーク固有のタグ付けが含まれます。
 
-Generic web tracing includes a `web.request` span to track latency and errors that originated from the call, in addition to spans for supported libraries — for example: database and HTTP clients.
+一般的な Web トレースには、データベースや HTTP クライアントなどのサポートされたライブラリのスパンに加えて、コールから発生したレイテンシーやエラーを追跡するための `web.request` スパンが含まれています。
 
-The following table enumerates some of the frameworks and versions Datadog successfully traces.
+次の表は、Datadog が正常にトレースするフレームワークとバージョンの一部を示しています。
 
-**Web frameworks**:
+**ウェブフレームワーク**:
 
-| Module         | Versions                                | Support Type                | Instrumentation level           |
+| モジュール         | バージョン                                | サポートの種類                | インスツルメンテーションレベル           |
 |:---------------|:----------------------------------------|:----------------------------|:--------------------------------|
-| CakePHP        | 2.x                                     | All supported PHP versions  | Framework-level instrumentation |
+| CakePHP        | 2.x                                     | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
 | CodeIgniter    | 2.x                                     | All supported PHP versions  | Framework-level instrumentation |
-| CodeIgniter    | 3.x                                     | All supported PHP versions  | Generic web tracing             |
-| Drupal         |                                         | All supported PHP versions  | Framework-level instrumentation |
-| FuelPHP        | 1.1                                     | All supported PHP versions  | Generic web tracing             |
-| Laminas        |                                         | All supported PHP versions  | Framework-level instrumentation |
-| Laravel        | 4.2, 5.x, 6.x                           | All supported PHP versions  | Framework-level instrumentation |
-| Laravel 8+     | 8.x, 9.x, 10.x, 11.x (tracer `0.52.0+`) | All supported PHP versions  | Framework-level instrumentation |
-| Lumen          | 5.2+                                    | All supported PHP versions  | Framework-level instrumentation |
-| Magento        | 1                                       | All supported PHP versions  | Generic web tracing             |
-| Magento        | 2                                       | All supported PHP versions  | Framework-level instrumentation |
-| Neos Flow      | 1.1                                     | All supported PHP versions  | Generic web tracing             |
-| Phalcon        | 1.3, 3.4                                | All supported PHP versions  | Generic web tracing             |
-| RoadRunner     | 2.x                                     | All supported PHP versions  | Framework-level instrumentation |
-| Slim           | 2.x, 3.x, 4.x                           | All supported PHP versions  | Framework-level instrumentation |
-| Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x, 7.x       | All supported PHP versions  | Framework-level instrumentation |
-| WordPress      | 4.x, 5.x, 6.x                           | All supported PHP versions  | Framework-level instrumentation |
-| Yii            | 1.1, 2.0                                | All supported PHP versions  | Framework-level instrumentation |
-| Zend Framework | 1.12, 1.21                              | All supported PHP versions  | Framework-level instrumentation |
-| Zend Framework | 2.x                                     | All supported PHP versions  | Generic web tracing             |
+| CodeIgniter    | 3.x                                     | サポートされているすべての PHP バージョン  | 一般的な Web トレース             |
+| Drupal         |                                         | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| FuelPHP        | 1.1                                     | All supported PHP versions  | 一般的な Web トレース             |
+| Laminas        |                                         | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| Laravel        | 4.2、5.x、6.x                           | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| Laravel 8+     | 8.x, 9.x, 10.x, 11.x (tracer `0.52.0+`) | All supported PHP versions  | フレームワークレベルのインスツルメンテーション |
+| Lumen          | 5.2+                                    | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| Magento        | 1                                       | サポートされているすべての PHP バージョン  | 一般的な Web トレース             |
+| Magento        | 2                                       | All supported PHP versions  | フレームワークレベルのインスツルメンテーション |
+| Neos Flow      | 1.1                                     | サポートされているすべての PHP バージョン  | 一般的な Web トレース             |
+| Phalcon        | 1.3、3.4                                | サポートされているすべての PHP バージョン  | 一般的な Web トレース             |
+| RoadRunner     | 2.x                                     | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| Slim           | 2.x、3.x、4.x                           | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x, 7.x       | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| WordPress      | 4.x、5.x、6.x                           | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| Yii            | 1.1、2.0                                | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| Zend Framework | 1.12, 1.21                              | サポートされているすべての PHP バージョン  | フレームワークレベルのインスツルメンテーション |
+| Zend Framework | 2.x                                     | サポートされているすべての PHP バージョン  | 一般的な Web トレース             |
 
-Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
+このリストにウェブフレームワークがない場合でも、トレーサーの最新リリースではそのまま使用できます。
 
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks. To request support for additional span metadata and framework internals, contact our awesome [support team][3].
 
-#### CLI library compatibility
+#### CLI ライブラリの互換性
 
-Tracing from the CLI SAPI is disabled by default. To enable tracing of PHP CLI scripts, set `DD_TRACE_CLI_ENABLED=true`.
+デフォルトで、CLI SAPI からのトレースは無効になっています。PHP CLI スクリプトのトレースを有効にするには、`DD_TRACE_CLI_ENABLED=true` とします。
 
-| Module          | Versions            | Support Type               |
+| モジュール          | バージョン            | サポートの種類               |
 |:----------------|:--------------------|:---------------------------|
-| CakePHP Console | 2.x                 | All supported PHP versions |
-| Laravel Artisan | 5.x, 8.x, 9.x, 10.x | All supported PHP versions |
-| Symfony CLI     | 4.x, 5.x, 6.x       | All supported PHP versions |
+| CakePHP Console | 2.x                 | サポートされているすべての PHP バージョン |
+| Laravel Artisan | 5.x、8.x、9.x、10.x | サポートされているすべての PHP バージョン |
+| Symfony CLI     | 4.x、5.x、6.x       | サポートされているすべての PHP バージョン |
 
-To request support for additional CLI libraries, contact our awesome [support team][3].
+追加 CLI ライブラリに関するサポートをご希望の場合は、[サポートチーム][3]までお気軽にお問い合わせください。
 
-#### Datastore compatibility
+#### データストアの互換性
 
-| Module                                                                  | Versions                   | Support Type               |
+| モジュール                                                                  | バージョン                   | サポートの種類               |
 |-------------------------------------------------------------------------|----------------------------|----------------------------|
-| Amazon RDS (using PDO or MySQLi)                                        | *(Any Supported PHP)*      | All supported PHP versions |
-| Elasticsearch                                                           | 1+                         | All supported PHP versions |
-| Eloquent                                                                | Laravel supported versions | All supported PHP versions |
-| Laravel Queues                                                          | Laravel supported versions | All supported PHP versions |
-| Memcache                                                                | *(Any Supported PHP)*      | All supported PHP versions |
-| Memcached                                                               | *(Any Supported PHP)*      | All supported PHP versions |
-| MongoDB - via [mongo][4] extension                                      | 1.4.x                      | All supported PHP versions |
-| MySQLi                                                                  | *(Any Supported PHP)*      | All supported PHP versions |
-| PDO                                                                     | *(Any Supported PHP)*      | All supported PHP versions |
-| PhpRedis                                                                | 3, 4, 5                    | All supported PHP versions |
-| Predis                                                                  | 1.1                        | All supported PHP versions |
-| SQLSRV                                                                  | *(Any Supported PHP)*      | All supported PHP versions |
+| Amazon RDS (PDO または MySQLi 使用)                                        | *(対応する PHP)*      | サポートされているすべての PHP バージョン |
+| Elasticsearch                                                           | 1+                         | サポートされているすべての PHP バージョン |
+| Eloquent                                                                | Laravel 対応バージョン | サポートされているすべての PHP バージョン |
+| Laravel Queues                                                          | Laravel 対応バージョン | サポートされているすべての PHP バージョン |
+| Memcache                                                                | *(対応する PHP)*      | サポートされているすべての PHP バージョン |
+| Memcached                                                               | *(対応する PHP)*      | サポートされているすべての PHP バージョン |
+| MongoDB - [mongo][4] 拡張機能を使用                                      | 1.4.x                      | サポートされているすべての PHP バージョン |
+| MySQLi                                                                  | *(対応する PHP)*      | サポートされているすべての PHP バージョン |
+| PDO                                                                     | *(対応する PHP)*      | サポートされているすべての PHP バージョン |
+| PhpRedis                                                                | 3、4、5                    | サポートされているすべての PHP バージョン |
+| Predis                                                                  | 1.1                        | サポートされているすべての PHP バージョン |
+| SQLSRV                                                                  | *(対応する PHP)*      | サポートされているすべての PHP バージョン |
 
-To request support for additional datastores, contact our awesome [support team][3].
+追加データストアに関するサポートをご希望の場合は、[サポートチーム][3]までお気軽にお問い合わせください。
 
-#### Library compatibility
+#### ライブラリの互換性
 
-| Module            | Versions                   | Support Type               |
+| モジュール            | バージョン                   | サポートの種類               |
 |:------------------|:---------------------------|:---------------------------|
-| [php-amqplib][10] | 2.x, 3.x                   | PHP 7.1+                   |
-| Curl              | *(Any Supported PHP)*      | All supported PHP versions |
-| Guzzle            | 5.x, 6.x, 7.x              | All supported PHP versions |
-| Laravel Queue     | Laravel supported versions | All supported PHP versions |
+| [php-amqplib][10] | 2.x、3.x                   | PHP 7.1+                   |
+| Curl              | *(対応する PHP)*      | サポートされているすべての PHP バージョン |
+| Guzzle            | 5.x, 6.x, 7.x              | サポートされているすべての PHP バージョン |
+| Laravel Queue     | Laravel 対応バージョン | サポートされているすべての PHP バージョン |
 
 
-To request support for additional libraries, contact our awesome [support team][3].
+ライブラリに関するサポートをご希望の場合は、[サポートチーム][3]までお気軽にお問い合わせください。
 
-#### Deep call stacks on PHP 5
+#### PHP 5 の深いコールスタック
 
-The call stack is limited on PHP 5. See the [deep call stack troubleshooting page][5] for more details.
+コールスタックは PHP 5 のみに限定されます。詳細は[深いコールスタックのトラブルシューティングページ][5]を参照してください。 
 
-### Generators
+### ジェネレータ
 
-Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
+[ジェネレータ][6]のインスツルメントは、PHP 5 および PHP 7 ではサポートされていません。
 
 ### PCNTL
 
 Datadog supports tracing forked processes using [pcntl][7]. When a call to `pcntl_fork` is detected, a dedicated span is created, and the forked process is instrumented. This can be disabled with `DD_TRACE_FORKED_PROCESS`. Refer to the [library configuration page][9] for more details.
 
-If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
+アプリケーションが `pcntl_unshare(CLONE_NEWUSER);` を実行し、トレーサーがインストールされている場合、アプリケーションは致命的にクラッシュします。これは、`CLONE_NEWUSER` を持つ `unshare` がプロセスを[スレッド化しない][8]ことを要求し、PHP トレーサーが別スレッドを使用してメインプロセスをブロックせずに Datadog Agent にトレースを送信するために起こります。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

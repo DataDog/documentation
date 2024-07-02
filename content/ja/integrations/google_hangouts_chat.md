@@ -2,7 +2,7 @@
 "categories":
 - collaboration
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Send Datadog alerts and graphs to your team's Google Chat Space."
 "doc_link": "https://docs.datadoghq.com/integrations/google_hangouts_chat/"
@@ -35,13 +35,13 @@ Connect Google Chat to Datadog and help your team collaborate by:
 - Sharing graphs with your colleagues in your team's private or public spaces.
 - Receiving alerts and notifications from Datadog within Google Chat.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Google Chat integration is installed with its [integration tile][1] on the Datadog site and by adding the bot to your Google Chat space.
 
-### Configuration
+### 構成
 
 1. Add the Datadog application to your Google Chat space with `@Datadog`. **Note:** [Allowlist the Datadog Chatbot][2] in order to add it to your room.
 2. Install the Datadog application in your Google Chat space by typing `@Datadog install`. **Note:** To install for sites other than the default domain (`app.datadoghq.com`), add the domain to this command, such as `@Datadog install mydomain.datadoghq.eu`
@@ -69,17 +69,17 @@ There are three ways to uninstall Google Chat from a Datadog account:
 Within a Datadog account, remove a space from the Google Chat integration tile.
 {{% /site-region %}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Google Chat integration does not include any metrics.
 
-### Events
+### イベント
 
 The Google Chat integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Chat integration does not include any service checks.
 

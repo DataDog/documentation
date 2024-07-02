@@ -28,7 +28,7 @@
 - configuration & deployment
 - network
 - provisioning
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/vercel/README.md"
 "display_on_public_website": true
@@ -79,25 +79,25 @@ Integrate Vercel with Datadog to:
 - See the number of requests and 4xx/5xx HTTP errors to your serverless applications and APIs running on Vercel
 - Monitor frontend performance with [Datadog Synthetics][6]
 
-## Setup
+## セットアップ
 
 - [Configure the Vercel integration][7]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Vercel integration does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 The Vercel integration does not include any service checks.
 
-### Events
+### イベント
 
 The Vercel integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

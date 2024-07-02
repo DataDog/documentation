@@ -2,7 +2,7 @@
 "categories":
 - collaboration
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Send Datadog alerts and graphs to your team's DingTalk Group."
 "doc_link": "https://docs.datadoghq.com/integrations/dingtalk/"
@@ -28,11 +28,11 @@ Integrate with DingTalk to:
 -   Be notified of Datadog alerts and events in DingTalk
 -   Share messages and graphs with your DingTalk group
 
-## Installation
+## インストール
 
 The DingTalk integration is installed with the Datadog [DingTalk integration tile][1].
 
-## Setup
+## セットアップ
 
 To integrate Datadog with a DingTalk group:
 
@@ -46,21 +46,21 @@ To integrate Datadog with a DingTalk group:
 
 After installing or updating the integration, you can use the [`@-notification` feature][2] with your DingTalk group name.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The DingTalk integration does not provide any metrics.
 
-### Events
+### イベント
 
 The DingTalk integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The DingTalk integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

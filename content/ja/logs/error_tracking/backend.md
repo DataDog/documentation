@@ -245,11 +245,11 @@ try {
 
 ### Python
 
-#### Logging
+#### ロギング
 
-If you have not setup log collection for Python, see the [Python Log Collection documentation][6]. Ensure your logs are tagged with `source:python`.
+Python のログ収集を設定していない場合は、[Python ログ収集ドキュメント][6]を参照してください。ログに `source:python` というタグが付けられていることを確認してください。
 
-To log a caught exception yourself, you may optionally use:
+キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
 
 ```python
 try:
@@ -334,7 +334,7 @@ Rails.application.configure do
     end
 end
 ```
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

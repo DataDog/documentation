@@ -11,7 +11,7 @@
   "support_email": akash.bhardwaj@harness.io
 "categories":
 - cost management
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/harness_cloud_cost_management/README.md"
 "display_on_public_website": true
@@ -70,18 +70,18 @@ With Datadog and Harness, you can:
 - Review top spending resources
 
 
-## Setup
+## セットアップ
 
 1. If you have not yet started using Harness Cloud Cost Management, [sign up][1] for a 14 day trial.
 
 2. Install the integration.
 3. Go to the Harness Cloud Cost Management Dashboard and connect in any of the widgets by logging in with your Harness user ID. This authenticates you for all the widgets.
 
-### Events
+### イベント
 
 The Harness Cloud Cost Management check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Harness Cloud Cost Management check does not include any service checks.
 

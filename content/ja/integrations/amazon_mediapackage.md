@@ -3,7 +3,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key AWS Elemental MediaPackage metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_mediapackage/"
@@ -28,9 +28,9 @@ AWS Elemental MediaPackage is a just-in-time video packaging and origination ser
 
 Enable this integration to see all your Elemental MediaPackage metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -55,21 +55,21 @@ Configure AWS Elemental MediaPackage to send logs either to a S3 bucket or to Cl
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_mediapackage" >}}
 
 
-### Events
+### イベント
 
 The AWS Elemental MediaPackage integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS Elemental MediaPackage integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

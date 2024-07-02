@@ -3,7 +3,7 @@
 - azure
 - cloud
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure Blob Storage metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_blob_storage/"
@@ -29,27 +29,27 @@ Azure Blob Storage is Microsoft's object storage solution for the cloud. Blob st
 - Visualize the performance of your Blob Storage.
 - Correlate the performance of your Blob Storage with your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps that need to be performed.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_blob_storage" >}}
 
 
-### Events
+### イベント
 
 The Azure Blob Storage integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Blob Storage integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

@@ -18,83 +18,83 @@ further_reading:
   text: Check your monitor status
 ---
 
-## Overview
+## 概要
 
 Datadog's [Real User Monitoring (RUM)][1]  provides real-time visibility into individual user activity for web and mobile applications. It addresses performance tracking, error management, analytics, and support use cases. 
 
 After you enable RUM for your organization, you can create a RUM monitor to alert you when a specific RUM event type exceeds a predefined threshold over a given period of time.
 
-## Create a RUM monitor
+## RUM モニターの作成
 
-To create a RUM monitor in Datadog, first navigate to [**Monitors** > **New Monitor** > **Real User Monitoring**][2].
+Datadog で RUM モニターを作成するには、まず [**Monitors** --> **New Monitor** --> **Real User Monitoring**][2] の順に移動します。
 
-<div class="alert alert-info"><strong>Note</strong>: There is a default limit of 1000 RUM monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
+<div class="alert alert-info"><strong>注</strong>: デフォルトでは、1 アカウントあたり 1000 RUM モニターという制限があります。この制限に引っかかっている場合、<a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">マルチアラート</a>の使用を検討するか、<a href="/help/">サポートにお問い合わせ</a>ください。</div>
 
-### Define the search query
+### 検索クエリを定義する
 
-As you expand your search filters, the graph above the search bar updates.
+検索フィルターを拡張すると、検索バーの上にあるグラフが更新されます。
 
-1. Construct a search query using the same logic as a [RUM Explorer search][3].
-2. Choose to monitor over a RUM event count, [facet][4], or [measure][5].
-    * **Monitor over a RUM event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of RUM events over a selected time frame, then compares it to the threshold conditions.
-    * **Monitor over a facet**: If you select a [facet][4], the monitor alerts over the `Unique value count` of the facet.
-    * **Monitor over measure**: If you select a [measure][5], the monitor alerts over the numerical value of the RUM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-3. Group RUM events by multiple dimensions (optional):
+1. [RUM エクスプローラー検索][3]と同じロジックを使用して検索クエリを作成します。
+2. RUM イベント数、[ファセット][4]、または[計測][5]のモニタリングを選択します。
+    * **Monitor over a RUM count**: 検索バーを使用し (任意)、ファセットまたはメジャーは選択**しません**。選択されたタイムフレームで Datadog が RUM イベント数を評価し、それをしきい値の条件と比較します。
+    * **Monitor over a facet**: [ファセット][4]を選択すると、モニターはファセットの `Unique value count` に対してアラートを発出します。
+    * **Monitor over measure**: [メジャー][5]を選択すると、モニターは (メトリクスモニターと同様に) RUM ファセットの数値に対してアラートを発出します。集計タイプ (`min`、`avg`、 `sum`、`median`、`pc75`、`pc90`、`pc95`、`pc98`、`pc99`、または `max`) を選択します。
+3. 複数のディメンションで RUM イベントをグループ化する (オプション):
   All RUM events matching the query are aggregated into groups based on the value of up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. The dimensions limit depends on the total number of dimensions:
-   * **1 facet**: 1000 top values
-   * **2 facets**: 30 top values per facet (at most 900 groups)
-   * **3 facets**: 10 top values per facet (at most 1000 groups)
-   * **4 facets**: 5 top values per facet (at most 625 groups)
+   * **ファセット 1 個**: 上位値 1000
+   * **ファセット 2 個**: ファセットごとに上位値 30 (最大 900 グループ)
+   * **ファセット 3 個**: ファセットごとに上位値 10 (最大 1000 グループ)
+   * **ファセット 4 個**: ファセットごとに上位値 5 (最大 625 グループ)
 
 
 
-4. Configure the alerting grouping strategy (optional).
-   * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. If the query has a `group by` and you select **Simple-Alert**, you get one alert when one or multiple groups values breach the threshold. You may use this strategy to reduce notification noise.
-   * **Multi Alert**: Multiple alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you can group a query by `@browser.name` to receive a separate alert for each browser when the number of errors is high.
+4. アラート設定のグループ化方法を構成します (オプション)。
+   * **Simple alert**: すべてのソースをまとめて集計します。集計値が設定条件を満たすと、1 件のアラートを受け取ります。クエリに `group by` があり、**シンプルアラートモード**を選択した場合、1 つまたは複数のグループの値がしきい値に違反すると 1 つのアラートが表示されます。通知ノイズを減らすには、この方法を使用します。
+   * **Multi Alert**: グループパラメーターに従い、複数のアラートを各ソースに適用します。アラートイベントは、設定された条件を満たすと各グループに生成されます。たとえば、クエリを `@browser.name` でグループ化すると、エラーの数が多い場合にブラウザごとに個別のアラートを受信することができます。
 
-   {{< img src="monitors/monitor_types/rum/define-the-search-query.png" alt="Define the search query" style="width:80%;" >}}
+   {{< img src="monitors/monitor_types/rum/define-the-search-query.png" alt="検索クエリの定義" style="width:80%;" >}}
 
-5. Add multiple queries and apply formulas and functions (optional):
+5. 複数のクエリを追加して数式や関数を適用 (オプション):
 
-    * **Multiple queries**: Click **Add Query** to analyze multiple different sets of RUM data in relation to each other.
-    * **Formulas and functions**: After adding your desired queries, click the **Add Function** icon to add a mathematical computation. The example below calculates the error rate on a cart page using the formula `(a/b)*100`.
+    * **Multiple queries**: **Add Query** をクリックして、複数の異なる RUM データセットについてお互いの関連性を分析します。
+    * **Formulas and functions**: 希望するクエリを追加後、**Add Function** アイコンをクリックして数学的計算を追加します。以下の例では、数式 `(a/b)*100` を使用してカートページのエラー率を計算しています。
 
-   {{< img src="monitors/monitor_types/rum/rum_multiple_queries_2.png" alt="A monitor configured to alert on the error rate of a cart page. This monitor has two queries (a and b) and contains a formula: (a/b)*100." style="width:80%;" >}}
+   {{< img src="monitors/monitor_types/rum/rum_multiple_queries_2.png" alt="カートページのエラー率についてアラートを出すように構成されたモニターです。このモニターには 2 つのクエリ (a、b) があり、数式 (a/b)*100 が含まれています。" style="width:80%;" >}}
 
-### Set alert conditions
+### アラートの条件を設定する
 
-An alert is triggered whenever a metric crosses a threshold.
+メトリクスがしきい値を超えるとアラートがトリガーされます。
 
-* Triggers when the metric is `above`, `above or equal to`, `below`, or `below or equal to`.
-* The threshold during the last `5 minutes`, `15 minutes`, `1 hour`, or `custom` to set a value between 5 minutes and 48 hours.
-* Alert threshold `<NUMBER>`.
-* Warning threshold `<NUMBER>`.
+* メトリクスが `above`、`above or equal to`、`below`、`below or equal to` の場合にトリガーします。
+* 過去 `5 minutes`、`15 minutes`、`1 hour` のしきい値、または `custom` に 5 分～48 時間の値を設定します。
+* アラートのしきい値 `<NUMBER>`。
+* 警告のしきい値 `<NUMBER>`。
 
-#### No data and below alerts
+#### データなしと下限のアラート
 
-To receive a notification when an application has stopped sending RUM events, set the condition to `below 1`. This notifies when no RUM events match the monitor query in a given time frame across all aggregate groups.
+アプリケーションが RUM イベントの送信を停止した場合に通知を受け取るには、条件を `below 1` に設定します。これにより、すべての集計グループについて、指定のタイムフレームでモニタークエリと一致する RUM イベントがない場合に通知されます。
 
-When splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are RUM events for a given group, and the count is below the threshold—or if there are no RUM events for **all** of the groups.
+モニターを何らかのディメンション (タグまたはファセット) で分割している場合に `below` 条件を使用すると、特定のグループに RUM イベントが存在してカウントがしきい値未満である**場合に限り**、または**すべての**グループで RUM イベントが存在しない場合に、アラートがトリガーされます。
 
-#### Alerting Examples
+#### アラート設定例
 
-For example, this monitor triggers if and only if there are no RUM events for all applications:
+たとえば、このモニターはすべてのアプリケーションで RUM イベントが存在しない場合にのみトリガーします。
 
-  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_application_id.png" alt="The monitor configuration page with the search query left blank, set to the count of all RUM events and grouped by @application.id over the last 5 minutes. The Set alert conditions section is configured to trigger when the value is below the threshold of 1, and if data is missing for more than 5 minutes it is configured to evaluate as zero" style="width:70%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_application_id.png" alt="検索クエリを空白にして、過去 5 分間のすべての RUM イベントのカウントと @application.id によるグループ化を設定したモニター構成ページ。Set alert conditions セクションは、値がしきい値 1 以下の場合にトリガーするように構成されており、5 分以上データがない場合はゼロとして評価するように構成されています" style="width:70%;" >}}
 
-And this monitor triggers if there are no logs for the application `Shop.ist`:
+このモニターは、アプリケーション `Shop.ist` でログが存在しない場合にトリガーします。
 
-  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist.png" alt="The monitor configuration page with Application Id:Shopist entered in the search query, set to the count of all RUM events matching that application over the last 5 minutes. The Set alert conditions section is configured to trigger when the value is below the threshold of 1, and if data is missing for more than 5 minutes it is configured to evaluate as zero" style="width:70%;" >}}
+  {{< img src="monitors/monitor_types/rum/rum_monitoring_by_shopist.png" alt="検索クエリに Application Id:Shopist を入力し、過去 5 分間にそのアプリケーションに一致するすべての RUM イベントのカウントを設定したモニター構成ページ。Set alert conditions セクションは、値がしきい値 1 以下の場合にトリガーするように構成されており、5 分以上データがない場合はゼロとして評価するように構成されています" style="width:70%;" >}}
 
-#### Advanced alert conditions
+#### 高度なアラート条件
 
-For more information about advanced alert options such as evaluation delay, see [Configure Monitors][6].
+評価遅延などの高度なアラートオプションについて、詳しくは[モニターの構成][6]をご覧ください。
 
-### Notifications
+### 通知
 
 For more information about the **Configure notifications and automations** section, see [Notifications][7].
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

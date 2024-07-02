@@ -14,14 +14,14 @@ further_reading:
   text: OpenTelemetry Support in Datadog
 ---
 
-## Overview
+## 概要
 
 OpenTelemetry SDKs and the OpenTelemetry Collector provide sampling capabilities, as ingesting 100% of traces is often unnecessary to gain visibility into the health of your applications. Configure sampling rates before sending traces to Datadog to ingest data that is most relevant to your business and observability goals, while controlling and managing overall costs.
 
 This document demonstrates two primary methods for sending traces to Datadog with OpenTelemetry:
 
 - Send traces to the **[OpenTelemetry Collector][1]**, and use the Datadog Exporter to forward them to Datadog.
-- Send traces to the **[Datadog Agent OTLP ingest][3]**, which forwards them to Datadog.
+- トレースを **[Datadog Agent OTLP 取り込み][3]**に送信し、Datadog に転送する
 
 **Note**: Datadog doesn't support running the OpenTelemetry Collector and the Datadog Agent on the same host.
 
@@ -49,7 +49,7 @@ With OpenTelemetry, you can configure sampling both in the OpenTelemetry librari
 - **Tail-based sampling** in the OpenTelemetry Collector
 - **Probabilistic sampling** in the Datadog Agent
 
-### Head-based sampling
+### ヘッドベースサンプリング
 
 At the SDK level, you can implement _head-based sampling_. This is when the sampling decision is made at the beginning of the trace. This type of sampling is particularly useful for high-throughput applications, where you have a clear understanding of which traces are most important to ingest and want to make sampling decisions early in the tracing process.
 
@@ -63,7 +63,7 @@ Head-based sampling affects the computation of APM metrics. Only sampled traces 
 
 To approximate unsampled metrics from sampled metrics, use [formulas and functions][7] with the sampling rate configured in the SDK.
 
-Use the [ingestion volume control guide][8] to read more about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
+スパンからのトレース分析モニターとメトリクスにトレースサンプリングを設定することの意味については、[取り込み量制御ガイド][8]を参照してください。
 
 
 ### Tail-based sampling
@@ -78,11 +78,11 @@ To configure tail-based sampling, use the [Tail Sampling Processor][9] or [Proba
 
 A limitation of tail-based sampling is that all spans for a given trace must be received by the same collector instance for effective sampling decisions. If a trace is distributed across multiple collector instances, and tail-based sampling is used, some parts of that trace may not be sent to Datadog.
 
-To ensure that APM metrics are computed based on 100% of the applications' traffic while using collector-level tail-based sampling, use the [Datadog Connector][11].
+コレクターレベルのテールベースサンプリングを使用しながら、APM メトリクスがアプリケーションのトラフィックの 100% に基づいて計算されるようにするには、[Datadog Connector][11] を使用します。
 
-<div class="alert alert-info">The Datadog Connector is available starting v0.83.0. Read <a href="/opentelemetry/guide/switch_from_processor_to_connector">Switch from Datadog Processor to Datadog Connector for OpenTelemetry APM Metrics</a> if migrating from an older version.</div>
+<div class="alert alert-info">Datadog Connector は v0.83.0 から利用可能です。古いバージョンから移行する場合は、<a href="/opentelemetry/guide/switch_from_processor_to_connector">OpenTelemetry APM メトリクスのために Datadog Processor から Datadog Connector に切り替える</a>をお読みください。</div>
 
-See the [ingestion volume control guide][8] for information about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
+スパンからのトレース分析モニターとメトリクスにトレースサンプリングを設定することの意味については、[取り込み量制御ガイド][8]を参照してください。
 
 ### Probabilistic sampling
 
@@ -123,7 +123,7 @@ Use the [APM Estimated Usage dashboard][13] and the `datadog.estimated_usage.apm
 
 If the ingestion volume is higher than expected, consider adjusting your sampling rates.
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

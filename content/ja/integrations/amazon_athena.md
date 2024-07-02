@@ -3,7 +3,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon Athena metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_athena/"
@@ -28,9 +28,9 @@ Amazon Athena is an interactive query service that makes it easy to analyze data
 
 Enable this integration to see all your Athena metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -39,21 +39,21 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
 1. In the [AWS integration page][2], ensure that `Athena` is enabled under the `Metric Collection` tab.
 2. Install the [Datadog - Amazon Athena integration][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_athena" >}}
 
 
-### Events
+### イベント
 
 The Amazon Athena integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Athena integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

@@ -11,77 +11,77 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-## Overview
+## 概要
 
-Exclusion filters provide fine-grained control over your CI Visibility budget by allowing you to define one or more conditions by which to exclude specific events from being processed by Datadog.
+除外フィルターは、特定のイベントを Datadog の処理対象から除外する条件を 1 つ以上定義することで、CI Visibility の予算をきめ細かく制御することができます。
 
-### Compatibility
-Filters are available for Pipeline Visibility.
+### 互換性
+Pipeline Visibility にフィルターが用意されています。
 
-## Adding an exclusion filter
-Exclusion filters are not required for setting up Pipeline Visibility. By default, all data is ingested and processed.
+## 除外フィルターを追加する
+Pipeline Visibility の設定に除外フィルターは必須ではありません。デフォルトでは、すべてのデータが取り込まれ処理されます。
 
-To create filters for your organization, your user account must have the `ci_ingestion_control_write` [permission][1].
+組織用のフィルターを作成するには、ユーザーアカウントに `ci_ingestion_control_write` [権限][1]が必要です。
 
-1. In Datadog, navigate to **CI** > **Settings** > **Ingestion Settings**.
-2. Select **Add an Exclusion Filter**.
+1. Datadog で、**CI** > **Settings** > **Ingestion Settings** に移動します。
+2. **Add an Exclusion Filter** を選択。
 
-{{< img src="ci/add-ci-exclusion-filter.png" alt="Add an Exclusion Filter button" style="width:90%;">}}
+{{< img src="ci/add-ci-exclusion-filter.png" alt="除外フィルターの追加ボタン" style="width:90%;">}}
 
-3. Name the filter and define a query. After you define a query, the preview above the input fields shows ingested data that matches your query. Once your filter is created and enabled, events like the ones shown in the preview are excluded from ingestion.
+3. フィルターに名前を付けて、クエリを定義します。クエリを定義すると、入力フィールドの上にあるプレビューに、クエリに一致する取り込みデータが表示されます。フィルターが作成され、有効になると、プレビューに表示されているようなイベントは取り込みの対象から除外されます。
 
-{{< img src="ci/exclusion-filter-pipeline.png" alt="Creating an exclusion filter for a specific pipeline" style="width:100%;">}}
+{{< img src="ci/exclusion-filter-pipeline.png" alt="特定のパイプラインに対する除外フィルターの作成" style="width:100%;">}}
 
-Once you have added a filter, each row in this page displays:
-- **Filter name** - the name of the filter
-- **Exclusion query** - the query that was defined for that filter
-- Toggle to [enable/disable the filter](#enabling-and-disabling-filters) - newly created filters are toggled on by default
+フィルターを追加すると、このページの各行に以下が表示されます。
+- **Filter name** - フィルター名
+- **Exclusion query** - そのフィルターに定義されていたクエリ
+- [フィルターの有効・無効を切り替える](#enabling-and-disabling-filters) - 新規に作成されたフィルターは、デフォルトでオンに設定されています
 
-All spans matching one or more filters are neither ingested nor processed by Datadog.
+1 つ以上のフィルターに一致するすべてのスパンは、Datadog によって取り込まれることも処理されることもありません。
 
-## Defining queries for an exclusion filter
-Filters are defined flexibly through a query editor interface. Rely on [tags][3] and attributes to create your filters.
+## 除外フィルターのクエリを定義する
+フィルターは、クエリエディターインターフェイスで柔軟に定義することができます。[タグ][3]や属性に頼って、フィルターを作成します。
 
-### Example exclusion filters
-Below are examples of how exclusion filters can help you optimize your CI Visibility usage and billing.
+### 除外フィルターの例
+以下は、除外フィルターが CI Visibility の使用と請求を最適化するのに役立つ例です。
 
-#### Filter by git author email address
-You can exclude one or more specific committers from being monitored by defining a filter with git author email address (`@git.commit.author.email`). The screenshot below shows a filter in which all spans associated with commits from this particular git author email are not ingested.
+#### git author のメールアドレスでフィルターする
+git author のメールアドレス (`@git.commit.author.email`) をフィルターとして定義することで、特定のコミッターを監視対象から除外することができます。以下のスクリーンショットは、この特定の git author のメールアドレスからのコミットに関連するすべてのスパンを取り込まないようにするフィルターを示しています。
 
-{{< img src="ci/exclusion-filter-email.png" alt="Ingestion control exclusion filter for email address" style="width:100%;">}}
+{{< img src="ci/exclusion-filter-email.png" alt="メールアドレスに対する取り込み制御除外フィルター" style="width:100%;">}}
 
-#### Filter by git author email domain
-You can also exclude many committers at once by email domain (for instance, you may want to exclude external contributors committing to monitored repositories). The screenshot below shows a filter in which all spans associated with commits from email address domains that do not match the one in the query are not ingested.
+#### git author のメールドメインでフィルターする
+また、メールアドレスドメインによって一度に多くのコミッターを除外することもできます (例えば、監視対象のリポジトリにコミットする外部の貢献者を除外したい場合など)。以下のスクリーンショットは、クエリに含まれるメールアドレスドメインと一致しないメールアドレスドメインからのコミットに関連するすべてのスパンを取り込まないようにするフィルターを示しています。
 
-{{< img src="ci/exclusion-filter-domain.png" alt="Ingestion control exclusion filter for email domain" style="width:100%;">}}
+{{< img src="ci/exclusion-filter-domain.png" alt="メールドメインに対する取り込み制御除外フィルター" style="width:100%;">}}
 
-#### Filter by repository
-You can exclude specific repositories from being monitored (for example, an internal testing repository) by defining a filter with repository name (`@git.repository.name`) or ID (`@git.repository.id`). The screenshot below shows a filter in which all spans associated with commits to this repository are not ingested.
+#### リポジトリによるフィルター
+リポジトリ名 (`@git.repository.name`) または ID (`@git.repository.id`) でフィルターを定義することで、特定のリポジトリを監視対象から除外することができます (たとえば、内部のテスト用リポジトリなど)。以下のスクリーンショットは、このリポジトリへのコミットに関連するすべてのスパンを取り込まないようにするフィルターを示しています。
 
-{{< img src="ci/exclusion-filter-repo.png" alt="Ingestion control exclusion filter for repository" style="width:100%;">}}
+{{< img src="ci/exclusion-filter-repo.png" alt="リポジトリに対する取り込み制御除外フィルター" style="width:100%;">}}
 
-## Updating exclusion filters
-Exclusion filters can be enabled/disabled, updated, and deleted by users with `ci_ingestion_control_write` [permissions][4]. They are applied at the organization level. You can view detailed information about who modified exclusion filters by using Datadog [Audit Trail][5].
+## 除外フィルターの更新
+除外フィルターは、`ci_ingestion_control_write` [権限][4]を持つユーザーによって有効/無効、更新、削除することができます。これらは組織レベルで適用されます。Datadog [監査証跡][5]を使用すると、誰が除外フィルターを変更したかの詳細情報を見ることができます。
 
-### Enabling and disabling filters
-A toggle on the right hand side of each filter allows you to enable and disable the filter at any time. Newly created filters are toggled on by default.
+### フィルターの有効化と無効化
+各フィルターの右側にあるトグルで、いつでもフィルターの有効・無効を切り替えることができます。新規に作成されたフィルターは、デフォルトでオンになっています。
 
-**Note**: In most scenarios, filters are applied to ingested data within <1 second (p95) of being enabled. However, it is possible that an enabled filter takes up to a few minutes to take effect.
+**注**: ほとんどの場合、フィルターは有効化されてから 1 秒以内 (p95) に取り込みデータに適用されます。ただし、有効化されたフィルターが有効になるまでに数分かかる場合もあります。
 
-### Updating filters
-You can rename a filter or modify the query for an exclusion filter at any time within the **Ingestion Settings** page.
+### フィルターの更新
+フィルター名の変更や除外フィルターのクエリーの変更は、**Ingestion Settings** ページ内でいつでも行うことができます。
 
-{{< img src="ci/exclusion-filter-edit.png" alt="Ingestion control edit exclusion filter button" style="width:90%;">}}
+{{< img src="ci/exclusion-filter-edit.png" alt="取り込み制御の除外フィルター編集ボタン" style="width:90%;">}}
 
-### Deleting filters
-You can delete a filter by clicking on the deletion icon.
+### フィルターの削除
+削除アイコンをクリックすることで、フィルターを削除することができます。
 
-{{< img src="ci/exclusion-filter-delete.png" alt="Ingestion control delete exclusion filter button" style="width:90%;">}}
+{{< img src="ci/exclusion-filter-delete.png" alt="取り込み制御の除外フィルター削除ボタン" style="width:90%;">}}
 
-## Further reading
+## 参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/permissions/#ci-visibility

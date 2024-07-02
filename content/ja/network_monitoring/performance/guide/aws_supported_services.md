@@ -10,10 +10,10 @@ further_reading:
     text: Network Device Monitoring
 ---
 
-Datadog Network Performance Monitoring (NPM) automatically detects S3, RDS, Kinesis, ELB, Elasticache, and other AWS services listed below:
+Datadog ネットワークパフォーマンスモニタリング (NPM) は自動的に S3、RDS、Kinesis、ELB、Elasticache および次に記載するその他の AWS サービスを検知します:
 
 {{< get-npm-integrations "aws" >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

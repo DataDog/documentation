@@ -1,18 +1,18 @@
 ---
-algolia:
-  tags:
-  - イベントストリーム
+title: List Widget
+widget_type: list_stream
 further_reading:
-- link: /ja/dashboards/graphing_json/
-  tag: ドキュメント
-  text: JSON を使用したダッシュボードの構築
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Building Dashboards using JSON
 - link: /notebooks/
-  tag: ドキュメント
-  text: ノートブック
-title: リストウィジェット
+  tag: Documentation
+  text: Notebooks
+algolia:
+  tags: [event stream, log stream]
 ---
 
-リストウィジェットでは、さまざまなソースから送られてくるイベントや問題のリストを表示することができます。
+The list widget displays a list of events and issues, which can come from a variety of sources such as Logs, RUM, or Events. Search and query across sources to narrow down the events you want the widget to highlight and display.
 
 _エラー追跡問題を表示するリストウィジェット_
 
@@ -24,7 +24,7 @@ _エラー追跡問題を表示するリストウィジェット_
 
 ### 構成
 
-1. グラフ化するデータの種類を選択します。組織で利用可能な製品に応じて、問題、ログ、監査証跡、イベントからリストウィジェットを作成することができます。
+1. Choose the type of data to graph. You can create a list widget from Issues, Logs, Audit Trail, Watchdog Alerts, or Events depending on which products are available for your organization.
 
 2. ディスプレイの環境設定を行います。スクリーンボードとノートブックの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、グローバルタイムフレームを使用するかを選択します。
 
@@ -46,7 +46,7 @@ _エラー追跡問題を表示するリストウィジェット_
 
 **注:** "Sorting by” の選択を変更しても、表示される列は変わりません。影響を受けたセッションでソートするようにリストを変更し、これをウィジェットに表示したい場合、グラフエディタに "Impacted Sessions” も選択または追加する必要があります。
 
-### ログ
+### Logs
 
 #### グループ化
 
@@ -83,10 +83,13 @@ RUM については、以下でソートすることができます。
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][1] ドキュメントをご参照ください。
+このウィジェットは **[Dashboards API][1]** で使用できます。[ウィジェット JSON スキーマ定義][2]については、以下の表を参照してください。
+
+{{< dashboards-widgets-api >}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/v1/dashboards/
+[1]: /api/latest/dashboards/
+[2]: /dashboards/graphing_json/widget_json/

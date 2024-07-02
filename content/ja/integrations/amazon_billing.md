@@ -27,7 +27,7 @@
 - "metrics"
 - "cloud"
 - "cost management"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -65,9 +65,9 @@ Enable this integration to see your AWS Billing and Cost Management metrics in D
 
 **Note**: This integration requires the permission `budgets:ViewBudget` to be fully enabled. Billing metrics need to be enabled in the AWS console. For more information on setting up AWS, see [the Amazon Web Services integration documentation][1].
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -76,21 +76,21 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
 1. On the [AWS integration page][2], ensure that `Billing` is enabled under the `Metric Collection` tab.
 2. Install the [Datadog - AWS Billing integration][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_billing" >}}
 
 
-### Events
+### イベント
 
 The AWS Billing and Cost Management integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS Billing and Cost Management integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

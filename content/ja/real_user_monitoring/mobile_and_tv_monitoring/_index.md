@@ -1,5 +1,5 @@
 ---
-title: Mobile and TV Monitoring
+title: モバイルおよび TV モニタリング
 kind: documentation
 description: Collect RUM data from your mobile and TV applications.
 type: multi-code-lang

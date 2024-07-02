@@ -1,6 +1,5 @@
 ---
 title: Getting Started with the Continuous Profiler
-kind: documentation
 aliases:
     - /tracing/profiling/intro_to_profiling
     - /tracing/profiler/intro_to_profiling
@@ -23,40 +22,40 @@ further_reading:
       text: Understanding Request Latency with Profiling
 ---
 
-Profiling can make your services faster, cheaper, and more reliable, but if you haven't used a profiler, it can be confusing.
+プロファイリングはサービスをより速く、より安く、より信頼性の高いものにするために役立ちますが、プロファイラーを使ったことがない人には少し分かりにくいかもしれません。
 
-This guide explains profiling, provides a sample service with a performance problem, and uses the Datadog Continuous Profiler to understand and fix the problem.
+このガイドでは、プロファイリングについて説明するとともに、パフォーマンスに問題のあるサンプルサービスを例として、Datadog Continuous Profiler を使用して問題を理解・修正する方法をご紹介します。
 
-## Overview
+## 概要
 
-A profiler shows how much "work" each function is doing by collecting data about the program as it's running. For example, if infrastructure monitoring shows your app servers are using 80% of their CPU, you may not know why. Profiling shows a breakdown of the work, for example:
+プロファイラーは、実行中のプログラムに関するデータを収集することで、各関数がどれだけ「仕事」をしているかを示します。たとえば、インフラストラクチャーのモニタリングでアプリサーバーが CPU を 80% 使用していることが確認できても、その理由が分からない場合だってあるでしょう。プロファイリングにより、このような作業の内訳を把握することができます。
 
-| Function      | CPU usage |
+| 関数      | CPU の使用率 |
 |---------------|-----------|
 | `doSomeWork`  | 48%       |
 | `renderGraph` | 19%       |
-| Other         | 13%       |
+| その他         | 13%       |
 
-When working on performance problems, this information is important because many programs spend a lot of time in a few places, which may not be obvious. Guessing at which parts of a program to optimize causes engineers to spend a lot of time with little results. By using a profiler, you can find exactly which parts of the code to optimize.
+パフォーマンスの問題に取り組む際には、この情報が重要になります。というのも、多くのプログラムは複数の場所で実行されており、それが明らかでない場合があるからです。プログラムのどの部分を最適化すべきかを推測している段階では、エンジニアは多くの時間を費やしてもほとんど成果を得ることができません。このような場合、プロファイラーを使えばコードのどの部分を最適化すべきかを正確に見つけることができます。
 
-If you've used an APM tool, you might think of profiling like a "deeper" tracer that provides a fine grained view of your code without needing any instrumentation.
+APM ツールを使用したことがある方にとっては、プロファイリングは、インスツルメンテーションを必要とせずにコードのきめ細かいビューを提供する「より深い」トレーサーのように考えられるかもしれません。
 
-The Datadog Continuous Profiler can track various types of "work", including CPU usage, amount and types of objects being allocated in memory, time spent waiting to acquire locks, amount of network or file I/O, and more. The profile types available depend on the language being profiled.
+Datadog Continuous Profiler は、CPU 使用率、メモリに割り当てられているオブジェクトの量と種類、ロックの取得を待機する時間、ネットワークまたはファイル I/O の量など、さまざまな種類の「作業」を追跡できます。使用可能なプロファイルタイプは、プロファイリングされる言語によって異なります。
 
-## Setup
+## セットアップ
 
-### Prerequisites
+### 前提条件
 
-Before getting started, ensure you have the following prerequisites:
+はじめに、以下の前提条件を確認してください。
 
 1. [docker-compose][1]
-2. A Datadog account and [API key][2]. If you need a Datadog account, [sign up for a free trial][3].
+2. Datadog のアカウントと [API キー][2]が必要です。Datadog アカウントをお持ちでない場合は、[無料トライアルにサインアップ][3]してください。
 
-### Installation
+### インストール
 
-The [dd-continuous-profiler-example][4] repo provides an example service with a performance problem for experimenting. An API is included for searching the "database" of 5000 movies.
+[dd-continuous-profiler-example][4] リポジトリでは、パフォーマンスに問題のあるサービスの例を実験用に提供しています。5000 本の映画の「データベース」を検索するための API も含まれています。
 
-Install and run the example service:
+サンプルサービスをインストールして実行します。
 
 ```shell
 git clone https://github.com/DataDog/dd-continuous-profiler-example.git
@@ -65,30 +64,30 @@ echo "DD_API_KEY=YOUR_API_KEY" > docker.env
 docker-compose up -d
 ```
 
-### Validation
+### 検証
 
-After the containers are built and running, the "toolbox" container is available to explore:
+コンテナが構築・実行されると、「toolbox」コンテナを使用して次のことを調べることができます。
 
 ```
 docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ```
 
-Use the API with:
+API を以下と共に使用します。
 ```
 curl -s http://movies-api-java:8080/movies?q=wars | jq
 ```
 
-If you prefer, there's a Python version of the example service, called `movies-api-py`. If utilized, adjust the commands throughout the tutorial accordingly.
+また、`movies-api-py` と呼ばれるサンプルサービスの Python バージョンもあります。利用する場合は、それに応じてチュートリアル全体でコマンドを調整してください。
 
-### Generate data
+### データの生成
 
-Generate traffic using the ApacheBench tool, [ab][5]. Run it for 10 concurrent HTTP clients sending requests for 20 seconds. Inside the toolbox container, run:
+ApacheBench ツール [ab][5] を使ってトラフィックを生成します。10 台の同時 HTTP クライアントが 20 秒間リクエストを送信することを想定して実行します。toolbox コンテナの中で次を実行してください。
 
 ```shell
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
 ```
 
-Example output:
+結果出力例:
 
 ```text
 ...
@@ -105,70 +104,70 @@ Percentage of the requests served within a certain time (ms)
  100%    867 (longest request)
 ```
 
-## Investigate
+## 調査
 
-### Read the profile
+### プロファイルの読み取り
 
-Use the [Profile Search][6] to find the profile covering the time period for which you generated traffic. It may take a minute or so to load. The profile that includes the load test has a higher CPU usage:
+[プロファイル検索][6]を使用して、トラフィックを生成していた期間をカバーするプロファイルを探します。読み込みに 1 分ほどかかる場合があります。負荷テストを含むプロファイルは、CPU 使用率が高くなります。
 
-{{< img src="profiler/intro_to_profiling/list.png" alt="List of profiles" style="width:80%;">}}
+{{< img src="profiler/intro_to_profiling/list.png" alt="プロファイルのリスト" style="width:80%;">}}
 
-When you open it, the visualization of the profile looks similar to this:
+開くと、次のように視覚化されたプロファイルが表示されます。
 
-{{< img src="profiler/intro_to_profiling/flame_graph.png" alt="Flame graph">}}
+{{< img src="profiler/intro_to_profiling/flame_graph.png" alt="フレームグラフ">}}
 
-This is a flame graph. The most important things it shows are how much CPU each method used (since this is a CPU profile) and how each method was called. For example, reading from the second row from the top, you see that `Thread.run()` called `QueuedThreadPool$2.run()` (amongst other things), which called `QueuedThreadPool.runjob(Runnable)`, which called `ReservedTheadExecutor$ReservedThread.run()`, and so on.
+これはフレームグラフです。これが示す最も重要なことは、各メソッドが使用した CPU の量 (これは CPU プロファイルであるため) と、各メソッドがどのように呼び出されたかです。たとえば、上から 2 番目の行から読み取ると、`Thread.run()` が `QueuedThreadPool$2.run()` を呼び出し (数ある中で)、これが `QueuedThreadPool.runjob(Runnable)` を呼び出し、これが `ReservedTheadExecutor$ReservedThread.run()` を呼び出し、と続いていきます。
 
-Zooming in to one area on the bottom of the flame graph, a tooltip shows that roughly 309ms (0.90%) of CPU time was spent within this `parse()` function:
+フレームグラフの下の部分にズームインするとツールチップが表示され、この `parse()` 関数に約 309ms (0.90%) の CPU 時間が費やされていることがわかります。
 
-{{< img src="profiler/intro_to_profiling/flame_graph_parse.png" alt="Flame graph parse() frame">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_parse.png" alt="フレームグラフ parse() フレーム">}}
 
-`String.length()` is directly below the `parse()` function, which means that `parse()` calls it. Hover over `String.length()`, to see it took about 112ms of CPU time:
+`String.length()` が `parse()` 関数の直下にあるのは、その `parse()` 関数を呼び出していることを意味します。`String.length()` にカーソルを合わせると、約 112ms の CPU 時間を要したことがわかります。
 
-{{< img src="profiler/intro_to_profiling/flame_graph_length.png" alt="Flame graph String.length() frame">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_length.png" alt="フレームグラフ String.length() フレーム">}}
 
-That means 197 milliseconds were spent directly in `parse()`: 309ms - 112ms. That's visually represented by the part of the `parse()` box that doesn't have anything below it.
+つまり、309ms - 112ms で 197 ミリ秒が `parse()` に直接費やされたことになります。それを視覚的に表しているのが、`parse()` ボックス下の何も表示されていない部分です。
 
-It's worth calling out that the flame graph _does not_ represent the progression of time. Looking at this part of the profile, `Gson$1.write()` didn't run before `TypeAdapters$16.write()` but it may not have run after it either.
+フレームグラフは時間の経過を表しているわけでは_ない_ことを覚えておきましょう。プロファイルのこの部分を見ると、`Gson$1.write()` は `TypeAdapters$16.write()` より前には実行されず、その後も同様に実行されなかったことが分かります
 
-{{< img src="profiler/intro_to_profiling/flame_graph_write.png" alt="Flame graph section with write() frames next to each other">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_write.png" alt="write() フレームが隣り合っているフレームグラフセクション">}}
 
- They could have been running concurrently, or the program could have run several calls of one, then several calls of the other, and kept switching back and forth. The flame graph merges together all the times that a program was running the same series of functions so you can tell at a glance which parts of the code were using the most CPU without tons of tiny boxes showing each time a function was called.
+ それらは同時に実行されているか、プログラムが一方の呼び出しを複数実行し、次にもう一方の呼び出しを複数実行して、前後に切り替え続けた可能性があります。フレームグラフはプログラムが同じ一連の関数を実行している間は常にマージされるため、関数が呼び出されるたびに多数の小さなボックスが表示されることなく、コードのどの部分が最も多くの CPU を使用しているかが一目でわかります。
 
-Zoom back out to see that about 87% of CPU usage was within the `replyJSON()` method. Below that, the graph shows `replyJSON()` and the methods it calls eventually branch into four main code paths ("stack traces") that run functions pertaining to sorting and date parsing:
+拡大してみると、CPU 使用率の約 87% がこの `replyJSON()` メソッド内で発生していることがわかります。その下のグラフでは、`replyJSON()` と呼び出したメソッドが最終的に 4 つの主要なコードパス (「スタックトレース」) に分岐し、ソートや日付のパースに関連する関数を実行していることがわかります。
 
-{{< img src="profiler/intro_to_profiling/flame_graph_replyjson_arrows.png" alt="Flame graph with arrows pointing at stack traces below replyJSON()">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_replyjson_arrows.png" alt="replyJSON() の下のスタックトレースを指す矢印の付いたフレームグラフ">}}
 
-Also, you can see a part of the CPU profile that looks like this:
+また、次のような CPU プロファイルの一部も表示されます。
 
-{{< img src="profiler/intro_to_profiling/flame_graph_gc.png" alt="Flame graph showing GC (garbage collection)" style="width:80%;">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_gc.png" alt="GC (ガベージコレクション) を示すフレームグラフ" style="width:80%;">}}
 
-### Profile types
+### プロファイルタイプ
 
-Almost 6% of CPU time was spent in garbage collection, which suggests it may be producing a lot of garbage. So, review the **Allocated Memory** profile type:
+CPU 時間の約 6％ がガベージコレクションに費やされており、大量のガベージを生成している可能性があります。そこで、**Allocated Memory** プロファイルタイプをレビューします。
 
-{{< img src="profiler/intro_to_profiling/types.png" alt="Profile type selector" style="width:60%;">}}
+{{< img src="profiler/intro_to_profiling/types.png" alt="プロファイルタイプセレクター" style="width:60%;">}}
 
-On an Allocated Memory profile, the size of the boxes shows how much memory each function allocated, and the call stack that led to the function doing the allocating. Here you can see that during this one minute profile, the `replyJSON()` method and other methods that it called, allocated 17.47 GiB, mostly related to the same date parsing code seen in the CPU profile above:
+Allocated Memory プロファイルのボックスのサイズは、各関数が割り当てられたメモリの量と、関数が割り当てを実行するようになった呼び出しスタックを示します。ここで、この 1 分間のプロファイル中に、`replyJSON()` メソッドとそれが呼び出した他のメソッドが 17.47 GiB を割り当て、上記の CPU プロファイルで見たのと同じ日付解析コードに主に関連していることがわかります。
 
-{{< img src="profiler/intro_to_profiling/alloc_flame_graph_replyjson_arrows.png" alt="Flame graph of allocation profile with arrows pointing at stack traces below replyJSON()">}}
+{{< img src="profiler/intro_to_profiling/alloc_flame_graph_replyjson_arrows.png" alt="replyJSON() の下のスタックトレースを指す矢印の付いた割り当てプロファイルのフレームグラフ">}}
 
-## Remediation
+## 修復
 
-### Fix the code
+### コードの修正
 
-Review the code and see what's going on. By looking at the CPU flame graph, you can see that expensive code paths go through a Lambda on line 66, which calls `LocalDate.parse()`:
+コードを見直して、何が起こっているのかを確認します。CPU フレームグラフを見ると、高価なコードパスが 66 行目で Lambda を通過し、そのLambda が `LocalDate.parse()` を呼び出していることがわかります。
 
-{{< img src="profiler/intro_to_profiling/flame_graph_sort_lambda.png" alt="Flame graph with mouse over sort lambda">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_sort_lambda.png" alt="ソート Lambda 上にマウスを置いたフレームグラフ">}}
 
-That corresponds to this part of code in [`dd-continuous-profiler-example`][7], where it calls to `LocalDate.parse()`:
+これは [`dd-continuous-profiler-example`][7] で、`LocalDate.parse()` を呼び出す部分のコードに対応しています。
 
 ```java
 private static Stream<Movie> sortByDescReleaseDate(Stream<Movie> movies) {
   return movies.sorted(Comparator.comparing((Movie m) -> {
-    // Problem: Parsing a datetime for each item to be sorted.
-    // Example Solution:
-    //   Since date is in isoformat (yyyy-mm-dd) already, that one sorts nicely with normal string sorting
+    // 問題: ソートされる各アイテムの datetime 解析。
+    // サンプルソリューション:
+    //   日付はすでに ISO 形式 (yyyy-mm-dd) になっているため、通常の文字列ソートでうまく並び替えることができます。
     //   `return m.releaseDate`
     try {
       return LocalDate.parse(m.releaseDate);
@@ -179,9 +178,9 @@ private static Stream<Movie> sortByDescReleaseDate(Stream<Movie> movies) {
 }
 ```
 
-This is the sorting logic in the API, which returns results in descending order by release date. It does this by using the release date converted to a `LocalDate` as the sorting key. To save time, you could cache the `LocalDate` so it's only parsed for each movie's release date rather than on every request, but there's a better fix. The dates are being parsed in ISO 8601 format (yyyy-mm-dd), which means they can be sorted as strings instead of parsing.
+これはAPI のソートロジックであり、リリース日の降順で結果を返します。ここではソートキーとして、リリース日を `LocalDate` に変換したものを使用しています。時間を節約するために、リクエストごとにパースするのではなく、映画の公開日ごとにパースするよう `LocalDate` をキャッシュすることもできますが、もっと良い方法があります。日付は ISO 8601 形式　(yyyy-mm-dd) でパースされているため、パースする代わりに文字列として並び替えることができます。
 
-Replace the `try` and `catch` with `return m.releaseDate;` like this:
+次のように、`try` と `catch` を `return m.releaseDate;` で置き換えます。
 
 ```java
 private static Stream<Movie> sortByDescReleaseDate(Stream<Movie> movies) {
@@ -191,22 +190,22 @@ private static Stream<Movie> sortByDescReleaseDate(Stream<Movie> movies) {
 }
 ```
 
-Then rebuild and restart the service:
+次に、サービスを再構築して再起動します。
 ```
 docker-compose build movies-api-java
 docker-compose up -d
 ```
 
-### Re-test
+### 再テスト
 
-To test the results, generate traffic again:
+結果をテストし、トラフィックを再度生成します。
 
 ```shell
 docker exec -it dd-continuous-profiler-example-toolbox-1 bash
 ab -c 10 -t 20 http://movies-api-java:8080/movies?q=the
 ```
 
-Example output:
+結果出力例:
 
 ```
 Reported latencies by ab:
@@ -222,31 +221,31 @@ Percentage of the requests served within a certain time (ms)
  100%    315 (longest request)
 ```
 
-p99 went from 795ms to 218ms, and overall, this is four to six times faster than before.
+p99 は 795ms から 218ms になり、全体として、以前の 4〜6 倍高速になりました。
 
-Locate the [profile](#read-the-profile) containing the new load test and look at the CPU profile. The `replyJSON` parts of the flame graph are a much smaller percentage of the total CPU usage than the previous load test:
+新しい負荷テストを含む[プロファイル](#read-the-profile)を探し、CPU プロファイルを確認します。フレームグラフの `replyJSON` の部分は、前回の負荷テストに比べて CPU の総使用量に占める割合がかなり小さくなっています。
 
-{{< img src="profiler/intro_to_profiling/flame_graph_optimized_replyjson.png" alt="Flame graph with the optimized replyJSON() stack traces">}}
+{{< img src="profiler/intro_to_profiling/flame_graph_optimized_replyjson.png" alt="最適化された replyJSON() スタックトレースを使用したフレームグラフ">}}
 
-### Clean up
+### クリーンアップ
 
-When you're done exploring, clean up by running:
+確認が終了したら、次を実行してクリーンアップします。
 
 ```shell
 docker-compose down
 ```
 
-## Recommendations
+## 推奨事項
 
-### Saving money
+### コストの節約
 
-Improving CPU usage like this can translate into saving money. If this had been a real service, this small improvement might have enabled you to scale down to half the servers, potentially saving thousands of dollars a year. Not bad for about 10 minutes of work.
+このように、CPU 使用率を改善してコストを節約することができます。これが実際のサービスであった場合、この小さな改善により、サーバーを半分に縮小でき、年間数千ドルを節約できる可能性があります。これがたった 10 分程度の作業で実現できるのです。
 
-### Improve your service
+### サービスを改善する
 
-This guide only skimmed the surface of profiling, but it should give you a sense of how to get started. **[Enable the Profiler for your services][8]**.
+このガイドでは、プロファイリングの概要をほんの少しだけ紹介しましたが、どのように始めればいいのかを理解していただけたかと思います。**[お使いのサービスで、早速プロファイラーを有効にしてみましょう][8]**。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

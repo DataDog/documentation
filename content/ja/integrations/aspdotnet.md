@@ -28,7 +28,7 @@
 "categories":
 - "languages"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/aspdotnet/README.md"
 "display_on_public_website": true
@@ -68,13 +68,13 @@ Get metrics from ASP.NET in real time to:
 - Visualize and monitor ASP.NET states.
 - Be notified about ASP.NET failovers and events.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The ASP.NET check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your servers.
 
-### Configuration
+### 構成
 
 1. Edit the `aspdotnet.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][2] to start collecting your ASP.NET performance data. See the [sample aspdotnet.d/conf.yaml][3] for all available configuration options.
 
@@ -92,21 +92,21 @@ Unhandled 500 level exceptions and events related to your ASP.NET application ca
 
 [Run the Agent's `status` subcommand][7] and look for `aspdotnet` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "aspdotnet" >}}
 
 
-### Events
+### イベント
 
 The ASP.NET check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The ASP.NET check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

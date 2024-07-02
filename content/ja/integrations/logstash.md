@@ -23,7 +23,7 @@
   "support_email": "ervansetiawan@gmail.com"
 "categories":
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/logstash/README.md"
 "display_on_public_website": true
@@ -66,16 +66,16 @@ Get metrics from Logstash in real time to:
 - Visualize and monitor Logstash states.
 - Be notified about Logstash events.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Logstash check is not included in the [Datadog Agent][1] package, so you need to install it.
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Logstash check on your host. For earlier versions of the Agent, see [Use Community Integrations][1]. 
 
@@ -109,14 +109,14 @@ See [Use Community Integrations][1] for more context.
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configuration
+### 構成
 
 #### Metric collection
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-##### Host
+##### ホスト
 
 1. Edit the `logstash.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1].
 
@@ -246,9 +246,9 @@ filter {
 
 The Logstash check is compatible with Logstash 5.x, 6.x and 7.x versions. It also supports the new multi-pipelines metrics introduced in Logstash 6.0. Tested with Logstash versions 5.6.15, 6.3.0 and 7.0.0.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "logstash" >}}
 
 

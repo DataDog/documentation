@@ -24,11 +24,11 @@ further_reading:
   text: Assign tags to all data emitted by a container
 ---
 
-This page lists data collected by the Datadog Agent when deployed on a Kubernetes cluster. 
+このページでは、Kubernetes クラスターにデプロイした際に Datadog Agent が収集したデータを一覧表示します。
 
-The set of metrics collected may vary depending on the version of Kubernetes in use.
+収集されるメトリクスのセットは、使用している Kubernetes のバージョンによって異なる場合があります。
 
-## Metrics
+## メトリクス
 
 ### Kubernetes
 
@@ -36,19 +36,19 @@ The set of metrics collected may vary depending on the version of Kubernetes in 
 
 ### Kubelet
 
-For more information, see the documentation for the [Kubelet][1] integration.
+詳しくは、[Kubelet][1] インテグレーションのドキュメントをご覧ください。
 
 {{< get-metrics-from-git "kubelet" >}}
 
 ### Kubernetes state metrics core
 
-For more information, see the documentation for the [Kubernetes state metrics core][6] integration. This check requires Datadog Cluster Agent v1.12 or later.
+詳細については、[Kubernetes state metrics core][6] インテグレーションのドキュメントを参照してください。このチェックには、Datadog Cluster Agent v1.12 またはそれ以降が必要です。
 
 {{< get-metrics-from-git "kubernetes_state_core" >}}
 
-### Kubernetes state
+### Kubernetes State
 
-**Note**: `kubernetes_state.*` metrics are gathered from the `kube-state-metrics` API. The `kubernetes_state` check is a legacy check. For an alternative, see [Kubernetes state metrics core][6]. Datadog recommends that you do not enable both checks simultaneously.
+**注**: `kubernetes_state.*` メトリクスは `kube-state-metrics` API から収集されます。`kubernetes_state` チェックはレガシーチェックです。代替案としては、[Kubernetes state metrics core][6] を参照してください。Datadog では、両方のチェックを同時に有効にしないことを推奨しています。
 
 {{< get-metrics-from-git "kubernetes_state" >}}
 
@@ -56,40 +56,40 @@ For more information, see the documentation for the [Kubernetes state metrics co
 
 {{< get-metrics-from-git "kube_dns" >}}
 
-### Kubernetes proxy
+### Kubernetes プロキシ
 
 {{< get-metrics-from-git "kube_proxy" >}}
 
 ### Kubernetes API server
 
-For more information, see the documentation for the [Kubernetes API server][3] integration.
+詳しくは、[Kubernetes API server][3] インテグレーションのドキュメントをご覧ください。
 
 {{< get-metrics-from-git "kube_apiserver_metrics" >}}
 
 ### Kubernetes controller manager
 
-For more information, see the documentation for the [Kubernetes controller manager][2] integration.
+詳しくは、[Kubernetes controller manager][2] インテグレーションのドキュメントをご覧ください。
 
 {{< get-metrics-from-git "kube_controller_manager" >}}
 
 ### Kubernetes metrics server
 
-For more information, see the documentation for the [Kubernetes metrics server][4] integration.
+詳しくは、[Kubernetes metrics server][4] インテグレーションのドキュメントをご覧ください。
 
 {{< get-metrics-from-git "kube_metrics_server" >}}
 
 ### Kubernetes scheduler
 
-For more information, see the documentation for the [Kubernetes scheduler][5] integration.
+詳しくは、[Kubernetes scheduler][5] インテグレーションのドキュメントをご覧ください。
 
 {{< get-metrics-from-git "kube_scheduler" >}}
 
 
-## Events
+## イベント
 
 - Backoff
 - Conflict
-- Delete
+- 削除
 - DeletingAllPods
 - Didn't have enough resource
 - Error
@@ -114,61 +114,61 @@ For more information, see the documentation for the [Kubernetes scheduler][5] in
 - Unable
 - Unhealthy
 
-## Service checks
+## サービスチェック
 
 ### Kubelet
 
-For more information, see the documentation for the [Kubelet][1] integration.
+詳しくは、[Kubelet][1] インテグレーションのドキュメントをご覧ください。
 
 {{< get-service-checks-from-git "kubelet" >}}
 
 ### Kubernetes controller manager
 
-For more information, see the documentation for the [Kubernetes controller manager][2] integration.
+詳しくは、[Kubernetes controller manager][2] インテグレーションのドキュメントをご覧ください。
 
 {{< get-service-checks-from-git "kube_controller_manager" >}}
 
 ### Kubernetes metrics server
 
-For more information, see the documentation for the [Kubernetes metrics server][4] integration.
+詳しくは、[Kubernetes metrics server][4] インテグレーションのドキュメントをご覧ください。
 
 {{< get-service-checks-from-git "kube_metrics_server" >}}
 
 ### Kubernetes scheduler
 
-For more information, see the documentation for the [Kubernetes scheduler][5] integration.
+詳しくは、[Kubernetes scheduler][5] インテグレーションのドキュメントをご覧ください。
 
 {{< get-service-checks-from-git "kube_scheduler" >}}
 
 ### Kubernetes state metrics core
 
-For more information, see the documentation for the [Kubernetes state metrics core][6] integration.
+詳しくは、[Kubernetes state metrics core][6] インテグレーションのドキュメントをご覧ください。
 
 `kubernetes_state.cronjob.complete`
-: Whether the last job of the cronjob is failed or not. Tags:`kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
+: cronjob の最後のジョブが失敗したかどうか。タグ:`kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.cronjob.on_schedule_check`
-: Alert if the cronjob's next schedule is in the past. Tags:`kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
+: cronjob の次のスケジュールが過去である場合に警告します。タグ: `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.job.complete`
-: Whether the job is failed or not. Tags:`kube_job` or `kube_cronjob` `kube_namespace` (`env` `service` `version` from standard labels).
+: ジョブが失敗したかどうか。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
 
 `kubernetes_state.node.ready`
-: Whether the node is ready. Tags:`node` `condition` `status`.
+: ノードの準備ができているかどうか。タグ: `node` `condition` `status`。
 
 `kubernetes_state.node.out_of_disk`
-: Whether the node is out of disk. Tags:`node` `condition` `status`.
+: ノードの準備ができているかどうか。タグ: `node` `condition` `status`。
 
 `kubernetes_state.node.disk_pressure`
-: Whether the node is under disk pressure. Tags:`node` `condition` `status`.
+: ノードにディスクプレッシャーがかかっているかどうか。タグ: `node` `condition` `status`。
 
 `kubernetes_state.node.network_unavailable`
-: Whether the node network is unavailable. Tags:`node` `condition` `status`.
+: ノードネットワークが利用できないかどうか。タグ: `node` `condition` `status`。
 
 `kubernetes_state.node.memory_pressure`
-: Whether the node network is under memory pressure. Tags:`node` `condition` `status`.
+: ノードネットワークにメモリプレッシャーがかかっているかどうか。タグ: `node` `condition` `status`。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

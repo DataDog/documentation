@@ -15,46 +15,46 @@ further_reading:
   text: Context Links
 ---
 
-The top list visualization enables you to display a list of tag values with the most or least of any metric or event value, such as highest consumers of CPU, hosts with the least disk space, or cloud products with the highest costs.
+トップリストの視覚化を使用すると、CPU の消費量が最も多い対象、ディスク容量が最も少ないホスト、コストが最も高いクラウド製品など、メトリクスまたはイベントの値が最も多いまたは最も少ないタグ値のリストを表示できます。
 
-## Setup
+## セットアップ
 
-{{< img src="dashboards/widgets/toplist/top_list_graph_display.png" alt="Configuration options for graph display highlighting Stacked, Relative display mode, and Visual Formatting Rules" style="width:100%;" >}}
+{{< img src="dashboards/widgets/toplist/top_list_graph_display.png" alt="Stacked、Relative display mode、Visual Formatting Rules をハイライトしているグラフ表示の構成オプション" style="width:100%;" >}}
 
-### Configuration
+### 構成
 
-1. Choose the data to graph:
-    * Metric: See the [querying][1] documentation to configure a metric query.
-    * Non-metric data sources: See the [Trace search documentation][2] or [Log search documentation][3] to configure an event query.
+1. グラフ化するデータを選択します。
+    * メトリクス: メトリクスのクエリを構成するには、[クエリ作成][1]のドキュメントを参照してください。
+    * メトリクス以外のデータソース: イベントクエリを構成するには、[トレース検索ドキュメント][2]または[ログ検索ドキュメント][3]を参照してください。
 
-2. Optional: see additional [graph display](#graph-display) configurations. 
+2. オプション: [グラフ表示](#graph-display)の追加構成を参照してください。
 
-### Options
+### オプション
 
-#### Graph display
+#### グラフ表示
 
-Configure the optional Display Mode features to add context to your top list visualization.
+オプションの Display Mode 機能を構成して、トップリストの視覚化にコンテキストを追加します。
 
-* Display multiple stacked groups to show a break down of each dimension in your query. **Stacked** is enabled by default. You can switch to **Flat**.
-* Select **Relative** display mode to show values as a percent of the total or **Absolute** display mode to show the raw count of data you are querying.</br>
-   **Note**: Relative display is only available for count data, such as count metrics or log events.
-* Configure conditional formatting in **Visual Formatting Rules** depending on your entries' values. 
+* 複数のスタックグループを表示して、クエリの各ディメンションの内訳を示します。デフォルトでは、**Stacked** は有効になっています。**Flat** に切り替えることもできます。
+* 値を全体のパーセントで表示するには **Relative** 表示モードを、クエリするデータの生カウントを表示するには **Absolute** 表示モードを選択します。</br>
+   **注**: 相対表示は、カウントメトリクスやログイベントなどのカウントデータでのみ使用できます。
+* **Visual Formatting Rules** で、エントリーの値に応じて条件付き書式を構成します。
 
-#### Context links
+#### コンテキストリンク
 
-[Context links][4] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
+[コンテキストリンク][1]は、デフォルトで有効になっており、オンまたはオフに切り替えることができます。コンテキストリンクは、ダッシュボードウィジェットと Datadog の他のページまたはサードパーティアプリケーションの橋渡しをします。
 
-#### Global time
+#### グローバルタイム
 
-On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
+スクリーンボードとノートブックの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、グローバルタイムフレームを使用するかを選択します。
 
 ## API
 
-This widget can be used with the **[Dashboards API][5]**. See the following table for the [widget JSON schema definition][6]:
+このウィジェットは **[Dashboards API][5]** で使用できます。[ウィジェット JSON スキーマ定義][6]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

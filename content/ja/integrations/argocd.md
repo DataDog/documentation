@@ -41,7 +41,7 @@
 - log collection
 - kubernetes
 - configuration & deployment
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/argocd/README.md"
 "display_on_public_website": true
@@ -82,40 +82,40 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Argo CD][1] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [Argo CD][1] を監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Argo CD check is included in the [Datadog Agent][2] package.
-No additional installation is needed on your server.
+Argo CD チェックは [Datadog Agent][2] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-**Note**: This check requires Agent v7.42.0+.
+**注**: この機能を使用するには、Agent v7.42.0 以上が必要です。
 
-### Configuration
+### 構成
 
-Argo CD exposes Prometheus-formatted metrics on three of their components:
-   - Application Controller
+Argo CD は、以下の 3 つのコンポーネントについて Prometheus 形式のメトリクスを公開しています。
+   - アプリケーションコントローラー
    - API Server
-   - Repo Server
+   - リポジトリサーバー
 
-The Datadog Agent can collect the exposed metrics using this integration. Follow the instructions below to configure data collection from any or all of the components.
+Datadog Agent は、このインテグレーションを使用して、公開されたメトリクスを収集することができます。以下の手順に従って、コンポーネントの一部または全部からデータ収集を構成してください。
 
-**Note**: This check uses [OpenMetrics][3] for metric collection, which requires Python 3.
+**注**: このチェックでは、メトリクスの収集に [OpenMetrics][3] を使用しており、Python 3 が必要です。
 
-#### Containerized
-##### Metric collection
+#### コンテナ化
+##### メトリクスの収集
 
-Ensure that the Prometheus-formatted metrics are exposed in your Argo CD cluster. This is enabled by default if using Argo CD's [default manifests][4]. For the Agent to gather all metrics, each of the three aforementioned components needs to be annotated. For more information about annotations, see the [Autodiscovery Integration Templates][5] for guidance. Additional configuration options are available by reviewing the [sample argocd.d/conf.yaml][6].
+Prometheus 形式のメトリクスが Argo CD クラスターで公開されていることを確認します。Argo CD の[デフォルトマニフェスト][4]を使用している場合、これはデフォルトで有効になっています。Agent がすべてのメトリクスを収集するためには、前述の 3 つのコンポーネントのそれぞれにアノテーションを付ける必要があります。アノテーションの詳細については、[オートディスカバリーインテグレーションテンプレート][5]を参照してください。その他の構成オプションは、[サンプル argocd.d/conf.yaml][6] を確認することで利用可能です。
 
 There are use cases where Argo CD Applications contain labels that need to be exposed as Prometheus metrics. These labels are available using the `argocd_app_labels` metric, which is disabled on the Application Controller by default. Refer to the [ArgoCD Documentation][7] for instructions on how to enable it.
 
-Example configurations:
+構成例:
 
-**Application Controller**:
+**アプリケーションコントローラー**:
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -141,7 +141,7 @@ spec:
 # (...)
 ```
 
-**API Server**:
+**API サーバー**:
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -167,7 +167,7 @@ spec:
 # (...)
 ```
 
-**Repo Server**:
+**リポジトリサーバー**:
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -200,7 +200,7 @@ spec:
 **Clashing Tag Names**:
 The Argo CD integration attaches a name tag derived from the application name OpenMetrics label when available. This could sometimes lead to querying issues if a name tag is already attached to a host, as seen in the example `name: host_a, app_a`. To prevent any unwanted behavior when querying, it is advisable to [remap the name label][9] to something more unique, such as `argocd_app_name` if the host happens to already have a name tag. Below is an example configuration:
 
-**Application Controller**:
+**アプリケーションコントローラー**:
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -229,39 +229,39 @@ spec:
 # (...)
 ```
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
 Argo CD logs can be collected from the different Argo CD pods through Kubernetes. Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][10].
 
 See the [Autodiscovery Integration Templates][11] for guidance on applying the parameters below.
 
-| Parameter      | Value                                                |
+| パラメーター      | 値                                                |
 | -------------- | ---------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "argocd", "service": "<SERVICE_NAME>"}`  |
 
-### Validation
+### 検証
 
 [Run the Agent's status subcommand][12] and look for `argocd` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "argocd" >}}
 
 
-### Events
+### イベント
 
-The Argo CD integration does not include any events.
+Argo CD インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "argocd" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][15].
+ご不明な点は [Datadog サポート][15]までお問い合わせください。
 
 
 

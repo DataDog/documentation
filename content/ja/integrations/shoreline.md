@@ -68,9 +68,9 @@ The Shoreline App automatically executes the automation when the monitor is trig
 Shoreline helps everyone on call be as good as your best SRE. Shoreline arms your on-call team with debugging tools and approved remediation actions, helping you fix incidents faster with fewer escalations and ensuring that incidents are fixed correctly the first time with fewer mistakes.
 
 To get started, set up a trial account on [Shoreline][1].
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Follow the steps below to configure the integration:
 

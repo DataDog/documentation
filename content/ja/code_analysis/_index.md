@@ -53,41 +53,41 @@ Regardless of the selected branch or commit, all results are organized into the 
 {{< tabs >}}
 {{% tab "Code Vulnerabilities" %}}
 
-{{< img src="code_analysis/shopist_code_vulnerabilities.png" alt="Code vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
+{{< img src="code_analysis/shopist_code_vulnerabilities.png" alt="Datadog Shopist サービスとリポジトリの Code Analysis ページにあるコードの脆弱性" style="width:100%;">}}
 
-Identify and address code security risks detected by Static Analysis in the **Code Vulnerabilities** view.
+**Code Vulnerabilities** ビューで、Static Analysis によって検出されたコードセキュリティリスクを特定し、対処します。
 
 {{% /tab %}}
 {{% tab "Code Quality" %}}
 
-{{< img src="code_analysis/shopist_code_quality.png" alt="Code quality vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
+{{< img src="code_analysis/shopist_code_quality.png" alt="Datadog Shopist サービスとリポジトリの Code Analysis ページにあるコード品質の脆弱性" style="width:100%;">}}
 
-Identify and address poor coding practices detected by Static Analysis in the **Code Quality** view.
+**Code Quality** ビューで、Static Analysis によって検出された不適切なコーディングプラクティスを特定し、対処します。
 
 {{% /tab %}}
 {{% tab "Library Vulnerabilities" %}}
 
-{{< img src="code_analysis/shopist_lib_vulnerabilities.png" alt="Library vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
+{{< img src="code_analysis/shopist_lib_vulnerabilities.png" alt="Datadog Shopist サービスとリポジトリの Code Analysis ページにあるライブラリの脆弱性" style="width:100%;">}}
 
-Identify and address vulnerable open source libraries detected by SCA in the **Library Vulnerabilities** view.
+**Library Vulnerabilities** ビューで、SCA によって検出された脆弱なオープンソースライブラリを特定し、対処します。
 
 {{% /tab %}}
 {{% tab "Library List" %}}
 
-{{< img src="code_analysis/shopist_lib_list.png" alt="A list of libraries on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
+{{< img src="code_analysis/shopist_lib_list.png" alt="Datadog Shopist サービスとリポジトリの Code Analysis ページにあるライブラリのリスト" style="width:100%;">}}
 
-Manage the full list of libraries detected by SCA that have imported into your codebase in the **Library List** view.
+**Library List** ビューで、コードベースにインポートされた SCA によって検出されたライブラリの完全なリストを管理します。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Integrations
+## インテグレーション
 
 With Static Analysis, you can receive automated feedback on poor coding practices and security vulnerabilities on the code you write [directly in an IDE][11] such as [VS Code][3] or [IntelliJ & PyCharm][4], and in your [pull requests on GitHub][5]. 
 
 {{< img src="developers/ide_plugins/vscode/static-analysis-issue.png" alt="A Static Analysis result in Visual Studio Code" style="width:100%;">}}
 
-## Set up Code Analysis on your repository
+## リポジトリに Code Analysis をセットアップする
 
 Click **+ Add a Repository** on the [**Code Analysis Repositories** page][9] and choose to run the scans directly in Datadog or in your CI pipelines.
 
@@ -112,7 +112,7 @@ Optionally, you can select specific GitHub repositories to enable SCA by clickin
 
 If you do not want to run your scans directly through Datadog, you can select which scans you'd like to run ([Static Analysis][106] and [Software Composition Analysis][107]) and configure your CI pipeline provider accordingly.
 
-## Configure your CI/CD provider
+## CI/CD プロバイダーの構成
 
 See the following documentation to configure your CI/CD provider to run Static Analysis and SCA scans:
 
@@ -133,7 +133,7 @@ See the following documentation to configure your CI/CD provider to run Static A
 {{% /tab %}}
 {{< /tabs >}}
 
-## Set up the GitHub integration 
+## GitHub インテグレーションのセットアップ
 
 You can configure a GitHub App by using the [GitHub integration tile][7] and setting up the [source code integration][8] to see the offending code snippets as part of the Static Analysis results in Datadog.
 
@@ -141,7 +141,7 @@ You can configure a GitHub App by using the [GitHub integration tile][7] and set
 
 For more information, see the [Source Code Integration documentation][10].
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

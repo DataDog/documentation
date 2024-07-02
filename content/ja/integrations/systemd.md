@@ -24,7 +24,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - os & system
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/systemd/README.md"
 "display_on_public_website": true
@@ -63,18 +63,18 @@ This check monitors [Systemd][1] and the units it manages through the Datadog Ag
 - Track the state and health of your Systemd
 - Monitor the units, services, sockets managed by Systemd
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Systemd check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
 
-### Configuration
+### 構成
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -109,9 +109,9 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock:ro \
 
 [Run the Agent's status subcommand][3] and look for `systemd` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "systemd" >}}
 
 
@@ -127,15 +127,15 @@ Some metrics are only available from specific version of Systemd:
 - `systemd.service.restart_count` requires Systemd v235
 - `systemd.socket.connection_refused_count` requires Systemd v239
 
-### Events
+### イベント
 
 The Systemd check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "systemd" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

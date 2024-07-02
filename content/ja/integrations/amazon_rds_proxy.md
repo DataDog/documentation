@@ -4,7 +4,7 @@
 - cloud
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon RDS Proxy metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_rds_proxy/"
@@ -29,9 +29,9 @@ Amazon RDS Proxy is a fully managed, highly available database proxy for Amazon 
 
 Enable this integration to see all your RDS Proxy metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 Enabling the [Amazon RDS integration][2] is also required.
@@ -54,21 +54,21 @@ When creating an RDS Proxy, logging can be enabled in the advanced configuration
 
 Once done, go to the  [Datadog Log Explorer][7] to analyze your logs.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_rds_proxy" >}}
 
 
-### Events
+### イベント
 
 The Amazon RDS Proxy integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon RDS Proxy integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

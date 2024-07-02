@@ -3,7 +3,7 @@
 - cloud
 - azure
 - ai/ml
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure Machine Learning metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_machine_learning_services/"
@@ -41,7 +41,7 @@ Get metrics from Azure Machine Learning to:
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## Data Collected
+## 収集データ
 ### Metrics
 {{< get-metrics-from-git "azure_machine_learning_services" >}}
 

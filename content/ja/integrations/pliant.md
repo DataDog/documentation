@@ -26,7 +26,7 @@
 - notifications
 - orchestration
 - provisioning
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md"
 "display_on_public_website": true
@@ -81,12 +81,12 @@ Examples include:
 - Provision additional VMs or container nodes in response to load
 - De-commission resources when load is low
 
-## Setup
-### Installation
+## セットアップ
+### インストール
 
 Create one or more workflows that you would like to trigger from a Datadog notification.
 
-### Configuration
+### 構成
 #### Pliant
 
 1. **Create a Pliant API key** - Log in to Pliant and click on your username at the top right of the screen to reveal a menu. Click "API Keys".
@@ -163,21 +163,21 @@ The request payload is pre-configured. Check the "ENCODE AS FORM" box and click 
 
 Add this integration to any alert notification in Datadog by adding the recipient of `@webhook-RestartHost`. When the monitor triggers an alert, the webhook triggers your Pliant workflow, and the input variables are sent to Pliant from Datadog.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Pliant integration does not provide metrics.
 
-### Service Checks
+### サービスチェック
 
 The Pliant integration does not include any service checks.
 
-### Events
+### イベント
 
 The Pliant integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][13].
 

@@ -4,15 +4,15 @@
 - "google cloud"
 - "log collection"
 - "ai/ml"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Google Cloud Machine Learning metrics."
+"description": "Google Cloud Machine Learning の主要メトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_ml/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/"
-  "tag": "Blog"
-  "text": "Best practices for monitoring ML models in production"
+  "tag": "ブログ"
+  "text": "本番環境で ML モデルを監視するためのベストプラクティス"
 "git_integration_title": "google_cloud_ml"
 "has_logo": true
 "integration_id": "google-cloud-ml"
@@ -53,7 +53,7 @@ Once this is done, export your Google Cloud Machine Learning logs from Google Cl
 3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "google_cloud_ml" >}}

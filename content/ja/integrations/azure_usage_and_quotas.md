@@ -4,7 +4,7 @@
 - cloud
 - cost management
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track usage against preconfigured limits on Azure compute, network, and storage resources for your subscription"
 "doc_link": "https://docs.datadoghq.com/integrations/azure_usage_and_quotas/"
@@ -30,27 +30,27 @@ Azure places preconfigured limits on resources for your subscription. To avoid u
 - Visualize utilization of computer, network, and storage resources against your quota.
 - Understand and prevent provisioning failures from hitting quota limits.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration first][1]. There are no other installation steps that need to be performed.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_usage_and_quotas" >}}
 
 
-### Events
+### イベント
 
 The Azure Quota integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Quota integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

@@ -25,7 +25,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/hive/README.md"
 "display_on_public_website": true
@@ -61,21 +61,21 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors two parts of [Hive][1]: Hive Metastore and HiveServer2.
+このチェックは、[Hive][1] の Hive Metastore と HiveServer2 の 2 つを監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Hive check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
+Hive チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-#### Hive setup
+#### Hive のセットアップ
 
-1. Edit the Hive configuration file in [`HIVE_HOME/conf/hive-site.xml`][3] to enable the Hive Metastore and HiveServer2 metrics by adding these properties:
+1. Hive Metastore と HiveServer2 のメトリクスを有効化するには、以下のプロパティを追加して、[`HIVE_HOME/conf/hive-site.xml`][3] にある Hive コンフィギュレーションファイルを編集します。
 
    ```xml
    <property>
@@ -88,7 +88,7 @@ The Hive check is included in the [Datadog Agent][2] package. No additional inst
    </property>
    ```
 
-2. Enable a JMX remote connection for the HiveServer2 and/or for the Hive Metastore. For example, set the `HADOOP_CLIENT_OPTS` environment variable:
+2. HiveServer2、Hive Metastore、またはその両方の JMX リモート接続を有効にします。たとえば、以下のように `HADOOP_CLIENT_OPTS` 環境変数を設定します。
 
    ```conf
    export HADOOP_CLIENT_OPTS="$HADOOP_CLIENT_OPTS -Dcom.sun.management.jmxremote \
@@ -96,37 +96,37 @@ The Hive check is included in the [Datadog Agent][2] package. No additional inst
    -Dcom.sun.management.jmxremote.port=8808"
    ```
 
-   Then restart the HiveServer2 or the Hive Metastore. Hive Metastore and HiveServer2 cannot share the same JMX connection.
+   次に、HiveServer2 または Hive Metastore を再起動します。Hive Metastore と HiveServer2 で同じ JMX 接続を共有することはできません。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Containerized](#containerized) section.
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `hive.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your hive performance data. See the [sample hive.d/conf.yaml][1] for all available configuration options.
+1. Hive のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `hive.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル hive.d/conf.yaml][1] を参照してください。
 
-    This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in [the status page][2]. You can specify the metrics you are interested in by editing the configuration below.
-    To learn how to customize the metrics to collect, see the [JMX Checks documentation][3] for more detailed instructions. If you need to monitor more metrics, contact [Datadog support][4].
+    このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、[ステータスページ][2]に表示されます。以下で説明するコンフィギュレーションを編集することで、関心があるメトリクスを指定できます。
+    収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][3]で詳細な手順を参照してください。制限数以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][4]までお問い合わせください。
 
-2. [Restart the Agent][5].
+2. [Agent を再起動します][5]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `hive.d/conf.yaml` file to start collecting your Hive logs:
+2. Hive のログの収集を開始するには、次の構成ブロックを `hive.d/conf.yaml` ファイルに追加します。
 
    ```yaml
      logs:
@@ -140,9 +140,9 @@ _Available for Agent versions >6.0_
              pattern: \d{4}\-\d{2}\-\d{2}
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment. See the [sample hive.d/conf.yaml][1] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションの詳細については、[サンプル hive.d/conf.yaml][1] を参照してください。
 
-3. [Restart the Agent][5].
+3. [Agent を再起動します][5]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/hive/datadog_checks/hive/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
@@ -150,25 +150,25 @@ _Available for Agent versions >6.0_
 [4]: https://docs.datadoghq.com/help/
 [5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-To collect metrics with the Datadog-Hive integration, see the [Autodiscovery with JMX][2] guide.
+Datadog-Hive インテグレーションを使用してメトリクスを収集するには、[JMX を使用したオートディスカバリー][2]ガイドを参照してください。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][3].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
-| Parameter      | Value                                                                                                                                                             |
+| パラメーター      | 値                                                                                                                                                             |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "hive", "service": "<SERVICE_NAME>", "log_processing_rules":{"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-\d{2}\-\d{2}"}}` |
+| `<LOG_CONFIG>` | `{"source": "hive", "service": "<サービス名>", "log_processing_rules":{"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-\d{2}\-\d{2}"}}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
@@ -176,27 +176,27 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][4] and look for `Hive` under the Checks section.
+[Agent の status サブコマンドを実行][4]し、Checks セクションで `Hive` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "hive" >}}
 
 
-### Events
+### イベント
 
-The Hive check does not include any events.
+Hive チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "hive" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 [1]: https://cwiki.apache.org/confluence/display/Hive/Home

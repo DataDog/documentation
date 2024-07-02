@@ -11,7 +11,7 @@
 "categories":
 - alerting
 - issue tracking
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/instabug/README.md"
 "display_on_public_website": true
@@ -69,39 +69,39 @@
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
-## Overview
+## 概要
 
-[Instabug][1] is a mobile-focused platform that empowers mobile teams to monitor, prioritize, and debug performance and stability issues throughout the mobile app development lifecycle.
+[Instabug][1] は、モバイルに特化したプラットフォームで、モバイルアプリ開発のライフサイクルを通じて、パフォーマンスと安定性の問題を監視、優先順位付け、デバッグできるようにモバイルチームを支援するものです。
 
-The Instabug dashboard widget in Datadog helps you monitor your overall app health and how users perceive your app's performance with just one number, the App Apdex. The widget provides:
-- The overall App Apdex score
-- App Apdex overtime
-- A breakdown of the sessions into four buckets (`Satisfying`, `Tolerable`, `Frustrating` or `Crashing` sessions)
-- The five most recent bug reports and the total number of new reports
+Datadog の Instabug ダッシュボードウィジェットを使用すると、アプリ全体の健全性と、アプリのパフォーマンスをユーザーがどのように認識しているかを、App Apdex というたった 1 つの数値で監視することができます。このウィジェットは以下を提供します。
+- App Apdex の総合スコア
+- App Apdex の超過時間
+- セッションを 4 つのバケット (`Satisfying`、`Tolerable`、`Frustrating`、`Crashing`) に分類
+- 直近のバグ報告 5 件と新規報告総件数
 
 
-## Setup
-1. If you haven't already, [Sign up for Instabug][2] for free and follow [the steps][3] to integrate the SDK into your app.
-2. After integrating the Instabug SDK in your app, go to a new or existing [Datadog dashboard][4].
-3. Press the **+ Add Widgets** or **+ Edit Dashboard** button to expose the widget drawer.
-4. Search for `Instabug` under the **Apps** tab of the widget drawer.
-5. Click or drag the Instabug widget icon to add it to your dashboard and open the Instabug editor modal.
-6. Authenticate and connect your Instabug account to Datadog by logging in with your Instabug credentials.
-7. Optionally, give the widget a title.
-8. Press **Save** to finish configuring the Datadog dashboard widget.
+## セットアップ
+1. まだの方は、[Instabug に無料登録][2]し、[手順][3]に従って、SDK をアプリにインテグレーションしてください。
+2. Instabug SDK をアプリにインテグレーションした後、新規または既存の [Datadog ダッシュボード][4]にアクセスします。
+3. **+ Add Widgets** または **+ Edit Dashboard** ボタンを押すと、ウィジェットドローワが表示されます。
+4. ウィジェットドロワーの **Apps** タブで `Instabug` を検索します。
+5. Instabug ウィジェットアイコンをクリックまたはドラッグしてダッシュボードに追加し、Instabug エディタモーダルを開きます。
+6. Instabug の認証情報を使用してログインし、Instabug アカウントを認証して Datadog に接続します。
+7. オプションでウィジェットのタイトルを指定します。
+8. **Save** を押して、Datadog ダッシュボードウィジェットの構成を完了します。
 
-## Data Collected
-The Instabug integration does not include any metrics.
+## 収集データ
+Instabug インテグレーションには、メトリクスは含まれません。
 
-## Service Checks
-The Instabug integration does not include any service checks.
+## サービスチェック
+Instabug インテグレーションには、サービスのチェック機能は含まれません。
 
-## Support
-Need help? Contact [Instabug Support][5].
+## サポート
+ご不明な点は、[Instabug のサポートチーム][5]までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
 - [Leverage user context to debug mobile performance issues with the Instabug Datadog Marketplace offering][6]
 

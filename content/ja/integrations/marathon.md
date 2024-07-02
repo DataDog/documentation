@@ -31,7 +31,7 @@
 - "configuration & deployment"
 - "containers"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/marathon/README.md"
 "display_on_public_website": true
@@ -44,7 +44,7 @@
 "manifest_version": "2.0.0"
 "name": "marathon"
 "public_title": "Marathon"
-"short_description": "Track application metrics: required memory and disk, instance count, and more."
+"short_description": "必要なメモリとディスク、インスタンス数などのアプリケーションメトリクスを追跡。"
 "supported_os":
 - "linux"
 - "macos"
@@ -53,11 +53,11 @@
   "classifier_tags":
   - "Supported OS::Linux"
   - "Supported OS::macOS"
-  - "Category::Configuration & Deployment"
-  - "Category::Containers"
-  - "Category::Log Collection"
+  - "Category::構成 & デプロイ"
+  - "Category::コンテナ"
+  - "Category::ログの収集"
   "configuration": "README.md#Setup"
-  "description": "Track application metrics: required memory and disk, instance count, and more."
+  "description": "必要なメモリとディスク、インスタンス数などのアプリケーションメトリクスを追跡。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -67,33 +67,33 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-The Agent's Marathon check lets you:
+Agent の Marathon チェックを使用して、以下のことができます。
 
-- Track the state and health of every application: see configured memory, disk, cpu, and instances; monitor the number of healthy and unhealthy tasks
-- Monitor the number of queued applications and the number of deployments
+- すべてのアプリケーションの状態と健全性を追跡し、構成されているメモリ、ディスク、CPU、インスタンスを確認し、正常および異常なタスクの数を監視できます。
+- キューに置かれたアプリケーションの数やデプロイの数を監視できます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Marathon check is included in the [Datadog Agent][1] package. No additional installation is needed on your server.
+Marathon チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Containerized](#containerized) section.
+ホストで実行中の Agent でこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metrics collection
+##### メトリクスの収集
 
-1. Edit the `marathon.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample marathon.d/conf.yaml][2] for all available configuration options:
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `marathon.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル marathon.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -111,24 +111,24 @@ To configure this check for an Agent running on a host:
        password: "<PASSWORD>"
    ```
 
-   The function of `username` and `password` depends on whether or not you configure `acs_url`. If you do, the Agent uses them to request an authentication token from ACS, which it then uses to authenticate to the Marathon API. Otherwise, the Agent uses `username` and `password` to directly authenticate to the Marathon API.
+   `username` と `password` の関数は `acs_url` を構成するかどうかに依存します。構成した場合、Agent はこれらを使用して ACS に認証トークンを要求し、それを使用して Marathon API に対する認証を行います。構成しない場合、Agent は `username` と `password` を使用して直接 Marathon API に対する認証を行います。
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Because Marathon uses logback, you can specify a custom log format. With Datadog, two formats are supported out of the box: the default one provided by Marathon and the Datadog recommended format. Add a file appender to your configuration as in the following example and replace `$PATTERN$` with your selected format:
+2. Marathon は logback を使用するため、カスタムログ形式を指定できます。Datadog では、Marathon から提供されるデフォルトの形式と Datadog 推奨の形式の 2 つの形式がサポートされ、すぐに使用できます。次の例のように、ファイルアペンダーを構成に追加し、`$PATTERN$` を選択した形式に置き換えます。
 
-   - Marathon default: `[%date] %-5level %message \(%logger:%thread\)%n`
-   - Datadog recommended: `%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n`
+   - Marathon のデフォルト形式: `[%date] %-5level %message \(%logger:%thread\)%n`
+   - Datadog の推奨形式: `%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n`
 
    ```xml
      <?xml version="1.0" encoding="UTF-8"?>
@@ -160,7 +160,7 @@ _Available for Agent versions >6.0_
      </configuration>
    ```
 
-3. Add this configuration block to your `marathon.d/conf.yaml` file to start collecting your Marathon logs:
+3. Marathon のログの収集を開始するには、次の構成ブロックを `marathon.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -170,33 +170,33 @@ _Available for Agent versions >6.0_
        service: "<SERVICE_NAME>"
    ```
 
-4. [Restart the Agent][3].
+4. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/marathon/datadog_checks/marathon/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                  |
+| パラメーター            | 値                                  |
 | -------------------- | -------------------------------------- |
 | `<INTEGRATION_NAME>` | `marathon`                             |
-| `<INIT_CONFIG>`      | blank or `{}`                          |
+| `<INIT_CONFIG>`      | 空白または `{}`                          |
 | `<INSTANCE_CONFIG>`  | `{"url": "https://%%host%%:%%port%%"}` |
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                                 |
+| パラメーター      | 値                                                 |
 | -------------- | ----------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "marathon", "service": "<SERVICE_NAME>"}` |
 
@@ -205,27 +205,27 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][2] and look for `marathon` under the Checks section.
+[Agent の status サブコマンドを実行][2]し、Checks セクションで `marathon` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "marathon" >}}
 
 
-### Events
+### イベント
 
-The Marathon check does not include any events.
+Marathon チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "marathon" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][3].
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 
 

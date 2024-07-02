@@ -6,9 +6,9 @@
 - "log collection"
 - "network"
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track busy instances and compare account usage metrics to quota limits."
+"description": "ビジー状態のインスタンスを追跡し、アカウント使用状況メトリクスを割り当て制限と比較"
 "doc_link": "https://docs.datadoghq.com/integrations/google_compute_engine/"
 "draft": false
 "git_integration_title": "google_compute_engine"
@@ -34,15 +34,15 @@ Get metrics from Google Compute Engine to:
 - Visualize the performance of your Compute Engines.
 - Correlate the performance of your Compute Engines with your applications.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
-#### Installation
+#### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
-#### Configuration
+#### 構成
 
 To collect custom Compute Engine labels as tags, enable the cloud asset inventory permission.
 
@@ -60,7 +60,7 @@ Once this is done, export your Google Compute Engine logs from Google Cloud Logg
 
 4. Click **Create** and wait for the confirmation message to show up.
 
-### Configuration
+### 構成
 
 #### Limit host collection
 
@@ -74,21 +74,21 @@ To silence monitors for expected GCE instance shutdowns, check the **GCE automut
 
 {{< img src="integrations/google_compute_engine/gce_automuting.png" alt="GCE Automuting" >}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_compute_engine" >}}
 
 
-### Events
+### イベント
 
 The Google Cloud Compute Engine integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Cloud Compute Engine integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

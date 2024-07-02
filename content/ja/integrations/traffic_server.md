@@ -38,7 +38,7 @@
 "categories":
 - caching
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/traffic_server/README.md"
 "display_on_public_website": true
@@ -75,46 +75,46 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Traffic Server][1] through the Datadog Agent. 
+このチェックは、Datadog Agent を通じて [Traffic Server][1] を監視します。
 
-Enable the Datadog-Apache Traffic Server integration to:
+Datadog-Apache Traffic Server インテグレーションを有効にすると、以下のことができます。
 
-- Ensure the availability and performance of online resources, such as websites and applications.
-- Track metrics such as hits, volume, and changes in traffic to websites and applications.
-- Determine average response times and sizes for requests.
-- Monitor system and error logs. 
+- Web サイトやアプリケーションなどのオンラインリソースの可用性とパフォーマンスを確保する。
+- Web サイトやアプリケーションへのアクセス数、ボリューム、変化などのメトリクスを追跡する。
+- リクエストの平均応答時間およびサイズを決定する。
+- システムログ、エラーログを監視する。
 
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The Traffic Server check is included in the [Datadog Agent][3] package.
+Traffic Server チェックは [Datadog Agent][3] パッケージに含まれています。
 
-To enable monitoring in Traffic Server, enable the [Stats Over HTTP plugin][4] on your Traffic Server by adding the following line to your `plugin.config` file and reloading Traffic Server:
+Traffic Server で監視を有効にするには、Traffic Server で [Stats Over HTTP プラグイン][4]を有効にし、`plugin.config` ファイルに次の行を追加して Traffic Server をリロードしてください。
 
 ```
 stats_over_http.so
 ```
 
-### Configuration
+### 構成
 
-1. Edit the `traffic_server.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Traffic Server performance data. See the [sample traffic_server.d/conf.yaml][5] for all available configuration options.
+1. Traffic Server のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `traffic_server.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル sample traffic_server.d/conf.yaml][5] を参照してください。
 
-**Note**: When using the default [configuration file][5], not all metrics are collected by default.
+**注**: デフォルトの[コンフィギュレーションファイル][5]を使用する場合、デフォルトではすべてのメトリクスが収集されるわけではありません。
 
-Comment out the `metric_patterns` option to collect all available metrics, or edit it to collect a different subset of metrics:
+利用可能なすべてのメトリクスを収集するために `metric_patterns` オプションをコメントアウトするか、別のサブセットのメトリクスを収集するために編集してください。
 
 ```
     ## @param metric_patterns - mapping - optional
-    ## A mapping of metrics to include or exclude, with each entry being a regular expression.
+    ## 包含または除外するメトリクスのマッピングで、各エントリーは正規表現です。
     ##
-    ## Metrics defined in `exclude` will take precedence in case of overlap.
-    ## Comment out this option to collect all available metrics.
+    ## `exclude` で定義されたメトリクスは、オーバーラップした場合に優先されます。
+    ## このオプションをコメントアウトすると、利用可能なすべてのメトリクスを収集することができます。
     #
     metric_patterns:
       include:
@@ -122,31 +122,31 @@ Comment out the `metric_patterns` option to collect all available metrics, or ed
          - <METRIC_2>
 ```
 
-2. [Restart the Agent][6].
+2. [Agent を再起動します][6]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][7] and look for `traffic_server` under the Checks section.
+[Agent の `status` サブコマンドを実行][7]し、Checks セクションで `traffic_server` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "traffic_server" >}}
 
 
-### Log collection
+### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Traffic Server logs are highly [customizable][9], but Datadog's integration pipeline supports the default conversion pattern. Clone and edit the [integration pipeline][10] if you have a different format.
+1. Traffic Server のログは高度に[カスタマイズ可能][9]ですが、Datadog のインテグレーションパイプラインは、デフォルトの変換パターンをサポートしています。異なるフォーマットがある場合は、[インテグレーションパイプライン][10]を複製して編集してください。
 
-2. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+2. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-3. Uncomment and edit the logs configuration block in your `traffic_server.d/conf.yaml` file. Change the `path` and `service` parameter values based on your environment. See the [sample traffic_server.d/conf.yaml][5] for all available configuration options.
+3. `traffic_server.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、`path` パラメーターと `service` パラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[traffic_server.d/conf.yaml のサンプル][5]を参照してください。
 
    ```yaml
    logs:
@@ -161,17 +161,17 @@ _Available for Agent versions >6.0_
         source: traffic_server
    ```
 
-### Events
+### イベント
 
-The Traffic Server integration does not include any events.
+Traffic Server インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "traffic_server" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][12].
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 
 [1]: https://trafficserver.apache.org/

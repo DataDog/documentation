@@ -16,24 +16,24 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-For Agent v5, reference the <a href="https://github.com/DataDog/docker-dd-agent#environment-variables">Docker Agent GitHub repo</a>.
+Agent v5 の場合は、<a href="https://github.com/DataDog/docker-dd-agent#environment-variables">Docker Agent GitHub リポジトリ</a>を参照してください。
 </div>
 
-## Overview
+## 概要
 
-For Agent v6, most of the configuration options in the [Agent's main configuration file][1] (`datadog.yaml`) can be set through environment variables.
+Agent v6 の場合、[Agent のメイン構成ファイル][1]（`datadog.yaml`）の構成オプションのほとんどは、環境変数を介して設定できます。
 
-## Recommendations
+## 推奨事項
 
-As a best practice, Datadog recommends using unified service tagging when assigning tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, see the [unified service tagging documentation][2].
+Datadog では、タグを付ける際のベストプラクティスとして、統合サービスタグ付けを使用することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付けに関するドキュメント][2]をご参照ください。
 
-## General use
+## 一般的な使用
 
-In general, use the following rules:
+一般に、次のルールを使用します。
 
-* Option names should be uppercase with the `DD_` prefix: `hostname` -> `DD_HOSTNAME`
+* オプション名は、大文字で `DD_` プレフィックスを付ける必要があります: `hostname` -> `DD_HOSTNAME`
 
-* List values should be separated by spaces (Include rules support regexes, and are defined as a list of comma-separated strings):
+* リストの値はスペース区切りにします（包含ルールは正規表現をサポートし、カンマ区切り文字列のリストとして定義されます）。
    ```yaml
       container_include:
         - "image:cp-kafka"
@@ -41,33 +41,33 @@ In general, use the following rules:
       # DD_CONTAINER_INCLUDE="image:cp-kafka image:k8szk"
    ```
 
-* The nesting of config options with **predefined** keys should be separated with an underscore:
+* **事前定義**キーを使用した構成オプションのネストは、アンダースコアで区切る必要があります。
    ```yaml
       cluster_agent:
         cmd_port: 5005
       # DD_CLUSTER_AGENT_CMD_PORT=5005
    ```
 
-* The nesting of config options with **user-defined** keys must be JSON-formatted:
+* **ユーザー定義**キーを使用した構成オプションのネストは、JSON 形式である必要があります。
    ```yaml
       container_env_as_tags:
         ENVVAR_NAME: tag_name
       # DD_CONTAINER_ENV_AS_TAGS='{"ENVVAR_NAME": "tag_name"}'
    ```
 
-**Note**: Specifying a nested option with an environment variable overrides _all_ the nested options specified under the config option. The exception to this rule is the `proxy` config option. Reference the [Agent proxy documentation][3] for more details.
+**注**: 環境変数を使用してネストされたオプションを指定すると、構成オプションで指定されたネストされたオプションがすべて上書きされます。このルールの例外は `proxy` 構成オプションです。詳細については、[Agent プロキシのドキュメント][3]を参照してください。
 
-### Exceptions
+### 例外
 
-- Not all `datadog.yaml` options are available with environment variables. See [config.go][4] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
+- すべての `datadog.yaml` オプションが環境変数で使用できるわけではありません。Datadog Agent GitHub リポジトリの [config.go][4] を参照してください。環境変数を持つオプションは、`config.BindEnv*` で始まります。
 
-- Component-specific environment variables not listed in [config.go][4] may also be supported.
+- [config.go][4] にリストアップされていない、コンポーネント固有の環境変数もサポートされる場合があります。
 
   - **APM Trace Agent**
 
-      - [Docker APM Agent Environment Variables][5]
+      - [Docker APM Agent の環境変数][5]
       - [trace-agent config/apm.go][6]
-      - example
+      - 例
 
           ```yaml
              apm_config:
@@ -77,10 +77,10 @@ In general, use the following rules:
              # DD_APM_ENV=dev
           ```
 
-  - **Live Process Agent**
+  - **ライブプロセスエージェント**
 
       - [process-agent config/process.go][7]
-      - example
+      - 例
 
           ```yaml
              process_config:
@@ -91,22 +91,22 @@ In general, use the following rules:
              # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
           ```
 
-## Using environment variables in systemd units
+## systemd ユニットでの環境変数の使用
 
-In operating systems that uses systemd to manage services, environment variables—global (for example, `/etc/environment`) or session-based (for example, `export VAR=value`)—are not generally made available to services unless configured to do so. See [systemd Exec manual page][8] for more details.
+systemd を使ってサービスを管理するオペレーティングシステムでは、環境変数 (グローバル: 例えば、`/etc/environment`、またはセッションベース: 例えば、`export VAR=value`) は通常、そのように構成されていない限りサービスで利用できません。詳しくは [systemd Exec マニュアルページ][8]を参照してください。
 
-From Datadog Agent 7.45, the Datadog Agent service (`datadog-agent.service` unit) can optionally load environment variables assignments from a file (`<ETC_DIR>/environment`).
+Datadog Agent 7.45 から、Datadog Agent サービス (`datadog-agent.service` ユニット) は、オプションで環境変数の割り当てをファイル (`<ETC_DIR>/environment`) からロードできるようになりました。
 
-1. Create `/etc/datadog-agent/environment` if it does not exist.
-2. Define newline-separated environment variable assignments. Example:
+1. `/etc/datadog-agent/environment` が存在しない場合は作成します。
+2. 改行で区切られた環境変数の割り当てを定義します。例:
   ```
   GODEBUG=x509ignoreCN=0,x509sha1=1
   DD_HOSTNAME=myhost.local
   DD_TAGS=env:dev service:foo
   ```
-3. Restart the service for changes to take effect
+3. 変更を有効にするためにサービスを再起動する
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

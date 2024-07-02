@@ -12,42 +12,42 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-## Overview
+## 概要
 
 [Codefresh][1] is a continuous integration and delivery platform built for Kubernetes which offers automation features that streamline the building, testing, and deploying of your applications. 
 
 Set up tracing in Codefresh to collect data on each step of your pipelines, analyze performance bottlenecks, troubleshoot operational challenges, and monitor your deployment workflows.
 
-### Compatibility
+### 互換性
 
-| Pipeline Visibility | Platform | Definition |
+| Pipeline Visibility | プラットフォーム | 定義 |
 |---|---|---|
 | [Partial retries][7] | Partial pipelines | View partially retried pipeline executions. |
 | [Manual steps][8] | Manual steps | View manually triggered pipelines. |
-| [Parameters][9] | Parameters | Set custom parameters (for example, [Codefresh variables][6]) when a pipeline is triggered. |
+| [Parameters][9] | パラメーター | Set custom parameters (for example, [Codefresh variables][6]) when a pipeline is triggered. |
 | [Pipeline failure reasons][10] | Pipeline failure reasons | Identify pipeline failure reasons from error messages. |
 
-## Configure the Datadog integration
+## Datadog インテグレーションの構成
 
 To set up the Datadog integration for [Codefresh][1]:
 
-1. Go to **[Account Settings > Configuration > Integrations][2]** in Codefresh and click **CONFIGURE** on the Datadog row.
-2. Click **ADD INTEGRATION**.
-3. Fill the form with the following information:
-   * **Datadog site**: Select {{< region-param key="dd_site" code="true" >}} from the dropdown.
-   * **Token**: Add your [Datadog API Key][3].
-4. Click **SAVE** to save the integration.
+1. Codefresh の **[Account Settings > Configuration > Integrations][2]** に移動し、Datadog の行の **CONFIGURE** をクリックします。
+2. **ADD INTEGRATION** をクリックします。
+3. 以下の情報をフォームに入力してください。
+   * **Datadog site**: ドロップダウンから {{< region-param key="dd_site" code="true" >}} を選択します。
+   * **Token**: [Datadog API キー][3]を追加します。
+4. インテグレーションを保存するには、**SAVE** をクリックします。
 
-## Visualize pipeline data in Datadog
+## Datadog でパイプラインデータを視覚化する
 
 The [**CI Pipeline List**][4] and [**Executions**][5] pages populate with data after the pipelines finish.
 
 The **CI Pipeline List** page shows data for only the default branch of each repository.
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

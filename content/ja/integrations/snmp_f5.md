@@ -22,7 +22,7 @@
 - network
 - notifications
 - snmp
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/snmp_f5/README.md"
 "display_on_public_website": true
@@ -64,38 +64,38 @@
 
 F5 Networks is an application delivery networking and security company. Collect health and performance metrics of your F5 devices, including including the Big IP and LTM platforms.
 
-## Setup
+## セットアップ
 
 All metrics from F5 appliances are collected from SNMP. To start collecting metrics, install and configure the SNMP integration. See the [Network Device Monitoring][1] documentation for more details and configuration options.
 
-## Vendor profiles
+## ベンダープロファイル
 
 Specific supported vendor profiles for this integration can be found on the [network vendors][2] page.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 All possible metrics collected with SNMP can be found in the Network Device Monitoring documentation under [Data Collected][3]. All metrics collected from F5 appliances can be found under the [F5] namespace.
 
-### Service Checks
+### サービスチェック
 
-There are no service checks included with the F5 integration.
+F5 インテグレーションに含まれるサービスチェックはありません。
 
-### Events
+### イベント
 
-No additional events are sent to Datadog from any component of the F5 platform.
+F5 プラットフォームのどのコンポーネントからも、Datadog に追加のイベントが送信されることはありません。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
 * [Monitoring Datacenters and Network Devices with Datadog][4]
 * [SNMP Monitoring with Datadog][5]
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][6].
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://docs.datadoghq.com/network_monitoring/devices/setup
 [2]: https://docs.datadoghq.com/network_monitoring/devices/#vendor-profiles

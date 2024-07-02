@@ -25,7 +25,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - aws
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/amazon_msk/README.md"
 "display_on_public_website": true
@@ -67,7 +67,7 @@ Amazon Managed Streaming for Apache Kafka (MSK) is a fully managed service that 
 
 You can collect metrics from this integration in two ways-with the [Datadog Agent](#setup) or with a [Crawler][1] that collects metrics from CloudWatch. 
 
-## Setup
+## セットアップ
 
 The Agent check monitors Amazon Managed Streaming for Apache Kafka ([Amazon MSK][2]) through the Datadog Agent.
 
@@ -75,14 +75,14 @@ Follow the instructions below to install and configure this check for an Agent r
 
 This OpenMetrics-based integration has a latest mode (`use_openmetrics`: true) and a legacy mode (`use_openmetrics`: false). To get all the most up-to-date features, Datadog recommends enabling the latest mode. For more information, see [Latest and Legacy Versioning For OpenMetrics-based Integrations][4].
 
-### Installation
+### インストール
 
 1. [Create a client machine][5] if one does not already exist.
 2. Ensure the client machine has been [granted][6] the permission policy [arn:aws:iam::aws:policy/AmazonMSKReadOnlyAccess][7] or equivalent [credentials][8] are available.
 3. Enable [open monitoring with Prometheus][9] on the MSK side to enable the JmxExporter and the NodeExporter.
 4. Install the [Datadog Agent][10] on the client machine just created.
 
-### Configuration
+### 構成
 
 1. Edit the `amazon_msk.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Amazon MSK performance data. 
 
@@ -102,21 +102,21 @@ This OpenMetrics-based integration has a latest mode (`use_openmetrics`: true) a
 
 [Run the Agent's status subcommand][15] and look for `amazon_msk` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_kafka" >}}
 
 
-### Events
+### イベント
 
 The Amazon MSK check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 See [service_checks.json][17] for a list of service checks provided by this integration.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][18].
 

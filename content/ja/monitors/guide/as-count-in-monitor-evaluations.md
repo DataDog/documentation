@@ -4,15 +4,15 @@ aliases:
   - /monitors/guide/as-count-monitor-evaluation
 ---
 
-## Overview
+## 概要
 
-Queries using **`as_count()`** and **`as_rate()`** modifiers are calculated in ways that can yield different results in monitor evaluations. Monitors involving arithmetic and at least 1 **`as_count()`** modifier use a separate evaluation path that changes the order in which arithmetic and time aggregation are performed.
+**`as_count()`** および **`as_rate()`** モディファイアーを使用してクエリを計算すると、モニター評価でさまざまな結果を得ることができます。演算と少なくとも 1 つの **`as_count()`** モディファイアーを含むモニターは、演算と時間集計を行う順序を変更するために、異なる評価パスを使用します。
 
-## Error rate example
+## エラー率の例
 
-Suppose you want to monitor an error rate over 5 minutes using the metrics, `requests.error` and `requests.total`. Consider a single evaluation performed with these aligned timeseries points for the 5 min timeframe:
+`requests.error` および `requests.total` メトリクスを使用して、5 分間のエラー率を監視するとします。以下のように、整った時系列ポイントを使用して、5 分のタイムフレームで 1 回の評価を行う場合を考えます。
 
-**Numerator**: `sum:requests.error{*}`
+**分子**: `sum:requests.error{*}`
 
 ```text
 | Timestamp           | Value |
@@ -24,7 +24,7 @@ Suppose you want to monitor an error rate over 5 minutes using the metrics, `req
 | 2018-03-13 11:04:40 | 5     |
 ```
 
-**Denominator**: `sum:requests.total{*}`
+**分母**: `sum:requests.total{*}`
 
 ```text
 | Timestamp           | Value |
@@ -36,36 +36,36 @@ Suppose you want to monitor an error rate over 5 minutes using the metrics, `req
 | 2018-03-13 11:04:40 | 10    |
 ```
 
-### 2 ways to calculate
+### 2 つの計算方法
 
-Refer to this query as **`classic_eval_path`**:
+次のクエリを **`classic_eval_path`** とします。
 
 ```text
 sum(last_5m): sum:requests.error{*}.as_rate() / sum:requests.total{*}.as_rate()
 ```
 
-and this query as **`as_count_eval_path`**:
+次のクエリを **`as_count_eval_path`** とします。
 
 ```text
 sum(last_5m): sum:requests.error{*}.as_count() / sum:requests.total{*}.as_count()
 ```
 
-Compare the result of the evaluation depending on the path:
+パスに応じた評価の結果を比較します。
 
-| Path                     | Behavior                                       | Expanded expression                    | Result  |
+| パス                     | 動作                                       | 計算式                    | 結果  |
 |:-------------------------|:-----------------------------------------------|:---------------------------------------|:--------|
-| **`classic_eval_path`**  | Aggregation function applied _after_ division  | **(1/10 + 2/10 + 3/10 + 4/10 + 5/10)** | **1.5** |
-| **`as_count_eval_path`** | Aggregation function applied _before_ division | **(1+2+3+4+5) / (10+10+10+10+10)**     | **0.3** |
+| **`classic_eval_path`**  | 除算の**後**に集計関数を適用  | **(1/10 + 2/10 + 3/10 + 4/10 + 5/10)** | **1.5** |
+| **`as_count_eval_path`** | 除算の**前**に集計関数を適用 | **(1+2+3+4+5) / (10+10+10+10+10)**     | **0.3** |
 
-_Note that both evaluations above are mathematically correct. Choose a method that suits your intentions._
+どちらも数学的には正しい評価です。目的に合った方法を選択してください。
 
-It may be helpful visualize the **`classic_eval_path`** as:
+もう少しわかりやすくクエリを記述すると、**`classic_eval_path`** は次のようになります。
 
 ```text
 sum(last_5m):error/total
 ```
 
-and the **`as_count_eval_path`** as:
+**`as_count_eval_path`** は次のようになります。
 
 ```text
 sum(last_5m):error
@@ -73,8 +73,8 @@ sum(last_5m):error
 sum(last_5m):total
 ```
 
-In general, **`avg`** time aggregation with **`.as_rate()`** is reasonable, but **`sum`** aggregation with **`.as_count()`** is recommended for error rates. Aggregation methods other than **`sum`** do not make sense to use with (and cannot be used with) **`.as_count()`**.
+通常、エラー率の **`avg`** 時間集計には **`.as_rate()`** が合理的ですが、**`sum`** 集計には **`.as_count()`** が推奨されます。**`sum`** 以外の集計方法を **`.as_count()`** と組み合わせて使用しても意味がありません (併用できません)。
 
-[Reach out to the Datadog support team][1] if you have any questions.
+ご質問は、[Datadog のサポートチームまでお問い合わせください][1]。
 
 [1]: /help/

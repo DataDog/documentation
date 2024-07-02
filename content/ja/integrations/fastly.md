@@ -31,7 +31,7 @@
 - "caching"
 - "log collection"
 - "metrics"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -67,40 +67,40 @@
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-{{< img src="integrations/fastly/fastly_dashboard.png" alt="Fastly dashboard showing cache hit ratio, success rate, and other metrics" popup="true">}}
+{{< img src="integrations/fastly/fastly_dashboard.png" alt="キャッシュヒット率、成功率、その他のメトリクスを表示する Fastly ダッシュボード" popup="true">}}
 
-## Overview
+## 概要
 
-Connect Fastly to Datadog to view key Fastly metrics (for example, cache coverage and header size) in context with the rest of your Datadog metrics.
+Fastly を Datadog に接続して、Fastly のキーメトリクス (キャッシュカバレッジ、ヘッダーサイズなど) を Datadog の他のメトリクスと関連付けて表示できます。
 
-The integration includes out-of-the-box monitors and dashboard that enable you to view metrics in aggregate, pivot between Fastly metrics and related logs, and create monitors that alert you when a metric passes a user-defined threshold or behaves anomalously.
+このインテグレーションには、即座に使用可能なモニターとダッシュボードが含まれており、それによってメトリクスを総合的に表示し、Fastly メトリクスと関連ログとの間で比較し、メトリクスがユーザー定義のしきい値を超えたり異常な振る舞いを示したりした際に通知するモニターを作成することが可能です。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-No installation steps required.
+必要なインストール手順はありません。
 
-### Configuration
+### 構成
 
-#### Metric collection
+#### メトリクスの収集
 
-Create a Read-only access API token on Fastly's token management page, get your Service ID from the Dashboard and enter them in the [Fastly integration tile][1].
+Fastly のトークン管理ページで読み取り専用アクセス API トークンを作成し、ダッシュボードからサービス ID を取得して、それらを [Fastly インテグレーションタイル][1]に入力します。
 
 <div class="alert alert-info">
-The ServiceID is the alphanumerical code, for example: <code>5VqE6MOOy1QFJbgmCK41pY</code> (example from the <a href="https://docs.fastly.com/api/auth">Fastly API documentation</a>).
+ServiceID は英数字のコードです。例: <code>5VqE6MOOy1QFJbgmCK41pY</code>（<a href="https://docs.fastly.com/api/auth">Fastly API ドキュメント</a>からの例）。
 </div>
 
-If you are using multiple Service IDs from one account, enter an API token on each line.
+1 つのアカウントで複数のサービス ID を使用している場合は、各行に API トークンを入力します。
 
-The account name is a way for you to organize your accounts, and is not used as part of the data ingestion process.
+アカウント名はアカウントの整理に使用されるものであり、データ取り込みプロセスには使用されません。
 
-#### Log collection
+#### ログ収集
 
 
 {{< site-region region="us3" >}}
 
-Log collection is not supported for this site.
+ログ収集は、このサイトではサポートされていません。
 
 {{< /site-region >}}
 
@@ -108,41 +108,41 @@ Log collection is not supported for this site.
 
 {{< site-region region="us,us5,eu,gov" >}}
 
-Configure the Datadog endpoint to forward Fastly logs to Datadog. You can choose the `Datadog` or `Datadog (via Syslog)` endpoint. The `Datadog` endpoint is recommended for more reliable delivery of logs over Syslog.
+Fastly ログを Datadog に転送するように Datadog エンドポイントを構成します。`Datadog` または `Datadog (via Syslog)` エンドポイントを選択できます。Syslog 経由でログをより確実に配信するには、`Datadog` エンドポイントをお勧めします。
 
-##### Select the logging endpoint
+##### ログエンドポイントの選択
 
-1. Log in to the Fastly web interface and click **Configure link**.
-2. From the **Service** menu, select the appropriate service.
-3. Click the **Configuration** button and then select **Clone active**. The Domains page appears.
-4. Click the **Logging** link. The logging endpoints page appears. Click **Create Endpoint** under **Datadog** or the **Datadog (with Syslog)** options.
+1. Fastly Web インターフェイスにログインし、**Configure リンク**をクリックします。
+2. **Service** メニューから、該当するサービスを選択します。
+3. **Configuration** ボタンをクリックし、次に **Clone active** を選択します。Domains ページが表示されます。
+4. **Logging** リンクをクリックします。ログエンドポイントページが表示されます。**Datadog** または **Datadog (with Syslog)** オプションの下の **Create Endpoint** をクリックします。
 
-##### Configure the Datadog endpoint (recommended)
+##### Datadog エンドポイントを構成する (推奨)
 
-1. Give a name to the endpoint, for example: `Datadog`.
-2. Configure the log format. By default, the recommended [Datadog-Fastly log format][2] is already provided and can be customized.
-3. Select your region to match your Datadog account region: {{< region-param key="dd_site_name" code="true" >}}
-4. Add your [Datadog API key][3].
-5. Click **Create** at the bottom.
-6. Click **Activate** at the top right to activate the new configuration. After a few minutes, logs should begin flowing into your account.
+1. エンドポイントに名前を付けます (例: `Datadog`)。
+2. ログ形式を構成します。デフォルトで、推奨される[Datadog-Fastly ログ形式][2]がすでに用意されており、カスタマイズできます。
+3. Datadog アカウントのリージョンと一致するように、リージョンを選択します: {{< region-param key="dd_site_name" code="true" >}}
+4. [Datadog API キー][3]を追加します。
+5. 下部にある **Create** をクリックします。
+6. 右上の **Activate** をクリックして、新しいコンフィギュレーションをアクティブ化します。数分後、ログがアカウントに流れ始めます。
 
-##### Configure the Syslog endpoint
+##### Syslog エンドポイントの構成
 
-1. Give a name to the endpoint, for example: `Datadog`.
-2. Configure the log format to include the recommended [Datadog-Fastly log format][2] with [your Datadog API key][3] at the beginning.
+1. エンドポイントに名前を付けます (例: `Datadog`)。
+2. ログ形式を構成して、推奨される[Datadog-Fastly ログ形式][2]の先頭に[Datadog API キー][3]を含めます。
 
     ```text
     <DATADOG_API_KEY> <DATADOG_FASTLY_LOG_FORMAT>
     ```
 
-    **Note**: Your Datadog API key MUST be in front of the Datadog-Fastly log format for your logs to display in Datadog. See [Useful variables to log][4] for more details.
+   注: Datadog-Fastly ログ形式の先頭に Datadog API キーがないと、ログが Datadog に表示されません。詳しくは、[ログを取るのに便利な変数][4]をご覧ください。
 
-3. Set **Syslog Address** to: {{< region-param key="web_integrations_endpoint" code="true" >}}
-4. Set **Port** to: {{< region-param key="web_integrations_port" code="true" >}}
-5. Set **TLS** to `yes`
-6. Set **TLS Hostname** to: {{< region-param key="web_integrations_endpoint" code="true" >}}
-7. In the advanced option section, select `Blank` as **log line format**
-8. Finally, save the endpoint and deploy the service. See the logs in your [Datadog Logs Explorer][5].
+3. **Syslog Address** を {{< region-param key="web_integrations_endpoint" code="true" >}} に設定します
+4. **Port** を {{< region-param key="web_integrations_port" code="true" >}} に設定します
+5. **TLS** を `yes` に設定します。
+6. **TLS Hostname** を {{< region-param key="web_integrations_endpoint" code="true" >}} に設定します
+7. Advanced options セクションで、**log line format** として `Blank` を選択します。
+8. 最後に、エンドポイントを保存し、サービスをデプロイします。[Datadog のログエクスプローラー][5] でログを確認できます。
 
 [2]: https://docs.datadoghq.com/resources/json/fastly_format.json
 [3]: https://app.datadoghq.com/organization-settings/api-keys
@@ -152,29 +152,29 @@ Configure the Datadog endpoint to forward Fastly logs to Datadog. You can choose
 {{< /site-region >}}
 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "fastly" >}}
 
 
-### Events
+### イベント
 
-The Fastly integration does not include any events.
+Fastly インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The Fastly integration does not include any service checks.
+Fastly インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][3].
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-## Further reading
+## 参考資料
 
-- [Monitor Fastly performance with Datadog][4]
-- [Create and manage your Fastly accounts with Terraform][5]
-- [Create and manage your Fastly services with Terraform][6]
+- [Datadog を使用した Fastly パフォーマンスの監視][4]
+- [Terraform による Fastly アカウントの作成と管理][5]
+- [Terraform による Fastly サービスの作成と管理][6]
 
 [1]: https://app.datadoghq.com/account/settings#integrations/fastly
 [2]: https://github.com/DataDog/dogweb/blob/prod/integration/fastly/fastly_metadata.csv

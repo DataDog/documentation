@@ -9,37 +9,37 @@ further_reading:
   tag: Documentation
   text: Visualize your Error Tracking data in the Explorer
 - link: "https://github.com/DataDog/datadog-ci/tree/457d25821e838db9067dbe376d0f34fb1a197869/src/commands/sourcemaps"
-  tag: Source Code
+  tag: ソースコード
   text: Sourcemaps command reference
 ---
 
-## Overview
+## 概要
 
-If your front-end JavaScript source code is minified, upload your source maps to Datadog to de-obfuscate your different stack traces. For any given error, you can access the file path, line number, and code snippet for each frame of the related stack trace. Datadog can also link stack frames to your source code in your repository.
+フロントエンドの JavaScript ソースコードが縮小化されている場合、Datadog にソースマップをアップロードして、異なるスタックトレースの難読化を解除します。任意のエラーについて、関連するスタックトレースの各フレームのファイルパス、行番号、コードスニペットにアクセスすることができます。また、Datadog はスタックフレームをリポジトリ内のソースコードにリンクすることができます。
 
-<div class="alert alert-info">Only errors collected by <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a>, and logs from <a href="/logs/log_collection/javascript/">Browser Logs Collection</a> can be unminified.</div>
+<div class="alert alert-info"><a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> で収集されたエラー、および<a href="/logs/log_collection/javascript/">ブラウザログ収集</a>のログのみ、縮小化解除が可能です。</div>
 
-## Instrument your code
+## コードのインスツルメンテーション
 
-Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute. 
+ソースコードを縮小するときに、`sourcesContent` 属性に関連するソースコードを直接含むソースマップを生成するように JavaScript バンドラーを構成します。
 
 <div class="alert alert-warning">
 {{< site-region region="us,us3,us5,eu" >}}
-Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **300** MB.
+関連する縮小ファイルのサイズを加えた各ソースマップのサイズが、**300** MB の制限を超えないようにしてください。
 {{< /site-region >}}
 {{< site-region region="ap1,gov" >}}
-Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of **50** MB.
+関連する縮小ファイルのサイズを加えた各ソースマップのサイズが、**50** MB の制限を超えないようにしてください。
 {{< /site-region >}}
 </div>
 
-See the following configurations for popular JavaScript bundlers.
+一般的な JavaScript のバンドルソフトについては、以下の構成を参照してください。
 
 {{< tabs >}}
 {{% tab "WebpackJS" %}}
 
-You can generate source maps by using the built-in webpack plugin named [SourceMapDevToolPlugin][1].
+[SourceMapDevToolPlugin][1] という名前の組み込みの Webpack プラグインを使用して、ソースマップを生成できます。
 
-See the example configuration in your `webpack.config.js` file:
+`webpack.config.js` ファイルにある構成例を参照してください。
 
 ```javascript
 // ...
@@ -63,20 +63,20 @@ module.exports = {
 };
 ```
 
-**Note**: If you are using TypeScript, set `compilerOptions.sourceMap` to `true` in your `tsconfig.json` file.
+**注**: TypeScript を使用している場合は、`tsconfig.json` ファイルで `compilerOptions.sourceMap` を `true` に設定してください。
 
 [1]: https://webpack.js.org/plugins/source-map-dev-tool-plugin/
 {{% /tab %}}
 {{% tab "ParcelJS" %}}
 
-Parcel generates source maps by default when you run the build command: `parcel build <entry file>`.
+Parcel は、ビルドコマンドを実行すると、デフォルトでソースマップを生成します: `parcel build <entry file>`。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-After building your application, bundlers generate a directory (typically named `dist`) with minified JavaScript files co-located with their corresponding source maps.
+アプリケーションをビルドした後、バンドラーは縮小化された JavaScript ファイルを、対応するソースマップと同じ場所に配置したディレクトリ (通常 `dist` という名前) を生成します。
 
-See the following example:
+次の例をご覧ください。
 
 ```bash
 ./dist
@@ -89,21 +89,21 @@ See the following example:
 
 <div class="alert alert-warning">
 {{< site-region region="us,us3,us5,eu" >}}
-If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the **300** MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
+<code>javascript.364758.min.js</code> と <code>javascript.364758.js.map</code> のファイルサイズの合計が <b>**300** MB</b> の制限を超える場合は、ソースコードを複数の小さなチャンクに分割するようにバントラーを構成することでファイルサイズを減らしてください。詳細については、<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS でのコード分割</a>を参照してください。
 {{< /site-region >}}
 {{< site-region region="ap1,gov" >}}
-If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>the **50** MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
+<code>javascript.364758.min.js</code> と <code>javascript.364758.js.map</code> のファイルサイズの合計が <b>**50** MB</b> の制限を超える場合は、ソースコードを複数の小さなチャンクに分割するようにバントラーを構成することでファイルサイズを減らしてください。詳細については、<a href="https://webpack.js.org/guides/code-splitting/">WebpackJS でのコード分割</a>を参照してください。
 {{< /site-region >}}
 </div>
 
-## Upload your source maps
+## ソースマップのアップロード
 
-The best way to upload source maps is to add an extra step in your CI pipeline and run the dedicated command from the [Datadog CLI][1]. It scans the `dist` directory and subdirectories to automatically upload source maps with relevant minified files.
+ソースマップをアップロードする最良の方法は、CI パイプラインに追加のステップを追加し、[Datadog CLI][1] から専用コマンドを実行することです。`dist` ディレクトリとそのサブディレクトリをスキャンして、関連する縮小ファイルを含むソースマップを自動的にアップロードします。
 
 {{< site-region region="us" >}}
-1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
-2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
-3. Run the following command once per service in your RUM application:
+1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
+2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
+3. RUM アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
 
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
@@ -117,10 +117,10 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 {{< /site-region >}}
 
 {{< site-region region="eu,us3,us5,gov,ap1" >}}
-1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
-2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
-3. Configure the CLI to upload files to the {{<region-param key="dd_site_name">}} site by exporting two environment variables: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} and `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
-4. Run the following command once per service in your RUM application:
+1. `package.json` ファイルに `@datadog/datadog-ci` を追加します (最新バージョンを使用していることを確認してください)。
+2. [専用の Datadog API キーを作成][1]し、`DATADOG_API_KEY` という名前の環境変数としてエクスポートします。
+3. 以下の 2 つの環境変数をエクスポートして、{{<region-param key="dd_site_name">}} サイトにファイルをアップロードするように CLI を構成します: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} と `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}
+4. RUM アプリケーションで、1 サービスにつき 1 回、以下のコマンドを実行します。
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
      --service=my-service \
@@ -132,39 +132,39 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-To minimize overhead on your CI's performance, the CLI is optimized to upload as many source maps as you need in a short amount of time (typically a few seconds).
+CI のパフォーマンスに対するオーバーヘッドを最小限に抑えるため、CLI は短時間 (通常数秒) で必要なだけのソースマップをアップロードできるように最適化されています。
 
-**Note**: Re-uploading a source map does not override the existing one if the version has not changed.
+**注**: バージョンに変更がない場合、ソースマップを再アップロードしても既存のものはオーバーライドされません。
 
-The `--service` and `--release-version` parameters must match the `service` and `version` tags on your RUM events and browser logs. For more information on how to setup these tags, refer to the [Browser RUM SDK initialization documentation][2] or [Browser Logs Collection documentation][3].
+`service` と `--release-version` パラメーターは、RUM イベントとブラウザログの `service` と `version` タグと一致する必要があります。これらのタグを設定する方法の詳細については、[Browser RUM SDK 初期化ドキュメント][2] または[ブラウザログ収集ドキュメント][3]を参照してください。
 
-<div class="alert alert-info">If you have defined multiple services in your RUM application, run the CI command as many times as there are services, even if you have one set of sourcemaps for the entire RUM application.</div>
+<div class="alert alert-info">RUM アプリケーションで複数のサービスを定義している場合、RUM アプリケーション全体のソースマップのセットが 1 つであっても、サービスの数だけ CI コマンドを実行します。</div>
 
-By running the command against the example `dist` directory, Datadog expects your server or CDN to deliver the JavaScript files at `https://hostname.com/static/js/javascript.364758.min.js` and `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
+サンプルの `dist` ディレクトリに対してコマンドを実行すると、Datadog はサーバーまたは CDN が `https://hostname.com/static/js/javascript.364758.min.js` と `https://hostname.com/static/js/subdirectory/javascript.464388.min.js` に JavaScript ファイルを配信することを期待します。
 
-Only source maps with the `.js.map` extension work to correctly unminify stack traces. Source maps with other extensions such as `.mjs.map` are accepted but do not unminify stack traces.
+スタックトレースを正しく非縮小するために機能するのは、拡張子が `.js.map` のソースマップのみです。`.mjs.map` など、他の拡張子のソースマップは許容されますが、スタックトレースを非縮小しません。
 
-<div class="alert alert-info">If you are serving the same JavaScript source files from different subdomains, upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full URL. For example, specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>.</div>
+<div class="alert alert-info">異なるサブドメインから同じ JavaScript ソースファイルを提供する場合、関連するソースマップを一度アップロードし、完全な URL の代わりに絶対プレフィックスパスを使用することで複数のサブドメインで動作するようにしてください。例えば、<code>https://hostname.com/static/js</code> の代わりに <code>/static/js</code> を指定します。</div>
 
-### Link stack frames to your source code
+### スタックフレームをソースコードにリンクする
 
-If you run `datadog-ci sourcemaps upload` within a Git working directory, Datadog collects repository metadata. The `datadog-ci` command collects the repository URL, the current commit hash, and the list of file paths in the repository that relate to your source maps. For more details about Git metadata collection, refer to the [datadog-ci documentation][4].
+Git の作業ディレクトリ内で `datadog-ci sourcemaps upload` を実行すると、Datadog はリポジトリのメタデータを収集します。`datadog-ci` コマンドは、リポジトリの URL、現在のコミットハッシュ、そしてソースマップに関連するリポジトリ内のファイルパスのリストを収集します。Git のメタデータ収集の詳細については、[datadog-ci のドキュメント][4]を参照してください。
 
-Datadog displays links to your source code on unminified stack frames.
+Datadog は、縮小化を解除されたスタックフレームにソースコードへのリンクを表示します。
 
-## Troubleshoot errors with ease
+## エラーを簡単にトラブルシューティング
 
-Without access to the file path and the line number, a minified stack trace is not helpful in troubleshooting your code base. Also, the code snippet is minified (which means there is one long line of transformed code), making the troubleshooting process more difficult.
+ファイルパスと行番号にアクセスできなければ、縮小化されたスタックトレースは、コードベースのトラブルシューティングに役立ちません。また、コードスニペットが縮小化されている (つまり、変換された長いコードが 1 行ある) ので、トラブルシューティングがより困難になります。
 
-The following example displays a minified stack trace:
+次の例では、縮小化されたスタックトレースを表示しています。
 
-{{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="Error Tracking Minified Stack Trace" >}}
+{{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="エラー追跡縮小スタックトレース" >}}
 
-On the other hand, an unminified stack trace provides you with all the context you need for quick, seamless troubleshooting. For stack frames that relate to your source code, Datadog also generates a direct link to your repository:
+一方、縮小化解除されたスタックトレースは、迅速でシームレスなトラブルシューティングに必要なすべてのコンテキストを提供します。ソースコードに関連するスタックフレームについては、Datadog はリポジトリへの直接リンクも生成します。
 
-{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.png" alt="Error Tracking Unminified Stack Trace" >}}
+{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.png" alt="エラー追跡非縮小スタックトレース" >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

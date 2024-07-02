@@ -6,9 +6,9 @@
 - "configuration & deployment"
 - "aws"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Amazon Simple Workflow Service metrics."
+"description": "Amazon Simple Workflow Service のキーメトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_swf/"
 "draft": false
 "git_integration_title": "amazon_swf"
@@ -31,9 +31,9 @@ Amazon SWF helps developers build, run, and scale background jobs that have para
 
 Enable this integration to see in Datadog all your SWF metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -58,23 +58,23 @@ Configure Amazon SWF to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_swf" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The Amazon SWF integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon SWF integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

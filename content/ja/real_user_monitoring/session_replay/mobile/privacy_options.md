@@ -1,6 +1,5 @@
 ---
 title: Mobile Session Replay Privacy Options
-kind: documentation
 description: Configure privacy options for Mobile Session Replay.
 aliases:
 further_reading:
@@ -21,30 +20,30 @@ further_reading:
       text: Session Replay
 ---
 
-## Overview
+## 概要
 
-Session Replay provides privacy controls to ensure organizations of any scale do not expose sensitive or personal data. Data is stored on Datadog-managed cloud instances and encrypted at rest.
+セッションリプレイは、あらゆる規模の組織が機密データや個人データを公開しないよう、プライバシーコントロールを提供します。データは Datadog が管理するクラウドインスタンスに保存され、静止時には暗号化されます。
 
-Default privacy options for Session Replay protect end user privacy and prevent sensitive organizational information from being collected.
+セッションリプレイのデフォルトのプライバシー オプションは、エンドユーザーのプライバシーを保護し、重要な組織情報が収集されるのを防ぎます。
 
-By enabling Mobile Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Mobile SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
+モバイルセッションリプレイを有効にすることで、RUM モバイル SDK を通じて記録される機密要素を自動的にマスクすることができます。データがマスクされると、そのデータは Datadog の SDK によって元の形で収集されないため、バックエンドに送信されることはありません。
 
-## Configuring masking modes
+## マスキングモデルの構成
 
-Using the masking modes below, you can override the default setup on a per-application basis.
+以下のマスキングモデルを使用して、デフォルトの設定をアプリケーション単位で上書きすることができます。
 
-### Mask all text elements
+### すべてのテキスト要素をマスクする
 
-By default, the `mask` setting is enabled for all data. With this setting enabled, all text content on screen is masked, as shown below.
+デフォルトでは、すべてのデータで `mask` 設定が有効になっています。この設定が有効になっている場合、下の図のように、画面上の全てのテキストコンテンツがマスクされます。
 
-{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all-2.png" alt="What your application screen may resemble when `mask` is enabled." style="width:50%;">}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-mask-all-2.png" alt="`mask` が有効な場合のアプリケーション画面の表示例。" style="width:50%;">}}
 
 {{< tabs >}}
 {{% tab "Android" %}}
 
    {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
-   // mask all text elements
+   // すべてのテキスト要素をマスク
    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
        .setPrivacy(SessionReplayPrivacy.MASK)
        .build()
@@ -56,7 +55,7 @@ By default, the `mask` setting is enabled for all data. With this setting enable
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
-    // mask all text elements
+    // すべてのテキスト要素をマスク
     SessionReplay.enable(
         with: SessionReplay.Configuration(
             replaySampleRate: sampleRate,
@@ -69,18 +68,18 @@ By default, the `mask` setting is enabled for all data. With this setting enable
 {{% /tab %}}
 {{< /tabs >}}
 
-### Mask only input elements
+### 入力要素のみをマスクする
 
-With the `mask user input` setting enabled, any input field is replaced with anonymized text. 
+`mask user input` 設定が有効になっている場合、すべての入力フィールドが匿名化されたテキストに置き換えられます。
 
-{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-user-input-2.png" alt="What your application screen may resemble when user input fields are masked." style="width:50%;">}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-user-input-2.png" alt="ユーザー入力フィールドがマスクされた場合のアプリケーション画面の表示例。" style="width:50%;">}}
 
 {{< tabs >}}
 {{% tab "Android" %}}
 
    {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
-   // mask only input elements
+   // 入力要素のみをマスク
    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
        .setPrivacy(SessionReplayPrivacy.MASK_USER_INPUT)
        .build()
@@ -92,7 +91,7 @@ With the `mask user input` setting enabled, any input field is replaced with ano
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
 
-   // mask only input elements
+   // 入力要素のみをマスク
     SessionReplay.enable(
         with: SessionReplay.Configuration(
             replaySampleRate: sampleRate,
@@ -105,20 +104,20 @@ With the `mask user input` setting enabled, any input field is replaced with ano
 {{% /tab %}}
 {{< /tabs >}}
 
-### Allow (no masking)
+### Allow (マスキングなし)
 
-With the `allow` setting enabled, all text is revealed.
+`allow` 設定が有効になっている場合、すべてのテキストが表示されます。
 
-{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-allow-all-2.png" alt="What your application screen may resemble when `allow` is enabled." style="width:50%;">}}
+{{< img src="real_user_monitoring/session_replay/mobile/masking-mode-allow-all-2.png" alt="`allow` が有効な場合のアプリケーション画面の表示例。" style="width:50%;">}}
 
-**Note**: Even with this option enabled, any sensitive text fields, such as passwords, emails, phone numbers, and addresses are still masked. For more information, see [Text masking definitions](#text-masking-definitions).
+**注**: このオプションが有効な場合でも、パスワード、メール、電話番号、住所などの機密テキストフィールドは依然としてマスクされます。詳細については、[テキストのマスキングの定義](#text-masking-definitions)を参照してください。
 
 {{< tabs >}}
 {{% tab "Android" %}}
 
    {{< code-block lang="javascript" filename="build.gradle" disable_copy="false" collapsible="true" >}}
 
-   // no masking; all text is revealed
+   // マスキングなし、すべてのテキストを表示
    val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
       .setPrivacy(SessionReplayPrivacy.ALLOW)
       .build()
@@ -129,7 +128,7 @@ With the `allow` setting enabled, all text is revealed.
 {{% tab "iOS" %}}
 
    {{< code-block lang="swift" filename="AppDelegate.swift" disable_copy="false" collapsible="true" >}}
-   // no masking; all text is revealed
+   // マスキングなし、すべてのテキストを表示
     SessionReplay.enable(
         with: SessionReplay.Configuration(
             replaySampleRate: sampleRate,
@@ -142,117 +141,116 @@ With the `allow` setting enabled, all text is revealed.
 {{% /tab %}}
 {{< /tabs >}}
 
-## How and what data is masked
+## マスキングの対象データとその方法
 
-This section describes how the Datadog recorder handles masking based on data type and how that data is defined. 
-### Text masking strategies
+このセクションでは、Datadog レコーダーがデータタイプに基づいてどのようにマスキングを処理するか、またそのデータがどのように定義されているかを説明します。
+### テストマスキング戦略
 
-Depending on how you've configured your privacy settings, the type of text, and sensitivity of data, Datadog's masking rules apply different strategies to different types of text fields.
+Datadog のマスキングルールでは、プライバシー設定の構成方法、テキストのタイプ、データの機密性に応じて、テキストフィールドのタイプごとに異なる戦略が適用されます。
 
-| Text masking strategy | Description | Example |
+| テキストのマスキング戦略 | 説明 | 例 |
 |-----------------------|-------------|---------|
-| No mask | The text is revealed in the session replay | `"Hello world"` → `"Hello world"` |
-| Space-preserving mask | Each visible character is replaced with a lowercase "x" | `"Hello world"` → `"xxxxx xxxxx"` |
-| Fixed-length mask | The entire text field is replaced with a constant of three asterisks (***) | `"Hello world"` → `"***"`
+| マスクなし | セッションリプレイでテキストを表示 | `"Hello world"` → `"Hello world"` |
+| スペース保持型マスク | 表示される各文字を小文字の "x" に置換 | `"Hello world"` → `"xxxxx xxxxx"` |
+| 固定長マスク | テキストフィールド全体を 3 つのアスタリスク (***) から成る定数に置換 | `"Hello world"` → `"***"`
 
-With the above text strategies in mind, you have a few different options if you want to override the default privacy rule of `mask` in your configuration.
+上記のテキスト戦略を念頭に、コンフィギュレーションで `mask` のデフォルトのプライバシールールを上書きしたい場合は、いくつかのオプションがあります。
 
-The following chart shows how Datadog applies different text masking strategies, using the rules you set up in your configuration, to the below text types.
+以下のチャートは、Datadog で、ユーザーが構成で設定したルールを使用して、各テキストタイプにどのようにテキストマスキング戦略が適用されるかを示しています。
 
-| Type | Allow all | Mask all | Mask user input |
+| タイプ | すべて許可 | すべてマスク | ユーザー入力をマスク |
 |------|-------------|------------|-------------------|
-| [Sensitive text](#sensitive-text) | Fixed-length mask | Fixed-length mask | Fixed-length mask |
-| [Input and option text](#input-and-option-text) | No mask | Fixed-length mask | Fixed-length mask |
-| [Static text](#static-text) | No mask | Space-preserving mask | No mask |
-| [Hint text](#hint-text) | No mask | Fixed-length mask | No mask |
+| [機密テキスト](#sensitive-text) | 固定長マスク | Fixed-length mask | Fixed-length mask |
+| [入力・オプションテキスト](#input-and-option-text) | マスクなし | 固定長マスク | Fixed-length mask |
+| [静的テキスト](#static-text) | マスクなし | スペース保持型マスク | マスクなし |
+| [ヒントテキスト](#hint-text) | マスクなし | 固定長マスク | マスクなし |
 
-### Text masking definitions
+### テキストのマスキングの定義
 
-Find below a description of how Datadog's recorder treats each text type.
+Datadog のレコーダーが各テキストタイプをどのように取り扱うかについては、以下の説明をご覧ください。
 
-#### Sensitive text
-Sensitive text includes passwords, e-mails, and phone numbers marked in a platform-specific way,
-and other forms of sensitivity in text available to each platform.
+#### 機密テキスト
+機密テキストには、プラットフォーム固有の方法で識別が施されたパスワード、メールアドレス、電話番号や、各プラットフォームで用意されている機密性を示すその他のテキスト形式が含まれます。
 
-This includes passwords, e-mails and phone numbers in:
+これには、以下のテキスト内のパスワード、メールアドレス、電話番号が含まれます。
 
-- Text Field (iOS)
-- Text View (iOS)
-- Edit Text (Android)
-- Address information (iOS + Android)
-- Credit card numbers (iOS)
-- One-time codes (iOS)
+- テキストフィールド (iOS)
+- テキストビュー (iOS)
+- 編集テキスト (Android)
+- 住所情報 (iOS + Android)
+- クレジットカード情報 (iOS)
+- ワンタイムコード (iOS)
 
-#### Input and option text
+#### 入力・オプションテキスト
 
-Input and option text is text entered by the user with a keyboard or other text-input device, or a custom (non-generic) value in selection elements.
+入力・オプションテキストとは、ユーザーがキーボードその他のテキスト入力デバイスを使って入力したテキスト、または選択要素内のカスタム (共通ではない) 値のことです。
 
-This includes the below.
+以下のものが含まれます。
 
-- User-entered text in:
-  - Text Field (iOS)
-  - Text View (iOS)
-  - Edit Text (Android)
-- User-selected options in:
-  - Value Picker (iOS + Android)
-  - Segment (iOS)
-  - Drop Down List (Android)
-- Notable exclusions:
-  - Placeholder (hint) texts in Text Field, Text View and Edit Text (not entered by the user)
-  - Non-editable texts in Text View (iOS).
-  - Month, day, and year labels in Date Picker (generic values)
+- ユーザーが以下で入力したテキスト
+  - テキストフィールド (iOS)
+  - テキストビュー (iOS)
+  - 編集テキスト (Android)
+- ユーザーが以下で選択したオプション
+  - 値の選択ツール (iOS + Android)
+  - セグメント (iOS)
+  - ドロップダウンリスト (Android)
+- 主な例外
+  - テキストフィールド、テキストビュー、編集テキストのプレースホルダー (ヒント) テキスト (ユーザー入力したものではないテキスト)
+  - テキストビューの編集不可能なテキスト (iOS).
+  - 日付選択ツールの月、日、年のラベル (共通の値)
 
-#### Static text
-Static text is any text that is not directly entered by the user. This includes the below.
+#### 静的テキスト
+静的テキストとは、ユーザーが直接入力したものではないテキストのことです。以下のものが含まれます。
 
-All texts in:
+以下のすべてのテキスト
 
-- Checkbox and Radio Button titles (Android)
-- Texts in non-editable Text View (iOS)
-- Month, day and year labels in the date and time picker
-- Values updated in response to gesture interaction with input elements, such as the current value of the Slider
-- Other controls, not considered as "user input elements", such as Labels, Tab Bar, and Navigation Bar (iOS), or Tabs (Android)
+- チェックボックスおよびラジオボタンのタイトル (Android)
+- 編集不可能なテキストビューのテキスト (iOS)
+- 日時選択ツールの月、日、年のラベル
+- スライダーの現在の値など、入力要素に対するジェスチャー操作に応じて更新された値
+- ラベル、タブバー、ナビゲーションバー (iOS)、タブ (Android) などの、「ユーザー入力要素」とは見なされていないその他のコントロール
 
-#### Hint text
-Hint text is static text in editable text elements or option selectors that is displayed when no value is given. This includes:
+#### ヒントテキスト
+ヒントテキストとは、値が一切与えられていないときに、編集可能なテキスト要素またはオプション選択ツールに表示される静的なテキストのことです。以下のものが含まれます。
 
-- Placeholders in Text Field (iOS), Text View (iOS)
-- Hints in Edit Text (Android)
-- Prompts in Drop Down lists (Android)
+- テキストフィールド (iOS)、テキストビュー (iOS) のプレースホルダー
+- 編集テキストのヒント (Android)
+- ドロップダウンリストの指示 (Android)
 
-### Appearance masking
+### 概観のマスキング
 
-The following chart shows how we apply different appearance masking strategies, using the rules you set up in your configuration, to the below text types.
+以下のチャートは、ユーザーが構成で設定したルールを使用して、各テキストタイプにどのように概観マスキング戦略が適用されるかを示しています。
 
-| Type | Allow all | Mask all | Mask user input |
+| タイプ | すべて許可 | すべてマスク | ユーザー入力をマスク |
 |------|-------------|------------|-------------------|
-| [Revealing attributes](#revealing-attributes) |  | {{< X >}} | {{< X >}} |
-| [Other attributes](#other-attributes) |  |  |  |
+| [開示型の属性](#revealing-attributes) |  | {{< X >}} | {{< X >}} |
+| [その他の属性](#other-attributes) |  |  |  |
 
-#### Revealing attributes
-Revealing attributes are attributes that can reveal or suggest the value of input elements and can be used to infer a user's input or selection.
+#### 開示型の属性
+開示型の属性とは、入力要素の値を明らかにし、または示唆し、ユーザーの入力内容や選択内容を推測するのに使用できる属性のことです。
 
-This includes:
+以下のものが含まれます。
 
-**Shapes**
-- Background of selected option in Segment (iOS)
-- Circle surrounding the selected date in a Date Picker (iOS)
-- Selection mark in Checkbox (Android)
-- Thumb of a Slider (iOS and Android)
+**形状**
+- セグメントで選択されたオプションの背景 (iOS)
+- 日付選択ツールで選択された日付を囲む円 (iOS)
+- チェックボックスの選択マーク (Android)
+- スライダーのつまみ (iOS および Android)
 
-**Text attributes**
+**テキスト属性**
 - The color of a label rendering the selected date in Date Picker (iOS)
-- The position of the first and last option in Value Picker (iOS and Android)
+- 値選択ツールの最初と最後のオプションの位置 (iOS および Android)
 
-### Touch interactions
+### タッチインタラクション
 
-The following chart shows how we apply different touch interaction strategies, using the rules you set up in your configuration, to the below text types. While any interaction that happens on an on-screen keyboard is masked, interactions with other elements are not masked.
+以下のチャートは、ユーザーが構成で設定したルールを使用して、各テキストタイプにどのようにタッチインタラクション戦略が適用されるかを示しています。スクリーンキーボード上で発生するインタラクションはすべてマスクされる一方、その他の要素とのインタラクションはマスクされません。
 
-| Type | Allow all | Mask all | Mask user input |
+| タイプ | すべて許可 | すべてマスク | ユーザー入力をマスク |
 |------|-------------|------------|-------------------|
-| [Other attributes](#other-attributes) |  |  |  |
-| [On-screen keyboard](#on-screen-keyboard) | {{< X >}} | {{< X >}} | {{< X >}} |
+| [その他の属性](#other-attributes) |  |  |  |
+| [スクリーンキーボード](#on-screen-keyboard) | {{< X >}} | {{< X >}} | {{< X >}} |
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

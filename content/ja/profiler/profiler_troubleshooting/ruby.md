@@ -9,34 +9,32 @@ further_reading:
       text: APM Troubleshooting
 ---
 
-## Missing profiles in the profile search page
+## プロファイル検索ページにないプロファイル
 
-If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
+プロファイラを設定してもプロファイル検索ページにプロファイルが表示されない場合は、[デバッグモード][1]をオンにし、デバッグファイルと次の情報で[サポートチケットを開いてください][2]。
 
 - Operating system type and version (for example, Ubuntu Linux 22.04)
-- Runtime type, version, and vendor (for example, Ruby 2.7.3)
+- ランタイムのタイプ、バージョン、ベンダー (例: Ruby 2.7.3)
 
-## Missing profiles for Resque jobs
+## レスキュージョブのプロファイルがありません
 
-When profiling [Resque][4] jobs, you should set the `RUN_AT_EXIT_HOOKS` environment
-variable to `1`, as described in the
-[Resque documentation][5].
+[Resque][4] のジョブをプロファイリングする場合、[Resque のドキュメント][5]にあるように、`RUN_AT_EXIT_HOOKS` 環境変数を `1` に設定する必要があります。
 
-Without this flag, profiles for short-lived Resque jobs will be unavailable.
+このフラグがないと、短期間の Resque ジョブのプロファイルは使用できなくなります。
 
-## Profiling does not turn on because compilation of the Ruby VM just-in-time header failed
+## Ruby VM のジャストインタイムヘッダーのコンパイルに失敗したため、プロファイリングがオンにならない
 
-There is a known incompatibility between Ruby 2.7 and older GCC versions (4.8 and below) that impacts the profiler ([upstream Ruby report][6], [`dd-trace-rb` bug report][7]). This can result in the following error message: "Your ddtrace installation is missing support for the Continuous Profiler because compilation of the Ruby VM just-in-time header failed. Your C compiler or Ruby VM just-in-time compiler seem to be broken."
+Ruby 2.7 と古いバージョンの GCC (4.8 以下) の間には、プロファイラに影響を与える非互換性があることが知られています ([アップストリーム Ruby レポート][6]、[`dd-trace-rb` バグレポート][7])。その結果、次のようなエラーメッセージが表示されることがあります: "Your ddtrace installation is missing support for the Continuous Profiler because compilation of the Ruby VM just-in-time header failed. Your C compiler or Ruby VM just-in-time compiler seem to be broken.” (Ruby VM ジャストインタイムヘッダーのコンパイルに失敗したため、あなたの ddtrace インストールには Continuous Profiler のサポートが欠けています。C コンパイラまたは Ruby VM ジャストインタイムコンパイラが壊れているようです。)
 
-To fix this, update your operating system or Docker image so that the GCC version is something more recent than v4.8.
+これを解決するには、オペレーティングシステムまたは Docker イメージを更新して、GCC のバージョンが v4.8 よりも新しいものになるようにしてください。
 
-For further help with this issue, [contact support][2] and include the output of running `DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install ddtrace` and the resulting `mkmf.log` file.
+この問題についての更なるヘルプは、[サポートにお問い合わせ][2]の上、`DD_PROFILING_FAIL_INSTALL_IF_MISSING_EXTENSION=true gem install ddtrace` と結果の `mkmf.log` ファイルを実行したときの出力を含めてお送りください。
 
-## Frames omitted when backtraces are very deep
+## バックトレースが非常に深い場合、フレームが省略される
 
-The Ruby profiler truncates deep backtraces when collecting profiling data. Truncated backtraces are missing some of their caller functions, making it impossible to link them to the root call frame. As a result, truncated backtraces are grouped together under a `N frames omitted` frame.
+Ruby プロファイラーでは、プロファイリングデータを収集する際に、深いバックトレースを切り捨てています。切り捨てられたバックトレースは呼び出し元の関数の一部が欠落しているため、ルートコールフレームにリンクすることが不可能になります。その結果、切り捨てられたバックトレースは `N frames omitted` というフレームにまとめられます。
 
-You can increase the maximum depth with the `DD_PROFILING_MAX_FRAMES` environment variable, or in code:
+環境変数 `DD_PROFILING_MAX_FRAMES`、または次のコードで、最大深度を増やすことができます。
 
 ```ruby
 Datadog.configure do |c|
@@ -46,20 +44,20 @@ end
 
 ## Unexpected failures or errors from Ruby gems that use native extensions in `dd-trace-rb` 1.11.0+
 
-Starting from `dd-trace-rb` 1.11.0, the "CPU Profiling 2.0" profiler gathers data by sending `SIGPROF` unix signals to Ruby applications, enabling finer-grained data gathering.
+`dd-trace-rb` 1.11.0 から、プロファイラー "CPU Profiling 2.0" が、Ruby アプリケーションに unix シグナル `SIGPROF` を送ることでデータを集め、よりきめ細かいデータ収集が可能になりました。
 
-Sending `SIGPROF` is a common profiling approach, and may cause system calls from native extensions/libraries to be interrupted with a system [`EINTR` error code][8].
-Rarely, native extensions or libraries called by them may have missing or incorrect error handling for the `EINTR` error code.
+`SIGPROF` の送信は一般的なプロファイリング手法であり、ネイティブ拡張機能/ライブラリからのシステムコールがシステムの [`EINTR` エラーコード][8]で中断されることがあります。
+まれに、ネイティブ拡張機能またはネイティブ拡張機能から呼び出されたライブラリの `EINTR` エラーコードに対するエラー処理が欠けていたり、不正確な場合があります。
 
-The following incompatibilities are known:
-* Using the `mysql2` gem together with versions of `libmysqlclient` [older than 8.0.0][9]. The affected `libmysqlclient` version is known to be present on Ubuntu 18.04, but not 20.04 or later releases.
-* [Using the `rugged` gem.][10]
+以下のような非互換性があることが知られています。
+* `mysql2` gem を [8.0.0 より古い][9]バージョンの `libmysqlclient` と一緒に使用すること。影響を受ける `libmysqlclient` のバージョンは、Ubuntu 18.04 に存在することが知られていますが、20.04 またはそれ以降のリリースには存在しません。
+* [`rugged` gem を使用すること。][10]
 * Using the `passenger` gem/Phusion Passenger web server [older than 6.0.19][11]
 
 In these cases, the latest version of the profiler automatically detects the incompatibility and applies a workaround.
 
-If you encounter failures or errors from Ruby gems that use native extensions other than those listed above, you can manually enable the "no signals" workaround, which avoids the use of `SIGPROF` signals.
-To enable this workaround, set the `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` environment variable to `true`, or in code:
+上記以外のネイティブ拡張機能を使用する Ruby gem で失敗やエラーが発生した場合、手動で "no signals" 回避策を有効にすることで `SIGPROF` シグナルの使用を回避することができます。
+この回避策を有効にするには、環境変数 `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` を `true` に設定します。
 
 ```ruby
 Datadog.configure do |c|
@@ -67,10 +65,10 @@ Datadog.configure do |c|
 end
 ```
 
-**Note**: The above setting is only available starting in `dd-trace-rb` 1.12.0.
+**注**: 上記の設定は `dd-trace-rb` 1.12.0 以降でのみ有効です。
 
-Let our team know if you find or suspect any incompatibilities [by opening a support ticket][2].
-Doing this enables Datadog to add them to the auto-detection list, and to work with the gem/library authors to fix the issue.
+非互換性を見つけたり疑ったりした場合は、[サポートチケット][2]で弊社チームにお知らせください。
+そうすることで、Datadog はそれらを自動検出リストに追加し、gem/ライブラリの作者と協力して問題を解決することができます。
 
 ## Segmentation faults in `gc_finalize_deferred` in Ruby versions 2.6 to 3.2
 
@@ -88,7 +86,7 @@ Datadog.configure do |c|
 end
 ```
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -21,7 +21,7 @@
 "categories":
 - network
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/twingate/README.md"
 "display_on_public_website": true
@@ -68,21 +68,21 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
-[Twingate][1] is a zero trust network access platform that allows fast growing companies to quickly and easily provide secure access to their AWS environment. By incorporating modern technologies such as NAT traversal, QUIC, private proxies, and split tunneling, Twingate can replace a traditional or cloud VPN while improving user performance and overall security.
+[Twingate][1] は、急成長する企業が迅速かつ容易に AWS 環境への安全なアクセスを提供できる、ゼロトラストのネットワークアクセスプラットフォームです。NAT トラバーサル、QUIC、プライベートプロキシ、スプリットトンネリングなどの最新技術を組み込むことで、Twingate はユーザーパフォーマンスと全体的なセキュリティを向上しながら、従来の VPN やクラウド VPN を置き換えることができます。
 
-This integration allows organizations to monitor a user's resource access activities in real time.
+このインテグレーションにより、企業はユーザーのリソースアクセスアクティビティをリアルタイムで監視することができます。
 
-## Setup
-### Prerequisites
-1. You have the Datadog Agent installed on the Twingate Connector server. You must be able to connect to that host and edit the files to configure the Agent and YAML Integration Configs. To install the Datadog Agent, see [Getting Started with the Agent][2].
-2. You must deploy the Twingate Connector. To enable real-time connection logs, see the [Twingate documentation][3].
+## セットアップ
+### 前提条件
+1. Twingate Connector サーバーに Datadog Agent がインストールされていること。そのホストに接続し、Agent と YAML インテグレーション構成を構成するためのファイルを編集できる必要があります。Datadog Agent をインストールするには、[Agent の概要][2]を参照してください。
+2. Twingate Connector をデプロイする必要があります。リアルタイムの接続ログを有効にするには、[Twingate ドキュメント][3]を参照してください。
 
-### Configure the Datadog Agent
+### Datadog Agent の構成
 #### Systemd Connector
-1. Set up [Datadog journald integration][4].
-2. Replace `journald.d/conf.yaml` with the following configuration:
+1. [Datadog journald インテグレーション][4]を設定します。
+2. `journald.d/conf.yaml` を以下の構成に置き換えます。
    ```yaml
     logs:
       - type: journald
@@ -100,14 +100,14 @@ This integration allows organizations to monitor a user's resource access activi
           replace_placeholder: ""
           pattern: "ANALYTICS "
    ```
-3. Add the `dd-agent` user to the `systemd-journal` group by using `usermod -a -G systemd-journal dd-agent`.
-4. Restart the Datadog Agent by running `service datadog-agent restart`.
-5. Confirm that the Twingate Analytic log appears in the [Log Explorer][5].
+3. `usermod -a -G systemd-journal dd-agent` を使って `dd-agent` ユーザーを `systemd-journal` グループに追加します。
+4. `service datadog-agent restart` を実行して、Datadog Agent を再起動します。
+5. [ログエクスプローラー][5]に Twingate Analytic のログが表示されることを確認します。
 
 
 #### Docker Connector
-##### Set up Datadog Docker integration for the Host Agent
-Add the following lines to the `datadog.yaml` configuration file:
+##### Host Agent の Datadog Docker インテグレーションを設定する
+コンフィレーションファイル `datadog.yaml` に以下の行を追加します。
 ```yaml
 logs_enabled: true
 listeners:
@@ -120,11 +120,11 @@ container_collect_all: true
 container_exclude: ["image:.*"]
 container_include: ["image:twingate/connector"]
 ```
-- Add the `dd-agent` user to the `docker` group by using `usermod -a -G docker dd-agent`.
-- Restart the Datadog Agent by running `service datadog-agent restart`.
+- `usermod -a -G docker dd-agent` で `dd-agent` ユーザーを `docker` グループに追加します。
+- `service datadog-agent restart` を実行して、Datadog Agent を再起動します。
 
-##### Set up Datadog Docker integration for the Container Agent
-Add additional parameters `-e DD_CONTAINER_EXCLUDE="image:.*"` and `-e DD_CONTAINER_INCLUDE="image:twingate/connector"` in the docker run command.
+##### Container Agent の Datadog Docker インテグレーションを設定する
+docker run コマンドに追加パラメーター `-e DD_CONTAINER_EXCLUDE="image:.*"` と `-e DD_CONTAINER_INCLUDE="image:twingate/connector"` を追加します。
 ```shell
 docker run -d --name datadog-agent \
            --cgroupns host \
@@ -142,8 +142,8 @@ docker run -d --name datadog-agent \
            gcr.io/datadoghq/agent:latest
 ```
 
-##### Set up Twingate Connector with additional docker parameters
-Add the label `com.datadoghq.ad.logs` to the Twingate Connector docker run command:
+##### Docker パラメーターを追加して Twingate Connector を設定する
+Twingate Connector の docker run コマンドに、`com.datadoghq.ad.logs` ラベルを追加します。
 ```shell
 docker run -d --sysctl net.ipv4.ping_group_range="0 2147483647" \
   -l "com.datadoghq.ad.logs"='[{"service":"Twingate Connection","source":"Twingate","log_processing_rules":[{"type":"include_at_match","name":"analytics","pattern":"ANALYTICS"},{"type":"mask_sequences","name":"remove_analytics","replace_placeholder":"","pattern":"ANALYTICS "}]}]' \
@@ -155,20 +155,20 @@ docker run -d --sysctl net.ipv4.ping_group_range="0 2147483647" \
   --restart=unless-stopped \
   $(docker run --help | grep -- --pull >/dev/null && echo "--pull=always") twingate/connector:1
 ```
-**Note**: The Twingate Connector container needs to be recreated to add the new label 
+**注**: 新しいラベルを追加するには、Twingate Connector コンテナを再作成する必要があります。
 
-### Twingate Analytics Dashboard
-1. Go to the Datadog [Dashboard List][6].
-2. Search for the Twingate Analytics dashboard.
+### Twingate Analytics ダッシュボード
+1. Datadog の[ダッシュボードリスト][6]に移動します。
+2. Twingate Analytics ダッシュボードを検索します。
 
-## Troubleshooting
-Need help? Contact [Twingate Support][7].
+## トラブルシューティング
+ご不明な点は、[Twingate のサポートチーム][7]までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor network access with Twingate's offering in the Datadog Marketplace][8]
+- [Datadog Marketplace の Twingate の製品を使ってネットワークアクセスを監視する][8]
 
 [1]: https://www.twingate.com/
 [2]: https://docs.datadoghq.com/getting_started/agent/

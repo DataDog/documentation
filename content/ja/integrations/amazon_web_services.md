@@ -10,18 +10,18 @@
 - "cloud"
 - "iot"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Integrate your AWS services with Datadog."
+"description": "AWS サービスを Datadog と統合。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_web_services/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/monitor-aws-control-plane-api-usage-metrics/"
-  "tag": "Blog"
-  "text": "Monitor AWS control plane API usage metrics in Datadog"
+  "tag": "ブログ"
+  "text": "Datadog で AWS コントロールプレーン API の使用量メトリクスを監視する"
 - "link": "https://www.datadoghq.com/blog/aws-reinvent-2022-recap/"
-  "tag": "Blog"
-  "text": "Highlights from AWS re:Invent 2022"
+  "tag": "ブログ"
+  "text": "AWS re:Invent 2022 のハイライト"
 "git_integration_title": "amazon_web_services"
 "has_logo": true
 "integration_id": "amazon-web-services"
@@ -51,7 +51,7 @@ To quickly get started using the AWS integration, check out the [AWS getting sta
 
 Datadog's Amazon Web Services integration collects logs, events, and [all metrics from CloudWatch][2] for over [90 AWS services][3].
 
-## Setup
+## セットアップ
 
 Use one of the following methods to integrate your AWS accounts into Datadog for metric, event, tag, and log collection.
 
@@ -115,7 +115,7 @@ To use <a href="https://docs.datadoghq.com/integrations/amazon_web_services/#res
 
 ### Cloud Security Management
 
-#### Setup
+#### セットアップ
 
 If you do not have the AWS integration set up for your AWS account, complete the [set up process][16] above. Ensure that you enable Cloud Security Management when mentioned.
 
@@ -138,7 +138,7 @@ There are two ways to send AWS CloudWatch alarms to the Datadog Events Explorer:
 - Alarm polling: Alarm polling comes out of the box with the AWS integration and fetches metric alarms through the [DescribeAlarmHistory][19] API. If you follow this method, your alarms are categorized under the event source `Amazon Web Services`. **Note**: The crawler does not collect composite alarms. 
 - SNS topic: You can see all AWS CloudWatch alarms in your Events Explorer by subscribing the alarms to an SNS topic, then forwarding the SNS messages to Datadog. To learn how to receive SNS messages as events in Datadog, see [Receive SNS messages][20]. If you follow this method, your alarms are categorized under the event source `Amazon SNS`.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "amazon_web_services" >}}

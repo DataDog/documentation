@@ -9,101 +9,101 @@ further_reading:
     tag: Documentation
     text: Using Distributions in DogStatsD
 ---
-## Overview
+## 概要
 
-Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.
+ディストリビューションは、フラッシュ間隔の間に複数のホストから送信された値を集計して、インフラストラクチャー全体の統計的分布を測定するメトリクスタイプです。
 
-Global distributions instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][1] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side using Datadog's [DDSketch data structure][2]. 
+グローバルディストリビューションは、サービスのような論理的オブジェクトを、基礎となるホストから独立してインスツルメントします。Agent 側で集計する[ヒストグラム][1]とは異なり、グローバルディストリビューションはフラッシュインターバルの間に収集した全ての生データを送信し、集計は Datadog の [DDSketch データ構造][2]を使ってサーバー側で行われます。
 
-Distributions provide enhanced query functionality and configuration options that aren't offered with other metric types (count, rate, gauge, histogram):
-* **Calculation of percentile aggregations**: Distributions are stored as DDSketch data structures that represent raw, unaggregated data such that globally accurate percentile aggregations (p50, p75, p90, p95, p99 or any percentile of your choosing with up to two decimal points) can be calculated across the raw data from all your hosts. Enabling percentile aggregations can unlock advanced query functionalities such as: 
+ディストリビューションは、他のメトリクスタイプ (カウント、レート、ゲージ、ヒストグラム) では提供されない、強化されたクエリー機能および構成オプションを提供します。
+* **パーセンタイル集計の計算**: ディストリビューションは、生の非集計データを表す DDSketch データ構造として保存され、すべてのホストの生データに対してグローバルに正確なパーセンタイル集計 (p50、p75、p90、p95、p99 または任意のパーセンタイル (小数点以下 2 桁まで)) を計算することが可能です。パーセンタイル集計を有効にすると、以下のような高度なクエリ機能を利用できます。
 
-  * **Single percentile value over any timeframe**:
+  * **任意の時間枠における単一パーセンタイル値**:
 
-     _"What has the 99.9th percentile load time for my application been over the past week?"_
+     _"私のアプリケーションの 99.9 パーセンタイルのロード時間は、この 1 週間でどうなったか？"_
 
   * **Standard deviation over any timeframe**:
 
      _"What is the standard deviation (stddev) of my application's CPU consumption over the past month?"_
 
-  * **Percentile thresholds on metric monitors**:
+  * **メトリクスモニターのパーセンタイルしきい値**:
 
-    _"Alert me when the p95 of my application's request latency is greater than 200 ms for the last 5 min."_
+    _"私のアプリケーションの p95 のリクエストレイテンシーが過去 5 分間に 200 ms を超えたら警告を出す。"_
 
-  * **Threshold Queries**:
+  * **しきい値クエリ**:
 
-    _"I'd like to define a 30-day SLO where 95% of requests to my service are completed in under 5 seconds."_
+    _"私のサービスへのリクエストの 95% が 5 秒以内に完了する 30 日間の SLO を定義したい。"_
 
 
-* **Customization of tagging**: This functionality allows you to control the tagging scheme for custom metrics for which host-level granularity is not necessary (for example, transactions per second for a checkout service).
+* **タグ付けのカスタマイズ**: この機能を使用すると、ホストレベルの詳細度を必要としない場合にカスタムメトリクスのタグ付けスキームを制御することができます (チェックアウトサービスの毎秒トランザクションなど)。
 
-See the [Developer Tools section][1] for more implementation details. 
+実装の詳細については、[開発ツールのセクション][1]を参照してください。
 
-**Note:** Because distributions are a new metric type, they should be instrumented under new metric names during submission to Datadog.
+**注:** ディストリビューションは新しいメトリクスタイプであるため、Datadog への送信時に新しいメトリクス名の下でインスツルメンテーションを行う必要があります。
 
-## Enabling advanced query functionality
+## 高度なクエリ機能の有効化
 
 Like other metric types, such as `gauges` or `histograms`, distributions have the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distributions are initially tagged the same way as other metrics, with custom tags set in code. They are then resolved to host tags based on the host that reported the metric. 
 
 However, you can enable advanced query functionality such as the calculation of globally accurate percentile aggregations for all queryable tags on your distribution on the Metrics Summary page. This provides aggregations for `p50`, `p75`, `p90`, `p95`, and `p99` or any user-defined percentile of your choosing (with up to two decimal points such as 99.99). Enabling advanced queries also unlocks threshold queries and standard deviation.
 
-{{< img src="metrics/distributions/metric_detail_enable_percentiles.mp4" alt="A user enabling advanced percentiles and threshold query functionality by clicking on configure under the advanced section of a metric detail panel" video=true width=80% >}}
+{{< img src="metrics/distributions/metric_detail_enable_percentiles.mp4" alt="メトリクス詳細パネルの高度のセクションにある構成をクリックして、高度なパーセンタイルとしきい値クエリ機能を有効にするユーザー" video=true width=80% >}}
 
 After electing to apply percentile aggregations on a distribution metric, these aggregations are automatically available in the graphing UI:
 
-{{< img src="metrics/distributions/graph_percentiles.mp4" alt="Distribution metric aggregations" video=true" >}}
+{{< img src="metrics/distributions/graph_percentiles.mp4" alt="ディストリビューションメトリクスの集計" video=true" >}}
 
-You can use percentile aggregations in a variety of other widgets and for alerting: 
-* **Single percentile value over any timeframe**
+パーセンタイル集計は、他の様々なウィジェットやアラートで使用することができます。
+* **任意の時間枠における単一パーセンタイル値**:
 
-   _"What has the 99.9th percentile request duration for my application been over the past week?"_ 
+   _"私のアプリケーションの 99.9 パーセンタイルのリクエスト期間は、この 1 週間でどうなったか？"_
 
-{{< img src="metrics/distributions/percentile_qvw.jpg" alt="A query value widget displaying a single value (7.33s) for the 99.99 percentile aggregation of a single metric" style="width:80%;">}}
+{{< img src="metrics/distributions/percentile_qvw.jpg" alt="単一のメトリクスの 99.99 パーセンタイル集計の単一値 (7.33s) を表示するクエリ値ウィジェット" style="width:80%;">}}
 
-* **Percentile thresholds on metric monitors**
-  _"Alert me when the p95 of my application's request latency is greater than 200 ms for the last 5 min."_ 
+* **メトリクスモニターのパーセンタイルしきい値**
+  _"私のアプリケーションの p95 のリクエストレイテンシーが過去 5 分間に 200 ms を超えたら警告を出す。"_
 
-{{< img src="metrics/distributions/percentile_monitor.jpg" alt="Percentile threshold being set with a dropdown for alert conditions in a monitor " style="width:80%;">}}
+{{< img src="metrics/distributions/percentile_monitor.jpg" alt="モニターのアラート条件にドロップダウンで設定できるパーセンタイルしきい値" style="width:80%;">}}
 
-### Threshold Queries
+### しきい値クエリ
 
 <div class="alert alert-warning">
-Threshold queries are in public beta.
+しきい値クエリは公開ベータ版です。 
 </div>
 
 Enabling DDSketch-calculated globally-accurate percentiles on your distribution metrics unlocks threshold queries where you can count the number of raw distribution metric values if they exceed or fall below a numerical threshold. You can use this functionality to count the number of errors or violations compared to an anomalous numerical threshold on dashboards. Or you can also use threshold queries to define SLOs like "95% of requests were completed in under 10 seconds over the past 30 days". 
 
-With threshold queries for distributions with percentiles, you do not need to predefine a threshold value prior to metric submission, and have full flexibility to adjust the threshold value in Datadog.
+パーセンタイルのディストリビューションのしきい値クエリでは、メトリクスの送信前にしきい値を事前に定義する必要がなく、Datadog でしきい値を柔軟に調整することができます。
 
-To use threshold queries: 
+しきい値クエリを使用するには:
 
-1. Enable percentiles on your distribution metric on the Metrics Summary page.
-2. Graph your chosen distribution metric using the "count values..." aggregator.
-3. Specify a threshold value and comparison operator.
+1. Metrics Summary ページで、ディストリビューションメトリクスのパーセンタイルを有効にします。
+2. "count values..." アグリゲーターを使用して、選択したディストリビューションメトリクスをグラフ化します。
+3. しきい値と比較演算子を指定します。
 
-{{< img src="metrics/distributions/threshold_queries.mp4" video=true alt="A timeseries graph being visualized using the count values aggregator, with a threshold of greater than 8 seconds" style="width:80%;" >}}
+{{< img src="metrics/distributions/threshold_queries.mp4" video=true alt="カウント値集計ツールで可視化されている時系列グラフで、しきい値が 8 秒以上であるもの" style="width:80%;" >}}
 
-You can similarly create a metric-based SLO using threshold queries: 
-1. Enable percentiles on your distribution metric on the Metrics Summary page.
+同様に、しきい値クエリを使用してメトリクスベースの SLO を作成することができます。
+1. Metrics Summary ページで、ディストリビューションメトリクスのパーセンタイルを有効にします。
 2. Create a new Metric-Based SLO and define the numerator as the number of "good" events with a query on your chosen distribution metric using the "count values..." aggregator.
-3. Specify a threshold value and comparison operator.
-{{< img src="metrics/distributions/threshold_SLO.jpg" alt="Threshold Queries for SLOs" style="width:80%;">}}
+3. しきい値と比較演算子を指定します。
+{{< img src="metrics/distributions/threshold_SLO.jpg" alt="SLO のしきい値クエリ" style="width:80%;">}}
 
-## Customize tagging
+## タグ付けのカスタマイズ
 
-Distributions provide functionality that allows you to control the tagging for custom metrics where host-level granularity does not make sense. Tag configurations are _allowlists_ of the tags you'd like to keep. 
+ディストリビューションには、ホストレベルの詳細度が意味を持たない場合にメトリクスへのタグ付けを制御する機能があります。タグのコンフィギュレーションは維持したいタグの_許可リスト_になります。
 
-To customize tagging:
+タグ付けをカスタマイズするには:
 
-1. Click on your custom distribution metric name in the Metrics Summary table to open the metrics details sidepanel.
-2. Click the **Manage Tags** button to open the tag configuration modal.
-3. Click the **Custom...** tab to customize the tags you'd like to keep available for query. 
+1. Metrics Summary テーブルでカスタムディストリビューションのメトリクス名をクリックし、メトリクス詳細のサイドパネルを開きます。
+2. **Manage Tags** ボタンをクリックして、タグコンフィギュレーションモーダルを開きます。
+3. **Custom...** タブをクリックして、クエリ用に維持したいタグをカスタマイズします。
 
 **Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted.
 
-{{< img src="metrics/distributions/dist_manage.jpg" alt="Configuring tags on a distribution with the Manage Tags button" style="width:80%;">}}
+{{< img src="metrics/distributions/dist_manage.jpg" alt="Manage Tags ボタンでディストリビューションにタグを構成する" style="width:80%;">}}
 
-## Audit events
+## 監査イベント
 Any tag configuration or percentile aggregation changes create an event in the [event explorer][3]. This event explains the change and displays the user that made the change.
 
 If you created, updated, or removed a tag configuration on a distribution metric, you can see examples with the following event search:
@@ -111,12 +111,12 @@ If you created, updated, or removed a tag configuration on a distribution metric
 https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20tag%20configuration
 ```
 
-If you added or removed percentile aggregations to a distribution metric, you can see examples with the following event search:
+パーセンタイル集計をディストリビューションメトリクスに追加または削除した場合、次のイベント検索の例を見ることができます。
 ```text
 https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags%3Aaudit%20status%3Aall%20priority%3Aall%20percentile%20aggregations
 ```
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

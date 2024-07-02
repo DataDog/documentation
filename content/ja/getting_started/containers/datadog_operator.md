@@ -1,29 +1,28 @@
 ---
 title: Getting Started with the Datadog Operator
-kind: documentation
 further_reading:
   - link: /containers/datadog_operator
     tag: documentation
     text: Datadog Operator
   - link: "https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md"
-    tag: Source Code
+    tag: ソースコード
     text: "Datadog Operator: Advanced Installation"
   - link: "https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md"
-    tag: Source Code
+    tag: ソースコード
     text: "Datadog Operator: Configuration"
 ---
 
-The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enables you to deploy and configure the Datadog Agent in a Kubernetes environment. This guide describes how to use the Operator to deploy the Datadog Agent.
+[Datadog Operator][1] は、Kubernetes 環境に Datadog Agent をデプロイし、構成することができるオープンソースの [Kubernetes Operator][2] です。このガイドでは、Datadog Agent をデプロイするために Operator を使用する方法について説明します。
 
-## Prerequisites
+## 前提条件
 
 - Kubernetes v1.20.X+
-- [Helm][3] for deploying the Datadog Operator
-- The Kubernetes command-line tool, [kubectl][4], for installing the Datadog Agent
+- Datadog Operator をデプロイするための [Helm][3]
+- Datadog Agent をインストールするための Kubernetes コマンドラインツール、[kubectl][4]
 
-## Installation and deployment
+## インストールとデプロイメント
 
-1. Install the Datadog Operator with Helm:
+1. Helm で Datadog Operator をインストールします。
   ```bash
   helm repo add datadog https://helm.datadoghq.com
   helm install my-datadog-operator datadog/datadog-operator
@@ -36,7 +35,7 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
 
   **Note**: add the application key for autoscaling using the external metrics server.
 
-3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The following sample configuration enables metrics, logs, and APM:
+3. `DatadogAgent` のデプロイメント構成の仕様を記述した `datadog-agent.yaml` ファイルを作成します。以下のサンプル構成では、メトリクス、ログ、APM を有効にしています。
   ```yaml
   apiVersion: datadoghq.com/v2alpha1
   kind: DatadogAgent
@@ -56,7 +55,7 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
   ```
   For all configuration options, see the [Operator configuration spec][6].
 
-4. Deploy the Datadog Agent:
+4. Datadog Agent をデプロイします。
   ```bash
   kubectl apply -f /path/to/your/datadog-agent.yaml
   ```
@@ -91,11 +90,11 @@ With the above configuration, Agent pods run as single containers with three Age
 
 **Note**: Running multiple Agent processes in a single container is discouraged in orchestrated environments such as Kubernetes. Pods running multiple processes need their lifecycles to be managed by a process manager, which is not directly controllable by Kubernetes and potentially leads to inconsistencies or conflicts in the container lifecycle management.
 
-## Validation
+## 検証
 
-Use `kubectl get daemonset` and `kubectl get pod -owide` to validate your installation.
+`kubectl get daemonset` と `kubectl get pod -owide` を使用して、インストールを検証します。
 
-In a cluster with two worker Nodes, you should see Agent Pods created on each Node:
+2 つのワーカーノードを持つクラスターでは、それぞれのノードに Agent ポッドが作成されているのが確認できるはずです。
 
 ```bash
 $ kubectl get daemonset
@@ -109,16 +108,16 @@ datadog-agent-k26tp                          1/1     Running   0          5m59s 
 datadog-agent-zcxx7                          1/1     Running   0          5m59s   10.244.1.7    kind-worker2
 ```
 
-## Cleanup
+## クリーンアップ
 
-The following commands delete all Kubernetes resources created in this guide:
+以下のコマンドは、本ガイドで作成したすべての Kubernetes リソースを削除します。
 
 ```bash
 kubectl delete datadogagent datadog
 helm delete my-datadog-operator
 ```
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

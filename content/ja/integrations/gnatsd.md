@@ -24,7 +24,7 @@
 "categories":
 - "message queues"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/gnatsd/README.md"
 "display_on_public_website": true
@@ -68,11 +68,11 @@ Get metrics from Gnatsd service in real time to:
 - Visualize and monitor Gnatsd states
 - Be notified about Gnatsd failovers and events.
 
-## Setup
+## セットアップ
 
 The Gnatsd check is not included in the [Datadog Agent][1] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Gnatsd check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -84,7 +84,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Gnatsd c
 
 2. Configure your integration similar to core [integrations][3].
 
-### Configuration
+### 構成
 
 1. Edit the `gnatsd.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4] to start collecting your Gnatsd [metrics](#metrics). See the [sample gnatsd.d/conf.yaml][5] for all available configuration options.
 
@@ -98,24 +98,24 @@ Run the [Agent's status subcommand][7] and look for `gnatsd` under the Checks se
 
 The gnatsd check is compatible with all major platforms
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "gnatsd" >}}
 
 
 **Note**: If you use custom Nats cluster names, your metrics may look like this:
 `gnatsd.connz.connections.cluster_name.in_msgs`
 
-### Events
+### イベント
 
 The gnatsd check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "gnatsd" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

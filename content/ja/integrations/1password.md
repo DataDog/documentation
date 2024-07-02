@@ -22,7 +22,7 @@
 - event management
 - issue tracking
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -114,7 +114,7 @@ To get started, copy the access token key from the previous step.
 
 Search your Datadog logs with `source:1password`. If you installed the integration correctly, you should be able to see 1Password events.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 

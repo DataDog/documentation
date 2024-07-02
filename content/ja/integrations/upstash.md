@@ -29,7 +29,7 @@
 - cloud
 - ai/ml
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/upstash/README.md"
 "display_on_public_website": true
@@ -97,9 +97,9 @@ To centralize your monitoring stack and enable a comprehensive view of your data
     * Total Data Size
     * Throughput
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Visit [Upstash][1] to sign up for free. Once registered, visit the [Upstash integration tile][2] in Datadog and install the integration. Once installed, navigate to the **Configure** tab and click **Connect Accounts**. This guides you through the Datadog OAuth flow to grant Upstash access to your database metrics.
 
@@ -109,15 +109,15 @@ To remove the Datadog integration from Upstash, navigate to the [Upstash integra
 
 Additionally, ensure that all API keys associated with this integration have been disabled by searching for `upstash` on the [API Keys management page][4].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "upstash" >}}
 
-### Events
+### イベント
 The Upstash integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Upstash integration does not include any service checks.
 

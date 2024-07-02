@@ -117,7 +117,7 @@ context to include data that are most important to the issue or are not part of 
 The Datadog dashboard gives you the insight you need to see where in your code the tracepoints are being triggered. Allowing you to
 identify hotspots of debug activity.
 
-### Events
+### イベント
 
 Each tracepoint that is triggered will be sent to Datadog as an event, containing the appropriate tags, and a link to view the
 data in NerdVision. Tracepoints allow you to gather the full stack and variables that are active at the frame the tracepoint is
@@ -128,11 +128,11 @@ triggered.
 With dynamic logging you can inject new log messages at any point of you code to add that extra data you missed. Each log message
 that is triggered will be synced with Datadog as soon as it has been processed by NerdVision.
 
-### Metrics
+### メトリクス
 
 NerdVision produces metrics for online clients and tracepoint triggers.
 
-### Service Checks
+### サービスチェック
 
 NerdVision does not include any service checks.
 

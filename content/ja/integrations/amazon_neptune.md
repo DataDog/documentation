@@ -4,7 +4,7 @@
 - cloud
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon Neptune metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_neptune/"
@@ -29,9 +29,9 @@ Amazon Neptune is a fast, reliable, fully managed graph database service that ma
 
 Enable this integration to see all your Neptune metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -56,21 +56,21 @@ Configure Amazon Neptune to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_neptune" >}}
 
 
-### Events
+### イベント
 
 The Amazon Neptune integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Neptune integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

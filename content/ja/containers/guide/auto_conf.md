@@ -12,7 +12,7 @@ further_reading:
   tag: Documentation
   text: Docker and Integrations
 - link: /agent/guide/autodiscovery-management/
-  tag: Documentation
+  tag: ドキュメント
   text: Autodiscovery Management
 algolia:
   tags: [auto conf,ignore auto conf, autoconf,ignore autoconf]
@@ -20,7 +20,7 @@ algolia:
 
 When the Agent runs as a container, [Autodiscovery][49] tries to discover other containers based on default configuration files named `auto_conf.yaml`. You can find these files in the corresponding `conf.d/<INTEGRATION>.d/` folders for the following integrations:
 
-| Integration                    | Auto-configuration file |
+| インテグレーション                    | オートディスカバリー構成ファイル |
 | ------                         | --------                |
 | [Apache][1]                    | [auto_conf.yaml][2]     |
 | [Cilium][3]                    | [auto_conf.yaml][4]     |
@@ -46,7 +46,7 @@ When the Agent runs as a container, [Autodiscovery][49] tries to discover other 
 | [Riak][39]                     | [auto_conf.yaml][40]    |
 | [Tomcat][41]                   | [auto_conf.yaml][42]    |
 
-The `auto_conf.yaml` configuration files cover all required parameters to set up a specific integration, with their corresponding [Autodiscovery Templates Variables][43] in place to take into account the containerized environment.
+`auto_conf.yaml` 構成ファイルには、特定のインテグレーションのセットアップに必要なすべてのパラメーターと、コンテナ環境を考慮して用意されているそれらに相当する[オートディスカバリーテンプレートの変数][43]が含まれます。
 
 ## Override auto-configuration
 Each `auto_conf.yaml` file provides a default configuration. To override this, you can add a custom configuration in [Kubernetes annotations][50] or [Docker Labels][51].
@@ -88,7 +88,7 @@ Add `datadog.ignoreAutoconfig` to your `datadog-values.yaml`:
 
 ```yaml
 datadog:
- #List of integration(s) to ignore auto_conf.yaml.
+ #auto_conf.yaml を無視するインテグレーションの一覧。
   ignoreAutoConfig:
     - redisdb
     - istio
@@ -107,7 +107,7 @@ To disable auto configuration integration(s) with the Operator, add the `DD_IGNO
 ```
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
-To disable auto configuration integration(s) with your DaemonSet, add the `DD_IGNORE_AUTOCONF` variable to your Agent manifest:
+DaemonSet との自動構成インテグレーションを無効にするには、Agent マニフェストに `DD_IGNORE_AUTOCONF` 変数を追加します。
 
 ```yaml
 DD_IGNORE_AUTOCONF="redisdb istio"
@@ -115,7 +115,7 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

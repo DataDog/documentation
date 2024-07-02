@@ -21,13 +21,13 @@ algolia:
   tags: [metric types]
 ---
 
-## Overview
+## 概要
 
-Each metric submitted to Datadog should have a type. A metric's type affects how the metric values are displayed when queried, as well as the associated graphing possibilities within Datadog using additional [modifiers][1] and [functions][2]. A metric's type is displayed on the details side panel for the given metric on the [Metrics Summary page][3].
+Datadog に送信される各メトリクスにはタイプが必要です。メトリクスのタイプは、クエリ時のメトリクス値の表示方法、および追加の[修飾子][1]および[関数][2]を使用した Datadog 内の関連するグラフ化の可能性に影響します。メトリクスのタイプは、[メトリクスの概要ページ][3]の特定のメトリクスの詳細サイドパネルに表示されます。
 
-**Note**: Changing the metric type in this details side panel can change metric behavior in all existing visualizations and monitors, potentially rendering historical data as nonsensical.
+**注**: この詳細サイドパネルでメトリクスタイプを変更すると、既存のすべての視覚化およびモニターのメトリクスの動作が変更され、履歴データが無意味なものになる可能性があります。
 
-The following metric submission types are accepted:
+メトリクスには、次の送信タイプを指定できます。
 
 - [COUNT](?tab=count#metric-types)
 - [RATE](?tab=rate#metric-types)
@@ -36,83 +36,83 @@ The following metric submission types are accepted:
 - [HISTOGRAM](?tab=histogram#metric-types)
 - [DISTRIBUTION](?tab=distribution#metric-types)
 
-These different metric submission types are mapped to four in-app metric types found within the Datadog web application:
+次の各種メトリクス送信タイプは、Datadog ウェブアプリケーション内にある 4 つのアプリ内メトリクスタイプにマッピングされます。
 
 - COUNT
 - RATE
 - GAUGE
 - DISTRIBUTION
 
-**Note**: If you submit a metric to Datadog without a type, the metric type appears as `Not Assigned` within Datadog. The `Not Assigned` metric type cannot be further changed to another in-app type until an initial metric type is submitted.
+**注**: タイプなしでメトリクスを Datadog に送信すると、メトリクスタイプは Datadog 内で `Not Assigned` と表示されます。`Not Assigned` メトリクスタイプは、最初のメトリクスタイプが送信されるまで、別のアプリ内タイプに変更できません。
 
-## Submission vs. in-app type
+## 送信とアプリ内タイプ
 
-Metrics are submitted to Datadog in three main ways:
+メトリクスは、主に次の 3 つの方法で Datadog に送信されます。
 
-- [Agent check][5]
+- [Agent チェック][5]
 - [DogStatsD][6]
-- [Datadog's HTTP API][7]
+- [Datadog の HTTP API][7]
 
-The majority of data that Datadog receives is submitted by the Agent, either through an Agent check or DogStatsD. For these submission methods, a metric's type determines how multiple values collected on an Agent in [a flush time interval][8] are aggregated. The Agent combines these values into a single representative metric value for that interval. This combined value is stored with a single timestamp in Datadog.
+Datadog が受信するデータの大部分は、Agent チェックまたは DogStatsD を介して、Agent によって送信されます。これらの送信方法の場合、メトリクスのタイプにより、[フラッシュ時間間隔][8]で Agent で収集された複数の値の集計方法が決まります。Agent は、これらの値を組み合わせて、その間隔の単一の代表的なメトリクス値にします。この組み合わせた値は、単一のタイムスタンプとともに Datadog に保存されます。
 
-Data submitted directly to the Datadog API is not aggregated by Datadog, with the exception of distribution metrics. The raw values sent to Datadog are stored as-is.
+Datadog API に直接送信されたデータは、ディストリビューションメトリクスを除き、Datadog によって集計されません。Datadog に送信された生の値はそのまま保存されます。
 
-Read the [Submission types and Datadog in-app types](#submission-types-and-datadog-in-app-types) section to learn about how different metric submission types are mapped to their corresponding in-app types.
+[送信タイプと Datadog アプリ内タイプ](#submission-types-and-datadog-in-app-types)セクションを読んで、各種メトリクス送信タイプが対応するアプリ内タイプにどのようにマッピングされるかを確認してください。
 
-## Metric types
+## メトリクスタイプ
 
-### Definition
+### 定義
 
 {{< tabs >}}
 {{% tab "COUNT" %}}
 
-The COUNT metric submission type represents the total number of event occurrences in one time interval. A COUNT can be used to track the total number of connections made to a database or the total number of requests to an endpoint. This number of events can accumulate or decrease over time—it is not monotonically increasing.
+COUNT メトリクス送信タイプは、ある時間間隔のイベント発生の合計数を表します。COUNT を使用して、データベースへの接続の合計数またはエンドポイントへのリクエストの合計数を追跡できます。このイベントの数は、時間の経過とともに累積または減少する可能性があり、単調に増加することはありません。
 
-**Note**: A COUNT is different from the RATE metric type, which represents the number of event occurrences normalized per second given the defined time interval.
+**注**: この COUNT とは異なり、RATE は定義された時間間隔で正規化される 1 秒あたりのイベントの数を表します。
 
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-The RATE metric submission type represents the total number of event occurrences per second in one time interval. A RATE can be used to track how often something is happening—like the frequency of connections made to a database or the flow of requests made to an endpoint.
+RATE メトリクス送信タイプは、ある時間間隔の 1 秒あたりのイベント発生の合計数を表します。RATE を使用して、データベースへの接続頻度やエンドポイントへのリクエストフローなど、何かが発生している頻度を追跡できます。
 
-**Note**: A RATE is different from the COUNT metric submission type, which represents the total number of event occurrences in the given time interval.
+**注**: この RATE とは異なり、COUNT メトリクス送信タイプは特定の時間間隔内のイベント発生の合計数を表します。
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-The GAUGE metric submission type represents a snapshot of events in one time interval. This representative snapshot value is the last value submitted to the Agent during a time interval. A GAUGE can be used to take a measure of something reporting continuously—like the available disk space or memory used.
+GAUGE メトリクス送信タイプは、ある時間間隔のイベントのスナップショットを表します。この代表的なスナップショット値は、時間間隔中に Agent に送信された最後の値です。GAUGE を使用して、使用可能なディスク容量や使用中のメモリなど、継続的にレポートする何かの測定を行うことができます。
 
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-The HISTOGRAM metric submission type represents the statistical distribution of a set of values calculated Agent-side in one time interval. Datadog's HISTOGRAM metric type is an extension of the StatsD timing metric type. The Agent aggregates the values that are sent in a defined time interval and produces different metrics which represent the set of values.
+HISTOGRAM メトリクス送信タイプは、ある時間間隔の Agent 側で計算された一連の値の統計分布を表します。Datadog の HISTOGRAM メトリクスタイプは、StatsD タイミングメトリクスタイプの拡張機能です。Agent は、定義された時間間隔で送信される値を集計し、一連の値を表すさまざまなメトリクスを生成します。
 
-If you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` in a given time interval, the following metrics are produced by the Agent by default:
+ある時間間隔内に HISTOGRAM メトリクス `<メトリクス名>` に対して `X` 個の値を送信した場合、次のメトリクスが Agent によってデフォルトで生成されます。
 
 `<METRIC_NAME>.avg`
-: Represents the average of those `X` values in the time interval.<br>
+: 時間間隔内の `X` 個の値の平均値を表します。<br>
 **Datadog In-App Type**: GAUGE
 
 `<METRIC_NAME>.count`
-: Represents the number of values submitted during the interval, `X`. The Agent submits this number as a RATE so it would show in app the value of `X/interval`. <br>
+: 間隔内に送信された値の数 (つまり `X`) を表します。Agent はその数を RATE として送信することで、アプリ内で値 `X/interval` として表示します。 <br>
 **Datadog In-App Type**: RATE
 
 `<METRIC_NAME>.median`
-: Represents the median of those `X` values in the time interval.<br>
+: 時間間隔内の `X` 個の値の中央値を表します。<br>
 **Datadog In-App Type**: GAUGE
 
 `<METRIC_NAME>.95percentile` 
-: Represents the 95th percentile of those `X` values in the time interval.<br>
+: 時間間隔内の `X` 個の値の 95 パーセンタイルを表します。<br>
 **Datadog In-App Type**: GAUGE
 
 `<METRIC_NAME>.max`
-: Represents the maximum value of those `X` values sent during the time interval.<br>
+: 時間間隔内に送信された `X` 個の値の最大値を表します。<br>
 **Datadog In-App Type**: GAUGE
 
-**Note**:
+**注**:
 
-- Configure which aggregations you want to send to Datadog with the `histogram_aggregates` parameter in your [`datadog.yaml` configuration file][1]. By default, only `max`, `median`, `avg`, and `count` aggregations are sent to Datadog. `sum` and `min` are also available.
-- Configure which percentile aggregation you want to send to Datadog with the `histogram_percentiles` parameter in your [`datadog.yaml` configuration file][2]. By default, only the `95percentile` is sent to Datadog.
+- どの集計を Datadog に送信するかは、[`datadog.yaml` 構成ファイル][1]の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、`count` の集計だけが Datadog に送信されます。`sum` および `min` も利用できます。
+- どのパーセンタイル集計を Datadog に送信するかは、[`datadog.yaml` 構成ファイル][2]の `histogram_percentiles` パラメーターで構成します。デフォルトでは、`95percentile` のパーセンタイルだけが Datadog に送信されます。
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/04d8ae9dd4bc6c7a64a8777e8a38127455ae3886/pkg/config/config_template.yaml#L106-L114
@@ -120,67 +120,67 @@ If you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` in a given time in
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 
-The DISTRIBUTION metric submission type represents the global statistical distribution of a set of values calculated across your entire distributed infrastructure in one time interval. A DISTRIBUTION can be used to instrument logical objects, like services, independently from the underlying hosts.
+DISTRIBUTION メトリクス送信タイプは、ある時間間隔の分散インフラストラクチャー全体にわたって計算された一連の値のグローバルな統計分布を表します。DISTRIBUTION を使用して、基底のホストから独立して、サービスなどの論理オブジェクトをインスツルメントすることができます。
 
-Unlike the HISTOGRAM metric type, which aggregates on the Agent during a given time interval, a DISTRIBUTION metric sends all the raw data during a time interval to Datadog. Aggregations occur on the server-side. Because the underlying data structure represents raw, unaggregated data, distributions provide two major features:
+Agent で特定の時間間隔内の集計を行う HISTOGRAM メトリクスタイプと異なり、DISTRIBUTION メトリクスは、時間間隔内に収集されたすべての未加工データを Datadog に送信します。サーバー側で集計を行います。基になるデータ構造は集計されておらず、未加工データを表すため、ディストリビューションは次の 2 つの主要な機能を提供します。
 
-- Calculation of percentile aggregations
-- Customization of tagging
+- パーセンタイル集計の計算
+- タグ付けのカスタマイズ
 
-If you send `X` values for a DISTRIBUTION metric `<METRIC_NAME>` in a given time interval, the following aggregations are available for query by default:
+ある時間間隔内に DISTRIBUTION メトリクス `<メトリクス名>` に対して `X` 個の値を送信した場合、デフォルトで次の集計をクエリに利用できます。
 
 `avg:<METRIC_NAME>`
-: Represents the average of those `X` values in the time interval.<br>
+: 時間間隔内の `X` 個の値の平均値を表します。<br>
 **Datadog In-App Type**: GAUGE
 
 `count:<METRIC_NAME>`
-: Represents the number of points submitted in the time interval, `X`. The Agent then sends it as a COUNT.<br>
+: 時間間隔内に送信されたポイントの数 (つまり `X`) を表します。Agent はその数を COUNT として送信します。<br>
 **Datadog In-App Type**: COUNT
 
 `max:<METRIC_NAME>`
-: Represents the maximum value of those `X` values sent in the time interval.<br>
+: 時間間隔内に送信された `X` 個の値の最大値を表します。<br>
 **Datadog In-App Type**: GAUGE
 
 `min:<METRIC_NAME>`
-: Represents the minimum value of those `X` sent in the time interval.<br>
+: 時間間隔内に送信された `X` 個の値の最小値を表します。<br>
 **Datadog In-App Type**: GAUGE
 
 `sum:<METRIC_NAME>`
-: Represents the sum of all `X` values sent in the time interval.<br>
+: 時間間隔内に送信された `X` 個の値すべての合計を表します。<br>
 **Datadog In-App Type**: COUNT
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Example
+### 例
 
 {{< tabs >}}
 {{% tab "COUNT" %}}
 
 Suppose you are submitting a COUNT metric, `notifications.sent`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
 
-The Agent adds all of the values received in one time interval. Then, it submits the total number, in this case `15`, as the COUNT metric's value.
+Agent は、ある時間間隔で受信したすべての値を追加します。その後、合計数 (この場合は `15`) を COUNT メトリクスの値として送信します。
 
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-Suppose you are submitting a RATE metric, `queue_messages.rate`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
+Datadog Agent を実行している単一のホストから RATE メトリクス、`queue_messages.rate` を送信するとします。このホストは、フラッシュ時間間隔で次の値を出力します: `[1,1,1,2,2,2,3,3]`。
 
-The Agent adds all of the values received in one time interval. Then, it submits the total number divided by the total number of seconds in this time interval. In this case, if the flush interval is 10 seconds, the value submitted would be `1.5` as the RATE metric's value.
+Agent は、ある時間間隔で受信したすべての値を追加します。その後、 この時間間隔の合計秒数で割った合計数を送信します。この場合、フラッシュ間隔が 10 秒の場合、RATE メトリクスの値として送信される値は `1.5` になります。
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-Suppose you are submitting a GAUGE metric, `temperature`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[71,71,71,71,71,71,71.5]`.
+Datadog Agent を実行している単一のホストから GAUGE メトリクス、`temperature` を送信するとします。このホストは、フラッシュ時間間隔で次の値を出力します: `[71,71,71,71,71,71,71.5]`。
 
-The Agent submits the last reported number, in this case `71.5`, as the GAUGE metric's value.
+Agent は、最後に報告された数値 (この場合は `71.5`) を GAUGE メトリクスの値として送信します。
 
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-For example, suppose you are submitting a HISTOGRAM metric, `request.response_time.histogram`, from a web server that reports the values `[1,1,1,2,2,2,3,3]` in a flush time interval. By default, the Agent submits the following metrics to Datadog which represent the statistical distribution of these values in this time interval:
+たとえば、フラッシュ時間間隔で値 `[1,1,1,2,2,2,3,3]` を報告するウェブサーバーから HISTOGRAM メトリクス `request.response_time.histogram` を送信するとします。デフォルトでは、Agent は、この時間間隔のこれらの値の統計分布を表す以下のメトリクスを Datadog に送信します。
 
-| Metric Name                                    | Value  | Datadog In-App Type |
+| メトリクス名                                    | 値  | Datadog アプリ内タイプ |
 | ---------------------------------------------- | ------ | ------------------- |
 | `request.response_time.histogram.avg`          | `1.88` | GAUGE               |
 | `request.response_time.histogram.count`        | `0.8`  | RATE                |
@@ -191,9 +191,9 @@ For example, suppose you are submitting a HISTOGRAM metric, `request.response_ti
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 
-Suppose you are submitting a DISTRIBUTION metric, `request.response_time.distribution`, from two webservers: `webserver:web_1` and `webserver:web_2`. Suppose in a given flush time interval, `webserver:web_1` reports the metric with the values `[1,1,1,2,2,2,3,3]`, and `webserver:web_2` reports the same metric with the values `[1,1,2]`. Over this time interval, the following five aggregations will represent the global statistical distribution of all values collected from both webservers:
+2 つのウェブサーバー `webserver:web_1` と `webserver:web_2` から DISTRIBUTION メトリクス、`request.response_time.distribution` を送信するとします。特定のフラッシュ時間間隔で、`webserver:web_1` が値 `[1,1,1,2,2,2,3,3]` を持つメトリクスを報告し、`webserver:web_2` が値 `[1,1,2]` を持つ同じメトリクスを報告するとします。この時間間隔で、次の 5 つの集計は、両方のウェブサーバーから収集されたすべての値のグローバルな統計分布を表します。
 
-| Metric Name                                | Value  | Datadog In-App Type |
+| メトリクス名                                | 値  | Datadog アプリ内タイプ |
 | ------------------------------------------ | ------ | ------------------- |
 | `avg:request.response_time.distribution`   | `1.73` | GAUGE               |
 | `count:request.response_time.distribution` | `11`   | COUNT               |
@@ -201,13 +201,13 @@ Suppose you are submitting a DISTRIBUTION metric, `request.response_time.distrib
 | `min:request.response_time.distribution`   | `1`    | GAUGE               |
 | `sum:request.response_time.distribution`   | `19`   | COUNT               |
 
-#### Calculation of percentile aggregations
+#### パーセンタイル集計の計算
 
-Like other metric types, such as GAUGE or HISTOGRAM, the DISTRIBUTION metric type has the following aggregations available: `count`, `min`, `max`, `sum`, and `avg`. Distribution metrics are initially tagged the same way as other metrics (with custom tags set in the code).
+GAUGE、HISTOGRAM などのメトリクスタイプと同様に、DISTRIBUTION メトリクスタイプでは `count`、`min`、`max`、`sum`、`avg` の集計を利用できます。ディストリビューションメトリクスは、まず他のメトリクスと同じ方法で (コードで設定されたカスタムタグを使用して) タグ付けられます。
 
-Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be added to distribution metrics. If you were to add percentile aggregations to your distribution metric in-app, the following five additional aggregations are available for query:
+パーセンタイル集計（p50`、`p75`、`p90`、`p95`、`p99`）をディストリビューションメトリクスに追加できます。アプリ内のディストリビューションメトリクスにパーセンタイル集計を追加する場合、次の 5 つの追加集計をクエリに使用できます。
 
-| Metric Name                              | Value | Datadog In-app Type |
+| メトリクス名                              | 値 | Datadog アプリ内タイプ |
 | ---------------------------------------- | ----- | ------------------- |
 | `p50:request.response_time.distribution` | `2`   | GAUGE               |
 | `p75:request.response_time.distribution` | `2`   | GAUGE               |
@@ -215,36 +215,36 @@ Additional percentile aggregations (`p50`, `p75`, `p90`, `p95`, `p99`) can be ad
 | `p95:request.response_time.distribution` | `3`   | GAUGE               |
 | `p99:request.response_time.distribution` | `3`   | GAUGE               |
 
-That is, for a distribution metric with added percentile aggregations during a given time interval, the following 10 aggregations are available: `count`, `sum`, `min`, `max`, `avg`, `p50`, `p75`, `p90`, `p95`, and `p99`.
+つまり、特定の時間間隔でパーセンタイル集計を指定したディストリビューションメトリクスであれば、`count`、`sum`、`min`、`max`、`avg`、`p50`、`p75`、`p90`、`p95`、`p99` の 10 個の集計を使用できます。
 
-#### Customization of tagging
+#### タグ付けのカスタマイズ
 
-This functionality allows you to control tagging for metrics where host-level granularity is not necessary. Learn more about [Metrics without LimitsTM][1].
+この機能を使用すると、ホストレベルの粒度を必要としない場合に、メトリクスのタグ付けを制御できます。[Metrics without Limits™][1] の詳細についてはこちらをご覧ください。
 
-**Note**: The exclusion of tags with `!` is not accepted with this feature.
+**注**: この機能では、`!` によるタグの除外を使用できません。
 
 
 [1]: /metrics/metrics-without-limits/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Submission
+### 送信
 
 {{< tabs >}}
 {{% tab "COUNT" %}}
 
-Submit your COUNT type metrics from one of the following sources:
+次のソースのいずれかから COUNT タイプのメトリクスを送信します。
 
-| Submission Source | Submission Method (python)           | Submission Type | Datadog In-App Type |
+| 送信元 | 送信方法 (Python)           | 送信タイプ | Datadog アプリ内タイプ |
 | ----------------- | ------------------------------------ | --------------- | ------------------- |
-| [Agent check][1]  | `self.count(...)`                    | COUNT           | COUNT               |
-| [Agent check][2]  | `self.monotonic_count(...)`          | COUNT           | COUNT               |
+| [Agent チェック][1]  | `self.count(...)`                    | COUNT           | COUNT               |
+| [Agent チェック][2]  | `self.monotonic_count(...)`          | COUNT           | COUNT               |
 | [API][3]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT               |
 | [DogStatsD][4]    | `dog.count(...)`                     | COUNT           | RATE                |
 | [DogStatsD][4]    | `dog.increment(...)`                 | COUNT           | RATE                |
 | [DogStatsD][4]    | `dog.decrement(...)`                 | COUNT           | RATE                |
 
-**Note**: When submitting a COUNT metric type through DogStatsD, the metric appears as a RATE in-app to ensure relevant comparison across different Agents. Consequently, StatsD counts may appear with a decimal value within Datadog (since they are normalized over a time interval to report units per second).
+**注**: DogStatsD を介して COUNT メトリクスタイプを送信する場合、メトリクスは異なる Agent 間の関連する比較を確保するためにアプリ内に RATE として表示されます。その結果、StatsD カウントは Datadog 内に 10 進数値で表示される場合があります（1 秒あたりの単位を報告するために時間間隔で正規化されるため）。
 
 
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=count#count
@@ -254,14 +254,14 @@ Submit your COUNT type metrics from one of the following sources:
 {{% /tab %}}
 {{% tab "RATE" %}}
 
-Submit your RATE type metrics from one of the following sources:
+次のソースのいずれかから RATE タイプのメトリクスを送信します。
 
-| Submission Source | Submission Method (python)          | Submission Type | Datadog In-App Type |
+| 送信元 | 送信方法 (Python)          | 送信タイプ | Datadog アプリ内タイプ |
 | ----------------- | ----------------------------------- | --------------- | ------------------- |
-| [Agent check][1]  | `self.rate(...)`                    | RATE            | GAUGE               |
+| [Agent チェック][1]  | `self.rate(...)`                    | RATE            | GAUGE               |
 | [API][2]          | `api.Metric.send(type="rate", ...)` | RATE            | RATE                |
 
-**Note**: When submitting a RATE metric type through DogStatsD, the metric appears as a GAUGE in-app to ensure relevant comparison across different Agents.
+**注**: DogStatsD を介して RATE メトリクスタイプを送信する場合、メトリクスは異なる Agent 間の関連する比較を確保するためにアプリ内に GAUGE として表示されます。
 
 
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=rate
@@ -269,11 +269,11 @@ Submit your RATE type metrics from one of the following sources:
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
-Submit your GAUGE type metrics from one of the following sources:
+次のソースのいずれかから GAUGE タイプのメトリクスを送信します。
 
-| Submission Source | Submission Method (Python)           | Submission Type | Datadog In-App Type |
+| 送信元 | 送信方法 (Python)           | 送信タイプ | Datadog アプリ内タイプ |
 | ----------------- | ------------------------------------ | --------------- | ------------------- |
-| [Agent check][1]  | `self.gauge(...)`                    | GAUGE           | GAUGE               |
+| [Agent チェック][1]  | `self.gauge(...)`                    | GAUGE           | GAUGE               |
 | [API][2]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE               |
 | [DogStatsD][3]    | `dog.gauge(...)`                     | GAUGE           | GAUGE               |
 
@@ -284,14 +284,14 @@ Submit your GAUGE type metrics from one of the following sources:
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-Submit your HISTOGRAM type metrics from one of the following sources:
+次のソースのいずれかから HISTOGRAM タイプのメトリクスを送信します。
 
-| Submission Source | Submission Method (Python) | Submission Type | Datadog In-App Types |
+| 送信元 | 送信方法 (Python) | 送信タイプ | Datadog アプリ内タイプ |
 | ----------------- | -------------------------- | --------------- | -------------------- |
-| [Agent check][1]  | `self.histogram(...)`      | HISTOGRAM       | GAUGE, RATE          |
-| [DogStatsD][2]    | `dog.histogram(...)`       | HISTOGRAM       | GAUGE, RATE          |
+| [Agent チェック][1]  | `self.histogram(...)`      | HISTOGRAM       | GAUGE、RATE          |
+| [DogStatsD][2]    | `dog.histogram(...)`       | HISTOGRAM       | GAUGE、RATE          |
 
-Submitting a TIMER metric to the Datadog Agent is equivalent to submitting a HISTOGRAM metric type within DogStatsD (not to be confused with timers in the standard StatsD). [DogStatsD `TIMER`][3] represents duration data only. For example, the amount of time a section of code takes to execute or how long it takes to fully render a page.
+TIMER メトリクスを Datadog Agent に送信することは、DogStatsD 内で HISTOGRAM メトリクスタイプを送信することと同等です（標準 StatsD のタイマーと混同しないでください）。[DogStatsD `TIMER`][3] は期間データのみを表します。たとえば、コードのセクションの実行にかかる時間や、ページを完全にレンダリングするのにかかる時間などです。
 
 
 [1]: /metrics/custom_metrics/agent_metrics_submission/?tab=histogram
@@ -300,39 +300,39 @@ Submitting a TIMER metric to the Datadog Agent is equivalent to submitting a HIS
 {{% /tab %}}
 {{% tab "DISTRIBUTION" %}}
 
-Submit your DISTRIBUTION type metrics from the following source:
+次のソースから DISTRIBUTION タイプのメトリクスを送信します。
 
-| Submission Source | Submission Method (Python) | Submission Type | Datadog In-App Types |
+| 送信元 | 送信方法 (Python) | 送信タイプ | Datadog アプリ内タイプ |
 | ----------------- | -------------------------- | --------------- | -------------------- |
-| [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE, COUNT         |
+| [DogStatsD][1]    | `dog.distribution(...)`    | DISTRIBUTION    | GAUGE、COUNT         |
 
 
 [1]: /metrics/custom_metrics/dogstatsd_metrics_submission/#distribution
 {{% /tab %}}
 {{< /tabs >}}
 
-## Submission types and Datadog in-app types
+## 送信タイプと Datadog アプリ内タイプ
 
-Below is a summary of all available metric submission sources and methods. This table shows the mapping between the corresponding metric submission type and the in-app types:
+以下に、利用可能なすべてのメトリクス送信のソースと方法の概要を示します。この表は、対応するメトリクス送信タイプとアプリ内タイプ間のマッピングを表しています。
 
-| Submission Source | Submission Method (Python)           | Submission Type | Datadog In-App Types |
+| 送信元 | 送信方法 (Python)           | 送信タイプ | Datadog アプリ内タイプ |
 | ----------------- | ------------------------------------ | --------------- | -------------------- |
-| [Agent check][9]  | `self.count(...)`                    | COUNT           | COUNT                |
-| [Agent check][10] | `self.monotonic_count(...)`          | COUNT           | COUNT                |
-| [Agent check][11] | `self.gauge(...)`                    | GAUGE           | GAUGE                |
-| [Agent check][12] | `self.histogram(...)`                | HISTOGRAM       | GAUGE, RATE          |
-| [Agent check][13] | `self.rate(...)`                     | RATE            | GAUGE                |
+| [Agent チェック][9]  | `self.count(...)`                    | COUNT           | COUNT                |
+| [Agent チェック][10] | `self.monotonic_count(...)`          | COUNT           | COUNT                |
+| [Agent チェック][11] | `self.gauge(...)`                    | GAUGE           | GAUGE                |
+| [Agent チェック][12] | `self.histogram(...)`                | HISTOGRAM       | GAUGE、RATE          |
+| [Agent チェック][13] | `self.rate(...)`                     | RATE            | GAUGE                |
 | [API][7]          | `api.Metric.send(type="count", ...)` | COUNT           | COUNT                |
 | [API][7]          | `api.Metric.send(type="gauge", ...)` | GAUGE           | GAUGE                |
 | [API][7]          | `api.Metric.send(type="rate", ...)`  | RATE            | RATE                 |
 | [DogStatsD][14]   | `dog.gauge(...)`                     | GAUGE           | GAUGE                |
-| [DogStatsD][15]   | `dog.distribution(...)`              | DISTRIBUTION    | GAUGE, COUNT         |
+| [DogStatsD][15]   | `dog.distribution(...)`              | DISTRIBUTION    | GAUGE、COUNT         |
 | [DogStatsD][16]   | `dog.count(...)`                     | COUNT           | RATE                 |
 | [DogStatsD][16]   | `dog.increment(...)`                 | COUNT           | RATE                 |
 | [DogStatsD][16]   | `dog.decrement(...)`                 | COUNT           | RATE                 |
 | [DogStatsD][17]   | `dog.set(...)`                       | SET             | GAUGE                |
-| [DogStatsD][18]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE, RATE          |
-## Further reading
+| [DogStatsD][18]   | `dog.histogram(...)`                 | HISTOGRAM       | GAUGE、RATE          |
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

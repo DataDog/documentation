@@ -6,7 +6,7 @@
 - cloud
 - configuration & deployment
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "See deployments as they happen and track how long they take."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_codebuild/"
@@ -35,9 +35,9 @@ Install the Datadog AWS CodeBuild integration to:
 - Collect metrics on your builds
 - Correlate builds with the rest of your Datadog metrics
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -63,21 +63,21 @@ Configure AWS CodeBuild to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_codebuild" >}}
 
 
-### Events
+### イベント
 
 The AWS CodeBuild integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS CodeBuild integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

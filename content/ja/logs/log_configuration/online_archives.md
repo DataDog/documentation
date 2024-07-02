@@ -1,6 +1,5 @@
 ---
 title: Online Archives
-kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
 private: true
 further_reading:
@@ -18,78 +17,78 @@ algolia:
 ---
 
 <div class="alert alert-warning">
-Online Archives is in limited availability. To request access, contact <a href="/help/">Datadog Support</a>.
+Online Archives は、数に限りがあります。アクセス権をリクエストする場合は、<a href="/help/">Datadog サポート</a>にお問い合わせください。
 </div>
 
-## Overview
+## 概要
 
-Online Archives is a log warehousing solution that provides 15 months or more of storage, live query, and analytics capabilities for your logs in Datadog.
+Online Archives は、Datadog のログを 15 ヶ月以上保存し、ライブクエリ、分析機能を提供するログウェアハウスソリューションです。
 
-Security, Compliance, and Engineering teams often need to query logs over large time windows. Security breaches are often detected after weeks, if not months, of an incident and legal compliance reviews and audit processes may require logs dating back more than a year. Long term analysis requirements are not limited to just security teams however. Engineering teams conducting high cardinality, year-over-year, long term analysis on millions of entities like users, hosts, IP addresses etc are better served with logs over straight metrics.
+セキュリティ、コンプライアンス、エンジニアリングの各チームは、多くの場合、大規模な時間軸でログを照会する必要があります。セキュリティ侵害は、数ヶ月ではないにしても数週間後に発見されることが多く、法令遵守のレビューや監査プロセスでは、1 年以上前のログを必要とする場合もあります。しかし、長期的な分析要件は、セキュリティチームだけに限定されるものではありません。ユーザー、ホスト、IP アドレスなど、何百万ものエンティティについて、高いカーディナリティ、前年比、長期的な分析を行うエンジニアリングチームには、ストレートメトリクスよりもログが適しています。
 
-Online Archives allows you to retain and search all of your log data for 15 months or more. Security, Compliance, and Engineering teams can address use cases requiring historical investigation and analysis, like security audits, or analyze extra high-cardinality trends over long periods and correlate system forensics from metrics with application and user behavior from log data.
+Online Archives では、すべてのログデータを 15 ヶ月以上保持し、検索することができます。セキュリティ、コンプライアンス、エンジニアリングの各チームは、セキュリティ監査のような過去の調査や分析を必要とするユースケースに対応したり、長期にわたる特別な高基準の傾向を分析したり、メトリクスからシステムフォレンジックを、ログデータからアプリケーションやユーザーの行動と関連付けることができます。
 
-## Enabling Online Archives
+## Online Archives を有効にする
 
-Online Archives are set up per Log index. [Index filters][1] that apply to that index also apply to Online Archives.
+Online Archives は、Log インデックスごとに設定されています。そのインデックスに適用される[インデックスフィルター][1]は、Online Archives にも適用されます。
 
-**Note**: However, that index's [exclusion filters][2] and daily quotas don't apply to Online Archives. For instance you may only choose to Index error logs while retaining all logs in Online Archives by excluding non error logs from Indexes.
+**注**: ただし、そのインデックスの[除外フィルター][2]と 1 日のクォータは、Online Archives には適用されません。例えば、エラー以外のログをインデックスから除外することで、すべてのログを Online Archives に保持しながら、エラーログのみをインデックスにすることができます。
 
-Configure Online Archives in the [Logs Index Configuration][3] page:
+[Logs Index Configuration][3] ページで Online Archives を構成します。
 
-1. Go to [**Logs > Configuration > Indexes**][3].
-2. Edit the index you wish to enable with Online Archives.
-3. Enable Online Archives in Step 3 of the index configuration.
+1. [**Logs > Configuration > Indexes**][3] に進みます。
+2. Online Archives で有効にしたいインデックスを編集します。
+3. インデックスコンフィギュレーションのステップ 3 で Online Archives を有効にします。
 
-{{< img src="logs/log_configuration/online_archives/enabling.png" alt="How to enable logs archives" style="width:100%;">}}
+{{< img src="logs/log_configuration/online_archives/enabling.png" alt="ログのアーカイブを有効にする方法" style="width:100%;">}}
 
-## Searching in Online Archives
+## Online Archives で検索する
 
-Select Online Archives from the dropdown in the Logs Explorer to begin searching in Online Archives instead of indexes. Find this dropdown next to the time picker. You can adjust the time picker by selecting pre-set options, up to 3 months, or by selecting the calendar view to search further back in time.
+ログエクスプローラーのドロップダウンから Online Archives を選択すると、インデックスではなく Online Archives での検索を開始します。このドロップダウンは、タイムピッカーの隣にあります。タイムピッカーでは、事前設定オプションで最大 3 か月まで選択できるほか、カレンダービューで過去にさかのぼって検索できます。
 
 
-{{< img src="logs/log_configuration/online_archives/searching.png" alt="How to search your online archive" style="width:100%;">}}
+{{< img src="logs/log_configuration/online_archives/searching.png" alt="オンラインアーカイブの検索方法" style="width:100%;">}}
 
-[Search][4] by typing in queries in the search bar or by selecting the relevant facet in the facet panel.
+[検索][4]は、検索バーにクエリを入力するか、ファセットパネルで該当するファセットを選択することで行います。
 
-**Notes**: 
-- You cannot export online archive logs to Dashboards, Notebooks, or Monitors.
-- The Transactions and Patterns view is not available for Online Archives.
+**注**: 
+- オンラインアーカイブのログは、ダッシュボード、ノートブック、モニターへはエクスポートできません。
+- 「トランザクション」および「パターン」のビューは、オンラインアーカイブでは利用できません。
 
-## Analytics in Online Archives
+## Online Archives における Analytics
 
-Switch to Analytics by either selecting **Group into Fields** or **Visualize as Timeseries/Top List/Table**.
+**Group into Fields** または **Visualize as Timeseries/Top List/Table** を選択し、Analytics に切り替えます。
 
-Setting the storage type to **Online Archives** lets you query Online Archives instead of indexes. You can switch back to **Indexes** at any time.
+ストレージタイプを **Online Archives** に設定すると、インデックスの代わりに Online Archives にクエリを発行することができます。いつでも **Indexes** に戻すことができます。
 
-## Selectively send logs to Online Archives and Indexes
+## Online Archives とインデックスへのログの選択的送信
 
-You can configure the setup to send certain logs to Online Archives while others go to an index based on log attributes and tags. Mix and match logs between storage types depending upon your logging use cases and retention strategy.
+ログの属性やタグに基づいて、特定のログを Online Archives に送り、他のログをインデックスに送るように設定することができます。ログの使用例や保存戦略に応じて、ストレージタイプ間でログを混在させたり、組み合わせたりすることができます。
 
-To configure storage types, use index filters that apply to Online Archives, and use index exclusion filters that don't apply to Online Archives.
+ストレージタイプを構成するには、Online Archives に適用されるインデックスフィルターを使用し、Online Archives に適用されないインデックス除外フィルターを使用します。
 
-Here are examples of different log retention strategies and how to implement them:
+ここでは、さまざまなログ保持戦略の例とその実施方法について説明します。
 
-### Engineering team wants to sample Debug logs in Indexes while retaining all logs in Online Archives
+### エンジニアリングチームは、すべてのログを Online Archives に保持しながら、インデックスのデバッグログをサンプリングしたい
 
-1. Create an index for all logs with filter `*`.
-2. Enable Online Archives for this index.
-3. Add an exclusion filter on the index `status:Debug` with an exclusion percentage set at 90%. This exclusion filter only applies to the index.
+1. フィルター `*` を持つすべてのログのインデックスを作成します。
+2. このインデックスの Online Archives を有効にします。
+3. インデックス `status:Debug` に、除外率を 90% に設定した除外フィルターを追加します。この除外フィルターは、インデックスにのみ適用されます。
 
-{{< img src="logs/log_configuration/online_archives/retain.png" alt="How to exclude things from the index" style="width:100%;">}}
+{{< img src="logs/log_configuration/online_archives/retain.png" alt="インデックスからモノを除外する方法" style="width:100%;">}}
 
-### Security team wants to retain all their logs in Online Archives but none in Indexes
+### セキュリティチームは、すべてのログを Online Archives に保存したくて、インデックスには保存したくない
 
-1. Create an index for security logs with filter `team:security`.
-2. Enable Online Archives for this index.
-3. Add a `*` exclusion filter on the index to filter out all logs from the Index but not from the Online Archives.
+1. セキュリティログ用のインデックスを `team:security` というフィルター付きで作成します。
+2. このインデックスの Online Archives を有効にします。
+3. インデックスに `*` 除外フィルターを追加して、インデックスからすべてのログをフィルタリングし、Online Archives からはフィルタリングしないようにします。
 
-{{< img src="logs/log_configuration/online_archives/exclusion.png" alt="How to exclude things from the index" style="width:100%;">}}
+{{< img src="logs/log_configuration/online_archives/exclusion.png" alt="インデックスからモノを除外する方法" style="width:100%;">}}
 
-### Disabling Online Archives
-Select the index where you want to turn off Online Archives and then switch the Online Archives toggle to the OFF position.
+### Online Archives を無効にする
+Online Archives をオフにしたいインデックスを選択し、Online Archives のトグルをオフの位置に切り替えてください。
 
-**Note:** Index order matters since `team:security` logs go into the first index that matches the index filter in case there are multiple indexes.
+**注:** インデックスの順番は重要で、複数のインデックスがある場合、`team:security` のログはインデックスフィルターにマッチする最初のインデックスに入るからです。
 
 [1]: /logs/log_configuration/indexes/#indexes-filters
 [2]: /logs/log_configuration/indexes/#exclusion-filters

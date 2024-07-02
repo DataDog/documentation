@@ -1,5 +1,5 @@
 ---
-title: Monitors
+title: モニター
 disable_sidebar: true
 aliases:
   - /guides/monitors/
@@ -7,26 +7,26 @@ aliases:
   - /guides/alerting/
   - /guides/monitors/the-conditions
   - /monitoring
-description: "Create monitors, configure notifications and automations, and manage your monitors using the alerting platform"
+description: "アラートプラットフォームでのモニターの作成、通知と自動化の構成、モニター管理"
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Alerting"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog Alerting releases! (App login required)."
+    tag: "リリースノート"
+    text: "Datadog Alerting の最新リリースをチェック！ (アプリログインが必要です)。"
   - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
-    tag: "Blog"
-    text: "Monitoring 101: Alerting on what matters"
+    tag: "ブログ"
+    text: "モニター入門 重要事項をアラート"
   - link: "/api/v1/monitors/"
     tag: "Documentation"
-    text: "Datadog Monitors API"
+    text: "Datadog モニター API"
   - link: "https://www.datadoghq.com/blog/datadog-github-deployment-protection-rules/"
-    tag: "Blog"
-    text: "Detect failed quality checks with GitHub Deployment Protection Rules and Datadog"
+    tag: "ブログ"
+    text: "GitHub Deployment Protection Rules と Datadog で品質チェックの失敗を検出する"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session on creating effective monitors"
   - link: "https://www.datadoghq.com/blog/aws-recommended-monitors/"
-    tag: "Blog"
-    text: "Enable preconfigured alerts with recommended monitors for AWS"
+    tag: "ブログ"
+    text: "AWS の推奨モニターであらかじめ構成されたアラートを有効にする"
 cascade:
     algolia:
         rank: 70
@@ -34,74 +34,74 @@ cascade:
 
 ---
 
-## Overview
+## 概要
 
-Monitoring all of your infrastructure in one place wouldn't be complete without the ability to know when critical changes are occurring. Datadog gives you the ability to create monitors that actively check metrics, integration availability, network endpoints, and more.
+すべてのインフラストラクチャーを 1 か所から監視していても、重要な変更が発生したことを知る機能がなければ完全とは言えません。Datadog には、メトリクス、インテグレーションのアベイラビリティー、ネットワークエンドポイントなどをアクティブにチェックするモニターを作成する機能が用意されています。
 
-Configure monitors, configure notifications and automations, and manage alerts at a glance on the Alerting platform.
+アラートプラットフォームで、モニターの構成、通知と自動化の設定、アラートの管理を一目で行います。
 
-**Note**: View and search for Monitors on your mobile device with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3].
+**注**: [Apple App Store][2] と [Google Play Store][3] で入手できる [Datadog モバイルアプリ][1]を使って、モバイルデバイスでモニターを表示および検索することができます。
 
-## Create monitors
+## モニターの作成
 
-To create a monitor in Datadog:
+Datadog でモニターを作成するには
 
-1. Navigate to [**Monitors** > **New Monitor**][4].
-1. Select a monitor type corresponding to the kind of telemetry you want to alert on. See [Monitor Types][5] for the full list.
-1. [Configure Monitors][6]: Alert over metrics, events, logs, integration availability, network endpoints, and more.
+1. [**Monitors** > **New Monitor**][4] の順に移動します。
+1. アラートしたいテレメトリーの種類に対応するモニタータイプを選択します。一覧は[モニタータイプ][5]を参照してください。
+1. [モニターの構成][6]: メトリクス、イベント、ログ、インテグレーションの可用性、ネットワークエンドポイントなどに関するアラート。
 
-{{< img src="/monitors/create.png" alt="Create a monitor" style="width:90%;">}}
+{{< img src="/monitors/create.png" alt="モニターの作成" style="width:90%;">}}
 
-To create a monitor programmatically, see the [Datadog API][7] or [community maintained libraries][8].
+プログラムでモニターを作成するには、[Datadog API][7] または[コミュニティが維持するライブラリ][8]を参照してください。
 
-## Configure notifications and automations
+## 通知と自動化の構成
 
-{{< img src="/monitors/notify.png" alt="Notify when a monitor is alerting" style="width:90%;">}}
+{{< img src="/monitors/notify.png" alt="モニターが警告を作成したら通知" style="width:90%;">}}
 
-Set up [Monitor Notifications][11] when creating monitors to keep your team informed of issues. Route the notifications to the correct people,  include [workflow automations][17], [cases][18], and [Datadog team handles][19], leverage template variables to include details, and attach snapshots when sending the alerts by email or Slack. Create [downtimes][12] to mute alerts during application maintenance.
+モニター作成時に[モニター通知][11]をセットアップし、チームに問題を通知します。通知を適切な担当者にルーティングし、[ワークフローオートメーション][17]、[ケース][18]、[Datadog チームハンドル][19]を含め、テンプレート変数を活用して詳細を追加し、アラートをメールや Slack で送信する際にスナップショットを添付します。[ダウンタイム][12]を作成してアプリケーションメンテナンス中のアラートをミュートします。
 
-## Manage monitors
+## モニターの管理
 
-{{< img src="/monitors/manage.png" alt="Manage all monitors alerts" style="width:90%;">}}
+{{< img src="/monitors/manage.png" alt="すべてのモニターアラートを管理" style="width:90%;">}}
 
-[Manage Monitors][13] by editing, cloning, deleting, muting, and resolving monitors all in the same place. Focus on high priority alerts by using advanced faceted search. Explore monitor details and alerts over time on the [Monitors List page][9].
+モニターの編集、複製、削除、ミュート、解決をすべて同じ場所で行うことで、[モニターを管理][13]します。高度なファセット検索を使用して、優先度の高いアラートに焦点を絞ります。[Monitors List ページ][9]で、モニターの詳細とアラートを時系列で確認できます。
 
-## Export and import monitors
+## モニターのエクスポートとインポート
 
-To export a monitor:
+モニターをエクスポートするには
 
-1. From the [**Manage Monitors**][9] page, click the monitor you want to export.
-1. You should see the Monitor Status page.
-1. Click the settings cog (top right) and select **Export** from the menu.
+1. [**Manage Monitors**][9] ページで、エクスポートするモニターをクリックします。
+1. Monitor Status ページが表示されます。
+1. 設定歯車 (右上) をクリックし、メニューから **Export** を選択します。
 
-To import a monitor:
+モニターをインポートするには
 
-1. Navigate to [**Monitors** > **New Monitor**][4].
-1. Click [**Import from JSON**][10] at the top of the page.
-1. Add your JSON monitor definition and click **Save**.
+1. [**Monitors** > **New Monitor**][4] の順に移動します。
+1. ページ上部の [**Import from JSON**][10] をクリックします。
+1. JSON モニター定義を追加し、**Save** をクリックします。
 
-## Control monitor tags with tag policies
+## タグポリシーによるモニタータグの制御
 
-[Monitor tag policies][14] enforce data validation on tags and tag values on your Datadog monitors. Add one of the following rules to prevent monitors with unexpected tags from being created.
-- Require tags with mandatory values
-- Require tags only
-- Optional tags with mandatory values
+[モニタータグポリシー][14]は、Datadog モニターのタグとタグ値に対するデータ検証を実施します。次のルールのいずれかを追加して、予期しないタグを持つモニターが作成されないようにします。
+- タグと指定された値が必要
+- タグのみ必要
+- オプションのタグと指定された値
 
-## View and search for monitors on mobile devices
+## モバイルデバイスでモニターを閲覧・検索
 
-[Mobile-Friendly Monitors on iOS and Android][15]: View, mute, and unmute monitors on any iOS or Android device with the [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3]. Write queries in the search bar to filter monitors in real-time. Use [Monitor Saved Views][16] to access a collection of monitors in a few taps on mobile.
+[iOS と Android のモバイルフレンドリーなモニター][15]: [Apple App Store][2] および [Google Play Store][3] で入手可能な [Datadog モバイルアプリ][1]を使用して、任意の iOS または Android デバイスでモニターの表示、ミュート、ミュート解除を行えます。検索バーでクエリを書いて、リアルタイムでモニターをフィルタリングします。[Monitor Saved Views][16] を用いて、モバイルで数タップでモニターのコレクションにアクセスします。
 
-{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors on Mobile App">}}
+{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モバイルアプリでのモニター">}}
 
-## Other sections
+## その他のセクション
 
 {{< whatsnext desc=" ">}}
-    {{< nextlink href="/service_management/service_level_objectives" >}}<u>Service Level Objectives</u>: Create, edit, or view your service level objectives using metrics or existing Datadog monitors.{{< /nextlink >}}
-    {{< nextlink href="/monitors/incident_management" >}}<u>Incident Management</u>: Declare and manage incidents.{{< /nextlink >}}
-    {{< nextlink href="/monitors/guide" >}}<u>Guides</u>: Additional helpful articles about monitors and alerting.{{< /nextlink >}}
+    {{< nextlink href="/service_management/service_level_objectives" >}}<u>サービスレベル目標</u>: メトリクスまたは既存の Datadog モニターを使用して、サービスレベル目標を作成、編集または表示します。{{< /nextlink >}}
+    {{< nextlink href="/monitors/incident_management" >}}<u>インシデント管理</u>: インシデントの宣言と管理。{{< /nextlink >}}
+    {{< nextlink href="/monitors/guide" >}}<u>ガイド</u>: モニターのおよびアラート設定に役立つその他の記事。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

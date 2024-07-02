@@ -8,32 +8,32 @@ further_reading:
   text: Review the main categories of data submitted to Datadog
 ---
 
-<div class="alert alert-info">This page is about the security of data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security/" target="_blank">Security</a> section.</div>
+<div class="alert alert-info">このページでは、Datadog に送信されるデータのセキュリティについて説明します。クラウドやアプリケーションのセキュリティ製品や機能をお探しの場合は、<a href="/security/" target="_blank">セキュリティ</a>のセクションをご覧ください。</div>
 
-The [Synthetic Monitoring product][2] allows you to proactively monitor how your systems and applications are performing using simulated requests and business transactions. Synthetic tests can be initiated from all around the globe, from either managed or private locations.
+[Synthetic モニタリング製品][2]により、シミュレートされたリクエストやビジネストランザクションを使いシステムやアプリケーションの稼働状況を監視することができます。Synthetic テストは世界中の管理ロケーションやプライベートロケーションから実行できます。
 
-## Information security
+## 情報セキュリティ
 
-### Encryption in managed locations
+### 管理された場所での暗号化
 
-#### Test configurations and variables
+#### テスト構成と変数
 
-* **Transport**: Asymmetric encryption - RSA (4096-bit key). All requests are signed using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][3]), ensuring both authentication and integrity.
-* **Storage**: Symmetric encryption - AES-GCM (256-bit key).
+* **Transport**: 非対称暗号化 - RSA (4096 ビットキー)。すべてのリクエストは Datadog Signature v1（[AWS 署名バージョン4][3]と同じ署名プロセスに基づく）を使用して署名され、認証と整合性の両方が保証されます。
+* **Storage**: 対称暗号化 - AES-GCM (256 ビットキー)。
 
-#### Test results
+#### テスト結果
 
-* **Transport**: Asymmetric encryption - RSA (4096-bit key). All requests are signed using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][3]), ensuring both authentication and integrity.
-* **Storage**: Sensitive parts (response headers and body) of test results are stored encrypted with an asymmetric encryption - RSA (4096-bit key) and decrypted on-the-fly when test results are fetched.
+* **Transport**: 非対称暗号化 - RSA (4096 ビットキー)。すべてのリクエストは Datadog Signature v1（[AWS 署名バージョン4][3]と同じ署名プロセスに基づく）を使用して署名され、認証と整合性の両方が保証されます。
+* **Storage**: テスト結果の機密部分（レスポンスヘッダーや本文）は非対称暗号、RSA (4096 ビットキー) で暗号化されて保存され、テスト結果が取得される際に復号化されます。
 
-#### Artifacts
+#### アーティファクト
 
-Artifacts are browser test screenshots, snapshots, errors, and resources.
+アーティファクトとは、ブラウザテストのスクリーンショット、スナップショット、エラー、リソースのことです。
 
 {{< site-region region="us,us3,us5,gov,ap1" >}}
 
 * **Storage**: Encryption for [Amazon S3 buckets][1].
-* **Transport**: Encryption in transit using [AWS Signature Version 4 for S3][2].
+* **Transport**: [S3 の AWS 署名バージョン4][2]を用いた転送中の暗号化。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/network-isolation.html
@@ -42,8 +42,8 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 {{< site-region region="eu" >}}
 
-* **Storage**: Encryption through [service accounts in GCS][1] (using [AES256][2]).
-* **Transport**: Encryption in transit using [Authentication, integrity, and encryption for GCS][3].
+* **Storage**: GCS のサービスアカウント][1]による暗号化（[AES256][2]使用）。
+* **Transport**: [GCS の認証、整合性、暗号化][3]を用いた転送中の暗号化。
 
 [1]: https://cloud.google.com/storage/docs/encryption/customer-managed-keys
 [2]: https://cloud.google.com/security/encryption-at-rest/default-encryption
@@ -51,31 +51,31 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 {{< /site-region >}}
 
-### Encryption in private locations
+### プライベートロケーションでの暗号化
 
-#### Private locations credentials
+#### プライベートロケーションの資格情報
 
-* **Storage**: Private locations credentials used to sign test configuration, variables, and test results requests are stored encrypted (symmetric encryption - AES-GCM), with audit logging and access policies.
+* **Storage**: テスト構成、変数、テスト結果リクエストの署名に使用されるプライベートロケーションの資格情報は、監査ログやアクセスポリシーを使用し暗号化されて保存されます（対称暗号化 - AES-GCM）。
 
-#### Test configurations and variables
+#### テスト構成と変数
 
-* **Transport**: Asymmetric encryption - RSA (4096-bit key). Communication between private locations and Datadog is secured using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][3]), ensuring both authentication and integrity.
-* **Storage**: Symmetric encryption - AES-GCM (256-bit key).
+* **Transport**: 非対称暗号化 - RSA (4096 ビットキー)。プライベートロケーションとDatadog間の通信は Datadog Signature v1（[AWS 署名バージョン4][3]と同じ署名プロセスに基づく）を使用して署名され、認証と整合性の両方が保証されます。
+* **Storage**: 対称暗号化 - AES-GCM (256 ビットキー)。
 
-#### Test results
+#### テスト結果
 
-* **Transport**: Asymmetric encryption - RSA (4096-bit key). Communication between private locations and Datadog is secured using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][3]), ensuring both authentication and integrity.
+* **Transport**: 非対称暗号化 - RSA (4096 ビットキー)。プライベートロケーションとDatadog間の通信は Datadog Signature v1（[AWS 署名バージョン4][3]と同じ署名プロセスに基づく）を使用して署名され、認証と整合性の両方が保証されます。
 
-* **Storage**: Sensitive parts (by default, response headers and body) of test results are stored encrypted with an asymmetric encryption - RSA (4096-bit key) and decrypted on-the-fly when test results are fetched.
+* **Storage**: テスト結果の機密部分（デフォルトではレスポンスヘッダーや本文）は非対称暗号、RSA (4096 ビットキー) で暗号化されて保存され、テスト結果が取得される際に復号化されます。
 
-#### Artifacts
+#### アーティファクト
 
-Artifacts are browser test screenshots, snapshots, errors, and resources.
+アーティファクトとは、ブラウザテストのスクリーンショット、スナップショット、エラー、リソースのことです。
 
 {{< site-region region="us,us3,us5,gov,ap1" >}}
 
-* **Storage**: Encryption for [AWS][1].
-* **Transport**: HTTPS transport between the private location and Datadog (authentication through API key), then from Datadog to storage: encryption in transit using [AWS Signature Version 4 for S3][2].
+* **Storage**: [AWS][1]の暗号化。
+* **Transport**: プライベートロケーションと Datadog 間の HTTPS トランスポート（API キーによる認証）、そして Datadog からストレージへの、[S3 の AWS 署名バージョン4][2]を用いた転送中の暗号化。
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/network-isolation.html
@@ -84,8 +84,8 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 {{< site-region region="eu" >}}
 
-* **Storage**: Encryption through [service accounts in GCS][1] (using [AES256][2]).
-* **Transport**: HTTPS transport between the private location and Datadog (authentication through API key), then from Datadog to storage: encryption in transit using [Authentication, integrity, and encryption for GCS][3].
+* **Storage**: GCS のサービスアカウント][1]による暗号化（[AES256][2]使用）。
+* **Transport**: プライベートロケーションと Datadog 間の HTTPS トランスポート（API キーによる認証）、そして Datadog からストレージへの、[GCS の認証、整合性、暗号化][3]を用いた転送中の暗号化。
 
 [1]: https://cloud.google.com/storage/docs/encryption/customer-managed-keys
 [2]: https://cloud.google.com/security/encryption-at-rest/default-encryption
@@ -93,19 +93,19 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 {{< /site-region >}}
 
-## Testing accounts
+## アカウントのテスト
 
-It is strongly recommended to leverage accounts dedicated to testing for your Synthetics tests.
+テスト専用のアカウントを使用して、Synthetics テストを行うことをお勧めします。
 
-## Storing secrets
+## シークレットの保存
 
-You can store secrets in [global variables][4] with the obfuscation feature to ensure global variable values do not leak into your test configurations and results. The access to global variables can then be restricted using the dedicated [global variable RBAC permissions][5].
+難読化機能を持つ[グローバル変数][4]にシークレットを保存して、グローバル変数の値をテストコンフィギュレーションおよびその結果に漏洩させないようにすることができます。その後、専用の[グローバル変数 RBAC アクセス許可][5]を使用して、グローバル変数へのアクセスを制限することができます。
 
-## Privacy options
+## プライバシーのオプション
 
-Use the [API][6], [Multistep API][7] and [Browser tests' privacy options][8] to limit the amount of data stored in test results. However, be mindful of the usage of these options as enabling them can make failures troubleshooting more difficult.
+[API][6]、[マルチステップ API][7]、[ブラウザテストのプライバシーオプション][8]を使用して、テスト結果に保存するデータの量を制限することができます。しかし、このオプションを有効化することでトラブルシューティングがより困難になる可能性があるため、利用する際には注意が必要です。
 
-### Further Reading
+### その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

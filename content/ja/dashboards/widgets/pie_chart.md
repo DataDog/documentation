@@ -1,13 +1,14 @@
 ---
-description: 1 つまたは複数のデータセットの比率をグラフ化します。
+title: Pie Chart Widget
+widget_type: "sunburst"
+description: "Graph proportions of one or more datasets."
 further_reading:
-- link: /ja/dashboards/graphing_json/
-  tag: ドキュメント
-  text: JSON を使用したダッシュボードの構築
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Building Dashboards using JSON
 - link: /dashboards/widgets/treemap/
-  tag: ドキュメント
-  text: ツリーマップウィジェット
-title: 円グラフウィジェット
+  tag: Documentation
+  text: Treemap Widget
 ---
 
 円グラフウィジェットは、単一のデータセットとそれに対応する比率、または複数のデータセットを入れ子にして比率を表示することができます。
@@ -15,7 +16,7 @@ title: 円グラフウィジェット
 {{< img src="dashboards/widgets/pie_chart/pie_chart_overview.png" alt="円グラフのウィジェットです。一番内側のリングにはユーザーの国が表示され、一番外側のリングは各国で使用されているブラウザのシェアを示すように比例配分されています。" style="width:60%;">}}
 
 
-## コンフィギュレーション
+## 構成
 
 1. 利用可能なデータソースから選択します。
 2. クエリを構成します。詳しくは、次の資料をご覧ください。
@@ -58,20 +59,26 @@ title: 円グラフウィジェット
 
 ## API
 
-このウィジェットは、[Dashboards API][6] で使用することができます。
+このウィジェットは **[Dashboards API][6]** で使用できます。[ウィジェット JSON スキーマ定義][7]については、以下の表を参照してください。
+
+<div class="alert alert-info">円グラフのウィジェットタイプは <strong>sunburst</strong> です。</div>
+
+{{< dashboards-widgets-api >}}
 
 ## ツリーマップウィジェット
 
-円グラフウィジェットのように、[ツリーマップ][7]もネストされた比率を表示するために使用することができます。両者の主な違いは、円グラフは放射状のスライスで比率を表示し、ツリーマップはネストされた長方形を表示する点です。
+円グラフウィジェットのように、[ツリーマップ][8]もネストされた比率を表示するために使用することができます。両者の主な違いは、円グラフは放射状のスライスで比率を表示し、ツリーマップはネストされた長方形として比率を表示する点です。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/querying
-[2]: /ja/logs/explorer/search_syntax/
-[3]: /ja/dashboards/functions/
-[4]: /ja/dashboards/guide/context-links/
-[5]: /ja/dashboards/widgets/#full-screen
-[6]: /ja/api/latest/dashboards/
-[7]: /ja/dashboards/widgets/treemap/
+
+[1]: /dashboards/querying
+[2]: /logs/explorer/search_syntax/
+[3]: /dashboards/functions/
+[4]: /dashboards/guide/context-links/
+[5]: /dashboards/widgets/#full-screen
+[6]: /api/latest/dashboards/
+[7]: /dashboards/graphing_json/widget_json/
+[8]: /dashboards/widgets/treemap/

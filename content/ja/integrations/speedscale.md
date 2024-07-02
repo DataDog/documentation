@@ -27,7 +27,7 @@
 - kubernetes
 - orchestration
 - testing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/speedscale/README.md"
 "display_on_public_website": true
@@ -68,9 +68,9 @@
 
 This integration publishes traffic replay results from [Speedscale][1] into Datadog. This lets you combine your observability data from Datadog with the results of a particular Speedscale replay to investigate the root cause of poor performance. Find and troubleshoot potential performance issues before they show up in production with the Speedscale Datadog integration.
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
 1. To use this integration you need a Datadog [API Key][2] so that events can be submitted into Datadog.
 
@@ -96,21 +96,21 @@ This integration publishes traffic replay results from [Speedscale][1] into Data
 
 View the Datadog [Event Stream][2] to see your exported report.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 Speedscale does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 Speedscale does not include any service checks.
 
-### Events
+### イベント
 
 The Speedscale integration sends events to your [Datadog Event Stream][3] when a traffic replay is complete to help you understand the impact this has on your metrics.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

@@ -38,7 +38,7 @@
   "vendor_id": rapdev
 "categories":
 - marketplace
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -102,14 +102,14 @@
 ## Overview
 The Nutanix Integration monitors storage, CPU usage, read/write IOPS, and other metrics within Nutanix Clusters, to ensure that your environment is running at optimal performance at all times. The integration comes with 4 Dashboards which allows you to view your Nutanix Clusters from an overview, as well as getting granular and pin-pointing potential performance degradations. The Nutanix Integration also comes with monitors for key metrics such as storage utilization and deduplication savings, which are integral to the overall performance of the Nutanix environment.
 
-### Monitors
+### モニター
 
 1. Nutanix Cluster Storage Utilization
 2. Nutanix Cluster CPU Utilization
 3. Nutanix Cluster Deduplication Savings Ratio
 4. Nutanix Cluster Compression Savings Ratio
 
-### Dashboards
+### ダッシュボード
 
 1. RapDev Nutanix Overview
 2. RapDev Nutanix Clusters

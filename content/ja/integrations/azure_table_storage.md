@@ -3,7 +3,7 @@
 - azure
 - cloud
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure Table Storage metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_table_storage/"
@@ -31,27 +31,27 @@ Get metrics from Azure Table Storage to:
 - Visualize the performance of your Table Storage.
 - Correlate the performance of your Table Storage with your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps that need to be performed.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_table_storage" >}}
 
 
-### Events
+### イベント
 
 The Azure Table Storage integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Table Storage integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

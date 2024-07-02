@@ -8,27 +8,27 @@ algolia:
 
 By default, the Windows Agent uses the `ddagentuser` account created at install time. The account is assigned to the following groups during installation:
 
-* It becomes a member of the "Performance Monitor Users" group
+* "Performance Monitor Users" グループのメンバーになる
   * Necessary to access WMI information
-  * Necessary to access Windows performance counter data
-* It becomes a member of the "Event Log Readers" group
+  * Windows のパフォーマンスカウンターデータにアクセスするために必要
+* "Event Log Readers" グループのメンバーになる
 * It becomes a member of the "Performance Log Users" group (since 7.51)
 
-**Note**: The installer doesn't add the account it creates to the `Users` groups by default. In rare cases, you may encounter permission issues. If so, manually add the created user to the `Users` group.
+**注**: インストーラーは、作成したアカウントをデフォルトで `Users` グループに追加しません。まれに、権限の問題が発生することがあります。その場合、作成したユーザーを手動で `Users` グループに追加してください。
 
 Additionally, the following security policies are applied to the account during installation:
-* Deny access to this computer from the network
-* Deny log on locally
-* Deny log on through Remote Desktop Services
-* Log on as a service
+* ネットワークからこのコンピューターへのアクセスを拒否する
+* ローカルでのログオンを拒否する
+* Remote Desktop Services によるログオンを拒否する
+* サービスとしてのログオン
 
 The Windows Agent can also use a user-supplied account. Do not use a 'real' user account. The user-supplied account should be solely dedicated to running the Datadog Agent. The account is modified during installation to restrict its privileges, including login privileges.
 
-**Note**: Starting with release `7.38.0/6.38.0` the installer supports the use of a **Grouped Managed Service Account (gMSA)**. To specify a Grouped Managed Service Account, append **$** at the end of the username: `<DOMAIN>\<USERNAME>$`. The Grouped Managed Service Account must exist *prior* to installation, as the installer cannot create one.
+**注**: `7.38.0/6.38.0` リリースから、インストーラーは **Grouped Managed Service Account (gMSA)** の使用をサポートします。Grouped Managed Service Account を指定するには、ユーザー名の最後に **$** を追加します: `<DOMAIN>\<USERNAME>**注**: 7.38.0/6.38.0 リリースから、インストーラーは **Grouped Managed Service Account (gMSA)** の使用をサポートします。Grouped Managed Service Account を指定するには、ユーザー名の最後に **$** を追加します。Grouped Managed Service Account は、インストーラーが作成できないため、インストール前に存在する必要があります。
 
-## Installation
+## インストール
 
-If no user account is specified on the command line, the installer attempts to create a local user account named `ddagentuser` with a randomly generated password.
+コマンドラインでユーザーアカウントが指定されなかった場合、インストーラーはランダムに生成されたパスワードで `ddagentuser` という名前のローカルユーザーアカウントを作成しようとします。
 
 If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generates a random password.
 
@@ -38,26 +38,26 @@ To specify the optional USERNAME and PASSWORD on the command line, pass the foll
 msiexec /i ddagent.msi DDAGENTUSER_NAME=<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
 ```
 
-Requirements:
+要件:
 * The username must be 20 characters or fewer to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
 * Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
 
-**Note**: If you encounter permission issues with `system` and `winproc` checks upon installing, make sure the `ddagentuser` is a member of the Performance Monitor Users and Event Log Readers groups.
+**注**: インストール時に `system` と `winproc` のチェックで権限の問題が発生した場合、`ddagentuser` が Performance Monitor Users と Event Log Readers グループのメンバであることを確認してください。
 
-**Note**: The user cannot be specified in the installer UI. Use the command line to pass the `DDAGENTUSER_NAME` and other parameters. They are taken into account, even in a UI install.
+**注**: インストーラーの UI ではユーザーを指定することができません。コマンドラインを使用して `DDAGENTUSER_NAME` と他のパラメータを渡してください。UI インストールであっても、それらは考慮されます。
 
-### Installation with group policy
+### グループポリシーによるインストール
 
-The installer changes the local group policy to allow the newly created user account to **run as a service**.
-If the domain group policy disallows that, then the installation setting is overridden, and you must update the domain group policy to allow the user account to run as a service.
+インストーラーは、新しく作成されたユーザーアカウントが**サービスとして実行**できるように、ローカルのグループポリシーを変更します。
+ドメイングループポリシーがそれを許可しない場合、インストールの設定が上書きされ、ユーザーアカウントがサービスとして実行できるようにドメイングループポリシーを更新する必要があります。
 
-### Installation in a domain environment
+### ドメイン環境でのインストール
 
-#### Domain joined machines
+#### ドメイン参加マシン
 
-On domain joined machines, the Agent installer can use a user supplied account, whether it is a domain or local one, or create a local account.
+ドメインに参加したマシンでは、Agent インストーラーは、ドメインまたはローカルのいずれであっても、ユーザー提供のアカウントを使用するか、またはローカルアカウントを作成することができます。
 
-If a domain account is specified on the command line, it must exist prior to the installation since only domain controllers can create domain accounts.
+ドメインアカウントをコマンドラインで指定する場合、ドメインコントローラのみがドメインアカウントを作成できるため、インストール前に存在している必要があります。
 
 If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generates a random password.
 
@@ -67,55 +67,55 @@ To specify a username from a domain account, use the following form for the `DDA
 msiexec /i ddagent.msi DDAGENTUSER_NAME=<DOMAIN>\<USERNAME> DDAGENTUSER_PASSWORD=<PASSWORD>
 ```
 
-The `<DOMAIN>` can either be a fully-qualified domain name (in the form `mydomain.com`) or the NETBIOS name (the pre-Windows 2000 name).
-It must be separated from the `<USERNAME>` with a backslash `\`.
+`<DOMAIN>` には完全修飾ドメイン名 (`mydomain.com` 形式) か、NETBIOS 名 (Windows2000 以前の名前) のどちらかを指定することができます。
+また、`<USERNAME>` とはバックスラッシュ `\` で区切らなければなりません。
 
-**Note**: The `<USERNAME>` must be 20 characters or fewer, to comply with Microsoft's [Active Directory Schema (AD Schema) SAM-Account-Name attribute][1].
+**注**: `<USERNAME>` は、Microsoft の [Active Directory Schema (AD Schema) SAM-Account-Name 属性][1]に準拠するため、20 文字以下でなければなりません。
 
-**Note**: Due to a restriction in the MSI installer, the `DDAGENTUSER_PASSWORD` property cannot contain the semicolon character `;`.
+**注**: MSI インストーラーの制限により、`DDAGENTUSER_PASSWORD` プロパティにセミコロン文字 `;` を含めることができません。
 
-#### Domain controllers
+#### ドメインコントローラ
 
-##### Primary and backup domain controllers
+##### プライマリおよびバックアップドメインコントローラ
 
 When installing the Agent on a domain controller, there is no notion of local user account. So if the installer creates a user account, it is a domain user rather than a local one.
 
-If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. A password must be specified for the installation to succeed.
+コマンドラインでユーザーアカウントが指定され、そのユーザーアカウントがシステム上にない場合、インストーラーはその作成を試行します。インストールを成功させるには、パスワードの指定が必要です。
 
-If the specified user account is from a parent domain, the installer uses that user account. Ensure there exists a user account in the parent domain before installation, as the installer never creates a user account in the parent domain.
+指定されたユーザーアカウントが親ドメインのものである場合、インストーラーはそのユーザーアカウントを使用します。インストーラーが親ドメインにユーザーアカウントを作成することはないため、インストール前に親ドメインにユーザーアカウントが存在することを確認してください。
 
-##### Read-only domain controllers
+##### 読み取り専用のドメインコントローラ
 
-The installer can use only an existing domain account when installing on a read-only domain controller.
+読み取り専用のドメインコントローラにインストールする場合、インストーラーは既存のドメインアカウントのみを使用することができます。
 
-### Installation with Chef
+### Chef によるインストール
 
-If you use Chef and the official `datadog` cookbook to deploy the Agent on Windows hosts, **use version 2.18.0 or above** of the cookbook to ensure that the Agent's configuration files have the correct permissions
+Windows ホストに Agent をデプロイするために Chef と公式の `datadog` クックブックを使用する場合、**バージョン 2.18.0 以上**のクックブックを使用して Agent のコンフィギュレーションファイルが正しい権限であることを確認してください。
 
-## Upgrade
+## アップグレード
 
 For Agent version < `7.25.0` when you upgrade the Datadog Agent on a domain controller or host where the user has supplied a username for the Agent, you must supply the `DDAGENTUSER_NAME` but not the `DDAGENTUSER_PASSWORD`.
 
 Starting with Agent version `7.25.0` the installer retains the username used to install the Agent and re-uses it during upgrades.
 It is still possible to override the saved value with `DDAGENTUSER_NAME`.
 
-## Agent integrations
+## Agent インテグレーション
 
 ### General permissions
 
-Every effort has been made to ensure that the transition from `LOCAL_SYSTEM` to `ddagentuser` is seamless. However, there is a class of problems that requires specific, configuration-specific modification upon installation of the Agent. These problems arise where the Windows Agent previously relied on administrator rights that the new Agent lacks by default.
+`LOCAL_SYSTEM` から `ddagentuser` への移行がシームレスに行われるよう、あらゆる努力が払われています。しかし、Agent のインストール時に特定の構成に特化した修正を必要とする問題があります。これらの問題は、Windows Agent が以前は管理者権限に依存していたが、新しい Agent にはデフォルトで欠けている場合に発生します。
 
-For example, if the directory check is monitoring a directory that has specific access rights, such as allowing only members of the Administrators group read access, then the existing Agent can monitor that directory successfully since `LOCAL_SYSTEM` has administrator rights. Upon upgrading, the administrator must add `ddagentuser` to the access control list for that directory in order for the directory check to function.
+例えば、ディレクトリチェックが特定のアクセス権、例えば Administrators グループのメンバーのみに読み取りアクセスを許可するディレクトリを監視している場合、`LOCAL_SYSTEM` は管理者権限を持っているので、既存の Agent はそのディレクトリを正常に監視することができます。アップグレードの際、管理者はディレクトリチェックが機能するように、そのディレクトリのアクセスコントロールリストに `ddagentuser` を追加する必要があります。
 
-**Note**: For Windows Server OS, the Windows Service integration cannot check against the DHCP Server service due to the special ACL for the `DHCPServer` service. The check returns `UNKNOWN` in such case.
+**注**: Windows Server OS の場合、Windows サービスインテグレーションは、`DHCPServer` サービスに対する特別な ACL のために、DHCP Server サービスに対してチェックすることができません。このような場合、チェックは `UNKNOWN` を返します。
 
-**Note**: The same considerations apply to the log files that may be monitored by the Logs Collection features of the Agent.
+**注**: Agent の Logs Collection 機能によって監視されるログファイルにも同じ考慮事項が適用されます。
 
-### JMX-based integrations
+### JMX ベースのインテグレーション
 
-The change to `ddagentuser` affects your JMX-based integrations if the Agent's JMXFetch is configured to connect to the monitored JVMs through the Attach API, for example if:
+Agent の JMXFetch が、Attach API を通じて監視対象の JVM に接続するように構成されている場合、`ddagentuser` への変更は、JMX ベースのインテグレーションに影響を及ぼします。例えば、次の場合:
 
-1. You're using a JMX-based integration, such as:
+1. 以下などの JMX ベースのインテグレーションを使用している。
    * [ActiveMQ][2]
    * [ActiveMQ_XML][3]
    * [Cassandra][4]
@@ -125,35 +125,35 @@ The change to `ddagentuser` affects your JMX-based integrations if the Agent's J
    * [Tomcat][8]
    * [Kafka][9]
 
-2. **AND** you've configured the integration with the `process_name_regex` setting instead of the `host` and `port` settings.
+2. **且つ**、`host` と `port` の設定ではなく、`process_name_regex` 設定でインテグレーションを構成している。
 
-If you're using the Attach API, the change in user context means that the Agent's JMXFetch is only be able to connect to the JVMs that also run under the `ddagentuser` user context. In most cases, it's recommended that you switch JMXFetch to using JMX Remote by enabling JMX Remote on your target JVMs and configuring your JMX integrations using `host` and `port`. For more information, see the [JMX documentation][5].
+Attach API を使用している場合、ユーザーコンテキストの変更は、Agent の JMXFetch が、`ddagentuser` ユーザーコンテキスト下で実行されている JVM にしか接続できないことを意味します。ほとんどの場合、ターゲット JVM 上で JMX Remote を有効にし、`host` と `port` を使用して JMX インテグレーションを構成することにより、JMXFetch を JMX Remote 使用に切り替えることが推奨されます。詳細については、[JMX ドキュメント][5]を参照してください。
 
-### Process check
+### プロセスチェック
 
 In v6.11 +, the Agent runs as `ddagentuser` instead of `Local System`. Because of this, it does not have access to the full command line of processes running under other users and to the user of other users' processes. This causes the following options of the check to not work:
 
-* `exact_match` when set to `false`
-* `user`, which allows selecting processes that belong to a specific user
+* `false` に設定した場合の `exact_match`
+* 特定のユーザーに属するプロセスを選択することができる `user`
 
-To restore the old behavior and run the Agent as `Local System` (not recommended) open an Administrator console and run the following command: `sc.exe config "datadogagent" obj= LocalSystem`. Alternatively, open the Service Manager, go to DataDog Agent > Properties and specify Log On as `Local System`.
+古い動作を復元し、Agent を `Local System` として実行するには (推奨しません)、管理者コンソールを開き、コマンド `sc.exe config "datadogagent" obj= LocalSystem` を実行してください。または、サービスマネージャーを開き、DataDog Agent > Properties に移動して、`Local System` として Log On を指定します。
 
-### Cassandra Nodetool integration
+### Cassandra Nodetool インテグレーション
 
-For the Cassandra Nodetool integration to continue working, apply the following changes to your environment:
+Cassandra Nodetool インテグレーションが引き続き動作するように、次の変更を環境に適用してください。
 
-* Grant access to the Nodetool installation directory to the `ddagentuser`.
-* Set the environment variables of the Nodetool installation directory (`CASSANDRA_HOME` and `DSCINSTALLDIR`) as system-wide variables instead of variables only for the user doing the Nodetool installation.
+* Nodetool のインストールディレクトリへのアクセスを `ddagentuser` に許可します。
+* Nodetool のインストールディレクトリの環境変数 (`CASSANDRA_HOME` と `DSCINSTALLDIR`) を、Nodetool のインストールを行うユーザーだけの変数ではなく、システム全体の変数として設定するようにします。
 
-## Security logs channel
+## セキュリティログチャンネル
 
-If you are using the [Datadog- Win 32 event log Integration][10], the Datadog user `ddagentuser` must be added to the Event Log Readers Group to collect logs from the Security logs channel:
+[Datadog- Win 32 イベントログインテグレーション][10]を使用している場合、セキュリティログチャンネルからログを収集するには、Datadog ユーザー `ddagentuser` を Event Log Readers Group に追加する必要があります。
 
-1. Open Run with *Windows+R* hotkeys, type `compmgmt.msc`.
-2. Navigate to *System Tools* -> *Local Users and Groups* -> *Groups*.
-3. Right-click **Event Log Readers** and select *Properties*.
-4. Click *Add* and enter `ddagentuser` -> *Check Names*.
-5. Click *OK* and *Apply*.
+1. *Windows+R* ホットキーでファイル名を指定して実行を開き、`compmgmt.msc` と入力します。
+2. *System Tools* -> *Local Users and Groups* -> *Groups* に移動します。
+3. **Event Log Readers** を右クリックし、*Properties* を選択します。
+4. *Add* をクリックし、`ddagentuser` を入力し、*Check Names* をクリックします。
+5. *OK*、*Apply* をクリックします。
 
 [1]: https://docs.microsoft.com/en-us/windows/win32/adschema/a-samaccountname?redirectedfrom=MSDN
 [2]: /integrations/activemq/

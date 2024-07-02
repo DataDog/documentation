@@ -33,7 +33,7 @@
 "categories":
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/glusterfs/README.md"
 "display_on_public_website": true
@@ -66,23 +66,23 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Red Hat Gluster Storage][1] cluster health, volume, and brick status through the Datadog Agent. 
-This GlusterFS integration is compatible with both Red Hat vendored and open-source versions of GlusterFS.
+このチェックは、Datadog Agent を介して [RedHat Gluster Storage][1] クラスターの状態、ボリューム、ブリックステータスを監視します。
+この GlusterFS インテグレーションは、RedHat ベンダーバージョンとオープンソースバージョンの GlusterFS の両方と互換性があります。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The GlusterFS check is included in the [Datadog Agent][3] package.
-No additional installation is needed on your server.
+GlusterFS チェックは [Datadog Agent][3] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-1. Edit the `glusterfs.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your GlusterFS performance data. See the [sample glusterfs.d/conf.yaml][4] for all available configuration options.
+1. GlusterFS のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `glusterfs.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル glusterfs.d/conf.yaml][4] を参照してください。
 
    ```yaml
    init_config:
@@ -107,26 +107,26 @@ No additional installation is needed on your server.
         min_collection_interval: 60
    ```
 
-   **NOTE**: By default, [`gstatus`][5] internally calls the `gluster` command which requires running as superuser. Add a line like the following to your `sudoers` file:
+   **注**: デフォルトでは、[`gstatus`][5] はスーパーユーザーとして実行する必要がある `gluster` コマンドを内部的に呼び出します。次のような行を `sudoers` ファイルに追加します。
 
    ```text
     dd-agent ALL=(ALL) NOPASSWD:/path/to/your/gstatus
    ```
 
-   If your GlusterFS environment does not require root, set `use_sudo` configuration option to `false`.
+   GlusterFS 環境が root を必要としない場合は、`use_sudo` コンフィギュレーションオプションを `false` に設定します。
 
-2. [Restart the Agent][6].
+2. [Agent を再起動します][6]。
 
-#### Log collection
+#### ログ収集
 
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Edit this configuration block in your `glusterfs.d/conf.yaml` file to start collecting your GlusterFS logs:
+2. GlusterFS のログの収集を開始するには、`glusterfs.d/conf.yaml` ファイルでこのコンフィギュレーションブロックを編集します。
 
     ```yaml
     logs:
@@ -138,33 +138,33 @@ No additional installation is needed on your server.
         source: glusterfs
     ```
 
-  Change the `path` parameter value based on your environment. See the [sample conf.yaml][4] for all available configuration options.
+  `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[conf.yaml のサンプル][4]を参照してください。
 
-  3. [Restart the Agent][6].
+  3. [Agent を再起動します][6]。
 
-For information on configuring the Agent for log collection in Kubernetes environments, see [Kubernetes Log Collection][7].
+Kubernetes 環境でのログ収集のための Agent の構成については、[Kubernetes ログの収集][7]を参照してください。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][8] and look for `glusterfs` under the Checks section.
+[Agent の status サブコマンドを実行][8]し、Checks セクションで `glusterfs` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "glusterfs" >}}
 
 
-### Events
+### イベント
 
-GlusterFS does not include any events.
+GlusterFS には、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "glusterfs" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][11].
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 
 [1]: https://www.redhat.com/en/technologies/storage/gluster

@@ -44,7 +44,7 @@
 - "log collection"
 - "notifications"
 - "tracing"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/postgres/README.md"
 "display_on_public_website": true
@@ -57,7 +57,7 @@
 "manifest_version": "2.0.0"
 "name": "postgres"
 "public_title": "Postgres"
-"short_description": "Collect a wealth of database performance and health metrics."
+"short_description": "データベースパフォーマンスと健全性のメトリクスを豊富に収集"
 "supported_os":
 - "linux"
 - "windows"
@@ -66,14 +66,14 @@
   "changelog": "CHANGELOG.md"
   "classifier_tags":
   - "Category::Data Stores"
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Category::Notifications"
   - "Category::Tracing"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Collect a wealth of database performance and health metrics."
+  "description": "データベースパフォーマンスと健全性のメトリクスを豊富に収集"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -85,31 +85,31 @@
 
 ![PostgreSQL Graph][1]
 
-## Overview
+## 概要
 
-The Postgres integration provides health and performance metrics for your Postgres database in near real-time. Visualize these metrics with the provided dashboard and create monitors to alert your team on PostgreSQL states.
+Postgres インテグレーションは、Postgres データベースの健全性とパフォーマンスに関するメトリクスをほぼリアルタイムで提供します。提供されるダッシュボードでこれらのメトリクスを可視化するとともに、モニターを作成して PostgreSQL の状態についてチームに警告を発することができます。
 
-Enable [Database Monitoring][2] (DBM) for enhanced insights into query performance and database health. In addition to the standard integration, Datadog DBM provides query-level metrics, live and historical query snapshots, wait event analysis, database load, query explain plans, and blocking query insights.
+[データベースモニタリング][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーションに加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画、ブロッキングを引き起こしているクエリについてのインサイトが提供されます。
 
-## Setup
+## セットアップ
 
-<div class="alert alert-info">This page describes the standard Postgres Agent integration. If you are looking for the Database Monitoring product for Postgres, see <a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog Database Monitoring</a>.</div>
+<div class="alert alert-info">このページでは、標準的な Postgres Agent のインテグレーションについて説明します。Postgres のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
-### Installation
+### インストール
 
-The PostgreSQL check is packaged with the Agent. To start gathering your PostgreSQL metrics and logs, [install the Agent][3].
+PostgreSQL チェックは Agent にパッケージ化されています。PostgreSQL メトリクスとログの収集を開始するには、[Agent をインストールします][3]。
 
-### Configuration
+### 構成
 
-**Note**: To install Database Monitoring for PostgreSQL, select your hosting solution in the [Database Monitoring documentation][4] for instructions.
+**注**: PostgreSQL 用のデータベースモニタリングをインストールするには、[データベースモニタリングドキュメント][4]でご利用のホスティングソリューションを選択して、手順を確認してください。
 
-Proceed with the following steps in this guide only if you are installing the standard integration alone.
+標準のインテグレーションを単体でインストールする場合のみ、このガイドの下記の手順に進んでください。
 
-#### Prepare Postgres
+#### Postgres の準備
 
-To get started with the standard PostgreSQL integration, create a read-only `datadog` user with proper access to your PostgreSQL server. Start `psql` on your PostgreSQL database.
+標準の PostgreSQL インテグレーションを開始するには、PostgreSQL サーバーへの適切なアクセス権を持つ読み取り専用 `datadog` ユーザーを作成します。PostgreSQL データベースで `psql` を起動します。
 
-For PostgreSQL version 10 and above, run:
+PostgreSQL バージョン 10 以上の場合、次を実行します。
 
 ```shell
 create user datadog with password '<PASSWORD>';
@@ -117,14 +117,14 @@ grant pg_monitor to datadog;
 grant SELECT ON pg_stat_database to datadog;
 ```
 
-For older PostgreSQL versions, run:
+それより前の PostgreSQL バージョンの場合、次を実行します。
 
 ```shell
-create user datadog with password '<PASSWORD>';
+create user datadog with password '<パスワード>';
 grant SELECT ON pg_stat_database to datadog;
 ```
 
-To verify the permissions are correct, run the following command:
+アクセス許可が正しいことを確認するには、次のコマンドを実行します。
 
 ```shell
 psql -h localhost -U datadog postgres -c \
@@ -133,9 +133,9 @@ psql -h localhost -U datadog postgres -c \
 || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
 ```
 
-When it prompts for a password, enter the one used in the first command.
+パスワードの入力を要求された場合は、最初のコマンドで使用したパスワードを入力します。
 
-**Note**: For PostgreSQL versions 9.6 and below, run the following and create a `SECURITY DEFINER` to read from `pg_stat_activity`.
+**注**: PostgreSQL バージョン 9.6 以前で `pg_stat_activity` から読み取るには、次のコマンドを実行して `SECURITY DEFINER` を作成します。
 
 ```shell
 CREATE FUNCTION pg_stat_activity() RETURNS SETOF pg_catalog.pg_stat_activity AS
@@ -147,17 +147,17 @@ grant SELECT ON pg_stat_activity_dd to datadog;
 ```
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-**Note**: When generating custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. Check the [FAQ section][1] for more information.
+**注**: その他の表へのクエリを必要とするカスタムメトリクスを生成する際は、`datadog` ユーザーにそれらの表への `SELECT` 権限を付与する必要があります。例: `grant SELECT on <TABLE_NAME> to datadog;`。詳しくは、[よくあるご質問セクション][1]をご確認ください。
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][2] for all available configuration options.
+1. `postgres.d/conf.yaml` ファイルを編集して、`host` / `port` を指定し、監視するマスターを設定します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル postgres.d/conf.yaml][2] を参照してください。
 
     ```yaml
     init_config:
@@ -196,9 +196,9 @@ To configure this check for an Agent running on a host:
         disable_generic_tags: true
     ```
 
-2. To collect relation metrics, connect the Agent to every logical database. These databases can be discovered automatically, or each one can be listed explicitly in the configuration. 
+2. リレーションメトリクスを収集するには、Agent をすべての論理データベースに接続します。これらのデータベースは自動的に発見することも、構成で明示的に列挙することもできます。
 
-    - To discover logical databases automatically on a given instance, enable autodiscovery on that instance:
+    - 特定のインスタンスで論理データベースを自動的に発見するには、そのインスタンスでオートディスカバリーを有効にします。
 
     ```yaml
     instances:
@@ -215,7 +215,7 @@ To configure this check for an Agent running on a host:
           - relation_regex: .*
     ```
 
-    - Alternatively, you can list each logical database as an instance in the configuration:
+    - または、構成に各論理データベースをインスタンスとして列挙することもできます。
 
     ```yaml
     instances:
@@ -242,22 +242,22 @@ To configure this check for an Agent running on a host:
         relations:
           - relation_regex: .*
     ```
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
-##### Trace collection
+##### トレースの収集
 
-Datadog APM integrates with Postgres to see the traces across your distributed system. Trace collection is enabled by default in the Datadog Agent v6+. To start collecting traces:
+Datadog APM は Postgres を統合して、分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
-1. [Enable trace collection in Datadog][4].
-2. [Instrument your application that makes requests to Postgres][5].
+1. [Datadog でトレースの収集を有効にします][4]。
+2. [Postgres へのリクエストを作成するアプリケーションをインスツルメントします][5]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-PostgreSQL default logging is to `stderr`, and logs do not include detailed information. It is recommended to log into a file with additional details specified in the log line prefix. See the PostgreSQL documentation on[Error Reporting and Logging][6] for more information.
+PostgreSQL のデフォルトのログは `stderr` に記録され、ログに詳細な情報は含まれません。ログ行のプレフィックスに指定された詳細を追加してファイルに記録することをお勧めします。詳細は PostgreSQL のドキュメント[エラーレポートとログ][6]を参照してください。
 
-1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, uncomment the following parameters in the log section:
+1. ロギングはファイル `/etc/postgresql/<バージョン>/main/postgresql.conf` 内で構成されます。ステートメント出力を含む通常のログ結果の場合、ログセクションの次のパラメーターのコメントを外します。
 
    ```conf
      logging_collector = on
@@ -272,9 +272,9 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
      #log_destination = 'eventlog'
    ```
 
-2. To gather detailed duration metrics and make them searchable in the Datadog interface, they should be configured inline with the statement themselves. See below for the recommended configuration differences from above. **Note**: Both `log_statement` and `log_duration` options are commented out. See [Logging statement/duration on the same line][7] for discussion on this topic.
+2. 詳細な期間メトリクスを収集し、Datadog インターフェイスで検索可能にするには、ステートメント自体を使用してインラインで構成する必要があります。上記の例と推奨構成との違いについては、以下を参照してください。**注**: log_statement` と `log_duration` オプションは両方ともコメントアウトされています。このトピックについては、[statement/duration のログを同一行に記録する][7]を参照してください。
 
-    This config logs all statements. To reduce the output based on duration, set the `log_min_duration_statement` value to the desired minimum duration (in milliseconds):
+   この構成では、すべてのステートメントをログに記録します。期間に応じて出力を減らすには、`log_min_duration_statement` の値を希望の最小期間 (ミリ秒単位) に設定します。
 
    ```conf
      log_min_duration_statement = 0    # -1 is disabled, 0 logs all statements
@@ -285,13 +285,13 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
      #log_duration = on
    ```
 
-3. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+3. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-4. Add and edit this configuration block to your `postgres.d/conf.yaml` file to start collecting your PostgreSQL logs:
+4. PostgreSQL のログの収集を開始するには、次の構成ブロックを `postgres.d/conf.yaml` ファイルに追加し、編集します。
 
    ```yaml
    logs:
@@ -306,9 +306,9 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
        #    name: new_log_start_with_date
    ```
 
-      Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][2] for all available configuration options.
+      `service` パラメーターと `path` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべての構成オプションについては、[postgres.d/conf.yaml のサンプル][2]を参照してください。
 
-5. [Restart the Agent][3].
+5. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/integrations/postgres/?tab=host#faq
 [2]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
@@ -322,11 +322,11 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
 
 #### Docker
 
-To configure this check for an Agent running on a container:
+コンテナで実行中の Agent に対してこのチェックを構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
@@ -334,32 +334,32 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"host":"%%host%%", "port":5432,"username":"datadog","password":"<PASSWORD>"}]'
 ```
 
-##### Log collection
+##### ログ収集
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"postgresql","service":"postgresql"}]'
 ```
 
-##### Trace collection
+##### トレースの収集
 
-APM for containerized apps is supported on Agent v6+ but requires extra configuration to begin collecting traces.
+コンテナ化されたアプリケーションの APM は、Agent v6 以降でサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
 
-Required environment variables on the Agent container:
+Agent コンテナで必要な環境変数
 
-| Parameter            | Value                                                                      |
+| パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-See [Tracing Docker Applications][4] for a complete list of available environment variables and configuration.
+利用可能な環境変数およびコンフィギュレーションの全リストについては、[Docker アプリケーションのトレース][4] を参照してください。
 
-Then, [instrument your application container that makes requests to Postgres][3] and set `DD_AGENT_HOST` to the name of your Agent container.
+次に、[Postgres にリクエストを送信するアプリケーションのコンテナをインスツルメント][3]し、Agent のコンテナ名に `DD_AGENT_HOST` を設定します。
 
 
 [1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
@@ -371,13 +371,13 @@ Then, [instrument your application container that makes requests to Postgres][3]
 
 #### Kubernetes
 
-To configure this check for an Agent running on Kubernetes:
+このチェックを、Kubernetes で実行している Agent に構成します。
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Aside from this, templates can also be configured with [a file, a configmap, or a key-value store][2].
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
 
-**Annotations v1** (for Datadog Agent < v7.36)
+**Annotations v1** (Datadog Agent < v7.36 向け)
 
 ```yaml
 apiVersion: v1
@@ -401,7 +401,7 @@ spec:
     - name: postgres
 ```
 
-**Annotations v2** (for Datadog Agent v7.36+)
+**Annotations v2** (Datadog Agent v7.36+ 向け)
 
 ```yaml
 apiVersion: v1
@@ -428,12 +428,12 @@ spec:
     - name: postgres
 ```
 
-##### Log collection
+##### ログ収集
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][3].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
-Then, set [Log Integrations][4] as pod annotations. This can also be configured with [a file, a configmap, or a key-value store][5].
+次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
 
 **Annotations v1/v2**
 
@@ -449,21 +449,21 @@ spec:
     - name: postgres
 ```
 
-##### Trace collection
+##### トレースの収集
 
-APM for containerized apps is supported on hosts running Agent v6+ but requires extra configuration to begin collecting traces.
+コンテナ化されたアプリケーションの APM は、Agent v6 以降を実行するホストでサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
 
-Required environment variables on the Agent container:
+Agent コンテナで必要な環境変数
 
-| Parameter            | Value                                                                      |
+| パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-See [Tracing Kubernetes Applications][6] and the [Kubernetes DaemonSet Setup][7] for a complete list of available environment variables and configuration.
+利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][6]および [Kubernetes DaemonSet のセットアップ][7]を参照してください。
 
-Then, [instrument your application container that makes requests to Postgres][4].
+そして、[Postgres へのリクエストを作成するアプリケーションコンテナをインスツルメントします][4]。
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes
 [2]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
@@ -477,11 +477,11 @@ Then, [instrument your application container that makes requests to Postgres][4]
 
 #### ECS
 
-To configure this check for an Agent running on ECS:
+このチェックを、ECS で実行している Agent に構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```json
 {
@@ -497,12 +497,12 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 }
 ```
 
-##### Log collection
+##### ログ収集
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [ECS Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```json
 {
@@ -516,21 +516,21 @@ Then, set [Log Integrations][3] as Docker labels:
 }
 ```
 
-##### Trace collection
+##### トレースの収集
 
-APM for containerized apps is supported on Agent v6+ but requires extra configuration to begin collecting traces.
+コンテナ化されたアプリケーションの APM は、Agent v6 以降でサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
 
-Required environment variables on the Agent container:
+Agent コンテナで必要な環境変数
 
-| Parameter            | Value                                                                      |
+| パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-See [Tracing Docker Applications][4] for a complete list of available environment variables and configuration.
+利用可能な環境変数およびコンフィギュレーションの全リストについては、[Docker アプリケーションのトレース][4] を参照してください。
 
-Then, [instrument your application container that makes requests to Postgres][3] and set `DD_AGENT_HOST` to the [EC2 private IP address][5].
+次に、[Postgres にリクエストを送信するアプリケーションのコンテナをインスツルメント][3]し、[EC2 プライベート IP アドレス][5]に `DD_AGENT_HOST` を設定します。
 
 [1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
 [2]: https://docs.datadoghq.com/agent/amazon_ecs/logs/?tab=linux
@@ -540,46 +540,46 @@ Then, [instrument your application container that makes requests to Postgres][3]
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][5] and look for `postgres` under the Checks section.
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `postgres` を探します。
 
-## Data Collected
+## 収集データ
 
-Some of the metrics listed below require additional configuration, see the [sample postgres.d/conf.yaml][6] for all configurable options.
+以下に記載されているメトリクスのいくつかには、追加の構成が必要です。すべての構成オプションについては、[サンプル postgres.d/conf.yaml][6] を参照してください。
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "postgres" >}}
 
 
-For Agent version `7.32.0` and later, if you have Database Monitoring enabled, the `postgresql.connections` metric is tagged with `state`, `app`, `db` and `user`.
+Agent のバージョン `7.32.0` 以降では、Database Monitoring を有効にすると、`postgresql.connections` メトリクスに `state`、`app`、`db` および `user` がタグ付けされます。
 
-### Events
+### イベント
 
-The PostgreSQL check does not include any events.
+PostgreSQL チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "postgres" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][7].
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-### FAQ
+### よくあるご質問
 
-- [PostgreSQL custom metric collection explained][8]
+- [PostgreSQL カスタムメトリクスの収集の説明][8]
 
-### Blog posts
+### ブログ記事
 
-- [100x faster Postgres performance by changing 1 line][9]
-- [Key metrics for PostgreSQL monitoring][10]
-- [Collecting metrics with PostgreSQL monitoring tools][11]
-- [How to collect and monitor PostgreSQL data with Datadog][12]
+- [1 行の変更で Postgres のパフォーマンスを 100 倍高速化][9]
+- [PostgreSQL 監視のキーメトリクス][10]
+- [PostgreSQL 監視ツールでメトリクスを収集][11]
+- [Datadog で PostgreSQL データを収集および監視する方法][12]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postgres/images/postgresql_dashboard.png

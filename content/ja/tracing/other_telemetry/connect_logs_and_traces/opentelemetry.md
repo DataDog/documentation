@@ -12,7 +12,7 @@ further_reading:
   tag: Documentation
   text: Send OpenTelemetry Traces to Datadog
 - link: "https://opentelemetry.io/docs/collector/"
-  tag: External Site
+  tag: 外部サイト
   text: Collector documentation
 - link: "https://www.datadoghq.com/blog/opentelemetry-instrumentation/"
   tag: Blog

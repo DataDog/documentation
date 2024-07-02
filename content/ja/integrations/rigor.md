@@ -22,7 +22,7 @@
   "support_email": support@rigor.com
 "categories":
 - testing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rigor/README.md"
 "display_on_public_website": true
@@ -64,11 +64,11 @@ Rigor provides synthetic monitoring and optimization insights throughout your de
 
 With Rigor, you can collect synthetic, front-end performance metrics and push those metrics into Datadog. You can also push alerts into Datadog as events.
 
-## Setup
+## セットアップ
 
 Rigor has two different integrations with Datadog, a metrics integration and an events integration.
 
-### Configuration
+### 構成
 #### Metrics collection
 
 As an administrator, click the "Admin Tools" menu in the upper right hand of your screen and select "Integrations".
@@ -111,13 +111,13 @@ Once you have configured the integration. You can add to any Real Browser, HTTP,
 
 ![add-webhookto-check][9]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "rigor" >}}
 
 
-### Events
+### イベント
 
 When a check is configured to alert through a Datadog event, two events types are pushed into Datadog:
 
@@ -126,11 +126,11 @@ When a check is configured to alert through a Datadog event, two events types ar
 
 ![events-example][11]
 
-### Service Checks
+### サービスチェック
 
 The Rigor integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Rigor support][12].
 

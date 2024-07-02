@@ -6,92 +6,92 @@ title: IP Allowlist
 The IP allowlist feature is available for customers on an enterprise plan only. Request access by contacting support.
 {{< /callout >}}
 
-## Overview
+## 概要
 
-{{< img src="account_management/org_settings/ip_allowlist_list.png" alt="Screenshot showing the IP allowlist UI, containing four IP ranges" >}}
+{{< img src="account_management/org_settings/ip_allowlist_list.png" alt="4 つの IP 範囲を含む IP 許可リスト UI を示すスクリーンショット" >}}
 
-The IP allowlist controls which networks can be used to access your data in Datadog. By limiting allowed networks, you can protect your resources from data exfiltration and insider threats.
+IP 許可リストは、Datadog のデータにアクセスするために使用できるネットワークを制御します。許可されたネットワークを制限することで、データの流出や内部脅威からリソースを保護することができます。
 
-When the IP allowlist is enabled, only IP addresses or CIDR ranges in the allowlist can access the Datadog API and UI. 
+IP 許可リストを有効にすると、許可リストに含まれる IP アドレスまたは CIDR 範囲のみが Datadog API および UI にアクセスできるようになります。
 
-### Blocked and allowed resources
+### ブロックされたリソースと許可されたリソース
 
-If a user's IP is not contained in the IP allowlist, they are effectively blocked from accessing and using:
+ユーザーの IP が IP 許可リストに含まれていない場合、ユーザーは事実上、以下のアクセスおよび使用をブロックされます。
 
-- Datadog's web UI
-- Datadog's public [API][1], including both documented and unpublished endpoints
-- Datadog's mobile apps (iOS, Android)
-- Third-party integrations and applications that access Datadog through OAuth
+- Datadog の Web UI
+- Datadog の公開 [API][1] (ドキュメントと未公開エンドポイントの両方を含む)
+- Datadog のモバイルアプリ(iOS、Android)
+- OAuth で Datadog にアクセスするサードパーティのインテグレーションおよびアプリケーション
 
-The IP allowlist feature does not block access to the following:
-- Data ingest endpoints to which the Agent sends data, such as metrics, traces, and logs
-- The [validate API key][2] endpoint, which the Agent uses before submitting data
-- [Public dashboards][3]
+IP 許可リスト機能は、以下へのアクセスをブロックしません。
+- Agent がメトリクス、トレース、ログなどのデータを送信するデータ取り込みエンドポイント
+- Agent がデータを送信する前に使用する [validate API key][2] のエンドポイント
+- [公開ダッシュボード][3]
 
-Applications and integrations that submit telemetry such as metrics, traces, and logs from the Agent and those that use an API key provided by the user are unaffected by the IP allowlist. Datadog recommends utilizing the [Audit Trail][4] to monitor for IP addresses from third parties.
+Agent からメトリクス、トレース、ログなどのテレメトリーを送信するアプリケーションやインテグレーション、およびユーザーから提供された API キーを使用するアプリケーションやインテグレーションは、IP 許可リストの影響を受けません。Datadog は、サードパーティからの IP アドレスを監視するために[監査証跡][4]を利用することを推奨します。
 
-### Functionality
+### 機能性
 
-Only users with the **Org Management** permission can configure the IP allowlist.
+IP 許可リストは、**Org Management** 権限を持つユーザーのみが設定できます。
 
-With the IP allowlist API or UI, you can:
-- Check the status of the IP allowlist. Whether the IP allowlist is on or off determines whether your organization is restricting requests by IP address allowlist membership.
-- Turn the IP allowlist on and off.
-- Show the IP addresses (as CIDR ranges) that are covered by your IP allowlist.
-- Add IP addresses (IPv4 or IPv6) or CIDR ranges to the IP allowlist with an optional note.
-- Edit the note for an IP address already in the IP allowlist.
-- Delete a single entry from the IP allowlist.
-- Replace the whole IP allowlist with new entries (only available through the API).
+IP 許可リスト API または UI を使用すると、次のことができます。
+- IP 許可リストのステータスを確認できます。IP 許可リスト がオンかオフかによって、組織が IP アドレス許可リストのメンバーシップによってリクエストを制限しているかどうかが決まります。
+- IP 許可リストのオン/オフを切り替えることができます。
+- IP 許可リストでカバーされている IP アドレス (CIDR 範囲として) を表示できます。
+- IP アドレス (IPv4 または IPv6) または CIDR 範囲を、オプションのメモとともに IP 許可リストに追加できます。
+- すでに IP 許可リストに登録されている IP アドレスのメモを編集できます。
+- IP 許可リストから 1 つのエントリを削除することができます。
+- IP 許可リスト全体を新しいエントリで置き換えることができます (API を通じてのみ利用可能)。
 
-### Lockout prevention
+### ロックアウト防止
 
-When you enable or modify the IP allowlist, the system enforces constraints to make sure you can still access your data:
-- At least one entry in the IP allowlist contains your current IP
-- The allowlist contains at least one entry
+IP 許可リストを有効化または変更すると、あなたがデータにアクセスできなくならないようにシステムは制約を適用します。
+- IP 許可リストの少なくとも 1 つのエントリに、現在の IP が含まれている
+- 許可リストには、少なくとも 1 つのエントリが含まれている
 
-## Managing the IP allowlist in the UI
+## UI で IP 許可リストを管理する
 
-**Note:** The IP allowlist page only appears in the UI if your Datadog organization has the feature turned on.
+**注:** IP 許可リスト ページは、Datadog 組織がこの機能をオンにしている場合にのみ UI に表示されます。
 
-To find the [IP allowlist UI][5]:
+[IP 許可リスト UI][5] を見つけるには
 
-1. Navigate to **Organization Settings** from your account menu.
-1. Under **Access**, select **IP Allowlist**.
+1. アカウントメニューから、**Organization Settings** に移動します。
+1. **Access** の下で、**IP Allowlist** を選択します。
 
-The IP allowlist table lists the CIDR ranges contained in the IP allowlist.
+IP 許可リストテーブルには、IP 許可リストに含まれる CIDR 範囲が一覧表示されます。
 
-### Enable and disable the IP allowlist
+### IP 許可リストの有効化・無効化
 
-A banner at the top of the page shows the enabled or disabled status of the IP allowlist. It also shows your IP and whether that IP is in the allowlist.
+ページ上部のバナーには、IP 許可リストの有効/無効のステータスが表示されます。また、IP とその IP が許可リストにあるかどうかも表示されます。
 
-To toggle the IP allowlist status, click the **Enable** or **Disable** button.
+IP 許可リストのステータスを切り替えるには、**Enable** または **Disable** ボタンをクリックします。
 
-### Add IP addresses or CIDR ranges
+### IP アドレスまたは CIDR 範囲を追加する
 
-{{< img src="account_management/org_settings/add_ip.png" alt="Screenshot showing a dialog box titled Add IP to allowlist" >}}
+{{< img src="account_management/org_settings/add_ip.png" alt="Add IP to allowlist と題されたダイアログボックスを示すスクリーンショット" >}}
 
-1. Click the **Add IP** button at the top right of the page. 
-1. Enter a valid IP address or CIDR range.
-1. Optionally, add a note, for example, to remind yourself why you are allowing access to certain addresses.
-1. Click **Confirm**.
+1. ページ右上の **Add IP** ボタンをクリックします。
+1. 有効な IP アドレスまたは CIDR 範囲を入力します。
+1. オプションで、例えば、特定のアドレスへのアクセスを許可する理由を思い出すために、メモを追加します。
+1. **Confirm** をクリックします。
 
-### Edit IP addresses or CIDR ranges
+### IP アドレスまたは CIDR 範囲を編集する
 
-1. In the IP allowlist table, hover over the row you wish to edit. 
-1. Click the pencil (**Edit**) icon. 
-1. Change the descriptive **Note** text.
-1. Click **Confirm**.
+1. IP 許可リストテーブルで、編集したい行にカーソルを合わせます。
+1. 鉛筆 (**Edit**) のアイコンをクリックします。
+1. 説明文の **Note** のテキストを変更します。
+1. **Confirm** をクリックします。
 
-### Delete IP addresses or CIDR ranges
+### IP アドレスまたは CIDR 範囲を削除する
 
-1. In the IP allowlist table, hover over the row you wish to delete. 
-1. Click the trash can (**Delete**) icon and confirm you want to delete it. 
+1. IP 許可リストテーブルで、削除したい行にカーソルを合わせます。
+1. ゴミ箱 (**Delete**) のアイコンをクリックし、削除することを確認します。
 
-## Managing the IP allowlist programmatically
+## プログラムで IP 許可リストを管理する
 
-To manage the IP allowlist through the API, see the [IP Allowlist API documentation][6].
+IP 許可リストを API で管理するには、[IP 許可リスト API ドキュメント][6]を参照してください。
 
-See the [`ip_allowlist` resource][7] to manage the IP allowlist in Terraform.
+Terraform で IP 許可リストを管理するには、[`ip_allowlist` リソース][7]をご覧ください。
 
 
 [1]: /api/latest/

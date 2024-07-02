@@ -221,7 +221,7 @@ class ErrorBoundary extends React.Component {
 {{< /tabs >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 ### Script error
 

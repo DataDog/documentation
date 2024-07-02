@@ -24,7 +24,7 @@
 - aws
 - cloud
 - cost management
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/aws_pricing/README.md"
 "display_on_public_website": true
@@ -66,11 +66,11 @@
 
 This check pulls pricing information [published by AWS][1] to make it easier to measure cost of resource utilization within Datadog.
 
-## Setup
+## セットアップ
 
 The AWS Pricing check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the AWS Pricing check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -82,7 +82,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the AWS Pric
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `aws_pricing.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting AWS pricing data. See the sample [aws_pricing.d/conf.yaml][5] for all available configuration options.
 
@@ -92,21 +92,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the AWS Pric
 
 [Run the Agent's status subcommand][7] and look for `aws_pricing` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "aws_pricing" >}}
 
 
-### Events
+### イベント
 
 AWS Pricing does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "aws_pricing" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

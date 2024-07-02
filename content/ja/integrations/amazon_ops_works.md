@@ -7,9 +7,9 @@
 - "configuration & deployment"
 - "log collection"
 - "provisioning"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track AWS OpsWorks resource usage."
+"description": "AWS OpsWorks のリソース使用状況を追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_ops_works/"
 "draft": false
 "git_integration_title": "amazon_ops_works"
@@ -32,9 +32,9 @@ AWS OpsWorks is an application management service that makes it easy to deploy a
 
 Enable this integration to see in Datadog all your OpsWorks metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -59,23 +59,23 @@ Configure AWS OpsWorks to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_ops_works" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The AWS OpsWorks integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS OpsWorks integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

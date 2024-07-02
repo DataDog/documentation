@@ -1,13 +1,17 @@
 ---
+title: Rollup
 aliases:
-- /ja/graphing/functions/rollup/
-title: ロールアップ
+    - /graphing/functions/rollup/
 ---
 
 すべてのメトリクスクエリは本質的に集計されます。しかし、クエリの最後に `.rollup()` 関数を追加することで、デフォルトをオーバーライドしたカスタムの[時間集計][1]を行うことができます。この関数を使用すると、次のような定義を行うことができます。
 
 * rollup `<interval>`: データが集計される時間の間隔 ([クエリで強制されるロールアップの間隔より大きい場合](#rollup-interval-enforced-vs-custom))。
 * rollup `<aggregator>`: 指定されたロールアップの時間間隔の範囲におけるデータポイントの集計方法。
+
+To apply a rollup, navigate to the **Add function** (Σ) button of the graphing editor: 
+
+{{< img src="dashboards/functions/rollup/rollup_option_1.mp4" alt="Select the Rollup average option from the Add function button" video=true >}}
 
 **注**: Distribution メトリクスタイプには rollup の `aggregator` はありません。このメトリクスタイプは時間と空間の両方で集計されます 詳細は[パーセンタイル付きのディストリビューション向け rollup][2] についてのドキュメントを参照してください。
 
@@ -38,24 +42,34 @@ title: ロールアップ
 
 ## ロールアップ間隔: 強制またはカスタム
 
-グラフ化する際、Datadog は 1 つのグラフのポイント数に制限を設けています。この制限を守るために、Datadog は `avg` メソッドを使用してデータポイントを自動的にロールアップし、あるメトリクスの時間間隔内のすべてのデータポイントの平均値を効果的に表示します。このデフォルトの時間間隔は、データをどのように視覚化するかによって異なります。これらのデフォルトの時間間隔を参照するには、次のチャートを参照してください。
+When graphing, Datadog sets a limit on the number of points per timeseries. To retain visual clarity, a series can have up to 1500 points. To respect this limit, Datadog rolls up datapoints automatically, defaulting to the `avg` method, effectively displaying the average of all datapoints within a time interval for a given metric. The default rollup time interval varies depending on how the data is visualized. See the following chart to reference these default time intervals:
 
 | タイムフレーム           | rollup 間隔 (線グラフ) | rollup 間隔 (棒グラフ) | rollup 間隔 (API) |
 |---------------------|-----------------------------|----------------------------|----------------------|
 | 過去 1 時間       | 20 秒                         | 1 分                         | 20 秒                  |
 | 過去 4 時間    | 1 分                          | 2 分                         | 1 分                   |
-| 過去 1 日        | 5 分                          | 20 分                        | ５分                   |
+| 過去 1 日        | 5 分                          | 20 分                        | 5 分                   |
 | 過去 2 日     | 10 分                         | 30 分                        | 10 分                  |
 | 過去 1 週間       | 1 時間                         | 2 時間                        | 1 時間                  |
-| 先月      | 2 時間                         | 12 時間                       | 4 時間                  |
+| 先月      | 4 時間                         | 12 時間                       | 4 時間                  |
 
-`.rollup()` 関数を作成して使用すると、時間集計のタイプ (`avg`、`min`、`max`、`count`、`sum`) と rollup の時間間隔を指定できます。しかし、カスタム `.rollup()` 関数を適用することで Datadog の制限を超えて時間間隔が短くなる場合、時間集計のタイプは rollup 関数で指定したものが使われますが、時間間隔については Datadog による制限の方が優先されます。たとえば、1 か月分のメトリクスを `.rollup(20)` を使用してリクエストすると、決められたポイント数以上のデータを返さないようにするため、20 秒よりも長い rollup 間隔でデータが戻されます。
+A custom `.rollup()` function can be used to enforce the type of time aggregation applied (`avg`, `min`, `max`, `count`, or `sum`) and optionally the time interval to rollup. Using this function, you can set the rollup time interval to a different value than the defaults, up to a limit of 1500 points. This supports up to one point per minute over a day.
 
 **注**: `COUNT` と `RATE` のタイプのメトリクスは、自動的に `.as_count()` のモディファイアー付きで画面に表示されます。これにより、`sum` を設定したロールアップ関数が実行され、補間が無効になります。この `.as_count()` はクエリの末尾に明示的に表示されます。
 
   {{< img src="dashboards/functions/rollup/as_count_dropdown.png" alt="as_count" style="width:100%;">}}
 
 `.as_count()` と `.as_rate()` の使用方法について詳しくは、ブログ記事 [StatsD メトリクスの視覚化][3]を参照してください。また、これらの関数の影響について詳しくは、[アプリ内モディファイアーに関するドキュメント][4]を参照してください。
+
+## Rollup with calendar aligned queries 
+
+{{< img src="dashboards/functions/rollup/calendar_aligned_queries.png" alt="calendar_aligned_queries" style="width:100%;" >}}
+
+You can customize how your metrics data is bucketed over time when using the `.rollup()` function with calendar aligned queries. This feature allows you the flexibility to define:
+
+* 開始日とタイムゾーンを調整可能な、カレンダーに準拠した月次クエリ。例えば、昨年の 2 月と 12 月の月間のクライアントエラーを比較することができます。
+* 開始日とタイムゾーンを調整可能な週次ロールアップ。例えば、(週の開始日が月曜日であれば) その週にどれだけの取引が開始されているかを見ることができます。
+* 開始時刻とタイムゾーンを調整可能な日次ロールアップ。例えば、(太平洋標準時の深夜から始まる場合) 当日に発生した興味深いイベントの数を見ることができます。
 
 ## モニターでのロールアップ
 
@@ -76,8 +90,8 @@ title: ロールアップ
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ja/dashboards/functions/#add-a-function
-[2]: /ja/metrics/faq/rollup-for-distributions-with-percentiles/
+[1]: /dashboards/functions/#add-a-function
+[2]: /metrics/faq/rollup-for-distributions-with-percentiles/
 [3]: https://www.datadoghq.com/blog/visualize-statsd-metrics-counts-graphing
-[4]: /ja/metrics/custom_metrics/type_modifiers/
-[5]: /ja/monitors/types/metric/
+[4]: /metrics/custom_metrics/type_modifiers/
+[5]: /monitors/types/metric/

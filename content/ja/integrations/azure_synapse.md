@@ -2,7 +2,7 @@
 "categories":
 - cloud
 - azure
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Synapse metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_synapse/"
@@ -27,23 +27,23 @@ Azure Synapse Analytics is an analytics service that brings together data integr
 
 Use the Datadog Azure integration to collect metrics from Azure Synapse.
 
-## Setup
-### Installation
+## セットアップ
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## Data Collected
-### Metrics
+## 収集データ
+### メトリクス
 {{< get-metrics-from-git "azure_synapse" >}}
 
 
-### Events
+### イベント
 The Azure Synapse integration does not include any events.
 
-### Service Checks
+### サービスチェック
 The Azure Synapse integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 Need help? Contact [Datadog support][3].
 
 [1]: https://docs.datadoghq.com/integrations/azure/

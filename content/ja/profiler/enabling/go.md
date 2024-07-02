@@ -17,39 +17,39 @@ aliases:
   - /tracing/profiler/enabling/go/
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
 
-## Requirements
+## 要件
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][18].
 
-The Datadog Profiler requires Go 1.19+.
+Datadog Profiler には Go 1.19 以降が必要です。
 
-For [Code Hotspots][2] and [Endpoint Profiling][3], use `dd-trace-go` version 1.37.0+.
+[Code Hotspots][2] と [Endpoint Profiling][3] については、`dd-trace-go` バージョン 1.37.0 以降を使用してください。
 
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
-## Installation
+## インストール
 
-To begin profiling applications:
+アプリケーションのプロファイリングを開始するには
 
 1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][19].
 
-2. Get `dd-trace-go` using the command:
+2. 以下のコマンドを使用して、`dd-trace-go` を取得します。
 
     ```shell
     go get gopkg.in/DataDog/dd-trace-go.v1/profiler
     ```
 
-     **Note**: Profiler is available in the `dd-trace-go` library for versions 1.23.0+.
+     **注**: プロファイラは、バージョン 1.23.0 以降の `dd-trace-go` ライブラリで利用できます。
 
-3. Import the [profiler][6] at the start of your application:
+3. アプリケーションの開始時に、[プロファイラ][6]をインポートします。
 
     ```Go
     import "gopkg.in/DataDog/dd-trace-go.v1/profiler"
     ```
 
-4. Add the following snippet to start the profiler:
+4. 次のスニペットを追加し、プロファイラを起動します。
 
     ```Go
     err := profiler.Start(
@@ -74,7 +74,7 @@ To begin profiling applications:
     defer profiler.Stop()
     ```
 
-4. Optional: Enable the [timeline feature][7] (beta), see [prerequisites][8].
+4. オプション: [タイムライン機能][7] (ベータ版) を有効にします。[前提条件][8]を参照してください。
 
 5. Optional: Set up [Source Code Integration][9] to connect your profiling data with your Git repositories.
 
@@ -82,45 +82,45 @@ To begin profiling applications:
 
 **Note**: By default, only the CPU and Heap profiles are enabled. Use [profiler.WithProfileTypes][11] to enable additional [profile types][12].
 
-## Configuration
+## 構成
 
-You can set profiler parameters in code with these functions:
+以下の関数で、コードにプロファイラーパラメーターを設定できます。
 
-| Function | Type          | Description                                                                                                  |
+| 関数 | タイプ          | 説明                                                                                                  |
 | ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
-|  WithService     | String        | The Datadog [service][13] name, for example, `my-web-app`.             |
-|  WithEnv         | String        | The Datadog [environment][14] name, for example, `production`.         |
-|  WithVersion     | String        | The version of your application.                                                                             |
-|  WithTags        | List of strings        | A list of tags to apply to an uploaded profile. Tags must be of the format `<KEY>:<VALUE>`. |
+|  WithService     | 文字列        | The Datadog [service][13] name, for example, `my-web-app`.             |
+|  WithEnv         | 文字列        | The Datadog [environment][14] name, for example, `production`.         |
+|  WithVersion     | 文字列        | アプリケーションのバージョン                                                                             |
+|  WithTags        | 文字列のリスト        | アップロードされたプロファイルに適用されるタグのリスト。タグは `<KEY>:<VALUE>` という形式で指定する必要があります。 |
 
-Alternatively you can set profiler configuration using environment variables:
+または、環境変数を使用してプロファイラーコンフィギュレーションを設定することも可能です。
 
-| Environment variable                             | Type          | Description                                                                                      |
+| 環境変数                             | タイプ          | 説明                                                                                      |
 | ------------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------ |
-| `DD_ENV`                                         | String        | The [environment][13] name, for example, `production`. |
-| `DD_SERVICE`                                     | String        | The [service][13] name, for example, `web-backend`. |
-| `DD_VERSION`                                     | String        | The [version][13] of your service. |
-| `DD_TAGS`                                        | String        | Tags to apply to an uploaded profile. Must be a list of `<key>:<value>` separated by commas such as: `layer:api,team:intake`.   |
+| `DD_ENV`                                         | 文字列        | The [environment][13] name, for example, `production`. |
+| `DD_SERVICE`                                     | 文字列        | The [service][13] name, for example, `web-backend`. |
+| `DD_VERSION`                                     | 文字列        | The [version][13] of your service. |
+| `DD_TAGS`                                        | 文字列        | アップロードされたプロファイルに適用するタグ。`<key>:<value>` のように、コンマ区切り形式のリストである必要があります（例、`layer:api,team:intake`）。   |
 
-### Showing C function calls in CPU profiles
+### CPU プロファイルで C 関数呼び出しを表示する
 
-By default, Go's CPU profiler only shows detailed information for Go code. If your program calls C code, the time spent running C code is reflected in the profile, but the call stacks only show Go function calls.
+デフォルトでは、Go の CPU プロファイラーには、Go コードの詳細情報のみが表示されます。プログラムが C コードを呼び出した場合、C コードの実行時間はプロファイルに反映されますが、コールスタックには Go 関数の呼び出しだけが表示されます。
 
 To add detailed C function call information to CPU profiles, you may opt to use library such as [ianlancetaylor/cgosymbolizer][14]. To use this library:
 
-1. Download the package:
+1. パッケージをダウンロードします。
 
     ```shell
     go get github.com/ianlancetaylor/cgosymbolizer@latest
     ```
 
-2. Add the following import anywhere in your program:
+2. プログラムの任意の場所に、以下のインポートを追加します。
 
     ```Go
     import _ "github.com/ianlancetaylor/cgosymbolizer"
     ```
 
-**Note**: This library is considered experimental. It can cause (infrequent) deadlocks in programs that use C++ exceptions, or that use libraries such as `tcmalloc`, which also collect call stacks.
+**注**: このライブラリは実験的なものと見なされています。C++ の例外を使用するプログラムや、`tcmalloc` のようなコールスタックを収集するライブラリを使用するプログラムでは、デッドロックの原因となる可能性があります (頻度は低いですが)。
 
 ## Save up to 14% CPU in production with PGO
 
@@ -128,11 +128,11 @@ Starting [Go 1.21][15], the Go compiler supports Profile-Guided Optimization (PG
 
 Follow [this guide][16] to set it up.
 
-## Not sure what to do next?
+## 次のステップ
 
 The [Getting Started with Profiler][17] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

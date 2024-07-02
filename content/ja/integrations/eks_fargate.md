@@ -23,7 +23,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/eks_fargate/README.md"
 "display_on_public_website": true
@@ -70,7 +70,7 @@ Amazon EKS on AWS Fargate is a managed Kubernetes service that automates certain
 
 **Note**: Network Performance Monitoring (NPM) is not supported for EKS Fargate.
 
-## Setup
+## セットアップ
 
 These steps cover the setup of the Datadog Agent v7.17+ in a container within Amazon EKS on AWS Fargate. See the [Datadog-Amazon EKS integration documentation][1] if you are not using AWS Fargate.
 
@@ -85,7 +85,7 @@ AWS Fargate pods are not physical pods, which means they exclude [host-based sys
 
 If you don't specify through [AWS Fargate Profile][4] that your pods should run on fargate, your pods can use classical EC2 machines. If it's the case see the [Datadog-Amazon EKS integration setup][5] in order to collect data from them. This works by running the Agent as an EC2-type workload. The Agent setup is the same as that of the [Kubernetes Agent setup][6], and all options are available. To deploy the Agent on EC2 nodes, use the [DaemonSet setup for the Datadog Agent][7].
 
-### Installation
+### インストール
 
 To get the best observability coverage monitoring workloads in AWS EKS Fargate, install the Datadog integrations for:
 
@@ -102,7 +102,7 @@ To install, download the custom Agent image: `datadog/agent` with version v7.17 
 
 If the Agent is running as a sidecar, it can communicate only with containers on the same pod. Run an Agent for every pod you wish to monitor.
 
-### Configuration
+### 構成
 
 To collect data from your applications running in AWS EKS Fargate over a Fargate node, follow these setup steps:
 
@@ -191,7 +191,7 @@ The setup below configures the Cluster Agent to communicate with the Agent sidec
    ```
    For more information how these secrets are used, see the [Cluster Agent Setup][4].
 
-###### Setup
+###### セットアップ
 
 1. Install the Datadog Agent with the Cluster Agent and Admission Controller enabled:
 
@@ -702,21 +702,21 @@ spec:
 
 **Note**: CPU and memory metrics are not available.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The eks_fargate check submits a heartbeat metric `eks.fargate.pods.running` that is tagged by `pod_name` and `virtual_node` so you can keep track of how many pods are running.
 
-### Service Checks
+### サービスチェック
 
 eks_fargate does not include any service checks.
 
-### Events
+### イベント
 
 eks_fargate does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][21].
 

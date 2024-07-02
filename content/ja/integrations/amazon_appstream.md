@@ -4,7 +4,7 @@
 - cloud
 - configuration & deployment
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon AppStream metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_appstream/"
@@ -29,9 +29,9 @@ Amazon AppStream is a fully managed, secure application streaming service that a
 
 Enable this integration to see all your AppStream metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -56,21 +56,21 @@ Configure Amazon AppStream to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_appstream" >}}
 
 
-### Events
+### イベント
 
 The Amazon AppStream integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon AppStream integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

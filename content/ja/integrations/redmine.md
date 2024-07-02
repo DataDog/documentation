@@ -3,9 +3,9 @@
 - "collaboration"
 - "developer tools"
 - "issue tracking"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "View, search on, and discuss Redmine updates in your Datadog event stream."
+"description": "Redmine のアップデートを Datadog のイベントストリームで表示、検索、議論。"
 "doc_link": "https://docs.datadoghq.com/integrations/redmine/"
 "draft": false
 "git_integration_title": "redmine"
@@ -32,27 +32,27 @@ Redmine is an open source project management web application. Capture Redmine ac
 
 The Redmine configuration requires a full URL to the desired activity feed. You can add multiple URLs.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 See the [Redmine integration tile][1] to configure your integration.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Redmine integration does not include any metric.
 
-### Events
+### イベント
 
 All created issues appear as events within Datadog. After installing and configuring the integration, you can search the [Events Explorer][2] for `source:redmine` to see issues in your Redmine activity feed.
 
-### Service Checks
+### サービスチェック
 
 The Redmine integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

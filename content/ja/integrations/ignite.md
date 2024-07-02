@@ -28,7 +28,7 @@
 - data stores
 - log collection
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/ignite/README.md"
 "display_on_public_website": true
@@ -67,51 +67,51 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Ignite][1].
+このチェックは [Ignite][1] を監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Ignite check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
+Ignite チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-#### Ignite setup
+#### Ignite のセットアップ
 
-JMX metrics exporter is enabled by default, but you may need to choose the port exposed, or enable authentication depending on your network security. The official docker image uses `49112` by default.
+JMX メトリクスエクスポーターはデフォルトで有効になっていますが、ネットワークセキュリティに応じて、公開ポートを選択するか、認証を有効にする必要がある場合があります。公式の Docker イメージはデフォルトで `49112` を使用します。
 
-For logging, it's strongly suggested to enable [log4j][3] to benefit from a log format with full dates.
+ロギングについては、[log4j][3] を有効にして、完全な日付のログ形式を利用することを強くお勧めします。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `ignite.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your ignite performance data. See the [sample ignite.d/conf.yaml][1] for all available configuration options.
+1. ignite のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ignite.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ignite.d/conf.yaml][1] を参照してください。
 
-   This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in [the status page][2].
-   You can specify the metrics you are interested in by editing the configuration below.
-   To learn how to customize the metrics to collect see the [JMX Checks documentation][3] for more information.
-   If you need to monitor more metrics, contact [Datadog support][4].
+   このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、[ステータスページ][2]に表示されます。
+   以下で説明する構成を編集することで、関心があるメトリクスを指定できます。
+   収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][3]で詳細を確認してください。
+   制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][4]までお問い合わせください。
 
-2. [Restart the Agent][5]
+2. [Agent を再起動します][5]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `ignite.d/conf.yaml` file to start collecting your Ignite logs:
+2. Ignite のログの収集を開始するには、次のコンフィギュレーションブロックを `ignite.d/conf.yaml` ファイルに追加します。
 
    ```yaml
      logs:
@@ -125,9 +125,9 @@ _Available for Agent versions >6.0_
              pattern: \[\d{4}\-\d{2}\-\d{2}
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment. See the [sample ignite.d/conf.yaml][1] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル ignite.d/conf.yaml][1] を参照してください。
 
-3. [Restart the Agent][5].
+3. [Agent を再起動します][5]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/ignite/datadog_checks/ignite/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
@@ -135,25 +135,25 @@ _Available for Agent versions >6.0_
 [4]: https://docs.datadoghq.com/help/
 [5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-To collect metrics with the Datadog-Ignite integration, see the [Autodiscovery with JMX][2] guide.
+Datadog-Ignite インテグレーションを使用してメトリクスを収集するには、[JMX を使用したオートディスカバリー][2]ガイドを参照してください。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker log collection][3].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][3]を参照してください。
 
-| Parameter      | Value                                                                                                                                                             |
+| パラメーター      | 値                                                                                                                                                             |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "ignite", "service": "<SERVICE_NAME>", "log_processing_rules":{"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-\d{2}\-\d{2}"}}` |
+| `<LOG_CONFIG>` | `{"source": "ignite", "service": "<サービス名>", "log_processing_rules":{"type":"multi_line","name":"new_log_start_with_date", "pattern":"\d{4}\-\d{2}\-\d{2}"}}` |
 
 [1]: https://docs.datadoghq.com/agent/autodiscovery/integrations/
 [2]: https://docs.datadoghq.com/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
@@ -161,27 +161,27 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's `status` subcommand][4] and look for `ignite` under the Checks section.
+[Agent の `status` サブコマンドを実行][4]し、Checks セクションで `ignite` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "ignite" >}}
 
 
-### Events
+### イベント
 
-The Ignite integration does not include any events.
+Ignite インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "ignite" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 

@@ -21,7 +21,7 @@
 "categories":
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/typingdna_activelock/README.md"
 "display_on_public_website": true
@@ -70,9 +70,9 @@ This integration allows you to send logs from your ActiveLock apps to Datadog, a
 To visualize your data in Datadog, a custom ActiveLock app needs to be configured and installed. This is the same install for all of your company computers.
 
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
 To generate a Datadog API key:
 
@@ -96,13 +96,13 @@ To view your ActiveLock logs in Datadog, navigate to the [Log Explorer][6] and e
 To access the dashboard, navigate to the [Dashboard List][7] and search for the **TypingDNA ActiveLock** dashboard.
 
 
-## Data Collected
+## 収集データ
 
 ### Log collection
 
 TypingDNA ActiveLock logs are collected and sent to Datadog directly from each application.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog][8] or [TypingDNA support][5].
 

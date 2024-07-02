@@ -4,7 +4,7 @@
 "categories":
 - cloud
 - azure
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure Analysis Services metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_analysis_services/"
@@ -29,27 +29,27 @@ Azure Analysis Services is a fully managed platform as a service (PaaS) that pro
 
 Use the Datadog Azure integration to collect metrics from Azure Analysis Services.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_analysis_services" >}}
 
 
-### Events
+### イベント
 
 The Azure Analysis Services integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Analysis Services integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

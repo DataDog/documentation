@@ -28,7 +28,7 @@
 - developer tools
 - orchestration
 - provisioning
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/pulumi/README.md"
 "display_on_public_website": true
@@ -78,13 +78,13 @@ The Pulumi integration is used to provision any of the cloud resources available
 
 **Note**: You need to set AWS IAM Permissions for the integration to make changes. You can find steps on setting AWS IAM Permissions in our [AWS Integration documentation][2].
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The [Pulumi Datadog integration][3] uses the Datadog SDK to manage and provision resources.
 
-### Configuration
+### 構成
 
 1. [Sign up for a free or commercial Pulumi account][4]
 
@@ -111,21 +111,21 @@ pulumi config set datadog:apiKey XXXXXXXXXXXXXX --secret && pulumi config set da
 
 5. Once you have defined your cloud resources in code, run `pulumi up` to create the new resources defined in your Pulumi program. 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 Pulumi does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 Pulumi does not include any service checks.
 
-### Events
+### イベント
 
 Pulumi does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

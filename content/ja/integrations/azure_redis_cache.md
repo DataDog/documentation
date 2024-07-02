@@ -3,9 +3,9 @@
 - "azure"
 - "caching"
 - "cloud"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track cache hits, misses, evictions, connected clients, and more."
+"description": "キャッシュのヒット数、ミス数、エビクション数、接続クライアント数などを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/azure_redis_cache/"
 "draft": false
 "git_integration_title": "azure_redis_cache"
@@ -31,27 +31,27 @@ Get metrics from Azure Redis Cache to:
 - Visualize the performance of your Redis Caches.
 - Correlate the performance of your Redis Caches with your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration first][1]. There are no other installation steps that need to be performed.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_redis_cache" >}}
 
 
-### Events
+### イベント
 
 The Azure Redis Cache integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Redis Cache integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

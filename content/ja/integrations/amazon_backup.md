@@ -3,7 +3,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key AWS Backup metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_backup/"
@@ -29,9 +29,9 @@ services and hybrid workloads.
 
 Enable this integration to see your Backup metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1].
 
@@ -40,21 +40,21 @@ If you haven't already, set up the [Amazon Web Services integration][1].
 1. In the [AWS integration page][2], ensure that `Backup` is enabled under the `Metric Collection` tab.
 2. Install the [Datadog - AWS Backup integration][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_backup" >}}
 
 
-### Events
+### イベント
 
 The AWS Backup integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS Backup integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

@@ -6,15 +6,15 @@
 - "aws"
 - "log collection"
 - "ai/ml"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track prediction counts and failures from AWS Machine Learning."
+"description": "AWS Machine Learning の予測カウントおよび失敗数を追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_machine_learning/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/ml-model-monitoring-in-production-best-practices/"
-  "tag": "Blog"
-  "text": "Best practices for monitoring ML models in production"
+  "tag": "ブログ"
+  "text": "本番環境で ML モデルを監視するためのベストプラクティス"
 "git_integration_title": "amazon_machine_learning"
 "has_logo": true
 "integration_id": ""
@@ -62,7 +62,7 @@ Configure AWS Machine Learning to send logs either to a S3 bucket or to CloudWat
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "amazon_machine_learning" >}}

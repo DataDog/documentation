@@ -2,28 +2,28 @@
 title: Template Variable Evaluation
 ---
 
-In monitor notification messages, you can modify the output of template variables using the `eval` syntax, which enables several different mathematical operations and functions on template variables with a numerical value.
+モニター通知メッセージでは、`eval` 構文を使用してテンプレート変数の出力を変更できます。これにより、数値を持つテンプレート変数に対していくつかの異なる算術演算と関数を使用できます。
 
-## Operators
+## 演算子
 
-Evaluation operators allow you to perform basic arithmetic operations on a numerical template variable. The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
+評価演算子を使用すると、数値テンプレート変数に対して基本的な算術演算を実行できます。構文は次の形式を使用します。**注**: 式は引用符（ `"`）で囲む必要があります。
 
 ```text
-{{eval "TEMPLATE_VARIABLE_NAME+1-2*3/4"}}
+{{eval "テンプレート変数名+1-2*3/4"}}
 ```
 
-The following operators are supported:
+次の演算子がサポートされています。
 
-| Operator | Description    |
+| 演算子 | 説明    |
 |----------|----------------|
-| +        | Addition       |
-| -        | Subtraction    |
-| *        | Multiplication |
-| /        | Division       |
-| ^        | Exponentiation |
-| %        | Modulo         |
+| +        | 加算       |
+| -        | 減算    |
+| *        | 乗算 |
+| /        | 除算       |
+| ^        | べき乗 |
+| %        | 剰余         |
 
-### Example
+### 例
 
 The `{{last_triggered_at_epoch}}` template variable returns the UTC time when a monitor last triggered in milliseconds epoch format. 
 
@@ -35,7 +35,7 @@ Evaluation operators can be used to subtract 15 minutes (15 * 60 * 1000 millisec
 {{eval "last_triggered_at_epoch-15*60*1000"}}
 ```
 
-This is useful for creating time-scoped links in your monitor notification message to other pages in Datadog or other workflow tools. For instance, use the evaluation operators on `{{last_triggered_at_epoch}}` to create a time-scoped link to the [Datadog Log Explorer][1]:
+これは、Datadog または他のワークフローツールの他のページへのモニター通知メッセージに時間スコープのリンクを作成するのに役立ちます。たとえば、`{{last_triggered_at_epoch}}` の評価演算子を使用して、[Datadog ログエクスプローラー][1]への時間スコープのリンクを作成します。
 
 ```
 https://app.datadoghq.com/logs?from_ts={{eval "last_triggered_at_epoch-15*60*1000"}}&to_ts={{last_triggered_at_epoch}}&live=false
@@ -50,61 +50,61 @@ Handle that should receive notification if time is between 2PM and 5PM
 {{/is_match}}
 ```
 
-## Functions
+## 関数
 
-The value of a numerical template variable can be used as the input for evaluation functions to change the formatting of the template variable or perform a mathematical operation on the value. The syntax uses the following format. **Note**: The expressions must be wrapped in quotation marks (`"`).
+数値テンプレート変数の値を評価関数の入力として使用して、テンプレート変数のフォーマットを変更したり、値に対して算術演算を実行したりできます。構文は次の形式を使用します。**注**: 式は引用符（`"`）で囲む必要があります。
 
 ```text
 {{eval "function(TEMPLATE_VARIABLE_NAME)"}}
 ```
 
-The following functions change how the value of a numerical template variable is formatted:
+次の関数は、数値テンプレート変数の値のフォーマット方法を変更します。
 
-| Function            | Description|
+| 関数            | 説明|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| humanize_bytes(var) | Returns a human readable formatting of var bytes|
-| humanize_bits(var)  | Returns a human readable formatting of var bits|
-| abs(var)            | Returns the absolute value of var|
-| int(var)            | Returns var as a floored integer; that is, the numbers to the left of the decimal point. For example: if var = 12.345, then `int(var)` returns 12.|
-| float(var)          | Returns var as a float|
-| trunc(var)          | Returns var as an integer, an alias of the int function|
-| dec(var)            | Returns the numbers to the right of the decimal point. For example: if var = 12.345, then `dec(var)` returns 0.345.|
+| humanize_bytes(var) | 人間が読める形式の var バイトを返します|
+| humanize_bits(var)  | 人間が読める形式の var ビットを返します|
+| abs(var)            | var の絶対値を返します|
+| int(var)            | var を床付き整数、つまり小数点以下の数値で返します。たとえば、var = 12.345 の場合、 `int(var)` は 12 を返します。|
+| float(var)          | var を浮動小数点数として返します|
+| trunc(var)          | var を整数として返します。これは int 関数のエイリアスです|
+| dec(var)            | 小数点の右側の数値を返します。たとえば、var = 12.345 の場合、`dec(var)` は 0.345 を返します。|
 
-The following functions use the value of a numerical template variable as the input to a mathematical function:
+次の関数は、数値テンプレート変数の値を数学関数への入力として使用します。
 
-| Function            | Description|
+| 関数            | 説明|
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| round(var)          | Returns var rounded to the nearest integer|
+| round(var)          | 最も近い整数に丸められた var を返します|
 | round(var, n)       | Returns var rounded to a specified number of digits (n).<br>For example: round(12.376, 2) = 12.38|
-| ceil(var)           | Returns the ceiling of var (the smallest integer that is greater than or equal to var)|
-| floor(var)          | Returns the floor of var (the largest integer that is less than or equal to var)|
-| sgn(var)            | Returns the value of the sign function evaluated at var:<br>sgn(var) = 1 if var > 0<br>sgn(var) = 0 if var = 0<br>sgn(var) = -1 if var < 0|
-| to_bool(var)        | Returns true if var = 1<br>Returns false if var = 0|
-| exp(var)            | Returns e (the base of the natural logarithm) raised to the power of var|
-| log10(var)          | Returns the base-10 logarithm of var|
-| sin(var)            | Returns the sine of var radians|
-| sinh(var)           | Returns the hyperbolic sine of var|
-| asin(var)           | Returns the arc sine of var, in radians|
-| asinh(var)          | Returns the inverse hyperbolic sine of var|
-| cos(var)            | Returns the cosine of var radians|
-| cosh(var)           | Returns the hyperbolic cosine of var|
-| acos(var)           | Returns the arc cosine of var, in radians|
-| acosh(var)          | Returns the inverse hyperbolic cosine of var|
-| tan(var)            | Returns the tangent of var radians|
-| tanh(var)           | Returns the hyperbolic tangent of var|
-| atan(var)           | Returns the arc tangent of var, in radians|
-| atan2(var1, var2)   | Returns atan(var1 / var2), in radians|
-| atanh(var)          | Returns the inverse hyperbolic tangent of var|
+| ceil(var)           | var の上限を返します（var 以上の最小の整数）|
+| floor(var)          | var の下限を返します（var 以下の最大の整数）|
+| sgn(var)            | var で評価される符号関数の値を返します:<br>var > 0 の場合、sgn(var) = 1<br>var = 0 の場合、sgn(var) = 0<br>var < 0 の場合、sgn(var) = -1|
+| to_bool(var)        | var = 1 の場合は true を返します<br>var = 0 の場合は false を返します|
+| exp(var)            | var で累乗した e（自然対数の底）を返します|
+| log10(var)          | var の 10 を底とする対数を返します|
+| sin(var)            | var ラジアンの正弦を返します|
+| sinh(var)           | var の双曲線正弦を返します|
+| asin(var)           | var の逆正弦をラジアンで返します|
+| asinh(var)          | var の逆双曲線正弦を返します|
+| cos(var)            | var ラジアンの余弦を返します|
+| cosh(var)           | var の双曲線余弦を返します|
+| acos(var)           | var の逆余弦をラジアンで返します|
+| acosh(var)          | var の逆双曲線余弦を返します|
+| tan(var)            | var ラジアンの正接を返します|
+| tanh(var)           | var の双曲線正接を返します|
+| atan(var)           | var の逆正接をラジアンで返します|
+| atan2(var1, var2)   | atan(var1 / var2) をラジアンで返します|
+| atanh(var)          | var の逆双曲線正接を返します|
 
-### Examples
+### 例
 
-If the decimal places of the `{{value}}` template variable are unnecessary for your particular use case, use the int function to evaluate `{{value}}` as an integer to improve readability and remove the decimals:
+特定のユースケースで `{{value}}` テンプレート変数の小数点以下の桁数が不要な場合は、int 関数を使用して `{{value}}` を整数として評価し、読みやすさを向上させて小数点を削除します。
 
 ```
 {{eval "int(value)"}}
 ```
 
-If `{{value}}` is evaluating to a large number of bytes or bits, use the `humanize_bytes` or `humanize_bits` function to convert the number to a different higher order memory unit like GB or MB to improve readability:
+`{{value}}` が多数のバイトまたはビットに評価される場合は、`humanize_bytes` または `humanize_bits` 関数を使用して、数値を GB や MB などの別のより高次のメモリユニットに変換して読みやすくします。
 
 ```
 {{eval "humanize_bytes(value)"}}

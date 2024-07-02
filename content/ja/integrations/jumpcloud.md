@@ -18,7 +18,7 @@
 "categories":
 - event management
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -83,7 +83,7 @@ No installation is required.
 See the integration tile for details. An API key is required from the JumpCloud
 Administrator Portal.
 
-## Data Collected
+## 収集データ
 
 ### Logs
 

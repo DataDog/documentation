@@ -1,9 +1,9 @@
 ---
 "categories":
 - "orchestration"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "See and search on Fabric tasks in your Datadog event stream."
+"description": "Datadog イベントストリームで Fabric タスクを参照および検索。"
 "doc_link": "https://docs.datadoghq.com/integrations/fabric/"
 "draft": false
 "git_integration_title": "fabric"
@@ -29,9 +29,9 @@ Connect Fabric to Datadog in order to:
 - Capture and search for deploy events in the event stream.
 - Correlate deploy events with metric changes on dashboards.
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
 1. Install the dogapi package:
 
@@ -61,21 +61,21 @@ Connect Fabric to Datadog in order to:
         # do things
     ```
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Fabric integration does not include any metric.
 
-### Events
+### イベント
 
 The Fabric integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Fabric integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][1].
 

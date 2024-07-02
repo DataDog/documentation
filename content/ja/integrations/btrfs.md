@@ -25,7 +25,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/btrfs/README.md"
 "display_on_public_website": true
@@ -67,13 +67,13 @@ Get metrics from Btrfs in real time to:
 
 - Visualize and monitor Btrfs states.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Btrfs check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your servers that use at least one Btrfs filesystem.
 
-### Configuration
+### 構成
 
 1. Edit the `btrfs.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][3]. See the [sample btrfs.d/conf.yaml][4] for all available configuration options.
 
@@ -83,21 +83,21 @@ The Btrfs check is included in the [Datadog Agent][2] package, so you don't need
 
 [Run the Agent's status subcommand][6] and look for `btrfs` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "btrfs" >}}
 
 
-### Events
+### イベント
 
 The Btrfs check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Btrfs check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

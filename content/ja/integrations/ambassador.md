@@ -25,7 +25,7 @@
 - "containers"
 - "kubernetes"
 - "orchestration"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/ambassador/README.md"
 "display_on_public_website": true
@@ -74,7 +74,7 @@ Get metrics from [Ambassador][1] in real time to:
 
 ![snapshot][2]
 
-## Setup
+## セットアップ
 
 Enable DogStatsD on your Agent Daemonset, and set the following environment variable on your Ambassador pod:
 
@@ -91,21 +91,21 @@ See [Envoy statistics with StatsD][3] for more information.
 
 You can also send tracing data from Ambassador to Datadog APM. See [Distributed Tracing with Datadog][4] for more information.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "ambassador" >}}
 
 
-### Events
+### イベント
 
 The Ambassador check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Ambassador check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

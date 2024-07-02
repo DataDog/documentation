@@ -28,7 +28,7 @@
 "categories":
 - "caching"
 - "data stores"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/tokumx/README.md"
 "display_on_public_website": true
@@ -73,13 +73,13 @@ This check collects TokuMX metrics, including:
 - Replication lag.
 - Cache table utilization and storage size.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The TokuMX check is included in the [Datadog Agent][1] package. No additional installation is needed on your server.
 
-### Configuration
+### 構成
 
 #### Prepare TokuMX
 
@@ -121,7 +121,7 @@ For more details about creating and managing users in MongoDB, see the [MongoDB 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -161,23 +161,23 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
 
 [Run the Agent's `status` subcommand][3] and look for `tokumx` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "tokumx" >}}
 
 
-### Events
+### イベント
 
 **Replication state changes**:
 
 This check emits an event each time a TokuMX node has a change in its replication state.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "tokumx" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

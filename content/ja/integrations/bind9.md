@@ -22,7 +22,7 @@
   "support_email": ashuvyas45@gmail.com
 "categories":
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/bind9/README.md"
 "display_on_public_website": true
@@ -66,11 +66,11 @@ Get metrics from Bind9 DNS Server.
 
 ![Snap][1]
 
-## Setup
+## セットアップ
 
 The Bind9 check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Bind9 check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -82,7 +82,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Bind9 ch
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `bind9.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5] to start collecting your Bind9 [metrics](#metrics). See the [sample bind9.d/conf.yaml][6] for all available configuration options.
 
@@ -103,21 +103,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Bind9 ch
 
 The check is compatible with all major platforms.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "bind9" >}}
 
 
-### Events
+### イベント
 
 The bind9_check check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "bind9" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][11].
 

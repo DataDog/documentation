@@ -25,7 +25,7 @@
 - metrics
 - log collection
 - cloud
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -61,9 +61,9 @@ Amazon Elemental MediaConvert is a service that formats and compresses offline v
 
 Enable this integration to see all your Elemental MediaConvert metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -88,21 +88,21 @@ Configure Amazon Elemental MediaConvert to send logs to either an S3 bucket or t
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_mediaconvert" >}}
 
 
-### Events
+### イベント
 
 The Amazon Elemental MediaConvert integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Elemental MediaConvert integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

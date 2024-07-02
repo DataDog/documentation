@@ -27,7 +27,7 @@
 - "metrics"
 - "cloud"
 - "data stores"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -67,9 +67,9 @@ Note: This integration requires the permission 's3:GetBucketTagging' to be fully
 
 Note: S3 requests metrics have to be enabled on the buckets themselves, see the [AWS documentation][1]
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][2] first.
 
@@ -78,21 +78,21 @@ If you haven't already, set up the [Amazon Web Services integration][2] first.
 1. In the [AWS integration page][3], ensure that `S3` is enabled under the `Metric Collection` tab.
 2. Install the [Datadog - Amazon S3 integration][4].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_s3" >}}
 
 
-### Events
+### イベント
 
 The Amazon S3 integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon S3 integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

@@ -33,7 +33,7 @@
 - data stores
 - marketplace
 - metrics
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -97,7 +97,7 @@
 
 This integration reports metrics about the health and operation of [InfluxDB][1] v2.0+.
 
-### Dashboards
+### ダッシュボード
 
 This integration provides several out-of-the-box dashboards named **InfluxDB Summary**, 
 **InfluxDB API Statistics**, **InfluxDB System**, and **InfluxDB Tasks and Services**. 

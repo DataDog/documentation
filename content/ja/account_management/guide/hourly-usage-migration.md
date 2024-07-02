@@ -6,28 +6,23 @@ further_reading:
   text: Plan and Usage Settings
 ---
 
-## Summary
-Users of the v1 APIs should recognize familiar concepts in the v2 hourly usage API,
-just represented in a slightly different format.
+## サマリー
+v1 API のユーザーは、v2 時間単位使用量 API でおなじみの概念を、若干異なるフォーマットで表現していることを認識できるはずです。
 
-The most notable differences between the v1 API and the v2 API are that the v2 API:
-* Consolidates all products to one endpoint
-* Follows the JSON:API standard
-* Is paginated
-* Can return data for multiple organizations and regions per request
+v1 API と v2 API の最も顕著な相違点は、v2 API の次の点です。
+* 全製品を 1 つのエンドポイントに集約する
+* JSON:API 規格に準拠する
+* ページ区切りされている
+* 1 回のリクエストで複数の組織や地域のデータを返すことができる
 
-Each difference is discussed in further detail in the following sections.
+それぞれの違いについては、以下のセクションでさらに詳しく説明します。
 
-## Consolidated Product Families
-The v2 API introduces the concepts of product family and usage type. Product families are
-groupings of one or more usage types. Usage types are usage measurements for a given organization
-and time period. The initial set of product families mostly aligns with the v1 APIs,
-with the full mapping outlined below. There is also a special `all` product family that retrieves
-the usage for all other product families.
+## 統合製品ファミリー
+v2 API では、製品ファミリーと使用量という概念が導入されています。製品ファミリーは、1 つまたは複数の使用量をグループ化したものです。使用量タイプは、特定の組織および期間での使用量の測定値です。製品ファミリーの初期セットは、v1 API とほぼ一致しており、完全なマッピングは以下のとおりです。また、他のすべての製品ファミリーの使用量を取得する特別な `all` 製品ファミリーがあります。
 
-The families and usage types:
+ファミリーと使用量タイプ:
 - **all**
-    * _Contains all other product families_
+    * _他のすべての製品ファミリーを含む_
 - **analyzed_logs**
     * `analyzed_logs`
 - **application_security**
@@ -176,9 +171,9 @@ The families and usage types:
     * `num_custom_timeseries`
 
 
-This list shows how the families and usage types above map to the v1 hourly usage endpoints. Usage type and datapoint are the same, except where explicitly noted otherwise:
+このリストは、上記のファミリーと使用量タイプが、v1 時間単位使用量エンドポイントにどのようにマッピングされるかを示しています。使用量とデータポイントは、特に明記されている場合を除き、同じです。
 
-ENDPOINT | PRODUCT FAMILY
+エンドポイント | 製品ファミリー
 `<base_url>/api/v1/usage/hosts` | infra_hosts
 : `agent_host_count`
 : `alibaba_host_count`
@@ -212,7 +207,7 @@ ENDPOINT | PRODUCT FAMILY
 : `indexed_events_count`
 
 `<base_url>/api/v1/usage/synthetics`
-: Deprecated. See synthetics_api and synthetics_browser for synthetics usage
+: 非推奨。Synthetics の使用量については synthetics_api および synthetics_browser を参照してください
 
 `<base_url>/api/v1/usage/synthetics_api` | synthetics_api
 : `check_calls_count`
@@ -245,11 +240,11 @@ ENDPOINT | PRODUCT FAMILY
 : `indexed_events_count`
 
 `<base_url>/api/v1/usage/logs-by-retention` | indexed_logs
-: **Note:** The usage type and datapoint are separate for this URL, because the retention value is included in the usage type.
-: **Usage Type:** `logs_indexed_events_<retention>_count` **Datapoint:** `indexed_events_count`
-: **Usage Type:** `logs_live_indexed_events_<retention>_count` **Datapoint:** `live_indexed_events_count`
-: **Usage Type:** `logs_rehydrated_indexed_events_<retention>_count` **Datapoint:** `rehydrated_indexed_events_count`
-: **Usage Type:** In `usage_type`, replace `<retention>` with one of : `3_day`, `7_day`, `15_day`, `30_day`, `45_day`, `60_day`, `90_day`, `180_day`, `365_day`, `custom` **Datapoint:** `retention`
+: **注:** この URL では、使用量タイプに保持値が含まれているため、使用量タイプとデータポイントが別になっています。
+: **使用量タイプ:** `logs_indexed_events_<retention>_count` **データポイント:** `indexed_events_count`
+: **使用量タイプ:** `logs_live_indexed_events_<retention>_count` **データポイント:** `live_indexed_events_count`
+: **使用量タイプ:** `logs_rehydrated_indexed_events_<retention>_count` **データポイント:** `rehydrated_indexed_events_count`
+: **使用量タイプ:** `usage_type` では、`<retention>` を次のいずれかに置き換えてください: `3_day`、`7_day`、`15_day`、`30_day`、`45_day`、`60_day`、`90_day`、`180_day`、`365_day`、`custom` **データポイント:** `retention`
 
 `<base_url>/api/v1/usage/analyzed_logs` | analyzed_logs
 : `analyzed_logs`
@@ -314,24 +309,22 @@ ENDPOINT | PRODUCT FAMILY
 `<base_url>/api/v2/usage/observability_pipelines` | observability_pipelines
 : `observability_pipelines_bytes_processed`
 
-## JSON:API Compliant Format
+## JSON:API 準拠のフォーマット
 
-Response bodies and parameter names conform to the [JSON:API specification][1]. All data
-available in the v1 APIs is still available. See the example below of the mapping from the v1 hosts
-API to the v2 hourly usage API.
+レスポンス本文およびパラメーター名は、[JSON:API 仕様][1]に準拠しています。v1 API で利用可能なすべてのデータは、引き続き利用可能です。v1 のホスト API から v2 の時間単位使用量 API へのマッピングの例は以下をご参照ください。
 
-### V1 API: [Get hourly usage for hosts and containers][2]
+### V1 API: [ホストとコンテナの 1 時間あたり使用量の取得][2]
 
-#### Request
+#### リクエスト
 
 `https://api.datadoghq.com/api/v1/usage/hosts?start_hr=2022-06-01T00&end_hr=2022-06-01T01`
 
-##### Notes
+##### 注
 
-* Product is an element of the path `hosts`.
-* Time bounds are controlled by the parameters `start_hr` and `end_hr`.
+* 製品はパス `hosts` の要素です。
+* 時間的な境界は、パラメーター `start_hr` と `end_hr` で制御されます。
 
-#### Response
+#### 応答
 
 ```json
 {
@@ -358,24 +351,24 @@ API to the v2 hourly usage API.
 }
 ```
 
-##### Notes
+##### 注
 
-* Usage for each hour is represented as an object in the usage array.
-* Usage types are keys in the object, and measured usage for those usage types are the corresponding values.
-* Hour, organization name, and public ID are also fields in the object.
+* 各時間の使用量は、使用量配列のオブジェクトとして表現されます。
+* 使用量タイプはオブジェクトのキーで、その使用量タイプに対応する測定値が値となります。
+* 時間、組織名、公開 ID もオブジェクトのフィールドです。
 
-### V2 API: Get hourly usage by product family
+### V2 API: 製品ファミリーの時間単位使用量の取得
 
-#### Request
+#### リクエスト
 
 `https://api.datadoghq.com/api/v2/usage/hourly_usage?filter[timestamp][start]=2022-06-01T00&filter[timestamp][end]=2022-06-01T01&filter[product_families]=infra_hosts`
 
-##### Notes
+##### 注
 
-* Product is passed as a query parameter `filter[product_families]=infra_hosts`.
-* Time bounds are controlled by the parameters `filter[timestamp][start]` and `filter[timestamp][end]`.
+* 製品は、クエリパラメーター `filter[product_families]=infra_hosts` として渡されます。
+* 時間的な境界は、パラメーター `filter[timestamp][start]` と `filter[timestamp][end]` によって制御されます。
 
-#### Response
+#### 応答
 
 ```json
 {
@@ -449,41 +442,36 @@ API to the v2 hourly usage API.
 }
 ```
 
-#### Notes
+#### 注
 
-* Objects in the data array represent hourly usage, for each product and each organization.
-    * V1 APIs did not support multiple products or multiple organizations per request.
-* Usage measurements are represented in the nested `measurements` array.
-* Usage measurement objects have the fields `usage_type` and `value`.
-* `hour`, `org_name`, and `public_id` are also fields in the `attributes` object.
+* データ配列のオブジェクトは、各製品、各組織の時間単位使用量を表しています。
+    * V1 API は、1 回のリクエストで複数の製品、複数の組織をサポートするものではありませんでした。
+* 使用量測定は、ネストした `measurements` 配列で表現されます。
+* 使用量測定オブジェクトは `usage_type` と `value` というフィールドを持ちます。
+* `hour`、`org_name`、`public_id` は `attributes` オブジェクトのフィールドでもあります。
 
-## Pagination
+## ページ区切り
 
-The v2 hourly usage API is paginated. Responses are limited to 500 pages, with a page containing usage data for one
-product family, for one hour, for one organization. Pagination allows the API to support other features such as multiple
-products per request, multiple organizations per request, and unlimited time ranges.
+v2 時間単位使用量 API はページ分割されます。レスポンスは 500 ページに制限され、1 ページには 1 製品ファミリー、1 時間、1 組織の使用量データが含まれます。ページ区切りにより、API はリクエストごとの複数製品、リクエストごとの複数組織、無制限の時間範囲などの他の機能をサポートすることができます。
 
-If a result has more pages, the record ID of the next page is returned in the field
-`meta.pagination.next_record_id`. Clients should then pass that id in the parameter `pagination[next_record_id]`. There
-are no more pages to retrieve when the `meta.pagination.next_record_id` field is not set.
+もし結果が複数のページを持つ場合、次のページのレコード ID が `meta.pagination.next_record_id` フィールドで返されます。クライアントはその ID をパラメーター `pagination[next_record_id]` に渡す必要があります。`meta.pagination.next_record_id` フィールドが設定されていない場合は、これ以上取得するページはありません。
 
-### Code example
+### コード例
 ```
 response := GetHourlyUsage(start_time, end_time, product_families)
 cursor := response.metadata.pagination.next_record_id
 WHILE cursor != null BEGIN
-sleep(5 seconds)  # Avoid running into rate limit
+sleep(5 seconds)  # レートリミットを回避する
 response := GetHourlyUsage(start_time, end_time, product_families, next_record_id=cursor)
 cursor := response.metadata.pagination.next_record_id
 END
 ```
 
-## Multi-organization responses
+## 複数組織のレスポンス
 
-The v2 API supports retrieving usage data for all of your child organizations in all regions in one request. Use the
-parameter `filter[include_descendants]` to request data for child organizations.
+v2 API では、1 回のリクエストで全地域の子組織の使用量データを取得することができます。子組織のデータをリクエストするには、パラメーター `filter[include_descendants]` を使用します。
 
-### Further Reading
+### その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

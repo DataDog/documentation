@@ -4,23 +4,23 @@ aliases:
  - /agent/guide/podman-support-with-docker-integration
 ---
 
-Podman is a daemonless container engine for developing, managing, and running OCI Containers on your Linux System. Read more on [https://podman.io/][1].
+Podman は、Linux システムで OCI コンテナを開発、管理、実行するためのデーモンレスコンテナエンジンです。詳細については、[https://podman.io/][1] をご覧ください。
 
-With Podman, we can deploy rootless or rootful containers. Rootless containers can be run by users that do not have admin rights, whereas rootful containers are the ones that run as root.
-The main advantage that rootless containers provide is that potential attackers cannot gain root permissions on the host when the container is compromised.
-The Datadog Agent works with both rootless and rootful containers.
+Podman では、ルートレスコンテナやルートフルコンテナをデプロイできます。ルートレスコンテナは管理者権限を持たないユーザーでも実行でき、ルートフルコンテナは root 権限で実行するコンテナです。
+ルートレスコンテナが提供する主な利点は、コンテナが侵害されたときに潜在的な攻撃者がホストの root 権限を取得できないことです。
+Datadog Agent は、ルートレスコンテナとルートフルコンテナの両方で動作します。
 
-## Requirements
+## 要件
 
-* Podman version >= 3.2.0
-* Datadog Agent version >= 7.30.0
+* Podman バージョン >= 3.2.0
+* Datadog Agent バージョン >= 7.30.0
 
-## Agent deployment as a Podman rootless container
+## Podman ルートレスコンテナとしての Agent デプロイ
 
-To deploy the Agent as a rootless Podman container, the command to run is similar to the one used for [Docker][2].
+Agent をルートレス Podman コンテナとしてデプロイするために実行するコマンドは、[Docker][2] で使用されるコマンドと似ています。
 
-The main difference is that as the Agent does not have access to the runtime socket, it relies on the Podman DB to extract the container information that it needs. So, instead of mounting the Docker socket and setting `DOCKER_HOST` we need to mount the Podman DB (`<PODMAN_DB_PATH>` in the command below).
-In some systems the path of the Podman DB is `$HOME/.local/share/containers/storage/libpod/bolt_state.db` but it might be different in your system. Set `<PODMAN_DB_PATH>` in the command below accordingly.
+主な違いは、Agent はランタイムソケットにアクセスできないため、必要なコンテナ情報を抽出するために Podman DBに依存することです。そのため、Docker ソケットをマウントして `DOCKER_HOST` を設定する代わりに、Podman DB をマウントする必要があります (以下のコマンドでは `<PODMAN_DB_PATH>`)。
+システムによっては Podman DB のパスは `$HOME/.local/share/containers/storage/libpod/bolt_state.db` ですが、お使いのシステムでは違うかもしれません。以下のコマンドで `<PODMAN_DB_PATH>` を適宜設定してください。
 
 ```
 $ podman run -d --name dd-agent \
@@ -33,21 +33,21 @@ $ podman run -d --name dd-agent \
     gcr.io/datadoghq/agent:latest
 ```
 
-The Agent should detect all the containers managed by the non-admin user that ran the Podman command and emit `container.*` metrics for all of them.
+Agent は、Podman コマンドを実行した非管理ユーザーが管理するコンテナをすべて検出し、すべてのコンテナに対して `container.*` メトリクスを発行する必要があります。
 
-## Agent deployment as a Podman rootful container
+## Podman ルートフルコンテナとしての Agent デプロイ
 
-When running rootful containers, we have two options: we can rely on the Podman DB as in the example above with rootless containers, or we can use the Podman socket.
+ルートフルコンテナを実行する場合、上記のルートレスコンテナの例のように Podman DB に依存するか、Podman ソケットを使うかの 2 つの選択肢があります。
 
-### Using the Podman DB
+### Podman DB の使用
 
-The command to run using the DB is identical to the one provided above, but note that the DB path is different for each user, including root. For root, it's typically `/var/lib/containers/storage/libpod/bolt_state.db` but it might be different in your system, so set `<PODMAN_DB_PATH>` accordingly.
+DB を使って実行するコマンドは上述のものと同一ですが、DB のパスはユーザーごとに異なることに注意してください (root を含む)。root の場合、通常は `/var/lib/containers/storage/libpod/bolt_state.db` ですが、お使いのシステムでは異なるかもしれませんので、`<PODMAN_DB_PATH>` を適宜設定してください。
 
-### Using the Podman socket
+### Podman ソケットの使用
 
-The Podman socket is compatible with the Docker one. That's why in this case, the Datadog Agent will run everything as if it was running on Docker. This means that it will emit `docker.*` metrics, for example.
+Podman ソケットは Docker ソケットと互換性があります。そのため、この場合、Datadog Agent は Docker 上で動作しているかのようにすべてを実行します。これは、例えば `docker.*` メトリクスを発行することを意味します。
 
-To deploy the Agent relying on the Podman socket run as root:
+Podman ソケットに依存する Agent をデプロイするには、root で以下を実行します。
 ```
 $ podman run -d --name dd-agent \
     --cgroupns host --pid host \
@@ -60,7 +60,7 @@ $ podman run -d --name dd-agent \
     gcr.io/datadoghq/agent:latest
 ```
 
-In both cases the Agent should detect all the containers managed by root and emit `container.*` metrics for all of them.
+どちらの場合も、Agent は root が管理するすべてのコンテナを検出し、すべてのコンテナに対して `container.*` メトリクスを出力する必要があります。
 
 [1]: https://podman.io/
 [2]: /agent/docker

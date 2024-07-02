@@ -1,6 +1,5 @@
 ---
 title: Correlating .NET Logs and Traces
-kind: documentation
 description: 'Connect your .NET logs and traces to correlate them in Datadog.'
 aliases:
   - /tracing/connect_logs_and_traces/dotnet
@@ -22,28 +21,28 @@ further_reading:
       text: Ease troubleshooting with cross product correlation.
 ---
 
-You can set up your logging library and .NET tracing configurations so that trace and span IDs are injected into application logs, providing you with application performance monitoring data correlated with log data.
+トレースとスパンの ID がアプリケーションログに挿入されるようロギングライブラリおよび .NET トレーシングのコンフィギュレーションを設定し、ログデータと相関したアプリケーションのパフォーマンスモニタリングデータを取得することができます。
 
-Configure the .NET Tracer with [Unified Service Tagging][1] for the best experience and helpful context when correlating application traces and logs.
+.NET トレーサーを[統合サービスタグ付け][1]で構成し、アプリケーションのトレースとログの相関付けに最高の使用体験と有用なコンテキストを確保します。
 
-The .NET Tracer supports the following logging libraries:
+.NET トレーサーは、以下のロギングライブラリをサポートします。
 - [Serilog][2] (v1.4+)
 - [log4net][3]
 - [NLog][4]
-- [Microsoft.Extensions.Logging][5] (added in v1.28.6)
+- [Microsoft.Extensions.Logging][5] (v1.28.6 で追加)
 
-## Configure log collection
+## ログ収集の構成
 
-Ensure that log collection is configured in the Datadog Agent and that the [Logs Agent configuration][15] for the specified files to tail is set to `source: csharp` so log pipelines can parse the log files. For more information, see [C# Log Collection][7]. If the `source` is set to a value other than `csharp`, you may need to add a [trace remapper][8] to the appropriate log processing pipeline for the correlation to work correctly.
+ログパイプラインがログファイルをパースできるように、Datadog Agent でログ収集が構成され、追跡する指定ファイルの [Logs Agent の構成][15]が `source: csharp` に設定されていることを確認します。詳細は、[C# ログ収集][7]を参照してください。`source` が `csharp` 以外の値に設定されている場合、相関を正しく動作させるために、適切なログ処理パイプラインに[トレースリマッパー][8]を追加する必要があるかもしれません。
 
-<div class="alert alert-warning"><strong>Note:</strong> Automatic log collection only works for logs formatted as JSON. Alternatively, use custom parsing rules.</div>
+<div class="alert alert-warning"><strong>注:</strong> 自動ログ挿入は、JSON でフォーマット化されたログのみに機能します。また、カスタムパースルールを使用することもできます。</div>
 
-## Configure injection in logs
+## ログへの挿入の構成
 
-To inject correlation identifiers into your log messages, follow the instructions for your logging library.
+ログメッセージに相関関係のある識別子を挿入するには、お使いのロギングライブラリの指示に従ってください。
 
 <div class="alert alert-info">
-  <div class="alert-info">See the <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">samples in dd-trace-dotnet</a> for more examples.</div>
+  <div class="alert-info">その他の例については、<a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">dd-trace-dotnet にあるサンプル</a>を参照してください。</div>
   </div>
 </div>
 
@@ -51,60 +50,60 @@ To inject correlation identifiers into your log messages, follow the instruction
 {{% tab "Serilog" %}}
 
 <div class="alert alert-warning">
-  <strong>Note: </strong>Starting with .NET Tracer version 2.0.1, automatic injection for the Serilog logging library requires the application to be instrumented with automatic instrumentation.
+  <strong>注: </strong>NET トレーサーバージョン 2.0.1 以降、Serilog ロギングライブラリの自動挿入には、アプリケーションが自動インスツルメンテーションされているれていることが必要になります。
 </div>
 
-To automatically inject correlation identifiers into your log messages:
+ログメッセージに相関性のある識別子を自動的に挿入するには:
 
-1. Configure the .NET Tracer with the following tracer settings:
+1. 以下のトレーサー設定で .NET トレーサーを構成します。
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
 
-2. Enable auto-instrumentation tracing of your app by following the [instructions to install the .NET Tracer][1].
+2. [.NET Tracer のインストール手順][1]に従って、アプリの自動インスツルメンテーショントレーシングを有効にします。
 
 [1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/
 {{% /tab %}}
 {{% tab "log4net" %}}
 
 <div class="alert alert-warning">
-  <strong>Note: </strong>Starting with .NET Tracer version 1.29.0, automatic injection for the log4net logging library requires the application to be instrumented with automatic instrumentation.
+  <strong>注: </strong>NET トレーサーバージョン 1.29.0 以降、log4net ロギングライブラリの自動挿入には、アプリケーションが自動インスツルメンテーションされているれていることが必要になります。
 </div>
 
-To automatically inject correlation identifiers into your log messages:
+ログメッセージに相関性のある識別子を自動的に挿入するには:
 
-1. Configure the .NET Tracer with the following tracer settings:
+1. 以下のトレーサー設定で .NET トレーサーを構成します。
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
 
-2. Enable auto-instrumentation tracing of your app by following the [instructions to install the .NET Tracer][1].
+2. [.NET Tracer のインストール手順][1]に従って、アプリの自動インスツルメンテーショントレーシングを有効にします。
 
-3. Add `dd.env`, `dd.service`, `dd.version`, `dd.trace_id`, and `dd.span_id` log properties into your logging output. This can be done by including these properties _individually_ or by including _all_ log properties. Both approaches are shown in the following example code:
+3. ログ出力に `dd.env`、`dd.service`、`dd.version`、`dd.trace_id`、`dd.span_id` のログプロパティを追加してください。これは、これらのプロパティを個別に含めることもできますし、すべてのログプロパティを含めることもできます。どちらの方法も、次のサンプルコードに示されています。
 
 ```xml
   <layout type="log4net.Layout.SerializedLayout, log4net.Ext.Json">
     <decorator type="log4net.Layout.Decorators.StandardTypesDecorator, log4net.Ext.Json" />
     <default />
-    <!--explicit default members-->
+    <!--明示的なデフォルトメンバー-->
     <remove value="ndc" />
-    <!--remove the default preformatted message member-->
+    <!--書式設定済みのデフォルトメッセージメンバーを削除-->
     <remove value="message" />
-    <!--add raw message-->
+    <!--未加工のメッセージを追加-->
     <member value="message:messageobject" />
 
-    <!-- Include Datadog properties -->
-    <!-- EITHER Include individual properties with value='<property_name>' -->
+    <!-- Datadog のプロパティを含める -->
+    <!-- EITHER 個々のプロパティを value='<property_name>' で含める-->
     <member value='dd.env' />
     <member value='dd.service' />
     <member value='dd.version' />
     <member value='dd.trace_id' />
     <member value='dd.span_id' />
-    <!-- OR Include all properties with value='properties' -->
+    <!-- OR value='properties' を持つすべてのプロパティを含める -->
     <member value='properties'/>
   </layout>
 ```
-For additional examples, see [the log4net automatic trace ID injection project][2] on GitHub.
+その他の例については、GitHub の [log4net トレース ID 自動挿入プロジェクト][2]を参照してください。
 
 
 [1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/
@@ -113,22 +112,22 @@ For additional examples, see [the log4net automatic trace ID injection project][
 {{% tab "NLog" %}}
 
 <div class="alert alert-warning">
-  <strong>Note: </strong>Starting with .NET Tracer version 2.0.1, automatic injection for the NLog logging library requires the application to be instrumented with automatic instrumentation.
+  <strong>注: </strong>NET トレーサーバージョン 2.0.1 以降、NLog ロギングライブラリの自動挿入には、アプリケーションが自動インスツルメンテーションされているれていることが必要になります。
 </div>
 
-To automatically inject correlation identifiers into your log messages:
+ログメッセージに相関性のある識別子を自動的に挿入するには:
 
-1. Configure the .NET Tracer with the following tracer settings:
+1. 以下のトレーサー設定で .NET トレーサーを構成します。
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
 
-2. Enable auto-instrumentation tracing of your app by following the [instructions to install the .NET Tracer][1].
+2. [.NET Tracer のインストール手順][1]に従って、アプリの自動インスツルメンテーショントレーシングを有効にします。
 
-3. Enable mapped diagnostic context (MDC), as shown in the following example code for NLog version 5.0+:
+3. 次の NLog バージョン 5.0 向けのサンプルコードに示すように、マップされた診断コンテキスト (MDC) を有効にします。
 
 ```xml
-  <!-- Add includeScopeProperties="true" to emit ScopeContext properties -->
+  <!-- includeScopeProperties="true" を追加して ScopeContext プロパティを表示 -->
   <layout xsi:type="JsonLayout" includeScopeProperties="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -137,10 +136,10 @@ To automatically inject correlation identifiers into your log messages:
   </layout>
 ```
 
-For NLog version 4.6+:
+NLog バージョン 4.6 以降 の場合
 
 ```xml
-  <!-- Add includeMdlc="true" to emit MDC properties -->
+  <!-- includeMdlc="true" を追加して MDC プロパティを表示 -->
   <layout xsi:type="JsonLayout" includeMdlc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -149,10 +148,10 @@ For NLog version 4.6+:
   </layout>
 ```
 
-For NLog version 4.5:
+NLog バージョン 4.5 の場合
 
 ```xml
-  <!-- Add includeMdc="true" to emit MDC properties -->
+  <!-- includeMdc="true" を追加して MDC プロパティを表示 -->
   <layout xsi:type="JsonLayout" includeMdc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -160,7 +159,7 @@ For NLog version 4.5:
     <attribute name="exception" layout="${exception:format=ToString}" />
   </layout>
 ```
-For additional examples, see the automatic trace ID injection projects using [NLog 4.0][2], [NLog 4.5][3], or [NLog 4.6][4] on GitHub.
+その他の例については、GitHub で [NLog 4.0][2]、[NLog 4.5][3]、[NLog 4.6][4] を使用したトレース ID 自動挿入プロジェクトを参照してください。
 
 
 [1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/
@@ -169,16 +168,16 @@ For additional examples, see the automatic trace ID injection projects using [NL
 [4]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
 {{% /tab %}}
 {{% tab "Microsoft.Extensions.Logging" %}}
-To automatically inject correlation identifiers into your log messages:
+ログメッセージに相関性のある識別子を自動的に挿入するには
 
-1. Configure the .NET Tracer with the following tracer settings:
+1. 以下のトレーサー設定で .NET トレーサーを構成します。
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
 
-2. Enable auto-instrumentation tracing of your app by following the [instructions to install the .NET Tracer][1].
+2. [.NET Tracer のインストール手順][1]に従って、アプリの自動インスツルメンテーショントレーシングを有効にします。
 
-3. Enable [log scopes][2] for your logging provider, as shown in the example code. Only providers that support log scopes will have correlation identifiers injected.
+3. サンプルコードに示するように、お使いのロギングプロバイダーの[ログスコープ][2]を有効にします。ログスコープをサポートしているプロバイダーにのみ、相関関係のある識別子が挿入されます。
 
 ```csharp
 Host.CreateDefaultBuilder(args)
@@ -186,17 +185,17 @@ Host.CreateDefaultBuilder(args)
     {
         logging.AddFile(opts =>
         {
-            opts.IncludeScopes = true; // must include scopes so that correlation identifiers are added
+            opts.IncludeScopes = true; // 相関識別子が追加されるように、スコープを含む必要があります
             opts.FormatterName = "json";
         });
     }
 ```
 
-If there is an active trace when the log is being written, trace and span IDs are automatically injected into the application logs with `dd_trace_id` and `dd_span_id` properties. If there is not an active trace, only `dd_env`, `dd_service`, and `dd_version` properties are injected.
+ログが書き込まれているときにアクティブなトレースがあれば、トレースとスパン ID が `dd_trace_id` および `dd_span_id` プロパティと合わせて自動的にアプリケーションログに挿入されます。アクティブなトレースがない場合は、`dd_env`、`dd_service`、`dd_version` プロパティのみが挿入されます。
 
-**Note:** If you are using a logging library that replaces the default `LoggerFactory` implementation such as the [_Serilog.Extensions.Hosting_][3] or [_Serilog.Extensions.Logging_][4] packages, follow the framework-specific instructions (in this example, see **Serilog**).
+**注:** [_Serilog.Extensions.Hosting_][3] や [_Serilog.Extensions.Logging_][4] パッケージのように、デフォルトの `LoggerFactory` の実装を置き換えるロギングライブラリを使用している場合は、フレームワーク固有の指示に従ってください (この例では、**Serilog** をご参照ください)。
 
-For additional examples, see [the Microsoft.Extensions.Logging automatic trace id injection project][5] on GitHub.
+その他の例については、GitHub の [Microsoft.Extensions.Logging トレース ID 自動挿入プロジェクト][5]を参照してください。
 
 
 [1]: https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/
@@ -207,63 +206,63 @@ For additional examples, see [the Microsoft.Extensions.Logging automatic trace i
 {{% /tab %}}
 {{< /tabs >}}
 
-Next, complete the setup for either automatic or manual injection.
+次に、自動または手動挿入のセットアップを完了します。
 
-## Automatic injection
+## 自動挿入
 
-The final step to enable automatic correlation identifier injection is to:
+相関識別子の自動挿入を有効にするための最後のステップは次の通りです。
 
-1. Enable `DD_LOGS_INJECTION=true` in the .NET Tracer's environment variables. To configure the .NET Tracer with a different method, see [Configuring the .NET Tracer][6].
+1. .NET トレーサーの環境変数で `DD_LOGS_INJECTION=true` を有効にします。.NET トレーサーを構成するその他の方法については、[.NET トレーサーの構成][6]をご参照ください。
 
-After configuring the correlation identifier injection, see [C# Log Collection][7] to configure your log collection.
+相関識別子の挿入を構成した後、[C# ログ収集][7]を参照してログ収集の構成を行います。
 
-**Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [Correlated Logs Not Showing Up in the Trace ID Panel][9] for more information.
+**注:** トレースとログを関連付けるには、ログのトレース ID として `dd_trace_id` をパースする[トレース ID リマッパー][8]をセットアップする必要があるかもしれません。詳しくは、[関連するログがトレース ID パネルに表示されない][9]を参照してください。
 
-<div class="alert alert-info"><strong>Beta</strong>: Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where this service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/service_catalog">Service Catalog</a> UI.</div>
+<div class="alert alert-info"><strong>ベータ版</strong>: バージョン 2.35.0 から、このサービスが実行される場所で <a href="/agent/remote_config/">Agent リモート構成</a>が有効になっている場合、<a href="/tracing/service_catalog">サービスカタログ</a> の UI で <code>DD_LOGS_INJECTION</code> を設定できます。</div>
 
-## Manual injection
+## 手動挿入
 
-If you prefer to manually correlate your traces with your logs, you can add correlation identifiers to your logs.
+トレースとログを手動で相関させたい場合は、ログに相関識別子を追加することができます。
 
-  | Required key   | Description                                  |
+  | 必要なキー   | 説明                                  |
   | -------------- | -------------------------------------------- |
-  | `dd.env`       | Globally configures the `env` for the tracer. Defaults to `""` if not set. |
-  | `dd.service`   | Globally configures the root service name. Defaults to the name of the application or IIS site name if not set.  |
-  | `dd.version`   | Globally configures `version` for the service. Defaults to `""` if not set.  |
-  | `dd.trace_id`  | Active trace ID during the log statement. Defaults to `0` if no trace.  |
-  | `dd.span_id`   | Active span ID during the log statement. Defaults to `0` if no trace. |
+  | `dd.env`       | トレーサー用に `env` をグローバルに構成します。設定されていない場合のデフォルトは `""` となります。 |
+  | `dd.service`   | ルートサービス名をグローバルに構成します。設定されていない場合のデフォルトは、アプリケーションの名前または IIS サイト名となります。  |
+  | `dd.version`   | サービス用に `version` をグローバルに構成します。設定されていない場合のデフォルトは `""` となります。  |
+  | `dd.trace_id`  | ログステートメント中のアクティブなトレース ID。トレースがない場合は `0` となります。  |
+  | `dd.span_id`   | ログステートメント中のアクティブなスパン ID。トレースがない場合は `0` となります。 |
 
-**Note:** If you are not using a [Datadog Log Integration][7] to parse your logs, custom log parsing rules must parse `dd.trace_id` and `dd.span_id` as strings. For information, see [Correlated Logs Not Showing Up in the Trace ID Panel][10].
+**注:** [Datadog ログインテグレーション][7]を使用してログをパースしていない場合、カスタムログパースルールは `dd.trace_id` と `dd.span_id` を文字列としてパースする必要があります。詳しくは、[関連するログがトレース ID パネルに表示されない][10]を参照してください。
 
-**Note**: If you are using Serilog, Nlog or log4net through ILogger, see the Microsoft.Extensions.Logging section to configure these properties using `BeginScope()`.
+**注**: ILogger を通して Serilog、Nlog、log4net を使用している場合、`BeginScope()` を使用してこれらのプロパティを構成するには、Microsoft.Extensions.Logging セクションを見てください。
 
-After completing the [getting started steps](#getting-started), finish your manual log enrichment setup:
+[はじめのステップ](#getting-started)が完了したら、手動のログ加工設定を終了します。
 
-1. Reference the [`Datadog.Trace` NuGet package][11] in your project.
+1. プロジェクトの [`Datadog.Trace` NuGet パッケージ][11]を参照します。
 
-2. Use the `CorrelationIdentifier` API to retrieve correlation identifiers and add them to the log context while a span is active.
+2. `CorrelationIdentifier` API を使用して相関識別子を取得し、スパンがアクティブな間にログのコンテキストに追加します。
 
-Lastly, see [C# Log Collection][7] to configure your log collection.
+最後に、[C# ログ収集][7]を参照して、ログ収集を構成します。
 
-Examples:
+例:
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-**Note**: The Serilog library requires message property names to be valid C# identifiers. The required property names are: `dd_env`, `dd_service`, `dd_version`, `dd_trace_id`, and `dd_span_id`.
+**注**: Serilog ライブラリでは、メッセージプロパティ名が有効な C# 識別子である必要があります。要求されるプロパティ名は、`dd_env`、`dd_service`、`dd_version`、`dd_trace_id`、`dd_span_id` です。
 
 ```csharp
 using Datadog.Trace;
 using Serilog.Context;
 
-// there must be spans started and active before this block.
+// スパンはこのブロック以前に開始され、アクティブになっている必要があります。
 using (LogContext.PushProperty("dd_env", CorrelationIdentifier.Env))
 using (LogContext.PushProperty("dd_service", CorrelationIdentifier.Service))
 using (LogContext.PushProperty("dd_version", CorrelationIdentifier.Version))
 using (LogContext.PushProperty("dd_trace_id", CorrelationIdentifier.TraceId.ToString()))
 using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToString()))
 {
-    // Log something
+    // 任意のログを記録
 }
 ```
 
@@ -274,7 +273,7 @@ using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToStri
 using Datadog.Trace;
 using log4net;
 
-// there must be spans started and active before this block.
+// スパンはこのブロック以前に開始され、アクティブになっている必要があります。
 try
 {
     LogicalThreadContext.Properties["dd.env"] = CorrelationIdentifier.Env;
@@ -283,7 +282,7 @@ try
     LogicalThreadContext.Properties["dd.trace_id"] = CorrelationIdentifier.TraceId.ToString();
     LogicalThreadContext.Properties["dd.span_id"] = CorrelationIdentifier.SpanId.ToString();
 
-    // Log something
+    // 任意のログを記録
 
 }
 finally
@@ -303,14 +302,14 @@ finally
 using Datadog.Trace;
 using NLog;
 
-// there must be spans started and active before this block.
+// スパンはこのブロック以前に開始され、アクティブになっている必要があります。
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.env", CorrelationIdentifier.Env))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.service", CorrelationIdentifier.Service))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.version", CorrelationIdentifier.Version))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.trace_id", CorrelationIdentifier.TraceId.ToString()))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdentifier.SpanId.ToString()))
 {
-    // Log something
+    // 任意のログを記録
 }
 ```
 
@@ -323,7 +322,7 @@ using Microsoft.Extensions.Logging;
 
 ILogger _logger;
 
-// there must be spans started and active before this block.
+// スパンはこのブロック以前に開始され、アクティブになっている必要があります。
 using(_logger.BeginScope(new Dictionary<string, object>
 {
     {"dd.env", CorrelationIdentifier.Env},
@@ -333,19 +332,19 @@ using(_logger.BeginScope(new Dictionary<string, object>
     {"dd.span_id", CorrelationIdentifier.SpanId.ToString()},
 }))
 {
-    // Log something
+    // 何かしらのログを記録
 }
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-You can read more about using BeginScope to create structured log messages for the following log providers:
-- Serilog: [The semantics of ILogger.BeginScope()][12]
-- NLog: [NLog properties with Microsoft Extension Logging][13]
-- log4net: [Using BeginScope][14]
+BeginScope を使用して、以下のログプロバイダーの構造化されたログメッセージを作成する方法については、こちらをご覧ください。
+- Serilog: [ILogger.BeginScope() のセマンティクス][12]
+- NLog: [Microsoft Extension Logging による NLog プロパティ][13]
+- log4net: [BeginScope の使用][14]
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

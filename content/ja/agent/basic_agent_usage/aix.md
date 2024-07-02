@@ -11,128 +11,128 @@ further_reading:
   tag: Blog
   text: Monitor AIX with the Datadog Unix Agent
 algolia:
-  tags: [uninstall, uninstalling]
+  tags: [アンインストール, uninstalling]
 ---
 
 <div class="alert alert-info">
-The Datadog UNIX Agent is being developed for specific system architectures, and is not the same as the Windows, Linux, and MacOS Agents.
+Datadog UNIX Agent は特定のシステムアーキテクチャ向けに開発されており、Windows、Linux、MacOS Agent とは異なります。
 </div>
 
-This page outlines the installation and configuration of the Datadog UNIX Agent for AIX.
+このページでは、AIX 用 Datadog UNIX Agent のインストールと構成について説明します。
 
-**Note:** The Datadog Unix Agent supports PowerPC 8 or greater and the following versions of AIX:
+**注**: Datadog Unix Agent は、PowerPC 8 以降および以下のバージョンの AIX をサポートしています。
 
 * AIX 6.1 TL9 SP6+
 * AIX 7.1 TL5 SP3+
 * AIX 7.2 TL3 SP0+
 
-## Installation
+## インストール
 
-A one-step ksh install script is provided on the [Agent download page][1] within Datadog. The script supports the following environment variables:
+Datadog の [Agent ダウンロードページ][1]に、ワンステップの ksh インストールスクリプトが用意されています。このスクリプトは、以下の環境変数をサポートします。
 
-* **CHANNEL**: defaults to stable. Specifies the package repository channel.
-  * Values: `stable`, `beta`, `unstable`
-* **VERSION**: defaults to latest. Specifies the package version.
-* **PROXY**: defaults to none. Specifies the proxy URI.
-  * Example: `http://proxy.foo.com`
-* **PROXY_USER**: defaults to empty. Specifies the proxy server username.
-* **PROXY_PASSWORD**: defaults to empty. Specifies the proxy server password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed.
-* **INSECURE**: defaults to `false`. Allows skipping TLS validation.
+* **CHANNEL**: デフォルトは stable です。パッケージリポジトリチャンネルを指定します。
+  * 値: `stable`、`beta`、`unstable`
+* **VERSION**: デフォルトは最新バージョンです。パッケージバージョンを指定します。
+* **PROXY**: デフォルトはなしです。プロキシの URI を指定します。
+  * 例: `http://proxy.foo.com`
+* **PROXY_USER**: デフォルトは空です。プロキシサーバーのユーザー名を指定します。
+* **PROXY_PASSWORD**: デフォルトは空です。プロキシサーバーのパスワードを指定します。プロセス/コンテナ Agent の場合は、認証パスワードの受け渡しのためにこの変数は必須で、名前を変えることはできません。
+* **INSECURE**: デフォルトは `false` です。TLS 検証の省略を許可します。
 
-Alternatively, download links for the latest releases can be found on [this page][2].
+別の方法として、[こちらのページ][2]で最新リリースのダウンロードリンクが提供されています。
 
-The installer may be executed as follows (as root):
+インストーラは次のように実行できます (ルートとして実行)。
 
 {{< code-block lang="shell" wrap="true" >}}
 installp -aXYgd ./datadog-unix-agent-<VERSION>.bff -e dd-aix-install.log datadog-unix-agent
 {{< /code-block >}}
 
-This installs the Agent in `/opt/datadog-agent`.
+これで、Agent が `/opt/datadog-agent` にインストールされます。
 
-### Installation log files
+### インストールログファイル
 
-You can find the Agent installation log in the `dd-aix-install.log` file. To disable this logging, remove the `-e dd-aix-install.log` parameter in the installation command.
+Agent のインストールログは、`dd-aix-install.log` ファイルに記録されます。このログを無効にするには、インストールコマンドの `-e dd-aix-install.log` パラメーターを削除します。
 
-## Commands
+## コマンド
 
-| Description                     | Command (as root)           |
+| 説明                     | コマンド (ルートとして実行)           |
 |---------------------------------|-----------------------------|
-| Start Agent as a service        | `startsrc -s datadog-agent` |
-| Stop Agent running as a service | `stopsrc -s datadog-agent`  |
-| Status of Agent service         | `lssrc -s datadog-agent`    |
-| Status page of running Agent    | `datadog-agent status`      |
-| Send flare                      | `datadog-agent flare`       |
-| Display command usage           | `datadog-agent --help`      |
+| Agent をサービスとして起動        | `startsrc -s datadog-agent` |
+| サービスとして実行中の Agent の停止 | `stopsrc -s datadog-agent`  |
+| Agent サービスのステータス         | `lssrc -s datadog-agent`    |
+| 実行中の Agent のステータスページ    | `datadog-agent status`      |
+| フレアの送信                      | `datadog-agent flare`       |
+| コマンドの使用方法の表示           | `datadog-agent --help`      |
 
-## Configuration
+## 構成
 
-The configuration files and folders for the Agent are located in `/etc/datadog-agent/datadog.yaml`
+Agent のコンフィギュレーションファイルおよびフォルダーは `/etc/datadog-agent/datadog.yaml` にあります
 
-A sample configuration file can be found in `/etc/datadog-agent/datadog.yaml.example`.
+コンフィギュレーションファイルのサンプルが `/etc/datadog-agent/datadog.yaml.example` にあります。
 
-A basic configuration typically requires your Datadog API key. To submit your metrics to a different site (for example, the EU instance), the `site` configuration option is available.
+基本的なコンフィギュレーションでは、通常、Datadog API キーが必要です。メトリクスを別のサイト (たとえば、EU インスタンス) に送信するために、`site` コンフィギュレーションオプションを使用できます。
 
-Occasionally a proxy configuration must be specified depending on your network setup.
+ネットワーク設定によっては、プロキシ構成を指定する必要があります。
 
-**Configuration files for Integrations:**
+**インテグレーション用構成ファイルの場所**
 `/etc/datadog-agent/conf.d/`
 
-## Integrations
+## インテグレーション
 
-The Unix Agent collects system metrics for:
+Unix Agent は、次のシステムメトリクスを収集します。
 
 * cpu
-* filesystem
+* ファイルシステム
 * iostat
 * load
 * memory
 * uptime
 * disk
-* network
+* ネットワーク
 
-Additionally, the following integrations can be enabled to collect further metrics:
+さらに、次のインテグレーションを有効にして、さらにメトリクスを収集できます。
 
 * process
 * lparstats
 * [ibm_was (Websphere Application Server)][3]
 
-Enable the above integrations by copying and editing the sample configuration files provided. These are found in `/etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration. Example configuration files can be found at `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml.example`
+提供されているコンフィギュレーションファイルサンプルをコピーして編集し、上記のインテグレーションを有効にします。サンプルは、`/etc/datadog-agent/conf.d` にあります。YAML コンフィギュレーションファイルの名前は、インテグレーションの名前と一致させる必要があります。`/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml` はインテグレーション `<INTEGRATION_NAME>` を有効にし、そのコンフィギュレーションを設定します。コンフィギュレーションファイルの例は、`/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml.example` にあります。
 
-**Note**: Some of the available metrics differ between the integrations for the Unix Agent and the integrations for Linux, Windows and MacOS. Although it is possible to monitor processes and network metrics with the Unix Agent, the Live Process Monitoring and Network Performance Monitoring capabilities aren't available. Log Management is also not available with the Unix Agent.
+**注**: 使用可能なメトリクスの一部は、Unix Agent のインテグレーションと、Linux、Windows、MacOS のインテグレーションとで異なります。Unix Agent を使用してプロセスとネットワークメトリクスを監視することは可能ですが、ライブプロセスモニタリングとネットワークパフォーマンスモニタリング機能は利用できません。また、ログ管理は、Unix Agent では利用できません。
 
-<div class="alert alert-info">The Unix Agent has no trace-agent component, so APM tracing and profiling is not supported.</div>
+<div class="alert alert-info">Unix Agent には trace-agent コンポーネントがないため、APM のトレースやプロファイリングはサポートされていません。</div>
 
-## Running DogStatsD
+## DogStatsD の実行
 
-DogStatsD allows collecting and submitting custom metrics to Datadog. It listens on a UDP port and DogStatsD metrics may be submitted to it. These are then relayed to Datadog.
+DogStatsD を使用すると、カスタムメトリクスを収集して Datadog に送信できます。DogStatsD は UDP ポートの 1 つをリスニングし、そこに DogStatsD メトリクスを送信します。送信されたメトリクスは Datadog にリレーされます。
 
-DogStatsD relies on the same configuration file defined for the Agent, where a DogStatsD configuration section is available. The DogStatsD server typically runs within the same Agent process—but should you need a dedicated process, it may also be launched in standalone mode.
+DogStatsD は、Agent と同じ構成ファイルに依存し、このファイルに DogStatsD 構成セクションがあります。DogStatsD サーバーは、通常、同じ Agent プロセス内で実行しますが、専用のプロセスが必要な場合は、スタンドアロンモードで起動することもできます。
 
-To enable DogStatsD, edit `/etc/datadog-agent/datadog.yaml` and set the relevant configuration options.
+DogStatsD を有効にするには、`/etc/datadog-agent/datadog.yaml` を編集し、関連する構成オプションを設定します。
 
 {{< code-block lang="yaml" filename="/etc/datadog-agent/datadog.yaml" >}}
-dogstatsd:                        # DogStatsD configuration options
-  enabled: true                   # disabled by default
-  bind_host: localhost            # address we'll be binding to
-  port: 8125                      # DogStatsD UDP listening port
-  non_local_traffic: false        # listen to non-local traffic
+dogstatsd:                        # DogStatsD 構成オプション
+  enabled: true                   # デフォルトでは無効
+  bind_host: localhost            # 連結先のアドレス
+  port: 8125                      # DogStatsD UDP リスニングポート
+  non_local_traffic: false        # 非ローカルトラフィックのリスニング
 {{< /code-block >}}
 
-**Note:** DogStatsD does not daemonize and runs in the foreground.
+**注**: DogStatsD はデーモン化されずに、フォアグラウンドで実行されます。
 
-There are also facilities to run the Agent with the known Python supervisor. This might be your preferred way to manage the Agent daemon if you are familiar with the tool. There are entries for both the Agent and DogStatsD.
+既存の Python スーパーバイザーで Agent を実行する機能もあります。このツールを使い慣れている場合は、この方法で Agent デーモンを管理してもかまいません。Agent と DogStatsD の両方のエントリがあります。
 
-## Uninstall the Agent
+## Agent のアンインストール
 
-To remove an installed Agent, run the following `installp` command:
+インストールされている Agent を削除するには、次の `installp` コマンドを実行します。
 
 {{< code-block lang="shell" >}}
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 {{< /code-block >}}
 
-Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. To disable this logging, remove the `-e` parameter in the uninstallation command.
+注: Agent のアンインストールログは、`dd-aix-install.log` ファイルに記録されます。このログを無効にするには、アンインストールコマンドの `-e` パラメーターを削除します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

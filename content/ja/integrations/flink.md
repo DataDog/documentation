@@ -39,7 +39,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/flink/README.md"
 "display_on_public_website": true
@@ -75,25 +75,24 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Flink][1]. Datadog collects Flink metrics through Flink's
-[Datadog HTTP Reporter][2], which uses [Datadog's HTTP API][3].
+このチェックは [Flink][1] を監視します。Datadog は Flink の [Datadog HTTP Reporter][2] を使用し、[Datadog の HTTP API][3] によって Flink のメトリクスを収集します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Flink check is included in the [Datadog Agent][4] package.
-No additional installation is needed on your server.
+Flink チェックは [Datadog Agent][4] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-#### Metric collection
+#### メトリクスの収集
 
-1. Configure the [Datadog HTTP Reporter][2] in Flink.
+1. Flink で [Datadog HTTP Reporter][2] を構成します。
 
-     In your `<FLINK_HOME>/conf/flink-conf.yaml`, add these lines, replacing `<DATADOG_API_KEY>` with your Datadog [API key][5]:
+   `<FLINK_HOME>/conf/flink-conf.yaml` に以下の行を追加し、`<DATADOG_API_KEY>` を Datadog [API キー][5]と置き換えます。
 
     ```yaml
     metrics.reporter.dghttp.factory.class: org.apache.flink.metrics.datadog.DatadogHttpReporterFactory
@@ -101,7 +100,7 @@ No additional installation is needed on your server.
     metrics.reporter.dghttp.dataCenter: {{< region-param key="dd_datacenter" >}}
     ```
 
-2. Re-map system scopes in your `<FLINK_HOME>/conf/flink-conf.yaml`.
+2. `<FLINK_HOME>/conf/flink-conf.yaml` で、システムのスコープを再マッピングします。
 
     ```yaml
     metrics.scope.jm: flink.jobmanager
@@ -112,41 +111,41 @@ No additional installation is needed on your server.
     metrics.scope.operator: flink.operator
     ```
 
-     **Note**: The system scopes must be remapped for your Flink metrics to be supported, otherwise they are submitted as custom metrics.
+     **注**: Flink のメトリクスをサポートするには、システムスコープをマッピングし直す必要があります。しない場合は、カスタムメトリクスとして送信されます。
 
-3. Configure additional [tags][2] in `<FLINK_HOME>/conf/flink-conf.yaml`. Here is an example of custom tags:
+3. `<FLINK_HOME>/conf/flink-conf.yaml` に、たとえば以下のカスタムタグのような[タグ][2]を追加します。
 
     ```yaml
     metrics.reporter.dghttp.scope.variables.additional: <KEY1>:<VALUE1>, <KEY1>:<VALUE2>
     ```
 
-     **Note**: By default, any variables in metric names are sent as tags, so there is no need to add custom tags for `job_id`, `task_id`, etc.
+     **注**: デフォルトでは、メトリクスの名前はタグとして送信され、識別されるため、`job_id` や `task_id` などのカスタムタグを追加する必要はありません。
 
-4. Restart Flink to start sending your Flink metrics to Datadog.
+4. Flink を再起動すると、Flink のメトリクスが Datadog に送信されます。
 
-#### Log collection
+#### ログ収集
 
-_Available for Agent >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Flink uses the `log4j` logger by default. To enable logging to a file, customize the format by editing the `log4j*.properties` configuration files in the `conf/` directory of the Flink distribution. See the [Flink logging documentation][6] for information on which configuration file is relevant for your setup. See [Flink's repository][7] for default configurations.
+1. Flink はデフォルトで `log4j` ロガーを使用します。ファイルへのロギングを有効にするには、Flink ディストリビューションの `conf/` ディレクトリにある `log4j*.properties` コンフィギュレーションファイルを編集して、フォーマットをカスタマイズします。どのコンフィギュレーションファイルがあなたのセットアップに関連するかについては、[Flink のロギングに関するドキュメント][6]を参照してください。デフォルトの構成については、[Flink のリポジトリ][7]を参照してください。
 
-2. By default, the integration pipeline supports the following layout pattern:
+2. インテグレーションパイプラインは、デフォルトで、次のレイアウトパターンをサポートします。
 
     ```text
     %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n
     ```
 
-     An example of a valid timestamp is: `2020-02-03 18:43:12,251`.
+   タイムスタンプの部分には、たとえば `2020-02-03 18:43:12,251` などが入ります。
 
-     Clone and edit the [integration pipeline][8] if you have a different format.
+     フォーマットが異なる場合は、[インテグレーションパイプライン][8]を複製して編集してください。
 
-3. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+3. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-4. Uncomment and edit the logs configuration block in your `flink.d/conf.yaml` file. Change the `path` and `service` parameter values based on your environment. See the [sample flink.d/conf.yaml][9] for all available configuration options.
+4. `flink.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、`path` パラメーターと `service` パラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[flink.d/conf.yaml のサンプル][9]を参照してください。
 
    ```yaml
    logs:
@@ -161,29 +160,29 @@ _Available for Agent >6.0_
        #    name: new_log_start_with_date
    ```
 
-5. [Restart the Agent][10].
+5. [Agent を再起動します][10]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][11] and look for `flink` under the Checks section.
+[Agent の status サブコマンドを実行][11]し、Checks セクションで `flink` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "flink" >}}
 
 
-### Service Checks
+### サービスチェック
 
-Flink does not include any service checks.
+Flink には、サービスのチェック機能は含まれません。
 
-### Events
+### イベント
 
-Flink does not include any events.
+Flink には、イベントは含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][13].
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
 
 [1]: https://flink.apache.org/

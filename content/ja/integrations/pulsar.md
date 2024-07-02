@@ -26,7 +26,7 @@
 "categories":
 - log collection
 - message queues
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/pulsar/README.md"
 "display_on_public_website": true
@@ -63,65 +63,65 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Pulsar][1] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [Pulsar][1] を監視します。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The Pulsar check is included in the [Datadog Agent][3] package.
-No additional installation is needed on your server.
+Pulsar チェックは [Datadog Agent][3] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-1. Edit the `pulsar.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your pulsar performance data. See the [sample pulsar.d/conf.yaml][4] for all available configuration options.
+1. pulsar のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `pulsar.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[pulsar.d/conf.yaml のサンプル][4]を参照してください。
 
-2. [Restart the Agent][5].
+2. [Agent を再起動します][5]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][6] and look for `pulsar` under the Checks section.
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `pulsar` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "pulsar" >}}
 
 
 
-### Log collection
+### ログ収集
 
-1. The Pulsar log integration supports Pulsar's [default log format][8]. Clone and edit the [integration pipeline][9] if you have a different format.
+1. Pulsar ログインテグレーションは、Pulsar の[デフォルトログフォーマット][8]をサポートします。異なるフォーマットがある場合は、[インテグレーションパイプライン][9]を複製し、編集してください。
 
-2. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+2. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
    ```yaml
    logs_enabled: true
    ```
 
-3. Uncomment and edit the logs configuration block in your `pulsar.d/conf.yaml` file. Change the path parameter value based on your environment. See the [sample pulsar.d/conf.yaml][4] for all available configuration options.
+3. `pulsar.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、パスパラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[pulsar.d/conf.yaml のサンプル][4]を参照してください。
    ```yaml
     logs:
       - type: file
         path: /pulsar/logs/pulsar.log
         source: pulsar
    ```
-4. [Restart the Agent][5]
+4. [Agent を再起動します][5]。
 
-### Events
+### イベント
 
-The Pulsar integration does not include any events.
+Pulsar インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "pulsar" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][11].
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
 
 [1]: https://pulsar.apache.org

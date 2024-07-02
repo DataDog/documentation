@@ -15,31 +15,31 @@ further_reading:
 
 A service is a set of processes that do the same job, for example, a web framework or database. Datadog provides out-of-the-box graphs to display service information, as seen on the Service page. Use the service summary widget to display the graphs of a chosen [service][1] in your dashboard.
 
-{{< img src="dashboards/widgets/service_summary/service_summary.png" alt="service summary" >}}
+{{< img src="dashboards/widgets/service_summary/service_summary.png" alt="サービスサマリー" >}}
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
-1. Select an [environment][2] and a [service][1].
-2. Select a widget size.
-3. Select the information to display:
+1. [環境][2]と[サービス][1]を選択します。
+2. ウィジェットのサイズを選択します。
+3. 表示する情報を選択します。
     * Hits
-    * Errors
-    * Latency
+    * エラー
+    * レイテンシー
     * Breakdown
     * Distribution
-    * Resource (**Note**: You need to select the large widget size to see this option.)
-4. Choose your display preference by selecting the number of columns to display your graphs across.
-5. Enter a title for your graph.
+    * リソース (**注**: このオプションを表示するには、大きなウィジェットサイズを選択する必要があります)
+4. グラフの表示に使用する列数を選択して、表示設定を行います。
+5. グラフのタイトルを入力します。
 
 ## API
 
-This widget can be used with the **[Dashboards API][3]**. See the following table for the [widget JSON schema definition][4]:
+このウィジェットは **[Dashboards API][3]** で使用できます。[ウィジェット JSON スキーマ定義][4]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

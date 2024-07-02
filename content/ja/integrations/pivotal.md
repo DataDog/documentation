@@ -2,9 +2,9 @@
 "categories":
 - "Collaboration"
 - "issue tracking"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "See and comment on stories in your Datadog event stream."
+"description": "Datadog イベントストリームでストーリーを参照してコメントを入力。"
 "doc_link": "https://docs.datadoghq.com/integrations/pivotal/"
 "draft": false
 "git_integration_title": "pivotal"
@@ -30,29 +30,29 @@
 - Correlate and graph story completion with other events and metrics in your system.
 - Receive notifications for updates to your stories.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To get Pivotal events in the Datadog Events Explorer, enter the API token generated from your Pivotal [profile page][2].
 
 {{< img src="integrations/pivotal/pivotal_token.png" alt="pivotal token" popup="true">}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Pivotal Tracker integration does not include any metric.
 
-### Events
+### イベント
 
 The Pivotal Tracker integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Pivotal Tracker integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

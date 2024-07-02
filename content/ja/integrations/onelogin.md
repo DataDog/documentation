@@ -20,7 +20,7 @@
 "categories":
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "OneLogin"
 "display_on_public_website": true
@@ -63,7 +63,7 @@
 
 Connect Datadog with OneLogin to see logs published by OneLogin. The OneLogin integration collects logs to track any [event][1] in OneLogin, including logins, file access, and updates to admin privileges. You can use this integration for compliance and security in conjunction with the [OOTB SIEM rules][2] for OneLogin.
 
-## Setup
+## セットアップ
 
 ### Log collection
 #### Generate Client ID and Client Secret
@@ -80,11 +80,11 @@ Connect Datadog with OneLogin to see logs published by OneLogin. The OneLogin in
 2. Enter the Client ID and Client Secret into the corresponding fields.
 3. Optionally add comma-separated tags to associate with your logs.
 
-### Metrics
+### メトリクス
 
 The OneLogin integration does not include any metrics.
 
-### Events
+### イベント
 
 The OneLogin integration does not include any events.
 
@@ -92,7 +92,7 @@ The OneLogin integration does not include any events.
 
 The OneLogin integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

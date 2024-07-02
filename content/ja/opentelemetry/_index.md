@@ -38,23 +38,23 @@ cascade:
   <strong>Important:</strong> OpenTelemetry Collector Contrib v0.95.0 introduces a breaking change that disables Trace Metrics computation in the Datadog Exporter. Follow Datadog's <a href="/opentelemetry/guide/migration/">migration guide</a> when upgrading.
 </div>
 
-## Overview
+## 概要
 
-[OpenTelemetry][1] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing telemetry data. Created as an incubator project by the [Cloud Native Computing Foundation][2] (CNCF), OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application telemetry data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
+[OpenTelemetry][1] は、オープンソースの観測可能性フレームワークで、IT チームにテレメトリーデータを収集しルーティングするための標準化されたプロトコルとツールを提供します。Cloud Native Computing Foundation][2] (CNCF) によってインキュベータープロジェクトとして作成された OpenTelemetry は、アプリケーションテレメトリーデータ (メトリクス、ログ、トレースなど) をインスツルメント、生成、収集、エクスポートし、分析および洞察するための監視プラットフォームに対して一貫したフォーマットを提供するものです。
 
-If your applications and services are instrumented with OpenTelemetry libraries, you can choose how to get traces, metrics, and logs data to the Datadog backend:
+アプリケーションやサービスが OpenTelemetry ライブラリでインスツルメントされている場合、トレース、メトリクス、ログのデータを Datadog バックエンドに取得する方法を選択することができます。
 
-1. [Send data to the OpenTelemetry collector, and use the Datadog exporter to forward it to Datadog][3], or
+1. [データを OpenTelemetry コレクターに送信し、Datadog エクスポーターで Datadog に転送する][3]、または
 
 2. [Ingest data with the Datadog Agent, which collects it for Datadog][4].
 
-{{< img src="tracing/setup/open_standards/otel-flow.png" alt="Map options for generating telemetry data and sending it to observability products.">}}
+{{< img src="tracing/setup/open_standards/otel-flow.png" alt="テレメトリーデータを生成し、観測可能性製品に送信するためのマップオプション。">}}
 
-<div class="alert alert-info"><strong>Beta: Custom Instrumentation with the OpenTelemetry API</strong></br>For some supported languages, you can configure OpenTelemetry instrumented applications to use the Datadog tracing library to process spans and traces. For more information, read <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a>.</div>
+<div class="alert alert-info"><strong>ベータ版: OpenTelemetry API を使用したカスタムインスツルメンテーション</strong></br>サポートされている一部の言語では、スパンとトレースを処理するために Datadog トレーシングライブラリを使用するように、OpenTelemetry インスツルメンテーションアプリケーションを構成することができます。詳しくは、<a href="/tracing/trace_collection/otel_instrumentation/">OpenTelemetry API を使用したカスタムインスツルメンテーション</a>をお読みください。</div>
 
 Datadog supports the [W3C Trace Context standard][6], ensuring complete traces are captured even when a request travels between services that have been instrumented with different tools. Services need only be instrumented with any system, such as an OpenTelemetry library or Datadog tracing library, that follows the W3C Trace Context standard. Read [Propagating Trace Context][5] for more information.
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

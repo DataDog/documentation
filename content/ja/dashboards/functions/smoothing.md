@@ -1,7 +1,7 @@
 ---
+title: Smoothing
 aliases:
-- /ja/graphing/functions/smoothing/
-title: スムーシング
+    - /graphing/functions/smoothing/
 ---
 
 ## 自動スムーズ
@@ -154,6 +154,6 @@ weighted() 修飾子の詳細については、[weighted() の仕組みは？][3
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: http://futuredata.stanford.edu/asap
+[1]: https://github.com/stanford-futuredata/ASAP
 [2]: https://www.datadoghq.com/blog/auto-smoother-asap
-[3]: /ja/dashboards/guide/how-weighted-works
+[3]: /dashboards/guide/how-weighted-works

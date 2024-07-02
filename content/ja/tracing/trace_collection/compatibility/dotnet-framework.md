@@ -1,6 +1,5 @@
 ---
 title: .NET Framework Compatibility Requirements
-kind: documentation
 description: 'Compatibility Requirements for the .NET Tracer'
 aliases:
   - /tracing/compatibility_requirements/dotnet-framework
@@ -13,58 +12,58 @@ further_reading:
       tag: Documentation
       text: Instrument Your Application
     - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-      tag: Source Code
+      tag: ソースコード
       text: Examples of Custom Instrumentation
 ---
 
 
 The Datadog .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic).
 
-The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
+.NET トレーサーはオープンソースです。詳細については、[.NET トレーサーリポジトリ][1]を参照してください。
 
-## Supported .NET Framework runtimes
+## サポートされている .NET フレームワークのランタイム
 
 The .NET Tracer supports automatic and custom instrumentation on the following .NET Framework versions. It also supports [.NET Core and .NET 5+][2]. The .NET Tracer does not support code running in partial trust environments.
 
-| .NET Framework Version  | Microsoft End of Life | Support level                       | Package version            | Datadog End of Life |
+| .NET Framework バージョン  | マイクロソフトサポート終了 | サポートレベル                       | パッケージバージョン            | Datadog サポート終了 |
 | ----------------------- | --------------------- | ----------------------------------- | -------------------------- | ------------------- |
-| 4.8.1                   |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.8                     |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.7.2                   |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.7                     |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.6.2                   |                       | [GA](#support-ga)                   | latest                     |                     |
-| 4.6.1                   | 04/26/2022            | [GA](#support-ga)                   | latest                     |                     |
-| 4.6                     | 04/26/2022            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
-| 4.5.2                   | 04/26/2022            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
-| 4.5.1                   | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
-| 4.5                     | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (e.g. [1.31.2][3]) | 04/26/2022          |
+| 4.8.1                   |                       | [GA](#support-ga)                   | 最新                     |                     |
+| 4.8                     |                       | [GA](#support-ga)                   | 最新                     |                     |
+| 4.7.2                   |                       | [GA](#support-ga)                   | 最新                     |                     |
+| 4.7                     |                       | [GA](#support-ga)                   | 最新                     |                     |
+| 4.6.2                   |                       | [GA](#support-ga)                   | 最新                     |                     |
+| 4.6.1                   | 04/26/2022            | [GA](#support-ga)                   | 最新                     |                     |
+| 4.6                     | 04/26/2022            | [EOL](#support-eol)                 | < 2.0.0 (例: [1.31.2][3]) | 04/26/2022          |
+| 4.5.2                   | 04/26/2022            | [EOL](#support-eol)                 | < 2.0.0 (例: [1.31.2][3]) | 04/26/2022          |
+| 4.5.1                   | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (例: [1.31.2][3]) | 04/26/2022          |
+| 4.5                     | 01/12/2016            | [EOL](#support-eol)                 | < 2.0.0 (例: [1.31.2][3]) | 04/26/2022          |
 
 Additional information can be found in [Microsoft's .NET Framework Lifecycle Policy][4] and in [.NET runtime support policy](#net-runtime-support-policy).
 
 <div class="alert alert-info">
-  <div class="alert-info"><b>Note:</b> When deciding which tracer version to use for an automatic instrumentation, use the .NET Framework version installed on the application server. For example, if you compile your application to target .NET Framework 4.5.1, but the application runs on a server that has .NET Framework 4.8 installed, use the latest version of the tracer. To determine which version of .NET Framework is installed on a machine, follow the <a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">guidance provided by Microsoft</a>.
+  <div class="alert-info"><b>注:</b> 自動インスツルメンテーションに使用するトレーサーのバージョンを決定する場合、アプリケーションサーバーにインストールされている .NET Framework のバージョンを使用します。たとえば、.NET Framework 4.5.1 をターゲットとしてアプリケーションをコンパイルしたが、アプリケーションは .NET Framework 4.8 がインストールされているサーバー上で実行されている場合、トレーサーの最新バージョンを使用します。マシンにインストールされている .NET Framework のバージョンを確認するには、<a href="https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed">Microsoft が提供するガイダンス</a>に従います。
   </div>
 </div>
 
-## Supported processor architectures
+## 対応プロセッサアーキテクチャー
 
-The .NET Tracer supports automatic instrumentation on the following architectures:
+.NET トレーサーは、次のアーキテクチャーの自動インスツルメンテーションをサポートします:
 
-| Processor architectures                                                 | Support level         | Package version                        |
+| プロセッサアーキテクチャー                                                 | サポートレベル         | パッケージバージョン                        |
 | ------------------------------------------------------------------------|-----------------------|----------------------------------------|
-| Windows x86 (`win-x86`)                                                 | [GA](#support-ga)     | latest                                 |
-| Windows x64 (`win-x64`)                                                 | [GA](#support-ga)     | latest                                 |
+| Windows x86 (`win-x86`)                                                 | [GA](#support-ga)     | 最新                                 |
+| Windows x64 (`win-x64`)                                                 | [GA](#support-ga)     | 最新                                 |
 
-## Integrations
+## インテグレーション
 
-The [latest version of the .NET Tracer][5] can automatically instrument the following libraries:
+[最新版 .NET トレーサー][5]では、以下のライブラリの自動インスツルメンテーションが可能です。
 
-| Framework or library            | NuGet package                                                                             | Integration Name     |
+| フレームワークまたはライブラリ            | NuGet パッケージ                                                                             | インテグレーション名     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
-| .NET Remoting                   | built-in                                                                                  | `Remoting`           |
-| ADO.NET                         | All AdoNet integrations                                                                   | `AdoNet`             |
+| .NET Remoting                   | 組み込み                                                                                  | `Remoting`           |
+| ADO.NET                         | すべての AdoNet インテグレーション                                                                   | `AdoNet`             |
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
-| ASP.NET (including Web Forms)   | built-in                                                                                  | `AspNet`             |
+| ASP.NET (Web Forms を含む)   | 組み込み                                                                                  | `AspNet`             |
 | ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
 | Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                 | `AwsDynamoDb`        |
@@ -77,22 +76,22 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | GraphQL .NET                    | `GraphQL` 2.3.0+                                                                          | `GraphQL`            |
 | gRPC                            | `Grpc.Core` 2.3.0+                                                                        | `Grpc`               |
 | HotChocolate                    | `HotChocolate` 11.0.0+                                                                    | `HotChocolate`       |
-| HttpClient / HttpMessageHandler | built-in                                                                                  | `HttpMessageHandler` |
+| HttpClient / HttpMessageHandler | 組み込み                                                                                  | `HttpMessageHandler` |
 | IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                      | `IbmMq`              |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
-| MSMQ                            | built-in                                                                                  | `Msmq`               |
+| MSMQ                            | 組み込み                                                                                  | `Msmq`               |
 | MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                          | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                       | `Oracle`             |
 | PostgreSQL                      | `Npgsql` 4.0+                                                                             | `Npgsql`             |
-| Process                         | `"System.Diagnostics.Process"` 4.0+                                                       | `Process`            |
-| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+,                                                                 | `RabbitMQ`           |
-| Redis (ServiceStack client)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
-| Redis (StackExchange client)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
+| プロセス                         | `"System.Diagnostics.Process"` 4.0+                                                       | `Process`            |
+| RabbitMQ                        | `RabbitMQ.Client` 3.6.9+、                                                                 | `RabbitMQ`           |
+| Redis (ServiceStack クライアント)     | `ServiceStack.Redis` 4.0.48+                                                              | `ServiceStackRedis`  |
+| Redis (StackExchange クライアント)    | `StackExchange.Redis` 1.0.187+                                                            | `StackExchangeRedis` |
 | SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                           | `Sqlite`             |
-| SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+  | `SqlClient`     |
-| WCF (server)                    | built-in                                                                                  | `Wcf`                |
-| WebClient / WebRequest          | built-in                                                                                  | `WebRequest`         |
+| SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+  | WebClient / WebRequest     |
+| WCF (サーバー)                    | 組み込み                                                                                  | `Wcf`                |
+| WebClient / WebRequest          | 組み込み                                                                                  | `WebRequest`         |
 
 Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (for example, [activity based tracing][11]). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
 
@@ -104,7 +103,7 @@ For these libraries, set `DD_TRACE_OTEL_ENABLED` to `true`, and the .NET tracer 
 
 The following list of libraries have been tested with this setup:
 
-| Framework or library            | NuGet package                                                                 | Integration Name     | Specific instructions         |
+| フレームワークまたはライブラリ            | NuGet パッケージ                                                                 | インテグレーション名     | Specific instructions         |
 | ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |
 | Azure Service Bus               | `Azure.Messaging.ServiceBus` 7.14.0+                                          | `AzureServiceBus`    | See `Azure SDK` section below |
 
@@ -112,38 +111,38 @@ The following list of libraries have been tested with this setup:
 
 Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][12] for more details.
 
-## Supported Datadog Agent versions
+## サポートされている Datadog Agent バージョン
 
-| **Datadog Agent version**   | **Package version** |
+| **Datadog Agent バージョン**   | **パッケージバージョン** |
 |-----------------------------|---------------------|
-| [7.x][7]                    | latest              |
-| [6.x][7]                    | latest              |
-| [5.x][8]                    | latest              |
+| [7.x][7]                    | 最新              |
+| [6.x][7]                    | 最新              |
+| [5.x][8]                    | 最新              |
 
 ## .NET runtime support policy
 
 The .NET Tracer depends on the host operating system, .NET Framework runtime, certain .NET Framework libraries, and the Datadog Agent/API. These third party software systems support specific versions of .NET Framework. When the external software no longer supports a version of .NET Framework, the .NET Tracer also limits its support for that version.
 
-### Levels of support
+### サポートレベル
 
-| **Level**                                              | **Support provided**                                                                                                                                                          |
+| **レベル**                                              | **サポート内容**                                                                                                                                                          |
 |--------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <span id="support-unsupported">Unsupported</span>      |  No implementation. [Contact customer support for special requests.][9]                                                             |
-| <span id="support-beta">Beta</span>                    |  Initial implementation. May not yet contain all features. Support for new features, bug & security fixes provided on a best-effort basis.                                    |
-| <span id="support-ga">General Availability (GA)</span> |  Full implementation of all features. Full support for new features, bug & security fixes.                                                                                    |
-| <span id="support-maintenance">Maintenance</span>      |  Full implementation of existing features. Does not receive new features. Support for bug & security fixes only.                                                              |
-| <span id="support-eol">End-of-life (EOL)</span>        |  No support.                                                                                                                                                                  |
+| <span id="support-unsupported">非対応</span>      |  実装していません。[特別なご要望はカスタマーサポートにお問い合わせください][9]。                                                             |
+| <span id="support-beta">ベータ版</span>                    |  初期実装です。まだすべての機能が含まれていない可能性があります。新機能のサポート、バグやセキュリティの修正は、ベストエフォートで提供されます。                                    |
+| <span id="support-ga">一般提供 (GA)</span> |  全機能の完全実装。新機能、バグ、セキュリティフィックスを完全サポート。                                                                                    |
+| <span id="support-maintenance">メンテナンス</span>      |  既存機能の完全実装。新機能は受けません。バグフィックス、セキュリティフィックスのみの対応となります。                                                              |
+| <span id="support-eol">サポート終了 (EOL)</span>        |  サポートはありません。                                                                                                                                                                  |
 
-### Package versioning
+### パッケージのバージョニング
 
-Datadog APM for .NET Framework practices [semantic versioning][10].
-Version updates imply the following changes to runtime support:
+Datadog APM for .NET Framework は、[セマンティックバージョニング][10]を実践しています。
+バージョンの更新は、ランタイムサポートの以下の変更を意味します。
 
-  - **Major version updates** (for example `1.0.0` to `2.0.0`) may change support for any runtime from [Beta](#support-beta)/[GA](#support-ga) to [Maintenance](#support-maintenance)/[EOL](#support-eol).
-  - **Minor version updates** (for example `1.0.0` to `1.1.0`) won't lower the level of support for one runtime but may add support for one.
-  - **Patch version updates** (for example `1.0.0` to `1.0.1`) will not change support for any runtime.
+  - **メジャーバージョンアップ** (例えば `1.0.0` から `2.0.0`) により、ランタイムのサポートが[ベータ版](#support-beta)/[GA](#support-ga)から[メンテナンス](#support-maintenance)/[EOL](#support-eol) に変更される場合があります。
+  - **マイナーバージョンアップ** (例えば `1.0.0` から `1.1.0`) は、あるランタイムのサポートレベルを下げることはありませんが、あるランタイムのサポートは追加されるかもしれません。
+  - **パッチバージョンアップ** (例えば `1.0.0` から `1.0.1`) によって、ランタイムのサポートが変更されることはありません。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

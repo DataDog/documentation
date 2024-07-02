@@ -19,7 +19,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/tenable/README.md"
 "display_on_public_website": true
@@ -53,39 +53,39 @@
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
-## Overview
+## 概要
 
-This integration monitors [Tenable Nessus][1] logs through the Datadog Agent.
+このインテグレーションは、Datadog Agent を通じて [Tenable Nessus][1] のログを監視します。
 
-## Setup
+## セットアップ
 
-Follow the instructions below configure this integration for an Agent running on a host.
+以下の手順に従って、ホストで稼働中の Agent に対して、このインテグレーションを構成します。
 
-### Installation
+### インストール
 
-To install the Tenable integration configuration on your Agent:
+Tenable インテグレーションのコンフィギュレーションを Agent にインストールします。
 
-**Note**: This step is not necessary for Agent version >= 7.18.0.
+**注**: Agent のバージョンが 7.18.0 以上であれば、この手順は必要ありません。
 
-1. [Install][2] the 1.0 release (`tenable==1.0.0`).
+1. 1.0 のリリースを[インストール][2]します（`tenable==1.0.0`）。
 
-### Configuration
+### 構成
 
-The Agent tails the Tenable Nessus `webserver` and `backend` logs to collect data on Nessus scans.
+Agent は Tenable Nessus の `webserver` と `backend` のログを追跡し、Nessus スキャンのデータを収集します。
 
-#### Log collection
+#### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Uncomment and edit this configuration block at the bottom of your `tenable.d/conf.yaml`:
+2. `tenable.d/conf.yaml` の一番下のコンフィギュレーションブロックをコメント解除し、編集します。
 
-   See the [sample tenable.d/conf.yaml][3] for available configuration options.
+   使用可能なコンフィギュレーションオプションの詳細については、[tenable.d/conf.yaml のサンプル][3]を参照してください。
 
    ```yaml
       logs:
@@ -100,26 +100,26 @@ _Available for Agent versions >6.0_
          source: tenable
    ```
 
-    Customize the `path` and `service` parameter values if necessary for your environment.
+    必要であれば、`path` パラメーターと `service` パラメーターの値を、環境に合わせて変更してください。
 
-3. [Restart the Agent][4].
+3. [Agent を再起動します][4]。
 
-#### Log data collected
+#### 収集されるログデータ
 
-1. Nessus backend logs collect data on scan names, start time, stop time, durations, target(s)
-2. Nessus web server logs collect data on access logs for the Nessus web server including Client IPs, User Agents, and login attempts/successes/failures.
+1. Nessus のバックエンドログには、スキャン名、開始時間、停止時間、期間、ターゲットに関するデータが収集されます。
+2. Nessus Web サーバーログには、クライアント IP、ユーザー Agent、ログインの試行、成功、失敗など、Nessus Web サーバーに対するアクセスログのデータが収集されます。
 
-### Metrics
+### メトリクス
 
-This integration does not include any metrics.
+このインテグレーションには、メトリクスは含まれません。
 
-### Events
+### イベント
 
-This integration does not include any events.
+このインテグレーションには、イベントは含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://www.tenable.com/products/nessus
 [2]: https://docs.datadoghq.com/agent/guide/integration-management/#install

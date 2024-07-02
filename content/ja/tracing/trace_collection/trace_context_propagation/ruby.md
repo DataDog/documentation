@@ -16,25 +16,25 @@ further_reading:
 <div class="alert alert-info">This documentation is for <code>datadog</code> gem v2.x. If you are looking for <code>ddtrace</code> gem v1.x documentation, see the legacy <a href="/tracing/trace_collection/trace_context_propagation/ruby_v1">Propagating Ruby Trace Context
 </a> documentation.</div>
 
-### Headers extraction and injection
+### ヘッダーの抽出と挿入
 
-Datadog APM tracer supports [B3][6] and [W3C Trace Context][7] header extraction and injection for distributed tracing.
+Datadog APM トレーサーは、分散型トレーシングのための [B3][6] と [W3C Trace Context][7] のヘッダー抽出と挿入をサポートしています。
 
-Distributed headers injection and extraction is controlled by configuring injection and extraction styles. The following styles are supported:
+分散したヘッダーの挿入と抽出は、挿入および抽出スタイルを構成することで制御されます。次の 2 つのスタイルがサポートされています。
 
 - Datadog: `datadog`
-- B3 Multi Header: `b3multi`
-- B3 Single Header: `b3`
+- B3 マルチヘッダー: `b3multi`
+- B3 シングルヘッダー: `b3`
 - W3C Trace Context: `tracecontext`
-- No-op: `none`
+- ノーオペレーション: `none`
 
-Injection styles can be configured using:
+挿入スタイルは次を使って構成できます:
 
 - Environment Variable: `DD_TRACE_PROPAGATION_STYLE_INJECT=datadog,b3`
 
 The value of the environment variable is a comma-separated list of header styles that are enabled for injection. The default setting is `datadog,tracecontext`.
 
-Extraction styles can be configured using:
+抽出スタイルは次を使って構成できます:
 
 - Environment Variable: `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog,b3`
 

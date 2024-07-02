@@ -1,6 +1,5 @@
 ---
 title: Parsing
-kind: documentation
 description: "Parse your logs using the Grok Processor"
 aliases:
     - /logs/parsing/
@@ -20,220 +19,220 @@ further_reading:
   text: Control the volume of logs indexed by Datadog
 ---
 
-## Overview
+## 概要
 
-Datadog automatically parses JSON-formatted logs. For other formats, Datadog allows you to enrich your logs with the help of Grok Parser.
-The Grok syntax provides an easier way to parse logs than pure regular expressions. The Grok Parser enables you to extract attributes from semi-structured text messages.
+Datadog は JSON 形式のログを自動的にパースしますが、その他の形式の場合は、Grok パーサーを利用してログを補完できます。
+Grok 構文は、標準の正規表現より簡単にログをパースする方法を提供します。Grok パーサーにより、半構造化されたテキストメッセージから属性を抽出できます。
 
-Grok comes with reusable patterns to parse integers, IP addresses, hostnames, etc. These values must be sent into the grok parser as strings.
+Grok には、整数、IP アドレス、ホスト名などをパースするための再利用可能なパターンが付属しています。これらの値は文字列として grok パーサーに送られなければなりません。
 
-You can write parsing rules with the `%{MATCHER:EXTRACT:FILTER}` syntax:
+パース規則は、`%{MATCHER:EXTRACT:FILTER}` 構文を使用して記述できます。
 
-* **Matcher**: A rule (possibly a reference to another token rule) that describes what to expect (number, word, notSpace, etc.).
+* **Matcher**: 期待する内容 (数値、単語、スペース以外など) を記述する規則 (または別のトークン規則への参照)。
 
-* **Extract** (optional): An identifier representing the capture destination for the piece of text matched by the *Matcher*.
+* **Extract** (任意): *Matcher* と一致するテキストをキャプチャする対象を表す識別子。
 
-* **Filter** (optional): A post-processor of the match to transform it.
+* **Filter** (任意): 一致したテキストを変換するためのポストプロセッサー。
 
-Example for a classic unstructured log:
+典型的な非構造化ログの例
 
 ```text
 john connected on 11/08/2017
 ```
 
-With the following parsing rule:
+これに次のパース規則を使用します。
 
 ```text
 MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 ```
 
-After processing, the following structured log is generated:
+処理後は、次のような構造化ログが生成されます。
 
-{{< img src="logs/processing/processors/_parser.png" alt="Parsing example 1" style="width:80%;">}}
+{{< img src="logs/processing/processors/_parser.png" alt="パース例 1" style="width:80%;">}}
 
-**Note**:
+**注**:
 
-* If you have multiple parsing rules in a single Grok parser:
-  * Only one can match any given log. The first one that matches, from top to bottom, is the one that does the parsing.
-  * Each rule can reference parsing rules defined above itself in the list.
-* You must have unique rule names within the same Grok parser.
-* The rule name must contain only: alphanumeric characters, `_`, and `.`. It must start with an alphanumeric character.
-* Properties with null or empty values are not displayed.
-* The regex matcher applies an implicit `^`, to match the start of a string, and `$`, to match the end of a string.
-* Certain logs can produce large gaps of whitespace. Use `\n` and `\s+` to account for newlines and whitespace.
+* 1 つの Grok パーサーに複数のパース規則がある場合
+  * 特定のログに一致する規則は 1 つだけです。上から下へ参照し、最初に一致した規則がパースを行う規則になります。
+  * 各規則は上記のリストに定義されたパースを参照します。
+* 同一の Grok パーサー内では同じ規則名を複数使用できません。
+* 規則名には英数字、アンダースコア (_)、ピリオド (.) のみ使用できます。最初の文字は英数字でなければなりません。
+* 値が null または空欄のプロパティは表示されません。
+* 正規表現マッチャーは、文字列の先頭に一致するように暗黙の `^` を適用し、文字列の末尾に一致するように `$` を適用します。
+* 特定のログは、空白の大きなギャップを生成する可能性があります。改行と空白を表すには、`\n` と `\s+` を使用します。
 
-### Matcher and filter
+### マッチャーとフィルター
 
-Here is a list of all the matchers and filters natively implemented by Datadog:
+以下に、Datadog でネイティブに実装されるすべてのマッチャーとフィルターを示します。
 
 {{< tabs >}}
-{{% tab "Matchers" %}}
+{{% tab "マッチャー" %}}
 
 `date("pattern"[, "timezoneId"[, "localeId"]])` 
-: Matches a date with the specified pattern and parses to produce a Unix timestamp. [See the date Matcher examples](#parsing-dates).
+: 指定されたパターンを持つ日付に一致してパースし、Unix タイムスタンプを生成します。[日付マッチャーの例を参照してください](#parsing-dates)。
 
 `regex("pattern")`
-: Matches a regex. [Check the regex Matcher examples](#regex).
+: 正規表現に一致します。[正規表現マッチャーの例を参照してください](#regex)。
 
 `notSpace`
-: Matches any string until the next space.
+: 次のスペースまでの文字列に一致します。
 
 `boolean("truePattern", "falsePattern")`
-: Matches and parses a Boolean, optionally defining the true and false patterns (defaults to `true` and `false`, ignoring case).
+: ブール値に一致してパースします。true と false のパターンをオプションで定義できます (デフォルトは 'true' と 'false'。大文字と小文字は区別されません)。
 
 `numberStr`
-: Matches a decimal floating point number and parses it as a string.
+: 10 進浮動小数点数に一致し、それを文字列としてパースします。
 
 `number`
-: Matches a decimal floating point number and parses it as a double precision number.
+: 10 進浮動小数点数に一致し、それを倍精度数としてパースします。
 
 `numberExtStr`
-: Matches a floating point number (with scientific notation support) and parses it as a string.
+: (指数表記の) 浮動小数点数に一致し、それを文字列としてパースします。
 
 `numberExt`
-: Matches a floating point number (with scientific notation support) and parses it as a double precision number.
+: (指数表記の) 浮動小数点数に一致し、それを倍精度数としてパースします。
 
 `integerStr`
-: Matches an integer number and parses it as a string.
+: 整数に一致し、それを文字列としてパースします。
 
 `integer`
-: Matches an integer number and parses it as an integer number.
+: 整数に一致し、それを整数としてパースします。
 
 `integerExtStr`
-: Matches an integer number (with scientific notation support) and parses it as a string.
+: (指数表記の) 整数に一致し、それを文字列としてパースします。
 
 `integerExt`
-: Matches an integer number (with scientific notation support) and parses it as an integer number.
+: (指数表記の) 整数に一致し、それを整数としてパースします。
 
 `word`
-: Matches a _word_, which starts with a word boundary; contains characters from a-z, A-Z, 0-9, including the `_` (underscore) character; and ends with a word boundary. Equivalent to `\b\w+\b` in regex.
+: 単語境界で始まり、a-z、A-Z、0-9 の文字と `_` (アンダースコア) 文字を含み、単語境界で終わる単語にマッチします。正規表現では `\b\w+\b` に相当します。
 
 `doubleQuotedString`
-: Matches a double-quoted string.
+: 二重引用符で囲まれた文字列に一致します。
 
 `singleQuotedString`
-: Matches a single-quoted string.
+: 単一引用符で囲まれた文字列に一致します。
 
 `quotedString`
-: Matches a double-quoted or single-quoted string.
+: 二重引用符または単一引用符で囲まれた文字列に一致します。
 
 `uuid`
-: Matches a UUID.
+: UUID に一致します。
 
 `mac`
-: Matches a MAC address.
+: MAC アドレスに一致します。
 
 `ipv4`
-: Matches an IPV4.
+: IPV4 に一致します。
 
 `ipv6`
-: Matches an IPV6.
+: IPV6 に一致します。
 
 `ip`
-: Matches an IP (v4 or v6).
+: IP (v4 または v6) に一致します。
 
 `hostname`
-: Matches a hostname.
+: ホスト名に一致します。
 
 `ipOrHost`
-: Matches a hostname or IP.
+: ホスト名または IP に一致します。
 
 `port`
-: Matches a port number.
+: ポート番号に一致します。
 
 `data`
-: Matches any string including spaces and newlines. Equivalent to `.*` in regex. Use when none of above patterns is appropriate.
+: スペースと改行を含め、任意の文字列に一致します。正規表現の `.*` と同じです。上記のいずれのパターンも適切でない場合に使用します。
 
 {{% /tab %}}
-{{% tab "Filters" %}}
+{{% tab "フィルター" %}}
 
 `number`
-: Parses a match as double precision number.
+: 一致部分を倍精度数としてパースします。
 
 `integer`
-: Parses a match as an integer number.
+: 一致部分を整数としてパースします。
 
 `boolean`
-: Parses 'true' and 'false' strings as booleans ignoring case.
+: 大文字と小文字を区別しないで、'true' および 'false' 文字列をブール値としてパースします。
 
 `nullIf("value")`
-: Returns null if the match is equal to the provided value.
+: 一致部分が指定された値に等しい場合は null を返します。
 
 `json`
-: Parses properly formatted JSON.
+: 適切な形式の JSON をパースします。
 
 `rubyhash`
-: Parses a properly formatted Ruby hash such as `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`
+: 適切な形式の Ruby ハッシュをパースします (例: `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`)。
 
 `useragent([decodeuricomponent:true/false])`
-: Parses a user-agent and returns a JSON object that contains the device, OS, and the browser represented by the Agent. [Check the User Agent processor][1].
+: User-Agent をパースして、Agent によって表されるデバイス、OS、ブラウザを含む JSON オブジェクトを返します。[ユーザーエージェントプロセッサーを参照してください][1]。
 
 `querystring`
-: Extracts all the key-value pairs in a matching URL query string (for example, `?productId=superproduct&promotionCode=superpromo`).
+: 一致する URL クエリ文字列内のすべての key-value ペアを抽出します (例: `?productId=superproduct&promotionCode=superpromo`)。
 
 `decodeuricomponent`
-: Decodes URI components. For instance, it transforms `%2Fservice%2Ftest` into `/service/test`.
+: URI コンポーネントをデコードします。たとえば、'%2Fservice%2Ftest' は '/service/test' に変換されます。
 
 `lowercase`
-: Returns the lower-cased string.
+: 小文字に変換した文字列を返します。
 
 `uppercase`
-: Returns the upper-cased string.
+: 大文字に変換した文字列を返します。
 
 `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])`
-: Extracts the key value pattern and returns a JSON object. See the [key-value filter examples](#key-value-or-logfmt).
+: キー値のパターンを抽出し、JSON オブジェクトを返します。[キー値フィルターの例](#キー値またはlogfmt)を参照してください。
 
 `xml`
-: Parses properly formatted XML. See the [XML filter examples](#parsing-xml).
+: 適切にフォーマット化された XML をパースします。[XML フィルターの例](#parsing-xml)を参照してください。
 
 `csv(headers[, separator[, quotingcharacter]])`
-: Parses properly formatted CSV or TSV lines. See the [CSV filter examples](#parsing-csv).
+: 適切にフォーマット化された CSV または TSV の行をパースします。[CSV フィルターの例](#CSV をパースする)を参照してください。
 
 `scale(factor)`
-: Multiplies the expected numerical value by the provided factor.
+: 抽出された数値を指定された factor で乗算します。
 
 `array([[openCloseStr, ] separator][, subRuleOrFilter)`
-: Parses a string sequence of tokens and returns it as an array. See the [list to array](#list-to-array) example.
+: 文字列トークンシーケンスをパースして配列として返します。[配列へのリスト](#list-to-array)の例を参照してください。
 
 `url`
-: Parses a URL and returns all the tokenized members (domain, query params, port, etc.) in a JSON object. [More info on how to parse URLs][2].
+: URL をパースし、トークン化されたすべてのメンバー (ドメイン、クエリパラメーター、ポートなど) を 1 つの JSON オブジェクトとして返します。[URL のパース方法を参照してください][2]。
 
 [1]: /logs/log_configuration/processors/#user-agent-parser
 [2]: /logs/log_configuration/processors/#url-parser
 {{% /tab %}}
 {{< /tabs >}}
 
-## Advanced settings
+## 高度な設定
 
-At the bottom of your Grok processor tiles, there is an **Advanced Settings** section:
+Grok プロセッサータイルの下部に、**Advanced Settings** セクションがあります。
 
-{{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings" style="width:80%;">}}
+{{< img src="logs/processing/parsing/advanced_settings.png" alt="詳細設定" style="width:80%;">}}
 
-### Parsing a specific text attribute
+### 特定のテキスト属性をパース
 
-Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
+**Extract from** フィールドを使用して、デフォルトの `message` 属性ではなく、指定されたテキスト属性に Grok プロセッサを適用します。
 
-For example, consider a log containing a `command.line` attribute that should be parsed as a key-value. You could parse this log as follows:
+たとえば、key-value としてパースされる必要のある `command.line` 属性を持つログを例に取ると、そのログは以下のようにパースできます。
 
-{{< img src="logs/processing/parsing/parsing_attribute.png" alt="Parsing Command Line" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_attribute.png" alt="コマンドラインをパース" style="width:80%;">}}
 
-### Using helper rules to factorize multiple parsing rules
+### ヘルパー規則を使用して複数のパース規則を再利用する
 
-Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
+パース規則に使用するトークンを定義するには、**Helper Rules** フィールドを使用します。Helper Rules を使用すると、Grok パターンを複数のパース規則で再利用でき、同じ Grok パーサーの複数の規則で同じトークンを使用する場合に便利です。
 
-Example for a classic unstructured log:
+典型的な非構造化ログの例
 
 ```text
 john id:12345 connected on 11/08/2017 on server XYZ in production
 ```
 
-Use the following parsing rule:
+次のパース規則を使用します。
 
 ```text
 MyParsingRule %{user} %{connection} %{server}
 ```
 
-With the following helpers:
+次のヘルパーと組み合わせます。
 
 ```text
 user %{word:user.name} id:%{integer:user.id}
@@ -241,88 +240,88 @@ connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
 
-{{< img src="logs/processing/parsing/helper_rules.png" alt="helper rules" style="width:80%;">}}
+{{< img src="logs/processing/parsing/helper_rules.png" alt="ヘルパー規則" style="width:80%;">}}
 
-## Examples
+## 例
 
-Some examples demonstrating how to use parsers:
+以下に、パーサーの具体的な使用例をいくつか挙げます。
 
-* [Key value or logfmt](#key-value-or-logfmt)
-* [Parsing dates](#parsing-dates)
-* [Alternating patterns](#alternating-pattern)
-* [Optional attribute](#optional-attribute)
-* [Nested JSON](#nested-json)
-* [Regex](#regex)
-* [List and Arrays](#list-to-array)
-* [Glog format](#glog-format)
+* [キー値または logfmt](#key-value-or-logfmt)
+* [日付のパース](#parsing-dates)
+* [交互パターン](#alternating-pattern)
+* [オプションの属性](#optional-attribute)
+* [ネストされた JSON](#nested-json)
+* [正規表現](#regex)
+* [リストと配列](#list-to-array)
+* [GLog 形式](#glog-format)
 * [XML](#parsing-xml)
 * [CSV](#parsing-csv)
 
-### Key value or logfmt
+### キー値または logfmt
 
-This is the key-value core filter: `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])` where:
+これは key-value コアフィルター `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])` です。
 
-* `separatorStr`: defines the separator between key and values. Defaults to `=`.
-* `characterAllowList`: defines extra non-escaped value chars in addition to the default `\\w.\\-_@`. Used only for non-quoted values (for example, `key=@valueStr`).
-* `quotingStr`: defines quotes, replacing the default quotes detection: `<>`, `""`, `''`.
-* `delimiter`: defines the separator between the different key values pairs (for example, `|`is the delimiter in `key1=value1|key2=value2`). Defaults to ` ` (normal space), `,` and `;`.
+* `separatorStr`: キーと値を区切るセパレーターを定義します。デフォルト `=`.
+* `characterAllowList`: デフォルトの `\\w.\\-_@` に加え、追加の非エスケープ値文字を定義します。引用符で囲まれていない値 (例: `key=@valueStr`) にのみ使用します。
+* `quotingStr`: 引用符を定義し、デフォルトの引用符検出（`<>`、`""`、`''`）を置き換えます。
+* `delimiter`: 異なる key-value ペアのセパレーターを定義します（すなわち、`|` は `key1=value1|key2=value2`の区切り文字です）。デフォルトは ` ` (通常のスペース)、`,` および `;` です。
 
-Use filters such as **keyvalue** to more-easily map strings to attributes for keyvalue or logfmt formats:
+**keyvalue** などのフィルターを使用すると、keyvalue または logfmt 形式の属性に文字列をより簡単にマップできます。
 
-**Log:**
+**ログ:**
 
 ```text
 user=john connect_date=11/08/2017 id=123 action=click
 ```
 
-**Rule:**
+**例:**
 
 ```text
 rule %{data::keyvalue}
 ```
 
-{{< img src="logs/processing/parsing/parsing_example_2.png" alt="Parsing example 2" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2.png" alt="パース例 2" style="width:80%;">}}
 
-You don't need to specify the name of your parameters as they are already contained in the log.
-If you add an **extract** attribute `my_attribute` in your rule pattern you will see:
+パラメーターの名前はログに既に含まれているため、指定する必要はありません。
+**extract** 属性 `my_attribute` を規則パターンに追加すると、次のようになります。
 
-{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="Parsing example 2 bis" style="width:80%;">}}
+{{< img src="logs/processing/parsing/parsing_example_2_bis.png" alt="パース例 2 bis" style="width:80%;">}}
 
-If `=` is not the default separator between your key and values, add a parameter in your parsing rule with a separator.
+キーと値を区切るデフォルトのセパレーターが `=` 以外の場合は、セパレーターとともにパラメーターをパース規則に追加します。
 
-**Log:**
+**ログ:**
 
 ```text
 user: john connect_date: 11/08/2017 id: 123 action: click
 ```
 
-**Rule:**
+**例:**
 
 ```text
 rule %{data::keyvalue(": ")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_parser.png" alt="Key value parser" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_parser.png" alt="キー値パーサー" style="width:80%;" >}}
 
-If logs contain special characters in an attribute value, such as `/` in a url for instance, add it to the allowlist in the parsing rule:
+ログの属性値に、URL の `/` などの特殊文字が含まれる場合は、それをパース規則の許可リストに追加します。
 
-**Log:**
+**ログ:**
 
 ```text
 url=https://app.datadoghq.com/event/stream user=john
 ```
 
-**Rule:**
+**例:**
 
 ```text
 rule %{data::keyvalue("=","/:")}
 ```
 
-{{< img src="logs/processing/parsing/key_value_allowlist.png" alt="Key value allowlist" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/key_value_allowlist.png" alt="キー値の許可リスト" style="width:80%;" >}}
 
-Other examples:
+その他の例
 
-| **Raw string**               | **Parsing rule**                                      | **Result**                            |
+| **文字列の例**               | **パース規則**                                      | **結果**                            |
 |:-----------------------------|:------------------------------------------------------|:--------------------------------------|
 | key=valueStr                 | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
 | key=\<valueStr>              | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
@@ -334,38 +333,38 @@ Other examples:
 | key1=value1\|key2=value2     | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
 | key1="value1"\|key2="value2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
 
-**Multiple QuotingString example**: When multiple quotingstring are defined, the default behavior is replaced with a defined quoting character.
-The key-value always matches inputs without any quoting characters, regardless of what is specified in `quotingStr`. When quoting characters are used, the `characterAllowList` is ignored as everything between the quoting characters is extracted.
+**Multiple QuotingString の例**: 複数の引用文字列が定義されると、デフォルトの挙動が定義された引用文字に置き換えられます。
+`quotingStr` で指定されている値にかかわらず、キーと値は引用文字列が使用されていなくても常に入力と一致します。 引用文字列が使用されている場合、引用符内の文字列がすべて抽出されるため、`characterAllowList` は無視されます。
 
-**Log:**
+**ログ:**
 
   ```text
   key1:=valueStr key2:=</valueStr2> key3:="valueStr3"
   ```
 
-**Rule:**
+**例:**
 
   ```text
   rule %{data::keyvalue(":=","","<>")}
   ```
 
-**Result:**
+**結果:**
 
   ```json
   {"key1": "valueStr", "key2": "/valueStr2"}
   ```
 
-**Note**:
+**注**:
 
-* Empty values (`key=`) or `null` values (`key=null`) are not displayed in the output JSON.
-* If you define a *keyvalue* filter on a `data` object, and this filter is not matched, then an empty JSON `{}` is returned (for example, input: `key:=valueStr`, parsing rule: `rule_test %{data::keyvalue("=")}`, output: `{}`).
-* Defining `""` as `quotingStr` keeps the default configuration for quoting.
+* 値が空 (`key=`) または `null` (`key=null`) の場合、出力される JSON に表示されません。
+* `data` オブジェクトで *keyvalue* フィルターを定義する場合で、このフィルターが一致しない時は、空の JSON `{}` が返されます (例: 入力: `key:=valueStr`、パース規則: `rule_test %{data::keyvalue("=")}`、出力: `{}`)。
+* `""` を `quotingStr` と定義すると、引用符のデフォルト設定が保持されます。
 
-### Parsing dates
+### 日付のパース
 
-The date matcher transforms your timestamp in the EPOCH format (unit of measure **millisecond**).
+日付マッチャーは、タイムスタンプを EPOCH 形式 (**millisecond** 計測単位) に変換します。
 
-| **Raw string**                       | **Parsing rule**                                          | **Result**              |
+| **文字列の例**                       | **パース規則**                                          | **結果**              |
 |:-------------------------------------|:----------------------------------------------------------|:------------------------|
 | 14:20:15                             | `%{date("HH:mm:ss"):date}`                                | {"date": 51615000}      |
 | 02:20:15 PM                          | `%{date("hh:mm:ss a"):date}`                              | {"date": 51615000}      |
@@ -381,149 +380,149 @@ The date matcher transforms your timestamp in the EPOCH format (unit of measure 
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","UTC+5"):date}`        | {"date": 1466047743000} |
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","+3"):date}`           | {"date": 1466054943000} |
 
-<sup>1</sup> Use the `timezone` parameter if you perform your own localizations and your timestamps are _not_ in UTC.
-The supported format for timezones are:
+<sup>1</sup>  独自のローカライズを実行し、タイムスタンプが UTC _以外_の場合は、`timezone` パラメーターを使用します。
+タイムゾーンとしてサポートされる形式は、以下になります。
 
-* `GMT`, `UTC`, `UT` or `Z`
-* `+h`, `+hh`, `+hh:mm`, `-hh:mm`, `+hhmm`, `-hhmm`, `+hh:mm:ss`, `-hh:mm:ss`, `+hhmmss` or `-hhmmss` . The maximum supported range is from +18:00 to -18:00 inclusive.
-* Timezones starting with `UTC+`, `UTC-`, `GMT+`, `GMT-`, `UT+` or `UT-`. The maximum supported range is from +18:00 to -18:00 inclusive.
-* Timezone IDs pulled from the TZ database. For more information, see [TZ database names][2].
+* `GMT`、`UTC`、`UT`、`Z`
+* `+h`、`+hh`、`+hh:mm`、`-hh:mm`、`+hhmm`、`-hhmm`、`+hh:mm:ss`、`-hh:mm:ss`、`+hhmmss`、`-hhmmss` 。対応する範囲は最大で +18:00 から -18:00 までです。
+* `UTC+`、`UTC-`、`GMT+`、`GMT-`、`UT+`、`UT-` で始まるタイムゾーン。対応する範囲は最大で +18:00 から -18:00 までです。
+* TZ データベースから取得されるタイムゾーン ID。詳細については、[TZ データベース名][2]を参照してください。
 
-**Note**: Parsing a date **doesn't** set its value as the log official date. For this use the [Log Date Remapper][3] in a subsequent Processor.
+**注**: 日付をパースしても、その値は公式のログ日付として設定**されません**。設定するには、後続のプロセッサーで [ログ日付リマッパー][3]を使用してください。
 
-### Alternating pattern
+### 交互パターン
 
-If you have logs with two possible formats which differ in only one attribute, set a single rule using alternating with `(<REGEX_1>|<REGEX_2>)`. This rule is equivalent to a Boolean OR.
+ログの形式が 2 通りあり、そのうち 1 つの属性だけが異なる場合は、`(<REGEX_1>|<REGEX_2>)` による交互条件を使用して 1 つの規則を設定します。この規則は Boolean OR と同じです。
 
-**Log**:
+**ログの例**
 
 ```text
 john connected on 11/08/2017
 12345 connected on 11/08/2017
 ```
 
-**Rule**:
-Note that "id" is an integer and not a string.
+**規則**:
+"id" は整数です。文字列ではないので注意してください。
 
 ```text
 MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-**Results**:
+**結果**
 
-{{< img src="logs/processing/parsing/parsing_example_4.png" alt="Parsing example 4" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4.png" alt="パース例 4" style="width:80%;" >}}
 
-{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="Parsing example 4 bis" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_4_bis.png" alt="パース例 4 bis" style="width:80%;" >}}
 
-### Optional attribute
+### オプションの属性
 
-Some logs contain values that only appear part of the time. In this case, make attribute extraction optional with `()?`.
+必ずしも表示されない値がログに含まれることがあります。その場合は、`()?` を使用して属性抽出を任意にします。
 
-**Log**:
+**ログの例**
 
 ```text
 john 1234 connected on 11/08/2017
 ```
 
-**Rule**:
+**規則の例**
 
 ```text
 MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-**Note**: A rule will not match if you include a space after the first word in the optional section.
+**注**: 任意のセクションで先頭の単語の後ろにスペースを含めると、規則は一致しません。
 
-{{< img src="logs/processing/parsing/parsing_example_5.png" alt="Parsing example 5" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5.png" alt="パース例 5" style="width:80%;" >}}
 
-{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="Parsing example 5 bis" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/parsing_example_5_bis.png" alt="パース例 5 bis" style="width:80%;" >}}
 
-### Nested JSON
+### ネストされた JSON
 
-Use the `json` filter to parse a JSON object nested after a raw text prefix:
+未処理のテキストプレフィックスの後でネストされている JSON オブジェクトをパースするには、`json`  フィルターを使用します。
 
-**Log**:
+**ログの例**
 
 ```text
 Sep 06 09:13:38 vagrant program[123]: server.1 {"method":"GET", "status_code":200, "url":"https://app.datadoghq.com/logs/pipelines", "duration":123456}
 ```
 
-**Rule**:
+**規則の例**
 
 ```text
 parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{number:logger.thread_id}\]: %{notSpace:server} %{data::json}
 ```
 
-{{< img src="logs/processing/parsing/nested_json.png" alt="Nested JSON Parsing example" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/nested_json.png" alt="ネストされた JSON パースの例" style="width:80%;" >}}
 
-### Regex
+### 正規表現
 
-**Log**:
+**ログの例**
 
 ```text
 john_1a2b3c4 connected on 11/08/2017
 ```
 
-**Rule**:
+**規則の例**
 
 ```text
 MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id} .*
 ```
 
-{{< img src="logs/processing/parsing/regex_parsing.png" alt="Parsing example 6" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/regex_parsing.png" alt="パース例 6" responsive="true" style="width:80%;" >}}
 
-### List to array
+### リストから配列へ
 
-Use the `array([[openCloseStr, ] separator][, subRuleOrFilter)` filter to extract a list into an array in a single attribute. The `subRuleOrFilter` is optional and accepts these [filters][4].
+リストを 1 つの属性の配列に取り出すには `array([[openCloseStr, ] separator][, subRuleOrFilter)` フィルターを使用します。`subRuleOrFilter` はオプションで、これらの[フィルター][4]を受け入れることができます。
 
-**Log**:
+**ログの例**
 
 ```text
 Users [John, Oliver, Marc, Tom] have been added to the database
 ```
 
-**Rule**:
+**規則の例**
 
 ```text
 myParsingRule Users %{data:users:array("[]",",")} have been added to the database
 ```
 
-{{< img src="logs/processing/parsing/array_parsing.png" alt="Parsing example 6" style="width:80%;" >}}
+{{< img src="logs/processing/parsing/array_parsing.png" alt="パース例 6" style="width:80%;" >}}
 
-**Log**:
+**ログの例**
 
 ```text
 Users {John-Oliver-Marc-Tom} have been added to the database
 ```
 
-**Rule**:
+**規則の例**
 
 ```text
 myParsingRule Users %{data:users:array("{}","-")} have been added to the database
 ```
 
-**Rule using `subRuleOrFilter`**:
+**`subRuleOrFilter` を使用したルール**:
 
 ```text
 myParsingRule Users %{data:users:array("{}","-", uppercase)} have been added to the database
 ```
 
-### Glog format
+### GLog 形式
 
-Kubernetes components sometimes log in the `glog` format; this example is from the Kube Scheduler item in the Pipeline Library.
+Kubernetes コンポーネントは `glog` 形式でログを記録することがあります。下の例は、パイプラインライブラリの Kube Scheduler アイテムからのものです。
 
-Example log line:
+ログラインの例、
 
 ```text
 W0424 11:47:41.605188       1 authorization.go:47] Authorization is disabled
 ```
 
-Parsing rule:
+パースの例、
 
 ```text
 kube_scheduler %{regex("\\w"):level}%{date("MMdd HH:mm:ss.SSSSSS"):timestamp}\s+%{number:logger.thread_id} %{notSpace:logger.name}:%{number:logger.lineno}\] %{data:msg}
 ```
 
-And extracted JSON:
+抽出された JSON、
 
 ```json
 {
@@ -538,11 +537,11 @@ And extracted JSON:
 }
 ```
 
-### Parsing XML
+### XML のパース 
 
-The XML parser transforms XML formatted messages into JSON.
+XML パーサーは、XML 形式のメッセージを JSON に変換します。
 
-**Log:**
+**ログ:**
 
 ```text
 <book category="CHILDREN">
@@ -552,13 +551,13 @@ The XML parser transforms XML formatted messages into JSON.
 </book>
 ```
 
-**Rule:**
+**例:**
 
 ```text
 rule %{data::xml}
 ```
 
-**Result:**
+**結果:**
 
   ```json
 {
@@ -574,41 +573,41 @@ rule %{data::xml}
 }
   ```
 
-**Notes**:
+**注**:
 
-* If the XML contains tags that have both an attribute and a string value between the two tags, a `value` attribute is generated. For example: `<title lang="en">Harry Potter</title>` is converted to `{"title": {"lang": "en", "value": "Harry Potter" } }`
-* Repeated tags are automatically converted to arrays. For example: `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` is converted to `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }`
+* XML に、前後のタグの間に属性と文字列値の両方が存在するタグが含まれている場合、`value` 属性が生成されます。例えば、`<title lang="en">Harry Potter</title>` は `{"title": {"lang": "en", "value": "Harry Potter" } }` に変換されます。
+* 繰り返しタグは自動的に配列に変換されます。例えば、`<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` は `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }` に変換されます。
 
-### Parsing CSV
+### CSV をパースする
 
-Use the **CSV** filter to more-easily map strings to attributes when separated by a given character (`,` by default).
+**CSV** フィルターを使用して、文字列を属性に簡単にマップできます。対象のデータは任意の文字で区切る必要があります (デフォルトでは `,` ) 。
 
-The CSV filter is defined as `csv(headers[, separator[, quotingcharacter]])` where:
+CSV フィルターは `csv(headers[, separator[, quotingcharacter]])` で定義されます。それぞれの内容は以下の通りです。
 
-* `headers`: Defines the keys name separated by `,`. Keys names must start with alphabetical character and can contain any alphanumerical character in addition to `_`.
-* `separator`: Defines separators used to separate the different values. Only one character is accepted. Default: `,`. **Note**: Use `tab` for the `separator` to represent the tabulation character for TSVs.
-* `quotingcharacter`: Defines the quoting character. Only one character is accepted. Default: `"`
+* `headers`: `,` で区切られたキーの名前を定義します。キー名にはアルファベットと `_` を使用できますが、冒頭の文字はアルファベットでなければなりません。
+* `separator`: 異なる値の区切りに使用する区切り文字を定義します。1 文字のみ使用可能です。デフォルト: `,`。**注**: TSV のタブ文字を表すには、`separator` に `tab` を使用します。
+* `quotingcharacter`: 引用符を定義します。許可されるのは 1 文字だけです。デフォルトは `"` 。
 
-**Note**:
+**注**:
 
-* Values containing a separator character must be quoted.
-* Quoted Values containing a quoting character must be escaped with a quoting characters. For example, `""` within a quoted value represents `"`.
-* If the log doesn't contain the same number of value as the number of keys in the header, the CSV parser will match the first ones.
-* Intergers and Double are automatically casted if possible.
+* 区切り文字を含む値は引用符で囲む必要があります。
+* 引用符で囲まれた (引用符を含む) 値は引用符でエスケープする必要があります。たとえば、引用符を含む値における `""` は `"` を意味します。
+* ヘッダーに含まれるキー数と同じ個数の値がログに含まれていない場合、CSV パーサーは最初に出現する値とのマッチングを行います。
+* 整数と浮動小数点数は、可能な場合自動でキャストされます。
 
-**Log**:
+**ログの例**
 
 {{< code-block lang="text" >}}
 John,Doe,120,Jefferson St.,Riverside
 {{< /code-block >}}
 
-**Rule**:
+**規則の例**
 
 {{< code-block lang="text" >}}
 myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 {{< /code-block >}}
 
-**Result:**
+**結果:**
 
 {{< code-block lang="json" >}}
 {
@@ -622,9 +621,9 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 }
 {{< /code-block >}}
 
-Other examples:
+その他の例
 
-| **Raw string**               | **Parsing rule**                                                         | **Result**                                      |
+| **文字列の例**               | **パース規則**                                                         | **結果**                                      |
 |:-----------------------------|:-------------------------------------------------------------------------|:------------------------------------------------|
 | `John,Doe`                   | `%{data::csv("firstname,name")}`                                         | {"firstname": "John", "name":"Doe"}             |
 | `"John ""Da Man""",Doe`      | `%{data::csv("firstname,name")}`                                         | {"firstname": "John \"Da Man\"", "name":"Doe"}  |
@@ -635,17 +634,17 @@ Other examples:
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
 | <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"key1": "value1", "key2": "value2", "key3":"value3"} |
 
-### Use data matcher to discard unneeded text
+### data matcher を使用して、不要なテキストを破棄する
 
-If you have a log where after you have parsed what is needed and know that the text after that point is safe to discard, you can use the data matcher to do so. For the following log example, you can use the `data` matcher to discard the `%` at the end.
+もし、必要な情報をパースした後のログで、それ以降のテキストは安全に破棄できるとわかっている場合、data matcher を使ってそれを行うことができます。以下のログの例では、`data` matcher を使って末尾の `%` を破棄することができます。
 
-**Log**:
+**ログの例**
 
 ```
 Usage: 24.3%
 ```
 
-**Rule**:
+**規則の例**
 
 ```
 MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
@@ -660,11 +659,11 @@ MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
 }
 ```
 
-### ASCII control characters
+### ASCII 制御文字
 
-If your logs contain ASCII control characters, they are serialized upon ingestion. These can be handled by explicitly escaping the serialized value within your grok parser.
+ログに ASCII 制御文字が含まれている場合、それは取り込み時にシリアル化されます。これは、grok パーサー内でシリアル化された値を明示的にエスケープすることで処理できます。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

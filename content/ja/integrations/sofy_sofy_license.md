@@ -15,7 +15,7 @@
 - marketplace
 - mobile
 - collaboration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -84,7 +84,7 @@
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## Overview
+## 概要
 
 [Sofy][4] is a no-code testing platform for mobile apps. It enables you to run QA tests from your CI/CD pipeline on real devices without a single line of code. Sofy simplifies test planning, automation, environments, execution, reporting, and debugging. Save time, improve release quality, and deliver frictionless mobile app experiences.
 
@@ -94,15 +94,15 @@ By signing up for Sofy from the Datadog Marketplace, you get an extra 500 device
 
 
 
-## Support
+## サポート
 
 For support or feature requests, contact Sofy through the following channel:
 
 - Support: [Sofy][2]
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links and articles:
+お役に立つドキュメント、リンクや記事:
 
  - [Monitor your mobile tests with Sofy's offering in the Datadog Marketplace][5]
  - [Sofy Documentation][3]

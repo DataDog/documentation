@@ -1,8 +1,8 @@
 ---
+title: Best practices for maintaining relevant dashboards
 aliases:
-- /ja/graphing/faq/maintain-relevant-dashboards
-- /ja/graphing/guide/maintain-relevant-dashboards
-title: 適切なダッシュボードを維持するためのベストプラクティス
+  - /graphing/faq/maintain-relevant-dashboards
+  - /graphing/guide/maintain-relevant-dashboards
 ---
 
 ダッシュボードの一覧ページが乱雑になると、適切なコンテンツを見つけるのが難しくなり、検索クエリが未使用または無関係の結果で汚染される可能性があります。一括削除と[**Recently Deleted** (最近削除した) ダッシュボード][1]を組み合わせることで、不要なダッシュボードを大規模に削除し、誤って削除したものを復元することができます。このガイドには以下が含まれます。
@@ -66,11 +66,11 @@ title: 適切なダッシュボードを維持するためのベストプラク�
 - [Datadog Miscellany: 古いダッシュボードやモニターを削除する][3]
 - [Datadog Miscellany: タイトルのテキストに基づいたダッシュボードの削除][4]
 
-[1]: https://docs.datadoghq.com/ja/dashboards/#restore-deleted-dashboards
-[2]: https://docs.datadoghq.com/ja/api/latest/dashboards/#restore-deleted-dashboards
+[1]: https://docs.datadoghq.com/dashboards/list/#restore-deleted-dashboards
+[2]: https://docs.datadoghq.com/api/latest/dashboards/#restore-deleted-dashboards
 [3]: https://github.com/DataDog/Miscellany/tree/master/remove_old_dash_monitors
 [4]: https://github.com/DataDog/Miscellany/tree/master/delete_dashboards_by_text_search
-[5]: https://docs.datadoghq.com/ja/notebooks/#overview
-[6]: https://docs.datadoghq.com/ja/dashboards/guide/quick-graphs/#overview
+[5]: https://docs.datadoghq.com/notebooks/#overview
+[6]: https://docs.datadoghq.com/dashboards/guide/quick-graphs/#overview
 [7]: https://www.datadoghq.com/blog/dashboard-details/
-[8]: https://docs.datadoghq.com/ja/api/latest/dashboards/#delete-dashboards
+[8]: https://docs.datadoghq.com/api/latest/dashboards/#delete-dashboards

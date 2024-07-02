@@ -12,7 +12,7 @@ further_reading:
       tag: Documentation
       text: Increase the retention of process data with metrics
     - link: /infrastructure/livecontainers
-      tag: Documentation
+      tag: ドキュメント
       text: Get real-time visibility of all of the containers across your environment
     - link: "https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/"
       tag: Blog
@@ -42,7 +42,7 @@ Datadog's Live Processes gives you real-time visibility into the processes runni
 
 {{< img src="infrastructure/process/live_processes_main.png" alt="Live Processes Overview" >}}
 
-## Installation
+## インストール
 
 If you are using Agent 5, follow this [specific installation process][1]. If you are using Agent 6 or 7, [see the instructions below][2].
 
@@ -102,7 +102,7 @@ Then, upgrade your Helm chart:
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 ```
 
-**Note**: Running the Agent as a container still allows you to collect host processes.
+**注**: 引き続き、Agent をコンテナとして実行してホストプロセスを収集することもできます。
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
@@ -127,7 +127,7 @@ spec:
 
 {{% k8s-operator-redeploy %}}
 
-**Note**: Running the Agent as a container still allows you to collect host processes.
+**注**: 引き続き、Agent をコンテナとして実行してホストプロセスを収集することもできます。
 
 {{% /tab %}}
 {{% tab "Kubernetes (Manual)" %}}
@@ -150,7 +150,7 @@ In the `datadog-agent.yaml` manifest used to create the DaemonSet, add the follo
 
 See the standard [DaemonSet installation][1] and the [Docker Agent][2] information pages for further documentation.
 
-**Note**: Running the Agent as a container still allows you to collect host processes.
+**注**: 引き続き、Agent をコンテナとして実行してホストプロセスを収集することもできます。
 
 [1]: /containers/guide/kubernetes_daemonset
 [2]: /agent/docker/#run-the-docker-agent
@@ -163,7 +163,7 @@ In order to collect processes, the Datadog Agent must be running as a container 
 
 To enable process monitoring in ECS Fargate, set the `DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED` environment variable to `true` in the Datadog Agent container definition within the task definition.
 
-For example:
+例:
 
 ```json
 {
@@ -206,17 +206,17 @@ For more information about installing the Datadog Agent with AWS ECS Fargate, se
 {{% /tab %}}
 {{< /tabs >}}
 
-### I/O stats
+### I/O 統計
 
-I/O and open files stats can be collected by the Datadog system-probe, which runs with elevated privileges. To enable the process module of the system-probe, use the following configuration:
+I/O とオープンファイルの統計情報は、昇格した権限で実行される Datadog system-probe によって収集することができます。system-probe の process モジュールを有効にするには、次の構成を使用します。
 
-1. Copy the system-probe example configuration:
+1. 下記のシステムプローブのコンフィギュレーションの例をコピーします。
 
    ```shell
    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
    ```
 
-2. Edit `/etc/datadog-agent/system-probe.yaml` to enable the process module:
+2. `/etc/datadog-agent/system-probe.yaml` を編集し、process モジュールを有効にします。
 
    ```yaml
    system_probe_config:
@@ -224,29 +224,29 @@ I/O and open files stats can be collected by the Datadog system-probe, which run
        enabled: true
    ```
 
-5. [Restart the Agent][12]:
+5. [Agent を再起動します][12]。
 
    ```shell
    sudo systemctl restart datadog-agent
    ```
 
-   **Note**: If the `systemctl` command is not available on your system, run the following command instead: `sudo service datadog-agent restart`
+   **注**: システムで `systemctl` コマンドを利用できない場合は、代わりに次のコマンドを実行します: `sudo service datadog-agent restart`。
 
 
-### Process arguments scrubbing
+### プロセス引数のスクラビング
 
-In order to hide sensitive data on the Live Processes page, the Agent scrubs sensitive arguments from the process command line. This feature is enabled by default and any process argument that matches one of the following words has its value hidden.
+ライブプロセスページに機密データが表示されないように、Agent はプロセスコマンドラインからの機密性の高い引数をスクラビングします。この機能はデフォルトで有効になっており、以下の語のいずれかと一致するプロセス引数は、値が表示されません。
 
 ```text
 "password", "passwd", "mysql_pwd", "access_token", "auth_token", "api_key", "apikey", "secret", "credentials", "stripetoken"
 ```
 
-**Note**: The matching is **case insensitive**.
+**注**: この一致では、**大文字と小文字は区別されません**。
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
 
-Define your own list to be merged with the default one, using the `custom_sensitive_words` field in `datadog.yaml` file under the `process_config` section. Use wildcards (`*`) to define your own matching scope. However, a single wildcard (`'*'`) is not supported as a sensitive word.
+`datadog.yaml` ファイルの `process_config` セクションの下にある `custom_sensitive_words` フィールドを使用すると、独自のリストを定義して、デフォルトのリストと統合することができます。ワイルドカード (`*`) を使用して、一致の範囲を独自に定義できます。ただし、ワイルドカード (`'*'`) 単独の使用は、機密語としてサポートされていません。
 
 ```yaml
 process_config:
@@ -254,15 +254,15 @@ process_config:
     custom_sensitive_words: ['personal_key', '*token', 'sql*', '*pass*d*']
 ```
 
-**Note**: Words in `custom_sensitive_words` must contain only alphanumeric characters, underscores, or wildcards (`'*'`). A wildcard-only sensitive word is not supported.
+**注**: `custom_sensitive_words` 内の語には、英数字、アンダースコア、およびワイルドカード (`'*'`) のみを使用できます。ワイルドカードのみの機密語はサポートされていません。
 
-The next image shows one process on the Live Processes page whose arguments have been hidden by using the configuration above.
+次の図に、ライブプロセスページに表示されたプロセスの一例を示します。上の構成を使用して、プロセス引数が非表示にされています。
 
-{{< img src="infrastructure/process/process_arg_scrubbing.png" alt="Process arguments scrubbing" style="width:100%;">}}
+{{< img src="infrastructure/process/process_arg_scrubbing.png" alt="プロセス引数のスクラビング" style="width:100%;">}}
 
-Set `scrub_args` to `false` to completely disable the process arguments scrubbing.
+`scrub_args` を `false` に設定すると、プロセス引数のスクラビングを完全に無効化できます。
 
-You can also scrub **all** arguments from processes by enabling the `strip_proc_arguments` flag in your `datadog.yaml` configuration file:
+`datadog.yaml` 構成ファイルで `strip_proc_arguments` フラグを有効にすることで、プロセスの**すべての**引数をスクラビングすることもできます。
 
 ```yaml
 process_config:
@@ -273,7 +273,7 @@ process_config:
 
 {{% tab "Helm" %}}
 
-You can use the Helm chart to define your own list, which is merged with the default one. Add the environment variables `DD_SCRUB_ARGS` and `DD_CUSTOM_SENSITIVE_WORDS` to your `datadog-values.yaml` file, and upgrade your Datadog Helm chart:
+Helm チャートを使い、デフォルトのリストにマージされる独自のリストを定義できます。環境変数 `DD_SCRUB_ARGS` と `DD_CUSTOM_SENSITIVE_WORDS` を `datadog-values.yaml` ファイルに追加し、Datadog Helm チャートをアップグレードします。
 
 ```yaml
 datadog:
@@ -292,11 +292,11 @@ datadog:
 ```
 
 
-Use wildcards (`*`) to define your own matching scope. However, a single wildcard (`'*'`) is not supported as a sensitive word.
+ワイルドカード (`*`) を使用して、一致のスコープを独自に定義できます。ただし、ワイルドカード (`'*'`) 単独の使用は、機密語としてサポートされていません。
 
-Set `DD_SCRUB_ARGS` to `false` to completely disable the process arguments scrubbing.
+`DD_SCRUB_ARGS` を `false` に設定すると、プロセス引数のスクラビングを完全に無効化できます。
 
-Alternatively, you can scrub **all** arguments from processes by enabling the `DD_STRIP_PROCESS_ARGS` variable in your `datadog-values.yaml` file:
+また、`datadog-values.yaml` ファイルで `DD_STRIP_PROCESS_ARGS` 変数を有効にすることで、プロセスの**すべての**引数をスクラビングすることもできます。
 
 ```yaml
 datadog:
@@ -316,54 +316,54 @@ agents:
 {{< /tabs >}}
 
 
-## Queries
+## クエリ
 
-### Scoping processes
+### プロセスのスコーピング
 
-Processes are, by nature, extremely high cardinality objects. To refine your scope to view relevant processes, you can use text and tag filters.
+プロセスは、本質的に極めてカーディナリティの高いオブジェクトです。関連するプロセスを表示するようにスコープを絞り込むには、テキストフィルターやタグフィルターを使用します。
 
-#### Text filters
+#### テキストフィルター
 
-When you input a text string into the search bar, fuzzy string search is used to query processes containing that text string in their command lines or paths. Enter a string of two or more characters to see results. Below is Datadog's demo environment, filtered with the string `postgres /9.`.
+検索バーにテキスト文字列を入力すると、コマンドラインやパスにそのテキスト文字列を含むプロセスの照会に、あいまい検索が使用されます。2 文字以上の文字列を入力すると結果が表示されます。下の例では、Datadog のデモ環境を文字列 `postgres /9.` でフィルタリングしています。
 
-**Note**: `/9.` has matched in the command path, and `postgres` matches the command itself.
+**注**: `/9.` はコマンドパスの一部と一致し、`postgres` はコマンド自体と一致しています。
 
 {{< img src="infrastructure/process/postgres.png" alt="Postgres" style="width:80%;">}}
 
-To combine multiple string searches into a complex query, use any of the following Boolean operators:
+複合クエリで複数の文字列検索を組み合わせるには、以下のブール演算子を使用します。
 
 `AND`
-: **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default)<br> **Example**: `java AND elasticsearch`
+: **積**: 両方の条件を含むイベントが選択されます（何も追加しなければ、AND がデフォルトです）。<br>**例**: `java AND elasticsearch`
 
 `OR`
-: **Union**: either term is contained in the selected events <br> **Example**: `java OR python`
+: **和**: いずれかの条件を含むイベントが選択されます。<br> **例**: `java OR python`
 
 `NOT` / `!`
-: **Exclusion**: the following term is NOT in the event. You may use the word `NOT` or `!` character to perform the same operation<br> **Example**: `java NOT elasticsearch` or `java !elasticsearch`
+: **排他**: 後続の条件はイベントに含まれません。単語  `NOT` または文字 `!` のどちらを使用しても、同じ演算を行うことができます。<br> **例**: `java NOT elasticsearch` または `java !elasticsearch`
 
-Use parentheses to group operators together. For example, `(NOT (elasticsearch OR kafka) java) OR python` .
+演算子をグループ化するには括弧を使用します。例: `(NOT (elasticsearch OR kafka) java) OR python`。
 
-#### Tag filters
+#### タグフィルター
 
-You can also filter your processes using Datadog [tags][3], such as `host`, `pod`, `user`, and `service`. Input tag filters directly into the search bar, or select them in the facet panel on the left of the page.
+プロセスのフィルタリングには、`host`、`pod`、`user`、`service` などの Datadog [タグ][3]を使用することもできます。検索バーに直接タグフィルターを入力するか、ページ左側のファセットパネルで選択します。
 
-Datadog automatically generates a `command` tag, so that you can filter for:
+Datadog は自動的に `command` タグを生成するので、以下をフィルタリングできます。
 
-- Third-party software, for example: `command:mongod`, `command:nginx`
-- Container management software, for example:  `command:docker`, `command:kubelet`)
-- Common workloads, for example:  `command:ssh`, `command:CRON`)
+- サードパーティソフトウェア、例: `command:mongod`、`command:nginx`
+- コンテナ管理ソフトウェア、例: `command:docker`、`command:kubelet`
+- 一般的なワークロード、例、`command:ssh`、`command:CRON`
 
-### Aggregating processes
+### プロセスの集約
 
-[Tagging][3] enhances navigation. In addition to all existing host-level tags, processes are tagged by `user`.
+[タグ付け][3]はナビゲーションを強化します。すべての既存のホストレベルのタグに加えて、プロセスは `user` でもタグ付けされます。
 
-Furthermore, processes in ECS containers are also tagged by:
+さらに、ECS コンテナ内のプロセスは、以下でもタグ付けされます。
 
 - `task_name`
 - `task_version`
 - `ecs_cluster`
 
-Processes in Kubernetes containers are tagged by:
+Kubernetes コンテナ内のプロセスは、以下でタグ付けされます。
 
 - `pod_name`
 - `kube_pod_ip`
@@ -375,94 +375,94 @@ Processes in Kubernetes containers are tagged by:
 - `kube_deployment`
 - `Kube_cluster`
 
-If you have configuration for [Unified Service Tagging][4] in place, `env`, `service`, and `version` are picked up automatically.
-Having these tags available lets you tie together APM, logs, metrics, and process data.
-**Note**: This setup applies to containerized environments only.
+[統合サービスタグ付け][4]のコンフィギュレーションがある場合、`env`、`service`、`version` も自動的に取得されます。
+上記のタグが利用できることで、APM、ログ、メトリクス、プロセスデータを結びつけることができます。
+**注**: このセットアップはコンテナ化環境にのみ適用されます。
 
-## Scatter plot
+## 散布図
 
-Use the scatter plot analytic to compare two metrics with one another in order to better understand the performance of your containers.
+散布図分析を使用すると、2 つのメトリクスを比較してコンテナのパフォーマンスをより的確に把握できます。
 
-To access the scatter plot analytic [in the Processes page][5] click on the _Show Summary graph_ button the select the "Scatter Plot" tab:
+[Processes ページ][5]で散布図分析にアクセスするには、_Show Summary graph_ ボタンをクリックし、"Scatter Plot" タブを選択します。
 
-{{< img src="infrastructure/process/scatterplot_selection.png" alt="Scatter plot selection" style="width:60%;">}}
+{{< img src="infrastructure/process/scatterplot_selection.png" alt="Scatter plot 選択" style="width:60%;">}}
 
-By default, the graph groups by the `command` tag key. The size of each dot represents the number of processes in that group, and clicking on a dot displays the individual pids and containers that contribute to the group.
+デフォルトでは、グラフは `command` タグキーでグループ化されます。ドットのサイズは、各グループ内のプロセスの数を表します。ドットをクリックすると、グループに参加しているすべてのポッドとコンテナが表示されます。
 
-The query at the top of the scatter plot analytic allows you to control your scatter plot analytic:
+散布図分析の上部にあるクエリを使用して、散布図分析を制御できます。
 
-- Selection of metrics to display.
-- Selection of the aggregation method for both metrics.
-- Selection of the scale of both X and Y axis (_Linear_/_Log_).
+- 表示するメトリクスの選択。
+- 2 つのメトリクスの集計方法の選択。
+- X 軸と Y 軸の目盛の選択 (_Linear_/_Log_)。
 
-{{< img src="infrastructure/process/scatterplot.png" alt="Container inspect" style="width:80%;">}}
+{{< img src="infrastructure/process/scatterplot.png" alt="コンテナ検査" style="width:80%;">}}
 
-## Process monitors
+## プロセスモニター
 
-Use the [Live Process Monitor][6] to generate alerts based on the count of any group of processes across hosts or tags. You can configure process alerts in the [Monitors page][7]. To learn more, see the [Live Process Monitor documentation][6].
+複数のホストまたはタグにまたがるプロセスグループのカウントに基づいてアラートを生成するには、[ライブプロセスモニター][6]を使用します。プロセスアラートは、[モニターページ][7]で構成できます。詳細は、[ライブプロセスモニターのドキュメント][6]を参照してください。
 
-{{< img src="infrastructure/process/process_monitor.png" alt="Process Monitor" style="width:80%;">}}
+{{< img src="infrastructure/process/process_monitor.png" alt="プロセスモニター" style="width:80%;">}}
 
-## Processes in dashboards and notebooks
+## ダッシュボードおよびノートブックでのプロセス
 
-You can graph process metrics in dashboards and notebooks using the [Timeseries widget][8]. To configure:
-1. Select Processes as a data source
-2. Filter using text strings in the search bar
-3. Select a process metric to graph
-4. Filter using tags in the `From` field
+ダッシュボードやノートブックでプロセスメトリクスをグラフ化するには、[時系列ウィジェット][8]を使用します。構成するには、
+1. プロセスをデータソースとして選択
+2. 検索バーのテキスト文字列を使用してフィルタリング
+3. グラフ化するプロセスメトリクスを選択
+4. `From` フィールドのタグを使用してフィルタリング
 
-{{< img src="infrastructure/process/process_widget.png" alt="Processes widget" style="width:80%;">}}
+{{< img src="infrastructure/process/process_widget.png" alt="プロセスウィジェット" style="width:80%;">}}
 
-## Monitoring third-party software
+## サードパーティソフトウェアをモニタリング
 
-### Autodetected integrations
+### 自動検出インテグレーション
 
-Datadog uses process collection to autodetect the technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][1]:
+Datadog ではプロセス収集を使用して、ホストで実行されているテクノロジーを自動検出します。これにより、こうしたテクノロジーの監視に役立つ Datadog インテグレーションが識別されます。この自動検出されたインテグレーションは、[インテグレーション検索][1]に表示されます。
 
-{{< img src="getting_started/integrations/ad_integrations.png" alt="Autodetected integrations" >}}
+{{< img src="getting_started/integrations/ad_integrations.png" alt="自動検出されたインテグレーション" >}}
 
-Each integration has one of two status types:
+各インテグレーションには、次の 2 つのステータスタイプのいずれかがあります。
 
-- **+ Detected**: This integration is not enabled on any host(s) running it.
-- **✓ Partial Visibility**: This integration is enabled on some, but not all relevant hosts are running it.
+- **+ Detected**: このインテグレーションは、それを実行しているホストでは有効になっていません。
+- **✓ Partial Visibility**: このインテグレーションは、一部で有効になっていますが、すべての関連ホストで実行されているわけではありません。
 
-Hosts that are running the integration, but where the integration is not enabled, can be found in the **Hosts** tab of the integrations tile.
+インテグレーションを実行しているが、インテグレーションが有効になっていないホストは、インテグレーションタイルの **Hosts** タブにあります。
 
-### Integration views
+### インテグレーションビュー
 
-{{< img src="infrastructure/process/integration_views.png" alt="Integration Views" >}}
+{{< img src="infrastructure/process/integration_views.png" alt="インテグレーションビュー" >}}
 
-After a third-party software has been detected, Live Processes helps to analyze the performance of that software.
-1. To start, click on *Views* at the top right of the page to open a list of pre-set options, including Nginx, Redis, and Kafka.
-2. Select a view to scope the page to only the processes running that software.
-3. When inspecting a heavy process, shift to the *Integration Metrics* tab to analyze the health of the software on the underlying host. If you have already enabled the relevant Datadog integration, you can view all performance metrics collected from the integration to distinguish between a host-level and software-level issue. For instance, seeing correlated spikes in process CPU and MySQL query latency may indicate that an intensive operation, such as a full table scan, is delaying the execution of other MySQL queries relying on the same underlying resources.
+サードパーティ製ソフトウェアが検出された後、ライブプロセスはそのソフトウェアのパフォーマンスを分析するのに役立ちます。
+1. まず、ページ右上の *Views* をクリックし、Nginx、Redis、Kafka などの予め設定されたオプションの一覧を開きます。
+2. そのソフトウェアを実行中の処理のみにページのスコープを設定するビューを選択します。　
+3. 重いプロセスを検査する際は、*Integration Metrics* タブに切り替え、基底のホストにあるソフトウェアの健全性を分析します。関連する Datadog インテグレーションを有効にしてある場合は、インテグレーションから収集されたすべてのパフォーマンスメトリクスを表示できるため、問題がホストレベルなのかソフトウェアレベルなのかを判断できます。たとえば、プロセス CPU と MySQL クエリのレイテンシーが相関して急上昇する場合、全表スキャンなどの集中的な操作が、同じ基底のリソースに依存する別の MySQL クエリの実行を遅らせていることが考えられます。
 
-You can customize integration views (for example, when aggregating a query for Nginx processes by host) and other custom queries by clicking the *+Save* button at the top of the page. This saves your query, table column selections, and visualization settings. Create saved views for quick access to the processes you care about without addition configuration, and to share process data with your teammates.
+インテグレーションビュー（ホストごとに Nginx 処理のクエリを集約する場合）や他のカスタムクエリをカスタマイズするには、ページ上部の *+Save* ボタンをクリックします。この操作により、クエリ、テーブルの列の選択、可視化設定が保存されます。保存ビューを作成し、追加のコンフィギュレーション無しに必要な処理へ迅速にアクセスへしたり、チームメイトとプロセスデータを共有したりできます。
 
-## Processes across the platform
+## プラットフォームにおけるプロセス
 
-### Live containers
+### ライブコンテナ
 
-Live Processes adds extra visibility to your container deployments by monitoring the processes running on each of your containers. Click on a container in the [Live Containers][9] page to view its process tree, including the commands it is running and their resource consumption. Use this data alongside other container metrics to determine the root cause of failing containers or deployments.
+ライブプロセスは、それぞれのコンテナで実行中のプロセスを監視することで、コンテナデプロイの可視化をさらに強化しています。[ライブコンテナ][9]ページでコンテナをクリックすると、実行中のコマンドやリソース消費量を含むプロセスツリーが表示されます。コンテナメトリクスと共にこのデータを使用し、コンテナやデプロイの不具合の根本的な原因を探ります。
 
 ### APM
 
-In [APM Traces][10], you can click on a service's span to see the processes running on its underlying infrastructure. A service's span processes are correlated with the hosts or pods on which the service runs at the time of the request. Analyze process metrics such as CPU and RSS memory alongside code-level errors to distinguish between application-specific and wider infrastructure issues. Clicking on a process brings you to the Live Processes page. Related processes are not supported for serverless and browser traces.
+[APM トレース][10]でサービスのスパンをクリックすると、基礎インフラストラクチャーで実行中のプロセスを確認できます。サービスのスパンプロセスは、リクエスト時にサービスが実行されているホストまたはポッドと相関関係にあります。CPU および RSS メモリなどのプロセスメトリクスをコードレベルのエラーとともに分析することで、アプリケーション特有の問題かインフラストラクチャーの問題かを見分けることができます。プロセスをクリックすると、ライブプロセス ページが開きます。関連するプロセスはサーバーレスおよびブラウザのトレースでサポートされていません。
 
-### Network Performance Monitoring
+### ネットワークパフォーマンス監視
 
-When you inspect a dependency in the [Network Analytics][11] page, you can view processes running on the underlying infrastructure of the endpoints such as services communicating with one another. Use process metadata to determine whether poor network connectivity (indicated by a high number of TCP retransmits) or high network call latency (indicated by high TCP round-trip time) could be due to heavy workloads consuming those endpoints' resources, and thus, affecting the health and efficiency of their communication.
+[Network Analytics][11] ページで依存関係を調べる際、相互に通信するエンドポイント (サービスなど) の基底のインフラストラクチャーで実行される処理を確認できます。プロセスメタデータを使用して、ネットワークの接続の悪さ (TCP の再送信数が多いことから) やネットワークの呼び出し遅延の高さ (TCP ラウンドトリップタイムが長いことから) の原因が、エンドポイントのリソースを消費する重いワークロードであり、結果、通信の健全性や効率性に影響を与えているかを判断できます。
 
-## Real-time monitoring
+## リアルタイムの監視
 
 Processes are normally collected at 10s resolution. While actively working with the Live Processes page, metrics are collected at 2s resolution and displayed in real time, which is important for volatile metrics such as CPU. However, for historical context, metrics are ingested at the default 10s resolution.
 
-## Additional information
+## 追加情報
 
-- Real-time (2s) data collection is turned off after 30 minutes. To resume real-time collection, refresh the page.
-- In container deployments, the `/etc/passwd` file mounted into the `docker-dd-agent` is necessary to collect usernames for each process. This is a public file and the Process Agent does not use any fields except the username. All features except the `user` metadata field function without access to this file. **Note**: Live Processes only uses the host `passwd` file and does not perform username resolution for users created within containers.
+- リアルタイム (2 秒) データ収集は 30 分後にオフになります。リアルタイム収集を再開するには、ページをリフレッシュします。
+- コンテナのデプロイで、各プロセスのユーザー名を収集するには、`docker-dd-agent` にマウントされた `/etc/passwd` ファイルが必要です。これは公開ファイルですが、プロセス Agent はユーザー名以外のフィールドを使用しません。`user` メタデータフィールド以外のすべての機能は、このファイルにアクセスせずに機能します。**注**: ライブプロセスは、ホストの `passwd` ファイルのみを使用し、コンテナ内に作成されたユーザーのユーザー名解決は実行しません。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -4,9 +4,9 @@
 - "google cloud"
 - "log collection"
 - "message queues"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Google Cloud PubSub metrics."
+"description": "Google Cloud PubSub の主要メトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_pubsub/"
 "draft": false
 "git_integration_title": "google_cloud_pubsub"
@@ -32,15 +32,15 @@ Get metrics from Google Pub/Sub to:
 - Visualize the performance of your Pub/Sub topics and subscriptions.
 - Correlate the performance of your Pub/Sub topics and subscriptions with your applications.
 
-## Setup
+## セットアップ
 
 ### Metric collection
 
-#### Installation
+#### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
-#### Configuration
+#### 構成
 
 To collect custom Pub/Sub labels as tags, enable the cloud asset inventory permission.
 
@@ -58,21 +58,21 @@ Once this is done, export your Google Cloud Pub/Sub logs from Google Cloud Loggi
 
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloud_pubsub" >}}
 
 
-### Events
+### イベント
 
 The Google Cloud Pub/Sub integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Cloud Pub/Sub integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

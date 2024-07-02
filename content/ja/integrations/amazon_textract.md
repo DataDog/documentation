@@ -5,7 +5,7 @@
 - cloud
 - log collection
 - ai/ml
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon Textract metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_textract/"
@@ -31,9 +31,9 @@ Amazon Textract is a machine learning service that automatically extracts text, 
 
 Enable this integration to see all your Amazon Textract metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -42,21 +42,21 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
 1. In the [AWS integration page][2], ensure that `Textract` is enabled under the `Metric Collection` tab.
 2. Install the [Datadog - Amazon Textract integration][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_textract" >}}
 
 
-### Events
+### イベント
 
 The Amazon Textract integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Textract integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

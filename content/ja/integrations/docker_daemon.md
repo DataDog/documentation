@@ -30,7 +30,7 @@
 - containers
 - log collection
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md"
 "display_on_public_website": true
@@ -81,8 +81,8 @@ Configure this Agent check to get metrics from the Docker_daemon service in real
 * Visualize and monitor Docker_daemon states.
 * Be notified about Docker_daemon failovers and events.
 
-## Setup
-### Installation
+## セットアップ
+### インストール
 
 To collect Docker metrics about all your containers, run **one** Datadog Agent on every host. There are two ways to run the Agent: directly on each host, or within a [docker-dd-agent container][2] (recommended).
 
@@ -191,12 +191,12 @@ Additional changes:
 
 The [`import`][18] command converts the old `docker_daemon.yaml` to the new `docker.yaml`. The command also moves needed settings from `docker_daemon.yaml` to `datadog.yaml`.
 
-## Data Collected
-### Metrics
+## 収集データ
+### メトリクス
 {{< get-metrics-from-git "docker_daemon" >}}
 
 
-### Events
+### イベント
 The Docker integration produces the following events:
 
 * Delete Image
@@ -210,13 +210,13 @@ The Docker integration produces the following events:
 * Restart Daemon
 * Update
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "docker_daemon" >}}
 
 
 **Note**: To use `docker.exit`, add `collect_exit_codes: true` in your [Docker YAML file][21] and restart the Agent.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][22].
 

@@ -75,17 +75,17 @@ This integration monitors credit usage, billing, storage, query metrics, and mor
 
 <div class="alert alert-info"><bold>Note</bold>: Metrics are collected with queries to Snowflake. Queries made by the Datadog integration are billable by Snowflake.</div>
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a host.
 
-### Installation
+### インストール
 
 The Snowflake check is included in the [Datadog Agent][2] package.
 
 **Note**: The Snowflake check is not available in Datadog Agent v6 using Python 2. To use Snowflake on Agent v6 see [Use Python 3 with Datadog Agent v6][3] or upgrade to Agent v7.
 
-### Configuration
+### 構成
 <div class="alert alert-warning">Snowflake recommends granting permissions to an alternate role like `SYSADMIN`. Read more about controlling <a href="https://docs.snowflake.com/en/user-guide/security-access-control-considerations.html#control-the-assignment-of-the-accountadmin-role-to-users">ACCOUNTADMIN role</a> for more information.</div>
 
 1. Create a Datadog specific role and user to monitor Snowflake. In Snowflake, run the following to create a custom role with access to the ACCOUNT_USAGE schema.
@@ -94,39 +94,10 @@ The Snowflake check is included in the [Datadog Agent][2] package.
     This database is available by default and only viewable by users in the `ACCOUNTADMIN` role or [any role granted by the ACCOUNTADMIN][4].
 
 
-    ```text
-    use role ACCOUNTADMIN;
-    grant imported privileges on database snowflake to role SYSADMIN;
+"```text<br>use role ACCOUNTADMIN;<br>grant imported privileges on database snowflake to role SYSADMIN;<br>use role SYSADMIN;<br>```<br>別の方法として、`ACCOUNT_USAGE` にアクセスできる `DATADOG` カスタムロールを作成することができます。<br>```text<br>-- Snowflake の使用量を監視するための新しいロールを作成します。<br>create role DATADOG;<br>-- 新しいロールに SNOWFLAKE データベースの特権を付与します。<br>grant imported privileges on database SNOWFLAKE to role DATADOG;<br>-- DATADOG ロールにデフォルトのウェアハウスの使用権限を付与します。"
+grant usage on warehouse &lt;WAREHOUSE&gt; to role DATADOG;
 
-    use role SYSADMIN;
-
-    ```
-
-
-    Alternatively, you can create a `DATADOG` custom role with access to `ACCOUNT_USAGE`.
-
-
-    ```text
-    -- Create a new role intended to monitor Snowflake usage.
-    create role DATADOG;
-
-    -- Grant privileges on the SNOWFLAKE database to the new role.
-    grant imported privileges on database SNOWFLAKE to role DATADOG;
-
-    -- Grant usage to your default warehouse to the role DATADOG.
-   grant usage on warehouse <WAREHOUSE> to role DATADOG;
-
-    -- Create a user, skip this step if you are using an existing user.
-    create user DATADOG_USER
-    LOGIN_NAME = DATADOG_USER
-    password = '<PASSWORD>'
-    default_warehouse = <WAREHOUSE>
-    default_role = DATADOG
-    default_namespace = SNOWFLAKE.ACCOUNT_USAGE;
-
-    -- Grant the monitor role to the user.
-    grant role DATADOG to user <USER>;
-    ```
+"-- ユーザーを作成します (既存のユーザーを使用する場合はこのステップをスキップします)。<br>create user DATADOG_USER<br>LOGIN_NAME = DATADOG_USER<br>password = '&lt;PASSWORD&gt;'<br>default_warehouse = &lt;WAREHOUSE&gt;<br>default_role = DATADOG<br>default_namespace = SNOWFLAKE.ACCOUNT_USAGE;<br>-- ユーザーにモニターロールを付与します。<br>grant role DATADOG to user &lt;USER&gt;;<br>```"
 
 
 2. Edit the `snowflake.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Snowflake performance data. See the [sample snowflake.d/conf.yaml][5] for all available configuration options.
@@ -277,7 +248,7 @@ The `custom_queries` option has the following options:
 |---------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | query         | Yes      | This is the SQL to execute. It can be a simple statement or a multi-line script. All of the rows of the results are evaluated. Use the pipe if you require a multi-line script.                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | columns       | Yes      | This is a list representing each column ordered sequentially from left to right.<br><br>There are 2 required pieces of data:<br>  - **`name`**: This is the suffix to append to the metric_prefix to form the full metric name. If the `type` is specified as `tag`, the column is instead applied as a tag to every metric collected by this query.<br>  - **`type`**: This is the submission method (`gauge`, `count`, `rate`, etc.). This can also be set to `tag` to tag each metric in the row with the name and value (`<name>:<row_value>`) of the item in this column. |
-| tags          | No       | A list of static tags to apply to each metric.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| usage-metering-get-hourly-usage-for-lambda-traced-invocations          | No       | A list of static tags to apply to each metric.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 
 ##### Notes
@@ -306,7 +277,7 @@ The following example is a query that counts all queries in the [`QUERY_HISTORY`
 select count(*), DATABASE_NAME, SCHEMA_NAME, WAREHOUSE_NAME from QUERY_HISTORY group by 2, 3, 4;
 ```
 
-##### Configuration
+##### 構成
 
 The custom query configuration in `instances` looks like the following:
 
@@ -337,14 +308,14 @@ To verify the result, search for the metrics using [Metrics Summary][12]:
 
 [Run the Agent's status subcommand][14] and look for `snowflake` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 <div class="alert alert-info"><bold>Note</bold>: Only metrics from the following metric groups are enabled by default: <code>snowflake.query.*</code>, <code>snowflake.billing.*</code>, <code>snowflake.storage.*</code>, and <code>snowflake.logins.*</code>.
 
 If you would like to collect metrics from other metric groups, please refer <a href="https://github.com/DataDog/integrations-core/blob/master/snowflake/datadog_checks/snowflake/data/conf.yaml.example">to the example config file for this integration</a>.
 </div>
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "snowflake" >}}
 
 

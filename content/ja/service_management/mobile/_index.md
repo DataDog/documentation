@@ -9,464 +9,465 @@ further_reading:
   text: Learn about Monitors and Alerting
 - link: /dashboards/
   tag: Documentation
-  text: Learn about Dashboards
+  text: ダッシュボードについて
 - link: "https://www.datadoghq.com/blog/datadog-mobile-widgets/"
   tag: Blog
   text: Improve your on-call experience with Datadog mobile dashboard widgets
 - link: "https://www.datadoghq.com/blog/mobile-app-getting-started/"
-  tag: Blog
+  tag: ブログ
   text: Getting started with the Datadog mobile app
 ---
 
-The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert via Slack, e-mail, Pagerduty or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
+Datadog Mobile アプリを使用すると、Datadog からのアラートをモバイルデバイスで表示できます。Slack、メール、Pagerduty、またはその他のページャーアプリを介してアラートを受け取った場合、モバイルデバイスでモニターグラフとダッシュボードを開いて問題を調査できます。
 
-## Installing
+## インストール
 
-Download the app from the [Apple App Store][1] for your iOS device, or from the [Google Play store][2] for your Android device.
+iOS デバイスの場合は [Apple App Store][1] から、Android デバイスの場合は [Google Play ストア][2]からアプリをダウンロードします。
 
-### Logging in
+### ログイン
 
-You can log in using standard authentication, Google authentication, or [SAML][3] - for both the US and the EU region.
+US と EU のどちらのリージョンでも、標準認証、Google 認証、または [SAML][3] を使用してログインできます。
 
-#### Enabling SAML
+#### SAML の有効化
 
-SAML login requires you to set up and authenticate your SAML provider with Datadog. For SAML IdP-initiated login, refer to the end of this section. To authenticate SAML:
+SAML ログインでは、Datadog を使用して SAML プロバイダーをセットアップおよび認証する必要があります。SAML IdP 始動のログインについては、このセクションの最後を参照してください。SAML を認証するには、
 
-1. Press the "Using Single Sign-On (SAML)?" button.
-2. Enter your company email and send the email.
-3. While on your mobile device, open the email and click on the indicated link.
-4. Enter your org's SAML credentials, which upon success will reroute to an authenticated session of the Datadog mobile app.
+1. "Using Single Sign-On (SAML)?" ボタンを押します。
+2. 勤務先メールアドレスを入力し、メールを送信します。
+3. モバイルデバイスでメールを開き、記載されているリンクをクリックします。
+4. 会社の SAML 資格情報を入力します。認証されると、Datadog モバイルアプリの認証済みセッションに再接続されます。
 
-Optionally, you may also authenticate through a QR Code or manual entry, outlined below.
+QR コードを使用または手動入力で認証することも可能です。詳しくは下記を参照してください。
 
-##### QR code
+##### QR コード
 
 1. In a browser, navigate to your [Datadog account Personal Settings Organizations][4] page and click **Log in to Mobile App** for the organization you are currently logged into. This pops up a QR code.
 2. Use your default phone camera app to scan the QR code and then tap the suggested link to open the Datadog App. You will be automatically logged in.
 
 **Note**: If you click the **Log in to Mobile App** button of an organization you are not currently logged into, the org UUID is automatically inserted into the login screen. You still have to provide authentication using your standard method.
 
-##### Manual entry
+##### 手動入力
 
-1. To manually enter the SAML ID, open the Datadog Mobile app and press the "Using Single Sign-On (SAML)?" button.
-2. Press the "Use another method to login" button, and enter the SAML ID manually.
+1. SAML ID を手動で入力するには、Datadog モバイルアプリを開いて "Using Single Sign-On (SAML)?" ボタンを押します。
+2. "Use another method to login" ボタンを押し、手動で SAML ID を入力します。
 
-By clicking **Authorize** when logging in, you link the mobile device you're using to your account. For security purposes, you will have to go through this flow once per month.
+ログイン時に **Authorize** をクリックすると、このモバイルデバイスがアカウントにリンクされます。セキュリティ上の理由から、このフローを月に 1 回実行する必要があります。
 
-##### SAML IdP initiated login
+##### SAML IdP 始動のログイン
 
-If you keep getting errors while trying to login with SAML, your identity provider may enforce IdP-initiated login. For more information regarding enabling IdP initiated SAML, please see our IdP initiated SAML page [IdP Initiated SAML page][5]
+SAML でログインしようとしているときにエラーが発生し続ける場合は、ID プロバイダーが IdP 始動のログインを強制する可能性があります。IdP 始動の SAML の有効化の詳細については、IdP 始動の SAML のページ [IdP 始動の SAML のページ][5]を参照してください。
 
-## Monitors
+## モニター
 
-{{< img src="service_management/mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="monitor page">}}
+{{< img src="service_management/mobile/monitors_doc2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="モニターページ">}}
 
-On the Monitors page, you can view and search all of the monitors that you have access to in your Datadog org. You can specify by field name and build-specific search queries based on your tagging strategy. For more information about search, see the [Manage Monitors Search section][6].
+モニターページでは、Datadog 組織でアクセスできるすべてのモニターを表示、検索できます。タグ付け戦略に基づいて、フィールド名とビルド固有の検索クエリで指定できます。検索の詳細については、[モニター検索の管理セクション][6]を参照してください。
 
-For example, to filter on metric monitors related to the SRE team that is being alerted, use the query `"status:Alert type:Metric team:sre"`. Click into individual alerts to see details, which can be filtered by type and by alert time. You can also mute the alert. Your ten most recent searches are saved so that you have faster access previous queries. Furthermore, you can filter your monitor list using saved views, which surface when you activate the search bar. Lastly, view and run synthetic tests when viewing your synthetic monitors.
+たとえば、アラートが発生している SRE チームに関連するメトリクスモニターでフィルタリングするには、クエリ `"status:Alert type:Metric team:sre"` を使用します。個々のアラートをクリックして詳細を表示します。これは、タイプとアラート時間でフィルタリングできます。また、アラートをミュートにすることもできます。最新の 10 件の検索が保存されるため、以前のクエリにすばやくアクセスできます。さらに、検索バーをアクティブにすると表示される保存済みのビューを使用して、モニターリストをフィルター処理できます。 最後に、Synthetic モニターを表示するときに、Synthetic テストを表示して実行します。
 
-**Note:** To set up or edit monitors, notifications, or saved views, you need to do it in the [Datadog web app][7]. All monitors set up in the web app are visible in the mobile app. For more information, see [Creating monitors][8].
+**注:** モニター、通知、または保存済みビューの設定または編集は、[Datadog ウェブアプリ][7]で行う必要があります。ウェブアプリで設定されたすべてのモニターがモバイルアプリで表示されます。詳細については、[モニターの作成][8]を参照してください。
 
-## Dashboards
+## ダッシュボード  
 
-{{< img src="service_management/mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="dashboard page">}}
+{{< img src="service_management/mobile/dashboards_doc.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ダッシュボードページ">}}
 
-On the Dashboards page, you can view and search all of the dashboards that you have access to in your Datadog org, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][9]. Click on an individual dashboard to view it.
+ダッシュボードページでは、Datadog 組織でアクセスできるすべてのダッシュボードを表示、検索し、Datadog Web アプリで設定したものと同じテンプレート変数を使用してそれらをフィルタリングできます。個々のダッシュボードをクリックして表示します。テンプレート変数の保存済みビューを使用して、ダッシュボードをすばやくフィルタリングします。テンプレート変数の保存済みビューの詳細については、[ダッシュボードの保存済みビュー][9]を参照してください。個々のダッシュボードをクリックして表示します。
 
-**Note:** To set up or edit a dashboard, you need to [login to the Datadog browser app][10]. For more information, see [Dashboards][11].
+**注:** ダッシュボードを設定または編集するには、[Datadog ブラウザアプリにログイン][10]する必要があります。詳細については、[ダッシュボード][11]を参照してください。
 
-## Incidents
+## インシデント
 
-{{< img src="service_management/mobile/incidents.png" alt="incidents page" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/incidents.png" alt="インシデントページ" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-On the Incidents page, you can view, search and filter all incidents that you have access to in your Datadog account from the Datadog Mobile App to ensure quick response and resolution from anywhere. You can also declare and edit incidents and seamlessly communicate to your teams through integrations with Slack, Zoom, and many more. For more information about Incidents, see the [Datadog Incident Management documentation][12].
+インシデントページでは、Datadog モバイルアプリから Datadog アカウントでアクセスできるすべてのインシデントを表示、検索、およびフィルタリングして、どこからでも迅速な対応と解決を保証できます。また、Slack、Zoom などとの統合を通じて、インシデントを宣言および編集し、チームとシームレスに通信することもできます。インシデントの詳細については、[Datadog インシデント管理ドキュメント][12]を参照してください。
 
-### Create an incident
+### インシデントを作成する
 
-1. Navigate to the incident list by clicking on the Incidents Tab in the bottom bar.
-2. Click the "+" button in the top right corner.
-3. Give your incident a title, severity, and commander.
+1. 下部のバーにある Incidents タブをクリックして、インシデントリストに移動します。
+2. 右上の "+" ボタンをクリックします。
+3. インシデントにタイトル、重大度、およびコマンダーを付けます。
 
-### Receive push notifications for incidents
+### インシデントをプッシュ通知で受け取る
 
-1. Navigate to **Account**.
-2. Click **Notifications**.
-3. Select the toggle for **Enable Notifications**. (**Note**: For Android, notifications will be enabled automatically when you install the latest version of the Datadog mobile app.)
-4. Next, in the Datadog web app, navigate to [Incident Notification Rules][13].
-5. Create or edit a notification rule and under **Notify**, type your name. Two options should appear, allowing you to choose between email notifications and your mobile device.
-6. Select your mobile device and click **Save**.
+1. **Account** に移動します。
+2. **Notifications** をクリックします。
+3. **Enable Notifications** のトグルを選択します。(**注**: Android の場合、最新バージョンの Datadog モバイルアプリをインストールすると、自動的に通知が有効になります。)
+4. 次に、Datadog の Web アプリで、[Incident Notification Rules][13] に移動します。
+5. 通知ルールを作成または編集し、**Notify** の下に、名前を入力します。2 つのオプションが表示され、メール通知とモバイルデバイスのどちらかを選択できるようになります。
+6. モバイルデバイスを選択し、** Save** をクリックします。
 
-For more information on configuring Incident Notification Rules, see the [Incidents settings docs][14].
+インシデント通知ルールの構成の詳細については、[インシデント設定ドキュメント][14]を参照してください。
 
-## Widgets
+## ウィジェット
 
-### Open Incidents widget
+### オープンインシデントウィジェット
 
-{{< img src="service_management/mobile/incident_widget.png" alt="Datadog incident mobile widget displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/incident_widget.png" alt="Android および iOS デバイスに表示された Datadog インシデントモバイルウィジェット" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [open incidents][12] from your mobile home screen with Datadog widgets.
+Datadog ウィジェットで、[オープンインシデント][12]をモバイルのホームスクリーンで確認。
 
-To dive deeper into issues, tap any open incident displayed in the widget to have it open with more details in the Datadog mobile app. 
+問題をより詳細に確認するには、ウィジェットに表示されているオープンインシデントをタップして開き、Datadog モバイルアプリで詳細を確認します。
 
-Also, you can customize your Open Incidents widgets by filtering on:
+オープンインシデントウィジェットは、以下のフィルターを使用してカスタマイズすることも可能です。
 
 - Organization
-- Severity levels
-- Customers impacted
-- Ordering
+- 重大度レベル
+- 影響のあった顧客
+- 順序
 
-#### Create an Open Incidents widget
+#### オープンインシデントウィジェットを作成する
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-1. Tap the **+** button on the top left corner of the screen.
-2. Search for "Datadog" widgets.
-3. Select your preferred size (small, medium, or large).
-4. Drag the widget to your desired, on-screen location.
+1. 画面左上の **+** ボタンをタップします。
+2. "Datadog" ウィジェットを検索します。
+3. 希望するサイズ（小、中、大）を選択します。
+4. ウィジェットを画面上の希望の場所にドラッグします。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-1. Long press on your home screen.
-2. Tap the **Widgets** button on your home screen editor. If you have app shortcuts, it might appear as only an icon on the top right corner of the bubble.
-3. Drag the widget to your desired, on-screen home screen.
-4. Resize the widget to fit your preference.
+1. ホーム画面を長押しします。
+2. ホーム画面エディタの **Widgets** ボタンをタップします。アプリのショートカットがある場合は、バブルの右上にアイコンとして表示されることがあります。
+3. ウィジェットを画面上の希望のホーム画面にドラッグします。
+4. お好みによりウィジェットのサイズを調整します。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Edit an Open Incidents widget
+#### オープンインシデントウィジェットを編集する
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-1. Long press the widget to configure.
-2. Tap **Edit Widget**.
-2. Tap **Choose** next to the **Organzation** label to fetch open incidents from the selected organization.
-3. Tap **SEV-1 and SEV-2** next to the Severities label to specify severity filters.
-4. Tap **Both** next to the **Customer Impacted** label to filter on open incidents that have impacted customers.
-5. Type in the **Type additional filters** text box to specify any further filtering.
-6. Tap **Ordering** to specify the order of how incidents are listed.
-7. Tap outside of the widget to save your selection and exit the configuration screen.
+1. ウィジェットを長押しして構成します。
+2. **Edit Widget** をタップします。
+2. **Organzation** ラベルの横にある **Choose** をタップし、選択したオーガニゼーションからオープンインシデントを取得します。
+3. 重大度ラベルの横にある **SEV-1 and SEV-2** をタップし、重大度フィルターを指定します。
+4. **Customer Impacted** ラベルの横にある **Both** をタップし、影響のあった顧客のオープンインシデントを絞り込みます。
+5. さらに絞り込みを指定するには、**Type additional filters** のテキストボックスに入力します。
+6. **Ordering** をタップして、リストアップされるインシデントの順番を指定します。
+7. ウィジェットの外側をタップして選択を保存し、コンフィギュレーション画面を終了します。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-1. Tap the widget title to configure.
-2. Tap **Organization** to fetch open incidents from the selected organization.
-3. Tap **Severities** to specify severity filters.
-4. Tap **Customer impacted** to filter on open incidents that have impacted customers.
-5. Tap **Query** to specify any further filtering.
-6. Tap **Sorted by** to specify the order of how incidents are listed.
-7. Tap **Save** or **Apply** to save your selection and exit the configuration screen.
-8. Long press and resize the widget to fit your preference.
+1. ウィジェットのタイトルをタップして構成します。
+2. **Organzation** をタップし、選択したオーガニゼーションからオープンインシデントを取得します。
+3. **Severities** をタップして重大度フィルターを指定します。
+4. **Customer Impacted** をタップして、影響のあった顧客のオープンインシデントを絞り込みます。
+5. **Query** をタップしてさらに絞り込みを指定します。
+6. **Sorted by** をタップして、リストアップされるインシデントの順番を指定します。
+7. **Save** または **Apply** をタップして選択を保存し、コンフィギュレーション画面を終了します。
+8. ウィジェットを長押ししてサイズを変更し、好みに合わせます。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Display Open Incidents from multiple organizations
+#### 複数のオーガニゼーションのオープンインシデントを表示する
 
-You can display open incidents from multiple organizations on your mobile home screen. 
+複数のオーガニゼーションのオープンインシデントをモバイルホーム画面に表示できます。
 
 {{< tabs >}}
 {{% tab "iOS" %}}
-- Tap **Choose** next to the Organization label to fetch open incidents from the selected organization.
+- Organzation ラベルの横にある **Choose** をタップし、選択したオーガニゼーションからオープンインシデントを取得します。
 
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-1. Tap the widget title to configure.
-2. From the configuration screen, tap **Organization**.
-3. Select a new organization (you may need to sign in).
-4. Size the widget to fit your preference.
-5. Tap **Save** or **Apply**. 
+1. ウィジェットのタイトルをタップして構成します。
+2. コンフィギュレーション画面で **Organization** をタップします。
+3. 新しいオーガニゼーションを選択します (サインインが必要な場合があります)。
+4. 好みに合わせてウィジェットのサイズを変更します。
+5. **Save** または **Apply** をタップします。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Delete an Open Incidents widget
+#### オープンインシデントウィジェットを削除する
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-Delete a widget by tapping the **-** button at the top left of the widget when editing your home screen, or by long pressing the widget and selecting **Remove Widget**.
+ホーム画面を編集するときにウィジェットの左上にある **-** ボタンをタップするか、ウィジェットを長押ししてから **Remove Widget** を選択することにより、ウィジェットを削除します。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Delete a widget by long pressing, dragging, and dropping the widget to the **Remove** button.
+ウィジェットを長押しし、ドラッグして、**Remove** ボタンにドロップしてウィジェットを削除します。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### SLOs widget
+### SLO ウィジェット
 
-{{< img src="service_management/mobile/slo_widget.png" alt="Application Uptime SLO widgets displayed on Android and iOS devices" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/slo_widget.png" alt="Android および iOS デバイスに表示されたアプリケーションアップタイム SLO ウィジェット" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [SLOs][15] from your mobile home screen with Datadog widgets. You can add any SLOs from your organization as a widget, along with a timeframe.
+Datadog ウィジェットを使用してモバイルホーム画面から [SLO][15] を表示します。オーガニゼーションの SLO を、タイムフレームとともにウィジェットとして追加できます。
 
-Timeframe options are:
-- 7 days
-- 30 days
-- 90 days
-- Previous week
-- Previous month
-- Week to date
-- Month to date
+タイムフレームオプションは次のとおりです。
+- 7 日
+- 30 日
+- 90 日
+- 前週
+- 前月
+- WTD
+- MTD
 
-You can also specify a dashboard that opens by default when you tap on an SLOs widget, allowing you to quickly investigate further into your metrics.
+SLO ウィジェットをタップするとデフォルトで開くダッシュボードを指定して、メトリクスの詳細をすばやく調査することもできます。
 
-**Note**: If you do not specify a dashboard that opens by default, tapping an SLOs widget opens the Datadog app.
+**注**: デフォルトで開くダッシュボードを指定しない場合、SLO ウィジェットをタップすると Datadog アプリが開きます。
 
-#### Create an SLOs widget
+#### SLO ウィジェットを作成する
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-- Long press on your home screen.
-- Tap the "+" button on the top left corner of the screen.
-- Search for "Datadog" widgets.
+- ホーム画面を長押しします。
+- 画面左上の "+" ボタンをタップします。
+- "Datadog" ウィジェットを検索します。
 - Select your preferred size (small shows one SLO and medium shows one SLO along with a visualized timeframe of its health).
-- Drag the widget to your desired, on-screen location.
+- ウィジェットを画面上の希望の場所にドラッグします。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Long press on your home screen.
-- Tap the "Widgets" button on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
-- Drag the widget to your desired, on-screen home screen.
-- Resize the widget to fit your preference. It always shows one SLO. If you size the widget to take up the width of your mobile home screen, it displays the selected SLO along with a visualized timeframe of its health.
+- ホーム画面を長押しします。
+- ホーム画面エディタの "Widgets" ボタンをタップします。アプリのショートカットがある場合は、バブルの右上隅にアイコンとして表示されることがあります。
+- ウィジェットを画面上の希望のホーム画面にドラッグします。
+- 好みに合わせてウィジェットのサイズを変更します。常に 1 つの SLO が表示されます。モバイルホーム画面の幅に合わせてウィジェットのサイズを変更すると、選択した SLO が、その健全性のタイムフレームとともに表示されます。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Edit an SLOs widget
+#### SLO ウィジェットを編集する
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-- Long press on the widget to configure.
-- Tap "Edit Widget."
-- Tap "Choose" next to the SLO label to choose an SLO to track.
-- Depending on the SLO chosen, a "Timeframe" label may appear. Tap "Choose" next to the "Timeframe" label to choose the SLO timeframe. 
-- Tap "Choose" next to the "Dashboard to open" label to choose a dashboard that opens when the SLOs widget is tapped. 
-- Tap out of the widget to validate your selection and exit the configuration screen.
+- ウィジェットを長押しして構成します。
+- "Edit Widget" をタップします。
+- SLO ラベルの横にある "Choose" をタップして、追跡する SLO を選択します。
+- 選択した SLO によっては、"Timeframe" ラベルが表示される場合があります。"Timeframe" ラベルの横にある "Choose" をタップして、SLO のタイムフレームを選択します。
+- "Dashboard to open" ラベルの横にある "Choose" をタップして、SLO ウィジェットをタップしたときに開くダッシュボードを選択します。
+- ウィジェットをタップして選択を検証し、コンフィギュレーション画面を終了します。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Tap the widget title to configure.
-- Tap "Selected SLO" to choose an SLO to track.
-- Tap "Selected Time Window" to choose the SLO timeframe.
-- Tap "Dashboard to open" to choose a dashboard that opens when the SLOs widget is tapped.
-- Tap "Save" or "Apply" to validate your selection and exit the configuration screen.
-- Long press and resize the widget to fit your preference.
+- ウィジェットのタイトルをタップして構成します。
+- "Selected SLO" をタップして、追跡する SLO を選択します。
+- "Selected Time Window" をタップして、SLO のタイムフレームを選択します。
+- "Dashboard to open" をタップして、SLO ウィジェットをタップしたときに開くダッシュボードを選択します。
+- "Save" または "Apply" をタップして選択を検証し、コンフィギュレーション画面を終了します。
+- ウィジェットを長押ししてサイズを変更し、好みに合わせます。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Display SLOs from multiple organizations
+#### 複数のオーガニゼーションの SLO を表示する
 
-You can display SLOs from multiple organizations on your mobile home screen. 
+複数のオーガニゼーションの SLO をモバイルホーム画面に表示できます。
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-All organizations you've logged into are displayed in the configuration screen. If you do not see your organization, sign into it again.
+ログインしたすべてのオーガニゼーションがコンフィギュレーション画面に表示されます。オーガニゼーションが表示されない場合は、再度サインインします。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Tap the widget title to configure.
-- From the configuration screen, tap "Organization".
-- Select a new organization (You might need to sign in).
-- Size the widget to fit your preference.
-- Tap "Save" or "Apply". 
+- ウィジェットのタイトルをタップして構成します。
+- コンフィギュレーション画面で "Organization" をタップします。
+- 新しいオーガニゼーションを選択します (サインインが必要な場合があります)。
+- 好みに合わせてウィジェットのサイズを変更します。
+- "Save" または "Apply" をタップします。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Delete an SLOs widget
+#### SLO ウィジェットを削除する
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-Delete a widget by tapping the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and selecting "Remove Widget".
+ホーム画面を編集するときにウィジェットの左上にある "-" ボタンをタップするか、ウィジェットを長押ししてから "Remove Widget" を選択することにより、ウィジェットを削除します。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Delete a widget by long pressing, dragging, and dropping the widget to the "Remove" button.
+ウィジェットを長押しし、ドラッグして、"Remove" ボタンにドロップしてウィジェットを削除します。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Monitors widget
+### モニターウィジェット
 
-{{< img src="service_management/mobile/monitor_widget.png" alt="Configured monitor widgets displayed on Android and iOS screens" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
+{{< img src="service_management/mobile/monitor_widget.png" alt="Android および iOS 画面に表示された構成済みモニターウィジェット" responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
 
-View your [monitors][16] from your home screen with Datadog widgets. Tap any cell to open the **Monitor Search** screen in the app, with your monitors already filled in.
+Datadog ウィジェットを使用して、ホーム画面から[モニター][16]を表示します。セルをタップして、モニターがすでに入力された状態で、アプリで **Monitor Search** 画面を開きます。
 
-**Note**: If you do not have any monitor saved views, the widget shows you all monitors by default.
+**注**: モニターに保存されたビューがない場合、ウィジェットにはデフォルトですべてのモニターが表示されます。
 
-#### Create a Monitors widget
+#### モニターウィジェットを作成する
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-- Long press on the home screen.
-- Tap the "+" button on the top left corner of the screen.
-- Search for "Datadog" widgets.
+- ホーム画面を長押しします。
+- 画面左上の "+" ボタンをタップします。
+- "Datadog" ウィジェットを検索します。
 - Select your preferred size (small shows two monitor saved views, medium allows up to three monitor saved views, and large up to six monitor saved views).
-- Drag the widget to your desired, on-screen location.
+- ウィジェットを画面上の希望の場所にドラッグします。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Long press on your home screen.
-- Tap "Widgets" on your home screen editor. If you have app shortcuts, it might appear as just an icon on the top right corner of the bubble.
-- Drag the widget to your desired, on-screen home screen.
-- Resize the widget to fit your preference. To show more saved views, increase the length of the widget on your mobile home screen.
+- ホーム画面を長押しします。
+- ホーム画面エディタの "Widgets" をタップします。アプリのショートカットがある場合は、バブルの右上隅にアイコンとして表示されることがあります。
+- ウィジェットを画面上の希望のホーム画面にドラッグします。
+- 好みに合わせてウィジェットのサイズを変更します。保存されたビューをさらに表示するには、モバイルホーム画面のウィジェットの長さを増やします。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Edit a Monitors widget
+#### モニターウィジェットを編集する
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-- Long press on the widget to configure.
-- Tap on "Edit Widget".
-- Tap on the individual saved view cell to select and deselect.
-- Reorder the views by dragging and dropping each cell.
-- Tap out of the widget to validate your selection and exit the configuration screen.
+- ウィジェットを長押しして構成します。
+- "Edit Widget" をタップします。
+- 個々の保存されたビューのセルをタップして、選択および選択解除します。
+- 各セルをドラッグアンドドロップして、ビューを並べ替えます。
+- ウィジェットをタップして選択を検証し、コンフィギュレーション画面を終了します。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Tap on the widget title to configure.
-- Tap on "Saved Views".
-- Tap on the individual saved view cell to select and deselect.
-- Reorder the views by dragging and dropping each cell.
-- Tap "Save" or "Apply" to validate your selection and exit the configuration screen.
-- Scroll inside the widget to see more saved views. Long press and resize the widget to fit your preference.
+- ウィジェットのタイトルをタップして構成します。
+- "Saved Views" をタップします。
+- 個々の保存されたビューのセルをタップして、選択および選択解除します。
+- 各セルをドラッグアンドドロップして、ビューを並べ替えます。
+- "Save" または "Apply" をタップして選択を検証し、コンフィギュレーション画面を終了します。
+- ウィジェット内をスクロールして、保存されたビューをさらに表示します。ウィジェットを長押ししてサイズを変更し、好みに合わせます。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Display Monitors from multiple organizations
+#### 複数のオーガニゼーションのモニターを表示する
 
-You can display Monitors from multiple organizations within the same widget. 
+同じウィジェット内に複数のオーガニゼーションからのモニターを表示できます。
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-All organizations you've logged-in are displayed in the configuration screen. If you do not see your organization, you may need to sign in again.
+ログインしたすべてのオーガニゼーションがコンフィギュレーション画面に表示されます。オーガニゼーションが表示されない場合は、再度サインインする必要がある場合があります。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-- Tap the widget title to configure.
-- From the configuration screen, tap "Organization".
-- Select a new organization (you might need to sign in).
-- Edit the widget to fit your preference.
-- Tap "Save" or "Apply". 
+- ウィジェットのタイトルをタップして構成します。
+- コンフィギュレーション画面で "Organization" をタップします。
+- 新しいオーガニゼーションを選択します (サインインが必要な場合があります)。
+- 好みに合わせてウィジェットを編集します。
+- "Save" または "Apply" をタップします。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Delete a Monitors widget
+#### モニターウィジェットを削除する
 
 {{< tabs >}}
 {{% tab "iOS" %}}
 
-Delete a widget pressing the "-" button at the top left of the widget when editing your home screen, or by long pressing on the widget and then selecting "Remove Widget".
+ホーム画面を編集するときにウィジェットの左上にある "-" ボタンを押すか、ウィジェットを長押ししてから "Remove Widget" を選択することにより、ウィジェットを削除します。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Delete a widget by long pressing, dragging, and dropping the widget on the "Remove" button.
+ウィジェットを長押しし、ドラッグして、"Remove" ボタンにドロップしてウィジェットを削除します。
 
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Quick actions
+## クイックアクション
 
-{{< img src="service_management/mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Quick Actions">}}
+{{< img src="service_management/mobile/shortcut_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="クイックアクション">}}
 
-Long-press the app icon to display a quick-action sheet of your top five [Frequently Viewed By Me][17] dashboards for iOS (measured by view count and recency), or your five most opened dashboards on mobile for Android. Tap a result to open the dashboard in-app.
 
-## Search from home screen
+アプリアイコンを長押しすると、iOS 用の上位 5 つの [Frequently Viewed By Me][17] ダッシュボード (表示数と最新性で測定) または Android 用モバイルで最も開いている 5 つのダッシュボードのクイックアクションシートが表示されます。結果をタップして、アプリ内ダッシュボードを開きます。
 
-{{< img src="service_management/mobile/iphone_search_doc.png" alt="Home Screen Search" style="width:40%;">}}
+## ホーム画面から検索
 
-**iOS only**: Within iPhone Search, filter and search for the name of any desired dashboard. Press on a result to open the dashboard view directly on the mobile app, or press the "Search in App" button to open the search query in the in-app Dashboard List page.
+{{< img src="service_management/mobile/iphone_search_doc.png" alt="ホーム画面の検索" style="width:40%;">}}
 
-## Shortcuts and Siri suggestions
+**iOS のみ**: iPhone Search 内で、必要なダッシュボードの名前をフィルタリングして検索します。結果を押してモバイルアプリで直接ダッシュボードビューを開くか、"Search in App" ボタンを押してアプリ内ダッシュボードリストページで検索クエリを開きます。
+
+## ショートカットと Siri の提案
 
 **Android**: Create shortcut icons for your dashboards by touching and holding the Datadog app icon, then lift your finger. If the app has shortcuts, it displays a list. Touch and hold the desired shortcut, then drag and drop it to another location on your screen to create a unique shortcut icon.
 
-**iOS**: Create Siri Shortcuts for Datadog dashboards and monitors through the Shortcuts App. For a shortcut to be available for creation, you must execute the desired action at least once in the app. For example, to create an "Open AWS Overview Dashboard" shortcut, open the AWS Overview Dashboard in your mobile app at least once.
+**iOS**: ショートカットアプリを使用して、Datadog ダッシュボードとモニターの Siri ショートカットを作成します。ショートカットを作成できるようにするには、アプリで目的のアクションを少なくとも 1 回実行する必要があります。たとえば、「AWS 概要ダッシュボードを開く」ショートカットを作成するには、モバイルアプリで AWS 概要ダッシュボードを少なくとも 1 回開きます。
 
-With the shortcut, you can access your dashboards and monitors through three key actions:
+ショートカットを使用すると、次の 3 つの主要なアクションを通じてダッシュボードとモニターにアクセスできます。
 
-- Pin the shortcut as an icon in your home screen. To do so, access the Shortcuts app, and open the edit menu for your dashboard shortcut.
-- Siri Voice: say your shortcut name, such as "Open AWS Overview", and Siri opens your dashboard in-app.
-- Siri suggestions: Siri learns your routine, and suggests dashboard shortcuts when you most need them, through a home or lock-screen banner, iPhone search, or iOS 14 Siri Suggestions widgets.
+- ショートカットをホーム画面のアイコンとして固定します。これを行うには、ショートカットアプリにアクセスし、ダッシュボードショートカットの編集メニューを開きます。
+- Siri 音声: 「AWS の概要を開く」などのショートカット名を言うと、Siri はアプリ内でダッシュボードを開きます。
+- Siri の提案: Siri はあなたのルーチンを学習し、ホームまたはロック画面のバナー、iPhone 検索、または iOS 14 の Siri の提案ウィジェットを介して、最も必要なときにダッシュボードのショートカットを提案します。
 
-{{< img src="service_management/mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Shortcuts">}}
+{{< img src="service_management/mobile/siri_shadow.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="ショートカット">}}
 
-For more information about Siri shortcuts and suggestions, read the [Apple Siri documentation][18].
+Siri のショートカットと提案の詳細については、[Apple Siri のドキュメント][18]をお読みください。
 
 ## Handoff
 
-**iOS Only**: Use Apple Handoff to continue your task across Apple devices. While in use, the icon of the Datadog mobile app appears on your Mac at the left end of the Dock. Click on the icon to open your current dashboard or monitor on your Mac.
+**iOS のみ**: Apple Handoff を使用して、Apple デバイス間でタスクを継続します。使用中、Datadog モバイルアプリのアイコンが Mac の Dock の左端に表示されます。アイコンをクリックして、Mac で現在のダッシュボードまたはモニターを開きます。
 
-For Handoff to work, each device must:
+Handoff が機能するには、各デバイスが次の条件を満たしている必要があります。
 
-- Be signed in to iCloud with the same Apple ID
-- Have Bluetooth enabled
-- Have Wi-Fi enabled
-- Have Handoff enabled
+- 同じ Apple ID で iCloud にサインインしている
+- Bluetooth が有効になっている
+- Wi-Fi が有効になっている
+- Handoff が有効になっている
 
-For more information about Handoff, read the [Apple Handoff documentation][19].
+Handoff の詳細については、[Apple Handoff のドキュメント][19]をお読みください。
 
-## Account
+## アカウント
 
-Switch organizations or log out from the Account page.
+組織を切り替えるか、アカウントページからログアウトします。
 
-## Troubleshooting
+## トラブルシューティング
 
-For help with troubleshooting, [contact Datadog support][20]. You can also send a message in the [Datadog public Slack][21] [#mobile-app][22] channel.
+トラブルシューティングのヘルプについては、[Datadog のサポートチームにお問い合わせください][20]。また、[Datadog 公開 Slack][21] [#mobile-app][22] チャンネルでメッセージをお送りいただくことも可能です。
 
-### Further Reading
+### その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

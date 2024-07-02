@@ -1,6 +1,5 @@
 ---
 title: RUM Analytics
-kind: documentation
 description: ""
 aliases:
   - /real_user_monitoring/rum_analytics
@@ -17,43 +16,43 @@ further_reading:
   text: Use funnel analysis to understand and optimize key user flows
 ---
 
-## Overview
+## 概要
 
-Real User Monitoring (RUM) Analytics extend the RUM Explorer page with views data aggregation and split capabilities for troubleshooting and monitoring. You can control:
+リアルユーザーモニタリング（RUM）分析は、RUM エクスプローラーページを、データの集計や分割の機能を備えたビューで拡張するため、トラブルシューティングや監視に使うことができます。以下を制御することが可能です。
 
-* The query that filters the set of views to analyze.
-* The dimensions over which to split data.
-* The visualization method for aggregates and splits.
+* 分析するビューセットをフィルタリングするクエリ
+* データの分割に使用するディメンション
+* 集計や分割を可視化する方法
 
-With RUM Analytics visualizations, you can:
+RUM Analytics の視覚化でできること
 
-* Create a widget in a dashboard out of that visualization.
-* Dive deeper into subsets of the events list depending on the interactions that the visualization enables.
+* 可視化からダッシュボードでウィジェットを作成する。
+* 可視化によって可能になる操作に応じて、イベントリストの各部を詳細に調べる。
 
-## Build a query
+## クエリの構築
 
-In [RUM Analytics][1], customize your display by adding facets and measures to your search query. 
+[RUM Analytics][1] では、検索クエリにファセットやメジャーを追加して、表示をカスタマイズします。
 
-1. Choose a measure or facet to graph. A measure lets you choose the aggregation function, whereas a facet displays the unique count.
+1. グラフ化するメジャーまたはファセットを選択します。メジャーを選ぶと、集計関数を選択できます。ファセットを選ぶと、ユニーク数が表示されます。
 
-    {{< img src="real_user_monitoring/explorer/analytics/measure_selection.png" alt="measure selection" style="width:50%;">}}
-2. Select the aggregation function for the measure you want to graph:
+    {{< img src="real_user_monitoring/explorer/analytics/measure_selection.png" alt="メジャーを選択" style="width:50%;">}}
+2. グラフ化するメジャーの集計関数を選択します。
 
-    {{< img src="real_user_monitoring/explorer/analytics/aggregation.png" alt="aggregation function for RUM Analytics" style="width:50%;">}}
+    {{< img src="real_user_monitoring/explorer/analytics/aggregation.png" alt="RUM 分析の集計関数" style="width:50%;">}}
 
-3. Use a facet to split your graph.
+3. ファセットを使用して、グラフを分割します。
 
-    {{< img src="real_user_monitoring/explorer/analytics/break_down.png" alt="split by facet RUM Analytics" style="width:50%;">}}
+    {{< img src="real_user_monitoring/explorer/analytics/break_down.png" alt="ファセットで分割された RUM 分析" style="width:50%;">}}
 
-4. Choose the time interval for your graph. Changing the global timeframe changes the list of available timestep values.
+4. グラフの時間間隔を選択します。グローバルタイムフレームを変更すると、使用可能なタイムステップ値のリストが変わります。
 
     {{< img src="real_user_monitoring/explorer/analytics/roll_up.png" alt="rollup" style="width:50%;">}}
 
-5. Choose to display either the **top** or **bottom** values according to the selected measure.
+5. 選択したメジャーに応じて、**上位**と**下位**のどちらの値を表示するかを選択します。
 
-    {{< img src="real_user_monitoring/explorer/analytics/top_bottom.png" alt="top bottom button" style="width:50%;">}}
+    {{< img src="real_user_monitoring/explorer/analytics/top_bottom.png" alt="上位下位ボタン" style="width:50%;">}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

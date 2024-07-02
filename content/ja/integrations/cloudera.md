@@ -30,7 +30,7 @@
 "categories":
 - cloud
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/cloudera/README.md"
 "display_on_public_website": true
@@ -217,7 +217,7 @@ Note: These queries can take advantage of metric expressions, resulting in queri
 
 [Run the Agent's status subcommand][8] and look for `cloudera` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "cloudera" >}}

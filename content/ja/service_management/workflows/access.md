@@ -6,7 +6,7 @@ aliases:
 - /workflows/access
 - /workflows/service_accounts
 algolia:
-  tags: [workflow, workflows, workflow automation]
+  tags: [workflow, workflows/, workflow automation]
 disable_toc: false
 further_reading:
 - link: /getting_started/workflow_automation/

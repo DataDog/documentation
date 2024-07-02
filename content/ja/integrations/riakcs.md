@@ -29,7 +29,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "data stores"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/riakcs/README.md"
 "display_on_public_website": true
@@ -74,13 +74,13 @@ Capture RiakCS metrics in Datadog to:
 - Visualize key RiakCS metrics.
 - Correlate RiakCS performance with the rest of your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The RiakCS check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your RiakCS nodes.
 
-### Configuration
+### 構成
 
 1. Edit the `riakcs.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][3]. See the [sample riakcs.d/conf.yaml][4] for all available configuration options:
 
@@ -105,9 +105,9 @@ The RiakCS check is included in the [Datadog Agent][2] package, so you don't nee
 
 [Run the Agent's `status` subcommand][6] and look for `riakcs` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "riakcs" >}}
  includes most S3 API metrics as well as memory stats. Some have been excluded:
 
@@ -122,15 +122,15 @@ Any of the excluded metrics or additional metrics (1000+) can be added to the `r
 
 See the [complete list of available metrics][8].
 
-### Events
+### イベント
 
 The RiakCS check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "riakcs" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

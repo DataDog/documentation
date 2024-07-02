@@ -18,26 +18,26 @@ The SLO List widget displays a subset of SLOs over their primary time window. Al
 
 {{< img src="dashboards/widgets/slo_list/slo-list-widget-latest.png" alt="The SLO List widget displaying a list of SLOs" style="width:90%;" >}}
 
-## Setup
+## セットアップ
 
 {{< img src="dashboards/widgets/slo_list/slo-list-widget-editor-latest.png" alt="A search query defining the service as web-store in the SLO List widget editor" style="width:90%;" >}}
 
-### Configuration
+### 構成
 
-1. Add an SLO List widget to a dashboard.
-2. Use tags to filter the list of SLOs (such as `service:foo, env:prod`). Template variables are supported. 
-3. Choose the maximum number of SLOs to display (the default is 100) and sort by either status or error budget.
-4. Optionally, give the widget a title.
+1. ダッシュボードに SLO リストウィジェットを追加します。
+2. タグを使用して、SLO の一覧をフィルターします (`service:foo, env:prod` など)。テンプレート変数がサポートされています。
+3. 表示する SLO の最大数 (デフォルトは 100) を選択し、ステータスまたはエラーバジェットのいずれかでソートします。
+4. オプションでウィジェットのタイトルを指定します。
 
-When you are ready to create the widget, click **Save**.
+ウィジェットを作成する準備ができたら、**Save** をクリックします。
 
 ## API
 
-This widget can be used with the **[Dashboards API][2]**. See the following table for the [widget JSON schema definition][3]:
+このウィジェットは **[Dashboards API][2]** で使用できます。[ウィジェット JSON スキーマ定義][3]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

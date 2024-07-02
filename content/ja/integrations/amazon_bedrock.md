@@ -24,10 +24,10 @@
   "support_email": help@datadoghq.com
 "categories":
 - aws
-- metrics
+- モニター
 - cloud
 - ai/ml
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -60,48 +60,46 @@
 ---
 
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
-## Overview
+## 概要
 
-Amazon Bedrock is a fully managed service that makes [foundation models][1] (FMs) from Amazon and leading AI
-startups available through an API, so you can choose from various FMs to find the model that's best
-suited for your use case.
+Amazon Bedrock は、Amazon および先進的な AI スタートアップの[基盤モデル][1] (FM) を API 経由で提供する完全マネージド型のサービスで、用途に最適なモデルを様々な FM から選べます。
 
-Enable this integration to see all your Bedrock metrics in Datadog.
+このインテグレーションを有効にすると、Datadog にすべての Bedrock メトリクスを表示できます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-If you haven't already, set up the [Amazon Web Services integration][2] first.
+[Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
-### Metric collection
+### メトリクスの収集
 
-1. In the [AWS integration page][3], ensure that `Bedrock` is enabled under the `Metric Collection` tab.
-2. Install the [Datadog - Amazon Bedrock integration][4].
+1. [AWS インテグレーションページ][3]で、`Metric Collection` タブの下にある `Bedrock` が有効になっていることを確認します。
+2. [Datadog - Amazon Bedrock インテグレーション][4]をインストールします。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_bedrock" >}}
 
 
-### Events
+### イベント
 
-The Amazon Bedrock integration does not include any events.
+Amazon Bedrock インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The Amazon Bedrock integration does not include any service checks.
+Amazon Bedrock インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][6].
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor Amazon Bedrock with Datadog][7]
+- [Datadog を使用した Amazon Bedrock の監視][7]
 
 [1]: https://aws.amazon.com/what-is/foundation-models/
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/

@@ -18,7 +18,7 @@
 "categories":
 - "event management"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -55,9 +55,9 @@ Use Papertrail and Datadog to:
 - Turn freeform log data into actionable metrics.
 - Avoid silo-ed operational knowledge. See and correlate log-derived metrics alongside app- and system-level metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To capture metrics from Papertrail:
 
@@ -74,25 +74,25 @@ To capture metrics from Papertrail:
 
 Papertrail updates Datadog at your chosen interval.
 
-### Configuration
+### 構成
 
 No configuration steps are required for this integration.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Papertrail integration does not include any metrics.
 
-### Events
+### イベント
 
 The Papertrail integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Papertrail integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][2].
 

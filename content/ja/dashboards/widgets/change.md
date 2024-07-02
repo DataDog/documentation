@@ -1,22 +1,22 @@
 ---
+title: Change Widget
+widget_type: change
+description: "Graph the change in a value over a chosen time period."
 aliases:
-- /ja/graphing/widgets/change/
-description: 選択した期間中の値の変化をグラフ化する
+- /graphing/widgets/change/
 further_reading:
 - link: /monitors/types/metric/?tab=change
-  tag: ドキュメント
-  text: モニターの変化アラート検出の構成
-- link: /ja/dashboards/graphing_json/
-  tag: ドキュメント
-  text: JSON を使用したダッシュボードの構築
+  tag: Documentation
+  text: Configure Change alert detection in monitors
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Building Dashboards using JSON
 - link: /dashboards/graphing_json/widget_json/
-  tag: ドキュメント
-  text: ウィジェット JSON スキーマ
+  tag: Documentation
+  text: Widget JSON schema
 - link: /dashboards/graphing_json/request_json/
-  tag: ドキュメント
-  text: リクエスト JSON スキーマ
-title: 変化ウィジェット
-widget_type: 変化
+  tag: Documentation
+  text: Request JSON schema
 ---
 
 変化グラフは、特定の時間内におけるメトリクスの変動を示します。これは、N 分前の値と現在の値との絶対変化量または相対変化量 (%) を指定のしきい値と比較します。比較されるデータポイントは単一のポイントではなく、メトリクスの定義セクションのパラメーターを使用して計算される値です。詳細については、[メトリクスモニター][6]ドキュメント、および[変化アラートモニターガイド][7]を参照してください。
@@ -61,8 +61,8 @@ widget_type: 変化
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/guide/context-links/
-[2]: /ja/api/latest/dashboards/
-[3]: /ja/dashboards/graphing_json/widget_json/
-[6]: /ja/monitors/types/metric/?tab=change
-[7]: /ja/monitors/guide/change-alert/
+[1]: /dashboards/guide/context-links/
+[2]: /api/latest/dashboards/
+[3]: /dashboards/graphing_json/widget_json/
+[6]: /monitors/types/metric/?tab=change
+[7]: /monitors/types/change-alert/

@@ -21,7 +21,7 @@ algolia:
   tags: [cluster agent]
 ---
 
-If you deploy the Datadog Agent using Helm chart v2.7.0+ or Datadog Operator v0.7.0+, the Cluster Agent is enabled by default.
+Helm chart v2.7.0+ または Datadog Operator v0.7.0+ を使用して Datadog Agent をデプロイした場合、Cluster Agent はデフォルトで有効化されます。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -50,19 +50,19 @@ When set manually, this token must be 32 alphanumeric characters.
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-The Cluster Agent is enabled by default since Helm chart v2.7.0.
+Helm チャート v2.7.0 以降、Cluster Agent はデフォルトで有効になっています。
 
-To activate it on older versions, or if you use a custom [datadog-values.yaml][1] that overrides the `clusterAgent` key, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration:
+古いバージョンで有効にする場合、または `clusterAgent` キーを上書きするカスタム [datadog-values.yaml][1] を使用する場合、以下の Cluster Agent コンフィギュレーションで [datadog-values.yaml][1] ファイルを更新します。
 
   ```yaml
   clusterAgent:
-    # clusterAgent.enabled -- Set this to false to disable Datadog Cluster Agent
+    # clusterAgent.enabled -- これを false に設定すると、Datadog Cluster Agent が無効になります
     enabled: true
   ```
 
-Then, upgrade your Datadog Helm chart.
+次に、Datadog Helm チャートをアップグレードします。
 
-This automatically updates the necessary RBAC files for the Cluster Agent and Datadog Agent. Both Agents use the same API key.
+これにより、Cluster Agent と Datadog Agent に必要な RBAC ファイルが自動的に更新されます。両方の Agent が同じ API キーを使用します。
 
 This also automatically generates a random token in a `Secret` shared by both the Cluster Agent and the Datadog Agent to secure communication. You can manually specify this token using the `clusterAgent.token` configuration. You can alternatively set this by referencing the name of an existing `Secret` containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
 
@@ -70,42 +70,42 @@ When set manually, this token must be 32 alphanumeric characters.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
-{{% tab "Manual (DaemonSet)" %}}
+{{% tab "手動 (DaemonSet)" %}}
 
-To set up the Datadog Cluster Agent using a DaemonSet:
-1. [Configure Cluster Agent RBAC permissions](#configure-cluster-agent-rbac-permissions).
-2. [Secure Cluster Agent to Agent communication](#secure-cluster-agent-to-agent-communication).
-3. [Create the Cluster Agent and its service](#create-the-cluster-agent-and-its-service).
-4. [Configure the node Agent to communicate with the Cluster Agent](#configure-datadog-agent-communication).
+DaemonSet を使用して Datadog Cluster Agent をセットアップするには
+1. [Cluster Agent RBAC 権限を構成します](#configure-cluster-agent-rbac-permissions)。
+2. [Cluster Agent と Agent 間の通信を確立します](#secure-cluster-agent-to-agent-communication)。
+3. [Cluster Agent とそのサービスを作成します](#create-the-cluster-agent-and-its-service)。
+4. [Cluster Agent と通信するためにノード Agent を構成します](#configure-datadog-agent-communication)。
 
-### Configure Cluster Agent RBAC permissions
+### Cluster Agent RBAC 権限の構成
 
-The Datadog Cluster Agent needs a proper RBAC to be up and running:
+Datadog Cluster Agent を実行するには、適切な RBAC が必要です。
 
-1. Review the manifests in the [Datadog Cluster Agent RBAC folder][1]. **Note**: When using the Cluster Agent, your node Agents are not able to interact with the Kubernetes API server—only the Cluster Agent is able to do so.
+1. [Datadog Cluster Agent RBAC フォルダー][1]にあるマニフェストを確認します。**注**: Cluster Agentを使用する場合、Kubernetes API サーバーと通信できるのは Cluster Agent だけで、Node Agent ではないことにご注意ください。
 
-2. To configure Cluster Agent RBAC permissions, apply the following manifests. (You may have done this already when setting up the [node Agent daemonset][2].)
+2. Cluster Agent に対する RBAC アクセス許可を構成するには、以下のマニフェストを適用します。（[Node Agent デーモンセット][2]を設定する際に、すでに行っている可能性があります。）
 
   ```shell
   kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/rbac.yaml"
   kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/cluster-agent-rbac.yaml"
   ```
 
-  This creates the appropriate `ServiceAccount`, `ClusterRole`, and `ClusterRoleBinding` for the Cluster Agent and updates the `ClusterRole` for the node Agent.
+  これにより、Cluster Agent に適切な `ServiceAccount`、`ClusterRole`、`ClusterRoleBinding` が作成され、ノード Agent の `ClusterRole` が更新されます。
 
-If you are using Azure Kubernetes Service (AKS), you may require extra permissions. See the [RBAC for DCA on AKS][3] FAQ.
+Azure Kubernetes Service (AKS) の場合、追加のアクセス許可が必要になる可能性もあります。[DCA のため AKS で RBAC][3] に関する「よくあるご質問」を参照してください。
 
-### Secure Cluster Agent to Agent communication
+### Cluster Agent - Agent 間通信のセキュリティ保護
 
-The Datadog Agent and Cluster Agent require a token to secure their communication. It is recommended that you save this token in a `Secret` that both the Datadog Agent and Cluster Agent can reference in the environment variable `DD_CLUSTER_AGENT_AUTH_TOKEN`. This helps to maintain consistency and to avoid the token being readable in the `PodSpec`.
+Datadog Agent と Cluster Agent は、通信を保護するためにトークンを必要とします。このトークンは、Datadog Agent と Cluster Agent の両方が環境変数 `DD_CLUSTER_AGENT_AUTH_TOKEN` で参照できる `Secret` に保存することをお勧めします。これは、一貫性を維持し、トークンが `PodSpec` で読み取り可能になることを防ぐのに役立ちます。
 
-To create this token run this one line command to generate a `Secret` named `datadog-cluster-agent` with a `token` set. Replace the `<TOKEN>` with 32 alphanumeric characters.
+このトークンを作成するには、この 1 行のコマンドを実行して、`token` が設定された `datadog-cluster-agent` という名前の `Secret` を生成します。`<TOKEN>` を 32 文字の英数字に置き換えます。
   ```shell
   kubectl create secret generic datadog-cluster-agent --from-literal=token='<TOKEN>' --namespace="default"
   ```
-**Note:** This creates a `Secret` in the default namespace. If you are in a custom namespace, update the namespace parameter of the command before running it.
+**注**: これにより、デフォルトネームスペースで `Secret` が作成されます。カスタムネームスペースを使用している場合、実行前にコマンドのネームスペースパラメーターを更新します。
 
-The default `cluster-agent-deployment.yaml` provided for the Cluster Agent is already configured to see this `Secret` with the environment variable configuration:
+Cluster Agent に提供されているデフォルトの `cluster-agent-deployment.yaml` は、環境変数のコンフィギュレーションでこの `Secret` を参照するように既に構成されています。
   ```yaml
   - name: DD_CLUSTER_AGENT_AUTH_TOKEN
     valueFrom:
@@ -114,42 +114,42 @@ The default `cluster-agent-deployment.yaml` provided for the Cluster Agent is al
         key: token
   ```
 
-This environment variable must be configured (using the same setup) when [Configuring the Datadog Agent][4].
+この環境変数は、[Datadog Agent の構成][4]で (同じセットアップを使用して) 構成する必要があります。
 
-### Create the Cluster Agent and its service
+### Cluster Agent とそのサービスの作成
 
-1. Download the following manifests:
+1. 以下のマニフェストをダウンロードします。
 
-    * [`agent-services.yaml`: The Cluster Agent Service manifest][5]
-    * [`secret-api-key.yaml`: The secret holding the Datadog API key][6]
-    * [`secret-application-key.yaml`: The secret holding the Datadog Application Key][7]
-    * [`cluster-agent-deployment.yaml`: Cluster Agent manifest][8]
-    * [`install_info-configmap.yaml`: Install Info Configmap][9]
+    * [`agent-services.yaml`: Cluster Agent サービスマニフェスト][5]
+    * [`secret-api-key.yaml`: Datadog API キーを含むシークレット][6]
+    * [`secret-application-key.yaml`: Datadog アプリケーションキーを含むシークレット][7]
+    * [`cluster-agent-deployment.yaml`: Cluster Agent マニフェスト][8]
+    * [`install_info-configmap.yaml`: Configmap のインストール][9]
 
-2. In the `secret-api-key.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` with [your Datadog API key][10] encoded in base64. To get the base64 version of your API key, you can run:
+2. `secret-api-key.yaml` マニフェストで、`PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` を base64 でエンコードされた [Datadog API キー][10]に置き換えます。API キーの base64 バージョンを取得するには、次のコマンドを実行します。
 
     ```shell
     echo -n '<Your API key>' | base64
     ```
-3. In the `secrets-application-key.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_APP_KEY_HERE` with [your Datadog Application key][11] encoded in base64.
-4. By default, the `cluster-agent-deployment.yaml` manifest refers to the token created previously in the `Secret` `datadog-cluster-agent`. If you are storing this token in an alternative way, configure your `DD_CLUSTER_AGENT_AUTH_TOKEN` environment variable accordingly.
-5. Deploy these resources for the Cluster Agent Deployment to use:
+3. `secrets-application-key.yaml` マニフェストで、`PUT_YOUR_BASE64_ENCODED_APP_KEY_HERE` を base64 でエンコードされた [Datadog アプリケーションキー][11]に置き換えます。
+4. デフォルトでは、`cluster-agent-deployment.yaml` マニフェストは、以前に `Secret` `datadog-cluster-agent` で作成されたトークンを参照します。このトークンを代替の方法で保存する場合は、それに応じて `DD_CLUSTER_AGENT_AUTH_TOKEN` 環境変数を構成します。
+5. Cluster Agent Deployment が使用するために、これらのリソースをデプロイします。
     ```shell
     kubectl apply -f agent-services.yaml
     kubectl apply -f secret-api-key.yaml
     kubectl apply -f secret-application-key.yaml
     kubectl apply -f install_info-configmap.yaml
     ```
-6. Finally, deploy the Datadog Cluster Agent:
+6. 最後に、Datadog Cluster Agent をデプロイします。
     ```shell
     kubectl apply -f cluster-agent-deployment.yaml
     ```
 
-**Note**: In your Datadog Cluster Agent, set the environment variable `DD_SITE` to your Datadog site: {{< region-param key="dd_site" code="true" >}}. It defaults to the `US` site `datadoghq.com`
+**注**: Datadog Cluster Agent で、環境変数 `DD_SITE` を Datadog サイトに設定します: {{< region-param key="dd_site" code="true" >}}。デフォルトは `US` サイト `datadoghq.com` です。
 
-### Verification
+### 検証
 
-At this point, you should see:
+この時点で、次のような状態になっているはずです。
 
 ```shell
 kubectl get deploy
@@ -172,13 +172,13 @@ NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(
 datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/TCP         1d
 ```
 
-**Note**: If you already have the Datadog Agent running, you may need to apply the [Agent's `rbac.yaml` manifest][12] before the Cluster Agent can start running.
+**注**: すでに Datadog Agent を実行している場合は、Cluster Agent の実行を開始する前に、[Agent の `rbac.yaml` マニフェスト][12]を適用する必要がある場合があります。
 
-## Configure Datadog Agent communication
+## Datadog Agent の通信の構成
 
-Modify your Datadog Agent configuration to communicate with the Datadog Cluster Agent.
+Datadog Cluster Agent と通信するために、Datadog Agent の構成を変更します。
 
-In your existing DaemonSet [manifest file][2], set the environment variable `DD_CLUSTER_AGENT_ENABLED` to `true`. Then, set the `DD_CLUSTER_AGENT_AUTH_TOKEN` using the same syntax used in [Secure Cluster-Agent-to-Agent Communication][13].
+既存の DaemonSet [マニフェストファイル][2]で、環境変数 `DD_CLUSTER_AGENT_ENABLED` を `true` に設定します。次に、[Secure Cluster-Agent-to-Agent Communication][13] で使用されているのと同じ構文を使用して `DD_CLUSTER_AGENT_AUTH_TOKEN` を設定します。
 
   ```yaml
   - name: DD_CLUSTER_AGENT_ENABLED
@@ -190,7 +190,7 @@ In your existing DaemonSet [manifest file][2], set the environment variable `DD_
         key: token
   ```
 
-After redeploying your DaemonSet with these configurations in place, the Datadog Agent is able to communicate with the Cluster Agent. You can reference the provided Cluster Agent [`daemonset.yaml` manifest][14] for a full example.
+これらの構成で DaemonSet を再デプロイすると、Datadog Agent は Cluster Agent と通信できるようになります。完全な例については、提供されている Cluster Agent [`daemonset.yaml` マニフェスト][14]を参照することができます。
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/manifests/cluster-agent
 [2]: /agent/kubernetes/?tab=daemonset
@@ -209,15 +209,15 @@ After redeploying your DaemonSet with these configurations in place, the Datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-### Verification
+### 検証
 
-You can verify your Datadog Agent Pods and Cluster Agent Pods are running by executing the command:
+次のコマンドを実行して、Datadog Agent ポッドと Cluster Agent ポッドが実行されていることを確認できます。
 
 ```shell
 kubectl get pods | grep agent
 ```
 
-You should see:
+次のようになるはずです。
 
 ```shell
 datadog-agent-4k9cd                      1/1       Running   0          2h
@@ -231,7 +231,7 @@ datadog-agent-x5wk5                      1/1       Running   0          2h
 datadog-cluster-agent-8568545574-x9tc9   1/1       Running   0          2h
 ```
 
-You can additionally verify the Datadog Agent has successfully connected to the Cluster Agent with the [Agent status output][1].
+さらに、[Agent ステータス出力][1]を使用して、Datadog Agent が Cluster Agent に正常に接続したことを確認できます。
 
 ```shell
 kubectl exec -it <AGENT_POD_NAME> agent status
@@ -245,13 +245,13 @@ Datadog Cluster Agent
   - Running: 1.11.0+commit.4eadd95
 ```
 
-Kubernetes events are beginning to flow into your Datadog account, and relevant metrics collected by your Agents are tagged with their corresponding cluster level metadata.
+Datadog アカウントに Kubernetes イベントが流れ込み始め、Agent によって収集された関連メトリクスに、それぞれに対応するクラスターレベルのメタデータがタグ付けされます。
 
-## Windows containers
+## Windows コンテナ
 
-The Datadog Cluster Agent can only be deployed on Linux nodes.
+Datadog Cluster Agent は、Linux ノードにのみデプロイ可能です。
 
-To monitor Windows containers, use two installations of the Helm chart in a mixed cluster. The first Helm chart deploys the Datadog Cluster Agent and the Agent DaemonSet for Linux nodes (with `targetSystem: linux`). The second Helm chart (with `targetSystem: windows`) deploys the Agent only on Windows nodes and connects to the existing Cluster Agent deployed as part of the first Helm chart.
+Windows コンテナを監視するには、混在クラスターに 2 つの Helm チャートをインストールします。最初の Helm チャートは、Linux ノード用に Datadog Cluster Agent と Agent DaemonSet をデプロイします (`targetSystem: linux` を使用)。2 つ目の Helm チャート (`targetSystem: windows` を使用) は、Windows ノードにのみ Agent をデプロイし、最初の Helm チャートの一部としてデプロイされた既存の Cluster Agent に接続します。
 
 Use the following `datadog-values.yaml` file to configure communication between Agents deployed on Windows nodes and the Cluster Agent.
 
@@ -259,21 +259,21 @@ Use the following `datadog-values.yaml` file to configure communication between 
 targetSystem: windows
 existingClusterAgent:
   join: true
-  serviceName: "<EXISTING_DCA_SECRET_NAME>" # from the first Datadog Helm chart
-  tokenSecretName: "<EXISTING_DCA_SERVICE_NAME>" # from the first Datadog Helm chart
+  serviceName: "<EXISTING_DCA_SECRET_NAME>" # Datadog Helm の最初のチャートから
+  tokenSecretName: "<EXISTING_DCA_SERVICE_NAME>" # Datadog Helm の最初のチャートから
 
-# Disable datadogMetrics deployment since it should have been already deployed with the first chart.
+# datadogMetrics は最初のチャートで既にデプロイされているはずなので、デプロイを無効にします。
 datadog-crds:
   crds:
     datadogMetrics: false
-# Disable kube-state-metrics deployment
+# kube-state-metrics のデプロイメントを無効にします
 datadog:
   kubeStateMetricsEnabled: false
 ```
 
-For more information, see [Troubleshooting Windows Container Issues][2].
+詳しくは、[Windows コンテナの問題のトラブルシューティング][2]をご覧ください。
 
-## Monitoring AWS managed services
+## AWS の管理型サービスを監視
 
 To monitor an AWS managed service like Amazon Managed Streaming for Apache Kafka (MSK), ElastiCache, or Relational Database Service (RDS), set `clusterChecksRunner` in your Helm chart to create a Pod with an IAM role assigned through `serviceAccountAnnotation`. Then, set the integration configurations under `clusterAgent.confd`.
 
@@ -281,7 +281,7 @@ To monitor an AWS managed service like Amazon Managed Streaming for Apache Kafka
 clusterChecksRunner:
   enabled: true
   rbac:
-    # clusterChecksRunner.rbac.create -- If true, create & use RBAC resources
+    # clusterChecksRunner.rbac.create -- true の場合は RBAC リソースを作成・使用
     create: true
     dedicated: true
     serviceAccountAnnotations:
@@ -295,7 +295,7 @@ clusterAgent:
           region_name: us-west-2
 {{< /code-block >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

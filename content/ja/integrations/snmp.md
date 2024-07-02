@@ -43,7 +43,7 @@
 - "network"
 - "notifications"
 - "snmp"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/snmp/README.md"
 "display_on_public_website": true
@@ -92,7 +92,7 @@ A MIB (Management Information Base) acts as a translator between OIDs and human 
 * `1.3.6.1.1`: (MIB-II) A standard that holds system information like uptime, interfaces, and network stack.
 * `1.3.6.1.4.1`: A standard that holds vendor specific information.
 
-## Setup
+## セットアップ
 
 To install and configure the SNMP integration, see the [Network Device Monitoring][1] documentation.
 
@@ -103,7 +103,7 @@ Additional helpful documentation, links, and articles:
 * [Monitor SNMP with Datadog][2]
 * [Introduction to SNMP][3]
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

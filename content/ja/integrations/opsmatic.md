@@ -1,9 +1,9 @@
 ---
 "categories":
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "See Opsmatic alerts and acknowledge them from your Datadog event stream."
+"description": "Datadog イベントストリームから Opsmatic アラートを参照および認識。"
 "doc_link": "https://docs.datadoghq.com/integrations/opsmatic/"
 "draft": false
 "git_integration_title": "opsmatic"
@@ -27,9 +27,9 @@ Connect Opsmatic to Datadog to get:
 - Instant awareness of any critical change
 - Full visibility of the live state and history of all your hosts
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To see Opsmatic events in your DataDog stream:
 
@@ -38,25 +38,25 @@ To see Opsmatic events in your DataDog stream:
 
 Check out the [docs on the Opsmatic website for more information][1].
 
-### Configuration
+### 構成
 
 Click the **Install Integration** button on the Opsmatic Integration Tile. configuration steps are required for this integration.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Opsmatic integration does not include any metric.
 
-### Events
+### イベント
 
 The Opsmatic integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Opsmatic integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][2].
 

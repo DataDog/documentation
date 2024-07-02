@@ -22,15 +22,15 @@ algolia:
   tags: [ecs]
 ---
 
-## Overview
+## 概要
 
-Amazon ECS is a scalable, high-performance container orchestration service that supports Docker containers. With the Datadog Agent, you can monitor ECS containers and tasks on every EC2 instance in your cluster.
+Amazon ECS は、Docker コンテナに対応する、拡張性とパフォーマンスに優れたコンテナオーケストレーションサービスです。Datadog Agent と使用すると、クラスター内のすべての EC2 インスタンスの ECS コンテナおよびタスクを監視できます。
 
 <div class="alert alert-info">
 If you want to monitor <strong>ECS on Fargate</strong>, see <a href="/integrations/ecs_fargate/">Amazon ECS on AWS Fargate</a>.  
 </div>
 
-## Setup
+## セットアップ
 
 To monitor your ECS containers and tasks, deploy the Datadog Agent as a container **once on each EC2 instance** in your ECS cluster. You can do this by creating a task definition for the Datadog Agent container and deploying it as a daemon service. Each Datadog Agent container then monitors the other containers on its respective EC2 instance.
 
@@ -40,13 +40,13 @@ The following instructions assume that you have configured an EC2 cluster. See t
 2. [Schedule the Datadog Agent as a daemon service][28]
 3. (Optional) [Set up additional Datadog Agent features][29]
 
-**Note:** Datadog's [Autodiscovery][5] can be used in conjunction with ECS and Docker to automatically discover and monitor running tasks in your environment.
+**注:** ECS および Docker を併用して Datadog の[オートディスカバリー][5]を実行すると、環境内で実行中のタスクを自動的に検出して監視できます。
 
 ### Create an ECS task definition
 
 This [ECS task definition][30] launches the Datadog Agent container with the necessary configurations. When you need to modify the Agent configuration, update this task definition and redeploy the daemon service. You can configure this task definition by using the AWS Management Console, or with the [AWS CLI][9]. 
 
-The following sample is a minimal configuration for core infrastructure monitoring. However, additional Task Definition samples with various features enabled are provided in the [Setup additional Agent features](#setup-additional-agent-features) section if you want to use those instead.
+以下のサンプルは、コアインフラストラクチャーを監視するための最小限の構成です。しかし、様々な機能を有効にした追加のタスク定義のサンプルが [Agent の追加機能の設定](#setup-additional-agent-features)のセクションで提供されていますので、それらを代わりに使用することができます。
 
 #### Create and manage the task definition file
 
@@ -95,20 +95,20 @@ aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-
 {{% /tab %}}
 {{% tab "Web UI" %}}
 After you have your task definition file, use the AWS Console to register the file.
-1. Log in to your AWS Console and navigate to the Elastic Container Service section.
+1. AWS コンソールにログインし、Elastic コンテナサービス セクションに移動します。
 2. Select **Task Definitions** in the navigation pane. On the **Create new task definition** menu, select **Create new task definition with JSON**.
 3. In the JSON editor box, paste the contents of your task definition file.
-4. Select **Create**.
+4. **Create** を選択します。
 
 {{% /tab %}}
 {{< /tabs >}}
 
 
-### Run the Agent as a daemon service
+### Agent を Daemon サービスとして実行
 
 To have one Datadog Agent container running on each EC2 instance, run the Datadog Agent task definition as a [daemon service][10].
 
-#### Schedule a daemon service in AWS using Datadog's ECS task
+#### Datadog の ECS タスクを使用して、AWS でDaemon サービスをスケジューリング
 
 1. Log in to the AWS Console and navigate to the ECS section. On the **Clusters** page, choose the cluster you run the Agent on.
 2. On your cluster's **Services** tab, select **Create**.
@@ -167,9 +167,9 @@ If you're using [DogStatsD][8], edit your Datadog Agent's container definition t
 
 This setup allows DogStatsD traffic to be routed from the application containers, through the host and host port, to the Datadog Agent container. However, the application container must use the host's private IP address for this traffic. You can enable this by setting the environment variable `DD_AGENT_HOST` to the private IP address of the EC2 instance, which you can retrieve from the Instance Metadata Service (IMDS). Alternatively, you can set this in the code during initialization. The implementation for DogStatsD is the same as for APM. See [Configure the Trace Agent endpoint][17] for examples of setting the Agent endpoint.
 
-Ensure that the security group settings on your EC2 instances do not publicly expose the ports for APM and DogStatsD.
+EC2 インスタンスのセキュリティグループ設定で、APM と DogStatsD のポートが公に公開されていないことを確認します。
 
-#### Process collection
+#### プロセスの収集
 
 To collect Live Process information for all your containers and send it to Datadog, update your task definition with the `DD_PROCESS_AGENT_ENABLED` environment variable:
 
@@ -199,7 +199,7 @@ To collect Live Process information for all your containers and send it to Datad
 }
 {{< /highlight >}}
 
-#### Network Performance Monitoring
+#### ネットワークパフォーマンス監視
 
 <div class="alert alert-warning">
 This feature is only available for Linux.
@@ -262,9 +262,9 @@ If you already have a task definition, update your file to include the following
  }
  ```
 
-## AWSVPC mode
+## AWSVPC モード
 
-For Agent v6.10+, `awsvpc` mode is supported for applicative containers, provided that security groups are set to allow the host instance's security group to reach the applicative containers on relevant ports.
+Agent バージョン 6.10 以降は、ホストインスタンスのセキュリティグループが関連するポート上の適用可能なコンテナに到達できるよう、セキュリティグループが設定されている場合には、適用可能なコンテナに `awsvpc` モードが対応しています。
 
 You can run the Agent in `awsvpc` mode, but Datadog does not recommend this because it may be difficult to retrieve the ENI IP to reach the Agent for DogStatsD metrics and APM traces. Instead, run the Agent in bridge mode with port mapping to allow easier retrieval of [host IP through the metadata server][6].
 
@@ -367,7 +367,7 @@ To send data to the Datadog for Government site, add the `fips-proxy` sidecar co
 }
 ```
 
-You also need to update the environment variables of the Datadog Agent's container to enable sending traffic through the FIPS proxy:
+また、Datadog Agent のコンテナの環境変数を更新して、FIPS プロキシを介したトラフィックの送信を可能にする必要があります。
 
 ```json
 {
@@ -399,11 +399,11 @@ You also need to update the environment variables of the Datadog Agent's contain
 [1]: https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations
 {{% /site-region %}}
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][11].
+ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

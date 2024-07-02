@@ -3,7 +3,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Ingest AWS Security Hub events as log."
 "doc_link": ""
@@ -30,7 +30,7 @@ This integration enables you to see all your AWS Security Hub logs in Datadog.
 
 **Note**: You can also send your Datadog security signals to Security Hub for orchestration of additional events in your AWS environment. Follow the instructions on the [securityhub-eventbridge-example][1] repository to set this up.
 
-## Setup
+## セットアップ
 
 Datadog uses Amazon EventBridge to forward Security Hub events as logs to Datadog.
 
@@ -46,7 +46,7 @@ Datadog uses Amazon EventBridge to forward Security Hub events as logs to Datado
 10. Select the [Datadog forwarder][3] to send logs to Datadog.
 11. Click **Create**.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

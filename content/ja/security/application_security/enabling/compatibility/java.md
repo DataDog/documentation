@@ -17,7 +17,7 @@ The following application security capabilities are supported in the Java librar
 | Threat Protection| 1.9.0 |
 | Customize response to blocked requests | 1.11.0 |
 | Software Composition Analysis (SCA) | 1.1.4 |
-| Code Security  | 1.15.0|
+| コードセキュリティ  | 1.15.0|
 | Automatic user activity event tracking | 1.20.0 |
 
 The minimum tracer version to get all supported application security capabilities for Java is 1.31.0.

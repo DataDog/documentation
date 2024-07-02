@@ -4,40 +4,40 @@ aliases:
  - /agent/guide/changing_container_registry
 ---
 
-Datadog publishes container images in Google's gcr.io, AWS' ECR, and on Docker Hub:
+Datadog は、Google の gcr.io、AWS の ECR、および Docker Hub でコンテナイメージを公開しています。
 
 {{% container-images-table %}}
 
-Pulling from the GCR or ECR registry works the same (except for Notary) as pulling from Docker Hub. You can use the same command (with different parameters) and get the same image.
+GCR または ECR レジストリからのプルは、Docker Hub からのプルと同じように動作します (Notary を除く)。同じコマンド (パラメータは異なる) を使用して、同じイメージを取得することができます。
 
-**Note**: ECR and GCR do not support Notary. If you are verifying the signature of images pulled from Docker, this feature does not work on GCR or ECR.
+**注**: ECR と GCR は Notary をサポートしていません。Docker から取り込んだイメージの署名を検証する場合、この機能は GCR と ECR では動作しません。
 
-To update your registry, you need to update your registry values based on the type of container environment you are deploying on.
+レジストリを更新するには、デプロイ先のコンテナ環境の種類に応じて、レジストリ値を更新する必要があります。
 
-**Note**: You can also use a private registry, but you will need to create a pull secret to be able the pull the images from the private registry.
-For more information about creating a pull secret, see the [Kubernetes documentation][1].
+**注**: プライベートレジストリを使用することもできますが、プライベートレジストリからイメージを取得するには、プルシークレットの作成が必要になります。
+プルシークレットの作成について、詳しくは [Kubernetes のドキュメント][1]を参照してください。
 
 ## Docker
 
-### Updating your registry
+### レジストリを更新する
 
-To update your containers registry, run the pull command for the new registry. To see the Docker pull commands for different container registries, see the examples in the [Overview of the Docker docs page][2].
+コンテナレジストリを更新するには、新しいレジストリ用の pull コマンドを実行します。異なるコンテナレジストリに対する Docker pull コマンドを確認するには、[Docker ドキュメントの概要ページ][2]の例を参照してください。
 
-## Kubernetes with Helm chart
+## Kubernetes と Helm チャート
 
-To update your containers registry while deploying the Datadog Agent (or Datadog Cluster Agent) with the Datadog helm chart on Kubernetes (including GKE, EKS, AKS, and OpenShift) update the `values.yaml` to specify a different registry:
+Kubernetes (GKE、EKS、AKS、OpenShift を含む) 上の Datadog helm チャートで Datadog Agent (または Datadog Cluster Agent) をデプロイする際にコンテナのレジストリを更新するには、 `values.yaml` を更新して異なるレジストリを指定してください。
 
-### Datadog Helm chart >= v2.7.0
+### Datadog Helm チャート >= v2.7.0
 
-1. Update your `values.yaml`:
+1. `values.yaml` を更新します:
     ```yaml
     registry: gcr.io/datadoghq
     ```
-2. Remove any overrides for `agents.image.repository`, `clusterAgent.image.repository`, or `clusterChecksRunner.image.repository` in the `values.yaml`.
+2. `values.yaml` にある `agents.image.repository`、`clusterAgent.image.repository`、`clusterChecksRunner.image.repository` のオーバーライドをすべて削除します。
 
-### Datadog Helm chart < v2.7.0
+### Datadog Helm チャート < v2.7.0
 
-Change the repository to `gcr.io`:
+リポジトリを `gcr.io` に変更します:
 
 ```yaml
 agents:
@@ -53,9 +53,9 @@ clusterChecksRunner:
     repository: gcr.io/datadoghq/agent
 ```
 
-For more information about using the Datadog Helm chart, see the [Datadog Kubernetes documentation][3] and the example [`values.yaml`][4] file.
+Datadog Helm チャートの使い方については、[Datadog Kubernetes のドキュメント][3]とサンプル [`values.yaml`][4] ファイルを参照してください。
 
-If using a private registry, you will need to add a pull secret to the `[key].image.pullSecrets` field to each image.
+プライベートレジストリを使用する場合は、各イメージの `[key].image.pullSecrets` フィールドにプルシークレットを追加する必要があります。
 ```yaml
 agents:
   image:
@@ -73,11 +73,11 @@ clusterChecksRunner:
     - name: PrivateRegistrySecret
 ```
 
-## Kubernetes with the Datadog Operator
+## Kubernetes と Datadog Operator
 
-To update your registry while deploying the Datadog Agent (or Datadog Cluster Agent) with the Datadog Operator:
+Datadog Operator で Datadog Agent (または Datadog Cluster Agent) をデプロイする際に、レジストリを更新するには:
 
-1. Update the Datadog Agent manifest file to override the default registry (`gcr.io/datadoghq`). For example, with `public.ecr.aws/datadog`:
+1. Datadog Agent のマニフェストファイルを更新し、デフォルトのレジストリ (`gcr.io/datadoghq`) をオーバーライドします。例えば、`public.ecr.aws/datadog` の場合:
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -89,8 +89,8 @@ spec:
   // ..
 ```
 
-2. Remove any overrides for the `spec.override.nodeAgent.image.name`, `spec.override.clusterAgent.image.name`, and `spec.override.clusterChecksRunner.image.name` fields.
-3. If using a private registry, you will need to add a pull secret to the `[key].image.pullSecrets` field to each image.
+2. `spec.override.nodeAgent.image.name`、`spec.override.clusterAgent.image.name` および `spec.override.clusterChecksRunner.image.name` フィールドに対するすべてのオーバーライドを削除します。
+3. プライベートレジストリを使用する場合は、各イメージの `[key].image.pullSecrets` フィールドにプルシークレットを追加する必要があります。
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -113,14 +113,14 @@ spec:
   // ..
 ```
 
-For more information about the Datadog Operator, see [Deploying an Agent with the Operator][5].
+Datadog Operator の詳細については、[Operator を使用して Agent をデプロイする][5]を参照してください。
 
 
-### Using the public.ecr.aws/datadog registry with Helm
+### Helm で public.ecr.aws/datadog のレジストリを使用する
 
-You could also switch from the default `gcr.io/datadoghq` registry to the `public.ecr.aws/datadog` registry when installing the Operator with the Helm chart. To switch to the `public.ecr.aws/datadog` registry:
+また、Helm チャートで Operator をインストールする際に、デフォルトの `gcr.io/datadoghq` レジストリから `public.ecr.aws/datadog` レジストリに変更することもできます。レジストリを `public.ecr.aws/datadog` に切り替えるには、次のようにします。
 
-Update [`values.yaml`][6] with the new image:
+新しいイメージで [`values.yaml`][6] を更新します:
 
 ```yaml
 image:
@@ -129,37 +129,37 @@ image:
 
 ## ECS
 
-To update your registry while deploying on ECS, in the `datadog-agent-ecs.json` file, change the value of the `"image"` key under `containerDefinitions` to `"public.ecr.aws/datadog/agent:latest"`:
+ECS にデプロイする際にレジストリを更新するには、`datadog-agent-ecs.json` ファイルで、`containerDefinitions` の `"image"` キーの値を `"public.ecr.aws/datadog/agent:latest"` に変更します:
 
 ```json
 "image": "public.ecr.aws/datadog/agent:latest",
 ```
 
-For more information about deploying Datadog on ECS, see the [Datadog ECS documentation][7] and the example [`datadog-agent-ecs.json`][7] file.
+ECS 上での Datadog のデプロイについては、[Datadog ECS のドキュメント][7]とサンプル [`datadog-agent-ecs` ファイル][7]を参照してください。
 
 ## Fargate
 
-To update your registry while deploying on Fargate, update the image in the Fargate task definition to use `public.ecr.aws`:
+Fargate でデプロイする際にレジストリを更新するには、Fargate のタスク定義でイメージを更新して `public.ecr.aws` を使用するようにします:
 
 ```json
 "image": "public.ecr.aws/datadog/agent:latest"
 ```
 
-The next time the task starts, it pulls from `public.ecr.aws` instead of Docker Hub. For more information about deploying on Fargate, see [Deploying the Agent on ECS][8] and [Deploying the Agent on EKS][9].
+次にタスクを起動するときは、Docker Hub ではなく `public.ecr.aws` からプルします。Fargate でのデプロイについては、[ECS での Agent のデプロイ][8]、[EKS での Agent のデプロイ][9]を参照してください。
 
 ## Cluster Agent
 
-If you're using the Helm chart to deploy the Datadog Agent and the Datadog Cluster Agent, follow the instructions in [Kubernetes with Helm chart](#kubernetes-with-helm-chart), and no other updates are needed. The change to the Helm `values.yaml` outlined above changes the repository that both the Cluster Agent and the Datadog Agent are pulled from.
+Datadog Agent と Datadog Cluster Agent のデプロイに Helm チャートを使用している場合は、[Kubernetes と Helm チャート](#kubernetes-with-helm-chart)の説明に従い、他の更新は必要ありません。上記の Helm `values.yaml` の変更により、Cluster Agent と Datadog Agent の両方が引き出されるリポジトリが変更されます。
 
-If you're using the Datadog Operator to deploy the Datadog Cluster Agent, follow the instructions in [Kubernetes with the Datadog Operator](#kubernetes-with-the-datadog-operator), and no other updates are needed. The instructions for updating the Operator configuration updates the repository that both the Cluster Agent and the Datadog Agent are pulled from.
+Datadog Operator を使用して Datadog Cluster Agent をデプロイしている場合は、[Kubernetes と Datadog Operator](#kubernetes-with-the-datadog-operator)の説明に従い、他の更新は必要ありません。Operator の設定を更新する手順は、Cluster Agent と Datadog Agent の両方が引き出されるリポジトリを更新します。
 
-For more information about the Datadog Cluster Agent, see the [Cluster Agent docs][10], and the [setup docs][11].
+Datadog Cluster Agent の詳細については、[Cluster Agent のドキュメント][10]および[セットアップのドキュメント][11]を参照してください。
 
-## Kubernetes Helm for the Datadog Private Location worker
+## Datadog Private Location ワーカーに対する Kubernetes Helm
 
-To update your registry for the Private Location worker, update the `datadog/synthetics-private-location-worker` image to the `public.ecr.aws/datadog/synthetics-private-location-worker` or `gcr.io/datadoghq/synthetics-private-location-worker` images.
+Private Location ワーカーのレジストリを更新するには、`datadog/synthetics-private-location-worker` イメージを `public.ecr.aws/datadog/synthetics-private-location-worker` または `gcr.io/datadoghq/synthetics-private-location-worker` イメージへ更新します。
 
-To change the default repository (`gcr.io/datadoghq`), update the `values.yaml` with the new image:
+デフォルトのリポジトリ (`gcr.io/datadoghq`) を変更するには、新しいイメージで `values.yaml` を更新します。
 
 ```yaml
 image:

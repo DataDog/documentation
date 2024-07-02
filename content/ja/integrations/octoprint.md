@@ -27,7 +27,7 @@
 - developer tools
 - log collection
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/octoprint/README.md"
 "display_on_public_website": true
@@ -65,11 +65,11 @@
 
 This check monitors [OctoPrint][1] through the Datadog Agent.
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### Installation
+### インストール
 
 To install the OctoPrint check on your host by running:
 
@@ -91,7 +91,7 @@ sudo -u dd-agent -- datadog-agent integration install datadog-octoprint==<VERSIO
  run `datadog-agent integration install -w
  path/to/octoprint/dist/datadog_octoprint*.whl`.
 
-### Configuration
+### 構成
 
 1. From the OctoPrint web interface, create an API key for use with Datadog. This can be found within Settings --> Application Keys.
 
@@ -129,21 +129,21 @@ OctoPrint uses its own log format (not an object format). To make use of the log
 
 For more information, see the [Datadog Log Processing documentation][9].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "octoprint" >}}
 
 
-### Events
+### イベント
 
 OctoPrint does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "octoprint" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][12].
 

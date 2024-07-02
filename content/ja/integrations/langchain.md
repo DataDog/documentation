@@ -29,7 +29,7 @@
 - ai/ml
 - developer tools
 - cost management
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/langchain/README.md"
 "display_on_public_website": true
@@ -156,7 +156,7 @@ WARNING:ddtrace.vendor.dogstatsd:Error submitting packet: [Errno 61] Connection 
 DEBUG:ddtrace.contrib._trace_utils_llm.py:sent 2 logs to 'http-intake.logs.datadoghq.com'
 ```
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "langchain" >}}

@@ -32,7 +32,7 @@
 - "caching"
 - "log collection"
 - "tracing"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/mcache/README.md"
 "display_on_public_website": true
@@ -45,20 +45,20 @@
 "manifest_version": "2.0.0"
 "name": "mcache"
 "public_title": "Memcache"
-"short_description": "Track memory use, hits, misses, evictions, fill percent, and more."
+"short_description": "メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。"
 "supported_os":
 - "linux"
 - "macos"
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Caching"
-  - "Category::Log Collection"
+  - "Category::キャッシュ"
+  - "Category::ログの収集"
   - "Category::Tracing"
   - "Supported OS::Linux"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Track memory use, hits, misses, evictions, fill percent, and more."
+  "description": "メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -68,32 +68,32 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-The Agent's Memcache check lets you track Memcache's memory use, hits, misses, evictions, fill percent, and much more.
+Agent の Memcache チェックを使用して、Memcache のメモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Memcache check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your Memcache servers.
+Memcache チェックは [Datadog Agent][1] パッケージに含まれています。Memcache サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Containerized](#containerized) section
+ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
 
-When launching the Memcache server, set the binding protocol `-B` to `binary` or `auto`. Automatic (auto) is the default.
+Memcache サーバーを起動する際に、バインディングプロトコル `-B` を `binary` または `auto` に設定します。自動 (auto) がデフォルトです。
 
-#### Metric collection
+#### メトリクスの収集
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `mcache.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample mcache.d/conf.yaml][2] for all available configuration options:
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `mcache.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mcache.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -105,14 +105,14 @@ To configure this check for an Agent running on a host:
      - url: localhost
    ```
 
-2. [Restart the Agent][3] to begin sending Memcache metrics to Datadog.
+2. [Agent を再起動][3]すると、Datadog への Memcache メトリクスの送信が開始されます。
 
-##### Trace collection
+##### トレースの収集
 
-Datadog APM integrates with Memcache to see the traces across your distributed system. Trace collection is enabled by default in the Datadog Agent v6+. To start collecting traces:
+Datadog APM は、Memcache と統合して分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
-1. [Enable trace collection in Datadog][4].
-2. [Instrument your application that makes requests to Memcache][5].
+1. [Datadog でトレースの収集を有効にします][4]。
+2. [Memcache へのリクエストを作成するアプリケーションをインスツルメントします][5]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/conf.yaml.example
@@ -120,39 +120,39 @@ Datadog APM integrates with Memcache to see the traces across your distributed s
 [4]: https://docs.datadoghq.com/tracing/send_traces/
 [5]: https://docs.datadoghq.com/tracing/setup/
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-| Parameter            | Value                                 |
+| パラメーター            | 値                                 |
 | -------------------- | ------------------------------------- |
 | `<INTEGRATION_NAME>` | `mcache`                              |
-| `<INIT_CONFIG>`      | blank or `{}`                         |
+| `<INIT_CONFIG>`      | 空白または `{}`                         |
 | `<INSTANCE_CONFIG>`  | `{"url": "%%host%%","port": "11211"}` |
 
-##### Trace collection
+##### トレースの収集
 
-APM for containerized apps is supported on hosts running Agent v6+ but requires extra configuration to begin collecting traces.
+コンテナ化されたアプリケーションの APM は、Agent v6 以降を実行するホストでサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
 
-Required environment variables on the Agent container:
+Agent コンテナで必要な環境変数
 
-| Parameter            | Value                                                                      |
+| パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-See [Tracing Kubernetes Applications][2] and the [Kubernetes Daemon Setup][3] for a complete list of available environment variables and configuration.
+利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][2]および [Kubernetes Daemon のセットアップ][3]を参照してください。
 
-Then, [instrument your application container][4] and set `DD_AGENT_HOST` to the name of your Agent container.
+次に、[アプリケーションコンテナをインスツルメント][4]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
 
-#### Log collection
+#### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Add this configuration block to your `mcache.d/conf.yaml` file to start collecting your Memcached Logs:
+1. このコンフィギュレーションブロックを `mcache.d/conf.yaml` ファイルに追加すると、Memcached ログの収集を開始します。
 
    ```yaml
    logs:
@@ -162,9 +162,9 @@ _Available for Agent versions >6.0_
        service: mcache
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。
 
-2. [Restart the Agent][5] to validate these changes.
+2. [Agent を再起動][5]して、変更を検証します。
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/agent/kubernetes/apm/?tab=java
@@ -174,35 +174,35 @@ _Available for Agent versions >6.0_
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-Run the [Agent's `status` subcommand][2] and look for `mcache` under the Checks section.
+[Agent の `status` サブコマンド][2]を実行し、Checks セクションで `mcache` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "mcache" >}}
 
 
-The check only collects `memcache.slabs.*` metrics if you set `options.slabs: true` in `mcache.d/conf.yaml`. Likewise, it only collects `memcache.items.*` metrics if you set `options.items: true`.
+`mcache.d/conf.yaml` で `options.slabs: true` と設定している場合、チェックは `memcache.slabs.*` メトリクスのみを収集します。同様に、`options.items: true` と設定している場合、チェックは `memcache.items.*` メトリクスのみを収集します。
 
-### Events
+### イベント
 
-The Mcache check does not include any events.
+Mcache チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "mcache" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][3].
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-- [Speed up your web applications with Memcached monitoring][4]
-- [Instrument Memcached performance metrics with DogStatsD][5]
-- [Monitoring ElastiCache performance metrics with Redis or Memcached][6]
+- [Memcached 監視を使用した Web アプリケーションのスピードアップ][4]
+- [DogStatsD を使用した Memcached パフォーマンスメトリクスの実装][5]
+- [Redis または Memcached を使用した ElastiCache のパフォーマンスメトリクスの監視][6]
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest

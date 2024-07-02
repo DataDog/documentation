@@ -30,10 +30,10 @@ further_reading:
     tag: Blog
     text: Monitor containerized ASP.NET Core applications on AWS Fargate
   - link: "https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples"
-    tag: Source Code
+    tag: ソースコード
     text: Examples of custom instrumentation
   - link: "https://github.com/DataDog/dd-trace-dotnet"
-    tag: Source Code
+    tag: ソースコード
     text: Source code
 ---
 

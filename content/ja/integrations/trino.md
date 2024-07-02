@@ -22,7 +22,7 @@
   "sales_email": help@datadoghq.com
   "support_email": help@datadoghq.com
 "categories": []
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/trino/README.md"
 "display_on_public_website": true
@@ -64,9 +64,9 @@ This check collects [Trino][1] metrics, such as the following examples:
 - Overall activity metrics: completed/failed queries, data input/output size, execution time.
 - Performance metrics: cluster memory, input CPU, execution CPU time.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 For Agent v7.33.0+, follow the instructions below to install the Trino check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -78,7 +78,7 @@ For Agent v7.33.0+, follow the instructions below to install the Trino check on 
 
 2. Configure your integration similar to core [integrations][3].
 
-### Configuration
+### 構成
 
 1. Edit the `trino.d/conf.yaml` file, in the `conf.d/` folder at the root of your
    Agent's configuration directory, to start collecting your Trino performance data.
@@ -95,21 +95,21 @@ For Agent v7.33.0+, follow the instructions below to install the Trino check on 
 
 [Run the Agent's `status` subcommand][5] and look for Trino under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "trino" >}}
 
 
-### Events
+### イベント
 
 The Trino integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Trino integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

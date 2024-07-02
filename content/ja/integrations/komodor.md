@@ -11,7 +11,7 @@
 - containers
 - kubernetes
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/komodor/README.md"
 "display_on_public_website": true
@@ -77,7 +77,7 @@ Komodor tracks changes across your entire K8s stack, analyzes their ripple effec
 
 With this integration, you can link to Datadog metrics with dynamic deployment links that take you directly to the dashboards you need. This allows you to troubleshoot your microservices based on the most relevant context, connections, and service dependencies detected in Datadog.
 
-## Setup
+## セットアップ
 
 1. Log onto the [Komodor platform][1].
 2. Install the Komodor pod-based agent on each Kubernetes cluster by using a Helm chart or Kustomize. For more information, see the [Komodor docs][2] for installing the agent.

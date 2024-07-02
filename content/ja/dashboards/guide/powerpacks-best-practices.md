@@ -1,15 +1,18 @@
 ---
+title: Scale Graphing Expertise with Powerpacks
 further_reading:
-- link: https://docs.datadoghq.com/getting_started/dashboards/#add-widgets-and-refine-what-they-show
-  tag: ドキュメント
-  text: ウィジェットを追加し表示内容を調整
-- link: https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/
-  tag: ブログ
-  text: パワーパックでダッシュボードウィジェットを再利用可能なグループに保存する
-- link: https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/
-  tag: ガイド
-  text: 適切なダッシュボードを維持するためのベストプラクティス
-title: パワーパックでグラフの専門知識を拡大する
+- link: /dashboards/widgets/powerpack
+  tag: Documentation
+  text: Powerpack Widget
+- link: "https://docs.datadoghq.com/getting_started/dashboards/#add-widgets-and-refine-what-they-show"
+  tag: Documentation
+  text: Add widgets and refine what they show
+- link: "https://www.datadoghq.com/blog/standardize-dashboards-powerpacks-datadog/"
+  tag: Blog
+  text: Save dashboard widgets in reusable groups with Powerpacks
+- link: "https://docs.datadoghq.com/dashboards/guide/maintain-relevant-dashboards/"
+  tag: Guide
+  text: Best practices for maintaining relevant dashboards
 ---
 
 ## 概要
@@ -21,7 +24,7 @@ title: パワーパックでグラフの専門知識を拡大する
 パワーパックは、プリセット (Datadog によって作成) またはカスタム (ユーザーによって作成) のいずれかです。
 
 - プリセットパワーパックは、パフォーマンスメトリクスや機能使用量のような一般的なモニタリングパターンに対して、すぐに利用できるビューを提供します。これらは多くの場合、特定の製品やインテグレーション (`RUM Page Views` など) にリンクされ、Datadog によって管理されています。
-- カスタムパワーパックは、ダッシュボードの書き込み権限があれば誰でも作成でき、ユーザーが社内のベストプラクティスを共有・標準化できるようにします。
+- ダッシュボードの書き込み権限を持つ人なら誰でもカスタムパワーパックを作成でき、ユーザーが社内のベストプラクティスを共有・標準化することをサポートできます。カスタムパワーパックへの更新は、そのパワーパックインスタンスすべてに同期されるため、複数のダッシュボードで個別に更新を行う必要はありません。
 
 このガイドでは、カスタムパワーパックの作成と共有のためのベストプラクティスを説明します。
 
@@ -89,6 +92,13 @@ title: パワーパックでグラフの専門知識を拡大する
 各パワーパックユーザーは、ダイナミックフィルタリングを可能にするために、自分のダッシュボードに変数を保存するかどうかを決定します。以下の例では、ユーザーはテンプレート変数を通してダッシュボード上の `$Environment` の値を変更することができますが、`$Service` は常に `agent` に設定されています。
 
 {{< img src="dashboards/guide/powerpacks_best_practices/configure_variables.png" alt="タグまたは属性変数の値を構成するオプションを示す画面。Tag or Attribute、Name、Value、Use as Template Variable の列があり、ダッシュボードに追加するオプションを提供するチェックボックスが表示されます。Add to dashboard チェックボックスは、$Environment ではチェックされ、$Service ではチェックされませ ん。" style="width:100%;" >}}
+
+### パワーパックの更新
+
+既存のカスタムパワーパックに加えられた変更は、同じパワーパックのすべてのインスタンスに反映されます。これにより、複数のダッシュボードで重複する内容を更新するプロセスを簡素化できます。同期されたパワーパックインスタンスを編集するには、**Edit Powerpack Layout** をクリックします。
+
+### 権限
+デフォルトでは、パワーパックの編集権限は作成者に制限されています。編集権限はウィジェットトレイのケバブメニューやパワーパックインスタンスのヘッダーからいつでも変更できます。
 
 ### 情報を発信する
 

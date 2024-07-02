@@ -37,7 +37,7 @@
 - "cloud"
 - "log collection"
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/envoy/README.md"
 "display_on_public_website": true
@@ -50,7 +50,7 @@
 "manifest_version": "2.0.0"
 "name": "envoy"
 "public_title": "Envoy"
-"short_description": "Envoy is an open source edge and service proxy"
+"short_description": "Envoy はオープンソースのエッジ/サービスプロキシを提供"
 "supported_os":
 - "linux"
 - "windows"
@@ -58,16 +58,16 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Cloud"
-  - "Category::Log Collection"
+  - "Category::クラウド"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
-  - "Category::Network"
+  - "Category::ネットワーク"
   - "Submitted Data Type::Metrics"
   - "Submitted Data Type::Logs"
   "configuration": "README.md#Setup"
-  "description": "Envoy is an open source edge and service proxy"
+  "description": "Envoy はオープンソースのエッジ/サービスプロキシを提供"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -77,32 +77,32 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check collects distributed system observability metrics from [Envoy][1].
+このチェックは、[Envoy][1] から分散型システムの可観測性メトリクスを収集します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Envoy check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your server.
+Envoy チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 #### Istio
 
-If you are using Envoy as part of [Istio][3], configure the Envoy integration to collect metrics from the Istio proxy metrics endpoint.
+[Istio][3] の一部として Envoy を使用している場合は、Envoy インテグレーションを構成して Istio プロキシメトリクスエンドポイントからのメトリクスを収集します。
 
 ```yaml
 instances:
   - openmetrics_endpoint: localhost:15090/stats/prometheus
 ```
 
-#### Standard
+#### 標準的な方法
 
-There are 2 ways to setup the `/stats` endpoint:
+`/stats` エンドポイントをセットアップする方法は 2 つあります。
 
-##### Unsecured stats endpoint
+##### セキュリティ保護なしの統計エンドポイント
 
-Here's an example Envoy admin configuration:
+以下に、Envoy の管理構成例を示します。
 
 ```yaml
 admin:
@@ -113,11 +113,11 @@ admin:
       port_value: 8001
 ```
 
-##### Secured stats endpoint
+##### セキュリティ保護ありの統計エンドポイント
 
-Create a listener/vhost that routes to the [admin endpoint][4] (Envoy connecting to itself), but only has a route for `/stats`; all other routes get a static/error response. Additionally, this allows nice integration with L3 filters for auth, for example.
+[管理エンドポイント][4]にルーティングし (Envoy が自身に接続)、`/stats` へのルートのみを持つリスナー /vhost を作成します。他のすべてのルートは静的/エラー応答を受け取ります。これにより、たとえば、認証用の L3 フィルターとの適切なインテグレーションも可能になります。
 
-Here's an example config from [envoy_secured_stats_config.json][5]:
+[envoy_secured_stats_config.json][5] のコンフィグ例:
 
 ```yaml
 admin:
@@ -165,18 +165,18 @@ static_resources:
             port_value: 8001
 ```
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `envoy.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your Envoy performance data. See the [sample envoy.d/conf.yaml][2] for all available configuration options.
+1. Envoy のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `envoy.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル envoy.d/conf.yaml][2] を参照してください。
 
     ```yaml
     init_config:
@@ -189,20 +189,20 @@ To configure this check for an Agent running on a host:
 
     ```
 
-2. Check if the Datadog Agent can access Envoy's [admin endpoint][3].
-3. [Restart the Agent][4].
+2. Datadog Agent が Envoy の[管理エンドポイント][3]にアクセスできるかを確認します。
+3. [Agent を再起動します][4]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Next, edit `envoy.d/conf.yaml` by uncommenting the `logs` lines at the bottom. Update the logs `path` with the correct path to your Envoy log files.
+2. 次に、下部にある `logs` 行のコメントを解除して、`envoy.d/conf.yaml` を編集します。ログの `path` を Envoy ログファイルの正しいパスで更新してください。
 
    ```yaml
    logs:
@@ -212,37 +212,37 @@ _Available for Agent versions >6.0_
        service: envoy
    ```
 
-3. [Restart the Agent][4].
+3. [Agent を再起動します][4]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/envoy/datadog_checks/envoy/data/conf.yaml.example
 [3]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
 [4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                       |
+| パラメーター            | 値                                       |
 | -------------------- | ------------------------------------------- |
 | `<INTEGRATION_NAME>` | `envoy`                                     |
-| `<INIT_CONFIG>`      | blank or `{}`                               |
+| `<INIT_CONFIG>`      | 空白または `{}`                               |
 | `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint": "http://%%host%%:80/stats/prometheus"}` |
- **Note**: The current version of the check (1.26.0+) uses [OpenMetrics][2] for metric collection, which requires Python 3. For hosts that are unable to use Python 3, or if you would like to use a legacy version of this check, refer to the following [config][3].
+ **注**: 現行バージョンのチェック (1.26.0+) は、メトリクスの収集に [OpenMetrics][2] を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][3]を参照してください。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][4].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][4]を参照してください。
 
-| Parameter      | Value                                              |
+| パラメーター      | 値                                              |
 | -------------- | -------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "envoy", "service": "<SERVICE_NAME>"}` |
+| `<LOG_CONFIG>` | `{"source": "envoy", "service": "<サービス名>"}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/integrations/openmetrics/
@@ -251,36 +251,36 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][6] and look for `envoy` under the Checks section.
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `envoy` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "envoy" >}}
 
 
-See [metrics.py][7] for a list of tags sent by each metric.
+各メトリクスによって送信されるタグのリストについては、[metrics.py][7] を参照してください。
 
-### Events
+### イベント
 
-The Envoy check does not include any events.
+Envoy チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "envoy" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-### Common problems
+### 一般的な問題
 
-#### Endpoint `/server_info` unreachable
-- Disable the `collect_server_info` option in your Envoy configuration, if the endpoint is not available in your Envoy environment, to minimize error logs.
+#### エンドポイント `/server_info` に到達できません
+- お使いの Envoy 環境でエンドポイントが利用不可能である場合、Envoy のコンフィギュレーションで `collect_server_info` オプションを無効化してエラーログを最小限に抑えます。
 
-**Note**: Envoy version data is not collected.
+**注**: Envoy のバージョンデータは収集されません。
 
-Need help? Contact [Datadog support][8].
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
 [1]: https://www.envoyproxy.io

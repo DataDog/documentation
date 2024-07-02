@@ -2,36 +2,36 @@
 title: Custom Organization Landing Page
 ---
 
-## Overview
+## 概要
 
 The Datadog organization landing page is the first page your users see when they log on to Datadog or navigate to the Datadog root page. Datadog sets a default landing page for your organization. If you use APM, Datadog sets the APM root as the landing page. If you don't use APM, then the list of dashboards is the default landing page.
 
-As an alternative to the default page, Datadog allows administrators to set a dashboard as the landing page for the organization. A custom landing page helps a large or small organization control the narrative for their users.
+デフォルトのページに代わるものとして、Datadog では管理者がダッシュボードを組織のランディングページとして設定することができます。カスタムランディングページは、大規模または小規模の組織がユーザーの説明を制御するのに役立ちます。
 
-You can customize a dashboard with the information you want your users to see when they first log on to Datadog. Use [Organization settings][1] to set that dashboard as the custom landing page for your organization.
+ユーザーが Datadog に初めてログオンしたときに表示させたい情報でダッシュボードをカスタマイズすることができます。[組織の設定][1]を使用して、そのダッシュボードを組織のカスタムランディングページとして設定します。
 
-## Set a custom landing page
+## カスタムランディングページを設定する
 
-Only users with the Datadog Admin Role or the Org Management (`org_management`) permission can set the custom landing page for an organization.
+Datadog Admin Role または Org Management (`org_management`) 権限を持つユーザーのみが、組織のカスタムランディングページを設定することができます。
 
-To set a custom landing page, follow the steps below:
+カスタムランディングページを設定するには、以下の手順で行います。
 
-1. Navigate to [Organization settings][1].
+1. [組織の設定][1]に移動します。
 2. From the tabs on the left, select [**Preferences**][2].
 3. In the Datadog Homepage section, click **Individual Dashboard**.
-4. Use the dropdown list to select a dashboard.
-5. Click the **Save** button.
+4. ドロップダウンリストを使用して、ダッシュボードを選択します。
+5. **Save** ボタンをクリックします。
 
-## Use the default landing page
+## デフォルトのランディングページを使用する
 
-Only users with the Datadog Admin Role or the Org Management (`org_management`) permission can change the landing page for an organization.
+Datadog Admin Role または Org Management (`org_management`) 権限を持つユーザーのみが、組織のランディングページを変更することができます。
 
-To restore the default landing page of APM Home, follow the steps below:
+APM ホームのランディングページをデフォルトに戻すには、以下の手順で行います。
 
-1. Navigate to [Organization settings][1].
+1. [組織の設定][1]に移動します。
 2. From the tabs on the left, select [**Preferences**][2].
 3. In the Datadog Homepage section, click **Default: Dashboard List**.
-4. Click the **Save** button.
+4. **Save** ボタンをクリックします。
 
 [1]: https://app.datadoghq.com/organization-settings/
 [2]: https://app.datadoghq.com/organization-settings/preferences

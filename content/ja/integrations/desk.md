@@ -2,9 +2,9 @@
 "categories":
 - "Collaboration"
 - "issue tracking"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "See and discuss new, open, pending, and resolved cases in your event stream."
+"description": "イベントストリームで、新規、オープン、保留中、解決済みのケースを確認および議論。"
 "doc_link": "https://docs.datadoghq.com/integrations/desk/"
 "draft": false
 "git_integration_title": "desk"
@@ -32,9 +32,9 @@ Connect Desk to Datadog to view your Salesforce support case data in an OOTB das
 
 For more information, see [Keep support on the same page with the Salesforce Desk integration][1].
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
 From your Desk account, add an API application on the Settings -> API -> My Applications page (you may need administrator privileges).
 
@@ -46,21 +46,21 @@ Then from your Datadog account, enter the corresponding information on the [Desk
 
 After installation, you can select `desk.*` metrics on a custom dashboard or view them on the provided [Desk dashboard][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "desk" >}}
 
 
-### Events
+### イベント
 
 The Desk integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Desk integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

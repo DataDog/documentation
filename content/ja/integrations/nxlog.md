@@ -1,7 +1,7 @@
 ---
 title: NXLog
 name: nxlog
-custom_kind: integration
+custom_kind: インテグレーション
 description: 'Configure NXLog to gather logs from your host, containers, & services.'
 short_description: 'Configure NXLog to gather logs from your host, containers, & services.'
 categories:

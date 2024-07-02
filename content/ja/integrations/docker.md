@@ -2,7 +2,7 @@
 "categories":
 - configuration & deployment
 - containers
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Monitor Docker metrics with Datadog"
 "doc_link": "https://docs.datadoghq.com/integrations/docker/"
@@ -37,12 +37,12 @@ Get metrics from Docker in real time to:
 - Visualize your containers' performance
 - Correlate the performance of containers with the applications running inside
 
-## Setup
+## セットアップ
 
 If you want to run the Agent inside a container, see the [Docker Agent documentation][1].
 
 
-## Data Collected
+## 収集データ
 
 For information about metrics, events, and service checks, see [Docker Data Collected][2].
 

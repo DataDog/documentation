@@ -9,23 +9,23 @@ further_reading:
   text: OpenTelemetry Support in Datadog
 ---
 
-## Overview
+## 概要
 
-The OpenTelemetry protocol (OTLP) sends [several metric types][1], some of which can have either *delta* or *cumulative* [aggregation temporality][2]. Datadog works best with delta aggregation temporality for monotonic sums, histograms, and exponential histograms. 
+OpenTelemetry プロトコル (OTLP) は、*デルタ*または*累積*[集計一時性][2]のいずれかを持つことができる[いくつかのメトリクスタイプ][1]を送信します。Datadog は、単調和、ヒストグラム、指数ヒストグラムのデルタ集計の一時性を最もよく機能させることができます。
 
-This guide describes the implications of using cumulative aggregation temporality instead, and how to select which aggregation temporality to export your metrics with, either in the OpenTelemetry SDK or by using the [OpenTelemetry Collector `cumulativetodelta` processor][3].
+このガイドでは、代わりに累積集計一時性を使用することの意味と、OpenTelemetry SDK または [OpenTelemetry Collector `cumulativetodelta`プロセッサ][3]を使用して、どの集計一時性でメトリクスをエクスポートするか選択する方法について説明します。
 
-## Implications of using cumulative aggregation temporality
+## 累積集計一時性を利用することの意味
 
-If you opt to send OTLP monotonic sums, histograms, or exponential histograms with cumulative aggregation temporality, Datadog takes the difference between consecutive points on a timeseries. This means that:
+OTLP の単調和、ヒストグラム、または累積集計一時性を持つ指数ヒストグラムの送信を選択した場合、Datadog は時系列上の連続するポイント間の差分を取ります。これは、次のことを意味します。
 
-- Your deployment is stateful, so you need to send all points on a timeseries to the same Datadog Agent or Datadog exporter. This affects how you scale your OpenTelemetry Collector deployments.
-- Datadog might not send the first point it receives from a given timeseries if it cannot ensure this point is the true start of the timeseries. This may lead to missing points upon restarts.
-- The minimum and maximum cannot be recovered for cumulative OTLP Histograms; they may be missing or approximated depending on the histograms export mode. 
+- デプロイはステートフルなので、時系列のすべてのポイントを同じ Datadog Agent または Datadog エクスポーターに送信する必要があります。これは、OpenTelemetry Collector のデプロイをスケールする方法に影響します。
+- Datadog は、ある時系列から受信した最初のポイントが、その時系列の真の開始点であることを確認できない場合、そのポイントを送信しないことがあります。このため、再起動時にポイントが欠落することがあります。
+- 累積 OTLP ヒストグラムの場合、最小値と最大値は復元できません。ヒストグラムのエクスポートモードによっては、欠落するか近似値になる可能性があります。
 
-## Configuring your OpenTelemetry SDK
+## OpenTelemetry SDK の構成
 
-If you produce OTLP metrics from an OpenTelemetry SDK, you can configure your OTLP exporter to produce these metric types with delta aggregation temporality. In some languages you can use the recommended configuration by setting the `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE` environment variable to `Delta` (case-insensitive). For a list of languages with support for this environment variable, read [the specification compliance matrix][4].
+OpenTelemetry SDK から OTLP メトリクスを生成する場合、これらのメトリクスタイプをデルタ集計一時性で生成するように OTLP エクスポーターを構成することができます。一部の言語では、`OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE` 環境変数を `Delta` に設定することで推奨構成を使用できます (大文字と小文字は区別されません)。この環境変数がサポートされている言語の一覧は、[仕様準拠マトリックス][4]を参照してください。
 
 If your SDK does not support this environment variable you can configure delta temporality in code. The following example configures an OTLP HTTP exporter and adds `1` to a counter every two seconds for a total of five minutes.
 
@@ -260,24 +260,24 @@ public class Program
 
 {{< /programming-lang-wrapper >}}
 
-You can configure OTLP gRPC exporters in a similar fashion.
+OTLP gRPC エクスポーターも同様に構成することができます。
 
-## Converting to delta temporality on the Collector
+## Collector でデルタ一時性に変換する
 
-When your metrics do not come from an OpenTelemetry language library, it may be infeasible to configure them to use delta aggregation temporality. This may be the case, for example, when producing metrics with other open source libraries such as Prometheus. In this situation, you can use the [cumulative to delta processor][3] to map your metrics to delta aggregation temporality. Your deployment is still stateful, so if your deployment has multiple Collectors, you need to use the processor on a first layer of stateful Collectors to ensure that all points of a metric are sent to the same Collector instance.
+メトリクスが OpenTelemetry 言語ライブラリから提供されていない場合、デルタ集計一時性を使用するように構成することが不可能な場合があります。例えば、Prometheus のような他のオープンソースライブラリでメトリクスを作成する場合などがそうです。このような場合、[累積-デルタプロセッサ][3]を使用して、メトリクスをデルタ集計一時性にマッピングすることができます。デプロイはまだステートフルなので、デプロイメントに複数の Collector がある場合は、メトリクスのすべてのポイントが同じ Collector インスタンスに送信されるように、ステートフル Collector の最初のレイヤーでプロセッサを使用する必要があります。
 
-To enable the cumulative-to-delta processor so that it applies to all your metrics, define it with an empty configuration on the `processors` section:
+累積-デルタプロセッサを有効にして、すべてのメトリクスに適用するには、`processors` セクションに空の構成で定義します。
 
 ```yaml
 processors:
     cumulativetodelta:
 ```
 
-Finally, add it to the `processors` list on your metrics pipelines.
+最後に、メトリクスパイプラインの `processors` リストに追加します。
 
-**Note**: The cumulative-to-delta processor does not support exponential histograms. Also, some fields, such as the minimum and maximum, can't be recovered with this approach. Instead, use the OpenTelemetry SDK approach whenever possible.
+**注**: 累積-デルタプロセッサは指数ヒストグラムをサポートしません。また、最小値や最大値など一部のフィールドは、このアプローチでは回復できません。代わりに、可能な限り OpenTelemetry SDK のアプローチを使用してください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

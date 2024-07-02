@@ -21,7 +21,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/disk/README.md"
 "display_name": "Disk"
@@ -29,7 +29,7 @@
 "draft": false
 "git_integration_title": "disk"
 "guid": "94588b23-111e-4ed2-a2af-fd6e4caeea04"
-"integration_id": "system"
+"integration_id": "システム"
 "integration_title": "Disk"
 "integration_version": "5.3.0"
 "is_public": true
@@ -69,13 +69,13 @@
 
 Collect metrics related to disk usage and IO.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The disk check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your server.
 
-### Configuration
+### 構成
 
 The Disk check is enabled by default, and the Agent collects metrics on all local partitions. To configure the check with custom options, edit the `disk.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][2]. See the [sample disk.d/conf.yaml][3] for all available configuration options.
 
@@ -101,21 +101,21 @@ There are three scenarios where the Disk check can be used:
 
 [Run the Agent's `status` subcommand][6] and look for `disk` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "disk" >}}
 
 
-### Events
+### イベント
 
 The Disk check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "disk" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

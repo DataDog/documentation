@@ -19,15 +19,15 @@ further_reading:
     text: Exclusion Functions
 ---
 
-## Overview
+## 概要
 
-When using the Metrics Explorer, monitors, or dashboards to query metrics data, you can filter the data to narrow the scope of the timeseries returned. Any metric can be filtered by tag(s) using the **from** field to the right of the metric. 
+メトリクスエクスプローラー、モニター、またはダッシュボードを使用してメトリクスデータをクエリする場合、データをフィルタリングして、返される時系列のスコープを絞り込むことができます。メトリクスの右側にある **from** フィールドを使用して、任意のメトリクスをタグでフィルタリングできます。
 
-You can also perform advanced filtering with Boolean or Wildcard tag value filters. For queries outside of metrics data such as logs, traces, Network Monitoring, Real User Monitoring, Synthetics, or Security, see the [Log Search Syntax][1] documentation for configuration.
+また、ブール値またはワイルドカードのタグ値フィルターを使用して、高度なフィルタリングを実行することもできます。ログ、トレース、ネットワーク・モニタリング、リアルユーザーモニタリング、Synthetics、セキュリティなど、メトリクスデータ以外のクエリについては、[ログ検索構文][1]ドキュメントを参照して、構成してください。
 
-## Boolean filtered queries 
+## ブールでフィルタリングされたクエリ
 
-The following syntax is supported for Boolean filtered metric queries: 
+次の構文は、ブールでフィルタリングされたメトリクスクエリでサポートされています。
 
 - `!`
 - `,`
@@ -37,44 +37,44 @@ The following syntax is supported for Boolean filtered metric queries:
 - `IN`, `in`
 - `NOT IN`, `not in`
 
-When including or excluding multiple tags:
-* Include uses `AND` logic
-* Exclude uses `OR` logic
+複数のタグを含めたり除外したりする場合:
+* 含めるには `AND` ロジックを使用します
+* 除外するには `OR` ロジックを使用します
 
-For more information on tags, see the [Getting Started With Using Tags][2] guide.
+タグの詳細については、[タグの使い方の概要][2]をご覧ください。
 
-**Note:** Symbolic boolean syntax (`!`, `,`) cannot be used with functional syntax operators (`NOT`, `AND`, `OR`, `IN`, `NOT IN`). The following query is considered _invalid_: 
+**注:** 記号のブール構文 (`!`、`,`) は、機能的な構文演算子 (`NOT`、`AND`、`OR`、`IN`、`NOT IN`) と一緒に使用できません。以下のクエリは _無効_ とみなされます。
 `avg:mymetric{env:prod AND !region:us-east}`
 
-### Boolean filtered query examples
+### ブールでフィルタリングされたクエリの例
 
-To use the examples below, click the code icon `</>` to see the query editor in the UI, and then copy and paste the query example into the query editor.
+以下の例を使用するには、コードアイコン `</>` をクリックして UI にクエリエディターを表示し、クエリ例をコピーしてクエリエディターに貼り付けてください。
 
 ```
 avg:system.cpu.user{env:staging AND (availability-zone:us-east-1a OR availability-zone:us-east-1c)} by {availability-zone}
 ```
 
-{{< img src="metrics/advanced-filtering/graph_editor_code_option.mp4" alt="Click code icon to see the raw query" video=true >}}
+{{< img src="metrics/advanced-filtering/graph_editor_code_option.mp4" alt="コードアイコンをクリックすると、生のクエリが表示されます" video=true >}}
 
 ```
 avg:system.cpu.user{env:shop.ist AND availability-zone IN (us-east-1a, us-east-1b, us-east4-b)} by {availability-zone}
 ```
 
-{{< img src="metrics/advanced-filtering/boolean_and_in.png" alt="Boolean example AND IN" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/boolean_and_in.png" alt="ブール値の例 AND IN" style="width:100%;" >}}
 ```
 avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 ```
 
-{{< img src="metrics/advanced-filtering/boolean_not_in.png" alt="Boolean example NOT IN" style="width:100%;" >}}
+{{< img src="metrics/advanced-filtering/boolean_not_in.png" alt="ブール値の例 NOT IN" style="width:100%;" >}}
 
-## Wildcard filtered queries 
+## ワイルドカードでフィルタリングされたクエリ
 
-Prefix, suffix, and substring wildcard tag filtering are supported: 
+プレフィックス、サフィックス、および部分文字列のワイルドカードによるタグフィルタリングがサポートされています。
 -  `pod_name: web-*` 
 -  `cluster:*-trace`
 -  `node:*-prod-*`
 
-### Wildcard filtered query examples
+### ワイルドカードでフィルタリングされたクエリの例
 
 ```
 avg:system.disk.in_use{!device:/dev/loop*} by {device}
@@ -94,16 +94,16 @@ avg:system.disk.utilized{region:*east*} by {region}
 
 {{< img src="metrics/advanced-filtering/wildcard_infix.png" alt="Wildcard used as infix" style="width:100%;" >}}
 
-## Exclusion functions
+## 除外関数
 
-Add an [exclusion function][3] to your query to: 
-- Exclude N/A values.
-- Apply a minimum or maximum value to metrics that meet the threshold.
-- Exclude values that are above or below threshold values.
+クエリに[除外関数][3]を追加することで、
+- N/A 値を除外します。
+- しきい値を満たしたメトリクスに、最小値または最大値を適用します。
+- しきい値以上または以下の値を除外します。
 
-Functions do not delete datapoints from Datadog, but they do remove datapoints from your visualizations.
+関数は Datadog からデータポイントを削除しませんが、可視化からデータポイントを削除します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

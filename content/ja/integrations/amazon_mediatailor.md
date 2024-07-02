@@ -3,7 +3,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key AWS Elemental MediaTailor metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_mediatailor/"
@@ -28,9 +28,9 @@ AWS Elemental MediaTailor is a personalization and monetization service that all
 
 Enable this integration to see all your Elemental MediaTailor metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -55,21 +55,21 @@ Configure AWS Elemental MediaTailor to send logs either to a S3 bucket or to Clo
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_mediatailor" >}}
 
 
-### Events
+### イベント
 
 The AWS Elemental MediaTailor integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS Elemental MediaTailor integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

@@ -9,35 +9,35 @@ further_reading:
   text: RBAC for Log Management
 ---
 
-If you are using Federated Authentication mechanisms, this API allows you to automatically map groups of users to roles in Datadog using attributes sent from your Identity Provider. To create and manage Authentication Mappings through the API, users need to use an application key owned by someone with the Access Management permission.
+フェデレーション認証メカニズムを使用する場合、この API を利用することにより、Datadog 内で ID プロバイダーから送信される属性を使用してユーザーグループをロールに自動的にマッピングできます。API を使用して認証マッピングを作成および管理するには、ユーザーはアクセス管理許可を持つ所有者のいるアプリケーションキーを使用する必要があります。
 
-**Note**: If you are a SAML user, and you have been using the existing beta Federated Mapping mechanism (`roles_v2_saml`), Datadog strongly recommends that you transition to using this API.
+**注**: SAML ユーザーであり、既存のベータ版フェデレーションマッピングメカニズム (`roles_v2_saml`) を使用している方には、この API に移行することを強くお勧めします。
 
-You can also create and manage mappings in the Datadog UI, on the **Mappings** tab in User Management. See [SAML group mapping][1] for more information.
+Datadog UI では、ユーザー管理の **Mappings** タブでマッピングを作成および管理することもできます。詳細については、[SAML グループマッピング][1]を参照してください。
 
-## Requests
+## リクエスト
 
-All the API endpoints below are using the following host endpoint:
+下記のすべての API エンドポイントで、次のホストエンドポイントを使用できます。
 
-* `https://api.{{< region-param key="dd_site" >}}/api/` for your Datadog region.
+* Datadog リージョンには `https://api.{{< region-param key="dd_site" >}}/api/` 。
 
-### Create a new authentication mapping
+### 新しい認証マッピングを作成
 
-Create a new AuthN Mapping from a JSON body. Returns the newly created AuthN Mapping.
+AuthN Mapping を JSON の本文から新しく作成します。新規作成された AuthN Mapping を返します。
 
-| Method | Endpoint path        | Required payload |
+| メソッド | エンドポイントのパス        | ペイロードの要件 |
 |--------|----------------------|------------------|
 | `POST` | `/v2/authn_mappings` | JSON             |
 
-##### ARGUMENTS
+##### 引数
 
-* **`role["data"]["id"]`** [*required*, no default]:
- The `ID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them.
- **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned an ID. For more information about finding the `ID` for the role you want to map to, see the [Role API documentation][2].
-* **`attributes["attribute_key"]`** [*required*, no default]:
- The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
-* **`attributes["attribute_value"]`** [*required*, no default]:
- The `attribute_value` is the value portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
+* **`role["data"]["id"]`** [*必須*, デフォルトなし]:
+ マッピング先のロールの `ID`。Roles API は、Datadog ロール、ロールに付与するグローバルアクセス許可、そのロールに属するユーザーを作成し、管理するために使用できます。
+ **注**: この属性はリクエストされた `role` 関係を有するブロックの一部として提示する必要があります。詳しくは以下の例を参照してください。作成するロールには ID が割り当てられます。マッピングするロールの `ID` を探す方法について詳しくは、[Role API ドキュメント][2]を参照してください。
+* **`attributes["attribute_key"]`** [*必須*, デフォルトなし]:
+ `attribute_key` は、ID プロバイダーから送信される属性を表すキー/値ペアのキーの部分です。各ユーザーのユースケースに合わせてこの 2 つを定義できます。たとえば、`attribute_key` は `member-of` に、`attribute_value` は `Development` に定義できます。
+* **`attributes["attribute_value"]`** [*必須*, デフォルトなし]:
+ `attribute_value` は、ID プロバイダーから送信される属性を表すキー/値ペアの値の部分です。それぞれのユースケースに合わせてこの 2 つを定義できます。たとえば、`attribute_key` は `member-of` に、`attribute_value` は `Development` に定義できます。
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -67,8 +67,8 @@ curl -X POST \
         }'
 ```
 
-- Replace `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` with the corresponding [API and application keys][1] for your organization.
-- Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -140,24 +140,24 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-### Get all AuthN mappings
+### すべての AuthN マッピングを取得
 
-Returns a list of AuthN Mappings
+AuthN Mapping のリストを返します
 
-| Method | Endpoint path        | Required payload          |
+| メソッド | エンドポイントのパス        | ペイロードの要件          |
 |--------|----------------------|---------------------------|
-| `GET`  | `/v2/authn_mappings` | Optional query parameters |
+| `GET`  | `/v2/authn_mappings` | オプションのクエリパラメーター |
 
-##### ARGUMENTS
+##### 引数
 
-* **`sort`** [*optional*, *default*=**created\_at**]:
-  Sort attribute and direction—defaults to ascending order, `-<attribute>` sorts in descending order. Can also sort on relationship attributes `role.name`, `saml_assertion_attribute.attribute_key`, `saml_assertion_attribute.attribute_value`.
-* **`page[number]`** [*optional*, *default*=**0**, *minimum*=**0**]:
-  The page of results to return.
-* **`page[size]`** [*optional*, *default*=**10**]:
-  The number of results to return on each page.
-* **`filter`** [*optional*, default=none]:
-  Filter by tags as strings. For example, `Billing Users`.
+* **`sort`** [*オプション*, *デフォルト*=**created\_at**]:
+  属性を指定した方向で並べ替えます。デフォルトでは昇順に、`-<attribute>` を指定すると降順に並べ替えます。また、関連属性 `role.name`、`saml_assertion_attribute.attribute_key`、`saml_assertion_attribute.attribute_value` でも並べ替えが可能です。
+* **`page[number]`** [*任意*, *デフォルト*=**0**, *最小値*=**0**]:
+  結果を返すページの数です。
+* **`page[サイズ]`** [*任意*、*デフォルト*=**10**]:
+  各ページに表示する結果の数です。
+* **`filter`** [*オプション*, デフォルト =none]:
+  タグの文字列 (`Billing Users` など) でフィルタリングします。
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -168,8 +168,8 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-- Replace `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` with the corresponding [API and application keys][1] for your organization.
-- Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -245,18 +245,18 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings" \
 {{% /tab %}}
 {{< /tabs >}}
 
-### Get a specific AuthN mapping
+### 指定した AuthN マッピングを削除
 
-Returns a specific AuthN Mapping by UUID.
+UUID で指定した AuthN Mapping を返します。
 
-| Method | Endpoint path            | Required payload |
+| メソッド | エンドポイントのパス            | ペイロードの要件 |
 |--------|--------------------------|------------------|
-| `GET`  | `/authn_mappings/{authn_mapping_id}` | URL parameter    |
+| `GET`  | `/authn_mappings/{authn_mapping_id}` | URL パラメーター    |
 
-##### ARGUMENTS
+##### 引数
 
-* **`{authn_mapping_id}`** [*required*, no default]:
-  Replace `{authn_mapping_id}` with the ID of the AuthN Mapping you want to view.
+* **`{authn_mapping_id}`** [*必須*, デフォルトなし]:
+  `{authn_mapping_id}` を、参照したい AuthN Mapping の ID に置き換えます。
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -267,8 +267,8 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{authn_mapping_id}
      -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-- Replace `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` with the corresponding [API and application keys][1] for your organization.
-- Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -341,25 +341,25 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{authn_mapping_id}
 {{% /tab %}}
 {{< /tabs >}}
 
-### Update mapping
+### マッピングを更新する
 
-Updates the AuthN Mapping `role`, `saml_assertion_attribute_id`, or both from a JSON body. Returns the updated AuthN Mapping.
+AuthN Mapping の `role`、`saml_assertion_attribute_id`、あるいはその両方を JSON の本文から更新します。更新された AuthN Mapping を返します。
 
-| Method  | Endpoint path                           | Required payload    |
+| メソッド  | エンドポイントのパス                           | ペイロードの要件    |
 |---------|-----------------------------------------|---------------------|
-| `PATCH` | `/v2/authn_mappings/{authn_mapping_id}` | URL parameter, JSON |
+| `PATCH` | `/v2/authn_mappings/{authn_mapping_id}` | URL パラメーター、JSON |
 
-##### ARGUMENTS
+##### 引数
 
-* **`{authn_mapping_id}`** [*required*, no default]:
-  Replace `{authn_mapping_id}` with the ID of the AuthN Mapping you want to update. This is required in both the path of the request and the body of the request.
-* **`role["data"]["id"]`** [*optional*, *default*=none]:
- The `ID` of the Role to map to. The Roles API can be used to create and manage Datadog roles, what global permissions they grant, and which users belong to them.
- **Note**: This attribute should be presented as part of a `role` relationship block in requests. See the example below for more details. When you create a Role, it is assigned an ID. For more information about finding the `ID` for the role you want to map to, see the [Role API documentation][2].
-* **`attributes["attribute_key"]`** [*optional*, *default*=none]:
- The `attribute_key` is the key portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
-* **`attributes["attribute_value"]`** [*optional*, *default*=none]:
- The `attribute_value` is the value portion of a key/value pair that represents an attribute sent from your Identity Provider. You can define these for your own use case. For example, `attribute_key` could be `member-of` and the `attribute_value` could be `Development`.
+* **`{authn_mapping_id}`** [*必須*, デフォルトなし]:
+  `{authn_mapping_id}` を、更新したい AuthN Mapping の ID に置き換えます。リクエストのパスと、リクエスト本文の両方でこの設定を行ってください。
+* **`role["data"]["id"]`** [*オプション*, *デフォルト*=none]:
+ マッピング先のロールの `ID`。Roles API は、Datadog ロール、ロールに付与するグローバルアクセス許可、そのロールに属するユーザーを作成し、管理するために使用できます。
+ **注**: この属性はリクエストされた `role` 関係を有するブロックの一部として提示する必要があります。詳しくは以下の例を参照してください。作成するロールには ID が割り当てられます。マッピングするロールの `ID` を探す方法について詳しくは、[Role API ドキュメント][2]を参照してください。
+* **`attributes["attribute_key"]`** [*オプション*, *デフォルト*=none]:
+ `attribute_key` は、ID プロバイダーから送信される属性を表すキー/値ペアのキーの部分です。各ユーザーのユースケースに合わせてこの 2 つを定義できます。たとえば、`attribute_key` は `member-of` に、`attribute_value` は `Development` に定義できます。
+* **`attributes["attribute_value"]`** [*オプション*, *デフォルト*=none]:
+ `attribute_value` は、ID プロバイダーから送信される属性を表すキー/値ペアの値の部分です。それぞれのユースケースに合わせてこの 2 つを定義できます。たとえば、`attribute_key` は `member-of` に、`attribute_value` は `Development` に定義できます。
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -390,8 +390,8 @@ curl -X PATCH \
         }'
 ```
 
-- Replace `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` with the corresponding [API and application keys][1] for your organization.
-- Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -461,18 +461,18 @@ curl -X PATCH \
 {{% /tab %}}
 {{< /tabs >}}
 
-### Delete mapping
+### マッピングを削除する
 
-Deletes a specific AuthN Mapping.
+指定した AuthN Mapping を削除します。
 
-| Method   | Endpoint path                           | Required payload |
+| メソッド   | エンドポイントのパス                           | ペイロードの要件 |
 |----------|-----------------------------------------|------------------|
-| `DELETE` | `/v2/authn_mappings/{authn_mapping_id}` | URL parameter    |
+| `DELETE` | `/v2/authn_mappings/{authn_mapping_id}` | URL パラメーター    |
 
-##### ARGUMENTS
+##### 引数
 
-* **`{authn_mapping_id}`** [*required*, no default]:
-  Replace `{authn_mapping_id}` with the ID of the AuthN Mapping you want to delete.
+* **`{authn_mapping_id}`** [*必須*, デフォルトなし]:
+  `{authn_mapping_id}` を、削除したい AuthN Mapping の ID に置き換えます。
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -484,8 +484,8 @@ curl -X DELETE "https://api.<YOUR_DD_SITE>/api/v2/authn_mappings/{UUID}" \
          -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>"
 ```
 
-- Replace `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` with the corresponding [API and application keys][1] for your organization.
-- Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -498,13 +498,13 @@ HTTP/2 204
 {{% /tab %}}
 {{< /tabs >}}
 
-### Get AuthN mapping enablement
+### AuthN マッピングの有効化を取得
 
-Check whether AuthN Mappings are enabled or disabled.
+AuthN Mappings が有効/無効であることを確認します。
 
-| Method   | Endpoint path              | Required payload |
+| メソッド   | エンドポイントのパス              | ペイロードの要件 |
 |----------|----------------------------|------------------|
-| `GET`    | `/v1/org_preferences`      | None             |
+| `GET`    | `/v1/org_preferences`      | なし             |
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -517,8 +517,8 @@ curl -X GET \
          -H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
 ```
 
-- Replace `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` with the corresponding [API and application keys][1] for your organization.
-- Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -540,24 +540,24 @@ curl -X GET \
 {{% /tab %}}
 {{< /tabs >}}
 
-### Enable or disable all mappings
+### すべてのマッピングを有効化/無効化
 
 <div class="alert alert-warning">
-When mappings are enabled, all users logging in with SAML are stripped of their roles and reassigned roles based on the values in their SAML assertion. It's important to confirm you are receiving the expected SAML assertions in your login before enabling the mapping enforcement.
+マッピングを有効にすると、SAML でログインしているすべてのユーザーのロールが消去され、各 SAML のアサーション値に基づいてロールの再割り当てが行われます。マッピング機能を有効化する前に、ログインで想定通りの SAML アサーションを受信していることを必ず確認してください。
 </div>
 
-Enables/disables the enforcement of all AuthN Mappings.
+すべての AuthN マッピングの実行を有効/無効にします。
 
-| Method   | Endpoint path               | Required payload |
+| メソッド   | エンドポイントのパス               | ペイロードの要件 |
 |----------|-----------------------------|------------------|
 | `POST`   | `/v1/org_preferences`       | JSON             |
 
-##### ARGUMENTS
+##### 引数
 
-* **`{preference_type}`** [*required*, no default]:
-  Preference to update, required to be "saml_authn_mapping_roles"
-* **`{preference_data}`** [*required*, no default]:
-  Data to update preference with, must be true or false: true to enable all mappings, false to disable
+* **`{preference_type}`** [*必須*, デフォルトなし]:
+  アップデートに関する設定です。値は "saml_authn_mapping_roles" となります。
+* **`{preference_data}`** [*必須*, デフォルトなし]:
+  設定を更新するデータで、true または false を設定します。true の場合はすべてのマッピングを有効化し、false だと無効化します。
 
 {{< tabs >}}
 {{% tab "Example" %}}
@@ -580,8 +580,8 @@ curl -X POST \
 `
 ```
 
-- Replace `<YOUR_DATADOG_API_KEY>` and `<YOUR_DATADOG_APPLICATION_KEY>` with the corresponding [API and application keys][1] for your organization.
-- Replace `<YOUR_DD_SITE>` with {{< region-param key="dd_site" code="true" >}}
+- `<YOUR_DATADOG_API_KEY>` と `<YOUR_DATADOG_APPLICATION_KEY>` を、組織の対応する[API キーとアプリケーションキー][1]に置き換えます。
+- `<YOUR_DD_SITE>` を {{< region-param key="dd_site" code="true" >}} に置き換えます
 
 [1]: https://api.datadoghq.com/account/settings#api
 {{% /tab %}}
@@ -603,7 +603,7 @@ curl -X POST \
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

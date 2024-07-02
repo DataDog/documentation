@@ -36,7 +36,7 @@
 "categories":
 - "data stores"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/mongo/README.md"
 "display_on_public_website": true
@@ -49,7 +49,7 @@
 "manifest_version": "2.0.0"
 "name": "mongo"
 "public_title": "MongoDB"
-"short_description": "Track read/write performance, most-used replicas, collection metrics, and more."
+"short_description": "読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。"
 "supported_os":
 - "linux"
 - "macos"
@@ -61,9 +61,9 @@
   - "Supported OS::macOS"
   - "Supported OS::Windows"
   - "Category::Data Stores"
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   "configuration": "README.md#Setup"
-  "description": "Track read/write performance, most-used replicas, collection metrics, and more."
+  "description": "読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -73,44 +73,44 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![MongoDB Dashboard][1]
+![MongoDB ダッシュボード][1]
 
-## Overview
+## 概要
 
-Connect MongoDB to Datadog in order to:
+MongoDB を Datadog に接続して、以下のことができます。
 
-- Visualize key MongoDB metrics.
-- Correlate MongoDB performance with the rest of your applications.
+- MongoDB のキーメトリクスを視覚化できます。
+- MongoDB のパフォーマンスをアプリケーションの他の部分と関連付けることができます。
 
-You can also create your own metrics using custom `find`, `count` and `aggregate` queries.
+また、カスタム `find`/`count`/`aggregate` クエリを使用して、独自のメトリクスを作成することもできます。
 
 **Note**: MongoDB v3.0+ is required for this integration. Integration of MongoDB Atlas with Datadog is only available on M10+ clusters. This integration also supports Alibaba AsparaDB and AWS DocumentDB Instance-Based clusters. DocumentDB Elastic clusters are not supported because they only expose the cluster (mongos) endpoints.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The MongoDB check is included in the [Datadog Agent][2] package. No additional installation is necessary.
+MongoDB チェックは [Datadog Agent][2] パッケージに含まれています。追加でインストールする必要はありません。
 
-### Architecture
+### アーキテクチャ
 
-Most low-level metrics (uptime, storage size etc.) needs to be collected on every mongod node. Other higher-level metrics (collection/index statistics etc.) should be collected only once. For these reasons the way you configure the Agents depends on how your mongo cluster is deployed.
+ほとんどの低レベルのメトリクス (アップタイム、ストレージサイズなど) は、すべての mongod ノードで収集する必要があります。その他の高レベルのメトリクス (収集/インデックス統計など) は、一度だけ収集する必要があります。これらの理由により、Agent を構成する方法は、mongo クラスターのデプロイ方法によって異なります。
 
 {{< tabs >}}
-{{% tab "Standalone" %}}
-#### Standalone
+{{% tab "スタンドアロン" %}}
+#### スタンドアロン
 
-To configure this integration for a single node MongoDB deployment:
+このインテグレーションを単一ノードの MongoDB デプロイ用に構成するには
 
-##### Prepare MongoDB
-In a Mongo shell, create a read-only user for the Datadog Agent in the `admin` database:
+##### MongoDB の準備
+Mongo シェルで、`admin` データベースに Datadog Agent 用の読み取り専用ユーザーを作成します。
 
 ```shell
-# Authenticate as the admin user.
+# 管理者ユーザーとして認証します。
 use admin
 db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 
-# Create the user for the Datadog Agent.
+# Datadog Agent のユーザーを作成します。
 db.createUser({
   "user": "datadog",
   "pwd": "<UNIQUEPASSWORD>",
@@ -122,23 +122,23 @@ db.createUser({
 })
 ```
 
-##### Configure the agents
-You only need a single agent, preferably running on the same node, to collect all the available mongo metrics. See below for configuration options.
+##### Agent の構成
+使用可能なすべての mongo メトリクスを収集するには、できれば同じノードで実行している単一の Agent だけが必要です。コンフィギュレーションオプションについては、以下を参照してください。
 {{% /tab %}}
-{{% tab "Replica Set" %}}
-#### Replica set
+{{% tab "レプリカセット" %}}
+#### レプリカセット
 
-To configure this integration for a MongoDB replica set:
+このインテグレーションを MongoDB レプリカセット用に構成するには
 
-##### Prepare MongoDB
-In a Mongo shell, authenticate to the primary and create a read-only user for the Datadog Agent in the `admin` database:
+##### MongoDB の準備
+Mongo シェルで、プライマリに対して認証し、`admin` データベースに Datadog Agent 用の読み取り専用ユーザーを作成します。
 
 ```shell
-# Authenticate as the admin user.
+# 管理者ユーザーとして認証します。
 use admin
 db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 
-# Create the user for the Datadog Agent.
+# Datadog Agent のユーザーを作成します。
 db.createUser({
   "user": "datadog",
   "pwd": "<UNIQUEPASSWORD>",
@@ -150,11 +150,11 @@ db.createUser({
 })
 ```
 
-##### Configure the agents
+##### Agent の構成
 
-Install the Datadog Agent on each host in the MongoDB replica set and configure the Agent to connect to the replica on that host (`localhost`). Running an Agent on each host results in lower latency and execution times, and ensures that data is still connected in the event a host fails.
+MongoDB レプリカセットの各ホストに Datadog Agent をインストールし、そのホスト (`localhost`) 上のレプリカに接続するように Agent を構成します。各ホストで Agent を実行することで、レイテンシーと実行時間が短縮され、ホストに障害が発生した場合でもデータが接続されるようになります。
 
-For example, on the primary node:
+例えば、プライマリノードで、
 
 ```yaml
 init_config:
@@ -163,7 +163,7 @@ instances:
       - mongo-primary:27017
 ```
 
-On the secondary node:
+セカンダリノードで、
 
 ```yaml
 init_config:
@@ -172,7 +172,7 @@ instances:
       - mongo-secondary:27017
 ```
 
-On the tertiary node:
+ターシャリノードで、
 
 ```yaml
 init_config:
@@ -182,20 +182,20 @@ instances:
 ```
 
 {{% /tab %}}
-{{% tab "Sharding" %}}
-#### Sharding
+{{% tab "シャード" %}}
+#### シャード
 
-To configure this integration for a MongoDB sharded cluster:
+このインテグレーションを MongoDB シャードクラスター用に構成するには
 
-##### Prepare MongoDB
-For each shard in your cluster, connect to the primary of the replica set and create a local read-only user for the Datadog Agent in the `admin` database:
+##### MongoDB の準備
+クラスタ内のシャードごとに、レプリカセットのプライマリに接続し、`admin` データベースに Datadog Agent 用のローカル読み取り専用ユーザーを作成します。
 
 ```shell
-# Authenticate as the admin user.
+# 管理者ユーザーとして認証します。
 use admin
 db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 
-# Create the user for the Datadog Agent.
+# Datadog Agent のユーザーを作成します。
 db.createUser({
   "user": "datadog",
   "pwd": "<UNIQUEPASSWORD>",
@@ -207,34 +207,34 @@ db.createUser({
 })
 ```
 
-Then create the same user from a mongos proxy. This action creates the local user in the config servers and allows direct connection.
+次に、mongos プロキシから同じユーザーを作成します。このアクションにより、コンフィギュレーションサーバーにローカルユーザーが作成され、直接接続が可能になります。
 
-##### Configure the Agents
-1. Configure one Agent for each member of each shard.
-2. Configure one Agent for each member of the config servers.
-3. Configure one extra Agent to connect to the cluster through a mongos proxy. This mongos proxy can be a new one dedicated to monitoring purposes, or an existing mongos proxy.
+##### Agent の構成
+1. 各シャードのメンバーごとに 1 つの Agent を構成します。
+2. コンフィギュレーションサーバーのメンバーごとに 1 つの Agent を構成します。
+3. mongos プロキシを介してクラスターに接続するように 1 つの追加 Agent を構成します。この mongos プロキシは、監視目的専用の新しい mongos プロキシでも、既存の mongos プロキシでもかまいません。
 
-**Note**: Monitoring of arbiter nodes is not supported (see the [MongoDB Replica Set Arbiter][1] for more details). However, any status change of an arbiter node is reported by the Agent connected to the primary.
+**注**: アービターノードの監視はサポートされていません (詳細については、[MongoDB Replica Set Arbiter][1] を参照してください)。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
 
 [1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
 {{% /tab %}}
 {{< /tabs >}}
 
 
-### Configuration
+### 構成
 
-Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Docker](?tab=docker#docker), [Kubernetes](?tab=kubernetes#kubernetes), or [ECS](?tab=ecs#ecs) sections.
+ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[Docker](?tab=docker#docker)、[Kubernetes](?tab=kubernetes#kubernetes)、または [ECS](?tab=ecs#ecs) セクションを参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `mongo.d/conf.yaml` file in the `conf.d` folder at the root of your [Agent's configuration directory][1]. See the [sample mongo.d/conf.yaml][2] for all available configuration options.
+1. [Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d` フォルダーの `mongo.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mongo.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -272,26 +272,26 @@ To configure this check for an Agent running on a host:
          authSource: admin
    ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-##### Trace collection
+##### トレースの収集
 
-Datadog APM integrates with Mongo to see the traces across your distributed system. Trace collection is enabled by default in the Datadog Agent v6+. To start collecting traces:
+Datadog APM は Mongo を統合して、分散システム全体のトレースを確認します。Datadog Agent v6 以降では、トレースの収集はデフォルトで有効化されています。トレースの収集を開始するには、以下の手順に従います。
 
-1. [Enable trace collection in Datadog][4].
-2. [Instrument your application that makes requests to Mongo][5].
+1. [Datadog でトレースの収集を有効にします][4]。
+2. [Mongo へのリクエストを作成するアプリケーションをインスツルメントします][5]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `mongo.d/conf.yaml` file to start collecting your MongoDB logs:
+2. MongoDB のログの収集を開始するには、次の構成ブロックを `mongo.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -301,9 +301,9 @@ _Available for Agent versions >6.0_
        source: mongodb
    ```
 
-    Change the `service` and `path` parameter values and configure them for your environment. See the [sample mongo.yaml][2] for all available configuration options
+    `service` パラメーターと `path` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル mongo.yaml][2] を参照してください。
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mongo/datadog_checks/mongo/data/conf.yaml.example
@@ -315,11 +315,11 @@ _Available for Agent versions >6.0_
 
 #### Docker
 
-To configure this check for an Agent running on a container:
+コンテナで実行中の Agent に対してこのチェックを構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["mongo"]'
@@ -327,31 +327,31 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"hosts": ["%%host%%:%%port%%"], "username": "datadog", "password" : "<UNIQUEPASSWORD>", "database": "<DATABASE>"}]'
 ```
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"mongodb","service":"<SERVICE_NAME>"}]'
 ```
 
-##### Trace collection
+##### トレースの収集
 
-APM for containerized apps is supported on Agent v6+ but requires extra configuration to begin collecting traces.
+コンテナ化されたアプリケーションの APM は、Agent v6 以降でサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
 
-Required environment variables on the Agent container:
+Agent コンテナで必要な環境変数
 
-| Parameter            | Value                                                                      |
+| パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-See [Tracing Docker Applications][4] for a complete list of available environment variables and configuration.
+利用可能な環境変数およびコンフィギュレーションの全リストについては、[Docker アプリケーションのトレース][4] を参照してください。
 
-Then, [instrument your application container][5] and set `DD_AGENT_HOST` to the name of your Agent container.
+次に、[アプリケーションコンテナをインスツルメント][5]し、Agent コンテナの名前に `DD_AGENT_HOST` を設定します。
 
 
 [1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
@@ -364,13 +364,13 @@ Then, [instrument your application container][5] and set `DD_AGENT_HOST` to the 
 
 #### Kubernetes
 
-To configure this check for an Agent running on Kubernetes:
+このチェックを、Kubernetes で実行している Agent に構成します。
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Aside from this, templates can also be configure with a [file, configmap, or key-value store][2].
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
 
-**Annotations v1** (for Datadog Agent < v7.36)
+**Annotations v1** (Datadog Agent < v7.36 向け)
 
 ```yaml
 apiVersion: v1
@@ -394,7 +394,7 @@ spec:
     - name: mongo
 ```
 
-**Annotations v2** (for Datadog Agent v7.36+)
+**Annotations v2** (Datadog Agent v7.36+ 向け)
 
 ```yaml
 apiVersion: v1
@@ -421,11 +421,11 @@ spec:
     - name: mongo
 ```
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][3].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
-Then, set [Log Integrations][4] as pod annotations. This can also be configured with [a file, a configmap, or a key-value store][5].
+次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
 
 **Annotations v1/v2**
 
@@ -441,21 +441,21 @@ spec:
     - name: mongo
 ```
 
-##### Trace collection
+##### トレースの収集
 
-APM for containerized apps is supported on hosts running Agent v6+ but requires extra configuration to begin collecting traces.
+コンテナ化されたアプリケーションの APM は、Agent v6 以降を実行するホストでサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
 
-Required environment variables on the Agent container:
+Agent コンテナで必要な環境変数
 
-| Parameter            | Value                                                                      |
+| パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-See [Tracing Kubernetes Applications][6] and the [Kubernetes DaemonSet Setup][7] for a complete list of available environment variables and configuration.
+利用可能な環境変数とコンフィギュレーションの完全なリストについては、[Kubernetes アプリケーションのトレース][6]および [Kubernetes DaemonSet のセットアップ][7]を参照してください。
 
-Then, [instrument your application container][8] and set `DD_AGENT_HOST` to the name of your Agent container.
+次に、[アプリケーションコンテナをインスツルメント][8]し、Agent コンテナ名に `DD_AGENT_HOST` を設定します。
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes
 [2]: https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration
@@ -470,11 +470,11 @@ Then, [instrument your application container][8] and set `DD_AGENT_HOST` to the 
 
 #### ECS
 
-To configure this check for an Agent running on ECS:
+このチェックを、ECS で実行している Agent に構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```json
 {
@@ -490,13 +490,13 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 }
 ```
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [ECS Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```json
 {
@@ -510,21 +510,21 @@ Then, set [Log Integrations][3] as Docker labels:
 }
 ```
 
-##### Trace collection
+##### トレースの収集
 
-APM for containerized apps is supported on Agent v6+ but requires extra configuration to begin collecting traces.
+コンテナ化されたアプリケーションの APM は、Agent v6 以降でサポートされていますが、トレースの収集を開始するには、追加のコンフィギュレーションが必要です。
 
-Required environment variables on the Agent container:
+Agent コンテナで必要な環境変数
 
-| Parameter            | Value                                                                      |
+| パラメーター            | 値                                                                      |
 | -------------------- | -------------------------------------------------------------------------- |
 | `<DD_API_KEY>` | `api_key`                                                                  |
 | `<DD_APM_ENABLED>`      | true                                                              |
 | `<DD_APM_NON_LOCAL_TRAFFIC>`  | true |
 
-See [Tracing Docker Applications][4] for a complete list of available environment variables and configuration.
+利用可能な環境変数およびコンフィギュレーションの全リストについては、[Docker アプリケーションのトレース][4] を参照してください。
 
-Then, [instrument your application container][5] and set `DD_AGENT_HOST` to the [EC2 private IP address][6].
+次に、[アプリケーションのコンテナをインスツルメント][5]し、[EC2 プライベート IP アドレス][6]に `DD_AGENT_HOST` を設定します。
 
 
 [1]: https://docs.datadoghq.com/agent/docker/integrations/?tab=docker
@@ -536,23 +536,23 @@ Then, [instrument your application container][5] and set `DD_AGENT_HOST` to the 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][3] and look for `mongo` under the Checks section.
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `mongo` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "mongo" >}}
 
 
-See the [MongoDB 3.0 Manual][4] for more detailed descriptions of some of these metrics.
+メトリクスの詳細については、[MongoDB 3.0 マニュアル][4]を参照してください。
 
-#### Additional metrics
+#### 追加のメトリクス
 
-The following metrics are **not** collected by default. Use the `additional_metrics` parameter in your `mongo.d/conf.yaml` file to collect them:
+次のメトリクスは、デフォルトでは収集**されません**。これらを収集するには、`mongo.d/conf.yaml` ファイルで `additional_metrics` パラメーターを使用してください。
 
-| metric prefix            | what to add to `additional_metrics` to collect it |
+| メトリクスのプレフィックス            | 収集するために `additional_metrics` に追加する項目 |
 | ------------------------ | ------------------------------------------------- |
 | mongodb.collection       | collection                                        |
 | mongodb.commands         | top                                               |
@@ -568,25 +568,25 @@ The following metrics are **not** collected by default. Use the `additional_metr
 | mongodb.tcmalloc         | tcmalloc                                          |
 | mongodb.metrics.commands | metrics.commands                                  |
 
-### Events
+### イベント
 
-**Replication state changes**:<br>
-This check emits an event each time a Mongo node has a change in its replication state.
+**レプリケーション状態の変化**:<br>
+このチェックは、Mongo ノードでレプリケーション状態が変化するたびにイベントを送信します。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "mongo" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitoring MongoDB performance metrics (WiredTiger)][6]
-- [Monitoring MongoDB performance metrics (MMAP)][7]
+- [MongoDB パフォーマンスメトリクスの監視 (WiredTiger)][6]
+- [MongoDB パフォーマンスメトリクスの監視 (MMAP)][7]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mongo/images/mongo_dashboard.png

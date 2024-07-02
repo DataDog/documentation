@@ -10,10 +10,10 @@ further_reading:
     text: Network Device Monitoring
 ---
 
-Datadog Network Performance Monitoring (NPM) automatically detects API calls to Azure Blob Storage, Cosmos, Postgres and other Azure services listed below:
+Datadog ネットワークパフォーマンスモニタリング (NPM) は、Azure Blob Storage、Cosmos、Postgres、および以下にリストされているその他の Azure サービスへの API 呼び出しを自動的に検出します。
 
 {{< get-npm-integrations "azure" >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

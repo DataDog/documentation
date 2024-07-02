@@ -12,40 +12,40 @@ further_reading:
   text: Set up Tracing on a Jenkins pipeline
 ---
 
-## Overview
+## 概要
 
-Add Continuous Testing tests to your Jenkins environment.
+Jenkins 環境に Continuous Testing テストを追加します。
 
-Datadog recommends discussing with your SRE and Infrastructure teams to determine a solution that models your existing Jenkins architecture and customizes an installation that fits your business requirements.
+Datadog では、既存の Jenkins アーキテクチャーをモデル化し、ビジネス要件に合ったインストールをカスタマイズするソリューションを決定するために、SRE およびインフラストラクチャーチームと話し合うことを推奨しています。
 
-## Setup
+## セットアップ
 
-To use Docker in your Jenkins environment, see [Using Docker with Pipeline][1].
+Jenkins 環境で Docker を使用するには、[Docker と Pipeline の併用][1]をご覧ください。
 
-### Prerequisites
+### 前提条件
 
 * Node.js v10.24.1+
-* A global JSON configuration file uploaded to your Jenkins instance through the [Config File Provider][2]. You need this file to define the global properties for your Synthetics test setup.
+* [Config File Provider][2] を介して Jenkins インスタンスにアップロードされたグローバル JSON コンフィギュレーションファイルです。このファイルは、Synthetics のテストセットアップのグローバルプロパティを定義するために必要です。
 
-You can store environment variables directly within the global configuration file or [use credentials][3]. For more information about test configurations, see [Configure tests][4].
+環境変数は、グローバルコンフィギュレーションファイル内に直接保存するか、[認証情報を使用する][3]ことができます。テストの構成について詳しくは、[テストの構成][4] を参照してください。
 
-### Run the `@datadog/datadog-ci` package
+### `@datadog/datadog-ci` パッケージの実行
 
-Install and run the Node.js and npm packages within your Jenkins environment with the Jenkins Node.js plugin.
+Jenkins Node.js プラグインを使用して、Jenkins 環境内に Node.js および npm パッケージをインストールし、実行します。
 
-For more information about the existing Datadog-Jenkins integration, see [Set up Tracing on a Jenkins Pipeline][5].
+既存の Datadog と Jenkins のインテグレーションについては、[Jenkins パイプラインにトレースを設定する][5]を参照してください。
 
-### Add a Node.js installation
+### Node.js のインストールを追加する
 
-Navigate to the global Jenkins Configuration panel and add a Node.js installation.
+Jenkins のグローバルなコンフィギュレーションパネルに移動し、Node.js のインストールを追加します。
 
-{{< img src="synthetics/cicd_integrations/jenkins/nodejs-installation.png" alt="Node.js Installations in Jenkins" style="width:80%;">}}
+{{< img src="synthetics/cicd_integrations/jenkins/nodejs-installation.png" alt="Jenkins の Node.js インストール" style="width:80%;">}}
 
-Install `@datadog/datadog-ci` globally for all relevant Node.js installations.
+Node.js に関連するすべてのインストールに対して、`@datadog/datadog-ci` をグローバルにインストールします。
 
-#### Tags
+#### タグ
 
-To run Continuous Testing tests with tags in a Jenkins Declarative pipeline:
+Jenkins の Declarative パイプラインでタグを使った Continuous Testing テストを実行するには
 
 {{< code-block lang="groovy" disable_copy="false" collapsible="true" >}}
 pipeline {
@@ -66,9 +66,9 @@ pipeline {
    }
 {{< /code-block >}}
 
-#### Custom test file
+#### カスタムテストファイル
 
-To run Continuous Testing tests with a custom test file in a Jenkins Declarative pipeline:
+Jenkins の Declarative パイプラインでカスタムテストファイルを使った Continuous Testing テストを実行するには
 
 {{< code-block lang="groovy" disable_copy="false" collapsible="true" >}}
 pipeline {
@@ -90,11 +90,11 @@ pipeline {
 }
 {{< /code-block >}}
 
-You can expect the following output:
+以下のような出力が期待できます。
 
-{{< img src="synthetics/cicd_integrations/jenkins/example-test-run.png" alt="Example Test Run in Jenkins" style="width:80%;">}}
+{{< img src="synthetics/cicd_integrations/jenkins/example-test-run.png" alt="Jenkins でのテスト実行例" style="width:80%;">}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

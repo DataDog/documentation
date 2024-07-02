@@ -17,98 +17,99 @@ further_reading:
 
 The Datadog Agent can automatically assign tags to metrics, traces, and logs emitted by a pod (or an individual container within a pod) based on labels or annotations.
 
-## Out-of-the-box tags
+## すぐに使えるタグ
 
 The list of automatically-assigned tags depends on the Agent's [cardinality configuration][1].
 
 <div style="overflow-x: auto;">
 
-  | Tag                           | Cardinality  | Source                                                                  | Requirement                                         |
+  | タグ                           | 粒度  | ソース                                                                  | 要件                                         |
   |-------------------------------|--------------|-------------------------------------------------------------------------|-----------------------------------------------------|
-  | `container_id`                | High         | Pod status                                                              | N/A                                                 |
-  | `display_container_name`      | High         | Pod status                                                              | N/A                                                 |
-  | `pod_name`                    | Orchestrator | Pod metadata                                                            | N/A                                                 |
-  | `oshift_deployment`           | Orchestrator | Pod annotation `openshift.io/deployment.name`                           | OpenShift environment and pod annotation must exist |
-  | `kube_ownerref_name`          | Orchestrator | Pod ownerref                                                            | Pod must have an owner                              |
-  | `kube_job`                    | Orchestrator | Pod ownerref                                                            | Pod must be attached to a cronjob                   |
-  | `kube_job`                    | Low          | Pod ownerref                                                            | Pod must be attached to a job                       |
-  | `kube_replica_set`            | Low          | Pod ownerref                                                            | Pod must be attached to a replica set               |
-  | `kube_service`                | Low          | Kubernetes service discovery                                            | Pod is behind a Kubernetes service                  |
-  | `kube_daemon_set`             | Low          | Pod ownerref                                                            | Pod must be attached to a DaemonSet                 |
-  | `kube_container_name`         | Low          | Pod status                                                              | N/A                                                 |
-  | `kube_namespace`              | Low          | Pod metadata                                                            | N/A                                                 |
-  | `kube_app_name`               | Low          | Pod label `app.kubernetes.io/name`                                      | Pod label must exist                                |
-  | `kube_app_instance`           | Low          | Pod label `app.kubernetes.io/instance`                                  | Pod label must exist                                |
-  | `kube_app_version`            | Low          | Pod label `app.kubernetes.io/version`                                   | Pod label must exist                                |
-  | `kube_app_component`          | Low          | Pod label `app.kubernetes.io/component`                                 | Pod label must exist                                |
-  | `kube_app_part_of`            | Low          | Pod label `app.kubernetes.io/part-of`                                   | Pod label must exist                                |
-  | `kube_app_managed_by`         | Low          | Pod label `app.kubernetes.io/managed-by`                                | Pod label must exist                                |
-  | `env`                         | Low          | Pod label `tags.datadoghq.com/env` or container envvar `DD_ENV`         | [Unified service tagging][2] enabled                |
-  | `version`                     | Low          | Pod label `tags.datadoghq.com/version` or container envvar `DD_VERSION` | [Unified service tagging][2] enabled                |
-  | `service`                     | Low          | Pod label `tags.datadoghq.com/service` or container envvar `DD_SERVICE` | [Unified service tagging][2] enabled                |
-  | `pod_phase`                   | Low          | Pod status                                                              | N/A                                                 |
-  | `oshift_deployment_config`    | Low          | Pod annotation `openshift.io/deployment-config.name`                    | OpenShift environment and pod annotation must exist |
-  | `kube_ownerref_kind`          | Low          | Pod ownerref                                                            | Pod must have an owner                              |
-  | `kube_deployment`             | Low          | Pod ownerref                                                            | Pod must be attached to a deployment                |
-  | `kube_replication_controller` | Low          | Pod ownerref                                                            | Pod must be attached to a replication controller    |
-  | `kube_stateful_set`           | Low          | Pod ownerref                                                            | Pod must be attached to a statefulset               |
-  | `persistentvolumeclaim`       | Low          | Pod spec                                                                | A PVC must be attached to the pod                   |
-  | `kube_cronjob`                | Low          | Pod ownerref                                                            | Pod must be attached to a cronjob                   |
-  | `image_name`                  | Low          | Pod spec                                                                | N/A                                                 |
-  | `short_image`                 | Low          | Pod spec                                                                | N/A                                                 |
-  | `image_tag`                   | Low          | Pod spec                                                                | N/A                                                 |
-  | `eks_fargate_node`            | Low          | Pod spec                                                                | EKS Fargate environment                                       |
-
+  | `container_id`                | 高         | ポッドステータス                                                              | N/A                                                 |
+  | `display_container_name`      | 高         | ポッドステータス                                                              | N/A                                                 |
+  | `pod_name`                    | オーケストレーター | ポッドメタデータ                                                            | N/A                                                 |
+  | `oshift_deployment`           | オーケストレーター | ポッドアノテーション `openshift.io/deployment.name`                           | OpenShift 環境およびポッドアノテーションが必要 |
+  | `kube_ownerref_name`          | オーケストレーター | ポッド ownerref                                                            | ポッドにオーナーが必要                              |
+  | `kube_job`                    | オーケストレーター | ポッド ownerref                                                            | ポッドはジョブにアタッチされていることが必要                       |
+  | `kube_job`                    | 低 | ポッド ownerref
+| ポッドは cronjob にアタッチされていることが必要                    |
+  | `kube_replica_set`            | 低 | ポッド ownerref                                                            | ポッドはレプリカセットにアタッチされていることが必要               |
+  | `kube_service`                | 低 | Kubernetes サービスディスカバリー                                            | ポッドは Kubernetes サービスの後方にあることが必要                  |
+  | `kube_daemon_set`             | 低          | ポッド ownerref                                                            | ポッドは DaemonSet セットにアタッチされていることが必要                 |
+  | `kube_container_name`         | 低          | ポッドステータス                                                              | N/A                                                 |
+  | `kube_namespace`              | 低          | ポッドメタデータ                                                            | N/A                                                 |
+  | `kube_app_name`               | 低          | ポッドラベル `app.kubernetes.io/name`                                      | ポッドラベルが必要                                |
+  | `kube_app_instance`           | 低          | ポッドラベル `app.kubernetes.io/instance`                                  | ポッドラベルが必要                                |
+  | `kube_app_version`            | 低          | ポッドラベル `app.kubernetes.io/version`                                   | ポッドラベルが必要                                |
+  | `kube_app_component`          | 低          | ポッドラベル `app.kubernetes.io/component`                                 | ポッドラベルが必要                                |
+  | `kube_app_part_of`            | 低          | ポッドラベル `app.kubernetes.io/part-of`                                   | ポッドラベルが必要                                |
+  | `kube_app_managed_by`         | 低          | ポッドラベル `app.kubernetes.io/managed-by`                                | ポッドラベルが必要                                |
+  | `env`                         | 低          | ポッドラベル `tags.datadoghq.com/env` またはコンテナ envvar `DD_ENV`         | [統合サービスタグ付け][2]有効                |
+  | `version`                     | 低          | ポッドラベル `tags.datadoghq.com/version` or container envvar `DD_VERSION` | [統合サービスタグ付け][2]有効                |
+  | `service`                     | 低          | ポッドラベル `tags.datadoghq.com/service` or container envvar `DD_SERVICE` | [統合サービスタグ付け][2]有効                |
+  | `pod_phase`                   | 低          | ポッドステータス                                                              | N/A                                                 |
+  | `oshift_deployment_config`    | 低          | ポッドアノテーション `openshift.io/deployment-config.name`                    | OpenShift 環境およびポッドアノテーションが必要 |
+  | `kube_ownerref_kind`          | 低          | ポッド ownerref                                                            | ポッドにオーナーが必要                              |
+  | `kube_deployment`             | 低          | ポッド ownerref                                                            | ポッドはデプロイにアタッチされていることが必要                |
+  | `kube_replication_controller` | 低          | ポッド ownerref                                                            | ポッドはレプリケーションコントローラーにアタッチされていることが必要    |
+  | `kube_stateful_set`           | 低          | ポッド ownerref                                                            | ポッドは statefulset にアタッチされていることが必要               |
+  | `persistentvolumeclaim`       | 低          | ポッド仕様                                                                | PVC がポッドにアタッチされていることが必要                   |
+  | `kube_cronjob`                | 低          | ポッド ownerref                                                            | ポッドは cronjob にアタッチされていることが必要                   |
+  | `image_name`                  | 低          | ポッド仕様                                                                | N/A                                                 |
+  | `short_image`                 | 低          | ポッド仕様                                                                | N/A                                                 |
+  | `image_tag`                   | 低          | ポッド仕様                                                                | N/A                                                 |
+  | `eks_fargate_node`        | 低         | ポッド仕様
+| EKS Fargate 環境                          |
 </div>
 
 
-### Host tag
+### ホストタグ
 
-The Agent can attach Kubernetes environment information as "host tags".
+Agent は Kubernetes 環境情報を "host tags" としてアタッチできます。
 
 <div style="overflow-x: auto;">
 
-  | Tag                 | Cardinality | Source                                                 | Requirement                                                    |
+  | タグ                 | 粒度 | ソース                                                 | 要件                                                    |
   |---------------------|-------------|--------------------------------------------------------|----------------------------------------------------------------|
-  | `kube_cluster_name` | Low         | `DD_CLUSTER_NAME` envvar or cloud provider integration | `DD_CLUSTER_NAME` envvar or cloud provider integration enabled |
-  | `kube_node_role`    | Low         | Node label `node-role.kubernetes.io/<role>`            | Node label must exist                                          |
+  | `kube_cluster_name` | 低         | `DD_CLUSTER_NAME` envvar またはクラウドプロバイダーインテグレーション | `DD_CLUSTER_NAME` envvar またはクラウドプロバイダー有効 |
+  | `kube_node_role`    | 低         | ノードラベル `node-role.kubernetes.io/<role>`            | ノードラベルが必要                                          |
 
 </div>
 
-## Tag Autodiscovery
+## タグのオートディスカバリー
 
-Starting with Agent v6.10+, the Agent can autodiscover tags from Pod annotations. It allows the Agent to associate tags to all data emitted by the entire pods or an individual container within this pod.
+Agent v6.10 以降では、Agent はポッドアノテーションからタグを自動検出できます。これにより、Agent は、ポッド全体またはこのポッド内の個々のコンテナから発行されるすべてのデータにタグを関連付けることができます。
 
-As a best practice in containerized environments, Datadog recommends using unified service tagging to help unify tags. Unified service tagging ties Datadog telemetry together through the use of three standard tags: `env`, `service`, and `version`. To learn how to configure your environment with unified tagging, refer to the dedicated [unified service tagging][2] documentation.
+Datadog では、コンテナ化環境のベストプラクティスとして、統合サービスタグ付けを使用してタグを統合することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。ご使用環境で統合タグ付けを構成する方法に関する詳細は、[統合サービスタグ付け][2]ドキュメントをご参照ください。
 
-To apply a `<TAG_KEY>:<TAG_VALUE>` tag to all data emitted by a given pod and collected by the Agent use the following annotation on your pod:
-
-```yaml
-annotations:
-  ad.datadoghq.com/tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
-```
-
-If you want to apply a `<TAG_KEY>:<TAG_VALUE>` tag to an individual container `<CONTAINER_IDENTIFIER>` within a pod, use the following annotation on your pod:
+`<タグキー>:<タグ値>` タグを特定のポッドから発行され、Agent によって収集されたすべてのデータに適用するには、ポッドで次のアノテーションを使用します。
 
 ```yaml
 annotations:
-  ad.datadoghq.com/<CONTAINER_IDENTIFIER>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
+  ad.datadoghq.com/tags: '{"<タグキー>": "<タグ値>","<タグキー_1>": "<タグ値_1>"}'
 ```
 
-Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without modifying the Agent configuration.
+ポッド内の個々のコンテナ `<CONTAINER_IDENTIFIER>` に `<TAG_KEY>:<TAG_VALUE>` タグを適用する場合は、ポッドで次のアノテーションを使用します。
 
 ```yaml
-com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
+annotations:
+  ad.datadoghq.com/<コンテナ識別子>.tags: '{"<タグキー>": "<タグ値>","<タグキー_1>": "<タグ値_1>"}'
 ```
 
-## Tag extraction
-### Node labels as tags
+Agent v7.17 以降では、Agent は Docker ラベルからタグを自動検出できます。このプロセスにより、Agent は、Agent 構成を変更することなく、コンテナによって発行されたすべてのデータにカスタムタグを関連付けることができます。
 
-Starting with Agent v6.0+, the Agent can collect labels for a given node and use them as tags to attach to all metrics, traces, and logs emitted associated with this `host` in Datadog:
+```yaml
+com.datadoghq.ad.tags: '["<タグキー>:タグ値", "<タグキー_1>:<タグ値_1>"]'
+```
+
+## タグ抽出
+### タグとしてのノードラベル
+
+Agent v6.0 以降、Agent は指定されたノードのラベルを収集し、Datadog のこの `host` に関連するすべてのメトリクス、トレース、ログに関連付けるタグとして使用することができます。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
+指定されたノードラベル `<NODE_LABEL>` を抽出して、Datadog 内でタグキー `<TAG_KEY>` として変換するには、`datadog-agent.yaml` 内の Operator の `DatadogAgent` 構成に以下の構成を追加します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -121,7 +122,7 @@ spec:
       <NODE_LABEL>: <TAG_KEY>
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -133,7 +134,7 @@ spec:
       kubernetes.io/arch: arch
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのノードラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -148,7 +149,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+指定したノードラベル `<NODE_LABEL>` を抽出し、Datadog 内でタグキー `<TAG_KEY>` として変換するには、Helm の `datadog-values.yaml` ファイルに以下の構成を追加します。
 
 ```yaml
 datadog:
@@ -156,14 +157,14 @@ datadog:
     <NODE_LABEL>: <TAG_KEY>
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 ```yaml
 datadog:
   nodeLabelsAsTags:
     kubernetes.io/arch: arch
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのノードラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
 
 ```yaml
 datadog:
@@ -179,13 +180,13 @@ To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"<NODE_LABEL>": "<TAG_KEY>"}'
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 
 ```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"kubernetes.io/arch":"arch"}'
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのノードラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
 
 ```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
@@ -193,15 +194,15 @@ DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][3]を参照してください。
 
-### Pod labels as tags
+### タグとしてのポッドラベル
 
-Starting with Agent v6.0+, the Agent can collect labels for a given pod and use them as tags to attach to all metrics, traces, and logs emitted by this pod:
+Agent v6.0 以降、Agent は特定のポッドのラベルを収集し、それらをタグとして使用して、このポッドが発行するすべてのメトリクス、トレース、ログに関連付けることができます。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-To extract a given pod label `<POD_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
+指定されたポッドラベル `<POD_LABEL>` を抽出して、Datadog 内でタグキー `<TAG_KEY>` として変換するには、`datadog-agent.yaml` 内の Operator の `DatadogAgent` 構成に以下の構成を追加します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -214,7 +215,7 @@ spec:
       <POD_LABEL>: <TAG_KEY>
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -226,7 +227,7 @@ spec:
       app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのポッドラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -241,7 +242,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-To extract a given pod label `<POD_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+指定したポッドラベル `<POD_LABEL>` を抽出し、Datadog 内でタグキー `<TAG_KEY>` として変換するには、Helm の `datadog-values.yaml` ファイルに以下の構成を追加します。
 
 ```yaml
 datadog:
@@ -249,14 +250,14 @@ datadog:
     <POD_LABEL>: <TAG_KEY>
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 ```yaml
 datadog:
   podLabelsAsTags:
     app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのポッドラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
 
 ```yaml
 datadog:
@@ -272,13 +273,13 @@ To extract a given pod label `<POD_LABEL>` and transform it as a tag key `<TAG_K
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"<POD_LABEL>": "<TAG_KEY>"}'
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 
 ```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-For Agent v6.8.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
+Agent v6.8.0 以降の場合、次の環境変数構成を使用して、すべてのポッドラベルをタグとしてメトリクスに追加します。この例では、タグ名の前に `<プレフィックス>_` が付いています。
 
 ```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
@@ -286,15 +287,15 @@ DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][3]を参照してください。
 
-### Pod annotations as tags
+### タグとしてのポッドアノテーション
 
-Starting with Agent v6.0+, the Agent can collect annotations for a given pod and use them as tags to attach to all metrics, traces, and logs emitted by this pod:
+Agent v6.0 以降、Agent は特定のポッドのアノテーションを収集し、それらをタグとして使用して、このポッドが発行するすべてのメトリクス、トレース、ログに関連付けることができます。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`
+指定されたポッドアノテーション `<POD_ANNOTATION>` を抽出して、Datadog 内でタグキー `<TAG_KEY>` として変換するには、`datadog-agent.yaml` 内の Operator の `DatadogAgent` 構成に以下の構成を追加します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -307,7 +308,7 @@ spec:
       <POD_ANNOTATION>: <TAG_KEY>
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -319,7 +320,7 @@ spec:
       app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのポッドアノテーションをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -334,7 +335,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+指定したポッドアノテーション `<POD_ANNOTATION>` を抽出し、Datadog 内でタグキー `<TAG_KEY>` として変換するには、Helm の `datadog-values.yaml` ファイルに以下の構成を追加します。
 
 ```yaml
 datadog:
@@ -342,14 +343,14 @@ datadog:
     <POD_ANNOTATION>: <TAG_KEY>
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 ```yaml
 datadog:
   podAnnotationsAsTags:
     app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod annotation as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのポッドアノテーションをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
 
 ```yaml
 datadog:
@@ -365,13 +366,13 @@ To extract a given pod annotation `<POD_ANNOTATION>` and transform it as a tag k
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"<POD_ANNOTATION>": "<TAG_KEY>"}'
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのポッドアノテーションをタグとしてメトリクスに追加します。この例では、タグ名の前に `<プレフィックス>_` が付いています。
 
 ```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
@@ -379,15 +380,15 @@ DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][3]を参照してください。
 
-### Namespace labels as tags
+### タグとしてのネームスペースラベル
 
-Starting with Agent v7.27+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics, traces, and logs emitted by all pods in this namespace:
+Agent 7.27 以降、Agent は特定のネームスペースのラベルを収集し、それらをタグとして使用して、このネームスペースのすべてのポッドが発行するすべてのメトリクス、トレース、ログに関連付けることができます。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
+指定されたネームスペースラベル `<NAMESPACE_LABEL>` を抽出して、Datadog 内でタグキー `<TAG_KEY>` として変換するには、`datadog-agent.yaml` 内の Operator の `DatadogAgent` 構成に以下の構成を追加します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -400,7 +401,7 @@ spec:
       <NAMESPACE_LABEL>: <TAG_KEY>
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -412,7 +413,7 @@ spec:
       app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのネームスペースラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -427,7 +428,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+指定したネームスペースラベル `<NAMESPACE_LABEL>` を抽出し、Datadog 内でタグキー `<TAG_KEY>` として変換するには、Helm の `datadog-values.yaml` ファイルに以下の構成を追加します。
 
 ```yaml
 datadog:
@@ -435,14 +436,14 @@ datadog:
     <NAMESPACE_LABEL>: <TAG_KEY>
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 ```yaml
 datadog:
   namespaceLabelsAsTags:
     app: kube_app
 ```
 
-For Agent v7.24.0+, use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tags' names are prefixed by `<PREFIX>_`:
+Agent v7.24.0 以降の場合、次の環境変数構成を使用して、すべてのネームスペースラベルをタグとしてメトリクスに追加します。この例では、タグの名前の前に `<PREFIX>_` が付いています。
 
 ```yaml
 datadog:
@@ -458,13 +459,13 @@ To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"<NAMESPACE_LABEL>": "<TAG_KEY>"}'
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 
 ```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
-Use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tag names are prefixed by `<PREFIX>_`:
+次の環境変数コンフィギュレーションを使用して、すべてのポッドラベルをタグとしてメトリクスに追加します。この例では、タグ名の前に `<PREFIX>_` が付いています。
 
 ```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
@@ -472,15 +473,15 @@ DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求ページ][3]を参照してください。
 
-### Container environment variables as tags
+### タグとしてのコンテナ環境変数
 
-Starting with Agent v7.32+, the Agent can collect container environment variables and use them as tags to attach to all metrics, traces, and logs corresponding to the container. Both `docker` and `containerd` containers are supported:
+Agent v7.32+ から、Agent はコンテナ環境変数を収集し、コンテナに対応するすべてのメトリクス、トレース、ログに関連付けるタグとして使用することができます。`docker` と `containerd` の両方のコンテナがサポートされています。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
+指定された環境変数 `<ENV_VAR>` を抽出して、Datadog 内でタグキー `<TAG_KEY>` として変換するには、`datadog-agent.yaml` 内の Operator の `DatadogAgent` 構成に以下の構成を追加します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -496,7 +497,7 @@ spec:
           value: '{"<ENV_VAR>": "<TAG_KEY>"}'
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -514,7 +515,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+指定した環境変数 `<ENV_VAR>` を抽出し、Datadog 内でタグキー `<TAG_KEY>` として変換するには、Helm の `datadog-values.yaml` ファイルに以下の構成を追加します。
 
 ```yaml
 datadog:
@@ -523,7 +524,7 @@ datadog:
       value: '{"<ENV_VAR>": "<TAG_KEY>"}'
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 ```yaml
 datadog:
   env:
@@ -539,7 +540,7 @@ To extract a given environment variable `<ENV_VAR>` and transform it as a tag ke
 DD_CONTAINER_ENV_AS_TAGS='{"<ENV_VAR>": "<TAG_KEY>"}'
 ```
 
-For example:
+例:
 
 ```bash
 DD_CONTAINER_ENV_AS_TAGS='{"app":"kube_app"}'
@@ -548,17 +549,17 @@ DD_CONTAINER_ENV_AS_TAGS='{"app":"kube_app"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][3] for more details.
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求][3]を参照してください。
 
-### Container labels as tags
+### タグとしてのコンテナラベル
 
-Starting with Agent v7.33+, the Agent can collect container labels and use them as tags. The agent attaches the tags to all metrics, traces, and logs associated with the container.
+Agent v7.33 以降、Agent はコンテナラベルを収集し、タグとして使用できます。Agent は、コンテナに関連するすべてのメトリクス、トレース、ログにタグを関連付けます。
 
-The Agent can generate tags from container labels for both `docker` and `containerd` containers. In the case of `containerd`, the minimum supported version is v1.5.6, because previous releases do not propagate labels correctly.
+Agent は `docker` と `containerd` コンテナの両方のコンテナラベルからタグを生成することができます。`containerd` の場合、最小サポートバージョンは v1.5.6 です。それ以前のリリースではラベルが正しく伝搬されないためです。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-To extract a given container label `<CONTAINER_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
+指定されたコンテナラベル `<CONTAINER_LABEL>` を抽出して、Datadog 内でタグキー `<TAG_KEY>` として変換するには、`datadog-agent.yaml` 内の Operator の `DatadogAgent` 構成に以下の構成を追加します。
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -574,7 +575,7 @@ spec:
           value: '{"<CONTAINER_LABEL>": "<TAG_KEY>"}'
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
@@ -592,7 +593,7 @@ spec:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-To extract a given container label `<CONTAINER_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+指定したコンテナラベル `<CONTAINER_LABEL>` を抽出し、Datadog 内でタグキー `<TAG_KEY>` として変換するには、Helm の `datadog-values.yaml` ファイルに以下の構成を追加します。
 
 ```yaml
 datadog:
@@ -601,7 +602,7 @@ datadog:
       value: '{"<CONTAINER_LABEL>": "<TAG_KEY>"}'
 ```
 
-For example, you could set up:
+たとえば、次のように設定できます。
 ```yaml
 datadog:
   env:
@@ -617,7 +618,7 @@ To extract a given container label `<CONTAINER_LABEL>` and transform it to a tag
 DD_CONTAINER_LABELS_AS_TAGS='{"<CONTAINER_LABEL>":"<TAG_KEY>"}'
 ```
 
-For example:
+例:
 
 ```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
@@ -625,9 +626,9 @@ DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][3] for more details.
+**注**: カスタムメトリクスは請求に影響を与える可能性があります。詳細については、[カスタムメトリクスの請求][3]を参照してください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

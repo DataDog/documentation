@@ -16,91 +16,91 @@ further_reading:
   text: Check your monitor status
 ---
 
-## Overview
+## 概要
 
-Use an integration monitor to check if an installed [integration][1] is running. For more detailed monitoring, a metric monitor can be used to gauge specific information about an integration.
+インテグレーションモニターを使用して、インストールした[インテグレーション][1]が実行されているか確認します。さらに詳しいモニタリングでは、メトリクスモニターを使用してインテグレーションに関する特定の情報を測定できます。
 
-## Monitor creation
+## モニターの作成
 
-To create an [integration monitor][2] in Datadog:
+Datadog で[インテグレーションモニター][2]を作成するには
 
-1. Use the main navigation: *Monitors --> New Monitor --> Integration*.
-2. Search for an integration or select it from the list or images.
+1. メインナビゲーションで、*Monitors --> New Monitor --> Integration* の順に選択します。
+2. インテグレーションを検索するか、一覧または画像から選択します。
 
-### Integration metric
+### インテグレーションのメトリクス
 
-Create an integration metric monitor by following the instructions in the [metric monitor][3] documentation. Using the integration metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][4] page.
+[メトリクスモニター][3]ドキュメントの手順に従って、インテグレーションメトリクスモニターを作成します。モニタータイプにインテグレーションメトリクスを選択すると、[モニターの管理][4] ページで、確実にインテグレーションモニタータイプのファセットでモニターを選択できるようになります。
 
 **Note**: To configure an integration monitor, ensure that the integration submits metrics or service checks.
 
-#### Pick a check
+#### チェックを選択する
 
-If there is only one check for the integration, no selection is necessary. Otherwise, select the check for your monitor.
+インテグレーションに含まれるチェックが 1 つしかない場合、選択する必要はありません。それ以外の場合は、モニターのチェックを選択します。
 
-#### Pick monitor scope
+#### モニターのスコープを選択
 
-Select the scope to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
+ホスト名、タグ、または `All Monitored Hosts` を選択して、監視するスコープを決定します。特定のホストを除外する必要がある場合は、2 番目のフィールドに名前やタグをリストアップします。
 
-* The include field uses `AND` logic. All listed host names and tags must be present on a host for it to be included.
-* The exclude field uses `OR` logic. Any host with a listed host name or tag is excluded.
+* インクルードフィールドでは `AND` ロジックを使用します。リストアップされたすべてのホスト名とタグが存在するホストがスコープに含まれます。
+* エクスクルードフィールドでは `OR` ロジックを使用します。リストアップされたホスト名やタグを持つホストはスコープから除外されます。
 
-#### Set alert conditions
+#### アラートの条件を設定する
 
-In this section, choose between a **Check Alert** or **Cluster Alert**:
+このセクションで、**Check Alert** または **Cluster Alert** を選択します。
 
 {{< tabs >}}
 {{% tab "Check Alert" %}}
 
-A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds.
+チェックアラートは、各チェックグループにつき、送信されたステータスを連続的にトラックし、しきい値と比較します。
 
-Set up the check alert:
+チェックアラートをセットアップする
 
-1. Trigger a separate alert for each `<GROUP>` reporting your check.
+1. チェックレポートを送信する各 `<グループ>` に対し、アラートを個別にトリガーします。
 
-    Check grouping is specified either from a list of known groupings or by you. For integration monitors, the per-check grouping is explicitly known. For example, the Postgres integration is tagged with `db`, `host`, and `port`.
+    チェックグループは既存のグループリストから指定するか、独自に指定します。インテグレーションモニターでは、チェックごとのグループを明確にします。たとえば Postgres インテグレーションなら、`db`、`host`、`port` でタグ付けします。
 
-2. Trigger the alert after selected consecutive failures: `<NUMBER>`
+2. 何回連続して失敗したらアラートをトリガーするか、回数 `<数値>` を選択します。
 
-    Each check run submits a single status of `OK`, `WARN`, `CRITICAL`, or `UNKNOWN`. Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, your database might have a single blip where connection fails. If you set this value to `> 1`, the blip is ignored but a problem with more than one consecutive failure triggers a notification.
+    各チェックは `OK`、`WARN`、`CRITICAL`、`UNKNOWN` のいずれか 1 つのステータスを送信します。`CRITICAL` ステータスが連続して何回送信されたら通知をトリガーするか選択します。たとえば、データベースで接続に失敗する異常が 1 回発生したとします。値を `> 1` に設定した場合、この異常は無視されますが、2 回以上連続で失敗した場合は通知をトリガーします。
 
-3. If the integration check reports an `UNKNOWN` status, choose `Do not notify` or `Notify` for Unknown status.
+3. インテグレーションチェックで `UNKNOWN` ステータスが報告された場合、Unknown ステータスに対して `Do not notify` または `Notify` を選択してください。
 
-    If enabled, a state transition to `UNKNOWN` triggers a notification. In the [monitor status page][1], the status bar of a group in `UNKNOWN` state uses `NODATA` grey. The overall status of the monitor stays in `OK`.
+   有効にした場合、`UNKNOWN` への状態遷移は通知をトリガーします。[モニターステータスページ][1]では、`UNKNOWN` 状態のグループのステータスバーには `NODATA` のグレーが表示されます。モニターの全体的なステータスは `OK` のままです。
 
-4. Resolve the alert after selected consecutive successes: `<NUMBER>`
+4. 何回連続して成功したらアラートを解決するか、回数 `<数値>` を選択します。
 
-    Choose how many consecutive runs with the `OK` status resolve the alert.
+    何回連続して `OK` ステータスが送信されたらアラートを解決するか、回数を選択します。
 
 
 [1]: /monitors/manage/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
-A cluster alert calculates the percent of checks in a given status and compares it to your thresholds.
+クラスターアラートは、既定のステータスでチェックの割合を計算し、しきい値と比較します。
 
-Set up a cluster alert:
+クラスターアラートをセットアップする
 
-1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per group basis.
+1. タグによりチェックをグループ化するかどうか決定します。`Ungrouped` はすべてのソースでステータスのパーセンテージを計算します。`Grouped` は各グループごとのステータスのパーセンテージを計算します。
 
-2. Select the percentage for the alert threshold.
+2. アラートのしきい値となるパーセンテージを選択します。
 
-Each check tagged with a distinct combination of tags is considered to be a distinct check in the cluster. Only the status of the last check of each combination of tags is taken into account in the cluster percentage calculation.
+タグの個別の組み合わせでタグ付けされた各チェックは、クラスター内の個別のチェックと見なされます。タグの各組み合わせの最後のチェックのステータスのみが、クラスターのパーセンテージの計算で考慮されます。
 
-{{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="Cluster Check Thresholds" style="width:90%;">}}
+{{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="クラスターチェックのしきい値" style="width:90%;">}}
 
-For example, a cluster check monitor grouped by environment can alert if more that 70% of the checks on any of the environments submit a `CRITICAL` status, and warn if more that 50% of the checks on any of the environments submit a `WARN` status.
+たとえば、環境ごとにグループ化されたクラスターチェックモニターは、いずれかの環境のチェックの 70% 以上が `CRITICAL` ステータスを送信した場合にアラートし、いずれかの環境のチェックの 50% 以上が `WARN` ステータスを送信した場合に警告できます。
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Advanced alert conditions
+#### 高度なアラート条件
 
-See the [Monitor configuration][5] documentation for information on [No data][6], [Auto resolve][7], and [New group delay][8] options.
+[データなし][6]、[自動解決][7]、[新しいグループ遅延][8]の各オプションに関する情報は、[モニターコンフィギュレーション][5]ドキュメントを参照してください。
 
-#### Notifications
+#### 通知
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][9] page.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

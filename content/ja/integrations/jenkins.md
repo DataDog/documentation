@@ -1,10 +1,10 @@
 ---
 categories:
 - configuration & deployment
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies:
 - https://github.com/jenkinsci/datadog-plugin/blob/master/README.md
-description: Automatically forward your Jenkins metrics, events, and service checks
+description: Jenkins のメトリクス、イベント、サービスチェックを自動転送
   to Datadog.
 doc_link: https://docs.datadoghq.com/integrations/jenkins/
 git_integration_title: jenkins
@@ -294,11 +294,11 @@ The other `datadog` settings, such as `collectLogs` or `tags` can be added along
 
 Please bear in mind that Test Visibility is a separate Datadog product that is billed separately.
 
-## Data collected
+## データ収集
 
 This plugin is collecting the following [events](#events), [metrics](#metrics), and [service checks](#service-checks):
 
-### Events
+### イベント
 
 #### Default events type
 
@@ -350,7 +350,7 @@ To get more specific control over what events are sent, three configuration opti
 
 NOTE: As mentioned in the [job customization](#job-customization) section, there are job-specific toggles to send `SCMCheckout` events. If the `SCMCheckout` event is excluded globally, this toggle will have no effect.
 
-### Metrics
+### メトリクス
 
 | Metric Name                            | Description                                                                                            | Default Tags                                                               |
 |----------------------------------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------|

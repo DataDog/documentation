@@ -1,9 +1,9 @@
 ---
 "categories":
 - "mobile"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Monitor app crashes and collect detailed runtime performance metrics."
+"description": "アプリのクラッシュの監視と詳細なランタイムパフォーマンスメトリクスの収集。"
 "doc_link": "https://docs.datadoghq.com/integrations/mparticle/"
 "draft": false
 "git_integration_title": "mparticle"
@@ -31,9 +31,9 @@ mParticle lets you track detailed run-time performance data on your mobile apps.
 
 For more information about mParticle, check out [the blog][1] and [their docs][2].
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 1. Log in to your [mParticle account][3].
 2. Navigate to the Services Page by clicking on the paper-airplane icon on the left-hand navigation bar.
@@ -41,21 +41,21 @@ For more information about mParticle, check out [the blog][1] and [their docs][2
 4. Enter your [Datadog API key][4] into the settings panel and click Save.
 5. Toggle the Status to on to forward data to Datadog.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 See the [mParticle documentation][2] for metrics available with this integration.
 
-### Events
+### イベント
 
 The mParticle integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The mParticle integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

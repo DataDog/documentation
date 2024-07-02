@@ -86,14 +86,14 @@ configuration.proxyConfiguration = @{
                        trackingConsent:trackingConsent];
 ```
 
-For more information, see the [URLSessionConfiguration.connectionProxyDictionary][3] documentation.
+詳しくは、[URLSessionConfiguration.connectionProxyDictionary][3] のドキュメントを参照してください。
 
 [3]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-When initializing the React Native SDK, specify the following proxy configuration:
+React Native SDK の初期化時に、以下のプロキシ構成を指定します。
 
 ```javascript
 import { DatadogProviderConfiguration, ProxyConfiguration, ProxyType } from '@datadog/mobile-react-native';
@@ -106,17 +106,17 @@ config.proxyConfig = new ProxyConfiguration(ProxyType.HTTPS, '<www.example.com>'
 {{% /tab %}}
 {{< /tabs >}}
 
-## SOCKS proxy
+## SOCKS プロキシ
 
 ### Prerequisite proxy setup
 
-To successfully forward a request to Datadog, your proxy must support [SOCKS5 proxying][4].
+リクエストを Datadog に正常に転送するには、プロキシが [SOCKS5 プロキシ][4]をサポートしている必要があります。
 
 ### Recommended SDK setup
 
 {{< tabs >}}
 {{% tab "Android" %}}
-When initializing the Android SDK, specify the following proxy configuration:
+Android SDK の初期化時に、以下のプロキシ構成を指定します。
 
 ```kotlin
 val configBuilder = Configuration.Builder(
@@ -130,13 +130,13 @@ val authenticator = ProxyAuthenticator("<proxy user>", "<proxy password>")
 configBuilder.setProxy(proxy, authenticator)
 ```
 
-For more information, see the [OkHttpClient Proxy and Authenticator][2] documentation.
+詳細については、[OkHttpClient の Proxy と Authenticator][2]のドキュメントを参照してください。
 
 [2]: https://square.github.io/okhttp/3.x/okhttp/okhttp3/OkHttpClient.html
 
 {{% /tab %}}
 {{% tab "iOS" %}}
-When initializing the iOS SDK, specify the following proxy configuration:
+iOS SDK の初期化時に、以下のプロキシ構成を指定します。
 
 #### Swift
 ```swift
@@ -175,14 +175,14 @@ configuration.proxyConfiguration = @{
                        trackingConsent:trackingConsent];
 ```
 
-For more information, see the [URLSessionConfiguration.connectionProxyDictionary][3] documentation.
+詳しくは、[URLSessionConfiguration.connectionProxyDictionary][3] のドキュメントを参照してください。
 
 [3]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-When initializing the React Native SDK, specify the following proxy configuration:
+React Native SDK の初期化時に、以下のプロキシ構成を指定します。
 
 ```javascript
 import { DatadogProviderConfiguration, ProxyConfiguration, ProxyType } from '@datadog/mobile-react-native';
@@ -195,7 +195,7 @@ config.proxyConfig = new ProxyConfiguration(ProxyType.SOCKS, '<www.example.com>'
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -23,7 +23,7 @@
 "categories":
 - alerting
 - automation
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/bluematador/README.md"
 "display_on_public_website": true
@@ -72,27 +72,27 @@ You can use it to enhance your existing dashboards or to correlate with metrics 
 
 For a full list of events and metrics that Blue Matador monitors and that you can import into Datadog, see their [monitors page][3].
 
-## Setup
+## セットアップ
 
 To get Blue Matador events into Datadog, use a [Datadog API key][4] to create a new notification method in Blue Matador.
 
 **Note**: Already existing events are not imported into Datadog, but new events appear as they occur.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Blue Matador integration does not include any metrics.
 
-### Events
+### イベント
 
 All events are sent to the Datadog event stream.
 
-### Service Checks
+### サービスチェック
 
 The Blue Matador integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact the [maintainer][5] of this integration.
 

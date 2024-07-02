@@ -17,28 +17,28 @@ aliases:
   - /tracing/profiler/enabling/nodejs/
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
 
-## Requirements
+## 要件
 
-For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][7].
+すべての言語におけるランタイムとトレーサーの最小バージョンと推奨バージョンの要約については、[サポートされている言語とトレーサーのバージョン][7]をお読みください。
 
 The Datadog Profiler requires at least Node.js 14, but Node.js 16 or higher is recommended. If you use a version of Node.js earlier than 16, some applications see tail latency spikes every minute when starting the next profile.
 
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
-## Installation
+## インストール
 
-To begin profiling applications:
+アプリケーションのプロファイリングを開始するには
 
 1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
-2. Run `npm install --save dd-trace@latest` to add a dependency on the `dd-trace` module which includes the profiler.
+2. `npm install --save dd-trace@latest` を実行して、プロファイラーを含む `dd-trace` モジュールへの依存関係を追加します。
 
-3. Enable the profiler:
+3. プロファイラーを有効にします。
 
    {{< tabs >}}
-{{% tab "Environment variables" %}}
+{{% tab "環境変数" %}}
 
 ```shell
 export DD_PROFILING_ENABLED=true
@@ -47,7 +47,7 @@ export DD_SERVICE=my-web-app
 export DD_VERSION=1.0.3
 ```
 
-**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
+**注**: Datadog APM を既に使用している場合は、既に `init` を呼び出しているので、再度呼び出す必要はありません。そうでない場合は、トレーサーとプロファイラーが一緒にロードされていることを確認してください。
 
 ```node
 node -r dd-trace/init app.js
@@ -65,7 +65,7 @@ const tracer = require('dd-trace').init({
 })
 ```
 
-**Note**: If you're already using Datadog APM, you are already calling `init` and don't need to do so again. If you are not, ensure the tracer and the profiler are loaded together:
+**注**: Datadog APM を既に使用している場合は、既に `init` を呼び出しているので、再度呼び出す必要はありません。そうでない場合は、トレーサーとプロファイラーが一緒にロードされていることを確認してください。
 
 ```node
 const tracer = require('dd-trace/init')
@@ -78,15 +78,15 @@ const tracer = require('dd-trace/init')
 
 5. A minute or two after starting your Node.js application, your profiles will show up on the [APM > Profiler page][5].
 
-## Not sure what to do next?
+## 次のステップ
 
-The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+[プロファイラーの概要][6]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
-## Experiencing high overhead?
+## オーバーヘッドが高いと感じている方
 
-Node.js 16 or higher is recommended. On earlier versions, some applications see tail latency spikes every minute while starting the next profile.
+Node.js 16 以上を推奨します。それ以前のバージョンでは、アプリケーションによっては、次のプロファイルを開始する際に、1 分ごとにテールレイテンシーがスパイクすることがあります。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

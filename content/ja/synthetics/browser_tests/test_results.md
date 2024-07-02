@@ -1,5 +1,5 @@
 ---
-title: Browser Testing Results
+title: ブラウザテストの結果
 kind: documentation
 description: View Synthetic browser test results and compare successful or failed sample runs to test runs. 
 aliases:

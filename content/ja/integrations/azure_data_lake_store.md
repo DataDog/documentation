@@ -5,7 +5,7 @@
 - azure
 - cloud
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure Data Lake Store metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_data_lake_store/"
@@ -30,29 +30,29 @@ Azure Data Lake Store is a no limits data lake that powers big data analytics.
 
 Use the Datadog Azure integration to collect metrics from Data Lake Store.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_data_lake_store" >}}
 
 
 **Note**: This integration only collects metrics for Data Lake Storage Gen 1. Data Lake Storage Gen 2 is built on Azure Blob Storage, so its metrics can be found in Datadog under the Blob Storage namespace: `azure.storage_storageaccounts_blobservices.*`. For additional details, see the [Azure Data Lake Storage Gen 2][3] documentation.
 
-### Events
+### イベント
 
 The Azure Data Lake Store integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Data Lake Store integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

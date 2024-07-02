@@ -6,7 +6,7 @@ type: multi-code-lang
 code_lang_weight: 50
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-cpp"
-  tag: Source Code
+  tag: ソースコード
   text: Source code
 - link: /tracing/glossary/
   tag: Documentation

@@ -2,9 +2,9 @@
 "categories":
 - "alerting"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Use VictorOps as a notification channel in Datadog alerts and events."
+"description": "VictorOps を Datadog のアラートとイベントで通知チャンネルとして使用。"
 "doc_link": "https://docs.datadoghq.com/integrations/victorops/"
 "draft": false
 "git_integration_title": "victorops"
@@ -29,30 +29,30 @@ Use the Datadog-VictorOps integration to send Datadog alerts to VictorOps and ga
 - By taking a snapshot
 - When a metric alert is triggered
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 1. On your VictorOps settings page, click "Integrations"
 2. Click "Datadog", then "Enable Integration"
 3. Copy your key
 4. Back to Datadog, paste the API key in the next section here
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The VictorOps integration does not include any metric.
 
-### Events
+### イベント
 
 The VictorOps integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The VictorOps integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][1].
 

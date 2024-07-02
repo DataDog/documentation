@@ -20,7 +20,7 @@
 "categories":
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -60,9 +60,9 @@ See the [Okta Event Types API][1] for all the Okta events that Datadog can track
 
 For single sign-on, see [Configuring Okta as a SAML IdP][2].
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
 There are two methods to enable the Datadog Okta integration: through OAuth using credentials from the Datadog app on the Okta Integration Network or through an API key.
 
@@ -102,21 +102,21 @@ To enable the integration using an API key:
 
 4. Click **Save**.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Okta integration does not include any metrics.
 
-### Events
+### イベント
 
 The Okta integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Okta integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

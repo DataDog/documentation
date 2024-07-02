@@ -1,14 +1,14 @@
 ---
+title: Interpolation
 aliases:
-- /ja/graphing/functions/interpolation/
+    - /graphing/functions/interpolation/
 further_reading:
 - link: /dashboards/functions/
-  tag: ドキュメント
-  text: その他の関数タイプ
+  tag: Documentation
+  text: Other function types
 - link: /metrics/guide/interpolation-the-fill-modifier-explained/
-  tag: ドキュメント
-  text: 補間とフィル修飾子
-title: 補間
+  tag: Documentation
+  text: Interpolation and the Fill Modifier
 ---
 
 ## フィル
@@ -92,11 +92,11 @@ default_zero(avg:custom_metric{*})
 +---------------------+-----------------------------+
 ```
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/metrics/guide/interpolation-the-fill-modifier-explained/
-[2]: /ja/dashboards/functions/#add-a-function
-[3]: /ja/monitors/guide/as-count-in-monitor-evaluations/
-[4]: /ja/metrics/
+[1]: /metrics/guide/interpolation-the-fill-modifier-explained/
+[2]: /dashboards/functions/#add-a-function
+[3]: /monitors/guide/as-count-in-monitor-evaluations/
+[4]: /metrics/

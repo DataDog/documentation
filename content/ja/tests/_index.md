@@ -11,38 +11,38 @@ further_reading:
       tag: Release Notes
       text: Check out the latest Software Delivery releases! (App login required)
     - link: "https://www.datadoghq.com/blog/datadog-ci-visibility/"
-      tag: Blog
+      tag: ブログ
       text: Monitor your CI pipelines and tests with Datadog CI Visibility
     - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
-      tag: Blog
-      text: Troubleshoot end-to-end tests with CI Visibility and RUM
+      tag: ブログ
+      text: CI Visibility と RUM を使ったエンドツーエンドのテストのトラブルシューティング
     - link: /monitors/types/ci/
       tag: Documentation
       text: Learn about CI Test Monitors
     - link: /tests/guides/flaky_test_management/
       tag: Documentation
-      text: Learn about Flaky Test Management
+      text: 不安定なテストの管理について
     - link: /tests/browser_tests/
-      tag: Documentation
+      tag: ドキュメント
       text: Learn how to instrument your browser tests with RUM
     - link: /tests/troubleshooting/
-      tag: Documentation
+      tag: ドキュメント
       text: Learn how to troubleshoot Test Visibility
 cascade:
     algolia:
         rank: 70
-        tags: [ci test, ci tests, test visibility, failed test, flaky test, supported features]
+        tags: [ci test, ci tests, test visibility, failed test, 不安定なテスト, サポートされる機能]
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Test Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では現在 Test Visibility は利用できません。</div>
 {{< /site-region >}}
 
-## Overview
+## 概要
 
 [Test Visibility][1] provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that are most relevant to your work, focusing on the code you are responsible for, rather than the pipelines which run your tests.
 
-## Setup
+## セットアップ
 
 Select an option to configure Test Visibility in Datadog:
 
@@ -52,24 +52,24 @@ Select an option to configure Test Visibility in Datadog:
 
 In addition to tests, Test Visibility provides visibility over the whole testing phase of your project.
 
-### Supported features
+### サポートされる機能
 
 |                                                                                                                                                                                                                  |   .NET    | Java/JVM&#8209;based |       Javascript       |  Python   |   Ruby    |   Swift   |       JUnit Xml        |
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------:|:--------------------:|:----------------------:|:---------:|:---------:|:---------:|:----------------------:|
-| {{< ci-details title="Accurate time/durations results" >}}Microseconds resolution in test start time and duration.{{< /ci-details >}}                                                                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
-| {{< ci-details title="Distributed traces on integration tests" >}}Tests that make calls to external services instrumented with Datadog show the full distributed trace in their test details.{{< /ci-details >}} | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           | {{< X >}} | {{< X >}} |                        |
-| {{< ci-details title="Agent-based reporting" >}}Ability to report test information through the Datadog Agent.{{< /ci-details >}}                                                                                 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
-| {{< ci-details title="Agentless reporting" >}}Ability to report test information without the Datadog Agent.{{< /ci-details >}}                                                                                   | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
+| {{< ci-details title="正確な時刻/継続時間結果" >}}テスト開始時刻と継続時間におけるマイクロ秒単位の分解能{{< /ci-details >}}                                                                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="インテグレーションテストの分散型トレース" >}}Datadog でインスツルメンテーションされた外部サービスを呼び出すテストは、テストの詳細で完全な分散型トレースを表示します。{{< /ci-details >}} | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="Agent ベースのレポート" >}}Datadog Agent を通じてテスト情報を報告する能力。{{< /ci-details >}}                                                                                 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="エージェントレスレポート" >}}Datadog Agent を使用せずにテスト情報を報告する能力。{{< /ci-details >}}                                                                                   | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Test suite level visibility" >}}Visibility over the whole testing process, including session, module, suites, and tests.{{< /ci-details >}}                                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
-| {{< ci-details title="Manual API" >}}Ability to programmatically create CI Visibility events for test frameworks that are not supported by Datadog's automatic instrumentation.{{< /ci-details >}}               | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           | {{< X >}} | {{< X >}} |                        |
-| {{< ci-details title="Codeowner by test" >}}Automatic detection of the owner of a test file based on the CODEOWNERS file.{{< /ci-details >}}                                                                     | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} (partially)  |
-| {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                        | {{< X >}} |       {{< X >}}      | {{< X >}} (only start) | {{< X >}} | {{< X >}} (only start) | {{< X >}} | {{< X >}} (only start) |
-| {{< ci-details title="CI and git info" >}}Automatic collection of git and CI environment metadata, such as CI provider, git commit SHA or pipeline URL.{{< /ci-details >}}                                       | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
-| {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for Intelligent Test Runner.{{< /ci-details >}}                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
+| {{< ci-details title="手動 API" >}}Datadog の自動インスツルメンテーションでサポートされていないテストフレームワーク用の CI Visibility イベントをプログラム的に作成する能力。{{< /ci-details >}}               | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="Codeowner by test" >}}Automatic detection of the owner of a test file based on the CODEOWNERS file.{{< /ci-details >}}                                                                     | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} (部分的)  |
+| {{< ci-details title="ソースコードの開始/終了" >}}テストの開始行と終了行の自動レポート。{{< /ci-details >}}                                                                                        | {{< X >}} |       {{< X >}}      | {{< X >}} (開始のみ) | {{< X >}} | {{< X >}} (開始のみ) | {{< X >}} | {{< X >}} (開始のみ) |
+| {{< ci-details title="CI と git 情報" >}}CI プロバイダー、git コミット SHA、パイプライン URL などの git や CI 環境のメタデータの自動収集。{{< /ci-details >}}                                       | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
+| {{< ci-details title="Git メタデータのアップロード" >}}Intelligent Test Runner で使用される git ツリー情報の自動アップロード。{{< /ci-details >}}                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Intelligent Test Runner *" >}}Capability to enable Intelligent Test Runner, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}}                    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} |  {{< X >}}     | {{< X >}} |                        |
-| {{< ci-details title="Code coverage support" >}}Ability to report total code coverage metrics.{{< /ci-details >}}                                                                                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}}       |           | {{< X >}} |   {{< X >}} (manual)   |
-| {{< ci-details title="Benchmark tests support" >}}Automatic detection of performance statistics for benchmark tests.{{< /ci-details >}}                                                                          | {{< X >}} |                      |                        | {{< X >}} |           | {{< X >}} |                        |
-| {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}                                                                                                     | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
+| {{< ci-details title="コードカバレッジサポート" >}}全体のコードカバレッジのメトリクスを報告する能力。{{< /ci-details >}}                                                                                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}}       |           | {{< X >}} |   {{< X >}} (手動)   |
+| {{< ci-details title="ベンチマークテストサポート" >}}ベンチマークテストのパフォーマンス統計の自動検出。{{< /ci-details >}}                                                                          | {{< X >}} |                      |                        | {{< X >}} |           | {{< X >}} |                        |
+| {{< ci-details title="パラメタライズドテスト" >}}パラメタライズドテストの自動検出。{{< /ci-details >}}                                                                                                     | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
 | {{< ci-details title="Early flake detection *" >}}Automatically retry new tests to detect flakiness.{{< /ci-details >}}                                                                                          | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |           |           |                        |
 | {{< ci-details title="Auto test retries *" >}}Automatically retry failed tests up to N times to avoid failing the build due to test flakiness.{{< /ci-details >}}                                               |           |       {{< X >}}      |                        |           |           |           |                        |
 | {{< ci-details title="Selenium RUM integration" >}}Automatically link browser sessions to test cases when testing RUM-instrumented applications.{{< /ci-details >}}                                              | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           | {{< X >}} |           |                        |
@@ -78,7 +78,7 @@ In addition to tests, Test Visibility provides visibility over the whole testing
 
 ## Default configurations
 
-Tests evaluate the behavior of code for a set of given conditions. Some of those conditions are related to the environment where the tests are run, such as the operating system or the runtime used. The same code executed under different sets of conditions can behave differently, so developers usually configure their tests to run in different sets of conditions and validate that the behavior is the expected for all of them. This specific set of conditions is called a *configuration*.
+テストは、与えられた条件のセットに対するコードの振る舞いを評価します。これらの条件の中には、OS やランタイムなど、テストが実行される環境に関連するものもあります。そのため、開発者は通常、異なる条件下でテストを実行するように構成し、 すべての条件下で期待通りの挙動が得られるかどうかを検証します。この特定の条件のセットを*構成*と呼びます。
 
 In Test Visibility, a test with multiple configurations is treated as multiple tests with a separate test for each configuration. In the case where one of the configurations fails but the others pass, only that specific test and configuration combination is marked as failed.
 
@@ -88,23 +88,23 @@ For example, suppose you're testing a single commit and you have a Python test t
 
 When you run your tests with Test Visibility, the library detects and reports information about the environment where tests are run as test tags. For example, the operating system name, such as `Windows` or `Linux`, and the architecture of the platform, such as `arm64` or `x86_64`, are added as tags on each test. These values are shown in the commit and on branch overview pages when a test fails or is flaky for a specific configuration but not others.
 
-The following tags are automatically collected to identify test configurations, and some may only apply to specific platforms:
+以下のタグは、テスト構成を特定するために自動的に収集され、特定のプラットフォームにのみ適用されるものもあります。
 
-| Tag Name               | Description                                                     |
+| タグ名               | 説明                                                     |
 |------------------------|-----------------------------------------------------------------|
-| `os.platform`          | Name of the operating system where the tests are run.           |
-| `os.family`            | Family of the operating system where the tests are run.         |
-| `os.version`           | Version of the operating system where the tests are run.        |
-| `os.architecture`      | Architecture of the operating system where the tests are run.   |
-| `runtime.name`         | Name of the runtime system for the tests.                       |
-| `runtime.version`      | Version of the runtime system.                                  |
-| `runtime.vendor`       | Vendor that built the runtime platform where the tests are run. |
-| `runtime.architecture` | Architecture of the runtime system for the tests.               |
-| `device.model`         | The device model running the tests.                             |
-| `device.name`          | Name of the device.                                             |
-| `ui.appearance`        | User Interface style.                                           |
-| `ui.orientation`       | Orientation the UI is run in.                                   |
-| `ui.localization`      | Language of the application.                                    |
+| `os.platform`          | テストが実行されるオペレーティングシステムの名前。           |
+| `os.family`            | テストが実行されるオペレーティングシステムの系列。         |
+| `os.version`           | テストが実行されるオペレーティングシステムのバージョン。        |
+| `os.architecture`      | テストが実行されるオペレーティングシステムのアーキテクチャ。   |
+| `runtime.name`         | テスト用ランタイムシステムの名前。                       |
+| `runtime.version`      | ランタイムシステムのバージョン。                                  |
+| `runtime.vendor`       | テストを実行するランタイムプラットフォームを構築したベンダー。 |
+| `runtime.architecture` | テスト用ランタイムシステムのアーキテクチャ。               |
+| `device.model`         | テストを実行しているデバイスのモデル。                             |
+| `device.name`          | デバイスの名前。                                             |
+| `ui.appearance`        | ユーザーインターフェイスのスタイル。                                           |
+| `ui.orientation`       | UI が実行されるオリエンテーション。                                   |
+| `ui.localization`      | アプリケーションの言語。                                    |
 
 ### Parameterized test configurations
 
@@ -121,7 +121,7 @@ Some examples of non-deterministic test parameters are:
 
 Avoid using non-deterministic test parameters. In case this is not possible, some testing frameworks provide a way to specify a deterministic string representation for a non-deterministic parameter (such as overriding parameter display name).
 
-## Custom configurations
+## カスタム構成
 
 There are some configurations that cannot be directly identified and reported automatically because they can depend on environment variables, test run arguments, or other approaches that developers use. For those cases, you must provide the configuration details to the library so Test Visibility can properly identify them.
 
@@ -133,11 +133,11 @@ For example, the following test configuration tags identify a test configuration
 DD_TAGS=test.configuration.disk:slow,test.configuration.memory:low
 {{< /code-block >}}
 
-All tags with the `test.configuration` prefix are used as configuration tags, in addition to the automatically collected ones.
+自動的に収集されたタグに加えて、`test.configuration` というプレフィックスを持つすべてのタグが構成タグとして使用されます。
 
-Note: Nested `test.configuration` tags, such as `test.configuration.cpu.memory`, are not supported.
+注: `test.configuration.cpu.memory` のようにネストされた `test.configuration` タグはサポートされていません。
 
-In order to filter using these configurations tags, [you must create facets for these tags][2].
+これらの構成タグを使ってフィルターをかけるには、[これらのタグ用のファセットを作成する必要があります][2]。
 
 ## Enhance your developer workflow
 
@@ -148,7 +148,7 @@ In order to filter using these configurations tags, [you must create facets for 
 {{< nextlink href="/tests/swift_tests" >}}Instrument Swift Tests with Browser RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Use CI tests data
+## CI テストデータの使用
 
 {{% ci-information-collected %}}
 
@@ -158,7 +158,7 @@ When creating a [dashboard][6] or a [notebook][7], you can use CI test data in y
 
 When you're evaluating failed or flaky tests, or the performance of a CI test, you can export your search query in the [Test Visibility Explorer][3] to a [CI Test monitor][4] by clicking the **Export** button.
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

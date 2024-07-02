@@ -17,7 +17,7 @@
 - marketplace
 - cloud
 - collaboration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -83,36 +83,36 @@
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## Overview
+## 概要
 
-[LambdaTest][4] is a cloud-based test execution platform that allows users to run both manual and automated tests on websites and web applications across 2000+ browsers, browser versions, and operating systems.
+LambdaTest はクラウドベースのテスト実行プラットフォームで、2000 以上のブラウザ、ブラウザバージョン、OS に対応した Web サイトや Web アプリケーションで手動テストと自動テストの両方を実行することが可能です。
 
-LambdaTest can run manual and automated tests, and supports various automation testing frameworks like Selenium, Cypress, and TestCafe. In addition, you can log bugs with a single click while performing cross-browser testing of your websites (and web applications) from the LambdaTest platform to Datadog. LambdaTest automatically includes details from the testing environment, such as browser version, OS, resolution, comments, along with screenshots.
+LambdaTest は、手動テストと自動テストを実行でき、Selenium、Cypress、TestCafe など、さまざまな自動テストフレームワークをサポートしています。また、LambdaTest プラットフォームから Datadog に Web サイト (および Web アプリケーション) のクロスブラウザテストを実行しながら、ワンクリックでバグを記録することが可能です。LambdaTest には、ブラウザのバージョン、OS、解像度、コメントなど、テスト環境からの詳細がスクリーンショットとともに自動的に記録されます。
 
-With LambdaTest, you have access to:  
+LambdaTest を使用すると、以下にアクセスできます。
 
-- Live-interactive testing across 2000+ browsers and real machines hosted on cloud-based infrastructure.
-- An online automation testing grid that supports Selenium and Cypress tests with any CI/CD pipeline to help QA teams validate and ship quality builds faster.
-- A next-gen, developer-friendly browser that helps you build well-performing and responsive websites with speed.
-- 100+ integrations with third-party tools for project management, communication, codeless automation, CI/CD, and more.
-- 24/7 chat support.
-- Lifetime free access to the platform with 100 free automation testing minutes.
+- クラウドベースのインフラストラクチャーでホストされた 2000 以上のブラウザと実機によるライブインタラクティブテスト。
+- あらゆる CI/CD パイプラインで QA チームが高品質のビルドを迅速に検証し出荷できるよう支援する、Selenium と Cypress のテストをサポートするオンライン自動テストグリッド。
+- パフォーマンスとレスポンスに優れたウェブサイトをスピーディーに構築できる、開発者に優しい次世代ブラウザ。
+- プロジェクト管理、コミュニケーション、コードレス自動化、CI/CD などのためのサードパーティツールとの 100 以上のインテグレーション。
+- 24 時間 365 日のチャットサポート。
+- プラットフォームへの生涯無料アクセス、自動化テスト 100 分無料。
 
-You can purchase a subscription to LambdaTest through the Datadog Marketplace. Once you have your LambdaTest account set up (or if you're already a customer of LambdaTest), navigate to the [integration tile][1] to start sending data into Datadog.
+Datadog Marketplace を通じて、LambdaTest のサブスクリプションを購入することができます。LambdaTest のアカウントを設定したら (または既に LambdaTest のお客様である場合)、[インテグレーションタイル][1]に移動して、Datadog へのデータ送信を開始してください。
 
 
-## Support
+## サポート
 
-For support or feature requests, contact LambdaTest through the following channels:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから LambdaTest にお問い合わせください。
 
-Email: [support@lambdatest.com][3]
-Phone: +1-(866)-430-7087
+メール: [support@lambdatest.com][3]
+電話: +1-(866)-430-7087
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor user-facing bugs with LambdaTest’s subscription in the Datadog Marketplace][5]
+- [Datadog Marketplace の LambdaTest のサブスクリプションを使ってユーザー向けのバグを監視する][5]
 
 [1]: https://app.datadoghq.com/integrations/lambdatest
 [2]: https://www.lambdatest.com/pricing
@@ -120,4 +120,4 @@ Additional helpful documentation, links, and articles:
 [4]: https://www.lambdatest.com/
 [5]: https://www.datadoghq.com/blog/monitor-user-bugs-with-lambdatest/
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/lambdatest-software-license" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/lambdatest-software-license" target="_blank">こちらをクリック</a>してください。

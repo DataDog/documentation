@@ -13,20 +13,20 @@ further_reading:
     text: Metrics Distributions
 ---
 
-## Overview
+## 概要
 
-The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. 
+[メトリクスの概要ページ][1]には、過去 1 時間、1 日、または 1 週間の指定されたタイムフレームで Datadog に報告されたメトリクスのリストが表示されます。
 
-Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
+**Metric** または **Tag** 検索フィールドを使用して、メトリクス名またはタグでメトリクスを検索します。
 
 {{< img src="metrics/summary/tag_advancedfiltering3.mp4" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
 
-Tag filtering supports boolean and wildcard syntax so that you can quickly identify: 
-* Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
-* Metrics that are missing a particular tag key, for example, `team`: `NOT team:*`
+タグフィルターは、ブーリアンやワイルドカードの構文に対応しており、以下を素早く識別することができます。
+* 特定のタグキーでタグ付けされたメトリクス。例: `team`: `team:*`
+* 特定のタグキーがないメトリクス。例: `team`: `NOT team:*`
 
 
-## Facet panel
+## ファセットパネル
 
 The search bars provide the most comprehensive set of actions to filter the list of metrics. But facets can also filter your metrics by:
 
@@ -41,101 +41,101 @@ The search bars provide the most comprehensive set of actions to filter the list
 
 {{< img src="metrics/summary/facets4.png" alt="Metrics Facet Panel" style="width:75%;">}}
 
-## Configuration of multiple metrics 
-There are two buttons that allow you to configure multiple metrics at a time: 
+## 複数のメトリクスのコンフィギュレーション
+一度に複数のメトリクスを構成できる 2 つのボタンがあります。
 
 {{< img src="metrics/summary/configurationbuttons2.png" alt="Bulk Configuration Buttons" style="width:75%;">}}
 
-* **Calculate Percentiles**: Add percentile aggregations to multiple distribution metrics.
+* **Calculate Percentiles**: 複数のディストリビューションメトリクスにパーセンタイル集計を追加します。
 
-{{< img src="metrics/summary/bulkpercentiles.jpg" alt="Bulk Percentiles" style="width:75%;">}}
+{{< img src="metrics/summary/bulkpercentiles.jpg" alt="一括パーセンタイル" style="width:75%;">}}
 
-* **Configure Tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without LimitsTM
+* **Configure Tags**: Metrics without Limits™ を使用して、ネームスペースに一致する複数のカスタムメトリクスにタグを構成します
 
-{{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
+{{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="一括メトリクスタグ構成" video="true" style="width:100%;" >}}
 
 
-## Metric details sidepanel
+## メトリクスの詳細サイドパネル
 
-Click on any metric name to display its details sidepanel for more information regarding the metric's metadata and tags: 
+メトリクスのメタデータとタグの詳細については、メトリクス名をクリックして詳細サイドパネルを表示してください。
 
-{{< img src="metrics/summary/mwl_sidepanel.jpg" alt="Metric panel" style="width:75%;">}}
+{{< img src="metrics/summary/mwl_sidepanel.jpg" alt="メトリクスパネル" style="width:75%;">}}
 
-### Metric name
+### メトリクス名
 
-The name of your metric in the [Metrics Explorer][2], [dashboards][3], etc.
+[メトリクスエクスプローラー][2]や[ダッシュボード][3]などに表示されるメトリクスの名前です。
 
 ### Ingested custom metrics
 
-A metric name may emit multiple ingested custom metrics depending on its associated tag value combinations. Ingested custom metrics represent all of the data originally submitted with code.
+メトリクス名は、関連するタグ値の組み合わせによって、複数のインジェストされたカスタムメトリクスを発行することができます。インジェストされたカスタムメトリクスは、元々コードで送信されたすべてのデータを表します。
 
-Learn more in the [custom metrics][4] documentation.
+詳細については、[カスタムメトリクス][4]のドキュメントをご覧ください。
 
 ### Indexed custom metrics
 
-Unlike ingested custom metrics, indexed custom metrics represent those that remain queryable across the Datadog platform. This number may be impacted by adding or removing percentile aggregations or by use of Metrics without LimitsTM. Learn more in the [Metrics without LimitsTM][10] documentation.
+インジェストされたカスタムメトリクスとは異なり、インデックスされたカスタムメトリクスは、Datadog プラットフォーム全体でクエリ可能な状態を維持するものを表しています。この数は、パーセンタイル集計の追加や削除、または Metrics without Limits™ の使用によって影響を受ける可能性があります。詳しくは、[Metrics without Limits™][10] のドキュメントを参照してください。<br>
 
-### Hosts
+### ホスト
 
-The total number of hosts reporting a metric.
+メトリクスをレポートしているホストの総数。
 
-### Tag values
+### タグ値
 
-The total number of unique tag values attached to a metric.
+メトリクスにアタッチされた一意のタグ値の総数。
 
-[Learn more about tagging][5].
+[タグ付けに関する詳しい説明][5]。
 
-### Metrics metadata
+### メトリクスメタデータ
 
-The metadata attached to your metric. Most of the metadata can be edited on the metric summary page or with the [Datadog API][6].
+メトリクスに作成されたメタデータを表示します。ほとんどのメタデータは、メトリクスの概要ページ、または [Datadog API][6] を使用して変更できます。
 
-#### Metric unit
+#### メトリクスの単位
 
-The unit for your metric (byte, second, request, query, etc.). See the [metric unit][7] page for more details.
+メトリクスの単位 (バイト、秒、リクエスト、クエリなど) を表示します。詳しくは、[メトリクスの単位][7]のページを参照してください。
 
-When submitting custom metrics to Datadog, it is possible to change the [unit of measurement][1] that displays when hovering over the metric in your graph.
+Datadog にカスタムメトリクスを送信する際、グラフのメトリクスにカーソルを合わせた時に表示される[計測単位][1]を変更することが可能です。
 
-**Note**: This does not change how a metric graph is displayed. It only changes the units of measurement that raw values are considered as when you hover over a metric. Formatting is automatically applied for readability. For example, bytes (`B`) may be displayed as kilobytes (`KiB`).
+**注**: メトリクスのグラフの表示方法は変わりません。元の値の測定単位がマウスを合わせた時に変わるだけです。読みやすい形式になるよう自動的に変更されます。たとえば、バイト (`B`) がキロバイト (`KiB`) の表示に変わる場合があります。
 
-#### Metric type
+#### メトリクスタイプ
 
-The type for your metric (gauge, rate, count, distribution). See the [metric type][8] page for more details.
+メトリクスタイプ (GAUGE、RATE、COUNT、DISTRIBUTION など) を表示します。詳しくは、[メトリクスタイプ][8]のページを参照してください。
 
-**Warning**: Editing the metric type changes that metric's behavior for **ALL** your dashboards and monitors.
+**警告**: メトリクスタイプを編集すると、ダッシュボードとモニターの**すべて**に対するメトリクスの動作が変更されます。
 
-#### Integration name
+#### インテグレーション名
 
-If the metric is coming from a supported [integration][9], the metadata lists the integration name. This information cannot be edited.
+メトリクスがサポートされている[インテグレーション][9]からのものである場合、メタデータにはインテグレーション名がリストされます。この情報は編集できません。
 
-#### Interval
+#### 間隔
 
-The collection interval for the metric in seconds.
+メトリクスの収集間隔を秒で表示します。
 
-#### Metric description
+#### メトリクスの説明
 
-The metric description helps you understand what a metric does. Descriptions are pre-populated for metrics coming from supported [integrations][9]. Use this field to update the descriptions for your [custom metrics][4].
+メトリクスの内容を理解するのに役立ちます。メトリクスに使用したサポート対象の[インテグレーション][9]から送られてくる説明が表示されます。[カスタムメトリクス][4]の場合は、このフィールドを使用して説明を更新できます。
 
-### Tags table
+### タグテーブル
 
-The tags table offers multiple ways to explore all of the tag keys and tag values that are actively reporting in your metric's data.
+タグテーブルは、メトリクスのデータでアクティブにレポートしているすべてのタグキーとタグ値を探索するための複数の方法を提供します。
 
-Use the tags table to:
+タグテーブルを使用して、次のことを行います。
 
-- Sort tag keys by the **Count column** (count of unique tag values).
-- Search through the paginated table of tags for a particular tag key.
-- Export the tags table as a downloadable CSV.
-- Toggle between tags you've configured on your metric vs the metric's originally submitted tags
+- **Count 列** (一意のタグ値のカウント) でタグキーを並べ替えます。
+- タグのページ区切りされたテーブルを検索して、特定のタグキーを探します。
+- タグテーブルをダウンロード可能な CSV としてエクスポートします。
+- メトリクスに構成したタグと、メトリクスに元々登録されているタグを切り替えることができます。
 
-For any particular tag key, you can:
+特定のタグキーについて、次のことができます。
 
-- Inspect all tag values of that tag key.
-- Use a specific tag `key:value` to further filter the list of metrics displayed on the Metrics Summary page.
-- Open a graph of this metric filtered by your tag `key:value` pair in the Metrics Explorer.
-- Copy any tag `key:value` for filtering across the application.
+- そのタグキーのすべてのタグ値を検査します。
+- 特定のタグ `key:value` を使用して、[メトリクスの概要]ページに表示されるメトリクスのリストをさらにフィルタリングします。
+- メトリクスエクスプローラーで、タグ `key:value` ペアによってフィルタリングされたこのメトリクスのグラフを開きます。
+- アプリケーション全体でフィルタリングするために、タグ `key:value` をコピーします。
 
-{{< img src="metrics/summary/updated_tags_table.mp4" alt="Tags Table" video=true style="width:75%;">}}
+{{< img src="metrics/summary/updated_tags_table.mp4" alt="タグテーブル" video=true style="width:75%;">}}
 
-[Learn more about tagging][5].
+[タグ付けに関する詳しい説明][5]。
 
 ## Metrics Related Assets
 
@@ -148,40 +148,40 @@ To determine the value of any metric name to your organization, use Metrics Rela
 
 
 ## Metrics without LimitsTM
-Metrics without LimitsTM provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
+Metrics without LimitsTM は、Agent やコードレベルの変更を必要とせずに、カスタムメトリクスのサイズを制御できます。
 
-**Note:** Metrics without LimitsTM is only available for custom metrics.
+**注:** Metrics without LimitsTM は、カスタムメトリクスでのみ利用可能です。
 
-You can configure tags using the bulk metric tag configuration button or the **Manage Tags** button in a metric's details side panel. 
+タグの構成は、メトリクスのタグ一括構成ボタン、またはメトリクスの詳細サイドパネルの **Manage Tags** ボタンで行えます。
 
-{{< img src="metrics/distributions/managetags.png" alt="Configuring tags on a distribution" style="width:80%;">}}
+{{< img src="metrics/distributions/managetags.png" alt="ディストリビューションでタグを構成する" style="width:80%;">}}
 
-1. Click on your custom distribution metric name in the **Metrics Summary** table to open the metrics details side panel.
-2. Click the **Manage Tags** button to open the tag configuration modal.
+1. **Metrics Summary** テーブルでカスタムディストリビューションのメトリクス名をクリックし、メトリクス詳細のサイドパネルを開きます。
+2. **Manage Tags** ボタンをクリックして、タグコンフィギュレーションモーダルを開きます。
 
 3. Select **Include tags...** or **Exclude tags...** to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][10] documentation.
 4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting **Save**.
 
 **Note**: The cardinality estimator requires the metric to be older than 48 hours.
 
-### Queryable tags 
+### クエリ可能なタグ 
 
-Once your metric has been configured with Metrics without LimitsTM, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume. 
+メトリクスが Metrics without LimitsTM で構成されると、どのタグが Queryable のままか、つまり _Indexed Custom Metrics_ のボリュームに寄与するタグを表示することができます。また、_Ingested Custom Metrics_ のボリュームに寄与する、最初に送信されインジェストされたすべてのタグにトグルバックすることができます。
 
-### Optimize your metric with aggregations in Advanced Mode
+### アドバンスドモードでの集計によるメトリクスの最適化
 
-For custom metrics of the count, gauge, or rate metric type, you can further refine your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without LimitsTM. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
+カウント、ゲージ、レートの各メトリクスタイプのカスタムメトリクスでは、Metrics without LimitsTM のアドバンスモードでオプションで追加の集計を含めることにより、メトリクスの構成をさらに洗練させることができます。デフォルトでは、Datadog は、構成されたメトリクスのクエリの数学的精度を維持するために、メトリクスのタイプに応じて最も頻繁にクエリされる集計の組み合わせを以下に示すように保存します。
 
-- Configured counts/rates are queryable with time/space aggregations of `SUM`
-- Configured gauges are queryable in time/space aggregations of `AVG`
+- 構成されたカウント/レートは `SUM` の時間/空間集計でクエリ可能です
+- 構成されたゲージは `AVG` の時間/空間集計ででクエリ可能です
 
-{{< img src="metrics/summary/customize_aggr_docs.jpg" alt="Refine aggregations on counts, rates, and gauges" style="width:80%;">}}
+{{< img src="metrics/summary/customize_aggr_docs.jpg" alt="カウント、レート、ゲージに関する集計の精緻化" style="width:80%;">}}
 
-More aggregations are available should they be valuable to you. You can add or remove aggregations at any time with no required Agent or code-level changes.
+さらに多くの集計が用意されており、お客様にとって価値のある集計となります。Agent やコードレベルの変更なしに、いつでも集計を追加または削除することができます。
 
-**Note**: Configuring your count, rate, or gauge metric and removing an aggregation may impact existing dashboards and monitors.
+**注**: カウント、レート、ゲージのメトリクスを構成し、集計を削除すると、既存のダッシュボードやモニターに影響を与える可能性があります。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -3,61 +3,61 @@ title: Dynamic Instrumentation Expression Language
 private: false
 ---
 
-## Overview
+## 概要
 
 The Dynamic Instrumentation Expression Language helps you formulate log probe message templates, metric probe expressions, span tag values, and probe conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators. 
 
-For example, you can create a histogram from the size of a collection using `count(myCollection)` as the metric expression. Metric expressions must evaluate to a number.
+例えば、`count(myCollection)` をメトリクス式として使用すると、コレクションのサイズからヒストグラムを作成することができます。メトリクス式は数値として評価されなければなりません。
 
-In log templates and tag values, expressions are delimited from the static parts of the template with brackets, for example: `User name is {user.name}`. Log template expressions can evaluate to any value. If evaluating the expression fails, it is replaced with `UNDEFINED`.
+ログテンプレートとタグの値では、式はテンプレートの静的な部分とブラケットで区切られます。例えば、`User name is {user.name}` です。ログテンプレート式は任意の値で評価することができます。もし、式の評価に失敗した場合は、`UNDEFINED` に置き換えられます。
 
-Probe conditions must evaluate to a Boolean, for example: `startsWith(user.name, "abc")`, `len(str) > 20` or `a == b`.
+プローブ条件はブール値で評価されなければなりません。例: `startsWith(user.name, "abc")`、`len(str) > 20` または `a == b`
 
-Generally, the Expression Language supports:
-* Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
+一般的に、式言語は以下をサポートしています。
+* オブジェクト内のローカル変数、メソッドのパラメーター、深くネストされたフィールドや属性へのアクセス。
 * Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`, `instanceof`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
-* Using logical operators (`&&`, `||`, and `not` or `!`) to build complex Boolean conditions.
-* Using the `null` literal (equivalent to `nil` in Python).
+* 論理演算子 (`&&`、`||`、`not` または `!`) を使って複雑なブール値を構築。
+* `null` リテラル (Python の `nil` に相当) を使用。
 
-It does **not** support:
-* Calling methods. Dynamic Instrumentation does not permit executing code that may have side effects. However, you can access `private` fields directly.
-* Other native programming language syntax beyond what is described on this page.
+以下はサポートして**いません**。
+* メソッドの呼び出し。ダイナミックインスツルメンテーションは副作用のあるコードの実行を許可しません。しかし、`private` フィールドに直接アクセスすることはできます。
+* このページで説明されている以外のネイティブプログラミング言語の構文。
 
-The following sections summarize the variables and operations that the Dynamic Instrumentation Expression Language supports.
+以下のセクションでは、ダイナミックインスツルメンテーション式言語がサポートする変数と 操作について説明します。
 
-## Contextual variables
+## コンテキスト変数
 
-| Keyword     | Description                                                                |
+| キーワード     | 説明                                                                |
 |-------------|----------------------------------------------------------------------------|
-| `@return`   | Provides access to the return value                                        |
-| `@duration` | Provides access to the call execution duration                             |
-| `@it`       | Provides access to the current value in collection iterating operations    |
+| `@return`   | 戻り値へのアクセスを提供します                                        |
+| `@duration` | 呼び出し実行期間へのアクセスを提供します                             |
+| `@it`       | コレクションの反復操作における現在値へのアクセスを提供します    |
 | `@exception`| Provides access to the current uncaught exception                          |
 
 
-## String operations
+## 文字列演算子
 
-| Operation | Description | Example |
+| 演算子 | 説明 | 例 |
 |-----------|-------------|---------|
-| `isEmpty(value_src)` | Checks for presence of data. For strings, it is equivalent to `len(str) == 0`. For collections, it is equivalent to `count(myCollection) == 0` | `isEmpty("Hello")` -> `False` |
-| `len(value_src)` | Gets the string length. | `len("Hello")` -> `5` |
-| `substring(value_src, startIndex, endIndex)` | Gets a substring. | `substring("Hello", 0, 2)` -> `"He"` |
-| `startsWith(value_src, string_literal)` | Checks whether a string starts with the given string literal. | `startsWith("Hello", "He")` -> `True` |
-| `endsWith(value_src, string_literal)` | Checks whether the string ends with the given string literal. | `endsWith("Hello", "lo")` -> `True` |
-| `contains(value_src, string_literal)` | Checks whether the string contains the string literal. | `contains("Hello", "ll")` -> `True` |
-| `matches(value_src, string_literal)` | Checks whether the string matches the regular expression provided as a string literal. | `matches("Hello", "^H.*o$")` -> `True` |
+| `isEmpty(value_src)` | データの有無をチェックします。文字列の場合は `len(str) == 0` と等価です。コレクションの場合は `count(myCollection) == 0` と等価です。 | `isEmpty("Hello")` -> `False` |
+| `len(value_src)` | 文字列の長さを取得します。 | `len("Hello")` -> `5` |
+| `substring(value_src, startIndex, endIndex)` | 部分文字列を取得します。 | `substring("Hello", 0, 2)` -> `"He"` |
+| `startsWith(value_src, string_literal)` | 文字列が与えられた文字列リテラルで始まるかどうかをチェックします。 | `startsWith("Hello", "He")` -> `True` |
+| `endsWith(value_src, string_literal)` | 文字列が与えられた文字列リテラルで終わるかどうかをチェックします。 | `endsWith("Hello", "lo")` -> `True` |
+| `contains(value_src, string_literal)` | 文字列が文字列リテラルを含むかどうかをチェックします。 | `contains("Hello", "ll")` -> `True` |
+| `matches(value_src, string_literal)` | 文字列が文字列リテラルとして指定された正規表現にマッチするかどうかをチェックします。 | `matches("Hello", "^H.*o$")` -> `True` |
 
-## Collection operations
+## コレクション演算子
 
-The following examples use a variable named `myCollection` defined as `[1,2,3]`:
+以下の例では、`[1,2,3]` として定義された `myCollection` という変数を使用しています。
 
-| Operation | Description | Example |
+| 演算子 | 説明 | 例 |
 |-----------|-------------|---------|
-| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference. | `any(myCollection, @it > 2)` -> `True` |
-| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | `all(myCollection, @it < 4)` -> `True` |
-| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | `filter(myCollection, @it > 1)` -> `[2,3]` |
-| `len(value_src)` | Gets the collection size. | `len(myCollection)` -> `3` |
-| `[ n ]` | For collections, returns the nth item in the collection. For maps and dictionaries, returns the value that corresponds to the key `n`. If the item does not exist, the expression yields an error. | `myCollection[1]` -> `2` |
+| `any(value_src, {predicate})` | コレクション内に、与えられた述語を満たす要素が少なくとも 1 つあるかどうかをチェックします。現在の要素には `@it` 参照でアクセスします。 | `any(myCollection, @it > 2)` -> `True` |
+| `all(value_src, {predicate})` | コレクション内のすべての要素が指定された述語を満たすかどうかをチェックします。現在の要素には `@it` 参照でアクセスします。 | `all(myCollection, @it < 4)` -> `True` |
+| `filter(value_src, {predicate})` | 述語を使ってコレクションの要素をフィルターします。現在の要素には `@it` 参照でアクセスします。 | `filter(myCollection, @it > 1)` -> `[2,3]` |
+| `len(value_src)` | コレクションサイズを取得します。 | `len(myCollection)` -> `3` |
+| `[ n ]` | コレクションの場合、コレクション内の n 番目のアイテムを返します。マップと辞書の場合、キー `n` に対応する値を返します。項目が存在しない場合、式はエラーを返します。 | `myCollection[1]` -> `2` |
 
 [1]: /metrics/types/?tab=count#metric-types
 [2]: /metrics/types/?tab=gauge#metric-types

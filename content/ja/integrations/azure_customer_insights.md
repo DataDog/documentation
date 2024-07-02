@@ -4,7 +4,7 @@
 "categories":
 - cloud
 - azure
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure Customer Insights metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_customer_insights/"
@@ -29,27 +29,27 @@ Azure Customer Insights enables organizations of all sizes to bring together div
 
 Use the Datadog Azure integration to collect metrics from Customer Insights.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_customer_insights" >}}
 
 
-### Events
+### イベント
 
 The Azure Customer Insights integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Customer Insights integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

@@ -88,7 +88,7 @@ Once a log pattern is excluded from Log Explorer, you can still track KPIs over 
 1. Click **New Metric** in the top right corner.
 1. Enter a name for your metric. Log-based metric names must follow the naming metric convention.
 1. Under **Define Query**, input the search query you copied and pasted into the pattern exclusion filter. For example, as per the example above: `service:web-store status:info "updating recommendations with customer_id" "url shops"`.
-1. Select the field you would like to track: Select `*` to generate a count of all logs matching your query or enter a measure (for example, `@duration`) to aggregate a numeric value and create its corresponding count, min, max, sum, and avg aggregated metrics.
+1. 追跡するフィールドを選択。`*` を選択し、クエリに一致するすべてのログのカウントを生成するか、メジャー (例、`@duration`) を入力して数値を集計し、集計メトリクスの対応するカウント、最小、最大、合計、平均を作成します。
 1. Add dimensions to group: Select log attributes or tag keys to apply to the generated log-based metric to transform them into tags following the `<KEY>:<VALUE>` format. Log-based metrics are considered custom metrics. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid negatively impacting your billing.
 
 ### Create an anomaly detection monitor
@@ -99,9 +99,9 @@ Once a log pattern is excluded from Log Explorer, you can still track KPIs over 
 
 1. Navigate to the [New Monitor][11] page.
 1. Select **Anomaly**.
-1. Enter the log-based metric you defined in the previous section.
-1. Set the alert conditions and add any additional information needed to alert yourself and/or your team of what's happening.
-1. Click **Create**.
+1. 前のセクションで定義したログベースのメトリクスを入力。
+1. アラート条件を設定し、ユーザーやユーザーのグループに現状を通知する際に必要な情報を追加します。
+1. **作成**をクリックします。
 
 When an anomaly is detected, an alert is sent to all who are tagged. This alert can also be found in the [Triggered Monitors][12] page.
 

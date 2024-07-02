@@ -27,7 +27,7 @@
 - iot
 - log collection
 - message queues
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md"
 "display_on_public_website": true
@@ -65,49 +65,48 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-[HiveMQ][1] is a MQTT based messaging platform designed for the fast, efficient and reliable movement
-of data to and from connected IoT devices. It is a MQTT 3.1, 3.1.1, and 5.0 compliant broker.
+[HiveMQ][1] は、接続された IoT デバイスと行き来するデータの高速で効率的かつ信頼性の高い移動のために設計された MQTT ベースのメッセージングプラットフォームです。MQTT 3.1、3.1.1、5.0 に準拠したブローカーです。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The HiveMQ check is included in the [Datadog Agent][2] package.
-No additional installation is needed on your server.
+HiveMQ チェックは [Datadog Agent][2] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `hivemq.d/conf.yaml` file, in the `conf.d/` folder at the root of your
-   Agent's configuration directory to start collecting your HiveMQ performance data.
-   See the [sample hivemq.d/conf.yaml][1] for all available configuration options.
+1. HiveMQ パフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリの
+   ルートにある `conf.d/` フォルダーの `hivemq.d/conf.yaml` ファイルを編集します。
+   使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル hivemq.d/conf.yaml][1] を参照してください。
 
-   This check has a limit of 350 metrics per instance. The number of returned metrics is indicated in [the status page][2].
-   You can specify the metrics you are interested in by editing the configuration below.
-   To learn how to customize the metrics to collect see the [JMX Checks documentation][3] for more detailed instructions.
-   If you need to monitor more metrics, contact [Datadog support][4].
+   このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、[ステータスページ][2]に表示されます。
+   以下で説明する構成を編集することで、関心があるメトリクスを指定できます。
+   収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][3]で詳細な手順を参照してください。
+   制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][4]までお問い合わせください。
 
-2. [Restart the Agent][5]
+2. [Agent を再起動します][5]。
 
-##### Log collection
+##### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add the following configuration block to your `hivemq.d/conf.yaml` file. Change the `path` and `service` parameter values based on your environment. See the [sample hivemq.d/conf.yaml][1] for all available configuration options.
+2. 次のコンフィギュレーションブロックを `hivemq.d/conf.yaml` ファイルに追加します。環境に基づいて、`path` パラメーターと `service` パラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル hivemq.d/conf.yaml][1] を参照してください。
 
    ```yaml
    logs:
@@ -121,7 +120,7 @@ To configure this check for an Agent running on a host:
            pattern: \d{4}\.\d{2}\.\d{2}
    ```
 
-3. [Restart the Agent][5].
+3. [Agent を再起動します][5]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/hivemq/datadog_checks/hivemq/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
@@ -129,25 +128,25 @@ To configure this check for an Agent running on a host:
 [4]: https://docs.datadoghq.com/help
 [5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-##### Metric collection
+##### メトリクスの収集
 
-For containerized environments, see the [Autodiscovery with JMX][1] guide.
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker log collection][2].
+Datadog Agent では、ログの収集がデフォルトで無効になっています。これを有効にするには、[Docker ログの収集][2]を参照してください。
 
-| Parameter      | Value                                              |
+| パラメーター      | 値                                              |
 | -------------- | -------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "hivemq", "service": "<SERVICE_NAME>"}` |
+| `<LOG_CONFIG>` | `{"source": "hivemq", "service": "<サービス名>"}` |
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][3] and look for `hivemq` under the **JMXFetch** section:
+[Agent の status サブコマンドを実行][3]し、**JMXFetch** セクションで `hivemq` を探します。
 
 ```text
 ========
@@ -169,25 +168,25 @@ JMXFetch
 {{% /tab %}}
 {{< /tabs >}}
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "hivemq" >}}
 
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "hivemq" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][3].
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Use HiveMQ and OpenTelemetry to monitor IoT applications in Datadog][4]
+- [Datadog で IoT アプリケーションを監視するために HiveMQ と OpenTelemetry を使用する][4]
 
 
 [1]: https://www.hivemq.com/hivemq/

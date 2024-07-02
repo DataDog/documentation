@@ -22,7 +22,7 @@
 - network
 - log collection
 - containers
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/consul_connect/README.md"
 "display_on_public_website": true
@@ -64,19 +64,19 @@
 
 Monitor your [Consul Connect][1] Envoy sidecar proxies with the [Datadog Envoy Integration][2]. The Consul Connect integration only supports [Consul Connect configured with Envoy][3]. 
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Install the [Datadog Agent][4] on your services running Consul Connect and follow the [Configuration](#configuration) instructions for your appropriate environment.
 
-### Configuration
+### 構成
 Follow the instructions below to configure this check for an Agent running on a host. For containerized environments, see the [Containerized](#containerized) section.
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -120,21 +120,21 @@ Follow the [Envoy containerized instructions][4] to configure log collection.
 
 [Run the Agent's status subcommand][5] and look for `envoy` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 See the [Envoy Integration documentation][6] for a list of metrics collected. 
 
-### Service Checks
+### サービスチェック
 
 See the [Envoy Integration documentation][7] for the list of service checks collected. 
 
-### Events
+### イベント
 
 Consul Connect does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

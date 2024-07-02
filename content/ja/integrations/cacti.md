@@ -24,7 +24,7 @@
 "categories":
 - "developer tools"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/cacti/README.md"
 "display_on_public_website": true
@@ -37,17 +37,17 @@
 "manifest_version": "2.0.0"
 "name": "cacti"
 "public_title": "Cacti"
-"short_description": "Forward your Cacti RRDs to Datadog for richer alerting and beautiful graphing."
+"short_description": "Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。"
 "supported_os":
 - "linux"
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
   - "Category::Developer Tools"
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   "configuration": "README.md#Setup"
-  "description": "Forward your Cacti RRDs to Datadog for richer alerting and beautiful graphing."
+  "description": "Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -57,56 +57,56 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-Get metrics from Cacti in real time to:
+Cacti からメトリクスをリアルタイムに取得すると、以下のことができます。
 
-- Visualize and monitor Cacti states.
-- Be notified about Cacti failovers and events.
+- Cacti の状態を視覚化および監視できます。
+- Cacti のフェイルオーバーとイベントの通知を受けることができます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Cacti check is included in the [Datadog Agent][1] package, to start gathering metrics you first need to:
+Cacti チェックは [Datadog Agent][1] パッケージに含まれています。メトリクスの収集を開始するには、次の手順に従います。
 
-1. Install `librrd` headers and libraries.
-2. Install Python bindings to `rrdtool`.
+1. `librrd` ヘッダーおよびライブラリをインストールします。
+2. Python バインディングを `rrdtool` にインストールします。
 
-#### Headers and libraries
+#### ヘッダーおよびライブラリ
 
-On Debian/Ubuntu:
+Debian/Ubuntu の場合
 
 ```shell
 sudo apt-get install librrd-dev
 ```
 
-On RHEL/CentOS:
+RHEL/CentOS の場合
 
 ```shell
 sudo yum install rrdtool-devel
 ```
 
-#### Python bindings
+#### Python バインディング
 
-Add the `rrdtool` Python package to the Agent with the following command:
+以下のコマンドを使用して、`rrdtool` Python パッケージを Agent に追加します。
 
 ```shell
 sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
 ```
 
-### Configuration
+### 構成
 
-#### Create a Datadog user
+#### Datadog ユーザーの作成
 
-1. Create a Datadog user with read-only rights to the Cacti database.
+1. Cacti データベースへの読み取り専用権限を持つ Datadog ユーザーを作成します。
 
    ```shell
    sudo mysql -e "create user 'datadog'@'localhost' identified by '<MYSQL_PASSWORD>';"
    sudo mysql -e "grant select on cacti.* to 'datadog'@'localhost';"
    ```
 
-2. Check the user and rights:
+2. ユーザーと権限をチェックします。
 
    ```shell
    mysql -u datadog --password=<MYSQL_PASSWORD> -e "show status" | \
@@ -118,7 +118,7 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
    echo -e "\033[0;31mMissing SELECT grant\033[0m"
    ```
 
-3. Give the `datadog-agent` user access to the RRD files:
+3. `datadog-agent` ユーザーに RRD ファイルへのアクセス権を付与します。
 
    ```shell
    sudo gpasswd -a dd-agent www-data
@@ -129,9 +129,9 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
    fi'
    ```
 
-#### Configure the Agent
+#### Agent の構成
 
-1. Configure the Agent to connect to MySQL, edit your `cacti.d/conf.yaml` file. See the [sample cacti.d/conf.yaml][2] for all available configuration options:
+1. Agent が MySQL に接続するように構成し、`cacti.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[cacti.d/conf.yaml のサンプル][2]を参照してください。
 
    ```yaml
    init_config:
@@ -168,27 +168,27 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
        rrd_path: "<CACTI_RRA_PATH>"
    ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][4] and look for `cacti` under the Checks section.
+[Agent の status サブコマンドを実行][4]し、Checks セクションで `cacti` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "cacti" >}}
 
 
-### Log collection
+### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Add this configuration block to your `cacti.d/conf.yaml` file to start collecting your Cacti logs:
+2. Cacti ログの収集を開始するには、次のコンフィギュレーションブロックを `cacti.d/conf.yaml` ファイルに追加します。
 
     ```yaml
     logs:
@@ -197,27 +197,27 @@ sudo -u dd-agent /opt/datadog-agent/embedded/bin/pip install rrdtool
         source: cacti
     ```
 
-    Change the `path` parameter value based on your environment. See the [sample cacti.d/conf.yaml][2] for all available configuration options.
+    `path` パラメーターの値を環境に合わせて変更します。使用可能なすべてのコンフィギュレーションオプションについては、[cacti.d/conf.yaml のサンプル][2]を参照してください。
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
-### Events
+### イベント
 
-The Cacti check does not include any events.
+Cacti チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The Cacti check does not include any service checks.
+Cacti チェックには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-### Known issues
+### 既知の問題
 
-The Python library used by this integration leaks memory under certain circumstances. If you experience this, one workaround is to install the [python-rrdtool][6] package instead of rrdtool. This older package is not maintained and is not officially supported by this integration but it has helped others resolve the memory issues.
+このインテグレーションが使用する Python ライブラリは、状況によってはメモリリークが発生することがあります。これが発生する場合は、1 つの回避策として、rrdtool の代わりに [python-rrdtool][6] パッケージをインストールしてください。この古いパッケージはメンテナンスされておらず、このインテグレーションでは公式にサポートされていませんが、メモリに関する問題の解決に利用できます。
 
-A [Github issue][7] has been opened to track this memory leak.
+このメモリリークの問題を追跡する [Github イシュー][7]がオープンされています。
 
-Need help? Contact [Datadog support][8].
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/integrations-core/blob/master/cacti/datadog_checks/cacti/data/conf.yaml.example

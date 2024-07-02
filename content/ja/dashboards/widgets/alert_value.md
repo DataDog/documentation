@@ -1,13 +1,13 @@
 ---
-aliases:
-- /ja/graphing/widgets/alert_value/
-description: システムで定義されているシンプルアラート型メトリクスモニター内のメトリクスの現在値をグラフ化する
-further_reading:
-- link: /ja/dashboards/graphing_json/
-  tag: ドキュメント
-  text: JSON を使用したダッシュボードの構築
-title: アラート値ウィジェット
+title: Alert Value Widget
 widget_type: alert_value
+description: "Graph the current value of a metric in any simple-alert metric monitor defined on your system."
+aliases:
+- /graphing/widgets/alert_value/
+further_reading:
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Building Dashboards using JSON
 ---
 
 アラート値ウィジェットは、シンプルアラート型メトリクスモニターのクエリの現在値を表示します。シンプルアラート型モニターのメトリクスクエリはグループ化されておらず、1 つの値を返します。モニターの挙動とアラートステータスの概要を取得するには、ダッシュボード内のアラート値ウィジェットを使用します。
@@ -36,5 +36,5 @@ widget_type: alert_value
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/v1/dashboards/
-[2]: /ja/dashboards/graphing_json/widget_json/
+[1]: /api/v1/dashboards/
+[2]: /dashboards/graphing_json/widget_json/

@@ -57,9 +57,9 @@ cmake --build build -j
 cmake --install build
 ```
 
-## Building a simple app
+## 簡単なアプリの作成
 
-Create a new file called `tracer_example.cpp` and populate it with the below code:
+新しいファイルを `tracer_example.cpp` という名前で作成し、以下のコードを入力します。
 
 ```cpp
 #include <datadog/tracer.h>
@@ -94,7 +94,7 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-This creates a tracer that generates two spans, a parent span `span_a` and a child span `span_b`, and tags them.
+これで、親スパンである `span_a` と、子スパンである `span_b` の 2 つのスパンが生成され、タグ付けされます。
 
 Then, compile and link against `libdd_trace_cpp` with:
 
@@ -102,29 +102,29 @@ Then, compile and link against `libdd_trace_cpp` with:
 g++ -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
 ```
 
-Finally, run the app with:
+最後に、アプリを実行します。
 
 ```shell
 LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 ```
 
-## Sending traces
+## トレースの送信
 
-Now that an app exists, you can start sending traces and see the Trace Agent in action.
+これでアプリが作成されたので、トレースの送信を開始して、トレース Agent の動作を確認できます。
 
-First, tail the Trace Agent log with:
+最初に、トレース Agent のログを追跡します。
 
 ```shell
 tail -f /var/log/datadog/trace-agent.log
 ```
 
-Next, open a new tab and run the example a couple times:
+次に、新しいタブを開いて、サンプルアプリを数回実行します。
 
 ```shell
 LD_LIBRARY_PATH=/usr/local/lib/ ./tracer_example
 ```
 
-On the Trace Agent tab, you will see something similar to:
+トレース Agent タブに、次のように表示されます。
 
 ```text
 2019-08-09 20:02:26 UTC | TRACE | INFO | (pkg/trace/info/stats.go:108 in LogStats) | [lang:cpp lang_version:201402 tracer_version:0.2.0] -> traces received: 1, traces filtered: 0, traces amount: 363 bytes, events extracted: 0, events sampled: 0
@@ -132,13 +132,13 @@ On the Trace Agent tab, you will see something similar to:
 
 The service then shows up in the Service Catalog in Datadog.
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services Page" >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/apm_services_page.png" alt="APM Services ページ" >}}
 
-Click on the service to view your traces.
+サービスをクリックすると、トレースが表示されます。
 
-{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="APM Traces UI" >}}
+{{< img src="tracing/guide/setting_up_APM_with_cpp/traces_ui.png" alt="APM トレース UI" >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

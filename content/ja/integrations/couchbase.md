@@ -33,7 +33,7 @@
 - "caching"
 - "data stores"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md"
 "display_on_public_website": true
@@ -85,18 +85,18 @@ Identify busy buckets, track cache miss ratios, and more. This Agent check colle
 
 And many more.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Couchbase check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your Couchbase nodes.
 
-### Configuration
+### 構成
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -165,21 +165,21 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
 
 [Run the Agent's `status` subcommand][3] and look for `couchbase` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "couchbase" >}}
 
 
-### Events
+### イベント
 
 The Couchbase check emits an event to Datadog each time the cluster is rebalanced.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "couchbase" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

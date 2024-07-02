@@ -24,7 +24,7 @@
   "support_email": sachin@apollographql.com
 "categories":
 - caching
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/apollo/README.md"
 "display_on_public_website": true
@@ -86,9 +86,9 @@ These metrics are also tagged with both the associated Studio graph ID (as `grap
 
 (Integrations set up prior to October 2020 have metric names starting with `apollo.engine.operations` instead of `apollo.operations` and use a `service` tag instead of `graph`. You can migrate to the new metric names in your graph's Integrations page in Apollo Studio.)
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
 Getting set up with the Apollo Datadog integration is as simple as providing a Datadog API key and region to Studio. There's no further configuration required.
 
@@ -110,25 +110,25 @@ Getting set up with the Apollo Datadog integration is as simple as providing a D
 
 6. Go to the Datadog metrics explorer to see your metrics. Metrics may take up to five minutes to be visible.
 
-### Usage
+### 使用方法
 
 See the [Apollo integrations docs][7] for more detailed usage information.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "apollo" >}}
 
 
-### Events
+### イベント
 
 The Apollo integration does not include any events at this time.
 
-### Service Checks
+### サービスチェック
 
 The Apollo integration does not include any service checks at this time.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog Support][9].
 

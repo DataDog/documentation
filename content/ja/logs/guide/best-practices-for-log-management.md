@@ -117,7 +117,7 @@ Create an anomaly detection monitor to alert on any unexpected log indexing spik
     1. [Check Log patterns for this service](https://app.datadoghq.com/logs/patterns?from_ts=1582549794112&live=true&to_ts=1582550694112&query=service%3A{{service.name}})
     2. [Add an exclusion filter on the noisy pattern](https://app.datadoghq.com/logs/pipelines/indexes)
     ``` 
-7. Click **Create**.
+7. **Create** をクリックします。
 
 ### Alert when an indexed log volume passes a specified threshold
 
@@ -136,7 +136,7 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
     ```
     The volume on this service exceeded the threshold. Define an additional exclusion filter or increase the sampling rate to reduce the volume.
     ```
-7. Click **Create**.
+7. **Create** をクリックします。
 
 #### Alert on indexed logs volume since the beginning of the month
 

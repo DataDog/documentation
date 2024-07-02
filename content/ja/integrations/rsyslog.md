@@ -1,7 +1,7 @@
 ---
 title: Rsyslog
 name: rsyslog
-custom_kind: integration
+custom_kind: インテグレーション
 description: 'Configure Rsyslog to gather logs from your host, containers, & services.'
 short_description: 'Configure Rsyslog to gather logs from your host, containers, & services.'
 categories:

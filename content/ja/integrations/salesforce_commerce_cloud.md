@@ -18,7 +18,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -50,13 +50,13 @@
 Salesforce Commerce Cloud is a multi-tenant, cloud-based commerce platform. Integrate Salesforce Commerce Cloud with
 Datadog to view and parse your logs using [Datadog Logs][1].
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 No installation is required.
 
-### Configuration
+### 構成
 
 To configure Salesforce Commerce Cloud to allow access for Datadog to import log data, you must create
 an API client. Then, register that API client with Datadog.
@@ -96,9 +96,9 @@ Wait ten minutes to see [logs][1] coming in under the source `salesforce.commerc
 
 The SFCC Log Center represents log data differently than Datadog does. For instance, some error logs with large stack traces are broken into two log events in the SFCC Log Center, while the stack trace details are omitted in Datadog. This results in a discrepancy in the total count of log events between the two systems.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Salesforce Commerce Cloud integration does not include any metrics.
 
@@ -106,11 +106,11 @@ The Salesforce Commerce Cloud integration does not include any metrics.
 
 The Salesforce Commerce Cloud integration collects logs via a webdav connection to your Commerce Cloud instance. 
 
-### Service Checks
+### サービスチェック
 
 The Salesforce Commerce Cloud integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

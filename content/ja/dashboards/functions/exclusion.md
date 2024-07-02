@@ -1,7 +1,7 @@
 ---
+title: Exclusion
 aliases:
-- /ja/graphing/functions/exclusion/
-title: 除外
+    - /graphing/functions/exclusion/
 ---
 
 ## null を除外
@@ -21,26 +21,16 @@ title: 除外
 | `clamp_min()` | 閾値 _以下_ のメトリクス値を、その値と等しくなるように設定します。 | `clamp_min(avg:system.load.1{*}, 100)` |
 | `clamp_max()` | 閾値 _以上_ のメトリクス値を、その値と等しくなるように設定します。  | `clamp_max(avg:system.load.1{*}, 100)` |
 
-`clamp_min()` 関数と `clamp_max()` 関数は、1 つのパラメーターを持ちます。
-
--   `THRESHOLD`: 指定した閾値。
-    -   `clamp_min()` は、すべての閾値以下のデータポイントを、その値と等しくなるよう設定し、`clamp_max()` は閾値以上のデータポイントを制限します。
+Add a threshold value. The `clamp_min()` sets all datapoints below the threshold to equal that value, while `clamp_max()` limits datapoints above the threshold.
 
 ## カットオフ
 
 | 関数       | 説明                                     | 例                                 |
 | -------------- | ----------------------------------------------- | --------------------------------------- |
-| `cutoff_min()` | 閾値 _以下_ のメトリクス値を削除します。 | `cutoff_min(avg:system.load.1{*}, 100)` |
-| `cutoff_max()` | 閾値 _以上_ のメトリクス値を削除します。  | `cutoff_max(avg:system.load.1{*}, 100)` |
+| `cutoff_min()` | Replace metric values _under_ a threshold value with NaN. | `cutoff_min(avg:system.load.1{*}, 100)` |
+| `cutoff_max()` | Replace metric values _over_ a threshold value with NaN.  | `cutoff_max(avg:system.load.1{*}, 100)` |
 
-`cutoff_min()` 関数と `cutoff_max()` 関数は、1 つのパラメーターを持ちます。
-
-- `THRESHOLD`: 指定した閾値。
-    - `cutoff_min()` は、閾値以下のすべてのメトリクス値をグラフから削除し、`cutoff_max()` は閾値以上のすべてのメトリクス値を削除します。
-
-カットオフ関数では、閾値と同じ値は削除されません。
-
-また、この関数で Datadog からのデータポイントが完全に削除されることはありません。視覚的に表示されなくなるだけです。この関数を無効にすると、データポイントが再度表示されます。
+Add a threshold value. The `cutoff_min()` replaces all metric values lower than this threshold value with `NaN`, while `cutoff_max()` replaces all metric values higher than this threshold value with `NaN`. The cutoff functions do not replace values that are **equal to** the threshold value.
 
 **ヒント**: クランプおよびカットオフ関数の両方において、選択した閾値を確認できると便利です。この値を表示するには、ダッシュボードに[水平マーカーを設定][1]します。
 

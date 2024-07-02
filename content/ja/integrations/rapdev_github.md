@@ -31,7 +31,7 @@
 - collaboration
 - marketplace
 - metrics
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -101,7 +101,7 @@ of metrics are submitted:
 + Self-hosted and Installed Runners
 + GitHub Workflow Monitoring
 
-### Dashboards
+### ダッシュボード
 This integration provides an out-of-the-box dashboard called
 **RapDev GitHub Dashboard**.
 This dashboard populates as data is submitted to Datadog over time and includes

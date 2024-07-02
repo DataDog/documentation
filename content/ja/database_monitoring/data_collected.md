@@ -5,26 +5,26 @@ further_reading:
 
 ---
 
-When you set up Database Monitoring, the Agent collects all the metrics described in the corresponding integration documentation. This includes metrics about database state, events, failovers, connections, and buffer pools, plus the query performance metrics that Database Monitoring uses.
+データベースモニタリングを設定すると、Agent は対応するインテグレーションのドキュメントで説明されたすべてのメトリクスを収集します。これには、データベースの状態、イベント、フェイルオーバー、接続、バッファプール、に関するメトリクスの他、データベースモニタリングが使用するクエリパフォーマンスのメトリクスが含まれます。
 
-These are standard Datadog metrics that you can use in [dashboards][1], [monitors][2], [notebooks][3], and anywhere else you use metrics.
+これは、[ダッシュボード][1]、[モニター][2]、[ノートブック][3]をはじめ、メトリクスを使用するあらゆる場所で使用される、Datadog の標準的なメトリクスです。
 
-To see a complete list of metrics collected, see the integration **Data Collected** documentation section for your database product:
+収集されたメトリクスの完全なリストを表示するには、データベース製品のインテグレーション**データ収集**ドキュメントセクションを参照してください。
 
 {{< partial name="dbm/dbm-data-collected" >}}
 <p></p>
 
-The metrics used for Database Monitoring views are, primarily:
+データベースモニタリングビューに使用されるメトリクスは、主に次のとおりです。
 - **MySQL**: `mysql.queries.*`
 - **Postgres**: `postgresql.queries.*`
 - **SQL Server**: `sqlserver.queries.*`
 - **Oracle**: `oracle.queries.*`
 
-## Normalized queries
+## 正規化クエリ
 
-In order to eliminate redundant information and keep track of performance trends, Database Monitoring groups together identical queries with different parameters by obfuscating the parameters. These query groups are called normalized queries and are sometimes referred to as query digests. Rather than imposing a strict query volume limitation, Datadog supports 200 normalized queries per database host. This process also ensures that no sensitive data leaks into observability tools.
+データベースモニタリングでは、冗長な情報を排除し、パフォーマンスの傾向を把握するために、パラメーターが異なる同一のクエリを難読化し、グループ化しています。これらのクエリグループは、正規化クエリと呼ばれ、クエリダイジェストと呼ばれることもあります。Datadog は、クエリ量に厳しい制限を設けるのではなく、データベースホストごとに 200 の正規化クエリをサポートしています。また、このプロセスにより、機密データが観測可能性ツールに漏れることがないようにします。
 
-For example, you may see many queries retrieving data from the same table by id:
+例えば、同じテーブルから id でデータを取得するクエリを多く見かけることがあります。
 
 ```sql
 SELECT * FROM customers WHERE id = 13345;
@@ -32,51 +32,51 @@ SELECT * FROM customers WHERE id = 24435;
 SELECT * FROM customers WHERE id = 34322;
 ```
 
-These appear together as a normalized query that replaces the parameter with `?`.
+これらは、パラメーターを `?` に置き換えた正規化クエリとして一緒に表示されます。
 
 ```sql
 SELECT * FROM customers WHERE id = ?
 ```
 
-Queries with multiple parameters follow the same pattern:
+複数のパラメーターを持つクエリも同じパターンになります。
 
 ```sql
 SELECT * FROM timeperiods WHERE start >= '2022-01-01' AND end <= '2022-12-31' AND num = 5
 ```
 
-The query above with specific parameters becomes the obfuscated version below:
+上記のクエリに特定のパラメーターを指定すると、以下のように難読化されたバージョンになります。
 
 ```sql
 SELECT * FROM timeperiods WHERE start >= ? AND end <= ? AND num = ?
 ```
 
-## Sensitive information
+## 機密情報
 
-Because the Database Monitoring Agent normalizes queries, it obfuscates all query bind parameters sent to the Datadog intake. Thus, passwords, PII (Personally identifiable information), and other potentially sensitive information stored in your database are not viewable in query metrics, query samples, or explain plans.
+データベースモニタリング Agent はクエリを正規化するため、Datadog インテークに送信されたすべてのクエリのバインドパラメータを難読化します。このため、データベースに保存されているパスワード、PII (個人を特定できる情報) などの機密情報は、クエリのメトリクス、クエリサンプル、または説明プランで表示不可能になります。
 
-However, there are some common sources of data risks:
+ただし、一般にデータリスクの共通ソースもあります。
 
-### Database schema
+### データベーススキーマ
 
-If table names, column names, indexes, database names, or any other schema contain sensitive information, these data are not obfuscated. It is uncommon that database schema are considered sensitive, but be advised that obfuscation is not applied to these data types.
+テーブル名、列名、インデックス名、データベース名などのスキーマに機密情報が含まれる場合、このデータは難読化されません。データベーススキーマが機密とされる場合は稀ですが、このようなデータタイプに難読化は適用されないことにご留意ください。
 
-### Database logs
+### データベースログ
 
-If you are sending logs to Datadog from your database, be aware that some logs can contain the full SQL query text including query bind parameters. Review and apply [log security rules][4] consistent with your organization's requirements.
+データベースから Datadog にログを送信する際は、一部のログにはクエリのバインドパラメーターを含む完全な SQL クエリ文字列が含まれることにご留意ください。組織の要件に合った[ログのセキュリティルール][4]を確認し適用してください。
 
-### Query comments
+### クエリコメント
 
-SQL query comments may be collected by the Agent and sent to Datadog without passing through obfuscation. SQL query comments generally do not contain sensitive data, but comments extracted from the query SQL will not pass through obfuscation.
+SQL クエリコメントが Agent により収集され、難読化をパススルーせずに Datadog へ送信される場合があります。通常、SQL クエリコメントは機密情報を含みませんが、クエリ SQL から抽出されたコメントは難読化をパススルーしません。
 
-## Which queries are tracked
+## 追跡されるクエリ
 
-Datadog Database Monitoring collects per-query metrics for the top 200 normalized queries measured by their total time spent executing on the host. This limit is applied only to each collection interval (10 seconds by default), so the total number of tracked queries can exceed the configured limit over longer periods of time.
+Datadog データベースモニタリングでは、ホストでの実行にかかった合計時間により計測された正規化されたクエリの上位 200 件のクエリ当たりのメトリクスを収集します。この上限は、各コレクションのインターバル (デフォルトで 10 秒) にのみ適用されるため、追跡されるクエリの合計数は、長時間に構成された上限を上回ります。
 
-Query samples have no limits on the number of unique normalized queries tracked, but the sampling is biased towards queries which are slow or frequent. It is possible for a query sample to be selected, but have no associated query metrics. This is the case when the query was slow or frequent for a brief period of time, but was not sustained enough to become a top query.
+クエリサンプルには、追跡される一意の正規化されたクエリ数の上限はありませんが、サンプリングには遅いまた頻度の高いクエリに対して偏りがあります。選択されたクエリサンプルに、関連するクエリメトリクスがない場合もあります。これは、短期間にクエリが遅かった、または頻度が高かったものの、トップクエリになるほど保持されなかった場合に見られます。
 
-## Other queries
+## その他のクエリ
 
-_Other Queries_ represent the metrics of all queries which do not appear in the top 200. Because a query may be a top query for some time frames but not others, the metrics for a particular query may sometimes be tracked as a distinct normalized query and other times counted in Other Queries.
+_その他のクエリ_ とは、上位 200 件に表れなかったすべてのクエリのメトリクスのことです。クエリは、ある時間枠にトップクエリでも他ではトップクエリでないため、特定のクエリのメトリクスは別の正規化されたクエリとして追跡され、他の時間はその他のクエリとしてカウントされます。
 
 
 [1]: /dashboards/

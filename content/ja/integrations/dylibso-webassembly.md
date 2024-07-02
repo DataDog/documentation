@@ -11,7 +11,7 @@
 - developer tools
 - languages
 - tracing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/dylibso-webassembly/README.md"
 "display_on_public_website": true
@@ -67,14 +67,14 @@ Datadog customers can use our open source SDKs and Adapters to emit full traces 
 In addition, Dylibso provides automatic instrumentation tooling which can take any existing WASM module and recompile it to include function and memory allocation tracing. For more information, contact [support@dylibso.com][2] or learn more about [automatic WebAssembly instrumentation][3].
 
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Depending on the programming language your application is written in, choose one of the appropriate Datadog Adapters from [`dylibso/observe-sdk`][1] on GitHub.
 
 
-### Configuration
+### 構成
 
 In order to connect the SDK and Adapter to your Datadog Agent, you must have the following information ready:
 
@@ -89,13 +89,13 @@ After you have imported and configured your Datadog Adapter from the available o
 2. Ensure that a WebAssembly module (`.wasm`) has been loaded and you are calling one of its exported functions.
 3. Check in your Datadog dashboard for traces sent from your service.
 
-## Data Collected
+## 収集データ
 
-### Events
+### イベント
 
 WebAssembly Observe SDK collects traces of function execution and memory allocation events from your application.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Dylibso support][2].
 

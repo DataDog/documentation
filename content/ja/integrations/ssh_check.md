@@ -29,7 +29,7 @@
 "categories":
 - "developer tools"
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/ssh_check/README.md"
 "display_on_public_website": true
@@ -70,18 +70,18 @@
 
 This check lets you monitor SSH connectivity to remote hosts and SFTP response times.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The SSH/SFTP check is included in the [Datadog Agent][1] package. No additional installation is needed on your server.
 
-### Configuration
+### 構成
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -127,21 +127,21 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
 
 [Run the Agent's `status` subcommand][2] and look for `ssh_check` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "ssh_check" >}}
 
 
-### Events
+### イベント
 
 The SSH Check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "ssh_check" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

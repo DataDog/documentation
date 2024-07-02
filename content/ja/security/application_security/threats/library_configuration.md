@@ -26,52 +26,52 @@ further_reading:
 ---
 
 
-## Configuring a client IP header
+## クライアント IP ヘッダーの構成
 
-ASM automatically attempts to resolve `http.client_ip` from several well-known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable. If this variable is set, the library only checks the specified header for the client IP.
+ASM は自動的に、`X-Forwarded-For` のようなよく知られたヘッダーから、`http.client_ip` を解決しようとします。もし、このフィールドにカスタムヘッダーを使用したり、解決アルゴリズムをバイパスしたい場合は、`DD_TRACE_CLIENT_IP_HEADER` 環境変数を設定します。この変数が設定されている場合、ライブラリはクライアント IP の指定されたヘッダーのみをチェックします。
 
-## Track authenticated bad actors
+## 認証された悪質なユーザーの追跡
 
-Many critical attacks are performed by authenticated users who can access your most sensitive endpoints. To identify bad actors that are generating suspicious security activity, add user information to traces by instrumenting your services with the standardized user tags. You can add custom tags to your root span, or use instrumentation functions.
+多くの重大な攻撃は、最も機密性の高いエンドポイントにアクセスできる認証されたユーザーによって実行されます。疑わしいセキュリティアクティビティを生成している悪質なユーザーを特定するには、標準化されたユーザータグを使用してサービスをインスツルメンテーションすることにより、ユーザー情報をトレースに追加します。ルートスパンにカスタムタグを追加したり、インスツルメンテーション関数を使用したりすることができます。
 
-The Datadog Tracing Library attempts to detect user login and signup events when compatible authentication frameworks are in use, and ASM is enabled.
+Datadog トレーシングライブラリは、互換性のある認証フレームワークが使用されており、ASM が有効になっている場合に、ユーザーのログインとサインアップイベントの検出を試みます。
 
-Read [Tracking User Activity][1] for more information on how to manually track user activity, or [see how to opt out][7] of the automatic tracking.
+ユーザーアクティビティを手動で追跡する方法については、[ユーザーアクティビティの追跡][1]をお読みください。または、自動追跡の[オプトアウト方法を参照][7]してください。
 
-## Exclude specific parameters from triggering detections
+## 特定のパラメーターを検出のトリガーから除外する
 
 There may be a time when an ASM signal, or a security trace, is a false positive. For example, ASM repeatedly detects
 the same security trace and a signal is generated, but the signal has been reviewed and is not a threat.
 
 You can add an entry to the passlist, which ignore events from a rule, to eliminate noisy signal patterns and focus on legitimately security traces.
 
-To add a passlist entry, do one of the following:
+パスリストエントリーを追加するには、次のいずれかを実行します。
 
-- Click on a signal in [ASM Signals][4] and click the **Add Entry** link next to the **Add to passlist** suggested action. This method automatically adds an entry for the targeted service.
-- Navigate to [Passlist Configuration][5] and manually configure a new passlist entry based on your own criteria.
+- [ASM シグナル][4]のシグナルをクリックし、**Add to passlist** という提案アクションの横にある **Add Entry** というリンクをクリックします。この方法では、対象となるサービスのエントリーが自動的に追加されます。
+- [パスリスト構成][5]に移動し、独自の基準に基づいて新しいパスリストエントリーを手動で構成します。
 
-**Note**: Requests (traces) that match a passlist entry are not billed.
+**注**: パスリストエントリーに一致するリクエスト (トレース) は請求されません。
 
-## Data security considerations
+## データセキュリティへの配慮
 
-The data that you collect with Datadog can contain sensitive information that you want to filter out, obfuscate, scrub, filter, modify, or just not collect. Additionally, the data may contain synthetic traffic that might cause your threat detection be inaccurate, or cause Datadog to not accurately indicate the security of your services.
+Datadog で収集するデータには、除外、難読化、フィルタリング、修正したり、収集しないことを選択したりするべき機密情報が含まれることがあります。さらに、データは脅威検出が不正確になったり、サービスのセキュリティが Datadog で正確にされないという問題の原因となるシンセティックトラフィックを含む場合もあります。
 
 By default, ASM collects information from security traces to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This enables you to observe that although the request was suspicious, the request data was not collected because of data security concerns.
 
-To protect users' data, sensitive data scanning is activated by default in ASM. You can customize the configuration by using the following environment variables. The scanning is based on the [RE2 syntax][2]. To customize scanning, set the value of these environment variables to a valid RE2 pattern:
+ユーザーのデータを保護するために、ASM では機密データスキャンがデフォルトで有効になっています。以下の環境変数を使用することで、構成をカスタマイズすることができます。スキャンは [RE2 構文][2]に基づいています。スキャンをカスタマイズするには、これらの環境変数の値を有効な RE2 パターンに設定します。
 
-* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - Pattern for scanning for keys whose values commonly contain sensitive data. If found, the values and any child nodes associated with the key are redacted.
-* `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - Pattern for scanning for values that could indicate sensitive data. If found, the value and all its child nodes are redacted.
+* `DD_APPSEC_OBFUSCATION_PARAMETER_KEY_REGEXP` - 値が一般的に機密データを含むキーをスキャンするためのパターン。見つかった場合、そのキーと関連する値およびすべての子ノードが編集されます。
+* `DD_APPSEC_OBFUSCATION_PARAMETER_VALUE_REGEXP` - 機密データを示す可能性のある値をスキャンするためのパターン。見つかった場合、その値とすべての子ノードが編集されます。
 
-<div class="alert alert-info"><strong>For Ruby only, starting in <code>ddtrace</code> version 1.1.0</strong>
+<div class="alert alert-info"><strong>Ruby のみ、ddtrace バージョン 1.1.0 から</strong>
 
-<p>You can also configure scanning patterns in code:</p>
+<p>また、コードでスキャンパターンを構成することも可能です。</p>
 
 ```ruby
 Datadog.configure do |c|
   # ...
 
-  # Set custom RE2 regexes
+  # カスタム RE2 正規表現を設定する
   c.appsec.obfuscator_key_regex = '...'
   c.appsec.obfuscator_value_regex = '...'
 end
@@ -80,28 +80,28 @@ end
 </div>
 
 
-The following are examples of data that are flagged as sensitive by default:
+以下は、デフォルトで機密と判定されるデータの例です。
 
-* `pwd`, `password`, `ipassword`, `pass_phrase`
+* `pwd`、`password`、`ipassword`、`pass_phrase`
 * `secret`
-* `key`, `api_key`, `private_key`, `public_key`
+* `key`、`api_key`、`private_key`、`public_key`
 * `token`
-* `consumer_id`, `consumer_key`, `consumer_secret`
-* `sign`, `signed`, `signature`
+* `consumer_id`、`consumer_key`、`consumer_secret`
+* `sign`、`signed`、`signature`
 * `bearer`
 * `authorization`
 * `BEGIN PRIVATE KEY`
 * `ssh-rsa`
 
-See [APM Data Security][3] for information about other mechanisms in the Datadog Agent and libraries that can also be used to remove sensitive data.
+Datadog Agent やライブラリの他のメカニズムで、機密データを削除するために使用できるものについては、[APM データセキュリティ][3]を参照してください。
 
-## Configure a custom blocking page or payload
+## カスタムブロッキングページまたはペイロードの構成
 
 {{% asm-protection-page-configuration %}}
 
-{{< img src="/security/application_security/asm-blocking-page-html.png" alt="The page displayed as ASM blocks requests originating from blocked IPs" width="75%" >}}
+{{< img src="/security/application_security/asm-blocking-page-html.png" alt="ASM がブロックされた IP からのリクエストをブロックする際に表示されるページ" width="75%" >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

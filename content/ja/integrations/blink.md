@@ -23,7 +23,7 @@
 - incidents
 - notifications
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/blink/README.md"
 "display_on_public_website": true
@@ -92,7 +92,7 @@ This out-of-the-box integration enables you to:
 
 For more information about Blink, see the [Blink documentation][3].
 
-## Setup
+## セットアップ
 
 Visit [our documentation][4] for details on how to connect your Datadog workspace to Blink.
 
@@ -102,21 +102,21 @@ To uninstall the integration, simply delete the corresponding Datadog connection
 
 Once deleted, any previous authorizations or access tokens are revoked.
 
-## Data Collected
+## 収集データ
 
-### Events
+### イベント
 
 This integration sends events and incidents to Datadog where you can search and update any relevant incidents within Blink. 
 
-### Monitors
+### モニター
 
 You can view, modify, and create Datadog monitors in Blink.
 
-### Metrics
+### メトリクス
 
 Blink does not include any metrics, however you can query and list metrics from your Datadog environment for use in Blink automations.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Blink support][5].
 

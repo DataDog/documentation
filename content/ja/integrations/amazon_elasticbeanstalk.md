@@ -9,15 +9,15 @@
 - "log collection"
 - "network"
 - "provisioning"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key AWS Elastic Beanstalk metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_elasticbeanstalk/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/deploy-datadog-aws-elastic-beanstalk"
-  "tag": "Blog"
-  "text": "Deploy Datadog on AWS Elastic Beanstalk"
+  "tag": "ブログ"
+  "text": "AWS Elastic Beanstalk への Datadog のデプロイ"
 "git_integration_title": "amazon_elasticbeanstalk"
 "has_logo": true
 "integration_id": ""
@@ -36,27 +36,27 @@
 
 AWS Elastic Beanstalk is an easy-to-use service for deploying and scaling web applications and services developed with Java, .NET, PHP, Node.js, Python, Ruby, Go, and Docker on familiar servers such as Apache, Nginx, Passenger, and IIS.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first. To receive Elastic Beanstalk metrics, you must [enable the Enhanced Health Reporting][2] feature for your environment, and configure your environment to [publish enhanced health metrics to CloudWatch][3].
 
 **Note**: These settings increase your CloudWatch custom metric charges.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_elasticbeanstalk" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The AWS Elastic Beanstalk integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS Elastic Beanstalk integration does not include any service checks.
 
@@ -401,7 +401,7 @@ An example can be seen below:
 
 ```
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

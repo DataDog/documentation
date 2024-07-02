@@ -8,59 +8,59 @@ further_reading:
   text: Learn more about Audit Trail
 ---
 
-## Overview
+## 概要
 
-[Datadog Audit Trail][1] records more than 100 types of audit events from across the Datadog platform. These audit events are categorized into different product categories as event names.
+[Datadog 監査証跡][1]は、Datadog プラットフォーム全体から 100 種類以上の監査イベントを記録します。これらの監査イベントは、イベント名として異なる製品カテゴリに分類されます。
 
-#### Platform Events
-- [Access management](#access-management-events)
+#### プラットフォームイベント
+- [アクセス管理](#access-management-events)
 - [Agent](#agent)
-- [API request](#api-request-events)
-- [Authentication](#authentication-events)
-- [Dashboard](#dashboard-events)
-- [Integration](#integration-events)
-- [Monitor](#monitor-events)
-- [Notebook](#notebook-events)
+- [API リクエスト](#api-request-events)
+- [認証](#authentication-events)
+- [ダッシュボード](#dashboard-events)
+- [インテグレーション](#integration-events)
+- [モニター](#monitor-events)
+- [ノートブック](#notebook-events)
 - [OAuth](#oauth-events)
-- [Organization management](#organization-management-events)
-- [Security Notifications](#security-notification-events)
+- [組織管理](#organization-management-events)
+- [セキュリティ通知](#security-notification-events)
 - [Teams management](#teams-management-events)
 
-#### Product-Specific Events
+#### 製品別イベント
 - [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
 - [Application Security Management (ASM)](#application-security-management)
-- [Audit Trail](#audit-trail-events)
+- [監査証跡](#audit-trail-events)
 - [CI Visibility](#ci-visibility-events)
-- [Cloud Security Platform](#cloud-security-platform-events)
+- [クラウドセキュリティプラットフォーム](#cloud-security-platform-events)
 - [Dynamic Instrumentation](#dynamic-instrumentation-events)
 - [Error Tracking](#error-tracking-events)
-- [Log Management](#log-management-events)
-- [Metrics](#metrics-events)
-- [Real User Monitoring](#real-user-monitoring-events)
-- [Sensitive Data Scanner](#sensitive-data-scanner-events)
-- [Service Level Objectives](#service-level-objectives-slo-events)
-- [Synthetic Monitoring](#synthetic-monitoring-events)
-- [Reference Tables](#reference-table-events)
-- [Workflows](#workflow-events)
+- [ログ管理](#log-management-events)
+- [メトリクス](#metrics-events)
+- [リアルユーザーモニタリング](#real-user-monitoring-events)
+- [機密データスキャナー](#sensitive-data-scanner-events)
+- [サービスレベル目標](#service-level-objectives-slo-events)
+- [Synthetic モニタリング](#synthetic-monitoring-events)
+- [リファレンステーブル](#reference-table-events)
+- [ワークフロー](#workflow-events)
 
 
-See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
+監査証跡の設定と構成については、[監査証跡ドキュメント][2]を参照してください。
 
-## Audit Events
+## 監査イベント
 
-### Access management events
+### アクセス管理イベント
 
-| Name        | Description of audit event                                          | Query in audit explorer                           |
+| 名前        | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | ----------- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Application key][3] (Service account user) | A user created, modified, or deleted an application key for a service account user. | `@evt.name:"Access Management" @asset.type:application_key` |
-| [Authentication methods][4] (Org) | A user modified the allowed authentication methods for an org and what the previous and new values are. | `@evt.name:"Access Management" @asset.type:identity_provider` |
-| [Email][5]       | An email is added, disabled, or verified on the Datadog account as a user in the account. | `@evt.name:"Access Management" @asset.type:user` |
-| [Role modified][6]  | A role is modified and what the previous and new permissions are. | `@evt.name:"Access Management" @asset.type:role @action:modified` |
-| [Role created or deleted][7] | A role is created or deleted in the org. | `@evt.name:"Access Management" @asset.type:role @action:(created OR deleted)` |
-| [Role access request][8] | A user created, responded to, or deleted an access request for a role, and the value of the access request. | `@evt.name:"Access Management" @asset.type:role_request` |
-| [User's role][6] | A user is added or deleted from a role in the org. | `@evt.name:"Access Management" @asset.type:role @action:modified` |
-| [Password][9] | A user modified or reset their password in the org. Password reset events are delivered to all orgs that user is active in, even if the org does not have password authentication configured. | `@evt.name:"Access Management" @asset.type:password @action:modified` |
-| [Restriction policy][10] | A restriction policy is modified for a resource. | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
+| [アプリケーションキー][3] (サービスアカウントユーザー) | ユーザーがサービスアカウントユーザーのアプリケーションキーを作成、変更、または削除した。 | `@evt.name:"Access Management" @asset.type:application_key` |
+| [認証方法][4] (組織) | ユーザーが組織で許可される認証方法を変更し、前と後の値がどうなったか。 | `@evt.name:"Access Management" @asset.type:identity_provider` |
+| [メール][5]       | Datadog アカウントのユーザーとして、メールアドレスが追加、無効化、または検証された。 | `@evt.name:"Access Management" @asset.type:user` |
+| [ロールの変更][6]  | ロールが変更され、以前の権限と新しい権限がどうなったか。 | `@evt.name:"Access Management" @asset.type:role @action:modified` |
+| [ロールの作成または削除][7] | 組織内でロールが作成または削除された。 | `@evt.name:"Access Management" @asset.type:role @action:(created OR deleted)` |
+| [ロールアクセスリクエスト][8] | ユーザーが、ロールに対するアクセスリクエストを作成、応答、または削除し、そのアクセスリクエストの値。 | `@evt.name:"Access Management" @asset.type:role_request` |
+| [ユーザーのロール][6] | ユーザーが組織内のロールに追加または削除された。 | `@evt.name:"Access Management" @asset.type:role @action:modified` |
+| [パスワード][9] | A user modified or reset their password in the org. Password reset events are delivered to all orgs that user is active in, even if the org does not have password authentication configured. | `@evt.name:"Access Management" @asset.type:password @action:modified` |
+| [Restriction policy][10] | リソースの制限ポリシーが変更されました。 | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
 | [Email update (Support)][11] | A user's email was updated by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:modified` |
 | [User invite (Support)][12] | A user was invited to the org by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:created` |
 | [User's role (Support)][100] | A user was added or deleted from a role in the org by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:role @action:modified` |
@@ -68,77 +68,77 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 
 ### Agent
 
-| Name                                    | Description of audit event                          | Query in audit explorer                                             |
+| 名前                                    | 監査イベントの説明                          | 監査エクスプローラーのクエリ                                             |
 |-----------------------------------------| --------------------------------------------------  | ------------------------------------------------------------------- |
 | [Agent enabled][13]                    | A new Datadog Agent was enabled.                    | `@evt.name:"Datadog Agent" @action:created`                         |
 | [Agent flare created][14]               | Datadog Agent flare is created for support tickets. | `@evt.name:"Datadog Agent" @action:created @asset.type:agent_flare` |
 | [Agent configuration updated][15]      | A Datadog Agent configuration was updated.          | `@evt.name:"Datadog Agent" @action:modified`                        |
 
 
-### API request events
+### API リクエストイベント
 
-| Name  | Description of audit event                          | Query in audit explorer              |
+| 名前  | 監査イベントの説明                          | 監査エクスプローラーのクエリ              |
 |-------------| --------------------------------------------------  | ------------------------------------ |
-| [API Request][16] | An API Request is made across the Datadog platform. | `@evt.name:Request @action:accessed` |
+| [API Request][16] | Datadog プラットフォーム上で API リクエストが行われた。 | `@evt.name:Request @action:accessed` |
 
-### Application Performance Monitoring (APM) events
-| Name | Description of audit event                                          | Query in audit explorer                           |
+### Application Performance Monitoring (APM) イベント
+| 名前 | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Retention filter][17] | A user created, modified, or deleted a [retention filter][18] and the previous and/or new values for the retention filter configuration. | `@evt.name:APM @asset.type:retention_filter` |
 | [Span-based metric][19] | A user created, modified, or deleted a [span-based metric][20] and the previous and/or new values for the metric configuration. | `@evt.name:APM @asset.type:custom_metrics` |
-| [Facet][21] | A user created, modified, or deleted a [facet][22] and the previous and/or new values for the facet configuration. | `@evt.name:APM @asset.type:facet` |
+| [ファセット][21] | A user created, modified, or deleted a [facet][22] and the previous and/or new values for the facet configuration. | `@evt.name:APM @asset.type:facet` |
 | [Primary operation name][23] | A user created, modified, or deleted the [primary operation name][24] of a service and the previous and/or new values for the configuration. | `@evt.name:APM @asset.type:service_operation_name` |
 | [Second Primary tag][25] | A user added, modified, or deleted the [second primary tag][26] and the previous and/or new values for the configuration.  | `@evt.name:APM @asset.type:second_primary_tag` |
-| [Sampling rates remotely configured][27] | A user remotely configured the APM sampling rates.  | `@evt.name:APM @asset.type:samplerconfig` |
+| [Sampling rates remotely configured][27] | ユーザーがリモートで APM のサンプリングレートを構成した。  | `@evt.name:APM @asset.type:samplerconfig` |
 
 ### Application Security Management
 
 {{% audit-trail-asm %}}
 
-### Audit Trail events
+### 監査証跡イベント
 
-| Name  | Description of audit event                          | Query in audit explorer              |
+| 名前  | 監査イベントの説明                          | 監査エクスプローラーのクエリ              |
 |-------------| --------------------------------------------------  | ------------------------------------ |
-| [Download as CSV][28] | A user exports list of Audit Events as CSV | `@evt.name:Audit Trail @asset.type:audit_events_csv` |
+| [Download as CSV][28] | ユーザーが監査イベントのリストを CSV でエクスポートする | `@evt.name:Audit Trail @asset.type:audit_events_csv` |
 
-### Authentication events
+### 認証イベント
 
-| Name                    | Description of audit event                                                                    | Query in audit explorer                                 |
+| 名前                    | 監査イベントの説明                                                                    | 監査エクスプローラーのクエリ                                 |
 |--------------------------------| --------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| [API key][29] (Org settings)         | An API key is accessed, listed, created, or deleted in the Organization Settings page.        | `@evt.name:Authentication @asset.type:api_key`          |
-| [Application key][30] (Org settings) | An application key is accessed, listed, created, or deleted in the Organization Settings page.| `@evt.name:Authentication @asset.type:application_key`  |
-| [Public API key][31] (Org settings)  | A public API key is accessed, listed, created, or deleted in the Organization Settings page.  | `@evt.name:Authentication @asset.type:public_api_key`   |
-| [User login][32]                     | A user logs into Datadog and the authentication method used.                                  | `@evt.name:Authentication @action:login`                |
+| [API key][29] (Org settings)         | API キーが、組織設定ページでアクセス、一覧化、作成、または削除された。        | `@evt.name:Authentication @asset.type:api_key`          |
+| [Application key][30] (Org settings) | アプリケーションキーが、組織設定ページでアクセス、一覧化、作成、または削除された。| `@evt.name:Authentication @asset.type:application_key`  |
+| [Public API key][31] (Org settings)  | 公開 API キーが、組織設定ページでアクセス、一覧化、作成、または削除された。  | `@evt.name:Authentication @asset.type:public_api_key`   |
+| [User login][32]                     | ユーザーが Datadog にログインし、使用された認証方法。                                  | `@evt.name:Authentication @action:login`                |
 
-### CI Visibility events
-| Name                            | Description of audit event                                   | Query in audit explorer                                                                                               |
+### CI Visibility イベント
+| 名前                            | 監査イベントの説明                                   | 監査エクスプローラーのクエリ                                                                                               |
 |---------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| [Repository default branch][33] | A user modified the default branch of a repository.          | `@evt.name:"CI Visibility" @asset.type:ci_app_repository @action:modified`                                            |
-| [Test service settings][34]     | A user created or modified the settings of a test service.   | `@evt.name:"CI Visibility" @asset.type:ci_app_test_service_settings (@action:created OR @action:modified)`            |
-| [GitHub account settings][35]   | A user has modified the GitHub account settings.             | `@evt.name:"CI Visibility" @asset.type:github_opt_ins (@action:modified OR @action:deleted)`                          |
-| [Exclusion filters][36]         | The exclusion filters have been modified.                    | `@evt.name:"CI Visibility" @asset.type:ci_app_exclusion_filters @action:modified`                                     |
-| [Quality gates rule][37]        | A user has created, modified or deleted a quality gate rule. | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates (@action:created OR @action:modified OR @action:deleted)` |
+| [Repository default branch][33] | ユーザーがリポジトリのデフォルトブランチを変更した。          | `@evt.name:"CI Visibility" @asset.type:ci_app_repository @action:modified`                                            |
+| [Test service settings][34]     | ユーザーがテストサービスの設定を作成または変更した。   | `@evt.name:"CI Visibility" @asset.type:ci_app_test_service_settings (@action:created OR @action:modified)`            |
+| [GitHub account settings][35]   | ユーザーが GitHub アカウント設定を変更した。             | `@evt.name:"CI Visibility" @asset.type:github_opt_ins (@action:modified OR @action:deleted)`                          |
+| [Exclusion filters][36]         | 除外フィルターが変更された。                    | `@evt.name:"CI Visibility" @asset.type:ci_app_exclusion_filters @action:modified`                                     |
+| [Quality gates rule][37]        | ユーザーが Quality Gates ルールを作成、修正、または削除した。 | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates (@action:created OR @action:modified OR @action:deleted)` |
 
-### Cloud Security Platform events
+### クラウドセキュリティプラットフォームのイベント
 
 {{% audit-trail-security-platform %}}
 
-### Dashboard events
+### ダッシュボードイベント
 
-| Name               | Description of audit event                                                                        | Query in audit explorer                                               |
+| 名前               | 監査イベントの説明                                                                        | 監査エクスプローラーのクエリ                                               |
 | -------------------| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------   |
-| [Dashboard created][38] | A dashboard is created and the new JSON value for the dashboard.                                    | `@evt.name:Dashboard @asset.type:dashboard @action:created`             |
-| [Dashboard deleted][39] | A dashboard is deleted and the previous JSON value for the dashboard.                              | `@evt.name:Dashboard @asset.type:dashboard @action:deleted`             |
+| [Dashboard created][38] | ダッシュボードが作成され、そのダッシュボードの新しい JSON 値。                                    | `@evt.name:Dashboard @asset.type:dashboard @action:created`             |
+| [Dashboard deleted][39] | ダッシュボードが削除され、そのダッシュボードの前の JSON 値。                              | `@evt.name:Dashboard @asset.type:dashboard @action:deleted`             |
 | [Dashboard embedded][40] (Roadie) | A Datadog dashboard is [embedded into a third party][41] and a user views the dashboard.                      | `@evt.name:Dashboard @asset.type:embed @action:accessed`                |
-| [Dashboard modified][42] | A dashboard is modified and the previous and new JSON values for the dashboard.                   | `@evt.name:Dashboard @asset.type:dashboard @action:modified`            |
-| [Dashboard user(s) added][43] | A user added user ID(s) that can access a dashboard and the list of new user IDs.                 | `@evt.name:Dashboard @asset.type:dashboard_share_acl @action:created`   |
-| [Dashboard user(s) deleted][44] | A user deleted user ID(s) that can access a dashboard and the list of the deleted user ID(s).       | `@evt.name:Dashboard @asset.type:dashboard_share_acl @action:deleted`   |
-| [Public URL accessed][45] | A public dashboard URL is accessed.                                                               | `@evt.name:Dashboard @asset.type:dashboard @action:accessed`            |
-|[Public URL generated or deleted][46]  | A public URL to view a dashboard is generated or deleted.                             | `@evt.name:Dashboard @asset.type:dashboard_share_link`            |
+| [Dashboard modified][42] | ダッシュボードが変更され、そのダッシュボードの前の JSON 値と新しい JSON 値。                   | `@evt.name:Dashboard @asset.type:dashboard @action:modified`            |
+| [Dashboard user(s) added][43] | ユーザーがダッシュボードにアクセスできるユーザー ID を追加し、新規ユーザー ID の一覧。                 | `@evt.name:Dashboard @asset.type:dashboard_share_acl @action:created`   |
+| [Dashboard user(s) deleted][44] | ユーザーがダッシュボードにアクセスできるユーザー ID を削除し、削除されたユーザー ID の一覧。       | `@evt.name:Dashboard @asset.type:dashboard_share_acl @action:deleted`   |
+| [Public URL accessed][45] | 公開されているダッシュボードの URL がアクセスされた。                                                               | `@evt.name:Dashboard @asset.type:dashboard @action:accessed`            |
+|[Public URL generated or deleted][46]  | ダッシュボードを閲覧するための公開 URL が生成または削除された。                             | `@evt.name:Dashboard @asset.type:dashboard_share_link`            |
 
 ### Dynamic Instrumentation events
 
-| Name     | Description of audit event                                          | Query in audit explorer                           |
+| 名前     | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | -------- | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Logs Probe][47] | A user has successfully created, modified or deleted a logs probe with Dynamic Instrumentation. | `@evt.name:"Dynamic Instrumentation" @action:(created OR modified OR deleted) @asset.type:log_probe` |
 | [Metrics Probe][48] | A user has successfully created, modified or deleted a metrics probe with Dynamic Instrumentation. | `@evt.name:"Dynamic Instrumentation" @action:(created OR modified OR deleted) @asset.type:span_probe` |
@@ -146,128 +146,128 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 
 ### Error Tracking events
 
-| Name     | Description of audit event                                          | Query in audit explorer                           |
+| 名前     | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | -------- | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Error Tracking for Logs activation][50] | A user has enabled or disabled Error Tracking for Logs product. | `@evt.name:"Error Tracking" @action:(created OR deleted) @asset.type:error_tracking_logs` |
 | [Create or Modify inclusion filter][51] | A user has added or modified an inclusion filter. | `@evt.name:"Error Tracking" @asset.type:error_tracking_inclusion_filter` |
 
-### Integration events
+### インテグレーションイベント
 
-| Name     | Description of audit event                                          | Query in audit explorer                           |
+| 名前     | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | -------- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Resource][52] | Anytime a resource (channel, service, webhook, account, instance, and so on) is added, modified, or deleted from an integration, and the previous and new values for the configuration. | `@evt.name:Integration @asset.type:integration` |
+| [Resource][52] | インテグレーションにリソース (チャンネル、サービス、Webhook、アカウント、インスタンスなど) が追加、変更、削除されたとき、およびその構成の以前の値と新しい値。 | `@evt.name:Integration @asset.type:integration` |
 
-### Log Management events
-| Name | Description of audit event                                          | Query in audit explorer                           |
+### ログ管理イベント
+| 名前 | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Archive configuration][53] | A user created, modified, or deleted the configuration of an archive and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:archive` |
-| [Custom metric][54] | A user created, modified, or deleted a custom metric for logs and the previous and new values for the custom metric configuration. | `@evt.name:"Log Management" @asset.type:"custom metric"` |
-| [Exclusion filter configuration][55] | A user created, modified, or deleted the configuration of an exclusion filter and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:"exclusion filter"` |
-| [Facet][56] | A user created, modified, or deleted a facet in the log explorer and the previous and new values for the facet configuration.| `@evt.name:"Log Management" @asset.type:facet` |
-| [Historical view][57] | A user created, modified, aborted, or deleted a historical view for logs and the previous and new values for the historical view configuration. | `@evt.name:"Log Management" @asset.type:historical_view` |
-| [Index configuration][58] | A user created, modified, or deleted the configuration of an index and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:index` |
-| [Log pipeline][59] | A user created, modified, or deleted a log pipeline or nested pipeline and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:pipeline` |
-| [Processor][60] | A user created, modified, or deleted a processor within a pipeline and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:pipeline_processor` |
-| [Query][61] (Public Beta)| A user ran a Log Management List query either in log explorer, Dashboards or through the Public API. | `@evt.name:"Log Management" @asset.type:logs_query` |
-| [Restriction query configuration][62] | A user created, modified, or deleted the configuration of a restriction query in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:restriction_query` |
-| [Standard attribute configuration][63] | A user created, modified, or deleted the configuration of a standard attribute in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:standard_attribute` |
-| [Download as CSV][64] | A user exports list of logs as CSV | `@evt.name:"Log Management" @asset.type:logs_csv` |
+| [Archive configuration][53] | ユーザーがアーカイブの構成を作成、変更、または削除し、その構成の以前の値と新しい値。 | `@evt.name:"Log Management" @asset.type:archive` |
+| [Custom metric][54] | ユーザーがログのカスタムメトリクスを作成、変更、または削除し、そのカスタムメトリクスの構成の以前の値と新しい値。 | `@evt.name:"Log Management" @asset.type:"custom metric"` |
+| [Exclusion filter configuration][55] | ユーザーが除外フィルターの構成を作成、変更、または削除し、その構成の以前の値と新しい値。 | `@evt.name:"Log Management" @asset.type:"exclusion filter"` |
+| [Facet][56] | ユーザーがログエクスプローラーでファセットを作成、変更、または削除し、そのファセット構成の以前の値と新しい値。| `@evt.name:"Log Management" @asset.type:facet` |
+| [Historical view][57] | ユーザーがログの履歴ビューを作成、変更、中止、または削除し、その履歴ビューの構成の以前の値と新しい値。 | `@evt.name:"Log Management" @asset.type:historical_view` |
+| [Index configuration][58] | ユーザーがインデックスの構成を作成、変更、または削除し、その構成の以前の値と新しい値。 | `@evt.name:"Log Management" @asset.type:index` |
+| [Log pipeline][59] | ユーザーがログパイプラインまたはネストされたパイプラインを作成、変更、または削除し、その構成の以前の値と新しい値。 | `@evt.name:"Log Management" @asset.type:pipeline` |
+| [Processor][60] | ユーザーがパイプライン内のプロセッサーを作成、変更、または削除し、その構成の以前の値と新しい値。 | `@evt.name:"Log Management" @asset.type:pipeline_processor` |
+| [Query][61] (Public Beta)| ユーザーがログエクスプローラー、ダッシュボード、または公開 API を介してログ管理リストクエリを実行した。 | `@evt.name:"Log Management" @asset.type:logs_query` |
+| [Restriction query configuration][62] | ユーザーがログの制限クエリの構成を作成、変更、または削除し、その構成の以前の値と新しい値。 | `@evt.name:"Log Management" @asset.type:restriction_query` |
+| [Standard attribute configuration][63] | ユーザーがログの標準属性の構成を作成、変更、または削除し、その構成の以前の値と新しい値。 | `@evt.name:"Log Management" @asset.type:standard_attribute` |
+| [Download as CSV][64] | ユーザーがログのリストを CSV でエクスポートする | `@evt.name:"Log Management" @asset.type:logs_csv` |
 
-### Metrics events
-| Name | Description of audit event                                          | Query in audit explorer                           |
+### メトリクスイベント
+| 名前 | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | ---- |------------------------------------------------------------------- | --------------------------------------------------|
-| [Custom metric created][65] | A user created a custom metric and the new value for the custom metric configuration. | `@evt.name:Metrics @asset.type:metric @action:created` |
-| [Custom metric deleted][66] | A user deleted a custom metric and the previous value for the custom metric configuration. | `@evt.name:Metrics @asset.type:metric @action:deleted` |
-| [Custom metric modified][67] | A user modified a custom metric and the previous and new values for the custom metric configuration. | `@evt.name:Metrics @asset.type:metric @action:modified` |
+| [Custom metric created][65] | ユーザーがカスタムメトリクスを作成し、そのカスタムメトリクス構成の新しい値。 | `@evt.name:Metrics @asset.type:metric @action:created` |
+| [Custom metric deleted][66] | ユーザーがカスタムメトリクスを削除し、そのカスタムメトリクス構成の以前の値。 | `@evt.name:Metrics @asset.type:metric @action:deleted` |
+| [Custom metric modified][67] | ユーザーがカスタムメトリクスを変更し、そのカスタムメトリクス構成の以前の値と新しい値。 | `@evt.name:Metrics @asset.type:metric @action:modified` |
 
-### Monitor events
+### モニターイベント
 
-| Name             | Description of audit event                                           | Query in audit explorer                                  |
+| 名前             | 監査イベントの説明                                           | 監査エクスプローラーのクエリ                                  |
 | ---------------- | -------------------------------------------------------------------- | ---------------------------------------------------------|
-| [Monitor created][68]  | A monitor is created and the new JSON value for the monitor.                 | `@evt.name:Monitor @asset.type:monitor @action:created`  |
-| [Monitor deleted][69]  | A monitor is deleted and the previous JSON value for the monitor.           | `@evt.name:Monitor @asset.type:monitor @action:deleted`  |
-| [Monitor modified][70] | A monitor is modified and the previous and new JSON values for the monitor. | `@evt.name:Monitor @asset.type:monitor @action:modified` |
-| [Monitor resolved][71] | A monitor is resolved.                                               | `@evt.name:Monitor @asset.type:monitor @action:resolved` |
+| [Monitor created][68]  | モニターが作成され、そのモニターの新しい JSON 値。                 | `@evt.name:Monitor @asset.type:monitor @action:created`  |
+| [Monitor deleted][69]  | モニターが削除され、そのモニターの前の JSON 値。           | `@evt.name:Monitor @asset.type:monitor @action:deleted`  |
+| [Monitor modified][70] | モニターが変更され、そのモニターの前の JSON 値と新しい JSON 値。 | `@evt.name:Monitor @asset.type:monitor @action:modified` |
+| [Monitor resolved][71] | モニターが解決された。                                               | `@evt.name:Monitor @asset.type:monitor @action:resolved` |
 
-### Notebook events
+### ノートブックイベント
 
-| Name              | Description of audit event                                            | Query in audit explorer                                     |
+| 名前              | 監査イベントの説明                                            | 監査エクスプローラーのクエリ                                     |
 | ----------------- | --------------------------------------------------------------------- | ----------------------------------------------------------- |
-| [Notebook created][72]  | A notebook is created and the new JSON value for the notebook.                 | `@evt.name:Notebook @asset.type:notebook @action:created`   |
-| [Notebook deleted][73]  | A notebook is deleted and the previous JSON value for the notebook.           | `@evt.name:Notebook @asset.type:notebook @action:deleted`   |
-| [Notebook modified][74] | A notebook is modified and the previous and new JSON values for the notebook. | `@evt.name:Notebook @asset.type:notebook @action:modified`  |
+| [Notebook created][72]  | ノートブックが作成され、そのノートブックの新しい JSON 値。                 | `@evt.name:Notebook @asset.type:notebook @action:created`   |
+| [Notebook deleted][73]  | ノートブックが削除され、そのノートブックの前の JSON 値。           | `@evt.name:Notebook @asset.type:notebook @action:deleted`   |
+| [Notebook modified][74] | ノートブックが変更され、そのノートブックの前の JSON 値と新しい JSON 値。 | `@evt.name:Notebook @asset.type:notebook @action:modified`  |
 
-### OAuth events
+### OAuth イベント
 
-| Name         | Description of audit event                                                                    | Query in audit explorer                  |
+| 名前         | 監査イベントの説明                                                                    | 監査エクスプローラーのクエリ                  |
 | ------------ | --------------------------------------------------------------------------------------------- | -----------------------------------------|
-| [OAuth client][75] | A user created, modified, or deleted an OAuth client and the previous and new values for the OAuth client. | `@evt.name:OAuth @asset.type:oauth_client` |
+| [OAuth client][75] | ユーザーが OAuth クライアントを作成、変更、または削除し、その OAuth クライアントの以前の値と新しい値。 | `@evt.name:OAuth @asset.type:oauth_client` |
 
-### Organization management events
+### 組織管理イベント
 
-| Name                 | Description of audit event                                                       | Query in audit explorer                                           |
+| 名前                 | 監査イベントの説明                                                       | 監査エクスプローラーのクエリ                                           |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
-| [Audit Trail settings][76] | A user modified Audit Trail settings and what the previous and new settings are. | `@evt.name:"Organization Management" @asset.type:audit_logs_settings` |
-| [Child org created][77] | A user created a new child organization for an existing Datadog organization. | `@evt.name:"Organization Management" @asset.type:organization @action:created` |
+| [Audit Trail settings][76] | ユーザーが監査証跡設定を変更し、変更前と変更後の設定内容。 | `@evt.name:"Organization Management" @asset.type:audit_logs_settings` |
+| [Child org created][77] | ユーザーが既存の Datadog 組織に新しい子組織を作成した。 | `@evt.name:"Organization Management" @asset.type:organization @action:created` |
 
-### Real User Monitoring events
-| Name | Description of audit event                                          | Query in audit explorer                           |
+### リアルユーザーモニタリングイベント
+| 名前 | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [RUM application created][78] | A user created or deleted an application in RUM and the type of the application (Browser, Flutter, iOS, React Native, Android). | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
-| [RUM application modified][79] | A user modified an application in RUM, the new value of the application, and the type of the application (Browser, Flutter, iOS, React Native, Android). | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:modified` |
+| [RUM application created][78] | ユーザーが RUM でアプリケーションを作成または削除し、そのアプリケーションの種類 (Browser、Flutter、iOS、React Native、Android)。 | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:(created OR deleted)` |
+| [RUM application modified][79] | ユーザーが RUM でアプリケーションを変更し、そのアプリケーションの新しい値、およびアプリケーションの種類 (Browser、Flutter、iOS、React Native、Android)。 | `@evt.name:"Real User Monitoring" @asset.type:real_user_monitoring_application @action:modified` |
 | [Session replay viewed][80] | A user viewed a session replay. | `@evt.name:"Real User Monitoring" @asset.type:session_replay @action:accessed` |
 
-### Security Notification events
-| Name                 | Description of audit event                                                       | Query in audit explorer                                           |
+### セキュリティ通知イベント
+| 名前                 | 監査イベントの説明                                                       | 監査エクスプローラーのクエリ                                           |
 | -------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------|
-| [Token leaked][81] | Datadog has detected leaked Datadog API or Application Key that should be revoked.| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
-| [Login method override][82] | Datadog has detected a user login method override that is different from the default login methods set for the organization.| `@evt.name:"Security Notification" @asset.type:user @action:notification` |
-| [Unusual login][83] | Datadog has detected a unusual login event.| `@evt.name:"Security Notification" @asset.type:unusual_login @action:notification` |
+| [Token leaked][81] | Datadog は、失効させるべき Datadog API またはアプリケーションキーのリークを検出しました。| `@evt.name:"Security Notification" @asset.type:(api_key OR application_key) @action:notification` |
+| [Login method override][82] | Datadog は、組織に設定されたデフォルトのログイン方法とは異なる、ユーザーのログイン方法のオーバーライドを検出しました。| `@evt.name:"Security Notification" @asset.type:user @action:notification` |
+| [Unusual login][83] | Datadog が異常なログインイベントを検出した。| `@evt.name:"Security Notification" @asset.type:unusual_login @action:notification` |
 | [User invited with throwaway email][102] | Datadog has detected that a user with an email from a free or disposable email provider was invited to the organization.| `@evt.name:"Security Notification" @asset.type:user_invite @action:notification` |
 
-### Sensitive Data Scanner events
-| Name | Description of audit event                                          | Query in audit explorer                           |
+### 機密データスキャナーイベント
+| 名前 | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | ---- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Scanning group][84] | A user created, modified, or deleted a scanning group in Sensitive Data Scanner and the previous and new values for the configuration. | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
-| [Scanning rule][85] | A user created, modified, or deleted a scanning rule within a scanning group in Sensitive Data Scanner and the previous and new values for the configuration. | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_rule` |
+| [Scanning group][84] | ユーザーが機密データスキャナーのスキャングループを作成、変更、または削除し、その構成の以前の値と新しい値。 | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_group` |
+| [Scanning rule][85] | ユーザーが機密データスキャナーのスキャングループ内のスキャンルールを作成、変更、または削除し、その構成の以前の値と新しい値。 | `@evt.name:"Sensitive Data Scanner" @asset.type:sensitive_data_scanner_scanning_rule` |
 
-### Service Level Objectives (SLO) events
+### サービスレベル目標 (SLO) イベント
 
-| Name          | Description of audit event                                                                       | Query in audit explorer                  |
+| 名前          | 監査イベントの説明                                                                       | 監査エクスプローラーのクエリ                  |
 | ------------- | ------------------------------------------------------------------------------------------------ | -----------------------------------------|
-| [SLO][86]           | A user creates, modifies, or deletes an SLO and the previous and new values for the SLO.| `@evt.name:SLO @asset.type:slo`            |
-| [SLO correction][87]| A user creates, modifies, or deletes an SLO correction and the previous and new values for the SLO correction. | `@evt.name:SLO @asset.type:slo_correction` |
+| [SLO][86]           | ユーザーが SLO を作成、変更、または削除し、その SLO の以前の値と新しい値。| `@evt.name:SLO @asset.type:slo`            |
+| [SLO correction][87]| ユーザーが SLO 補正を作成、変更、または削除し、その SLO 補正の以前の値と新しい値。 | `@evt.name:SLO @asset.type:slo_correction` |
 
 
-### Synthetic Monitoring events
-| Name                     | Description of audit event                                          | Query in audit explorer                           |
+### Synthetic モニタリングイベント
+| 名前                     | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Private location][88] | A user created or deleted a private location for Synthetic tests. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_private_location` |
-| [Synthetic test created or deleted][89] | A user created or deleted a Synthetic test. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
-| [Synthetic test modified][90] | A user modified a Synthetic test and the previous and new values for the configuration. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:modified` |
-| [Synthetic variable][91] | A user created, modified, or deleted a Synthetic variable. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_variable` |
-| [Synthetic settings][92] | A user modified Synthetic settings (quotas, PL access) and the previous and new setting values. | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_settings @action:modified` |
+| [Private location][88] | ユーザーが Synthetic テスト用のプライベートロケーションを作成または削除した。 | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_private_location` |
+| [Synthetic test created or deleted][89] | ユーザーが Synthetic テストを作成または削除した。 | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:(created OR deleted)` |
+| [Synthetic test modified][90] | ユーザーが Synthetic テストを修正し、その構成の以前の値と新しい値。 | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_test @action:modified` |
+| [Synthetic variable][91] | ユーザーが Synthetic 変数を作成、変更、または削除した。 | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_variable` |
+| [Synthetic settings][92] | ユーザーが Synthetic 設定 (クォータ、PL アクセス) を変更し、変更前と変更後の設定値。 | `@evt.name:"Synthetics Monitoring" @asset.type:synthetics_settings @action:modified` |
 
-### Reference Table events
-| Name                     | Description of audit event                                          | Query in audit explorer                           |
+### リファレンステーブルのイベント
+| 名前                     | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Reference Table][93] | A user created, deleted, or modified a reference table. | `@evt.name:"Reference Tables" @asset.type:reference_table @action:(created OR deleted OR modified)` |
-| [Reference Table File][94] | A user uploaded a file or imported a file with a cloud provider for a reference table. | `@evt.name:"Reference Tables" @asset.type:reference_table_file @action:(uploaded OR imported)` |                                                      |
+| [Reference Table][93] | ユーザーがリファレンステーブルを作成、削除、または変更した。 | `@evt.name:"Reference Tables" @asset.type:reference_table @action:(created OR deleted OR modified)` |
+| [Reference Table File][94] | ユーザーがクラウドプロバイダーにファイルをアップロードまたはインポートして、リファレンステーブルを作成した。 | `@evt.name:"Reference Tables" @asset.type:reference_table_file @action:(uploaded OR imported)` |                                                      |
 
 ### Teams Management events
-| Name                     | Description of audit event                                          | Query in audit explorer                           |
+| 名前                     | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Teams Management][95] | A user created, deleted, or modified a team or team association. | `@evt.name:"Teams Management" @action:(created OR deleted OR modified)` |
 
-### Workflow events
-| Name                     | Description of audit event                                          | Query in audit explorer                           |
+### ワークフローイベント
+| 名前                     | 監査イベントの説明                                          | 監査エクスプローラーのクエリ                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
-| [Workflow][96] | A user created, deleted, or modified a workflow, or a workflow executed. | `@evt.name:"Workflows" @asset.type:workflow @action:(created OR deleted OR modified OR executed)` |
-| [Workflow Schedule][97] | A user created, deleted, or modified a schedule for a workflow. | `@evt.name:"Workflows" @asset.type:workflow_schedule @action:(created OR deleted OR modified)` |
-| [Workflow Action][98] | A user responded to a Slack prompt during the execution of a workflow. | `@evt.name:"Workflows" @asset.type:workflow_action @action:(responded)` |
-| [Custom Connection][99] | A user created, deleted, or modified a connection. | `@evt.name:"Custom Connections" @asset.type:custom_connection @action:(created OR deleted OR modified)` |
+| [Workflow][96] | ユーザーがワークフローを作成、削除、修正した、またはワークフローが実行された。 | `@evt.name:"Workflows" @asset.type:workflow @action:(created OR deleted OR modified OR executed)` |
+| [Workflow Schedule][97] | ユーザーがワークフローのスケジュールを作成、削除、または変更した。 | `@evt.name:"Workflows" @asset.type:workflow_schedule @action:(created OR deleted OR modified)` |
+| [Workflow Action][98] | ワークフローの実行中に、ユーザーが Slack のプロンプトに応答した。 | `@evt.name:"Workflows" @asset.type:workflow_action @action:(responded)` |
+| [Custom Connection][99] | ユーザが接続を作成、削除、または変更した。 | `@evt.name:"Custom Connections" @asset.type:custom_connection @action:(created OR deleted OR modified)` |
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

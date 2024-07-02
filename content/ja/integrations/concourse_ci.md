@@ -22,7 +22,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - automation
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/concourse_ci/README.md"
 "display_on_public_website": true
@@ -65,13 +65,13 @@ Configure the Datadog Metric Emitter in Concourse CI to:
 - Visualize the duration of pipelines, number of containers and mounted volumes of workers.
 - Identify slow requests to build routes.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Concourse CI comes bundled with a Datadog metrics emitter. A prerequisite to configuring [ATC][1] to emit metrics on start is to have a [Datadog Agent][2] installed.
 
-### Configuration
+### 構成
 
 Configure ATC to use the Datadog emitter by setting the following options. It is important to use a prefix of `concourse.ci` to avoid emitting [custom metrics][3].
 
@@ -86,13 +86,13 @@ Metric Emitter (Datadog):
     --datadog-prefix=           Prefix for all metrics to easily find them in Datadog [$CONCOURSE_DATADOG_PREFIX]
 ```
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "concourse_ci" >}}
 
 
-### Events
+### イベント
 
 This integration does not support events.
 
@@ -100,7 +100,7 @@ This integration does not support events.
 
 This integration does not collect service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

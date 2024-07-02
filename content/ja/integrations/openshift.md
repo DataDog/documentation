@@ -29,7 +29,7 @@
 - network
 - orchestration
 - provisioning
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/openshift/README.md"
 "display_on_public_website": true
@@ -70,9 +70,9 @@ Red Hat OpenShift is an open source container application platform based on the 
 
 > This README describes the necessary configuration to enable collection of OpenShift-specific metrics in the Agent. Data described here are collected by the [`kubernetes_apiserver` check][1]. You must configure the check to collect the `openshift.*` metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To install the Agent, see the [Agent installation instructions][2] for Kubernetes. The default configuration targets OpenShift 3.7.0+ and OpenShift 4.0+, as it relies on features and endpoints introduced in this version.
 
@@ -147,7 +147,7 @@ The recommended ingestion method for Dogstatsd, APM, and logs is to bind the Dat
 
 The Agent supports working on a `sidecar` run mode, to enable running the Agent in your application's pod for easier discoverability.
 
-#### Host
+#### ホスト
 
 Add the `allowHostPorts` permission to the pod with the standard `hostnetwork` or `hostaccess` SCC, or by creating your own. In this case, you can add the relevant port bindings in your pod specs:
 
@@ -190,21 +190,21 @@ runAsUser:
 
 See [kubernetes_apiserver][1]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "openshift" >}}
 
 
-### Events
+### イベント
 
 The OpenShift check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The OpenShift check does not include any Service Checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][11].
 

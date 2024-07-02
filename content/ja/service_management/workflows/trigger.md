@@ -3,7 +3,7 @@ title: Trigger a workflow
 kind: documentation
 disable_toc: false
 algolia:
-  tags: [workflow, workflows, workflow automation]
+  tags: [workflow, workflows/, workflow automation]
 aliases:
 - /workflows/trigger
 further_reading:
@@ -13,7 +13,7 @@ further_reading:
 - link: "/service_management/workflows/access/#service-accounts/"
   tag: Documentation
   text: Find out more about Service Accounts for workflows
-- link: dashboards
+- link: ダッシュボード
   tag: Documentation
   text: Find out more about setting up a dashboard
 - link: /security

@@ -25,7 +25,7 @@
 - ai/ml
 - kubernetes
 - os & system
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/nvml/README.md"
 "display_on_public_website": true
@@ -67,11 +67,11 @@
 
 This check monitors [NVIDIA Management Library (NVML)][1] exposed metrics through the Datadog Agent and can correlate them with the [exposed Kubernetes devices][2].
 
-## Setup
+## セットアップ
 
 The NVML check is not included in the [Datadog Agent][3] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the NVML check on your host. See [Use Community Integrations][4] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -102,7 +102,7 @@ If you're using Docker and Kubernetes, you need to expose the environment variab
 
 To correlate reserved Kubernetes NVIDIA devices with the Kubernetes pod using the device, mount the Unix domain socket `/var/lib/kubelet/pod-resources/kubelet.sock` into your Agent's configuration. More information about this socket is on the [Kubernetes website][2]. **Note**: This device is in beta support for version 1.15.
 
-### Configuration
+### 構成
 
 1. Edit the `nvml.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your NVML performance data. See the [sample nvml.d/conf.yaml][7] for all available configuration options.
 
@@ -112,23 +112,23 @@ To correlate reserved Kubernetes NVIDIA devices with the Kubernetes pod using th
 
 [Run the Agent's status subcommand][9] and look for `nvml` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "nvml" >}}
  The authoritative metric documentation is on the [NVIDIA website][11].
 
 There is an attempt to, when possible, match metric names with NVIDIA's [Data Center GPU Manager (DCGM) exporter][12].
 
-### Events
+### イベント
 
 NVML does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "nvml" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][14].
 

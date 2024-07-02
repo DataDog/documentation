@@ -28,7 +28,7 @@
 "categories":
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/vertica/README.md"
 "display_on_public_website": true
@@ -65,55 +65,55 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Vertica][1] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [Vertica][1] を監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Vertica check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
+Vertica チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-Edit the `vertica.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your vertica performance data. See the example [vertica.d/conf.yaml][3] for all available configuration options.
+vertica のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `vertica.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、サンプル [vertica.d/conf.yaml][3] を参照してください。
 
-#### Enabling SSL
+#### SSL の有効化
 
-The Vertica integration supports connecting to Vertica through SSL. To enable this, set `use_tls` in `conf.yaml` to `true`. 
+Vertica インテグレーションは、SSL を使用した Vertica への接続をサポートします。これを有効にするには、`conf.yaml` の `use_tls` を `true` にします。
 
-**Note**: For Vertica integration versions <=1.9.0, set `tls_verify` to `true` instead. For legacy support, if `tls_verify` is explicitly set to `true`, `use_tls` is set to `true`.
+注: Vertica インテグレーションのバージョン 1.9.0 以前では、`tls_verify` を `true` にします。レガシーのサポートとして、`tls_verify` が明示的に `true` に設定されている場合、`use_tls` は `true` に設定されます。
 
-#### Prepare Vertica
+#### Vertica の準備
 
-Create a database user for the Datadog Agent. From [vsql][4], connect to the database as a superuser. Then run the `CREATE USER` statement.
+Datadog Agent のデータベースユーザーを作成します。[vsql][4] から、スーパーユーザーとしてデータベースに接続します。次に、`CREATE USER` ステートメントを実行します。
 
 ```text
-CREATE USER datadog IDENTIFIED BY '<PASSWORD>';
+CREATE USER datadog IDENTIFIED BY '<パスワード>';
 ```
 
-The user used to connect to the database must be granted the [SYSMONITOR][5] role in order to access the monitoring system tables.
+モニタリングシステムテーブルにアクセスするには、データベースへの接続に使用するユーザーに [SYSMONITOR][5] ロールを付与する必要があります。
 
 ```text
 GRANT SYSMONITOR TO datadog WITH ADMIN OPTION;
 ```
 
-As the metrics for current license usage use the values from the most recent [audit][6], Datadog recommends scheduling audits to occur as often as possible. For more information, see the [Vertica audit license guide][7].
+現在のライセンス使用のメトリクスは最新の[監査][6]の値を使用するため、Datadog は監査をできるだけ頻繁にスケジュールすることをお勧めします。詳細については、[Vertica 監査ライセンスガイド][7]を参照してください。
 
-[Restart the Agent][8] to start sending Vertica metrics to Datadog.
+[Agent を再起動][8]すると、Datadog への Vertica メトリクスの送信が開始されます。
 
-#### Log collection
+#### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Add this configuration block to your `vertica.d/conf.yaml` file to start collecting your Vertica logs:
+2. Vertica のログの収集を開始するには、次の構成ブロックを `vertica.d/conf.yaml` ファイルに追加します。
 
     ```yaml
     logs:
@@ -123,29 +123,29 @@ _Available for Agent versions >6.0_
         service: vertica
     ```
 
-3. [Restart the Agent][8].
+3. [Agent を再起動します][8]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][9] and look for `vertica` under the Checks section.
+[Agent の status サブコマンドを実行][9]し、Checks セクションで `vertica` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "vertica" >}}
 
 
-### Events
+### イベント
 
-Vertica does not include any events.
+Vertica には、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "vertica" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][12].
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 
 [1]: https://www.vertica.com

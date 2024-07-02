@@ -25,7 +25,7 @@ products:
 
 {{< product-availability >}}
 
-## Overview
+## 概要
 
 Security notification rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual detection rules. Notification rules can span across multiple detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
 
@@ -43,8 +43,8 @@ As you configure the rule, a preview of issues matching the notification rule co
 4. Under **Rule Criteria**, select one or more severity levels.
 5. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
 6. Under **Notification Details**, specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notifications][2] for more information.
-7. Enter a name for the notification rule.
-8. Click **Save and Activate**.
+7. 通知ルールの名前を入力します。
+8. **Save and Activate** をクリックします。
 
 {{< img src="security/notification-profiles-setup3.png" alt="Setup of a notification rule" style="width:100%;" >}}
 
@@ -68,7 +68,7 @@ To clone a notification rule, click the vertical three-dot menu on the notificat
 
 To delete a notification rule, click the vertical three-dot menu on the notification rule card and select **Delete**.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

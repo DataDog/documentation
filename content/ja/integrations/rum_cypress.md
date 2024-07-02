@@ -13,7 +13,7 @@
 - network
 - testing
 - tracing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rum_cypress/README.md"
 "display_on_public_website": true
@@ -59,7 +59,7 @@ With the Datadog [Cypress integration][1], monitor the performance of your CI/CD
 - Monitoring, capturing, and visually replaying real user sessions
 
 
-## Setup
+## セットアップ
 
 For more information about integrating Cypress tests with RUM & Session Replay, see the [CI Visibility-RUM integration documentation][2].
 
@@ -72,9 +72,9 @@ To start collecting Real User Monitoring events from your application, see [Cypr
 
 Your application automatically sends traces to Datadog.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The CI Visibility-RUM integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][4].
 
@@ -82,7 +82,7 @@ The CI Visibility-RUM integration does not include any metrics. To generate cust
 
 The Cypress integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog Support][5]. 
 

@@ -53,7 +53,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/haproxy/README.md"
 "display_on_public_website": true
@@ -66,7 +66,7 @@
 "manifest_version": "2.0.0"
 "name": "haproxy"
 "public_title": "HAProxy"
-"short_description": "Monitor key metrics for requests, responses, errors, bytes served, and more."
+"short_description": "リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。"
 "supported_os":
 - "linux"
 - "windows"
@@ -74,12 +74,12 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Monitor key metrics for requests, responses, errors, bytes served, and more."
+  "description": "リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -89,56 +89,56 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![HAProxy Out of the box Dashboard][1]
+![HAProxy 付属のダッシュボード][1]
 
-## Overview
+## 概要
 
-Capture HAProxy activity in Datadog to:
+Datadog で HAProxy のアクティビティをキャプチャして、以下のことができます。
 
-- Visualize HAProxy load-balancing performance.
-- Know when a server goes down.
-- Correlate the performance of HAProxy with the rest of your applications.
+- HAProxy の負荷分散パフォーマンスを視覚化できます。
+- サーバーがダウンしたときに気付くことができます。
+- HAProxy のパフォーマンスを他のアプリケーションと関連付けることができます。
 
-## Setup
+## セットアップ
 
-This integration can collect metrics from a Prometheus endpoint (recommended) or from a socket-based integration through the stats endpoint (deprecated). Using the Prometheus endpoint requires HAProxy version 2 (enterprise version 1.9rc1) or later.
+このインテグレーションでは、Prometheus エンドポイント (推奨) または stats エンドポイントを介したソケットベースのインテグレーション (非推奨) からメトリクスを収集できます。Prometheus エンドポイントを使用するには、HAProxy バージョン 2 (エンタープライズバージョン 1.9rc1) 以降が必要です。
 
-When using the Prometheus endpoint, starting with version 4.0.0, this OpenMetrics-based integration has a latest mode (`use_openmetrics`: true) and a legacy mode (`use_openmetrics`: false and `use_prometheus`: true). To get all the most up-to-date features, Datadog recommends enabling the latest mode. For more information, see [Latest and Legacy Versioning For OpenMetrics-based Integrations][2].
+Prometheus エンドポイントを使用する場合、バージョン 1.10.0 以降、この OpenMetrics ベースのインテグレーションには、最新モード (`use_openmetrics`: true) とレガシーモード (`use_openmetrics`: false および `use_prometheus`: true) があります。すべての最新機能を利用するために、Datadog は最新モードを有効にすることを推奨します。詳しくは、[OpenMetrics ベースのインテグレーションにおける最新バージョニングとレガシーバージョニング][2]を参照してください。
 
-To use the socket-based integration, set both `use_openmetrics` and `use_prometheus` to false and follow the [corresponding instructions](#using-the-stats-endpoint) on the Configuration section.
+ソケットベースのインテグレーションを使用するには、`use_openmetrics` と `use_prometheus` を false に設定し、構成セクションの[対応する手順](#using-the-stats-endpoint)に従ってください。
 
-The `use_openmetrics` option uses the latest mode of [OpenMetrics][3], which requires Agent v7.35 or later, or for you to [enable Python 3][4] in Agent v6.35 or later for metric collection. For hosts that are unable to use Python 3 or are on Agent v7.34 or earlier, use the legacy mode of OpenMetrics or the [socket-based legacy integration](#using-the-stats-endpoint). 
+`use_openmetrics` オプションは、最新の [OpenMetrics][3] モードを使用し、Agent v7.35 以降が必要です。または、メトリクス収集のために Agent v6.35 以降で [Python 3][4] を有効にする必要があります。Python 3 を使用できないホストや、Agent v7.34 以前のホストでは、OpenMetrics のレガシーモードまたは[ソケットベースのレガシーインテグレーション](#using-the-stats-endpoint)を使用してください。
 
-Metrics marked as `[OpenMetrics V1]` or `[OpenMetrics V2]` are only available using the corresponding mode of the HAProxy integration. Metrics marked as `[OpenMetrics V1 and V2]` are collected by both modes.
+`[OpenMetrics V1]` または `[OpenMetrics V2]` とマークされたメトリクスは、HAProxy インテグレーションの対応するモードを使用してのみ利用可能です。`[OpenMetrics V1 and V2]` とマークされたメトリクスは、どちらのモードでも収集されます。
 
-### Installation
+### インストール
 
-The HAProxy check is included in the [Datadog Agent][5] package, so you don't need to install anything else on your HAProxy server.
+HAProxy チェックは [Datadog Agent][5] パッケージに含まれています。HAProxy サーバーには何もインストールする必要がありません。
 
-### Configuration
+### 構成
 
-#### Using Prometheus
+#### Prometheus の使用
 
-The recommended way to set up this integration is by enabling the Prometheus endpoint on HAProxy. This endpoint is built into HAProxy starting with version 2 (enterprise version 1.9rc1). If you are using an older version, consider setting up the [HAProxy Prometheus exporter][6], or alternatively set up the legacy socket-based integration described in the next section.
+このインテグレーションを設定するための推奨される方法は、HAProxy で Prometheus エンドポイントを有効にすることです。このエンドポイントは、バージョン 2 (エンタープライズバージョン 1.9rc1) 以降の HAProxy に組み込まれています。古いバージョンを使用している場合は、[HAProxy Prometheus エクスポーター][6]を設定するか、次のセクションで説明するレガシーソケットベースのインテグレーションを設定することを検討してください。
 
-To use the legacy OpenMetrics mode instead of the latest one, change the `use_openmetrics` option to `use_prometheus`, and change the `openmetrics_endpoint` option to `prometheus_url`. For more information, see the [Prometheus and OpenMetrics metrics collection from a host documentation][7].
+最新の OpenMetrics モードではなく、従来の OpenMetrics モードを使用するには、`use_openmetrics` オプションを `use_prometheus` に変更し、`openmetrics_endpoint` オプションを `prometheus_url` に変更してください。詳細については、[ホストからの Prometheus および OpenMetrics メトリクス収集のドキュメント][7]を参照してください。
 
-#### Prepare HAProxy
+#### HAProxy の準備
 
-1. Configure your `haproxy.conf` using the [official guide][8].
-2. [Restart HAProxy to enable the Prometheus endpoint][9].
+1. [公式ガイド][8]を使用して `haproxy.conf` を構成します。
+2. [HAProxy を再起動して、Prometheus エンドポイントを有効にします][9]。
 
-#### Configure the Agent
+#### Agent の構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-##### Metric collection
-To configure this check for an Agent running on a host:
+##### メトリクスの収集
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `haproxy.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your HAProxy metrics. See the [sample haproxy.d/conf.yaml][1] for all available configuration options.
+1. HAProxy メトリクスの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `haproxy.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル haproxy.d/conf.yaml][1] を参照してください。
 
    ```yaml  
    instances:
@@ -161,32 +161,32 @@ To configure this check for an Agent running on a host:
      openmetrics_endpoint: http://localhost:<PORT>/metrics
    ```
 
-   To view configuration options for the legacy implementation, see the [sample haproxy.d/conf.yaml][2] file for Agent v7.34 or earlier.
+   レガシー実装の構成オプションを表示するには、Agent v7.34 以前の[サンプル haproxy.d/conf.yaml][2] ファイルをご覧ください。
 
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/data/conf.yaml.example
 [2]: https://github.com/DataDog/integrations-core/blob/7.34.x/haproxy/datadog_checks/haproxy/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                                                                   |
+| パラメーター            | 値                                                                                   |
 |----------------------|-----------------------------------------------------------------------------------------|
 | `<INTEGRATION_NAME>` | `haproxy`                                                                               |
-| `<INIT_CONFIG>`      | blank or `{}`                                                                           |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                           |
 | `<INSTANCE_CONFIG>`  | `{"openmetrics_endpoint": "http://%%host%%:<PORT>/metrics", "use_openmetrics": "true"}` |
 
-##### Kubernetes Deployment example
+##### Kubernetes のデプロイメント例
 
-Add pod annotations under `.spec.template.metadata` for a Deployment:
+デプロイメントの `.spec.template.metadata` の下にポッドアノテーションを追加します。
 
 ```yaml
 apiVersion: apps/v1
@@ -217,13 +217,13 @@ spec:
 {{< /tabs >}}
 
 
-#### Using the stats endpoint
+#### 統計エンドポイントの使用
 
-This configuration strategy is provided as a reference for legacy users. If you are setting up the integration for the first time, consider using the Prometheus-based strategy described in the previous section.
+この構成戦略は、レガシーユーザー向けのリファレンスとして提供されています。初めてインテグレーションを設定する場合は、前のセクションで説明した Prometheus ベースの戦略の使用を検討してください。
 
-The Agent collects metrics using a stats endpoint:
+Agent は、メトリクスを統計エンドポイントを使って収集します。
 
-1. Configure one in your `haproxy.conf`:
+1. `haproxy.conf` で統計エンドポイントを構成します。
 
    ```conf
      listen stats # Define a listen section called "stats"
@@ -236,21 +236,21 @@ The Agent collects metrics using a stats endpoint:
      stats auth Username:Password  # Authentication credentials
    ```
 
-2. [Restart HAProxy to enable the stats endpoint][9].
+2. [HAProxy を再起動して、統計エンドポイントを有効にします][9]。
 
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-Edit the `haproxy.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your HAProxy [metrics](#metric-collection) and [logs](#log-collection). See the [sample haproxy.d/conf.yaml][2] for all available configuration options.
+[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `haproxy.d/conf.yaml` ファイルを編集し、HAProxy の[メトリクス](#metric-collection)と[ログ](#log-collection)の収集を開始します。使用可能なすべてのコンフィギュレーションオプションについては、[haproxy.d/conf.yaml のサンプル][2]を参照してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Add this configuration block to your `haproxy.d/conf.yaml` file to start gathering your [HAProxy Metrics](#metrics):
+1. [HAProxy のメトリクス](#metrics)の収集を開始するには、`haproxy.d/conf.yaml` ファイルに次の構成ブロックを追加します。
 
    ```yaml
    init_config:
@@ -264,19 +264,19 @@ Edit the `haproxy.d/conf.yaml` file, in the `conf.d/` folder at the root of your
      - url: http://localhost/admin?stats
    ```
 
-2. [Restart the Agent][3].
+2. [Agent を再起動します][3]。
 
-##### Log collection
+##### ログ収集
 
-By default Haproxy sends logs over UDP to port 514. The Agent can listen for these logs on this port, however, binding to a port number under 1024 requires elevated permissions. Follow the instructions below to set this up. Alternatively, you can use a different port and skip step 3.
+デフォルトで、Haproxy はログを UDP 経由で 514 ポートに送信します。Agent はこのポートでログをリッスンできますが、1024 よりも下のポート番号にバインディングするため、管理者特権が必要になります。以下ではこの設定方法について説明します。別のポートを使用することも可能で、その場合は手順 3 をスキップしてください。
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `haproxy.d/conf.yaml` file to start collecting your Haproxy Logs:
+2. Haproxy のログの収集を開始するには、次の構成ブロックを `haproxy.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -286,28 +286,28 @@ By default Haproxy sends logs over UDP to port 514. The Agent can listen for the
        source: haproxy
    ```
 
-    Change the `service` parameter value and configure it for your environment. See the [sample haproxy.d/conf.yaml][2] for all available configuration options.
+    環境に合わせて、`service` パラメーターの値を変更して構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル haproxy.d/conf.yaml][2] を参照してください。
 
-3. Grant access to port 514 using the `setcap` command:
+3. `setcap` コマンドを使用して、514 ポートへのアクセスを許可します。
 
     ```bash
     sudo setcap CAP_NET_BIND_SERVICE=+ep /opt/datadog-agent/bin/agent/agent
     ```
 
-    Verify the setup is correct by running the `getcap` command:
+    セットアップが正しいか確認するために、`getcap` コマンドを実行します。
 
     ```bash
     sudo getcap /opt/datadog-agent/bin/agent/agent
     ```
 
-    With the expected output:
+    正しければ、次のように出力されます。
     ```bash
     /opt/datadog-agent/bin/agent/agent = cap_net_bind_service+ep
     ```
 
-    **Note:** Re-run this `setcap` command every time you upgrade the Agent.
+    **注:** この `setcap` コマンドを、Agent をアップグレードするたびに実行してください。
 
-4. [Restart the Agent][3].
+4. [Agent を再起動します][3]。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/haproxy/datadog_checks/haproxy/data/conf.yaml.example
@@ -317,11 +317,11 @@ By default Haproxy sends logs over UDP to port 514. The Agent can listen for the
 
 #### Docker
 
-To configure this check for an Agent running on a container:
+コンテナで実行中の Agent に対してこのチェックを構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.check_names"='["haproxy"]'
@@ -329,11 +329,11 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"url": "https://%%host%%/admin?stats"}]'
 ```
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Docker ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```yaml
 LABEL "com.datadoghq.ad.logs"='[{"source":"haproxy","service":"<SERVICE_NAME>"}]'
@@ -347,13 +347,13 @@ LABEL "com.datadoghq.ad.logs"='[{"source":"haproxy","service":"<SERVICE_NAME>"}]
 
 #### Kubernetes
 
-To configure this check for an Agent running on Kubernetes:
+このチェックを、Kubernetes で実行している Agent に構成します。
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as pod annotations on your application container. Aside from this, templates can also be configured with [a file, a configmap, or a key-value store][2].
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]をポッドアノテーションとして設定します。他にも、[ファイル、ConfigMap、または key-value ストア][2]を使用してテンプレートを構成できます。
 
-**Annotations v1** (for Datadog Agent v7.36 or earlier)
+**Annotations v1** (Datadog Agent v7.36 以前向け)
 
 ```yaml
 apiVersion: v1
@@ -374,7 +374,7 @@ spec:
     - name: haproxy
 ```
 
-**Annotations v2** (for Datadog Agent v7.36 or later)
+**Annotations v2** (Datadog Agent v7.36 以降向け)
 
 ```yaml
 apiVersion: v1
@@ -398,13 +398,13 @@ spec:
     - name: haproxy
 ```
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][3].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][3]を参照してください。
 
-Then, set [Log Integrations][4] as pod annotations. This can also be configured with [a file, a configmap, or a key-value store][5].
+次に、[ログのインテグレーション][4]をポッドアノテーションとして設定します。これは、[ファイル、ConfigMap、または key-value ストア][5]を使用して構成することも可能です。
 
 **Annotations v1/v2**
 
@@ -430,11 +430,11 @@ spec:
 
 #### ECS
 
-To configure this check for an Agent running on ECS:
+このチェックを、ECS で実行している Agent に構成するには:
 
-##### Metric collection
+##### メトリクスの収集
 
-Set [Autodiscovery Integrations Templates][1] as Docker labels on your application container:
+アプリケーションのコンテナで、[オートディスカバリーのインテグレーションテンプレート][1]を Docker ラベルとして設定します。
 
 ```json
 {
@@ -450,13 +450,13 @@ Set [Autodiscovery Integrations Templates][1] as Docker labels on your applicati
 }
 ```
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions 6.0 or later_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [ECS Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[ECS ログ収集][2]を参照してください。
 
-Then, set [Log Integrations][3] as Docker labels:
+次に、[ログインテグレーション][3]を Docker ラベルとして設定します。
 
 ```json
 {
@@ -476,39 +476,39 @@ Then, set [Log Integrations][3] as Docker labels:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][10] and look for `haproxy` under the Checks section.
+[Agent の status サブコマンドを実行][10]し、Checks セクションで `haproxy` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "haproxy" >}}
 
 
-### Events
+### イベント
 
-The HAProxy check does not include any events.
+HAProxy チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "haproxy" >}}
 
 
-## Troubleshooting
-### Port 514 Already in Use Error
-On systems with syslog, if the Agent is listening for HAProxy logs on port 514, the following error can appear in the Agent logs: 
-`Can't start UDP forwarder on port 514: listen udp :514: bind: address already in use`. 
+## トラブルシューティング
+### エラー: ポート 514 はすでに使用中
+syslog があるシステムで、Agent がポート 514 で HAProxy ログをリッスンしている場合、Agent ログに以下のエラーが表示されることがあります: 
+`Can't start UDP forwarder on port 514: listen udp :514: bind: address already in use`
 
-This is happening because, by default, syslog is listening on port 514. To resolve this error, syslog can be disabled, or HAProxy can be configured to forward logs to port 514 and another port the Agent is listening for logs on. The port the Agent listens on can be defined in the haproxy.d/conf.yaml file [here][11].
+これは、デフォルトで syslog がポート 514 でリッスンしているために起こっています。このエラーを解決するには、syslog を無効にするか、ポート 514 と Agent がログをリッスンしている別のポートにログを転送するように HAProxy を構成することができます。Agent がリッスンするポートは、[こちら][11]で haproxy.d/conf.yaml ファイル定義することができます。
 
-Need help? Contact [Datadog support][12].
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-- [Monitoring HAProxy performance metrics][13]
-- [How to collect HAProxy metrics][14]
-- [Monitor HAProxy with Datadog][15]
-- [HA Proxy Multi Process Configuration][16]
+- [HAProxy パフォーマンスメトリクスの監視][13]
+- [HAProxy メトリクスの収集方法][14]
+- [Datadog を使用した HAProxy の監視][15]
+- [HAProxy のマルチプロセス構成][16]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/haproxy/images/haproxy-dash.png

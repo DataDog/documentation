@@ -44,7 +44,7 @@ In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the app
 
 Alternatively, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport. For more information, read [DogStatsD over Unix Domain Socket][8].
 
-## Data Collected
+## 収集データ
 
 The following metrics are collected by default after enabling runtime metrics:
 

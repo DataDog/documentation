@@ -4,25 +4,25 @@ description: Advanced Configuration for MySQL Database Monitoring
 
 ---
 
-## Truncating `events_statements_summary_by_digest`
+## `events_statements_summary_by_digest` の切り捨て
 
-Certain workloads require some maintenance on tables in `performance_schema`. Query statistics are aggregated in the `performance_schema.events_statements_summary_by_digest` table, which has a limit on the number of rows. This limit is specified by the [`performance_schema_digests_size` system variable][1]. If the table is full, new query digests are tracked in a catch-all row with null schema and null query digest, preventing the Agent from distinguishing between queries that make up that row.
+一部のワークロードでは、`performance_schema` のテーブルのメンテナンスが必要です。クエリの統計情報は `performance_schema.events_statements_summary_by_digest` テーブルで集計されますが、行数に上限があります。この上限は、[`performance_schema_digests_size` システム変数][1]により指定されます。テーブルの行がいっぱいの場合、新しいクエリダイジェストは null スキーマおよび null クエリダイジェストで「その他」の行でまとめて追跡されるため、Agent はその行に含まれるクエリの違いを特定できなくなります。
 
-To prevent this loss of accurate per-query metrics, periodically truncate this table as a maintenance step so that all new queries can be collected:
+このように、クエリ当たりのメトリクスが正確に追跡されない問題を回避するため、定期的なメンテナンスとしてこのテーブルを切り捨て、すべての新しいクエリが収集されるようにします。
 
 ```sql
 TRUNCATE performance_schema.events_statements_summary_by_digest;
 ```
 
-To determine the frequency of truncation, run the query below to determine the number of statements sent to this catch-all row per second. A value greater than zero means the table is full and should be truncated.
+切り捨ての頻度を決定するには、下記のクエリを実行してこの「その他」行に送信されるステートメントの 1 秒あたりの数を確認します。0 より大きい値は、テーブルがいっぱいで切り捨てが必要であることを示します。
 
 ```sql
 SHOW STATUS LIKE 'Performance_schema_digest_lost';
 ```
 
-## Handling many identical tables
+## 多数の同一テーブルの取り扱い
 
-Partitioning your database across tables, such that table definitions are identical except for the name, can result in a large number or normalized queries:
+名前以外のテーブルの定義が同一である複数のテーブル間でデータベースをパーティション化すると、大量のクエリまたは正規化されたクエリが発生します。
 
 ```sql
 SELECT * FROM daily_aggregates_001
@@ -30,13 +30,13 @@ SELECT * FROM daily_aggregates_002
 SELECT * FROM daily_aggregates_003
 ```
 
-In these cases, track these queries as a single normalized query using the `replace_digits` option, so all metrics for those queries are rolled up into a single query:
+このような場合は、`replace_digits` オプションを使用してこのクエリを単一の正規化されたクエリとして追跡すると、このクエリのすべてのメトリクスが単一のクエリにロールアップされます。
 
 ```sql
 SELECT * FROM daily_aggregates_?
 ```
 
-Add the `replace_digits` option to your database instance configuration in the Datadog Agent:
+Datadog Agent のデータベースインスタンスのコンフィギュレーションに `replace_digits` オプションを追加します。
 
 ```yaml
 init_config:
@@ -47,11 +47,11 @@ instances:
     replace_digits: true
 ```
 
-## Raising the sampling rate
+## サンプリングレートの増加
 
-If you have queries that are relatively infrequent or execute quickly, raise the sampling rate by lowering the `collection_interval` value to collect samples more frequently.
+比較的頻度が低い、またはすばやく実行するクエリがある場合は、`collection_interval` の値を下げてサンプル収集の頻度を上げ、サンプリングレートを増加します。
 
-Set the `collection_interval` in your database instance configuration of the Datadog Agent. The default value is 1. Lower the value to a smaller interval:
+Datadog Agent のデータベースインスタンスコンフィギュレーションで `collection_interval` を設定します。デフォルト値は 1 で、値を小さくするとインターバルが小さくなります。
 
 ```yaml
 instances:

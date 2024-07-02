@@ -26,30 +26,30 @@ further_reading:
       text: Join an interactive session for insights on Kubernetes monitoring
 ---
 
-## Overview
+## 概要
 
-Run the Datadog Agent in your Kubernetes cluster to start collecting your cluster and applications metrics, traces, and logs.
+Kubernetes クラスターで Datadog Agent を実行し、クラスターとアプリケーションのメトリクス、トレース、ログの収集を開始します。
 
-**Note**: Agent v6.0+ only supports Kubernetes v1.7.6+. For prior versions of Kubernetes, see [Legacy Kubernetes versions][1].
+**注**: Agent v6.0+ は Kubernetes v1.7.6+ のみをサポートしています。Kubernetes の以前のバージョンについては、[Kubernetes のレガシーバージョン][1]を参照してください。
 
-For Agent commands, see the [Agent Commands guides][2].
+Agent のコマンドについては、[Agent コマンドガイド][2]を参照してください。
 
-For information pertaining to the Datadog Cluster Agent, which provides a streamlined approach to collecting cluster level monitoring data, see [Cluster Agent for Kubernetes][3].
+クラスターレベルのモニタリングデータの収集について合理的なアプローチを提供する Datadog Cluster Agent に関する情報については、[Kubernetes 対応の Cluster Agent][3] を参照してください。
 
-{{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/agent/kubernetes/installation">}}<u>Installation</u>: Install the Datadog Agent in a Kubernetes environment.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/configuration">}}<u>Further Configuration</u>: Collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, and reference the full list of available environment variables.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/distributions">}}<u>Distributions</u>: Review base configurations for major Kubernetes distributions, including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE).{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/apm">}}<u>APM</u>: Set up trace collection: configure the Agent to accept traces, configure your Pods to communicate with the Agent, and configure your application tracers to emit traces.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/log">}}<u>Log collection</u>: Set up log collection in a Kubernetes environment.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/tag">}}<u>Tag extraction</u>: Configure the Agent to create and assign tags to all metrics, traces, and logs emitted by a container, Pod, or Node, based on Kubernetes labels or annotations.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/integrations">}}<u>Integrations & Autodiscovery</u>: To configure integrations in a Kubernetes environment, use Datadog's Autodiscovery feature.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/prometheus">}}<u>Prometheus & OpenMetrics</u>: Collect your exposed Prometheus and OpenMetrics metrics from your application running inside Kubernetes.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/control_plane">}}<u>Control plane monitoring</u>: Monitor the Kubernetes API server, controller manager, scheduler, and etcd.{{< /nextlink >}}
-  {{< nextlink href="/agent/kubernetes/data_collected">}}<u>Data Collected</u>: See the list of metrics collected by the Agent when deployed on your Kubernetes cluster.{{< /nextlink >}}
+{{< whatsnext desc="このセクションには、以下のトピックが含まれます。">}}
+  {{< nextlink href="/agent/kubernetes/installation">}}<u>インストール</u>: Kubernetes 環境に Datadog Agent をインストールします。{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/configuration">}}<u>追加の構成</u>: イベントの収集、プロキシ設定のオーバーライド、DogStatsD によるカスタムメトリクスの送信、コンテナの許可リストとブロックリストの構成、利用可能な環境変数の全リストの参照を行います。{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/distributions">}}<u>ディストリビューション</u>: AWS Elastic Kubernetes Service (EKS)、Azure Kubernetes Service (AKS)、Google Kubernetes Engine (GKE) など、主要な Kubernetes ディストリビューションの基本構成を確認します。{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/apm">}}<u>APM</u>: トレース収集の設定: トレースを受け入れるように Agent を構成し、Agent と通信するようにポッドを構成し、トレースを発するようにアプリケーショントレーサーを構成します。{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/log">}}<u>ログ収集</u>: Kubernetes 環境のログ収集を設定します。{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/tag">}}<u>タグ抽出</u>: コンテナ、ポッド、またはノードから出力されるすべてのメトリクス、トレース、およびログに対して、Kubernetes のラベルまたはアノテーションに基づいてタグを作成し、割り当てるように Agent を構成します。{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/integrations">}}<u>インテグレーションとオートディスカバリー</u>: Kubernetes 環境でインテグレーションを構成するには、Datadog のオートディスカバリー機能を使用します。{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/prometheus">}}<u>Prometheus & OpenMetrics</u>: Kubernetes 内部で動作するアプリケーションから、公開されている Prometheus や OpenMetrics のメトリクスを収集します。{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/control_plane">}}<u>コントロールプレーンモニタリング</u>: Kubernetes API サーバー、コントローラーマネージャー、スケジューラー、etcd を監視します。{{< /nextlink >}}
+  {{< nextlink href="/agent/kubernetes/data_collected">}}<u>収集データ</u>: Kubernetes クラスターにデプロイした際に Agent が収集したメトリクスの一覧を確認します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

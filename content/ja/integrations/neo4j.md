@@ -27,7 +27,7 @@
   "support_email": support@neotechnology.com
 "categories":
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/neo4j/README.md"
 "display_on_public_website": true
@@ -78,11 +78,11 @@ Neo4j metrics enable database administrators to monitor their Neo4j deployments.
 With this integration, visualize important Neo4j metrics in our out-of-the-box dashboards and enable your DBAs to troubleshoot and monitor the health of your Neo4j databases.
 
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
-### Installation
+### インストール
 
 To install the neo4j check on your host:
 
@@ -93,7 +93,7 @@ To install the neo4j check on your host:
    datadog-agent integration install -t datadog-neo4j==<INTEGRATION_VERSION>
    ```
 
-### Configuration
+### 構成
 
 1. Edit the `neo4j.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your neo4j performance data. See the [sample neo4j.d/conf.yaml][4] for all available configuration options.
 
@@ -105,22 +105,22 @@ To install the neo4j check on your host:
 
 [Run the Agent's status subcommand][6] and look for `neo4j` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "neo4j" >}}
 
 
-### Service Checks
+### サービスチェック
 
 Service check `neo4j.prometheus.health` is submitted in the base check
 
-### Events
+### イベント
 
 Neo4j does not include any events.
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Neo4j support][10].
 

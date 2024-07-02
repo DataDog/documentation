@@ -19,14 +19,14 @@
   "sales_email": "info@datadoghq.com"
   "support_email": "help@datadoghq.com"
 "categories": []
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/agent_metrics/README.md"
 "display_on_public_website": true
 "draft": false
 "git_integration_title": "agent_metrics"
 "integration_id": "datadog-agent"
-"integration_title": "Agent Metrics"
+"integration_title": "Agent メトリクス"
 "integration_version": ""
 "is_public": true
 "manifest_version": "2.0.0"
@@ -60,13 +60,13 @@ Get internal metrics from the Datadog Agent to create visualizations and monitor
 
 **Note:** The list of metrics collected by this integration may change between minor Agent versions. Such changes may not be mentioned in the Agent's changelog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Agent Metrics integration, based on the [go_expvar][1] check, is included in the [Datadog Agent][2] package, so you don't need to install anything else on your servers.
 
-### Configuration
+### 構成
 
 1. Rename the [`go_expvar.d/agent_stats.yaml.example`][3] file, in the `conf.d/` folder at the root of your [Agent's configuration directory][4], to `go_expvar.d/agent_stats.yaml`.
 
@@ -76,21 +76,21 @@ The Agent Metrics integration, based on the [go_expvar][1] check, is included in
 
 [Run the Agent's status subcommand][6] and look for `go_expvar` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Agent Metrics integration collects the metrics defined in [`agent_stats.yaml.example`][3].
 
-### Events
+### イベント
 
 The Agent Metrics integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Agent Metrics integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

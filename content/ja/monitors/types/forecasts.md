@@ -16,62 +16,62 @@ further_reading:
   text: Consult your monitor status
 ---
 
-## Overview
+## 概要
 
-Forecasting is an algorithmic feature that allows you to predict where a metric is heading in the future. It is well-suited for metrics with strong trends or recurring patterns. For example, if your application starts logging at a faster rate, forecasts can alert you a week before a disk fills up, giving you adequate time to update your log rotation policy. Or, you can forecast business metrics, such as user sign-ups, to track progress against your quarterly targets.
+予測機能は、メトリクスが今後どこに向かうかを予測するためのアルゴリズム機能です。強い傾向や繰り返しパターンがあるメトリクスに適しています。たとえば、アプリケーションがより短い間隔でログを記録し始めた場合、予測値機能は、ログローテーションポリシーを更新するための時間を十分に取れるように、ディスクが満杯になる 1 週間前にアラートを生成します。あるいは、ユーザーのサインアップなどのビジネスメトリクスを予測して、四半期目標へ向けた進捗状況を追跡できます。
 
-## Monitor creation
+## モニターの作成
 
-To create a [forecast monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Forecast*.
+Datadog で[予測値モニター][1]を作成するには、メインナビゲーションを使用して次のように移動します: *Monitors --> New Monitor --> Forecast*。
 
-### Define the metric
+### メトリクスを定義する
 
-Any metric currently reporting to Datadog is available for monitors. For more information, see the [Metric Monitor][2] page.
+現在 Datadog にレポートが送信されるメトリクスはすべて、モニターに使用できます。詳細については、[メトリクスモニター][2]ページをご確認ください。
 
-After defining the metric, the forecast monitor provides two preview graphs in the editor:
-{{< img src="monitors/monitor_types/forecasts/editor_graphs.png" alt="Editor graphs" style="width:95%;">}}
+メトリクスを定義すると、予測値モニターはエディターに 2 つのプレビューグラフを表示します。
+{{< img src="monitors/monitor_types/forecasts/editor_graphs.png" alt="エディターグラフ" style="width:95%;">}}
 
-* The **Historical View** lets you explore the past metric data at different time scales.
-* The **Evaluation Preview** shows a combination of historical and predicted metric data.
+* **Historical View** では、さまざまな時間スケールで過去のメトリクスデータを確認できます。
+* **Evaluation Preview** には、過去と予測のメトリクスデータの組み合わせが表示されます。
 
-### Set alert conditions
+### アラートの条件を設定する
 
-* Trigger an alert when the edge of the forecast confidence bounds goes `above` or `below`.
-* the threshold within the next `24 hours`, `1 week`, `1 month`, etc. or `custom` to set a value between 12 hours and 3 months.
-* Alert threshold: >= `<NUMBER>`
-* Warning threshold: >= `<NUMBER>`
-* Alert [recovery threshold][3]: < `<NUMBER>`
-* Warning [recovery threshold][3]: < `<NUMBER>`
+* 予測の信頼限界のエッジが `above` または `below` になったときにアラートをトリガーします。
+* 次の `24 hours`、`1 week`、`1 month` 内などのしきい値、または `custom` に 12 時間〜3 か月の値を設定します。
+* アラートのしきい値: >= `<数値>`
+* 警告のしきい値: >= `<NUMBER>`
+* アラートの[リカバリしきい値][3]: < `<数値>`
+* 警告の[リカバリしきい値][3]: < `<NUMBER>`
 
-#### Advanced options
+#### 高度なオプション
 
-Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available to edit under **Advanced Options**:
+Datadog は、選択したメトリクスを自動的に分析して、複数のパラメーターを設定しますが、**Advanced Options** に、編集可能なオプションがあります。
 
 {{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="Advanced options" style="width:80%;">}}
 
-| Option                     | Description                                                                                                             |
+| オプション                     | 説明                                                                                                             |
 |----------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| [Algorithm](#algorithms)   | The forecast algorithm (`linear` or `seasonal`)                                                                         |
-| Model                      | The forecast model (`default`, `simple`, or `reactive`) for the linear algorithm                                        |
-| Seasonality                | The forecast seasonality (`hourly`, `daily`, or `weekly`) for the seasonal algorithm                         |
-| [Daylight&nbsp;savings][4] | Available for `seasonal` forecast monitors with `daily` or `weekly` seasonality.                            |
-| [Rollup][5]                | The rollup interval&mdash;larger intervals between points avoid noise influence on the forecast.                        |
-| Deviations                 | The width of the range of forecasted values&mdash;a value of 1 or 2 is generally large enough for most "normal" points. |
+| [アルゴリズム](#algorithms)   | 予測アルゴリズム（`linear` または `seasonal`）                                                                         |
+| モデル                      | 線形アルゴリズムの予測モデル（`default`、`simple`、`reactive`）                                        |
+| 季節性                | 季節アルゴリズムの予測季節性（`hourly`、`daily`、`weekly`）                         |
+| [夏時間][4] | `daily` または `weekly` の季節性を持つ `seasonal` 予測値モニターで使用できます。                            |
+| [Rollup][5]                | ロールアップ間隔&mdash;ポイント間の間隔を大きくすると、予測へのノイズの影響が回避されます。                        |
+| 偏差                 | 予測値の範囲の幅&mdash;この値を 1 ～ 2 にすると、大半の「正常」ポイントに対して十分な大きさになります。 |
 
-##### Algorithms
+##### アルゴリズム
 
-The available forecast algorithms are `linear` and `seasonal`:
+利用可能な予測アルゴリズムは `linear` と `seasonal` です。
 
 {{< tabs >}}
 {{% tab "Linear" %}}
 
-Use the linear algorithm for metrics that have steady trends but no repeating seasonal pattern. There are three different _models_ which control the linear algorithm's sensitivity to level shifts:
+安定した傾向を持っているが、季節パターンの繰り返しがないメトリクスには線形アルゴリズムを使用します。レベルシフトに対する線形アルゴリズムの感度を制御する 3 つの異なる_モデル_があります。
 
-| Model    | Description                                                                                |
+| モデル    | 説明                                                                                |
 |----------|--------------------------------------------------------------------------------------------|
-| Default  | Adjusts to the most recent trend and extrapolates data while being robust to recent noise. |
-| Simple   | Does a robust linear regression through the entire history.                                |
-| Reactive | Extrapolates recent behavior better at the risk of overfitting to noise, spikes, or dips.  |
+| デフォルト  | 最近のノイズに対してロバストでありながら、直近の傾向に合わせてデータを外挿します。 |
+| Simple   | 履歴全体でロバスト線形回帰を行います。                                |
+| Reactive | ノイズ、スパイク、ディップに過剰に適合するリスクがありますが、最近の挙動をよりよく外挿します。  |
 
 {{< img src="monitors/monitor_types/forecasts/linear_default.png" alt="linear default" style="width:80%;">}}
 
@@ -82,59 +82,59 @@ Use the linear algorithm for metrics that have steady trends but no repeating se
 {{% /tab %}}
 {{% tab "Seasonal" %}}
 
-Use the seasonal algorithm for metrics with repeating patterns. There are three different _seasonality_ choices:
+繰り返しパターンを持つメトリクスには季節アルゴリズムを使用します。選択肢として 3 つの異なる_季節性_があります。
 
-| Option  | Description                                                                                                                                        |
+| オプション  | 説明                                                                                                                                        |
 |---------|----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Hourly  | The algorithm expects the same minute after the hour behaves like past minutes after the hour, for example 5:15 behaves like 4:15, 3:15, etc.      |
-| Daily   | The algorithm expects the same time today behaves like past days, for example 5pm today behaves like 5pm yesterday.                                |
-| Weekly  | The algorithm expects that a given day of the week behaves like past days of the week, for example this Tuesday behaves like past Tuesdays.        |
+| Hourly  | アルゴリズムは挙動が 1 時間単位で過去の同時刻の挙動と同じであることを期待します。たとえば、5:15 の挙動なら 4:15 や 3:15 の挙動と同じ。      |
+| Daily   | アルゴリズムは 挙動が 1 日単位で過去の同時刻の挙動と同じであることを期待します。たとえば、今日の午後 5 の挙動なら昨日の午後5 時の挙動と同じ。                                |
+| Weekly  | アルゴリズムは 挙動が1 週間単位で過去の同じ曜日の挙動と同じであることを期待します。たとえば、火曜日の挙動なら過去の火曜日の挙動と同じ。        |
 
-**Note**: This algorithm requires at least two seasons of history and uses up to six seasons for forecasting.
+**注**: このアルゴリズムには少なくとも 2 シーズンの履歴が必要で、予測には最大 6 シーズンが使用されます。
 
 {{< img src="monitors/monitor_types/forecasts/seasonal.png" alt="seasonal" style="width:80%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Advanced alert conditions
+### 高度なアラート条件
 
-For detailed instructions on the advanced alert options (no data, evaluation delay, etc.), see the [Monitor configuration][6] page. For the metric-specific option full data window, see the [Metric monitor][7] page.
+高度なアラートオプション (データなし、評価遅延など) の詳細な手順については、[モニターコンフィギュレーション][6]ページを参照してください。メトリクス固有のオプションのフルデータウィンドウについては、[メトリクスモニター][7]ページを参照してください。
 
-### Notifications
+### 通知
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
 
 ## API
 
-To create forecast monitors programmatically, see the [Datadog API reference][9]. Datadog **strongly recommends** [exporting a monitor's JSON][10] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
+予測値モニターをプログラムで作成するには、[Datadog API リファレンス][9]を参照してください。Datadog では、[モニターの JSON をエクスポート][10]して API のクエリを作成することを**強く推奨**しています。Datadog の[モニター作成ページ][1]を使用することで、顧客はプレビューグラフと自動パラメーター調整の恩恵を受け、不適切に構成されたモニターを回避できます。
 
-Forecast monitors are managed using the [same API][11] as other monitors, but the contents of the `query` property deserves further explanation.
+予測値モニターは、他のモニターと[同じ API][11] を使用して管理されますが、`query` プロパティのコンテンツについては、さらに説明が必要です。
 
-The `query` property in the request body should contain a query string in the following format:
+リクエストの本文の `query` プロパティには、次の形式のクエリ文字列を含める必要があります。
 
 ```text
 <aggregator>(<query_window>):forecast(<metric_query>, '<algorithm>', <deviations>, interval=<interval>[, history='<history>'][, model='<model>'][, seasonality='<seasonality>']) <comparator> <threshold>
 ```
 
-* `aggregator`: Use `min` if the alert should trigger when the forecast goes below the threshold. Use `max` if the alert should trigger when the forecast goes above the threshold.
+* `aggregator`: 予測値が閾値を下回ったらアラートをトリガーするようにする場合は、`min` を使用します。予測値が閾値を上回ったらアラートをトリガーするようにするには、`max` を使用します。
 * `query_window`: A timeframe, for example: `next_4h` or `next_7d`.
-* `metric_query`: A standard Datadog metric query, for example: `min:system.disk.free{service:database,device:/data}by{host}`.
-* `algorithm`: `linear` or `seasonal`
-* `deviations`: A number greater than or equal to one. This parameter controls the size of the confidence bounds, allowing a monitor to be made more or less sensitive.
-* `interval`: A positive integer representing the number of seconds in the rollup interval.
-* `history`: A string representing the amount of past data that should be used for making the forecast, for example: `1w`, `3d`. This parameter is only used with the `linear` algorithm.
-* `model`: The type of model to use: `default`, `simple`, or `reactive`. This parameter is only used with the `linear` algorithm.
-* `seasonality`: The seasonality to use: `hourly`, `daily`, or `weekly`. This parameter is only used with the `seasonal` algorithm
-* `comparator`: Use `<=` to alert when the forecast goes below the threshold. Use `>=` to alert when the forecast goes above the threshold.
-* `threshold`: A critical alert will trigger when the forecast's confidence bounds reach this threshold.
+* `metric_query`: 標準の Datadog メトリクスクエリ (例: `min:system.disk.free{service:database,device:/data}by{host}`)
+* `algorithm`: `linear` または `seasonal`
+* `deviations`: 1 と等しい、または 1 より大きい数。このパラメーターは、信頼限界のサイズを制御し、モニターの秘密度を調整できます。
+* `interval`:ロールアップ間隔の秒数を表す正の整数。
+* `history`: 予測値の作成に使用されるべき過去データの量を表す文字列（例: `1w`、`3d`）。このパラメーターは、`linear` アルゴリズムでのみ使用されます。
+* `model`: 使用されるモデルタイプは `default`、`simple`、または `reactive`。このパラメーターは、`linear` アルゴリズムでのみ使用されます。
+* `seasonality`: 使用される季節性は `hourly`、`daily`、または `weekly`。このパラメーターは、`seasonal` アルゴリズムでのみ使用されます。
+* `comparator`: 予測値が閾値を下回ったらアラートを発生させるには、`<=` を使用します。予測値が閾値を上回ったらアラートする場合は、`>=` を使用します。
+* `threshold`: 予測値の信頼限界がこの閾値に達すると「クリティカル」のアラートをトリガーします。
 
-## Troubleshooting
+## トラブルシューティング
 
-The following functions cannot be nested inside calls to the `forecast()` function:<br>
-`anomalies`, `cumsum`, `integral`, `outliers`, `piecewise_constant`, `robust_trend`, or `trend_line`
+次の関数は、`forecast()` 関数の呼び出し内にネストすることはできません。<br>
+`anomalies`、`cumsum`、`integral`、`outliers`、`piecewise_constant`、`robust_trend`、`trend_line`
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

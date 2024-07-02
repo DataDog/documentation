@@ -2,38 +2,38 @@
 title: Hostname Detection in Containers
 ---
 
-Many features in Datadog rely on the Agent to provide an accurate hostname for monitored hosts. While this is straightforward when the Agent runs directly on a host, the hostname resolution process is different when the Agent runs in a containerized environment.
+Datadog の多くの機能は、監視するホストの正確なホスト名を提供するために、Agent に依存しています。Agent がホスト上で直接実行される場合、これは簡単ですが、Agent がコンテナ化された環境で実行される場合、ホスト名解決プロセスは異なっています。
 
-Since version **7.40**, the Agent properly recognizes failed hostname resolution in containerized environments. Without a resolved hostname, the Agent exits with an error shortly after it starts.
+バージョン **7.40** 以降、Agent はコンテナ環境でのホスト名解決に失敗したことを適切に認識するようになりました。解決されたホスト名がない場合、Agent は起動後すぐにエラーで終了します。
 
-When that happens, the following `ERROR` message is printed in the logs:
+そのような場合、ログに以下のような `ERROR` メッセージが出力されます。
 ```
 Error while getting hostname, exiting: unable to reliably determine the host name. You can define one in the agent config file or in your hosts file
 ```
 
-Encountering this error usually means that some part of the Agent configuration is incorrect. Use the following information to resolve various common cases of this misconfiguration.
+このエラーが発生するのは、通常、Agent の構成の一部が正しくないことを意味します。この誤構成の様々な一般的なケースを解決するために、次の情報を使用してください。
 
-## Kubernetes hostname errors
+## Kubernetes のホスト名エラー
 
-On Kubernetes, a hostname error usually means the Agent cannot access at least one of:
+Kubernetes では、ホスト名エラーは通常、Agent が少なくとも次のいずれかにアクセスできないことを意味します。
 * Kubelet API
-* Cloud provider metadata endpoint
-* Container runtime API
+* クラウドプロバイダーのメタデータエンドポイント
+* コンテナランタイム API
 
-Some Kubernetes distributions require a dedicated configuration, so verify that your setup is aligned with our [recommended Kubernetes setup][1].
+Kubernetes ディストリビューションによっては、専用の構成が必要なものもありますので、[Kubernetes の推奨構成][1]に沿った構成であることを確認してください。
 
-### Accessing the Kubelet API 
+### Kubelet API へのアクセス
 
-Make sure the Agent can access the Kubelet API. When it can, the Agent prints this log:
+Agent が Kubelet API にアクセスできることを確認します。アクセスできると、Agent はこのログを出力します。
 ```
 Successful configuration found for Kubelet, using URL: ******
 ```
 
-The Kubernetes RBAC permissions are set automatically by our official [Helm chart][2], the [Datadog Operator][3] and our official [manifests][4]. If you use a different solution to deploy the Agent, make sure the following permissions are present in a `Role` or `ClusterRole` that is bounded to the Agent service account:
+Kubernetes の RBAC 権限は、Datadog 公式の[ヘルムチャート][2]、[Datadog Operator][3]、Datadog 公式の[マニフェスト][4]で自動的に設定されます。Agent のデプロイに別のソリューションを使用する場合は、Agent サービスアカウントにバインドされる `Role` または `ClusterRole` に以下の権限が存在することを確認してください。
 
 ```yaml
 rules:
-  - apiGroups: # Kubelet connectivity
+  - apiGroups: # Kubelet の接続性
       - ""
     resources:
       - nodes/metrics
@@ -44,13 +44,13 @@ rules:
       - get
 ```
 
-The most common error that prevents connection to the Kubelet API is the verification of Kubelet TLS certificate. In many Kubernetes distributions the Kubelet certificate is either:
-* Not signed by the cluster CA.
-* Does not contain a SAN corresponding to the address it's reachable at.
+Kubelet API への接続を妨げる最も一般的なエラーは、Kubelet の TLS 証明書の検証です。多くの Kubernetes ディストリビューションでは、Kubelet の証明書は以下のどちらかです。
+* クラスター CA によって署名されていない。
+* 到達可能なアドレスに対応する SAN が含まれていない。
 
-This prevents the Agent from connecting to the Kubelet API through HTTPS, because TLS verification is enabled by default.
+これは、TLS 検証がデフォルトで有効になっているため、Agent が HTTPS で Kubelet API に接続できないようにするためです。
 
-You can disable TLS verification by using dedicated parameters or by setting the `DD_KUBELET_TLS_VERIFY` variable for **all containers** in the Agent manifest:
+専用のパラメーターを使用するか、Agent マニフェストの**すべてのコンテナ**に対して `DD_KUBELET_TLS_VERIFY` 変数を設定することにより、TLS 検証を無効化することができます。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -101,20 +101,20 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Accessing the cloud provider metadata endpoint
+### クラウドプロバイダーのメタデータエンドポイントへのアクセス
 
-If you run in AWS, Google Cloud, or Azure, the Agent can use a metadata endpoint to retrieve the hostname.
+AWS、Google Cloud、または Azure で実行する場合、Agent はホスト名を取得するためにメタデータエンドポイントを使用することができます。
 
-Accessing the cloud provider metadata endpoint allows Datadog to properly match Agent data and cloud integration data in the application.
+クラウドプロバイダーのメタデータエンドポイントにアクセスすることで、Datadog は Agent データとアプリケーション内のクラウドインテグレーションデータを適切に照合することができます。
 
-Encountering this issue usually means that access to the metadata endpoint has been restricted.
-For example, on AWS, this could be due to the [hop limit setting][5].
+この問題に遭遇することは、通常、メタデータエンドポイントへのアクセスが制限されていることを意味します。
+例えば AWS の場合、[ホップ制限の設定][5]が原因である可能性があります。
 
-### Accessing the container runtime API
+### コンテナランタイム API へのアクセス
 
-Use this solution only in the unlikely event that you **explicitly** don't want the Agent to connect to Kubelet API, and if you are not running in a supported cloud provider described above.
+このソリューションは、Agent が Kubelet API に接続することを**明示的に**望まない場合、および上記のサポートされるクラウドプロバイダーで実行していない場合にのみ使用してください。
 
-In this case you can use the downward API to set `DD_HOSTNAME`:
+この場合、Download API を使用して `DD_HOSTNAME` を設定することができます。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -176,25 +176,25 @@ spec:
 
 ## Amazon ECS and Docker VM hostname errors
 
-When the Agent runs in Docker on a cloud provider, a hostname error usually means that the Agent cannot access at least one of:
-* Container runtime API
-* Cloud provider metadata endpoint
+クラウドプロバイダー上の Docker で Agent を実行する場合、ホスト名エラーは通常、Agent が少なくとも次のいずれかにアクセスできないことを意味します。
+* コンテナランタイム API
+* クラウドプロバイダーのメタデータエンドポイント
 
-### Accessing the container runtime API
+### コンテナランタイム API へのアクセス
 
-Allow the Agent to connect to the Docker socket:
+Agent が Docker ソケットに接続できるようにします。
 
 {{< tabs >}}
 {{% tab "Amazon ECS on EC2" %}}
 
-Make sure the Docker socket is mounted in your [task definition][1].
+[タスク定義][1]で Docker ソケットがマウントされていることを確認します。
 
 
 [1]: /resources/json/datadog-agent-ecs.json
 {{% /tab %}}
-{{% tab "Docker on VM" %}}
+{{% tab "VM 上の Docker" %}}
 
-Make sure the Docker socket is mounted in your `docker run` command:
+`docker run` コマンドで Docker ソケットがマウントされていることを確認します。
 
 ```
 -v /var/run/docker.sock:/var/run/docker.sock:ro
@@ -203,39 +203,38 @@ Make sure the Docker socket is mounted in your `docker run` command:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Accessing the cloud provider metadata endpoint
+### クラウドプロバイダーのメタデータエンドポイントへのアクセス
 
-If you run in AWS, Google Cloud, or Azure, the Agent can use a metadata endpoint to retrieve the hostname.
+AWS、Google Cloud、または Azure で実行する場合、Agent はホスト名を取得するためにメタデータエンドポイントを使用することができます。
 
-Accessing the cloud provider metadata endpoint allows Datadog to properly match Agent data and cloud integration data in the application.
+クラウドプロバイダーのメタデータエンドポイントにアクセスすることで、Datadog は Agent データとアプリケーション内のクラウドインテグレーションデータを適切に照合することができます。
 
-Encountering this issue usually means that access to the metadata endpoint has been restricted.
-For example, on AWS, this could be due to the [hop limit setting][5].
+この問題に遭遇することは、通常、メタデータエンドポイントへのアクセスが制限されていることを意味します。
+例えば AWS の場合、[ホップ制限の設定][5]が原因である可能性があります。
 
-## Hostname errors in CI environments, sidecar setups, and environments without access to container runtime
+## CI 環境、サイドカーセットアップ、およびコンテナランタイムにアクセスできない環境でのホスト名エラー
 
-When you run the Agent in a **CI environment** (so Agent is ephemeral) or as a sidecar without access to
-host information, two options are available:
+Agent を **CI 環境** (つまり Agent はエフェメラル) またはホスト情報にアクセスできないサイドカーとして実行する場合、2 つのオプションがあります。
 
-- Setting `DD_HOSTNAME` (`hostname` in `datadog.yaml`) explicitly to the hostname:
+- `DD_HOSTNAME` (`datadog.yaml` の `hostname`) を明示的にホスト名に設定する。
 
 ```
 -e DD_HOSTNAME=$(hostname)
 ```
 
-- Setting `DD_HOSTNAME_TRUST_UTS_NAMESPACE` (`hostname_trust_uts_namespace` in `datadog.yaml`):
+- `DD_HOSTNAME_TRUST_UTS_NAMESPACE` (`datadog.yaml` の `hostname_trust_uts_namespace`) を設定する。
 
-This option is available starting Datadog Agent **7.42.0**.
+このオプションは、Datadog Agent **7.42.0** から利用可能です。
 
 ```
 -e DD_HOSTNAME_TRUST_UTS_NAMESPACE=true
 ```
 
-When this is set, the Agent will use the in-container hostname (usually the container name or pod name).
+これを設定すると、Agent はコンテナ内のホスト名 (通常はコンテナ名またはポッド名) を使用します。
 
-**Note**: This does not apply to serverless solutions like Fargate.
+**注**: Fargate のようなサーバーレスソリューションには適用されません。
 
-If the solutions above did not fix your Agent setup, reach out to the [Datadog support team][6].
+上記の解決策で Agent の設定がうまくいかない場合は、[Datadog サポートチーム][6]までご連絡ください。
 
 [1]: /containers/kubernetes/distributions
 [2]: https://github.com/DataDog/helm-charts

@@ -13,44 +13,44 @@ algolia:
   tags: [airgap, airgapped, air gap, air gapped, air-gap, air-gapped]
 ---
 
-The one-line install command provided in the [Agent install instructions][1] requires outbound HTTPS access to a few different endpoints to function properly and might not work with servers that have limited internet access. Specifically, these are:
+[Agent インストール手順][1]で提供される 1 行のインストールコマンドは、正しく機能するためにいくつかの異なるエンドポイントへのアウトバウンド HTTPS アクセスを必要とし、インターネットアクセスが制限されているサーバーでは動作しない可能性があります。具体的には、以下の通りです。
 
-* For Debian/Ubuntu systems installation:
-  * https://keys.datadoghq.com - Storage of Datadog public signing keys.
-  * https://apt.datadoghq.com - Datadog APT package repository.
-* For RedHat and SUSE based systems installation:
-  * https://keys.datadoghq.com - Storage of Datadog public signing keys.
-  * https://yum.datadoghq.com - Datadog RPM package repository.
+* Debian/Ubuntu システムのインストールの場合
+  * https://keys.datadoghq.com - Datadog の公開署名鍵の保管。
+  * https://apt.datadoghq.com - Datadog APT のパッケージリポジトリ。
+* RedHat および SUSE ベースシステムのインストールの場合
+  * https://keys.datadoghq.com - Datadog の公開署名鍵の保管。
+  * https://yum.datadoghq.com - Datadog RPM のパッケージリポジトリ。
 
-For servers with no direct internet access, the Agent can be configured to route through a proxy, see [Agent Proxy Configuration][2]. For servers with limited outbound internet connectivity, the Agent can be installed using the relevant package for the server's OS. The [Agent install instructions][1] contain step-by-step instructions underneath the one-line install commands.
+インターネットに直接アクセスできないサーバーの場合、Agent はプロキシを経由するように構成できます ([Agent Proxy の構成][2]を参照)。インターネットへの接続が制限されているサーバーでは、サーバーの OS に関連するパッケージを使用して Agent をインストールすることができます。[Agent インストール手順][1]には、1 行のインストールコマンドの下にステップバイステップの手順が記載されています。
 
-If the target system is blocked from accessing the package repository directly, download the package from the repository using another server, then transfer it over to the target system for a local install.
+ターゲットシステムがパッケージリポジトリへの直接アクセスをブロックされている場合、他のサーバーを使用してリポジトリからパッケージをダウンロードし、ターゲットシステムに転送してローカルにインストールします。
 
-The RPM packages for Agent 6 are available at [https://yum.datadoghq.com/stable/6/][3], for Agent 7 at [https://yum.datadoghq.com/stable/7/][4], and DEB packages are available at [https://apt.datadoghq.com/pool/d/da/][5].
+Agent 6 の RPM パッケージは [https://yum.datadoghq.com/stable/6/][3] に、Agent 7 の RPM パッケージは [https://yum.datadoghq.com/stable/7/][4] に、DEB パッケージは [https://apt.datadoghq.com/pool/d/da/][5] に掲載されています。
 
-**Note**: The package bundles all resources necessary to run the Agent and checks (whether the integration is enabled or not). In terms of hard requirements, Python 2.7+ and sysstat are required; other dependencies are mandatory depending on what checks are enabled.
+**注**: このパッケージには、Agent とチェック (インテグレーションが有効かどうかに関わらず) を実行するために必要なすべてのリソースがバンドルされています。ハード要件としては、Python 2.7+ と sysstat が必要です。他の依存関係は、どのようなチェックが有効かによって必須となります。
 
-Once the package has been transferred to the target system, it can be installed locally by using the appropriate package manager command. For yum, the command would follow the pattern:
+パッケージがターゲットシステムに転送されたら、適切なパッケージマネージャーコマンドを使用してローカルにインストールすることができます。yum の場合、コマンドは次のパターンに従います。
 
 ```bash
 sudo yum localinstall datadog-agent-<AGENT_VERSION>-1.<CPU_ARCHITECTURE>.rpm
 ```
 
-To install a deb file in the current directory for Debian-based distributions:
+Debian ベースのディストリビューションで、deb ファイルをカレントディレクトリにインストールするには
 
 ```bash
 sudo apt install ./datadog-agent_<AGENT_VERSION>-1_amd64.deb
 ```
 
-Once installed, add a `datadog.yaml` file by copying `datadog.yaml.example`. Then update `datadog.yaml` with the [API key][6] for your organization. This can be done with a single command:
+インストールが完了したら、`datadog.yaml.example` をコピーして `datadog.yaml` ファイルを追加します。次に、`datadog.yaml` を組織の [API キー][6]で更新します。これは 1 つのコマンドで実行できます。
 
 ```bash
 sudo sh -c "sed 's/api_key:.*/api_key: <YOUR_DATADOG_API_KEY>/' /etc/datadog-agent/datadog.yaml.example > /etc/datadog-agent/datadog.yaml"
 ```
 
-Then, [start the Agent][7] using the appropriate command for your system.
+次に、お使いのシステムに適したコマンドを使用して、[Agent の起動][7]を行います。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

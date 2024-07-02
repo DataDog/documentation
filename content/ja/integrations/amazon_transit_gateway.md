@@ -3,7 +3,7 @@
 - aws
 - cloud
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key AWS Transit Gateway metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_transit_gateway/"
@@ -28,9 +28,9 @@ Use AWS Transit Gateway to interconnect your virtual private clouds (VPCs) and o
 
 Enable this integration to see all your Transit Gateway metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -76,21 +76,21 @@ After a few minutes, Transit Gateway flow logs appear in your [Log Explorer][6].
 
 For more information on collecting AWS Services logs, see [Send AWS Services Logs with the Datadog Lambda Function][7].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_transit_gateway" >}}
 
 
-### Events
+### イベント
 
 The AWS Transit Gateway integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The AWS Transit Gateway integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

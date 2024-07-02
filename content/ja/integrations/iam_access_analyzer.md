@@ -21,7 +21,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/iam_access_analyzer/README.md"
 "display_on_public_website": true
@@ -61,7 +61,7 @@
 
 Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon account to continuously analyze IAM permissions granted with any of your account policies. Datadog integrates with Amazon IAM Access Analyzer using a Lambda function that ships its findings as logs to Datadog.
 
-## Setup
+## セットアップ
 
 ### Log collection
 
@@ -83,13 +83,13 @@ Use AWS Identity and Access Management (IAM) Access Analyzer across your Amazon 
 
 6. Once the AWS Access Analyzer runs and produces findings, the events will be picked up by the Datadog Lambda Forwarder tagged with `source:access-analyzer`. See the [Log Explorer][2] to start exploring your logs.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 This integration does not include any metrics.
 
-### Service Checks
+### サービスチェック
 
 This integration does not include any service checks.
 
@@ -97,11 +97,11 @@ This integration does not include any service checks.
 
 This integration can be configured to send logs.
 
-### Events
+### イベント
 
 This integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

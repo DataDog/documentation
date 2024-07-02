@@ -11,37 +11,37 @@ further_reading:
 
 You can use resource tags to create filters that include or exclude resources from being evaluated by Cloud Security Management (CSM). The filters must be specified as a comma-separated list of `key:value` pairs.
 
-**Notes**:
+**注**:
 
 - Resource evaluation filters can only be used with hosts that are scanned by cloud integrations.
 - Tags must be applied directly to the resource. The filters do not take into account user tags added in Datadog. The only exception is for tags added on the integration tiles for AWS and Google Cloud Platform.
 
-| Format                       | Value        |
+| 形式                       | 値        |
 |------------------------------|--------------|
-| Allowlist                    | `key:value`  |
-| Blocklist                    | `!key:value` |
-| Single character wildcard    | `?`          |
-| Multiple characters wildcard | `*`          |
+| 許可リスト                    | `key:value`  |
+| ブロックリスト                    | `!key:value` |
+| 1 文字のワイルドカード    | `?`          |
+| 複数文字のワイルドカード | `*`          |
 
-The allowlist enables you to specify tags that must be applied to a resource in order for CSM to evaluate it. Allowlist tags are evaluated as OR statements. In other words, at least one of the allowlist tags must be present in order for a resource to be evaluated. In contrast, blocklisted tags are evaluated as AND statements and take precedence over allowlist tags.
+許可リストでは、CSM がリソースを評価するためにリソースに適用する必要があるタグを指定できます。許可リストタグは OR ステートメントとして評価されます。つまり、リソースを評価するには、許可リストタグが少なくとも 1 つ存在する必要があります。一方、ブロックリストタグは AND ステートメントとして評価され、許可リストタグよりも優先されます。
 
-**Examples**:
+**例**:
 
-- `!env:staging` excludes resources that have the `env:staging` tag.
-- `datadog:monitored, env:prod*` collects metrics for resources that have at least one of these tags.
-- `!env:staging, !testing` excludes resources that have both the `env:staging` and `testing` tags.
-- `datadog:monitored !region:us-east1` collects metrics for resources that have the `datadog:monitored` tag, so long as the resource does not have the `region:us-east1` tag applied to it.
+- `!env:staging` は `env:staging` タグを持つリソースを除外します。
+- `datadog:monitored, env:prod*` は、これらのタグを少なくとも 1 つ持つリソースのメトリクスを収集します。
+- `!env:staging, !testing` は、`env:staging` タグと `testing` タグの両方を持つリソースを除外します。
+- `datadog:monitored !region:us-east1` は、リソースに `region:us-east1` タグが適用されていない限り、`datadog:monitored` タグを持つリソースのメトリクスを収集します。
 
-## Exclude resources from evaluation
+## 評価からリソースを除外
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
 1. On the [**Cloud Security Management Setup** page][1], click **Cloud accounts**.
-2. Expand the **AWS** section.
+2. **AWS** セクションを展開します。
 3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon for the account you want to add the filter to.
-4. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
-5. Click **Save**.
+4. 許可リストまたはブロックリストにしたいタグの `key:value` のペアをカンマで区切ったリストを入力します。
+5. **Save** をクリックします。
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 
@@ -49,11 +49,11 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{% tab "Azure" %}}
 
 1. On the [**Cloud Security Management Setup** page][1], click **Cloud accounts**.
-2. Expand the **Azure** section.
+2. **Azure** セクションを展開します。
 3. Expand a subscription.
-3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon.
-4. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
-5. Click **Save**.
+3. **Resource Evaluation Filters (Optional)** の下で、**Plus** (+) アイコンをクリックします。
+4. 許可リストまたはブロックリストにしたいタグの `key:value` のペアをカンマで区切ったリストを入力します。
+5. **Save** をクリックします。
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 
@@ -61,17 +61,17 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{% tab "Google Cloud" %}}
 
 1. On the [**Cloud Security Management Setup** page][1], click **Cloud accounts**.
-2. Expand the **GCP** section.
+2. **GCP** セクションを展開します。
 3. Expand a project.
-3. Under **Resource Evaluation Filters (Optional)**, click the **Plus** (+) icon.
-4. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
-5. Click **Save**.
+3. **Resource Evaluation Filters (Optional)** の下で、**Plus** (+) アイコンをクリックします。
+4. 許可リストまたはブロックリストにしたいタグの `key:value` のペアをカンマで区切ったリストを入力します。
+5. **Save** をクリックします。
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

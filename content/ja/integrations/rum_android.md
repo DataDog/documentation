@@ -9,11 +9,11 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-- metrics
+- モニター
 - mobile
 - network
 - tracing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rum_android/README.md"
 "display_on_public_website": true
@@ -52,63 +52,63 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
-With the Datadog [Android integration][1], you can spend less time triaging issues and more time releasing new features by:
+Datadog [Android インテグレーション][1]を利用することで、問題のトリアージに費やす時間を減らし、より多くの時間を新機能のリリースに費やすことができるようになります。
 
-- Debugging the root cause of slow performance issues and application crashes in third-party libraries, network requests, or large media files
-- Improving application responsiveness, setting up service level indicators (SLIs), and diagnosing issues with out-of-the-box dashboards, real-time metrics, and deobfuscated crash reports
-- Intelligently grouping high-volume application errors into a manageable set of unique issues
+- サードパーティライブラリ、ネットワークリクエスト、大容量メディアファイルにおけるパフォーマンス低下やアプリケーションクラッシュの根本的な原因をデバッグ
+- アプリケーションの応答性向上、サービスレベルインジケータ (SLI) の設定、すぐに使えるダッシュボード、リアルタイムメトリクス、難読化されたクラッシュレポートによる問題の診断
+- 大量のアプリケーションエラーを管理可能な固有の問題群にインテリジェントにグループ化
 
-Correlate the impact of the user experience on your business by:
+ユーザーエクスペリエンスがビジネスに与える影響を関連付けます。
 
-- Analyzing critical mobile user experience data such as screen engagement by demographics, version releases, or any custom attributes, to reach your business KPIs
-- Automatically correlating every user journey with a timeline of session events and attributes including ID, cellular activity, referral URL, and more
-- Understanding user behavior trends with customizable analytics and geographical maps
+- ビジネス KPI を達成するために、デモグラフィック、バージョンリリース、または任意のカスタム属性による画面エンゲージメントなど、重要なモバイルユーザーエクスペリエンスデータを分析
+- すべてのユーザージャーニーを、ID、セルラーアクティビティ、リファーラル URL などのセッションイベントや属性のタイムラインと自動的に相関付け
+- カスタマイズ可能なアナリティクスと地理的マップによりユーザー行動傾向を把握
 
-Monitor the end-to-end health of your application by:
+アプリケーションのエンドツーエンドの健全性を監視します。
 
-- Pivoting from your user experience data to backend traces, runtime metrics, and logs for the complete context when investigating issues
-- Debugging crashes faster by unifying client-side and server-side metrics, traces, and logs
-- Unifying full-stack monitoring in a single platform for frontend and backend teams
+- ユーザーエクスペリエンスデータからバックエンドトレース、ランタイムメトリクス、ログに視点を移し、問題を調査する際の完全なコンテクストを提供
+- クライアントサイドとサーバーサイドのメトリクス、トレース、ログを統合し、クラッシュのデバッグを高速化
+- フロントエンドとバックエンドのチーム向けに、フルスタックモニタリングを単一プラットフォームで実現
 
-## Setup
+## セットアップ
 
-### Collect RUM events
+### RUM イベントの収集
 
-To start collecting Real User Monitoring events from your application, see [Android and Android TV Monitoring][2].
+アプリケーションからリアルユーザーモニタリングのイベント収集を開始するには、[Android および Android TV モニタリング][2]を参照してください。
 
-### Collect traces
+### トレースの収集
 
-To start sending your Android application's traces to Datadog, see [Android Trace Collection][3]. Additionally, you can [Connect RUM and Traces][4].
+Android アプリケーションのトレースを Datadog に送信し始めるには、[Android トレース収集][3]をご覧ください。また、[RUM とトレースの接続][4]することもできます。
 
-### Collect logs
+### ログの収集
 
-To start forwarding your Android application's logs to Datadog, see [Android Log Collection][5].
+Android アプリケーションのログを Datadog に転送し始めるには、[Android ログ収集][5]をご覧ください。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-The Android integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][6]. 
+Android インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][6]を参照してください。
 
-### Events
+### イベント
 
-For more information about events and attributes, see [RUM Android Data Collected][7].
+イベントや属性の詳細については、[RUM Android データ収集][7]を参照してください。
 
-### Service Checks
+### サービスチェック
 
-The Android integration does not include any service checks.
+Android インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog Support][8].
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Android and Android TV Monitoring][9]
+- [Android および Android TV のモニタリング][9]
 
 [1]: https://app.datadoghq.com/integrations/rum-android
 [2]: https://docs.datadoghq.com/real_user_monitoring/android/?tabs=kotlin#setup

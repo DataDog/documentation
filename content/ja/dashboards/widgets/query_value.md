@@ -10,31 +10,31 @@ further_reading:
   text: Building Dashboards using JSON
 ---
 
-Query values display the current value of a given metric, APM, or log query. They come with conditional formatting (such as a green/yellow/red background) to convey whether the value is in the expected range. This can be supplemented with optional backgrounds of timeseries data. The values displayed by a query value do not require an instantaneous measurement.
+クエリ値は、1 つのメトリクス、APM、またはログクエリの現在の値を表示します。値は条件付き書式 (緑/黄/赤色の背景など) を使用して表示され、値が期待される範囲内にあるかどうかを示します。これに、オプションで時系列データの背景を追加することができます。クエリ値によって表示される値は、必ずしもある瞬間の測定値を必要としません。
 
-The widget can display the latest value reported, or an aggregate computed from all query values across the time window. These visualizations provide a narrow but unambiguous window into your infrastructure query.
+このウィジェットは、最新の報告値を表示することも、タイムウィンドウ全体のすべてのクエリ値から計算された集計値を表示することもできます。この可視化機能は、小さくてもはっきりとしたインフラストラクチャークエリへのウィンドウを提供します。
 
-{{< img src="dashboards/widgets/query_value/query_value1.png" alt="Query value widget" style="width:80%;" >}}
+{{< img src="dashboards/widgets/query_value/query_value1.png" alt="クエリ値ウィジェット" style="width:80%;" >}}
 
-## Setup
+## セットアップ
 
-{{< img src="dashboards/widgets/query_value/query-value-widget-setup1.png" alt="Query value widget setup" style="width:80%;">}}
+{{< img src="dashboards/widgets/query_value/query-value-widget-setup1.png" alt="クエリ値ウィジェットのセットアップ" style="width:80%;">}}
 
-### Configuration
+### 構成
 
-1. Choose the data to graph:
-    * Metric: See the [Querying documentation][1] to configure a metric query.
-    * Indexed Spans: See the [Trace search documentation][2] to configure an Indexed Span query.
-    * Log Events: See the [Log search documentation][3] to configure a log event query.
-2. Reduce the query values to a single value, calculated as the `avg`, `min`, `sum`, `max`, or `last` value of all data points in the specified timeframe.
-3. Choose the units and the formatting. Autoformat scales the dashboard for you based on the units.
+1. グラフ化するデータを選択します。
+    * メトリクス: メトリクスクエリの構成については、[クエリ作成のドキュメント][1]を参照してください。
+    * Indexed Span: Indexed Span クエリの構成については、[トレース検索に関するドキュメント][2]を参照してください。
+    * ログイベント: ログイベントクエリの構成については、[ログ検索に関するドキュメント][3]を参照してください。
+2. 指定した時間枠内のすべてのデータポイントの `avg`、`min`、`sum`、`max`、`last` の値として計算される、クエリ値を単一の値に削減します。
+3. 単位とフォーマットを選択します。自動フォーマットは、単位に基づいてダッシュボードをスケーリングします。
 4. Optionally, configure a conditional format depending on the value displayed. See [Visual Formatting Rules](#visual-formatting-rules) for more examples.
-5. Optionally, overlay a timeseries background:
-    * Min to Max: A scale graph from minimum to maximum.
-    * Line: A scale graph to include zero (0).
-    * Bars: Shows discrete, periodic measurements.
+5. オプションで、時系列の背景をオーバーレイ表示します。
+    * Min to Max: 最小から最大までのスケールグラフ。
+    * Line: ゼロ (0) を含むためのスケールグラフ。
+    * Bars: 離散的、周期的な測定値を表示します。
 
-### Options
+### オプション
 
 #### Visual formatting rules
 
@@ -44,21 +44,21 @@ Customize the background of your Query Value widget with conditional rules. You 
 
 {{< img src="dashboards/widgets/query_value/visual_formatting_rules_custom_img.png" alt="Query value widget visual formatting rules with custom image background" style="width:90%;" >}}
 
-#### Context links
+#### コンテキストリンク
 
-[Context links][4] are enabled by default, and can be toggled on or off. Context links bridge dashboard widgets with other pages in Datadog, or third party applications.
+[コンテキストリンク][1]は、デフォルトで有効になっており、オンまたはオフに切り替えることができます。コンテキストリンクは、ダッシュボードウィジェットと Datadog の他のページまたはサードパーティアプリケーションの橋渡しをします。
 
-#### Global time
+#### グローバルタイム
 
-Choose whether your widget has a custom timeframe or the dashboard's global timeframe.
+ウィジェットにカスタムタイムフレームがあるか、ダッシュボードのグローバルタイムフレームがあるかを選択します。
 
 ## API
 
-This widget can be used with the **[Dashboards API][5]**. See the following table for the [widget JSON schema definition][6]:
+このウィジェットは **[Dashboards API][5]** で使用できます。[ウィジェット JSON スキーマ定義][6]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

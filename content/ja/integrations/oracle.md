@@ -28,7 +28,7 @@
 - "data stores"
 - "network"
 - "oracle"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/oracle/README.md"
 "display_on_public_website": true
@@ -75,9 +75,9 @@ The Oracle integration provides health and performance metrics for your Oracle d
 Enable [Database Monitoring][2] (DBM) for enhanced insights into query performance and database health. In addition to the standard integration features, Datadog DBM provides query-level metrics, live and historical query snapshots, wait event analysis, database load, query explain plans, and blocking query insights.
 
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 #### Prerequisite
 
@@ -360,7 +360,7 @@ grant select on dba_data_files to datadog;
 
 {{< /tabs >}}
 
-### Configuration
+### 構成
 
 To configure this check for an Agent running on a host:
 
@@ -478,7 +478,7 @@ is what the following example configuration would become:
 
 See the [sample oracle.d/conf.yaml][4] for all available configuration options.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "oracle" >}}

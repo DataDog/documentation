@@ -4,9 +4,9 @@ description: Advanced Configuration for Postgres Database Monitoring
 
 ---
 
-## Handling many relations
+## 多数のリレーションの取り扱い
 
-If your Postgres database has a large number of relations (in the thousands), Datadog recommends adding `collect_database_size_metrics: false` to your instance configuration for that database. When this setting is disabled, the Agent will not run the function `pg_database_size()` to collect database size statistics, which has worse performance on instances with a large number of tables.
+Postgres データベースに大量 (数千単位) のリレーションがある場合、Datadog ではそのデータベースのインスタンスのコンフィギュレーションに `collect_database_size_metrics: false` を追加することをおすすめしています。この設定が無効の場合、Agent はデータベースのサイズ統計を収集する関数 `pg_database_size()` を実行しないため、大量のテーブルがあるインスタンスでパフォーマンスが悪くなります。
 
 ```yaml
 instances:
@@ -15,7 +15,7 @@ instances:
     collect_database_size_metrics: false
 ```
 
-Additionally, if you partition your data across tables, such that table definitions are identical except for the name, this can result in a large number or normalized queries:
+さらに、名前以外のテーブルの定義が同一である複数のテーブル間でデータをパーティション化すると、大量のクエリまたは正規化されたクエリが発生します。
 
 ```sql
 SELECT * FROM daily_aggregates_001
@@ -23,13 +23,13 @@ SELECT * FROM daily_aggregates_002
 SELECT * FROM daily_aggregates_003
 ```
 
-In these cases, track these queries as a single normalized query using the `replace_digits` option, so all metrics for those queries are rolled up into a single query:
+このような場合は、`replace_digits` オプションを使用してこのクエリを単一の正規化されたクエリとして追跡すると、このクエリのすべてのメトリクスが単一のクエリにロールアップされます。
 
 ```sql
 SELECT * FROM daily_aggregates_?
 ```
 
-Add the `replace_digits` option to your database instance configuration in the Datadog Agent:
+Datadog Agent のデータベースインスタンスのコンフィギュレーションに `replace_digits` オプションを追加します。
 
 ```yaml
 instances:
@@ -39,13 +39,13 @@ instances:
       replace_digits: true
 ```
 
-## Raising the sampling rate
+## サンプリングレートの増加
 
-If you have queries that are relatively infrequent or execute quickly, raise the sampling rate by lowering the `collection_interval` value to collect samples more frequently.
+比較的頻度が低い、またはすばやく実行するクエリがある場合は、`collection_interval` の値を下げてサンプル収集の頻度を上げ、サンプリングレートを増加します。
 
-Set the `collection_interval` in your database instance configuration of the Datadog Agent. The default value is 1 second and can be seen in the <a href="https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L332C9-L336" target="_blank">`postgres/conf.yaml.example`</a>.
+Datadog Agent のデータベースインスタンス構成で `collection_interval` を設定します。デフォルト値は 1 秒で、<a href="https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L332C9-L336" target="_blank">`postgres/conf.yaml.example`</a> で確認できます。
 
-Lower the value to a smaller interval:
+より小さな間隔に値を下げます。
 
 ```yaml
 instances:

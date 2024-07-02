@@ -30,7 +30,7 @@
 "categories":
 - iot
 - metrics
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/emnify/README.md"
 "display_on_public_website": true
@@ -80,10 +80,10 @@ connected and secure.
 
 Use the Datadog-EMnify integration to collect metrics and data usage from IoT EMnify devices.
 
-## Setup
+## セットアップ
 Follow the [EMnify integration guide][2] to configure streaming of usage data, using the **Integration steps** and **Verifying the integration** sections.
 
-### Monitors
+### モニター
 
 Everybody has different usage patterns, so in order for monitors to reflect your specific case you must
 define workload-based boundaries and sensitivity.

@@ -1,42 +1,41 @@
 ---
 title: "Service Check Submission: Agent Check"
-kind: documentation
 further_reading:
 - link: /developers/custom_checks/write_agent_check/
   tag: Documentation
   text: Write an Agent Custom Check
 ---
 
-To submit a service check to Datadog within a custom Agent check, use the predefined `service_check()` function in the `AgentCheck` class.
+カスタム Agent チェック内で Datadog にサービスチェックを送信するには、`AgentCheck` クラスの定義済みの `service_check()` 関数を使用します。
 
 ```python
 self.service_check(name, status, tags=None, hostname=None, message=None)
 ```
 
-Find below the different parameters and data types available for the `service_check()` function:
+以下は、`service_check()` 関数で利用可能な各種パラメーターとデータ型です。
 
-| Parameter  | Type            | Required | Default Value | Description                                                                                                   |
+| パラメーター  | タイプ            | 必須 | デフォルト値 | 説明                                                                                                   |
 |------------|-----------------|----------|---------------|---------------------------------------------------------------------------------------------------------------|
-| `name`     | string          | yes      | -             | The name of the service check.                                                                                |
-| `status`   | int             | yes      | -             | A constant describing the service status: `0` for OK, `1` for Warning, `2` for Critical, and `3` for Unknown. |
-| `tags`     | list of strings | no       | `None`        | A list of tags to associate with this Service Check.                                                          |
-| `hostname` | string          | no       | current host  | A hostname to associate with this Service check. Defaults to the current host.                                |
-| `message`  | string          | no       | `None`        | Additional information or a description of why this status occurred.                                          |
+| `name`     | 文字列          | はい      | -             | サービスチェックの名前。                                                                                |
+| `status`   | 整数             | はい      | -             | サービスのステータスを説明する定数: OK には `0`、Warning には `1`、Critical には `2`、Unknown には `3`。 |
+| `tags`     | 文字列のリスト | いいえ       | `None`        | このサービスチェックに関連付けるタグのリスト                                                          |
+| `hostname` | 文字列          | いいえ       | 現在のホスト  | このサービスチェックに関連付けるホスト名。デフォルトは現在のホストです。                                |
+| `message`  | 文字列          | いいえ       | `None`        | このステータスが発生した補足情報や説明                                          |
 
-## Example
+## 例
 
-Here is an example of a dummy Agent check sending only one service check periodically. See [Writing a Custom Agent Check][1] to learn more.
+定期的に 1 つのサービスチェックのみを送信するダミーの Agent チェックの例を次に示します。詳細については、[カスタム Agent チェックの書き方][1]を参照してください。
 
-1. Create a new directory, `service_check_example.d/`, in the [`conf.d/` folder][2] of your Agent.
+1. Agent の [`conf.d/` フォルダー][2]に新しいディレクトリ `service_check_example.d/` を作成します。
 
-2. In your `service_check_example.d/` folder, create an empty configuration file named `service_check_example.yaml` with the following content:
+2. `service_check_example.d/` フォルダーに次の内容で空のコンフィギュレーションファイルを作成し、`service_check_example.yaml` と名付けます。
 
     ```yaml
     instances: [{}]
     ```
 
-3. Up one level from the `conf.d/` folder, go to the `checks.d/` folder.
-4. Within this folder, create a custom check file named `service_check_example.py` with the content below:
+3. `conf.d/` フォルダーから階層を 1 つ上がり、`checks.d/` フォルダーに移動します。
+4. このフォルダー内に次の内容でカスタムチェックファイルを作成し、`service_check_example.py` と名付けます。
 
     {{< code-block lang="python" filename="service_check_example.py" >}}
 from datadog_checks.base import AgentCheck
@@ -45,12 +44,12 @@ __version__ = "1.0.0"
 
 class MyClass(AgentCheck):
     def check(self, instance):
-        self.service_check('example_service_check', 0, message='Example application is up and running.')
+        self.service_check('example_service_check', 0, message='サンプルアプリケーションが稼働しています。')
     {{< /code-block >}}
 
-5. [Restart the Agent][3]
+5. [Agent を再起動します][3]。
 
-6. Ensure that your custom check is correctly running with the [Agent status command][4]. You should see something like this:
+6. [Agent ステータスコマンド][4]を使用して、カスタムチェックが正しく実行されていることを確認してください。次のように表示されるはずです。
 
     ```text
     =========
@@ -74,11 +73,11 @@ class MyClass(AgentCheck):
         (...)
     ```
 
-7. Finally, see your [Datadog service check summary][5] to see your service check reporting:
+7. 最後に、[Datadog サービスチェック内容のサマリー][5]を参照して、サービスチェックレポートを確認します。
 
-{{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="Service Checks" style="width:80%;">}}
+{{< img src="developers/service_checks/agent_service_checks_submission/service_check.png" alt="サービスチェック" style="width:80%;">}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

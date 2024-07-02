@@ -27,7 +27,7 @@
 "categories":
 - metrics
 - ai/ml
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/algorithmia/README.md"
 "display_on_public_website": true
@@ -78,7 +78,7 @@ This integration allows you to stream operational metrics as well as
 user-defined, inference-related metrics from Algorithmia to Kafka to the metrics
 API in Datadog.
 
-## Setup
+## セットアップ
 
 1. From your Algorithmia instance, configure Algorithmia Insights to connect to
    a Kafka broker (external to Algorithmia).
@@ -115,21 +115,21 @@ data from incoming API requests. **Note**: The message forwarding script
 provided in this integration prefixes user-defined metrics with
 `algorithmia.` in Datadog.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "algorithmia" >}}
 
 
-### Service Checks
+### サービスチェック
 
 The Algorithmia check does not include any service checks.
 
-### Events
+### イベント
 
 The Algorithmia check does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Algorithmia support][5].
 

@@ -15,15 +15,15 @@ further_reading:
 
 This page takes you through building a sample custom Agent check using the `min_collection_interval` and provides an example use case to expand the sample custom check. Custom checks run at a fixed interval, the same as Agent-based integrations, which defaults to every 15 seconds.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 To create a custom Agent check, start by installing the [Datadog Agent][1].
 
 **Note**: If you are running Agent v7+, your custom Agent check should be Python 3 compatible. Otherwise, it should be Python 2.7+ compatible.
 
-### Configuration
+### 構成
 
 1. Change to the `conf.d` directory on your system. For more information about where to find the `conf.d` directory, see [Agent configuration files][2].
 2. In the `conf.d` directory, create a new config file for your new Agent check. Name the file `custom_checkvalue.yaml`.

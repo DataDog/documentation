@@ -28,9 +28,9 @@
 - containers
 - developer tools
 - kubernetes
-- metrics
+- モニター
 - orchestration
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/wayfinder/README.md"
 "display_on_public_website": true
@@ -86,12 +86,12 @@ The integration collects key metrics from the Wayfinder API server, controller,
 and webhook components. These metrics should highlight issues in managed
 workspaces. 
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install the integration in the Wayfinder
 Kubernetes management cluster.
 
-### Installation
+### インストール
 
 For containerized environments, the best way to use this integration with the
 Docker Agent is to build the Agent with the Wayfinder integration installed. 
@@ -164,7 +164,7 @@ To build an updated version of the Agent:
     helm upgrade -f values.yaml <RELEASE_NAME> datadog/datadog
     ```
 
-### Configuration
+### 構成
 
 1. Edit the `wayfinder/conf.yaml` file, in the `conf.d/` folder at the root of
    your Agent's configuration directory to start collecting your Wayfinder data.
@@ -178,21 +178,21 @@ To build an updated version of the Agent:
 [Run the Agent's status subcommand][6] and look for `wayfinder` under the Checks
 section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "wayfinder" >}}
 
 
-### Service Checks
+### サービスチェック
 
 Wayfinder does not include any service checks.
 
-### Events
+### イベント
 
 Wayfinder does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][2].
 

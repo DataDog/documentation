@@ -32,7 +32,7 @@ The HDFS DataNode check is included in the [Datadog Agent][3] package, so you do
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Host" xxx -->
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -100,21 +100,21 @@ For containerized environments, see the [Autodiscovery Integration Templates][2]
 
 [Run the Agent's status subcommand][7] and look for `hdfs_datanode` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "hdfs_datanode" >}}
 
 
-### Events
+### イベント
 
 The HDFS-datanode check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "hdfs_datanode" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 
@@ -154,7 +154,7 @@ The HDFS NameNode check is included in the [Datadog Agent][3] package, so you do
 <!-- xxx tabs xxx -->
 <!-- xxx tab "Host" xxx -->
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host:
 
@@ -222,21 +222,21 @@ For containerized environments, see the [Autodiscovery Integration Templates][2]
 
 [Run the Agent's status subcommand][7] and look for `hdfs_namenode` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "hdfs_namenode" >}}
 
 
-### Events
+### イベント
 
 The HDFS-namenode check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "hdfs_namenode" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

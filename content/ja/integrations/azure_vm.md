@@ -4,15 +4,15 @@
 - "cloud"
 - "configuration & deployment"
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track Azure VM resource usage, network statistics, and more."
+"description": "Azure VM のリソース使用状況、ネットワーク統計などを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/azure_vm/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/video-streaming-performance-monitoring-conviva/"
-  "tag": "Blog"
-  "text": "Monitor Conviva with Datadog"
+  "tag": "ブログ"
+  "text": "Datadog で Conviva を監視する"
 "git_integration_title": "azure_vm"
 "has_logo": true
 "integration_id": "azure-vm"
@@ -36,9 +36,9 @@ Get metrics from Azure VM to:
 - Visualize the performance of your VMs.
 - Correlate the performance of your VMs with your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first.
 
@@ -58,25 +58,25 @@ To create metric monitors that can be automatically muted, ensure that you trigg
 
 **Note:** If you are not running the Datadog Agent, the `host` tag on your Azure VM is a GUID. Use the message template variable `{{host.name_tag}}` in the notification response to include the human readable name as well. 
 
-## Data Collected
+## 収集データ
 
 <div class="alert alert-warning">The <code>azure.vm.status</code> metric is deprecated and is no longer populated for newly created Datadog organizations. For existing users, this metric was disabled on June 1, 2023.
 
 For any questions, contact <a href="https://docs.datadoghq.com/help/" target="_blank">Datadog Support</a>.</div>
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_vm" >}}
 
 
-### Events
+### イベント
 
 The Azure Virtual Machine integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Virtual Machine integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][6].
 

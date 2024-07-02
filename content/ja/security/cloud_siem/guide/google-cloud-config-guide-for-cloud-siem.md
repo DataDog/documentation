@@ -18,18 +18,18 @@ further_reading:
   text: Visualize activity in your Google Cloud environment with Datadog Cloud SIEM Investigator
 ---
 
-## Overview
+## 概要
 
-[Datadog Cloud SIEM][1] applies detection rules to all processed logs in Datadog to detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure resource modification. The threats are surfaced as Security Signals in the Security Signals Explorer for triaging.
+[Datadog Cloud SIEM][1] は、Datadog で処理されたすべてのログに検出ルールを適用し、標的型攻撃や脅威インテリジェンスに記載された IP がシステムと通信している、あるいは安全でないリソース変更などの脅威を検出します。この脅威は、トリアージするためにセキュリティシグナルエクスプローラーでセキュリティシグナルとして表面化されます。
 
 Use [Google Cloud Dataflow][2] and the [Datadog template][3] to forward logs from your Google Cloud services to Datadog. This guide walks you through the following steps so that you can start detecting threats with your Google Cloud audit logs:
 
-1. [Enable Data Access audit logs](#enable-data-access-audit-logs)
+1. [Data Access の監査ログを有効にする](#enable-data-access-audit-logs)
 1. [Create a Google Cloud publish/subscription (Pub/Sub) topic and pull subscription](#create-a-google-cloud-publishsubscription-pubsub-system) to receive logs from a configured log sink
 1. [Create a custom Dataflow worker service account](#create-a-custom-dataflow-worker-service-account)
 1. [Create a log sink to publish logs to the Pub/Sub](#create-a-log-sink-to-publish-logs-to-the-pubsub)
 1. [Create and run the Dataflow job](#create-and-run-the-dataflow-job)
-1. [Use Cloud SIEM to triage Security Signals](#use-cloud-siem-to-triage-security-signals)
+1. [Cloud SIEM でセキュリティシグナルのトリアージを行う](#use-cloud-siem-to-triage-security-signals)
 
 <div class="alert alert-danger">
 
@@ -41,39 +41,39 @@ Use [Google Cloud Dataflow][2] and the [Datadog template][3] to forward logs fro
 Documentation for the <strong>Push</strong> subscription is only maintained for troubleshooting or modifying legacy setups. Use a <strong>Pull</strong> subscription with the Datadog Dataflow template to forward your Google Cloud logs to Datadog instead.
 </div>
 
-## Enable Data Access audit logs
+## Data Access の監査ログを有効にする
 
 1. Navigate to the IAM & Admin Console > [Audit Log][4].
-1. Select the services for which you want to enable data access logs.
-1. In the **Log Types** panel, enable **Admin Read**, **Data Read**, and **Data Write**.
-1. Click **Save**.
+1. データアクセスログを有効にするサービスを選択します。
+1. **Log Types** パネルで、**Admin Read**、**Data Read**、**Data Write** を有効にします。
+1. **Save** をクリックします。
 
-### Change default configuration for new services
+### 新サービスのデフォルト構成を変更する
 
 If a new Google Cloud service is added, it inherits your [default audit configuration][5].
 
-To ensure that Data Access audit logs are captured for new Google Cloud services, modify your default audit configuration:
+新しい Google Cloud サービスに対して Data Access の監査ログがキャプチャされるようにするには、デフォルトの監査構成を変更します。
 
 1. Navigate to the **IAM & Admin Console > [Audit Log][4]**.
-1. Enable **Admin Read**, **Data Read**, and **Data Write**.
-1. Click **Save**.
+1. **Admin Read**、**Data Read**、**Data Write** を有効にします。
+1. **Save** をクリックします。
 
 ## Create a Google Cloud publish/subscription (Pub/Sub) system
 
 1. Navigate to Pub/Sub > [Topics][5].
-1. Click **Create Topic**.
+1. **Create Topic** をクリックします。
 1. Enter a descriptive topic name. For example, `export-audit-logs-to-datadog`.
 1. Leave **Add a default subscription** selected, which creates a subscription with default configuration values. The name of the subscription is automatically generated as your topic name with "-sub" appended to it. This subscription name is used when you create your [Dataflow job](#create-and-run-the-dataflow-job) later.
-1. Click **Create**.
+1. **作成**をクリックします。
 
 ### Create an additional topic and subscription for outputDeadletterTopic parameter
 Create an additional topic and default subscription to handle any log messages rejected by the Datadog API. This topic is used when you set up the [Dataflow job](#create-and-run-the-dataflow-job) later.
 
 1. Navigate back to Pub/Sub > [Topics][5]
-1. Click **Create Topic**.
+1. **Create Topic** をクリックします。
 1. Enter a descriptive topic name.
 1. Leave **Add a default subscription** selected.
-1. Click **Create**.
+1. **作成**をクリックします。
 
 **Warning**: Pub/subs are subject to [Google Cloud quotas and limitations][6]. If the number of logs you have is higher than those limitations, Datadog recommends you split your logs over several topics. See [Monitor the Log Forwarding][7] for information on how to set up a monitor to notify when you are close to those limits.
 
@@ -103,7 +103,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
     ##### Required permissions
     | Role | Path | Description |
     | -------------  | ----------- | ----------- |
-    | [Dataflow Admin][12] | `roles/dataflow.admin` |  Allow this service account to perform Dataflow administrative tasks
+    | [Dataflow Admin][12] | `roles/dataflow.admin` |  このサービスアカウントが Dataflow の管理者タスクを実行することを許可します。
     | [Dataflow Worker][13] | `roles/dataflow.worker` |  Allow this service account to perform Dataflow job operations 
     | [Pub/Sub Viewer][14] | `roles/pubsub.viewer` | Allow this service account to view messages from the Pub/Sub subscription with your Google Cloud logs
     | [Pub/Sub Subscriber][15] | `roles/pubsub.subscriber` | Allow this service account to consume messages from the Pub/Sub subscription with your Google Cloud logs
@@ -111,27 +111,27 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
     | [Secret Manager Secret Accessor][17] | `roles/secretmanager.secretAccessor` | Allow this service account to access the Datadog API key in Secret Manager
     | [Storage Object Admin][18] | `roles/storage.objectAdmin` | Allow this service account to read and write to the Cloud Storage bucket specified for staging files |
 7. Continue **Continue**.
-8. Click **Done**.
+8. **Done** をクリックします。
 
 ##  Create a log sink to publish logs to the Pub/Sub
 
 1. Navigate to Google Cloud's [Logs Explorer][19].
-1. Select **Log Router** in the left side menu.
-1. Click **Create Sink**.
+1. 左サイドメニューの **Log Router** を選択します。
+1. **Create Sink** をクリックします。
 1. Enter a descriptive name for the sink.
-1. Click **Next**.
+1. **Next** をクリックします。
 1. In the **Select Sink Service** dropdown menu, select **Cloud Pub/Sub topic**.   
     **Note**: The Cloud Pub/Sub topic can be located in a different project.
-1. In the **Select a Cloud Pub/Sub topic**, select the Pub/Sub created earlier.
-1. Click **Next**.
+1. **Select a Cloud Pub/Sub topic** で、先ほど作成した Pub/Sub を選択します。
+1. **Next** をクリックします。
 1. Enter an inclusion filter for the logs you want to send to Datadog.
-1. Click **Next**.
+1. **Next** をクリックします。
 1. Optionally, enter an exclusion filter to exclude logs you do not want sent to Datadog.
-1. Click **Create Sink**.
+1. **Create Sink** をクリックします。
 
 **Note**: You can create multiple exports from Google Cloud Logging to the same Pub/Sub topic with different sinks.
 
-## Create and run the Dataflow job
+## Dataflow ジョブを作成して実行する
 
 1. Navigate to Google Cloud [Dataflow][20].
 1. Click **Create job from template**.
@@ -140,14 +140,14 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. In the **Dataflow template** dropdown menu, select **Pub/Sub to Datadog**.
 1. In **Required Parameters** section:  
       a. In the **Pub/Sub input subscription** dropdown menu, select the default subscription that was created earlier when you created a new [Pub/Sub system](#create-a-google-cloud-publishsubscription-pubsub-system).  
-      b. Enter the following in the **Datadog Logs API URL** field:
+      b. **Datadog Logs API URL** フィールドに以下の値を入力します。
       ```
       https://{{< region-param key="http_endpoint" code="true" >}}
       ```
       **Note**: Ensure that the Datadog site selector on the right of this documentation page is set to your Datadog site before copying the URL above.  
       c. In the **Output deadletter Pub/Sub topic** field, select the [additional topic](#create-an-additional-topic-and-subscription-for-outputdeadlettertopic) you created earlier for receiving messages rejected by the Datadog API.  
       d. Specify a path for temporary files in your storage bucket in the **Temporary location** field.
-1. If you [created a secret in Secret Manager](#create-a-secret-in-secret-manager) for your Datadog API key value earlier:  
+1. 先ほど Datadog API キー値用の [シークレットを Secret Manager で作成](#create-a-secret-in-secret-manager)した場合:  
     a. Click **Optional Parameters** to see the additional fields.  
     b. Enter the resource name of the secret in the **Google Cloud Secret Manager ID** field.  
         To get the resource name, go to your secret in [Secret Manager][8]. Click on your secret. Click on the three dots under **Action** and select **Copy resource name**.  
@@ -162,18 +162,18 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 1. If you created a custom worker service account, select it in the **Service account email** dropdown menu.
 1. Click **Run Job**.
 
-See new logging events delivered to the Cloud Pub/Sub topic in the [Datadog Log Explorer][22].
+[Datadog Log Explorer][22] で Cloud Pub/Sub トピックに配信された新規ログイベントを確認します。
 
-## Use Cloud SIEM to triage Security Signals
+## Cloud SIEM でセキュリティシグナルのトリアージを行う
 
-Cloud SIEM applies out-of-the-box detection rules to all processed logs, including the Google Cloud audit logs you have just set up. When a threat is detected with a detection rule, a Security Signal is generated and can be viewed in the Security Signals Explorer.
+Cloud SIEM は、設定した Google Cloud の監査ログを含む、処理されたすべてのログに対して、すぐに検出ルールを適用します。検出ルールで脅威が検出されると、セキュリティシグナルが生成され、セキュリティシグナルエクスプローラーで確認することができます。
 
 - Go to the [Cloud SIEM Signals Explorer][23] to view and triage threats. See Security Signals Explorer for further details.
 - You can also use the [Google Cloud Audit Log dashboard][24] to investigate anomalous activity.
 - See [out-of-the-box detection rules][25] that are applied to your logs.
 - Create [new rules][26] to detect threats that match your specific use case.
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

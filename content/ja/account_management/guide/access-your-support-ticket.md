@@ -5,44 +5,44 @@ aliases:
   - /account_management/faq/access-your-support-ticket
 ---
 
-## Creating a support ticket
+## サポートチケットの作成
 
-To create a new support ticket, click on the appropriate Site link and click **Submit a request** to fill out a ticket form. 
+新しいサポートチケットを作成するには、該当するサイトのリンクをクリックし、**Submit a request** をクリックしてチケットフォームに必要事項を記入してください。
 
-{{< whatsnext desc="Support page by Datadog site:">}}
-    {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1 {{< /nextlink >}}
+{{< whatsnext desc="Datadog サイト別サポートページ:">}}
+    {{< nextlink href="https://help.datadoghq.com/" >}} US1、US3、US5、EU、AP1 {{< /nextlink >}}
     {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< img src="/account_management/guide/access_your_support_ticket/support_page.png" alt="Datadog Support landing page" style="width:100%;" >}}
+{{< img src="/account_management/guide/access_your_support_ticket/support_page.png" alt="Datadog サポートランディングページ" style="width:100%;" >}}
 
-You can also access this form through Datadog from the [help page][2], from the left navgiation click on **?** -> **Resources**. Under *Support Tickets & Billing Questions* click on **New Support Ticket**.
+Datadog の[ヘルプページ][2]から左側のナビゲーションから **?** -> **Resources** をクリックしてこのフォームにアクセスすることもできます。*Support Tickets & Billing Questions* の下にある **New Support Ticket** をクリックします。
 
-## Accessing existing tickets
+## 既存のチケットにアクセスする
 
-If you have opened at least one Datadog support ticket, follow this process to access all your Datadog support tickets:
-1. From the Support page click **Sign in** on the top right. 
+少なくとも 1 つの Datadog サポートチケットを開いている場合、この手順に従って、すべての Datadog サポートチケットにアクセスします。
+1. サポートページから、右上の **Sign in** をクリックします。
 
-2. If this is your first time signing into your Datadog Zendesk account, click the link by **New to your Datadog Zendesk account? Sign up**. 
+2. Datadog Zendesk アカウントに初めてサインインする場合は、**New to your Datadog Zendesk account? Sign up** のリンクをクリックします。
 
-3. If you have previously emailed Datadog support, click **Emailed us for support? Get a password** and enter the same email address you used to contact Datadog support.
+3. 以前に Datadog サポートにメールしたことがある場合は、**Emailed us for support? Get a password** をクリックし、Datadog サポートに連絡する際に使用したものと同じメールアドレスを入力します。
 
-4. After you receive the password in your email, log in and click **Manage your tickets** to see your requests:
+4. パスワードがメールで届いたら、ログインして **Manage your tickets** をクリックすると、リクエストを確認できます。
 
-5. If you don't see the **My Activities** page after logging in, click on your name in the upper right corner, and then click **My Activities**.
+5. ログイン後、**My Activities** のページが表示されない場合は、右上の自分の名前をクリックし、**My Activities** をクリックしてください。
 
-6. If you would like to view your entire organization's tickets, submit a request to Datadog support.
+6. 組織全体のチケットを表示したい場合は、Datadog サポートにリクエストを送信してください。
 
-{{< whatsnext desc="Support Page by Datadog Site:">}}
-    {{< nextlink href="https://help.datadoghq.com/" >}} US1, US3, US5, EU, AP1 {{< /nextlink >}}
+{{< whatsnext desc="Datadog サイト別サポートページ:">}}
+    {{< nextlink href="https://help.datadoghq.com/" >}} US1、US3、US5、EU、AP1 {{< /nextlink >}}
     {{< nextlink href="http://help.ddog-gov.com/" >}}US1-FED{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Troubleshooting
-### Error: Refused to connect
-**Refused to connect** errors come from privacy settings that block third-party cookies. To solve this issue, make sure the browser allows third-party cookies from Zendesk. Find instructions on how to [Clear, enable, and manage cookies in Chrome][1] in Google Chrome Help.
+## トラブルシューティング
+### エラー: Refused to connect
+**Refused to connect** のエラーは、プライバシー設定でサードパーティ Cookie がブロックされていることが原因です。この問題を解決するには、ブラウザが Zendesk からのサードパーティ Cookie を許可していることを確認します。Google Chrome のヘルプで [Chrome で Cookie を消去、有効化、管理する][1]方法を確認してください。
 
-If your browser has ad-blockers, turn them off to see if this allows you to sign in. Some ad-blockers have their own list of exceptions. In this case, add **datadog.zendesk.com** to the allow list.
+お使いのブラウザに広告ブロック機能がある場合は、それをオフにして、サインインできるかどうかを確認してください。広告ブロックの中には、独自の例外リストがあるものもあります。この場合は、**datadog.zendesk.com** を許可リストに追加してください。
 
 [1]: https://support.google.com/chrome/answer/95647
 [2]: https://app.datadoghq.com/help

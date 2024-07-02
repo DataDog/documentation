@@ -25,7 +25,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/sidekiq/README.md"
 "display_on_public_website": true
@@ -61,28 +61,28 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This integration monitors [Sidekiq][1] through [Dogstatsd][2]. It collects metrics through [Datadog's Dogstatsd Ruby client][3].
+このインテグレーションは、[Sidekiq][1]〜[DogStatsD][2] を監視します。[Datadog の DogStatsD Ruby クライアント][3]を介してメトリクスを収集します。
 
-**Note** Only Sidekiq Pro (>= 3.6) or Enterprise (>= 1.1.0) users can collect metrics.
+**注** Sidekiq Pro (>= 3.6) または Enterprise (>= 1.1.0) のユーザーのみがメトリクスを収集できます。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Sidekiq integration is packaged with the [Datadog Agent][4].
-No additional installation is needed on your server.
+Sidekiq インテグレーションは [Datadog Agent][4] にパッケージ化されています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-1. Install the `dogstatsd-ruby` [gem][3]:
+1. `dogstatsd-ruby` [gem][3] をインストールします。
 
    ```
     gem install dogstatsd-ruby
    ```
 
-2. Enable Sidekiq Pro metric collection by including this in your initializer; for a containerized deployment, update `localhost` to your Agent container address:
+2. Sidekiq Pro メトリクス収集を初期化子に含めることで有効にします。コンテナ化されたデプロイの場合は、`localhost` を Agent のコンテナのアドレスに更新します。
 
    ```ruby
         require 'datadog/statsd' # gem 'dogstatsd-ruby'
@@ -97,7 +97,7 @@ No additional installation is needed on your server.
         end
    ```
 
-    If you are using Sidekiq Enterprise and would like to collect historical metrics, include this line as well:
+   Sidekiq Enterprise を使用していて、履歴メトリクスを収集する場合は、次の行も含めます。
 
    ```ruby
           Sidekiq.configure_server do |config|
@@ -106,9 +106,9 @@ No additional installation is needed on your server.
           end
    ```
 
-    See the Sidekiq [Pro][5] and [Enterprise][6] documentation for more information, and the [Dogstatsd Ruby][3] documentation for further configuration options.
+    詳細については、Sidekiq [Pro][5] および [Enterprise][6] のドキュメントを参照してください。詳細なコンフィギュレーションオプションについては、[DogStatsD Ruby][3] のドキュメントを参照してください。
 
-3. Update the [Datadog Agent main configuration file][7] `datadog.yaml` by adding the following configs:
+3. 下記のコンフィギュレーションを追加して、[Datadog Agent のメインコンフィギュレーションファイル][7]である `datadog.yaml` を更新します。
 
    ```yaml
    # dogstatsd_mapper_cache_size: 1000  # default to 1000
@@ -131,27 +131,27 @@ No additional installation is needed on your server.
              worker: "$1"
     ```
 
-    These parameters can also be set by adding the `DD_DOGSTATSD_MAPPER_PROFILES` environment variable to the Datadog Agent. 
+   これらのパラメーターは、Datadog Agent に `DD_DOGSTATSD_MAPPER_PROFILES` 環境変数を追加することで設定することも可能です。
 
-4. [Restart the Agent][8].
+4. [Agent を再起動します][8]。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "sidekiq" >}}
 
 
-The Sidekiq integration also allows custom metrics, see [Sidekiq Enterprise Historical Metrics][10].
+Sidekiq インテグレーションでは、カスタムメトリクスも使用できます。カスタムメトリクスのアイデアについては、[Sidekiq Enterprise Historical Metrics][10] を参照してください。
 
-### Log collection
+### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent. Enable it in the `datadog.yaml` file with:
+1. Datadog Agent でのログ収集は、デフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
       logs_enabled: true
     ```
 
-2. Add this configuration block to your `sidekiq.d/conf.yaml` file to start collecting your Sidekiq logs:
+2. Sidekiq のログの収集を開始するには、次のコンフィギュレーションブロックを `sidekiq.d/conf.yaml` ファイルに追加します。
 
     ```yaml
       logs:
@@ -161,21 +161,21 @@ The Sidekiq integration also allows custom metrics, see [Sidekiq Enterprise Hist
           service: <SERVICE>
     ```
 
-     Change the `path` and `service` parameter values and configure them for your environment. If you cannot find your logs, see [Sidekiq Logging][11].
+     `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。ログが見つからない場合は、[Sidekiq Logging][11] を参照してください。
 
-3. [Restart the Agent][8].
+3. [Agent を再起動します][8]。
 
-### Service Checks
+### サービスチェック
 
-Sidekiq does not include any service checks.
+Sidekiq には、サービスのチェック機能は含まれません。
 
-### Events
+### イベント
 
-Sidekiq does not include any events.
+Sidekiq には、イベントは含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][12].
+ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
 
 [1]: https://sidekiq.org/
 [2]: https://docs.datadoghq.com/developers/dogstatsd/

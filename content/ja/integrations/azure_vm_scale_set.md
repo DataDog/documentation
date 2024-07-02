@@ -4,9 +4,9 @@
 - "cloud"
 - "configuration & deployment"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track by-set metrics: bytes in/out, disk operations, CPU usage, and more."
+"description": "受送信バイト数、ディスク操作数、CPU 使用率など、セット別メトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/azure_vm_scale_set/"
 "draft": false
 "git_integration_title": "azure_vm_scale_set"

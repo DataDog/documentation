@@ -1,9 +1,9 @@
 ---
 "categories":
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Centrally track error rates across your applications."
+"description": "複数のアプリケーションのエラー率を一元的に追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/bugsnag/"
 "draft": false
 "git_integration_title": "bugsnag"
@@ -31,13 +31,13 @@ With this integration:
 - Get notified when a project has a spike in error rates
 - Filter notifications by severity and release stage
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 No installation is required.
 
-### Configuration
+### 構成
 
 To integrate Bugsnag with Datadog:
 
@@ -54,21 +54,21 @@ To integrate Bugsnag with Datadog:
 7. Save your settings.
 8. Add more streams from the same project to see error events based on a different set of notification criteria.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Bugsnag integration does not include metrics.
 
-### Events
+### イベント
 
 The Bugsnag integration pushes configured Bugsnag errors and alerts to your Datadog event stream.
 
-### Service Checks
+### サービスチェック
 
 The Bugsnag integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][2].
 

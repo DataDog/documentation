@@ -1,11 +1,9 @@
 ---
+title: Algorithms
 algolia:
-  tags:
-  - 異常値
-  - 異常グラフ
+  tags: [anomaly, anomaly graph]
 aliases:
-- /ja/graphing/functions/algorithms/
-title: アルゴリズム
+    - /graphing/functions/algorithms/
 ---
 
 ## 異常値
@@ -45,7 +43,7 @@ title: アルゴリズム
 
 詳細については、[外れ値モニター][2]のページを参照してください。
 
-## 予測値
+## 予測
 
 | 関数     | 説明                | 例                                                                    |
 | :----        | :-------                   | :---------                                                                 |
@@ -71,7 +69,7 @@ title: アルゴリズム
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ja/monitors/types/anomaly/
-[2]: /ja/monitors/types/outlier/
-[3]: /ja/monitors/types/forecasts/#forecast-algorithms
-[4]: /ja/monitors/types/anomaly/?s=anomaly%20algorithm#seasonality
+[1]: /monitors/types/anomaly/
+[2]: /monitors/types/outlier/
+[3]: /monitors/types/forecasts/?tab=linear#algorithms
+[4]: /monitors/types/anomaly/?s=anomaly%20algorithm#seasonality

@@ -5,16 +5,16 @@ aliases:
   - /tracing/advanced/setting_primary_tags_to_scope/
 further_reading:
 - link: /tracing/other_telemetry/connect_logs_and_traces/
-  tag: Documentation
+  tag: ドキュメント
   text: Connect your Logs and Traces together
 - link: /tracing/manual_instrumentation/
-  tag: Documentation
+  tag: ドキュメント
   text: Instrument manually your application to create traces.
 - link: /tracing/opentracing/
-  tag: Documentation
+  tag: ドキュメント
   text: Implement Opentracing across your applications.
 - link: /tracing/glossary/
-  tag: Documentation
+  tag: ドキュメント
   text: Explore your services, resources, and traces
 ---
 

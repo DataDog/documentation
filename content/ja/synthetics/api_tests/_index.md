@@ -1,5 +1,5 @@
 ---
-title: API Testing
+title: API テスト
 kind: documentation
 description: Simulate requests on your public and internal services
 aliases:
@@ -11,7 +11,7 @@ further_reading:
   text: Introducing Datadog Synthetic Monitoring
 - link: "https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/"
   tag: Blog
-  text: Improve your API test coverage with Datadog Synthetic Monitoring
+  text: Datadog Synthetic Monitoring で API テストカバレッジを向上させる
 - link: "https://www.datadoghq.com/blog/monitor-apis-with-datadog"
   tag: Blog
   text: Monitor your workflows with Datadog SSL, TLS, and Multistep API tests
@@ -25,7 +25,7 @@ further_reading:
   tag: Documentation
   text: Run API tests on internal endpoints
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
-  tag: External Site
+  tag: 外部サイト
   text: Create and manage Synthetic API Tests with Terraform
 ---
 

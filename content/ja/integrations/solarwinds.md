@@ -2,7 +2,7 @@
 "categories":
 - event management
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Ingest alerts from SolarWinds Orion into your Datadog Event Stream."
 "doc_link": "https://docs.datadoghq.com/integrations/solarwinds/"
@@ -27,7 +27,7 @@ Get alerts from SolarWinds Orion to aggregate and triage your alerts in a centra
 
 This integration works by subscribing Datadog to all of your SolarWinds alert notifications.
 
-## Setup
+## セットアップ
 
 ### Create trigger actions
 
@@ -105,21 +105,21 @@ To create a new trigger action in SolarWinds:
 }
 ``` 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The SolarWinds integration does not include any metrics.
 
-### Events
+### イベント
 
 The SolarWinds integration collects SolarWinds alerts in the event stream.
 
-### Service Checks
+### サービスチェック
 
 The SolarWinds integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact Datadog support
 

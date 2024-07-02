@@ -21,7 +21,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/dns_check/README.md"
 "display_on_public_website": true
@@ -98,7 +98,7 @@ Though many metrics-oriented checks are best run on the same host(s) as the moni
 
 [Run the Agent's `status` subcommand][5] and look for `dns_check` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "dns_check" >}}

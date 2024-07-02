@@ -32,8 +32,8 @@
 - sap
 - data stores
 - event management
-- metrics
-"custom_kind": "integration"
+- モニター
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false

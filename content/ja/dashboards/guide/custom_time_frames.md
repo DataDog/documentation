@@ -1,5 +1,5 @@
 ---
-title: カスタムタイムフレーム
+title: Custom Time Frames
 ---
 
 ## 概要
@@ -31,20 +31,20 @@ Datadog のビューの多くでは、特定のタイムフレームに合わせ
 | UNIX 秒タイムスタンプ       | 1577883600                                       |
 | UNIX ミリ秒タイムスタンプ  | 1577883600000                                    |
 
-任意の固定日付を範囲の一部として入力できます。例:
+Any fixed date can be entered as part of a range. For example:
   * `1577883600 - 1578009540`
   * `Jan 1 - Jan 2`
   * `6:00 am - 1:00 pm`
 
 ### 相対日付
 
-相対日付は時間の経過とともに**更新されるのではなく**、入力時に計算されます。
+Relative dates **do not** update over time; they are calculated when entered.
 
 {{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="相対カスタムタイムフレームを入力" video="true" width="500" >}}
 
 | 形式                                             | 説明                                                         |
 |----------------------------------------------------|---------------------------------------------------------------------|
-| `N{unit}`<br> 受付可能な単位のリストは以下をご覧ください | 過去 N 単位の日付を表示します。例: **3 mo** (過去 3 か月)|
+| `N{unit}`<br> See the list of accepted units below | Displays the past N units. For example, **3 mo** (the past 3 months)|
 | `today`                                            | 今現在の暦日を表示します                     |
 | `yesterday`                                        | 1 日前の暦日を表示します                             |
 | `this month`                                       | 今現在の暦月を表示します                   |
@@ -59,14 +59,14 @@ Datadog のビューの多くでは、特定のタイムフレームに合わせ
   * 週: `w`、`week`、`weeks`
   * 月: `mo`、`mos`、`mon`、`mons`、`month`、`months`
 
-### カレンダーに沿った日付
+### Calendar aligned dates
 
-カレンダーに沿った日付は、現在の日を反映して更新されます。
+Calendar aligned dates update to reflect the current day.
 
 | 形式         | 説明                                      |
 |----------------|--------------------------------------------------|
-| `week to date` | 月曜日午前 12 時から現在までの週を表示します |
-| `month to date`| 月の 1 日から現在までを表示します      |
+| `week to date` | Displays the week from 12AM Monday until present |
+| `month to date`| Displays the 1st of the month until present      |
 
 ## URL
 

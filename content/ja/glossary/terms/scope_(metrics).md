@@ -1,7 +1,7 @@
 ---
 title: scope
 core_product:
-  - metrics
+  - モニター
   - alerts
 ---
 The scope uses tag(s) to filter the query. 

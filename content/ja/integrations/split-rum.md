@@ -11,7 +11,7 @@
 - configuration & deployment
 - issue tracking
 - developer tools
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/split-rum/README.md"
 "display_on_public_website": true
@@ -61,7 +61,7 @@
 
 With The Datadog Split RUM integration, product teams can view feature flag information overlaid on RUM data. This enables proactive monitoring of the real-time activity and experience of individual users and, if necessary, quick roll back or shut off of features that may be causing degradations.
 
-## Setup
+## セットアップ
 
 Feature flag tracking is available in the RUM Browser SDK. For detailed setup instructions, see the [Getting started with Feature Flag data in RUM][3] guide.
 
@@ -90,7 +90,7 @@ const factory = SplitFactory({
 const client = factory.client();
 ```
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? See the [JavaScript SDK page][4] in the Split documentation or contact [Datadog Support][5].
 

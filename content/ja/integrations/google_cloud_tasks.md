@@ -3,7 +3,7 @@
 - cloud
 - google cloud
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Google Cloud Tasks metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/google_cloud_tasks/"
@@ -28,9 +28,9 @@ Google Cloud Tasks is a fully managed service that allows you to manage the exec
 
 Use the Datadog Google Cloud Platform integration to collect metrics from Google Cloud Tasks.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Google Cloud Platform integration][1] first. There are no other installation steps.
 
@@ -45,21 +45,21 @@ Once this is done, export your Google Cloud Tasks logs from Google Cloud Logging
 3. Choose "Cloud Pub/Sub" as the destination and select the Pub/Sub topic that was created for that purpose. **Note**: The Pub/Sub topic can be located in a different project.
 4. Click **Create** and wait for the confirmation message to show up.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "google_cloud_tasks" >}}
 
 
-### Events
+### イベント
 
 The Google Cloud Tasks integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Cloud Tasks integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

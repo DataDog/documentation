@@ -21,7 +21,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "languages"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/go-metro/README.md"
 "display_on_public_website": true
@@ -59,11 +59,11 @@ The TCP RTT check reports on roundtrip times between the host the Agent is runni
 
 This check is only shipped in the 64-bit DEB and RPM Datadog Agent v5 packages. The check is _not_ available with Datadog Agent v6.
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying these instructions.
 
-### Installation
+### インストール
 
 The TCP RTT check-also known as [go-metro][2]-is packaged with the Agent, but requires additional system libraries. The check uses timestamps provided by the PCAP library to compute the time between any outgoing packet and the corresponding TCP acknowledgment. As such, PCAP must be installed and configured.
 
@@ -87,7 +87,7 @@ Finally, configure PCAP:
 sudo setcap cap_net_raw+ep /opt/datadog-agent/bin/go-metro
 ```
 
-### Configuration
+### 構成
 
 Edit the `go-metro.yaml` file in your agent's `conf.d` directory. See the [sample go-metro.yaml][3] for all available configuration options.
 The following is an example file that shows the TCP RTT times for app.datadoghq.com and 192.168.0.22:
@@ -152,21 +152,21 @@ If the TCP RTT check has started you should see something similar to the go-metr
 
 **This is a passive check, so unless there are packets actively being sent to the hosts mentioned in the yaml file, the metrics are not reported.**
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "go-metro" >}}
 
 
-### Events
+### イベント
 
 The Go-metro check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Go-metro check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

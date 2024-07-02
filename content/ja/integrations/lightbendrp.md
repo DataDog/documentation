@@ -1,9 +1,9 @@
 ---
 "categories":
 - "cloud"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track actors and dispatcher events for Akka-based applications"
+"description": "Akka ベースのアプリケーションのアクターおよびディスパッチャーイベントを追跡"
 "doc_link": "https://docs.datadoghq.com/integrations/lightbendrp/"
 "draft": false
 "git_integration_title": "lightbendrp"

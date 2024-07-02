@@ -9,28 +9,28 @@ further_reading:
       text: Space Aggregation
 ---
 
-When using the `sum`/`min`/`max`/`avg` aggregators, you are looking across multiple series, not at points within a single series. So if the query is scoped to its most granular level, it's possible that switching between those aggregators doesn't change the values you're seeing.
+`sum`/`min`/`max`/`avg` アグリゲーターを使用する場合、1 つの系列内のポイントではなく、複数の系列を横断して見ています。そのため、クエリのスコープが最も細かいレベルまで設定されている場合、これらのアグリゲーターを切り替えても表示される値が変わらない可能性があります。
 
-For example, if you break down web requests by `host` and `path`, where you get a series for each combination. The data at a particular time may look like:
+例えば、Web リクエストを `host` と `path` で分解し、それぞれの組み合わせで系列を取得する場合です。ある時刻のデータは次のようになります。
 
-| Metric Name  | Tags                      | Value |
+| メトリクス名  | タグ                      | 値 |
 | ------------ | ------------------------- | ----- |
-| web.requests | `host: a`, `path: /test1` | 5     |
-| web.requests | `host: a`, `path: /test2` | 3     |
-| web.requests | `host: b`, `path: /test1` | 2     |
-| web.requests | `host: b`, `path: /test2` | 8     |
+| web.requests | `host: a`、`path: /test1` | 5     |
+| web.requests | `host: a`、`path: /test2` | 3     |
+| web.requests | `host: b`、`path: /test1` | 2     |
+| web.requests | `host: b`、`path: /test2` | 8     |
 
-You get different results per aggregation method when grouping by `host`, since there are two series per `host` that must be combined.
+`host` でグループ化する場合、`host` ごとに 2 つの系列を組み合わせる必要があるため、集計方法ごとに異なる結果が得られます。
 
-| Query                           | host: a | host: b |
+| クエリ                           | host: a | host: b |
 | ------------------------------- | ------- | ------- |
 | `sum:web.requests(*) by {host}` | 8       | 10      |
 | `min:web.requests(*) by {host}` | 3       | 2       |
 | `max:web.requests(*) by {host}` | 5       | 8       |
 | `avg:web.requests(*) by {host}` | 4       | 5       |
 
-If you group by `host` **and** `path` in this example, this results in four series where the `sum`/`min`/`max`/`avg` are the same per series as that is the most granular level for this data.
+この例で `host` **と** `path` でグループ化すると、このデータの最も細かいレベルである `sum`/`min`/`max`/`avg` が系列ごとに同じになる 4 つの系列が得られます。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -4,13 +4,13 @@ title: Agent Site Issues
 
 By default the Agent sends its data to Datadog US site: `app.datadoghq.com`. If your organization is on another site, you must update the `site` parameter in your [Agent main configuration file][1] or set the `DD_SITE` environment variable.
 
-To update the Datadog documentation to your site, use the selector on the right. You are currently viewing documentation for: {{< region-param key="dd_full_site" code="true" >}}.
+Datadog のドキュメントをサイトに更新するには、右側のセレクターを使用します。現在、{{< region-param key="dd_full_site" code="true" >}} のドキュメントを表示しています。
 
 Set the `DD_SITE` variable to {{< region-param key="dd_site" code="true" >}}or update the parameter `site` parameter in your `datadog.yaml`
 
 ```yaml
-## @param site - string - optional - default: datadoghq.com
-## The site of the Datadog intake to send Agent data to.
+## @param site - 文字列 - 任意 - デフォルト: datadoghq.com
+## Agent データを送信する Datadog インテークのサイト。
 #
 site: {{< region-param key="dd_site" >}}
 ```

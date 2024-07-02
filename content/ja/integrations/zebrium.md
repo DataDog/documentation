@@ -25,7 +25,7 @@
 "categories":
 - automation
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/zebrium/README.md"
 "display_on_public_website": true
@@ -77,55 +77,55 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
-When you know there's a problem and you're not sure what caused it, [Zebrium][1] shows you the root cause directly on your Datadog dashboards. It works by using machine learning on logs, without the need for manual training or setting up any rules, and it achieves accuracy in less than 24 hours. 
+問題が発生していることは分かっていても、その原因が分からない場合に、[Zebrium][1] は Datadog のダッシュボード上に直接根本原因を表示します。手動でのトレーニングやルールの設定を必要とせず、ログを機械学習することで動作し、24 時間以内に精度を達成します。
 
-Using Zebrium is simple. When troubleshooting a problem, simply add the Zebrium app to your Datadog dashboard and look at the details of the corresponding detection.
+Zebrium の使い方は簡単です。トラブルシューティングの際には、Datadogの ダッシュボードに Zebrium アプリを追加し、対応する検出の詳細を見るだけです。
 
-Zebrium integrates with Datadog in two ways: 1) a Datadog App with a custom dashboard widget and 2) an events and metrics integration.
+Zebrium は、2 つの方法で Datadog と統合します。1) カスタムダッシュボードウィジェットを持つ Datadog アプリと 2) イベントとメトリクスインテグレーションです。
 
-### 1) Datadog App
+### 1) Datadog アプリ
 
-The Zebrium app provides a pre-built, interactive dashboard widget that displays the detected problems over time, and allows you to dig into the Root Cause of these problems (as well as relevant metrics). This method provides the simplest user experience.
+Zebrium アプリは、検出された問題を時系列で表示し、これらの問題の根本原因 (および関連メトリクス) を掘り下げることができる、あらかじめ構築された対話型のダッシュボードウィジェットを提供します。この方法は、最もシンプルなユーザーエクスペリエンスを提供します。
 
-### 2) Events and metrics integration
+### 2) イベントとメトリクスインテグレーション
 
-With the integration, Zebrium detection events and metrics are sent directly into Datadog. You can visualize them any way you'd like (sample dashboard provided). This method should be used if you would like to customize how Zebrium data appears on your dashboards.
+インテグレーションにより、Zebrium の検出イベントとメトリクスが Datadog に直接送信されます。それらを好きなように視覚化することができます (サンプルダッシュボードを提供)。この方法は、Zebrium のデータをダッシュボードに表示する方法をカスタマイズしたい場合に使用します。
 
-## Setup
+## セットアップ
 
-### Events and metrics integration
+### イベントとメトリクスインテグレーション
 
-The Zebrium events and metrics integration uses a [Datadog API key][2], which needs to be created by a Datadog admin. Once you obtain a Datadog API key, see the [Zebrium documentation for Datadog integration][3] to learn how to setup the Zebrium events and metrics integration for Datadog.
+Zebrium のイベントメトリクスインテグレーションは、[Datadog API キー][2]を使用し、Datadog の管理者が作成する必要があります。Datadog API キーを取得したら、[Zebrium の Datadog インテグレーションに関するドキュメント][3] を参照して、Zebrium のイベントおよびメトリクスを Datadog に統合するための設定方法を学びます。
 
-### Dashboard widget
+### ダッシュボードウィジェット
 
-1. Click **Install Integration** in the top right of this panel.
-2. Navigate to an existing Datadog dashboard or create a new one.
-3. Press the **Add Widgets** button to expose the widget drawer.
-4. Search for **Zebrium** in the **Apps** section of the widget drawer.
-5. Click or drag the ***Zebrium Root Cause Finder*** widget icon to add it to your Datadog dashboard.
-6. Open the [Zebrium UI][4] in a new browser tab and  create an access token for your deployment. 
-   - Select the hamburger menu in the upper right of the Zebrium UI and choose Access Tokens. 
-   - Click the Add Access Token button, provide a name for the token, select the deployment for the token and set role to viewer. 
-   - Click Add and copy the token to your clipboard. 
-7. In the widget editor in the Datadog UI, enter the following information:
-   - **API Endpoint**: this is the absolute URL to the root of your Zebrium instance. It is normally **https://cloud.zebrium.com**.
-   - **Token**: Paste the token that you created in step 6 above.
-   - **Service Group**: The name of the service group you wish to show data from. Or enter 'All' to show data from all service groups in this deployment. 
-9. Optionally give the widget a title.
-10. Press **Save** to finish configuring the Datadog dashboard widget.
+1. このパネルの右上にある **Install Integration** をクリックします。
+2. 既存の Datadog ダッシュボードに移動するか、新しいダッシュボードを作成します。
+3. **Add Widgets** ボタンを押すと、ウィジェットドローワが表示されます。
+4. ウィジェットドロワー内の **Apps** セクションで **Zebrium** を 検索します。
+5. ***Zebrium Root Cause Finder*** ウィジェットアイコンをクリックまたはドラッグして、Datadog ダッシュボードに追加します。
+6. 新しいブラウザのタブで [Zebrium UI][4] を開き、デプロイメント用のアクセストークンを作成します。
+   - Zebrium UI の右上にあるハンバーガーメニューを選択し、Access Tokens を選択します。
+   - Add Access Token ボタンをクリックし、トークンの名前を指定し、トークンのデプロイメントを選択し、ロールを viewer に設定します。
+   - Add をクリックし、トークンをクリップボードにコピーします。
+7. Datadog UI のウィジェットエディタで、以下の情報を入力します。
+   - **API Endpoint**: Zebrium インスタンスのルートへの絶対 URL です。通常は **https://cloud.zebrium.com** です。
+   - **Token**: 上記手順 6 で作成したトークンを貼り付けます。
+   - **Service Group**: データを表示するサービスグループの名前です。または ‘All' を入力すると、このデプロイメントのすべてのサービスグループのデータが表示されます。
+9. オプションでウィジェットのタイトルを指定します。
+10. **Save** を押して、Datadog ダッシュボードウィジェットの構成を完了します。
 
-## Support
+## サポート
 
-Need help? Contact [Datadog Support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
-## Further reading
+## 参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Find the root cause faster with Datadog and Zebrium][6]
+- [Datadog と Zebrium で根本原因を迅速に発見][6]
 
 [1]: https://www.zebrium.com
 [2]: https://app.datadoghq.com/organization-settings/api-keys

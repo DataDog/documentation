@@ -19,7 +19,7 @@ further_reading:
       tag: Documentation
       text: Supported Deployment Types
     - link: /security/cloud_security_management/guide/agent_variables/
-      tag: Guide
+      tag: ガイド
       text: Cloud Security Management Agent Variables
 ---
 
@@ -101,7 +101,7 @@ You can enable additional CSM features at any time by returning to the [Features
 
 {{< img src="security/csm/setup/features_page.png" alt="CSM Features page" width="100%">}}
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

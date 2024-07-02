@@ -7,92 +7,92 @@ further_reading:
   text: Basic Postgres Integration
 ---
 
-Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
+データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に可視化します。
 
-The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database:
+Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリーを収集します。Postgres データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
 
-1. [Configure database parameters](#configure-postgres-settings)
-1. [Grant the Agent access to the database](#grant-the-agent-access)
+1. [データベースのパラメーターを構成する](#configure-postgres-settings)
+1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
 1. [Install and configure the Agent](#install-and-configure-the-agent)
-1. [Install the Azure PostgreSQL integration](#install-the-azure-postgresql-integration)
+1. [Azure PostgreSQL インテグレーションをインストールする](#install-the-azure-postgresql-integration)
 
-## Before you begin
+## はじめに
 
-Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15
+サポート対象の PostgreSQL バージョン
+: 9.6、10、11、12、13、14、15
 
-Supported Azure PostgreSQL deployment types
-: PostgreSQL on Azure VMs, Single Server, Flexible Server
+サポートされる Azure PostgreSQL のデプロイメントタイプ
+: Azure VM 上の PostgreSQL、シングルサーバー、フレキシブルサーバー
 
-Supported Agent versions
+サポート対象の Agent バージョン
 : 7.36.1+
 
-Performance impact
-: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
+パフォーマンスへの影響
+: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。<br/><br/>
+データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
-Proxies, load balancers, and connection poolers
-: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
+プロキシ、ロードバランサー、コネクションプーラー
+: Datadog Agent は、監視対象のホストに直接接続する必要があります。セルフホスト型のデータベースの場合は、`127.0.0.1` またはソケットが推奨されます。Agent は、プロキシ、ロードバランサー、または `pgbouncer` などのコネクションプーラーを介してデータベースに接続すべきではありません。Agent が実行中に異なるホストに接続すると (フェイルオーバーやロードバランシングなどの場合)、Agent は 2 つのホスト間で統計情報の差を計算し、不正確なメトリクスを生成します。
 
-Data security considerations
-: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
+データセキュリティへの配慮
+: Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][2]を参照してください。
 
-## Configure Postgres settings
+## Postgres 設定を構成する
 
-Configure the following [parameters][3] in the [Server parameters][4], then **restart the server** for the settings to take effect.
+[サーバーパラメーター][4]で以下の[パラメーター][3]を構成し、**サーバーを再起動**することで設定が有効になります。
 
 {{< tabs >}}
-{{% tab "Single Server" %}}
+{{% tab "シングルサーバー" %}}
 
-| Parameter | Value | Description |
+| パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value, queries longer than `1024` characters are not collected. |
-| `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
-| `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
-| `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
-| `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
+| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字を超えるクエリは収集されません。 |
+| `pg_stat_statements.track` | `ALL` | オプションです。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
+| `pg_stat_statements.max` | `10000` | オプションです。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
+| `pg_stat_statements.track_utility` | `off` | オプション。PREPARE や EXPLAIN といったユーティリティコマンドを無効にします。この値を `off` に設定すると、SELECT、UPDATE、DELETE のようなクエリのみが追跡されます。 |
+| `track_io_timing` | `on` | オプション。クエリのブロックの読み取りおよび書き込み時間の収集を有効にします。 |
 
 {{% /tab %}}
-{{% tab "Flexible Server" %}}
+{{% tab "フレキシブルサーバー" %}}
 
-| Parameter            | Value | Description |
+| パラメーター            | 値 | 説明 |
 |----------------------| -- | --- |
-| `azure.extensions` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][1] extension. |
-| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value, queries longer than `1024` characters are not collected. |
-| `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
-| `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
-| `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
-| `track_io_timing` | `on` | Optional. Enables collection of block read and write times for queries. |
+| `azure.extensions` | `pg_stat_statements` | `postgresql.queries.*` メトリクスに対して必要です。[pg_stat_statements][1] 拡張機能を使用して、クエリメトリクスの収集を可能にします。 |
+| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字を超えるクエリは収集されません。 |
+| `pg_stat_statements.track` | `ALL` | オプションです。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
+| `pg_stat_statements.max` | `10000` | オプションです。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
+| `pg_stat_statements.track_utility` | `off` | オプション。PREPARE や EXPLAIN といったユーティリティコマンドを無効にします。この値を `off` に設定すると、SELECT、UPDATE、DELETE のようなクエリのみが追跡されます。 |
+| `track_io_timing` | `on` | オプション。クエリのブロックの読み取りおよび書き込み時間の収集を有効にします。 |
 
 [1]: https://www.postgresql.org/docs/current/pgstatstatements.html
 {{% /tab %}}
 {{< /tabs >}}
 
-## Grant the Agent access
+## Agent にアクセスを付与する
 
-The Datadog Agent requires read-only access to the database server in order to collect statistics and queries.
+Datadog Agent が統計やクエリを収集するためには、データベース サーバーへの読み取り専用のアクセスが必要となります。
 
-The following SQL commands should be executed on the **primary** database server (the writer) in the cluster if Postgres is replicated. Choose a PostgreSQL database on the database server for the Agent to connect to. The Agent can collect telemetry from all databases on the database server regardless of which one it connects to, so a good option is to use the default `postgres` database. Choose a different database only if you need the Agent to run [custom queries against data unique to that database][5].
+Postgres が複製されている場合、以下の SQL コマンドはクラスター内の**プライマリ**データベースサーバー (ライター) で実行する必要があります。Agent が接続するデータベースサーバー上の PostgreSQL データベースを選択します。Agent は、どのデータベースに接続してもデータベースサーバー上のすべてのデータベースからテレメトリーを収集することができるため、デフォルトの `postgres` データベースを使用することをお勧めします。[そのデータベースに対して、固有のデータに対するカスタムクエリ]を Agentで実行する必要がある場合のみ別のデータベースを選択してください[5]。
 
-Connect to the chosen database as a superuser (or another user with sufficient permissions). For example, if your chosen database is `postgres`, connect as the `postgres` user using [psql][6] by running:
+選択したデータベースに、スーパーユーザー (または十分な権限を持つ他のユーザー) として接続します。例えば、選択したデータベースが `postgres` である場合は、次のように実行して [psql][6] を使用する `postgres` ユーザーとして接続します。
 
  ```bash
  psql -h mydb.example.com -d postgres -U postgres
  ```
 
-Create the `datadog` user:
+`datadog` ユーザーを作成します。
 
 ```SQL
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-**Note:** Microsoft Entra ID managed identity authentication is also supported. Please see [the guide][12] on how to configure this for your Azure instance.
+**注:** Microsoft Entra ID マネージドアイデンティティ認証もサポートされています。Azure インスタンスの構成方法については、[ガイド][12]を参照してください。
 
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 16" %}}
 
-Create the following schema **in every database**:
+**すべてのデータベース**に以下のスキーマを作成します。
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -107,7 +107,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 
 {{% tab "Postgres 15" %}}
 
-Create the following schema **in every database**:
+**すべてのデータベース**に以下のスキーマを作成します。
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -121,7 +121,7 @@ CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 
 {{% tab "Postgres ≥ 10" %}}
 
-Create the following schema **in every database**:
+**すべてのデータベース**に以下のスキーマを作成します。
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -133,7 +133,7 @@ GRANT pg_monitor TO datadog;
 {{% /tab %}}
 {{% tab "Postgres 9.6" %}}
 
-Create the following schema **in every database**:
+**すべてのデータベース**に以下のスキーマを作成します。
 
 ```SQL
 CREATE SCHEMA datadog;
@@ -142,7 +142,7 @@ GRANT USAGE ON SCHEMA public TO datadog;
 GRANT SELECT ON pg_stat_database TO datadog;
 ```
 
-Create functions **in every database** to enable the Agent to read the full contents of `pg_stat_activity` and `pg_stat_statements`:
+**すべてのデータベース**に関数を作成して、Agent が `pg_stat_activity` および `pg_stat_statements` の全コンテンツを読み込めるようにします。
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.pg_stat_activity() RETURNS SETOF pg_stat_activity AS
@@ -158,9 +158,9 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">For data collection or custom metrics that require querying additional tables, you may need to grant the <code>SELECT</code> permission on those tables to the <code>datadog</code> user. Example: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>. See <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL custom metric collection</a> for more information. </div>
+<div class="alert alert-info">追加のテーブルをクエリする必要があるデータ収集またはカスタムメトリクスの場合は、それらのテーブルの <code>SELECT</code> 権限を <code>datadog</code> ユーザーに付与する必要があるかもしれません。例: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code> 詳細は <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL カスタムメトリクスの収集</a>を参照してください。</div>
 
-Create the function **in every database** to enable the Agent to collect explain plans.
+Agent が実行計画を収集できるように、**すべてのデータベース**に関数を作成します。
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.explain_statement(
@@ -185,11 +185,11 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-### Verify
+### 検証する
 
-To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
+権限が正しいことを確認するために、以下のコマンドを実行して、Agent ユーザーがデータベースに接続してコアテーブルを読み取ることができることを確認します。
 {{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
+{{% tab "Postgres ≥ 10" %}}。
 
 ```shell
 psql -h mydb.example.com -U datadog postgres -A \
@@ -226,18 +226,18 @@ psql -h mydb.example.com -U datadog postgres -A \
 {{% /tab %}}
 {{< /tabs >}}
 
-When it prompts for a password, use the password you entered when you created the `datadog` user.
+パスワードの入力を求められた場合は、`datadog` ユーザーを作成したときに入力したパスワードを使用してください。
 
-## Install and configure the Agent
+## Agent のインストールと構成
 
-To monitor Azure Postgres databases, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][7].
+Azure Postgres データベースを監視するには、インフラストラクチャーに Datadog Agent をインストールし、各インスタンスのエンドポイントにリモートで接続するよう構成します。Agent はデータベース上で動作する必要はなく、データベースに接続するだけで問題ありません。ここに記載されていないその他の Agent のインストール方法については、[Agent のインストール手順][7]を参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small virtual machine for the Agent to collect from an Azure database:
+ホスト上で実行されている Agent のデータベースモニタリングメトリクスの収集を構成するには、次の手順に従ってください。(Agent で Azure データベースからメトリクスを収集するために小規模な仮想マシンをプロビジョニングする場合など)
 
-1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
+1. `postgres.d/conf.yaml` ファイルを編集して、`host` / `port` を指定し、監視するマスターを設定します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル postgres.d/conf.yaml][1] を参照してください。
    ```yaml
    init_config:
    instances:
@@ -258,9 +258,9 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
         deployment_type: '<DEPLOYMENT_TYPE>'
         fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
    ```
-2. [Restart the Agent][2].
+2. [Agent を再起動します][2]。
 
-See the [Postgres integration spec][3] for additional information on setting `deployment_type` and `name` fields.
+`deployment_type` と `name` フィールドの設定に関する追加情報は、[Postgres インテグレーション仕様][3]を参照してください。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
@@ -268,13 +268,13 @@ See the [Postgres integration spec][3] for additional information on setting `de
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-To configure the Database Monitoring Agent running in a Docker container, you can set the [Autodiscovery Integration Templates][1] as Docker labels on your agent container.
+Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
-**Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
+**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットに対する読み取り権限が与えられている必要があります。
 
-### Command line
+### コマンドライン
 
-Execute the following command to run the Agent from your command line. Replace the values to match your account and environment:
+次のコマンドを実行して、コマンドラインから Agent を実行します。お使いのアカウントや環境に合わせて値を変更してください。
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -299,7 +299,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
-For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
 
 ```yaml
 pg_stat_statements_view: datadog.pg_stat_statements()
@@ -308,7 +308,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 
 ### Dockerfile
 
-Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom Agent without changing any infrastructure configuration:
+`Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーのコンフィギュレーションを変更することなく、カスタム Agent を構築・デプロイすることができます。
 
 ```Dockerfile
 FROM datadog/agent:7.36.1
@@ -318,16 +318,16 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": "require", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
-For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
 
 ```yaml
 pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-See the [Postgres integration spec][2] for additional information on setting `deployment_type` and `name` fields.
+`deployment_type` と `name` フィールドの設定に関する追加情報は、[Postgres インテグレーション仕様][2]を参照してください。
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][4] on how to pass the password in as an environment variable.
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][3]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][4]でパスワードを環境変数として渡す方法をご確認ください。
 
 
 [1]: /agent/docker/integrations/?tab=docker
@@ -337,9 +337,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
+Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
 
-Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the Postgres configuration with static files mounted in the Cluster Agent container, or using service annotations:
+Kubernetes クラスターでまだチェックが有効になっていない場合は、手順に従って[クラスターチェックを有効][2]にしてください。Postgres のコンフィギュレーションは、Cluster Agent コンテナにマウントされた静的ファイル、またはサービスアノテーションを使用して宣言できます。
 
 ### Helm
 
@@ -388,9 +388,9 @@ For Windows, append <code>--set targetSystem=windows</code> to the <code>helm in
 [2]: /getting_started/site
 [3]: /containers/kubernetes/installation/?tab=helm#installation
 
-### Configure with mounted files
+### マウントされたファイルで構成する
 
-To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path: `/conf.d/postgres.yaml`:
+マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/postgres.yaml` にマウントします。
 
 ```yaml
 cluster_check: true  # Make sure to include this flag
@@ -412,9 +412,9 @@ instances:
     # pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-### Configure with Kubernetes service annotations
+### Kubernetes サービスアノテーションで構成する
 
-Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+ファイルをマウントせずに、インスタンスのコンフィギュレーションを Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
 
 
 ```yaml
@@ -451,18 +451,18 @@ spec:
     name: postgres
 ```
 
-For Postgres 9.6, add the following settings to the instance config where host and port are specified:
+Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
 
 ```yaml
 pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-See the [Postgres integration spec][4] for additional information on setting `deployment_type` and `name` fields.
+`deployment_type` と `name` フィールドの設定に関する追加情報は、[Postgres インテグレーション仕様][4]を参照してください。
 
-The Cluster Agent automatically registers this configuration and begins running the Postgres check.
+Cluster Agent は自動的にこのコンフィギュレーションを登録し、Postgres チェックを開始します。
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][5] and declare the password using the `ENC[]` syntax.
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][5]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
@@ -472,18 +472,18 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validate
+### UpdateAzureIntegration
 
-[Run the Agent's status subcommand][8] and look for `postgres` under the Checks section. Or visit the [Databases][9] page to get started!
-## Example Agent Configurations
+[Agent の status サブコマンドを実行][8]し、Checks セクションで `postgres` を探します。または、[データベース][9]のページを参照してください。
+## Agent の構成例
 {{% dbm-postgres-agent-config-examples %}}
-## Install the Azure PostgreSQL Integration
+## Azure PostgreSQL インテグレーションをインストールする
 
-To collect more comprehensive database metrics from Azure, install the [Azure PostgreSQL integration][10] (optional).
+Azure からより包括的なデータベースメトリクスを収集するには、[Azure PostgreSQL インテグレーション][10]をインストールします (オプション)。
 
-## Known issues
+## 既知の問題
 
-For Postgres 16 databases, the following error messages are written into the log file:
+Postgres 16 データベースの場合、次のエラーメッセージがログファイルに書き込まれます。
 
 ```
 psycopg2.errors.InsufficientPrivilege: permission denied for function pg_ls_waldir
@@ -497,13 +497,13 @@ Traceback (most recent call last):
 psycopg2.errors.InsufficientPrivilege: permission denied for function pg_ls_waldir
 ```
 
-As a consequence, the Agent doesn't collect the following metrics for Postgres 16: `postgresql.wal_count`, `postgresql.wal_size` and `postgresql.wal_age`.
+その結果、Postgres 16 では Agent は次のメトリクスを収集しません: `postgresql.wal_count`、`postgresql.wal_size`、`postgresql.wal_age`
 
-## Troubleshooting
+## トラブルシューティング
 
-If you have installed and configured the integrations and Agent as described, and it is not working as expected, see [Troubleshooting][11]
+インテグレーションと Agent を手順通りにインストール・設定しても期待通りに動作しない場合は、[トラブルシューティング][11]を参照してください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

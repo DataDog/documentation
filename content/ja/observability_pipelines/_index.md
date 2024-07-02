@@ -39,7 +39,7 @@ further_reading:
 Datadog recommends you update Observability Pipelines Worker (OPW) with every minor and patch release, or, at a minimum, monthly. <br><br> Upgrading to a major OPW version and keeping it updated is the only supported way to get the latest OPW functionality, fixes, and security updates.
 </div>
 
-## Overview
+## 概要
 
 {{< img src="observability_pipelines/op_marketecture_04182024.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
@@ -55,7 +55,7 @@ The Observability Pipelines Worker is the software that runs in your infrastruct
 
 The Datadog UI provides a control plane to manage your Observability Pipelines Workers. You can build and edit pipelines, deploy pipeline changes to your Workers, and monitor your pipelines to evaluate the health of your pipelines.
 
-## Get started
+## 詳細はこちら
 
 1. [Set up bootstrap options for the Observability Pipelines Worker][1].
 1. Navigate to [Observability Pipelines][2].
@@ -67,7 +67,7 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
     - [Sensitive data redaction][7]
 1. Enable monitors.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

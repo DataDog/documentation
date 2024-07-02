@@ -25,7 +25,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - os & system
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/ibm_i/README.md"
 "display_on_public_website": true
@@ -63,13 +63,13 @@
 
 This check monitors [IBM i][1] remotely through the Datadog Agent.
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
 
 **Note**: This check is not available on Windows as it uses the `fcntl()` system call, which is specific to Unix-like operating systems.
 
-### Installation
+### インストール
 
 The IBM i check is included in the [Datadog Agent][3] package.
 No additional installation is needed on your server.
@@ -82,7 +82,7 @@ Download the driver from the [IBM i Access - Client Solutions][4] page. Click on
 
 Choose the `ACS App Pkg` package for your platform, such as `ACS Linux App Pkg` for Linux hosts. Download the package and follow the installation instructions to install the driver.
 
-### Configuration
+### 構成
 
 The IBM i check queries an IBM i system remotely from a host running the Datadog Agent. To communicate with the IBM i system, you need to set up the IBM i ODBC driver on the host running the Datadog Agent.
 
@@ -116,17 +116,17 @@ The name of the IBM i ODBC driver is needed to configure the IBM i check.
 
 [Run the Agent's status subcommand][7] and look for `ibm_i` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "ibm_i" >}}
 
 
-### Events
+### イベント
 
 The IBM i check does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

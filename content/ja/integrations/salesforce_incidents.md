@@ -3,7 +3,7 @@
 - cloud
 - incidents
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "This integration allows you to create Salesforce Incidents from triggered alerts in Datadog, and update existing incidents with new information as it arises."
 "doc_link": "https://docs.datadoghq.com/integrations/salesforce_incidents/"
@@ -28,7 +28,7 @@ The Salesforce Incidents integration allows you to create incidents in Salesforc
 events. Using the Salesforce Datadog Widget, you can view the timeline of monitor events related to the incident
 directly in Salesforce.
 
-## Setup
+## セットアップ
 
 ### Connect Datadog to Salesforce Service Cloud
 
@@ -64,7 +64,7 @@ To install the Datadog Widget in Salesforce Service Cloud:
 4. Click and drag the Datadog widget onto the page from the custom components in the left nav.
 5. Click **Save**.
 
-## Usage
+## 使用方法
 
 #### Creating incidents in Salesforce Service Cloud from Datadog Alerts
 
@@ -74,21 +74,21 @@ in the **Notify your team** or **Say what's happening** sections of your Datadog
 Incidents are created when the monitor triggers. New incidents are not created until the monitor resolves.
 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Salesforce Incidents integration does not provide any metrics.
 
-### Events
+### イベント
 
 The Salesforce Incidents integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Salesforce Incidents integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

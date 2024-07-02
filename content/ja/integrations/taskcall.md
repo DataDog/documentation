@@ -14,7 +14,7 @@
 - incidents
 - issue tracking
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/taskcall/README.md"
 "display_on_public_website": true
@@ -85,7 +85,7 @@ TaskCall's integration allows Datadog users to bolster their operations by impro
 - This integration is available on all TaskCall subscription plans.
 
 
-## Setup
+## セットアップ
 
 The integration needs to be configured from both TaskCall and Datadog.
 

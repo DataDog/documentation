@@ -1,6 +1,5 @@
 ---
 title: Ruby Runtime Metrics
-kind: documentation
 description: "Gain additional insights into your Ruby application's performance with the runtime metrics associated to your traces."
 aliases:
 - /tracing/runtime_metrics/ruby
@@ -20,14 +19,14 @@ further_reading:
 ---
 
 <div class="alert alert-warning">
-This feature is in public beta.
+これは公開ベータ版の機能です。
 </div>
 
-## Automatic configuration
+## 自動コンフィギュレーション
 
-Runtime metrics collection uses the [`dogstatsd-ruby`][1] gem to send metrics via DogStatsD to the Agent. To collect runtime metrics, you must add this gem to your Ruby application, and make sure that [DogStatsD is enabled for the Agent][2].
+ランタイムメトリクスの収集は [`dogstatsd-ruby`][1] gemを使用し、DogStatsD を介して Agent にメトリクスを送信します。ランタイムメトリクスを収集するには、この gem を Ruby アプリケーションに追加し、[DogStatsD が Agent に対して有効になっていること][2]を確認する必要があります。
 
-Metrics collection is disabled by default. You can enable it by setting the `DD_RUNTIME_METRICS_ENABLED` environment variable to `true`, or by setting the following configuration in your Ruby application:
+メトリクス収集は初期設定では無効になっています。`DD_RUNTIME_METRICS_ENABLED` 環境変数を `true` に設定するか、Ruby アプリケーションで次のコンフィギュレーションを行うと有効にできます。
 
 ```ruby
 # config/initializers/datadog.rb
@@ -46,23 +45,23 @@ Datadog.configure do |c|
 end
 ```
 
-Runtime metrics can be viewed in correlation with your Ruby services. See the [Service page][3] in Datadog.
+ランタイムメトリクスは、Ruby サービスと相関して表示できます。Datadog の[サービス詳細画面][3]を参照してください。
 
-By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
-If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][4], and that port `8125` is open on the Agent.
-In Kubernetes, [bind the DogstatsD port to a host port][5]; in ECS, [set the appropriate flags in your task definition][6].
+初期設定では、アプリケーションからのランタイムメトリクスは DogStatsD のポート `8125` から Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっていること][2]を確認してください。
+Agent をコンテナとして実行している場合は、`DD_DOGSTATSD_NON_LOCAL_TRAFFIC` が [true に設定されていること][4]、また Agent 上でポート `8125` が開いていることを確認してください。
+Kubernetes では、[DogstatsD ポートをホストポートにバインド][5]し、ECS では[タスク定義で適切なフラグを設定][6]します。
 
 Alternatively, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport. For more information, read [DogStatsD over Unix Domain Socket][8].
 
-## Data Collected
+## 収集データ
 
-The following metrics are collected by default after enabling Runtime metrics.
+以下のメトリクスはランタイムメトリクスを有効にした後、デフォルトで収集されます。
 
 {{< get-metrics-from-git "ruby" >}}
 
-Along with displaying these metrics in your APM Service Page, Datadog provides a [default Ruby Runtime Dashboard][7].
+APM サービス詳細画面にこれらのメトリクスを表示するだけでなく、Datadog は[デフォルトの Ruby ランタイムダッシュボード][7]を提供します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

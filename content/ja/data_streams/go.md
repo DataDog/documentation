@@ -2,20 +2,20 @@
 title: Setup Data Streams Monitoring for Go
 ---
 
-### Prerequisites
+### 前提条件
 
-To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Data Streams Monitoring libraries:
-* [Datadog Agent v7.34.0 or later][1]
-* [dd-trace-go v1.56.1 or later][2]
+Data Streams Monitoring を開始するには、Datadog Agent と Data Streams Monitoring ライブラリの最新バージョンが必要です。
+* [Datadog Agent v7.34.0 以降][1]
+* [dd-trace-go v1.56.1 以降][2]
 
-### Installation
+### インストール
 
 - Set the `DD_DATA_STREAMS_ENABLED=true` environment variable.
 - [Start the tracer][3].
 
-Two types of instrumentation are available:
-- Instrumentation for Kafka-based workloads
-- Custom instrumentation for any other queuing technology or protocol
+2 種類のインスツルメンテーションが用意されています。
+- Kafka ベースのワークロードのためのインスツルメンテーション
+- その他のキューイング技術やプロトコルのためのカスタムインスツルメンテーション
 
 ### Confluent Kafka client
 
@@ -58,7 +58,7 @@ producer, err := sarama.NewAsyncProducer([]string{bootStrapServers}, config)
 producer = ddsarama.WrapAsyncProducer(config, producer, ddsarama.WithDataStreams())
 ```
 
-### Manual instrumentation
+### 手動インスツルメンテーション
 
 You can also use manual instrumentation. For example, you can propagate context through Kinesis.
 

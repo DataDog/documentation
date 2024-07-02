@@ -1,29 +1,32 @@
 ---
+title: Continuous Testing Settings
 further_reading:
 - link: /continuous_testing/cicd_integrations
-  tag: ドキュメント
-  text: CI/CD パイプラインに Continuous Testing のテストをインテグレーションする
+  tag: Documentation
+  text: Integrate your Continuous Testing tests in your CI/CD pipelines
 - link: /synthetics/api_tests/
-  tag: ドキュメント
-  text: APIテストの設定
+  tag: Documentation
+  text: Configure an API Test
 - link: /synthetics/browser_tests/
-  tag: ドキュメント
-  text: ブラウザテストの設定
+  tag: Documentation
+  text: Configure a Browser Test
+- link: /mobile_app_testing/mobile_app_tests/
+  tag: Documentation
+  text: Configure a Mobile App Test
 - link: /synthetics/guide/explore-rum-through-synthetics/
-  tag: ドキュメント
-  text: Synthetics で RUM とセッションリプレイを確認する
-- link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
-  tag: Terraform
-  text: Terraform でテストを作成・管理する
-title: Continuous Testing 設定
+  tag: Documentation
+  text: Explore RUM & Session Replay in Synthetics
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
+  tag: 外部サイト
+  text: Create and manage tests with Terraform
 ---
 {{< jqmath-vanilla >}}
 
 ## 概要
 
-Continuous Testing の設定は、[Synthetic Monitoring & Continuous Testing Settings ページ][1]で行うことができます。
+You can access Continuous Testing settings on the [Synthetic Monitoring & Testing Settings page][1].
 
-{{< img src="continuous_testing/continuous_testing_settings_default.png" alt="Continuous Testing のデフォルト設定" style="width:100%;">}}
+{{< img src="continuous_testing/settings/parallelization.png" alt="Set parallelization for your Continuous Testing tests on the Settings page" style="width:100%;">}}
 
 デフォルトでは、CI/CD パイプラインで実行されるすべてのテストは、順次実行されます (1 つずつ実行されます)。この動作を変更するには、[並列化値](#set-parallelization)を設定し、選択を保存してください。
 
@@ -56,9 +59,9 @@ $$\text"estimated parallelization" = {\text"CI バッチあたりの平均テス
 3. **Save Selection** をクリックします。
 4. 選択内容を確認します。
 
-{{< img src="continuous_testing/continuous_testing_settings_parallelization.png" alt="Continuous Testing のための並列化の設定" style="width:100%;">}}
+{{< img src="continuous_testing/settings/parallelization.png" alt="Parallelization settings for 25 parallel Continuous Testing test runs" style="width:100%;">}}
 
-## アクセス許可
+## 権限
 
 Continuous Testing の並列化をカスタマイズするには、`billing_edit` 権限が必要です。
 
@@ -66,11 +69,11 @@ Continuous Testing の並列化をカスタマイズするには、`billing_edit
 
 詳しくは、[Datadog ロール権限][2]を参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/settings/
-[2]: /ja/account_management/rbac/permissions/#billing-and-usage
-[3]: /ja/synthetics/metrics/#continuous-testing
-[4]: /ja/continuous_testing/cicd_integrations
+[1]: /synthetics/settings/
+[2]: /account_management/rbac/permissions/#billing-and-usage
+[3]: /synthetics/metrics/#continuous-testing
+[4]: /continuous_testing/cicd_integrations

@@ -1,91 +1,88 @@
 ---
 title: Datagram Format and Shell Usage
-kind: documentation
-description: Overview of the datagram format used by DogStatsD as well as (advanced) shell usage.
+description: DogStatsD が使用するデータグラム形式および (高度な) シェルの使用方法の概要
 aliases:
     - /developers/dogstatsd/data_types/
 further_reading:
     - link: 'developers/dogstatsd'
-      tag: 'Documentation'
-      text: 'Introduction to DogStatsD'
+      tag: 'ドキュメント'
+      text: 'DogStatsD 入門'
     - link: 'developers/libraries'
-      tag: 'Documentation'
-      text: 'Official and Community created API and DogStatsD client libraries'
+      tag: 'ドキュメント'
+      text: '公式/コミュニティ作成の API および DogStatsD クライアントライブラリ'
 ---
 
-This section specifies the raw datagram format for metrics, events, and service checks that DogStatsD accepts. The raw datagrams are encoded in UTF-8. This isn't required reading if you're using any of [the DogStatsD client libraries][1]; however, if you want to write your own library, or use the shell to send metrics, then read on.
+ここでは、DogStatsD が受け付けるメトリクス、イベント、サービスチェックの生のデータグラム形式を規定します。生のデータグラムは UTF-8 でエンコーディングされています。[DogStatsD クライアントライブラリ][1]を使用する場合は、これをお読みになる必要はありません。独自のライブラリを記述する場合、あるいはシェルを使用してメトリクスを送信する場合は、以下を参照してください。
 
-## The DogStatsD protocol
+## DogStatsD プロトコル
 
 {{< tabs >}}
 {{% tab "Metrics" %}}
 
 `<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
-| Parameter                           | Required | Description                                                                                                                                                    |
+| パラメーター                           | 必須 | 説明                                                                                                                                                    |
 | ----------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<METRIC_NAME>`                     | Yes      | A string that contains only ASCII alphanumerics, underscores, and periods. See the [metric naming policy][101].                                                  |
-| `<VALUE>`                           | Yes      | An integer or float.                                                                                                                                           |
-| `<TYPE>`                            | Yes      | `c` for COUNT, `g` for GAUGE, `ms` for TIMER, `h` for HISTOGRAM, `s` for SET, `d` for DISTRIBUTION. See [Metric Types][102] for more details.                    |
-| `<SAMPLE_RATE>`                     | No       | A float between `0` and `1`, inclusive. Only works with COUNT, HISTOGRAM, DISTRIBUTION, and TIMER metrics. The default is `1`, which samples 100% of the time. |
-| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | A comma separated list of strings. Use colons for key/value tags (`env:prod`). For guidance on defining tags, see [Getting Started with Tags][103].              |
+| `<METRIC_NAME>`                     | はい      | A string that contains only ASCII alphanumerics, underscores, and periods. See the [metric naming policy][101].                                                  |
+| `<VALUE>`                           | はい      | 整数または浮動小数点数。                                                                                                                                           |
+| `<TYPE>`                            | はい      | COUNT の場合は `c`、GAUGE の場合は `g`、TIMER の場合は `ms`、HISTOGRAM の場合は `h`、SET の場合は `s`、DISTRIBUTION の場合は `d`。詳細は[メトリクスタイプ][102]を参照してください。                    |
+| `<SAMPLE_RATE>`                     | いいえ       | `0` から `1` までの浮動小数点数。COUNT、HISTOGRAM、DISTRIBUTION、TIMER メトリクスでのみ機能します。デフォルトは `1` で、100% の時間をサンプリングします。 |
+| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | いいえ       | A comma separated list of strings. Use colons for key/value tags (`env:prod`). For guidance on defining tags, see [Getting Started with Tags][103].              |
 
-Here are some example datagrams:
+以下に、データグラムの例を示します。
 
-- `page.views:1|c` : Increment the `page.views` COUNT metric.
-- `fuel.level:0.5|g`: Record the fuel tank is half-empty.
-- `song.length:240|h|@0.5`: Sample the `song.length` histogram as if it was sent half of the time.
-- `users.uniques:1234|s`: Track unique visitors to the site.
-- `users.online:1|c|#country:china`: Increment the active users COUNT metric and tag by country of origin.
-- `users.online:1|c|@0.5|#country:china`: Track active China users and use a sample rate.
+- `page.views:1|c` : `page.views` COUNT メトリクスを増やします。
+- `fuel.level:0.5|g`: 燃料タンクが半分空になったことを記録します。
+- `song.length:240|h|@0.5`: 半分の時間だけ送信したように `song.length` ヒストグラムをサンプリングします。
+- `users.uniques:1234|s`: サイトへのユニークビジターを追跡します。
+- `users.online:1|c|#country:china`: アクティブユーザー COUNT メトリクスを増やし、所属国ごとにタグ付けします。
+- `users.online:1|c|@0.5|#country:china`: アクティブな中国ユーザーを追跡し、サンプルレートを使用します。
 
-### DogStatsD protocol v1.1
+### DogStatsD プロトコル v1.1
 
-Starting with the Agent `>=v6.25.0` && `<v7.0.0` or `>=v7.25.0`, value packing is possible. This
-is supported for all metric types except `SET`. Values are separated by a `:`, for example:
+Agent `>=v6.25.0` && `<v7.0.0` または `>=v7.25.0` からは、値のパッキングが可能になります。これは、 `SET` を除くすべてのメトリクスタイプでサポートされています。値は `:` で区切られ、例えば次のようになります。
 
 `<METRIC_NAME>:<VALUE1>:<VALUE2>:<VALUE3>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
-`TYPE`, `SAMPLE_RATE`, and `TAGS` are shared between all values. This produces the same metrics than sending multiple
-messages with one value in each. This is useful for HISTOGRAM, TIMING, and DISTRIBUTION metrics.
+`TYPE`、`SAMPLE_RATE`、`TAGS` はすべての値で共有されます。これは、それぞれ 1 つの値で複数のメッセージを送信するよりも、同じメトリクスを生成します。これは、HISTOGRAM、TIMING、DISTRIBUTION の各メトリクスに有効です。
 
-### Example datagrams
+### データグラムの例
 
-- `page.views:1:2:32|d`: Sample the `page.views` DISTRIBUTION metric three times with values `1`, `2` and `32`.
-- `song.length:240:234|h|@0.5`: Sample the `song.length` histogram as if it was sent half of the time, twice. Each value has the sample rate of `0.5` applied to it.
+- `page.views:1:2:32|d`: `page.views` DISTRIBUTION メトリクスを `1`、`2`、`32` の値で 3 回サンプリングします。
+- `song.length:240:234|h|@0.5`: `song.length` ヒストグラムを、半分の時間を 2 回送信したかのようにサンプリングします。それぞれの値には `0.5` のサンプルレートが適用されます。
 
-### DogStatsD protocol v1.2
+### DogStatsD プロトコル v1.2
 
-Starting with the Agent `>=v6.35.0` && `<v7.0.0` or `>=v7.35.0`, a new container ID field is supported.
-The Datadog Agent uses the container ID value to enrich DogStatsD metrics with additional container tags.
+Agent `>=v6.35.0` および `<v7.0.0` または `>=v7.35.0` からは、新しいコンテナ ID フィールドがサポートされています。
+Datadog Agent は、コンテナ ID の値を使用して、追加のコンテナタグで DogStatsD メトリクスをリッチ化します。
 
-The container ID is prefixed by `c:`, for example:
+コンテナ ID の先頭には `c:` が付きます。例:
 
 `<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|c:<CONTAINER_ID>`
 
-**Note:** Set `dogstatsd_origin_detection_client` to `true` in your `datadog.yaml` file or the environment variable `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT=true` to instruct the Datadog Agent to extract the container ID field and attach the corresponding container tags.
+**注:** `datadog.yaml` ファイルまたは環境変数 `DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT=true` で `dogstatsd_origin_detection_client` を `true` に設定すると、Datadog Agent にコンテナ ID フィールドを抽出して、対応するコンテナタグをアタッチするように指示が出ます。
 
-### Example datagrams
+### データグラムの例
 
-- `page.views:1|g|#env:dev|c:83c0a99c0a54c0c187f461c7980e9b57f3f6a8b0c918c8d93df19a9de6f3fe1d`: The Datadog Agent adds container tags like `image_name` and `image_tag` to the `page.views` metric.
+- `page.views:1|g|#env:dev|c:83c0a99c0a54c0c187f461c7980e9b57f3f6a8b0c918c8d93df19a9de6f3fe1d`: Datadog Agent は、`image_name` や `image_tag` などのコンテナタグを `page.views` メトリクスに追加します。
 
 Read more about container tags in the [Kubernetes][104] and [Docker][105] tagging documentation.
 
-### DogStatsD protocol v1.3
+### DogStatsD プロトコル v1.3
 
-Agents v6.40.0+ and v7.40.0+ support an optional Unix timestamp field.
+Agent v6.40.0+ および v7.40.0+ は、オプションで Unix タイムスタンプフィールドをサポートしています。
 
-When this field is provided, the Datadog Agent doesn't do any processing with the metrics (no aggregation) except from enriching the metrics with tags. This can be useful if you already aggregate your metrics in your application, and you want to send them to Datadog without extra processing.
+このフィールドを指定すると、Datadog Agent は、タグでメトリクスをリッチ化する以外、メトリクスの処理を行いません (集計を行いません)。これは、アプリケーションで既にメトリクスを集計しており、余分な処理なしで Datadog に送信したい場合に便利です。
 
-The Unix timestamp should be a valid positive number in the past. Only GAUGE and COUNT metrics are supported.
+Unix のタイムスタンプは、過去の有効な正の数である必要があります。GAUGE と COUNT メトリクスのみサポートされています。
 
-The value is a Unix timestamp (UTC) and must be prefixed by `T`, for example:
+値は Unix タイムスタンプ (UTC) であり、プレフィックスとして `T` を付ける必要があります。例:
 
 `<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|T<METRIC_TIMESTAMP>`
 
-### Example datagram
+### データグラムの例
 
-- `page.views:15|c|#env:dev|T1656581400`: A COUNT indicating that 15 page views happened on the 30th of June, 2022 at 9:30am UTC
+- `page.views:15|c|#env:dev|T1656581400`: 2022 年 6 月 30 日午前 9 時 30 分 (UTC) に 15 ページビューが発生したことを示す COUNT
 
 [101]: /metrics/#metric-name
 [102]: /metrics/types/
@@ -97,28 +94,28 @@ The value is a Unix timestamp (UTC) and must be prefixed by `T`, for example:
 
 `_e{<TITLE_UTF8_LENGTH>,<TEXT_UTF8_LENGTH>}:<TITLE>|<TEXT>|d:<TIMESTAMP>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>`
 
-| Parameter                            | Required | Description                                                                                                            |
+| パラメーター                            | 必須 | 説明                                                                                                            |
 | ------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `_e`                                 | Yes      | The datagram must begin with `_e`.                                                                                     |
-| `<TITLE>`                            | Yes      | The event title.                                                                                                       |
-| `<TEXT>`                             | Yes      | The event text. Insert line breaks with: `\\n`.                                                                        |
-| `<TITLE_UTF8_LENGTH>`                | Yes      | The length (in bytes) of the UTF-8-encoded `<TITLE>`                                                                              |
-| `<TEXT_UTF8_LENGTH>`                 | Yes      | The length (in bytes) of the UTF-8-encoded `<TEXT>`                                                                               |
-| `d:<TIMESTAMP>`                      | No       | Add a timestamp to the event. The default is the current Unix epoch timestamp.                                         |
-| `h:<HOSTNAME>`                       | No       | Add a hostname to the event. Defaults to the Datadog Agent instance.                                                                               |
-| `k:<AGGREGATION_KEY>`                | No       | Add an aggregation key to group the event with others that have the same key. No default.                              |
-| `p:<PRIORITY>`                       | No       | Set to `normal` or `low`. Default `normal`.                                                                            |
-| `s:<SOURCE_TYPE_NAME>`               | No       | Add a source type to the event. No default.                                                                            |
-| `t:<ALERT_TYPE>`                     | No       | Set to `error`, `warning`, `info`, or `success`. Default `info`.                                                        |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | The colon in tags is part of the tag list string and has no parsing purpose like for the other parameters. No default. |
+| `_e`                                 | はい      | データグラムは `_e` で始まる必要があります。                                                                                     |
+| `<タイトル>`                            | はい      | イベントのタイトル。                                                                                                       |
+| `<テキスト>`                             | はい      | イベントテキスト。`\\n` で改行を挿入します。                                                                        |
+| `<TITLE_UTF8_LENGTH>`                | はい      | UTF-8 でエンコーディングされた `<TITLE>` 長 (バイト単位)                                                                              |
+| `<TEXT_UTF8_LENGTH>`                 | はい      | UTF-8 でエンコーディングされた `<TEXT>` 長 (バイト単位)                                                                               |
+| `d:<TIMESTAMP>`                      | いいえ       | イベントにタイムスタンプを追加します。デフォルトは、現在の Unix Epoch タイムスタンプです。                                         |
+| `h:<HOSTNAME>`                       | いいえ       | Add a hostname to the event. Defaults to the Datadog Agent instance.                                                                               |
+| `k:<集計キー>`                | いいえ       | 同じキーを持つ他のイベントとグループ化するための集計キーを追加します。デフォルトはありません。                              |
+| `p:<PRIORITY>`                       | いいえ       | `normal` または `low` に設定します。デフォルトは `normal` です。                                                                            |
+| `s:<ソースタイプ名>`               | いいえ       | イベントにソースタイプを追加します。デフォルトはありません。                                                                            |
+| `t:<ALERT_TYPE>`                     | いいえ       | Set to `error`, `warning`, `info`, or `success`. Default `info`.                                                        |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | いいえ       | タグ内のコロンは、タグリスト文字列の一部です。他のパラメーターで使用されるコロンのようにパースには使用されません。デフォルトはありません。 |
 
-Here are some example datagrams:
+以下に、データグラムの例を示します。
 
 ```text
-## Send an exception
+## 例外を送信する
 _e{21,36}:An exception occurred|Cannot parse CSV file from 10.0.0.17|t:warning|#err_type:bad_file
 
-## Send an event with a newline in the text
+## テキスト内に改行を含むイベントを送信する
 _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low|#err_type:bad_request
 ```
 
@@ -127,44 +124,44 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 
 `_sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|m:<SERVICE_CHECK_MESSAGE>`
 
-| Parameter                            | Required | Description                                                                                                                             |
+| パラメーター                            | 必須 | 説明                                                                                                                             |
 | ------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| `_sc`                                | Yes      | The datagram must begin with `_sc`.                                                                                                     |
-| `<NAME>`                             | Yes      | The service check name.                                                                                                                 |
-| `<STATUS>`                           | Yes      | An integer corresponding to the check status (OK = `0`, WARNING = `1`, CRITICAL = `2`, UNKNOWN = `3`).                                  |
-| `d:<TIMESTAMP>`                      | No       | Add a timestamp to the check. The default is the current Unix epoch timestamp.                                                          |
-| `h:<HOSTNAME>`                       | No       | Add a hostname to the event (no default).                                                                                               |
-| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | No       | Set the tags of the event. A list of strings separated by comma (no default).                                                           |
-| `m:<SERVICE_CHECK_MESSAGE>`          | No       | A message describing the current state of the service check. This field must be positioned last among the metadata fields (no default). |
+| `_sc`                                | はい      | データグラムは `_sc` で始まる必要があります。                                                                                                     |
+| `<NAME>`                             | はい      | サービスチェック名。                                                                                                                 |
+| `<STATUS>`                           | はい      | チェックステータスに対応する整数値 (OK = `0`、WARNING = `1`、CRITICAL = `2`、UNKNOWN = `3`)                                  |
+| `d:<TIMESTAMP>`                      | いいえ       | チェックにタイムスタンプを追加します。デフォルトは、現在の Unix Epoch タイムスタンプです。                                                          |
+| `h:<HOSTNAME>`                       | いいえ       | イベントにホスト名を追加します（デフォルトはありません）。                                                                                               |
+| `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | いいえ       | イベントのタグを設定します。カンマで区切られた文字列のリスト（デフォルトはありません）。                                                           |
+| `m:<SERVICE_CHECK_MESSAGE>`          | いいえ       | A message describing the current state of the service check. This field must be positioned last among the metadata fields (no default). |
 
-Here's an example datagram:
+以下に、データグラムの例を示します。
 
 ```text
-# Send a CRITICAL status for a remote connection
+# リモート接続の CRITICAL ステータスを送信する
 _sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Send metrics using DogStatsD and the shell
+## DogStatsD とシェルを使用したメトリクスの送信
 
-For Linux and other Unix-like OS, use Bash. For Windows, use PowerShell and [PowerShell-statsd][2] (a simple PowerShell function that takes care of the network bits).
+Linux などの Unix 系 OS では、Bash を使用してください。Windows では、PowerShell と [PowerShell-statsd][2] (ネットワークビットを処理する簡単な PowerShell 機能) を使用します。
 
-DogStatsD creates a message that contains information about your metric, event, or service check and sends it to a locally installed Agent as a collector. The destination IP address is `127.0.0.1` and the collector port over UDP is `8125`. See [DogStatsD][3] for details on configuring the Agent.
+DogStatsD は、メトリクス、イベント、またはサービスチェックに関する情報を含むメッセージを作成し、ローカルにインストールされた Agent にコレクターとして送信します。宛先 IP アドレスは `127.0.0.1` で、UDP 上のコレクターポートは `8125` です。Agent の構成の詳細については、[DogStatsD][3] を参照してください。
 
 {{< tabs >}}
 {{% tab "Metrics" %}}
 
-The format for sending metrics is:
+メトリクスの送信に使用される形式は以下のとおりです。
 
 ```text
-<METRIC_NAME>:<VALUE>|<TYPE>|@<SAMPLE_RATE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>
+<メトリクス名>:<値>|<タイプ>|@<サンプリングレート>|#<タグキー_1>:<タグ値_1>,<タグ_2>
 ```
 
-The examples below send data points for a gauge metric called `custom_metric` with the `shell` tag.
+以下の例では、`shell` タグを使用して `custom_metric` というゲージメトリクスのデータポイントを送信します。
 
-On Linux:
+Linux の場合
 
 ```shell
 echo -n "custom_metric:60|g|#shell" >/dev/udp/localhost/8125
@@ -178,13 +175,13 @@ echo -n "custom_metric:60|g|#shell" | nc -4u -w0 127.0.0.1 8125
 echo -n "custom.metric.name:1|c"|nc -4u -w1 localhost 8125
 ```
 
-On Windows:
+Windows の場合
 
 ```powershell
 PS C:\> .\send-statsd.ps1 "custom_metric:123|g|#shell"
 ```
 
-On any platform with Python (on Windows, the Agent's embedded Python interpreter can be used, which is located at `%ProgramFiles%\Datadog\Datadog Agent\embedded\python.exe` for Agent versions <= 6.11 and in `%ProgramFiles%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe` for Agent versions >= 6.12):
+任意のプラットフォームで Python を使用する場合 (Windows では、Agent の埋め込み Python インタープリターを使用できます。これは、Agent バージョン <= 6.11 の場合は `%ProgramFiles%\Datadog\Datadog Agent\embedded\python.exe`、Agent バージョン >= 6.12 の場合は `%ProgramFiles%\Datadog\Datadog Agent\embedded<PYTHON_MAJOR_VERSION>\python.exe` にあります。)
 
 ### Python 2
 
@@ -205,59 +202,59 @@ sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 {{% /tab %}}
 {{% tab "Events" %}}
 
-The format for sending events is:
+イベントの送信に使用される形式は以下のとおりです。
 
 ```text
-_e{<TITLE>.length,<TEXT>.length}:<TITLE>|<TEXT>|d:<DATE_EVENT>|h:<HOSTNAME>|p:<PRIORITY>|t:<ALERT_TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>.
+_e{<タイトル>.length,<テキスト>.length}:<タイトル>|<テキスト>|d:<日付イベント>|h:<ホスト名>|p:<優先度>|t:<アラートタイプ>|#<タグキー_1>:<タグ値_1>,<タグ_2>.
 ```
 
-The examples below calculate the size of the event's title and body.
+以下の例では、イベントのタイトルと本文のサイズを計算しています。
 
-On Linux:
+Linux の場合
 
 ```shell
-$ title="Event from the shell"
+$ title="シェルからのイベント"
 
-$ text="This was sent from Bash!"
+$ text="これは Bash から送信されました！"
 
 $ echo "_e{${#title},${#text}}:$title|$text|#shell,bash"  >/dev/udp/localhost/8125
 ```
 
-On Windows:
+Windows の場合
 
 ```powershell
-PS C:> $title = "Event from the shell"
-PS C:> $text = "This was sent from PowerShell!"
+PS C:> $title = "シェルからのイベント"
+PS C:> $text = "これは PowerShell から送信されました！"
 PS C:> .\send-statsd.ps1 "_e{$($title.length),$($text.Length)}:$title|$text|#shell,PowerShell"
 ```
 
 {{% /tab %}}
 {{% tab "Service Checks" %}}
 
-The format for sending service checks is:
+サービスチェックの送信に使用される形式は以下のとおりです。
 
 ```text
-_sc|<NAME>|<STATUS>|d:<TIMESTAMP>|h:<HOSTNAME>|#<TAG_KEY_1>:<TAG_VALUE_1>|m:<SERVICE_CHECK_MESSAGE>
+_sc|<名前>|<ステータス>|d:<タイムスタンプ>|h:<ホスト名>|#<タグキー_1>:<タグ値_1>|m:<サービスチェックメッセージ>
 ```
 
-On Linux:
+Linux の場合
 
 ```shell
-echo -n "_sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s" >/dev/udp/localhost/8125
+echo -n "_sc|Redis 接続|2|#env:dev|m:Redis 接続が 10 秒後にタイムアウトしました" >/dev/udp/localhost/8125
 ```
 
-On Windows:
+Windows の場合
 
 ```powershell
-PS C:\> .\send-statsd.ps1 "_sc|Redis connection|2|#env:dev|m:Redis connection timed out after 10s"
+PS C:\> .\send-statsd.ps1 "_sc|Redis 接続|2|#env:dev|m:Redis 接続が 10 秒後にタイムアウトしました"
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-To send metrics, events, or service checks on containerized environments, see [DogStatsD on Kubernetes][3], in conjunction with [configuring APM on Kubernetes][4], depending on your installation. The [Docker APM][5] documentation may also be helpful.
+コンテナ環境でメトリクス、イベント、またはサービスチェックを送信する方法については、[Kubernetes 上の DogStatsD][3]を参照してください。また、環境に応じて [Kubernetes での APM の構成][4]も併せて参照してください。[Docker APM][5] のドキュメントも参考になります。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

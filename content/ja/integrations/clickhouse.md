@@ -27,7 +27,7 @@
 - caching
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/clickhouse/README.md"
 "display_on_public_website": true
@@ -65,42 +65,42 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [ClickHouse][1] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [ClickHouse][1] を監視します。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The ClickHouse check is included in the [Datadog Agent][3] package. No additional installation is needed on your server.
+ClickHouse チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-#### Metric collection
+#### メトリクスの収集
 
-1. To start collecting your ClickHouse performance data, edit the `clickhouse.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's configuration directory. See the [sample clickhouse.d/conf.yaml][1] for all available configuration options.
+1. ClickHouse のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `clickhouse.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル clickhouse.d/conf.yaml][1] を参照してください。
 
-2. [Restart the Agent][2].
+2. [Agent を再起動します][2]。
 
-##### Log collection
+##### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add the log files you are interested in to your `clickhouse.d/conf.yaml` file to start collecting your ClickHouse logs:
+2. ClickHouse のログの収集を開始するには、該当のログファイルを `clickhouse.d/conf.yaml` ファイルに追加します。
 
    ```yaml
      logs:
@@ -110,61 +110,61 @@ To configure this check for an Agent running on a host:
          service: "<SERVICE_NAME>"
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment. See the [sample clickhouse.d/conf.yaml][1] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル clickhouse.d/conf.yaml][1] を参照してください。
 
-3. [Restart the Agent][2].
+3. [Agent を再起動します][2]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/clickhouse/datadog_checks/clickhouse/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-#### Metric collection
+#### メトリクスの収集
 
-| Parameter            | Value                                                      |
+| パラメーター            | 値                                                      |
 |----------------------|------------------------------------------------------------|
 | `<INTEGRATION_NAME>` | `clickhouse`                                                   |
-| `<INIT_CONFIG>`      | blank or `{}`                                              |
-| `<INSTANCE_CONFIG>`  | `{"server": "%%host%%", "port": "%%port%%", "username": "<USER>", "password": "<PASSWORD>"}`       |
+| `<INIT_CONFIG>`      | 空白または `{}`                                              |
+| `<INSTANCE_CONFIG>`  | `{"server": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes log collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                     |
+| パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
-| `<LOG_CONFIG>` | `{"source": "clickhouse", "service": "<SERVICE_NAME>"}` |
+| `<LOG_CONFIG>` | `{"source": "clickhouse", "service": "<サービス名>"}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][4] and look for `clickhouse` under the **Checks** section.
+[Agent の status サブコマンドを実行][4]し、**Checks** セクションで `clickhouse` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "clickhouse" >}}
 
 
-### Events
+### イベント
 
-The ClickHouse check does not include any events.
+ClickHouse チェックにはイベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "clickhouse" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 

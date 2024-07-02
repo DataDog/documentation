@@ -6,9 +6,9 @@
 - "data stores"
 - "aws"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track snapshot age, IOPS, read/write times, and more."
+"description": "スナップショットの経過時間、IOPS、読み取り/書き込み回数などを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_ebs/"
 "draft": false
 "git_integration_title": "amazon_ebs"
@@ -31,9 +31,9 @@ Amazon EBS provides persistent block storage volumes for use with Amazon EC2 ins
 
 Enable this integration to see in Datadog all your EBS metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -60,23 +60,23 @@ Configure Amazon EBS to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][6]
     - [Add a manual trigger on the CloudWatch Log Group][7]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_ebs" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The Amazon EBS integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon EBS integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

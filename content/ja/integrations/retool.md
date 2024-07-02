@@ -24,7 +24,7 @@
   "support_email": support@retool.com
 "categories":
 - developer tools
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/retool/README.md"
 "display_on_public_website": true
@@ -67,35 +67,35 @@ Retool helps developers create custom apps that embed directly into a Datadog da
 
 ![Screenshot1][1]
 
-### Metrics
+### メトリクス
 Datadog's embedded Retool app for Elasticsearch Management combines existing visibility into key Elasticsearch metrics and logs with the power to manage clusters, accounts, and more without leaving your Datadog dashboard.
 
-### Dashboards
+### ダッシュボード
 Retool built an embedded app for Elasticsearch Management. You can already monitor Elasticsearch metrics, traces, and logs in Datadog today. With the embedded app, developers can take action on their rich Datadog insights directly in the Datadog dashboard. These actions include:
 
 - Add a new index with shards and replicas
 - Manage nodes by rerouting shards and excluding indexes
 - Create new snapshots and restore indexes
 
-## Setup
+## セットアップ
 The Retool integration comes with an out-of-the-box dashboard, which allows you to sign up or log into Retool through an iframe.
 
 You are prompted to connect to your ElasticSearch cluster with a connection string. This app is automatically added to your instance. You then need to click resources in the navbar and create a new Datadog resource (adding your api and application keys). Finally connect your Datadog resource to the two Datadog queries by selecting it from the select resource dropdown in the query editor.
 
 Return to Datadog to see the app up and running in your dashboard. You can edit the app anytime to customize it for your DevOps workflows.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 The Retool integration does not include any metrics at this time.
 
-### Events
+### イベント
 The Retool integration does not include any events at this time.
 
-### Service Checks
+### サービスチェック
 The Retool does not include any service checks at this time.
 
-## Troubleshooting
+## トラブルシューティング
 Need help? Contact [Datadog support][2]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/retool/images/1.png

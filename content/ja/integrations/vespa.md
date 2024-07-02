@@ -22,7 +22,7 @@
   "support_email": dd@vespa.ai
 "categories":
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/vespa/README.md"
 "display_on_public_website": true
@@ -61,11 +61,11 @@ Gather metrics from your [Vespa][1] system in real time to:
 - Visualize and monitor Vespa state and performance
 - Alert on health and availability
 
-## Setup
+## セットアップ
 
 The Vespa check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Vespa check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -77,7 +77,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Vespa ch
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 To configure the Vespa check:
 
@@ -93,21 +93,21 @@ To configure the Vespa check:
 
 Run the [Agent's status subcommand][9] and look for `vespa` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "vespa" >}}
 
 
-### Events
+### イベント
 
 The Vespa integration does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "vespa" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][12].
 

@@ -26,7 +26,7 @@ algolia:
   tags: [network device monitoring]
 ---
 
-## Overview
+## 概要
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/673243317/rendition/1080p/file.mp4?loc=external&signature=cadf7020caa33b97a62ecb01216b83e5d04b35a4ca3a1b8b0a22323b9e79d0c3" poster="/images/poster/ndm.png" >}}
 
@@ -34,39 +34,39 @@ algolia:
 
 Network Device Monitoring gives you visibility into your on-premises and virtual network devices, such as routers, switches, and firewalls. Automatically discover devices on any network, and start collecting metrics like bandwidth utilization, volume of bytes sent, and determine whether devices are up/down.
 
-## Getting started
+## はじめに
 
-1. Install the Datadog Agent (usually on a server that is not the monitored device).
-2. Configure the SNMP integration by either [monitoring individual devices][1], or using [device autodiscovery][2].
-3. Start monitoring your entire network infrastructure on the [Network Devices][3] page.
-4. View metrics collected on Datadog's out-of-the-box dashboards:
-    - [Overview of all devices monitored][4]
-    - [Across the performance on all interfaces][5]
-5. Catch issues before they arise with proactive monitoring on any [SNMP metric][6].
+1. Datadog Agent をインストールします (通常、監視対象デバイスではないサーバーにインストールします)。
+2. [個々のデバイスの監視][1]または[デバイスのオートディスカバリー][2]のいずれかで、SNMP インテグレーションを構成します。
+3. [ネットワークデバイス][3]ページで、ネットワークインフラストラクチャー全体の監視を開始します。
+4. Datadog のすぐに使えるダッシュボードで収集されたメトリクスを表示します。
+    - [監視対象のデバイス一覧][4]
+    - [すべてのインターフェイスのパフォーマンス全体][5]
+5. [SNMP メトリクス][6]の積極的な監視で問題が発生する前に把握します。
 6. Optionally, configure the Agent to collect specific metrics and tags by creating [device profiles][224] directly in the Datadog app.
 
-## Supported devices
+## サポートされるデバイス
 
-### Generic profile
+### 一般的なプロファイル
 
-The generic profile collects metrics for all devices not supported by a vendor profile. Metrics include TCP, UDP, IP, and interface metrics such as bandwidth utilization, volume sent/received, etc.
+一般的なプロファイルはベンダープロファイルでサポートされないデバイスのメトリクスを収集します。メトリクスには、TCP、UDP、IP の他、帯域幅使用率や送受信量などのインターフェイスメトリクスが含まれます。
 
 ### SD-WAN
 
-Datadog provides SD-WAN (Software-Defined Wide Area Network) monitoring for select vendors. SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). It is mainly used to interconnect remote offices and data centers across different transports (MPLS, Broadband, 5G, and so on). SD-WAN benefits from automatic load balancing and failure detection across these transports. 
+Datadog は、特定のベンダー向けに SD-WAN (Software-Defined Wide Area Network) モニタリングを提供しています。SD-WAN は、SDN (Software-Defined Networking) の原則を使用して、広域ネットワーク (WAN) のパフォーマンスを管理・最適化するネットワーキング技術の一種です。主に、異なるトランスポート (MPLS、ブロードバンド、5G など) 間でリモートオフィスやデータセンターを相互接続するために使用されます。SD-WAN の利点は、これらのトランスポート間での自動負荷分散と障害検出です。
 
-Datadog supports the following vendors for SD-WAN network monitoring:
+Datadog は、SD-WAN ネットワークモニタリングのために以下のベンダーをサポートしています。
 
 - [Meraki SD-WAN][7] 
 - [Cisco SD-WAN][223] (public beta)
 
-### Vendor profiles
+### ベンダープロファイル
 
-The following vendor devices are supported with dedicated profiles. If a vendor or device type is supported, but the specific model isn't supported, you can:
+以下のベンダーのデバイスは、専用のプロファイルでサポートされます。特定のベンダーやデバイスタイプがサポートされているが、特定のモデルがサポートされていない場合は、
   - Customize your own YAML profile (see the [NDM troubleshooting FAQ page][8] for guidance).
   - Create new [profiles][9] to start monitoring new device models.
 
-| Vendor | Config files |
+| ベンダー | コンフィギュレーションファイル |
 | ---  | ----------- |
 | 3com | [3com.yaml][10] <br> |
 | TP-Link | [tp-link.yaml][11] <br> |
@@ -85,7 +85,7 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 | Brocade | [brocade.yaml][31] <br> |
 | Brother | [brother.yaml][32] <br> |
 | [Chatsworth][201] | [chatsworth_pdu.yaml][33] <br> |
-| Checkpoint | [checkpoint.yaml][34] <br>[checkpoint-firewall.yaml][35] <br> |
+| チェックポイント | [checkpoint.yaml][34] <br>[checkpoint-firewall.yaml][35] <br> |
 | Chrysalis | [chrysalis.yaml][36] <br> |
 | [Cisco][202] </br> [Cisco ACI][203] </br> [Cisco ASA][204] </br> Cisco ASR </br> Cisco Catalyst </br> Cisco ICM </br> [Cisco ISE][205] </br> Cisco ISR </br> Cisco Nexus </br> Cisco SB </br> Cisco UCS  </br> Cisco WLC | [cisco-3850.yaml][37]</br> [cisco-asa.yaml][38]  </br>[cisco-asa-5525.yaml][39]  </br>[cisco-asr.yaml][40]  </br>[cisco-catalyst-wlc.yaml][41]  </br>[cisco-catalyst.yaml][42]  </br>[cisco-csr1000v.yaml][43]  </br>[cisco_icm.yaml][44]  </br>[cisco-ise.yaml][45]  </br>[cisco-isr.yaml][46]  </br>[cisco_isr_4431.yaml][47]  </br>[cisco-nexus.yaml][48]  </br>[cisco-sb.yaml][49]  </br>[cisco-ucs.yaml][50]  </br>[_cisco-metadata.yaml][51]  </br>[_cisco-wlc.yaml][52] </br>[cisco-legacy-wlc.yaml][53]  </br>[cisco_uc_virtual_machine.yaml][54] |
 | Citrix | [citrix.yaml][55] <br> |
@@ -143,7 +143,7 @@ The following vendor devices are supported with dedicated profiles. If a vendor 
 
 
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

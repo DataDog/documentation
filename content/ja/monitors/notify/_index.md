@@ -15,26 +15,26 @@ further_reading:
   text: Manage monitors
 ---
 
-## Overview
+## 概要
 
-Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Configure notifications and automations** section.
+通知は、チームに問題を知らせ、トラブルシューティングをサポートするモニターの重要なコンポーネントです。[モニターを作成する][1]場合は、**Configure notifications and automations** (通知と自動化の構成) セクションに追加します。
 
-## Configure notifications and automations
+## 通知と自動化の構成
 
-Use the **Configure notifications and automations** section to:
-- Send notifications to your team through email, Slack, PagerDuty, and other integrations. 
-- Trigger a workflow or create a workflow from a monitor.
-- Add a case to your monitor.
+**Configure notifications and automations** (通知と自動化の構成) セクションを使用して、以下を行います。
+- メール、Slack、PagerDuty、その他のインテグレーションでチームに通知を送ります。
+- ワークフローをトリガーしたり、モニターからワークフローを作成します。
+- モニターにケースを追加します。
 
-### Title
+### タイトル
 
 Add a unique title to your monitor (required). For multi alert monitors, some tags identifying your triggering scope are automatically inserted. Additionally, you can use [tag variables][12].
 
-### Message
+### メッセージ
 
-The message field allows standard [Markdown formatting][3] and [variables][4]. Use [conditional variables][5] to modulate the notification text sent to different contacts with [@notifications](#notifications).
+メッセージフィールドでは、標準の[マークダウンフォーマット][3]と[変数][4]を使用できます。[@通知](#notifications)を使用して別の連絡先に送信される通知テキストを調整するには、[条件付き変数][5]を使用します。
 
-A common use-case for the monitor message is to include a step-by-step way to resolve the problem, for example:
+モニターメッセージの一般的な使用例は、問題を解決するための段階的な方法を含めることです。次に例を示します。
 
 ```text
 Steps to free up disk space:
@@ -44,54 +44,53 @@ Steps to free up disk space:
 4. Remove duplicate files
 ```
 
-### Notifications
+### 通知
 
-Use an `@notification` to add a team member, integration, workflow, or case to your notification. As you type, Datadog recommends existing options in a drop-down menu. Click an option to add it to your notification. Alternatively, click **@ Add Mention**, **Add Workflow**, or **Add Case**.
+`@notification` を使用して、チームメンバー、インテグレーション、ワークフロー、またはケースを通知に追加します。入力すると、Datadog がドロップダウンメニューで既存のオプションをお勧めします。オプションをクリックして、通知に追加します。または、**@ Add Mention**、**Add Workflow**、**Add Case** をクリックします。
 
-**Note**: An `@notification` must have a space between it and the last line character, for example:
+**注**: `@通知` は最後の行文字との間にスペースが必要です。次に例を示します。
 
 ```text
 Disk space is low @ops-team@company.com
 ```
-`@notifications` can be sent to:
+`@通知`は以下に送信できます。
 
 #### Email
 
 {{% notifications-email %}}
 
-#### Teams
+#### チーム
 
-If a notification channel is set, you can route notifications to a specific Team. Monitor alerts targeting @team-handle are redirected to the selected communication channel. For more information on setting a notification channel to your Team, see the [Teams][6] documentation.
+通知チャンネルが設定されている場合、通知を特定のチームにルーティングできます。@team-handle をターゲットにしたモニターアラートは、選択した通信チャンネルにリダイレクトされます。チームへの通知チャンネルの設定の詳細については、[Teams][6] ドキュメントを参照してください。
 
-#### Integrations
+#### インテグレーション
 
 {{% notifications-integrations %}}
 
-### Workflows
-You can trigger a [workflow automation][7] or create a new workflow from a monitor.
+### ワークフロー
+[ワークフローの自動化][7]をトリガーしたり、モニターから新しいワークフローを作成することができます。
 
-**To add an existing workflow to a monitor**:
-1. In the message section, add the full workflow mention name:
-   - The mention name should start with `@workflow-`. For example, `@workflow-my-workflow`
-   - To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. You can use message template variables as trigger variables. For example, `@workflow-my-workflow(hostname=host.name)`
+**既存のワークフローをモニターに追加するには**:
+1. メッセージセクションに、ワークフローの完全なメンション名を追加します。
+   - メンション名は `@workflow-` で始まる必要があります。例えば、`@workflow-my-workflow` のようになります。
+   - ワークフローにトリガー変数を渡すには、カンマ区切りのリストで `@workflow-name(key=value, key=value)` という構文を使います。メッセージテンプレート変数をトリガー変数として使用することができます。例えば、`@workflow-my-workflow(hostname=host.name)` とします。
 
-1. Alternatively, click **Add Workflow** and search for it in the drop-down menu.
+1. または、**Add Workflow** をクリックし、ドロップダウンメニューで検索します。
 
-For more information on triggering a workflow, see [Trigger a workflow][8].
+ワークフローのトリガーについては、[ワークフローをトリガーする][8]を参照してください。
 
-**To create a workflow**:
-1. Click **Add Workflow**.
-1. Click the **+** icon and select a Blueprint, or select **Start From Scratch**.
-   {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
+**ワークフローを作成するには**:
+1. **Add Workflow** をクリックします。
+1. **+** アイコンをクリックし、ブループリントを選択するか、**Start From Scratch** を選択します。
+   {{< img src="/monitors/notifications/create-workflow.png" alt="+ ボタンをクリックして、新しいワークフローを追加する" style="width:90%;">}}
 
-For more information on building a workflow, see [Build workflows][9].
+ワークフローの構築については、[ワークフローを構築する][9]を参照してください。
 
-### Priority
+### 優先度
 
-Add a priority (optional) associated with your monitors. Values range from P1 through P5, with P1 being the highest priority and the P5 being the lowest.
-To override the monitor priority in the notification message, use `{{override_priority 'Pi'}}` where `Pi` is between P1 and P5.
+モニターに関連付けられた優先度 (オプション) を追加します。値の範囲は P1 から P5 で、P1 が最高の優先度、P5 が最低の優先度です。通知メッセージでモニターの優先度を上書きするには、`{{override_priority 'Pi'}}` を使用し、`Pi` を P1 から P5 の間で設定します。
 
-For example, you can set different priorities for `alert` and `warning` notifications:
+たとえば、`alert` および `warning` 通知を異なる優先度で設定できます。
 
 ```
 {{#is_alert}}
@@ -104,109 +103,109 @@ For example, you can set different priorities for `alert` and `warning` notifica
 {{/is_warning}}
 ```
 
-### Toggle additional content
+### 追加コンテンツのトグル
 
-Monitor notifications include content such as the monitor's query, the @-mentions used, metric snapshots (for metric monitors), and links back to relevant pages in Datadog. You have the option to choose which content you would like to include or exclude from notifications for individual monitors.
+モニター通知には、モニターのクエリ、使用された @メンション、メトリクススナップショット (メトリクスモニターの場合)、Datadog の関連ページへのリンクなどのコンテンツが含まれます。個々のモニターの通知に含める、または除外するコンテンツを選択するオプションがあります。
 
-<div class="alert alert-warning">Distribution metrics with percentile aggregators (such as `p50`, `p75`, `p95`, or `p99`) do not generate a snapshot graph in notifications. </div>
+<div class="alert alert-warning">パーセンタイルアグリゲーターを持つディストリビューションメトリクス (`p50`、`p75`、`p95`、`p99` など) は、通知でスナップショットグラフを生成しません。 </div>
 
-{{< img src="monitors/notifications/monitor_notification_presets.png" alt="Set a monitor preset" style="width:70%;" >}}
+{{< img src="monitors/notifications/monitor_notification_presets.png" alt="モニタープリセットを設定する" style="width:70%;" >}}
 
-The options are:
+オプションは、以下の通りです。
 
-- **Default**: No content is hidden.
-- **Hide Query**: Remove the monitor's query from the notification message.
-- **Hide Handles**: Remove the @-mentions that are used in the notification message.
-- **Hide All**: Notification message does not include query, handles, any snapshots (for metric monitors), or additional links in footers.
+- **Default**: コンテンツが隠れることはありません。
+- **Hide Query**: 通知メッセージからモニターのクエリを削除します。
+- **Hide Handles**: 通知メッセージで使用されている @メンションを削除します。
+- **Hide All**: 通知メッセージには、クエリ、ハンドル、スナップショット (メトリクスモニター用)、フッターの追加リンクは含まれません。
 
-**Note**: Depending on the integration, some content may not be displayed by default.
+**注**: インテグレーションによっては、デフォルトで表示されないコンテンツがあります。
 
-### Metadata
+### メタデータ
 
-Add metadata (Priority, Tags, Datadog Team) to your monitor. Monitor Priority allows you to set the importance of your monitor through P-level (P1 to P5). Monitor tag--which are different from metric tags--are used in the UI to group and search for monitors. If tag policies are configured, the required tags and tag values need to be added. To learn more, see [Tag Policies][10]. Datadog Teams allows you to set a layer of ownership to this monitor and view all the monitors linked to your team. To learn more, see [Datadog Teams][11].
+モニターにメタデータ (優先度、タグ、Datadog チーム) を追加します。モニターの優先度を P レベル (P1 から P5) で設定できます。モニタータグ (メトリクスタグとは異なります) は、UI でモニターをグループ化して検索するために使用されます。タグポリシーが構成されている場合は、必要なタグとタグ値を追加する必要があります。詳しくは、[タグポリシー][10]を参照してください。Datadog Teams を使用すると、このモニターに所有者のレイヤーを設定し、チームにリンクされているすべてのモニターを表示することができます。詳細については、[Datadog Teams][11] を参照してください。
 
-{{< img src="monitors/notifications/notifications_metadata.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:100%;" >}}
+{{< img src="monitors/notifications/notifications_metadata.png" alt="ポリシータグ構成の表示。'Policy tags' の下には、'Select value' のドロップダウンの横に、cost_center、product_id、env の 3 つのタグの例が示されています。" style="width:100%;" >}}
 
-### Renotify
+### 再通知
 
-Enable monitor renotification (optional) to remind your team that a problem is not solved.
+モニターの再通知（オプション）を有効にすると、問題の未解決をチームに知らせることができます。
 
-  {{< img src="monitors/notifications/renotify_options.png" alt="Enable renotify" style="width:90%;" >}}
+  {{< img src="monitors/notifications/renotify_options.png" alt="再通知の有効化" style="width:90%;" >}}
 
-Configure the renotify interval, the monitor states from which the monitor renotifies (within `alert`, `no data`, and `warn`) and optionally set a limit to the number of renotification messages sent.
+再通知の間隔、再通知の対象となるモニターの状態 (`alert`、`no data`、`warn`) を構成し、オプションで再通知メッセージの送信数の制限を設定します。
 
-For example, configure the monitor to `stop renotifying after 1 occurrence` to receive a single escalation message after the main alert.
-**Note:** [Attribute and tag variables][12] in the renotification are populated with the data available to the monitor during the time period of the renotification.
+例えば、`stop renotifying after 1 occurrence` (1 回発生したら再通知を停止する) ようにモニターを設定すると、メインの警告の後に 1 回のエスカレーションメッセージを受信することができます。
+**注:** 再通知の[属性とタグの変数][12]には、再通知の期間中にモニターが利用できるデータが入力されます。
 
-If renotification is enabled, you are given the option to include an escalation message that is sent if the monitor remains in one of the chosen states for the specified time period.
-
-
-The escalation message can be added in the following ways:
-
-* In the `{{#is_renotify}}` block in the original notification message (recommended).
-* In the *Renotification message* field in the `Configure notifications and automations` section.
-* With the `escalation_message` attribute in the API.
-
-If you use the `{{#is_renotify}}` block, the original notification message is also included in the renotification, so:
-
-1. Include only extra details in the `{{#is_renotify}}` block and don't repeat the original message details.
-2. Send the escalation message to a subset of groups.
-
-Learn how to configure your monitors for those use cases in the [example section][13].
+再通知が有効になっている場合、モニターが指定した時間、選択した状態のいずれかに留まっている場合に送信されるエスカレーションメッセージを含めるオプションが提供されます。
 
 
-## Define permissions and audit notifications
+エスカレーションメッセージは次の方法で追加できます。
 
-### Modifications
+* 元の通知メッセージの `{{#is_renotify}}` ブロック (推奨)。
+* `Configure notifications and automations` セクションの *Renotification message* フィールド。
+* API の `escalation_message` 属性。
 
-An [event][14] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
+`{{#is_renotify}}` ブロックを使用する場合、元の通知メッセージも再通知に含まれます。
 
-### Permissions
+1. `{{#is_renotify}}` ブロックには余分な詳細のみを含め、元のメッセージの詳細は繰り返さないでください。
+2. グループのサブセットにエスカレーションメッセージを送信します。
 
-All users can read all monitors, regardless of the role they are associated with.
+[サンプルセクション][13]で、これらのユースケースに合わせてモニターを構成する方法を学びましょう。
 
-By default, only users attached to roles with the [Monitors Write permission][15] can edit monitors. [Datadog Admin Role and Datadog Standard Role][16] have the Monitors Write permission by default. If your organization uses [Custom Roles][17], other custom roles may have the Monitors Write permission.
 
-You can further restrict your monitor by specifying a list of [roles][18] allowed to edit it. The monitor's creator can always edit the monitor.
+## 権限と監査通知の定義
 
-  {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
+### 変更
 
-Editing includes any updates to the monitor configuration, deleting the monitor, and muting the monitor for any amount of time.
+モニターが作成、変更、無音設定、または削除されるたびに[イベント][14]が生成されます。`Notify` オプションを設定して、これらのイベントをチームメンバー、チャットサービス、モニター作成者に通知します。
 
-**Note**: The limitations are applied both in the UI and API.
+### 権限
 
-For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][19].
+すべてのユーザーは、関連するロールに関係なく、すべてのモニターを読むことができます。
 
-## Test notifications
+デフォルトでは、[モニターの書き込み権限][15]を持つユーザーのみがモニターを編集できます。[Datadog Admin ロールおよび Datadog Standard ロール][16]には、デフォルトでモニターの書き込み権限があります。オーガニゼーションで[カスタムロール][17]を使用している場合、他のカスタムロールにモニターの書き込み権限が付与されていることがあります。
 
-Test notifications are supported for the [monitor types][20]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
+モニターの編集が許可される[ロール][18]のリストを指定することで、さらにモニターに制限を設定できます。モニターの作成者は、常にモニターを編集することが可能です。
 
-### Run the test
+  {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC 制限付きモニター" style="width:90%;" >}}
 
-1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
+編集には、モニターのコンフィギュレーションの更新、モニターの削除、モニターのミュート（時間の長短を問わず）などが含まれます。
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][21] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+**注**: 制限は UI と API の両方に適用されます。
 
-    {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
+モニターの RBAC 設定や、モニターを固定設定からロール制限の使用へ移行する方法について、詳しくは[モニターに RBAC を設定する方法][19]をご参照ください。
 
-3. Click **Run Test** to send notifications to the people and services listed in the monitor.
+## テスト通知
 
-### Events
+テスト通知は、ホスト、メトリクス、異常、外れ値、予測値、ログ、RUM、APM、インテグレーション (チェックのみ)、プロセス (チェックのみ)、ネットワーク (チェックのみ)、カスタムチェック、イベント、複合条件の[モニターの種類][20]でサポートされています。
 
-Test notifications produce events that can be searched within the event explorer. These notifications indicate who initiated the test in the message body with `[TEST]` in notification title.
+### テストを実行する
 
-Tag variables are only populated in the text of Datadog child events. The parent event only displays an aggregation summary.
+1. モニターを定義したら、モニターページの右下にある **Test Notifications** ボタンを使用して通知をテストします。
 
-### Variables {#variables-test-notification}
+2. テスト通知ポップアップから、テストするモニターケースを選択します。テストできるのは、アラート条件で指定されたしきい値について、モニターのコンフィギュレーションで使用可能な状態のみです。ただし、[回復しきい値][21]は例外です。これは、モニターがアラート状態でなくなったか、警告状態がなくなったときに、Datadog が回復通知を送信するためです。
 
-Message variables auto-populate with a randomly selected group based on the scope of your monitor's definition, for example:
+    {{< img src="monitors/notifications/test-notif-select.png" alt="このモニターの通知をテストする" style="width:70%;" >}}
+
+3. **Run Test** をクリックして、モニターにリストされている人とサービスに通知を送信します。
+
+### イベント
+
+テスト通知は、イベントエクスプローラー内で検索できるイベントを生成します。テストを開始したユーザーをメッセージ本文で示し、通知のタイトルに `[TEST]` が付きます。
+
+タグ変数は、Datadog 子イベントのテキストにのみ入力されます。親イベントは、集計サマリーのみを表示します。
+
+### 変数 {#variables-test-notification}
+
+メッセージ変数には、モニター定義のスコープに基づいて、ランダムに選択されたグループが自動挿入されます。例:
 
 ```text
 {{#is_alert}}
-{{host.name}} <-- will populate
+{{host.name}} <-- これが入力されます
 {{/is_alert}}
 ```
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

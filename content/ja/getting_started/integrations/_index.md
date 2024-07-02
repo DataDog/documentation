@@ -30,7 +30,7 @@ You can also build a [custom check][10] to define and send metrics to Datadog fr
 
 The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][11]. To use those integrations, download the Datadog Agent. Community-based integrations are in [integrations extras][12]. For more information on installing or managing these integrations, see the [integrations management guide][14].
 
-### Permissions
+### 権限
 
 The `manage_integrations` permission is required to interact with an Integration tile. See [RBAC roles][45] for more information.
 
@@ -38,7 +38,7 @@ The `manage_integrations` permission is required to interact with an Integration
 
 To [install the Datadog Agent][15], you need an [API key][16]. If the Agent is already downloaded, make sure to set up the API key in the `datadog.yaml` file. To use most additional Datadog functionality besides submitting metrics and events, you need an [application key][16]. You can manage your accounts API and application keys in the [API Settings page][17].
 
-### Installation
+### インストール
 
 If you want to connect with a crawler or library based integration, navigate to that provider on the [Integrations page][18] for specific instructions on how to connect. For other supported integrations, install the [Datadog Agent][15]. Most integrations are supported for the containerized Agents: [Docker][19] and [Kubernetes][20]. After you've downloaded the Agent, go to the [Integrations page][18] to find specific configuration instructions for individual integrations.
 
@@ -140,7 +140,7 @@ After your first integration is set up, [explore all of the metrics][31] being s
 
 Also check out Datadog [Logs management][34], [APM][35], and [Synthetic Monitoring][36] solutions.
 
-## Troubleshooting
+## トラブルシューティング
 
 The first step to troubleshooting an integration is to use a plugin in your code editor or use one of the many online tools to verify that the YAML is valid. The next step is to run through all of the [Agent troubleshooting][37] steps.
 

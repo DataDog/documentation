@@ -5,7 +5,7 @@ aliases:
 - /continuous_integration/dora_metrics/setup/
 further_reading:
 - link: /dora_metrics/
-  tag: Documentation
+  tag: ドキュメント
   text: Learn about DORA Metrics
 ---
 
@@ -15,9 +15,9 @@ further_reading:
 
 <div class="alert alert-warning">DORA Metrics is in public beta.</div>
 
-## Overview
+## 概要
 
-The four DORA Metrics are calculated based on two types of events:
+4 つの DORA メトリクスは、以下の 2 種類のイベントに基づいて計算されます。
 
 - [**Deployment events**][8]: Indicate that a new deployment has occurred for a service in a specific environment. 
 - [**Incident events**][9]: Indicate that a new failure has occurred for a service in a specific environment.
@@ -38,11 +38,11 @@ Each event type supports different data sources.
   {{< nextlink href="/dora_metrics/failures/incident_api" >}}Incident Event API{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Limitations
+## 制限
 - When you first select a data source option (such as APM Deployment Tracking or PagerDuty), DORA Metrics begins populating data from that point forward. If you switch from source A to source B, then back to source A, the historical data from source A is only available from the time it was first selected. 
 - Deployments or incidents of the same service cannot occur at the same second.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

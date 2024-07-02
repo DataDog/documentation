@@ -1,5 +1,5 @@
 ---
-title: Multistep API Testing
+title: マルチステップ API テスト
 kind: documentation
 description: Chain requests to monitor sophisticated transactions on your key services.
 further_reading:
@@ -19,7 +19,7 @@ further_reading:
   tag: Documentation
   text: Learn about Synthetic test monitors
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test"
-  tag: External Site
+  tag: 外部サイト
   text: Create and manage Synthetic Multistep API Tests with Terraform
 ---
 
@@ -157,7 +157,7 @@ A test is considered `FAILED` if a step does not satisfy one or several assertio
 
 For HTTP steps, see [common HTTP step failures][15]. For gRPC steps, see [common gRPC step failures][16].
 
-## Permissions
+## 権限
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][17] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][17].
 

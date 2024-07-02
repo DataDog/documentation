@@ -6,30 +6,30 @@
 - "developer tools"
 - "issue tracking"
 - "source control"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Connect GitHub with Datadog to monitor commits and pull requests that affect your services' performance."
+"description": "GitHub と Datadog を接続し、サービスのパフォーマンスに影響を与えるコミットやプルリクエストを監視する"
 "doc_link": "https://docs.datadoghq.com/integrations/github/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/collect-github-audit-logs-alerts-datadog/"
-  "tag": "Blog"
-  "text": "Collect GitHub audit logs and scanning alerts with Datadog"
+  "tag": "ブログ"
+  "text": "Datadog で GitHub の監査ログを収集し、アラートをスキャンする"
 - "link": "https://www.datadoghq.com/blog/github-source-code-integration/"
-  "tag": "Blog"
-  "text": "Use Datadog's GitHub and source code integrations to streamline troubleshooting"
+  "tag": "ブログ"
+  "text": "Datadog の GitHub とソースコードのインテグレーションを使用して、トラブルシューティングを効率化する"
 - "link": "https://www.datadoghq.com/blog/github-actions-service-catalog/"
-  "tag": "Blog"
-  "text": "I use GitHub Actions for Datadog's Service Catalog, and you should, too"
+  "tag": "ブログ"
+  "text": "私は GitHub Actions を Datadog のサービスカタログに使っています。あなたもそうするべきですよ"
 - "link": "https://docs.datadoghq.com/integrations/guide/source-code-integration/"
   "tag": "Documentation"
-  "text": "Learn about the Datadog Source Code Integration"
+  "text": "Datadog のソースコードインテグレーションについて"
 - "link": "https://docs.datadoghq.com/tracing/service_catalog/setup/#store-and-edit-service-definitions-in-github"
   "tag": "Documentation"
-  "text": "Learn how to use the GitHub integration in the Service Catalog"
+  "text": "サービスカタログで GitHub インテグレーションを利用する方法について"
 - "link": "https://docs.datadoghq.com/serverless/configuration/?tab=serverlessframework#link-errors-to-your-source-code"
   "tag": "Documentation"
-  "text": "Learn how to use the GitHub integration in Serverless Monitoring"
+  "text": "サーバーレスモニタリングにおける GitHub インテグレーションの使用方法について"
 "git_integration_title": "github"
 "has_logo": true
 "integration_id": "github"
@@ -53,7 +53,7 @@ Set up the GitHub integration to configure GitHub Apps and GitHub Actions, secur
 
 You can use the Datadog [source code integration][1] to see code snippets in your stack traces, link stack traces to source code in GitHub for your [Lambda functions][2], show test result summaries from pull request comments in [CI Visibility][3], and access multiple service definitions in GitHub from the [Service Catalog][4].
 
-## Setup
+## セットアップ
 
 <div class="alert alert-info">
 Follow these instructions to install GitHub Apps and grant permissions to Datadog. Depending on the permissions granted, you can set up the source code integration, see code snippets in stack traces, view collected telemetry such as audit logs, access GitHub Actions in CI Visibility, and more.
@@ -76,7 +76,7 @@ If you are an admin in your GitHub organization, you can configure GitHub Apps.
 
 Your GitHub App displays in the integration tile. To enable inline code snippets in stack traces, see [Setting Up Source Code Integration][1].
 
-### Notebooks
+### ノートブック
 
 If you have granted your GitHub App read permissions for issues and pull requests, GitHub issues and pull requests automatically generate a preview hoverbox with details including the commit history, author, and date in [Notebooks][7].
 
@@ -96,9 +96,9 @@ Audit logs encompass all activities and events across a GitHub organization. Upo
 
 Follow the instructions on [Setting up streaming to Datadog][8] in the GitHub documentation to forward your audit logs to Datadog. For more information about Audit Logs, see the GitHub documentation for [Audit log actions][9].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The GitHub integration collects Code Scan Alert and Secret Scan Alert metrics. These metrics provide an overview of the organization's Alert state by categorizing their state, repo, and secret type. They also provide long-term insights on Alert trends and their general progress.
 
@@ -106,7 +106,7 @@ The GitHub integration collects Code Scan Alert and Secret Scan Alert metrics. T
 
 To start collecting these metrics, select the respective permissions for read access upon the application's installation. To opt-out of Code Scan or Secret Scan metrics, find the corresponding organization in the **Telemetery** tab on the integration tile, click the toggle for the respective sections, and click **Update Account**.
 
-### Events
+### イベント
 
 <div class="alert alert-info">
 Follow these instructions to configure webhooks in GitHub and Datadog, allowing events to appear in the Events Explorer.
@@ -154,11 +154,11 @@ Once you have added webhooks in the **Webhooks** tab on the integration tile, ev
 
 To filter events coming from GitHub, select **Github** in the **Source** facet menu under **Core**, or enter `source:github` in the search query. The bar chart of events automatically updates as you edit the search query.
 
-### Service Checks
+### サービスチェック
 
 The GitHub integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][62].
 

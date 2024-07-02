@@ -15,23 +15,23 @@ further_reading:
   text: Cluster Checks
 ---
 
-The Cluster Agent can dispatch out two types of checks: [endpoint checks][1] and [cluster checks][2]. The checks are slightly different. 
+Cluster Agent は[エンドポイントチェック][1]と[クラスターチェック][2]の 2 種類のチェックをディスパッチできます。チェックの内容は若干異なります。
 
-Endpoint checks are dispatched specifically to the regular Datadog Agent on the same node as the application pod endpoints. Executing endpoint checks on the same node as the application endpoint allows proper tagging of the metrics.
+エンドポイントチェックは、アプリケーションポッドのエンドポイントと同じノード上の通常の Datadog Agent に特別にディスパッチされます。アプリケーションエンドポイントと同じノード上でエンドポイントチェックを実行することで、メトリクスに適切なタグ付けを行うことができます。
 
-Cluster checks monitor internal Kubernetes services, as well as external services like managed databases and network devices, and can be dispatched much more freely.
-Using Cluster Check Runners is optional. When you use Cluster Check Runners, a small, dedicated set of Agents runs the cluster checks, leaving the endpoint checks to the normal Agent. This strategy can be beneficial to control the dispatching of cluster checks, especially when the scale of your cluster checks increases.
+クラスターチェックは、Kubernetes の内部サービスだけでなく、マネージドデータベースやネットワークデバイスなどの外部サービスも監視し、より自由にディスパッチできます。
+クラスターチェックランナーの使用はオプションです。クラスターチェックランナーを使用すると、少数の専用 Agent セットがクラスターチェックを実行し、エンドポイントチェックは通常の Agent に任せます。この戦略は、特にクラスターチェックの規模が大きくなった場合に、クラスターチェックのディスパッチを制御するのに有益です。
 
-## Set up
+## セットアップ
 
-First, [deploy the Cluster Agent][3].
+まず、[Cluster Agent をデプロイ][3]します。
 
-Then, deploy the cluster check runner using either [Datadog Operator][4] or [Helm][5]:
+次に、[Datadog Operator][4] または [Helm][5] を使用してクラスターチェックランナーをデプロイします。
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Using the Operator, you can launch and manage all of these resources with a single manifest. For example:
+Operator を使用することで、単一のマニフェストでこれらのリソースすべてをローンチおよび管理することができます。例:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -53,26 +53,26 @@ spec:
       replicas: 2
 ```
 
-Deploy these resources into your cluster:
+リソースをクラスターにデプロイします。
 
 ```
 kubectl apply -f datadog-agent-with-dca-clusterchecksrunner.yaml
 ```
 
-If you see the following output, it confirms the configuration was applied successfully:
+以下のような結果が表示された場合、コンフィギュレーションは正常に適用されています。
 
 ```
 datadogagent.datadoghq.com/datadog created
 ```
 
-See the [Datadog Operator repo][1] for more information about the Datadog Operator.
+Datadog Operator についての詳細は [Datadog Operator リポジトリ][1]を参照してください。
 
 
 [1]: https://github.com/DataDog/datadog-operator
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-You can update the relevant sections of the chart to enable cluster checks, the Cluster Agent, and the cluster check runner at the same time. For example:
+チャートの関連するセクションを更新してクラスターチェック、Cluster Agent, クラスターチェックランナーを同時に有効化することができます。例:
 
 ```yaml
 datadog:
@@ -93,7 +93,7 @@ clusterChecksRunner:
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Both the Datadog Operator and the Helm chart use `podAntiAffinity` to avoid having multiple cluster check runners on the same node. This is important because the Cluster Agent identifies the cluster check runners by their node names. Using `podAntiAffinity` avoids having name collisions.
+**注**: Datadog Operator および Helm チャートは、どちらも `podAntiAffinity` を使用して複数のクラスターチェックランナーが同じノードに適用されるのを回避しています。Cluster Agent はノード名でクラスターチェックを識別するため、これは重要です。`podAntiAffinity` を使用することで名前の衝突を避けることができます。
 
 
 [1]: https://docs.datadoghq.com/agent/cluster_agent/endpointschecks/

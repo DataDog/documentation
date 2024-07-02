@@ -26,7 +26,7 @@
 "categories":
 - log collection
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/ambari/README.md"
 "display_on_public_website": true
@@ -61,28 +61,28 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Ambari][1] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [Ambari][1] を監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Ambari check is included in the [Datadog Agent][2] package. No additional installation is needed on your server.
+Ambari チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `ambari.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Ambari performance data. See the [sample ambari.d/conf.yaml][1] for all available configuration options.
+1. Ambari のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `ambari.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル ambari.d/conf.yaml][1] を参照してください。
 
    ```yaml
    init_config:
@@ -94,19 +94,19 @@ To configure this check for an Agent running on a host:
      - url: localhost
    ```
 
-2. [Restart the Agent][2].
+2. [Agent を再起動します][2]。
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Edit your `ambari.d/conf.yaml` by uncommenting the `logs` lines at the bottom. Update the logs `path` with the correct path to your Ambari log files.
+2. 下部にある `logs` 行のコメントを解除して、`ambari.d/conf.yaml` を編集します。ログの `path` を Ambari ログファイルの正しいパスで更新してください。
 
     ```yaml
       logs:
@@ -122,73 +122,73 @@ _Available for Agent versions >6.0_
       ...
     ```
 
-3. [Restart the Agent][2].
+3. [Agent を再起動します][2]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/ambari/datadog_checks/ambari/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                        |
+| パラメーター            | 値                        |
 | -------------------- | ---------------------------- |
 | `<INTEGRATION_NAME>` | `ambari`                     |
-| `<INIT_CONFIG>`      | blank or `{}`                |
+| `<INIT_CONFIG>`      | 空白または `{}`                |
 | `<INSTANCE_CONFIG>`  | `{"url": "http://%%host%%"}` |
 
-##### Log collection
+##### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                                                                                                                                                                             |
+| パラメーター      | 値                                                                                                                                                                                             |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<LOG_CONFIG>` | `{"source": "ambari", "service": "<SERVICE_NAME>", "log_processing_rules":{"type":"multi_line","name":"new_log_start_with_date","pattern":"\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"}}` |
+| `<LOG_CONFIG>` | `{"source": "ambari", "service": "<サービス名>", "log_processing_rules":{"type":"multi_line","name":"new_log_start_with_date","pattern":"\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])"}}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [2]: https://docs.datadoghq.com/agent/kubernetes/log/
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][3] and look for `ambari` under the Checks section.
+[Agent の status サブコマンドを実行][3]し、Checks セクションで `ambari` を探します。
 
-## Data Collected
+## 収集データ
 
-This integration collects for every host in every cluster the following system metrics:
+このインテグレーションは、以下のシステムメトリクスをすべてのクラスター内のホストごとに収集します。
 
 - boottime
 - cpu
 - disk
 - memory
 - load
-- network
+- ネットワーク
 - process
 
-If service metrics collection is enabled with `collect_service_metrics` this integration collects for each included service component the metrics with headers in the inclusion list.
+`collect_service_metrics` を使用してサービスメトリクスの収集が有効にされている場合、このインテグレーションは、含まれるサービスコンポーネントごとに、インクルードリスト内のヘッダーを持つメトリクスを収集します。
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "ambari" >}}
 
 
-### Events
+### イベント
 
-Ambari does not include any events.
+Ambari には、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "ambari" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][4].
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
 

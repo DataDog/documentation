@@ -23,87 +23,87 @@ products:
 
 {{< product-availability >}}
 
-## Overview
+## 概要
 
-When [creating a new detection rule or modifying an existing one][1], use [template variables](#template-variables) (such as attributes and signal tags) and [conditional variables](#conditional-variables) to customize a rule's notification message. When a signal is generated from the rule, the variables are populated with values related to that signal. 
+新しい検出ルールを作成したり、既存のルールを変更したりする場合][1]、[テンプレート変数](#template-variables) (属性やシグナルタグなど) と[条件変数](#conditional-variables)を使用して、ルールの通知メッセージをカスタマイズします。ルールからシグナルが生成されると、そのシグナルに関連する値が変数に入力されます。
 
-## Template Variables
+## テンプレート変数
 
-Use template variables to inject dynamic context from triggered logs or traces directly into a security signal and its associated notifications.
+テンプレート変数を使用して、トリガーされたログやトレースから動的なコンテキストをセキュリティシグナルと関連する通知に直接注入することができます。
 
-The following variables are available:
+以下の変数が利用可能です。
 
-| Variable                                           | Description                                                                                   |
+| 変数                                           | 説明                                                                                   |
 | -------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `{{severity}}`                                     | The severity of the triggering rule case (integer, 0-4).                                      |
-| `{{timestamp}}`                                    | Time the signal was created. For example, `Mon Jan 01 00:00:00 UTC 1970`.                     |
-| `{{timestamp_epoch}}`                              | Time the signal was created, in milliseconds since midnight, January 1, 1970.                 |
-| `{{first_seen}}`                                   | Time the signal was first seen. For example, `Mon Jan 01 00:00:00 UTC 1970`.                  |
-| `{{first_seen_epoch}}`                             | Time the signal was first seen, in milliseconds since midnight, January 1, 1970.              |
-| `{{last_seen}}`                                    | Time the signal was most recently triggered. For example, `Mon Jan 01 00:00:00 UTC 1970`.     |
-| `{{last_seen_epoch}}`                              | Time the signal was most recently triggered, in milliseconds, since midnight, January 1, 1970.|
-| `{{rule_name}}`                                    | Name of the associated rule.                                                                  |
-| `{{case_name}}`                                    | Name of the triggering rule case.                                                             |
+| `{{severity}}`                                     | トリガーとなるルールケースの重大度 (整数、0-4)。                                      |
+| `{{timestamp}}`                                    | シグナルが作成された時間。例: `Mon Jan 01 00:00:00 UTC 1970`                     |
+| `{{timestamp_epoch}}`                              | シグナルが作成された時間。1970 年 1 月 1 日午前 0 時からのミリ秒単位。                 |
+| `{{first_seen}}`                                   | シグナルが最初に観測された時間。例: `Mon Jan 01 00:00:00 UTC 1970`                  |
+| `{{first_seen_epoch}}`                             | シグナルが最初に観測された時間。1970 年 1 月 1 日午前 0 時からのミリ秒単位。              |
+| `{{last_seen}}`                                    | シグナルが直近でトリガーされた時間。例: `Mon Jan 01 00:00:00 UTC 1970`     |
+| `{{last_seen_epoch}}`                              | シグナルが直近でトリガーされた時間。1970 年 1 月 1 日午前 0 時からのミリ秒単位。|
+| `{{rule_name}}`                                    | 関連するルールの名前。                                                                  |
+| `{{case_name}}`                                    | トリガーとなるルールケースの名前。                                                             |
 | `{{events_matched}}`                               | Number of events that have matched the associated rule.                                       |
 | `{{events_matched_per_query.<name_of_the_query>}}` | Number of events that have matched the associated rule query `<name_of_the_query>`.           |
 
 When a large number of logs match a rule, the rule's title and message are not rendered for every new log. In these cases, the rendered values of `{{events_matched}}` and `{{events_matched_per_query.<name_of_the_query>}}` could be below the values displayed in the Overview tab of the signal's side panel.
 
-### Dynamic links
+### ダイナミックリンク
 
-Use template variables to dynamically link to a related resource for your investigation. 
+テンプレート変数を使用して、調査のための関連リソースに動的にリンクします。
 
-For example, if a signal detects a suspicious user login, use `{{@user.id}}` to create a dynamic link to another resource:
+例えば、シグナルが疑わしいユーザーのログインを検出した場合、`{{@user.id}}` を使って別のリソースへのダイナミックリンクを作成します。
 
 ```
 * [Investigate user in the authentication dashboard](https://app.datadoghq.com/example/integration/security-monitoring---authentication-events?tpl_var_username={{@usr.id}})
 ```
 
-Or, if a signal is tagged with a specific service, use the `{{@service}}` variable to create a dynamic link:
+また、シグナルが特定のサービスとタグ付けされている場合、`{{@service}}` 変数を使用して動的なリンクを作成します。
 
 ```
 * [Investigate service in the services dashboard](https://app.datadoghq.com/example/integration/application-security---service-events?tpl_var_service={{@service}})
 ```
 
-### Evaluation of numerical values
+### 数値の評価
 
-For template variables that return numerical values, use `eval` to perform mathematical operations or change the value's format. For more information, see [Template Variable Evaluation][2].
+数値を返すテンプレート変数では、数学的な演算を行ったり、値の形式を変更したりするために `eval` を使用します。より詳細な情報は、[テンプレート変数の評価][2]を参照してください。
 
 ### Epoch
 
-Epoch template variables create a human-readable string or math-friendly number within a notification. For example, use values such as `first_seen`, `last_seen`, or `timestamp` (in milliseconds) within a function to receive a readable string in a notification. For example:
+Epoch テンプレート変数は、通知内で人間が読みやすい文字列や数学に適した数値を作成します。例えば、関数の中で `first_seen`、`last_seen`、`timestamp` (ミリ秒単位) などの値を使用すると、通知内で読みやすい文字列を受け取ることができます。例:
 
 ```
 {{eval "first_seen_epoch-15*60*1000"}}
 ```
 
-For more information on the `eval` function, see [Template Variable Evaluation][2].
+`eval` 関数の詳細については、[テンプレート変数の評価][2]を参照してください。
 
-### Local time
+### ローカルタイム
 
-Use the `local_time` function to add another date in your notification in the time zone of your choice. This function transforms a date into its local time: `{{local_time "time_variable" "timezone"}}`.
+`local_time` 関数を使うと、通知の中に好きなタイムゾーンで別の日付を追加することができます。この関数は、日付をローカルタイムに変換します: `{{local_time "time_variable" "timezone"}}`
 
-For example, to add the last triggered time of the signal in the Tokyo time zone in your notification, include the following in the notification message:
+例えば、東京のタイムゾーンで最後にトリガーされたシグナルの時刻を通知に追加するには、通知メッセージに次のように記述します。
 
 ```
 {{local_time "last_triggered_at" "Asia/Tokyo"}}
 ```
 
-The result is displayed in the ISO 8601 format: `yyyy-MM-dd HH:mm:ss±HH:mm`, for example, `2021-05-31 23:43:27+09:00`. See the [list of TZ database time zones][3], specifically the `TZ database name` column, to see the list of available time zone values.
+結果は、ISO 8601 形式 `yyyy-MM-dd HH:mm:ss±HH:mm` で表示されます。例: `2021-05-31 23:43:27+09:00`。 利用可能なタイムゾーンの値については、[tz データベースのタイムゾーンリスト][3]、特に `TZ database name` の列をご参照ください。
 
-## Attribute variables
+## 属性変数
 
 <div class="alert alert-warning">
-HIPAA-enabled Datadog organizations have access to only <a href="#template-variables">template variables</a> for security notifications. Attribute variables are not supported.
+HIPAA 対応 Datadog 組織がセキュリティ通知に関してアクセスできるのは<a href="#template-variables">テンプレート変数</a>のみです。属性変数はサポートされていません。
 </div>
 
-Use attribute variables to customize signal notifications with specific information about the triggered signal. 
+属性変数を使用して、トリガーされたシグナルに関する特定の情報を使用してシグナル通知をカスタマイズします。
 
-To see a signal's list of event attributes, click **JSON** at the bottom of the **Overview** tab in the signal's side panel. Use the following syntax to add these event attributes in your rule notifications: `{{@attribute}}`. To access inner keys of the event attributes, use JSON dot notation, for example, `{{@attribute.inner_key}})`.
+シグナルのイベント属性のリストを表示するには、シグナルのサイドパネルの **Overview** タブの下部にある **JSON** をクリックします。ルール通知にこれらのイベント属性を追加するには、構文 `{{@attribute}}` を使用します。イベント属性の内部キーにアクセスするには、JSON のドット表記を使用します (例: `{{@attribute.inner_key}})`)。
 
 If the signal's JSON does not contain an attribute that is present in the related log's JSON, use the previously outlined syntax with the attribute name from the log's JSON. This attribute is then included in both the signal's JSON and the signal notifications.
 
-The following is an example JSON object with event attributes that may be associated with a security signal:
+以下は、セキュリティシグナルに関連するイベント属性を持つ JSON オブジェクトの例です。
 
 {{< tabs >}}
 {{% tab "Cloud SIEM" %}}
@@ -126,12 +126,12 @@ The following is an example JSON object with event attributes that may be associ
 }
 ```
 
-If you use the following in the **Say what's happening** section:
+**Say what's happening** セクションで以下を使用した場合
 
 ```
 {{@usr.id}} just logged in without MFA from {{@network.client.ip}}.
 ```
-This is what the notification message looks like:
+通知メッセージはこのようなものになります。
 
 ```
 user@domain.com just logged in without MFA from 1.2.3.4.
@@ -162,13 +162,13 @@ user@domain.com just logged in without MFA from 1.2.3.4.
 }
 ```
 
-If you use the following in the Say What's Happening section:
+Say What's Happening セクションで以下を使用した場合
 
 ```
 Real routes targeted for {{@service}}.
 ```
 
-The notification shows the service name in the message as follows:
+通知には、以下のようにサービス名が表示されます。
 
 ```
 Real routes targeted for your_service_name.
@@ -177,79 +177,79 @@ Real routes targeted for your_service_name.
 {{% /tab %}}
 {{< /tabs >}}
 
-### More examples
+### その他の例
 
-Use `{{@network.client.ip}}` to display the IP address(es) associated with the signal.
+シグナルに関連する IP アドレスを表示するには、`{{@network.client.ip}}` を使用します。
 
-If a security rule detects a user logging in from an IP address known to be malicious, use the template variables `{{@usr.id}}` and `{{@network.client.ip}}` to see which user and IP address triggered the signal. For example:
+もしセキュリティルールが悪意のある IP アドレスからログインしたユーザーを検出したら、テンプレート変数 `{{@usr.id}}` と `{{@network.client.ip}}` を使って、どのユーザーと IP アドレスがシグナルを発生させたかを確認します。例:
 
 ```
 The user {{@usr.id}} just successfully authenticated from {{@network.client.ip}} which is a known malicious IP address.
 ```
-## Tag variables
+## タグ変数
 
-Use the following syntax to add a tag variable to your rule's notification message: `{{tag_name}}`. 
+ルールの通知メッセージにタグ変数を追加するには、構文 `{{tag_name}}` を使用します。
 
-For tags following the `key:value` syntax, use the variable: `{{key.name}}`. This renders the value associated with the key in the notification. For example, if a signal has the tag key `region`, use the variable `{{region.name}}` in your notification message.
+`key:value` の構文に従うタグには、変数 `{{key.name}}` を使用します。これは、キーに関連付けられた値を通知でレンダリングします。例えば、シグナルが `region` というタグキーを持っている場合、通知メッセージの中で `{{region.name}}` という変数を使用します。
 
-There is no need to use `@` to access the tag value.
+タグの値にアクセスするために `@` を使用する必要はありません。
 
-If a tag key includes a period, use brackets around the full key when using a tag variable. For example, if your tag is `dot.key.test:five`, use `{{[dot.key.test].name}}`.
+タグのキーにピリオドが含まれている場合、タグ変数を使用する際には完全なキーを括弧で囲んでください。例えば、タグが `dot.key.test:five` の場合、`{{[dot.key.test].name}}` を使用します。
 
-### Dynamic handles
+### ダイナミックハンドル
 
-Use tag variables to dynamically build notification handles and route notifications to a specific team or service based on the security signal generated.
-For example, if a signal has a `service` tag, you can have your notifications routed to different Slack channels based on the failing service:
+タグ変数を使用して、通知ハンドルを動的に構築し、生成されたセキュリティシグナルに基づいて、通知を特定のチームまたはサービスにルーティングします。
+例えば、シグナルに `service` タグがある場合、失敗したサービスに基づいて、通知を異なる Slack チャンネルにルーティングさせることができます。
 ```
 @slack-{{service.name}} There is a security issue with {{service.name}}.
 ```
 
-For example, if the signal has the `service:ad-server`, the notification is sent to the `#ad-server` Slack channel with the following content:
+例えば、シグナルに `service:ad-server` が指定されている場合、`#ad-server` Slack チャンネルに以下の内容で通知が送信されます。
 
 ```
 @slack-ad-server There is an ongoing issue with ad-server.
 ```
 
-## Conditional variables
+## 条件付き変数
 
-Conditional variables use if-else logic to display a message based on the details of the signal triggered. These variables can be used in the title or notification message.
+条件変数は、if-else ロジックを使用して、シグナルがトリガーされた詳細に基づいてメッセージを表示します。これらの変数は、タイトルや通知メッセージで使用することができます。
 
-The following conditional variables are available:
+以下の条件付き変数を使用できます。
 
-| Variable              | Description                                               |
+| 変数              | 説明                                               |
 | --------------------- | --------------------------------------------------------- |
-| `{{#is_match}}`       | The context matches the provided substring.               |
-| `{{^is_match}}`       | The context does not match the provided substring.        |
-| `{{#is_exact_match}}` | The context exactly matches the provided string.          |
-| `{{^is_exact_match}}` | The context does not exactly match the provided string.   |
-| `{{#if}}`             | The attribute exists.                                     |
+| `{{#is_match}}`       | コンテキストが指定された部分文字列と一致する。               |
+| `{{^is_match}}`       | コンテキストが指定された部分文字列と一致しない。        |
+| `{{#is_exact_match}}` | コンテキストが指定された文字列と完全に一致する。          |
+| `{{^is_exact_match}}` | コンテキストが指定された文字列と完全に一致しない。   |
+| `{{#if}}`             | 属性が存在する。                                     |
 
-Conditional variables must have an opening and closing pair with the text and @-notifications in between. For example:
+条件付き変数には、テキストと @通知の間に開始と終了のペアが必要です。例:
 ```
 {{#is_match "<tag_variable>.name" "<comparison_string>"}}
   This displays if <comparison_string> is included in <tag_variable>.
 {{/is_match}}
 ```
 
-### Examples
+### 例
 
-Use if-else logic to see if an attribute exists::
+if-else ロジックで属性が存在するかどうかを確認します。
 
 ```
 {{#if @network.client.ip}}The attribute IP attribute exists.{{/if}}
 ```
 
-Use if-else logic to see if an attribute matches a value:
+if-else ロジックで属性が値と一致するかどうかを確認します。
 
 ```
 {{#is_exact_match "@network.client.ip" "1.2.3.4"}}The ip matched.{{/is_exact_match}}
 ```
 
-## Additional information
+## 追加情報
 
-### Raw format
+### 未加工の形式
 
-Use the `{{{{raw}}}}` format if your signal notification needs to send double curly braces, such as `{{ <TEXT> }}`. For example, the following syntax:
+シグナル通知が二重中括弧、例えば `{{ <TEXT> }}` を送る必要がある場合は `{{{{raw}}}}` フォーマットを使用してください。例えば、以下の構文:
 
 ```
 {{{{raw}}}}
@@ -257,27 +257,27 @@ Use the `{{{{raw}}}}` format if your signal notification needs to send double cu
 {{{{/raw}}}}
 ```
 
-Outputs:
+出力:
 
 ```
 {{ <TEXT_1> }} {{ <TEXT_2> }}
 ```
 
-The `^|#` helpers used in conditional variables cannot be used with the `{{{{raw}}}}` format and must be removed. For instance, to output raw text with the `{{is_match}}` conditional variable, use the following template:
+条件付き変数で使用されている `^|#` ヘルパーは、`{{{{raw}}}}` 形式と共に使用できず、削除する必要があります。たとえば、`{{is_match}}` 条件付き変数を使用してテキストをそのまま出力するには、次のテンプレートを使用します。
 
 ```
 {{{{is_match "host.name" "<HOST_NAME>"}}}}
-{{ .matched }} the host name
+{{ .matched }} ホスト名
 {{{{/is_match}}}}
 ```
 
-If `host.name` matches `<HOST_NAME>`, the template outputs:
+`host.name` が `<HOST_NAME>` と一致する場合、テンプレートは次を出力します。
 
 ```
-{{ .matched }} the host name
+{{ .matched }} ホスト名
 ```
 
-### URL Encode
+### URL エンコード
 
 If your signal notification includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
 
@@ -287,7 +287,7 @@ If your signal notification includes information that needs to be encoded in a U
 https://app.datadoghq.com/services/{{urlencode "service.name"}}
 ```
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

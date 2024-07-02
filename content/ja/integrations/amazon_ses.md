@@ -5,9 +5,9 @@
 - "aws"
 - "cloud"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track email bounces, delivery attempts, rejected messages, and more."
+"description": "メールのバウンス、配信の試行、メッセージの拒否などを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_ses/"
 "draft": false
 "git_integration_title": "amazon_ses"
@@ -30,9 +30,9 @@ Amazon Simple Email Service (SES) is a cost-effective, outbound-only email-sendi
 
 Enable this integration to see in Datadog all your SES metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -64,23 +64,23 @@ Configure Amazon SES to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][7]
     - [Add a manual trigger on the CloudWatch Log Group][8]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_ses" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The Amazon Simple Email Service (SES) integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Simple Email Service (SES) integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

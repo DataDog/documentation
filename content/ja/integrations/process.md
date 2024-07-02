@@ -21,14 +21,14 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/process/README.md"
 "display_on_public_website": true
 "draft": false
-"git_integration_title": "process"
-"integration_id": "system"
-"integration_title": "Processes"
+"git_integration_title": "プロセス"
+"integration_id": "システム"
+"integration_title": "プロセス"
 "integration_version": "3.3.0"
 "is_public": true
 "manifest_version": "2.0.0"
@@ -63,13 +63,13 @@ The Process Check lets you:
 - Collect resource usage metrics for specific running processes on any host. For example, CPU, memory, I/O, and number of threads.
 - Use [Process Monitors][1] to configure thresholds for how many instances of a specific process should be running and get alerts when the thresholds aren't met (see **Service Checks** below).
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Process check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your server.
 
-### Configuration
+### 構成
 
 Unlike many checks, the Process check doesn't monitor anything useful by default. You must configure which processes you want to monitor.
 
@@ -121,21 +121,21 @@ than 30 seconds. Do not expect its value to be accurate for shorter-lived proces
 
 For the full list of metrics, see the [Metrics section](#metrics).
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "process" >}}
 
 
-### Events
+### イベント
 
 The Process Check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "process" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][11].
 

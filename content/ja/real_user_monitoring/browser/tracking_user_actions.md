@@ -109,13 +109,13 @@ The Datadog Browser SDK uses different strategies to compute click action names:
 
 2. If `data-dd-action-name` attribute or its equivalent is not set, depending on the element type, the sdk uses other attributes such as `label`, `placeholder`, `aria-label` from the element or its parents to construct the action name. If none of these attributes is found, the sdk uses the inner text as name for the action.
 
-## Send custom actions
+## カスタムアクションの送信
 
-To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user journey.
+ユーザーインタラクションのコレクションを拡張するには、`addAction` API を使用してカスタムアクションを送信します。これらのカスタムアクションは、ユーザージャーニー中に発生したイベントに関連する情報を送信します。
 
-For more information, see [Send Custom Actions][5].
+詳しくは、[カスタムアクションの送信][5]をご覧ください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

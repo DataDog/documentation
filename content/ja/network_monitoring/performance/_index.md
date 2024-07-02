@@ -28,24 +28,24 @@ further_reading:
   tag: Blog
   text: Quickstart network investigations with NPM's story-centric UX
 - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
-  tag: Blog
+  tag: ブログ
   text: Monitor DNS logs for network and security analysis
 algolia:
   tags: [npm, network performance monitoring]
 ---
 
-## Overview
+## 概要
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/670228207/rendition/1080p/file.mp4?loc=external&signature=42d4a7322017fffa6d5cc2e49ddbb7cfc4c6bbbbf207d13a5c9830630bda4ece" poster="/images/poster/npm.png" >}}
 
-Datadog Network Performance Monitoring (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog. Connection data at the IP, port, and PID levels is aggregated into application-layer dependencies between meaningful client and server endpoints, which can be analyzed and visualized through a customizable [network page][1] and [network map][2]. Use flow data along with key network traffic and DNS server metrics to:
+Datadog ネットワークパフォーマンスモニタリング (NPM) は Datadog のサービス、コンテナ、アベイラビリティーゾーン、およびその他のタグまで、ネットワークトラフィックを可視化します。IP、ポート、PID レベルの接続データは有意義なクライアントとサーバーのエンドポイント間のアプリケーションレイヤーの依存関係に集約され、カスタマイズ可能な[ネットワークページ][1]と[ネットワークマップ][2]経由で分析および可視化することができます。フローデータと主要なネットワークトラフィック、および DNS サーバーのメトリクスを使用すると以下のことが行えます。
 
-* Pinpoint unexpected or latent service dependencies
-* Optimize costly cross-regional or multi-cloud communication
-* Identify outages of cloud provider regions and third-party tools
-* Troubleshoot client-side and server-side DNS server issues
+* 予期しない、または潜在的なサービスの依存関係を特定
+* クロスリージョンやマルチクラウドなど、高コストの通信を最適化
+* クラウドプロバイダーのリージョンやサードパーティーツールの機能停止を特定
+* クライアントおよびサーバーサイドにおける、DNS サーバーに関する問題のトラブルシューティング
 
-NPM makes it simple to monitor complex networks with built in support for Linux and [Windows OS][3] as well as containerized environments that are orchestrated and [instrumented with Istio service mesh][4].
+NPM は Linux および [Windows OS][3] の組み込みサポートと、[Istio サービスメッシュのインスツルメンテーション][4]およびオーケストレーションに対応したコンテナ化環境を搭載しており、複雑なネットワークの監視をシンプルにします。
 
 Additionally, [Network path][5], a feature of NPM, is available in private beta, which allows you to see hop-by-hop traffic in your network.
 
@@ -56,7 +56,7 @@ Additionally, [Network path][5], a feature of NPM, is available in private beta,
     {{< nextlink href="monitors/types/network_performance/" >}}<u>Recommended Monitors</u>: Configure recommended NPM monitors.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

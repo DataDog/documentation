@@ -27,7 +27,7 @@
 "categories":
 - configuration & deployment
 - containers
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/helm/README.md"
 "display_on_public_website": true
@@ -70,14 +70,14 @@ This check monitors Helm deployments through the Datadog Agent.
 
 Helm supports multiple storage backends. In v3, Helm defaults to Kubernetes secrets and in v2, Helm defaults to ConfigMaps. This check supports both options.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Helm check is included in the [Datadog Agent][1] package.
 No additional installation is needed on your server.
 
-### Configuration
+### 構成
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -108,7 +108,7 @@ spec:
 {{% /tab %}}
 {{% tab "Operator (< v1.5.0)" %}}
 
-This is a cluster check. You can enable this check by providing a configuration file `helm.yaml` to the cluster Agent in your `DatadogAgent` deployment configuration.
+これはクラスターのチェックです。このチェックを有効にするには、`DatadogAgent` のデプロイメント構成でコンフィギュレーションファイル `helm.yaml` を Cluster Agent に渡します。
 
 ```
 apiVersion: datadoghq.com/v2alpha1
@@ -128,7 +128,7 @@ spec:
             - collect_events: false
 ```
 
-This check requires additional permissions bound to the Kubernetes service account used by the cluster Agent pod to access the releases stored by Helm.
+このチェックには、Helm に保存されたリリースにアクセスするために、Cluster Agent ポッドが使用する Kubernetes サービスアカウントにバインドされる追加の権限が必要です。
 
 ```
 apiVersion: rbac.authorization.k8s.io/v1
@@ -160,44 +160,44 @@ rules:
   - watch
 ```
 
-**Note**: The `ServiceAccount` subject is an example with the installation in the `default` namespace. Adjust `name` and `namespace` in accordance with your deployment.
+**注**: `ServiceAccount` のサブジェクトは `default` ネームスペースへのインストールを例に挙げています。デプロイメントに応じて `name` と `namespace` を調整してください。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][2] and look for `helm` under the Checks section.
+[Agent の status サブコマンドを実行][2]し、Checks セクションで `helm` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "helm" >}}
 
 
-### Events
+### イベント
 
-This check emits events when the `collect_events` option is set to `true`. The default is `false`.
+このチェックは、`collect_events` オプションが `true` に設定されているときにイベントを発行します。デフォルトは `false` です。
 
-When the option is enabled, the check emits events when:
-- A new release is deployed.
-- A release is deleted.
-- A release is upgraded (new revision).
-- There's a status change, for example from deployed to superseded.
+このオプションを有効にすると、次の場合にチェックがイベントを発行します。
+- 新しいリリースがデプロイされる。
+- リリースが削除される。
+- リリースがアップグレードされる (新しいリビジョン)。
+- 例えば、デプロイ済みから置き換え済みへのステータス変更があります。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "helm" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][3].
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Blog: Monitor your Helm-managed Kubernetes applications with Datadog][4]
+- [ブログ: Datadog で Helm で管理された Kubernetes アプリケーションを監視する][4]
 
 
 

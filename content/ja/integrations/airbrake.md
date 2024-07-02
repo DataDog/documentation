@@ -24,7 +24,7 @@
 - "metrics"
 - "event management"
 - "issue tracking"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -63,9 +63,9 @@ Connect Airbrake to Datadog to:
 
 {{< img src="integrations/airbrake/airbrakeevent.png" alt="airbrake" popup="true">}}
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
 Set up Airbrake integration using webhooks:
 
@@ -83,21 +83,21 @@ Set up Airbrake integration using webhooks:
 
 Go to the [Events Explorer][2] to see new errors from Airbrake.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "airbrake" >}}
 
 
-### Events
+### イベント
 
 The Airbrake integration shows errors from Airbrake as events.
 
-### Service Checks
+### サービスチェック
 
 The Airbrake integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

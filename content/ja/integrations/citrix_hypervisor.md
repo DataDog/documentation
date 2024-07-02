@@ -27,7 +27,7 @@
 "categories":
 - cloud
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/citrix_hypervisor/README.md"
 "display_on_public_website": true
@@ -64,80 +64,80 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [Citrix Hypervisor][1] through the Datadog Agent.
+このチェックは、Datadog Agent を通じて [Citrix Hypervisor][1] を監視します。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The Citrix Hypervisor check is included in the [Datadog Agent][3] package.
-No additional installation is needed on your server.  
-The recommended way to monitor Citrix hypervisors is to install one Datadog Agent on each hypervisor.
+Citrix Hypervisor チェックは、[Datadog Agent][3] のパッケージに含まれています。
+サーバーに追加でインストールする必要はありません。 
+Citrix Hypervisor を監視する推奨方法は、各ハイパーバイザーに 1 つの Datadog Agent をインストールすることです。
 
-#### Datadog user
+#### Datadog ユーザー
 
-The Citrix Hypervisor integration requires a user with at least [`read-only`][4] access to monitor the service.
+Citrix Hypervisor とのインテグレーションでは、サービスを監視するために、少なくとも [`read-only`][4] のアクセス権を持つユーザーが必要です。
 
-### Configuration
+### 構成
 
-#### Host
+#### ホスト
 
-1. Edit the `citrix_hypervisor.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Citrix Hypervisor performance data. See the [sample citrix_hypervisor.d/conf.yaml][5] for all available configuration options.
+1. Citrix Hypervisor のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `citrix_hypervisor.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル citrix_hypervisor.d/conf.yaml][5] を参照してください。
 
-2. [Restart the Agent][6].
+2. [Agent を再起動します][6]。
 
-#### Log collection
+#### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-1. Collecting logs is disabled by default in the Datadog Agent. Enable it in `datadog.yaml`:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。`datadog.yaml` で有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `citrix_hypervisor.d/conf.yaml` file to start collecting your Citrix Hypervisor logs:
+2. Citrix Hypervisor ログの収集を開始するには、次のコンフィギュレーションブロックを `citrix_hypervisor.d/conf.yaml` ファイルに追加します。
     ```yaml
     logs:
     - type: file
       path: /var/log/xensource.log
       source: citrix_hypervisor
     ```
-    Change the `path` value and configure it for your environment. See the [sample `citrix_hypervisor.d/conf.yaml` file][5] for all available configuration options.
+    `path` の値を変更し、環境に合わせて構成します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル  `citrix_hypervisor.d/conf.yaml` ファイル][5]を参照してください。
 
-3. [Restart the Agent][6].
+3. [Agent を再起動します][6]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][7] and look for `citrix_hypervisor` under the Checks section.
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `citrix_hypervisor` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "citrix_hypervisor" >}}
 
 
-### Events
+### イベント
 
-The Citrix Hypervisor integration does not include any events.
+Citrix Hypervisor インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "citrix_hypervisor" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][10].
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
-## Further reading
+## 参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor Citrix Hypervisor performance with Datadog][11]
+- [Datadog を使用した Citrix Hypervisor パフォーマンスの監視][11]
 
 [1]: https://www.citrix.com/products/citrix-hypervisor/
 [2]: https://docs.datadoghq.com/agent/kubernetes/integrations/

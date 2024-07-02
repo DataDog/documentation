@@ -9,7 +9,7 @@ further_reading:
   text: Protect against threats with Datadog Application Security Management
 ---
 
-## Overview
+## 概要
 
 This topic describes [threat intelligence][1] for Application Security Management (ASM).
 
@@ -17,7 +17,7 @@ Datadog provides built-in threat intelligence [datasets][1] for ASM. This provid
 
 Additionally, ASM supports *bring your own threat intelligence*. This functionality enriches detections with business-specific threat intelligence. 
 
-## Best practices
+## ベストプラクティス
 
 Datadog recommends the following methods for consuming threat intelligence:
 
@@ -54,13 +54,13 @@ Threat intelligence is supported in the CSV format and requires 4 columns.
 
 **CSV Structure**
 
-| field            | data  | description| required | example|
+| field            | データ  | 説明| 必須 | 例|
 |------------------|-------|----|-----|--|
-| ip_address       | text | The primary key for the reference table in the IPv4 dot notation format. | true | 192.0.2.1  |
+| ip_address       | テキスト | The primary key for the reference table in the IPv4 dot notation format. | true | 192.0.2.1  |
 | additional_data  | json      | Additional data to enrich the trace. | false | `{"ref":"hxxp://example.org"}`
-| category         | text  | The threat intel [category][7]. This is used by some out of the box detection rules. | true | `residential_proxy` |
-| intention        | text | The threat intel [intent][8]. This is used by some out of the box detection rules.| true | malicious | |
-| source           | text  | The name of the source and the link to its site, such as your team and your teams wiki. | true| `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` | | 
+| category         | テキスト  | The threat intel [category][7]. This is used by some out of the box detection rules. | true | `residential_proxy` |
+| intention        | テキスト | The threat intel [intent][8]. This is used by some out of the box detection rules.| true | 悪意がある | |
+| source           | テキスト  | The name of the source and the link to its site, such as your team and your teams wiki. | true| `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` | | 
 
 
 
@@ -99,7 +99,7 @@ Using a join with a Reference Table enables you to evaluate impact before enrich
 
 You can use any fields, not just IP addresses. For example, by associating security traces with specific URLs from a reference table, you can identify which parts of your application are being targeted by attacks. This can help pinpoint vulnerabilities or high-risk areas within the application.
 
-Examples:
+例:
 
 - Investigation and incident response. You can upload and join using IPs or other fields from attacks and see the traffic related to that incident.
 - By using security traces with the IP addresses from a Reference Table, such as associating IP addresses with geographic locations or organizational details, security teams can gain better context around attack attempts. This can help in understanding the origin and potential motivation behind the attacks.
@@ -131,7 +131,7 @@ Under `@threat_intel.results` you can always see the full details of what was ma
 
  {{< img src="security/application_security/threats/threat_intel/threat_intel_generic.png" alt="Example of the threat_intel attribute containing threat intelligence data">}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

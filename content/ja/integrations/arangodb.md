@@ -30,7 +30,7 @@
 - caching
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/arangodb/README.md"
 "display_on_public_website": true
@@ -68,51 +68,51 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [ArangoDB][1] through the Datadog Agent. ArangoDB 3.8 and above are supported.
+このチェックでは、Datadog Agent を通じて [ArangoDB][1] を監視します。ArangoDB 3.8 以降に対応しています。
 
-Enable the Datadog-ArangoDB integration to:
+Datadog-ArangoDB インテグレーションを有効にすると、以下のことができます。
 
-- Identify slow queries based on user-defined thresholds.
-- Understand the impact of a long request and troubleshoot latency issues.
-- Monitor underlying RocksDB memory, disk, and cache limits.
+- ユーザー定義のしきい値に基づいて、遅いクエリを特定する。
+- 長いリクエストの影響を理解し、レイテンシーの問題をトラブルシュートする。
+- RocksDB のメモリ、ディスク、キャッシュの制限を監視する。
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] to apply these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]を参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The ArangoDB check is included in the [Datadog Agent][3] package.
+ArangoDB チェックは [Datadog Agent][3] パッケージに含まれています。
 
-### Configuration
+### 構成
 
-1. Edit the `arangodb.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your ArangoDB performance data. See the [sample arangodb.d/conf.yaml][4] for all available configuration options.
+1. ArangoDB のパフォーマンスデータの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `arangodb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル arangodb.d/conf.yaml][4] を参照してください。
 
-2. [Restart the Agent][5].
+2. [Agent を再起動します][5]。
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][6] and look for `arangodb` under the Checks section.
+[Agent の status サブコマンドを実行][6]し、Checks セクションで `arangodb` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "arangodb" >}}
 
 
-### Log collection
+### ログ収集
 
-_Available for Agent versions >6.0_
+_Agent バージョン 6.0 以降で利用可能_
 
-To collect logs from your ArangoDB instance, first make sure that your ArangoDB is configured to output logs to a file.
-For example, if using the `arangod.conf` file to configure your ArangoDB instance, you should include the following:
+ArangoDB インスタンスからログを収集するには、まず ArangoDB がログをファイルに出力するよう構成されていることを確認します。
+例えば、`arangod.conf` ファイルを使って ArangoDB インスタンスを構成する場合、以下のように記述してください。
 
 ```
-# ArangoDB configuration file
+# ArangoDB コンフィギュレーションファイル
 #
-# Documentation:
+# ドキュメント:
 # https://www.arangodb.com/docs/stable/administration-configuration.html
 #
 
@@ -124,15 +124,15 @@ file = /var/log/arangodb3/arangod.log
 ...
 ```
 
-ArangoDB logs contain [many options][8] for log verbosity and output files. Datadog's integration pipeline supports the default conversion pattern.
+ArangoDB のログには、ログの冗長性と出力ファイルのための[多くのオプション][8]が含まれています。Datadog のインテグレーションパイプラインは、デフォルトの変換パターンをサポートしています。
 
-1. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Uncomment and edit the logs configuration block in your `arangodb.d/conf.yaml` file:
+2. `arangodb.d/conf.yaml` ファイルのログ構成ブロックのコメントを解除して編集します。
 
    ```yaml
    logs:
@@ -141,17 +141,17 @@ ArangoDB logs contain [many options][8] for log verbosity and output files. Data
         source: arangodb
    ```
 
-### Events
+### イベント
 
-The ArangoDB integration does not include any events.
+ArangoDB インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "arangodb" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog Support][10].
+ご不明な点は、[Datadog のサポートチーム][10]までお問い合わせください。
 
 
 [1]: https://www.arangodb.com/

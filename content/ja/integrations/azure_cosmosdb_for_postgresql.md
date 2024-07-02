@@ -5,7 +5,7 @@
 - azure
 - cloud
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Azure Cosmos DB for PostgreSQL metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/azure_cosmosdb_for_postgresql/"
@@ -30,27 +30,27 @@ Azure Cosmos DB for PostgreSQL is PostgreSQL extended with the power of "distrib
 
 Use the Datadog Azure integration to collect metrics and logs for Azure Cosmos DB for PostgreSQL. You can also utilize the out of the box dashboard for immediate insights.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first. There are no other installation steps that need to be performed.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_cosmosdb_for_postgresql" >}}
 
 
-### Events
+### イベント
 
 The Azure Cosmos DB for PostgreSQL integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Cosmos DB for PostgreSQL integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

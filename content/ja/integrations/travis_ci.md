@@ -4,8 +4,8 @@
 - cloud
 - configuration & deployment
 - developer tools
-- metrics
-"custom_kind": "integration"
+- モニター
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Connect to Travis CI to view metrics about build times, build statuses, jobs, and more."
 "doc_link": "https://docs.datadoghq.com/integrations/travis_ci/"
@@ -29,13 +29,13 @@
 
 Travis CI is a hosted continuous integration service used to build and test software projects. Connect to Travis CI to view metrics about build times, build statuses, jobs, and more.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 You can install the Travis CI integration with its [integration tile][1].
 
-### Configuration
+### 構成
 
 1. Add your account name, API token (found under the profile tab in Travis CI), and the project type. Project types are determined as follows:
 
@@ -50,21 +50,21 @@ You can install the Travis CI integration with its [integration tile][1].
 6. To collect metrics for all repositories under an organization, type `<ORGANIZATION_NAME>/*` under Project.
 7. Click 'Update Configuration'.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "travis_ci" >}}
 
 
-### Events
+### イベント
 
 The Travis CI integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Travis CI integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

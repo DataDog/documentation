@@ -29,7 +29,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/yarn/README.md"
 "display_on_public_website": true
@@ -42,7 +42,7 @@
 "manifest_version": "2.0.0"
 "name": "yarn"
 "public_title": "Yarn"
-"short_description": "Collect cluster-wide health metrics and track application progress."
+"short_description": "クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。"
 "supported_os":
 - "linux"
 - "windows"
@@ -50,12 +50,12 @@
 "tile":
   "changelog": "CHANGELOG.md"
   "classifier_tags":
-  - "Category::Log Collection"
+  - "Category::ログの収集"
   - "Supported OS::Linux"
   - "Supported OS::Windows"
   - "Supported OS::macOS"
   "configuration": "README.md#Setup"
-  "description": "Collect cluster-wide health metrics and track application progress."
+  "description": "クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -67,34 +67,34 @@
 
 ![Hadoop Yarn][1]
 
-## Overview
+## 概要
 
-This check collects metrics from your YARN ResourceManager, including (but not limited to):
+このチェックは、YARN ResourceManager からメトリクスを収集します。以下は、メトリクスの一例です。
 
-- Cluster-wide metrics, such as number of running apps, running containers, unhealthy nodes, and more.
-- Per-application metrics, such as app progress, elapsed running time, running containers, memory use, and more.
-- Node metrics, such as available vCores, time of last health update, and more.
+- クラスター全体のメトリクス (実行中のアプリ、実行中のコンテナ、異常なノードの数など)
+- アプリケーションごとのメトリクス (アプリの進捗状況、経過した実行時間、実行中のコンテナ数、メモリ使用量など)
+- ノードメトリクス (使用可能な vCores、最新の健全性更新時間など)
 
-### Deprecation notice
+### 非推奨のお知らせ
 
-`yarn.apps.<METRIC>` metrics are deprecated in favor of `yarn.apps.<METRIC>_gauge` metrics because `yarn.apps` metrics are incorrectly reported as a `RATE` instead of a `GAUGE`.
+`yarn.apps` メトリクスは `GAUGE` ではなく `RATE` として誤って報告されるため、`yarn.apps.<メトリクス>` メトリクスは非推奨になりました。`yarn.apps.<メトリクス>_gauge` メトリクスを使用してください。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The YARN check is included in the [Datadog Agent][2] package, so you don't need to install anything else on your YARN ResourceManager.
+YARN チェックは [Datadog Agent][2] パッケージに含まれています。YARN ResourceManager に追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-1. Edit the `yarn.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1].
+1. [Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `yarn.d/conf.yaml` ファイルを編集します。
 
    ```yaml
    init_config:
@@ -119,35 +119,35 @@ To configure this check for an Agent running on a host:
        cluster_name: default_cluster
    ```
 
-    See the [example check configuration][2] for a comprehensive list and description of all check options.
+    すべてのチェックオプションの一覧と説明については、[チェックコンフィギュレーションの例][2]を参照してください。
 
-2. [Restart the Agent][3] to start sending YARN metrics to Datadog.
+2. [Agent を再起動][3]すると、Datadog への YARN メトリクスの送信が開始されます。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/yarn/datadog_checks/yarn/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-| Parameter            | Value                                                                                   |
+| パラメーター            | 値                                                                                   |
 | -------------------- | --------------------------------------------------------------------------------------- |
 | `<INTEGRATION_NAME>` | `yarn`                                                                                  |
-| `<INIT_CONFIG>`      | blank or `{}`                                                                           |
-| `<INSTANCE_CONFIG>`  | `{"resourcemanager_uri": "http://%%host%%:%%port%%", "cluster_name": "<CLUSTER_NAME>"}` |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                           |
+| `<INSTANCE_CONFIG>`  | `{"resourcemanager_uri": "http://%%host%%:%%port%%", "cluster_name": "<クラスター名>"}` |
 
-##### Log collection
+##### ログ収集
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
     ```yaml
     logs_enabled: true
     ```
 
-2. Uncomment and edit the logs configuration block in your `yarn.d/conf.yaml` file. Change the `type`, `path`, and `service` parameter values based on your environment. See the [sample yarn.d/conf.yaml][2] for all available configuration options.
+2. `yarn.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、 `type`、`path`、`service` パラメーターの値を変更してください。使用可能なすべての構成オプションの詳細については、[サンプル yarn.d/conf.yaml][2] を参照してください。
 
     ```yaml
     logs:
@@ -162,9 +162,9 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
         #     name: new_log_start_with_date
     ```
 
-3. [Restart the Agent][3].
+3. [Agent を再起動します][3]。
 
-To enable logs for Docker environments, see [Docker Log Collection][4].
+Docker 環境のログを有効にするには、[Docker ログ収集][4]を参照してください。
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 [2]: https://github.com/DataDog/integrations-core/blob/master/yarn/datadog_checks/yarn/data/conf.yaml.example
@@ -173,34 +173,34 @@ To enable logs for Docker environments, see [Docker Log Collection][4].
 {{% /tab %}}
 {{< /tabs >}}
 
-### Validation
+### 検証
 
-Run the [Agent's status subcommand][3] and look for `yarn` under the Checks section.
+[Agent の status サブコマンド][3]を実行し、Checks セクションで `yarn` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "yarn" >}}
 
 
-### Events
+### イベント
 
-The Yarn check does not include any events.
+Yarn チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "yarn" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][4].
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-- [Hadoop architectural overview][5]
-- [How to monitor Hadoop metrics][6]
-- [How to collect Hadoop metrics][7]
-- [How to monitor Hadoop with Datadog][8]
+- [Hadoop アーキテクチャの概要][5]
+- [Hadoop メトリクスの監視方法][6]
+- [Hadoop メトリクスの収集方法][7]
+- [Datadog を使用した Hadoop の監視方法][8]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/yarn/images/yarn_dashboard.png

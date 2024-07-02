@@ -239,7 +239,7 @@ To configure monitoring for the entire tenant, assign access to the **Tenant Roo
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configuration
+### 構成
 
 To limit metric collection for Azure-based hosts, open the integration tile for Azure. Select the **Configuration** tab, then open **App Registrations**. Enter a list of tags in the text box under **Metric Collection Filters**.
 

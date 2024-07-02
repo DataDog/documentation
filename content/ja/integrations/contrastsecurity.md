@@ -25,7 +25,7 @@
 "categories":
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/contrastsecurity/README.md"
 "display_on_public_website": true
@@ -66,7 +66,7 @@
 
 The Datadog-Contrast integration allows you to get your Contrast logs into Datadog.
 
-## Setup
+## セットアップ
 
 ### Log collection
 
@@ -96,21 +96,21 @@ For more information, see the:
 - [Datadog Logs documentation][4]
 - [Datadog Dashboards API][5]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Contrast integration does not include any metrics.
 
-### Events
+### イベント
 
 The Contrast integration does not send any events.
 
-### Service Checks
+### サービスチェック
 
 The Contrast integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact the [maintainer][6] of this integration.
 

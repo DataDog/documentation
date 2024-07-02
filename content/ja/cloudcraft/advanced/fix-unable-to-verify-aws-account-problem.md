@@ -2,19 +2,19 @@
 title: Fix "unable to verify AWS account" problem
 ---
 
-If you're getting an "unable to verify AWS account" error when trying to add your AWS account to Cloudcraft, it may be because your organization has attached a service control policy to the account. This prevents Cloudcraft's servers from validating the created IAM role.
+Cloudcraft に AWS アカウントを追加しようとしたときに "unable to verify AWS account" (AWS アカウントを検証できません) エラーが表示される場合、組織がアカウントにサービス制御ポリシーを適用している可能性があります。これにより、Cloudcraft のサーバーが作成された IAM ロールを検証できません。
 
-To resolve this error, you have the following options:
+このエラーを解決するには、以下のオプションがあります。
 
-## Enable access to `us-east-1` region
+## `us-east-1` リージョンへのアクセスを有効にする
 
-You can ask your IT team to temporarily enable access to the `us-east-1` region in their policies. This is the region Cloudcraft uses to verify the IAM role. After you add the account, you can then disable the region again, and Cloudcraft will be limited to only scanning components in the regions that aren't blocked.
+IT チームにポリシーの `us-east-1` リージョンへのアクセスを一時的に有効にするよう依頼します。これは Cloudcraft が IAM ロールの検証に使用するリージョンです。アカウントを追加した後、再度リージョンを無効にすると、Cloudcraft はブロックされていないリージョン内のコンポーネントのみをスキャンするように制限されます。
 
-To help make a stronger case about opening an exception in the policy, you can offer your organization's administrators the option of attaching a minimal IAM policy to the role, limiting what Cloudcraft can and can't read from the AWS account added to the application. For more information, see [Create a minimal IAM policy to use with Cloudcraft][1].
+ポリシーに例外を設けるための強力な理由を提供するために、組織の管理者に最小限の IAM ポリシーをロールに適用するオプションを提供し、Cloudcraft がアプリケーションに追加された AWS アカウントから読み取れるものと読み取れないものに制限をかけることができます。詳細については、[Cloudcraft で使用する最小限の IAM ポリシーを作成する][1]を参照してください。
 
-## Use the API to add your account
+## API を使用してアカウントを追加する
 
-As an alternative to using the web interface, you can use Cloudcraft's API to add your account and specify which region the account should be checked from. For more information, see [Add AWS accounts via the Cloudcraft API][2].
+Web インターフェイスを使用する代わりに、Cloudcraft の API を使用してアカウントを追加し、アカウントをチェックするリージョンを指定することができます。詳細については、[Cloudcraft API による AWS アカウントの追加][2]を参照してください。
 
 [1]: /cloudcraft/advanced/minimal-iam-policy/
 [2]: /cloudcraft/advanced/add-aws-account-via-api/

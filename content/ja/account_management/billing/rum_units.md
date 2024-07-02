@@ -5,13 +5,13 @@ private: true
 ---
 
 <div class="alert alert-warning">
-The features discussed on this page are in private beta. Contact your Customer Success Manager to learn more about it.
+このページで紹介されている機能はプライベートベータ版です。詳細については、カスタマーサクセスマネージャーにお問い合わせください。
 </div>
 
-A **session** is a user journey on your web application. It expires after either 15 minutes of inactivity, or 4 hours of continuous activity.
+**セッション**とは、ウェブアプリケーションでユーザーが行う操作 (カスタマージャーニー) です。15 分間操作が行われない、または 4 時間以上継続して操作が行われるとセッションは無効になります。
 
-**Mobile RUM Session**: Datadog collects all of the screens visited by your end users on your mobile applications (Android, iOS, React Native), along with the telemetry that matters: mobile errors and crashes and resources loading (XHRs, images, CSS files, JS scripts, etc). All of this is included in the Mobile RUM Session.
+**Mobile RUM セッション**: Datadog は、モバイルアプリケーション (Android、iOS、React Native) でエンドユーザーが訪問したすべての画面を、モバイルのエラーやクラッシュ、リソースの読み込み (XHR、画像、CSS ファイル、JS スクリプトなど) といった重要なテレメトリとともに収集します。これらはすべて Mobile RUM セッションに含まれています。
 
-**RUM Lite Session**: Datadog collects all of the pages visited by your end users on your browser applications along with the telemetry that matters: frontend errors and performance metrics. All of this is included in the RUM Lite Session.
+**RUM Lite セッション**: Datadog は、エンドユーザーがブラウザアプリケーションで訪れたすべてのページを、フロントエンドのエラーやパフォーマンスメトリクスといった重要なテレメトリとともに収集します。これらはすべて RUM Lite セッションに含まれています。
 
-**RUM Replay Session**: Datadog collects all of the pages visited by your end users on your browser applications, along with the telemetry that matters: frontend errors, performance metrics, resources loading (XHRs, images, CSS files, JS scripts, etc). You can also collect a replay of the actions of your user, rendering their experience in a film-like fashion. All of this is included in the RUM Replay Session.
+**RUM Replay セッション**: Datadog は、エンドユーザがブラウザアプリケーションで訪れたすべてのページを、フロントエンドのエラー、パフォーマンスメトリクス、リソースの読み込みといった重要なテレメトリ (XHR、画像、CSS ファイル、JS スクリプトなど ) とともに収集します。また、ユーザーのアクションのリプレイを収集して、ユーザーの体験を映画のようにレンダリングすることもできます。これらはすべて、RUM Replay セッションに含まれています。

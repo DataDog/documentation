@@ -4,13 +4,13 @@ aliases:
     - /agent/faq/network-time-protocol-ntp-offset-issues
 ---
 
-If you have noticed any of the following issues, they may be related to the NTP offset on the hosts that are reporting metrics through the Agent:
+以下の問題は、Agent を介してメトリクスを報告するホストの NTP オフセットに関連している可能性があります。
 
-* Incorrect alert triggers
-* Metric delays
-* Gaps in graphs of metrics
+* 不正なアラートのトリガー
+* メトリクスの遅延
+* メトリクスのグラフの途切れ
 
-To check the NTP offset for a host, run the Agent [status command][1], using the instructions appropriate for your OS, and look for the Clocks section:
+ホストの NTP オフセットをチェックするには、使用中の OS に適した手順に従い Agent [ステータスコマンド][1]を実行し、クロックセクションを探します。
 
 ```
   Clocks
@@ -19,17 +19,17 @@ To check the NTP offset for a host, run the Agent [status command][1], using the
     System UTC time: 2015-02-12 22:10:49.524660
 ```
 
-Any significant offset can have undesired effects. To prevent NTP issues, leverage Datadog's monitor for NTP offset to alert you when there is drift on a host thanks to the [NTP Integration][2].
-Alternatively, use Datadog's [Check Summary page][3] and inspect the check `ntp.in_sync` to see the list of hosts that have NTP issues.
+大幅なオフセットにより、好ましくない影響を受けることがあります。NTP 関連の問題を防ぐには、NTP オフセット用の Datadog のモニターを活用し、ホストでドリフトが見られる際に警告を発するようにします（[NTP インテグレーション][2]のおかげです）。
+または、Datadog の[チェック内容のサマリーページ][3]を使い、チェック `ntp.in_sync` を調べ、NTP 関連の問題のあるホスト一覧を確認します。
 
-**Note**: Outgoing UDP traffic over the port `123` should be allowed so the Agent can confirm that the local server time is reasonably accurate according to the Datadog NTP servers.
+**注**: ローカルサーバーの時刻が Datadog NTP サーバーに照らし許容範囲であることを Agent が確認できるように、ポート `123` を経由する外行き UDP トラフィックは許可されなければなりません。
 
-## Further Reading
+## その他の参考資料
 
-{{< whatsnext desc="Instructions for syncing the system clock with NTP vary based on the operating system being used:">}}
-    {{< nextlink href="https://support.microsoft.com/en-us/help/816042/how-to-configure-an-authoritative-time-server-in-windows-server" tag="Windows" >}}How To Synchronize Microsoft Windows with a NTP Server{{< /nextlink >}}
-    {{< nextlink href="http://askubuntu.com/questions/254826/how-to-force-a-clock-update-using-ntp" tag="Linux" >}}How to force a clock update using NTP?{{< /nextlink >}}
-    {{< nextlink href="http://www.freebsd.org/doc/en/books/handbook/network-ntp.html" tag="FreeBSD">}}Clock Synchronization with NTP{{< /nextlink >}}
+{{< whatsnext desc="システムクロックと NTP を同期させる手順は使用中の OS により異なります。">}}
+    {{< nextlink href="https://support.microsoft.com/en-us/help/816042/how-to-configure-an-authoritative-time-server-in-windows-server" tag="Windows" >}}Microsoft Windows と NTP サーバーを同期する方法{{< /nextlink >}}
+    {{< nextlink href="http://askubuntu.com/questions/254826/how-to-force-a-clock-update-using-ntp" tag="Linux" >}}NTPを使用してクロックを強制的に更新する方法{{< /nextlink >}}
+    {{< nextlink href="http://www.freebsd.org/doc/en/books/handbook/network-ntp.html" tag="FreeBSD">}}NTP との時刻同期{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /agent/configuration/agent-commands/#agent-status-and-information

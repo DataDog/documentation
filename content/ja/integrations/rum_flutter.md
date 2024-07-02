@@ -9,11 +9,11 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-- metrics
+- モニター
 - mobile
 - network
 - tracing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rum_flutter/README.md"
 "display_on_public_website": true
@@ -72,7 +72,7 @@ Monitor the end-to-end health of your Flutter application by:
 - Unifying full-stack monitoring in a single platform for frontend and backend teams
 
 
-## Setup
+## セットアップ
 
 ### Collect RUM events 
 
@@ -86,9 +86,9 @@ Your Flutter application automatically sends traces to Datadog.
 
 To start forwarding your Flutter application's logs to Datadog, see [Flutter Log Collection][3].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Flutter integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][4].
 
@@ -100,7 +100,7 @@ For more information about events and attributes, see [RUM Flutter Monitoring][5
 
 The Flutter integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog Support][6]. 
 

@@ -23,7 +23,7 @@
 "categories":
 - "event management"
 - "ai/ml"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/logzio/README.md"
 "display_on_public_website": true
@@ -74,9 +74,9 @@ This integration allows you to
 
 ![dashboard][2]
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Import your alerts into Datadog with the following steps:
 
@@ -85,21 +85,21 @@ Import your alerts into Datadog with the following steps:
 
 For a more detailed setup description, see [Log Correlation with Logz.io and Datadog][4].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Logz.io check does not include any metrics.
 
-### Events
+### イベント
 
 The Logz.io check does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Logz.io check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

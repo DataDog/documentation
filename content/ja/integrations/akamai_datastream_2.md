@@ -25,7 +25,7 @@
 "categories":
 - caching
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/akamai_datastream_2/README.md"
 "display_on_public_website": true
@@ -65,54 +65,53 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
-Akamai DataStream 2 captures performance, security, and CDN health logs for your properties on the Akamai Intelligent Edge Platform. This integration streams the data in near real-time to Datadog.
+Akamai DataStream 2 は、Akamai Intelligent Edge Platform のプロパティのパフォーマンス、セキュリティ、および CDN の健全性に関するログをキャプチャします。このインテグレーションは、データを Datadog にほぼリアルタイムでストリーミングします。
 
-You can use Akamai DataStream 2 logs to gain insight into long term trends, resolve performance and security issues, and monitor high-throughput data delivery streams. See the [DataStream 2 documentation][1] for further details and use cases.
+Akamai DataStream 2 ログを使用することで、長期的なトレンドの把握、パフォーマンスやセキュリティに関する問題の解決、高スループットのデータ配信ストリームの監視が可能です。詳細および使用例については、[DataStream 2 のドキュメント][1]を参照してください。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-Click **Install Integration** to enable a preset dashboard for viewing Akamai DataStream 2 logs and metrics.
+Akamai DataStream 2 のログとメトリクスを表示するためのプリセットダッシュボードを有効にするには、**Install Integration** をクリックします。
 
-### Configuration
+### 構成
 
-To configure Akamai DataStream 2 to send logs to Datadog, follow [these instructions on the
-Akamai techdocs site](https://techdocs.akamai.com/datastream2/docs/stream-datadog), make sure to set the log source to `akamai.datastream` and the log format to `JSON`.
+Akamai DataStream 2 が Datadog にログを送信するよう構成するには、[Akamai techdocs サイト上の以下の説明](https://techdocs.akamai.com/datastream2/docs/stream-datadog)に従って、ログソースを `akamai.datastream` に、ログフォーマットを `JSON` に設定することを確認します。
 
-Ensure that you have the Datadog Site selector on the right of the page set to your [Datadog Site][2], and copy the logs endpoint URL below:  
+ページの右側にある Datadog サイトセレクタが自分の [Datadog サイト][2]に設定されていることを確認し、以下のログエンドポイント URL をコピーしてください。
 
 `https://{{< region-param key="http_endpoint" code="true" >}}/v1/input`
 
-### Validation
+### 検証
 
-To validate that this integration is configured properly, [search for logs with the source `akamai.datastream`][3]. You may have to wait a few minutes after configuring the datastream in Akamai before logs are visible in Datadog.
+このインテグレーションが正しく構成されていることを確認するには、[ソースが `akamai.datastream` のログを検索][3]します。Akamai でデータストリームを構成した後、Datadog でログが表示されるまで数分待つ必要があるかもしれません。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-Akamai DataStream 2 does not include any metrics.
+Akamai DataStream 2 には、メトリクスは含まれません。
 
-### Service Checks
+### サービスチェック
 
-Akamai DataStream 2 does not include any service checks.
+Akamai DataStream 2 には、サービスのチェック機能は含まれません。
 
-### Events
+### イベント
 
-Akamai DataStream 2 does not include any events.
+Akamai DataStream 2 には、イベントは含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][4].
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor Akamai Datastream 2 with Datadog][2]
+- [Datadog で Akamai Datastream 2 を監視する][2]
 
 [1]: https://techdocs.akamai.com/datastream2/docs
 [2]: https://www.datadoghq.com/blog/monitor-akamai-datastream2/

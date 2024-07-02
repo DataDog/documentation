@@ -23,7 +23,7 @@
 "categories":
 - kubernetes
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/portworx/README.md"
 "display_on_public_website": true
@@ -59,32 +59,32 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
+## 概要
 
-Get metrics from Portworx service in real time to:
+Portworx サービスからメトリクスをリアルタイムに取得して、以下のことができます。
 
-- Monitor health and performance of your Portworx Cluster
-- Track disk usage, latency and throughput for Portworx volumes
+- Portworx クラスターの健全性とパフォーマンスを監視できます。
+- Portworx ボリュームのディスク使用状況、レイテンシー、スループットを追跡できます。
 
-## Setup
+## セットアップ
 
-The Portworx check is not included in the [Datadog Agent][1] package, so you need to install it.
+Portworx チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### Installation
+### インストール
 
-For Agent v7.21+ / v6.21+, follow the instructions below to install the Portworx check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
+Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Portworx チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
-1. Run the following command to install the Agent integration:
+1. 以下のコマンドを実行して、Agent インテグレーションをインストールします。
 
    ```shell
    datadog-agent integration install -t datadog-portworx==<INTEGRATION_VERSION>
    ```
 
-2. Configure your integration similar to core [integrations][3].
+2. コアの[インテグレーション][3]と同様にインテグレーションを構成します。
 
-### Configuration
+### 構成
 
-1. Edit the `portworx.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4] to start collecting your Portworx [metrics](#metrics). See the [sample portworx.d/conf.yaml][5] for all available configuration options.
+1. Portworx の[メトリクス](#metrics)を収集するには、[Agent のコンフィギュレーションディレクトリ][4]のルートにある `conf.d/` フォルダーの `portworx.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル portworx.d/conf.yaml][5] を参照してください。
 
     ```yaml
     init_config:
@@ -94,29 +94,29 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Portworx
      - prometheus_endpoint: http://localhost:9001/metrics
     ```
 
-2. [Restart the Agent][6]
+2. [Agent を再起動します][6]。
 
-### Validation
+### 検証
 
-[Run the Agent's `info` subcommand][7], you should see something like the following:
+[Agent の `info` サブコマンドを実行すると][7]、以下のような内容が表示されます。
 
-## Compatibility
+## 互換性
 
-The Portworx check is compatible with Portworx 1.4.0 and possible earlier versions.
+Portworx チェック機能は、Portworx 1.4.0 以前のバージョンと互換性があります。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "portworx" >}}
 
 
-### Events
+### イベント
 
-The Portworx check does not include any events.
+Portworx チェックには、イベントは含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-### Agent cannot connect
+### Agent が接続できない
 
 ```text
     portworx
@@ -125,13 +125,13 @@ The Portworx check does not include any events.
       - Collected 0 metrics, 0 events & 0 service check
 ```
 
-Check that the `url` in `portworx.yaml` is correct.
+`portworx.yaml` 内の `url` が正しいかどうかを確認してください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitoring multi-cloud container storage with Portworx and Datadog][9]
+- [Portworx および Datadog でマルチクラウドコンテナストレージをモニタリング][9]
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest

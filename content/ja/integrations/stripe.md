@@ -18,7 +18,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -49,9 +49,9 @@
 
 Stripe is a suite of APIs powering online payment processing and commerce solutions for internet businesses of all sizes. Connect Datadog with your Stripe account to receive logs about event changes in your account.
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
 #### Logs
 
@@ -64,9 +64,9 @@ Stripe is a suite of APIs powering online payment processing and commerce soluti
 7. Click **Add endpoint**.
 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Stripe integration does not include any metrics.
 
@@ -74,15 +74,15 @@ The Stripe integration does not include any metrics.
 
 Stripe events appear as logs under the `stripe` source.
 
-### Events
+### イベント
 
 The Stripe integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Stripe integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

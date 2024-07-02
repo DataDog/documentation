@@ -1,14 +1,14 @@
 ---
-title: Tag Pipelines
+title: タグパイプライン
 further_reading:
 - link: /cloud_cost_management/
   tag: Documentation
-  text: Learn about Cloud Cost Management
+  text: Cloud Cost Management について
 - link: /getting_started/tagging/
-  tag: Documentation
-  text: Getting Started with Tags
+  tag: ドキュメント
+  text: タグの使用を開始する
 - link: /integrations/guide/reference-tables
-  tag: Documentation
+  tag: ドキュメント
   text: Learn about Reference Tables
 ---
 
@@ -34,7 +34,7 @@ Within each ruleset, click **+ Add New Rule** and select a rule type: **Add tag*
 
 You can organize rules and rulesets to ensure the order of execution matches your business logic.
 
-### Add tag
+### タグの追加
 
 Add a new tag (key + value) based on the presence of existing tags on your Cloud Costs data.
 
@@ -44,7 +44,7 @@ For example, you can create a rule to tag all resources with their business unit
 
 To ensure the rule only applies if the `business_unit` tag doesn't already exist, click the toggle in the **Additional options** section.
 
-### Alias tag keys
+### タグキーのエイリアス設定
 
 Map existing tag values to a more standardized tag.
 
@@ -56,9 +56,9 @@ Add the application tag to resources with `app`, `webapp`, or `apps` tags. The r
 
 To ensure the rule only applies if the `application` tag doesn't already exist, click the toggle in the **Additional options** section.
 
-### Map multiple tags
+### 複数のタグのマッピング
 
-Use [Reference Tables][2] to add multiple tags to cost data without creating multiple rules. This will map the values from your Reference Table's primary key column to values from cost tags. If found, the pipelines adds the selected Reference Table columns as tags to cost data.
+[リファレンステーブル][2]を使用すると、複数のルールを作成することなく、コストデータに複数のタグを追加できます。これにより、リファレンステーブルのプライマリキー列の値がコストタグの値にマップされます。見つかった場合、パイプラインは選択したリファレンステーブルの列をタグとしてコストデータに追加します。
 
 For example, if you want to add information about which VPs, organizations, and business_units different AWS and Azure accounts fall under, you can create a table and map the tags. 
 
@@ -72,7 +72,7 @@ Certain tags such as `env` and `host` are [reserved tags][4], and are part of [U
 
 Using tags helps correlate your metrics, traces, processes, and logs. Reserved tags like `host` provide visibility and effective monitoring across your infrastructure. For optimal correlation and actionable insights, use these reserved tags as part of your tagging strategy in Datadog.
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

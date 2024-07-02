@@ -4,9 +4,9 @@
 - "cloud"
 - "log collection"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Monitor AWS service health events in near real time."
+"description": "AWS のサービス健全性イベントをほぼリアルタイムに監視。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_health"
 "draft": false
 "git_integration_title": "amazon_health"
@@ -31,9 +31,9 @@ AWS Health provides ongoing visibility into the state of your AWS resources, ser
 
 **Note**: This integration only works for AWS customers with a Business or Enterprise support plan.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -49,21 +49,21 @@ If you haven't already, set up the [Amazon Web Services integration][1] first.
 
 2. Install the [Datadog - AWS Health integration][4].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The AWS Health integration does not include any metrics.
 
-### Events
+### イベント
 
 The AWS Health integration includes events found in the AWS Personal Health Dashboard. Examples include open issues, scheduled maintenances, and account notifications.
 
-### Service Checks
+### サービスチェック
 
 The AWS Health integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

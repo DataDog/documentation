@@ -5,9 +5,9 @@
 - "cloud"
 - "aws"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Amazon Polly metrics."
+"description": "Amazon Polly のキーメトリクスを追跡します。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_polly/"
 "draft": false
 "git_integration_title": "amazon_polly"
@@ -30,9 +30,9 @@ Amazon Polly is a service that turns text into lifelike speech.
 
 Enable this integration to see in Datadog all your Polly metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][1].
 
@@ -57,23 +57,23 @@ Configure Amazon Polly to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_polly" >}}
 
 
 Each of the metrics retrieved from AWS are assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The Amazon Polly integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Polly integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

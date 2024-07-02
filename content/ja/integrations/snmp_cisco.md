@@ -20,7 +20,7 @@
 - network
 - notifications
 - snmp
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/snmp_cisco/README.md"
 "display_on_public_website": true
@@ -76,33 +76,33 @@ Collect SNMP metrics from Cisco appliances, including:
 
 **Note**: Additional supported vendor profiles for this integration can be found on the [network vendors][5] page.
 
-## Setup
+## セットアップ
 
 To install and configure the SNMP integration, see the [Network Device Monitoring][6] documentation.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 For details of monitored metrics see the [SNMP integration tile][7].
 
-### Service Checks
+### サービスチェック
 
-Snmp Cisco does not include any service checks.
+SNMP Cisco には、サービスのチェック機能は含まれません。
 
-### Events
+### イベント
 
-Snmp Cisco does not include any events.
+SNMP Cisco には、イベントは含まれません。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
 * [Monitor SNMP with Datadog][8]
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][9].
+ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/integrations/crest_data_systems_cisco_asa/
 [2]: https://docs.datadoghq.com/integrations/meraki/

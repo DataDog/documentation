@@ -4,7 +4,7 @@
 - google cloud
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "View Audit log dashboard."
 "doc_link": ""

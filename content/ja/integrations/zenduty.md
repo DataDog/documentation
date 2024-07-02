@@ -26,7 +26,7 @@
 - incidents
 - issue tracking
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/zenduty/README.md"
 "display_on_public_website": true
@@ -89,7 +89,7 @@ Connect Zenduty with Datadog in order to:
 - Deploy on-call schedules, escalation policies, incident playbooks, postmortems, and detailed analytics
 - Use Alert Rules to customize routing for Datadog alerts to certain users or teams, write suppression rules, and automatically add notes, responders, and incident tasks
 
-## Setup
+## セットアップ
 
 ### Zenduty
 In [Zenduty][1], follow the steps below:
@@ -127,20 +127,20 @@ See the [Zenduty documentation][3] for more details and to get the most out of t
 
 **Note**: Mention `@zenduty` as a channel under **Notify your team** in the Datadog monitor's configuration to get alerts through Zenduty when Datadog incidents are created or resolved.
 
-## Data Collected
-### Metrics
+## 収集データ
+### メトリクス
 
 The Zenduty integration does not include any metrics.
 
-### Events
+### イベント
 
 Triggered, acknowledged, and resolved events are displayed in Zenduty's dashboard.
 
-### Service Checks
+### サービスチェック
 
 The Zenduty integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 Need help? Contact [Datadog Support][4].
 
 [1]: https://www.zenduty.com

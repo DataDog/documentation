@@ -11,7 +11,7 @@ aliases:
     - /integrations/shoreline/
     - /integrations/shoreline_license/
     - /integrations/shoreline_software_license/
-description: Gather data from all of your systems, apps, & services
+description: すべてのシステム、アプリケーション、そしてサービスからデータを収集
 cascade:
 - _target:
     path: /integrations/akamai_datastream_2.md
@@ -21,36 +21,36 @@ cascade:
     path: /integrations/azure.md
   algolia:
     rank: 80
-    category: Documentation
-    subcategory: Integrations
+    category: ドキュメント
+    subcategory: インテグレーション
     tags: ['azure', 'microsoft azure']
 - _target:
     path: /integrations/kubernetes_state_core.md
   algolia:
     rank: 60
-    category: Documentation
-    subcategory: Integrations
+    category: ドキュメント
+    subcategory: インテグレーション
     tags: ['ksm']
 - _target:
     path: /integrations/google_cloud_platform.md
   algolia:
     rank: 80
-    category: Documentation
-    subcategory: Integrations
+    category: ドキュメント
+    subcategory: インテグレーション
     tags: ['gcp', 'google cloud platform']
 - _target:
     path: /integrations/amazon_web_services.md
   algolia:
     rank: 80
-    category: Documentation
-    subcategory: Integrations
+    category: ドキュメント
+    subcategory: インテグレーション
     tags: ['aws', 'amazon web services']
 - _target:
     path: /integrations/eks_fargate.md
   algolia:
     rank: 60
-    category: Documentation
-    subcategory: Integrations
+    category: ドキュメント
+    subcategory: インテグレーション
     tags: ['eks logging']
 - _target:
     path: /integrations/win32_event_log.md
@@ -58,8 +58,8 @@ cascade:
     - /integrations/eventviewer/
   algolia:
     rank: 60
-    category: Documentation
-    subcategory: Integrations
+    category: ドキュメント
+    subcategory: インテグレーション
     tags: ['event viewer']
 - _target:
     path: /integrations/lambdatest_license.md
@@ -116,9 +116,9 @@ cascade:
     - /integrations/snowflake/
 ---
 
-More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.
+すべてのシステム、アプリケーション、サービスの横断的な監視を実現します。Datadog が提供する {{< translate key="integration_count" >}} 以上の組み込みインテグレーションをご活用ください。
 
-What's an integration? See [Introduction to Integrations][1].
+インテグレーションとは何でしょうか？ [インテグレーションをご紹介します][1]
 
 {{< integrations >}}
 

@@ -2,7 +2,7 @@
 "categories":
 - collaboration
 - notifications
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Be notified of Datadog alerts and events in Microsoft Teams."
 "doc_link": "https://docs.datadoghq.com/integrations/microsoft_teams/"
@@ -64,7 +64,7 @@ Once the bot has been added to the team, configure the notification handle in Da
 5. On the Configuration tab, click **Add Handle**, give the handle a name, and paste the webhook URL.
 6. In the connector configuration modal, click **Save**.
 
-### Usage
+### 使用方法
 
 From a Datadog monitor, send a notification to Microsoft Teams using the [`@-notification` feature][2]. Send the notification to the address `@teams-<HANDLE>`, replacing `<HANDLE>` with the name of your Microsoft Teams handle.
 
@@ -86,151 +86,148 @@ First, install the Datadog App in Microsoft Teams:
 5. On the dropdown menu, select the team that the App should be added to, then click **Set Up** to complete the installation. 
 
 
-Next, connect your Microsoft tenant to Datadog:
+次に、Microsoft のテナントを Datadog に接続します。
 
-1. In Datadog, navigate to the [Microsoft Teams Integration Tile][1].
-2. Click **Add Tenant**, which redirects you to Microsoft.
-3. Follow the prompts and click **OK**.
+1. Datadog で、[Microsoft Teams Integration Tile][1] に移動します。
+2. **Add Tenant** をクリックすると、Microsoft に移動します。
+3. 画面の指示に従って、**OK** をクリックします。
 
-Some Datadog Incident Management features need permission to perform actions on your tenant, for example, creating a new 
-team for an incident. You need someone who is authorized to consent on behalf of the Microsoft organization to 
-grant tenant-wide admin consent, such as a user assigned the *Global Admin* role. View [Microsoft Entra ID documentation][3] for more 
-information on who can grant tenant-wide admin consent to the Datadog application.
+Datadog Incident Management の一部の機能では、テナント上でアクションを実行するための権限が必要です。たとえば、インシデント用の新しいチームを作成する場合などです。テナント全体に対する管理者の同意を得るには、Microsoft 組織を代表して同意を与える権限を持つ人物が必要です。例えば、*Global Admin* ロールが割り当てられたユーザーが該当します。Datadog アプリケーションにテナント全体に対する管理者の同意を付与できる人物についての詳細は、[Microsoft Entra ID ドキュメント][3]をご覧ください。
 
-To grant consent:
+同意を付与するには
 
-1. Navigate to the [Microsoft Teams Integration Tile][1] in Datadog.
-2. For the tenant in which you want to use Incident Management, click the gear icon on the right-hand side. 
-3. Click **Authorize Tenant**, which redirects you to Microsoft. A user who can grant tenant-wide admin consent must perform this step. Note that the Microsoft user does not need to have a Datadog account.
-4. Follow the prompts and click **OK**.
+1. Datadog で [Microsoft Teams インテグレーションタイル][1]に移動します。
+2. Incident Management を使用したいテナントで、右側の歯車アイコンをクリックします。
+3. **Authorize Tenant** をクリックすると Microsoft にリダイレクトされます。この手順を実行するには、テナント全体に対する管理者同意を与えることができるユーザーが必要です。Microsoft のユーザーが Datadog のアカウントを持っている必要はありません。
+4. 画面の指示に従って、**OK** をクリックします。
 
-### User setup
+### ユーザー設定
 
-Performing actions in Datadog from Microsoft Teams requires you to connect your Datadog and Microsoft Team accounts.
+Microsoft Teams から Datadog のアクションを実行するには、Datadog と Microsoft Team のアカウントを接続する必要があります。
 
-To connect your account from Microsoft Teams:
+Microsoft Teams からアカウントを接続するには
 
-1. Open Microsoft Teams.
-2. Start a chat with the Datadog bot by clicking on the `...` button in the vertical toolbar and selecting Datadog.
-3. Type "accounts" and hit enter.
-   {{< img src="integrations/microsoft_teams/microsoft_teams_connect_account_from_teams.png" alt="Connect accounts from Microsoft Teams" >}}
+1. Microsoft Teams を開きます。
+2. 垂直ツールバーの `...` ボタンをクリックし、Datadog を選択すると、Datadog ボットとのチャットが開始されます。
+3. "accounts" と入力し、エンターキーを押します。
+   {{< img src="integrations/microsoft_teams/microsoft_teams_connect_account_from_teams.png" alt="Microsoft Teams からのアカウント接続" >}}
 
-4. The Datadog bot will respond with instructions on how to connect your accounts. Click **Connect Datadog Account**.
-5. The Datadog bot will then send a message containing a link to connect your accounts. Click the link and follow the prompts.
-6. You will be redirected back to the [Microsoft Teams Integration Tile][1]. 
-7. Create an application key by clicking **Create** in the prompt on the [Microsoft Teams Integration Tile][1].
+4. Datadog ボットが、アカウントの接続方法について応答します。**Connect Datadog Account** をクリックします。
+5. その後、Datadog ボットが、アカウントを接続するためのリンクが含まれたメッセージを送信します。リンクをクリックし、プロンプトに従います。
+6. [Microsoft Teams Integration Tile][1] へと戻ります。
+7. [Microsoft Teams Integration Tile][1] のプロンプトで **Create** をクリックし、アプリケーションキーを作成します。
 
 
-You can also connect your accounts from Datadog:
+Datadog からアカウントを接続することも可能です。
 
-1. In Datadog, navigate to the [Microsoft Teams Integration Tile][1].
-2. Click **Connect** in the tenant listed.
-3. Follow the prompts and click **OK**.
-5. From the [Microsoft Teams Integration Tile][1], create an application key by clicking **Create** in the above prompt.
+1. Datadog で、[Microsoft Teams Integration Tile][1] に移動します。
+2. 表示されたテナントの中から、**Connect** をクリックします。
+3. 画面の指示に従って、**OK** をクリックします。
+5. [Microsoft Teams インテグレーションタイル][1]から、上記のプロンプトで **Create** をクリックしてアプリケーションキーを作成します。
 
-{{< img src="integrations/microsoft_teams/microsoft_teams_connect_account_from_datadog_v2.png" alt="Connect accounts from Datadog Microsoft Teams integration tile" >}}
+{{< img src="integrations/microsoft_teams/microsoft_teams_connect_account_from_datadog_v2.png" alt="Datadog Microsoft Teams インテグレーションタイルからアカウントを接続します" >}}
 
-### Usage
+### 使用方法
 
-#### Dashboards
+#### ダッシュボード  
 
-You can post dashboard widget snapshots on any team or chat. For a list of supported widgets, see [Scheduled Reports][4].
+ダッシュボードウィジェットのスナップショットを任意のチームまたはチャットに投稿できます。サポートされているウィジェットのリストについては、[スケジュールレポート][4]を参照してください。
 
-To share a dashboard widget in Teams:
+Teams でダッシュボードウィジェットを共有するには
 
-1. In Datadog, hover over a dashboard widget and press `CMD + C` or `CTRL + C`, or click the **Copy** button from the share menu.
-1. Paste the link into Teams.
+1. Datadog でダッシュボードウィジェットにカーソルを合わせ、`CMD + C` または `CTRL + C` を押すか、共有メニューから **Copy** ボタンをクリックします。
+1. リンクを Teams に貼り付けます。
 
-{{< img src="integrations/microsoft_teams/dashboard_share.png" alt="Sharing a dashboard widget in Microsoft Teams">}}
+{{< img src="integrations/microsoft_teams/dashboard_share.png" alt="Microsoft Teams でのダッシュボードウィジェットの共有">}}
 
-#### Incidents
+#### インシデント
 
-To declare a new incident from Microsoft Teams:
+Microsoft Teams から新しいインシデントを宣言するには
 
-1. Start a conversation in any team.
-2. Type `@Datadog` or use the `...` button to open the **Messaging extensions** menu and select the **Datadog** App.
-3. Select **Create an Incident**.
-4. Complete the form with your desired information.
-5. Click **Create**.
+1. 任意のチームで会話を開始します。
+2. `@Datadog` と入力するか、`...` ボタンで **Messaging extensions** メニューを開き、**Datadog** アプリを選択します。
+3. **Create an Incident** を選択します。
+4. 希望の情報をフォームに入力します。
+5. **作成**をクリックします。
 
-Anyone in your Microsoft Teams tenant can declare an incident, regardless of whether they have access to Datadog.
+Datadog へのアクセス権の有無を問わず、Microsoft Teams テナント内の誰でもインシデントを宣言できます。
 
-When a new incident is created, a corresponding team named `incident-(unique number ID)` is created.
+新しいインシデントが作成されると、`incident-( 一意の番号 ID )` という名前の対応するチームが作成されます。
 
-To update an incident, follow a similar process as creation:
+インシデントを更新するには、作成と同様の手順で行います。
 
-1. Start a conversation while in an incident team.
-2. Type `@Datadog` or use the `...` button to open the **Messaging extensions** menu and select the **Datadog** App.
-3. Select **Update Incident**.
-4. Complete the form with your desired information.
-5. Click **Update**.
+1. インシデントチームにいながら、会話を始めます。
+2. `@Datadog` と入力するか、`...` ボタンで **Messaging extensions** メニューを開き、**Datadog** アプリを選択します。
+3. **Update Incident** を選択します。
+4. 希望の情報をフォームに入力します。
+5. **Update** をクリックします。
 
-List all open (active and stable) incidents with:
+次を使用してオープン（アクティブで安定している）インシデントをリスト表示します。
 
 ```
 @Datadog list incidents
 ```
 
-Use the "More actions" menu on any message inside an incident team on the far right to send that message to the incident Timeline.
+インシデントチーム内のメッセージの右端にある "More actions" メニューを使用すると、そのメッセージをインシデントタイムラインに送信することができます。
 
-#### Incident updates channel
-Using an incident updates channel provides your stakeholders with organization-wide visibility into the status of all incidents directly from Microsoft Teams. Select which team and channel in your account to post these updates to, and the channel receives the following posts:
+#### インシデントの更新チャンネル
+インシデント更新チャンネルを使用すると、関係者は Microsoft Teams から直接、すべてのインシデントのステータスを組織全体で確認することができます。これらのアップデートを投稿するチームとチャンネルをアカウントで選択すると、チャンネルは次の投稿を受け取ります。
 
-   - Newly declared incidents.
-   - Changes to severity, status transition, and incident commander. 
-   - Links to the incident's overview page in App. 
-   - Link to join the dedicated incident team.
+   - 新しく宣言されたインシデント。
+   - 重要度、ステータスの移行、インシデントコマンダーへの変更点。
+   - アプリ内のインシデントの概要ページへのリンク。
+   - インシデント専門チームへの参加リンク。
 
-Once the Microsoft Teams App has been installed, you can navigate to the **Incident Settings** page. From this, you can scroll down to the **Incident Updates** Channel section and begin the set-up flow.
+Microsoft Teams アプリがインストールされたら、**Incident Settings** ページに移動できます。ここから、**Incident Updates** Channel セクションまでスクロールダウンし、セットアップフローを開始することができます。
 
-#### How to set up an incident channel:
+#### インシデントチャンネルの設定方法
 
-1. Navigate to [Incidents Settings][5].
+1. [Incidents Settings][5] に移動します。
 2. Under the Microsoft Teams section, select your connected Microsoft Teams tenant.
 3. Toggle on **Automatically create a Microsoft Teams channel for every incident**.
 4. Select the Team in which you want to automatically create new channels.
-5. Save your settings.
+5. 設定を保存します。
 
 {{< img src="integrations/microsoft_teams/ms_teams_incident_updates_v2" alt="Microsoft Teams Incident Update Channel Settings." >}}
 
-## Data collected
+## データ収集
 
-### Metrics
+### メトリクス
 
-The Microsoft Teams integration does not provide any metrics.
+Microsoft Teams インテグレーションは、メトリクスを提供しません。
 
-### Events
+### イベント
 
-The Microsoft Teams integration does not include any events.
+Microsoft Teams インテグレーションには、イベントは含まれません。
 
-### Service checks
+### サービスチェック
 
-The Microsoft Teams integration does not include any service checks.
+Microsoft Teams インテグレーションには、サービスのチェック機能は含まれません。
 
-## Permissions
+## 権限
 
-Datadog for Microsoft Teams requires the following permissions. For more information, see the [Microsoft Graph permission reference][6].
+Datadog for Microsoft Teams には、以下の権限が必要です。詳細については、[Microsoft Graph 権限リファレンス][6]を参照してください。
 
-| API / Permissions name               | Type        | Request Reason                                                                                  |
+| API / 権限名               | タイプ        | リクエスト理由                                                                                  |
 |--------------------------------------|-------------|-------------------------------------------------------------------------------------------------|
-| `ChannelSettings.ReadWrite.All`      | Application | Create and modify channels to remediate incidents using Datadog Incident Management. |
-| `GroupMember.Read.All`               | Application | Provides team and channel name auto-complete suggestions for Datadog Incident Management configuration.        |
-| `Team.Create`                        | Application | Create teams to manage and remediate incidents using Datadog Incident Management.               |
-| `TeamMember.ReadWrite.All`           | Application | Add users to Teams to manage incidents with Datadog Incident Management. |
-| `TeamsAppInstallation.ReadWrite.All` | Application | Adds the Datadog App to teams created by Datadog Incident Management.  |
-| `TeamSettings.ReadWrite.All`         | Application | Keeps Datadog Incident Management up to date with the state of incident teams.            |
+| `ChannelSettings.ReadWrite.All`      | Application | Datadog Incident Management を使用して、インシデントを修復するためのチャンネルを作成および変更します。 |
+| `GroupMember.Read.All`               | Application | Datadog Incident Management の構成に、チーム名とチャンネル名のオートコンプリート候補を提供します。        |
+| `Team.Create`                        | Application | Datadog Incident Management を使用して、インシデントを管理および修復するチームを作成します。               |
+| `TeamMember.ReadWrite.All`           | Application | Datadog Incident Management でインシデントを管理するユーザーを Teams に追加します。 |
+| `TeamsAppInstallation.ReadWrite.All` | Application | Datadog Incident Management によって作成されたチームに Datadog アプリを追加します。  |
+| `TeamSettings.ReadWrite.All`         | Application | Datadog Incident Management が、インシデントチームの状態を最新の状態に保つようにします。            |
 
-## Troubleshooting
+## トラブルシューティング
 
-### Using SSO
+### SSO の使用
 
-Use the following steps to set new channel connectors:
+次の手順を使用して、新しいチャンネルコネクターを設定します。
 
-1. Login to Datadog, then complete setup steps 1 and 2.
+1. Datadog にログインし、セットアップ手順 1 および 2 を完了します。
 
-2. After setup step 3 redirects you to Datadog from the MS Teams page, open a new tab and log into Datadog with your SSO. Then perform setup step 4 separately.
+2. セットアップ手順 3 で MS Teams ページから Datadog にリダイレクトされたら、新しいタブを開き、SSO で Datadog にログインします。次に、セットアップ手順 4 を個別に実行します。
 
-Need help? Contact [Datadog support][7].
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://app.datadoghq.com/integrations/microsoft-teams
 [2]: https://docs.datadoghq.com/monitors/notifications/#notification

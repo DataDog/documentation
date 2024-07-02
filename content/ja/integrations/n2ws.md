@@ -28,7 +28,7 @@
   "support_email": eliad.eini@n2ws.com
 "categories":
 - cloud
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/n2ws/README.md"
 "display_on_public_website": true
@@ -72,9 +72,9 @@ N2WS Backup & Recovery (CPM), known as N2WS, is an enterprise-class backup, reco
 Your N2WS Backup and Recovery instance supports the monitoring of backups, disaster recovery, copy to S3, alerts,
 and more with Datadog's monitoring service. This integration allows users to monitor and analyze the N2WS Backup and Recovery Dashboard metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 1.  Install the [Python integration][1].
 
@@ -110,7 +110,7 @@ and more with Datadog's monitoring service. This integration allows users to mon
 
     Alternatively, you can [import JSON templates from N2WS][4] to create your dashboards.
 
-## Data Collected
+## 収集データ
 
 Datadog collects the following data about N2WS Backup & Recovery backups:
 
@@ -121,19 +121,19 @@ Datadog collects the following data about N2WS Backup & Recovery backups:
 - Protected resources from any type
 - Data about volume capacity (AWS only), alerts, etc.
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "n2ws" >}}
 
 
-### Events
+### イベント
 
 Datadog collects alert messages from all N2WS Backup & Recovery hosts.
 
-### Service Checks
+### サービスチェック
 
 The N2WS Backup & Recovery integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 - [N2WS user guide and documentation][6]
 - [N2WS support][7]

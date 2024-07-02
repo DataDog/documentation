@@ -1,13 +1,13 @@
 ---
+title: Monitor Summary Widget
+description: "Display a summary view of all your Datadog monitors, or a subset based on a query."
+widget_type: "manage_status"
 aliases:
-- /ja/graphing/widgets/monitor_summary/
-description: Datadog のすべてのモニターまたはクエリに基づく一部のモニターの概要を表示する
+- /graphing/widgets/monitor_summary/
 further_reading:
-- link: /ja/dashboards/graphing_json/
-  tag: ドキュメント
-  text: JSON を使用したダッシュボードの構築
-title: モニターサマリーウィジェット
-widget_type: manage_status
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Building Dashboards using JSON
 ---
 
 モニターサマリーウィジェットは、Datadog のすべてのモニターまたはクエリに基づく一部のモニターの概要を表示します。
@@ -16,9 +16,7 @@ widget_type: manage_status
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/monitor_summary/monitor-summary-setup.png" alt="Monitor サマリーの設定" style="width:80%;">}}
-
-### コンフィギュレーション
+### 構成
 
 1. 3 つのサマリータイプ `Monitor`、`Group`、`Combined` のいずれかを選択します。
     - `Monitor` サマリータイプには、[モニタークエリ][1]に一致するモニターのステータスと名前が一覧表示されます。マルチアラートモニターの結果リストには 1 行しかなく、そのステータスはマルチアラートモニターの全体的なステータスです。ステータスカウントは、各ステータスタイプと一致するモニターの数です。
@@ -70,19 +68,9 @@ widget_type: manage_status
 
 {{< img src="dashboards/widgets/monitor_summary/monitor-summary.png" alt="表示設定" style="width:80%;">}}
 
-#### タイトル
-
-`Show a title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
-
-{{< img src="dashboards/widgets/monitor_summary/widget_title.png" alt="ウィジェットのタイトル" style="width:80%;">}}
-
-オプションで、タイトルのサイズと配置を定義できます。
-
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][3] ドキュメントをご参照ください。
-
-モニターサマリーウィジェットの[ウィジェット JSON スキーマ定義][4]は次のとおりです。
+このウィジェットは **[Dashboards API][3]** で使用できます。[ウィジェット JSON スキーマ定義][4]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
@@ -90,7 +78,7 @@ widget_type: manage_status
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/manage/
-[2]: /ja/monitors/manage/#manage-triggered-monitors-with-group-level-granularity
-[3]: /ja/api/v1/dashboards/
-[4]: /ja/dashboards/graphing_json/widget_json/
+[1]: /monitors/manage/
+[2]: /monitors/manage/#grouped-results
+[3]: /api/latest/dashboards/
+[4]: /dashboards/graphing_json/widget_json/

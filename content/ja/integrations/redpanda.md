@@ -28,7 +28,7 @@
 "categories":
 - log collection
 - message queues
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/redpanda/README.md"
 "display_on_public_website": true
@@ -70,9 +70,9 @@ Redpanda is a Kafka API-compatible streaming platform for mission-critical workl
 
 Connect Datadog with [Redpanda][1] to view key metrics and add additional metric groups based on specific user needs.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 1. [Download and launch the Datadog Agent][2].
 2. Manually install the Redpanda integration. See [Use Community Integrations][3] for more details based on the environment.
@@ -80,7 +80,7 @@ Connect Datadog with [Redpanda][1] to view key metrics and add additional metric
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 To configure this check for an Agent running on a host, run `datadog-agent integration install -t datadog-redpanda==<INTEGRATION_VERSION>`.
 
@@ -124,12 +124,12 @@ helm upgrade -f values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configuration
+### 構成
 
 {{< tabs >}}
 {{% tab "Host" %}}
 
-#### Host
+#### ホスト
 
 ##### Metric collection
 
@@ -195,21 +195,21 @@ To enable logs, see [Kubernetes Log Collection][2].
 
 [Run the Agent's status subcommand][4] and look for `redpanda` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "redpanda" >}}
 
 
-### Events
+### イベント
 
 The Redpanda integration does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "redpanda" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

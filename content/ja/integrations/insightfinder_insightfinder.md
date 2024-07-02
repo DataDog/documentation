@@ -24,7 +24,7 @@
 - marketplace
 - notifications
 - ai/ml
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -99,23 +99,23 @@
 <!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
-## Overview
-DevSecOps, DataOps, MLOps, IT operations, and SRE teams rely on [InsightFinder][1] as the one-stop AI intelligence engine to predict and prevent infrastructure, data, and security problems in complex modern IT architectures. Powered by unique patented capabilities for incident prediction, unsupervised machine learning, and pattern-driven auto-remediation, the InsightFinder platform continuously learns from machine data to identify and fix all problems before they impact business.
+## 概要
+DevSecOps、DataOps、MLOps、IT 運用、SRE チームは、複雑なモダン IT アーキテクチャにおけるインフラストラクチャー、データ、セキュリティの問題を予測・防止するワンストップ AI インテリジェンスエンジンとして [InsightFinder][1] に依存しています。インシデント予測、教師なし機械学習、パターン駆動型自動修復のための独自の特許機能を搭載した InsightFinder プラットフォームは、マシンデータから継続的に学習し、ビジネスに影響を与える前にすべての問題を特定し修正します。
 
-Customers gain value quickly, starting with an InsightFinder free trial and the company’s pre-built integrations with Datadog and other popular tools for DevSecOps, IT operations management (ITOM), and IT service management (ITSM).
+InsightFinder の無料トライアルや、Datadog をはじめとする DevSecOps、IT 運用管理 (ITOM)、IT サービス管理 (ITSM) の人気ツールとのインテグレーションにより、お客様は迅速に価値を得ることができます。
 
-## Support
+## サポート
 
-For support or feature requests, contact InsightFinder through the following channels:
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから InsightFinder にお問い合わせください。
 
-- Email: [support@insightfinder.com][4]
-- Contact [Datadog Support][5]
+- メール: [support@insightfinder.com][4]
+- [Datadog のサポートチーム][5]までお問い合わせください。
 
-### Further Reading
+### その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Identify and resolve incidents faster with InsightFinder’s offering in the Datadog Marketplace][6]
+- [Datadog Marketplace の InsightFinder の製品を使って、インシデントを迅速に特定し、解決する][6]
 
 [1]: https://insightfinder.com/
 [2]: https://app.insightfinder.com/
@@ -124,4 +124,4 @@ Additional helpful documentation, links, and articles:
 [5]: https://docs.datadoghq.com/help/
 [6]: https://www.datadoghq.com/blog/resolve-incidents-faster-with-insightfinder/
 ---
-This application is made available through the Marketplace and is supported by a Datadog Technology Partner. <a href="https://app.datadoghq.com/marketplace/app/insightfinder-insightfinder-license" target="_blank">Click Here</a> to purchase this application.
+このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/insightfinder-insightfinder-license" target="_blank">こちらをクリック</a>してください。

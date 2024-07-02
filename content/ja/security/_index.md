@@ -56,35 +56,35 @@ cascade:
         rank: 70
 ---
 
-## Overview
+## 概要
 
-Bring speed and scale to your production security operations. Datadog Security delivers real-time threat detection, and continuous configuration audits across applications, hosts, containers, and cloud infrastructure. Coupled with the greater Datadog observability platform, Datadog Security brings unprecedented integration between security and operations aligned to your organizations shared goals.
+実稼働セキュリティ運用にスピードとスケールを。Datadog Security は、リアルタイムの脅威検出と、アプリケーション、ホスト、コンテナ、クラウドインフラストラクチャー全体にわたる継続的なコンフィギュレーション監査を提供します。Datadog の可観測性プラットフォームと組み合わせることで、Datadog Security は、組織の共有目標に沿ったセキュリティと運用の間にかつてないインテグレーションをもたらします。
 
-Datadog Security includes [Application Security Management](#application-security-management), [Cloud SIEM](#cloud-siem), and [Cloud Security Management](#cloud-security-management). To learn more, check out the [30-second Product Guided Tour][14].
+Datadog Security には、[Application Security Management](#application-security-management)、[Cloud SIEM](#cloud-siem)、[Cloud Security Management](#cloud-security-management) があります。詳しくは、[30 秒製品ガイドツアー][14]をご覧ください。
 
 ## Application Security Management
 
-[Application Security Management][1] (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). ASM leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
+[Application Security Management][1] (ASM) は、SSRF (Server-Side-Request-Forgery) や SQL インジェクション、Log4Shell、XSS (Reflected Cross-Site-Scripting) など、コードレベルの脆弱性を悪用しようとするアプリケーションレベルの攻撃に対する観測可能性を提供します。ASM は、Datadog [APM][2]、[Datadog Agent][3]、およびアプリ内検出ルールを活用して、アプリケーション環境における脅威を検出します。詳しくは製品[ガイドツアー](https://www.datadoghq.com/guided-tour/security/application-security-management/)をご確認ください。
 
-{{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
+{{< img src="/security/application_security/app-sec-landing-page.png" alt="攻撃フローとフレームグラフが表示された Datadog のセキュリティシグナルパネル" width="75%">}}
 
 ## Cloud SIEM
 
-[Cloud SIEM][4] (Security Information and Event Management) detects real-time threats to your application and infrastructure, like a targeted attack, an IP communicating with your systems which matches a threat intel list, or an insecure configuration. Cloud SIEM is powered by [Datadog Log Management][5]. With these areas combined, you can [automate remediation of threats detected by Datadog Cloud SIEM][6] to speed up your threat-response workflow. Check out the dedicated [Guided Tour](https://www.datadoghq.com/guided-tour/security/cloud-siem/) to see more.
+[Cloud SIEM][4] (Security Information and Event Management) は、標的型攻撃、脅威情報リストに一致する IP 通信、安全でない構成など、アプリケーションやインフラストラクチャーに対する脅威をリアルタイムに検出します。Cloud SIEM は、[Datadog ログ管理][5]を利用しています。これらを組み合わせることで、[Datadog Cloud SIEM で検出した脅威の対処を自動化][6]し、脅威対応のワークフローを加速させることができます。詳しくは専用の[ガイドツアー](https://www.datadoghq.com/guided-tour/security/cloud-siem/)をご確認ください。
 
 {{< img src="security/security_monitoring/cloud_siem_overview_2.png" alt="The Cloud SIEM home page showing the Security Overview section with widgets for important signals, suspicious actors, impacted resources, threat intel, and signal trends" width="100%">}}
 
 ## Cloud Security Management
 
-[Cloud Security Management (CSM)][10] delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
+[Cloud Security Management (CSM)][10] は、クラウドインフラクチャー全体でリアルタイムの脅威検出と継続的な構成監査を実現し、統一ビューでシームレスなコラボレーションと迅速な修復を可能にします。 観測可能性データにより、セキュリティチームは、攻撃フローを完全にトレースすることで脅威の影響を判断し、脆弱性がトリガーされたリソース所有者を特定することができます。
 
-CSM includes [Threats][12], [Misconfigurations][11], [Identity Risks][15], and [Vulnerabilities][16]. To learn more, check out the dedicated [Guided Tour][13].
+CSM には、[Threats][12]、[Misconfigurations][11]、[Identity Risks][15]、[Vulnerabilities][16] が含まれます。詳細については、専用の[ガイドツアー][13]をご覧ください。
 
 {{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues" width="100%">}}
 
-To get started with Datadog Security, navigate to the [**Security** > **Setup**][9] page in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
+Datadog Security を使い始めるには、Datadog の [**Security** > **Setup**][9] ページに移動し、単一構成または複数構成の詳細情報を参照するか、以下のスタートアップセクションに従って、プラットフォームの各エリアの詳細について学びます。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

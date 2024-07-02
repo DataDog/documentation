@@ -12,69 +12,69 @@ further_reading:
     text: ASM threat intelligence
 ---
 
-## Overview
+## 概要
 
-ASM security signals are created when Datadog detects a threat based on a detection rule. View, search, filter, and investigate security signals in the [Signals Explorer][2], or configure [Notification Rules][8] to send signals to third-party tools.
+ASM セキュリティシグナルは、Datadog が検出ルールに基づいて脅威を検出すると作成されます。[Signals Explorer][4] でセキュリティシグナルを表示、検索、フィルター、調査したり、[通知ルール][1] を構成してサードパーティツールにシグナルを送信することができます。
 
-In the [Signals Explorer][2], filter by attributes and facets to find critical threats. Click on a signal to see details about it, including the service owner and attack details. Attack details include the authenticated user and their IP address, what rule they triggered, attack flow, related traces, and other security signals. From this page, you can block IP addresses and users, and also click to create a case and declare an incident.
+[Signals Explorer][2] では、属性やファセットでフィルターをかけて重要な脅威を見つけます。シグナルをクリックすると、サービス所有者や攻撃情報など、シグナルの詳細を確認できます。攻撃情報には、認証ユーザーとその IP アドレス、トリガーしたルール、攻撃フロー、関連するトレースやその他のセキュリティシグナルが含まれます。このページから、IP アドレスやユーザーをブロックできるほか、クリックしてケースを作成し、インシデントを宣言することもできます。
 
-{{< img src="security/application_security/threats/security_signals/appsec-threat-signals.png" alt="Overview of investigating threats in signals explorer with details side panel">}}
+{{< img src="security/application_security/threats/security_signals/appsec-threat-signals.png" alt="Signals Explorer での脅威の調査の概要と詳細サイドパネル">}}
 
 ## Filter security signals
 
-To filter the security signals in the [Signals Explorer][2], use the search query `@workflow.triage.state:<status>`, where `<status>` is the state you want to filter on (`open`, `under_review`, or `archived`). You can also use the **Signal State** facet on the facet panel.
+[Signals Explorer][2] でセキュリティシグナルをフィルターするには、検索クエリ `@workflow.triage.state:<status>` を使用します。`<status>` はフィルターしたい状態 (`open`、`under_review`、`archived`) です。ファセットパネルの **Signal State** ファセットを使用することもできます。
 
 ## Triage a signal
 
 You can triage a signal by assigning it to a user for further investigation. The assigned user can then track their review by updating the signal's status.
 
-1. On the [Signals Explorer][2] page, select a security signal.
+1. [Signals Explorer][2] ページでセキュリティシグナルを選択します。
 2. On the signal side panel, click the user profile icon and select a user.
 3. To update the status of the security signal, click the triage status dropdown menu and select a status. The default status is **Open**.
     - **Open**: The signal has not yet been resolved.
-    - **Under Review**: The signal is actively being investigated. From the **Under Review** state, you can move the signal to **Archived** or **Open** as needed.
+    - **Under Review**: シグナルはアクティブに調査中です。**Under Review** の状態から、必要に応じてシグナルを **Archived** または **Open** に移動することができます。
     - **Archived**: The detection that caused the signal has been resolved. From the **Archived** state, you can move the signal back to **Open** if it's within 30 days of when the signal was originally detected.
 
-**Note**: To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][9] for more information about Datadog's default roles and granular role-based access control permissions available for Application Security Management.
+**注**: セキュリティシグナルを変更するには、`security_monitoring_signals_write` 権限が必要です。Datadog のデフォルトロールと Application Security Management で利用可能な粒度の高いロールベースのアクセス制御権限については、[ロールベースのアクセス制御][3]を参照してください。
 
-## Create a case
+## ケースの作成
 
 Use [Case Management][6] to track, triage, and investigate security signals.
 
-1. On the [Signals Explorer][2] page, select a security signal.
-2. On the signal side panel, select the **Create a case** dropdown. Select **Create a new case**, or **Add to an existing case** to add the signal to an existing case. 
+1. [Signals Explorer][2] ページでセキュリティシグナルを選択します。
+2. シグナルのサイドパネルで、**Create a case** ドロップダウンメニューを選択します。クリックし、**Create a new case** を選択するか、**Add to an existing case** を選択して、シグナルを既存のケースに追加します。
 3. Enter a title and optional description.
 4. Click **Create Case**.
 
 ## Declare an incident 
 
-Use [Incident Management][4] to create an incident for a security signal.
+セキュリティシグナルのインシデントを作成するには、[Incident Management][4] を使用します。
 
-1. On the [Signals Explorer][2] page, select a security signal.
-2. On the signal side panel, click the **Declare Indident** dropdown menu and select **Create an incident**, or **Add to an existing incident**.
+1. [Signals Explorer][2] ページでセキュリティシグナルを選択します。
+2. シグナルのサイドパネルで、**Declare Incident** ドロップダウンメニューをクリックし、**Create an incident** または **Add to an existing incident** を選択します。
 3. On the incident creation modal, configure the incident by specifying details such as the severity level and incident commander.
 4. Click **Declare Incident**.
 
 ## Run a workflow
 
-Use [Workflow Automation][5] to manually trigger a workflow for a security signal. 
+セキュリティシグナルでワークフローを手動でトリガーするには、[ワークフローの自動化][5]を使用します。
 
-1. On the [Signals Explorer][2] page, select a security signal.
-2. Scroll down to the **What is Workflow Automation** section. 
+1. [Signals Explorer][2] ページでセキュリティシグナルを選択します。
+2. **What is Workflow Automation** セクションまで下へスクロールします。
 3. Click **Run Workflow**.
 4. On the workflow modal, select the workflow you want to run. Depending on the workflow, you may be required to enter additional input parameters.
-5. Click **Run**.
+5. **Run** をクリックします。
 
-## Review and remediate
+## 確認と修正
 
-1. On the [Signals Explorer][2] page, select a security signal.
-2. On the signal side panel, click each of the tabs, such as **Attack Flow**, **Activity Summary**, and **Rule Details**, to review the information.
-3. Review the **Suggested Next Steps**, and take action:
-    -  Click **Block all Attacking IPs** (by specific duration or permanently).
-    -  Click **Automated Attacker Blocking** (based on [detection][10] rules).
-    -  Click **[Block with Edge WAF][11]**.
+1. [Signals Explorer][2] ページでセキュリティシグナルを選択します。
+2. シグナルのサイドパネルで、**Attack Flow**、**Activity Summary**、**Rule Details** などの各タブをクリックし、情報を確認します。
+3. **Suggested Next Steps** を確認し、アクションを起こします。
+    -  **Block all Attacking IPs** をクリックする (指定した期間または恒久的)。
+    -  **Automated Attacker Blocking** をクリックする ([検出][10]ルールに基づく)。
+    -  **[Block with Edge WAF][11]** をクリックする。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

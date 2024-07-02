@@ -21,13 +21,13 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/directory/README.md"
 "display_on_public_website": true
 "draft": false
 "git_integration_title": "directory"
-"integration_id": "system"
+"integration_id": "システム"
 "integration_title": "Directory"
 "integration_version": "2.1.1"
 "is_public": true
@@ -66,13 +66,13 @@ Capture metrics from directories and files of your choosing. The Agent collects:
 - Age of the last modification
 - Age of the creation
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Directory check is included in the [Datadog Agent][1] package, so you don't need to install anything else on your server.
 
-### Configuration
+### 構成
 
 1. Edit the `directory.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][2] to start collecting Directory performance data. See the [sample directory.d/conf.yaml][3] for all available configuration options.
 
@@ -97,21 +97,21 @@ The Directory check is included in the [Datadog Agent][1] package, so you don't 
 
 [Run the Agent's status subcommand][5] and look for `directory` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "directory" >}}
 
 
-### Events
+### イベント
 
 The Directory check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "directory" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 When running the check against very large directories and recursion is set to true, be aware that is an intensive operation on the I/O and CPU. The default check frequency, every 15 seconds, may need to be adjusted. 
 

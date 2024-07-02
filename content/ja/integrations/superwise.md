@@ -25,7 +25,7 @@
 "categories":
 - incidents
 - ai/ml
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/superwise/README.md"
 "display_on_public_website": true
@@ -65,60 +65,60 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
-## Overview
-[Superwise][1] provides model observability for high-scale machine learning (ML) operations.
-Superwise's model observability gives you visibility and context into your models' behaviors, so you can easily monitor model risks based on different use cases. With Superwise, data scientists, ML engineers, and business ops get model observability without alert fatigue, so you can be confident about your model management.
+## 概要
+[Superwise][1] は、大規模な機械学習 (ML) 運用のためのモデル観測性を提供します。
+Superwise のモデル観測機能により、モデルの挙動を可視化し、コンテキストを提供することで、様々なユースケースに基づくモデルリスクを容易に監視することができます。Superwise を使用することで、データサイエンティスト、ML エンジニア、ビジネスオペレーションは、アラートに疲れることなくモデル観測性を得られるので、モデル管理について自信を持つことができます。
 
-![Superwise Dashboard][2]
+![Superwise ダッシュボード][2]
 
-Superwise's model metrics and incidents integration sends out-of-the-box model metrics, including drift, activity, incidents, and custom metrics, directly to Datadog. You get an overview of which models are not predicting the expected results, which can be configured to any use case, logic, segmentation, threshold, and sensitivity.
+Superwise のモデルメトリクスとインシデントのインテグレーションは、ドリフト、アクティビティ、インシデント、カスタムメトリクスなど、すぐに使えるモデルメトリクスを Datadog に直接送信します。ユースケース、ロジック、セグメンテーション、しきい値、感度を任意に構成し、どのモデルが期待通りの結果を予測できていないかの概要を得ることができます。
 
-With the Datadog integration configured in Superwise, standard model metrics are sent to Datadog, and users get model observability dashboards in Datadog. You can configure any specific model metric and incident policy, and send them to Datadog for model observability that is tailored to your use case.
+Superwise で Datadog インテグレーションを構成すると、標準的なモデルメトリクスが Datadog に送信され、ユーザーは Datadog でモデル観測性のダッシュボードを取得できます。特定のモデルメトリクスやインシデントポリシーを構成し、Datadog に送信することで、ユースケースに合わせたモデル観測性を実現することが可能です。
 
-## Setup
+## セットアップ
 
-1. Go to [Superwise portal][3] and select **Integrations**.
+1. [Superwise ポータル][3]で、**Integrations** を選択します。
 
-2. Click **Create a new channel** and select **Datadog**.
+2. **Create a new channel** をクリックし、**Datadog** を選択します。
 
-    ![Superwise - Add new integration][4]
+    ![Superwise - 新しいインテグレーションを追加する][4]
 
-3. Input your Datadog API and application keys, and click **Test**. A test request is sent to your Datadog account to validate the integration. If the request was successfully sent, there is a message in Superwise saying the test was delivered successfully. To finish the setup, click **Create channel**.
+3. Datadog の API キーとアプリケーションキーを入力し、**Test** をクリックします。インテグレーションを検証するために、Datadog アカウントにテストリクエストが送信されます。リクエストの送信が成功した場合、Superwise にテストが正常に配信された旨のメッセージが表示されます。セットアップを終了するには、**Create channel** をクリックします。
 
-    ![Superwise - Add new Datadog channel][5]
+    ![Superwise - Datadog の新しいチャンネルを追加する][5]
 
-4. When setup is complete, the new Datadog integration widget is available:
+4. セットアップが完了すると、新しい Datadog インテグレーションウィジェットが利用できるようになります。
 
-    ![Superwise Integration][6]
+    ![Superwise インテグレーション][6]
 
-### Validation
-In Datadog, go to **Metrics Explorer** and search for the metric `superwise.integration.test` to verify that the integration between Superwise and Datadog is working.
+### 検証
+Datadog の **Metrics Explorer** で、メトリクス `superwise.integration.test` を検索して、Superwise と Datadog 間のインテグレーションが機能していることを確認します。
 
-![superwise.integration.test graph in Datadog][7]
+![Datadog の superwise.integration.test グラフ][7]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "superwise" >}}
 
 
-### Events
+### イベント
 
-The Superwise integration does not include any events.
+Superwise インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 
-The Superwise integration does not include any service checks.
+Superwise インテグレーションには、サービスのチェック機能は含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? See the [Superwise documentation][9].
+サポートが必要な場合は、[Superwise のドキュメント][9]をご覧ください。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor model performance with Superwise's offering in the Datadog Marketplace][10]
+- [Datadog マーケットプレイスで Superwise が提供するモデルパフォーマンスの監視][10]
 
 [1]: https://www.superwise.ai/
 [2]: https://raw.githubusercontent.com/DataDog/integrations-extras/master/superwise/images/5.png

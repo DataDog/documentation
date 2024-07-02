@@ -11,7 +11,7 @@
 - languages
 - metrics
 - tracing
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/rum_javascript/README.md"
 "display_on_public_website": true
@@ -62,7 +62,7 @@ Monitor your JavaScript applications from end-to-end by:
 - Unifying full-stack monitoring in one platform for frontend and backend development teams
 
 
-## Setup
+## セットアップ
 
 ### Collect RUM events 
 
@@ -76,9 +76,9 @@ To start sending your JavaScript application's traces to Datadog, see [Connect R
 
 To start forwarding your JavaScript application's logs to Datadog, see [Browser Log Collection][4].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The JavaScript integration does not include any metrics. To generate custom metrics from your RUM application, see [Generate Metrics][5].
 
@@ -90,7 +90,7 @@ For more information about events and attributes, see [RUM Browser Data Collecte
 
 The JavaScript integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog Support][7]. 
 

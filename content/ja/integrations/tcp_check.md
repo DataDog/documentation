@@ -21,14 +21,14 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "network"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/tcp_check/README.md"
 "display_on_public_website": true
 "draft": false
 "git_integration_title": "tcp_check"
-"integration_id": "system"
-"integration_title": "TCP Check"
+"integration_id": "システム"
+"integration_title": "TCP チェック"
 "integration_version": "4.8.0"
 "is_public": true
 "manifest_version": "2.0.0"
@@ -127,7 +127,7 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
 
 [Run the Agent's `status` subcommand][3] and look for `tcp_check` under the Checks section.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "tcp_check" >}}

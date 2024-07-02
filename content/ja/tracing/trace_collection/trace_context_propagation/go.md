@@ -1,6 +1,5 @@
 ---
 title: Propagating Go Trace Context
-kind: documentation
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
@@ -14,33 +13,30 @@ further_reading:
 ---
 
 
-The Datadog APM tracer supports extraction and injection of [B3][8] and [W3C Trace Context][10] headers for distributed tracing.
+Datadog APM トレーサーは、分散型トレーシングのために [B3][8] や [W3C Trace Context][10] のヘッダーの抽出と挿入をサポートしています。
 
 Distributed headers injection and extraction is controlled by
 configuring injection/extraction styles. Supported styles are:
 `tracecontext`, `datadog`, `B3`, and `B3 single header`.
 
-- Configure injection styles using the `DD_TRACE_PROPAGATION_STYLE_INJECT=tracecontext,B3` environment variable.
-- Configure extraction styles using the `DD_TRACE_PROPAGATION_STYLE_EXTRACT=tracecontext,B3` environment variable.
-- Configure both injection and extraction styles using the `DD_TRACE_PROPAGATION_STYLE=tracecontext,B3` environment variable.
+- 環境変数 `DD_TRACE_PROPAGATION_STYLE_INJECT=tracecontext,B3` を用いて挿入スタイルを構成する
+- 環境変数 `DD_TRACE_PROPAGATION_STYLE_EXTRACT=tracecontext,B3` を用いて抽出スタイルを構成する
+- 環境変数 `DD_TRACE_PROPAGATION_STYLE=tracecontext,B3` を用いて挿入スタイルと抽出スタイルの両方を構成する
 
 The values of these environment variables are comma-separated lists of
 header styles enabled for injection or extraction. By default,
 the `datadog,tracecontext` styles are enabled.
 
-To disable trace context propagation, set the value of the environment variables to `none`.
-- Disable injection styles using the `DD_TRACE_PROPAGATION_STYLE_INJECT=none` environment variable.
-- Disable extraction styles using the `DD_TRACE_PROPAGATION_STYLE_EXTRACT=none` environment variable.
-- Disable all trace context propagation (both inject and extract) using the `DD_TRACE_PROPAGATION_STYLE=none` environment variable.
+トレースコンテキストの伝搬を無効にするには、環境変数の値を `none` に設定します。
+- 環境変数 `DD_TRACE_PROPAGATION_STYLE_INJECT=none` を用いて挿入スタイルを無効にする
+- 環境変数 `DD_TRACE_PROPAGATION_STYLE_EXTRACT=none` を用いて抽出スタイルを無効にする
+- 環境変数 `DD_TRACE_PROPAGATION_STYLE=none` を使って、すべてのトレースコンテキストの伝搬を無効にします (挿入と抽出の両方)。
 
-If multiple environment variables are set, `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-override any value provided in `DD_TRACE_PROPAGATION_STYLE`.
+複数の環境変数が設定されている場合、`DD_TRACE_PROPAGATION_STYLE_INJECT` と `DD_TRACE_PROPAGATION_STYLE_EXTRACT` は `DD_TRACE_PROPAGATION_STYLE` で指定した値をオーバーライドします。
 
-If multiple extraction styles are enabled, extraction attempts are made
-in the order that those styles are specified. The first successfully
-extracted value is used.
+複数の抽出スタイルが有効な場合、それらのスタイルが指定されている順序で抽出が試行されます。最初に正常に抽出された値が使用されます。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

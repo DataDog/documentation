@@ -4,7 +4,7 @@
 - cloud
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon FSx metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_fsx/"
@@ -29,9 +29,9 @@ Amazon FSx is a fully managed service that provides scalable storage for NetApp 
 
 Enable this integration to see all your FSx metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -69,19 +69,19 @@ To track all user accesses of individual files, folders, and file shares, integr
 Amazon FSx is integrated with AWS CloudTrail which tracks every FSx action taken by a user, role, or AWS service. 
 Enable Datadog's [CloudTrail Integration][9] to monitor all FSx API calls in your AWS account.
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_fsx" >}}
 
 
-### Events
+### イベント
 
 The Amazon FSx integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon FSx integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][11].
 

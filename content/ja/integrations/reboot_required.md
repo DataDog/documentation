@@ -23,7 +23,7 @@
 "categories":
 - "developer tools"
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/reboot_required/README.md"
 "display_on_public_website": true
@@ -60,11 +60,11 @@
 
 Linux systems that are configured to autoinstall packages may not be configured to autoreboot (it may be desirable to time this manually). This check enables alerts to be fired in the case where reboots are not performed in a timely manner.
 
-## Setup
+## セットアップ
 
 The Reboot Required check is not included in the [Datadog Agent][1] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Reboot Required check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -76,7 +76,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Reboot R
 
 2. Configure your integration similar to core [integrations][3].
 
-### Configuration
+### 構成
 
 1. Edit the `reboot_required.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4]. See the [sample reboot_required.d/conf.yaml][5] for all available configuration options.
 
@@ -93,21 +93,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Reboot R
 
 [Run the Agent's `status` subcommand][7] and look for `reboot_required` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 No metrics are collected.
 
-### Events
+### イベント
 
 The reboot_required check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "reboot_required" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

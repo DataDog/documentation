@@ -24,7 +24,7 @@
 - configuration & deployment
 - notifications
 - provisioning
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/configcat/README.md"
 "display_on_public_website": true
@@ -71,7 +71,7 @@ This integration ensures that every setting change in ConfigCat is sent to Datad
 *Example:*
 ![DatadogEvent][4]
 
-## Setup
+## セットアップ
 
 1. Have a [Datadog subscription][5].
 2. Get a [Datadog API Key][6].
@@ -86,13 +86,13 @@ This integration ensures that every setting change in ConfigCat is sent to Datad
 1. Open the [integrations tab][8] on ConfigCat Dashboard.
 2. Click on Datadog's DISCONNECT button and set your Datadog API key.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 ConfigCat integration does not include any metrics.
 
-### Events
+### イベント
 
 All ConfigCat related events collected appear within the Datadog Event Stream with the `source:configcat` property are tagged with your product, config and environment names.
 
@@ -100,11 +100,11 @@ For example here is how to search for events that happened in the production env
 
 ![Filtering][9]
 
-### Service Checks
+### サービスチェック
 
 ConfigCat integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? See the [ConfigCat documentation][10] or contact [ConfigCat support][11].
 

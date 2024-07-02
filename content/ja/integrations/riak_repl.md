@@ -22,7 +22,7 @@
   "support_email": britt.treece@gmail.com
 "categories":
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/riak_repl/README.md"
 "display_on_public_website": true
@@ -62,11 +62,11 @@
 
 This check monitors Riak replication [riak-repl][1].
 
-## Setup
+## セットアップ
 
 The Riak-Repl check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Riak-Repl check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -78,7 +78,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Riak-Rep
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `riak_repl.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your riak_repl performance data. See the [sample riak_repl.d/conf.yaml][5] for all available configuration options.
 
@@ -88,21 +88,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Riak-Rep
 
 Run the [Agent's status subcommand][7] and look for `riak_repl` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "riak_repl" >}}
 
 
-### Service Checks
+### サービスチェック
 
 The Riak-Repl integration does not include any service checks.
 
-### Events
+### イベント
 
 The Riak-Repl integration does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

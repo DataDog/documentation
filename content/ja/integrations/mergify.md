@@ -25,7 +25,7 @@
   "support_email": support@mergify.com
 "categories":
 - developer tools
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/mergify/README.md"
 "display_on_public_website": true
@@ -70,9 +70,9 @@ Datadog account, you can set up monitors for anomaly alerts and analyze merge
 queue performance. You can maintain awareness of Mergify service availability
 and optimize your development workflow using this Datadog integration.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 #### From release
 
@@ -92,7 +92,7 @@ To install the Mergify check on your host:
  run `datadog-agent integration install -w
  path/to/mergify/dist/<ARTIFACT_NAME>.whl`.
 
-### Configuration
+### 構成
 
 1. Edit the `mergify.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4] to start collecting your Mergify [metrics](#metrics).
 
@@ -104,17 +104,17 @@ To install the Mergify check on your host:
 
 Run the [Agent's status subcommand][7] and look for `mergify` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "mergify" >}}
 
 
-### Events
+### イベント
 
 Mergify does not include any events.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Mergify support][1].
 

@@ -3,7 +3,7 @@
 - cloud
 - aws
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track key Amazon Translate metrics."
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_translate/"
@@ -28,9 +28,9 @@ Amazon Translate is a neural machine translation service for translating text to
 
 Enable this integration to see all your Translate metrics in Datadog.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -55,21 +55,21 @@ Configure Amazon Translate to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][5]
     - [Add a manual trigger on the CloudWatch Log Group][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_translate" >}}
 
 
-### Events
+### イベント
 
 The Amazon Translate integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Translate integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

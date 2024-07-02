@@ -35,10 +35,10 @@ To monitor integrations that are not compatible with Autodiscovery, you can use 
 
 Some integrations require setup steps, such as creating an access token or granting read permission to the Datadog Agent. Follow the instructions in the **Setup** section of your integration's documentation.
 
-### Community integrations
+### コミュニティのインテグレーション
 To use an integration that is not packaged with the Datadog Agent, you must build a custom image that contains your desired integration. See [Use Community Integrations][5] for instructions.
 
-## Configuration
+## 構成
 
 Some commonly-used integrations come with default configuration for Autodiscovery. See [Autodiscovery auto-configuration][6] for details, including a list of auto-configured integrations and their corresponding default configuration files. If your integration is in this list, and the default configuration is sufficient for your use case, no further action is required.
 
@@ -62,10 +62,10 @@ LABEL "com.datadoghq.ad.checks"='{"<INTEGRATION_NAME>": {"instances": [<INSTANCE
 For earlier Agent versions:
 
 ```yaml
-LABEL "com.datadoghq.ad.check_names"='[<INTEGRATION_NAME>]'
-LABEL "com.datadoghq.ad.init_configs"='[<INIT_CONFIG>]'
-LABEL "com.datadoghq.ad.instances"='[<INSTANCE_CONFIG>]'
-LABEL "com.datadoghq.ad.logs"='[<LOGS_CONFIG>]'
+LABEL "com.datadoghq.ad.check_names"='[<インテグレーション名>]'
+LABEL "com.datadoghq.ad.init_configs"='[<初期構成>]'
+LABEL "com.datadoghq.ad.instances"='[<インスタンス構成>]'
+LABEL "com.datadoghq.ad.logs"='[<ログ構成>]'
 ```
 
 #### docker-compose.yaml
@@ -81,10 +81,10 @@ For earlier Agent versions:
 
 ```yaml
 labels:
-  com.datadoghq.ad.check_names: '[<INTEGRATION_NAME>]'
-  com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
-  com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
-  com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
+  com.datadoghq.ad.check_names: '[<インテグレーション名>]'
+  com.datadoghq.ad.init_configs: '[<初期構成>]'
+  com.datadoghq.ad.instances: '[<インスタンス構成>]'
+  com.datadoghq.ad.logs: '[<ログ構成>]'
 ```
 
 #### Using docker run, nerdctl run, or podman run
@@ -101,7 +101,7 @@ For earlier Agent versions:
 docker run -l com.datadoghq.ad.check_names='[<INTEGRATION_NAME>]' -l com.datadoghq.ad.init_configs='[<INIT_CONFIG>]' -l com.datadoghq.ad.instances='[<INSTANCE_CONFIG>]' -l com.datadoghq.ad.logs='[<LOGS_CONFIG>]'
 ```
 
-**Note**: You can escape JSON while configuring these labels. For example:
+**注**: これらのラベルを構成する際に、JSON をエスケープすることができます。例:
 ```shell
 docker run -l "com.datadoghq.ad.checks="{\"apache\": {\"instances\": [{\"apache_status_url\":\"http://%%host%%/server-status?auto2\"}]}}"
 ```
@@ -129,12 +129,12 @@ version: "1.0"
 services:
 ...
   project:
-    image: '<IMAGE_NAME>'
+    image: '<イメージ名>'
     labels:
-      com.datadoghq.ad.check_names: '[<INTEGRATION_NAME>]'
-      com.datadoghq.ad.init_configs: '[<INIT_CONFIG>]'
-      com.datadoghq.ad.instances: '[<INSTANCE_CONFIG>]'
-      com.datadoghq.ad.logs: '[<LOGS_CONFIG>]'
+      com.datadoghq.ad.check_names: '[<インテグレーション名>]'
+      com.datadoghq.ad.init_configs: '[<初期構成>]'
+      com.datadoghq.ad.instances: '[<インスタンス構成>]'
+      com.datadoghq.ad.logs: '[<ログ構成>]'
 
 ```
 
@@ -158,13 +158,13 @@ You can store Autodiscovery templates as local files inside the mounted `/conf.d
      <LOGS_CONFIG>
    ```
 
-2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
+2. ホスト の `conf.d/` フォルダーをコンテナ化 Agent の `conf.d` フォルダーにマウントします。
 
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 You can source Autodiscovery templates from [Consul][1], [etcd][2], or [ZooKeeper][3]. You can configure your key-value store in the `datadog.yaml` configuration file (and subsequently mount this file inside the Agent container), or as environment variables in the Agent container.
 
-**Configure in datadog.yaml**:
+**datadog.yaml での構成**
 
 In `datadog.yaml`, set the `<KEY_VALUE_STORE_IP>` address and `<KEY_VALUE_STORE_PORT>` of your key-value store:
 
@@ -199,9 +199,9 @@ In `datadog.yaml`, set the `<KEY_VALUE_STORE_IP>` address and `<KEY_VALUE_STORE_
 
 [Restart the Datadog Agent][4] to apply your changes.
 
-**Configure in environment variables**:
+**環境変数での構成**
 
-With the key-value store enabled as a template source, the Agent looks for templates under the key `/datadog/check_configs`. Autodiscovery expects a key-value hierarchy like this:
+key-value ストアがテンプレートソースとして有効になっている場合、Agent はキー `/datadog/check_configs` の下でテンプレートを探します。オートディスカバリーは、以下のような key-value 階層を前提とします。
 
 ```yaml
 /datadog/
@@ -243,7 +243,7 @@ You can also use custom identifiers. See [Custom Autodiscovery Identifiers][21].
 `<LOGS_CONFIG>`
 : The configuration parameters listed under `logs` in your integration's `<INTEGRATION_NAME>.d/conf.yaml.example` file.
 
-## Examples
+## 例
 
 ### Redis integration
 
@@ -291,12 +291,12 @@ labels:
        service: "redis_service"
    ```
 
-2. Mount your host `conf.d/` folder to the containerized Agent's `conf.d` folder.
+2. ホスト の `conf.d/` フォルダーをコンテナ化 Agent の `conf.d` フォルダーにマウントします。
 
 {{% /tab %}}
 {{% tab "Key-value store" %}}
 
-The following etcd commands create a Redis integration template with a custom `password` parameter:
+以下の etcd コマンドは、カスタム `password` パラメーターを使用して Redis インテグレーションテンプレートを作成します。
 
 ```conf
 etcdctl mkdir /datadog/check_configs/redis

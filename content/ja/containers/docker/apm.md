@@ -7,7 +7,7 @@ aliases:
     - /agent/docker/apm
 further_reading:
     - link: "https://github.com/DataDog/datadog-agent/tree/main/pkg/trace"
-      tag: Source Code
+      tag: ソースコード
       text: Source code
     - link: "/integrations/amazon_ecs/#trace-collection"
       tag: Documentation
@@ -26,19 +26,19 @@ further_reading:
       text: Assign tags to all data emitted by a container
 ---
 
-As of Agent 6.0.0, the Trace Agent is enabled by default. If it has been turned off, you can re-enable it in the `gcr.io/datadoghq/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
+Agent 6.0.0 では、Trace Agent はデフォルトで有効になっています。オフにした場合は、`gcr.io/datadoghq/agent` コンテナで環境変数として `DD_APM_ENABLED=true` を渡すことで再び有効にすることができます。
 
-The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
+このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
 
-<div class="alert alert-info">If you are collecting traces from a containerized app (your Agent and app running in separate containers), as an alternative to the following instructions, you can automatically inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">Injecting Libraries</a> for instructions.</div>
+<div class="alert alert-info">コンテナ化されたアプリ (Agent とアプリが別々のコンテナで動作している) からトレースを収集する場合、以下の説明の代わりに、トレーシングライブラリをアプリケーションに自動的に挿入することができます。手順については、<a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">ライブラリの挿入</a>をお読みください。</div>
 
-## Tracing from the host
+## ホストからのトレース
 
-Tracing is available on port `8126/tcp` from _your host only_ by adding the option `-p 127.0.0.1:8126:8126/tcp` to the `docker run` command.
+`docker run` コマンドにオプション `-p 127.0.0.1:8126:8126/tcp` を追加すると、ポート `8126/tcp` で _自分のホストからのみ_ トレースを利用できます。
 
-To make it available from _any host_, use `-p 8126:8126/tcp` instead.
+_任意のホスト_ からトレースを利用するには、`-p 8126:8126/tcp` を使用します。
 
-For example, the following command allows the Agent to receive traces from your host only:
+たとえば、次のコマンドを使用すると、Agent はユーザーのホストからのみトレースを受信します。
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -55,7 +55,7 @@ docker run -d --cgroupns host \
               -e DD_SITE=<DATADOG_SITE> \
               gcr.io/datadoghq/agent:latest
 ```
-Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
+`<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場合 (デフォルトは `datadoghq.com`)。
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -67,12 +67,12 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_SITE=<DATADOG_SITE> \
               gcr.io/datadoghq/agent:latest
 ```
-Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
+`<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場合 (デフォルトは `datadoghq.com`)。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Docker APM Agent environment variables
+## Docker APM Agent の環境変数
 
 Use the following environment variables to configure tracing for the Docker Agent. See the [sample `config_template.yaml` file][8] for more details.
 
@@ -154,24 +154,24 @@ Use the following environment variables to configure tracing for the Docker Agen
 : optional - _string_ - **default**: `info` 
 <br/>Sets the minimum logging level. Valid options: `trace`, `debug`, `info`, `warn`, `error`, `critical`, and `off`.
 
-## Tracing from other containers
+## 他のコンテナからのトレース
 
-As with DogStatsD, traces can be submitted to the Agent from other containers either using [Docker networks](#docker-network) or with the [Docker host IP](#docker-host-ip).
+DogStatsD と同様に、[Docker ネットワーク](#docker-network)または [Docker ホスト IP](#docker-host-ip) を使用して、他のコンテナから Agent にトレースを送信できます。
 
-### Docker network
+### Docker ネットワーク
 
-As a first step, create a user-defined bridge network:
+最初に、ユーザー定義のブリッジネットワークを作成します。
 
 ```bash
 docker network create <NETWORK_NAME>
 ```
 
-The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
+このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
 
-Then start the Agent and the application container, connected to the network previously created:
+次に、先ほど作成したネットワークに接続されている Agent とアプリケーションコンテナを起動します。
 
 {{< tabs >}}
-{{% tab "Standard" %}}
+{{% tab "標準" %}}
 
 ```bash
 # Datadog Agent
@@ -187,14 +187,14 @@ docker run -d --name datadog-agent \
               -e DD_SITE=<DATADOG_SITE> \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
-# Application
+# アプリケーション
 docker run -d --name app \
               --network <NETWORK_NAME> \
               -e DD_AGENT_HOST=datadog-agent \
               company/app:latest
 ```
 
-Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
+`<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場合 (デフォルトは `datadoghq.com`)。
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -210,29 +210,29 @@ docker run -d --name datadog-agent \
               -e DD_SITE=<DATADOG_SITE> \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               gcr.io/datadoghq/agent:latest
-# Application
+# アプリケーション
 docker run -d --name app \
               --network "<NETWORK_NAME>" \
               -e DD_AGENT_HOST=datadog-agent \
               company/app:latest
 ```
-Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
+`<DATADOG_SITE>` が {{< region-param key="dd_site" code="true" >}} である場合 (デフォルトは `datadoghq.com`)。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-This exposes the hostname `datadog-agent` in your `app` container.
-If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defined under the `networks` section of your `docker-compose.yml`.
+これで `app` コンテナ内のホスト名 `datadog-agent` が公開されます。
+`docker-compose` を使用している場合、`<NETWORK_NAME>` パラメーターは、`docker-compose.yml` の `networks` セクションに定義されている名前になります。
 
-Your application tracers must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port in your application containers. The example above uses host `datadog-agent` and port `8126` (the default value so you don't have to set it).
+このアドレスにトレースを送信するには、アプリケーショントレーサーを構成する必要があります。アプリケーションコンテナで、Agent コンテナ名として `DD_AGENT_HOST`、Agent Trace ポートとして `DD_TRACE_AGENT_PORT` を使用して、環境変数を設定します。上の例では、ホストに `datadog-agent`、ポートに `8126` を使用しています。（デフォルト値なので設定する必要はありません。）
 
-Alternately, see the examples below to set the Agent host manually in each supported language:
+または、サポートされている言語ごとに、以下の例を参照して Agent ホストを手動で設定します。
 
 {{< programming-lang-wrapper langs="java,python,ruby,go,nodeJS,.NET" >}}
 
 {{< programming-lang lang="java" >}}
 
-Either update the Java Agent configuration with environment variables:
+環境変数を使用して Java Agent 構成を更新します。
 
 ```bash
 DD_AGENT_HOST=datadog-agent \
@@ -240,7 +240,7 @@ DD_TRACE_AGENT_PORT=8126 \
 java -javaagent:/path/to/the/dd-java-agent.jar -jar /your/app.jar
 ```
 
-or through system properties:
+または、システムプロパティを使用して更新します。
 
 ```bash
 java -javaagent:/path/to/the/dd-java-agent.jar \
@@ -303,26 +303,26 @@ const tracer = require('dd-trace').init({
 
 {{< programming-lang lang=".NET" >}}
 
-Set the environment variables before running your instrumented app:
+インスツルメンテーションされたアプリを起動する前に変数を設定します。
 
 ```bash
-# Environment variables
+# 環境変数
 export CORECLR_ENABLE_PROFILING=1
 export CORECLR_PROFILER={846F5F1C-F9AE-4B07-969E-05C26BC060D8}
 export CORECLR_PROFILER_PATH=<SYSTEM_DEPENDENT_PATH>
 export DD_DOTNET_TRACER_HOME=/opt/datadog
 
-# For containers
+# コンテナ
 export DD_AGENT_HOST=datadog-agent
 export DD_TRACE_AGENT_PORT=8126
 
-# Start your application
+# アプリケーションの開始
 dotnet example.dll
 ```
 
-The value for the `CORECLR_PROFILER_PATH` environment variable varies based on the system where the application is running:
+環境変数 `CORECLR_PROFILER_PATH` の値は、アプリケーションが動作しているシステムに応じて変化します。
 
-   Operating System and Process Architecture | CORECLR_PROFILER_PATH Value
+   オペレーティングシステムとプロセスアーキテクチャ | CORECLR_PROFILER_PATH 値
    ------------------------------------------|----------------------------
    Alpine Linux x64 | `<APP_DIRECTORY>/datadog/linux-musl-x64/Datadog.Trace.ClrProfiler.Native.so`
    Linux x64        | `<APP_DIRECTORY>/datadog/linux-x64/Datadog.Trace.ClrProfiler.Native.so`
@@ -330,18 +330,18 @@ The value for the `CORECLR_PROFILER_PATH` environment variable varies based on t
    Windows x64      | `<APP_DIRECTORY>\datadog\win-x64\Datadog.Trace.ClrProfiler.Native.dll`
    Windows x86      | `<APP_DIRECTORY>\datadog\win-x86\Datadog.Trace.ClrProfiler.Native.dll`
 
-In the table above, `<APP_DIRECTORY>` refers to the directory containing the application's `.dll` files.
+上の表で、`<APP_DIRECTORY>` は、アプリケーションの `.dll` ファイルを含むディレクトリを指します。
 
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
 
-### Docker host IP
+### Docker ホスト IP
 
-Agent container port `8126` should be linked to the host directly.
-Configure your application tracer to report to the default route of this container (determine this using the `ip route` command).
+Agent コンテナポート `8126` は、直接ホストにリンクしている必要があります。
+このコンテナのデフォルトのルートにレポートを送信するようにアプリケーショントレーサーを構成します (デフォルトのルートは `ip route` コマンドを使用して決定)。
 
-The following is an example for the Python Tracer, assuming `172.17.0.1` is the default route:
+次の Python Tracer の例では、デフォルトのルートを `172.17.0.1` と仮定しています。
 
 ```python
 from ddtrace import tracer
@@ -378,7 +378,7 @@ docker run -d --name app \
 
 Refer to the [language-specific APM instrumentation docs][3] for tracer settings.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -10,7 +10,7 @@
 "categories":
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/apptrail/README.md"
 "display_on_public_website": true
@@ -73,7 +73,7 @@ Apptrail's audit event streaming feature ([_trails_][2]) lets you deliver audit 
 
 The Apptrail Datadog integration allows you to continously export your SaaS audit logs from Apptrail to Datadog in realtime. You can use Datadog to analyze, archive, monitor, and alert on your SaaS audit logs.
 
-## Setup
+## セットアップ
 
 As a prerequisite, you should be signed up by your SaaS vendor for Apptrail.
 
@@ -100,7 +100,7 @@ To view Apptrail audit logs in Datadog:
 
 For more details, read the [Apptrail Datadog delivery documentation][7].
 
-## Data Collected
+## 収集データ
 
 ### Log collection
 

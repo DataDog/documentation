@@ -20,7 +20,7 @@
 - network
 - notifications
 - snmp
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/snmp_juniper/README.md"
 "display_on_public_website": true
@@ -68,38 +68,38 @@ Juniper Networks develops and markets networking products, including routers, sw
 
 For details of monitored metrics see the [NDM Data Collected][1] section.
 
-## Setup
+## セットアップ
 
 To install and configure the SNMP integration, see the [Network Device Monitoring][2] documentation.
 
-## Vendor profiles
+## ベンダープロファイル
 
-Specific supported vendor profiles for this integration can be found on the [network vendors][3] page.
+このインテグレーションでサポートされている具体的なベンダープロファイルは、[ネットワークベンダー][3]のページで確認できます。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-For details of monitored metrics see the [NDM Data Collected][1] section.
+監視対象となるメトリクスの詳細については、[収集される NDM データ][1]のセクションを参照してください。
 
-### Service Checks
+### サービスチェック
 
-Juniper does not include any service checks.
+Juniper には、サービスのチェック機能は含まれません。
 
-### Events
+### イベント
 
-Juniper does not include any events.
+Juniper には、イベントは含まれません。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-- [Monitor SNMP with Datadog][4]
+- [Datadog での SNMP モニタリング][4]
 - [Monitor Juniper network devices with Datadog][5]
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][6].
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 [1]: https://docs.datadoghq.com/network_monitoring/devices/data/
 [2]: https://docs.datadoghq.com/network_monitoring/devices/setup/

@@ -26,12 +26,12 @@ cascade:
         rank: 70
 ---
 
-{{< whatsnext desc="This section includes the following topics:">}}
-    {{< nextlink href="network_monitoring/performance" >}}<u>Network Performance Monitoring</u>: Explore metrics for point to point communication on your infrastructure.{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/dns" >}}<u>DNS Monitoring</u>: Diagnose and debug DNS server issues.{{< /nextlink >}}
-    {{< nextlink href="network_monitoring/devices" >}}<u>Network Device Monitoring</u>: Gain visibility into your network-connected devices, such as routers, switches, servers, and firewalls.{{< /nextlink >}}
+{{< whatsnext desc="このセクションには、次のトピックが含まれています。">}}
+    {{< nextlink href="network_monitoring/performance" >}}<u>ネットワークパフォーマンスモニタリング</u>: インフラストラクチャー上のポイントツーポイントコミュニケーションのメトリクスを調査。{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/dns" >}}<u>DNS モニタリング</u>: DNS サーバーに関する問題の診断とデバッグ。{{< /nextlink >}}
+    {{< nextlink href="network_monitoring/devices" >}}<u>ネットワークデバイスモニタリング</u>: ルーター、スイッチ、サーバー、ファイアウォールなどのネットワーク接続デバイスを可視化。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

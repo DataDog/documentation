@@ -26,7 +26,7 @@
 - "event management"
 - "os & system"
 - "testing"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md"
 "display_on_public_website": true
@@ -75,9 +75,9 @@ Get events and metrics from your app in real time to:
 
 ![Uptime.com Graph][1]
 
-## Setup
+## セットアップ
 
-### Configuration
+### 構成
 
 To activate the Datadog integration within your Uptime account, go to [Notifications > Integrations][2] then choose Datadog as the provider type when adding a new push notifications profile.
 
@@ -91,21 +91,21 @@ shell
 
 After configuring your Datadog profile, assign the profile to a contact group located under _Alerting > Contacts_. The profile is assigned in the **Push Notifications** field within the contact group.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "uptime" >}}
 
 
-### Events
+### イベント
 
 The Uptime integration sends an event to your Datadog Event Stream when an alert happens or resolves.
 
-### Service Checks
+### サービスチェック
 
 The Uptime check does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

@@ -8,32 +8,32 @@ further_reading:
     tag: Blog
     text: Gain visibility and control of your cloud spend with Datadog Cloud Cost Management
   - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
-    tag: Blog
-    text: Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management
+    tag: ブログ
+    text: Datadog Cloud Cost Management で Kubernetes と ECS の支出を把握する
   - link: "https://www.datadoghq.com/blog/google-cloud-cost-management/"
-    tag: Blog
+    tag: ブログ
     text: Empower engineers to take ownership of Google Cloud costs with Datadog
   - link: /monitors/types/cloud_cost/
     tag: Documentation
     text: Create a Cloud Cost monitor
   - link: /cloud_cost_management/tag_pipelines/
-    tag: Documentation
+    tag: ドキュメント
     text: Learn about Tag Pipelines
   - link: /cloud_cost_management/tag_pipelines
-    tag: Documentation
+    tag: ドキュメント
     text: Standardize tags across Cloud Cost Management with Tag Pipelines
 cascade:
     algolia:
       subcategory: Cloud Cost Management
       rank: 70
-      tags: [cloud cost, cloud integrations, cloud cost management, cloud cost aws, cloud cost azure, cloud cost google cloud, cloud cost gcp, data collected aws, data collected azure, data collected google cloud]
+      tags: [cloud cost, cloud integrations, クラウド コスト マネジメント, cloud cost aws, cloud cost azure, cloud cost google cloud, cloud cost gcp, data collected aws, data collected azure, data collected google cloud]
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## Overview
+## 概要
 
 Cloud Cost Management provides insights for engineering and finance teams to understand how infrastructure changes impact costs, allocate spend across your organization, and identify inefficiencies.
 
@@ -41,7 +41,7 @@ Cloud Cost Management provides insights for engineering and finance teams to und
 
 Datadog ingests your cloud cost data and transforms it into metrics you can use in a search query on the [**Analytics** page][1]. If costs rise, you can correlate the increase with usage metrics to determine the root cause.
 
-## Setup
+## セットアップ
 
 {{< whatsnext desc="To start managing your cloud costs with Cloud Cost Management, see the following documentation.">}}
   {{< nextlink href="/cloud_cost_management/aws">}}<u>AWS</u>: Configure Cloud Cost Management for your AWS bill.{{< /nextlink >}}
@@ -52,14 +52,14 @@ Datadog ingests your cloud cost data and transforms it into metrics you can use 
   {{< nextlink href="/cloud_cost_management/datadog_costs">}}<u>Datadog Costs</u>: Visualize daily Datadog spending and utilization metrics. {{< /nextlink >}}
  {{< /whatsnext >}}
 
-## Data Collected
+## 収集データ
 
 Cloud Cost Management collects tags for the AWS, Azure, and Google Cloud integrations. This table provides a non-exhaustive list of out-of-the-box tags associated with each integration.
 
 {{< tabs >}}
 {{% tab "AWS" %}}
 
-| Tag Name | Tag Description |
+| タグ名 | タグの説明 |
 |---|---|
 | aws_availability_zone | The Availability Zone that hosts the line item. |
 | aws_bill_entity | The AWS seller that your account is with. Transactions can either be an AWS Marketplace purchase (`AWS Marketplace`) or a purchase of other AWS services (`AWS`). |
@@ -122,7 +122,7 @@ Cloud Cost Management collects tags for the AWS, Azure, and Google Cloud integra
 {{% /tab %}}
 {{% tab "Azure" %}}
 
-| Tag Name | Tag Description |
+| タグ名 | タグの説明 |
 |---|---|
 | accountname | The name of the account associated with the line item. |
 | accountownerid | The ID of the owner associated with the line item. |
@@ -144,7 +144,7 @@ Cloud Cost Management collects tags for the AWS, Azure, and Google Cloud integra
 | effectiveprice | The blended unit price for the period. Blended prices average out any fluctuations in the unit price, like graduated tiering, which lowers the price as quantity increases. |
 | exchangeratedate | The date the exchange rate was established. |
 | exchangeratepricingtobilling | The exchange rate used to convert the cost in the pricing currency to the billing currency. |
-| frequency | Indicates whether a charge is expected to repeat. Charges can either happen once (`OneTime`), repeat on a monthly or yearly basis (`Recurring`), or be based on usage (`Usage`) |
+| 周波数 | Indicates whether a charge is expected to repeat. Charges can either happen once (`OneTime`), repeat on a monthly or yearly basis (`Recurring`), or be based on usage (`Usage`) |
 | InvoiceId | The unique document ID listed on the invoice PDF. |
 | invoicesectionid | The ID of the MCA invoice section. |
 | invoicesectionname | The name of the EA department. |
@@ -185,7 +185,7 @@ Cloud Cost Management collects tags for the AWS, Azure, and Google Cloud integra
 {{% /tab %}}
 {{% tab "Google Cloud" %}}
 
-| Tag Name | Tag Description |
+| タグ名 | タグの説明 |
 |---|---|
 | service_description | The Google Cloud service (such as Compute Engine or BigQuery) |
 | project_id | The ID of the Google Cloud project that generated the Cloud Billing data. |
@@ -198,13 +198,13 @@ Cloud Cost Management collects tags for the AWS, Azure, and Google Cloud integra
 {{% /tab %}}
 {{% tab "Shared" %}}
 
-| Tag Name | Tag Description |
+| タグ名 | タグの説明 |
 |---|---|
 | allocated_resource | The type of resource used by a container workload (such as `cpu` or `mem`). |
 | allocated_spend_type | Container costs are split into three spend types: resources used by a workload (`usage`); resources reserved by a workload, but not used (`workload_idle`); and resources that are not reserved or used by any workload (`cluster_idle`). |
 | ecs_cluster_name | The name of the ECS cluster hosting a workload. |
 | kube_cluster_name | The name of the Kubernetes cluster hosting a workload. |
-| orchestrator | The container orchestrator (such as `kubernetes` or `ecs`). |
+| オーケストレーター | The container orchestrator (such as `kubernetes` or `ecs`). |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -243,11 +243,11 @@ Proactively manage and optimize your cloud spending by creating a [Cloud Cost Mo
 
 {{< img src="cloud_cost/monitor.png" alt="Create a Cloud Cost monitor that alerts on cost changes" style="width:100%;" >}}
 
-## Allocate costs
+## コストの割り当て
 
 Use [Container Cost Allocation metrics][4] to discover costs associated with clusters and workloads across Kubernetes, AWS ECS, Azure, and Google Cloud. Gain visibility into pod-level costs, identify idle resource costs, and analyze costs by resource type.
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

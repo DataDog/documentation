@@ -11,7 +11,7 @@
 - automation
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/docontrol/README.md"
 "display_on_public_website": true
@@ -74,11 +74,11 @@
 
 This integration allows [DoControl][1] customers to forward their DoControl-related logs and events to Datadog through automated security workflows.
 
-## Setup
+## セットアップ
 
 To set up this integration, you must have an active [DoControl account][2]. You must also have proper [admin permissions][3] in Datadog.
 
-### Installation
+### インストール
 
 No installation is required on your host.
 

@@ -13,10 +13,10 @@ further_reading:
       text: Simplify microservice governance with the Datadog Service Catalog
     - link: /service_catalog/troubleshooting
       tag: Documentation
-      text: Troubleshooting
+      text: トラブルシューティング
     - link: /service_catalog/scorecards
       tag: Documentation
-      text: Service Scorecards
+      text: サービススコアカード
 ---
 
 {{< img src="/getting_started/service_catalog/overview_image.jpeg" alt="Service Catalog Reliability view showing several services and their associated MTTR, deployment metrics, issues, incidents, SLOs, and monitor statuses." style="width:90%;" >}}

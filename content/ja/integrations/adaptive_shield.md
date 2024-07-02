@@ -22,7 +22,7 @@
 "categories":
 - cloud
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/adaptive_shield/README.md"
 "display_on_public_website": true
@@ -70,7 +70,7 @@ SaaS Apps like Office 365, Slack, Zoom, and Salesforce are vital to a business's
 
 With the Adaptive Shield integration, you can track and monitor SaaS posture alerts, such as configuration drifts, integration failures, and security check degradations, as Datadog Events.
 
-## Setup
+## セットアップ
 
 1. Click **Connect Accounts** to begin authorization of this integration. You are then redirected to [Adaptive Shield][1].
 2. Provide the alias name.

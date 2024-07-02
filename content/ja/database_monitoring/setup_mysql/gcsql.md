@@ -8,71 +8,71 @@ further_reading:
 
 ---
 
-Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
+データベースモニタリングは、InnoDB ストレージエンジンのクエリメトリクス、クエリサンプル、説明プラン、接続データ、システムメトリクス、テレメトリを公開することにより、MySQL データベースの詳細な可視性を提供します。
 
-The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
+Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリーを収集します。MySQL データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
 
-1. [Configure database parameters](#configure-mysql-settings)
-1. [Grant the Agent access to the database](#grant-the-agent-access)
+1. [データベースのパラメーターを構成する](#configure-mysql-settings)
+1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
 1. [Install and configure the Agent](#install-and-configure-the-agent)
-1. [Install the Cloud SQL Integration](#install-the-cloud-sql-integration)
+1. [Cloud SQL インテグレーションをインストールする](#install-the-cloud-sql-integration)
 
-## Before you begin
+## はじめに
 
-Supported MySQL versions
-: 5.6, 5.7, or 8.0+
+サポートされている MySQL バージョン
+: 5.6、5.7、または 8.0+
 
-Supported Agent versions
+サポート対象の Agent バージョン
 : 7.36.1+
 
-Performance impact
-: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
+パフォーマンスへの影響
+: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。<br/><br/>
+データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
-Proxies, load balancers, and connection poolers
-: The Datadog Agent must connect directly to the host being monitored, preferably through the IP address provided in the Google Cloud console. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
+プロキシ、ロードバランサー、コネクションプーラー
+: Datadog Agent は、監視対象のホストにできれば Google Cloud コンソールで提供されている IP アドレスを通じて直接接続する必要があります。Agent は、プロキシ、ロードバランサー、またはコネクションプーラーを介してデータベースに接続すべきではありません。Agent が実行中に異なるホストに接続すると (フェイルオーバーやロードバランシングなどの場合)、Agent は 2 つのホスト間で統計情報の差を計算し、不正確なメトリクスを生成します。
 
-Data security considerations
-: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
+データセキュリティへの配慮
+: Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][2]を参照してください。
 
-## Configure MySQL settings
+## MySQL 設定を構成する
 
 
-Configure the following [Database Flags][3] and then **restart the server** for the settings to take effect:
+次の[データベースフラグ][3]を構成してから、設定を有効にするために**サーバーを再起動**します。
 
 {{< tabs >}}
 {{% tab "MySQL 5.6" %}}
-| Parameter | Value | Description |
+| パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `performance_schema` | `on` | Required. Enables the [Performance Schema][9]. |
-| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
+| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][9]を有効にします。 |
+| `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
 
 {{% tab "MySQL ≥ 5.7" %}}
-| Parameter | Value | Description |
+| パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `performance_schema` | `on` | Required. Enables the [Performance Schema][9]. |
-| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
-| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Must match `max_digest_length`. |
+| `performance_schema` | `on` | 必須。[パフォーマンススキーマ][9]を有効にします。 |
+| `max_digest_length` | `4096` | より大きなクエリの収集に必要です。`events_statements_*` テーブルの SQL ダイジェストテキストのサイズを増やします。デフォルト値のままにすると、`1024` 文字より長いクエリは収集されません。 |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
+| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | `max_digest_length` と一致する必要があります。 |
 
 [1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 {{% /tab %}}
 {{< /tabs >}}
 
-## Grant the Agent access
+## Agent にアクセスを付与する
 
-The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
+Datadog Agent が統計やクエリを収集するためには、データベースへの読み取り専用のアクセスが必要となります。
 
-The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
+次の手順では、`datadog@'%'` を使用して任意のホストからログインするアクセス許可を Agent に付与します。`datadog@'localhost'` を使用して、`datadog` ユーザーが localhost からのみログインできるように制限できます。詳細については、[MySQL ドキュメント][4]を参照してください。
 
 {{< tabs >}}
 {{% tab "MySQL 5.6" %}}
 
-Create the `datadog` user and grant basic permissions:
+`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
@@ -84,7 +84,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 {{% /tab %}}
 {{% tab "MySQL ≥ 5.7" %}}
 
-Create the `datadog` user and grant basic permissions:
+`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
 ```sql
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
@@ -97,7 +97,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 {{% /tab %}}
 {{< /tabs >}}
 
-Create the following schema:
+次のスキーマを作成します。
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
@@ -105,7 +105,7 @@ GRANT EXECUTE ON datadog.* to datadog@'%';
 GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
-Create the `explain_statement` procedure to enable the Agent to collect explain plans:
+Agent が説明プランを収集できるようにするには、`explain_statement` プロシージャを作成します。
 
 ```sql
 DELIMITER $$
@@ -120,7 +120,7 @@ END $$
 DELIMITER ;
 ```
 
-Additionally, create this procedure **in every schema** from which you want to collect explain plans. Replace `<YOUR_SCHEMA>` with your database schema:
+さらに、説明プランを収集する**すべてのスキーマ**でこのプロシージャを作成します。`<YOUR_SCHEMA>` をデータベーススキーマに置き換えます。
 
 ```sql
 DELIMITER $$
@@ -136,8 +136,8 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <YOUR_SCHEMA>.explain_statement TO datadog@'%';
 ```
 
-### Runtime setup consumers
-Datadog recommends that you create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
+### ランタイムセットアップコンシューマー
+Datadogは、ランタイムで `performance_schema.events_*` コンシューマーを有効にする機能を Agent に与えるために、次のプロシージャを作成することをお勧めします。
 
 ```SQL
 DELIMITER $$
@@ -151,9 +151,9 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
 
-### Verify
+### 検証する
 
-Verify the user was created successfully using the following commands, replacing `<UNIQUEPASSWORD>` with the password you created above:
+次のコマンドを使用して、ユーザーが問題なく作成されたことを検証します。`<UNIQUEPASSWORD>` は上記で作成したパスワードに置き換えます。
 
 ```shell
 mysql -u datadog --password=<UNIQUEPASSWORD> -e "show status" | \
@@ -161,25 +161,25 @@ grep Uptime && echo -e "\033[0;32mMySQL user - OK\033[0m" || \
 echo -e "\033[0;31mCannot connect to MySQL\033[0m"
 ```
 ```shell
-mysql -u datadog --password=<UNIQUEPASSWORD> -e "show slave status" && \
+mysql -u datadog --password=<一意のパスワード> -e "show slave status" && \
 echo -e "\033[0;32mMySQL grant - OK\033[0m" || \
 echo -e "\033[0;31mMissing REPLICATION CLIENT grant\033[0m"
 ```
 
 
-## Install and configure the Agent
+## Agent のインストールと構成
 
-To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][4].
+Cloud SQL ホストを監視するには、インフラストラクチャーに Datadog Agent をインストールし、各インスタンスにリモートで接続するよう構成します。Agent はデータベース上で動作する必要はなく、データベースに接続するだけで問題ありません。ここに記載されていないその他の Agent のインストール方法については、[Agent のインストール手順][4]を参照してください。
 
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-To configure this check for an Agent running on a host, for example when you provision a small GCE instance for the Agent to collect from a Google Cloud SQL database:
+ホストで実行されている Agent に対してこのチェックを設定するには (Agent が Google Cloud SQL データベースから収集するように小さな GCE インスタンスをプロビジョニングする場合など)
 
-Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
+[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `mysql.d/conf.yaml` ファイルを編集します。カスタムメトリクスに対するものを含む、使用可能な全コンフィギュレーションオプションの詳細については、[サンプル mysql.d/conf.yaml][2] を参照してください。
 
-Add this configuration block to your `mysql.d/conf.yaml` to collect MySQL metrics:
+MySQL メトリクスを収集するには、`mysql.d/conf.yaml` に次のコンフィギュレーションブロックを追加します。
 
 ```yaml
 init_config:
@@ -189,19 +189,19 @@ instances:
     host: '<INSTANCE_ADDRESS>'
     port: 3306
     username: datadog
-    password: '<UNIQUEPASSWORD>' # from the CREATE USER step earlier
+    password: '<UNIQUEPASSWORD>' # 先ほどの CREATE USER のステップから
 
-    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Google Cloud (GCP) インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
 
-**Note**: Wrap your password in single quotes in case a special character is present.
+**注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。
 
-See the [MySQL integration spec][3] for additional information on setting `project_id` and `instance_id` fields.
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][3]を参照してください。
 
-[Restart the Agent][3] to start sending MySQL metrics to Datadog.
+[Agent を再起動][3]すると、Datadog への MySQL メトリクスの送信が開始されます。
 
 
 [1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
@@ -210,13 +210,13 @@ See the [MySQL integration spec][3] for additional information on setting `proje
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-To configure the Database Monitoring Agent running in a Docker container such as in Google Cloud Run, set the [Autodiscovery Integration Templates][1] as Docker labels on your Agent container.
+Google Cloud Run などの Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
-**Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
+**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットに対する読み取り権限が与えられている必要があります。
 
-### Command line
+### コマンドライン
 
-Get up and running quickly by executing the following command to run the agent from your command line. Replace the values to match your account and environment:
+次のコマンドを実行して、コマンドラインから Agent を実行することですぐに稼動させることができます。お使いのアカウントや環境に合わせて値を変更してください。
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -242,7 +242,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 ### Dockerfile
 
-Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
+`Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーのコンフィギュレーションを変更することなく、カスタム Agent を構築・デプロイすることができます。
 
 ```Dockerfile
 FROM gcr.io/datadoghq/agent:7.36.1
@@ -252,9 +252,9 @@ LABEL "com.datadoghq.ad.init_configs"='[{}]'
 LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "<UNIQUEPASSWORD>", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
 ```
 
-See the [MySQL integration spec][2] for additional information on setting `project_id` and `instance_id` fields.
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][2]を参照してください。
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][3] and declare the password using the `ENC[]` syntax, or see the [Autodiscovery template variables documentation][2] on how to pass in the password as an environment variable.
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][3]を使用し、`ENC[]` 構文を使ってパスワードを宣言するか、[オートディスカバリーテンプレート変数に関するドキュメント][2]でパスワードを環境変数として渡す方法をご確認ください。
 
 
 [1]: /agent/docker/integrations/?tab=docker
@@ -263,9 +263,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-If you have a Kubernetes cluster, use the [Datadog Cluster Agent][1] for Database Monitoring.
+Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
 
-Follow the instructions to [enable the cluster checks][2] if not already enabled in your Kubernetes cluster. You can declare the MySQL configuration either with static files mounted in the Cluster Agent container or using service annotations:
+Kubernetes クラスターでまだチェックが有効になっていない場合は、手順に従って[クラスターチェックを有効][2]にしてください。MySQL のコンフィギュレーションは、Cluster Agent コンテナにマウントされた静的ファイル、またはサービスアノテーションのいずれかを使用して宣言できます。
 
 ### Helm
 
@@ -306,12 +306,12 @@ For Windows, append <code>--set targetSystem=windows</code> to the <code>helm in
 [2]: /getting_started/site
 [3]: /containers/kubernetes/installation/?tab=helm#installation
 
-### Configure with mounted files
+### マウントされたファイルで構成する
 
-To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path `/conf.d/mysql.yaml`:
+マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/mysql.yaml` にマウントします。
 
 ```yaml
-cluster_check: true  # Make sure to include this flag
+cluster_check: true  # このフラグを必ず入れてください
 init_config:
 instances:
   - dbm: true
@@ -319,15 +319,15 @@ instances:
     port: 3306
     username: datadog
     password: '<UNIQUEPASSWORD>'
-    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
+    # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Google Cloud (GCP) インテグレーションを構成します。
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
 ```
 
-### Configure with Kubernetes service annotations
+### Kubernetes サービスアノテーションで構成する
 
-Rather than mounting a file, you can declare the instance configuration as a Kubernetes Service. To configure this check for an Agent running on Kubernetes, create a Service in the same namespace as the Datadog Cluster Agent:
+ファイルをマウントせずに、インスタンスのコンフィギュレーションを Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
 
 ```yaml
 apiVersion: v1
@@ -362,11 +362,11 @@ spec:
     name: mysql
 ```
 
-See the [MySQL integration spec][4] for additional information on setting `project_id` and `instance_id` fields.
+`project_id` と `instance_id` フィールドの設定に関する追加情報は、[MySQL インテグレーション仕様][4]を参照してください。
 
-The Cluster Agent automatically registers this configuration and begins running the MySQL check.
+Cluster Agent は自動的にこのコンフィギュレーションを登録し、MySQL チェックを開始します。
 
-To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][4] and declare the password using the `ENC[]` syntax.
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
@@ -376,23 +376,23 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 {{< /tabs >}}
 
-### Validate
+### UpdateAzureIntegration
 
-[Run the Agent's status subcommand][5] and look for `mysql` under the Checks section. Or visit the [Databases][6] page to get started!
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `mysql` を探します。または、[データベース][6]のページを参照してください。
 
-## Example Agent Configurations
+## Agent の構成例
 {{% dbm-mysql-agent-config-examples %}}
 
-## Install the Cloud SQL integration
+## Cloud SQL インテグレーションをインストールする
 
-To collect more comprehensive database metrics from Google Cloud, install the [Cloud SQL integration][7] (optional).
+Google Cloud からより包括的なデータベースメトリクスを収集するには、[Cloud SQL インテグレーション][7]をインストールします (オプション)。
 
 
-## Troubleshooting
+## トラブルシューティング
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][8]
+インテグレーションと Agent を手順通りにインストール・設定しても期待通りに動作しない場合は、[トラブルシューティング][8]を参照してください。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

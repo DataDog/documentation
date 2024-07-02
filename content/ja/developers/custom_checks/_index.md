@@ -1,24 +1,23 @@
 ---
 title: Custom Checks
-kind: documentation
 description: Setting up a custom check with Datadog
 ---
 
-## Overview 
+## 概要 
 
-Custom checks, also known as custom Agent checks, enable you to collect metrics and other data from your custom systems or applications and send them to Datadog. By creating and configuring a new check file in your `conf.d` directory, you can configure the Datadog Agent to collect data emitted from your application. Custom checks are considered low effort compared to writing a Datadog integration. They impact your billing because Metrics emitted through custom checks are considered custom metrics, which have a cost associated depending on your subscription plan.
+カスタム Agent チェックとも呼ばれるカスタムチェックを使用すると、カスタムシステムまたはアプリケーションからメトリクスやその他のデータを収集して Datadog に送信できます。`conf.d` ディレクトリに新しいチェックファイルを作成して設定することで、アプリケーションから送信されたデータを収集するように Datadog Agent を設定できます。カスタムチェックは、Datadog インテグレーションを作成する場合と比較して労力が少なく済むと思われます。カスタムチェックを通じて発行されたメトリクスはカスタムメトリクスと見なされ、サブスクリプションプランに応じてコストが関連付けられるため、請求に影響します。
 
-**Note**: A custom check is different from a service check. Service checks monitor the up or down status of a service. For more information, see [Service checks][1].
+**注**: カスタムチェックはサービスチェックとは異なります。サービスチェックは、サービスのアップまたはダウンステータスを監視します。詳細については、[サービスチェック][1]を参照してください。
 
-### Should you write a custom Agent check or an integration?
+### カスタム Agent チェックとインテグレーションのどちらを作成するべきですか？
 
-Use custom checks to collect metrics from custom applications or unique systems. However, if you are trying to gather metrics from a generally available application, public service, or open source project, Datadog recommends that you [create a full-fledged Agent integration][2]. For more information about deciding how to send your data, see [Developers][3]. To learn how to write an integration, see [Creating New Integrations][2].
+カスタムチェックを使用すると、カスタムアプリケーションまたは固有のシステムからメトリクスを収集することができます。ただし、一般に利用可能なアプリケーション、公共サービス、またはオープンソースプロジェクトからメトリクスを収集しようとしている場合は、[本格的な Agent インテグレーションを作成する][2]ことをお勧めします。データの送信方法の決定について詳しくは、[開発者][3]を参照してください。インテグレーションの作成方法については、[新しいインテグレーションの作成][2]を参照してください。
 
-## Getting started
+## はじめに
 
 {{< whatsnext >}}
-    {{< nextlink href="/developers/custom_checks/write_agent_check/" >}}To quickly get started, see the Writing an Agent Check docs. {{< /nextlink >}}
-    {{< nextlink href="/developers/custom_checks/prometheus/" >}}If you have more advanced needs than the generic check (for example, metrics preprocessing), see the writing a custom Open Metrics check docs.{{< /nextlink >}}
+    {{< nextlink href="/developers/custom_checks/write_agent_check/" >}}すぐに始めるには、Agent チェック作成のドキュメントを参照してください。 {{< /nextlink >}}
+    {{< nextlink href="/developers/custom_checks/prometheus/" >}}一般的なチェックよりも高度なニーズ (メトリクスの前処理など) がある場合は、カスタムオープンメトリクスチェック作成のドキュメントを参照してください。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /developers/service_checks/

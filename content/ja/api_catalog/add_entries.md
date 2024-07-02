@@ -19,43 +19,43 @@ aliases:
 <div class="alert alert-warning">API Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-## Overview
+## 概要
 
-API Catalog uses APM instrumentation for distributed tracing to automatically discover endpoints in your Datadog organization. For instrumented services with supported libraries, endpoints are automatically populated into API Catalog.
+API カタログは、Datadog 組織内のエンドポイントを自動的に発見するために、分散型トレーシング用の APM インスツルメンテーションを使用します。サポートされているライブラリでインスツルメントされたサービスの場合、エンドポイントは自動的に API カタログに入力されます。
 
-Register automatically detected endpoints, or upload an OpenAPI file to benefit from the full value of API Catalog.
+自動検出されたエンドポイントを登録するか、OpenAPI ファイルをアップロードして API カタログの全機能を活用してください。
 
-## Register automatically detected endpoints
+## 自動検出されたエンドポイントの登録
 
-Group automatically detected endpoints into APIs to track their usage, set ownership, and set monitoring policies from a centralized location.
+自動検出されたエンドポイントを API にグループ化して、使用状況を追跡し、所有権を設定し、中央から監視ポリシーを管理します。
 
-To register endpoints:
+エンドポイントを登録するには
 
-1. From the **Explorer** page, select the endpoints to register.
-2. Click **Register Endpoints**.
-3. Select the API(s) you want to group the endpoints into.
-4. Click **Apply**.
+1. **Explorer** ページから、登録するエンドポイントを選択します。
+2. **Register Endpoints** をクリックします。
+3. エンドポイントをグループ化したい API を選択します。
+4. **Apply** をクリックします。
 
-{{< img src="tracing/api_catalog/api-catalog-register.png" alt="Select endpoints in API Catalog and click Register Endpoints button." style="width:65%;" >}}
+{{< img src="tracing/api_catalog/api-catalog-register.png" alt="API カタログでエンドポイントを選択し、Register Endpoints ボタンをクリックします。" style="width:65%;" >}}
 
-After endpoints are registered, Datadog starts collecting a new endpoint metric for better [monitoring capabilities][6].
+エンドポイントが登録されると、Datadog は[モニタリング機能][6]の向上のために新しいエンドポイントメトリクスの収集を開始します。
 
-Autodiscovery is not available for some frameworks. Check compatibility status by clicking the **Learn More** button in Datadog. If you still cannot find your endpoints, try uploading a definition file containing them. Datadog automatically starts collecting data on those endpoint definitions after they are uploaded.
+オートディスカバリーは、一部のフレームワークでは使用できません。Datadog の **Learn More** ボタンをクリックして、互換性のステータスを確認してください。それでもエンドポイントが見つからない場合は、エンドポイントを含む定義ファイルをアップロードしてみてください。Datadog は、アップロードされた後にそのエンドポイント定義のデータ収集を自動的に開始します。
 
-## Import OpenAPI/Swagger file
+## OpenAPI/Swagger ファイルのインポート
 
-Import API definitions that you already own to see which endpoints are receiving traffic, and get performance and deployment information on top of your API definitions.
+すでに所有している API 定義をインポートして、トラフィックを受信しているエンドポイントを確認し、API 定義に基づいてパフォーマンスとデプロイメント情報を取得します。
 
-Supported formats are OpenAPI 2 and 3.
+サポートされているフォーマットは OpenAPI 2 と 3 です。
 
-To import an OpenAPI/Swagger file:
+OpenAPI/Swagger ファイルをインポートするには
 
-1. Go to the **Catalog** page.
-2. Click **Add API**.
-3. Select **Import an API**.
-4. Choose the OpenAPI file to import from your device.
+1. **Catalog** ページに移動します。
+2. **Add API** をクリックします。
+3. **Import an API** を選択します。
+4. デバイスからインポートする OpenAPI ファイルを選択します。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

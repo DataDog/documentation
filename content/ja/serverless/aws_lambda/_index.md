@@ -40,7 +40,7 @@ Datadog Serverless Monitoring makes use of a runtime-specific Datadog Lambda Lib
 
 The Datadog Lambda extension collects logs through CloudWatch, in addition to traces, enhanced metrics, and custom metrics from the Datadog Lambda Library.
 
-## Usage
+## 使用方法
 
 The following pages describe how to install and configure Serverless Monitoring for AWS Lambda—including how to use metrics, traces, and logs for full visibility.
 

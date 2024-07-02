@@ -6,33 +6,33 @@ further_reading:
   text: Learn more about NDM Setup
 ---
 
-## Overview
+## 概要
 
-The Datadog Agent 7.27.0 introduces a new SNMP check version in Go that has both memory and performance improvements to the Agent when monitoring devices using SNMP. The purpose of this guide is to assist in migration over to the new core check.
+Datadog Agent 7.27.0 では、SNMP を使用したデバイスの監視の際、Agent のメモリおよびパフォーマンスの両方を向上できる Go での新しい SNMP チェックバージョンが導入されています。本文書は、この新しいコアチェックへの移行をスムーズに行うためのガイドです。
 
-### Agent v7.27.0 changes
+### Agent v7.27.0 の変更点
 
-- Autodiscovery is now a core Agent process, and needs to be loaded in the main SNMP integration check with `loader:core` under the `init_config`, and configured in the main Datadog Agent `datadog.yaml`.
+- オートディスカバリーが Agent のコアプロセスとなり、`init_config` で `loader:core` を使用してメインの SNMP インテグレーションチェックでロードし、Datadog Agent `datadog.yaml` で構成される必要があります。
 
-- Direct reference to MIBs by their human readable names only are no longer supported. Instead, all OID references should be made by their numerical address, and human readable name. All Datadog shipped profiles have been updated, but custom profiles will need to be updated. Examples for migration are provided below.
+- 可読名のみによる MIB への直接参照はサポートされません。すべての OID 参照は、数字によるアドレスで作成され、可読名である必要があります。Datadog がサポートするすべてのプロファイルは更新されていますが、カスタムプロファイルはアップデートする必要があります。移行例を以下に示します。
 
-- The Core check does not support manually compiling MIBs to be used as a profile, therefore the following parameters are no longer supported:
+- Core チェックは、手動でコンパイルする MIB のプロファイルとしての使用をサポートしないため、以下のパラメーターはサポートされません。
   - `mibs_folder`
   - `optimize_mib_memory_usage`
   - `enforce_mib_constraints`
-  - `bulk_threshold` - Removed this in favor of other `GET` functions
+  - `bulk_threshold` - 削除され、他の `GET` 関数に置き換えられました
 
-## Instructions
+## 手順
 
-1. Upgrade to Datadog Agent version 7.27+ for your corresponding Agent platform.
+1. 対応する Agent プラットフォーム用に Datadog Agent バージョンを 7.27 以降にアップグレードします。
 
-2. Update the `init_config` in the SNMP check to reference the new core check in `snmp.d/conf.yaml`.
+2. `snmp.d/conf.yaml` で新しいコアチェックを参照するよう SNMP チェックで `init_config` を更新します。
 
 ``` yaml
   init_config:
       loader: core
 ```
-3. The following step is only applicable if you use Autodiscovery/subnet scanning: Move the configuration for each instance (subnet) from the SNMP check configuration to the main Datadog Agent `datadog.yaml`.
+3. 以下の手順は、オートディスカバリー/サブネットスキャンを使用する場合のみ適用されます。各インスタンス（サブネット）のコンフィギュレーションを、SNMP チェックコンフィギュレーションからメインの Datadog Agent `datadog.yaml` に移動します。
 
 {{< tabs >}}
 {{% tab "SNMPv2" %}}
@@ -100,13 +100,13 @@ network_devices:
 
 **Note**: Make sure you are on Agent 7.53+ for this syntax. For previous versions, see the [previous config_template.yaml][1]
 
-### Migrating custom profiles (independent of deployment)
+### カスタムプロファイルの移行（デプロイ以外）
 
-SNMP no longer supports only listing OIDs by their human-readable name. You can reference by address (table name and index) or MIB entry address. If you have written any profiles yourself or modified any existing profiles, migrate them to the new format. Below are examples of migration.
+可読名のみによる OID リストはサポートされません。アドレス（テーブル名およびインデックス）または MIB エントリアドレスにより参照できます。自身で書き込んだプロファイルがあるまたは既存のプロファイルを変更した場合は、新しいフォーマットに移行します。移行例を以下に示します。
 
-#### Scalar symbols
+#### スカラーシンボル
 
-**Before Agent 7.27.0:**
+**Agent 7.27.0 以前:**
 
 {{< code-block lang="yaml" filename="scalar_symbols.yaml" >}}
 metrics:
@@ -114,7 +114,7 @@ metrics:
     symbol: hrSystemUptime
 {{< /code-block >}}
 
-**With Agent 7.27.0:**
+**Agent 7.27.0 の場合:**
 
 {{< code-block lang="yaml" filename="scalar_symbols_7_27.yaml" >}}
 metrics:
@@ -124,9 +124,9 @@ metrics:
       name: hrSystemUptime
 {{< /code-block >}}
 
-#### Table symbols
+#### テーブルシンボル
 
-**Before Agent 7.27.0:**
+**Agent 7.27.0 以前:**
 
 {{< code-block lang="yaml" filename="table_symbols.yaml" >}}
 
@@ -143,7 +143,7 @@ metrics:
 {{< /code-block >}}
 
 
-**With Agent 7.27.0:**
+**Agent 7.27.0 の場合:**
 
 {{< code-block lang="yaml" filename="table_symbols_7_27.yaml" >}}
 metrics:
@@ -164,9 +164,9 @@ metrics:
 {{< /code-block >}}
 
 
-#### Metrics tags
+#### メトリクスタグ
 
-**Before Agent 7.27.0:**
+**Agent 7.27.0 以前:**
 
 {{< code-block lang="yaml" filename="metrics_tags.yaml" >}}
 metrics_tags:
@@ -174,7 +174,7 @@ metrics_tags:
     tag: snmp_host
 {{< /code-block >}}
 
-**With Agent 7.27.0:**
+**Agent 7.27.0 の場合:**
 
 {{< code-block lang="yaml" filename="metrics_tags_7_27.yaml" >}}
 metrics_tags:

@@ -4,15 +4,15 @@
 - "incidents"
 - "issue tracking"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Have your Datadog alerts automatically generate and update tickets."
+"description": "Datadog アラートからチケットを自動的に生成および更新"
 "doc_link": "https://docs.datadoghq.com/integrations/servicenow/"
 "draft": false
 "further_reading":
 - "link": "https://www.datadoghq.com/blog/create-servicenow-tickets-from-datadog-alerts/"
-  "tag": "Blog"
-  "text": "Create ServiceNow tickets from Datadog alerts"
+  "tag": "ブログ"
+  "text": "Datadog アラートからの ServiceNow チケットの作成"
 "git_integration_title": "servicenow"
 "has_logo": true
 "integration_id": ""
@@ -96,7 +96,7 @@ Monitor the ingestion process in the Datadog [Events Explorer][5] by scoping you
 
 {{< img src="integrations/servicenow/ingestion-progress.jpg" alt="Screenshot showing one running ingestion" >}}
 
-#### Troubleshooting
+#### トラブルシューティング
 
 For host tagging to work correctly, ensure that the following are true in your system:
 
@@ -115,7 +115,7 @@ Enrich your Datadog Service Catalog with ServiceNow CMDB metadata through servic
 
 With service ingestion, you can populate your Datadog [Service Catalog][6] with services from your ServiceNow CMDB.
 
-#### Setup
+#### セットアップ
 
 To enable ingestion of service data:
 1. Configure a [Query Builder][7] query in your ServiceNow instance that returns all of the services with which you wish to enrich the Service Catalog.
@@ -131,7 +131,7 @@ Expect to see service data populated in Datadog a few minutes after your queries
 
 {{< img src="integrations/servicenow/service-metadata.jpg" alt="Screenshot of the Service Configuration panel showing metadata populated from ServiceNow" >}}
 
-#### Troubleshooting
+#### トラブルシューティング
 
 For service ingestion to work correctly, ensure that the following are true in your system:
 
@@ -147,10 +147,7 @@ Case Management integration is not supported in the {{< region-param key=dd_data
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-warning">
-Incident Management integration is not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
-</div>
-{{% /site-region %}}
+Incident Management インテグレーションは、{{&lt; region-param key=dd_datacenter code="true" &gt;}} サイトではサポートされていません。{{% /site-region %}}
 
 To use the Datadog integration for Monitors, Case Management, and Incident Management, follow these steps:
 

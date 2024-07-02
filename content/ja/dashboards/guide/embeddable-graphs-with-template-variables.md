@@ -1,12 +1,12 @@
 ---
+title: Embeddable Graphs with Template Variables
 aliases:
-- /ja/graphing/faq/embeddable-graphs-with-template-variables
-- /ja/dashboards/faq/embeddable-graphs-with-template-variables/
+    - /graphing/faq/embeddable-graphs-with-template-variables
+    - /dashboards/faq/embeddable-graphs-with-template-variables/
 further_reading:
 - link: /dashboards/sharing/
-  tag: ドキュメント
-  text: グラフの共有
-title: テンプレート変数による埋め込み可能なグラフ
+  tag: Documentation
+  text: Shared Graphs
 ---
 
 API で作成された埋め込み可能なグラフは、テンプレート変数を受け付けます。以下は、Python を使用して `avg:system.cpu.user{$var}` に問い合わせる例です。この例では、`$var` がテンプレート変数です。**注**: このメソッドは、時系列で視覚化されたグラフのみをサポートしています。

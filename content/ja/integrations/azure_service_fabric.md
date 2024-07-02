@@ -2,7 +2,7 @@
 "categories":
 - cloud
 - azure
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Track metrics from Azure Service Fabric"
 "doc_link": "https://docs.datadoghq.com/integrations/azure_service_fabric/"
@@ -25,8 +25,8 @@
 
 Azure Service Fabric is a distributed systems platform used to package, deploy, and manage scalable and reliable microservices and containers.
 
-## Setup
-### Installation
+## セットアップ
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration][1] first.
 
@@ -64,20 +64,20 @@ Login to the Azure CLI and run the updated command to deploy the Datadog Agent o
 
 An alternative installation method is adding the Datadog Azure Virtual Machine extension directly to the [ARM template][4] of your Service Fabric cluster.
 
-## Data Collected
-### Metrics
+## 収集データ
+### メトリクス
 
 Because the Datadog Agent is installed on the nodes in your Service Fabric cluster, metrics are reported to Datadog from the Agent's [core checks][5].
 
 If you are running containerized apps on Service Fabric, the Agent reports [Service Fabric Mesh metrics][6].
 
-### Events
+### イベント
 The Azure Service Fabric integration does not include any events.
 
-### Service Checks
+### サービスチェック
 The Azure Service Fabric integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 Need help? Contact [Datadog support][7].
 
 [1]: https://docs.datadoghq.com/integrations/azure/

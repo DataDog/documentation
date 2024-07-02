@@ -26,7 +26,7 @@
 "categories":
 - cloud
 - metrics
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/cloudsmith/README.md"
 "display_on_public_website": true
@@ -69,11 +69,11 @@ This check monitors [Cloudsmith][1] through the Datadog Agent.
 - Monitor storage, bandwidth and token usage in your Cloudsmith account. 
 
 
-## Setup
+## セットアップ
 
 The Cloudsmith check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Cloudsmith check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -85,7 +85,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Cloudsmi
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `cloudsmith.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Cloudsmith performance data. See the [sample cloudsmith.d/conf.yaml][5] for all available configuration options.
 
@@ -95,13 +95,13 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Cloudsmi
 
 [Run the Agent's status subcommand][7] and look for `cloudsmith` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "cloudsmith" >}}
 
 
-### Events
+### イベント
 
 All Cloudsmith related events collected appear within the Datadog Event Stream with the `source:cloudsmith` property. They are collected every five minutes to reduce the number of requests sent to the Cloudsmith API.
 
@@ -112,7 +112,7 @@ There are two types of events:
 
 They are accessible with aggregation keys: `@aggregation_key:audit_log` and `@aggregation_key:vulnerabilities`.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Cloudsmith support][10].
 

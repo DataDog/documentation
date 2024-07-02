@@ -83,7 +83,7 @@ Using Ably's Datadog Integration, you can:
 - Correlate Ably message, channel, and connection usage for collaborative analysis in Datadog dashboards
 - View and track Ably usage statistics in Datadog
 
-## Setup
+## セットアップ
 
 - **In Datadog**: Go to **Integrations**, select the Ably tile and click **Install Integration**.
 
@@ -107,19 +107,19 @@ Using Ably's Datadog Integration, you can:
 
 Your Ably App statistics now appear in Datadog.
 
-## Data Collected
+## 収集データ
 
 For further details on the Ably statistics, read the [Application Statistics documentation][2].
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "ably" >}}
 
 
-### Events
+### イベント
 
 The Ably integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Ably integration does not include any service checks.
 

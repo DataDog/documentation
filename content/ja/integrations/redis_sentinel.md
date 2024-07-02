@@ -22,7 +22,7 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "os & system"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/redis_sentinel/README.md"
 "display_on_public_website": true
@@ -65,11 +65,11 @@ Get metrics from Redis's Sentinel service in real time to:
 - Visualize and monitor sentinels states
 - Be notified about failovers
 
-## Setup
+## セットアップ
 
 The Redis Sentinel check is not included in the [Datadog Agent][1] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Redis Sentinel check on your host. See [Use Community Integrations][2] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -81,7 +81,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Redis Se
 
 2. Configure your integration similar to core [integrations][3].
 
-### Configuration
+### 構成
 
 1. Edit the `redis_sentinel.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][4] to start collecting your Redis Sentinel [metrics](#metrics).
    See the [sample upsc.d/conf.yaml][5] for all available configuration options.
@@ -92,21 +92,21 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Redis Se
 
 Run the [Agent's status subcommand][7] and look for `redis_sentinel` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "redis_sentinel" >}}
 
 
-### Events
+### イベント
 
 The Redis's Sentinel check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "redis_sentinel" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

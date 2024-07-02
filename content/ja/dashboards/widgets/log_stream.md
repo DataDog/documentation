@@ -1,9 +1,9 @@
 ---
-aliases:
-- /ja/graphing/widgets/log_stream/
-description: Datadog のダッシュボードにフィルター処理したログストリームを表示する
-title: ログストリームウィジェット
+title: Log Stream Widget
 widget_type: log_stream
+description: "Display a filtered log stream in your Datadog dashboards."
+aliases:
+- /graphing/widgets/log_stream/
 ---
 
-<div class="alert alert-warning"><a href="https://docs.datadoghq.com/dashboards/widgets/list/">List ウィジェット</a>を通じてログ管理ストリームを表示する</div>
+<div class="alert alert-warning">View the Log Management stream through the <a href="https://docs.datadoghq.com/dashboards/widgets/list/">List widget</a>.</div>

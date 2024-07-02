@@ -19,7 +19,7 @@
 - "log collection"
 - "issue tracking"
 - "notifications"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -62,14 +62,14 @@ Connect Rollbar to Datadog to:
 - Discuss exceptions with your team.
 - Spend less time debugging issues.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 1. Navigate to the [Rollbar integration tile][1] and click **Install Integration**.
 2. From the integration tile, click to choose an existing API key or create a new one for this integration.
 
-### Configuration
+### 構成
 
 Configuration is per-project in Rollbar.
 
@@ -83,21 +83,21 @@ Configuration is per-project in Rollbar.
 
 At this point, click the **Send Test Notification** button to ensure things are configured properly. After clicking this, you should see an event from Rollbar in the [Events Explorer][2].
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Rollbar integration does not include any metric.
 
-### Events
+### イベント
 
 The Rollbar integration pushes exceptions, errors, and code deployments into Datadog as events.
 
-### Service Checks
+### サービスチェック
 
 The Rollbar integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

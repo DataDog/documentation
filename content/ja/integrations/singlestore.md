@@ -33,7 +33,7 @@
 - data stores
 - log collection
 - network
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/singlestore/README.md"
 "display_on_public_website": true
@@ -71,50 +71,50 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [SingleStore][1] through the Datadog Agent. SingleStore offers transactional and analytical processing of stored data. Enable the Datadog-SingleStoreDB integration to:
+このチェックでは、Datadog Agent を通じて [SingleStore][1] を監視します。SingleStore は、保存されたデータのトランザクション処理と分析処理を提供します。Datadog-SingleStoreDB インテグレーションを有効にすると、以下が可能になります。
 
-- Understand the health of clusters and nodes through metrics and events.
-- Address drops in storage capacity.
-- Improve resource utilization efficiency.
+- メトリクスとイベントにより、クラスターとノードの健全性を把握する。
+- ストレージ容量の低下に対応する。
+- リソースの利用効率を高める。
 
 
-## Setup
+## セットアップ
 
-Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying these instructions.
+ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### Installation
+### インストール
 
-The SingleStore check is included in the [Datadog Agent][3] package.
-No additional installation is needed on your server.
+SingleStore チェックは [Datadog Agent][3] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-#### Host
+#### ホスト
 
-##### Metric collection
-1. Edit the `singlestore.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your SingleStore performance data. See the [sample singlestore.d/conf.yaml][4] for all available configuration options.
+##### メトリクスの収集
+1. SingleStore のパフォーマンスデータを収集するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `singlestore.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル singlestore.d/conf.yaml][4] を参照してください。
 
-2. [Restart the Agent][5].
+2. [Agent を再起動します][5]。
 
-**Note**: By default, the SingleStore integration only collects metrics from the `MV_GLOBAL_STATUS`, `AGGREGATORS`, and `LEAVES` tables. To collect additional system level metrics (CPU, disk, network IO, and memory), set `collect_system_metrics: true`  in your `singlestore.d/conf.yaml` file.
+**注**: デフォルトでは、SingleStore インテグレーションは `MV_GLOBAL_STATUS`、`AGGREGATORS`、`LEAVES` テーブルからしかメトリクスを収集しません。システムレベルのメトリクス (CPU、ディスク、ネットワーク IO、メモリ) を追加で収集するには、`singlestore.d/conf.yaml` ファイルで `collect_system_metrics: true` を設定します。
 
-##### Log collection
+##### ログ収集
 
 
 {{< site-region region="us3" >}}
-**Log collection is not supported for this site.**
+**ログ収集は、このサイトではサポートされていません。**
 {{< /site-region >}}
 
 
-1. Collecting logs is disabled by default in the Datadog Agent, enable it in your `datadog.yaml` file:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add the log files you are interested in to your `singlestore.d/conf.yaml` file to start collecting your SingleStore logs:
+2. SingleStore のログの収集を開始するには、該当のログファイルを `singlestore.d/conf.yaml` ファイルに追加します。
 
    ```yaml
      logs:
@@ -124,59 +124,59 @@ No additional installation is needed on your server.
          service: "<SERVICE_NAME>"
    ```
 
-    Change the `path` and `service` parameter values and configure them for your environment. See the [sample singlestore.d/conf.yaml][4] for all available configuration options.
+    `path` パラメーターと `service` パラメーターの値を変更し、環境に合わせて構成してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル singlestore.d/conf.yaml][4] を参照してください。
 
-3. [Restart the Agent][5].
+3. [Agent を再起動します][5]。
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][2] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照して、次のパラメーターを適用してください。
 
-#### Metric collection
+#### メトリクスの収集
 
-| Parameter            | Value                                                      |
+| パラメーター            | 値                                                      |
 |----------------------|------------------------------------------------------------|
 | `<INTEGRATION_NAME>` | `singlestore`                                                   |
-| `<INIT_CONFIG>`      | blank or `{}`                                              |
-| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port": "%%port%%", "username": "<USER>", "password": "<PASSWORD>"}`       |
+| `<INIT_CONFIG>`      | 空白または `{}`                                              |
+| `<INSTANCE_CONFIG>`  | `{"host": "%%host%%", "port": "%%port%%", "username": "<ユーザー>", "password": "<パスワード>"}`       |
 
-##### Log collection
+##### ログ収集
 
 
 {{< site-region region="us3" >}}
-**Log collection is not supported for this site.**
+**ログ収集は、このサイトではサポートされていません。**
 {{< /site-region >}}
 
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes Log Collection][6].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][6]を参照してください。
 
-| Parameter      | Value                                     |
+| パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
 | `<LOG_CONFIG>` | `{"source": "singlestore", "service": "<SERVICE_NAME>"}` |
 
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][7] and look for `singlestore` under the Checks section.
+[Agent の status サブコマンドを実行][7]し、Checks セクションで `singlestore` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "singlestore" >}}
 
 
 
-### Events
+### イベント
 
-The SingleStore integration does not include any events.
+SingleStore インテグレーションには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "singlestore" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][10].
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 
 [1]: https://www.singlestore.com/

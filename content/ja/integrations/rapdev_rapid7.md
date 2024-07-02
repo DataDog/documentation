@@ -33,7 +33,7 @@
 - log collection
 - marketplace
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -94,14 +94,14 @@ This integration tracks the status of currently open and recently closed Rapid7 
 
 The log portion of the check (if enabled) uses the Rapid7 REST API to query IDR log streams. The integration returns all logs that are not considered Rapid7 platform-level logs. These logs are submitted to Datadog. **Note:** Submission of these logs may incur extra fees based on your Datadog pricing plan, as described in the [Datadog Log Management pricing structure](https://www.datadoghq.com/pricing/?product=log-management#log-management). These logs are typically composed of Rapid7 endpoint agent summaries and the statuses of their processes at a given time. 
 
-### Dashboards
+### ダッシュボード
 1. This integration comes with an out-of-the-box dashboard that summarizes Rapid 7 Investigations
 2. This integration also includes an example dashboard based on logs. This dashboard is available upon installation of the integration, but it requires creating a facet for the R7 log source in order to begin seeing data flow.
 
-### Events
+### イベント
 This integration generates Datadog events for new open/closed investigations. The integration tracks the state of an investigation based on its ID and aggregates the open and close events generated together.
 
-### Metrics
+### メトリクス
 The count of logs processed per check is reported as a metric.
 
 ### Log Collection

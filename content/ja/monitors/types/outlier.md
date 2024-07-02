@@ -16,65 +16,65 @@ further_reading:
   tag: Documentation
   text: Consult your monitor status
 - link: /watchdog/insights/
-  tag: Documentation
+  tag: ドキュメント
   text: Outlier detection in Watchdog Insights
 ---
 
-## Overview
+## 概要
 
-Outlier detection is an algorithmic feature that allows you to detect when a specific group is behaving different compared to its peers. For example, you could detect that one web server in a pool is processing an unusual number of requests, or significantly more 500 errors are happening in one AWS availability zone than the others.
+外れ値検出は、特定のグループがピアと比較して異なる動作をしていることを検出できるアルゴリズム機能です。たとえば、プール内の 1 つのウェブサーバーが異常な数のリクエストを処理していることや、1 つの AWS アベイラビリティーゾーンで他よりはるかに多くの 500 エラーが発生していることを検出できます。
 
-{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="outliers metric alert" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-metric-alert.png" alt="外れ値メトリクスアラート" style="width:80%;">}}
 
-## Monitor creation
+## モニターの作成
 
-To create an [outlier monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Outlier*.
+Datadog で[外れ値モニター][1]を作成するには、メインナビゲーションを使用して次のように移動します: *Monitors --> New Monitor --> Outlier*。
 
-### Define the metric
+### メトリクスを定義する
 
-Any metric currently reporting to Datadog is available for monitors. For more information, see the [Metric Monitor][2] page.
+現在 Datadog にレポートが送信されるメトリクスはすべて、モニターに使用できます。詳細については、[メトリクスモニター][2]ページをご確認ください。
 
-The outlier monitor requires a metric with a group (hosts, availability zones, partitions, etc.) that has three or more members, which exhibit uniform behavior.
+外れ値モニターには、3 つ以上のメンバーを持つグループ（ホスト、アベイラビリティーゾーン、パーティションなど）を持つメトリクスが必要であり、これらのメンバーは均一な動作を示します。
 
-### Set alert conditions
+### アラートの条件を設定する
 
-* Trigger a separate alert for each outlier `<GROUP>`
-* during the last `5 minutes`, `15 minutes`, `1 hour`, etc. or `custom` to set a value between 1 minute and 24 hours.
-* Using algorithm `MAD`, `DBSCAN`, `scaledMAD`, or `scaledDBSCAN`
-* tolerance: `0.33`, `1.0`, `3.0`, etc.
-* %: `10`, `20`, `30`, etc. (only for `MAD` algorithms)
+* 各外れ値 `<GROUP>` に対して個別のアラートをトリガーします
+* 過去 `5 minutes`、`15 minutes`、`1 hour` など、または `custom` に 1 分～24 時間の値を設定します。
+* アルゴリズム `MAD`、`DBSCAN`、`scaledMAD`、または `scaledDBSCAN` を使用する
+* 許容値: `0.33`、`1.0`、`3.0` など
+* %: `10`、`20`、`30` など（`MAD` アルゴリズムのみ）
 
-When setting up an outlier monitor, the time window is an important consideration. If the time window is too large, you might not be alerted in time. If the time window is too short, the alerts are not as resilient to one-off spikes.
+外れ値モニターをセットアップする場合、時間枠について考えることが大切です。時間枠が大きすぎる場合、アラートを受け取るタイミングが遅すぎる場合があります。逆に時間枠が短すぎる場合、アラートは 1 回限りのスパイクに対しても反応してしまうでしょう。
 
-To ensure your alert is properly calibrated, set the time window in the preview graph and use the reverse (<<) button to look back in time at outliers that would have triggered an alert. Additionally, you can use this feature to tune your parameters to a specific outlier algorithm.
+アラートが適切に調整されるようにするには、プレビューグラフで時間枠を設定し、逆 (<<) ボタンを使用して、アラートをトリガーしたはずの外れ値を時間で振り返ります。さらに、この機能を使用して、特定の外れ値アルゴリズムに合わせてパラメーターを調整できます。
 
-{{< img src="monitors/monitor_types/outliers/outliers-new-monitor-graph-calibrate.png" alt="outliers new monitor graph calibrate" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-new-monitor-graph-calibrate.png" alt="外れ値の新しいモニターグラフの調整" style="width:80%;">}}
 
-#### Algorithms
+#### アルゴリズム
 
-Datadog offers two types of outlier detection algorithms: `DBSCAN`/`scaledDBSCAN` and `MAD`/`scaledMAD`. It is recommended to use the default algorithm, DBSCAN. If you have trouble detecting the correct outliers, adjust the parameters of DBSCAN or try the MAD algorithm. The scaled algorithms may be useful if your metrics are large scale and closely clustered.
+Datadog は、`DBSCAN`/`scaledDBSCAN` と `MAD`/`scaledMAD` の 2 つのタイプの外れ値検出アルゴリズムを提供しています。デフォルトのアルゴリズムである DBSCAN を使用することをお勧めします。正しく外れ値を検出できない場合は、DBSCAN のパラメーターを調整するか、MAD アルゴリズムを試してください。スケーリングされたアルゴリズムは、メトリクスが大規模で密接にクラスター化されている場合に役立ちます。
 
 {{< tabs >}}
 {{% tab "DBSCAN" %}}
 
-[DBSCAN][1] (density-based spatial clustering of applications with noise) is a popular clustering algorithm. Traditionally, DBSCAN takes:
+[DBSCAN][1]（ノイズを伴うアプリケーションの密度ベースの空間クラスタリング）は、一般的なクラスタリングアルゴリズムです。 従来、DBSCAN は次を取得します。
 
-1. A parameter `ε` that specifies a distance threshold under which two points are considered to be close.
-2. The minimum number of points that have to be within a point's `ε-radius` before that point can start agglomerating.
+1. 2 つのポイントが近いと見なされる距離のしきい値を指定するパラメーター `ε`。
+2. そのポイントが凝集を開始する前に、ポイントの `ε-radius` 内にある必要があるポイントの最小数。
 
-Datadog uses a simplified form of DBSCAN to detect outliers on timeseries. Each group is considered to be a point in *d*-dimensions, where *d* is the number of elements in the timeseries. Any point can agglomerate, and any point not in the largest cluster is considered an outlier. The initial distance threshold is set by creating a new median timeseries by taking the median of the values from the existing timeseries at every time point. The Euclidean distance between each group and the median series is calculated. The threshold is set as the median of these distances, multiplied by a normalizing constant.
+Datadog では、時系列上の外れ値を検出するために、簡略化した形式の DBSCAN を使用しています。それぞれのグループは d 次元内のポイントと見なされます。ここで、d は時系列内の要素の数です。どのポイントも高密度領域を形成できますが、最大のクラスターに属していないポイントは外れ値と見なされます。距離しきい値の初期値は、各時点での既存の時系列の値の中央値から新しい中央値時系列を作成することで設定されます。そして、この中央値系列と各グループとのユークリッド距離が計算されます。しきい値は、この距離の中央値を正規化定数で乗じた値として設定されます。
 
-**Parameters**<br>
-This implementation of DBSCAN takes one parameter, `tolerance`, the constant by which the initial threshold is multiplied to yield DBSCAN's distance parameter ε. Set the tolerance parameter according to how similarly you expect your groups to behave—larger values allow for more tolerance in how much a group can deviate from its peers.
+**パラメーター**<br>
+この DBSCAN の実装では、`tolerance` というパラメーターを使用します。この定数で初期しきい値を乗じて、DBSCAN の距離パラメーター ε が算出されます。tolerance パラメーターは、グループにどの程度類似の挙動を期待するかに応じて設定します。大きな値を設定すると、グループが他のグループから外れて挙動し得る許容度が大きくなります。
 
 [1]: https://en.wikipedia.org/wiki/DBSCAN
 {{% /tab %}}
 {{% tab "MAD" %}}
 
-[MAD][1] (median absolute deviation) is a robust measure of variability, and can be viewed as the robust analog for standard deviation. Robust statistics describe data in a way that is not influenced by outliers.
+[MAD][1] (中央絶対偏差) は、ばらつきのロバストな測定方法であり、ロバストな標準偏差と見なすこともできます。ロバスト統計では、外れ値によって影響を受けないような手法でデータを記述します。
 
-**Parameters**<br>
-To use MAD for your outlier monitor, configure the parameters `tolerance` and `%`.
+**パラメーター**<br>
+外れ値モニターで MAD を使用するには、パラメーター `tolerance` と `%` を構成します。
 
 Tolerance specifies the number of deviations a point (independently of the groups) needs to be away from the median for it to be considered an outlier. This parameter should be tuned depending on the expected variability of the data. For example, if the data is generally within a small range of values, then this should be small. Otherwise, if points can vary greatly, then set a higher scale so the variabilities do not trigger false positives.
 
@@ -84,38 +84,38 @@ Percent refers to the percentage of points in the group considered as outliers. 
 {{% /tab %}}
 {{% tab "Scaled" %}}
 
-DBSCAN and MAD have scaled versions (scaledDBSCAN and scaledMAD). In most situations, the scaled algorithms behave the same as their regular counterparts. However, if DBSCAN/MAD algorithms are identifying outliers within a closely clustered group of metrics, and you would like the outlier detection algorithm to scale with the overall magnitude of the metrics, try the scaled algorithms.
+DBSCAN と MAD には、スケール調整バージョンがあります（scaledDBSCAN と scaledMAD）。多くの場合、スケール調整アルゴリズムの動作は標準アルゴリズムと同じです。ただし、十分に集まっているメトリクスに対して DBSCAN/MAD アルゴリズムが外れ値を検出している場合に、メトリクスの全体的な大きさに合わせて外れ値検知アルゴリズムを調整するには、スケール調整アルゴリズムを試してください。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-##### DBSCAN vs. MAD
+##### DBSCAN か MAD か
 
-So which algorithm should you use? For most outliers, any algorithm performs well at the default settings. However, there are subtle cases where one algorithm is more appropriate.
+それでは、どちらのアルゴリズムを使用すべきでしょうか。ほとんどの外れ値には、どちらのアルゴリズムもデフォルトの設定でよく機能します。しかし、一方のアルゴリズムの方がより適している微妙なケースもあります。
 
-In the following image, a group of hosts is flushing their buffers together, while one host is flushing its buffer slightly later. DBSCAN picks this up as an outlier whereas MAD does not. This is a case where you might prefer to use MAD since the synchronization of the group is just an artifact of the hosts being restarted at the same time. On the other hand, if instead of flushed buffers, the metrics represented a scheduled job that should be synchronized across hosts, DBSCAN would be the correct choice.
+以下の図では、複数のホストが一斉にバッファをフラッシュしていますが、1 つのホストが少し遅れてバッファをフラッシュしています。DBSCAN はこのホストを外れ値として検出しますが、MAD は検出しません。このグループの同時性は、単にそれらのホストが同時に再起動されたという人為的な理由に過ぎないため、このようなケースでは MAD の使用が適しています。一方、もしメトリクスがバッファのフラッシュではなくスケジューリングされたジョブを表し、グループ内のホスト全体で実際に同時に発生する必要がある場合は、DBSCAN の使用が適しています。
 
-{{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="outliers flushing" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-flushing.png" alt="外れ値のフラッシュ" style="width:80%;">}}
 
-### Advanced alert conditions
+### 高度なアラート条件
 
-For detailed instructions on the advanced alert options (auto resolve, new group delay, etc.), see the [Monitor configuration][3] page.
+高度なアラートオプション (自動解決、新しいグループ遅延など) の詳細な手順については、[モニターコンフィギュレーション][3]ページを参照してください。
 
-### Notifications
+### 通知
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
 
 ## API
 
-To create outlier monitors programmatically, see the [Datadog API reference][5]. Datadog recommends [exporting a monitor's JSON][6] to build the query for the API.
+プログラムで外れ値モニターを作成するには、[Datadog API リファレンス][5]を参照してください。Datadog は、[モニターの JSON をエクスポート][6]して API のクエリを作成することを推奨しています。
 
-## Troubleshooting
+## トラブルシューティング
 
-The outlier algorithms are set up to identify groups that are behaving differently from their peers. If your groups exhibit "banding" behavior as shown below (maybe each band represents a different shard), Datadog recommends tagging each band with an identifier, and setting up outlier detection alerts on each band separately.
+外れ値アルゴリズムは、ピアとは異なる動作をしているグループを識別するために設定されます。 以下に示すようにグループに「帯状」動作が見られる場合（帯ごとに異なるシャードを表す場合がある）、各帯に識別子をタグ付けし、各帯で外れ値検出アラートを個別に設定することをお勧めします。
 
-{{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="outliers banding" style="width:80%;">}}
+{{< img src="monitors/monitor_types/outliers/outliers-banding.png" alt="外れ値の帯状" style="width:80%;">}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

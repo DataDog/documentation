@@ -29,7 +29,7 @@
 "categories":
 - data stores
 - caching
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/redisenterprise/README.md"
 "display_on_public_website": true
@@ -70,7 +70,7 @@
 
 ## Overview
 
-**This integration is will be deprecated starting on July 19, 2024. Please use the latest [Redis Enterprise Datadog Integration][2] going forward. This new integration exposes all of the latest Redis Enterprise metrics and includes updated dashboards.**
+**This integration is will be deprecated starting on September 1, 2024. Please use the latest [Redis Enterprise Datadog Integration][2] going forward. This new integration exposes all of the latest Redis Enterprise metrics and includes updated dashboards.**
 
 This integration provides [Redis Enterprise][3] monitoring and metrics for Datadog.
 
@@ -150,7 +150,7 @@ See the full example file for other optional settings available to match your cl
 
 Users can be configured according to the [documentation][17].
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "redisenterprise" >}}

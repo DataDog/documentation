@@ -22,7 +22,7 @@
   "support_email": namrata.deshpande4@gmail.com
 "categories":
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/sortdb/README.md"
 "display_on_public_website": true
@@ -66,11 +66,11 @@ Get metrics from [Sortdb][1] service in real time to:
 - Be notified about Sortdb failovers.
 - Check health of and get stats from multiple instances
 
-## Setup
+## セットアップ
 
 The Sortdb check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Sortdb check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -82,7 +82,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Sortdb c
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `sortdb.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][5] to start collecting your Sortdb [metrics](#metric-collection). See the [sample sortdb.d/conf.yaml][6] for all available configuration options.
 
@@ -96,17 +96,17 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Sortdb c
 
 The SortDB check is compatible with all major platforms.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 See [metadata.csv][9] for a list of metrics provided by this integration.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "sortdb" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 The SortDB check does not include any events.
 

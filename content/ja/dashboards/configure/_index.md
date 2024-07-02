@@ -1,10 +1,10 @@
 ---
+title: Configure
 disable_toc: false
 further_reading:
 - link: /dashboards/
-  tag: ドキュメント
-  text: ダッシュボードの概要
-title: 構成
+  tag: Documentation
+  text: Dashboards Overview
 ---
 
 ## 概要
@@ -42,7 +42,7 @@ Markdown に対応するダッシュボードの説明を更新したり、[チ�
 
 **Configure** をクリックすると、ダッシュボードで使用可能な構成オプションのメニューが開きます。これには以下などがあります。
 
-| ブラウザトラブルシューティング    | 説明 |
+| 構成    | 説明 |
 | ----------- | ----------- |
 | バージョン履歴 | ダッシュボードのバージョン履歴をプレビュー、復元、複製します。詳細については、[バージョン履歴ガイド][3]を参照してください。 |
 | 監査イベントの表示 | 組織内で誰がこのダッシュボードを使用しているかを確認できます。個人として、自分のアクションのストリームを見ることができます。詳細は、[Datadog 監査証跡][4]を参照してください。 |
@@ -78,9 +78,9 @@ tags:(audit AND dash) <DASHBOARD_NAME>
 
 ダッシュボードを完全に削除するには、このオプションを使用します。削除したダッシュボードを復元するには、プリセットの **Recently Deleted** リストを使用します。**Recently Deleted** にあるダッシュボードは、30 日後に完全に削除されます。詳細については、[ダッシュボードリスト][6]のドキュメントを参照してください。
 
-## ヘルプ
+## 権限
 
-<div class="alert alert-info">個々のダッシュボードの<em>表示</em>制限は、<strong>Enterprise</strong> ティアプランを利用している人であれば誰でも利用できます。この機能を有効にするには、アカウントチームまたは <a href="/help/">Datadog サポート</a>にご連絡ください。</div>
+<div class="alert alert-info"><em>View</em> restrictions on individual dashboards are available to anyone on an <strong>Enterprise</strong> tier plan. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature. </div>
 
 {{< img src="dashboards/access_popup.png" alt="ダッシュボードにアクセスするためのロールを選択するためのドロップダウンメニューを備えたダイアログボックス。" style="width:70%;">}}
 
@@ -89,7 +89,7 @@ tags:(audit AND dash) <DASHBOARD_NAME>
 1. **Permissions** を選択します。
 1. **Restrict Access** をクリックします。
 1. ダイアログボックスが更新され、組織のメンバーはデフォルトで **Viewer** アクセス権を持っていることが表示されます。
-1. ドロップダウンを使用して、ダッシュボードを編集できるロール、チーム、またはユーザーを 1 つ以上選択します。
+1. Use the dropdown to select one or more roles, teams, or users that may edit the dashboard.
 1. **Add** をクリックします。
 1. ダイアログボックスが更新され、選択したロールに **Editor** 権限があることが表示されます。
 1. **Save** をクリックします。
@@ -106,18 +106,18 @@ tags:(audit AND dash) <DASHBOARD_NAME>
 
 Terraform でダッシュボードを管理する場合、最新バージョンの Datadog Terraform プロバイダーを使用して、ダッシュボードを編集できるロールを制御することができます。詳細については、[Terraform ダッシュボードロール制限ガイド][8]を参照してください。
 
-編集制限がある各ダッシュボードの右上にアクセスインジケーターが表示されます。権限によっては、**Gain Edit Access** または **Request Edit Access** と表示されます。アクセスインジケーターをクリックすると、アクセス権限を理解し、ダッシュボードを編集するための手順を確認することができます。
+The access indicator appears at the top right of each edit-restricted dashboard. Depending on your permissions, it may say **Gain Edit Access** or **Request Edit Access**. Click the access indicator to understand your access permissions and what steps to take to edit the dashboard.
 
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/account_management/teams/
-[2]: /ja/dashboards/template_variables/
-[3]: /ja/dashboards/guide/version_history/
-[4]: /ja/account_management/audit_trail/
-[5]: /ja/events/
-[6]: /ja/dashboards/list
-[7]: /ja/account_management/rbac/
-[8]: /ja/dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[1]: /account_management/teams/
+[2]: /dashboards/template_variables/
+[3]: /dashboards/guide/version_history/
+[4]: /account_management/audit_trail/
+[5]: /events/
+[6]: /dashboards/list
+[7]: /account_management/rbac/
+[8]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/

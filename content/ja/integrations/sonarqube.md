@@ -34,7 +34,7 @@
 - automation
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md"
 "display_on_public_website": true
@@ -72,29 +72,29 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [SonarQube][1].
+このチェックは [SonarQube][1] を監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The SonarQube check is included in the [Datadog Agent][2] package.
-No additional installation is needed on your server.
+SonarQube チェックは [Datadog Agent][2] パッケージに含まれています。
+サーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-SonarQube exposes metrics from two sources: its web API and JMX. To collect all of the
-[metrics specified below](#metrics), configure three instances of this check. One to monitor SonarQube's web API, and
-the other two to monitor SonarQube's JMX beans.
+SonarQube は、Web API および JMX の 2 つのソースからのメトリクスを公開します。
+[以下で指定されたメトリクス](#metrics)のすべてを収集するには、このチェックの 3 つのインスタンスを構成します。SonarQube の
+Web API を監視するものと、SonarQube の JMX Bean を監視する 2 つです。
 
-Documentation on SonarQube's web API is available at `/web_api` on your SonarQube web UI. By default this integration
-collects all relevant SonarQube performance metrics exposed through SonarQube's JMX beans. The configuration for these
-default metrics is available in the [sonarqube.d/metrics.yaml][3] file. Documentation on these beans is available on
-[SonarQube's website][4].
+SonarQube の Web API に関するドキュメントは、SonarQube Web UI の `/web_api` でご確認ください。デフォルトで
+このインテグレーションは SonarQube の JMX Bean を通じて公開されたすべての関連 SonarQube パフォーマンスを収集します。この
+デフォルトのメトリクスのコンフィギュレーションは、[sonarqube.d/metrics.yaml][3] ファイルにあります。Bean に関するドキュメントは、
+[SonarQube のウェブサイト][4]をご覧ください。
 
-SonarQube's JMX server is **not enabled** by default, this means that unless it is enabled, `sonarqube.server.*` metrics are not collected. More information on how to enable and configure JMX within SonarQube is available within the [SonarQube documentation][5]. Below are configurations needed to enable the JMX server for some common Java processes:
+SonarQube の JMX サーバーは、デフォルトで**無効**になっています。つまり、有効にしない限り `sonarqube.server.*` メトリクスは収集されません。有効化して SonarQube 内で JMX を構成する方法について、詳細は [SonarQube ドキュメント][5]をご参照ください。以下は、いくつかの一般的な Java プロセスで JMX サーバーを有効にするために必要な構成です。
 
 ```conf
 # WEB SERVER
@@ -122,7 +122,7 @@ sonar.search.javaAdditionalOpts="
   "
 ```
 
-This is a basic `sonarqube.d/conf.yaml` example based on SonarQube and JMX defaults. You can use it as a starting point when configuring for both the host-based or container-based Agent installation.
+これは、SonarQube および JMX のデフォルトに基づく基本的な `sonarqube.d/conf.yaml` 例です。ホストベースまたはコンテナベースで Agent をインストールする場合、ここを起点として開始できます。
 
 ```yaml
 init_config:
@@ -130,47 +130,45 @@ init_config:
     collect_default_metrics: true
 instances:
 
-  # Web API instance
+  # Web API インスタンス
   - is_jmx: false
     web_endpoint: http://localhost:9000
     auth_type: basic
-    username: <username>    # Defined in the Web UI
-    password: <password>    # Defined in the Web UI
-    default_tag: component  # Optional
-    components:             # Required
+    username: <username>    # Web UI で定義済み
+    password: <password>    # Web UI で定義済み
+    default_tag: component  # オプション
+    components:             # 必須
       my-project:
         tag: project_name
 
-  # Web JMX instance
+  # Web JMX インスタンス
   - is_jmx: true
     host: localhost
-    port: 10443           # See sonar.web.javaAdditionalOpts in SonarQube's sonar.properties file
-    user: <username>      # Defined in SonarQube's sonar.properties file
-    password: <password>  # Defined in SonarQube's sonar.properties file
+    port: 10443           # SonarQube の sonar.properties ファイルの sonar.web.javaAdditionalOpts を参照してください
+    user: <username>      # SonarQube の sonar.properties ファイルで定義済み
+    password: <password>  # SonarQube の sonar.properties ファイルで定義済み
 
-  # Compute Engine JMX instance
+  # Compute Engine JMX インスタンス
   - is_jmx: true
     host: localhost
-    port: 10444           # See sonar.ce.javaAdditionalOpts in SonarQube's sonar.properties file
-    user: <username>      # Defined in SonarQube's sonar.properties file
-    password: <password>  # Defined in SonarQube's sonar.properties file
+    port: 10444           # SonarQube の sonar.properties ファイルの sonar.ce.javaAdditionalOpts を参照してください
+    user: <username>      # SonarQube の sonar.properties ファイルで定義済み
+    password: <password>  # SonarQube の sonar.properties ファイルで定義済み
 ```
 
-**Note**: Once the integration is configured, have SonarQube scan at least one project to send metrics to Datadog.
+**注**: インテグレーションを構成したら、SonarQube で 1 つ以上のプロジェクトをスキャンし、メトリクスを Datadog に送信します。
 
-Metrics collected by this integration are tagged with a `component` tag by default. If you wish to change the tag
-name on a per component basis, specify the `tag` property within the component definition. To set it for all projects,
-set the `default_tag` property on the instance config.
+このインテグレーションで収集される.メトリクスは、デフォルトで `component` タグが付けられます。タグ名をコンポーネント別に変更するには、コンポーネントの定義で `tag` プロパティを指定します。すべてのプロジェクトに設定するには、インスタンスのコンフィグで `default_tag` プロパティを設定します。
 
-**Note**: Projects in SonarQube often contain multiple source control branches. This integration can only collect metrics from the default branch in SonarQube (typically `main`).
+**注**: SonarQube のプロジェクトには、よく複数のソース管理ブランチが含まれています。このインテグレーションでは、SonarQube 内のデフォルトブランチ (通常は `main`) からのメトリクスのみが収集されます。
 
-#### Search server metrics
+#### サーバーメトリクスの検索
 
-SonarQube exposes a search server, which can be monitored using an additional instance of this integration and a configuration of the JMX metrics. To learn how to customize the metrics to collect, see the [JMX Checks documentation][6] for more detailed instructions. For an example, use the config below and default JMX metric config in [sonarqube.d/metrics.yaml][3].
+SonarQube はこのインテグレーションの追加インスタンスおよび JMX メトリクスのコンフィギュレーションを使用して監視される検索サーバーを公開します。収集するメトリクスのカスタマイズ方法については、[JMX チェックのドキュメント][6]で詳細をご確認ください。例については、以下のコンフィグや、 [sonarqube.d/metrics.yaml][3] 内のデフォルトの JMX メトリクスコンフィグなどもご活用いただけます。
 
 ```yaml
 init_config:
-  # The list of metrics to be collected by the integration.
+  # インテグレーションにより収集されるメトリクスのリスト。
   config:
     - include:
       domain: SonarQube
@@ -182,45 +180,45 @@ init_config:
           alias: sonarqube.search_server.my_metric
           metric_type: gauge
 instances:
-  # Search Server JMX instance
+  # Search Server JMX インスタンス
   - is_jmx: true
     host: localhost
-    port: 10445           # See sonar.search.javaAdditionalOpts in SonarQube's sonar.properties file
-    user: <username>      # Defined in SonarQube's sonar.properties file
-    password: <password>  # Defined in SonarQube's sonar.properties file
+    port: 10445           # SonarQube の sonar.properties ファイルの sonar.search.javaAdditionalOpts を参照してください
+    user: <username>      # SonarQube の sonar.properties ファイルで定義済み
+    password: <password>  # SonarQube の sonar.properties ファイルで定義済み
 ```
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. Edit the `sonarqube.d/conf.yaml` file, in the `conf.d/` folder at the root of your
-   Agent's configuration directory to start collecting your SonarQube data.
-   See the [sample sonarqube.d/conf.yaml][1] for all available configuration options.
+1. 次のルートにある `conf.d/` フォルダーの `sonarqube.d/conf.yaml` ファイルを編集します:
+   SonarQube データの収集を開始します。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル  sonarqube.d/conf.yaml][1] を参照してください。
 
    This check has a limit of 350 metrics per JMX instance. The number of returned metrics is indicated in [the status page][2].
-   You can specify the metrics you are interested in by editing the configuration below.
-   To learn how to customize the metrics to collect, see the [JMX Checks documentation][3] for more detailed instructions.
-   If you need to monitor more metrics, contact [Datadog support][4].
+   以下で説明する構成を編集することで、関心があるメトリクスを指定できます。
+   収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][3]で詳細な手順を参照してください。
+   制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][4]までお問い合わせください。
 
-2. [Restart the Agent][5].
+2. [Agent を再起動します][5]。
 
-##### Log collection
+##### ログ収集
 
 1. Enable SonarQube [logging][6].
 
-2. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+2. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
    ```yaml
    logs_enabled: true
    ```
 
-3. Add the following configuration block to your `sonarqube.d/conf.yaml` file. Change the `path` and `service` parameter values based on your environment. See the [sample sonarqube.d/conf.yaml][1] for all available configuration options.
+3. 次のコンフィギュレーションブロックを `sonarqube.d/conf.yaml` ファイルに追加します。環境に基づいて、`path` パラメーターと `service` パラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル sonarqube.d/conf.yaml][1] を参照してください。
 
    ```yaml
    logs:
@@ -257,7 +255,7 @@ To configure this check for an Agent running on a host:
            pattern: \d{4}\.\d{2}\.\d{2}
    ```
 
-5. [Restart the Agent][5].
+5. [Agent を再起動します][5]。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/sonarqube/datadog_checks/sonarqube/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information
@@ -266,19 +264,19 @@ To configure this check for an Agent running on a host:
 [5]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.sonarqube.org/latest/instance-administration/system-info/
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-##### Metric collection
+##### メトリクスの収集
 
-For containerized environments, see the [Autodiscovery with JMX][1] guide.
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Docker log collection][2].
+Datadog Agent では、ログの収集がデフォルトで無効になっています。これを有効にするには、[Docker ログの収集][2]を参照してください。
 
-| Parameter      | Value                                              |
+| パラメーター      | 値                                              |
 | -------------- | -------------------------------------------------- |
 | `<LOG_CONFIG>` | `{"source": "sonarqube"}` |
 
@@ -287,25 +285,25 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Components Discovery
+#### コンポーネントの検出
 
-You can configure how your components are discovered with the `components_discovery` parameter.
+`components_discovery` パラメータで、コンポーネントの検出方法を構成することができます。
 
 `limit`
-: Maximum number of items to be autodiscovered.  
-**Default value**: `10`
+: 自動検出するアイテムの最大数。
+**デフォルト値**: `10`
 
 `include`
-: Mapping of regular expression keys and component config values to autodiscover.  
-**Default value**: empty map
+: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。 
+**デフォルト値**: 空のマップ
 
 `exclude`
-: List of regular expressions with the patterns of components to exclude from autodiscovery.  
-**Default value**: empty list
+: 自動検出から除外するコンポーネントのパターンを持つ正規表現のリスト。
+**デフォルト値**: 空のリスト
 
-**Examples**:
+**例**:
 
-Include a maximum of `5` components with names starting with `my_project`:
+`my_project` で始まる名前のコンポーネントを最大 `5` まで含めます。
 
 ```yaml
 components_discovery:
@@ -314,7 +312,7 @@ components_discovery:
     'my_project*':
 ```
 
-Include a maximum of `20` components and exclude those beginning with `temp`:
+最大 `20` のコンポーネントを含み、`temp` で始まるコンポーネントは除外します。
 
 ```yaml
 components_discovery:
@@ -325,7 +323,7 @@ components_discovery:
     - 'temp*'
 ```
 
-Include all components with names starting with `issues`, apply the `issues_project` tag, and only collect metrics belonging to the category `issues`. As `limit` is not defined, the number of components discovered is limited to the default value `10`:
+名前が `issues` で始まるコンポーネントをすべて含み、`issues_project` タグを適用し、カテゴリー `issues` に属するメトリクスのみを収集します。`limit` が定義されていないため、検出されるコンポーネントの数はデフォルト値の `10` に制限されます。
 ```yaml
 components_discovery:
   include:
@@ -335,9 +333,9 @@ components_discovery:
          - issues.
 ```
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][7] and look for `sonarqube` under the **JMXFetch** section:
+[Agent のステータスサブコマンドを実行][7]し、 **JMXFetch** セクションで `sonarqube` を探します。
 
 ```text
 ========
@@ -358,7 +356,7 @@ JMXFetch
       status : OK
 ```
 
-If you set an instance without `is_jmx: true`, also look for `sonarqube` under the **Collector** section:
+`is_jmx: true` を使用せずにインスタンスを設定する場合も、**Collector** セクションで `sonarqube` を探します。
 
 ```text
 =========
@@ -379,25 +377,25 @@ Collector
       Last Successful Execution Date : 2021-03-12 00:00:44.000000 UTC
 ```
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "sonarqube" >}}
 
 
-### Events
+### イベント
 
-SonarQube does not include any events.
+SonarQube には、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "sonarqube" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][8].
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

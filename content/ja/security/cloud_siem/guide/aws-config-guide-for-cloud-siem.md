@@ -24,70 +24,70 @@ aliases:
   - /security_platform/cloud_siem/guide/aws-config-guide-for-cloud-siem
 ---
 
-## Overview
+## 概要
 
-Cloud SIEM applies detection rules to all processed logs in Datadog to detect threats, like a targeted attack, a threat intel listed IP communicating with your systems, or an insecure configuration. The threats are surfaced as Security Signals in the [Security Signals Explorer][1] for triaging.
+Cloud SIEM は、Datadog で処理されたすべてのログに検出ルールを適用し、標的型攻撃や脅威インテリジェンスに記載された IP がシステムと通信している、あるいは安全でない構成などの脅威を検出します。この脅威は、トリアージするために[セキュリティシグナルエクスプローラー][1]でセキュリティシグナルとして表面化されます。
 
-This guide walks you through the following steps so that you can start detecting threats with your AWS CloudTrail logs:
+このガイドでは、AWS CloudTrail のログから脅威の検出を開始できるように、次の手順を説明します。
 
-1. [Set up Datadog's AWS integration](#set-up-aws-integration-using-cloudformation)
-2. [Enable AWS CloudTrail logs](#enable-aws-cloudtrail-logging)
-3. [Send AWS CloudTrail logs to Datadog](#send-aws-cloudtrail-logs-to-datadog)
-4. [Use Cloud SIEM to triage Security Signals](#use-cloud-siem-to-triage-security-signals)
+1. [Datadog の AWS インテグレーションを設定する](#set-up-aws-integration-using-cloudformation)
+2. [AWS CloudTrail のログを有効にする](#enable-aws-cloudtrail-logging)
+3. [AWS CloudTrail のログを Datadog に送信する](#send-aws-cloudtrail-logs-to-datadog)
+4. [Cloud SIEM でセキュリティシグナルのトリアージを行う](#use-cloud-siem-to-triage-security-signals)
 
-## Set up AWS integration using CloudFormation
+## CloudFormation を使った AWS インテグレーションの設定
 
-1. Go to Datadog's [AWS integration tile][2] to install the integration.
-2. Click **Automatically Using CloudFormation**. If there is already an AWS account set up, click **Add Another Account** first.
-3. Select the AWS Region where the CloudFormation stack will be launched.
-4. Select or create the Datadog API Key used to send data from your AWS account to Datadog.
-5. Select **Yes** for *Send Logs to Datadog*. This sets up the Datadog Lambda Forwarder to be used later for sending AWS CloudTrail logs to Datadog.
-6. Click **Launch CloudFormation Template**. This opens the AWS Console and loads the CloudFormation stack with the parameters filled in based on your selections in the prior Datadog form. 
+1. Datadog の [AWS インテグレーションタイル][2]にアクセスし、インテグレーションをインストールします。
+2. **Automatically Using CloudFormation** をクリックします。すでに AWS アカウントが設定されている場合は、まず **Add Another Account** をクリックします。
+3. CloudFormation スタックを起動する AWS リージョンを選択します。
+4. AWS アカウントから Datadog へのデータ送信に使用される Datadog API キーを選択または作成します。
+5. *Send Logs to Datadog* で **Yes** を選択します。これで、AWS CloudTrail のログを Datadog に送信するために、後で使用する Datadog Lambda Forwarder がセットアップされます。
+6. **Launch CloudFormation Template** をクリックします。これで AWS コンソールが開き、CloudFormation スタックがロードされます。パラメーターは、事前の Datadog フォームでの選択に基づいて入力されています。
 
-    **Note:** The `DatadogAppKey` parameter enables the CloudFormation stack to make API calls to Datadog to add and edit the Datadog configuration for this AWS account. The key is automatically generated and tied to your Datadog account. 
+   **注:** `DatadogAppKey` パラメーターは、CloudFormation スタックが Datadog に API コールを行い、この AWS アカウントに対して Datadog の構成を追加・編集できるようにするものです。キーは自動的に生成され、Datadog アカウントに結びつけられます。
 
-7. Check the required boxes from AWS and click **Create stack**.
-8. After the CloudFormation stack is created, go back to the AWS integration tile in Datadog and click **Ready!**
+7. AWS から必要な項目にチェックを入れ、**Create stack** をクリックします。
+8. CloudFormation スタック作成後、Datadog の AWS インテグレーションタイルに戻り、**Ready!** をクリックします。
 
-See [Getting Started with AWS][3] for more information about Datadog's AWS integration and CloudFormation template. See [AWS manual setup instructions][4] if you need to set up the AWS integration manually.
+Datadog の AWS インテグレーションと CloudFormation テンプレートの詳細については、[AWS の概要][3]を参照してください。AWS インテグレーションを手動で設定する必要がある場合は、[AWS 手動設定手順][4]を参照してください。
 
-## Enable AWS CloudTrail logging 
+## AWS CloudTrail のログを有効にする
 
-Enable AWS CloudTrail logging so that logs are sent to a S3 bucket. If you already have this setup, skip to [Send AWS CloudTrail logs to Datadog](#send-aws-cloudtrail-logs-to-datadog).
+AWS CloudTrail のログを有効にし、S3 バケットにログが送信されるようにします。すでに設定している場合は、[AWS CloudTrail のログを Datadog に送信する](#send-aws-cloudtrail-logs-to-datadog)にスキップしてください。
 
-1. Click **Create trail** on the [CloudTrail dashboard][5].
-2. Enter in the name for your trail.
-3. Create a new S3 bucket or use an existing S3 bucket to store the CloudTrail logs. 
-4. Create a new AWS KMS key or use an existing AWS KMS key. Click **Next**.
-5. Leave the event type with the default management read and write events, or choose additional event types you want to send to Datadog. Click **Next**.
-6. Review and click **Create trail**.
+1. [CloudTrail ダッシュボード][5]の **Create Trail** をクリックします。
+2. トレイルの名前を入力します。
+3. 新しい S3 バケットを作成するか、既存の S3 バケットを使用して CloudTrail のログを保存します。
+4. 新しい AWS KMS キーを作成するか、既存の AWS KMS キーを使用します。**Next** をクリックします。
+5. イベントタイプは、デフォルトの管理用読み書きイベントのまま、または Datadog に送信したいイベントタイプを追加で選択します。**Next** をクリックします。
+6. 確認後、**Create trail** をクリックします。
 
-## Send AWS CloudTrail logs to Datadog
+## AWS CloudTrail のログを Datadog に送信する
 
-Set up a trigger on your Datadog Forwarder Lambda function to send CloudTrail logs stored in the S3 bucket to Datadog for monitoring.
+Datadog Forwarder の Lambda 関数にトリガーを設定し、S3 バケットに保存されている CloudTrail ログを Datadog に送信してモニタリングします。
 
-1. Go to the [Datadog Forwarder Lambda][6] that was created during the AWS integration set up.
-2. Click **Add trigger**.
-3. Select **S3** for the trigger.
-4. Select the S3 bucket you are using to collect AWS CloudTrail logs. 
-5. For Event type, select **All object create events**.
-6. Click **Add**.
-7. See CloudTrail logs in Datadog's [Log Explorer][7].
+1. AWS インテグレーションのセットアップ時に作成した [Datadog Forwarder Lambda][6] にアクセスします。
+2. **Add trigger** をクリックします。
+3. トリガーに **S3** を選択します。
+4. AWS CloudTrail のログを収集するために使用する S3 バケットを選択します。
+5. イベントタイプで、**All object create events** を選択します。
+6. **Add** をクリックします。
+7. Datadog の[ログエクスプローラー][7]で CloudTrail のログをご覧ください。
 
-See [Log Explorer][8] for more information on how to search and filter, group, and visualize your logs. 
+ログの検索やフィルタリング、グループ化、視覚化の方法については、[ログエクスプローラー][8]を参照してください。
 
-## Use Cloud SIEM to triage Security Signals
+## Cloud SIEM でセキュリティシグナルのトリアージを行う
 
-Cloud SIEM applies out of the box detection rules to all processed logs, including the CloudTrail logs you have just set up. When a threat is detected with a Detection Rule, a Security Signal is generated and can be viewed in the Security Signals Explorer.
+Cloud SIEM は、設定した CloudTrail のログを含む、処理されたすべてのログに対して、すぐに検出ルールを適用します。検出ルールで脅威が検出されると、セキュリティシグナルが生成され、セキュリティシグナルエクスプローラーで確認することができます。
 
-- Go to the [Cloud SIEM Signals Explorer][9] to view and triage threats. See [Security Signals Explorer][10] for further details.
-- You can also use the [AWS CloudTrail dashboard][11] to investigate anomalous activity.
-- See [out-of-the-box detection rules][12] that are applied to your logs.
-- Create [new rules][13] to detect threats that match your specific use case.
+- [Cloud SIEM シグナルエクスプローラー][9]にアクセスして、脅威の表示とトリアージを行います。詳細は[セキュリティシグナルエクスプローラー][10]をご覧ください。
+- また、[AWS CloudTrail ダッシュボード][11]を使って、異常なアクティビティを調査することも可能です。
+- ログに適用される[すぐに使える検出ルール][12]をご覧ください。
+- [新しいルール][13]を作成し、特定のユースケースにマッチした脅威を検出することができます。
 
-Since Cloud SIEM applies detection rules to all processed logs, see the [in-app instructions][14] on how to collect [Kubernetes audit logs][15] and logs from other sources for threat detection. You can also enable different [AWS services][16] to log to a S3 bucket and send them to Datadog for threat monitoring.
+Cloud SIEM は処理されたすべてのログに検出ルールを適用するため、脅威検出のために [Kubernetes 監査ログ][15]や他のソースからのログを収集する方法については[アプリ内説明書][14]を参照してください。また、異なる [AWS サービス][16]を有効にして S3 バケットにログを記録し、脅威監視のために Datadog に送信することも可能です。
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -2,7 +2,7 @@
 description: Learn about the various assets that need to be included when preparing a Datadog integration.
 further_reading:
 - link: "https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md"
-  tag: Source Code
+  tag: ソースコード
   text: Contributing Guidelines for the Documentation Site
 - link: /developers/integrations/
   tag: Documentation
@@ -12,17 +12,17 @@ further_reading:
   text: Learn about using OAuth for integrations
 title: Integration Assets Reference
 ---
-## Overview
+## 概要
 
-This page walks you through the files that you need to populate in order to create an offering on the [**Integrations** page][12] or the [**Marketplace** page][9]. 
+このページでは、[** Integrations** ページ][12]または [**Marketplace** ページ][9]で製品を作成するために入力する必要があるファイルについて説明します。
 
-## Configuration file
+## 構成ファイル
 
-When preparing a new integration, you must include an example configuration that contains the necessary options and reasonable defaults. The example configuration file—which in this case, is located at `<CHECK_NAME>/datadog_checks/<CHECK_NAME>/data/conf.yaml.example`—has two top-level elements: `init_config` and `instances`. 
+新しいインテグレーションを用意する際は、必要なオプションと適正なデフォルトを設定したコンフィギュレーションサンプルを追加する必要があります。この例のサンプルコンフィギュレーションファイルは `<チェック名>/datadog_checks/<チェック名>/data/conf.yaml.example` にあり、`init_config` と `instances` という 2 つのトップレベル要素を持っています。
 
-The configuration under `init_config` is applied to the integration globally, and is used in every instantiation of the integration, whereas anything within `instances` is specific to a given instantiation.
+`init_config` 下のコンフィギュレーションはインテグレーションにグローバルに適用され、インテグレーションのすべてのインスタンスで使用されます。一方、`instances` 内のコンフィギュレーションは特定のインスタンスに適用されます。
 
-Configuration blocks in either section take the following form:
+どちらのセクションの構成ブロックも次の形式になります。
 
 ```yaml
 ## @<COMMAND> [- <ARGS>]
@@ -32,102 +32,102 @@ Configuration blocks in either section take the following form:
 <KEY>: <VALUE>
 ```
 
-Configuration blocks follow a few guidelines:
+構成ブロックは以下のガイドラインに従います。
 
-- Descriptions must not be empty.
-- Always follow this format: `<THIS_IS_A_PLACEHOLDER>` for placeholders. For more information, see the [Documentation Site's contributing guidelines][1].
-- All required parameters are **not** commented by default.
-- All optional parameters are commented by default.
-- If a placeholder has a default value for an integration (like the status endpoint of an integration), it can be used instead of a generic placeholder.
+- 説明を空にすることはできません。
+- プレースホルダーは常に `<THIS_IS_A_PLACEHOLDER>` のフォーマットに従ってください。詳しくは、[ドキュメントサイトの寄稿ガイドライン][1]を参照してください。
+- すべての必須パラメーターはデフォルトでコメントに**されません**。
+- すべてのオプションパラメーターはデフォルトでコメントにされます。
+- プレースホルダーにインテグレーションのデフォルト値がある場合 (たとえば、インテグレーションのステータスエンドポイント)、それを汎用プレースホルダーの代わりに使用できます。
 
-### `@param` specification
+### `@param` の指定
 
-You can use the `@param` command to describe configuration blocks and provide documentation for your configuration. 
+`@param` コマンドは、構成ブロックを記述し、構成のドキュメントを提供するために使用することができます。
 
-`@param` is implemented using one of the following forms:
+`param` は、以下のいずれかの形式で実装されます。
 
 ```text
-@param <name> - <type> - required
-@param <name> - <type> - optional
-@param <name> - <type> - optional - default: <defval>
+@param <name> - <type> - 必須
+@param <name> - <type> - オプション
+@param <name> - <type> - オプション - デフォルト: <defval>
 ```
 
-**Arguments**:
+**引数**:
 
-- `name`: The name of the parameter, such as `search_string` (mandatory).
-- `type`: The data type for the parameter value (mandatory).
+- `name`: パラメーターの名前。例: `search_string` (必須)。
+- `type`: パラメーター値のデータタイプ (必須)。
           Possible values include the following: _boolean_, _string_, _integer_, _double_, _float_, _dictionary_, _list\*_, and _object\*_.
-- `defval`: Default value for the parameter; can be empty (optional).
+- `defval`: パラメーターのデフォルト値。空でもかまいません (オプション)。
 
-`list` and `object` variables span over multiple lines and have special rules.
+`list` および `object` 変数は複数行にまたがり、特別な規則があります。
 
-- In a `list`, individual elements are not documented with the `@param` specification.
-- In an `object`, you can choose to either document elements individually with the `@param` specification or have a common top-level description following the specification of the object itself.
+- `list` の個々の要素は、`@param` 指定を使用して文書化されません。
+- `object` の場合は、`@param` 指定を使用して要素を個別に文書化することも、オブジェクト自体の指定に続けてトップレベルに共通の説明を付けることもできます。
 
-### Optional parameters
+### オプションパラメーター
 
-An optional parameter must be commented by default. Before every line the parameter spans on, add `#` with the same indentation as the `@param` specification.
+オプションパラメーターはデフォルトでコメントにする必要があります。パラメーターの記述に使用される各行の前に、`@param` 指定と同じインデントで `#` を追加します。
 
-### Block comments
+### ブロックコメント
 
-You can add a block comment anywhere in the configuration file with the following rules:
+次の規則に従って、構成ファイルの任意の場所にブロックコメントを追加できます。
 
-- Comments start with `##`.
-- Comments should be indented like any variable (the hyphen doesn't count).
+- コメントは `##` で開始されます。
+- コメントは変数と同様にインデントされます (ハイフンはカウントされません)。
 
-For more information about YAML syntax, see the [Wikipedia article about YAML][2]. You can also explore the [Online YAML Parser][3].
+YAML 構文についての詳細は、[YAMLに関する Wikipedia の記事][2]を参照してください。また、[Online YAML Parser][3] を調べることもできます。
 
-## Manifest file
+## マニフェストファイル
 
-Every offering on the [**Integrations** page][4] or the [**Marketplace** page][11] contains a `manifest.json` file that defines operating parameters, positioning within the greater Datadog integration ecosystem, and additional metadata.
+[**Integrations** ページ][4]または [**Marketplace** ページ][11]にあるすべての製品には、動作パラメーター、より大きなDatadog インテグレーションエコシステム内での位置づけ、追加のメタデータを定義する `manifest.json` ファイルがあります。
 
 {{% integration-assets-reference %}}
 
-### Classifier tags
+### 分類子タグ
 
-You can set multiple categories and define submitted or queried data types for the integration using the `classifier_tags` parameter.
+`classifier_tags` パラメーターを使用して、複数のカテゴリーを設定し、インテグレーションに送信またはクエリされるデータタイプを定義することができます。
 
-You can find the complete list of classifier tags for the `manifest.json` file below: 
+`manifest.json` ファイルに対する分類子タグの完全なリストは、以下の通りです。
 
 {{% integration_categories %}}
 
-## Service check file
+## サービスチェックファイル
 
-The `service_check.json` file describes the service checks made by the integration.
+`service_check.json` ファイルは、インテグレーションによって作成されたサービスチェックを記述します。
 
-You can find the complete list of mandatory attributes for the `service_checks.json` file below: 
+`service_checks.json` ファイルの必須属性の完全なリストは、以下の通りです。
 
-| Attribute       | Description                                                                                                                |
+| 属性       | 説明                                                                                                                |
 | --------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `agent_version` | Minimum Agent version supported.                                                                                           |
-| `integration`   | The name of the integration that emits this service check. Must be the non-normalized `tile.title` from `manifest.json`.   |
-| `check`         | Name of the service check. It must be unique.                                                                              |
-| `statuses`      | List of different status of the check, to choose among `ok`, `warning`, and `critical`. `unknown` is also a possibility.   |
-| `groups`        | [Tags][8] sent with the service check.                                                                                     |
-| `name`          | Displayed name of the service check. The displayed name must be self-explanatory and unique across all integrations.       |
-| `description`   | Description of the service check.                                                                                           |
+| `agent_version` | サポートされている Agent の最小バージョン。                                                                                           |
+| `integration`   | このサービスチェックを送信するインテグレーションの名前。これは、`manifest.json` にある正規化されていない `tile.title` です。   |
+| `check`         | サービスチェックの名前。一意である必要があります。                                                                              |
+| `statuses`      | チェックのさまざまなステータスのリスト。`ok`、`warning`、`critical` から選択します。`unknown` も可能です。   |
+| `groups`        | サービスチェックと共に送信される[タグ][8]。                                                                                     |
+| `name`          | サービスチェックの表示名。表示名はわかりやすく、すべてのインテグレーションで一意である必要があります。       |
+| `description`   | サービスチェックの説明。                                                                                           |
 
 
-## Metrics metadata file
+## メトリクスメタデータファイル
 
-The `metadata.csv` file describes all of the metrics that can be collected by the integration.
+`metadata.csv` ファイルには、インテグレーションが収集できるすべてのメトリクスが記述されます。
 
-You can find the complete list of mandatory and optional attributes for the `metadata.csv` file below: 
+以下に、`metadata.csv` ファイルの必須属性とオプション属性の完全なリストを示します。
 
-| Column name     | Mandatory or Optional | Description                                                                                                                                                                                                                                                                                                                             |
+| 列名     | 必須またはオプション | 説明                                                                                                                                                                                                                                                                                                                             |
 | --------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `metric_name`   | Mandatory          | Name of the metric.                                                                                                                                                                                                                                                                                                                     |
-| `metric_type`   | Mandatory          | Type of the metric. For a list of available metric submission types, see [Metrics Types][6].                                                                                                                                                                                                                                                                                                                |
-| `interval`      | Optional           | Collection interval of the metric in seconds.                                                                                                                                                                                                                                                                                            |
-| `unit_name`     | Optional           | Unit of the metric. For a complete list of supported units, see [Metrics Units][7].                                                                                                                                                                                                                                                                              |
-| `per_unit_name` | Optional           | If there is a unit sub-division, such as `request per second`.                                                                                                                                                                                                                                                                               |
-| `description`   | Optional           | Description of the metric.                                                                                                                                                                                                                                                                                                              |
-| `orientation`   | Mandatory          | Set to `1` if the metric should go up, such as `myapp.turnover`. Set to `0` if the metric variations are irrelevant. Set to `-1` if the metric should go down, such as `myapp.latency`.                                                                                                                                                         |
-| `integration`   | Mandatory          | The name of the integration that emits the metric. Must be the normalized version of the `tile.title` from the `manifest.json` file. Any character besides letters, underscores, dashes, and numbers are converted to underscores. For example: `Openstack Controller` -> `openstack_controller`, `ASP.NET` -> `asp_net`, and `CRI-o` -> `cri-o`. |
-| `short_name`    | Mandatory          | Explicit unique ID for the metric.                                                                                                                                                                                                                                                                                                      |
-| `curated_metric`| Optional           | Marks which metrics for an integration are noteworthy for a given type (`cpu` and `memory` are both accepted). These are displayed in the UI above the other integration metrics.
+| `metric_name`   | 必須          | メトリクスの名前。                                                                                                                                                                                                                                                                                                                     |
+| `metric_type`   | 必須          | メトリクスのタイプ。利用可能なメトリクス送信タイプの一覧は、[メトリクスタイプ][6]を参照してください。                                                                                                                                                                                                                                                                                                                |
+| `interval`      | オプション           | メトリクスの収集間隔 (秒単位)。                                                                                                                                                                                                                                                                                            |
+| `unit_name`     | オプション           | メトリクスの単位。対応する単位の一覧は、[メトリクスの単位][7]を参照してください。                                                                                                                                                                                                                                                                              |
+| `per_unit_name` | オプション           | 単位の下位区分がある場合。`request per second` (1 秒あたりのリクエスト) など。                                                                                                                                                                                                                                                                               |
+| `description`   | オプション           | メトリクスの説明。                                                                                                                                                                                                                                                                                                              |
+| `orientation`   | 必須          | `myapp.turnover` のように、大きい方がよいメトリクスの場合は `1` に設定します。メトリクスの変動が特に重要でない場合は `0` に設定します。`myapp.latency` のように、小さい方がよいメトリクスの場合は `-1` に設定します。                                                                                                                                                         |
+| `integration`   | 必須          | メトリクスを送信するインテグレーションの名前。これは、`manifest.json` ファイルにある `tile.title` を正規化した文字列です。文字、アンダースコア、ダッシュ、数字以外の文字はアンダースコアに変換されます。例: `Openstack Controller` -> `openstack_controller`、`ASP.NET` -> `asp_net`、`CRI-o` -> `cri-o`。 |
+| `short_name`    | 必須          | メトリクスの明示的な一意の ID。                                                                                                                                                                                                                                                                                                      |
+| `curated_metric`| オプション           | インテグレーションのためのどのメトリクスが、与えられたタイプで注目すべきかをマークします (`cpu`と`memory`の両方が受け入れられる)。これらは、UI で他のインテグレーションメトリクスの上に表示されます。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

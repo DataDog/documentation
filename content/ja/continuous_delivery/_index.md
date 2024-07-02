@@ -31,7 +31,7 @@ cascade:
 CD Visibility is in private beta. To request access, complete the form.
 {{< /callout >}}
 
-## Overview
+## 概要
 
 Datadog Continuous Delivery (CD) Visibility provides observability on your deployments. CD Visibility brings deployment metrics and data into Datadog so you can communicate the health of your deployments, and focus your efforts in improving your team's ability to deliver quality code every time.
 
@@ -39,7 +39,7 @@ Datadog Continuous Delivery (CD) Visibility provides observability on your deplo
 
 Deployment Visibility helps you monitor deployments across CI environments by tracking every deployment event in real time. You can identify bottlenecks, understand failures, and measure deployment success metrics. With CD Visibility, your team can optimize processes, increase deployment frequency safely, and ensure consistent delivery performance.
 
-## Increase efficiency through seamless integrations
+## シームレスなインテグレーションで効率アップ
 
 Datadog integrates with [CI providers][4] and CD providers like [ArgoCD][5] to collect metrics and track the execution performance and results of your deployments. 
 
@@ -49,11 +49,11 @@ Datadog integrates with [CI providers][4] and CD providers like [ArgoCD][5] to c
 
 Use the data aggregated over time to identify trends and improve your deployment strategies for enhanced operational efficiency. 
 
-## Ready to start?
+## 準備はいいですか？
 
 See [Deployment Visibility][1] for instructions on setting up CD Visibility with your CD providers, information about compatibility requirements, and steps for instrumenting and configuring data collection. Then, start exploring details about your deployment executions in the [CD Visibility Explorer][2] and export your search query into a [saved view][3].
 
-## Further reading
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

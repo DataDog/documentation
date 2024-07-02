@@ -5,18 +5,18 @@ aliases:
     - /network_performance_monitoring/devices/data/
 ---
 
-## Events
+## イベント
 
-Network Device Monitoring does not include any events.
+ネットワークデバイスモニタリングには、イベントは含まれません。
 
-## Service checks
+## サービスチェック
 
 {{< get-service-checks-from-git "snmp" >}}
 
-## Metrics
+## メトリクス
 
-Network Device Monitoring submits specified metrics under the `snmp.*` namespace. The metrics collected are determined by the `[configured profile]`.
-If the metrics you want are not on the following list, search for the OID and its name from the [Global OID reference database][1] to add to your profiles.
+ネットワークデバイス監視は、`snmp.*` ネームスペースの下に指定されたメトリクスを提出します。収集されるメトリクスは、`[configured profile]` によって決定されます。
+必要なメトリクスが以下のリストにない場合は、[グローバル OID リファレンスデータベース][1]から OID とその名前を検索して、プロファイルに追加してください。
 
 {{< get-metrics-from-git "snmp" >}}
 

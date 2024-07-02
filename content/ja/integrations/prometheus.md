@@ -19,14 +19,14 @@
   "support_email": "help@datadoghq.com"
 "categories":
 - "metrics"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/prometheus/README.md"
 "display_on_public_website": true
 "draft": false
 "git_integration_title": "prometheus"
 "integration_id": "prometheus"
-"integration_title": "Prometheus (legacy)"
+"integration_title": "Prometheus (レガシー)"
 "integration_version": "3.6.0"
 "is_public": true
 "manifest_version": "2.0.0"
@@ -69,15 +69,15 @@ All the metrics retrieved by this integration are considered <a href="https://do
 
 **See the [Prometheus metrics collection Getting Started][2] to learn how to configure a Prometheus Check.**
 
-## Setup
+## セットアップ
 
 Follow the instructions below to install and configure this check for an Agent running on a host. For containerized environments, see the [Autodiscovery Integration Templates][3] for guidance on applying these instructions.
 
-### Installation
+### インストール
 
 The Prometheus check is packaged with the [Datadog Agent][4] starting version 6.1.0.
 
-### Configuration
+### 構成
 
 Edit the `prometheus.d/conf.yaml` file to retrieve metrics from applications that expose OpenMetrics / Prometheus end points.
 
@@ -101,26 +101,26 @@ If `send_monotonic_counter: True`, the Agent sends the deltas of the values in q
 
 [Run the Agent's `status` subcommand][6] and look for `prometheus` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 All metrics collected by the prometheus check are forwarded to Datadog as custom metrics.
 
 Note: Bucket data for a given `<HISTOGRAM_METRIC_NAME>` Prometheus histogram metric are stored in the `<HISTOGRAM_METRIC_NAME>.count` metric within Datadog with the tags `upper_bound` including the name of the buckets. To access the `+Inf` bucket, use `upper_bound:none`.
 
-### Events
+### イベント
 
 Prometheus Alertmanager alerts are automatically sent to your Datadog event stream following the webhook configuration.
 
-### Service Checks
+### サービスチェック
 
 The Prometheus check does not include any service checks.
 
 ## Prometheus Alertmanager
 Send Prometheus Alertmanager alerts in the event stream. Natively, Alertmanager sends all alerts simultaneously to the configured webhook. To see alerts in Datadog, you must configure your instance of Alertmanager to send alerts one at a time. You can add a group-by parameter under `route` to have alerts grouped by the actual name of the alert rule.
 
-### Setup
+### セットアップ
 1. Edit the Alertmanager configuration file, `alertmanager.yml`, to include the following:
 ```
 receivers:
@@ -143,7 +143,7 @@ route:
 sudo systemctl restart prometheus.service alertmanager.service
 ```
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

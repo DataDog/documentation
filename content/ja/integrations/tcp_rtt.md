@@ -1,7 +1,7 @@
 ---
 integration_title: TCP RTT
 name: tcp_rtt
-custom_kind: integration
+custom_kind: インテグレーション
 newhlevel: true
 is_public: true
 public_title: Datadog-TCP RTT Integration

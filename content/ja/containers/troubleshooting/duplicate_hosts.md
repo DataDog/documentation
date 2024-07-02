@@ -2,17 +2,17 @@
 title: Duplicate hosts with Kubernetes on AWS (EC2 or EKS)
 ---
 
-If you are running the Datadog Agent in a Kubernetes environment on AWS (fully self-managed on EC2, or using EKS) you may see a problem with duplicate hosts. One host is using a hostname coming from the Datadog Agent, while the other is the AWS `instance-id` collected by Datadog's AWS integration.
+AWS 上の Kubernetes 環境 (EC2 上の完全自己管理、または EKS を使用) で Datadog Agent を実行している場合、ホストが重複している問題が発生することがあります。1 つのホストは Datadog Agent から来るホスト名を使用しており、もう 1 つは Datadog の AWS インテグレーションによって収集された AWS `instance-id` です。
 
-## Background
+## バックグラウンド
 
-To perform hostname resolution, the Datadog Agent queries the local EC2 metadata endpoint to detect the EC2 `instance-id`. The Agent then submits this `instance-id` as a hostname alias. Datadog merges the data from the Agent and the data from the AWS integration into one host.
+ホスト名解決を行うには、Datadog Agent がローカルの EC2 メタデータエンドポイントにクエリし、EC2 の `instance-id` を検出します。次に Agent は、この `instance-id` をホスト名のエイリアスとして送信します。Datadog は Agent からのデータと AWS インテグレーションからのデータを 1 つのホストにマージします。
 
-When the Datadog Agent cannot query the EC2 metadata endpoint, duplicate hostnames may arise.
+Datadog Agent が EC2 メタデータエンドポイントにクエリできない場合、重複したホスト名が発生することがあります。
 
-## Diagnosis
+## 診断
 
-Use the Agent flare command to generate a flare. Then look at `diagnose.log`. You may find a failure like the following:
+Agent flare コマンドでフレアを生成します。その後、`diagnose.log` を見ます。以下のような失敗が見つかるかもしれません。
 
 ```
 === Running EC2 Metadata availability diagnosis ===
@@ -20,12 +20,12 @@ Use the Agent flare command to generate a flare. Then look at `diagnose.log`. Yo
 ===> FAIL
 ```
 
-## Remediation
+## 修復
 
-Update your configuration to allow access to the EC2 metadata endpoint.
+EC2 メタデータエンドポイントへのアクセスを許可するよう、構成を更新します。
 
-If you are using IMDSv2, you also need to:
-1. Set the environment variable `DD_EC2_PREFER_IMDSV2` to `true`.
-2. Increase the [hop limit][1] from `1` to `2`.
+また、IMDSv2 を使用している場合は、こちらも必要です。
+1. 環境変数 `DD_EC2_PREFER_IMDSV2` を `true` に設定します。
+2. [ホップリミット][1]を `1` から `2` に増やします。
 
 [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-data-retrieval.html

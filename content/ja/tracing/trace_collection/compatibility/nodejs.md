@@ -113,83 +113,83 @@ Or, modify the `package.json` file if you typically start an application with np
 **Note**: The previous examples use Next.js, but the same approach applies to other frameworks with custom entry points, such as Nest.js. Adapt the commands to fit your specific framework and setup. Either command should work, but using `NODE_OPTIONS`  also applies to any child Node.js processes.
 
 
-### Native module compatibility
+### ネイティブモジュールの互換性
 
-| Module      | Support Type        | Notes |
+| モジュール      | サポートの種類        | 注 |
 | ----------- | ------------------- | ------------------------------------------ |
-| [dns][22]   | Fully supported     |       |
+| [dns][22]   | 完全対応     |       |
 | [http][24]  | Fully supported     |       |
-| [https][25] | Fully supported     |       |
-| [http2][26] | Partially supported | Only HTTP2 clients are currently supported and not servers. |
-| [net][27]   | Fully supported     |       |
+| [https][25] | 完全対応     |       |
+| [http2][26] | 一部対応 | 現在、HTTP2 クライアントのみ対応。サーバーは非対応。 |
+| [net][27]   | 完全対応     |       |
 
-### Data store compatibility
+### データストアの互換性
 
-| Module                 | Versions | Support Type    | Notes                                            |
+| モジュール                 | バージョン | サポートの種類    | 注                                            |
 | ---------------------- | -------- | --------------- | ------------------------------------------------ |
-| [cassandra-driver][28] | `>=3`    | Fully supported |                                                  |
-| [couchbase][29]        | `^2.4.2` | Fully supported |                                                  |
-| [elasticsearch][30]    | `>=10`   | Fully supported | Supports `@elastic/elasticsearch` versions `>=5` |
-| [ioredis][31]          | `>=2`    | Fully supported |                                                  |
-| [knex][32]             | `>=0.8`  | Fully supported | This integration is only for context propagation |
-| [mariadb][63]          | `>=3`    | Fully supported |                                                  |
-| [memcached][33]        | `>=2.2`  | Fully supported |                                                  |
-| [mongodb-core][34]     | `>=2`    | Fully supported | Supports Mongoose                                |
-| [mysql][35]            | `>=2`    | Fully supported |                                                  |
-| [mysql2][36]           | `>=1`    | Fully supported |                                                  |
+| [cassandra-driver][28] | `3 以降`    | 完全対応 |                                                  |
+| [couchbase][29]        | `2.4.2 以降` | Fully supported |                                                  |
+| [elasticsearch][30]    | `10 以降`   | Fully supported | バージョン 5 以降の `@elastic/elasticsearch` に対応 |
+| [ioredis][31]          | `2 以降`    | Fully supported |                                                  |
+| [knex][32]             | `0.8 以降`  | Fully supported | このインテグレーションはコンテキストの伝搬のみが目的 |
+| [mariadb][63]          | `3 以降`    | 完全対応 |                                                  |
+| [memcached][33]        | `2.2 以降`  | Fully supported |                                                  |
+| [mongodb-core][34]     | `2 以降`    | Fully supported | Mongoose に対応                                |
+| [mysql][35]            | `2 以降`    | 完全対応 |                                                  |
+| [mysql2][36]           | `1 以降`    | 完全対応 |                                                  |
 | [oracledb][37]         | `>=5`    | Fully supported |                                                  |
-| [pg][38]               | `>=4`    | Fully supported | Supports `pg-native` when used with `pg`         |
-| [redis][39]            | `>=0.12` | Fully supported |                                                  |
-| [sharedb][40]          | `>=1`    | Fully supported |                                                  |
-| [tedious][41]          | `>=1`    | Fully supported | SQL Server driver for `mssql` and `sequelize`    |
+| [pg][38]               | `4 以降`    | Fully supported | `pg` と共に使用した場合 `pg-native` に対応         |
+| [redis][39]            | `0.12 以降` | 完全対応 |                                                  |
+| [sharedb][40]          | `1 以降`    | 完全対応 |                                                  |
+| [tedious][41]          | `1 以降`    | 完全対応 | `mssql` および `sequelize` 用の SQL Server ドライバー    |
 
-### Worker compatibility
+### ワーカーの互換性
 
-| Module                     | Versions | Support Type    | Notes                                                  |
+| モジュール                     | バージョン | サポートの種類    | 注                                                  |
 | -------------------------- | -------- | --------------- | ------------------------------------------------------ |
-| [@google-cloud/pubsub][42] | `>=1.2`  | Fully supported |                                                        |
-| [amqp10][43]               | `>=3`    | Fully supported | Supports AMQP 1.0 brokers (such as ActiveMQ, or Apache Qpid) |
-| [amqplib][44]              | `>=0.5`  | Fully supported | Supports AMQP 0.9 brokers (such as RabbitMQ, or Apache Qpid) |
-| [generic-pool][45]         | `>=2`    | Fully supported |                                                        |
-| [kafkajs][46]         | `>=1.4`    | Fully supported |                                                        |
-| [kafka-node][47]           |          | Coming Soon     |                                                        |
-| [rhea][48]                 | `>=1`    | Fully supported |                                                        |
+| [@google-cloud/pubsub][42] | `1.2 以降`  | Fully supported |                                                        |
+| [amqp10][43]               | `3 以降`    | 完全対応 | AMQP 1.0 ブローカー (ActiveMQ、または Apache Qpid など) に対応 |
+| [amqplib][44]              | `0.5 以降`  | Fully supported | AMQP 0.9 ブローカー (RabbitMQ、または Apache Qpid など) に対応 |
+| [generic-pool][45]         | `2 以降`    | 完全対応 |                                                        |
+| [kafkajs][46]         | `>=1.4`    | 完全対応 |                                                        |
+| [kafka-node][47]           |          | 間もなく対応     |                                                        |
+| [rhea][48]                 | `1 以降`    | 完全対応 |                                                        |
 
-### SDK compatibility
+### SDK の互換性
 
-| Module             | Versions   | Support Type    | Notes                                                  |
+| モジュール             | バージョン   | サポートの種類    | 注                                                  |
 | ------------------ | ---------- | --------------- | ------------------------------------------------------ |
-| [aws-sdk][49]      | `>=2.1.35` | Fully supported | CloudWatch, DynamoDB, Kinesis, Redshift, S3, SNS, SQS, and generic requests. |
+| [aws-sdk][49]      | `>=2.1.35` | 完全対応 | CloudWatch、DynamoDB、Kinesis、Redshift、S3、SNS、SQS、一般的なリクエスト。 |
 | [openai][64]       | `3.x`      | Fully supported |                                                        |
 
-### Promise library compatibility
+### Promise ライブラリの互換性
 
-| Module           | Versions  | Support Type    |
+| モジュール           | バージョン  | サポートの種類    |
 | ---------------- | --------- | --------------- |
-| [bluebird][50]   | `>=2`     | Fully supported |
-| [promise][51]    | `>=7`     | Fully supported |
-| [promise-js][52] | `>=0.0.3` | Fully supported |
-| [q][53]          | `>=1`     | Fully supported |
-| [when][54]       | `>=3`     | Fully supported |
+| [bluebird][50]   | `2 以降`     | 完全対応 |
+| [promise][51]    | `7 以降`     | 完全対応 |
+| [promise-js][52] | `0.0.3 以降` | 完全対応 |
+| [q][53]          | `1 以降`     | 完全対応 |
+| [when][54]       | `3 以降`     | Fully supported |
 
-### Logger compatibility
+### ロガーの互換性
 
-| Module           | Versions  | Support Type    |
+| モジュール           | バージョン  | サポートの種類    |
 | ---------------- | --------- | --------------- |
-| [bunyan][55]     | `>=1`     | Fully supported |
-| [paperplane][56] | `>=2.3.2` | Fully supported |
-| [pino][57]       | `>=2`     | Fully supported |
-| [winston][58]    | `>=1`     | Fully supported |
+| [bunyan][55]     | `1 以降`     | 完全対応 |
+| [paperplane][56] | `2.3.2 以降` | 完全対応 |
+| [pino][57]       | `2 以降`     | 完全対応 |
+| [winston][58]    | `1 以降`     | 完全対応 |
 
-## Unsupported libraries
+## 非対応のライブラリ
 
 ### Fibers
 
-[`fibers`][59] is incompatible with `async_hooks`, a Node.js [module][60] that is used by `dd-trace-js` to track asynchronous contexts thereby ensuring accurate tracing. Interactions between `fibers` and `async_hooks` may lead to unpreventable crashes and undefined behavior. So, the use of `dd-trace-js` with applications that invoke `fibers` directly or indirectly through frameworks such as [Meteor][61] may result in instability (crashes) or incorrect tracing.
+[`fibers`][59] は `async_hooks` と互換性がありません。これは Node.js の[モジュール][60]で、`dd-trace-js` が非同期コンテキストを追跡するために使用し、それによって正確なトレースを保証しています。`fibers` と `async_hooks` の間の相互作用は、予防できないクラッシュや未定義の挙動につながる可能性があります。そのため、`fibers` を直接、あるいは [Meteor][61] などのフレームワークを介して間接的に呼び出すアプリケーションで `dd-trace-js` を使用すると、不安定 (クラッシュ) や不正確なトレースが発生する可能性があります。
 
-For additional information or to discuss [leave a comment on this github issue][62] or [reach out to support][3] to discuss further.
+追加情報または議論については、[この github 問題にコメントを残す][62]か、[サポートにお問い合わせ][3]ください。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

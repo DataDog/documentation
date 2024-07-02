@@ -19,7 +19,7 @@
 - log collection
 - collaboration
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "display_on_public_website": true
 "draft": false
@@ -70,13 +70,13 @@ Import your Google Workspace security logs in Datadog. Upon enabling this integr
 |Jamboard|The Jamboard activity report returns information about changes to Jamboard device settings. Each report uses the basic endpoint request with report-specific parameters such as licensing or device pairing settings.|
 |Login|The Login application's activity reports return account information about different types of Login activity events.|
 |Mobile|The Mobile Audit activity reports return information about different types of Mobile Audit activity events.|
-|Rules|The Rules activity reports return information about different types of Rules activity events.|
+|ルール|The Rules activity reports return information about different types of Rules activity events.|
 |Token|The Token application's activity reports return account information about different types of Token activity events.|
 |SAML|The SAML activity report returns information about the results of SAML login attempted. Each report uses the basic endpoint request with report-specific parameters such as the failure type and SAML application name.|
 |User Accounts|The User Accounts application's activity reports return account information about different types of User Accounts activity events|
 
-## Setup
-### Installation
+## セットアップ
+### インストール
 
 Follow the Google Workspace Admin SDK [Reports API: Prerequisites][1] documentation before configuring the Datadog-Google Workspace integration.
 
@@ -84,26 +84,26 @@ Follow the Google Workspace Admin SDK [Reports API: Prerequisites][1] documentat
 
 To configure the Datadog Google Workspace integration, click on the *Connect a new Google Workspace domain* button in your [Datadog-Google Workspace integration tile][3] and authorize Datadog to access the Google Workspace Admin API.
 
-## Data Collected
+## 収集データ
 ### Logs
 
 See the [Google Workspace Admin SDK documentation][4] for the full list of collected logs and their content.
 
 **Note**: The Groups, Enterprise Groups, Login, Token, and Calendar logs are on a 90 minute crawler because of a limitation in how often Google polls these logs on their side. Logs from this integration are only forwarded every 1.5-2 hours.
 
-### Metrics
+### メトリクス
 
 The Google Workspace integration does not include any metrics.
 
-### Events
+### イベント
 
 The Google Workspace integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Google Workspace integration does not include any Service Checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][5].
 

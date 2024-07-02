@@ -45,7 +45,7 @@
 "categories":
 - data stores
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/foundationdb/README.md"
 "display_on_public_website": true
@@ -82,53 +82,47 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-## Overview
+## 概要
 
-This check monitors [FoundationDB][1] through the Datadog Agent. Aside from
-checking that the FoundationDB cluster is healthy, it also collects numerous metrics
-and, optionally, FoundationDB transaction logs.
+このチェックでは、Datadog Agent を通じて [FoundationDB][1] を監視します。FoundationDB クラスターが健全であることを確認するほか、多数のメトリクスを収集し、オプションで FoundationDB トランザクションログも収集します。
 
-## Setup
+## セットアップ
 
-Both the check and metrics apply to the FoundationDB cluster as a whole,
-and should only be installed on one host. The host doesn't need to be one that is
-running FoundationDB, but just one with access to it.
+チェックとメトリクスはどちらも FoundationDB クラスター全体に適用され、1 つのホストにのみインストールする必要があります。このホストは FoundationDB を実行しているホストである必要はなく、アクセス可能なホストであれば問題ありません。
 
-### Installation
+### インストール
 
-The FoundationDB check is included in the [Datadog Agent][2] package,
-but requires the [FoundationDB client][3] to be installed.
+FoundationDB チェックは [Datadog Agent][2] パッケージに含まれていますが、[FoundationDB クライアント][3]がインストールされている必要があります。
 
-### Configuration
+### 構成
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-##### Metric collection
+##### メトリクスの収集
 
-1. To start collecting your FoundationDB metrics, edit the `foundationdb.d/conf.yaml` file in the `conf.d/` folder at the root of your Agent's configuration directory.
-   See the [sample foundationdb.d/conf.yaml][1] for all available configuration options.
+1. FoundationDB メトリクスの収集を開始するには、Agent の構成ディレクトリのルートにある `conf.d/` フォルダ内の `foundationdb.d/conf.yaml` ファイルを編集します。
+   使用可能なすべての構成オプションの詳細については、[サンプル foundationdb.d/conf.yaml][1] を参照してください。
 
-2. The cluster to check is determined by searching for a cluster file  in the [default location][2]. If the cluster file is located elsewhere,
-set the `cluster_file` property. Only one cluster can be monitored per check instance.
+2. チェックするクラスターは、[デフォルトの場所][2]にあるクラスターファイルを検索することで決定されます。クラスターファイルが他の場所にある場合は、
+`cluster_file` プロパティを設定します。チェックインスタンスごとに監視できるクラスターは 1 つだけです。
 
-3. If the cluster is [configured to use TLS][3], further properties should  be set in the configuration. These properties follow the names of the TLS
-related options given to `fdbcli` to connect to such a cluster.
+3. クラスターが [TLS を使用するように構成されている][3]場合、構成にさらなるプロパティを設定する必要があります。これらのプロパティは、
+そのようなクラスターに接続するために `fdbcli` に与えられる TLS 関連のオプションの名前に従います。
 
-4. [Restart the Agent][4].
+4. [Agent を再起動します][4]。
 
-##### Log collection
+##### ログ収集
 
-FoundationDB writes XML logs by default, however, Datadog integrations expect JSON logs. Thus, a configuration change needs to be made to
-FoundationDB.
+FoundationDB はデフォルトで XML ログを書き込みますが、Datadog インテグレーションは JSON ログを想定しています。そのため、FoundationDB に構成変更を行う必要があります。
 
-1. Locate your `foundationdb.conf` file. Under the `fdbserver` section, add
-   or change the key `trace_format` to have the value `json`. Also, make
-   note of the `logdir`.
+1. `foundationdb.conf` ファイルを探します。`fdbserver` セクションで、
+   キー `trace_format` を追加または変更して、値を `json` にします。
+   また、`logdir` をメモしておきます。
 
     ```
     [fdbserver]
@@ -137,18 +131,18 @@ FoundationDB.
     trace_format = json
     ```
 
-2. Restart the FoundationDB server so the changes take effect. Verify that
-   logs in the `logdir` are written in JSON.
+2. FoundationDB サーバーを再起動し、変更を有効にします。
+   `logdir` にあるログが JSON で書き込まれていることを確認します。
 
-3. Ensure that log collection is enabled in your `datadog.yaml` file:
+3. `datadog.yaml` ファイルでログ収集が有効になっていることを確認します。
 
     ```yaml
     logs_enabled: true
     ```
 
-4. In the `foundationdb.d/conf.yaml` file, uncomment the `logs` section
-   and set the path to the one in your FoundationDB configuration file,
-   appending `*.json`.
+4. `foundationdb.d/conf.yaml` ファイルで、`logs` セクションのコメントを解除し、
+   パスを FoundationDB の構成ファイルにあるものに設定し、
+   `*.json` を追加します。
 
     ```yaml
     logs:
@@ -158,36 +152,36 @@ FoundationDB.
         source: foundationdb
     ```
 
-5. Make sure the Datadog Agent has the privileges required to list the
-   directory and read its files.
+5. Datadog Agent が、ディレクトリの一覧表示とそのファイルの読み取りに必要な権限を
+   持っていることを確認します。
 
-5. Restart the Datadog Agent.
+5. Datadog Agent を再起動します。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/foundationdb/datadog_checks/foundationdb/data/conf.yaml.example
 [2]: https://apple.github.io/foundationdb/administration.html#default-cluster-file
 [3]: https://www.foundationdb.org/
 [4]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
 
-##### Metric collection
+##### メトリクスの収集
 
-| Parameter            | Value                                                      |
+| パラメーター            | 値                                                      |
 |----------------------|------------------------------------------------------------|
 | `<INTEGRATION_NAME>` | `foundationdb`                                             |
-| `<INIT_CONFIG>`      | blank or `{}`                                              |
+| `<INIT_CONFIG>`      | 空白または `{}`                                              |
 | `<INSTANCE_CONFIG>`  | `{}`                                                       |
 
-##### Log collection
+##### ログ収集
 
-Collecting logs is disabled by default in the Datadog Agent. To enable it, see [Kubernetes log collection][2].
+Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
 
-| Parameter      | Value                                     |
+| パラメーター      | 値                                     |
 |----------------|-------------------------------------------|
 | `<LOG_CONFIG>` | `{"source": "foundationdb", "service": "<SERVICE_NAME>"}` |
 
@@ -197,24 +191,24 @@ Collecting logs is disabled by default in the Datadog Agent. To enable it, see [
 {{< /tabs >}}
 
 
-### Validation
+### 検証
 
-[Run the Agent's status subcommand][4] and look for `foundationdb` under the **Checks** section.
+[Agent の status サブコマンドを実行][4]し、**Checks** セクションで `foundationdb` を探します。
 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "foundationdb" >}}
 
 
-### Events
+### イベント
 
-The FoundationDB check does not include any events.
+FoundationDB チェックには、イベントは含まれません。
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 [1]: https://www.foundationdb.org/

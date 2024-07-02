@@ -16,79 +16,79 @@ further_reading:
   text: Consult your monitor status
 ---
 
-## Overview
+## 概要
 
-Service check monitors include any service check not reported by one of the [more than {{< translate key="integration_count" >}} integrations][1] included with the Agent. Service checks can be sent to Datadog using a [custom Agent check][2], [DogStatsD][3], or the [API][4]. For more information, see the [Service Check Overview][5].
+サービスチェックモニターには、Agent に含まれる [{{< translate key="integration_count" >}} 以上のインテグレーション][1]のいずれかによってレポートされないサービスチェックが含まれます。サービスチェックは、[カスタム Agent チェック][2]、[DogStatsD][3]、または [API][4] を使用して Datadog に送信できます。詳しくは、[サービスチェックの概要][5]をご覧ください。
 
-## Monitor creation
+## モニターの作成
 
-To create a [service check monitor][6] in Datadog, use the main navigation: **Monitors** --> **New Monitor** --> **Service Check**.
+Datadog で[サービスチェックモニター][6]を作成するには、メインナビゲーションを使用して次のように移動します: **Monitors** --> **New Monitor** --> **Service Check**。
 
-### Pick a service check
+### サービスチェックを選択する
 
-Choose a service check from the dropdown menu.
+ドロップダウンメニューからサービスチェックを選択します。
 
-### Pick monitor scope
+### モニターのスコープを選択
 
-Select the scope to monitor by choosing host names, tags, or choose `All Monitored Hosts`. If you need to exclude certain hosts, use the second field to list names or tags.
+ホスト名、タグ、または `All Monitored Hosts` を選択して、監視するスコープを決定します。特定のホストを除外する必要がある場合は、2 番目のフィールドに名前やタグをリストアップします。
 
-* The include field uses `AND` logic. All listed hostnames and tags must be present on a host for it to be included.
-* The exclude field uses `OR` logic. Any host with a listed hostname or tag is excluded.
+* インクルードフィールドでは `AND` ロジックを使用します。ホストに存在するリストアップされたすべてのホスト名とタグはスコープに含まれます。
+* エクスクルードフィールドでは `OR` ロジックを使用します。リストアップされたホスト名やタグを持つホストはスコープから除外されます。
 
-### Set alert conditions
+### アラートの条件を設定する
 
-In this section, choose between a **Check Alert** or **Cluster Alert**:
+このセクションで、**Check Alert** または **Cluster Alert** を選択します。
 
 {{< tabs >}}
 {{% tab "Check Alert" %}}
 
-A check alert tracks consecutive statuses submitted per check grouping and compares it to your thresholds.
+チェックアラートは、各チェックグループにつき、送信されたステータスを連続的にトラックし、しきい値と比較します。
 
-Set up the check alert:
+チェックアラートをセットアップする
 
-1. Trigger a separate alert for each `<GROUP>` reporting your check.
-    * Check grouping is specified either from a list of known groupings or by you. For service check monitors, the per-check grouping is unknown, so you must specify it.
+1. チェックレポートを送信する各 `<グループ>` に対し、アラートを個別にトリガーします。
+    * チェックグループは既存のグループリストから指定するか、独自に指定します。サービスチェックモニターでは、チェックごとのグループは不明なので、指定する必要があります。
 
-2. Trigger the alert after selected consecutive failures: `<NUMBER>`
-    * Choose how many consecutive runs with the `CRITICAL` status trigger a notification. For example, to be notified immediately when your check fails, trigger the monitor alert on `1` critical status.
+2. 何回連続して失敗したらアラートをトリガーするか、回数 `<数値>` を選択します。
+    * `CRITICAL` ステータスが連続して何回送信されたら通知をトリガーするか選択します。たとえば、チェックが失敗したときにすぐに通知するには、`1` 回のクリティカルステータスでモニターアラートをトリガーします。
 
-3. Select `Do not notify` or `Notify` for Unknown status.
-    * If `Notify` is selected, a state transition to `UNKNOWN` triggers a notification. In the [monitor status page][1], the status bar of a group in `UNKNOWN` state uses `NODATA` grey. The overall status of the monitor stays in `OK`.
+3. Unknown ステータスに対して、`Do not notify`（通知しない）または `Notify`（通知する）を選択します。
+    * `Notify` を選択した場合、`UNKNOWN` への状態遷移は通知をトリガーします。[モニターステータスページ][1]では、`UNKNOWN` 状態のグループのステータスバーには `NODATA` のグレーが表示されます。モニターの全体的なステータスは `OK` のままです。
 
-4. Resolve the alert after selected consecutive successes: `<NUMBER>`.
-    * Choose how many consecutive runs with the `OK` status resolve the alert. For example, to ensure an issue is fixed, resolve the monitor on `4` `OK` statuses.
+4. 何回連続して成功したらアラートを解決するか、回数 `<数値>` を選択します。
+    *  何回連続して `OK` ステータスが送信されたらアラートを解決するか、回数を選択します。たとえば、問題修正を確実にするには、`4` 回の `OK` ステータスでモニターを解決します。
 
 
 [1]: /monitors/manage/status
 {{% /tab %}}
 {{% tab "Cluster Alert" %}}
 
-A cluster alert calculates the percent of checks in a given status and compares it to your thresholds.
+クラスターアラートは、既定のステータスでチェックの割合を計算し、しきい値と比較します。
 
-Each check tagged with a distinct combination of tags is considered to be a distinct check in the cluster. Only the status of the last check of each combination of tags is taken into account in the cluster percentage calculation.
+タグの個別の組み合わせでタグ付けされた各チェックは、クラスター内の個別のチェックと見なされます。タグの各組み合わせの最後のチェックのステータスのみが、クラスターのパーセンテージの計算で考慮されます。
 
-{{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="Cluster Check Thresholds" style="width:90%;">}}
+{{< img src="monitors/monitor_types/process_check/cluster_check_thresholds.png" alt="クラスターチェックのしきい値" style="width:90%;">}}
 
-For example, a cluster check monitor grouped by environment can alert if more that 70% of the checks on any of the environments submit a `CRITICAL` status, and warn if more that 70% of the checks on any of the environments submit a `WARN` status.
+たとえば、環境ごとにグループ化されたクラスターチェックモニターは、いずれかの環境のチェックの 70% 以上が `CRITICAL` ステータスを送信した場合にアラートし、いずれかの環境のチェックの70% 以上が `WARN` ステータスを送信した場合に警告できます。
 
-To set up a cluster alert:
+クラスターアラートをセットアップするには
 
-1. Decide whether or not to group your checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per-group basis.
+1. タグによりチェックをグループ化するかどうか決定します。`Ungrouped` はすべてのソースでステータスのパーセンテージを計算します。`Grouped` は各グループごとのステータスのパーセンテージを計算します。
 
-2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
+2. アラートと警告のしきい値の割合を選択します。1 つの設定（アラートまたは警告）のみ必須です。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Advanced alert conditions
+#### 高度なアラート条件
 
-See the [Monitor configuration][7] documentation for information on [No data][8], [Auto resolve][9], and [New group delay][10] options.
+[データなし][8]、[自動解決][9]、[新しいグループ遅延][10]の各オプションに関する情報は、[モニターコンフィギュレーション][7]ドキュメントを参照してください。
 
-### Notifications
+### 通知
 
 For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][11] page.
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

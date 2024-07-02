@@ -1,7 +1,7 @@
 ---
 "categories":
 - metrics
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Monitor Conviva Quality Insights metrics for video streaming platforms."
 "doc_link": "https://docs.datadoghq.com/integrations/conviva/"
@@ -25,13 +25,13 @@
 
 Connect Datadog with your Conviva account to see your quality of experience (QoE) MetricLens metrics.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 Install the integration with the Datadog [Conviva integration tile][1].
 
-### Configuration
+### 構成
 1. Go to the configuration tab inside the Datadog [Conviva integration tile][1].
 2. Click **Add New Credentials** and input your Conviva API Key and API Secret. Datadog searches for accounts associated with those credentials.
 3. After Datadog finds the accounts associated with your credentials, add a _MetricLens_ to determine which metrics are be ingested into Datadog. Specify a name for the MetricLens along with a _Filter_ and _Dimension_. The name is automatically tagged for that specific MetricLens.
@@ -46,23 +46,23 @@ After configuring the integration, use the out-of-the box Conviva dashboard to o
 
 Filter by `metriclens` to view the breakdown of the metrics by each corresponding MetricLens configured on the tile. Drill down further by filtering by `dimension` to view metrics by a single dimension entity. 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "conviva" >}}
 
 
-### Events
+### イベント
 
 The Conviva integration sends alerts to your [Datadog event stream][3].
 
 {{< img src="integrations/conviva/conviva_eventstream.png" alt="Monitor alerts in the Datadog Conviva Event Stream" popup="true" style="width:100%" >}}
 
-### Service Checks
+### サービスチェック
 
 The Conviva integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][4].
 

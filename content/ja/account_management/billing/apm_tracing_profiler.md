@@ -6,175 +6,175 @@ aliases:
 - /account_management/billing/apm_tracing_profiling/
 ---
 
-APM is available through three tiers: APM, APM Pro, and APM Enterprise. APM gives you deep visibility into your applications, with distributed tracing capabilities, seamless correlation between traces, logs, and other telemetry, and out-of-the-box performance dashboards for your service. With Continuous Profiler in APM Enterprise, you can pinpoint the slowest and most resource-intensive methods, in aggregate at the service and endpoint levels, as well as for every distributed trace. With Data Streams Monitoring (DSM) in APM Pro and APM Enterprise, you can easily track the end-to-end performance of your data streaming pipelines and event-driven applications that use Kafka and RabbitMQ.
+APM は、APM、APM Pro、APM Enterprise の 3 つの階層で提供されています。APM は、分散型トレーシング機能、トレース、ログ、その他のテレメトリー間のシームレスな相関、サービスに対するすぐに使えるパフォーマンスダッシュボードにより、アプリケーションの深い可視性を提供します。APM Enterprise の Continuous Profiler を使用すると、サービスやエンドポイントレベルの集計、および分散型トレーシングごとに、最も時間がかかり、最もリソースを消費するメソッドをピンポイントで特定することができます。APM Pro と APM Enterprise の Data Streams Monitoring (DSM) を使用すると、Kafka と RabbitMQ を使用するデータストリーミングパイプラインとイベント駆動型アプリケーションのエンドツーエンドパフォーマンスを簡単に追跡することができます。
 
 
-| Billing Parameter  | Price                                      | Ingested and Indexed Spans                                                                 | Billing                                                                                                                                                                                                                                                                                                                          |
+| 請求パラメーター  | 料金                                      | 取り込まれ、インデックス化されたスパン                                                                 | 課金                                                                                                                                                                                                                                                                                                                          |
 |--------------------|--------------------------------------------|-------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [APM Host][5]      | $31 per underlying [APM host][5] per month | 1 million Indexed Spans and 150 GB of Ingested Spans included per month with every APM host.   | Datadog records the number of [APM hosts][5] you are concurrently monitoring in the Datadog APM service once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement. [More APM pricing information.][5] |
-| APM Pro (APM Host with Data Streams Monitoring) | $35 per underlying [APM host][5]. Includes Data Streams Monitoring. | Same as APM Host | Datadog records the number of unique APM hosts in the Datadog APM service and unique DSM hosts you are concurrently monitoring once an hour. The hourly measurements and billing for APM Pro are conducted the same as for APM Hosts.  |
-| APM Enterprise (APM Host with Data Streams Monitoring & [Continuous Profiler)][6] | $40 per underlying [APM host][5]. Includes Data Streams Monitoring and [Continuous Profiler][6] with four profiled containers per host per month. | Same as APM Host | Datadog records the number of unique APM hosts in the APM service, unique DSM hosts, and unique Continuous Profiler hosts you are concurrently monitoring once per hour. The hourly measurements and billing for APM Enterprise are conducted the same as for APM Hosts. |
-| [Fargate][4]       | APM: $2 per concurrent task per month <br> APM Pro: $2.30 per concurrent task per month <br> APM Enterprise: $2.60 per concurrent task per month              | 65,000 Indexed Spans and 10 GB of Ingested Spans included in pricing.              | Datadog records the number of task instances you are monitoring in the Datadog APM service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the average number of hours your applications were run and monitored. [More Fargate pricing information.][4]              |
-| [Indexed span][5] | $1.70 per million Indexed Spans per month | Billed when usage is in excess of Indexed Spans included with every APM host | An Indexed span is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed with retention filters or legacy Analyzed Spans to the Datadog APM service at the end of the month. [More APM pricing information.][5]                                                                                          |
-| [Ingested span][5] | $.10 per GB Ingested Spans per month | Billed when usage is in excess of Ingested Spans included with every APM host | An Ingested span is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested to Datadog at the end of the month. [More APM pricing information.][5]                                                                                          |
+| [APM ホスト][5]      | 基底の [APM ホスト][5] あたり 31 ドル / 月 | 各 APM ホストに対し、月 100 万件の Indexed Span と 150 GB の Ingested Spans を含む   | Datadog は、Datadog APM サービスでお客様が同時に監視している [APM ホスト][5]の数を 1 時間ごとに記録します。最高水準プラン (HWMP) では、月末にこの 1 時間ごとの測定結果が最高から最低まで順序付けられ、そのうち 9 番目に高い測定値に基づき課金されます。2 月は例外で、Datadog は 8 番目に高い測定値に基づいて課金します。[APM の料金について詳しくはこちら。][5] |
+| APM Pro (APM ホストと Data Streams Monitoring) | 基底の [APM ホスト][5]ごとに 35 ドル。Data Streams Monitoring が含まれます。 | APM ホストと同様 | Datadog は、同時監視している Datadog APM サービスのユニーク APM ホストとユニーク DSM ホストの数を 1 時間に 1 回記録します。APM Pro の 1 時間ごとの測定と請求は、APM ホストと同じように行われます。  |
+| APM Enterprise (APM ホストと Data Streams Monitoring & [Continuous Profiler)][6] | 基底の [APM ホスト][5]あたり 40 ドル。Data Streams Monitoring と [Continuous Profiler][6] が含まれ、1 ホストあたり 月 4 つのプロファイルされたコンテナが付属します。 | APM ホストと同様 | Datadog は、同時監視している Datadog APM サービスのユニーク APM ホスト、ユニーク DSM ホスト、ユニーク Continuous Profiler ホストの数を 1 時間に 1 回記録します。APM Enterprise の 1 時間ごとの測定と請求は、APM ホストと同じように行われます。 |
+| [Fargate][4]       | APM: 同時実行タスク 1 件につき 2 ドル/月 <br> APM Pro: 同時実行タスク 1 件につき 2.30 ドル/月 <br> APM Enterprise: 同時実行タスク 1 件につき 2.60 ドル/月              | 65,000 の Indexed Span と 10 GB と Ingested Spans を価格に含む。              | お客様が Datadog APM サービスで監視しているタスクのインスタンス数を 5 分間隔で記録します。月末にこの間隔に基づく測定値を集計し、アプリケーションが実行されて監視された平均時間数に基づいて課金されます。[Fargate の料金について詳しくはこちら][4]              |
+| [Indexed span][5] | Indexed Span 100 万件あたり 1.70 ドル / 月 | すべての APM ホストで使用される Indexed Span の数が超過すると料金が発生 | Indexed Span は、スタック内の個々のサービスに対する個別のリクエストです。保持フィルターを使用してインデックス化されたスパンまたは Datadog APM サービスに送信された レガシー Analyzed Span の合計数に基づき月末に課金されます。[APM の料金について詳しくはこちら。][5]                                                                                          |
+| [Ingested span][5] | Ingested Span 1 GB あたり 0.1 ドル / 月 | すべての APM ホストで使用される Ingested Span の数が超過すると料金が発生 | Ingested Span は、スタック内の個々のサービスに対する個別のリクエストです。Datadog に取り込まれたスパンのギガバイトの総数に基づき月末に課金されます。[APM の料金について詳しくはこちら][5]                                                                                          |
 
-**Notes**:  
-   - If you're using a non-Fargate container based environment, you get billed for the underlying host deploying the Datadog Agent.
-   - One profiled container is a container that is running the Continuous Profiler service. This does not include containers that are not being profiled. For instance, a DNS service container that is NOT profiled, running concurrently with your application container that IS profiled, is not counted towards the four profiler containers allotment.
-   - [Universal Service Monitoring][15] is included in all APM tiers (APM, APM Pro, APM Enterprise) at no additional cost.
+**注**:  
+   - Fargate 以外のコンテナベースの環境を使用している場合、Datadog Agent をデプロイしている基盤となるホストの料金が発生します。
+   - 1 つのプロファイルされたコンテナは、Continuous Profiler サービスを実行しているコンテナです。これには、プロファイルされていないコンテナは含まれません。たとえば、プロファイルされていないアプリケーションコンテナと同時に実行されている、プロファイルされていない DNS サービスコンテナは、4 つのプロファイラーコンテナの割り当てにカウントされません。
+   - [ユニバーサルサービスモニタリング][15]は、すべての APM 階層 (APM、APM Pro、APM Enterprise) に追加費用なしで含まれています。
 
-For more information, see the [Pricing page][7].
+詳細については、[料金ページ][7]を参照してください。
 
 ## Database Monitoring
 
-| Billing Parameter  | Normalized Queries                | Billing                                          |
+| 請求パラメーター  | 正規化されたクエリ                | 課金                                          |
 |--------------------|-----------------------------------|--------------------------------------------------|
-| Database host      | 200 normalized queries are included per month with every database host. | Datadog records the number of database hosts you are concurrently monitoring with Database Monitoring once an hour. On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement. |
-| Normalized Queries | Billed when the configured threshold is in excess of normalized queries that are included with every database host. | A _normalized query_ represents an aggregate of queries with similar structure, differing only by the query parameters. Datadog charges based on the total number of configured normalized queries being tracked at any given time. |
+| データベースホスト      | すべてのデータベースホストには、月に 200 の正規化されたクエリが含まれています。 | Datadog は、データベースモニタリングでお客様が同時に監視しているデータベースホストの数を 1 時間ごとに記録します。最高水準プラン (HWMP) では、月末にこの 1 時間ごとの測定結果が最高から最低まで順序付けられ、そのうち 9 番目に高い測定値に基づき課金されます。2 月は例外で、Datadog は 8 番目に高い測定値に基づいて課金します。 |
+| 正規化されたクエリ | 構成されたしきい値が、すべてのデータベースホストに含まれている正規化されたクエリを超えた場合に請求されます。 | _正規化されたクエリ_は、クエリのパラメーターのみが異なる同様の構造を持つクエリの集合を表します。Datadog では、指定時間に追跡された、構成済みの正規化されたクエリの合計数に基づき請求が発生します。 |
 
-For more information, see the [Pricing page][7].
+詳細については、[料金ページ][7]を参照してください。
 
-## Deployment scenarios
+## デプロイのシナリオ
 
-**Sample cases illustrate annual billing rates with default 15 days Indexed Span retention. Contact [Sales][8] or your [Customer Success][9] Manager to discuss volume discounts for your account.**
+**以下に、デフォルトで 15 日の保存期間を持つ Indexed Span の年間請求レートについて、サンプルケースを使用して説明します。アカウントのボリュームディスカウントについては、[営業担当者][8]または[カスタマーサクセス][9]マネージャーまでお問い合わせください。**
 
-### APM Hosts, indexed spans, and extra ingested spans
+### APM ホスト、インデックス化スパン、追加の取り込みスパン
 
-Using five APM hosts and sending 30 million Indexed Spans, with 900 GB of total Ingested Spans.
+APM ホストを 5 つ使用し、合計 900 GB の取り込みスパンで 3,000 万件のインデックス化スパンを送信。
 
-| Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
+| 対象ユニット  | 数量   | 料金                                                                                           | 計算式       | 小計              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
-| APM Hosts      | 5          | $31 per host                                                                                    | 5 * $31       | $155                  |
-| Indexed Spans | 30 million | 5 million included with 5 APM hosts. $1.70 per million for additional 25 million Indexed Spans | 25 * $1.70    | $42.50                |
-| Ingested Spans | 900 GB          | 750 GB included with 5 APM hosts. $.10 per GB for additional 150 GB of Ingested Spans.                                                                                 | 150 * $.10      | $15                  |
-| Total          |            |                                                                                                 | $155 + $42.50 + $15 | **$212.50 per month** |
+| APM ホスト      | 5          | 31 ドル / ホスト                                                                                    | 5 × 31 ドル       | 155 ドル                  |
+| Indexed Span | 3,000 万件 | 5 つの APM ホストに 500 万件の Indexed Span が含まれるため、残りの 2,500 万件に対し 1.70 ドル / 100 万件 | 25 × 1.70 ドル    | 42.50 ドル                |
+| Ingested Span | 900 GB          | 5 つの APM ホストに 750 GB の Ingested Span が含まれるため、残りの 150 GB に対し 0.10 ドル / 1 GB                                                                                 | 150 * 0.10 ドル      | 15 ドル                  |
+| 合計          |            |                                                                                                 | 155 ドル + 42.50 ドル + 15 ドル | **月額 212.50 ドル** |
 
-### APM Pro Hosts, indexed spans, and extra ingested spans 
+### APM Pro ホスト、インデックス化スパン、追加の取り込みスパン
 
-Using five APM Pro hosts and sending 30 million Indexed Spans, with 900 GB of total Ingested Spans.
+APM Pro ホストを 5 つ使用し、合計 900 GB の取り込みスパンで 3,000 万件のインデックス化スパンを送信。
 
-| Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
+| 対象ユニット  | 数量   | 料金                                                                                           | 計算式       | 小計              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
-| APM Pro Hosts      | 5          | $35 per host                                                                                    | 5 * $35       | $175                  |
-| Indexed Spans | 30 million | 5 million included with 5 APM hosts. $1.70 per million for additional 25 million Indexed Spans | 25 * $1.70    | $42.50                |
-| Ingested Spans | 900 GB          | 750 GB included with 5 APM hosts. $.10 per GB for additional 150 GB of Ingested Spans.                                                                                 | 150 * $.10      | $15                  |
-| Total          |            |                                                                                                 | $175 + $42.50 + $15 | **$232.50 per month** |
+| APM Pro ホスト      | 5          | 1 ホストあたり 35 ドル                                                                                    | 5 × 35 ドル       | 175 ドル                  |
+| Indexed Span | 3,000 万件 | 5 つの APM ホストに 500 万件の Indexed Span が含まれるため、残りの 2,500 万件に対し 1.70 ドル / 100 万件 | 25 × 1.70 ドル    | 42.50 ドル                |
+| Ingested Span | 900 GB          | 5 つの APM ホストに 750 GB の Ingested Span が含まれるため、残りの 150 GB に対し 0.10 ドル / 1 GB                                                                                 | 150 * 0.10 ドル      | 15 ドル                  |
+| 合計          |            |                                                                                                 | 175 ドル + 42.50 ドル + 15 ドル | **月額 232.50 ドル** |
 
-### APM Enterprise Hosts with six profiled containers per host
+### 1 ホストあたりプロファイルされたコンテナ 6 個の APM Enterprise ホスト
 
-Using five APM Enterprise hosts with six apps running in separate containers per each host.
+5 つの APM Enterprise ホストを使用し、各ホストごとに別々のコンテナで 6 つのアプリを実行。
 
-| Billable Unit  | Quantity   | Price                                                                                           | Formula       | Subtotal              |
+| 対象ユニット  | 数量   | 料金                                                                                           | 計算式       | 小計              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------|-----------------------|
-| APM Enterprise Hosts       | 5          | $40 per host                                                                                    | 5 * $40       | $200                  |
-| Profiled containers  | 6 per host | $2 per additional container per host. In this case there are 6 - 4 = 2 additional containers for each host        | 2  * $2 * 5 hosts         | $20                   |
-| Total          |            |                                                                                                 | $200 + $20      | **$220 per month**    |
+| APM Enterprise ホスト       | 5          | $40/ホスト                                                                                    | 5×$40       | $200                  |
+| プロファイルされたコンテナ  | 6 / ホスト | ホストあたりの追加コンテナあたり 2 ドル。この場合、各ホストに 6 - 4 = 2 の追加コンテナがあります        | 2  * 2 ドル * 5 ホスト         | 20 ドル                   |
+| 合計          |            |                                                                                                 | $200 + $20      | **$220/月**    |
 
-### APM Hosts, Fargate, and indexed spans
+### APM ホスト、Fargate、インデックス化スパン
 
-Using five APM hosts, sending 20 million Indexed Spans, and have deployed APM on average 20 Fargate Tasks over the month.
+5 つの APM ホストを使用し、2,000 万件のインデックス化スパンを送信。1 か月に平均 20 の Fargate タスクに APM をデプロイ。
 
-| Billable Unit  | Quantity   | Price                                                                                           | Formula             | Subtotal              |
+| 対象ユニット  | 数量   | 料金                                                                                           | 計算式             | 小計              |
 |----------------|------------|-------------------------------------------------------------------------------------------------|---------------------|-----------------------|
-| APM Hosts      | 5          | $31 per host                                                                                    | 5 * $31             | $155                  |
-| Fargate Tasks  | 20         | $2 per task                                                                                     | 20 * $2             | $40                   |
-| Indexed Spans | 20 million | 5 million included with 5 APM hosts. 1.3 million included with 20 Fargate tasks. $1.70 per million for additional 13.7 million Indexed Spans | 13.7 * $1.70          | $23.29                |
-| Total          |            |                                                                                                 | $155 + $40 + $23.29 | **$218.29 per month** |
+| APM ホスト      | 5          | 31 ドル / ホスト                                                                                    | 5 × 31 ドル             | 155 ドル                  |
+| Fargate タスク  | 20         | 2 ドル / タスク                                                                                     | 20 × 2 ドル             | 40 ドル                   |
+| Indexed Span | 2,000 万件 | 5 つの APM ホストに 500 万件の Indexed Span が含まれます。20のFargateタスクに130万含まれています。残りの 1,370万件のIndexed Spanに対し1.70 ドル / 100 万件 | 13.7 × 1.70 ドル          | 23.29 ドル                |
+| 合計          |            |                                                                                                 | 155 ドル + 40 ドル + 23.29 ドル | **月額 218.29 ドル** |
 
-### APM Enterprise Hosts, services, containers, and indexed spans
+### APM Enterprise ホスト、サービス、コンテナ、インデックス化スパン
 
-APM Enterprise for service 1 running on container 1, service 2 running on container 2. Both Containers are running on one host and are sending 20 million Indexed Spans on App Analytics. 
+コンテナ 1 で稼働するサービス 1、コンテナ 2 で稼働するサービス 2 の APM Enterprise。どちらも 1 つのホストで動作し、App Analytics で 2,000 万件のインデックス化スパンを送信。
 
-| Billable Unit  | Quantity   | Price                                                                                          | Formula      | Subtotal             |
+| 対象ユニット  | 数量   | 料金                                                                                          | 計算式      | 小計             |
 |----------------|------------|------------------------------------------------------------------------------------------------|--------------|----------------------|
-| APM Enterprise Hosts      | 1          | $40 per host                                                                                   | 1 * $40      | $40                  |
-| Profiled containers  | 2 | $0 as profiled containers are within the 4 per APM Host allotment.
-| Indexed Spans | 20 million | 1 million included with 1 APM host. $1.70 per million for additional 19 million Indexed Spans | 19 * $1.70   | $32.30               |
-| Total          |            |                                                                                                | $40 + $32.30 | **$72.30 per month** |
+| APM Enterprise ホスト      | 1          | $40/ホスト                                                                                   | 1×$40      | 40 ドル                  |
+| プロファイルされたコンテナ  | 2 | プロファイルされたコンテナが APM ホストあたり 4 つの割り当ての範囲内のため、$0。
+| Indexed Span | 2,000 万件 | 1 つの APM ホストに 100 万件の Indexed Span が含まれるため、残りの 1,900 万件に対し 1.70 ドル / 100 万件 | 19 × 1.70 ドル   | 32.30 ドル               |
+| 合計          |            |                                                                                                | $40 + $32.30 | **$72.30/月** |
 
-### APM hosts with dynamic scaling, containers, Fargate, and no indexed spans
+### 動的スケーリングの APM ホスト、コンテナ、Fargate、インデックス化スパンなし
 
-App 1 running on 20-40 containers which are deployed on 4-8 host instances, app 2 running on 10-30 Fargate tasks. Assuming, the 99th percentile usage of EC2 instances is 7, and average of Fargate Tasks over the month is 28.
+アプリ 1 は 4～8 のホストインスタンスにデプロイされた 20～40 個のコンテナ上で稼働し、アプリ 2 は 10～30 の Fargate タスク上で稼働。使用量が 99 パーセンタイルまでの EC2 インスタンスの数は 7、Fargate タスクの月ごとの平均数は 28 と仮定する。
 
-| Billable Unit | Quantity | Price        | Formula    | Subtotal           |
+| 対象ユニット | 数量 | 料金        | 計算式    | 小計           |
 |---------------|----------|--------------|------------|--------------------|
-| APM Hosts     | 7        | $31 per host | 7 * $31    | $217               |
-| Fargate Tasks | 28       | $2 per task  | 28 * $2    | $56                |
-| Total         |          |              | $217 + $56 | **$273 per month** |
+| APM ホスト     | 7        | 31 ドル / ホスト | 7 × 31 ドル    | 217 ドル               |
+| Fargate タスク | 28       | 2 ドル / タスク  | 28 × 2 ドル    | 56 ドル                |
+| 合計         |          |              | 217ドル + 56ドル | **月額 273 ドル** |
 
-**Note**: The container count does not matter if the deployed Agent is on the EC2 instances.
+**注**: EC2 インスタンスに Agent がデプロイされている場合、コンテナの数は料金に影響しません。
 
-### APM Enterprise Hosts with Kubernetes nodes and indexed spans
+### Kubernetes ノードとインデックス化スパンを備えた APM Enterprise ホスト
 
-APM Enterprise for apps with a Datadog Agent running on 20 worker nodes in Kubernetes sending 20 million Indexed Spans. 10 of these worker nodes have eight pods each with one container per pod, the other 10 have two pods each with one container per pod. 
+Kubernetes の 20 件のワーカーノード上で稼働し、2,000 万件のインデックス化スパンを送信する Datadog Agent を備えたアプリの APM Enterprise。このワーカーノードのうち 10 件は、ポッドごとに 1 つのコンテナを持つポッドが 8 個、残りの 10 件は、ポッドごとに 1 つのコンテナを持つポッドが 2 個あります。
 
-| Billable Unit     | Quantity   | Price                                                                       | Formula   | Subtotal           |
+| 対象ユニット     | 数量   | 料金                                                                       | 計算式   | 小計           |
 |-------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
-| APM Enterprise Hosts (Nodes) | 20         | $40 per host                                                                | 20 * $40 | $800               |
-| Profiled containers  | 100 in aggregate | $2 per additional container. In this case 20 hosts would allow up to 80 containers but there are 20 containers summed across two hosts: 100-80 = 20 additional containers        | $2 * 20 hosts        | $40                    |
-| Indexed Spans    | 20 million | 20 million included with 20 APM hosts (nodes). No additional Indexed Spans | 0 * $1.70 | 0                  |
-| Total             |            |                                                                             | $800 + $40 | **$840 per month** |
+| APM Enterprise ホスト (ノード) | 20         | $40/ホスト                                                                | 20×$40 | $800               |
+| プロファイルされたコンテナ  | 合計 100 | 追加コンテナあたり 2 ドル。この場合、20 のホストで最大 80 のコンテナが許可されますが、2 つのホストで合計 20 のコンテナがあります。100-80 = 20 の追加コンテナ        | $2×20 ホスト        | 40 ドル                    |
+| Indexed Span    | 2,000 万件 | 20 の APM ホスト (ノード) に 2,000 万件の Indexed Span が含まれるため、追加はなし | 0 × 1.70 ドル | 0                  |
+| 合計             |            |                                                                             | $800 + $40 | **$840/月** |
 
-For Kubernetes, APM & Continuous Profiler are priced by nodes not by pods.
+Kubernetes の場合、APM & Continuous Profiler はポッドではなくノードごとに課金されます。
 
-### Lambda functions and indexed spans
+### Lambda 関数と Indexed Span
 
-An AWS-Lambda based serverless application being invoked 10 million times in a month while sending 10 million Indexed Spans.
+1,000万個のIndexed Spansを送信しながら、1 か月に 1,000 万回呼び出される AWS-Lambda ベースのサーバレスアプリケーション。
 
-| Billable Unit                  | Quantity   | Price                                                                       | Formula   | Subtotal           |
+| 対象ユニット                  | 数量   | 料金                                                                       | 計算式   | 小計           |
 |--------------------------------|------------|-----------------------------------------------------------------------------|-----------|--------------------|
-| Lambda Function Invocations    | 10 million | [$5 per month][10]                                                           | 10 * $5  | $50               |
-| Indexed Spans                  | 10 million | 150,000 Indexed Spans included with each 1 million Lambda invocations. $1.70 per million additional Indexed Spans | 8.5 * $1.70 | $14.45               |
-| Total                          |            |                                                                             | $50 + $14.45 | **$64.45 per month** |
+| Lambda 関数呼び出し    | 1,000 万 | [$5/月][10]                                                           | 10×$5  | $50               |
+| Indexed Span                  | 1,000 万 | 100 万回の Lambda 呼び出しごとに 150,000 個の Indexed Span が含まれています。追加の Indexed Span 100万個あたり1.70ドル | 8.5×$1.70 | $14.45               |
+| 合計                          |            |                                                                             | $50 + $14.45 | **$64.45/月** |
 
-## FAQ
+## よくあるご質問
 
-**1. What is classified as an APM host for billing?**
+**1. APM の請求対象となるホストとは？**
 
-A [host][4] is a physical or virtual operating system instance. Datadog records the number of hosts you are concurrently monitoring in the Datadog Infrastructure service once an hour. For billing APM, number of hosts with [APM installed][12] and sending traces are calculated every hour. At the end of the month, you are billed based on your 99th percentile usage for [APM hosts][5].
+[ホスト][4]とは、1 つの物理的または仮想のオペレーティングシステムインスタンスです。Datadog では、お客様が Datadog インフラストラクチャーサービスで同時に監視しているホスト数を 1 時間に一度記録します。APM の請求には、[APM がインストール][12]され、トレースを送信しているホストの数が 1 時間ごとに計算されます。使用量が 99 パーセンタイルまでの [APM ホスト][5]の数を基に、月末に請求いたします。
 
-**2. How is billing calculated when deploying one Agent per container?**
+**2. コンテナごとに 1 つの Agent をデプロイする場合、料金はどのように計算されますか**
 
-It is recommended that you set up _one Agent per underlying host_ for container deployment. If you choose instead to run one Agent per container, then each container is treated as a single host. The price is then (Price Per APM host) * (Number of containers).
+コンテナをデプロイする場合は、_基底のホストにつき 1 つの Agent_ をセットアップすることをお勧めします。1 つのコンテナごとに 1 つの Agent を稼働させると、各コンテナが 1 つのホストとして扱われるため、APM ホストあたりの料金にコンテナの数をかけた金額が請求されます。
 
-**3. What is classified as an APM Fargate task for billing?**
+**3. 請求対象となる APM Fargate タスクとは？**
 
-A Fargate task is a collection of containers that are scheduled to run on AWS Fargate as a serverless compute engine. Datadog records the number of tasks you are concurrently monitoring in Datadog at five-minute intervals. For billing APM, Datadog bills based on the average number of Fargate tasks that send traces to Datadog per hour across the month of your account.
+Fargate タスクとは、AWS Fargate でサーバーレスコンピューターエンジンとして実行するようスケジュールされた一連のコンテナのことです。現在 Datadog で監視しているタスクの数が 5 分間隔で記録されます。APM の請求については、アカウント内でその月に Datadog へトレースを送信した Fargate タスクの 1 時間当たりの平均数に基づき算出されます。
 
-**4. What happens to your bill when scaling your environment?**
+**4. 使用量が増加した場合、料金はどうなりますか**
 
-Your APM bill is calculated using the top 99 percentile of active agents sending traces every hour of each month. At the end of the month, Datadog disregards the top 1% value, giving a shield against being billed for unexpected spikes.
+APM の料金は、トレースを送信しているアクティブな (上位 99 パーセンタイルまでの) Agent の数を 1 時間ごとに測定し、それを基準として毎月計算します（月末に請求）。上位 1 %の使用量を無視することで、予期しない使用量の急激な増加を課金の対象から除外しています。
 
-**5. Do you get charged for pause containers in Kubernetes?**
+**5. Kubernetes の pause コンテナに対して課金されますか**
 
-Kubernetes creates pause containers to acquire the respective pod's IP address and set up the network namespace for all other containers that join that pod. Datadog excludes all pause containers from your quota and does not charge for them (requires Agent 5.8+). For Kubernetes, APM is priced by nodes not by pods.
+Kubernetes は、ポッドの IP アドレスを取得し、そのポッドに加わる他のコンテナに使用されるネットワークネームスペースを設定するために pause コンテナを作成します。すべての pause コンテナはクオータから除外されるため、pause コンテナに対する課金はありません (Agent 5.8 以降が必要)。Kubernetes では、APM がポッドごとではなくノードごとに課金されます。
 
-**6. How is the host billing related to your services?**
+**6. 利用するサービスの数とホスト数は、請求にどのように影響しますか**
 
-APM is billed on the basis of [hosts][5] deployed with agents sending traces and not services. Additionally, over the monthly allocation by host, APM is billed on the basis of Ingested span volume and Indexed span count. To estimate how many ingested and indexed spans each of your services is sending, see the [ingestion][2] and [retention][13] documentation.
+APM は、サービスではなく、トレースを送信する Agent がデプロイされた[ホスト][5]に基づいて課金されます。さらに、APM はホストごとの月間割り当てを越えて、取り込まれたスパン量とインデックス化されたスパン量に基づいて課金されます。各サービスが送信している取り込まれたスパンとインデックス化されたスパンの数を見積もるには、[取り込み][2]と[保持][13]のドキュメントを参照してください。
 
-**7. What happens to your existing App Analytics filters?**
+**7. 既存の App Analytics フィルターはどうなりますか**
 
-As of October 20, 2020, all existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters within the [retention filters][3] page.
+2020 年 10 月 20 日現在、既存のすべての App Analytics フィルターは、自動的に Retention Filters に移行されています。フィルターは、未変更のままにするか、必要に応じて修正することができます。移行されたフィルターには、[保持フィルター][3]ページで App Analytics のレガシーフィルターであることを示す *i* が付けられます。
 
-**8. How do you estimate your ingested or indexed span volume?**
+**8. Ingested Span または Indexed Span のボリュームを見積もるにはどうすればよいですか**
 
-Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `datadog.estimated_usage.apm.ingested_spans` for monitoring ingested and indexed span volume. More information is available in the [Usage Metrics][14] documentation.
+Datadogは、Ingested Span と Indexed Span のボリュームを監視するためのメトリクス `datadog.estimated_usage.apm.ingested_bytes` および `datadog.estimated_usage.apm.ingested_spans` を提供します。詳細については、[使用量メトリクス][14]のドキュメントをご覧ください。
 
-**9. Is the Continuous Profiler available as a standalone product?**
+**9. Continuous Profiler はスタンドアロン製品として利用できますか？**
 
-Yes. Let Datadog know if you are interested in buying the Continuous Profiler without APM. Reach out to [Sales][8] or your [Customer Success Manager][9].
+はい、できます。APM なしで Continuous Profiling を購入したい場合は、[営業担当者][8]または[カスタマーサクセスマネージャー][9]までお問い合わせください。
 
-**10. Is Data Streams Monitoring available as a standalone product?**
+**10. Data Streams Monitoring はスタンドアロン製品として利用できますか？**
 
-Yes. Let Datadog know if you are interested in buying Data Streams Monitoring without APM. Reach out to [Sales][8] or your [Customer Success Manager][9].
+はい、できます。APM なしで Data Streams Monitoring を購入したい場合は、[営業担当者][8]または[カスタマーサクセスマネージャー][9]までお問い合わせください。
 
 
-## Further Reading
+## その他の参考資料
 
 {{< whatsnext >}}
-    {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}View and Alert on APM Usage{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_control_apm/" >}}Estimate and Control APM Usage{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}APM 使用量の表示とアラート{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_control_apm/" >}}APM 使用量の推計と制御{{< /nextlink >}}
 {{< /whatsnext >}}
 
 

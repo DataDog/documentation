@@ -29,7 +29,7 @@
 - data stores
 - cloud
 - log collection
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/tidb/README.md"
 "display_on_public_website": true
@@ -80,9 +80,9 @@ Connect [TiDB][1] cluster to Datadog in order to:
 > - TiDB 4.0+ is required for this integration. 
 > - For TiDB Cloud, see the [TiDB Cloud Integration][2].
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 First, [download and launch the Datadog Agent][3].
 
@@ -90,7 +90,7 @@ Then, manually install the TiDB check. [Instructions vary depending on the envir
 
 Run `datadog-agent integration install -t datadog-tidb==<INTEGRATION_VERSION>`.
 
-### Configuration
+### 構成
 
 ##### Metric collection
 
@@ -199,23 +199,23 @@ _Available for Agent versions >6.0_
 
 Run the [Agent's status subcommand][7] and look for `tidb` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "tidb" >}}
 
 
 > It is possible to use the `metrics` configuration option to collect additional metrics from a TiDB cluster.
 
-### Events
+### イベント
 
 TiDB check does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "tidb" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
 ### Missing CPU and Memory metrics for TiKV and TiFlash instances on macOS
 

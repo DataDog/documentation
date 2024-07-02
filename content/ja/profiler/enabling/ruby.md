@@ -20,33 +20,33 @@ aliases:
   - /tracing/profiler/enabling/ruby/
 ---
 
-The profiler is shipped within Datadog tracing libraries. If you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to enabling the profiler.
+プロファイラーは、Datadog トレースライブラリ内で送信されます。アプリケーションですでに [APM を使用してトレースを収集][1]している場合は、ライブラリのインストールをスキップして、プロファイラーの有効化に直接進むことができます。
 
-## Requirements
+## 要件
 
-For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+すべての言語におけるランタイムとトレーサーの最小バージョンと推奨バージョンの要約については、[サポートされている言語とトレーサーのバージョン][14]をお読みください。
 
 The Datadog Profiler requires Ruby 2.5+. JRuby and TruffleRuby are not supported.
 
-The following operating systems and architectures are supported:
-- Linux (GNU libc) x86-64, aarch64
-- Alpine Linux (musl libc) x86-64, aarch64
+以下の OS、アーキテクチャに対応しています。
+- Linux (GNU libc) x86-64、aarch64
+- Alpine Linux (musl libc) x86-64、aarch64
 
 You also need either the [`pkg-config`](https://www.freedesktop.org/wiki/Software/pkg-config/) or the [`pkgconf`](https://github.com/pkgconf/pkgconf) system utility installed.
 This utility is available on the software repositories of most Linux distributions. For example:
 
-- The `pkg-config` package is available for [Homebrew](https://formulae.brew.sh/formula/pkg-config), and [Debian](https://packages.debian.org/search?keywords=pkg-config)- and [Ubuntu](https://packages.ubuntu.com/search?keywords=pkg-config)-based Linux
-- The `pkgconf` package is available for [Arch](https://archlinux.org/packages/?q=pkgconf)- and [Alpine](https://pkgs.alpinelinux.org/packages?name=pkgconf)-based Linux
-- The `pkgconf-pkg-config` package is available for [Fedora](https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config/)- and [Red-Hat](https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config)-based Linux
+- `pkg-config` パッケージは [Homebrew](https://formulae.brew.sh/formula/pkg-config)、[Debian](https://packages.debian.org/search?keywords=pkg-config) および [Ubuntu](https://packages.ubuntu.com/search?keywords=pkg-config) ベースの Linux で利用可能です
+- `pkgconf` パッケージは [Arch](https://archlinux.org/packages/?q=pkgconf) および [Alpine](https://pkgs.alpinelinux.org/packages?name=pkgconf) ベースの Linux で利用可能です
+- `pkgconf-pkg-config` パッケージは [Fedora](https://packages.fedoraproject.org/pkgs/pkgconf/pkgconf-pkg-config/) および [Red-Hat](https://rpmfind.net/linux/rpm2html/search.php?query=pkgconf-pkg-config) ベースの Linux で利用可能です
 
-Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+Continuous Profiler は、AWS Lambda などのサーバーレスプラットフォームには対応していません。
 
 [Single Step Instrumentation](https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/) is not supported for Linux hosts, VMs, or Docker.
 Single Step Instrumentation is supported for Kubernetes (using the Datadog Helm chart), but you need to manually set the `DD_PROFILING_ENABLED=true` environment variable to enable profiling.
 
-## Installation
+## インストール
 
-To begin profiling applications:
+アプリケーションのプロファイリングを開始するには
 
 1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
@@ -55,12 +55,12 @@ To begin profiling applications:
     ```ruby
     gem 'datadog', '~> 2.0'
     ```
-3. Install the gems with `bundle install`.
+3. `bundle install` で gem をインストールします。
 
-4. Enable the profiler:
+4. プロファイラーを有効にします。
 
    {{< tabs >}}
-{{% tab "Environment variables" %}}
+{{% tab "環境変数" %}}
 
 ```shell
 export DD_PROFILING_ENABLED=true
@@ -81,7 +81,7 @@ Datadog.configure do |c|
 end
 ```
 
-**Note**: For Rails applications, create a `config/initializers/datadog.rb` file with the code configuration above.
+ **注**: Rails アプリケーションの場合は、上記のコードコンフィギュレーションで `config/initializers/datadog.rb` ファイルを作成します。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -92,7 +92,7 @@ end
     bundle exec ddprofrb exec ruby myapp.rb
     ```
 
-    Rails example:
+    Rails の例:
 
     ```shell
     bundle exec ddprofrb exec bin/rails s
@@ -100,7 +100,7 @@ end
 
     If you're running a version of `ddtrace` older than 1.21.0, replace `ddprofrb exec` with `ddtracerb exec`.
 
-    **Note**
+    **注**
 
     If starting the application with `ddprofrb exec` is not an option (for example, when using the Phusion Passenger web server), you can alternatively start the profiler by adding the following to your application entry point (such as `config.ru`, for a web application):
 
@@ -112,11 +112,11 @@ end
 
 7. A minute or two after starting your Ruby application, your profiles will show up on the [Datadog APM > Profiler page][5].
 
-## Not sure what to do next?
+## 次のステップ
 
-The [Getting Started with Profiler][6] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
+[プロファイラーの概要][6]ガイドでは、パフォーマンスの問題があるサンプルサービスを例に、Continuous Profiler を使用して問題を理解し修正する方法を確認します。
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

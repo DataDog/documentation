@@ -21,7 +21,7 @@
 - network
 - notifications
 - snmp
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/snmp_american_power_conversion/README.md"
 "display_on_public_website": true
@@ -67,17 +67,17 @@ Configure the APC integration and collect SNMP metrics from devices such as APC 
 
 For details of monitored metrics, see the [SNMP Data Collected][1] section.
 
-## Setup
+## セットアップ
 
 To install and configure the SNMP integration, see the [Network Device Monitoring][2] documentation.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 For details of monitored metrics, see the [SNMP Data Collected][1] section.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

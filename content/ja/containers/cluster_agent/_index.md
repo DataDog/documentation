@@ -14,48 +14,48 @@ further_reading:
   text: Autoscale your Kubernetes workloads with any Datadog metric
 ---
 
-## Overview
+## 概要
 
-The Datadog Cluster Agent provides a streamlined, centralized approach to collecting cluster level monitoring data. By acting as a proxy between the API server and node-based Agents, the Cluster Agent helps to alleviate server load. It also relays cluster level metadata to node-based Agents, allowing them to enrich the metadata of locally collected metrics.
+Datadog Cluster Agent は、合理的かつ一元的にクラスターレベルの監視データを収集します。Cluster Agent は、API サーバーとノードベースの Agent の間のプロキシとして機能し、サーバーの負荷を軽減します。また、クラスターレベルのメタデータをノードベースの Agent にリレーすることで、Agent はローカルで収集したメトリクスのメタデータを充実させることができます。
 
-Using the Datadog Cluster Agent allows you to:
+Datadog Cluster Agent を使用すると、次のことができます。
 
-* Alleviate the impact of Agents on your infrastructure.
-* Isolate node-based Agents to their respective nodes, reducing RBAC rules to solely read metrics and metadata from the kubelet.
-* Provide cluster level metadata that can only be found in the API server to the Node Agents, in order for them to enrich the metadata of the locally collected metrics.
-* Enable the collection of cluster level data, such as the monitoring of services or SPOF and events.
-* Use Horizontal Pod Autoscaling (HPA) with custom Kubernetes metrics and external metrics. See the [Autoscaling on custom and external metrics guide][1] for more details.
+* Agent がインフラストラクチャーに与える影響を軽減できます。
+* ノードベースの Agent がそれぞれのノードに隔離されるため、RBAC 規則の機能は、メトリクスとメタデータを kubelet から読み取るだけに縮小されます。
+* Node Agent がローカルで収集したメトリクスを充実させられるよう、API サーバー内にのみ存在するクラスターレベルのメタデータを Node Agent に提供します。
+* サービス、SPOF、イベントの監視など、クラスターレベルのデータの収集を有効化します。
+* カスタム Kubernetes メトリクスと外部メトリクスで HPA (Horizontal Pod Autoscaling) を使用します。詳しくは、[カスタムおよび外部メトリクスでのオートスケーリングガイド][1]を参照してください。
 
-If you installed the Datadog Agent using Helm chart v2.7.0 or Datadog Operator v1.0.0+, the **Datadog Cluster Agent is enabled by default**.
+Helm chart v2.7.0 または Datadog Operator v1.0.0+ を使用して Datadog Agent をインストールした場合、**Datadog Cluster Agent はデフォルトで有効化されます**。
 
-If you're using Docker, the Datadog Cluster Agent is available on Docker Hub and GCR:
+Docker をお使いの場合、Datadog Cluster Agent は Docker Hub と GCR で利用できます。
 
 | Docker Hub                                       | GCR                                                       |
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/cluster-agent][2]      | [gcr.io/datadoghq/cluster-agent][3]                       |
 
-<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-warning">Docker Hub にはイメージのプルレート制限があります。Docker Hub をご利用でない場合は、Datadog Agent および Cluster Agent の構成を更新して、GCR または ECR からプルすることをお勧めします。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリの変更</a>を参照してください。</div>
 
-### Minimum Agent and Cluster Agent versions
+### Agent と Cluster Agent の最小バージョン
 
-Some features related to later Kubernetes versions require a minimum Datadog Agent version.
+Kubernetes の後期バージョンに関連する一部の機能では、Datadog Agent の最低バージョンが必要です。
 
-| Kubernetes version | Agent version  | Cluster Agent version | Reason                                |
+| Kubernetes バージョン | Agent バージョン  | Cluster Agent バージョン | 理由                                |
 |--------------------|----------------|-----------------------|---------------------------------------|
-| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet metrics deprecation           |
-| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes resource deprecation       |
-| 1.22.0+            | 7.37.0+        | 7.37.0+               | Support dynamic service account token |
+| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet メトリクスの非推奨化           |
+| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes リソースの非推奨化       |
+| 1.22.0+            | 7.37.0+        | 7.37.0+               | ダイナミックサービスアカウントトークンをサポート |
 
-{{< whatsnext desc="This section includes the following topics:">}}
-    {{< nextlink href="/agent/cluster_agent/setup" >}}<u>Setup</u>: Setup the Datadog Cluster Agent in your Kubernetes Cluster.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/commands" >}}<u>Commands & Options</u>: List of all commands and options available for the Cluster Agent.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>Cluster Checks</u>: Cluster checks provide the ability to Autodiscover and perform checks on load-balanced cluster services like Kubernetes services.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/endpointschecks" >}}<u>Endpoint Checks</u>: Endpoint checks extend cluster checks to monitor any endpoint behind cluster services.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/admission_controller" >}}<u>Admission Controller</u>: Configure the Admission Controller for simplified application Pod configuration.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Cluster Agent Troubleshooting</u>: Find troubleshooting information for the Datadog Cluster Agent.{{< /nextlink >}}
+{{< whatsnext desc="このセクションには、以下のトピックが記載されています。">}}
+    {{< nextlink href="/agent/cluster_agent/setup" >}}<u>セットアップ</u>: Kubernetes クラスターで Datadog Cluster Agent をセットアップします。{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/commands" >}}<u>コマンドとオプション</u>: Cluster Agent で利用可能なコマンドとオプションの一覧。{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>クラスターチェック</u>: クラスターチェックにより、オートディスカバリーの実施や、Kubernetes サービスなど負荷分散型クラスターサービスでのチェックの実施が可能になります。{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/endpointschecks" >}}<u>エンドポイントチェック</u>: エンドポイントチェックはクラスターチェックを拡張して、クラスターサービスの背後にあるあらゆるエンドポイントを監視します。{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/admission_controller" >}}<u>Admission Controller</u>: アプリケーションポッドの構成を簡略化するために Admission Controller を構成します。{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>Cluster Agent のトラブルシューティング</u>: Datadog Cluster Agent のトラブルシューティング情報を検索できます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

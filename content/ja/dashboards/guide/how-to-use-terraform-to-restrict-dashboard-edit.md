@@ -1,8 +1,8 @@
 ---
+title: How to use Terraform to restrict the editing of a dashboard
 aliases:
-- /ja/dashboards/faq/how-to-use-terraform-to-restrict-dashboards
-- /ja/dashboards/guide/how-to-use-terraform-to-restrict-dashboards
-title: Terraform でダッシュボードの編集を制限する方法
+  - /dashboards/faq/how-to-use-terraform-to-restrict-dashboards
+  - /dashboards/guide/how-to-use-terraform-to-restrict-dashboards
 ---
 
 
@@ -56,7 +56,7 @@ resource "datadog_restriction_policy" "example" {
 
 
 [1]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/restriction_policy
-[2]: /ja/api/latest/roles/#list-roles
+[2]: /api/latest/roles/#list-roles
 [3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role
 [4]: https://app.datadoghq.com/api/v2/current_user
 [5]: https://app.datadoghq.com/organization-settings/roles

@@ -62,7 +62,7 @@ window.DD_RUM.init({
 Frustration signals require actions. Enabling `trackFrustrations` automatically enables `trackUserInteractions`.
 </details>
 
-## Usage
+## 使用方法
 
 Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`.
 
@@ -136,7 +136,7 @@ For example, to set an alert that notifies you if any frustration signals occur 
 
 For more information, see the [Real User Monitoring Monitor documentation][9].
 
-## Troubleshooting
+## トラブルシューティング
 
 ### Why is a rage click not created when a user presses a key (like Delete) on the keyboard?
 

@@ -4,9 +4,9 @@
 - "configuration & deployment"
 - "network"
 - "azure"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track trigger workflows, action latency, failed actions, and more."
+"description": "トリガーワークフロー、アクションのレイテンシー、失敗したアクションなどを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/azure_logic_app/"
 "draft": false
 "git_integration_title": "azure_logic_app"
@@ -32,27 +32,27 @@ Get metrics from Azure Logic App to:
 - Visualize the performance of your Logic App workflows.
 - Correlate the performance of your Logic App workflows with your applications.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Microsoft Azure integration first][1]. There are no other installation steps that need to be performed.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "azure_logic_app" >}}
 
 
-### Events
+### イベント
 
 The Azure Logic App integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Azure Logic App integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

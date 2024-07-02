@@ -8,50 +8,50 @@ further_reading:
     text: Datadog and Kubernetes
 ---
 
-[The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+[Datadog Operator][1] は Kubernetes や OpenShift にDatadog Agent をデプロイする方法です。カスタムリソースステータスでデプロイ状況、健全性、エラーを報告し、高度なコンフィギュレーションオプションでコンフィギュレーションミスのリスクを抑えます。
 
-## Prerequisites
+## 前提条件
 
-Using the Datadog Operator requires the following prerequisites:
+Datadog Operator を使用するには、次の前提条件が必要です。
 
-- **Kubernetes Cluster version >= v1.20.X**: Tests were done on versions >= `1.20.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, because of limited CRD support, the Operator may not work as expected.
-- [`Helm`][2] for deploying the `datadog-operator`.
-- [`Kubectl` CLI][3] for installing the `datadog-agent`.
+- **Kubernetes Cluster バージョン >= v1.20.X**: テストはバージョン >= `1.20.0` で行われましたが、バージョン `>= v1.11.0` で動作するはずです。以前のバージョンでは、CRD サポートが制限されているため、Operator が期待どおりに機能しない場合があります。
+- `datadog-operator` をデプロイするための [`Helm`][2]。
+- `datadog-agent` をインストールするための [`Kubectl` CLI][3]。
 
-## Deploy the Datadog Operator
+## Datadog Operator のデプロイ
 
-To use the Datadog Operator, deploy it in your Kubernetes cluster. Then create a `DatadogAgent` Kubernetes resource that contains the Datadog deployment configuration:
+Datadog Operator を使用するには、Kubernetes クラスターにデプロイします。次に、Datadog デプロイコンフィギュレーションを含む `DatadogAgent` Kubernetes リソースを作成します。
 
-1. Add the Datadog Helm repo:
+1. Datadog Helm リポジトリを追加します。
   ```
   helm repo add datadog https://helm.datadoghq.com
   ```
 
-2. Install the Datadog Operator:
+2. Datadog Operator をインストールします。
   ```
   helm install my-datadog-operator datadog/datadog-operator
   ```
 
-## Deploy the Datadog Agents with the Operator
+## Operator を使用して Datadog Agent をデプロイする
 
-After deploying the Datadog Operator, create the `DatadogAgent` resource that triggers the Datadog Agent's deployment in your Kubernetes cluster. By creating this resource in the `Datadog-Operator` namespace, the Agent is deployed as a `DaemonSet` on every `Node` of your cluster.
+Datadog Operator をデプロイした後、Kubernetes クラスターでの Datadog Agent のデプロイをトリガーする `DatadogAgent` リソースを作成します。このリソースを `Datadog-Operator` ネームスペースに作成することにより、Agent はクラスターのすべての `Node` に `DaemonSet` としてデプロイされます。
 
-Create the `datadog-agent.yaml` manifest out of one of the following templates:
+以下のテンプレートを使用して、`datadog-agent.yaml` マニフェストを作成します。
 
-* [Manifest with Logs, APM, process, and metrics collection enabled.][4]
-* [Manifest with Logs, APM, and metrics collection enabled.][5]
-* [Manifest with APM and metrics collection enabled.][7]
-* [Manifest with Cluster Agent.][8]
-* [Manifest with tolerations.][9]
+* [ログ、APM、プロセス、メトリクス収集を有効にしたマニフェスト][4]。
+* [ログ、APM、メトリクス収集を有効にしたマニフェスト][5]。
+* [APMとメトリクス収集を有効にしたマニフェスト][7]。
+* [クラスター Agent のあるマニフェスト][8]。
+* [許容範囲のあるマニフェスト][9]。
 
-Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][10], then trigger the Agent installation with the following command:
+`<DATADOG_API_KEY>` と `<DATADOG_APP_KEY>` を [Datadog API とアプリケーションキー][10]に置き換えてから、次のコマンドで Agent のインストールをトリガーします。
 
 ```shell
 $ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 datadogagent.datadoghq.com/datadog created
 ```
 
-You can check the state of the `DatadogAgent` resource with:
+`DatadogAgent` リソースの状態は次のコマンドで確認できます。
 
 ```shell
 kubectl get -n $DD_NAMESPACE dd datadog
@@ -60,7 +60,7 @@ NAME            ACTIVE   AGENT             CLUSTER-AGENT   CLUSTER-CHECKS-RUNNER
 datadog-agent   True     Running (2/2/2)                                           110m
 ```
 
-In a 2-worker-nodes cluster, you should see the Agent pods created on each node.
+2-worker-nodes のクラスターでは、各ノードで作成された Agent ポッドが表示されます。
 
 ```shell
 $ kubectl get -n $DD_NAMESPACE daemonset
@@ -75,18 +75,18 @@ datadog-agent-zcxx7                          1/1     Running   0          5m59s 
 ```
 
 
-## Cleanup
+## クリーンアップ
 
-The following command deletes all the Kubernetes resources created by the above instructions:
+次のコマンドは、上記の手順で作成されたすべての Kubernetes リソースを削除します。
 
 ```shell
 kubectl delete datadogagent datadog
 helm delete datadog
 ```
 
-### Tolerations
+### 許容範囲
 
-Update your `datadog-agent.yaml` file with the following configuration to add the toleration in the `Daemonset.spec.template` of your `DaemonSet` :
+`datadog-agent.yaml` ファイルを次のコンフィギュレーションで更新して、`DaemonSet` の `Daemonset.spec.template` に許容範囲を追加します。
 
 ```yaml
 kind: DatadogAgent
@@ -106,14 +106,14 @@ spec:
         - operator: Exists
 ```
 
-Apply this new configuration:
+この新しいコンフィギュレーションを適用します。
 
 ```shell
 $ kubectl apply -f datadog-agent.yaml
 datadogagent.datadoghq.com/datadog updated
 ```
 
-The DaemonSet update can be validated by looking at the new desired pod value:
+DaemonSet の更新は、新しい目的のポッド値を確認することで検証できます。
 
 ```shell
 $ kubectl get -n $DD_NAMESPACE daemonset
@@ -128,7 +128,7 @@ datadog-agent-lkfqt                          0/1     Running    0          15s
 datadog-agent-zvdbw                          1/1     Running    0          8m1s
 ```
 
-## Further Reading
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

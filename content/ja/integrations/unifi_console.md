@@ -22,7 +22,7 @@
   "sales_email": antonin.bruneau@gmail.com
   "support_email": antonin.bruneau@gmail.com
 "categories": []
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/unifi_console/README.md"
 "display_on_public_website": true
@@ -61,11 +61,11 @@
 
 This check monitors [Unifi Console][1] through the Datadog Agent.
 
-## Setup
+## セットアップ
 
 The Unifi check is not included in the [Datadog Agent][2] package, so you need to install it.
 
-### Installation
+### インストール
 
 For Agent v7.21+ / v6.21+, follow the instructions below to install the Unifi check on your host. See [Use Community Integrations][3] to install with the Docker Agent or earlier versions of the Agent.
 
@@ -77,7 +77,7 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Unifi ch
 
 2. Configure your integration similar to core [integrations][4].
 
-### Configuration
+### 構成
 
 1. Edit the `unifi_console.d/conf.yaml` file, in the `conf.d/` folder at the root of your Agent's configuration directory to start collecting your Unifi Console performance data. See the [sample unifi_console.d/conf.yaml][5] for all available configuration options.
 
@@ -87,22 +87,22 @@ For Agent v7.21+ / v6.21+, follow the instructions below to install the Unifi ch
 
 [Run the Agent's status subcommand][7] and look for `unifi_console` under the Checks section.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "unifi_console" >}}
 
 
-### Events
+### イベント
 
 The Unifi Console integration does not include any events.
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "unifi_console" >}}
 
 
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][10].
 

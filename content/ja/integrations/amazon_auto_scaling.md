@@ -9,9 +9,9 @@
 - "configuration & deployment"
 - "log collection"
 - "provisioning"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track the status and counts of instances in your Auto Scaling groups."
+"description": "Auto Scaling グループ内のインスタンスのステータスとカウントを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_auto_scaling/"
 "draft": false
 "git_integration_title": "amazon_auto_scaling"
@@ -37,9 +37,9 @@ Enable this integration to see all your Auto Scaling metrics in Datadog.
 - Collect EC2 metrics for hosts in Auto Scaling groups with the `autoscaling_group` tag.
 - Collect Auto Scaling metrics about the specific group with the `autoscaling_group` and `autoscalinggroupname` tags.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration][1] first.
 
@@ -75,25 +75,25 @@ Configure AWS Auto Scaling to send logs either to a S3 bucket or to CloudWatch.
     - [Add a manual trigger on the S3 bucket][8]
     - [Add a manual trigger on the CloudWatch Log Group][9]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_auto_scaling" >}}
 
 
 Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The AWS Auto-Scaling integration includes events for launching and terminating EC2 instances. See example events below:
 
 {{< img src="integrations/amazon_auto_scaling/aws_auto_scaling_events.png" alt="AWS Auto-Scaling Events" >}}
 
-### Service Checks
+### サービスチェック
 
 The AWS Auto-Scaling integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 In order for the ASG metrics to start appearing in Datadog, first enable them in your AWS console. [See the AWS instructions on how to enable your ASG metrics][11]. **Note**: It may take a while for such metrics to appear after they have been enabled.
 

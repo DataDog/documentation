@@ -33,7 +33,7 @@
 "categories":
 - ai/ml
 - data stores
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/airbyte/README.md"
 "display_on_public_website": true
@@ -148,7 +148,7 @@ dogstatsd_mapper_profiles:
 
 3. [Restart the Agent][6] and Airbyte.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "airbyte" >}}

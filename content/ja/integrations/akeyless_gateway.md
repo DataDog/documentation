@@ -36,7 +36,7 @@
 "categories":
 - security
 - kubernetes
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/akeyless_gateway/README.md"
 "display_on_public_website": true
@@ -163,7 +163,7 @@ docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081
 
 Upon successful setup of the Gateway, go to the [Metrics Explorer][5] on the Datadog site, and filter the Akeyless metrics on the summary page.
 
-## Data Collected
+## 収集データ
 
 ### Metrics
 {{< get-metrics-from-git "akeyless_gateway" >}}

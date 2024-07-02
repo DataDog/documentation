@@ -2,7 +2,7 @@
 "categories":
 - log collection
 - security
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
 "description": "Collects logs from Google Workspace Alert Center."
 "doc_link": "https://docs.datadoghq.com/integrations/google_workspace_alert_center/"
@@ -36,9 +36,9 @@ Datadog to:
 - Set [monitors][2] on [events][3] from your Google Workspace domain.
 - Leverage the Datadog [Security Platform][4] to monitor and detect threats across your Google Workspace domain.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 The Datadog Google Workspace Alert Center integration uses service accounts to create
 an API connection between Google and Datadog. Below are instructions for creating a service
@@ -58,7 +58,7 @@ your behalf.
 If you want to monitor multiple projects, you can repeat the process above to use multiple
    service accounts.
 
-### Configuration
+### 構成
 
 Custom tags can also be specified per project. These tags are added to every log event
 for that project in Datadog.
@@ -68,21 +68,21 @@ for that project in Datadog.
 Wait at least five minutes to see [logs][1] coming in under the source `google.workspace.alert.center`. You may have to wait
 longer if your environment generates Alert Center alerts infrequently.
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 This Google Workspace Alert Center does not include metrics data.
 
-### Events
+### イベント
 
 For the full list of log events, see the [Google Workspace Alert Center documentation][7].
 
-### Service Checks
+### サービスチェック
 
 The Google Workspace Alert Center integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][8].
 

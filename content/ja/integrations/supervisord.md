@@ -29,7 +29,7 @@
 "categories":
 - "os & system"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/supervisord/README.md"
 "display_on_public_website": true
@@ -42,7 +42,7 @@
 "manifest_version": "2.0.0"
 "name": "supervisord"
 "public_title": "Supervisord"
-"short_description": "Monitor the status, uptime, and number of supervisor-managed processes."
+"short_description": "Supervisor 管理プロセスのステータス、アップタイム、数を監視。"
 "supported_os":
 - "linux"
 - "macos"
@@ -53,10 +53,10 @@
   - "Supported OS::Linux"
   - "Supported OS::macOS"
   - "Supported OS::Windows"
-  - "Category::OS & System"
-  - "Category::Log Collection"
+  - "Category::OS とシステム"
+  - "Category::ログの収集"
   "configuration": "README.md#Setup"
-  "description": "Monitor the status, uptime, and number of supervisor-managed processes."
+  "description": "Supervisor 管理プロセスのステータス、アップタイム、数を監視。"
   "media": []
   "overview": "README.md#Overview"
   "support": "README.md#Support"
@@ -66,38 +66,38 @@
 <!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
-![Supervisor Event][1]
+![Supervisor イベント][1]
 
-## Overview
+## 概要
 
-This check monitors the uptime, status, and number of processes running under Supervisor.
+このチェックは、Supervisor で実行中のプロセスのアップタイム、ステータス、数を監視します。
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
-The Supervisor check is included in the [Datadog Agent][2] package, so you don't need to install anything else on servers where Supervisor is running.
+Supervisor チェックは [Datadog Agent][2] パッケージに含まれています。Supervisor が実行されているサーバーに追加でインストールする必要はありません。
 
-### Configuration
+### 構成
 
-#### Prepare supervisord
+#### supervisord の準備
 
-The Agent can collect data from Supervisor through a HTTP server or UNIX socket. The Agent collects the same data no matter which collection method you configure.
+Agent は、HTTP サーバーまたは UNIX ソケットを介して、Supervisor からデータを収集できます。Agent は、構成された収集方法に関係なく、同じデータを収集します。
 
-##### HTTP server
+##### HTTP サーバー
 
-Add a block like this to Supervisor's main configuration file (`/etc/supervisor.conf`):
+以下のブロックを Supervisor のメインコンフィギュレーションファイル (`/etc/supervisor.conf`) に追加します。
 
 ```ini
 [inet_http_server]
 port=localhost:9001
-;username=user  # optional
-;password=pass  # optional
+;username=user  # 任意
+;password=pass  # 任意
 ```
 
-##### UNIX socket
+##### UNIX ソケット
 
-Add blocks like these to `/etc/supervisor.conf` (if they're not already there):
+以下のようなブロックを `/etc/supervisor.conf` に追加します (まだない場合)。
 
 ```ini
 [supervisorctl]
@@ -107,75 +107,75 @@ serverurl=unix:///var/run/supervisor.sock
 file=/var/run/supervisor.sock
 chmod=777
 chown=nobody:nogroup
-;username=user  # optional
-;password=pass  # optional
+;username=user  # 任意
+;password=pass  # 任意
 ```
 
-If Supervisor is running as root, make sure `chmod` or `chown` is set so that non-root users, such as `dd-agent`, can read the socket.
+Supervisor がルートとして実行されている場合は、非ルートユーザー (`dd-agent` など) がソケットを読み取れるように、必ず `chmod` または `chown` を設定します。
 
 ---
 
-Reload `supervisord`.
+`supervisord` を再度読み込みます。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### Host
+#### ホスト
 
-To configure this check for an Agent running on a host:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
-Edit the `supervisord.d/conf.yaml` file in the `conf.d/` folder at the root of your [Agent's configuration directory][1]. See the [sample supervisord.d/conf.yaml][2] for all available configuration options:
+[Agent の構成ディレクトリ][1]のルートにある `conf.d/` フォルダーの `supervisord.d/conf.yaml` ファイルを編集します。使用可能なすべての構成オプションの詳細については、[サンプル supervisord.d/conf.yaml][2] を参照してください。
 
 ```yaml
 init_config:
 
 instances:
-  ## Used to tag service checks and metrics, i.e. supervisor_server:supervisord0
+  ## サービスチェックとメトリクスをタグ付けするために使用 (supervisor_server:supervisord0 など)
   - name: supervisord0
     host: localhost
     port: 9001
-  ## To collect from the socket instead
+  ## 代わりにソケットから収集
   # - name: supervisord0
   #   socket: unix:///var/run/supervisor.sock
 ```
 
-Use the `proc_names` and/or `proc_regex` options to list processes you want the Agent to collect metrics on and create service checks for. If you don't provide either option, the Agent tracks _all_ child processes of Supervisor. If you provide both options, the Agent tracks processes from both lists meaning the two options are not mutually exclusive.
+`proc_names` オプションや `proc_regex` オプションを使用して、Agent がメトリクスを収集してサービスチェックを作成する対象プロセスのリストを作成します。どちらのオプションも指定しなかった場合、Agent は Supervisor の _すべて_ の子プロセスを追跡します。両方のオプションを指定した場合、Agent は両方のリストのプロセスを追跡します。つまり 2 つのオプションは相互排他ではありません。
 
-See the [example check configuration][2] for comprehensive descriptions of other check options.
+他のチェックオプションの詳細については、[チェック構成の例][2]を参照してください。
 
-[Restart the Agent][3] to start sending Supervisor metrics to Datadog.
+[Agent を再起動][3]すると、Datadog への Supervisor メトリクスの送信が開始されます。
 
 [1]: https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/supervisord/datadog_checks/supervisord/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
-#### Containerized
+#### コンテナ化
 
-For containerized environments, see the [Autodiscovery Integration Templates][1] for guidance on applying the parameters below.
+コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-| Parameter            | Value                                                                                                              |
+| パラメーター            | 値                                                                                                              |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | `<INTEGRATION_NAME>` | `supervisord`                                                                                                      |
-| `<INIT_CONFIG>`      | blank or `{}`                                                                                                      |
+| `<INIT_CONFIG>`      | 空白または `{}`                                                                                                      |
 | `<INSTANCE_CONFIG>`  | `{"name":"<SUPERVISORD_SERVER_NAME>", "host":"%%host%%", "port":"9001", "username":"<USERNAME>", "password":"<PASSWORD>"}` |
 
 [1]: https://docs.datadoghq.com/agent/kubernetes/integrations/
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Log collection
+#### ログ収集
 
 
 
-1. Collecting logs is disabled by default in the Datadog Agent, you need to enable it in `datadog.yaml`:
+1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
    ```yaml
    logs_enabled: true
    ```
 
-2. Add this configuration block to your `supervisord.d/conf.yaml` file to start collecting your Supervisord Logs:
+2. Supervisord ログの収集を開始するには、次のコンフィギュレーションブロックを `supervisord.d/conf.yaml` ファイルに追加します。
 
    ```yaml
    logs:
@@ -184,36 +184,36 @@ For containerized environments, see the [Autodiscovery Integration Templates][1]
        source: supervisord
    ```
 
-   Change the `path` parameter value and configure it for your environment.
-   See the [sample supervisord.d/conf.yaml][3] for all available configuration options.
+   `path` のパラメーター値を変更し、環境に合わせて構成してください。
+   使用可能なすべてのコンフィギュレーションオプションについては、[サンプル supervisord.d/conf.yaml][3] を参照してください。
 
-3. [Restart the Agent][4].
+3. [Agent を再起動します][4]。
 
-### Validation
+### 検証
 
-Run the [Agent's status subcommand][5] and look for `supervisord` under the Checks section.
+[Agent の status サブコマンド][5]を実行し、Checks セクションで `supervisord` を探します。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "supervisord" >}}
 
 
-### Events
+### イベント
 
-The Supervisor check does not include any events.
+Supervisor チェックには、イベントは含まれません。
 
-### Service Checks
+### サービスチェック
 {{< get-service-checks-from-git "supervisord" >}}
 
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][6].
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-## Further Reading
+## その他の参考資料
 
-- [Supervisor monitors your processes. Datadog monitors Supervisor.][7]
+- [Supervisor によるプロセスの監視 / Datadog による Supervisor の監視][7]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/supervisord/images/supervisorevent.png

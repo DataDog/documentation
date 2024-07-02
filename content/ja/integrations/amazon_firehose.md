@@ -5,9 +5,9 @@
 - "aws"
 - "cloud"
 - "log collection"
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies": []
-"description": "Track key Amazon Data Firehose metrics."
+"description": "Amazon Data Firehose のキーメトリクスを追跡。"
 "doc_link": "https://docs.datadoghq.com/integrations/amazon_firehose/"
 "draft": false
 "git_integration_title": "amazon_firehose"
@@ -32,9 +32,9 @@ Enable this integration to see in Datadog all your Firehose metrics.
 
 **Note**: Amazon Data Firehose was formerly known as Amazon Kinesis Data Firehose. Read the [AWS What's New][1] post to learn more.
 
-## Setup
+## セットアップ
 
-### Installation
+### インストール
 
 If you haven't already, set up the [Amazon Web Services integration first][2].
 
@@ -59,23 +59,23 @@ Configure Amazon Data Firehose to send logs either to a S3 bucket or to CloudWat
     - [Add a manual trigger on the S3 bucket][6]
     - [Add a manual trigger on the CloudWatch Log Group][7]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "amazon_firehose" >}}
 
 
 Each of the metrics retrieved from AWS is assigned the same tags that appear in the AWS console, including but not limited to host name, security-groups, and more.
 
-### Events
+### イベント
 
 The Amazon Data Firehose integration does not include any events.
 
-### Service Checks
+### サービスチェック
 
 The Amazon Data Firehose integration does not include any service checks.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][9].
 

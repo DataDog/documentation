@@ -1,12 +1,13 @@
 ---
+title: Host Map Widget
+widget_type: hostmap
+description: "Display the Datadog host map in your dashboards."
 aliases:
-- /ja/graphing/widgets/hostmap/
-description: Datadog のホストマップをダッシュボードに表示する
+- /graphing/widgets/hostmap/
 further_reading:
-- link: /ja/dashboards/graphing_json/
-  tag: ドキュメント
-  text: JSON を使用したダッシュボードの構築
-title: ホストマップウィジェット
+- link: /dashboards/graphing_json/
+  tag: Documentation
+  text: Building Dashboards using JSON
 ---
 
 ホストマップウィジェットは、メインの[ホストマップ][1]ページから利用できる同じ視覚化機能を使用して、ホスト全体のあらゆるメトリクスをグラフ化します。
@@ -17,7 +18,7 @@ title: ホストマップウィジェット
 
 {{< img src="dashboards/widgets/hostmap/hostmap_setup.png" alt="ホストマップの設定" >}}
 
-### コンフィギュレーション
+### 構成
 
 ホストマップウィジェットの構成は、メインの[ホストマップ][1]ページに似ています。
 
@@ -33,19 +34,13 @@ title: ホストマップウィジェット
 
 ### オプション
 
-#### タイトル
+#### コンテキストリンク
 
-`Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
-
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル" style="width:80%;">}}
-
-オプションで、サイズと配置を定義できます。
+[コンテキストリンク][2]はデフォルトで有効になっていますが、有効/無効を切り替えることができます。コンテキストリンクは、ダッシュボードウィジェットと他のページ (Datadog 内またはサードパーティ) を接続します。
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
-
-ホストマップウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
+このウィジェットは **[Dashboards API][3]** で使用できます。[ウィジェット JSON スキーマ定義][4]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
@@ -53,6 +48,7 @@ title: ホストマップウィジェット
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/infrastructure/hostmap/
-[2]: /ja/api/v1/dashboards/
-[3]: /ja/dashboards/graphing_json/widget_json/
+[1]: /infrastructure/hostmap/
+[2]: /dashboards/guide/context-links/
+[3]: /api/latest/dashboards/
+[4]: /dashboards/graphing_json/widget_json/

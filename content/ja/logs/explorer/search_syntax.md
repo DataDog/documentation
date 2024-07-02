@@ -178,7 +178,7 @@ You can search for numerical attribute within a specific range. For instance, re
 @http.status_code:[400 TO 499]
 ```
 
-## Tags
+## タグ
 
 Your logs inherit tags from [hosts][3] and [integrations][4] that generate them. They can be used in the search and as facets as well:
 

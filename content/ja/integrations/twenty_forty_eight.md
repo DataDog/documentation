@@ -8,7 +8,7 @@
   "sales_email": sales@datadog.com
   "support_email": help@datadoghq.com
 "categories": []
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/twenty_forty_eight/README.md"
 "display_on_public_website": true
@@ -55,13 +55,13 @@ Twenty Forty Eight is a fun game you can add to your Datadog dashboards. This ex
 
 Click on the widget to activate the app, then use your **arrow keys** to move the tiles. Tiles with the same number **merge into one** when they touch. Add them up to reach 2048 and beyond!
 
-## Setup
+## セットアップ
 
 1. In your Datadog account, navigate to Dashboards. Select the dashboard that you would like to add the game to or [create a new dashboard][2].
 
 2. In the dashboard, click **+Add Widgets** to the right of the dashboard title. Scroll to the right through the widgets, and then drag and drop the **Twenty Forty Eight** widget into the desired position on your dashboard.
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][3].
 

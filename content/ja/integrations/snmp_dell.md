@@ -20,7 +20,7 @@
 - network
 - notifications
 - snmp
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-core/blob/master/snmp_dell/README.md"
 "display_on_public_website": true
@@ -68,37 +68,37 @@ Dell Inc. is a technology company that develops computers and network hardware f
 
 For a complete list of all the metrics collected from Dell devices, see the [Network Device Monitoring documentation][1].
 
-## Setup
+## セットアップ
 
 To install and configure the SNMP integration, see the [Network Device Monitoring][2] documentation.
 
-## Vendor profiles
+## ベンダープロファイル
 
-Specific supported vendor profiles for this integration can be found on the [network vendors][3] page.
+このインテグレーションでサポートされている具体的なベンダープロファイルは、[ネットワークベンダー][3]のページで確認できます。
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
-For details of monitored metrics see the [Network Device Monitoring documentation][1].
+監視対象のメトリクスの詳細については、[ネットワークデバイスの監視に関するドキュメント][1]を参照してください。
 
-### Service Checks
+### サービスチェック
 
-The Dell integration does not include any service checks.
+Dell インテグレーションには、サービスのチェック機能は含まれません。
 
-### Events
+### イベント
 
-The Dell integration does not include any events.
+Dell インテグレーションには、イベントは含まれません。
 
-## Further Reading
+## その他の参考資料
 
-Additional helpful documentation, links, and articles:
+お役に立つドキュメント、リンクや記事:
 
-* [Monitor SNMP with Datadog][4]
+* [Datadog での SNMP モニタリング][4]
 
-## Troubleshooting
+## トラブルシューティング
 
-Need help? Contact [Datadog support][5].
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/network_performance_monitoring/devices/data
 [2]: https://docs.datadoghq.com/network_performance_monitoring/devices/setup

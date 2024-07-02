@@ -22,7 +22,7 @@
   "support_email": help@datadoghq.com
 "categories":
 - alerting
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/botprise/README.md"
 "display_on_public_website": true
@@ -62,14 +62,14 @@ Botprise's Datadog integration allows you to send generated [Botprise][1] events
 
 ![image-datadog-botprise-events][2]
 
-## Setup
+## セットアップ
 
 To use the Botprise-Datadog integration, you must be a customer of Botprise. For more information about Botprise, see [https://www.botprise.com/][1].
 
-### Installation
+### インストール
 
 
-### Configuration
+### 構成
 1. Install the Datadog Agent on your lab devices.
 2. After successful installation, your devices start sending data to Datadog. View the data on the [Datadog host list][3].
 3. In Datadog, create a monitor for each of the hosts. Datadog generates alerts based on the monitor rules.
@@ -78,24 +78,24 @@ To use the Botprise-Datadog integration, you must be a customer of Botprise. For
 6. Generate an [API key and an Application key][6] to call Datadog Rest APIs.
 
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 
 The Botprise integration does not provide metrics.
 
-### Service Checks
+### サービスチェック
 
 The Botprise integration does not include any service checks.
 
-### Events
+### イベント
 
 All events are sent to the Datadog event stream.
 
-### Configuration
+### 構成
 To use the Datadog API, you need to enter an [API key and an application key][6].
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Datadog support][7].
 

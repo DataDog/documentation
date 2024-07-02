@@ -23,7 +23,7 @@
   "sales_email": integrations-partnerships@postman.com
   "support_email": integrations-partnerships@postman.com
 "categories": []
-"custom_kind": "integration"
+"custom_kind": "インテグレーション"
 "dependencies":
 - "https://github.com/DataDog/integrations-extras/blob/master/postman/README.md"
 "display_on_public_website": true
@@ -69,11 +69,11 @@ This integration helps you stay on top of your monitors' health. It enables you 
 
 - Generate events for successful and failed monitoring runs.
 
-## Setup
+## セットアップ
 
 You can find detailed instructions in [Postman's documentation][2]. Postman Integrations require a Postman [Team, Business, or Enterprise plan][3].
 
-### Configuration
+### 構成
 
 1. Generate a Datadog [API key][4].
 2. Sign in to your Postman account and navigate to the [Datadog integration][5].
@@ -88,17 +88,17 @@ You can find detailed instructions in [Postman's documentation][2]. Postman Inte
 
 ![Configure Integration][6]
 
-## Data Collected
+## 収集データ
 
-### Metrics
+### メトリクス
 {{< get-metrics-from-git "postman" >}}
 
 
-### Service Checks
+### サービスチェック
 
 Postman does not include any service checks.
 
-### Events
+### イベント
 
 An event is generated each time a monitor runs in Postman. The severity of the event is based on the tests in the Postman monitor:
 
@@ -107,7 +107,7 @@ An event is generated each time a monitor runs in Postman. The severity of the e
 | `Low`    | If all the tests pass                                                 |
 | `Normal` | If some tests fail, or an error occurs in the execution of any event. |
 
-## Troubleshooting
+## トラブルシューティング
 
 Need help? Contact [Postman Support][8].
 
