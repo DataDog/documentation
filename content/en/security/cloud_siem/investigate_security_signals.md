@@ -37,7 +37,7 @@ Use different visualizations to investigate the threat activity in your environm
 - **Table** to see signals by the specified tag key (for example, `source`, `technique`, and so on).
 - **Pie Chart** to see the relative volume of each of the detection rules.
 
-{{< img src="security/security_monitoring/investigate_security_signals/signal_list.png" alt="The Signal Explorer showing signals categorized by detection rules" style="width:100%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/signal_list2.png" alt="The Signal Explorer showing signals categorized by detection rules" style="width:100%;" >}}
 
 ### View signals by detection rules
 
@@ -50,18 +50,23 @@ To view your signals by MITRE ATT&CK Tactic and Technique:
 1. Click the plus icon next to the first group `by` to add a second group `by`, and select **Technique** for it.
 1. In the table, click one of the tactics or techniques to see options to further investigate and filter the signals. For example, you can view signals related to the tactic and technique and search for or exclude specific tactics and techniques.
 
-## Triage a signal or multiple signals
+{{< img src="security/security_monitoring/investigate_security_signals/tactics_techniques.png" alt="The Signal Explorer table showing a list of tactics and techniques" style="width:100%;" >}}
+
+### Triage a single signal
 
 1. Navigate to [Cloud SIEM][5].
-1. Click **Signals**.
+1. Click the **Signals** tab at the top of the page.
 1. Click on a security signal from the table.
-1. To assign a signal to yourself or another Datadog user, click the user profile icon with the plus sign in the top left corner of the signal side panel.
-{{< img src="security/security_monitoring/investigate_security_signals/profile_icon.png" alt="The profile icon next to the triage status" style="width:45%;" >}}
-1. To update the triage status of the security signal, navigate to the top left corner of the signal side panel and select the status you want from the dropdown menu. The default status is `OPEN`.
-{{< img src="security/security_monitoring/investigate_security_signals/triage_status.png" alt="The profile icon next to the triage status" style="width:35%;" >}}
-    - **Open**: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
-    - **Under Review**: During an active investigation, you can switch the signal state to **Under Review**. From the **Under Review** state, you can move the signal state to **Archived** or **Open** as needed.
-    - **Archived**: When the detection that caused the signal has been resolved, you can transition it to the **Archived** state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an **Open** state within 30 days of being created.
+1. In the **What Happened** section, see the logs that matched the query. Hover over the query to see the query details.
+    - You can also see specific information like username or network IP. Click the funnel icon to create a suppression rule or add the information to an existing suppression. See [Create suppression rule][11] for more details.
+1. In the **Signal Status & Assignee** section:   
+  a. Click the dropdown to change the triage status of the signal. The default status is `OPEN`.
+      - `Open`: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
+      - `Under Review`: During an active investigation, you can switch the signal state to `Under Review`. From the `Under Review` state, you can move the signal state to `Archived` or `Open` as needed.
+      - `Archived`: When the detection that caused the signal has been resolved, you can transition it to the `Archived` state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an `Open` state within 30 days of being created.</ul>
+  b. Click **Assign Signal** to assign a signal to yourself or another Datadog user.
+
+### Triage multiple signals
 
 Use bulk actions to triage multiple signals. To use bulk actions, first search and filter your signals in the Signal Explorer, then:
 
@@ -70,7 +75,51 @@ Use bulk actions to triage multiple signals. To use bulk actions, first search a
 
 **Note**: The Signals Explorer stops dynamically updating when performing a bulk action.
 
-{{< img src="security/security_monitoring/investigate_security_signals/bulk_actions.png" alt="The Signal Explorer showing the bulk action option" style="width:45%;" >}}
+{{< img src="security/security_monitoring/investigate_security_signals/bulk_actions2.png" alt="The Signal Explorer showing the bulk action option" style="width:55%;" >}}
+
+### Run Workflow automation
+
+Use Workflow Automations to carry out actions to help you investigate and remediate a signal. These actions can include:
+- Blocking an IP address from your environment.
+- Disabling a user account.
+- Looking up an IP address with a third party threat intelligence provider.
+- Sending slack messages to your colleagues to get help with your investigation.
+
+In the signal side panel, click the **Workflows** tab to see which workflows were triggered for the signal. Click **Run Workflow** to manually trigger a workflow for the signal. You can also manually trigger a workflow from the **Next Steps** section at the top of the signal panel.
+
+To trigger a Workflow automatically for any Security Signal, see [Trigger a Workflow from a Security Signal][8] and [Automate Security Workflows with Workflow Automation][9] for more information.
+
+## Investigate
+
+A signal contains important information to determine whether a signal is malicious or not. Additionally, you can add a signal to a case in Case Management for further investigation.
+
+### Logs
+
+Click the **Logs** tab to view the logs related to the signal. Click **View All Related Logs** to see the related logs in the Log Explorer.
+
+### Entities
+
+To investigate entities related to the signal:
+
+1. Click the **Entities** tab to see entities related to the signal, such as IP addresses.
+1. Click **View Related Logs** to see logs related to that entity in the Log Explorer.
+1. Click the down arrow next to **View Relate Logs** and you can:   
+    - Select **View IP Dashboard** to see more information about the IP address in the IP Investigation dashboard.
+    - Select **View Related Signals** to open the Signals Explorer and see the other signals associated with the IP address.
+1. For cloud environment entities, such as an assumed role or IAM user, click **View in Investigator** to go to the Investigator to get more details.
+
+### Related signals
+
+Click the **Related Signals** tab to see the related signals and what information, such as fields and attributes, the signals share. Click **View All Related Activity** to see the signals in the Signal Explorer.
+
+### Suppressions
+
+Do one of the following to view the suppression rules affecting the detection rule that generated the signal:
+
+- Click the **Suppressions** tab to see a list of suppressions, if there are any. Click **Edit Suppressions** to go to the detection rule editor to see the suppression section of that rule.
+- In the **Next Steps** section, click **Edit Suppressions** to go to the detection rule editor to see the suppression section of that rule.
+
+## Collaborate
 
 ### Case Management
 
@@ -78,8 +127,14 @@ Sometimes you need more information than what is available in a single signal to
 
 To create a case from a security signal:
 
-1. Click the **Escalate Investigation** dropdown menu.
-2. Select **Create a case** to start a security investigation.
+1. Click **Create Case** in the **Next Steps** section to create a new case. If you want to add the signal to an existing case, click the down arrow next to **Create Case** and select **Add to an existing case**.
+1. Fill in the information for the case.
+1. Click **Create Case**.
+
+The signal is automatically assigned to the user who created the case and the signal status is automatically changed to `Under Review`.
+
+After a case is created, hover over the **Case** button to see the case associated with the signal.
+
 
 **Note**: If a case is determined to be critical after further investigation, click **Declare Incident** in the case to escalate it to an incident.
 
@@ -89,13 +144,10 @@ Whether it is based on a single signal or after an investigation of a case, cert
 
 To declare an incident in the signal panel:
 
-1. Click the **Escalate Investigation** dropdown menu.
-2. Select **Declare incident**.
-3. Fill out the incident template.
+1. Click **Declare Incident** in the **Next Steps** section.
+1. Fill out the incident template.
 
-### Workflow automation
-
-You can trigger a Workflow automatically for any Security Signal. You can also manually trigger a Workflow from a Cloud SIEM Security Signal. See [Trigger a Workflow from a Security Signal][8] and [Automate Security Workflows with Workflow Automation][9] for more information.
+If you want to add the signal to an incident, click the down arrow next to **Declare Incident** and select the incident you want to add the signal to. Click **Confirm**.
 
 ### Threat intelligence
 
@@ -136,3 +188,4 @@ You can also launch this query directly from the signal panel:
 [8]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
 [9]: /security/cloud_security_management/workflows/
 [10]: /security/threat_intelligence
+[11]: /security/suppressions/#create-a-suppression-rule
