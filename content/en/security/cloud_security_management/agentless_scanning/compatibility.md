@@ -1,6 +1,5 @@
 ---
 title: CSM Agentless Scanning Compatibility Matrix
-kind: documentation
 ---
 
 ## Linux distributions
