@@ -314,6 +314,7 @@ You can further restrict your monitor by specifying a list of [roles][15] allowe
 
 Use [granular access controls][16] to limit the roles that can edit a monitor:
 1. While editing or configuring a monitor, find the **Define permissions and audit notifications** section.
+  {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Monitor configuration options to define permissions" style="width:70%;" >}}
 1. Click **Edit Access**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
