@@ -10,7 +10,7 @@ further_reading:
   text: "Use Version tags within Datadog APM to monitor deployments"
 - link: "https://www.datadoghq.com/blog/unified-service-tagging/"
   tag: "Blog"
-  text: "Tags: set once, access everywhere"
+  text: "Tags: Set once, access everywhere"
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Autodiscovery: Tracking services across ephemeral containers"
@@ -413,11 +413,13 @@ For more information about AWS Lambda functions, see [how to connect your Lambda
 
 ### OpenTelemetry environment
 
-In OpenTelemetry environments, you can use the [OpenTelemetry Collector][16] to collect and batch telemetry data (like metrics, traces, and logs) and the [OpenTelemetry Exporter][17] to send the data to Datadog (without the Datadog Agent).
+In OpenTelemetry environments, you can use the [OpenTelemetry Collector][16] to collect and batch telemetry data (like metrics, traces, and logs) by leveraging the [Datadog Exporter][17] to send the data to Datadog without the Datadog Agent.
 
-To setup unified service tagging in an OpenTelemetry environment:
+Optionally, you can send telemetry data from [applications instrumented with the OpenTelemetry SDKs with the Datadog Agent][20], which collects the data for Datadog.
 
-1. Set the following attributes in your OpenTelemetry configuration to ensure proper tagging:
+To set up unified service tagging in an OpenTelemetry environment:
+
+1. Depending on the OpenTelemetry component you are using, set the following attributes to ensure proper tagging:
 
    For example, with the Python OpenTelemetry SDK:
 
@@ -470,7 +472,7 @@ To setup unified service tagging in an OpenTelemetry environment:
 
    | Domain | OpenTelemetry | Datadog |
    |---|---|---|
-   | Tracing | `TraceId` and `SpanId` are stored in OpenTelemetry as 32-hex character and 16-hex character. | Stored in Datadog as 64-bit unsigned int. |
+   | Tracing | `TraceId` and `SpanId` are stored in OpenTelemetry as strings of 32 hex characters and 16 hex characters, respectively. | Stored in Datadog as 64-bit unsigned int. |
    | Unified service tagging | `service.name`, `deployment.environment`, `service.version` | `service`, `env`, `version` |
    
    Edit your logging configuration to include the trace and span IDs. For example, this Python application uses the `structlog` library:
@@ -538,3 +540,4 @@ For more information, see [Correlating OpenTelemetry Traces and Logs][19].
 [17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [18]: /tracing/other_telemetry/connect_logs_and_traces/
 [19]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/
+[20]: /opentelemetry/interoperability/otlp_ingest_in_the_agent/
