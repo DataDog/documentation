@@ -97,9 +97,13 @@ Click the **Share** button and select **Share event** to share a link to the cur
 
 ### Recent changes
 
-Use the **Recent Changes** tab on a resource's side panel to see a 7-day history of changes to the resource and its configuration. To forward change events from your cloud environments, follow the links or instructions for your cloud providers below:
+{{< callout url="https://www.datadoghq.com/private-beta/recent-changes-tab/" >}}
+  The <strong>Recent Changes</strong> tab is in private beta, but you can easily request access! Use this form to submit your request today.
+{{< /callout >}} 
 
-**Note**: Contact [Datadog support][7] to enable change event forwarding from your Azure environment.
+Use the **Recent Changes** tab on a resource's side panel to see a 7-day history of changes to the resource and its configuration. To forward change events from your cloud environments, follow the links for your cloud providers in the sections below.
+
+**Note**: To collect resource change events from your cloud environments, ensure that you have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [integration tile][7].
 
 #### AWS
 
@@ -119,7 +123,5 @@ See the [Resource change collection][8] section of the Google Cloud Platform int
 [4]: /account_management/teams
 [5]: https://app.datadoghq.com/infrastructure/catalog/configuration
 [6]: /integrations/amazon_config/#events
-[7]: /help/
+[7]: https://app.datadoghq.com/integrations
 [8]: /integrations/google_cloud_platform/#resource-change-collection
-
-
