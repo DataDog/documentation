@@ -5,7 +5,7 @@ cascade:
     rank: 20
     subcategory: Guide pour RUM et Session Replay
 disable_toc: true
-kind: guide
+
 private: true
 title: Guides pour Real User Monitoring et Session Replay
 ---

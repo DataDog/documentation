@@ -1,6 +1,6 @@
 ---
 title: jmx.yaml error, Include Section
-kind: faq
+
 ---
 
 You may encounter the following error message when configuring your `jmx.yaml` file:

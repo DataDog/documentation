@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Log Management
-kind: guide
+
 aliases:
     - /logs/guide/logs-monitors-on-volumes/
 further_reading:

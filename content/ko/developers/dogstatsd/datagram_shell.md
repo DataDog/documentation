@@ -9,7 +9,6 @@ further_reading:
 - link: developers/libraries
   tag: 설명서
   text: 공식적으로 커뮤니티에서 만든 API 및 DogStatsD 클라이언트 라이브러리
-kind: 설명서
 title: 데이터그램 형식 및 쉘 사용
 ---
 

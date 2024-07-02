@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
   tag: Blog
   text: Utiliza consultas con notación CIDR para filtrar tus logs de tráfico de red
-kind: documentación
 title: Monitor de logs
 ---
 

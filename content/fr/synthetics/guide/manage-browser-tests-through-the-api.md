@@ -1,6 +1,6 @@
 ---
 title: Gérer vos tests Browser par programmation
-kind: guide
+
 further_reading:
   - link: /synthetics/browser_tests
     tag: Documentation

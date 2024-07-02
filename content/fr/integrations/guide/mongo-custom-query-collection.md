@@ -3,7 +3,6 @@ further_reading:
 - link: /integrations/mongo/
   tag: Documentation
   text: En savoir plus sur l'intégration MongoDB
-kind: guide
 title: Recueillir des métriques custom MongoDB
 ---
 

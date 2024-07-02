@@ -10,7 +10,6 @@ further_reading:
 - link: /real_user_monitoring
   tag: 설명서
   text: RUM & 세션 재생
-kind: 설명서
 title: RUM iOS 고급 구성
 type: multi-code-lang
 ---
