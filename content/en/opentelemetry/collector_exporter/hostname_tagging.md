@@ -297,10 +297,10 @@ When configuring the OpenTelemetry Collector, you can use the following environm
 | Variable   | Required | Description                                                  |
 |------------|----------|--------------------------------------------------------------|
 | `DD_API_KEY` | Yes      | Your Datadog API key.                                        |
-| `DD_SITE`    | Yes       | The Datadog site to send data to. Defaults to {{< region-param key="dd_site" >}}. |
-| `DD_ENV`     | Yes       | The environment to associate the data with.                  |
-| `DD_SERVICE` | Yes       | The service name to associate the data with.                 |
-| `DD_VERSION` | Yes       | The version of the service to associate the data with.       |
+| `DD_SITE`    | Yes      | The Datadog site to send data to. Defaults to {{< region-param key="dd_site" >}}. |
+| `DD_ENV`     | Yes      | The environment to associate the data with.                  |
+| `DD_SERVICE` | Yes      | The service name to associate the data with.                 |
+| `DD_VERSION` | Yes      | The version of the service to associate the data with.       |
 | `DD_TAGS`    | No       | A list of tags to apply to all data sent to Datadog.         |
 
 For more information, see [Unified Service Tagging][5].

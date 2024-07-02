@@ -419,7 +419,7 @@ Optionally, you can send telemetry data from [applications instrumented with the
 
 To set up unified service tagging in an OpenTelemetry environment:
 
-1. Depending on the OpenTelemetry component you are using, set the following attributes to ensure proper tagging:
+1. Set the required attributes to ensure proper tagging for the OpenTelemetry component you are using.
 
    For example, with the Python OpenTelemetry SDK:
 
