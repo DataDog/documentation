@@ -4,7 +4,6 @@ further_reading:
 - link: /integrations/webhooks/
   tag: 설명서
   text: Webhooks 통합
-kind: 가이드
 title: Webhooks를 사용한 Freshservice 티켓
 ---
 

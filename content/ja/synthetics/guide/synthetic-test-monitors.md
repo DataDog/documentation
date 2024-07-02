@@ -10,7 +10,6 @@ further_reading:
 - link: /synthetics/metrics/
   tag: ドキュメント
   text: Synthetic モニタリングメトリクスについて
-kind: ガイド
 title: Synthetic テストモニターを利用する
 ---
 

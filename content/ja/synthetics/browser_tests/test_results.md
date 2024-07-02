@@ -12,7 +12,6 @@ further_reading:
 - link: /synthetics/dashboards/browser_test/
   tag: ドキュメント
   text: ブラウザテストパフォーマンスダッシュボードについて
-kind: ドキュメント
 title: ブラウザテストの結果
 ---
 

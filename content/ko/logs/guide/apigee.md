@@ -9,7 +9,6 @@ further_reading:
   tag: 설명서
   text: 로그 관리
 integration_id: apigee
-kind: 지침
 name: apigee
 short_description: Apigee 로그 수집
 title: Apigee

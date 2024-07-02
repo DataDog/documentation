@@ -10,7 +10,6 @@ further_reading:
 - link: /synthetics/guide/popup/#moving-popups
   tag: ドキュメント
   text: 不明な時間にトリガーされるポップアップの処理方法について
-kind: ガイド
 title: ブラウザテストでカスタム JavaScript アサーションを使用する
 ---
 

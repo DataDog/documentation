@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: 로그 지침
 disable_toc: true
-kind: 지침
 private: true
 title: 로그 지침
 ---

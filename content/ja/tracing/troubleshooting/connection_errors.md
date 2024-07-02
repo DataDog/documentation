@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
-kind: ドキュメント
 title: APM 接続エラー
 ---
 

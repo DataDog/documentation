@@ -7,7 +7,6 @@ further_reading:
 - link: /account_management/billing/usage_attribution/
   tag: Documentation
   text: 計画と使用設定
-kind: ガイド
 title: 使用量属性タグによる RUM の使用量の追跡
 ---
 

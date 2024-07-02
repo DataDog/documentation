@@ -3,7 +3,6 @@ further_reading:
 - link: /tracing/trace_pipeline/ingestion_controls/
   tag: ドキュメント
   text: 取り込み制御ページ
-kind: ガイド
 title: APM 分散型トレーシングによる取り込み量制御
 ---
 

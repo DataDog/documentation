@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/integrations/faq/for-snmp-does-datadog-have-a-list-of-commonly-used-compatible-oids
-kind: ガイド
 title: SNMP でよく使われる OID と互換性のある OID
 ---
 

@@ -7,7 +7,6 @@ further_reading:
 - link: logs/explorer
   tag: ドキュメント
   text: ログの調査方法
-kind: ドキュメント
 title: Android ログの収集
 ---
 

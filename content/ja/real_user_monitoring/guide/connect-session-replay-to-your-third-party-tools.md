@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/session_replay/
   tag: Documentation
   text: セッションリプレイについて
-kind: ガイド
 title: セッションリプレイとサードパーティツールの接続
 ---
 

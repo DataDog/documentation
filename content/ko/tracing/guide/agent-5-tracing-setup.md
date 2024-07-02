@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/tracing/faq/agent-5-tracing-setup
-kind: 가이드
 private: true
 title: Agent v5와 APM & Continuous Profiler
 ---

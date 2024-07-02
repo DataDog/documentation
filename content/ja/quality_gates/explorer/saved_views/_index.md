@@ -3,7 +3,6 @@ further_reading:
 - link: /quality_gates/explorer/search_syntax/
   tag: ドキュメント
   text: 検索クエリの作成方法
-kind: ドキュメント
 title: パフォーマンス
 ---
 

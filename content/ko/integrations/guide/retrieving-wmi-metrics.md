@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/integrations/faq/how-to-retrieve-wmi-metrics
-kind: 가이드
 title: WMI\u0008 메트릭 검색하기
 ---
 

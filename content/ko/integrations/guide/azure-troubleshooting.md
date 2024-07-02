@@ -5,7 +5,6 @@ further_reading:
 - link: /integrations/azure/
   tag: 설명서
   text: Azure 통합
-kind: 가이드
 title: Azure 트러블슈팅
 ---
 

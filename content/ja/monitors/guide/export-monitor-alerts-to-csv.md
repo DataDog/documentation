@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/monitors/faq/how-can-i-export-alert-history
-kind: ガイド
 title: モニターアラートを CSV にエクスポート
 ---
 

@@ -10,7 +10,6 @@ further_reading:
 - link: /tracing/metrics
   tag: 설명서
   text: APM 메트릭에 대해 알아보기
-kind: 가이드
 title: 모니터, SLO 및 대시보드에서 USM 메트릭 사용
 ---
 

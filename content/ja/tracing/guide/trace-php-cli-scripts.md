@@ -6,7 +6,6 @@ further_reading:
 - link: /tracing/troubleshooting/
   tags: ドキュメント
   text: トラブルシューティング
-kind: ガイド
 title: PHP CLI スクリプトのトレース
 ---
 

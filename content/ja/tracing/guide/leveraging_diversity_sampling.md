@@ -3,7 +3,6 @@ further_reading:
 - link: /tracing/trace_pipeline/trace_retention/
   tag: Documentation
   text: トレースインデックスの保持を制御する
-kind: ガイド
 title: Datadog の保持ポリシーを理解し、トレースデータを効率的に保持する
 ---
 

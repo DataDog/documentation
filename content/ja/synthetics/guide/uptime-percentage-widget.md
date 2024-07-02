@@ -9,7 +9,6 @@ further_reading:
 - link: /getting_started/synthetics/
   tag: ドキュメント
   text: Synthetic モニタリングの概要
-kind: ガイド
 title: SLO を用いて Web サイトのアップタイムを監視する
 ---
 

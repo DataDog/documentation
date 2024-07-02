@@ -11,7 +11,6 @@ further_reading:
 - link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
-kind: ガイド
 title: モニターの依存関係を作成する
 ---
 

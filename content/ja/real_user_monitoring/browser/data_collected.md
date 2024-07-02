@@ -22,7 +22,6 @@ further_reading:
 - link: /logs/log_configuration/attributes_naming_convention
   tag: ドキュメント
   text: Datadog 標準属性
-kind: ドキュメント
 title: 収集された RUM ブラウザデータ
 ---
 

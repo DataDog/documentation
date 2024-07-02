@@ -10,7 +10,6 @@ further_reading:
 - link: /tracing/metrics
   tag: Documentation
   text: APM メトリクスについて
-kind: ガイド
 title: モニター、SLO、ダッシュボードでの USM メトリクスの活用
 ---
 

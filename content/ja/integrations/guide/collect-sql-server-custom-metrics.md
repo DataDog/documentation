@@ -5,7 +5,6 @@ further_reading:
 - link: /integrations/mysql/
   tag: ドキュメント
   text: Datadog-MySQL インテグレーション
-kind: ガイド
 title: SQL Server カスタムメトリクスの収集
 ---
 

@@ -3,7 +3,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: ドキュメント
   text: RUM データを Explorer で確認
-kind: ガイド
 title: RUM Mobile SDK のアップグレード
 ---
 

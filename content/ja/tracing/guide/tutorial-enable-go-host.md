@@ -18,7 +18,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-Go
   tags: GitHub
   text: トレーシングライブラリオープンソースコードリポジトリ
-kind: ガイド
 title: チュートリアル - Datadog Agent と同じホスト上の Go アプリケーションのトレースを有効にする
 ---
 

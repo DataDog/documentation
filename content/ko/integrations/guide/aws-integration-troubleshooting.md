@@ -4,7 +4,6 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/amazon_web_services/
   tag: 통합
   text: AWS통합
-kind: 지침
 title: AWS 통합 트러블슈팅
 ---
 

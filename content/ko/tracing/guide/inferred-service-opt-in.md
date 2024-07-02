@@ -10,7 +10,6 @@ further_reading:
 - link: /tracing/trace_collection/dd_libraries/
   tag: 설명서
   text: Datadog 트레이싱 라이브러리 추가
-kind: 가이드
 private: true
 title: 신규 서비스(현황) 페이지 및 추론 서비스
 ---

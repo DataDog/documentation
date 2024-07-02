@@ -5,7 +5,6 @@ further_reading:
 - link: /synthetics/
   tag: ドキュメント
   text: Synthetic モニタリングについて
-kind: ガイド
 title: Synthetic テストの複製
 ---
 

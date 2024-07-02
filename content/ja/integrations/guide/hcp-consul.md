@@ -3,7 +3,6 @@ further_reading:
 - link: /integrations/consul/
   tag: ドキュメント
   text: Consul インテグレーションについて
-kind: ガイド
 title: Datadog を使用した HCP Consul の監視
 ---
 

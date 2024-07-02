@@ -19,7 +19,6 @@ further_reading:
   tag: ブログ
   text: Datadog Mobile RUM による Flutter アプリケーションのパフォーマンス監視
 is_beta: true
-kind: ドキュメント
 private: true
 title: RUM Unity Monitoring のセットアップ
 type: multi-code-lang

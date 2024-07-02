@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/integrations/faq/how-to-run-jmx-commands-in-windows
-kind: 가이드
 title: Windows에서 JMX 명령 실행하기
 ---
 

@@ -4,7 +4,6 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/azure/
   tag: Documentation
   text: Azure インテグレーション
-kind: ガイド
 title: Azure インテグレーションアーキテクチャと構成
 ---
 

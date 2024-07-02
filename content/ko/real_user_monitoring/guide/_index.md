@@ -5,7 +5,6 @@ cascade:
     rank: 20
     subcategory: RUM 및 세션 재생 가이드
 disable_toc: true
-kind: 가이드
 private: true
 title: 실제 사용자 모니터링 및 세션 재생 가이드
 ---

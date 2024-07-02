@@ -19,7 +19,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/azure-app-service-datadog-serverless-view/
   tag: ブログ
   text: Datadog サーバーレスビューで Azure App Service を確認する
-kind: ガイド
 title: Azure Native インテグレーション手動セットアップガイド
 ---
 

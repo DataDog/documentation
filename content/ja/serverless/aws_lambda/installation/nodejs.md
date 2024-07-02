@@ -16,7 +16,6 @@ further_reading:
 - link: serverless/custom_metrics/
   tag: ドキュメント
   text: サーバーレスアプリケーションからのカスタムメトリクスの送信
-kind: ドキュメント
 title: Node.js サーバーレスアプリケーションのインスツルメンテーション
 ---
 

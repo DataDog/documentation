@@ -3,7 +3,6 @@ aliases:
 - /ko/developers/faq/can-i-call-scripts-and-generate-events-from-their-results
 - /ko/dashboards/faq/how-do-i-track-cron-jobs
 description: Dogwrap을 사용하여 명령 호출 및 결과로부터 이벤트 생성
-kind: 가이드
 title: Dogwrap
 ---
 

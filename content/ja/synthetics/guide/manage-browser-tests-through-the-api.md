@@ -9,7 +9,6 @@ further_reading:
 - link: /synthetics/browser_tests
   tag: ドキュメント
   text: ブラウザテストの詳細
-kind: ガイド
 title: プログラムによるブラウザテストの管理
 ---
 

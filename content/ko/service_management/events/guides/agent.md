@@ -6,7 +6,6 @@ further_reading:
 - link: /developers/custom_checks/write_agent_check/
   tag: 설명서
   text: 커스텀 Agent 점검 작성
-kind: 지침
 title: 커스텀 Agent 점검을 이용하는 이벤트
 ---
 

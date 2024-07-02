@@ -15,7 +15,6 @@ further_reading:
 - link: /logs/logs_to_metrics/
   tag: ドキュメント
   text: 収集されたログからメトリクスを生成する方法
-kind: ガイド
 title: Logging Without Limits™ ガイド
 ---
 

@@ -11,7 +11,6 @@ further_reading:
 - link: https://docs.datadoghq.com/tracing/guide/metrics_namespace/
   tag: 설명서
   text: 트레이스 메트릭에 대해 더 알아보기
-kind: 가이드
 title: 애플리케이션 성능 모니터링(APM)의 DDSketch 기반 메트릭
 ---
 

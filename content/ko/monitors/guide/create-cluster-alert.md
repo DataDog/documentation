@@ -6,7 +6,6 @@ further_reading:
 - link: /monitors/notify/
   tag: 설명서
   text: 모니터링 알림 설정하기
-kind: 지침
 title: 클러스터 경고를 생성하여 일정 비율의 그룹이 위험 상태일 시 알림을 받으세요.
 ---
 

@@ -2,7 +2,6 @@
 aliases:
 - /ko/developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
 description: 터미널 또는 쉘에서 Datadog의 API 사용
-kind: 가이드
 title: Dogshell
 ---
 

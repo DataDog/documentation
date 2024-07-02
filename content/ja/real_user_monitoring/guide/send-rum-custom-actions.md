@@ -7,7 +7,6 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: RUM エクスプローラーで RUM データを視覚化する
-kind: ガイド
 private: true
 title: RUM カスタムアクションの送信
 ---

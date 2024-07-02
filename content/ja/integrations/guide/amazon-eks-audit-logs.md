@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Amazon EKS 監査ログのログ収集
 ---
 

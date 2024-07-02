@@ -8,7 +8,6 @@ further_reading:
 - link: /monitors/notify/
   tag: 설명서
   text: Configure your monitor notifications
-kind: 가이드
 title: 특정 태그 보고 중단 시 경고 설정하기
 ---
 

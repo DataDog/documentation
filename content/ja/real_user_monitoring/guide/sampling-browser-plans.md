@@ -6,7 +6,6 @@ further_reading:
 - link: /real_user_monitoring/browser/
   tag: ドキュメント
   text: RUM ブラウザモニタリングについて
-kind: ガイド
 title: Browser RUM および Browser RUM & セッションリプレイのサンプリングのためのセットアップの構成
 ---
 

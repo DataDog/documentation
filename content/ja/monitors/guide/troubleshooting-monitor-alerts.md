@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/set-and-monitor-slas/
   tag: ブログ
   text: Datadog によるサービスの監視と SLA 設定
-kind: ガイド
 title: モニターアラートのトラブルシューティング
 ---
 

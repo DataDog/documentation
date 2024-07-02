@@ -6,7 +6,6 @@ further_reading:
 - link: /dashboards/functions/interpolation/#default-zero
   tag: ドキュメント
   text: 補間について
-kind: ガイド
 title: 疎なメトリクスの監視
 ---
 

@@ -18,7 +18,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-flutter-application-performance-with-mobile-rum/
   tag: ブログ
   text: Datadog Mobile RUM による Flutter アプリケーションのパフォーマンス監視
-kind: ドキュメント
 title: RUM Flutter モニタリングのセットアップ
 type: multi-code-lang
 ---

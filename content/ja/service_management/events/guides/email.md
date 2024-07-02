@@ -3,7 +3,6 @@ aliases:
 - /ja/developers/events/email/
 - /ja/guides/eventsemail
 - /ja/events/guides/email
-kind: ガイド
 title: メールによるイベント送信
 ---
 

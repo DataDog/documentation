@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/faq/log-parsing-best-practice
   tag: Documentation
   text: ログのパース - ベストプラクティス
-kind: ガイド
 title: パースされていないログの監視とクエリ
 ---
 

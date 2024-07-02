@@ -16,7 +16,6 @@ further_reading:
 - link: tracing/trace_collection/otel_instrumentation/java/
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
-kind: ドキュメント
 title: Java アプリケーションのトレース
 type: multi-code-lang
 ---

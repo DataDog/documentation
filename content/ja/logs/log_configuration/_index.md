@@ -15,7 +15,6 @@ further_reading:
 - link: /logs/guide/
   tag: ガイド
   text: Datadog を使用したロギングに関する追加ガイド
-kind: ドキュメント
 title: ログコンフィギュレーション
 ---
 

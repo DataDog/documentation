@@ -12,7 +12,6 @@ further_reading:
 - link: /tracing/guide/
   tag: ''
   text: すべてのガイド
-kind: ガイド
 title: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
 ---
 

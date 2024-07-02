@@ -9,7 +9,6 @@ further_reading:
 - link: /tracing/trace_collection/library_config/
   tag: ドキュメント
   text: トレーシングライブラリの構成
-kind: ドキュメント
 title: APM データの量子化
 ---
 

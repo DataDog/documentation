@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Amazon Aurora DB クラスターに対する Database Monitoring の構成
 ---
 

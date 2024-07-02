@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/announcing-cloud-siem/
   tag: ブログ
   text: Datadog セキュリティモニタリングが新登場
-kind: ガイド
 title: AWS 組織向け AWS インテグレーションマルチアカウント設定
 ---
 

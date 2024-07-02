@@ -12,7 +12,6 @@ further_reading:
 - link: /synthetics/apm/
   tag: ドキュメント
   text: Synthetics テストとトレースの接続
-kind: ガイド
 title: クロスプロダクト相関で容易にトラブルシューティング
 ---
 

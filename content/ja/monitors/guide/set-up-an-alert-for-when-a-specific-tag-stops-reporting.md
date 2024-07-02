@@ -8,7 +8,6 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-kind: ガイド
 title: 特定のタグがレポートを停止した場合のアラート設定
 ---
 

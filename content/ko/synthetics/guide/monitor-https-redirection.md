@@ -3,7 +3,6 @@ further_reading:
 - link: /synthetics/api_tests/http_tests
   tag: 설명서
   text: HTTP 테스트 생성하기
-kind: 가이드
 title: HTTP 요청이 HTTPS으로 리디렉션되는지 모니터링합니다.
 ---
 

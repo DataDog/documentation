@@ -10,7 +10,6 @@ further_reading:
 - link: /real_user_monitoring
   tag: ドキュメント
   text: Datadog RUM を探索する
-kind: ドキュメント
 title: RUM Android の高度なコンフィギュレーション
 type: multi-code-lang
 ---

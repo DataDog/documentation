@@ -6,7 +6,6 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-kind: ガイド
 title: クラスターアラートを作成し、グループの何割かが重大な状態になったときに通知する
 ---
 

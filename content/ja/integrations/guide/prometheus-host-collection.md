@@ -12,7 +12,6 @@ further_reading:
 - link: developers/prometheus
   tag: ドキュメント
   text: カスタム Prometheus チェックの記述
-kind: ドキュメント
 title: ホストからの Prometheus および OpenMetrics メトリクスの収集
 ---
 

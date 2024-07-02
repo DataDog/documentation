@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: if 조건에 코드 블록이 2개인지 확인하기
 ---
 ## 메타데이터

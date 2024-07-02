@@ -15,7 +15,6 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-php
   tags: GitHub
   text: トレーシングライブラリオープンソースコードリポジトリ
-kind: ガイド
 title: チュートリアル - コンテナ内の Python アプリケーションとホスト上の Agent のトレースを有効にする
 ---
 

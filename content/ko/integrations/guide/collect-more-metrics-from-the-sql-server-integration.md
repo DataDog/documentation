@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ko/integrations/faq/how-can-i-collect-more-metrics-from-my-sql-server-integration
-kind: 가이드
 title: SQL 서버 통합에서 메트릭을 더 수집하는 방법
 ---
 

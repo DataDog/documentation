@@ -8,7 +8,6 @@ further_reading:
 - link: /logs/log_collection/javascript/
   tag: ドキュメント
   text: Datadog Browser SDK for Logs について
-kind: ドキュメント
 title: RUM ブラウザモニタリング
 ---
 

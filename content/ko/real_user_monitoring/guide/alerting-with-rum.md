@@ -10,7 +10,6 @@ further_reading:
 - link: /monitors/
   tag: 설명서
   text: 경고
-kind: 가이드
 title: RUM 데이터 알림 생성하기
 ---
 

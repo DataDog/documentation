@@ -1,7 +1,6 @@
 ---
 dependencies: []
 disable_edit: true
-kind: 도움말
 title: 데이터 클래스에 특별 메서드 사용하지 않기
 ---
 ## 메타데이터

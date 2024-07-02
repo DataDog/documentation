@@ -8,7 +8,6 @@ cascade:
     rank: 50
     subcategory: APM ガイド
 disable_toc: true
-kind: ガイド
 private: true
 title: トレースガイド
 ---

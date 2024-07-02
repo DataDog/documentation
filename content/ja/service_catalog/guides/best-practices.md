@@ -3,7 +3,6 @@ further_reading:
 - link: /tracing/service_catalog/
   tag: ドキュメント
   text: Datadog サービスカタログ
-kind: ガイド
 title: サービスカタログのベストプラクティス
 ---
 

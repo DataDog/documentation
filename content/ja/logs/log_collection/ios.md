@@ -7,7 +7,6 @@ further_reading:
 - link: logs/explorer
   tag: ドキュメント
   text: ログの調査方法
-kind: ドキュメント
 title: iOS ログ収集
 ---
 ## 概要

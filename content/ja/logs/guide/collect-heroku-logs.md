@@ -1,5 +1,4 @@
 ---
-kind: ガイド
 title: Heroku ログの収集
 ---
 

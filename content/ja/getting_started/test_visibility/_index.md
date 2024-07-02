@@ -23,7 +23,6 @@ further_reading:
 - link: /tests/developer_workflows
   tag: ドキュメント
   text: Datadog における開発者のワークフロー強化について
-kind: ドキュメント
 title: Test Visibility の概要
 ---
 

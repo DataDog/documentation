@@ -14,7 +14,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/log-management-policies/
   tag: ブログ
   text: ログ管理ポリシーの実装に備える
-kind: ガイド
 title: ログ管理のベストプラクティス
 ---
 

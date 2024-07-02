@@ -1,6 +1,5 @@
 ---
 disable_toc: true
-kind: 가이드
 private: true
 title: 범용 서비스 모니터링 가이드
 ---

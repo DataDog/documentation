@@ -6,7 +6,6 @@ further_reading:
 - link: /logs/log_collection/javascript
   tag: ドキュメント
   text: ブラウザログ収集
-kind: ガイド
 title: ブラウザ開発ツール使用時の注意点
 ---
 

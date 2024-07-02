@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/amazon-cloudwatch-metric-streams-datadog/
   tag: 블로그
   text: Metric Streams를 사용하여 Amazon CloudWatch 메트릭 수집하기
-kind: 가이드
 title: Amazon Data Firehose를 사용한 AWS CloudWatch Metric Streams
 ---
 {{% site-region region="us3,gov" %}}

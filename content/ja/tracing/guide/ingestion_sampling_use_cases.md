@@ -3,7 +3,6 @@ further_reading:
 - link: /tracing/guide/trace_ingestion_volume_control/
   tag: ガイド
   text: 取り込みボリュームを制御する方法
-kind: ガイド
 title: トレースサンプリングのユースケース
 ---
 

@@ -12,7 +12,6 @@ further_reading:
 - link: /tracing/guide/
   tag: ''
   text: 모든 가이드
-kind: 가이드
 title: APM 메트릭을 추적 및 상호 연결하기 위해 대시보드 생성
 ---
 

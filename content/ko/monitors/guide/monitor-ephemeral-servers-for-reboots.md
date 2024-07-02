@@ -8,7 +8,6 @@ further_reading:
 - link: /monitors/notify/
   tag: 설명서
   text: 모니터 알림 설정하기
-kind: 가이드
 title: 재부팅을 위해 수명이 짧은 서버를 모니터링
 ---
 

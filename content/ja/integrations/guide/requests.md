@@ -3,7 +3,6 @@ further_reading:
 - link: developers/integrations/agent_integration
   tag: ドキュメント
   text: Datadog インテグレーションを作成する
-kind: ガイド
 title: Datadog インテグレーションをリクエストする
 ---
 
