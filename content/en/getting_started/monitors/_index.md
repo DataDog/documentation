@@ -114,11 +114,11 @@ Leave the other sections as-is. For more information on what each configuration 
 
 ### Permissions
 
-Click **Edit Access** to restrict the editing of your monitor to its creator and to specific roles in your org. Optionally, select `Notify` to be alerted when the monitor is modified.
+Click **Edit Access** to restrict the editing of your monitor to its creator, teams, users, groups, or to specific roles in your organization. Optionally, select `Notify` to be alerted when the monitor is modified.
 
 {{< img src="getting_started/monitors/monitor_permissions.png" alt="Set access permissions for a monitor and options for audit notifications" style="width:80%;" >}}
 
-For more information about roles, see [Role Based Access Control][10].
+For more information, see [Granular Access Control][10].
 
 ## View Monitors and Triage Alerts on Mobile
 
@@ -139,7 +139,7 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 [7]: /monitors/types/metric/?tab=threshold#set-alert-conditions
 [8]: /monitors/notify/variables/
 [9]: /monitors/configuration/?tab=thresholdalert#alert-grouping
-[10]: /account_management/rbac/
+[10]: /account_management/rbac/granular_access/
 [11]: /service_management/mobile/
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
