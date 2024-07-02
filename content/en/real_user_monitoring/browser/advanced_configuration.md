@@ -1,6 +1,5 @@
 ---
 title: Advanced Configuration
-kind: documentation
 aliases:
   - /real_user_monitoring/installation/advanced_configuration/
   - /real_user_monitoring/browser/modifying_data_and_context/
@@ -1020,7 +1019,7 @@ However, this feature comes with some **limitations**:
 [1]: /real_user_monitoring/browser/data_collected/
 [2]: /real_user_monitoring/browser/monitoring_page_performance/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: /real_user_monitoring/browser/#setup
+[4]: /real_user_monitoring/browser/setup
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Event

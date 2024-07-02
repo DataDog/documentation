@@ -40,7 +40,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/hybrid-app-monitoring/
   tag: Blog
   text: Surveiller vos applications mobiles hybrides avec Datadog
-kind: documentation
 title: RUM et Session Replay
 ---
 

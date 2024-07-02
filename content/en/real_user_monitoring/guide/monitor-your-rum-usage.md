@@ -1,6 +1,6 @@
 ---
 title: Monitor Your RUM Usage
-kind: guide
+
 description: 'Learn how to monitor your RUM usage and receive alerts on unexpected spikes and impending thresholds.'
 further_reading:
 - link: '/real_user_monitoring/'

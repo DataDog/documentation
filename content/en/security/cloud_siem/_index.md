@@ -1,6 +1,5 @@
 ---
 title: Cloud SIEM
-kind: documentation
 aliases:
   - /security_monitoring/
   - /security_platform/cloud_siem/security_home/
@@ -25,6 +24,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
   tag: "Blog"
   text: "Build sufficient security coverage for your cloud environment"
+- link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
+  tag: "Blog"
+  text: "Monitor DNS logs for network and security analysis"
 ---
 ## Overview
 

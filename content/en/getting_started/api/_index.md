@@ -1,6 +1,5 @@
 ---
 title: Using Postman with Datadog APIs
-kind: documentation
 aliases:
     - /developers/faq/using-postman-with-datadog-apis
     - /getting_started/using-postman-with-datadog-apis

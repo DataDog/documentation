@@ -1,6 +1,5 @@
 ---
 title: Ingestion Mechanisms
-kind: documentation
 description: "Overview of the mechanisms in the tracer and the Agent that control trace ingestion."
 aliases:
 - /tracing/trace_ingestion/mechanisms
@@ -47,9 +46,7 @@ For instance, if service `A` has more traffic than service `B`, the Agent might 
 
 #### Remote configuration
 
-<div class="alert alert-info"><strong> Remote configuration for ingestion configuration in the Agent is in beta.</strong></div>
-
-Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. Read [How Remote Configuration Works][23] for information about enabling remote configuration in your Agents. With remote configuration, you can change the parameter without having to restart the Agent.
+Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. To get started, set up [Remote Configuration][23] and then configure the `ingestion_reason` parameter from the [Ingestion Control page][5]. Remote Configuration allows you to change the parameter without having to restart the Agent. Remotely set configuration takes precedence over local configurations, including environment variables and settings from `datadog.yaml`.
 
 #### Local configuration
 
@@ -60,8 +57,8 @@ Set Agent's target traces-per-second in its main configuration file (`datadog.ya
 ```
 
 **Notes**:
-- Remotely configured parameters take precedence over local configurations - environment variables and `datadog.yaml` configuration.
 - The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries. It has no effect on other tracing libraries such as OpenTelemetry SDKs.
+- The maximum traces per second is a target, not a fixed value. In reality, it fluctuates depending on traffic spikes and other factors.
 
 All the spans from a trace sampled using the Datadog Agent [automatically computed sampling rates](#in-the-agent) are tagged with the ingestion reason `auto`. The `ingestion_reason` tag is also set on [usage metrics][2]. Services using the Datadog Agent default mechanism are labeled as `Automatic` in the [Ingestion Control Page][5] Configuration column.
 
@@ -69,55 +66,66 @@ All the spans from a trace sampled using the Datadog Agent [automatically comput
 `ingestion_reason: rule`
 
 For more granular control, use tracing library sampling configuration options:
-- Set a specific **sampling rate to apply to all root services** for the library, overriding the Agent's [default mechanism](#in-the-agent).
-- Set a **sampling rate to apply to specific root services**.
+- Set a specific **sampling rate to apply to the root of the trace**, by service, and/or resource name, overriding the Agent's [default mechanism](#in-the-agent).
 - Set a **rate limit** on the number of ingested traces per second. The default rate limit is 100 traces per second per service instance (when using the Agent [default mechanism](#in-the-agent), the rate limiter is ignored).
 
-Sampling controls can be set for only root services.
-
-**Note**: These rules are also head-based sampling controls. If the traffic for a service is higher than the configured maximum traces per second, then traces are dropped at the root. It does not create incomplete traces.
+**Note**: Sampling rules are also head-based sampling controls. If the traffic for a service is higher than the configured maximum traces per second, then traces are dropped at the root. It does not create incomplete traces.
 
 The configuration can be set by environment variables or directly in the code:
 
 {{< tabs >}}
 {{% tab "Java" %}}
-For Java applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+**Remote configuration**
 
-For example, to send 20% of the traces for the service named `my-service`:
+<div class="alert alert-info"><strong>Resource-based sampling rules are in Beta</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.34.0">1.34.0</a>, for Java applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://forms.gle/WCG57yTCG27BCBB67">link</a>.</div>
+
+Read more about how to remotely configure sampling rates by service and resource in the [Resource-based sampling guide][1].
+
+**Note**: Remotely set configuration takes precedence over local configuration.
+
+**Local configuration**
+
+For Java applications, set by-service and by-resource (starting from version [v1.26.0][3] for resource-based sampling) sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+
+For example, to capture 100% of traces for the resource `GET /checkout` from the service `my-service`, and 20% of other endpoints' traces, set:
 
 ```
 # using system property
-java -Ddd.trace.sampling.rules='[{\"service\": \"my-service\", \"sample_rate\":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
+java -Ddd.trace.sampling.rules='[{\"service\": \"my-service\", \"resource\": \"GET /checkout\", \"sample_rate\":1},{\"service\": \"my-service\", \"sample_rate\":0.2}]' -javaagent:dd-java-agent.jar -jar my-app.jar
 
 # using environment variables
-export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.2}]'
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource":"GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
 The service name value is case sensitive and must match the case of the actual service name.
 
-<div class="alert alert-info"><strong>Beta</strong>: Starting in version 1.18.3, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set per-service <code>DD_TRACE_SAMPLE_RATE</code> in the <a href="/tracing/service_catalog">Service Catalog</a> UI.</div>
-
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
-Read more about sampling controls in the [Java tracing library documentation][1].
+**Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
 
-[1]: /tracing/trace_collection/dd_libraries/java
+Read more about sampling controls in the [Java tracing library documentation][2].
+
+[1]: /tracing/guide/resource_based_sampling
+[2]: /tracing/trace_collection/dd_libraries/java
+[3]: https://github.com/DataDog/dd-trace-java/releases/tag/v1.26.0
 {{% /tab %}}
 {{% tab "Python" %}}
-For Python applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+For Python applications, set by-service and by-resource (starting from version [v2.8.0][1] for resource-based sampling) sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
 
-For example, to send 50% of the traces for the service named `my-service` and 10% for the rest of the traces:
+For example, to capture 100% of traces for the resource `GET /checkout` from the service `my-service`, and 20% of other endpoints' traces, set:
 
 ```
-export DD_TRACE_SAMPLE_RATE=0.1
-export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource": "GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
-Read more about sampling controls in the [Python tracing library documentation][1].
+**Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
 
-[1]: /tracing/trace_collection/dd_libraries/python
+Read more about sampling controls in the [Python tracing library documentation][2].
+
+[1]: https://github.com/DataDog/dd-trace-py/releases/tag/v2.8.0
+[2]: /tracing/trace_collection/dd_libraries/python
 {{% /tab %}}
 {{% tab "Ruby" %}}
 For Ruby applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
@@ -136,29 +144,33 @@ Read more about sampling controls in the [Ruby tracing library documentation][1]
 [1]: /tracing/trace_collection/dd_libraries/ruby#sampling
 {{% /tab %}}
 {{% tab "Go" %}}
-For Go applications, set a global sampling rate for the library using the `DD_TRACE_SAMPLE_RATE` environment variable. Set by-service sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+**Remote configuration**
 
-For example, to send 50% of the traces for the service named `my-service` and 10% of the rest of the traces:
+<div class="alert alert-info"><strong>Resource-based sampling rules are in Beta</strong>: Starting from version <a href="https://github.com/DataDog/dd-trace-go/releases/tag/v1.63.1">1.63.1</a>, for Go applications, set by-service and by-resource sampling rates from the <a href="/tracing/trace_pipeline/ingestion_controls#configure-the-service-ingestion-rate">Ingestion Control Page</a> UI. Request access to the feature via this <a href="https://forms.gle/WCG57yTCG27BCBB67">link</a>.</div>
+
+Read more about how to remotely configure sampling rates by service and resource in this [article][3].
+
+**Note**: The remotely set configuration takes precedence over local configuration.
+
+**Local configuration**
+
+For Go applications, set by-service and by-resource (starting from version [v1.60.0][2] for resource-based sampling) sampling rates with the `DD_TRACE_SAMPLING_RULES` environment variable.
+
+For example, to capture 100% of traces for the resource `GET /checkout` from the service `my-service`, and 20% of other endpoints' traces, set:
 
 ```
-export DD_TRACE_SAMPLE_RATE=0.1
-export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.5}]'
-```
-
-Starting from version [v1.60.0][2], for Go applications, set by-resource and by-tags sampling rules with the `DD_TRACE_SAMPLING_RULES` environment variable.
-For example, to send 1% of the traces for the resource `GET api/list_documents` and 10% of the rest of the traces:
-
-```
-export DD_TRACE_SAMPLE_RATE=0.1
-export DD_TRACE_SAMPLING_RULES='[{"resource": `GET api/list_documents`, "sample_rate": 0.01}]'
+export DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "resource": "GET /checkout", "sample_rate": 1},{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
+
+**Note**: The use of `DD_TRACE_SAMPLE_RATE` is deprecated. Use `DD_TRACE_SAMPLING_RULES` instead. For instance, if you already set `DD_TRACE_SAMPLE_RATE` to `0.1`, set `DD_TRACE_SAMPLING_RULES` to `[{"sample_rate":0.1}]` instead.
 
 Read more about sampling controls in the [Go tracing library documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/go
 [2]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
+[3]: /tracing/guide/resource_based_sampling
 {{% /tab %}}
 {{% tab "Node.js" %}}
 For Node.js applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
@@ -271,7 +283,7 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 
 <div class="alert alert-warning"> This feature is currently in Beta. Reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a> to request access to the functionality.</div>
 
-The error sampling is remotely configurable if your using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to enable the collection of rare spans without having to restart the Datadog Agent.
+The error sampling is remotely configurable if you're using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to enable the collection of rare spans without having to restart the Datadog Agent.
 
 #### Datadog Agent 6/7.41.0 and higher
 
@@ -294,7 +306,7 @@ The rare sampler sends a set of rare spans to Datadog. It catches combinations o
 
 <div class="alert alert-warning"> This feature is currently in Beta. Reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a> to request access to the functionality.</div>
 
-The rare sampling rate is remotely configurable if your using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to change the parameter value without having to restart the Datadog Agent.
+The rare sampling rate is remotely configurable if you're using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to change the parameter value without having to restart the Datadog Agent.
 
 #### Datadog Agent 6/7.41.0 and higher
 

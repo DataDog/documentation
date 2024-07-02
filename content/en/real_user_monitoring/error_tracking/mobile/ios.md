@@ -1,6 +1,5 @@
 ---
 title: iOS Crash Reporting and Error Tracking
-kind: documentation
 aliases:
 - /real_user_monitoring/ios/crash_reporting/
 - /real_user_monitoring/error_tracking/ios
@@ -152,6 +151,10 @@ To enable app hang monitoring:
 To disable app hang monitoring, update the initialization snippet and set the `appHangThreshold` parameter to `nil`.
 
 ## Get deobfuscated stack traces
+
+Mapping files are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding mapping files. This ensures that regardless of when the mapping file was uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
+
+For iOS applications, the matching of stack traces and symbol files relies on their `uuid` field.
 
 ### Symbolicate crash reports
 

@@ -1,6 +1,6 @@
 ---
 title: Events with DogStatsD
-kind: guide
+
 description: Overview of the features of DogStatsD, including data types and tagging.
 aliases:
 - /developers/events/dogstatsd/

@@ -1,6 +1,6 @@
 ---
 title: Upgrade RUM Mobile SDKs
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
@@ -24,6 +24,8 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
 
+[1]: /real_user_monitoring/session_replay/mobile/
+
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -32,6 +34,8 @@ The migration from v1 to v2 represents a migration from a monolith SDK into a mo
 SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the Android SDK, and other Datadog products.
 
 SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
+
+[1]: /real_user_monitoring/session_replay/mobile/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -330,7 +334,7 @@ Semantic Issue (Xcode): Duplicate interface definition for class 'DatadogSdkPlug
 /Users/exampleuser/Projects/test_app/build/ios/Debug-iphonesimulator/datadog_flutter_plugin/datadog_flutter_plugin.framework/Headers/DatadogSdkPlugin.h:6:0
 ```
 
-Try performing `flutter clean` && `flutter pub get` and rebuilding. This usually resolves the issue.
+Try performing `flutter clean && flutter pub get` and rebuilding. This usually resolves the issue.
 
 ### Duplicate classes (Android)
 
@@ -865,5 +869,3 @@ Additionally, event mappers no longer allow you to modify their view names. To r
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /real_user_monitoring/session_replay/mobile/

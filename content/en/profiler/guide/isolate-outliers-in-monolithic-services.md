@@ -1,6 +1,5 @@
 ---
 title: Isolate Outliers in Monolithic Services
-kind: guide
 further_reading:
 - link: "/profiler"
   tag: "Documentation"

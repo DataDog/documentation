@@ -1,6 +1,5 @@
 ---
 title: Tracing Docker Applications
-kind: Documentation
 aliases:
     - /tracing/docker/
     - /tracing/setup/docker/
@@ -117,7 +116,7 @@ Use the following environment variables to configure tracing for the Docker Agen
 
 `DD_APM_FILTER_TAGS_REQUIRE`       
 : optional - _object_
-<br/>Defines rules for tag-based trace filtering. To be sent to Datadog, traces must have these these tags. See [Ignoring Unwanted Resources in APM][5]. 
+<br/>Defines rules for tag-based trace filtering. To be sent to Datadog, traces must have these tags. See [Ignoring Unwanted Resources in APM][5]. 
 
 `DD_APM_FILTER_TAGS_REGEX_REQUIRE` 
 : optional - _object_

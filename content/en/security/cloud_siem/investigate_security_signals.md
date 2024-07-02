@@ -1,6 +1,5 @@
 ---
 title: Investigate Security Signals
-kind: documentation
 disable_toc: false
 further_reading:
   - link: "/cloud_siem/detection_rules/"
@@ -18,7 +17,13 @@ A Cloud SIEM security signal is created when Datadog detects a threat while anal
 You must have the `Security Signals Write` permission to modify a security signal, such as change the state and view signal action history in [Audit Trail][2]. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Datadog Security in the Cloud Security.
 
 ## Signal explorer
+## Signal explorer
 
+In the Signals Explorer, use the facet panel or search bar to group and filter your signals. For example, you can view signals by [their severity](#view-signals-by-severity), [detection rules](#view-signals-by-detection-rules), and [MITRE ATT&CK](#view-signals-by-mitre-attck). After you have filtered your signals to your use case, create a [saved view][4] so that you can reload your query later.
+
+### View signals by severity
+
+To view all signals with specific severities, for example `HIGH` and `CRITICAL`, that are in the `open` or `under review` triage state, do one of the following:
 In the Signals Explorer, use the facet panel or search bar to group and filter your signals. For example, you can view signals by [their severity](#view-signals-by-severity), [detection rules](#view-signals-by-detection-rules), and [MITRE ATT&CK](#view-signals-by-mitre-attck). After you have filtered your signals to your use case, create a [saved view][4] so that you can reload your query later.
 
 ### View signals by severity
@@ -32,6 +37,11 @@ To add the column **Signal State**, select the **Options** button in the top rig
 
 Use different visualizations to investigate the threat activity in your environment. For example, in the **Visualize by** field, you can group signals by:
 
+- **Rules List** to see the volume and alerting trends across the different detection rules.
+- **Timeseries** to view signal trends over time.
+- **Top List** to see signals with the highest to lowest number of occurrences.
+- **Table** to see signals by the specified tag key (for example, `source`, `technique`, and so on).
+- **Pie Chart** to see the relative volume of each of the detection rules.
 - **Rules List** to see the volume and alerting trends across the different detection rules.
 - **Timeseries** to view signal trends over time.
 - **Top List** to see signals with the highest to lowest number of occurrences.

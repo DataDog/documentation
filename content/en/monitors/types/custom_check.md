@@ -1,6 +1,5 @@
 ---
 title: Service Check Monitor
-kind: documentation
 description: "Monitor status of arbitrary service checks."
 aliases :
     - /monitors/monitor_types/custom_check
@@ -87,7 +86,7 @@ See the [Monitor configuration][7] documentation for information on [No data][8]
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][11] page.
+For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][11] page.
 
 ## Further Reading
 

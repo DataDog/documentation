@@ -1,6 +1,5 @@
 ---
 title: Metric Monitor
-kind: documentation
 description: "Compare values of a metric with a user defined threshold"
 aliases:
 - /monitors/monitor_types/metric
@@ -210,7 +209,7 @@ For instructions on the advanced alert options (no data, auto resolve), see the 
 
 ## Notifications
 
-For instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] and [Monitor configuration][8] pages.
+For instructions on the **Configure notifications and automations** section, see the [Notifications][7] and [Monitor configuration][8] pages.
 
 ## Further Reading
 
@@ -222,4 +221,4 @@ For instructions on the **Say what's happening** and **Notify your team** sectio
 [5]: /monitors/configuration/?tab=thresholdalert#evaluation-window
 [6]: /monitors/configuration/#advanced-alert-conditions
 [7]: /monitors/notify/
-[8]: /monitors/configuration/?tab=thresholdalert#notify-your-team
+[8]: /monitors/configuration/?tab=thresholdalert#configure-notifications-and-automations

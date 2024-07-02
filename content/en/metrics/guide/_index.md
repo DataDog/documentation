@@ -1,6 +1,5 @@
 ---
 title: Metrics Guides
-kind: guide
 description: Index of Metrics Guides
 aliases:
     - /metrics/custom_metrics/guide/

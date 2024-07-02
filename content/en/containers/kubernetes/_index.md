@@ -1,6 +1,5 @@
 ---
 title: Kubernetes
-kind: documentation
 aliases:
     - /guides/basic_agent_usage/kubernetes
     - /agent/basic_agent_usage/kubernetes

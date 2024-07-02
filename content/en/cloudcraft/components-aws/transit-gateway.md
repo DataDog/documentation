@@ -1,6 +1,5 @@
 ---
 title: "Transit Gateway Component"
-kind: guide
 ---
 ## Overview
 

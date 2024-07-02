@@ -1,6 +1,5 @@
 ---
 title: Test Visibility in Datadog
-kind: documentation
 aliases:
   - /continuous_integration/explore_tests/
   - /continuous_integration/guides/test_configurations/
@@ -65,13 +64,14 @@ In addition to tests, Test Visibility provides visibility over the whole testing
 | {{< ci-details title="Codeowner by test" >}}Automatic detection of the owner of a test file based on the CODEOWNERS file.{{< /ci-details >}}                                                                     | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} (partially)  |
 | {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                        | {{< X >}} |       {{< X >}}      | {{< X >}} (only start) | {{< X >}} | {{< X >}} (only start) | {{< X >}} | {{< X >}} (only start) |
 | {{< ci-details title="CI and git info" >}}Automatic collection of git and CI environment metadata, such as CI provider, git commit SHA or pipeline URL.{{< /ci-details >}}                                       | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
-| {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for Intelligent Test Runner.{{< /ci-details >}}                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} |           | {{< X >}} |       {{< X >}}        |
+| {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for Intelligent Test Runner.{{< /ci-details >}}                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Intelligent Test Runner *" >}}Capability to enable Intelligent Test Runner, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}}                    | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} |  {{< X >}}     | {{< X >}} |                        |
 | {{< ci-details title="Code coverage support" >}}Ability to report total code coverage metrics.{{< /ci-details >}}                                                                                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}}       |           | {{< X >}} |   {{< X >}} (manual)   |
 | {{< ci-details title="Benchmark tests support" >}}Automatic detection of performance statistics for benchmark tests.{{< /ci-details >}}                                                                          | {{< X >}} |                      |                        | {{< X >}} |           | {{< X >}} |                        |
 | {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}                                                                                                     | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}} | {{< X >}} |                        |
-| {{< ci-details title="Early flake detection *" >}}Automatically retry new tests to detect flakiness.{{< /ci-details >}}                                                                                          |           |       {{< X >}}      |       {{< X >}}        |           |           |           |                        |
-| {{< ci-details title="Selenium RUM integration" >}}Automatically link browser sessions to test cases when testing RUM-instrumented applications.{{< /ci-details >}}                                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |           |           |                        |
+| {{< ci-details title="Early flake detection *" >}}Automatically retry new tests to detect flakiness.{{< /ci-details >}}                                                                                          | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |           |           |                        |
+| {{< ci-details title="Auto test retries *" >}}Automatically retry failed tests up to N times to avoid failing the build due to test flakiness.{{< /ci-details >}}                                               |           |       {{< X >}}      |                        |           |           |           |                        |
+| {{< ci-details title="Selenium RUM integration" >}}Automatically link browser sessions to test cases when testing RUM-instrumented applications.{{< /ci-details >}}                                              | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           | {{< X >}} |           |                        |
 
 \* The feature is opt-in, and needs to be enabled on the [**Test Service Settings** page][5].
 
@@ -155,7 +155,7 @@ When creating a [dashboard][6] or a [notebook][7], you can use CI test data in y
 
 ## Alert on test data
 
-When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][3], click **Create Monitor** to create a [CI Test monitor][4].
+When you're evaluating failed or flaky tests, or the performance of a CI test, you can export your search query in the [Test Visibility Explorer][3] to a [CI Test monitor][4] by clicking the **Export** button.
 
 ## Further reading
 

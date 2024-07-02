@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM for Java
-kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
@@ -27,8 +26,6 @@ further_reading:
 You can monitor application security for Java apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
-
-{{% appsec-getstarted-with-rc %}}
 
 ## Enabling threat detection
 ### Get started

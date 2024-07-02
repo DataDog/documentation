@@ -17,7 +17,7 @@ Use one of the following methods to enable CSM for your AWS accounts:
 #### Amazon Web Services integration page
 
 1. On the [**Amazon Web Services Integration** page][4], select an AWS account.
-2. On the **Resource Collection** tab, select the **Cloud Security Posture Management Collection** checkbox.
+2. On the **Resource Collection** tab, select **Enable Cloud Security Management**.
 3. Click **Save**.
 
 [1]: https://docs.datadoghq.com/integrations/amazon_web_services/

@@ -1,6 +1,5 @@
 ---
 title: NDM Profiles
-kind: documentation
 aliases:
     - /network_performance_monitoring/devices/profiles/
 further_reading:
@@ -12,51 +11,51 @@ further_reading:
   text: "Monitor SNMP with Datadog"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
-{{< /site-region >}}
-
 ## Overview
 
-Network Device Monitoring uses profiles to tell the Datadog Agent the metrics and associated tags to collect. A profile is a collection of OIDs associated with a device.
+Network Device Monitoring uses profiles to tell the Datadog Agent the metrics and associated tags to collect. A profile is a collection of OIDs associated with a device. 
 
 ## Configuration
 
 By default, all profiles in the Agent configuration directory are loaded. To customize the specific profiles for collection, explicitly reference them by filename under `definition_file`, or provide an inline list under `definition`. Any of the Datadog profiles can be listed by name. Additional custom profiles can be referenced by the file path in the config, or placed in the configuration directory.
 
-**Note**: The generic profile is [generic-device.yaml][1], which supports routers, switches, etc.
+**Note**: The generic profile is [generic-device.yaml][1], which supports routers, switches, and other devices.
+
+<div class="alert alert-info">
+If you would like to build a device profile using the GUI based experience, review the <a href="/network_monitoring/devices/guide/device_profiles/">Getting Started with Device Profiles</a> documentation.
+</div>
 
 ### sysOID mapped devices
 
-Profiles allow Network Device Monitoring to reuse metric definitions across several device types or instances. Profiles define metrics the same way as instances, either inline in the configuration file or in separate files. Each instance can only match a single profile. For example, you can define a profile in the `init_config` section:
+Profiles allow Network Device Monitoring to reuse metric definitions across several device types or instances. Profiles define which metrics to collect and how to transform them into Datadog metrics. Each profile is expected to monitor a class of similar devices from the same vendor. They are automatically used by the Datadog Agent by comparing the sysObjectIds of the network device with the ones defined in the profile file.
+
+The Datadog Agent provides out-of-the-box profiles in the `conf.d/snmp.d/default_profiles` directory. This directory is cleaned and reset upon Agent upgrades so do not save anything there. You can write your own custom profiles and extend existing ones by putting files in the `conf.d/snmp.d/profiles` directory.
+
+The following example profile is used on any network device whose `sysobjectid` either _is_ `1.3.6.1.4.1.232.9.4.10` or _starts with_ `1.3.6.1.4.1.232.9.4.2.`:
 
 ```yaml
-init_config:
-  profiles:
-    my-profile:
-      definition:
-        - MIB: IP-MIB
-          table: ipSystemStatsTable
-          symbols:
-            - ipSystemStatsInReceives
-          metric_tags:
-            - tag: ipversion
-          index: 1
-      sysobjectid: '1.3.6.1.4.1.8072.3.2.10'
+sysobjectid:
+ - 1.3.6.1.4.1.232.9.4.10
+ - 1.3.6.1.4.1.232.9.4.2.*
+
+metrics:
+  - MIB: CPQHLTH-MIB
+    symbol:
+      OID: 1.3.6.1.4.1.232.6.2.8.1.0
+      name: cpqHeSysUtilLifeTime
 ```
 
-Then either reference it explicitly by name, or use sysObjectID detection:
+If you need different metrics for network devices that share the same `sysobjectid`, you can write profiles without any `sysobjectid`, and configure the `profile` option in the SNMP configuration.
 
 ```yaml
 instances:
    - ip_address: 192.168.34.10
-     profile: my-profile
+     profile: my-profile1
    - ip_address: 192.168.34.11
-     # Don't need anything else here, the check will query the sysObjectID
-     # and use the profile if it matches.
+     profile: my-profile2
+   - ip_address: 192.168.34.13
+     # For this device, the Agent will fetch the sysObjectID of the device and use the closest match
 ```
-
-If necessary, additional metrics can be defined in the instances. These metrics are collected in addition to those in the profile.
 
 ### Metric definition by profile
 
@@ -97,3 +96,5 @@ See the [Profile Format Reference][5] for more information about profiles format
 [3]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/default_profiles
 [4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/networkdevice/metadata/payload.go#L51-L76
 [5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
+[6]: https://app.datadoghq.com/devices/
+[7]: /network_monitoring/devices/guide/device_profiles/

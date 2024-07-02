@@ -24,7 +24,6 @@ further_reading:
 - link: https://securitylabs.datadoghq.com/
   tag: Laboratorios de seguridad
   text: Investigación sobre seguridad, informes, consejos y vídeos de Datadog
-kind: documentación
 title: Empezando con Cloud Security Management
 ---
 

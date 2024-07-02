@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting
-kind: Documentation
 ---
 
 ## Overview

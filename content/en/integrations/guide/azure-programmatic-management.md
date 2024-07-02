@@ -1,6 +1,6 @@
 ---
 title: Azure Integration Programmatic Management Guide
-kind: guide
+
 description: "Steps for programmatically managing the Azure integration with Datadog"
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/azure/"
@@ -30,7 +30,7 @@ Follow these steps to deploy the integration through [Terraform][13].
 
 2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
     * `tenant_name`: Your Azure Active Directory ID.
-    * `client_id`: Your Azure web application secret key.
+    * `client_id`: Your Azure application (client) ID.
     * `client_secret`: Your Azure web application secret key.
 
    See the [Datadog Azure integration resource][17] page in the Terraform registry for further example usage and the full list of optional parameters, as well as additional Datadog resources.
@@ -147,4 +147,4 @@ See the [Virtual Machine Extension resource][10] in the Terraform registry for m
 [17]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
 [18]: /logs/guide/azure-logging-guide
 [19]: https://app.datadoghq.com/monitors/recommended
-[20]: /monitors/notify/#notify-your-team
+[20]: /monitors/notify/#configure-notifications-and-automations

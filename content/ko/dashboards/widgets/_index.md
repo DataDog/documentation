@@ -7,7 +7,6 @@ further_reading:
 - link: /dashboards/guide/context-links/
   tag: 설명서
   text: 커스텀 링크
-kind: 설명서
 title: 위젯
 ---
 
@@ -85,7 +84,7 @@ title: 위젯
         img="dashboards/widgets/icons/run-workflow_light_small.svg">}} 워크플로우 실행{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### 모니터 관리
+### 아키텍처
 {{< whatsnext desc="인프라스트럭처 및 아키텍처 데이터 시각화: ">}}
     {{< nextlink href="/dashboards/widgets/hostmap" 
         img="dashboards/widgets/icons/host-map_light_large.png">}} 호스트맵{{< /nextlink >}}
@@ -96,14 +95,7 @@ title: 위젯
 {{< /whatsnext >}}
 
 ### 성능 및 안정성
-{{< whatsnext desc="사이트 안정성 시각화: ">}}
-    {{< nextlink href="/dashboards/widgets/profiling_flame_graph"
-        img="dashboards/widgets/icons/profiling_flame_graph.svg">}} 화염 그래프 프로파일링{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo" 
-        img="dashboards/widgets/icons/slo-summary_light_large.png">}} 서비스 수준 목표(SLO) 요약{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo_list" 
-        img="dashboards/widgets/icons/slo-list_light_large.png">}} 서비스 수준 목표(SLO) 목록{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< whatsnext desc="사이트 안정성 시각화: ">}} {{< nextlink href="/dashboards/widgets/profiling_flame_graph" img="dashboards/widgets/icons/profiling_flame_graph.svg">}} 불꽃 그래프 프로파일링 {{< /nextlink >}} {{< nextlink href="/dashboards/widgets/slo" img="dashboards/widgets/icons/slo-summary_light_large.png">}} 서비스 수준 목표(SLO) 요약 {{< /nextlink >}} {{< nextlink href="/dashboards/widgets/slo_list" img="dashboards/widgets/icons/slo-list_light_large.png">}} 서비스 수준 목표(SLO){{< /nextlink >}}{{< /whatsnext >}}
 
 ## 전체 화면
 

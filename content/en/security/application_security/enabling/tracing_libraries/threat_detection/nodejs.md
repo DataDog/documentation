@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM for NodeJs
-kind: documentation
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
@@ -26,8 +25,6 @@ further_reading:
 You can monitor application security for Node.js apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
-
-{{% appsec-getstarted-with-rc %}}
 
 ## Enabling threat detection
 ### Get started

@@ -1,6 +1,6 @@
 ---
 title: Enrich And Control Browser RUM Data With beforeSend
-kind: guide
+
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'

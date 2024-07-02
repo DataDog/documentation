@@ -1,6 +1,5 @@
 ---
 title: IdP 始動の SAML を使用した Datadog モバイルアプリ
-kind: documentation
 is_public: true
 aliases:
   - /ja/account_management/faq/how-do-i-use-the-mobile-app-with-saml/

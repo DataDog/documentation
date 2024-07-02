@@ -15,7 +15,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Terraform でテストを作成・管理する
-kind: documentation
 title: Continuous Testing 設定
 ---
 {{< jqmath-vanilla >}}

@@ -1,6 +1,5 @@
 ---
 title: Log Volume Control for the Sumo Logic Hosted Collector HTTP Logs Source
-kind: document
 disable_toc: false
 ---
 
@@ -11,8 +10,6 @@ This document walks you through the following steps to set up the Observability 
 1. The [prerequisites](#prerequisites) needed to set up Observability Pipelines
 1. [Setting up Observability Pipelines](#set-up-observability-pipelines)
 1. [Sending logs to the Observability Pipelines Worker over Sumo Logic HTTP Source](#send-logs-to-the-observability-pipelines-worker-over-sumo-logic-http-source)
-
-{{< img src="observability_pipelines/use_cases/log_volume_control.png" alt="The log sources, processors, and destinations available for the split logs use case" width="100%" >}}
 
 ## Prerequisites
 
@@ -73,6 +70,11 @@ Enter the following information based on your selected logs destination.
 {{% tab "Edit fields" %}}
 
 {{% observability_pipelines/processors/remap %}}
+
+{{% /tab %}}
+{{% tab "Sensitive Data Scanner" %}}
+
+{{% observability_pipelines/processors/sensitive_data_scanner %}}
 
 {{% /tab %}}
 {{< /tabs >}}

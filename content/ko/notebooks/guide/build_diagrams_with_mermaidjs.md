@@ -1,6 +1,5 @@
 ---
 disable_toc: false
-kind: 가이드
 title: Mermaid JS를 사용한 다이어그램 빌드
 ---
 

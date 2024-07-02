@@ -5,7 +5,6 @@ further_reading:
 - link: /serverless/installation/nodejs
   tag: Documentation
   text: Instrumenter des applications Node.js
-kind: documentation
 title: Tracing Lambda Node.js et compatibilité de Webpack
 ---
 

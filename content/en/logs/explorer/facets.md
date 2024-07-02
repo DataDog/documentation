@@ -1,6 +1,5 @@
 ---
 title: Log Facets
-kind: documentation
 description: 'Log Facets and Facet Panel'
 aliases:
     - /logs/facets

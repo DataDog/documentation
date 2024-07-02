@@ -36,7 +36,7 @@ integration_id: helm
 integration_title: Helm チェック
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: 2.0.0
 name: helm
 public_title: Helm チェック

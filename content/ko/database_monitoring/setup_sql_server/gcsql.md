@@ -4,7 +4,6 @@ further_reading:
 - link: /integrations/sqlserver/
   tag: 설명서
   text: SQL Server 통합
-kind: 설명서
 title: Google Cloud SQL 관리형 SQL Server에서 데이터베이스 모니터링 설정
 ---
 

@@ -40,7 +40,7 @@ title: 튜토리얼 - 컨테이너의 파이썬(Python) 애플리케이션 및 �
 시스템에 Datadog 에이전트를 설치하지 않은 경우, [**통합 > 에이전트**][5]로 이동하여 운영체제를 선택합니다. 예를 들어, 대부분의 Linux 플랫폼은 다음 스크립트를 실행하여 `<YOUR_API_KEY>`을 [Datadog API 키][3]로 대체하여 에이전트를 설치합니다.
 
 {{< code-block lang="shell" >}}
-DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
 {{< /code-block >}}
 
 `datadoghq.com` 이외의 Datadog 사이트로 데이터를 전송하려면 `DD_SITE` 환경변수를 [Datadog 사이트][6]로 교체합니다.

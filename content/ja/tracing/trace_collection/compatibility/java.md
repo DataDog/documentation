@@ -10,7 +10,6 @@ further_reading:
 - link: tracing/trace_collection/dd_libraries/java
   tag: ドキュメント
   text: アプリケーションのインスツルメンテーション
-kind: documentation
 title: Java 互換性要件
 type: multi-code-lang
 ---

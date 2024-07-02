@@ -8,7 +8,6 @@ further_reading:
 - link: dashboards/guide/maintain-relevant-dashboards
   tag: ガイド
   text: 適切なダッシュボードを維持するためのベストプラクティス
-kind: ドキュメント
 title: ダッシュボードリスト
 ---
 

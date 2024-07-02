@@ -9,7 +9,7 @@ further_reading:
   tag: Documentation
   text: Afficher les données JMX dans jConsole et configurer votre jmx.yaml pour les
     recueillir
-kind: guide
+
 title: Utiliser les expressions régulières Bean pour filtrer vos métriques JMX et
   spécifier des tags supplémentaires
 ---

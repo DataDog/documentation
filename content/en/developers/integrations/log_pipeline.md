@@ -15,7 +15,6 @@ further_reading:
 - link: /logs/log_configuration/pipelines/
   tag: Documentation
   text: Learn about log pipelines
-kind: documentation
 title: Create a Log Pipeline
 description: Learn how to create a Datadog Log integration.
 ---
@@ -144,9 +143,10 @@ After you've downloaded these files, navigate to your [integration's pull reques
 
 Validations are run automatically in your pull request. 
 
-Two common validation errors are:
+Three common validation errors are:
 1. The `id` field in both YAML files: Ensure that the `id` field matches the `app_id` field in your integration's `manifest.json` file to connect your pipeline to your integration. 
 2. Not providing the result of running the raw logs you provided against your pipeline. If the resulting output from the validation is accurate, take that output and add it to the `result` field in the YAML file containing the raw example logs.
+3. If you send `service` as a parameter, instead of sending it in the log payload, you must include the `service` field below your log samples within the yaml file.
 
 
 Once validations pass, Datadog creates and deploys the new log integration assets. If you have any questions, add them as comments in your pull request. A Datadog team member will respond within 2-3 business days.

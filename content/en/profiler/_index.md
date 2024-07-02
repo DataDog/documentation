@@ -1,6 +1,5 @@
 ---
 title: Continuous Profiler
-kind: Documentation
 aliases:
     - /tracing/profiling/
     - /tracing/profiler/
@@ -17,6 +16,9 @@ further_reading:
     - link: '/developers/guide/data-collection-resolution-retention/'
       tag: 'Documentation'
       text: 'Data collection, resolution, and retention'
+    - link: 'https://www.datadoghq.com/blog/source-code-preview/'
+      tag: 'Blog'
+      text: 'Focus on code that matters with source code previews in Continuous Profiler'      
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tag: 'Blog'
       text: 'Introducing always-on production profiling in Datadog'

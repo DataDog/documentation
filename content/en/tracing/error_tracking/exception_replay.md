@@ -1,6 +1,5 @@
 ---
 title: Error Tracking Exception Replay
-kind: documentation
 is_beta: true
 description: Learn about Exception Replay in Error Tracking.
 further_reading:
