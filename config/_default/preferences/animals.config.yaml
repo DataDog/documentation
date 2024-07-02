@@ -1,0 +1,6 @@
+domestic_animal_options:
+  - id: dog
+    display_name: Dog
+    default: true
+  - id: cat
+    display_name: Cat

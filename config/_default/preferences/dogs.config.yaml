@@ -1,0 +1,8 @@
+dog_breed_options:
+  - id: mutt
+    display_name: Mutt
+    default: true
+  - id: golden_retriever
+    display_name: Golden Retriever
+  - id: chihuahua
+    display_name: Chihuahua

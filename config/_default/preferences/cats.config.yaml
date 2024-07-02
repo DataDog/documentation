@@ -1,0 +1,8 @@
+cat_breed_options:
+  - id: siamese
+    display_name: Siamese
+    default: true
+  - id: persian
+    display_name: Persian
+  - id: maine_coon
+    display_name: Maine Coon
