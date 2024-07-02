@@ -104,7 +104,7 @@ Click the **Share** button and select **Share event** to share a link to the cur
 Use the **Recent Changes** tab on a resource's side panel to see a 7-day history of changes to the resource and its configuration. To forward change events from your cloud environments, follow the links for your cloud providers in the sections below.
 
 **Prerequisites**: 
-   - You have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [integration tile][7]. 
+   - You have selected to `Enable Resource Collection` under the **Resource Collection** tab on the [cloud provider integration tile][7]. 
    - You have [access to the private beta][9].
 
 #### AWS
