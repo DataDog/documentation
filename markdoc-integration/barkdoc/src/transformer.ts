@@ -1,0 +1,89 @@
+import { Class } from './schema-types/class';
+import { Id } from './schema-types/id';
+import { isPromise } from './utils';
+import type {
+  Config,
+  MaybePromise,
+  Node,
+  NodeType,
+  RenderableTreeNodes,
+  Schema,
+  Transformer,
+} from './types';
+import { buildTag } from './utils';
+
+type AttributesSchema = Schema['attributes'];
+
+export const globalAttributes: AttributesSchema = {
+  class: { type: Class, render: true },
+  id: { type: Id, render: true },
+};
+
+export default {
+  findSchema(node: Node, { nodes = {}, tags = {} }: Config = {}) {
+    return node.tag ? tags[node.tag] : nodes[node.type as NodeType];
+  },
+
+  attributes(node: Node, config: Config = {}) {
+    const schema = this.findSchema(node, config) ?? {};
+    const output: Record<string, any> = {};
+
+    const attrs = { ...globalAttributes, ...schema.attributes };
+    for (const [key, attr] of Object.entries(attrs)) {
+      if (attr.render == false) continue;
+
+      const name = typeof attr.render === 'string' ? attr.render : key;
+
+      let value = node.attributes[key];
+      if (typeof attr.type === 'function') {
+        const instance: any = new attr.type();
+        if (instance.transform) {
+          value = instance.transform(value, config);
+        }
+      }
+      value = value === undefined ? attr.default : value;
+
+      if (value === undefined) continue;
+      output[name] = value;
+    }
+
+    if (schema.slots) {
+      for (const [key, slot] of Object.entries(schema.slots)) {
+        if (slot.render === false) continue;
+        const name = typeof slot.render === 'string' ? slot.render : key;
+        if (node.slots[key]) output[name] = this.node(node.slots[key], config);
+      }
+    }
+
+    return output;
+  },
+
+  children(node: Node, config: Config = {}) {
+    const children = node.children.flatMap<MaybePromise<RenderableTreeNodes>>(
+      (child) => this.node(child, config)
+    );
+    if (children.some(isPromise)) {
+      return Promise.all(children);
+    }
+    return children;
+  },
+
+  node(node: Node, config: Config = {}) {
+    const schema = this.findSchema(node, config) ?? {};
+    if (schema && schema.transform instanceof Function)
+      return schema.transform(node, config);
+
+    const children = this.children(node, config);
+    if (!schema || !schema.render) return children;
+
+    const attributes = this.attributes(node, config);
+
+    if (isPromise(attributes) || isPromise(children)) {
+      return Promise.all([attributes, children]).then((values) =>
+        buildTag(schema.render, ...values)
+      );
+    }
+
+    return buildTag(schema.render, attributes, children);
+  },
+} as Transformer;

@@ -1,0 +1,195 @@
+import type Func from './ast/function';
+import type Node from './ast/node';
+import type Var from './ast/variable';
+
+export interface Tag {
+  $$mdtype: 'Tag';
+  name: string;
+  // TODO: Add UUID key for more performant rendering
+  // in the incremental renderer
+  if?: ClientFunction | ClientVariable;
+  attributes: Record<string, any>;
+  children: RenderableTreeNode[];
+}
+
+export interface ClientFunction {
+  $$mdtype: 'Function';
+  name: 'and' | 'or' | 'equals' | 'not' | 'default' | 'debug';
+  parameters: Record<string, any>;
+  value: any;
+}
+
+export interface ClientVariable {
+  $$mdtype: 'Variable';
+  path: string[];
+  value: any;
+}
+
+export type { Node };
+export declare type Function = Func;
+export declare type Variable = Var;
+
+export type MaybePromise<T> = T | Promise<T>;
+
+export interface AstType {
+  readonly $$mdtype: 'Function' | 'Node' | 'Variable';
+  resolve(config: Config): any;
+}
+
+export type AttributeValue = {
+  type: string;
+  name: string;
+  value: any;
+};
+
+export type Config = Readonly<ConfigType>;
+
+export type ConfigType = Partial<{
+  nodes: Partial<Record<NodeType, Schema>>;
+  tags: Record<string, Schema>;
+  variables: Record<string, any>;
+  functions: Record<string, ConfigFunction>;
+  partials: Record<string, any>;
+  validation?: {
+    parents?: Node[];
+    validateFunctions?: boolean;
+    environment?: string;
+  };
+}>;
+
+export type ConfigFunction = {
+  returns?: ValidationType | ValidationType[];
+  parameters?: Record<string, SchemaAttribute>;
+  transform?(parameters: Record<string, any>, config: Config): any;
+  validate?(fn: Func, config: Config): ValidationError[];
+};
+
+export interface CustomAttributeTypeInterface {
+  transform?(value: any, config: Config): Scalar;
+  validate?(value: any, config: Config, name: string): ValidationError[];
+}
+
+export interface CustomAttributeType {
+  new (): CustomAttributeTypeInterface;
+  readonly prototype: CustomAttributeTypeInterface;
+}
+
+export type Location = {
+  file?: string;
+  start: LocationEdge;
+  end: LocationEdge;
+};
+
+export type LocationEdge = {
+  line: number;
+  character?: number;
+};
+
+export type NodeType =
+  | 'blockquote'
+  | 'code'
+  | 'comment'
+  | 'document'
+  | 'em'
+  | 'error'
+  | 'fence'
+  | 'hardbreak'
+  | 'heading'
+  | 'hr'
+  | 'image'
+  | 'inline'
+  | 'item'
+  | 'link'
+  | 'list'
+  | 'node'
+  | 'paragraph'
+  | 's'
+  | 'softbreak'
+  | 'strong'
+  | 'table'
+  | 'tag'
+  | 'tbody'
+  | 'td'
+  | 'text'
+  | 'th'
+  | 'thead'
+  | 'tr';
+
+export type Primitive = null | boolean | number | string;
+
+export type RenderableTreeNode = Tag | Scalar | ClientFunction | ClientVariable;
+export type RenderableTreeNodes = RenderableTreeNode | RenderableTreeNode[];
+
+export type Scalar = Primitive | Scalar[] | { [key: string]: Scalar };
+
+export type Schema<C extends Config = Config, R = string> = {
+  render?: R;
+  children?: string[];
+  attributes?: Record<string, SchemaAttribute>;
+  slots?: Record<string, SchemaSlot>;
+  selfClosing?: boolean;
+  inline?: boolean;
+  transform?(node: Node, config: C): MaybePromise<RenderableTreeNodes>;
+  validate?(node: Node, config: C): MaybePromise<ValidationError[]>;
+  description?: string;
+};
+
+export type SchemaAttribute = {
+  type?: ValidationType | ValidationType[];
+  render?: boolean | string;
+  default?: any;
+  required?: boolean;
+  matches?: SchemaMatches | ((config: Config) => SchemaMatches);
+  validate?(value: any, config: Config, name: string): ValidationError[];
+  errorLevel?: ValidationError['level'];
+  description?: string;
+};
+
+export type SchemaMatches = RegExp | string[] | null;
+
+export type SchemaSlot = {
+  render?: boolean | string;
+  required?: boolean;
+};
+
+export interface Transformer {
+  findSchema(node: Node, config: Config): Schema | undefined;
+  node(node: Node, config: Config): MaybePromise<RenderableTreeNodes>;
+  attributes(node: Node, config: Config): Record<string, any>;
+  children(node: Node, config: Config): RenderableTreeNode[];
+}
+
+export type ValidationError = {
+  id: string;
+  level: 'debug' | 'info' | 'warning' | 'error' | 'critical';
+  message: string;
+  location?: Location;
+};
+
+export type ValidateError = {
+  type: string;
+  lines: number[];
+  location?: Location;
+  error: ValidationError;
+};
+
+export type ValidationType =
+  | CustomAttributeType
+  | typeof String
+  | typeof Number
+  | typeof Boolean
+  | typeof Object
+  | typeof Array
+  | 'String'
+  | 'Number'
+  | 'Boolean'
+  | 'Object'
+  | 'Array';
+
+export type Value = AstType | Scalar;
+
+export type ParserArgs = {
+  file?: string;
+  slots?: boolean;
+  location?: boolean;
+};
