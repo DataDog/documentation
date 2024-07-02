@@ -1,8 +1,8 @@
 cat_breed_options:
-  - id: siamese
-    display_name: Siamese
+  - id: mutt
+    display_name: Mutt
     default: true
-  - id: persian
-    display_name: Persian
+  - id: sphynx
+    display_name: Sphynx
   - id: maine_coon
     display_name: Maine Coon
