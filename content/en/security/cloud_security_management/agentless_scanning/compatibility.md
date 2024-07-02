@@ -32,7 +32,7 @@ The following languages are supported for Software Composition Analysis scans on
 | Language | Supported Package Manager | Supported Files                                                      |
 |----------|---------------------------|----------------------------------------------------------------------|
 | Ruby     | bundler                   | Gemfile.lock, gemspec                                                |
-| C#       | nuget                     | packages.lock.json, packages.config, .deps.json, *packages.props     |
+| .NET     | nuget                     | packages.lock.json, packages.config, .deps.json, *packages.props     |
 | Go       | mod                       | Binaries built by Go, go.mod                                         |
 | Java     | Gradle, Maven             | pom.xml, *gradle.lockfile, JAR/WAR/PAR/EAR (with pom.properties)     |
 | Node.js  | npm, pnpm, yarn           | package-lock.json, yarn.lock, pnpm-lock.yaml, package.json           |
