@@ -32,6 +32,8 @@ variables:
   # yarn/node cache dirs
   YARN_CACHE_FOLDER: "${CI_PROJECT_DIR}/.yarn/cache/"
   PREVIEW_PATTERN: '/.+?\/[a-zA-Z0-9_-]+/'
+  DATADOG_API_SPEC_GENERATED_PR_PATTERN: '/^datadog-api-spec\/generated.*/'
+  BUILD_PREVIEW_LABEL_PATTERN: '/build-preview/'
   PREVIEW_ERROR_LOG: "/go/src/github.com/DataDog/documentation/preview_error.log"
   PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.pipcache/"
 
@@ -100,7 +102,7 @@ before_script:
 # ==================== rules ==================== #
 .preview_rules: &preview_rules
   rules:
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN
+    - if: ($CI_COMMIT_BRANCH !~ $DATADOG_API_SPEC_GENERATED_PR_PATTERN && $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH && $CI_COMMIT_BRANCH =~ $PREVIEW_PATTERN) || $CI_MERGE_REQUEST_LABELS =~ $BUILD_PREVIEW_LABEL_PATTERN
       when: on_success
 
 .preview_manual_rules: &preview_manual_rules
@@ -297,7 +299,7 @@ post_build_success_status_to_spec_repo:
     - chmod +x ./local/bin/py/submit_github_status_check.py
     - ./local/bin/py/submit_github_status_check.py -i "$(get_secret 'dd-api-spec-repo-app-id')" -k "$(get_secret 'dd-api-spec-repo-app-key')"
   rules:
-    - if: $CI_COMMIT_BRANCH =~ /^datadog-api-spec\/generated.*/
+    - if: $CI_COMMIT_BRANCH =~ $DATADOG_API_SPEC_GENERATED_PR_PATTERN
       when: on_success
   interruptible: true
   allow_failure: true
@@ -311,7 +313,7 @@ post_build_failure_status_to_spec_repo:
     - chmod +x ./local/bin/py/submit_github_status_check.py
     - ./local/bin/py/submit_github_status_check.py -s "failure" -i "$(get_secret 'dd-api-spec-repo-app-id')" -k "$(get_secret 'dd-api-spec-repo-app-key')"
   rules:
-    - if: $CI_COMMIT_BRANCH =~ /^datadog-api-spec\/generated.*/
+    - if: $CI_COMMIT_BRANCH =~ $DATADOG_API_SPEC_GENERATED_PR_PATTERN
       when: on_failure
   interruptible: true
   allow_failure: true
