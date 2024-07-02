@@ -111,7 +111,7 @@ traceExporter, err := otlptracehttp.New(
 			"dd-protocol": "otlp", 
 			"dd-api-key": os.Getenv("DD_API_KEY"),
 			"dd-otel-span-mapping": "{span_name_as_resource_name: false}",
-                  "dd-otlp-source": "${YOUR_SITE}", // Replace this with the correct site
+      "dd-otlp-source": "${YOUR_SITE}", // Replace this with the correct site
 		}),
 )
 ```
