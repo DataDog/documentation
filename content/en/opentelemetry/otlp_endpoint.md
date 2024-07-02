@@ -68,7 +68,7 @@ const exporter = new OTLPTraceExporter({
   headers: {
     'dd-protocol': 'otlp', 
     'dd-api-key': process.env.DD_API_KEY,
-    'dd-otel-span-mapping': '{span_name_as_resource_name: false}',
+    'dd-otel-span-mapping': '{span_name_as_resource_name: true}',
     'dd-otlp-source': '${YOUR_SITE}', // Replace this with the correct site
   },
 });
@@ -110,8 +110,8 @@ traceExporter, err := otlptracehttp.New(
 		map[string]string{
 			"dd-protocol": "otlp", 
 			"dd-api-key": os.Getenv("DD_API_KEY"),
-			"dd-otel-span-mapping": "{span_name_as_resource_name: false}",
-      "dd-otlp-source": "${YOUR_SITE}", // Replace this with the correct site
+			"dd-otel-span-mapping": "{span_name_as_resource_name: true}",
+                  "dd-otlp-source": "${YOUR_SITE}", // Replace this with the correct site
 		}),
 )
 ```
@@ -131,7 +131,7 @@ exporter = OTLPSpanExporter(
     headers={
         "dd-protocol": "otlp", 
         "dd-api-key": os.environ.get("DD_API_KEY"),
-        "dd-otel-span-mapping": "{span_name_as_resource_name: false}",
+        "dd-otel-span-mapping": "{span_name_as_resource_name: true}",
         "dd-otlp-source": "${YOUR_SITE}" # Replace this with the correct site
     },
 )
