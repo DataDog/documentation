@@ -1,6 +1,5 @@
 ---
 title: Split Logs
-kind: document
 disable_toc: false
 ---
 

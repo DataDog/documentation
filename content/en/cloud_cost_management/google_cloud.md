@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+<div class="alert alert-warning">Cloud Cost Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
@@ -48,6 +48,7 @@ The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-t
 
 {{< img src="cloud_cost/billing_export.png" alt="Google Cloud project and dataset info highlighted" >}}
 
+_Newly created BigQuery billing export datasets only contain the most recent two months of data. It can take a day or two for this data to backfill in BigQuery._
 
 #### Enable Google Service APIs
 The following permissions allow Datadog to access and transfer the billing export into the storage bucket using a scheduled BigQuery query.

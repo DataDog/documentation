@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/define-and-manage-slos/#monitor-based-slo
   tag: ブログ
   text: Datadog で SLO を管理するためのベストプラクティス
-kind: documentation
 title: モニターベース SLO
 ---
 

@@ -51,7 +51,6 @@ further_reading:
 - link: /real_user_monitoring/browser/data_collected/
   tag: 설명서
   text: 수집된 RUM 브라우저 데이터
-kind: 설명서
 title: RUM & 세션 재생
 ---
 

@@ -7,7 +7,6 @@ further_reading:
 - link: logs/explorer/analytics
   tag: Documentation
   text: Apprendre à analyser vos logs
-kind: documentation
 title: Regrouper des logs en patterns
 ---
 

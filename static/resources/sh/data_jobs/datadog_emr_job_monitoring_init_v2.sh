@@ -11,7 +11,7 @@ SECRET_NAME=$2   # INPUT: Secret name of the DD_API_KEY
 
 # Install the agent
 DD_API_KEY=$(aws secretsmanager get-secret-value --secret-id $SECRET_NAME | jq -r .SecretString | jq -r '.["dd_api_key"]')
-DD_APM_INSTRUMENTATION_LANGUAGES=java DD_API_KEY=${DD_API_KEY} DD_INSTALL_ONLY=true DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl --retry 10 -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LANGUAGES=java DD_API_KEY=${DD_API_KEY} DD_INSTALL_ONLY=true DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl --retry 10 -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 
 # Get instance data
 JOB_FLOW_ID=$(cat /mnt/var/lib/instance-controller/extraInstanceData.json | jq  -r ".jobFlowId")

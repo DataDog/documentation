@@ -13,7 +13,6 @@ further_reading:
 - link: /agent/kubernetes/metrics/
   tag: documentation
   text: Métricas de Kubernetes
-kind: guía
 title: Versiones legacy de Kubernetes
 ---
 

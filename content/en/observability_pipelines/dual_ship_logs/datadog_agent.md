@@ -1,6 +1,5 @@
 ---
 title: Dual Ship Logs for the Datadog Agent
-kind: document
 disable_toc: false
 ---
 

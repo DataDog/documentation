@@ -1,6 +1,5 @@
 ---
 title: Sensitive Data Redaction for Splunk Heavy and Universal Forwarders (TCP)
-kind: document
 disable_toc: false
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: Saved Views
-kind: documentation
 further_reading:
 - link: "/tests/explorer/search_syntax/"
   tag: "Documentation"

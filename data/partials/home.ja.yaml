@@ -3,7 +3,7 @@ guides:
   link: getting_started/agent/
   link_text: Agent の概要
   title: Agent のインストール
-- desc: 700 以上のビルトインインテグレーションにより、メトリクス、トレース、ログを収集し、Datadog に送信することができます。
+- desc: 750 以上のビルトインインテグレーションにより、メトリクス、トレース、ログを収集し、Datadog に送信することができます。
   link: getting_started/integrations/
   link_text: インテグレーションの概要
   title: インテグレーションをセットアップ

@@ -1,5 +1,4 @@
 ---
-kind: documentation
 title: Product Allotments
 ---
 

@@ -3,7 +3,6 @@ further_reading:
 - link: service_management/case_management/view_and_manage
   tag: Documentación
   text: Ver y gestionar casos
-kind: Documentación
 title: Crear un caso
 ---
 

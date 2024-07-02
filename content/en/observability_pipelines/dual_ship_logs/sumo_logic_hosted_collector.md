@@ -1,6 +1,5 @@
 ---
 title: Dual Ship Logs for the Sumo Logic Hosted Collector HTTP Logs Source
-kind: document
 disable_toc: false
 ---
 

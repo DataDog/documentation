@@ -6,7 +6,6 @@ further_reading:
   tag: Blog
   text: Mettez facilement en corrélation les données de télémétrie de DBM et d'APM
     afin d'analyser les performances des requêtes de bout en bout
-kind: documentation
 title: Associer la fonctionnalité Database Monitoring aux traces
 ---
 

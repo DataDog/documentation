@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM for Nginx
-kind: documentation
 code_lang: nginx
 type: multi-code-lang
 code_lang_weight: 50

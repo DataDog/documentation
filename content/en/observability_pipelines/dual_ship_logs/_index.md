@@ -1,6 +1,5 @@
 ---
 title: Dual Ship Logs
-kind: Documentation
 disable_toc: false
 aliases:
     -  /observability_pipelines/dual_ship_logs/datadog_agent

@@ -3,7 +3,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
   tag: Blog
   text: Recueillir des traces, logs et métriques custom à partir de services Cloud Run
-kind: documentation
 title: Google Cloud Run
 ---
 

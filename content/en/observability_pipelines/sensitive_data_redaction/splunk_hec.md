@@ -1,6 +1,5 @@
 ---
 title: Sensitive Data Redaction for the Splunk HTTP Event Collector (HEC)
-kind: document
 disable_toc: false
 ---
 

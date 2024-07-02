@@ -1,6 +1,6 @@
 ---
 title: Reuse Browser Test Journeys Across Your Test Suite
-kind: guide
+
 further_reading:
     - link: 'synthetics/browser_tests'
       tag: 'Documentation'

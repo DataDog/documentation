@@ -23,7 +23,6 @@ further_reading:
   tag: Blog
   text: Soluciona rápidamente los problemas de tus aplicaciones Azure con Datadog
     Workflow Automation
-kind: documentation
 title: Workflow Automation
 ---
 

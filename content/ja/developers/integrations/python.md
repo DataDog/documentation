@@ -1,6 +1,5 @@
 ---
 description: Datadog Agent Integration Developer Tool をインストールします。
-kind: documentation
 title: Datadog Agent Integration Developer Tool をインストールする
 ---
 このドキュメントでは、インタープリターおよび開発ツールのインストールなど、Agent ベースのインテグレーションを開発するための Python 環境の設定方法について説明します。

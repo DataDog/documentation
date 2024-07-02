@@ -17,7 +17,6 @@ further_reading:
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Terraform
   text: Créer et gérer des tests API Synthetic à plusieurs étapes avec Terraform
-kind: documentation
 title: Tests API à plusieurs étapes
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: Index des guides sur les notebooks
 disable_toc: true
-kind: guide
 private: true
 title: Guides sur les notebooks
 ---

@@ -12,7 +12,6 @@ further_reading:
 - link: /synthetics/private_locations
   tag: ドキュメント
   text: プライベートロケーションの詳細
-kind: documentation
 title: プライベートロケーションの概要
 ---
 

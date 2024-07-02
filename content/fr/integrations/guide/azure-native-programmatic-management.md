@@ -8,7 +8,7 @@ further_reading:
 - link: https://docs.datadoghq.com/integrations/guide/azure-portal
   tag: Documentation
   text: Gérer l'intégration Azure native
-kind: guide
+
 title: Guide sur la gestion automatisée de l'intégration Azure native
 ---
 

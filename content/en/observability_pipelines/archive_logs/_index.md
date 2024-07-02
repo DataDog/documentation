@@ -1,6 +1,5 @@
 ---
 title: Archive Logs to Datadog Archives
-kind: document
 disable_toc: false
 ---
 

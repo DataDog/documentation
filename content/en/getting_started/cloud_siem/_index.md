@@ -1,6 +1,5 @@
 ---
 title: Getting Started with Cloud SIEM
-kind: documentation
 aliases:
     - /cloud-siem/getting_started/
     - /security_monitoring/getting_started/

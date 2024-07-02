@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM for Java
-kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0

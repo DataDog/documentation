@@ -17,7 +17,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/dotnet-runtime-metrics/
   tag: GitHub
   text: Datadog を使用した .NET ランタイムメトリクスの監視
-kind: documentation
 title: .NET ランタイムメトリクス
 type: multi-code-lang
 ---
