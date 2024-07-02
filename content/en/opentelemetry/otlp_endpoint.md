@@ -88,6 +88,7 @@ OtlpHttpSpanExporter exporter = OtlpHttpSpanExporter.builder()
     .setEndpoint("${YOUR_ENDPOINT}") // Replace this with the correct endpoint
     .addHeader("dd-protocol", "otlp")
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
+    .addHeader("dd-otel-span-mapping", "{span_name_as_resource_name: true}")
     .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace this with the correct site
     .build();
 ```
