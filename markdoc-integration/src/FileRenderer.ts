@@ -1,4 +1,4 @@
-import Barkdoc, { Node, RenderableTreeNodes } from '../barkdoc/dist';
+import Barkdoc, { Node, RenderableTreeNodes } from '../../barkdoc/dist';
 import fs from 'fs';
 import yaml from 'js-yaml';
 import {

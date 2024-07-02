@@ -1,25 +1,24 @@
 {
-  "name": "hugo-demo",
-  "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-markdoc-integration": "rimraf ./markdoc-integration/dist && npx tsc && cp ./markdoc-integration/src/variables.config.yaml ./markdoc-integration/dist/variables.config.yaml",
-    "compile-markdoc": "node ./markdoc-integration/dist/compileMarkdocPages.js",
-    "build-prod-renderer": "npx esbuild ./markdoc-integration/src/sparkdoc-client-renderer.js --bundle --minify > ./public/sparkdoc-client-renderer.js",
-    "build-dev-renderer": "npx esbuild ./markdoc-integration/src/sparkdoc-client-renderer.js --bundle > ./public/sparkdoc-client-renderer.js",
-    "build": "npm run build-dev-renderer && npm run build-markdoc-integration && npm run compile-markdoc"
-  },
-  "dependencies": {
-    "js-yaml": "^4.1.0",
-    "rimraf": "^5.0.5",
-    "sparkdoc": "file:../sparkdoc",
-    "zod": "^3.22.4"
-  },
-  "devDependencies": {
-    "@types/js-yaml": "^4.0.9",
-    "@types/node": "^20.11.30",
-    "typescript": "^5.4.3",
-    "esbuild": "0.20.2"
-  }
+    "name": "hugo-markdoc-integration",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build-markdoc-integration": "rimraf ./dist && npx tsc && cp ./src/variables.config.yaml ./dist/variables.config.yaml",
+        "build-prod-renderer": "npx esbuild ./src/barkdoc-client-renderer.js --bundle --minify > ./dist/barkdoc-client-renderer.min.js",
+        "build-dev-renderer": "npx esbuild ./src/barkdoc-client-renderer.js --bundle > ./dist/barkdoc-client-renderer.js",
+        "build": "npm run build-markdoc-integration && npm run build-dev-renderer && npm run build-prod-renderer"
+    },
+    "dependencies": {
+        "js-yaml": "^4.1.0",
+        "rimraf": "^5.0.5",
+        "barkdoc": "file:../barkdoc",
+        "zod": "^3.22.4"
+    },
+    "devDependencies": {
+        "@types/js-yaml": "^4.0.9",
+        "@types/node": "^20.11.30",
+        "typescript": "^5.4.3",
+        "esbuild": "0.20.2"
+    }
 }
