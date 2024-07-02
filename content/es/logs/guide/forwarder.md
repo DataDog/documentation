@@ -24,7 +24,7 @@ Para obtener más información sobre el envío de logs de servicios AWS con el D
 
 ## Instalación
 
-Datadog recomienda utilizar [CloudFormation](#cloudformation) para instalar automáticamente el Forwarder. También puedes completar el proceso de configuración utilizando [Terraform](#terraform) o [manualmente](#manual). Una vez instalado, puedes asignar fuentes de logs al Forwarder, como buckets S3 o grupos de logs CloudWatch [configurando activadores][4].
+Datadog recomienda utilizar [CloudFormation](#cloudformation) para instalar automáticamente el Forwarder. También puedes completar el proceso de configuración utilizando [Terraform](#terraform) o [manualmente](#manually). Una vez instalado, puedes asignar fuentes de logs al Forwarder, como buckets S3 o grupos de logs CloudWatch [setting up triggers][4].
 
 {{< tabs >}}
 {{% tab "CloudFormation" %}}
