@@ -3,6 +3,10 @@ title: AWS Fargate Configuration Guide for Datadog Security
 disable_toc: false
 aliases:
   - /security/cloud_security_management/setup/fargate
+further_reading:
+- link: "https://www.datadoghq.com/blog/threat-detection-fargate/"
+  tag: "Blog"
+  text: "Get real-time threat detection for AWS Fargate ECS and EKS environments with Datadog CSM"
 ---
 
 This guide walks you through configuring [Cloud Security Management (CSM)][3], [Application Security Management (ASM)][4], and [Cloud SIEM][5] on AWS Fargate.
@@ -395,6 +399,10 @@ For step-by-step instructions, see [AWS Configuration Guide for Cloud SIEM][17].
 #### Send AWS CloudTrail logs to Datadog
 
 {{% cloud-siem-aws-cloudtrail-send-logs %}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/ecs_fargate/
 [2]: /integrations/eks_fargate/

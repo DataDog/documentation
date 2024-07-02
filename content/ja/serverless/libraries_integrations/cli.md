@@ -188,7 +188,7 @@ datadog-ci lambda flare -f <function-arn> -c <case-id> -e <email-on-case-id> --w
 | `--dry-run`           | `-d`      | Datadog サポートに送信される収集データをプレビューします。                                                                        | `false` |
 
 
-## ヘルプ
+## コミュニティ
 
 製品のフィードバックや質問については、[Slack の Datadog コミュニティ](https://chat.datadoghq.com/)の `#serverless` チャンネルに参加してください。
 

@@ -270,7 +270,7 @@ dependencies {
    * `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
    * `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
 
-**Note**: In the credentials required for initialization, your application variant name is also required, and should use your `BuildConfig.FLAVOR` value (or an empty string if you don't have variants). This is important because it enables the right ProGuard `mapping.txt` file to be automatically uploaded at build time to be able to view de-obfuscated RUM error stack traces. For more information see the [guide to uploading Android source mapping files][8].
+**Note**: In the credentials required for initialization, your application variant name is also required, and should use your `BuildConfig.FLAVOR` value (or an empty string if you don't have variants). This is important because it enables the right ProGuard `mapping.txt` file to be automatically uploaded at build time to be able to view de-obfuscated RUM error stack traces. For more information see the [guide to uploading Android source mapping files][12].
 
    Use the utility method `isInitialized` to check if the SDK is properly initialized:
 
@@ -947,3 +947,4 @@ The following methods in `AndroidTracer.Builder` can be used when initializing t
 [9]: https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3
 [10]: /tracing/trace_collection/custom_instrumentation/android/otel
 [11]: https://opentracing.io
+[12]: /real_user_monitoring/error_tracking/mobile/android/?tab=us#upload-your-mapping-file

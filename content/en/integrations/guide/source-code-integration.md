@@ -27,6 +27,9 @@ further_reading:
 - link: "/logs/error_tracking/"
   tag: "Documentation"
   text: "Learn about Error Tracking for logs"
+- link: "https://www.datadoghq.com/blog/live-debugging/"
+  tag:  "Blog"
+  text: "Fix production bugs efficiently with Datadog Live Debugging"
 ---
 
 ## Overview

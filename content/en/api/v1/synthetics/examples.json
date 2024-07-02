@@ -3195,11 +3195,12 @@
     "request": {
       "json_curl": {},
       "json": {
+        "force_delete_dependencies": false,
         "public_ids": [
           []
         ]
       },
-      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">public_ids</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>An array of Synthetic test IDs you want to delete.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
+      "html": "<div class=\"\"><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">force_delete_dependencies</p>\n    </div>\n              <div class=\"col-2 column\"><p>boolean</p></div>\n              <div class=\"col-6 column\"><p>Delete the Synthetic test even if it&#39;s referenced by other resources\n(for example, SLOs and composite monitors).</p></div>\n            </div>\n            \n          </div>\n        </div><div class=\"row   \">\n          <div class=\"col-12 first-column\">\n            <div class=\"row first-row  \">\n              <div class=\"col-4 column\">\n      <p class=\"key\">public_ids</p>\n    </div>\n              <div class=\"col-2 column\"><p>[string]</p></div>\n              <div class=\"col-6 column\"><p>An array of Synthetic test IDs you want to delete.</p></div>\n            </div>\n            \n          </div>\n        </div></div>"
     }
   },
   "TriggerTests": {
