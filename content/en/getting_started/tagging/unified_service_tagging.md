@@ -419,13 +419,52 @@ To setup unified service tagging in an OpenTelemetry environment:
 
 1. Set the following attributes in your OpenTelemetry configuration to ensure proper tagging:
 
-   ```yaml
-   service.name: "<SERVICE>"
-   deployment.environment: "<ENV>"
-   service.version: "<VERSION>"
-   ```
+   For example, with the Python OpenTelemetry SDK:
+
+   ```python
+   from opentelemetry.sdk.resources import Resource
+   from opentelemetry.sdk.trace import TracerProvider
+
+   resource = Resource(attributes={
+      "service.name": "<SERVICE>",
+      "deployment.environment": "<ENV>",
+      "service.version": "<VERSION>"
+    })
+    tracer_provider = TracerProvider(resource=resource)
+    ```
+
+    For example, with the OpenTelemetry Collector:
+
+    ```yaml
+    receivers:
+    otlp:
+      protocols:
+        grpc:
+        http:
+
+    processors:
+      batch:
+
+    exporters:
+      datadog:
+        api:
+          key: "<DATADOG_API_KEY>"
+        metrics:
+          attributes:
+            service.name: "<SERVICE>"
+            deployment.environment: "<ENV>"
+            service.version: "<VERSION>"
+
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [datadog]
+    ```
+
    
-1. To [correlate OpenTelemetry language SDK logs and traces][18], translate the OpenTelemetry `TraceId` and `SpanId` properties into the Datadog format, and ensure your logs are sent as JSON files. Your language-level logs must become Datadog attributes for the trace-log correlation to work.
+1. To [correlate OpenTelemetry language SDK logs and traces][18], translate the OpenTelemetry `TraceId` and `SpanId` properties (a 128-bit unsigned int and 64-bit unsigned int represented as a 32-hex-character and 16-hex-character lowercase string) into the Datadog format and add them as attributes in your logs. 
 
    The following table outlines the key differences between OpenTelemetry and Datadog schemas for tracing and unified service tagging:
 
@@ -433,8 +472,39 @@ To setup unified service tagging in an OpenTelemetry environment:
    |---|---|---|
    | Tracing | `TraceId` and `SpanId` are stored in OpenTelemetry as 32-hex character and 16-hex character. | Stored in Datadog as 64-bit unsigned int. |
    | Unified service tagging | `service.name`, `deployment.environment`, `service.version` | `service`, `env`, `version` |
+   
+   Edit your logging configuration to include the trace and span IDs. For example, this Python application uses the `structlog` library:
 
-   For more information, see [Correlating OpenTelemetry Traces and Logs][19]. 
+   ```python
+   from opentelemetry import trace
+
+   class CustomDatadogLogProcessor(object):
+       def __call__(self, logger, method_name, event_dict):
+           current_span = trace.get_current_span()
+           if not current_span.is_recording():
+               return event_dict
+
+           context = current_span.get_span_context() if current_span is not None else None
+           if context is not None:
+               event_dict["dd.trace_id"] = str(context.trace_id & 0xFFFFFFFFFFFFFFFF)
+               event_dict["dd.span_id"] = str(context.span_id)
+
+           return event_dict        
+
+   import .injection
+   import logging
+   import structlog
+   structlog.configure(
+       processors=[
+           injection.CustomDatadogLogProcessor(),
+           structlog.processors.JSONRenderer(sort_keys=True)
+       ],
+   )
+
+   log = structlog.getLogger()
+
+   log.info("Example log line with trace correlation information")
+   ```
 
 1. To ensure span kind statistics are computed and services are properly aggregated by their peers, you can enable the following settings in the OpenTelemetry Exporter's YAML configuration file:
 
@@ -442,6 +512,8 @@ To setup unified service tagging in an OpenTelemetry environment:
    compute_stats_by_span_kind: true
    peer_service_aggregation: true
    ```
+
+For more information, see [Correlating OpenTelemetry Traces and Logs][19]. 
 
 ## Further Reading
 
