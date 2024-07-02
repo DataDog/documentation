@@ -76,6 +76,7 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackUserInteractions: true,
+  enablePrivacyForActionName: true,
 });
 ```
 
@@ -213,6 +214,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -241,6 +243,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -269,6 +272,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -297,6 +301,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -325,6 +330,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -353,6 +359,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
   })
 </script>
@@ -1087,6 +1094,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1110,6 +1118,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1133,6 +1142,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1156,6 +1166,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1179,6 +1190,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
@@ -1202,6 +1214,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
       trackResources: true,
       trackLongTasks: true,
       trackUserInteractions: true,
+      enablePrivacyForActionName: true,
     });
 </script>
 ```
