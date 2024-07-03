@@ -10,7 +10,6 @@ further_reading:
 - link: /tracing/visualization/
   tag: 설명서
   text: APM 용어 및 소개
-kind: 가이드
 title: API로 Agend에 트레이스 전송하기
 ---
 

@@ -9,7 +9,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/default-privacy-session-replay/
   tag: ブログ
   text: セッションリプレイのデフォルトプライバシー設定によるユーザーデータの難読化
-kind: ドキュメント
 title: セッションリプレイブラウザのプライバシーオプション
 ---
 

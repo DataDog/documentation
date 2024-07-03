@@ -1,6 +1,6 @@
 ---
 title: Monitoring Kafka Queues
-kind: guide
+
 further_reading:
 - link: "/tracing/trace_collection"
   tag: "Documentation"

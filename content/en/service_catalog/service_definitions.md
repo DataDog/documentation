@@ -1,6 +1,5 @@
 ---
 title: Service Definitions and Supported Versions
-kind: documentation
 further_reading:
 - link: "/tracing/service_catalog/adding_metadata"
   tag: "Documentation"

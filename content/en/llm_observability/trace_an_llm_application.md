@@ -1,6 +1,6 @@
 ---
 title: Trace an LLM Application
-kind: guide
+
 aliases:
     - /tracing/llm_observability/trace_an_llm_application
 ---

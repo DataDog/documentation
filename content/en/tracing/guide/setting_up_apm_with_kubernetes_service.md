@@ -1,6 +1,6 @@
 ---
 title: Setting up APM with Kubernetes Service
-kind: guide
+
 further_reading:
 - link: "/containers/kubernetes/apm/"
   tag: "Documentation"

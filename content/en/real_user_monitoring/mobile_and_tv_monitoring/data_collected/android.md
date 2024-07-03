@@ -1,6 +1,5 @@
 ---
 title: RUM Android Data Collected
-kind: documentation
 code_lang: android
 type: multi-code-lang
 code_lang_weight: 10

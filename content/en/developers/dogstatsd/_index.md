@@ -1,6 +1,5 @@
 ---
 title: DogStatsD
-kind: documentation
 description: Overview of the features of DogStatsD, including data types and tagging.
 aliases:
     - /guides/dogstatsd/

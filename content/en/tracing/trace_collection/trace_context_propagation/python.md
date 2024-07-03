@@ -1,6 +1,5 @@
 ---
 title: Propagating Python Trace Context
-kind: documentation
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10

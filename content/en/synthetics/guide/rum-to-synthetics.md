@@ -1,6 +1,6 @@
 ---
 title: Generate Synthetic Browser Tests From Session Replay
-kind: guide
+
 further_reading:
   - link: 'https://www.datadoghq.com/blog/create-browser-tests-from-datadog-rum-session-replay/'
     tag: 'Blog'

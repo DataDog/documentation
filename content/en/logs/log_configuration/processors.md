@@ -1,6 +1,5 @@
 ---
 title: Processors
-kind: documentation
 description: "Parse your logs using the Grok Processor"
 aliases:
   - /logs/processing/processors/

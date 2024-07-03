@@ -1,6 +1,5 @@
 ---
 title: Advanced Options for Browser Testing Steps
-kind: documentation
 description: Configure advanced options for Browser Test Steps
 aliases:
   - /synthetics/guide/browser-tests-switch-tabs/

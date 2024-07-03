@@ -3,7 +3,6 @@ further_reading:
 - link: https://docs.datadoghq.com/agent/troubleshooting/
   tag: Documentation
   text: Agent のトラブルシューティング
-kind: documentation
 title: Datadog サポートの概要
 ---
 

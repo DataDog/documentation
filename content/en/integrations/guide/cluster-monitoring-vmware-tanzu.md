@@ -1,6 +1,6 @@
 ---
 title: Datadog Cluster Monitoring for VMware Tanzu
-kind: guide
+
 description: "Datadog Cluster Monitoring for VMware Tanzu"
 further_reading:
 - link: "https://www.datadoghq.com/blog/collecting-pcf-logs/"

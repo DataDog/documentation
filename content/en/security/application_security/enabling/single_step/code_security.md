@@ -1,6 +1,5 @@
 ---
 title: Enabling Code Security using single step instrumentation
-kind: documentation
 ---
 
 <div class="alert alert-info">Enabling Code Security using single step instrumentation is in beta.</div>

@@ -3,7 +3,6 @@ aliases:
 - /fr/tracing/trace_collection/admission_controller/
 - /fr/tracing/trace_collection/library_injection/
 description: Injecter des bibliothèques d'instrumentation dans des applications
-kind: documentation
 title: Injecter des bibliothèques localement
 ---
 

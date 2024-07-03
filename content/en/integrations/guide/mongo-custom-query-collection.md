@@ -1,6 +1,6 @@
 ---
 title: Collect MongoDB Custom Metrics
-kind: guide
+
 further_reading:
 - link: "/integrations/mongo/"
   tag: "Documentation"

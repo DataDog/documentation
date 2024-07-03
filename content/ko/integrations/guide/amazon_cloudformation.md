@@ -3,7 +3,6 @@ aliases:
 - /ko/developers/amazon_cloudformation/
 dependencies:
 - https://github.com/DataDog/datadog-cloudformation-resources/blob/master/README.md
-kind: 지침
 title: Datadog-Amazon CloudFormation
 ---
 [AWS CloudFormation][1]은 환경에 있는 모든 AWS 리소스를 한 번에 설명, 설정 및 프로비저닝할 수 있는 템플릿을 제공합니다. Datadog-AWS CloudFormation 리소스를 통해 지원되는 Datadog 리소스와 상호 작용하고, 모든 Datadog 데이터센터에 리소스를 전송하고, Datadog 리소스가 있는 모든 지역에 비공개로 확장 프로그램을 등록할 수 있습니다.
