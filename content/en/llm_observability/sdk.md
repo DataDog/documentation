@@ -104,6 +104,14 @@ LLMObs.enable(
 : optional - _string_
 <br />The name of the service used for your application. If not provided, this defaults to the value of `DD_SERVICE`.
 
+### Serverless setup
+
+Enable LLM Observability in a serverless environmant by using the [Datadog-Python and Datadog-Extension layers][14].
+
+For a complete auto-instrumented experience, you only need to enable the environment variables specified in [Command-line setup](#command-line-setup). No other code changes are needed.
+
+For manual instrumentation, following [In-code setup](#in-code-setup), you still need to set the `DD_LLMOBS_ENABLED` environment variable as outlined in [Command-line setup](#command-line-setup) in order for the layer to properly flush your LLM spans after the lambda execution.
+
 #### Application naming guidelines
 
 Your application name (the value of `DD_LLMOBS_ML_APP`) must be a lowercase Unicode string. It may contain the characters listed below:
@@ -656,3 +664,4 @@ def server_process_request(request):
 [11]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#integrations
 [12]: https://docs.datadoghq.com/tracing/trace_collection/compatibility/python/#library-compatibility
 [13]: /llm_observability/auto_instrumentation/
+[14]: https://docs.datadoghq.com/serverless/aws_lambda/installation/python/?tab=custom
