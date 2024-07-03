@@ -21,7 +21,7 @@ title: Generar métricas a partir de logs consumidos
 
 ## Información general
 
-Datadog [Logging without Limits][1]\* te permite decidir de forma dinámica qué incluir o excluir de tus índices para el almacenamiento y las consultas. Al mismo tiempo, muchos tipos de logs se utilizan en telemetrías como los KPI, para el seguimiento de tendencias durante largos periodos de tiempo. Las métricas basadas en logs son una forma rentable de resumir los datos de logs de todo el flujo de consumo. Esto significa que, incluso si utilizas [filtros de exclusión][2] para limitar lo que se almacena para la exploración, puedes seguir visualizando las tendencias y las anomalías de todos los datos de tus logs, con una granularidad de 10s durante 15 meses.
+Datadog [Logging without Limits][1]\* te permite decidir de forma dinámica qué incluir o excluir de tus índices para el almacenamiento y las consultas. Al mismo tiempo, muchos tipos de logs se utilizan en telemetrías como los KPI, para el seguimiento de tendencias durante largos periodos de tiempo. Las métricas basadas en logs son una forma rentable de resumir los datos de logs de todo el flujo (stream) de consumo. Esto significa que, incluso si utilizas [filtros de exclusión][2] para limitar lo que se almacena para la exploración, puedes seguir visualizando las tendencias y las anomalías de todos los datos de tus logs, con una granularidad de 10s durante 15 meses.
 
 Con las métricas basadas en logs puedes generar una métrica de recuento de los logs que coinciden con una consulta o una [métrica de distribución][3] de un valor numérico contenido en los logs, como la duración de la solicitud.
 
@@ -45,9 +45,9 @@ También puedes crear métricas a partir de una búsqueda de Analytics, seleccio
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="Crear logs para métricas" style="width:80%;">}}
 
-1. **Introduce una consulta para filtrar el flujo (stream) de logs**: la sintaxis de la consulta es la misma que la de las [búsquedas del Explorador de logs][6]. Para la agregación, sólo se tienen en cuenta los logs con marcas de tiempo, consumidos en los últimos 20 minutos.
+1. **Introduce una consulta para filtrar el flujo de logs**: la sintaxis de la consulta es la misma que la de las [búsquedas del Explorador de logs][6]. Para la agregación, sólo se tienen en cuenta los logs con marcas de tiempo, consumidos en los últimos 20 minutos.
 2. **Selecciona el campo del que quieres realizar el seguimiento**: selecciona `*` para generar un recuento de todos los logs que coinciden con tu consulta o introduce un atributo de log (por ejemplo, `@network.bytes_written`), para agregar un valor numérico y crear sus correspondientes métricas agregadas `count`, `min`, `max`, `sum` y `avg`. Si la faceta del atributo de log es una [medida][7], el valor de la métrica es el valor del atributo de log.
-3. **Añade dimensiones a `group by`**: por defecto, las métricas generadas a partir de logs no tienen ninguna etiqueta (tags), a menos que se añadan explícitamente. Cualquier atributo o dimensión de etiqueta presente en tus logs (por ejemplo, `@network.bytes_written`, `env`) puede utilizarse para crear [etiquetas (tags)][8] de métricas. Los nombres de etiquetas de métricas son iguales al atributo o nombre de etiqueta de origen, sin el símbolo @.
+3. **Añade dimensiones a `group by`**: por defecto, las métricas generadas a partir de logs no tienen ninguna etiqueta (tags), a menos que se añadan explícitamente. Cualquier atributo o dimensión de etiqueta presente en tus logs (por ejemplo, `@network.bytes_written`, `env`) puede utilizarse para crear [etiquetas][8] de métricas. Los nombres de etiquetas de métricas son iguales al atributo o nombre de etiqueta de origen, sin el símbolo @.
 4. **Añade agregaciones de percentiles**: para las métricas de distribución, también puedes generar los percentiles p50, p75, p90, p95 y p99. Las métricas de percentiles también se consideran métricas personalizadas y se [facturan en consecuencia][9].
 5. **Ponle un nombre a tu métrica**: los nombres de los logs basados en métricas deben seguir la [convención de nomenclatura de métricas personalizadas][10].
 
@@ -61,7 +61,7 @@ También puedes crear métricas a partir de una búsqueda de Analytics, seleccio
 
 Después de crear una métrica, se pueden actualizar los siguientes campos:
 
-- Consulta del filtro de flujo (stream): para cambiar el conjunto de logs coincidentes que se agregarán a las métricas
+- Consulta del filtro de flujo: para cambiar el conjunto de logs coincidentes que se agregarán a las métricas
 - Grupos de agregación: para actualizar las etiquetas o gestionar la cardinalidad de las métricas generadas
 - Selección de percentiles: selecciona o deselecciona la casilla **Calculate percentiles** (Calcular percentiles) para eliminar o generar métricas de percentiles
 
