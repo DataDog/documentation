@@ -41,6 +41,10 @@ These points of reference become a set of locators, each of which uniquely defin
 
 Custom selectors are created by performing a [step in the recorder][1] (such as a **tap**, **double tap**, or **open deep link**) on any element of your page. This specifies the kind of step that needs to be performed.
 
+Optionally, handlebars syntax can be used to insert dynamic content such as variables:
+
+{{< img src="mobile_app_testing/mobile_app_advanced_user_locator.png" alt="User specified locator field highlighting handlebar syntax with variables" style="width:70%">}}
+
 ## Timeout
 
 If a mobile app test cannot locate an element, it retries the step for 60 seconds by default.
