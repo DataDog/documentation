@@ -145,9 +145,9 @@ metadata:
 
 ## Tag an Argo CD application deploying multiple services
 
-In case your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed
-from an application sync based on the Kubernetes resources that were modified.
-For this to work, you need to [monitor your Kubernetes infrastructure using the Datadog agent][14] and your Kubernetes resources should have the following labels:
+If your Argo CD application deploys more than one service, Datadog can automatically infer the services deployed from an application sync. Datadog infers the services based on the Kubernetes resources that were modified.
+
+To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][14] and your Kubernetes resources should have the following labels:
 1. `service` (required): specifies the Datadog service of this resource
 2. `team` (optional): specifies the Datadog team of this resource
 
