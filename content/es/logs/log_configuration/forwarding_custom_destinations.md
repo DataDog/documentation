@@ -24,7 +24,7 @@ El reenvío de logs no está disponible para el sitio del Gobierno. Ponte en con
 
 ## Información general
 
-El reenvío de logs te permite enviar logs desde Datadog a destinos personalizados como Splunk, Elasticsearch y endpoints HTTP. Esto significa que puedes utilizar [pipelines de logs][1] para recopilar, procesar y estandarizar tus logs de forma centralizada en Datadog. A continuación, puedes enviar los logs desde Datadog a otras herramientas para dar soporte a los flujos (streams) de trabajo de los equipos individuales. Puedes elegir reenviar cualquier log consumido, esté o no indexado, a destinos personalizados. Los logs se reenvían en formato JSON y se comprimen con GZIP.
+El reenvío de logs te permite enviar logs desde Datadog a destinos personalizados como Splunk, Elasticsearch y endpoints HTTP. Esto significa que puedes utilizar [pipelines de logs][1] para recopilar, procesar y estandarizar tus logs de forma centralizada en Datadog. A continuación, puedes enviar los logs desde Datadog a otras herramientas para dar soporte a los flujos de trabajo de los equipos individuales. Puedes elegir reenviar cualquier log consumido, esté o no indexado, a destinos personalizados. Los logs se reenvían en formato JSON y se comprimen con GZIP.
 
 **Nota**: Sólo los usuarios de Datadog con el permiso [`logs_write_forwarding_rules`][2] pueden [crear][6], [editar][7] y [eliminar][8] destinos personalizados para el reenvío de logs.
 
