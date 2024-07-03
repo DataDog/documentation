@@ -71,7 +71,7 @@ Para configurar roles personalizados con permisos:
 
 1. Inicia sesión en [Datadog][6] como administrador.
 2. Ve a [Organization Settings > Roles (Parámetros de organización > Roles)][7].
-3. Para activar los roles personalizados, haz clic en el engranaje de la parte superior izquierda y, a continuación, en **Enable** (Habilitar).
+3. Para habilitar los roles personalizados, haz clic en el engranaje de la parte superior izquierda y, a continuación, en **Enable** (Habilitar).
 4. Una vez habilitados, haz clic en **New Role** (Nuevo rol).
 5. Introduce un nombre para el nuevo rol.
 6. Selecciona los permisos para el rol. Esto te permite restringir el acceso a determinadas acciones, como la recuperación de logs y la creación de métricas basadas en logs. Para obtener más información, consulta los [permisos de Log Management][8].
