@@ -42,7 +42,7 @@ Si descargas vistas históricas como CSV, los datos se limitan a los últimos 90
 
 8. (Opcional) **Notifica** cuando finalice la recuperación utilizando [integraciones][6] con la sintaxis @handle.
 
-{{< img src="logs/archives/log_rehydration_setup.png" alt="Recargar a partir de un archivo" style="width:75%;">}}
+{{< img src="logs/archives/log_rehydration_setup.png" alt="Recarga a partir de un archivo" style="width:75%;">}}
 
 **Nota**: La consulta se aplica después de que los archivos que coinciden con el periodo de tiempo se descargan de tu archivo. Para reducir el coste de transferencia de datos en la nube, reduce el intervalo de fechas seleccionado.
 
@@ -143,9 +143,9 @@ Para recuperar eventos de logs desde tus archivos, Datadog utiliza el rol IAM co
 }
 ```
 
-#### Añadir la delegación de roles a archivos S3
+#### Añadir la delegación de roles a archivos de S3
 
-Datadog sólo admite la recuperación de archivos que se hayan configurado para utilizar la delegación de roles para conceder acceso. Una vez que hayas modificado tu rol IAM Datadog para incluir la política de rol IAM anterior, asegúrate de que cada archivo de tu [página de configuración de archivos][3] tenga la combinación correcta de cuenta + función AWS.
+Datadog sólo admite la recuperación de archivos que se hayan configurado para utilizar la delegación de roles para conceder acceso. Una vez que hayas modificado tu rol IAM Datadog para incluir la política de rol IAM anterior, asegúrate de que cada archivo de tu [página de configuración de archivos][3] tenga la combinación correcta de cuenta + rol AWS.
 
 {{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Agregar la delegación de roles a archivos de S3" style="width:75%;">}}
 
