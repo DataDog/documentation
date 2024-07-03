@@ -33,7 +33,7 @@ further_reading:
     text: "Deploy ASP.NET Core applications to Azure App Service"
   - link: "/opentelemetry/interoperability/environment_variable_support"
     tag: "Documentation"
-    text: "OTEL Environment Variable Configurations"
+    text: "OpenTelemetry Environment Variable Configurations"
 ---
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][4].

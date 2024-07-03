@@ -18,7 +18,7 @@ further_reading:
   text: "Propagating trace context"
 - link: "/opentelemetry/interoperability/environment_variable_support"
   tag: "Documentation"
-  text: "OTEL Environment Variable Configurations"
+  text: "OpenTelemetry Environment Variable Configurations"
 ---
 
 After you [set up the tracing library with your code, configure the Agent to collect APM data, and activate the Go integration][1], optionally configure the tracing library as desired.
