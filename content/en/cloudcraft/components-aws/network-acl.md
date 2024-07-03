@@ -114,3 +114,5 @@ The following is an example JSON of a Network ACL component:
   - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color. Defaults to `#CC2264`.
 - **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
 - **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
+
+[1]: /cloudcraft/api/
