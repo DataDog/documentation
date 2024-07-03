@@ -76,15 +76,16 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 {{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" >}}.
 
-4. In the destination tab, select the following details:
+5. In the destination tab, select the following details:
     - Choose a storage account, container, and directory for the exports.
         - **Note:** Do not use special characters like `.` in these fields.
         - **Note:** Billing exports can be stored in any subscription. If you are creating exports for multiple subscriptions, Datadog recommends storing them in the same storage account. Export names must be unique.
-    - File partitioning: `On`
-    - Overwrite Data: `Off`
+    - File partitioning: `Checked`
+    - Overwrite Data: `Unchecked`
 
 {{< img src="cloud_cost/export_destination.png" alt="Export Destination with File partitioning and Overwrite data settings" >}}.
 
+6. Click **Next** and **Review + Create**.
 {{% /tab %}}
 {{< /tabs >}}
 
