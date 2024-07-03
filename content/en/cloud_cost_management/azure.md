@@ -71,8 +71,8 @@ You need to generate exports for two data types: **actual** and **amortized**. D
     - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
     - Frequency: **Daily export of month-to-date costs**
     - Dataset version:
-      - Supported versions are `2021-10-01`, `2021-01-01`, `2020-01-01`
-      - Version `2019-10-01` is not supported at this time
+      - Supported versions: `2021-10-01`, `2021-01-01`, `2020-01-01`
+      - Unsupported versions: `2019-10-01`
 
 {{< img src="cloud_cost/improved_export.png" alt="Export details with Metric: Actual, Export type: Daily, and Dataset Version" >}}.
 
