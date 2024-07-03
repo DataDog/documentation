@@ -89,7 +89,7 @@ The following is an example JSON of a Region component:
 - **type: string**: The type of component.
 - **id: string**: A unique identifier for the component consisting of the string `acl-` followed by a random 17-character alphanumeric string.
 - **arn: string**: The globally unique identifier for the component within AWS, known as [Amazon Resource Names](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-- **region: string**: The AWS region itself. All global regions are supported except `cn-` regions.
+- **region: string**: The AWS region for the component. All global regions are supported except `cn-` regions.
 - **visible: boolean**: If `false`, the component becomes semi-transparent on the diagram. Defaults to `true`.
 - **name: string**: The name for the NACL.
 - **shape: string**: The shape of the component. Accepts either `dynamic` or `rectangular`. Defaults to `retangular`.
