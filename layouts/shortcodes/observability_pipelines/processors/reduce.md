@@ -1,4 +1,4 @@
-This processor combines multiple log events into a single event based on the selected fields and merge strategies.
+This processor combines multiple log events into a single event based on the selected fields and merge strategies. This is an example SQL command that carries out a similar action: `SELECT MAX(latency) GROUP BY service`. The reduce processor groups and merges events every 10 seconds.
 
 To set up the reduce processor:
 To set up the reduce processor:
