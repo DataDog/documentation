@@ -25,7 +25,7 @@ Use the [Cloudcraft API][1] to programmatically access and render your architect
 
 ### Schema
 
-The following is an example JSON of a Region component:
+The following is an example JSON of a Network ACL component:
 
 ```json
 {
