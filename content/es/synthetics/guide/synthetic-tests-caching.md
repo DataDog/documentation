@@ -6,7 +6,6 @@ further_reading:
 - link: /synthetics/api_tests/http_tests
   tag: Documentación
   text: Configurar un test de HTTP
-kind: guía
 title: Prevenir problemas con la caché en los tests de Synthetics
 ---
 

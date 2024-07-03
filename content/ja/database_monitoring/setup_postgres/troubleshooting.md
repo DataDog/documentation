@@ -1,11 +1,7 @@
 ---
 description: Postgres のデータベースモニタリングセットアップのトラブルシューティング
-kind: documentation
 title: Postgres 用 DBM セットアップのトラブルシューティング
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
 このページでは、Postgres によるデータベースモニタリングのセットアップおよび使用に関する一般的な問題と、その解決方法について詳しく説明します。Datadog では、Agent のバージョンリリースにより内容が変更となる可能性があるため、最新の安定した Agent バージョンを使用し、最新の[セットアップドキュメント][1]に従っていただくことをお勧めします。
 
@@ -253,8 +249,8 @@ sudo apt-get install postgresql-contrib-10
 
 [1]: /ja/database_monitoring/setup_postgres/
 [2]: /ja/agent/troubleshooting/
-[3]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-[4]: /ja/agent/guide/agent-log-files
+[3]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /ja/agent/configuration/agent-log-files
 [5]: /ja/database_monitoring/data_collected/#which-queries-are-tracked
 [6]: https://www.postgresql.org/docs/current/pgstatstatements.html#id-1.11.7.38.8
 [7]: /ja/database_monitoring/setup_postgres/advanced_configuration

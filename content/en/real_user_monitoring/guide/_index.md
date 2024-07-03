@@ -1,6 +1,6 @@
 ---
 title: Real User Monitoring & Session Replay Guides
-kind: guide
+
 private: true
 disable_toc: true
 cascade:
@@ -23,7 +23,6 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Getting started with Feature Flag Tracking{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitor kiosk sessions using RUM{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Best practices for RUM sampling{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/monitor-utm-campaigns-in-rum" >}}Monitor UTM Campaigns in RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}
@@ -49,6 +48,7 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Use multiple instances of the Mobile SDK{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}Proxy your Mobile RUM data{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/initialize-your-native-sdk-before-react-native-starts" >}}Initialize your native SDK before React Native starts{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/monitor-hybrid-react-native-applications" >}}Monitor hybrid React Native applications{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Session Replay:" >}}

@@ -37,7 +37,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/tagging-best-practices/#aws
   tag: ブログ
   text: インフラストラクチャーとアプリケーションにタグを付けるためのベストプラクティス
-kind: ガイド
 title: AWS マニュアルセットアップガイド
 ---
 
@@ -112,20 +111,21 @@ IAM ポリシーで定義された権限を使用するために、Datadog 用�
 {{% /tab %}}
 {{% tab "Access keys (GovCloud or China Only)" %}}
 
-## 計画と使用
+## セットアップ
 
 ### AWS
 
 1. AWS のコンソールで、Datadog インテグレーションで使用する IAM ユーザーを[必要な権限](#aws-integration-iam-policy)で作成します。
 2. Datadog インテグレーション IAM ユーザー用のアクセスキーとシークレットキーを生成します。
 
-### Ruby
+### Datadog
 
 3. [AWS インテグレーションタイル][1]で、**Add AWS Account** をクリックし、** Manually** を選択します。
 4. **Access Keys (GovCloud or China\* Only)** タブを選択します。
-5. `Account ID`、`AWS Access Key`、`AWS Secret Key` を入力します。GovCloud および中国用のアクセスキーとシークレットキーのみが許可されます。
-6. **Save** をクリックします。
-7. データ収集が開始されるまで最大 10 分待ち、すぐに使える <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS 概要ダッシュボード</a>を表示し、AWS サービスやインフラストラクチャーから送信されるメトリクスを確認します。
+5. **I confirm that the IAM User for the Datadog Integration has been added to the AWS Account** (Datadog インテグレーション用の IAM ユーザーが AWS アカウントに追加されていることを確認します) チェックボックスをクリックします。
+6. `Account ID`、`AWS Access Key`、`AWS Secret Key` を入力します。GovCloud および中国用のアクセスキーとシークレットキーのみが許可されます。
+7. **Save** をクリックします。
+8. データ収集が開始されるまで最大 10 分待ち、すぐに使える <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS 概要ダッシュボード</a>を表示し、AWS サービスやインフラストラクチャーから送信されるメトリクスを確認します。
 
  \* _中国本土における (または中国本土内の環境に関連する) Datadog サービスの使用はすべて、当社 Web サイトの[サービス制限地域][10]セクションに掲載されている免責事項に従うものとします。_
 

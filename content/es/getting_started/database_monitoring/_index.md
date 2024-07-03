@@ -13,7 +13,6 @@ further_reading:
   tag: Habilitar los fundamentos
   text: Participa en una sesión interactiva para mejorar la Monitorización de bases
     de datos
-kind: documentación
 title: Empezando con la monitorización de bases de datos
 ---
 

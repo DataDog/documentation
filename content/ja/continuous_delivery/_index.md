@@ -21,7 +21,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/
   tag: ブログ
   text: CI/CD モニタリングのベストプラクティス
-kind: ドキュメント
 title: Continuous Delivery Visibility
 ---
 
@@ -41,7 +40,7 @@ Datadog Continuous Delivery (CD) Visibility は、デプロイメントの可観
 
 Datadog は、以下の CD プロバイダーとインテグレーションして、デプロイメントメトリクスを収集し、デプロイメント実行のパフォーマンスと結果を追跡します。時間の経過とともに集計されたデータを使用して、デプロイメントのパフォーマンスの傾向を追跡します。
 
-{{< partial name="continuous_delivery/cd-pipelines-getting-started.html" >}}
+{{< partial name="continuous_delivery/cd-getting-started.html" >}}
 
 </br>
 

@@ -1,6 +1,5 @@
 ---
 title: ログ分析 API を使用したカスタムレポートの構築
-kind: ガイド
 further_reading:
   - link: /logs/explorer/analytics/?tab=timeseries#overview
     tag: Documentation

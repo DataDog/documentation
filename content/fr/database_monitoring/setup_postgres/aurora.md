@@ -1,6 +1,5 @@
 ---
 title: Configuration de Database Monitoring pour Postgres avec une gestion sur Aurora
-kind: documentation
 description: "Installez et configurez Database Monitoring pour Postgres sur Amazon\_Aurora."
 further_reading:
   - link: /integrations/postgres/

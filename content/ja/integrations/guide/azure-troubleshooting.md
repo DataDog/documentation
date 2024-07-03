@@ -5,7 +5,6 @@ further_reading:
 - link: /integrations/azure/
   tag: ドキュメント
   text: Azure インテグレーション
-kind: ガイド
 title: Azure のトラブルシューティング
 ---
 

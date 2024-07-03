@@ -28,7 +28,7 @@ integration_id: amazon-lambda
 integration_title: Amazon Lambda
 integration_version: ''
 is_public: true
-kind: integration
+custom_kind: integration
 manifest_version: '1.0'
 monitors:
   lambda_high_error_rate: assets/monitors/lambda_high_error_rate.json

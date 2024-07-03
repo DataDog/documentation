@@ -1,6 +1,5 @@
 ---
 title: Datadog Audit Trail
-kind: documentation
 aliases:
     - /account_management/audit_logs/
 further_reading:
@@ -150,6 +149,16 @@ Events that match the following queries are marked as notable.
 The Inspect Changes (Diff) tab in the audit event details panel compares the configuration changes that were made to what was previously set. It shows the changes made to dashboard, notebook, and monitor configurations, which are represented as JSON objects.
 
 {{< img src="account_management/audit_logs/inspect_changes.png" alt="The audit event side panel showing the changes to a composite monitor configuration, where the text highlighted in green is what was changed and the text highlighted in red is what was removed." style="width:70%;">}}
+
+## Filter audit events based on Reference Tables
+
+<div class="alert alert-warning">Reference Tables are in beta. Reference Tables containing over 40,000 rows cannot be used to filter events. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables. </div>
+
+Reference Tables allow you to combine metadata with audit events, providing more information to investigate Datadog user behavior. Add a query filter based on a Reference Table to perform lookup queries. For more information on activating and managing this feature, see the [Reference Tables][2] guide.
+
+To apply a query filter with Reference Tables, click on the `+ Add` button next to the query editor and select **Join with Reference Table**. In the following example, the Reference Table query filter is used to search for dashboards modified by users who are accessing Datadog from non-authorized IP addresses:
+
+{{< img src="account_management/audit_logs/reference_tables.png" alt="The Datadog Audit Trail explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
 
 ### API key auditing
 

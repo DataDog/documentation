@@ -1,6 +1,5 @@
 ---
 title: Automate Security Workflows with Workflow Automation
-kind: documentation
 further_reading:
   - link: "/security/cloud_security_management"
     tag: "Documentation"

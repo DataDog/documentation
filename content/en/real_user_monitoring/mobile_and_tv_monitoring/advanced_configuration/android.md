@@ -1,6 +1,5 @@
 ---
 title: RUM Android Advanced Configuration
-kind: documentation
 code_lang: android
 type: multi-code-lang
 code_lang_weight: 10
@@ -8,7 +7,7 @@ aliases:
     - /real_user_monitoring/android/advanced_configuration/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation
@@ -483,6 +482,18 @@ To modify some attributes in your RUM events, or to drop some of the events enti
    |               | `view.name`           | Name of the view.                                |
    
    **Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
+
+## Retrieve the RUM session ID
+
+Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
+
+You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
+
+```kotlin
+GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
+  currentSessionId = sessionId
+}
+```
 
 ## Further Reading
 

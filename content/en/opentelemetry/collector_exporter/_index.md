@@ -1,6 +1,5 @@
 ---
 title: OpenTelemetry Collector and Datadog Exporter
-kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
 - /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
@@ -8,7 +7,7 @@ aliases:
 description: 'Send OpenTelemetry data to the OpenTelemetry Collector and Datadog Exporter'
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "Collector documentation"
 - link: "https://www.datadoghq.com/blog/ingest-opentelemetry-traces-metrics-with-datadog-exporter/"
   tag: "Blog"

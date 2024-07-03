@@ -164,7 +164,7 @@ core_product:
     - name: cloud siem
       requires_all_keyvals:
         - 'core_product:security'
-    - name: code profiling
+    - name: continuous profiler
     - name: continuous testing
       requires_all_keyvals:
         - 'core_product:synthetic monitoring'

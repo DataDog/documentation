@@ -1,6 +1,5 @@
 ---
 title: Container Discovery Management
-kind: guide
 aliases:
  - /agent/autodiscovery/management
  - /agent/kubernetes/management
@@ -21,7 +20,7 @@ You can adjust the discovery rules for the Agent to restrict metric and log coll
 
 These restrictions can be set by either:
 - Providing environment variables to the Datadog Agent container as an allowlist/blocklist of containers.
-- Adding annotations to your Kubernetes pods to allow/block individual containers.
+- Adding annotations to your Kubernetes pods to block individual pods or containers.
 
 The first option works well as a list of container names, images, or Kubernetes namespaces to exclude for the entire cluster. The second option works well for more fine tuned exclusions in Kubernetes.
 
@@ -251,6 +250,20 @@ spec:
           #(...)
 ```
 
+### Tolerate unready pods
+
+By default, `unready` pods are ignored when the Datadog Agent schedules checks. Therefore, metrics, service checks, and logs are not collected from these pods. To override this behavior, set the annotation `ad.datadoghq.com/tolerate-unready` to `"true"`. For example:
+
+```yaml
+apiVersion: v1
+kind: Pod
+# (...)
+metadata:
+  name: '<POD_NAME>'
+  annotations:
+    ad.datadoghq.com/tolerate-unready: "true"
+  ...
+```
 
 ## Further Reading
 

@@ -1,6 +1,5 @@
 ---
 title: クレジットカードでの支払い
-kind: documentation
 ---
 ## 概要
 

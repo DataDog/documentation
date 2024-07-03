@@ -1,6 +1,5 @@
 ---
 title: Tracing Go Applications
-kind: documentation
 aliases:
 - /tracing/go/
 - /tracing/languages/go
@@ -14,10 +13,10 @@ type: multi-code-lang
 code_lang_weight: 20
 further_reading:
 - link: "https://github.com/DataDog/dd-trace-go/tree/v1"
-  tag: "GitHub"
+  tag: "Source Code"
   text: "Source code"
 - link: "https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace"
-  tag: "GoDoc"
+  tag: "External Site"
   text: "Package page"
 - link: "/tracing/glossary/"
   tag: "Documentation"

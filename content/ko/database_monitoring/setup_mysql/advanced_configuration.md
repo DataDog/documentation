@@ -1,12 +1,7 @@
 ---
 description: MySQL 데이터베이스 모니터링을 위한 고급 설정
-kind: 설명서
 title: MySQL 데이터베이스 모니터링을 위한 고급 설정
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">이 사이트에서는 Database Monitoring이 지원되지 않습니다.</div>
-{{< /site-region >}}
 
 ## `events_statements_summary_by_digest` 잘라내기
 
@@ -35,7 +30,7 @@ SELECT * FROM daily_aggregates_002
 SELECT * FROM daily_aggregates_003
 ```
 
-이러한 경우 `replace_digits` 옵션을 사용하여 이러한 쿼리를 단일 정규화된 쿼리로 추적하면 해당 쿼리에 대한 모든 메트릭이 단일 쿼리로 롤업됩니다:
+이러한 경우 `replace_digits` 옵션을 사용해 해당 쿼리를 하나의 정규화된 쿼리로 추적하여 해당 쿼리에 대한 모든 메트릭이 하나의 쿼리로 롤업되도록 합니다:
 
 ```sql
 SELECT * FROM daily_aggregates_?
@@ -52,9 +47,9 @@ instances:
     replace_digits: true
 ```
 
-## 샘플링 속도 향상
+## 샘플링 속도 높이기
 
-상대적으로 자주 발생하지 않거나 빨리 실행되는 쿼리가 있는 경우 `collection_interval` 값을 낮춰 샘플을 더 자주 수집합니다.
+상대적으로 자주 발생하지 않거나 빨리 실행되는 쿼리가 있는 경우 `collection_interval` 값을 낮춰 샘플링 속도를 높이면 표본을 더 자주 수집할 수 있습니다.
 
 Datadog Agent의 데이터베이스 인스턴스 설정에서 `collection_interval`을 설정합니다. 기본값은 1입니다. 값을 더 작은 간격으로 줄입니다:
 

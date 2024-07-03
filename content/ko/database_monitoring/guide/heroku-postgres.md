@@ -3,7 +3,6 @@ further_reading:
 - link: /agent/basic_agent_usage/heroku/
   tag: 설명서
   text: Datadog 헤로쿠 빌드팩
-kind: 가이드
 private: true
 title: 데이터베이스 모니터링을 위해 헤로쿠(Heroku) Postgres 설정
 ---

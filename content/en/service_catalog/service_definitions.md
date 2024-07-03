@@ -1,12 +1,11 @@
 ---
 title: Service Definitions and Supported Versions
-kind: documentation
 further_reading:
 - link: "/tracing/service_catalog/adding_metadata"
   tag: "Documentation"
   text: "Adding metadata"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage service definitions with Terraform"
 - link: "/api/latest/service-definition/"
   tag: "API"
@@ -190,8 +189,8 @@ The `inheritFrom` field instructs the ingestion pipeline to inherit metadata fro
 Note: The entity reference only applies to an entity from the same YAML file. 
 
 ##### Implicit Inheritance 
-Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:library`) inherit all metadata from the application that it belongs to under the following conditions:
-- The component belongs to only *one* application in the same YAML file. For example, if a component of `kind:service` is specified as part of two separate `kind:application` definitions, it does not implicitly inherit the metadata from either parent application. 
+Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit all metadata from the application that they belong to under the following conditions:
+- There is only one application defined in the YAML file.
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
 
 #### v3.0 API endpoints (alpha)
@@ -266,6 +265,18 @@ Permission: SERVICE_CATALOG_READ
 
 {{< code-block lang="yaml" collapsible="true" >}}
 curl --location 'https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>' \
+--header 'DD-API-KEY: <KEY>' \
+--header 'DD-APPLICATION-KEY: <APP_KEY>'
+{{< /code-block >}}
+
+URL Parameter: `ref <kind>:<name>`
+
+##### Delete entities by reference 
+DELETE https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>
+Permission: SERVICE_CATALOG_WRITE
+
+{{< code-block lang="yaml" collapsible="true" >}}
+curl --location --request DELETE 'https://api.datadoghq.com/api/unstable/catalog/definition/ref/<ref>' \
 --header 'DD-API-KEY: <KEY>' \
 --header 'DD-APPLICATION-KEY: <APP_KEY>'
 {{< /code-block >}}

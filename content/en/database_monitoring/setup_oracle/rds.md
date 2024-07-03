@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for RDS Oracle
-kind: documentation
 description: Install and configure Database Monitoring for RDS Oracle
 further_reading:
 - link: "/integrations/oracle/"
@@ -8,10 +7,6 @@ further_reading:
   text: "Basic Oracle Integration"
 
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 {{% dbm-oracle-definition %}}
 
@@ -61,7 +56,6 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('V_$INSTANCE','DATADOG','SELECT',p_
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_FEATURE_USAGE_STATISTICS','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PROCESS','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SESSION','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CON_SYSMETRIC','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_TABLESPACE_USAGE_METRICS','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_TABLESPACES','DATADOG','SELECT',p_grant_option => false);
@@ -73,9 +67,6 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PDBS','DATADOG','SELECT',p_gran
 exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_SERVICES','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$OSSTAT','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PARAMETER','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQLSTATS','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',p_grant_option => false);
-exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PGASTAT','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$ASM_DISKGROUP','DATADOG','SELECT',p_grant_option => false);
@@ -144,7 +135,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 
 <div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 
-[1]: /agent/basic_agent_usage#agent-overhead
+[1]: /database_monitoring/agent_integration_overhead/?tab=oracle
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [3]: /agent/configuration/agent-commands/#agent-status-and-information
 [4]: https://app.datadoghq.com/databases

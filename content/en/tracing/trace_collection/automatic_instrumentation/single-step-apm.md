@@ -1,6 +1,5 @@
 ---
 title: Single Step APM Instrumentation (Beta)
-kind: documentation
 is_beta: true
 aliases:
 - /tracing/trace_collection/single-step-apm
@@ -35,10 +34,10 @@ For an Ubuntu host:
 1. Run the one-line installation command:
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
-   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
+   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][4], `<YOUR_DD_SITE>` with your [Datadog site][3], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 2. Start a new shell session.
 3. Restart the services on the host or VM.
@@ -60,14 +59,14 @@ For a Docker Linux container:
 
 1. Run the one-line installation command:
    ```shell
-   bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
    ```
 2. Configure the Agent in Docker:
    ```shell
    docker run -d --name dd-agent \
-     -e DD_API_KEY=${YOUR_DD_API_KEY} \
+     -e DD_API_KEY=<YOUR_DD_API_KEY> \
      -e DD_APM_ENABLED=true \
-     -e DD_ENV=<AGENT_ENV>
+     -e DD_ENV=<AGENT_ENV> \
      -e DD_APM_NON_LOCAL_TRAFFIC=true \
      -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
      -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
@@ -76,7 +75,7 @@ For a Docker Linux container:
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
      gcr.io/datadoghq/agent:7
    ```
-   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][5] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
+   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][5] and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `staging`).
    <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 3. Restart the Docker containers.
 4. [Explore the performance observability of your services in Datadog][6].
@@ -210,7 +209,7 @@ By default, enabling APM on your server installs support for Java, Python, Ruby,
 For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
 
 ```shell
-DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=staging bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
@@ -242,7 +241,7 @@ By default, enabling APM on your server installs support for Java, Python, Ruby,
 For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
 
 ```shell
-DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_docker_injection.sh)"
 ```
 
 You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.

@@ -1,6 +1,6 @@
 ---
 title: Setting Up APM with C++
-kind: guide
+
 further_reading:
 - link: "/tracing/trace_collection/dd_libraries/cpp/"
   tag: "Documentation"
@@ -34,26 +34,13 @@ sudo apt-get update
 sudo apt-get -y install g++ cmake
 ```
 
-Run these two lines together to get the latest C++ tracer version:
-
-```cpp
-get_latest_release() {
-  wget -qO- "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
-}
-DD_TRACE_CPP_VERSION="$(get_latest_release DataDog/dd-trace-cpp)"
-```
-
-If you get a rate limited message from GitHub, wait a few minutes and run the command again. When the update is complete, confirm that this is successful by checking your C++ version with:
+Download and install `dd-trace-cpp` library with:
 
 ```shell
-echo $DD_TRACE_CPP_VERSION
+wget https://github.com/DataDog/dd-trace-cpp/archive/v0.2.0.tar.gz -O dd-trace-cpp.tar.gz
 ```
 
-Then, download and install the `dd-trace-cpp` library with:
-
-```shell
-wget https://github.com/DataDog/dd-trace-cpp/archive/${DD_TRACE_CPP_VERSION}.tar.gz -O dd-trace-cpp.tar.gz
-```
+If you get a rate limited message from GitHub, wait a few minutes and run the command again.
 
 After downloading the `tar` file, unzip it:
 
@@ -109,7 +96,7 @@ int main(int argc, char* argv[]) {
 
 This creates a tracer that generates two spans, a parent span `span_a` and a child span `span_b`, and tags them.
 
-Then, link against `libdd_trace_cpp` with:
+Then, compile and link against `libdd_trace_cpp` with:
 
 ```shell
 g++ -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
@@ -155,5 +142,5 @@ Click on the service to view your traces.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup/cpp/#compile-against-dd-opentracing-cpp
+[1]: /tracing/setup/cpp/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu

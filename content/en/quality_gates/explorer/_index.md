@@ -1,6 +1,5 @@
 ---
 title: Quality Gates Explorer
-kind: documentation
 description: Learn about the Quality Gates Explorer for quality gates and rule executions.
 aliases:
 - /continuous_integration/quality_gates/
@@ -16,10 +15,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Quality Gates is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
-
-{{< callout url="#" btn_hidden="true" >}}
-Quality Gates is in public beta.
-{{< /callout >}}
 
 ## Overview
 
@@ -104,7 +99,7 @@ Select a visualization type to visualize the outcomes of filters and aggregation
 
 ## Export
 
-Export your view in the [Quality Gates Explorer][4] to reuse it later or in different contexts.
+Export your view in the [Quality Gates Explorer][5] to reuse it later or in different contexts. For more information, see [Saved Views][4].
 
 ## Further reading
 
@@ -114,3 +109,4 @@ Export your view in the [Quality Gates Explorer][4] to reuse it later or in diff
 [2]: /quality_gates/explorer/search_syntax
 [3]: /quality_gates/explorer/facets
 [4]: /quality_gates/explorer/saved_views
+[5]: /quality_gates/explorer

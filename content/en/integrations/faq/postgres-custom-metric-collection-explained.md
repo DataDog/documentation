@@ -1,6 +1,6 @@
 ---
 title: Postgres Custom Metric Collection
-kind: faq
+
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"

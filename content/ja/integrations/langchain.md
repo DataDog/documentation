@@ -27,6 +27,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - ai/ml
+- 開発ツール
+- コスト管理
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/langchain/README.md
 display_on_public_website: true
@@ -49,6 +51,8 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::AI/ML
+  - Category::Developer Tools
+  - Category::Cost Management
   - Submitted Data Type::Metrics
   - Submitted Data Type::Logs
   - Submitted Data Type::Traces
@@ -70,9 +74,9 @@ tile:
 
 Datadog のメトリクス、APM、ログを使用して、[LangChain][1] Python ライブラリのリクエストから、コストの見積もり、プロンプトとコンプリーションのサンプリング、エラー追跡、パフォーマンスメトリクスなどを取得します。
 
-## 計画と使用
+## セットアップ
 
-### インフラストラクチャーリスト
+### インストール
 
 1. Datadog Agent で APM と StatsD を有効化します。例えば、Docker で:
 
@@ -108,7 +112,7 @@ DD_SERVICE="my-service" DD_ENV="staging" DD_API_KEY=<DATADOG_API_KEY> ddtrace-ru
 より高度な使い方については、[APM Python ライブラリドキュメント][2]を参照してください。
 
 
-### ブラウザトラブルシューティング
+### 構成
 
 利用可能なすべての構成オプションについては、[APM Python ライブラリドキュメント][3]を参照してください。
 
@@ -152,22 +156,22 @@ WARNING:ddtrace.vendor.dogstatsd:Error submitting packet: [Errno 61] Connection 
 DEBUG:ddtrace.contrib._trace_utils_llm.py:sent 2 logs to 'http-intake.logs.datadoghq.com'
 ```
 
-## リアルユーザーモニタリング
+## データ収集
 
-### データセキュリティ
+### メトリクス
 {{< get-metrics-from-git "langchain" >}}
 
 
-### ヘルプ
+### イベント
 
 LangChain インテグレーションには、イベントは含まれません。
 
-### ヘルプ
+### サービスチェック
 
 LangChain インテグレーションには、サービスのチェック機能は含まれません。
 
 
-## ヘルプ
+## トラブルシューティング
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 

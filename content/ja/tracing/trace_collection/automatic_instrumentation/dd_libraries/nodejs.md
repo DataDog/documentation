@@ -24,7 +24,6 @@ further_reading:
 - link: tracing/trace_collection/otel_instrumentation/
   tag: 高度な使用方法
   text: 高度な使用方法
-kind: ドキュメント
 title: Node.js アプリケーションのトレース
 type: multi-code-lang
 ---

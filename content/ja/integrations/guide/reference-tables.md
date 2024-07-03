@@ -16,7 +16,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/add-context-with-reference-tables/
   tag: ブログ
   text: リファレンステーブルを使用してログにさらにコンテキストを追加する
-kind: ガイド
 title: リファレンステーブルでカスタムメタデータを追加する
 ---
 

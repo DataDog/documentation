@@ -4,17 +4,12 @@ further_reading:
 - link: /integrations/postgres/
   tag: ドキュメント
   text: Postgres インテグレーションの基本
-kind: documentation
 title: Aurora マネージド Postgres の Database Monitoring のセットアップ
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring はこのサイトでサポートされていません。</div>
-{{< /site-region >}}
+データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に可視化します。
 
-Database Monitoring は、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースに対する深い可視性を提供します。
-
-Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリを収集します。Postgres データベースで Database Monitoring を有効にするには、以下の設定を行ってください。
+Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリーを収集します。Postgres データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
 
 1. [データベースのパラメーターを構成する](#configure-postgres-settings)
 1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
@@ -30,11 +25,11 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 7.36.1+
 
 パフォーマンスへの影響
-: Database Monitoring 用のデフォルト Agent 構成は控えめですが、収集間隔やクエリのサンプリングレートなどの設定を調整して、ニーズに更に合わせることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。<br/><br/>
-Database Monitoring は、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
+: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、および CPU の 1 % 未満を占めています。<br/><br/>
+データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
 プロキシ、ロードバランサー、コネクションプーラー
-: Datadog Agent は、監視対象のホストに直接接続する必要があります。セルフホスト型のデータベースでは、`127.0.0.1` またはソケットを使用することをお勧めします。Agent をプロキシ、ロードバランサー、`pgbouncer` などのコネクションプーラー、または **Aurora クラスターエンドポイント** を経由してデータベースに接続しないようご注意ください。クラスターエンドポイントに接続されると、Agent は 1 つのランダムなレプリカからデータを収集し、そのレプリカのみを視覚化します。Agent が実行中に異なるホストに接続すると (フェイルオーバーやロードバランシングなどの場合)、Agent は 2 つのホスト間で統計情報の差を計算し、不正確なメトリクスを生成します。
+: Datadog Agent は、監視対象のホストに直接接続する必要があります。セルフホスト型のデータベースの場合は、`127.0.0.1` またはソケットが推奨されます。Agent は、プロキシ、ロードバランサー、`pgbouncer` などのコネクションプーラーまたは **Aurora クラスターエンドポイント**を介してデータベースに接続すべきではありません。クラスターエンドポイントに接続されている場合、Agent はランダムな 1 つのレプリカからデータを収集し、そのレプリカの可視性だけを提供します。Agent が実行中に異なるホストに接続すると (フェイルオーバーやロードバランシングなどの場合)、Agent は 2 つのホスト間で統計情報の差を計算し、不正確なメトリクスを生成します。
 
 データセキュリティへの配慮
 : Agent がお客様のデータベースからどのようなデータを収集するか、またそのデータの安全性をどのように確保しているかについては、[機密情報][2]を参照してください。
@@ -45,19 +40,19 @@ Database Monitoring は、ベースとなる Agent 上のインテグレーシ�
 
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
-| `shared_preload_libraries` | `pg_stat_statements` | `postgresql.queries.*` メトリクスに対して必要です。[pg_stat_statements][5] 拡張機能を使用して、クエリメトリクスの収集を可能にします。Aurora でデフォルトで有効。 |
-| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
-| `pg_stat_statements.track` | `ALL` | オプション。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
-| `pg_stat_statements.max` | `10000` | オプション。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
-| `pg_stat_statements.track_utility` | `off` | オプション。PREPARE や EXPLAIN のようなユーティリティコマンドを無効にします。この値を `off` にすると、SELECT、UPDATE、DELETE などのクエリのみが追跡されます。 |
+| `shared_preload_libraries` | `pg_stat_statements` | `postgresql.queries.*` メトリクスに対して必要です。[pg_stat_statements][5] 拡張機能を使用して、クエリメトリクスの収集を可能にします。Aurora ではデフォルトでオンです。 |
+| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字を超えるクエリは収集されません。 |
+| `pg_stat_statements.track` | `ALL` | オプションです。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
+| `pg_stat_statements.max` | `10000` | オプションです。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
+| `pg_stat_statements.track_utility` | `off` | オプション。PREPARE や EXPLAIN といったユーティリティコマンドを無効にします。この値を `off` に設定すると、SELECT、UPDATE、DELETE のようなクエリのみが追跡されます。 |
 | `track_io_timing` | `on` | オプション。クエリのブロックの読み取りおよび書き込み時間の収集を有効にします。 |
 
 
 ## Agent にアクセスを付与する
 
-Datadog Agent は、統計やクエリを収集するためにデータベースサーバーへの読み取り専用のアクセスを必要とします。
+Datadog Agent が統計やクエリを収集するためには、データベース サーバーへの読み取り専用のアクセスが必要となります。
 
-Postgres がレプリケーションされている場合、以下の SQL コマンドはクラスター内の**プライマリ**データベースサーバー (ライター) で実行する必要があります。Agent が接続するデータベースサーバー上の PostgreSQL データベースを選択します。Agent は、どのデータベースに接続してもデータベースサーバー上のすべてのデータベースからテレメトリーを収集することができるため、デフォルトの `postgres` データベースを使用することをお勧めします。[そのデータベースに対して、固有のデータに対するカスタムクエリ][6]を Agentで実行する必要がある場合のみ別のデータベースを選択してください。
+Postgres が複製されている場合、以下の SQL コマンドはクラスター内の**プライマリ**データベースサーバー (ライター) で実行する必要があります。Agent が接続するデータベースサーバー上の PostgreSQL データベースを選択します。Agent は、どのデータベースに接続してもデータベースサーバー上のすべてのデータベースからテレメトリーを収集することができるため、デフォルトの `postgres` データベースを使用することをお勧めします。[そのデータベースに対して、固有のデータに対するカスタムクエリ]を Agentで実行する必要がある場合のみ別のデータベースを選択してください[6]。
 
 選択したデータベースに、スーパーユーザー (または十分な権限を持つ他のユーザー) として接続します。例えば、選択したデータベースが `postgres` である場合は、次のように実行して [psql][7] を使用する `postgres` ユーザーとして接続します。
 
@@ -71,7 +66,7 @@ Postgres がレプリケーションされている場合、以下の SQL コマ
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-**注:** IAM 認証もサポートされています。Auroraインスタンスでのこの構成方法については、[ガイド][13]を参照してください。
+**注:** IAM 認証もサポートされています。Aurora インスタンスの場合のこの構成方法については、[ガイド][13]を参照してください。
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
@@ -115,7 +110,7 @@ SECURITY DEFINER;
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">追加のテーブルをクエリする必要があるデータ収集またはカスタムメトリクスでは、それらのテーブルの <code>SELECT</code> 権限を <code>datadog</code> ユーザーに付与する必要がある場合があります。例: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code>。詳細は、<a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL カスタムメトリクス収集</a>を参照してください。</div>
+<div class="alert alert-info">追加のテーブルをクエリする必要があるデータ収集またはカスタムメトリクスの場合は、それらのテーブルの <code>SELECT</code> 権限を <code>datadog</code> ユーザーに付与する必要があるかもしれません。例: <code>grant SELECT on &lt;TABLE_NAME&gt; to datadog;</code> 詳細は <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL カスタムメトリクスの収集</a>を参照してください。</div>
 
 Agent が実行計画を収集できるように、**すべてのデータベース**に関数を作成します。
 
@@ -191,7 +186,7 @@ psql -h localhost -U datadog postgres -A \
 Aurora ホストを監視するには、インフラストラクチャーに Datadog Agent をインストールし、各インスタンスのエンドポイントにリモートで接続するよう構成します。Agent はデータベース上で動作する必要はなく、データベースに接続するだけで問題ありません。ここに記載されていないその他の Agent のインストール方法については、[Agent のインストール手順][8]を参照してください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
 ホスト上で実行されている Agent のデータベースモニタリングメトリクスの収集を構成するには、次の手順に従ってください。(Agent で Aurora データベースからメトリクスを収集するために小規模な EC2 インスタンスをプロビジョニングする場合など)
 
@@ -220,15 +215,18 @@ Aurora ホストを監視するには、インフラストラクチャーに Dat
 
 2. [Agent を再起動します][2]。
 
+**Datadog Agent は、クラスター内のすべての Aurora エンドポイントの[オートディスカバリー][14]をサポートしています。**
+
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[14]: /ja/database_monitoring/guide/aurora_autodiscovery/?tab=postgres
 {{% /tab %}}
 {{% tab "Docker" %}}
 
 ECS や Fargate などの Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
-**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットに対する読み取り権限が与えられている必要があります。
+**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットの読み取り権限が必要です。
 
 ### コマンドライン
 
@@ -252,7 +250,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
   gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
-Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
+Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの構成に以下の設定を追加します。
 
 ```yaml
 pg_stat_statements_view: datadog.pg_stat_statements()
@@ -261,7 +259,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 
 ### Dockerfile
 
-`Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーのコンフィギュレーションを変更することなく、カスタム Agent を構築・デプロイすることができます。
+`Dockerfile` ではラベルの指定も可能であるため、インフラストラクチャーの構成を変更することなく、カスタム Agent を構築・デプロイすることができます。
 
 ```Dockerfile
 FROM gcr.io/datadoghq/agent:7.36.1
@@ -273,7 +271,7 @@ LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AWS_INSTANCE_ENDPOI
 
 <div class="alert alert-warning"><strong>重要</strong>: クラスターのエンドポイントではなく、Aurora インスタンスのエンドポイントをホストとして使用します。</div>
 
-Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
+Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの構成に以下の設定を追加します。
 
 ```yaml
 pg_stat_statements_view: datadog.pg_stat_statements()
@@ -291,7 +289,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 
 Kubernetes クラスターをお使いの場合は、データベースモニタリング用の [Datadog Cluster Agent][1] をご利用ください。
 
-Kubernetes クラスターでまだチェックが有効になっていない場合は、手順に従って[クラスターチェックを有効][2]にしてください。Postgres のコンフィギュレーションは、Cluster Agent コンテナにマウントされた静的ファイル、またはサービスアノテーションのいずれかを使用して宣言できます。
+Kubernetes クラスターでまだチェックが有効になっていない場合は、手順に従って[クラスターチェックを有効][2]にしてください。Postgres の構成は、Cluster Agent コンテナにマウントされた静的ファイル、またはサービスアノテーションのいずれかを使用して宣言できます。
 
 ### Helm のコマンドライン
 
@@ -316,7 +314,7 @@ instances:
   datadog/datadog
 ```
 
-Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
+Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの構成に以下の設定を追加します。
 
 ```yaml
 pg_stat_statements_view: datadog.pg_stat_statements()
@@ -325,7 +323,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 
 ### マウントされたファイルで構成する
 
-マウントされたコンフィギュレーションファイルを使ってクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/postgres.yaml` にマウントします。
+マウントされたコンフィギュレーションファイルでクラスターチェックを構成するには、コンフィギュレーションファイルを Cluster Agent コンテナのパス `/conf.d/postgres.yaml` にマウントします。
 
 ```yaml
 cluster_check: true  # Make sure to include this flag
@@ -343,7 +341,7 @@ instances:
 
 ### Kubernetes サービスアノテーションで構成する
 
-ファイルをマウントせずに、インスタンスのコンフィギュレーションを Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
+ファイルをマウントせずに、インスタンスの構成を Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
 
 ```yaml
 apiVersion: v1
@@ -375,16 +373,16 @@ spec:
 ```
 <div class="alert alert-warning"><strong>重要</strong>: ここでは、Aurora クラスターのエンドポイントではなく、Aurora インスタンスのエンドポイントを使用してください。</div>
 
-Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
+Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの構成に以下の設定を追加します。
 
 ```yaml
 pg_stat_statements_view: datadog.pg_stat_statements()
 pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-Cluster Agent は自動的にこのコンフィギュレーションを登録し、Postgres チェックを開始します。
+Cluster Agent は自動的にこの構成を登録し、Postgres チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
+`datadog` ユーザーのパスワードをプレーンテキストで公開しないようにするには、Agent の[シークレット管理パッケージ][4]を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
 
 [1]: /ja/agent/cluster_agent
 [2]: /ja/agent/cluster_agent/clusterchecks/
@@ -394,7 +392,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 
 {{< /tabs >}}
 
-### 検証
+### UpdateAzureIntegration
 
 [Agent の status サブコマンドを実行][9]し、Checks セクションで `postgres` を探します。または、[データベース][10]のページを参照してください。
 ## Agent の構成例
@@ -413,7 +411,7 @@ DBM でデータベースのテレメトリーとともに CPU などの AWS か
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /ja/agent/basic_agent_usage#agent-overhead
+[1]: /ja/database_monitoring/agent_integration_overhead/?tab=postgres
 [2]: /ja/database_monitoring/data_collected/#sensitive-information
 [3]: https://www.postgresql.org/docs/current/config-setting.html
 [4]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html

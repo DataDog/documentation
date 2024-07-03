@@ -1,6 +1,5 @@
 ---
 title: ページ区切りで複数のログを収集する
-kind: ガイド
 further_reading:
   - link: /logs/log_configuration/processors
     tag: ビデオ

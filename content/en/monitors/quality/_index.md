@@ -1,10 +1,9 @@
 ---
 title: Monitor Quality
-kind: Documentation
 disable_toc: false
 further_reading:
 - link: "https://app.datadoghq.com/monitors/quality"
-  tag: "In-app"
+  tag: "App"
   text: "Datadog Monitor Quality"
 - link: "/monitors/"
   tag: "Documentation"

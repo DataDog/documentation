@@ -18,7 +18,7 @@ further_reading:
 - link: https://github.com/DataDog/dd-trace-Go
   tags: GitHub
   text: Référentiel du code open source de la bibliothèque de tracing
-kind: guide
+
 title: 'Tutoriel : Activer le tracing pour une application Go et lʼAgent Datadog dans
   des conteneurs'
 ---

@@ -1,9 +1,8 @@
 ---
 title: Troubleshooting
-kind: documentation
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/troubleshooting/"
-  tag: "OpenTelemetry"
+  tag: "External Site"
   text: "OpenTelemetry Troubleshooting"
 ---
 

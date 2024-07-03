@@ -24,6 +24,7 @@ temp
 
 # Developers/ui_extensions
 content/en/developers/ui_extensions.md
+content/en/developers/faq/ui_extensions.md
 
 # Agent section
 content/en/agent/basic_agent_usage/ansible.md
@@ -37,6 +38,9 @@ content/en/agent/guide/ansible_standalone_role.md
 content/en/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby.md
 content/en/tracing/trace_collection/dd_libraries/ruby.md
 content/en/tracing/trace_collection/compatibility/ruby.md
+content/en/tracing/trace_collection/dd_libraries/ruby_v1.md
+content/en/tracing/trace_collection/compatibility/ruby_v1.md
+content/en/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby_v1.md
 
 # Log collection
 content/en/logs/guide/forwarder.md
@@ -75,6 +79,12 @@ content/en/security/threats/agent_expressions.md
 content/en/security/threats/backend.md
 content/en/security_platform/
 
+# security threat detection
+content/en/security/threats/backend_linux.md
+content/en/security/threats/backend_windows.md
+content/en/security/threats/linux_expressions.md
+content/en/security/threats/windows_expressions.md
+
 # cspm cloud resource schemas
 content/en/security/cspm/custom_rules/*.md
 content/en/security/misconfigurations/custom_rules/*.md
@@ -100,6 +110,8 @@ content/en/continuous_testing/cicd_integrations/configuration.md
 content/en/continuous_testing/cicd_integrations/github_actions.md
 content/en/continuous_testing/cicd_integrations/circleci_orb.md
 content/en/continuous_testing/cicd_integrations/azure_devops_extension.md
+content/en/continuous_testing/cicd_integrations/bitrise_upload.md
+content/en/continuous_testing/cicd_integrations/bitrise_run.md
 
 # Code Analysis
 content/en/code_analysis/static_analysis/github_actions.md

@@ -4,13 +4,8 @@ further_reading:
 - link: /integrations/sqlserver/
   tag: ドキュメント
   text: SQL Server インテグレーション
-kind: documentation
 title: Google Cloud SQL マネージド SQL Server のデータベースモニタリングの設定
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
-{{< /site-region >}}
 
 データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Microsoft SQL Server データベースを詳細に可視化します。
 
@@ -106,7 +101,7 @@ driver: '{ODBC Driver 18 for SQL Server}'
 
 すべての Agent の構成が完了したら、[Datadog Agent を再起動][9]します。
 
-### 検証
+### UpdateAzureIntegration
 
 [Agent の status サブコマンドを実行][10]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][11]のページへ移動して開始します。
 
@@ -156,7 +151,7 @@ instances:
 
 すべての Agent の構成が完了したら、[Datadog Agent を再起動][6]します。
 
-### 検証
+### UpdateAzureIntegration
 
 [Agent の status サブコマンドを実行][7]し、**Checks** セクションで `sqlserver` を探します。Datadog の[データベース][8]のページへ移動して開始します。
 
@@ -173,7 +168,7 @@ instances:
 {{% tab "Docker" %}}
 Docker コンテナで動作するデータベースモニタリング Agent を設定するには、Agent コンテナの Docker ラベルとして[オートディスカバリーのインテグレーションテンプレート][1]を設定します。
 
-**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットに対する読み取り権限が与えられている必要があります。
+**注**: ラベルのオートディスカバリーを機能させるためには、Agent にDocker ソケットの読み取り権限が必要です。
 
 アカウントや環境に合わせて、値を置き換えます。利用可能なすべての構成オプションについては、[サンプルコンフィギュレーションファイル][2]を参照してください。
 
@@ -209,7 +204,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 
 `service` と `env` タグを使用して、共通のタグ付けスキームでデータベースのテレメトリーを他のテレメトリーにリンクします。これらのタグが Datadog 全体でどのように使用されるかについては、[統合サービスタグ付け][4]を参照してください。
 
-### 検証
+### UpdateAzureIntegration
 
 [Agent の status サブコマンドを実行][5]し、**Checks** セクションで `sqlserver` を探します。または、Datadog の[データベース][6]のページへ移動して開始します。
 
@@ -281,7 +276,7 @@ instances:
 
 ### Kubernetes サービスアノテーションで構成する
 
-ファイルをマウントせずに、インスタンスのコンフィギュレーションを Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
+ファイルをマウントせずに、インスタンスの構成を Kubernetes サービスとして宣言することができます。Kubernetes 上で動作する Agent にこのチェックを設定するには、Datadog Cluster Agent と同じネームスペースにサービスを作成します。
 
 
 ```yaml

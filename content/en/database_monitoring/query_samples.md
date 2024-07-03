@@ -1,6 +1,5 @@
 ---
 title: Exploring Query Samples
-kind: documentation
 description: Get information about queries currently running and find problematic outliers
 further_reading:
 - link: "/database_monitoring/"
@@ -14,10 +13,6 @@ further_reading:
   text: "Troubleshooting"
 
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 The [Samples page][1] helps you understand which queries were running at a given time. Compare each execution to the average performance of the query and related queries.
 

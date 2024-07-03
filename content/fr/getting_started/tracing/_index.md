@@ -14,7 +14,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Validation des bases
   text: Participer à une session interactive pour maîtriser la solution APM
-kind: documentation
 title: Débuter avec le tracing
 ---
 
@@ -41,7 +40,7 @@ vagrant ssh
 Pour installer l'Agent Datadog sur un host, utilisez la [commande d'installation d'une ligne][6] en indiquant votre [clé d'API Datadog][7] :
 
 ```shell
-DD_API_KEY=<CLÉ_API_DATADOG> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+DD_API_KEY=<CLÉ_API_DATADOG> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 ### Validation

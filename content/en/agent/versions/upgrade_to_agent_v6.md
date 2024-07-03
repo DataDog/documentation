@@ -1,6 +1,5 @@
 ---
 title: Upgrade to Datadog Agent v6
-kind: documentation
 aliases:
   - /agent/faq/upgrade-to-agent-v6
   - /agent/guide/upgrade-to-agent-v6
@@ -22,7 +21,7 @@ If you have Agent v5 already installed, a script is available to automatically i
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 
 The following command works on Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu, and SUSE:
-: `DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent6.sh)"`
+: `DD_UPGRADE=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent6.sh)"`
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as Datadog cannot guarantee full backwards compatibility out of the box.
 
@@ -37,7 +36,7 @@ There is no one step install for Windows platforms, refer to the [Manual Upgrade
 The Agent v6 installer can automatically convert v5 configurations during the upgrade:
 
 ```shell
-DD_UPGRADE=true bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_mac_os.sh)"
+DD_UPGRADE=true bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)"
 ```
 
 **Note:** The import process won't automatically move **custom** Agent checks. This is by design as Datadog cannot guarantee full backwards compatibility out of the box.
@@ -74,6 +73,7 @@ Find below the manual upgrade instructions for:
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -118,6 +118,7 @@ Find below the manual upgrade instructions for:
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -168,6 +169,7 @@ Find below the manual upgrade instructions for:
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
 
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
@@ -211,6 +213,7 @@ Find below the manual upgrade instructions for:
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -249,6 +252,7 @@ Find below the manual upgrade instructions for:
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -299,6 +303,7 @@ Find below the manual upgrade instructions for:
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
 
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_06462314.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
@@ -350,6 +355,7 @@ Find below the manual upgrade instructions for:
   gpgcheck=1
   repo_gpgcheck=1
   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+         https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
          https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
          https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
          https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
@@ -359,6 +365,7 @@ Find below the manual upgrade instructions for:
   ```shell
   sudo zypper refresh
   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_4F09D16B.public
   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public

@@ -1,12 +1,11 @@
 ---
 title: Configuring the Java Tracing Library
-kind: documentation
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-java'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Datadog Java APM source code'
     - link: 'tracing/glossary/'
       tag: 'Documentation'
@@ -317,6 +316,11 @@ When `true`, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32
 **Default**: `false`<br>
 When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the tracer always injects Trace IDs as decimal numbers.
 
+`dd.trace.otel.enabled`
+: **Environment Variable**: `DD_TRACE_OTEL_ENABLED`<br>
+**Default**: `false`<br>
+When `true`, OpenTelemetry-based tracing for [custom][16] instrumentation is enabled.
+
 **Note**:
 
 - If the same key type is set for both, the system property configuration takes priority.
@@ -492,16 +496,6 @@ Deprecated since version 1.9.0
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
 Deprecated since version 1.9.0
 
-### Experimental features
-
-The following configuration options are for features that are available for use but may change in future releases.
-
-`dd.integration.opentelemetry.experimental.enabled`
-: **Environment Variable**: `DD_INTEGRATION_OPENTELEMETRY_EXPERIMENTAL_ENABLED`<br>
-**Default**: `false`<br>
-Enables experimental OpenTelemetry features. When you enable this setting, you can use the OpenTelemetry tracing API backed by the Datadog Trace Agent.<br>
-Available since version 1.10.0
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -521,3 +515,4 @@ Available since version 1.10.0
 [13]: /tracing/compatibility_requirements/java#disabling-integrations
 [14]: /integrations/java/?tab=host#metric-collection
 [15]: /tracing/trace_collection/trace_context_propagation/java/
+[16]: /tracing/trace_collection/custom_instrumentation/java/otel/

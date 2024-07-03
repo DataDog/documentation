@@ -1,6 +1,6 @@
 ---
 title: Logs Not Showing the Expected Timestamp
-kind: guide
+
 aliases:
   - /logs/faq/why-do-my-logs-not-have-the-expected-timestamp
 further_reading:
@@ -23,7 +23,7 @@ By default, when logs are received by the Datadog intake API, a timestamp is gen
 
 The log timestamp is located at the top section of the log panel. Timestamps are stored in UTC and displayed in the user's local timezone. In the above screenshot, the local profile is set to `UTC+1`, therefore the time the log was received is `11:06:16.807 UTC`.
 
-The timestamp may not show the expected value because the timezone is incorrectly set. To check if this is the case, go to [Personal Settings > Preferences][1] and look at the **Time zone** section.
+The timestamp may not show the expected value because the timezone is incorrectly set. To check if this is the case, go to [Preferences][1] and look at the **Time zone** section.
 
 If the timezone is correct, extract the timestamp from the message to override the log timestamp being shown.
 

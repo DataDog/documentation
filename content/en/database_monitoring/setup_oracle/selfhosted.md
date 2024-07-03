@@ -1,16 +1,11 @@
 ---
 title: Setting Up Database Monitoring for Self-Hosted Oracle
-kind: documentation
 description: Install and configure Database Monitoring for Self-Hosted Oracle
 further_reading:
 - link: "/integrations/oracle/"
   tag: "Documentation"
   text: "Basic Oracle Integration"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 {{% dbm-oracle-definition %}}
 
@@ -185,7 +180,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [3]: https://app.datadoghq.com/databases
 [4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle.d/conf.yaml.example
 [5]: /database_monitoring/data_collected/#sensitive-information
-[6]: /agent/basic_agent_usage#agent-overhead
+[6]: /database_monitoring/agent_integration_overhead/?tab=oracle
 [7]: https://app.datadoghq.com/integrations/oracle
 [8]: /agent/configuration/agent-commands/#agent-status-and-information
 [9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent

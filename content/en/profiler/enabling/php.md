@@ -1,6 +1,5 @@
 ---
 title: Enabling the PHP Profiler
-kind: Documentation
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 70

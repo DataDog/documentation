@@ -1,6 +1,6 @@
 ---
 title: Best Practices for RUM Sampling
-kind: guide
+
 description: Guide for RUM sampling.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'

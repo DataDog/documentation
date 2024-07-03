@@ -1,6 +1,5 @@
 ---
 title: Troubleshooting Service Catalog
-kind: documentation
 aliases:
   - /tracing/service_catalog/troubleshooting
   - /service_catalog/troubleshooting
@@ -15,10 +14,6 @@ further_reading:
 If services that you know are instrumented for APM are not appearing in the Service Catalog list, it's likely because they have not been emitting performance data in the past hour for the selected `env` (or any Primary Tag values of your choosing) or [Secondary Primary Tag][1]. To confirm, on the **Performance** tab, hover over the columns where you expect the performance metrics to appear and see information on which environments the services are active. 
 
 {{< img src="tracing/service_catalog/svc_cat_troubleshooting_1.png" alt="Hover message indicating that no performance data has been reported in the past hour" >}}
-
-## Extra services are discovered as an artifact of APM instrumentation 
-
-Certain services like my-service-mysql, my-service-mongodb, or my-service-http-client are auto-discovered by APM. If you want to remove them from your Service Catalog, you can opt into the [inferred services beta][4]. 
 
 ## SLOs not listed in Setup Guidance section
 
@@ -52,4 +47,3 @@ The total monitor count displayed on the **Setup Guidance** tab for a single ser
 [1]: /tracing/guide/setting_primary_tags_to_scope/#add-a-second-primary-tag-in-datadog
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /tracing/guide/setting_primary_tags_to_scope
-[4]: /tracing/guide/inferred-service-opt-in/?tab=java

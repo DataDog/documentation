@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for SQL Server on Amazon RDS
-kind: documentation
 description: Install and configure Database Monitoring for SQL Server managed on RDS.
 further_reading:
 - link: "/integrations/sqlserver/"
@@ -12,10 +11,6 @@ further_reading:
 
 
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 

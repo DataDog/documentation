@@ -1,6 +1,5 @@
 ---
 title: Enabling ASM for Go
-kind: documentation
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
@@ -13,7 +12,7 @@ further_reading:
       tag: "Documentation"
       text: "Adding user information to traces"
     - link: 'https://github.com/DataDog/dd-trace-go/tree/v1'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: 'Go Datadog library source code'
     - link: "/security/default_rules/?category=cat-application-security"
       tag: "Documentation"

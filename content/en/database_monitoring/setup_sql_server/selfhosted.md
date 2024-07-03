@@ -1,6 +1,5 @@
 ---
 title: Setting Up Database Monitoring for self-hosted SQL Server
-kind: documentation
 description: Install and configure Database Monitoring for self-hosted SQL Server
 further_reading:
 - link: "/integrations/sqlserver/"
@@ -17,10 +16,6 @@ further_reading:
   text: "Monitor your AlwaysOn availability groups with Datadog Database Monitoring"
 
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
-{{< /site-region >}}
 
 Database Monitoring provides deep visibility into your Microsoft SQL Server databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 

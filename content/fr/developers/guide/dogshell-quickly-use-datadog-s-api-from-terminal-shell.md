@@ -1,10 +1,11 @@
 ---
-title: Dogshell
-description: Utiliser l'API de Datadog à partir du terminal ou du shell
-kind: guide
 aliases:
-  - /fr/developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
+- /fr/developers/faq/dogshell-quickly-use-datadog-s-api-from-terminal-shell
+description: Utiliser l'API de Datadog à partir du terminal ou du shell
+
+title: Dogshell
 ---
+
 Vous pouvez utiliser l'API Datadog directement à partir du terminal/shell en utilisant un wrapper appelé `dogshell`.
 
 ## Configuration :
@@ -45,13 +46,51 @@ Wrote ~/.dogrc.
 
 Utilisez ensuite vos commandes `dog` pour utiliser rapidement l'API Datadog à partir de votre terminal/shell. Si vous avez besoin d'aide ou d'informations supplémentaires sur les commandes `dog`, exécutez `dog -h`.
 
-Si vous préférez rédiger vous-même le fichier `.dogrc`, le contenu du fichier doit ressembler à ceci :
+Si vous préférez écrire vous-même le fichier `.dogrc`, le contenu du fichier doit ressembler à ceci :
 
+{{< site-region region="us" >}}
 ```text
 [Connection]
-apikey = <VOTRE_CLÉ_API>
-appkey = <VOTRE_CLÉ_APPLICATION>
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://datadoghq.com
 ```
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://us3.datadoghq.com
+```
+{{< /site-region >}}
+{{< site-region region="us5" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://us5.datadoghq.com
+{{< /site-region >}}
+{{< site-region region="eu" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://datadoghq.eu
+```
+{{< /site-region >}}
+{{< site-region region="gov" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://ddog-gov.com
+```
+{{< /site-region >}}
+{{< site-region region="ap1" >}}
+```text
+apikey = <DATADOG_API_KEY>
+appkey = <YOUR_APPLICATION_KEY>
+api_host = https://ap1.datadoghq.com
+```
+{{< /site-region >}}
+
 Cette méthode vous permet d'appliquer le fichier à plusieurs serveurs par programmation pour que vous puissiez exécuter les commandes `dog` depuis n'importe lequel de vos serveurs.
 
 ## Commandes Dogshell
@@ -70,6 +109,8 @@ Vous pouvez [consulter le code de Dogshell][4] à des fins de référence. Toute
 * `dog tag`
 * `dog search`
 * `dog comment`
+
+**Remarque** : La commande `dogshell` envoie des données au site US1 de Datadog par défaut. Si vous souhaitez envoyer des données vers un autre site, vous devez utiliser le fichier `--api_host` option or by specificying an api_host in your `.dogrc`.
 
 ### Utilisation de Dogshell
 
@@ -94,6 +135,6 @@ dog metric post -h
 {{< img src="developers/faq/dogshell_test.png" alt="dogshell_test" >}}
 
 [1]: https://github.com/DataDog/datadogpy
-[2]: /fr/metrics/dogstatsd_metrics_submission/
+[2]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://github.com/DataDog/datadogpy#installation
 [4]: https://github.com/DataDog/datadogpy/tree/master/datadog/dogshell

@@ -1,6 +1,5 @@
 ---
 title: RUM Android and Android TV Monitoring Setup
-kind: documentation
 aliases:
     - /real_user_monitoring/android/
 code_lang: android
@@ -11,7 +10,7 @@ further_reading:
   tag: Documentation
   text: RUM Android Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-android
-  tag: Github
+  tag: "Source Code"
   text: Source code for dd-sdk-android
 - link: /real_user_monitoring
   tag: Documentation

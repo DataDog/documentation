@@ -1,26 +1,25 @@
 ---
 title: Node.js Compatibility Requirements
-kind: documentation
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
 ---
 
-## ASM capabilities
+## Application Security capabilities
 
-The following ASM capabilities are supported in the Node.js library, for the specified tracer version:
+The following application security capabilities are supported in the Node.js library, for the specified tracer version:
 
-| ASM capability                         | Minimum NodeJS tracer version                                               |
-|----------------------------------------|-----------------------------------------------------------------------------|
-| Threat Detection                       | 3.13.1                                                                      |
-| Threat Protection                      | 3.19.0                                                                      |
-| Customize response to blocked requests | 3.22.0 for Node.js 14+, 4.1.0 for Node.js 16+                               |
-| Software Composition Analysis (SCA)    | 3.10.0 for Node.js 14+                                                      |
-| Code Security (beta)                   | 3.39.0 for Node.js 14+, 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+    |
-| Automatic user activity event tracking | 3.25.0 for Node.js 14+, or 4.4.0 for Node.js 16+                            |
-| API Security                           | 3.51.0 for Node.js 14+, or 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+ |
+| Application Security capability                         | Minimum NodeJS tracer version                      |
+|----------------------------------------|----------------------------------------------------|
+| Threat Detection                       | 4.0.0                                              |
+| Threat Protection                      | 4.0.0                                              |
+| Customize response to blocked requests | 4.1.0                                              |
+| Software Composition Analysis (SCA)    | 4.0.0                                              |
+| Code Security                          | 4.18.0 for Node.js 16+, or 5.0.0 for Node.js 18+   |
+| Automatic user activity event tracking | 4.4.0 for Node.js 16+                              |
+| API Security                           | 4.30.0 for Node.js 16+, or 5.6.0 for Node.js 18+   |
 
-The minimum tracer version to get all supported ASM capabilities for Node.js is 3.51.0.
+The minimum tracer version to get all supported application security capabilities for Node.js is 4.30.0.
 
 
 **Note**:
@@ -53,7 +52,7 @@ For more information about Node.js release, see the [official Node.js documentat
 
 ### Operating system support
 
-The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example ASM, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
+The following operating systems are officially supported by `dd-trace`. Any operating system not listed is still likely to work, but with some features missing, for example application security capabilities, profiling, and runtime metrics. Generally speaking, operating systems that are actively maintained at the time of initial release for a major version are supported.
 
 
 | Operating System | Architectures | Minimum Versions                         |
@@ -73,12 +72,12 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Tags for the HTTP request (status code, method, etc)
 - Distributed Tracing to see attack flows through your applications
 
-##### ASM Capability Notes
-- **Vulnerability Management for OSS** is supported on all frameworks
-- If your framework is not listed below, **Vulnerability Management for Code** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
+##### Application Security Capability Notes
+- **Software Composition Analysis** is supported on all frameworks
+- If your framework is not listed below, **Code Security** will still detect Weak Cipher, Weak Hashing, Insecure Cookie, Cookie without HttpOnly Flag, and Cookie without SameSite Flag vulnerabilities.
 
 
-| Framework | Versions | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
+| Framework | Versions | Threat Detection supported? | Threat Protection supported? | Code Security? |
 |-----------|----------|-----------------------------|------------------------------|----------------------------------------------------|
 | express   | >=4      | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
 | nextjs    | >=11.1   | {{< X >}}                   |                              |                                                    |
@@ -98,12 +97,12 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Distributed tracing through your applications
 - Request-based blocking
 
-##### ASM Capability Notes
-- **Vulnerability Management for OSS**  is supported on all frameworks
+##### Application Security Capability Notes
+- **Software Composition Analysis**  is supported on all frameworks
 
 
 
-| Framework | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
+| Framework | Threat Detection supported? | Threat Protection supported? | Code Security? |
 |-----------|-----------------------------|------------------------------|----------------------------------------------------|
 | http      | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
 | https     | {{< X >}}                   | {{< X >}}                    | {{< X >}}                                          |
@@ -120,12 +119,12 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 - Query info (for example, a sanitized query string)
 - Error and stacktrace capturing
 
-##### ASM Capability Notes
-- **Vulnerability Management for OSS**  is supported on all frameworks
+##### Application Security Capability Notes
+- **Software Composition Analysis**  is supported on all frameworks
 - **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 
-| Framework                | Versions  | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
+| Framework                | Versions  | Threat Detection supported? | Threat Protection supported? | Code Security? |
 |--------------------------|-----------|-----------------------------|------------------------------|----------------------------------------------------|
 | [@apollo/server][43]     | `>=4`     | {{< X >}}                   | {{< X >}}                    |                                                    |
 | [apollo-server-core][44] | `>=3`     | {{< X >}}                   | {{< X >}}                    |                                                    |

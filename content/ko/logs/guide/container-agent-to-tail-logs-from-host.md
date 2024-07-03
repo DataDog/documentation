@@ -12,10 +12,9 @@ further_reading:
   tag: 블로그
   text: 도커(Docker) 로깅 모범 사례
 - link: /glossary/#tail
-  tag: 설정
+  tag: 용어
   text: '"tail"에 대한 용어 항목'
-kind: 가이드
-title: 컨테이너 에이전트를 사용해 호스트에서 로그 추적
+title: 컨테이너 에이전트를 사용해 호스트에서 로그 테일링
 ---
 
 <div class="alert alert-info">Datadog는 <b>STDOUT/STDERR</b>를 사용해 컨테이너 로그를 수집할 것을 권장합니다.</div>
@@ -55,7 +54,7 @@ title: 컨테이너 에이전트를 사용해 호스트에서 로그 추적
             path: /var/test-dir/logs/
 ```
 
-다음으로, 에이전트를 설정하여 로그 수집을 위해 파일을 추적하세요. 이를 위해 커스텀 로그 설정을 `/conf.d/`에 마운트할 수 있습니다. 파일 이름은 `.yaml` 확장을 포함하기만 하면 됩니다.
+다음으로, 에이전트를 설정하여 로그 수집을 위해 파일을 테일링하세요. 이를 위해 커스텀 로그 설정을 `/conf.d/`에 마운트할 수 있습니다. 파일 이름은 `.yaml` 확장을 포함하기만 하면 됩니다.
 
 호스트 파일을 직접 마운트하기 보다는 ConfigMap을 사용해 설정을 저장하는 것이 좋습니다. `logs.yaml` 파일을 포함하는 샘플 ConfigMap 매니페스트는 다음과 같습니다.
 

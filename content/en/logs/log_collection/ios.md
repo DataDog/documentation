@@ -1,10 +1,9 @@
 ---
 title: iOS Log Collection
-kind: documentation
 description: Collect logs from your iOS applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
-  tag: GitHub
+  tag: "Source Code"
   text: dd-sdk-ios Source code
 - link: logs/explorer
   tag: Documentation

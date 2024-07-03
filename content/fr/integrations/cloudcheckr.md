@@ -1,7 +1,7 @@
 ---
 integration_title: CloudCheckr
 name: cloudcheckr
-kind: integration
+custom_kind: integration
 newhlevel: true
 is_public: true
 public_title: Intégration Datadog/CloudCheckr

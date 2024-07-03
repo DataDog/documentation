@@ -1,6 +1,5 @@
 ---
 title: Service Level Objectives
-kind: documentation
 description: "Track the status of your SLOs"
 aliases:
 - /monitors/monitor_uptime_widget/
@@ -26,7 +25,7 @@ further_reading:
   tag: "Foundation Enablement"
   text: "Join an interactive session on creating effective monitors and SLOs"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
-  tag: "Terraform"
+  tag: "External Site"
   text: "Create and manage SLOs with Terraform"
 ---
 

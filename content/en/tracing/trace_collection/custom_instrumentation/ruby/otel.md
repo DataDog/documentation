@@ -1,6 +1,5 @@
 ---
 title: Ruby Custom Instrumentation using OpenTelemetry API
-kind: documentation
 description: 'Instrument your Ruby application with OpenTelemetry API to send traces to Datadog.'
 code_lang: otel
 type: multi-code-lang
@@ -40,11 +39,11 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 1. Add your desired manual OpenTelemetry instrumentation to your Ruby code following the [OpenTelemetry Ruby Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
 
-1. Add the `ddtrace` gem to your Gemfile:
+1. Add the `datadog` gem to your Gemfile:
 
     ```ruby
     source 'https://rubygems.org'
-    gem 'ddtrace'
+    gem 'datadog' # For dd-trace-rb v1.x, use the `ddtrace` gem.
     ```
 
 1. Install the gem by running `bundle install`.

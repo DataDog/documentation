@@ -3,7 +3,6 @@ further_reading:
 - link: /security_platform/explorer/
   tag: ドキュメント
   text: シグナルエクスプローラーでシグナルの調査を開始する
-kind: ガイド
 title: Webhooks で検出された脅威の修復を自動化する
 ---
 

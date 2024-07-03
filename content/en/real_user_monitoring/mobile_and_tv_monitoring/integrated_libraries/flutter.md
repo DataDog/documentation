@@ -1,6 +1,5 @@
 ---
 title: Flutter Libraries for RUM
-kind: documentation
 code_lang: flutter
 type: multi-code-lang
 code_lang_weight: 30
@@ -8,7 +7,7 @@ aliases:
 - /real_user_monitoring/flutter/integrated_libraries/
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
-  tag: GitHub
+  tag: "Source Code"
   text: Source code for dd-sdk-flutter
 - link: /real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
   tag: Documentation

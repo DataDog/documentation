@@ -1,6 +1,5 @@
 ---
 title: .NET Custom Instrumentation using Datadog API
-kind: documentation
 code_lang: dd-api
 type: multi-code-lang
 code_lang_weight: 1
@@ -23,7 +22,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
     - link: 'https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples'
-      tag: 'GitHub'
+      tag: "Source Code"
       text: '.NET code samples'
 ---
 
