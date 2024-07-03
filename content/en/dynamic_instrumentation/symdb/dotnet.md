@@ -36,10 +36,11 @@ If autocomplete suggestions do not appear for your package or module, it may be 
 If your code is accidentally recognized as third-party code or third-party code is accidentally recognized as user code, you can configure the third-party detection with the following settings:
 
 ```
-export DD_SYMBOL_DATABASE_THIRD_PARTY_DETECTION_EXCLUDES=<LIST_OF_USER_CODE_PACKAGE_PREFIXES>
-export DD_SYMBOL_DATABASE_THIRD_PARTY_DETECTION_INCLUDES=<LIST_OF_ADDITIONAL_THIRD_PARTY_PACKAGE_PREFIXES>
+export DD_THIRD_PARTY_DETECTION_EXCLUDES=<LIST_OF_USER_CODE_PACKAGE_PREFIXES>
+export DD_THIRD_PARTY_DETECTION_INCLUDES=<LIST_OF_ADDITIONAL_THIRD_PARTY_PACKAGE_PREFIXES>
 ```
 
 [1]: /dynamic_instrumentation
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: https://app.datadoghq.com/dynamic-instrumentation
+
