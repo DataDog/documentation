@@ -28,7 +28,7 @@ Zendesk チケットに関連付けられた Session Replay を表示するに�
 
 リプレイページでは、ユーザーのアクションの一覧と、各アクションに関連するバックエンドコールを表示できます。イベントにカーソルを合わせて **Details** をクリックすると、関連するトレースやエラーなどが表示されます。
 
-{{< img src="real_user_monitoring/guide/zendesk/session-replay-details-button.png" alt=“Details ボタンがハイライトされた Session Replay イベントのホバー表示" style="width:60%;" >}}
+{{< img src="real_user_monitoring/guide/zendesk/session-replay-details-button.png" alt="Details ボタンがハイライトされた Session Replay イベントのホバー表示" style="width:60%;" >}}
 
 また、リプレイをプレイリストに追加して、関連する問題をグループ化し、閲覧や共有を容易にすることもできます。詳細については、[Session Replay プレイリストのドキュメント][4]を参照してください。
 
