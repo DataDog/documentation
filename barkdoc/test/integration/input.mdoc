@@ -1,0 +1,107 @@
+# Test document
+
+Anything with a YES in front of it should display normally, with no visible background color.
+
+Anything with a NO in front of it should have a dark background (to indicate that it has been given the `barkdoc__hidden` class, and would be hidden in a real document).
+
+For easier checking, each section has its YESes at the top, and NOs at the bottom.
+
+## Variable values
+
+- `state`: {% $state %}
+- `alwaysTrue`: {% $alwaysTrue %}
+- `alwaysFalse`: {% $alwaysFalse %}
+
+## Dynamic variables test
+
+## `equals` test
+
+{% if equals($alwaysTrue, true) %}
+YES: Display if `equals($alwaysTrue, true)`.
+{% /if %}
+
+{% if equals($state, "Illinois") %}
+YES: Display if `equals($state, "Illinois")`.
+{% /if %}
+
+{% if equals($alwaysFalse, true) %}
+NO: Display if `equals($alwaysFalse, true)`.
+{% /if %}
+
+{% if equals($state, "California") %}
+NO: Display if `equals($state, "California")`.
+{% /if %}
+
+## `default` test
+
+{% if default($notDefined, true) %}
+YES: Display if `default($notDefined, true)`.
+{% /if %}
+
+{% if default($alwaysTrue, false) %}
+YES: Display if `default($alwaysTrue, false)`.
+{% /if %}
+
+{% if default($notDefined, false) %}
+NO: Display if `default($notDefined, false)`.
+{% /if %}
+
+## `or` test
+
+{% if or($alwaysTrue, $alwaysFalse) %}
+YES: Display if `or($alwaysTrue, $alwaysFalse)`.
+{% /if %}
+
+{% if or(equals(state, "California"), equals(state, "Illinois")) %}
+YES: Display if `or(equals(state, "California"), equals(state, "Illinois"))`.
+{% /if %}
+
+{% if or($missingVarOne, $missingVarTwo) %}
+NO: Display if `or($missingVarOne, $missingVarTwo)`.
+{% /if %}
+
+## `and` test
+
+{% if and($alwaysTrue, $alwaysTrue) %}
+YES: Display if `and($alwaysTrue, $alwaysTrue)`.
+{% /if %}
+
+{% if and($alwaysTrue, $alwaysFalse) %}
+NO: Display if `and($alwaysTrue, $alwaysFalse)`.
+{% /if %}
+
+{% if and(equals(state, "California"), equals(state, "Illinois")) %}
+NO: Display if `and(equals(state, "California"), equals(state, "Illinois"))`.
+{% /if %}
+
+## `not` test
+
+{% if not($alwaysFalse) %}
+YES: Display if `not($alwaysFalse)`.
+{% /if %}
+
+{% if not(equals(state, "California")) %}
+YES: Display if `not(equals(state, "California"))`.
+{% /if %}
+
+{% if not($alwaysTrue) %}
+NO: Display if `not($alwaysTrue)`.
+{% /if %}
+
+{% if not(equals(state, "Illinois")) %}
+NO: Display if `not(equals(state, "Illinois"))`.
+{% /if %}
+
+## Nested functions
+
+{% if or(not($alwaysFalse), not($alwaysTrue)) %}
+YES: Display if `or(not($alwaysFalse), not($alwaysTrue))`.
+{% /if %}
+
+{% if equals(not($alwaysFalse), true) %}
+YES: Display if `equals(not($alwaysFalse), true)`.
+{% /if %}
+
+{% if and(not($alwaysFalse), not($alwaysTrue)) %}
+NO: Display if `and(not($alwaysFalse), not($alwaysTrue))`.
+{% /if %}

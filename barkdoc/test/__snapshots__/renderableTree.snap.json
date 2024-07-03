@@ -1,0 +1,1049 @@
+{
+  "$$mdtype": "Tag",
+  "name": "article",
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Tag",
+      "name": "h1",
+      "attributes": {},
+      "children": [
+        "Test document"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "Anything with a YES in front of it should display normally, with no visible background color."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "Anything with a NO in front of it should have a dark background (to indicate that it has been given the ",
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "barkdoc__hidden"
+          ]
+        },
+        " class, and would be hidden in a real document)."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "For easier checking, each section has its YESes at the top, and NOs at the bottom."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Variable values"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "ul",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "state"
+              ]
+            },
+            ": ",
+            {
+              "$$mdtype": "Variable",
+              "path": [
+                "state"
+              ],
+              "value": "Illinois"
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "alwaysTrue"
+              ]
+            },
+            ": ",
+            {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysTrue"
+              ],
+              "value": true
+            }
+          ]
+        },
+        {
+          "$$mdtype": "Tag",
+          "name": "li",
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "alwaysFalse"
+              ]
+            },
+            ": ",
+            {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysFalse"
+              ],
+              "value": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Dynamic variables test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "equals"
+          ]
+        },
+        " test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "alwaysTrue"
+            ],
+            "value": true
+          },
+          "1": true
+        }
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "equals($alwaysTrue, true)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "state"
+            ],
+            "value": "Illinois"
+          },
+          "1": "Illinois"
+        }
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "equals($state, \"Illinois\")"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "alwaysFalse"
+            ],
+            "value": false
+          },
+          "1": true
+        }
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "equals($alwaysFalse, true)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "state"
+            ],
+            "value": "Illinois"
+          },
+          "1": "California"
+        }
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "equals($state, \"California\")"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "default"
+          ]
+        },
+        " test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "default",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "notDefined"
+            ]
+          },
+          "1": true
+        }
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "default($notDefined, true)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "default",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "alwaysTrue"
+            ],
+            "value": true
+          },
+          "1": false
+        }
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "default($alwaysTrue, false)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "default",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "notDefined"
+            ]
+          },
+          "1": false
+        }
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "default($notDefined, false)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "or"
+          ]
+        },
+        " test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "or",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "alwaysTrue"
+            ],
+            "value": true
+          },
+          "1": {
+            "$$mdtype": "Variable",
+            "path": [
+              "alwaysFalse"
+            ],
+            "value": false
+          }
+        }
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "or($alwaysTrue, $alwaysFalse)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "YES: Display if ",
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "or(equals(state, \"California\"), equals(state, \"Illinois\"))"
+          ]
+        },
+        "."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "attributes": {
+        "display": "false"
+      },
+      "children": []
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "or",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "missingVarOne"
+            ]
+          },
+          "1": {
+            "$$mdtype": "Variable",
+            "path": [
+              "missingVarTwo"
+            ]
+          }
+        }
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "or($missingVarOne, $missingVarTwo)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "and"
+          ]
+        },
+        " test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "and",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "alwaysTrue"
+            ],
+            "value": true
+          },
+          "1": {
+            "$$mdtype": "Variable",
+            "path": [
+              "alwaysTrue"
+            ],
+            "value": true
+          }
+        }
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "and($alwaysTrue, $alwaysTrue)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "and",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "alwaysTrue"
+            ],
+            "value": true
+          },
+          "1": {
+            "$$mdtype": "Variable",
+            "path": [
+              "alwaysFalse"
+            ],
+            "value": false
+          }
+        }
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "and($alwaysTrue, $alwaysFalse)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "NO: Display if ",
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "and(equals(state, \"California\"), equals(state, \"Illinois\"))"
+          ]
+        },
+        "."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "attributes": {
+        "display": "false"
+      },
+      "children": []
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "not"
+          ]
+        },
+        " test"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "not",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "alwaysFalse"
+            ],
+            "value": false
+          }
+        }
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "not($alwaysFalse)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "YES: Display if ",
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "not(equals(state, \"California\"))"
+          ]
+        },
+        "."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "attributes": {
+        "display": "false"
+      },
+      "children": []
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "not",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Variable",
+            "path": [
+              "alwaysTrue"
+            ],
+            "value": true
+          }
+        }
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "not($alwaysTrue)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "p",
+      "attributes": {},
+      "children": [
+        "NO: Display if ",
+        {
+          "$$mdtype": "Tag",
+          "name": "code",
+          "attributes": {},
+          "children": [
+            "not(equals(state, \"Illinois\"))"
+          ]
+        },
+        "."
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "attributes": {
+        "display": "false"
+      },
+      "children": []
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "h2",
+      "attributes": {},
+      "children": [
+        "Nested functions"
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "or",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysFalse"
+                ],
+                "value": false
+              }
+            }
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "value": false,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysTrue"
+                ],
+                "value": true
+              }
+            }
+          }
+        }
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "or(not($alwaysFalse), not($alwaysTrue))"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "equals",
+        "value": true,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysFalse"
+                ],
+                "value": false
+              }
+            }
+          },
+          "1": true
+        }
+      },
+      "attributes": {
+        "display": "true"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "YES: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "equals(not($alwaysFalse), true)"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    },
+    {
+      "$$mdtype": "Tag",
+      "name": "div",
+      "if": {
+        "$$mdtype": "Function",
+        "name": "and",
+        "value": false,
+        "parameters": {
+          "0": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "value": true,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysFalse"
+                ],
+                "value": false
+              }
+            }
+          },
+          "1": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "value": false,
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysTrue"
+                ],
+                "value": true
+              }
+            }
+          }
+        }
+      },
+      "attributes": {
+        "display": "false"
+      },
+      "children": [
+        {
+          "$$mdtype": "Tag",
+          "name": "p",
+          "attributes": {},
+          "children": [
+            "NO: Display if ",
+            {
+              "$$mdtype": "Tag",
+              "name": "code",
+              "attributes": {},
+              "children": [
+                "and(not($alwaysFalse), not($alwaysTrue))"
+              ]
+            },
+            "."
+          ]
+        }
+      ]
+    }
+  ]
+}

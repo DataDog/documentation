@@ -1,0 +1,5097 @@
+{
+  "$$mdtype": "Node",
+  "errors": [],
+  "lines": [],
+  "inline": false,
+  "attributes": {},
+  "children": [
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        0,
+        1
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 1
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            0,
+            1
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                0,
+                1
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Test document"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 0
+                },
+                "end": {
+                  "line": 1
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 0
+            },
+            "end": {
+              "line": 1
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 0
+        },
+        "end": {
+          "line": 1
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        2,
+        3
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            2,
+            3
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                2,
+                3
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Anything with a YES in front of it should display normally, with no visible background color."
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 2
+                },
+                "end": {
+                  "line": 3
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 2
+            },
+            "end": {
+              "line": 3
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 2
+        },
+        "end": {
+          "line": 3
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        4,
+        5
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            4,
+            5
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                4,
+                5
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Anything with a NO in front of it should have a dark background (to indicate that it has been given the "
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 4
+                },
+                "end": {
+                  "line": 5
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                4,
+                5
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "barkdoc__hidden"
+              },
+              "children": [],
+              "type": "code",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 4
+                },
+                "end": {
+                  "line": 5
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                4,
+                5
+              ],
+              "inline": true,
+              "attributes": {
+                "content": " class, and would be hidden in a real document)."
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 4
+                },
+                "end": {
+                  "line": 5
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 4
+            },
+            "end": {
+              "line": 5
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 4
+        },
+        "end": {
+          "line": 5
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        6,
+        7
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            6,
+            7
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                6,
+                7
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "For easier checking, each section has its YESes at the top, and NOs at the bottom."
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 6
+                },
+                "end": {
+                  "line": 7
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 6
+            },
+            "end": {
+              "line": 7
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 6
+        },
+        "end": {
+          "line": 7
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        8,
+        9
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            8,
+            9
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                8,
+                9
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Variable values"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 8
+                },
+                "end": {
+                  "line": 9
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 8
+            },
+            "end": {
+              "line": 9
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 8
+        },
+        "end": {
+          "line": 9
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        10,
+        14
+      ],
+      "inline": false,
+      "attributes": {
+        "ordered": false,
+        "marker": "-"
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            10,
+            11
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                10,
+                11
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    10,
+                    11
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "state"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 10
+                    },
+                    "end": {
+                      "line": 11
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    10,
+                    11
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": ": "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 10
+                    },
+                    "end": {
+                      "line": 11
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    10,
+                    11
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": {
+                      "$$mdtype": "Variable",
+                      "path": [
+                        "state"
+                      ]
+                    }
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 10
+                    },
+                    "end": {
+                      "line": 11
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 10
+                },
+                "end": {
+                  "line": 11
+                }
+              }
+            }
+          ],
+          "type": "item",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 10
+            },
+            "end": {
+              "line": 11
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            11,
+            12
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                11,
+                12
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    11,
+                    12
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "alwaysTrue"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 11
+                    },
+                    "end": {
+                      "line": 12
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    11,
+                    12
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": ": "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 11
+                    },
+                    "end": {
+                      "line": 12
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    11,
+                    12
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": {
+                      "$$mdtype": "Variable",
+                      "path": [
+                        "alwaysTrue"
+                      ]
+                    }
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 11
+                    },
+                    "end": {
+                      "line": 12
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 11
+                },
+                "end": {
+                  "line": 12
+                }
+              }
+            }
+          ],
+          "type": "item",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 11
+            },
+            "end": {
+              "line": 12
+            }
+          }
+        },
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            12,
+            14
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                12,
+                13
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    12,
+                    13
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "alwaysFalse"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 12
+                    },
+                    "end": {
+                      "line": 13
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    12,
+                    13
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": ": "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 12
+                    },
+                    "end": {
+                      "line": 13
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    12,
+                    13
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": {
+                      "$$mdtype": "Variable",
+                      "path": [
+                        "alwaysFalse"
+                      ]
+                    }
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 12
+                    },
+                    "end": {
+                      "line": 13
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 12
+                },
+                "end": {
+                  "line": 13
+                }
+              }
+            }
+          ],
+          "type": "item",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 12
+            },
+            "end": {
+              "line": 14
+            }
+          }
+        }
+      ],
+      "type": "list",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 10
+        },
+        "end": {
+          "line": 14
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        14,
+        15
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            14,
+            15
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                14,
+                15
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Dynamic variables test"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 14
+                },
+                "end": {
+                  "line": 15
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 14
+            },
+            "end": {
+              "line": 15
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 14
+        },
+        "end": {
+          "line": 15
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        16,
+        17
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            16,
+            17
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                16,
+                17
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "equals"
+              },
+              "children": [],
+              "type": "code",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 16
+                },
+                "end": {
+                  "line": 17
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                16,
+                17
+              ],
+              "inline": true,
+              "attributes": {
+                "content": " test"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 16
+                },
+                "end": {
+                  "line": 17
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 16
+            },
+            "end": {
+              "line": 17
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 16
+        },
+        "end": {
+          "line": 17
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "equals",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysTrue"
+              ]
+            },
+            "1": true
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            19,
+            20
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                19,
+                20
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    19,
+                    20
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "YES: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 19
+                    },
+                    "end": {
+                      "line": 20
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    19,
+                    20
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "equals($alwaysTrue, true)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 19
+                    },
+                    "end": {
+                      "line": 20
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    19,
+                    20
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 19
+                    },
+                    "end": {
+                      "line": 20
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 19
+                },
+                "end": {
+                  "line": 20
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 19
+            },
+            "end": {
+              "line": 20
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysTrue"
+                ]
+              },
+              "1": true
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 18
+        },
+        "end": {
+          "line": 19
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        22,
+        23,
+        24,
+        25
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "equals",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "state"
+              ]
+            },
+            "1": "Illinois"
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            23,
+            24
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                23,
+                24
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    23,
+                    24
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "YES: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 23
+                    },
+                    "end": {
+                      "line": 24
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    23,
+                    24
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "equals($state, \"Illinois\")"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 23
+                    },
+                    "end": {
+                      "line": 24
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    23,
+                    24
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 23
+                    },
+                    "end": {
+                      "line": 24
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 23
+                },
+                "end": {
+                  "line": 24
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 23
+            },
+            "end": {
+              "line": 24
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "state"
+                ]
+              },
+              "1": "Illinois"
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 22
+        },
+        "end": {
+          "line": 23
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        26,
+        27,
+        28,
+        29
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "equals",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysFalse"
+              ]
+            },
+            "1": true
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            27,
+            28
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                27,
+                28
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    27,
+                    28
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 27
+                    },
+                    "end": {
+                      "line": 28
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    27,
+                    28
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "equals($alwaysFalse, true)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 27
+                    },
+                    "end": {
+                      "line": 28
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    27,
+                    28
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 27
+                    },
+                    "end": {
+                      "line": 28
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 27
+                },
+                "end": {
+                  "line": 28
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 27
+            },
+            "end": {
+              "line": 28
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysFalse"
+                ]
+              },
+              "1": true
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 26
+        },
+        "end": {
+          "line": 27
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        30,
+        31,
+        32,
+        33
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "equals",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "state"
+              ]
+            },
+            "1": "California"
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            31,
+            32
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                31,
+                32
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    31,
+                    32
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 31
+                    },
+                    "end": {
+                      "line": 32
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    31,
+                    32
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "equals($state, \"California\")"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 31
+                    },
+                    "end": {
+                      "line": 32
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    31,
+                    32
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 31
+                    },
+                    "end": {
+                      "line": 32
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 31
+                },
+                "end": {
+                  "line": 32
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 31
+            },
+            "end": {
+              "line": 32
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "state"
+                ]
+              },
+              "1": "California"
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 30
+        },
+        "end": {
+          "line": 31
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        34,
+        35
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            34,
+            35
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                34,
+                35
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "default"
+              },
+              "children": [],
+              "type": "code",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 34
+                },
+                "end": {
+                  "line": 35
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                34,
+                35
+              ],
+              "inline": true,
+              "attributes": {
+                "content": " test"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 34
+                },
+                "end": {
+                  "line": 35
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 34
+            },
+            "end": {
+              "line": 35
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 34
+        },
+        "end": {
+          "line": 35
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        36,
+        37,
+        38,
+        39
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "default",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "notDefined"
+              ]
+            },
+            "1": true
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            37,
+            38
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                37,
+                38
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    37,
+                    38
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "YES: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 37
+                    },
+                    "end": {
+                      "line": 38
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    37,
+                    38
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "default($notDefined, true)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 37
+                    },
+                    "end": {
+                      "line": 38
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    37,
+                    38
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 37
+                    },
+                    "end": {
+                      "line": 38
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 37
+                },
+                "end": {
+                  "line": 38
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 37
+            },
+            "end": {
+              "line": 38
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "default",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "notDefined"
+                ]
+              },
+              "1": true
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 36
+        },
+        "end": {
+          "line": 37
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "default",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysTrue"
+              ]
+            },
+            "1": false
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            41,
+            42
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                41,
+                42
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    41,
+                    42
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "YES: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 41
+                    },
+                    "end": {
+                      "line": 42
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    41,
+                    42
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "default($alwaysTrue, false)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 41
+                    },
+                    "end": {
+                      "line": 42
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    41,
+                    42
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 41
+                    },
+                    "end": {
+                      "line": 42
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 41
+                },
+                "end": {
+                  "line": 42
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 41
+            },
+            "end": {
+              "line": 42
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "default",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysTrue"
+                ]
+              },
+              "1": false
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 40
+        },
+        "end": {
+          "line": 41
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        44,
+        45,
+        46,
+        47
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "default",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "notDefined"
+              ]
+            },
+            "1": false
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            45,
+            46
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                45,
+                46
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    45,
+                    46
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 45
+                    },
+                    "end": {
+                      "line": 46
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    45,
+                    46
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "default($notDefined, false)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 45
+                    },
+                    "end": {
+                      "line": 46
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    45,
+                    46
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 45
+                    },
+                    "end": {
+                      "line": 46
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 45
+                },
+                "end": {
+                  "line": 46
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 45
+            },
+            "end": {
+              "line": 46
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "default",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "notDefined"
+                ]
+              },
+              "1": false
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 44
+        },
+        "end": {
+          "line": 45
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        48,
+        49
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            48,
+            49
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                48,
+                49
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "or"
+              },
+              "children": [],
+              "type": "code",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 48
+                },
+                "end": {
+                  "line": 49
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                48,
+                49
+              ],
+              "inline": true,
+              "attributes": {
+                "content": " test"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 48
+                },
+                "end": {
+                  "line": 49
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 48
+            },
+            "end": {
+              "line": 49
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 48
+        },
+        "end": {
+          "line": 49
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        50,
+        51,
+        52,
+        53
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "or",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysTrue"
+              ]
+            },
+            "1": {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysFalse"
+              ]
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            51,
+            52
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                51,
+                52
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    51,
+                    52
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "YES: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 51
+                    },
+                    "end": {
+                      "line": 52
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    51,
+                    52
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "or($alwaysTrue, $alwaysFalse)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 51
+                    },
+                    "end": {
+                      "line": 52
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    51,
+                    52
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 51
+                    },
+                    "end": {
+                      "line": 52
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 51
+                },
+                "end": {
+                  "line": 52
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 51
+            },
+            "end": {
+              "line": 52
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "or",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysTrue"
+                ]
+              },
+              "1": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysFalse"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 50
+        },
+        "end": {
+          "line": 51
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [
+        {
+          "id": "parse-error",
+          "level": "critical",
+          "message": "Expected \"(\" or \"=\" but \",\" found.",
+          "location": {
+            "start": {
+              "offset": 1333
+            },
+            "end": {
+              "offset": 1334
+            }
+          }
+        }
+      ],
+      "lines": [
+        54,
+        55
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [],
+      "type": "error",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 54
+        },
+        "end": {
+          "line": 55
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        55,
+        56
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            55,
+            56
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                55,
+                56
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "YES: Display if "
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 55
+                },
+                "end": {
+                  "line": 56
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                55,
+                56
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "or(equals(state, \"California\"), equals(state, \"Illinois\"))"
+              },
+              "children": [],
+              "type": "code",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 55
+                },
+                "end": {
+                  "line": 56
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                55,
+                56
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "."
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 55
+                },
+                "end": {
+                  "line": 56
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 55
+            },
+            "end": {
+              "line": 56
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 55
+        },
+        "end": {
+          "line": 56
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [
+        {
+          "id": "missing-opening",
+          "level": "critical",
+          "message": "Node 'tag' is missing opening"
+        }
+      ],
+      "lines": [
+        56,
+        57
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 56
+        },
+        "end": {
+          "line": 57
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        58,
+        59,
+        60,
+        61
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "or",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "missingVarOne"
+              ]
+            },
+            "1": {
+              "$$mdtype": "Variable",
+              "path": [
+                "missingVarTwo"
+              ]
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            59,
+            60
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                59,
+                60
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    59,
+                    60
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 59
+                    },
+                    "end": {
+                      "line": 60
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    59,
+                    60
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "or($missingVarOne, $missingVarTwo)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 59
+                    },
+                    "end": {
+                      "line": 60
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    59,
+                    60
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 59
+                    },
+                    "end": {
+                      "line": 60
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 59
+                },
+                "end": {
+                  "line": 60
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 59
+            },
+            "end": {
+              "line": 60
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "or",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "missingVarOne"
+                ]
+              },
+              "1": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "missingVarTwo"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 58
+        },
+        "end": {
+          "line": 59
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        62,
+        63
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            62,
+            63
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                62,
+                63
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "and"
+              },
+              "children": [],
+              "type": "code",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 62
+                },
+                "end": {
+                  "line": 63
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                62,
+                63
+              ],
+              "inline": true,
+              "attributes": {
+                "content": " test"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 62
+                },
+                "end": {
+                  "line": 63
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 62
+            },
+            "end": {
+              "line": 63
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 62
+        },
+        "end": {
+          "line": 63
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        64,
+        65,
+        66,
+        67
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "and",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysTrue"
+              ]
+            },
+            "1": {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysTrue"
+              ]
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            65,
+            66
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                65,
+                66
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    65,
+                    66
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "YES: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 65
+                    },
+                    "end": {
+                      "line": 66
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    65,
+                    66
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "and($alwaysTrue, $alwaysTrue)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 65
+                    },
+                    "end": {
+                      "line": 66
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    65,
+                    66
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 65
+                    },
+                    "end": {
+                      "line": 66
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 65
+                },
+                "end": {
+                  "line": 66
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 65
+            },
+            "end": {
+              "line": 66
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "and",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysTrue"
+                ]
+              },
+              "1": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysTrue"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 64
+        },
+        "end": {
+          "line": 65
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        68,
+        69,
+        70,
+        71
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "and",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysTrue"
+              ]
+            },
+            "1": {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysFalse"
+              ]
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            69,
+            70
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                69,
+                70
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    69,
+                    70
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 69
+                    },
+                    "end": {
+                      "line": 70
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    69,
+                    70
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "and($alwaysTrue, $alwaysFalse)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 69
+                    },
+                    "end": {
+                      "line": 70
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    69,
+                    70
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 69
+                    },
+                    "end": {
+                      "line": 70
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 69
+                },
+                "end": {
+                  "line": 70
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 69
+            },
+            "end": {
+              "line": 70
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "and",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysTrue"
+                ]
+              },
+              "1": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysFalse"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 68
+        },
+        "end": {
+          "line": 69
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [
+        {
+          "id": "parse-error",
+          "level": "critical",
+          "message": "Expected \"(\" or \"=\" but \",\" found.",
+          "location": {
+            "start": {
+              "offset": 1813
+            },
+            "end": {
+              "offset": 1814
+            }
+          }
+        }
+      ],
+      "lines": [
+        72,
+        73
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [],
+      "type": "error",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 72
+        },
+        "end": {
+          "line": 73
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        73,
+        74
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            73,
+            74
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                73,
+                74
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "NO: Display if "
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 73
+                },
+                "end": {
+                  "line": 74
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                73,
+                74
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "and(equals(state, \"California\"), equals(state, \"Illinois\"))"
+              },
+              "children": [],
+              "type": "code",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 73
+                },
+                "end": {
+                  "line": 74
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                73,
+                74
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "."
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 73
+                },
+                "end": {
+                  "line": 74
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 73
+            },
+            "end": {
+              "line": 74
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 73
+        },
+        "end": {
+          "line": 74
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [
+        {
+          "id": "missing-opening",
+          "level": "critical",
+          "message": "Node 'tag' is missing opening"
+        }
+      ],
+      "lines": [
+        74,
+        75
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 74
+        },
+        "end": {
+          "line": 75
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        76,
+        77
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            76,
+            77
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                76,
+                77
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "not"
+              },
+              "children": [],
+              "type": "code",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 76
+                },
+                "end": {
+                  "line": 77
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                76,
+                77
+              ],
+              "inline": true,
+              "attributes": {
+                "content": " test"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 76
+                },
+                "end": {
+                  "line": 77
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 76
+            },
+            "end": {
+              "line": 77
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 76
+        },
+        "end": {
+          "line": 77
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        78,
+        79,
+        80,
+        81
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "not",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysFalse"
+              ]
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            79,
+            80
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                79,
+                80
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    79,
+                    80
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "YES: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 79
+                    },
+                    "end": {
+                      "line": 80
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    79,
+                    80
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "not($alwaysFalse)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 79
+                    },
+                    "end": {
+                      "line": 80
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    79,
+                    80
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 79
+                    },
+                    "end": {
+                      "line": 80
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 79
+                },
+                "end": {
+                  "line": 80
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 79
+            },
+            "end": {
+              "line": 80
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysFalse"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 78
+        },
+        "end": {
+          "line": 79
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [
+        {
+          "id": "parse-error",
+          "level": "critical",
+          "message": "Expected \"(\" or \"=\" but \",\" found.",
+          "location": {
+            "start": {
+              "offset": 2061
+            },
+            "end": {
+              "offset": 2062
+            }
+          }
+        }
+      ],
+      "lines": [
+        82,
+        83
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [],
+      "type": "error",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 82
+        },
+        "end": {
+          "line": 83
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        83,
+        84
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            83,
+            84
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                83,
+                84
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "YES: Display if "
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 83
+                },
+                "end": {
+                  "line": 84
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                83,
+                84
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "not(equals(state, \"California\"))"
+              },
+              "children": [],
+              "type": "code",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 83
+                },
+                "end": {
+                  "line": 84
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                83,
+                84
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "."
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 83
+                },
+                "end": {
+                  "line": 84
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 83
+            },
+            "end": {
+              "line": 84
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 83
+        },
+        "end": {
+          "line": 84
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [
+        {
+          "id": "missing-opening",
+          "level": "critical",
+          "message": "Node 'tag' is missing opening"
+        }
+      ],
+      "lines": [
+        84,
+        85
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 84
+        },
+        "end": {
+          "line": 85
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        86,
+        87,
+        88,
+        89
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "not",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Variable",
+              "path": [
+                "alwaysTrue"
+              ]
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            87,
+            88
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                87,
+                88
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    87,
+                    88
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 87
+                    },
+                    "end": {
+                      "line": 88
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    87,
+                    88
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "not($alwaysTrue)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 87
+                    },
+                    "end": {
+                      "line": 88
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    87,
+                    88
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 87
+                    },
+                    "end": {
+                      "line": 88
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 87
+                },
+                "end": {
+                  "line": 88
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 87
+            },
+            "end": {
+              "line": 88
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "not",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Variable",
+                "path": [
+                  "alwaysTrue"
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 86
+        },
+        "end": {
+          "line": 87
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [
+        {
+          "id": "parse-error",
+          "level": "critical",
+          "message": "Expected \"(\" or \"=\" but \",\" found.",
+          "location": {
+            "start": {
+              "offset": 2238
+            },
+            "end": {
+              "offset": 2239
+            }
+          }
+        }
+      ],
+      "lines": [
+        90,
+        91
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [],
+      "type": "error",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 90
+        },
+        "end": {
+          "line": 91
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        91,
+        92
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            91,
+            92
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                91,
+                92
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "NO: Display if "
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 91
+                },
+                "end": {
+                  "line": 92
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                91,
+                92
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "not(equals(state, \"Illinois\"))"
+              },
+              "children": [],
+              "type": "code",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 91
+                },
+                "end": {
+                  "line": 92
+                }
+              }
+            },
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                91,
+                92
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "."
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 91
+                },
+                "end": {
+                  "line": 92
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 91
+            },
+            "end": {
+              "line": 92
+            }
+          }
+        }
+      ],
+      "type": "paragraph",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 91
+        },
+        "end": {
+          "line": 92
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [
+        {
+          "id": "missing-opening",
+          "level": "critical",
+          "message": "Node 'tag' is missing opening"
+        }
+      ],
+      "lines": [
+        92,
+        93
+      ],
+      "inline": false,
+      "attributes": {},
+      "children": [],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 92
+        },
+        "end": {
+          "line": 93
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        94,
+        95
+      ],
+      "inline": false,
+      "attributes": {
+        "level": 2
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            94,
+            95
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                94,
+                95
+              ],
+              "inline": true,
+              "attributes": {
+                "content": "Nested functions"
+              },
+              "children": [],
+              "type": "text",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 94
+                },
+                "end": {
+                  "line": 95
+                }
+              }
+            }
+          ],
+          "type": "inline",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 94
+            },
+            "end": {
+              "line": 95
+            }
+          }
+        }
+      ],
+      "type": "heading",
+      "annotations": [],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 94
+        },
+        "end": {
+          "line": 95
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        96,
+        97,
+        98,
+        99
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "or",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Function",
+              "name": "not",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "alwaysFalse"
+                  ]
+                }
+              }
+            },
+            "1": {
+              "$$mdtype": "Function",
+              "name": "not",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "alwaysTrue"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            97,
+            98
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                97,
+                98
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    97,
+                    98
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "YES: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 97
+                    },
+                    "end": {
+                      "line": 98
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    97,
+                    98
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "or(not($alwaysFalse), not($alwaysTrue))"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 97
+                    },
+                    "end": {
+                      "line": 98
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    97,
+                    98
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 97
+                    },
+                    "end": {
+                      "line": 98
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 97
+                },
+                "end": {
+                  "line": 98
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 97
+            },
+            "end": {
+              "line": 98
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "or",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "alwaysFalse"
+                    ]
+                  }
+                }
+              },
+              "1": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "alwaysTrue"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 96
+        },
+        "end": {
+          "line": 97
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        100,
+        101,
+        102,
+        103
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "equals",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Function",
+              "name": "not",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "alwaysFalse"
+                  ]
+                }
+              }
+            },
+            "1": true
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            101,
+            102
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                101,
+                102
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    101,
+                    102
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "YES: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 101
+                    },
+                    "end": {
+                      "line": 102
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    101,
+                    102
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "equals(not($alwaysFalse), true)"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 101
+                    },
+                    "end": {
+                      "line": 102
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    101,
+                    102
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 101
+                    },
+                    "end": {
+                      "line": 102
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 101
+                },
+                "end": {
+                  "line": 102
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 101
+            },
+            "end": {
+              "line": 102
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "equals",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "alwaysFalse"
+                    ]
+                  }
+                }
+              },
+              "1": true
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 100
+        },
+        "end": {
+          "line": 101
+        }
+      }
+    },
+    {
+      "$$mdtype": "Node",
+      "errors": [],
+      "lines": [
+        104,
+        105,
+        106,
+        107
+      ],
+      "inline": false,
+      "attributes": {
+        "primary": {
+          "$$mdtype": "Function",
+          "name": "and",
+          "parameters": {
+            "0": {
+              "$$mdtype": "Function",
+              "name": "not",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "alwaysFalse"
+                  ]
+                }
+              }
+            },
+            "1": {
+              "$$mdtype": "Function",
+              "name": "not",
+              "parameters": {
+                "0": {
+                  "$$mdtype": "Variable",
+                  "path": [
+                    "alwaysTrue"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "$$mdtype": "Node",
+          "errors": [],
+          "lines": [
+            105,
+            106
+          ],
+          "inline": false,
+          "attributes": {},
+          "children": [
+            {
+              "$$mdtype": "Node",
+              "errors": [],
+              "lines": [
+                105,
+                106
+              ],
+              "inline": false,
+              "attributes": {},
+              "children": [
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    105,
+                    106
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "NO: Display if "
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 105
+                    },
+                    "end": {
+                      "line": 106
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    105,
+                    106
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "and(not($alwaysFalse), not($alwaysTrue))"
+                  },
+                  "children": [],
+                  "type": "code",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 105
+                    },
+                    "end": {
+                      "line": 106
+                    }
+                  }
+                },
+                {
+                  "$$mdtype": "Node",
+                  "errors": [],
+                  "lines": [
+                    105,
+                    106
+                  ],
+                  "inline": true,
+                  "attributes": {
+                    "content": "."
+                  },
+                  "children": [],
+                  "type": "text",
+                  "annotations": [],
+                  "slots": {},
+                  "location": {
+                    "start": {
+                      "line": 105
+                    },
+                    "end": {
+                      "line": 106
+                    }
+                  }
+                }
+              ],
+              "type": "inline",
+              "annotations": [],
+              "slots": {},
+              "location": {
+                "start": {
+                  "line": 105
+                },
+                "end": {
+                  "line": 106
+                }
+              }
+            }
+          ],
+          "type": "paragraph",
+          "annotations": [],
+          "slots": {},
+          "location": {
+            "start": {
+              "line": 105
+            },
+            "end": {
+              "line": 106
+            }
+          }
+        }
+      ],
+      "type": "tag",
+      "tag": "if",
+      "annotations": [
+        {
+          "type": "attribute",
+          "name": "primary",
+          "value": {
+            "$$mdtype": "Function",
+            "name": "and",
+            "parameters": {
+              "0": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "alwaysFalse"
+                    ]
+                  }
+                }
+              },
+              "1": {
+                "$$mdtype": "Function",
+                "name": "not",
+                "parameters": {
+                  "0": {
+                    "$$mdtype": "Variable",
+                    "path": [
+                      "alwaysTrue"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "slots": {},
+      "location": {
+        "start": {
+          "line": 104
+        },
+        "end": {
+          "line": 105
+        }
+      }
+    }
+  ],
+  "type": "document",
+  "annotations": [],
+  "slots": {}
+}
