@@ -5,6 +5,10 @@ $lightGreyGrey: #d6d6d6;
 $darkGreyGrey: #a1a1a1;
 $dimGreyGrey: #707070;
 
+:root {
+    --bs-link-hover-color: #{$ddpurple};
+}
+
 html {
     font-size: 18px;
     opacity: 1 !important;

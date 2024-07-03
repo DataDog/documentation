@@ -13,11 +13,11 @@ Les extensions AWS Lambda s'exécutent au sein de l'environnement d'exécution 
 
 Si vous avez configuré les [fonctionnalités sans serveur Datadog][2] avant le lancement officiel de l'extension Lambda Datadog, vous utilisez probablement le [Forwarder Datadog][3] pour envoyer des métriques custom, des métriques optimisées, des traces et des logs.
 
-Il existe d'importantes différences entre l'extension Lambda et le Forwarder. Ainsi, dans certaines situations, il est plus intéressant d'utiliser l'extension plutôt que le Forwarder, et inversement. Cette page décrit les différents aspects à prendre en compte si vous songez à migrer depuis le Forwarder vers l'extension Lambda.
+Il existe d'importantes différences entre l'extension Lambda et le Forwarder. Cette page décrit les différents aspects à prendre en compte si vous songez à migrer depuis le Forwarder vers l'extension Lambda.
 
 ### Différences fonctionnelles
 
-{{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrumenter des applications sans serveur AWS"  style="width:100%;">}}
+{{< img src="serverless/serverless_monitoring_installation_instructions.png" alt="Instrumenter des applications sans serveur AWS" style="width:100%;">}}
 
 Bien qu'il soit désormais recommandé d'utiliser l'extension Lambda à la place du Forwarder pour recueillir des données de télémétrie à partir de fonctions Lambda, seul le Forwarder doit être utilisé pour recueillir des métadonnées et les ajouter aux logs d'autres services AWS, notamment API Gateway, AppSync et Lambda@Edge.
 
@@ -25,12 +25,16 @@ Bien qu'il soit désormais recommandé d'utiliser l'extension Lambda à la place
 
 L'extension Lambda Datadog présente plusieurs avantages par rapport au Forwarder Datadog :
 
-- **Pas de logs CloudWatch** : le Forwarder extrait les données de télémétrie des logs, puis les envoie à Datadog. À l'inverse, l'extension Lambda Datadog envoie les données de télémétrie directement à Datadog, ce qui réduit ainsi vos coûts associés aux logs CloudWatch.
+- **Pas de logs CloudWatch** : le Forwarder extrait les données de télémétrie des logs, puis les envoie à Datadog. À l'inverse, l'extension Lambda Datadog envoie les données de télémétrie directement à Datadog, ce qui réduit ainsi vos coûts associés aux logs CloudWatch et à la fonction Lambda du Forwarder.
 - **Configuration simplifiée** : l'extension Lambda Datadog peut être ajoutée en tant que couche Lambda afin d'envoyer les données de télémétrie directement à Datadog, vous évitant ainsi d'avoir à configurer un filtre d'abonnement pour le groupe de logs CloudWatch de chaque nouvelle fonction Lambda.
 
 ### Contrepartie
 
-L'extension [augmente la charge de vos fonctions Lambda][4] par rapport aux fonctions sans instrumentation. Cette surcharge entraîne une hausse de vos coûts AWS et de votre simultanéité Lambda, et risque de nuire aux performances des démarrages à froid. Dans la plupart des cas, ces ralentissements ne limitent **pas** les performances de votre fonction. D'après les résultats des derniers benchmarks Datadog, la hausse des coûts découlant de l'utilisation de l'extension Lambda demeure inférieure (ou similaire, pour la transmission de données depuis des régions distantes) aux frais supplémentaires liés à l'utilisation du Forwarder.
+L'extension [augmente la charge de vos fonctions Lambda][4] par rapport aux fonctions sans instrumentation. en raison du chargement de lʼextension lors de démarrages à froid et à lʼenvoi dʼun grand nombre de données de télémétrie à Datadog. Dans la plupart des cas, ces ralentissements ne limitent **pas** les performances de votre fonction. D'après les résultats des derniers benchmarks Datadog, la hausse des coûts découlant de l'utilisation de l'extension Lambda demeure inférieure aux frais supplémentaires liés à l'utilisation du Forwarder.
+
+### Conclusion
+
+Si vous souhaitez uniquement collecter des logs, en particulier à partir de nombreuses fonctions Lambda il est judicieux de continuer à utiliser le Forwarder de Datadog. Si vous collectez également des métriques et des traces à partir de vos fonctions Lambda, nous vous recommandons de migrer vers l'extension Lambda Datadog.
 
 ## Migrer vers l'extension Lambda Datadog
 
