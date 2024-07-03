@@ -4,7 +4,7 @@ is_beta: true
 ---
 
 {{< callout url="#" header="false" btn_hidden="true">}}
-  Note: Cross-organization visibility is in <strong>public beta</strong>. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  Note: Cross-organization visibility is in beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
 {{< /callout >}} 
 
 [Cross-organization visibility][1] allows customers to share data between different organizations in the same account, and show insights from multiple organizations in one place.
