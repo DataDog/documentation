@@ -19,6 +19,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/sensitive-data-management-best-practices/"
       tag: "Blog"
       text: "Best practices for sensitive data management"
+    - link: "https://www.datadoghq.com/blog/data-security/"
+      tag: "Blog"
+      text: "Discover sensitive data in your cloud data stores with Data Security"
 ---
 
 ## Overview
