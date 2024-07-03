@@ -29,7 +29,7 @@ title: Pipelines
 
 ## Información general
 
-Datadog [analiza][1] automáticamente logs con formato JSON. Luego, puedes añadir valor a todos tus logs (sin procesar y JSON), enviándolos a través de un pipeline de procesamiento. Los pipelines aceptan logs con una amplia variedad de formatos y los traducen a un formato común en Datadog. Implementar una estrategia de pipelines y de procesamiento de logs es beneficioso, ya que introduce una [convención de nomenclatura de atributos][2] para tu organización.
+Datadog [analiza][1] automáticamente logs con formato JSON. Luego, puedes añadir valor a todos tus logs (sin procesar y JSON), enviándolos a un pipeline de procesamiento. Los pipelines aceptan logs con una amplia variedad de formatos y los traducen a un formato común en Datadog. Implementar una estrategia de pipelines y de procesamiento de logs es beneficioso, ya que introduce una [convención de nomenclatura de atributos][2] para tu organización.
 
 Los pipelines analizan y enriquecen los logs encadenándolos secuencialmente mediante [procesadores][3]. De este modo, se extraen detalles significativos o atributos del texto semiestructurado para reutilizarlos como [facetas][4]. Cada log que pasa por los pipelines se prueba con todos los filtros de pipelines. Si el log coincide con un filtro, todos los procesadores se aplican secuencialmente antes de pasar al siguiente.
 
@@ -54,7 +54,7 @@ El preprocesamiento de logs JSON viene con una configuración predeterminada que
 
 #### Atributo de origen
 
-Si un archivo de log con formato JSON incluye el atributo `ddsource`, Datadog interpreta su valor como el origen del log. Para utilizar los mismos nombres de origen que Datadog, consulta la [biblioteca de pipelines de integraciones][1].
+Si un archivo de log con formato JSON incluye el atributo `ddsource`, Datadog interpreta su valor como el origen del log. Para utilizar los mismos nombres de origen que Datadog, consulta la [biblioteca de pipelines de integración][1].
 
 **Nota**: Los logs procedentes de un entorno contenedorizado requieren el uso de una [variable de entorno][2] para anular los valores por defecto de origen y de servicio.
 
