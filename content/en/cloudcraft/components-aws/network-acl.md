@@ -30,7 +30,7 @@ The following is an example JSON of a Region component:
 ```json
 {
     "type": "networkacl",
-    "id": "acl-0eb4cbc7dcba2747f",
+    "id": "acl-0mqj0d4dxpmf9iru3",
     "arn": "arn:aws:ec2:us-east-1:762056483071:network-acl/acl-0mqj0d4dxpmf9iru3",
     "region": "us-east-1",
     "visible": true,
