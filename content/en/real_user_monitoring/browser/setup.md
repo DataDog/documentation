@@ -1917,6 +1917,7 @@ See [Session Replay Privacy Options][21].
 `enablePrivacyForActionName`
 : Optional<br/>
 **Type**: Boolean<br/>
+**Default**: `false` <br/>
 See [Mask Action Names][29].
 
 `actionNameAttribute`
