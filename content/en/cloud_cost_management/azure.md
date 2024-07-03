@@ -65,7 +65,7 @@ You need to generate exports for two data types: **actual** and **amortized**. D
 
 {{% /tab %}}
 
-{{% tab "Improved exports" %}}
+{{% tab "Improved exports (Preview)" %}}
 
 4. Select the following Export details:
     - Metric: **Actual Cost (usage and purchases)** THEN **Amortized Cost (usage and purchases)**
