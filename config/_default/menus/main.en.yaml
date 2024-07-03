@@ -4254,36 +4254,41 @@ menu:
       parent: observability_pipelines
       identifier: observability_pipelines_dual_ship_logs
       weight: 3
+    - name: Datadog Agent
+      url: observability_pipelines/dual_ship_logs/datadog_agent/
+      parent: observability_pipelines_dual_ship_logs
+      identifier: observability_pipelines_dual_ship_logs_datadog_agent
+      weight: 3001
     - name: Fluent
       url: observability_pipelines/dual_ship_logs/fluent/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_fluent
-      weight: 3001
+      weight: 3002
     - name: HTTP Client
       url: observability_pipelines/dual_ship_logs/http_client/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_http_client
-      weight: 3002
+      weight: 3003
     - name: Splunk HTTP Event Collector
       url: observability_pipelines/dual_ship_logs/splunk_hec/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_splunk_hec
-      weight: 3003
+      weight: 3004
     - name: Splunk Forwarders (TCP)
       url: observability_pipelines/dual_ship_logs/splunk_tcp/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_splunk_tcp
-      weight: 3004
+      weight: 3005
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/dual_ship_logs/sumo_logic_hosted_collector/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_sumo_logic_hosted_collector
-      weight: 3005
+      weight: 3006
     - name: Syslog
       url: observability_pipelines/dual_ship_logs/syslog/
       parent: observability_pipelines_dual_ship_logs
       identifier: observability_pipelines_dual_ship_logs_syslog
-      weight: 3006
+      weight: 3007
     - name: Archive Logs
       url: observability_pipelines/archive_logs/
       parent: observability_pipelines
