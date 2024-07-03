@@ -40,7 +40,7 @@ If your organization has an existing all-encompassing index with a low limit, pl
 Please enable the `Include execution data` option on the state machine's logging. After enabling this option, log execution input, data passed between states, and execution output is logged. The Datadog backend uses the logs to construct these step spans for you.
 
 ## Some step spans are missing in the traces
-- Actions of Lambda, DynamoDB, StepFunction, and most of the other AWS services are supported, but`Activity` has not been supported yet.
+- Actions from Lambda, DynamoDB, StepFunction, and most of the other AWS services are supported. `Activity` is not supported.
 - `Wait`, `Choice`, `Success`, `Fail`, `Pass`, `Inline MapState`, and `Parallel` are supported, while `Distributed MapState` is not supported. 
 
 ## Customized way to deploy Datadog Lambda Forwarder
